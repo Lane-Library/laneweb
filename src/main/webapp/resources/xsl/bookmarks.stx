@@ -7,17 +7,13 @@
     
     <stx:param name="emrid"/>
     
-    <stx:template match="h:div[@class='yui-ge']/h:div[@class='yui-u']">
-        <stx:copy>
-            <stx:process-attributes/>
-            <stx:if test="$emrid">
+    <stx:template match="h:div[@id='bookmarks']">
+        <stx:if test="$emrid">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                     href="apps:/bookmarks">
                     <xi:fallback/>
                 </xi:include>
-            </stx:if>
-            <stx:process-children/>
-        </stx:copy>
+        </stx:if>
     </stx:template>
     
 </stx:transform>

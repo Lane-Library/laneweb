@@ -120,6 +120,20 @@ YUI({
             Y.Assert.areEqual("www.thomsonhc.com", this.trackingData.host);
             Y.Assert.areEqual("/carenotes/librarian/", this.trackingData.path);
             Y.Assert.areEqual("cookiesFetch", this.trackingData.title);
+        },
+        testTrackingDisabledEnabled : function() {
+        	var node = Y.all("a").item(1);
+            var event;
+            var handler = function(e) {
+                event = e;
+            };
+            node.on('click', handler);
+            LANE.tracking.disableTracking();
+            node.simulate('click');
+            Y.Assert.isFalse(LANE.tracking.isTrackable(event), 'event is trackable');
+            LANE.tracking.enableTracking();
+            node.simulate('click');
+            Y.Assert.isTrue(LANE.tracking.isTrackable(event), 'event is not trackable');
         }
     });
     

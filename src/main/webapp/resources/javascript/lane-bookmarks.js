@@ -140,9 +140,11 @@
                 this.get("toggle").set("innerHTML", e.newVal ? strings.editing : strings.notEditing);
                 var editables = this.get("contentBox").all(".yui3-bookmark-edit, .yui3-bookmarks-edit");
                 if (e.newVal) {
+                	LANE.tracking.disableTracking();
                     this._pageLinkEventHandle = Y.one("document").on("click", this._pageLinkHandler, this);
                     editables.removeClass("yui3-bookmarks-hide");
                 } else {
+                	LANE.tracking.enableTracking();
                     this._pageLinkEventHandle.detach();
                     editables.addClass("yui3-bookmarks-hide");
                 }

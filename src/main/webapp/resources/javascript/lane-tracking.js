@@ -5,7 +5,8 @@
             //TODO more thorough documentation
             //TODO use 'track' less
             //trackers is the array of tracker objects
-            var trackers = [],        //figures out the title string for a node
+            var enabled = true,
+            trackers = [],        //figures out the title string for a node
             getTrackedTitle = function(node) {
                 //if there is a title attribute, use that.
                 var title = node.get('title'), img, i, rel, relTokens;
@@ -139,6 +140,12 @@
                     }
                     trackers.push(tracker);
                 },
+                disableTracking : function() {
+                	enabled = false;
+                },
+                enableTracking : function () {
+                	enabled = true;
+                },
                 trackEvent: function(event) {
                     var trackingData;
                     if (this.isTrackable(event)) {
@@ -154,6 +161,9 @@
                     }
                 },
                 isTrackable: function(event) {
+                	if (!enabled) {
+                		return false;
+                	}
                     var link, documentHost, linkHost, rel, relTokens;
                     documentHost = document.location.host;
                     if (documentHost.indexOf(':') > -1) {
