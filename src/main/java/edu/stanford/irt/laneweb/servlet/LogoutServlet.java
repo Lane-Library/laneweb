@@ -9,18 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class LogoutServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     private static final String WEBAUTH_COOKIE_NAME = "webauth_at";
 
-    private static final String WEBAUTH_LOGOUT_URL = "https://weblogin.stanford.edu/logout";
+    private static final String EZPROXY_COOKIE_NAME = "ezproxy";
     
-    private Logger log = LoggerFactory.getLogger("cookies");
+    private static final String WEBAUTH_LOGOUT_URL = "https://weblogin.stanford.edu/logout";
 
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
@@ -34,6 +31,11 @@ public class LogoutServlet extends HttpServlet {
         webAuthCookie.setPath("/");
         webAuthCookie.setMaxAge(0);
         resp.addCookie(webAuthCookie);
+        
+        Cookie ezproxyCookie = new Cookie(EZPROXY_COOKIE_NAME, null);
+        ezproxyCookie.setPath("/");
+        ezproxyCookie.setMaxAge(0);
+        resp.addCookie(ezproxyCookie);
         
         HttpSession session = req.getSession(false);
         if (null != session) {
