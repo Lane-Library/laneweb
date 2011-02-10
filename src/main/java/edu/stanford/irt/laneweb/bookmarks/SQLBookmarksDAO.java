@@ -38,6 +38,7 @@ public class SQLBookmarksDAO implements BookmarksDAO {
     private DataSource dataSource;
 
     public Bookmarks getBookmarks(final String emrid) {
+        this.log.info("start getBookmarks("+emrid+")");
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -67,10 +68,12 @@ public class SQLBookmarksDAO implements BookmarksDAO {
             JdbcUtils.closeStatement(pstmt);
             JdbcUtils.closeResultSet(rs);
         }
+        this.log.info("end getBookmarks("+emrid+")="+bookmarks);
         return bookmarks;
     }
 
     public void saveBookmarks(final Bookmarks bookmarks) {
+        this.log.info("start saveBookmarks("+bookmarks+")");
         Connection conn = null;
         CallableStatement cstmt = null;
         PreparedStatement pstmt = null;
@@ -96,6 +99,7 @@ public class SQLBookmarksDAO implements BookmarksDAO {
                 os.close();
             }
             conn.commit();
+            this.log.info("end saveBookmarks("+bookmarks+")");
         } catch (SQLException e) {
             this.log.error(e.getMessage(), e);
             try {
