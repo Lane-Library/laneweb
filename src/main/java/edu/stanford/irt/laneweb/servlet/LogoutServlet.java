@@ -24,15 +24,17 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        String userAgent = req.getHeader("user-agent");
-        boolean isIphone = userAgent != null && userAgent.indexOf("iPhone") > -1;
-        if (isIphone) {
-            this.log.info("logout servlet removing cookies:");
-        }
-        Cookie cookie = new Cookie(SunetIdCookieCodec.LANE_COOKIE_NAME, null);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        resp.addCookie(cookie);
+        
+        Cookie userCookie = new Cookie(SunetIdCookieCodec.LANE_COOKIE_NAME, null);
+        userCookie.setPath("/");
+        userCookie.setMaxAge(0);
+        resp.addCookie(userCookie);
+        
+        Cookie webAuthCookie = new Cookie( WEBAUTH_COOKIE_NAME, null);
+        webAuthCookie.setPath("/");
+        webAuthCookie.setMaxAge(0);
+        resp.addCookie(webAuthCookie);
+        
         HttpSession session = req.getSession(false);
         if (null != session) {
             session.invalidate();
