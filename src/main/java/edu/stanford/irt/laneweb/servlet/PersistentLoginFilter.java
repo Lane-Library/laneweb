@@ -12,9 +12,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class PersistentLoginFilter implements Filter {
 
     /**
@@ -24,30 +21,20 @@ public class PersistentLoginFilter implements Filter {
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();
 
     private SunetIdSource sunetIdSource = new SunetIdSource();
-    
-    private Logger log = LoggerFactory.getLogger("cookies");
 
     public void destroy() {
     }
 
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException,
             ServletException {
-        String userAgent = ((HttpServletRequest) request).getHeader("user-agent");
-        boolean isIphone = userAgent != null && userAgent.indexOf("iPhone") > -1;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         if (Boolean.parseBoolean(request.getParameter(("pl")))) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             String sunetid = this.sunetIdSource.getSunetid(httpRequest);
             if (sunetid != null) {
-                if (isIphone) {
-                    this.log.info("adding persistent login cookie");
-                }
                 setLoginCookie(sunetid, httpRequest, httpResponse);
             }
         } else if (Boolean.parseBoolean(request.getParameter("remove-pl"))) {
-            if (isIphone) {
-                this.log.info("removing persistent login cookie");
-            }
             removeLoginCookie(httpResponse);
         }
         chain.doFilter(request, response);
