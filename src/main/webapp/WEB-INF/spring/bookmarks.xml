@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-
-    <context:component-scan base-package="edu.stanford.irt.laneweb.bookmarks"/>
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmarks"
-        class="edu.stanford.irt.laneweb.bookmarks.BookmarksDataBinder"/>
+        class="edu.stanford.irt.laneweb.bookmarks.BookmarksDataBinder">
+        <property name="bookmarksDAO" ref="edu.stanford.irt.laneweb.bookmarks.BookmarksDAO"/>
+    </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/bookmarks"
         class="edu.stanford.irt.laneweb.bookmarks.BookmarksGenerator"
-        scope="prototype"/>
+        scope="prototype">
+        <property name="defaultView" ref="edu.stanford.irt.laneweb.bookmarks.DefaultXMLizableBookmarksView"/>
+        <property name="editingView" ref="edu.stanford.irt.laneweb.bookmarks.EditingXMLizableBookmarksView"/>
+        <property name="bookmarksDAO" ref="edu.stanford.irt.laneweb.bookmarks.BookmarksDAO"/>
+    </bean>
     
     <bean name="edu.stanford.irt.laneweb.bookmarks.BookmarksDAO"
         class="edu.stanford.irt.laneweb.bookmarks.SQLBookmarksDAO">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.bookmarks.DefaultXMLizableBookmarksView"
+        class="edu.stanford.irt.laneweb.bookmarks.DefaultXMLizableBookmarksView"/>
+    
+    <bean id="edu.stanford.irt.laneweb.bookmarks.EditingXMLizableBookmarksView"
+        class="edu.stanford.irt.laneweb.bookmarks.EditingXMLizableBookmarksView"/>
 
 </beans>

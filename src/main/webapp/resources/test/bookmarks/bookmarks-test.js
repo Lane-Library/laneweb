@@ -61,29 +61,31 @@ YUI({
         	T.Assert.areEqual(size - 1, T.all("li").size());
         },
         
-        testClickAddBookmark : function() {
-        	var size = T.all("li").size();
-        	T.one("input[name='label']").set("value","SlashDot");
-        	T.one("input[name='url']").set("value","http://slashdot.org/");
-        	T.one("input[type='submit']").simulate("click");
-        	T.Assert.areEqual(size + 1, T.all("li").size());
-        },
+//        testClickAddBookmark : function() {
+//        	var size = T.all("li").size();
+//        	T.one("input[name='label']").set("value","SlashDot");
+//        	T.one("input[name='url']").set("value","http://slashdot.org/");
+//        	T.one("input[type='submit']").simulate("click");
+//        	T.Assert.areEqual(size + 1, T.all("li").size());
+//        },
         
         testCorrectBookmarkRemoved : function() {
+        	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
         	var label = T.one("li").get("textContent");
         	T.all(".yui3-bookmark-edit").item(1).simulate("click");
         	T.Assert.areEqual(label, T.one("li").get("textContent"));
         }, 
         
-        testClickAddedToForm : function() {
+        testClickBookmarkable : function() {
+        	var size = T.all("li").size();
         	bookmarks.set("editable", true);
         	var bookmarkable = bookmarkables.item(0);
         	bookmarkable.simulate("click");
-        	T.Assert.areEqual(bookmarkable.get("href"), Y.one("input[type='text']").get("value"));
+        	T.Assert.areEqual(size + 1, T.all("li").size());
         },
         
         testIOSent : function () {
-        	T.one("input[type='submit']").simulate("click");
+        	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
         	T.Assert.isTrue(ioOccurred);
         }
         

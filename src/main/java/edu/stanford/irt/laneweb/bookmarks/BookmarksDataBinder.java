@@ -12,7 +12,6 @@ import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class BookmarksDataBinder implements DataBinder {
 
-    @Autowired
     private BookmarksDAO bookmarksDAO;
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -50,5 +49,9 @@ public class BookmarksDataBinder implements DataBinder {
                 model.put("bookmarks:label", label);
             }
         }
+    }
+    
+    public void setBookmarksDAO(BookmarksDAO bookmarksDAO) {
+        this.bookmarksDAO = bookmarksDAO;
     }
 }

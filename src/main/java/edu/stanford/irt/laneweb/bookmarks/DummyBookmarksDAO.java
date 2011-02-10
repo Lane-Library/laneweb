@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
+import javax.sql.DataSource;
+
 public class DummyBookmarksDAO implements BookmarksDAO {
 
     @Override
@@ -12,5 +14,9 @@ public class DummyBookmarksDAO implements BookmarksDAO {
 
     @Override
     public void saveBookmarks(final Bookmarks bookmarks) {
+    }
+    
+    public void setDataSource(DataSource dataSource) {
+        
     }
 }

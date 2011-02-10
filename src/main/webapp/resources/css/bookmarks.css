@@ -3,8 +3,8 @@
     float : right;
     display : block
 }
-#bookmarks .delete input,
-.yui3-bookmark-edit {
+#bookmarks .remove input,
+.yui3-bookmark-remove {
     background : none;
     border : none;
     border-bottom : 1px dotted #81785A;
@@ -12,15 +12,15 @@
     color : #1C4B70;
     clear : right
 }
-#bookmarks .delete input:hover,
-.yui3-bookmark-edit:hover {
+#bookmarks .remove input:hover,
+.yui3-bookmark-remove:hover {
     color : #820000;
     border-color : #820000;
     border-bottom-style : solid;
     cursor : pointer
 }
 /* IE 6 & 7 need this to retain list bullets . . . */
-#bookmarks .delete {
+#bookmarks .remove {
     border : 1px solid white
 }
 #bookmarks h4 {
