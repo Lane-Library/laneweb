@@ -7,18 +7,13 @@
 .tooltips, #search-content-counts, #findIt, #spellCheck, #queryMapping {
     display:none;
 }
-#findIt span:first-child, #spellCheck span:first-child, #queryMapping span:first-child {
-    font-weight:bold;
-    color:#820000;
-    text-transform:uppercase;
-}
 #queryMapping span {
-    padding-right:10px;
+    padding-right:25px;
 }
 .search a, .search a:visited {
     color: #1C4B70;
     border-bottom:none;
-  }
+}
 .search a:hover {
     color:#820000;
     border-bottom:1px solid #820000;
@@ -31,11 +26,7 @@
     border-bottom:1px solid #820000;
 }
 #searchFacets {
-    margin-top:25px;
-    /* conflict with middleColumn border ... wait to hear from OG
-    padding-right:20px;
-    border-right:1px solid #edecdf;
-    */
+    margin-top:5px;
     background-color:#fff; /* IE needs for opacity animation */
 }
 #searchFacets .facetHeader {
@@ -83,22 +74,38 @@
     font-weight:bold;
 }
 #popInContent {
-    margin-left:5px;
-    padding-bottom:2px;
-    border-bottom:1px solid #edecdf;
-    white-space:nowrap;
     display:none;
-    _white-space:wrap;
-    _border-bottom:none;
+    position:relative;
+    background-color: #F6F3E5;
+    border: 1px solid #EEE3CC;
+    margin-left: 180px;
+    margin-top: -10px;
+    padding: 7px;
+    white-space: nowrap;
+    width: 772px;
+    _margin-right:-15px;
+    _width: 773px;
+}
+#popInContent a {
+    border-bottom:1px dotted #81785A;
+}
+#popInContent .popInLabel {
+    color:#FF6600;
+    padding-right:25px;
+    padding-left:10px;
+}
+.hitCountPopIn#popInContent {
+    margin-left:305px;
+    margin-top:-54px;
+    margin-bottom:24px;
+    width:647px;
+    _width:648px;
 }
 #searchResults {
-    margin-top:20px;
+    margin-top:30px;
 }
 #searchResults li {
     margin-left:0;
-}
-#searchResults li div {
-    margin-left:20px;
 }
 #searchResults ul {
     padding:5px;
@@ -127,7 +134,7 @@
     font-size:11px;
 }
 .rightSearchTips {
-    margin-top:25px;
+    margin-top:40px;
     padding:20px;
     background-color:#edecdf;
 }

@@ -105,25 +105,30 @@
                                 <xsl:apply-templates select="s:pub-volume"/>
                                 <xsl:apply-templates select="s:pub-issue"/>
                                 <xsl:apply-templates select="s:page"/>
-                                <span class="sourceLink">
-                                    <xsl:text> - </xsl:text>
-                                    <xsl:value-of select="$resourceName"/>
-                                </span>
+                                <xsl:if test="$resourceName = 'PubMed'">
+                                    <span class="sourceLink">
+                                        <xsl:text> - </xsl:text>
+                                        <xsl:value-of select="$resourceName"/>
+                                    </span>
+                                </xsl:if>
                                 <xsl:apply-templates select="s:contentId"/>
                                 <br />
                                 <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                                    <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
+                                    <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/>  &#187;</a>
                                 </xsl:if>
                             </xsl:when>
                             <xsl:otherwise>
-                                <span class="sourceLink">
-                                    <xsl:value-of select="$resourceName"/>
-                                </span>
-                                <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                                    <xsl:text> - </xsl:text>
-                                    <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
-                                    <xsl:if test="$emrid and $resourceName = 'UpToDate'"> <span class="utdCMEnote"> &#8592; Use this link for CME</span></xsl:if>
-                                </xsl:if>
+                                <xsl:choose>
+                                    <xsl:when test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
+                                        <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/>  &#187;</a>
+                                        <xsl:if test="$emrid and $resourceName = 'UpToDate'"> <span class="utdCMEnote"> &#8592; Use this link for CME</span></xsl:if>
+                                    </xsl:when>
+                                    <xsl:when test="$moreResultsLimit &gt;= number(s:resourceHits)">
+                                        <span class="sourceLink">
+                                            <xsl:value-of select="$resourceName"/>
+                                        </span>
+                                    </xsl:when>
+                                </xsl:choose>
                             </xsl:otherwise>
                         </xsl:choose>
                     </div>
@@ -361,7 +366,6 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')"/>
         </xsl:variable>
-        <xsl:text> - </xsl:text>
         <span class="pmid">
             <xsl:text> PMID: </xsl:text>
             <a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}"><xsl:value-of select="$pmid"/></a>
