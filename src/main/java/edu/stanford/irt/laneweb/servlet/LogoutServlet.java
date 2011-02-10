@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -30,27 +29,14 @@ public class LogoutServlet extends HttpServlet {
         if (isIphone) {
             this.log.info("logout servlet removing cookies:");
         }
-        for (Cookie cookie : req.getCookies()) {
-            String name = cookie.getName();
-            if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(name) || WEBAUTH_COOKIE_NAME.equals(name)) {
-                if (isIphone) {
-                    this.log.info("removing cookie: " + cookie.getName() + " value: " + cookie.getValue());
-                }
-                cookie.setValue(null);
-                cookie.setMaxAge(0);
-                resp.addCookie(cookie);
-            }
-        }
+        Cookie cookie = new Cookie(SunetIdCookieCodec.LANE_COOKIE_NAME, null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        resp.addCookie(cookie);
         HttpSession session = req.getSession(false);
         if (null != session) {
             session.invalidate();
         }
-        OutputStream out =  resp.getOutputStream();
-        resp.setContentType ("text/html");
-
-        out.write(page.getBytes());
-        out.flush();
+        resp.sendRedirect(WEBAUTH_LOGOUT_URL);
     }
-    
-    String page = "<html><head><meta http-equiv=\"refresh\" content=\"0;url=".concat(WEBAUTH_LOGOUT_URL).concat("\"></head></html>");
 }
