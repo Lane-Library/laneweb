@@ -18,8 +18,7 @@ public class TreeProcessor extends org.apache.cocoon.components.treeprocessor.Tr
     @Override
     public InternalPipelineDescription buildPipeline(final Environment environment) throws Exception {
         if (this.source == null) {
-            this.source = new DelayedRefreshSourceWrapper(this.resolver.resolveURI(this.filename), this.lastModifiedDelay);
-            super.initialize();
+            init();
         }
         return super.buildPipeline(environment);
     }
@@ -27,13 +26,19 @@ public class TreeProcessor extends org.apache.cocoon.components.treeprocessor.Tr
     @Override
     public boolean process(final Environment environment) throws Exception {
         if (this.source == null) {
-            this.source = new DelayedRefreshSourceWrapper(this.resolver.resolveURI(this.filename), this.lastModifiedDelay);
-            super.initialize();
+            init();
         }
         return super.process(environment);
     }
 
     public void setSourceResolver(final SourceResolver sourceResolver) {
         this.resolver = sourceResolver;
+    }
+    
+    private synchronized void init() throws Exception {
+        if (this.source == null) {
+            this.source = new DelayedRefreshSourceWrapper(this.resolver.resolveURI(this.filename), this.lastModifiedDelay);
+            super.initialize();
+        }
     }
 }
