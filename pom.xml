@@ -10,7 +10,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>1.11.17-SNAPSHOT</version>
+    <version>1.11.18-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/index.html</url>
     <inceptionYear>2002</inceptionYear>
@@ -602,13 +602,13 @@
         <dependency>
             <artifactId>easymock</artifactId>
             <groupId>org.easymock</groupId>
-            <version>3.0</version>
+            <version>2.5.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <artifactId>easymockclassextension</artifactId>
             <groupId>org.easymock</groupId>
-            <version>3.0</version>
+            <version>2.5.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
