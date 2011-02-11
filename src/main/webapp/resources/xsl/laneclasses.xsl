@@ -16,12 +16,12 @@
 
     <xsl:template match="lc:event_data">
         <xsl:if test="position() mod 2 !=0 ">
-            <li class="odd yui-gf">
+            <li class="odd">
                 <xsl:call-template name="decorator" />
             </li>
         </xsl:if>
         <xsl:if test="position() mod 2  = 0 ">
-            <li class="even yui-gf">
+            <li class="even">
                 <xsl:call-template name="decorator" />
             </li>
         </xsl:if>
@@ -29,7 +29,18 @@
 
     <xsl:template name="decorator">
 
-        <div class="yui-ge">
+        <div class="yui-gf">
+            <div class="yui-u date first">
+                <strong>
+                    <xsl:call-template name="month" />
+                    <xsl:text> </xsl:text>
+                    <xsl:call-template name="day" />
+                </strong>
+                <br />
+                <xsl:call-template name="start-time" />
+                <xsl:text>–</xsl:text>
+                <xsl:call-template name="end-time" />
+            </div>
             <div class="yui-u">
                 <h4>
                     <a>
@@ -44,79 +55,69 @@
                     <xsl:value-of select="./lc:speaker/text()" />
                 </div>
             </div>
-            <div class="yui-u first date">
-                <strong>
-                    <xsl:call-template name="month" />
-                    <xsl:text> </xsl:text>
-                    <xsl:call-template name="day" />
-                </strong>
-                <br />
-                <xsl:call-template name="start-time" />
-                <xsl:text>–</xsl:text>
-                <xsl:call-template name="end-time" />
-
-            </div>
         </div>
         <div class="details">
-            <div class="module">
-                <div>
-                    <xsl:param name="description-text" select="./lc:event_description" />
-                    <xsl:param name="firstParagraphDescription" select="substring-before($description-text, '.')" />
-                    <xsl:param name="first-words">
-                        <xsl:call-template name="firstWords">
-                            <xsl:with-param name="value" select="$description-text" />
-                            <xsl:with-param name="count" select="50" />
-                        </xsl:call-template>
-                    </xsl:param>
-                    <xsl:choose>
-                        <xsl:when test="count(tokenize($description-text, '\W+')[. != ''])  &gt; 50">
-                            <xsl:choose>
-                                <xsl:when  test="count(tokenize($firstParagraphDescription, '\W+')[. != ''])  &gt; 50 and count(tokenize($firstParagraphDescription, '\W+')[. != '']) &lt; 100">
-                                    <xsl:value-of select="$firstParagraphDescription" />
-                                    <xsl:text>.  </xsl:text>
-                                    <xsl:if test="count(tokenize($description-text, '\W+')[. != '']) != count(tokenize($firstParagraphDescription, '\W+')[. != ''])">
-                                        <xsl:text>........</xsl:text>
-                                        <a>
-                                            <xsl:attribute name="href">
-                                            <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
-                                            <xsl:value-of select="lc:module_id/text()" />
-                                            </xsl:attribute>
-                                            <xsl:text>more</xsl:text>
-                                        </a>
-                                    </xsl:if>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="normalize-space($first-words)" />
+          <div class="module">
+            <div>
+                <xsl:param name="description-text" select="./lc:event_description" />
+                <xsl:param name="firstParagraphDescription" select="substring-before($description-text, '.')" />
+                <xsl:param name="first-words">
+                    <xsl:call-template name="firstWords">
+                        <xsl:with-param name="value" select="$description-text" />
+                        <xsl:with-param name="count" select="50" />
+                    </xsl:call-template>
+                </xsl:param>
+                <xsl:choose>
+                    <xsl:when test="count(tokenize($description-text, '\W+')[. != ''])  &gt; 50">
+                        <xsl:choose>
+                            <xsl:when
+                                test="count(tokenize($firstParagraphDescription, '\W+')[. != ''])  &gt; 50 and count(tokenize($firstParagraphDescription, '\W+')[. != '']) &lt; 100">
+                                <xsl:value-of select="$firstParagraphDescription" />
+                                <xsl:text>.  </xsl:text>
+                                <xsl:if
+                                    test="count(tokenize($description-text, '\W+')[. != '']) != count(tokenize($firstParagraphDescription, '\W+')[. != ''])">
                                     <xsl:text>........</xsl:text>
                                     <a>
                                         <xsl:attribute name="href">
+                                            <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
+                                            <xsl:value-of select="lc:module_id/text()" />
+                                            </xsl:attribute>
+                                        <xsl:text>more</xsl:text>
+                                    </a>
+                                </xsl:if>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="normalize-space($first-words)" />
+                                <xsl:text>........</xsl:text>
+                                <a>
+                                    <xsl:attribute name="href">
                                         <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
                                         <xsl:value-of select="lc:module_id/text()" />
                                         </xsl:attribute>
-                                        <xsl:text>more</xsl:text>
-                                    </a>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="$description-text"></xsl:value-of>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
-                <a>
-                    <xsl:attribute name="href">
+                                    <xsl:text>more>></xsl:text>
+                                </a>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$description-text"></xsl:value-of>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </div>
+            <a>
+                <xsl:attribute name="href">
                         <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
                         <xsl:value-of select="./lc:module_id" />
                     </xsl:attribute>
-                    <xsl:attribute name="class">image-link</xsl:attribute>
-                    <img>
-                        <xsl:attribute name="class">module-img</xsl:attribute>
-                        <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
-                    </img>
-                </a>
-            </div>
+                <xsl:attribute name="class">image-link</xsl:attribute>
+                <img>
+                    <xsl:attribute name="class">module-img</xsl:attribute>
+                    <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
+                </img>
+            </a>
+            
         </div>
-
+    </div>
     </xsl:template>
 
 
