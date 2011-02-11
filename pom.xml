@@ -189,7 +189,6 @@
                                 <include>lane-search-reset-min.js</include>
                                 <include>lane-search-hoverText-min.js</include>                                                              
                                 <include>lane-bookmarks-min.js</include>
-                                <include>lane-logout-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
