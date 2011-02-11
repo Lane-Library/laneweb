@@ -43,17 +43,17 @@ public class SunetIdAndTicketDataBinderTest {
 
     @Test
     public void testBind() {
-//        expect(this.request.getSession()).andReturn(this.session).times(2);
-//        expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
-//        expect(this.session.getAttribute(Model.TICKET)).andReturn(null);
-//        this.session.setAttribute(eq(Model.TICKET), isA(Ticket.class));
-//        replay(this.request, this.session);
-//        this.model.put(Model.SUNETID, "ditenus");
-//        this.dataBinder.bind(this.model, this.request);
-//        Ticket ticket = (Ticket) this.model.get(Model.TICKET);
-//        assertNotNull(ticket);
-//        assertTrue(ticket.isValid());
-//        assertEquals("ditenus", this.model.get(Model.SUNETID));
-//        verify(this.request, this.session);
+        expect(this.request.getSession()).andReturn(this.session).times(2);
+        expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
+        expect(this.session.getAttribute(Model.TICKET)).andReturn(null);
+        this.session.setAttribute(eq(Model.TICKET), isA(Ticket.class));
+        replay(this.request, this.session);
+        this.model.put(Model.SUNETID, "ditenus");
+        this.dataBinder.bind(this.model, this.request);
+        Ticket ticket = (Ticket) this.model.get(Model.TICKET);
+        assertNotNull(ticket);
+        assertTrue(ticket.isValid());
+        assertEquals("ditenus", this.model.get(Model.SUNETID));
+        verify(this.request, this.session);
     }
 }
