@@ -58,7 +58,8 @@
         </div>
         <div class="details">
           <div class="module">
-            <div>
+            
+            <p>
                 <xsl:param name="description-text" select="./lc:event_description" />
                 <xsl:param name="firstParagraphDescription" select="substring-before($description-text, '.')" />
                 <xsl:param name="first-words">
@@ -103,7 +104,7 @@
                         <xsl:value-of select="$description-text"></xsl:value-of>
                     </xsl:otherwise>
                 </xsl:choose>
-            </div>
+            </p>
             <a>
                 <xsl:attribute name="href">
                         <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
@@ -115,7 +116,7 @@
                     <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
                 </img>
             </a>
-            
+           
         </div>
     </div>
     </xsl:template>
