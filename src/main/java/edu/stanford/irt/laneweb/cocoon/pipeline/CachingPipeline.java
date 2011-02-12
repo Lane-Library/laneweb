@@ -212,6 +212,9 @@ public class CachingPipeline extends NonCachingPipeline {
                 response = new CachedResponse(this.toCacheSourceValidities, ((CachingOutputStream) os).getContent(), expiresObj);
                 response.setContentType(environment.getContentType());
             } else {
+                if (this.xmlSerializer == null) {
+                    throw new IllegalStateException("null xmlSerializer, generator source is: " + this.generatorSource);
+                }
                 response = new CachedResponse(this.toCacheSourceValidities, (byte[]) this.xmlSerializer.getSAXFragment(),
                         expiresObj);
             }
