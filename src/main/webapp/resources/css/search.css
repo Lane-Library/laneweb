@@ -12,22 +12,24 @@
 }
 .search a, .search a:visited {
     color: #1C4B70;
-    border-bottom:none;
 }
 .search a:hover {
     color:#820000;
     border-bottom:1px solid #820000;
 }
+#searchResults a, #searchResults a:visited {
+    color: #565347;
+}
 #searchResults a.primaryLink {
     font-size:16px;
-    border-bottom:1px dotted #0C4C72;
-}
-#searchResults a.primaryLink:hover {
-    border-bottom:1px solid #820000;
+    color: #1C4B70;
 }
 #searchFacets {
     margin-top:5px;
     background-color:#fff; /* IE needs for opacity animation */
+}
+#searchFacets a {
+    border-bottom:none;
 }
 #searchFacets .facetHeader {
     text-transform:uppercase;
@@ -85,9 +87,6 @@
     width: 772px;
     _margin-right:-15px;
     _width: 773px;
-}
-#popInContent a {
-    border-bottom:1px dotted #81785A;
 }
 #popInContent .popInLabel {
     color:#FF6600;
