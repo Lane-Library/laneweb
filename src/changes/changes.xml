@@ -7,6 +7,16 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-02-14" version="1.11.18" description="1.11.18 bug fix release">
+            <action date="2011-02-14" dev="ryanmax" issue="47173" type="update">
+                search results display step-by-step changes: step 2
+            </action>
+        </release>
+        <release date="2011-02-11" version="1.11.17" description="1.11.17 emergency release">
+            <action date="2011-02-11" dev="ceyates" issue="47253" type="fix">
+                reference portal broken
+            </action>
+        </release>
         <release date="2011-02-07" version="1.11.16" description="1.11.16 bug fix release">
             <action date="2011-01-31" dev="ceyates" issue="46744" type="fix">
                 paging links broken in some circumstances
