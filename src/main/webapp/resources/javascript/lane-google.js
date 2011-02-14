@@ -77,11 +77,6 @@
             gaPageTracker._trackEvent(event.type, event.parentForm.source.value, event.suggestion);
         }
     });
-    Y.Global.on("lane:searchOptionsChange",  function(event) {
-        if (gaPageTracker !== undefined) {
-            gaPageTracker._trackEvent(event.type, event.action);
-        }
-    });
     Y.Global.on("lane:quickLinkClick",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, event.linkName);

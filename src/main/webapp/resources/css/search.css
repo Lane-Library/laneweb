@@ -55,26 +55,6 @@
 #searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a {
     color:#666666;
 }
-#searchOptions {
-    background-color:#edecdf;
-    height:15px;
-    padding:10px;
-}
-#optionsToggle {
-    background-position:0px 2px;
-    background-repeat:no-repeat;
-    padding-left:15px;
-    margin-left:-5px;
-}
-#optionsToggle.closed {
-    background-image:url(/././resources/images/minus.png);
-}
-#optionsToggle.open {
-    background-image:url(/././resources/images/plus.png);
-}
-#optionsToggle a {
-    font-weight:bold;
-}
 #popInContent {
     display:none;
     position:relative;
