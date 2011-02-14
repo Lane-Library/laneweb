@@ -77,26 +77,28 @@
                                     <xsl:text>.  </xsl:text>
                                     <xsl:if
                                         test="count(tokenize($description-text, '\W+')[. != '']) != count(tokenize($firstParagraphDescription, '\W+')[. != ''])">
-                                        <xsl:text>........</xsl:text>
+                                        <xsl:text>...</xsl:text>
                                         <a>
                                             <xsl:attribute name="href">
                                             <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
                                             <xsl:value-of select="lc:module_id/text()" />
                                             </xsl:attribute>
-                                            <xsl:text>more</xsl:text>
+                                            <xsl:text> More </xsl:text>
                                         </a>
+                                        <xsl:text>&#187;</xsl:text>
                                     </xsl:if>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="normalize-space($first-words)" />
-                                    <xsl:text>........</xsl:text>
+                                    <xsl:text>...</xsl:text>
                                     <a>
                                         <xsl:attribute name="href">
                                         <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
                                         <xsl:value-of select="lc:module_id/text()" />
                                         </xsl:attribute>
-                                        <xsl:text>more>></xsl:text>
+                                        <xsl:text> More </xsl:text>
                                     </a>
+                                    <xsl:text>&#187;</xsl:text>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:when>
@@ -112,8 +114,8 @@
                     </xsl:attribute>
                     <xsl:attribute name="class">image-link</xsl:attribute>
                     <img>
-                        <xsl:attribute name="class">module-img</xsl:attribute>
-                        <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
+                        <xsl:attribute name="class">module-img, module</xsl:attribute>
+                        <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>                        
                     </img>
                 </a>
             </div>
