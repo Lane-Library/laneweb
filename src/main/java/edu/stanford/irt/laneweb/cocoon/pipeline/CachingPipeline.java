@@ -213,7 +213,15 @@ public class CachingPipeline extends NonCachingPipeline {
                 response.setContentType(environment.getContentType());
             } else {
                 if (this.xmlSerializer == null) {
-                    throw new IllegalStateException("null xmlSerializer, generator source is: " + this.generatorSource);
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("\ncacheCompleteResponse:").append(this.cacheCompleteResponse)
+                    .append("\ncachedResponse:").append(this.cachedResponse)
+                    .append("\ncompleteResponseIsCached:").append(this.completeResponseIsCached)
+                    .append("\nfirstNotCacheableTransformerIndex:").append(this.firstNotCacheableTransformerIndex)
+                    .append("\nfirstProcessedTransformerIndex:").append(this.firstProcessedTransformerIndex)
+                    .append("\nfromCacheKey:").append(this.fromCacheKey)
+                    .append("\ntoCacheKey:").append(this.toCacheKey);
+                    throw new IllegalStateException(sb.toString());
                 }
                 response = new CachedResponse(this.toCacheSourceValidities, (byte[]) this.xmlSerializer.getSAXFragment(),
                         expiresObj);
