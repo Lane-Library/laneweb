@@ -3,14 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
-    <bean id="javax.servlet.ServletContext"
-        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
-    
-    <bean name="org.apache.cocoon.processing.ProcessInfoProvider"
-        class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
-        <property name="servletContext" ref="servletContext"/>
-    </bean>
-    
     <bean id="org.apache.cocoon.configuration.Settings" class="edu.stanford.irt.laneweb.cocoon.Settings">
         <property name="tempDir" value="#{contextAttributes['javax.servlet.context.tempdir']}"/>
     </bean>
@@ -19,17 +11,9 @@
         class="org.apache.cocoon.core.xml.impl.JaxpSAXParser">
         <property name="validate" value="false"/>
     </bean>
-
-    <bean id="org.apache.cocoon.template.expression.AbstractStringTemplateParser"
-        class="org.apache.cocoon.template.expression.AbstractStringTemplateParser" abstract="true">
-        <property name="expressionFactory" ref="org.apache.cocoon.el.ExpressionFactory"/>
-    </bean>
     
     <bean id="org.apache.avalon.framework.service.ServiceManager"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceManager"/>
-    
-    <bean id="org.apache.cocoon.core.container.spring.avalon.ConfigurationInfo"
-        class="org.apache.cocoon.core.container.spring.avalon.ConfigurationInfo"/>
     
     <bean id="org.apache.cocoon.core.container.spring.logger.Log"
         class="org.apache.cocoon.core.container.spring.logger.LoggerFactoryBean"/>

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.apache.excalibur.store.Store;
-import org.apache.excalibur.store.StoreJanitor;
 
 public class TransientStore implements Store {
 
@@ -37,10 +36,6 @@ public class TransientStore implements Store {
 
     public void remove(final Object key) {
         this.map.remove(key);
-    }
-
-    public void setStoreJanitor(final StoreJanitor storeJanitor) {
-        storeJanitor.register(this);
     }
 
     public int size() {
