@@ -175,7 +175,6 @@
     <bean name="org.apache.cocoon.generation.Generator/status"
         class="edu.stanford.irt.laneweb.cocoon.StatusGenerator" scope="prototype">
         <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
-        <constructor-arg ref="org.apache.excalibur.store.StoreJanitor"/>
         <constructor-arg ref="org.apache.excalibur.store.Store"/>
     </bean>
     
