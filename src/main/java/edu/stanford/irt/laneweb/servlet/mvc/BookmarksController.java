@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bookmarks;
+package edu.stanford.irt.laneweb.servlet.mvc;
 
 //import java.util.Collections;
 
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.Bookmarks;
+import edu.stanford.irt.laneweb.bookmarks.BookmarksDAO;
 import edu.stanford.irt.laneweb.model.Model;
 
 @Controller

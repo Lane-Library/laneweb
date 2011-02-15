@@ -7,37 +7,46 @@
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">    
     
-    <context:component-scan base-package="edu.stanford.irt.laneweb.bookmarks"/>
+    <context:component-scan base-package="edu.stanford.irt.laneweb.servlet.mvc"/>
     
     <mvc:annotation-driven/>
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.LanewebPathInterceptor">
+                <property name="defaultContentBase" value="#{contextAttributes['laneweb.context.live-base']}"/>
+                <property name="stageBase" value="#{contextAttributes['laneweb.context.stage-base']}"/>
+            </bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.RedirectHandlerInterceptor">
+                <property name="redirectProcessor" ref="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="interceptors">
-            <list>
-                <bean class="edu.stanford.irt.laneweb.servlet.mvc.LanewebPathInterceptor">
-                    <property name="defaultContentBase" value="#{contextAttributes['laneweb.context.live-base']}"/>
-                    <property name="stageBase" value="#{contextAttributes['laneweb.context.stage-base']}"/>
-                </bean>
-                <bean class="edu.stanford.irt.laneweb.servlet.mvc.RedirectHandlerInterceptor">
-                    <property name="redirectProcessor" ref="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"/>
-                </bean>
-            </list>
-        </property>
         <property name="urlMap">
             <map>
+                <entry key="/apps/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
+                <entry key="/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"/>
+                <entry key="/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
+                <entry key="/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
+                <entry key="/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
                 <entry key="/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"/>
                 <entry key="/BingSiteAuth.xml" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/site-verification"/>
                 <entry key="/google708f1eef3c6d1e52.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/site-verification"/>
                 <entry key="/y_key_01fe447429961ab5.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/site-verification"/>
-                <!--<entry key="/resources/css/lane-all.css" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
-                <entry key="/resources/javascript/lane-all.js" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>-->
+                <!--<entry key="/resources/**/*.*" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>-->
             </map>
         </property>
-        <property name="defaultHandler" ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"/>
+        <property name="defaultHandler" ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
-        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        abstract="true">
         <property name="methodsNotAllowed">
             <set>
                 <value>OPTIONS</value>
@@ -46,8 +55,48 @@
         </property>
         <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder"/>
         <property name="servletContext" ref="servletContext"/>
+        <lookup-method bean="org.apache.cocoon.environment.Environment" name="getEnvironment"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
         <property name="processor" ref="org.apache.cocoon.Processor/sitemap"/>
-        <lookup-method bean="edu.stanford.irt.laneweb.model.Model" name="getModel"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="processor" ref="org.apache.cocoon.Processor/applications"/>
+        <property name="prefix" value="/apps"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="processor" ref="org.apache.cocoon.Processor/mobile"/>
+        <property name="prefix" value="/m"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="processor" ref="org.apache.cocoon.Processor/mobile"/>
+        <property name="prefix" value="/rss"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="processor" ref="org.apache.cocoon.Processor/eresources"/>
+        <property name="prefix" value="/eresources"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="processor" ref="org.apache.cocoon.Processor/content"/>
+        <property name="prefix" value="/content"/>
     </bean>
     
     <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"
@@ -72,19 +121,18 @@
         <property name="supportedMethods" value="HEAD,GET"/>
     </bean>
     
-    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"
+    <!--<bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"
         class="edu.stanford.irt.laneweb.servlet.mvc.BasePathSubstitutingRequestHandler">
         <property name="locations">
             <list>
-                <value>/</value>
+                <value>/resources/</value>
             </list>
         </property>
         <property name="cacheSeconds" value="31536000"/>
         <property name="supportedMethods" value="HEAD,GET"/>
         <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
         <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
-        <lookup-method name="getModel" bean="edu.stanford.irt.laneweb.model.Model"/>
-    </bean>
+    </bean>-->
     
     <bean class="org.springframework.web.servlet.DispatcherServlet">
         <property name="detectAllHandlerMappings" value="true"/>

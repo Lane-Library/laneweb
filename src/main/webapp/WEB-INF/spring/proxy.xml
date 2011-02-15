@@ -30,12 +30,12 @@
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
     
-    <bean name="org.apache.cocoon.acting.Action/proxy-credential"
-        class="edu.stanford.irt.laneweb.proxy.ProxyCredentialAction"
-        scope="prototype">
-    </bean>
-    
     <bean name="org.apache.cocoon.selection.Selector/proxy-links"
         class="edu.stanford.irt.laneweb.proxy.ProxyLinkSelector"/>
+    
+    <bean name="laneweb.context.ezproxy-key"
+        class="java.lang.String">
+        <constructor-arg value="#{contextAttributes['laneweb.context.ezproxy-key']}"></constructor-arg>
+    </bean>
 
 </beans>

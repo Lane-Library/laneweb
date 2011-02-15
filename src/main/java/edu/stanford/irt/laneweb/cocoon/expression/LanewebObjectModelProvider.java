@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
 
+import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
+
 public class LanewebObjectModelProvider implements ObjectModelProvider {
 
     private Map<String, Object> objectModel;
@@ -12,7 +14,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         return this.objectModel;
     }
 
-    public void setObjectModel(final Map<String, Object> objectModel) {
-        this.objectModel = objectModel;
+    public void setEnvironment(final LanewebEnvironment environment) {
+        this.objectModel = environment.getObjectModel();
     }
 }

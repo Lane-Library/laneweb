@@ -3,7 +3,7 @@
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>4</version>
+        <version>5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.stanford.irt</groupId>
@@ -601,13 +601,13 @@
         <dependency>
             <artifactId>easymock</artifactId>
             <groupId>org.easymock</groupId>
-            <version>2.5.2</version>
+            <version>3.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <artifactId>easymockclassextension</artifactId>
             <groupId>org.easymock</groupId>
-            <version>2.5.2</version>
+            <version>3.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

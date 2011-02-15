@@ -18,15 +18,15 @@
                 <entry key="laneweb">
                     <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
                         class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModelProvider">
-                        <property name="objectModel" ref="edu.stanford.irt.laneweb.model.Model"/>
+                        <property name="environment" ref="org.apache.cocoon.environment.Environment"/>
                     </bean>
                 </entry>
             </map>
         </property>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.model.Model"
-        class="java.util.HashMap"
+    <bean id="org.apache.cocoon.environment.Environment"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment"
         scope="request">
     </bean>
     

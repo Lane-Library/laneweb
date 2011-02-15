@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,10 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.cocoon.Processor;
 import org.apache.cocoon.environment.Context;
 import org.apache.cocoon.environment.Environment;
+import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.http.HttpContext;
-import org.apache.cocoon.environment.internal.EnvironmentHelper;
+import org.apache.cocoon.environment.http.HttpRequest;
 import org.springframework.web.HttpRequestHandler;
 
+import edu.stanford.irt.laneweb.cocoon.expression.LanewebRequest;
+import edu.stanford.irt.laneweb.cocoon.expression.LanewebResponse;
 import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
@@ -32,6 +36,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     private Processor processor;
 
     private ServletContext servletContext;
+    
+    private String prefix = "";
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
             IOException {
@@ -39,16 +45,37 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return;
         }
-        Map<String, Object> model = getModel();
+        Map<String, Object> model = new HashMap<String, Object>();
         this.dataBinder.bind(model, request);
         String requestURI = request.getRequestURI();
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
-        String sitemapURI = requestURI.substring(basePath.length());
-        process(sitemapURI, model, request, response);
+        String sitemapURI = requestURI.substring(basePath.length() + this.prefix.length());
+        LanewebEnvironment environment = getEnvironment();
+        environment.setModel(model);
+        environment.setHttpServletResponse(response);
+        environment.setHttpServletRequest(request);
+        environment.setServletContext(this.servletContext);
+        
+        model.put(ObjectModelHelper.REQUEST_OBJECT, new LanewebRequest(sitemapURI, request));
+        model.put(ObjectModelHelper.RESPONSE_OBJECT, new LanewebResponse(response));
+        
+        try {
+            environment.startingProcessing();
+            this.processor.process(environment);
+            environment.commitResponse();
+        } catch (Exception e) {
+            throw new ServletException(e);
+        } finally {
+            environment.finishingProcessing();
+        }
     }
 
     public void setDataBinder(final DataBinder dataBinder) {
         this.dataBinder = dataBinder;
+    }
+    
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {
@@ -66,20 +93,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.servletContext = servletContext;
         this.context = new HttpContext(servletContext);
     }
-
-    protected abstract Map<String, Object> getModel();
-
-    protected void process(final String sitemapURI, final Map<String, Object> model, final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException, ServletException {
-        Environment environment = new LanewebEnvironment(sitemapURI, model, request, response, this.servletContext, this.context);
-        try {
-            EnvironmentHelper.enterProcessor(this.processor, environment);
-            this.processor.process(environment);
-            environment.commitResponse();
-        } catch (Exception e) {
-            throw new ServletException(e);
-        } finally {
-            EnvironmentHelper.leaveProcessor();
-        }
-    }
+    
+    protected abstract LanewebEnvironment getEnvironment();
 }

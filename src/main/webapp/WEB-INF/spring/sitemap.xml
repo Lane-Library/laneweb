@@ -2,109 +2,90 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    
-    
-    <bean name="org.apache.cocoon.Processor/sitemap"
-        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
-        <constructor-arg value="sitemap.xmap"/>
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
+
+    <bean name="org.apache.cocoon.Processor" abstract="true">
+        <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
     
-    <bean name="org.apache.cocoon.Processor/content"
+    <bean name="org.apache.cocoon.Processor/sitemap" parent="org.apache.cocoon.Processor"
         class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
-        <constructor-arg value="content.xmap"/>
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
+        <property name="source" value="/sitemap.xmap"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.Processor/content" parent="org.apache.cocoon.Processor"
+        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        <property name="source" value="/content.xmap"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.Processor/eresources" parent="org.apache.cocoon.Processor"
+        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        <property name="source" value="/eresources.xmap"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.Processor/applications" parent="org.apache.cocoon.Processor"
+        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        <property name="source" value="/applications.xmap"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.Processor/rss" parent="org.apache.cocoon.Processor"
+        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        <property name="source" value="/rss.xmap"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.Processor/mobile" parent="org.apache.cocoon.Processor"
+        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        <property name="source" value="/mobile.xmap"/>
     </bean>
     
-    <bean name="org.apache.cocoon.Processor/eresources"
+    <bean name="org.apache.cocoon.Processor/static" parent="org.apache.cocoon.Processor"
         class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
-        <constructor-arg value="eresources.xmap"/>
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
+        <property name="source" value="/static.xmap"/>
     </bean>
-    
-    <bean name="org.apache.cocoon.Processor/applications"
-        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
-        <constructor-arg value="applications.xmap"/>
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
-    </bean>
-    
-    <bean name="org.apache.cocoon.Processor/rss"
-        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
-        <constructor-arg value="rss.xmap"/>
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
-    </bean>
-    
-    <bean name="org.apache.cocoon.Processor/mobile"
-        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
-        <constructor-arg value="mobile.xmap"/>
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
-    </bean>
-    
+
     <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
         class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
         <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
     </bean>
-    
+
     <bean id="org.apache.excalibur.xmlizer.XMLizer"
         class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
-    
+
     <bean name="org.apache.cocoon.matching.Matcher/wildcard"
         class="org.apache.cocoon.matching.WildcardURIMatcher"/>
-        
+
     <bean name="org.apache.cocoon.matching.Matcher/url-decoding-wildcard"
         class="edu.stanford.irt.laneweb.cocoon.URLDecodingWildcardURIMatcher"/>
-        
+
     <bean name="org.apache.cocoon.matching.Matcher/regexp"
         class="org.apache.cocoon.matching.RegexpURIMatcher"/>
-    
+
     <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
         class="org.apache.cocoon.matching.RegexpRequestParameterMatcher"/>
-    
+
     <bean id="org.apache.cocoon.components.notification.NotifyingBuilder"
         class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
-    
-    <bean name="org.apache.cocoon.acting.Action/clear-cache"
-        class="edu.stanford.irt.laneweb.cocoon.ClearCacheAction">
-        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.acting.Action/clear-laneclasses-cache"
-        class="edu.stanford.irt.laneweb.classes.ClearClasseCacheAction">
-        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
-    </bean>
-
 
     <bean name="org.apache.cocoon.selection.Selector/ipgroup"
-        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector" scope="prototype"/>
-
+        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"
+        scope="prototype">
+    </bean>
+    
     <bean id="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
         <constructor-arg value="org.apache.cocoon.matching.Matcher"/>
     </bean>
-
+    
     <bean id="org.apache.cocoon.acting.ActionSelector"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
         <constructor-arg value="org.apache.cocoon.acting.Action"/>
     </bean>
-
+    
     <bean id="org.apache.cocoon.selection.SelectorSelector"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
         <constructor-arg value="org.apache.cocoon.selection.Selector"/>
     </bean>
-
+    
     <bean name="sitemap"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"/>
     <bean name="pipelines"
@@ -112,16 +93,20 @@
     <bean name="pipeline"
         class="org.apache.cocoon.components.treeprocessor.sitemap.PipelineNodeBuilder"
         scope="prototype"/>
-    <bean name="match" class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
-    <bean name="mount" class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>
-    <bean name="read" class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>
+    <bean name="match"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
+    <bean name="mount"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>
+    <bean name="read"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>
     <bean name="generate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
         scope="prototype"/>
     <bean name="serialize"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
         scope="prototype"/>
-    <bean name="act" class="org.apache.cocoon.components.treeprocessor.sitemap.ActNodeBuilder"
+    <bean name="act"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.ActNodeBuilder"
         scope="prototype"/>
     <bean name="aggregate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
@@ -132,7 +117,8 @@
     <bean name="transform"
         class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
         scope="prototype"/>
-    <bean name="select" class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
+    <bean name="select"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
         scope="prototype"/>
     <bean name="handle-errors"
         class="org.apache.cocoon.components.treeprocessor.sitemap.HandleErrorsNodeBuilder"/>
@@ -143,8 +129,7 @@
     <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
         class="org.apache.cocoon.components.treeprocessor.variables.StringTemplateParserVariableResolver"
         scope="prototype">
-        <property name="stringTemplateParser"
-            ref="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"/>
+        <property name="stringTemplateParser" ref="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"/>
         <property name="objectModel" ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
     </bean>
 

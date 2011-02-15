@@ -89,13 +89,8 @@
         scope="prototype">
     </bean>
 
-    <bean name="org.apache.cocoon.acting.Action/voyager"
-        class="edu.stanford.irt.laneweb.voyager.VoyagerAction" scope="prototype">
-        <property name="voyagerLogin">
             <bean class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
                 <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
             </bean>
-        </property>
-    </bean>
 
 </beans>

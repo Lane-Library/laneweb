@@ -22,7 +22,7 @@ import java.net.MalformedURLException;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.Processor;
 import org.apache.cocoon.components.source.impl.SitemapSourceInfo;
-import org.apache.cocoon.environment.internal.EnvironmentHelper;
+import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.wrapper.EnvironmentWrapper;
 import org.apache.cocoon.xml.ContentHandlerWrapper;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -32,6 +32,8 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
+
+import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
 
 /**
  * Implementation of a {@link Source} that gets its content by invoking a
@@ -99,7 +101,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
     /**
      * Construct a new object
      */
-    public LanewebSitemapSource(final String uri, final Processor processor) throws MalformedURLException {
+    public LanewebSitemapSource(final String uri, final Environment environment, final Processor processor) throws MalformedURLException {
         this.systemId = uri;
         this.processor = processor;
         // SitemapSourceInfo info = SitemapSourceInfo.parseURI(this.environment,
@@ -111,7 +113,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
         // create environment...
         SitemapSourceInfo info = new SitemapSourceInfo();
         info.uri = uri.substring(uri.indexOf(":/") + 2);
-        this.environment = new EnvironmentWrapper(EnvironmentHelper.getCurrentEnvironment(), info);
+        this.environment = new EnvironmentWrapper(environment, info);
         // The environment is a facade whose delegate can be changed in case of
         // internal redirects
         // this.environment = new MutableEnvironmentFacade(wrapper);
@@ -146,12 +148,9 @@ public class LanewebSitemapSource implements Source, XMLizable {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         this.environment.setOutputStream(os);
         try {
-            EnvironmentHelper.enterProcessor(this.pipelineDescription.processor, this.environment);
             this.pipelineDescription.processingPipeline.process(this.environment);
         } catch (ProcessingException e) {
             throw new RuntimeException(e);
-        } finally {
-            EnvironmentHelper.leaveProcessor();
         }
         return new ByteArrayInputStream(os.toByteArray());
     }
@@ -218,13 +217,9 @@ public class LanewebSitemapSource implements Source, XMLizable {
         // We have to add an environment changer
         // for clean environment stack handling.
         try {
-            EnvironmentHelper.enterProcessor(this.pipelineDescription.processor, this.environment);
-            this.pipelineDescription.processingPipeline.process(this.environment,
-                    EnvironmentHelper.createEnvironmentAwareConsumer(consumer));
+            this.pipelineDescription.processingPipeline.process(this.environment, consumer);
         } catch (ProcessingException e) {
             throw new RuntimeException(e);
-        } finally {
-            EnvironmentHelper.leaveProcessor();
         }
     }
 
@@ -238,8 +233,6 @@ public class LanewebSitemapSource implements Source, XMLizable {
         this.environment.startingProcessing();
         this.pipelineDescription = this.processor.buildPipeline(this.environment);
         this.environment.setURI(this.pipelineDescription.prefix, this.pipelineDescription.uri);
-        EnvironmentHelper.enterProcessor(this.pipelineDescription.processor, this.environment);
-        try {
             this.pipelineDescription.processingPipeline.prepareInternal(this.environment);
             this.validity.set(this.pipelineDescription.processingPipeline.getValidityForEventPipeline());
             String eventPipelineKey = this.pipelineDescription.processingPipeline.getKeyForEventPipeline();
@@ -257,8 +250,5 @@ public class LanewebSitemapSource implements Source, XMLizable {
             } else {
                 this.systemIdForCaching = this.systemId;
             }
-        } finally {
-            EnvironmentHelper.leaveProcessor();
-        }
     }
 }
