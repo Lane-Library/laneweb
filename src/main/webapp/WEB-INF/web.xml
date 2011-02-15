@@ -136,6 +136,11 @@
         <servlet-name>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-name>
         <url-pattern>/robots.txt</url-pattern>
     </servlet-mapping>
+    
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error.html</location>
+    </error-page>
 
     <mime-mapping>
         <extension>abs</extension>

@@ -60,13 +60,9 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         model.put(ObjectModelHelper.RESPONSE_OBJECT, new LanewebResponse(response));
         
         try {
-            environment.startingProcessing();
             this.processor.process(environment);
-            environment.commitResponse();
         } catch (Exception e) {
             throw new ServletException(e);
-        } finally {
-            environment.finishingProcessing();
         }
     }
 

@@ -35,7 +35,8 @@ public class LanewebEnvironment implements Environment {
 
     
     public String getURIPrefix() {
-        throw new UnsupportedOperationException();
+        return null;
+//        throw new UnsupportedOperationException();
     }
 
     
@@ -131,7 +132,12 @@ public class LanewebEnvironment implements Environment {
 
     
     public boolean tryResetResponse() throws IOException {
-        throw new UnsupportedOperationException();
+        try {
+            this.response.reset();
+            return true;
+        } catch (IllegalStateException e) {
+            return false;
+        }
     }
 
     
