@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.servlet.mvc.ProxyCredentialController;
 
 public class ProxyCredentialControllerTest {
 

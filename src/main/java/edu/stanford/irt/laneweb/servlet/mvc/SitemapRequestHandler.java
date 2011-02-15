@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.cocoon.Processor;
 import org.apache.cocoon.environment.Context;
-import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.http.HttpContext;
-import org.apache.cocoon.environment.http.HttpRequest;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.cocoon.expression.LanewebRequest;

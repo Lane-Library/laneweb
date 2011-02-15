@@ -9,9 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.cocoon.environment.Context;
 import org.apache.cocoon.environment.Environment;
-import org.apache.cocoon.environment.http.HttpEnvironment;
 
 public class LanewebEnvironment implements Environment {
     
@@ -36,7 +34,6 @@ public class LanewebEnvironment implements Environment {
     
     public String getURIPrefix() {
         return null;
-//        throw new UnsupportedOperationException();
     }
 
     

@@ -16,7 +16,7 @@
         <property name="bookmarksDAO" ref="edu.stanford.irt.laneweb.bookmarks.BookmarksDAO"/>
     </bean>
     
-    <bean name="edu.stanford.irt.laneweb.bookmarks.BookmarksDAO"
+    <bean id="edu.stanford.irt.laneweb.bookmarks.BookmarksDAO"
         class="edu.stanford.irt.laneweb.bookmarks.SQLBookmarksDAO">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>

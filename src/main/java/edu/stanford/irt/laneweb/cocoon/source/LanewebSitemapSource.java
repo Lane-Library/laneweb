@@ -33,8 +33,6 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
-import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
-
 /**
  * Implementation of a {@link Source} that gets its content by invoking a
  * pipeline.
