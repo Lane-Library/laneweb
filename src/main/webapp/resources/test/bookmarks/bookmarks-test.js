@@ -115,7 +115,6 @@ YUI({
         newestOnTop: false
     }).render("#log");
 
-//  T.Test.Runner.add(bookmarkTestCase);
   T.Test.Runner.add(bookmarksTestCase);
     T.Test.Runner.run();
 });
