@@ -52,9 +52,11 @@
                     }
                 }
         };
-        Bookmarks.DELETE_TEMPLATE = "<a class=\"yui3-bookmark-remove yui3-bookmark-edit\">remove</a>";
+        Bookmarks.DELETE_TEMPLATE = "<a class=\"yui3-bookmarks-remove yui3-bookmarks-edit\">remove</a>";
         Bookmarks.CREATE_TEMPLATE = "<li><a></a>" + Bookmarks.DELETE_TEMPLATE + "</li>";
-        Bookmarks.ADD_BOOKMARK_TEMPLATE = "<p class=\"yui3-bookmark-edit\">Click on any link to add a bookmark.</p>";
+        Bookmarks.ADD_BOOKMARK_TEMPLATE = "<div class=\"yui3-bookmarks-edit\">" +
+        	'<form><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></form>' +
+        "<p>or click on any link to add a bookmark.</p></div>";
         Y.extend(Bookmarks, Y.Widget, {
             addBookmark : function(bookmark, position) {
                 position = position === undefined ? 0 : position;
@@ -70,7 +72,7 @@
                     }
                     this.get("contentBox").one("ul").insert(node, position);
                     this.get("bookmarks").splice(position, 0, node);
-                    node.one(".yui3-bookmark-edit").on("click", this._handleRemoveClick, this);
+                    node.one(".yui3-bookmarks-edit").on("click", this._handleRemoveClick, this);
                     var data = "url=" + bookmark.url + "&label=" + bookmark.label;
                     this.get("io")("/././bookmarks/add", {
                         method : "post",
@@ -99,13 +101,13 @@
 //            },
             renderUI : function() {
                 this.get("contentBox").appendChild(Y.Node.create(Bookmarks.ADD_BOOKMARK_TEMPLATE));
-                this.get("contentBox").all(".yui3-bookmark-edit, .yui3-bookmarks-edit").addClass("yui3-bookmarks-hide");
+                this.get("contentBox").all(".yui3-bookmarks-edit, .yui3-bookmarks-edit").addClass("yui3-bookmarks-hide");
             },
             bindUI : function() {
                 this.after("editingChange", this._afterEditingChange);
                 this.get("toggle").on("click", this._toggleEdit, this);
-                this.get("contentBox").all(".yui3-bookmark-edit").on("click", this._handleRemoveClick, this);
-//                this.get("contentBox").one("input[type='submit']").on("click", this._handleAddClick, this);
+                this.get("contentBox").all(".yui3-bookmarks-edit").on("click", this._handleRemoveClick, this);
+                this.get("contentBox").one("input[type='submit']").on("click", this._handleAddClick, this);
             },
             _handleAddClick: function(e) {
                 var div = e.target.ancestor(".yui3-bookmarks-edit");
@@ -122,7 +124,7 @@
                 url.set("value","");
             },
             _handleRemoveClick : function(e) {
-                var i, ul = e.target.ancestor("ul").all(".yui3-bookmark-edit");
+                var i, ul = e.target.ancestor("ul").all(".yui3-bookmarks-edit");
                 for (i = 0; i < ul.size(); i++) {
                     if (ul.item(i) === e.target) {
                         this.removeBookmark(i);
@@ -134,11 +136,20 @@
                     }
                 }
             },
+        	_handleAddClick: function(e) {
+        		var form = e.target.ancestor("form");
+        		var label = form.one("input[name='label']");
+        		var url = form.one("input[name='url']");
+        		var data = "url=" + url.get("value") + "&label=" + label.get("value");
+        		this.addBookmark({label:label.get("value"),url:url.get("value")});
+        		label.set("value","");
+        		url.set("value","");
+        	},
             _pageLinkEventHandle : null,
             _afterEditingChange : function(e) {
                 var strings = this.get("strings");
                 this.get("toggle").set("innerHTML", e.newVal ? strings.editing : strings.notEditing);
-                var editables = this.get("contentBox").all(".yui3-bookmark-edit, .yui3-bookmarks-edit");
+                var editables = this.get("contentBox").all(".yui3-bookmarks-edit, .yui3-bookmarks-edit");
                 if (e.newVal) {
                 	LANE.tracking.disableTracking();
                     this._pageLinkEventHandle = Y.one("document").on("click", this._pageLinkHandler, this);

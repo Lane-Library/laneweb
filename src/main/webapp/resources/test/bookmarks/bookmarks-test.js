@@ -61,13 +61,13 @@ YUI({
         	T.Assert.areEqual(size - 1, T.all("li").size());
         },
         
-//        testClickAddBookmark : function() {
-//        	var size = T.all("li").size();
-//        	T.one("input[name='label']").set("value","SlashDot");
-//        	T.one("input[name='url']").set("value","http://slashdot.org/");
-//        	T.one("input[type='submit']").simulate("click");
-//        	T.Assert.areEqual(size + 1, T.all("li").size());
-//        },
+        testClickAddBookmark : function() {
+        	var size = T.all("#bookmarks li").size();
+        	T.one("input[name='label']").set("value","SlashDot");
+        	T.one("input[name='url']").set("value","http://slashdot.org/");
+        	T.one("input[type='submit']").simulate("click");
+        	T.Assert.areEqual(size + 1, T.all("#bookmarks li").size());
+        },
         
         testCorrectBookmarkRemoved : function() {
         	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
