@@ -105,7 +105,7 @@
                                 <xsl:apply-templates select="s:pub-volume"/>
                                 <xsl:apply-templates select="s:pub-issue"/>
                                 <xsl:apply-templates select="s:page"/>
-                                <xsl:if test="$resourceName = 'PubMed'">
+                                <xsl:if test="$resourceName = 'PubMed' or number(s:resourceHits) &lt;= $moreResultsLimit">
                                     <span class="sourceLink">
                                         <xsl:text> - </xsl:text>
                                         <xsl:value-of select="$resourceName"/>
