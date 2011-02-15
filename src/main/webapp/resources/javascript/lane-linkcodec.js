@@ -8,7 +8,12 @@
             host = "host",
             pathname = "pathname",
             loginPath = "/././secure/apps/proxy/credential",
-            proxyHost = "laneproxy.stanford.edu";
+            proxyHost = "laneproxy.stanford.edu",
+            
+            getPath = function(link) {
+                var path = link.get(pathname);
+                return path.indexOf("/") === 0 ? path : "/" + path;
+            };
 
         return {
 
@@ -20,14 +25,12 @@
                 if (link.get(host) !== thisHost) {
                     return false;
                 } else {
-                	var pathIndex = link.get(pathname).indexOf(loginPath);
-                    return pathIndex === 0 || pathIndex === 1;
+                    return getPath(link) === loginPath;
                 }
             },
 
             isProxy : function(link) {
-            	var pathIndex = link.get(pathname).indexOf("login");
-                return link.get(host).indexOf(proxyHost) === 0 && (pathIndex === 0 || pathIndex === 1);
+                return getPath(link) === "/login";
             }
         };
     };
