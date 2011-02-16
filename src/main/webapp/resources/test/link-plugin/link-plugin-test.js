@@ -12,33 +12,36 @@ YUI({
         name: "Lane Link Test Case",
         
         testIsLocalLink : function() {
-        	var link = T.all("a").item(0);
-        	link.simulate("click");
-        	T.Assert.isTrue(link.isLocal());
+        	var anchor = T.all("a").item(0);
+        	anchor.simulate("click");
+        	T.Assert.isTrue(anchor.link.isLocal());
         },
         
         testIsProxyLoginLink : function () {
-        	var link = T.all("a").item(1);
-        	link.simulate("click");
-        	T.Assert.isTrue(link.isProxyLogin());
+        	var anchor = T.all("a").item(1);
+        	anchor.simulate("click");
+        	T.Assert.isTrue(anchor.link.isProxyLogin());
         },
         
         testIsProxyLink : function() {
-        	var link = T.all("a").item(2);
-        	link.simulate("click");
-        	T.Assert.isTrue(link.isProxy());
+        	var anchor = T.all("a").item(2);
+        	anchor.simulate("click");
+        	T.Assert.isTrue(anchor.link.isProxy());
         },
         
         testProxyLoginIsNotLocal : function() {
-        	var link = T.all("a").item(1);
-        	link.simulate("click");
-        	T.Assert.isFalse(link.isLocal());
+        	var anchor = T.all("a").item(1);
+        	anchor.simulate("click");
+        	T.Assert.isFalse(anchor.link.isLocal());
         }
     });
     
 	T.all("a").on("click", function(e) {
 		e.preventDefault();
-		T.mix(e.target, Y.lane.Link);
+		e.target.plug(Y.lane.LinkPlugin);
+		var foo = e.target;
+		var bar = foo;
+//		T.mix(e.target, Y.lane.Link);
 	});
     
     T.one("body").addClass("yui3-skin-sam");
