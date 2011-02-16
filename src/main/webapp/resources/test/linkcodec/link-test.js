@@ -48,6 +48,7 @@ YUI({
 
 
 	T.all("a").on("click", function(e) {
+		e.preventDefault();
 		T.mix(e.target, Y.lane.Link);
 	});
     
