@@ -23,7 +23,7 @@ public class Ticket {
             throw new IllegalArgumentException("null ezproxyKey");
         }
         Date now = new Date();
-        String packet = "$u" + ((int) (now.getTime() / 1000));
+        String packet = "$u" + ((int) (now.getTime() / 1000)) + "$e";
         try {
             this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + user + packet) + packet, "UTF-8");
             this.creationTime = System.currentTimeMillis();
