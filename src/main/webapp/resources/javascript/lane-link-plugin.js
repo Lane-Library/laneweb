@@ -4,7 +4,7 @@
  */
 (function() {
 	
-	LinkPlugin = function(config) {
+	var LinkPlugin = function(config) {
 		this._node = config.host;
 	};
 	
