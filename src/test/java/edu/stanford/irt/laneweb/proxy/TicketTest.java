@@ -37,6 +37,6 @@ public class TicketTest {
 
     @Test
     public void testToString() {
-        assertEquals(46, this.ticket.toString().length());
+        assertEquals(50, this.ticket.toString().length());
     }
 }
