@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.cocoon.expression;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.apache.cocoon.el.objectmodel.ObjectModelProvider;

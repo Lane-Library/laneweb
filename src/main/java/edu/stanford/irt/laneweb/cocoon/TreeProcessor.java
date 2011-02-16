@@ -16,7 +16,6 @@ import org.apache.cocoon.components.treeprocessor.InvokeContext;
 import org.apache.cocoon.components.treeprocessor.ProcessingNode;
 import org.apache.cocoon.components.treeprocessor.TreeBuilder;
 import org.apache.cocoon.environment.Environment;
-import org.apache.cocoon.environment.ForwardRedirector;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.apache.cocoon.sitemap.impl.DefaultExecutor;
@@ -136,18 +135,6 @@ public class TreeProcessor extends org.apache.cocoon.components.treeprocessor.Tr
         int pos = this.source.getURI().lastIndexOf('/');
         this.environmentHelper = new EnvironmentHelper(new URL(this.source.getURI().substring(0, pos + 1)));
     }
-    private class TreeProcessorRedirector extends ForwardRedirector {
-        private InvokeContext context;
-
-        public TreeProcessorRedirector(Environment env, InvokeContext context) {
-            super(env);
-            this.context = context;
-        }
-
-        protected void cocoonRedirect(String uri) {
-            throw new UnsupportedOperationException();
-        }
-    }
 
     @Override
     public boolean process(final Environment environment) throws Exception {
@@ -216,15 +203,8 @@ public class TreeProcessor extends org.apache.cocoon.components.treeprocessor.Tr
         if (this.rootNode == null) {
             initialize();
         }
-        TreeProcessorRedirector redirector = new TreeProcessorRedirector(environment, context);
-        context.setRedirector(redirector);
         context.service(this.serviceManager);
         context.setLastProcessor(this);
-//        EnvironmentHelper.enterProcessor(new ConcreteTreeProcessor(null, new DefaultExecutor()), environment);
-        try {
-            return this.rootNode.invoke(environment, context);
-        } finally {
-//            EnvironmentHelper.leaveProcessor();
-        }
+        return this.rootNode.invoke(environment, context);
     }
 }
