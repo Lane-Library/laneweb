@@ -73,10 +73,13 @@
                     this.get("contentBox").one("ul").insert(node, position);
                     this.get("bookmarks").splice(position, 0, node);
                     node.one(".yui3-bookmarks-edit").on("click", this._handleRemoveClick, this);
-                    var data = "url=" + bookmark.url + "&label=" + bookmark.label;
+                    var data = Y.JSON.stringify(bookmark);//"url=" + bookmark.url + "&label=" + bookmark.label;
                     this.get("io")("/././bookmarks/add", {
                         method : "post",
-                        data : data
+                        data : data,
+                        headers: {
+                    		"Content-Type" : "application/json"
+                    	}
                     });
                 }
             },
@@ -116,10 +119,6 @@
                 var form = div.one("form");
                 var data = "url=" + url.get("value") + "&label=" + label.get("value");
                 this.addBookmark({label:label.get("value"),url:url.get("value")});
-                this.get("io")("/././bookmarks/add", {
-                    method : "post",
-                    data : data
-                });
                 label.set("value","");
                 url.set("value","");
             },
@@ -130,7 +129,10 @@
                         this.removeBookmark(i);
                         this.get("io")("/././bookmarks/remove", {
                             method : "post",
-                            data : "position=" + i
+                            data : Y.JSON.stringify(i),
+                            headers: {
+                        		"Content-Type" : "application/json"
+                        	}
                         });
                         break;
                     }
@@ -169,9 +171,12 @@
                 event.preventDefault();
                 var target = event.target;
                 if (target.get("nodeName") === "A" && target.inDoc() && target.ancestor("#bookmarks") === null) {
-                    var div = this.get("contentBox");
+                	if (!target.link) {
+                		target.plug(Y.lane.LinkPlugin);
+                	}
                     var label = target.get("textContent");
-                    var url = target.get("href");
+                    var url = target.link.isLocal() ? target.link.getPath() : target.get("href");
+                    url += target.get("search") + target.get("hash");
                     this.addBookmark({label:label,url:url});
                 }
             }

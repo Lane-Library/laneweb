@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -28,9 +28,8 @@ public class BookmarksController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void addBookmark(@RequestParam final String label, @RequestParam final String url,
-            @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
-        bookmarks.add(0, new Bookmark(label, url));
+    public void addBookmark(@RequestBody Bookmark bookmark,  @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        bookmarks.add(0, bookmark);
         this.bookmarksDAO.saveBookmarks(bookmarks);
     }
 
@@ -63,7 +62,7 @@ public class BookmarksController {
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void removeBookmark(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+    public void removeBookmark(@RequestBody final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
         bookmarks.remove(position);
         this.bookmarksDAO.saveBookmarks(bookmarks);
     }

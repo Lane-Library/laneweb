@@ -5,14 +5,14 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use("test", "console", "node-event-simulate", function(T){
+}).use("test", "console", "node-event-simulate", "json-parse", function(T){
 	
 	var bookmarks = Y.lane.Bookmarks;
 	
-	var io = false;
+	var bookmark = null;
 	
-	bookmarks.set("io", function() {
-	    ioOccurred = true;
+	bookmarks.set("io", function(url, message) {
+		bookmark = T.JSON.parse(message.data);
 	});
 	
 	var bookmarkables = T.all("#bookmarkables a");
@@ -21,7 +21,7 @@ YUI({
         name: "Lane Bookmarks Test Case",
         
         setUp : function() {
-        	ioOccurred = false;
+        	bookmark = null;
         },
         
         testNotEditing : function() {
@@ -86,7 +86,19 @@ YUI({
         
         testIOSent : function () {
         	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
-        	T.Assert.isTrue(ioOccurred);
+        	T.Assert.areEqual("http://mdconsult.com", bookmark.url);
+        },
+        
+        testHostStrippedFromLocalLink : function() {
+        	bookmarks.set("editable", true);
+        	T.one("#local").simulate("click");
+        	T.Assert.areEqual(T.one("#local").get("pathname"), bookmark.url);
+        },
+        
+        testLocalHasQueryString : function() {
+        	bookmarks.set("editable", true);
+        	T.one("#localquerystring").simulate("click");
+        	T.Assert.areEqual("/test/index.html?query=string#hash", bookmark.url);
         }
         
 //        testMoveUp : function() {
