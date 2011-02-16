@@ -9,7 +9,7 @@ YUI({
     
 
     var linkTestCase = new T.Test.Case({
-        name: "Lane Bookmarks Test Case",
+        name: "Lane Link Test Case",
         
         setUp : function() {
         	target = null;
@@ -42,14 +42,10 @@ YUI({
     
     target = null;
     
-    T.on("click", function(e){
-    	target = e.target;
-    });
-
-
 	T.all("a").on("click", function(e) {
 		e.preventDefault();
 		T.mix(e.target, Y.lane.Link);
+    	target = e.target;
 	});
     
     T.one("body").addClass("yui3-skin-sam");
