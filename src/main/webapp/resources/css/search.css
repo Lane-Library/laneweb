@@ -58,6 +58,7 @@
 #popInContent {
     display:none;
     position:relative;
+    overflow:hidden;
     background-color: #F6F3E5;
     border: 1px solid #EEE3CC;
     margin-left: 180px;
