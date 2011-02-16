@@ -11,41 +11,34 @@ YUI({
     var linkTestCase = new T.Test.Case({
         name: "Lane Link Test Case",
         
-        setUp : function() {
-        	target = null;
-        },
-        
         testIsLocalLink : function() {
         	var link = T.all("a").item(0);
         	link.simulate("click");
-        	T.Assert.isTrue(target.isLocal());
+        	T.Assert.isTrue(link.isLocal());
         },
         
         testIsProxyLoginLink : function () {
         	var link = T.all("a").item(1);
         	link.simulate("click");
-        	T.Assert.isTrue(target.isProxyLogin());
+        	T.Assert.isTrue(link.isProxyLogin());
         },
         
         testIsProxyLink : function() {
         	var link = T.all("a").item(2);
         	link.simulate("click");
-        	T.Assert.isTrue(target.isProxy());
+        	T.Assert.isTrue(link.isProxy());
         },
         
         testProxyLoginIsNotLocal : function() {
         	var link = T.all("a").item(1);
         	link.simulate("click");
-        	T.Assert.isFalse(target.isLocal());
+        	T.Assert.isFalse(link.isLocal());
         }
-    }),
-    
-    target = null;
+    });
     
 	T.all("a").on("click", function(e) {
 		e.preventDefault();
 		T.mix(e.target, Y.lane.Link);
-    	target = e.target;
 	});
     
     T.one("body").addClass("yui3-skin-sam");
