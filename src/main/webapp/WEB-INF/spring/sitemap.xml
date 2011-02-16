@@ -3,7 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean name="org.apache.cocoon.Processor" abstract="true">
+    <bean name="org.apache.cocoon.Processor" abstract="true" init-method="initialize">
+        <property name="sitemapLanguage" ref="org.apache.cocoon.components.treeprocessor.TreeBuilder"/>
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
     
@@ -36,13 +37,8 @@
         class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
         <property name="source" value="/mobile.xmap"/>
     </bean>
-    
-    <bean name="org.apache.cocoon.Processor/static" parent="org.apache.cocoon.Processor"
-        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
-        <property name="source" value="/static.xmap"/>
-    </bean>
 
-    <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
+    <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder"
         class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
         <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
@@ -95,8 +91,8 @@
         scope="prototype"/>
     <bean name="match"
         class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
-    <bean name="mount"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>
+    <!--<bean name="mount"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>-->
     <bean name="read"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>
     <bean name="generate"
@@ -105,15 +101,15 @@
     <bean name="serialize"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
         scope="prototype"/>
-    <bean name="act"
+    <!--<bean name="act"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ActNodeBuilder"
-        scope="prototype"/>
+        scope="prototype"/>-->
     <bean name="aggregate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
         scope="prototype"/>
-    <bean name="redirect-to"
+    <!--<bean name="redirect-to"
         class="org.apache.cocoon.components.treeprocessor.sitemap.RedirectToNodeBuilder"
-        scope="prototype"/>
+        scope="prototype"/>-->
     <bean name="transform"
         class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
         scope="prototype"/>
@@ -122,15 +118,16 @@
         scope="prototype"/>
     <bean name="handle-errors"
         class="org.apache.cocoon.components.treeprocessor.sitemap.HandleErrorsNodeBuilder"/>
+    
     <bean name="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"
         class="org.apache.cocoon.components.treeprocessor.variables.LegacySitemapStringTemplateParser">
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
+    
     <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
         class="org.apache.cocoon.components.treeprocessor.variables.StringTemplateParserVariableResolver"
         scope="prototype">
         <property name="stringTemplateParser" ref="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"/>
-        <property name="objectModel" ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
     </bean>
 
 </beans>
