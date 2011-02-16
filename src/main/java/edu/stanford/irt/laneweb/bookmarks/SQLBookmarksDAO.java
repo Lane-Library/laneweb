@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
-
-import oracle.sql.BLOB;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,8 +86,8 @@ public class SQLBookmarksDAO implements BookmarksDAO {
                 cstmt.setString(1, emrid);
                 cstmt.registerOutParameter(2, java.sql.Types.BLOB);
                 cstmt.executeUpdate();
-                BLOB blob = (BLOB) cstmt.getBlob(2);
-                OutputStream os = blob.getBinaryOutputStream();
+                Blob blob = cstmt.getBlob(2);
+                OutputStream os = blob.setBinaryStream(0);
                 ObjectOutputStream oop = new ObjectOutputStream(os);
                 oop.writeObject(bookmarks);
                 oop.flush();
