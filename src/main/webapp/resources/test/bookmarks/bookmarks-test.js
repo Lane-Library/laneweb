@@ -57,7 +57,7 @@ YUI({
         
         testClickRemoveBookmark : function() {
         	var size = T.all("li").size();
-        	T.one(".yui3-bookmark-edit").simulate("click");
+        	T.one(".yui3-bookmarks-edit").simulate("click");
         	T.Assert.areEqual(size - 1, T.all("li").size());
         },
         
@@ -72,7 +72,7 @@ YUI({
         testCorrectBookmarkRemoved : function() {
         	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
         	var label = T.one("li").get("textContent");
-        	T.all(".yui3-bookmark-edit").item(1).simulate("click");
+        	T.all(".yui3-bookmarks-edit").item(1).simulate("click");
         	T.Assert.areEqual(label, T.one("li").get("textContent"));
         }, 
         

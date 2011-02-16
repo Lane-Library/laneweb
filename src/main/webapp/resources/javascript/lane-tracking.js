@@ -133,18 +133,20 @@
                     external: external
                 };
             };
+
+
+            Y.on("startTracking", function() {
+            	enabled = true;
+            });
+            Y.on("stopTracking", function() {
+            	enabled = false;
+            });
             return {
                 addTracker: function(tracker) {
                     if (!tracker || tracker.track === undefined) {
                         throw 'tracker does not implement track()';
                     }
                     trackers.push(tracker);
-                },
-                disableTracking : function() {
-                	enabled = false;
-                },
-                enableTracking : function () {
-                	enabled = true;
                 },
                 trackEvent: function(event) {
                     var trackingData;
