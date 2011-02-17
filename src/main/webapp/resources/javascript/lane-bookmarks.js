@@ -7,7 +7,7 @@
          * @class Bookmarks
          * @constructor
     	 */
-        Bookmarks = function() {
+        var Bookmarks = function() {
             Bookmarks.superclass.constructor.apply(this, arguments);
         };
         Bookmarks.NAME = "bookmarks";
