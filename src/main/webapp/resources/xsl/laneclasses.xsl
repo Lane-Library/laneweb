@@ -28,7 +28,6 @@
     </xsl:template>
 
     <xsl:template name="decorator">
-
         <div class="yui-gf">
             <div class="yui-u date first">
                 <strong>

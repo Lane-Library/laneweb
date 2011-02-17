@@ -226,11 +226,20 @@
                 </map:match>
                 <map:match pattern="classes/data.xml" type="wildcard">
                     <map:generate type="classes-aggregator" src="apps:/classes/onlineregistrationcenter.xml"/>
-                    <map:transform type="textNodeParser"/>
+                    <map:transform type="textNodeParser"/> 
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="classes/all-data.xml" type="wildcard">
+                    <map:generate type="classes-aggregator" src="apps:/classes/all-onlineregistrationcenter.xml"/>
+                    <map:transform type="textNodeParser"/> 
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="classes/onlineregistrationcenter.xml" type="wildcard">
                     <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="classes/all-onlineregistrationcenter.xml" type="wildcard">
+                    <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
