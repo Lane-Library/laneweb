@@ -81,7 +81,7 @@
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="processor" ref="org.apache.cocoon.Processor/mobile"/>
+        <property name="processor" ref="org.apache.cocoon.Processor/rss"/>
         <property name="prefix" value="/rss"/>
     </bean>
     
