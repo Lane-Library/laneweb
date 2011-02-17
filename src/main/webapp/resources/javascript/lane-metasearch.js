@@ -7,7 +7,7 @@
             searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
             uberEngines = ['cro_', 'mdc_', 'ovid-'], // engines with multiple resources
             startTime,
-            searchIndicator = new LANE.SearchIndicator();
+            searchIndicator = new LANE.SearchIndicator(),
             getSearchUrl = function() {
                 var add, i, y, searchUrl = '/././apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms();
                 for (y = 0; y < searchables.length; y++) {
