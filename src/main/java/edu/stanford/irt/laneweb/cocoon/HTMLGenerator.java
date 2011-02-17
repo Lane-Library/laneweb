@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;

@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.cocoon.Processor;
-import org.apache.cocoon.environment.Context;
 import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.http.HttpContext;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.cocoon.expression.LanewebRequest;
@@ -24,8 +22,6 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
-
-    private Context context;
 
     private DataBinder dataBinder;
 
@@ -85,7 +81,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     public void setServletContext(final ServletContext servletContext) {
         this.servletContext = servletContext;
-        this.context = new HttpContext(servletContext);
     }
     
     protected abstract LanewebEnvironment getEnvironment();
