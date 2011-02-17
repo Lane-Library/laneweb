@@ -14,10 +14,17 @@ public class LanewebXMLizer implements XMLizer {
 
     public void toSAX(final InputStream stream, final String mimeType, final String systemID, final ContentHandler handler)
             throws SAXException, IOException {
-        InputSource inputSource = new InputSource(stream);
+        InputSource inputSource = new InputSource();
+        inputSource.setByteStream(stream);
         inputSource.setSystemId(systemID);
         XMLReader reader = XMLReaderFactory.createXMLReader();
         reader.setContentHandler(handler);
-        reader.parse(inputSource);
+        try {
+            reader.parse(inputSource);
+        } finally {
+            if (inputSource.getByteStream() != null) {
+                inputSource.getByteStream().close();
+            }
+        }
     }
 }

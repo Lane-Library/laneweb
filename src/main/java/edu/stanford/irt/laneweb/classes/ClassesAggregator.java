@@ -54,6 +54,7 @@ public class ClassesAggregator extends ContentAggregator implements CacheablePro
         this.src = src;
         Source source = resolver.resolveURI(src);
         InputSource domContent = new InputSource(source.getInputStream());
+        domContent.setSystemId(source.getURI());
         try {
             NodeList nodeList = (NodeList) this.xpath.evaluate("/eventlist/event/eventid", domContent, XPathConstants.NODESET);
             for (int i = 0; i < nodeList.getLength(); i++) {

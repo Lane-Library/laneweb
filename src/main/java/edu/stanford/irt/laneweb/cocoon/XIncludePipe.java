@@ -398,13 +398,14 @@ class XIncludePipe extends AbstractXMLPipe {
             } else if (url instanceof XMLizable) {
                 ((XMLizable) url).toSAX(new IncludeXMLConsumer(subPipe));
             } else {
-                InputStream input = null;
+                InputSource inputSource = new InputSource();
                 try {
-                    input = url.getInputStream();
-                    this.saxParser.parse(new InputSource(input), new IncludeXMLConsumer(subPipe));
+                    inputSource.setByteStream(url.getInputStream());
+                    inputSource.setSystemId(url.getURI());
+                    this.saxParser.parse(inputSource, new IncludeXMLConsumer(subPipe));
                 } finally {
-                    if (input != null) {
-                        input.close();
+                    if (inputSource.getByteStream() != null) {
+                        inputSource.getByteStream().close();
                     }
                 }
             }

@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.core.xml.SAXParser;
@@ -38,13 +37,14 @@ public class ContentAggregator extends DefaultContentAggregator {
             if (part.source instanceof XMLizable) {
                 ((XMLizable) part.source).toSAX(this);
             } else {
-                InputStream input = null;
+                InputSource inputSource = new InputSource();
                 try {
-                    input = part.source.getInputStream();
-                    this.saxParser.parse(new InputSource(input), this, this);
+                    inputSource.setByteStream(part.source.getInputStream());
+                    inputSource.setSystemId(part.uri);
+                    this.saxParser.parse(inputSource, this, this);
                 } finally {
-                    if (input != null) {
-                        input.close();
+                    if (inputSource.getByteStream() != null) {
+                        inputSource.getByteStream().close();
                     }
                 }
             }
