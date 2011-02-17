@@ -2,19 +2,16 @@ package edu.stanford.irt.laneweb.bookmarks;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-
 public class Bookmark implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonDeserialize
     private String label;
 
-    @JsonDeserialize
     private String url;
-    
-    protected Bookmark() {}
+
+    protected Bookmark() {
+    }
 
     public Bookmark(final String label, final String url) {
         this.label = label;
@@ -27,5 +24,13 @@ public class Bookmark implements Serializable {
 
     public String getUrl() {
         return this.url;
+    }
+
+    public void setLabel(final String label) {
+        this.label = label;
+    }
+
+    public void setUrl(final String url) {
+        this.url = url;
     }
 }
