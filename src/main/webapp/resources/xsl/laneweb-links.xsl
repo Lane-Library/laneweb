@@ -116,7 +116,7 @@
                 </xsl:otherwise>
             </xsl:choose>
             <!-- replace links ending with / so they end with /index.html -->
-            <xsl:if test="ends-with($link,'/')">
+            <xsl:if test="not(contains($link, '?')) and ends-with($link,'/')">
                 <xsl:text>index.html</xsl:text>
             </xsl:if>
             <xsl:if test="$sourceid and name(..) != 'link' and name(..) != 'img' and not(starts-with($link,'#'))">

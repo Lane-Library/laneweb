@@ -29,6 +29,15 @@
 			return path.indexOf("/") === 0 ? path : "/" + path;
 		},
 		
+		getURL : function() {
+			var href = this._node.get("href");
+			if (this.isProxy() || this.isProxyLogin()) {
+				return href.substring(href.indexOf("url=") + 4);
+			} else {
+				return href;
+			}
+		},
+		
 		isLocal : function() {
 			return this._node.get(LinkPlugin.HOST) === LinkPlugin.DOCUMENT_HOST ?
 					!this.isProxyLogin()

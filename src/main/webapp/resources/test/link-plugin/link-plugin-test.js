@@ -12,23 +12,38 @@ YUI({
         name: "Lane Link Test Case",
         
         testIsLocalLink : function() {
-        	var anchor = T.all("a").item(0);
+        	var anchor = T.one("#local");
         	T.Assert.isTrue(anchor.link.isLocal());
         },
         
         testIsProxyLoginLink : function () {
-        	var anchor = T.all("a").item(1);
+        	var anchor = T.one("#proxylogin");
         	T.Assert.isTrue(anchor.link.isProxyLogin());
         },
         
         testIsProxyLink : function() {
-        	var anchor = T.all("a").item(2);
+        	var anchor = T.one("#proxyurl");
         	T.Assert.isTrue(anchor.link.isProxy());
         },
         
         testProxyLoginIsNotLocal : function() {
-        	var anchor = T.all("a").item(1);
+        	var anchor = T.one("#proxylogin");
         	T.Assert.isFalse(anchor.link.isLocal());
+        },
+        
+        testGetURL : function() {
+        	var anchor = T.one("#example");
+        	T.Assert.areEqual("http://www.example.com/example", anchor.link.getURL());
+        },
+        
+        testGetProxiedLoginURL : function() {
+        	var anchor = T.one("#proxylogin");
+        	T.Assert.areEqual("http://www.nejm.org/", anchor.link.getURL());
+        }, 
+        
+        testGetProxiedURL : function() {
+        	var anchor = T.one("#proxyurl");
+        	T.Assert.areEqual("http://www.nejm.org/", anchor.link.getURL());
         }
     });
     

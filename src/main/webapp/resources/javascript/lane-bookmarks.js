@@ -176,8 +176,11 @@
                 		target.plug(Y.lane.LinkPlugin);
                 	}
                     label = target.get("textContent");
-                    url = target.link.isLocal() ? target.link.getPath() : target.get("href");
-                    url += target.get("search") + target.get("hash");
+                    if (target.link.isLocal()) {
+                    	url = target.link.getPath() + target.get("search") + target.get("hash");
+                    } else {
+                    	url = target.link.getURL();
+                    }
                     this.addBookmark({label:label,url:url});
                 }
             }

@@ -99,6 +99,18 @@ YUI({
         	bookmarks.set("editable", true);
         	T.one("#localquerystring").simulate("click");
         	T.Assert.areEqual("/test/index.html?query=string#hash", bookmark.url);
+        },
+        
+        testProxyLoginURL : function() {
+        	bookmarks.set("editable", true);
+        	T.one("#proxylogin").simulate("click");
+        	T.Assert.areEqual("http://www.nejm.org/", bookmark.url);
+        },
+        
+        testProxiedURL : function() {
+        	bookmarks.set("editable", true);
+        	T.one("#proxyurl").simulate("click");
+        	T.Assert.areEqual("http://www.nejm.org/", bookmark.url);
         }
         
 //        testMoveUp : function() {
