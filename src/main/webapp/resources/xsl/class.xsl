@@ -27,7 +27,7 @@
 
 
     <xsl:template match="h:span[@id='full-cancelled']">
-        <xsl:if test="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_status/text() = 'F'">
+        <xsl:if test="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:seats/text() &gt;=  /doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:registrations/text()">
         <xsl:copy>
             <xsl:apply-templates select="attribute::* | child::node()" />
         </xsl:copy>
