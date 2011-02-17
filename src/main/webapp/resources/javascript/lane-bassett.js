@@ -1,6 +1,6 @@
 (function() {
   if (Y.one("#accordion") && Y.one("#bassettContent")) {
-	function Bassett(config) {
+	var Bassett = function(config) {
 		Bassett.superclass.constructor.apply(this, arguments);
 	};
 	Bassett.NAME = "bassett";
