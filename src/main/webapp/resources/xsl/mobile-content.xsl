@@ -77,7 +77,7 @@
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
-                <xsl:when test="matches(@href,'http.*lane(-local|-stage)?.stanford.edu/')">
+                <xsl:when test="matches(@href,'http.*lane(-local|-stage)?.stanford.edu/[^m/]')">
                     <xsl:attribute name="href">
                         <xsl:value-of select="replace(@href,'http.*lane(-local|-stage)?.stanford.edu/',concat($base-path,'/m/lc2txt/'))"/>
                     </xsl:attribute>
