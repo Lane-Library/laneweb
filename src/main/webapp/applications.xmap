@@ -197,9 +197,6 @@
                     <map:generate type="querymap"/>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match pattern="querymap/json" type="wildcard">
-                    <map:read type="querymap"/>
-                </map:match>
             </map:match>
             <map:match pattern="sfx/json" type="wildcard">
                 <map:generate type="html"
