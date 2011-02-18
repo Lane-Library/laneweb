@@ -25,8 +25,7 @@
         <property name="elementName" value="url"/>
     </bean>
     
-    <bean name="org.apache.cocoon.reading.Reader/ezproxy-servers" scope="prototype"
-        class="edu.stanford.irt.laneweb.proxy.EzproxyServersReader">
+    <bean class="edu.stanford.irt.laneweb.proxy.EzproxyServersWriter">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
     

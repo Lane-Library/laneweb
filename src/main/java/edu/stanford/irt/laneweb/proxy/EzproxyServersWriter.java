@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
-public class EzproxyServersReader {
+public class EzproxyServersWriter {
 
     private static final byte[] HJ = "HJ ".getBytes();
 
