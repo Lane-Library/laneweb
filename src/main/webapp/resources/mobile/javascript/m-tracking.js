@@ -93,6 +93,9 @@ _gaq.push(['_trackPageview']);
             // trim and normalize:
             title = title.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
         }
+        if (!title) {
+            title = node.href;
+        }
         // finally:
         if (!title) {
             title = 'unknown';
