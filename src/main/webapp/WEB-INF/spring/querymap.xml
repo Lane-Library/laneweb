@@ -2,9 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    
-    
-    <bean id="edu.stanford.irt.querymap.QueryMapper" class="edu.stanford.irt.querymap.QueryMapper">
+
+    <bean class="edu.stanford.irt.querymap.QueryMapper">
         <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
         <property name="queryToDescriptor">
             <bean class="edu.stanford.irt.querymap.QueryToDescriptor">
@@ -16,24 +15,6 @@
     
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
         class="edu.stanford.irt.querymap.DescriptorManager"/>
-    
-    <bean id="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent"
-        class="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent"
-        scope="prototype"
-        abstract="true">
-        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
-    </bean>
-    
-    
-    <bean name="org.apache.cocoon.generation.Generator/querymap"
-        class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
-        parent="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent">
-    </bean>
-    
-    <bean name="org.apache.cocoon.reading.Reader/querymap"
-        class="edu.stanford.irt.laneweb.querymap.QueryMapReader"
-        parent="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent">
-    </bean>
     
     <bean id="org.apache.commons.httpclient.HttpClient"
         class="org.apache.commons.httpclient.HttpClient">
