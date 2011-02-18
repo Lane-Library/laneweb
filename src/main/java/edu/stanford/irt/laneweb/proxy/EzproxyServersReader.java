@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.proxy;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,10 +9,9 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
-public class EzproxyServersReader extends AbstractReader {
+public class EzproxyServersReader {
 
     private static final byte[] HJ = "HJ ".getBytes();
 
@@ -45,8 +45,8 @@ public class EzproxyServersReader extends AbstractReader {
             .getBytes();
 
     private DataSource dataSource;
-
-    public void generate() throws IOException {
+    
+    public void write(OutputStream outputStream) throws IOException {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -56,23 +56,19 @@ public class EzproxyServersReader extends AbstractReader {
             rs = stmt.executeQuery(SQL);
             while (rs.next()) {
                 String host = rs.getString(1);
-                this.outputStream.write(HJ);
-                this.outputStream.write(host.getBytes());
-                this.outputStream.write('\n');
+                outputStream.write(HJ);
+                outputStream.write(host.getBytes());
+                outputStream.write('\n');
             }
-            this.outputStream.write(SUL);
+            outputStream.write(SUL);
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeConnection(conn);
+            outputStream.close();
         }
-    }
-
-    @Override
-    public String getMimeType() {
-        return "text/plain";
     }
 
     public void setDataSource(final DataSource dataSource) {
