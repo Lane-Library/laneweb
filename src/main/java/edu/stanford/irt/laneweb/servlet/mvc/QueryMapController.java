@@ -19,6 +19,6 @@ public class QueryMapController {
     @ResponseBody
     public QueryMap getQueryMap(@RequestParam String q) {
         QueryMap queryMap = this.queryMapper.getQueryMap(q);
-        return new QueryMap(null, null, queryMap.getResourceMap(), null, null);
+        return new QueryMap(q, null, queryMap.getResourceMap(), null, null);
     }
 }
