@@ -35,14 +35,16 @@
                 <entry key="/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
                 <entry key="/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
                 <entry key="/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
-                <entry key="/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"/>
-                <entry key="/BingSiteAuth.xml" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/site-verification"/>
-                <entry key="/google708f1eef3c6d1e52.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/site-verification"/>
-                <entry key="/y_key_01fe447429961ab5.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/site-verification"/>
-                <!--<entry key="/resources/**/*.*" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>-->
+                <entry key="/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="/BingSiteAuth.xml" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="/google708f1eef3c6d1e52.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="/y_key_01fe447429961ab5.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="/resources/images/**/*.*" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="/**/*.html" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
+                <entry key="/resources/**/*.*" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
             </map>
         </property>
-        <property name="defaultHandler" ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
+        <property name="defaultHandler" ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
@@ -99,29 +101,21 @@
         <property name="prefix" value="/content"/>
     </bean>
     
-    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"
+    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"
         class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
         <property name="locations">
             <list>
+                <value>/resources/images/</value>
+                <value>${laneweb.context.live-base}/</value>
                 <value>${laneweb.context.live-base}/tobacco/</value>
+                <value>/resources/site-verification/</value>
             </list>
         </property>
         <property name="cacheSeconds" value="31536000"/>
         <property name="supportedMethods" value="HEAD,GET"/>
     </bean>
     
-    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/site-verification"
-        class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
-        <property name="locations">
-            <list>
-                <value>resources/site-verification/</value>
-            </list>
-        </property>
-        <property name="cacheSeconds" value="31536000"/>
-        <property name="supportedMethods" value="HEAD,GET"/>
-    </bean>
-    
-    <!--<bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"
+    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"
         class="edu.stanford.irt.laneweb.servlet.mvc.BasePathSubstitutingRequestHandler">
         <property name="locations">
             <list>
@@ -130,9 +124,7 @@
         </property>
         <property name="cacheSeconds" value="31536000"/>
         <property name="supportedMethods" value="HEAD,GET"/>
-        <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
-        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
-    </bean>-->
+    </bean>
     
     <bean class="org.springframework.web.servlet.DispatcherServlet">
         <property name="detectAllHandlerMappings" value="true"/>
