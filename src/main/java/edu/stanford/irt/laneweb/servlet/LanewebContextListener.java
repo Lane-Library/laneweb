@@ -54,7 +54,7 @@ public class LanewebContextListener implements ServletContextListener {
         String value = getValue(name);
         value = value.endsWith("/") ? value : value + "/";
         try {
-            return new URL(getValue(value));
+            return new URL(value);
         } catch (MalformedURLException e) {
             throw new IllegalStateException("unable to determine URL for '" + name + "'", e);
         }
