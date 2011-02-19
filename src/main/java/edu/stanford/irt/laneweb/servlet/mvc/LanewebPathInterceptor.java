@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import edu.stanford.irt.laneweb.model.Model;
@@ -41,7 +42,16 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
         String requestURI = request.getRequestURI();
         String contextPath = request.getContextPath();
         String servletPath = requestURI.substring(contextPath.length());
-        request.setAttribute(Model.BASE_PATH, getBasePath(servletPath, contextPath));
+        String basePath = getBasePath(servletPath, contextPath);
+        request.setAttribute(Model.BASE_PATH, basePath);
+        int length = basePath.length() - contextPath.length();
+        if (length > 0) {
+        //TODO: there must be a better way to reset these:
+            String bestMatchingPattern = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
+            String pathWithinMapping = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+            request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, bestMatchingPattern.substring(length));
+            request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, pathWithinMapping.substring(length));
+        }
         request.setAttribute(Model.CONTENT_BASE, getContentBase(servletPath, contextPath));
         return true;
     }
