@@ -1,7 +1,7 @@
 /** LANE additions to iui **/
 body {
     /*
-    background:url('/././m/images/lane-bg.png');
+    background:url('/././resources/images/mobile/lane-bg.png');
     */
     background-position-x: 0;
     background-position-y: 102px;
@@ -10,7 +10,7 @@ body {
 
 body > ul > li {
     font-size: 16px;
-    background:url(/././m/images/listBg.png) repeat-x;
+    background:url(/././resources/images/mobile/listBg.png) repeat-x;
     border-bottom:1px solid darkgray;
 }
 
@@ -23,7 +23,7 @@ body > ul > li a {
     
 body > .toolbar {
     border-top: 1px solid #2D3642;
-    background: url(/././m/images/toolbar.png) #6E0000 repeat-x;
+    background: url(/././resources/images/mobile/toolbar.png) #6E0000 repeat-x;
 }
 
 .toolbar > h1 {
@@ -52,7 +52,7 @@ ul.panel>li{
     display:none;
     top: 6px;
     right: 60px;
-    background: url(/././m/images/loading.gif) repeat-x;
+    background: url(/././resources/images/mobile/loading.gif) repeat-x;
     width:32px;
     height:32px;
 }
@@ -87,7 +87,7 @@ ul.panel>li{
     padding-bottom:20px;
     font-size:11px;
     /*
-    background:url(/././m/images/footerBg.png) repeat-x;
+    background:url(/././resources/images/mobile/footerBg.png) repeat-x;
     */
     background:#c2cbd0;
     text-align:center;
@@ -131,7 +131,7 @@ ul.panel>li{
     top:18px;
     right:12px;
     display:none;
-    background: url(/././m/images/cancel.png) no-repeat;
+    background: url(/././resources/images/mobile/cancel.png) no-repeat;
     height:20px;
     width:20px;
 }
@@ -180,7 +180,7 @@ li.more {
 #results li a.more{
     text-align:right;
     font-size:14px;
-    background:url('/././m/images/listArrow.png') no-repeat scroll right center transparent;
+    background:url('/././resources/images/mobile/listArrow.png') no-repeat scroll right center transparent;
 }
 #results li{
     background-color:#dfe6e9;
@@ -236,7 +236,7 @@ div.absInfo {
     right:6px;
     top:8px;
     display:none;
-    background: url(/././m/images/home.png) no-repeat;
+    background: url(/././resources/images/mobile/home.png) no-repeat;
     width:38px;
     height:30px;
 }

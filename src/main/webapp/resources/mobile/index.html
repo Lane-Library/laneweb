@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" manifest="lane.manifest">
+<html xmlns="http://www.w3.org/1999/xhtml" manifest="/resources/mobile/lane.manifest">
         <head>
             <title>Express Lane - Beta</title>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=1;"/>
-            <link rel="icon" type="image/png" href="/m/images/lane-favicon.ico" />
+            <link rel="icon" type="image/png" href="/resources/images/mobile/lane-favicon.ico" />
             <!-- 
-            <link rel="apple-touch-icon" href="/m/images/lane-touch-icon.png" />
+            <link rel="apple-touch-icon" href="/resources/images/mobile/lane-touch-icon.png" />
              -->
             <meta name="apple-mobile-web-app-capable" content="yes" />
-            <link rel="stylesheet" href="/m/lane-mobile.css?${project.version}" type="text/css" />
+            <link rel="stylesheet" href="/resources/css/mobile/lane-mobile.css?${project.version}" type="text/css" />
             <script type="text/javascript">
                 var b = document.location.protocol+"//"+document.location.hostname;
                 if(!navigator.userAgent.match(/AppleWebKit/)){
@@ -30,7 +30,7 @@
             <form id="laneSearch" class="dialog" action="/m/msc/pubmed,pubmed_systematicreviews,pubmed_clinicaltrial,scopus" method="get">
                 <fieldset>
                     <span id="searchLink">
-                        <img alt="search" src="/m/images/search.png"/>
+                        <img alt="search" src="/resources/images/mobile/search.png"/>
                     </span>
                     <span id="searchCancel"> </span>
                     <input id="searchInput" title="Search ... " type="search" placeholder="Title, Author, PMID, ISSN" name="q"/>
@@ -84,7 +84,7 @@
             <div>Thank you for your feedback!</div>
         </div>
         
-        <script type="text/javascript" src="/m/lane-mobile.js?${project.version}"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${project.version}"> </script>
         <script type="text/javascript" src="/apps/ipGroupFetch?callback=LANE.setIpGroup"> </script>
     </body>
 </html>
