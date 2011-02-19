@@ -137,10 +137,10 @@
         <url-pattern>/robots.txt</url-pattern>
     </servlet-mapping>
     
-    <error-page>
+    <!--<error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/error.html</location>
-    </error-page>
+    </error-page>-->
 
     <mime-mapping>
         <extension>abs</extension>
