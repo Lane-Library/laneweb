@@ -172,12 +172,6 @@
                     <map:serialize type="text"/>
                 </map:match>
             </map:match>
-            <!-- used for tracking user IPGroup in interfaces external to laneweb (catalog, elane) -->
-            <map:match pattern="ipGroupFetch" type="wildcard">
-                <map:generate type="request"/>
-                <map:transform type="saxon" src="resources/xsl/ipGroupFetch.xsl"/>
-                <map:serialize type="text" mime-type="text/javascript"/>
-            </map:match>
             <map:match pattern="bookmarks" type="wildcard">
                 <map:generate type="bookmarks"/>
                 <map:serialize type="xml"/>
