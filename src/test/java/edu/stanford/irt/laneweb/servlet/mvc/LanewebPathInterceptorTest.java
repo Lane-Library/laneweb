@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.servlet.HandlerMapping;
 
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -42,6 +43,10 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getRequestURI()).andReturn("/ceyates/index.html");
         expect(this.request.getContextPath()).andReturn("");
         this.request.setAttribute(Model.BASE_PATH, "/ceyates");
+        expect(this.request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE)).andReturn("/ceyates/index.html");
+        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("/ceyates/index.html");
+        this.request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, "/index.html");
+        this.request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, "/index.html");
         this.request.setAttribute(Model.CONTENT_BASE, this.ceyatesContent);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
@@ -64,6 +69,10 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getRequestURI()).andReturn("/laneweb/ceyates/index.html");
         expect(this.request.getContextPath()).andReturn("/laneweb");
         this.request.setAttribute(Model.BASE_PATH, "/laneweb/ceyates");
+        expect(this.request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE)).andReturn("/ceyates/index.html");
+        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("/ceyates/index.html");
+        this.request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, "/index.html");
+        this.request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, "/index.html");
         this.request.setAttribute(Model.CONTENT_BASE, this.ceyatesContent);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
@@ -75,6 +84,10 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getRequestURI()).andReturn("/laneweb/stage/index.html");
         expect(this.request.getContextPath()).andReturn("/laneweb");
         this.request.setAttribute(Model.BASE_PATH, "/laneweb/stage");
+        expect(this.request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE)).andReturn("/stage/index.html");
+        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("/stage/index.html");
+        this.request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, "/index.html");
+        this.request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, "/index.html");
         this.request.setAttribute(Model.CONTENT_BASE, this.stageBase);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
@@ -97,6 +110,10 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getRequestURI()).andReturn("/stage/index.html");
         expect(this.request.getContextPath()).andReturn("");
         this.request.setAttribute(Model.BASE_PATH, "/stage");
+        expect(this.request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE)).andReturn("/stage/index.html");
+        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("/stage/index.html");
+        this.request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, "/index.html");
+        this.request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, "/index.html");
         this.request.setAttribute(Model.CONTENT_BASE, this.stageBase);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
