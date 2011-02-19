@@ -353,7 +353,6 @@ public class CollectionManagerImpl implements CollectionManager {
             for (String param : params) {
                 stmt.setString(index++, param);
             }
-            System.out.println(sql);
             rs = stmt.executeQuery();
             return parseResultSet(rs, scores);
         } catch (SQLException e) {
