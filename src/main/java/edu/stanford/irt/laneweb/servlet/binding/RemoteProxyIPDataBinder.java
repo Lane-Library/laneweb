@@ -42,7 +42,8 @@ public class RemoteProxyIPDataBinder implements DataBinder {
             session.setAttribute(Model.PROXY_LINKS, proxyLinks);
         } else if (isSameIP) {
             proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
-        } else {
+        }
+        if (proxyLinks == null) {
             proxyLinks = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
             session.setAttribute(Model.PROXY_LINKS, proxyLinks);
         }
