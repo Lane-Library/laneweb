@@ -27,35 +27,38 @@ public class CollectionManagerImpl implements CollectionManager {
 
     private static final String BROWSE =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, TYPE "
+                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
+                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND TYPE.TYPE = ? "
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String BROWSE_ALPHA =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, TYPE "
+                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
+                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND TYPE.TYPE = ? "
                     + "AND NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT(?,'NLS_SORT=GENERIC_BASELETTER') "
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String BROWSE_NONALPHA =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, TYPE "
+                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
+                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND TYPE.TYPE = ? "
                     + "AND (NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER') "
                     + "OR NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER')) "
@@ -63,12 +66,14 @@ public class CollectionManagerImpl implements CollectionManager {
 
     private static final String CORE =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, TYPE "
+                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
-                    + "AND ERESOURCE.CORE = 'Y'AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
+                    + "AND ERESOURCE.CORE = 'Y' "
+                    + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
+                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND TYPE.TYPE = ? "
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
@@ -87,11 +92,12 @@ public class CollectionManagerImpl implements CollectionManager {
 
     private static final String MESH =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, MESH, TYPE "
+                    + "FROM ERESOURCE, VERSION, LINK, MESH, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
+                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND ERESOURCE.ERESOURCE_ID = MESH.ERESOURCE_ID "
                     + "AND MESH.TERM = ? "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
@@ -100,11 +106,12 @@ public class CollectionManagerImpl implements CollectionManager {
 
     private static final String MESH_CORE =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, MESH, TYPE "
+                    + "FROM ERESOURCE, VERSION, LINK, MESH, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
+                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND ERESOURCE.ERESOURCE_ID = MESH.ERESOURCE_ID "
                     + "AND MESH.TERM = ? "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
@@ -127,11 +134,12 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND CORE IS NULL "
                     + ") "
                     + "SELECT FOUND.ERESOURCE_ID, FOUND.RECORD_TYPE, FOUND.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES,   DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES,   VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET "
+                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION "
                     + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
+                    + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
                     + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
                     + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
@@ -151,11 +159,12 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND CORE IS NULL "
                     + ") "
                     + "SELECT FOUND.ERESOURCE_ID, FOUND.RECORD_TYPE, FOUND.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES,   DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES,   VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET "
+                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION "
                     + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
+                    + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
                     + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
                     + "AND SUBSET = ? "
@@ -176,11 +185,12 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND CORE IS NULL "
                     + ") "
                     + "SELECT FOUND.ERESOURCE_ID, FOUND.RECORD_TYPE, FOUND.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES,   DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES,   VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET "
+                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION "
                     + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
+                    + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
                     + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
                     + "AND TYPE = ? "
@@ -188,16 +198,15 @@ public class CollectionManagerImpl implements CollectionManager {
 
     private static final String SUBSET =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, SUBSET "
+                    + "FROM ERESOURCE, VERSION, LINK, SUBSET, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID "
+                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND SUBSET.SUBSET = ? "
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
-    
-    private static final String DESCRIPTION = "SELECT DESCRIPTION FROM DESCRIPTION WHERE ERESOURCE_ID = ?";
 
     protected DataSource dataSource;
 
@@ -333,19 +342,6 @@ public class CollectionManagerImpl implements CollectionManager {
         this.dataSource = dataSource;
     }
 
-    private void addDescription(final Eresource eresource, final int id, final PreparedStatement stmt) throws SQLException {
-        ResultSet rs = null;
-        try {
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                eresource.setDescription(rs.getString(1));
-            }
-        } finally {
-            JdbcUtils.closeResultSet(rs);
-        }
-    }
-
     private LinkedList<Eresource> doGet(final String sql, final Collection<String> params, final boolean scores) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -357,6 +353,7 @@ public class CollectionManagerImpl implements CollectionManager {
             for (String param : params) {
                 stmt.setString(index++, param);
             }
+            System.out.println(sql);
             rs = stmt.executeQuery();
             return parseResultSet(rs, scores);
         } catch (SQLException e) {
@@ -398,7 +395,6 @@ public class CollectionManagerImpl implements CollectionManager {
         int currentVersionId = -1;
         int currentLinkId = -1;
         String currentTitle = null;
-        PreparedStatement descriptionStatement = rs.getStatement().getConnection().prepareStatement(DESCRIPTION);
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             int recordId = rs.getInt("RECORD_ID");
@@ -414,7 +410,7 @@ public class CollectionManagerImpl implements CollectionManager {
                 if (scored) {
                     eresource.setScore((rs.getInt("SCORE_TITLE") + rs.getInt("SCORE_TEXT")) / 2);
                 }
-                addDescription(eresource, rowEresourceId, descriptionStatement);
+                eresource.setDescription(rs.getString("E_DESCRIPTION"));
                 eresources.add(eresource);
                 currentEresourceId = rowEresourceId;
                 currentVersionId = -1;
@@ -427,7 +423,7 @@ public class CollectionManagerImpl implements CollectionManager {
                 version.setPublisher(rs.getString("PUBLISHER"));
                 version.setSummaryHoldings(rs.getString("HOLDINGS"));
                 version.setDates(rs.getString("DATES"));
-                version.setDescription(rs.getString("DESCRIPTION"));
+                version.setDescription(rs.getString("V_DESCRIPTION"));
                 currentVersionId = rowVersionId;
                 currentLinkId = -1;
             }
@@ -441,7 +437,6 @@ public class CollectionManagerImpl implements CollectionManager {
                 currentLinkId = rowLinkId;
             }
         }
-        descriptionStatement.close();
         return eresources;
     }
 }
