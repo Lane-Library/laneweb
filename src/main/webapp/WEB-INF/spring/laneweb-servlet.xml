@@ -30,12 +30,12 @@
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="urlMap">
             <map>
-                <entry key="/apps/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
-                <entry key="/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"/>
-                <entry key="/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
-                <entry key="/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
-                <entry key="/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
-                <entry key="/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="**/apps/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
+                <entry key="**/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"/>
+                <entry key="**/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
+                <entry key="**/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
+                <entry key="**/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
+                <entry key="**/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
                 <entry key="/BingSiteAuth.xml" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
                 <entry key="/google708f1eef3c6d1e52.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
                 <entry key="/y_key_01fe447429961ab5.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
