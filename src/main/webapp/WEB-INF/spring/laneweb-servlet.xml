@@ -102,11 +102,10 @@
     </bean>
     
     <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"
-        class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
+        class="edu.stanford.irt.laneweb.servlet.mvc.ContentBaseAwareHttpRequestHandler">
         <property name="locations">
             <list>
                 <value>/resources/images/</value>
-                <value>${laneweb.context.live-base}/</value>
                 <value>${laneweb.context.live-base}/tobacco/</value>
                 <value>/resources/site-verification/</value>
             </list>
