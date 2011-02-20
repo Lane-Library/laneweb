@@ -52,7 +52,8 @@ public class LanewebContextListener implements ServletContextListener {
      */
     private URL getURL(final String name) {
         String value = getValue(name);
-        value = value.endsWith("/") ? value : value + "/";
+        value = value.endsWith("/") ? value.substring(0, value.length() - 1) : value;
+//        value = value.endsWith("/") ? value : value + "/";
         try {
             return new URL(value);
         } catch (MalformedURLException e) {

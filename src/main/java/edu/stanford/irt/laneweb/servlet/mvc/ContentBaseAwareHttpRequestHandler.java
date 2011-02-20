@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -44,7 +45,12 @@ public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandl
         
         URL url = (URL) request.getAttribute(Model.CONTENT_BASE);
         
-        Resource contentBase = new UrlResource(url);
+        Resource contentBase;
+        try {
+            contentBase = new UrlResource(url.toString() + "/");
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
 
         if (logger.isDebugEnabled()) {
             logger.debug("Trying relative path [" + path + "] against base location: " + contentBase);

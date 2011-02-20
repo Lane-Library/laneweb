@@ -46,11 +46,11 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
         request.setAttribute(Model.BASE_PATH, basePath);
         int length = basePath.length() - contextPath.length();
         if (length > 0) {
-        //TODO: there must be a better way to reset these:
-            String bestMatchingPattern = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
+        //TODO: there must be a better way to reset this:
             String pathWithinMapping = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-            request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, bestMatchingPattern.substring(length));
-            request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, pathWithinMapping.substring(length));
+            if (pathWithinMapping.length() > length) {
+                request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, pathWithinMapping.substring(length));
+            }
         }
         request.setAttribute(Model.CONTENT_BASE, getContentBase(servletPath, contextPath));
         return true;
