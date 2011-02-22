@@ -5,7 +5,9 @@ import java.util.Comparator;
 
 import com.ibm.icu.text.Normalizer;
 
-public class SuggestionComparator implements Comparator<String>, Serializable {
+import edu.stanford.irt.suggest.Suggestion;
+
+public class SuggestionComparator implements Comparator<Suggestion>, Serializable {
 
     /** for Serializable. */
     private static final long serialVersionUID = 1L;
@@ -19,12 +21,12 @@ public class SuggestionComparator implements Comparator<String>, Serializable {
         this.query = normalize(query);
     }
 
-    public int compare(final String heading1, final String heading2) {
-        if (heading1 == null || heading2 == null) {
-            throw new IllegalArgumentException("cannot compare " + heading1 + " to " + heading2);
+    public int compare(final Suggestion suggestion1, final Suggestion suggestion2) {
+        if (suggestion1 == null || suggestion2 == null) {
+            throw new IllegalArgumentException("cannot compare " + suggestion1 + " to " + suggestion2);
         }
-        String upper1 = normalize(heading1);
-        String upper2 = normalize(heading2);
+        String upper1 = normalize(suggestion1.getSuggestionTitle());
+        String upper2 = normalize(suggestion2.getSuggestionTitle());
         int weightDiff = queryWeight(upper2) - queryWeight(upper1);
         if (weightDiff != 0) {
             return weightDiff;

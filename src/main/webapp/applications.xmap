@@ -171,13 +171,6 @@
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
-        <map:pipeline type="throttling">
-            <map:parameter name="request-key" value="${remote-addr}/${request-uri}/${query-string}"/>
-            <map:match pattern="suggest/json" type="wildcard">
-                <map:read type="suggest"/>
-            </map:match>
-        </map:pipeline>
-        <!-- trying this out, might fill up cache with a bazillion query maps -->
         <map:pipeline type="expires">
             <map:parameter name="cache-key" value="${request-uri};q=${query}"/>
             <map:match pattern="sfx/json" type="wildcard">

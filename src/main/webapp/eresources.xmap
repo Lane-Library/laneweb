@@ -42,9 +42,6 @@
                 <map:generate type="history-count"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="extensions-suggest" type="wildcard">
-                <map:read type="extensions-suggest"/>
-            </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
             <map:match pattern="browse/type/*" type="wildcard">
