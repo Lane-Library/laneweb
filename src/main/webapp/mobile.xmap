@@ -97,9 +97,6 @@
                 <map:transform type="debug"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match pattern="**" type="wildcard">
-                <map:read type="resource" src="${content-base}/m/{1}"/>
-            </map:match>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
