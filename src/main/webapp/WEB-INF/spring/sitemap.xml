@@ -93,8 +93,8 @@
         class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
     <!--<bean name="mount"
         class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>-->
-    <bean name="read"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>
+    <!--<bean name="read"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>-->
     <bean name="generate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
         scope="prototype"/>
