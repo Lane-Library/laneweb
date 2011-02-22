@@ -122,19 +122,34 @@
         <servlet-class>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-class>
     </servlet>
     
+    <servlet-mapping>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-name>
         <servlet-class>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-name>
         <url-pattern>/robots.txt</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>tobacco</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/tobacco-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>tobacco</servlet-name>
+        <url-pattern>/tobacco/*</url-pattern>
     </servlet-mapping>
     
     <!--<error-page>

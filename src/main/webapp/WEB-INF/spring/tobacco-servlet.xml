@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.LanewebPathInterceptor">
+                <property name="defaultContentBase" value="#{contextAttributes['laneweb.context.live-base']}"/>
+                <property name="stageBase" value="#{contextAttributes['laneweb.context.stage-base']}"/>
+            </bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.RedirectHandlerInterceptor">
+                <property name="redirectProcessor" ref="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean name="/*"
+        class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
+        <property name="locations">
+            <list>
+                <value>${laneweb.context.live-base}tobacco/</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="31536000"/>
+        <property name="supportedMethods" value="HEAD,GET"/>
+    </bean>
+    
+    <bean class="org.springframework.web.servlet.DispatcherServlet">
+        <property name="detectAllHandlerMappings" value="false"/>
+        <property name="detectAllHandlerAdapters" value="false"/>
+        <property name="detectAllHandlerExceptionResolvers" value="false"/>
+        <property name="detectAllViewResolvers" value="false"/>
+        <property name="publishContext" value="false"/>
+        <property name="publishEvents" value="false"/>
+    </bean>
+    
+    <bean id="handlerAdapter"
+        class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+    
+    <bean id="lifecycleProcessor"
+        class="org.springframework.context.support.DefaultLifecycleProcessor"/>
+    
+    <bean id="localeResolver"
+        class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/>
+    
+    <bean id="themeResolver"
+        class="org.springframework.web.servlet.theme.FixedThemeResolver"/>
+    
+    <bean id="handlerExceptionResolver"
+        class="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver"/>
+    
+    <bean id="viewNameTranslator"
+        class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator"/>
+    
+    <bean id="messageSource"
+        class="org.springframework.context.support.DelegatingMessageSource"/>
+    
+    <bean id="applicationEventMulticaster"
+        class="org.springframework.context.event.SimpleApplicationEventMulticaster"/>
+    
+    <bean  id="themeSource"
+        class="org.springframework.ui.context.support.DelegatingThemeSource"/>
+    
+</beans>

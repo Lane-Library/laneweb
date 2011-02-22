@@ -36,7 +36,6 @@
                 <entry key="**/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
                 <entry key="**/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
                 <entry key="**/m/**/*.html" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
-                <entry key="**/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
                 <entry key="/BingSiteAuth.xml" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
                 <entry key="/google708f1eef3c6d1e52.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
                 <entry key="/y_key_01fe447429961ab5.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
@@ -108,7 +107,6 @@
         <property name="locations">
             <list>
                 <value>/</value>
-                <value>${laneweb.context.live-base}tobacco/</value>
                 <value>/resources/site-verification/</value>
             </list>
         </property>
@@ -121,6 +119,7 @@
         <property name="locations">
             <list>
                 <value>/</value>
+                <value>/resources/</value>
             </list>
         </property>
         <property name="cacheSeconds" value="31536000"/>
