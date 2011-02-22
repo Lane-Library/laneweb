@@ -73,10 +73,6 @@
                 <map:transform type="debug"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match pattern="**.xml" type="wildcard">
-                <map:generate type="file" src="${content-base}/{1}.xml"/>
-                <map:serialize type="xml"/>
-            </map:match>
         </map:pipeline>
         <!--<map:handle-errors>
             <map:aggregate element="doc" label="content">
