@@ -1,36 +1,39 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractReader;
-import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
 
-public class UrlTester extends AbstractReader {
+@Controller
+public class UrlTester {
 
     private HttpClient httpClient;
 
-    private String url;
-
-    public void generate() throws IOException, SAXException {
-        GetMethod get = new GetMethod(this.url);
+    @RequestMapping(value = "/apps/url-tester")
+    public void generate(@RequestParam final String url, HttpServletResponse response) throws IOException, SAXException {
+        GetMethod get = new GetMethod(url);
         this.httpClient.executeMethod(get);
-        this.outputStream.write(get.getResponseBody());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(get.getResponseBody());
         byte[] headers = getHeaderString(get);
-        this.outputStream.write(headers);
-        this.outputStream.flush();
+        baos.write(headers);
+        response.setHeader("Content-Type", "text/plain");
+        response.getOutputStream().write(baos.toByteArray());
     }
 
-    @Override
-    public String getMimeType() {
-        return "text/plain";
-    }
-
+    @Autowired
     public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
         this.httpClient = msms.getHttpClient();
     }
@@ -53,16 +56,5 @@ public class UrlTester extends AbstractReader {
             result.append("\n");
         }
         return result.toString();
-    }
-
-    @Override
-    protected void initialize() {
-        this.url = ModelUtil.getString(this.model, Model.URL);
-        if (this.url == null) {
-            throw new IllegalStateException(Model.URL + " is null");
-        }
-        if (!this.url.startsWith("http")) {
-            this.url = "http://".concat(this.url);
-        }
     }
 }

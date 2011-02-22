@@ -54,13 +54,6 @@
         class="edu.stanford.irt.laneweb.search.ResourceSearchGenerator"
         parent="org.apache.cocoon.generation.Generator/search"/>
 
-    <bean name="org.apache.cocoon.reading.Reader/search-url-tester"
-        class="edu.stanford.irt.laneweb.search.UrlTester"
-        scope="prototype">
-        <property name="metaSearchManagerSource"
-            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-    </bean>
-
     
     <bean name="org.apache.cocoon.reading.Reader/search-cache-manager"
         class="edu.stanford.irt.laneweb.search.SearchCacheManagerReader"
