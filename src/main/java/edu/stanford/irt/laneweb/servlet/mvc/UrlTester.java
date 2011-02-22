@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
 
@@ -22,7 +21,7 @@ public class UrlTester {
     private HttpClient httpClient;
 
     @RequestMapping(value = "/apps/url-tester")
-    public void generate(@RequestParam final String url, HttpServletResponse response) throws IOException, SAXException {
+    public void testUrl(@RequestParam final String url, HttpServletResponse response) throws IOException {
         GetMethod get = new GetMethod(url);
         this.httpClient.executeMethod(get);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
