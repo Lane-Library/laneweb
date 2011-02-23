@@ -124,10 +124,14 @@
                 var node = this.get("node"),
                     children = node.get("children"),
                     size = children.size(),
-                    items = this.get("items");
-                    i;
+                    items = this.get("items"),
+                    i, child;
                 for (i = 0; i < size; i++) {
-                    items.push(new ExpandyItem({node : children.item(i)}));
+                    child = children.item(i);
+                    //don't create ExpandyItem if not two children:
+                    if (child.get("children").size() === 2) {
+                        items.push(new ExpandyItem({node : child}));
+                    }
                 };
                 node.addClass("yui3-accordion");
                 node.plug(Y.Plugin.NodeAccordion, { anim: Y.Easing.backIn });
