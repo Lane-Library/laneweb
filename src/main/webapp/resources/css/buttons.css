@@ -27,7 +27,8 @@
     margin: 10px 0;
 }
 .button.all-classes,.button.all-classes:hover {
-    background-position: -25px -220px;
+    background-position:11px -220px;
+    width:156px
 }
 .button.biomed-sem,.button.biomed-sem:hover {
     background-position: -25px -267px;
