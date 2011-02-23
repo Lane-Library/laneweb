@@ -10,7 +10,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>1.11.19-SNAPSHOT</version>
+    <version>1.12.0-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/index.html</url>
     <inceptionYear>2002</inceptionYear>
