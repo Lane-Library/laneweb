@@ -18,6 +18,8 @@
     
     <xsl:param name="emrid"/>
     
+    <xsl:param name="mesh"/>
+    
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
@@ -386,6 +388,9 @@
                 </xsl:when>
                 <xsl:when test="$alpha">
                     <xsl:value-of select="concat('a=', $alpha, '&amp;')"/>
+                </xsl:when>
+                <xsl:when test="$mesh">
+                    <xsl:value-of select="concat('m=', $mesh, '&amp;')"/>
                 </xsl:when>
             </xsl:choose>
         </xsl:variable>
