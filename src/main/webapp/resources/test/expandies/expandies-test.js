@@ -1,83 +1,95 @@
 /**
  * @author ceyates
  */
-YUI().use('node', 'node-event-simulate', 'console', 'test', function(Y){
+YUI(
+	{logInclude: {
+	        TestRunner: true
+	    }
+	}).use('node', 'node-event-simulate', 'console', 'test', function(T){
 
-    var expandiesTestCase = new Y.Test.Case({
+    var expandiesTestCase = new T.Test.Case({
         name: 'Lane Expandies TestCase',
+        
+        testHasClassName : function() {
+        	var expandies = T.all(".expandy");
+        	for (var i = 0; i < expandies.size(); i++) {
+        		T.Assert.isTrue(expandies.item(i).hasClass("yui3-accordion"));
+        	}
+        },
+        
         testIsClosed: function() {
-            var panel = Y.one('#panel1');
-            Y.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
+            var panel = T.one('#panel1');
+            T.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
         },
         testExpanded: function() {
-            var panel = Y.one('#panel2');
-            Y.Assert.isFalse(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
+            var panel = T.one('#panel2');
+            T.Assert.isFalse(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
         },
         testExpand: function() {
-            var panel = Y.one('#panel1');
-            Y.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
-            Y.Assert.isFalse(panel.get('parentNode').hasClass('expanded'), 'parent class is expanded');
+            var panel = T.one('#panel1');
+            T.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
+            T.Assert.isFalse(panel.get('parentNode').hasClass('expanded'), 'parent class is expanded');
             panel.previous().simulate('click');
             this.wait(function() {
-                Y.Assert.isFalse(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
-                Y.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'parent class is not yui3-accordion-item-active');
+                T.Assert.isFalse(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
+                T.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'parent class is not yui3-accordion-item-active');
             }, 500);
         },
         testClose: function() {
-            var panel = Y.one('#panel2');
-            Y.Assert.isFalse(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
+            var panel = T.one('#panel2');
+            T.Assert.isFalse(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
             panel.previous().simulate('click');
             //delay this 500ms to allow expandy to close
             this.wait(function() {
-                 Y.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
+                 T.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
                  }, 500);
         },
         testAnchor: function() {
-            var panel = Y.one('#panel3');
+            var panel = T.one('#panel3');
             if (document.location.hash == '#anchor') {
-                Y.Assert.isTrue(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));
+                T.Assert.isTrue(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));
             } else {
-                Y.Assert.isFalse(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));
+                T.Assert.isFalse(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));
             }
         },
         //TODO: disabling, do we need initialize on lane:change event?  any expandies in lane:change content?
 //        testChangeEvent: function() {
-//            var panel = Y.one('#panel4');
-//            var notExpandy = Y.one('.not-expandy');
+//            var panel = T.one('#panel4');
+//            var notExpandy = T.one('.not-expandy');
 //            notExpandy.removeClass('not-expandy');
 //            notExpandy.addClass('expandy');
-//            Y.fire('lane:change');
-//            Y.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'className is ' +panel.get('parentNode').get("className"));
+//            T.fire('lane:change');
+//            T.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'className is ' +panel.get('parentNode').get("className"));
 //        },
         testTriggerLinkIsNotTrigger: function() {
-            var panel = Y.one("#panel5");
-            var link = Y.one("#testLink");
+            var panel = T.one("#panel5");
+            var link = T.one("#testLink");
             link.on("click", function(event) {event.preventDefault();});
             link.simulate("click");
-            Y.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
+            T.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
             
         },
         testTriggerLinkWithRel: function() {
-            var panel = Y.one("#panel6");
-            var link = Y.one("#testLinkRel");
+            var panel = T.one("#panel6");
+            var link = T.one("#testLinkRel");
             var clicked = false;
             link.on("click", function(event) {
                 event.preventDefault();
                 clicked = true;
             });
             link.simulate("click");
-            Y.Assert.isTrue(clicked);
-            Y.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
+            T.Assert.isTrue(clicked);
+            T.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
             
         }
     });
     
-    Y.one('body').addClass('yui3-skin-sam');
-    new Y.Console({
+    T.one('body').addClass('yui3-skin-sam');
+    new T.Console({
         newestOnTop: false
     }).render('#log');
     
     
-    Y.Test.Runner.add(expandiesTestCase);
-    Y.Test.Runner.run();
+    T.Test.Runner.add(expandiesTestCase);
+    T.Test.Runner.run();
 });
