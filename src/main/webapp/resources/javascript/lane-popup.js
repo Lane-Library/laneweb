@@ -6,23 +6,13 @@
         panel = new Y.Overlay({
             srcNode: container
         });
-//            panel = new Y.YUI2.widget.Panel('popupContainer', {
-//                underlay: 'none',
-//                close: true,
-//                visible: false,
-//                draggable: true,
-//                constraintoviewport: true,
-//                modal: false
-//            });
     };
     showPanel = function(title, body, cX, cY) {
-        //FIXME: Hard coded this width value for beta feedback form.
         var width = (title.length * 7 > 334) ? title.length * 7 : 334;
         panel.set('headerContent',title + '<a href="#">Close</a>');
         panel.set('bodyContent', body);
         panel.set('x', cX);
         panel.set('y', cY);
-        //TODO: set the width somehow.
         panel.set('width',width);
         panel.render();
         panel.show();
@@ -69,7 +59,7 @@
         }
         for (i = 0; i < popupAnchors.length; i++) {
             args = popupAnchors[i].get('rel').split(' ');
-            if (!panel && (args[1] == 'local' || args[1] == 'faq')) {
+            if (!panel && (args[1] == 'local')) {
                 createPanel();
             }
             if (args[1] == 'standard' || args[1] == 'console' || args[1] == 'console-with-scrollbars' || args[1] == 'fullscreen') {
@@ -87,30 +77,6 @@
                     title = elm && elm.get('title') ? elm.get('title') : '';
                     body = elm ? elm.get('innerHTML') : '';
                     showPanel(title, body, e.pageX, e.pageY);
-                }, popupAnchors[i]);
-            } else if (args[1] == 'faq') {
-                Y.on('click', function(e) {
-                    var id = this.get('rel').split(' ')[2];
-                    e.preventDefault();
-                    Y.io('/././content/popup.html?id=' + id, {
-                        on: {
-                            success: function(tansactionId, o, argument) {
-                                var id = argument.id,
-                                    cX = argument.X,
-                                    cY = argument.Y,
-                                    f = o.responseXML.documentElement,
-                                    title = f.getElementsByTagName('a')[0].firstChild.data,
-                                    body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
-                                argument.showPanel(title, body, cX, cY);
-                            }
-                        },
-                        argument: {
-                            showPanel: showPanel,
-                            X: e.pageX,
-                            Y: e.pageY,
-                            id: id
-                        }
-                    });
                 }, popupAnchors[i]);
             }
         }
