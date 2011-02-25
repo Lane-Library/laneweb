@@ -380,6 +380,16 @@
         </strong>
     </xsl:template>
     
+    <xsl:template match="s:desc-label">
+        <xsl:if test="position() > 1">
+            <br />
+        </xsl:if>
+        <span class="abstractLabel">
+            <xsl:value-of select="."/>
+        </span>
+        <xsl:text>: </xsl:text>
+    </xsl:template>
+    
     <xsl:template name="paginationLinks">
         <xsl:variable name="no-page-query-string">
             <xsl:choose>

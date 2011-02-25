@@ -14,6 +14,8 @@ public interface Resource extends XMLizable {
 
     public static final String DESCRIPTION = "description";
 
+    public static final String DESCRIPTION_LABEL = "desc-label";
+    
     public static final String EMPTY_NS = "";
 
     public static final String ID = "id";

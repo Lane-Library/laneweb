@@ -30,4 +30,9 @@
         scope="prototype">
     </bean>
 
+    <bean name="org.apache.cocoon.transformation.Transformer/description-labeling"
+        class="edu.stanford.irt.laneweb.search.DescriptionLabelTransformer"
+        scope="prototype">
+    </bean>
+
 </beans>

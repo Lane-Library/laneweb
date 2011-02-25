@@ -75,6 +75,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
+                    <map:transform type="description-labeling"/>
                     <map:transform type="saxon" src="resources/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -84,6 +85,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
+                    <map:transform type="description-labeling"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/merged/html returns xhtmlized merged metasearch and eresources results -->
@@ -93,6 +95,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
+                    <map:transform type="description-labeling"/>
                     <map:transform type="saxon" src="resources/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -103,6 +106,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
+                    <map:transform type="description-labeling"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/merged/history/html returns xhtmlized merged metasearch and history eresources results -->
@@ -112,6 +116,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
+                    <map:transform type="description-labeling"/>
                     <map:transform type="saxon" src="resources/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>

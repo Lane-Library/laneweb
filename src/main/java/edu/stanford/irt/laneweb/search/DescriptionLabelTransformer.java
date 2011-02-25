@@ -9,11 +9,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.Resource;
 
-public class QueryHighlightingTransformer extends AbstractTransformer {
+public class DescriptionLabelTransformer extends AbstractTransformer {
 
     public static final String EMPTY = "";
 
@@ -22,11 +20,11 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
     private CharBuffer chars;
 
     private int parseLevel = 0;
-
-    private Pattern queryPattern;
-
-    private boolean inTargetElement = false;
     
+    private boolean inDescriptionElement = false;
+    
+    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z ']+)##");
+
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
         if (this.parseLevel > 0) {
@@ -48,12 +46,12 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
         if (this.parseLevel > 0) {
             handleMatches();
         }
-        if ("title".equals(localName) || "description".equals(localName)) {
+        if ("description".equals(localName)) {
             this.parseLevel--;
-            this.inTargetElement = false;
+            this.inDescriptionElement = false;
         }
-        // end of child element of title or description
-        else if(this.inTargetElement == true){
+        // end of child element of description
+        else if(this.inDescriptionElement == true){
             ++this.parseLevel;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
@@ -62,12 +60,12 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        if ("title".equals(localName) || "description".equals(localName)) {
+        if ("description".equals(localName)) {
             ++this.parseLevel;
-            this.inTargetElement = true;
+            this.inDescriptionElement = true;
         }
-        // don't process child elements of title or description
-        else if(this.inTargetElement == true){
+        // don't process child elements of description
+        else if(this.inDescriptionElement == true){
             handleMatches();
             this.parseLevel--;
         }
@@ -77,7 +75,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
     private void handleMatches() throws SAXException {
         int charsEnd = this.chars.position();
         this.chars.rewind();
-        Matcher matcher = this.queryPattern.matcher(this.chars.subSequence(0, charsEnd));
+        Matcher matcher = LABEL_PATTERN.matcher(this.chars.subSequence(0, charsEnd));
         int current = 0;
         while (current < charsEnd && matcher.find()) {
             int matchStart = matcher.start();
@@ -86,10 +84,10 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
                 // send chars before match:
                 this.xmlConsumer.characters(this.chars.array(), current, matchStart - current);
             }
-            this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
-            char[] match = matcher.group().toCharArray();
+            this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL, EMPTY_ATTRIBUTES);
+            char[] match = matcher.group(1).toCharArray();
             this.xmlConsumer.characters(match, 0, match.length);
-            this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD);
+            this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL);
             current = matchEnd;
         }
         if (current < charsEnd) {
@@ -101,11 +99,6 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        String query = ModelUtil.getString(this.model, Model.QUERY);
-        if (null == query) {
-            throw new IllegalArgumentException("null query");
-        }
-        this.queryPattern = QueryTermPattern.getPattern(query);
         this.chars = CharBuffer.allocate(256);
     }
 }
