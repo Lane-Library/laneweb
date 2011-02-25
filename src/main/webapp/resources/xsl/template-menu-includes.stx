@@ -15,7 +15,7 @@
     
     <stx:group name="dont-include" pass-through="none">
         
-        <stx:template match="h:ul[contains(@class,'sectionMenu')]">
+        <stx:template match="h:ul[contains(@class,'sectionMenu')] | h:div[@class='announce']">
             <stx:copy>
                 <stx:process-attributes group="include"/>
                 <stx:process-children group="include"/>

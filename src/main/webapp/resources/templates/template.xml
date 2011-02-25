@@ -54,6 +54,10 @@
                             </fieldset>
                         </form>
                         <div class="content">
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                href="content:/includes/global-announcement.html">
+                                <xi:fallback/>
+                            </xi:include>
                             <?laneweb content?>
                         </div>
                         <ul id="libraryContact">
