@@ -408,6 +408,16 @@
         </strong>
     </xsl:template>
 
+    <xsl:template match="s:desc-label">
+        <xsl:if test="position() > 1">
+            <br />
+        </xsl:if>
+        <strong>
+            <xsl:value-of select="."/>
+        </strong>
+        <xsl:text>: </xsl:text>
+    </xsl:template>
+    
     <!-- add Next toggle to search results -->
     <xsl:template name="paginationLinks">
         <xsl:if test="number(/s:resources/@pages) &gt; 1 and number(/s:resources/@page) &lt; number(/s:resources/@pages) - 1">
