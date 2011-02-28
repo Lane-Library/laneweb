@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-02-28" version="1.11.19" description="1.11.19 bug fix release">
+            <action date="2011-02-22" dev="ceyates" issue="47601" type="fix">
+                paged mesh subject browsing fails
+            </action>
+            <action date="2011-02-22" dev="ceyates" issue="47514" type="update">
+                eresources performance slower than it should be
+            </action>
+            <action date="2011-02-18" dev="ryanmax" issue="47501" type="fix">
+                mobile "unknown" clicks being reported in Google Analytics
+            </action>
+            <action date="2011-02-18" dev="ryanmax" issue="47476" type="fix">
+                Linkscan reports /m/mobile.html as broken
+            </action>
+            <action date="2011-02-16" dev="ryanmax" issue="47422" type="fix">
+                Did you mean text going off page
+            </action>
+            <action date="2011-02-16" dev="ryanmax" issue="47373" type="fix">
+                metasearch provider not showing up in some circumstances
+            </action>
+            <action date="2011-02-" dev="ceyates" issue="47232" type="fix">
+                NullPointerException in CachingPipeline
+            </action>
+            <action date="2011-02-25" dev="ceyates" issue="45954" type="add">
+                Site- wide and selected pages announcements
+            </action>
+        </release>
         <release date="2011-02-14" version="1.11.18" description="1.11.18 bug fix release">
             <action date="2011-02-14" dev="ryanmax" issue="47173" type="update">
                 search results display step-by-step changes: step 2
