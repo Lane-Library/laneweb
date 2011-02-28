@@ -26,15 +26,6 @@
     </xsl:template>
 
 
-    <xsl:template match="h:span[@id='full-cancelled']">
-        <xsl:if test="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:seats/text() &gt;=  /doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:registrations/text()">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::* | child::node()" />
-        </xsl:copy>
-        </xsl:if>
-    </xsl:template>
-    
-
     <xsl:template match="h:p[@id='description']">
         <xsl:copy>
         <xsl:apply-templates/>
@@ -55,11 +46,19 @@
                         <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
                         <xsl:value-of select="lc:module_id"/>
                     </xsl:attribute>
-                    <xsl:attribute name="class">image-link</xsl:attribute>    
+                    <xsl:attribute name="class">image-link</xsl:attribute>
                     <img>
                         <xsl:attribute name="class">module-img</xsl:attribute>
-                        <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
+                        <xsl:choose>
+                            <xsl:when test="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:seats/text() &gt;=  /doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:registrations/text()">
+                                 <xsl:attribute name="src">/graphics/buttons/waitlist-button.png</xsl:attribute>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                 <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
                      </img> 
+                     
                  </a>
             </p>
             <h4>

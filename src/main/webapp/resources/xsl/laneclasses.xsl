@@ -114,7 +114,14 @@
                     <xsl:attribute name="class">image-link</xsl:attribute>
                     <img>
                         <xsl:attribute name="class">module-img, module</xsl:attribute>
-                        <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>                        
+                        <xsl:choose>
+                            <xsl:when test="./lc:seats/text() &gt;=  ./lc:registrations/text()">
+                                 <xsl:attribute name="src">/graphics/buttons/waitlist-button.png</xsl:attribute>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                 <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>                        
                     </img>
                 </a>
             </div>
