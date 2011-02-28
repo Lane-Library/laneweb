@@ -160,17 +160,6 @@
                     <map:serialize type="xhtml"/>
                 </map:match>
             </map:match>
-            <map:match pattern="spellcheck/*" type="wildcard">
-                <map:match pattern="spellcheck/xml" type="wildcard">
-                    <map:generate type="spellcheck"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match pattern="spellcheck/json" type="wildcard">
-                    <map:generate type="spellcheck"/>
-                    <map:transform src="resources/xsl/spellcheck2json.xsl" type="saxon"/>
-                    <map:serialize type="text"/>
-                </map:match>
-            </map:match>
             <map:match pattern="bookmarks" type="wildcard">
                 <map:generate type="bookmarks"/>
                 <map:serialize type="xml"/>

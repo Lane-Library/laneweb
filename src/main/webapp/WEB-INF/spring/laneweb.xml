@@ -63,14 +63,8 @@
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator" scope="prototype">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
-
-    <bean name="org.apache.cocoon.generation.Generator/spellcheck"
-        class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"
-        scope="prototype">
-        <property name="spellChecker">
-            <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
-        </property>
-    </bean>
+    
+    <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
 
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
         class="edu.stanford.irt.laneweb.cocoon.NamespaceFilter" scope="prototype"/>
