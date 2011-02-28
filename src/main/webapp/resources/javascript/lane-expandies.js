@@ -73,12 +73,23 @@
              * the initializer adds the appropriate class names
              */
             initializer : function() {
-                var node = this.get("node");
+                var trigger = this.get("trigger"),
+                    node = this.get("node"),
+                    anchors, anchor, i, size
                 node.addClass("yui3-accordion-item");
                 if (this.get("expanded")) {
                     node.addClass("yui3-accordion-item-active");
                 }
-                this.get("trigger").addClass("yui3-accordion-item-trigger");
+                trigger.addClass("yui3-accordion-item-trigger");
+                //stop propogation (expandy actions) if click is on link in trigger:
+                anchors = trigger.all("a");
+                size = anchors.size();
+                for (i = 0; i < size; i++) {
+                    anchor = anchors.item(i);
+                    if (anchor.get("href") && !anchor.get("rel")) {
+                        anchor.on("click", function(event) {event.stopPropagation();});
+                    }
+                }
                 this.get("hd").addClass("yui3-accordion-item-hd");
                 this.get("bd").addClass("yui3-accordion-item-bd");
             }

@@ -61,6 +61,7 @@ YUI(
 //            T.fire('lane:change');
 //            T.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'className is ' +panel.get('parentNode').get("className"));
 //        },
+        //FIXME: this doesn't seem to test what I think it does. It doesn't fail when it should.
         testTriggerLinkIsNotTrigger: function() {
             var panel = T.one("#panel5");
             var link = T.one("#testLink");
