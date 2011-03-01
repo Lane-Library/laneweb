@@ -42,6 +42,14 @@
             </div>
             <div class="yui-u">
                 <h4>
+                      <xsl:if test="./lc:seats/text() &gt;=  ./lc:registrations/text()">
+                      <b>
+                        <xsl:attribute name="class">
+                            <xsl:text>red-text</xsl:text>
+                        </xsl:attribute>
+                        <xsl:text>WAITLIST! </xsl:text>
+                      </b>
+                      </xsl:if>
                     <a>
                         <xsl:attribute name="href">
                         <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
@@ -57,7 +65,6 @@
         </div>
         <div class="details">
             <div class="module">
-
                 <p>
                     <xsl:param name="description-text" select="./lc:event_description" />
                     <xsl:param name="firstParagraphDescription" select="substring-before($description-text, '.')" />
