@@ -13,7 +13,11 @@ public class QueryTermPattern {
 
     private static final String INVERT_REPLACEMENT = "$1 and ($4 $2)";
 
+    private static final String MAYBE_NONWORD = "\\\\W?";
+
     private static final String NONWORD = "\\\\W";
+
+    private static final Pattern REPLACE_QUOTES_PATTERN = Pattern.compile("\\\"");
 
     private static final Pattern SPACE_PATTERN = Pattern.compile(" ");
 
@@ -23,8 +27,10 @@ public class QueryTermPattern {
      * normalize query terms for use in regex pattern, where normal means:
      * 
      * <pre>
+     *  trim
      *  lower-case
-     *  strip [^a-zA-Z0-9,-_ ]
+     *  replace quotes with "\W?"
+     *  replace [^a-zA-Z0-9,-_ ] with \W
      *  invert comma separated terms: Heparin, Low-Molecular-Weight becomes Low-Molecular-Weight Heparin
      *  replace hyphens and spaces with "\W"
      * </pre>
@@ -34,7 +40,8 @@ public class QueryTermPattern {
      */
     public static Pattern getPattern(final String query) {
         String normalQuery;
-        normalQuery = query.toLowerCase();
+        normalQuery = query.trim().toLowerCase();
+        normalQuery = REPLACE_QUOTES_PATTERN.matcher(normalQuery).replaceAll(MAYBE_NONWORD);
         normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = INVERT_COMMAS_PATTERN.matcher(normalQuery).replaceAll(INVERT_REPLACEMENT);
         normalQuery = normalQuery.replaceAll(" and ", "|");
