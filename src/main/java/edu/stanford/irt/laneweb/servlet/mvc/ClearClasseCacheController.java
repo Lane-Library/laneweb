@@ -1,7 +1,11 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.io.IOException;
+
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.cocoon.caching.Cache;
 import org.apache.cocoon.caching.ComponentCacheKey;
@@ -22,7 +26,7 @@ public class ClearClasseCacheController {
     private Cache cache;
 
     @RequestMapping(value = "/secure/classes/reload.html")
-    public void clearClassCache(final HttpServletRequest request) {
+    public void clearClassCache(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         String contentBase = request.getAttribute(Model.CONTENT_BASE).toString();
         PipelineCacheKey key = new PipelineCacheKey();
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Generator, "classes-aggregator",
@@ -71,6 +75,6 @@ public class ClearClasseCacheController {
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Transformer, "saxon",
                 "jndi:/localhost/resources/xsl/rss2html.xsl"));
         this.cache.remove(key);
-        this.servletContext.getRequestDispatcher("/classes-consult/laneclasses.html");
+        this.servletContext.getRequestDispatcher("/classes-consult/laneclasses.html").forward(request, response);
     }
 }
