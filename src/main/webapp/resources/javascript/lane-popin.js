@@ -24,7 +24,12 @@
                         elms.item(i).get('parentNode').setStyle('display','block');
                         elms.item(i).setStyle('display','inline');
                         if(searchResults){
-                            searchResults.setStyle('marginTop','-3px');
+                            if (Y.UA.ie <= 7){
+                                searchResults.setStyle('marginTop','0');
+                            }
+                            else{
+                                searchResults.setStyle('marginTop','-3px');
+                            }
                         }
                         if(rightSearchTips){
                             rightSearchTips.setStyle('marginTop','7px');
