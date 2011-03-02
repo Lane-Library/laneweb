@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-03-02" version="1.11.20" description="1.11.20 emergency release">
+            <action date="2011-03-01" dev="alainb" type="fix">
+                country of original showing instead of PubMed journal titles
+            </action>
+            <action date="2011-02-28" dev="ryanmax" issue="47752" type="fix">
+                relevance ranking and term highlighting not working with quoted search terms
+            </action>
+        </release>
         <release date="2011-02-28" version="1.11.19" description="1.11.19 bug fix release">
             <action date="2011-02-22" dev="ceyates" issue="47601" type="fix">
                 paged mesh subject browsing fails
