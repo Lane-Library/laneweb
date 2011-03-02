@@ -177,5 +177,7 @@
         <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
         <constructor-arg ref="org.apache.excalibur.store.Store"/>
     </bean>
+    <bean id="javax.servlet.ServletContext"
+        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
     
 </beans>
