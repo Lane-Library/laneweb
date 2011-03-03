@@ -236,7 +236,7 @@
                                 window.location = t.get('href');
                             };
                             e.preventDefault();
-                            setTimeout(f, 250);
+                            setTimeout(f, 100);
                             break;
                         }
                         t = t.get('parentNode');
