@@ -222,25 +222,25 @@
         }();
         LANE.Y.on('click', function(event) {
             LANE.tracking.trackEvent(event);
-            //put in a delay for browsers to make the tracking request:
-//            if (LANE.tracking.isTrackable(event)) {
-//                    var node = event.target,
-//                        goToHref = function() {
-//                            window.location = node.get('href');
-//                        };
-//                    while (node) {
-//                        //  don't prevent default if it's
-//                        //  a popup or facet
-//                        //    (can't halt facet click propagation b/c they need to be tracked)
-//                        if (node.get('href') 
-//                                && (!node.get('rel') && !node.get('target'))
-//                                && !node.get('parentNode').hasClass('searchFacet') ){
-//                            event.preventDefault();
-//                            setTimeout(goToHref, 100);
-//                            break;
-//                        }
-//                        node = t.get('parentNode');
-//                    }
-//            }
+            //put in a delay for webkit (safari) to make the tracking request:
+            if (LANE.Y.UA.webkit && LANE.tracking.isTrackable(event)) {
+                    var node = event.target,
+                        goToHref = function() {
+                            window.location = node.get('href');
+                        };
+                    while (node) {
+                        //  don't prevent default if it's
+                        //  a popup or facet
+                        //    (can't halt facet click propagation b/c they need to be tracked)
+                        if (node.get('href') 
+                                && (!node.get('rel') && !node.get('target'))
+                                && !node.get('parentNode').hasClass('searchFacet') ){
+                            event.preventDefault();
+                            setTimeout(goToHref, 100);
+                            break;
+                        }
+                        node = t.get('parentNode');
+                    }
+            }
         }, document);
 })();
