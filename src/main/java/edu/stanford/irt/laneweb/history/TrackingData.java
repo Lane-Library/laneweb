@@ -90,7 +90,7 @@ public class TrackingData {
     public String toString() {
         StringBuilder sb = new StringBuilder(this.title)
         .append(" http://").append(this.host).append(this.path);
-        if (this.query != null) {
+        if (this.query != null  & this.query.length() > 0) {
             sb.append("?").append(this.query);
         }
         return sb.toString();
