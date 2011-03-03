@@ -11,7 +11,7 @@ public class SitemapSourceLocationModifier {
         String modifiedLocation = getModifiedLocation(location);
         if (modifiedLocation != null) {
             if (log.isWarnEnabled()) {
-                log.warn("the url form: " + location + "is deprecated, use the form: " + modifiedLocation + " instead.");
+                log.warn("the url form: " + location + " is deprecated, use the form: " + modifiedLocation + " instead.");
             }
             return modifiedLocation;
         }
