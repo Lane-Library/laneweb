@@ -20,6 +20,7 @@
             /WEB-INF/spring/datasources.xml
             /WEB-INF/spring/eresources.xml
             /WEB-INF/spring/history.xml
+            /WEB-INF/spring/history-eresources.xml
             /WEB-INF/spring/laneweb.xml
             /WEB-INF/spring/merged-search.xml
             /WEB-INF/spring/model.xml

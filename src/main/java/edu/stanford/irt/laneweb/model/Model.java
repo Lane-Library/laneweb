@@ -30,6 +30,8 @@ public interface Model {
     public static final String FACETS = "facets";
 
     public static final String HOST = "host";
+    
+    public static final String HISTORY = "history";
 
     public static final String IPGROUP = "ipgroup";
 
