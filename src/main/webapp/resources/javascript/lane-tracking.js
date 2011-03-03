@@ -225,7 +225,7 @@
             //put in a delay for browsers to make the tracking request:
             if (LANE.tracking.isTrackable(event)) {
                     var node = event.target,
-                        delay = function() {
+                        goToHref = function() {
                             window.location = node.get('href');
                         };
                     while (node) {
@@ -236,7 +236,7 @@
                                 && (!node.get('rel') && !node.get('target'))
                                 && !node.get('parentNode').hasClass('searchFacet') ){
                             event.preventDefault();
-                            setTimeout(delay, 100);
+                            setTimeout(goToHref, 100);
                             break;
                         }
                         node = t.get('parentNode');
