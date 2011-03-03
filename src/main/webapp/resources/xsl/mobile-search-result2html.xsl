@@ -4,6 +4,8 @@
     xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s"
     version="2.0">
     
+    <xsl:param name="page-title"/>
+    
     <xsl:param name="request-uri"/>
     
     <xsl:param name="query-string"/>
@@ -18,6 +20,16 @@
         <xsl:value-of select="concat($request-uri,'?',$consumable-query-string)"/>
     </xsl:variable>
     
+    <xsl:variable name="page-label">
+        <xsl:choose>
+            <xsl:when test="$page-title">
+                <!-- TODO: better way to unencode this? kinda missing cocoon's url-decode -->
+                <xsl:value-of select="replace($page-title,'(%20|\+)',' ')"/>
+            </xsl:when>
+            <xsl:otherwise>Results</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
@@ -38,7 +50,7 @@
                 <xsl:call-template name="paginationLinks"/>
             </xsl:when>
             <xsl:otherwise>
-                <ul id="results" title="Results">
+                <ul id="results" title="{$page-label}">
                     <li class="rHead">
                         <xsl:value-of select="format-number(/s:resources/@size, '###,##0')"/> results
                         <xsl:if test="string-length($search-terms)">
