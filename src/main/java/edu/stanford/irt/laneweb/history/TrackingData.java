@@ -1,7 +1,9 @@
 package edu.stanford.irt.laneweb.history;
 
+import java.io.Serializable;
 
-public class TrackingData {
+
+public class TrackingData implements Serializable {
     
     private String host;
     
