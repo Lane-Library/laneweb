@@ -26,6 +26,8 @@
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
             searchTextInput.setHintText(selectedOption.get('title'));
             searchTipsLink.set('href',searchTipsLink.get('href').replace(/#.*/,'#'+searchSourceSelect.get('value')));
+            form.one('input[type="text"]').focus();
+            searchTextInput.setValue(searchTextInput.getValue());
         });
         searchTipsLink.set('href',searchTipsLink.get('href')+'#'+searchSourceSelect.get('value'));
         searchTextInput.setHintText(selectedOption.get('title'));

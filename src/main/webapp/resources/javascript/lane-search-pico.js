@@ -96,7 +96,7 @@
         };
         Y.publish("lane:searchPicoChange",{broadcast:2});
     if (form) {
-        searchTerms = new LANE.TextInput(Y.one("#searchTerms"))
+        searchTerms = new LANE.TextInput(Y.one("#searchTerms"));
         Y.Global.on("lane:suggestSelect",  function(event) {
             if(picoIsOn && getPicoQuery()){
                 searchTerms.setValue(getPicoQuery());
@@ -118,6 +118,8 @@
         Y.Global.on('lane:searchSourceChange', function(event) {
             if (event.newVal == 'clinical-all'||event.newVal.indexOf('peds') == 0) {
                 picoOn();
+                form.one('#clinicalP').focus();
+                picoTextInputs[0].setValue(picoTextInputs[0].getValue());
             } else {
                 picoOff();
             }
