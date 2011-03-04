@@ -27,7 +27,6 @@ if (Y.UA.webkit) {
 			if (href && (!node.get('rel') && !node.get('target'))
                      && !node.get('parentNode').hasClass('searchFacet')) {
                 event.preventDefault();
-                alert("putting in a delay before going to " + href);
                 setTimeout(goToHref, 100);
 			}
 		}
