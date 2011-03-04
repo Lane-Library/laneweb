@@ -21,14 +21,16 @@
                     gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);
                 }
                 gaPageTracker._trackPageview();
-                LANE.tracking.addTracker({
-                    track: function(trackingData) {
+                Y.on("trackable", function(link, event) {
+                	var trackingData;
+                	if (link.get("trackable")) {
+                		trackingData = link.get("trackingData");
                         if (trackingData.external) {
                             gaPageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(trackingData.title));
                         } else {
                             gaPageTracker._trackPageview('/ONSITE/' + encodeURIComponent(trackingData.title) + '/' + trackingData.path);
                         }
-                    }
+                	}
                 });
             }
         }

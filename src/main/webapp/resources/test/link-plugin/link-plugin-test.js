@@ -2,6 +2,8 @@
  * @author ceyates
  */
 YUI({
+	filter : "debug",
+	debug : true,
     logInclude: {
         TestRunner: true
     }
@@ -13,37 +15,55 @@ YUI({
         
         testIsLocalLink : function() {
         	var anchor = T.one("#local");
-        	T.Assert.isTrue(anchor.link.isLocal());
+        	T.Assert.isTrue(anchor.link.get("local"));
         },
         
         testIsProxyLoginLink : function () {
         	var anchor = T.one("#proxylogin");
-        	T.Assert.isTrue(anchor.link.isProxyLogin());
+        	T.Assert.isTrue(anchor.link.get("proxyLogin"));
         },
         
         testIsProxyLink : function() {
         	var anchor = T.one("#proxyurl");
-        	T.Assert.isTrue(anchor.link.isProxy());
+        	T.Assert.isTrue(anchor.link.get("proxy"));
         },
         
         testProxyLoginIsNotLocal : function() {
         	var anchor = T.one("#proxylogin");
-        	T.Assert.isFalse(anchor.link.isLocal());
+        	T.Assert.isFalse(anchor.link.get("local"));
         },
         
         testGetURL : function() {
         	var anchor = T.one("#example");
-        	T.Assert.areEqual("http://www.example.com/example", anchor.link.getURL());
+        	T.Assert.areEqual("http://www.example.com/example", anchor.link.get("url"));
         },
         
         testGetProxiedLoginURL : function() {
         	var anchor = T.one("#proxylogin");
-        	T.Assert.areEqual("http://www.nejm.org/", anchor.link.getURL());
+        	T.Assert.areEqual("http://www.nejm.org/", anchor.link.get("url"));
         }, 
         
         testGetProxiedURL : function() {
         	var anchor = T.one("#proxyurl");
-        	T.Assert.areEqual("http://www.nejm.org/", anchor.link.getURL());
+        	T.Assert.areEqual("http://www.nejm.org/", anchor.link.get("url"));
+        },
+        
+        testCookiesFetchIsNotLocal : function() {
+        	var anchor = T.one("#cookiesFetch");
+        	T.Assert.isFalse(anchor.link.get("local"));
+        },
+        
+        testGetCookiesFetchURL : function() {
+        	var anchor = T.one("#cookiesFetch");
+        	T.Assert.areEqual("http://www.thomsonhc.com/carenotes/librarian/", anchor.link.get("url"));
+        },
+        
+        testGetTitle: function() {
+        	var i, anchor, anchors = T.all("#testGetTitle a");
+        	for (i = 0; i < anchors.size(); i++) {
+        		anchor = anchors.item(i);
+        		T.Assert.areEqual(anchor.get("rel"), anchor.link.get("title"));
+        	}
         }
     });
     

@@ -9,7 +9,7 @@
 //        if (typeof _gat === 'undefined') {
 //            setTimeout(timer, 1000);
 //        } else {
-//            YAHOO.tool.TestRunner.run();
+//            T.HOO.tool.TestRunner.run();
 //        }
 //    };
 //    timer();
@@ -17,34 +17,29 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use('lane-tracking','node-event-simulate', 'console', 'test', function(Y){
+}).use('node-event-simulate', 'console', 'test', function(T) {
 
-    var googleTestCase = new Y.Test.Case({
+    var googleTestCase = new T.Test.Case({
         name: 'Lane Google Test Case',
         testTrack: function() {
-            var event;
             var handler = function(e) {
                 e.preventDefault();
-                event = e;
             };
-            var nodes = Y.all('img, a'), i;
+            var nodes = T.all('img, a'), i;
             for (i = 0; i < nodes.size(); i++) {
                 nodes.item(i).on('click', handler);
                 nodes.item(i).simulate('click');
-                if (LANE.tracking.isTrackable(event)) {
-                    LANE.tracking.trackEvent(event);
-                }
                 nodes.item(i).detach(handler);
             }
         }
     });
     
-    Y.one('body').addClass('yui3-skin-sam');
-    new Y.Console({
+    T.one('body').addClass('yui3-skin-sam');
+    new T.Console({
         newestOnTop: false
     }).render('#log');
     
     
-    Y.Test.Runner.add(googleTestCase);
-    Y.Test.Runner.run();
+    T.Test.Runner.add(googleTestCase);
+    T.Test.Runner.run();
 });

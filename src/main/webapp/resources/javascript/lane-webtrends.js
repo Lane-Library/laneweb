@@ -160,9 +160,10 @@
     dcsMeta();
     dcsTag();
     
-    LANE.tracking.addTracker({
-        track: function(trackingData) {
-            var args = [];
+    Y.on("trackable", function(link, event) {
+    	if (link.get("trackable")) {
+            var trackingData = link.get("trackingData"),
+                args = [];
             if (trackingData.host !== undefined) {
                 args.push('DCS.dcssip');
                 args.push(trackingData.host);
@@ -196,6 +197,6 @@
                 args.push('1');
             }
             dcsMultiTrack.call(dcsMultiTrack, args);
-        }
+    	}
     });
 })();

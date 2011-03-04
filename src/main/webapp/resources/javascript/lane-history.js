@@ -27,6 +27,11 @@
         }
     });
     
-    LANE.tracking.addTracker(new HistoryTracker());
+    Y.on("trackable", function(link, event){
+    	var trackingData = link.get("trackingData");
+    	if (trackingData.external) {
+        	HistoryTracker.track(link.get("trackingData"));
+    	}
+    });
     
 })();

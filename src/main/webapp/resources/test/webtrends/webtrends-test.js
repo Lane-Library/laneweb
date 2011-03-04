@@ -13,18 +13,13 @@ YUI({
     var webtrendsTestCase = new Y.Test.Case({
         name: "Lane Webtrends TestCase",
         testTrack: function() {
-            var event;
             var handler = function(e) {
                 e.preventDefault();
-                event = e;
             };
             var nodes = Y.all('img, a'), i;
             for (i = 0; i < nodes.size(); i++) {
                 nodes.item(i).on('click', handler);
                 nodes.item(i).simulate('click');
-                if (LANE.tracking.isTrackable(event)) {
-                    LANE.tracking.trackEvent(event);
-                }
                 nodes.item(i).detach(handler);
             }
         }

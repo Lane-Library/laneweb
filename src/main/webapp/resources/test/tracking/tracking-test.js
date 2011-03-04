@@ -2,149 +2,120 @@
  * @author ceyates
  */
 YUI({
-//    logInclude: {
-//        TestRunner: true
-//    }
-}).use('dump', 'lane-tracking', 'node-event-simulate', 'console', 'test', function(Y){
+    filter : "debug",
+    logInclude: {
+        TestRunner: true
+    }
+}).use('dump', 'node-event-simulate', 'console', 'test', function(T){
+	
+	//TODO: this ends up testing the LinkPlugin more than anything, move those tests to that test case.
 
-    var trackingTestCase = new Y.Test.Case({
+    var trackingTestCase = new T.Test.Case({
         name: "Lane Tracking TestCase",
-        trackingData: {},
-        track: function(td) {
-            this.trackingData = td;
+        trackingData: undefined,
+        link : undefined,
+        track: function(link, event) {
+        	event.preventDefault();
+            this.trackingData = link.get("trackingData");
+            this.link = link;
         },
         setUp: function() {
-            this.trackingData = {};
-        },
-        testExists: function() {
-            Y.Assert.isObject(LANE.tracking);
-        },
-        testAddTracker: function() {
-            try {
-                LANE.tracking.addTracker({});
-            } catch (ex) {
-                Y.Assert.areEqual(ex, 'tracker does not implement track()');
-            }
-            LANE.tracking.addTracker(this);
+            this.trackingData = undefined;
+            this.link = undefined;
         },
         testIsTrackable: function() {
             var i;
-            var images = Y.one('#testIsTrackable').all('img');
-            var anchors = Y.one('#testIsTrackable').all('a');
+            var images = T.one('#testIsTrackable').all('img');
+            var anchors = T.one('#testIsTrackable').all('a');
             var failedNodes = [];
-            var trackable = function(event) {
-                event.halt();
-                if (!LANE.tracking.isTrackable(event)) {
-                    failedNodes.push(event.target);
-                }
-            };
-            var notTrackable = function(event) {
-                event.halt();
-                if (LANE.tracking.isTrackable(event)) {
-                    failedNodes.push(event.target);
-                }
-            };
+            var successfulNodes = [];
+            var totalClicks = 0;
             for (i = 0; i < anchors.size(); i++) {
                 if (anchors.item(i).get('rel') == 'trackable') {
-                    anchors.item(i).on('click', trackable);
                     anchors.item(i).simulate('click');
-                    anchors.item(i).detach(trackable);
+                    if (this.link.get("trackable")) {
+                    	successfulNodes.push(anchors.item(i));
+                    } else {
+                    	failedNodes.push(anchors.item(i));
+                    }
+                    totalClicks++;
                 } else {
-                    anchors.item(i).on('click', notTrackable);
                     anchors.item(i).simulate('click');
-                    anchors.item(i).detach(notTrackable);
+                    if (!this.link.get("trackable")) {
+                    	successfulNodes.push(anchors.item(i));
+                    } else {
+                    	failedNodes.push(anchors.item(i));
+                    }
+                    totalClicks++;
                 }
             }
-            for (i = 0; i < images.size; i++) {
+            for (i = 0; i < images.size(); i++) {
                 if (images.item(i).get('parentNode').get('rel') == 'trackable') {
-                    images.item(i).on('click', trackable);
                     images.item(i).simulate('click');
-                    images.item(i).detach(trackable);
+                    if (this.link.get("trackable")) {
+                    	successfulNodes.push(anchors.item(i));
+                    } else {
+                    	failedNodes.push(anchors.item(i));
+                    }
+                    totalClicks++;
                 } else {
-                    images.item(i).on('click', notTrackable);
                     images.item(i).simulate('click');
-                    images.item(i).detach(notTrackable);
+                    if (!this.link.get("trackable")) {
+                    	successfulNodes.push(anchors.item(i));
+                    } else {
+                    	failedNodes.push(anchors.item(i));
+                    }
+                    totalClicks++;
                 }
             }
-            Y.Assert.isTrue(0 === failedNodes.length, Y.dump(failedNodes));
+            T.Assert.areEqual(0, failedNodes.length, "nodes with the wrong isTrackble status");
+            T.Assert.areEqual(totalClicks, successfulNodes.length);
         },
         testGetTrackingTitle: function() {
-            var i, anchors = Y.one('#testGetTrackedTitle').all('a');
-            var prevent = function(event) {
-                event.preventDefault();
-            };
+            var i, anchors = T.one('#testGetTrackedTitle').all('a');
             for (i = 0; i < anchors.size(); i++) {
-                anchors.item(i).on('click', prevent);
                 anchors.item(i).simulate('click');
-                Y.Assert.areEqual(anchors.item(i).get('rel'), this.trackingData.title);
-                anchors.detach(prevent);
+                T.Assert.areEqual(anchors.item(i).get('rel'), this.trackingData.title);
             }
         },
-        testTrack: function() {
-            LANE.tracking.track({
-                host: 'www.google.com',
-                path: '/path',
-                title: 'title'
-            });
-            Y.Assert.areEqual('www.google.com', this.trackingData.host);
-            Y.Assert.areEqual('/path', this.trackingData.path);
-            Y.Assert.areEqual('title', this.trackingData.title);
-        },
         testExpandyIsTrackable: function() {
-            var expandy = Y.one('.yui3-accordion-item-trigger');
+            var expandy = T.one('.yui3-accordion-item-trigger');
+            var event;
+            expandy.setAttribute("trackable", true);
+            expandy.simulate('click');
+            T.Assert.isTrue(this.link.get("trackable"), 'event not trackable');
+        },
+        testTrackExpandy: function() {
+            var expandy = T.one('.yui3-accordion-item-trigger');
             var event;
             var handler = function(e) {
                 event = e;
             };
             expandy.on('click', handler);
             expandy.simulate('click');
-            Y.Assert.isTrue(LANE.tracking.isTrackable(event), 'event not trackable');
+            T.Assert.areEqual('Expandy:' + expandy.get('textContent'), this.trackingData.title, 'actual:' + this.trackingData.title);
+            T.Assert.isFalse(this.trackingData !== undefined && this.trackingData.external);
             expandy.detach(handler);
         },
-        testTrackExpandy: function() {
-            var expandy = Y.one('.yui3-accordion-item-trigger');
-//            var event;
-//            var handler = function(e) {
-//                event = e;
-//            };
-//            expandy.on('click', handler);
-            expandy.simulate('click');
-            Y.Assert.areEqual('Expandy:' + expandy.get('textContent'), this.trackingData.title, 'actual:' + this.trackingData.title);
-            Y.Assert.isFalse(this.trackingData !== undefined && this.trackingData.external);
-//            expandy.detach(handler);
-        },
         testTrackCookiesFetch: function() {
-            var cookiesFetch = Y.one("#testTrackCookiesFetch");
-            cookiesFetch.on('click', function(e) {e.preventDefault();});
+            var cookiesFetch = T.one("#testTrackCookiesFetch");
             cookiesFetch.simulate('click');
-            Y.Assert.areEqual("www.thomsonhc.com", this.trackingData.host);
-            Y.Assert.areEqual("/carenotes/librarian/", this.trackingData.path);
-            Y.Assert.areEqual("cookiesFetch", this.trackingData.title);
-        },
-        testTrackingDisabledEnabled : function() {
-        	var node = Y.all("a").item(1);
-            var event;
-            var handler = function(e) {
-                event = e;
-            };
-            node.on('click', handler);
-            LANE.tracking.disableTracking();
-            node.simulate('click');
-            Y.Assert.isFalse(LANE.tracking.isTrackable(event), 'event is trackable');
-            LANE.tracking.enableTracking();
-            node.simulate('click');
-            Y.Assert.isTrue(LANE.tracking.isTrackable(event), 'event is not trackable');
+            T.Assert.areEqual("www.thomsonhc.com", this.trackingData.host);
+            T.Assert.areEqual("/carenotes/librarian/", this.trackingData.path);
+            T.Assert.areEqual("cookiesFetch", this.trackingData.title);
         }
     });
     
-    LANE.tracking.addTracker(trackingTestCase);
+    Y.on("trackable", function(link, event) {
+    	trackingTestCase.track(link, event);
+    });
     
-    Y.one('body').addClass('yui3-skin-sam');
-    new Y.Console({
+    T.one('body').addClass('yui3-skin-sam');
+    new T.Console({
         newestOnTop: false
     }).render('#log');
     
     
-    Y.Test.Runner.add(trackingTestCase);
-    Y.Test.Runner.run();
+    T.Test.Runner.add(trackingTestCase);
+    T.Test.Runner.run();
 });
