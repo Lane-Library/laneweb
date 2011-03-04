@@ -11,13 +11,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.stanford.irt.laneweb.bookmarks.Bookmarks;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class SQLHistoryDAO implements HistoryDAO {
@@ -37,11 +37,11 @@ public class SQLHistoryDAO implements HistoryDAO {
 
     private DataSource dataSource;
 
-    public List<TrackingData> getHistory(final String emrid) {
+    public Bookmarks getHistory(final String emrid) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<TrackingData> history = null;
+        Bookmarks history = null;
         try {
             conn = this.dataSource.getConnection();
             pstmt = conn.prepareStatement(READ_HISTORY_SQL);
@@ -50,7 +50,7 @@ public class SQLHistoryDAO implements HistoryDAO {
             if (rs.next()) {
                 InputStream is = rs.getBlob(1).getBinaryStream();
                 ObjectInputStream oip = new ObjectInputStream(is);
-                history = (List<TrackingData>) oip.readObject();
+                history = (Bookmarks) oip.readObject();
                 oip.close();
                 is.close();
                 rs.close();
@@ -70,11 +70,12 @@ public class SQLHistoryDAO implements HistoryDAO {
         return history;
     }
 
-    public void saveHistory(final List<TrackingData> history, String emrid) {
+    public void saveHistory(final Bookmarks history) {
         Connection conn = null;
         CallableStatement cstmt = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        String emrid = history.getEmrid();
         try {
             conn = this.dataSource.getConnection();
             conn.setAutoCommit(false);

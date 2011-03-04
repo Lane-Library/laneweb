@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.history;
 
-import java.util.List;
+import edu.stanford.irt.laneweb.bookmarks.Bookmarks;
 
 public interface HistoryDAO {
 
-    public List<TrackingData> getHistory(final String emrid);
+    public Bookmarks getHistory(final String emrid);
 
-    public void saveHistory(final List<TrackingData> bookmarks, String emrid);
+    public void saveHistory(final Bookmarks bookmarks);
 }

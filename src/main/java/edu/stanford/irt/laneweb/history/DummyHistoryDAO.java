@@ -1,15 +1,14 @@
 package edu.stanford.irt.laneweb.history;
 
-import java.util.LinkedList;
-import java.util.List;
+import edu.stanford.irt.laneweb.bookmarks.Bookmarks;
 
 
 public class DummyHistoryDAO implements HistoryDAO {
 
-    public List<TrackingData> getHistory(String emrid) {
-        return new LinkedList<TrackingData>();
+    public Bookmarks getHistory(String emrid) {
+        return new Bookmarks(emrid);
     }
 
-    public void saveHistory(List<TrackingData> bookmarks, String emrid) {
+    public void saveHistory(Bookmarks history) {
     }
 }
