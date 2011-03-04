@@ -87,7 +87,7 @@ public class SQLHistoryDAO implements HistoryDAO {
                 cstmt.registerOutParameter(2, java.sql.Types.BLOB);
                 cstmt.executeUpdate();
                 Blob blob = cstmt.getBlob(2);
-                OutputStream os = blob.setBinaryStream(0);
+                OutputStream os = blob.setBinaryStream(1);
                 ObjectOutputStream oop = new ObjectOutputStream(os);
                 oop.writeObject(history);
                 oop.flush();
