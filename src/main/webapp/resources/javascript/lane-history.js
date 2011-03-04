@@ -27,10 +27,12 @@
         }
     });
     
+    Y.lane.HistoryTracker = new HistoryTracker();
+    
     Y.on("trackable", function(link, event){
     	var trackingData = link.get("trackingData");
     	if (trackingData.external) {
-        	HistoryTracker.track(link.get("trackingData"));
+        	Y.lane.HistoryTracker.track(link.get("trackingData"));
     	}
     });
     
