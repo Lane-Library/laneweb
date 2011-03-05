@@ -19,11 +19,6 @@
                 </xsl:call-template>
             </xsl:when>
             -->
-            <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'\{keywords\}',$regex-query)"/>
-                </xsl:attribute>
-            </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{search-terms}')">
                 <xsl:attribute name="href">
                     <xsl:value-of select="replace(.,'\{search-terms\}',$regex-query)"/>
@@ -99,12 +94,6 @@
             </xsl:if>
             <!-- replace keywords/search-terms TODO: unify this so only replaceing one thing -->
             <xsl:choose>
-                <xsl:when test="contains($link,'{keywords}')">
-                    <xsl:value-of select="replace($link,'\{keywords\}',$regex-query)"/>
-                </xsl:when>
-                <xsl:when test="contains($link,'%7Bkeywords%7D')">
-                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$regex-query)"/>
-                </xsl:when>
                 <xsl:when test="contains($link,'{search-terms}')">
                     <xsl:value-of select="replace($link,'\{search-terms\}',$regex-query)"/>
                 </xsl:when>
