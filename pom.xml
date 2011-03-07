@@ -381,7 +381,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.25</version>
+            <version>1.6.27</version>
         </dependency>
         <dependency>
             <artifactId>log4j</artifactId>
