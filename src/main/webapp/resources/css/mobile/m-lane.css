@@ -246,9 +246,9 @@ div.absInfo {
     padding: 0;
     max-width: 55px;
     border-width: 0 8px 0 14px;
-    -webkit-border-image: url(/././resources/images/backButtonBrdr.png) 0 8 0 14;
-    -moz-border-image: url(/././resources/images/backButtonBrdr.png) 0 8 0 14;
-    background: url(/././resources/images/backButtonBack.png) repeat-x;
+    -webkit-border-image: url(/././resources/images/mobile/backButtonBrdr.png) 0 8 0 14;
+    -moz-border-image: url(/././resources/images/mobile/backButtonBrdr.png) 0 8 0 14;
+    background: url(/././resources/images/mobile/backButtonBack.png) repeat-x;
 }
 
 #loginLink, #ploginLink, #logoutLink {
