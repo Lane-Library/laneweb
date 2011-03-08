@@ -3,7 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/history"
+        class="edu.stanford.irt.laneweb.history.HistoryDataBinder">
+        <property name="historyDAO" ref="edu.stanford.irt.laneweb.history.HistoryDAO"/>
+    </bean>
     
+    <bean name="org.apache.cocoon.generation.Generator/history"
+        class="edu.stanford.irt.laneweb.history.HistoryGenerator"
+        scope="prototype"/>
     
     <bean id="edu.stanford.irt.laneweb.history.HistoryDAO"
         class="edu.stanford.irt.laneweb.history.SQLHistoryDAO">

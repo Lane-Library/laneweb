@@ -165,6 +165,12 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="samples/history.html" type="wildcard">
+                <map:generate type="html" src="${content-base}/samples/history.html"/>
+                <map:transform type="joost" src="resources/xsl/bookmarks.stx"/>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="caching" internal-only="true">
             <!-- secure/** generates an error unless used from a pipeline -->

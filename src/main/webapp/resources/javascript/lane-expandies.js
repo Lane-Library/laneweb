@@ -75,7 +75,7 @@
             initializer : function() {
                 var trigger = this.get("trigger"),
                     node = this.get("node"),
-                    anchors, anchor, i, size
+                    anchors, anchor, i, size;
                 node.addClass("yui3-accordion-item");
                 if (this.get("expanded")) {
                     node.addClass("yui3-accordion-item-active");
