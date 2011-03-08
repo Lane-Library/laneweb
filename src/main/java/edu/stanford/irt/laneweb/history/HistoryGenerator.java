@@ -19,8 +19,6 @@ public class HistoryGenerator extends AbstractGenerator {
 
     private static final String CDATA = "CDATA";
 
-    private static final String CLASS = "class";
-
     private static final String HREF = "href";
 
     private static final String LI = "li";
@@ -36,10 +34,8 @@ public class HistoryGenerator extends AbstractGenerator {
         if (this.history != null && this.history.size() > 0) {
             XMLUtils.startElement(this.xmlConsumer, XHTMLNS, UL);
             for (Bookmark bookmark : this.history) {
+                XMLUtils.startElement(this.xmlConsumer, XHTMLNS, LI);
                 AttributesImpl atts = new AttributesImpl();
-                atts.addAttribute("", CLASS, CLASS, CDATA, "bookmark");
-                XMLUtils.startElement(this.xmlConsumer, XHTMLNS, LI, atts);
-                atts = new AttributesImpl();
                 atts.addAttribute("", HREF, HREF, CDATA, bookmark.getUrl());
                 XMLUtils.createElementNS(this.xmlConsumer, XHTMLNS, A, atts, bookmark.getLabel());
                 XMLUtils.endElement(this.xmlConsumer, XHTMLNS, LI);
@@ -52,6 +48,6 @@ public class HistoryGenerator extends AbstractGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.history = ModelUtil.getObject(this.model, Model.BOOKMARKS, Bookmarks.class);
+        this.history = ModelUtil.getObject(this.model, Model.HISTORY, Bookmarks.class);
     }
 }

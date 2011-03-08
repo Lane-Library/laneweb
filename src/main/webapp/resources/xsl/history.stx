@@ -7,7 +7,7 @@
     
     <stx:param name="emrid"/>
     
-    <stx:template match="h:div[@id='history']">
+    <stx:template match="h:div[@id='history']/h:div[@class='bd']">
         <stx:if test="$emrid">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                     href="apps:/history">
