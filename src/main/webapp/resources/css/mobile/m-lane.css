@@ -156,36 +156,36 @@ ul.panel>li{
     padding-left:140px;
 }
 
-#results {
+.results {
     padding:0;
 }
-#results li {
+.results li {
     color:gray;
     font-size:14px;
 }
-#results li a {
+.results li a {
     background:none;
 }
-#results li.rHead {
+.results li.rHead {
     font-size:12px;
     text-align:center;
 }
-#results li.rHead strong {
+.results li.rHead strong {
     color:black;
     font-style:italic;
 }
 li.more {
     border-bottom:4px solid #7a8792;
 }
-#results li a.more{
+.results li a.more{
     text-align:right;
     font-size:14px;
     background:url('/././resources/images/mobile/listArrow.png') no-repeat scroll right center transparent;
 }
-#results li{
+.results li{
     background-color:#dfe6e9;
 }
-#results strong {
+.results strong {
     color:#00E;
     /*color:#6e0000;*/
 }
@@ -230,7 +230,7 @@ div.absInfo {
     margin-top:-9px;
     margin-bottom:10px;
 }
-#homeButton {
+.homeButton {
     padding:0 3px;
     position:absolute;
     right:6px;
@@ -240,6 +240,17 @@ div.absInfo {
     width:38px;
     height:30px;
 }
-#loginLink {
+.staticBackButton {
+    left: 6px;
+    right: auto;
+    padding: 0;
+    max-width: 55px;
+    border-width: 0 8px 0 14px;
+    -webkit-border-image: url(/././resources/images/backButtonBrdr.png) 0 8 0 14;
+    -moz-border-image: url(/././resources/images/backButtonBrdr.png) 0 8 0 14;
+    background: url(/././resources/images/backButtonBack.png) repeat-x;
+}
+
+#loginLink, #ploginLink, #logoutLink {
     visibility:hidden;
 }

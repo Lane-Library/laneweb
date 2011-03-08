@@ -34,6 +34,16 @@
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
 
+    <xsl:variable name="searchType">
+        <xsl:choose>
+            <xsl:when test="$rid and contains($request-uri,'m/msc')">srid::laneSearch::</xsl:when>
+            <xsl:when test="$rid and contains($request-uri,'m/sc')">srid::pico::</xsl:when>
+            <xsl:when test="contains($request-uri,'m/msc')">sr::laneSearch::</xsl:when>
+            <xsl:when test="contains($request-uri,'m/sc')">sr::pico::</xsl:when>
+            <xsl:otherwise>browse</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
     <xsl:variable name="moreResultsLimit">10</xsl:variable>
 
@@ -50,7 +60,7 @@
                 <xsl:call-template name="paginationLinks"/>
             </xsl:when>
             <xsl:otherwise>
-                <ul id="results" title="{$page-label}">
+                <ul class="results" id="{$searchType}{$search-terms}" title="{$page-label}">
                     <li class="rHead">
                         <xsl:value-of select="format-number(/s:resources/@size, '###,##0')"/> results
                         <xsl:if test="string-length($search-terms)">
@@ -105,7 +115,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <div class="absInfo">
+        <div class="absInfo" id="{$searchType}{$search-terms}::{$rid}" title="{s:title}">
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
@@ -188,7 +198,7 @@
     </xsl:template>
     
     <xsl:template match="s:result[@type='eresource']" mode="full">
-        <div class="absInfo">
+        <div class="absInfo" id="{$searchType}{$search-terms}::{$rid}" title="{s:title}">
             <xsl:choose>
                 <xsl:when
                     test="s:versions/s:version[1]/s:links/s:link[1]/@type = 'getPassword'">
