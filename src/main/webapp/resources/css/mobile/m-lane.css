@@ -252,5 +252,5 @@ div.absInfo {
 }
 
 #loginLink, #ploginLink, #logoutLink {
-    visibility:hidden;
+    display:none;
 }

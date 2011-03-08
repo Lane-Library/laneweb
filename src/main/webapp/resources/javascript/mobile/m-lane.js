@@ -10,7 +10,6 @@
         ipGroup,
         DISPLAY_BLOCK = 'block',
         DISPLAY_NONE = 'none',
-        VISIBILITY_VISIBLE = 'visible',
         iuiGoBack,
         loadInProgress = false;
 
@@ -126,11 +125,11 @@
             // turn on/off login, persistent login, logout links 
             if($('loginLink') && $('ploginLink') && $('logoutLink')) {
                 if( !LANE.readCookie('webauth_at') && !LANE.readCookie('user')){
-                    $('loginLink').style.visibility = VISIBILITY_VISIBLE;
+                    $('loginLink').style.display = DISPLAY_BLOCK;
                 }
                 else if(LANE.readCookie('webauth_at')||LANE.readCookie('user')){
-                    $('ploginLink').style.visibility = VISIBILITY_VISIBLE;
-                    $('logoutLink').style.visibility = VISIBILITY_VISIBLE;
+                    $('ploginLink').style.display = DISPLAY_BLOCK;
+                    $('logoutLink').style.display = DISPLAY_BLOCK;
                 }
             }
             
