@@ -79,6 +79,13 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
+            <map:match pattern="persistentlogin.html" type="wildcard">
+                <map:generate type="html" src="resources/mobile/persistentlogin.html"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="html5"/>
+            </map:match>
             <!-- Merged Search Content (er and metasearch) -->
             <map:match pattern="msc/**" type="wildcard">
                 <map:generate type="file" src="apps:/search/merged/xml/{1}"/>

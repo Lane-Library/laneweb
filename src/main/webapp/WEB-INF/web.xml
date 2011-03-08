@@ -88,6 +88,7 @@
     <filter-mapping>
         <filter-name>persistent-login</filter-name>
         <url-pattern>/persistentlogin.html</url-pattern>
+        <url-pattern>/m/persistentlogin.html</url-pattern>
     </filter-mapping>
     
     <servlet>

@@ -45,7 +45,6 @@
     
     <!-- ====================  INCLUDED TEMPLATES ============================= -->
     <xsl:include href="laneweb-links.xsl"/>
-    <xsl:include href="laneweb-login.xsl"/>
     
     <xsl:template match="/">
         <xsl:apply-templates select="child::node()"/>
@@ -73,10 +72,13 @@
     </xsl:template>
     
     <!-- internal links should refer to /m/lc2txt, external links get blank target, exclude login links  -->
-    <xsl:template match="h:a[not(//h:ul[@id='login'])]">
+    <xsl:template match="h:a">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
+                <xsl:when test="@href = '/logout' or starts-with(@href,'/secure')">
+                    <xsl:apply-templates select="attribute::node()"/>
+                </xsl:when>
                 <xsl:when test="matches(@href,'http.*lane(-local|-stage)?.stanford.edu/[^m/]')">
                     <xsl:attribute name="href">
                         <xsl:value-of select="replace(@href,'http.*lane(-local|-stage)?.stanford.edu/',concat($base-path,'/m/lc2txt/'))"/>
@@ -94,5 +96,23 @@
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
-    
+
+    <!-- select content to show on persistentlogin.html -->
+    <xsl:template match="h:ul[attribute::id='persistentlogin']/h:li[attribute::id='ploginExtended']">
+        <xsl:if test="matches($query-string,'^pl=true')">
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node()"/>
+                <xsl:apply-templates select="child::node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="h:ul[attribute::id='persistentlogin']/h:li[attribute::id='ploginRemoved']">
+        <xsl:if test="matches($query-string,'^remove-pl=true')">
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node()"/>
+                <xsl:apply-templates select="child::node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+
 </xsl:stylesheet>
