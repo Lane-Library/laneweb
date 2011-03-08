@@ -8,12 +8,15 @@
     <stx:param name="emrid"/>
     
     <stx:template match="h:div[@id='history']/h:div[@class='bd']">
-        <stx:if test="$emrid">
+        <stx:copy>
+            <stx:apply-attributes/>
+            <stx:if test="$emrid">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                     href="apps:/history">
                     <xi:fallback/>
                 </xi:include>
-        </stx:if>
+            </stx:if>
+        </stx:copy>
     </stx:template>
     
 </stx:transform>
