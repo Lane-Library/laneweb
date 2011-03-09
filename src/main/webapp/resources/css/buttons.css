@@ -90,6 +90,7 @@
 }
 .top-resources:hover {
     border-bottom:none;
+    color:white;
 }
 .top-resources.journals:hover {
     background-position:-301px 0;
