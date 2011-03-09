@@ -1,4 +1,5 @@
 CACHE MANIFEST
+# Build Time: ${timestamp}
 # swap comments on next 4 lines to turn off js, css caching for production
 /././resources/javascript/mobile/lane-mobile.js?${project.version}
 /././resources/css/mobile/lane-mobile.css?${project.version}
