@@ -115,4 +115,16 @@
     </xsl:template>
 
 
+
+    <xsl:template match="*">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()|child::node()" />
+        </xsl:copy>
+    </xsl:template>
+
+
+    <xsl:template match="attribute::node()">
+        <xsl:copy-of select="self::node()" />
+    </xsl:template>
+
 </xsl:stylesheet>
