@@ -42,25 +42,23 @@
                             alert('result not found ... try your search again');
                         }
                     };
-                    if(searchForm){
-                        e.preventDefault();
-                        searchForm.elements['q'].value = searchTerms;
-                        resultIdElm = document.createElement('input');
-                        resultIdElm.type = 'hidden';
-                        resultIdElm.id = 'tmpRid';
-                        resultIdElm.name = 'rid';
-                        resultIdElm.value = resultId;
-                        pageElm = document.createElement('input');
-                        pageElm.type = 'hidden';
-                        pageElm.id = 'tmpPage';
-                        pageElm.name = 'page';
-                        pageElm.value = 'all';
-                        searchFieldset.appendChild(resultIdElm);
-                        searchFieldset.appendChild(pageElm);
-                        setTimeout(function(){ 
-                            LANE.submitForm(searchForm,callback);
-                        }, 300);
-                    }
+                    e.preventDefault();
+                    searchForm.elements['q'].value = searchTerms;
+                    resultIdElm = document.createElement('input');
+                    resultIdElm.type = 'hidden';
+                    resultIdElm.id = 'tmpRid';
+                    resultIdElm.name = 'rid';
+                    resultIdElm.value = resultId;
+                    pageElm = document.createElement('input');
+                    pageElm.type = 'hidden';
+                    pageElm.id = 'tmpPage';
+                    pageElm.name = 'page';
+                    pageElm.value = 'all';
+                    searchFieldset.appendChild(resultIdElm);
+                    searchFieldset.appendChild(pageElm);
+                    setTimeout(function(){ 
+                        LANE.submitForm(searchForm,callback);
+                    }, 500);
                 }
                 // search result pages
                 else if(location.hash.match(/#_(sr::(.*)::(.*))/)){
@@ -72,13 +70,11 @@
                     callback = function(){
                         $(bookmarkId).setAttribute('selected','true');
                     };
-                    if(searchForm){
-                        e.preventDefault();
-                        searchForm.elements['q'].value = searchTerms;
-                        setTimeout(function(){ 
-                            LANE.submitForm(searchForm,callback);
-                        }, 300);
-                    }
+                    e.preventDefault();
+                    searchForm.elements['q'].value = searchTerms;
+                    setTimeout(function(){ 
+                        LANE.submitForm(searchForm,callback);
+                    }, 500);
                 }
                 // known static pages ... could probably open this up to any hash
                 else if(location.hash.match(/#_(book|db|ej|fb|hours|top)/)){
@@ -93,7 +89,7 @@
                                 function(){
                             $(bookmarkedHash).setAttribute('selected','true');
                         });
-                    }, 300);
+                    }, 500);
                 }
             }
             
