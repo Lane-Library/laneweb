@@ -56,7 +56,7 @@
             proxy : {
                 readOnly : true,
                 valueFn : function() {
-                    return this.get("linkHost") == LinkPlugin.PROXY_HOST
+                    return this.get("linkHost") === LinkPlugin.PROXY_HOST
                     && this.get("path") === LinkPlugin.PROXY_LOGIN_PATH;
                 }
             },

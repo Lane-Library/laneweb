@@ -76,3 +76,33 @@
 #seeAll:hover {
     background-image: url(/././resources/images/seeall-but-on.gif);
 }
+
+/* top resources buttons, possibly temporary */
+.top-resources {
+    background-image : url(/././resources/images/top-resources.gif);
+    display: block;
+    font-size: 0;
+    color: white;
+    background-repeat: no-repeat;
+    border: none;
+    margin-left:-15px;
+    height: 32px;
+}
+.top-resources:hover {
+    border-bottom:none;
+}
+.top-resources.journals:hover {
+    background-position:-301px 0;
+}
+.top-resources.pubmed {
+    background-position: 0 -48px;
+}
+.top-resources.pubmed:hover {
+    background-position: -301px -48px;
+}
+.top-resources.uptodate {
+    background-position: 0 -96px;
+}
+.top-resources.uptodate:hover {
+    background-position: -301px -96px;
+}
