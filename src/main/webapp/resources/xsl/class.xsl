@@ -39,6 +39,7 @@
     <xsl:template match="h:p[@id='registration']">
         
         <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[text() = $internal-id]/..">
+        <xsl:if test="lc:event_status/text() = 'O'">
         <div>
             <p>
                 <a>
@@ -89,8 +90,8 @@
                 </xsl:choose>
             </h4>
          </div>
+         </xsl:if>
         </xsl:for-each>
-        
     </xsl:template>
 
 
@@ -113,17 +114,5 @@
         </xsl:copy>
     </xsl:template>
 
-
-
-    <xsl:template match="*">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()|child::node()" />
-        </xsl:copy>
-    </xsl:template>
-
-
-    <xsl:template match="attribute::node()">
-        <xsl:copy-of select="self::node()" />
-    </xsl:template>
 
 </xsl:stylesheet>
