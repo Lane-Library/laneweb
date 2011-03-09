@@ -175,6 +175,17 @@
             loadInProgress : loadInProgress
         };
     }();
+
+    addEventListener("beforeinsert", function(event){
+        // chrome ... time for a new framework
+        if(event.fragment.childNodes[1].tagName == 'META'){
+            for(var i = 0; i < event.fragment.childNodes.length; i++){
+                if(event.fragment.childNodes[i].tagName && event.fragment.childNodes[i].tagName.match(/(META|TITLE)/)){
+                    event.fragment.removeChild(event.fragment.childNodes[i]);
+                }
+            }
+        }
+    }, true);
     
     addEventListener("afterinsert", function(event){
         // scroll panels into viewport after page load
