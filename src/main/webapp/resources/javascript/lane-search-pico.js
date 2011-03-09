@@ -119,7 +119,12 @@
             if (event.newVal == 'clinical-all'||event.newVal.indexOf('peds') == 0) {
                 picoOn();
                 form.one('#clinicalP').focus();
-                picoTextInputs[0].setValue(picoTextInputs[0].getValue());
+                if(picoTextInputs[0].getValue()){
+                    picoTextInputs[0].setValue(picoTextInputs[0].getValue());
+                }
+                else{
+                    picoTextInputs[0].setValue(LANE.Search.getSearchTerms());
+                }
             } else {
                 picoOff();
             }
