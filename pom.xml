@@ -51,6 +51,10 @@
     <scm>
         <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
     </scm>
+    <properties>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd:HH:mm:ss</maven.build.timestamp.format>
+    </properties>
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
