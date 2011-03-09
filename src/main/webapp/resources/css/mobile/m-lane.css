@@ -148,9 +148,9 @@ ul.panel>li{
     -webkit-border-radius:15px;
     border:2px solid darkgray;
 }
-#picoClr {
+input#picoClr {
     width:65px;
-    float:right;
+    float:left;
 }
 #login .row span {
     padding-left:140px;
