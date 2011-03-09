@@ -58,7 +58,7 @@
                     searchFieldset.appendChild(pageElm);
                     setTimeout(function(){ 
                         LANE.submitForm(searchForm,callback);
-                    }, 500);
+                    }, 1000);
                 }
                 // search result pages
                 else if(location.hash.match(/#_(sr::(.*)::(.*))/)){
@@ -74,7 +74,7 @@
                     searchForm.elements['q'].value = searchTerms;
                     setTimeout(function(){ 
                         LANE.submitForm(searchForm,callback);
-                    }, 500);
+                    }, 1000);
                 }
                 // known static pages ... could probably open this up to any hash
                 else if(location.hash.match(/#_(book|db|ej|fb|hours|top)/)){
@@ -89,7 +89,7 @@
                                 function(){
                             $(bookmarkedHash).setAttribute('selected','true');
                         });
-                    }, 500);
+                    }, 1000);
                 }
             }
             
