@@ -8,19 +8,19 @@
     <xsl:template match="/lc:classes">
         <html>
             <body>
-                <xsl:apply-templates />
+                <xsl:apply-templates select="lc:event_data"/>
             </body>
         </html>
     </xsl:template>
 
 
     <xsl:template match="lc:event_data">
-        <xsl:if test="position() mod 2 !=0 ">
+        <xsl:if test="position() mod 2 !=0 and lc:event_status/text() = 'O'">
             <li class="odd">
                 <xsl:call-template name="decorator" />
             </li>
         </xsl:if>
-        <xsl:if test="position() mod 2  = 0 ">
+        <xsl:if test="position() mod 2  = 0 and lc:event_status/text() = 'O'">
             <li class="even">
                 <xsl:call-template name="decorator" />
             </li>
@@ -153,8 +153,5 @@
             </xsl:if>
         </xsl:if>
     </xsl:template>
-
-
-
 
 </xsl:stylesheet>
