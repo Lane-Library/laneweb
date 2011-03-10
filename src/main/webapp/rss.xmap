@@ -34,18 +34,16 @@
             <map:match type="regex-parameter" pattern="/classes-consult/laneclasses.html">
                 <map:parameter name="parameter-name" value="page"/>
                 <map:generate type="classes"  src="apps:/classes/data.xml"/>
-                <map:transform type="saxon" src="resources/xsl/classes-rss.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/classes/rss.xsl"/>
                 <map:serialize type="xml"/>
               </map:match>
-            
               <map:match type="regex-parameter" pattern="^(/biomed-resources|/help)">
                 <map:parameter name="parameter-name" value="page"/>
-                  <map:generate type="html" src="${content-base}${page}"/>
+                <map:generate type="html" src="${content-base}${page}"/>
                 <map:transform src="resources/xsl/page2rss.xsl" type="saxon"/>
                 <map:serialize type="xml"/>
-                </map:match>
-            </map:match>
-            
+              </map:match>
+           </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
             <map:match pattern="**.xml" type="wildcard">

@@ -153,9 +153,9 @@
             <map:match type="wildcard" pattern="classes-consult/laneclass.html">
                 <map:aggregate element="doc">
                     <map:part src="${content-base}/classes-consult/class.html"/>
-                    <map:part src="apps:/classes/data.xml"/>
+                    <map:part src="apps:/classes/all-data.xml"/>
                 </map:aggregate>
-                <map:transform type="saxon" src="resources/xsl/class.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/classes/laneclass.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xhtml"/>
             </map:match>

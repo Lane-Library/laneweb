@@ -190,27 +190,29 @@
            <map:match pattern="classes/**" type="wildcard"> 
                 <map:match pattern="classes/thisweek" type="wildcard">
                     <map:generate type="classes" src="apps:/classes/data.xml"/>
-                    <map:transform  type="saxon"  src="resources/xsl/classes-thisweek.xsl"/>
+                    <map:transform  type="saxon"  src="resources/xsl/classes/thisweek.xsl"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
                 <map:match pattern="classes/all" type="wildcard">
                     <map:generate type="classes" src="apps:/classes/data.xml"/>
-                    <map:transform type="saxon" src="resources/xsl/laneclasses.xsl"/>
+                    <map:transform type="saxon" src="resources/xsl/classes/laneclasses.xsl"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
                 <map:match pattern="classes/data.xml" type="wildcard">
                     <map:generate type="classes-aggregator" src="apps:/classes/onlineregistrationcenter.xml"/>
                     <map:transform type="textNodeParser"/> 
+                    <map:transform type="saxon" src="resources/xsl/classes/lastmodified.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="classes/all-data.xml" type="wildcard">
                     <map:generate type="classes-aggregator" src="apps:/classes/all-onlineregistrationcenter.xml"/>
-                    <map:transform type="textNodeParser"/> 
+                    <map:transform type="textNodeParser"/>
+                    <map:transform type="saxon" src="resources/xsl/classes/lastmodified.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="classes/onlineregistrationcenter.xml" type="wildcard">
                     <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
-                    <map:serialize type="xml"/>
+                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="classes/all-onlineregistrationcenter.xml" type="wildcard">
                     <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1"/>
