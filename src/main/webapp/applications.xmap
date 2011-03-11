@@ -200,14 +200,14 @@
                 </map:match>
                 <map:match pattern="classes/data.xml" type="wildcard">
                     <map:generate type="classes-aggregator" src="apps:/classes/onlineregistrationcenter.xml"/>
-                    <map:transform type="textNodeParser"/> 
                     <map:transform type="saxon" src="resources/xsl/classes/lastmodified.xsl"/>
+                    <map:transform type="textNodeParser"/> 
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="classes/all-data.xml" type="wildcard">
                     <map:generate type="classes-aggregator" src="apps:/classes/all-onlineregistrationcenter.xml"/>
-                    <map:transform type="textNodeParser"/>
                     <map:transform type="saxon" src="resources/xsl/classes/lastmodified.xsl"/>
+                    <map:transform type="textNodeParser"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="classes/onlineregistrationcenter.xml" type="wildcard">
