@@ -77,7 +77,7 @@
             if(backButton.scroll){
                 setTimeout(function(){
                     scrollTo(0,backButton.scroll);
-                }, 30);
+                }, 100);
             }
         };
         d.addEventListener("click", function(e) {
@@ -156,6 +156,7 @@
                     }
                 }
                 iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
+                scrollTo(0,1);
             },
             setIpGroup : function(group) {
                 ipGroup = group;
@@ -188,8 +189,8 @@
     }, true);
     
     addEventListener("afterinsert", function(event){
-        // scroll panels into viewport after page load
-        if(event.insertedNode.className=="absInfo"||event.insertedNode.id=="results"){
+        // scroll abstract/more info panel into viewport after page load
+        if(event.insertedNode.className=="absInfo"){
             setTimeout(function(){
                 scrollTo(0,1);
             }, 200);
