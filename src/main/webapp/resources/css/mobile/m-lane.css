@@ -195,6 +195,7 @@ div.absInfo {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     padding: 10px;
+    background-color:#fff;
 }
 .pubAuthor, .pubInfo {
     font-size:10px;

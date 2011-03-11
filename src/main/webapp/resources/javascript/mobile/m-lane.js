@@ -189,12 +189,13 @@
     }, true);
     
     addEventListener("afterinsert", function(event){
+        scrollTo(0,1);
         // scroll abstract/more info panel into viewport after page load
-        if(event.insertedNode.className=="absInfo"){
-            setTimeout(function(){
-                scrollTo(0,1);
-            }, 200);
-        }
+        //if(event.insertedNode.className=="absInfo"){
+        //    setTimeout(function(){
+        //        //scrollTo(0,1);
+        //    }, 200);
+        //}
     }, true);
     
 })();

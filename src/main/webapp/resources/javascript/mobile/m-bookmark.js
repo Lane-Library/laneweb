@@ -77,11 +77,11 @@
                     }, 1000);
                 }
                 // known static pages ... could probably open this up to any hash
-                else if(location.hash.match(/#_(book|db|ej|fb|hours|top)/)){
+                else if(location.hash.match(/#_(book|db|ej|fb|hours|top|bookAZ|dbAZ|ejAZ)$/)){
                     bookmarkedHash = RegExp.$1;
                     LANE.loadInProgress = true;
                     e.preventDefault();
-                    setTimeout(function(){ 
+                    setTimeout(function(){
                         iui.showPageByHref(bookmarkedHash+".html", 
                                 null, 
                                 "GET", 
