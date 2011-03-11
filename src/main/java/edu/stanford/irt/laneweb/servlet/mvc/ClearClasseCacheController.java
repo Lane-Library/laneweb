@@ -58,7 +58,7 @@ public class ClearClasseCacheController {
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Generator, "classes-aggregator",
                 "apps:/classes/onlineregistrationcenter.xml"));
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Transformer, "saxon",
-                "jndi:/localhost/resources/xsl/laneclasses-lastmodified.xsl"));
+                "jndi:/localhost/resources/xsl/classes/lastmodified.xsl"));
         this.cache.remove(key);
         key = new PipelineCacheKey();
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Generator, "classes",
@@ -68,7 +68,7 @@ public class ClearClasseCacheController {
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Generator, "classes-aggregator",
                 "apps:/classes/all-onlineregistrationcenter.xml"));
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Transformer, "saxon",
-                "jndi:/localhost/resources/xsl/laneclasses-lastmodified.xsl"));
+                "jndi:/localhost/resources/xsl/classes/lastmodified.xsl"));
         this.cache.remove(key);
         key = new PipelineCacheKey();
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Generator, "classes",
@@ -77,7 +77,7 @@ public class ClearClasseCacheController {
         key = new PipelineCacheKey();
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Generator, "classes", "apps:/classes/data.xml"));
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Transformer, "saxon",
-                "jndi:/localhost/resources/xsl/laneclasses.xsl"));
+                "jndi:/localhost/resources/xsl/classes/laneclasses.xsl"));
         this.cache.remove(key);
         key = new PipelineCacheKey();
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Generator, "html", contentBase
@@ -92,7 +92,7 @@ public class ClearClasseCacheController {
         key = new PipelineCacheKey();
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Generator, "classes", "apps:/classes/data.xml"));
         key.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Transformer, "saxon",
-                "jndi:/localhost/resources/xsl/classes-thisweek.xsl"));
+                "jndi:/localhost/resources/xsl/classes/thisweek.xsl"));
         this.cache.remove(key);
     }
 }
