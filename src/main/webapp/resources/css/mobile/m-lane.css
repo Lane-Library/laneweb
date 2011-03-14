@@ -84,14 +84,14 @@ ul.panel>li{
 
 .footer {
     padding-top:10px;
-    padding-bottom:20px;
+    padding-bottom:12px;
     font-size:11px;
     /*
     background:url(/././resources/images/mobile/footerBg.png) repeat-x;
     */
     background:#c2cbd0;
     text-align:center;
-    border-bottom:70px solid #414649;
+    border-bottom:2px solid #414649;
 }
 
 .footer a {
