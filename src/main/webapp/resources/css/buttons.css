@@ -1,112 +1,122 @@
 /* styles for grey buttons */
 .button {
-    display: block;
-    font-size: 0;
-    color: white;
-    background-image: url(/././resources/images/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    height: 27px;
-    width: 147px;
-    margin: 5px 0;
-    border: none;
+    display : block;
+    font-size : 0;
+    color : white;
+    background-image : url(/././resources/images/sprite-but-off.gif);
+    background-repeat : no-repeat;
+    height : 27px;
+    width : 147px;
+    margin : 5px 0;
+    border : none;
 }
 .events.button {
-    color: white;
+    color : white;
 }
 .button:hover {
-    background: transparent url(/././resources/images/sprite-but-on.gif);
-    border: none;
-    color: white;
+    background : transparent url(/././resources/images/sprite-but-on.gif);
+    border : none;
+    color : white;
 }
-.button.livechat,.button.livechat:hover {
-    background-position: 13px -19px;
-    margin: 10px 0;
+.button.livechat,
+.button.livechat:hover {
+    background-position : 13px -19px;
+    margin : 10px 0;
 }
-.button.directions-maps,.button.direction-maps:hover {
-    background-position: -25px -318px;
-    margin: 10px 0;
+.button.directions-maps,
+.button.direction-maps:hover {
+    background-position : -25px -318px;
+    margin : 10px 0;
 }
-.button.all-classes,.button.all-classes:hover {
-    background-position:11px -220px;
-    width:156px
+.button.all-classes,
+.button.all-classes:hover {
+    background-position : 11px -220px;
+    width : 156px
 }
-.button.biomed-sem,.button.biomed-sem:hover {
-    background-position: -25px -267px;
+.button.biomed-sem,
+.button.biomed-sem:hover {
+    background-position : -25px -267px;
 }
-.button.go-straight-pubmed,.button.go-straight-pubmed:hover {
-    background-position: -25px -435px;
-    width: 205px;
+.button.go-straight-pubmed,
+.button.go-straight-pubmed:hover {
+    background-position : -25px -435px;
+    width : 205px;
 }
-.button.go-straight-uptodate,.button.go-straight-uptodate:hover {
-    background-position: -25px -483px;
-    width: 205px;
+.button.go-straight-uptodate,
+.button.go-straight-uptodate:hover {
+    background-position : -25px -483px;
+    width : 205px;
 }
-.button.go-straight-webscience,.button.go-straight-webscience:hover {
-    background-position: -25px -529px;
-    width: 253px;
+.button.go-straight-webscience,
+.button.go-straight-webscience:hover {
+    background-position : -25px -529px;
+    width : 253px;
 }
 .button.subscribe {
-    background-position: -25px -70px;
-    background-color: transparent;
-    cursor: pointer;
+    background-position : -25px -70px;
+    background-color : transparent;
+    cursor : pointer;
 }
-.button.sched-support,.button.sched-support:hover {
-    background-position: -25px -318px;
-    width: 162px;
-    margin: 7px 0 0 0;
-    height: 48px;
+.button.sched-support,
+.button.sched-support:hover {
+    background-position : -25px -318px;
+    width : 162px;
+    margin : 7px 0 0 0;
+    height : 48px;
 }
-.button.sul, .button.sul:hover {
-    background-position:-24px -529px;
-    height: 48px;
+.button.sul,
+.button.sul:hover {
+    background-position : -24px -529px;
+    height : 48px;
 }
 /*see all button on ej and search pages*/
 #seeAll {
-    background-image: url(/././resources/images/seeall-but-off.gif);
-    border-bottom: none;
-    float: right;
-    height: 26px;
-    position: relative;
-    color:white;
-    font-size:0;
-    top: -6px;
-    margin:0 0 -12px 5px;
-    width: 95px;
+    background-image : url(/././resources/images/seeall-but-off.gif);
+    border-bottom : none;
+    float : right;
+    height : 26px;
+    position : relative;
+    color : white;
+    font-size : 0;
+    top : -6px;
+    margin : 0 0 -12px 5px;
+    width : 95px;
 }
 #seeAll:hover {
-    background-image: url(/././resources/images/seeall-but-on.gif);
+    background-image : url(/././resources/images/seeall-but-on.gif);
 }
 
 /* top resources buttons, possibly temporary */
 .top-resources {
     background-image : url(/././resources/images/top-resources.gif);
-    display: block;
-    font-size: 0;
-    color: white;
-    background-repeat: no-repeat;
-    border: none;
-    margin-left:-15px;
-    height: 32px;
+    display : block;
+    font-size : 0;
+    color : white;
+    background-repeat : no-repeat;
+    border : none;
+    margin-left : -15px;
+    height : 32px;
 }
 .top-resources:hover {
-    border-bottom:none;
-    color:white;
+    border-bottom : none;
+    color : white;
 }
 .top-resources:visited {
-    color:white;
+    color : white;
 }
 .top-resources.journals:hover {
-    background-position:-301px 0;
+    background-position : -301px 0;
 }
 .top-resources.pubmed {
-    background-position: 0 -48px;
+    background-position : 0 -48px;
 }
 .top-resources.pubmed:hover {
-    background-position: -301px -48px;
+    background-position : -301px -48px;
 }
 .top-resources.uptodate {
-    background-position: 0 -96px;
+    background-position : 0 -96px;
+    margin-bottom : 10px;
 }
 .top-resources.uptodate:hover {
-    background-position: -301px -96px;
+    background-position : -301px -96px;
 }
