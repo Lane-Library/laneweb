@@ -18,7 +18,7 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
         String requestURI = request.getRequestURI();
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
         String sitemapURI = requestURI.substring(basePath.length());
-        // only .html and .xml or ending in / potentially get redirects.
+        // only .html and .xml or ending in / and a few other custom urls potentially get redirects.
         if (isRedirectable(sitemapURI)) {
             String redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI, basePath, request.getQueryString());
             if (redirectURL != null) {
