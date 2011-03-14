@@ -35,6 +35,7 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
 
     private boolean isRedirectable(final String sitemapURI) {
         return sitemapURI.indexOf(".html") > 0 || sitemapURI.indexOf(".xml") > 0 || sitemapURI.endsWith("/")
-                || sitemapURI.indexOf("page2rss") > 0 || sitemapURI.indexOf("/lksc-print") == 0;
+                || sitemapURI.indexOf("page2rss") > 0 || sitemapURI.indexOf("/lksc-print") == 0
+                || "/m".equals(sitemapURI) || "/classes".equals(sitemapURI) || "/clinician".equals(sitemapURI);
     }
 }

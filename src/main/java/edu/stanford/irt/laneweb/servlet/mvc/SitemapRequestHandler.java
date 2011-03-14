@@ -49,6 +49,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         environment.setHttpServletResponse(response);
         environment.setHttpServletRequest(request);
         environment.setServletContext(this.servletContext);
+        environment.setURI(this.prefix, sitemapURI);
         
         model.put(ObjectModelHelper.REQUEST_OBJECT, new LanewebRequest(sitemapURI, request));
         model.put(ObjectModelHelper.RESPONSE_OBJECT, new LanewebResponse(response));

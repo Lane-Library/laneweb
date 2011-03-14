@@ -17,6 +17,8 @@ public class LanewebEnvironment implements Environment {
     private HttpServletResponse response;
     private HttpServletRequest request;
     private ServletContext servletContext;
+    private String prefix;
+    private String uri;
 
     
     public void startingProcessing() {
@@ -28,18 +30,18 @@ public class LanewebEnvironment implements Environment {
 
     
     public String getURI() {
-        return null;
+        return this.uri;
     }
 
     
     public String getURIPrefix() {
-        return null;
+        return this.prefix;
     }
 
     
-    public void setURI(String prefix, String value) {
-        throw new UnsupportedOperationException();
-        
+    public void setURI(String prefix, String uri) {
+        this.prefix = prefix;
+        this.uri = uri;
     }
 
     
