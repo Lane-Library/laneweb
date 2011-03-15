@@ -152,6 +152,7 @@
                                 <include>follow-min.css</include>
                                 <include>images-min.css</include>
                                 <include>bookmarks-min.css</include>
+                                <include>captioned-img-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>

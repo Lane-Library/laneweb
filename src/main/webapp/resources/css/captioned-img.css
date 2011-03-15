@@ -1,0 +1,30 @@
+/* rules for styling markup for images with captions */
+
+.captioned-img {
+    text-align : center;
+}
+.captioned-img.left {
+    float : left;
+    margin-right : 1em;
+}
+.captioned-img.right {
+    float : right;
+    margin-left : 1em;
+}
+.captioned-img div {
+    font-size : .9em;
+    font-family : Georgia, 'Times New Roman', Times, serif;
+    color : #666666;
+    padding : 0 5px;
+}
+.captioned-img a {
+    border-bottom : none;
+    cursor : pointer;
+}
+.captioned-img div a {
+    border-bottom : 1px dotted #81785A;
+    font-size : 10px
+}
+.captioned-img div a:hover {
+    border-bottom : 1px solid #820000;
+}
