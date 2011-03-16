@@ -9,9 +9,9 @@ YUI({
 
     var lanePopupTestCase = new Y.Test.Case({
         name: 'Lane Popup Test Case',
-        testContainerExists: function() {
-            Y.Assert.isTrue(Y.Lang.isObject(Y.one('#popupContainer')));
-        },
+//        testContainerExists: function() {
+//            Y.Assert.isTrue(Y.Lang.isObject(Y.one('#popupContainer')));
+//        },
         testConsole: function() {
             Y.all('a').item(0).simulate('click');
         },

@@ -1,11 +1,13 @@
 (function() {
-    var Y = LANE.Y, panel, container, createPanel, showPanel, popupWindow, showWindow, createEventHandlers;
-    createPanel = function() {
-        container = Y.Node.create('<div id="popupContainer"/>');
-        Y.one('body').append(container);
-        panel = new Y.Overlay({
-            srcNode: container
-        });
+    var Y = LANE.Y, panel, container, maybeCreatePanel, showPanel, popupWindow, showWindow, createEventHandlers;
+    maybeCreatePanel = function() {
+    	if (!panel) {
+            container = Y.Node.create('<div id="popupContainer"/>');
+            Y.one('body').append(container);
+            panel = new Y.Overlay({
+                srcNode: container
+            });
+    	}
     };
     showPanel = function(title, body, cX, cY) {
         var width = (title.length * 7 > 334) ? title.length * 7 : 334;
@@ -49,38 +51,56 @@
         popupWindow = window.open(url, 'newWin', tools);
         popupWindow.focus();
     };
-    createEventHandlers = function() {
-        var i, anchors, args, popupAnchors = [];
-        anchors = Y.all('a');
-        for (i = 0; i < anchors.size(); i++) {
-            if (anchors.item(i).get('rel') && anchors.item(i).get('rel').indexOf('popup') === 0) {
-                popupAnchors.push(anchors.item(i));
-            }
-        }
-        for (i = 0; i < popupAnchors.length; i++) {
-            args = popupAnchors[i].get('rel').split(' ');
-            if (!panel && (args[1] == 'local')) {
-                createPanel();
-            }
-            if (args[1] == 'standard' || args[1] == 'console' || args[1] == 'console-with-scrollbars' || args[1] == 'fullscreen') {
-                Y.on('click', function(e) {
-                    var args = this.get('rel').split(' ');
-                    e.preventDefault();
-                    showWindow(this.get('href'), args[1], args[2], args[3]);
-                }, popupAnchors[i]);
-            } else if (args[1] == 'local') {
-                Y.on('click', function(e) {
-                    var id, elm, title, body;
-                    e.preventDefault();
-                    id = this.get('rel').split(' ')[2];
-                    elm = Y.one('#' + id);
-                    title = elm && elm.get('title') ? elm.get('title') : '';
-                    body = elm ? elm.get('innerHTML') : '';
-                    showPanel(title, body, e.pageX, e.pageY);
-                }, popupAnchors[i]);
-            }
-        }
-    };
-    createEventHandlers();
-    Y.Global.on('lane:change', createEventHandlers);
+//    createEventHandlers = function() {
+//        var i, anchors, args, popupAnchors = [];
+//        anchors = Y.all('a');
+//        for (i = 0; i < anchors.size(); i++) {
+//            if (anchors.item(i).get('rel') && anchors.item(i).get('rel').indexOf('popup') === 0) {
+//                popupAnchors.push(anchors.item(i));
+//            }
+//        }
+//        for (i = 0; i < popupAnchors.length; i++) {
+//            args = popupAnchors[i].get('rel').split(' ');
+//            if (!panel && (args[1] == 'local')) {
+//                createPanel();
+//            }
+//            if (args[1] == 'standard' || args[1] == 'console' || args[1] == 'console-with-scrollbars' || args[1] == 'fullscreen') {
+//                Y.on('click', function(e) {
+//                    var args = this.get('rel').split(' ');
+//                    e.preventDefault();
+//                    showWindow(this.get('href'), args[1], args[2], args[3]);
+//                }, popupAnchors[i]);
+//            } else if (args[1] == 'local') {
+//                Y.on('click', function(e) {
+//                    var id, elm, title, body;
+//                    e.preventDefault();
+//                    id = this.get('rel').split(' ')[2];
+//                    elm = Y.one('#' + id);
+//                    title = elm && elm.get('title') ? elm.get('title') : '';
+//                    body = elm ? elm.get('innerHTML') : '';
+//                    showPanel(title, body, e.pageX, e.pageY);
+//                }, popupAnchors[i]);
+//            }
+//        }
+//    };
+//    createEventHandlers();
+//    Y.Global.on('lane:change', createEventHandlers);
+    Y.on("click", function(event) {
+    	var args, popupElement, title, body,
+    	    anchor = event.target.ancestor("a") || event.target,
+    	    rel = anchor.get("rel");
+    	if (rel && rel.indexOf("popup") === 0) {
+    		event.preventDefault();
+    		args = rel.split(" ");
+    		if (args[1] === "local") {
+    			maybeCreatePanel();
+    			popupElement = Y.one('#' + args[2]);
+    			title = popupElement && popupElement.get('title') ? popupElement.get('title') : '';
+    			body = popupElement ? popupElement.get('innerHTML') : '';
+    			showPanel(title, body, event.pageX, event.pageY);
+    		} else {
+    			showWindow(anchor.get("href"), args[1], args[2], args[3]);
+    		}
+    	}
+    });
 })();
