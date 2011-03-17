@@ -369,7 +369,7 @@
             </ul>
         </div>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:h="http://www.w3.org/1999/xhtml"
-            href="cocoon:/includes/tooltips.html" xpointer="xpointer(//h:div[@id='generalTooltips'])">
+            href="content:/includes/tooltips.html" xpointer="xpointer(//h:div[@id='generalTooltips'])">
             <xi:fallback/>
         </xi:include>
         <script type="text/javascript" src="/resources/javascript/yui.js?${project.version}"></script>
