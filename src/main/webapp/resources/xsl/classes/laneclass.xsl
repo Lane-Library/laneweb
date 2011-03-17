@@ -37,7 +37,6 @@
 
 
     <xsl:template match="h:p[@id='registration']">
-        
         <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[text() = $internal-id]/..">
         <xsl:if test="lc:event_status/text() = 'O'">
         <div>
@@ -51,7 +50,7 @@
                     <img>
                         <xsl:attribute name="class">module-img</xsl:attribute>
                         <xsl:choose>
-                            <xsl:when test="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:seats/text() &gt;=  /doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:registrations/text()">
+                            <xsl:when test="./lc:registrations/text() &gt;=  ./lc:seats/text()">
                                  <xsl:attribute name="src">/graphics/buttons/waitlist-button.png</xsl:attribute>
                             </xsl:when>
                             <xsl:otherwise>
@@ -59,7 +58,6 @@
                             </xsl:otherwise>
                         </xsl:choose>
                      </img> 
-                     
                  </a>
             </p>
             <h4>
