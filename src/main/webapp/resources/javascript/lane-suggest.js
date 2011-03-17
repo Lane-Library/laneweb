@@ -217,7 +217,7 @@ Y.Plugin.ACPlugin = Y.extend(
  **/
 function attachHandles (self, host) {
     var category = Y.stamp(this)+"|";
-    Y.on(category+"valueChange", valueChangeHandler, host, self);
+//    Y.on(category+"valueChange", valueChangeHandler, host, self);
     Y.on("valueChange", valueChangeHandler, host, self);
     // next/open on down
     Y.on(category+"key", self.next, host, "down:40", self);
@@ -235,7 +235,7 @@ function attachHandles (self, host) {
  * @private
  **/
 function valueChangeHandler (e) {
-    var value = e.value, instance = this;
+    var value = e.newVal, instance = this;
     if (!value) return this.close();
     if (value === this._cachedValue || value.length < this.get("minQueryLength")) return;
 
@@ -245,7 +245,7 @@ function valueChangeHandler (e) {
     instance._delayId = setTimeout(
         function() {
             instance._cachedValue = value;
-            instance.fire( "ac:query", { value : e.value });
+            instance.fire( "ac:query", { value : value });
         },
         instance.get('queryDelay')
     );
