@@ -212,6 +212,11 @@
                                 <span class="sourceLink">Lane Web Page</span>
                             </div>
                         </xsl:when>
+                        <xsl:when test="s:recordType = 'class'">
+                            <div class="moreResults">
+                                <span class="sourceLink">Lane Class</span>
+                            </div>
+                        </xsl:when>
                     </xsl:choose>
                 </li>
                 <xsl:apply-templates select="s:description"/>
