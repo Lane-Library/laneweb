@@ -122,7 +122,7 @@
                     picoTextInputs[0].setValue(picoTextInputs[0].getValue());
                 }
                 else{
-                    picoTextInputs[0].setValue(LANE.Search.getSearchTerms());
+                    picoTextInputs[0].setValue(Y.lane.Search.getSearchTerms());
                 }
             } else {
                 picoOff();
