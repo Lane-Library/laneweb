@@ -4,13 +4,15 @@
     version="2.0">
 
     <xsl:template match="/lc:classes">
+        <xsl:variable name="time"><xsl:value-of select="current-time()" /></xsl:variable>
+        <xsl:variable name="date"><xsl:value-of select="current-date()" /></xsl:variable>
         <xsl:copy>
             <lastmodified>
                 <date>
-                    <xsl:value-of select="current-date()" />
+                    <xsl:value-of select="year-from-date($date)" /><xsl:text>-</xsl:text><xsl:value-of select="month-from-date($date)" /><xsl:text>-</xsl:text><xsl:value-of select="day-from-date($date)" />
                 </date>
                 <time>
-                    <xsl:value-of select="current-time()" />
+                    <xsl:value-of select="hours-from-time($time)" /><xsl:text>:</xsl:text><xsl:value-of select="minutes-from-time($time)" /><xsl:text>:00</xsl:text>
                 </time>
             </lastmodified>
             <xsl:apply-templates />
