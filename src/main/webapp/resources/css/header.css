@@ -69,3 +69,14 @@ h1 a:visited {
 #libraryContact li:first-child {
     border-left:none;
 }
+li#chatHours {
+    background-image:url(/././resources/images/chat-top-off.png);
+    background-position:5px 0;
+    background-repeat: no-repeat;
+}
+li#chatHours:hover {
+    background-image:url(/././resources/images/chat-top-on.png);
+}
+#chatHours a {
+    margin-left:25px;
+}

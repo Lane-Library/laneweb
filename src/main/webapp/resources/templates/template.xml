@@ -28,10 +28,10 @@
                             <fieldset id="searchFields">
                                 <select name="source" id="searchSource">
                                     <option value="all-all"
-                                        title="Enter eJournal or Article Title, PMID, ISSN, or Author"
+                                        title="Subject, Title, Author, PMID, ISSN"
                                         >Lane Search</option>
                                     <option value="clinical-all"
-                                        title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ..."
+                                        title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed ..."
                                         >Clinical/PICO</option>
                                     <option value="peds-all"
                                         title="Find pediatric evidence from UpToDate, PubMed, and more ..."
@@ -45,7 +45,7 @@
                                         title="Find anatomical images from Lane's Bassett Collection"
                                         >Bassett Images</option>
                                 </select>
-                                <a id="searchTips" href="/help/choose-search.html">Choose Best Search for You</a>
+                                <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187;</span>
                                 <div id="searchIndicator"><img alt="[searching]"
                                         src="/resources/images/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
@@ -64,6 +64,7 @@
                             <li>650-723-6831</li>
                             <li><a href="/help/ask-us.html">Ask Us</a></li>
                             <li><a href="/about/hours-directions.html">Library Hours</a></li>
+                            <li id="chatHours"><a href="/help/live-chat.html">Live Chat</a></li>
                         </ul>
                         <ul id="login">
                             <li>
@@ -367,6 +368,10 @@
                 </li>
             </ul>
         </div>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:h="http://www.w3.org/1999/xhtml"
+            href="cocoon:/includes/tooltips.html" xpointer="xpointer(//h:div[@id='generalTooltips'])">
+            <xi:fallback/>
+        </xi:include>
         <script type="text/javascript" src="/resources/javascript/yui.js?${project.version}"></script>
         <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}"></script>
     </body>

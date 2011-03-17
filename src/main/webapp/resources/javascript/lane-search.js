@@ -5,7 +5,7 @@
     LANE.Search = function() {
         var searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
-            searchTipsLink = Y.one('#searchTips'),
+            searchTipsLink = Y.one('#searchTips a'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             searchIndicator = new LANE.SearchIndicator(),
             searchTextInput = new LANE.TextInput(form.one('#searchTerms')),

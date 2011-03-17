@@ -20,7 +20,7 @@
 }
 #picoFields {
     display:none;
-    left:27px;
+    left:37px;
     position:absolute;
     z-index:1;
     top:108px;
@@ -43,26 +43,36 @@
 /* webkit: remove border from active inputs */
     outline-style:none;
 }
-.yui3-js-enabled .clinical #searchTerms, .yui3-js-enabled .clinical #searchSubmit{
+.yui3-js-enabled .clinical #searchTerms{
     margin-left:160px;
     margin-top:34px;
+    width: 510px;
+}
+.yui3-js-enabled .clinical #searchSubmit{
+    margin-left:97px;
+    margin-top:33px;
 }
 .yui3-js-enabled .clinical #searchReset {
-    margin-left:157px;
+    margin-left:97px;
     margin-top:32px;
 }
 #searchSubmit {
     position:absolute;
-    top:27px;
+    top:25px;
     left:593px;
     background-color:transparent;
     border:medium none;
     cursor:pointer;
-    text-indent:20px;
-    width:20px;
-    height:20px;
+    text-indent:-1000px;
+    font-size: 0;
+    width:90px;
+    height:25px;
     border:none;
     padding-left:20px;
+}
+#searchSubmit:hover {
+    background-image: url(/././resources/images/search-button-on.png);
+    border-bottom: none;
 }
 #searchReset {
     display:none;
@@ -81,7 +91,7 @@
     display:none;
     position:absolute;
     top:0px;
-    left:390px;
+    left:280px;
     z-index:1;
 }
 #searchTips {
@@ -89,23 +99,29 @@
     top:3px;
     left:155px;
     color:white;
-    border-bottom:none;
-    text-decoration:underline;
     white-space:nowrap;
+    font-size:90%;
+}
+#searchTips a {
+    color:white;
+    border-bottom:1px dotted #fff;
+}
+#searchTips a:hover {
+    border-bottom:1px solid #fff;
 }
 #clinicalP {
     left:0px;
-    width:230px;
+    width:233px;
 }
 #clinicalI {
-    left:246px;
-    width:219px;
+    left:240px;
+    width:215px;
 }
 #clinicalC {
-    left:483px;
-    width:219px;
+    left:462px;
+    width:215px;
 }
 #clinicalO {
-    left:720px;
-    width:212px;
+    left:683px;
+    width:210px;
 }
