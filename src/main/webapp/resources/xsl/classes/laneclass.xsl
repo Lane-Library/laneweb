@@ -50,7 +50,7 @@
                     <img>
                         <xsl:attribute name="class">module-img</xsl:attribute>
                         <xsl:choose>
-                            <xsl:when test="./lc:registrations/text() &gt;=  ./lc:seats/text()">
+                            <xsl:when test="number(./lc:registrations/text()) &gt;=  number(./lc:seats/text())">
                                  <xsl:attribute name="src">/graphics/buttons/waitlist-button.png</xsl:attribute>
                             </xsl:when>
                             <xsl:otherwise>

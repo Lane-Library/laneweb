@@ -42,7 +42,7 @@
             </div>
             <div class="yui-u">
                 <h4>
-                      <xsl:if test="./lc:registrations/text() &gt;= ./lc:seats/text() ">
+                      <xsl:if test="number( ./lc:registrations/text()) &gt;= number( ./lc:seats/text()) ">
                       <b>
                         <xsl:attribute name="class">
                             <xsl:text>red-text</xsl:text>
@@ -122,7 +122,7 @@
                     <img>
                         <xsl:attribute name="class">module-img, module</xsl:attribute>
                         <xsl:choose>
-                            <xsl:when test=" ./lc:registrations/text() &gt;=  ./lc:seats/text()">
+                            <xsl:when test="number(./lc:registrations/text()) &gt;= number( ./lc:seats/text())">
                                  <xsl:attribute name="src">/graphics/buttons/waitlist-button.png</xsl:attribute>
                             </xsl:when>
                             <xsl:otherwise>
