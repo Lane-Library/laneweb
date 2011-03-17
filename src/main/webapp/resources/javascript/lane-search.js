@@ -1,15 +1,14 @@
 (function() {
-    var Y = LANE.Y,
-        form = Y.one("#search");//the form Element
+    var form = Y.one("#search");//the form Element
     if (form) {
-    LANE.Search = function() {
+    Y.lane.Search = function() {
         var searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             searchTipsLink = Y.one('#searchTips a'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
-            searchIndicator = new LANE.SearchIndicator(),
-            searchTextInput = new LANE.TextInput(form.one('#searchTerms')),
-            searchTermsSuggest = new LANE.Suggest(searchTextInput.getInput()),
+            searchIndicator = new Y.lane.SearchIndicator(),
+            searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
+            searchTermsSuggest = new Y.lane.Suggest(searchTextInput.getInput()),
             search;
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();

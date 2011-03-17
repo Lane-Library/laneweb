@@ -1,5 +1,5 @@
 (function() {
-    LANE.SearchResult = function() {
+    Y.lane.SearchResult = function() {
         var searchString,
             encodedSearchString,
             source;

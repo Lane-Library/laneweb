@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        gaPageTracker,
+    var gaPageTracker,
         gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
@@ -58,9 +57,9 @@
         }
         if (link) {
             if (link.ancestor(".lwSearchResults")) {
-                if (LANE.SearchResult.getSearchTerms()) {
+                if (Y.lane.SearchResult.getSearchTerms()) {
                     Y.fire("lane:searchResultClick", {
-                        searchTerms: LANE.SearchResult.getSearchTerms(),
+                        searchTerms: Y.lane.SearchResult.getSearchTerms(),
                         resultTitle: link.get('textContent'),
                         resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
                     });

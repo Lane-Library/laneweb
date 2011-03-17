@@ -171,7 +171,6 @@
                 container = args.bassett.get("content");
                 container.setContent(content);
                 args.bassett._registerLinksContainer(container);
-                Y.fire('lane:change');
             }
         });
         

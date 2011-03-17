@@ -10,7 +10,7 @@
      * invalid inputs gracefully and improve user experience.
      * @class Form
      */
-    var Y = LANE.Y, YL = Y.Lang, S4 = function() {
+    var YL = Y.Lang, S4 = function() {
         return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
     },
     /**

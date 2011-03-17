@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        Lang = Y.Lang,
+    var Lang = Y.Lang,
         Node = Y.Node,
         OX = -10000,
         OY = -10000,
@@ -474,13 +473,13 @@
                         e.target.reset();
                     }
                 });
-                LANE.ToolTips = tt;
+                Y.lane.ToolTips = tt;
             }
         };
     Y.Global.on('lane:change', function() {
-        if (LANE.ToolTips) {
-           LANE.ToolTips.destructor();
-           LANE.ToolTips = undefined;
+        if (Y.lane.ToolTips) {
+           Y.lane.ToolTips.destructor();
+           Y.lane.ToolTips = undefined;
         }
         createTooltips(); 
     });

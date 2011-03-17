@@ -7,7 +7,7 @@ YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','t
     var searchTestCase = new Y.Test.Case({
         
         name: 'Lane Search Test Case',
-        search: LANE.Search,
+        search: Y.lane.Search,
         
         searchTermsInput: Y.one('#searchTerms'),
         searchIndicator: Y.one('#searchIndicator'),

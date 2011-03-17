@@ -1,7 +1,7 @@
 (function() {
-    var Y = LANE.Y, self;
+    var self;
     
-    LANE.SearchReset = function() {
+    Y.lane.SearchReset = function() {
         var searchTerms = Y.one('#searchTerms'),
         searchReset = Y.one('#searchReset'),
         form = Y.one("#search"),
@@ -39,7 +39,7 @@
                 searchReset.setStyle("display", "none");
             },
             syncUI : function() {
-                if(LANE.Search.searchTermsPresent()){
+                if(Y.lane.Search.searchTermsPresent()){
                     reset.show();
                 }
                 else{
@@ -53,7 +53,7 @@
                 for(i = 0; i < inputs.size(); i++){
                     title = inputs.item(i).get('title');
                     if (title) {
-                        new LANE.TextInput(inputs.item(i), title);
+                        new Y.lane.TextInput(inputs.item(i), title);
                     }
                 }
                 inputs.item(0).focus();
@@ -68,7 +68,7 @@
         return reset;
     };
     if (Y.one("#search")) {
-        self = new LANE.SearchReset();
+        self = new Y.lane.SearchReset();
         self.syncUI();
     }
 })();

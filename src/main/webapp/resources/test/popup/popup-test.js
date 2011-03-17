@@ -12,20 +12,23 @@ YUI({
 //        testContainerExists: function() {
 //            Y.Assert.isTrue(Y.Lang.isObject(Y.one('#popupContainer')));
 //        },
-        testConsole: function() {
-            Y.all('a').item(0).simulate('click');
-        },
-        testStandard: function() {
-            Y.all('a').item(1).simulate('click');
-        },
-        testConsoleWithScrollbars: function() {
-            Y.all('a').item(2).simulate('click');
-        },
-        testFullscreen: function() {
-            Y.all('a').item(3).simulate('click');
-        },
-        testLocal: function() {
-            Y.all('a').item(4).simulate('click');
+//        testConsole: function() {
+//            Y.all('a').item(0).simulate('click');
+//        },
+//        testStandard: function() {
+//            Y.all('a').item(1).simulate('click');
+//        },
+//        testConsoleWithScrollbars: function() {
+//            Y.all('a').item(2).simulate('click');
+//        },
+//        testFullscreen: function() {
+//            Y.all('a').item(3).simulate('click');
+//        },
+//        testLocal: function() {
+//            Y.all('a').item(4).simulate('click');
+//        },
+        testFool: function() {
+            Y.all('a').item(5).simulate('click');
         }
     });
     

@@ -2,8 +2,7 @@
 // typing in .teletypeInput sends keystrokes to #search #searchTerms
 // if .teletypeInput has name p, i, c, o, keystrokes go to respective pico input
 (function() {
-    var Y = LANE.Y,
-    i, targetInput, 
+    var i, targetInput, 
     teletypeInputs = Y.all('.teletypeInput'),
     teletype = function(inputElm,targetElm){
         var qString;
@@ -27,7 +26,7 @@
             teletyperForm.on("submit",function(e){
                 e.halt();
                 try {
-                    LANE.Search.submitSearch();
+                    Y.lane.Search.submitSearch();
                 } catch (e) {
                     alert(e);
                 }

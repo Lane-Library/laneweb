@@ -1,10 +1,9 @@
 (function() {
-    var Y = LANE.Y,
-        elt = Y.one('#searchFacets'),
-        searchIndicator = new LANE.SearchIndicator(),
+    var elt = Y.one('#searchFacets'),
+        searchIndicator = new Y.lane.SearchIndicator(),
         facets, i, type, source, container;
-    LANE.namespace('search.facets');
-    LANE.search.facets = function(){
+    Y.namespace('lane.search.facets');
+    Y.lane.search.facets = function(){
         var currentResult;
         return {
             setCurrentResult: function(result){
@@ -19,8 +18,8 @@
                     if (result._state == 'initialized') {
                         result.show();
                     } else if (result._state == 'searched') {
-                        LANE.search.facets.getCurrentResult().hide();
-                        LANE.search.facets.setCurrentResult(result);
+                        Y.lane.search.facets.getCurrentResult().hide();
+                        Y.lane.search.facets.setCurrentResult(result);
                         result.show();
                     }
                 }
@@ -38,13 +37,13 @@
                     facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
                     if (facets.item(i).hasClass('current')) {
                         facets.item(i).getData('result').setContent(container.get('children'));
-                        LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
+                        Y.lane.search.facets.setCurrentResult(facets.item(i).getData('result'));
                     }
                     if (!(Y.UA.ie && Y.UA.ie < 8)) { // TODO: fix IE < 8 rendering of tooltips after import
                         Y.on('click',function(event) {
                             var result = this.getData('result');
                             try {
-                                LANE.Search.History.addValue("facet", this.getData('result')._source);
+                                Y.lane.Search.History.addValue("facet", this.getData('result')._source);
                             } catch (e) {
                                 //log somewhere ... no need to break/alert
                                 result.show();
@@ -61,7 +60,7 @@
         this._source = source;
         this._facet = facet;
         this._container = container;
-        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.SearchResult.getEncodedSearchTerms();
+        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + Y.lane.SearchResult.getEncodedSearchTerms();
         this._state = 'initialized';
         this._callback = {
             on: {
@@ -71,8 +70,8 @@
                     bodyNodes = o.responseXML.getElementsByTagName('body')[0];
                     content = new Y.Node(document.importNode(bodyNodes, true));
                     result.setContent(content.get('children'));
-                    LANE.search.facets.getCurrentResult().hide();
-                    LANE.search.facets.setCurrentResult(result);
+                    Y.lane.search.facets.getCurrentResult().hide();
+                    Y.lane.search.facets.setCurrentResult(result);
                     result.show();
                     Y.Global.fire('lane:change');
                 },
@@ -97,8 +96,8 @@
             } else if (this._state == 'searching') {
                 alert('search in progress');
             } else {
-                LANE.search.facets.getCurrentResult().hide();
-                LANE.search.facets.setCurrentResult(this);
+                Y.lane.search.facets.getCurrentResult().hide();
+                Y.lane.search.facets.setCurrentResult(this);
                 this._facet.addClass('current');
                 for(i = 0; i < this._content.size(); i++) {
                     this._container.append(this._content.item(i));

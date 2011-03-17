@@ -37,14 +37,14 @@ YUI({
 //    };
 //        
 //        testURL: function() {
-//            LANE.search.metasearch.initialize();
-//            LANE.search.metasearch.getResultCounts();
+//            Y.lane.search.metasearch.initialize();
+//            Y.lane.search.metasearch.getResultCounts();
 //            YAHOO.util.Assert.isTrue(url.indexOf('/././apps/search/json?q=foo&r=foo&rd=') === 0);
 //        },
 //        
 //        testSuccess: function() {
-//            LANE.search.metasearch.initialize();
-//            LANE.search.metasearch.getResultCounts();
+//            Y.lane.search.metasearch.initialize();
+//            Y.lane.search.metasearch.getResultCounts();
 //            jsonResult = {
 //                resources: []
 //            };

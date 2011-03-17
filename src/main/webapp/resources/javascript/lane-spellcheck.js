@@ -1,7 +1,6 @@
 (function() {
-    var Y = LANE.Y,
-        spellCheck = Y.one('#spellCheck'),
-        searchTerms = LANE.SearchResult.getEncodedSearchTerms(), trackingImg;
+    var spellCheck = Y.one('#spellCheck'),
+        searchTerms = Y.lane.SearchResult.getEncodedSearchTerms(), trackingImg;
     if (spellCheck && searchTerms) {
         //get the suggestion
         Y.io('/././apps/spellcheck/json?q=' + searchTerms, {

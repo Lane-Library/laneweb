@@ -1,5 +1,5 @@
 (function() {
-    var Y = LANE.Y, i, j, menus, nodes, node;
+    var i, j, menus, nodes, node;
     if (Y.UA.ie && Y.UA.ie < 7) {
         //instead of :first-child selector remove background image:
         node = Y.one('#stanfordMedicineBrand');

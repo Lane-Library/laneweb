@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        form = Y.one('#search'),
+    var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         searchTerms,
         picoIsOn = false,
@@ -57,7 +56,7 @@
                 if(queryString[inputs.item(i).get('name')] != undefined){
                     inputs.item(i).set('value',queryString[inputs.item(i).get('name')])
                 }
-                picoTextInputs.push(new LANE.TextInput(inputs.item(i), inputs.item(i).get('title')));
+                picoTextInputs.push(new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
                 inputs.item(i).on("blur",function(){
                     searchTerms.setValue(getPicoQuery());
                 });
@@ -66,13 +65,13 @@
                 });
                 switch(inputs.item(i).get('name')){
                     case 'p':
-                        picoSuggest = new LANE.Suggest(inputs.item(i),"l=mesh-d&");
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
                         break;
                     case 'i':
-                        picoSuggest = new LANE.Suggest(inputs.item(i),"l=mesh-i&");
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
                         break;
                     case 'c':
-                        picoSuggest = new LANE.Suggest(inputs.item(i),"l=mesh-di&");
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
                         break;
                 }
             }
@@ -96,7 +95,7 @@
         };
         Y.publish("lane:searchPicoChange",{broadcast:2});
     if (form) {
-        searchTerms = new LANE.TextInput(Y.one("#searchTerms"));
+        searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"))
         Y.Global.on("lane:suggestSelect",  function(event) {
             if(picoIsOn && getPicoQuery()){
                 searchTerms.setValue(getPicoQuery());

@@ -9,7 +9,7 @@ YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','t
     var resultTestCase = new Y.Test.Case({
         
         name: 'Lane Result Test Case',
-        result: LANE.SearchResult,
+        result: Y.lane.SearchResult,
         
         testGetSearchSource: function() {
             Y.Assert.areEqual('foo', this.result.getSearchSource());

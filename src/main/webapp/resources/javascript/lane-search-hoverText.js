@@ -1,6 +1,6 @@
 // hover text for search result abstracts and descriptions
 (function() {
-    var Y = LANE.Y, registerHoverTriggers = function() {
+    var registerHoverTriggers = function() {
         var hoverTargets = Y.all('.hvrTarg'), parentUl, label, i;
         for (i = 0; i < hoverTargets.size(); i++) {
             parentUl = hoverTargets.item(i).get('parentNode');

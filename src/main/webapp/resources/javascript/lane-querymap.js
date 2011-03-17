@@ -1,22 +1,21 @@
 //TODO: this needs some cleaning up
 //check if there is a query
 (function() {
-    if (LANE.SearchResult.getEncodedSearchTerms()) {
+    if (Y.lane.SearchResult.getEncodedSearchTerms()) {
         //check if there is id=queryMapping
-        var Y = LANE.Y,
-            queryMapping = Y.one('#queryMapping');
+        var queryMapping = Y.one('#queryMapping');
         if (queryMapping) {
-            Y.io('/././apps/querymap/json?q=' + LANE.SearchResult.getEncodedSearchTerms(), {
+            Y.io('/././apps/querymap/json?q=' + Y.lane.SearchResult.getEncodedSearchTerms(), {
                 on:{
                 success: function(id, o) {
                     var anchor, span, img, i;
-                    LANE.search.querymap = Y.JSON.parse(o.responseText);
-                    if (LANE.search.querymap.resourceMap) {
-                        LANE.search.querymap.getResultCounts = function() {
-                            var url = '/././apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms(), i;
-                            for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
-                                if (!LANE.search.querymap.resourceMap.resources[i].status) {
-                                    url += '&r=' + LANE.search.querymap.resourceMap.resources[i].id;
+                    Y.lane.search.querymap = Y.JSON.parse(o.responseText);
+                    if (Y.lane.search.querymap.resourceMap) {
+                        Y.lane.search.querymap.getResultCounts = function() {
+                            var url = '/././apps/search/json?q=' + Y.lane.SearchResult.getEncodedSearchTerms(), i;
+                            for (i = 0; i < Y.lane.search.querymap.resourceMap.resources.length; i++) {
+                                if (!Y.lane.search.querymap.resourceMap.resources[i].status) {
+                                    url += '&r=' + Y.lane.search.querymap.resourceMap.resources[i].id;
                                 }
                             }
                             url += '&rd=' + Math.random();
@@ -24,7 +23,7 @@
                                 on:{
                                     success: function(id, o) {
                                             var results = Y.JSON.parse(o.responseText),
-                                                rs = LANE.search.querymap.resourceMap.resources,
+                                                rs = Y.lane.search.querymap.resourceMap.resources,
                                                 i, needMore = false, result;
                                             for (i = 0; i < rs.length; i++) {
                                                 if (!rs[i].status) {
@@ -44,7 +43,7 @@
                                                 }
                                             }
                                             if (needMore) {
-                                                setTimeout(LANE.search.querymap.getResultCounts, 2000);
+                                                setTimeout(Y.lane.search.querymap.getResultCounts, 2000);
                                             }
                                             //queryMapping.style.display = 'inline';
                                             Y.Global.fire('lane:popin', queryMapping);
@@ -52,26 +51,26 @@
                                     }
                                 });
                             };
-                            for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
-                                LANE.search.querymap.resourceMap.resources[i].status = '';
+                            for (i = 0; i < Y.lane.search.querymap.resourceMap.resources.length; i++) {
+                                Y.lane.search.querymap.resourceMap.resources[i].status = '';
                                 span = document.createElement('span');
                                 anchor = document.createElement('a');
-                                anchor.title = 'QueryMapping: ' + LANE.search.querymap.resourceMap.resources[i].label;
+                                anchor.title = 'QueryMapping: ' + Y.lane.search.querymap.resourceMap.resources[i].label;
                                 span.appendChild(anchor);
-                                anchor.appendChild(document.createTextNode(LANE.search.querymap.resourceMap.resources[i].label));
+                                anchor.appendChild(document.createTextNode(Y.lane.search.querymap.resourceMap.resources[i].label));
                                 queryMapping.append(span);
-                                LANE.search.querymap.resourceMap.resources[i].anchor = anchor;
+                                Y.lane.search.querymap.resourceMap.resources[i].anchor = anchor;
                             }
                             if (document.getElementById('queryMappingDescriptor')) {
-                                document.getElementById('queryMappingDescriptor').appendChild(document.createTextNode(LANE.search.querymap.resourceMap.descriptor));
+                                document.getElementById('queryMappingDescriptor').appendChild(document.createTextNode(Y.lane.search.querymap.resourceMap.descriptor));
                             }
                             // track mapped term and descriptor
                             img = document.createElement('img');
                             img.style.display = "none";
-                            img.src = "/././resources/images/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor + "&k=" + LANE.SearchResult.getEncodedSearchTerms();
+                            img.src = "/././resources/images/spacer.gif?log=QM&d=" + Y.lane.search.querymap.resourceMap.descriptor + "&k=" + Y.lane.SearchResult.getEncodedSearchTerms();
                             queryMapping.append(img);
                             
-                            LANE.search.querymap.getResultCounts();
+                            Y.lane.search.querymap.getResultCounts();
                         }
                     }
                 }

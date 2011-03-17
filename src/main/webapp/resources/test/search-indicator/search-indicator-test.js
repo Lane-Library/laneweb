@@ -19,11 +19,11 @@ YUI({
             Y.Assert.isNull(Y.one("#searchIndicator"));
         },
         testConstructorCreatesImage: function() {
-            new LANE.SearchIndicator();
+            new Y.lane.SearchIndicator();
             Y.Assert.isObject(Y.one("#searchIndicator"));
         },
         testShowAndHide: function() {
-            var indicator = new LANE.SearchIndicator();
+            var indicator = new Y.lane.SearchIndicator();
             var node = Y.one("#searchIndicator");
             indicator.show();
             Y.Assert.areEqual("block", node.getStyle("display"));
@@ -31,8 +31,8 @@ YUI({
             Y.Assert.areEqual("none", node.getStyle("display"));
         },
         testTwoIndicatorsPlayNice: function() {
-            var indicator1 = new LANE.SearchIndicator();
-            var indicator2 = new LANE.SearchIndicator();
+            var indicator1 = new Y.lane.SearchIndicator();
+            var indicator2 = new Y.lane.SearchIndicator();
             Y.Assert.areEqual(1, Y.all("#searchIndicator").size());
             var node = Y.one("#searchIndicator");
             indicator1.show();

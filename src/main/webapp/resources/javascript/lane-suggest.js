@@ -16,7 +16,6 @@ function ACPlugin () { ACPlugin.superclass.constructor.apply(this, arguments) };
 
 // shorthands
 var autocomplete = "autocomplete",
-    Y = LANE.Y,
     YLang = Y.Lang,
     YArrayeach = Y.Array.each,
     eventDefaultBehavior = {
@@ -318,7 +317,7 @@ function handleQueryResponse (e) {
     }
 };
     
-    LANE.Suggest = function (input, limit) {
+    Y.lane.Suggest = function (input, limit) {
         var self = this, acWidget,
             baseUrl = '/././apps/suggest/json?',
             acDS  = new Y.DataSource.IO({source:baseUrl}),
@@ -516,5 +515,5 @@ function handleQueryResponse (e) {
         input.ac.on("ac:previous", acWidget.previous, acWidget);
         Y.on("key", acWidget.select, input, "down:13,10");
     };
-    Y.augment(LANE.Suggest,Y.EventTarget);
+    Y.augment(Y.lane.Suggest,Y.EventTarget);
 })();

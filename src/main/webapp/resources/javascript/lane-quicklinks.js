@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        qlNode = Y.one('#qlinks'),
+    var qlNode = Y.one('#qlinks'),
         qlOptions;
     if (qlNode) {
         Y.publish("lane:quickLinkClick",{
