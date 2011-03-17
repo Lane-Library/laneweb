@@ -22,7 +22,8 @@ public class SuggestionController {
 
     private static final String CLOSE_CALLBACK = ");";
 
-    private static final Pattern ER_PATTERN = Pattern.compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
+    private static final Pattern ER_PATTERN = Pattern
+            .compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
 
     private static final String JSON_1 = "{\"suggest\":[";
 
@@ -40,14 +41,16 @@ public class SuggestionController {
 
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
     private SuggestionManager meshSuggestionManager;
-    
+
     @RequestMapping(value = "/apps/suggest/json")
     @ResponseBody
-    public String getSuggestions(@RequestParam String q, @RequestParam(required = false) String l, @RequestParam(required = false) String callback) {
+    public String getSuggestions(@RequestParam String q, @RequestParam(required = false) String l,
+            @RequestParam(required = false) String callback) {
         String query = escapeQuotes(q);
+        SuggestionComparator comparator = new SuggestionComparator(query);
         Collection<Suggestion> suggestions = internalGetSuggestions(query, l);
-        List<Suggestion> result = new LinkedList<Suggestion>();
-        for (Suggestion suggestion: suggestions) {
+        TreeSet<Suggestion> result = new TreeSet<Suggestion>(comparator);
+        for (Suggestion suggestion : suggestions) {
             result.add(suggestion);
             if (result.size() >= JSON_RETURN_LIMIT) {
                 break;
@@ -69,19 +72,17 @@ public class SuggestionController {
         }
         return sb.toString();
     }
-    
+
     private Collection<Suggestion> internalGetSuggestions(String query, String limit) {
         if (ER_PATTERN.matcher(limit).matches()) {
             return this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
         } else if ("er-mesh".equals(limit)) {
-            SuggestionComparator comparator = new SuggestionComparator(query);
-            TreeSet<Suggestion> suggestions = new TreeSet<Suggestion>(comparator);
+            List<Suggestion> suggestions = new LinkedList<Suggestion>();
             suggestions.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm(query));
             suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
             return suggestions;
         } else if ("ej-mesh".equals(limit)) {
-            SuggestionComparator comparator = new SuggestionComparator(query);
-            TreeSet<Suggestion> suggestions = new TreeSet<Suggestion>(comparator);
+            List<Suggestion> suggestions = new LinkedList<Suggestion>();
             suggestions.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", query));
             suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
             return suggestions;
@@ -116,7 +117,7 @@ public class SuggestionController {
         }
         this.meshSuggestionManager = meshSuggestionManager;
     }
-    
+
     private String escapeQuotes(final String string) {
         String result = string;
         if (result.indexOf('"') > -1) {
