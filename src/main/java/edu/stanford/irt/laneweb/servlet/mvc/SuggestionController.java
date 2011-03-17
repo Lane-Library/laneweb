@@ -1,5 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import edu.stanford.irt.laneweb.suggest.SuggestionComparator;
+import edu.stanford.irt.suggest.Suggestion;
+import edu.stanford.irt.suggest.SuggestionManager;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,10 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import edu.stanford.irt.laneweb.suggest.SuggestionComparator;
-import edu.stanford.irt.suggest.Suggestion;
-import edu.stanford.irt.suggest.SuggestionManager;
 
 @Controller
 public class SuggestionController {
@@ -42,10 +42,26 @@ public class SuggestionController {
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
     private SuggestionManager meshSuggestionManager;
 
+    private String escapeQuotes(final String string) {
+        String result = string;
+        if (result.indexOf('"') > -1) {
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < result.length(); i++) {
+                char c = result.charAt(i);
+                if ('"' == c) {
+                    sb.append("\\");
+                }
+                sb.append(c);
+            }
+            result = sb.toString();
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/apps/suggest/json")
     @ResponseBody
-    public String getSuggestions(@RequestParam String q, @RequestParam(required = false) String l,
-            @RequestParam(required = false) String callback) {
+    public String getSuggestions(@RequestParam final String q, @RequestParam(required = false) final String l,
+            @RequestParam(required = false) final String callback) {
         String query = escapeQuotes(q);
         SuggestionComparator comparator = new SuggestionComparator(query);
         Collection<Suggestion> suggestions = internalGetSuggestions(query, l);
@@ -73,7 +89,7 @@ public class SuggestionController {
         return sb.toString();
     }
 
-    private Collection<Suggestion> internalGetSuggestions(String query, String limit) {
+    private Collection<Suggestion> internalGetSuggestions(final String query, final String limit) {
         if (ER_PATTERN.matcher(limit).matches()) {
             return this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
         } else if ("er-mesh".equals(limit)) {
@@ -116,21 +132,5 @@ public class SuggestionController {
             throw new IllegalArgumentException("null meshSuggestionManager");
         }
         this.meshSuggestionManager = meshSuggestionManager;
-    }
-
-    private String escapeQuotes(final String string) {
-        String result = string;
-        if (result.indexOf('"') > -1) {
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < result.length(); i++) {
-                char c = result.charAt(i);
-                if ('"' == c) {
-                    sb.append("\\");
-                }
-                sb.append(c);
-            }
-            result = sb.toString();
-        }
-        return result;
     }
 }
