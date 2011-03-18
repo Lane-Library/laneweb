@@ -120,7 +120,7 @@
                     </xsl:attribute>
                     <xsl:attribute name="class">image-link</xsl:attribute>
                     <img>
-                        <xsl:attribute name="class">module-img, module</xsl:attribute>
+                        <xsl:attribute name="class">module-img</xsl:attribute>
                         <xsl:choose>
                             <xsl:when test="number(./lc:registrations/text()) &gt;= number( ./lc:seats/text())">
                                  <xsl:attribute name="src">/graphics/buttons/waitlist-button.png</xsl:attribute>
