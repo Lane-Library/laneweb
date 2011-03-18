@@ -21,7 +21,6 @@
         <xsl:copy>
             <xsl:apply-templates />
             <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_name/text()" />
-            
         </xsl:copy>
     </xsl:template>
 
@@ -39,7 +38,7 @@
     <xsl:template match="h:p[@id='registration']">
         <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[text() = $internal-id]/..">
         <xsl:if test="lc:event_status/text() = 'O'">
-        <div>
+        <p>
             <p>
                 <a>
                     <xsl:attribute name="href">
@@ -68,49 +67,48 @@
                 <xsl:call-template  name="start-time"/>
                 <xsl:text>-</xsl:text>
                 <xsl:call-template  name="end-time"/>
-            </h4>    
+            </h4>
+            
             <h4> 
                 <xsl:attribute name="class">weak</xsl:attribute>
-                <xsl:variable name="link"><xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_website"></xsl:value-of> </xsl:variable> 
+             <xsl:choose>
+                <xsl:when test="./lc:more_info_url/text() != ''">
+                    <a>
+                        <xsl:attribute name="href">
+                    <xsl:value-of select="./lc:more_info_url/text()" />
+                    </xsl:attribute>
+                        <xsl:value-of select="./lc:speaker/text()" />
+                    </a>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="./lc:speaker/text()" />
+                </xsl:otherwise>
+            </xsl:choose>
+            </h4>
+                
+            <h4> 
+                <xsl:attribute name="class">weak</xsl:attribute>
+                <xsl:variable name="link"><xsl:value-of select="./lc:venue/lc:venue_website"></xsl:value-of> </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$link != ''">
                         <a>
                             <xsl:attribute name="href">
-                    <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_website/text()" />
+                    <xsl:value-of select="./lc:venue/lc:venue_website/text()" />
                     </xsl:attribute>
-                            <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_name" />
+                            <xsl:value-of select="./lc:venue/lc:venue_name" />
                         </a>
                         <xsl:if test="ends-with($link, '.pdf')"> <xsl:text> (.pdf)</xsl:text></xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_name" />
+                        <xsl:value-of select="./lc:venue/lc:venue_name" />
                     </xsl:otherwise>
                 </xsl:choose>
             </h4>
-         </div>
+         </p>
          </xsl:if>
         </xsl:for-each>
     </xsl:template>
 
-
-    <xsl:template match="h:p[@id='instructor']">
-        <xsl:copy>
-            <xsl:apply-templates />
-            <xsl:choose>
-                <xsl:when test="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:more_info_url/text() != ''">
-                    <a>
-                        <xsl:attribute name="href">
-                    <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:more_info_url/text()" />
-                    </xsl:attribute>
-                        <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:speaker/text()" />
-                    </a>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:speaker/text()" />
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:copy>
-    </xsl:template>
 
 
 
