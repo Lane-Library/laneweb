@@ -70,7 +70,8 @@
     			    bodyContent : body,
     			    x : event.pageX,
     			    y : event.pageY,
-    			    width : 334
+    			    width : 334,
+    			    constrain : true
     			});
     			bar.render();
     			bar.get("contentBox").one("a").on("click", function(event) {
