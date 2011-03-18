@@ -2,6 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>lane-popup javascript unit tests</title>
+        <style type="text/css">
+            .yui3-popup {
+                position : absolute;
+            }
+            .yui3-popup-hidden {
+                visibility : hidden
+            }</style>
     </head>
     <body>
         <ul>
@@ -10,7 +17,7 @@
             <li><a href="?" rel="popup console-with-scrollbars">console-with-scrollbars</a></li>
             <li><a href="?" rel="popup fullscreen">fullscreen</a></li>
             <li><a href="?" rel="popup local a">local</a></li>
-            <li><a href="foo.html" rel="popup foo">foo</a></li>
+            <li><a href="/index.html" rel="popup foo">foo</a></li>
         </ul>
         <div id="a" title="popup title"><p>popup body</p></div>
         <script type="text/javascript" src="/resources/javascript/yui.js"></script>

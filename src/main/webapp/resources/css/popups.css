@@ -1,36 +1,36 @@
 .popups {
-    display:none;
+    display : none;
 }
-#popupContainer {
-    background-color:#fff;
-    border:4px solid #B2A77A;
-    text-align:left;
-    visibility:hidden;
-    z-index:3;
+.yui3-popup-content {
+    background-color : #fff;
+    border : 4px solid #B2A77A;
+    text-align : left;
+    visibility : hidden;
+    z-index : 3;
 }
-.yui3-widget-hd {
-    background-color:#cdcfbe;
-    color:#820000;
-    font-family:Georgia, "Times New Roman", Times, serif;
-    font-size: 1.3em;
-    padding: 4px;
-    font-weight:bold;
-    cursor:move;
+.yui3-popup-content .yui3-widget-hd {
+    background-color : #cdcfbe;
+    color : #820000;
+    font-family : Georgia, "Times New Roman", Times, serif;
+    font-size : 1.3em;
+    padding : 4px;
+    font-weight : bold;
+    cursor : move;
 }
-.yui3-widget-hd a {
-    background-image:url(/././resources/images/close-button-off.gif);
-    width:22px;
-    height:22px;
-    position:absolute;
-    right:4px;
-    top:5px;
-    text-indent:-2000px;
+.yui3-popup-content .yui3-widget-hd a {
+    background-image : url(/././resources/images/close-button-off.gif);
+    width : 22px;
+    height : 22px;
+    position : absolute;
+    right : 4px;
+    top : 5px;
+    text-indent : -2000px;
 }
-.yui3-widget-hd a:hover {
-    background-image:url(/././resources/images/close-button-on.gif);
-    cursor:pointer;
+.yui3-popup-content .yui3-widget-hd a:hover {
+    background-image : url(/././resources/images/close-button-on.gif);
+    cursor : pointer;
 }
-.yui3-widget-bd {
-    padding: 4px;
-    font-size:90%;
+.yui3-popup-content .yui3-widget-bd {
+    padding : 4px;
+    font-size : 90%;
 }

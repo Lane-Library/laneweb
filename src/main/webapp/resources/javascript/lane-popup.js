@@ -1,5 +1,6 @@
 (function() {
-    var panel, container, maybeCreatePanel, showLocalPanel, showFooPanel, popupWindow, showWindow, createEventHandlers;
+	Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
+    var panel, container, maybeCreatePanel, showFooPanel, popupWindow, showWindow, createEventHandlers;
     maybeCreatePanel = function() {
     	if (!panel) {
             container = Y.Node.create('<div id="popupContainer"/>');
@@ -9,24 +10,22 @@
             });
     	}
     };
-    showLocalPanel = function(title, body, cX, cY) {
-        var width = (title.length * 7 > 334) ? title.length * 7 : 334;
-        panel.set('headerContent',title + '<a href="#">Close</a>');
-        panel.set('bodyContent', body);
-        panel.set('x', cX);
-        panel.set('y', cY);
-        panel.set('width',width);
-        panel.render();
-        panel.show();
-        container.setStyle('visibility','visible');
-        container.plug(Y.Plugin.Drag);
-        container.dd.addHandle(Y.one('#popupContainer .yui3-widget-hd'));
-        Y.on("click",function(){
-            panel.hide();
-            container.setStyle('visibility','hidden');
-        },Y.one('#popupContainer .yui3-widget-hd a'));
-        
-    };
+//    showLocalPanel = function(title, body, cX, cY) {
+//        var width = (title.length * 7 > 334) ? title.length * 7 : 334;
+//        panel.set('headerContent',title + '<a>Close</a>');
+//        panel.set('bodyContent', body);
+//        panel.set('x', cX);
+//        panel.set('y', cY);
+//        panel.set('width',width);
+//        panel.render();
+//        panel.show();
+//        container.plug(Y.Plugin.Drag);
+//        container.dd.addHandle(Y.one('#popupContainer .yui3-widget-hd'));
+//        Y.on("click",function(){
+//            panel.hide();
+//        },Y.one('#popupContainer .yui3-widget-hd a'));
+//        
+//    };
     showFooPanel = function(body) {
         panel.set('bodyContent', body);
         panel.render();
@@ -63,11 +62,20 @@
     		event.preventDefault();
     		args = rel.split(" ");
     		if (args[1] === "local") {
-    			maybeCreatePanel();
     			popupElement = Y.one('#' + args[2]);
     			title = popupElement && popupElement.get('title') ? popupElement.get('title') : '';
     			body = popupElement ? popupElement.get('innerHTML') : '';
-    			showLocalPanel(title, body, event.pageX, event.pageY);
+    			var bar = new Y.lane.Popup({
+    				headerContent : title + "<a>Close</a>",
+    			    bodyContent : body,
+    			    x : event.pageX,
+    			    y : event.pageY,
+    			    width : 334
+    			});
+    			bar.render();
+    			bar.get("contentBox").one("a").on("click", function(event) {
+    				bar.destroy();
+    			});
     		} else if (args[1] === "foo") {
     			href = anchor.get("href").replace(/(.+)\/\/([^\/]+)\/(.+)/, "$1//$2/plain/$3");
     			Y.io(href,{
