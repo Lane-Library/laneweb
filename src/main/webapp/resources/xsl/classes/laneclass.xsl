@@ -17,9 +17,9 @@
 
 
 
-    <xsl:template match="h:h4[@id='title']">
+    <xsl:template match="h:div[@id='class-title']">
         <xsl:copy>
-            <xsl:apply-templates />
+            <xsl:apply-templates select="attribute::node()|child::node()"/>
             <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_name/text()" />
         </xsl:copy>
     </xsl:template>
