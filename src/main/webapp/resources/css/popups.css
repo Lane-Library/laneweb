@@ -2,7 +2,11 @@
     display : none;
 }
 .yui3-popup {
-    z-index : 1
+    z-index : 1;
+    position : absolute
+}
+.yui3-popup-hidden {
+    visibility : hidden
 }
 .yui3-popup-content {
     background-color : #fff;

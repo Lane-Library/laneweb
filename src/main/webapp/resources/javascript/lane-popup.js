@@ -1,34 +1,32 @@
 (function() {
-	Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
-    var panel, container, maybeCreatePanel, showFooPanel, popupWindow, showWindow, createEventHandlers;
+    Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition]);
+    var popup, container, maybeCreatePanel, showFooPanel, popupWindow, showWindow, createEventHandlers;
     maybeCreatePanel = function() {
-    	if (!panel) {
+        if (!popup) {
             container = Y.Node.create('<div id="popupContainer"/>');
             Y.one('body').append(container);
-            panel = new Y.Overlay({
+            popup = new Y.Overlay({
                 srcNode: container
             });
-    	}
+        }
     };
 //    showLocalPanel = function(title, body, cX, cY) {
 //        var width = (title.length * 7 > 334) ? title.length * 7 : 334;
-//        panel.set('headerContent',title + '<a>Close</a>');
-//        panel.set('bodyContent', body);
-//        panel.set('x', cX);
-//        panel.set('y', cY);
-//        panel.set('width',width);
-//        panel.render();
-//        panel.show();
-//        container.plug(Y.Plugin.Drag);
-//        container.dd.addHandle(Y.one('#popupContainer .yui3-widget-hd'));
+//        popup.set('headerContent',title + '<a>Close</a>');
+//        popup.set('bodyContent', body);
+//        popup.set('x', cX);
+//        popup.set('y', cY);
+//        popup.set('width',width);
+//        popup.render();
+//        popup.show();
 //        Y.on("click",function(){
-//            panel.hide();
+//            popup.hide();
 //        },Y.one('#popupContainer .yui3-widget-hd a'));
 //        
 //    };
     showFooPanel = function(body) {
-        panel.set('bodyContent', body);
-        panel.render();
+        popup.set('bodyContent', body);
+        popup.render();
     };
     showWindow = function(url, type, strWidth, strHeight) {
         if (popupWindow !== undefined && !popupWindow.closed) {
@@ -55,42 +53,50 @@
         popupWindow.focus();
     };
     Y.on("click", function(event) {
-    	var args, href, popupElement, title, body,
-    	    anchor = event.target.ancestor("a") || event.target,
-    	    rel = anchor.get("rel");
-    	if (rel && rel.indexOf("popup") === 0) {
-    		event.preventDefault();
-    		args = rel.split(" ");
-    		if (args[1] === "local") {
-    			popupElement = Y.one('#' + args[2]);
-    			title = popupElement && popupElement.get('title') ? popupElement.get('title') : '';
-    			body = popupElement ? popupElement.get('innerHTML') : '';
-    			var bar = new Y.lane.Popup({
-    				headerContent : title + "<a>Close</a>",
-    			    bodyContent : body,
-    			    x : event.pageX,
-    			    y : event.pageY,
-    			    width : 334,
-    			    constrain : true
-    			});
-    			bar.render();
-    			bar.get("contentBox").one("a").on("click", function(event) {
-    				bar.destroy();
-    			});
-    		} else if (args[1] === "foo") {
-    			href = anchor.get("href").replace(/(.+)\/\/([^\/]+)\/(.+)/, "$1//$2/plain/$3");
-    			Y.io(href,{
-    				on : {
-    					success : function(id, o, args) {
-        					maybeCreatePanel();
-        					var body = o.responseXML.documentElement.getElementsByTagName("body")[0];
-        					showFooPanel(body.innerHTML);
-    				    }
-    				}
-    			});
-    		} else {
-    			showWindow(anchor.get("href"), args[1], args[2], args[3]);
-    		}
-    	}
+        var args, href, popupElement, title, body,
+            anchor = event.target.ancestor("a") || event.target,
+            rel = anchor.get("rel");
+        if (rel && rel.indexOf("popup") === 0) {
+            event.preventDefault();
+            args = rel.split(" ");
+            if (args[1] === "local") {
+                popupElement = Y.one('#' + args[2]);
+                title = popupElement && popupElement.get('title') ? popupElement.get('title') : '';
+                title += "<a>Close</a>";
+                body = popupElement ? popupElement.get('innerHTML') : '';
+                if (!popup) {
+                    popup = new Y.lane.Popup({
+                        headerContent : title,
+                        bodyContent : body,
+                        xy : [event.pageX, event.pageY],
+                        width : 334
+                    });
+                    popup.plug(Y.Plugin.Drag);
+                    popup.dd.addHandle(popup.get("contentBox"));
+                    popup.get("contentBox").on("click", function(event) {
+                        popup.hide();
+                    });
+                } else {
+                    popup.set("headerContent", title);
+                    popup.set("bodyContent", body);
+                    popup.set("xy",[event.pageX, event.pageY]);
+                }
+                popup.render();
+                popup.show();
+            } else if (args[1] === "foo") {
+                href = anchor.get("href").replace(/(.+)\/\/([^\/]+)\/(.+)/, "$1//$2/plain/$3");
+                Y.io(href,{
+                    on : {
+                        success : function(id, o, args) {
+                            maybeCreatePanel();
+                            var body = o.responseXML.documentElement.getElementsByTagName("body")[0];
+                            showFooPanel(body.innerHTML);
+                        }
+                    }
+                });
+            } else {
+                showWindow(anchor.get("href"), args[1], args[2], args[3]);
+            }
+        }
     });
 })();
