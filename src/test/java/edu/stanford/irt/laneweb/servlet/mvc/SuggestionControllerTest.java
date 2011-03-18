@@ -6,15 +6,15 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import edu.stanford.irt.suggest.Suggestion;
+import edu.stanford.irt.suggest.SuggestionManager;
+
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.stanford.irt.suggest.Suggestion;
-import edu.stanford.irt.suggest.SuggestionManager;
+import org.springframework.http.ResponseEntity;
 
 /**
  * @author ryanmax
@@ -44,9 +44,7 @@ public class SuggestionControllerTest {
     }
 
     /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.SuggestionController.SuggestionReader#generate()}
-     * .
+     * Test method for {@link edu.stanford.irt.laneweb.SuggestionController.SuggestionReader#generate()} .
      * 
      * @throws IOException
      */
@@ -56,15 +54,14 @@ public class SuggestionControllerTest {
         expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis");
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));
         replay(suggestion, this.eresource, this.history, this.mesh);
-        String suggestions = this.reader.getSuggestions("venous thrombosis", "mesh", null);
+        ResponseEntity<String> response = this.reader.getSuggestions("venous thrombosis", "mesh", null);
+        String suggestions = response.getBody();
         assertEquals("{\"suggest\":[\"Venous Thrombosis\"]}", suggestions);
         verify(suggestion, this.eresource, this.history, this.mesh);
     }
 
     /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.SuggestionController.SuggestionReader#generate()}
-     * .
+     * Test method for {@link edu.stanford.irt.laneweb.SuggestionController.SuggestionReader#generate()} .
      * 
      * @throws IOException
      */
@@ -72,7 +69,8 @@ public class SuggestionControllerTest {
     public void testGenerateCallback() throws IOException {
         expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion> emptyList());
         replay(this.eresource, this.history, this.mesh);
-        String suggestions = this.reader.getSuggestions("asdfgh", "mesh", "foo");
+        ResponseEntity<String> response = this.reader.getSuggestions("asdfgh", "mesh", "foo");
+        String suggestions = response.getBody();
         assertEquals("foo({\"suggest\":[]});", suggestions);
         verify(this.eresource, this.history, this.mesh);
     }
