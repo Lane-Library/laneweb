@@ -49,8 +49,8 @@
     width: 510px;
 }
 .yui3-js-enabled .clinical #searchSubmit{
-    margin-left:97px;
-    margin-top:33px;
+    margin-left:98px;
+    margin-top:32px;
 }
 .yui3-js-enabled .clinical #searchReset {
     margin-left:97px;
@@ -59,7 +59,7 @@
 #searchSubmit {
     position:absolute;
     top:25px;
-    left:593px;
+    left:592px;
     background-color:transparent;
     border:medium none;
     cursor:pointer;
@@ -100,7 +100,7 @@
     left:155px;
     color:white;
     white-space:nowrap;
-    font-size:90%;
+    font-size:80%;
 }
 #searchTips a {
     color:white;
