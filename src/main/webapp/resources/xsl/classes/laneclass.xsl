@@ -17,7 +17,7 @@
 
 
 
-    <xsl:template match="h:div[@id='class-title']">
+    <xsl:template match="h:h4[@id='class-title']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()|child::node()"/>
             <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_name/text()" />
@@ -70,7 +70,8 @@
             </h4>
             
             <h4> 
-                <xsl:attribute name="class">weak</xsl:attribute>
+             <xsl:attribute name="class">weak</xsl:attribute>
+             <xsl:text>With </xsl:text>
              <xsl:choose>
                 <xsl:when test="./lc:more_info_url/text() != ''">
                     <a>
@@ -88,6 +89,7 @@
                 
             <h4> 
                 <xsl:attribute name="class">weak</xsl:attribute>
+                <xsl:text>At </xsl:text>
                 <xsl:variable name="link"><xsl:value-of select="./lc:venue/lc:venue_website"></xsl:value-of> </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$link != ''">
