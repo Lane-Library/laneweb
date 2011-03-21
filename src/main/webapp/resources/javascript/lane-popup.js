@@ -1,29 +1,25 @@
 (function() {
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition]);
-    var popup, container, maybeCreatePanel, showFooPanel, popupWindow, showWindow, createEventHandlers;
-    maybeCreatePanel = function() {
+    var popup, container, maybeCreatePopup, showFooPanel, popupWindow, showWindow, createEventHandlers;
+    maybeCreatePopup = function(title, body, xy) {
         if (!popup) {
-            container = Y.Node.create('<div id="popupContainer"/>');
-            Y.one('body').append(container);
-            popup = new Y.Overlay({
-                srcNode: container
+            popup = new Y.lane.Popup({
+                headerContent : title,
+                bodyContent : body,
+                xy : xy,
+                width : 334
             });
+            popup.plug(Y.Plugin.Drag);
+            popup.dd.addHandle(popup.get("contentBox"));
+            popup.get("contentBox").on("click", function(event) {
+                popup.hide();
+            });
+        } else {
+            popup.set("headerContent", title);
+            popup.set("bodyContent", body);
+            popup.set("xy", xy);
         }
     };
-//    showLocalPanel = function(title, body, cX, cY) {
-//        var width = (title.length * 7 > 334) ? title.length * 7 : 334;
-//        popup.set('headerContent',title + '<a>Close</a>');
-//        popup.set('bodyContent', body);
-//        popup.set('x', cX);
-//        popup.set('y', cY);
-//        popup.set('width',width);
-//        popup.render();
-//        popup.show();
-//        Y.on("click",function(){
-//            popup.hide();
-//        },Y.one('#popupContainer .yui3-widget-hd a'));
-//        
-//    };
     showFooPanel = function(body) {
         popup.set('bodyContent', body);
         popup.render();
@@ -64,23 +60,7 @@
                 title = popupElement && popupElement.get('title') ? popupElement.get('title') : '';
                 title += "<a>Close</a>";
                 body = popupElement ? popupElement.get('innerHTML') : '';
-                if (!popup) {
-                    popup = new Y.lane.Popup({
-                        headerContent : title,
-                        bodyContent : body,
-                        xy : [event.pageX, event.pageY],
-                        width : 334
-                    });
-                    popup.plug(Y.Plugin.Drag);
-                    popup.dd.addHandle(popup.get("contentBox"));
-                    popup.get("contentBox").on("click", function(event) {
-                        popup.hide();
-                    });
-                } else {
-                    popup.set("headerContent", title);
-                    popup.set("bodyContent", body);
-                    popup.set("xy",[event.pageX, event.pageY]);
-                }
+                maybeCreatePopup(title, body, [event.pageX, event.pageY]);
                 popup.render();
                 popup.show();
             } else if (args[1] === "foo") {
