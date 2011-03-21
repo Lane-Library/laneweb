@@ -1,6 +1,7 @@
 (function() {
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition]);
-    var popup, container, maybeCreatePopup, showFooPanel, popupWindow, showWindow, createEventHandlers;
+    Y.lane.Foo = Y.Base.create("foo", Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign]);
+    var popup, container, maybeCreatePopup, maybeCreateFoo, popupWindow, showWindow, createEventHandlers, foo;
     maybeCreatePopup = function(title, body, xy) {
         if (!popup) {
             popup = new Y.lane.Popup({
@@ -20,9 +21,16 @@
             popup.set("xy", xy);
         }
     };
-    showFooPanel = function(body) {
-        popup.set('bodyContent', body);
-        popup.render();
+    maybeCreateFoo = function(body) {
+    	if (!foo) {
+    		foo = new Y.lane.Foo({
+    			centered : true
+    		});
+    		foo.get("contentBox").on("click", function(event) {
+    			foo.hide();
+    		});
+    	}
+        foo.get("contentBox").set("innerHTML", body);
     };
     showWindow = function(url, type, strWidth, strHeight) {
         if (popupWindow !== undefined && !popupWindow.closed) {
@@ -68,9 +76,11 @@
                 Y.io(href,{
                     on : {
                         success : function(id, o, args) {
-                            maybeCreatePanel();
                             var body = o.responseXML.documentElement.getElementsByTagName("body")[0];
-                            showFooPanel(body.innerHTML);
+                            maybeCreateFoo(body.innerHTML);
+                            foo.render();
+                            foo.centered();
+                            foo.show();
                         }
                     }
                 });

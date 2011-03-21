@@ -40,3 +40,13 @@
     padding : 4px;
     font-size : 90%;
 }
+
+
+.yui3-foo {
+    position : fixed;
+    z-index : 2
+}
+
+.yui3-foo-hidden {
+    visibility : hidden
+}
