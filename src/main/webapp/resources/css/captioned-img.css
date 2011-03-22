@@ -28,3 +28,16 @@
 .captioned-img div a:hover {
     border-bottom : 1px solid #820000;
 }
+
+/*light box related rules*/
+.yui3-lightbox-content .captioned-img {
+    padding : 18px;
+    background-color : #F7F3E7;
+    -moz-border-radius :5px;
+    -webkit-border-radius:5px;
+}
+.yui3-lightbox-content img {
+    padding : 11px;
+    background-color : white;
+    border : 1px #B7B7AD solid
+}

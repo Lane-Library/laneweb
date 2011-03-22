@@ -61,7 +61,7 @@
         popupWindow.focus();
     };
     Y.on("click", function(event) {
-        var args, href, popupElement, title, body,
+        var args, href, popupElement, title, body, regex,
             anchor = event.target.ancestor("a") || event.target,
             rel = anchor.get("rel");
         if (rel && rel.indexOf("popup") === 0) {
@@ -76,7 +76,9 @@
                 popup.render();
                 popup.show();
             } else if (args[1] === "lightbox") {
-                href = anchor.get("href").replace(/(.+)\/\/([^\/]+)\/(.+)/, "$1//$2/plain/$3");
+            	//need to dynamically create regex for getting /plain url because of various base paths (eg /stage)
+            	regex = new RegExp("(.+)//([^/]+)(/././)(.+)".replace(/\//g, "\\\/"));
+                href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
                 Y.io(href,{
                     on : {
                         success : function(id, o, args) {

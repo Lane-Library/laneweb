@@ -153,6 +153,7 @@
                                 <include>images-min.css</include>
                                 <include>bookmarks-min.css</include>
                                 <include>captioned-img-min.css</include>
+                                <include>lightbox-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
