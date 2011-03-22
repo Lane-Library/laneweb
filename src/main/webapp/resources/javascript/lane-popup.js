@@ -1,7 +1,8 @@
 (function() {
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition]);
-    Y.lane.Foo = Y.Base.create("foo", Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign]);
-    var popup, container, maybeCreatePopup, maybeCreateFoo, popupWindow, showWindow, createEventHandlers, foo;
+    Y.lane.Lightbox = Y.Base.create("lightbox", Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign]);
+    Y.lane.LightboxBg = Y.Base.create("lightboxbg", Y.Widget, []);
+    var popup, container, maybeCreatePopup, maybeCreateLightbox, popupWindow, showWindow, createEventHandlers, lightbox, lightboxbg;
     maybeCreatePopup = function(title, body, xy) {
         if (!popup) {
             popup = new Y.lane.Popup({
@@ -21,16 +22,19 @@
             popup.set("xy", xy);
         }
     };
-    maybeCreateFoo = function(body) {
-    	if (!foo) {
-    		foo = new Y.lane.Foo({
+    maybeCreateLightbox = function(body) {
+    	if (!lightbox) {
+    		lightbox = new Y.lane.Lightbox({
     			centered : true
     		});
-    		foo.get("contentBox").on("click", function(event) {
-    			foo.hide();
+    		lightboxbg = new Y.lane.LightboxBg();
+    		lightboxbg.render();
+    		lightbox.get("contentBox").on("click", function(event) {
+    			lightbox.hide();
+    			lightboxbg.hide();
     		});
     	}
-        foo.get("contentBox").set("innerHTML", body);
+        lightbox.get("contentBox").set("innerHTML", body);
     };
     showWindow = function(url, type, strWidth, strHeight) {
         if (popupWindow !== undefined && !popupWindow.closed) {
@@ -71,16 +75,17 @@
                 maybeCreatePopup(title, body, [event.pageX, event.pageY]);
                 popup.render();
                 popup.show();
-            } else if (args[1] === "foo") {
+            } else if (args[1] === "lightbox") {
                 href = anchor.get("href").replace(/(.+)\/\/([^\/]+)\/(.+)/, "$1//$2/plain/$3");
                 Y.io(href,{
                     on : {
                         success : function(id, o, args) {
                             var body = o.responseXML.documentElement.getElementsByTagName("body")[0];
-                            maybeCreateFoo(body.innerHTML);
-                            foo.render();
-                            foo.centered();
-                            foo.show();
+                            maybeCreateLightbox(body.innerHTML);
+                            lightbox.render();
+                            lightbox.centered();
+                            lightboxbg.show();
+                            lightbox.show();
                         }
                     }
                 });
