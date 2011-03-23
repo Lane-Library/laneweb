@@ -20,6 +20,7 @@ YUI({
 	
 	var eventOccurred = false;
 	
+	//FIXME: lane:change is no longer fired so this is broken
 	Y.on("lane:change", function() {
 		eventOccurred = true;
 	});

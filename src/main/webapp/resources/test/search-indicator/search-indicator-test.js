@@ -5,49 +5,49 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use("node-event-simulate", "console", "test", function(Y){
+}).use("node-event-simulate", "console", "test", function(T){
 
-    var searchIndicatorTestCase = new Y.Test.Case({
+    var searchIndicatorTestCase = new T.Test.Case({
         name: "Lane Search Indicator Test Case",
         setUp: function() {
-            var indicator = Y.one("#searchIndicator");
+            var indicator = T.one("#searchIndicator");
             if (indicator) {
                 indicator.remove();
             }
         },
         testImageNotPresent: function() {
-            Y.Assert.isNull(Y.one("#searchIndicator"));
+            T.Assert.isNull(T.one("#searchIndicator"));
         },
         testConstructorCreatesImage: function() {
             new Y.lane.SearchIndicator();
-            Y.Assert.isObject(Y.one("#searchIndicator"));
+            T.Assert.isObject(T.one("#searchIndicator"));
         },
         testShowAndHide: function() {
             var indicator = new Y.lane.SearchIndicator();
-            var node = Y.one("#searchIndicator");
+            var node = T.one("#searchIndicator");
             indicator.show();
-            Y.Assert.areEqual("block", node.getStyle("display"));
+            T.Assert.areEqual("block", node.getStyle("display"));
             indicator.hide();
-            Y.Assert.areEqual("none", node.getStyle("display"));
+            T.Assert.areEqual("none", node.getStyle("display"));
         },
         testTwoIndicatorsPlayNice: function() {
             var indicator1 = new Y.lane.SearchIndicator();
             var indicator2 = new Y.lane.SearchIndicator();
-            Y.Assert.areEqual(1, Y.all("#searchIndicator").size());
-            var node = Y.one("#searchIndicator");
+            T.Assert.areEqual(1, T.all("#searchIndicator").size());
+            var node = T.one("#searchIndicator");
             indicator1.show();
-            Y.Assert.areEqual("block", node.getStyle("display"));
+            T.Assert.areEqual("block", node.getStyle("display"));
             indicator2.hide();
-            Y.Assert.areEqual("none", node.getStyle("display"));
+            T.Assert.areEqual("none", node.getStyle("display"));
         }
     });
     
-    Y.one("body").addClass("yui3-skin-sam");
-    new Y.Console({
+    T.one("body").addClass("yui3-skin-sam");
+    new T.Console({
         newestOnTop: false
     }).render("#log");
     
     
-    Y.Test.Runner.add(searchIndicatorTestCase);
-    Y.Test.Runner.run();
+    T.Test.Runner.add(searchIndicatorTestCase);
+    T.Test.Runner.run();
 });
