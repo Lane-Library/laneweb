@@ -82,8 +82,7 @@
                 Y.io(href,{
                     on : {
                         success : function(id, o, args) {
-                            var body = o.responseXML.documentElement.getElementsByTagName("body")[0];
-                            maybeCreateLightbox(body.innerHTML);
+                            maybeCreateLightbox(o.responseText);
                             lightbox.render();
                             lightbox.centered();
                             lightboxbg.show();
@@ -95,5 +94,5 @@
                 showWindow(anchor.get("href"), args[1], args[2], args[3]);
             }
         }
-    });
+    }, document);
 })();
