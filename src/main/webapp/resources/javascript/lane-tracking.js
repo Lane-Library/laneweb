@@ -8,7 +8,7 @@ Y.on("click", function(event) {
 		link = target.plug(Y.lane.LinkPlugin).link;
 	}
 	Y.fire("trackable", link, event);
-});
+}, document);
 
 
 //put in a delay for webkit (safari) to make the tracking request:
