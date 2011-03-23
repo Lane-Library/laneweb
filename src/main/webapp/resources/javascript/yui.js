@@ -3,6 +3,7 @@ yui
 anim
 base
 datasource
+datatype
 dd-plugin
 event
 history
@@ -19,7 +20,7 @@ gallery-node-accordion
  */
 
 /*url:
-http://yui.yahooapis.com/combo?3.3.0/build/yui/yui-debug.js&3.3.0/build/oop/oop-debug.js&3.3.0/build/event-custom/event-custom-debug.js&3.3.0/build/pluginhost/pluginhost-debug.js&3.3.0/build/attribute/attribute-debug.js&3.3.0/build/base/base-debug.js&3.3.0/build/dom/dom-debug.js&3.3.0/build/dom/dom-style-ie-debug.js&3.3.0/build/event/event-debug.js&3.3.0/build/node/node-debug.js&3.3.0/build/event/event-base-ie-debug.js&3.3.0/build/anim/anim-debug.js&3.3.0/build/json/json-debug.js&3.3.0/build/history/history-debug.js&3.3.0/build/history/history-hash-ie-debug.js&3.3.0/build/plugin/plugin-debug.js&3.3.0/build/classnamemanager/classnamemanager-debug.js&3.3.0/build/widget/widget-debug.js&3.3.0/build/widget/widget-base-ie-debug.js&3.3.0/build/widget/widget-stdmod-debug.js&3.3.0/build/widget/widget-position-debug.js&3.3.0/build/widget/widget-position-align-debug.js&3.3.0/build/dd/dd-debug.js&3.3.0/build/dd/dd-gestures-debug.js&3.3.0/build/dd/dd-plugin-debug.js&3.3.0/build/cache/cache-base-debug.js&3.3.0/build/querystring/querystring-stringify-simple-debug.js&3.3.0/build/io/io-base-debug.js&3.3.0/build/dataschema/dataschema-debug.js&3.3.0/build/datasource/datasource-debug.js&3.3.0/build/querystring/querystring-parse-simple-debug.js&3.3.0/build/widget/widget-stack-debug.js&3.3.0/build/widget/widget-position-constrain-debug.js&3.3.0/build/overlay/overlay-debug.js&3.3.0/build/dump/dump-debug.js&gallery-2010.05.21-18-16/build/gallery-node-accordion/gallery-node-accordion-debug.js 
+http://yui.yahooapis.com/combo?3.3.0/build/yui/yui-debug.js&3.3.0/build/oop/oop-debug.js&3.3.0/build/event-custom/event-custom-debug.js&3.3.0/build/pluginhost/pluginhost-debug.js&3.3.0/build/attribute/attribute-debug.js&3.3.0/build/base/base-debug.js&3.3.0/build/dom/dom-debug.js&3.3.0/build/dom/dom-style-ie-debug.js&3.3.0/build/event/event-debug.js&3.3.0/build/node/node-debug.js&3.3.0/build/event/event-base-ie-debug.js&3.3.0/build/anim/anim-debug.js&3.3.0/build/json/json-debug.js&3.3.0/build/history/history-debug.js&3.3.0/build/history/history-hash-ie-debug.js&3.3.0/build/plugin/plugin-debug.js&3.3.0/build/classnamemanager/classnamemanager-debug.js&3.3.0/build/widget/widget-debug.js&3.3.0/build/widget/widget-base-ie-debug.js&3.3.0/build/widget/widget-stdmod-debug.js&3.3.0/build/widget/widget-position-debug.js&3.3.0/build/widget/widget-position-align-debug.js&3.3.0/build/dd/dd-debug.js&3.3.0/build/dd/dd-gestures-debug.js&3.3.0/build/dd/dd-plugin-debug.js&3.3.0/build/cache/cache-base-debug.js&3.3.0/build/querystring/querystring-stringify-simple-debug.js&3.3.0/build/io/io-base-debug.js&3.3.0/build/dataschema/dataschema-debug.js&3.3.0/build/datasource/datasource-debug.js&3.3.0/build/querystring/querystring-parse-simple-debug.js&3.3.0/build/widget/widget-stack-debug.js&3.3.0/build/widget/widget-position-constrain-debug.js&3.3.0/build/overlay/overlay-debug.js&3.3.0/build/intl/intl-debug.js&3.3.0/build/datatype/lang/datatype.js&3.3.0/build/datatype/datatype-debug.js&3.3.0/build/dump/dump-debug.js&gallery-2010.05.21-18-16/build/gallery-node-accordion/gallery-node-accordion-debug.js 
  */
 
 
