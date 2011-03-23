@@ -33,8 +33,7 @@
 .yui3-lightbox-content .captioned-img {
     padding : 18px;
     background-color : #F7F3E7;
-    -moz-border-radius :5px;
-    -webkit-border-radius:5px;
+    border-radius : 5px;
 }
 .yui3-lightbox-content img {
     padding : 11px;
