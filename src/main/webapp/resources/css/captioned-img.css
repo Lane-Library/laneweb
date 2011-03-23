@@ -2,6 +2,9 @@
 
 .captioned-img {
     text-align : center;
+    font-size : .9em;
+    font-family : Georgia, 'Times New Roman', Times, serif;
+    color : #666666;
 }
 .captioned-img.left {
     float : left;
@@ -12,9 +15,6 @@
     margin-left : 1em;
 }
 .captioned-img div {
-    font-size : .9em;
-    font-family : Georgia, 'Times New Roman', Times, serif;
-    color : #666666;
     padding : 0 5px;
 }
 .captioned-img a {
@@ -31,12 +31,13 @@
 
 /*light box related rules*/
 .yui3-lightbox-content .captioned-img {
+    font-size : 18px;
     padding : 18px;
-    background-color : #F7F3E7;
+    background-color : #F6F3E5;
     border-radius : 5px;
 }
-.yui3-lightbox-content img {
-    padding : 11px;
+.yui3-lightbox-content .captioned-img img {
+    padding : 9px;
     background-color : white;
-    border : 1px #B7B7AD solid
+    border : 1px #B5B3AA solid
 }
