@@ -39,8 +39,8 @@
                             <entry key="/search\.html\?source=(clinical|history)&amp;(.*)" value="/newpage.html?page=/search\.html\?source=$1-all%26$2"/>
                             <entry key="/search\.html\?source=research&amp;(.*)" value="/newpage.html?page=/search\.html\?source=bioresearch-all%26$1"/>
                             <entry key="/search\.html\?source=peds&amp;(.*)" value="/newpage.html?page=/portals\/peds\.html\?$1"/>
-                            <entry key="/local/antibiogram/index\.html" value="/newpage.html?page=/biomed-resources/antibiograms-shc.html"/>
-                            <entry key="/local/antibiogramLPCH/index\.html" value="/newpage.html?page=/biomed-resources/antibiograms-lpch.html"/>
+                            <entry key="/local/antibiogram/index\.html(.*)" value="/newpage.html?page=/biomed-resources/antibiograms-shc.html$1"/>
+                            <entry key="/local/antibiogramLPCH/index\.html(.*)" value="/newpage.html?page=/biomed-resources/antibiograms-lpch.html$1"/>
                             <entry key="/local/(antibiogram(?:LPCH)?)/(.*)" value="/newpage.html?page=/biomed-resources/$1/$2"/>
                         </map>
                     </property>
