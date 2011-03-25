@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -28,12 +29,21 @@ public class VoyagerLoginController {
 
     @Autowired
     private VoyagerLogin voyagerLogin;
-
-    @RequestMapping(value = "/secure/voyager.html")
-    public void voyagerLogin(@ModelAttribute(Model.UNIVID) final String univid, @RequestParam final String PID, final HttpServletRequest request,
+    
+    @RequestMapping(value = "/secure/voyager/{db}")
+    public void voyagerLogin(@PathVariable final String db, @ModelAttribute(Model.UNIVID) final String univid, @RequestParam final String PID, final HttpServletRequest request,
             final HttpServletResponse response) throws IOException {
         String queryString = request.getQueryString();
-        String url = this.voyagerLogin.getVoyagerURL(univid, PID, queryString);
+        String url = this.voyagerLogin.getVoyagerURL(db, univid, PID, queryString);
+        response.sendRedirect(url);
+    }
+    
+    //TODO: remove once Lane catalog server points to /secure/voyager/lmldb
+    @RequestMapping(value = "/secure/voyager.html")
+    public void laneVoyagerLogin(@ModelAttribute(Model.UNIVID) final String univid, @RequestParam final String PID, final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException {
+        String queryString = request.getQueryString();
+        String url = this.voyagerLogin.getVoyagerURL("lmldb", univid, PID, queryString);
         response.sendRedirect(url);
     }
 

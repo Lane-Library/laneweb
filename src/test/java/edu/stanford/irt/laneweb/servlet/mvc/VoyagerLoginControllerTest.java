@@ -32,13 +32,13 @@ public class VoyagerLoginControllerTest {
     }
 
     @Test
-    public void testAct() throws Exception {
+    public void testVoyagerLogin() throws Exception {
         expect(this.request.getQueryString()).andReturn("a=b");
-        expect(this.voyagerLogin.getVoyagerURL("1234", "123", "a=b")).andReturn("hello");
+        expect(this.voyagerLogin.getVoyagerURL("lmldb", "1234", "123", "a=b")).andReturn("hello");
         this.response.sendRedirect("hello");
         replay(this.voyagerLogin, this.request, this.response);
         this.voyagerLoginController.setVoyagerLogin(this.voyagerLogin);
-        this.voyagerLoginController.voyagerLogin("1234", "123", this.request, this.response);
+        this.voyagerLoginController.voyagerLogin("lmldb", "1234", "123", this.request, this.response);
         verify(this.voyagerLogin, this.request, this.response);
     }
 }
