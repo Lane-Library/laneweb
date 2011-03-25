@@ -11,11 +11,11 @@ import java.util.Map;
 
 import org.apache.avalon.framework.CascadingRuntimeException;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.cocoon.ProcessingException;
+import org.apache.cocoon.ResourceNotFoundException;
 import org.apache.cocoon.components.source.impl.MultiSourceValidity;
-import org.apache.cocoon.components.source.util.SourceUtil;
 import org.apache.cocoon.components.xpointer.XPointer;
 import org.apache.cocoon.components.xpointer.XPointerContext;
+import org.apache.cocoon.components.xpointer.parser.ParseException;
 import org.apache.cocoon.components.xpointer.parser.XPointerFrameworkParser;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
@@ -23,8 +23,6 @@ import org.apache.cocoon.xml.AbstractXMLPipe;
 import org.apache.cocoon.xml.IncludeXMLConsumer;
 import org.apache.cocoon.xml.XMLBaseSupport;
 import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceException;
-import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -286,13 +284,10 @@ class XIncludePipe extends AbstractXMLPipe {
                     String parse = attr.getValue("", PARSE);
                     String xpointer = attr.getValue("", XPOINTER);
                     try {
-                        processXIncludeElement(href, parse, xpointer);
-                    } catch (ProcessingException e) {
-                        getLogger().debug("Rethrowing exception", e);
-                        throw new SAXException(e);
-                    } catch (IOException e) {
-                        getLogger().debug("Rethrowing exception", e);
-                        throw new SAXException(e);
+                    	processXIncludeElement(href, parse, xpointer);
+                    } catch (Exception e) {
+                        this.useFallbackLevel++;
+                        getLogger().error("Error processing an xInclude, will try to use fallback.", e);
                     }
                 }
                 this.xIncludeElementLevel++;
@@ -344,11 +339,8 @@ class XIncludePipe extends AbstractXMLPipe {
                 || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
     }
 
-    private void parseText(final String xpointer, final Source url) throws SAXException, IOException {
+    private void parseText(final String xpointer, final Source url) throws IOException, SAXException {
         getLogger().debug("Parse type is text");
-        if (xpointer != null) {
-            throw new SAXException("xpointer attribute must not be present when parse='text': " + getLocation());
-        }
         InputStream is = null;
         InputStreamReader isr = null;
         Reader reader = null;
@@ -361,9 +353,6 @@ class XIncludePipe extends AbstractXMLPipe {
             while ((read = reader.read(ary)) != -1) {
                 super.characters(ary, 0, read);
             }
-        } catch (SourceNotFoundException e) {
-            this.useFallbackLevel++;
-            getLogger().error("xIncluded resource not found: " + url.getURI(), e);
         } finally {
             if (reader != null) {
                 reader.close();
@@ -377,24 +366,27 @@ class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
-    private void parseXML(final String xpointer, final Source url) throws ProcessingException {
+    private void parseXML(final String xpointer, final Source url) throws ParseException, SAXException, IOException {
         getLogger().debug("Parse type is XML");
         // Check loop inclusion
         if (isLoopInclusion(url.getURI(), xpointer)) {
-            throw new ProcessingException("Detected loop inclusion of href=" + url.getURI() + ", xpointer=" + xpointer);
+            throw new IllegalStateException("Detected loop inclusion of href=" + url.getURI() + ", xpointer=" + xpointer);
         }
         XIncludePipe subPipe = new XIncludePipe(this.sourceResolver, this.validity, this.serviceManager, this.saxParser);
         subPipe.init(url.getURI(), xpointer);
         subPipe.setConsumer(this.xmlConsumer);
         subPipe.setParent(this);
-        try {
             if ((xpointer != null) && (xpointer.length() > 0)) {
                 XPointer xptr = XPointerFrameworkParser.parse(URLDecoder.decode(xpointer, "UTF-8"));
                 XPointerContext context = new XPointerContext(xpointer, url, subPipe, this.serviceManager);
                 for (String prefix : this.namespaces.keySet()) {
                     context.addPrefix(prefix, this.namespaces.get(prefix));
                 }
-                xptr.process(context);
+                try {
+					xptr.process(context);
+				} catch (ResourceNotFoundException e) {
+					throw new IllegalStateException(e);
+				}
             } else if (url instanceof XMLizable) {
                 ((XMLizable) url).toSAX(new IncludeXMLConsumer(subPipe));
             } else {
@@ -413,45 +405,9 @@ class XIncludePipe extends AbstractXMLPipe {
             if (this.locator != null) {
                 this.xmlConsumer.setDocumentLocator(this.locator);
             }
-            // } catch (ResourceNotFoundException e) {
-            // this.useFallbackLevel++;
-            // this.fallBackException = new
-            // CascadingException("Resource not found: " + url.getURI());
-            // getLogger().error("xIncluded resource not found: " +
-            // url.getURI(), e);
-            // } catch (ParseException e) {
-            // // this exception is thrown in case of an invalid
-            // // xpointer expression
-            // this.useFallbackLevel++;
-            // this.fallBackException = new
-            // CascadingException("Error parsing xPointer expression", e);
-            // this.fallBackException.fillInStackTrace();
-            // getLogger().error("Error parsing XPointer expression, will try to use fallback.",
-            // e);
-            // } catch (SAXException e) {
-            // this.useFallbackLevel++;
-            // this.fallBackException = e;
-            // getLogger().error("Error processing an xInclude, will try to use fallback.",
-            // e);
-            // } catch (MalformedURLException e) {
-            // this.useFallbackLevel++;
-            // this.fallBackException = e;
-            // getLogger().error("Error processing an xInclude, will try to use fallback.",
-            // e);
-            // } catch (IOException e) {
-            // this.useFallbackLevel++;
-            // this.fallBackException = e;
-            // getLogger().error("Error processing an xInclude, will try to use fallback.",
-            // e);
-            // }
-        } catch (Exception e) {
-            this.useFallbackLevel++;
-            getLogger().error("Error processing an xInclude, will try to use fallback.", e);
-        }
     }
 
-    protected void processXIncludeElement(final String href, final String parse, final String xpointer) throws SAXException,
-            ProcessingException, IOException {
+    private void processXIncludeElement(final String href, final String parse, final String xpointer) throws IOException, SAXException, ParseException {
         if (getLogger().isDebugEnabled()) {
             getLogger().debug("Processing XInclude element: href=" + href + ", parse=" + parse + ", xpointer=" + xpointer);
         }
@@ -464,7 +420,7 @@ class XIncludePipe extends AbstractXMLPipe {
             // document -- this can be different than the current base
             if ((href == null) || (href.length() == 0)) {
                 if (this.href == null) {
-                    throw new SAXException(
+                    throw new IllegalArgumentException(
                             "XIncludeTransformer: encountered empty href (= href pointing to the current document) but the location of the current document is unknown.");
                 }
                 localHref = this.href;
@@ -479,11 +435,7 @@ class XIncludePipe extends AbstractXMLPipe {
                 parseText(xpointer, url);
             } else if ("xml".equals(localParse)) {
                 parseXML(xpointer, url);
-            } else {
-                throw new SAXException("Found 'parse' attribute with unknown value " + localParse + " at " + getLocation());
             }
-        } catch (SourceException se) {
-            throw SourceUtil.handle(se);
         } finally {
             if (url != null) {
                 this.sourceResolver.release(url);
