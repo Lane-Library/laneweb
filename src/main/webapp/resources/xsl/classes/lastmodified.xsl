@@ -9,10 +9,10 @@
         <xsl:copy>
             <lastmodified>
                 <date>
-                    <xsl:value-of select="year-from-date($date)" /><xsl:text>-</xsl:text><xsl:value-of select="month-from-date($date)" /><xsl:text>-</xsl:text><xsl:value-of select="day-from-date($date)" />
+                    <xsl:value-of select="year-from-date($date)" /><xsl:text>-</xsl:text> <xsl:value-of select="format-number(month-from-date($date),'00')" /><xsl:text>-</xsl:text><xsl:value-of select="format-number(day-from-date($date),'00')" />
                 </date>
                 <time>
-                    <xsl:value-of select="hours-from-time($time)" /><xsl:text>:</xsl:text><xsl:value-of select="minutes-from-time($time)" /><xsl:text>:00</xsl:text>
+                    <xsl:value-of select="format-number(hours-from-time($time),'00')" /><xsl:text>:</xsl:text><xsl:value-of select="format-number(minutes-from-time($time),'00')" /><xsl:text>:00</xsl:text>
                 </time>
             </lastmodified>
             <xsl:apply-templates />
