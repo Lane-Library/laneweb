@@ -115,7 +115,7 @@
 }
 .top-resources.uptodate {
     background-position : 0 -96px;
-    margin-bottom : 10px;
+    margin-bottom : 10px
 }
 .top-resources.uptodate:hover {
     background-position : -301px -96px;

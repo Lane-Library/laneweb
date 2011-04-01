@@ -39,7 +39,7 @@
     position : absolute;
     border : 1px #D6D5C7 solid;
     border-top : none;
-    padding-bottom : 6px;
+    padding : 6px 0;
     z-index : 2;
     background-image : url(/././resources/images/menu-bg.gif);
     background-position : 0 100%;
