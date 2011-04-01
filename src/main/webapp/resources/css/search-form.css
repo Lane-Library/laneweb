@@ -1,127 +1,127 @@
 #search {
-    background-image:url(/././resources/images/search-bg.jpg);
-    padding-top:8px;
-    padding-left:28px;
-    height:94px;
+    background-image : url(/././resources/images/search-bg.jpg);
+    padding-top : 8px;
+    padding-left : 28px;
+    height : 10px;
 }
 .yui3-js-enabled #search.clinical {
-    background-image:url(/././resources/images/clin-search-bg.jpg);
-    height:124px;
+    background-image : url(/././resources/images/clin-search-bg.jpg);
+    height : 140px;
 }
 #searchSource {
-    display:block;
-    width:140px;
+    display : block;
+    width : 140px;
 }
 #searchFields {
-    position:absolute;
-    z-index:1;
-    left:27px;
-    top:78px;
+    position : absolute;
+    z-index : 1;
+    left : 27px;
+    top : 78px;
 }
 #picoFields {
-    display:none;
-    left:37px;
-    position:absolute;
-    z-index:1;
-    top:108px;
+    display : none;
+    left : 37px;
+    position : absolute;
+    z-index : 1;
+    top : 108px;
 }
 #picoFields input {
-    border:1px solid white;
-    position:absolute;
+    border : 1px solid white;
+    position : absolute;
     /* Mobile Safari: remove rounded corners and input shadow */
-    -webkit-appearance: none;
+    -webkit-appearance : none;
 }
 #searchTerms {
-    width:570px;
-    border:1px solid white;
-    position:absolute;
-    top:29px;
+    width : 570px;
+    border : 1px solid white;
+    position : absolute;
+    top : 29px;
     /* Mobile Safari: remove rounded corners and input shadow */
-    -webkit-appearance: none;
+    -webkit-appearance : none;
 }
 #search input:focus {
-/* webkit: remove border from active inputs */
-    outline-style:none;
+    /* webkit: remove border from active inputs */
+    outline-style : none;
 }
-.yui3-js-enabled .clinical #searchTerms{
-    margin-left:160px;
-    margin-top:34px;
-    width: 510px;
+.yui3-js-enabled .clinical #searchTerms {
+    margin-left : 160px;
+    margin-top : 34px;
+    width : 510px;
 }
-.yui3-js-enabled .clinical #searchSubmit{
-    margin-left:98px;
-    margin-top:32px;
+.yui3-js-enabled .clinical #searchSubmit {
+    margin-left : 98px;
+    margin-top : 32px;
 }
 .yui3-js-enabled .clinical #searchReset {
-    margin-left:97px;
-    margin-top:32px;
+    margin-left : 97px;
+    margin-top : 32px;
 }
 #searchSubmit {
-    position:absolute;
-    top:25px;
-    left:592px;
-    background-color:transparent;
-    border:medium none;
-    cursor:pointer;
-    text-indent:-1000px;
-    font-size: 0;
-    width:90px;
-    height:25px;
-    border:none;
-    padding-left:20px;
+    position : absolute;
+    top : 25px;
+    left : 592px;
+    background-color : transparent;
+    border : medium none;
+    cursor : pointer;
+    text-indent : -1000px;
+    font-size : 0;
+    width : 90px;
+    height : 25px;
+    border : none;
+    padding-left : 20px;
 }
 #searchSubmit:hover {
-    background-image: url(/././resources/images/search-button-on.png);
-    border-bottom: none;
+    background-image : url(/././resources/images/search-button-on.png);
+    border-bottom : none;
 }
 #searchReset {
-    display:none;
-    position:absolute;
-    top:24px;
-    left:575px;
-    color:#A1B9ED;
-    border-bottom:none;
-    font-size:175%;
+    display : none;
+    position : absolute;
+    top : 24px;
+    left : 575px;
+    color : #A1B9ED;
+    border-bottom : none;
+    font-size : 175%;
     /*font:24px Arial,sans-serif;*/
 }
 #searchReset:hover {
-    color:#79455C;
+    color : #79455C;
 }
 #searchIndicator {
-    display:none;
-    position:absolute;
-    top:0px;
-    left:280px;
-    z-index:1;
+    display : none;
+    position : absolute;
+    top : 0px;
+    left : 280px;
+    z-index : 1;
 }
 #searchTips {
-    position:absolute;
-    top:3px;
-    left:155px;
-    color:white;
-    white-space:nowrap;
-    font-size:80%;
+    position : absolute;
+    top : 3px;
+    left : 155px;
+    color : white;
+    white-space : nowrap;
+    font-size : 80%;
 }
 #searchTips a {
-    color:white;
-    border-bottom:1px dotted #fff;
+    color : white;
+    border-bottom : 1px dotted #fff;
 }
 #searchTips a:hover {
-    border-bottom:1px solid #fff;
+    border-bottom : 1px solid #fff;
 }
 #clinicalP {
-    left:0px;
-    width:233px;
+    left : 0px;
+    width : 233px;
 }
 #clinicalI {
-    left:240px;
-    width:215px;
+    left : 240px;
+    width : 215px;
 }
 #clinicalC {
-    left:462px;
-    width:215px;
+    left : 462px;
+    width : 215px;
 }
 #clinicalO {
-    left:683px;
-    width:210px;
+    left : 683px;
+    width : 210px;
 }
