@@ -2,10 +2,10 @@
     position : absolute;
     top : 144px;
     width : 100%;
-    height : 30px;
+    height : 46px;
     /* IE6 doesn't get width 100% right */
     _width : 989px;
-    background-image : url(/././resources/images/main-nav-bg.gif);
+    background-image : url(/././resources/images/laneNavBg1.png);
 }
 .yui3-js-enabled #laneNav.clinical {
     top : 174px;
@@ -14,13 +14,14 @@
     float : left;
 }
 #laneNav a {
-    color : black;
-    padding : 7px 20px;
+    color : #3C3623;
+    padding : 14px;
     text-decoration : none;
     border-bottom : none;
     display : block;
-    font-weight : bold;
-    font-size : 13px;
+    font-size : 15px;
+    text-shadow : 0 1px 0 #DEDCB4;
+    font-family : Georgia, 'Times New Roman', Times, serif;
 }
 #laneNav li:hover a,
 #laneNav .hover a,
@@ -61,6 +62,8 @@
     padding : 0;
     color : #1C4B70;
     border-bottom : 1px dotted #81785A;
+    font-family : arial, helvetica, clean, sans-serif;
+    text-shadow : none
 }
 #laneNav ul a:hover {
     color : #820000;
