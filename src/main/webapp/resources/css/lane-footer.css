@@ -1,0 +1,27 @@
+#laneFooter {
+    background-color : #F6F7F2;
+    background-image : url(/././resources/images/laneFooterBg1.png);
+    background-repeat : repeat-x;
+    padding : 29px
+}
+
+#laneFooter a {
+    font-family : Georgia;
+    font-size : 15px;
+    border-bottom : none;
+    letter-spacing : .5px
+}
+
+#laneFooter ul {
+    padding-top : 3px
+}
+
+#laneFooter li {
+    padding : 1.5px 0
+}
+
+#laneFooter ul a {
+    font-family : arial;
+    font-size : 11px;
+    letter-spacing : normal
+}

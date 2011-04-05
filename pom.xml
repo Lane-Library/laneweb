@@ -19,8 +19,8 @@
         <url>http://irt-bugs.stanford.edu/default.php</url>
     </issueManagement>
     <ciManagement>
-        <system>Hudson</system>
-        <url>https://irt-dev.stanford.edu/hudson/job/Laneweb/</url>
+        <system>Jenson</system>
+        <url>https://irt-lane-stage.stanford.edu/hudson/job/laneweb/</url>
     </ciManagement>
     <developers>
         <developer>
@@ -30,10 +30,16 @@
             <organization>IRT Systems Development</organization>
         </developer>
         <developer>
-            <id>tpod</id>
-            <name>Tanya Podchiyska</name>
-            <email>tpod@stanford.edu</email>
+            <id>alainb</id>
+            <name>Alain Broussard</name>
+            <email>alainb@stanford.edu</email>
             <organization>IRT Systems Development</organization>
+        </developer>
+        <developer>
+            <id>olgary</id>
+            <name>Olya Gary</name>
+            <email>olgary@stanford.edu</email>
+            <organization>Lane Medical Library</organization>
         </developer>
         <developer>
             <id>ryanmax</id>
@@ -42,10 +48,10 @@
             <organization>Lane Medical Library</organization>
         </developer>
         <developer>
-            <id>alainb</id>
-            <name>Alain Broussard</name>
-            <email>alainb@stanford.edu</email>
-            <organization>IRT Systems Development</organization>
+            <id>rzwies</id>
+            <name>Rick Zwies</name>
+            <email>rzwies@stanford.edu</email>
+            <organization>Lane Medical Library</organization>
         </developer>
     </developers>
     <scm>
@@ -130,7 +136,8 @@
                                 <include>lane-nav-min.css</include>
                                 <include>lists-min.css</include>
                                 <include>anchors-min.css</include>
-                                <include>footer-min.css</include>
+                                <include>som-footer-min.css</include>
+                                <include>lane-footer-min.css</include>
                                 <include>headers-min.css</include>
                                 <include>module-min.css</include>
                                 <include>autocomplete-min.css</include>
@@ -385,7 +392,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.28</version>
+            <version>1.6.29</version>
         </dependency>
         <dependency>
             <artifactId>log4j</artifactId>
@@ -660,7 +667,7 @@
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-core</artifactId>
-            <version>1.25.0</version>
+            <version>1.26.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

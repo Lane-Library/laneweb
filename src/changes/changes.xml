@@ -7,6 +7,55 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-04-04" version="1.11.25" description="1.11.25 bug fix release">
+            <action date="2011-04-01" dev="ryanmax" issue="48732" type="fix">
+                cached background images
+            </action>
+            <action date="2011-04-01" dev="ceyates" issue="48695" type="update">
+                design change for yellow bar and main nav
+            </action>
+        </release>
+        <release date="2011-03-28" version="1.11.24" description="1.11.24 bug fix release">
+            <action date="2011-03-25" dev="ceyates" issue="48461" type="fix">
+                xinclude fallback not processed when source resolution fails
+            </action>
+            <action date="2011-03-23" dev="ryanmax" issue="48354" type="fix">
+                redirect for /local/antibiogram/index.html?loadTab=general
+            </action>
+        </release>
+        <release date="2011-03-21" version="1.11.23" description="1.11.23 bug fix release">
+            <action date="2011-03-21" dev="ceyates" issue="48267" type="remove">
+                remove redirects that are no longer needed
+            </action>
+            <action date="2011-03-18" dev="ceyates" issue="47981" type="add">
+                top 3 resources - buttons instead of links
+            </action>
+            <action date="2011-03-18" dev="ryanmax" issue="47779" type="update">
+                changes to the top red bar  - step 1
+            </action>
+            <action date="2011-03-15" dev="ceyates" issue="47339" type="add">
+                provide style rules for images with captions
+            </action>
+        </release>
+        <release date="2011-03-14" version="1.11.22" description="1.11.22 bug fix release">
+            <action date="2011-03-09" dev="ryanmax" issue="47997" type="fix">
+                Clinical &amp; Peds Search: text disappears from main search box (not PICO though)
+            </action>
+            <action date="2011-03-14" dev="ryanmax" issue="47746" type="update">
+                Express Lane - Login 
+            </action>
+        </release>
+        <release date="2011-03-07" version="1.11.21" description="1.11.21 bug fix release">
+            <action date="2011-03-03" dev="ryanmax" issue="47795" type="fix">
+                Feedback: switching to Clinical and starting to type changes search mode instead of completing form
+            </action>
+            <action date="2011-03-02" dev="ryanmax" issue="47770" type="fix">
+                IE7: #1 result item -- "show" abstract/info box top of box is cut off
+            </action>
+            <action date="2011-03-03" dev="ryanmax" issue="47745" type="fix">
+                Express Lane - Page titles match link names
+            </action>
+        </release>
         <release date="2011-03-02" version="1.11.20" description="1.11.20 emergency release">
             <action date="2011-03-01" dev="alainb" type="fix">
                 country of original showing instead of PubMed journal titles
