@@ -66,14 +66,14 @@
         <div class="details">
             <div class="module">
                 <p>
-                    <xsl:param name="description-text" select="./lc:event_description" />
-                    <xsl:param name="firstParagraphDescription" select="substring-before($description-text, '.')" />
-                    <xsl:param name="first-words">
+                    <xsl:variable name="description-text" select="./lc:event_description" />
+                    <xsl:variable name="firstParagraphDescription" select="substring-before($description-text, '.')" />
+                    <xsl:variable name="first-words">
                         <xsl:call-template name="firstWords">
                             <xsl:with-param name="value" select="$description-text" />
                             <xsl:with-param name="count" select="50" />
                         </xsl:call-template>
-                    </xsl:param>
+                    </xsl:variable>
                     <xsl:choose>
                         <xsl:when test="count(tokenize($description-text, '\W+')[. != ''])  &gt; 50">
                             <xsl:choose>
