@@ -38,15 +38,6 @@ public class VoyagerLoginController {
         response.sendRedirect(url);
     }
     
-    //TODO: remove once Lane catalog server points to /secure/voyager/lmldb
-    @RequestMapping(value = "/secure/voyager.html")
-    public void laneVoyagerLogin(@ModelAttribute(Model.UNIVID) final String univid, @RequestParam final String PID, final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException {
-        String queryString = request.getQueryString();
-        String url = this.voyagerLogin.getVoyagerURL("lmldb", univid, PID, queryString);
-        response.sendRedirect(url);
-    }
-
     public void setVoyagerLogin(VoyagerLogin voyagerLogin) {
         this.voyagerLogin = voyagerLogin;
     }
