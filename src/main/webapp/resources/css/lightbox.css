@@ -16,3 +16,12 @@
     height : 100%;
     z-index : 2
 }
+#lightboxClose {
+    display : block;
+    width : 30px;
+    height : 30px;
+    background-color : red;
+    position : absolute;
+    right : -15px;
+    top : -15px;
+}

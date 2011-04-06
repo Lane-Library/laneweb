@@ -56,9 +56,11 @@
 	
 	Y.lane.Feedback = Feedback;
 	
+	Y.lane.Lightbox.on("contentChanged", function(event) {
 	if (Y.one("#feedback")) {
-			var feedback = new Y.lane.Feedback({srcNode : "#feedback"});
-			feedback.render();
-	}
+		var feedback = new Y.lane.Feedback({srcNode : "#feedback"});
+		feedback.render();
+      }
+	});
 	
 })();

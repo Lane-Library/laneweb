@@ -6,20 +6,27 @@
         visible : false
     });
 
-    var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign ]);
+    var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign ], {
+    		setContent : function(content) {
+    			this.get("contentBox").set("innerHTML", content);
+    			this.fire("contentChanged");
+    			this.centered();
+    		}
+    });
 
     Y.lane.Lightbox = new Lightbox({
         visible : false
-    });   
+    });  
     
+    Y.lane.Lightbox.get("boundingBox").append("<a href='#' id='lightboxClose'>close</a>");
+    Y.lane.Lightbox.get("boundingBox").one("#lightboxClose").on("click", function(event) {
+    	event.preventDefault();
+      Y.lane.Lightbox.hide();
+      Y.lane.LightboxBg.hide();
+    });
     Y.lane.Lightbox.render();
     Y.lane.LightboxBg.render();
     
-    
-    Y.lane.Lightbox.get("contentBox").on("click", function(event) {
-        Y.lane.Lightbox.hide();
-        Y.lane.LightboxBg.hide();
-    });
 
     Y.on("click", function(event) {
         var args, href, popupElement, title, body, regex, anchor = event.target
@@ -36,8 +43,7 @@
                     success : function(id, o, args) {
                         var lightbox = Y.lane.Lightbox,
                             lightboxbg = Y.lane.LightboxBg;
-                        lightbox.get("contentBox").set("innerHTML", o.responseText);
-                        lightbox.centered();
+                        lightbox.setContent(o.responseText);
                         lightboxbg.show();
                         lightbox.show();
                     }
