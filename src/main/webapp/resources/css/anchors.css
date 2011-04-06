@@ -1,17 +1,18 @@
 /* these are the default anchor styles*/
 a {
-    color: #1C4B70;
-    text-decoration:none;
-    border-bottom:1px dotted #81785A;
+    color : #1C4B70;
+    text-decoration : none;
+    border-bottom : 1px dotted #81785A
 }
 a:hover {
-    color:#820000;
-    border-color:#820000;
-    border-bottom-style:solid;
+    color : #820000;
+    border-color : #820000;
+    border-bottom : 1px solid #820000
 }
 a:visited {
-    color:#79455C
+    color : #79455C
 }
-.image-link, .image-link:hover {
-    border-bottom:none;
+.image-link,
+.image-link:hover {
+    border-bottom : none
 }
