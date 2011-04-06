@@ -44,7 +44,14 @@
     background-image : url(/././resources/images/menu-bg.gif);
     background-position : 0 100%;
     background-repeat : repeat-x;
+    -moz-border-radius-bottomleft:5px;
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-left-radius:5px;
+    -webkit-border-bottom-right-radius:5px;
     border-radius : 0 0 5px 5px;
+    -webkit-box-shadow: 5px 5px 5px #AAAAAA;
+    -mox-box-shadow: 5px 5px 5px #AAAAAA;
+    box-shadow: 5px 5px 5px #AAAAAA;
 }
 #laneNav li:hover ul,
 #laneNav .hover ul {
