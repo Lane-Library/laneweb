@@ -1,8 +1,8 @@
 (function() {
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition]);
-    Y.lane.Lightbox = Y.Base.create("lightbox", Y.Widget, [Y.WidgetPosition, Y.WidgetPositionAlign]);
-    Y.lane.LightboxBg = Y.Base.create("lightboxbg", Y.Widget, []);
-    var popup, container, maybeCreatePopup, maybeCreateLightbox, popupWindow, showWindow, createEventHandlers, lightbox, lightboxbg;
+
+    var popup, container, maybeCreatePopup, popupWindow, showWindow;
+    
     maybeCreatePopup = function(title, body, xy) {
         if (!popup) {
             popup = new Y.lane.Popup({
@@ -21,20 +21,6 @@
             popup.set("bodyContent", body);
             popup.set("xy", xy);
         }
-    };
-    maybeCreateLightbox = function(body) {
-    	if (!lightbox) {
-    		lightbox = new Y.lane.Lightbox({
-    			centered : true
-    		});
-    		lightboxbg = new Y.lane.LightboxBg();
-    		lightboxbg.render();
-    		lightbox.get("contentBox").on("click", function(event) {
-    			lightbox.hide();
-    			lightboxbg.hide();
-    		});
-    	}
-        lightbox.get("contentBox").set("innerHTML", body);
     };
     showWindow = function(url, type, strWidth, strHeight) {
         if (popupWindow !== undefined && !popupWindow.closed) {
@@ -75,21 +61,6 @@
                 maybeCreatePopup(title, body, [event.pageX, event.pageY]);
                 popup.render();
                 popup.show();
-            } else if (args[1] === "lightbox") {
-            	//need to dynamically create regex for getting /plain url because of various base paths (eg /stage)
-            	regex = new RegExp("(.+)//([^/]+)(/././)(.+)".replace(/\//g, "\\\/"));
-                href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
-                Y.io(href,{
-                    on : {
-                        success : function(id, o, args) {
-                            maybeCreateLightbox(o.responseText);
-                            lightbox.render();
-                            lightbox.centered();
-                            lightboxbg.show();
-                            lightbox.show();
-                        }
-                    }
-                });
             } else {
                 showWindow(anchor.get("href"), args[1], args[2], args[3]);
             }

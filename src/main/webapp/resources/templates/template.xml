@@ -420,6 +420,7 @@
         <script type="text/javascript" src="/resources/javascript/lane-expandies.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-google.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-webtrends.js"></script>
+        <script type="text/javascript" src="/resources/javascript/lane-lightbox.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-popup.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-metasearch.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search-facets.js"></script>
@@ -436,6 +437,8 @@
         <script type="text/javascript" src="/resources/javascript/lane-forms.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search-reset.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search-hoverText.js"></script>                                                              
-        <script type="text/javascript" src="/resources/javascript/lane-bookmarks.js"></script>
+        <script type="text/javascript" src="/resources/javascript/lane-bookmarks.js"></script>                                                             
+        <script type="text/javascript" src="/resources/javascript/lane-history.js"></script>                                                             
+        <script type="text/javascript" src="/resources/javascript/lane-feedback.js"></script>
     </body>
 </html>
