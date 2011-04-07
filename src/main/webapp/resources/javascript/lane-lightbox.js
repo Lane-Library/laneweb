@@ -6,7 +6,7 @@
         visible : false
     });
 
-    var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign ], {
+    var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
     		setContent : function(content) {
     			this.get("contentBox").set("innerHTML", content);
     			this.fire("contentChanged");
@@ -15,10 +15,11 @@
     });
 
     Y.lane.Lightbox = new Lightbox({
-        visible : false
+        visible : false,
+        constrain : Y.one("body")
     });  
     
-    Y.lane.Lightbox.get("boundingBox").append("<a href='#' id='lightboxClose'>close</a>");
+    Y.lane.Lightbox.get("boundingBox").append("<a id='lightboxClose'></a>");
     Y.lane.Lightbox.get("boundingBox").one("#lightboxClose").on("click", function(event) {
     	event.preventDefault();
       Y.lane.Lightbox.hide();

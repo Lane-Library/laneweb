@@ -17,11 +17,16 @@
     z-index : 2
 }
 #lightboxClose {
+    cursor : pointer;
     display : block;
-    width : 30px;
-    height : 30px;
-    background-color : red;
+    width : 26px;
+    height : 26px;
+    background-image : url(/././resources/images/lightboxCloseBg1.png);
+    border-bottom : none;
     position : absolute;
-    right : -15px;
-    top : -15px;
+    right : -13px;
+    top : -13px
+}
+#lightboxClose:hover {
+    background-position : 26px 0;
 }
