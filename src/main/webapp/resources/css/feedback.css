@@ -1,0 +1,67 @@
+.yui3-feedback-item {
+    display : none
+}
+.yui3-feedback-item-active {
+    display : block
+}
+#feedback {
+    width : 750px;
+    border : 10px solid #C1B8A2;
+    border-radius : 12px;
+    background-color : #5C5644;
+    /*TODO: update this image url when finalized*/
+    background-image : url(/././samples/feedback/feedbackBg1.png);
+    background-position : top;
+    background-repeat : repeat-x;
+    padding : 20px 20px 40px;
+}
+#feedback h2 {
+    text-align : left;
+    margin-left : 27px;
+    font-size : 32px;
+    text-shadow : 1px 3px 3px white
+}
+#feedbackMenu {
+    text-align : left;
+    margin-top : 40px;
+    font-family : Georgia;
+    font-size : 16px
+}
+#feedbackMenu li {
+    padding : 10px 15px
+}
+#feedbackMenu a,
+#feedbackMenu a:visited {
+    border-bottom : none;
+    color : #585347
+}
+#feedbackItems {
+    background-color : white;
+    border : 1px solid #7D786c
+}
+.yui3-feedback-menu-active {
+    background-color : white;
+    border : 1px solid #7D786c;
+    border-right : none;
+    width : 110%
+}
+#instantHelp {
+    margin-top : 50px
+}
+#instantHelp h3 {
+    font-size : 14px;
+    letter-spacing : 1.1px;
+    color : white;
+    border-bottom : none
+}
+#feedback form {
+    padding : 20px;
+    text-align : left
+}
+.mainFeedback {
+    font-family : Georgia;
+    font-size : 16px
+}
+#feedback textarea {
+    width : 100%
+}
