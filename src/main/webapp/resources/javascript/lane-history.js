@@ -3,6 +3,8 @@
  * application for history tracking.
  */
 (function() {
+	
+	//FIXME: find some way to disable if no emrid
     
     var HistoryTracker = function() {
         HistoryTracker.superclass.constructor.apply(this, arguments);

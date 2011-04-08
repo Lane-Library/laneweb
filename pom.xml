@@ -199,7 +199,7 @@
                                 <include>lane-search-reset-min.js</include>
                                 <include>lane-search-hoverText-min.js</include>                                                              
                                 <include>lane-bookmarks-min.js</include>                                                             
-                                <include>lane-history-min.js</include>                                                           
+                                <!--<include>lane-history-min.js</include>-->                                                           
                                 <include>lane-feedback-min.js</include>
                             </includes>
                         </aggregation>
