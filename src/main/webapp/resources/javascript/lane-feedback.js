@@ -44,13 +44,13 @@
 			    items = this.get("items"),
 			    menuActiveClass = this.getClassName("menu", "active"),
 			    itemActiveClass = this.getClassName("item", "active");
-			event.preventDefault();
 			menu.item(event.prevVal).removeClass(menuActiveClass);
 			items.item(event.prevVal).removeClass(itemActiveClass);
 			menu.item(event.newVal).addClass(menuActiveClass);
 			items.item(event.newVal).addClass(itemActiveClass);
 		},
 		_handleMenuClick : function(event) {
+			event.preventDefault();
 			this.set("activeItem", this.get("menu").indexOf(event.currentTarget));
 		}
 	});
