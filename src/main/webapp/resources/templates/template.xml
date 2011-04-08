@@ -404,15 +404,11 @@
             <xi:fallback/>
         </xi:include>
         <a rel="lightbox" id="feedbackLink" href="/samples/feedback/feedback.html" style="
-            -moz-transform: rotate(270deg);
-            -webkit-transform: rotate(270deg);
-            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
             background-color: white;
             border: 1px solid black;
-            display: block;
-            margin-right: -19px;
             padding: 10px;
             position: fixed;
+            _position : absolute;
             right: 0;
             top: 50%;">feedback</a>
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.3.0/build/yui/yui-debug.js&amp;3.3.0/build/oop/oop-debug.js&amp;3.3.0/build/event-custom/event-custom-debug.js&amp;3.3.0/build/pluginhost/pluginhost-debug.js&amp;3.3.0/build/attribute/attribute-debug.js&amp;3.3.0/build/base/base-debug.js&amp;3.3.0/build/dom/dom-debug.js&amp;3.3.0/build/dom/dom-style-ie-debug.js&amp;3.3.0/build/event/event-debug.js&amp;3.3.0/build/node/node-debug.js&amp;3.3.0/build/event/event-base-ie-debug.js&amp;3.3.0/build/anim/anim-debug.js&amp;3.3.0/build/plugin/plugin-debug.js&amp;3.3.0/build/cache/cache-base-debug.js&amp;3.3.0/build/querystring/querystring-stringify-simple-debug.js&amp;3.3.0/build/io/io-base-debug.js&amp;3.3.0/build/json/json-debug.js&amp;3.3.0/build/dataschema/dataschema-debug.js&amp;3.3.0/build/datasource/datasource-debug.js&amp;3.3.0/build/intl/intl-debug.js&amp;3.3.0/build/datatype/lang/datatype.js&amp;3.3.0/build/datatype/datatype-debug.js&amp;3.3.0/build/classnamemanager/classnamemanager-debug.js&amp;3.3.0/build/dd/dd-debug.js&amp;3.3.0/build/dd/dd-gestures-debug.js&amp;3.3.0/build/dd/dd-plugin-debug.js&amp;3.3.0/build/history/history-debug.js&amp;3.3.0/build/history/history-hash-ie-debug.js&amp;3.3.0/build/widget/widget-debug.js&amp;3.3.0/build/widget/widget-base-ie-debug.js&amp;3.3.0/build/widget/widget-position-debug.js&amp;3.3.0/build/widget/widget-position-align-debug.js&amp;3.3.0/build/widget/widget-stack-debug.js&amp;3.3.0/build/widget/widget-stdmod-debug.js&amp;3.3.0/build/widget/widget-position-constrain-debug.js&amp;3.3.0/build/overlay/overlay-debug.js&amp;3.3.0/build/querystring/querystring-parse-simple-debug.js&amp;3.3.0/build/event-valuechange/event-valuechange-debug.js&amp;3.3.0/build/dump/dump-debug.js&amp;gallery-2010.05.21-18-16/build/gallery-node-accordion/gallery-node-accordion-debug.js"></script>
