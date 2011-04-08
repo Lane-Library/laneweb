@@ -161,6 +161,7 @@
                                 <include>bookmarks-min.css</include>
                                 <include>captioned-img-min.css</include>
                                 <include>lightbox-min.css</include>
+                                <include>feedback-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
