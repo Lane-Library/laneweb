@@ -103,9 +103,10 @@
                 Y.lane.search.facets.getCurrentResult().hide();
                 Y.lane.search.facets.setCurrentResult(this);
                 this._facet.addClass('current');
-                for(i = 0; i < this._content.size(); i++) {
-                    this._container.append(this._content.item(i));
-                }
+                this._container.append(this._content);
+//                for(i = 0; i < this._content.size(); i++) {
+//                    this._container.append(this._content.item(i));
+//                }
                 searchIndicator.hide();
                 Y.fire('lane:change');;
             }
