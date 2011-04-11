@@ -65,11 +65,15 @@
         this._callback = {
             on: {
                 success: function(id, o, arguments){
-                    var result, bodyNodes, content;
+                    var result, content;
                     result = arguments.result;
-                    bodyNodes = o.responseXML.getElementsByTagName('body')[0];
-                    content = new Y.Node(document.importNode(bodyNodes, true));
-                    result.setContent(content.get('children'));
+                    content = Y.Node.create(o.responseText).all("body > *");
+//                  bodyNode = o.responseXML.getElementsByTagName('body')[0];
+//                  content = new Y.Node(document.importNode(bodyNode, true));
+                    result.setContent(content);
+//                    bodyNodes = o.responseXML.getElementsByTagName('body')[0];
+//                    content = new Y.Node(document.importNode(bodyNodes, true));
+//                    result.setContent(content.get('children'));
                     Y.lane.search.facets.getCurrentResult().hide();
                     Y.lane.search.facets.setCurrentResult(result);
                     result.show();
