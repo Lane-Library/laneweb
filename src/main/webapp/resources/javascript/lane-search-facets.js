@@ -105,7 +105,7 @@
                 this._facet.addClass('current');
                 children = this._content.get("children");
                 for(i = 0; i < children.size(); i++) {
-                    this._container.append(children.item(i));
+                    this._container.append(children.item(i).cloneNode(true));
                 }
                 searchIndicator.hide();
                 Y.fire('lane:change');;
