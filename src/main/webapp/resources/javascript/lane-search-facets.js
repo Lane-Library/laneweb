@@ -93,7 +93,7 @@
             this._state = 'searched';
         };
         Result.prototype.show = function(){
-            var i;
+            var i, children;
             if (this._state == 'initialized') {
                 this.getContent();
                 searchIndicator.show();
@@ -103,10 +103,10 @@
                 Y.lane.search.facets.getCurrentResult().hide();
                 Y.lane.search.facets.setCurrentResult(this);
                 this._facet.addClass('current');
-                this._container.append(this._content);
-//                for(i = 0; i < this._content.size(); i++) {
-//                    this._container.append(this._content.item(i));
-//                }
+                children = this._content.get("children");
+                for(i = 0; i < children.size(); i++) {
+                    this._container.append(children.item(i));
+                }
                 searchIndicator.hide();
                 Y.fire('lane:change');;
             }
