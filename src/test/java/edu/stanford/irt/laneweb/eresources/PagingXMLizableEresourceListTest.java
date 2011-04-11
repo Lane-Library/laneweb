@@ -35,6 +35,7 @@ public class PagingXMLizableEresourceListTest {
 
     private ContentHandler handler;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.eresources = createMock(Collection.class);

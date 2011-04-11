@@ -26,12 +26,13 @@ public class PagingXMLizableSearchResultSetTest {
 
     private ContentHandler handler;
 
-    private Iterator iterator;
+    private Iterator<SearchResult> iterator;
 
     private SearchResult result;
 
     private Set<SearchResult> results;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.results = createMock(Set.class);

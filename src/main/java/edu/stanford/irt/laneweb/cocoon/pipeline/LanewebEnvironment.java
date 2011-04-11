@@ -88,6 +88,7 @@ public class LanewebEnvironment implements Environment {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Map getObjectModel() {
         return this.model;
     }
@@ -125,6 +126,7 @@ public class LanewebEnvironment implements Environment {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Enumeration getAttributeNames() {
         throw new UnsupportedOperationException();
     }

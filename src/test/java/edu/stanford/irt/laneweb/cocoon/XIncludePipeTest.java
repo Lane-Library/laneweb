@@ -6,8 +6,6 @@ import static org.easymock.EasyMock.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.components.xpointer.parser.ParseException;
 import org.apache.cocoon.environment.SourceResolver;
 import org.junit.Before;
 import org.junit.Test;

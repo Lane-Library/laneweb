@@ -14,6 +14,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         return this.objectModel;
     }
 
+    @SuppressWarnings("unchecked")
     public void setEnvironment(final LanewebEnvironment environment) {
         this.objectModel = environment.getObjectModel();
     }

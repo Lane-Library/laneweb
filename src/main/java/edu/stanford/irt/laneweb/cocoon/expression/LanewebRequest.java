@@ -49,6 +49,7 @@ public class LanewebRequest implements Request {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Map getParameterMap() {
         throw new UnsupportedOperationException();
         
@@ -115,12 +116,14 @@ public class LanewebRequest implements Request {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Enumeration getAttributeNames() {
         throw new UnsupportedOperationException();
         
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Enumeration getLocalAttributeNames() {
         throw new UnsupportedOperationException();
         
@@ -153,6 +156,7 @@ public class LanewebRequest implements Request {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Map getAttributes() {
         throw new UnsupportedOperationException();
         
@@ -193,6 +197,7 @@ public class LanewebRequest implements Request {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Enumeration getParameterNames() {
         throw new UnsupportedOperationException();
         
@@ -205,6 +210,7 @@ public class LanewebRequest implements Request {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Map getParameters() {
         throw new UnsupportedOperationException();
         
@@ -253,6 +259,7 @@ public class LanewebRequest implements Request {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Enumeration getLocales() {
         throw new UnsupportedOperationException();
         
@@ -271,18 +278,21 @@ public class LanewebRequest implements Request {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Map getCookieMap() {
         throw new UnsupportedOperationException();
         
     }
 
     
+    @SuppressWarnings("deprecation")
     public org.apache.cocoon.environment.Cookie[] getCocoonCookies() {
         throw new UnsupportedOperationException();
         
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Map getCocoonCookieMap() {
         throw new UnsupportedOperationException();
         
@@ -301,18 +311,21 @@ public class LanewebRequest implements Request {
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Enumeration getHeaders(String name) {
         throw new UnsupportedOperationException();
         
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Enumeration getHeaderNames() {
         throw new UnsupportedOperationException();
         
     }
 
     
+    @SuppressWarnings("rawtypes")
     public Map getHeaders() {
         throw new UnsupportedOperationException();
         

@@ -153,6 +153,7 @@ public class LanewebResponse implements Response {
     }
 
     
+    @SuppressWarnings("deprecation")
     public org.apache.cocoon.environment.Cookie createCocoonCookie(String name, String value) {
         throw new UnsupportedOperationException();
         
@@ -164,6 +165,7 @@ public class LanewebResponse implements Response {
     }
 
     
+    @SuppressWarnings("deprecation")
     public void addCookie(org.apache.cocoon.environment.Cookie cookie) {
         throw new UnsupportedOperationException();
     }
