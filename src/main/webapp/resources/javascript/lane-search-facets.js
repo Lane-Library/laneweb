@@ -65,15 +65,11 @@
         this._callback = {
             on: {
                 success: function(id, o, arguments){
-                    var result, content;
+                    var result, bodyNodes, content;
                     result = arguments.result;
-                    content = Y.Node.create(o.responseText);
-//                  bodyNode = o.responseXML.getElementsByTagName('body')[0];
-//                  content = new Y.Node(document.importNode(bodyNode, true));
-                    result.setContent(content);
-//                    bodyNodes = o.responseXML.getElementsByTagName('body')[0];
-//                    content = new Y.Node(document.importNode(bodyNodes, true));
-//                    result.setContent(content.get('children'));
+                    bodyNodes = o.responseXML.getElementsByTagName('body')[0];
+                    content = new Y.Node(document.importNode(bodyNodes, true));
+                    result.setContent(content.get('children'));
                     Y.lane.search.facets.getCurrentResult().hide();
                     Y.lane.search.facets.setCurrentResult(result);
                     result.show();
@@ -93,7 +89,7 @@
             this._state = 'searched';
         };
         Result.prototype.show = function(){
-            var i, children;
+            var i;
             if (this._state == 'initialized') {
                 this.getContent();
                 searchIndicator.show();
@@ -103,9 +99,8 @@
                 Y.lane.search.facets.getCurrentResult().hide();
                 Y.lane.search.facets.setCurrentResult(this);
                 this._facet.addClass('current');
-                children = this._content.get("children");
-                for(i = 0; i < children.size(); i++) {
-                    this._container.append(children.item(i).cloneNode(true));
+                for(i = 0; i < this._content.size(); i++) {
+                    this._container.append(this._content.item(i));
                 }
                 searchIndicator.hide();
                 Y.fire('lane:change');;

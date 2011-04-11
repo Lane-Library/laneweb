@@ -32,16 +32,19 @@ Y.publish('lane:change', {broadcast: 2});
                     /* create a new element */
                     newNode = document.createElement(node.nodeName);
                     /* does the node have any attributes to add? */
-                    if (node.attributes && node.attributes.length > 0)
+                    if (node.attributes && node.attributes.length > 0) {
                         /* add all of the attributes */
                         for (i = 0, il = node.attributes.length; i < il;) {
                             newNode.setAttribute(node.attributes[i].nodeName, node.getAttribute(node.attributes[i++].nodeName));
                         }
+                    }
                     /* are we going after children too, and does the node have any? */
-                    if (allChildren && node.childNodes && node.childNodes.length > 0)
+                    if (allChildren && node.childNodes && node.childNodes.length > 0) {
                         /* recursively get all of the child nodes */
-                        for (i = 0, il = node.childNodes.length; i < il;)
+                        for (i = 0, il = node.childNodes.length; i < il;) {
                             newNode.appendChild(document.importNode(node.childNodes[i++], allChildren));
+                        }
+                    }
                     return newNode;
                     break;
                 case document.TEXT_NODE:
@@ -62,5 +65,5 @@ Y.publish('lane:change', {broadcast: 2});
                 }
             }
             return -1;
-        }
+        };
     }
