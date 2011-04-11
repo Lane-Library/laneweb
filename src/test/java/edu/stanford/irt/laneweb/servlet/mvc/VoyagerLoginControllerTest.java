@@ -5,6 +5,9 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,12 +36,17 @@ public class VoyagerLoginControllerTest {
 
     @Test
     public void testVoyagerLogin() throws Exception {
-        expect(this.request.getQueryString()).andReturn("a=b");
-        expect(this.voyagerLogin.getVoyagerURL("lmldb", "1234", "123", "a=b")).andReturn("hello");
+        expect(this.request.getQueryString()).andReturn("a=b").times(2);
+        expect(this.voyagerLogin.getVoyagerURL("1234", "123", "a=b")).andReturn("hello").times(2);
+        this.response.sendRedirect("hello");
         this.response.sendRedirect("hello");
         replay(this.voyagerLogin, this.request, this.response);
-        this.voyagerLoginController.setVoyagerLogin(this.voyagerLogin);
-        this.voyagerLoginController.voyagerLogin("lmldb", "1234", "123", this.request, this.response);
+        Map<String, VoyagerLogin> voyagerLogins = new HashMap<String, VoyagerLogin>();
+        voyagerLogins.put(VoyagerLogin.class.getName() + "/lmldb", this.voyagerLogin);
+        voyagerLogins.put(VoyagerLogin.class.getName() + "/jbldb", this.voyagerLogin);
+        this.voyagerLoginController.setVoyagerLogins(voyagerLogins);
+        this.voyagerLoginController.login("lmldb", "1234", "123", this.request, this.response);
+        this.voyagerLoginController.login("jbldb", "1234", "123", this.request, this.response);
         verify(this.voyagerLogin, this.request, this.response);
     }
 }

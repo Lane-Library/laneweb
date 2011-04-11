@@ -75,8 +75,4 @@
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
 
-    <bean class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
-        <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
-    </bean>
-
 </beans>

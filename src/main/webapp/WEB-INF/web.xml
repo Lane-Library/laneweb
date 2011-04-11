@@ -32,6 +32,7 @@
             /WEB-INF/spring/sitemap.xml
             /WEB-INF/spring/source.xml
             /WEB-INF/spring/suggest.xml
+            /WEB-INF/spring/voyager-login.xml
         </param-value>
     </context-param>
 

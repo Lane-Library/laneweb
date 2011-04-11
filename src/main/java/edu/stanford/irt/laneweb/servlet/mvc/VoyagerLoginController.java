@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,37 +20,40 @@ import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
 @Controller
-@SessionAttributes({Model.UNIVID, Model.SUNETID})
+@SessionAttributes({ Model.UNIVID, Model.SUNETID })
 public class VoyagerLoginController {
-    
-    private SunetIdSource sunetIdSource = new SunetIdSource();
-    
+
+    private static final String BEAN_ROOT_NAME = VoyagerLogin.class.getName() + "/";
+
     @Autowired
     private LDAPDataAccess ldapDataSource;
 
-    @Autowired
-    private VoyagerLogin voyagerLogin;
-    
-    @RequestMapping(value = "/secure/voyager/{db}")
-    public void voyagerLogin(@PathVariable final String db, @ModelAttribute(Model.UNIVID) final String univid, @RequestParam final String PID, final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException {
-        String queryString = request.getQueryString();
-        String url = this.voyagerLogin.getVoyagerURL(db, univid, PID, queryString);
-        response.sendRedirect(url);
-    }
-    
-    public void setVoyagerLogin(VoyagerLogin voyagerLogin) {
-        this.voyagerLogin = voyagerLogin;
-    }
-    
-    @ModelAttribute(Model.UNIVID)
-    public String getUnivId(@ModelAttribute(Model.SUNETID) String sunetid) {
-        return this.ldapDataSource.getLdapData(sunetid).getUnivId();
-    }
+    private SunetIdSource sunetIdSource = new SunetIdSource();
 
+    @Autowired
+    private Map<String, VoyagerLogin> voyagerLogins;
 
     @ModelAttribute(Model.SUNETID)
     public String getSunetid(final HttpServletRequest request) {
         return this.sunetIdSource.getSunetid(request);
+    }
+
+    @ModelAttribute(Model.UNIVID)
+    public String getUnivId(@ModelAttribute(Model.SUNETID) final String sunetid) {
+        return this.ldapDataSource.getLdapData(sunetid).getUnivId();
+    }
+
+    @RequestMapping(value = "/secure/voyager/{db}")
+    public void login(@PathVariable final String db, @ModelAttribute(Model.UNIVID) final String univid,
+            @RequestParam final String PID, final HttpServletRequest request, final HttpServletResponse response)
+            throws IOException {
+        VoyagerLogin voyagerLogin = this.voyagerLogins.get(BEAN_ROOT_NAME + db);
+        String queryString = request.getQueryString();
+        String url = voyagerLogin.getVoyagerURL(univid, PID, queryString);
+        response.sendRedirect(url);
+    }
+
+    public void setVoyagerLogins(final Map<String, VoyagerLogin> voyagerLogins) {
+        this.voyagerLogins = voyagerLogins;
     }
 }
