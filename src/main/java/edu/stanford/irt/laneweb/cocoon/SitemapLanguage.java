@@ -46,7 +46,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
                             desc.append("map:");
                         }
                     } catch (ConfigurationException e) {
-                        // no namespace: ignore
+                        throw new RuntimeException(e);
                     }
                     desc.append(config.getName()).append('>');
                     return new LocationImpl(desc.toString(), result);

@@ -22,7 +22,7 @@ public class RequestParameterDataBinder implements DataBinder {
                 try {
                     model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
-                    // won't happen
+                    throw new RuntimeException(e);
                 }
             } else if ("t".equals(name)) {
                 model.put(Model.TYPE, value);

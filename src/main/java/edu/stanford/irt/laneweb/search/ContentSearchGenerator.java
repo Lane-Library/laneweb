@@ -54,7 +54,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
             try {
                 time = Long.parseLong(this.timeout);
             } catch (NumberFormatException nfe) {
-                ;
+                time = this.defaultTimeout;
             }
         }
         return this.metaSearchManager.search(new SimpleQuery(this.query), time, this.engines, true);

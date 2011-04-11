@@ -300,9 +300,7 @@ public class CachingPipeline extends NonCachingPipeline {
     protected void connectPipeline(final Environment environment) throws ProcessingException {
         if (this.toCacheKey == null && this.cachedResponse == null) {
             super.connectPipeline(environment);
-        } else if (this.completeResponseIsCached) {
-            // do nothing
-        } else {
+        } else if (!this.completeResponseIsCached) {
             connectCachingPipeline(environment);
         }
     }

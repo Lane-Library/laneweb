@@ -91,9 +91,6 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         }
         javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
         for (Entry<String, Object> entry : this.model.entrySet()) {
-            if (entry.getValue() == null) {
-                throw new IllegalStateException("null value in model for " + entry.getKey());
-            }
             transformer.setParameter(entry.getKey(), entry.getValue().toString());
         }
         for (Entry<String, String> entry : this.parameterMap.entrySet()) {

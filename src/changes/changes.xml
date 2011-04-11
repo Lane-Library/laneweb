@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-04-11" version="1.11.26" description="1.11.26 bug fix release">
+            <action date="2011-04-07" dev="ceyates" issue="48909" type="update">
+                change style rules for h3
+            </action>
+            <action date="2011-04-05" dev="ceyates" issue="48824" type="update">
+                design change for lane footer
+            </action>
+        </release>
         <release date="2011-04-04" version="1.11.25" description="1.11.25 bug fix release">
             <action date="2011-04-01" dev="ryanmax" issue="48732" type="fix">
                 cached background images

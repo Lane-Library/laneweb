@@ -339,7 +339,7 @@ class XIncludePipe extends AbstractXMLPipe {
                 || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
     }
 
-    private void parseText(final String xpointer, final Source url) throws IOException, SAXException {
+    private void parseText(final Source url) throws IOException, SAXException {
         getLogger().debug("Parse type is text");
         InputStream is = null;
         InputStreamReader isr = null;
@@ -432,7 +432,7 @@ class XIncludePipe extends AbstractXMLPipe {
             // add the source to the SourceValidity
             this.validity.addSource(url);
             if ("text".equals(localParse)) {
-                parseText(xpointer, url);
+                parseText(url);
             } else if ("xml".equals(localParse)) {
                 parseXML(xpointer, url);
             }

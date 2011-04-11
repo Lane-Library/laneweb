@@ -52,7 +52,7 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
                 request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, pathWithinMapping.substring(length));
             }
         }
-        request.setAttribute(Model.CONTENT_BASE, getContentBase(servletPath, contextPath));
+        request.setAttribute(Model.CONTENT_BASE, getContentBase(servletPath));
         return true;
     }
 
@@ -76,7 +76,7 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
         return contextPath;
     }
 
-    private URL getContentBase(final String servletPath, final String contextPath) throws MalformedURLException {
+    private URL getContentBase(final String servletPath) throws MalformedURLException {
         if (servletPath.indexOf("/stage") == 0) {
             return this.stageBase;
         }

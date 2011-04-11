@@ -36,7 +36,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
                 try {
                     time = Long.parseLong(this.timeout);
                 } catch (NumberFormatException nfe) {
-                    ;
+                    time = this.defaultTimeout;
                 }
             }
             long timeout = time;
@@ -51,7 +51,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
                 try {
                     wait = Long.parseLong(this.wait);
                 } catch (NumberFormatException nfe) {
-                    ;
+                    wait = 0;
                 }
                 long start = System.currentTimeMillis();
                 try {

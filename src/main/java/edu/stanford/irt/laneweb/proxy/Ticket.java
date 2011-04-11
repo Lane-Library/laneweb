@@ -28,9 +28,9 @@ public class Ticket {
             this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + user + packet) + packet, "UTF-8");
             this.creationTime = System.currentTimeMillis();
         } catch (UnsupportedEncodingException e) {
-            // won't happen
+            throw new RuntimeException(e);
         } catch (NoSuchAlgorithmException e) {
-            // won't happen
+            throw new RuntimeException(e);
         }
     }
 
