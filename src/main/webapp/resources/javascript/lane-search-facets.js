@@ -67,7 +67,7 @@
                 success: function(id, o, arguments){
                     var result, content;
                     result = arguments.result;
-                    content = Y.Node.create(o.responseText).all("body > *");
+                    content = Y.Node.create(o.responseText);
 //                  bodyNode = o.responseXML.getElementsByTagName('body')[0];
 //                  content = new Y.Node(document.importNode(bodyNode, true));
                     result.setContent(content);
