@@ -37,6 +37,8 @@ public interface Model {
 
     public static final String LIMIT = "limit";
 
+    public static final String LIVE_CHAT_AVAILABLE = "live-chat-available";
+
     public static final String MEDBLOG_BASE = "medblog-base";
 
     public static final String MESH = "mesh";

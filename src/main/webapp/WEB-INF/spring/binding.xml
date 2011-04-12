@@ -21,6 +21,7 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmarks"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/history"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"/>
             </list>
         </property>
     </bean>
@@ -66,6 +67,9 @@
         class="edu.stanford.irt.laneweb.servlet.binding.ServletContextDataBinder">
         <property name="servletContext" ref="servletContext"/>
     </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"
+        class="edu.stanford.irt.laneweb.servlet.binding.LiveChatScheduleBinder"/>
 
     <bean id="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"
         class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks">

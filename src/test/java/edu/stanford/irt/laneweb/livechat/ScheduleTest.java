@@ -24,7 +24,7 @@ public class ScheduleTest {
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
         calendar.set(Calendar.HOUR_OF_DAY, 12);
         Date date = calendar.getTime();
-        assertTrue(this.schedule.isAvaliableAt(date));
+        assertTrue(this.schedule.isAvailableAt(date));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class ScheduleTest {
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         calendar.set(Calendar.HOUR_OF_DAY, 12);
         Date date = calendar.getTime();
-        assertTrue(this.schedule.isAvaliableAt(date));
+        assertTrue(this.schedule.isAvailableAt(date));
     }
 
     @Test
@@ -43,6 +43,6 @@ public class ScheduleTest {
         calendar.set(Calendar.HOUR_OF_DAY, 19);
         calendar.set(Calendar.MINUTE, 30);
         Date date = calendar.getTime();
-        assertFalse(this.schedule.isAvaliableAt(date));
+        assertFalse(this.schedule.isAvailableAt(date));
     }
 }
