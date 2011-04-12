@@ -33,7 +33,7 @@
                 var i;
                 searchElms = Y.all(".metasearch");
                 for (i = 0; i < searchElms.size(); i++) {
-                    if (searchables.indexOf(searchElms.item(i).get('id')) == -1) {
+                    if (Y.Array.indexOf(searchables, searchElms.item(i).get('id')) == -1) {
                         searchables.push(searchElms.item(i).get('id'));
                     }
                 }
