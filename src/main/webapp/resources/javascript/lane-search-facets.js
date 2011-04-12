@@ -36,21 +36,19 @@
                 if (type) {
                     facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
                     if (facets.item(i).hasClass('current')) {
-                        facets.item(i).getData('result').setContent(container.get('children'));
+                        facets.item(i).getData('result').setContent(container.get('innerHTML'));
                         Y.lane.search.facets.setCurrentResult(facets.item(i).getData('result'));
                     }
-                    if (!(Y.UA.ie && Y.UA.ie < 8)) { // TODO: fix IE < 8 rendering of tooltips after import
-                        Y.on('click',function(event) {
-                            var result = this.getData('result');
-                            try {
-                                Y.lane.Search.History.addValue("facet", this.getData('result')._source);
-                            } catch (e) {
-                                //log somewhere ... no need to break/alert
-                                result.show();
-                            }
-                            event.preventDefault();
-                        }, facets.item(i));
-                    }
+                    Y.on('click',function(event) {
+                        var result = this.getData('result');
+                        try {
+                            Y.lane.Search.History.addValue("facet", this.getData('result')._source);
+                        } catch (e) {
+                            //log somewhere ... no need to break/alert
+                            result.show();
+                        }
+                        event.preventDefault();
+                    }, facets.item(i));
                 }
             }
         }
@@ -65,15 +63,12 @@
         this._callback = {
             on: {
                 success: function(id, o, arguments){
-                    var result, bodyNodes, content;
-                    result = arguments.result;
-                    bodyNodes = o.responseXML.getElementsByTagName('body')[0];
-                    content = new Y.Node(document.importNode(bodyNodes, true));
-                    result.setContent(content.get('children'));
-                    Y.lane.search.facets.getCurrentResult().hide();
-                    Y.lane.search.facets.setCurrentResult(result);
+                    var result = arguments.result;
+                    result.setContent(o.responseText);
+                    LANE.search.facets.getCurrentResult().hide();
+                    LANE.search.facets.setCurrentResult(result);
                     result.show();
-                    Y.Global.fire('lane:change');
+                    Y.fire('lane:change');
                 },
                 failure: function(){
                     //TODO: use window.location to set page to href of facet
@@ -85,7 +80,6 @@
         };
         Result.prototype.setContent = function(content){
             this._content = content;
-            //TODO: is this the best place for this?
             this._state = 'searched';
         };
         Result.prototype.show = function(){
@@ -99,9 +93,7 @@
                 Y.lane.search.facets.getCurrentResult().hide();
                 Y.lane.search.facets.setCurrentResult(this);
                 this._facet.addClass('current');
-                for(i = 0; i < this._content.size(); i++) {
-                    this._container.append(this._content.item(i));
-                }
+                this._container.set("innerHTML", this._content);
                 searchIndicator.hide();
                 Y.fire('lane:change');;
             }
@@ -120,9 +112,7 @@
                     }
         };
         Result.prototype.hide = function(){
-            while (this._container.get('childNodes').size() > 0) {
-                this._container.get('lastChild').remove();
-            }
+            this._container.set("innerHTML", "");
             this._facet.removeClass('current');
         };
     }
