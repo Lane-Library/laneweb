@@ -13,7 +13,7 @@
                         findItLink = findItNode.one('a');
                         findItLink.set('href', findIt.openurl);
                         findItLink.set('innerHTML', findIt.result);
-                        Y.Global.fire('lane:popin', findItNode);
+                        Y.fire('lane:popin', findItNode);
                     }
                 }
             }

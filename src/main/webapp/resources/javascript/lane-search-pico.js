@@ -93,10 +93,10 @@
             Y.fire('lane:searchPicoChange');
             return qString;
         };
-        Y.publish("lane:searchPicoChange",{broadcast:2});
+        Y.publish("lane:searchPicoChange");
     if (form) {
-        searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"))
-        Y.Global.on("lane:suggestSelect",  function(event) {
+        searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"));
+        Y.on("lane:suggestSelect",  function(event) {
             if(picoIsOn && getPicoQuery()){
                 searchTerms.setValue(getPicoQuery());
             }
@@ -114,7 +114,7 @@
 //            easing: Y.Easing.easOut,
 //            duration: 0.3 
 //        });
-        Y.Global.on('lane:searchSourceChange', function(event) {
+        Y.on('lane:searchSourceChange', function(event) {
             if (event.newVal == 'clinical-all'||event.newVal.indexOf('peds') == 0) {
                 picoOn();
                 form.one('#clinicalP').focus();

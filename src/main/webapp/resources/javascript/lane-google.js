@@ -37,14 +37,12 @@
         
         // for search result event tracking
     Y.publish("lane:searchResultClick",{
-        broadcast:2,
         emitFacade: true,
         searchTerms:null,
         resultTitle:null,
         resultPosition:null
     });
     Y.publish("lane:browseResultClick",{
-        broadcast:2,
         emitFacade: true,
         resultTitle:null,
         resultPosition:null
@@ -73,27 +71,27 @@
         }
     }, document);
         
-    Y.Global.on("lane:suggestSelect",  function(event) {
+    Y.on("lane:suggestSelect",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, event.parentForm.source.value, event.suggestion);
         }
     });
-    Y.Global.on("lane:quickLinkClick",  function(event) {
+    Y.on("lane:quickLinkClick",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, event.linkName);
         }
     });
-    Y.Global.on("lane:searchResultClick",  function(event) {
+    Y.on("lane:searchResultClick",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, event.searchTerms, event.resultTitle, event.resultPosition);
         }
     });
-    Y.Global.on("lane:browseResultClick",  function(event) {
+    Y.on("lane:browseResultClick",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, document.location.pathname, event.resultTitle, event.resultPosition);
         }
     });
-    Y.Global.on("lane:searchFormReset",  function(event) {
+    Y.on("lane:searchFormReset",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, document.location.pathname);
         }

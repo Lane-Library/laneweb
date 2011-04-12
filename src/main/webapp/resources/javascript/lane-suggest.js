@@ -343,7 +343,6 @@ function handleQueryResponse (e) {
                 }
             };
             this.publish("lane:suggestSelect",{
-                broadcast:2,
                 emitFacade: true,
                 suggestion:null,
                 parentForm:null
@@ -383,7 +382,7 @@ function handleQueryResponse (e) {
             }, "li");
             Y.on("click", function () { acWidget.hide(); }, document);
             Y.on("key", function () { acWidget.hide(); }, document, "down:9,13,10");
-            Y.Global.on("lane:beforeSearchSubmit", function () { acWidget.destroy(); });
+            Y.on("lane:beforeSearchSubmit", function () { acWidget.destroy(); });
             
             return {
                 setData : function (d) {

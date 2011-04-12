@@ -13,21 +13,21 @@
             searchReset.setStyle("display","none");
             form.one("fieldset").append(searchReset);
         }
-        Y.publish("lane:searchFormReset",{broadcast:2,emitFacade: true});
+        Y.publish("lane:searchFormReset",{emitFacade: true});
         searchReset.on("click", function(e){
             reset.resetSearch(e);
         });
         eventHandle = searchTerms.on("valueChange", function(){
             reset.syncUI();
         });
-        Y.Global.on("lane:searchPicoChange", function(){
+        Y.on("lane:searchPicoChange", function(){
             reset.syncUI();
         });
         form.on("submit", function(){
             reset.hide();
 //            Y.detach(eventHandle);
         });
-        Y.Global.on("lane:beforeSearchSubmit", function(){
+        Y.on("lane:beforeSearchSubmit", function(){
             reset.hide();
 //            Y.detach(eventHandle);
         });

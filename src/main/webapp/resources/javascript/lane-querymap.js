@@ -46,7 +46,7 @@
                                                 setTimeout(Y.lane.search.querymap.getResultCounts, 2000);
                                             }
                                             //queryMapping.style.display = 'inline';
-                                            Y.Global.fire('lane:popin', queryMapping);
+                                            Y.fire('lane:popin', queryMapping);
                                         }
                                     }
                                 });

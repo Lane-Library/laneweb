@@ -14,7 +14,7 @@
                         a = spellCheck.one('a');
                         a.set('href', document.location.href.replace('q=' + searchTerms, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + searchTerms));
                         a.set('innerHTML', sc.suggestion);
-                        Y.Global.fire('lane:popin', spellCheck);
+                        Y.fire('lane:popin', spellCheck);
                         // track spelling suggestion and original term
                         trackingImg = document.createElement('img');
                         trackingImg.style.display = "none";

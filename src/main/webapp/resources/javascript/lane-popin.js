@@ -2,7 +2,7 @@
     
     // custom popin event
     var onPopinHandler;
-    Y.publish('lane:popin',{broadcast:2});
+    Y.publish('lane:popin');
     
         onPopinHandler = function(el) {
             //FIXME: are elms returned in the right order? probably not.
@@ -41,5 +41,5 @@
                 }
             }
         };
-    Y.Global.on('lane:popin', onPopinHandler);
+    Y.on('lane:popin', onPopinHandler);
 })();

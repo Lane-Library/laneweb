@@ -19,8 +19,8 @@
                 alert(e);
             }
         });
-        Y.publish("lane:searchSourceChange",{broadcast:2});
-        Y.publish('lane:beforeSearchSubmit', {broadcast:2});
+        Y.publish("lane:searchSourceChange");
+        Y.publish('lane:beforeSearchSubmit');
         Y.on('lane:searchSourceChange', function() {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
             searchTextInput.setHintText(selectedOption.get('title'));

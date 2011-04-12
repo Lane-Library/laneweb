@@ -46,7 +46,7 @@
             }
         }
     };
-    Y.Global.on('lane:change', function() {
+    Y.on('lane:change', function() {
         registerHoverTriggers();
     });
     registerHoverTriggers();

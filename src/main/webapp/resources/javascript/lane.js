@@ -6,4 +6,4 @@ var Y = YUI({fetchCSS:false}).use('*');
 
 Y.namespace("lane");
 
-Y.publish('lane:change', {broadcast: 2});
+Y.publish('lane:change');
