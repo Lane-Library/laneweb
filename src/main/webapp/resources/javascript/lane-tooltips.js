@@ -476,9 +476,9 @@
                 Y.lane.ToolTips = tt;
             }
         };
-    Y.Global.on('lane:change', function() {
+    Y.on('lane:change', function() {
         if (Y.lane.ToolTips) {
-           Y.lane.ToolTips.destructor();
+           Y.lane.ToolTips.destroy();
            Y.lane.ToolTips = undefined;
         }
         createTooltips(); 

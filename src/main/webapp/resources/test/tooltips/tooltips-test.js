@@ -23,6 +23,12 @@ YUI({
             	T.Assert.isTrue(inside);
             }, 500);
             b.simulate("mouseout");
+        },
+        
+        testOnlyOneWidget : function() {
+        	T.Assert.areEqual(1, T.all(".yui3-tooltip").size());
+        	Y.fire("lane:change");
+        	T.Assert.areEqual(1, T.all(".yui3-tooltip").size());
         }
     });
     T.one('body').addClass('yui3-skin-sam');
