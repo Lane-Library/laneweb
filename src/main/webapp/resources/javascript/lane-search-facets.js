@@ -65,8 +65,8 @@
                 success: function(id, o, arguments){
                     var result = arguments.result;
                     result.setContent(o.responseText);
-                    LANE.search.facets.getCurrentResult().hide();
-                    LANE.search.facets.setCurrentResult(result);
+                    Y.lane.search.facets.getCurrentResult().hide();
+                    Y.lane.search.facets.setCurrentResult(result);
                     result.show();
                     Y.fire('lane:change');
                 },
