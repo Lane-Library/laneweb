@@ -93,7 +93,6 @@
             Y.fire('lane:searchPicoChange');
             return qString;
         };
-        Y.publish("lane:searchPicoChange",{broadcast:1});
     if (form) {
         searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"));
         Y.on("lane:suggestSelect",  function(event) {
