@@ -5592,7 +5592,7 @@ Y.CustomEvent.prototype = {
             }
 
             if (this.broadcast == 2) {
-                Y.fire.apply(Y.Global, a);
+                Y.Global.fire.apply(Y.Global, a);
             }
         }
     },

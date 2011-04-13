@@ -2,7 +2,7 @@
     
     // custom popin event
     var onPopinHandler;
-    Y.publish('lane:popin');
+    Y.publish('lane:popin',{broadcast:1});
     
         onPopinHandler = function(el) {
             //FIXME: are elms returned in the right order? probably not.

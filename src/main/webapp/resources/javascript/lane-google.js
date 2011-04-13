@@ -37,12 +37,14 @@
         
         // for search result event tracking
     Y.publish("lane:searchResultClick",{
+        broadcast:1,
         emitFacade: true,
         searchTerms:null,
         resultTitle:null,
         resultPosition:null
     });
     Y.publish("lane:browseResultClick",{
+        broadcast:1,
         emitFacade: true,
         resultTitle:null,
         resultPosition:null

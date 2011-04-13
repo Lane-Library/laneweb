@@ -13,7 +13,7 @@
             searchReset.setStyle("display","none");
             form.one("fieldset").append(searchReset);
         }
-        Y.publish("lane:searchFormReset",{emitFacade: true});
+        Y.publish("lane:searchFormReset",{broadcast:1,emitFacade: true});
         searchReset.on("click", function(e){
             reset.resetSearch(e);
         });

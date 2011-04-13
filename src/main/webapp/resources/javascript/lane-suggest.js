@@ -343,6 +343,7 @@ function handleQueryResponse (e) {
                 }
             };
             this.publish("lane:suggestSelect",{
+                broadcast:1,
                 emitFacade: true,
                 suggestion:null,
                 parentForm:null

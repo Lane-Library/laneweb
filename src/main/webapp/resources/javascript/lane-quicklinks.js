@@ -3,6 +3,7 @@
         qlOptions;
     if (qlNode) {
         Y.publish("lane:quickLinkClick",{
+            broadcast:1,
             emitFacade: true,
             linkName:null
         });
