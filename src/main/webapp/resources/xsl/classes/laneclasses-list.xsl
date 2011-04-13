@@ -15,6 +15,7 @@
                         <xsl:value-of select="$currentYear" />
                     </div>
                     <xsl:for-each-group select="lc:event_data" group-by="lc:event_name">
+                        <xsl:sort select="./lc:event_name/text()"/>
                         <xsl:for-each select="current-group()[last()]">
                             <xsl:if test="contains( ./lc:event_dates/lc:start_date/text(), $currentYear )">
                                 <xsl:call-template name="event_data" />
@@ -27,12 +28,12 @@
                         <div><xsl:value-of select="$currentYear - 1" /></div>
                         <ul>
                             <xsl:for-each-group select="lc:event_data" group-by="lc:event_name">
+                                <xsl:sort select="./lc:event_name/text()"/>
                                 <xsl:for-each select="current-group()[last()]">
                                     <xsl:if test="not(contains( ./lc:event_dates/lc:start_date/text(), $currentYear))">
                                         <xsl:call-template name="event_data" />
                                     </xsl:if>
                                 </xsl:for-each>
-
                             </xsl:for-each-group>
                         </ul>
                     </li>
