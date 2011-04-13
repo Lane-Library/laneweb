@@ -2,11 +2,11 @@
     var qlNode = Y.one('#qlinks'),
         qlOptions;
     if (qlNode) {
-        Y.publish("lane:quickLinkClick",{
-            broadcast:1,
-            emitFacade: true,
-            linkName:null
-        });
+//        Y.publish("lane:quickLinkClick",{
+//            broadcast:1,
+//            emitFacade: true,
+//            linkName:null
+//        });
         qlOptions = qlNode.all("option");
         qlNode.on('change', function() {
             var i = qlNode.get('selectedIndex'), v = qlOptions.item(i).get('value');
