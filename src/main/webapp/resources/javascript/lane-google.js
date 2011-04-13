@@ -37,11 +37,13 @@
         
         // for search result event tracking
     Y.publish("lane:searchResultClick",{
+    	type : "lane:searchResultClick",
         searchTerms:null,
         resultTitle:null,
         resultPosition:null
     });
     Y.publish("lane:browseResultClick",{
+    	type : "lane:browseResultClick",
         resultTitle:null,
         resultPosition:null
     });
