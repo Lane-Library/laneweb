@@ -41,10 +41,10 @@
         resultTitle:null,
         resultPosition:null
     });
-    Y.publish("lane:browseResultClick",{
-        resultTitle:null,
-        resultPosition:null
-    });
+//    Y.publish("lane:browseResultClick",{
+//        resultTitle:null,
+//        resultPosition:null
+//    });
     Y.on("click", function(event) {
         
         var link = event.target;
