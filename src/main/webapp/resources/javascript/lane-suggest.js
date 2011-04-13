@@ -342,12 +342,6 @@ function handleQueryResponse (e) {
                     input.ac.get("dataSource").set("source",limit);
                 }
             };
-            this.publish("lane:suggestSelect",{
-                broadcast:1,
-                emitFacade: true,
-                suggestion:null,
-                parentForm:null
-            });
             acDS.plug({fn : Y.Plugin.DataSourceJSONSchema, cfg : {
                 schema : { resultListLocator : "suggest" }
             }});
@@ -457,7 +451,7 @@ function handleQueryResponse (e) {
                 select : function (e) {
                     if(acWidget.getValue()){
                         input.ac.set("queryValue", acWidget.getValue());
-                        self.fire("lane:suggestSelect",{
+                        Y.fire("lane:suggestSelect",{
                             suggestion:input.ac.get("queryValue"),
                             parentForm:Y.Node.getDOMNode(input.ancestor("form"))
                         });
