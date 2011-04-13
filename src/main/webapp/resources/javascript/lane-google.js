@@ -37,13 +37,11 @@
         
         // for search result event tracking
     Y.publish("lane:searchResultClick",{
-    	type : "lane:searchResultClick",
         searchTerms:null,
         resultTitle:null,
         resultPosition:null
     });
     Y.publish("lane:browseResultClick",{
-    	type : "lane:browseResultClick",
         resultTitle:null,
         resultPosition:null
     });
@@ -83,12 +81,12 @@
     });
     Y.on("lane:searchResultClick",  function(event) {
         if (gaPageTracker !== undefined) {
-            gaPageTracker._trackEvent(event.type, event.searchTerms, event.resultTitle, event.resultPosition);
+            gaPageTracker._trackEvent("lane:searchResultClick", event.searchTerms, event.resultTitle, event.resultPosition);
         }
     });
     Y.on("lane:browseResultClick",  function(event) {
         if (gaPageTracker !== undefined) {
-            gaPageTracker._trackEvent(event.type, document.location.pathname, event.resultTitle, event.resultPosition);
+            gaPageTracker._trackEvent("lane:browseResultClick", document.location.pathname, event.resultTitle, event.resultPosition);
         }
     });
     Y.on("lane:searchFormReset",  function(event) {
