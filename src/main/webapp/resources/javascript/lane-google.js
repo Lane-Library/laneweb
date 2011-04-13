@@ -44,8 +44,8 @@
         resultPosition:null
     });
     Y.publish("lane:browseResultClick",{
-        broadcast:1,
-//        emitFacade: true,
+//        broadcast:1,
+        emitFacade: true,
         resultTitle:null,
         resultPosition:null
     });
