@@ -45,7 +45,7 @@
     });
     Y.publish("lane:browseResultClick",{
         broadcast:1,
-        emitFacade: true,
+//        emitFacade: true,
         resultTitle:null,
         resultPosition:null
     });
