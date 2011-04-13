@@ -21,49 +21,31 @@
                 }
                 gaPageTracker._trackPageview();
                 Y.on("trackable", function(link, event) {
-                	var trackingData;
-                	if (link.get("trackable")) {
-                		trackingData = link.get("trackingData");
+                    var trackingData;
+                    if (link.get("trackable")) {
+                        trackingData = link.get("trackingData");
                         if (trackingData.external) {
                             gaPageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(trackingData.title));
                         } else {
                             gaPageTracker._trackPageview('/ONSITE/' + encodeURIComponent(trackingData.title) + '/' + trackingData.path);
                         }
-                	}
+                    }
                 });
             }
         }
     });
-        
-        // for search result event tracking
-    Y.publish("lane:searchResultClick",{
-        searchTerms:null,
-        resultTitle:null,
-        resultPosition:null
-    });
-//    Y.publish("lane:browseResultClick",{
-//        resultTitle:null,
-//        resultPosition:null
-//    });
     Y.on("click", function(event) {
-        
-        var link = event.target;
-        while (link && link.get('nodeName') != 'A') {
-            link = link.get('parentNode');
-        }
-        if (link) {
-            if (link.ancestor(".lwSearchResults")) {
-                if (Y.lane.SearchResult.getSearchTerms()) {
-                    Y.fire("lane:searchResultClick", {
-                        searchTerms: Y.lane.SearchResult.getSearchTerms(),
-                        resultTitle: link.get('textContent'),
-                        resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
-                    });
+        if (gaPageTracker !== undefined) {
+            var searchTerms = Y.lane.SearchResult.getSearchTerms(),
+                link = event.target.get("nodeName") == "A" ? event.target : event.target.ancestor("a"),
+                resultTitle, resultPosition;
+            if (link && link.ancestor(".lwSearchResults")) {
+                resultTitle = link.get("textContent");
+                resultPosition = parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10);
+                if (searchTerms) {
+                    gaPageTracker._trackEvent("lane:searchResultClick", searchTerms, resultTitle, resultPosition);
                 } else {
-                    Y.fire("lane:browseResultClick", {
-                        resultTitle: link.get('textContent'),
-                        resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
-                    });
+                    gaPageTracker._trackEvent("lane:browseResultClick", document.location.pathname, resultTitle, resultPosition);
                 }
             }
         }
@@ -77,16 +59,6 @@
     Y.on("lane:quickLinkClick",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, event.linkName);
-        }
-    });
-    Y.on("lane:searchResultClick",  function(event) {
-        if (gaPageTracker !== undefined) {
-            gaPageTracker._trackEvent("lane:searchResultClick", event.searchTerms, event.resultTitle, event.resultPosition);
-        }
-    });
-    Y.on("lane:browseResultClick",  function(event) {
-        if (gaPageTracker !== undefined) {
-            gaPageTracker._trackEvent("lane:browseResultClick", document.location.pathname, event.resultTitle, event.resultPosition);
         }
     });
     Y.on("lane:searchFormReset",  function(event) {
