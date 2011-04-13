@@ -58,7 +58,7 @@
     });
     Y.on("lane:quickLinkClick",  function(event) {
         if (gaPageTracker !== undefined) {
-            gaPageTracker._trackEvent(event.type, event.linkName);
+            gaPageTracker._trackEvent("lane:quickLinkClick", event.linkName);
         }
     });
     Y.on("lane:searchFormReset",  function(event) {
