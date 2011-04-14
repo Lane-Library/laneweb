@@ -6,7 +6,9 @@
     
     maybeCreatePopup = function(title, body, width, xy) {
     	var boundingBox;
-    	width = width || 350;
+    	if (width == "auto") {
+    		width = 350;
+    	}
     	if (!popup) {
     		popup = new Y.lane.Popup({
     			visible : false,
