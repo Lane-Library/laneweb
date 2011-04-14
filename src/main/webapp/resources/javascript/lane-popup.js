@@ -1,6 +1,7 @@
 (function() {
+	
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
-
+    
     var popup, container, maybeCreatePopup, popupWindow, showWindow;
     
     maybeCreatePopup = function(title, body, width, xy) {
@@ -17,8 +18,12 @@
     		boundingBox.one("#popupClose").on("click", function() {
     			popup.hide();
     		});
-//    		popup.plug(Y.Plugin.Drag);
-//    		popup.dd.addHandle(popup.get("contentBox"));
+    		//FIXME: figure out why I need to sandbox this:
+    		YUI().use('dd-drag', function(Y) {
+    		    var dd = new Y.DD.Drag({
+    		        node: ".yui3-popup"
+    		    });   
+    		});
     	}
     	popup.set("headerContent", title);
     	popup.set("bodyContent", body);
@@ -50,9 +55,9 @@
         popupWindow.focus();
     };
     Y.on("click", function(event) {
-        var args, href, popupElement, title, body, regex,
-            anchor = event.target.ancestor("a") || event.target,
-            rel = anchor.get("rel");
+        var args, href, popupElement, title, body,
+            anchor = event.target.get("nodeName") == "A" ? event.target : event.target.ancestor("a"),
+            rel = anchor !== null && anchor.get("rel");
         if (rel && rel.indexOf("popup") === 0) {
             event.preventDefault();
             args = rel.split(" ");
