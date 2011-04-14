@@ -1,5 +1,5 @@
 (function() {
-    Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition]);
+    Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain]);
 
     var popup, container, maybeCreatePopup, popupWindow, showWindow;
     
@@ -9,13 +9,16 @@
                 headerContent : title,
                 bodyContent : body,
                 xy : xy,
-                width : 334
+                width : 334,
+                constrain : Y.one("body"),
+                visible : false
+            });
+            popup.get("boundingBox").append("<a id='popupClose'>Close</a>");
+            popup.get("boundingBox").one("#popupClose").on("click", function() {
+            	popup.hide();
             });
             popup.plug(Y.Plugin.Drag);
             popup.dd.addHandle(popup.get("contentBox"));
-            popup.get("contentBox").on("click", function(event) {
-                popup.hide();
-            });
         } else {
             popup.set("headerContent", title);
             popup.set("bodyContent", body);
@@ -56,7 +59,6 @@
             if (args[1] === "local") {
                 popupElement = Y.one('#' + args[2]);
                 title = popupElement && popupElement.get('title') ? popupElement.get('title') : '';
-                title += "<a>Close</a>";
                 body = popupElement ? popupElement.get('innerHTML') : '';
                 maybeCreatePopup(title, body, [event.pageX, event.pageY]);
                 popup.render();
