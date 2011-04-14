@@ -29,9 +29,7 @@
     position : absolute;
     right : 5px;
     top : 5px;
-    font-size : 0;
     border-bottom : none;
-    text-indent : -20000px
 }
 #popupClose:hover {
     background-image : url(/././resources/images/close-button-on.gif)
