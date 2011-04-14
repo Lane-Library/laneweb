@@ -2,7 +2,8 @@
 a {
     color : #1C4B70;
     text-decoration : none;
-    border-bottom : 1px dotted #81785A
+    border-bottom : 1px dotted #81785A;
+    cursor : pointer
 }
 a:hover {
     color : #820000;
