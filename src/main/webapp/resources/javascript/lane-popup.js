@@ -1,29 +1,29 @@
 (function() {
-    Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain]);
+    Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
 
     var popup, container, maybeCreatePopup, popupWindow, showWindow;
     
-    maybeCreatePopup = function(title, body, xy) {
-        if (!popup) {
-            popup = new Y.lane.Popup({
-                headerContent : title,
-                bodyContent : body,
-                xy : xy,
-                width : 334,
-                constrain : Y.one("body"),
-                visible : false
-            });
-            popup.get("boundingBox").append("<a id='popupClose'>Close</a>");
-            popup.get("boundingBox").one("#popupClose").on("click", function() {
-            	popup.hide();
-            });
-            popup.plug(Y.Plugin.Drag);
-            popup.dd.addHandle(popup.get("contentBox"));
-        } else {
-            popup.set("headerContent", title);
-            popup.set("bodyContent", body);
-            popup.set("xy", xy);
-        }
+    maybeCreatePopup = function(title, body, width, xy) {
+    	var boundingBox;
+    	width = width || 350;
+    	if (!popup) {
+    		popup = new Y.lane.Popup({
+    			visible : false,
+    			constrain : true,
+    			render : true
+    		});
+    		boundingBox = popup.get("boundingBox");
+    		boundingBox.append("<a id='popupClose'></a>");
+    		boundingBox.one("#popupClose").on("click", function() {
+    			popup.hide();
+    		});
+//    		popup.plug(Y.Plugin.Drag);
+//    		popup.dd.addHandle(popup.get("contentBox"));
+    	}
+    	popup.set("headerContent", title);
+    	popup.set("bodyContent", body);
+    	popup.set("width", width);
+    	popup.set("xy", xy);
     };
     showWindow = function(url, type, strWidth, strHeight) {
         if (popupWindow !== undefined && !popupWindow.closed) {
@@ -60,8 +60,7 @@
                 popupElement = Y.one('#' + args[2]);
                 title = popupElement && popupElement.get('title') ? popupElement.get('title') : '';
                 body = popupElement ? popupElement.get('innerHTML') : '';
-                maybeCreatePopup(title, body, [event.pageX, event.pageY]);
-                popup.render();
+                maybeCreatePopup(title, body, popupElement.getStyle("width"), [event.pageX, event.pageY]);
                 popup.show();
             } else {
                 showWindow(anchor.get("href"), args[1], args[2], args[3]);
