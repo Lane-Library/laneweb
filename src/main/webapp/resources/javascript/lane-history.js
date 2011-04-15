@@ -3,8 +3,8 @@
  * application for history tracking.
  */
 (function() {
-	
-	//FIXME: find some way to disable if no emrid
+    
+    //FIXME: find some way to disable if no emrid
     
     var HistoryTracker = function() {
         HistoryTracker.superclass.constructor.apply(this, arguments);
@@ -32,13 +32,13 @@
     Y.lane.HistoryTracker = new HistoryTracker();
     
     Y.on("trackable", function(link, event){
-    	var trackingData = link.get("trackingData");
-    	if (trackingData.external) {
-        	Y.lane.HistoryTracker.track({
-        		label : trackingData.title,
-        		url : link.get("url")
-        	});
-    	}
+        var trackingData = link.get("trackingData");
+        if (trackingData.external) {
+            Y.lane.HistoryTracker.track({
+                label : trackingData.title,
+                url : link.get("url")
+            });
+        }
     });
     
 })();

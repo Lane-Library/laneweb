@@ -161,7 +161,7 @@
     dcsTag();
     
     Y.on("trackable", function(link, event) {
-    	if (link.get("trackable")) {
+        if (link.get("trackable")) {
             var trackingData = link.get("trackingData"),
                 args = [];
             if (trackingData.host !== undefined) {
@@ -197,6 +197,6 @@
                 args.push('1');
             }
             dcsMultiTrack.call(dcsMultiTrack, args);
-    	}
+        }
     });
 })();

@@ -7,11 +7,11 @@
     });
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
-    		setContent : function(content) {
-    			this.get("contentBox").set("innerHTML", content);
-    			this.fire("contentChanged");
-    			this.centered();
-    		}
+            setContent : function(content) {
+                this.get("contentBox").set("innerHTML", content);
+                this.fire("contentChanged");
+                this.centered();
+            }
     });
 
     Y.lane.Lightbox = new Lightbox({
@@ -21,49 +21,49 @@
     
     Y.lane.Lightbox.get("boundingBox").append("<a id='lightboxClose'></a>");
     Y.lane.Lightbox.get("boundingBox").one("#lightboxClose").on("click", function(event) {
-    	event.preventDefault();
+        event.preventDefault();
       Y.lane.Lightbox.hide();
     });
     Y.lane.Lightbox.render();
     Y.lane.LightboxBg.render();
     
     Y.lane.Lightbox.after("visibleChange", function(event) {
-    	if (!event.newVal) {
-  	      Y.lane.LightboxBg.hide();
-  	      this.get("boundingBox").setAttribute("style","");
-    	}
+        if (!event.newVal) {
+            Y.lane.LightboxBg.hide();
+            this.get("boundingBox").setAttribute("style","");
+        }
     });
     
     Y.lane.Lightbox.on("visibleChange", function(event) {
-    	if (event.newVal) {
-  	      Y.lane.LightboxBg.show();
-  	      var boundingBox = this.get("boundingBox");
-      	  boundingBox.setStyle("overflow", "hidden");
-  	      var width = boundingBox.get("clientWidth");
-  	      var height = boundingBox.get("clientHeight");
-  	      var left = boundingBox.get("offsetLeft");
-  	      var top = boundingBox.get("offsetTop");
-      	  var anim1 = new Y.Anim({
-			node : boundingBox,
-			duration : 0.3,
-			to : {width:width, height:height, left:left, top:top},
-			from : {width:0, height:0, left:left + (width/2), top: top + (height/2)}
-	      });
-      	  var contentBox = this.get("contentBox");
-      	  contentBox.setStyle("position","relative");
-      	  var anim2 = new Y.Anim({
-      		  node : contentBox,
-      		  duration : 0.3,
-      		  from : {left:contentBox.get("clientWidth")/-2, top: contentBox.get("clientHeight")/-2},
-      		  to : {left:0,top:0}
-      	  });
-      	  anim1.on("end", function() {
-      		  boundingBox.setStyle("overflow", "visible");
-      		  contentBox.setAttribute("style","");
-      	  });
-	      anim1.run();
-	      anim2.run();
-    	}
+        if (event.newVal) {
+            Y.lane.LightboxBg.show();
+            var boundingBox = this.get("boundingBox");
+            boundingBox.setStyle("overflow", "hidden");
+            var width = boundingBox.get("clientWidth");
+            var height = boundingBox.get("clientHeight");
+            var left = boundingBox.get("offsetLeft");
+            var top = boundingBox.get("offsetTop");
+            var anim1 = new Y.Anim({
+            node : boundingBox,
+            duration : 0.3,
+            to : {width:width, height:height, left:left, top:top},
+            from : {width:0, height:0, left:left + (width/2), top: top + (height/2)}
+          });
+            var contentBox = this.get("contentBox");
+            contentBox.setStyle("position","relative");
+            var anim2 = new Y.Anim({
+                node : contentBox,
+                duration : 0.3,
+                from : {left:contentBox.get("clientWidth")/-2, top: contentBox.get("clientHeight")/-2},
+                to : {left:0,top:0}
+            });
+            anim1.on("end", function() {
+                boundingBox.setStyle("overflow", "visible");
+                contentBox.setAttribute("style","");
+            });
+          anim1.run();
+          anim2.run();
+        }
     });
     
 

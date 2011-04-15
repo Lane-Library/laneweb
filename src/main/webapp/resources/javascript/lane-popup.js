@@ -1,36 +1,36 @@
 (function() {
-	
+    
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
     
     var popup, container, maybeCreatePopup, popupWindow, showWindow;
     
     maybeCreatePopup = function(title, body, width, xy) {
-    	var boundingBox;
-    	if (width == "auto") {
-    		width = 350;
-    	}
-    	if (!popup) {
-    		popup = new Y.lane.Popup({
-    			visible : false,
-    			constrain : true,
-    			render : true
-    		});
-    		boundingBox = popup.get("boundingBox");
-    		boundingBox.append("<a id='popupClose'></a>");
-    		boundingBox.one("#popupClose").on("click", function() {
-    			popup.hide();
-    		});
-    		//FIXME: figure out why I need to sandbox this:
-    		YUI().use('dd-drag', function(Y) {
-    		    var dd = new Y.DD.Drag({
-    		        node: ".yui3-popup"
-    		    });   
-    		});
-    	}
-    	popup.set("headerContent", title);
-    	popup.set("bodyContent", body);
-    	popup.set("width", width);
-    	popup.set("xy", xy);
+        var boundingBox;
+        if (width == "auto") {
+            width = 350;
+        }
+        if (!popup) {
+            popup = new Y.lane.Popup({
+                visible : false,
+                constrain : true,
+                render : true
+            });
+            boundingBox = popup.get("boundingBox");
+            boundingBox.append("<a id='popupClose'></a>");
+            boundingBox.one("#popupClose").on("click", function() {
+                popup.hide();
+            });
+            //FIXME: figure out why I need to sandbox this:
+            YUI().use('dd-drag', function(Y) {
+                var dd = new Y.DD.Drag({
+                    node: ".yui3-popup"
+                });   
+            });
+        }
+        popup.set("headerContent", title);
+        popup.set("bodyContent", body);
+        popup.set("width", width);
+        popup.set("xy", xy);
     };
     showWindow = function(url, type, strWidth, strHeight) {
         if (popupWindow !== undefined && !popupWindow.closed) {
