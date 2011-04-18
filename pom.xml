@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
@@ -61,10 +63,10 @@
         <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
-            	<groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-compiler-plugin</artifactId>
-            	<version>2.3.2</version>
-            	<configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
                     <target>1.6</target>
                     <source>1.6</source>
                 </configuration>
@@ -198,9 +200,9 @@
                                 <include>lane-quicklinks-min.js</include>
                                 <include>lane-forms-min.js</include>
                                 <include>lane-search-reset-min.js</include>
-                                <include>lane-search-hoverText-min.js</include>                                                              
-                                <include>lane-bookmarks-min.js</include>                                                             
-                                <!--<include>lane-history-min.js</include>-->                                                           
+                                <include>lane-search-hoverText-min.js</include>
+                                <include>lane-bookmarks-min.js</include>
+                                <!--<include>lane-history-min.js</include>-->
                                 <include>lane-feedback-min.js</include>
                             </includes>
                         </aggregation>
@@ -291,9 +293,9 @@
                 <version>2.0</version>
             </plugin>
             <plugin>
-            	<groupId>org.codehaus.mojo</groupId>
-            	<artifactId>jdepend-maven-plugin</artifactId>
-            	<version>2.0-beta-2</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+                <version>2.0-beta-2</version>
             </plugin>
             <plugin>
                 <groupId>gr.abiss.mvn.plugins</groupId>
@@ -326,7 +328,8 @@
                     <smtpHost>smtp.stanford.edu</smtpHost>
                     <smtpPort implementation="java.lang.Integer">25</smtpPort>
                     <toAddresses>
-                        <toAddress implementation="java.lang.String">ceyates@stanford.edu</toAddress>
+                        <toAddress implementation="java.lang.String"
+                            >ceyates@stanford.edu</toAddress>
                     </toAddresses>
                 </configuration>
                 <reportSets>
@@ -341,93 +344,10 @@
     </reporting>
     <dependencies>
         <dependency>
-            <artifactId>commons-codec</artifactId>
-            <groupId>commons-codec</groupId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <artifactId>commons-httpclient</artifactId>
-            <groupId>commons-httpclient</groupId>
-            <version>3.1</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <artifactId>eresources-impl</artifactId>
-            <groupId>edu.stanford.irt</groupId>
-            <version>1.6.0</version>
-        </dependency>
-        <dependency>
-            <artifactId>querymap</artifactId>
-            <groupId>edu.stanford.irt</groupId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <artifactId>spellcheck</artifactId>
-            <groupId>edu.stanford.irt</groupId>
-            <version>1.2.4</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>googleapi</artifactId>
-                    <groupId>com.google</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jazzy-core</artifactId>
-                    <groupId>com.swabunga.spell</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>soap</artifactId>
-                    <groupId>soap</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <artifactId>suggest-query</artifactId>
-            <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <artifactId>search-lane</artifactId>
-            <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.31-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <artifactId>log4j</artifactId>
-            <groupId>log4j</groupId>
-            <version>1.2.16</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jmxtools</artifactId>
-                    <groupId>com.sun.jdmk</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jmxri</artifactId>
-                    <groupId>com.sun.jmx</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jms</artifactId>
-                    <groupId>javax.jms</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <artifactId>nekohtml</artifactId>
-            <groupId>net.sourceforge.nekohtml</groupId>
-            <version>1.9.11</version>
-            <exclusions>
-            	<exclusion>
-            		<artifactId>xml-apis</artifactId>
-            		<groupId>xml-apis</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>xercesImpl</artifactId>
-            		<groupId>xerces</groupId>
-            	</exclusion>
-            </exclusions>
+            <artifactId>cglib-nodep</artifactId>
+            <groupId>cglib</groupId>
+            <scope>runtime</scope>
+            <version>2.2</version>
         </dependency>
         <dependency>
             <artifactId>cocoon-configuration-api</artifactId>
@@ -439,6 +359,18 @@
             <groupId>org.apache.cocoon</groupId>
             <version>2.2.0</version>
             <exclusions>
+                <exclusion>
+                    <artifactId>cocoon-spring-configurator</artifactId>
+                    <groupId>org.apache.cocoon</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cocoon-thread-api</artifactId>
+                    <groupId>org.apache.cocoon</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cocoon-thread-impl</artifactId>
+                    <groupId>org.apache.cocoon</groupId>
+                </exclusion>
                 <exclusion>
                     <artifactId>commons-io</artifactId>
                     <groupId>commons-io</groupId>
@@ -464,36 +396,28 @@
                     <groupId>concurrent</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>log4j</artifactId>
-                    <groupId>log4j</groupId>
-                </exclusion>
-                <exclusion>
                     <artifactId>ehcache</artifactId>
                     <groupId>net.sf.ehcache</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-spring-configurator</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-thread-api</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-thread-impl</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>excalibur-instrument-api</artifactId>
                     <groupId>org.apache.excalibur.containerkit</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>spring-aop</artifactId>
-                    <groupId>org.springframework</groupId>
+                    <artifactId>excalibur-logger</artifactId>
+                    <groupId>org.apache.excalibur.containerkit</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>js</artifactId>
                     <groupId>rhino</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>xalan</artifactId>
@@ -507,19 +431,242 @@
                     <artifactId>xml-apis</artifactId>
                     <groupId>xml-apis</groupId>
                 </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>cocoon-spring-configurator</artifactId>
+            <groupId>org.apache.cocoon</groupId>
+            <scope>runtime</scope>
+            <version>2.0.0</version>
+            <exclusions>
                 <exclusion>
-                    <artifactId>excalibur-logger</artifactId>
-                    <groupId>org.apache.excalibur.containerkit</groupId>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
+            <artifactId>commons-codec</artifactId>
+            <groupId>commons-codec</groupId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <artifactId>commons-httpclient</artifactId>
+            <groupId>commons-httpclient</groupId>
+            <version>3.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>commons-io</artifactId>
+            <groupId>commons-io</groupId>
+            <scope>runtime</scope>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <artifactId>commons-lang</artifactId>
+            <groupId>commons-lang</groupId>
+            <scope>runtime</scope>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <artifactId>easymock</artifactId>
+            <groupId>org.easymock</groupId>
+            <scope>test</scope>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>easymockclassextension</artifactId>
+            <groupId>org.easymock</groupId>
+            <scope>test</scope>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>ehcache-core</artifactId>
+            <groupId>net.sf.ehcache</groupId>
+            <scope>runtime</scope>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <artifactId>eresources-impl</artifactId>
+            <groupId>edu.stanford.irt</groupId>
+            <version>1.6.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>icu4j</artifactId>
+            <groupId>com.ibm.icu</groupId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <artifactId>itext</artifactId>
+            <groupId>com.lowagie</groupId>
+            <scope>runtime</scope>
+            <version>2.1.4</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcmail-jdk14</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>bcprov-jdk14</artifactId>
+                    <groupId>bouncycastle</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <groupId>org.codehaus.jackson</groupId>
+            <scope>runtime</scope>
+            <version>1.7.1</version>
+        </dependency>
+        <dependency>
+            <artifactId>javamelody-core</artifactId>
+            <groupId>net.bull.javamelody</groupId>
+            <scope>runtime</scope>
+            <version>1.26.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>joost</artifactId>
+            <groupId>net.sf.joost</groupId>
+            <scope>runtime</scope>
+            <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <artifactId>jrobin</artifactId>
+            <groupId>org.jrobin</groupId>
+            <scope>runtime</scope>
+            <version>1.5.9</version>
+        </dependency>
+        <dependency>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
+            <scope>test</scope>
+            <version>4.8.1</version>
+        </dependency>
+        <dependency>
+            <artifactId>log4j</artifactId>
+            <groupId>log4j</groupId>
+            <version>1.2.16</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jms</artifactId>
+                    <groupId>javax.jms</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jmxri</artifactId>
+                    <groupId>com.sun.jmx</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jmxtools</artifactId>
+                    <groupId>com.sun.jdmk</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>nekohtml</artifactId>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <version>1.9.11</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xercesImpl</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>ojdbc6</artifactId>
+            <groupId>com.oracle.ojdbc</groupId>
+            <scope>provided</scope>
+            <version>11.2.0.1.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>querymap</artifactId>
+            <groupId>edu.stanford.irt</groupId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <artifactId>saxon</artifactId>
+            <groupId>net.sf.saxon</groupId>
+            <scope>runtime</scope>
+            <version>9.1.0.8</version>
+        </dependency>
+        <dependency>
+            <artifactId>saxon-dom</artifactId>
+            <groupId>net.sf.saxon</groupId>
+            <scope>runtime</scope>
+            <version>9.1.0.8</version>
+        </dependency>
+        <dependency>
+            <artifactId>search-lane</artifactId>
+            <groupId>edu.stanford.irt.search</groupId>
+            <version>1.6.31</version>
+        </dependency>
+        <dependency>
+            <artifactId>servlet-api</artifactId>
+            <groupId>javax.servlet</groupId>
+            <scope>provided</scope>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
             <artifactId>slf4j-api</artifactId>
+            <groupId>org.slf4j</groupId>
             <version>1.6.1</version>
         </dependency>
         <dependency>
-            <artifactId>spring-web</artifactId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <groupId>org.slf4j</groupId>
+            <scope>runtime</scope>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <artifactId>spellcheck</artifactId>
+            <groupId>edu.stanford.irt</groupId>
+            <version>1.2.4</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>googleapi</artifactId>
+                    <groupId>com.google</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jazzy-core</artifactId>
+                    <groupId>com.swabunga.spell</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>soap</artifactId>
+                    <groupId>soap</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>spring-aop</artifactId>
+            <groupId>org.springframework</groupId>
+            <scope>runtime</scope>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-beans</artifactId>
+            <groupId>org.springframework</groupId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-context</artifactId>
+            <groupId>org.springframework</groupId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-core</artifactId>
             <groupId>org.springframework</groupId>
             <version>3.0.5.RELEASE</version>
         </dependency>
@@ -543,170 +690,36 @@
             </exclusions>
         </dependency>
         <dependency>
-            <artifactId>servlet-api</artifactId>
-            <groupId>javax.servlet</groupId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <artifactId>cglib-nodep</artifactId>
-            <groupId>cglib</groupId>
-            <version>2.2</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <artifactId>commons-io</artifactId>
-            <groupId>commons-io</groupId>
-            <version>1.4</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <artifactId>commons-lang</artifactId>
-            <groupId>commons-lang</groupId>
-            <version>2.4</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <artifactId>saxon</artifactId>
-            <groupId>net.sf.saxon</groupId>
-            <version>9.1.0.8</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <artifactId>saxon-dom</artifactId>
-            <groupId>net.sf.saxon</groupId>
-            <version>9.1.0.8</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <artifactId>cocoon-spring-configurator</artifactId>
-            <groupId>org.apache.cocoon</groupId>
-            <version>2.0.0</version>
-            <scope>runtime</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-                <exclusion>
-                	<artifactId>spring-aop</artifactId>
-                	<groupId>org.springframework</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.1</version>
-            <scope>runtime</scope>
+            <artifactId>spring-test</artifactId>
+            <groupId>org.springframework</groupId>
+            <scope>test</scope>
+            <version>3.0.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
             <version>3.0.5.RELEASE</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
-            <artifactId>junit</artifactId>
-            <groupId>junit</groupId>
-            <version>4.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <artifactId>easymock</artifactId>
-            <groupId>org.easymock</groupId>
-            <version>3.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <artifactId>easymockclassextension</artifactId>
-            <groupId>org.easymock</groupId>
-            <version>3.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <artifactId>spring-test</artifactId>
+            <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
             <version>3.0.5.RELEASE</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.sf.joost</groupId>
-            <artifactId>joost</artifactId>
-            <version>0.9.1</version>
-            <type>jar</type>
-            <scope>runtime</scope>
+            <artifactId>spring-webmvc</artifactId>
+            <groupId>org.springframework</groupId>
+            <version>3.0.5.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.jrobin</groupId>
-            <artifactId>jrobin</artifactId>
-            <version>1.5.9</version>
-            <scope>runtime</scope>
+            <artifactId>suggest-query</artifactId>
+            <groupId>edu.stanford.irt.suggest</groupId>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
-            <groupId>com.lowagie</groupId>
-            <artifactId>itext</artifactId>
-            <version>2.1.4</version>
-            <scope>runtime</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>bcmail-jdk14</artifactId>
-                    <groupId>bouncycastle</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>bcprov-jdk14</artifactId>
-                    <groupId>bouncycastle</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <scope>runtime</scope>
             <version>1.3.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.bull.javamelody</groupId>
-            <artifactId>javamelody-core</artifactId>
-            <version>1.26.0</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-        	<groupId>com.ibm.icu</groupId>
-        	<artifactId>icu4j</artifactId>
-        	<version>4.0.1</version>
-        	<type>jar</type>
-        	<scope>compile</scope>
-        </dependency>
-        <dependency>
-        	<groupId>org.springframework</groupId>
-        	<artifactId>spring-webmvc</artifactId>
-        	<version>3.0.5.RELEASE</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.codehaus.jackson</groupId>
-        	<artifactId>jackson-mapper-asl</artifactId>
-        	<version>1.7.1</version>
-        	<scope>runtime</scope>
-        </dependency>
-        <dependency>
-        	<groupId>com.oracle.ojdbc</groupId>
-        	<artifactId>ojdbc6</artifactId>
-        	<version>11.2.0.1.0</version>
-        	<type>jar</type>
-        	<scope>provided</scope>
-        </dependency>
-        <dependency>
-        	<groupId>org.springframework</groupId>
-        	<artifactId>spring-aop</artifactId>
-        	<version>3.0.5.RELEASE</version>
-        	<scope>runtime</scope>
-        </dependency>
-        <dependency>
-        	<groupId>net.sf.ehcache</groupId>
-        	<artifactId>ehcache-core</artifactId>
-        	<version>2.3.2</version>
-        	<scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>
