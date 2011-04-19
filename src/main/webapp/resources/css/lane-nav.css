@@ -37,7 +37,7 @@
     display : none;
     background-color : white;
     position : absolute;
-    border : 1px #D6D5C7 solid;
+    border : 1px #C3C3C3 solid;
     border-top : none;
     padding : 6px 0;
     z-index : 2;
@@ -49,9 +49,9 @@
     -webkit-border-bottom-left-radius:5px;
     -webkit-border-bottom-right-radius:5px;
     border-radius : 0 0 5px 5px;
-    -webkit-box-shadow: 5px 5px 5px #AAAAAA;
-    -moz-box-shadow: 5px 5px 5px #AAAAAA;
-    box-shadow: 5px 5px 5px #AAAAAA;
+    -webkit-box-shadow: 0px 2px 2px #ADADAD;
+    -moz-box-shadow: 0px 2px 2px #ADADAD;
+    box-shadow: 0 2px 2px #ADADAD;
 }
 #laneNav li:hover ul,
 #laneNav .hover ul {
