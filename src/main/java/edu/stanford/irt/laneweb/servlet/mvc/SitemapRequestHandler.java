@@ -23,15 +23,15 @@ import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
-    private DataBinder dataBinder;
+    protected DataBinder dataBinder;
 
-    private Set<String> methodsNotAllowed = Collections.emptySet();
+    protected Set<String> methodsNotAllowed = Collections.emptySet();
 
-    private Processor processor;
+    protected Processor processor;
 
-    private ServletContext servletContext;
+    protected ServletContext servletContext;
     
-    private String prefix = "";
+    protected String prefix = "";
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
             IOException {
@@ -41,9 +41,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         }
         Map<String, Object> model = new HashMap<String, Object>();
         this.dataBinder.bind(model, request);
-        String requestURI = request.getRequestURI();
-        String basePath = (String) request.getAttribute(Model.BASE_PATH);
-        String sitemapURI = requestURI.substring(basePath.length() + this.prefix.length());
+        String sitemapURI = getSitemapURI(request);
         LanewebEnvironment environment = getEnvironment();
         environment.setModel(model);
         environment.setHttpServletResponse(response);
@@ -82,6 +80,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     public void setServletContext(final ServletContext servletContext) {
         this.servletContext = servletContext;
+    }
+    
+    protected String getSitemapURI(HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        String basePath = (String) request.getAttribute(Model.BASE_PATH);
+        return requestURI.substring(basePath.length() + this.prefix.length());
     }
     
     protected abstract LanewebEnvironment getEnvironment();
