@@ -6,9 +6,9 @@
 }
 #feedback {
     width : 750px;
-    border : 10px solid #C1B8A2;
+    border : 10px solid #7C786C;
     border-radius : 12px;
-    background-color : #5C5644;
+    background-color : #F6F3E5;
     /*TODO: update this image url when finalized*/
     background-image : url(/././samples/feedback/feedbackBg1.png);
     background-position : top;
@@ -37,11 +37,11 @@
 }
 #feedbackItems {
     background-color : white;
-    border : 1px solid #7D786c
+    border : 1px solid #7C786C
 }
 .yui3-feedback-menu-active {
     background-color : white;
-    border : 1px solid #7D786c;
+    border : 1px solid #7C786C;
     border-right : none;
     width : 110%
 }
