@@ -13,6 +13,7 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
 
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         try {
             handleRequest(request, response);
         } catch (ServletException e) {
