@@ -31,7 +31,8 @@
 .button.all-classes,
 .button.all-classes:hover {
     background-position : 11px -220px;
-    width : 156px
+    width : 156px;
+    margin : 15px 0
 }
 .button.biomed-sem,
 .button.biomed-sem:hover {

@@ -32,7 +32,8 @@ em {
 .more.classes {
     border-top : none;
     font-size : 10px;
-    padding : 6px
+    padding : 6px;
+    margin : 15px 0
 }
 .more a {
     border : none;
