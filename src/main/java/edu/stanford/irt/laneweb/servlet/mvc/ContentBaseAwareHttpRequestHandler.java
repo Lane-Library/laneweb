@@ -15,6 +15,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandler {
 
+    @Override
     protected Resource getResource(final HttpServletRequest request) {
         String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
         if (path == null) {
