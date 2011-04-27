@@ -19,6 +19,7 @@
 #lightboxClose {
     cursor : pointer;
     display : block;
+    z-index : 3;
     width : 26px;
     height : 26px;
     background-image : url(/././resources/images/lightboxCloseBg1.png);
