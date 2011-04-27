@@ -16,7 +16,7 @@
 
     Y.lane.Lightbox = new Lightbox({
         visible : false,
-        constrain : Y.one("body")
+        constrain : true
     });  
     
     Y.lane.Lightbox.get("boundingBox").append("<a id='lightboxClose'></a>");
