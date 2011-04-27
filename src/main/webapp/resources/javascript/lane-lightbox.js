@@ -57,9 +57,10 @@
                 from : {left:contentBox.get("clientWidth")/-2, top: contentBox.get("clientHeight")/-2},
                 to : {left:0,top:0}
             });
-            anim1.on("end", function() {
+            anim2.on("end", function() {
                 boundingBox.setStyle("overflow", "visible");
                 contentBox.setAttribute("style","");
+                alert(Y.one(".yui3-lightboxbg").get("clientLeft"));
             });
             boundingBox.setStyle("width", 0);
             boundingBox.setStyle("height", 0);
