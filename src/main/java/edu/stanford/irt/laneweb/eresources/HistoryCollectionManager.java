@@ -202,14 +202,11 @@ public class HistoryCollectionManager implements CollectionManager {
     public Collection<Eresource> getCore(final String type) {
         Collection<String> params = new LinkedList<String>();
         params.add(type);
-        params.add(type);
         return doGet(CORE, params);
     }
 
     public Collection<Eresource> getMesh(final String type, final String mesh) {
         Collection<String> params = new LinkedList<String>();
-        params.add(mesh);
-        params.add(type);
         params.add(mesh);
         params.add(type);
         return doGet(MESH, params);
@@ -219,14 +216,11 @@ public class HistoryCollectionManager implements CollectionManager {
         Collection<String> params = new LinkedList<String>();
         params.add(mesh);
         params.add(type);
-        params.add(mesh);
-        params.add(type);
         return doGet(MESH_CORE, params);
     }
 
     public Collection<Eresource> getSubset(final String subset) {
         Collection<String> params = new LinkedList<String>();
-        params.add(subset);
         params.add(subset);
         return doGet(SUBSET, params);
     }
@@ -236,7 +230,6 @@ public class HistoryCollectionManager implements CollectionManager {
             throw new IllegalArgumentException("null type");
         }
         Collection<String> params = new LinkedList<String>();
-        params.add(type);
         params.add(type);
         return doGet(BROWSE, params);
     }
@@ -250,12 +243,9 @@ public class HistoryCollectionManager implements CollectionManager {
         if ('#' == alpha) {
             sql = BROWSE_NONALPHA;
             params.add(type);
-            params.add(type);
         } else {
             sql = BROWSE_ALPHA;
             String alphaString = new String(new char[] { alpha });
-            params.add(type);
-            params.add(alphaString);
             params.add(type);
             params.add(alphaString);
         }
