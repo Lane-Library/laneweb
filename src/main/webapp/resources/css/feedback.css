@@ -17,7 +17,7 @@
 }
 #feedback h2 {
     text-align : left;
-    margin-left : 27px;
+    margin-left : 15px;
     font-size : 32px;
     text-shadow : 1px 3px 3px white
 }
@@ -43,7 +43,8 @@
     background-color : white;
     border : 1px solid #7C786C;
     border-right : none;
-    width : 110%
+    width : 225px;
+    box-shadow : -5px 5px 5px gray
 }
 #instantHelp {
     margin-top : 50px
@@ -59,8 +60,10 @@
     text-align : left
 }
 .mainFeedback {
+    color : #585347;
     font-family : Georgia;
-    font-size : 16px
+    font-size : 18px;
+    font-weight : bold
 }
 #feedback textarea {
     width : 100%
