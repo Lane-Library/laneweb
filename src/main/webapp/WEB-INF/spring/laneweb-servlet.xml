@@ -148,9 +148,7 @@
         class="org.springframework.web.servlet.theme.FixedThemeResolver"/>
     
     <bean id="handlerExceptionResolver"
-        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapHandlerExceptionResolver"
-        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"
-    />
+        class="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver"/>
     
     <bean id="viewNameTranslator"
         class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator"/>
