@@ -268,7 +268,7 @@ public class HistoryCollectionManager implements CollectionManager {
         for (int i = 0; i < types.size(); i++) {
             stringBuffer.append(COUNT_TYPE_UNION);
         }
-        for (int i = 0; i < subsets.size(); i++) { 
+        for (int i = 0; i < subsets.size(); i++) {
             stringBuffer.append(COUNT_SUBSET_UNION);
         }
         String sql = stringBuffer.toString();
