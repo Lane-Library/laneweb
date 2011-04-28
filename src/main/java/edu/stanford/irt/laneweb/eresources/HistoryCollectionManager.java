@@ -256,7 +256,7 @@ public class HistoryCollectionManager implements CollectionManager {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             params.add(translatedQuery);
         }
         return doGetSearch(SEARCH, params, query);
@@ -282,10 +282,8 @@ public class HistoryCollectionManager implements CollectionManager {
             stmt.setString(index++, new QueryTranslator().translate(query));
             for (String type : types) {
                 stmt.setString(index++, type);
-                stmt.setString(index++, type);
             }
             for (String subset : subsets) {
-                stmt.setString(index++, subset);
                 stmt.setString(index++, subset);
             }
             rs = stmt.executeQuery();
@@ -306,7 +304,7 @@ public class HistoryCollectionManager implements CollectionManager {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             params.add(translatedQuery);
         }
         params.add(subset);
@@ -317,7 +315,7 @@ public class HistoryCollectionManager implements CollectionManager {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             params.add(translatedQuery);
         }
         params.add(type);
