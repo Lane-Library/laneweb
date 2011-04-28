@@ -6,14 +6,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
 
-    //TODO: log the exception
+    private final Logger log = LoggerFactory.getLogger(SitemapHandlerExceptionResolver.class);
+
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
+        this.log.error("handling error", ex);
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         try {
             handleRequest(request, response);
@@ -26,7 +30,7 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
     }
 
     @Override
-    protected String getSitemapURI(HttpServletRequest request) {
+    protected String getSitemapURI(final HttpServletRequest request) {
         return "/error.html";
     }
 }
