@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
 
+    //TODO: log the exception
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
