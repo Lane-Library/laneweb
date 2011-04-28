@@ -282,8 +282,10 @@ public class HistoryCollectionManager implements CollectionManager {
             stmt.setString(index++, new QueryTranslator().translate(query));
             for (String type : types) {
                 stmt.setString(index++, type);
+                stmt.setString(index++, type);
             }
             for (String subset : subsets) {
+                stmt.setString(index++, subset);
                 stmt.setString(index++, subset);
             }
             rs = stmt.executeQuery();
