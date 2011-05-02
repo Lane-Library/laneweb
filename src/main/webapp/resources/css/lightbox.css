@@ -1,6 +1,7 @@
 .yui3-lightbox {
     position : absolute;
-    z-index : 3
+    z-index : 3;
+    margin-top : 13px
 }
 
 .yui3-lightbox-hidden,
