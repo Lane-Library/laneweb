@@ -7,6 +7,8 @@
 #feedback {
     width : 750px;
     border : 10px solid #7C786C;
+    -webkit-border-radius : 12px;
+    -moz-border-radius : 12px;
     border-radius : 12px;
     background-color : #F6F3E5;
     /*TODO: update this image url when finalized*/

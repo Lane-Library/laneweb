@@ -10,6 +10,8 @@
 
 .yui3-lightboxbg {
     position : fixed;
+    /* IE needs left:0*/
+    left : 0;
     background-color : black;
     opacity : .75;
     width : 100%;
