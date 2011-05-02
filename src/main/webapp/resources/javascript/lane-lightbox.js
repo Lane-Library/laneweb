@@ -60,6 +60,8 @@
             	boundingBox.setStyle("height","auto");
             });
             boundingBox.setStyle("overflow", "hidden");
+        	boundingBox.setStyle("width", "0");
+        	boundingBox.setStyle("height", "0");
             anim1.run();
             anim2.run();
         }
