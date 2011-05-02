@@ -10,7 +10,7 @@
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
             setContent : function(content) {
                 this.get("contentBox").set("innerHTML", content);
-//                this.fire("contentChanged");
+                this.fire("contentChanged");
                 this.centered();
             }
     });
@@ -27,18 +27,18 @@
       Y.lane.Lightbox.hide();
     });
     
-//    Y.lane.Lightbox.after("visibleChange", function(event) {
-//        if (!event.newVal) {
-//            Y.lane.LightboxBg.hide();
+    Y.lane.Lightbox.after("visibleChange", function(event) {
+        if (!event.newVal) {
+            Y.lane.LightboxBg.hide();
 //            //TODO: figure out exactly which styles need to be reset and reset them only
 //            this.get("boundingBox").setAttribute("style","");
 //            this.get("contentBox").setContent("");
-//        }
-//    });
-//    
-//    Y.lane.Lightbox.on("visibleChange", function(event) {
-//        if (event.newVal) {
-//            Y.lane.LightboxBg.show();
+        }
+    });
+    
+    Y.lane.Lightbox.on("visibleChange", function(event) {
+        if (event.newVal) {
+            Y.lane.LightboxBg.show();
 //            var boundingBox = this.get("boundingBox");
 //            boundingBox.setStyle("overflow", "hidden");
 //            var width = boundingBox.get("clientWidth");
@@ -67,8 +67,8 @@
 //            boundingBox.setStyle("height", 0);
 //            anim1.run();
 //            anim2.run();
-//        }
-//    });
+        }
+    });
     
 
     Y.on("click", function(event) {
