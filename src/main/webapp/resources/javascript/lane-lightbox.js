@@ -3,7 +3,8 @@
     var LightboxBg = Y.Base.create("lightboxbg", Y.Widget, []);
 
     Y.lane.LightboxBg = new LightboxBg({
-        visible : false
+        visible : false,
+        render : true
     });
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
@@ -16,6 +17,7 @@
 
     Y.lane.Lightbox = new Lightbox({
         visible : false,
+        render : true,
         constrain : true
     });  
     
@@ -24,13 +26,15 @@
         event.preventDefault();
       Y.lane.Lightbox.hide();
     });
-    Y.lane.Lightbox.render();
-    Y.lane.LightboxBg.render();
     
     Y.lane.Lightbox.after("visibleChange", function(event) {
         if (!event.newVal) {
             Y.lane.LightboxBg.hide();
+            //TODO: figure out exactly which styles need to be reset and reset them only
             this.get("boundingBox").setAttribute("style","");
+            var contentBox = this.get("contentBox");
+            contentBox.set("height", 0);
+            contentBox.set("width", 0);
         }
     });
     
