@@ -50,7 +50,7 @@
                 contentBox = this.get("contentBox"),
                 anim2 = new Y.Anim({
                     node : contentBox,
-                    duration : 0.3,
+                    duration : 0.5,
                     from : {left:contentBox.get("clientWidth")/-2, top: contentBox.get("clientHeight")/-2},
                     to : {left:0,top:0}
                 });
