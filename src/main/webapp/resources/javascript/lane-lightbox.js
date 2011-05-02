@@ -65,6 +65,10 @@
 //            });
 //            boundingBox.setStyle("width", 0);
 //            boundingBox.setStyle("height", 0);
+            anim1.on("end", function() {
+            	boundingBox.setStyle("width","auto");
+            	boundingBox.setStyle("height","auto");
+            });
             anim1.run();
 //            anim2.run();
         }
