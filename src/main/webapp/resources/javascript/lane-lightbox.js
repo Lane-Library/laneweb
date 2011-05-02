@@ -32,9 +32,7 @@
             Y.lane.LightboxBg.hide();
             //TODO: figure out exactly which styles need to be reset and reset them only
             this.get("boundingBox").setAttribute("style","");
-            var contentBox = this.get("contentBox");
-            contentBox.set("height", 0);
-            contentBox.set("width", 0);
+            this.get("contentBox").setContent("");
         }
     });
     
