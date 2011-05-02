@@ -30,24 +30,22 @@
     Y.lane.Lightbox.after("visibleChange", function(event) {
         if (!event.newVal) {
             Y.lane.LightboxBg.hide();
-//            //TODO: figure out exactly which styles need to be reset and reset them only
-//            this.get("boundingBox").setAttribute("style","");
-//            this.get("contentBox").setContent("");
         }
     });
     
     Y.lane.Lightbox.on("visibleChange", function(event) {
         if (event.newVal) {
             Y.lane.LightboxBg.show();
-            var boundingBox = this.get("boundingBox");
+            var boundingBox = this.get("boundingBox"),
+                width, height, left, top, anim1;
             boundingBox.setStyle("overflow", "hidden");
-            var width = boundingBox.get("clientWidth");
-            var height = boundingBox.get("clientHeight");
-            var left = boundingBox.get("offsetLeft");
-            var top = boundingBox.get("offsetTop");
-            var anim1 = new Y.Anim({
+            width = boundingBox.get("clientWidth");
+            height = boundingBox.get("clientHeight");
+            left = boundingBox.get("offsetLeft");
+            top = boundingBox.get("offsetTop");
+            anim1 = new Y.Anim({
                 node : boundingBox,
-                duration : 3,
+                duration : 0.5,
                 to : {width:width, height:height, left:left, top:top},
                 from : {width:0, height:0, left:left + (width/2), top: top + (height/2)}
             });
@@ -66,6 +64,7 @@
 //            boundingBox.setStyle("width", 0);
 //            boundingBox.setStyle("height", 0);
             anim1.on("end", function() {
+            	boundingBox.setStyle("overflow", "visible");
             	boundingBox.setStyle("width","auto");
             	boundingBox.setStyle("height","auto");
             });
