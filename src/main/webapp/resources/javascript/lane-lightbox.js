@@ -8,11 +8,11 @@
     });
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
-//            setContent : function(content) {
-//                this.get("contentBox").set("innerHTML", content);
+            setContent : function(content) {
+                this.get("contentBox").set("innerHTML", content);
 //                this.fire("contentChanged");
 //                this.centered();
-//            }
+            }
     });
 
     Y.lane.Lightbox = new Lightbox({
