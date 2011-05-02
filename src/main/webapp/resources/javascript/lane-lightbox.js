@@ -11,7 +11,7 @@
             setContent : function(content) {
                 this.get("contentBox").set("innerHTML", content);
 //                this.fire("contentChanged");
-//                this.centered();
+                this.centered();
             }
     });
 
