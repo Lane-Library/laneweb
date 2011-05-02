@@ -39,18 +39,18 @@
     Y.lane.Lightbox.on("visibleChange", function(event) {
         if (event.newVal) {
             Y.lane.LightboxBg.show();
-//            var boundingBox = this.get("boundingBox");
-//            boundingBox.setStyle("overflow", "hidden");
-//            var width = boundingBox.get("clientWidth");
-//            var height = boundingBox.get("clientHeight");
-//            var left = boundingBox.get("offsetLeft");
-//            var top = boundingBox.get("offsetTop");
-//            var anim1 = new Y.Anim({
-//                node : boundingBox,
-//                duration : 0.3,
-//                to : {width:width, height:height, left:left, top:top},
-//                from : {width:0, height:0, left:left + (width/2), top: top + (height/2)}
-//            });
+            var boundingBox = this.get("boundingBox");
+            boundingBox.setStyle("overflow", "hidden");
+            var width = boundingBox.get("clientWidth");
+            var height = boundingBox.get("clientHeight");
+            var left = boundingBox.get("offsetLeft");
+            var top = boundingBox.get("offsetTop");
+            var anim1 = new Y.Anim({
+                node : boundingBox,
+                duration : 3,
+                to : {width:width, height:height, left:left, top:top},
+                from : {width:0, height:0, left:left + (width/2), top: top + (height/2)}
+            });
 //            var contentBox = this.get("contentBox");
 //            contentBox.setStyle("position","relative");
 //            var anim2 = new Y.Anim({
@@ -65,7 +65,7 @@
 //            });
 //            boundingBox.setStyle("width", 0);
 //            boundingBox.setStyle("height", 0);
-//            anim1.run();
+            anim1.run();
 //            anim2.run();
         }
     });
