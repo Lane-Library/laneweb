@@ -8,6 +8,10 @@
     visibility : hidden
 }
 
+.yui3-lightbox-content {
+    position : relative
+}
+
 .yui3-lightboxbg {
     position : fixed;
     /* IE needs left:0*/

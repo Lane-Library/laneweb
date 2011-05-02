@@ -37,39 +37,31 @@
         if (event.newVal) {
             Y.lane.LightboxBg.show();
             var boundingBox = this.get("boundingBox"),
-                width, height, left, top, anim1;
-            boundingBox.setStyle("overflow", "hidden");
-            width = boundingBox.get("clientWidth");
-            height = boundingBox.get("clientHeight");
-            left = boundingBox.get("offsetLeft");
-            top = boundingBox.get("offsetTop");
-            anim1 = new Y.Anim({
-                node : boundingBox,
-                duration : 0.5,
-                to : {width:width, height:height, left:left, top:top},
-                from : {width:0, height:0, left:left + (width/2), top: top + (height/2)}
-            });
-//            var contentBox = this.get("contentBox");
-//            contentBox.setStyle("position","relative");
-//            var anim2 = new Y.Anim({
-//                node : contentBox,
-//                duration : 0.3,
-//                from : {left:contentBox.get("clientWidth")/-2, top: contentBox.get("clientHeight")/-2},
-//                to : {left:0,top:0}
-//            });
-//            anim2.on("end", function() {
-//                boundingBox.setStyle("overflow", "visible");
-//                contentBox.setAttribute("style","");
-//            });
-//            boundingBox.setStyle("width", 0);
-//            boundingBox.setStyle("height", 0);
+                width = boundingBox.get("clientWidth"),
+                height = boundingBox.get("clientHeight"),
+                left = boundingBox.get("offsetLeft"),
+                top = boundingBox.get("offsetTop"),
+                anim1 = new Y.Anim({
+                    node : boundingBox,
+                    duration : 0.5,
+                    to : {width:width, height:height, left:left, top:top},
+                    from : {width:0, height:0, left:left + (width/2), top: top + (height/2)}
+                }),
+                contentBox = this.get("contentBox"),
+                anim2 = new Y.Anim({
+                    node : contentBox,
+                    duration : 0.3,
+                    from : {left:contentBox.get("clientWidth")/-2, top: contentBox.get("clientHeight")/-2},
+                    to : {left:0,top:0}
+                });
             anim1.on("end", function() {
             	boundingBox.setStyle("overflow", "visible");
             	boundingBox.setStyle("width","auto");
             	boundingBox.setStyle("height","auto");
             });
+            boundingBox.setStyle("overflow", "hidden");
             anim1.run();
-//            anim2.run();
+            anim2.run();
         }
     });
     
