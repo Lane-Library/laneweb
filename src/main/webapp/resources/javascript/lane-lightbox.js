@@ -56,6 +56,23 @@
         }
     }); 
 
+    Y.lane.Lightbox = new Lightbox({
+        visible : false,
+        constrain : true,
+        render : true
+    });
+
+    Y.lane.LightboxBg = new LightboxBg({
+        visible : false,
+        render : true
+    });
+
+    //TODO: put more of this initialization into the Lightbox object
+    Y.lane.Lightbox.get("boundingBox").append("<a id='lightboxClose'></a>");
+    Y.lane.Lightbox.get("boundingBox").one("#lightboxClose").on("click", function(event) {
+        event.preventDefault();
+        Y.lane.Lightbox.hide();
+    });
 
     Y.on("click", function(event) {
         var args, href, popupElement, title, body, regex,
@@ -70,25 +87,6 @@
             Y.io(href, {
                 on : {
                     success : function(id, o, args) {
-                        //TODO: put more of this initialization into the Lightbox object
-                        if (!Y.lane.Lightbox) {
-                            Y.lane.Lightbox = new Lightbox({
-                                visible : false,
-                                constrain : true,
-                                render : true
-                            });
-
-                            Y.lane.LightboxBg = new LightboxBg({
-                                visible : false,
-                                render : true
-                            });
-
-                            Y.lane.Lightbox.get("boundingBox").append("<a id='lightboxClose'></a>");
-                            Y.lane.Lightbox.get("boundingBox").one("#lightboxClose").on("click", function(event) {
-                                event.preventDefault();
-                                Y.lane.Lightbox.hide();
-                            });
-                        }
                         var lightbox = Y.lane.Lightbox;
                         lightbox.setContent(o.responseText);
                         lightbox.show();
