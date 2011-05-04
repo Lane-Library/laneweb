@@ -28,8 +28,7 @@
     -moz-border-radius : 12px;
     border-radius : 12px;
     background-color : #F6F3E5;
-    /*TODO: update this image url when finalized*/
-    background-image : url(/././samples/feedback/feedbackBg1.png);
+    background-image : url(/././resources/images/feedbackBg1.png);
     background-position : top;
     background-repeat : repeat-x;
     padding : 20px 20px 40px;
@@ -41,7 +40,7 @@
     text-shadow : 1px 3px 3px white
 }
 #feedback li {
-    list-style: none outside none
+    list-style : none outside none
 }
 #feedbackMenu {
     text-align : left;
@@ -60,7 +59,7 @@
 .yui3-lightbox #feedbackItems {
     background-color : white;
     border : 1px solid #7C786C;
-    box-shadow:-5px 5px 5px gray
+    box-shadow : -5px 5px 5px gray
 }
 .yui3-feedback-menu-active {
     background-color : white;
@@ -69,15 +68,6 @@
     width : 225px;
     box-shadow : -5px 5px 5px gray
 }
-/*#instantHelp {
-    margin-top : 50px
-}
-#instantHelp h3 {
-    font-size : 14px;
-    letter-spacing : 1.1px;
-    color : white;
-    border-bottom : none
-}*/
 #feedback form {
     padding : 20px;
     text-align : left
@@ -92,17 +82,15 @@
     width : 100%
 }
 
-#feedback input[type="submit"] {
+#feedback input[type = "submit"] {
     background-image : url(/././resources/images/submit-feedback-off.png);
     border : none;
-    font-size : 0;
-    text-indent : -300px;
     display : block;
     width : 223px;
     height : 43px
 }
 
-#feedback input[type="submit"]:hover {
+#feedback input[type = "submit"]:hover {
     background-image : url(/././resources/images/submit-feedback-on.png);
     cursor : pointer
 }
