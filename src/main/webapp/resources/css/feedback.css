@@ -59,6 +59,8 @@
 .yui3-lightbox #feedbackItems {
     background-color : white;
     border : 1px solid #7C786C;
+    -webkit-box-shadow : -5px 5px 5px gray;
+    -moz-box-shqdow : -5px 5px 5px gray;
     box-shadow : -5px 5px 5px gray
 }
 .yui3-feedback-menu-active {
