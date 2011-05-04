@@ -123,10 +123,14 @@
                         <xsl:attribute name="class">module-img</xsl:attribute>
                         <xsl:choose>
                             <xsl:when test="number(./lc:registrations/text()) &gt;= number( ./lc:seats/text())">
-                                 <xsl:attribute name="src">/graphics/buttons/waitlist-button.png</xsl:attribute>
+                                 <xsl:attribute name="src">/graphics/buttons/button-waitlist-off.png</xsl:attribute>
+                                 <xsl:attribute name="onmouseover">this.src='/graphics/buttons/button-waitlist-on.png'</xsl:attribute>
+                                 <xsl:attribute name="onmouseout">this.src='/graphics/buttons/button-waitlist-off.png'</xsl:attribute>
                             </xsl:when>
                             <xsl:otherwise>
-                                 <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
+                                 <xsl:attribute name="src">/graphics/buttons/button-sign-up-off.png</xsl:attribute>
+                                 <xsl:attribute name="onmouseover">this.src='/graphics/buttons/button-sign-up-on.png'</xsl:attribute>
+                                 <xsl:attribute name="onmouseout">this.src='/graphics/buttons/button-sign-up-off.png'</xsl:attribute>
                             </xsl:otherwise>
                         </xsl:choose>                        
                     </img>
