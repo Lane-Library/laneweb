@@ -91,3 +91,17 @@
 #feedback textarea {
     width : 100%
 }
+
+#feedback input[type="submit"] {
+    background-image : url(/././resources/images/submit-feedback-off.png);
+    border : none;
+    font-size : 0;
+    display : block;
+    width : 223px;
+    height : 43px
+}
+
+#feedback input[type="submit"]:hover {
+    background-image : url(/././resources/images/submit-feedback-on.png);
+    cursor : pointer
+}
