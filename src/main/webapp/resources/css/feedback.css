@@ -96,6 +96,7 @@
     background-image : url(/././resources/images/submit-feedback-off.png);
     border : none;
     font-size : 0;
+    text-indent : 300px;
     display : block;
     width : 223px;
     height : 43px
