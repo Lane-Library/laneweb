@@ -1,0 +1,13 @@
+
+#libraryContact .live-chat a {
+    display : block;
+    background-image : url(/././resources/images/chat-top-off.png);
+    background-repeat : no-repeat;
+    padding-left : 26px
+}
+#libraryContact .live-chat a:hover {
+    background-image : url(/././resources/images/chat-top-on.png)
+}
+.live-chat-inactive {
+    display : none
+}
