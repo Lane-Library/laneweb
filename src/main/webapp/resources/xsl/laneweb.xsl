@@ -1,5 +1,7 @@
-<xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="2.0"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="h">
 
     <xsl:strip-space
@@ -68,30 +70,12 @@
 
     <!-- here is the information associating urls with what is the laneNav active tab -->
     <xsl:variable name="laneNav-tabs">
-        <div>
-            <span>Biomed Resources</span>
-            <span>/biomed-resources</span>
-        </div>
-        <div>
-            <span>Specialty Portals</span>
-            <span>/portals</span>
-        </div>
-        <div>
-            <span>Classes &amp; Consulting</span>
-            <span>/classes-consult</span>
-        </div>
-        <div>
-            <span>History Center</span>
-            <span>/med-history</span>
-        </div>
-        <div>
-            <span>About Lane</span>
-            <span>/about</span>
-        </div>
-        <div>
-            <span>How To</span>
-            <span>/help</span>
-        </div>
+        <div><span>Biomed Resources</span><span>/biomed-resources</span></div>
+        <div><span>Specialty Portals</span><span>/portals</span></div>
+        <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
+        <div><span>History Center</span><span>/med-history</span></div>
+        <div><span>About Lane</span><span>/about</span></div>
+        <div><span>How To</span><span>/help</span></div>
     </xsl:variable>
 
     <xsl:variable name="source-prefix">
@@ -103,12 +87,9 @@
             <xsl:when test="starts-with($path,'/portals/ethics')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
-            <xsl:when
-                test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))"
-                >clinical-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')"
-                >clinical-all</xsl:when>
+            <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/med-history')">history-all</xsl:when>
             <xsl:when test="starts-with($path,'/bassett')">bassett</xsl:when>
             <xsl:when test="starts-with($path,'/biomed-resources/bassett')">bassett</xsl:when>
@@ -215,8 +196,7 @@
 
     <!-- add 'current' class to li with a child a with current href -->
     <!-- TODO: reexamine this priority, should this be more specific?  -->
-    <xsl:template match="h:li[h:a/@href = $path][not(parent::h:ul[attribute::id='laneNav'])]"
-        priority="-1">
+    <xsl:template match="h:li[h:a/@href = $path][not(parent::h:ul[attribute::id='laneNav'])]" priority="-1">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:attribute name="class">
@@ -280,8 +260,7 @@
     <xsl:template match="node()[@id='search' or @id='laneNav']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
-            <xsl:if
-                test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
+            <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
                 <xsl:attribute name="class">clinical</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
@@ -326,8 +305,7 @@
     </xsl:template>
 
     <!-- add class="active" to online resource alpha browse links if link is for current page -->
-    <xsl:template
-        match="h:ul[attribute::id='browseTabs']/h:li/h:a[ends-with(@href, concat('?a=',$alpha)) or @href = $path]">
+    <xsl:template match="h:ul[attribute::id='browseTabs']/h:li/h:a[ends-with(@href, concat('?a=',$alpha)) or @href = $path]">
         <xsl:copy>
             <xsl:attribute name="class">active</xsl:attribute>
             <xsl:apply-templates select="attribute::node() | child::node()"/>
@@ -336,45 +314,28 @@
 
     <!-- surround <a> with <em> for the menu item for the current page -->
     <xsl:template match="h:ul[contains(@class,'sectionMenu')]/h:li//h:a[@href=$path]">
-        <em>
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node() | child::node()"/>
-            </xsl:copy>
-        </em>
+      <em><xsl:copy><xsl:apply-templates select="attribute::node() | child::node()"/></xsl:copy></em>
     </xsl:template>
 
     <!-- ugly hack to get all the resource pages to cause the main menu link to highlight,
         gets a priority=1 because ambiguous with the preceding template-->
-    <xsl:template
-        match="h:ul[contains(@class, 'sectionMenu')]/h:li/h:a[starts-with(@href, '/biomed-resources/')]"
-        priority="1">
+    <xsl:template match="h:ul[contains(@class, 'sectionMenu')]/h:li/h:a[starts-with(@href, '/biomed-resources/')]" priority="1">
         <xsl:variable name="href-base" select="substring-before(@href, '.html')"/>
         <xsl:choose>
             <xsl:when test="starts-with($path, $href-base)">
-                <em>
-                    <xsl:copy>
-                        <xsl:apply-templates select="attribute::node()|child::node()"/>
-                    </xsl:copy>
-                </em>
+                <em><xsl:copy><xsl:apply-templates select="attribute::node()|child::node()"/></xsl:copy></em>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy>
-                    <xsl:apply-templates select="attribute::node()|child::node()"/>
-                </xsl:copy>
+                <xsl:copy><xsl:apply-templates select="attribute::node()|child::node()"/></xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
     <!-- add class="expanded" to sectionMenu li that are links to the current page and are expandies -->
-    <xsl:template
-        match="h:ul[contains(@class,'sectionMenu')]/h:li[h:div/h:a[@href=$path or @href=$parent-path]]">
+    <xsl:template match="h:ul[contains(@class,'sectionMenu')]/h:li[h:div/h:a[@href=$path or @href=$parent-path]]">
         <xsl:copy>
             <xsl:attribute name="class">expanded</xsl:attribute>
-            <div>
-                <em>
-                    <xsl:apply-templates select="child::h:div/h:a"/>
-                </em>
-            </div>
+            <div><em><xsl:apply-templates select="child::h:div/h:a"/></em></div>
             <xsl:apply-templates select="child::h:ul"/>
         </xsl:copy>
     </xsl:template>
