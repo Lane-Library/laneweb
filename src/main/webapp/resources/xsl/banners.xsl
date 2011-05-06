@@ -59,6 +59,7 @@
                     <xsl:if test="position() = $banner-wanted">
                         <xsl:attribute name="class" select="'banner-nav-active'"/>
                     </xsl:if>
+                    <xsl:text> </xsl:text>
                 </a></li>
             </xsl:for-each>
         </ul>
