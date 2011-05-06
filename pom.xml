@@ -205,6 +205,7 @@
                                 <include>lane-bookmarks-min.js</include>
                                 <!--<include>lane-history-min.js</include>-->
                                 <include>lane-feedback-min.js</include>
+                                <include>banner-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
