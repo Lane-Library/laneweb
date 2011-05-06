@@ -37,4 +37,11 @@
             nodes.item(i).append(Y.Node.create("<span class='after'/>"));
         }
     }
+    if (Y.UA.ie) {
+    	//IE doesn't know about rgba, set background color without opacity:
+    	node = Y.one(".banner-nav-content");
+    	if (node) {
+    		node.setStyle("background-color","rgb(131,128,119)");
+    	}
+    }
 })();
