@@ -171,6 +171,11 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match type="wildcard" pattern="**/banners.html">
+                <map:generate type="html" src="${content-base}/{1}/banners.html"/>
+                <map:transform type="saxon" src="resources/xsl/banners.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="caching" internal-only="true">
             <!-- secure/** generates an error unless used from a pipeline -->
@@ -197,7 +202,7 @@
         </map:pipeline>
         <map:pipeline type="caching">
             <!-- this is so the liaisons selection by department works without javascript enabled -->
-            <map:parameter name="cache-key" value="${request-uri};selection=${liaison}"/>
+            <map:parameter name="cache-key" value="${request-uri}?${query-string}"/>
             <map:match type="wildcard" pattern="about/liaisons.html">
                 <map:generate type="html" src="${content-base}/about/liaisons.html"/>
                 <map:transform type="saxon" src="resources/xsl/selections.xsl">

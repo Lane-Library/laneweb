@@ -83,6 +83,8 @@ public class RequestParameterDataBinder implements DataBinder {
                 model.put(Model.TIMEOUT, value);
             } else if (Model.CLASS_ID.equals(name)) {
                 model.put(Model.CLASS_ID, value);
+            } else if (Model.BANNER.equals(name)) {
+                model.put(Model.BANNER, value);
             }
         }
     }

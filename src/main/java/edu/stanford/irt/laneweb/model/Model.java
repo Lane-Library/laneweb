@@ -6,6 +6,8 @@ package edu.stanford.irt.laneweb.model;
 public interface Model {
 
     public static final String ALPHA = "alpha";
+    
+    public static final String BANNER = "banner";
 
     public static final String BASE_PATH = "base-path";
 
