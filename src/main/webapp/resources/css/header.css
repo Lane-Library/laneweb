@@ -1,71 +1,69 @@
 #sb {
-    padding-top:72px;
+    padding-top : 72px;
+    background-image : url(/././resources/images/headerBg1.png);
+    background-repeat : repeat-x
 }
 h1 {
-    position:absolute;
-    left:224px;
-    top:16px;
-    font-family:FrutigerLTStdLightCn,"Arial Narrow",Arial,Tahoma,"Trebuchet MS",sans-serif;
-    font-size:24px;
-    letter-spacing:.1em;
-    color: #820000;
+    position : absolute;
+    left : 224px;
+    top : 16px;
+    font-family : FrutigerLTStdLightCn, "Arial Narrow", Arial, Tahoma, "Trebuchet MS", sans-serif;
+    font-size : 24px;
+    letter-spacing : .1em;
+    color : #820000
 }
 h1 span {
-    color:black;
+    color : black
 }
 #subHeading {
-    font-size:11px;
-    text-transform:uppercase;
-    display:block;
-    letter-spacing:normal;
+    font-size : 11px;
+    text-transform : uppercase;
+    display : block;
+    letter-spacing : normal
 }
 h1 a {
-    border-bottom:none;
-    color: #820000;
+    border-bottom : none;
+    color : #820000
 }
 h1 a:visited {
-    color: #820000;
+    color : #820000
 }
-#som, h1 a:hover {
-    text-decoration:underline;
-    border-bottom-style:none;
-}
-#som {
-    display:block;
-    height:50px;
-    left:18px;
-    position:absolute;
-    top:22px;
-    width:202px;
-    text-indent:-9000px;
-}
-#som:hover {
-    background-position:0 -600px;
+#som,
+h1 a:hover {
+    text-decoration : underline;
+    border-bottom-style : none
 }
 #som {
-    background-image:url(/././resources/images/sprite.gif);
-    background-position:0 -500px;
+    display : block;
+    height : 50px;
+    left : 18px;
+    position : absolute;
+    top : 22px;
+    width : 203px;
+    text-indent : -9000px;
+    background-image : url(/././resources/images/somLogo1.gif)
 }
 #som:hover {
-    background-position:0 -600px;
+    background-position : 0 -100px
 }
-#login, #libraryContact {
-    position:absolute;
-    font-size:10px;
-    right:1em;
+#login,
+#libraryContact {
+    position : absolute;
+    font-size : 10px;
+    right : 1em
 }
 #login {
-    top:0.8em;
+    top : 0.8em
 }
 #libraryContact {
-    top: 54px;
+    top : 54px
 }
 #libraryContact li {
-    float:left;
-    padding:0 7px;
-    background-image:none;
-    border-left:1px dotted #C1C1C1;
+    float : left;
+    padding : 0 7px;
+    background-image : none;
+    border-left : 1px dotted #C1C1C1
 }
 #libraryContact li:first-child {
-    border-left:none;
+    border-left : none
 }
