@@ -1,22 +1,25 @@
 .drop-shadow {
-    padding:6px 7px 8px 6px;
-    background-repeat:no-repeat
+    padding : 6px 7px 8px 6px;
+    background-repeat : no-repeat
 }
 .ds1 {
-    background-image:url(/././resources/images/imgbg1.gif)
+    background-image : url(/././resources/images/imgbg1.gif)
 }
 .ds2 {
-    background-image:url(/././resources/images/imgbg2.gif)
+    background-image : url(/././resources/images/imgbg2.gif)
 }
 .ds3 {
-    background-image:url(/././resources/images/imgbg3.gif)
+    background-image : url(/././resources/images/imgbg3.gif)
 }
 .ds4 {
-    background-image:url(/././resources/images/imgbg4.gif)
+    background-image : url(/././resources/images/imgbg4.gif)
 }
 .ds5 {
-    background-image:url(/././resources/images/imgbg5.gif)
+    background-image : url(/././resources/images/imgbg5.gif)
 }
 .ds6 {
-    background-image:url(/././resources/images/imgbg6.gif)
+    background-image : url(/././resources/images/imgbg6.gif)
+}
+.ds7 {
+    background-image : url(/././resources/images/imgbg7.gif)
 }
