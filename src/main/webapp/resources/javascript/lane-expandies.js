@@ -156,6 +156,25 @@
         for (i = 0; i < expandies.size(); i++) {
             Y.lane.ExpandyLists.push(new ExpandyList({node : expandies.item(i)}));
         }
+        
+    //TODO: tighten this up a bit:
+    var externalTriggers = Y.all(".expandy-trigger");
+    for (i = 0; i < externalTriggers.size(); i++) {
+    	externalTriggers.item(i).on("click", function(event) {
+    		event.preventDefault();
+    		var hash = event.target.get("hash");
+    		var anchor = Y.one(hash);
+    		var item = anchor.ancestor(".yui3-accordion-item");
+    		var trigger = item.one(".yui3-accordion-item-trigger");
+    		var accordion = item.ancestor(".yui3-accordion");
+    		accordion.accordion.expandItem(item);
+    		var href = event.target.get("href");
+    		var setLocation = function() {
+    			window.location = href;
+    		};
+    		window.setTimeout(setLocation, 500);
+    	});
+    }
 
     }
 
