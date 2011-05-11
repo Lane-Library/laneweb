@@ -44,4 +44,15 @@ public class NoDotRedirectProcessorTest {
     public void testMobileURL() {
         assertNull(this.processor.getRedirectURL("/m/er/browse/type/ej/Journals%20-%20U%20-%20", null, null));
     }
+
+    @Test
+    public void testRssURL() {
+        assertNull(this.processor.getRedirectURL("/rss/page2rss", "page=/biomed-resources/grandrounds/pedsgrandrounds-2006.html",
+                null));
+    }
+
+    @Test
+    public void testSecureAppsURL() {
+        assertNull(this.processor.getRedirectURL("/secure/apps/proxy/credential", "url=foo", null));
+    }
 }
