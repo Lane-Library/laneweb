@@ -27,7 +27,7 @@ public class Schedule {
         } else if (dayOfWeek == Calendar.FRIDAY) {
             available = hourOfDay >= 9 && hourOfDay < 17;
         } else {
-            available = hourOfDay >= 8 && hourOfDay < 19;
+            available = hourOfDay >= 9 && hourOfDay < 19;
         }
         return available;
     }
