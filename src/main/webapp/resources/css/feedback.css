@@ -27,9 +27,9 @@
     -webkit-border-radius : 12px;
     -moz-border-radius : 12px;
     border-radius : 12px;
-    background-color : #F6F3E5;
+    background-color : #EFE7D7;
     background-image : url(/././resources/images/feedbackBg1.png);
-    background-position : top;
+    background-position : bottom;
     background-repeat : repeat-x;
     padding : 20px 20px 40px;
 }
