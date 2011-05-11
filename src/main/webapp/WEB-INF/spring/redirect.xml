@@ -44,7 +44,6 @@
                         </map>
                     </property>
                 </bean>
-                <bean class="edu.stanford.irt.laneweb.servlet.redirect.NoDotRedirectProcessor"/>
                 <bean class="edu.stanford.irt.laneweb.servlet.redirect.SHCRedirectProcessor">
                     <property name="redirectMap">
                         <map>

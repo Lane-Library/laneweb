@@ -43,9 +43,12 @@
                 <entry key="**/*.js" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
                 <entry key="**/*.css" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
                 <entry key="**/*.manifest" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
+                <entry key="**/**/*.*" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
             </map>
         </property>
-        <property name="defaultHandler" ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+        <property name="defaultHandler">
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.DefaultRequestHandler"/>
+        </property>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
