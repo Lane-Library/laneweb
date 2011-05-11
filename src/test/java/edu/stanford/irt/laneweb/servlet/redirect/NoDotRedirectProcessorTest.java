@@ -21,6 +21,11 @@ public class NoDotRedirectProcessorTest {
     }
 
     @Test
+    public void testEresourcesURL() {
+        assertNull(this.processor.getRedirectURL("/eresources/count", "q=heart", null));
+    }
+
+    @Test
     public void testGetRedirectURL() {
         assertEquals("/foo/bar/index.html", this.processor.getRedirectURL("/foo/bar", null, null));
     }
