@@ -13,7 +13,7 @@ public class NoDotRedirectProcessor implements RedirectProcessor {
 
     public String getRedirectURL(final String uri, final String basePath, final String queryString) {
         String result = null;
-        if (uri.indexOf("/apps/") != 0 && uri.indexOf("/m/") != 0) {
+        if (uri.indexOf("/apps/") != 0 && uri.indexOf("/m/") != 0 && uri.indexOf("/eresources/") != 0) {
             String last = uri.substring(uri.lastIndexOf('/') + 1);
             if (last.indexOf('.') == -1) {
                 result = uri + "/index.html";
