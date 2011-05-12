@@ -41,7 +41,8 @@
                 boundingBox.setStyle("overflow", "visible");
                 boundingBox.setStyle("width","auto");
                 boundingBox.setStyle("height","auto");
-            });
+                this.fire("animEnd");
+            }, this);
             boundingBox.setStyle("overflow", "hidden");
             boundingBox.setStyle("width", "0");
             boundingBox.setStyle("height", "0");

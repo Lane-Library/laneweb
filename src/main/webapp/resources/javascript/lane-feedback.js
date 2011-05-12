@@ -31,8 +31,12 @@
             this.get("items").addClass(this.getClassName("item"));
         },
         bindUI : function() {
+        	var self = this;
             this.get("menu").on("click", this._handleMenuClick, this);
             this.on("activeItemChange", this._handleActiveItemChange);
+            Y.lane.Lightbox.on("animEnd", function() {
+                self.get("items").item(self.get("activeItem")).one("textarea").focus();
+            });
         },
         syncUI : function() {
             var activeItem = this.get("activeItem");
@@ -48,6 +52,7 @@
             items.item(event.prevVal).removeClass(itemActiveClass);
             menu.item(event.newVal).addClass(menuActiveClass);
             items.item(event.newVal).addClass(itemActiveClass);
+            items.item(event.newVal).one("textarea").focus();
         },
         _handleMenuClick : function(event) {
             event.preventDefault();
