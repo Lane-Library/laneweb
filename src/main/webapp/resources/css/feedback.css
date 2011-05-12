@@ -74,14 +74,11 @@
     padding : 20px;
     text-align : left
 }
-.mainFeedback {
+#feedback .mainFeedback {
     color : #585347;
     font-family : Georgia;
     font-size : 18px;
     font-weight : bold
-}
-#feedback textarea {
-    width : 100%
 }
 
 #feedback input[type = "submit"] {
@@ -89,10 +86,58 @@
     border : none;
     display : block;
     width : 223px;
-    height : 43px
+    height : 43px;
+    margin : 0 auto
 }
 
 #feedback input[type = "submit"]:hover {
     background-image : url(/././resources/images/submit-feedback-on.png);
     cursor : pointer
+}
+
+
+#feedback input[type = "text"],
+#feedback textarea {
+    padding : 9px;
+    border : solid 2px #C9C9C9;
+    outline : 0;
+    font : normal 13px / 100%Arial, Verdana, sans-serif;
+    background : #FFFFFF;
+     width:100%;
+     -moz-box-sizing: border-box;
+     -ms-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+     box-sizing: border-box;
+}
+
+#feedback textarea {
+    height : 150px;
+    line-height : 150%;
+}
+
+#feedback input:hover,
+#feedback textarea:hover,
+#feedback input:focus,
+#feedback textarea:focus {
+    border-color : #9d9b94;
+}
+
+#feedback label {
+    display : block;
+}
+
+
+#feedback input,
+#feedback textarea {
+    box-shadow : rgba(0, 0, 0, 0.1) 0px 0px 8px;
+    -moz-box-shadow : rgba(0, 0, 0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow : rgba(0, 0, 0, 0.1) 0px 0px 8px;
+}
+
+#feedback fieldset fieldset {
+    margin : 1em 0;
+    color : #585347;
+    font-family : Georgia;
+    font-size : 14px;
+    font-weight : normal;
 }
