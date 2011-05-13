@@ -14,6 +14,9 @@
         },
         _afterVisibleChange : function(event) {
             if (!event.newVal) {
+            	if (Y.UA.ie === 6) {
+                	Y.all("select").setStyle("visibility", "visible");
+            	}
             	//TODO: make the background a property of Lightbox
                 Y.lane.LightboxBg.hide();
             }
@@ -51,6 +54,9 @@
         },
         _onVisibleChange : function(event) {
             if (event.newVal) {
+            	if (Y.UA.ie === 6) {
+                	Y.all("select").setStyle("visibility", "hidden");
+            	}
                 Y.lane.LightboxBg.show();
                 this._animate();
             }

@@ -29,6 +29,12 @@
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).addClass("child");
         }
+        node = Y.one("#feedbackLink");
+        if (node) {
+        	node.setStyle("position", "absolute");
+        	node.setStyle("right", "0px");
+        	node.setStyle("top", "200px");
+        }
     }
     if (Y.UA.ie && Y.UA.ie <= 8) {
         //mimic .module:after so subsequent elements are cleared
