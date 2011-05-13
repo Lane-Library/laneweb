@@ -46,7 +46,9 @@
     text-align : left;
     margin-top : 40px;
     font-family : Georgia;
-    font-size : 16px
+    font-size : 16px;
+    /*IE6 fix*/
+    _overflow : hidden
 }
 #feedbackMenu li {
     padding : 10px 15px
@@ -103,11 +105,11 @@
     outline : 0;
     font : normal 13px / 100%Arial, Verdana, sans-serif;
     background : #FFFFFF;
-     width:100%;
-     -moz-box-sizing: border-box;
-     -ms-box-sizing: border-box;
-     -webkit-box-sizing: border-box;
-     box-sizing: border-box;
+    width : 100%;
+    -moz-box-sizing : border-box;
+    -ms-box-sizing : border-box;
+    -webkit-box-sizing : border-box;
+    box-sizing : border-box;
 }
 
 #feedback textarea {

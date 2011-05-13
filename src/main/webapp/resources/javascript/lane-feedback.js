@@ -40,9 +40,7 @@
             eventHandle2 = Y.lane.Lightbox.on("visibleChange", function(event) {
             	if (event.newVal) {
                     if (Y.UA.ie === 6) {
-                    	//get IE6 to render the markup, not sure why needed . . .
-                        self.get("boundingBox").setStyle("visibility", "hidden");
-                        self.get("boundingBox").setStyle("visibility", "visible");
+                    	self._fixForIE6();
                     }
             	} else {
             		eventHandle1.detach();
@@ -55,6 +53,16 @@
             var activeItem = this.get("activeItem");
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
             this.get("items").item(activeItem).addClass(this.getClassName("item", "active"));
+        },
+        _fixForIE6 : function() {
+        	var boundingBox = this.get("boundingBox");
+        	//keep the menu column from dropping below the form column
+        	boundingBox.one(".yui-gd > .first").setStyle("overflow", "hidden");
+        	//put text "submit" into submit buttons
+        	boundingBox.all("input[type='submit']").setAttribute("value","submit");
+        	//this forces the markup to be rendered, not sure why it is needed.
+        	boundingBox.setStyle("visibility", "hidden");
+        	boundingBox.setStyle("visibility", "visible");
         },
         _handleActiveItemChange : function(event) {
             var menu = this.get("menu"),
