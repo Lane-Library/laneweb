@@ -31,11 +31,24 @@
             this.get("items").addClass(this.getClassName("item"));
         },
         bindUI : function() {
-        	var self = this;
+        	var self = this, eventHandle1, eventHandle2;
             this.get("menu").on("click", this._handleMenuClick, this);
             this.on("activeItemChange", this._handleActiveItemChange);
-            Y.lane.Lightbox.on("animEnd", function() {
+            eventHandle1 = Y.lane.Lightbox.on("animEnd", function() {
                 self.get("items").item(self.get("activeItem")).one("textarea").focus();
+            });
+            eventHandle2 = Y.lane.Lightbox.on("visibleChange", function(event) {
+            	if (event.newVal) {
+                    if (Y.UA.ie === 6) {
+                    	//get IE6 to render the markup, not sure why needed . . .
+                        self.get("boundingBox").setStyle("visibility", "hidden");
+                        self.get("boundingBox").setStyle("visibility", "visible");
+                    }
+            	} else {
+            		eventHandle1.detach();
+            		eventHandle2.detach();
+                	self.destroy();
+            	}
             });
         },
         syncUI : function() {
