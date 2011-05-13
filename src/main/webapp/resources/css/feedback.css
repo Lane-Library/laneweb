@@ -37,7 +37,8 @@
     text-align : left;
     margin-left : 15px;
     font-size : 32px;
-    text-shadow : 1px 3px 3px white
+    text-shadow : 1px 3px 3px white;
+    border-bottom : none
 }
 #feedback li {
     list-style : none outside none
