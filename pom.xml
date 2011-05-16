@@ -165,6 +165,7 @@
                                 <include>lightbox-min.css</include>
                                 <include>feedback-min.css</include>
                                 <include>live-chat-min.css</include>
+                                <include>home-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -204,6 +205,7 @@
                                 <include>lane-search-hoverText-min.js</include>
                                 <include>lane-bookmarks-min.js</include>
                                 <!--<include>lane-history-min.js</include>-->
+                                <include>lane-lightbox-min.js</include>
                                 <include>lane-feedback-min.js</include>
                                 <include>banner-min.js</include>
                             </includes>
@@ -330,8 +332,7 @@
                     <smtpHost>smtp.stanford.edu</smtpHost>
                     <smtpPort implementation="java.lang.Integer">25</smtpPort>
                     <toAddresses>
-                        <toAddress implementation="java.lang.String"
-                            >ceyates@stanford.edu</toAddress>
+                        <toAddress implementation="java.lang.String">ceyates@stanford.edu</toAddress>
                     </toAddresses>
                 </configuration>
                 <reportSets>
@@ -613,7 +614,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.34-SNAPSHOT</version>
+            <version>1.6.34</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>
