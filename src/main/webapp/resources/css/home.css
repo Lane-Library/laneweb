@@ -139,8 +139,8 @@
 .events .time {
     color : #575347
 }
-.button.all-classes,
-.button.all-classes:hover {
+#home .button.all-classes,
+#home .button.all-classes:hover {
     background-position : 72px -220px;
     width : 100%;
 }
