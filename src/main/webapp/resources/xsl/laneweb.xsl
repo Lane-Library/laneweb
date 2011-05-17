@@ -173,6 +173,13 @@
             </xsl:comment>
         </xsl:copy>
     </xsl:template>
+    
+    <!-- match and copy the template body with the attributes from the content body -->
+    <xsl:template match="h:body">
+        <xsl:copy>
+            <xsl:apply-templates select="$source-doc/h:body/attribute::node()|child::node()"/>
+        </xsl:copy>
+    </xsl:template>
 
     <!-- setup flash object, using swfobject -->
     <xsl:template match="h:object[@type='application/x-shockwave-flash']">
@@ -241,6 +248,13 @@
 
     <!-- remove http-equiv meta elements-->
     <xsl:template match="h:meta[@http-equiv != 'refresh']"/>
+    
+    <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
+    <xsl:template match="h:meta[@name='WT.seg_1']/@content">
+        <xsl:attribute name="content">
+            <xsl:value-of select="$ipgroup"/>
+        </xsl:attribute>
+    </xsl:template>
 
     <!-- combines the template title value with the value of the title of the source document -->
     <xsl:template match="h:title">
@@ -262,29 +276,6 @@
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
                 <xsl:attribute name="class">clinical</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
-    <xsl:template match="h:meta[@name='WT.seg_1']/@content">
-        <xsl:attribute name="content">
-            <xsl:value-of select="$ipgroup"/>
-        </xsl:attribute>
-    </xsl:template>
-
-    <!-- even/odd tr classes for striped table -->
-    <xsl:template match="h:tr[parent::h:table[@class='striped']]">
-        <xsl:copy>
-            <xsl:copy-of select="attribute::node()"/>
-            <xsl:if test="not(attribute::class)">
-                <xsl:attribute name="class">
-                    <xsl:choose>
-                        <xsl:when test="position() mod 2 = 0">even</xsl:when>
-                        <xsl:otherwise>odd</xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
