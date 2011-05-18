@@ -159,7 +159,16 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match pattern="samples/*bookmarks.html" type="wildcard">
+            <!-- TODO: temporarily moved this out of caching pipeline to work on personalization
+                will have to work out caching mechanism before implementing this -->
+            <map:match pattern="templates/**.xml" type="wildcard">
+                <map:generate type="file" src="resources/templates/{1}.xml"/>
+                <map:transform type="joost" src="resources/xsl/personal.stx"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="resources/xsl/template-menu-includes.stx"/>
+                <map:serialize type="xml"/>
+                </map:match>
+            <!--<map:match pattern="samples/*bookmarks.html" type="wildcard">
                 <map:generate type="html" src="${content-base}/samples/bookmarks.html"/>
                 <map:transform type="joost" src="resources/xsl/bookmarks.stx"/>
                 <map:transform type="xinclude"/>
@@ -170,7 +179,7 @@
                 <map:transform type="joost" src="resources/xsl/history.stx"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
-            </map:match>
+            </map:match>-->
             <map:match type="wildcard" pattern="**/banners.html">
                 <map:generate type="html" src="${content-base}/{1}/banners.html"/>
                 <map:transform type="saxon" src="resources/xsl/banners.xsl"/>
@@ -258,12 +267,14 @@
                 <map:transform type="saxon" src="resources/xsl/popup-faq.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="templates/**.xml" type="wildcard">
+            <!-- TODO: temporarily moving this out of caching pipeline to work on personalization
+                will have to work out caching mechanism before implementing this -->
+            <!--<map:match pattern="templates/**.xml" type="wildcard">
                 <map:generate type="file" src="resources/templates/{1}.xml"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="joost" src="resources/xsl/template-menu-includes.stx"/>
                 <map:serialize type="xml"/>
-            </map:match>
+            </map:match>-->
             <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="${content-base}/error.html"/>

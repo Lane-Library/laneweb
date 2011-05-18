@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    version="1.0"
+    pass-through="all">
+    
+    <stx:param name="emrid"/>
+    
+    <stx:template match="h:select[@id='qlinks']">
+        <stx:choose>
+            <stx:when test="$emrid">
+                <a>Personal Links</a>
+                <ul>
+                    <li>Bookmarks:</li>
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                        href="apps:/bookmarks">
+                        <xi:fallback/>
+                    </xi:include>
+                    <li>History:</li>
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                        href="apps:/history">
+                        <xi:fallback/>
+                    </xi:include>
+                </ul>
+            </stx:when>
+            <stx:otherwise>
+                <stx:copy>
+                    <stx:process-attributes/>
+                    <stx:process-children/>
+                </stx:copy>
+            </stx:otherwise>
+        </stx:choose>
+    </stx:template>
+    
+    <stx:template match="h:head">
+        <stx:copy>
+            <stx:process-attributes/>
+            <stx:process-children/>
+            <stx:if test="$emrid">
+                <meta name="emrid" content="{$emrid}"/>
+            </stx:if>
+        </stx:copy>
+    </stx:template>
+    
+</stx:transform>

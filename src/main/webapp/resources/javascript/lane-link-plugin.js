@@ -34,7 +34,7 @@
                 readOnly : true,
                 valueFn : function() {
                     var host = this.get("host").get("host");
-                    return host !== undefined ? host : LinkPlugin.DOCUMENT_HOST;
+                    return host !== undefined && host !== "" ? host : LinkPlugin.DOCUMENT_HOST;
                 }
             },
             local : {
@@ -49,7 +49,7 @@
                 readOnly : true,
                 valueFn : function() {
                     var path = this.get("host").get("pathname");
-                    path = path === undefined ? document.location.pathname : path;
+                    path = path === undefined || path === "" ? document.location.pathname : path;
                     return path.indexOf("/") === 0 ? path : "/" + path;
                 }
             },

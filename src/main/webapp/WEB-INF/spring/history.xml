@@ -13,8 +13,8 @@
         scope="prototype"/>
     
     <bean id="edu.stanford.irt.laneweb.history.HistoryDAO"
-        class="edu.stanford.irt.laneweb.history.SQLHistoryDAO">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+        class="edu.stanford.irt.laneweb.history.DummyHistoryDAO">
+        <!--<property name="dataSource" ref="javax.sql.DataSource/eresources"/>-->
     </bean>
 
 </beans>

@@ -4,16 +4,14 @@
  */
 (function() {
     
-    //FIXME: find some way to disable if no emrid
-    
     var HistoryTracker = function() {
         HistoryTracker.superclass.constructor.apply(this, arguments);
     };
     
     HistoryTracker.ATTRS = {
-            io : {
-                value : Y.io
-            }
+        io : {
+            value : Y.io
+        }
     };
     
 
@@ -31,12 +29,30 @@
     
     Y.lane.HistoryTracker = new HistoryTracker();
     
-    Y.on("trackable", function(link, event){
-        var trackingData = link.get("trackingData");
-        if (trackingData.external) {
+    Y.on("domready", function() {
+        //only track history if <meta name="emrid"/>
+        var emridMeta = Y.one("meta[name='emrid']"),
+            emrid, title, index;
+        if (emridMeta) {
+            //shorten title:
+            if (index > 0) {
+                title = title.substring(0, index);
+            } else {
+                title = "Lane Medical Library";
+            }
             Y.lane.HistoryTracker.track({
-                label : trackingData.title,
-                url : link.get("url")
+                label : title,
+                url : window.location.toString()
+            });
+            
+            Y.on("trackable", function(link, event) {
+                var trackingData = link.get("trackingData");
+                if (trackingData.external) {
+                    Y.lane.HistoryTracker.track({
+                        label : trackingData.title,
+                        url : link.get("url")
+                    });
+                }
             });
         }
     });

@@ -437,7 +437,7 @@
         <script type="text/javascript" src="/resources/javascript/lane-search-reset.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search-hoverText.js"></script>                                                              
         <script type="text/javascript" src="/resources/javascript/lane-bookmarks.js"></script>                                                             
-        <!--<script type="text/javascript" src="/resources/javascript/lane-history.js"></script>-->                                                             
+        <script type="text/javascript" src="/resources/javascript/lane-history.js"></script>                                                             
         <script type="text/javascript" src="/resources/javascript/lane-feedback.js"></script>
         <script type="text/javascript" src="/resources/javascript/banner.js"></script> 
     </body>

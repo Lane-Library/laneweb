@@ -17,8 +17,8 @@
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.bookmarks.BookmarksDAO"
-        class="edu.stanford.irt.laneweb.bookmarks.SQLBookmarksDAO">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+        class="edu.stanford.irt.laneweb.bookmarks.DummyBookmarksDAO">
+        <!--<property name="dataSource" ref="javax.sql.DataSource/eresources"/>-->
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.bookmarks.DefaultXMLizableBookmarksView"
