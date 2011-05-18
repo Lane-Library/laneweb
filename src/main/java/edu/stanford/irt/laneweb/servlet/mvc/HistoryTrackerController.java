@@ -17,6 +17,8 @@ import edu.stanford.irt.laneweb.model.Model;
 @SessionAttributes({ Model.HISTORY, Model.EMRID })
 @RequestMapping(value = "/history")
 public class HistoryTrackerController {
+    
+    private static final int MAX_SIZE = 10;
 
     @Autowired
     private HistoryDAO historyDAO;
@@ -34,7 +36,10 @@ public class HistoryTrackerController {
     @ResponseBody
     public void trackHistory(@RequestBody final Bookmark trackingData, @ModelAttribute(Model.EMRID) final String emrid,
             @ModelAttribute(Model.HISTORY) final Bookmarks history) {
-        history.add(0, trackingData);
+        history.addFirst(trackingData);
+        if (history.size() > MAX_SIZE) {
+            history.removeLast();
+        }
         this.historyDAO.saveHistory(history);
     }
 

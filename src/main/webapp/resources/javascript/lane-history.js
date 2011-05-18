@@ -35,8 +35,10 @@
             emrid, title, index;
         if (emridMeta) {
             //shorten title:
+        	title = Y.one("title").getContent();
+        	index = title.indexOf(" - Lane Medical Library");
             if (index > 0) {
-                title = title.substring(0, index);
+                title = title.substring(0, index).replace("&amp;", "&");
             } else {
                 title = "Lane Medical Library";
             }

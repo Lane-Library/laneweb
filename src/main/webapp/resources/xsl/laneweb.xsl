@@ -283,8 +283,8 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add class="active" to laneNav li when the path matches (except for the one with qlinks select) -->
-    <xsl:template match="h:ul[attribute::id='laneNav']/h:li[not(h:select)]">
+    <!-- add class="active" to laneNav li when the path matches (except for the last one, qlinks or personal-links) -->
+    <xsl:template match="h:ul[attribute::id='laneNav']/h:li[not(position()=last())]">
         <xsl:variable name="link-content" select="child::h:a/text()"/>
         <xsl:variable name="active-tab" select="$laneNav-tabs/h:div[h:span[1]=$link-content]"/>
         <xsl:variable name="active" select="starts-with($path, $active-tab/h:span[2])"/>
