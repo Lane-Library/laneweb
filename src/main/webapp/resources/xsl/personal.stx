@@ -12,11 +12,11 @@
             <stx:when test="$emrid">
                 <a>Personal Links</a>
                 <ul id="personal-links">
-                    <!--<li>Bookmarks:</li>
+                    <li>Bookmarks:</li>
                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                         href="apps:/bookmarks">
                         <xi:fallback/>
-                        </xi:include>-->
+                    </xi:include>
                     <li>History:</li>
                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                         href="apps:/history">
