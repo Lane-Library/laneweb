@@ -38,7 +38,7 @@
 				    node = Y.Node.create("<li class='bookmark'><a><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;<a href='" +
 						bookmark.url + "'>" + bookmark.label + "</a></li>");
 				node.one("a").on("click", this._handleRemoveClick, this);
-				contentBox.insert(node, contentBox.all(".bookmark").size() + 1);
+				contentBox.insert(node, 1);
 			},
 			
 			removeBookmark : function(index) {
