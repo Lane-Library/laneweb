@@ -38,7 +38,7 @@ public class DefaultXMLizableBookmarksView {
 //            XMLUtils.startElement(contentHandler, XHTMLNS, UL);
             for (Bookmark bookmark : bookmarks) {
                 AttributesImpl atts = new AttributesImpl();
-//                atts.addAttribute("", CLASS, CLASS, CDATA, "bookmark");
+                atts.addAttribute("", CLASS, CLASS, CDATA, "bookmark");
                 XMLUtils.startElement(contentHandler, XHTMLNS, LI, atts);
                 atts = new AttributesImpl();
                 atts.addAttribute("", HREF, HREF, CDATA, bookmark.getUrl());

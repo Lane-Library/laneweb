@@ -1,4 +1,41 @@
 (function() {
+	
+	var personalLinks = Y.one("#personal-links"),
+	    PersonalLinks;
+	if (personalLinks) {
+		
+		PersonalLinks = function() {
+			PersonalLinks.superclass.constructor.apply(this, arguments);
+		};
+		
+		PersonalLinks.NAME = "personal-links";
+		
+		Y.extend(PersonalLinks, Y.Widget, {
+			
+			renderUI : function() {
+				var bookmarks = this.get("contentBox").all(".bookmark"),
+				    history = this.get("contentBox").all(".history"),
+				    i;
+				for (i = 0; i < bookmarks.size(); i++) {
+					bookmarks.item(i).insert("<a><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;", 0);
+				}
+				for (i = 0; i < history.size(); i++) {
+					history.item(i).insert("<a><img title='save as bookmark' src='/././resources/images/plus.png'/></a>&#160;", 0);
+				}
+			}
+		});
+		
+		Y.lane.PersonalLinks = new PersonalLinks({
+			srcNode : personalLinks,
+			render : true
+		});
+	}
+
+})();
+
+
+
+(function() {
     
     //only do this if there are bookmarks
     if (Y.one("#bookmarks")) {
