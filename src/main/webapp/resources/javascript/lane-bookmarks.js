@@ -13,15 +13,50 @@
 		Y.extend(PersonalLinks, Y.Widget, {
 			
 			renderUI : function() {
-				var bookmarks = this.get("contentBox").all(".bookmark"),
-				    history = this.get("contentBox").all(".history"),
+				var contentBox = this.get("contentBox"),
+				    bookmarks = contentBox.all(".bookmark"),
+				    history = contentBox.all(".history"),
 				    i;
-				for (i = 0; i < bookmarks.size(); i++) {
+				for (i = 1; i < bookmarks.size(); i++) {
 					bookmarks.item(i).insert("<a><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;", 0);
 				}
-				for (i = 0; i < history.size(); i++) {
+				for (i = 1; i < history.size(); i++) {
 					history.item(i).insert("<a><img title='save as bookmark' src='/././resources/images/plus.png'/></a>&#160;", 0);
 				}
+			},
+			
+			bindUI : function() {
+				var contentBox = this.get("contentBox"),
+			        removeBookmarkLinks = contentBox.all(".bookmark > a"),
+			        addBookmarkLinks = contentBox.all(".history > a");
+				removeBookmarkLinks.on("click", this._handleRemoveClick, this);
+				addBookmarkLinks.on("click", this._handleAddClick, this);
+			},
+			
+			addBookmark : function(bookmark) {
+				var contentBox = this.get("contentBox"),
+				    node = Y.Node.create("<li class='bookmark'><a><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;<a href='" +
+						bookmark.url + "'>" + bookmark.label + "</a></li>");
+				node.one("a").on("click", this._handleRemoveClick, this);
+				contentBox.insert(node, contentBox.all(".bookmark").size() + 1);
+			},
+			
+			removeBookmark : function(index) {
+				this.get("contentBox").all("li").item(index).remove(true);
+			},
+			
+			_handleAddClick : function(event) {
+				event.preventDefault();
+				var historyLink = event.target.ancestor("li").all("a").item(1);
+				this.addBookmark({
+					label : historyLink.getContent(),
+					url : historyLink.getAttribute("href")
+				});
+			},
+			
+			_handleRemoveClick : function(event) {
+				event.preventDefault();
+				this.removeBookmark(this.get("contentBox").all("li").indexOf(event.target.ancestor("li")));
 			}
 		});
 		
