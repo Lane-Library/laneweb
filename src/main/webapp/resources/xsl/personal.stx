@@ -10,7 +10,7 @@
     <stx:template match="h:select[@id='qlinks']">
         <stx:choose>
             <stx:when test="$emrid">
-                <a>Personal Links</a>
+                <a href="/samples/personalization.html">Personal Links</a>
                 <ul id="personal-links">
                     <li class="bookmark">My Bookmarks:</li>
                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
