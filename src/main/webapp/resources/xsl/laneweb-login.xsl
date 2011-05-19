@@ -26,7 +26,7 @@
                     <xsl:value-of select="$sunetid"/>
                 </xsl:when>
                 <xsl:when test="string-length($emrid) &gt; 0">
-                    <xsl:value-of select="$emrid"/>
+                    EPIC id: <xsl:value-of select="$emrid"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="child::node()"/>
