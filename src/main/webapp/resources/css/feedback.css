@@ -98,8 +98,7 @@
 }
 
 
-#feedback input[type = "text"],
-#feedback textarea {
+.feebackText {
     padding : 9px;
     border : solid 2px #C9C9C9;
     outline : 0;

@@ -4,6 +4,7 @@
 	    PersonalLinks;
 	if (personalLinks) {
 		
+		//TODO: create arrays as data model for bookmarks and history like the Bookmarks class
 		PersonalLinks = function() {
 			PersonalLinks.superclass.constructor.apply(this, arguments);
 		};
