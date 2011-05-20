@@ -164,14 +164,12 @@
 #banner {
     height : 286px;
     width : 733px;
-
     position : relative;
 }
 #banner img {
     display : block
 }
 .banner-nav-content {
-    background-color : rgba(131, 128, 119, 0.75);
     width : 100%;
     position : absolute;
     bottom : 0
@@ -183,7 +181,6 @@
     height : 46px;
     padding-top : 29px;
     width : 150px;
-
 }
 #banner li {
     list-style : none outside none;
