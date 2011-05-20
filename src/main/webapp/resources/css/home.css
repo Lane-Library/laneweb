@@ -26,6 +26,12 @@
     -webkit-border-bottom-left-radius : 22px;
     border-radius : 0 0 0 22px
 }
+#highlightedResourcesIECorner {
+    display : block;
+    position : absolute;
+    bottom : -4px;
+    left : -3px
+}
 #highlightedResources li {
     list-style : none inside none;
     margin-left : 0

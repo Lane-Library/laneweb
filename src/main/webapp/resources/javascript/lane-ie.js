@@ -33,7 +33,7 @@
         if (node) {
         	node.setStyle("position", "absolute");
         	node.setStyle("right", "0px");
-        	node.setStyle("top", "200px");
+        	node.setStyle("top", "300px");
         }
     }
     if (Y.UA.ie && Y.UA.ie <= 8) {
@@ -43,4 +43,11 @@
             nodes.item(i).append(Y.Node.create("<span class='after'/>"));
         }
     }
+//    if (Y.UA.ie) {
+    	//add rounded bottom left corner to highlighted resources
+    	node = Y.one("#highlightedResources");
+    	if (node) {
+    		node.append("<img id='highlightedResourcesIECorner' src='/././resources/images/highlightedResourcesIECorner.png'/>");
+    	}
+//    }
 })();
