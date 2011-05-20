@@ -49,6 +49,8 @@
     	node = Y.one(".banner-nav-content");
     	if (node) {
     		node.setStyle("background-color","blue");
+    		node.setStyle("visibility","hidden");
+    		node.setStyle("visibility","visible");
     	}
     }
 })();
