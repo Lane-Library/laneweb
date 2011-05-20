@@ -44,11 +44,12 @@
         }
     }
     //TODO: figure out why this doesn't work:
-//    if (Y.UA.ie) {
-//    	//IE doesn't know about rgba, set background color without opacity:
-//    	node = Y.one(".banner-nav-content");
-//    	if (node) {
-//    		node.setStyle("background-color","rgb(131,128,119)");
-//    	}
-//    }
+    if (Y.UA.ie) {
+    	//IE doesn't know about rgba, set background color without opacity:
+    	node = Y.one(".banner-nav-content");
+    	if (node) {
+    		node.setStyle("background-color","rgb(131,128,119)");
+    	}
+		alert(node);
+    }
 })();
