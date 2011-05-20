@@ -48,6 +48,7 @@
     	node = Y.one("#highlightedResources");
     	if (node) {
     		node.append("<img id='highlightedResourcesIECorner' src='/././resources/images/highlightedResourcesIECorner.png'/>");
+    		//TODO: possible further IE6 corrections
     	}
     }
 })();
