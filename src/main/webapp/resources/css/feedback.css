@@ -105,8 +105,6 @@
     font : normal 13px / 100%Arial, Verdana, sans-serif;
     background : #FFFFFF;
     width : 100%;
-    /*100% too big for IE*/
-    _width : 90%;
     -moz-box-sizing : border-box;
     -ms-box-sizing : border-box;
     -webkit-box-sizing : border-box;
