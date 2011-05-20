@@ -43,11 +43,11 @@
             nodes.item(i).append(Y.Node.create("<span class='after'/>"));
         }
     }
-//    if (Y.UA.ie) {
+    if (Y.UA.ie) {
     	//add rounded bottom left corner to highlighted resources
     	node = Y.one("#highlightedResources");
     	if (node) {
     		node.append("<img id='highlightedResourcesIECorner' src='/././resources/images/highlightedResourcesIECorner.png'/>");
     	}
-//    }
+    }
 })();
