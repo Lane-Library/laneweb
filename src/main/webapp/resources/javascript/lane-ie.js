@@ -48,9 +48,7 @@
     	//IE doesn't know about rgba, set background color without opacity:
     	node = Y.one(".banner-nav-content");
     	if (node) {
-    		node.setStyle("background-color","blue");
-    		node.setStyle("visibility","hidden");
-    		node.setStyle("visibility","visible");
+    		node.on("mouseover", function() {this.setStyle("background-color","black")});
     	}
     }
 })();
