@@ -43,12 +43,4 @@
             nodes.item(i).append(Y.Node.create("<span class='after'/>"));
         }
     }
-    //TODO: figure out why this doesn't work:
-    if (Y.UA.ie) {
-    	//IE doesn't know about rgba, set background color without opacity:
-    	node = Y.one(".banner-nav-content");
-    	if (node) {
-    		node.on("mouseover", function() {this.setStyle("background-color","black")});
-    	}
-    }
 })();
