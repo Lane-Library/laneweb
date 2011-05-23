@@ -169,15 +169,15 @@
                                         value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online"
                                         >UpToDate</option>
                                     <option value=""> ---------------- </option>
-                                    <option value="/biomed-resources/eb.html">Books</option>
-                                    <option value="/biomed-resources/db.html">Databases</option>
-                                    <option value="/biomed-resources/ej.html">Journals</option>
+                                    <option value="/biomed-resources/eb.html?laneNav=4">Books</option>
+                                    <option value="/biomed-resources/db.html?laneNav=4">Databases</option>
+                                    <option value="/biomed-resources/ej.html?laneNav=4">Journals</option>
                                     <option value=""> ---------------- </option>
-                                    <option value="/portals/bioresearch.html">Bioresearch
+                                    <option value="/portals/bioresearch.html?laneNav=4">Bioresearch
                                         Portal</option>
-                                    <option value="/portals/clinical.html">Clinical Portal</option>
-                                    <option value="/portals/peds.html">Pediatrics Portal</option>
-                                    <option value="/portals/pharmacy.html">Pharmacy Portal</option>
+                                    <option value="/portals/clinical.html?laneNav=4">Clinical Portal</option>
+                                    <option value="/portals/peds.html?laneNav=4">Pediatrics Portal</option>
+                                    <option value="/portals/pharmacy.html?laneNav=4">Pharmacy Portal</option>
                                     <option value=""> ---------------- </option>
                                     <option value="http://docxpress.stanford.edu">DocXpress</option>
                                     <option value="http://lmldb.stanford.edu">Lane Catalog</option>
