@@ -187,46 +187,46 @@
                         <div class="yui-g" id="laneFooter">
                             <div class="yui-g first">
                                 <div class="yui-u first">
-                                    <a href="/biomed-resources/index.html">BIOMEDICAL RESOURCES</a>
+                                    <a href="/biomed-resources/index.html?laneNav=3">BIOMEDICAL RESOURCES</a>
                                     <ul>
-                                        <li><a href="/biomed-resources/ej.html">Journals</a></li>
-                                        <li><a href="/biomed-resources/eb.html">Books</a></li>
-                                        <li><a href="/biomed-resources/db.html">Databases</a></li>
-                                        <li><a href="/biomed-resources/images.html">Images</a></li>
-                                        <li><a href="/biomed-resources/cc.html">Clinical Decision Tools</a></li>
-                                        <li><a href="/biomed-resources/index.html">ALL &#xBB;</a></li>
+                                        <li><a href="/biomed-resources/ej.html?laneNav=3">Journals</a></li>
+                                        <li><a href="/biomed-resources/eb.html?laneNav=3">Books</a></li>
+                                        <li><a href="/biomed-resources/db.html?laneNav=3">Databases</a></li>
+                                        <li><a href="/biomed-resources/images.html?laneNav=3">Images</a></li>
+                                        <li><a href="/biomed-resources/cc.html?laneNav=3">Clinical Decision Tools</a></li>
+                                        <li><a href="/biomed-resources/index.html?laneNav=3">ALL &#xBB;</a></li>
                                     </ul>
                                 </div>
                                 <div class="yui-u">
-                                    <a href="/portals/index.html">SPECIALTY PORTALS</a>
+                                    <a href="/portals/index.html?laneNav=3">SPECIALTY PORTALS</a>
                                     <ul>
-                                        <li><a href="/portals/peds.html">Pediatrics</a></li>
-                                        <li><a href="/portals/clinical.html">Clinical</a></li>
-                                        <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
-                                        <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
-                                        <li><a href="/portals/picu.html">PICU</a></li>
-                                        <li><a href="/portals/index.html">ALL &#xBB;</a></li>
+                                        <li><a href="/portals/peds.html?laneNav=3">Pediatrics</a></li>
+                                        <li><a href="/portals/clinical.html?laneNav=3">Clinical</a></li>
+                                        <li><a href="/portals/cvicu.html?laneNav=3">LPCH Heart Center Nursing</a></li>
+                                        <li><a href="/portals/pharmacy.html?laneNav=3">Pharmacy</a></li>
+                                        <li><a href="/portals/picu.html?laneNav=3">PICU</a></li>
+                                        <li><a href="/portals/index.html?laneNav=3">ALL &#xBB;</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="yui-g">
                                 <div class="yui-u first">
-                                    <a href="/about/index.html">ABOUT LANE</a>
+                                    <a href="/about/index.html?laneNav=3">ABOUT LANE</a>
                                     <ul>
-                                        <li><a href="/about/hours-directions.html">Hours &amp; Directions</a></li>
-                                        <li><a href="/about/contact.html">Contact Us</a></li>
-                                        <li><a href="/about/studyspaces.html">Study Spaces</a></li>
-                                        <li><a href="/about/liaisons.html">Liaisons</a></li>
-                                        <li><a href="/about/affiliate-privilege.html">Library Affiliations</a></li>
-                                        <li><a href="/about/index.html">ALL &#xBB;</a></li>
+                                        <li><a href="/about/hours-directions.html?laneNav=3">Hours &amp; Directions</a></li>
+                                        <li><a href="/about/contact.html?laneNav=3">Contact Us</a></li>
+                                        <li><a href="/about/studyspaces.html?laneNav=3">Study Spaces</a></li>
+                                        <li><a href="/about/liaisons.html?laneNav=3">Liaisons</a></li>
+                                        <li><a href="/about/affiliate-privilege.html?laneNav=3">Library Affiliations</a></li>
+                                        <li><a href="/about/index.html?laneNav=3">ALL &#xBB;</a></li>
                                     </ul>
                                 </div>
                                 <div class="yui-u">
                                     <a href="http://www.stanford.edu/">STANFORD</a>
                                     <ul>
                                         <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
-                                        <li><a href="/biomed-resources/recent-su-pubmed.html">Stanford Authors in PubMed</a></li>
-                                        <li><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles @Stanford</a></li>
+                                        <li><a href="/biomed-resources/recent-su-pubmed.html?laneNav=3">Stanford Authors in PubMed</a></li>
+                                        <li><a href="/biomed-resources/highly-accessed.html?laneNav=3">Highly Accessed Articles @Stanford</a></li>
                                         <li><a href="http://scopeblog.stanford.edu/">Scope Blog</a></li>
                                     </ul>
                                 </div>
@@ -331,7 +331,7 @@
                             <a href="http://med.stanford.edu/alumni/">Alumni</a>
                         </li>
                         <li>
-                            <a href="http://lane.stanford.edu/">Lane Medical Library</a>
+                            <a href="http://lane.stanford.edu/index.html">Lane Medical Library</a>
                         </li>
                     </ul>
                 </li>
