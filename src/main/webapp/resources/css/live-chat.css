@@ -1,13 +1,39 @@
-
-#libraryContact .live-chat a {
+/* display : block for button behavior with background-image*/
+.live-chat a {
     display : block;
-    background-image : url(/././resources/images/chat-top-off.png);
     background-repeat : no-repeat;
+}
+#libraryContact .live-chat a {
+    background-image : url(/././resources/images/chat-top-off.png);
     padding-left : 26px
 }
 #libraryContact .live-chat a:hover {
     background-image : url(/././resources/images/chat-top-on.png)
 }
-.live-chat-inactive {
+#libraryContact .live-chat-inactive {
     display : none
+}
+
+.content .live-chat-inactive, .content .live-chat a {
+    width : 161px;
+    height : 70px;
+    background-image : url(/././resources/images/liveChat1.png);
+    background-repeat : no-repeat;
+    margin : 5px auto
+}
+.content .live-chat-inactive {
+    background-position : 0 -210px
+}
+.content .live-chat a {
+    font-size : 0;
+    text-indent : -1000px;
+    border-bottom : none
+}
+
+.content .live-chat a:hover {
+    background-position : 0 -105px
+}
+
+.content .live-chat-inactive a {
+    visibility : hidden
 }
