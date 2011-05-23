@@ -333,6 +333,7 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- add ?laneNav=2 to sectionMenu links -->
     <xsl:template match="h:ul[contains(@class,'sectionMenu')]//attribute::href">
         <xsl:variable name="href">
             <xsl:choose>
