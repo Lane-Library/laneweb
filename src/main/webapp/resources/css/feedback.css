@@ -83,18 +83,19 @@
     font-weight : bold
 }
 
-#feedback input[type = "submit"] {
+.feedbackSubmit {
+    background-color : transparent;
     background-image : url(/././resources/images/submit-feedback-off.png);
     border : none;
     display : block;
     width : 223px;
     height : 43px;
-    margin : 0 auto
+    margin : 0 auto;
+    cursor : pointer
 }
 
-#feedback input[type = "submit"]:hover {
+.feedbackSubmit:hover {
     background-image : url(/././resources/images/submit-feedback-on.png);
-    cursor : pointer
 }
 
 
@@ -105,10 +106,19 @@
     font : normal 13px / 100%Arial, Verdana, sans-serif;
     background : #FFFFFF;
     width : 100%;
+    _width : 95%;
     -moz-box-sizing : border-box;
     -ms-box-sizing : border-box;
     -webkit-box-sizing : border-box;
     box-sizing : border-box;
+}
+
+/*a couple of IE6 fixes*/
+#feedbackItems .yui-g .yui-u .feedbackText {
+    _width : 90%
+}
+#feedback .yui-gd .first {
+    _overflow : hidden
 }
 
 #feedback textarea {

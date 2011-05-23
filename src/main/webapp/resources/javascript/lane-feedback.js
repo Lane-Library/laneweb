@@ -56,11 +56,7 @@
         },
         _fixForIE6 : function() {
         	var boundingBox = this.get("boundingBox");
-        	//keep the menu column from dropping below the form column
-        	boundingBox.one(".yui-gd > .first").setStyle("overflow", "hidden");
-        	//put text "submit" into submit buttons
-        	boundingBox.all("input[type='submit']").setAttribute("value","submit");
-        	//this forces the markup to be rendered, not sure why it is needed.
+//        	//this forces the markup to be rendered, not sure why it is needed.
         	boundingBox.setStyle("visibility", "hidden");
         	boundingBox.setStyle("visibility", "visible");
         },
