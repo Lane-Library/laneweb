@@ -1,6 +1,23 @@
 (function() {
 
-    var LightboxBg = Y.Base.create("lightboxbg", Y.Widget, []);
+    var LightboxBg = Y.Base.create("lightboxbg", Y.Widget, [], {
+    	//tweak background for IE6, no position : fixed, need to set height depending on body height
+    	bindUI : function() {
+    		if (Y.UA.ie && Y.UA.ie < 7) {
+    			var boundingBox = this.get("boundingBox");
+    			boundingBox.setStyle("position", "absolute");
+    			this.on("visibleChange", this._visibleChange, this);
+    		}
+    	},
+    	_visibleChange : function(event) {
+    		if (event.newVal) {
+    			var bodyHeight = Y.one("body").get("clientHeight") + 40,
+    			    htmlHeight = document.documentElement.offsetHeight,
+    			    height = htmlHeight > bodyHeight ? htmlHeight : bodyHeight;
+    			this.get("boundingBox").setStyle("height", height + "px");
+    		}
+    	}
+    });
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
         bindUI : function () {
