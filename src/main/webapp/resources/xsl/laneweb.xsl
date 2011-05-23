@@ -332,6 +332,25 @@
             <xsl:apply-templates select="child::h:ul"/>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="h:ul[contains(@class,'sectionMenu')]//attribute::href">
+        <xsl:variable name="href">
+            <xsl:choose>
+                <xsl:when test="contains(.,'#')">
+                    <xsl:value-of select="substring-before(.,'#')"/>
+                    <xsl:text>?laneNav=2#</xsl:text>
+                    <xsl:value-of select="substring-after(.,'#')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="concat(.,'?laneNav=2')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:call-template name="make-link">
+            <xsl:with-param name="link" select="$href"/>
+            <xsl:with-param name="attr" select="'href'"/>
+        </xsl:call-template>
+    </xsl:template>
 
     <!-- disable live chat if not scheduled to be available -->
     <xsl:template match="h:*[@class = 'live-chat']">
