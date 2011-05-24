@@ -231,6 +231,17 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div style="position:absolute;right:29px;bottom:29px">
+                                <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257"
+                                    class="image-link"><img src="/samples/new/facebook-color.png" alt=""
+                                        width="27" height="28" /></a>
+                                &#160;
+                                <a href="http://www.flickr.com/photos/40390680@N08/" class="image-link"><img
+                                                src="/samples/new/flickr-icon.png" alt="" width="27" height="28" /></a>
+                                &#160;
+                                <a href="http://medblog.stanford.edu/lane-news/index.xml" class="image-link"><img
+                                    src="/samples/new/rss-icon-color.png" alt="" width="27" height="28"/></a>
+                            </div>
                         </div>
                     </div>
                     <div class="sb-tb" id="sb-bot">
