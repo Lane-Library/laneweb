@@ -87,6 +87,22 @@
     background-image : url(/././resources/images/seeall-but-on.gif);
 }
 
+#infoLiteracy {
+    background-image : url(/././resources/images/infoLiteracy1.png);
+    display : block;
+    width : 161px;
+    height : 70px;
+    background-repeat : no-repeat;
+    margin : 5px auto;
+    font-size : 0;
+    text-indent : -1000px;
+    border-bottom : none
+}
+
+#infoLiteracy:hover {
+    background-position : 0 -105px
+}
+
 /* top resources buttons, possibly temporary */
 .top-resources {
     background-image : url(/././resources/images/top-resources.gif);

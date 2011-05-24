@@ -18,7 +18,6 @@
     width : 161px;
     height : 70px;
     background-image : url(/././resources/images/liveChat1.png);
-    background-repeat : no-repeat;
     margin : 5px auto
 }
 .content .live-chat-inactive {

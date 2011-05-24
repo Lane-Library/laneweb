@@ -13,8 +13,7 @@
 }
 /*padding to push down for top resources*/
 #topRightColumn {
-    padding-top : 90px;
-    text-align : center
+    padding-top : 90px
 }
 #highlightedResources {
     position : absolute;
