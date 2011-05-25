@@ -51,6 +51,13 @@
 			},
 			
 			removeBookmark : function(index) {
+				Y.io("/././bookmarks/remove", {
+                    method : "post",
+                    data : Y.JSON.stringify(index),
+                    headers: {
+                        "Content-Type" : "application/json"
+                    }
+                });
 				this.get("contentBox").all("li").item(index).remove(true);
 			},
 			
