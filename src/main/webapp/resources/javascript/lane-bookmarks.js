@@ -37,7 +37,15 @@
 			addBookmark : function(bookmark) {
 				var contentBox = this.get("contentBox"),
 				    node = Y.Node.create("<li class='bookmark'><a><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;<a href='" +
-						bookmark.url + "'>" + bookmark.label + "</a></li>");
+						bookmark.url + "'>" + bookmark.label + "</a></li>"),
+				    data = Y.JSON.stringify(bookmark);
+				Y.io("/././bookmarks/add", {
+                    method : "post",
+                    data : data,
+                    headers: {
+                        "Content-Type" : "application/json"
+                    }
+                });
 				node.one("a").on("click", this._handleRemoveClick, this);
 				contentBox.insert(node, 2);
 			},
