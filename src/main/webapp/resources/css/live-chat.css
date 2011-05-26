@@ -5,7 +5,8 @@
 }
 #libraryContact .live-chat a {
     background-image : url(/././resources/images/chat-top-off.png);
-    padding-left : 26px
+    padding-left : 26px;
+    border-bottom : none
 }
 #libraryContact .live-chat a:hover {
     background-image : url(/././resources/images/chat-top-on.png)
@@ -13,7 +14,12 @@
 #libraryContact .live-chat-inactive {
     display : none
 }
-
+#libraryContact span {
+    border-bottom : 1px dotted #81785A
+}
+#libraryContact a:hover span {
+    border-bottom : 1px solid #820000
+}
 .content .live-chat-inactive, .content .live-chat a {
     width : 161px;
     height : 70px;

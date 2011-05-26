@@ -1,4 +1,5 @@
 #laneFooter {
+    position : relative;
     background-color : #F6F7F2;
     background-image : url(/././resources/images/laneFooterBg1.png);
     background-repeat : repeat-x;
@@ -24,4 +25,10 @@
     font-family : arial;
     font-size : 11px;
     letter-spacing : normal
+}
+
+#socialMedia {
+    position : absolute;
+    right : 24px;
+    bottom : 14px
 }
