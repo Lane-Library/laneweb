@@ -79,6 +79,12 @@
             }
         }
     }); 
+    
+    Lightbox.ATTRS = {
+    	url : {
+    		value : null
+    	}
+    };
 
     Y.lane.Lightbox = new Lightbox({
         visible : false,
@@ -112,11 +118,9 @@
                 on : {
                     success : function(id, o, args) {
                         var lightbox = Y.lane.Lightbox;
+                        lightbox.set("url", href);
                         lightbox.setContent(o.responseText);
                         lightbox.show();
-                    },
-                    failure : function() {
-                        window.location = anchor.get("href");
                     }
                 }
             });

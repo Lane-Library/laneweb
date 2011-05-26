@@ -80,10 +80,20 @@
     Y.lane.Feedback = Feedback;
     
     Y.lane.Lightbox.on("contentChanged", function(event) {
-    if (Y.one("#feedback")) {
-        var feedback = new Y.lane.Feedback({srcNode : "#feedback"});
-        feedback.render();
-      }
+        if (Y.one("#feedback")) {
+            var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
+                url = Y.lane.Lightbox.get("url"),
+                hash, items, index;
+            feedback.render();
+            if (url.indexOf("#") > -1) {
+            	hash = url.substring(url.indexOf("#"));
+            	items = feedback.get("items");
+            	index = items.indexOf(feedback.get("contentBox").one(hash));
+            	if (index > -1) {
+            		feedback.set("activeItem", index);
+            	}
+            }
+        }
     });
     
 })();
