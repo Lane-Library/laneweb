@@ -19,24 +19,24 @@
 				    history = contentBox.all(".history"),
 				    i;
 				for (i = 1; i < bookmarks.size(); i++) {
-					bookmarks.item(i).insert("<a><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;", 0);
+					bookmarks.item(i).insert("<a class='remove'><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;", 0);
 				}
 				for (i = 1; i < history.size(); i++) {
-					history.item(i).insert("<a><img title='save as bookmark' src='/././resources/images/plus.png'/></a>&#160;", 0);
+					history.item(i).insert("<a class='add'><img title='save as bookmark' src='/././resources/images/plus.png'/></a>&#160;", 0);
 				}
 			},
 			
 			bindUI : function() {
 				var contentBox = this.get("contentBox"),
-			        removeBookmarkLinks = contentBox.all(".bookmark > a"),
-			        addBookmarkLinks = contentBox.all(".history > a");
+			        removeBookmarkLinks = contentBox.all(".remove"),
+			        addBookmarkLinks = contentBox.all(".add");
 				removeBookmarkLinks.on("click", this._handleRemoveClick, this);
 				addBookmarkLinks.on("click", this._handleAddClick, this);
 			},
 			
 			addBookmark : function(bookmark) {
 				var contentBox = this.get("contentBox"),
-				    node = Y.Node.create("<li class='bookmark'><a><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;<a href='" +
+				    node = Y.Node.create("<li class='bookmark'><a class='remove'><img title='delete this bookmark' src='/././resources/images/minus.png'/></a>&#160;<a href='" +
 						bookmark.url + "'>" + bookmark.label + "</a></li>"),
 				    data = Y.JSON.stringify(bookmark);
 				Y.io("/././bookmarks/add", {
