@@ -534,7 +534,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.26.0</version>
+            <version>1.28.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -614,7 +614,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.34</version>
+            <version>1.6.35</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>
