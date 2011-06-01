@@ -32,7 +32,7 @@
     Y.on("domready", function() {
         //only track history if <meta name="emrid"/>
         var emridMeta = Y.one("meta[name='emrid']"),
-            searchTerms, emrid, title, index;
+            searchTerms, emrid, title, url, index;
         if (emridMeta) {
             //shorten title:
         	title = Y.one("title").getContent();
@@ -46,9 +46,13 @@
             if (searchTerms) {
             	title = "Search for: " + searchTerms;
             }
+            url = window.location.pathname;
+            if (window.location.search) {
+            	url += "?" + window.location.search;
+            }
             Y.lane.HistoryTracker.track({
                 label : title,
-                url : window.location.pathname
+                url : url
             });
             
             Y.on("trackable", function(link, event) {
