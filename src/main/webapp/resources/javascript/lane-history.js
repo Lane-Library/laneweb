@@ -32,7 +32,7 @@
     Y.on("domready", function() {
         //only track history if <meta name="emrid"/>
         var emridMeta = Y.one("meta[name='emrid']"),
-            emrid, title, index;
+            searchTerms, emrid, title, index;
         if (emridMeta) {
             //shorten title:
         	title = Y.one("title").getContent();
@@ -41,6 +41,10 @@
                 title = title.substring(0, index).replace("&amp;", "&");
             } else {
                 title = "Lane Medical Library";
+            }
+            searchTerms = Y.lane.SearchResult.getSearchTerms();
+            if (searchTerms) {
+            	title = "Search for: " + searchTerms;
             }
             Y.lane.HistoryTracker.track({
                 label : title,
