@@ -44,7 +44,7 @@
             }
             Y.lane.HistoryTracker.track({
                 label : title,
-                url : window.location.toString()
+                url : window.location.pathname
             });
             
             Y.on("trackable", function(link, event) {
