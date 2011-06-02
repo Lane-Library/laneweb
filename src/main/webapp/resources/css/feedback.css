@@ -5,6 +5,10 @@
     right : 0;
     z-index : 1
 }
+/* IE6 doesn't do position : fixed, this class is added via lane-ie.js*/
+#feedbackLink.ie6Feedback {
+    position : absolute
+}
 #feedbackLink a {
     display : block;
     background-image : url(/././resources/images/feedback-vertical-off.png);

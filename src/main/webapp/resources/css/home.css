@@ -210,6 +210,5 @@
     font-weight : bolder;
     -webkit-text-shadow : 1px 1px 1px black;
     -moz-text-shadow : 1px 1px 1px black;
-    filter: Shadow(Color=black, Direction=120, Strength=2);
     text-shadow : 1px 1px 1px black;
 }

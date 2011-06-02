@@ -4,12 +4,12 @@
     background-repeat : no-repeat;
 }
 #libraryContact .live-chat a {
-    background-image : url(/././resources/images/chat-top-off.png);
+    background-image : url(/././resources/images/chat-top-off.gif);
     padding-left : 26px;
     border-bottom : none
 }
 #libraryContact .live-chat a:hover {
-    background-image : url(/././resources/images/chat-top-on.png)
+    background-image : url(/././resources/images/chat-top-on.gif)
 }
 #libraryContact .live-chat-inactive {
     display : none
