@@ -235,7 +235,7 @@ public class ContentResultSearchResult implements SearchResult {
         } else {
             score = 1;
         }
-        return (int) (score * weight);
+        return (int) ((score + computeDateAdjustment()) * weight);
     }
 
     private double computeWeight(final String engineId) {
@@ -249,6 +249,18 @@ public class ContentResultSearchResult implements SearchResult {
         return 1;
     }
 
+    // return -10 to 10, based on pub date's proximity to THIS_YEAR
+    private int computeDateAdjustment() {
+        if(null == this.contentResult.getPublicationDate()){
+            return 0;
+        }
+        Matcher yearMatcher = YEAR_PATTERN.matcher(this.contentResult.getPublicationDate());
+        if (yearMatcher.matches()) {
+            return Math.max(-10, 10 - (THIS_YEAR - Integer.parseInt(yearMatcher.group(1))));
+        }
+        return 0;
+    }
+    
     private void maybeCreateElement(final ContentHandler handler, final String name, final String value) throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(handler, NAMESPACE, name, value);
