@@ -9,6 +9,8 @@
             href="/extensions/laneconnex-engine.xml"/>
         <link rel="alternate" type="application/rss+xml" title="Lane RSS News"
             href="http://medblog.stanford.edu/lane-news/index.xml"/>
+        <!-- temporarily putting this in for Olya -->
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
         <meta name="WT.seg_1" content="{ipGroup}"/>
     </head>
     <body>
