@@ -4,9 +4,6 @@
     position : relative;
     margin : -10px -15px 0 -20px
 }
-#lastRow {
-    padding : 0 18px
-}
 #lastRow .module {
     border : 1px solid #CCCCCC;
     -moz-border-radius-bottomright : 25px;
