@@ -1,85 +1,8 @@
 /*styles for redesigned home page*/
-/*margin from banner*/
-#firstRow {
-    margin : 31px 27px 0 18px
-}
-/*leftColumn wider*/
-#home .content .yui-gf .leftColumn {
-    width : 217px
-}
-/*set style to yui-grid default, not #rightGrids 760px*/
-#home .content .yui-gf .rightGrids {
-    width : 74.2%
-}
-/*padding to push down for top resources*/
-#topRightColumn {
-    padding-top : 90px
-}
-#highlightedResources {
-    position : absolute;
-    top : 0;
-    right : 0;
-    border : 3px #5A8CB4 solid;
-    width : 250px;
-    -moz-border-radius-bottomleft : 22px;
-    -webkit-border-bottom-left-radius : 22px;
-    border-radius : 0 0 0 22px
-}
-#highlightedResourcesIECorner {
-    display : block;
-    position : absolute;
-    bottom : -3px;
-    left : -3px
-}
-#highlightedResources li {
-    list-style : none inside none;
-    margin-left : 0
-}
-#highlightedResources a {
-    border-bottom : none
-}
-#highlightedResources a:hover {
-    color : #ff9933;
-}
-#topResources {
-    background-image : url(/././resources/images/topResourcesBg1.png);
-    background-repeat : no-repeat;
-    height : 280px;
-    font-size : 15px;
-    font-family : Georgia, 'Times New Roman', Times, serif;
-    text-shadow : 0.1em 0.1em 0.1em #101010;
-    margin-bottom : 0
-}
-#topResources li {
-    float : left;
-}
-#topResources a {
-    display : block;
-    width : 110px;
-    height : 25px;
-    padding : 9px 0 0 15px;
-    margin-bottom : 1px;
-    color : #FFECC1;
-}
-#topResources a:hover {
-    background-color : #256592;
-    background-image : url(/././resources/images/topResourcesOverBg1.png);
-    background-repeat : no-repeat
-}
-#moreTopResources {
-    background-color : #084468;
-    padding : 20px 0 10px;
-    margin-bottom : 0;
-    text-align : right;
-    -webkit-border-radius : 0 0 0 19px;
-    -moz-border-radius : 0 0 0 19px;
-    border-radius : 0 0 0 19px
-}
-#moreTopResources li {
-    padding : 4px 16px;
-}
-#moreTopResources a {
-    color : white;
+/*correct margin for banner and highlightedResources*/
+.noMarginContent {
+    position : relative;
+    margin : -10px -15px 0 -20px
 }
 #lastRow {
     padding : 0 18px
@@ -90,31 +13,16 @@
     -webkit-border-bottom-right-radius : 25px;
     border-radius : 0 0 25px 0;
     padding : 1em;
-    height : 215px
+    height : 220px
 }
 #lastRow .bd {
     margin-top : 0
 }
-/*template style changes, no margin so stuff goes to the edge, and relative position to absolutely
-            position topResources */
-#home .content {
-    margin : 0;
-    position : relative
-}
-.rss-link {
-    margin-top : 6px;
-}
-#home h3 {
-    font-size : 15px;
-    border-bottom-color : #575347;
-    color : #575347;
-    letter-spacing : 1.1px
-}
-#home h4 {
+#lastRow h4 {
     font-size : 14px;
     margin-bottom : 1em
 }
-#home h4 a {
+#lastRow h4 a {
     border-bottom : none
 }
 /*classes section*/
@@ -144,14 +52,14 @@
 .events .time {
     color : #575347
 }
-#home .button.all-classes,
-#home .button.all-classes:hover {
+.button.all-classes,
+.button.all-classes:hover {
     background-position : 72px -220px;
     width : 100%;
 }
 /*grand rounds section*/
 
-#grandrounds li {
+.content .grandrounds li {
     list-style : none inside none;
     font-size : 14px;
     font-family : Georgia, "Times New Roman", Times, serif;
@@ -162,53 +70,14 @@
     background-position : bottom center;
     background-repeat : no-repeat
 }
-#grandrounds a {
+.grandrounds a {
     border-bottom : none
 }
 
-#banner {
-    height : 286px;
-    width : 733px;
-    position : relative;
-}
-#banner img {
-    display : block
-}
-.banner-nav-content {
-    width : 100%;
-    position : absolute;
-    bottom : 0
-}
-#banner .banner-nav {
-    float : left;
-    margin-bottom : 0;
-    margin-left : 5px;
-    height : 46px;
-    padding-top : 29px;
-    width : 150px;
-}
-#banner li {
-    list-style : none outside none;
-    float : left;
-    margin-left : 10px;
-}
-.banner-nav a {
-    display : block;
-    width : 18px;
-    height : 18px;
-    background-image : url(/././resources/images/bannerButtonOff1.png);
-    border-bottom : none
-}
-.banner-nav .banner-nav-active,
-.banner-nav a:hover {
-    background-image : url(/././resources/images/bannerButtonOn1.png)
-}
-.banner-content {
-    float : left;
-    padding-top : 8px;
-    color : white;
-    font-weight : bolder;
-    -webkit-text-shadow : 1px 1px 1px black;
-    -moz-text-shadow : 1px 1px 1px black;
-    text-shadow : 1px 1px 1px black;
+/* module with shadow on bottom*/
+.bd.bottomShadow {
+    margin-top : 0;
+    background-image : url(/././resources/images/bottomShadow1.png);
+    background-position : bottom;
+    padding-bottom : 15px
 }

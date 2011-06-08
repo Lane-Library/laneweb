@@ -166,6 +166,8 @@
                                 <include>feedback-min.css</include>
                                 <include>live-chat-min.css</include>
                                 <include>home-min.css</include>
+                                <include>banner-min.css</include>
+                                <include>hightlighted-resources-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -614,7 +616,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.35</version>
+            <version>1.6.36</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>

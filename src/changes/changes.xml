@@ -7,6 +7,67 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-05-27" version="1.11.31" description="1.11.31 bug fix release">
+            <action date="2011-05-26" dev="ceyates" issue="51033" type="add">
+                choose active feedback item via hash in url
+            </action>
+            <action date="2011-05-25" dev="ceyates" issue="50980" type="update">
+                put the feedback link into the template 
+            </action>
+            <action date="2011-05-26" dev="ceyates" issue="50370" type="fix">
+                underline for live chat link
+            </action>
+            <action date="2011-05-17" dev="ceyates" issue="50246" type="add">
+                Expandy with internal anchor
+            </action>
+            <action date="2011-05-24" dev="ceyates" issue="50088" type="update">
+                Social networking buttons for footer 
+            </action>
+            <action date="2011-05-24" dev="ceyates" issue="49106" type="add">
+                laneNav=2 &amp; =3 URL Parameters for Left &amp; Foot Nav Links 
+            </action>
+        </release>
+        <release date="2011-05-16" version="1.11.30" description="1.11.30 bug fix release">
+            <action date="2011-05-11" dev="ceyates" issue="50331" type="update">
+                Add Psych &amp; Spiritual Care Portal links to Specialty dropdown
+            </action>
+            <action date="2011-05-13" dev="ceyates" issue="50299" type="fix">
+                Text string displaying incorrectly
+            </action>
+            <action date="2011-05-10" dev="ceyates" issue="50246" type="add">
+                Expandy with internal anchor
+            </action>
+            <action date="2011-05-10" dev="ceyates" issue="48782" type="update">
+                changes to the top of the template to match SoM
+            </action>
+            <action date="2011-05-10" dev="ceyates" issue="48402" type="add">
+                Live Chat in the upper right corner
+            </action>
+            <action date="2011-05-13" dev="ceyates" issue="46914" type="add">
+                create a widget for feedback
+            </action>
+        </release>
+        <release date="2011-05-09" version="1.11.29" description="1.11.29 bug fix release">
+            <action date="2011-05-09" dev="alainb" issue="49370" type="fix">
+                Feedback: Systematic Review search
+            </action>
+            <action date="2011-05-03" dev="ceyates" issue="47957" type="add">
+                create a lightbox widget
+            </action>
+        </release>
+        <release date="2011-05-02" version="1.11.28" description="1.11.28 bug fix release">
+            <action date="2011-05-02" dev="ceyates" issue="49865" type="update">
+                remove preferred_title references from history search queries
+            </action>
+            <action date="2011-04-21" dev="ceyates" issue="49416" type="update">
+                Margin for the "Classes" button and "schedul-support" &amp; "biomed seminars" links
+            </action>
+        </release>
+        <release date="2011-04-18" version="1.11.27" description="1.11.27 bug fix release">
+            <action date="2011-04-18" dev="ceyates" issue="48488" type="fix">
+                popup cursor, z-index &amp; positioning are incorrect
+            </action>
+        </release>
         <release date="2011-04-11" version="1.11.26" description="1.11.26 bug fix release">
             <action date="2011-04-07" dev="ceyates" issue="48909" type="update">
                 change style rules for h3

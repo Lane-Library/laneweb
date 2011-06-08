@@ -1,0 +1,92 @@
+
+#highlightedResources {
+    position : absolute;
+    top : 0;
+    right : 0;
+    border : 3px #5A8CB4 solid;
+    width : 250px;
+    -moz-border-radius-bottomleft : 22px;
+    -webkit-border-bottom-left-radius : 22px;
+    border-radius : 0 0 0 22px
+}
+#highlightedResourcesIECorner {
+    display : block;
+    position : absolute;
+    bottom : -3px;
+    left : -3px
+}
+#highlightedResources h3 {
+    background-color : #084468;
+    padding : 5px;
+    text-align : center;
+    color : white;
+    font-size : 16px;
+    font-weight : bold;
+    border-bottom : 3px #5A8CB4 solid;
+    text-transform : none;
+}
+#highlightedResources li {
+    list-style : none inside none;
+    margin-left : 0
+}
+#highlightedResources a {
+    border-bottom : none
+}
+#highlightedResources a:hover {
+    color : #ff9933;
+}
+#topResources {
+    background-image : url(/././resources/images/topResourcesBg1.png);
+    background-repeat : no-repeat;
+    font-size : 15px;
+    font-family : Georgia, 'Times New Roman', Times, serif;
+    text-shadow : 0.1em 0.1em 0.1em #101010;
+    margin-bottom : 0;
+    white-space : nowrap;
+    /* required for IE6:*/
+    position : relative;
+    /* required for IE7:*/
+    height : 100%
+}
+#topResources:after, #topResources .after {
+    content : ".";
+    display : block;
+    height : 0;
+    font-size : 0;
+    clear : both;
+    visibility : hidden;
+}
+#topResources li {
+    float : left;
+    /* required for IE6:*/
+    position : relative
+}
+#topResources a {
+    display : block;
+    width : 110px;
+    height : 25px;
+    padding : 9px 0 0 15px;
+    margin-bottom : 1px;
+    color : #FFECC1
+}
+#topResources a:hover {
+    background-color : #256592;
+    background-image : url(/././resources/images/topResourcesOverBg1.png);
+    background-repeat : no-repeat
+}
+#moreTopResources {
+    background-color : #084468;
+    padding : 20px 0 10px;
+    margin-bottom : 0;
+    text-align : right;
+    text-shadow : 0.1em 0.1em 0.1em #101010;
+    -webkit-border-radius : 0 0 0 19px;
+    -moz-border-radius : 0 0 0 19px;
+    border-radius : 0 0 0 19px
+}
+#moreTopResources li {
+    padding : 4px 16px;
+}
+#moreTopResources a {
+    color : white;
+}
