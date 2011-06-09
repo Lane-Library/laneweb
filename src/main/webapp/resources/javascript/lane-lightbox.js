@@ -57,10 +57,11 @@
                     from : {left:contentBox.get("clientWidth")/-2, top: contentBox.get("clientHeight")/-2},
                     to : {left:0,top:0}
                 });
-            anim1.on("end", function() {
+            anim2.on("end", function() {
                 boundingBox.setStyle("overflow", "visible");
                 boundingBox.setStyle("width","auto");
                 boundingBox.setStyle("height","auto");
+                this.set("constrain", true);
                 this.fire("animEnd");
             }, this);
             boundingBox.setStyle("overflow", "hidden");
