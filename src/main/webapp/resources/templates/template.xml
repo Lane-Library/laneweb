@@ -66,7 +66,7 @@
                             <li>650-723-6831</li>
                             <li><a href="/help/ask-us.html">Ask Us</a></li>
                             <li><a href="/about/hours-directions.html">Library Hours</a></li>
-                            <li class="live-chat"><a href="/help/live-chat.html"><span>Live Chat</span></a></li>
+                            <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
                         </ul>
                         <ul id="login">
                             <li>
