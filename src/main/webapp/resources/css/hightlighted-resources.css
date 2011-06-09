@@ -3,6 +3,8 @@
     position : absolute;
     top : 0;
     right : 0;
+    /*required for IE6:*/
+    _right : 10px;
     border : 3px #5A8CB4 solid;
     width : 250px;
     -moz-border-radius-bottomleft : 22px;
