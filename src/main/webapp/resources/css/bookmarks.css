@@ -41,3 +41,6 @@
 .yui3-bookmarks-hide {
     display : none
 }
+#personal-links .add, #personal-links .remove {
+    float : right
+}
