@@ -295,6 +295,11 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- TODO: this is temporary to permit different feedback in develpment version of application-->
+            <map:match pattern="help/feedback1.html">
+                <map:generate type="html" src="/resources/feedback1.html"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="${content-base}/{1}"/>
                 <map:transform type="xinclude"/>
