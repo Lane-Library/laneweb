@@ -79,8 +79,18 @@
     background-position : bottom;
     padding-bottom : 15px
 }
-
-
+/*requred for IE < 8:*/
+#portalList {
+    *height:350px
+}
+#portalList:after {
+    content : ".";
+    display : block;
+    height : 0;
+    font-size : 0;
+    clear : both;
+    visibility : hidden;
+}
 #portalList li {
     float : left;
     list-style : none inside none;
