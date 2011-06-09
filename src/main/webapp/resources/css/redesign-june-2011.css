@@ -1,5 +1,6 @@
-/*styles for redesigned home page*/
+/*styles for redesigned pages*/
 /*correct margin for banner and highlightedResources*/
+/*TODO: many styles inline style attributes in html pages for redesigned pages*/
 .noMarginContent {
     position : relative;
     margin : -10px -15px 0 -20px
@@ -77,4 +78,24 @@
     background-image : url(/././resources/images/bottomShadow1.png);
     background-position : bottom;
     padding-bottom : 15px
+}
+
+
+#portalList li {
+    float : left;
+    list-style : none inside none;
+    margin-left : 0
+}
+#portalList a {
+    display : block;
+    width : 200px;
+    padding : 15px;
+    border-bottom : none;
+    background-color : white;
+    font-size : 15px;
+    font-family : Georgia, 'Times New Roman', Times, serif;
+    margin : 1px
+}
+#portalList a:hover {
+    background-color : #e6e4dc
 }
