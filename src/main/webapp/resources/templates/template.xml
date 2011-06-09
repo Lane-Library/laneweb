@@ -99,15 +99,15 @@
                                     >Specialty Portals</a>
                                 <ul id="specialties-menu">
                                     <li><a href="/portals/anesthesia.html?laneNav=1">Anesthesia</a></li>
-                                      <li><a href="/portals/nursing.html?laneNav=1">Nursing</a></li>
-                                    <li><a href="/portals/ethics.html?laneNav=1">Biomedical Ethics</a></li>
                                       <li><a href="/portals/obgyn.html?laneNav=1">Obstetrics &amp; Gynecology</a></li>
-                                    <li><a href="/portals/bioresearch.html?laneNav=1">Bioresearch</a></li>
+                                    <li><a href="/portals/ethics.html?laneNav=1">Biomedical Ethics</a></li>
                                       <li><a href="/portals/oncology.html?laneNav=1">Oncology</a></li>
-                                    <li><a href="/portals/cardiology.html?laneNav=1">Cardiology</a></li>
+                                    <li><a href="/portals/bioresearch.html?laneNav=1">Bioresearch</a></li>
                                       <li><a href="/portals/ophthalmology.html?laneNav=1">Ophthalmology</a></li>
-                                    <li><a href="/portals/clinical.html?laneNav=1">Clinical</a></li>
+                                    <li><a href="/portals/cardiology.html?laneNav=1">Cardiology</a></li>
                                       <li><a href="http://trachea.stanford.edu/">Otolaryngology</a></li>
+                                    <li><a href="/portals/clinical.html?laneNav=1">Clinical</a></li>
+                                      <li><a href="/portals/pathology.html?laneNav=1">Pathology</a></li>
                                     <li><a href="/portals/patient.html?laneNav=1">Consumer Health</a></li>
                                       <li><a href="/portals/peds.html?laneNav=1">Pediatrics</a></li>
                                     <li><a href="/portals/emergency.html?laneNav=1">Emergency Medicine</a></li>
@@ -126,6 +126,7 @@
                                       <li><a href="/portals/spiritual.html?laneNav=1">Spiritual Care</a></li>
                                     <li><a href="/portals/neurology.html?laneNav=1">Neurology</a></li>
                                       <li><a href="/classes-consult/infoliteracy-practice.html?laneNav=1">Student</a></li>
+                                    <li><a href="/portals/nursing.html?laneNav=1">Nursing</a></li>
                                 </ul>
                             </li>
                             <li>
