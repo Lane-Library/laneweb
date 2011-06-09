@@ -10,7 +10,7 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
         		self.autoNext();
     		}
     	};
-    	window.setTimeout(recursion, 5000);
+    	window.setTimeout(recursion, 10000);
     },
 	bindUI : function() {
 		this.get("navNodes").on("click", this._handleNavClick, this);
