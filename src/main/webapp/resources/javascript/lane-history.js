@@ -48,7 +48,7 @@
             }
             url = window.location.pathname;
             if (window.location.search) {
-            	url += "?" + window.location.search;
+            	url += window.location.search;
             }
             Y.lane.HistoryTracker.track({
                 label : title,
