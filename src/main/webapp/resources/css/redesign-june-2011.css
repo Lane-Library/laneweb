@@ -79,8 +79,10 @@
     background-position : bottom;
     padding-bottom : 15px
 }
-/*requred for IE < 8:*/
 #portalList {
+    padding : 11px;
+    background-color : #e6e4dc;
+    /*requred for IE < 8:*/
     *height:350px
 }
 #portalList:after {
