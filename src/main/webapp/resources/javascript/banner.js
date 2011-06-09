@@ -40,9 +40,6 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
             		    imgSrc = childNodes.filter("img").getAttribute("src"),
             		    bannerContent = childNodes.filter("div").item(0).one(".banner-content");
                 	this.setNewContent(imgSrc, bannerContent ? bannerContent.get("innerHTML") : "");
-                },
-                failure : function() {
-                    window.location = event.target.get("href");
                 }
             },
             context : this
