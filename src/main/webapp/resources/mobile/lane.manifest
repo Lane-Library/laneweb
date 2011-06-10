@@ -6,6 +6,7 @@ CACHE MANIFEST
 #/././resources/javascript/mobile/lane-mobile.js
 #/././resources/css/mobile/lane-mobile.css
 http://www.google-analytics.com/ga.js
+/././apple-touch-icon.png
 /././resources/images/mobile/search.png
 /././resources/images/mobile/cancel.png
 /././resources/images/mobile/backButton.png
