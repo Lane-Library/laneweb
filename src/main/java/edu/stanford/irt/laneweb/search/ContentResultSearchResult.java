@@ -16,7 +16,7 @@ import org.xml.sax.helpers.AttributesImpl;
 public class ContentResultSearchResult implements SearchResult {
 
     private static final Pattern DOUBLE_WEIGHT_PATTERN = Pattern
-            .compile("pubmed_cochrane_reviews|dare|acpjc|bmj_clinical_evidence|jama_rce");
+            .compile("pubmed_cochrane_reviews|dare|acpjc|bmj_clinical_evidence");
 
     private static final Pattern ENGINEID_PATTERN = Pattern.compile("_content_\\d+");
 
