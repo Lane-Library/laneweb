@@ -38,7 +38,7 @@ public class ProxyCredentialController {
         return new Ticket(sunetid, this.ezproxyKey);
     }
 
-    @RequestMapping(value = "/secure/apps/proxy/credential")
+    @RequestMapping(value = "**/secure/apps/proxy/credential")
     public void proxyRedirect(final HttpServletResponse response, final HttpServletRequest request,
             @ModelAttribute(Model.SUNETID) final String sunetid, @ModelAttribute(Model.TICKET) final Ticket ticket)
             throws IOException {
