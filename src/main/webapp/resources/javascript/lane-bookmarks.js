@@ -78,12 +78,14 @@
 		
 		_handleViewClick : function(event) {
 			if (event.target.hasClass(this.getClassName("remove"))) {
+				event.preventDefault();
 				this.removeBookmark(event.currentTarget.all("li").indexOf(event.target.ancestor("li")));
 			}
 		},
 		
 		_handleHistoryClick : function(event) {
 			if (event.target.hasClass(this.getClassName("save"))) {
+				event.preventDefault();
 				var item = event.target.ancestor("li").one("a");
 				this.addBookmark({label:item.getContent(),url:item.getAttribute("href")});
 			}
