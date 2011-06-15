@@ -30,82 +30,82 @@
     });
     
     
-    History = function() {
-    	History.superclass.constructor.apply(this, arguments);
-    };
-    
-    History.NAME = "history";
-    
-    History.ATTRS = {
-        model : {
-        	value : []
-        },
-        view : {
-        	value : null
-        }
-    };
-    
-    History.HTML_PARSER = {
-        model : function(srcNode) {
-        	var i, item, model = [], items = srcNode.all("a"), size = items.size();
-        	for (i = 0; i < size; i++) {
-        		item = items.item(i);
-        		model.push({label:item.getContent(),url:item.getAttribute("href")});
-        	}
-        	return model;
-        },
-        view : function(srcNode) {
-        	return srcNode.one("ul");
-        }
-    };
-    
-    History.SAVE_TEMPLATE = "";// <a class=\"save\" href=\"#\">save</a>";
-    
-	Y.extend(History, Y.Widget, {
-		renderUI : function() {
-			var view = this.get("view"),
-			    items = view.all("li"),
-			    size = items.size(), i;
-			for (i = 0; i < size; i++) {
-				items.item(i).append(History.SAVE_TEMPLATE);
-			}
-		},
-		bindUI : function() {
-			this.on("itemAdded", this._handleItemAdded, this);
-		},
-		addItem : function(item) {
-			if (!this.contains(item)) {
-    			this.get("model").splice(0, 0, item);
-    			this.fire("itemAdded", item);
-    			return true;
-			} else {
-				return false;
-			}
-		},
-		contains : function(item) {
-			var contains = false,
-			    model = this.get("model"),
-			    i;
-			for (i = 0; i < model.length; i++) {
-				if (model[i].label == item.label && model[i].url == item.url) {
-					contains = true;
-					break;
-				}
-			}
-			return contains;
-		},
-		_handleItemAdded : function(event) {
-			this.get("view").prepend("<li><a href=\"" + event.url + "\">" + event.label + "</a>" + History.SAVE_TEMPLATE + "</li>");
-	        Y.lane.HistoryTracker.track({
-	            label : event.label,
-	            url : event.url
-	        });
-		}
-	});
+//    History = function() {
+//    	History.superclass.constructor.apply(this, arguments);
+//    };
+//    
+//    History.NAME = "history";
+//    
+//    History.ATTRS = {
+//        model : {
+//        	value : []
+//        },
+//        view : {
+//        	value : null
+//        }
+//    };
+//    
+//    History.HTML_PARSER = {
+//        model : function(srcNode) {
+//        	var i, item, model = [], items = srcNode.all("a"), size = items.size();
+//        	for (i = 0; i < size; i++) {
+//        		item = items.item(i);
+//        		model.push({label:item.getContent(),url:item.getAttribute("href")});
+//        	}
+//        	return model;
+//        },
+//        view : function(srcNode) {
+//        	return srcNode.one("ul");
+//        }
+//    };
+//    
+//    History.SAVE_TEMPLATE = "";// <a class=\"save\" href=\"#\">save</a>";
+//    
+//	Y.extend(History, Y.Widget, {
+//		renderUI : function() {
+//			var view = this.get("view"),
+//			    items = view.all("li"),
+//			    size = items.size(), i;
+//			for (i = 0; i < size; i++) {
+//				items.item(i).append(History.SAVE_TEMPLATE);
+//			}
+//		},
+//		bindUI : function() {
+//			this.on("itemAdded", this._handleItemAdded, this);
+//		},
+//		addItem : function(item) {
+//			if (!this.contains(item)) {
+//    			this.get("model").splice(0, 0, item);
+//    			this.fire("itemAdded", item);
+//    			return true;
+//			} else {
+//				return false;
+//			}
+//		},
+//		contains : function(item) {
+//			var contains = false,
+//			    model = this.get("model"),
+//			    i;
+//			for (i = 0; i < model.length; i++) {
+//				if (model[i].label == item.label && model[i].url == item.url) {
+//					contains = true;
+//					break;
+//				}
+//			}
+//			return contains;
+//		},
+//		_handleItemAdded : function(event) {
+//			this.get("view").prepend("<li><a href=\"" + event.url + "\">" + event.label + "</a>" + History.SAVE_TEMPLATE + "</li>");
+//	        Y.lane.HistoryTracker.track({
+//	            label : event.label,
+//	            url : event.url
+//	        });
+//		}
+//	});
     
     if (Y.one("#history")) {
         var searchTerms, emrid, title, url, index;
-    	Y.lane.History = new History({srcNode:"#history",render:true});
+//    	Y.lane.History = new History({srcNode:"#history",render:true});
         
         Y.lane.HistoryTracker = new HistoryTracker();
     	title = Y.one("title").getContent();
@@ -124,7 +124,8 @@
         	url += window.location.search;
         }
         
-        Y.lane.History.addItem({label : title, url : url});
+//        Y.lane.History.addItem({label : title, url : url});
+        Y.lane.HistoryTracker.track({label : title, url : url});
         
         Y.on("trackable", function(link, event) {
             var trackingData = link.get("trackingData");
