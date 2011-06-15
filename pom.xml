@@ -168,6 +168,7 @@
                                 <include>redesign-june-2011-min.css</include>
                                 <include>banner-min.css</include>
                                 <include>hightlighted-resources-min.css</include>
+                                <include>personal-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -616,7 +617,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.36</version>
+            <version>1.6.37</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>

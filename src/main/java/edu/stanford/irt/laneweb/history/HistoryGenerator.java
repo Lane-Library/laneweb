@@ -32,17 +32,15 @@ public class HistoryGenerator extends AbstractGenerator {
     public void generate() throws SAXException {
         this.xmlConsumer.startDocument();
         if (this.history != null && this.history.size() > 0) {
-//            XMLUtils.startElement(this.xmlConsumer, XHTMLNS, UL);
+            XMLUtils.startElement(this.xmlConsumer, XHTMLNS, UL);
             for (Bookmark bookmark : this.history) {
+                XMLUtils.startElement(this.xmlConsumer, XHTMLNS, LI);
                 AttributesImpl atts = new AttributesImpl();
-                atts.addAttribute("", "class", "class", CDATA, "history");
-                XMLUtils.startElement(this.xmlConsumer, XHTMLNS, LI, atts);
-                atts = new AttributesImpl();
                 atts.addAttribute("", HREF, HREF, CDATA, bookmark.getUrl());
                 XMLUtils.createElementNS(this.xmlConsumer, XHTMLNS, A, atts, bookmark.getLabel());
                 XMLUtils.endElement(this.xmlConsumer, XHTMLNS, LI);
             }
-//            XMLUtils.endElement(this.xmlConsumer, XHTMLNS, UL);
+            XMLUtils.endElement(this.xmlConsumer, XHTMLNS, UL);
         }
         this.xmlConsumer.endDocument();
     }

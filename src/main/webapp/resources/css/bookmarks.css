@@ -1,4 +1,4 @@
-#bookmarks h3 a {
+/*#bookmarks h3 a {
     text-transform : none;
     float : right;
     display : block
@@ -19,7 +19,7 @@
     border-bottom-style : solid;
     cursor : pointer
 }
-/* IE 6 & 7 need this to retain list bullets . . . */
+/\* IE 6 & 7 need this to retain list bullets . . . *\/
 #bookmarks .remove {
     border : 1px solid white
 }
@@ -40,7 +40,4 @@
 }
 .yui3-bookmarks-hide {
     display : none
-}
-#personal-links .add, #personal-links .remove {
-    float : right
-}
+}*/

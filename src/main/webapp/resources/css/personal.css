@@ -1,0 +1,24 @@
+#laneNav #personalLinks {
+    display : block
+}
+
+#personalLinks h3 {
+    border-bottom : none;
+    color : black;
+    text-transform : none;
+    font-weight : normal;
+    letter-spacing : normal;
+    padding-bottom : 0;
+    font-size : 100%
+}
+#personalLinks ul {
+    display : block;
+    position : static;
+    border : none;
+    box-shadow : none;
+    background-image : none;
+    background-color : transparent
+}
+#personalLinks ul li {
+    padding-left : 0
+}

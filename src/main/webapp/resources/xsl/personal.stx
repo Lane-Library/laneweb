@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
-    xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    version="1.0"
-    pass-through="all">
-    
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" version="1.0" pass-through="all">
+
     <stx:param name="emrid"/>
-    
+
     <stx:template match="h:select[@id='qlinks']">
         <stx:choose>
             <stx:when test="$emrid">
                 <a href="/samples/personalization.html">Personal Links</a>
-                <ul id="personal-links">
-                    <li class="bookmark">My Bookmarks:</li>
-                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                        href="apps:/bookmarks">
-                        <xi:fallback/>
-                    </xi:include>
-                    <li class="history">My History:</li>
-                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                        href="apps:/history">
-                        <xi:fallback/>
-                    </xi:include>
+                <ul id="personalLinks">
+                    <!--<li id="bookmarks">
+                        <h3>My Bookmarks:</h3>
+                        <ul>
+                            <li><a href="#">bookmark item 1</a></li>
+                            <li><a href="#">bookmark item 2</a></li>
+                            <li><a href="#">bookmark item 3</a></li>
+                        </ul>
+                        <!-\-<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                            href="apps:/bookmarks">
+                            <xi:fallback/>
+                        </xi:include>-\->
+                    </li>-->
+                    <li>
+                        <div id="history">
+                            <h3>My History:</h3>
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="apps:/history">
+                                <xi:fallback/>
+                            </xi:include>
+                        </div>
+                    </li>
                 </ul>
             </stx:when>
             <stx:otherwise>
@@ -32,7 +38,7 @@
             </stx:otherwise>
         </stx:choose>
     </stx:template>
-    
+
     <stx:template match="h:head">
         <stx:copy>
             <stx:process-attributes/>
@@ -42,5 +48,5 @@
             </stx:if>
         </stx:copy>
     </stx:template>
-    
+
 </stx:transform>
