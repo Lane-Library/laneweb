@@ -18,6 +18,39 @@
     
 
     Y.extend(HistoryTracker, Y.Base, {
+    	
+    	initializer : function() {
+            var searchTerms, title, url, index;
+        	title = Y.one("title").getContent();
+        	index = title.indexOf(" - Lane Medical Library");
+            if (index > 0) {
+                title = title.substring(0, index).replace("&amp;", "&");
+            } else {
+                title = "Lane Medical Library";
+            }
+            searchTerms = Y.lane.SearchResult ? Y.lane.SearchResult.getSearchTerms() : false;
+            if (searchTerms) {
+            	title = "Search for: " + searchTerms;
+            }
+            url = window.location.pathname;
+            if (window.location.search) {
+            	url += window.location.search;
+            }
+
+//          Y.lane.History.addItem({label : title, url : url});
+            this.track({label : title, url : url});
+            
+            Y.on("trackable", function(link, event) {
+                var trackingData = link.get("trackingData");
+                if (trackingData.external) {
+                    this.track({
+                        label : trackingData.title,
+                        url : link.get("url")
+                    });
+                }
+            }, this);
+    	},
+    	
         track : function(trackingData) {
             this.get("io")("/././history/track", {
                 method : "post",
@@ -104,38 +137,8 @@
 //	});
     
     if (Y.one("#history")) {
-        var searchTerms, emrid, title, url, index;
 //    	Y.lane.History = new History({srcNode:"#history",render:true});
-        
         Y.lane.HistoryTracker = new HistoryTracker();
-    	title = Y.one("title").getContent();
-    	index = title.indexOf(" - Lane Medical Library");
-        if (index > 0) {
-            title = title.substring(0, index).replace("&amp;", "&");
-        } else {
-            title = "Lane Medical Library";
-        }
-        searchTerms = Y.lane.SearchResult ? Y.lane.SearchResult.getSearchTerms() : false;
-        if (searchTerms) {
-        	title = "Search for: " + searchTerms;
-        }
-        url = window.location.pathname;
-        if (window.location.search) {
-        	url += window.location.search;
-        }
-        
-//        Y.lane.History.addItem({label : title, url : url});
-        Y.lane.HistoryTracker.track({label : title, url : url});
-        
-        Y.on("trackable", function(link, event) {
-            var trackingData = link.get("trackingData");
-            if (trackingData.external) {
-                Y.lane.HistoryTracker.track({
-                    label : trackingData.title,
-                    url : link.get("url")
-                });
-            }
-        });
     }
     
 })();
