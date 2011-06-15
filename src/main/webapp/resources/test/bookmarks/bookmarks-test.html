@@ -2,23 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>lane-bookmarks javascript unit tests</title>
-        <style type="text/css">
-            #bookmarks { width : 200px }
-            .yui3-bookmarks-edit { float : right }
-            .yui3-bookmarks-hide { display : none }
-        </style>
     </head>
     <body>
-        <div id="bookmarks" class="module">
-            <h3>bookmarks<a href="edit-bookmarks.html">edit</a></h3>
-            <div class="bd">
+        <div id="bookmarks">
+            <h3>bookmarks</h3>
                 <ul>
                     <li><a href="http://www.google.com">Google</a></li>
                     <li><a href="http://www.uptodate.com">UpToDate</a></li>
                 </ul>
-            </div>
         </div>
-        <div>
+        <div id="history">
+            <h3>history</h3>
+            <ul>
+                <li><a href="http://www.stanford.edu">Stanford</a></li>
+                <li><a href="http://lucy.corvus-corax.net/">Lucy</a></li>
+            </ul>
+        </div>
+        <!--<div>
         <ul id="bookmarkables">
         <li><a href="http://www.example.com/bookmarkable1">bookmarkable1</a></li>
         <li><a href="http://www.example.com/bookmarkable2">bookmarkable2</a></li>
@@ -26,10 +26,10 @@
             <li><a id="local" href="index.html">local</a></li>
             <li><a id="localquerystring" href="../index.html?query=string#hash">local</a></li>
         </ul>
-        </div>
+        </div>-->
         <script type="text/javascript" src="/resources/javascript/yui.js"></script>
         <script src="/resources/javascript/lane.js" type="text/javascript"></script>
-        <script src="/resources/javascript/lane-link-plugin.js" type="text/javascript"></script>
+        <!--<script src="/resources/javascript/lane-link-plugin.js" type="text/javascript"></script>-->
         <script src="/resources/javascript/lane-bookmarks.js" type="text/javascript"></script>
         <script src="bookmarks-test.js" type="text/javascript"></script>
     </body>

@@ -1,358 +1,452 @@
 (function() {
 	
-	var personalLinks = Y.one("#personal-links"),
-	    PersonalLinks;
-	if (personalLinks) {
+	var Bookmarks;
+	
+	Bookmarks = function() {
+		Bookmarks.superclass.constructor.apply(this, arguments);
+	};
+	
+	Bookmarks.NAME = "bookmarks";
+	
+	Bookmarks.ATTRS = {
+		model : {
+			value : []
+		},
+		view : {
+			value : null
+		}
+	};
+	
+	Bookmarks.HTML_PARSER = {
+	    model : function(srcNode) {
+        	var i, item, model = [], items = srcNode.all("a"), size = items.size();
+        	for (i = 0; i < size; i++) {
+        		item = items.item(i);
+        		model.push({label:item.getContent(),url:item.getAttribute("href")});
+        	}
+        	return model;
+	    },
+        view : function(srcNode) {
+	        return srcNode.one("ul");
+        }
+	};
+	
+	Y.extend(Bookmarks, Y.Widget, {
 		
-		//TODO: create arrays as data model for bookmarks and history like the Bookmarks class
-		PersonalLinks = function() {
-			PersonalLinks.superclass.constructor.apply(this, arguments);
-		};
-		
-		PersonalLinks.NAME = "personal-links";
-		
-		Y.extend(PersonalLinks, Y.Widget, {
-			
-			renderUI : function() {
-				var contentBox = this.get("contentBox"),
-				    bookmarks = contentBox.all(".bookmark"),
-				    history = contentBox.all(".history"),
-				    i;
-				for (i = 1; i < bookmarks.size(); i++) {
-					bookmarks.item(i).append(" <a class='remove'>delete</a>", 0);
-				}
-				for (i = 1; i < history.size(); i++) {
-					history.item(i).append(" <a class='add'>save</a>", 0);
-				}
-			},
-			
-			bindUI : function() {
-				var contentBox = this.get("contentBox"),
-			        removeBookmarkLinks = contentBox.all(".remove"),
-			        addBookmarkLinks = contentBox.all(".add");
-				removeBookmarkLinks.on("click", this._handleRemoveClick, this);
-				addBookmarkLinks.on("click", this._handleAddClick, this);
-			},
-			
-			addBookmark : function(bookmark) {
-				var contentBox = this.get("contentBox"),
-				    node = Y.Node.create("<li class='bookmark'><a href='" +
-						bookmark.url + "'>" + bookmark.label + "</a> <a class='remove'>delete</a></li>"),
-				    data = Y.JSON.stringify(bookmark);
-				Y.io("/././bookmarks/add", {
-                    method : "post",
-                    data : data,
-                    headers: {
-                        "Content-Type" : "application/json"
-                    }
-                });
-				node.one("a").on("click", this._handleRemoveClick, this);
-				contentBox.insert(node, 2);
-			},
-			
-			removeBookmark : function(index) {
-				Y.io("/././bookmarks/remove", {
-                    method : "post",
-                    data : Y.JSON.stringify(index),
-                    headers: {
-                        "Content-Type" : "application/json"
-                    }
-                });
-				this.get("contentBox").all("li").item(index).remove(true);
-			},
-			
-			_handleAddClick : function(event) {
-				event.preventDefault();
-				var historyLink = event.target.ancestor("li").one("a");
-				this.addBookmark({
-					label : historyLink.getContent(),
-					url : historyLink.getAttribute("href")
-				});
-			},
-			
-			_handleRemoveClick : function(event) {
-				event.preventDefault();
-				this.removeBookmark(this.get("contentBox").all("li").indexOf(event.target.ancestor("li")));
+		renderUI : function() {
+			var i, removeClassName = this.getClassName("remove"),
+			    saveClassName = this.getClassName("save");
+			    items = this.get("view").all("li"),
+			    size = items.size();
+			for (i = 0; i < size; i++) {
+				items.item(i).append("<a href='#' class='" + removeClassName + "'>remove</a>");
 			}
-		});
+			items = Y.one("#history").all("li");
+			size = items.size();
+			for (i = 0; i < size; i++) {
+				items.item(i).append("<a href='#' class='" + saveClassName + "'>save</a>");
+			}
+		},
 		
-		Y.lane.PersonalLinks = new PersonalLinks({
-			srcNode : personalLinks,
-			render : true
-		});
+		bindUI : function() {
+			var view, history;
+			view = this.get("view");
+			view.on("click", this._handleViewClick, this);
+			history = Y.one("#history ul");
+			history.on("click", this._handleHistoryClick, this);
+			this.on("bookmarkAdded", this._handleBookmarkAdded);
+			this.on("bookmarkRemoved", this._handleBookmarkRemoved);
+		},
+		
+		addBookmark : function(bookmark) {
+			this.get("model").splice(0, 0, bookmark);
+			this.fire("bookmarkAdded", bookmark);		
+		},
+		
+		removeBookmark : function(index) {
+			this.get("model").splice(index, 1);
+			this.fire("bookmarkRemoved", {index:index});
+		},
+		
+		_handleBookmarkAdded : function(event) {
+			this.get("view").prepend("<li><a href=\"" + event.url + "\">" + event.label + "</a><a href='#' class='" + this.getClassName("remove") + "'>remove</a></li>");		
+		},
+		
+		_handleBookmarkRemoved : function(event) {
+			this.get("view").all("li").item(event.index).remove(true);
+		},
+		
+		_handleViewClick : function(event) {
+			if (event.target.hasClass(this.getClassName("remove"))) {
+				this.removeBookmark(event.currentTarget.all("li").indexOf(event.target.ancestor("li")));
+			}
+		},
+		
+		_handleHistoryClick : function(event) {
+			if (event.target.hasClass(this.getClassName("save"))) {
+				var item = event.target.ancestor("li").one("a");
+				this.addBookmark({label:item.getContent(),url:item.getAttribute("href")});
+			}
+		}
+	});
+	
+	if (Y.one("#bookmarks") && Y.one("#history")) {
+		Y.lane.Bookmarks = new Bookmarks({srcNode:"#bookmarks",render:true});
 	}
-
-})();
-
-
-
-(function() {
-    
-    //only do this if there are bookmarks
-    if (Y.one("#bookmarks")) {
-
-        /**
-         * <p>This class represents the Bookmarks Widget.</p>
-         * 
-         * @class Bookmarks
-         * @base Y.Widget
-         * @constructor
-         */
-        var Bookmarks = function() {
-            Bookmarks.superclass.constructor.apply(this, arguments);
-        };
-        
-        /**
-         * @final class name
-         */
-        Bookmarks.NAME = "bookmarks";
-        
-        /**
-         * default attributes
-         */
-        Bookmarks.ATTRS = {
-                editing: {
-                    value: false
-                },
-                bookmarks: {
-                    valueFn : function() {
-                        var i, node,
-                        value = [],
-                        lis = this.get("contentBox").all("li"),
-                        size = lis.size();
-                        for (i = 0; i < size; i++) {
-                            node = lis.item(i);
-                            node.insert(Y.Node.create(Bookmarks.REMOVE_TEMPLATE));
-                            value.push(node);
-                        }
-                        return value;
-                    }
-                },
-                io : {
-                    value : Y.io
-                },
-                render : {
-                    value : true
-                },
-                srcNode : {
-                    valueFn : function() {
-                        return Y.one("#bookmarks");
-                    }
-                },
-                strings: {
-                    value: {
-                        editing:"done",
-                        notEditing:"edit"
-                    }
-                },
-                toggle: {
-                    valueFn: function() {
-                        return Y.one("#bookmarks h3 a");
-                    }
-                }
-        };
-        
-        /**
-         * @final
-         * The markup template for the individual bookmark remove link.
-         */
-        Bookmarks.REMOVE_TEMPLATE = "<a class=\"yui3-bookmarks-remove yui3-bookmarks-edit\">remove</a>";
-        
-        /**
-         * @final
-         * The markup template for new bookmarks.
-         */
-        Bookmarks.CREATE_TEMPLATE = "<li><a></a>" + Bookmarks.REMOVE_TEMPLATE + "</li>";
-        
-        /**
-         * @final
-         * The markup template for the add bookmark form.
-         */
-        Bookmarks.ADD_BOOKMARK_TEMPLATE = "<div class=\"yui3-bookmarks-edit\">" +
-            '<form><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></form>' +
-        "<p>or click on any link to add a bookmark.</p></div>";
-        
-        /**
-         * extend Y.Widget
-         */
-        Y.extend(Bookmarks, Y.Widget, {
-            
-            /**
-             * add the add bookmark form markup and hide edit related elements.
-             */
-            renderUI : function() {
-                this.get("contentBox").appendChild(Y.Node.create(Bookmarks.ADD_BOOKMARK_TEMPLATE));
-                this.get("contentBox").all(".yui3-bookmarks-edit").addClass("yui3-bookmarks-hide");
-            },
-            
-            /**
-             * setup event handlers
-             */
-            bindUI : function() {
-                this.after("editingChange", this._afterEditingChange);
-                this.get("toggle").on("click", this._toggleEdit, this);
-                this.get("contentBox").all("a.yui3-bookmarks-edit").on("click", this._handleRemoveClick, this);
-                this.get("contentBox").one("input[type='submit']").on("click", this._handleAddClick, this);
-            },
-            
-            /**
-             * add a bookmark at a particular position, or position 0 if not specified
-             * @param bookmark
-             * @param position
-             */
-            addBookmark : function(bookmark, position) {
-                var node, ULNode, data;
-                position = position === undefined ? 0 : position;
-                if (bookmark.label && bookmark.url) {
-                    node = Y.Node.create(Bookmarks.CREATE_TEMPLATE);
-                    node.one("a").set("innerHTML", bookmark.label);
-                    node.one("a").set("href", bookmark.url);
-                    ULNode = this.get("contentBox").one("ul");
-                    if (!ULNode) {
-                        ULNode = Y.Node.create("<ul/>");
-                        this.get("contentBox").one(".bd").set("innerHTML","<ul/>");
-                        ULNode = this.get("contentBox").one("ul");
-                    }
-                    this.get("contentBox").one("ul").insert(node, position);
-                    this.get("bookmarks").splice(position, 0, node);
-                    node.one(".yui3-bookmarks-edit").on("click", this._handleRemoveClick, this);
-                    data = Y.JSON.stringify(bookmark);//"url=" + bookmark.url + "&label=" + bookmark.label;
-                    this.get("io")("/././bookmarks/add", {
-                        method : "post",
-                        data : data,
-                        headers: {
-                            "Content-Type" : "application/json"
-                        }
-                    });
-                }
-            },
-            
-            /**
-             * remove the bookmark at position
-             * @param position
-             */
-            removeBookmark : function(position) {
-                var bookmarks = this.get("bookmarks"),
-                node = bookmarks[position];
-                Y.Event.purgeElement(node, true);
-                node.get("parentNode").removeChild(node);
-                bookmarks.splice(position, 1);
-            },
-//            moveUp : function(position) {
-//            var bookmarks = this.get("bookmarks");
-//            bookmarks.splice(position - 1, 2, bookmarks[position], bookmarks[position - 1]);
-//            var nodeList = this.get("contentBox").all("li");
-//            nodeList.item(position).swap(nodeList.item(position - 1));
+	
+//	var personalLinks = Y.one("#personal-links"),
+//	    PersonalLinks;
+//	if (personalLinks) {
+//		
+//		//TODO: create arrays as data model for bookmarks and history like the Bookmarks class
+//		PersonalLinks = function() {
+//			PersonalLinks.superclass.constructor.apply(this, arguments);
+//		};
+//		
+//		PersonalLinks.NAME = "personal-links";
+//		
+//		Y.extend(PersonalLinks, Y.Widget, {
+//			
+//			renderUI : function() {
+//				var contentBox = this.get("contentBox"),
+//				    bookmarks = contentBox.all(".bookmark"),
+//				    history = contentBox.all(".history"),
+//				    i;
+//				for (i = 1; i < bookmarks.size(); i++) {
+//					bookmarks.item(i).append(" <a class='remove'>delete</a>", 0);
+//				}
+//				for (i = 1; i < history.size(); i++) {
+//					history.item(i).append(" <a class='add'>save</a>", 0);
+//				}
+//			},
+//			
+//			bindUI : function() {
+//				var contentBox = this.get("contentBox"),
+//			        removeBookmarkLinks = contentBox.all(".remove"),
+//			        addBookmarkLinks = contentBox.all(".add");
+//				removeBookmarkLinks.on("click", this._handleRemoveClick, this);
+//				addBookmarkLinks.on("click", this._handleAddClick, this);
+//			},
+//			
+//			addBookmark : function(bookmark) {
+//				var contentBox = this.get("contentBox"),
+//				    node = Y.Node.create("<li class='bookmark'><a href='" +
+//						bookmark.url + "'>" + bookmark.label + "</a> <a class='remove'>delete</a></li>"),
+//				    data = Y.JSON.stringify(bookmark);
+//				Y.io("/././bookmarks/add", {
+//                    method : "post",
+//                    data : data,
+//                    headers: {
+//                        "Content-Type" : "application/json"
+//                    }
+//                });
+//				node.one("a").on("click", this._handleRemoveClick, this);
+//				contentBox.insert(node, 2);
+//			},
+//			
+//			removeBookmark : function(index) {
+//				Y.io("/././bookmarks/remove", {
+//                    method : "post",
+//                    data : Y.JSON.stringify(index),
+//                    headers: {
+//                        "Content-Type" : "application/json"
+//                    }
+//                });
+//				this.get("contentBox").all("li").item(index).remove(true);
+//			},
+//			
+//			_handleAddClick : function(event) {
+//				event.preventDefault();
+//				var historyLink = event.target.ancestor("li").one("a");
+//				this.addBookmark({
+//					label : historyLink.getContent(),
+//					url : historyLink.getAttribute("href")
+//				});
+//			},
+//			
+//			_handleRemoveClick : function(event) {
+//				event.preventDefault();
+//				this.removeBookmark(this.get("contentBox").all("li").indexOf(event.target.ancestor("li")));
+//			}
+//		});
+//		
+//		Y.lane.PersonalLinks = new PersonalLinks({
+//			srcNode : personalLinks,
+//			render : true
+//		});
+//	}
+//
+//})();
+//
+//
+//
+//(function() {
+//    
+//    //only do this if there are bookmarks
+//    if (Y.one("#bookmarks")) {
+//
+//        /**
+//         * <p>This class represents the Bookmarks Widget.</p>
+//         * 
+//         * @class Bookmarks
+//         * @base Y.Widget
+//         * @constructor
+//         */
+//        var Bookmarks = function() {
+//            Bookmarks.superclass.constructor.apply(this, arguments);
+//        };
+//        
+//        /**
+//         * @final class name
+//         */
+//        Bookmarks.NAME = "bookmarks";
+//        
+//        /**
+//         * default attributes
+//         */
+//        Bookmarks.ATTRS = {
+//                editing: {
+//                    value: false
+//                },
+//                bookmarks: {
+//                    valueFn : function() {
+//                        var i, node,
+//                        value = [],
+//                        lis = this.get("contentBox").all("li"),
+//                        size = lis.size();
+//                        for (i = 0; i < size; i++) {
+//                            node = lis.item(i);
+//                            node.insert(Y.Node.create(Bookmarks.REMOVE_TEMPLATE));
+//                            value.push(node);
+//                        }
+//                        return value;
+//                    }
+//                },
+//                io : {
+//                    value : Y.io
+//                },
+//                render : {
+//                    value : true
+//                },
+//                srcNode : {
+//                    valueFn : function() {
+//                        return Y.one("#bookmarks");
+//                    }
+//                },
+//                strings: {
+//                    value: {
+//                        editing:"done",
+//                        notEditing:"edit"
+//                    }
+//                },
+//                toggle: {
+//                    valueFn: function() {
+//                        return Y.one("#bookmarks h3 a");
+//                    }
+//                }
+//        };
+//        
+//        /**
+//         * @final
+//         * The markup template for the individual bookmark remove link.
+//         */
+//        Bookmarks.REMOVE_TEMPLATE = "<a class=\"yui3-bookmarks-remove yui3-bookmarks-edit\">remove</a>";
+//        
+//        /**
+//         * @final
+//         * The markup template for new bookmarks.
+//         */
+//        Bookmarks.CREATE_TEMPLATE = "<li><a></a>" + Bookmarks.REMOVE_TEMPLATE + "</li>";
+//        
+//        /**
+//         * @final
+//         * The markup template for the add bookmark form.
+//         */
+//        Bookmarks.ADD_BOOKMARK_TEMPLATE = "<div class=\"yui3-bookmarks-edit\">" +
+//            '<form><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></form>' +
+//        "<p>or click on any link to add a bookmark.</p></div>";
+//        
+//        /**
+//         * extend Y.Widget
+//         */
+//        Y.extend(Bookmarks, Y.Widget, {
+//            
+//            /**
+//             * add the add bookmark form markup and hide edit related elements.
+//             */
+//            renderUI : function() {
+//                this.get("contentBox").appendChild(Y.Node.create(Bookmarks.ADD_BOOKMARK_TEMPLATE));
+//                this.get("contentBox").all(".yui3-bookmarks-edit").addClass("yui3-bookmarks-hide");
 //            },
-//            moveDown : function(position) {
-//            var bookmarks = this.get("bookmarks");
-//            bookmarks.splice(position, 2, bookmarks[position + 1], bookmarks[position]);
-//            var nodeList = this.get("contentBox").all("li");
-//            nodeList.item(position).swap(nodeList.item(position + 1));
+//            
+//            /**
+//             * setup event handlers
+//             */
+//            bindUI : function() {
+//                this.after("editingChange", this._afterEditingChange);
+//                this.get("toggle").on("click", this._toggleEdit, this);
+//                this.get("contentBox").all("a.yui3-bookmarks-edit").on("click", this._handleRemoveClick, this);
+//                this.get("contentBox").one("input[type='submit']").on("click", this._handleAddClick, this);
 //            },
-            
-            /**
-             * handler for click events on the add bookmark form submit button
-             */
-            _handleAddClick: function(e) {
-                var form, labelTextInput, urlTextInput, label, url;
-                form = e.target.ancestor("form");
-                labelTextInput = form.one("input[name='label']");
-                urlTextInput = form.one("input[name='url']");
-                label = labelTextInput.get("value");
-                url = urlTextInput.get("value");
-                if (url && label) {
-                    this.addBookmark({
-                        label : label,
-                        url : url
-                    });
-                    labelTextInput.set("value","");
-                    urlTextInput.set("value","");
-                }
-            },
-            
-            /**
-             * handler for the remove clicks
-             * @param e
-             */
-            _handleRemoveClick : function(e) {
-                var i, ul;
-                ul = e.target.ancestor("ul").all(".yui3-bookmarks-edit");
-                for (i = 0; i < ul.size(); i++) {
-                    if (ul.item(i) === e.target) {
-                        this.removeBookmark(i);
-                        this.get("io")("/././bookmarks/remove", {
-                            method : "post",
-                            data : Y.JSON.stringify(i),
-                            headers: {
-                                "Content-Type" : "application/json"
-                            }
-                        });
-                        break;
-                    }
-                }
-            },
-            
-            /**
-             * the event handle for the event handler for the clicks on links in the page saved
-             * so it can be removed
-             */
-            _pageLinkEventHandle : null,
-            
-            /**
-             * handler deals with editing state changes
-             * @param e
-             */
-            _afterEditingChange : function(e) {
-                var strings, editables;
-                strings = this.get("strings");
-                this.get("toggle").set("innerHTML", e.newVal ? strings.editing : strings.notEditing);
-                editables = this.get("contentBox").all(".yui3-bookmarks-edit");
-                if (e.newVal) {
-                    Y.fire("stopTracking");
-                    this._pageLinkEventHandle = Y.one("document").on("click", this._pageLinkHandler, this);
-                    editables.removeClass("yui3-bookmarks-hide");
-                } else {
-                    this._pageLinkEventHandle.detach();
-                    editables.addClass("yui3-bookmarks-hide");
-                    Y.fire("startTracking");
-                }
-            },
-            
-            /**
-             * handles clicks on the edit/done link
-             * @param e
-             */
-            _toggleEdit : function(e) {
-                var editing = this.get("editing");
-                e.preventDefault();
-                this.set("editing", !editing);
-            },
-            
-            /**
-             * handles clicks on links in the page when in edit mode
-             * @param event
-             */
-            _pageLinkHandler : function(event) {
-                var target, label, url;
-                event.preventDefault();
-                target = event.target;
-                if (target.get("nodeName") === "A" && target.inDoc() && target.ancestor("#bookmarks") === null) {
-                    if (!target.link) {
-                        target.plug(Y.lane.LinkPlugin);
-                    }
-                    label = target.get("textContent");
-                    if (target.link.isLocal()) {
-                        url = target.link.getPath() + target.get("search") + target.get("hash");
-                    } else {
-                        url = target.link.getURL();
-                    }
-                    this.addBookmark({label:label,url:url});
-                }
-            }
-        });
-        
-        //instantiate
-        Y.lane.Bookmarks = new Bookmarks();
-    }
+//            
+//            /**
+//             * add a bookmark at a particular position, or position 0 if not specified
+//             * @param bookmark
+//             * @param position
+//             */
+//            addBookmark : function(bookmark, position) {
+//                var node, ULNode, data;
+//                position = position === undefined ? 0 : position;
+//                if (bookmark.label && bookmark.url) {
+//                    node = Y.Node.create(Bookmarks.CREATE_TEMPLATE);
+//                    node.one("a").set("innerHTML", bookmark.label);
+//                    node.one("a").set("href", bookmark.url);
+//                    ULNode = this.get("contentBox").one("ul");
+//                    if (!ULNode) {
+//                        ULNode = Y.Node.create("<ul/>");
+//                        this.get("contentBox").one(".bd").set("innerHTML","<ul/>");
+//                        ULNode = this.get("contentBox").one("ul");
+//                    }
+//                    this.get("contentBox").one("ul").insert(node, position);
+//                    this.get("bookmarks").splice(position, 0, node);
+//                    node.one(".yui3-bookmarks-edit").on("click", this._handleRemoveClick, this);
+//                    data = Y.JSON.stringify(bookmark);//"url=" + bookmark.url + "&label=" + bookmark.label;
+//                    this.get("io")("/././bookmarks/add", {
+//                        method : "post",
+//                        data : data,
+//                        headers: {
+//                            "Content-Type" : "application/json"
+//                        }
+//                    });
+//                }
+//            },
+//            
+//            /**
+//             * remove the bookmark at position
+//             * @param position
+//             */
+//            removeBookmark : function(position) {
+//                var bookmarks = this.get("bookmarks"),
+//                node = bookmarks[position];
+//                Y.Event.purgeElement(node, true);
+//                node.get("parentNode").removeChild(node);
+//                bookmarks.splice(position, 1);
+//            },
+////            moveUp : function(position) {
+////            var bookmarks = this.get("bookmarks");
+////            bookmarks.splice(position - 1, 2, bookmarks[position], bookmarks[position - 1]);
+////            var nodeList = this.get("contentBox").all("li");
+////            nodeList.item(position).swap(nodeList.item(position - 1));
+////            },
+////            moveDown : function(position) {
+////            var bookmarks = this.get("bookmarks");
+////            bookmarks.splice(position, 2, bookmarks[position + 1], bookmarks[position]);
+////            var nodeList = this.get("contentBox").all("li");
+////            nodeList.item(position).swap(nodeList.item(position + 1));
+////            },
+//            
+//            /**
+//             * handler for click events on the add bookmark form submit button
+//             */
+//            _handleAddClick: function(e) {
+//                var form, labelTextInput, urlTextInput, label, url;
+//                form = e.target.ancestor("form");
+//                labelTextInput = form.one("input[name='label']");
+//                urlTextInput = form.one("input[name='url']");
+//                label = labelTextInput.get("value");
+//                url = urlTextInput.get("value");
+//                if (url && label) {
+//                    this.addBookmark({
+//                        label : label,
+//                        url : url
+//                    });
+//                    labelTextInput.set("value","");
+//                    urlTextInput.set("value","");
+//                }
+//            },
+//            
+//            /**
+//             * handler for the remove clicks
+//             * @param e
+//             */
+//            _handleRemoveClick : function(e) {
+//                var i, ul;
+//                ul = e.target.ancestor("ul").all(".yui3-bookmarks-edit");
+//                for (i = 0; i < ul.size(); i++) {
+//                    if (ul.item(i) === e.target) {
+//                        this.removeBookmark(i);
+//                        this.get("io")("/././bookmarks/remove", {
+//                            method : "post",
+//                            data : Y.JSON.stringify(i),
+//                            headers: {
+//                                "Content-Type" : "application/json"
+//                            }
+//                        });
+//                        break;
+//                    }
+//                }
+//            },
+//            
+//            /**
+//             * the event handle for the event handler for the clicks on links in the page saved
+//             * so it can be removed
+//             */
+//            _pageLinkEventHandle : null,
+//            
+//            /**
+//             * handler deals with editing state changes
+//             * @param e
+//             */
+//            _afterEditingChange : function(e) {
+//                var strings, editables;
+//                strings = this.get("strings");
+//                this.get("toggle").set("innerHTML", e.newVal ? strings.editing : strings.notEditing);
+//                editables = this.get("contentBox").all(".yui3-bookmarks-edit");
+//                if (e.newVal) {
+//                    Y.fire("stopTracking");
+//                    this._pageLinkEventHandle = Y.one("document").on("click", this._pageLinkHandler, this);
+//                    editables.removeClass("yui3-bookmarks-hide");
+//                } else {
+//                    this._pageLinkEventHandle.detach();
+//                    editables.addClass("yui3-bookmarks-hide");
+//                    Y.fire("startTracking");
+//                }
+//            },
+//            
+//            /**
+//             * handles clicks on the edit/done link
+//             * @param e
+//             */
+//            _toggleEdit : function(e) {
+//                var editing = this.get("editing");
+//                e.preventDefault();
+//                this.set("editing", !editing);
+//            },
+//            
+//            /**
+//             * handles clicks on links in the page when in edit mode
+//             * @param event
+//             */
+//            _pageLinkHandler : function(event) {
+//                var target, label, url;
+//                event.preventDefault();
+//                target = event.target;
+//                if (target.get("nodeName") === "A" && target.inDoc() && target.ancestor("#bookmarks") === null) {
+//                    if (!target.link) {
+//                        target.plug(Y.lane.LinkPlugin);
+//                    }
+//                    label = target.get("textContent");
+//                    if (target.link.isLocal()) {
+//                        url = target.link.getPath() + target.get("search") + target.get("hash");
+//                    } else {
+//                        url = target.link.getURL();
+//                    }
+//                    this.addBookmark({label:label,url:url});
+//                }
+//            }
+//        });
+//        
+//        //instantiate
+//        Y.lane.Bookmarks = new Bookmarks();
+//    }
 })();

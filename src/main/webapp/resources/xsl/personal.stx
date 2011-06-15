@@ -8,18 +8,14 @@
             <stx:when test="$emrid">
                 <a href="/samples/personalization.html">Personal Links</a>
                 <ul id="personalLinks">
-                    <!--<li id="bookmarks">
-                        <h3>My Bookmarks:</h3>
-                        <ul>
-                            <li><a href="#">bookmark item 1</a></li>
-                            <li><a href="#">bookmark item 2</a></li>
-                            <li><a href="#">bookmark item 3</a></li>
-                        </ul>
-                        <!-\-<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                            href="apps:/bookmarks">
-                            <xi:fallback/>
-                        </xi:include>-\->
-                    </li>-->
+                    <li>
+                        <div id="bookmarks">
+                            <h3>My Bookmarks:</h3>
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="apps:/bookmarks">
+                                <xi:fallback/>
+                            </xi:include>
+                        </div>
+                    </li>
                     <li>
                         <div id="history">
                             <h3>My History:</h3>
@@ -39,7 +35,7 @@
         </stx:choose>
     </stx:template>
 
-    <stx:template match="h:head">
+    <!--<stx:template match="h:head">
         <stx:copy>
             <stx:process-attributes/>
             <stx:process-children/>
@@ -47,6 +43,6 @@
                 <meta name="emrid" content="{$emrid}"/>
             </stx:if>
         </stx:copy>
-    </stx:template>
+    </stx:template>-->
 
 </stx:transform>

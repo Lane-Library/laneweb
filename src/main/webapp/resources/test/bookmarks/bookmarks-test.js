@@ -7,9 +7,13 @@ YUI({
     }
 }).use("test", "console", "node-event-simulate", "json-parse", function(T){
 	
-	var bookmarks = Y.lane.Bookmarks;
+	var bookmarks = Y.lane.Bookmarks,
 	
-	var bookmark = null;
+	    bookmark = null,
+	    
+	    bookmarkItems = Y.one("#bookmarks").all("li");
+	    
+	    bookmarkItemsSize = bookmarkItems.size();
 	
 	bookmarks.set("io", function(url, message) {
 		bookmark = T.JSON.parse(message.data);
@@ -24,82 +28,124 @@ YUI({
         	bookmark = null;
         },
         
-        testNotEditing : function() {
-        	T.Assert.isFalse(bookmarks.get("editing"));
+        testBookmarkModelLength : function() {
+        	T.Assert.areEqual(bookmarkItemsSize, bookmarks.get("model").length);
         },
         
-        testForTwoBookmarks : function() {
-        	T.Assert.areEqual(2, bookmarks.get("bookmarks").length);
+        testBookmarkViewSize : function() {
+        	T.Assert.areEqual(bookmarkItemsSize, bookmarks.get("view").all("li").size());
         },
         
-        testBookmarkLabel : function() {
-        	T.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].one("a").get("textContent"));
+        testHaveRemoveLinks : function() {
+        	var pass = true, i;
+        	for (i = 0; i < bookmarkItemsSize; i++) {
+        		if (!bookmarkItems.item(i).one("a.yui3-bookmarks-remove")) {
+        			pass = false;
+        			break;
+        		}
+        	}
+        	T.Assert.isTrue(pass);
         },
         
-        testSetEditing : function() {
-        	var editing = bookmarks.get("editing");
-        	var toggle = T.one("h3 a");
-        	toggle.simulate("click");
-        	T.Assert.isFalse(editing === bookmarks.get("editing"));
+        testHaveSaveLinks : function() {
+        	var pass = true, i, items = Y.one("#history").all("li"), size = items.size();
+        	for (i = 0; i < size; i++) {
+        		if (!items.item(i).one("a.yui3-bookmarks-save")) {
+        			pass = false;
+        			break;
+        		}
+        	}
+        	T.Assert.isTrue(pass);
         },
         
         testAddBookmark : function() {
-        	var size = T.all("li").size();
         	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
-        	T.Assert.areEqual(size + 1, T.all("li").size());
+        	T.Assert.areEqual(bookmarkItemsSize + 1, bookmarks.get("model").length);
+        	T.Assert.areEqual(bookmarkItemsSize + 1, bookmarks.get("view").all("li").size());
         },
         
         testRemoveBookmark : function() {
-        	var size = T.all("#bookmarks li").size();
-        	bookmarks.removeBookmark(1);
-        	T.Assert.areEqual(size - 1, T.all("#bookmarks li").size());
-        },
-        
-        testClickRemoveBookmark : function() {
-        	var size = T.all("li").size();
-        	T.one(".yui3-bookmarks-edit").simulate("click");
-        	T.Assert.areEqual(size - 1, T.all("li").size());
-        },
-        
-        testClickAddBookmark : function() {
-        	var size = T.all("#bookmarks li").size();
-        	T.one("input[name='label']").set("value","SlashDot");
-        	T.one("input[name='url']").set("value","http://slashdot.org/");
-        	T.one("input[type='submit']").simulate("click");
-        	T.Assert.areEqual(size + 1, T.all("#bookmarks li").size());
-        },
-        
-        testCorrectBookmarkRemoved : function() {
-        	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
-        	var label = T.one("li").get("textContent");
-        	T.all(".yui3-bookmarks-edit").item(1).simulate("click");
-        	T.Assert.areEqual(label, T.one("li").get("textContent"));
-        }, 
-        
-        testClickBookmarkable : function() {
-        	var size = T.all("li").size();
-        	bookmarks.set("editable", true);
-        	var bookmarkable = bookmarkables.item(0);
-        	bookmarkable.simulate("click");
-        	T.Assert.areEqual(size + 1, T.all("li").size());
-        },
-        
-        testIOSent : function () {
-        	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
-        	T.Assert.areEqual("http://mdconsult.com", bookmark.url);
-        },
-        
-        testHostStrippedFromLocalLink : function() {
-        	bookmarks.set("editable", true);
-        	T.one("#local").simulate("click");
-        	T.Assert.areEqual(T.one("#local").get("pathname"), bookmark.url);
-        },
-        
-        testLocalHasQueryString : function() {
-        	bookmarks.set("editable", true);
-        	T.one("#localquerystring").simulate("click");
-        	T.Assert.areEqual("/test/index.html?query=string#hash", bookmark.url);
+        	bookmarks.removeBookmark(0);
+        	T.Assert.areEqual(bookmarkItemsSize, bookmarks.get("model").length);
+        	T.Assert.areEqual(bookmarkItemsSize, bookmarks.get("view").all("li").size());
         }
+        
+//        testNotEditing : function() {
+//        	T.Assert.isFalse(bookmarks.get("editing"));
+//        },
+//        
+//        testForTwoBookmarks : function() {
+//        	T.Assert.areEqual(2, bookmarks.get("bookmarks").length);
+//        },
+//        
+//        testBookmarkLabel : function() {
+//        	T.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].one("a").get("textContent"));
+//        },
+//        
+//        testSetEditing : function() {
+//        	var editing = bookmarks.get("editing");
+//        	var toggle = T.one("h3 a");
+//        	toggle.simulate("click");
+//        	T.Assert.isFalse(editing === bookmarks.get("editing"));
+//        },
+//        
+//        testAddBookmark : function() {
+//        	var size = T.all("li").size();
+//        	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
+//        	T.Assert.areEqual(size + 1, T.all("li").size());
+//        },
+//        
+//        testRemoveBookmark : function() {
+//        	var size = T.all("#bookmarks li").size();
+//        	bookmarks.removeBookmark(1);
+//        	T.Assert.areEqual(size - 1, T.all("#bookmarks li").size());
+//        },
+//        
+//        testClickRemoveBookmark : function() {
+//        	var size = T.all("li").size();
+//        	T.one(".yui3-bookmarks-edit").simulate("click");
+//        	T.Assert.areEqual(size - 1, T.all("li").size());
+//        },
+//        
+//        testClickAddBookmark : function() {
+//        	var size = T.all("#bookmarks li").size();
+//        	T.one("input[name='label']").set("value","SlashDot");
+//        	T.one("input[name='url']").set("value","http://slashdot.org/");
+//        	T.one("input[type='submit']").simulate("click");
+//        	T.Assert.areEqual(size + 1, T.all("#bookmarks li").size());
+//        },
+//        
+//        testCorrectBookmarkRemoved : function() {
+//        	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
+//        	var label = T.one("li").get("textContent");
+//        	T.all(".yui3-bookmarks-edit").item(1).simulate("click");
+//        	T.Assert.areEqual(label, T.one("li").get("textContent"));
+//        }, 
+//        
+//        testClickBookmarkable : function() {
+//        	var size = T.all("li").size();
+//        	bookmarks.set("editable", true);
+//        	var bookmarkable = bookmarkables.item(0);
+//        	bookmarkable.simulate("click");
+//        	T.Assert.areEqual(size + 1, T.all("li").size());
+//        },
+//        
+//        testIOSent : function () {
+//        	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
+//        	T.Assert.areEqual("http://mdconsult.com", bookmark.url);
+//        },
+//        
+//        testHostStrippedFromLocalLink : function() {
+//        	bookmarks.set("editable", true);
+//        	T.one("#local").simulate("click");
+//        	T.Assert.areEqual(T.one("#local").get("pathname"), bookmark.url);
+//        },
+//        
+//        testLocalHasQueryString : function() {
+//        	bookmarks.set("editable", true);
+//        	T.one("#localquerystring").simulate("click");
+//        	T.Assert.areEqual("/test/index.html?query=string#hash", bookmark.url);
+//        }
         
 //        testMoveUp : function() {
 //        	var li = T.all("li");
