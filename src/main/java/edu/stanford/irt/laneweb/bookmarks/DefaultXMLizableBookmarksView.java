@@ -34,8 +34,8 @@ public class DefaultXMLizableBookmarksView {
     }
 
     protected void maybeCreateBookmarksUL(final Bookmarks bookmarks, final ContentHandler contentHandler) throws SAXException {
-        if (bookmarks != null && bookmarks.size() > 0) {
-            XMLUtils.startElement(contentHandler, XHTMLNS, UL);
+        XMLUtils.startElement(contentHandler, XHTMLNS, UL);
+        if (bookmarks != null) {
             for (Bookmark bookmark : bookmarks) {
                 XMLUtils.startElement(contentHandler, XHTMLNS, LI);
                 AttributesImpl atts = new AttributesImpl();
@@ -43,7 +43,7 @@ public class DefaultXMLizableBookmarksView {
                 XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, bookmark.getLabel());
                 XMLUtils.endElement(contentHandler, XHTMLNS, LI);
             }
-            XMLUtils.endElement(contentHandler, XHTMLNS, UL);
         }
+        XMLUtils.endElement(contentHandler, XHTMLNS, UL);
     }
 }

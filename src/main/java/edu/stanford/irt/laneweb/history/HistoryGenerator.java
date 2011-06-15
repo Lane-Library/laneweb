@@ -10,10 +10,7 @@ import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-
 public class HistoryGenerator extends AbstractGenerator {
-
-    private static final long serialVersionUID = 1L;
 
     private static final String A = "a";
 
@@ -23,16 +20,18 @@ public class HistoryGenerator extends AbstractGenerator {
 
     private static final String LI = "li";
 
+    private static final long serialVersionUID = 1L;
+
     private static final String UL = "ul";
 
     private static final String XHTMLNS = "http://www.w3.org/1999/xhtml";
-    
+
     private Bookmarks history;
 
     public void generate() throws SAXException {
         this.xmlConsumer.startDocument();
-        if (this.history != null && this.history.size() > 0) {
-            XMLUtils.startElement(this.xmlConsumer, XHTMLNS, UL);
+        XMLUtils.startElement(this.xmlConsumer, XHTMLNS, UL);
+        if (this.history != null) {
             for (Bookmark bookmark : this.history) {
                 XMLUtils.startElement(this.xmlConsumer, XHTMLNS, LI);
                 AttributesImpl atts = new AttributesImpl();
@@ -40,8 +39,8 @@ public class HistoryGenerator extends AbstractGenerator {
                 XMLUtils.createElementNS(this.xmlConsumer, XHTMLNS, A, atts, bookmark.getLabel());
                 XMLUtils.endElement(this.xmlConsumer, XHTMLNS, LI);
             }
-            XMLUtils.endElement(this.xmlConsumer, XHTMLNS, UL);
         }
+        XMLUtils.endElement(this.xmlConsumer, XHTMLNS, UL);
         this.xmlConsumer.endDocument();
     }
 
