@@ -49,11 +49,8 @@
 		},
 		
 		bindUI : function() {
-			var view, history;
-			view = this.get("view");
-			view.on("click", this._handleViewClick, this);
-			history = Y.one("#history ul");
-			history.on("click", this._handleHistoryClick, this);
+			this.get("view").on("click", this._handleViewClick, this);
+			Y.one("#history ul").on("click", this._handleHistoryClick, this);
 			this.on("bookmarkAdded", this._handleBookmarkAdded);
 			this.on("bookmarkRemoved", this._handleBookmarkRemoved);
 		},
@@ -69,11 +66,25 @@
 		},
 		
 		_handleBookmarkAdded : function(event) {
-			this.get("view").prepend("<li><a href=\"" + event.url + "\">" + event.label + "</a><a href='#' class='" + this.getClassName("remove") + "'>remove</a></li>");		
+			this.get("view").prepend("<li><a href=\"" + event.url + "\">" + event.label + "</a><a href='#' class='" + this.getClassName("remove") + "'>remove</a></li>");
+			Y.io("/././bookmarks/add", {
+                method : "post",
+                data : Y.JSON.stringify({label:event.label,url:event.url}),
+                headers: {
+                    "Content-Type" : "application/json"
+                }
+            });
 		},
 		
 		_handleBookmarkRemoved : function(event) {
 			this.get("view").all("li").item(event.index).remove(true);
+			Y.io("/././bookmarks/remove", {
+                method : "post",
+                data : Y.JSON.stringify(event.index),
+                headers: {
+                    "Content-Type" : "application/json"
+                }
+            });
 		},
 		
 		_handleViewClick : function(event) {
