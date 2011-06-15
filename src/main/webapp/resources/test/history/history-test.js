@@ -10,6 +10,10 @@ YUI({
 	var historyTestCase = new T.Test.Case({
 		name : 'History Test Case',
 		
+		setUp : function() {
+			Y.lane.HistoryTracker.set("io", function(){});
+		},
+		
 		testInitialSize : function() {
 			T.Assert.areEqual(3, Y.lane.History.get("model").length);
 		},
