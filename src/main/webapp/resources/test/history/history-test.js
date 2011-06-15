@@ -11,15 +11,21 @@ YUI({
 		name : 'History Test Case',
 		
 		testInitialSize : function() {
-			T.Assert.areEqual(3, Y.lane.History.get("links").length);
+			T.Assert.areEqual(3, Y.lane.History.get("model").length);
 		},
 		
 		testAddItem : function() {
-			Y.lane.History.addItem({label:"label",url:"url"});
-			T.Assert.areEqual(4, Y.lane.History.get("links").length);
-			T.Assert.areEqual("label", Y.lane.History.get("links")[0].label);
-			T.Assert.areEqual(4, Y.one("#history").all("li").size());
-			T.Assert.areEqual("url", Y.one("#history").all("a").item(0).getAttribute("href"));
+			T.Assert.isTrue(Y.lane.History.addItem({label:"label",url:"url"}));
+			T.Assert.areEqual(4, Y.lane.History.get("model").length);
+			T.Assert.areEqual("label", Y.lane.History.get("model")[0].label);
+			T.Assert.areEqual(4, Y.lane.History.get("view").all("li").size());
+			T.Assert.areEqual("url", Y.lane.History.get("view").all("a").item(0).getAttribute("href"));
+		},
+		
+		testAddSameItem : function() {
+			T.Assert.isFalse(Y.lane.History.addItem({label:"label",url:"url"}));
+			T.Assert.areEqual(4, Y.lane.History.get("model").length);
+			T.Assert.areEqual(4, Y.lane.History.get("view").all("li").size());
 		}
 	});
 

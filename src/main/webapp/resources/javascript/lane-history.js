@@ -76,8 +76,11 @@
     History.NAME = "history";
     
     History.ATTRS = {
-        links : {
+        model : {
         	value : []
+        },
+        view : {
+        	value : null
         },
         io : {
         	value : Y.io
@@ -85,13 +88,16 @@
     };
     
     History.HTML_PARSER = {
-        links : function(srcNode) {
-        	var i, item, links = [], items = srcNode.all("a"), size = items.size();
+        model : function(srcNode) {
+        	var i, item, model = [], items = srcNode.all("a"), size = items.size();
         	for (i = 0; i < size; i++) {
         		item = items.item(i);
-        		links.push({label:item.getContent(),url:item.getAttribute("href")});
+        		model.push({label:item.getContent(),url:item.getAttribute("href")});
         	}
-        	return links;
+        	return model;
+        },
+        view : function(srcNode) {
+        	return srcNode.one("ul");
         }
     };
     
@@ -100,8 +106,8 @@
     if (Y.one("#history")) {
     	Y.extend(History, Y.Widget, {
     		renderUI : function() {
-    			var contentBox = this.get("contentBox"),
-    			    items = contentBox.all("li"),
+    			var view = this.get("view"),
+    			    items = view.all("li"),
     			    size = items.size(), i;
     			for (i = 0; i < size; i++) {
     				items.item(i).append(History.SAVE_TEMPLATE);
@@ -111,11 +117,28 @@
     			this.on("itemAdded", this._handleItemAdded, this);
     		},
     		addItem : function(item) {
-    			this.get("links").splice(0, 0, item);
-    			this.fire("itemAdded", item);
+    			if (!this.contains(item)) {
+        			this.get("model").splice(0, 0, item);
+        			this.fire("itemAdded", item);
+        			return true;
+    			} else {
+    				return false;
+    			}
+    		},
+    		contains : function(item) {
+    			var contains = false,
+    			    model = this.get("model"),
+    			    i;
+    			for (i = 0; i < model.length; i++) {
+    				if (model[i].label == item.label && model[i].url == item.url) {
+    					contains = true;
+    					break;
+    				}
+    			}
+    			return contains;
     		},
     		_handleItemAdded : function(event) {
-    			this.get("contentBox").prepend("<li><a href=\"" + event.url + "\">" + event.label + "</a>" + History.SAVE_TEMPLATE + "</li>");
+    			this.get("view").prepend("<li><a href=\"" + event.url + "\">" + event.label + "</a>" + History.SAVE_TEMPLATE + "</li>");
     		}
     	});
     	Y.lane.History = new History({srcNode:"#history",render:true});
