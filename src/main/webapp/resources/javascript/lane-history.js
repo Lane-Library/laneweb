@@ -39,16 +39,6 @@
 
 //          Y.lane.History.addItem({label : title, url : url});
             this.track({label : title, url : url});
-            
-            Y.on("trackable", function(link, event) {
-                var trackingData = link.get("trackingData");
-                if (trackingData.external) {
-                    this.track({
-                        label : trackingData.title,
-                        url : link.get("url")
-                    });
-                }
-            }, this);
     	},
     	
         track : function(trackingData) {
@@ -139,6 +129,17 @@
     if (Y.one("#history")) {
 //    	Y.lane.History = new History({srcNode:"#history",render:true});
         Y.lane.HistoryTracker = new HistoryTracker();
+        
+        //TODO: figure out why this doesn't work when in initializer:
+        Y.on("trackable", function(link, event) {
+            var trackingData = link.get("trackingData");
+            if (trackingData.external) {
+            	Y.lane.HistoryTracker.track({
+                    label : trackingData.title,
+                    url : link.get("url")
+                });
+            }
+        });
     }
     
 })();
