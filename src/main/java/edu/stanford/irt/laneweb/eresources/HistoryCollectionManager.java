@@ -15,8 +15,6 @@ import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
@@ -373,9 +371,9 @@ public class HistoryCollectionManager implements CollectionManager {
 
     private LinkedList<Eresource> parseResultSet(final ResultSet rs) throws SQLException {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
-        Eresource eresource = null;
-        Version version = null;
-        Link link;
+        EresourceImpl eresource = null;
+        VersionImpl version = null;
+        LinkImpl link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
@@ -401,9 +399,6 @@ public class HistoryCollectionManager implements CollectionManager {
                 version.setSummaryHoldings(rs.getString("HOLDINGS"));
                 version.setDates(rs.getString("DATES"));
                 version.setDescription(rs.getString("DESCRIPTION"));
-                if ("F".equals(rs.getString("PROXY"))) {
-                    version.setProxy(false);
-                }
                 currentVersionId = rowVersionId;
             }
             int rowLinkId = rs.getInt("LINK_ID");

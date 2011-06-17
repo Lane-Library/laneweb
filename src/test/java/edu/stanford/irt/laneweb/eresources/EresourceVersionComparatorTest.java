@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.VersionImpl;
 
@@ -16,13 +14,13 @@ import edu.stanford.irt.eresources.impl.VersionImpl;
  */
 public class EresourceVersionComparatorTest {
 
-    EresourceVersionComparator comparator;
+    private EresourceVersionComparator comparator;
 
-    Link link;
+    private LinkImpl link;
 
-    Version v1;
+    private VersionImpl v1;
 
-    Version v2;
+    private VersionImpl v2;
 
     /**
      * @throws java.lang.Exception

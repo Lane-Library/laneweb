@@ -15,8 +15,6 @@ import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
@@ -366,19 +364,19 @@ public class CollectionManagerImpl implements CollectionManager {
 
     private Collection<Eresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
         LinkedList<Eresource> result = doGet(sql, params, true);
-        LinkedList<Eresource> titleMatches = new LinkedList<Eresource>();
+        LinkedList<EresourceImpl> titleMatches = new LinkedList<EresourceImpl>();
         String normQuery = query.replaceAll("\\W", "");
         int i = 0;
         for (ListIterator<Eresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
             Eresource eresource = it.next();
             String normTitle = eresource.getTitle().replaceAll("\\W", "");
             if (normQuery.equalsIgnoreCase(normTitle)) {
-                titleMatches.add(eresource);
+                titleMatches.add((EresourceImpl) eresource);
                 it.remove();
             }
         }
         i = 0;
-        for (Eresource eresource : titleMatches) {
+        for (EresourceImpl eresource : titleMatches) {
             eresource.setScore(eresource.getScore() * 10);
             result.add(i++, eresource);
         }
@@ -387,9 +385,9 @@ public class CollectionManagerImpl implements CollectionManager {
 
     private LinkedList<Eresource> parseResultSet(final ResultSet rs, final boolean scored) throws SQLException {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
-        Eresource eresource = null;
-        Version version = null;
-        Link link;
+        EresourceImpl eresource = null;
+        VersionImpl version = null;
+        LinkImpl link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
 
 /**
@@ -13,11 +12,11 @@ import edu.stanford.irt.eresources.impl.EresourceImpl;
  */
 public class EresourceSearchResultTest {
 
-    private Eresource eresource1;
+    private EresourceImpl eresource1;
 
-    private Eresource eresource2;
+    private EresourceImpl eresource2;
 
-    private Eresource eresource3;
+    private EresourceImpl eresource3;
 
     private EresourceSearchResult eresourceSearchResult1;
 

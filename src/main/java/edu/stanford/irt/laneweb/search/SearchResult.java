@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.search;
 
-import edu.stanford.irt.laneweb.resource.Resource;
-
 import java.util.Calendar;
 import java.util.regex.Pattern;
+
+import edu.stanford.irt.laneweb.resource.Resource;
 
 /**
  * @author ryanmax

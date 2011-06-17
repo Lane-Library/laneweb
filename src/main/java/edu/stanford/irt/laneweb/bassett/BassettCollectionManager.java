@@ -15,7 +15,6 @@ import java.util.Set;
 import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
@@ -249,7 +248,7 @@ public class BassettCollectionManager {
     private List<Eresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
         List<Eresource> eresources = new LinkedList<Eresource>();
         BassettEresource eresource = null;
-        Version version = null;
+        VersionImpl version = null;
         int currentEresourceId = -1;
         String currentTitle = null;
         while (rs.next()) {
@@ -275,9 +274,6 @@ public class BassettCollectionManager {
                 version.setSummaryHoldings(rs.getString("HOLDINGS"));
                 version.setDates(rs.getString("DATES"));
                 version.setDescription(rs.getString("VERSION_DESCRIPTION"));
-                if ("F".equals(rs.getString("PROXY"))) {
-                    version.setProxy(false);
-                }
                 eresources.add(eresource);
             }
             if (rs.getString("SUB_REGION") != null) {
