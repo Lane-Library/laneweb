@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,6 +22,8 @@ import edu.stanford.irt.eresources.impl.VersionImpl;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class CollectionManagerImpl implements CollectionManager {
+    
+    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
     private static final String BROWSE =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
@@ -363,8 +365,14 @@ public class CollectionManagerImpl implements CollectionManager {
                     if (query.equalsIgnoreCase(currentTitle)) {
                         eresource.setScore(Integer.MAX_VALUE);
                     } else {
+                        //core material weighted * 3
                         int coreFactor = "Y".equals(rs.getString("CORE")) ? 3 : 1;
-                        eresource.setScore(((rs.getInt("SCORE_TITLE") + rs.getInt("SCORE_TEXT")) * coreFactor) / 2);
+                        //weighted oracle text scores for title and text averaged
+                        int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
+                        int year = rs.getInt("YEAR");
+                        //subtract years since current year
+                        int yearFactor = year == 0 ? 0 : year - THIS_YEAR;
+                        eresource.setScore(scoreFactor + yearFactor);
                     }
                 }
                 eresource.setDescription(rs.getString("E_DESCRIPTION"));
