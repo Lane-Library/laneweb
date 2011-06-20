@@ -370,7 +370,7 @@ public class CollectionManagerImpl implements CollectionManager {
                         //weighted oracle text scores for title and text averaged
                         int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
                         int year = rs.getInt("YEAR");
-                        //subtract years since current year
+                        //subtract number of years difference from current year
                         int yearFactor = year == 0 ? 0 : year - THIS_YEAR;
                         eresource.setScore(scoreFactor + yearFactor);
                     }
