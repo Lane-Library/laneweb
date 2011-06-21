@@ -371,7 +371,8 @@ public class CollectionManagerImpl implements CollectionManager {
                         int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
                         int year = rs.getInt("YEAR");
                         //subtract number of years difference from current year
-                        int yearFactor = year == 0 ? 0 : year - THIS_YEAR;
+                        //yearFactor can change score from -10 to 10 points
+                        int yearFactor = year == 0 ? 0 : Math.max(-10, 10 - (THIS_YEAR - year));
                         eresource.setScore(scoreFactor + yearFactor);
                     }
                 }
