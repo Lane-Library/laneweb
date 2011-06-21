@@ -20,6 +20,9 @@
 .ds6 {
     background-image : url(/././resources/images/imgbg6.gif)
 }
+/* small images, less padding */
 .ds7 {
-    background-image : url(/././resources/images/imgbg7.gif)
+    background-image : url(/././resources/images/imgbg7.gif);
+    padding-left: 5px;
+    padding-top: 5px
 }
