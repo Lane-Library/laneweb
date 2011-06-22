@@ -499,7 +499,7 @@
             <artifactId>ehcache-core</artifactId>
             <groupId>net.sf.ehcache</groupId>
             <scope>runtime</scope>
-            <version>2.3.2</version>
+            <version>2.4.2</version>
         </dependency>
         <dependency>
             <artifactId>eresources-impl</artifactId>
@@ -537,7 +537,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.28.0</version>
+            <version>1.29.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -617,7 +617,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.37</version>
+            <version>1.6.38</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>
