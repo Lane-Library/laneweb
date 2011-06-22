@@ -348,21 +348,16 @@ public class CollectionManagerImpl implements CollectionManager {
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
-        String currentTitle = null;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
-            int recordId = rs.getInt("RECORD_ID");
-            String recordType = rs.getString("RECORD_TYPE");
-            String rowTitle = rs.getString("TITLE");
-            if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
-                currentTitle = rowTitle;
+            if (rowEresourceId != currentEresourceId) {
                 eresource = new EresourceImpl();
                 eresource.setId(rowEresourceId);
-                eresource.setRecordId(recordId);
-                eresource.setRecordType(recordType);
-                eresource.setTitle(currentTitle);
+                eresource.setRecordId(rs.getInt("RECORD_ID"));
+                eresource.setRecordType(rs.getString("RECORD_TYPE"));
+                eresource.setTitle(rs.getString("TITLE"));
                 if (query != null) {
-                    if (query.equalsIgnoreCase(currentTitle)) {
+                    if (query.equalsIgnoreCase(eresource.getTitle())) {
                         eresource.setScore(Integer.MAX_VALUE);
                     } else {
                         //core material weighted * 3
@@ -370,7 +365,6 @@ public class CollectionManagerImpl implements CollectionManager {
                         //weighted oracle text scores for title and text averaged
                         int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
                         int year = rs.getInt("YEAR");
-                        //subtract number of years difference from current year
                         //yearFactor can change score from -10 to 10 points
                         int yearFactor = year == 0 ? 0 : Math.max(-10, 10 - (THIS_YEAR - year));
                         eresource.setScore(scoreFactor + yearFactor);
