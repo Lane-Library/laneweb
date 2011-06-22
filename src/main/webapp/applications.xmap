@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
@@ -8,7 +7,7 @@
                 <map:generate type="status"/>
                 <map:serialize type="xml"/>
             </map:match>
-             <!-- matches /apps/search/ requests -->
+            <!-- matches /apps/search/ requests -->
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
@@ -23,7 +22,7 @@
                             <map:transform type="search-proxy-links"/>
                         </map:when>
                     </map:select>
-                     <map:serialize type="xml"/>
+                    <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/engine/xml/*" type="wildcard">
                     <map:generate type="search-engine">
@@ -142,7 +141,7 @@
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>
-                
+
                 <!-- search facet counts -->
                 <map:match pattern="search/facets/json" type="wildcard">
                     <map:generate type="file" src="apps:/cache/search/templates/xml"/>
@@ -180,7 +179,8 @@
                     src="http://sfx.stanford.edu/local?sid=stanford:laneweb-auto&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
                 <map:transform src="resources/xsl/sfx2json.xsl" type="saxon">
                     <map:parameter name="sfx-request"
-                        value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact"/>
+                        value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact"
+                    />
                 </map:transform>
                 <map:serialize type="text"/>
             </map:match>
@@ -190,12 +190,12 @@
             <map:match pattern="classes/**" type="wildcard">
                 <map:match pattern="classes/classeslist" type="wildcard">
                     <map:generate type="classes" src="apps:/classes/all-data.xml"/>
-                    <map:transform  type="saxon"  src="resources/xsl/classes/laneclasses-list.xsl"/>
+                    <map:transform type="saxon" src="resources/xsl/classes/laneclasses-list.xsl"/>
                     <map:serialize type="xhtml"/>
-                </map:match> 
+                </map:match>
                 <map:match pattern="classes/thisweek" type="wildcard">
                     <map:generate type="classes" src="apps:/classes/data.xml"/>
-                    <map:transform  type="saxon"  src="resources/xsl/classes/thisweek.xsl"/>
+                    <map:transform type="saxon" src="resources/xsl/classes/thisweek.xsl"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
                 <map:match pattern="classes/all" type="wildcard">
@@ -206,7 +206,7 @@
                 <map:match pattern="classes/data.xml" type="wildcard">
                     <map:generate type="classes-aggregator" src="apps:/classes/onlineregistrationcenter.xml"/>
                     <map:transform type="saxon" src="resources/xsl/classes/lastmodified.xsl"/>
-                    <map:transform type="textNodeParser"/> 
+                    <map:transform type="textNodeParser"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="classes/all-data.xml" type="wildcard">
@@ -217,7 +217,7 @@
                 </map:match>
                 <map:match pattern="classes/onlineregistrationcenter.xml" type="wildcard">
                     <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
-                     <map:serialize type="xml"/>
+                    <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="classes/all-onlineregistrationcenter.xml" type="wildcard">
                     <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1"/>
