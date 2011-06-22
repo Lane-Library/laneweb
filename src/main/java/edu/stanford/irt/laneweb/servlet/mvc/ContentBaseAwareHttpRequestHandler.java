@@ -17,6 +17,7 @@ public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandl
 
     @Override
     protected Resource getResource(final HttpServletRequest request) {
+        Resource resource = null;
         String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
         if (path == null) {
             throw new IllegalStateException("Required request attribute '" + HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE
@@ -33,16 +34,20 @@ public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandl
             this.logger.debug("Trying relative path [" + path + "] against base location: " + contentBase);
         }
         try {
-            Resource contentBaseResource = contentBase.createRelative(path);
-            if (contentBaseResource.exists() && contentBaseResource.isReadable()) {
+            resource = contentBase.createRelative(path);
+            if (resource.exists() && resource.isReadable()) {
                 if (this.logger.isDebugEnabled()) {
-                    this.logger.debug("Found matching resource: " + contentBaseResource);
+                    this.logger.debug("Found matching resource: " + resource);
                 }
-                return contentBaseResource;
+                return resource;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return super.getResource(request);
+        resource = super.getResource(request);
+        if (resource == null) {
+            throw new RuntimeException(path + " not found");
+        }
+        return resource;
     }
 }
