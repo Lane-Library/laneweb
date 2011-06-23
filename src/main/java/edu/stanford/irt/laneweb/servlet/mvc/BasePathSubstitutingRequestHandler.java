@@ -1,88 +1,92 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.regex.Pattern;
+import java.net.URI;
+import java.net.URL;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.BasePathSubstitutingInputStream;
 
 public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandler {
 
-    private static final String SUBSTITUTE = "/./.";
+    private static class BasePathSubstitutingResource implements Resource {
 
-    private static final Pattern PATTERN = Pattern.compile(SUBSTITUTE, Pattern.LITERAL);
+        private String basePath;
 
-    @Override
-    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
-            IOException {
-        checkAndPrepare(request, response, true);
-        // check whether a matching resource exists
-        Resource resource = getResource(request);
-        if (resource == null) {
-            this.logger.debug("No matching resource found - returning 404");
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
+        private Resource resource;
+
+        public BasePathSubstitutingResource(final String basePath, final Resource resource) {
+            this.basePath = basePath;
+            this.resource = resource;
         }
-        // check the resource's media type
-        MediaType mediaType = getMediaType(resource);
-        if (mediaType != null) {
-            if (this.logger.isDebugEnabled()) {
-                this.logger.debug("Determined media type [" + mediaType + "] for " + resource);
-            }
-        } else {
-            if (this.logger.isDebugEnabled()) {
-                this.logger.debug("No media type found for " + resource + " - returning 404");
-            }
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
+
+        public long contentLength() throws IOException {
+            throw new IOException("can't determine length before substituting");
         }
-        // header phase
-        setHeaders(response, resource, mediaType);
-        if (new ServletWebRequest(request, response).checkNotModified(resource.lastModified())) {
-            this.logger.debug("Resource not modified - returning 304");
-            return;
+
+        public Resource createRelative(final String relativePath) throws IOException {
+            return this.resource.createRelative(relativePath);
         }
-        // content phase
-        if (METHOD_HEAD.equals(request.getMethod())) {
-            this.logger.trace("HEAD request - skipping content");
-            return;
+
+        public boolean exists() {
+            return this.resource.exists();
         }
-        String basePath = (String) request.getAttribute(Model.BASE_PATH);
-        doWriteContent(response, resource, basePath);
+
+        public String getDescription() {
+            return this.resource.getDescription();
+        }
+
+        public File getFile() throws IOException {
+            return this.resource.getFile();
+        }
+
+        public String getFilename() {
+            return this.resource.getFilename();
+        }
+
+        @Override
+        public InputStream getInputStream() throws IOException {
+            return new BasePathSubstitutingInputStream(this.resource.getInputStream(), this.basePath);
+        }
+
+        public URI getURI() throws IOException {
+            return this.resource.getURI();
+        }
+
+        public URL getURL() throws IOException {
+            return this.resource.getURL();
+        }
+
+        public boolean isOpen() {
+            return this.resource.isOpen();
+        }
+
+        public boolean isReadable() {
+            return this.resource.isReadable();
+        }
+
+        public long lastModified() throws IOException {
+            return this.resource.lastModified();
+        }
     }
 
-    private void doWriteContent(final HttpServletResponse response, final Resource resource, final String basePath)
-            throws IOException {
-        InputStream input = resource.getInputStream();
-        PrintWriter writer = response.getWriter();
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                if (line.indexOf(SUBSTITUTE) > -1) {
-                    line = PATTERN.matcher(line).replaceAll(basePath);
-                }
-                writer.println(line);
-            }
-        } finally {
-            if (input != null) {
-                input.close();
-            }
-            if (writer != null) {
-                writer.close();
-            }
+    @Override
+    protected Resource getResource(final HttpServletRequest request) {
+        Resource resource = super.getResource(request);
+        if (resource != null) {
+            String basePath = (String) request.getAttribute(Model.BASE_PATH);
+            return new BasePathSubstitutingResource(basePath, super.getResource(request));
+        } else {
+            return null;
         }
     }
 
