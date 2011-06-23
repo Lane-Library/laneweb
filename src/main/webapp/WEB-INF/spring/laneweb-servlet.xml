@@ -127,6 +127,7 @@
         </property>
         <property name="cacheSeconds" value="31536000"/>
         <property name="supportedMethods" value="HEAD,GET"/>
+        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
     </bean>
     
     <bean class="org.springframework.web.servlet.DispatcherServlet">
