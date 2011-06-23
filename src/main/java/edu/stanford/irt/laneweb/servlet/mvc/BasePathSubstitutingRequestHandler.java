@@ -118,7 +118,7 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
                 throw new RuntimeException(e);
             }
         } else {
-            return null;
+            throw new RuntimeException(request.getRequestURI() + " not found.");
         }
     }
 
