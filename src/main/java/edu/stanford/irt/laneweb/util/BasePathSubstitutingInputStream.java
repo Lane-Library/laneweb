@@ -43,6 +43,7 @@ public class BasePathSubstitutingInputStream extends FilterInputStream {
         if (this.substituting) {
             if (this.basePathIndex >= this.basePathArray.length) {
                 this.substituting = false;
+                return SLASH;
             } else {
                 return this.basePathArray[this.basePathIndex++];
             }
@@ -78,7 +79,7 @@ public class BasePathSubstitutingInputStream extends FilterInputStream {
                                 this.ringBuffer.clear();
                                 this.substituting = true;
                                 this.basePathIndex = 0;
-                                return this.basePathArray[this.basePathIndex++];
+                                return this.read();
                             }
                         }
                     }

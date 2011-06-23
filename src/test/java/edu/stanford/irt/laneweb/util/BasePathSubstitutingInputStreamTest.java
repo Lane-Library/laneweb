@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class BasePathSubstitutingInputStreamTest {
     
-    private String substituted = "here is some text with /stage in it";
+    private String substituted = "here is some text with /stage/ in it";
     
     private BasePathSubstitutingInputStream in;
     
@@ -59,7 +59,7 @@ public class BasePathSubstitutingInputStreamTest {
         long skip = 26;
         assertEquals(skip, this.in.skip(skip));
         int length = this.in.read(buffer);
-        assertEquals("age in it", new String(buffer, 0, length));
+        assertEquals("age/ in it", new String(buffer, 0, length));
     }
     
     @Test
