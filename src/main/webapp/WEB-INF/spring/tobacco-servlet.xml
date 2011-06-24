@@ -21,13 +21,25 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <bean name="/*"
+    <!--<bean name="/*"
         class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
         <property name="locations">
             <list>
                 <value>${laneweb.context.live-base}tobacco/</value>
             </list>
         </property>
+        <property name="cacheSeconds" value="31536000"/>
+        <property name="supportedMethods" value="HEAD,GET"/>
+    </bean>-->
+    
+    <bean name="/*"
+        class="edu.stanford.irt.laneweb.servlet.mvc.ContentBaseAwareHttpRequestHandler">
+        <!--<property name="locations">
+            <list>
+                <value>/</value>
+                <value>/resources/site-verification/</value>
+            </list>
+        </property>-->
         <property name="cacheSeconds" value="31536000"/>
         <property name="supportedMethods" value="HEAD,GET"/>
     </bean>
