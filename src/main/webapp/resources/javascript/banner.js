@@ -32,7 +32,7 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 		var navNodes = this.get("navNodes");
 		navNodes.item(event.prevVal).removeClass("banner-nav-active");
 		navNodes.item(event.newVal).addClass("banner-nav-active");
-        Y.io("/././plain/samples/banner/banners.html?banner=" + (event.newVal + 1), {
+        Y.io("/././plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
             on : {
                 success : function(id, o, args) {
                 	var fragment = Y.Node.create(o.responseText),
