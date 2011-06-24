@@ -1,0 +1,29 @@
+﻿.antibiogram {
+    margin : 10px 15px 0 20px;
+}
+.antibiogram table {
+    border-collapse : collapse;
+    background-color : #fff;
+}
+.antibiogram th {
+    padding : .2em;
+    vertical-align : top;
+    border : 1px solid #ccc;
+}
+.antibiogram td {
+    padding : .2em;
+    vertical-align : top;
+    border : 1px solid #ccc;
+}
+.antibiogram table th {
+    background-color : #e6e8d5;
+    font-weight : bold;
+    font-size : 1.1em;
+}
+.ol-outside {
+    padding-left : 25px;
+}
+.ol-outside li {
+    list-style-position : outside;
+}
+
