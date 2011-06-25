@@ -35,7 +35,7 @@ public class ProxyCredentialControllerTest {
 
     @Test
     public void testNullQueryString() throws IOException {
-        expect(this.request.getQueryString()).andReturn(null);
+        expect(this.request.getQueryString()).andReturn(null).times(2);
         replay(this.request, this.response);
         try {
             this.controller.proxyRedirect(this.response, this.request, "ditenus", this.ticket);
@@ -47,7 +47,7 @@ public class ProxyCredentialControllerTest {
 
     @Test
     public void testRedirectForCredentials() throws IOException {
-        expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
+        expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c").times(2);
         this.response.sendRedirect("http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
                 + "&url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.response);

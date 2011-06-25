@@ -15,9 +15,9 @@ public class Ticket {
 
     private String stringValue;
 
-    public Ticket(final String user, final String ezyproxyKey) {
-        if (null == user) {
-            throw new IllegalArgumentException("null user");
+    public Ticket(final String sunetid, final String ezyproxyKey) {
+        if (null == sunetid) {
+            throw new IllegalArgumentException("null sunetid");
         }
         if (null == ezyproxyKey) {
             throw new IllegalArgumentException("null ezproxyKey");
@@ -25,7 +25,7 @@ public class Ticket {
         Date now = new Date();
         String packet = "$u" + ((int) (now.getTime() / 1000)) + "$e";
         try {
-            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + user + packet) + packet, "UTF-8");
+            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + sunetid + packet) + packet, "UTF-8");
             this.creationTime = System.currentTimeMillis();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
