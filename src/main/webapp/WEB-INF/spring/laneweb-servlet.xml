@@ -151,10 +151,11 @@
     <bean id="themeResolver"
         class="org.springframework.web.servlet.theme.FixedThemeResolver"/>
     
-    <bean id="handlerExceptionResolver"
+    <!--FIXME:  re-enable for release
+        <bean id="handlerExceptionResolver"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapHandlerExceptionResolver"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"
-    />
+    />-->
     
     <bean id="viewNameTranslator"
         class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator"/>
