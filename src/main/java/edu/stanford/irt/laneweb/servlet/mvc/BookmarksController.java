@@ -19,6 +19,7 @@ import edu.stanford.irt.laneweb.bookmarks.BookmarksDAO;
 import edu.stanford.irt.laneweb.model.Model;
 
 @Controller
+//FIXME: @SessionAttributes don't work the way I figured, remove them . . .
 @SessionAttributes({ Model.BOOKMARKS, Model.EMRID })
 @RequestMapping(value = "/bookmarks")
 public class BookmarksController {

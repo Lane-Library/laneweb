@@ -14,6 +14,7 @@ import edu.stanford.irt.laneweb.history.HistoryDAO;
 import edu.stanford.irt.laneweb.model.Model;
 
 @Controller
+//FIXME: @SessionAttributes don't work the way I figured, remove them . . .
 @SessionAttributes({ Model.HISTORY, Model.EMRID })
 @RequestMapping(value = "/history")
 public class HistoryTrackerController {

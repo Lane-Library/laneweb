@@ -20,6 +20,7 @@ import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
 @Controller
+//FIXME: @SessionAttributes don't work the way I figured, remove them . . .
 @SessionAttributes({ Model.UNIVID, Model.SUNETID })
 public class VoyagerLoginController {
 
