@@ -121,9 +121,9 @@ public class CollectionManagerImpl implements CollectionManager {
     
     private static final String SEARCH = 
         "WITH FOUND AS ( "
-                    + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,'{cardiovascular} & {research}') AS SCORE_TITLE "
+                    + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,?) AS SCORE_TITLE "
                     + "FROM ERESOURCE "
-                    + "WHERE CONTAINS(TEXT,'{cardiovascular} & {research}',1) > 0 "
+                    + "WHERE CONTAINS(TEXT,?,1) > 0 "
                     + ") "
                     + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
