@@ -118,24 +118,40 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND TYPE.TYPE = ? "
                     + "AND ERESOURCE.CORE = 'Y' "
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
-
-    private static final String SEARCH =
-            "WITH FOUND AS ( "
-                    + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,?) AS SCORE_TITLE "
+    
+    private static final String SEARCH = 
+        "WITH FOUND AS ( "
+                    + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,'{cardiovascular} & {research}') AS SCORE_TITLE "
                     + "FROM ERESOURCE "
-                    + "WHERE CONTAINS(TEXT,?,1) > 0"
+                    + "WHERE CONTAINS(TEXT,'{cardiovascular} & {research}',1) > 0 "
                     + ") "
-                    + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
+                    + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
-                    + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION, PUBLICATION_YEAR "
+                    + "SCORE_TITLE, SCORE_TEXT "
+                    + "FROM FOUND, VERSION, LINK, DESCRIPTION, PUBLICATION_YEAR "
                     + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND FOUND.ERESOURCE_ID = PUBLICATION_YEAR.ERESOURCE_ID(+) "
-                    + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
-                    + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
-                    + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
+                    + "ORDER BY FOUND.ERESOURCE_ID, VERSION_ID, LINK_ID";
+
+//    private static final String SEARCH =
+//            "WITH FOUND AS ( "
+//                    + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,?) AS SCORE_TITLE "
+//                    + "FROM ERESOURCE "
+//                    + "WHERE CONTAINS(TEXT,?,1) > 0"
+//                    + ") "
+//                    + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
+//                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
+//                    + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+//                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION, PUBLICATION_YEAR "
+//                    + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
+//                    + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
+//                    + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
+//                    + "AND FOUND.ERESOURCE_ID = PUBLICATION_YEAR.ERESOURCE_ID(+) "
+//                    + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
+//                    + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
+//                    + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String SEARCH_SUBSET =
             "WITH FOUND AS ( "
