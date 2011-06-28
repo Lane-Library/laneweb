@@ -15,8 +15,6 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
 
     private CollectionManager collectionManager;
 
-    private String subset;
-
     private String type;
 
     public void generate() throws IOException, SAXException {
@@ -39,8 +37,6 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
         Collection<Eresource> eresources = null;
         if (null != this.type) {
             eresources = this.collectionManager.searchType(this.type, this.query);
-        } else if (null != this.subset) {
-            eresources = this.collectionManager.searchSubset(this.subset, this.query);
         } else {
             eresources = this.collectionManager.search(this.query);
         }
@@ -56,7 +52,5 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
         super.initialize();
         this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : ModelUtil.getString(this.model,
                 Model.TYPE);
-        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : ModelUtil.getString(
-                this.model, Model.SUBSET);
     }
 }

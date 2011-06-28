@@ -77,8 +77,6 @@ public class HistoryCollectionManager implements CollectionManager {
         + "AND H_ERESOURCE.ERESOURCE_ID = H_SUBSET.ERESOURCE_ID(+)) "
         + "SELECT 'all' AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND";
 
-    private static final String COUNT_SUBSET_UNION = " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE SUBSET = ?";
-
     private static final String COUNT_TYPE_UNION = " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE TYPE = ?";
 
     private static final String MESH =
@@ -208,13 +206,6 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGet(MESH, params);
     }
 
-    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
-        Collection<String> params = new LinkedList<String>();
-        params.add(mesh);
-        params.add(type);
-        return doGet(MESH_CORE, params);
-    }
-
     public Collection<Eresource> getSubset(final String subset) {
         Collection<String> params = new LinkedList<String>();
         params.add(subset);
@@ -258,15 +249,15 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGetSearch(SEARCH, params, query);
     }
 
-    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
+    public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         StringBuffer stringBuffer = new StringBuffer(COUNT);
         for (int i = 0; i < types.size(); i++) {
             stringBuffer.append(COUNT_TYPE_UNION);
         }
-        for (int i = 0; i < subsets.size(); i++) {
-            stringBuffer.append(COUNT_SUBSET_UNION);
-        }
+//        for (int i = 0; i < subsets.size(); i++) {
+//            stringBuffer.append(COUNT_SUBSET_UNION);
+//        }
         String sql = stringBuffer.toString();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -280,10 +271,10 @@ public class HistoryCollectionManager implements CollectionManager {
                 stmt.setString(index++, type);
                 stmt.setString(index++, type);
             }
-            for (String subset : subsets) {
-                stmt.setString(index++, subset);
-                stmt.setString(index++, subset);
-            }
+//            for (String subset : subsets) {
+//                stmt.setString(index++, subset);
+//                stmt.setString(index++, subset);
+//            }
             rs = stmt.executeQuery();
             while (rs.next()) {
                 result.put(rs.getString(1), Integer.valueOf(rs.getInt(2)));

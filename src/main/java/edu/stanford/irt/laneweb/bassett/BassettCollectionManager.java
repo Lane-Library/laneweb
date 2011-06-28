@@ -96,10 +96,6 @@ public class BassettCollectionManager {
         throw new UnsupportedOperationException();
     }
 
-    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
-        throw new UnsupportedOperationException();
-    }
-
     public Collection<Eresource> getSubset(final String region) {
         Collection<String> params = new LinkedList<String>();
         if (region.indexOf("--") > -1) {

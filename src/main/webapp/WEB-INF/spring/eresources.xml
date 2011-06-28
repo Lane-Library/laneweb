@@ -32,9 +32,6 @@
                 <value>statistics</value>
             </set>
         </property>
-        <property name="subsets">
-            <set/>
-        </property>
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>

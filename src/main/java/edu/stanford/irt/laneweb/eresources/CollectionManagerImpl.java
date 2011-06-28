@@ -26,7 +26,7 @@ public class CollectionManagerImpl implements CollectionManager {
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
     private static final String BROWSE =
-            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
+            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
                     + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
@@ -38,7 +38,7 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String BROWSE_ALPHA =
-            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
+            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
                     + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
@@ -51,7 +51,7 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String BROWSE_NONALPHA =
-            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
+            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
                     + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
@@ -65,7 +65,7 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String CORE =
-            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
+            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
                     + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
@@ -84,14 +84,11 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND ERESOURCE.ERESOURCE_ID = SUBSET.ERESOURCE_ID(+)) "
                     + "SELECT 'all' AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND";
 
-    private static final String COUNT_SUBSET_UNION =
-            " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE SUBSET = ?";
-
     private static final String COUNT_TYPE_UNION =
             " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE TYPE = ?";
 
     private static final String MESH =
-            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
+            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
                     + "FROM ERESOURCE, VERSION, LINK, MESH, TYPE, DESCRIPTION "
@@ -102,21 +99,6 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND MESH.TERM = ? "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
                     + "AND TYPE.TYPE = ? "
-                    + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
-
-    private static final String MESH_CORE =
-            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
-                    + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, MESH, TYPE, DESCRIPTION "
-                    + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
-                    + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
-                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
-                    + "AND ERESOURCE.ERESOURCE_ID = MESH.ERESOURCE_ID "
-                    + "AND MESH.TERM = ? "
-                    + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
-                    + "AND TYPE.TYPE = ? "
-                    + "AND ERESOURCE.CORE = 'Y' "
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
     
     private static final String SEARCH = 
@@ -135,65 +117,27 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND FOUND.ERESOURCE_ID = PUBLICATION_YEAR.ERESOURCE_ID(+) "
                     + "ORDER BY FOUND.ERESOURCE_ID, VERSION_ID, LINK_ID";
 
-//    private static final String SEARCH =
-//            "WITH FOUND AS ( "
-//                    + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,?) AS SCORE_TITLE "
-//                    + "FROM ERESOURCE "
-//                    + "WHERE CONTAINS(TEXT,?,1) > 0"
-//                    + ") "
-//                    + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-//                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
-//                    + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-//                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION, PUBLICATION_YEAR "
-//                    + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
-//                    + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
-//                    + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
-//                    + "AND FOUND.ERESOURCE_ID = PUBLICATION_YEAR.ERESOURCE_ID(+) "
-//                    + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
-//                    + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
-//                    + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
-
-    private static final String SEARCH_SUBSET =
-            "WITH FOUND AS ( "
-                    + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,?) AS SCORE_TITLE "
-                    + "FROM ERESOURCE "
-                    + "WHERE CONTAINS(TEXT,?,1) > 0"
-                    + ") "
-                    + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
-                    + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION, PUBLICATION_YEAR "
-                    + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
-                    + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
-                    + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
-                    + "AND FOUND.ERESOURCE_ID = PUBLICATION_YEAR.ERESOURCE_ID(+) "
-                    + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
-                    + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
-                    + "AND SUBSET = ? "
-                    + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
-
     private static final String SEARCH_TYPE =
             "WITH FOUND AS ( "
                     + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,?) AS SCORE_TITLE "
                     + "FROM ERESOURCE "
                     + "WHERE CONTAINS(TEXT,?,1) > 0"
                     + ") "
-                    + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES,   VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
-                    + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION, PUBLICATION_YEAR "
+                    + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "SCORE_TITLE, SCORE_TEXT, TYPE "
+                    + "FROM FOUND, VERSION, LINK, DESCRIPTION, PUBLICATION_YEAR, TYPE "
                     + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
                     + "AND FOUND.ERESOURCE_ID = PUBLICATION_YEAR.ERESOURCE_ID(+) "
                     + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
-                    + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
                     + "AND TYPE = ? "
-                    + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
+                    + "ORDER BY FOUND.ERESOURCE_ID, VERSION_ID, LINK_ID";
 
     private static final String SUBSET =
             "SELECT ERESOURCE.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
+                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
                     + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
                     + "FROM ERESOURCE, VERSION, LINK, SUBSET, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
@@ -216,13 +160,6 @@ public class CollectionManagerImpl implements CollectionManager {
         params.add(mesh);
         params.add(type);
         return doGet(MESH, params, null);
-    }
-
-    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
-        Collection<String> params = new LinkedList<String>();
-        params.add(mesh);
-        params.add(type);
-        return doGet(MESH_CORE, params, null);
     }
 
     public Collection<Eresource> getSubset(final String subset) {
@@ -267,14 +204,11 @@ public class CollectionManagerImpl implements CollectionManager {
         return doGet(SEARCH, params, query);
     }
 
-    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
+    public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         StringBuilder sb = new StringBuilder(COUNT);
         for (int i = 0; i < types.size(); i++) {
             sb.append(COUNT_TYPE_UNION);
-        }
-        for (int i = 0; i < subsets.size(); i++) {
-            sb.append(COUNT_SUBSET_UNION);
         }
         String sql = sb.toString();
         Connection conn = null;
@@ -289,10 +223,6 @@ public class CollectionManagerImpl implements CollectionManager {
                 stmt.setString(index++, type);
                 stmt.setString(index++, type);
             }
-            for (String subset : subsets) {
-                stmt.setString(index++, subset);
-                stmt.setString(index++, subset);
-            }
             rs = stmt.executeQuery();
             while (rs.next()) {
                 result.put(rs.getString(1), Integer.valueOf(rs.getInt(2)));
@@ -305,16 +235,6 @@ public class CollectionManagerImpl implements CollectionManager {
             JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeConnection(conn);
         }
-    }
-
-    public Collection<Eresource> searchSubset(final String subset, final String query) {
-        QueryTranslator translator = new QueryTranslator();
-        String translatedQuery = translator.translate(query);
-        Collection<String> params = new LinkedList<String>();
-        params.add(translatedQuery);
-        params.add(translatedQuery);
-        params.add(subset);
-        return doGet(SEARCH_SUBSET, params, query);
     }
 
     public Collection<Eresource> searchType(final String type, final String query) {
@@ -373,18 +293,7 @@ public class CollectionManagerImpl implements CollectionManager {
                 eresource.setRecordType(rs.getString("RECORD_TYPE"));
                 eresource.setTitle(rs.getString("TITLE"));
                 if (query != null) {
-                    if (query.equalsIgnoreCase(eresource.getTitle())) {
-                        eresource.setScore(Integer.MAX_VALUE);
-                    } else {
-                        //core material weighted * 3
-                        int coreFactor = "Y".equals(rs.getString("CORE")) ? 3 : 1;
-                        //weighted oracle text scores for title and text averaged
-                        int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
-                        int year = rs.getInt("YEAR");
-                        //yearFactor can change score from -10 to 10 points
-                        int yearFactor = year == 0 ? 0 : Math.max(-10, 10 - (THIS_YEAR - year));
-                        eresource.setScore(scoreFactor + yearFactor);
-                    }
+                    eresource.setScore(getScore(query, eresource.getTitle(), "Y".equals(rs.getString("CORE")), rs.getInt("SCORE_TITLE"), rs.getInt("SCORE_TEXT"), rs.getInt("YEAR")));
                 }
                 eresource.setDescription(rs.getString("E_DESCRIPTION"));
                 eresources.add(eresource);
@@ -414,5 +323,21 @@ public class CollectionManagerImpl implements CollectionManager {
             }
         }
         return eresources;
+    }
+    
+    private int getScore(String query, String title, boolean isCore, int titleScore, int textScore, int year) {
+        int score = 0;
+        if (query.equalsIgnoreCase(title)) {
+            score = Integer.MAX_VALUE;
+        } else {
+            //core material weighted * 3
+            int coreFactor = isCore ? 3 : 1;
+            //weighted oracle text scores for title and text averaged
+            int scoreFactor = ((titleScore * coreFactor) + (textScore * coreFactor)) / 2;
+            //yearFactor can change score from -10 to 10 points
+            int yearFactor = year == 0 ? 0 : Math.max(-10, 10 - (THIS_YEAR - year));
+            score = scoreFactor + yearFactor;
+        }
+        return score;
     }
 }

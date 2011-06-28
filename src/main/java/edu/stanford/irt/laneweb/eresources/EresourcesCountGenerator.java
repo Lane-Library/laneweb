@@ -21,12 +21,10 @@ public class EresourcesCountGenerator extends AbstractGenerator {
 
     private String query;
 
-    private Set<String> subsets = Collections.emptySet();
-
     private Set<String> types = Collections.emptySet();
 
     public void generate() throws SAXException {
-        Map<String, Integer> results = this.collectionManager.searchCount(this.types, this.subsets, this.query);
+        Map<String, Integer> results = this.collectionManager.searchCount(this.types, this.query);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", SQL_NS);
         XMLUtils.startElement(this.xmlConsumer, SQL_NS, "rowset");
@@ -51,13 +49,6 @@ public class EresourcesCountGenerator extends AbstractGenerator {
             throw new IllegalArgumentException("null collectionManager");
         }
         this.collectionManager = collectionManager;
-    }
-
-    public void setSubsets(final Set<String> subsets) {
-        if (null == subsets) {
-            throw new IllegalArgumentException("null subsets");
-        }
-        this.subsets = subsets;
     }
 
     public void setTypes(final Set<String> types) {
