@@ -44,8 +44,8 @@ public class EresourceSearchResultTest {
         this.eresource2.setTitle("FOO");
         this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
-        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == 0);
-        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == 0);
+        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == -1);
+        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == -1);
     }
 
     /**
@@ -61,8 +61,8 @@ public class EresourceSearchResultTest {
         this.eresource2.setTitle("The Foo");
         this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
-        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == 0);
-        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == 0);
+        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == -1);
+        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == -1);
         this.eresource1.setTitle("a foo");
         this.eresource1.setScore(0);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
@@ -72,9 +72,9 @@ public class EresourceSearchResultTest {
         this.eresource3.setTitle("the foo");
         this.eresource3.setScore(0);
         this.eresourceSearchResult3 = new EresourceSearchResult(this.eresource3);
-        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == 0);
-        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult3) == 0);
-        assertTrue(this.eresourceSearchResult3.compareTo(this.eresourceSearchResult1) == 0);
+        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == -1);
+        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult3) == -1);
+        assertTrue(this.eresourceSearchResult3.compareTo(this.eresourceSearchResult1) == -1);
     }
 
     /**
@@ -111,24 +111,24 @@ public class EresourceSearchResultTest {
         this.eresource2.setTitle("foo");
         this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
-        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == 0);
-        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == 0);
+        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == -1);
+        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == -1);
         this.eresource1.setTitle("an foo");
         this.eresource1.setScore(99);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
         this.eresource2.setTitle("foo");
         this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
-        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == 0);
-        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == 0);
+        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == -1);
+        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == -1);
         this.eresource1.setTitle("the foo");
         this.eresource1.setScore(99);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
         this.eresource2.setTitle("foo");
         this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
-        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == 0);
-        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == 0);
+        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == -1);
+        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == -1);
     }
 
     /**
@@ -144,8 +144,8 @@ public class EresourceSearchResultTest {
         this.eresource2.setTitle("foo");
         this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
-        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == 0);
-        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == 0);
+        assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) == -1);
+        assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) == -1);
         this.eresource1.setTitle("foo");
         this.eresource1.setScore(100);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
