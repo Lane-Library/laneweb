@@ -1,11 +1,6 @@
 CACHE MANIFEST
-## Build Time: ${timestamp}
-# swap comments on next 4 lines to turn off js, css caching for production
 /././resources/javascript/mobile/lane-mobile.js?${project.version}
 /././resources/css/mobile/lane-mobile.css?${project.version}
-#/././resources/javascript/mobile/lane-mobile.js
-#/././resources/css/mobile/lane-mobile.css
-http://www.google-analytics.com/ga.js
 /././apple-touch-icon.png
 /././resources/images/mobile/search.png
 /././resources/images/mobile/cancel.png
@@ -24,12 +19,12 @@ http://www.google-analytics.com/ga.js
 /././resources/images/mobile/selection.png
 /././resources/images/mobile/toolbar.png
 /././resources/images/mobile/toolButton.png
+http://www.google-analytics.com/ga.js
 
 NETWORK:
 /././m/
-/././m/index.html
-http://www.google-analytics.com/__utm.gif
 /././apps/
+http://www.google-analytics.com/__utm.gif
 # comment next 2 lines to turn on js, css caching for production
 #/././resources/css/mobile/lane-mobile.css?${project.version}
 #/././resources/javascript/mobile/lane-mobile.js?${project.version}
