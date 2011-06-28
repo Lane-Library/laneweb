@@ -25,7 +25,7 @@ public class EresourceSearchResult extends EresourceResource implements SearchRe
                 scoreCmp = -1;
             }
         }
-        return (scoreCmp != 0 ? scoreCmp : this.sortTitle.compareTo(other.getSortTitle()));
+        return scoreCmp;
     }
 
     @Override
