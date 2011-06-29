@@ -92,20 +92,6 @@ public class HistoryCollectionManager implements CollectionManager {
         + "AND H_TYPE.TYPE = ? "
         + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String MESH_CORE =
-        "SELECT H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
-        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
-        + "AND H_MESH.TERM = ? "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-        + "AND H_TYPE.TYPE = ? "
-        + "AND H_ERESOURCE.CORE = 'Y' "
-        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
-
     private static final String SEARCH =
         "WITH FOUND AS ( "
         + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, SCORE(1) * 3 AS SCORE_TEXT, "
@@ -255,9 +241,6 @@ public class HistoryCollectionManager implements CollectionManager {
         for (int i = 0; i < types.size(); i++) {
             stringBuffer.append(COUNT_TYPE_UNION);
         }
-//        for (int i = 0; i < subsets.size(); i++) {
-//            stringBuffer.append(COUNT_SUBSET_UNION);
-//        }
         String sql = stringBuffer.toString();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -271,10 +254,6 @@ public class HistoryCollectionManager implements CollectionManager {
                 stmt.setString(index++, type);
                 stmt.setString(index++, type);
             }
-//            for (String subset : subsets) {
-//                stmt.setString(index++, subset);
-//                stmt.setString(index++, subset);
-//            }
             rs = stmt.executeQuery();
             while (rs.next()) {
                 result.put(rs.getString(1), Integer.valueOf(rs.getInt(2)));
