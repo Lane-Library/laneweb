@@ -9,8 +9,6 @@
             href="/extensions/laneconnex-engine.xml"/>
         <link rel="alternate" type="application/rss+xml" title="Lane RSS News"
             href="http://medblog.stanford.edu/lane-news/index.xml"/>
-        <!-- temporarily putting this in for Olya -->
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
         <meta name="WT.seg_1" content="{ipGroup}"/>
     </head>
     <body>
@@ -113,20 +111,21 @@
                                     <li><a href="/portals/emergency.html?laneNav=1">Emergency Medicine</a></li>
                                       <li><a href="/portals/pharmacy.html?laneNav=1">Pharmacy</a></li>
                                     <li><a href="/portals/ihealth.html?laneNav=1">Global Health</a></li>
-                                      <li><a href="/portals/picu.html?laneNav=1">PICU</a></li>
+                                      <li><a href="/portals/pmr.html?laneNav=1">Physical Medicine &amp; Rehab.</a></li>
                                     <li><a href="/portals/hematology.html?laneNav=1">Hematology</a></li>
-                                      <li><a href="/portals/psychiatry.html?laneNav=1">Psychiatry</a></li>
+                                      <li><a href="/portals/picu.html?laneNav=1">PICU</a></li>
                                     <li><a href="/portals/internal-medicine.html?laneNav=1">Internal Medicine</a></li>
-                                      <li><a href="/portals/pulmonary.html?laneNav=1">Pulmonary</a></li>
+                                      <li><a href="/portals/psychiatry.html?laneNav=1">Psychiatry</a></li>
                                     <li><a href="/portals/cvicu.html?laneNav=1">LPCH Heart Center Nursing</a></li>
-                                      <li><a href="/portals/reference.html">Reference Desk</a></li>
+                                      <li><a href="/portals/pulmonary.html?laneNav=1">Pulmonary</a></li>
                                     <li><a href="/portals/medicalEd.html?laneNav=1">Medical Education</a></li>
-                                      <li><a href="/portals/spec-programs.html?laneNav=1">Special Programs</a></li>
+                                      <li><a href="/portals/reference.html">Reference Desk</a></li>
                                     <li><a href="/portals/cultural.html?laneNav=1">Multicultural Health</a></li>
-                                      <li><a href="/portals/spiritual.html?laneNav=1">Spiritual Care</a></li>
+                                      <li><a href="/portals/spec-programs.html?laneNav=1">Special Programs</a></li>
                                     <li><a href="/portals/neurology.html?laneNav=1">Neurology</a></li>
-                                      <li><a href="/classes-consult/infoliteracy-practice.html?laneNav=1">Student</a></li>
+                                      <li><a href="/portals/spiritual.html?laneNav=1">Spiritual Care</a></li>
                                     <li><a href="/portals/nursing.html?laneNav=1">Nursing</a></li>
+                                      <li><a href="/classes-consult/infoliteracy-practice.html?laneNav=1">Student</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -237,6 +236,10 @@
                             <div id="socialMedia">
                                 <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257"
                                     class="image-link"><img src="/resources/images/facebook-color.png" alt=""
+                                        width="27" height="28" /></a>
+                                &#160;
+                                <a href="http://twitter.com/#!/LaneLibStanford"
+                                    class="image-link"><img src="/resources/images/twitter-icon.png" alt=""
                                         width="27" height="28" /></a>
                                 &#160;
                                 <a href="http://www.flickr.com/photos/40390680@N08/" class="image-link noproxy"><img

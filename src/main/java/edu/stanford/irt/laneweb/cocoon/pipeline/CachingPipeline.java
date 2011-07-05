@@ -377,7 +377,7 @@ public class CachingPipeline extends NonCachingPipeline {
                     try {
                         this.transientStore.store(lockKey, lock);
                     } catch (IOException e) {
-                        /* should not happen */
+                        throw new RuntimeException(e);
                     }
                 }
             }

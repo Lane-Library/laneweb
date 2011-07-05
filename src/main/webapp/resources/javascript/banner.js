@@ -7,7 +7,9 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
     	var recursion = function() {
     		if (self.get("automate")) {
         		self.next();
-        		self.autoNext();
+        		if (self.get("cycleCount") < self.get("maxCycles")) {
+            		self.autoNext();
+        		}
     		}
     	};
     	window.setTimeout(recursion, 10000);
@@ -21,6 +23,9 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 		var index = this.get("index"),
 		    navNodes = this.get("navNodes"),
 		    next = (index + 1) >= navNodes.size() ? 0 : index + 1;
+		if (next === 0) {
+			this.set("cycleCount", this.get("cycleCount") + 1);
+		}
 		this.set("index", next);
 	},
 	setNewContent : function(imgSrc, content) {
@@ -54,8 +59,14 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 
 Y.lane.Banner.ATTRS = {
 	automate : {},
+	cycleCount : {
+		value: 0
+	},
 	index : {
 		value : 0
+	},
+	maxCycles : {
+		value : 2
 	},
 	navNodes : {
 		valueFn : function() {
