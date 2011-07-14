@@ -25,11 +25,14 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
 
     private static final String MOBILE_PATH = "/m/";
 
-    public static MobileSiteInterceptor slashM() {
-        return new MobileSiteInterceptor(new StandardSitePreferenceHandler(new CookieSitePreferenceRepository()));
-    }
-
     private final SitePreferenceHandler sitePreferenceHandler;
+    
+    /**
+     * Creates a new Interceptor with a StandardSitePreferenceHandler
+     */
+    public MobileSiteInterceptor() {
+        this(new StandardSitePreferenceHandler(new CookieSitePreferenceRepository()));
+    }
 
     /**
      * Creates a new site switcher.
