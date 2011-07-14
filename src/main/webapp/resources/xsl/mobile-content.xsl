@@ -98,6 +98,13 @@
     </xsl:template>
 
     <!-- select content to show on persistentlogin.html -->
+    <xsl:template match="node()[attribute::id='loginName' and $name != '']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:value-of select="$name"/>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>
     <xsl:template match="h:ul[attribute::id='persistentlogin']/h:li[attribute::id='ploginExtended']">
         <xsl:if test="matches($query-string,'^pl=true')">
             <xsl:copy>
