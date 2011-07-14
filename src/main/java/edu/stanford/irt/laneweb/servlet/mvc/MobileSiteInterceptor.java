@@ -26,7 +26,7 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
     private static final String MOBILE_PATH = "/m/";
 
     private final SitePreferenceHandler sitePreferenceHandler;
-    
+
     /**
      * Creates a new Interceptor with a StandardSitePreferenceHandler
      */
@@ -50,7 +50,7 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
         SitePreference sitePreference = this.sitePreferenceHandler.handleSitePreference(request, response);
         String requestURI = request.getRequestURI();
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
-        if (requestURI.endsWith(".html")) {
+        if (requestURI.endsWith(".html") && requestURI.indexOf("/secure/") == -1) {
             if (requestURI.indexOf(MOBILE_PATH) > -1) {
                 if (sitePreference == SitePreference.NORMAL) {
                     response.sendRedirect(basePath + MOBILE_HELP_PATH);
