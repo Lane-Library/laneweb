@@ -121,18 +121,6 @@
                     }
                 }
             }
-            
-            // turn on/off login, persistent login, logout links 
-            if($('loginLink') && $('ploginLink') && $('logoutLink')) {
-                if( !LANE.readCookie('webauth_at') && !LANE.readCookie('user')){
-                    $('loginLink').style.display = DISPLAY_BLOCK;
-                }
-                else if(LANE.readCookie('webauth_at')||LANE.readCookie('user')){
-                    $('ploginLink').style.display = DISPLAY_BLOCK;
-                    $('logoutLink').style.display = DISPLAY_BLOCK;
-                }
-            }
-            
         }, true);
 
         
@@ -164,14 +152,28 @@
             getIpGroup : function() {
                 return ipGroup;  
             },
-            readCookie : function(name) {
-                var nameEQ = name + "=", ca = document.cookie.split(';'), i, c;
-                for(i=0;i < ca.length;i++) {
-                    c = ca[i];
-                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            validateCookie : function(cookieValid,validTomorrow){
+                if(cookieValid && !validTomorrow){
+                    var loginWarningIssued = confirm("Your persistent login is about to expire.\n Click \"OK\" to extend.");
+                    if(loginWarningIssued == true){
+                        document.location.href = '/././m/persistentlogin.html?pl=true';
+                    }
+                    /*
+                     * TODO: force logout?
+                    else{
+                        document.location.href = '/././logout';
+                    }
+                    */
                 }
-                return null;
+                // toggle login/logout links 
+                if($('loginLink') && $('logoutLink')){
+                    if( cookieValid ){
+                        $('logoutLink').style.display = DISPLAY_BLOCK;
+                    }
+                    else{
+                        $('loginLink').style.display = DISPLAY_BLOCK;
+                    }
+                }
             },
             loadInProgress : loadInProgress
         };

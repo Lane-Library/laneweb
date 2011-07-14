@@ -40,7 +40,6 @@
             <li><a href="hours.html">Hours/Directions</a></li>
             <li><a href="fb.html">Feedback</a></li>
             <li id="loginLink"><a target="_webapp" href="/secure/mobile-login.html">Login</a></li>
-            <li id="ploginLink"><a target="_webapp" href="/m/persistentlogin.html?pl=true">Extend Login</a></li>
             <li id="logoutLink"><a target="_webapp" href="/logout">Logout</a></li>
             <li class="listSpacer"> </li>
             <li class="footer"><span class="fCopy">&copy; Stanford</span> <a href="hours.html">CONTACT</a> <span class="fFV"><a target="_self" href="/?site_preference=normal">FULL VERSION</a></span></li>
@@ -81,5 +80,6 @@
         
         <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${project.version}"> </script>
         <script type="text/javascript" src="/apps/ipGroupFetch?callback=LANE.setIpGroup"> </script>
+        <script type="text/javascript" src="/apps/loginCookieValidator?callback=LANE.validateCookie"> </script>
     </body>
 </html>
