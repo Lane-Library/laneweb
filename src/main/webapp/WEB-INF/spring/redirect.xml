@@ -41,6 +41,7 @@
                             <entry key="/local/antibiogram/index\.html(.*)" value="/newpage.html?page=/biomed-resources/antibiograms-shc.html$1"/>
                             <entry key="/local/antibiogramLPCH/index\.html(.*)" value="/newpage.html?page=/biomed-resources/antibiograms-lpch.html$1"/>
                             <entry key="/local/(antibiogram(?:LPCH)?)/(.*)" value="/newpage.html?page=/biomed-resources/$1/$2"/>
+                            <entry key="/m/lane.manifest" value="/resources/mobile/lane.manifest"/> <!--  TODO: remove manifest redirect once laneweb-1.12 has been in production 30 days -->
                         </map>
                     </property>
                 </bean>
