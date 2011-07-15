@@ -10,8 +10,8 @@
     <body>
         <div class="toolbar">
             <h1 id="pageTitle"> </h1>
-            <a class="staticBackButton button" target="_webapp" href="/m/">Back</a>
-            <a class="homeButton" style="display:inline;" target="_webapp" href="/m/" title="home"> </a>
+            <a class="staticBackButton button" target="_webapp" href="/m/index.html?${project.version}">Back</a>
+            <a class="homeButton" style="display:inline;" target="_webapp" href="/m/index.html?${project.version}" title="home"> </a>
             <span id="loading">&nbsp;</span>
         </div>
         
@@ -19,7 +19,7 @@
             <li id="loginName"> </li>
             <li id="ploginExtended">
                 <p>Your browser will stay authenticated to Lane Mobile and our proxy server for 2 weeks. If this is a shared machine or your don't want Lane Mobile to remember your login information, click one of the links below.</p>
-                <p><a target="_webapp" href="/m/">Return to Lane Mobile</a></p>
+                <p><a target="_webapp" href="/m/index.html?${project.version}">Return to Lane Mobile</a></p>
                 <p><a href="persistentlogin.html?remove-pl=true">Disable persistent login</a></p>
                 <p><a target="_webapp" href="/logout">Logout</a></p>
             </li>
