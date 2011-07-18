@@ -2,17 +2,28 @@
     LANE = function() {
         var $ = iui.$, 
         d = document,
-        searchInput = $('searchInput'),
-        pico = $('pico'),
-        searchCancel = $('searchCancel'),
-        backButton = $('backButton'),
-        loadingElm = $('loading'),
-        ipGroup,
         DISPLAY_BLOCK = 'block',
         DISPLAY_NONE = 'none',
+        backButton = $('backButton'),
+        loadingElm = $('loading'),
+        loginLink = $('loginLink'),
+        logoutLink = $('logoutLink'),
+        pico = $('pico'),
+        searchCancel = $('searchCancel'),
+        searchInput = $('searchInput'),
         iuiGoBack,
+        ipGroup,
         loadInProgress = false;
 
+        if(logoutLink){
+            logoutLink.addEventListener("click", function(e) {
+                e.preventDefault();
+                if(true == confirm("Logout Confirmation\n\n Click \"OK\" to logout or \"Cancel\" to stay logged in.")){
+                    document.location.href = e.target.href;
+                }
+            }, true);
+        }
+        
         if(searchInput){
             searchInput.addEventListener("keyup", function(e) {
                 searchCancel.style.display = (!e.target.value) ? DISPLAY_NONE : DISPLAY_BLOCK;
@@ -166,12 +177,12 @@
                     */
                 }
                 // toggle login/logout links 
-                if($('loginLink') && $('logoutLink')){
+                if(loginLink && logoutLink){
                     if( cookieValid ){
-                        $('logoutLink').style.display = DISPLAY_BLOCK;
+                        logoutLink.style.display = DISPLAY_BLOCK;
                     }
                     else{
-                        $('loginLink').style.display = DISPLAY_BLOCK;
+                        loginLink.style.display = DISPLAY_BLOCK;
                     }
                 }
             },
