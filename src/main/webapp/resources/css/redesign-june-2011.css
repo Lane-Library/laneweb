@@ -84,7 +84,7 @@
     padding : 11px;
     background-color : #e6e4dc;
     /*requred for IE < 8:*/
-    *height:350px
+    *height:404px
 }
 #portalList:after {
     content : ".";
