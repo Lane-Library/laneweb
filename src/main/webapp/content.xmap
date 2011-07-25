@@ -159,15 +159,6 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <!-- TODO: temporarily moved this out of caching pipeline to work on personalization
-                will have to work out caching mechanism before implementing this -->
-            <map:match pattern="templates/**.xml" type="wildcard">
-                <map:generate type="file" src="resources/templates/{1}.xml"/>
-                <map:transform type="joost" src="resources/xsl/personal.stx"/>
-                <map:transform type="xinclude"/>
-                <map:transform type="joost" src="resources/xsl/template-menu-includes.stx"/>
-                <map:serialize type="xml"/>
-                </map:match>
             <!--<map:match pattern="samples/*bookmarks.html" type="wildcard">
                 <map:generate type="html" src="${content-base}/samples/bookmarks.html"/>
                 <map:transform type="joost" src="resources/xsl/bookmarks.stx"/>
@@ -191,7 +182,6 @@
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="${content-base}/secure/{1}"/>
                 <map:transform type="xinclude"/>
-                <!--<map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>-->
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
@@ -218,7 +208,6 @@
                     <map:parameter name="cache-key" value=";selection=${selection}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
-                <!--<map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>-->
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
@@ -267,19 +256,16 @@
                 <map:transform type="saxon" src="resources/xsl/popup-faq.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- TODO: temporarily moving this out of caching pipeline to work on personalization
-                will have to work out caching mechanism before implementing this -->
-            <!--<map:match pattern="templates/**.xml" type="wildcard">
+            <map:match pattern="templates/**.xml" type="wildcard">
                 <map:generate type="file" src="resources/templates/{1}.xml"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="joost" src="resources/xsl/template-menu-includes.stx"/>
                 <map:serialize type="xml"/>
-            </map:match>-->
+            </map:match>
             <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="${content-base}/error.html"/>
                 <map:transform type="xinclude"/>
-                <!--<map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>-->
                 <map:serialize type="xml" status-code="403"/>
             </map:match>
             <!-- reference portal is the only page with xincluded rss -->
@@ -289,21 +275,9 @@
                 <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- TODO: temporarily testing of intermittent NullPointerExceptions -->
-            <map:match pattern="portals/cvicu-test.html" type="wildcard">
-                <map:generate type="html" src="${content-base}/portals/cvicu.html"/>
-                <map:transform type="xinclude"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <!-- TODO: uncomment this to permit different feedback in develpment version of application-->
-            <!--<map:match type="wildcard" pattern="help/feedback1.html">
-                <map:generate type="html" src="/resources/feedback1.html"/>
-                <map:serialize type="xml"/>
-            </map:match>-->
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="${content-base}/{1}"/>
                 <map:transform type="xinclude"/>
-                <!--<map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>-->
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
