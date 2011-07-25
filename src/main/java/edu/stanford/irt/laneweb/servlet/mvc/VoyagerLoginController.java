@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
@@ -20,8 +20,6 @@ import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
 @Controller
-//FIXME: @SessionAttributes don't work the way I figured, remove them . . .
-@SessionAttributes({ Model.UNIVID, Model.SUNETID })
 public class VoyagerLoginController {
 
     private static final String BEAN_ROOT_NAME = VoyagerLogin.class.getName() + "/";
@@ -40,8 +38,16 @@ public class VoyagerLoginController {
     }
 
     @ModelAttribute(Model.UNIVID)
-    public String getUnivId(@ModelAttribute(Model.SUNETID) final String sunetid) {
-        return this.ldapDataSource.getLdapData(sunetid).getUnivId();
+    public String getUnivId(final HttpServletRequest request, @ModelAttribute(Model.SUNETID) final String sunetid) {
+        HttpSession session = request.getSession();
+        String univId = (String) session.getAttribute(Model.UNIVID);
+        if (univId == null) {
+            univId = this.ldapDataSource.getLdapData(sunetid).getUnivId();
+            if (univId != null) {
+                session.setAttribute(Model.UNIVID, univId);
+            }
+        }
+        return univId;
     }
 
     @RequestMapping(value = "/secure/voyager/{db}")
