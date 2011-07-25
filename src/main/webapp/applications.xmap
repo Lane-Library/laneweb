@@ -141,7 +141,6 @@
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>
-
                 <!-- search facet counts -->
                 <map:match pattern="search/facets/json" type="wildcard">
                     <map:generate type="file" src="apps:/cache/search/templates/xml"/>
