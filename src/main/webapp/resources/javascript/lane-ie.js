@@ -29,18 +29,21 @@
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).addClass("child");
         }
+        //add ie6Feedback to feedbackLink to get position : absolute from feedback.css
         node = Y.one("#feedbackLink");
         if (node) {
-        	node.setStyle("position", "absolute");
-        	node.setStyle("right", "0px");
-        	node.setStyle("top", "300px");
+        	node.addClass("ie6Feedback");
         }
     }
     if (Y.UA.ie && Y.UA.ie <= 8) {
         //mimic .module:after so subsequent elements are cleared
         nodes = Y.all(".module");
         for (i = 0; i < nodes.size(); i++) {
-            nodes.item(i).append(Y.Node.create("<span class='after'/>"));
+            nodes.item(i).append("<span class='after'/>");
+        }
+        node = Y.one("#topResources");
+        if (node) {
+        	node.insert("<span class='after'/>", "after");
         }
     }
     if (Y.UA.ie) {

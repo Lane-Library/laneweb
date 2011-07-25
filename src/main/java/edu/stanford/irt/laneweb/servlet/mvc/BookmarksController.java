@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-//import java.util.Collections;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.Bookmarks;
@@ -19,8 +16,6 @@ import edu.stanford.irt.laneweb.bookmarks.BookmarksDAO;
 import edu.stanford.irt.laneweb.model.Model;
 
 @Controller
-//FIXME: @SessionAttributes don't work the way I figured, remove them . . .
-@SessionAttributes({ Model.BOOKMARKS, Model.EMRID })
 @RequestMapping(value = "/bookmarks")
 public class BookmarksController {
 

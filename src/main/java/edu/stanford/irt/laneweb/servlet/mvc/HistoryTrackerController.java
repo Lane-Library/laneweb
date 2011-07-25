@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.Bookmarks;
@@ -14,8 +13,6 @@ import edu.stanford.irt.laneweb.history.HistoryDAO;
 import edu.stanford.irt.laneweb.model.Model;
 
 @Controller
-//FIXME: @SessionAttributes don't work the way I figured, remove them . . .
-@SessionAttributes({ Model.HISTORY, Model.EMRID })
 @RequestMapping(value = "/history")
 public class HistoryTrackerController {
     
