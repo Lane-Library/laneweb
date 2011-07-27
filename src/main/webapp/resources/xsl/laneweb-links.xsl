@@ -7,18 +7,6 @@
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
-            <!-- 
-                //FIXME: uncomment before putting into production
-                
-            <xsl:when
-                test="starts-with(.,'http://lane.stanford.edu') and not(contains(.,'cookiesFetch'))">
-                <xsl:call-template name="make-link">
-                    <xsl:with-param name="link"
-                        select="substring-after(.,'http://lane.stanford.edu')"/>
-                    <xsl:with-param name="attr" select="'href'"/>
-                </xsl:call-template>
-            </xsl:when>
-            -->
             <xsl:when test="contains(., '://') and contains(.,'{search-terms}')">
                 <xsl:attribute name="href">
                     <xsl:value-of select="replace(.,'\{search-terms\}',$regex-query)"/>
