@@ -19,15 +19,12 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
 
     @Override
     public Collection<Eresource> search(final String query) {
-        Collection<String> params = searchStringToParams(query);
-        return doSearch(getSearchSQL(), params);
+        return doSearch(getSearchSQL(), getSearchParams(query));
     }
 
     @Override
     public Collection<Eresource> searchType(final String type, final String query) {
-        Collection<String> params = searchStringToParams(query);
-        params.add(type);
-        return doSearch(getSearchTypeSQL(), params);
+        return doSearch(getSearchTypeSQL(), getSearchTypeParams(type, query));
     }
 
     private Collection<Eresource> doSearch(final String sql, final Collection<String> params) {
@@ -75,6 +72,8 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
     protected abstract String getSearchSQL();
 
     protected abstract String getSearchTypeSQL();
-
-    protected abstract Collection<String> searchStringToParams(String query);
+    
+    protected abstract Collection<String> getSearchParams(String query);
+    
+    protected abstract Collection<String> getSearchTypeParams(String type, String query);
 }
