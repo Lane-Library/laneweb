@@ -14,6 +14,8 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends CollectionManagerImpl {
+    
+    private static final int MAX_SUGGESTION_COUNT = 10;
 
     protected QueryNormalizer queryNormalizer = new QueryNormalizer();
 
@@ -54,7 +56,8 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         EresourceImpl eresource = null;
         int currentEresourceId = 0;
         String currentTitle = null;
-        while (rs.next()) {
+        int count = 0;
+        while (rs.next() && count++ < MAX_SUGGESTION_COUNT) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             String rowTitle = rs.getString("TITLE");
             if (rowEresourceId != currentEresourceId || !rowTitle.equals(currentTitle)) {

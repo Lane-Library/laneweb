@@ -16,14 +16,7 @@ public class EresourceCollectionManager extends AbstractSuggestCollectionManager
     + "SELECT TITLE, "
     + "    ERESOURCE_ID, "
     + "    NLSSORT_TITLE, "
-    + "    SCORE(1)   * 2       AS SCORE "
-    + "      FROM ERESOURCE "
-    + "      WHERE CONTAINS(TITLE,?,1) > 0 "
-    + "UNION "
-    + "SELECT TITLE, "
-    + "    ERESOURCE_ID, "
-    + "    NLSSORT_TITLE, "
-    + "    SCORE(1)          AS SCORE "
+    + "    (CONTAINS(TITLE,?) * 2) + SCORE(1) AS SCORE "
     + "      FROM ERESOURCE "
     + "      WHERE CONTAINS(TEXT,?,1) > 0 "
     + "ORDER BY SCORE DESC, "
@@ -36,25 +29,16 @@ public class EresourceCollectionManager extends AbstractSuggestCollectionManager
     + "    300 as SCORE "
     + "      FROM ERESOURCE, TYPE "
     + "      WHERE ASCII_TITLE LIKE CONVERT(?,'US7ASCII') || '%' "
-    + "          AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE+ID "
+    + "          AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
     + "          AND TYPE = ? "
     + "UNION "
     + "SELECT TITLE, "
     + "    ERESOURCE.ERESOURCE_ID, "
     + "    NLSSORT_TITLE, "
-    + "    SCORE(1)   * 2       AS SCORE "
-    + "      FROM ERESOURCE "
-    + "      WHERE CONTAINS(TITLE,?,1) > 0 "
-    + "          AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE+ID "
-    + "          AND TYPE = ? "
-    + "UNION "
-    + "SELECT TITLE, "
-    + "    ERESOURCE.ERESOURCE_ID, "
-    + "    NLSSORT_TITLE, "
-    + "    SCORE(1)          AS SCORE "
-    + "      FROM ERESOURCE "
+    + "    (CONTAINS(TITLE,?) * 2) + SCORE(1) AS SCORE "
+    + "      FROM ERESOURCE, TYPE "
     + "      WHERE CONTAINS(TEXT,?,1) > 0 "
-    + "          AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE+ID "
+    + "          AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
     + "          AND TYPE = ? "
     + "ORDER BY SCORE DESC, "
     + "  NLSSORT_TITLE ";
@@ -84,7 +68,6 @@ public class EresourceCollectionManager extends AbstractSuggestCollectionManager
         params.add(this.queryNormalizer.normalizeForLike(query));
         params.add(type);
         params.add(this.queryNormalizer.normalizeForWildcardContains(query));
-        params.add(type);
         params.add(this.queryNormalizer.normalizeForContains(query));
         params.add(type);
         return params;
