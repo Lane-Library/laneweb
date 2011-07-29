@@ -60,7 +60,7 @@ public class SuggestionController {
         sb.append(JSON_1);
         String maybeComma = "\"";
         int count = 0;
-        for (Iterator<Suggestion> it = result.iterator(); it.hasNext() && count <= JSON_RETURN_LIMIT; count++) {
+        for (Iterator<Suggestion> it = result.iterator(); it.hasNext() && count < JSON_RETURN_LIMIT; count++) {
             sb.append(maybeComma).append(escapeQuotes(it.next().getSuggestionTitle())).append('"');
             maybeComma = ",\"";
         }
