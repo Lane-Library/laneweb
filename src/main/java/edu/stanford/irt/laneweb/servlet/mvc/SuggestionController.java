@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
@@ -51,20 +52,16 @@ public class SuggestionController {
         SuggestionComparator comparator = new SuggestionComparator(query);
         Collection<Suggestion> suggestions = internalGetSuggestions(query, l);
         TreeSet<Suggestion> result = new TreeSet<Suggestion>(comparator);
-        for (Suggestion suggestion : suggestions) {
-            result.add(suggestion);
-            if (result.size() >= JSON_RETURN_LIMIT) {
-                break;
-            }
-        }
+        result.addAll(suggestions);
         StringBuilder sb = new StringBuilder();
         if (callback != null) {
             sb.append(callback).append(OPEN_CALLBACK);
         }
         sb.append(JSON_1);
         String maybeComma = "\"";
-        for (Suggestion suggestion : result) {
-            sb.append(maybeComma).append(escapeQuotes(suggestion.getSuggestionTitle())).append('"');
+        int count = 0;
+        for (Iterator<Suggestion> it = result.iterator(); it.hasNext() && count <= JSON_RETURN_LIMIT; count++) {
+            sb.append(maybeComma).append(escapeQuotes(it.next().getSuggestionTitle())).append('"');
             maybeComma = ",\"";
         }
         sb.append(JSON_2);
