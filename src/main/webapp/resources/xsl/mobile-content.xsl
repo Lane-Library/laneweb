@@ -79,9 +79,9 @@
                 <xsl:when test="@href = '/logout' or starts-with(@href,'/secure')">
                     <xsl:apply-templates select="attribute::node()"/>
                 </xsl:when>
-                <xsl:when test="matches(@href,'http.*lane(-local|-stage)?.stanford.edu/[^m/]')">
+                <xsl:when test="matches(@href,'https?://(irt-)?lane(-local|-stage)?\.stanford\.edu/[^m/]')">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="replace(@href,'http.*lane(-local|-stage)?.stanford.edu/',concat($base-path,'/m/lc2txt/'))"/>
+                        <xsl:value-of select="replace(@href,'https?://(irt-)?lane(-local|-stage)?\.stanford\.edu/',concat($base-path,'/m/lc2txt/'))"/>
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:when test="starts-with(@href,'/') and contains(@href,'.html') and not(contains(@href,'/m/'))">
