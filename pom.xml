@@ -509,7 +509,7 @@
         <dependency>
             <artifactId>eresources-impl</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.7.0-SNAPSHOT</version>
+            <version>1.8.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>icu4j</artifactId>
@@ -542,7 +542,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.29.0</version>
+            <version>1.30.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
