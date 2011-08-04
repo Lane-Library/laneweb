@@ -560,7 +560,7 @@
             <artifactId>junit</artifactId>
             <groupId>junit</groupId>
             <scope>test</scope>
-            <version>4.8.1</version>
+            <version>4.8.2</version>
         </dependency>
         <dependency>
             <artifactId>log4j</artifactId>
@@ -622,7 +622,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.40</version>
+            <version>1.6.41</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>
