@@ -16,9 +16,11 @@ import org.slf4j.LoggerFactory;
 public abstract class JdbcUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(JdbcUtils.class);
+    
+    private JdbcUtils() {}
 
     /**
-     * Close the given JDBC Connection and ignore any thrown exception. This is
+     * Close the given JDBC Connection and ignore any thrown SQLException. This is
      * useful for typical finally blocks in manual JDBC code.
      * 
      * @param con
@@ -29,17 +31,13 @@ public abstract class JdbcUtils {
             try {
                 con.close();
             } catch (SQLException ex) {
-                LOG.debug("Could not close JDBC Connection", ex);
-            } catch (Throwable ex) {
-                // We don't trust the JDBC driver: It might throw
-                // RuntimeException or Error.
-                LOG.debug("Unexpected exception on closing JDBC Connection", ex);
+                LOG.warn("Could not close JDBC Connection", ex);
             }
         }
     }
 
     /**
-     * Close the given JDBC ResultSet and ignore any thrown exception. This is
+     * Close the given JDBC ResultSet and ignore any thrown SQLException. This is
      * useful for typical finally blocks in manual JDBC code.
      * 
      * @param rs
@@ -50,17 +48,13 @@ public abstract class JdbcUtils {
             try {
                 rs.close();
             } catch (SQLException ex) {
-                LOG.trace("Could not close JDBC ResultSet", ex);
-            } catch (Throwable ex) {
-                // We don't trust the JDBC driver: It might throw
-                // RuntimeException or Error.
-                LOG.trace("Unexpected exception on closing JDBC ResultSet", ex);
+                LOG.warn("Could not close JDBC ResultSet", ex);
             }
         }
     }
 
     /**
-     * Close the given JDBC Statement and ignore any thrown exception. This is
+     * Close the given JDBC Statement and ignore any thrown SQLException. This is
      * useful for typical finally blocks in manual JDBC code.
      * 
      * @param stmt
@@ -71,11 +65,7 @@ public abstract class JdbcUtils {
             try {
                 stmt.close();
             } catch (SQLException ex) {
-                LOG.trace("Could not close JDBC Statement", ex);
-            } catch (Throwable ex) {
-                // We don't trust the JDBC driver: It might throw
-                // RuntimeException or Error.
-                LOG.trace("Unexpected exception on closing JDBC Statement", ex);
+                LOG.warn("Could not close JDBC Statement", ex);
             }
         }
     }
