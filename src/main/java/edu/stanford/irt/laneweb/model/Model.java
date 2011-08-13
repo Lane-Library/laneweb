@@ -5,111 +5,111 @@ package edu.stanford.irt.laneweb.model;
  */
 public interface Model {
 
-    public static final String ALPHA = "alpha";
+    String ALPHA = "alpha";
     
-    public static final String BANNER = "banner";
+    String BANNER = "banner";
 
-    public static final String BASE_PATH = "base-path";
+    String BASE_PATH = "base-path";
 
-    public static final String BASSETT_NUMBER = "basset-number";
+    String BASSETT_NUMBER = "basset-number";
 
-    public static final String BOOKMARKS = "bookmarks";
+    String BOOKMARKS = "bookmarks";
 
-    public static final String CALLBACK = "callback";
+    String CALLBACK = "callback";
 
-    public static final String CLASS_ID = "class-id";
+    String CLASS_ID = "class-id";
 
-    public static final String CONTENT_BASE = "content-base";
+    String CONTENT_BASE = "content-base";
 
-    public static final String DEBUG = "debug";
+    String DEBUG = "debug";
 
-    public static final String EMRID = "emrid";
+    String EMRID = "emrid";
 
-    public static final String ENGINES = "engines";
+    String ENGINES = "engines";
 
-    public static final String ENTRY_URL = "entry-url";
+    String ENTRY_URL = "entry-url";
 
-    public static final String FACETS = "facets";
+    String FACETS = "facets";
 
-    public static final String HOST = "host";
+    String HOST = "host";
     
-    public static final String HISTORY = "history";
+    String HISTORY = "history";
 
-    public static final String IPGROUP = "ipgroup";
+    String IPGROUP = "ipgroup";
 
-    public static final String LIMIT = "limit";
+    String LIMIT = "limit";
 
-    public static final String LIVE_CHAT_AVAILABLE = "live-chat-available";
+    String LIVE_CHAT_AVAILABLE = "live-chat-available";
 
-    public static final String MEDBLOG_BASE = "medblog-base";
+    String MEDBLOG_BASE = "medblog-base";
 
-    public static final String MESH = "mesh";
+    String MESH = "mesh";
 
-    public static final String MODEL = "model";
+    String MODEL = "model";
 
-    public static final String NAME = "name";
+    String NAME = "name";
 
-    public static final String PAGE = "page";
+    String PAGE = "page";
 
-    public static final String PAGE_NUMBER = "pageNumber";
+    String PAGE_NUMBER = "pageNumber";
 
-    public static final String PARENT_PATH = "parent-path";
+    String PARENT_PATH = "parent-path";
 
-    public static final String PASSWORD = "password";
+    String PASSWORD = "password";
 
-    public static final String PERSISTENT_LOGIN = "persistent-login";
+    String PERSISTENT_LOGIN = "persistent-login";
 
-    public static final String PID = "pid";
+    String PID = "pid";
 
-    public static final String PROXY_LINKS = "proxy-links";
+    String PROXY_LINKS = "proxy-links";
 
-    public static final String QUERY = "query";
+    String QUERY = "query";
 
-    public static final String QUERY_STRING = "query-string";
+    String QUERY_STRING = "query-string";
 
-    public static final String REFERRER = "referrer";
+    String REFERRER = "referrer";
 
-    public static final String REGION = "region";
+    String REGION = "region";
 
-    public static final String RELEASE = "release";
+    String RELEASE = "release";
 
-    public static final String REMOTE_ADDR = "remote-addr";
+    String REMOTE_ADDR = "remote-addr";
 
-    public static final String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
+    String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
 
-    public static final String REQUEST_URI = "request-uri";
+    String REQUEST_URI = "request-uri";
 
-    public static final String RESOURCE_ID = "rid";
+    String RESOURCE_ID = "rid";
 
-    public static final String RESOURCES = "resources";
+    String RESOURCES = "resources";
 
-    public static final String SELECTION = "selection";
+    String SELECTION = "selection";
 
-    public static final String SOURCE = "source";
+    String SOURCE = "source";
 
-    public static final String SOURCEID = "sourceid";
+    String SOURCEID = "sourceid";
 
-    public static final String SUBSET = "subset";
+    String SUBSET = "subset";
 
-    public static final String SUNETID = "sunetid";
+    String SUNETID = "sunetid";
 
-    public static final String SYNCHRONOUS = "synchronous";
+    String SYNCHRONOUS = "synchronous";
 
-    public static final String TEMPLATE = "template";
+    String TEMPLATE = "template";
 
-    public static final String TICKET = "ticket";
+    String TICKET = "ticket";
 
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
-    public static final String TITLE = "title";
+    String TITLE = "title";
 
-    public static final String TYPE = "type";
+    String TYPE = "type";
 
-    public static final String UNIVID = "univid";
+    String UNIVID = "univid";
 
-    public static final String URL = "url";
+    String URL = "url";
 
-    public static final String USER_COOKIE = "user-cookie";
+    String USER_COOKIE = "user-cookie";
 
-    public static final String VERSION = "version";
+    String VERSION = "version";
 }

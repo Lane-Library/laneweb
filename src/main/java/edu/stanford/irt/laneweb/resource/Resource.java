@@ -4,79 +4,79 @@ import org.apache.excalibur.xml.sax.XMLizable;
 
 public interface Resource extends XMLizable {
 
-    public static final String AUTHOR = "pub-author";
+    String AUTHOR = "pub-author";
 
-    public static final String CONTENT_HIT_COUNTS = "contentHitCounts";
+    String CONTENT_HIT_COUNTS = "contentHitCounts";
 
-    public static final String CONTENT_ID = "contentId";
+    String CONTENT_ID = "contentId";
 
-    public static final String DATES = "dates";
+    String DATES = "dates";
 
-    public static final String DESCRIPTION = "description";
+    String DESCRIPTION = "description";
 
-    public static final String DESCRIPTION_LABEL = "desc-label";
+    String DESCRIPTION_LABEL = "desc-label";
     
-    public static final String EMPTY_NS = "";
+    String EMPTY_NS = "";
 
-    public static final String ID = "id";
+    String ID = "id";
 
-    public static final String INSTRUCTION = "instruction";
+    String INSTRUCTION = "instruction";
 
-    public static final String KEYWORD = "keyword";
+    String KEYWORD = "keyword";
 
-    public static final String LABEL = "label";
+    String LABEL = "label";
 
-    public static final String LINK = "link";
+    String LINK = "link";
 
-    public static final String LINKS = "links";
+    String LINKS = "links";
 
-    public static final String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
+    String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
 
-    public static final String PAGES = "pub-pages";
+    String PAGES = "pub-pages";
 
-    public static final String PUBLICATION_DATE = "pub-date";
+    String PUBLICATION_DATE = "pub-date";
 
-    public static final String PUBLICATION_ISSUE = "pub-issue";
+    String PUBLICATION_ISSUE = "pub-issue";
 
-    public static final String PUBLICATION_TITLE = "pub-title";
+    String PUBLICATION_TITLE = "pub-title";
 
-    public static final String PUBLICATION_VOLUME = "pub-volume";
+    String PUBLICATION_VOLUME = "pub-volume";
 
-    public static final String PUBLISHER = "publisher";
+    String PUBLISHER = "publisher";
 
-    public static final String QUERY = "query";
+    String QUERY = "query";
 
-    public static final String RECORD_ID = "recordId";
+    String RECORD_ID = "recordId";
 
-    public static final String RECORD_TYPE = "recordType";
+    String RECORD_TYPE = "recordType";
 
-    public static final String RESOURCE = "resource";
+    String RESOURCE = "resource";
 
-    public static final String RESOURCE_HITS = "resourceHits";
+    String RESOURCE_HITS = "resourceHits";
 
-    public static final String RESOURCE_ID = "resourceId";
+    String RESOURCE_ID = "resourceId";
 
-    public static final String RESOURCE_NAME = "resourceName";
+    String RESOURCE_NAME = "resourceName";
 
-    public static final String RESOURCE_URL = "resourceUrl";
+    String RESOURCE_URL = "resourceUrl";
 
-    public static final String RESOURCES = "resources";
+    String RESOURCES = "resources";
 
-    public static final String RESULT = "result";
+    String RESULT = "result";
 
-    public static final String SCORE = "score";
+    String SCORE = "score";
 
-    public static final String SIZE = "size";
+    String SIZE = "size";
 
-    public static final String SUMMARY_HOLDINGS = "summaryHoldings";
+    String SUMMARY_HOLDINGS = "summaryHoldings";
 
-    public static final String TITLE = "title";
+    String TITLE = "title";
 
-    public static final String TYPE = "type";
+    String TYPE = "type";
 
-    public static final String URL = "url";
+    String URL = "url";
 
-    public static final String VERSION = "version";
+    String VERSION = "version";
 
-    public static final String VERSIONS = "versions";
+    String VERSIONS = "versions";
 }
