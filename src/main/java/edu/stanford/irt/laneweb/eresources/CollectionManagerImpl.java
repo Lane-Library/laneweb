@@ -28,10 +28,10 @@ public class CollectionManagerImpl implements CollectionManager {
     private static final String $1_SELECT =
             "SELECT ERESOURCE.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
-                    + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE ";
+                    + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION ";
 
     private static final String BROWSE = $1_SELECT
-                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
@@ -40,7 +40,6 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String BROWSE_ALPHA = $1_SELECT
-                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
@@ -50,7 +49,6 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String BROWSE_NONALPHA = $1_SELECT
-                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
@@ -61,7 +59,6 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String CORE = $1_SELECT
-                    + "FROM ERESOURCE, VERSION, LINK, TYPE, DESCRIPTION "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND ERESOURCE.CORE = 'Y' "
@@ -81,7 +78,7 @@ public class CollectionManagerImpl implements CollectionManager {
             " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE TYPE = ?";
 
     private static final String MESH = $1_SELECT
-                    + "FROM ERESOURCE, VERSION, LINK, MESH, TYPE, DESCRIPTION "
+                    + ", MESH "
                     + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
                     + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
                     + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
