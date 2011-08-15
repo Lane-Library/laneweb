@@ -4,13 +4,49 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import edu.stanford.irt.laneweb.model.Model;
 
+//TODO: have a set of parameters where the model name is the same as the parameter names
 public class RequestParameterDataBinder implements DataBinder {
+
+    private static final String[][] PARAMETER_ARRAY_MODEL = { { "r", Model.RESOURCES }, { "e", Model.ENGINES } };
+
+    private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE }, { "s", Model.SUBSET },
+            { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS }, { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER },
+            { "r", Model.REGION }, { "source", Model.SOURCE }, { "sourceid", Model.SOURCEID }, { "host", Model.HOST },
+            { "release", Model.RELEASE }, { "password", Model.PASSWORD }, { "PID", Model.PID },
+            { "page-number", Model.PAGE_NUMBER }, { Model.CALLBACK, Model.CALLBACK }, { Model.URL, Model.URL },
+            { Model.BASSETT_NUMBER, Model.BASSETT_NUMBER }, { Model.SELECTION, Model.SELECTION }, { Model.TITLE, Model.TITLE },
+            { "entryUrl", Model.ENTRY_URL }, { Model.PAGE, Model.PAGE }, { "pl", Model.PERSISTENT_LOGIN },
+            { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN }, { "rid", Model.RESOURCE_ID }, { Model.SYNCHRONOUS, Model.SYNCHRONOUS },
+            { Model.TIMEOUT, Model.TIMEOUT }, { Model.CLASS_ID, Model.CLASS_ID }, { Model.BANNER, Model.BANNER } };
+
+    /**
+     * parameterArrayModelMap contains the mapping of parameter names to model name of model attributes
+     * that are Lists
+     */
+    private Map<String, String> parameterArrayModelMap;
+
+    /**
+     * parameterModelMap contains the mapping of parameter names to model names.
+     */
+    private Map<String, String> parameterModelMap;
+
+    public RequestParameterDataBinder() {
+        this.parameterModelMap = new HashMap<String, String>();
+        for (int i = 0; i < PARAMETER_MODEL.length; i++) {
+            this.parameterModelMap.put(PARAMETER_MODEL[i][0], PARAMETER_ARRAY_MODEL[i][1]);
+        }
+        this.parameterArrayModelMap = new HashMap<String, String>();
+        for (String[] element : PARAMETER_ARRAY_MODEL) {
+            this.parameterArrayModelMap.put(element[0], element[1]);
+        }
+    }
 
     @SuppressWarnings("rawtypes")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -18,73 +54,17 @@ public class RequestParameterDataBinder implements DataBinder {
             String name = (String) params.nextElement();
             String value = request.getParameter(name);
             if ("q".equals(name)) {
-                model.put(Model.QUERY, value);
                 try {
                     model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
                 }
-            } else if ("t".equals(name)) {
-                model.put(Model.TYPE, value);
-            } else if ("s".equals(name)) {
-                model.put(Model.SUBSET, value);
-            } else if ("a".equals(name)) {
-                model.put(Model.ALPHA, value);
-            } else if ("m".equals(name)) {
-                model.put(Model.MESH, value);
-            } else if ("f".equals(name)) {
-                model.put(Model.FACETS, value);
-            } else if ("l".equals(name)) {
-                model.put(Model.LIMIT, value);
-            } else if ("bn".equals(name)) {
-                model.put(Model.BASSETT_NUMBER, value);
-            } else if ("r".equals(name)) {
-                model.put(Model.RESOURCES, Arrays.asList(request.getParameterValues(name)));
-                model.put(Model.REGION, value);
-            } else if ("e".equals(name)) {
-                model.put(Model.ENGINES, Arrays.asList(request.getParameterValues(name)));
-            } else if ("source".equals(name)) {
-                model.put(Model.SOURCE, value);
-            } else if ("sourceid".equals(name)) {
-                model.put(Model.SOURCEID, value);
-            } else if ("host".equals(name)) {
-                model.put(Model.HOST, value);
-            } else if ("release".equals(name)) {
-                model.put(Model.RELEASE, value);
-            } else if ("password".equals(name)) {
-                model.put(Model.PASSWORD, value);
-            } else if ("PID".equals(name)) {
-                model.put(Model.PID, value);
-            } else if ("page-number".equals(name)) {
-                model.put(Model.PAGE_NUMBER, value);
-            } else if (Model.CALLBACK.equals(name)) {
-                model.put(Model.CALLBACK, value);
-            } else if (Model.URL.equals(name)) {
-                model.put(Model.URL, value);
-            } else if (Model.BASSETT_NUMBER.equals(name)) {
-                model.put(Model.BASSETT_NUMBER, value);
-            } else if (Model.SELECTION.equals(name)) {
-                model.put(Model.SELECTION, value);
-            } else if (Model.TITLE.equals(name)) {
-                model.put(Model.TITLE, value);
-            } else if ("entryUrl".equals(name)) {
-                model.put(Model.ENTRY_URL, value);
-            } else if (Model.PAGE.equals(name)) {
-                model.put(Model.PAGE, value);
-            } else if ("pl".equals(name)) {
-                model.put(Model.PERSISTENT_LOGIN, value);
-            } else if ("remove-pl".equals(name)) {
-                model.put(Model.REMOVE_PERSISTENT_LOGIN, value);
-            } else if ("rid".equals(name)) {
-                model.put(Model.RESOURCE_ID, value);
-            } else if (Model.SYNCHRONOUS.equals(name)) {
-                model.put(Model.SYNCHRONOUS, value);
-            } else if (Model.TIMEOUT.equals(name)) {
-                model.put(Model.TIMEOUT, value);
-            } else if (Model.CLASS_ID.equals(name)) {
-                model.put(Model.CLASS_ID, value);
-            } else if (Model.BANNER.equals(name)) {
-                model.put(Model.BANNER, value);
+            }
+            if (this.parameterModelMap.containsKey(name)) {
+                model.put(this.parameterModelMap.get(name), value);
+            }
+            if (this.parameterArrayModelMap.containsKey(name)) {
+                model.put(this.parameterArrayModelMap.get(name), Arrays.asList(request.getParameterValues(name)));
             }
         }
     }
