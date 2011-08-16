@@ -39,8 +39,8 @@ public class RequestParameterDataBinder implements DataBinder {
 
     public RequestParameterDataBinder() {
         this.parameterModelMap = new HashMap<String, String>();
-        for (int i = 0; i < PARAMETER_MODEL.length; i++) {
-            this.parameterModelMap.put(PARAMETER_MODEL[i][0], PARAMETER_ARRAY_MODEL[i][1]);
+        for (String[] element: PARAMETER_MODEL) {
+            this.parameterModelMap.put(element[0], element[1]);
         }
         this.parameterArrayModelMap = new HashMap<String, String>();
         for (String[] element : PARAMETER_ARRAY_MODEL) {
