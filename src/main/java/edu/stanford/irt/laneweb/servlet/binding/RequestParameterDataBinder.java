@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-// TODO: have a set of parameters where the model name is the same as the
-// parameter names
 public class RequestParameterDataBinder implements DataBinder {
 
     private static final String[][] PARAMETER_ARRAY_MODEL = { { "r", Model.RESOURCES }, { "e", Model.ENGINES } };
