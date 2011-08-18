@@ -85,7 +85,7 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
     }
 
     private Cache cache;
-    
+
     public void setCache(final Cache cache) {
         this.cache = cache;
     }
@@ -103,11 +103,14 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
                     InputStream input = new BasePathSubstitutingInputStream(resource.getInputStream(), basePath);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     int i;
-                    while ((i = input.read()) != -1) {
-                        baos.write(i);
+                    try {
+                        while ((i = input.read()) != -1) {
+                            baos.write(i);
+                        }
+                    } finally {
+                        input.close();
+                        baos.close();
                     }
-                    input.close();
-                    baos.close();
                     cachedResponse = new CachedResponse((SourceValidity[]) null, baos.toByteArray());
                     this.cache.store(cacheKey, cachedResponse);
                 }
