@@ -26,9 +26,6 @@ public class CMERedirectController {
             response.sendRedirect(PROXY_LINK + UTD_CME_STRING.replaceFirst("EMRID", emrid));
         } else {
             String queryString = request.getQueryString();
-            if (queryString == null) {
-                throw new IllegalArgumentException("null query-string");
-            }
             response.sendRedirect(null == queryString ? ERROR_URL : ERROR_URL + '?' + queryString);
         }
     }
