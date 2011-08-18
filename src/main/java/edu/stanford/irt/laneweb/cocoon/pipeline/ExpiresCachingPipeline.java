@@ -37,28 +37,28 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
     public static final String CACHE_KEY_KEY = ExpiresCachingProcessingPipeline.class.getName() + "/CacheKey";
 
     /** This is the Cache holding cached responses */
-    protected Cache cache;
+    private Cache cache;
 
     /** The cached response */
-    protected CachedResponse cachedResponse;
+    private CachedResponse cachedResponse;
 
     /** The expires information. */
-    protected long cacheExpires;
+    private long cacheExpires;
 
     /** The key used for caching */
-    protected IdentifierCacheKey cacheKey;
+    private IdentifierCacheKey cacheKey;
 
     /** The source validity */
-    protected SourceValidity cacheValidity;
+    private SourceValidity cacheValidity;
 
     /** Default value for expiration */
-    protected long defaultCacheExpires = 3600; // 1 hour
+    private long defaultCacheExpires = 3600; // 1 hour
 
     /** The deserializer */
-    protected XMLByteStreamInterpreter xmlDeserializer;
+    private XMLByteStreamInterpreter xmlDeserializer;
 
     /** The serializer */
-    protected XMLByteStreamCompiler xmlSerializer;
+    private XMLByteStreamCompiler xmlSerializer;
 
     public ExpiresCachingPipeline(final SourceResolver sourceResolver, final Cache cache, final long cacheExpires) {
         super(sourceResolver);
