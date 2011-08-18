@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.caching.Cache;
 import org.apache.cocoon.caching.CachedResponse;
@@ -19,6 +20,9 @@ import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Response;
 import org.apache.cocoon.environment.SourceResolver;
+import org.apache.cocoon.generation.Generator;
+import org.apache.cocoon.reading.Reader;
+import org.apache.cocoon.serialization.Serializer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.ExpiresValidity;
@@ -87,16 +91,17 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
      */
     @Override
     protected void connectPipeline(final Environment environment) throws ProcessingException {
-        if (this.lastConsumer != this.serializer) {
+        XMLConsumer lastConsumer = getLastConsumer();
+        if (lastConsumer != getSerializer()) {
             // internal
             if (this.cachedResponse == null) {
                 // if we cache, we need an xml serializer
                 if (this.cacheExpires != 0) {
-                    final XMLConsumer old = this.lastConsumer;
+                    final XMLConsumer old = lastConsumer;
                     this.xmlSerializer = new XMLByteStreamCompiler();
-                    this.lastConsumer = new XMLTeePipe(this.lastConsumer, this.xmlSerializer);
+                    lastConsumer = new XMLTeePipe(lastConsumer, this.xmlSerializer);
                     super.connectPipeline(environment);
-                    this.lastConsumer = old;
+                    lastConsumer = old;
                 } else {
                     super.connectPipeline(environment);
                 }
@@ -125,8 +130,9 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         // get a copy of the object model with our info!
         final Map objectModel = environment.getObjectModel();
         String key = (String) objectModel.get(CACHE_KEY_KEY);
+        Parameters parameters = getParameters();
         if (key == null) {
-            key = this.parameters.getParameter("cache-key", null);
+            key = parameters.getParameter("cache-key", null);
             if (key == null) {
                 key = environment.getURIPrefix() + environment.getURI();
             }
@@ -135,7 +141,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         }
         String expiresValue = (String) objectModel.get(CACHE_EXPIRES_KEY);
         if (expiresValue == null) {
-            this.cacheExpires = this.parameters.getParameterAsLong("cache-expires", this.defaultCacheExpires);
+            this.cacheExpires = parameters.getParameterAsLong("cache-expires", this.defaultCacheExpires);
         } else {
             this.cacheExpires = Long.valueOf(expiresValue).longValue();
             objectModel.remove(CACHE_EXPIRES_KEY);
@@ -143,13 +149,15 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         // prepare the pipeline
         super.preparePipeline(environment);
         // and now prepare the caching information
-        this.cacheKey = new IdentifierCacheKey(key, this.serializer == this.lastConsumer);
+        XMLConsumer lastConsumer = getLastConsumer();
+        Serializer serializer = getSerializer();
+        this.cacheKey = new IdentifierCacheKey(key, serializer == lastConsumer);
         if (this.cacheExpires > 0) {
             this.cacheValidity = new ExpiresValidity(this.cacheExpires * 1000);
         } else if (this.cacheExpires < 0) {
             this.cacheValidity = NOPValidity.SHARED_INSTANCE;
         }
-        final boolean purge = this.parameters.getParameterAsBoolean("purge-cache", false);
+        final boolean purge = parameters.getParameterAsBoolean("purge-cache", false);
         this.cachedResponse = this.cache.get(this.cacheKey);
         if (this.cachedResponse != null) {
             final SourceValidity sv = this.cachedResponse.getValidityObjects()[0];
@@ -158,7 +166,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 this.cachedResponse = null;
             }
         }
-        if (this.cacheExpires > 0 && (this.reader != null || this.lastConsumer == this.serializer)) {
+        if (this.cacheExpires > 0 && (getReader() != null || lastConsumer == serializer)) {
             Response res = ObjectModelHelper.getResponse(environment.getObjectModel());
             res.setDateHeader("Expires", System.currentTimeMillis() + (this.cacheExpires * 1000));
             res.setHeader("Cache-Control", "max-age=" + this.cacheExpires + ", public");
@@ -184,21 +192,23 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                     return super.processReader(environment);
                 }
                 byte[] cachedData;
+                int outputBufferSize = getOutputBufferSize();
                 this.setMimeTypeForReader(environment);
-                if (this.reader.shouldSetContentLength()) {
-                    final OutputStream os = environment.getOutputStream(this.outputBufferSize);
+                Reader reader = getReader();
+                if (reader.shouldSetContentLength()) {
+                    final OutputStream os = environment.getOutputStream(outputBufferSize);
                     // set the output stream
                     final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    this.reader.setOutputStream(baos);
-                    this.reader.generate();
+                    reader.setOutputStream(baos);
+                    reader.generate();
                     cachedData = baos.toByteArray();
                     environment.setContentLength(cachedData.length);
                     os.write(cachedData);
                 } else {
-                    final CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(this.outputBufferSize));
+                    final CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
                     // set the output stream
-                    this.reader.setOutputStream(os);
-                    this.reader.generate();
+                    reader.setOutputStream(os);
+                    reader.generate();
                     cachedData = os.getContent();
                 }
                 //
@@ -224,10 +234,12 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
      */
     @Override
     protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {
+        XMLConsumer lastConsumer = getLastConsumer();
+        Serializer serializer = getSerializer();
         try {
             if (this.cachedResponse != null) {
                 byte[] content = this.cachedResponse.getResponse();
-                if (this.serializer == this.lastConsumer) {
+                if (serializer == lastConsumer) {
                     if (this.cachedResponse.getContentType() != null) {
                         environment.setContentType(this.cachedResponse.getContentType());
                     } else {
@@ -240,7 +252,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                     }
                 } else {
                     this.setMimeTypeForSerializer(environment);
-                    this.xmlDeserializer.setConsumer(this.lastConsumer);
+                    this.xmlDeserializer.setConsumer(lastConsumer);
                     this.xmlDeserializer.deserialize(content);
                 }
             } else {
@@ -250,25 +262,27 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 }
                 this.setMimeTypeForSerializer(environment);
                 byte[] cachedData;
-                if (this.serializer == this.lastConsumer) {
-                    if (this.serializer.shouldSetContentLength()) {
-                        OutputStream os = environment.getOutputStream(this.outputBufferSize);
+                Generator generator = getGenerator();
+                int outputBufferSize = getOutputBufferSize();
+                if (serializer == lastConsumer) {
+                    if (serializer.shouldSetContentLength()) {
+                        OutputStream os = environment.getOutputStream(outputBufferSize);
                         // set the output stream
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        this.serializer.setOutputStream(baos);
-                        this.generator.generate();
+                        serializer.setOutputStream(baos);
+                        generator.generate();
                         cachedData = baos.toByteArray();
                         environment.setContentLength(cachedData.length);
                         os.write(cachedData);
                     } else {
-                        CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(this.outputBufferSize));
+                        CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
                         // set the output stream
-                        this.serializer.setOutputStream(os);
-                        this.generator.generate();
+                        serializer.setOutputStream(os);
+                        generator.generate();
                         cachedData = os.getContent();
                     }
                 } else {
-                    this.generator.generate();
+                    generator.generate();
                     cachedData = (byte[]) this.xmlSerializer.getSAXFragment();
                 }
                 //

@@ -25,6 +25,9 @@ import org.apache.cocoon.components.sax.XMLTeePipe;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
+import org.apache.cocoon.generation.Generator;
+import org.apache.cocoon.reading.Reader;
+import org.apache.cocoon.serialization.Serializer;
 import org.apache.cocoon.transformation.Transformer;
 import org.apache.cocoon.util.HashUtil;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -112,12 +115,13 @@ public class CachingPipeline extends NonCachingPipeline {
         if (isInternalError()) {
             return null;
         }
+        List<Transformer> transformers = getTransformers();
         if (null != this.toCacheKey && !this.cacheCompleteResponse
-                && this.firstNotCacheableTransformerIndex == super.transformers.size()) {
+                && this.firstNotCacheableTransformerIndex == transformers.size()) {
             return String.valueOf(HashUtil.hash(this.toCacheKey.toString()));
         }
         if (null != this.fromCacheKey && !this.completeResponseIsCached
-                && this.firstProcessedTransformerIndex == super.transformers.size()) {
+                && this.firstProcessedTransformerIndex == transformers.size()) {
             return String.valueOf(HashUtil.hash(this.fromCacheKey.toString()));
         }
         return null;
@@ -133,8 +137,9 @@ public class CachingPipeline extends NonCachingPipeline {
         if (isInternalError()) {
             return null;
         }
+        List<Transformer> transformers = getTransformers();
         if (this.cachedResponse != null) {
-            if (!this.cacheCompleteResponse && this.firstNotCacheableTransformerIndex < super.transformers.size()) {
+            if (!this.cacheCompleteResponse && this.firstNotCacheableTransformerIndex < transformers.size()) {
                 // Cache contains only partial pipeline.
                 return null;
             }
@@ -153,10 +158,10 @@ public class CachingPipeline extends NonCachingPipeline {
         } else {
             int vals = 0;
             if (null != this.toCacheKey && !this.cacheCompleteResponse
-                    && this.firstNotCacheableTransformerIndex == super.transformers.size()) {
+                    && this.firstNotCacheableTransformerIndex == transformers.size()) {
                 vals = this.toCacheKey.size();
             } else if (null != this.fromCacheKey && !this.completeResponseIsCached
-                    && this.firstProcessedTransformerIndex == super.transformers.size()) {
+                    && this.firstProcessedTransformerIndex == transformers.size()) {
                 vals = this.fromCacheKey.size();
             }
             if (vals > 0) {
@@ -241,11 +246,13 @@ public class CachingPipeline extends NonCachingPipeline {
             this.xmlSerializer = new XMLByteStreamCompiler();
             localXMLSerializer = this.xmlSerializer;
         }
+        XMLConsumer lastConsumer = getLastConsumer();
+        List<Transformer> transformers = getTransformers();
         if (this.cachedResponse == null) {
-            XMLProducer prev = super.generator;
+            XMLProducer prev = getGenerator();
             XMLConsumer next;
             int cacheableTransformerCount = this.firstNotCacheableTransformerIndex;
-            Iterator<Transformer> itt = this.transformers.iterator();
+            Iterator<Transformer> itt = transformers.iterator();
             while (itt.hasNext()) {
                 next = itt.next();
                 if (localXMLSerializer != null) {
@@ -259,7 +266,7 @@ public class CachingPipeline extends NonCachingPipeline {
                 connect(environment, prev, next);
                 prev = (XMLProducer) next;
             }
-            next = super.lastConsumer;
+            next = lastConsumer;
             if (localXMLSerializer != null) {
                 next = new XMLTeePipe(next, localXMLSerializer);
                 localXMLSerializer = null;
@@ -271,7 +278,7 @@ public class CachingPipeline extends NonCachingPipeline {
             XMLProducer prev = this.xmlDeserializer;
             XMLConsumer next;
             int cacheableTransformerCount = 0;
-            Iterator<Transformer> itt = this.transformers.iterator();
+            Iterator<Transformer> itt = transformers.iterator();
             while (itt.hasNext()) {
                 next = itt.next();
                 if (cacheableTransformerCount >= this.firstProcessedTransformerIndex) {
@@ -284,7 +291,7 @@ public class CachingPipeline extends NonCachingPipeline {
                 }
                 cacheableTransformerCount++;
             }
-            next = super.lastConsumer;
+            next = lastConsumer;
             if (localXMLSerializer != null) {
                 next = new XMLTeePipe(next, localXMLSerializer);
                 localXMLSerializer = null;
@@ -319,17 +326,18 @@ public class CachingPipeline extends NonCachingPipeline {
         // to build a unique key of the request
         // is the generator cacheable?
         Serializable key = null;
-        if (super.generator instanceof CacheableProcessingComponent) {
-            key = ((CacheableProcessingComponent) super.generator).getKey();
+        if (getGenerator() instanceof CacheableProcessingComponent) {
+            key = ((CacheableProcessingComponent) getGenerator()).getKey();
         }
+        List<Transformer> transformers = getTransformers();
         if (key != null) {
             this.toCacheKey = new PipelineCacheKey();
             this.toCacheKey.addKey(newComponentCacheKey(ComponentCacheKey.ComponentType_Generator, this.generatorRole, key));
             // now testing transformers
-            final int transformerSize = super.transformers.size();
+            final int transformerSize = transformers.size();
             boolean continueTest = true;
             while (this.firstNotCacheableTransformerIndex < transformerSize && continueTest) {
-                final Transformer trans = super.transformers.get(this.firstNotCacheableTransformerIndex);
+                final Transformer trans = transformers.get(this.firstNotCacheableTransformerIndex);
                 key = null;
                 if (trans instanceof CacheableProcessingComponent) {
                     key = ((CacheableProcessingComponent) trans).getKey();
@@ -344,10 +352,11 @@ public class CachingPipeline extends NonCachingPipeline {
             }
             // all transformers are cacheable => pipeline is cacheable
             // test serializer if this is not an internal request
-            if (this.firstNotCacheableTransformerIndex == transformerSize && super.serializer == this.lastConsumer) {
+            Serializer serializer = getSerializer();
+            if (this.firstNotCacheableTransformerIndex == transformerSize && serializer == getLastConsumer()) {
                 key = null;
-                if (super.serializer instanceof CacheableProcessingComponent) {
-                    key = ((CacheableProcessingComponent) this.serializer).getKey();
+                if (serializer instanceof CacheableProcessingComponent) {
+                    key = ((CacheableProcessingComponent) serializer).getKey();
                 }
                 if (key != null) {
                     this.toCacheKey.addKey(newComponentCacheKey(ComponentCacheKey.ComponentType_Serializer, this.serializerRole,
@@ -406,8 +415,9 @@ public class CachingPipeline extends NonCachingPipeline {
             PipelineCacheKey pcKey = null;
             // test if reader is cacheable
             Serializable readerKey = null;
-            if (super.reader instanceof CacheableProcessingComponent) {
-                readerKey = ((CacheableProcessingComponent) super.reader).getKey();
+            Reader reader = getReader();
+            if (reader instanceof CacheableProcessingComponent) {
+                readerKey = ((CacheableProcessingComponent) reader).getKey();
             }
             boolean finished = false;
             if (readerKey != null) {
@@ -437,7 +447,7 @@ public class CachingPipeline extends NonCachingPipeline {
                             int valid = cachedValidity.isValid();
                             if (valid == SourceValidity.UNKNOWN) {
                                 // get reader validity and compare
-                                readerValidity = ((CacheableProcessingComponent) super.reader).getValidity();
+                                readerValidity = ((CacheableProcessingComponent) reader).getValidity();
                                 if (readerValidity != null) {
                                     valid = cachedValidity.isValid(readerValidity);
                                     if (valid == SourceValidity.UNKNOWN) {
@@ -480,6 +490,7 @@ public class CachingPipeline extends NonCachingPipeline {
             }
             if (!usedCache) {
                 // make sure lock will be released
+                int outputBufferSize = getOutputBufferSize();
                 try {
                     if (pcKey != null) {
                         if (this.log.isDebugEnabled()) {
@@ -487,18 +498,18 @@ public class CachingPipeline extends NonCachingPipeline {
                         }
                         generateLock(pcKey);
                         if (readerValidity == null) {
-                            readerValidity = ((CacheableProcessingComponent) super.reader).getValidity();
+                            readerValidity = ((CacheableProcessingComponent) reader).getValidity();
                         }
                         if (readerValidity != null) {
-                            outputStream = environment.getOutputStream(this.outputBufferSize);
+                            outputStream = environment.getOutputStream(outputBufferSize);
                             outputStream = new CachingOutputStream(outputStream);
                         }
                     }
                     setMimeTypeForReader(environment);
-                    if (this.reader.shouldSetContentLength()) {
+                    if (reader.shouldSetContentLength()) {
                         ByteArrayOutputStream os = new ByteArrayOutputStream();
-                        this.reader.setOutputStream(os);
-                        this.reader.generate();
+                        reader.setOutputStream(os);
+                        reader.generate();
                         environment.setContentLength(os.size());
                         if (outputStream == null) {
                             outputStream = environment.getOutputStream(0);
@@ -506,10 +517,10 @@ public class CachingPipeline extends NonCachingPipeline {
                         os.writeTo(outputStream);
                     } else {
                         if (outputStream == null) {
-                            outputStream = environment.getOutputStream(this.outputBufferSize);
+                            outputStream = environment.getOutputStream(outputBufferSize);
                         }
-                        this.reader.setOutputStream(outputStream);
-                        this.reader.generate();
+                        reader.setOutputStream(outputStream);
+                        reader.generate();
                     }
                     // store the response
                     if (pcKey != null && readerValidity != null) {
@@ -569,46 +580,49 @@ public class CachingPipeline extends NonCachingPipeline {
             generateLock(this.toCacheKey);
             try {
                 OutputStream os = null;
+                int outputBufferSize = getOutputBufferSize();
                 if (this.cacheCompleteResponse && this.toCacheKey != null) {
-                    os = new CachingOutputStream(environment.getOutputStream(this.outputBufferSize));
+                    os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
                 }
-                if (super.serializer != super.lastConsumer) {
+                Generator generator = getGenerator();
+                Serializer serializer = getSerializer();
+                if (serializer != getLastConsumer()) {
                     if (os == null) {
-                        os = environment.getOutputStream(this.outputBufferSize);
+                        os = environment.getOutputStream(outputBufferSize);
                     }
                     // internal processing
                     if (this.xmlDeserializer != null) {
                         this.xmlDeserializer.deserialize(this.cachedResponse.getResponse());
                     } else {
-                        this.generator.generate();
+                        generator.generate();
                     }
                 } else {
-                    if (this.serializer.shouldSetContentLength()) {
+                    if (serializer.shouldSetContentLength()) {
                         if (os == null) {
                             os = environment.getOutputStream(0);
                         }
                         // Set the output stream
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        this.serializer.setOutputStream(baos);
+                        serializer.setOutputStream(baos);
                         // Execute the pipeline
                         if (this.xmlDeserializer != null) {
                             this.xmlDeserializer.deserialize(this.cachedResponse.getResponse());
                         } else {
-                            this.generator.generate();
+                            generator.generate();
                         }
                         environment.setContentLength(baos.size());
                         baos.writeTo(os);
                     } else {
                         if (os == null) {
-                            os = environment.getOutputStream(this.outputBufferSize);
+                            os = environment.getOutputStream(outputBufferSize);
                         }
                         // Set the output stream
-                        this.serializer.setOutputStream(os);
+                        serializer.setOutputStream(os);
                         // Execute the pipeline
                         if (this.xmlDeserializer != null) {
                             this.xmlDeserializer.deserialize(this.cachedResponse.getResponse());
                         } else {
-                            this.generator.generate();
+                            generator.generate();
                         }
                     }
                 }
@@ -740,6 +754,7 @@ public class CachingPipeline extends NonCachingPipeline {
         this.fromCacheKey = this.toCacheKey.copy();
         this.firstProcessedTransformerIndex = this.firstNotCacheableTransformerIndex;
         boolean finished = false;
+        long expires = getExpires();
         while (this.fromCacheKey != null && !finished) {
             finished = true;
             final CachedResponse response = this.cache.get(this.fromCacheKey);
@@ -774,11 +789,11 @@ public class CachingPipeline extends NonCachingPipeline {
                         // it means that the sitemap was modified, and the old
                         // expires value is not valid
                         // anymore.
-                        if (this.expires != 0) {
+                        if (expires != 0) {
                             if (this.log.isDebugEnabled()) {
                                 this.log.debug("Refreshing expires informations");
                             }
-                            response.setExpires(Long.valueOf(this.expires + System.currentTimeMillis()));
+                            response.setExpires(Long.valueOf(expires + System.currentTimeMillis()));
                         } else {
                             if (this.log.isDebugEnabled()) {
                                 this.log.debug("No expires defined anymore for this object, setting it to no expires");
@@ -789,11 +804,11 @@ public class CachingPipeline extends NonCachingPipeline {
                 } else {
                     // The response had no expires informations. See if it needs
                     // to be set (i.e. because the configuration has changed)
-                    if (this.expires != 0) {
+                    if (expires != 0) {
                         if (this.log.isDebugEnabled()) {
                             this.log.debug("Setting a new expires object for this resource");
                         }
-                        response.setExpires(Long.valueOf(this.expires + System.currentTimeMillis()));
+                        response.setExpires(Long.valueOf(expires + System.currentTimeMillis()));
                     }
                 }
                 SourceValidity[] fromCacheValidityObjects = response.getValidityObjects();
@@ -934,20 +949,20 @@ public class CachingPipeline extends NonCachingPipeline {
         }
         if (index == 0) {
             // test generator
-            validity = ((CacheableProcessingComponent) super.generator).getValidity();
+            validity = ((CacheableProcessingComponent) getGenerator()).getValidity();
             if (debug) {
                 msg += "generator: using getValidity";
             }
         } else if (index <= this.firstNotCacheableTransformerIndex) {
             // test transformer
-            final Transformer trans = super.transformers.get(index - 1);
+            final Transformer trans = getTransformers().get(index - 1);
             validity = ((CacheableProcessingComponent) trans).getValidity();
             if (debug) {
                 msg += "transformer: using getValidity";
             }
         } else {
             // test serializer
-            validity = ((CacheableProcessingComponent) super.serializer).getValidity();
+            validity = ((CacheableProcessingComponent) getSerializer()).getValidity();
             if (debug) {
                 msg += "serializer: using getValidity";
             }

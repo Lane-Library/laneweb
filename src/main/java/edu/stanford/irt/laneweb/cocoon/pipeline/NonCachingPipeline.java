@@ -54,63 +54,63 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     private boolean prepared;
 
     /** The component manager set with compose() and recompose() */
-    protected BeanFactory beanFactory;
+    private BeanFactory beanFactory;
 
     /** Configured Expires value */
-    protected long configuredExpires;
+    private long configuredExpires;
 
     /** Configured Output Buffer Size */
-    protected int configuredOutputBufferSize;
+    private int configuredOutputBufferSize;
 
     /** Expires value */
-    protected long expires;
+    private long expires;
 
     // Generator stuff
-    protected Generator generator;
+    private Generator generator;
 
-    protected Parameters generatorParam;
+    private Parameters generatorParam;
 
-    protected String generatorSource;
+    private String generatorSource;
 
     /**
      * This is the last component in the pipeline, either the serializer or a
      * custom XML consumer in case of internal processing.
      */
-    protected XMLConsumer lastConsumer;
+    private XMLConsumer lastConsumer;
 
     /** Output Buffer Size */
-    protected int outputBufferSize;
+    private int outputBufferSize;
 
     /** The parameters */
-    protected Parameters parameters;
+    private Parameters parameters;
 
     // Reader stuff
-    protected Reader reader;
+    private Reader reader;
 
-    protected String readerMimeType;
+    private String readerMimeType;
 
-    protected Parameters readerParam;
+    private Parameters readerParam;
 
-    protected String readerSource;
+    private String readerSource;
 
     // Serializer stuff
-    protected Serializer serializer;
+    private Serializer serializer;
 
-    protected String serializerMimeType;
+    private String serializerMimeType;
 
-    protected Parameters serializerParam;
+    private Parameters serializerParam;
 
-    protected String serializerSource;
+    private String serializerSource;
 
     /** The current SourceResolver */
-    protected SourceResolver sourceResolver;
+    private SourceResolver sourceResolver;
 
-    protected List<Parameters> transformerParams = new LinkedList<Parameters>();
+    private List<Parameters> transformerParams = new LinkedList<Parameters>();
 
     // Transformer stuff
-    protected List<Transformer> transformers = new LinkedList<Transformer>();
+    private List<Transformer> transformers = new LinkedList<Transformer>();
 
-    protected List<String> transformerSources = new LinkedList<String>();
+    private List<String> transformerSources = new LinkedList<String>();
 
     public NonCachingPipeline(final SourceResolver sourceResolver) {
         this.sourceResolver = sourceResolver;
@@ -762,5 +762,33 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         } catch (Exception e) {
             handleException(e);
         }
+    }
+
+    protected long getExpires() {
+        return this.expires;
+    }
+    
+    protected XMLConsumer getLastConsumer() {
+        return this.lastConsumer;
+    }
+    
+    protected int getOutputBufferSize() {
+        return this.outputBufferSize;
+    }
+    
+    protected Parameters getParameters() {
+        return this.parameters;
+    }
+    
+    protected Reader getReader() {
+        return this.reader;
+    }
+    
+    protected Serializer getSerializer() {
+        return this.serializer;
+    }
+    
+    protected List<Transformer> getTransformers() {
+        return this.transformers;
     }
 }
