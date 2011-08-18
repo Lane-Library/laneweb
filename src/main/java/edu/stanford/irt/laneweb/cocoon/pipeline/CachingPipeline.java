@@ -47,52 +47,52 @@ public class CachingPipeline extends NonCachingPipeline {
     private final Logger log = LoggerFactory.getLogger(CachingPipeline.class);
 
     /** This is the Cache holding cached responses */
-    protected Cache cache;
+    private Cache cache;
 
     /** Cache complete response */
-    protected boolean cacheCompleteResponse;
+    private boolean cacheCompleteResponse;
 
     /** The cached response */
-    protected CachedResponse cachedResponse;
+    private CachedResponse cachedResponse;
 
     /** Complete response is cached */
-    protected boolean completeResponseIsCached;
+    private boolean completeResponseIsCached;
 
     /** The index indicating to the first transformer which is not cacheable */
-    protected int firstNotCacheableTransformerIndex;
+    private int firstNotCacheableTransformerIndex;
 
     /** The index indicating the first transformer getting input from the cache */
-    protected int firstProcessedTransformerIndex;
+    private int firstProcessedTransformerIndex;
 
     /** This key indicates the response that is fetched from the cache */
-    protected PipelineCacheKey fromCacheKey;
+    private PipelineCacheKey fromCacheKey;
 
     /** The role name of the generator */
-    protected String generatorRole;
+    private String generatorRole;
 
     /** The role name of the reader */
-    protected String readerRole;
+    private String readerRole;
 
     /** The role name of the serializer */
-    protected String serializerRole;
+    private String serializerRole;
 
     /** This key indicates the response that will get into the cache */
-    protected PipelineCacheKey toCacheKey;
+    private PipelineCacheKey toCacheKey;
 
     /** The source validities used for caching */
-    protected SourceValidity[] toCacheSourceValidities;
+    private SourceValidity[] toCacheSourceValidities;
 
     /** The role names of the transfomrers */
-    protected List<String> transformerRoles = new LinkedList<String>();
+    private List<String> transformerRoles = new LinkedList<String>();
 
     /** Store for pipeline locks (optional) */
-    protected Store transientStore;
+    private Store transientStore;
 
     /** The deserializer */
-    protected XMLByteStreamInterpreter xmlDeserializer;
+    private XMLByteStreamInterpreter xmlDeserializer;
 
     /** The serializer */
-    protected XMLByteStreamCompiler xmlSerializer;
+    private XMLByteStreamCompiler xmlSerializer;
 
     public CachingPipeline(final SourceResolver sourceResolver, final Cache cache, final Store transientStore) {
         super(sourceResolver);
