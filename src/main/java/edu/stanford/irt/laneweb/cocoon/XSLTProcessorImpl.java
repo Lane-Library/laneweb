@@ -120,28 +120,28 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
     private SAXParser saxParser;
 
     /** Check included stylesheets */
-    protected boolean checkIncludes;
+    private boolean checkIncludes;
 
     /** The default TransformerFactory used by this component */
-    protected SAXTransformerFactory defaultFactory;
+    private SAXTransformerFactory defaultFactory;
 
     /** The error handler for the transformer */
-    protected TraxErrorHandler errorHandler;
+    private TraxErrorHandler errorHandler;
 
     /** The trax TransformerFactory this component uses */
-    protected SAXTransformerFactory factory;
+    private SAXTransformerFactory factory;
 
     /** Map of pairs of System ID's / validities of the included stylesheets */
-    protected Map<String, List<Object>> includesMap = new HashMap<String, List<Object>>();
+    private Map<String, List<Object>> includesMap = new HashMap<String, List<Object>>();
 
     /** Resolver used to resolve XSLT document() calls, imports and includes */
-    protected SourceResolver resolver;
+    private SourceResolver resolver;
 
     /** The store service instance */
-    protected Store store;
+    private Store store;
 
     /** The configured transformer factory to use */
-    protected String transformerFactory;
+    private String transformerFactory;
 
     public XSLTProcessorImpl(final SAXParser saxParser, final Store store, final SourceResolver sourceResolver) {
         this.saxParser = saxParser;
