@@ -345,7 +345,9 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
             }
             return null;
         } finally {
-            this.resolver.release(xslSource);
+            if (xslSource != null) {
+                this.resolver.release(xslSource);
+            }
         }
     }
 
