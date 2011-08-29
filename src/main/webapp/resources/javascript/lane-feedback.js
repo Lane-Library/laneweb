@@ -35,7 +35,7 @@
             this.get("menu").on("click", this._handleMenuClick, this);
             this.on("activeItemChange", this._handleActiveItemChange);
             eventHandle1 = Y.lane.Lightbox.on("animEnd", function() {
-                self.get("items").item(self.get("activeItem")).one("textarea").focus();
+                self.get("items").item(self.get("activeItem")).one("textarea, input[type='text']").focus();
             });
             eventHandle2 = Y.lane.Lightbox.on("visibleChange", function(event) {
             	if (event.newVal) {
@@ -64,12 +64,16 @@
             var menu = this.get("menu"),
                 items = this.get("items"),
                 menuActiveClass = this.getClassName("menu", "active"),
-                itemActiveClass = this.getClassName("item", "active");
+                itemActiveClass = this.getClassName("item", "active"),
+                focusElement;
             menu.item(event.prevVal).removeClass(menuActiveClass);
             items.item(event.prevVal).removeClass(itemActiveClass);
             menu.item(event.newVal).addClass(menuActiveClass);
             items.item(event.newVal).addClass(itemActiveClass);
-            items.item(event.newVal).one("textarea").focus();
+            focusElement = items.item(event.newVal).one("textarea, input[type='text']");
+            if (focusElement) {
+            	focusElement.focus();
+            }
         },
         _handleMenuClick : function(event) {
             event.preventDefault();

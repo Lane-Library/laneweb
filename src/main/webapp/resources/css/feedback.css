@@ -20,10 +20,10 @@
     background-image : url(/././resources/images/feedback-vertical-on.png);
 }
 
-.yui3-feedback-item {
+.yui3-feedback-item, .yui3-purchase-item {
     display : none
 }
-.yui3-feedback-item-active {
+.yui3-feedback-item-active, .yui3-purchase-item-active {
     display : block
 }
 .yui3-lightbox #feedback {
@@ -38,6 +38,11 @@
     background-repeat : repeat-x;
     padding : 20px 20px 40px;
 }
+#feedback, #feedback select, #feedback option {
+    color : #585347;
+    font-family : Georgia;
+    font-size : 14px;
+}
 #feedback h2 {
     text-align : left;
     margin-left : 15px;
@@ -50,7 +55,6 @@
 #feedbackMenu {
     text-align : left;
     margin-top : 40px;
-    font-family : Georgia;
     font-size : 16px;
     /*IE6 fix*/
     _overflow : hidden
@@ -82,8 +86,6 @@
     text-align : left
 }
 #feedback .mainFeedback {
-    color : #585347;
-    font-family : Georgia;
     font-size : 18px;
     font-weight : bold
 }
@@ -106,6 +108,7 @@
 
 .feedbackText {
     padding : 9px;
+    margin-bottom : .5em;
     border : solid 2px #C9C9C9;
     outline : 0;
     font : normal 13px / 100%Arial, Verdana, sans-serif;
@@ -142,6 +145,7 @@
 
 #feedback label {
     display : block;
+    margin-top : .5em
 }
 
 
@@ -152,10 +156,27 @@
     -webkit-box-shadow : rgba(0, 0, 0, 0.1) 0px 0px 8px;
 }
 
-#feedback fieldset fieldset {
-    margin : 1em 0;
-    color : #585347;
-    font-family : Georgia;
-    font-size : 14px;
-    font-weight : normal;
+#feedback select {
+	border: 2px solid #C9C9C9;
+	width : 100%;
+	margin-top : 24px
+}
+#purchaseMenu {
+    margin : 9px 0 40px;
+    /* make this a bit wider so the <a>s don't wrap */
+    width : 105%
+}
+#purchaseMenu li {
+    float : left
+}
+#purchaseMenu a {
+	border: 2px solid #C9C9C9;
+	color: #585347;
+	padding: 4px 50px;
+	margin-right : 12px
+}
+#purchaseMenu a:hover {
+	background: #E6E4DC;
+	border-color: #9D9B94;
+	color: #585347;
 }
