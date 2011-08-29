@@ -1,6 +1,7 @@
 (function() {
-    Y.lane.SearchIndicator = function() {
-        var indicator = Y.one("#searchIndicator");
+    LANE.SearchIndicator = function() {
+        var Y = LANE.Y,
+            indicator = Y.one("#searchIndicator");
         if (!indicator) {
             indicator = Y.Node.create("<div id='searchIndicator'><img src='/././resources/images/search-indicator.gif'/></div>");
             indicator.setStyle("display","none");
@@ -19,6 +20,6 @@
             hide: function() {
                 indicator.setStyle("display", "none");
             }
-        }
+        };
     };
 })();

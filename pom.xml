@@ -173,7 +173,6 @@
                                 <include>banner-min.css</include>
                                 <include>hightlighted-resources-min.css</include>
                                 <include>antibiogram-min.css</include>
-                                <include>personal-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -181,7 +180,7 @@
                             <output>target/laneweb/resources/javascript/lane-all.js</output>
                             <includes>
                                 <include>lane-min.js</include>
-                                <include>lane-link-plugin-min.js</include>
+                                <!--<include>lane-link-plugin-min.js</include>-->
                                 <include>lane-ie-min.js</include>
                                 <include>lane-mobile-ad-min.js</include>
                                 <include>lane-search-result-min.js</include>
@@ -212,8 +211,8 @@
                                 <include>lane-forms-min.js</include>
                                 <include>lane-search-reset-min.js</include>
                                 <include>lane-search-hoverText-min.js</include>
-                                <include>lane-bookmarks-min.js</include>
-                                <include>lane-history-min.js</include>
+                                <!--<include>lane-bookmarks-min.js</include>-->
+                                <!--<include>lane-history-min.js</include>-->
                                 <include>lane-feedback-min.js</include>
                                 <include>banner-min.js</include>
                             </includes>
@@ -616,7 +615,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.41</version>
+            <version>1.6.42</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>

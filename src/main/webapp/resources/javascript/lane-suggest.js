@@ -16,6 +16,7 @@ function ACPlugin () { ACPlugin.superclass.constructor.apply(this, arguments) };
 
 // shorthands
 var autocomplete = "autocomplete",
+    Y = LANE.Y,
     YLang = Y.Lang,
     YArrayeach = Y.Array.each,
     eventDefaultBehavior = {
@@ -234,7 +235,7 @@ function attachHandles (self, host) {
  * @private
  **/
 function valueChangeHandler (e) {
-    var value = e.newVal, instance = this;
+    var value = e.value, instance = this;
     if (!value) return this.close();
     if (value === this._cachedValue || value.length < this.get("minQueryLength")) return;
 
@@ -244,7 +245,7 @@ function valueChangeHandler (e) {
     instance._delayId = setTimeout(
         function() {
             instance._cachedValue = value;
-            instance.fire( "ac:query", { value : value });
+            instance.fire( "ac:query", { value : e.value });
         },
         instance.get('queryDelay')
     );
@@ -317,7 +318,7 @@ function handleQueryResponse (e) {
     }
 };
     
-    Y.lane.Suggest = function (input, limit) {
+    LANE.Suggest = function (input, limit) {
         var self = this, acWidget,
             baseUrl = '/././apps/suggest/json?',
             acDS  = new Y.DataSource.IO({source:baseUrl}),
@@ -342,6 +343,12 @@ function handleQueryResponse (e) {
                     input.ac.get("dataSource").set("source",limit);
                 }
             };
+            this.publish("lane:suggestSelect",{
+                broadcast:1,
+                emitFacade: true,
+                suggestion:null,
+                parentForm:null
+            });
             acDS.plug({fn : Y.Plugin.DataSourceJSONSchema, cfg : {
                 schema : { resultListLocator : "suggest" }
             }});
@@ -377,7 +384,7 @@ function handleQueryResponse (e) {
             }, "li");
             Y.on("click", function () { acWidget.hide(); }, document);
             Y.on("key", function () { acWidget.hide(); }, document, "down:9,13,10");
-            Y.on("lane:beforeSearchSubmit", function () { acWidget.destroy(); });
+            Y.Global.on("lane:beforeSearchSubmit", function () { acWidget.destroy(); });
             
             return {
                 setData : function (d) {
@@ -451,7 +458,7 @@ function handleQueryResponse (e) {
                 select : function (e) {
                     if(acWidget.getValue()){
                         input.ac.set("queryValue", acWidget.getValue());
-                        Y.fire("lane:suggestSelect",{
+                        self.fire("lane:suggestSelect",{
                             suggestion:input.ac.get("queryValue"),
                             parentForm:Y.Node.getDOMNode(input.ancestor("form"))
                         });
@@ -509,5 +516,5 @@ function handleQueryResponse (e) {
         input.ac.on("ac:previous", acWidget.previous, acWidget);
         Y.on("key", acWidget.select, input, "down:13,10");
     };
-    Y.augment(Y.lane.Suggest,Y.EventTarget);
+    Y.augment(LANE.Suggest,Y.EventTarget);
 })();

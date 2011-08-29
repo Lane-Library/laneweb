@@ -14,7 +14,7 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- the 1st #login li is the login link or the users name or the emrid -->
+    <!-- the 1st #login li is the login link or the users name -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[1]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
@@ -24,9 +24,6 @@
                 </xsl:when>
                 <xsl:when test="string-length($sunetid) &gt; 0">
                     <xsl:value-of select="$sunetid"/>
-                </xsl:when>
-                <xsl:when test="string-length($emrid) &gt; 0">
-                    EPIC id: <xsl:value-of select="$emrid"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="child::node()"/>

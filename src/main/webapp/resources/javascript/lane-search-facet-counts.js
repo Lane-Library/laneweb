@@ -1,6 +1,7 @@
 //TODO: should this stop polling when all facets are complete? currently polls until search app done or timeout
 (function() {
-    var searchString = Y.lane.SearchResult.getEncodedSearchTerms(),
+    var Y = LANE.Y,
+        searchString = LANE.SearchResult.getEncodedSearchTerms(),
         facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
         requestString, j,
@@ -25,8 +26,8 @@
                                 hits = null;
                                 hitLink = facets.item(j).one('a');
                                 facetId = facets.item(j).getAttribute('facetId');
-                                if (undefined != response.results.facets[facetId]) {
-                                    hits = parseInt(response.results.facets[facetId].hits);
+                                if (undefined !== response.results.facets[facetId]) {
+                                    hits = parseInt(response.results.facets[facetId].hits, 10);
                                     engineStatus = response.results.facets[facetId].status;
                                 }
                                 if ((engineStatus == 'successful' || engineStatus == 'canceled') && hitLink !== null && hits === 0) {

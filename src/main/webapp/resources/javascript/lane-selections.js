@@ -1,5 +1,6 @@
 (function() {
-    var selections = Y.all('#selections > li'),
+    var Y = LANE.Y,
+        selections = Y.all('#selections > li'),
         select = Y.one('#selections-select'),
         i,
         showAll = function() {

@@ -1,9 +1,10 @@
 (function() {
-    var elt = Y.one('#searchFacets'),
-        searchIndicator = new Y.lane.SearchIndicator(),
+    var Y = LANE.Y,
+        elt = Y.one('#searchFacets'),
+        searchIndicator = new LANE.SearchIndicator(),
         facets, i, type, source, container;
-    Y.namespace('lane.search.facets');
-    Y.lane.search.facets = function(){
+    LANE.namespace('search.facets');
+    LANE.search.facets = function(){
         var currentResult;
         return {
             setCurrentResult: function(result){
@@ -18,8 +19,8 @@
                     if (result._state == 'initialized') {
                         result.show();
                     } else if (result._state == 'searched') {
-                        Y.lane.search.facets.getCurrentResult().hide();
-                        Y.lane.search.facets.setCurrentResult(result);
+                        LANE.search.facets.getCurrentResult().hide();
+                        LANE.search.facets.setCurrentResult(result);
                         result.show();
                     }
                 }
@@ -37,12 +38,12 @@
                     facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
                     if (facets.item(i).hasClass('current')) {
                         facets.item(i).getData('result').setContent(container.get('innerHTML'));
-                        Y.lane.search.facets.setCurrentResult(facets.item(i).getData('result'));
+                        LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
                     }
                     Y.on('click',function(event) {
                         var result = this.getData('result');
                         try {
-                            Y.lane.Search.History.addValue("facet", this.getData('result')._source);
+                            LANE.Search.History.addValue("facet", this.getData('result')._source);
                         } catch (e) {
                             //log somewhere ... no need to break/alert
                             result.show();
@@ -58,15 +59,15 @@
         this._source = source;
         this._facet = facet;
         this._container = container;
-        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + Y.lane.SearchResult.getEncodedSearchTerms();
+        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.SearchResult.getEncodedSearchTerms();
         this._state = 'initialized';
         this._callback = {
             on: {
                 success: function(id, o, arguments){
                     var result = arguments.result;
                     result.setContent(o.responseText);
-                    Y.lane.search.facets.getCurrentResult().hide();
-                    Y.lane.search.facets.setCurrentResult(result);
+                    LANE.search.facets.getCurrentResult().hide();
+                    LANE.search.facets.setCurrentResult(result);
                     result.show();
                     Y.fire('lane:change');
                 },
@@ -90,8 +91,8 @@
             } else if (this._state == 'searching') {
                 alert('search in progress');
             } else {
-                Y.lane.search.facets.getCurrentResult().hide();
-                Y.lane.search.facets.setCurrentResult(this);
+                LANE.search.facets.getCurrentResult().hide();
+                LANE.search.facets.setCurrentResult(this);
                 this._facet.addClass('current');
                 this._container.set("innerHTML", this._content);
                 searchIndicator.hide();

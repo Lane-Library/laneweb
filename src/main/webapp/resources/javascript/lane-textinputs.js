@@ -6,7 +6,7 @@
  */
 (function() {
     
-    Y.lane.TextInput = function(input, hintText) {
+    LANE.TextInput = function(input, hintText) {
         var hintStyle = "inputHint",
             _hintText = hintText || '',
             _reset = function(input) {
@@ -57,12 +57,12 @@
         };
     };
 
-    var i, title, textInputs = new Y.all('input[type="text"]');
+    var Y = LANE.Y, i, title, textInputs = new Y.all('input[type="text"]');
     
     for (i = 0; i < textInputs.size(); i++) {
         title = textInputs.item(i).get('title');
         if (title) {
-            new Y.lane.TextInput(textInputs.item(i), title);
+            new LANE.TextInput(textInputs.item(i), title);
         }
     }
     

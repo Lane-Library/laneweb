@@ -1,5 +1,6 @@
 (function() {
-    var gaPageTracker,
+    var Y = LANE.Y,
+        gaPageTracker,
         gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
@@ -20,10 +21,8 @@
                     gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);
                 }
                 gaPageTracker._trackPageview();
-                Y.on("trackable", function(link, event) {
-                    var trackingData;
-                    if (link.get("trackable")) {
-                        trackingData = link.get("trackingData");
+                LANE.tracking.addTracker({
+                    track: function(trackingData) {
                         if (trackingData.external) {
                             gaPageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(trackingData.title));
                         } else {
@@ -31,37 +30,71 @@
                         }
                     }
                 });
-                
-                //add onclick handler for search/browse results
-                Y.on("click", function(event) {
-                    var searchTerms = Y.lane.SearchResult.getSearchTerms(),
-                    link = event.target.get("nodeName") == "A" ? event.target : event.target.ancestor("a"),
-                            resultTitle, resultPosition;
-                    if (link && link.ancestor(".lwSearchResults")) {
-                        resultTitle = link.get("textContent");
-                        resultPosition = parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10);
-                        if (searchTerms) {
-                            gaPageTracker._trackEvent("lane:searchResultClick", searchTerms, resultTitle, resultPosition);
-                        } else {
-                            gaPageTracker._trackEvent("lane:browseResultClick", document.location.pathname, resultTitle, resultPosition);
-                        }
-                    }
-                }, document);
-
-
-                Y.on("lane:suggestSelect",  function(event) {
-                    gaPageTracker._trackEvent("lane:suggestSelect", event.parentForm.source.value, event.suggestion);
-                });
-                
-                Y.on("lane:quickLinkClick",  function(event) {
-                    gaPageTracker._trackEvent("lane:quickLinkClick", event.linkName);
-                });
-                
-                Y.on("lane:searchFormReset",  function(event) {
-                    gaPageTracker._trackEvent("lane:searchFormReset", document.location.pathname);
-                });
-                
             }
+        }
+    });
+        
+        // for search result event tracking
+    Y.publish("lane:searchResultClick",{
+        broadcast:1,
+        emitFacade: true,
+        searchTerms:null,
+        resultTitle:null,
+        resultPosition:null
+    });
+    Y.publish("lane:browseResultClick",{
+        broadcast:1,
+        emitFacade: true,
+        resultTitle:null,
+        resultPosition:null
+    });
+    Y.on("click", function(event) {
+        
+        var link = event.target;
+        while (link && link.get('nodeName') != 'A') {
+            link = link.get('parentNode');
+        }
+        if (link) {
+            if (link.ancestor(".lwSearchResults")) {
+                if (LANE.SearchResult.getSearchTerms()) {
+                    Y.fire("lane:searchResultClick", {
+                        searchTerms: LANE.SearchResult.getSearchTerms(),
+                        resultTitle: link.get('textContent'),
+                        resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
+                    });
+                } else {
+                    Y.fire("lane:browseResultClick", {
+                        resultTitle: link.get('textContent'),
+                        resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
+                    });
+                }
+            }
+        }
+    }, document);
+        
+    Y.on("lane:suggestSelect",  function(event) {
+        if (gaPageTracker !== undefined) {
+            gaPageTracker._trackEvent(event.type, event.parentForm.source.value, event.suggestion);
+        }
+    });
+    Y.on("lane:quickLinkClick",  function(event) {
+        if (gaPageTracker !== undefined) {
+            gaPageTracker._trackEvent(event.type, event.linkName);
+        }
+    });
+    Y.on("lane:searchResultClick",  function(event) {
+        if (gaPageTracker !== undefined) {
+            gaPageTracker._trackEvent(event.type, event.searchTerms, event.resultTitle, event.resultPosition);
+        }
+    });
+    Y.on("lane:browseResultClick",  function(event) {
+        if (gaPageTracker !== undefined) {
+            gaPageTracker._trackEvent(event.type, document.location.pathname, event.resultTitle, event.resultPosition);
+        }
+    });
+    Y.on("lane:searchFormReset",  function(event) {
+        if (gaPageTracker !== undefined) {
+            gaPageTracker._trackEvent(event.type, document.location.pathname);
         }
     });
 })();

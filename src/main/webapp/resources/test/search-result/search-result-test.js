@@ -4,29 +4,29 @@
 if (!window.location.search) {
     window.location = window.location + '?source=foo&q=bar+baz';
 }
-YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','test', function(T) {
+YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','test', function(Y) {
     
-    var resultTestCase = new T.Test.Case({
+    var resultTestCase = new Y.Test.Case({
         
         name: 'Lane Result Test Case',
-        result: Y.lane.SearchResult,
+        result: LANE.SearchResult,
         
         testGetSearchSource: function() {
-            T.Assert.areEqual('foo', this.result.getSearchSource());
+            Y.Assert.areEqual('foo', this.result.getSearchSource());
         },
         testGetSearchTerms: function() {
-            T.Assert.areEqual('bar baz', this.result.getSearchTerms());
+            Y.Assert.areEqual('bar baz', this.result.getSearchTerms());
         },
         testGetEncodedSearchTerms: function() {
-            T.Assert.areEqual('bar+baz', this.result.getEncodedSearchTerms());
+            Y.Assert.areEqual('bar+baz', this.result.getEncodedSearchTerms());
         }
     });
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false                   
     }).render('#log');
     
-    T.Test.Runner.add(resultTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(resultTestCase);
+    Y.Test.Runner.run();
 });

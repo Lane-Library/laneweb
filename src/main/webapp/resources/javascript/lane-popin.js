@@ -1,7 +1,10 @@
 (function() {
     
+    LANE.namespace('search.popin');
+    
     // custom popin event
-    var onPopinHandler;
+    var Y = LANE.Y, onPopinHandler;
+    Y.publish('lane:popin',{broadcast:1});
     
         onPopinHandler = function(el) {
             //FIXME: are elms returned in the right order? probably not.

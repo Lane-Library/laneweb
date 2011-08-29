@@ -25,8 +25,6 @@
     <xsl:param name="proxy-links"/>
 
     <xsl:param name="sunetid"/>
-    
-    <xsl:param name="emrid"/>
 
     <!-- a MeSH term -->
     <xsl:param name="mesh"/>

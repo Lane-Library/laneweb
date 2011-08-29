@@ -72,11 +72,11 @@
     },
 
 
-    A = function(N,V){
+    getEncodedParamString = function(name, value){
         if (encodeURIComponent) {
-            return "&"+N+"="+encodeURIComponent(V);
+            return "&" + name + "=" + encodeURIComponent(value);
         }
-        return "&"+N+"="+escape(V);
+        return "&" + N + "=" + escape(value);
     },
     
     dcsCreateImage = function(dcsSrc){
@@ -115,17 +115,17 @@
         var N, P="http"+(window.location.protocol.indexOf('https:')===0?'s':'')+"://"+gDomain+(gDcsId===""?'':'/'+gDcsId)+"/dcs.gif?";
         for (N in DCS){
             if (DCS[N]) {
-                P+=A(N,DCS[N]);
+                P+=getEncodedParamString(N,DCS[N]);
             }
         }
         for (N in WT){
             if (WT[N]) {
-                P+=A("WT."+N,WT[N]);
+                P+=getEncodedParamString("WT."+N,WT[N]);
             }
         }
         for (N in DCSext){
             if (DCSext[N]) {
-                P+=A(N,DCSext[N]);
+                P+=getEncodedParamString(N,DCSext[N]);
             }
         }
         if (P.length>2048&&navigator.userAgent.indexOf('MSIE')>=0){
@@ -160,10 +160,9 @@
     dcsMeta();
     dcsTag();
     
-    Y.on("trackable", function(link, event) {
-        if (link.get("trackable")) {
-            var trackingData = link.get("trackingData"),
-                args = [];
+    LANE.tracking.addTracker({
+        track: function(trackingData) {
+            var args = [];
             if (trackingData.host !== undefined) {
                 args.push('DCS.dcssip');
                 args.push(trackingData.host);

@@ -1,25 +1,34 @@
 /**
  * @author ceyates
  */
-YUI({logInclude: { TestRunner: true } }).use('console','test', function(T) {
+YUI({logInclude: { TestRunner: true } }).use('console','test', function(Y) {
     
-    var laneTestCase = new T.Test.Case({
+    var laneTestCase = new Y.Test.Case({
         name: "Lane TestCase",
         testExists: function() {
-            T.Assert.isObject(Y.lane);
+            Y.Assert.isObject(LANE);
+        },
+        testNamespaceExists: function() {
+            Y.Assert.isFunction(LANE.namespace);
+        },
+        testNamespace: function() {
+            var o = LANE.namespace('LANE.newNamespace', 'another.newNamespace');
+            Y.Assert.isObject(LANE.newNamespace);
+            Y.Assert.isObject(LANE.another.newNamespace);
+            Y.Assert.areSame(LANE.another.newNamespace, o);
         },
         testImportNode: function() {
-            T.Assert.isFunction(document.importNode);
+            Y.Assert.isFunction(document.importNode);
         }
     });
     
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false                   
     }).render('#log');
  
     
-    T.Test.Runner.add(laneTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(laneTestCase);
+    Y.Test.Runner.run();
 });

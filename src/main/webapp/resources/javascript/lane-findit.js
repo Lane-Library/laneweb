@@ -1,6 +1,7 @@
 (function() {
-    var findItNode = Y.one('#findIt'),
-        searchString = Y.lane.SearchResult.getEncodedSearchTerms(),
+    var Y = LANE.Y,
+        findItNode = Y.one('#findIt'),
+        searchString = LANE.SearchResult.getEncodedSearchTerms(),
         url;
     if (findItNode && searchString) {
         url = '/././apps/sfx/json?q=' + searchString;

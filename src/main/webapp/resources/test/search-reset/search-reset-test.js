@@ -2,63 +2,63 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use("node-event-simulate", "console", "test", function(T){
+}).use("node-event-simulate", "console", "test", function(Y){
 
-    var searchResetTestCase = new T.Test.Case({
+    var searchResetTestCase = new Y.Test.Case({
         name: "Lane Search Reset Test Case",
         setUp: function() {
-            var searchReset = T.one("#searchReset");
+            var searchReset = Y.one("#searchReset");
             if (searchReset) {
                 searchReset.remove();
             }
         },
         testSearchResetNotPresent: function() {
-            T.Assert.isNull(T.one("#searchReset"));
+            Y.Assert.isNull(Y.one("#searchReset"));
         },
         testConstructorCreatesLink: function() {
-            var instance = new Y.lane.SearchReset();
-            T.Assert.isObject(T.one("#searchReset"));
+            var instance = new LANE.SearchReset();
+            Y.Assert.isObject(Y.one("#searchReset"));
         },
         testShow: function() {
-            var instance = new Y.lane.SearchReset();
-            var searchReset = T.one("#searchReset");
+            var instance = new LANE.SearchReset();
+            var searchReset = Y.one("#searchReset");
             instance.show();
-            T.Assert.areEqual("block", searchReset.getStyle("display"));
+            Y.Assert.areEqual("block", searchReset.getStyle("display"));
         },
         testHide: function() {
-            var instance = new Y.lane.SearchReset();
-            var searchReset = T.one("#searchReset");
+            var instance = new LANE.SearchReset();
+            var searchReset = Y.one("#searchReset");
             instance.hide();
-            T.Assert.areEqual("none", searchReset.getStyle("display"));
+            Y.Assert.areEqual("none", searchReset.getStyle("display"));
         },
         testSyncUI: function() {
-            var instance = new Y.lane.SearchReset();
-            var searchReset = T.one("#searchReset"), searchTerms = T.one("#searchTerms");
+            var instance = new LANE.SearchReset();
+            var searchReset = Y.one("#searchReset"), searchTerms = Y.one("#searchTerms");
             searchTerms.set('value','foo');
             instance.syncUI();
-            T.Assert.areEqual("block", searchReset.getStyle("display"));
+            Y.Assert.areEqual("block", searchReset.getStyle("display"));
             searchTerms.set('value','');
             instance.syncUI();
-            T.Assert.areEqual("none", searchReset.getStyle("display"));
+            Y.Assert.areEqual("none", searchReset.getStyle("display"));
         },
         testResetSearch: function() {
-            var instance = new Y.lane.SearchReset();
-            var searchReset = T.one("#searchReset"), searchTerms = T.one("#searchTerms");
+            var instance = new LANE.SearchReset();
+            var searchReset = Y.one("#searchReset"), searchTerms = Y.one("#searchTerms");
             searchTerms.set('value','foo');
             instance.syncUI();
-            T.Assert.areEqual("block", searchReset.getStyle("display"));
+            Y.Assert.areEqual("block", searchReset.getStyle("display"));
             searchReset.simulate('click');
-            T.Assert.areEqual("", searchTerms.get("value"));
-            T.Assert.areEqual("none", searchReset.getStyle("display"));
+            Y.Assert.areEqual("", searchTerms.get("value"));
+            Y.Assert.areEqual("none", searchReset.getStyle("display"));
         }
     });
     
-    T.one("body").addClass("yui3-skin-sam");
-    new T.Console({
+    Y.one("body").addClass("yui3-skin-sam");
+    new Y.Console({
         newestOnTop: false
     }).render("#log");
     
     
-    T.Test.Runner.add(searchResetTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(searchResetTestCase);
+    Y.Test.Runner.run();
 });

@@ -1,6 +1,6 @@
 // hover text for search result abstracts and descriptions
 (function() {
-    var registerHoverTriggers = function() {
+    var Y = LANE.Y, registerHoverTriggers = function() {
         var hoverTargets = Y.all('.hvrTarg'), parentUl, label, i;
         for (i = 0; i < hoverTargets.size(); i++) {
             parentUl = hoverTargets.item(i).get('parentNode');
@@ -39,8 +39,7 @@
                     this.one(".showAbstract").setStyle("display", "block");
                 }
             });
-            if (navigator.platform.match(/(iPhone|iP.d)/)
-                    && !parentUl.one(".showAbstract")) {
+            if (navigator.platform.match(/(iPhone|iP.d)/) && !parentUl.one(".showAbstract")) {
                 label = (parentUl.one(".pmid")) ? 'Abstract' : 'Description';
                 hoverTargets.item(i).insert("<li class='showAbstract'>[<a href='#'>Show " + label + "</a>]</li>", "before");
             }

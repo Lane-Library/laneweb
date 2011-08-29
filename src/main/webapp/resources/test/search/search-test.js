@@ -1,17 +1,17 @@
 /**
  * @author ceyates
  */
-YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','test', function(T) {
+YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','test', function(Y) {
 
     
-    var searchTestCase = new T.Test.Case({
+    var searchTestCase = new Y.Test.Case({
         
         name: 'Lane Search Test Case',
-        search: Y.lane.Search,
+        search: LANE.Search,
         
-        searchTermsInput: T.one('#searchTerms'),
-        searchIndicator: T.one('#searchIndicator'),
-        searchSource: T.one('#searchSource'),
+        searchTermsInput: Y.one('#searchTerms'),
+        searchIndicator: Y.one('#searchIndicator'),
+        searchSource: Y.one('#searchSource'),
         
         setUp: function() {
             this.searchTermsInput.set('value', '');
@@ -21,37 +21,37 @@ YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','t
         testSubmitSearchNoQuery: function() {
             try {
                 this.search.submitSearch();
-                T.Assert.fail('should cause exception');
+                Y.Assert.fail('should cause exception');
             } catch (ex) {
-                T.Assert.areEqual('nothing to search for', ex.toString());
+                Y.Assert.areEqual('nothing to search for', ex.toString());
             }
         },
         testSourceChangeEvent: function() {
             var theSearchSource = this.searchSource;
-            T.Global.on('lane:searchSourceChange', function(search) {
-                T.Assert.areEqual(search.getSearchSource(), theSearchSource.get('value'));
+            Y.Global.on('lane:searchSourceChange', function(search) {
+                Y.Assert.areEqual(search.getSearchSource(), theSearchSource.get('value'));
             });
             this.searchSource.set('selectedIndex',1);
             this.searchSource.simulate('change');
         },
         testGetSearchTerms: function() {
-            T.Assert.areEqual('', this.search.getSearchTerms());
+            Y.Assert.areEqual('', this.search.getSearchTerms());
         },
         testSetSearchTerms: function() {
             this.search.setSearchTerms('foo');
-            T.Assert.areEqual('foo', this.searchTermsInput.get('value'));
+            Y.Assert.areEqual('foo', this.searchTermsInput.get('value'));
         },
         testSuggestSelect: function() {
-            T.publish("lane:suggestSelect",{broadcast:2});
-            T.fire("lane:suggestSelect");
+            Y.publish("lane:suggestSelect",{broadcast:2});
+            Y.fire("lane:suggestSelect");
         }
     });
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false                   
     }).render('#log');
     
-    T.Test.Runner.add(searchTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(searchTestCase);
+    Y.Test.Runner.run();
 });
