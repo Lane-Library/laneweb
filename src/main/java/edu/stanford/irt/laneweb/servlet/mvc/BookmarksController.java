@@ -15,8 +15,8 @@ import edu.stanford.irt.laneweb.bookmarks.Bookmarks;
 import edu.stanford.irt.laneweb.bookmarks.BookmarksDAO;
 import edu.stanford.irt.laneweb.model.Model;
 
-@Controller
-@RequestMapping(value = "/bookmarks")
+//@Controller
+//@RequestMapping(value = "/bookmarks")
 public class BookmarksController {
 
     @Autowired

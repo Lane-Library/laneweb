@@ -12,8 +12,8 @@ import edu.stanford.irt.laneweb.bookmarks.Bookmarks;
 import edu.stanford.irt.laneweb.history.HistoryDAO;
 import edu.stanford.irt.laneweb.model.Model;
 
-@Controller
-@RequestMapping(value = "/history")
+//@Controller
+//@RequestMapping(value = "/history")
 public class HistoryTrackerController {
     
     private static final int MAX_SIZE = 10;

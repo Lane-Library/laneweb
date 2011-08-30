@@ -19,8 +19,8 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/parent-path"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmarks"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/history"/>
+                <!--<ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmarks"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/history"/>-->
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"/>
             </list>
         </property>
