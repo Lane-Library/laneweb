@@ -1,11 +1,11 @@
 package edu.stanford.irt.laneweb.ipgroup;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
-/**
- * @author ceyates
- */
-public final class IPGroup {
+public final class IPGroup implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
     public static final IPGroup ERR = new IPGroup("ERR");
 
