@@ -45,38 +45,6 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- remove after 1.11.22 release -->
-            <map:match pattern="er/browse/type/*" type="wildcard">
-                <map:generate type="er-browse">
-                    <map:parameter name="type" value="{1}"/>
-                </map:generate>
-                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${rid}"/>
-                </map:transform>
-                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-                <map:select type="proxy-links">
-                    <map:when test="true">
-                        <map:transform type="proxy-links"/>
-                    </map:when>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
-            <!-- remove after 1.11.22 release -->
-            <map:match pattern="er/browse/subset/*" type="wildcard">
-                <map:generate type="er-browse">
-                    <map:parameter name="subset" value="{1}"/>
-                </map:generate>
-                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${rid}"/>
-                </map:transform>
-                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-                <map:select type="proxy-links">
-                    <map:when test="true">
-                        <map:transform type="proxy-links"/>
-                    </map:when>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
             <map:match pattern="persistentlogin.html" type="wildcard">
