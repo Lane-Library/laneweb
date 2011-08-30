@@ -14,19 +14,20 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends CollectionManagerImpl {
-    
-    private static final int MAX_SUGGESTION_COUNT = 10;
 
     protected QueryNormalizer queryNormalizer = new QueryNormalizer();
 
     @Override
     public Collection<Eresource> search(final String query) {
-        return doSearch(getSearchSQL(), getSearchParams(query));
+        Collection<String> params = searchStringToParams(query);
+        return doSearch(getSearchSQL(), params);
     }
 
     @Override
     public Collection<Eresource> searchType(final String type, final String query) {
-        return doSearch(getSearchTypeSQL(), getSearchTypeParams(type, query));
+        Collection<String> params = searchStringToParams(query);
+        params.add(type);
+        return doSearch(getSearchTypeSQL(), params);
     }
 
     private Collection<Eresource> doSearch(final String sql, final Collection<String> params) {
@@ -56,8 +57,7 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         EresourceImpl eresource = null;
         int currentEresourceId = 0;
         String currentTitle = null;
-        int count = 0;
-        while (rs.next() && count++ < MAX_SUGGESTION_COUNT) {
+        while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             String rowTitle = rs.getString("TITLE");
             if (rowEresourceId != currentEresourceId || !rowTitle.equals(currentTitle)) {
@@ -75,8 +75,6 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
     protected abstract String getSearchSQL();
 
     protected abstract String getSearchTypeSQL();
-    
-    protected abstract Collection<String> getSearchParams(String query);
-    
-    protected abstract Collection<String> getSearchTypeParams(String type, String query);
+
+    protected abstract Collection<String> searchStringToParams(String query);
 }
