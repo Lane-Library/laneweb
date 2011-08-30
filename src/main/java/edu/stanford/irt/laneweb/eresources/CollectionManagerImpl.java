@@ -101,21 +101,6 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND TYPE.TYPE = ? "
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String MESH_CORE =
-            "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
-                    + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM ERESOURCE, VERSION, LINK, MESH, TYPE, DESCRIPTION "
-                    + "WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID "
-                    + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
-                    + "AND ERESOURCE.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
-                    + "AND ERESOURCE.ERESOURCE_ID = MESH.ERESOURCE_ID "
-                    + "AND MESH.TERM = ? "
-                    + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
-                    + "AND TYPE.TYPE = ? "
-                    + "AND ERESOURCE.CORE = 'Y' "
-                    + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
-
     private static final String SEARCH =
             "WITH FOUND AS ( "
                     + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,?) AS SCORE_TITLE "
@@ -132,25 +117,6 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND FOUND.ERESOURCE_ID = PUBLICATION_YEAR.ERESOURCE_ID(+) "
                     + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
                     + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
-                    + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
-
-    private static final String SEARCH_SUBSET =
-            "WITH FOUND AS ( "
-                    + "SELECT TITLE, ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,?) AS SCORE_TITLE "
-                    + "FROM ERESOURCE "
-                    + "WHERE CONTAINS(TEXT,?,1) > 0"
-                    + ") "
-                    + "SELECT FOUND.ERESOURCE_ID, RECORD_TYPE, RECORD_ID, CORE, YEAR, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-                    + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
-                    + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-                    + "FROM FOUND, VERSION, LINK, TYPE, SUBSET, DESCRIPTION, PUBLICATION_YEAR "
-                    + "WHERE FOUND.ERESOURCE_ID = VERSION.ERESOURCE_ID "
-                    + "AND VERSION.VERSION_ID = LINK.VERSION_ID "
-                    + "AND FOUND.ERESOURCE_ID = DESCRIPTION.ERESOURCE_ID(+) "
-                    + "AND FOUND.ERESOURCE_ID = PUBLICATION_YEAR.ERESOURCE_ID(+) "
-                    + "AND FOUND.ERESOURCE_ID = TYPE.ERESOURCE_ID(+) "
-                    + "AND VERSION.VERSION_ID = SUBSET.VERSION_ID(+) "
-                    + "AND SUBSET = ? "
                     + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String SEARCH_TYPE =
@@ -197,13 +163,6 @@ public class CollectionManagerImpl implements CollectionManager {
         params.add(mesh);
         params.add(type);
         return doGet(MESH, params, null);
-    }
-
-    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
-        Collection<String> params = new LinkedList<String>();
-        params.add(mesh);
-        params.add(type);
-        return doGet(MESH_CORE, params, null);
     }
 
     public Collection<Eresource> getSubset(final String subset) {
@@ -384,5 +343,19 @@ public class CollectionManagerImpl implements CollectionManager {
             }
         }
         return eresources;
+    }
+
+
+    //TODO: remove these when upgrading to 1.8
+    public Map<String, Integer> searchCount(Set<String> types, Set<String> subsets, String query) {
+        return searchCount(types, query);
+    }
+
+    public Collection<Eresource> searchSubset(String subset, String query) {
+        throw new UnsupportedOperationException();
+    }
+
+    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
+        throw new UnsupportedOperationException();
     }
 }

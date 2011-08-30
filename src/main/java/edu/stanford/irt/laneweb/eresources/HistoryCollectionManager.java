@@ -92,20 +92,6 @@ public class HistoryCollectionManager implements CollectionManager {
         + "AND H_TYPE.TYPE = ? "
         + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String MESH_CORE =
-        "SELECT H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
-        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
-        + "AND H_MESH.TERM = ? "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-        + "AND H_TYPE.TYPE = ? "
-        + "AND H_ERESOURCE.CORE = 'Y' "
-        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
-
     private static final String SEARCH =
         "WITH FOUND AS ( "
         + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, SCORE(1) * 3 AS SCORE_TEXT, "
@@ -128,31 +114,6 @@ public class HistoryCollectionManager implements CollectionManager {
         + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
         + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
         + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) "
-        + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
-
-    private static final String SEARCH_SUBSET =
-        "WITH FOUND AS ( "
-        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-        + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE "
-        + "FROM H_ERESOURCE "
-        + "WHERE CONTAINS(TEXT,?,1) > 0 "
-        + "AND CORE = 'Y' "
-        + "UNION "
-        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, SCORE(1) AS SCORE_TEXT, "
-        + "CONTAINS(TITLE,?) AS SCORE_TITLE "
-        + "FROM H_ERESOURCE "
-        + "WHERE CONTAINS(TEXT,?,1) > 0 "
-        + "AND CORE IS NULL "
-        + ") "
-        + "SELECT FOUND.ERESOURCE_ID, FOUND.RECORD_TYPE, FOUND.RECORD_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET "
-        + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
-        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) "
-        + "AND SUBSET = ? "
         + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String SEARCH_TYPE =
@@ -282,17 +243,6 @@ public class HistoryCollectionManager implements CollectionManager {
         return result;
     }
 
-    public Collection<Eresource> searchSubset(final String subset, final String query) {
-        QueryTranslator translator = new QueryTranslator();
-        String translatedQuery = translator.translate(query);
-        Collection<String> params = new LinkedList<String>();
-        for (int i = 0; i < 4; i++) {
-            params.add(translatedQuery);
-        }
-        params.add(subset);
-        return doGetSearch(SEARCH_SUBSET, params, query);
-    }
-
     public Collection<Eresource> searchType(final String type, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
@@ -396,5 +346,18 @@ public class HistoryCollectionManager implements CollectionManager {
             }
         }
         return eresources;
+    }
+
+    //TODO: remove these when upgrading to eresources-1.8
+    public Collection<Eresource> getMeshCore(String type, String mesh) {
+        throw new UnsupportedOperationException();
+    }
+
+    public Map<String, Integer> searchCount(Set<String> types, Set<String> subsets, String query) {
+        return searchCount(types, query);
+    }
+
+    public Collection<Eresource> searchSubset(final String subset, final String query) {
+        throw new UnsupportedOperationException();
     }
 }

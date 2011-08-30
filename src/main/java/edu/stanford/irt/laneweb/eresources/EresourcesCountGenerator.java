@@ -24,7 +24,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
     private Set<String> types = Collections.emptySet();
 
     public void generate() throws SAXException {
-        Map<String, Integer> results = this.collectionManager.searchCount(this.types, this.query);
+        Map<String, Integer> results = this.collectionManager.searchCount(this.types, null, this.query);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", SQL_NS);
         XMLUtils.startElement(this.xmlConsumer, SQL_NS, "rowset");
