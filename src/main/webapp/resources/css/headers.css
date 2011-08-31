@@ -23,7 +23,8 @@ h3 {
 h2 {
     color : #575347;
     font-size : 250%;
-    margin-bottom : 10px
+    padding-top : 15px;
+    margin-bottom : 0
 }
 h4 {
     color : black;

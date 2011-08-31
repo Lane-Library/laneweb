@@ -1,106 +1,102 @@
 /*styles for redesigned main elements on the landing pages*/
-h2 {
-	margin-bottom :0;
-    padding-top:15px;
-}
 .h2-border {
-	border-bottom:5px #575347 solid;
-	margin-bottom :0;
-    padding-top:25px;
+    border-bottom : 5px #575347 solid;
+    margin-bottom : 0;
+    padding-top : 25px;
 }
 .alternate {
-	color: #920000;
-	text-transform:none;
-	text-align:center;
-		border-bottom:none;
-	font-weight:bold;
+    color : #920000;
+    text-transform : none;
+    text-align : center;
+    border-bottom : none;
+    font-weight : bold;
 }
 .popular-shadow {
-	background-color: #F4F5EF;
-	background-image:url(/././resources/images/bottomShadow1.png);
-	background-position: center bottom;
-	background-repeat: no-repeat;
-	padding: 1em 1em 2em 2em;
-	width: 85%;
-	margin-bottom: 2em;
-	margin-top: 1.5em;
+    background-color : #F4F5EF;
+    background-image : url(/././resources/images/bottomShadow1.png);
+    background-position : center bottom;
+    background-repeat : no-repeat;
+    padding : 1em 1em 2em 2em;
+    width : 85%;
+    margin-bottom : 2em;
+    margin-top : 1.5em;
 }
 .popular-shadow h3 {
-	border-bottom:none;
-	font-weight:bold;
-	margin-bottom: .5em;
+    border-bottom : none;
+    font-weight : bold;
+    margin-bottom : .5em;
 }
 .popular-shadow .bd {
-	margin-bottom: 2.5em;
+    margin-bottom : 2.5em;
 }
 .header {
-	border-bottom:none;
-	font-weight:bold;
+    border-bottom : none;
+    font-weight : bold;
 }
 .detailInfo {
-	color:#999;
-	font-size:10px;
+    color : #999;
+    font-size : 10px;
 }
 .module-margin {
-	margin-bottom: 1em;
+    margin-bottom : 1em;
 }
 .shadow {
-	padding-bottom:15px;
-	margin-bottom: 15px;
-	background-image:url(/././resources/images/grandroundsItemBg1.png);
-	background-position:bottom;
-	background-repeat:no-repeat;
+    padding-bottom : 15px;
+    margin-bottom : 15px;
+    background-image : url(/././resources/images/grandroundsItemBg1.png);
+    background-position : bottom;
+    background-repeat : no-repeat;
 }
 .border {
-	border-right: 1px solid #eae9e6;
-	padding-bottom:15px;
+    border-right : 1px solid #eae9e6;
+    padding-bottom : 15px;
 }
 .module-links-narrow {
-	float:left;
-	width:50%;
+    float : left;
+    width : 50%;
 }
 .content .calendar li {
-	width : 75px;
-	height : 64px;
-	float : left;
-	margin : .2em;
-	padding : .5em;
-	font-family : Georgia, "Times New Roman", Times, serif;
-	font-weight: bold;
-	list-style: none inside none;
-	margin-left: 0;
-	background-color : #d6d5c7;
-	margin-bottom : 0;
-	-webkit-border-radius : 0 0 0 19px;
-	-moz-border-radius : 0 0 0 19px;
-	border-radius : 0 0 0 19px;
-	border: 2px #ffffff solid;
+    width : 75px;
+    height : 64px;
+    float : left;
+    margin : .2em;
+    padding : .5em;
+    font-family : Georgia, "Times New Roman", Times, serif;
+    font-weight : bold;
+    list-style : none inside none;
+    margin-left : 0;
+    background-color : #d6d5c7;
+    margin-bottom : 0;
+    -webkit-border-radius : 0 0 0 19px;
+    -moz-border-radius : 0 0 0 19px;
+    border-radius : 0 0 0 19px;
+    border : 2px #ffffff solid;
 }
 .calendar li p {
-	line-height: normal;
-	font-weight: normal;
-	margin-top: .5em;
+    line-height : normal;
+    font-weight : normal;
+    margin-top : .5em;
 }
 .bottomShadowWide {
-	padding-top:10px;
-	clear:left;
-	text-align:center;
-	background-image:url(/././resources/images/bottomShadow1.png);
-	background-repeat:no-repeat;
-	background-position:top center;
-	padding-bottom:15px;
-	margin-bottom: 20px;
+    padding-top : 10px;
+    clear : left;
+    text-align : center;
+    background-image : url(/././resources/images/bottomShadow1.png);
+    background-repeat : no-repeat;
+    background-position : top center;
+    padding-bottom : 15px;
+    margin-bottom : 20px;
 }
 .buttons-inline {
-	display:inline;
-	list-style-type: none;
+    display : inline;
+    list-style-type : none;
 }
 #portalList .empty-cell {
-	background-color: white;
-	border-bottom: medium none;
-	display: block;
-	font-size: 15px;
-	margin: 1px;
-	padding: 15px;
-	width: 200px;
+    background-color : white;
+    border-bottom : medium none;
+    display : block;
+    font-size : 15px;
+    margin : 1px;
+    padding : 15px;
+    width : 200px;
 }
