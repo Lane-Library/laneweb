@@ -166,13 +166,12 @@
 }
 #purchaseMenu {
     margin : 9px 0 40px;
-    /* make this a bit wider so the <a>s don't wrap */
-    width : 105%
 }
 #purchaseMenu li {
     float : left
 }
 #purchaseMenu a {
+    display : block;
 	border: 2px solid #C9C9C9;
 	color: #585347;
 	padding: 4px 50px;
