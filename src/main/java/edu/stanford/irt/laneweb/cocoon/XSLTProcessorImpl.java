@@ -122,9 +122,6 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
     /** Check included stylesheets */
     private boolean checkIncludes;
 
-    /** The default TransformerFactory used by this component */
-    private SAXTransformerFactory defaultFactory;
-
     /** The error handler for the transformer */
     private TraxErrorHandler errorHandler;
 
@@ -263,7 +260,6 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
             this.factory = getTransformerFactory(this.transformerFactory);
         }
         this.factory.setErrorListener(this.errorHandler);
-        this.defaultFactory = this.factory;
     }
 
     /**

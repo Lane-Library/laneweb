@@ -9,8 +9,6 @@ import org.xml.sax.helpers.AttributesImpl;
 @Component
 public class DefaultXMLizableBookmarksView {
 
-    private static final long serialVersionUID = 1L;
-
     static final String A = "a";
 
     static final String CDATA = "CDATA";

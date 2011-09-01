@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ShowParameterRedirectFilter extends AbstractLanewebFilter {
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)
             throws ServletException, IOException {

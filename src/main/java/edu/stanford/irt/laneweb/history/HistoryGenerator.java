@@ -20,8 +20,6 @@ public class HistoryGenerator extends AbstractGenerator {
 
     private static final String LI = "li";
 
-    private static final long serialVersionUID = 1L;
-
     private static final String UL = "ul";
 
     private static final String XHTMLNS = "http://www.w3.org/1999/xhtml";

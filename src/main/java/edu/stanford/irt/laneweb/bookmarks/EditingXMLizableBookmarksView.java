@@ -1,12 +1,6 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
-import org.apache.cocoon.xml.XMLUtils;
-import org.springframework.stereotype.Component;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
-
-@Component
+//@Component
 public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView {
 
 //    private static final String FORM = "form";
