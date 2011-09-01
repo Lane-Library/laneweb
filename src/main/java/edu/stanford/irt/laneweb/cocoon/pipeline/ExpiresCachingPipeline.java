@@ -99,9 +99,9 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 if (this.cacheExpires != 0) {
                     final XMLConsumer old = lastConsumer;
                     this.xmlSerializer = new XMLByteStreamCompiler();
-                    lastConsumer = new XMLTeePipe(lastConsumer, this.xmlSerializer);
+                    setLastConsumer(new XMLTeePipe(lastConsumer, this.xmlSerializer));
                     super.connectPipeline(environment);
-                    lastConsumer = old;
+                    setLastConsumer(old);
                 } else {
                     super.connectPipeline(environment);
                 }

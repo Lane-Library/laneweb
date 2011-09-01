@@ -791,4 +791,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     protected List<Transformer> getTransformers() {
         return this.transformers;
     }
+    
+    protected void setLastConsumer(XMLConsumer consumer) {
+    	this.lastConsumer = consumer;
+    }
 }
