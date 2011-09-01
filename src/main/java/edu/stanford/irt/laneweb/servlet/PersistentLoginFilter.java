@@ -2,17 +2,13 @@ package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class PersistentLoginFilter implements Filter {
+public class PersistentLoginFilter extends AbstractLanewebFilter {
 
     /**
      * this codec codes and decodes the cookie value using sunet id, useragent
@@ -22,25 +18,18 @@ public class PersistentLoginFilter implements Filter {
 
     private SunetIdSource sunetIdSource = new SunetIdSource();
 
-    public void destroy() {
-    }
-
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException,
-            ServletException {
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
+    @Override
+    public void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)
+            throws IOException, ServletException {
         if (Boolean.parseBoolean(request.getParameter(("pl")))) {
-            HttpServletRequest httpRequest = (HttpServletRequest) request;
-            String sunetid = this.sunetIdSource.getSunetid(httpRequest);
+            String sunetid = this.sunetIdSource.getSunetid(request);
             if (sunetid != null) {
-                setLoginCookie(sunetid, httpRequest, httpResponse);
+                setLoginCookie(sunetid, request, response);
             }
         } else if (Boolean.parseBoolean(request.getParameter("remove-pl"))) {
-            removeLoginCookie(httpResponse);
+            removeLoginCookie(response);
         }
         chain.doFilter(request, response);
-    }
-
-    public void init(final FilterConfig filterConfig) throws ServletException {
     }
 
     /**

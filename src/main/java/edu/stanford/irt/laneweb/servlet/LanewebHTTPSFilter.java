@@ -2,12 +2,8 @@ package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,29 +15,22 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @author ceyates
  */
-public class LanewebHTTPSFilter implements Filter {
-
-    public void destroy() {
-    }
+public class LanewebHTTPSFilter extends AbstractLanewebFilter {
 
     /**
      * does the redirect if no gohttps header or scheme is not https
      */
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException,
-            ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
+    @Override
+    protected void internalDoFilter(final HttpServletRequest req, final HttpServletResponse resp, final FilterChain chain)
+            throws IOException, ServletException {
         String queryString = req.getQueryString();
         String url = queryString == null ? req.getRequestURL().toString() : req.getRequestURL().append('?').append(queryString)
                 .toString();
         int colonIndex = url.indexOf(':');
         if ((req.getHeader("gohttps") != null) || "https".equals(req.getScheme())) {
-            chain.doFilter(request, response);
+            chain.doFilter(req, resp);
         } else {
             resp.sendRedirect("https" + url.substring(colonIndex));
         }
-    }
-
-    public void init(final FilterConfig filterConfig) throws ServletException {
     }
 }
