@@ -11,7 +11,10 @@
             <action date="2010-09-01" dev="ceyates" issue="54771" type="update">
                 Replace some Cocoon components with Spring MVC
             </action>
-            <action date="2010-08-26" dev="ryanmax" issue="34539" type="add">
+            <action date="2010-08-30" dev="ryanmax" issue="52750" type="add">
+                mobile redirects
+            </action>
+            <action date="2010-08-26" dev="ryanmax" issue="54539" type="add">
                 exclude /howto/ in robots.txt
             </action>
         </release>
