@@ -543,19 +543,13 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.30.0</version>
+            <version>1.31.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
             <groupId>net.sf.joost</groupId>
             <scope>runtime</scope>
             <version>0.9.1</version>
-        </dependency>
-        <dependency>
-            <artifactId>jrobin</artifactId>
-            <groupId>org.jrobin</groupId>
-            <scope>runtime</scope>
-            <version>1.5.9</version>
         </dependency>
         <dependency>
             <artifactId>junit</artifactId>
