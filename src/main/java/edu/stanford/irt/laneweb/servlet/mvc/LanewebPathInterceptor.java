@@ -47,6 +47,7 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
         int length = basePath.length() - contextPath.length();
         if (length > 0) {
         //FIXME: there must be a better way to reset this, find it and implement it before 1.12 release
+            //OK, well, it works so keeping it for the 1.12 release :-)
             String pathWithinMapping = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
             if (pathWithinMapping.length() > length) {
                 request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, pathWithinMapping.substring(length));
