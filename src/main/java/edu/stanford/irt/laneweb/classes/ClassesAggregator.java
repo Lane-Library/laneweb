@@ -52,7 +52,11 @@ public class ClassesAggregator extends ContentAggregator implements CacheablePro
             throws ProcessingException, SAXException, IOException {
         this.resolver = resolver;
         this.src = src;
-        Source source = resolver.resolveURI(src);
+    }
+
+    @Override
+    public void generate() throws IOException, SAXException, ProcessingException {
+        Source source = this.resolver.resolveURI(src);
         InputSource domContent = new InputSource(source.getInputStream());
         domContent.setSystemId(source.getURI());
         try {
@@ -64,10 +68,11 @@ public class ClassesAggregator extends ContentAggregator implements CacheablePro
             }
             for (int i = 0; i < this.parts.size(); i++) {
                 final Part current = (Part) this.parts.get(i);
-                current.source = resolver.resolveURI(current.uri);
+                current.source = this.resolver.resolveURI(current.uri);
             }
         } catch (XPathExpressionException e) {
-            throw new RuntimeException(e);
+            throw new ProcessingException(e);
         }
+        super.generate();
     }
 }

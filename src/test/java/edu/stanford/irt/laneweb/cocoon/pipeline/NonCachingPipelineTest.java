@@ -96,18 +96,6 @@ public class NonCachingPipelineTest {
     }
 
     @Test
-    public void testPrepareInternal() throws ProcessingException, SAXException, IOException {
-        expect(this.beanFactory.getBean("org.apache.cocoon.reading.Reader/foo")).andReturn(this.reader);
-        expect(this.environment.getObjectModel()).andReturn(null);
-        this.reader.setup(null, null, null, this.parameters);
-        expect(this.parameters.isParameter("expires")).andReturn(false);
-        replay(this.beanFactory, this.reader, this.environment, this.parameters);
-        this.pipeline.setReader("foo", null, this.parameters, null);
-        this.pipeline.prepareInternal(this.environment);
-        verify(this.beanFactory, this.reader, this.environment, this.parameters);
-    }
-
-    @Test
     public void testProcessEnvironmentXMLConsumer() throws ProcessingException, IOException, SAXException {
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
         expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
@@ -138,14 +126,6 @@ public class NonCachingPipelineTest {
     @Test
     public void testSetProcessorManager() {
         this.pipeline.setProcessorManager(null);
-    }
-
-    @Test
-    public void testSetReader() throws ProcessingException {
-        expect(this.beanFactory.getBean("org.apache.cocoon.reading.Reader/foo")).andReturn(this.reader);
-        replay(this.beanFactory, this.reader);
-        this.pipeline.setReader("foo", null, null, null);
-        verify(this.beanFactory, this.reader);
     }
 
     @Test

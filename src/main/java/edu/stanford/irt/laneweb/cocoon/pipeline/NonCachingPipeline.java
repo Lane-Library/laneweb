@@ -84,15 +84,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     /** The parameters */
     private Parameters parameters;
 
-    // Reader stuff
-    private Reader reader;
-
-    private String readerMimeType;
-
-    private Parameters readerParam;
-
-    private String readerSource;
-
     // Serializer stuff
     private Serializer serializer;
 
@@ -133,11 +124,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      */
     public void addTransformer(final String role, final String source, final Parameters param, final Parameters hintParam)
             throws ProcessingException {
-        if (this.reader != null) {
-            // Should normally never happen as setting a reader starts pipeline
-            // processing
-            throw new ProcessingException("Reader already set. Cannot add transformer '" + role + "'", getLocation(param));
-        }
         if (this.generator == null) {
             throw new ProcessingException("Must set a generator before adding transformer '" + role + "'", getLocation(param));
         }
@@ -215,19 +201,13 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             environment.getObjectModel().put(ObjectModelHelper.EXPIRES_OBJECT,
                     Long.valueOf(this.expires + System.currentTimeMillis()));
         }
-        if (this.reader != null) {
-            if (checkIfModified(environment, this.reader.getLastModified())) {
-                return true;
-            }
-            return processReader(environment);
-        } else {
+
             // If this is an internal request, lastConsumer was reset!
             if (this.lastConsumer == null) {
                 this.lastConsumer = this.serializer;
             }
             connectPipeline(environment);
             return processXMLPipeline(environment);
-        }
     }
 
     /**
@@ -235,9 +215,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * serializer. Instead all SAX events are streamed to the XMLConsumer.
      */
     public boolean process(final Environment environment, final XMLConsumer consumer) throws ProcessingException {
-        if (this.reader != null) {
-            throw new ProcessingException("Streaming of an internal pipeline is not possible with a reader.");
-        }
         // Exception happened during setup and was handled
         if (this.errorPipeline != null) {
             return this.errorPipeline.process(environment, consumer);
@@ -297,9 +274,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         if (this.generator != null) {
             throw new ProcessingException("Generator already set. Cannot set generator '" + role + "'", getLocation(param));
         }
-        if (this.reader != null) {
-            throw new ProcessingException("Reader already set. Cannot set generator '" + role + "'", getLocation(param));
-        }
         this.generator = (Generator) this.beanFactory.getBean(Generator.ROLE + '/' + role);
         this.generatorSource = source;
         this.generatorParam = param;
@@ -317,22 +291,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * @param mimeType
      *            Can be null
      */
-    public void setReader(final String role, final String source, final Parameters param, final String mimeType)
-            throws ProcessingException {
-        if (this.reader != null) {
-            // Should normally never happen as setting a reader starts pipeline
-            // processing
-            throw new ProcessingException("Reader already set. Cannot set reader '" + role + "'", getLocation(param));
-        }
-        if (this.generator != null) {
-            // Should normally never happen as setting a reader starts pipeline
-            // processing
-            throw new ProcessingException("Generator already set. Cannot use reader '" + role + "'", getLocation(param));
-        }
-        this.reader = (Reader) this.beanFactory.getBean(Reader.ROLE + '/' + role);
-        this.readerSource = source;
-        this.readerParam = param;
-        this.readerMimeType = mimeType;
+    public void setReader(final String role, final String source, final Parameters param, final String mimeType) {
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -347,11 +307,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             // Should normally not happen as adding a serializer starts pipeline
             // processing
             throw new ProcessingException("Serializer already set. Cannot set serializer '" + role + "'", getLocation(param));
-        }
-        if (this.reader != null) {
-            // Should normally never happen as setting a reader starts pipeline
-            // processing
-            throw new ProcessingException("Reader already set. Cannot set serializer '" + role + "'", getLocation(param));
         }
         if (this.generator == null) {
             throw new ProcessingException("Must set a generator before setting serializer '" + role + "'", getLocation(param));
@@ -454,7 +409,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * @return true if the pipeline is 'sane', false otherwise.
      */
     protected boolean checkPipeline() {
-        if (this.generator == null && this.reader == null) {
+        if (this.generator == null) {
             return false;
         }
         if (this.generator != null && this.serializer == null) {
@@ -526,7 +481,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             throw (ConnectionResetException) e;
         }
         // Not a connection reset: add all location information
-        if (this.reader == null) {
             // Add all locations in reverse order
             List<Location> locations = new LinkedList<Location>();
             locations.add(getLocation(this.serializerParam));
@@ -535,10 +489,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             }
             locations.add(getLocation(this.generatorParam));
             throw ProcessingException.throwLocated("Failed to process pipeline", e, locations);
-        } else {
-            // Add reader location
-            throw ProcessingException.throwLocated("Failed to process reader", e, getLocation(this.readerParam));
-        }
+
     }
 
     /**
@@ -583,11 +534,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         if (this.prepared) {
             throw new ProcessingException("Duplicate preparePipeline call caught.");
         }
-        if (this.reader != null) {
-            setupReader(environment);
-        } else {
-            setupPipeline(environment);
-        }
+        setupPipeline(environment);
         this.prepared = true;
     }
 
@@ -605,31 +552,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             }
         }
         throw e;
-    }
-
-    /**
-     * Process the pipeline using a reader.
-     * 
-     * @throws ProcessingException
-     *             if
-     */
-    protected boolean processReader(final Environment environment) throws ProcessingException {
-        try {
-            this.setMimeTypeForReader(environment);
-            if (this.reader.shouldSetContentLength()) {
-                ByteArrayOutputStream os = new ByteArrayOutputStream();
-                this.reader.setOutputStream(os);
-                this.reader.generate();
-                environment.setContentLength(os.size());
-                os.writeTo(environment.getOutputStream(0));
-            } else {
-                this.reader.setOutputStream(environment.getOutputStream(this.outputBufferSize));
-                this.reader.generate();
-            }
-        } catch (Exception e) {
-            handleException(e);
-        }
-        return true;
     }
 
     /**
@@ -661,35 +583,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             handleException(e);
         }
         return true;
-    }
-
-    /**
-     * Set the mime-type for a reader
-     * 
-     * @param environment
-     *            The current environment
-     */
-    protected void setMimeTypeForReader(final Environment environment) {
-        // Set the mime-type
-        // the behaviour has changed from 2.1.x to 2.2 according to bug #10277:
-        // MIME type declared in the sitemap (instance or declaration, in this
-        // order)
-        // Ask the Reader for a MIME type:
-        // A *.doc reader could peek into the file
-        // and return either text/plain or application/vnd.msword or
-        // the reader can use MIME type declared in WEB-INF/web.xml or
-        // by the server.
-        if (this.readerMimeType != null) {
-            // there was a mime-type defined on map:read in the sitemap
-            environment.setContentType(this.readerMimeType);
-        } else {
-            final String mimeType = this.reader.getMimeType();
-            if (mimeType != null) {
-                environment.setContentType(mimeType);
-            }
-            // If no mimeType available, leave to to upstream proxy
-            // or browser to deduce content-type from URL extension.
-        }
     }
 
     /**
@@ -747,23 +640,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         }
     }
 
-    /**
-     * Setup the reader
-     */
-    protected void setupReader(final Environment environment) throws ProcessingException {
-        try {
-            this.reader.setup(this.sourceResolver, environment.getObjectModel(), this.readerSource, this.readerParam);
-            // set the expires parameter on the pipeline if the reader is
-            // configured with one
-            if (this.readerParam.isParameter("expires")) {
-                // should this checking be done somewhere else??
-                this.expires = this.readerParam.getParameterAsLong("expires");
-            }
-        } catch (Exception e) {
-            handleException(e);
-        }
-    }
-
     protected long getExpires() {
         return this.expires;
     }
@@ -778,10 +654,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     
     protected Parameters getParameters() {
         return this.parameters;
-    }
-    
-    protected Reader getReader() {
-        return this.reader;
     }
     
     protected Serializer getSerializer() {

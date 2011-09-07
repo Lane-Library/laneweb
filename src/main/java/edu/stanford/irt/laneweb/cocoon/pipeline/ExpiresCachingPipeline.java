@@ -21,7 +21,6 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Response;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.reading.Reader;
 import org.apache.cocoon.serialization.Serializer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
@@ -166,67 +165,11 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 this.cachedResponse = null;
             }
         }
-        if (this.cacheExpires > 0 && (getReader() != null || lastConsumer == serializer)) {
+        if (this.cacheExpires > 0 && lastConsumer == serializer) {
             Response res = ObjectModelHelper.getResponse(environment.getObjectModel());
             res.setDateHeader("Expires", System.currentTimeMillis() + (this.cacheExpires * 1000));
             res.setHeader("Cache-Control", "max-age=" + this.cacheExpires + ", public");
         }
-    }
-
-    @Override
-    protected boolean processReader(final Environment environment) throws ProcessingException {
-        try {
-            if (this.cachedResponse != null) {
-                if (this.cachedResponse.getContentType() != null) {
-                    environment.setContentType(this.cachedResponse.getContentType());
-                } else {
-                    this.setMimeTypeForReader(environment);
-                }
-                final byte[] content = this.cachedResponse.getResponse();
-                environment.setContentLength(content.length);
-                final OutputStream os = environment.getOutputStream(0);
-                os.write(content);
-            } else {
-                // generate new response
-                if (this.cacheExpires == 0) {
-                    return super.processReader(environment);
-                }
-                byte[] cachedData;
-                int outputBufferSize = getOutputBufferSize();
-                this.setMimeTypeForReader(environment);
-                Reader reader = getReader();
-                if (reader.shouldSetContentLength()) {
-                    final OutputStream os = environment.getOutputStream(outputBufferSize);
-                    // set the output stream
-                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    reader.setOutputStream(baos);
-                    reader.generate();
-                    cachedData = baos.toByteArray();
-                    environment.setContentLength(cachedData.length);
-                    os.write(cachedData);
-                } else {
-                    final CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
-                    // set the output stream
-                    reader.setOutputStream(os);
-                    reader.generate();
-                    cachedData = os.getContent();
-                }
-                //
-                // Now that we have processed the pipeline,
-                // we do the actual caching
-                //
-                if (this.cacheValidity != null) {
-                    this.cachedResponse = new CachedResponse(this.cacheValidity, cachedData);
-                    this.cachedResponse.setContentType(environment.getContentType());
-                    this.cache.store(this.cacheKey, this.cachedResponse);
-                }
-            }
-        } catch (Exception e) {
-            handleException(e);
-        }
-        // Request has been succesfully processed, set approporiate status code
-        environment.setStatus(HttpServletResponse.SC_OK);
-        return true;
     }
 
     /**

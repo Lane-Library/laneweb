@@ -1,17 +1,21 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.StringReader;
 
+import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.xml.ContentHandlerWrapper;
 import org.apache.cocoon.xml.XMLConsumer;
+import org.apache.excalibur.source.SourceValidity;
+import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-public class TextNodeParsingTransformer extends AbstractTransformer {
+public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent {
 
     private static class HtmlSAXParser extends AbstractSAXParser {
 
@@ -100,5 +104,15 @@ public class TextNodeParsingTransformer extends AbstractTransformer {
         if (this.elementName.equals(qName)) {
             this.inElement = true;
         }
+    }
+
+    @Override
+    public Serializable getKey() {
+        return "textNodeParsing";
+    }
+
+    @Override
+    public SourceValidity getValidity() {
+        return NOPValidity.SHARED_INSTANCE;
     }
 }

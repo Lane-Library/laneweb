@@ -26,7 +26,6 @@ import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.reading.Reader;
 import org.apache.cocoon.serialization.Serializer;
 import org.apache.cocoon.transformation.Transformer;
 import org.apache.cocoon.util.HashUtil;
@@ -69,9 +68,6 @@ public class CachingPipeline extends NonCachingPipeline {
 
     /** The role name of the generator */
     private String generatorRole;
-
-    /** The role name of the reader */
-    private String readerRole;
 
     /** The role name of the serializer */
     private String serializerRole;
@@ -183,16 +179,6 @@ public class CachingPipeline extends NonCachingPipeline {
             throws ProcessingException {
         super.setGenerator(role, source, param, hintParam);
         this.generatorRole = role;
-    }
-
-    /**
-     * Set the Reader.
-     */
-    @Override
-    public void setReader(final String role, final String source, final Parameters param, final String mimeType)
-            throws ProcessingException {
-        super.setReader(role, source, param, mimeType);
-        this.readerRole = role;
     }
 
     /**
@@ -398,147 +384,6 @@ public class CachingPipeline extends NonCachingPipeline {
      */
     protected ComponentCacheKey newComponentCacheKey(final int type, final String role, final Serializable key) {
         return new ComponentCacheKey(type, role, key);
-    }
-
-    /**
-     * Process the pipeline using a reader.
-     * 
-     * @throws ProcessingException
-     *             if an error occurs
-     */
-    @Override
-    protected boolean processReader(final Environment environment) throws ProcessingException {
-        try {
-            boolean usedCache = false;
-            OutputStream outputStream = null;
-            SourceValidity readerValidity = null;
-            PipelineCacheKey pcKey = null;
-            // test if reader is cacheable
-            Serializable readerKey = null;
-            Reader reader = getReader();
-            if (reader instanceof CacheableProcessingComponent) {
-                readerKey = ((CacheableProcessingComponent) reader).getKey();
-            }
-            boolean finished = false;
-            if (readerKey != null) {
-                // response is cacheable, build the key
-                pcKey = new PipelineCacheKey();
-                pcKey.addKey(new ComponentCacheKey(ComponentCacheKey.ComponentType_Reader, this.readerRole, readerKey));
-                while (!finished) {
-                    finished = true;
-                    // now we have the key to get the cached object
-                    CachedResponse cachedObject = this.cache.get(pcKey);
-                    if (cachedObject != null) {
-                        if (this.log.isDebugEnabled()) {
-                            this.log.debug("Found cached response for '" + environment.getURI() + "' using key: " + pcKey);
-                        }
-                        SourceValidity[] validities = cachedObject.getValidityObjects();
-                        if (validities == null || validities.length != 1) {
-                            // to avoid getting here again and again, we delete
-                            // it
-                            this.cache.remove(pcKey);
-                            if (this.log.isDebugEnabled()) {
-                                this.log.debug("Cached response for '" + environment.getURI() + "' using key: " + pcKey
-                                        + " is invalid.");
-                            }
-                            this.cachedResponse = null;
-                        } else {
-                            SourceValidity cachedValidity = validities[0];
-                            int valid = cachedValidity.isValid();
-                            if (valid == SourceValidity.UNKNOWN) {
-                                // get reader validity and compare
-                                readerValidity = ((CacheableProcessingComponent) reader).getValidity();
-                                if (readerValidity != null) {
-                                    valid = cachedValidity.isValid(readerValidity);
-                                    if (valid == SourceValidity.UNKNOWN) {
-                                        readerValidity = null;
-                                    }
-                                }
-                            }
-                            if (valid == SourceValidity.VALID) {
-                                if (this.log.isDebugEnabled()) {
-                                    this.log.debug("processReader: using valid cached content for '" + environment.getURI() + "'.");
-                                }
-                                byte[] response = cachedObject.getResponse();
-                                if (response.length > 0) {
-                                    usedCache = true;
-                                    if (cachedObject.getContentType() != null) {
-                                        environment.setContentType(cachedObject.getContentType());
-                                    } else {
-                                        setMimeTypeForReader(environment);
-                                    }
-                                    outputStream = environment.getOutputStream(0);
-                                    environment.setContentLength(response.length);
-                                    outputStream.write(response);
-                                }
-                            } else {
-                                if (this.log.isDebugEnabled()) {
-                                    this.log.debug("processReader: cached content is invalid for '" + environment.getURI() + "'.");
-                                }
-                                // remove invalid cached object
-                                this.cache.remove(pcKey);
-                            }
-                        }
-                    } else {
-                        // check if something is being generated right now
-                        if (!waitForLock(pcKey)) {
-                            finished = false;
-                            continue;
-                        }
-                    }
-                }
-            }
-            if (!usedCache) {
-                // make sure lock will be released
-                int outputBufferSize = getOutputBufferSize();
-                try {
-                    if (pcKey != null) {
-                        if (this.log.isDebugEnabled()) {
-                            this.log.debug("processReader: caching content for further requests of '" + environment.getURI() + "'.");
-                        }
-                        generateLock(pcKey);
-                        if (readerValidity == null) {
-                            readerValidity = ((CacheableProcessingComponent) reader).getValidity();
-                        }
-                        if (readerValidity != null) {
-                            outputStream = environment.getOutputStream(outputBufferSize);
-                            outputStream = new CachingOutputStream(outputStream);
-                        }
-                    }
-                    setMimeTypeForReader(environment);
-                    if (reader.shouldSetContentLength()) {
-                        ByteArrayOutputStream os = new ByteArrayOutputStream();
-                        reader.setOutputStream(os);
-                        reader.generate();
-                        environment.setContentLength(os.size());
-                        if (outputStream == null) {
-                            outputStream = environment.getOutputStream(0);
-                        }
-                        os.writeTo(outputStream);
-                    } else {
-                        if (outputStream == null) {
-                            outputStream = environment.getOutputStream(outputBufferSize);
-                        }
-                        reader.setOutputStream(outputStream);
-                        reader.generate();
-                    }
-                    // store the response
-                    if (pcKey != null && readerValidity != null) {
-                        final CachedResponse res = new CachedResponse(new SourceValidity[] { readerValidity },
-                                ((CachingOutputStream) outputStream).getContent());
-                        res.setContentType(environment.getContentType());
-                        this.cache.store(pcKey, res);
-                    }
-                } finally {
-                    releaseLock(pcKey);
-                }
-            }
-        } catch (Exception e) {
-            handleException(e);
-        }
-        // Request has been succesfully processed, set approporiate status code
-        environment.setStatus(HttpServletResponse.SC_OK);
-        return true;
     }
 
     /**
