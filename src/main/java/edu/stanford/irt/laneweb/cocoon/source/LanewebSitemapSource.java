@@ -17,7 +17,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.Processor;
@@ -98,28 +97,40 @@ public class LanewebSitemapSource implements Source, XMLizable {
 
     /**
      * Construct a new object
+     * @throws Exception 
      */
-    public LanewebSitemapSource(final String uri, final Environment environment, final Processor processor) throws MalformedURLException {
+    public LanewebSitemapSource(final String uri, final Environment environment, final Processor processor) {
         this.systemId = uri;
         this.processor = processor;
-        // SitemapSourceInfo info = SitemapSourceInfo.parseURI(this.environment,
-        // uri);
-        // this.protocol = info.protocol;
-        // create a new validity holder
         this.validity = new SitemapSourceValidity();
-        // initialize
-        // create environment...
         SitemapSourceInfo info = new SitemapSourceInfo();
         info.uri = uri.substring(uri.indexOf(":/") + 2);
         this.environment = new EnvironmentWrapper(environment, info);
-        // The environment is a facade whose delegate can be changed in case of
-        // internal redirects
-        // this.environment = new MutableEnvironmentFacade(wrapper);
+        this.systemIdForCaching = this.systemId;
+        this.environment.startingProcessing();
         try {
-            this.init();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+			this.pipelineDescription = this.processor.buildPipeline(this.environment);
+			this.environment.setURI(this.pipelineDescription.prefix, this.pipelineDescription.uri);
+			this.pipelineDescription.processingPipeline .prepareInternal(this.environment);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		this.validity.set(this.pipelineDescription.processingPipeline.getValidityForEventPipeline());
+		String eventPipelineKey = this.pipelineDescription.processingPipeline.getKeyForEventPipeline();
+		this.mimeType = this.environment.getContentType();
+		if (eventPipelineKey != null) {
+			StringBuilder buffer = new StringBuilder(this.systemId);
+			if (this.systemId.indexOf('?') == -1) {
+				buffer.append('?');
+			} else {
+				buffer.append('&');
+			}
+			buffer.append("pipelinehash=");
+			buffer.append(eventPipelineKey);
+			this.systemIdForCaching = buffer.toString();
+		} else {
+			this.systemIdForCaching = this.systemId;
+		}
     }
 
     /**
@@ -212,41 +223,10 @@ public class LanewebSitemapSource implements Source, XMLizable {
         } else {
             consumer = new ContentHandlerWrapper(contentHandler);
         }
-        // We have to add an environment changer
-        // for clean environment stack handling.
         try {
             this.pipelineDescription.processingPipeline.process(this.environment, consumer);
         } catch (ProcessingException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * Initialize
-     * 
-     * @throws Exception
-     */
-    protected void init() throws Exception {
-        this.systemIdForCaching = this.systemId;
-        this.environment.startingProcessing();
-        this.pipelineDescription = this.processor.buildPipeline(this.environment);
-        this.environment.setURI(this.pipelineDescription.prefix, this.pipelineDescription.uri);
-            this.pipelineDescription.processingPipeline.prepareInternal(this.environment);
-            this.validity.set(this.pipelineDescription.processingPipeline.getValidityForEventPipeline());
-            String eventPipelineKey = this.pipelineDescription.processingPipeline.getKeyForEventPipeline();
-            this.mimeType = this.environment.getContentType();
-            if (eventPipelineKey != null) {
-                StringBuffer buffer = new StringBuffer(this.systemId);
-                if (this.systemId.indexOf('?') == -1) {
-                    buffer.append('?');
-                } else {
-                    buffer.append('&');
-                }
-                buffer.append("pipelinehash=");
-                buffer.append(eventPipelineKey);
-                this.systemIdForCaching = buffer.toString();
-            } else {
-                this.systemIdForCaching = this.systemId;
-            }
     }
 }
