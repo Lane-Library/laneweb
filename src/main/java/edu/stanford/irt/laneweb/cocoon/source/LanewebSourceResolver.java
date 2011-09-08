@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon.source;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -30,7 +29,7 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
     public void release(final Source source) {
     }
 
-    public Source resolveURI(final String location) throws MalformedURLException, IOException {
+    public Source resolveURI(final String location) throws IOException {
         String modifiedLocation = location;
         Matcher matcher = this.tomcatURLPattern.matcher(location);
         if (matcher.matches()) {
@@ -50,8 +49,7 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
     }
 
     @SuppressWarnings("rawtypes")
-    public Source resolveURI(final String location, final String base, final Map parameters) throws MalformedURLException,
-            IOException {
+    public Source resolveURI(final String location, final String base, final Map parameters) throws IOException {
         return this.resolveURI(location);
     }
 

@@ -104,6 +104,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
         this.processor = processor;
         this.validity = new SitemapSourceValidity();
         SitemapSourceInfo info = new SitemapSourceInfo();
+        this.protocol = info.protocol;
         info.uri = uri.substring(uri.indexOf(":/") + 2);
         this.environment = new EnvironmentWrapper(environment, info);
         this.systemIdForCaching = this.systemId;
@@ -113,7 +114,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
 			this.environment.setURI(this.pipelineDescription.prefix, this.pipelineDescription.uri);
 			this.pipelineDescription.processingPipeline .prepareInternal(this.environment);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new LanewebSourceException(e);
 		}
 		this.validity.set(this.pipelineDescription.processingPipeline.getValidityForEventPipeline());
 		String eventPipelineKey = this.pipelineDescription.processingPipeline.getKeyForEventPipeline();
@@ -159,7 +160,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
         try {
             this.pipelineDescription.processingPipeline.process(this.environment);
         } catch (ProcessingException e) {
-            throw new RuntimeException(e);
+            throw new LanewebSourceException(e);
         }
         return new ByteArrayInputStream(os.toByteArray());
     }
@@ -226,7 +227,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
         try {
             this.pipelineDescription.processingPipeline.process(this.environment, consumer);
         } catch (ProcessingException e) {
-            throw new RuntimeException(e);
+            throw new LanewebSourceException(e);
         }
     }
 }

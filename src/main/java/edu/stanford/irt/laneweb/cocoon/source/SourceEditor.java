@@ -5,7 +5,7 @@ import org.springframework.core.io.ResourceEditor;
 import org.springframework.core.io.ResourceLoader;
 
 
-public class SourceEditor extends ResourceEditor{
+public class SourceEditor extends ResourceEditor {
 
     public SourceEditor(ResourceLoader resourceLoader) {
         super(resourceLoader);

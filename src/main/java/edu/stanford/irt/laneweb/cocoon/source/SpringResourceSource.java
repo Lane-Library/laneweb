@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.FileTimeStampValidity;
 import org.springframework.core.io.Resource;
@@ -29,7 +28,7 @@ public class SpringResourceSource implements Source {
         }
     }
 
-    public InputStream getInputStream() throws IOException, SourceNotFoundException {
+    public InputStream getInputStream() throws IOException {
         return this.resource.getInputStream();
     }
 
@@ -53,7 +52,7 @@ public class SpringResourceSource implements Source {
         try {
             return this.resource.getURI().toString();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new LanewebSourceException(e);
         }
     }
 
