@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.excalibur.store.Store;
 
@@ -30,8 +30,20 @@ public class TransientStore implements Store {
     }
 
     public Enumeration<Object> keys() {
-        Vector<Object> vector = new Vector<Object>(this.map.keySet());
-        return vector.elements();
+    	final Iterator<Object> iterator = this.map.keySet().iterator();
+    	return new Enumeration<Object>() {
+
+			@Override
+			public boolean hasMoreElements() {
+				return iterator.hasNext();
+			}
+
+			@Override
+			public Object nextElement() {
+				return iterator.next();
+			}
+    		
+    	};
     }
 
     public void remove(final Object key) {
