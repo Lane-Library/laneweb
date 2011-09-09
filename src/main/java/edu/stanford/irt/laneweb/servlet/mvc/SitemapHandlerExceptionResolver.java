@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,17 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
 
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
-        this.log.error("handling error", ex);
+        Throwable maybeNull = ex.getCause();
+        Throwable ultimateCause = ex;
+        while (maybeNull != null) {
+            ultimateCause = maybeNull;
+            maybeNull = maybeNull.getCause();
+        }
+        if (ultimateCause instanceof FileNotFoundException) {
+            this.log.error(ultimateCause.toString());
+        } else {
+            this.log.error("handling error", ex);
+        }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         try {
             handleRequest(request, response);

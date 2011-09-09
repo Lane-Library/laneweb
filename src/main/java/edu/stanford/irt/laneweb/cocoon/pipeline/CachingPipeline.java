@@ -38,6 +38,7 @@ import org.apache.excalibur.store.Store;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.xml.sax.SAXException;
 
 public class CachingPipeline extends NonCachingPipeline {
 
@@ -100,17 +101,13 @@ public class CachingPipeline extends NonCachingPipeline {
      * Add a transformer.
      */
     @Override
-    public void addTransformer(final String role, final String source, final Parameters param, final Parameters hintParam)
-            throws ProcessingException {
+    public void addTransformer(final String role, final String source, final Parameters param, final Parameters hintParam) {
         super.addTransformer(role, source, param, hintParam);
         this.transformerRoles.add(role);
     }
 
     @Override
     public String getKeyForEventPipeline() {
-        if (isInternalError()) {
-            return null;
-        }
         List<Transformer> transformers = getTransformers();
         if (null != this.toCacheKey && !this.cacheCompleteResponse
                 && this.firstNotCacheableTransformerIndex == transformers.size()) {
@@ -130,9 +127,6 @@ public class CachingPipeline extends NonCachingPipeline {
      */
     @Override
     public SourceValidity getValidityForEventPipeline() {
-        if (isInternalError()) {
-            return null;
-        }
         List<Transformer> transformers = getTransformers();
         if (this.cachedResponse != null) {
             if (!this.cacheCompleteResponse && this.firstNotCacheableTransformerIndex < transformers.size()) {
@@ -175,8 +169,7 @@ public class CachingPipeline extends NonCachingPipeline {
      * Set the generator.
      */
     @Override
-    public void setGenerator(final String role, final String source, final Parameters param, final Parameters hintParam)
-            throws ProcessingException {
+    public void setGenerator(final String role, final String source, final Parameters param, final Parameters hintParam) {
         super.setGenerator(role, source, param, hintParam);
         this.generatorRole = role;
     }
@@ -186,15 +179,16 @@ public class CachingPipeline extends NonCachingPipeline {
      */
     @Override
     public void setSerializer(final String role, final String source, final Parameters param, final Parameters hintParam,
-            final String mimeType) throws ProcessingException {
+            final String mimeType) {
         super.setSerializer(role, source, param, hintParam, mimeType);
         this.serializerRole = role;
     }
 
     /**
      * Cache longest cacheable key
+     * @throws ProcessingException 
      */
-    protected CachedResponse cacheResults(final Environment environment, final OutputStream os) throws Exception {
+    protected CachedResponse cacheResults(final Environment environment, final OutputStream os) throws ProcessingException {
         if (this.toCacheKey != null) {
             // See if there is an expires object for this resource.
             Long expiresObj = (Long) environment.getObjectModel().get(ObjectModelHelper.EXPIRES_OBJECT);
@@ -413,9 +407,9 @@ public class CachingPipeline extends NonCachingPipeline {
                     environment.setContentLength(content.length);
                     outputStream.write(content);
                 }
-            } catch (Exception e) {
-                handleException(e);
-            }
+            } catch (IOException e) {
+            	throw new RuntimeException(e);
+			}
         } else {
             setMimeTypeForSerializer(environment);
             if (this.log.isDebugEnabled() && this.toCacheKey != null) {
@@ -484,9 +478,11 @@ public class CachingPipeline extends NonCachingPipeline {
                     // the actual check is neither meaningful nor important here
                     environment.isResponseModified(completeCachedResponse.getLastModified());
                 }
-            } catch (Exception e) {
-                handleException(e);
-            } finally {
+            } catch (IOException e) {
+            	throw new RuntimeException(e);
+			} catch (SAXException e) {
+            	throw new RuntimeException(e);
+			} finally {
                 releaseLock(this.toCacheKey);
             }
             // Request has been succesfully processed, set approporiate status
@@ -823,5 +819,16 @@ public class CachingPipeline extends NonCachingPipeline {
         // stop on longest key for smart caching
         this.fromCacheKey = null;
         return true;
+    }
+
+
+    private boolean checkIfModified(final Environment environment, final long lastModified) throws ProcessingException {
+        // has the read resource been modified?
+        if (!environment.isResponseModified(lastModified)) {
+            // environment supports this, so we are finished
+            environment.setResponseIsNotModified();
+            return true;
+        }
+        return false;
     }
 }

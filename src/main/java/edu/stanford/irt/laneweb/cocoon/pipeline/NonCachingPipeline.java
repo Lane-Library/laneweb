@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon.pipeline;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.SocketException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.StringTokenizer;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.cocoon.ConnectionResetException;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.components.pipeline.ProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
@@ -23,14 +20,9 @@ import org.apache.cocoon.serialization.Serializer;
 import org.apache.cocoon.sitemap.SitemapErrorHandler;
 import org.apache.cocoon.sitemap.SitemapModelComponent;
 import org.apache.cocoon.transformation.Transformer;
-import org.apache.cocoon.util.location.Locatable;
-import org.apache.cocoon.util.location.Location;
-import org.apache.cocoon.xml.SaxBuffer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.cocoon.xml.XMLProducer;
 import org.apache.excalibur.source.SourceValidity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.xml.sax.SAXException;
@@ -41,13 +33,6 @@ import org.xml.sax.SAXException;
  * own implementation!
  */
 public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware {
-
-    // Error handler stuff
-    private SitemapErrorHandler errorHandler;
-
-    private ProcessingPipeline errorPipeline;
-
-    private final Logger log = LoggerFactory.getLogger(NonCachingPipeline.class);
 
     /** True when pipeline has been prepared. */
     private boolean prepared;
@@ -108,8 +93,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
 
     /**
      * Add a transformer at the end of the pipeline. The transformer role is
-     * given : the actual <code>Transformer</code> is fetched from the latest
-     * <code>ServiceManager</code>.
+     * given : the actual <code>Transformer</code> is fetched from the
+     * <code>BeanFactory</code>.
      * 
      * @param role
      *            the transformer role in the component manager.
@@ -118,14 +103,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      *            <code>null</code> if no source is given.
      * @param param
      *            the parameters for the transfomer.
-     * @throws ProcessingException
-     *             if the generator couldn't be obtained.
      */
-    public void addTransformer(final String role, final String source, final Parameters param, final Parameters hintParam)
-            throws ProcessingException {
-        if (this.generator == null) {
-            throw new ProcessingException("Must set a generator before adding transformer '" + role + "'", getLocation(param));
-        }
+    public void addTransformer(final String role, final String source, final Parameters param, final Parameters hintParam) {
         this.transformers.add((Transformer) this.beanFactory.getBean(Transformer.ROLE + '/' + role));
         this.transformerSources.add(source);
         this.transformerParams.add(param);
@@ -174,11 +153,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      */
     public void prepareInternal(final Environment environment) throws ProcessingException {
         this.lastConsumer = null;
-        try {
-            preparePipeline(environment);
-        } catch (ProcessingException e) {
-            prepareInternalErrorHandler(environment, e);
-        }
+        preparePipeline(environment);
     }
 
     /**
@@ -194,9 +169,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             Response res = ObjectModelHelper.getResponse(environment.getObjectModel());
             res.setDateHeader("Expires", System.currentTimeMillis() + this.expires);
             res.setHeader("Cache-Control", "max-age=" + this.expires / 1000 + ", public");
-            if (this.log.isDebugEnabled()) {
-                this.log.debug("Setting a new Expires object for this resource");
-            }
             environment.getObjectModel().put(ObjectModelHelper.EXPIRES_OBJECT,
                     Long.valueOf(this.expires + System.currentTimeMillis()));
         }
@@ -214,28 +186,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * serializer. Instead all SAX events are streamed to the XMLConsumer.
      */
     public boolean process(final Environment environment, final XMLConsumer consumer) throws ProcessingException {
-        // Exception happened during setup and was handled
-        if (this.errorPipeline != null) {
-            return this.errorPipeline.process(environment, consumer);
-        }
-        // Have to buffer events if error handler is specified.
-        SaxBuffer buffer = null;
-        this.lastConsumer = this.errorHandler == null ? consumer : (buffer = new SaxBuffer());
-        try {
-            connectPipeline(environment);
-            return processXMLPipeline(environment);
-        } catch (ProcessingException e) {
-            buffer = null;
-            return processErrorHandler(environment, e, consumer);
-        } finally {
-            if (buffer != null) {
-                try {
-                    buffer.toSAX(consumer);
-                } catch (SAXException e) {
-                    throw new ProcessingException("Failed to execute pipeline.", e);
-                }
-            }
-        }
+        this.lastConsumer =  consumer;
+        connectPipeline(environment);
+        return processXMLPipeline(environment);
     }
 
     public void setBeanFactory(final BeanFactory beanFactory) {
@@ -250,7 +203,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      *            error handler
      */
     public void setErrorHandler(final SitemapErrorHandler errorHandler) {
-        this.errorHandler = errorHandler;
+    	if (errorHandler != null) {
+    		throw new IllegalArgumentException("we don't use error handler any more.");
+    	}
     }
 
     /**
@@ -268,11 +223,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * @throws ProcessingException
      *             if the generator couldn't be obtained.
      */
-    public void setGenerator(final String role, final String source, final Parameters param, final Parameters hintParam)
-            throws ProcessingException {
-        if (this.generator != null) {
-            throw new ProcessingException("Generator already set. Cannot set generator '" + role + "'", getLocation(param));
-        }
+    public void setGenerator(final String role, final String source, final Parameters param, final Parameters hintParam) {
         this.generator = (Generator) this.beanFactory.getBean(Generator.ROLE + '/' + role);
         this.generatorSource = source;
         this.generatorParam = param;
@@ -301,15 +252,10 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      *            Can be null
      */
     public void setSerializer(final String role, final String source, final Parameters param, final Parameters hintParam,
-            final String mimeType) throws ProcessingException {
-        if (this.serializer != null) {
-            // Should normally not happen as adding a serializer starts pipeline
-            // processing
-            throw new ProcessingException("Serializer already set. Cannot set serializer '" + role + "'", getLocation(param));
-        }
-        if (this.generator == null) {
-            throw new ProcessingException("Must set a generator before setting serializer '" + role + "'", getLocation(param));
-        }
+            final String mimeType) {
+    	if (mimeType == null) {
+    		throw new IllegalArgumentException("null mimeType");
+    	}
         this.serializer = (Serializer) this.beanFactory.getBean(Serializer.ROLE + '/' + role);
         this.serializerSource = source;
         this.serializerParam = param;
@@ -339,12 +285,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         // get <base>
         String current = tokens.nextToken();
         if (current.equals("modification")) {
-            this.log.warn("the \"modification\" keyword is not yet" + " implemented. Assuming \"now\" as the base attribute");
             current = "now";
-        }
-        if (!current.equals("now") && !current.equals("access")) {
-            this.log.error("bad <base> attribute, Expires header will not be set");
-            return -1;
         }
         long number;
         long modifier;
@@ -360,14 +301,12 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             try {
                 number = Long.parseLong(current);
             } catch (NumberFormatException nfe) {
-                this.log.error("state violation: a number was expected here");
                 return -1;
             }
             // now get <modifier>
             try {
                 current = tokens.nextToken();
             } catch (NoSuchElementException nsee) {
-                this.log.error("State violation: expecting a modifier" + " but no one found: Expires header will not be set");
             }
             if (current.equals("years")) {
                 modifier = 365L * 24L * 60L * 60L * 1000L;
@@ -384,37 +323,11 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             } else if (current.equals("seconds")) {
                 modifier = 1000L;
             } else {
-                this.log.error("Bad modifier (" + current + "): ignoring expires configuration");
                 return -1;
             }
             expires += number * modifier;
         }
         return expires;
-    }
-
-    protected boolean checkIfModified(final Environment environment, final long lastModified) throws ProcessingException {
-        // has the read resource been modified?
-        if (!environment.isResponseModified(lastModified)) {
-            // environment supports this, so we are finished
-            environment.setResponseIsNotModified();
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Sanity check
-     * 
-     * @return true if the pipeline is 'sane', false otherwise.
-     */
-    protected boolean checkPipeline() {
-        if (this.generator == null) {
-            return false;
-        }
-        if (this.generator != null && this.serializer == null) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -441,116 +354,12 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         connect(environment, prev, this.lastConsumer);
     }
 
-    protected Location getLocation(final Parameters param) {
-        Location location = null;
-        if (param instanceof Locatable) {
-            location = ((Locatable) param).getLocation();
-        }
-        if (location == null) {
-            location = Location.UNKNOWN;
-        }
-        return location;
-    }
-
-    /**
-     * Handles exception which can happen during pipeline processing. If this
-     * not a connection reset, then all locations for pipeline components are
-     * added to the exception.
-     * 
-     * @throws ConnectionResetException
-     *             if connection reset detected
-     * @throws ProcessingException
-     *             in all other cases
-     */
-    protected void handleException(final Exception e) throws ProcessingException {
-        // Check if the client aborted the connection
-        if (e instanceof SocketException) {
-            if (e.getMessage().indexOf("reset") > -1 || e.getMessage().indexOf("aborted") > -1
-                    || e.getMessage().indexOf("Broken pipe") > -1 || e.getMessage().indexOf("connection abort") > -1) {
-                throw new ConnectionResetException("Connection reset by peer", e);
-            }
-        } else if (e instanceof IOException) {
-            // Tomcat5 wraps SocketException into ClientAbortException which
-            // extends IOException.
-            if (e.getClass().getName().endsWith("ClientAbortException")) {
-                throw new ConnectionResetException("Connection reset by peer", e);
-            }
-        } else if (e instanceof ConnectionResetException) {
-            // Exception comes up from a deeper pipeline
-            throw (ConnectionResetException) e;
-        }
-        // Not a connection reset: add all location information
-            // Add all locations in reverse order
-            List<Location> locations = new LinkedList<Location>();
-            locations.add(getLocation(this.serializerParam));
-            for (int i = this.transformerParams.size() - 1; i >= 0; i--) {
-                locations.add(getLocation(this.transformerParams.get(i)));
-            }
-            locations.add(getLocation(this.generatorParam));
-            throw ProcessingException.throwLocated("Failed to process pipeline", e, locations);
-
-    }
-
-    /**
-     * @return true if error happened during internal pipeline prepare call.
-     */
-    protected boolean isInternalError() {
-        return this.errorPipeline != null;
-    }
-
-    /**
-     * If prepareInternal fails, prepare internal error handler.
-     */
-    protected void prepareInternalErrorHandler(final Environment environment, final ProcessingException ex)
-            throws ProcessingException {
-        if (this.errorHandler == null) {
-            // propagate exception if we have no error handler
-            throw ex;
-        }
-        try {
-            this.errorPipeline = this.errorHandler.prepareErrorPipeline(ex);
-            if (this.errorPipeline != null) {
-                this.errorPipeline.prepareInternal(environment);
-            }
-        } catch (ProcessingException e) {
-            // Log the original exception
-            this.log.error("Failed to process error handler for exception", ex);
-            throw e;
-        } catch (Exception e) {
-            // Log the original exception
-            this.log.error("Failed to process error handler for exception", ex);
-            throw new ProcessingException("Failed to handle exception <" + ex.getMessage() + ">", e);
-        }
-    }
-
     /**
      * Prepare the pipeline
      */
     protected void preparePipeline(final Environment environment) throws ProcessingException {
-        if (!checkPipeline()) {
-            throw new ProcessingException("Attempted to process incomplete pipeline.");
-        }
-        if (this.prepared) {
-            throw new ProcessingException("Duplicate preparePipeline call caught.");
-        }
         setupPipeline(environment);
         this.prepared = true;
-    }
-
-    protected boolean processErrorHandler(final Environment environment, final ProcessingException e, final XMLConsumer consumer)
-            throws ProcessingException {
-        if (this.errorHandler != null) {
-            try {
-                this.errorPipeline = this.errorHandler.prepareErrorPipeline(e);
-                if (this.errorPipeline != null) {
-                    this.errorPipeline.prepareInternal(environment);
-                    return this.errorPipeline.process(environment, consumer);
-                }
-            } catch (Exception ignored) {
-                this.log.debug("Exception in error handler", ignored);
-            }
-        }
-        throw e;
     }
 
     /**
@@ -563,24 +372,16 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
                 // internal processing
                 this.generator.generate();
             } else {
-                if (this.serializer.shouldSetContentLength()) {
-                    // set the output stream
-                    ByteArrayOutputStream os = new ByteArrayOutputStream();
-                    this.serializer.setOutputStream(os);
-                    // execute the pipeline:
-                    this.generator.generate();
-                    environment.setContentLength(os.size());
-                    os.writeTo(environment.getOutputStream(0));
-                } else {
                     // set the output stream
                     this.serializer.setOutputStream(environment.getOutputStream(this.outputBufferSize));
                     // execute the pipeline:
                     this.generator.generate();
-                }
             }
-        } catch (Exception e) {
-            handleException(e);
-        }
+        } catch (IOException e) {
+        	throw new RuntimeException(e);
+		} catch (SAXException e) {
+			throw new RuntimeException(e);
+		}
         return true;
     }
 
@@ -595,23 +396,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             // internal processing: text/xml
             environment.setContentType("text/xml");
         } else {
-            // Set the mime-type
-            // the behaviour has changed from 2.1.x to 2.2 according to bug
-            // #10277
-            if (this.serializerMimeType != null) {
-                // there was a serializer defined in the sitemap
-                environment.setContentType(this.serializerMimeType);
-            } else {
-                // ask to the component itself
-                String mimeType = this.serializer.getMimeType();
-                if (mimeType != null) {
-                    environment.setContentType(mimeType);
-                } else {
-                    // No mimeType available
-                    String message = "Unable to determine MIME type for " + environment.getURIPrefix() + "/" + environment.getURI();
-                    throw new ProcessingException(message);
-                }
-            }
+            environment.setContentType(this.serializerMimeType);
         }
     }
 
@@ -634,9 +419,11 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
                 ((SitemapModelComponent) this.serializer).setup(this.sourceResolver, environment.getObjectModel(),
                         this.serializerSource, this.serializerParam);
             }
-        } catch (Exception e) {
-            handleException(e);
-        }
+        } catch (SAXException e) {
+        	throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
     }
 
     protected long getExpires() {

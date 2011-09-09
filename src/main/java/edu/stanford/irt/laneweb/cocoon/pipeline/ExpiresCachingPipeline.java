@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon.pipeline;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
+import org.xml.sax.SAXException;
 
 public class ExpiresCachingPipeline extends NonCachingPipeline {
 
@@ -238,8 +240,11 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                     this.cache.store(this.cacheKey, this.cachedResponse);
                 }
             }
-        } catch (Exception e) {
-            handleException(e);
+        } catch (IOException e) {
+        	throw new RuntimeException(e);
+		} catch (SAXException e) {
+        	throw new RuntimeException(e);
+		} finally {
         }
         // Request has been succesfully processed, set approporiate status code
         environment.setStatus(HttpServletResponse.SC_OK);
