@@ -7,20 +7,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
-import edu.stanford.irt.search.spring.SearchCacheManager;
 
 @Controller
 public class ClearSearchCacheController {
-
-    private SearchCacheManager searchCache;
+    
+    private MetaSearchManagerSource msms;
 
     @RequestMapping(value = "/apps/search/clearcache")
     @ResponseBody
     public String clearCache(@RequestParam(required = false) final String q) {
         if (q != null) {
-            this.searchCache.clearCache(q);
+            this.msms.getSearchCacheManager().clearCache(q);
         } else {
-            this.searchCache.clearAllCaches();
+            this.msms.getSearchCacheManager().clearAllCaches();
         }
         return "OK";
     }
@@ -30,9 +29,6 @@ public class ClearSearchCacheController {
         if (null == msms) {
             throw new IllegalArgumentException("null metaSearchManagerSource");
         }
-        this.searchCache = msms.getSearchCacheManager();
-        if (null == this.searchCache) {
-            throw new IllegalStateException("null searchCacheManager");
-        }
+        this.msms = msms;
     }
 }
