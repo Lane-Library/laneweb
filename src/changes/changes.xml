@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="" version="1.12.1" description="1.12.1 bug fix release">
+            <action date="2010-09-14" dev="ryanmax" issue="55266" type="add">
+                add textbooks search option
+            </action>
+        </release>
         <release date="2010-09-02" version="1.12.0" description="1.12.0 refactor release">
             <action date="2010-09-01" dev="ceyates" issue="54771" type="update">
                 Replace some Cocoon components with Spring MVC
