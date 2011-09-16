@@ -53,6 +53,7 @@
     font-family : arial, helvetica, clean, sans-serif
 }
 
+/*left nav module with the shadow*/
 .left-shadow {
 	background-image : url(/././resources/images/grandroundsItemBg1.png);
     background-position : center bottom;
