@@ -12,28 +12,31 @@
     margin:10px 15px 0 20px;
 }
 /* customizations */
+.content .yui-gf {
+	margin-left: -20px;
+	}
+
 .yui-ge .yui-u .leftColumn, .content .yui-gf .leftColumn {
     width:156px;
 }
 .yui-ge .yui-u .middleColumn {
-    width:521px;
+    width:540px;
 /*
       border-left:1px solid #E6E4DB;
   padding-left:18px;
  */
 }
 .content .yui-ge .rightColumn {
-    width:199px;
+    width:230px;
+    
 }
 .content .yui-ge .leftGrids {
-    width:713px;
-/*
-      border-right:1px solid #E6E4DB;
-  padding-right:20px;
- */
+    width:700px;
+    
 }
 .content .yui-gf .rightGrids {
-    width:760px;
+    width:785px;
+   
 }
 /* nesting error corrections */
 .yui-gf .yui-g, .yui-u .yui-g {
@@ -45,6 +48,7 @@
 .yui-gc div.first {
     width:66%;
 }
+
 .yui-gc .yui-u {
     margin-left:1.99%;
     width:32%;

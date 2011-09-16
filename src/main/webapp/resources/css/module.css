@@ -52,3 +52,9 @@
     letter-spacing : normal;
     font-family : arial, helvetica, clean, sans-serif
 }
+
+.left-shadow {
+	background-image : url(/././resources/images/grandroundsItemBg1.png);
+    background-position : center bottom;
+    background-repeat : no-repeat;
+	}
