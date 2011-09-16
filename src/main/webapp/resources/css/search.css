@@ -34,13 +34,15 @@
 #searchFacets .facetHeader {
     text-transform:uppercase;
     font-weight:bold;
-    list-style-image:url(/././resources/images/raquo.gif);
-    list-style-type:disc;
+   /*list-style-image:url(/././resources/images/raquo.gif);
+    list-style-type:disc;*/
+    list-style: none outside none;
 }
 #searchFacets .facetIndent {
     margin-left:30px;
     list-style-image:none;
     list-style-type:disc;
+    padding-left: 0;
 }
 #searchFacets li, #searchResults li {
     list-style-image:none;
