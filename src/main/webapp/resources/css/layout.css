@@ -20,7 +20,8 @@
     width:156px;
 }
 .yui-ge .yui-u .middleColumn {
-    width:540px;
+    width:540px; /* used to be 521px */
+   
 /*
       border-left:1px solid #E6E4DB;
   padding-left:18px;
