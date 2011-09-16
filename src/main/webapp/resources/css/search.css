@@ -34,9 +34,9 @@
 #searchFacets .facetHeader {
     text-transform:uppercase;
     font-weight:bold;
-   /*list-style-image:url(/././resources/images/raquo.gif);
-    list-style-type:disc;*/
     list-style: none outside none;
+    /*list-style-image:url(/././resources/images/raquo.gif);
+    list-style-type:disc;*/
 }
 #searchFacets .facetIndent {
     margin-left:30px;
