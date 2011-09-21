@@ -2,6 +2,13 @@
 p {
     margin-bottom : 10px
 }
+/* styles for the long paragraphs, not short lists - to spread out the lines for better readability*/
+.wideline {
+	font-size: 1em;
+    line-height: 1.6em;
+    margin: 0 0 4em;
+
+	}
 .content {
     color : #3F3C30;
     font-size : 12px
