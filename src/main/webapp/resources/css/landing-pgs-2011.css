@@ -84,8 +84,8 @@
     background-image : url(/././resources/images/bottomShadow1.png);
     background-repeat : no-repeat;
     background-position : top center;
-    padding-bottom : 15px;
-    margin-bottom : 20px;
+    /*padding-bottom : 15px;*/
+    /*margin-bottom : 20px;*/
 }
 .buttons-inline {
     display : inline;
