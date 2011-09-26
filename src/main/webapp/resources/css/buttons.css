@@ -39,8 +39,9 @@
 	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11),
 		to(#f06015) );
 	background: -moz-linear-gradient(top, #f88e11, #f06015);
-	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
-		'#f88e11', endColorstr = '#f06015' );
+	filter: progid :         DXImageTransform.Microsoft.gradient (      
+		  startColorstr =    
+		    '#f88e11', endColorstr =         '#f06015' );
 }
 
 .orange:active {
@@ -48,8 +49,40 @@
 	background: -webkit-gradient(linear, left top, left bottom, from(#f47a20),
 		to(#faa51a) );
 	background: -moz-linear-gradient(top, #f47a20, #faa51a);
-	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
-		'#f47a20', endColorstr = '#faa51a' );
+	filter: progid :         DXImageTransform.Microsoft.gradient (      
+		  startColorstr =    
+		    '#f47a20', endColorstr =         '#faa51a' );
+}
+
+/*off-white css button*/
+.white {
+	color: #606060;
+	border: solid 1px #b7b7b7;
+	background: #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff),
+		to(#ededed) );
+}
+
+.white:hover {
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff),
+		to(#c8cab8) );
+	background: -moz-linear-gradient(top, #fff, #c8cab8);
+	filter: progid :     DXImageTransform.Microsoft.gradient (    
+		startColorstr =  
+		  '#ffffff', endColorstr =     '#c8cab8' );
+	border: 1px solid #c8cab8;
+	color: #575347;
+}
+
+.white:active {
+	color: #575347;
+	background: -webkit-gradient(linear, left top, left bottom, from(#c8cab8),
+		to(#fff) );
+	background: -moz-linear-gradient(top, #ededed, #fff);
+	filter: progid :     DXImageTransform.Microsoft.gradient (    
+		startColorstr =  
+		  '#c8cab8', endColorstr =     '#ffffff' );
 }
 
 .events.button {
