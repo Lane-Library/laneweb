@@ -22,21 +22,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PersistentLoginCookieValidatorController {
 
+    private static long ONE_DAY = 1000 * 60 * 60 * 24 * 1;
+
     private static final String USER_AGENT_HEADER = "User-Agent";
 
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();
 
-    private static long ONE_DAY = 1000*60*60*24*1;
-
     private String userAgent;
 
     private boolean valid;
-    
+
     private boolean validTomorrow;
 
     @RequestMapping(value = "**/apps/loginCookieValidator")
-    public void validateCookie(final HttpServletRequest request, final HttpServletResponse response,@RequestParam(required = false) final String callback)
-            throws IOException {
+    public void validateCookie(final HttpServletRequest request, final HttpServletResponse response,
+            @RequestParam(required = false) final String callback) throws IOException {
         this.valid = false;
         this.validTomorrow = false;
         this.userAgent = request.getHeader(USER_AGENT_HEADER);
