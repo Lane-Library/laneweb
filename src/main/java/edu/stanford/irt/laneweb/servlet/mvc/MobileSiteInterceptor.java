@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import edu.stanford.irt.laneweb.model.Model;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +22,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @author ryanmax
  */
 public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
+
+    private static final String HOME_PATH = "/index.html";
 
     private static final String MOBILE_HELP_PATH = "/help/m.html";
 
@@ -46,22 +50,21 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
-            throws Exception {
+            throws IOException {
         SitePreference sitePreference = this.sitePreferenceHandler.handleSitePreference(request, response);
         String requestURI = request.getRequestURI();
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
-        if (requestURI.endsWith(".html") && requestURI.indexOf("/secure/") == -1) {
-            if (requestURI.indexOf(MOBILE_PATH) > -1) {
-                if (sitePreference == SitePreference.NORMAL) {
-                    response.sendRedirect(basePath + MOBILE_HELP_PATH);
-                    return false;
-                }
-            } else {
-                Device device = DeviceUtils.getRequiredCurrentDevice(request);
-                if (sitePreference == SitePreference.MOBILE || device.isMobile() && sitePreference == null) {
-                    response.sendRedirect(basePath + MOBILE_PATH);
-                    return false;
-                }
+        // only redirect for /m/ and /index.html requests
+        if (requestURI.indexOf(MOBILE_PATH) > -1) {
+            if (sitePreference == SitePreference.NORMAL) {
+                response.sendRedirect(basePath + MOBILE_HELP_PATH);
+                return false;
+            }
+        } else if (requestURI.equals(basePath + HOME_PATH)) {
+            Device device = DeviceUtils.getRequiredCurrentDevice(request);
+            if (sitePreference == SitePreference.MOBILE || device.isMobile() && sitePreference == null) {
+                response.sendRedirect(basePath + MOBILE_PATH);
+                return false;
             }
         }
         return true;
