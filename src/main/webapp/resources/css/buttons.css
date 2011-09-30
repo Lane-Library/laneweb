@@ -1,4 +1,4 @@
-/* styles for grey buttons */
+/* styles for grey buttons in sprite*/
 .button {
 	display: block;
 	font-size: 0;
@@ -10,84 +10,6 @@
 	margin: 5px 0;
 	border: none;
 }
-/*buttons with css only, no images*/
-.button-css {
-	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
-	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-	cursor: pointer;
-	display: inline-block;
-	font: 14px/100% Arial, Helvetica, sans-serif;
-	margin: 0 2px;
-	outline: medium none;
-	padding: 0.5em 2em 0.55em;
-	text-align: center;
-	text-decoration: none;
-	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-	vertical-align: baseline;
-}
-
-/*orange css button*/
-.orange {
-	background: -moz-linear-gradient(center top, #FAA51A, #F47A20) repeat
-		scroll 0 0 transparent;
-	border: 1px solid #DA7C0C;
-	color: #FEF4E9;
-}
-
-.orange:hover {
-	background: #f47c20;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11),
-		to(#f06015) );
-	background: -moz-linear-gradient(top, #f88e11, #f06015);
-	filter: progid :         DXImageTransform.Microsoft.gradient (      
-		  startColorstr =    
-		    '#f88e11', endColorstr =         '#f06015' );
-}
-
-.orange:active {
-	color: #fcd3a5;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f47a20),
-		to(#faa51a) );
-	background: -moz-linear-gradient(top, #f47a20, #faa51a);
-	filter: progid :         DXImageTransform.Microsoft.gradient (      
-		  startColorstr =    
-		    '#f47a20', endColorstr =         '#faa51a' );
-}
-
-/*off-white css button*/
-.white {
-	color: #606060;
-	border: solid 1px #b7b7b7;
-	background: #fff;
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff),
-		to(#ededed) );
-}
-
-.white:hover {
-	background: #ededed;
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff),
-		to(#c8cab8) );
-	background: -moz-linear-gradient(top, #fff, #c8cab8);
-	filter: progid :     DXImageTransform.Microsoft.gradient (    
-		startColorstr =  
-		  '#ffffff', endColorstr =     '#c8cab8' );
-	border: 1px solid #c8cab8;
-	color: #575347;
-}
-
-.white:active {
-	color: #575347;
-	background: -webkit-gradient(linear, left top, left bottom, from(#c8cab8),
-		to(#fff) );
-	background: -moz-linear-gradient(top, #ededed, #fff);
-	filter: progid :     DXImageTransform.Microsoft.gradient (    
-		startColorstr =  
-		  '#c8cab8', endColorstr =     '#ffffff' );
-}
-
-.events.button {
-	color: white;
-}
 
 .button:hover {
 	background: transparent url(/././resources/images/sprite-but-on.gif);
@@ -95,9 +17,8 @@
 	color: white;
 }
 
-.button.livechat,.button.livechat:hover {
-	background-position: 13px -19px;
-	margin: 10px 0;
+.events.button {
+	color: white;
 }
 
 .button.directions-maps,.button.direction-maps:hover {
@@ -109,25 +30,6 @@
 	background-position: 11px -220px;
 	width: 156px;
 	margin: 15px 0
-}
-
-.button.biomed-sem,.button.biomed-sem:hover {
-	background-position: -25px -267px;
-}
-
-.button.go-straight-pubmed,.button.go-straight-pubmed:hover {
-	background-position: -25px -435px;
-	width: 205px;
-}
-
-.button.go-straight-uptodate,.button.go-straight-uptodate:hover {
-	background-position: -25px -483px;
-	width: 205px;
-}
-
-.button.go-straight-webscience,.button.go-straight-webscience:hover {
-	background-position: -25px -529px;
-	width: 253px;
 }
 
 .button.subscribe {
@@ -143,26 +45,42 @@
 	height: 48px;
 }
 
-.button.sul,.button.sul:hover {
-	background-position: -24px -529px;
-	height: 48px;
-}
-/*see all button on ej and search pages*/
-#seeAll {
-	background-image: url(/././resources/images/seeall-but-off.gif);
-	border-bottom: none;
-	float: right;
-	height: 26px;
-	position: relative;
-	color: white;
-	font-size: 0;
-	top: -6px;
-	margin: 0 0 -12px 5px;
-	width: 95px;
+.bookmarklet {
+	background-position: -25px -529px;
+	background-color: transparent;
+	cursor: pointer;
+	height: 36px;
+	width: 173px;
 }
 
-#seeAll:hover {
-	background-image: url(/././resources/images/seeall-but-on.gif);
+.bookmarklet:hover {
+	background-position: -25px -529px;
+	background-color: transparent;
+	cursor: pointer;
+	height: 36px;
+	width: 173px;
+}
+
+.info {
+	background-position: -250px -61px;
+	background-color: transparent;
+	cursor: pointer;
+	height: 23px;
+	width: 22px;
+	display:inline-block;
+}
+.info:hover {
+	background-position: -250px -61px;
+	background-color: transparent;
+	cursor: pointer;
+	height: 23px;
+	width: 22px;
+}
+
+/*separate buttons - need to be combined into sprite*/
+.button.livechat,.button.livechat:hover {
+	background-position: 13px -19px;
+	margin: 10px 0;
 }
 
 #infoLiteracy {
@@ -181,44 +99,20 @@
 	background-position: 0 -105px
 }
 
-/* top resources buttons, possibly temporary */
-.top-resources {
-	background-image: url(/././resources/images/top-resources.gif);
-	display: block;
-	font-size: 0;
-	color: white;
-	background-repeat: no-repeat;
-	border: none;
-	margin-left: -15px;
-	height: 32px;
-}
-
-.top-resources:hover {
+/*see all button on ej and search pages*/
+#seeAll {
+	background-image: url(/././resources/images/seeall-but-off.gif);
 	border-bottom: none;
+	float: right;
+	height: 26px;
+	position: relative;
 	color: white;
+	font-size: 0;
+	top: -6px;
+	margin: 0 0 -12px 5px;
+	width: 95px;
 }
 
-.top-resources:visited {
-	color: white;
-}
-
-.top-resources.journals:hover {
-	background-position: -301px 0;
-}
-
-.top-resources.pubmed {
-	background-position: 0 -48px;
-}
-
-.top-resources.pubmed:hover {
-	background-position: -301px -48px;
-}
-
-.top-resources.uptodate {
-	background-position: 0 -96px;
-	margin-bottom: 10px
-}
-
-.top-resources.uptodate:hover {
-	background-position: -301px -96px;
+#seeAll:hover {
+	background-image: url(/././resources/images/seeall-but-on.gif);
 }
