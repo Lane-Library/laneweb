@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2011-10-01" version="1.12.2" description="1.12.2 bug fix release">
+            <action date="2011-10-01" dev="alainb" issue="55933" type="add">
+                2 Metasearch engines for the textbook search: am-lange &amp; ovid-darts5mtox
+            </action>
             <action date="2011-09-29" dev="olgary" issue="55946" type="update">
                 Reduced padding and bottom margin for more-classes style
             </action>
