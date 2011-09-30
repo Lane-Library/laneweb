@@ -3,7 +3,7 @@
 	display: block;
 	font-size: 0;
 	color: white;
-	background-image: url(/././resources/images/sprite-but-off.gif);
+	background-image: url(/././resources/images/sprite-but-off1.gif);
 	background-repeat: no-repeat;
 	height: 27px;
 	width: 147px;
@@ -12,7 +12,7 @@
 }
 
 .button:hover {
-	background: transparent url(/././resources/images/sprite-but-on.gif);
+	background: transparent url(/././resources/images/sprite-but-on1.gif);
 	border: none;
 	color: white;
 }
