@@ -485,8 +485,7 @@ public class CachingPipeline extends NonCachingPipeline {
             final String lockKey = PIPELOCK_PREFIX + key;
             Object lock = null;
             synchronized (this.transientStore) {
-                if (!this.transientStore.containsKey(lockKey)) {
-                } else {
+                if (this.transientStore.containsKey(lockKey)) {
                     lock = this.transientStore.get(lockKey);
                     this.transientStore.remove(lockKey);
                 }
@@ -629,7 +628,6 @@ public class CachingPipeline extends NonCachingPipeline {
                         // update validity
                         if (validity == null) {
                             responseIsUsable = false;
-                        } else {
                         }
                     } else {
                         i++;

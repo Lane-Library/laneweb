@@ -244,8 +244,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         	throw new RuntimeException(e);
 		} catch (SAXException e) {
         	throw new RuntimeException(e);
-		} finally {
-        }
+		}
         // Request has been succesfully processed, set approporiate status code
         environment.setStatus(HttpServletResponse.SC_OK);
         return true;
