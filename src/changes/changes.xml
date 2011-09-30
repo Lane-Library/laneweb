@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-10-01" version="1.12.2" description="1.12.2 bug fix release">
+            <action date="2011-09-29" dev="olgary" issue="55946" type="update">
+                Reduced padding and bottom margin for more-classes style
+            </action>
+            <action date="2011-09-29" dev="olgary" issue="55942" type="add">
+                Added new css only buttons into buttons.css
+            </action>
+            <action date="2011-09-28" dev="ryanmax" issue="55852" type="update">
+                mobile redirects and deep links
+            </action>
+        </release>
         <release date="2011-09-26" version="1.12.1" description="1.12.1 bug fix release">
             <action date="2011-09-14" dev="ryanmax" issue="55266" type="add">
                 add textbooks search option
