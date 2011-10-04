@@ -13,8 +13,6 @@ public interface Model {
 
     String BASSETT_NUMBER = "basset-number";
 
-    String BOOKMARKS = "bookmarks";
-
     String CALLBACK = "callback";
 
     String CLASS_ID = "class-id";
@@ -32,8 +30,6 @@ public interface Model {
     String FACETS = "facets";
 
     String HOST = "host";
-    
-    String HISTORY = "history";
 
     String IPGROUP = "ipgroup";
 
