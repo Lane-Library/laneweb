@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class EzproxyServersWriter {
+    
+    private static final String UNION = "union ";
 
     private static final byte[] HJ = "HJ ".getBytes();
 
@@ -22,7 +24,7 @@ public class EzproxyServersWriter {
         + "and proxy = 'T' "
         + "and url like 'http%' "
         + "and url not like '%.stanford.edu%' "
-        + "union "
+        + UNION
         + "select url from h_link, h_version "
         + "where h_link.version_id = h_version.version_id "
         + "and proxy = 'T' "
@@ -31,13 +33,13 @@ public class EzproxyServersWriter {
         + ") "
         + "select substr(url, 0, instr(url,'/',1,3)) as server from urls "
         + "where url like 'https://%' and instr(url,'/',1,3) > 0 "
-        + "union "
+        + UNION
         + "select url as server from urls "
         + "where url like 'https://%' and instr(url,'/',1,3) = 0 "
-        + "union "
+        + UNION
         + "select substr(url, 0, instr(url,'/',1,3)) as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) > 0 "
-        + "union "
+        + UNION
         + "select url as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
 

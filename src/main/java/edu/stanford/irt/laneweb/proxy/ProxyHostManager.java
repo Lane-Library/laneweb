@@ -18,10 +18,13 @@ import javax.sql.DataSource;
 
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
-public class ProxyHostManager {
+public final class ProxyHostManager {
+    
+    private static final String UNION = "union ";
 
-    @SuppressWarnings("serial")
     private static class DatabaseProxyHostSet extends HashSet<String> {
+
+        private static final long serialVersionUID = 1L;
 
         private static final String SQL =
             "with urls as ( "
@@ -30,7 +33,7 @@ public class ProxyHostManager {
             + "and proxy = 'T' "
             + "and url like 'http%' "
             + "and url not like '%.stanford.edu%' "
-            + "union "
+            + UNION
             + "select url from h_link, h_version "
             + "where h_link.version_id = h_version.version_id "
             + "and proxy = 'T' "
@@ -39,13 +42,13 @@ public class ProxyHostManager {
             + ") "
             + "select substr(url, 9, instr(url,'/',1,3) - 9) as server from urls "
             + "where url like 'https://%' and instr(url,'/',1,3) > 0 "
-            + "union "
+            + UNION
             + "select substr(url, 9) as server from urls "
             + "where url like 'https://%' and instr(url,'/',1,3) = 0 "
-            + "union "
+            + UNION
             + "select substr(url, 8, instr(url,'/',1,3) - 8) as server from urls "
             + "where url like 'http://%' and instr(url,'/',1,3) > 0 "
-            + "union "
+            + UNION
             + "select substr(url, 8) as server from urls "
             + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
 
@@ -98,7 +101,7 @@ public class ProxyHostManager {
             try {
                 reader.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new IllegalStateException(e);
             }
         }
     }

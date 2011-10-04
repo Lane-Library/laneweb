@@ -22,8 +22,8 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     @Override
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
-        if (this.proxyLinks && this.elementName.equals(localName)) {
-            String proxyURL = super.createProxyLink(this.builder.toString());
+        if (proxyLinks() && this.elementName.equals(localName)) {
+            String proxyURL = createProxyLink(this.builder.toString());
             this.xmlConsumer.characters(proxyURL.toCharArray(), 0, proxyURL.length());
             this.building = false;
         }
@@ -37,7 +37,7 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        if (this.proxyLinks && this.elementName.equals(localName)) {
+        if (proxyLinks() && this.elementName.equals(localName)) {
             this.builder.setLength(0);
             this.building = true;
         }

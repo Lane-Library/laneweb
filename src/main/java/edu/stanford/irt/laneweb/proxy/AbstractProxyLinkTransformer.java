@@ -23,9 +23,9 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private Ticket ticket;
 
-    protected ProxyHostManager proxyHostManager;
+    private ProxyHostManager proxyHostManager;
 
-    protected boolean proxyLinks;
+    private boolean proxyLinks;
 
     public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
         this.proxyHostManager = proxyHostManager;
@@ -52,5 +52,13 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
         this.ipGroup = ModelUtil.getObject(this.model, Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
         this.basePath = this.parameterMap.containsKey(Model.BASE_PATH) ? this.parameterMap.get(Model.BASE_PATH) : ModelUtil
                 .getString(this.model, Model.BASE_PATH);
+    }
+    
+    protected ProxyHostManager getProxyHostManager() {
+        return this.proxyHostManager;
+    }
+    
+    protected boolean proxyLinks() {
+        return this.proxyLinks;
     }
 }

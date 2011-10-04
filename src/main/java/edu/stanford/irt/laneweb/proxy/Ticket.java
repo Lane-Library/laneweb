@@ -10,6 +10,10 @@ import java.util.Date;
  * @author ceyates
  */
 public class Ticket {
+    
+    private static final int ONE_SECOND = 1000;
+    
+    private static final int ONE_MINUTE = ONE_SECOND * 60;
 
     private long creationTime;
 
@@ -23,19 +27,19 @@ public class Ticket {
             throw new IllegalArgumentException("null ezproxyKey");
         }
         Date now = new Date();
-        String packet = "$u" + ((int) (now.getTime() / 1000)) + "$e";
+        String packet = "$u" + ((int) (now.getTime() / ONE_SECOND)) + "$e";
         try {
             this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + sunetid + packet) + packet, "UTF-8");
             this.creationTime = System.currentTimeMillis();
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 
     public boolean isValid() {
-        return System.currentTimeMillis() - this.creationTime < 1000 * 60;
+        return System.currentTimeMillis() - this.creationTime < ONE_MINUTE;
     }
 
     @Override
