@@ -61,6 +61,26 @@
     Y.lane.Lightbox.on("contentChanged", function(event) {
         if (Y.one("#purchase")) {
             var purchase = new Y.lane.PurchaseSuggestions({srcNode : "#purchase"});
+            var nodes = purchase.get("srcNode").all("input[title='required']");
+            var fieldJSON = [];
+            var node;
+            for (var i = 0; i < nodes.size(); i++) {
+            	node = nodes.item(i);
+            	fieldJSON.push({
+            		type : Y.TextBaseField,
+            		atts : {
+            			inputDOM : Y.Node.getDOMNode(node),
+            			correctCss : "correct",
+            			incorrectCss : "incorrect"
+            		}
+            	});
+            }
+            
+            var validator = new Y.Validator( {
+                        form : Y.Node.getDOMNode(purchase.get("srcNode").one("form")),
+                        fieldJSON : fieldJSON,
+                        checkOnSubmit : true
+                    });
             purchase.render();
         }
     });
