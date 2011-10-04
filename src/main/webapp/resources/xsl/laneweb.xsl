@@ -47,9 +47,6 @@
     <!-- this is the a= parameter for the online resources -->
     <xsl:param name="alpha"/>
 
-    <!-- this is the parent document where there is one (eg /a/b.html for /a/b-sub.html) -->
-    <xsl:param name="parent-path"/>
-
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->
@@ -323,7 +320,7 @@
     </xsl:template>
 
     <!-- add class="expanded" to sectionMenu li that are links to the current page and are expandies -->
-    <xsl:template match="h:ul[contains(@class,'sectionMenu')]/h:li[h:div/h:a[@href=$path or @href=$parent-path]]">
+    <xsl:template match="h:ul[contains(@class,'sectionMenu')]/h:li[h:div/h:a[@href=$path]]">
         <xsl:copy>
             <xsl:attribute name="class">expanded</xsl:attribute>
             <div><em><xsl:apply-templates select="child::h:div/h:a"/></em></div>

@@ -53,8 +53,6 @@ public interface Model {
 
     String PAGE_NUMBER = "pageNumber";
 
-    String PARENT_PATH = "parent-path";
-
     String PASSWORD = "password";
 
     String PERSISTENT_LOGIN = "persistent-login";
