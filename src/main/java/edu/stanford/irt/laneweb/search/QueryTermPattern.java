@@ -5,13 +5,13 @@ import java.util.regex.Pattern;
 /**
  * @author ryanmax
  */
-public class QueryTermPattern {
+public final class QueryTermPattern {
 
     private static final Pattern HYPHEN_PATTERN = Pattern.compile("\\-");
 
     private static final Pattern INVERT_COMMAS_PATTERN = Pattern.compile("(\\(?((\\w| |-|_)+), ((\\w| |-|_)+)\\)?)");
 
-    private static final String INVERT_REPLACEMENT = "$1 and ($4 $2)";
+    private static final String INVERT_REPLACEMENT = "$1 and $4 $2";
 
     private static final String MAYBE_NONWORD = "\\\\W?";
 
@@ -42,8 +42,8 @@ public class QueryTermPattern {
         String normalQuery;
         normalQuery = query.trim().toLowerCase();
         normalQuery = REPLACE_QUOTES_PATTERN.matcher(normalQuery).replaceAll(MAYBE_NONWORD);
-        normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = INVERT_COMMAS_PATTERN.matcher(normalQuery).replaceAll(INVERT_REPLACEMENT);
+        normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = normalQuery.replaceAll(" and ", "|");
         normalQuery = HYPHEN_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = SPACE_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
