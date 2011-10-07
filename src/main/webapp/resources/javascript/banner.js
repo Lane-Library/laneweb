@@ -75,10 +75,12 @@ Y.lane.Banner.ATTRS = {
 	}
 };
 
-if (Y.one("#banner")) {
-	var banner = new Y.lane.Banner({
-		srcNode : "#banner",
-		render : true,
-		automate : true
-	});
-}
+(function() {
+	if (Y.one("#banner")) {
+		var banner = new Y.lane.Banner({
+			srcNode : "#banner",
+			automate : true
+		});
+		banner.render();
+	}
+})();

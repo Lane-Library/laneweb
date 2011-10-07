@@ -23,29 +23,93 @@
         items : {
             value : null,
             writeOnce : true
+        },
+        validator : {
+        	value : null
         }
     };
     
     Y.extend(PurchaseSuggestions, Y.Widget, {
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
-            this.get("items").addClass(this.getClassName("item"));
+            var items = this.get("items");
+            for (var i = 0; i < items.size(); i++) {
+            	items.item(i).remove(false);
+            }
         },
         bindUI : function() {
             this.get("menu").on("click", this._handleMenuClick, this);
             this.on("activeItemChange", this._handleActiveItemChange);
         },
+        _createNewValidator : function (activeItem) {
+        	var validator = this.get("validator");
+        	if (validator) {
+        		validator.destroy();
+        	}
+            var nodes = activeItem.all("input[title='required']");
+            var fieldJSON = [];
+            fieldJSON.push({
+            	type : Y.TextBaseField,
+            	atts : {
+            		inputDOM : Y.Node.getDOMNode(this.get("srcNode").one("input[name='full-name']")),
+            		correctCss : "correct",
+            		incorrectCss : "incorrect",
+        			isOn : false
+            	}
+            });
+            fieldJSON.push({
+            	type : Y.TextBaseField,
+            	atts : {
+            		inputDOM : Y.Node.getDOMNode(this.get("srcNode").one("input[name='email']")),
+            		correctCss : "correct",
+            		incorrectCss : "incorrect",
+        			isOn : false
+            	}
+            });
+            var node;
+            for (var i = 0; i < nodes.size(); i++) {
+            	node = nodes.item(i);
+            	fieldJSON.push({
+            		type : Y.TextBaseField,
+            		atts : {
+            			inputDOM : Y.Node.getDOMNode(node),
+            			correctCss : "correct",
+            			incorrectCss : "incorrect",
+            			isOn : false
+            		}
+            	});
+            }
+            validator = new Y.Validator( {
+                        form : Y.Node.getDOMNode(this.get("srcNode").one("form")),
+                        fieldJSON : fieldJSON,
+                        checkOnSubmit : true
+                    });
+            var inputFields = validator.get("inputFields");
+            for (i = 0; i < inputFields.length; i++) {
+            	inputFields[i].isEmpty = function() {
+                    var node = this.get("inputDOM");
+                    return node.value === '' || node.value == node.title;
+            	};
+            	inputFields[i].set("isOn", true);
+            }
+            this.set("validator", validator);
+        },
         _handleActiveItemChange : function(event) {
             var menu = this.get("menu"),
                 items = this.get("items"),
                 menuActiveClass = this.getClassName("menu", "active"),
-                itemActiveClass = this.getClassName("item", "active"),
                 focusElement;
             menu.item(event.prevVal).removeClass(menuActiveClass);
-            items.item(event.prevVal).removeClass(itemActiveClass);
             menu.item(event.newVal).addClass(menuActiveClass);
-            items.item(event.newVal).addClass(itemActiveClass);
-            focusElement = items.item(event.newVal).one("textarea, input[type='text']");
+            var itemsList = Y.one("#purchaseItems");
+            var item = itemsList.one("li");
+            if (item) {
+            	item.remove(false);
+            }
+            item = items.item(event.newVal);
+            itemsList.append(item);
+            focusElement = itemsList.one("textarea, input[type='text']");
+            this._createNewValidator(item);
             if (focusElement) {
             	focusElement.focus();
             }
@@ -61,26 +125,6 @@
     Y.lane.Lightbox.on("contentChanged", function(event) {
         if (Y.one("#purchase")) {
             var purchase = new Y.lane.PurchaseSuggestions({srcNode : "#purchase"});
-            var nodes = purchase.get("srcNode").all("input[title='required']");
-            var fieldJSON = [];
-            var node;
-            for (var i = 0; i < nodes.size(); i++) {
-            	node = nodes.item(i);
-            	fieldJSON.push({
-            		type : Y.TextBaseField,
-            		atts : {
-            			inputDOM : Y.Node.getDOMNode(node),
-            			correctCss : "correct",
-            			incorrectCss : "incorrect"
-            		}
-            	});
-            }
-            
-            var validator = new Y.Validator( {
-                        form : Y.Node.getDOMNode(purchase.get("srcNode").one("form")),
-                        fieldJSON : fieldJSON,
-                        checkOnSubmit : true
-                    });
             purchase.render();
         }
     });
