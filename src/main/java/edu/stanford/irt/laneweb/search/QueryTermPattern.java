@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * @author ryanmax
  */
-public final class QueryTermPattern {
+public class QueryTermPattern {
 
     private static final Pattern HYPHEN_PATTERN = Pattern.compile("\\-");
 
@@ -48,5 +48,9 @@ public final class QueryTermPattern {
         normalQuery = HYPHEN_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = SPACE_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         return Pattern.compile(normalQuery, Pattern.CASE_INSENSITIVE);
+    }
+
+    private QueryTermPattern() {
+        // empty constructor
     }
 }
