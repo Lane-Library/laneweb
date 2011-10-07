@@ -19,6 +19,7 @@ import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class CollectionManagerImpl implements CollectionManager {
@@ -232,7 +233,7 @@ public class CollectionManagerImpl implements CollectionManager {
             }
             return result;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new LanewebException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
@@ -271,7 +272,7 @@ public class CollectionManagerImpl implements CollectionManager {
             rs = stmt.executeQuery();
             return parseResultSet(rs, query);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new LanewebException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);

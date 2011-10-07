@@ -11,6 +11,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandler {
@@ -42,11 +43,11 @@ public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandl
                 return resource;
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new LanewebException(e);
         }
         resource = super.getResource(request);
         if (resource == null) {
-            throw new RuntimeException(path + " not found");
+            throw new LanewebException(path + " not found");
         }
         return resource;
     }

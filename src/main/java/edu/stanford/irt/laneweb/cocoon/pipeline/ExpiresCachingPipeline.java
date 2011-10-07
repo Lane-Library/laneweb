@@ -29,6 +29,8 @@ import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class ExpiresCachingPipeline extends NonCachingPipeline {
 
     /** This key can be used to put an expires information in the object model */
@@ -241,9 +243,9 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 }
             }
         } catch (IOException e) {
-        	throw new RuntimeException(e);
+        	throw new LanewebException(e);
 		} catch (SAXException e) {
-        	throw new RuntimeException(e);
+        	throw new LanewebException(e);
 		}
         // Request has been succesfully processed, set approporiate status code
         environment.setStatus(HttpServletResponse.SC_OK);

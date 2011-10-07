@@ -26,6 +26,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.WebApplicationContext;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage implements
         ApplicationContextAware {
 
@@ -46,7 +48,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
                             desc.append("map:");
                         }
                     } catch (ConfigurationException e) {
-                        throw new RuntimeException(e);
+                        throw new LanewebException(e);
                     }
                     desc.append(config.getName()).append('>');
                     return new LocationImpl(desc.toString(), result);

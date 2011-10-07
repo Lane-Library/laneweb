@@ -37,6 +37,8 @@ import org.apache.excalibur.store.Store;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class CachingPipeline extends NonCachingPipeline {
 
     public static final String PIPELOCK_PREFIX = "PIPELOCK:";
@@ -354,7 +356,7 @@ public class CachingPipeline extends NonCachingPipeline {
                     try {
                         this.transientStore.store(lockKey, lock);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        throw new LanewebException(e);
                     }
                 }
             }
@@ -396,7 +398,7 @@ public class CachingPipeline extends NonCachingPipeline {
                     outputStream.write(content);
                 }
             } catch (IOException e) {
-            	throw new RuntimeException(e);
+            	throw new LanewebException(e);
 			}
         } else {
             setMimeTypeForSerializer(environment);
@@ -463,9 +465,9 @@ public class CachingPipeline extends NonCachingPipeline {
                     environment.isResponseModified(completeCachedResponse.getLastModified());
                 }
             } catch (IOException e) {
-            	throw new RuntimeException(e);
+            	throw new LanewebException(e);
 			} catch (SAXException e) {
-            	throw new RuntimeException(e);
+            	throw new LanewebException(e);
 			} finally {
                 releaseLock(this.toCacheKey);
             }

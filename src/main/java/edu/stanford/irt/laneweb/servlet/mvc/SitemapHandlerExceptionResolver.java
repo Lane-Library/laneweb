@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
 
     private final Logger log = LoggerFactory.getLogger(SitemapHandlerExceptionResolver.class);
@@ -33,9 +35,9 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
         try {
             handleRequest(request, response);
         } catch (ServletException e) {
-            throw new RuntimeException(e);
+            throw new LanewebException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new LanewebException(e);
         }
         return new ModelAndView();
     }

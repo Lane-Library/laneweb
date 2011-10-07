@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class RequestParameterDataBinder implements DataBinder {
@@ -66,7 +67,7 @@ public class RequestParameterDataBinder implements DataBinder {
                     try {
                         model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
                     } catch (UnsupportedEncodingException e) {
-                        throw new RuntimeException(e);
+                        throw new LanewebException(e);
                     }
                 }
                 if (this.parameterModelMap.containsKey(name)) {

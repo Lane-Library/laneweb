@@ -19,6 +19,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.BasePathSubstitutingInputStream;
 
@@ -116,12 +117,12 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
                 }
                 return new CachedResponseResource(cachedResponse, resource);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new LanewebException(e);
             } catch (ProcessingException e) {
-                throw new RuntimeException(e);
+                throw new LanewebException(e);
             }
         } else {
-            throw new RuntimeException(request.getRequestURI() + " not found.");
+            throw new LanewebException(request.getRequestURI() + " not found.");
         }
     }
 

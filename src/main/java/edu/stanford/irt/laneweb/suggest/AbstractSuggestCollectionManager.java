@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.CollectionManagerImpl;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.suggest.QueryNormalizer;
@@ -44,7 +45,7 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
             rs = stmt.executeQuery();
             return parseResultSet(rs);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new LanewebException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);

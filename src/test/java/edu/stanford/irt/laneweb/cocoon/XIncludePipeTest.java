@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class XIncludePipeTest {
 	
 	private XIncludePipe pipe;
@@ -38,7 +40,7 @@ public class XIncludePipeTest {
 		expect(this.attributes.getValue("", "href")).andReturn("foo");
 		expect(this.attributes.getValue("", "parse")).andReturn(null);
 		expect(this.attributes.getValue("", "xpointer")).andReturn(null);
-		expect(this.sourceResolver.resolveURI("foo")).andThrow(new RuntimeException("oopsie"));
+		expect(this.sourceResolver.resolveURI("foo")).andThrow(new LanewebException("oopsie"));
 		replay(this.sourceResolver, this.attributes);
 		//must call init() to create xmlBaseSupport object
 		this.pipe.init(null, null);

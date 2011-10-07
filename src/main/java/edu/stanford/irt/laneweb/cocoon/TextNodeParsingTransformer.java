@@ -15,6 +15,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent {
 
     private static class HtmlSAXParser extends AbstractSAXParser {
@@ -78,7 +80,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
                 this.htmlParser.setContentHandler(xmlConsumer);
                 this.htmlParser.parse(inputSource);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new LanewebException(e);
             }
         }
         this.content = new StringBuilder();
