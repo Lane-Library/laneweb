@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * @author ryanmax
  */
-public class QueryTermPattern {
+public final class QueryTermPattern {
 
     private static final Pattern HYPHEN_PATTERN = Pattern.compile("\\-");
 
