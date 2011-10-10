@@ -9,5 +9,12 @@
             event.currentTarget.one("ul").setStyle("visibility", "visible");
         }, 300);
     });
+    
+    Y.all("#somNav>li").on("mouseenter", function(event) {
+        event.currentTarget.one("ul").setStyle("visibility","hidden");
+        setTimeout(function() {
+            event.currentTarget.one("ul").setStyle("visibility", "visible");
+        }, 600);
+    });
 
 })();
