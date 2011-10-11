@@ -7,7 +7,7 @@
         event.currentTarget.one("ul").setStyle("visibility","hidden");
         setTimeout(function() {
             event.currentTarget.one("ul").setStyle("visibility", "visible");
-        }, 300);
+        }, 500);
     });
     
     Y.all("#somNav>li").on("mouseenter", function(event) {
