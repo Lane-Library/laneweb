@@ -212,6 +212,7 @@
                                 <include>banner-min.js</include>
                                 <include>purchase-suggestions-min.js</include>
                                 <include>menu-delay-min.js</include>
+                                <include>lane-search-printonly-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
