@@ -1,35 +1,44 @@
-.contentForm legend  {
-    border:1px solid #C1C1C1;
-    color:#444444;
-    font-size:95%;
-    font-weight:bold;
-    padding:0.3em 1em;
-    text-align:left;
+.contentForm legend {
+    border : 1px solid #C1C1C1;
+    color : #444444;
+    font-size : 95%;
+    font-weight : bold;
+    padding : 0.3em 1em;
+    text-align : left;
 }
-.contentForm fieldset  {
-    margin-bottom:1.2em;
-    padding:1em;
-    border:1px solid #C1C1C1;
+.contentForm fieldset {
+    margin-bottom : 1.2em;
+    padding : 1em;
+    border : 1px solid #C1C1C1;
 }
-.fieldLabel  {
-    background-color:#F2F3ED;
-    border:1px dotted #C1C1C1;
-    float:left;
-    margin-right:10px;
-    padding:5px;
-    text-align:right;
-    width:30%;
+.fieldLabel {
+    background-color : #F2F3ED;
+    border : 1px dotted #C1C1C1;
+    float : left;
+    margin-right : 10px;
+    padding : 5px;
+    text-align : right;
+    width : 30%;
 }
-.requiredField, .validatedField {
-    padding:5px;
-    font-size:1.5em;
+.requiredField,
+.validatedField {
+    padding : 5px;
+    font-size : 1.5em;
 }
-.requiredField  {
-    color:#990000;
+.requiredField {
+    color : #990000;
 }
-.validatedField  {
-    color:green;
+.validatedField {
+    color : green;
 }
 .fieldRow {
-  clear:both;
+    clear : both;
+}
+/* .incorrect is for the suggestions for purchase lightbox form */
+#purchase .incorrect {
+    background-color : #F0E8D8;
+    color : #920000;
+    background-image : url(/././resources/images/required.png);
+    background-repeat : no-repeat;
+    background-position : right center
 }
