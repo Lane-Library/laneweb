@@ -18,10 +18,8 @@
     <xsl:template match="/h:html/h:body/h:div"/>
     
     <xsl:template match="/h:html/h:body/h:div[position() = $banner-wanted]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()|child::node()"/>
-            <xsl:call-template name="create-nav"/>
-        </xsl:copy>
+        <xsl:apply-templates select="child::node()"/>
+        <xsl:call-template name="create-nav"/>
     </xsl:template>
     
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
