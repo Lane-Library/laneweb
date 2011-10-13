@@ -5,21 +5,18 @@
     position : relative;
     overflow : hidden
 }
-#banner img {
+#banner .bannerBackground {
     display : block
 }
-.banner-nav-content {
-    width : 100%;
-    position : absolute;
-    bottom : 0
+.banner-content {
+    position : relative;
+    top : -286px;
+    height : 286px
 }
 #banner .banner-nav {
-    float : left;
-    margin-bottom : 0;
-    margin-left : 5px;
-    height : 46px;
-    padding-top : 29px;
-    width : 150px;
+    position : absolute;
+    bottom : 18px;
+    left : 5px
 }
 #banner li {
     list-style : none outside none;
@@ -36,13 +33,4 @@
 .banner-nav .banner-nav-active,
 .banner-nav a:hover {
     background-image : url(/././resources/images/bannerButtonOn1.png)
-}
-.banner-content {
-    float : left;
-    padding-top : 8px;
-    color : white;
-    font-weight : bolder;
-    -webkit-text-shadow : 1px 1px 1px black;
-    -moz-text-shadow : 1px 1px 1px black;
-    text-shadow : 1px 1px 1px black;
 }

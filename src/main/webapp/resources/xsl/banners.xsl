@@ -15,28 +15,13 @@
         </xsl:choose>
     </xsl:variable>
     
-    <xsl:template match="h:body">
+    <xsl:template match="/h:html/h:body/h:div"/>
+    
+    <xsl:template match="/h:html/h:body/h:div[position() = $banner-wanted]">
         <xsl:copy>
-            <xsl:apply-templates select="child::h:div[position() = $banner-wanted]"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="/h:html/h:body/h:div">
-        <xsl:apply-templates select="attribute::node()|child::node()"/>
-        <xsl:if test="not(h:div[attribute::class = 'banner-content'])">
-            <div class="banner-nav-content">
-                <xsl:call-template name="create-nav"/>
-            </div>
-        </xsl:if>
-    </xsl:template>
-    
-    <xsl:template match="h:div[attribute::class = 'banner-content']">
-        <div class="banner-nav-content">
+            <xsl:apply-templates select="attribute::node()|child::node()"/>
             <xsl:call-template name="create-nav"/>
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node()|child::node()"/>
-            </xsl:copy>
-        </div>
+        </xsl:copy>
     </xsl:template>
     
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
