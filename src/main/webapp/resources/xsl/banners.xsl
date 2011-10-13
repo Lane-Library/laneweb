@@ -17,7 +17,7 @@
     
     <xsl:template match="/h:html/h:body/h:div"/>
     
-    <xsl:template match="/h:html/h:body/h:div[position() = $banner-wanted]">
+    <xsl:template match="/h:html/h:body/h:div[position() = $banner-wanted]" priority="1">
         <xsl:apply-templates select="child::node()"/>
         <xsl:call-template name="create-nav"/>
     </xsl:template>
