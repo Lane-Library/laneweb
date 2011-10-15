@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon.pipeline;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
 
 import java.io.IOException;

@@ -6,8 +6,6 @@
     
     <xsl:param name="banner"/>
     
-    <xsl:variable name="banner-count" select="count(/h:html/h:body/h:div)"/>
-    
     <xsl:variable name="banner-wanted">
         <xsl:choose>
             <xsl:when test="string-length($banner) = 0">1</xsl:when>
