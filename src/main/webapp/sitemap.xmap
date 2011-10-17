@@ -47,7 +47,7 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <!-- status page -->
-            <map:match pattern="secure/status.html" type="wildard">
+            <map:match pattern="secure/status.html" type="wildcard">
                 <map:generate type="status"/>
                 <map:serialize type="xml"/>
             </map:match>
