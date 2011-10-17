@@ -46,7 +46,7 @@
                 <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <!-- status page -->
+            <!-- status page (not really .html, but convenient to use html suffix for url mapping purposes -->
             <map:match pattern="secure/status.html" type="wildcard">
                 <map:generate type="status"/>
                 <map:serialize type="xml"/>
