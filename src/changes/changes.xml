@@ -7,6 +7,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-10-17" version="1.12.3" description="1.12.3 bug fix release">
+            <action date="2011-10-13" dev="ceyates" issue="56747" type="update">
+                reduce needless logging output
+            </action>
+            <action date="2011-10-12" dev="olgary" issue="56687" type="update">
+                search.css changes: hid empty facets, changed margin for facetheaders, adjusted width of 'did you mean?' 
+            </action>
+            <action date="2011-10-12" dev="ryanmax" issue="56635" type="add">
+                show print results when no other search results present
+            </action>
+            <action date="2011-10-12" dev="ceyates" issue="56538" type="update">
+                allow markup to appear anywhere in the banner
+            </action>
+            <action date="2011-10-06" dev="ryanmax" issue="56306" type="bug">
+                Keyword highlighting not working on pulmonary hypertension.
+            </action>
+            <action date="2011-10-11" dev="ceyates" issue="55704" type="add">
+                Time delay for the dropdown menus in the main nav
+            </action>
+            <action date="2011-10-12" dev="ceyates" issue="53816" type="add">
+                Help with suggestion for purchase form
+            </action>
+        </release>
         <release date="2011-10-01" version="1.12.2" description="1.12.2 bug fix release">
             <action date="2011-10-01" dev="alainb" issue="55933" type="add">
                 2 Metasearch engines for the textbook search: am-lange &amp; ovid-darts5mtox
