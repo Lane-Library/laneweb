@@ -28,6 +28,7 @@ dt {
 	margin-left: 0;
 }
 
+
 /*this is the middle column*/
 .content .middleColumn li {
 	padding-bottom: 0.2em;
@@ -38,4 +39,8 @@ dt {
 	font-size: 11px;
 	line-height: 12px;
 	padding: 2.5px 0;
+}
+
+.content .rightColumn .cite li {
+	margin-bottom: .5em;
 }
