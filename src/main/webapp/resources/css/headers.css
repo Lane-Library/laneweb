@@ -30,13 +30,13 @@ h4 {
     margin-bottom : .2em;
 }
 h5 {
-	color : black;
-    font-weight: bold;
+    color : black;
+    font-weight : bold;
     letter-spacing : 0.05em;
     line-height : 1.2em;
     margin-bottom : .2em;
-    font-size: 1.1 em;
-	}
+    font-size : 1.1em;
+}
 
 .rightColumn h5 {
     color : #820000;
@@ -56,6 +56,6 @@ h5 {
 }
 /*style for h4 - bigger font, red; good for long pages, not portals*/
 .plain {
-	color : #820000;
+    color : #820000;
     font-size : 1.8em;
 }
