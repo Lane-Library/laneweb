@@ -29,6 +29,23 @@ h4 {
     line-height : 1.2em;
     margin-bottom : .2em;
 }
+h5 {
+	color : black;
+    font-weight: bold;
+    letter-spacing : 0.05em;
+    line-height : 1.2em;
+    margin-bottom : .2em;
+    font-size: 1.1 em;
+	}
+
+.rightColumn h5 {
+    color : #820000;
+    font-size : 9px;
+    letter-spacing : 1px;
+    padding : 3px 0;
+    text-transform : uppercase;
+}
+
 .alt {
     color : #575347;
     border-bottom-color : #575347;
@@ -37,14 +54,7 @@ h4 {
     font-size : 11px;
     font-weight : normal;
 }
-.rightColumn h5 {
-    color : #820000;
-    font-size : 9px;
-    letter-spacing : 1px;
-    padding : 3px 0;
-    text-transform : uppercase;
-}
-/*style for h3 - bigger font, red; good for long pages, not portals*/
+/*style for h4 - bigger font, red; good for long pages, not portals*/
 .plain {
 	color : #820000;
     font-size : 1.8em;
