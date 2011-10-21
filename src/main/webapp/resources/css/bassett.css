@@ -1,201 +1,103 @@
-
-#bassettContent p {
-    text-align: justify;
+/* COMMON TO THE TWO IMAGE VIEWS  */
+ #bassettContent td {
+	border: none;
 }
-#bassettContent h1{
-    position: static;
+.choice {
+	float: left;
 }
-#bassettContent a{
-    border-bottom: 0px;
-}
-#bassettContent td{
-    border:none;
+div.paging a, div.bassett-image td a, #bassettContent .hr a{
+	border-bottom: 0px;
 }
 
 
-.profileImage{
-    clear : both;
-    float : right;
-    height: 175px;
-    margin: 0.5em 1em 1em;
-    position : relative;
-    text-align: center;
+/* Multi IMAGES VIEW */
+div.bassett-images, div.paging, div.bassett-image {
+	clear: both;
 }
-      
-.fixed a{
-    text-decoration: none;
+div.bassett-images div {
+	padding: 0 10px 30px 0;
+	float: left;
 }
-
-
-/*********** Multi IMAGES VIEW CSS **********/
-
-div.bassett-images{
-    clear:both;
-    padding-left:45px;
+#bassettContent .hr {
+	padding: 0 0 7px 0;
+	float: none;
 }
-
-div.bassett-images div{
-    padding :5px;
-    padding-top: 15px;
-    padding-bottom :30px;
-    float: left;
+#bassettContent .image-text {
+	padding: 3px 0 0 0;
+}
+div.paging {
+	float: right;
+	vertical-align: middle;
+}
+div.paging table td,.choice {
+	padding: 0 0 1em 0;
+}
+div.paging img {
+	padding: 1px 3px 0 0;
 }
 
-#bassettContent .hr{
-    border-bottom:1px solid #ccc;
-    padding:0px;
-    padding-bottom:7px;
-    float:none;
+div.paging #page-number {
+	padding: 0 5px 0 5px;
 }
 
-#bassettContent .image-text{
-    padding:0px;
-    padding-top:3px;
+
+/* IMAGE VIEW */
+.legend-title {
+	padding-top: 7px;
+	color: #820000;
+	font-size: 1.8em;
 }
-
-div.paging{
-    float:right;
-    vertical-align:middle;
-    clear:both;
+#bassett-number {
+	font-weight: bold;
+	margin-top:1em;
 }
-
-div.paging img{
-    padding:0px;
-    padding-right:3px;
-    padding-top:1px;
+ #second-region {
+	color: #999999;
+    font-size: 10px;
 }
-
-div.paging #page-number{
-    color:#666;
-    padding-right:5px;
-    padding-left:5px;
-}
-
-/*********** IMAGE VIEW CSS **************/
-
-
 div.bassett-image{
-    clear:both;
     width:100%;
 }
-
 div.bassett-image table{
-    margin-right: 5px;
     margin-bottom :30px;
     text-align: center;
+    vertical-align: middle;
+    padding: 2em;
+}
+div.bassett-image td#image {
+	vertical-align: middle;
+}
+div.bassett-image td#diagram-image {
+	vertical-align: top;
 }
 
-div.bassett-image td{
-    vertical-align:middle;
-    padding: 7px;
+div.bassett-image table table td {
+	padding: 0px;
+	padding-top: 3px;
+	padding-left: 2px;
+	text-align: left;
+	vertical-align: top;
+}
+div.bassett-image table table td.legend-title, div.bassett-image table table td.legend-sub-title {
+	text-align: center;
+}
+div.bassett-image table table td.legend-title {
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 1em;
+	color: #3F3C30;
+}
+div.bassett-image table table td.legend-sub-title {
+	padding-bottom: 5px;
+	font-style: italic;
+}
+div.bassett-image table table td.legend-description {
+	padding-bottom: 15px;
 }
 
-div.bassett-image td#image{
-    border-right:1px solid #ccc;
-    border-bottom:1px solid #ccc;
-    padding-right:20px
+/*
+#larger-view-link {
+	padding-right: 10px;
+	float: right;
 }
-
-div.bassett-image td#diagram-image{
-    vertical-align: top;
-    border-right:1px solid #ccc;
-}
-
-div.bassett-image td#legend-image{
-    border-bottom:1px solid #ccc;
-}
-
-div.bassett-image table table{
-    margin-left:15px;margin-top:15px;
-}
-
-div.bassett-image table table table{
-    margin:0px;
-}
-
-div.bassett-image table table td{
-    padding: 0px;
-    padding-top: 3px;
-    padding-left: 2px;
-    text-align: left;
-    vertical-align: top;
-}
-
-div.bassett-image table table td.legend-title{
-    font-weight:bold;
-    text-align: center;
-    padding-bottom :7px;
-}
-
-div.bassett-image table table td.legend-sub-title{
-    text-align: center;
-    padding-bottom :5px;
-    font-style:italic;
-}
-
-div.bassett-image table table td.legend-description{
-    text-align: justify;
-    padding-bottom: 15px;
-}
-
-#larger-view-link{
-    padding-right:10px;
-    float:right;
-}
-
-
-#bassett-number{
-float:left;
-}
-
-
-#second-region{
-    padding-top:7px;
-    clear:both
-}
-
-#bassett-subtitle{
-    font-size:0.9em;
-    color:#968672;
-}
-
-.legend-title{
-padding-top:7px;
-}
-/* COMMON TO THE TWO IMAGE VIEW  */
-
-img.newWinIcon{
-    padding-left :3px;
-}
-
-#bassettContent hr{
-    border: 0px;
-    background-color: #ccc;
-    height: 1px;
-    clear:both;
-}
-
-.choice{
-    float:left;
-    color:#1C4B70;
-}
-
-.choice a{
-    color:#1C4B70;
-}
-
-.choice span{
-    color:#1C4B70;
-    text-decoration:underline;
-}
-
-
-/********  Larger View ***********/
-
-#new-window a{
-    color:#1C4B70;
-    text-decoration:none;
-    font-size:10px;
-    margin-right: 10px;
-    float:right
-}        
+*/
