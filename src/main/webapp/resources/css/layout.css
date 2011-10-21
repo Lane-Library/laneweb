@@ -12,12 +12,9 @@
     margin:10px 15px 0 20px;
 }
 /* customizations */
-/*this brings the 3 column layout left box to the edge of the shaded border:*/
 .yui-ge .yui-u .leftColumn,
 .content .yui-gf .leftColumn {
     width : 156px;
-    position : relative;
-    left : -20px;
 }
 .yui-ge .yui-u .middleColumn {
     width : 540px;
