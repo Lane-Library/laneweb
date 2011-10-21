@@ -27,8 +27,13 @@ dt {
 	border-bottom: 1px solid #E6E4DC;
 	margin-left: 0;
 }
-
-
+.content .leftColumn li ul {
+	padding-top: 4px;
+}
+.content .leftColumn li ul li{
+	padding: 1px 5px 0px 6px;
+	border-bottom: 0;
+}
 /*this is the middle column*/
 .content .middleColumn li {
 	padding-bottom: 0.2em;
