@@ -15,6 +15,8 @@
 .yui-ge .yui-u .leftColumn,
 .content .yui-gf .leftColumn {
     width : 156px;
+    position : relative;
+    left : -20px;
 }
 .yui-ge .yui-u .middleColumn {
     width : 540px;
@@ -24,9 +26,7 @@
 }
 /*this brings the 3 column layout left box to the edge of the shaded border:*/
 .content .yui-ge .leftGrids {
-    width : 720px;
-    position : relative;
-    left : -20px;
+    width : 700px;
 }
 .content .yui-gf .rightGrids {
     width : 785px;
