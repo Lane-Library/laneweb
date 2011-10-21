@@ -47,13 +47,13 @@
              <xsl:apply-templates select="attribute::node()|child::node()"/>
               <xsl:choose>
                 <xsl:when test="$query">
-                    <xsl:text>Search Term: </xsl:text>
+                    <xsl:text>Search Term </xsl:text>
                     <xsl:value-of select="$query"/>
                 </xsl:when>
                 <xsl:when test="$region">
                     <xsl:value-of select="replace($region,'--',': ')"/>
                 </xsl:when>
-                <xsl:otherwise><xsl:value-of select="/doc/b:bassetts/b:bassett/b:regions/b:region[1]/@b:name"/>:</xsl:otherwise>
+                <xsl:otherwise><xsl:value-of select="/doc/b:bassetts/b:bassett/b:regions/b:region[1]/@b:name"/></xsl:otherwise>
             </xsl:choose>
         </xsl:copy>
                     
@@ -163,16 +163,14 @@
                               </div>
                           <div>
                           <xsl:attribute name="class">image-text</xsl:attribute>
-                         <xsl:text>#</xsl:text><xsl:value-of select="./@b:bassett_number"/>
-                        <br/>
-                        <a> 
+                          <a> 
                                <xsl:attribute name="title"  >
                                 <xsl:value-of select="./b:title"/>
                             </xsl:attribute>
                             <xsl:attribute name="href"  >
                                 <xsl:text>/biomed-resources/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
                             </xsl:attribute>
-                            <xsl:text> View Larger</xsl:text>
+                         <xsl:text>#</xsl:text><xsl:value-of select="./@b:bassett_number"/>
                        </a>
                        </div>
                     </div>
@@ -210,7 +208,7 @@
 <xsl:template match="h:*[@class='legend-title']">
     <xsl:copy>
         <xsl:apply-templates select="attribute::node()"/>
-        <xsl:value-of select="upper-case(substring-before(/doc/b:bassetts/b:bassett/b:title, '.'))"/>
+        <xsl:value-of select="substring-before(/doc/b:bassetts/b:bassett/b:title, '.')"/>
     </xsl:copy>
      
 </xsl:template>
