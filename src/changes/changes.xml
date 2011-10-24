@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-10-24" version="1.12.4" description="1.12.4 bug fix release">
+            <action date="2011-10-21" dev="olgary" issue="57133" type="update">
+                in the main template, changed the link to hours to go to main about page
+            </action>
+            <action date="2011-10-21" dev="olgary" issue="57127" type="update">
+                bassett.css, bassett.xsl fix to fix the layout
+            </action>
+            <action date="2011-10-21" dev="ceyates" issue="56983" type="fix">
+                IE7 hack: Text on Left in Nav &amp; search filters is partially hidden (1 or 2 px)
+            </action>
+            <action date="2011-10-21" dev="ceyates" issue="55888" type="fix">
+                "+" indicators on expandies not aligned on the classes page
+            </action>
+        </release>
         <release date="2011-10-17" version="1.12.3" description="1.12.3 bug fix release">
             <action date="2011-10-13" dev="ceyates" issue="56747" type="update">
                 reduce needless logging output
