@@ -48,7 +48,9 @@
                 <xsl:if test="number(@size) &gt; 100">
                     <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
-                <div id="search-content-counts" style="display:none;">
+                <div id="search-content-counts">
+                    <!-- empty div causes problems when facets are imported with JS -->
+                    <xsl:text>&#160;</xsl:text>
                     <xsl:for-each
                         select="/s:resources/s:contentHitCounts/s:resource">
                         <span id="{@resourceId}">
