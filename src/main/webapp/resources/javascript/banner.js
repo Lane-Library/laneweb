@@ -15,9 +15,12 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
     	window.setTimeout(recursion, 10000);
     },
 	bindUI : function() {
-		this.get("navNodes").on("click", this._handleNavClick, this);
-		this.on("indexChange", this._handleIndexChange);
-		this.autoNext();
+		var navNodes = this.get("navNodes");
+		if (navNodes.size() > 0) {
+			navNodes.on("click", this._handleNavClick, this);
+			this.on("indexChange", this._handleIndexChange);
+			this.autoNext();
+		}
 	},
 	next : function() {
 		var index = this.get("index"),
