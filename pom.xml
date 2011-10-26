@@ -6,7 +6,6 @@
         <version>5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>edu.stanford.irt</groupId>
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
@@ -244,6 +243,34 @@
                 <version>3.0-beta-3</version>
             </plugin>
         </plugins>
+        <pluginManagement>
+        	<plugins>
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>net.alchim31.maven</groupId>
+        								<artifactId>yuicompressor-maven-plugin</artifactId>
+        								<versionRange>[1.2,)</versionRange>
+        								<goals>
+        									<goal>compress</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        							    <execute/>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
     </build>
     <reporting>
         <plugins>
