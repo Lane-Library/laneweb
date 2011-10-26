@@ -9,7 +9,7 @@
     		list.setStyle("visibility", "hidden");
     		setTimeout(function() {
     			list.setStyle("visibility", "visible");
-    		});
+    		}, 500);
     	}
     });
 
