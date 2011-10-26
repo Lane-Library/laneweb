@@ -17,7 +17,10 @@
     
     <xsl:template match="/h:html/h:body/h:div[position() = $banner-wanted]" priority="1">
         <xsl:apply-templates select="child::node()"/>
-        <xsl:call-template name="create-nav"/>
+        <!-- only construct navigation if there is more than one banner -->
+        <xsl:if test="count(/h:html/h:body/h:div) &gt; 1">
+            <xsl:call-template name="create-nav"/>
+        </xsl:if>
     </xsl:template>
     
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
