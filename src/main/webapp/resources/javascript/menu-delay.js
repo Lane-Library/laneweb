@@ -3,18 +3,14 @@
  */
 (function() {
     
-    Y.all("#laneNav>li").on("mouseenter", function(event) {
-        event.currentTarget.one("ul").setStyle("visibility","hidden");
-        setTimeout(function() {
-            event.currentTarget.one("ul").setStyle("visibility", "visible");
-        }, 500);
-    });
-    
-    Y.all("#somNav>li").on("mouseenter", function(event) {
-        event.currentTarget.one("ul").setStyle("visibility","hidden");
-        setTimeout(function() {
-            event.currentTarget.one("ul").setStyle("visibility", "visible");
-        }, 600);
+    Y.all("#laneNav>li, #somNav>li").on("mouseenter", function(event) {
+    	var list = event.currentTarget.one("ul");
+    	if (list) {
+    		list.setStyle("visibility", "hidden");
+    		setTimeout(function() {
+    			list.setStyle("visibility", "visible");
+    		});
+    	}
     });
 
 })();
