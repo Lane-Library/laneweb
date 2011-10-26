@@ -4,6 +4,7 @@ import java.util.Map.Entry;
 
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 /**
@@ -29,6 +30,6 @@ public class DebugTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        this.debug = ModelUtil.getObject(this.model, "debug", Boolean.class, Boolean.FALSE);
+        this.debug = ModelUtil.getObject(this.model, Model.DEBUG, Boolean.class, Boolean.FALSE);
     }
 }
