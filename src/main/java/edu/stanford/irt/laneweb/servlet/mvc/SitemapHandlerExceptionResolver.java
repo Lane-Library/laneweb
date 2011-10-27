@@ -17,7 +17,7 @@ import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
 public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
 
-    private final Logger log = LoggerFactory.getLogger(SitemapHandlerExceptionResolver.class);
+    private final Logger log = LoggerFactory.getLogger("error handler");
 
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
