@@ -21,21 +21,22 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
 
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
-        if (ex instanceof ResourceNotFoundException) {
-            this.log.error(ex.toString());
-        } else {
-            Throwable maybeNull = ex.getCause();
-            Throwable ultimateCause = ex;
-            while (maybeNull != null) {
-                ultimateCause = maybeNull;
-                maybeNull = maybeNull.getCause();
-            }
-            if (ultimateCause instanceof FileNotFoundException) {
-                this.log.error(ultimateCause.toString());
-            } else {
-                this.log.error(ex.toString(), ultimateCause);
-            }
-        }
+//        if (ex instanceof ResourceNotFoundException) {
+//            this.log.error(ex.toString());
+//        } else {
+//            Throwable maybeNull = ex.getCause();
+//            Throwable ultimateCause = ex;
+//            while (maybeNull != null) {
+//                ultimateCause = maybeNull;
+//                maybeNull = maybeNull.getCause();
+//            }
+//            if (ultimateCause instanceof FileNotFoundException) {
+//                this.log.error(ultimateCause.toString());
+//            } else {
+//                this.log.error(ex.toString(), ultimateCause);
+//            }
+//        }
+        this.log.error(ex.toString(), ex);
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         try {
             handleRequest(request, response);
