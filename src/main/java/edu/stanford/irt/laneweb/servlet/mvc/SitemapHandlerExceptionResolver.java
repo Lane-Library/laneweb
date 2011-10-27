@@ -33,7 +33,7 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
             if (ultimateCause instanceof FileNotFoundException) {
                 this.log.error(ultimateCause.toString());
             } else {
-                this.log.error(ex.getMessage(), ex);
+                this.log.error(ex.toString(), ultimateCause);
             }
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);

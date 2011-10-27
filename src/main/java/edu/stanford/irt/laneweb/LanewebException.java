@@ -11,4 +11,8 @@ public class LanewebException extends RuntimeException {
     public LanewebException(String message) {
         super(message);
     }
+    
+    public LanewebException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

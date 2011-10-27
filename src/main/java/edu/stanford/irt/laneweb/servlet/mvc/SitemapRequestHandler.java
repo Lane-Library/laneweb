@@ -15,6 +15,7 @@ import org.apache.cocoon.Processor;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.springframework.web.HttpRequestHandler;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.cocoon.expression.LanewebRequest;
 import edu.stanford.irt.laneweb.cocoon.expression.LanewebResponse;
 import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
@@ -55,7 +56,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         try {
             this.processor.process(environment);
         } catch (Exception e) {
-            throw new ServletException(e);
+            throw new LanewebException(model.toString(), e);
+//            throw new ServletException(e);
         }
     }
 
