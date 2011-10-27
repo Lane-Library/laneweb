@@ -50,15 +50,13 @@
         </xsl:attribute>
     </xsl:template>
 
+    <!-- {request-uri} in an attribute will be resolved to $request-uri + [?$query-string] -->
     <xsl:template match="@*[.='{request-uri}']">
         <xsl:attribute name="{name()}">
             <xsl:value-of select="$path"/>
-        </xsl:attribute>
-    </xsl:template>
-    
-    <xsl:template match="@*[.='{request-url}']">
-        <xsl:attribute name="{name()}">
-            <xsl:value-of select="$request-url"/>
+            <xsl:if test="$query-string">
+                <xsl:value-of select="concat('?',$query-string)"/>
+            </xsl:if>
         </xsl:attribute>
     </xsl:template>
 
