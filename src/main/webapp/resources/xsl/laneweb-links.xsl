@@ -55,6 +55,12 @@
             <xsl:value-of select="$path"/>
         </xsl:attribute>
     </xsl:template>
+    
+    <xsl:template match="@*[.='{request-url}']">
+        <xsl:attribute name="{name()}">
+            <xsl:value-of select="$request-url"/>
+        </xsl:attribute>
+    </xsl:template>
 
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->

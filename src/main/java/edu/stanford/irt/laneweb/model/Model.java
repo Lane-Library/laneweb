@@ -71,7 +71,10 @@ public interface Model {
 
     String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
 
+    //TODO will maybe remove in favor of REQUEST_URL which includes query string
     String REQUEST_URI = "request-uri";
+
+    String REQUEST_URL = "request-url";
 
     String RESOURCE_ID = "rid";
 

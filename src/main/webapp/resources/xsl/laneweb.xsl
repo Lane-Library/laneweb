@@ -10,6 +10,9 @@
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the request-uri ( not including parameters ) -->
     <xsl:param name="request-uri"/>
+    
+    <!-- thie request url (including parameters) -->
+    <xsl:param name="request-url"/>
 
     <!-- the base-path parameter ( i.e. the base url of the webapp ) -->
     <xsl:param name="base-path"/>
