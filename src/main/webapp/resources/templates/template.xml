@@ -44,9 +44,9 @@
                                     <option value="bassett"
                                         title="Find anatomical images from Lane's Bassett Collection"
                                         >Bassett Images</option>
-									<option value="textbooks-all"
-									    title="Search selected clinical textbooks"
-										>Textbooks</option>
+                                    <option value="textbooks-all"
+                                        title="Search selected clinical textbooks"
+                                        >Textbooks</option>
                                 </select>
                                 <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187;</span>
                                 <div id="searchIndicator"><img alt="[searching]"
