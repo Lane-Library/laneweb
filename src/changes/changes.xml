@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-10-31" version="1.12.5" description="1.12.5 bug fix release">
+            <action date="2011-10-27" dev="ceyates" issue="58234" type="add">
+                provide more useful information when errors are logged
+            </action>
+            <action date="2011-10-27" dev="ceyates" issue="58224" type="fix">
+                the query string does not appear in the url-not-found field
+            </action>
+            <action date="2011-10-26" dev="ceyates" issue="58121" type="fix">
+                javascript error when mouseover of som nav elements without lists.
+            </action>
+            <action date="2011-10-26" dev="ceyates" issue="58120" type="fix">
+                nav button appears in banner when there is only one banner
+            </action>
+            <action date="2011-10-26" dev="ceyates" issue="58098" type="add">
+                create a template that has unminified css and js for development
+            </action>
+            <action date="2011-10-26" dev="ryanmax" issue="58032" type="fix">
+                noHitsText disappears in search results
+            </action>
+            <action date="2011-10-28" dev="ryanmax" issue="58025" type="update">
+                point Scopus search result links to SFX
+            </action>
+            <action date="2011-10-28" dev="ryanmax" issue="53689" type="update">
+                search results hover text usability issue
+            </action>
+        </release>
         <release date="2011-10-24" version="1.12.4" description="1.12.4 bug fix release">
             <action date="2011-10-21" dev="olgary" issue="57133" type="update">
                 in the main template, changed the link to hours to go to main about page
