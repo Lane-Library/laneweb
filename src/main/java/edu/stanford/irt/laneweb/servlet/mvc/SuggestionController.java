@@ -43,7 +43,7 @@ public class SuggestionController {
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
     private SuggestionManager meshSuggestionManager;
 
-    @RequestMapping(value = "/apps/suggest/json")
+    @RequestMapping(value = "/**/apps/suggest/json")
     public HttpEntity<String> getSuggestions(@RequestParam final String q, @RequestParam(required = false) final String l,
             @RequestParam(required = false) final String callback) {
         HttpHeaders responseHeaders = new HttpHeaders();
