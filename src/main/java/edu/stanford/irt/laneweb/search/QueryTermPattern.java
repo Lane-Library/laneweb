@@ -1,6 +1,9 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * @author ryanmax
@@ -37,6 +40,7 @@ public final class QueryTermPattern {
      * 
      * @param query
      * @return String to use in regExp pattern
+     * @throws LanewebException if there was a PatternSyntaxException in order to report the original query
      */
     public static Pattern getPattern(final String query) {
         String normalQuery;
@@ -47,7 +51,11 @@ public final class QueryTermPattern {
         normalQuery = normalQuery.replaceAll(" and ", "|");
         normalQuery = HYPHEN_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = SPACE_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
-        return Pattern.compile(normalQuery, Pattern.CASE_INSENSITIVE);
+        try {
+        	return Pattern.compile(normalQuery, Pattern.CASE_INSENSITIVE);
+        } catch (PatternSyntaxException e) {
+        	throw new LanewebException("error creating Pattern for: " + query + "\n" + e.getMessage(), e);
+        }
     }
 
     private QueryTermPattern() {
