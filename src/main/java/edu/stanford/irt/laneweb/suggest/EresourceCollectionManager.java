@@ -76,11 +76,13 @@ public class EresourceCollectionManager extends AbstractSuggestCollectionManager
     @Override
     protected Collection<String> searchStringToParams(final String term) {
         Collection<String> params = new LinkedList<String>();
-        String likeSearchString = this.queryNormalizer.normalizeForLike(term);
-        String titleSearchString = this.queryNormalizer.normalizeForWildcardContains(term);
-        params.add(likeSearchString);
-        params.add(titleSearchString);
-        params.add(this.queryNormalizer.normalizeForContains(term));
+		if (term.length() <= 32) {
+			String likeSearchString = this.queryNormalizer.normalizeForLike(term);
+			String titleSearchString = this.queryNormalizer.normalizeForWildcardContains(term);
+			params.add(likeSearchString);
+			params.add(titleSearchString);
+			params.add(this.queryNormalizer.normalizeForContains(term));
+		}
         return params;
     }
 }
