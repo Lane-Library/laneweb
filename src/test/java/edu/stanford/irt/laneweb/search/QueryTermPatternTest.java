@@ -5,8 +5,11 @@ package edu.stanford.irt.laneweb.search;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * @author ryanmax
@@ -33,5 +36,14 @@ public class QueryTermPatternTest {
                 " in infants with",
                 QueryTermPattern.getPattern("(Hypertension, Pulmonary) AND (Bronchopulmonary Dysplasia)")
                         .matcher("pulmonary hypertension in infants with bronchopulmonary dysplasia.").replaceAll(""));
+    }
+    
+    @Test
+    public void testTrailingBackslash() {
+        try {
+            QueryTermPattern.getPattern("foo\\");
+        } catch (LanewebException e) {
+            fail("getPattern() should handle a String with a trailing backslash");
+        }
     }
 }
