@@ -20,11 +20,13 @@ public final class QueryTermPattern {
 
     private static final String NONWORD = "\\\\W";
 
-    private static final Pattern REPLACE_QUOTES_PATTERN = Pattern.compile("\\\"");
+    private static final Pattern REPLACE_QUOTES_AND_BACKSLASH_PATTERN = Pattern.compile("[\\\"\\\\]");
 
     private static final Pattern SPACE_PATTERN = Pattern.compile(" ");
 
     private static final Pattern UNACCEPTABLE_CHARS_PATTERN = Pattern.compile("[^a-zA-Z0-9,-_ ]");
+    
+//    private static final Pattern BACKSLASH = Pattern.compile("\\\\");
 
     /**
      * normalize query terms for use in regex pattern, where normal means:
@@ -45,7 +47,7 @@ public final class QueryTermPattern {
     public static Pattern getPattern(final String query) {
         String normalQuery;
         normalQuery = query.trim().toLowerCase();
-        normalQuery = REPLACE_QUOTES_PATTERN.matcher(normalQuery).replaceAll(MAYBE_NONWORD);
+        normalQuery = REPLACE_QUOTES_AND_BACKSLASH_PATTERN.matcher(normalQuery).replaceAll(MAYBE_NONWORD);
         normalQuery = INVERT_COMMAS_PATTERN.matcher(normalQuery).replaceAll(INVERT_REPLACEMENT);
         normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = normalQuery.replaceAll(" and ", "|");
