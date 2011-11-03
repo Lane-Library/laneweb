@@ -5,7 +5,7 @@
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
             searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
-            uberEngines = ['cro_', 'mdc_', 'ovid-'], // engines with multiple resources
+            uberEngines = ['cro_', 'mdc_'], // engines with multiple resources
             startTime,
             searchIndicator = new LANE.SearchIndicator(),
             getSearchUrl = function() {
