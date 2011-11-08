@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
+import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
+import edu.stanford.irt.laneweb.resource.Resource;
+
 import java.nio.CharBuffer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,22 +11,19 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.resource.Resource;
-
 public class DescriptionLabelTransformer extends AbstractTransformer {
 
     public static final String EMPTY = "";
 
     private static final Attributes EMPTY_ATTRIBUTES = new AttributesImpl();
 
+    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z '/]+)##");
+
     private CharBuffer chars;
 
-    private int parseLevel = 0;
-    
     private boolean inDescriptionElement = false;
-    
-    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z '/]+)##");
+
+    private int parseLevel = 0;
 
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
@@ -51,25 +51,10 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
             this.inDescriptionElement = false;
         }
         // end of child element of description
-        else if(this.inDescriptionElement == true){
+        else if (this.inDescriptionElement) {
             ++this.parseLevel;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
-    }
-
-    @Override
-    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
-            throws SAXException {
-        if ("description".equals(localName)) {
-            ++this.parseLevel;
-            this.inDescriptionElement = true;
-        }
-        // don't process child elements of description
-        else if(this.inDescriptionElement == true){
-            handleMatches();
-            this.parseLevel--;
-        }
-        this.xmlConsumer.startElement(uri, localName, qName, atts);
     }
 
     private void handleMatches() throws SAXException {
@@ -84,7 +69,8 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
                 // send chars before match:
                 this.xmlConsumer.characters(this.chars.array(), current, matchStart - current);
             }
-            this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL, EMPTY_ATTRIBUTES);
+            this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL,
+                    EMPTY_ATTRIBUTES);
             char[] match = matcher.group(1).toCharArray();
             this.xmlConsumer.characters(match, 0, match.length);
             this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL);
@@ -100,5 +86,20 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
     @Override
     protected void initialize() {
         this.chars = CharBuffer.allocate(256);
+    }
+
+    @Override
+    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
+            throws SAXException {
+        if ("description".equals(localName)) {
+            ++this.parseLevel;
+            this.inDescriptionElement = true;
+        }
+        // don't process child elements of description
+        else if (this.inDescriptionElement) {
+            handleMatches();
+            this.parseLevel--;
+        }
+        this.xmlConsumer.startElement(uri, localName, qName, atts);
     }
 }
