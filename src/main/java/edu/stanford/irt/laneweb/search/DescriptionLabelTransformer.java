@@ -23,7 +23,7 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
     
     private boolean inDescriptionElement = false;
     
-    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z ']+)##");
+    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z '/]+)##");
 
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
