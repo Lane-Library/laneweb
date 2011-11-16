@@ -490,6 +490,17 @@
             <version>1.2</version>
         </dependency>
         <dependency>
+            <artifactId>commons-httpclient</artifactId>
+            <groupId>commons-httpclient</groupId>
+            <version>3.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <artifactId>commons-io</artifactId>
             <groupId>commons-io</groupId>
             <scope>runtime</scope>
@@ -501,11 +512,6 @@
             <scope>runtime</scope>
             <version>2.4</version>
         </dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.1.2</version>
-		</dependency>
         <dependency>
             <artifactId>easymock</artifactId>
             <groupId>org.easymock</groupId>
@@ -628,7 +634,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.1-SNAPSHOT</version>
+            <version>1.6.49</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>
