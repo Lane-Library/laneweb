@@ -5,9 +5,12 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.GetMethod;
+
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,26 +25,27 @@ public class UrlTester {
 
     @RequestMapping(value = "/apps/url-tester")
     public void testUrl(@RequestParam final String url, HttpServletResponse response) throws IOException {
-        GetMethod get = new GetMethod(url);
-        this.httpClient.executeMethod(get);
+        HttpGet get = new HttpGet(url);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        baos.write(get.getResponseBody());
-        byte[] headers = getHeaderString(get);
+        
+        HttpResponse res = null; 
+        try {
+        	res	= this.httpClient.execute(get);
+        	baos.write(EntityUtils.toByteArray(res.getEntity()));
+		} catch (Exception e) {
+			get.abort();
+		}byte[] headers = getHeaderString(get, res);
         baos.write(headers);
         response.setHeader("Content-Type", "text/plain");
         response.getOutputStream().write(baos.toByteArray());
     }
 
-    @Autowired
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        this.httpClient = msms.getHttpClient();
-    }
-
-    private byte[] getHeaderString(final GetMethod get) {
+    
+    private byte[] getHeaderString(final HttpGet get, final HttpResponse rep) {
         StringBuffer result = new StringBuffer("\n\n\n<!--\n\nRequest Headers:\n\n");
-        result.append(getHeaderString(get.getRequestHeaders()));
+        result.append(getHeaderString(get.getAllHeaders()));
         result.append("\n\n\nResponse Headers:\n\n");
-        result.append(getHeaderString(get.getResponseHeaders()));
+        result.append(getHeaderString(get.getAllHeaders()));
         result.append("\n-->");
         return result.toString().getBytes();
     }
@@ -55,5 +59,10 @@ public class UrlTester {
             result.append("\n");
         }
         return result.toString();
+    }
+    
+    @Autowired
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.httpClient = msms.getHttpClient();
     }
 }
