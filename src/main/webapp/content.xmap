@@ -15,7 +15,7 @@
                 <map:match pattern="biomed-resources/((.+)?(browse|core|mobile|pda|software-)(.+)?).html" type="regexp">
                     <map:generate type="html" src="${content-base}/biomed-resources/{1}.html"/>
                     <map:transform type="xinclude"/>
-                    <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
+                    <map:transform type="saxon" src="resources/xsl/search-post.xsl"/>
                     <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -77,7 +77,7 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-                    <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
+                    <map:transform type="saxon" src="resources/xsl/search-post.xsl"/>
                     <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -90,7 +90,7 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-                    <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
+                    <map:transform type="saxon" src="resources/xsl/search-post.xsl"/>
                     <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -115,7 +115,7 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-                    <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
+                    <map:transform type="saxon" src="resources/xsl/search-post.xsl"/>
                     <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -130,7 +130,7 @@
                 <map:generate src="content:/cached/search/{1}/{2}.html" type="file"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-                <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
+                <map:transform type="saxon" src="resources/xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- TODO: temporarily moving this out of caching pipeline because of intermittent NullPointerExceptioins -->
