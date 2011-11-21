@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-11-21" version="1.12.7" description="1.12.7 bug fix release">
+            <action date="2011-11-21" dev="ceyates" issue="60660" type="update">
+                update search version to 1.7.1
+            </action>
+            <action date="2011-11-21" dev="ceyates" issue="60659" type="fix">
+                Long Strings cause SQLExceptions when getting suggestions
+            </action>
+            <action date="2011-11-08" dev="ryanmax" issue="59569" type="fix">
+                problem parsing pubmed abstracts with forward slashes in labels
+            </action>
+            <action date="2011-11-03" dev="alainb" issue="59409" type="update">
+                textbooks search not updating properly
+            </action>
+        </release>
         <release date="2011-11-02" version="1.12.6" description="1.12.6 emergency release">
             <action date="2011-11-02" dev="ceyates" issue="59336" type="update">
                 My Account going to ask-us
