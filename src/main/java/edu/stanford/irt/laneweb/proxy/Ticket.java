@@ -1,16 +1,16 @@
 package edu.stanford.irt.laneweb.proxy;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
-/**
- * @author ceyates
- */
-public class Ticket {
-    
+public class Ticket implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private static final int ONE_SECOND = 1000;
     
     private static final int ONE_MINUTE = ONE_SECOND * 60;
