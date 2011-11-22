@@ -143,7 +143,7 @@
                 <xsl:apply-templates select="s:description"/>
                 <!-- TODO: remove this after done -->
                 <xsl:if test="$debug = 'true'">
-                    <li><xsl:value-of select="s:score"/></li>
+                    <li><xsl:value-of select="@score"/></li>
                 </xsl:if>
             </ul>
         </dd>
@@ -231,7 +231,7 @@
                 <xsl:apply-templates select="s:description"/>
                 <!-- TODO: remove this after done -->
                 <xsl:if test="$debug = 'true'">
-                    <li><xsl:value-of select="s:score"/></li>
+                    <li><xsl:value-of select="@score"/></li>
                 </xsl:if>
             </ul>
         </dd>
