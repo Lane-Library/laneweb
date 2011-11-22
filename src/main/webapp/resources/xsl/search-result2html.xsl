@@ -151,7 +151,7 @@
 
     <!-- tranforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
-        <dd><!--FIXME not sure why <dd> is stripped only for eresoruces ... search-post? -->
+        <dd>
             <ul class="r-{/s:resources/@start + position()}">
                 <li>
                     <xsl:choose>
