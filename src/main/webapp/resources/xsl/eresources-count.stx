@@ -12,8 +12,10 @@
     
     <stx:template match="h:dd">
         <stx:assign name="count" select="$count + 1"/>
-        <stx:process-attributes/>
-        <stx:process-children/>
+        <stx:copy>
+            <stx:process-attributes/>
+            <stx:process-children/>
+        </stx:copy>
     </stx:template>
     
     <stx:template match="h:*[@id='noHitsText']">
