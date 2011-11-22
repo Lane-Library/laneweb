@@ -28,13 +28,13 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
 
     private StringBuilder content = new StringBuilder();
 
-    private final String elementName = "event_description";
+    private String elementName = "event_description";
 
     private boolean inElement = false;
 
     private final String namespace = "http://www.w3.org/1999/xhtml";
 
-    AbstractSAXParser htmlParser;
+    private AbstractSAXParser htmlParser;
 
     public TextNodeParsingTransformer() {
         HTMLConfiguration conf = new HTMLConfiguration();
@@ -87,17 +87,10 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         this.xmlConsumer.endElement(uri, localName, qName);
     }
 
-    /**
-     * @return the elementname
-     */
-    public String getElementName() {
-        return this.elementName;
-    }
-
-    @Override
-    public void startDocument() throws SAXException {
-        this.xmlConsumer.startDocument();
-    }
+//    @Override
+//    public void startDocument() throws SAXException {
+//        this.xmlConsumer.startDocument();
+//    }
 
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
@@ -116,5 +109,14 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     @Override
     public SourceValidity getValidity() {
         return NOPValidity.SHARED_INSTANCE;
+    }
+
+    @Override
+    protected void initialize() {
+        super.initialize();
+        String name = this.parameterMap.get("elementName");
+        if (name != null) {
+            this.elementName = name;
+        }
     }
 }

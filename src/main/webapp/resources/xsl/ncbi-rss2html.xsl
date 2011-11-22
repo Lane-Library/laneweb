@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
     version="2.0">
     
     <xsl:param name="format"/>
     
-    <xsl:template match="node()">
+    <!--<xsl:template match="node()">
         <xsl:copy>
             <xsl:apply-templates select="node()|@*"/>
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>-->
     
-    <xsl:template match="@*">
+    <!--<xsl:template match="@*">
         <xsl:copy-of select="."/>
-    </xsl:template>
+    </xsl:template>-->
     
     <xsl:template match="rss">
         <xsl:choose>
@@ -68,7 +68,8 @@
                 <xsl:when test="starts-with(guid,'PubMed:') and description">
                     <span id="pubmed_{substring-after(guid,':')}Tooltip" style="width:60%">
                         <!-- WARNING: brittle replacement of escaped HTML markup ... if PubMed feed markup changes, this will break -->
-                        <xsl:value-of select="replace(normalize-space(description), '(.*&lt;p&gt;&lt;b&gt;|&lt;/?[pb]&gt;)','','m')"/>
+                        <!--<xsl:value-of select="replace(normalize-space(description), '(.*&lt;p&gt;&lt;b&gt;|&lt;/?[pb]&gt;)','','m')"/>-->
+                        <xsl:copy-of select="description/node()"/>
                     </span>
                 </xsl:when>
                 <xsl:when test="starts-with(guid,'PubMed:')">
