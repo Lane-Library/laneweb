@@ -648,9 +648,23 @@
             <version>1.6.4</version>
         </dependency>
         <dependency>
-            <artifactId>spellcheck-google-toolbar</artifactId>
+            <artifactId>spellcheck</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>2.0.0-SNAPSHOT</version>
+            <version>1.2.4</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>googleapi</artifactId>
+                    <groupId>com.google</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jazzy-core</artifactId>
+                    <groupId>com.swabunga.spell</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>soap</artifactId>
+                    <groupId>soap</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>spring-aop</artifactId>
