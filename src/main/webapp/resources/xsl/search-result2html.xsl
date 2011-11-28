@@ -20,9 +20,6 @@
     
     <xsl:param name="mesh"/>
     
-    <!-- TODO: remove this after done -->
-    <xsl:param name="debug"/>
-    
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
@@ -141,10 +138,6 @@
                     </div>
                 </li>
                 <xsl:apply-templates select="s:description"/>
-                <!-- TODO: remove this after done -->
-                <xsl:if test="$debug = 'true'">
-                    <li><xsl:value-of select="@score"/></li>
-                </xsl:if>
             </ul>
         </dd>
     </xsl:template>
@@ -229,10 +222,6 @@
                     </xsl:choose>
                 </li>
                 <xsl:apply-templates select="s:description"/>
-                <!-- TODO: remove this after done -->
-                <xsl:if test="$debug = 'true'">
-                    <li><xsl:value-of select="@score"/></li>
-                </xsl:if>
             </ul>
         </dd>
     </xsl:template>
