@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2011-11-28" version="1.12.8" description="1.12.8 bug fix release">
+            <action date="2011-11-28" dev="ceyates" issue="60841" type="update">
+                update search version to 1.7.2
+            </action>
+            <action date="2011-11-23" dev="ryanmax" issue="60563" type="add">
+                create a single data source for library hours
+            </action>
+        </release>
         <release date="2011-11-21" version="1.12.7" description="1.12.7 bug fix release">
             <action date="2011-11-21" dev="ceyates" issue="60660" type="update">
                 update search version to 1.7.1
