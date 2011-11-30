@@ -104,8 +104,15 @@
 	<xsl:template match="lh:calendar" mode="mobile">
 		<dl>
 			<xsl:for-each select="lh:day">
-				<dt>
-					<xsl:value-of select="lh:label" />
+				<dt name="{lh:label}">
+				    <xsl:choose>
+		                <xsl:when test="lh:date">
+	                        <xsl:value-of select="lh:date" />
+	                    </xsl:when>
+		                <xsl:otherwise>
+							<xsl:value-of select="lh:label" />
+		                </xsl:otherwise>
+				    </xsl:choose>
 				</dt>
 				<dd>
 					<xsl:value-of select="replace(lh:description,':00 ?','')" />
