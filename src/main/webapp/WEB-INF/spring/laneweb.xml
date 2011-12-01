@@ -4,17 +4,9 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="org.apache.cocoon.caching.Cache" class="edu.stanford.irt.laneweb.cocoon.LanewebCache">
-        <property name="store" ref="org.apache.excalibur.store.Store"/>
-    </bean>
-
-    <bean name="org.apache.excalibur.store.Store"
-        class="org.apache.cocoon.components.store.impl.EHDefaultStore" init-method="init"
-        destroy-method="destroy">
-        <property name="maxMemObjects" value="1000"/>
-        <property name="overflowToDisk" value="false"/>
-        <property name="useCacheDirectory" value="true"/>
-        <property name="diskPersistent" value="false"/>
-        <property name="settings" ref="org.apache.cocoon.configuration.Settings"/>
+        <constructor-arg>
+            <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+        </constructor-arg>
     </bean>
 
     <bean name="org.apache.excalibur.store.Store/TransientStore"

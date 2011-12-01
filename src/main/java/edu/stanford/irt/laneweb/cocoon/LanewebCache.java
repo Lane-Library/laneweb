@@ -1,47 +1,43 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import java.io.IOException;
 import java.io.Serializable;
 
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.caching.Cache;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
+//import net.sf.ehcache.config.ConfigurationFactory;
+
 import org.apache.cocoon.caching.CachedResponse;
-import org.apache.excalibur.store.Store;
 
-/**
- * implemented this because the default implementation does excessive logging.
- * @author ceyates
- *
- */
-public class LanewebCache implements Cache {
+public class LanewebCache implements org.apache.cocoon.caching.Cache {
 
-    protected Store store;
+    private Cache cache;
+    
+    public LanewebCache(CacheManager manager) {
+        this.cache = manager.getCache("cocoon-ehcache");
+//    	CacheManager manager = CacheManager.create(ConfigurationFactory.parseConfiguration(LanewebCache.class.getResourceAsStream("/ehcache.xml")));
+//    	this.cache = manager.getCache("cocoon-ehcache");
+    }
 
     public void clear() {
-        this.store.clear();
+        this.cache.removeAll();
     }
 
     public boolean containsKey(final Serializable key) {
-        return this.store.containsKey(key);
+        return this.cache.get(key) != null;
     }
 
     public CachedResponse get(final Serializable key) {
-        return (CachedResponse) this.store.get(key);
+    	Element element = this.cache.get(key);
+    	return (CachedResponse) (element == null ? null : element.getValue());
     }
 
     public void remove(final Serializable key) {
-        this.store.remove(key);
+        this.cache.remove(key);
     }
 
-    public void setStore(final Store store) {
-        this.store = store;
-    }
-
-    public void store(final Serializable key, final CachedResponse response) throws ProcessingException {
-        try {
-            this.store.store(key, response);
-        } catch (IOException e) {
-            throw new ProcessingException(e);
-        }
+    public void store(final Serializable key, final CachedResponse response){
+        final Element element = new Element(key, response);
+        this.cache.put(element);
     }
 }

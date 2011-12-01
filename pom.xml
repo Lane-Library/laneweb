@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
@@ -240,7 +242,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.0-beta-3</version>
+                <version>3.0</version>
             </plugin>
         </plugins>
         <pluginManagement>
@@ -466,6 +468,10 @@
                     <artifactId>xml-apis</artifactId>
                     <groupId>xml-apis</groupId>
                 </exclusion>
+                <exclusion>
+                	<artifactId>cocoon-store-impl</artifactId>
+                	<groupId>org.apache.cocoon</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -515,7 +521,6 @@
         <dependency>
             <artifactId>ehcache-core</artifactId>
             <groupId>net.sf.ehcache</groupId>
-            <scope>runtime</scope>
             <version>2.4.6</version>
         </dependency>
         <dependency>
@@ -573,7 +578,7 @@
         <dependency>
             <artifactId>nekohtml</artifactId>
             <groupId>net.sourceforge.nekohtml</groupId>
-            <version>1.9.11</version>
+            <version>1.9.15</version>
             <exclusions>
                 <exclusion>
                     <artifactId>xercesImpl</artifactId>
