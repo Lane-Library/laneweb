@@ -14,6 +14,8 @@ import org.xml.sax.SAXException;
  * generates SAX Events. It uses the NekoHTML library to do this.
  */
 public class HTMLGenerator extends AbstractGenerator implements CacheableProcessingComponent {
+    
+    private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
 
     private static class HtmlSAXParser extends AbstractSAXParser {
 
@@ -30,8 +32,12 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
      */
     public void generate() throws SAXException, IOException {
         HTMLConfiguration conf = new HTMLConfiguration();
+        //TODO: review properties
         conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+        conf.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
+        conf.setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
+        conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", NAMESPACE);
         AbstractSAXParser parser = new HtmlSAXParser(conf);
         parser.setContentHandler(this.xmlConsumer);
         InputSource inputSource = new InputSource();

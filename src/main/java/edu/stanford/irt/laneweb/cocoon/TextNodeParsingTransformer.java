@@ -19,6 +19,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent {
 
+    private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
+    
     private static class HtmlSAXParser extends AbstractSAXParser {
 
         protected HtmlSAXParser(final HTMLConfiguration conf) {
@@ -32,8 +34,6 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
 
     private boolean inElement = false;
 
-    private final String namespace = "http://www.w3.org/1999/xhtml";
-
     private AbstractSAXParser htmlParser;
 
     public TextNodeParsingTransformer() {
@@ -42,7 +42,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
         conf.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
         conf.setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
-        conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", this.namespace);
+        conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", NAMESPACE);
         this.htmlParser = new HtmlSAXParser(conf);
     }
 
