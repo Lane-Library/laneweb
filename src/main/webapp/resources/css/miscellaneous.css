@@ -4,11 +4,11 @@ p {
 }
 /* styles for the long paragraphs, not short lists - to spread out the lines for better readability*/
 .wideline {
-	font-size: 1em;
-    line-height: 1.6em;
-    margin: 0 0 1em;
+    font-size : 1em;
+    line-height : 1.6em;
+    margin : 0 0 1em;
 
-	}
+}
 .content {
     color : #3F3C30;
     font-size : 12px
@@ -113,4 +113,37 @@ em {
 }
 #class-title {
     font-size : 1.8em
+}
+
+/*grand rounds section*/
+
+.content .grandrounds li a {
+    border-bottom : 1px dotted #81785A
+}
+.content .grandrounds li {
+    font-size : 14px;
+    font-family : Georgia, "Times New Roman", Times, serif;
+    border-bottom : none;
+    padding : 0 0 0 11px
+}
+/*table on ejpw_list.html*/
+
+.password-table table {
+    border-collapse : collapse;
+    background-color : #fff;
+}
+.password-table th {
+    padding : .7em;
+    vertical-align : top;
+    border : 1px solid #ccc;
+}
+.password-table td {
+    padding : .7em;
+    vertical-align : top;
+    border : 1px solid #ccc;
+}
+.password-table table th {
+    background-color : #e6e8d5;
+    font-weight : bold;
+    font-size : 1.1em;
 }

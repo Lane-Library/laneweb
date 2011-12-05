@@ -55,29 +55,6 @@
     background-position : 72px -220px;
     width : 100%;
 }
-/*grand rounds section*/
-
-.content .grandrounds li {
-    list-style : none inside none;
-    font-size : 14px;
-    font-family : Georgia, "Times New Roman", Times, serif;
-    margin-left : 0;
-    text-align : center;
-    padding : 11px 0 28px;
-    background-image : url(/././resources/images/grandroundsItemBg1.png);
-    background-position : bottom center;
-    background-repeat : no-repeat;
-    border-bottom: none;
-}
-
-.content .grandrounds li:hover {
-    background-color: #fff;
-}
-
-.grandrounds a {
-    border-bottom : none
-}
-
 /* module with shadow on bottom*/
 .bd.bottomShadow {
     margin-top : 0;
