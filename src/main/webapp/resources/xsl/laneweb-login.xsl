@@ -7,11 +7,12 @@
     <!-- the next 6 template matches handle the login state and show links depending on that state -->
     <!-- process the list only if off campus -->
     <xsl:template match="h:ul[attribute::id='login']">
-        <xsl:if test="matches($ipgroup,'^(OTHER|PAVA|LPCH|SHC|ERR)$')">
+        <!-- temporarily enable for all IPGroup so Rick can check things out -->
+        <!--<xsl:if test="matches($ipgroup,'^(OTHER|PAVA|LPCH|SHC|ERR)$')">-->
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node() | child::node()"/>
             </xsl:copy>
-        </xsl:if>
+        <!--</xsl:if>-->
     </xsl:template>
 
     <!-- the 1st #login li is the login link or the users name -->
