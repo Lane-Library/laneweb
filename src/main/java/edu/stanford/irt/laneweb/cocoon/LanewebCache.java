@@ -13,10 +13,11 @@ public class LanewebCache implements org.apache.cocoon.caching.Cache {
 
     private Cache cache;
     
+    private CacheManager manager;
+    
     public LanewebCache(CacheManager manager) {
+        this.manager = manager;
         this.cache = manager.getCache("cocoon-ehcache");
-//    	CacheManager manager = CacheManager.create(ConfigurationFactory.parseConfiguration(LanewebCache.class.getResourceAsStream("/ehcache.xml")));
-//    	this.cache = manager.getCache("cocoon-ehcache");
     }
 
     public void clear() {
@@ -25,6 +26,10 @@ public class LanewebCache implements org.apache.cocoon.caching.Cache {
 
     public boolean containsKey(final Serializable key) {
         return this.cache.get(key) != null;
+    }
+    
+    public void destroy() {
+        this.manager.shutdown();
     }
 
     public CachedResponse get(final Serializable key) {
