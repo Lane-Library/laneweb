@@ -590,7 +590,7 @@
         <dependency>
             <artifactId>nekohtml</artifactId>
             <groupId>net.sourceforge.nekohtml</groupId>
-            <version>1.9.15</version>
+            <version>1.9.11</version>
             <exclusions>
                 <exclusion>
                     <artifactId>xercesImpl</artifactId>
