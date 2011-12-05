@@ -57,6 +57,7 @@
     </developers>
     <scm>
         <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
+        <url>https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</url>
     </scm>
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
@@ -548,7 +549,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.32.1</version>
+            <version>1.33.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
