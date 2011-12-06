@@ -35,7 +35,6 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
         //TODO: review properties
         conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-        conf.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
         conf.setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
         conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", NAMESPACE);
         AbstractSAXParser parser = new HtmlSAXParser(conf);
