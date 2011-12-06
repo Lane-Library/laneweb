@@ -4,48 +4,29 @@
     xmlns:h="http://www.w3.org/1999/xhtml" exclude-result-prefixes="h lh"
     version="2.0">
 
-    <xsl:param name="id" />
-
     <xsl:param name="mode" />
 
     <xsl:template match="/lh:calendars">
-       <xsl:choose>
-           <xsl:when test="$id and $mode">
-               <xsl:choose>
-                   <xsl:when test="$mode = 'brief'">
-                    <xsl:apply-templates select="lh:calendar[@id=$id]" mode="brief" />
-                   </xsl:when>
-                   <xsl:when test="$mode = 'full'">
-                    <xsl:apply-templates select="lh:calendar[@id=$id]" mode="full" />
-                   </xsl:when>
-                   <xsl:when test="$mode = 'mobile'">
-                    <xsl:apply-templates select="lh:calendar[@id=$id]" mode="mobile" />
-                   </xsl:when>
-               </xsl:choose>
-           </xsl:when>
-           <xsl:when test="$mode">
-               <xsl:choose>
-                   <xsl:when test="$mode = 'brief'">
-                    <xsl:apply-templates select="lh:calendar" mode="brief">
-                        <xsl:with-param name="headers">true</xsl:with-param>
-                    </xsl:apply-templates>
-                   </xsl:when>
-                   <xsl:when test="$mode = 'full'">
-                    <xsl:apply-templates select="lh:calendar" mode="full">
-                        <xsl:with-param name="headers">true</xsl:with-param>
-                    </xsl:apply-templates>
-                   </xsl:when>
-                   <xsl:when test="$mode = 'mobile' and count(lh:calendar) &gt;1">
-                    <xsl:apply-templates select="lh:calendar" mode="mobile">
-                        <xsl:with-param name="headers">true</xsl:with-param>
-                    </xsl:apply-templates>
-                   </xsl:when>
-                   <xsl:when test="$mode = 'mobile'">
-                    <xsl:apply-templates select="lh:calendar" mode="mobile" />
-                   </xsl:when>
-               </xsl:choose>
-           </xsl:when>
-       </xsl:choose>
+	    <xsl:choose>
+	        <xsl:when test="$mode = 'brief'">
+	         <xsl:apply-templates select="lh:calendar" mode="brief">
+	             <xsl:with-param name="headers">true</xsl:with-param>
+	         </xsl:apply-templates>
+	        </xsl:when>
+	        <xsl:when test="$mode = 'full'">
+	         <xsl:apply-templates select="lh:calendar" mode="full">
+	             <xsl:with-param name="headers">true</xsl:with-param>
+	         </xsl:apply-templates>
+	        </xsl:when>
+	        <xsl:when test="$mode = 'mobile' and count(lh:calendar) &gt;1">
+	         <xsl:apply-templates select="lh:calendar" mode="mobile">
+	             <xsl:with-param name="headers">true</xsl:with-param>
+	         </xsl:apply-templates>
+	        </xsl:when>
+	        <xsl:when test="$mode = 'mobile'">
+	         <xsl:apply-templates select="lh:calendar" mode="mobile" />
+	        </xsl:when>
+	    </xsl:choose>
     </xsl:template>
 
     <xsl:template match="lh:calendar" mode="brief">

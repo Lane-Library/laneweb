@@ -259,15 +259,6 @@
                 <map:transform type="saxon" src="resources/xsl/popup-faq.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="hours/*/*.xml" type="wildcard">
-                <map:generate type="file" src="${content-base}/includes/hours.xml"/>
-                <map:transform type="saxon" src="resources/xsl/hours.xsl">
-                    <map:parameter name="cache-key" value=";{1};{2}"/>
-                    <map:parameter name="id" value="{1}"/>
-                    <map:parameter name="mode" value="{2}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match pattern="hours/*.xml" type="wildcard">
                 <map:generate type="file" src="${content-base}/includes/hours.xml"/>
                 <map:transform type="saxon" src="resources/xsl/hours.xsl">
