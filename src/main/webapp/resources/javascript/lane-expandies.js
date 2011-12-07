@@ -1,12 +1,38 @@
 (function() {
 
-    var i, expandies = Y.all(".expandy");
+    var i, anims, expandies = Y.all(".expandy");
 
     //only do this if there are expandies
     if (expandies.size() > 0) {
+        
+        if (Y.UA.ie && Y.UA.ie < 8) {
+            //IE 7 fails to redraw footer, etc unless we do this:
+            anims  = {};
+            Y.Plugin.NodeAccordion.prototype._animate = function(id, conf, fn) {
+            	var anim = anims[id], nodes = Y.all(".sb-tb");
+            	if ((anim) && (anim.get ('running'))) {
+            		anim.stop();
+            	}
+            	if (Y.Lang.isFunction(this.get("anim"))) {
+            		conf.easing = this.get("anim");
+            	}
+            	anim = new Y.Anim(conf);
+            	anim.on('end', fn, this);
+            	if (nodes) {
+            		//toggle display style to force redraw
+            		anim.on("end", function() {
+            			nodes.setStyle("display", "none");
+            			nodes.setStyle("display", "block");
+            		}, this);
+            	}
+            	anim.run();
+            	anims[id] = anim;
+            	return anim;
+            };
+        }
 
         /**
-         * An ExpanydItem represents a single item in an expandy list
+         * An ExpandyItem represents a single item in an expandy list
          * @constructor
          * @base Y.Base
          */
@@ -160,22 +186,21 @@
     //TODO: tighten this up a bit:
     var externalTriggers = Y.all(".expandy-trigger");
     for (i = 0; i < externalTriggers.size(); i++) {
-    	externalTriggers.item(i).on("click", function(event) {
-    		event.preventDefault();
-    		var hash = event.target.get("hash");
-    		var anchor = Y.one(hash);
-    		var item = anchor.ancestor(".yui3-accordion-item");
-    		var trigger = item.one(".yui3-accordion-item-trigger");
-    		var accordion = item.ancestor(".yui3-accordion");
-    		accordion.accordion.expandItem(item);
-    		var href = event.target.get("href");
-    		var setLocation = function() {
-    			window.location = href;
-    		};
-    		window.setTimeout(setLocation, 500);
-    	});
+        externalTriggers.item(i).on("click", function(event) {
+            event.preventDefault();
+            var hash = event.target.get("hash");
+            var anchor = Y.one(hash);
+            var item = anchor.ancestor(".yui3-accordion-item");
+            var trigger = item.one(".yui3-accordion-item-trigger");
+            var accordion = item.ancestor(".yui3-accordion");
+            accordion.accordion.expandItem(item);
+            var href = event.target.get("href");
+            var setLocation = function() {
+                window.location = href;
+            };
+            window.setTimeout(setLocation, 500);
+        });
     }
 
     }
-
 })();
