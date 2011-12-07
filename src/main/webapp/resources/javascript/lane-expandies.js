@@ -9,25 +9,25 @@
             //IE 7 fails to redraw footer, etc unless we do this:
             anims  = {};
             Y.Plugin.NodeAccordion.prototype._animate = function(id, conf, fn) {
-            	var anim = anims[id], nodes = Y.all(".sb-tb");
-            	if ((anim) && (anim.get ('running'))) {
-            		anim.stop();
-            	}
-            	if (Y.Lang.isFunction(this.get("anim"))) {
-            		conf.easing = this.get("anim");
-            	}
-            	anim = new Y.Anim(conf);
-            	anim.on('end', fn, this);
-            	if (nodes) {
-            		//toggle display style to force redraw
-            		anim.on("end", function() {
-            			nodes.setStyle("display", "none");
-            			nodes.setStyle("display", "block");
-            		}, this);
-            	}
-            	anim.run();
-            	anims[id] = anim;
-            	return anim;
+                var anim = anims[id], nodes = Y.all(".sb-tb");
+                if ((anim) && (anim.get ('running'))) {
+                    anim.stop();
+                }
+                if (Y.Lang.isFunction(this.get("anim"))) {
+                    conf.easing = this.get("anim");
+                }
+                anim = new Y.Anim(conf);
+                anim.on('end', fn, this);
+                if (nodes) {
+                    //toggle display style to force redraw
+                    anim.on("end", function() {
+                        nodes.setStyle("display", "none");
+                        nodes.setStyle("display", "block");
+                    }, this);
+                }
+                anim.run();
+                anims[id] = anim;
+                return anim;
             };
         }
 
