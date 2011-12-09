@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        findItNode = Y.one('#findIt'),
+    var findItNode = Y.one('#findIt'),
         searchString = LANE.SearchResult.getEncodedSearchTerms(),
         url;
     if (findItNode && searchString) {

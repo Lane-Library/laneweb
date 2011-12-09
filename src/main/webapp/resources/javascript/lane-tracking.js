@@ -218,10 +218,10 @@
                 }
             };
         }();
-        LANE.Y.on('click', function(e) {
+        Y.on('click', function(e) {
             LANE.tracking.trackEvent(e);
             //put in a delay for safari to make the tracking request:
-            if (LANE.Y.UA.webkit && LANE.tracking.isTrackable(e)) {
+            if (Y.UA.webkit && LANE.tracking.isTrackable(e)) {
                     var t = e.target, f;
                     while (t) {
                         // have safari follow link if it's not:

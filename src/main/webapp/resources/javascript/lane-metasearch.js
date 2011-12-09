@@ -1,6 +1,6 @@
 (function() {
     LANE.namespace('metasearch');
-    var Y = LANE.Y, i, hybridInputs, laneSuggest;
+    var i, hybridInputs, laneSuggest;
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search

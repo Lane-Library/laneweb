@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        elt = Y.one('#searchFacets'),
+    var elt = Y.one('#searchFacets'),
         searchIndicator = new LANE.SearchIndicator(),
         facets, i, type, source, container;
     LANE.namespace('search.facets');

@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        spellCheck = Y.one('#spellCheck'),
+    var spellCheck = Y.one('#spellCheck'),
         searchTerms = LANE.SearchResult.getEncodedSearchTerms(), trackingImg;
     if (spellCheck && searchTerms) {
         //get the suggestion

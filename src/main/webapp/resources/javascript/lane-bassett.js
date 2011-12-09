@@ -3,8 +3,7 @@
     
 
 
-        var Y = LANE.Y,
-            bassettContent = Y.one('#bassettContent'),
+        var bassettContent = Y.one('#bassettContent'),
             diagramDisplay = false,
             accordion,
             history,

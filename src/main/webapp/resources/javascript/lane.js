@@ -18,7 +18,6 @@ YUI({fetchCSS:false}).use("*", function(Y) {
          * @static
          */
         LANE = {};
-        LANE.Y = Y;
     }
     LANE.namespace = function() {
         var a = arguments, o = null, i, j, d;

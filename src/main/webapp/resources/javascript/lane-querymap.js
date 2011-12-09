@@ -3,8 +3,7 @@
 (function() {
     if (LANE.SearchResult.getEncodedSearchTerms()) {
         //check if there is id=queryMapping
-        var Y = LANE.Y,
-            queryMapping = Y.one('#queryMapping');
+        var queryMapping = Y.one('#queryMapping');
         if (queryMapping) {
             Y.io('/././apps/querymap/json?q=' + LANE.SearchResult.getEncodedSearchTerms(), {
                 on:{

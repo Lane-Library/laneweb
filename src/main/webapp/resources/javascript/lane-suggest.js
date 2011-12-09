@@ -16,7 +16,6 @@ function ACPlugin () { ACPlugin.superclass.constructor.apply(this, arguments) };
 
 // shorthands
 var autocomplete = "autocomplete",
-    Y = LANE.Y,
     YLang = Y.Lang,
     YArrayeach = Y.Array.each,
     eventDefaultBehavior = {

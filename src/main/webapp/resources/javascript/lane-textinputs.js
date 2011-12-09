@@ -57,7 +57,7 @@
         };
     };
 
-    var Y = LANE.Y, i, title, textInputs = new Y.all('input[type="text"]');
+    var i, title, textInputs = new Y.all('input[type="text"]');
     
     for (i = 0; i < textInputs.size(); i++) {
         title = textInputs.item(i).get('title');

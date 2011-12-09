@@ -1,5 +1,5 @@
 (function() {
-    var Y = LANE.Y, self;
+    var self;
     
     LANE.SearchReset = function() {
         var searchTerms = Y.one('#searchTerms'),

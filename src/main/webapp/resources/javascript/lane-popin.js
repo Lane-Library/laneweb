@@ -3,7 +3,7 @@
     LANE.namespace('search.popin');
     
     // custom popin event
-    var Y = LANE.Y, onPopinHandler;
+    var onPopinHandler;
     Y.publish('lane:popin',{broadcast:1});
     
         onPopinHandler = function(el) {

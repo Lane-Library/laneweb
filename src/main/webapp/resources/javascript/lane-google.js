@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        gaPageTracker,
+    var gaPageTracker,
         gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {

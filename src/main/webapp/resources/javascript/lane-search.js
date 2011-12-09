@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        form = Y.one("#search");//the form Element
+    var form = Y.one("#search");//the form Element
     if (form) {
     LANE.Search = function() {
         var searchSourceSelect = form.one('#searchSource'),

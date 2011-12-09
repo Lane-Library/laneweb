@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        Lang = Y.Lang,
+    var Lang = Y.Lang,
         Node = Y.Node,
         OX = -10000,
         OY = -10000,

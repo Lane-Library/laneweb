@@ -1,6 +1,5 @@
 (function() {
-    var Y = LANE.Y,
-        form = Y.one('#search'),
+    var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         searchTerms,
         picoIsOn = false,
