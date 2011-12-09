@@ -7,7 +7,18 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2011-12-05" version="1.12.9" description="1.12.9 bug fix release">
+        <release date="2011-12-09" version="1.12.10" description="1.12.10 bug fix release">
+            <action date="2011-12-09" dev="ceyates" issue="62070" type="update">
+                replace references to LANE.Y with the global Y object
+            </action>
+            <action date="2011-12-06" dev="ceyates" issue="61859" type="fix">
+                org.w3c.dom.DOMException appearing in log since 1.12.9
+            </action>
+            <action date="2011-12-07" dev="ceyates" issue="60719" type="fix">
+                IE7: Expandies expanded behind &amp; through footer
+            </action>
+        </release>
+        <release date="2011-12-05" version="1.12.9" description="1.12.9 bug fix release [not deployed]">
             <action date="2011-12-05" dev="ceyates" issue="60841" type="update">
                 update search version to 1.7.3
             </action>
