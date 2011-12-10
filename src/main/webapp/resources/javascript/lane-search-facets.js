@@ -2,7 +2,6 @@
     var elt = Y.one('#searchFacets'),
         searchIndicator = new LANE.SearchIndicator(),
         facets, i, type, source, container;
-    LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
         return {

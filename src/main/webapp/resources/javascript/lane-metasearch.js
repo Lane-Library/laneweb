@@ -1,5 +1,4 @@
 (function() {
-    LANE.namespace('metasearch');
     var i, hybridInputs, laneSuggest;
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
