@@ -15,6 +15,7 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     //create the lane namespace
     Y.namespace("lane");
     
+    //create the LANE.search object that gets used elsewhere
     LANE = {
         search : {}
     };
