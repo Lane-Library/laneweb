@@ -58,12 +58,12 @@ h1 a:hover {
 #libraryContact {
     top : 54px
 }
-#libraryContact li {
+#libraryContact li, #login li {
     float : left;
     padding : 0 7px;
     background-image : none;
     border-left : 1px dotted #C1C1C1
 }
-#libraryContact li:first-child {
+#libraryContact li:first-child, #login li:first-child {
     border-left : none
 }
