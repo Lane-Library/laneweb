@@ -4,6 +4,8 @@ package edu.stanford.irt.laneweb.model;
  * Model for sitemap components.
  */
 public interface Model {
+    
+    String ACTION = "action";
 
     String ALPHA = "alpha";
     
@@ -12,6 +14,8 @@ public interface Model {
     String BASE_PATH = "base-path";
 
     String BASSETT_NUMBER = "basset-number";
+
+    String BOOKMARKS = "bookmarks";
 
     String CALLBACK = "callback";
 
@@ -29,9 +33,13 @@ public interface Model {
 
     String FACETS = "facets";
 
+    String HISTORY = "history";
+
     String HOST = "host";
 
     String IPGROUP = "ipgroup";
+
+    String ITEMS = "items";
 
     String LIMIT = "limit";
 
