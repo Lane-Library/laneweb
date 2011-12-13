@@ -7,7 +7,7 @@
             searchTipsLink = Y.one('#searchTips a'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             searchIndicator = new LANE.SearchIndicator(),
-            searchTextInput = new LANE.TextInput(form.one('#searchTerms')),
+            searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
             searchTermsSuggest = new LANE.Suggest(searchTextInput.getInput()),
             search;
         form.on('submit', function(submitEvent) {

@@ -104,7 +104,7 @@
             for (i = 0; i < textInputs.size(); i++) {
                 title = textInputs.item(i).get('title');
                 if (title) {
-                    new LANE.TextInput(textInputs.item(i), title);
+                    new Y.lane.TextInput(textInputs.item(i), title);
                 }
             }
         }

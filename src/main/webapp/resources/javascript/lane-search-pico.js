@@ -56,7 +56,7 @@
                 if (queryString[inputs.item(i).get('name')] !== undefined) {
                     inputs.item(i).set('value',queryString[inputs.item(i).get('name')]);
                 }
-                picoTextInputs.push(new LANE.TextInput(inputs.item(i), inputs.item(i).get('title')));
+                picoTextInputs.push(new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
                 inputs.item(i).on("blur",function(){
                     searchTerms.setValue(getPicoQuery());
                 });
@@ -95,7 +95,7 @@
         };
         Y.publish("lane:searchPicoChange",{broadcast:1});
     if (form) {
-        searchTerms = new LANE.TextInput(Y.one("#searchTerms"));
+        searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"));
         Y.on("lane:suggestSelect",  function(event) {
             if(picoIsOn && getPicoQuery()){
                 searchTerms.setValue(getPicoQuery());
