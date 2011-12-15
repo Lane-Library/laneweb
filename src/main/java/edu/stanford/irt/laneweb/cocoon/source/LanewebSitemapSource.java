@@ -105,7 +105,15 @@ public class LanewebSitemapSource implements Source, XMLizable {
         this.validity = new SitemapSourceValidity();
         SitemapSourceInfo info = new SitemapSourceInfo();
         this.protocol = info.protocol;
-        info.uri = uri.substring(uri.indexOf(":/") + 2);
+        int qMark = uri.indexOf('?');
+        int startOfPath = uri.indexOf(":/") + 2;
+        if (qMark > -1) {
+        	info.queryString = uri.substring(qMark + 1);
+        	info.uri = uri.substring(startOfPath, qMark);
+        } else {
+        	info.uri = uri.substring(startOfPath);
+        }
+        //TODO: create an EnvironmentWrapper that puts the query parameters into the model
         this.environment = new EnvironmentWrapper(environment, info);
         this.systemIdForCaching = this.systemId;
         this.environment.startingProcessing();
