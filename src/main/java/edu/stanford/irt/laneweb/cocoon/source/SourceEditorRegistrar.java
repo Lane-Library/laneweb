@@ -6,19 +6,17 @@ import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 
-
 public class SourceEditorRegistrar implements PropertyEditorRegistrar, ResourceLoaderAware {
 
     private ResourceLoader resourceLoader;
 
     @Override
-    public void registerCustomEditors(PropertyEditorRegistry registry) {
+    public void registerCustomEditors(final PropertyEditorRegistry registry) {
         registry.registerCustomEditor(Source.class, new SourceEditor(this.resourceLoader));
-
     }
 
     @Override
-    public void setResourceLoader(ResourceLoader resourceLoader) {
+    public void setResourceLoader(final ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 }

@@ -23,6 +23,6 @@ public abstract class LanewebSitemapSourceFactory implements SourceFactory {
     public void setProcessor(final Processor processor) {
         this.processor = processor;
     }
-    
+
     protected abstract Environment getEnvironment();
 }

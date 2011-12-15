@@ -13,16 +13,17 @@ package edu.stanford.irt.laneweb.cocoon.source;
  * KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.Processor;
-import org.apache.cocoon.components.source.impl.SitemapSourceInfo;
 import org.apache.cocoon.environment.Environment;
-import org.apache.cocoon.environment.wrapper.EnvironmentWrapper;
+import org.apache.cocoon.environment.ObjectModelHelper;
+import org.apache.cocoon.environment.wrapper.RequestParameters;
 import org.apache.cocoon.xml.ContentHandlerWrapper;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.Source;
@@ -73,21 +74,13 @@ public class LanewebSitemapSource implements Source, XMLizable {
     }
 
     /** The environment */
-    private EnvironmentWrapper environment;
-
-    private String mimeType;
+    private LanewebSitemapSourceEnvironment environment;
 
     /** The pipeline description */
     private Processor.InternalPipelineDescription pipelineDescription;
 
-    /** The processor */
-    private Processor processor;
-
     /** The used protocol */
     private String protocol;
-
-    /** The system id */
-    private String systemId;
 
     /** The system id used for caching */
     private String systemIdForCaching;
@@ -97,49 +90,56 @@ public class LanewebSitemapSource implements Source, XMLizable {
 
     /**
      * Construct a new object
-     * @throws Exception 
+     * 
+     * @throws Exception
      */
+    @SuppressWarnings("unchecked")
     public LanewebSitemapSource(final String uri, final Environment environment, final Processor processor) {
-        this.systemId = uri;
-        this.processor = processor;
         this.validity = new SitemapSourceValidity();
-        SitemapSourceInfo info = new SitemapSourceInfo();
-        this.protocol = info.protocol;
-        int qMark = uri.indexOf('?');
+        int colon = uri.indexOf(':');
+        this.protocol = uri.substring(0, colon);
+        Map<Object, Object> newObjectModel = new HashMap<Object, Object>(environment.getObjectModel());
         int startOfPath = uri.indexOf(":/") + 2;
+        String sitemapURI = uri.substring(startOfPath);
+        int qMark = sitemapURI.indexOf('?');
         if (qMark > -1) {
-        	info.queryString = uri.substring(qMark + 1);
-        	info.uri = uri.substring(startOfPath, qMark);
-        } else {
-        	info.uri = uri.substring(startOfPath);
+            sitemapURI = sitemapURI.substring(qMark);
+            // add uri parameters to newObjectModel
+            RequestParameters params = new RequestParameters(sitemapURI.substring(qMark + 1));
+            for (Enumeration<String> names = params.getParameterNames(); names.hasMoreElements();) {
+                String name = names.nextElement();
+                String[] value = params.getParameterValues(name);
+                if (value.length == 1) {
+                    newObjectModel.put(name, value[0]);
+                } else {
+                    newObjectModel.put(name, value);
+                }
+            }
         }
-        //TODO: create an EnvironmentWrapper that puts the query parameters into the model
-        this.environment = new EnvironmentWrapper(environment, info);
-        this.systemIdForCaching = this.systemId;
-        this.environment.startingProcessing();
+        newObjectModel.put(ObjectModelHelper.REQUEST_OBJECT, new LanewebSitemapSourceRequest(sitemapURI));
+        newObjectModel.put(ObjectModelHelper.RESPONSE_OBJECT, new LanewebSitemapSourceResponse());
+        this.environment = new LanewebSitemapSourceEnvironment(newObjectModel);
         try {
-			this.pipelineDescription = this.processor.buildPipeline(this.environment);
-			this.environment.setURI(this.pipelineDescription.prefix, this.pipelineDescription.uri);
-			this.pipelineDescription.processingPipeline .prepareInternal(this.environment);
-		} catch (Exception e) {
-			throw new LanewebSourceException(e);
-		}
-		this.validity.set(this.pipelineDescription.processingPipeline.getValidityForEventPipeline());
-		String eventPipelineKey = this.pipelineDescription.processingPipeline.getKeyForEventPipeline();
-		this.mimeType = this.environment.getContentType();
-		if (eventPipelineKey != null) {
-			StringBuilder buffer = new StringBuilder(this.systemId);
-			if (this.systemId.indexOf('?') == -1) {
-				buffer.append('?');
-			} else {
-				buffer.append('&');
-			}
-			buffer.append("pipelinehash=");
-			buffer.append(eventPipelineKey);
-			this.systemIdForCaching = buffer.toString();
-		} else {
-			this.systemIdForCaching = this.systemId;
-		}
+            this.pipelineDescription = processor.buildPipeline(this.environment);
+            this.pipelineDescription.processingPipeline.prepareInternal(this.environment);
+        } catch (Exception e) {
+            throw new LanewebSourceException(e);
+        }
+        this.validity.set(this.pipelineDescription.processingPipeline.getValidityForEventPipeline());
+        String eventPipelineKey = this.pipelineDescription.processingPipeline.getKeyForEventPipeline();
+        if (eventPipelineKey != null) {
+            StringBuilder buffer = new StringBuilder(uri);
+            if (uri.indexOf('?') == -1) {
+                buffer.append('?');
+            } else {
+                buffer.append('&');
+            }
+            buffer.append("pipelinehash=");
+            buffer.append(eventPipelineKey);
+            this.systemIdForCaching = buffer.toString();
+        } else {
+            this.systemIdForCaching = uri;
+        }
     }
 
     /**
@@ -163,14 +163,12 @@ public class LanewebSitemapSource implements Source, XMLizable {
      * Return an <code>InputStream</code> object to read from the source.
      */
     public InputStream getInputStream() throws IOException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        this.environment.setOutputStream(os);
         try {
             this.pipelineDescription.processingPipeline.process(this.environment);
         } catch (ProcessingException e) {
             throw new LanewebSourceException(e);
         }
-        return new ByteArrayInputStream(os.toByteArray());
+        return this.environment.getInputStream();
     }
 
     /**
@@ -188,7 +186,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
      * not able to determine the mime-type by itself this can be null.
      */
     public String getMimeType() {
-        return this.mimeType;
+        throw new UnsupportedOperationException();
     }
 
     /**

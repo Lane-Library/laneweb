@@ -6,8 +6,7 @@ public class LanewebSourceException extends LanewebException {
 
     private static final long serialVersionUID = 1L;
 
-	public LanewebSourceException(Throwable cause) {
-		super(cause);
-	}
-
+    public LanewebSourceException(final Throwable cause) {
+        super(cause);
+    }
 }
