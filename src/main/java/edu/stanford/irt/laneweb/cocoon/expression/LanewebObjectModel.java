@@ -8,8 +8,7 @@ import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
 import org.apache.commons.collections.MultiMap;
 
 /**
- * A simplified version of the Cocoon ObjectModel, doesn't keep track of a bunch
- * of stuff. But it works
+ * A Cocoon ObjectModel that does nothing
  */
 @SuppressWarnings({ "rawtypes", "serial" })
 public class LanewebObjectModel extends HashMap implements ObjectModel {
@@ -28,16 +27,10 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     public void markLocalContext() {
     }
 
-    @SuppressWarnings("unchecked")
     public void putAt(final String path, final Object value) {
-        put(path, value);
     }
 
-    @SuppressWarnings("unchecked")
     public void setInitialEntries(final Map<String, ObjectModelProvider> initialEntries) {
-        for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {
-            put(entry.getKey(), entry.getValue().getObject());
-        }
     }
 
     public void setParent(final ObjectModel parentObjectModel) {

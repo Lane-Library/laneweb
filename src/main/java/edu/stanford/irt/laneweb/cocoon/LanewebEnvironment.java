@@ -1,32 +1,45 @@
-package edu.stanford.irt.laneweb.cocoon.source;
+package edu.stanford.irt.laneweb.cocoon;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.cocoon.environment.Environment;
 
-public class LanewebSitemapSourceEnvironment implements Environment {
+public class LanewebEnvironment implements Environment {
 
-    private Map<Object, Object> model;
+    private boolean isExternal;
 
-    private ByteArrayOutputStream outputStream;
+    private Map<String, Object> model;
 
-    public LanewebSitemapSourceEnvironment(final Map<Object, Object> model) {
+    private OutputStream outputStream;
+    
+    public LanewebEnvironment() {}
+
+    public LanewebEnvironment(final Map<String, Object> model, final OutputStream outputStream, final boolean isExternal) {
         this.model = model;
-        this.outputStream = new ByteArrayOutputStream();
+        this.outputStream = outputStream;
+        this.isExternal = isExternal;
+    }
+    
+    public void setModel(Map<String, Object> model) {
+        this.model = model;
+    }
+    
+    public void setOutputStream(OutputStream outputStream) {
+        this.outputStream = outputStream;
+    }
+    
+    public void setIsExternal(boolean isExternal) {
+        this.isExternal = isExternal;
     }
 
     public void commitResponse() throws IOException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
         throw new UnsupportedOperationException();
     }
 
@@ -69,27 +82,23 @@ public class LanewebSitemapSourceEnvironment implements Environment {
     }
 
     public String getView() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public int hashCode() {
-        throw new UnsupportedOperationException();
+        return null;
     }
 
     public boolean isExternal() {
-        return false;
+        return this.isExternal;
     }
 
     public boolean isInternalRedirect() {
+//        throw new UnsupportedOperationException();
         return false;
     }
 
     public boolean isResponseModified(final long lastModified) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
-    public void redirect(final String newURL, final boolean global, final boolean permanent) throws IOException {
+    public void redirect(final String url, final boolean global, final boolean permanent) throws IOException {
         throw new UnsupportedOperationException();
     }
 
@@ -105,17 +114,29 @@ public class LanewebSitemapSourceEnvironment implements Environment {
         throw new UnsupportedOperationException();
     }
 
-    public void setContentType(final String contentType) {
+    public void setContentType(final String mimeType) {
+    }
+
+    public void setHttpServletRequest(final HttpServletRequest request) {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setHttpServletResponse(final HttpServletResponse response) {
+        throw new UnsupportedOperationException();
     }
 
     public void setResponseIsNotModified() {
         throw new UnsupportedOperationException();
     }
 
+    public void setServletContext(final ServletContext servletContext) {
+        throw new UnsupportedOperationException();
+    }
+
     public void setStatus(final int statusCode) {
     }
 
-    public void setURI(final String prefix, final String value) {
+    public void setURI(final String prefix, final String uri) {
         throw new UnsupportedOperationException();
     }
 
@@ -123,16 +144,7 @@ public class LanewebSitemapSourceEnvironment implements Environment {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public String toString() {
-        throw new UnsupportedOperationException();
-    }
-
     public boolean tryResetResponse() throws IOException {
         throw new UnsupportedOperationException();
-    }
-
-    InputStream getInputStream() {
-        return new ByteArrayInputStream(this.outputStream.toByteArray());
     }
 }

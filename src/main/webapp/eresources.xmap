@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="throttling">
-            <map:parameter name="request-key" value="${remote-addr}/${request-uri}/${query-string}"/>
+            <map:parameter name="request-key" value="{remote-addr}/{request-uri}/{query-string}"/>
             <map:match pattern="search" type="wildcard">
                 <map:generate type="er-search"/>
                 <map:transform type="query-highlighting"/>

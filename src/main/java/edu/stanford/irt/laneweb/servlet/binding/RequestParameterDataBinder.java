@@ -16,17 +16,17 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class RequestParameterDataBinder implements DataBinder {
 
-    private static final String[][] PARAMETER_ARRAY_MODEL =
-        { { "r", Model.RESOURCES }, { "e", Model.ENGINES }, { "i", Model.ITEMS} };
+    private static final String[][] PARAMETER_ARRAY_MODEL = { { "r", Model.RESOURCES }, { "e", Model.ENGINES },
+            { "i", Model.ITEMS } };
 
     private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE }, { "s", Model.SUBSET },
             { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS }, { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER },
             { "r", Model.REGION }, { "PID", Model.PID }, { "page-number", Model.PAGE_NUMBER }, { "entryUrl", Model.ENTRY_URL },
             { "pl", Model.PERSISTENT_LOGIN }, { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
 
-    private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CLASS_ID, Model.TIMEOUT, Model.SYNCHRONOUS,
-            Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK,
-            Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SOURCEID, Model.SOURCE };
+    private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CLASS_ID, Model.TIMEOUT,
+            Model.SYNCHRONOUS, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER, Model.URL,
+            Model.CALLBACK, Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SOURCEID, Model.SOURCE };
 
     /**
      * parameterArrayModelMap contains the mapping of parameter names to model
@@ -60,23 +60,21 @@ public class RequestParameterDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String name = (String) params.nextElement();
-            String value = request.getParameter(name);
             if (this.parameterSameAsModel.contains(name)) {
-                model.put(name, value);
-            } else {
+                model.put(name, request.getParameter(name));
+            } else if (this.parameterModelMap.containsKey(name)) {
+                String value = request.getParameter(name);
+                model.put(this.parameterModelMap.get(name), value);
                 if ("q".equals(name)) {
                     try {
+                        // TODO: put url-encoded-query into Model.java
                         model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
                     } catch (UnsupportedEncodingException e) {
                         throw new LanewebException(e);
                     }
                 }
-                if (this.parameterModelMap.containsKey(name)) {
-                    model.put(this.parameterModelMap.get(name), value);
-                }
-                if (this.parameterArrayModelMap.containsKey(name)) {
-                    model.put(this.parameterArrayModelMap.get(name), Arrays.asList(request.getParameterValues(name)));
-                }
+            } else if (this.parameterArrayModelMap.containsKey(name)) {
+                model.put(this.parameterArrayModelMap.get(name), Arrays.asList(request.getParameterValues(name)));
             }
         }
     }

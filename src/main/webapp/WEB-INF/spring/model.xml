@@ -4,34 +4,17 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-    <bean id="org.apache.cocoon.el.ExpressionFactory"
-        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebExpressionFactory">
-        <property name="expressionCompiler">
-            <bean class="edu.stanford.irt.laneweb.cocoon.expression.LanewebExpressionCompiler"/>
-        </property>
-    </bean>
-
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
-        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModel" scope="request">
-        <property name="initialEntries">
-            <map>
-                <entry key="laneweb">
-                    <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
-                        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModelProvider">
-                        <property name="environment" ref="org.apache.cocoon.environment.Environment"/>
-                    </bean>
-                </entry>
-            </map>
-        </property>
-    </bean>
-    
-    <bean id="org.apache.cocoon.environment.Environment"
-        class="edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment"
-        scope="request">
+        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModel">
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/debug"
         class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"
         scope="prototype"/>
+    
+    <bean id="org.apache.cocoon.environment.Environment"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebEnvironment"
+        scope="request">
+    </bean>
     
 </beans>

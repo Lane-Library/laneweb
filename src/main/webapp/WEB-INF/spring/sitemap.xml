@@ -48,16 +48,16 @@
         class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
 
     <bean name="org.apache.cocoon.matching.Matcher/wildcard"
-        class="org.apache.cocoon.matching.WildcardURIMatcher"/>
+        class="edu.stanford.irt.laneweb.cocoon.matching.WildcardSitemapURIMatcher"/>
 
     <bean name="org.apache.cocoon.matching.Matcher/url-decoding-wildcard"
-        class="edu.stanford.irt.laneweb.cocoon.URLDecodingWildcardURIMatcher"/>
+        class="edu.stanford.irt.laneweb.cocoon.matching.URLDecodingWildcardURIMatcher"/>
 
     <bean name="org.apache.cocoon.matching.Matcher/regexp"
-        class="org.apache.cocoon.matching.RegexpURIMatcher"/>
+        class="edu.stanford.irt.laneweb.cocoon.matching.RegexpSitemapURIMatcher"/>
 
     <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
-        class="org.apache.cocoon.matching.RegexpRequestParameterMatcher"/>
+        class="edu.stanford.irt.laneweb.cocoon.matching.RegexpModelValueMatcher"/>
 
     <bean id="org.apache.cocoon.components.notification.NotifyingBuilder"
         class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
@@ -91,25 +91,15 @@
         scope="prototype"/>
     <bean name="match"
         class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
-    <!--<bean name="mount"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>-->
-    <!--<bean name="read"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>-->
     <bean name="generate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
         scope="prototype"/>
     <bean name="serialize"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
         scope="prototype"/>
-    <!--<bean name="act"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ActNodeBuilder"
-        scope="prototype"/>-->
     <bean name="aggregate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
         scope="prototype"/>
-    <!--<bean name="redirect-to"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.RedirectToNodeBuilder"
-        scope="prototype"/>-->
     <bean name="transform"
         class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
         scope="prototype"/>
@@ -119,15 +109,18 @@
     <bean name="handle-errors"
         class="org.apache.cocoon.components.treeprocessor.sitemap.HandleErrorsNodeBuilder"/>
     
-    <bean name="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"
+    <!--<bean name="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"
         class="org.apache.cocoon.components.treeprocessor.variables.LegacySitemapStringTemplateParser">
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
-    </bean>
+    </bean>-->
     
     <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
-        class="org.apache.cocoon.components.treeprocessor.variables.StringTemplateParserVariableResolver"
+        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebVariableResolver"
         scope="prototype">
-        <property name="stringTemplateParser" ref="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.expression.ExpressionParser"/>
     </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.cocoon.expression.ExpressionParser"
+        class="edu.stanford.irt.laneweb.cocoon.expression.ExpressionParser"/>
 
 </beans>

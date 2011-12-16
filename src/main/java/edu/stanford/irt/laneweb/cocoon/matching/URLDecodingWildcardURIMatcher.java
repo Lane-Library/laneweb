@@ -1,13 +1,12 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.laneweb.cocoon.matching;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.matching.WildcardURIMatcher;
 
-public class URLDecodingWildcardURIMatcher extends WildcardURIMatcher {
+public class URLDecodingWildcardURIMatcher extends WildcardSitemapURIMatcher {
 
     @SuppressWarnings("rawtypes")
     @Override

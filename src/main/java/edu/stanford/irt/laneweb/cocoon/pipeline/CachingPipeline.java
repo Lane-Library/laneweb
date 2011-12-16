@@ -8,8 +8,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.caching.Cache;
@@ -33,8 +31,6 @@ import org.apache.cocoon.xml.XMLProducer;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.AggregatedValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
-import org.apache.excalibur.store.Store;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -79,8 +75,8 @@ public class CachingPipeline extends NonCachingPipeline {
     /** The role names of the transfomrers */
     private List<String> transformerRoles = new LinkedList<String>();
 
-    /** Store for pipeline locks (optional) */
-    private Store transientStore;
+//    /** Store for pipeline locks (optional) */
+//    private Store transientStore;
 
     /** The deserializer */
     private XMLByteStreamInterpreter xmlDeserializer;
@@ -88,10 +84,10 @@ public class CachingPipeline extends NonCachingPipeline {
     /** The serializer */
     private XMLByteStreamCompiler xmlSerializer;
 
-    public CachingPipeline(final SourceResolver sourceResolver, final Cache cache, final Store transientStore) {
+    public CachingPipeline(final SourceResolver sourceResolver, final Cache cache) {
         super(sourceResolver);
         this.cache = cache;
-        this.transientStore = transientStore;
+//        this.transientStore = transientStore;
     }
 
     /**
@@ -185,7 +181,7 @@ public class CachingPipeline extends NonCachingPipeline {
      * Cache longest cacheable key
      * @throws ProcessingException 
      */
-    protected CachedResponse cacheResults(final Environment environment, final OutputStream os) throws ProcessingException {
+    protected void cacheResults(final Environment environment, final OutputStream os) throws ProcessingException {
         if (this.toCacheKey != null) {
             // See if there is an expires object for this resource.
             Long expiresObj = (Long) environment.getObjectModel().get(ObjectModelHelper.EXPIRES_OBJECT);
@@ -209,9 +205,7 @@ public class CachingPipeline extends NonCachingPipeline {
                         expiresObj);
             }
             this.cache.store(this.toCacheKey, response);
-            return response;
         }
-        return null;
     }
 
     /**
@@ -344,24 +338,24 @@ public class CachingPipeline extends NonCachingPipeline {
         }
     }
 
-    /**
-     * Makes the lock (instantiates a new object and puts it into the store)
-     */
-    protected void generateLock(final Object key) {
-        if (this.transientStore != null && key != null) {
-            final String lockKey = PIPELOCK_PREFIX + key;
-            synchronized (this.transientStore) {
-                if (!this.transientStore.containsKey(lockKey)) {
-                    Object lock = RequestContextHolder.getRequestAttributes();
-                    try {
-                        this.transientStore.store(lockKey, lock);
-                    } catch (IOException e) {
-                        throw new LanewebException(e);
-                    }
-                }
-            }
-        }
-    }
+//    /**
+//     * Makes the lock (instantiates a new object and puts it into the store)
+//     */
+//    protected void generateLock(final Object key) {
+//        if (this.transientStore != null && key != null) {
+//            final String lockKey = PIPELOCK_PREFIX + key;
+//            synchronized (this.transientStore) {
+//                if (!this.transientStore.containsKey(lockKey)) {
+//                    Object lock = RequestContextHolder.getRequestAttributes();
+//                    try {
+//                        this.transientStore.store(lockKey, lock);
+//                    } catch (IOException e) {
+//                        throw new LanewebException(e);
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     /**
      * Create a new cache key
@@ -402,7 +396,7 @@ public class CachingPipeline extends NonCachingPipeline {
 			}
         } else {
             setMimeTypeForSerializer(environment);
-            generateLock(this.toCacheKey);
+//            generateLock(this.toCacheKey);
             try {
                 OutputStream os = null;
                 int outputBufferSize = getOutputBufferSize();
@@ -455,51 +449,40 @@ public class CachingPipeline extends NonCachingPipeline {
                 // Now that we have processed the pipeline,
                 // we do the actual caching
                 //
-                CachedResponse completeCachedResponse = cacheResults(environment, os);
-                if (completeCachedResponse != null) {
-                    // Dirty work-around for setting Last-Modified header as
-                    // there is no appoporiate method
-                    // org.apache.cocoon.environment.http.HttpEnvironment.isResponseModified
-                    // will set it and the result of
-                    // the actual check is neither meaningful nor important here
-                    environment.isResponseModified(completeCachedResponse.getLastModified());
-                }
+                cacheResults(environment, os);
             } catch (IOException e) {
             	throw new LanewebException(e);
 			} catch (SAXException e) {
             	throw new LanewebException(e);
-			} finally {
-                releaseLock(this.toCacheKey);
+//			} finally {
+//                releaseLock(this.toCacheKey);
             }
-            // Request has been succesfully processed, set approporiate status
-            // code
-            environment.setStatus(HttpServletResponse.SC_OK);
             return true;
         }
         return true;
     }
 
-    /**
-     * Releases the lock (notifies it and removes it from the store)
-     */
-    protected void releaseLock(final Object key) {
-        if (this.transientStore != null && key != null) {
-            final String lockKey = PIPELOCK_PREFIX + key;
-            Object lock = null;
-            synchronized (this.transientStore) {
-                if (this.transientStore.containsKey(lockKey)) {
-                    lock = this.transientStore.get(lockKey);
-                    this.transientStore.remove(lockKey);
-                }
-            }
-            if (lock != null) {
-                // Notify everybody who's waiting
-                synchronized (lock) {
-                    lock.notifyAll();
-                }
-            }
-        }
-    }
+//    /**
+//     * Releases the lock (notifies it and removes it from the store)
+//     */
+//    protected void releaseLock(final Object key) {
+//        if (this.transientStore != null && key != null) {
+//            final String lockKey = PIPELOCK_PREFIX + key;
+//            Object lock = null;
+//            synchronized (this.transientStore) {
+//                if (this.transientStore.containsKey(lockKey)) {
+//                    lock = this.transientStore.get(lockKey);
+//                    this.transientStore.remove(lockKey);
+//                }
+//            }
+//            if (lock != null) {
+//                // Notify everybody who's waiting
+//                synchronized (lock) {
+//                    lock.notifyAll();
+//                }
+//            }
+//        }
+//    }
 
     /**
      * Setup the evenet pipeline. The components of the pipeline are checked if
@@ -674,10 +657,10 @@ public class CachingPipeline extends NonCachingPipeline {
                 }
             } else {
                 // check if there might be one being generated
-                if (!waitForLock(this.fromCacheKey)) {
-                    finished = false;
-                    continue;
-                }
+//                if (!waitForLock(this.fromCacheKey)) {
+//                    finished = false;
+//                    continue;
+//                }
                 // no cached response found
                 finished = setupFromCacheKey();
                 this.completeResponseIsCached = false;
@@ -690,29 +673,29 @@ public class CachingPipeline extends NonCachingPipeline {
      * 
      * @return false if able to find a lock and was notified
      */
-    protected boolean waitForLock(final Object key) {
-        if (this.transientStore != null) {
-            final String lockKey = PIPELOCK_PREFIX + key;
-            // Get a lock object from the store
-            Object lock;
-            synchronized (this.transientStore) {
-                lock = this.transientStore.get(lockKey);
-            }
-            // Avoid deadlock with self (see JIRA COCOON-1985).
-            Object current = RequestContextHolder.getRequestAttributes();
-            if (lock != null && lock != current) {
-                try {
-                    synchronized (lock) {
-                        lock.wait();
-                    }
-                } catch (InterruptedException e) {
-                    /* ignored */
-                }
-                return false;
-            }
-        }
-        return true;
-    }
+//    protected boolean waitForLock(final Object key) {
+//        if (this.transientStore != null) {
+//            final String lockKey = PIPELOCK_PREFIX + key;
+//            // Get a lock object from the store
+//            Object lock;
+//            synchronized (this.transientStore) {
+//                lock = this.transientStore.get(lockKey);
+//            }
+//            // Avoid deadlock with self (see JIRA COCOON-1985).
+//            Object current = RequestContextHolder.getRequestAttributes();
+//            if (lock != null && lock != current) {
+//                try {
+//                    synchronized (lock) {
+//                        lock.wait();
+//                    }
+//                } catch (InterruptedException e) {
+//                    /* ignored */
+//                }
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
     SourceValidity getValidityForInternalPipeline(final int index) {
         final SourceValidity validity;

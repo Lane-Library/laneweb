@@ -13,6 +13,8 @@ package edu.stanford.irt.laneweb.cocoon.source;
  * KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -22,7 +24,6 @@ import java.util.Map;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.Processor;
 import org.apache.cocoon.environment.Environment;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.wrapper.RequestParameters;
 import org.apache.cocoon.xml.ContentHandlerWrapper;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -32,6 +33,9 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
+
+import edu.stanford.irt.laneweb.cocoon.LanewebEnvironment;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * Implementation of a {@link Source} that gets its content by invoking a
@@ -74,7 +78,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
     }
 
     /** The environment */
-    private LanewebSitemapSourceEnvironment environment;
+    private Environment environment;
 
     /** The pipeline description */
     private Processor.InternalPipelineDescription pipelineDescription;
@@ -87,18 +91,21 @@ public class LanewebSitemapSource implements Source, XMLizable {
 
     /** The internal event pipeline validities */
     private SitemapSourceValidity validity;
+    
+    private ByteArrayOutputStream outputStream;
 
     /**
      * Construct a new object
      * 
      * @throws Exception
      */
+    //TODO: a lot of this should probably be in the SourceFactory
     @SuppressWarnings("unchecked")
     public LanewebSitemapSource(final String uri, final Environment environment, final Processor processor) {
         this.validity = new SitemapSourceValidity();
         int colon = uri.indexOf(':');
         this.protocol = uri.substring(0, colon);
-        Map<Object, Object> newObjectModel = new HashMap<Object, Object>(environment.getObjectModel());
+        Map<String, Object> newObjectModel = new HashMap<String, Object>(environment.getObjectModel());
         int startOfPath = uri.indexOf(":/") + 2;
         String sitemapURI = uri.substring(startOfPath);
         int qMark = sitemapURI.indexOf('?');
@@ -116,9 +123,9 @@ public class LanewebSitemapSource implements Source, XMLizable {
                 }
             }
         }
-        newObjectModel.put(ObjectModelHelper.REQUEST_OBJECT, new LanewebSitemapSourceRequest(sitemapURI));
-        newObjectModel.put(ObjectModelHelper.RESPONSE_OBJECT, new LanewebSitemapSourceResponse());
-        this.environment = new LanewebSitemapSourceEnvironment(newObjectModel);
+        newObjectModel.put(Model.SITEMAP_URI, sitemapURI);
+        this.outputStream = new ByteArrayOutputStream();
+        this.environment = new LanewebEnvironment(newObjectModel, this.outputStream, false);
         try {
             this.pipelineDescription = processor.buildPipeline(this.environment);
             this.pipelineDescription.processingPipeline.prepareInternal(this.environment);
@@ -168,7 +175,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
         } catch (ProcessingException e) {
             throw new LanewebSourceException(e);
         }
-        return this.environment.getInputStream();
+        return new ByteArrayInputStream(this.outputStream.toByteArray());
     }
 
     /**

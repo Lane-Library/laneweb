@@ -13,6 +13,7 @@ public abstract class LanewebSitemapSourceFactory implements SourceFactory {
     private Processor processor;
 
     @SuppressWarnings("rawtypes")
+    //TODO: should move a lot of the LanewebSitemapSource constructor here
     public Source getSource(final String location, final Map parameters) throws IOException {
         return new LanewebSitemapSource(location, getEnvironment(), this.processor);
     }

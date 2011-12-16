@@ -143,7 +143,6 @@
         class="edu.stanford.irt.laneweb.cocoon.pipeline.CachingPipeline" scope="prototype">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
-        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
 
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"

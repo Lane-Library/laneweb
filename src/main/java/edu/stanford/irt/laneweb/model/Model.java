@@ -87,6 +87,8 @@ public interface Model {
 
     String SELECTION = "selection";
 
+    String SITEMAP_URI = "sitemap-uri";
+
     String SOURCE = "source";
 
     String SOURCEID = "sourceid";

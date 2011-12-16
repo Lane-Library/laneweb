@@ -18,7 +18,7 @@
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${rid}"/>
+                    <map:parameter name="cache-key" value="{rid}"/>
                     <map:parameter name="page-title" value="{2}"/>
                 </map:transform>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
@@ -34,7 +34,7 @@
                     <map:parameter name="subset" value="{1}"/>
                 </map:generate>
                 <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${rid}"/>
+                    <map:parameter name="cache-key" value="{rid}"/>
                     <map:parameter name="page-title" value="{2}"/>
                 </map:transform>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
@@ -92,9 +92,9 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
-                <map:generate type="html" src="${content-base}/m/{1}.html"/>
+                <map:generate type="html" src="{content-base}/m/{1}.html"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl">
-                    <map:parameter name="cache-key" value="${rid}"/>
+                    <map:parameter name="cache-key" value="{rid}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:select type="proxy-links">

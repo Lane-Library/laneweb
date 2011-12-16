@@ -12,13 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.cocoon.Processor;
-import org.apache.cocoon.environment.ObjectModelHelper;
+import org.apache.cocoon.environment.Environment;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.cocoon.expression.LanewebRequest;
-import edu.stanford.irt.laneweb.cocoon.expression.LanewebResponse;
-import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
+import edu.stanford.irt.laneweb.cocoon.LanewebEnvironment;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
@@ -42,22 +40,16 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         }
         Map<String, Object> model = new HashMap<String, Object>();
         this.dataBinder.bind(model, request);
-        String sitemapURI = getSitemapURI(request);
+        model.put(Model.SITEMAP_URI, getSitemapURI(request));
         LanewebEnvironment environment = getEnvironment();
         environment.setModel(model);
-        environment.setHttpServletResponse(response);
-        environment.setHttpServletRequest(request);
-        environment.setServletContext(this.servletContext);
-        environment.setURI(this.prefix, sitemapURI);
-        
-        model.put(ObjectModelHelper.REQUEST_OBJECT, new LanewebRequest(sitemapURI, request));
-        model.put(ObjectModelHelper.RESPONSE_OBJECT, new LanewebResponse(response));
+        environment.setOutputStream(response.getOutputStream());
+        environment.setIsExternal(true);
         
         try {
             this.processor.process(environment);
         } catch (Exception e) {
             throw new LanewebException(model.toString(), e);
-//            throw new ServletException(e);
         }
     }
 
