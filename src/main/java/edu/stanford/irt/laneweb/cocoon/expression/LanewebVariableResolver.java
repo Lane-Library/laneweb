@@ -25,7 +25,9 @@ public class LanewebVariableResolver extends VariableResolver {
     public String resolve(final InvokeContext context, final Map objectModel) {
         Map<String, Object> compositeMap = new HashMap<String, Object>(objectModel);
         String entryPrefix = "";
-        for (Map<String, String> map : ((List<Map<String, String>>) context.getMapStack())) {
+        List<Map<String, String>> list = context.getMapStack();
+        for (int i = list.size() - 1; i >= 0; i--) {
+            Map<String, String> map = list.get(i);
             for (Entry<String, String> entry : map.entrySet()) {
                 compositeMap.put(entryPrefix + entry.getKey(), entry.getValue());
             }
