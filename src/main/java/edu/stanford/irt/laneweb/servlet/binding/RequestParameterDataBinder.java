@@ -60,10 +60,10 @@ public class RequestParameterDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String name = (String) params.nextElement();
+            String value = request.getParameter(name);
             if (this.parameterSameAsModel.contains(name)) {
-                model.put(name, request.getParameter(name));
+                model.put(name, value);
             } else if (this.parameterModelMap.containsKey(name)) {
-                String value = request.getParameter(name);
                 model.put(this.parameterModelMap.get(name), value);
                 if ("q".equals(name)) {
                     try {
@@ -73,7 +73,8 @@ public class RequestParameterDataBinder implements DataBinder {
                         throw new LanewebException(e);
                     }
                 }
-            } else if (this.parameterArrayModelMap.containsKey(name)) {
+            }
+            if (this.parameterArrayModelMap.containsKey(name)) {
                 model.put(this.parameterArrayModelMap.get(name), Arrays.asList(request.getParameterValues(name)));
             }
         }

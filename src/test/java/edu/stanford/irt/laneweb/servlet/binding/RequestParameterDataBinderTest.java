@@ -54,6 +54,7 @@ public class RequestParameterDataBinderTest {
         expect(this.request.getParameterNames()).andReturn(this.names);
         expect(this.names.hasMoreElements()).andReturn(true);
         expect(this.names.nextElement()).andReturn("e");
+        expect(this.request.getParameter("e")).andReturn("foo");
         expect(this.request.getParameterValues("e")).andReturn(new String[] { "foo", "bar" });
         expect(this.names.hasMoreElements()).andReturn(false);
         replay(this.request, this.names);
@@ -73,6 +74,21 @@ public class RequestParameterDataBinderTest {
         this.binder.bind(this.model, this.request);
         assertEquals("foo?bar", this.model.get(Model.QUERY));
         assertEquals("foo%3Fbar", this.model.get("url-encoded-query"));
+        verify(this.request, this.names);
+    }
+    
+    @Test
+    public void testBothSingleAndMultiple() {
+        expect(this.request.getParameterNames()).andReturn(this.names);
+        expect(this.names.hasMoreElements()).andReturn(true);
+        expect(this.names.nextElement()).andReturn("r");
+        expect(this.request.getParameter("r")).andReturn("foo");
+        expect(this.request.getParameterValues("r")).andReturn(new String[] { "foo", "bar" });
+        expect(this.names.hasMoreElements()).andReturn(false);
+        replay(this.request, this.names);
+        this.binder.bind(this.model, this.request);
+        assertEquals(this.model.get(Model.RESOURCES), Arrays.asList(new String[] { "foo", "bar" }));
+        assertEquals("foo", this.model.get(Model.REGION));
         verify(this.request, this.names);
     }
 }
