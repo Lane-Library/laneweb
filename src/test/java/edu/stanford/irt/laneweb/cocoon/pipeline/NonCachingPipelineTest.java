@@ -101,8 +101,7 @@ public class NonCachingPipelineTest {
         XMLConsumer consumer = createMock(XMLConsumer.class);
         this.transformer.setConsumer(consumer);
         this.transformer.setup(null, null, null, null);
-        expect(this.environment.getObjectModel()).andReturn(null).times(2);
-        this.environment.setContentType("text/xml");
+        expect(this.environment.getObjectModel()).andReturn(null);
         expect(this.environment.getOutputStream(0)).andReturn(null);
         this.serializer.setOutputStream(null);
         replay(this.environment, this.beanFactory, this.generator, this.transformer, this.serializer, consumer);
@@ -164,7 +163,6 @@ public class NonCachingPipelineTest {
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/null")).andReturn(this.generator);
         expect(this.beanFactory.getBean("org.apache.cocoon.serialization.Serializer/null")).andReturn(this.serializer);
         expect(this.environment.getObjectModel()).andReturn(null);
-        this.environment.setContentType("text/plain");
         expect(this.environment.getOutputStream(0)).andReturn(null);
         this.generator.setup(null, null, null, null);
         this.generator.setConsumer(this.serializer);

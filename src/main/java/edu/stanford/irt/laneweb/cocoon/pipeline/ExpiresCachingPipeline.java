@@ -3,9 +3,6 @@ package edu.stanford.irt.laneweb.cocoon.pipeline;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
@@ -18,8 +15,6 @@ import org.apache.cocoon.components.sax.XMLByteStreamCompiler;
 import org.apache.cocoon.components.sax.XMLByteStreamInterpreter;
 import org.apache.cocoon.components.sax.XMLTeePipe;
 import org.apache.cocoon.environment.Environment;
-import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Response;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.serialization.Serializer;
@@ -127,28 +122,12 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
     @SuppressWarnings("rawtypes")
     @Override
     protected void preparePipeline(final Environment environment) throws ProcessingException {
-        // get the key and the expires info
-        // we must do this before we call super.preparePipeline,
-        // otherwise internal pipelines are instantiated and
-        // get a copy of the object model with our info!
-        final Map objectModel = environment.getObjectModel();
-        String key = (String) objectModel.get(CACHE_KEY_KEY);
         Parameters parameters = getParameters();
+        String key = parameters.getParameter("cache-key", null);
         if (key == null) {
-            key = parameters.getParameter("cache-key", null);
-            if (key == null) {
-                key = environment.getURIPrefix() + environment.getURI();
-            }
-        } else {
-            objectModel.remove(CACHE_KEY_KEY);
+            throw new LanewebException("null cache-key");
         }
-        String expiresValue = (String) objectModel.get(CACHE_EXPIRES_KEY);
-        if (expiresValue == null) {
-            this.cacheExpires = parameters.getParameterAsLong("cache-expires", this.defaultCacheExpires);
-        } else {
-            this.cacheExpires = Long.valueOf(expiresValue).longValue();
-            objectModel.remove(CACHE_EXPIRES_KEY);
-        }
+        this.cacheExpires = parameters.getParameterAsLong("cache-expires", this.defaultCacheExpires);
         // prepare the pipeline
         super.preparePipeline(environment);
         // and now prepare the caching information
@@ -169,11 +148,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 this.cachedResponse = null;
             }
         }
-        if (this.cacheExpires > 0 && lastConsumer == serializer) {
-            Response res = ObjectModelHelper.getResponse(environment.getObjectModel());
-            res.setDateHeader("Expires", System.currentTimeMillis() + (this.cacheExpires * 1000));
-            res.setHeader("Cache-Control", "max-age=" + this.cacheExpires + ", public");
-        }
     }
 
     /**
@@ -187,18 +161,8 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
             if (this.cachedResponse != null) {
                 byte[] content = this.cachedResponse.getResponse();
                 if (serializer == lastConsumer) {
-                    if (this.cachedResponse.getContentType() != null) {
-                        environment.setContentType(this.cachedResponse.getContentType());
-                    } else {
-                        this.setMimeTypeForSerializer(environment);
-                    }
                     final OutputStream outputStream = environment.getOutputStream(0);
-                    if (content.length > 0) {
-                        environment.setContentLength(content.length);
-                        outputStream.write(content);
-                    }
                 } else {
-                    this.setMimeTypeForSerializer(environment);
                     this.xmlDeserializer.setConsumer(lastConsumer);
                     this.xmlDeserializer.deserialize(content);
                 }
@@ -207,7 +171,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 if (this.cacheExpires == 0) {
                     return super.processXMLPipeline(environment);
                 }
-                this.setMimeTypeForSerializer(environment);
                 byte[] cachedData;
                 Generator generator = getGenerator();
                 int outputBufferSize = getOutputBufferSize();
@@ -219,7 +182,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                         serializer.setOutputStream(baos);
                         generator.generate();
                         cachedData = baos.toByteArray();
-                        environment.setContentLength(cachedData.length);
                         os.write(cachedData);
                     } else {
                         CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
@@ -238,7 +200,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 //
                 if (this.cacheValidity != null) {
                     this.cachedResponse = new CachedResponse(this.cacheValidity, cachedData);
-                    this.cachedResponse.setContentType(environment.getContentType());
                     this.cache.store(this.cacheKey, this.cachedResponse);
                 }
             }
@@ -247,8 +208,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
 		} catch (SAXException e) {
         	throw new LanewebException(e);
 		}
-        // Request has been succesfully processed, set approporiate status code
-        environment.setStatus(HttpServletResponse.SC_OK);
         return true;
     }
 }

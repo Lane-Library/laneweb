@@ -145,7 +145,6 @@ public class CachingPipelineTest {
     @Test
     public void testProcessXMLPipeline() throws ProcessingException, IOException, SAXException {
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/null")).andReturn(this.generator);
-        this.environment.setContentType("text/xml");
         this.generator.generate();
         replayAll();
         this.pipeline.setGenerator(null, null, null, null);

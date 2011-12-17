@@ -20,7 +20,6 @@ import org.apache.cocoon.components.sax.XMLByteStreamCompiler;
 import org.apache.cocoon.components.sax.XMLByteStreamInterpreter;
 import org.apache.cocoon.components.sax.XMLTeePipe;
 import org.apache.cocoon.environment.Environment;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.serialization.Serializer;
@@ -183,12 +182,10 @@ public class CachingPipeline extends NonCachingPipeline {
      */
     protected void cacheResults(final Environment environment, final OutputStream os) throws ProcessingException {
         if (this.toCacheKey != null) {
-            // See if there is an expires object for this resource.
-            Long expiresObj = (Long) environment.getObjectModel().get(ObjectModelHelper.EXPIRES_OBJECT);
             CachedResponse response;
             if (this.cacheCompleteResponse) {
-                response = new CachedResponse(this.toCacheSourceValidities, ((CachingOutputStream) os).getContent(), expiresObj);
-                response.setContentType(environment.getContentType());
+                response = new CachedResponse(this.toCacheSourceValidities, ((CachingOutputStream) os).getContent());
+//                response.setContentType(environment.getContentType());
             } else {
                 if (this.xmlSerializer == null) {
                     StringBuilder sb = new StringBuilder();
@@ -201,8 +198,7 @@ public class CachingPipeline extends NonCachingPipeline {
                     .append("\ntoCacheKey:").append(this.toCacheKey);
                     throw new IllegalStateException(sb.toString());
                 }
-                response = new CachedResponse(this.toCacheSourceValidities, (byte[]) this.xmlSerializer.getSAXFragment(),
-                        expiresObj);
+                response = new CachedResponse(this.toCacheSourceValidities, (byte[]) this.xmlSerializer.getSAXFragment());
             }
             this.cache.store(this.toCacheKey, response);
         }
@@ -373,29 +369,17 @@ public class CachingPipeline extends NonCachingPipeline {
             return super.processXMLPipeline(environment);
         }
         if (this.cachedResponse != null && this.completeResponseIsCached) {
-            // Allow for 304 (not modified) responses in dynamic content
-            if (checkIfModified(environment, this.cachedResponse.getLastModified())) {
-                return true;
-            }
-            // Set mime-type
-            if (this.cachedResponse.getContentType() != null) {
-                environment.setContentType(this.cachedResponse.getContentType());
-            } else {
-                setMimeTypeForSerializer(environment);
-            }
             // Write response out
             try {
                 final OutputStream outputStream = environment.getOutputStream(0);
                 final byte[] content = this.cachedResponse.getResponse();
                 if (content.length > 0) {
-                    environment.setContentLength(content.length);
                     outputStream.write(content);
                 }
             } catch (IOException e) {
             	throw new LanewebException(e);
 			}
         } else {
-            setMimeTypeForSerializer(environment);
 //            generateLock(this.toCacheKey);
             try {
                 OutputStream os = null;
@@ -429,7 +413,6 @@ public class CachingPipeline extends NonCachingPipeline {
                         } else {
                             generator.generate();
                         }
-                        environment.setContentLength(baos.size());
                         baos.writeTo(os);
                     } else {
                         if (os == null) {
@@ -717,16 +700,5 @@ public class CachingPipeline extends NonCachingPipeline {
         // stop on longest key for smart caching
         this.fromCacheKey = null;
         return true;
-    }
-
-
-    private boolean checkIfModified(final Environment environment, final long lastModified) throws ProcessingException {
-        // has the read resource been modified?
-        if (!environment.isResponseModified(lastModified)) {
-            // environment supports this, so we are finished
-            environment.setResponseIsNotModified();
-            return true;
-        }
-        return false;
     }
 }

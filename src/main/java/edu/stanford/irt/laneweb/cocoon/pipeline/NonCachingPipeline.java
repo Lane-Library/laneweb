@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
@@ -12,8 +13,6 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.components.pipeline.ProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
-import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Response;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.serialization.Serializer;
@@ -72,8 +71,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
 
     // Serializer stuff
     private Serializer serializer;
-
-    private String serializerMimeType;
 
     private Parameters serializerParam;
 
@@ -166,14 +163,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         if (!this.prepared) {
             preparePipeline(environment);
         }
-        // See if we need to set an "Expires:" header
-        if (this.expires != 0) {
-            Response res = ObjectModelHelper.getResponse(environment.getObjectModel());
-            res.setDateHeader("Expires", System.currentTimeMillis() + this.expires);
-            res.setHeader("Cache-Control", "max-age=" + this.expires / 1000 + ", public");
-            environment.getObjectModel().put(ObjectModelHelper.EXPIRES_OBJECT,
-                    Long.valueOf(this.expires + System.currentTimeMillis()));
-        }
 
             // If this is an internal request, lastConsumer was reset!
             if (this.lastConsumer == null) {
@@ -261,7 +250,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         this.serializer = (Serializer) this.beanFactory.getBean(Serializer.ROLE + '/' + role);
         this.serializerSource = source;
         this.serializerParam = param;
-        this.serializerMimeType = mimeType;
         this.lastConsumer = this.serializer;
     }
 
@@ -368,7 +356,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * Process the SAX event pipeline
      */
     protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {
-        setMimeTypeForSerializer(environment);
         try {
             if (this.lastConsumer == null) {
                 // internal processing
@@ -388,37 +375,23 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
-     * Set the mime-type for a serializer
-     * 
-     * @param environment
-     *            The current environment
-     */
-    protected void setMimeTypeForSerializer(final Environment environment) throws ProcessingException {
-        if (this.lastConsumer == null) {
-            // internal processing: text/xml
-            environment.setContentType("text/xml");
-        } else {
-            environment.setContentType(this.serializerMimeType);
-        }
-    }
-
-    /**
      * Setup pipeline components.
      */
     protected void setupPipeline(final Environment environment) throws ProcessingException {
         try {
             // setup the generator
-            this.generator.setup(this.sourceResolver, environment.getObjectModel(), this.generatorSource, this.generatorParam);
+            Map model = environment.getObjectModel();
+            this.generator.setup(this.sourceResolver, model, this.generatorSource, this.generatorParam);
             Iterator<Transformer> transformerItt = this.transformers.iterator();
             Iterator<String> transformerSourceItt = this.transformerSources.iterator();
             Iterator<Parameters> transformerParamItt = this.transformerParams.iterator();
             while (transformerItt.hasNext()) {
                 Transformer trans = transformerItt.next();
-                trans.setup(this.sourceResolver, environment.getObjectModel(), transformerSourceItt.next(),
+                trans.setup(this.sourceResolver, model, transformerSourceItt.next(),
                         transformerParamItt.next());
             }
             if (this.serializer instanceof SitemapModelComponent) {
-                ((SitemapModelComponent) this.serializer).setup(this.sourceResolver, environment.getObjectModel(),
+                ((SitemapModelComponent) this.serializer).setup(this.sourceResolver, model,
                         this.serializerSource, this.serializerParam);
             }
         } catch (SAXException e) {

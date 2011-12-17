@@ -52,7 +52,6 @@ public class ThrottlingPipelineTest {
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
         expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
         this.generator.generate();
-        this.environment.setContentType("text/xml");
         replay(this.environment, this.beanFactory, this.generator, this.transformer, this.parameters);
         this.pipeline.setGenerator("foo", null, null, null);
         this.pipeline.addTransformer("foo", null, null, null);
