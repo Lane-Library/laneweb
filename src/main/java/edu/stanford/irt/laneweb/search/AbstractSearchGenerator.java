@@ -12,11 +12,11 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.query = ModelUtil.getString(this.model, Model.QUERY);
+        this.query = ModelUtil.getString(getModel(), Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }
-        String page = ModelUtil.getString(this.model, Model.PAGE, "1");
+        String page = ModelUtil.getString(getModel(), Model.PAGE, "1");
         this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
     }
 }

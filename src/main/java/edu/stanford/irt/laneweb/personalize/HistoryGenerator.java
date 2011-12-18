@@ -17,6 +17,6 @@ public class HistoryGenerator extends AbstractMarshallingGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.history = ModelUtil.getObject(this.model, Model.HISTORY, List.class);
+        this.history = ModelUtil.getObject(getModel(), Model.HISTORY, List.class);
     }
 }

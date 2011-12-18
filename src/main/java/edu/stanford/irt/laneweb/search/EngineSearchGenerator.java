@@ -20,9 +20,9 @@ public class EngineSearchGenerator extends SearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class);
+        this.engines = ModelUtil.getObject(getModel(), Model.ENGINES, Collection.class);
         if (this.engines == null) {
-            String engineList = this.parameterMap.get("engine-list");
+            String engineList = getParameterMap().get("engine-list");
             if (engineList == null) {
                 throw new IllegalArgumentException("null engine-list");
             }

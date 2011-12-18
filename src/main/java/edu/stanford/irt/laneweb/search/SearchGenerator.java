@@ -80,8 +80,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameterMap.get(Model.TIMEOUT));
-        this.wait = ModelUtil.getString(this.model, "wait");
-        this.synchronous = ModelUtil.getString(this.model, Model.SYNCHRONOUS, this.parameterMap.get(Model.SYNCHRONOUS));
+        this.timeout = ModelUtil.getString(getModel(), Model.TIMEOUT, getParameterMap().get(Model.TIMEOUT));
+        this.wait = ModelUtil.getString(getModel(), "wait");
+        this.synchronous = ModelUtil.getString(getModel(), Model.SYNCHRONOUS, getParameterMap().get(Model.SYNCHRONOUS));
     }
 }

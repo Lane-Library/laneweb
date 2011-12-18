@@ -66,7 +66,7 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     }
 
     public SourceValidity getValidity() {
-        return this.source.getValidity();
+        return getSource().getValidity();
     }
 
     public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
@@ -84,16 +84,16 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     public void setConsumer(final XMLConsumer xmlConsumer) {
         if (this.transformerHandler == null) {
             try {
-                this.transformerHandler = this.xsltProcessor.getTransformerHandler(this.source);
+                this.transformerHandler = this.xsltProcessor.getTransformerHandler(getSource());
             } catch (XSLTProcessorException se) {
                 throw new IllegalStateException(se);
             }
         }
         javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
-        for (Entry<String, Object> entry : this.model.entrySet()) {
+        for (Entry<String, Object> entry : getModel().entrySet()) {
             transformer.setParameter(entry.getKey(), entry.getValue().toString());
         }
-        for (Entry<String, String> entry : this.parameterMap.entrySet()) {
+        for (Entry<String, String> entry : getParameterMap().entrySet()) {
             transformer.setParameter(entry.getKey(), entry.getValue());
         }
         final SAXResult result = new SAXResult(xmlConsumer);
@@ -153,9 +153,9 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
 
     @Override
     protected void initialize() {
-        this.cacheKey = this.source.getURI();
-        if (this.parameterMap.containsKey("cache-key")) {
-            this.cacheKey = this.cacheKey + ";" + this.parameterMap.get("cache-key");
+    	String key = getSource().getURI();
+        if (getParameterMap().containsKey("cache-key")) {
+            this.cacheKey = this.cacheKey + ";" + getParameterMap().get("cache-key");
         }
     }
 }

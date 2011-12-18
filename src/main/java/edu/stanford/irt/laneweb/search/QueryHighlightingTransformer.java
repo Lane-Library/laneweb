@@ -101,7 +101,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        String query = ModelUtil.getString(this.model, Model.QUERY);
+        String query = ModelUtil.getString(getModel(), Model.QUERY);
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }

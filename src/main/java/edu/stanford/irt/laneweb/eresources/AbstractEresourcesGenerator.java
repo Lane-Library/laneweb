@@ -38,11 +38,11 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : ModelUtil.getString(this.model,
+        this.type = getParameterMap().containsKey(Model.TYPE) ? getParameterMap().get(Model.TYPE) : ModelUtil.getString(getModel(),
                 Model.TYPE);
-        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : ModelUtil.getString(
-                this.model, Model.SUBSET);
-        this.alpha = ModelUtil.getString(this.model, Model.ALPHA);
+        this.subset = getParameterMap().containsKey(Model.SUBSET) ? getParameterMap().get(Model.SUBSET) : ModelUtil.getString(
+                getModel(), Model.SUBSET);
+        this.alpha = ModelUtil.getString(getModel(), Model.ALPHA);
         if (this.alpha != null && this.alpha.length() > 1) {
             if ("all".equals(this.alpha)) {
                 this.alpha = null;
@@ -50,11 +50,11 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
                 this.alpha = this.alpha.substring(0, 1);
             }
         }
-        this.mesh = ModelUtil.getString(this.model, Model.MESH);
+        this.mesh = ModelUtil.getString(getModel(), Model.MESH);
         if (this.mesh != null) {
             this.mesh = this.mesh.toLowerCase();
         }
-        String page = ModelUtil.getString(this.model, Model.PAGE, "1");
+        String page = ModelUtil.getString(getModel(), Model.PAGE, "1");
         this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
     }
 }

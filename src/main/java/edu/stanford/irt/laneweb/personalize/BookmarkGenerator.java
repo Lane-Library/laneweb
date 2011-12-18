@@ -44,12 +44,12 @@ public class BookmarkGenerator extends AbstractMarshallingGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.bookmarks = ModelUtil.getObject(this.model, Model.BOOKMARKS, List.class);
-//        this.editing = ModelUtil.getString(this.model, Model.REQUEST_URI).endsWith("edit-bookmarks.html");
-//        this.position = Integer.parseInt(ModelUtil.getString(this.model, "bookmarks:position", "0"));
-//        this.action = ModelUtil.getString(this.model, "bookmarks:action");
-//        this.label = ModelUtil.getString(this.model, "bookmarks:label");
-//        this.url = ModelUtil.getString(this.model, "bookmarks:url");
-//        this.sunetid = ModelUtil.getString(this.model, Model.SUNETID);
+        this.bookmarks = ModelUtil.getObject(getModel(), Model.BOOKMARKS, List.class);
+//        this.editing = ModelUtil.getString(getModel(), Model.REQUEST_URI).endsWith("edit-bookmarks.html");
+//        this.position = Integer.parseInt(ModelUtil.getString(getModel(), "bookmarks:position", "0"));
+//        this.action = ModelUtil.getString(getModel(), "bookmarks:action");
+//        this.label = ModelUtil.getString(getModel(), "bookmarks:label");
+//        this.url = ModelUtil.getString(getModel(), "bookmarks:url");
+//        this.sunetid = ModelUtil.getString(getModel(), Model.SUNETID);
     }
 }

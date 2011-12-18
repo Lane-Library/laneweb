@@ -60,7 +60,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.query = ModelUtil.getString(this.model, Model.QUERY);
+        this.query = ModelUtil.getString(getModel(), Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }

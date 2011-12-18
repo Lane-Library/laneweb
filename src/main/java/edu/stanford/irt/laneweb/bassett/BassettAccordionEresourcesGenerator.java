@@ -23,6 +23,6 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
 
     @Override
     protected void initialize() {
-        this.query = ModelUtil.getString(this.model, Model.QUERY, "bassett");
+        this.query = ModelUtil.getString(getModel(), Model.QUERY, "bassett");
     }
 }

@@ -37,9 +37,9 @@ public class ResourceSearchGenerator extends SearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.resources = ModelUtil.getObject(this.model, Model.RESOURCES, Collection.class);
+        this.resources = ModelUtil.getObject(getModel(), Model.RESOURCES, Collection.class);
         if (this.resources == null) {
-            String resourceList = this.parameterMap.get("resource-list");
+            String resourceList = getParameterMap().get("resource-list");
             if (resourceList == null) {
                 throw new IllegalArgumentException("null resource-list");
             }

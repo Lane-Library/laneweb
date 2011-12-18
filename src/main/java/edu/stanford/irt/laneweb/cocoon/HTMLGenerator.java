@@ -41,8 +41,8 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
         parser.setContentHandler(this.xmlConsumer);
         InputSource inputSource = new InputSource();
         try {
-            inputSource.setByteStream(this.source.getInputStream());
-            inputSource.setSystemId(this.source.getURI());
+            inputSource.setByteStream(getSource().getInputStream());
+            inputSource.setSystemId(getSource().getURI());
             parser.parse(inputSource);
         } finally {
             if (inputSource.getByteStream() != null) {
@@ -60,7 +60,7 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
      *         not cacheable.
      */
     public java.io.Serializable getKey() {
-        return this.source.getURI();
+        return getSource().getURI();
     }
 
     /**
@@ -71,6 +71,6 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
      *         component is currently not cacheable.
      */
     public SourceValidity getValidity() {
-        return this.source.getValidity();
+        return getSource().getValidity();
     }
 }

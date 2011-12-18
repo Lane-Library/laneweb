@@ -34,7 +34,7 @@ public class DescribeGenerator extends AbstractMetasearchGenerator {
     // because query might be null which throws an exception in the parent
     // class.
     protected void initialize() {
-        this.query = this.parameterMap.get(Model.QUERY);
-        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, String[].class, NO_ENGINES);
+        this.query = getParameterMap().get(Model.QUERY);
+        this.engines = ModelUtil.getObject(getModel(), Model.ENGINES, String[].class, NO_ENGINES);
     }
 }

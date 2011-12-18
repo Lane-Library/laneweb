@@ -51,6 +51,7 @@ public class LanewebEnvironment implements Environment {
         throw new UnsupportedOperationException();
     }
 
+    //used in PipelineNode.invoke()
     public Object getAttribute(final String name) {
         return null;
     }
@@ -73,24 +74,28 @@ public class LanewebEnvironment implements Environment {
         return this.outputStream;
     }
 
+    //used in InvokeContext.getInternalPipelineDescription(), PipelineNode.invoke()
     public String getURI() {
         return null;
     }
 
+    //used in InvokeContext.getInternalPipelineDescription(), PipelineNode.invoke()
     public String getURIPrefix() {
         return null;
     }
 
+    //used in AggregateNode.invoke(), also other pipeline nodes but not really.
     public String getView() {
         return null;
     }
 
+    //used in PipelineNode.invoke(), ErrorHandlerHelper.prepareErrorHandler(), SerializeNode.invoke()
     public boolean isExternal() {
         return this.isExternal;
     }
 
+    //used in ErrorHandlerHelper.prepareErrorHandler(), maybe can do without this?
     public boolean isInternalRedirect() {
-//        throw new UnsupportedOperationException();
         return false;
     }
 
@@ -115,6 +120,7 @@ public class LanewebEnvironment implements Environment {
     }
 
     public void setContentType(final String mimeType) {
+    	throw new UnsupportedOperationException();
     }
 
     public void setHttpServletRequest(final HttpServletRequest request) {
@@ -132,7 +138,8 @@ public class LanewebEnvironment implements Environment {
     public void setServletContext(final ServletContext servletContext) {
         throw new UnsupportedOperationException();
     }
-
+    
+    //used in SerializeNode.invoke()
     public void setStatus(final int statusCode) {
     }
 

@@ -114,7 +114,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     @Override
     protected void initialize() {
         super.initialize();
-        String name = this.parameterMap.get("elementName");
+        String name = getParameterMap().get("elementName");
         if (name != null) {
             this.elementName = name;
         }

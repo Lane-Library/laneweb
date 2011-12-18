@@ -100,10 +100,10 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
     @SuppressWarnings("unchecked")
     protected void initialize() {
         super.initialize();
-        this.timeout = ModelUtil.getString(this.model, "timeout", this.parameterMap.get("timeout"));
-        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
+        this.timeout = ModelUtil.getString(getModel(), "timeout", getParameterMap().get("timeout"));
+        this.engines = ModelUtil.getObject(getModel(), Model.ENGINES, Collection.class, Collections.<String> emptyList());
         if (this.engines.size() == 0) {
-            String engineList = this.parameterMap.get("engine-list");
+            String engineList = getParameterMap().get("engine-list");
             if (engineList != null) {
                 this.engines = new LinkedList<String>();
                 for (StringTokenizer st = new StringTokenizer(engineList, ","); st.hasMoreTokens();) {
