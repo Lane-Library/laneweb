@@ -4,6 +4,7 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="expires">
+            <map:parameter name="cache-key" value="{request-uri}"/>
             <map:match pattern="highly-accessed-articles.xml" type="wildcard">
                 <map:generate type="file" src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml"/>
                 <map:transform src="resources/xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>

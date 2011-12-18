@@ -186,6 +186,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="expires">
+            <map:parameter name="cache-key" value="{request-uri}"/>
             <map:match pattern="ncbi-rss2html/**" type="wildcard">
                 <map:generate type="file" src="{1}"/>
                 <map:transform type="textNodeParser">
