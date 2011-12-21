@@ -109,6 +109,8 @@ public interface Model {
 
     String TITLE = "title";
 
+    String TODAYS_HOURS = "todays-hours";
+    
     String TYPE = "type";
 
     String UNIVID = "univid";

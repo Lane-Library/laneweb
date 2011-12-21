@@ -19,6 +19,7 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"/>
             </list>
         </property>
     </bean>
@@ -65,6 +66,11 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"
         class="edu.stanford.irt.laneweb.servlet.binding.LiveChatScheduleBinder"/>
+
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"
+        class="edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder">
+        <property name="hoursPath" value="/includes/hours.xml"/>
+    </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"
         class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks">
