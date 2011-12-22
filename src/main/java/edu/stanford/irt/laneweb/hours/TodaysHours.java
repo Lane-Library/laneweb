@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.hours;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,7 +31,7 @@ public class TodaysHours {
             throw new IllegalArgumentException("null hoursPath");
         }
         if (null == this.hoursFileResource) {
-            this.hoursFileResource = new FileSystemResource(new File(hoursPath));
+            this.hoursFileResource = new FileSystemResource(hoursPath);
         }
         updateHoursMap();
     }

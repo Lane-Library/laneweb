@@ -4,13 +4,14 @@ import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.model.Model;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class TodaysHoursBinder implements DataBinder {
 
-    private TodaysHours hours;
+    private HashMap<String, TodaysHours> hours = new HashMap<String, TodaysHours>();
 
     private String hoursPath;
 
@@ -19,11 +20,12 @@ public class TodaysHoursBinder implements DataBinder {
         if (null == this.hoursPath) {
             throw new IllegalArgumentException("null hoursPath");
         }
-        if (null == this.hours) {
+        String basePath = request.getAttribute(Model.BASE_PATH).toString();
+        if (null == this.hours.get(basePath)) {
             URL contentBase = (URL) request.getAttribute(Model.CONTENT_BASE);
-            this.hours = new TodaysHours(contentBase.getPath() + this.hoursPath);
+            this.hours.put(basePath, new TodaysHours(contentBase.getPath() + this.hoursPath));
         }
-        model.put(Model.TODAYS_HOURS, this.hours.toString());
+        model.put(Model.TODAYS_HOURS, this.hours.get(basePath).toString());
     }
 
     public void setHoursPath(final String hoursPath) {
