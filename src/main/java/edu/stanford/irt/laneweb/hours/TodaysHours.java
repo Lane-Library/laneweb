@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +19,9 @@ public class TodaysHours {
 
     private static final String UNKNOWN = "??";
 
-    private HashMap<String, String> daysMap = new HashMap<String, String>();
+    private Map<String, String> daysMap = new HashMap<String, String>();
 
-    private Resource hoursFileResource;
+    private Resource hoursFileResource = null;
 
     private long hoursLastModified = 0;
 
@@ -30,9 +31,7 @@ public class TodaysHours {
         if (null == hoursPath) {
             throw new IllegalArgumentException("null hoursPath");
         }
-        if (null == this.hoursFileResource) {
-            this.hoursFileResource = new FileSystemResource(hoursPath);
-        }
+        this.hoursFileResource = new FileSystemResource(hoursPath);
         updateHoursMap();
     }
 

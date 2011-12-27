@@ -19,6 +19,8 @@ public class StreamDaysMapping extends HashMap<String, String> {
 
     private static final DocumentBuilderFactory FACTORY = DocumentBuilderFactory.newInstance();
 
+    private static final Logger LOG = LoggerFactory.getLogger(StreamDaysMapping.class);
+
     private static final long serialVersionUID = 1L;
 
     private static final String STRIPPABLE_MINUTES = ":00";
@@ -32,8 +34,6 @@ public class StreamDaysMapping extends HashMap<String, String> {
     private static final String TAG_DESCRIPTION = "description";
 
     private static final String TAG_LABEL = "label";
-
-    private final Logger log = LoggerFactory.getLogger(StreamDaysMapping.class);
 
     public StreamDaysMapping(final InputStream inputStream) {
         try {
@@ -56,17 +56,15 @@ public class StreamDaysMapping extends HashMap<String, String> {
                         value = day.getElementsByTagName(TAG_DESCRIPTION).item(0).getTextContent();
                         value = value.replaceAll(STRIPPABLE_MINUTES, "");
                     }
-                    if (null != key && null != value) {
-                        super.put(key, value);
-                    }
+                    super.put(key, value);
                 }
             }
         } catch (ParserConfigurationException e) {
-            this.log.error("error parsing hours file", e);
+            LOG.error("error parsing hours file", e);
         } catch (SAXException e) {
-            this.log.error("error parsing hours file", e);
+            LOG.error("error parsing hours file", e);
         } catch (IOException e) {
-            this.log.error("IO error while parsing hours file", e);
+            LOG.error("IO error while parsing hours file", e);
         }
     }
 }
