@@ -13,10 +13,6 @@ import org.springframework.core.io.Resource;
 
 public class TodaysHours {
 
-    private static final SimpleDateFormat TODAYS_DATE_FORMAT = new SimpleDateFormat("MMM d");
-
-    private static final SimpleDateFormat TODAYS_DAY_FORMAT = new SimpleDateFormat("EEEE");
-
     private static final String UNKNOWN = "??";
 
     private Map<String, String> daysMap = new HashMap<String, String>();
@@ -27,12 +23,15 @@ public class TodaysHours {
 
     private final Logger log = LoggerFactory.getLogger(TodaysHours.class);
 
+    private final SimpleDateFormat todaysDateFormat = new SimpleDateFormat("MMM d");
+
+    private final SimpleDateFormat todaysDayFormat = new SimpleDateFormat("EEEE");
+
     public TodaysHours(final String hoursPath) {
         if (null == hoursPath) {
             throw new IllegalArgumentException("null hoursPath");
         }
         this.hoursFileResource = new FileSystemResource(hoursPath);
-        updateHoursMap();
     }
 
     @Override
@@ -49,13 +48,11 @@ public class TodaysHours {
         } else {
             today = date;
         }
-        synchronized (TODAYS_DATE_FORMAT) {
-            todaysDate = TODAYS_DATE_FORMAT.format(today);
+        synchronized (this) {
+            todaysDate = this.todaysDateFormat.format(today);
+            todaysDay = this.todaysDayFormat.format(today);
+            updateHoursMap();
         }
-        synchronized (TODAYS_DAY_FORMAT) {
-            todaysDay = TODAYS_DAY_FORMAT.format(today);
-        }
-        updateHoursMap();
         if (this.daysMap.containsKey(todaysDate)) {
             return this.daysMap.get(todaysDate);
         } else if (this.daysMap.containsKey(todaysDay)) {
@@ -64,7 +61,7 @@ public class TodaysHours {
         return UNKNOWN;
     }
 
-    private synchronized void updateHoursMap() {
+    private void updateHoursMap() {
         try {
             if (this.hoursFileResource.lastModified() > this.hoursLastModified) {
                 this.hoursLastModified = this.hoursFileResource.lastModified();
