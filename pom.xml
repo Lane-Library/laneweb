@@ -486,6 +486,10 @@
                 	<artifactId>cocoon-store-impl</artifactId>
                 	<groupId>org.apache.cocoon</groupId>
                 </exclusion>
+                <exclusion>
+                	<artifactId>cocoon-expression-language-impl</artifactId>
+                	<groupId>org.apache.cocoon</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -658,22 +662,22 @@
             <artifactId>spring-aop</artifactId>
             <groupId>org.springframework</groupId>
             <scope>runtime</scope>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-beans</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-core</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-ldap-core</artifactId>
@@ -703,22 +707,22 @@
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
             <scope>test</scope>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-webmvc</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -734,7 +738,7 @@
         <dependency>
         	<groupId>org.springframework</groupId>
         	<artifactId>spring-oxm</artifactId>
-        	<version>3.0.6.RELEASE</version>
+        	<version>3.0.7.RELEASE</version>
         </dependency>
     </dependencies>
 </project>
