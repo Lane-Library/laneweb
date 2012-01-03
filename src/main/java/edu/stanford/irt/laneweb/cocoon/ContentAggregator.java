@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
 
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.sitemap.DefaultContentAggregator;
 import org.apache.cocoon.xml.XMLUtils;
@@ -19,10 +18,7 @@ public class ContentAggregator extends DefaultContentAggregator {
     }
 
     @Override
-    public void generate() throws IOException, SAXException, ProcessingException {
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug("Generating aggregated content");
-        }
+    public void generate() throws IOException, SAXException {
         this.contentHandler.startDocument();
         startElem(this.rootElement);
         for (int i = 0; i < this.parts.size(); i++) {
@@ -54,7 +50,6 @@ public class ContentAggregator extends DefaultContentAggregator {
         }
         endElem(this.rootElement);
         this.contentHandler.endDocument();
-        getLogger().debug("Finished aggregating content");
     }
 
     /**

@@ -10,8 +10,6 @@ import javax.xml.xpath.XPathFactory;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.excalibur.source.Source;
@@ -24,7 +22,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.cocoon.ContentAggregator;
 
-public class ClassesAggregator extends ContentAggregator implements CacheableProcessingComponent {
+public class ClassesAggregator extends ContentAggregator {
 
     private String detailClasseUrl = "http://onlineregistrationcenter.com/registerxml.asp?m=257&c=";
 
@@ -36,7 +34,7 @@ public class ClassesAggregator extends ContentAggregator implements CacheablePro
     }
 
     @Override
-    public void generate() throws IOException, ProcessingException, SAXException {
+    public void generate() throws IOException, SAXException {
         Source source = this.resolver.resolveURI(this.src);
         InputSource domContent = new InputSource(source.getInputStream());
         domContent.setSystemId(source.getURI());
