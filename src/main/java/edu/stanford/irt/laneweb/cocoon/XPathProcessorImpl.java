@@ -8,15 +8,26 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import javax.xml.xpath.XPathFactoryConfigurationException;
 
 import org.apache.excalibur.xml.xpath.PrefixResolver;
 import org.apache.excalibur.xml.xpath.XPathProcessor;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class XPathProcessorImpl implements XPathProcessor {
 
-    private XPathFactory factory = XPathFactory.newInstance();
+    private XPathFactory factory;
+    
+    public XPathProcessorImpl() {
+        try {
+            this.factory = XPathFactory.newInstance(XPathFactory.DEFAULT_OBJECT_MODEL_URI,"com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl", null);
+        } catch (XPathFactoryConfigurationException e) {
+            throw new LanewebException(e);
+        }
+    }
 
     public boolean evaluateAsBoolean(final Node contextNode, final String str) {
         return (Boolean) evaluate(contextNode, str, XPathConstants.BOOLEAN, null);
@@ -59,7 +70,10 @@ public class XPathProcessorImpl implements XPathProcessor {
     }
 
     private Object evaluate(final Node node, final String str, final QName returnType, final PrefixResolver resolver) {
-        XPath xpath = this.factory.newXPath();
+        XPath xpath = null;
+        synchronized(this.factory) {
+            xpath = this.factory.newXPath();
+        }
         if (null != resolver) {
             xpath.setNamespaceContext(new NamespaceContext() {
 
