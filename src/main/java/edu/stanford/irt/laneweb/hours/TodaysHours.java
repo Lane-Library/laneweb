@@ -42,13 +42,19 @@ public class TodaysHours {
 
     public String toString(final Date date) {
         Date today;
+        String todaysDate;
+        String todaysDay;
         if (null == date) {
             today = new Date();
         } else {
             today = date;
         }
-        String todaysDate = TODAYS_DATE_FORMAT.format(today);
-        String todaysDay = TODAYS_DAY_FORMAT.format(today);
+        synchronized (TODAYS_DATE_FORMAT) {
+            todaysDate = TODAYS_DATE_FORMAT.format(today);
+        }
+        synchronized (TODAYS_DAY_FORMAT) {
+            todaysDay = TODAYS_DAY_FORMAT.format(today);
+        }
         updateHoursMap();
         if (this.daysMap.containsKey(todaysDate)) {
             return this.daysMap.get(todaysDate);
@@ -58,7 +64,7 @@ public class TodaysHours {
         return UNKNOWN;
     }
 
-    private void updateHoursMap() {
+    private synchronized void updateHoursMap() {
         try {
             if (this.hoursFileResource.lastModified() > this.hoursLastModified) {
                 this.hoursLastModified = this.hoursFileResource.lastModified();
