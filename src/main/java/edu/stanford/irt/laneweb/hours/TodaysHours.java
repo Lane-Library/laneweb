@@ -52,11 +52,11 @@ public class TodaysHours {
             todaysDate = this.todaysDateFormat.format(today);
             todaysDay = this.todaysDayFormat.format(today);
             updateHoursMap();
-        }
-        if (this.daysMap.containsKey(todaysDate)) {
-            return this.daysMap.get(todaysDate);
-        } else if (this.daysMap.containsKey(todaysDay)) {
-            return this.daysMap.get(todaysDay);
+            if (this.daysMap.containsKey(todaysDate)) {
+                return this.daysMap.get(todaysDate);
+            } else if (this.daysMap.containsKey(todaysDay)) {
+                return this.daysMap.get(todaysDay);
+            }
         }
         return UNKNOWN;
     }

@@ -4,6 +4,7 @@ import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.model.Model;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class TodaysHoursBinder implements DataBinder {
 
-    private HashMap<String, TodaysHours> hours = new HashMap<String, TodaysHours>();
+    private Map<String, TodaysHours> hours = Collections.synchronizedMap(new HashMap<String, TodaysHours>());
 
     private String hoursPath;
 
