@@ -1,4 +1,4 @@
-<ehcache>
+<ehcache name="laneweb">
     
     <cache
         name="cocoon-ehcache"
