@@ -148,7 +148,6 @@
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
         class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
         scope="prototype">
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg>
@@ -161,7 +160,6 @@
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"
         class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
         scope="prototype">
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg>
