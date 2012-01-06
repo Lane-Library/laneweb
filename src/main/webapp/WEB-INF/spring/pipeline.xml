@@ -147,24 +147,29 @@
 
     <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"
         class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
-        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
                 <property name="transformerFactoryClass" value="net.sf.saxon.TransformerFactoryImpl"/>
             </bean>
         </constructor-arg>
+        <constructor-arg ref="javax.xml.transform.URIResolver"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
 
     <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"
         class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
-        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
                 <property name="transformerFactoryClass" value="net.sf.joost.trax.TransformerFactoryImpl"/>
             </bean>
         </constructor-arg>
+        <constructor-arg ref="javax.xml.transform.URIResolver"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
+    </bean>
+    
+    <bean id="javax.xml.transform.URIResolver"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebURIResolver">
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/exception"
