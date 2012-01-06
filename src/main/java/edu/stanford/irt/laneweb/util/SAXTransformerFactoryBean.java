@@ -10,19 +10,16 @@ public class SAXTransformerFactoryBean implements FactoryBean<SAXTransformerFact
 
     private SAXTransformerFactory factory;
 
-    @Override
     public SAXTransformerFactory getObject() throws Exception {
         return this.factory;
     }
 
-    @Override
     public Class<?> getObjectType() {
         return SAXTransformerFactory.class;
     }
 
-    @Override
     public boolean isSingleton() {
-        return false;
+        return true;
     }
     
     public void setTransformerFactoryClass(String factoryClass) {

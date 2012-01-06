@@ -11,8 +11,6 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.transformation.Transformer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.xml.xslt.XSLTProcessor;
-import org.apache.excalibur.xml.xslt.XSLTProcessorException;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
@@ -23,7 +21,7 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
 
     private TransformerHandler transformerHandler;
 
-    private XSLTProcessor xsltProcessor;
+    private TraxProcessor traxProcessor;
 
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
         this.transformerHandler.characters(ch, start, length);
@@ -83,11 +81,7 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
 
     public void setConsumer(final XMLConsumer xmlConsumer) {
         if (this.transformerHandler == null) {
-            try {
-                this.transformerHandler = this.xsltProcessor.getTransformerHandler(getSource());
-            } catch (XSLTProcessorException se) {
-                throw new IllegalStateException(se);
-            }
+            this.transformerHandler = this.traxProcessor.getTransformerHandler(getSource());
         }
         javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
         for (Entry<String, Object> entry : getModel().entrySet()) {
@@ -113,8 +107,8 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         this.transformerHandler.setSystemId(systemID);
     }
 
-    public void setXsltProcessor(final XSLTProcessor xsltProcessor) {
-        this.xsltProcessor = xsltProcessor;
+    public void setTraxProcessor(final TraxProcessor traxProcessor) {
+        this.traxProcessor = traxProcessor;
     }
 
     public void skippedEntity(final String name) throws SAXException {
@@ -153,7 +147,7 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
 
     @Override
     protected void initialize() {
-    	String key = getSource().getURI();
+    	this.cacheKey = getSource().getURI();
         if (getParameterMap().containsKey("cache-key")) {
             this.cacheKey = this.cacheKey + ";" + getParameterMap().get("cache-key");
         }

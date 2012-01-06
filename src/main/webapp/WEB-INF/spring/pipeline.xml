@@ -88,7 +88,7 @@
     <bean name="org.apache.cocoon.transformation.Transformer/saxon"
         class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
         scope="prototype">
-        <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"/>
+        <property name="traxProcessor" ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"/>
     </bean>
 
      <bean name="org.apache.cocoon.transformation.Transformer/textNodeParser"
@@ -99,7 +99,7 @@
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
         class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
         scope="prototype">
-        <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"/>
+        <property name="traxProcessor" ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
@@ -145,9 +145,8 @@
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
     </bean>
 
-    <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
-        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
-        scope="prototype">
+    <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"
+        class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg>
@@ -157,9 +156,8 @@
         </constructor-arg>
     </bean>
 
-    <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"
-        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
-        scope="prototype">
+    <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"
+        class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg>

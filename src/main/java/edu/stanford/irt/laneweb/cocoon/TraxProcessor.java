@@ -4,18 +4,18 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.xml.transform.ErrorListener;
-import javax.xml.transform.Result;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.Templates;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.excalibur.source.Source;
+import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceResolver;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.store.Store;
@@ -23,19 +23,10 @@ import org.apache.excalibur.xml.xslt.XSLTProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
-import org.xml.sax.XMLFilter;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
-
-    private static class TransformerHandlerAndValidity extends XSLTProcessor.TransformerHandlerAndValidity {
-
-        protected TransformerHandlerAndValidity(final TransformerHandler transformerHandler,
-                final SourceValidity transformerValidity) {
-            super(transformerHandler, transformerValidity);
-        }
-    }
+public class TraxProcessor implements URIResolver {
 
     private static class TraxErrorHandler implements ErrorListener {
 
@@ -71,17 +62,13 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
     /** The trax TransformerFactory this component uses */
     private SAXTransformerFactory factory;
 
-    /** Hold the System ID of the main/base stylesheet */
-    private String id;
-
     /** Resolver used to resolve XSLT document() calls, imports and includes */
     private SourceResolver resolver;
 
     /** The store service instance */
     private Store store;
 
-    public XSLTProcessorImpl(final Store store, final SourceResolver sourceResolver,
-            final SAXTransformerFactory factory) {
+    public TraxProcessor(final Store store, final SourceResolver sourceResolver, final SAXTransformerFactory factory) {
         this.store = store;
         this.resolver = sourceResolver;
         this.factory = factory;
@@ -89,46 +76,29 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
         this.factory.setErrorListener(this.errorHandler);
     }
 
-    /**
-     * @see org.apache.excalibur.xml.xslt.XSLTProcessor#getTransformerHandler(org.apache.excalibur.source.Source)
-     */
     public TransformerHandler getTransformerHandler(final Source stylesheet) {
-        XSLTProcessor.TransformerHandlerAndValidity validity = getTransformerHandlerAndValidity(stylesheet);
-        return validity.getTransfomerHandler();
-    }
-
-    /**
-     * @see org.apache.excalibur.xml.xslt.XSLTProcessor#getTransformerHandler(org.apache.excalibur.source.Source,
-     *      org.xml.sax.XMLFilter)
-     */
-    public TransformerHandler getTransformerHandler(final Source stylesheet, final XMLFilter filter) {
-        throw new UnsupportedOperationException();
-    }
-
-    public TransformerHandlerAndValidity getTransformerHandlerAndValidity(final Source stylesheet) {
         try {
-            this.id = stylesheet.getURI();
-            TransformerHandlerAndValidity handlerAndValidity = getTemplates(stylesheet, this.id);
-            if (null == handlerAndValidity) {
-                SourceValidity validity = stylesheet.getValidity();
-                Templates template = this.factory.newTemplates(new StreamSource(stylesheet.getInputStream(), this.id));
-                putTemplates(template, stylesheet, this.id);
-                TransformerHandler handler = this.factory.newTransformerHandler(template);
-                Transformer transformer = handler.getTransformer();
-                transformer.setErrorListener(this.errorHandler);
-                transformer.setURIResolver(this);
-                handlerAndValidity = new TransformerHandlerAndValidity(handler, validity);
+            String uri = stylesheet.getURI();
+            TransformerHandler handler = getValidHandlerFromStore(stylesheet, uri);
+            if (handler == null) {
+                Templates templates = this.factory.newTemplates(new StreamSource(stylesheet.getInputStream(), uri));
+                putTemplates(templates, stylesheet, uri);
+                handler = prepareHandlerFromTemplates(templates);
             }
-            return handlerAndValidity;
+            return handler;
         } catch (IOException e) {
             throw new LanewebException(e);
         } catch (TransformerException e) {
             throw new LanewebException(e);
         }
     }
-
-    public TransformerHandlerAndValidity getTransformerHandlerAndValidity(final Source stylesheet, final XMLFilter filter) {
-        throw new UnsupportedOperationException();
+    
+    private TransformerHandler prepareHandlerFromTemplates(Templates templates) throws TransformerConfigurationException {
+        TransformerHandler handler = this.factory.newTransformerHandler(templates);
+        Transformer transformer = handler.getTransformer();
+        transformer.setErrorListener(this.errorHandler);
+        transformer.setURIResolver(this);
+        return handler;
     }
 
     /**
@@ -178,14 +148,6 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
         }
     }
 
-    public void setTransformerFactory(final String classname) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void transform(final Source source, final Source stylesheet, final Parameters params, final Result result) {
-        throw new UnsupportedOperationException();
-    }
-
     /**
      * Return a new <code>InputSource</code> object that uses the
      * <code>InputStream</code> and the system ID of the <code>Source</code>
@@ -201,11 +163,12 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
         return inputSource;
     }
 
-    private TransformerHandlerAndValidity getTemplates(final Source stylesheet, final String id) throws IOException, TransformerException {
+    private TransformerHandler getValidHandlerFromStore(final Source stylesheet, final String uri) throws IOException,
+            TransformerException {
         // we must augment the template ID with the factory classname since one
         // transformer implementation cannot handle the instances of a
         // template created by another one.
-        String key = "XSLTTemplate: " + id + '(' + this.factory.getClass().getName() + ')';
+        String key = "XSLTTemplate: " + uri + '(' + this.factory.getClass().getName() + ')';
         SourceValidity newValidity = stylesheet.getValidity();
         // Only stylesheets with validity are stored
         if (newValidity == null) {
@@ -215,12 +178,12 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
         }
         // Stored is an array of the templates and the caching time and list of
         // includes
-        Object[] templateAndValidityAndIncludes = (Object[]) this.store.get(key);
-        if (templateAndValidityAndIncludes == null) {
+        Object[] templateAndValidity = (Object[]) this.store.get(key);
+        if (templateAndValidity == null) {
             // Templates not found in cache
             return null;
         }
-        SourceValidity storedValidity = (SourceValidity) templateAndValidityAndIncludes[1];
+        SourceValidity storedValidity = (SourceValidity) templateAndValidity[1];
         int valid = storedValidity.isValid();
         boolean isValid;
         if (valid == SourceValidity.UNKNOWN) {
@@ -233,21 +196,18 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
             this.store.remove(key);
             return null;
         }
-        TransformerHandler handler = this.factory.newTransformerHandler((Templates) templateAndValidityAndIncludes[0]);
-        Transformer transformer = handler.getTransformer();
-        transformer.setErrorListener(this.errorHandler);
-        transformer.setURIResolver(this);
-        return new TransformerHandlerAndValidity(handler, storedValidity);
+        TransformerHandler handler = prepareHandlerFromTemplates((Templates) templateAndValidity[0]);
+        return handler;
     }
 
     private void putTemplates(final Templates templates, final Source stylesheet, final String id) throws IOException {
         String key = "XSLTTemplate: " + id + '(' + this.factory.getClass().getName() + ')';
         SourceValidity validity = stylesheet.getValidity();
         if (null != validity) {
-            Object[] templateAndValidityAndIncludes = new Object[2];
-            templateAndValidityAndIncludes[0] = templates;
-            templateAndValidityAndIncludes[1] = validity;
-            this.store.store(key, templateAndValidityAndIncludes);
+            Object[] templateAndValidity = new Object[2];
+            templateAndValidity[0] = templates;
+            templateAndValidity[1] = validity;
+            this.store.store(key, templateAndValidity);
         }
     }
 }
