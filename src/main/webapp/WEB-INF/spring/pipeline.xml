@@ -147,22 +147,28 @@
 
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
         class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
-        init-method="initialize"
         scope="prototype">
         <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
-        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+                <property name="transformerFactoryClass" value="net.sf.saxon.TransformerFactoryImpl"/>
+            </bean>
+        </constructor-arg>
     </bean>
 
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"
         class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
-        init-method="initialize"
         scope="prototype">
         <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
-        <property name="transformerFactory" value="net.sf.joost.trax.TransformerFactoryImpl"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+                <property name="transformerFactoryClass" value="net.sf.joost.trax.TransformerFactoryImpl"/>
+            </bean>
+        </constructor-arg>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/exception"
