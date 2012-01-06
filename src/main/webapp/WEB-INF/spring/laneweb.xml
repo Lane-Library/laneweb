@@ -3,20 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="org.apache.cocoon.caching.Cache"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebCache"
-        destroy-method="destroy">
-        <constructor-arg>
-            <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
-        </constructor-arg>
-    </bean>
-
-    <bean name="org.apache.excalibur.store.Store/TransientStore"
-        class="edu.stanford.irt.laneweb.cocoon.store.TransientStore"/>
-
-    <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
-        class="edu.stanford.irt.laneweb.cocoon.XPathProcessorImpl"/>
-
     <bean id="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"
         class="edu.stanford.irt.laneweb.ldap.LDAPDataAccess">
         <property name="subjectSource">
@@ -44,29 +30,78 @@
             </bean>
         </property>
     </bean>
-
-    <bean name="org.apache.cocoon.generation.Generator/file"
-        class="edu.stanford.irt.laneweb.cocoon.URLGenerator" scope="prototype">
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.generation.Generator/html"
-        class="edu.stanford.irt.laneweb.cocoon.HTMLGenerator" scope="prototype"/>
-
-    <bean name="org.apache.cocoon.generation.Generator/link-scan"
-        class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator" scope="prototype">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+    
+    <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>    
+    <bean id="org.apache.cocoon.configuration.Settings" class="edu.stanford.irt.laneweb.cocoon.Settings">
+        <property name="tempDir" value="#{contextAttributes['javax.servlet.context.tempdir']}"/>
     </bean>
     
-    <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
-
-    <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
-        class="edu.stanford.irt.laneweb.cocoon.NamespaceFilter" scope="prototype"/>
-
-    <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebXIncludeTransformer" scope="prototype">
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
-        <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
+    <bean name="org.apache.cocoon.core.xml.SAXParser"
+        class="org.apache.cocoon.core.xml.impl.JaxpSAXParser">
+        <property name="validate" value="false"/>
     </bean>
+    
+    <bean id="org.apache.avalon.framework.service.ServiceManager"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceManager"/>
+    
+    <bean id="org.apache.cocoon.core.container.spring.logger.Log"
+        class="org.apache.cocoon.core.container.spring.logger.LoggerFactoryBean"/>
+    
+    <bean id="org.apache.cocoon.caching.Cache"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebCache"
+        destroy-method="destroy">
+        <constructor-arg>
+            <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean name="org.apache.excalibur.store.Store/TransientStore"
+        class="edu.stanford.irt.laneweb.cocoon.store.TransientStore"/>
+    
+    <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
+        class="edu.stanford.irt.laneweb.cocoon.XPathProcessorImpl"/>
+    
+    
+    <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
+        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModel">
+    </bean>
+    
+    <bean id="org.apache.cocoon.environment.Environment"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebEnvironment"
+        scope="request">
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"
+        class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+                <property name="transformerFactoryClass" value="net.sf.saxon.TransformerFactoryImpl"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg ref="javax.xml.transform.URIResolver"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"
+        class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+                <property name="transformerFactoryClass" value="net.sf.joost.trax.TransformerFactoryImpl"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg ref="javax.xml.transform.URIResolver"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
+    </bean>
+    
+    <bean id="javax.xml.transform.URIResolver"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebURIResolver">
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+    </bean>
+    
+    <bean id="javax.servlet.ServletContext"
+        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
+    
+    <bean id="org.apache.excalibur.xmlizer.XMLizer"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
 
 </beans>

@@ -9,7 +9,6 @@
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"
-        class="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"
         scope="prototype"
         abstract="true">
         <property name="collectionManager"

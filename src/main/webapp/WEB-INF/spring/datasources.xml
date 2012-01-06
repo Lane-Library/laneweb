@@ -8,7 +8,8 @@
         <property name="jndiName" value="java:comp/env/jdbc/eresources"/>
     </bean>
 
-    <bean name="javax.sql.DataSource/voyager" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <bean name="javax.sql.DataSource/voyager"
+        class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/voyager"/>
     </bean>
 

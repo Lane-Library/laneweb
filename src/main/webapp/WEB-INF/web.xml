@@ -15,13 +15,10 @@
             /WEB-INF/spring/bassett.xml
             /WEB-INF/spring/binding.xml
             /WEB-INF/spring/cme.xml
-            /WEB-INF/spring/cocoon.xml
             /WEB-INF/spring/datasources.xml
             /WEB-INF/spring/eresources.xml
             /WEB-INF/spring/history-eresources.xml
             /WEB-INF/spring/laneweb.xml
-            /WEB-INF/spring/merged-search.xml
-            /WEB-INF/spring/model.xml
             /WEB-INF/spring/pipeline.xml
             /WEB-INF/spring/proxy.xml
             /WEB-INF/spring/querymap.xml

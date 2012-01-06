@@ -24,41 +24,50 @@
         </property>
     </bean>
 
-
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"
         class="edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder">
         <property name="ezproxyKey" value="#{contextAttributes['laneweb.context.ezproxy-key']}"/>
     </bean>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"
         class="edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder">
         <property name="parameterName" value="debug"/>
         <property name="modelKey" value="debug"/>
     </bean>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"
         class="edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder">
         <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
     </bean>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"
         class="edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder">
         <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"/>
     </bean>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"
         class="edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder">
         <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
     </bean>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"
         class="edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder">
         <property name="parameterName" value="emrid"/>
         <property name="modelKey" value="emrid"/>
     </bean>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"
         class="edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder"/>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-method"
         class="edu.stanford.irt.laneweb.servlet.binding.RequestMethodDataBinder"/>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"
         class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"
         class="edu.stanford.irt.laneweb.servlet.binding.RequestAttributeDataBinder"/>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"
         class="edu.stanford.irt.laneweb.servlet.binding.ServletContextDataBinder">
         <property name="servletContext" ref="servletContext"/>
