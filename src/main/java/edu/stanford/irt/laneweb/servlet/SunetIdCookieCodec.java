@@ -67,7 +67,7 @@ public class SunetIdCookieCodec {
         }
     }
 
-    private String decrypt(final String codedInput) {
+    private synchronized String decrypt(final String codedInput) {
         try {
             this.cipher.init(Cipher.DECRYPT_MODE, this.desKey);
             byte[] base = Base64.decodeBase64(codedInput.getBytes("UTF-8"));
@@ -84,7 +84,7 @@ public class SunetIdCookieCodec {
         }
     }
 
-    private String encrypt(final String input) {
+    private synchronized String encrypt(final String input) {
         try {
             this.cipher.init(Cipher.ENCRYPT_MODE, this.desKey);
             byte[] cleartext = input.getBytes("UTF-8");
