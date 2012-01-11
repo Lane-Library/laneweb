@@ -103,5 +103,9 @@
     
     <bean id="org.apache.excalibur.xmlizer.XMLizer"
         class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
+    
+    <bean id="org.springframework.oxm.Marshaller"
+        class="org.springframework.oxm.xstream.XStreamMarshaller">
+    </bean>
 
 </beans>

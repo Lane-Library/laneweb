@@ -46,9 +46,11 @@
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/request"
-        class="org.apache.cocoon.generation.RequestGenerator"
-        scope="prototype"/>
+    <bean name="org.apache.cocoon.generation.Generator/parameter-map"
+        class="edu.stanford.irt.laneweb.cocoon.ParameterMapGenerator"
+        scope="prototype">
+        <property name="marshaller" ref="org.springframework.oxm.Marshaller"/>
+    </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
         class="edu.stanford.irt.laneweb.cocoon.ContentAggregator"
