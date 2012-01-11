@@ -5,27 +5,27 @@
     <xsl:variable name="currentYear">
         <xsl:value-of select="year-from-date(current-date())"></xsl:value-of>
     </xsl:variable>
-
-
+    
+    
     <xsl:template match="/lc:classes">
         <html>
             <body>
-                <ul>
+                <div class="module">
+                    <div><xsl:value-of select="$currentYear" /></div>
+                    <ul>
+                        <xsl:for-each-group select="lc:event_data" group-by="lc:event_name">
+                            <xsl:sort select="./lc:event_name/text()"/>
+                            <xsl:for-each select="current-group()[last()]">
+                                <xsl:if test="contains( ./lc:event_dates/lc:start_date/text(), $currentYear )">
+                                    <xsl:call-template name="event_data" />
+                                </xsl:if>
+                            </xsl:for-each>
+                        </xsl:for-each-group>
+                    </ul>
+                </div>
+                <div class="module expandy type1">
                     <div>
-                        <xsl:value-of select="$currentYear" />
-                    </div>
-                    <xsl:for-each-group select="lc:event_data" group-by="lc:event_name">
-                        <xsl:sort select="./lc:event_name/text()"/>
-                        <xsl:for-each select="current-group()[last()]">
-                            <xsl:if test="contains( ./lc:event_dates/lc:start_date/text(), $currentYear )">
-                                <xsl:call-template name="event_data" />
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:for-each-group>
-                </ul>
-                <ul class="sectionMenu expandy">
-                    <li>
-                        <div><xsl:value-of select="$currentYear - 1" /></div>
+                        <div style="background-position:0 1px;padding-left:14px"><xsl:value-of select="$currentYear - 1" /></div>
                         <ul>
                             <xsl:for-each-group select="lc:event_data" group-by="lc:event_name">
                                 <xsl:sort select="./lc:event_name/text()"/>
@@ -36,8 +36,9 @@
                                 </xsl:for-each>
                             </xsl:for-each-group>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+                
             </body>
         </html>
     </xsl:template>
