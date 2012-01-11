@@ -1,31 +1,23 @@
 CACHE MANIFEST
 # ${timestamp}
-/././resources/javascript/mobile/lane-mobile.js?${project.version}
-/././resources/css/mobile/lane-mobile.css?${project.version}
+# uncomment next 2 lines to turn on js, css caching for production
+/././resources/javascript/mobile/lane-mobile.js?${timestamp}
+/././resources/css/mobile/lane-mobile.css?${timestamp}
 /././apple-touch-icon.png
-/././resources/images/mobile/search.png
-/././resources/images/mobile/cancel.png
-/././resources/images/mobile/backButton.png
-/././resources/images/mobile/backButtonBack.png
-/././resources/images/mobile/backButtonBrdr.png
-/././resources/images/mobile/fieldsetBg.png
-/././resources/images/mobile/home.png
-/././resources/images/mobile/lane-favicon.ico
-/././resources/images/mobile/listArrow.png
-/././resources/images/mobile/listArrowSel.png
-/././resources/images/mobile/listBg.png
-/././resources/images/mobile/listGroup.png
-/././resources/images/mobile/loading.gif
-/././resources/images/mobile/pinstripes.png
-/././resources/images/mobile/selection.png
-/././resources/images/mobile/toolbar.png
-/././resources/images/mobile/toolButton.png
+/././resources/images/mobile/ajax-loader.png
+/././resources/images/mobile/clear_search.png
+/././resources/images/mobile/home_btn_bg.png
+/././resources/images/mobile/icon_sprite.png
+/././resources/images/mobile/search_bg.png
+/././resources/images/mobile/link_bg_sprite.png
+/././resources/images/mobile/logo_header_sm.gif
 http://www.google-analytics.com/ga.js
 
 NETWORK:
+#*
 /././m/
 /././apps/
 http://www.google-analytics.com/__utm.gif
 # comment next 2 lines to turn on js, css caching for production
-#/././resources/css/mobile/lane-mobile.css?${project.version}
-#/././resources/javascript/mobile/lane-mobile.js?${project.version}
+#/././resources/css/mobile/lane-mobile.css
+#/././resources/javascript/mobile/lane-mobile.js

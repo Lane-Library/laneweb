@@ -4,8 +4,6 @@
     xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s"
     version="2.0">
     
-    <xsl:param name="page-title"/>
-    
     <xsl:param name="request-uri"/>
     
     <xsl:param name="query-string"/>
@@ -20,30 +18,28 @@
         <xsl:value-of select="concat($request-uri,'?',$consumable-query-string)"/>
     </xsl:variable>
     
-    <xsl:variable name="page-label">
-        <xsl:choose>
-            <xsl:when test="$page-title">
-                <!-- TODO: better way to unencode this? kinda missing cocoon's url-decode -->
-                <xsl:value-of select="replace($page-title,'(%20|\+)',' ')"/>
-            </xsl:when>
-            <xsl:otherwise>Results</xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
 
     <xsl:variable name="searchType">
         <xsl:choose>
-            <xsl:when test="$rid and contains($request-uri,'m/msc')">srid::laneSearch::</xsl:when>
-            <xsl:when test="$rid and contains($request-uri,'m/sc')">srid::pico::</xsl:when>
-            <xsl:when test="contains($request-uri,'m/msc')">sr::laneSearch::</xsl:when>
-            <xsl:when test="contains($request-uri,'m/sc')">sr::pico::</xsl:when>
-            <xsl:otherwise>browse</xsl:otherwise>
+            <xsl:when test="contains($request-uri,'m/search/lane')">lane</xsl:when>
+            <xsl:when test="contains($request-uri,'m/search/clinical')">clinical</xsl:when>
+            <xsl:when test="contains($request-uri,'m/search/ped')">ped</xsl:when>
+            <xsl:when test="contains($request-uri,'m/search/er/type/book')">book</xsl:when>
+            <xsl:when test="contains($request-uri,'m/search/er/type/ej')">journal</xsl:when>
+            <xsl:otherwise>lane</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
 
+    <xsl:variable name="resultsString">
+        <xsl:choose>
+           <xsl:when test="number(/s:resources/@size) = 1">result</xsl:when>
+           <xsl:otherwise>results</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
     <xsl:variable name="moreResultsLimit">10</xsl:variable>
 
@@ -54,15 +50,12 @@
             <xsl:when test="contains($query-string,'rid=')">
                 <xsl:apply-templates select="//s:result[s:id = $rid]" mode="full"/>
             </xsl:when>
-            <!-- fragment for populating "next" content -->
-            <xsl:when test="contains($query-string,'page=')">
-                <xsl:apply-templates select="//s:result" mode="brief"/>
-                <xsl:call-template name="paginationLinks"/>
-            </xsl:when>
             <xsl:otherwise>
-                <ul class="results" id="{$searchType}{$search-terms}" title="{$page-label}">
+                <ul class="results">
                     <li class="rHead">
-                        <xsl:value-of select="format-number(/s:resources/@size, '###,##0')"/> results
+                        <xsl:value-of select="format-number(/s:resources/@size, '###,##0')"/>
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="$resultsString"/>
                         <xsl:if test="string-length($search-terms)">
                             for <strong>  <xsl:value-of select="/s:resources/s:query"/></strong>
                         </xsl:if>
@@ -83,7 +76,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <li>
+        <li rank="{position()}">
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
@@ -97,10 +90,10 @@
             </div>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:resourceId,'pubmed')">
-                    <a href="{concat($base-link,'&amp;page=all&amp;rid=',s:id)}" class="more">abstract</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">abstract</a>
                 </xsl:when>
                 <xsl:when test="s:description">
-                    <a href="{concat($base-link,'&amp;page=all&amp;rid=',s:id)}" class="more">more info</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">more info</a>
                 </xsl:when>
             </xsl:choose>
         </li>
@@ -115,7 +108,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <div class="absInfo" id="{$searchType}{$search-terms}::{$rid}" title="{s:title}">
+        <div class="absInfo">
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
@@ -154,7 +147,7 @@
     </xsl:template>
 
     <xsl:template match="s:result[@type='eresource']" mode="brief">
-        <li>
+        <li rank="{position()}">
             <xsl:choose>
                 <xsl:when
                     test="s:versions/s:version[1]/s:links/s:link[1]/@type = 'getPassword'">
@@ -192,13 +185,13 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:if test="s:description or count(s:versions/s:version) > 1">
-                <a href="{concat($base-link,'&amp;page=all&amp;rid=',s:id)}" class="more">more info</a>
+                <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">more info</a>
             </xsl:if>
         </li>
     </xsl:template>
     
     <xsl:template match="s:result[@type='eresource']" mode="full">
-        <div class="absInfo" id="{$searchType}{$search-terms}::{$rid}" title="{s:title}">
+        <div class="absInfo">
             <xsl:choose>
                 <xsl:when
                     test="s:versions/s:version[1]/s:links/s:link[1]/@type = 'getPassword'">
@@ -337,7 +330,7 @@
         <xsl:param name="title"/>
         <xsl:choose>
             <xsl:when test="$type = 'first'">
-                <a target="_blank" href="{$link/s:url}">
+                <a target="_blank" class="newWindow" href="{$link/s:url}">
                     <xsl:apply-templates select="$title"/>
                 </a>
             </xsl:when>
@@ -444,7 +437,7 @@
     <xsl:template name="paginationLinks">
         <xsl:if test="number(/s:resources/@pages) &gt; 1 and number(/s:resources/@page) &lt; number(/s:resources/@pages) - 1">
             <li class="more resultsNav">
-                <a target="_replace" href="{concat($base-link,'&amp;page=',number(/s:resources/@page) + 2)}">next</a>
+                <a href="{concat($base-link,'&amp;page=',number(/s:resources/@page) + 2)}">next</a>
             </li>
         </xsl:if>
     </xsl:template>

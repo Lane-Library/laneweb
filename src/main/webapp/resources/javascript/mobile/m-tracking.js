@@ -8,7 +8,7 @@ else {
 }
 //_gaq.push(['_setLocalServerMode']);
 _gaq.push(['_setDomainName', '.stanford.edu']);
-_gaq.push(['_setCustomVar', 1, 'ipGroup', LANE.getIpGroup(), 2]);
+_gaq.push(['_setCustomVar', 1, 'ipGroup', $.LANE.ipGroup, 2]);
 _gaq.push(['_trackPageview']);
 
 (function() {
@@ -16,18 +16,28 @@ _gaq.push(['_trackPageview']);
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
-            
+ 
 (function() {
-            
-    LANE.encode = function(value) {
+    if (typeof ($.LANE.tracking) === "undefined") {
+        $.LANE.tracking = {};
+    }
+    
+    $.LANE.tracking.decode = function(value) {
+        if (decodeURIComponent) {
+            return decodeURIComponent(value);
+        }
+        return unescape(value);
+    };
+    
+    $.LANE.tracking.encode = function(value) {
         if (encodeURIComponent) {
             return encodeURIComponent(value);
         }
         return escape(value);
     };
     
-    LANE.track = function(e) {
-        var node = e.srcElement || e.target, basePath;
+    $.LANE.tracking.track = function(e) {
+        var node = e.srcElement || e.target, basePath, label;
         // find parent A for IMG nodes if possible
         if(node.nodeName == 'IMG'){
             while (node && node.nodeName != 'A') {
@@ -38,23 +48,32 @@ _gaq.push(['_trackPageview']);
                 }
             }
         }
-        basePath = LANE.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
-        if (e.type == 'click' && (node.nodeName == 'A'||node.nodeName == 'IMG')) {
-            _gaq.push(['_trackPageview', basePath + LANE.encode(LANE.getTrackingTitle(node))]);
+        basePath = $.LANE.tracking.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
+        if ($(e.target).parent().parent().hasClass('ui-autocomplete')) {
+            // ignore clicks on autocomplete Anchors
+            return;
+        }
+        else if (node.nodeName == 'H4' && node.parentNode.parentNode.id == 'hours') {
+            label = (node.parentNode.parentNode.className == 'expanded') ? "open" : "close";
+            _gaq.push(['_trackPageview', basePath + "hours/" + label]);
+        }
+        else if (e.type == 'click' && (node.nodeName == 'A'||node.nodeName == 'IMG')) {
+            if(node.nodeName == 'A' && $(node).parent().attr('rank')){
+                //TODO: verify that q is correct value here
+                _gaq.push(['_trackEvent', "searchResultClick", $("input[name=q]").val(), node.textContent, parseInt($(node).parent().attr('rank'),10)]);
+            }
+            _gaq.push(['_trackPageview', basePath + $.LANE.tracking.encode($.LANE.tracking.getTrackingTitle(node))]);
         }
         else if (e.type == 'submit' && node.nodeName == 'FORM') {
-            _gaq.push(['_trackPageview', "/search?source="+node.id+"&q="+LANE.encode(node.elements['q'].value)]);
+            _gaq.push(['_trackPageview', "/search?source="+$(e.target).attr('action')+"&"+$(e.target).serialize()]);
         }
-        // inelegant way to track suggestSelect; if laneSearch, also tracks as a search event
-        else if (e.inputElement && node.nodeName == 'LI') {
-            _gaq.push(['_trackPageview', "/suggestSelect/"+e.inputElement.form.id+"/"+e.inputElement.id+"/"+LANE.encode(node.textContent)]);
-            if("laneSearch" == e.inputElement.form.id){
-                _gaq.push(['_trackPageview', "/search?source="+e.inputElement.form.id+"&q="+LANE.encode(node.textContent)]);
-            }
+        // track suggestSelect
+        else if (e.type == 'autocompleteselect') {
+            _gaq.push(['_trackEvent', "suggestSelect", e.target.id, $.LANE.tracking.decode(node.textContent)]);
         }
     };
     
-    LANE.isExternal = function(node) {
+    $.LANE.tracking.isExternal = function(node) {
         if(node.nodeName != 'A'){
             return false;
         }
@@ -64,7 +83,7 @@ _gaq.push(['_trackPageview']);
         return false;
     };
     
-    LANE.getTrackingTitle = function(node) {
+    $.LANE.tracking.getTrackingTitle = function(node) {
         // if there is a title attribute, use that.
         var title = node.title, img, i = 0;
         // next try alt attribute.
@@ -103,3 +122,16 @@ _gaq.push(['_trackPageview']);
         return title;
     };
 })();
+
+$("form").live( "autocompleteselect", function(e, ui) {
+    $.LANE.tracking.track(e);
+});
+$("form").live( "submit", function(e) {
+    $.LANE.tracking.track(e);
+});
+$(document).bind("click", function(e) {
+    $.LANE.tracking.track(e);
+});
+$(document).bind('spellSuggestion spellSuggestionClick', function(e, form, searchTerm, suggestion) {
+    _gaq.push(['_trackEvent', e.type, form.attr('action'), "term->"+searchTerm+"::suggestion->"+suggestion]);
+});

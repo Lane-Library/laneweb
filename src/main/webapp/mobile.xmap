@@ -5,21 +5,13 @@
     <!-- publishable paths for mobile search and browse -->
     <map:pipelines>
         <map:pipeline type="caching">
-            <map:match pattern="index.html" type="wildcard">
-                <map:generate type="html" src="resources/mobile/index.html"/>
-                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-                <map:transform type="namespace-filter"/>
-                <map:transform type="debug"/>
-                <map:serialize type="html5"/>
-            </map:match>
             <!-- EResources browse -->
-            <map:match pattern="er/browse/type/*/*" type="wildcard">
+            <map:match pattern="er/browse/type/*" type="wildcard">
                 <map:generate type="er-browse">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="{rid}"/>
-                    <map:parameter name="page-title" value="{2}"/>
                 </map:transform>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
@@ -29,13 +21,12 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="er/browse/subset/*/*" type="wildcard">
+            <map:match pattern="er/browse/subset/*" type="wildcard">
                 <map:generate type="er-browse">
                     <map:parameter name="subset" value="{1}"/>
                 </map:generate>
                 <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="{rid}"/>
-                    <map:parameter name="page-title" value="{2}"/>
                 </map:transform>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
@@ -47,15 +38,8 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
-            <map:match pattern="persistentlogin.html" type="wildcard">
-                <map:generate type="html" src="resources/mobile/persistentlogin.html"/>
-                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-                <map:transform type="namespace-filter"/>
-                <map:transform type="debug"/>
-                <map:serialize type="html5"/>
-            </map:match>
             <!-- Merged Search Content (er and metasearch) -->
-            <map:match pattern="msc/**" type="wildcard">
+            <map:match pattern="search/lane/**" type="wildcard">
                 <map:generate type="file" src="apps:/search/merged/xml/{1}"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
@@ -67,7 +51,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <!-- Search Content (metasearch) -->
-            <map:match pattern="sc/**" type="wildcard">
+            <map:match pattern="search/content/(.*)" type="regexp">
                 <map:generate type="file" src="apps:/search/content/xml/{1}"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
@@ -78,24 +62,38 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- text version of laneweb content -->
-            <map:match pattern="lc2txt/**.html" type="wildcard">
-                <map:generate type="file" src="content:/{1}.html"/>
-                <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+            <!-- EResources search -->
+            <map:match pattern="search/er" type="wildcard">
+                <map:generate type="er-search"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
+                    <map:parameter name="cache-key" value="{rid}"/>
+                </map:transform>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="**.html" type="wildcard">
-                <map:generate type="html" src="{content-base}/m/{1}.html"/>
-                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl">
+            <map:match pattern="search/er/type/*" type="wildcard">
+                <map:generate type="er-search">
+                    <map:parameter name="type" value="{1}"/>
+                </map:generate>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="{rid}"/>
                 </map:transform>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="includes/**.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/includes/{1}.html"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
@@ -105,6 +103,39 @@
                 <map:transform type="namespace-filter"/>
                 <map:transform type="debug"/>
                 <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="plain/**.html" type="wildcard">
+                <!--TODO: move to content tree after development!!!! -->
+                <!--<map:generate type="html" src="{content-base}/m/{1}.html"/>-->
+                <map:generate type="html" src="{content-base}/m/v3/{1}.html"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:transform type="xinclude"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="html5"/>
+            </map:match>
+            <map:match pattern="**.html" type="wildcard">
+                <map:aggregate element="doc" label="content">
+                    <!--TODO: move to content tree after development!!!! -->
+                    <!--<map:part src="{content-base}/m/{1}.html"/> -->
+                    <map:part src="{content-base}/m/v3/{1}.html"/>
+                    <map:part src="resources/mobile/template.xml"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:transform type="xinclude"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="html5"/>
             </map:match>
         </map:pipeline>
     </map:pipelines>

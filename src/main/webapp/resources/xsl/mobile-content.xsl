@@ -24,6 +24,9 @@
     <!-- LPCH and SHC don't require authentication for proxy server -->
     <xsl:param name="ipgroup"/>
     
+    <!-- today's hours computed from includes/hours.xml -->
+    <xsl:param name="todays-hours"/>
+
     <xsl:param name="version"/>
     
     <xsl:param name="referrer"/>
@@ -37,6 +40,12 @@
         <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
     </xsl:variable>
     
+    <!-- the root node of the requested content document -->
+    <xsl:variable name="source-doc" select="/*/h:html[1]"/>
+    
+    <!-- the template document -->
+    <xsl:variable name="template" select="/*/h:html[2]"/>
+    
     <xsl:variable name="regex-query">
         <xsl:if test="$query">
             <xsl:value-of select="replace($query,'(\\|\$)','\\$1')"/>
@@ -46,32 +55,89 @@
     <!-- ====================  INCLUDED TEMPLATES ============================= -->
     <xsl:include href="laneweb-links.xsl"/>
     
+    <!-- ====================  DEFAULT TEMPLATES ============================= -->
+    <!-- root template applies templates on the template document -->
     <xsl:template match="/">
-        <xsl:apply-templates select="child::node()"/>
+        <xsl:choose>
+            <xsl:when test="$template">
+                <xsl:apply-templates select="$template"/>
+            </xsl:when>
+            <!-- when there is not a template (ie the request is for /plain/**.html) process whole document -->
+            <xsl:otherwise>
+                <xsl:apply-templates select="child::node()"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
+    <!-- default element match, copies the element and applies templates on all childeren and attributes -->
     <xsl:template match="*">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
     </xsl:template>
     
+    <!-- default attribute match, copies the attribute -->
     <xsl:template match="@*">
         <xsl:copy-of select="."/>
     </xsl:template>
     
-    <!-- remove left column for lwc2txt --> 
-    <xsl:template match="h:div[contains(@class,'leftColumn')]"/>
-    
-    <!-- replace h2 with link to full version for lwc2txt --> 
-    <xsl:template match="h:body/h:h2[1]">
-        <div>Lane Medical Library text version | <a href="{concat(replace($request-uri,'/m/lc2txt',''),'?',$query-string)}">Full version available here</a></div>
-        <xsl:copy>
-            <xsl:copy-of select="node()[name()!='a']"></xsl:copy-of>
-        </xsl:copy>
+    <xsl:template match="processing-instruction()">
+        <xsl:choose>
+            <xsl:when test=".='content'">
+                <xsl:apply-templates select="$source-doc/h:body/node()"/>
+            </xsl:when>
+            <xsl:when test=".='current-year'">
+                <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>
+            </xsl:when>
+            <xsl:when test=".='todays-hours'">
+                <xsl:value-of select="$todays-hours"/>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
     
-    <!-- internal links should refer to /m/lc2txt, external links get blank target, exclude login links  -->
+    <xsl:template match="h:input/@value">
+        <xsl:attribute name="{name()}">
+		    <xsl:choose>
+		        <xsl:when test="contains(.,'{search-terms}')">
+	                <xsl:value-of select="replace(.,'\{search-terms\}',$regex-query)"/>
+		        </xsl:when>
+		        <xsl:otherwise>
+		            <xsl:value-of select="." />
+		        </xsl:otherwise>
+		    </xsl:choose>
+	    </xsl:attribute>
+    </xsl:template>
+
+    <!-- insert footer into "page" div -->
+    <xsl:template match="h:div[@data-role='page']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node() | child::node()"/>
+	        <div class="footer">
+	            <xsl:apply-templates select="$template//h:div[@class='footer2copy']/*"/>
+	        </div>
+        </xsl:copy>
+    </xsl:template>
+
+    <!--  remove template version of footer after copying to 'page' div -->
+    <xsl:template match="h:body/h:div[@class='footer2copy']"/>
+    
+    <!-- strip html @manifest for all but index.html requests-->
+    <xsl:template match="@manifest">
+        <xsl:if test="contains($request-uri,'/m/index.html')">
+            <xsl:attribute name="{name()}">
+                <xsl:choose>
+                    <xsl:when test="starts-with(.,'/')">
+                        <xsl:value-of select="concat($base-path,.)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="."/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- external links get blank target, exclude login links  -->
     <xsl:template match="h:a">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
@@ -79,17 +145,8 @@
                 <xsl:when test="@href = '/logout' or starts-with(@href,'/secure')">
                     <xsl:apply-templates select="attribute::node()"/>
                 </xsl:when>
-                <xsl:when test="matches(@href,'https?://(irt-)?lane(-local|-stage)?\.stanford\.edu/[^m/]')">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="replace(@href,'https?://(irt-)?lane(-local|-stage)?\.stanford\.edu/',concat($base-path,'/m/lc2txt/'))"/>
-                    </xsl:attribute>
-                </xsl:when>
-                <xsl:when test="starts-with(@href,'/') and contains(@href,'.html') and not(contains(@href,'/m/'))">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="replace(@href,'^/',concat($base-path,'/m/lc2txt/'))"/>
-                    </xsl:attribute>
-                </xsl:when>
                 <xsl:when test="not(@target) and starts-with(@href,'http')">
+                    <xsl:attribute name="class">newWindow</xsl:attribute>
                     <xsl:attribute name="target">_blank</xsl:attribute>
                 </xsl:when>
             </xsl:choose>
@@ -105,7 +162,7 @@
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
-    <xsl:template match="h:ul[attribute::id='persistentlogin']/h:li[attribute::id='ploginExtended']">
+    <xsl:template match="node()[attribute::id='loggedIn']/node()[attribute::id='ploginExtended']">
         <xsl:if test="matches($query-string,'^pl=true')">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
@@ -113,7 +170,7 @@
             </xsl:copy>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="h:ul[attribute::id='persistentlogin']/h:li[attribute::id='ploginRemoved']">
+    <xsl:template match="node()[attribute::id='loggedIn']/node()[attribute::id='ploginRemoved']">
         <xsl:if test="matches($query-string,'^remove-pl=true')">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
