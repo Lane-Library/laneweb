@@ -158,7 +158,7 @@ $.LANE.scrollPage = function(activePage){
             }
         },delay);
     }
-    else if(activePage.attr('id') != 'home' && activePage.find(".resourceList").size()){ // resource list pages
+    else if(activePage.attr('id') != '_home' && activePage.find(".resourceList").size()){ // resource list pages
         setTimeout(function(){
             if(window.pageYOffset < $.mobile.minScrollBack){
                 window.scrollTo(0, hideHeaderScroll);
@@ -220,19 +220,19 @@ $.LANE.validatePicoForm = function(event){
 
 
 //When the homepage is loaded, attach event listeners for search tabs and search boxes, and load content for Hours of operation through Ajax.
-$("#home").live("pageinit", function() {
+$("#_home").live("pageinit", function() {
     // fetch hours content
     $.LANE.getHours();
 
     // Attach click event listener to the search tabs.
     // User can select Lane, Clinical, Pediatric search by clicking/tapping on the appropriate icon.
     $("#searchTabs li").click(function() {
-        $("#home .search form").removeClass("selected");
-        $($("#home .search form").get($(this).index())).addClass("selected");
+        $("#_home .search form").removeClass("selected");
+        $($("#_home .search form").get($(this).index())).addClass("selected");
         if($(this).index() > 0 && $(this).index() < 3) {
             if(!$("#overlayMask").length) {
                 var maskHeight = $('.ui-mobile .ui-page-active').height();
-                $("#home").append("<div id='overlayMask'></div>");
+                $("#_home").append("<div id='overlayMask'></div>");
                 $("#overlayMask").css("height", maskHeight + 100 + "px");
                 $("#overlayMask").click(function() {
                     $($("#searchTabs li").get(0)).trigger("vclick");
@@ -268,12 +268,12 @@ $("#home").live("pageinit", function() {
         });
         $("#searchTabs li").removeClass("selected");
         $(this).addClass("selected");
-        $("#home .search form").removeClass("selected");
-        $($("#home .search form").get($(this).index())).addClass("selected");
+        $("#_home .search form").removeClass("selected");
+        $($("#_home .search form").get($(this).index())).addClass("selected");
         if($(this).index() > 0 && $(this).index() < 3) {
             if(!$("#overlayMask").length) {
                 var maskHeight = $('.ui-mobile .ui-page-active').height();
-                $("#home").append("<div id='overlayMask'></div>");
+                $("#_home").append("<div id='overlayMask'></div>");
                 $("#overlayMask").css("height", maskHeight + 100 + "px");
                 $("#overlayMask").bind('click',function(e) {
                     e.preventDefault();
