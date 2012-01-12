@@ -17,7 +17,7 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
 
     private static final Attributes EMPTY_ATTRIBUTES = new AttributesImpl();
 
-    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z '/]+)##");
+    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z '/,]+)##");
 
     private CharBuffer chars;
 
