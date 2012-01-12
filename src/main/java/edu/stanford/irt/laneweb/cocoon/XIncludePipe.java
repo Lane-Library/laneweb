@@ -9,7 +9,6 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.avalon.framework.CascadingRuntimeException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ResourceNotFoundException;
 import org.apache.cocoon.components.source.impl.MultiSourceValidity;
@@ -29,6 +28,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 /**
  * XMLPipe that processes XInclude elements. To perform XInclude processing on
  * included content, this class is instantiated recursively.
@@ -46,6 +47,8 @@ class XIncludePipe extends AbstractXMLPipe {
     private static final String PARSE = "parse";
 
     private static final String XPOINTER = "xpointer";
+
+    private XIncludeExceptionListener exceptionListener;
 
     /**
      * The nesting level of xi:fallback elements that have been encountered.
@@ -95,23 +98,24 @@ class XIncludePipe extends AbstractXMLPipe {
      */
     private String xpointer;
 
+    public XIncludePipe(final SourceResolver sourceResolver, final MultiSourceValidity validity,
+            final ServiceManager serviceManager, final SAXParser saxParser, final XIncludeExceptionListener exceptionLister) {
+        this(sourceResolver, validity, serviceManager, saxParser, exceptionLister, null);
+    }
+
     /**
      * @param validity
      * @param parser
      * @param lanewebXIncludeTransformer
      */
     XIncludePipe(final SourceResolver sourceResolver, final MultiSourceValidity validity, final ServiceManager serviceManager,
-            final SAXParser saxParser, final XIncludePipe parent) {
+            final SAXParser saxParser, final XIncludeExceptionListener exceptionLister, final XIncludePipe parent) {
         this.sourceResolver = sourceResolver;
         this.validity = validity;
         this.serviceManager = serviceManager;
         this.saxParser = saxParser;
+        this.exceptionListener = exceptionLister;
         this.parent = parent;
-    }
-
-    public XIncludePipe(SourceResolver sourceResolver, MultiSourceValidity validity, ServiceManager serviceManager,
-            SAXParser saxParser) {
-        this(sourceResolver, validity, serviceManager, saxParser, null);
     }
 
     @Override
@@ -187,28 +191,6 @@ class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
-    //TODO: have this make sense
-    protected void init(final String uri, final String xpointer) {
-        this.href = uri;
-        this.xpointer = xpointer;
-        this.xmlBaseSupport = new XMLBaseSupport(this.sourceResolver, getLogger());
-    }
-
-    private boolean isLoopInclusion(final String uri, final String xpointer) {
-        String thePointer = xpointer == null ? "" : xpointer;
-        if (uri.equals(this.href) && thePointer.equals(this.xpointer == null ? "" : this.xpointer)) {
-            return true;
-        }
-        XIncludePipe parent = this.parent;
-        while (parent != null) {
-            if (uri.equals(parent.href) && thePointer.equals(parent.xpointer == null ? "" : parent.xpointer)) {
-                return true;
-            }
-            parent = parent.parent;
-        }
-        return false;
-    }
-
     @Override
     public void processingInstruction(final String target, final String data) throws SAXException {
         if (isEvaluatingContent()) {
@@ -221,32 +203,26 @@ class XIncludePipe extends AbstractXMLPipe {
         try {
             // When using SAXON to serialize a DOM tree to SAX, a locator is
             // passed with a "null" system id
-            if (locator.getSystemId() != null) {
-                Source source = this.sourceResolver.resolveURI(locator.getSystemId());
-                try {
-                    this.xmlBaseSupport.setDocumentLocation(source.getURI());
-                    // only for the "root" XIncludePipe, we'll have to set
-                    // the href here, in the other cases
-                    // the href is taken from the xi:include href attribute
-                    if (this.href == null) {
-                        this.href = source.getURI();
-                    }
-                } finally {
-                    this.sourceResolver.release(source);
+            String systemid = locator.getSystemId();
+            if (systemid != null) {
+                Source source = this.sourceResolver.resolveURI(systemid);
+                String uri = source.getURI();
+                this.xmlBaseSupport.setDocumentLocation(uri);
+                // only for the "root" XIncludePipe, we'll have to set
+                // the href here, in the other cases
+                // the href is taken from the xi:include href attribute
+                if (this.href == null) {
+                    this.href = uri;
                 }
             }
         } catch (IOException e) {
-            throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
+            throw new LanewebException(e);
         } catch (SAXException e) {
-            throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
+            throw new LanewebException(e);
         }
         this.locator = locator;
         super.setDocumentLocator(locator);
     }
-
-//    private void setParent(final XIncludePipe parent) {
-//        this.parent = parent;
-//    }
 
     @Override
     public void skippedEntity(final String name) throws SAXException {
@@ -262,6 +238,9 @@ class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
+    // private void setParent(final XIncludePipe parent) {
+    // this.parent = parent;
+    // }
     @Override
     public void startElement(final String uri, final String name, final String raw, final Attributes attr) throws SAXException {
         // Track xml:base context:
@@ -276,10 +255,10 @@ class XIncludePipe extends AbstractXMLPipe {
                     String parse = attr.getValue("", PARSE);
                     String xpointer = attr.getValue("", XPOINTER);
                     try {
-                    	processXIncludeElement(href, parse, xpointer);
+                        processXIncludeElement(href, parse, xpointer);
                     } catch (Exception e) {
                         this.useFallbackLevel++;
-                        getLogger().error("Error processing an xInclude, will try to use fallback.", e);
+                        this.exceptionListener.exception(e);
                     }
                 }
                 this.xIncludeElementLevel++;
@@ -331,6 +310,21 @@ class XIncludePipe extends AbstractXMLPipe {
                 || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
     }
 
+    private boolean isLoopInclusion(final String uri, final String xpointer) {
+        String thePointer = xpointer == null ? "" : xpointer;
+        if (uri.equals(this.href) && thePointer.equals(this.xpointer == null ? "" : this.xpointer)) {
+            return true;
+        }
+        XIncludePipe parent = this.parent;
+        while (parent != null) {
+            if (uri.equals(parent.href) && thePointer.equals(parent.xpointer == null ? "" : parent.xpointer)) {
+                return true;
+            }
+            parent = parent.parent;
+        }
+        return false;
+    }
+
     private void parseText(final Source url) throws IOException, SAXException {
         InputStream is = null;
         InputStreamReader isr = null;
@@ -357,72 +351,76 @@ class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
-    private void parseXML(final String xpointer, final Source url) throws ParseException, SAXException, IOException {
+    private void parseXML(final String xpointer, final Source source) throws ParseException, SAXException, IOException {
         // Check loop inclusion
-        if (isLoopInclusion(url.getURI(), xpointer)) {
-            throw new IllegalStateException("Detected loop inclusion of href=" + url.getURI() + ", xpointer=" + xpointer);
+        String uri = source.getURI();
+        if (isLoopInclusion(uri, xpointer)) {
+            throw new IllegalStateException("Detected loop inclusion of href=" + uri + ", xpointer=" + xpointer);
         }
-        XIncludePipe subPipe = new XIncludePipe(this.sourceResolver, this.validity, this.serviceManager, this.saxParser, this);
-        subPipe.init(url.getURI(), xpointer);
+        XIncludePipe subPipe = new XIncludePipe(this.sourceResolver, this.validity, this.serviceManager, this.saxParser,
+                this.exceptionListener, this);
+        subPipe.init(uri, xpointer);
         subPipe.setConsumer(this.xmlConsumer);
-            if ((xpointer != null) && (xpointer.length() > 0)) {
-                XPointer xptr = XPointerFrameworkParser.parse(URLDecoder.decode(xpointer, "UTF-8"));
-                XPointerContext context = new XPointerContext(xpointer, url, subPipe, this.serviceManager);
-                for (String prefix : this.namespaces.keySet()) {
-                    context.addPrefix(prefix, this.namespaces.get(prefix));
-                }
-                try {
-					xptr.process(context);
-				} catch (ResourceNotFoundException e) {
-					throw new IllegalStateException(e);
-				}
-            } else if (url instanceof XMLizable) {
-                ((XMLizable) url).toSAX(new IncludeXMLConsumer(subPipe));
-            } else {
-                InputSource inputSource = new InputSource();
-                try {
-                    inputSource.setByteStream(url.getInputStream());
-                    inputSource.setSystemId(url.getURI());
-                    this.saxParser.parse(inputSource, new IncludeXMLConsumer(subPipe));
-                } finally {
-                    if (inputSource.getByteStream() != null) {
-                        inputSource.getByteStream().close();
-                    }
+        if ((xpointer != null) && (xpointer.length() > 0)) {
+            XPointer xptr = XPointerFrameworkParser.parse(URLDecoder.decode(xpointer, "UTF-8"));
+            XPointerContext context = new XPointerContext(xpointer, source, subPipe, this.serviceManager);
+            for (String prefix : this.namespaces.keySet()) {
+                context.addPrefix(prefix, this.namespaces.get(prefix));
+            }
+            try {
+                xptr.process(context);
+            } catch (ResourceNotFoundException e) {
+                throw new LanewebException(e);
+            }
+        } else if (source instanceof XMLizable) {
+            ((XMLizable) source).toSAX(new IncludeXMLConsumer(subPipe));
+        } else {
+            InputSource inputSource = new InputSource();
+            try {
+                inputSource.setByteStream(source.getInputStream());
+                inputSource.setSystemId(uri);
+                this.saxParser.parse(inputSource, new IncludeXMLConsumer(subPipe));
+            } finally {
+                if (inputSource.getByteStream() != null) {
+                    inputSource.getByteStream().close();
                 }
             }
-            // restore locator on the consumer
-            if (this.locator != null) {
-                this.xmlConsumer.setDocumentLocator(this.locator);
-            }
+        }
+        // restore locator on the consumer
+        if (this.locator != null) {
+            this.xmlConsumer.setDocumentLocator(this.locator);
+        }
     }
 
-    private void processXIncludeElement(final String href, final String parse, final String xpointer) throws IOException, SAXException, ParseException {
+    private void processXIncludeElement(final String href, final String parse, final String xpointer) throws IOException,
+            SAXException, ParseException {
         // Default for @parse is "xml"
         String localParse = parse == null ? "xml" : parse;
         Source url = null;
         String localHref = href;
-        try {
-            // An empty or absent href is a reference to the current
-            // document -- this can be different than the current base
-            if ((href == null) || (href.length() == 0)) {
-                if (this.href == null) {
-                    throw new IllegalArgumentException(
-                            "XIncludeTransformer: encountered empty href (= href pointing to the current document) but the location of the current document is unknown.");
-                }
-                localHref = this.href;
+        // An empty or absent href is a reference to the current
+        // document -- this can be different than the current base
+        if ((href == null) || (href.length() == 0)) {
+            if (this.href == null) {
+                throw new IllegalArgumentException(
+                        "XIncludeTransformer: encountered empty href (= href pointing to the current document) but the location of the current document is unknown.");
             }
-            url = this.xmlBaseSupport.makeAbsolute(localHref);
-            // add the source to the SourceValidity
-            this.validity.addSource(url);
-            if ("text".equals(localParse)) {
-                parseText(url);
-            } else if ("xml".equals(localParse)) {
-                parseXML(xpointer, url);
-            }
-        } finally {
-            if (url != null) {
-                this.sourceResolver.release(url);
-            }
+            localHref = this.href;
         }
+        url = this.xmlBaseSupport.makeAbsolute(localHref);
+        // add the source to the SourceValidity
+        this.validity.addSource(url);
+        if ("text".equals(localParse)) {
+            parseText(url);
+        } else if ("xml".equals(localParse)) {
+            parseXML(xpointer, url);
+        }
+    }
+
+    // TODO: have this make sense
+    protected void init(final String uri, final String xpointer) {
+        this.href = uri;
+        this.xpointer = xpointer;
+        this.xmlBaseSupport = new XMLBaseSupport(this.sourceResolver, getLogger());
     }
 }

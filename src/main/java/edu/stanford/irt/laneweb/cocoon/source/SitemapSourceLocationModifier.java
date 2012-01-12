@@ -1,21 +1,10 @@
 package edu.stanford.irt.laneweb.cocoon.source;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class SitemapSourceLocationModifier {
-
-    private final Logger log = LoggerFactory.getLogger(SitemapSourceLocationModifier.class);
 
     public String modify(final String location) {
         String modifiedLocation = getModifiedLocation(location);
-        if (modifiedLocation != null) {
-            if (this.log.isWarnEnabled()) {
-                this.log.warn("the url form: " + location + " is deprecated, use the form: " + modifiedLocation + " instead.");
-            }
-            return modifiedLocation;
-        }
-        return location;
+        return modifiedLocation == null ? location : modifiedLocation;
     }
 
     private String getModifiedLocation(final String location) {

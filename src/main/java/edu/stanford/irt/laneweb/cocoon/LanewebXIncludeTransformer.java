@@ -25,6 +25,8 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.transformation.AbstractTransformer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.ext.LexicalHandler;
 
@@ -34,7 +36,26 @@ import org.xml.sax.ext.LexicalHandler;
  */
 public class LanewebXIncludeTransformer extends AbstractTransformer implements CacheableProcessingComponent {
 
+    private static final class ExceptionListener implements XIncludeExceptionListener {
+
+        private Logger log;
+
+        private Map model;
+
+        private ExceptionListener(final Map model, final Logger log) {
+            this.model = model;
+            this.log = log;
+        }
+
+        @Override
+        public void exception(final Exception e) {
+            this.log.error(this.model.toString(), e);
+        }
+    }
+
     private static final String XINCLUDE_CACHE_KEY = "XInclude";
+
+    private Logger log = LoggerFactory.getLogger(LanewebXIncludeTransformer.class);
 
     private XIncludePipe xIncludePipe;
 
@@ -81,10 +102,11 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
     }
 
     @SuppressWarnings("rawtypes")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String source, final Parameters parameters) {
+    public void setup(final SourceResolver resolver, final Map model, final String source, final Parameters parameters) {
         this.resolver = resolver;
         this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);
-        this.xIncludePipe = new XIncludePipe(this.resolver, this.validity, this.manager, this.parser);
+        this.xIncludePipe = new XIncludePipe(this.resolver, this.validity, this.manager, this.parser, new ExceptionListener(model,
+                this.log));
         this.xIncludePipe.init(null, null);
         super.setContentHandler(this.xIncludePipe);
         super.setLexicalHandler(this.xIncludePipe);
