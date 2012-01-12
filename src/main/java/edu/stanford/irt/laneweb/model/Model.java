@@ -18,6 +18,8 @@ public interface Model {
     String BOOKMARKS = "bookmarks";
 
     String CALLBACK = "callback";
+    
+    String CATEGORY = "category";
 
     String CLASS_ID = "class-id";
 
