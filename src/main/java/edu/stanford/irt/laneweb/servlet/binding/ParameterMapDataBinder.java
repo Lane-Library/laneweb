@@ -9,8 +9,11 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class ParameterMapDataBinder implements DataBinder {
 
-    @Override
+    @SuppressWarnings("rawtypes")
     public void bind(Map<String, Object> model, HttpServletRequest request) {
-        model.put(Model.PARAMETER_MAP, request.getParameterMap());
+        Map parameterMap = request.getParameterMap();
+        if (parameterMap.size() > 0) {
+            model.put(Model.PARAMETER_MAP, request.getParameterMap());
+        }
     }
 }
