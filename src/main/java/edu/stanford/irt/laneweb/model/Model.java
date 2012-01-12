@@ -59,7 +59,7 @@ public interface Model {
 
     String PAGE_NUMBER = "pageNumber";
     
-    String PARAMETER_MAP = "paramter-map";
+    String PARAMETER_MAP = "parameter-map";
 
     String PASSWORD = "password";
 
