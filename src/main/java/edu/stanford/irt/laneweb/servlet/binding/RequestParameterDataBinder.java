@@ -24,9 +24,9 @@ public class RequestParameterDataBinder implements DataBinder {
             { "r", Model.REGION }, { "PID", Model.PID }, { "page-number", Model.PAGE_NUMBER }, { "entryUrl", Model.ENTRY_URL },
             { "pl", Model.PERSISTENT_LOGIN }, { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
 
-    private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CATEGORY, Model.CLASS_ID, Model.TIMEOUT,
-            Model.SYNCHRONOUS, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER, Model.URL,
-            Model.CALLBACK, Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SOURCEID, Model.SOURCE, Model.ID };
+    private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CATEGORY, Model.CLASS_ID,
+            Model.TIMEOUT, Model.SYNCHRONOUS, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER,
+            Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SOURCEID, Model.SOURCE, Model.ID };
 
     /**
      * parameterArrayModelMap contains the mapping of parameter names to model
