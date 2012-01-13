@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.personalize;
+package edu.stanford.irt.laneweb.bookmarks;
 
 import java.io.IOException;
 import java.io.InputStream;

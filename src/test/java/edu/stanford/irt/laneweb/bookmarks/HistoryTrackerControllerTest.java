@@ -1,7 +1,12 @@
-package edu.stanford.irt.laneweb.personalize;
+package edu.stanford.irt.laneweb.bookmarks;
 
-import static org.junit.Assert.*;
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.capture;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,11 +17,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class HistoryTrackerControllerTest {
-    
+
     private HistoryTrackerController controller;
-    private List<History> historyList;
+
     private BookmarkDAO<History> dao;
+
     private History history;
+
+    private List<History> historyList;
 
     @Before
     public void setUp() throws Exception {
@@ -24,7 +32,7 @@ public class HistoryTrackerControllerTest {
         this.historyList = new ArrayList<History>();
         this.dao = createMock(BookmarkDAO.class);
         this.controller.setBookmarkDAO(this.dao);
-        this.history = new History("label","url",new Date(Long.MAX_VALUE));
+        this.history = new History("label", "url", new Date(Long.MAX_VALUE));
     }
 
     @Test

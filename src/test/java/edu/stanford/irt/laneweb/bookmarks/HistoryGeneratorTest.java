@@ -1,7 +1,9 @@
-package edu.stanford.irt.laneweb.personalize;
+package edu.stanford.irt.laneweb.bookmarks;
 
-import static org.junit.Assert.fail;
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -16,17 +18,18 @@ import org.springframework.oxm.XmlMappingException;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-public class BookmarkGeneratorTest {
-    
-    private BookmarkGenerator generator;
+public class HistoryGeneratorTest {
+
+    private HistoryGenerator generator;
+
     private Marshaller marshaller;
 
     @Before
     public void setUp() throws Exception {
-        this.generator = new BookmarkGenerator();
+        this.generator = new HistoryGenerator();
         this.marshaller = createMock(Marshaller.class);
         this.generator.setMarshaller(this.marshaller);
-        this.generator.setup(null, Collections.singletonMap(Model.BOOKMARKS, Collections.emptyList()), null, null);
+        this.generator.setup(null, Collections.singletonMap(Model.HISTORY, Collections.emptyList()), null, null);
     }
 
     @Test

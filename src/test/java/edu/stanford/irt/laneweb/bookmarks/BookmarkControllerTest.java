@@ -1,7 +1,12 @@
-package edu.stanford.irt.laneweb.personalize;
+package edu.stanford.irt.laneweb.bookmarks;
 
-import static org.junit.Assert.*;
-import static  org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +23,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-
 public class BookmarkControllerTest {
 
     private Bookmark bookmark;
@@ -29,15 +33,15 @@ public class BookmarkControllerTest {
 
     private BookmarkDAO<Bookmark> dao;
 
-    private HttpSession session;
-
-    private String sunetid;
-
-    private HttpServletResponse response;
+    private RequestDispatcher dispatcher;
 
     private HttpServletRequest request;
 
-    private RequestDispatcher dispatcher;
+    private HttpServletResponse response;
+
+    private HttpSession session;
+
+    private String sunetid;
 
     @Before
     public void setUp() throws Exception {
@@ -62,22 +66,22 @@ public class BookmarkControllerTest {
     }
 
     @Test
-    public void testGetBookmarksNotInSession() {
-        expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(null);
-        expect(this.dao.getLinks(this.sunetid)).andReturn(this.bookmarks);
-        this.session.setAttribute(Model.BOOKMARKS, this.bookmarks);
-        replay(this.session, this.dao);
-        assertEquals(this.bookmarks, this.controller.getBookmarks(this.session, this.sunetid));
-        verify(this.session, this.dao);
-    }
-
-    @Test
     public void testGetBookmarksNotInDAO() {
         expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(null);
         expect(this.dao.getLinks(this.sunetid)).andReturn(null);
         this.session.setAttribute(eq(Model.BOOKMARKS), isA(List.class));
         replay(this.session, this.dao);
         assertEquals(0, this.controller.getBookmarks(this.session, this.sunetid).size());
+        verify(this.session, this.dao);
+    }
+
+    @Test
+    public void testGetBookmarksNotInSession() {
+        expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(null);
+        expect(this.dao.getLinks(this.sunetid)).andReturn(this.bookmarks);
+        this.session.setAttribute(Model.BOOKMARKS, this.bookmarks);
+        replay(this.session, this.dao);
+        assertEquals(this.bookmarks, this.controller.getBookmarks(this.session, this.sunetid));
         verify(this.session, this.dao);
     }
 
@@ -99,7 +103,7 @@ public class BookmarkControllerTest {
         expect(this.request.getRequestDispatcher("/samples/favorites.html")).andReturn(this.dispatcher);
         this.dispatcher.forward(this.request, this.response);
         replay(this.request, this.response, this.dispatcher, this.dao);
-        this.controller.handleDeleteBookmarks(this.request, this.response, this.bookmarks, this.sunetid, new int[]{0});
+        this.controller.handleDeleteBookmarks(this.request, this.response, this.bookmarks, this.sunetid, new int[] { 0 });
         assertEquals(1, this.bookmarks.size());
         verify(this.request, this.response, this.dispatcher, this.dao);
     }
