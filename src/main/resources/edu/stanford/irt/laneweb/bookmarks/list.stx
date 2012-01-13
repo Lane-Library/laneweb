@@ -7,23 +7,20 @@
     <stx:template match="null"/>
     
     <stx:template match="list">
-        <ul xmlns="http://www.w3.org/1999/xhtml">
+        <ul id="bookmarks" xmlns="http://www.w3.org/1999/xhtml">
             <stx:process-children/>
         </ul>
     </stx:template>
     
     <stx:variable name="label"/>
     <stx:variable name="url"/>
-    <stx:variable name="date"/>
     
     <stx:template match="bookmark|history">
         <stx:assign name="label" select="''"/>
         <stx:assign name="url" select="''"/>
-        <stx:assign name="date" select="''"/>
         <li xmlns="http://www.w3.org/1999/xhtml">
             <stx:process-children/>
             <a xmlns="http://www.w3.org/1999/xhtml" href="{$url}"><stx:value-of select="$label"/></a>
-            <stx:value-of select="$date"/>
         </li>
     </stx:template>
     
@@ -33,10 +30,6 @@
     
     <stx:template match="url">
         <stx:assign name="url" select="."/>
-    </stx:template>
-    
-    <stx:template match="date">
-        <stx:assign name="date" select="."/>
     </stx:template>
     
 </stx:transform>

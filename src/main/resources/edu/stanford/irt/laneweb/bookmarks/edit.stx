@@ -41,6 +41,7 @@
                 <input name="label" type="text" value="{.}"></input>
                 <button name="action" value="save" type="submit">save</button>
                 <button value="reset" type="reset">reset</button>
+                <button name="action" value="cancel" type="submit">cancel</button>
             </stx:when>
             <stx:otherwise>
                 <stx:copy>

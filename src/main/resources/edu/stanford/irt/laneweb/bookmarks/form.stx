@@ -9,7 +9,7 @@
     <stx:variable name="item" select="0"/>
     
     <stx:template match="/">
-        <form action="/bookmarks">
+        <form action="/bookmarks" method="post" id="bookmarks-editor">
             <fieldset>
                 <button name="action" value="add" type="submit">add</button>
                 <button name="action" value="delete" type="submit">delete</button>
@@ -17,6 +17,13 @@
             </fieldset>
             <stx:process-children/>
         </form>
+    </stx:template>
+    
+    <!-- remove id="bookmarks" -->
+    <stx:template match="h:ul">
+        <stx:copy>
+            <stx:process-children/>
+        </stx:copy>
     </stx:template>
     
     <stx:template match="h:li">

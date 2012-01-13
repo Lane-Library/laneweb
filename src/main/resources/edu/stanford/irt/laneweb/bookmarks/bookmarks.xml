@@ -8,20 +8,8 @@
         <property name="bookmarkDAO" ref="edu.stanford.irt.laneweb.bookmarks.BookmarkDAO"/>
     </bean>
     
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/history"
-        class="edu.stanford.irt.laneweb.bookmarks.HistoryDataBinder">
-        <property name="historyDAO">
-            <bean class="edu.stanford.irt.laneweb.bookmarks.DummyHistoryDAO"/>
-        </property>
-    </bean>
-    
     <bean name="org.apache.cocoon.generation.Generator/bookmark"
         class="edu.stanford.irt.laneweb.bookmarks.BookmarkGenerator"
-        parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator"/>
-    
-    
-    <bean name="org.apache.cocoon.generation.Generator/history"
-        class="edu.stanford.irt.laneweb.bookmarks.HistoryGenerator"
         parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator"/>
     
     <bean name="org.apache.cocoon.selection.Selector/action"

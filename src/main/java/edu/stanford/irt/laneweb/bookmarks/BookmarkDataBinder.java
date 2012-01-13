@@ -10,10 +10,9 @@ import javax.servlet.http.HttpSession;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
-//TODO: BookmarkDataBinder and HistoryDataBinder very similar, extract superclass?
 public class BookmarkDataBinder implements DataBinder {
 
-    private BookmarkDAO<Bookmark> bookmarkDAO;
+    private BookmarkDAO bookmarkDAO;
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String sunetid = (String) model.get(Model.SUNETID);
@@ -33,26 +32,10 @@ public class BookmarkDataBinder implements DataBinder {
                 session.setAttribute(Model.BOOKMARKS, bookmarks);
             }
             model.put(Model.BOOKMARKS, bookmarks);
-//            String position = request.getParameter("position");
-//            String action = request.getParameter("action");
-//            String url = request.getParameter("url");
-//            String label = request.getParameter("label");
-//            if (action != null) {
-//                model.put("bookmarks:action", action);
-//            }
-//            if (position != null) {
-//                model.put("bookmarks:position", position);
-//            }
-//            if (url != null) {
-//                model.put("bookmarks:url", url);
-//            }
-//            if (label != null) {
-//                model.put("bookmarks:label", label);
-//            }
         }
     }
 
-    public void setBookmarkDAO(final BookmarkDAO<Bookmark> bookmarkDAO) {
+    public void setBookmarkDAO(final BookmarkDAO bookmarkDAO) {
         this.bookmarkDAO = bookmarkDAO;
     }
 }

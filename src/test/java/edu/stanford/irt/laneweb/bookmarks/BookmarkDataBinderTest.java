@@ -25,7 +25,7 @@ public class BookmarkDataBinderTest {
 
     private List<Bookmark> bookmarks;
 
-    private BookmarkDAO<Bookmark> dao;
+    private BookmarkDAO dao;
 
     private Map<String, Object> model;
 

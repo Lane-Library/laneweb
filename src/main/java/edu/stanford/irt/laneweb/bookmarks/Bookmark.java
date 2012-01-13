@@ -13,6 +13,8 @@ public class Bookmark implements Serializable {
     private String label;
 
     private String url;
+    
+    public Bookmark() {}
 
     public Bookmark(final String label, final String url) {
         if (label == null) {
@@ -22,6 +24,14 @@ public class Bookmark implements Serializable {
             throw new LanewebException("null url");
         }
         this.label = label;
+        this.url = url;
+    }
+    
+    public void setLabel(final String label) {
+        this.label = label;
+    }
+    
+    public void setUrl(final String url) {
         this.url = url;
     }
 

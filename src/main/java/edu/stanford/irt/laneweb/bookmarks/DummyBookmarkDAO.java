@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-public class DummyBookmarkDAO implements BookmarkDAO<Bookmark> {
+public class DummyBookmarkDAO implements BookmarkDAO {
 
     public List<Bookmark> getLinks(final String sunetid) {
         List<Bookmark> bookmarks = new ArrayList<Bookmark>();
