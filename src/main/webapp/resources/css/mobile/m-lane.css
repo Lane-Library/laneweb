@@ -600,7 +600,7 @@ body.ui-mobile-viewport,.ui-body-c {
 #hours h4 {
     font-size: 1.1em;
     margin: 0;
-    padding: 0 0 8px 0;
+    padding: 0 0 8px 20px;
 }
 
 #hours h4:before {
