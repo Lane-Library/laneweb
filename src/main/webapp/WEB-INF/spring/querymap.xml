@@ -8,24 +8,11 @@
         <property name="queryToDescriptor">
             <bean class="edu.stanford.irt.querymap.QueryToDescriptor">
                 <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
-                <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
             </bean>
         </property>
     </bean>
     
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
         class="edu.stanford.irt.querymap.DescriptorManager"/>
-    
-    <bean id="org.apache.commons.httpclient.HttpClient"
-        class="org.apache.commons.httpclient.HttpClient">
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.querymap.ConnectionManager"
-                destroy-method="shutdown">
-                <property name="maxTotalConnections" value="30"/>
-                <property name="defaultMaxConnectionsPerHost" value="10"/>
-                <property name="connectionTimeout" value="20000"/>
-            </bean>
-        </constructor-arg>
-    </bean>
     
 </beans>
