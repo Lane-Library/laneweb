@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-01-13" version="1.12.12" description="1.12.12 bug fix release">
+            <action date="2012-01-12" dev="ceyates" issue="63058" type="fix">
+                FAQ More broken
+            </action>
+            <action date="2012-01-12" dev="ryanmax" issue="63042" type="fix">
+                problem parsing PubMed abstract: 21139110
+            </action>
+            <action date="2012-01-11" dev="ceyates" issue="62983" type="fix">
+                ?laneNav=2 being added to urls
+            </action>
+            <action date="2012-01-10" dev="ceyates" issue="62962" type="fix">
+                /postMethodHelper.html fails with NullPointerException
+            </action>
+            <action date="2012-01-10" dev="ryanmax" issue="62937" type="add">
+                new mobile interface
+            </action>
+            <action date="2012-01-09" dev="ceyates" issue="6881" type="fix">
+                SunetidCookieCodec has thread safety issues
+            </action>
+        </release>
         <release date="2012-01-09" version="1.12.11" description="1.12.11 bug fix release">
             <action date="2011-12-15" dev="ceyates" issue="62252" type="add">
                 create an EnvironmentWrapper that puts the query parameters into the model
