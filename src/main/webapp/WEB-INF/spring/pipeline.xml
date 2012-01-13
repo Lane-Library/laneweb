@@ -94,7 +94,7 @@
     <bean name="org.apache.cocoon.transformation.Transformer/saxon"
         class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
         scope="prototype">
-        <property name="traxProcessor" ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/textNodeParser"
@@ -104,7 +104,7 @@
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
         class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
         scope="prototype">
-        <property name="traxProcessor" ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"/>
     </bean>
     
     <bean name="org.apache.cocoon.serialization.AbstractTextSerializer"

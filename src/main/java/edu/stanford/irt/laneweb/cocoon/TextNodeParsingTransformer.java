@@ -87,11 +87,6 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         this.xmlConsumer.endElement(uri, localName, qName);
     }
 
-//    @Override
-//    public void startDocument() throws SAXException {
-//        this.xmlConsumer.startDocument();
-//    }
-
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {

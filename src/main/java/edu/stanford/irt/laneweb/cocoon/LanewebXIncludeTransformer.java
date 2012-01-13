@@ -23,6 +23,7 @@ import org.apache.cocoon.components.source.impl.MultiSourceValidity;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.transformation.AbstractTransformer;
+import org.apache.cocoon.xml.XMLBaseSupport;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
 import org.slf4j.Logger;
@@ -106,7 +107,7 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
         this.resolver = resolver;
         this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);
         this.xIncludePipe = new XIncludePipe(this.resolver, this.validity, this.manager, this.parser, new ExceptionListener(model,
-                this.log));
+                this.log), new XMLBaseSupport(this.resolver, getLogger()));
         this.xIncludePipe.init(null, null);
         super.setContentHandler(this.xIncludePipe);
         super.setLexicalHandler(this.xIncludePipe);

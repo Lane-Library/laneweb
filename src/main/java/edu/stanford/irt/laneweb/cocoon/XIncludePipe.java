@@ -99,8 +99,9 @@ class XIncludePipe extends AbstractXMLPipe {
     private String xpointer;
 
     public XIncludePipe(final SourceResolver sourceResolver, final MultiSourceValidity validity,
-            final ServiceManager serviceManager, final SAXParser saxParser, final XIncludeExceptionListener exceptionLister) {
-        this(sourceResolver, validity, serviceManager, saxParser, exceptionLister, null);
+            final ServiceManager serviceManager, final SAXParser saxParser, final XIncludeExceptionListener exceptionLister,
+            final XMLBaseSupport xmlBaseSupport) {
+        this(sourceResolver, validity, serviceManager, saxParser, exceptionLister, xmlBaseSupport, null);
     }
 
     /**
@@ -109,12 +110,14 @@ class XIncludePipe extends AbstractXMLPipe {
      * @param lanewebXIncludeTransformer
      */
     XIncludePipe(final SourceResolver sourceResolver, final MultiSourceValidity validity, final ServiceManager serviceManager,
-            final SAXParser saxParser, final XIncludeExceptionListener exceptionLister, final XIncludePipe parent) {
+            final SAXParser saxParser, final XIncludeExceptionListener exceptionLister, final XMLBaseSupport xmlBaseSupport,
+            final XIncludePipe parent) {
         this.sourceResolver = sourceResolver;
         this.validity = validity;
         this.serviceManager = serviceManager;
         this.saxParser = saxParser;
         this.exceptionListener = exceptionLister;
+        this.xmlBaseSupport = xmlBaseSupport;
         this.parent = parent;
     }
 
@@ -325,27 +328,25 @@ class XIncludePipe extends AbstractXMLPipe {
         return false;
     }
 
-    private void parseText(final Source url) throws IOException, SAXException {
+    private void parseText(final Source source) throws IOException, SAXException {
         InputStream is = null;
         InputStreamReader isr = null;
         Reader reader = null;
         try {
-            is = url.getInputStream();
+            is = source.getInputStream();
             isr = new InputStreamReader(is);
             reader = new BufferedReader(isr);
             int read;
-            char[] ary = new char[1024 * 4];
+            char[] ary = new char[1024];
             while ((read = reader.read(ary)) != -1) {
                 super.characters(ary, 0, read);
             }
         } finally {
             if (reader != null) {
                 reader.close();
-            }
-            if (isr != null) {
+            } else if (isr != null) {
                 isr.close();
-            }
-            if (is != null) {
+            } else if (is != null) {
                 is.close();
             }
         }
@@ -358,7 +359,7 @@ class XIncludePipe extends AbstractXMLPipe {
             throw new IllegalStateException("Detected loop inclusion of href=" + uri + ", xpointer=" + xpointer);
         }
         XIncludePipe subPipe = new XIncludePipe(this.sourceResolver, this.validity, this.serviceManager, this.saxParser,
-                this.exceptionListener, this);
+                this.exceptionListener, this.xmlBaseSupport, this);
         subPipe.init(uri, xpointer);
         subPipe.setConsumer(this.xmlConsumer);
         if ((xpointer != null) && (xpointer.length() > 0)) {
@@ -421,6 +422,5 @@ class XIncludePipe extends AbstractXMLPipe {
     protected void init(final String uri, final String xpointer) {
         this.href = uri;
         this.xpointer = xpointer;
-        this.xmlBaseSupport = new XMLBaseSupport(this.sourceResolver, getLogger());
     }
 }

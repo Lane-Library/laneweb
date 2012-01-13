@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.util.Iterator;
 
 import javax.xml.namespace.NamespaceContext;
-import javax.xml.namespace.QName;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -30,46 +29,34 @@ public class XPathProcessorImpl implements XPathProcessor {
     }
 
     public boolean evaluateAsBoolean(final Node contextNode, final String str) {
-        return (Boolean) evaluate(contextNode, str, XPathConstants.BOOLEAN, null);
+    	throw new UnsupportedOperationException();
     }
 
     public boolean evaluateAsBoolean(final Node contextNode, final String str, final PrefixResolver resolver) {
-        return (Boolean) evaluate(contextNode, str, XPathConstants.BOOLEAN, resolver);
+    	throw new UnsupportedOperationException();
     }
 
     public Number evaluateAsNumber(final Node contextNode, final String str) {
-        return (Number) evaluate(contextNode, str, XPathConstants.NUMBER, null);
+    	throw new UnsupportedOperationException();
     }
 
     public Number evaluateAsNumber(final Node contextNode, final String str, final PrefixResolver resolver) {
-        return (Number) evaluate(contextNode, str, XPathConstants.NUMBER, resolver);
+    	throw new UnsupportedOperationException();
     }
 
     public String evaluateAsString(final Node contextNode, final String str) {
-        return (String) evaluate(contextNode, str, XPathConstants.STRING, null);
+    	throw new UnsupportedOperationException();
     }
 
     public String evaluateAsString(final Node contextNode, final String str, final PrefixResolver resolver) {
-        return (String) evaluate(contextNode, str, XPathConstants.STRING, resolver);
+    	throw new UnsupportedOperationException();
     }
 
     public NodeList selectNodeList(final Node contextNode, final String str) {
-        return (NodeList) evaluate(contextNode, str, XPathConstants.NODESET, null);
+    	throw new UnsupportedOperationException();
     }
 
-    public NodeList selectNodeList(final Node contextNode, final String str, final PrefixResolver resolver) {
-        return (NodeList) evaluate(contextNode, str, XPathConstants.NODESET, resolver);
-    }
-
-    public Node selectSingleNode(final Node contextNode, final String str) {
-        return (Node) evaluate(contextNode, str, XPathConstants.NODE, null);
-    }
-
-    public Node selectSingleNode(final Node contextNode, final String str, final PrefixResolver resolver) {
-        return (Node) evaluate(contextNode, str, XPathConstants.NODE, resolver);
-    }
-
-    private Object evaluate(final Node node, final String str, final QName returnType, final PrefixResolver resolver) {
+    public NodeList selectNodeList(final Node node, final String str, final PrefixResolver resolver) {
         XPath xpath = null;
         synchronized(this.factory) {
             xpath = this.factory.newXPath();
@@ -92,9 +79,17 @@ public class XPathProcessorImpl implements XPathProcessor {
             });
         }
         try {
-            return xpath.evaluate(str, node, returnType);
+            return (NodeList) xpath.evaluate(str, node, XPathConstants.NODESET);
         } catch (XPathExpressionException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    public Node selectSingleNode(final Node contextNode, final String str) {
+    	throw new UnsupportedOperationException();
+    }
+
+    public Node selectSingleNode(final Node contextNode, final String str, final PrefixResolver resolver) {
+    	throw new UnsupportedOperationException();
     }
 }

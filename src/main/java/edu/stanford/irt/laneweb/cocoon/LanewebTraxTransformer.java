@@ -22,6 +22,16 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     private TransformerHandler transformerHandler;
 
     private TraxProcessor traxProcessor;
+    
+    private XMLConsumer xmlConsumer;
+    
+    private Locator locator;
+
+    private SourceValidity validity;
+    
+    public LanewebTraxTransformer(TraxProcessor traxProcessor) {
+        this.traxProcessor = traxProcessor;
+    }
 
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
         this.transformerHandler.characters(ch, start, length);
@@ -59,12 +69,8 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         return this.cacheKey;
     }
 
-    public String getSystemId() {
-        return this.transformerHandler.getSystemId();
-    }
-
     public SourceValidity getValidity() {
-        return getSource().getValidity();
+        return this.validity;
     }
 
     public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
@@ -80,35 +86,11 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     }
 
     public void setConsumer(final XMLConsumer xmlConsumer) {
-        if (this.transformerHandler == null) {
-            this.transformerHandler = this.traxProcessor.getTransformerHandler(getSource());
-        }
-        javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
-        for (Entry<String, Object> entry : getModel().entrySet()) {
-            transformer.setParameter(entry.getKey(), entry.getValue().toString());
-        }
-        for (Entry<String, String> entry : getParameterMap().entrySet()) {
-            transformer.setParameter(entry.getKey(), entry.getValue());
-        }
-        final SAXResult result = new SAXResult(xmlConsumer);
-        result.setLexicalHandler(xmlConsumer);
-        this.transformerHandler.setResult(result);
+        this.xmlConsumer = xmlConsumer;
     }
 
     public void setDocumentLocator(final Locator locator) {
-        this.transformerHandler.setDocumentLocator(locator);
-    }
-
-    public void setResult(final Result result) throws IllegalArgumentException {
-        this.transformerHandler.setResult(result);
-    }
-
-    public void setSystemId(final String systemID) {
-        this.transformerHandler.setSystemId(systemID);
-    }
-
-    public void setTraxProcessor(final TraxProcessor traxProcessor) {
-        this.traxProcessor = traxProcessor;
+        this.locator = locator;
     }
 
     public void skippedEntity(final String name) throws SAXException {
@@ -120,6 +102,10 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     }
 
     public void startDocument() throws SAXException {
+        setupTransformerHandler();
+        if (this.locator != null) {
+            this.transformerHandler.setDocumentLocator(locator);
+        }
         this.transformerHandler.startDocument();
     }
 
@@ -148,8 +134,24 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     @Override
     protected void initialize() {
     	this.cacheKey = getSource().getURI();
-        if (getParameterMap().containsKey("cache-key")) {
-            this.cacheKey = this.cacheKey + ";" + getParameterMap().get("cache-key");
+    	String paramCacheKey = getParameterMap().get("cache-key");
+        if (paramCacheKey != null) {
+            this.cacheKey = this.cacheKey + ";" + paramCacheKey;
         }
+        this.validity = getSource().getValidity();
+    }
+    
+    private void setupTransformerHandler() {
+        this.transformerHandler = this.traxProcessor.getTransformerHandler(getSource());
+        javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
+        for (Entry<String, Object> entry : getModel().entrySet()) {
+            transformer.setParameter(entry.getKey(), entry.getValue().toString());
+        }
+        for (Entry<String, String> entry : getParameterMap().entrySet()) {
+            transformer.setParameter(entry.getKey(), entry.getValue());
+        }
+        SAXResult result = new SAXResult(this.xmlConsumer);
+        result.setLexicalHandler(this.xmlConsumer);
+        this.transformerHandler.setResult(result);
     }
 }

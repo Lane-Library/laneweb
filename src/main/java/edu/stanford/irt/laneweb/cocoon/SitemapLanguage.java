@@ -66,8 +66,6 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
 
     private ApplicationContext applicationContext;
 
-    private Map<String, ProcessingNode> registeredNodes = Collections.emptyMap();
-
     private ServiceManager serviceManager;
 
     public SitemapLanguage(final ServiceManager serviceManager, final PipelineComponentInfo info) throws ServiceException {
@@ -86,11 +84,8 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
     }
 
     @Override
-    public ProcessingNodeBuilder createNodeBuilder(final Configuration config) throws Exception {
+    public ProcessingNodeBuilder createNodeBuilder(final Configuration config) {
         String nodeName = config.getName();
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug("Creating node builder for " + nodeName);
-        }
         ProcessingNodeBuilder builder = (ProcessingNodeBuilder) this.applicationContext.getBean(nodeName);
         builder.setBuilder(this);
         return builder;
@@ -98,7 +93,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Map getHintsForStatement(final String role, final String hint, final Configuration statement) throws Exception {
+    public Map getHintsForStatement(final String role, final String hint, final Configuration statement) {
         return Collections.emptyMap();
     }
 
@@ -107,32 +102,18 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
      */
     @Override
     public ProcessingNode getRegisteredNode(final String name) {
-        return this.registeredNodes.get(name);
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public String getTypeForStatement(final Configuration statement, final String role) throws ConfigurationException {
-        // Get the component type for the statement
-        String type = statement.getAttribute("type", null);
-        if (type == null) {
-            type = this.itsComponentInfo.getDefaultType(role);
-        }
-        if (type == null) {
-            throw new ConfigurationException("No default type exists for 'map:" + statement.getName() + "' at "
-                    + statement.getLocation());
-        }
-        final String beanName = role + '/' + type;
-        if (!this.applicationContext.containsBean(beanName)) {
-            throw new ConfigurationException("Type '" + type + "' does not exist for 'map:" + statement.getName() + "' at "
-                    + statement.getLocation());
-        }
-        return type;
+    public String getTypeForStatement(final Configuration configuration, final String role) {
+        return configuration.getAttribute("type", null);
     }
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Collection getViewsForStatement(final String role, final String hint, final Configuration statement) throws Exception {
-        return Collections.emptyList();
+    public Collection getViewsForStatement(final String role, final String hint, final Configuration statement) {
+        return Collections.emptySet();
     }
 
     @Override
@@ -146,11 +127,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
      */
     @Override
     public boolean registerNode(final String name, final ProcessingNode node) {
-        if (this.registeredNodes.containsKey(name)) {
-            return false;
-        }
-        this.registeredNodes.put(name, node);
-        return true;
+        throw new UnsupportedOperationException();
     }
 
     public void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
