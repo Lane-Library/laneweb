@@ -158,6 +158,10 @@
                     <map:serialize type="xhtml"/>
                 </map:match>
             </map:match>
+            <map:match pattern="search.xml" type="wildcard">
+                <map:generate type="search-engine"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="expires">
             <map:parameter name="cache-key" value="{request-uri};q={query}"/>
