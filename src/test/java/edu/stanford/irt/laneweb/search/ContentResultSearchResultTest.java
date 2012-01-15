@@ -1,27 +1,35 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
 
 import java.util.regex.Pattern;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.Attributes;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.resource.Resource;
+import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.impl.DefaultContentResult;
 
-/**
- * @author ryanmax
- */
 public class ContentResultSearchResultTest {
 
-    DefaultContentResult contentResult1;
+    private DefaultContentResult contentResult1;
 
-    DefaultContentResult contentResult2;
+    private DefaultContentResult contentResult2;
 
-    ContentResultSearchResult contentResultSearchResult1;
+    private ContentResultSearchResult contentResultSearchResult1;
 
-    ContentResultSearchResult contentResultSearchResult2;
+    private ContentResultSearchResult contentResultSearchResult2;
 
-    Pattern queryTermPattern;
+    private Pattern queryTermPattern;
+    
+    private ContentResultSearchResult result;
+
+	private ContentResult contentResult;
 
     @Test
     public void testCompareToDescriptionHits() {
@@ -135,4 +143,121 @@ public class ContentResultSearchResultTest {
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) == 0);
     }
+    
+    @Before
+    public void setUp() {
+    	this.contentResult = createMock(ContentResult.class);
+    	this.queryTermPattern = QueryTermPattern.getPattern("query");
+    	expect(this.contentResult.getTitle()).andReturn("title").times(4);
+    	expect(this.contentResult.getId()).andReturn("id");
+    	expect(this.contentResult.getDescription()).andReturn("description").times(2);
+    	expect(this.contentResult.getPublicationDate()).andReturn("publicationDate").times(2);
+    	replay(this.contentResult);
+    	this.result = new ContentResultSearchResult(this.contentResult, this.queryTermPattern);
+    	verify(this.contentResult);
+    }
+
+	@Test
+	public void testHashCode() {
+		ContentResult result = createMock(ContentResult.class);
+    	expect(result.getTitle()).andReturn("the title").times(4);
+    	expect(result.getId()).andReturn("id");
+    	expect(result.getDescription()).andReturn("description").times(2);
+    	expect(result.getPublicationDate()).andReturn("publicationDate").times(2);
+    	replay(result);
+    	ContentResultSearchResult other = new ContentResultSearchResult(result, this.queryTermPattern);
+    	assertEquals(this.result.hashCode(), other.hashCode());
+    	verify(result);
+	}
+
+	@Test
+	public void testEqualsObject() {
+		ContentResult result = createMock(ContentResult.class);
+    	expect(result.getTitle()).andReturn("the title").times(4);
+    	expect(result.getId()).andReturn("id");
+    	expect(result.getDescription()).andReturn("description").times(2);
+    	expect(result.getPublicationDate()).andReturn("publicationDate").times(2);
+    	replay(result);
+    	ContentResultSearchResult other = new ContentResultSearchResult(result, this.queryTermPattern);
+    	assertEquals(this.result, other);
+    	verify(result);
+	}
+
+	@Test
+	public void testGetContentUrl() {
+		reset(this.contentResult);
+		expect(this.contentResult.getURL()).andReturn("url");
+		replay(this.contentResult);
+		assertEquals("url", this.result.getContentUrl());
+		verify(this.contentResult);
+	}
+
+	@Test
+	public void testGetPublicationTitle() {
+		reset(this.contentResult);
+		expect(this.contentResult.getPublicationTitle()).andReturn("publicationTitle");
+		replay(this.contentResult);
+		assertEquals("publicationTitle", this.result.getPublicationTitle());
+		verify(this.contentResult);
+	}
+
+	@Test
+	public void testSetGetResourceHits() {
+		this.result.setResourceHits("resourceHits");
+		assertEquals("resourceHits", this.result.getResourceHits());
+	}
+
+	@Test
+	public void testSetGetResourceId() {
+		this.result.setResourceId("resourceId");
+		assertEquals("resourceId", this.result.getResourceId());
+	}
+
+	@Test
+	public void testSetGetResourceName() {
+		this.result.setResourceName("resourceName");
+		assertEquals("resourceName", this.result.getResourceName());
+	}
+
+	@Test
+	public void testSetGetResourceUrl() {
+		this.result.setResourceUrl("resourceUrl");
+		assertEquals("resourceUrl", this.result.getResourceUrl());
+	}
+
+	@Test
+	public void testGetScore() {
+		assertEquals(1, this.result.getScore());
+	}
+
+	@Test
+	public void testGetSortTitle() {
+		assertEquals("title", this.result.getSortTitle());
+	}
+
+	@Test
+	public void testToSAX() throws SAXException {
+		ContentHandler handler = createMock(ContentHandler.class);
+		reset(this.contentResult);
+		handler.startElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class), isA(Attributes.class));
+		expectLastCall().times(12);
+		expect(this.contentResult.getId()).andReturn("id");
+		handler.characters(isA(char[].class), eq(0), gt(0));
+		expectLastCall().times(11);
+		handler.endElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class));
+		expectLastCall().times(12);
+		expect(this.contentResult.getContentId()).andReturn("contentId");
+		expect(this.contentResult.getTitle()).andReturn("title");
+		expect(this.contentResult.getDescription()).andReturn("description");
+		expect(this.contentResult.getAuthor()).andReturn("author");
+		expect(this.contentResult.getPublicationDate()).andReturn("publicationDate");
+		expect(this.contentResult.getPublicationTitle()).andReturn("publicationTitle");
+		expect(this.contentResult.getPublicationVolume()).andReturn("publicationVolume");
+		expect(this.contentResult.getPublicationIssue()).andReturn("publicationIssue");
+		expect(this.contentResult.getPages()).andReturn("pages");
+		expect(this.contentResult.getURL()).andReturn("url");
+		replay(this.contentResult, handler);
+		this.result.toSAX(handler);
+		verify(this.contentResult, handler);
+	}
 }

@@ -22,7 +22,7 @@
                 </map:match>
                 <map:match pattern="search/engine/xml/*" type="wildcard">
                     <map:generate type="search-engine">
-                        <map:parameter name="engine-list" value="{1}"/>
+                        <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:select type="cme-links">
                         <map:when test="true">
@@ -38,7 +38,7 @@
                 </map:match>
                 <map:match pattern="search/engine/xml" type="wildcard">
                     <map:generate type="search-engine">
-                        <map:parameter name="engine-list" value="{$engines}"/>
+                        <map:parameter name="engines" value="{$engines}"/>
                     </map:generate>
                     <map:select type="cme-links">
                         <map:when test="true">
@@ -71,7 +71,7 @@
                 <!-- search/content/html returns xhtmlized metasearch content results -->
                 <map:match pattern="search/content/html/*" type="wildcard">
                     <map:generate type="search-content">
-                        <map:parameter name="engine-list" value="{1}"/>
+                        <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
@@ -81,7 +81,7 @@
                 <!-- return raw xml metasearch content results -->
                 <map:match pattern="search/content/xml/*" type="wildcard">
                     <map:generate type="search-content">
-                        <map:parameter name="engine-list" value="{1}"/>
+                        <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
@@ -91,7 +91,7 @@
                 <map:match pattern="search/merged/html/*" type="wildcard">
                     <map:generate type="merged-search">
                         <map:parameter name="timeout" value="5000"/>
-                        <map:parameter name="engine-list" value="{1}"/>
+                        <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
@@ -102,7 +102,7 @@
                 <map:match pattern="search/merged/xml/*" type="wildcard">
                     <map:generate type="merged-search">
                         <map:parameter name="timeout" value="5000"/>
-                        <map:parameter name="engine-list" value="{1}"/>
+                        <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
@@ -112,7 +112,7 @@
                 <map:match pattern="search/merged/history/html/*" type="wildcard">
                     <map:generate type="merged-history-search">
                         <map:parameter name="timeout" value="20000"/>
-                        <map:parameter name="engine-list" value="{1}"/>
+                        <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>

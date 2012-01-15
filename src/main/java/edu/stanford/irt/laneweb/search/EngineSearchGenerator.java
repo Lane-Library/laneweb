@@ -22,9 +22,9 @@ public class EngineSearchGenerator extends SearchGenerator {
         super.initialize();
         this.engines = ModelUtil.getObject(getModel(), Model.ENGINES, Collection.class);
         if (this.engines == null) {
-            String engineList = getParameterMap().get("engine-list");
+            String engineList = getParameterMap().get(Model.ENGINES);
             if (engineList == null) {
-                throw new IllegalArgumentException("null engine-list");
+                throw new IllegalArgumentException("null engines");
             }
             this.engines = Arrays.asList(engineList.split(","));
         }
