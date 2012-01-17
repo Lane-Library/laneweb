@@ -21,7 +21,7 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     private byte[] production = ("User-agent: *\nCrawl-delay: 7\nDisallow: /search.html\nDisallow: /secure/\n"
             + "Disallow: /stage/\nDisallow: /online/\nDisallow: /bassett/\n"
-            + "Disallow: /services/\nDisallow: /portals/history/\nDisallow: /howto/").getBytes();
+            + "Disallow: /services/\nDisallow: /portals/history/\nDisallow: /howto/\nDisallow: /tobacco/").getBytes();
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
