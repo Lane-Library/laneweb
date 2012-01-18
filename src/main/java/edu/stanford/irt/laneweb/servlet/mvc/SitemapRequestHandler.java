@@ -38,13 +38,20 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return;
         }
+        
+        String sitemapURI = getSitemapURI(request);
         Map<String, Object> model = new HashMap<String, Object>();
         this.dataBinder.bind(model, request);
-        model.put(Model.SITEMAP_URI, getSitemapURI(request));
+        model.put(Model.SITEMAP_URI, sitemapURI);
         LanewebEnvironment environment = getEnvironment();
         environment.setModel(model);
         environment.setOutputStream(response.getOutputStream());
         environment.setIsExternal(true);
+        
+        String mimeType = getContentType(sitemapURI);
+        if (mimeType != null) {
+            response.setContentType(mimeType);
+        }
         
         try {
             this.processor.process(environment);
@@ -74,6 +81,22 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     public void setServletContext(final ServletContext servletContext) {
         this.servletContext = servletContext;
+    }
+
+    private  String getContentType(String value) {
+        String contentType = this.servletContext.getMimeType(value);
+        if (contentType == null) {
+            if (value.indexOf("xml") > -1 || value.indexOf("rss") > -1 || value.indexOf("classes/") > -1) {
+                contentType = "text/xml";
+            } else if (value.indexOf("html") > -1) {
+                contentType = "text/html";
+            } else if (value.indexOf("json") > -1) {
+                contentType = "application/json";
+            } else {
+                contentType = "text/plain";
+            }
+        }
+        return contentType;
     }
     
     protected String getSitemapURI(HttpServletRequest request) {

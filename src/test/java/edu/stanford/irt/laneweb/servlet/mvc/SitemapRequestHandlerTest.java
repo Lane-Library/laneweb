@@ -68,7 +68,9 @@ public class SitemapRequestHandlerTest {
         expect(this.request.getMethod()).andReturn("GET");
         expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
         expect(this.request.getRequestURI()).andReturn("/index.html");
+        expect(this.servletContext.getMimeType("/index.html")).andReturn("text/html");
         expect(this.response.getOutputStream()).andReturn(null);
+        this.response.setContentType("text/html");
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         environment.setModel(isA(Map.class));
         environment.setOutputStream(null);
