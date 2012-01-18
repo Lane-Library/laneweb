@@ -161,7 +161,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
             if (this.cachedResponse != null) {
                 byte[] content = this.cachedResponse.getResponse();
                 if (serializer == lastConsumer) {
-                    final OutputStream outputStream = environment.getOutputStream(0);
+                    environment.getOutputStream(0).write(content);
                 } else {
                     this.xmlDeserializer.setConsumer(lastConsumer);
                     this.xmlDeserializer.deserialize(content);
