@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon.pipeline;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
@@ -63,7 +61,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         this.cache = cache;
         this.cacheExpires = cacheExpires;
     }
-
 
     @Override
     public String getKeyForEventPipeline() {
@@ -174,11 +171,11 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 Generator generator = getGenerator();
                 int outputBufferSize = getOutputBufferSize();
                 if (serializer == lastConsumer) {
-                        CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
-                        // set the output stream
-                        serializer.setOutputStream(os);
-                        generator.generate();
-                        cachedData = os.getContent();
+                    CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
+                    // set the output stream
+                    serializer.setOutputStream(os);
+                    generator.generate();
+                    cachedData = os.getContent();
                 } else {
                     generator.generate();
                     cachedData = (byte[]) this.xmlSerializer.getSAXFragment();
@@ -193,10 +190,10 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 }
             }
         } catch (IOException e) {
-        	throw new LanewebException(e);
-		} catch (SAXException e) {
-        	throw new LanewebException(e);
-		}
+            throw new LanewebException(e);
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
         return true;
     }
 }
