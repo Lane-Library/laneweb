@@ -86,7 +86,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     private  String getContentType(String value) {
         String contentType = this.servletContext.getMimeType(value);
         if (contentType == null) {
-            if (value.indexOf("xml") > -1 || value.indexOf("rss") > -1 || value.indexOf("classes/") > -1) {
+            if (value.indexOf("xml") > -1 || "/rss".equals(this.prefix) || value.indexOf("classes/") > -1) {
                 contentType = "text/xml";
             } else if (value.indexOf("html") > -1) {
                 contentType = "text/html";
