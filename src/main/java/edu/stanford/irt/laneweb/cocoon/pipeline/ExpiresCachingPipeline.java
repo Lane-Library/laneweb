@@ -119,7 +119,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
     /**
      * Prepare the pipeline
      */
-    @SuppressWarnings("rawtypes")
     @Override
     protected void preparePipeline(final Environment environment) throws ProcessingException {
         Parameters parameters = getParameters();
@@ -175,21 +174,11 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 Generator generator = getGenerator();
                 int outputBufferSize = getOutputBufferSize();
                 if (serializer == lastConsumer) {
-                    if (serializer.shouldSetContentLength()) {
-                        OutputStream os = environment.getOutputStream(outputBufferSize);
-                        // set the output stream
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        serializer.setOutputStream(baos);
-                        generator.generate();
-                        cachedData = baos.toByteArray();
-                        os.write(cachedData);
-                    } else {
                         CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
                         // set the output stream
                         serializer.setOutputStream(os);
                         generator.generate();
                         cachedData = os.getContent();
-                    }
                 } else {
                     generator.generate();
                     cachedData = (byte[]) this.xmlSerializer.getSAXFragment();

@@ -86,6 +86,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
 
     private List<String> transformerSources = new LinkedList<String>();
 
+	private boolean isInternal;
+
     public NonCachingPipeline(final SourceResolver sourceResolver) {
         this.sourceResolver = sourceResolver;
     }
@@ -152,13 +154,13 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      */
     public void prepareInternal(final Environment environment) throws ProcessingException {
         this.lastConsumer = null;
+        this.isInternal = true;
         preparePipeline(environment);
     }
 
     /**
      * Process the given <code>Environment</code>, producing the output.
      */
-    @SuppressWarnings("unchecked")
     public boolean process(final Environment environment) throws ProcessingException {
         if (!this.prepared) {
             preparePipeline(environment);
@@ -177,6 +179,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * serializer. Instead all SAX events are streamed to the XMLConsumer.
      */
     public boolean process(final Environment environment, final XMLConsumer consumer) throws ProcessingException {
+    	if (!this.isInternal) {
+    		throw new LanewebException("not internal");
+    	}
         this.lastConsumer =  consumer;
         connectPipeline(environment);
         return processXMLPipeline(environment);
