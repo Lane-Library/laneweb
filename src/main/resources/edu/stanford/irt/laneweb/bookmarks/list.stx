@@ -15,7 +15,7 @@
     <stx:variable name="label"/>
     <stx:variable name="url"/>
     
-    <stx:template match="bookmark|history">
+    <stx:template match="bookmark">
         <stx:assign name="label" select="''"/>
         <stx:assign name="url" select="''"/>
         <li xmlns="http://www.w3.org/1999/xhtml">
