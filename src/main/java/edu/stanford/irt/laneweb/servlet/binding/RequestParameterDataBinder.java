@@ -67,8 +67,7 @@ public class RequestParameterDataBinder implements DataBinder {
                 model.put(this.parameterModelMap.get(name), value);
                 if ("q".equals(name)) {
                     try {
-                        // TODO: put url-encoded-query into Model.java
-                        model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
+                        model.put(Model.URL_ENCODED_QUERY, URLEncoder.encode(value, "UTF-8"));
                     } catch (UnsupportedEncodingException e) {
                         throw new LanewebException(e);
                     }

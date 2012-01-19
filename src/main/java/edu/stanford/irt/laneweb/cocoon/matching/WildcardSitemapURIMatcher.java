@@ -9,6 +9,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class WildcardSitemapURIMatcher extends AbstractWildcardMatcher {
 
+    @SuppressWarnings("rawtypes")
     @Override
     protected String getMatchString(final Map objectModel, final Parameters parameters) {
         String result = objectModel.get(Model.SITEMAP_URI).toString();

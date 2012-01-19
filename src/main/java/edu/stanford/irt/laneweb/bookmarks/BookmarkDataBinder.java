@@ -14,6 +14,7 @@ public class BookmarkDataBinder implements DataBinder {
 
     private BookmarkDAO bookmarkDAO;
 
+    @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String sunetid = (String) model.get(Model.SUNETID);
         if (sunetid != null) {

@@ -9,6 +9,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class RegexpModelValueMatcher extends AbstractRegexpMatcher {
 
+    @SuppressWarnings("rawtypes")
     @Override
     protected String getMatchString(final Map objectModel, final Parameters parameters) {
         String paramName = parameters.getParameter("parameter-name", null);

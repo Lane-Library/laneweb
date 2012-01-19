@@ -158,7 +158,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     /**
      * Process the given <code>Environment</code>, producing the output.
      */
-    @SuppressWarnings("unchecked")
     public boolean process(final Environment environment) throws ProcessingException {
         if (!this.prepared) {
             preparePipeline(environment);
@@ -377,6 +376,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     /**
      * Setup pipeline components.
      */
+    @SuppressWarnings("rawtypes")
     protected void setupPipeline(final Environment environment) throws ProcessingException {
         try {
             // setup the generator

@@ -1,7 +1,10 @@
 package edu.stanford.irt.laneweb.cocoon.source;
 
-import static org.junit.Assert.*;
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 
 import org.apache.excalibur.source.Source;
 import org.junit.Before;

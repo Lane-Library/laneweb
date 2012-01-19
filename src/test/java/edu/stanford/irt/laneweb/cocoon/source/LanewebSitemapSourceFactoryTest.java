@@ -1,11 +1,12 @@
 package edu.stanford.irt.laneweb.cocoon.source;
 
-import static org.junit.Assert.*;
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 
-import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 
 import org.apache.cocoon.Processor;
 import org.apache.cocoon.Processor.InternalPipelineDescription;
@@ -15,24 +16,26 @@ import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class LanewebSitemapSourceFactoryTest {
-    
-    private static Environment environment;
-    
+
     private static final class TestFactory extends LanewebSitemapSourceFactory {
 
         @Override
         protected Environment getEnvironment() {
             return environment;
         }
-        
     }
-    
+
+    private static Environment environment;
+
     private LanewebSitemapSourceFactory factory;
-    private Processor processor;
-    private InternalPipelineDescription pipelineDescription;
+
     private ProcessingPipeline pipeline;
+
+    private InternalPipelineDescription pipelineDescription;
+
+    private Processor processor;
+
     private SourceValidity validity;
 
     @Before

@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
-import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
-
 import java.io.IOException;
 
 import javax.servlet.http.Cookie;
@@ -12,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
+import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 
 /**
  * Checks the validity of the Lane user cookie AND if cookie will still be valid GRACE_PERIOD from now. Used to provide

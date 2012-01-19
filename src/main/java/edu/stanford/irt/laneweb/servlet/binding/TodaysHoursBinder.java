@@ -1,14 +1,14 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import edu.stanford.irt.laneweb.hours.TodaysHours;
-import edu.stanford.irt.laneweb.model.Model;
-
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import edu.stanford.irt.laneweb.hours.TodaysHours;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class TodaysHoursBinder implements DataBinder {
 

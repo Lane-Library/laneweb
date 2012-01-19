@@ -53,6 +53,7 @@ public class LanewebVariableResolverTest {
         this.expression = createMock(Expression.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testResolveInvokeContextMap() throws IOException {
         this.context.pushMap(null, Collections.singletonMap("0", "foo"));

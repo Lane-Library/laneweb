@@ -120,6 +120,8 @@ public interface Model {
     String UNIVID = "univid";
 
     String URL = "url";
+    
+    String URL_ENCODED_QUERY = "url-encoded-query";
 
     String USER_COOKIE = "user-cookie";
 

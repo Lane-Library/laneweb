@@ -14,6 +14,7 @@ public class BookmarkGenerator extends AbstractMarshallingGenerator {
         marshall(this.bookmarks);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void initialize() {
         super.initialize();

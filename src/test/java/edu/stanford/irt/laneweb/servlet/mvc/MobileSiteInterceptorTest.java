@@ -12,8 +12,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mobile.device.Device;
@@ -23,6 +21,8 @@ import org.springframework.mobile.device.site.SitePreferenceHandler;
 import org.springframework.mobile.device.site.StandardSitePreferenceHandler;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * @author ryanmax

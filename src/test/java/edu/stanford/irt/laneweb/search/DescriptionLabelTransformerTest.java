@@ -6,8 +6,6 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import edu.stanford.irt.laneweb.resource.Resource;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.laneweb.resource.Resource;
 
 public class DescriptionLabelTransformerTest {
 

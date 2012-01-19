@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import edu.stanford.irt.suggest.Suggestion;
-import edu.stanford.irt.suggest.SuggestionManager;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -14,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import edu.stanford.irt.suggest.Suggestion;
+import edu.stanford.irt.suggest.SuggestionManager;
 
 @Controller
 public class ExtensionsSuggestController {

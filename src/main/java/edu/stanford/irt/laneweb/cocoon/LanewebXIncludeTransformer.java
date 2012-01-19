@@ -41,9 +41,9 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
 
         private Logger log;
 
-        private Map model;
+        private Map<String, Object> model;
 
-        private ExceptionListener(final Map model, final Logger log) {
+        private ExceptionListener(final Map<String, Object> model, final Logger log) {
             this.model = model;
             this.log = log;
         }
@@ -102,7 +102,7 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
         this.manager = serviceManager;
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public void setup(final SourceResolver resolver, final Map model, final String source, final Parameters parameters) {
         this.resolver = resolver;
         this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);

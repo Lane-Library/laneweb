@@ -42,6 +42,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         this.dataSource = dataSource;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Bookmark> getLinks(final String sunetid) {
         if (sunetid == null) {
             throw new LanewebException("null sunetid");

@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.search;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.resource.Resource;
-
 import java.nio.CharBuffer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +7,9 @@ import java.util.regex.Pattern;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
+
+import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
+import edu.stanford.irt.laneweb.resource.Resource;
 
 public class DescriptionLabelTransformer extends AbstractTransformer {
 

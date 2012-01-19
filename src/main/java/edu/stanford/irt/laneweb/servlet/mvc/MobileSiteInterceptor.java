@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +12,8 @@ import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.mobile.device.site.SitePreferenceHandler;
 import org.springframework.mobile.device.site.StandardSitePreferenceHandler;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * Interceptor to switch between mobile and desktop sites. Based on Keith Donald's
