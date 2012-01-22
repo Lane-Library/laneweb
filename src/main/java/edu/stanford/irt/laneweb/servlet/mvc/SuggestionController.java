@@ -51,7 +51,7 @@ public class SuggestionController {
             @RequestParam(required = false) final String callback) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Content-Type", "text/plain; charset=UTF-8");
-        String query = escapeQuotes(q.trim());
+        String query = q.trim();
         SuggestionComparator comparator = new SuggestionComparator(query);
         Collection<Suggestion> suggestions = internalGetSuggestions(query, l);
         TreeSet<Suggestion> result = new TreeSet<Suggestion>(comparator);
