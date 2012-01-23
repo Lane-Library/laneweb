@@ -159,18 +159,6 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <!--<map:match pattern="samples/*bookmarks.html" type="wildcard">
-                <map:generate type="html" src="{content-base}/samples/bookmarks.html"/>
-                <map:transform type="joost" src="resources/xsl/bookmarks.stx"/>
-                <map:transform type="xinclude"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="samples/history.html" type="wildcard">
-                <map:generate type="html" src="{content-base}/samples/history.html"/>
-                <map:transform type="joost" src="resources/xsl/history.stx"/>
-                <map:transform type="xinclude"/>
-                <map:serialize type="xml"/>
-            </map:match>-->
             <map:match type="wildcard" pattern="**/banners.html">
                 <map:generate type="html" src="{content-base}/{1}/banners.html"/>
                 <map:transform type="saxon" src="resources/xsl/banners.xsl"/>
