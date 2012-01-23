@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-01-23" version="1.12.13" description="1.12.13 bug fix release">
+            <action date="2012-01-18" dev="ceyates" issue="63298" type="fix">
+                responses are not getting Content-Type headers
+            </action>
             <action date="2012-01-22" dev="ryanmax" issue="63297" type="fix">
                 suggest occasionally causing oracle text errors 
             </action>
