@@ -52,6 +52,9 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 }
 
 .var1 {
+	-webkit-border-radius: 3px;
+    border-radius: 3px;
+	-moz-border-radius: 3px;
 	background-color: #ec060d;
 	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
@@ -76,6 +79,9 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 }
 
 .var2 {
+	-webkit-border-radius: 3px;
+    border-radius: 3px;
+	-moz-border-radius: 3px;
 	background-color: #ec060d;
 	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
