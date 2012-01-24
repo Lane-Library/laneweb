@@ -36,6 +36,24 @@
                             <entry key="/local/antibiogramLPCH/index\.html(.*)" value="/newpage.html?page=/biomed-resources/antibiograms-lpch.html$1"/>
                             <entry key="/local/(antibiogram(?:LPCH)?)/(.*)" value="/newpage.html?page=/biomed-resources/$1/$2"/>
                             <entry key="/m" value="/m/index\.html"/>
+                            <!--  redirects for contact pages: remove 2012-03-01 -->
+                            <entry key="/about/contacts/banko(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Joanne_Banko/"/>
+							<entry key="/about/contacts/bourn(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Andrew_Bourn/"/>
+							<entry key="/about/contacts/brekke(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Sandra_Brekke/"/>
+							<entry key="/about/contacts/buttner(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Mary_Buttner/"/>
+							<entry key="/about/contacts/christopher(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Anthony_Christopher/"/>
+							<entry key="/about/contacts/czwies(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Cindy_Zwies/"/>
+							<entry key="/about/contacts/earnest(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Heida_Earnest/"/>
+							<entry key="/about/contacts/heilemann(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Heidi_Heilemann/"/>
+							<entry key="/about/contacts/maggio(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Lauren_Maggio/"/>
+							<entry key="/about/contacts/miller(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Dick_Miller/"/>
+							<entry key="/about/contacts/olgary(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Olga_Gary/"/>
+							<entry key="/about/contacts/stave(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Christopher_Stave/"/>
+							<entry key="/about/contacts/tinsley(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Marilyn_Tinsley/"/>
+							<entry key="/about/contacts/documents/tc_(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Anthony_Christopher/"/>
+							<entry key="/about/contacts/documents/mb_(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Mary_Buttner/"/>
+							<entry key="/about/contacts/documents/dm_(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Dick_Miller/"/>
+							<entry key="/about/contacts/documents/cs_(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Christopher_Stave/"/>
                         </map>
                     </property>
                 </bean>
