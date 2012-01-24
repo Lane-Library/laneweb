@@ -4,10 +4,10 @@
 	-moz-user-select: none;
 	background-color: #edede5;
 	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
-	background: -webkit-gradient(linear, center top, from(#edede5),
-		to(#fafbf8) );
+	background: -webkit-gradient(linear, center top, from(#fafbf8),
+		to(#edede5) );
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
-		       '#edede5', endColorstr = '#fafbf8' );
+		       '#fafbf8', endColorstr = '#edede5' );
 	color: #444444;
 	border: 1px solid #dadad9;
 	cursor: pointer;
@@ -26,10 +26,10 @@
 .button-css:hover {
 	background-color: #eeeee5;
 	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
-	background: -webkit-gradient(linear, center top, from(#edede5),
-		to(#fafbf8) );
+background: -webkit-gradient(linear, center top, from(#fafbf8),
+		to(#edede5) );
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
-		       '#edede5', endColorstr = '#fafbf8' );
+		       '#fafbf8', endColorstr = '#edede5' );
 	border: 1px solid #bfbfbf /*b5b79b*/;
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e6;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e6;
@@ -39,10 +39,10 @@
 .button-css:active {
 	background-color: #eeeee5;
 	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
-	background: -webkit-gradient(linear, center top, from(#edede5),
-		to(#fafbf8) );
+	background: -webkit-gradient(linear, center top, from(#fafbf8),
+		to(#edede5) );
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
-		       '#edede5', endColorstr = '#fafbf8' );
+		       '#fafbf8', endColorstr = '#edede5');
 	border: 1px solid #b5b79b;
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e6;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e6;
@@ -55,7 +55,7 @@
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
 		to(#ec060d) );
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
-		       '#9e1d21', endColorstr = '#ec060d' );
+		       '#ec060d', endColorstr = '#9e1d21' );
 	color: #ffffff;
 	border: 1px solid transparent;
 }
@@ -66,7 +66,7 @@
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
 		to(#ec060d) );
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
-		       '#9e1d21', endColorstr = '#ec060d' );
+		       '#ec060d', endColorstr = '#9e1d21' );
 	border: 1px solid #ff0000;
 	-moz-box-shadow: 1px 1px 1px 1px #9b9b9b;
 	-webkit-box-shadow: 1px 1px 1px 1px #9b9b9b;
