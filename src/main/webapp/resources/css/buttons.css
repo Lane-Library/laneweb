@@ -1,3 +1,78 @@
+/* styles for css buttons */
+.button-css {
+	-moz-border-radius: 3px 3px 3px 3px;
+	-moz-user-select: none;
+	background-color: #edede5;
+	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
+	background: -webkit-gradient(linear, center top, from(#edede5),
+		to(#fafbf8) );
+	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
+		       '#edede5', endColorstr = '#fafbf8' );
+	color: #444444;
+	border: 1px solid #dadad9;
+	cursor: pointer;
+	display: inline-block;
+	cursor: default;
+	display: inline-block;
+	font-size: 11px;
+	font-weight: bold;
+	height: 27px;
+	line-height: 27px;
+	min-width: 46px;
+	padding: 0 8px;
+	text-align: center;
+}
+
+.button-css:hover {
+	background-color: #eeeee5;
+	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
+	background: -webkit-gradient(linear, center top, from(#edede5),
+		to(#fafbf8) );
+	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
+		       '#edede5', endColorstr = '#fafbf8' );
+	border: 1px solid #bfbfbf /*b5b79b*/;
+	-moz-box-shadow: 1px 1px 1px 1px #e8e8e6;
+	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e6;
+	box-shadow: 1px 1px 1px 1px #e8e8e6;
+}
+
+.button-css:active {
+	background-color: #eeeee5;
+	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
+	background: -webkit-gradient(linear, center top, from(#edede5),
+		to(#fafbf8) );
+	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
+		       '#edede5', endColorstr = '#fafbf8' );
+	border: 1px solid #b5b79b;
+	-moz-box-shadow: 1px 1px 1px 1px #e8e8e6;
+	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e6;
+	box-shadow: 1px 1px 1px 1px #e8e8e6;
+}
+
+.red {
+	background-color: #ec060d;
+	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
+	background: -webkit-gradient(linear, center top, from(#9e1d21),
+		to(#ec060d) );
+	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
+		       '#9e1d21', endColorstr = '#ec060d' );
+	color: #ffffff;
+	border: 1px solid transparent;
+}
+
+.red:hover {
+	background-color: #ff00000;
+	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
+	background: -webkit-gradient(linear, center top, from(#9e1d21),
+		to(#ec060d) );
+	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
+		       '#9e1d21', endColorstr = '#ec060d' );
+	border: 1px solid #ff0000;
+	-moz-box-shadow: 1px 1px 1px 1px #9b9b9b;
+	-webkit-box-shadow: 1px 1px 1px 1px #9b9b9b;
+	box-shadow: 1px 1px 1px 1px #9b9b9b;
+}
+
 /* styles for grey buttons in sprite*/
 .button {
 	display: block;
@@ -67,8 +142,9 @@
 	cursor: pointer;
 	height: 23px;
 	width: 22px;
-	display:inline-block;
+	display: inline-block;
 }
+
 .info:hover {
 	background-position: -250px -61px;
 	background-color: transparent;
