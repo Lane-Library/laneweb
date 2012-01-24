@@ -51,7 +51,7 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 	box-shadow: 1px 1px 1px 1px #e8e8e8;
 }
 
-.red {
+.var1 {
 	background-color: #ec060d;
 	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
@@ -62,7 +62,7 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 	border: 1px solid transparent;
 }
 
-.red:hover {
+.var1:hover {
 	background-color: #9e1d21;
 	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
@@ -73,6 +73,17 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 	-moz-box-shadow: 1px 1px 1px 1px #9b9b9b;
 	-webkit-box-shadow: 1px 1px 1px 1px #9b9b9b;
 	box-shadow: 1px 1px 1px 1px #9b9b9b;
+}
+
+.var2 {
+	background-color: #ec060d;
+	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
+	background: -webkit-gradient(linear, center top, from(#9e1d21),
+		to(#ec060d) );
+	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
+		       '#ec060d', endColorstr = '#9e1d21' );
+	color: #ffffff;
+	border: 1px solid transparent;
 }
 
 /* styles for grey buttons in sprite*/
