@@ -1,6 +1,8 @@
 /* styles for css buttons */
 .button-css {
-	-moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+	-moz-border-radius: 6px;
 	-moz-user-select: none;
 	background-color: #edede5;
 	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
@@ -30,10 +32,10 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 		to(#edede5) );
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
 		       '#fafbf8', endColorstr = '#edede5' );
-	border: 1px solid #bfbfbf /*b5b79b*/;
-	-moz-box-shadow: 1px 1px 1px 1px #e8e8e6;
-	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e6;
-	box-shadow: 1px 1px 1px 1px #e8e8e6;
+	border: 1px solid #9e9d98 /*b5b79b*/;
+	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
+	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
+	box-shadow: 1px 1px 1px 1px #e8e8e8;
 }
 
 .button-css:active {
@@ -44,9 +46,9 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
 		       '#fafbf8', endColorstr = '#edede5');
 	border: 1px solid #b5b79b;
-	-moz-box-shadow: 1px 1px 1px 1px #e8e8e6;
-	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e6;
-	box-shadow: 1px 1px 1px 1px #e8e8e6;
+	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
+	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
+	box-shadow: 1px 1px 1px 1px #e8e8e8;
 }
 
 .red {
@@ -61,7 +63,7 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 }
 
 .red:hover {
-	background-color: #ff00000;
+	background-color: #9e1d21;
 	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
 		to(#ec060d) );
