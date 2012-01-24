@@ -8,7 +8,6 @@ import org.apache.cocoon.caching.Cache;
 import org.apache.cocoon.caching.CachedResponse;
 import org.apache.cocoon.caching.CachingOutputStream;
 import org.apache.cocoon.caching.IdentifierCacheKey;
-import org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline;
 import org.apache.cocoon.components.sax.XMLByteStreamCompiler;
 import org.apache.cocoon.components.sax.XMLByteStreamInterpreter;
 import org.apache.cocoon.components.sax.XMLTeePipe;
@@ -25,12 +24,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class ExpiresCachingPipeline extends NonCachingPipeline {
-
-    /** This key can be used to put an expires information in the object model */
-    public static final String CACHE_EXPIRES_KEY = ExpiresCachingProcessingPipeline.class.getName() + "/Expires";
-
-    /** This key can be used to put a key in the object model */
-    public static final String CACHE_KEY_KEY = ExpiresCachingProcessingPipeline.class.getName() + "/CacheKey";
 
     /** This is the Cache holding cached responses */
     private Cache cache;
