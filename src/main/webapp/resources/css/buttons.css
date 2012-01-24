@@ -55,7 +55,7 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 	-webkit-border-radius: 3px;
     border-radius: 3px;
 	-moz-border-radius: 3px;
-	background-color: #ec060d;
+	background-color: #9e1d21;
 	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
 		to(#ec060d) );
@@ -66,7 +66,7 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 }
 
 .var1:hover {
-	background-color: #9e1d21;
+	background-color: #d60309;
 	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
 		to(#ec060d) );
