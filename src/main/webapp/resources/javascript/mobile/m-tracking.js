@@ -59,8 +59,7 @@ _gaq.push(['_trackPageview']);
         }
         else if (e.type == 'click' && (node.nodeName == 'A'||node.nodeName == 'IMG')) {
             if(node.nodeName == 'A' && $(node).parent().attr('rank')){
-                //TODO: verify that q is correct value here
-                _gaq.push(['_trackEvent', "searchResultClick", $("input[name=q]").val(), node.textContent, parseInt($(node).parent().attr('rank'),10)]);
+                _gaq.push(['_trackEvent', "searchResultClick", $("input[name=qSearch]").val(), node.textContent, parseInt($(node).parent().attr('rank'),10)]);
             }
             _gaq.push(['_trackPageview', basePath + $.LANE.tracking.encode($.LANE.tracking.getTrackingTitle(node))]);
         }
