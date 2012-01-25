@@ -67,7 +67,7 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 
 .var1:hover {
 	background-color: #ab0b10;
-	background-image: -moz-linear-gradient(center top, #ab0b10, #9e1d21);
+	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
 		to(#ab0b10) );
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
