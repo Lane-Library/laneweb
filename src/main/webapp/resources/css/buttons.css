@@ -66,12 +66,12 @@ background: -webkit-gradient(linear, center top, from(#fafbf8),
 }
 
 .var1:hover {
-	background-color: #d60309;
-	background-image: -moz-linear-gradient(center top, #ec060d, #9e1d21);
+	background-color: #ab0b10;
+	background-image: -moz-linear-gradient(center top, #ab0b10, #9e1d21);
 	background: -webkit-gradient(linear, center top, from(#9e1d21),
-		to(#ec060d) );
+		to(#ab0b10) );
 	filter: progid : DXImageTransform.Microsoft.gradient (startColorstr =       
-		       '#ec060d', endColorstr = '#9e1d21' );
+		       '#ab0b10', endColorstr = '#9e1d21' );
 	border: 1px solid #ff0000;
 	-moz-box-shadow: 1px 1px 1px 1px #9b9b9b;
 	-webkit-box-shadow: 1px 1px 1px 1px #9b9b9b;
