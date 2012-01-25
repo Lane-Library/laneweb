@@ -525,16 +525,11 @@
             <scope>runtime</scope>
             <version>2.4</version>
         </dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.1.2</version>
-		</dependency>
         <dependency>
             <artifactId>easymock</artifactId>
             <groupId>org.easymock</groupId>
             <scope>test</scope>
-            <version>3.0</version>
+            <version>3.1</version>
         </dependency>
         <dependency>
             <artifactId>ehcache-core</artifactId>
@@ -611,7 +606,7 @@
         <dependency>
             <artifactId>querymap</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.2.3</version>
+            <version>1.2.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>saxon</artifactId>
