@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-01-27" version="1.12.14" description="1.12.14 bug fix release">
+            <action date="2012-01-25" dev="ceyates" issue="63583" type="fix">
+                occasional querymap exceptions in log 
+            </action>
+            <action date="2012-01-24" dev="olgary" issue="63548" type="update">
+                updated 'live chat' icon 
+            </action>
+            <action date="2012-01-24" dev="ryanmax" issue="63534" type="update">
+                add about/contacts/ to our robots.txt disallow 
+            </action>
+            <action date="2012-01-24" dev="ryanmax" issue="63529" type="update">
+                add new *temporary* redirect rules that utilize our newpage speedbump; 
+            </action>
+        </release>
         <release date="2012-01-23" version="1.12.13" description="1.12.13 bug fix release">
             <action date="2012-01-23" dev="ceyates" issue="63478" type="update">
                 update to querymap-1.2.3; removes commons-httpclient dependency
