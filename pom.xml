@@ -133,8 +133,6 @@
                             <includes>
                                 <include>layout-min.css</include>
                                 <include>bassett-min.css</include>
-                                <!-- TODO: delete som-nav.css -->
-                                <!--<include>som-nav-min.css</include>-->
                                 <include>shaded-border-min.css</include>
                                 <include>header-min.css</include>
                                 <include>search-form-min.css</include>
