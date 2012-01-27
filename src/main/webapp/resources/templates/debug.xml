@@ -261,12 +261,12 @@
                                 <div class="yui-u first">
                                     <a href="/about/index.html?laneNav=3">ABOUT LANE</a>
                                     <ul>
-                                        <li><a href="/about/hours-directions.html?laneNav=3">Hours &amp; Directions</a></li>
+                                        <li><a href="/about/index.html?laneNav=3">Hours</a></li>
+                                        <li><a href="/about/hours-directions.html?laneNav=3">Directions &amp; Maps</a></li>
                                         <li><a href="/about/contact.html?laneNav=3">Contact Us</a></li>
                                         <li><a href="/about/studyspaces.html?laneNav=3">Study Spaces</a></li>
                                         <li><a href="/about/liaisons.html?laneNav=3">Liaisons</a></li>
                                         <li><a href="/about/affiliate-privilege.html?laneNav=3">Library Affiliations</a></li>
-                                        <li><a href="/about/index.html?laneNav=3">ALL &#xBB;</a></li>
                                     </ul>
                                 </div>
                                 <div class="yui-u">
