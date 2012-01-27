@@ -33,7 +33,7 @@
 #laneNav .active ul a {
     background-color : transparent;
 }
-#laneNav ul {
+#laneNav ul, #favorites ul {
     display : none;
     background-color : white;
     position : absolute;
@@ -54,7 +54,9 @@
     box-shadow: 0 2px 2px #ADADAD;
 }
 #laneNav li:hover ul,
-#laneNav .hover ul {
+#favorites:hover ul,
+#laneNav .hover ul,
+#favorites.hover {
     display : block;
 }
 #laneNav ul li {

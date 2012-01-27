@@ -76,6 +76,11 @@
         <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
     
+    <bean id="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator"
+        abstract="true" scope="prototype">
+        <property name="marshaller" ref="org.springframework.oxm.Marshaller"/>
+    </bean>
+    
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
         class="edu.stanford.irt.laneweb.cocoon.NamespaceFilter"
         scope="prototype"/>

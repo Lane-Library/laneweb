@@ -6,6 +6,7 @@
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmark"
         class="edu.stanford.irt.laneweb.bookmarks.BookmarkDataBinder">
         <property name="bookmarkDAO" ref="edu.stanford.irt.laneweb.bookmarks.BookmarkDAO"/>
+        <property name="enabled" value="${bookmarksEnabled}"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/bookmark"
@@ -18,6 +19,11 @@
     <bean name="edu.stanford.irt.laneweb.bookmarks.BookmarkDAO"
         class="edu.stanford.irt.laneweb.bookmarks.SQLBookmarkDAO">
         <constructor-arg ref="javax.sql.DataSource/eresources"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.selection.Selector/bookmarks-enabled"
+        class="edu.stanford.irt.laneweb.bookmarks.BookmarksEnabledSelector">
+        <constructor-arg value="${bookmarksEnabled}"/>
     </bean>
     
 </beans>

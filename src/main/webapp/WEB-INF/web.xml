@@ -13,6 +13,7 @@
         <param-value>
             /WEB-INF/spring/bassett.xml
             /WEB-INF/spring/binding.xml
+            /WEB-INF/spring/bookmarks.xml
             /WEB-INF/spring/cme.xml
             /WEB-INF/spring/datasources.xml
             /WEB-INF/spring/eresources.xml

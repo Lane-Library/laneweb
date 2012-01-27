@@ -56,7 +56,20 @@
                         <map:transform type="html-cme-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+                <!-- feature toggle here, if app was built with bookmarksEnabled=true -->
+                <map:select type="bookmarks-enabled">
+                    <map:when test="true">
+                        <map:transform type="saxon" src="resources/xsl/bookmarks-laneweb.xsl"/>
+                        <map:select type="logged-in">
+                            <map:when test="true">
+                                <map:transform type="xinclude"/>
+                            </map:when>
+                        </map:select>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+                    </map:otherwise>
+                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>

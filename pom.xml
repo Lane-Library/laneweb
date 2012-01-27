@@ -60,6 +60,8 @@
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
+        <defaultTemplate>template</defaultTemplate>
+        <bookmarksEnabled>false</bookmarksEnabled>
     </properties>
     <build>
         <defaultGoal>package</defaultGoal>
@@ -655,22 +657,22 @@
             <artifactId>spring-aop</artifactId>
             <groupId>org.springframework</groupId>
             <scope>runtime</scope>
-            <version>3.0.7.RELEASE</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-beans</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.7.RELEASE</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.7.RELEASE</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-core</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.7.RELEASE</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-ldap-core</artifactId>
@@ -700,22 +702,22 @@
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
             <scope>test</scope>
-            <version>3.0.7.RELEASE</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.7.RELEASE</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.7.RELEASE</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-webmvc</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.7.RELEASE</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -731,7 +733,165 @@
         <dependency>
         	<groupId>org.springframework</groupId>
         	<artifactId>spring-oxm</artifactId>
-        	<version>3.0.7.RELEASE</version>
+        	<version>3.1.0.RELEASE</version>
         </dependency>
     </dependencies>
+    <profiles>
+        <profile>
+            <id>bookmarks</id>
+            <activation>
+                <property>
+                    <name>bookmark</name>
+                </property>
+            </activation>
+            <properties>
+                <defaultTemplate>bookmarks</defaultTemplate>
+                <bookmarksEnabled>true</bookmarksEnabled>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>yuicompressor-maven-plugin</artifactId>
+                    <version>1.2</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compress</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <webappDirectory>target/laneweb</webappDirectory>
+                        <excludes>
+                            <exclude>**/swfobject.js</exclude>
+                            <exclude>**/lane-all.css</exclude>
+                            <exclude>**/lane-all.js</exclude>
+                            <exclude>**/lane-mobile.css</exclude>
+                            <exclude>**/lane-mobile.js</exclude>
+                            <exclude>**/test/*/*.js</exclude>
+                            <exclude>**/yui.js</exclude>
+                            <exclude>**/yui.css</exclude>
+                        </excludes>
+                        <aggregations>
+                            <aggregation>
+                                <removeIncluded>true</removeIncluded>
+                                <output>target/laneweb/resources/css/lane-all.css</output>
+                                <includes>
+                                    <include>layout-min.css</include>
+                                    <include>bassett-min.css</include>
+                                    <include>shaded-border-min.css</include>
+                                    <include>header-min.css</include>
+                                    <include>search-form-min.css</include>
+                                    <include>lane-nav-min.css</include>
+                                    <include>lists-min.css</include>
+                                    <include>anchors-min.css</include>
+                                    <include>som-footer-min.css</include>
+                                    <include>lane-footer-min.css</include>
+                                    <include>headers-min.css</include>
+                                    <include>module-min.css</include>
+                                    <include>autocomplete-min.css</include>
+                                    <include>search-min.css</include>
+                                    <include>popups-min.css</include>
+                                    <include>online-resources-min.css</include>
+                                    <include>tooltips-min.css</include>
+                                    <include>miscellaneous-min.css</include>
+                                    <include>events-min.css</include>
+                                    <include>node-accordion-min.css</include>
+                                    <include>expandies-min.css</include>
+                                    <include>buttons-min.css</include>
+                                    <include>breadcrumb-form-min.css</include>
+                                    <include>tutorials-min.css</include>
+                                    <include>forms-min.css</include>
+                                    <include>section-menu-min.css</include>
+                                    <include>liaisons-min.css</include>
+                                    <include>table-styles-min.css</include>
+                                    <include>follow-min.css</include>
+                                    <include>images-min.css</include>
+                                    <include>captioned-img-min.css</include>
+                                    <include>lightbox-min.css</include>
+                                    <include>feedback-min.css</include>
+                                    <include>live-chat-min.css</include>
+                                    <include>redesign-june-2011-min.css</include>
+                                    <include>banner-min.css</include>
+                                    <include>hightlighted-resources-min.css</include>
+                                    <include>antibiogram-min.css</include>
+                                    <include>landing-pgs-2011-min.css</include>
+                                    <include>bookmarks-min.css</include>
+                                </includes>
+                            </aggregation>
+                            <aggregation>
+                                <removeIncluded>true</removeIncluded>
+                                <output>target/laneweb/resources/javascript/lane-all.js</output>
+                                <includes>
+                                    <include>lane-min.js</include>
+                                    <include>model-min.js</include>
+                                    <include>lane-ie-min.js</include>
+                                    <include>lane-mobile-ad-min.js</include>
+                                    <include>lane-search-result-min.js</include>
+                                    <include>lane-search-indicator-min.js</include>
+                                    <include>lane-bassett-min.js</include>
+                                    <include>lane-textinputs-min.js</include>
+                                    <include>lane-suggest-min.js</include>
+                                    <include>lane-search-pico-min.js</include>
+                                    <include>lane-search-min.js</include>
+                                    <include>lane-tracking-min.js</include>
+                                    <include>lane-expandies-min.js</include>
+                                    <include>lane-google-min.js</include>
+                                    <include>lane-webtrends-min.js</include>
+                                    <include>lane-lightbox-min.js</include>
+                                    <include>lane-popup-min.js</include>
+                                    <include>lane-metasearch-min.js</include>
+                                    <include>lane-search-facets-min.js</include>
+                                    <include>lane-search-facet-counts-min.js</include>
+                                    <include>lane-search-history-min.js</include>
+                                    <include>lane-tooltips-min.js</include>
+                                    <include>lane-spellcheck-min.js</include>
+                                    <include>lane-findit-min.js</include>
+                                    <include>lane-querymap-min.js</include>
+                                    <include>lane-teletype-min.js</include>
+                                    <include>lane-selections-min.js</include>
+                                    <include>lane-popin-min.js</include>
+                                    <include>lane-quicklinks-min.js</include>
+                                    <include>lane-forms-min.js</include>
+                                    <include>lane-search-reset-min.js</include>
+                                    <include>lane-search-hoverText-min.js</include>
+                                    <include>lane-feedback-min.js</include>
+                                    <include>banner-min.js</include>
+                                    <include>purchase-suggestions-min.js</include>
+                                    <include>menu-delay-min.js</include>
+                                    <include>lane-search-printonly-min.js</include>
+                                    <include>link-plugin-min.js</include>
+                                    <include>bookmarks-min.js</include>
+                                </includes>
+                            </aggregation>
+                            <aggregation>
+                                <removeIncluded>true</removeIncluded>
+                                <output>target/laneweb/resources/css/mobile/lane-mobile.css</output>
+                                <includes>
+                                    <include>jquery.mobile.structure-1.0-min.css</include>
+                                    <include>jquery.ui.autocomplete-min.css</include>
+                                    <include>m-lane-min.css</include>
+                                </includes>
+                            </aggregation>
+                            <aggregation>
+                                <removeIncluded>true</removeIncluded>
+                                <output>target/laneweb/resources/javascript/mobile/lane-mobile.js</output>
+                                <includes>
+                                    <include>jquery-1.6.4-min.js</include>
+                                    <include>jquery.mobile-1.0-min.js</include>
+                                    <include>jquery-ui-1.8.16.custom-min.js</include>
+                                    <include>m-lane-min.js</include>
+                                    <include>m-login-min.js</include>
+                                    <include>m-spellcheck-min.js</include>
+                                    <include>m-tracking-min.js</include>
+                                </includes>
+                            </aggregation>
+                        </aggregations>
+                    </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
