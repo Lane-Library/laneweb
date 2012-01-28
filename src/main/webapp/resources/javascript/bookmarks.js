@@ -557,13 +557,16 @@
 })();
 
 
+(function() {
 if (Y.one("#bookmarks")) {
-    var widget = new Y.lane.BookmarksWidget({srcNode:Y.one("#bookmarks")});
+	var widget, editor, link;
+    widget = new Y.lane.BookmarksWidget({srcNode:Y.one("#bookmarks")});
     widget.render();
     if (Y.one("#bookmarks-editor")) {
-        var editor = new Y.lane.BookmarksEditor({srcNode:Y.one("#bookmarks-editor"), bookmarks : widget.get("bookmarks")});
+        editor = new Y.lane.BookmarksEditor({srcNode:Y.one("#bookmarks-editor"), bookmarks : widget.get("bookmarks")});
         editor.render();
     };
-    var link = new Y.lane.BookmarkLink();
-    link.render();
+    link = new Y.lane.BookmarkLink();
 };
+
+})();
