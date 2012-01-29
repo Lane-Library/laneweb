@@ -574,7 +574,7 @@ if (Y.one("#bookmarks")) {
         editor = new Y.lane.BookmarksEditor({srcNode:Y.one("#bookmarks-editor"), bookmarks : widget.get("bookmarks")});
         editor.render();
     };
-    link = new Y.lane.BookmarkLink();
+    link = new Y.lane.BookmarkLink({bookmarks:widget.get("bookmarks")});
 };
 
 })();
