@@ -338,6 +338,9 @@
                 return Y.Node.create("<a style='border:1px black solid;padding:3px;visibility:hidden;background-color:white'>bookmark this</a>");
             }
         },
+        bookmarks : {
+        	value : null
+        },
         timeoutid : {
             value : null
         },
