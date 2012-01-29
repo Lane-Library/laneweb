@@ -382,7 +382,15 @@
             this.set("inBookmark", true);
         },
         _handleClick : function() {
-            this.get("bookmarks").add(new Y.lane.Bookmark({node : this.get("target")}));
+    	    var target = this.get("target") label, url;
+            target.plug(Y.lane.LinkPlugin);
+            label = target.link.get("title");
+            if (target.link.get("local")) {
+                url = target.link.get("path");
+            } else {
+                url = target.link.get("url");
+            }
+            this.get("bookmarks").add(new Y.lane.Bookmark({label:label, url:url}));
         },
         _handleInBookmarkChange : function(event) {
             this.toggleVisibility(event.newVal);
