@@ -382,7 +382,7 @@
             this.set("inBookmark", true);
         },
         _handleClick : function() {
-    	    var target = this.get("target") label, url;
+    	    var target = this.get("target"), label, url;
             target.plug(Y.lane.LinkPlugin);
             label = target.link.get("title");
             if (target.link.get("local")) {
