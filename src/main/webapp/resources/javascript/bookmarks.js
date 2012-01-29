@@ -393,7 +393,7 @@
             } else {
                 url = target.link.get("url");
             }
-            this.get("bookmarks").add(new Y.lane.Bookmark({label:label, url:url}));
+            this.get("bookmarks").addBookmark(new Y.lane.Bookmark({label:label, url:url}));
         },
         _handleInBookmarkChange : function(event) {
             this.toggleVisibility(event.newVal);
