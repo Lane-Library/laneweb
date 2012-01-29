@@ -382,7 +382,7 @@
             this.set("inBookmark", true);
         },
         _handleClick : function() {
-            this.get("bookmarks").add(new Bookmark({node : this.get("target")}));
+            this.get("bookmarks").add(new Y.lane.Bookmark({node : this.get("target")}));
         },
         _handleInBookmarkChange : function(event) {
             this.toggleVisibility(event.newVal);
