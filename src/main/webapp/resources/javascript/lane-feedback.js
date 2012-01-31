@@ -72,7 +72,13 @@
             items.item(event.newVal).addClass(itemActiveClass);
             focusElement = items.item(event.newVal).one("textarea, input[type='text']");
             if (focusElement) {
-                focusElement.focus();
+                try {
+                    focusElement.focus();
+                } catch (e) {
+                    //IE6 throws an error here:
+                    //Can't move focus to the control because it is invisible, not enabled, or
+                    //of a type that does not accept the focus.
+                }
             }
         },
         _handleMenuClick : function(event) {
