@@ -25,8 +25,6 @@
 
     <xsl:param name="sunetid"/>
 
-    <xsl:param name="bookmarks"/>
-
     <!-- a MeSH term -->
     <xsl:param name="mesh"/>
 
@@ -52,8 +50,6 @@
     <xsl:param name="alpha"/>
 
     <!-- ==========================  VARIABLES  ========================== -->
-    
-    <xsl:variable name="ipgroup-string" select="string($ipgroup)"/>
 
     <!-- the root node of the requested content document -->
     <xsl:variable name="source-doc" select="/*/h:html[1]"/>
@@ -162,15 +158,6 @@
                     <xi:fallback/>
                 </xi:include>
             </xsl:when>
-            <xsl:when test=".='model' and string-length($sunetid) &gt; 0">
-                <!-- put model data into a javascript object in a script element -->
-                <!-- TODO: escape quotes -->
-                <script id="model" type="text/plain">
-                    <xsl:text>{</xsl:text>
-                    <xsl:text>"sunetid":"</xsl:text><xsl:value-of select="$sunetid"/><xsl:text>"</xsl:text>
-                    <xsl:text>}</xsl:text>
-                </script>
-            </xsl:when>
         </xsl:choose>
     </xsl:template>
 
@@ -184,8 +171,7 @@
     </xsl:template>
 
     <!-- put script text into a comment so saxon won't convert entities -->
-    <!-- TODO: is this necessary? I don't think so -->
-    <!--<xsl:template match="h:script[string-length(normalize-space()) &gt; 0]">
+    <xsl:template match="h:script[string-length(normalize-space()) &gt; 0]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:comment>
@@ -193,7 +179,7 @@
                 <xsl:text>//</xsl:text>
             </xsl:comment>
         </xsl:copy>
-    </xsl:template>-->
+    </xsl:template>
     
     <!-- match and copy the template body with the attributes from the content body -->
     <xsl:template match="h:body">
@@ -376,24 +362,12 @@
         <xsl:copy>
             <xsl:attribute name="class">
                 <xsl:choose>
-                    <xsl:when test="not($live-chat-available)">live-chat-inactive</xsl:when>
+                    <xsl:when test="$live-chat-available = 'false'">live-chat-inactive</xsl:when>
                     <xsl:otherwise>live-chat</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
             <xsl:apply-templates select="attribute::node()[not(name() = 'class')] | child::node()"/>
         </xsl:copy>
-    </xsl:template>
-
-    <!-- the rss link for biomed-resources, adds the query string to href -->
-    <xsl:template match="h:link[@type='application/rss+xml' and ends-with(@href, '?')]">
-        <xsl:if test="$query != '' or $alpha != '' or $mesh != ''">
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node()[not(name()='href')]"/>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="concat(@href, $query-string)"/>
-                </xsl:attribute>
-            </xsl:copy>
-        </xsl:if>
     </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->

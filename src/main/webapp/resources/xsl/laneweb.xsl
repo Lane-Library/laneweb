@@ -4,8 +4,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="h">
 
-    <xsl:strip-space
-        elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
+    <xsl:strip-space elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
 
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the request-uri ( not including parameters ) -->
@@ -154,6 +153,11 @@
             <xsl:when test=".='todays-hours'">
                 <xsl:value-of select="$todays-hours"/>
             </xsl:when>
+            <xsl:when test=".='bookmarks' and string-length($sunetid) &gt; 0">
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="bookmarks:/list.html">
+                    <xi:fallback/>
+                </xi:include>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
 
@@ -228,8 +232,7 @@
         <xsl:copy>
             <xsl:apply-templates select="child::node()"/>
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
-            <xsl:if
-                test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
+            <xsl:if test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
                 <script type="text/javascript" src="{$base-path}/resources/javascript/swfobject.js?{$version}"><xsl:text> </xsl:text></script>
                 <script type="text/javascript">
                     <xsl:for-each select="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
@@ -251,7 +254,7 @@
 
     <!-- remove http-equiv meta elements-->
     <xsl:template match="h:meta[@http-equiv != 'refresh']"/>
-    
+
     <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
     <xsl:template match="h:meta[@name='WT.seg_1']/@content">
         <xsl:attribute name="content">
@@ -333,7 +336,7 @@
             <xsl:apply-templates select="child::h:ul"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- add ?laneNav=2 to sectionMenu links -->
     <xsl:template match="h:ul[contains(@class,'sectionMenu')]//attribute::href">
         <xsl:variable name="href">
