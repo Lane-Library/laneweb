@@ -115,9 +115,9 @@
             // of various base paths (eg /stage)
             regex = new RegExp("(.+)//([^/]+)(/././)(.+)".replace(/\//g, "\\\/"));
             href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
-            //TODO: temporary IE debugging:
-            if (Y.UA.ie <= 6) {
-                alert(href);
+            //IE <= 7 includes the hash in the href, so remove it:
+            if (href.indexOf("#") > -1) {
+                href = href.substring(0, href.indexOf("#") - 1);
             }
             Y.io(href, {
                 on : {
