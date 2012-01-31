@@ -212,6 +212,8 @@ YUI({
     
     BookmarksWidget = Y.lane.BookmarksWidget,
     
+    widget = new Y.lane.BookmarksWidget({srcNode:Y.one("#bookmarks")});
+    
     bookmarksWidgetTestCase = new T.Test.Case({
         
         name : 'BookmarksWidget Test Case',
@@ -230,15 +232,14 @@ YUI({
         },
         
         setUp : function() {
-            this.widget = new Y.lane.BookmarksWidget({srcNode:Y.one("#bookmarks")});
-            this.widget.render();
-            this.bookmarks = this.widget.get("bookmarks");
-            this.items = this.widget.get("items");
+            widget.render();
+            this.bookmarks = widget.get("bookmarks");
+            this.items = widget.get("items");
             Y.io = this.ioSuccess;
         },
         
         testExists : function() {
-            T.Assert.isTrue(T.Lang.isObject(this.widget));
+            T.Assert.isTrue(T.Lang.isObject(widget));
         },
         
         testHasBookmarks : function() {
@@ -293,9 +294,9 @@ YUI({
         newestOnTop: false
     }).render('#log');
 
-    T.Test.Runner.add(bookmarkTestCase);
-    T.Test.Runner.add(bookmarksTestCase);
-    T.Test.Runner.add(bookmarksWidgetTestCase);
-//    T.Test.Runner.add(bookmarkLinkTestCase);
+//    T.Test.Runner.add(bookmarkTestCase);
+//    T.Test.Runner.add(bookmarksTestCase);
+//    T.Test.Runner.add(bookmarksWidgetTestCase);
+    T.Test.Runner.add(bookmarkLinkTestCase);
     T.Test.Runner.run();
 });

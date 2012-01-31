@@ -335,7 +335,7 @@
     BookmarkLink.ATTRS = {
         node : {
             valueFn : function() {
-                return Y.Node.create("<a style='border:1px black solid;padding:3px;visibility:hidden;background-color:white'>bookmark this</a>");
+                return Y.Node.create("<a id='bookmark-link'>bookmark this</a>");
             }
         },
         bookmarks : {
