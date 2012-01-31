@@ -117,7 +117,7 @@
             href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
             //IE <= 7 includes the hash in the href, so remove it:
             if (href.indexOf("#") > -1) {
-                href = href.substring(0, href.indexOf("#") - 1);
+                href = href.substring(0, href.indexOf("#"));
             }
             Y.io(href, {
                 on : {
