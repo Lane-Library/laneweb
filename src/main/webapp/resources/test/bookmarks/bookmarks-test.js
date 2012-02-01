@@ -100,6 +100,10 @@ YUI({
         
         bookmarks : null,
         
+        initialSize : 0,
+        
+        eventHander : null,
+        
         ioSuccess : function() {
             var bar = arguments[1].on.success;
             var args = arguments[1]["arguments"];
@@ -108,36 +112,31 @@ YUI({
         },
         
         setUp : function() {
-            this.bookmarks = new Bookmarks();
+            this.bookmarks = Y.lane.BookmarksWidget.get("bookmarks");
+            this.initialSize = this.bookmarks.size();
             Y.io = this.ioSuccess;
+            this.bookmarks.detach(this.eventHandle);
         },
         
         testConstructor : function() {
         	T.Assert.isObject(this.bookmarks);
         },
         
-        testConstructorArray : function() {
-        	var bookmarks = [];
-        	bookmarks.push(new Bookmark({label:"label",url:"url"}));
-        	this.bookmarks = new Bookmarks(bookmarks);
-        },
-        
         testAddBookmark : function() {
-            T.Assert.areEqual(0, this.bookmarks.size());
-        	this.bookmarks.addBookmark(new Bookmark({label:"label",url:"url"}));
-            T.Assert.areEqual(1, this.bookmarks.size());
+        	this.bookmarks.addBookmark(new Bookmark({label:"label1",url:"url1"}));
+            T.Assert.areEqual(this.initialSize + 1, this.bookmarks.size());
         },
         
         testAddBadBookmark : function() {
         	try {
             	this.bookmarks.addBookmark(null);
         	} catch(e) {}
-            T.Assert.areEqual(0, this.bookmarks.size());
+            T.Assert.areEqual(this.initialSize, this.bookmarks.size());
         },
         
         testAddBookmarkEvent : function() {
-            var added = null, bookmark = new Bookmark({label:"label",url:"url"});
-            this.bookmarks.on("addSync", function(event) {
+            var added = null, bookmark = new Bookmark({label:"label2",url:"url2"});
+            this.eventHandle = this.bookmarks.on("addSync", function(event) {
                 added = event.bookmark;
             });
             this.bookmarks.addBookmark(bookmark);
@@ -145,23 +144,23 @@ YUI({
         },
         
         testAddBookmarkEventPrevent : function() {
-            this.bookmarks.on("add", function(event) {
+            this.eventHandle = this.bookmarks.on("add", function(event) {
                 event.preventDefault();
             });
-            this.bookmarks.addBookmark(new Bookmark({label:"label",url:"url"}));
-            T.Assert.areEqual(0, this.bookmarks.size());
+            this.bookmarks.addBookmark(new Bookmark({label:"label3",url:"url3"}));
+            T.Assert.areEqual(this.initialSize, this.bookmarks.size());
         },
         
         testGetBookmark : function() {
-        	var bookmark = new Bookmark({label:"label",url:"url"});
+        	var bookmark = new Bookmark({label:"label4",url:"url4"});
         	this.bookmarks.addBookmark(bookmark);
         	T.Assert.areEqual(bookmark, this.bookmarks.getBookmark(0));
         },
         
         testRemoveBookmark : function() {
-            this.bookmarks.addBookmark(new Bookmark({label:"label",url:"url"}));
+            this.bookmarks.addBookmark(new Bookmark({label:"label5",url:"url5"}));
             this.bookmarks.removeBookmark(0);
-            T.Assert.areEqual(0, this.bookmarks.size());
+            T.Assert.areEqual(this.initialSize - 1, this.bookmarks.size());
         },
         
         testRemoveBookmarkBadPosition : function() {
@@ -172,8 +171,8 @@ YUI({
         
         testRemoveBookmarkEvent : function() {
             var position = null;
-            this.bookmarks.addBookmark(new Bookmark({label:"label",url:"url"}));
-            this.bookmarks.on("removeSync", function(event) {
+            this.bookmarks.addBookmark(new Bookmark({label:"label6",url:"url6"}));
+            this.eventHandle = this.bookmarks.on("removeSync", function(event) {
                 position = event.position;
             });
             this.bookmarks.removeBookmark(0);
@@ -181,18 +180,18 @@ YUI({
         },
         
         testRemoveBookmarkEventPrevent : function() {
-            this.bookmarks.addBookmark(new Bookmark({label:"label",url:"url"}));
-            this.bookmarks.on("remove", function(event) {
+            this.bookmarks.addBookmark(new Bookmark({label:"label7",url:"url7"}));
+            this.eventHandle = this.bookmarks.on("remove", function(event) {
                 event.preventDefault();
             });
             this.bookmarks.removeBookmark(0);
-            T.Assert.areEqual(1, this.bookmarks.size());
+            T.Assert.areEqual(this.initialSize + 1, this.bookmarks.size());
         },
         
         testUpdateBookmark : function() {
-            var b = null, p = -1, bookmark = new Bookmark({label:"label",url:"url"});
+            var b = null, p = -1, bookmark = new Bookmark({label:"label8",url:"url8"});
             this.bookmarks.addBookmark(bookmark);
-            this.bookmarks.on("update", function(event) {
+            this.eventHandle = this.bookmarks.on("update", function(event) {
                 b = event.bookmark;
                 p = event.position;
             });
@@ -203,16 +202,12 @@ YUI({
         },
         
         testSetValue : function() {
-            var bookmark = new Bookmark({label:"label",url:"url"});
+            var bookmark = new Bookmark({label:"label9",url:"url9"});
             this.bookmarks.addBookmark(bookmark);
             this.bookmarks.setValue(0, {label:"newlabel"});
             T.Assert.areEqual("newlabel", bookmark.getLabel());
         }
     }),
-    
-    BookmarksWidget = Y.lane.BookmarksWidget,
-    
-    widget = new Y.lane.BookmarksWidget({srcNode:Y.one("#bookmarks")});
     
     bookmarksWidgetTestCase = new T.Test.Case({
         
@@ -232,14 +227,14 @@ YUI({
         },
         
         setUp : function() {
-            widget.render();
-            this.bookmarks = widget.get("bookmarks");
-            this.items = widget.get("items");
+            this.widget = Y.lane.BookmarksWidget;
+            this.bookmarks = this.widget.get("bookmarks");
+            this.items = this.widget.get("items");
             Y.io = this.ioSuccess;
         },
         
         testExists : function() {
-            T.Assert.isTrue(T.Lang.isObject(widget));
+            T.Assert.isTrue(T.Lang.isObject(this.widget));
         },
         
         testHasBookmarks : function() {
@@ -279,7 +274,7 @@ YUI({
         link : null,
         
         setUp : function() {
-            this.link = new Y.lane.BookmarkLink();
+            this.link = Y.lane.BookmarkLink;
         },
     
         testExists : function() {

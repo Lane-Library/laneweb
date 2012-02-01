@@ -5,6 +5,12 @@
     margin:0;
     padding:1px 5px
 }
+#bookmark-link{
+    border:1px black solid;
+    padding:3px;
+    visibility:hidden;
+    background-color:white
+}
 #bookmarks-editor fieldset{
     border:1px #DADAD8 solid;
     background-color:#F4F5EF;
