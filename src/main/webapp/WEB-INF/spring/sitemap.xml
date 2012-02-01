@@ -46,6 +46,11 @@
         class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
         <property name="source" value="classpath:/edu/stanford/irt/laneweb/bookmarks/bookmarks.xmap"/>
     </bean>
+    
+    <bean name="org.apache.cocoon.Processor/svg" parent="org.apache.cocoon.Processor"
+        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        <property name="source" value="/svg.xmap"/>
+    </bean>
 
     <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder"
         class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
