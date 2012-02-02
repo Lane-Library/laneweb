@@ -289,9 +289,9 @@ YUI({
         newestOnTop: false
     }).render('#log');
 
-//    T.Test.Runner.add(bookmarkTestCase);
-//    T.Test.Runner.add(bookmarksTestCase);
-//    T.Test.Runner.add(bookmarksWidgetTestCase);
+    T.Test.Runner.add(bookmarkTestCase);
+    T.Test.Runner.add(bookmarksTestCase);
+    T.Test.Runner.add(bookmarksWidgetTestCase);
     T.Test.Runner.add(bookmarkLinkTestCase);
     T.Test.Runner.run();
 });
