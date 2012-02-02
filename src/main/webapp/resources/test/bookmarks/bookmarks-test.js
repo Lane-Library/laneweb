@@ -102,7 +102,7 @@ YUI({
         
         initialSize : 0,
         
-        eventHander : null,
+        eventHandle : null,
         
         ioSuccess : function() {
             var bar = arguments[1].on.success;
@@ -115,7 +115,12 @@ YUI({
             this.bookmarks = Y.lane.BookmarksWidget.get("bookmarks");
             this.initialSize = this.bookmarks.size();
             Y.io = this.ioSuccess;
-            this.bookmarks.detach(this.eventHandle);
+        },
+        
+        tearDown : function() {
+            if (this.eventHandle) {
+                this.bookmarks.detach(this.eventHandle);
+            }
         },
         
         testConstructor : function() {
