@@ -396,7 +396,7 @@
 
         Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
 
-        if (Y.one("bookmarks-editor")) {
+        if (Y.one("#bookmarks-editor")) {
 
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
                 syncUI : function(config) {
@@ -544,7 +544,7 @@
                 }
             });
 
-            Y.lane.BookmarksEditor = BookmarksEditor({srcNode:Y.one("#bookmarks-editor"), bookmarks : Y.lane.BookmarksWidget.get("bookmarks")});
+            Y.lane.BookmarksEditor = new BookmarksEditor({srcNode:Y.one("#bookmarks-editor"), bookmarks : Y.lane.BookmarksWidget.get("bookmarks")});
             Y.lane.BookmarksEditor.render();
         }
     }
