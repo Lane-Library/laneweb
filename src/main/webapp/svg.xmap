@@ -6,6 +6,9 @@
         <map:pipeline type="caching">
             <map:match pattern="*" type="wildcard">
                 <map:generate type="file" src="/resources/images/{1}"/>
+                <map:transform type="joost" src="/resources/xsl/buttons.stx">
+                    <map:parameter name="cache-key" value="{text}"/>
+                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

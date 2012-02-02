@@ -107,6 +107,8 @@ public interface Model {
 
     String TEMPLATE = "template";
 
+    String TEXT = "text";
+
     String TICKET = "ticket";
 
     String TIMEOUT = "timeout";

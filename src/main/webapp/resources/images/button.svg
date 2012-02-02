@@ -22,7 +22,7 @@
     
     <text x="30" y="55" fill="white"
         font-family="Tahoma" font-size="20" font-weight="500">
-        SVG Button
+        <?laneweb button-text?>
     </text>
     
     <!-- vitual lighting effect -->
