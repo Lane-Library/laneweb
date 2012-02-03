@@ -7,54 +7,64 @@
     if (Y.one("#bookmarks")) {
 
         /**
-         * A class for representing a bookmark with attributes for the label, url and proxy url.
+         * A class for representing a bookmark with attributes for the label and url.
          * 
          * @class Bookmark
          * @constructor
          */
-        Bookmark = function(config) {
-            if (!Y.Lang.isObject(config) || !(Y.Lang.isString(config.label) && Y.Lang.isString(config.url))) {
-                Y.log('bad config', 'error', 'bookmark');
-                throw("bad config");
-            }
+        Bookmark = function(label, url) {
             this.publish("valueChange", {defaultFn : this._valueChange});
-            this._value = {label:config.label,url:config.url};
+            this.setValues(label, url);
             Y.log("created new " + this);
         };
 
         Bookmark.prototype = {
                 _valueChange : function(event) {
-                    this._value = event.newVal;
+                    this._label = event.newLabel;
+                    this._url = event.newUrl;
                 },
                 getLabel : function() {
-                    return this._value.label;
+                    return this._label;
                 },
 
                 getUrl : function() {
-                    return this._value.url;
+                    return this._url;
+                },
+                
+                setLabel : function(newLabel) {
+                    this.setValues(newLabel, this._url);
+                },
+                
+                setUrl : function(newUrl) {
+                    this.setValues(this._label, newUrl);
                 },
 
                 /**
                  * Set both the label and url then fire a changed event
-                 * @param labelAndUrl
+                 * @param label
+                 * @param url
                  */
-                setValue : function(newVal) {
+                setValues : function(newLabel, newUrl) {
+                    if (!newLabel) {
+                        throw("null or empty newLabel");
+                    }
+                    if (!newUrl) {
+                        throw("null or empty newUrl");
+                    }
                     var changed = false;
-                    if (Y.Lang.isObject(newVal)) {
-                        if (Y.Lang.isString(newVal.label) && newVal.label != this._label) {
+                        if (newLabel !== this._label) {
                             changed = true;
-                        } else if (Y.Lang.isString(newVal.url) && newVal.url != this._url) {
+                        } else if (newUrl !== this._url) {
                             changed = true;
                         }
-                    }
                     if (changed) {
-                        Y.log(this + " firing valueChange: newVal:{label:" + newVal.label + ",url:" + newVal.url+ "}");
-                        this.fire("valueChange", {prevVal : this._value, newVal : newVal});
+                        Y.log(this + " firing valueChange: newLabel:" + newLabel + ",newUrl:" + newUrl);
+                        this.fire("valueChange", {prevLabel : this._label, prevUrl : this._url, newLabel : newLabel,  newUrl : newUrl});
                     }
                 },
 
                 toString : function() {
-                    return "Bookmark{label:" + this._value.label + ",url:" + this._value.url + "}";
+                    return "Bookmark{label:" + this._label + ",url:" + this._url + "}";
                 }
         };
 
@@ -62,8 +72,6 @@
         Y.augment(Bookmark, Y.EventTarget, null, null, {
             emitFacade : true,
             prefix     : 'bookmark',
-            //TODO: figure out why I can prevent in the test despite this being false:
-            preventable: false
         });
 
         Y.lane.Bookmark = Bookmark;
@@ -141,9 +149,6 @@
                 },
                 size : function() {
                     return this._bookmarks.length;
-                },
-                setValue : function(position, bookmark) {
-                    this._bookmarks[position].setValue(bookmark);
                 },
                 toString : function() {
                     var string = "Bookmarks[";
@@ -276,7 +281,7 @@
                         } else {
                             url = anchor.link.get("url");
                         }
-                        bookmarks.push(new Bookmark({label:label, url:url}));
+                        bookmarks.push(new Bookmark(label, url));
                     }
                     return new Bookmarks(bookmarks);
                 }
@@ -376,7 +381,7 @@
                 } else {
                     url = target.link.get("url");
                 }
-                this.get("bookmarks").addBookmark(new Y.lane.Bookmark({label:label, url:url}));
+                this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
             },
             _handleInBookmarkChange : function(event) {
                 this.toggleVisibility(event.newVal);
@@ -426,7 +431,7 @@
                     oldlabel = bookmark.getLabel(),
                     oldurl = bookmark.getUrl();
                     if (newlabel != oldlabel || newurl != oldurl) {
-                        bookmark.setValue({label : newlabel, url : newurl});
+                        bookmark.setValues(newlabel, newurl);
                     }
                     this.set("editing", false);
                 },
