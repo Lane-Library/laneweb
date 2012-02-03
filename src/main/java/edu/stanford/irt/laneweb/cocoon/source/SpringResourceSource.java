@@ -60,10 +60,27 @@ public class SpringResourceSource implements Source {
         try {
             return new FileTimeStampValidity(this.resource.getFile());
         } catch (IOException e) {
-            return null;
+            return INVALID;
         }
     }
 
     public void refresh() {
     }
+    
+    /**
+     * A private always invalid source validity to avoid returning a null validity.
+     */
+    private static SourceValidity INVALID = new SourceValidity() {
+
+        private static final long serialVersionUID = 1L;
+
+        public int isValid() {
+            return SourceValidity.INVALID;
+        }
+
+        public int isValid(SourceValidity newValidity) {
+            return SourceValidity.INVALID;
+        }
+        
+    };
 }
