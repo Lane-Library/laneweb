@@ -7,8 +7,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
-        <link rel="alternate" type="application/rss+xml" title="Lane RSS News"
-            href="http://medblog.stanford.edu/lane-news/index.xml"/>
         <meta name="WT.seg_1" content="{ipGroup}"/>
     </head>
     <body>
@@ -250,9 +248,6 @@
                                 &#160;
                                 <a href="http://www.flickr.com/photos/40390680@N08/" class="image-link noproxy"><img
                                                 src="/resources/images/flickr-icon.png" alt="" width="27" height="28" /></a>
-                                &#160;
-                                <a href="http://medblog.stanford.edu/lane-news/index.xml" class="image-link"><img
-                                    src="/resources/images/rss-icon-color.png" alt="" width="27" height="28"/></a>
                             </div>
                         </div>
                     </div>
