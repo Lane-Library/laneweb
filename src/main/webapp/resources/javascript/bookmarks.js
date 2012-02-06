@@ -11,6 +11,8 @@
          * 
          * @class Bookmark
          * @constructor
+         * @param label {string} the label
+         * @param url {string} the url
          */
         Bookmark = function(label, url) {
             this.publish("valueChange", {defaultFn : this._valueChange});
@@ -19,30 +21,62 @@
         };
 
         Bookmark.prototype = {
+                
+                /**
+                 * The default changeEvent handler
+                 * @method _valueChange
+                 * @private
+                 * @param event {CustomEvent} the valueChange event
+                 */
                 _valueChange : function(event) {
                     this._label = event.newLabel;
                     this._url = event.newUrl;
                 },
+                
+                /**
+                 * getter for the label
+                 * @method getLabel
+                 * @returns {string} the label
+                 */
                 getLabel : function() {
                     return this._label;
                 },
 
+                /**
+                 * getter for the url
+                 * @method getUrl
+                 * @returns {string} the url
+                 */
                 getUrl : function() {
                     return this._url;
                 },
                 
+                /**
+                 * setter for the label, delegates to setValues with the current
+                 * url as the url value.
+                 * @method setLabel
+                 * @param newLabel {string}
+                 */
                 setLabel : function(newLabel) {
                     this.setValues(newLabel, this._url);
                 },
                 
+                /**
+                 * setter for the url, delegates to setValues with the current
+                 * @method setUrl
+                 * label as the label value.
+                 * 
+                 * @param newUrl {string}
+                 */
                 setUrl : function(newUrl) {
                     this.setValues(this._label, newUrl);
                 },
 
                 /**
                  * Set both the label and url then fire a changed event
-                 * @param label
-                 * @param url
+                 * @method setValues
+                 * @param newLabel {string}
+                 * @param newUrl {string}
                  */
                 setValues : function(newLabel, newUrl) {
                     if (!newLabel) {
@@ -63,17 +97,23 @@
                     }
                 },
 
+                /**
+                 * @method toString
+                 * @return {string} a string with the label and url values
+                 */
                 toString : function() {
                     return "Bookmark{label:" + this._label + ",url:" + this._url + "}";
                 }
         };
 
 
+        //Add EventTarget attributes to the Bookmark prototype
         Y.augment(Bookmark, Y.EventTarget, null, null, {
             emitFacade : true,
             prefix     : 'bookmark',
         });
 
+        //make the Bookmark constructor globally accessible
         Y.lane.Bookmark = Bookmark;
 
         /**
@@ -82,7 +122,7 @@
          * 
          * @class Bookmarks
          * @constructor
-         * @extends Base
+         * @param bookmarks {array} may be undefined
          */
         Bookmarks = function(bookmarks) {
             this._bookmarks = [];
@@ -92,7 +132,7 @@
             }
             if (bookmarks) {
                 for (var i = 0; i < bookmarks.length; i++) {
-                    bookmarks[i].after("valueChange", this._handleBookmarkChanged, this);
+                    bookmarks[i].after("valueChange", this._handleValueChange, this);
                     this._bookmarks.push(bookmarks[i]);
                 }
             }
@@ -100,32 +140,49 @@
             /**
              * @event add
              * @description Fired when a bookmark is added.
-             * @preventable _devAddFn
+             * @preventable _defAddFn
              */
             this.publish("add", {defaultFn: this._defAddFn});
+            
+            /**
+             * @event addSync
+             * @description fired after an add is successfully synced with the server
+             */
             this.publish("addSync", {defaultFn: this._successfulAdd, preventable : false});
 
             /**
              * @event remove
              * @description Fired when a bookmark is removed.
-             * @preventable _devRemoveFn
+             * @preventable _defRemoveFn
              */
             this.publish("remove", {defaultFn: this._defRemoveFn});
+            
+            /**
+             * @event removeSync
+             * @description fired when a removal is successfully synced with the server
+             */
             this.publish("removeSync", {defaultFn: this._successfulRemove, preventable : false});
 
             /**
              * @event update
              * @description Fired when a bookmark is updated.
+             * @preventable _defUpdateFn
              */            
             this.publish("update", {defaultFn: this._defUpdateFn});
-            this.publish("updateSync", {defaultFn : this._successfulUpdate, preventable : false});
+            
+            /**
+             * @event updateSync
+             * @description fired when an update is successfully synced with the server
+             */
+            this.publish("updateSync", {preventable : false});
             Y.log("created new " + this);
         };
 
         Bookmarks.prototype = {
 
                 /**
-                 * 
+                 * fires a bookmark:add event
+                 * @method addBookmark
                  * @param bookmark {Bookmark}
                  */
                 addBookmark : function(bookmark) {
@@ -135,21 +192,49 @@
                     Y.log(this + " firing add: " + bookmark);
                     this.fire("add", {bookmark : bookmark});
                 },
+                
+                /**
+                 * @method getBookmark
+                 * @param position {number}
+                 * @returns the bookmark at the position
+                 */
                 getBookmark : function(position) {
                     return this._bookmarks[position];
                 },
+                
+                /**
+                 * fires a bookmark:remove event
+                 * @method removeBookmark
+                 * @param position {number} the bookmark to remove
+                 */
                 removeBookmark : function(position) {
                     Y.log(this + " firing remove: " + position);
                     this.fire("remove", {position : position});
                 },
+                
+                /**
+                 * fires a bookmark:update event
+                 * @method updateBookmark
+                 * @param bookmark {Bookmark}
+                 */
                 updateBookmark : function(bookmark) {
                     var position = Y.Array.indexOf(this._bookmarks, bookmark);
                     Y.log(this + " firing update: position: " + position + " " + bookmark);
                     this.fire("update", {bookmark : bookmark, position : position});
                 },
+                
+                /**
+                 * @method size
+                 * @returns {number} the number of bookmarks
+                 */
                 size : function() {
                     return this._bookmarks.length;
                 },
+                
+                /**
+                 * @method toString
+                 * @returns {String} a string representation
+                 */
                 toString : function() {
                     var string = "Bookmarks[";
                     for (var i = 0; i < this._bookmarks.length; i++) {
@@ -161,9 +246,14 @@
                     string += "]";
                     return string;
                 },
-                _getBookmarks : function() {
-                    return this._bookmarks;
-                },
+                
+                /**
+                 * The default response to bookmarks:add, attempts to sync with server, fires
+                 * bookmarks:addSync if successful.
+                 * @method _defAddFn
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _defAddFn : function(event) {
                     var data = Y.JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
                     Y.io("/././bookmarks", {
@@ -185,6 +275,14 @@
                         context : this
                     });
                 },
+                
+                /**
+                 * The default response to bookmarks:remove, attempts to sync with server,
+                 * fires bookmarks:removeSync if successful
+                 * @method _defRemoveFn
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _defRemoveFn : function(event) {
                     var data = Y.JSON.stringify(event.position);
                     Y.io("/././bookmarks", {
@@ -207,8 +305,15 @@
                     });
                     this._bookmarks.splice(event.position, 1);
                 },
+                
+                /**
+                 * The default response to bookmarks:update, attempts to sync with server,
+                 * fires bookmarks:updateSync if successful.
+                 * @method _defUpdateFn
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _defUpdateFn : function(event) {
-//                  var position = Y.Array.indexOf(this._bookmarks, event.bookmark);
                     var data = Y.JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
                     Y.io("/././bookmarks", {
                         method : "put",
@@ -230,29 +335,46 @@
                     });
 
                 },
-                _handleBookmarkChanged : function(event) {
+                
+                /**
+                 * handler for bookmark:valueChange events
+                 * @method _handleValueChange
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleValueChange : function(event) {
                     this.updateBookmark(event.target);
                 },
+                
+                /**
+                 * handler for bookmarks:removeSync event, removes a bookmark from the
+                 * backing Array
+                 * @method _successfulRemove
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _successfulRemove : function(event) {
                     this._bookmarks.splice(event.position, 1);
                 },
+                
+                /**
+                 * handler for bookmarks:addSync event, adds a bookmark to index 0 of the
+                 * backing Array
+                 * @method _successfulAdd
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _successfulAdd : function(event) {
-                    event.bookmark.after("valueChange", this._handleBookmarkChanged, this);
+                    event.bookmark.after("valueChange", this._handleValueChange, this);
                     this._bookmarks.unshift(event.bookmark);
-                },
-                _successfulUpdate : function(event) {
-                    var bookmark = this._bookmarks[event.position];
-//                  bookmark.set("label", args.label);
-//                  bookmark.set("url", args.url);
-//                  this.fire("update", args.position, bookmark);
                 }
         };
 
 
+        //Add EventTarget attributes to the Bookmarks prototype
         Y.augment(Bookmarks, Y.EventTarget, null, null, {
             emitFacade : true,
-            prefix     : 'bookmarks',
-            preventable: false
+            prefix     : 'bookmarks'
         });
 
         BookmarksWidget = function() {
