@@ -232,6 +232,15 @@
                 },
                 
                 /**
+                 * @method indexOf
+                 * @param bookmark {Bookmark}
+                 * @return {number} the index of the given bookmark
+                 */
+                indexOf : function(bookmark) {
+                    return Y.Array.indexOf(this._bookmarks, bookmark);
+                },
+                
+                /**
                  * @method toString
                  * @returns {String} a string representation
                  */
@@ -543,25 +552,39 @@
                     this.get("srcNode").all("button").on("click", this._handleButtonClick, this);
                 },
                 cancel : function() {
-                    this.set("editing", false);
+                    if (this.get("bookmark")) {
+                        this.set("editing", false);
+                    } else {
+                        this.destroy(true);
+                    }
                 },
                 save : function() {
                     var srcNode = this.get("srcNode"),
                     newlabel = srcNode.one("input[name='label']").get("value"),
                     newurl = srcNode.one("input[name='url']").get("value"),
-                    bookmark = this.get("bookmark"),
-                    oldlabel = bookmark.getLabel(),
-                    oldurl = bookmark.getUrl();
-                    if (newlabel != oldlabel || newurl != oldurl) {
-                        bookmark.setValues(newlabel, newurl);
+                    bookmark = this.get("bookmark");
+                    if (bookmark) {
+                        if (newlabel != bookmark.getLabel() || newurl != bookmark.getUrl()) {
+                            bookmark.setValues(newlabel, newurl);
+                        }
+                    } else if (newlabel && newurl) {
+                        bookmark = new Bookmark(newlabel, newurl);
+                        this.set("bookmark", bookmark);
+                        Y.lane.BookmarksWidget.get("bookmarks").addBookmark(bookmark);
+                    } else {
+                        //do nothing if empty input field
+                        //TODO: some sort of error reporting to user
+                        return;
                     }
                     this.set("editing", false);
                 },
                 reset : function() {
                     var srcNode = this.get("srcNode"),
-                    bookmark = this.get("bookmark");
-                    srcNode.one("input[name='url']").set("value", bookmark.getUrl());
-                    srcNode.one("input[name='label']").set("value", bookmark.getLabel());
+                    bookmark = this.get("bookmark"),
+                    resetLabel = bookmark ? bookmark.getLabel() : "",
+                    resetUrl = bookmark ? bookmark.getUrl() : "";
+                    srcNode.one("input[name='label']").set("value", resetLabel);
+                    srcNode.one("input[name='url']").set("value", resetUrl);
                 },
                 update : function() {
                     var anchor = this.get("srcNode").one("a"),
@@ -598,9 +621,11 @@
 
             BookmarksEditor = Y.Base.create("bookmarks-editor", Y.Widget, [], {
                 renderUI : function() {
-                    var editors = [], i, items = this.get("srcNode").all("li"), bookmarks = this.get("bookmarks");
+                    var editor, editors = [], i, items = this.get("srcNode").all("li"), bookmarks = this.get("bookmarks");
                     for (i = 0; i < items.size(); i++) {
-                        editors.push(new BookmarkEditor({srcNode : items.item(i), render : true, bookmark : bookmarks.getBookmark(i)}));
+                        editor = new BookmarkEditor({srcNode : items.item(i), render : true, bookmark : bookmarks.getBookmark(i)});
+                        editor.after("destroy", this._handleDestroyEditor, this);
+                        editors.push(editor);
                     }
                     this.set("editors", editors);
                     bookmarks.after("removeSync", this._handleBookmarkRemove, this);
@@ -611,40 +636,45 @@
                     this.get("srcNode").all("fieldset button").on("click", this._handleButtonClick, this);
                 },
                 add : function() {
-                    this.get("bookmarks").addBookmark(new Y.lane.Bookmark({label : "", url : "", href : ""}));
-                },
-                "delete" : function() {
-                    var checked = this._getCheckedIndexes();
-                    if (checked.length > 0) {
-                        this.get("bookmarks").removeBookmark(checked[0]);
-                    }
-                },
-                edit : function() {
-                    var i, checked = this._getCheckedIndexes(), editors = this.get("editors");
-                    for (i = 0; i < checked.length; i++) {
-                        editors[checked[i]].set("editing", true);
-                    }
-                },
-                _handleButtonClick : function(event) {
-                    event.preventDefault();
-                    var fn = this[event.target.getAttribute("value")];
-                    if (fn) {
-                        fn.call(this);
-                    }
-                },
-                _handleBookmarkRemove : function(event) {
-                    var editors = this.get("editors"), editor;
-                    editor = editors.splice(event.position, 1)[0];
-                    editor.destroy(true);
-                },
-                _handleBookmarkAdd : function(event) {
                     var items = this.get("srcNode").one("ul");
                     var item = Y.Node.create("<li><input type=\"checkbox\" checked=\"checked\"/><a></a></li>");
                     items.prepend(item);
-                    var editor = new Y.lane.BookmarkEditor({srcNode : item, render : true, bookmark : event.bookmark});
+                    var editor = new BookmarkEditor({srcNode : item, render : true});
+                    editor.after("destroy", this._handleDestroyEditor, this);
                     this.get("editors").unshift(editor);
                     editor.set("editing", true);
-                },
+//                      this.get("bookmarks").addBookmark(new Y.lane.Bookmark({label : "", url : "", href : ""}));
+                  },
+                  "delete" : function() {
+                      var checked = this._getCheckedIndexes();
+                      if (checked.length > 0) {
+                          this.get("bookmarks").removeBookmark(checked[0]);
+                      }
+                  },
+                  edit : function() {
+                      var i, checked = this._getCheckedIndexes(), editors = this.get("editors");
+                      for (i = 0; i < checked.length; i++) {
+                          editors[checked[i]].set("editing", true);
+                      }
+                  },
+                  _handleButtonClick : function(event) {
+                      event.preventDefault();
+                      var fn = this[event.target.getAttribute("value")];
+                      if (fn) {
+                          fn.call(this);
+                      }
+                  },
+                  _handleBookmarkRemove : function(event) {
+                      this.get("editors")[event.position].destroy(true);
+                  },
+                  _handleDestroyEditor : function(event) {
+                      var editors = this.get("editors"),
+                      position = Y.Array.indexOf(editors, event.target);
+                      editors.splice(position, 1);
+                  },
+                  _handleBookmarkAdd : function(event) {
+                      this.get("editors")[event.target.indexOf(event.bookmark)].update();
+                  },
                 _handleBookmarkUpdate : function(event) {
                     var editors = this.get("editors");
                     editors[event.position].update();
