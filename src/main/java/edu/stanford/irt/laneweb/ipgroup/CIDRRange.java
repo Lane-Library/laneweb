@@ -8,9 +8,9 @@ import java.util.StringTokenizer;
  */
 public class CIDRRange {
 
-    int highest;
+    private int highest;
 
-    int lowest;
+    private int lowest;
 
     /**
      * create a new CIDRRange
