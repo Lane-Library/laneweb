@@ -1,11 +1,9 @@
 package edu.stanford.irt.laneweb.ipgroup;
 
 import java.io.Serializable;
-import java.util.regex.Pattern;
+import java.util.StringTokenizer;
 
 public final class IPGroup implements Serializable {
-
-	private static final long serialVersionUID = 1L;
 
     public static final IPGroup ERR = new IPGroup("ERR");
 
@@ -29,196 +27,231 @@ public final class IPGroup implements Serializable {
 
     public static final IPGroup SOM_LKSC = new IPGroup("SOM_LKSC");
 
-    public static final IPGroup SOM_SIM1 = new IPGroup("SOM_SIM1");
-    
     public static final IPGroup SOM_OTHER = new IPGroup("SOM_OTHER");
-    
+
+    public static final IPGroup SOM_SIM1 = new IPGroup("SOM_SIM1");
+
     public static final IPGroup STAFF = new IPGroup("STAFF");
 
     public static final IPGroup SU = new IPGroup("SU");
 
-    private static final String _0_TO_255 = "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
+    private static final CIDRRange HOSPITAL_NET = new CIDRRange("10.252.0.0/14");
 
-    private static final String DOT = "\\.";
+    private static final CIDRRange LOCALNET = new CIDRRange("10.0.0.0/8");
 
-    private static final Pattern IP_ADDRESS = Pattern.compile("^" + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final CIDRRange LPCH_4 = new CIDRRange("159.140.183.0/24");
 
-    private static final Pattern LPCH_159_PATTERN = Pattern.compile("^159" + DOT + "140" + DOT + "183" + DOT + _0_TO_255 + "$");
+    private static final CIDRRange LPCH_5 = new CIDRRange("209.11.188.0/22");
 
-    private static final String LPCH_252_1 = "(?:5|6|7|10|11|18|19|22|23|26|27|30|31|34|35|38|39|42|43|46|47|50|51|54|55|60|61|62|63|67|70|71|84|85|107|108|109|122|123|13[89]|14[0-9]|15[23]|200)"
-            + DOT + _0_TO_255;
+    private static final CIDRRange[] LPCH_HOSPITALNET = { new CIDRRange("10.252.1.1/32"), new CIDRRange("10.252.1.2/32"),
+            new CIDRRange("10.252.5.0/24"), new CIDRRange("10.252.6.0/23"), new CIDRRange("10.252.10.0/23"),
+            new CIDRRange("10.252.18.0/23"), new CIDRRange("10.252.22.0/23"), new CIDRRange("10.252.26.0/23"),
+            new CIDRRange("10.252.30.0/23"), new CIDRRange("10.252.34.0/23"), new CIDRRange("10.252.38.0/23"),
+            new CIDRRange("10.252.42.0/23"), new CIDRRange("10.252.46.0/23"), new CIDRRange("10.252.50.0/23"),
+            new CIDRRange("10.252.54.0/23"), new CIDRRange("10.252.60.0/23"), new CIDRRange("10.252.63.0/23"),
+            new CIDRRange("10.252.64.12/32"), new CIDRRange("10.252.64.23/32"), new CIDRRange("10.252.64.46/32"),
+            new CIDRRange("10.252.64.60/32"), new CIDRRange("10.252.64.64/32"), new CIDRRange("10.252.64.71/32"),
+            new CIDRRange("10.252.65.5/32"), new CIDRRange("10.252.65.6/32"), new CIDRRange("10.252.65.9/32"),
+            new CIDRRange("10.252.65.13/32"), new CIDRRange("10.252.65.14/32"), new CIDRRange("10.252.65.17/32"),
+            new CIDRRange("10.252.65.18/32"), new CIDRRange("10.252.65.41/32"), new CIDRRange("10.252.65.42/32"),
+            new CIDRRange("10.252.65.141/32"), new CIDRRange("10.252.65.142/32"), new CIDRRange("10.252.65.145/32"),
+            new CIDRRange("10.252.65.146/32"), new CIDRRange("10.252.66.5/32"), new CIDRRange("10.252.66.6/32"),
+            new CIDRRange("10.252.66.49/32"), new CIDRRange("10.252.66.50/32"), new CIDRRange("10.252.66.233/32"),
+            new CIDRRange("10.252.66.234/32"), new CIDRRange("10.252.66.249/32"), new CIDRRange("10.252.66.250/32"),
+            new CIDRRange("10.252.66.253/32"), new CIDRRange("10.252.66.254/32"), new CIDRRange("10.252.67.0/24"),
+            new CIDRRange("10.252.70.0/23"), new CIDRRange("10.252.84.0/23"), new CIDRRange("10.252.107.0/24"),
+            new CIDRRange("10.252.108.0/24"), new CIDRRange("10.252.109.0/24"), new CIDRRange("10.252.122.0/24"),
+            new CIDRRange("10.252.123.0/24"), new CIDRRange("10.252.138.0/23"), new CIDRRange("10.252.140.0/22"),
+            new CIDRRange("10.252.144.0/22"), new CIDRRange("10.252.147.0/24"), new CIDRRange("10.252.148.0/24"),
+            new CIDRRange("10.252.149.0/24"), new CIDRRange("10.252.152.0/24"), new CIDRRange("10.252.153.0/24"),
+            new CIDRRange("10.252.200.0/24"), new CIDRRange("10.252.250.97/32"), new CIDRRange("10.252.250.98/32"),
+            new CIDRRange("10.252.250.99/32"), new CIDRRange("10.252.250.100/30"), new CIDRRange("10.252.250.104/29"),
+            new CIDRRange("10.252.250.112/29"), new CIDRRange("10.252.250.120/30"), new CIDRRange("10.252.250.124/31"),
+            new CIDRRange("10.252.250.126/32"), new CIDRRange("10.253.220.0/24"), new CIDRRange("10.253.254.0/23") };
 
-    private static final String LPCH_252_2 = "250" + DOT + "(?:0?9[7-9]|1[01][0-9]|12[0-6])";
+    private static final CIDRRange[] LPCH_LOCALNET = { new CIDRRange("10.50.0.0/16"), new CIDRRange("10.250.128.0/17"),
+            new CIDRRange("10.251.128.0/17") };
 
-    private static final String LPCH_252_3 = "1" + DOT + "[12]";
+    private static final CIDRRange PAVA_1 = new CIDRRange("152.130.10.128/32");
 
-    private static final String LPCH_252_4 = "64" + DOT + "(?:12|23|46|60|64|71)";
+    private static final CIDRRange PAVA_2 = new CIDRRange("152.131.10.128/32");
 
-    private static final String LPCH_252_5 = "65" + DOT + "(?:5|6|9|13|14|17|18|41|42|141|142|145|146)";
+    private static final CIDRRange PAVA_3 = new CIDRRange("152.132.10.128/32");
 
-    private static final String LPCH_252_6 = "66" + DOT + "(?:5|6|49|50|233|234|249|250|253|254)";
+    private static final CIDRRange PAVA_4 = new CIDRRange("152.133.10.128/32");
 
-    private static final String LPCH_1 = "(?:50" + DOT + _0_TO_255 + DOT + _0_TO_255 + "|25[01]" + DOT + "(?:25[0-5]|2[0-4][0-9]|1[3-9][0-9]|12[89])" + DOT
-            + _0_TO_255 + ")";
+    private static final long serialVersionUID = 1L;
 
-    private static final String LPCH_2 = "252" + DOT + "(?:" + LPCH_252_1 + "|" + LPCH_252_2 + "|" + LPCH_252_3 + "|" + LPCH_252_4 + "|" + LPCH_252_5 + "|"
-            + LPCH_252_6 + ")";
+    private static final CIDRRange SHC_5 = new CIDRRange("204.161.120.0/24");
 
-    private static final String LPCH_3 = "253" + DOT + "2(?:20|54|55)" + DOT + _0_TO_255;
+    private static final CIDRRange SHC_6 = new CIDRRange("209.11.184.0/22");
 
-    private static final Pattern LPCH_PATTERN = Pattern.compile("^(?:" + LPCH_1 + "|" + LPCH_2 + "|" + LPCH_3 + ")$");
+    private static final CIDRRange[] SHC_LOCALNET = { new CIDRRange("10.247.0.0/16"), new CIDRRange("10.248.0.0/16"),
+            new CIDRRange("10.250.0.0/17"), new CIDRRange("10.251.0.0/17") };
 
-    private static final Pattern LPCH_209_PATTERN = Pattern.compile("^209" + DOT + "11" + DOT + "(?:18[89]|19[01])" + DOT + _0_TO_255 + "$");
+    private static final CIDRRange[] SOM_BECKMAN_RANGES = { new CIDRRange("171.65.20.0/22"), new CIDRRange("171.65.24.0/22") };
 
-    private static final Pattern NOT_OTHER = Pattern.compile("^(?:10|128|134|152|159|171|204|209)" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final CIDRRange[] SOM_CCSR_RANGES = { new CIDRRange("171.65.4.0/22"), new CIDRRange("171.65.8.0/21") };
 
-    private static final Pattern PAVA_PATTERN = Pattern.compile("^152" + DOT + "13[0-3]" + DOT + "10" + DOT + "128$");
+    private static final CIDRRange[] SOM_CLARK_RANGES = { new CIDRRange("171.65.71.0/25"), new CIDRRange("171.65.92.0/22"),
+            new CIDRRange("171.65.102.0/23") };
 
-    private static final Pattern SHC_204_PATTERN = Pattern.compile("^204" + DOT + "161" + DOT + "120.*");
+    private static final CIDRRange[] SOM_GRANT_RANGES = { new CIDRRange("171.65.40.64/28"), new CIDRRange("171.65.88.0/22") };
 
-    private static final Pattern SHC_209_PATTERN = Pattern.compile("^209" + DOT + "11" + DOT + "18[4-7].*");
+    private static final CIDRRange SOM_LANE_RANGE = new CIDRRange("171.65.82.0/23");
 
-    private static final Pattern SHC_PATTERN = Pattern.compile("^2(?:(?:5[2-5]|4[78])" + DOT + _0_TO_255 + "|5[01]" + DOT + "(?:12[0-7]|1[01][0-9]|[0]?[0-9][0-9]?))"
-            + DOT + _0_TO_255 + "$");
+    private static final CIDRRange SOM_LKSC_RANGE = new CIDRRange("171.65.164.0/22");
 
-    private static final Pattern SOM_BECKMAN_PATTERN = Pattern.compile("^2[0-7]" + DOT + _0_TO_255 + "$");
+    private static final CIDRRange[] SOM_LPCH_RANGES = { new CIDRRange("171.65.112.0/24"), new CIDRRange("171.65.126.0/24") };
 
-    private static final Pattern SOM_CCSR_PATTERN = Pattern.compile("^(?:1[0-5]|[4-9])" + DOT + _0_TO_255 + "$");
+    private static final CIDRRange SOM_NET = new CIDRRange("171.65.0.0/16");
 
-    private static final String SOM_CLARK_1 = "(?:9[2-5]|10[23])" + DOT + _0_TO_255;
+    private static final CIDRRange SOM_PAVA_RANGE = new CIDRRange("171.65.44.0/24");
 
-    private static final String SOM_CLARK_2 = "71" + DOT + "(?:12[0-7]|1[01][0-9]|[0-9][0-9]?)";
+    private static final CIDRRange SOM_PROXY_SERVER = new CIDRRange("171.65.65.46/32");
 
-    private static final Pattern SOM_CLARK_PATTERN = Pattern.compile("^(?:" + SOM_CLARK_1 + "|" + SOM_CLARK_2 + ")$");
+    private static final CIDRRange[] SOM_SHC_RANGES = { new CIDRRange("171.65.46.0/23"), new CIDRRange("171.65.115.0/24"),
+            new CIDRRange("171.65.125.0/24"), new CIDRRange("171.65.127.0/24"), new CIDRRange("171.65.128.0/19"),
+            new CIDRRange("171.65.168.0/21"), new CIDRRange("171.65.176.0/20"), new CIDRRange("171.65.192.0/18") };
 
-    private static final String SOM_GRANT_1 = "(?:8[89]|9[01])" + DOT + _0_TO_255;
+    private static final CIDRRange SOM_SIM1_RANGE = new CIDRRange("171.65.160.0/22");
 
-    private static final String SOM_GRANT_2 = "^40" + DOT + "(?:7[0-9]|6[4-9])";
+    private static final CIDRRange[] STAFF_RANGES = { new CIDRRange("171.65.1.213/32"), new CIDRRange("171.65.82.11/32"),
+            new CIDRRange("171.65.82.15/32"), new CIDRRange("171.65.82.16/32"), new CIDRRange("171.65.82.20/32"),
+            new CIDRRange("171.65.82.24/32"), new CIDRRange("171.65.82.42/32"), new CIDRRange("171.65.82.61/32"),
+            new CIDRRange("171.65.82.68/32"), new CIDRRange("171.65.82.74/32"), new CIDRRange("171.65.82.89/32"),
+            new CIDRRange("171.65.82.95/32"), new CIDRRange("171.65.82.98/32"), new CIDRRange("171.65.82.105/32"),
+            new CIDRRange("171.65.82.109/32"), new CIDRRange("171.65.82.112/32"), new CIDRRange("171.65.82.133/32"),
+            new CIDRRange("171.65.82.141/32"), new CIDRRange("171.65.82.143/32"), new CIDRRange("171.65.82.144/32"),
+            new CIDRRange("171.65.82.166/32"), new CIDRRange("171.65.82.168/32"), new CIDRRange("171.65.82.179/32"),
+            new CIDRRange("171.65.82.204/32"), new CIDRRange("171.65.82.207/32"), new CIDRRange("171.65.82.212/32"),
+            new CIDRRange("171.65.82.217/32"), new CIDRRange("171.65.82.218/32"), new CIDRRange("171.65.82.232/32"),
+            new CIDRRange("171.65.82.234/32"), new CIDRRange("171.65.82.237/32"), new CIDRRange("171.65.82.239/32"),
+            new CIDRRange("171.65.83.8/32"), new CIDRRange("171.65.83.32/32"), new CIDRRange("171.65.83.45/32"),
+            new CIDRRange("171.65.83.73/32"), new CIDRRange("171.65.83.84/32"), new CIDRRange("171.65.83.86/32"),
+            new CIDRRange("171.65.83.98/32"), new CIDRRange("171.65.83.114/32"), new CIDRRange("171.65.83.132/32"),
+            new CIDRRange("171.65.83.157/32"), new CIDRRange("171.65.83.160/32"), new CIDRRange("171.65.83.168/32"),
+            new CIDRRange("171.65.83.169/32"), new CIDRRange("171.65.83.172/32"), new CIDRRange("171.65.83.174/32"),
+            new CIDRRange("171.65.83.189/32"), new CIDRRange("171.65.83.203/32"), new CIDRRange("171.65.83.204/32"),
+            new CIDRRange("171.65.83.205/32"), new CIDRRange("171.65.83.206/32"), new CIDRRange("171.65.83.208/32"),
+            new CIDRRange("171.65.83.209/32"), new CIDRRange("171.65.83.212/32"), new CIDRRange("171.65.83.213/32"),
+            new CIDRRange("171.65.83.214/32"), new CIDRRange("171.65.83.215/32"), new CIDRRange("171.65.83.232/32") };
 
-    private static final Pattern SOM_GRANT_PATTERN = Pattern.compile("^(?:" + SOM_GRANT_1 + "|" + SOM_GRANT_2 + ")$");
+    private static final CIDRRange SU_1 = new CIDRRange("128.12.0.0/16");
 
-    private static final Pattern SOM_LANE_PATTERN = Pattern.compile("^8[23]" + DOT + _0_TO_255 + "$");
+    private static final CIDRRange SU_2 = new CIDRRange("134.79.0.0/16");
 
-    private static final String SOM_LANE_STAFF_1 = "82" + DOT
-            + "(?:11|15|16|20|24|42|61|68|74|89|95|98|105|109|112|133|141|143|144|166|168|179|204|207|212|217|218|232|234|237|239)";
-
-    private static final String SOM_LANE_STAFF_2 = "83" + DOT
-            + "(?:8|32|45|73|84|86|98|114|132|157|160|168|169|172|174|189|203|204|205|206|208|209|212|213|214|215|232)";
-
-    private static final String SOM_LANE_STAFF_3 = "1" + DOT + "213";
-
-    private static final Pattern SOM_LANE_STAFF_PATTERN = Pattern.compile("^(?:" + SOM_LANE_STAFF_1 + "|" + SOM_LANE_STAFF_2 + "|" + SOM_LANE_STAFF_3 + ")$");
-
-    private static final Pattern SOM_LPCH_PATTERN = Pattern.compile("^(?:112|126)" + DOT + _0_TO_255 + "$");
-
-    private static final Pattern SOM_LKSC_PATTERN = Pattern.compile("^(?:16[4-7])" + DOT + _0_TO_255 + "$");
-
-    private static final Pattern SOM_PATTERN = Pattern.compile("^171" + DOT + "65" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
-
-    private static final Pattern SOM_PAVA_PATTERN = Pattern.compile("^44" + DOT + _0_TO_255 + "$");
-    
-    private static final Pattern SOM_SIM1_PATTERN = Pattern.compile("^(?:16[0-3])" + DOT + _0_TO_255 + "$");
-    
-    private static final Pattern EZPROXY_SERVER_PATTERN = Pattern.compile("^65.46$");
-
-    private static final Pattern SOM_SHC_PATTERN = Pattern.compile("^(?:(?:1[12]5|12[7-9]|1[3-57-9][0-9]|16[8-9]|25[0-5]|2[0-4][0-9])|4[6-7])" + DOT + _0_TO_255 + "$");
-
-    private static final Pattern STANFORD_10_PATTERN = Pattern.compile("^10" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
-
-    private static final Pattern STANFORD_128_PATTERN = Pattern.compile("^128" + DOT + "12" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
-
-    private static final Pattern STANFORD_134_PATTERN = Pattern.compile("^134" + DOT + "79" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
-
-    private static final Pattern STANFORD_171_PATTERN = Pattern.compile("^171" + DOT + "6[4-7]" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final CIDRRange SUNET = new CIDRRange("171.64.0.0/14");
 
     public static IPGroup getGroupForIP(final String ip) {
-        if (!IP_ADDRESS.matcher(ip).matches()) {
-            return IPGroup.ERR;
+        int addr = ipToInt(ip);
+        if (LOCALNET.contains(addr)) {
+            return getGroupForLocalNet(addr);
+        } else if (SU_1.contains(addr) || SU_2.contains(addr)) {
+            return SU;
+        } else if (PAVA_1.contains(addr) || PAVA_2.contains(addr) || PAVA_3.contains(addr) || PAVA_4.contains(addr)) {
+            return PAVA;
+        } else if (LPCH_4.contains(addr) || LPCH_5.contains(addr)) {
+            return LPCH;
+        } else if (SUNET.contains(addr)) {
+            return getGroupForSUNet(addr);
+        } else if (SHC_5.contains(addr) || SHC_6.contains(addr)) {
+            return SHC;
         }
-        if (!NOT_OTHER.matcher(ip).matches()) {
-            return IPGroup.OTHER;
-        }
-        if (SOM_PATTERN.matcher(ip).matches()) {
-            return getGroupForSOMSubnet(ip.substring(7));
-        }
-        if (STANFORD_10_PATTERN.matcher(ip).matches()) {
-            return getGroupForHospitalSubnet(ip.substring(3));
-        }
-        if (PAVA_PATTERN.matcher(ip).matches()) {
-            return IPGroup.PAVA;
-        }
-        if (STANFORD_171_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SU;
-        }
-        if (STANFORD_128_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SU;
-        }
-        if (SHC_209_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SHC;
-        }
-        if (STANFORD_134_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SU;
-        }
-        if (SHC_204_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SHC;
-        }
-        if (LPCH_209_PATTERN.matcher(ip).matches()) {
-            return IPGroup.LPCH;
-        }
-        if (LPCH_159_PATTERN.matcher(ip).matches()) {
-            return IPGroup.LPCH;
-        }
-        return IPGroup.OTHER;
+        return OTHER;
     }
 
-    private static IPGroup getGroupForHospitalSubnet(final String ip) {
-        if (LPCH_PATTERN.matcher(ip).matches()) {
-            return IPGroup.LPCH;
+    private static IPGroup getGroupForHospitalNet(final int addr) {
+        for (CIDRRange element : LPCH_HOSPITALNET) {
+            if (element.contains(addr)) {
+                return LPCH;
+            }
         }
-        if (SHC_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SHC;
-        }
-        return IPGroup.SU;
+        return SHC;
     }
 
-    private static IPGroup getGroupForSOMSubnet(final String ip) {
-        if (SOM_LANE_STAFF_PATTERN.matcher(ip).matches()) {
-            return IPGroup.STAFF;
+    private static IPGroup getGroupForLocalNet(final int addr) {
+        if (HOSPITAL_NET.contains(addr)) {
+            return getGroupForHospitalNet(addr);
         }
-        if (SOM_LANE_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SOM_LANE;
+        for (CIDRRange element : SHC_LOCALNET) {
+            if (element.contains(addr)) {
+                return SHC;
+            }
         }
-        if (SOM_CCSR_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SOM_CCSR;
+        for (CIDRRange element : LPCH_LOCALNET) {
+            if (element.contains(addr)) {
+                return LPCH;
+            }
         }
-        if (SOM_BECKMAN_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SOM_BECKMAN;
+        return SU;
+    }
+
+    private static IPGroup getGroupForSOMNet(final int addr) {
+        for (CIDRRange element : STAFF_RANGES) {
+            if (element.contains(addr)) {
+                return STAFF;
+            }
         }
-        if (SOM_GRANT_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SOM_GRANT;
+        for (CIDRRange element : SOM_CCSR_RANGES) {
+            if (element.contains(addr)) {
+                return SOM_CCSR;
+            }
         }
-        if (SOM_CLARK_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SOM_CLARK;
+        for (CIDRRange element : SOM_BECKMAN_RANGES) {
+            if (element.contains(addr)) {
+                return SOM_BECKMAN;
+            }
         }
-        if (SOM_LPCH_PATTERN.matcher(ip).matches()) {
-            return IPGroup.LPCH;
+        for (CIDRRange element : SOM_GRANT_RANGES) {
+            if (element.contains(addr)) {
+                return SOM_GRANT;
+            }
         }
-        if (SOM_LKSC_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SOM_LKSC;
+        if (SOM_PAVA_RANGE.contains(addr)) {
+            return PAVA;
         }
-        if (SOM_PAVA_PATTERN.matcher(ip).matches()) {
-            return IPGroup.PAVA;
+        for (CIDRRange element : SOM_SHC_RANGES) {
+            if (element.contains(addr)) {
+                return SHC;
+            }
         }
-        if (SOM_SHC_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SHC;
+        for (CIDRRange element : SOM_CLARK_RANGES) {
+            if (element.contains(addr)) {
+                return SOM_CLARK;
+            }
         }
-        if (SOM_SIM1_PATTERN.matcher(ip).matches()) {
-            return IPGroup.SOM_SIM1;
+        if (SOM_LANE_RANGE.contains(addr)) {
+            return SOM_LANE;
         }
-        if (EZPROXY_SERVER_PATTERN.matcher(ip).matches()) {
-            return IPGroup.OTHER;
+        for (CIDRRange element : SOM_LPCH_RANGES) {
+            if (element.contains(addr)) {
+                return LPCH;
+            }
         }
-        return IPGroup.SOM_OTHER;
+        if (SOM_SIM1_RANGE.contains(addr)) {
+            return SOM_SIM1;
+        }
+        if (SOM_LKSC_RANGE.contains(addr)) {
+            return SOM_LKSC;
+        }
+        if (SOM_PROXY_SERVER.contains(addr)) {
+            return OTHER;
+        }
+        return SOM_OTHER;
+    }
+
+    private static IPGroup getGroupForSUNet(final int addr) {
+        if (SOM_NET.contains(addr)) {
+            return getGroupForSOMNet(addr);
+        }
+        return SU;
+    }
+
+    private static int ipToInt(final String ip) {
+        StringTokenizer st = new StringTokenizer(ip, ".");
+        return ((Integer.parseInt(st.nextToken()) << 24) & 0xFF000000) | ((Integer.parseInt(st.nextToken()) << 16) & 0xFF0000)
+                | ((Integer.parseInt(st.nextToken()) << 8) & 0xFF00) | (Integer.parseInt(st.nextToken()) & 0xFF);
     }
 
     private String stringValue;
