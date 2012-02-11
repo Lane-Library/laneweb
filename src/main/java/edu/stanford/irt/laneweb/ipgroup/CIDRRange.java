@@ -1,6 +1,11 @@
 package edu.stanford.irt.laneweb.ipgroup;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.StringTokenizer;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * CIDRRange represents a range of ip addresses using CIDR notation in the
@@ -8,9 +13,15 @@ import java.util.StringTokenizer;
  */
 public class CIDRRange {
 
-    private int highest;
+    private String cidr;
 
-    private int lowest;
+    private long highest;
+
+    private IPGroup ipGroup;
+
+    private long lowest;
+
+    private List<CIDRRange> subranges;
 
     /**
      * create a new CIDRRange
@@ -18,12 +29,33 @@ public class CIDRRange {
      * @param cidr
      *            with the format "nnn.nnn.nnn.nnn/nn"
      */
-    public CIDRRange(final String cidr) {
+    public CIDRRange(final String cidr, final IPGroup ipGroup) {
+        this.cidr = cidr;
+        this.ipGroup = ipGroup;
+        this.subranges = new ArrayList<CIDRRange>();
         String ip = cidr.substring(0, cidr.indexOf('/'));
         int addr = ipToInt(ip);
         int mask = (-1) << (32 - Integer.parseInt(cidr.substring(ip.length() + 1)));
         this.lowest = addr & mask;
         this.highest = this.lowest + (~mask);
+    }
+
+    public void addSubrange(final CIDRRange other) {
+        if (!isSubrange(other)) {
+            throw new LanewebException(other + " is not a subrange of " + this);
+        }
+        // first see if this is a subrange of any of the current subranges:
+        CIDRRange subrange = getSubrangeContaining(other);
+        if (subrange != null) {
+            subrange.addSubrange(other);
+        } else {
+            // then see if this is a parent range of any of the current ranges
+            for (CIDRRange containedBy : getSubrangesContainedBy(other)) {
+                this.subranges.remove(containedBy);
+                other.addSubrange(containedBy);
+            }
+            this.subranges.add(other);
+        }
     }
 
     /**
@@ -37,9 +69,55 @@ public class CIDRRange {
         return ip >= this.lowest && ip <= this.highest;
     }
 
+    public IPGroup getIPGroup(final int ip) {
+        IPGroup result = null;
+        if (contains(ip)) {
+            for (CIDRRange subrange : this.subranges) {
+                result = subrange.getIPGroup(ip);
+                if (result != null) {
+                    break;
+                }
+            }
+            if (result == null) {
+                result = this.ipGroup;
+            }
+        }
+        return result;
+    }
+
+    private CIDRRange getSubrangeContaining(final CIDRRange other) {
+        for (CIDRRange subrange : this.subranges) {
+            if (subrange.isSubrange(other)) {
+                return subrange;
+            }
+        }
+        return null;
+    }
+
+    private List<CIDRRange> getSubrangesContainedBy(final CIDRRange other) {
+        List<CIDRRange> containedBy = new LinkedList<CIDRRange>();
+        for (CIDRRange subrange : this.subranges) {
+            if (other.isSubrange(subrange)) {
+                containedBy.add(subrange);
+            }
+        }
+        return containedBy;
+    }
+
     private int ipToInt(final String ip) {
         StringTokenizer st = new StringTokenizer(ip, ".");
         return ((Integer.parseInt(st.nextToken()) << 24) & 0xFF000000) | ((Integer.parseInt(st.nextToken()) << 16) & 0xFF0000)
                 | ((Integer.parseInt(st.nextToken()) << 8) & 0xFF00) | (Integer.parseInt(st.nextToken()) & 0xFF);
+    }
+
+    public boolean isSubrange(final CIDRRange other) {
+        return other.lowest >= this.lowest && other.highest <= this.highest;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("cidr=").append(this.cidr).append(" ipGroup=").append(this.ipGroup)
+                .append(" subranges=").append(this.subranges);
+        return sb.toString();
     }
 }
