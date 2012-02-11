@@ -450,18 +450,27 @@
         Y.lane.BookmarksWidget.render();
 
         BookmarkLink = Y.Base.create("bookmark-link", Y.Widget, [], {
-            syncUI : function() {
-                this.get("boundingBox").setStyle("display", "inline");
-                this.get("boundingBox").append("<span class='foo'>B</span>");
-            },
             bindUI : function() {
+                var display = this.get("contentBox").getStyle("display");
+                this.get("boundingBox").setStyle("display", display);
+                this.get("boundingBox").setStyle("position", "relative");
+                this.get("boundingBox").append("<span style='cursor:pointer;position:absolute;right:-20px;bottom:0;display:block;border:1px black solid;padding-left:15px;background-color:pink' class='foo'>&#160;</span>");
+            },
+            syncUI : function() {
                 this.get("boundingBox").on("mouseout", this.hide, this);
+                this.get("boundingBox").one(".foo").on("mouseover", this.activate, this);
+                this.get("boundingBox").one(".foo").on("mouseout", this.hide, this);
             },
             show : function() {
-                this.get("boundingBox").one(".foo").setStyle("display", "inline");
+                this.get("boundingBox").one(".foo").setStyle("display", "block");
             },
             hide : function() {
                 this.get("boundingBox").one(".foo").setStyle("display", "none");
+                this.get("boundingBox").one(".foo").setStyle("background-color", "pink");
+            },
+            activate : function() {
+                this.show();
+                this.get("boundingBox").one(".foo").setStyle("background-color", "red");
             }
         });
         
