@@ -40,6 +40,11 @@ public class CIDRRange {
         this.highest = this.lowest + (~mask);
     }
 
+    /**
+     * add a CIDRRange as a subrange of this one.
+     * 
+     * @param other
+     */
     public void addSubrange(final CIDRRange other) {
         if (!isSubrange(other)) {
             throw new LanewebException(other + " is not a subrange of " + this);
@@ -69,6 +74,13 @@ public class CIDRRange {
         return ip >= this.lowest && ip <= this.highest;
     }
 
+    /**
+     * get the IPGroup associated with an ip or null if not in range.
+     * 
+     * @param ip
+     *            the int value of an ip address
+     * @return the IPGroup or null
+     */
     public IPGroup getIPGroup(final int ip) {
         IPGroup result = null;
         if (contains(ip)) {
@@ -85,6 +97,13 @@ public class CIDRRange {
         return result;
     }
 
+    /**
+     * get the IPGroup associated with an ip or null if not in range.
+     * 
+     * @param ip
+     *            the String value of an ip address
+     * @return the IPGroup or null
+     */
     public IPGroup getIPGroup(final String ip) {
         return getIPGroup(ipToInt(ip));
     }
@@ -114,6 +133,12 @@ public class CIDRRange {
                 | ((Integer.parseInt(st.nextToken()) << 8) & 0xFF00) | (Integer.parseInt(st.nextToken()) & 0xFF);
     }
 
+    /**
+     * Determine of another range is contained within this range
+     * 
+     * @param other
+     * @return true if other is within this range, otherwise false
+     */
     public boolean isSubrange(final CIDRRange other) {
         return other.lowest >= this.lowest && other.highest <= this.highest;
     }
