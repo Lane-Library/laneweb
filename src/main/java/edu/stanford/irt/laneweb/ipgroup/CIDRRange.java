@@ -85,6 +85,10 @@ public class CIDRRange {
         return result;
     }
 
+    public IPGroup getIPGroup(final String ip) {
+        return getIPGroup(ipToInt(ip));
+    }
+
     private CIDRRange getSubrangeContaining(final CIDRRange other) {
         for (CIDRRange subrange : this.subranges) {
             if (subrange.isSubrange(other)) {

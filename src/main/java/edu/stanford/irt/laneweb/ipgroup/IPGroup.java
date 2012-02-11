@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.ipgroup;
 
 import java.io.Serializable;
-import java.util.StringTokenizer;
 
 public final class IPGroup implements Serializable {
 
@@ -231,13 +230,7 @@ public final class IPGroup implements Serializable {
     }
 
     public static IPGroup getGroupForIP(final String ip) {
-        return ROOT.getIPGroup(ipToInt(ip));
-    }
-
-    private static int ipToInt(final String ip) {
-        StringTokenizer st = new StringTokenizer(ip, ".");
-        return ((Integer.parseInt(st.nextToken()) << 24) & 0xFF000000) | ((Integer.parseInt(st.nextToken()) << 16) & 0xFF0000)
-                | ((Integer.parseInt(st.nextToken()) << 8) & 0xFF00) | (Integer.parseInt(st.nextToken()) & 0xFF);
+        return ROOT.getIPGroup(ip);
     }
 
     private String stringValue;
