@@ -449,125 +449,124 @@
         Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks")});
         Y.lane.BookmarksWidget.render();
 
-        BookmarkLink = Y.Base.create("bookmark-link", Y.Widget, [], {
-            bindUI : function() {
-                var display = this.get("contentBox").getStyle("display");
-                this.get("boundingBox").setStyle("display", display);
-                this.get("boundingBox").setStyle("position", "relative");
-                this.get("boundingBox").append("<span style='cursor:pointer;position:absolute;right:-20px;bottom:0;display:block;border:1px black solid;padding-left:15px;background-color:pink' class='foo'>&#160;</span>");
-            },
-            syncUI : function() {
-                this.get("boundingBox").on("mouseout", this.hide, this);
-                this.get("boundingBox").one(".foo").on("mouseover", this.activate, this);
-                this.get("boundingBox").one(".foo").on("mouseout", this.hide, this);
-            },
-            show : function() {
-                this.get("boundingBox").one(".foo").setStyle("display", "block");
-            },
-            hide : function() {
-                this.get("boundingBox").one(".foo").setStyle("display", "none");
-                this.get("boundingBox").one(".foo").setStyle("background-color", "pink");
-            },
-            activate : function() {
-                this.show();
-                this.get("boundingBox").one(".foo").setStyle("background-color", "red");
-            }
-        });
-        
-        Y.delegate("mouseover", function(event) {
-            if (!this.hasClass("yui3-bookmark-link-content")) {
-                var foo = new BookmarkLink({srcNode:event.target});
-                foo.render();
-            } else {
-                Y.Widget.getByNode(this).show();
-            }
-        }, document, "a");
-        
-        
-//        BookmarkLink = function() {
-//            BookmarkLink.superclass.constructor.apply(this, arguments);
-//        };
-//
-//        BookmarkLink.NAME = "bookmark-link";
-
-//        BookmarkLink.ATTRS = {
-//                node : {
-//                    valueFn : function() {
-//                        return Y.Node.create("<a id='bookmark-link'>bookmark this</a>");
-//                    }
-//                },
-//                bookmarks : {
-//                    value : null
-//                },
-//                timeoutid : {
-//                    value : null
-//                },
-//                inBookmark : {
-//                    value : false
-//                },
-//                inTarget : {
-//                    value : false
-//                },
-//                target : {
-//                    value : null
-//                }
-//        };
-
-//        Y.extend(BookmarkLink, Y.Base, {
-//            initializer : function() {
-//                var node = this.get("node");
-//                Y.one("body").append(node);
-//                Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
-//                Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-//                node.on("mouseover",this._handleBookmarkMouseover, this);
-//                node.on("mouseout", this._handleBookmarkMouseout, this);
-//                node.on("click", this._handleClick, this);
-//                this.on("inTargetChange", this._handleInTargetChange);
-//                this.on("inBookmarkChange", this._handleInBookmarkChange);
+//        BookmarkLink = Y.Base.create("bookmark-link", Y.Widget, [], {
+//            bindUI : function() {
+//                var display = this.get("contentBox").getStyle("display");
+//                this.get("boundingBox").setStyle("display", display);
+//                this.get("boundingBox").setStyle("position", "relative");
+//                this.get("boundingBox").append("<span style='cursor:pointer;position:absolute;right:-20px;bottom:0;display:block;border:1px black solid;padding-left:15px;background-color:pink' class='foo'>&#160;</span>");
 //            },
-//            toggleVisibility : function(show) {
-//                var visibility = show ? "visible" : "hidden";
-//                this.get("node").setStyle("visibility", visibility);
+//            syncUI : function() {
+//                this.get("boundingBox").on("mouseout", this.hide, this);
+//                this.get("boundingBox").one(".foo").on("mouseover", this.activate, this);
+//                this.get("boundingBox").one(".foo").on("mouseout", this.hide, this);
 //            },
-//            startTimer : function() {
+//            show : function() {
+//                this.get("boundingBox").one(".foo").setStyle("display", "block");
 //            },
-//            clearTimer : function() {
+//            hide : function() {
+//                this.get("boundingBox").one(".foo").setStyle("display", "none");
+//                this.get("boundingBox").one(".foo").setStyle("background-color", "pink");
 //            },
-//            setNodeXY : function(xy) {
-//                this.get("node").setXY(xy);
-//            },
-//            _handleBookmarkMouseout : function(event) {
-//                this.set("inBookmark", false);
-//            },
-//            _handleBookmarkMouseover : function(event) {
-//                this.set("inBookmark", true);
-//            },
-//            _handleClick : function() {
-//                var target = this.get("target"), label, url;
-//                target.plug(Y.lane.LinkPlugin);
-//                label = target.link.get("title");
-//                if (target.link.get("local")) {
-//                    url = target.link.get("path");
-//                } else {
-//                    url = target.link.get("url");
-//                }
-//                this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
-//            },
-//            _handleInBookmarkChange : function(event) {
-//                this.toggleVisibility(event.newVal);
-//            },
-//            _handleInTargetChange : function(event) {
-//                this.toggleVisibility(event.newVal);
-//            },
-//            _handleTargetMouseout : function(event) {
-//                this.set("inTarget", false);
-//            },
-//            _handleTargetMouseover : function(event) {
-//                this.set("target", event.target);
-//                this.setNodeXY([event.pageX + 1,event.pageY + 1]);
-//                this.set("inTarget", true);
+//            activate : function() {
+//                this.show();
+//                this.get("boundingBox").one(".foo").setStyle("background-color", "red");
 //            }
 //        });
+//        
+//        Y.delegate("mouseover", function(event) {
+//            if (!this.hasClass("yui3-bookmark-link-content")) {
+//                var foo = new BookmarkLink({srcNode:event.target});
+//                foo.render();
+//            } else {
+//                Y.Widget.getByNode(this).show();
+//            }
+//        }, document, "a");
+        
+        
+        BookmarkLink = function() {
+            BookmarkLink.superclass.constructor.apply(this, arguments);
+        };
+
+        BookmarkLink.NAME = "bookmark-link";
+
+        BookmarkLink.ATTRS = {
+                node : {
+                    valueFn : function() {
+                        return Y.Node.create("<span id='bookmark-link'>b</span>");
+                    }
+                },
+                bookmarks : {
+                    value : null
+                },
+                timeoutid : {
+                    value : null
+                },
+                inBookmark : {
+                    value : false
+                },
+                inTarget : {
+                    value : false
+                },
+                target : {
+                    value : null
+                }
+        };
+
+        Y.extend(BookmarkLink, Y.Base, {
+            initializer : function() {
+                var node = this.get("node");
+                Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
+                Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
+                node.on("mouseover",this._handleBookmarkMouseover, this);
+                node.on("mouseout", this._handleBookmarkMouseout, this);
+                node.on("click", this._handleClick, this);
+                this.after("inTargetChange", this._handleInTargetChange);
+                this.after("inBookmarkChange", this._handleInBookmarkChange);
+            },
+            startTimer : function() {
+            },
+            clearTimer : function() {
+            },
+            _handleBookmarkMouseout : function(event) {
+                this.set("inBookmark", false);
+            },
+            _handleBookmarkMouseover : function(event) {
+                this.set("inBookmark", true);
+            },
+            _handleClick : function() {
+                var target = this.get("target"), label, url;
+                target.plug(Y.lane.LinkPlugin);
+                label = target.link.get("title");
+                if (target.link.get("local")) {
+                    url = target.link.get("path");
+                } else {
+                    url = target.link.get("url");
+                }
+                this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
+            },
+            _handleInBookmarkChange : function(event) {
+                if (event.newVal) {
+                    this.get("target").insert(this.get("node"), "after");
+                } else {
+                    this.get("node").remove(false);
+                }
+            },
+            _handleInTargetChange : function(event) {
+                if (event.newVal) {
+                    this.get("target").insert(this.get("node"), "after");
+                } else {
+                    this.get("node").remove(false);
+                }
+            },
+            _handleTargetMouseout : function(event) {
+                this.set("inTarget", false);
+            },
+            _handleTargetMouseover : function(event) {
+                this.set("target", event.target);
+                this.set("inTarget", true);
+            }
+        });
 
         Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
 
