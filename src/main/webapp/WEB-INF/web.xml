@@ -907,4 +907,8 @@
         <extension>dmg</extension>
         <mime-type>application/octet-stream</mime-type>
     </mime-mapping>
+    <mime-mapping>
+        <extension>ics</extension>
+        <mime-type>text/calendar</mime-type>
+    </mime-mapping>
 </web-app>
