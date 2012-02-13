@@ -566,7 +566,7 @@
                 this.set("inTarget", false);
             },
             _handleTargetMouseover : function(event) {
-                this.set("target", event.target);
+                this.set("target", event.currentTarget);
                 this.set("inTarget", true);
             }
         });
