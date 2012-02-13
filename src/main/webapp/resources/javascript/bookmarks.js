@@ -553,10 +553,13 @@
                 }
             },
             _handleInTargetChange : function(event) {
-                if (event.newVal) {
-                    this.get("target").insert(this.get("node"), "after");
-                } else {
-                    this.get("node").remove(false);
+                var target = this.get("target"), display = target.getStyle("display");
+                if (display == "inline" && !target.one("img")) {
+                    if (event.newVal) {
+                        this.get("target").insert(this.get("node"), "after");
+                    } else {
+                        this.get("node").remove(false);
+                    }
                 }
             },
             _handleTargetMouseout : function(event) {
