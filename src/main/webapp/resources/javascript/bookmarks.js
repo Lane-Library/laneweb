@@ -148,7 +148,7 @@
              * @event addSync
              * @description fired after an add is successfully synced with the server
              */
-            this.publish("addSync", {defaultFn: this._successfulAdd, preventable : false});
+            this.publish("addSync", {defaultFn: this._handleAddSync, preventable : false});
 
             /**
              * @event remove
@@ -161,7 +161,7 @@
              * @event removeSync
              * @description fired when a removal is successfully synced with the server
              */
-            this.publish("removeSync", {defaultFn: this._successfulRemove, preventable : false});
+            this.publish("removeSync", {defaultFn: this._handleRemoveSync, preventable : false});
 
             /**
              * @event update
@@ -174,6 +174,7 @@
              * @event updateSync
              * @description fired when an update is successfully synced with the server
              */
+            //TODO: handle updateSync failure
             this.publish("updateSync", {preventable : false});
             Y.log("created new " + this);
         };
@@ -367,28 +368,28 @@
                 /**
                  * handler for bookmarks:removeSync event, removes a bookmark from the
                  * backing Array
-                 * @method _successfulRemove
+                 * @method _handleRemoveSync
                  * @private
                  * @param event {CustomEvent}
                  */
-                _successfulRemove : function(event) {
-                    this._bookmarks.splice(event.position, 1);
+                _handleRemoveSync : function(event) {
+                    if (event.success) {
+                        this._bookmarks.splice(event.position, 1);
+                    }
                 },
                 
                 /**
                  * handler for bookmarks:addSync event, adds a bookmark to index 0 of the
                  * backing Array
-                 * @method _successfulAdd
+                 * @method _handleAddSync
                  * @private
                  * @param event {CustomEvent}
                  */
-                _successfulAdd : function(event) {
-                    event.bookmark.after("valueChange", this._handleValueChange, this);
-                    this._bookmarks.unshift(event.bookmark);
-                },
-                
-                _syncFailed : function() {
-                    alert("sync failed");
+                _handleAddSync : function(event) {
+                    if (event.success) {
+                        event.bookmark.after("valueChange", this._handleValueChange, this);
+                        this._bookmarks.unshift(event.bookmark);
+                    }
                 }
         };
 
