@@ -9,9 +9,17 @@
     cursor:pointer;
     padding-left:5px;
 }
-#bookmark-link:hover {
+#bookmark-link.active {
+    color:blue;
+}
+#bookmark-link.bookmarking {
+    color:orange;
+}
+#bookmark-link.successful {
+    color:green;
+}
+#bookmark-link.failed {
     color:red;
-    background-color:pink
 }
 #bookmarks-editor fieldset{
     border:1px #DADAD8 solid;

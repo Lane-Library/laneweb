@@ -499,17 +499,11 @@
                 bookmarks : {
                     value : null
                 },
-                timeoutid : {
-                    value : null
-                },
-                inBookmark : {
-                    value : false
-                },
-                inTarget : {
-                    value : false
-                },
                 target : {
                     value : null
+                },
+                state : {
+                    value : BookmarkLink.OFF
                 }
         };
 
@@ -521,18 +515,14 @@
                 node.on("mouseover",this._handleBookmarkMouseover, this);
                 node.on("mouseout", this._handleBookmarkMouseout, this);
                 node.on("click", this._handleClick, this);
-                this.after("inTargetChange", this._handleInTargetChange);
-                this.after("inBookmarkChange", this._handleInBookmarkChange);
-            },
-            startTimer : function() {
-            },
-            clearTimer : function() {
+                this.on("statusChange", this._handleStatusChange);
+                this.get("bookmarks").on("addSync", function() {this.set("status", BookmarkLink.SUCCESSFUL)}, this);
             },
             _handleBookmarkMouseout : function(event) {
-                this.set("inBookmark", false);
+                this.set("status", BookmarkLink.OFF);
             },
             _handleBookmarkMouseover : function(event) {
-                this.set("inBookmark", true);
+                this.set("status", BookmarkLink.ACTIVE);
             },
             _handleClick : function() {
                 var target = this.get("target"), label, url;
@@ -543,32 +533,57 @@
                 } else {
                     url = target.link.get("url");
                 }
+                this.set("status", BookmarkLink.BOOKMARKING);
                 this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
             },
-            _handleInBookmarkChange : function(event) {
-                if (event.newVal) {
-                    this.get("target").insert(this.get("node"), "after");
-                } else {
-                    this.get("node").remove(false);
-                }
-            },
-            _handleInTargetChange : function(event) {
-                var target = this.get("target"), display = target.getStyle("display");
-                if (display == "inline" && !target.one("img")) {
-                    if (event.newVal) {
-                        this.get("target").insert(this.get("node"), "after");
-                    } else {
-                        this.get("node").remove(false);
-                    }
-                }
-            },
             _handleTargetMouseout : function(event) {
-                this.set("inTarget", false);
+                this.set("status", BookmarkLink.OFF);
             },
             _handleTargetMouseover : function(event) {
-                this.set("target", event.currentTarget);
-                this.set("inTarget", true);
+                if (this._isBookmarkable(event.currentTarget)) {
+                    this.set("target", event.currentTarget);
+                    this.set("status", BookmarkLink.READY);
+                }
+            },
+            _isBookmarkable : function(target) {
+                return target.getStyle("display") == "inline" && !target.one("img");
+            },
+            _handleStatusChange : function(event) {
+                var node = this.get("node");
+                switch(event.newVal) {
+                case BookmarkLink.OFF : 
+                    node.remove(false);
+                    node.removeClass("active");
+                    node.removeClass("bookmarking");
+                    node.removeClass("successful");
+                    node.removeClass("failed");
+                    break;
+                case BookmarkLink.READY :
+                    this.get("target").insert(node, "after");
+                    break;
+                case BookmarkLink.ACTIVE : 
+                    this.get("target").insert(node, "after");
+                    node.addClass("active");
+                    break;
+                case BookmarkLink.BOOKMARKING : 
+                    node.replaceClass("active", "bookmarking");
+                    break;
+                case BookmarkLink.SUCCESSFUL : 
+                    node.replaceClass("bookmarking", "successful");
+                    break;
+                case BookmarkLink.FAILED : 
+                    node.replaceClass("bookmarking", "failed");
+                    break;
+                default:
+                }
             }
+        }, {
+            OFF : 0,
+            READY : 1,
+            ACTIVE : 2,
+            BOOKMARKING : 3,
+            SUCCESSFUL : 4,
+            FAILED : 5
         });
 
         Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
