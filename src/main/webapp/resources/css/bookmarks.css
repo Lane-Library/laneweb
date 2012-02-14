@@ -11,15 +11,19 @@
 }
 #bookmark-link.active {
     color:blue;
+    background-color:green;
 }
 #bookmark-link.bookmarking {
     color:orange;
+    background-color:yellow;
 }
 #bookmark-link.successful {
     color:green;
+    background-color:blue;
 }
 #bookmark-link.failed {
     color:red;
+    background-color:orange;
 }
 #bookmarks-editor fieldset{
     border:1px #DADAD8 solid;

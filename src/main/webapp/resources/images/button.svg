@@ -20,12 +20,22 @@
     <rect x="10" y="10" rx="15" ry="15" width="150" height="80"
         fill="url(#button_surface)" stroke="#363636"/>
     
-    <text x="30" y="55" fill="white"
+    <text x="30" y="55" fill="white" text-anchor="middle"
         font-family="Tahoma" font-size="20" font-weight="500">
-        <?laneweb button-text?>
+        <?laneweb button-text?>text
     </text>
     
     <!-- vitual lighting effect -->
     <rect x="12" y="12" rx="15" ry="15" width="146" height="76"
         fill="url(#virtual_light)" stroke="#FFFFFF" stroke-opacity="0.4"/>
+    <script type="text/javascript">
+        var text = document.getElementsByTagName("text")[0];
+        var rect = document.getElementsByTagName("rect");
+        var width = text.getBBox().width;
+        for (var i = 0; i !== rect.length; i++) {
+            for (j in rect[i]) {
+            alert(j + ":" + (typeof rect[i][j]) + ":" + rect[i][j]);
+            }
+        }
+    </script>
 </svg>
