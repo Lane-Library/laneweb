@@ -54,6 +54,8 @@
 							<entry key="/about/contacts/documents/mb_(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Mary_Buttner/"/>
 							<entry key="/about/contacts/documents/dm_(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Dick_Miller/"/>
 							<entry key="/about/contacts/documents/cs_(?:.*)" value="/newpage.html?page=http://med.stanford.edu/profiles/Christopher_Stave/"/>
+							<!-- tobacco: 2012-02-14 TODO: remove in 3 months or after traffic dies down sufficiently -->
+							<entry key="/tobacco/(?:.*)" value="/newpage.html?page=http://tobacco.stanford.edu/tobacco_web/index.php"/>
                         </map>
                     </property>
                 </bean>
