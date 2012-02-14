@@ -273,10 +273,13 @@
                         },
                         on : {
                             success : function() {
-                                Y.log(this + " firing addSync: " + event.bookmark);
-                                this.fire("addSync", {bookmark : event.bookmark});
+                                Y.log(this + " firing addSync: successful " + event.bookmark);
+                                this.fire("addSync", {success : true, bookmark : event.bookmark});
                             },
-                            failure : this._syncFailed
+                            failure : function() {
+                                Y.log(this + " firing addSync: failed " + event.bookmark);
+                                this.fire("addSync", {success : false, bookmark : event.bookmark});
+                            }
                         },
                         "arguments" : {
                             bookmark : event.bookmark
@@ -302,10 +305,13 @@
                         },
                         on : {
                             success : function() {
-                                Y.log(this + " firing removeSync: " + event.position);
-                                this.fire("removeSync", {position : event.position});
+                                Y.log(this + " firing removeSync: successful " + event.position);
+                                this.fire("removeSync", {success: true, position : event.position});
                             },
-                            failure : this._syncFailed
+                            failure : function() {
+                                Y.log(this + " firing removeSync: failed " + event.position);
+                                this.fire("removeSync", {success: false, position : event.position});
+                            }
                         },
                         "arguments" : {
                             position : event.position
@@ -332,10 +338,13 @@
                         },
                         on : {
                             success :  function() {
-                                Y.log(this + " firing updateSync: " + event.position);
-                                this.fire("updateSync", {position : event.position});
+                                Y.log(this + " firing updateSync: successful " + event.position);
+                                this.fire("updateSync", {success : true, position : event.position});
                             },
-                            failure : this._syncFailed
+                            failure :  function() {
+                                Y.log(this + " firing updateSync: failed" + event.position);
+                                this.fire("updateSync", {success: false, position : event.position});
+                            }
                         },
                         "arguments" : {
                             position : event.position
@@ -516,7 +525,14 @@
                 node.on("mouseout", this._handleBookmarkMouseout, this);
                 node.on("click", this._handleClick, this);
                 this.on("statusChange", this._handleStatusChange);
-                this.get("bookmarks").on("addSync", function() {this.set("status", BookmarkLink.SUCCESSFUL)}, this);
+                this.get("bookmarks").on("addSync", this._handleSyncEvent, this);
+            },
+            _handleSyncEvent : function(event) {
+                if (event.success) {
+                    this.set("status", BookmarkLink.SUCCESSFUL);
+                } else {
+                    this.set("status", BookmarkLink.FAILED);
+                }
             },
             _handleBookmarkMouseout : function(event) {
                 this.set("status", BookmarkLink.OFF);
@@ -721,6 +737,7 @@
                       }
                   },
                   _handleBookmarkRemove : function(event) {
+                      //TODO: handle event.success == false
                       this.get("editors")[event.position].destroy(true);
                   },
                   _handleDestroyEditor : function(event) {
@@ -729,9 +746,11 @@
                       editors.splice(position, 1);
                   },
                   _handleBookmarkAdd : function(event) {
+                      //TODO: handle event.success == false
                       this.get("editors")[event.target.indexOf(event.bookmark)].update();
                   },
                 _handleBookmarkUpdate : function(event) {
+                    //TODO: handle event.success == false
                     var editors = this.get("editors");
                     editors[event.position].update();
                 },
