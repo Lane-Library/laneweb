@@ -10,16 +10,16 @@
     padding-left:5px;
 }
 #bookmark-link.active {
-    color:blue;
-    background-color:green;
+    color:green;
+    background-color:blue;
 }
 #bookmark-link.bookmarking {
     color:orange;
     background-color:yellow;
 }
 #bookmark-link.successful {
-    color:green;
-    background-color:blue;
+    color:blue;
+    background-color:green;
 }
 #bookmark-link.failed {
     color:red;
