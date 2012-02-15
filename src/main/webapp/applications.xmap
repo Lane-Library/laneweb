@@ -177,6 +177,25 @@
         </map:pipeline>
         <!-- caching pipeline for static documents -->
         <map:pipeline type="caching">
+        	<!-- TO REMOVE AT FOR RELEASE -->
+            <map:match pattern="classes/**" type="wildcard">
+            	<map:match pattern="classes/classeslist" type="wildcard">
+                    <map:generate type="classes" src="classes:/all-data.xml"/>
+                    <map:transform type="saxon" src="resources/xsl/classes/laneclasses-list.xsl"/>
+                    <map:serialize type="xhtml"/>
+                </map:match>
+                <map:match pattern="classes/thisweek" type="wildcard">
+                    <map:generate type="classes" src="classes:/data.xml"/>
+                    <map:transform type="saxon" src="resources/xsl/classes/thisweek.xsl"/>
+                    <map:serialize type="xhtml"/>
+                </map:match>
+                <map:match pattern="classes/all" type="wildcard">
+                    <map:generate type="classes" src="classes:/data.xml"/>
+                    <map:transform type="saxon" src="resources/xsl/classes/laneclasses.xsl"/>
+                    <map:serialize type="xhtml"/>
+                </map:match>
+            </map:match>
+            <!-- END   TO REMOVE FOR NEXT RELEASE -->
             <map:match pattern="cache/search/templates/xml" type="wildcard">
                 <map:generate type="search-template-generator" src="apps:/search/describe/xml">
                     <map:parameter name="directories" value="search,portals"/>
