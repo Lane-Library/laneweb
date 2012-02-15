@@ -8,6 +8,8 @@
 #bookmark-link{
     cursor:pointer;
     padding-left:5px;
+    color:black;
+    background-color:gray
 }
 #bookmark-link.active {
     color:green;
