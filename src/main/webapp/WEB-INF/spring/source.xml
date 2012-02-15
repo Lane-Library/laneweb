@@ -33,6 +33,12 @@
         <lookup-method bean="org.apache.cocoon.environment.Environment" name="getEnvironment"/>
     </bean>
     
+    <bean name="org.apache.excalibur.source.SourceFactory/classes"
+        class="edu.stanford.irt.laneweb.cocoon.source.LanewebSitemapSourceFactory">
+        <property name="processor" ref="org.apache.cocoon.Processor/classes"/>
+        <lookup-method bean="org.apache.cocoon.environment.Environment" name="getEnvironment"/>
+    </bean>
+    
     <bean name="org.apache.excalibur.source.SourceFactory/bookmarks"
         class="edu.stanford.irt.laneweb.cocoon.source.LanewebSitemapSourceFactory">
         <property name="processor" ref="org.apache.cocoon.Processor/bookmarks"/>
@@ -49,6 +55,7 @@
                 <entry key="eresources" value-ref="org.apache.excalibur.source.SourceFactory/eresources"/>
                 <entry key="rss" value-ref="org.apache.excalibur.source.SourceFactory/rss"/>
                 <entry key="mobile" value-ref="org.apache.excalibur.source.SourceFactory/mobile"/>
+                <entry key="classes" value-ref="org.apache.excalibur.source.SourceFactory/classes"/>
                 <entry key="bookmarks" value-ref="org.apache.excalibur.source.SourceFactory/bookmarks"/>
             </map>
         </property>

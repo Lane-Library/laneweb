@@ -42,6 +42,7 @@
                 <entry key="**/apps/search/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
                 <entry key="**/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"/>
                 <entry key="**/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
+                <entry key="**/classes/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/classes"/>
                 <entry key="**/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
                 <entry key="**/bookmarks/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/bookmarks"/>
                 <entry key="**/test/bookmarks/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
@@ -114,6 +115,13 @@
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
         <property name="processor" ref="org.apache.cocoon.Processor/content"/>
         <property name="prefix" value="/content"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/classes"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="processor" ref="org.apache.cocoon.Processor/classes"/>
+        <property name="prefix" value="/classes"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/bookmarks"

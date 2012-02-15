@@ -36,6 +36,11 @@
         class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
         <property name="source" value="/rss.xmap"/>
     </bean>
+	
+	<bean name="org.apache.cocoon.Processor/classes" parent="org.apache.cocoon.Processor"
+        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        <property name="source" value="/classes.xmap"/>
+    </bean>
 
     <bean name="org.apache.cocoon.Processor/mobile" parent="org.apache.cocoon.Processor"
         class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
