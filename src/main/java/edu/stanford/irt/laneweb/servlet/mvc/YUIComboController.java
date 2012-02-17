@@ -9,6 +9,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.cocoon.ProcessingException;
+import org.apache.cocoon.caching.Cache;
+import org.apache.cocoon.caching.CachedResponse;
+import org.apache.cocoon.caching.CachingOutputStream;
+import org.apache.excalibur.source.SourceValidity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -21,6 +27,11 @@ import org.springframework.web.servlet.support.WebContentGenerator;
  */
 @Controller
 public class YUIComboController extends WebContentGenerator implements ResourceLoaderAware {
+    
+    private static final SourceValidity[] EMPTY_VALIDITY = new SourceValidity[0];
+    
+    @Autowired
+    private Cache cache;
 
     /** where to start looking for the yui build files */
     private Resource yuiBase;
@@ -31,20 +42,30 @@ public class YUIComboController extends WebContentGenerator implements ResourceL
      * @param response
      * @throws ServletException
      * @throws IOException
+     * @throws ProcessingException 
      */
-    //TODO: cache the combined result for future requests.
     @RequestMapping(value = "/yui")
-    public void getCombo(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+    public void getCombo(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException, ProcessingException {
         checkAndPrepare(request, response, true);
         OutputStream output = response.getOutputStream();
-        StringTokenizer names = new StringTokenizer(request.getQueryString(), "&");
-        try {
-            while (names.hasMoreTokens()) {
-                Resource resource = this.yuiBase.createRelative(names.nextToken());
-                copy(resource.getInputStream(), output);
+        String queryString = request.getQueryString();
+        CachedResponse cachedResponse = this.cache.get(queryString);
+        if (cachedResponse == null) {
+            CachingOutputStream cachingOutput = new CachingOutputStream(output);
+            StringTokenizer names = new StringTokenizer(queryString, "&");
+            try {
+                while (names.hasMoreTokens()) {
+                    Resource resource = this.yuiBase.createRelative(names.nextToken());
+                    copy(resource.getInputStream(), cachingOutput);
+                }
+                cachingOutput.flush();
+            } finally {
+                cachingOutput.close();
             }
+            this.cache.store(queryString, new CachedResponse(EMPTY_VALIDITY, cachingOutput.getContent()));
+        } else {
+            output.write(cachedResponse.getResponse());
             output.flush();
-        } finally {
             output.close();
         }
     }
