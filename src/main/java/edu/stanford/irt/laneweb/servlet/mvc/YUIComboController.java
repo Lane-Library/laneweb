@@ -23,8 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.WebContentGenerator;
 
 /**
- * This class mimicks the yui combo server
+ * This class mimics the yui combo server
  */
+//TODO: maybe proxy the real combo server for gallery content
 @Controller
 public class YUIComboController extends WebContentGenerator implements ResourceLoaderAware {
     
