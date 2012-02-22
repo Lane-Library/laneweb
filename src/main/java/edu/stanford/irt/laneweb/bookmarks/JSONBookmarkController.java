@@ -36,6 +36,7 @@ public class JSONBookmarkController extends BookmarkController {
     }
     
     @RequestMapping(method = RequestMethod.DELETE)
+    //TODO: all browsers may not do PUT or DELETE
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
@@ -55,6 +56,7 @@ public class JSONBookmarkController extends BookmarkController {
     }
     
     @RequestMapping(method = RequestMethod.PUT)
+    //TODO: all browsers may not do PUT or DELETE
     @ResponseStatus(value = HttpStatus.OK)
     public void saveBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
