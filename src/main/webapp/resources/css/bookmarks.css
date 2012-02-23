@@ -13,6 +13,8 @@
     background-image : url(/././resources/images/icons-sprite.png);
     background-position: 0px 0px;
     background-repeat : no-repeat;
+    height: 15px;
+	width: 24px;
 }
 #bookmark-link.active {
     color:green;
