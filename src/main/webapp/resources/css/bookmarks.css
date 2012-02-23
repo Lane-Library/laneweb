@@ -9,7 +9,10 @@
     cursor:pointer;
     padding-left:5px;
     color:black;
-    background-color:gray
+    background-color:gray;
+    background-image : url(/././resources/images/icons-sprite.png);
+    background-position: 0px 0px;
+    background-repeat : no-repeat;
 }
 #bookmark-link.active {
     color:green;
