@@ -53,6 +53,8 @@ public final class QueryTermPattern {
         normalQuery = normalQuery.replaceAll(" and ", "|");
         normalQuery = HYPHEN_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = SPACE_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
+      //education, medical AND "cognitive+load" was generated two "||" --> bug 65768  
+        normalQuery = normalQuery.replaceAll("\\|\\|", "|");   
         try {
         	return Pattern.compile(normalQuery, Pattern.CASE_INSENSITIVE);
         } catch (PatternSyntaxException e) {
