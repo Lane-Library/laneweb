@@ -353,16 +353,9 @@
                             <artifactId>maven-changes-plugin</artifactId>
                             <version>2.6</version>
                             <configuration>
-                                <issueLinkTemplate>%URL%/default.php?%ISSUE%</issueLinkTemplate>
-                                <mailSender>
-                                    <name>Release Notification</name>
-                                    <email>ceyates@stanford.edu</email>
-                                </mailSender>
-                                <smtpHost>smtp.stanford.edu</smtpHost>
-                                <smtpPort implementation="java.lang.Integer">25</smtpPort>
-                                <toAddresses>
-                                    <toAddress implementation="java.lang.String">ceyates@stanford.edu</toAddress>
-                                </toAddresses>
+                                <issueLinkTemplatePerSystem>
+                                    <FogBugz>%URL%/default.php?%ISSUE%</FogBugz>
+                                </issueLinkTemplatePerSystem>
                             </configuration>
                             <reportSets>
                                 <reportSet>
