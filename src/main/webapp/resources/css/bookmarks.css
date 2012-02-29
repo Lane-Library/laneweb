@@ -3,22 +3,25 @@
     float:none;
     border-left:none;
     margin:0;
-    padding:1px 5px
+    padding:1px 5px;
 }
 #bookmark-link{
     cursor:pointer;
-    padding-left:5px;
-    color:black;
-    background-color:gray;
-    background-image : url(/././resources/images/icons-sprite.png);
-    background-position: 0px 0px;
-    background-repeat : no-repeat;
+    color:none;
+    opacity:0.5;
+    border: 0 none;
+    background: url("/././resources/images/icons-sprite.png") repeat scroll 0 0 transparent;
+    color: black;
     height: 15px;
-	width: 24px;
+    width: 24px;
+    display: inline;
+    margin-left: 5px;
+    overflow: hidden;
+    vertical-align: text-bottom; 
 }
 #bookmark-link.active {
-    color:green;
-    background-color:blue;
+    color:none;
+   /* background-color:blue;*/
 }
 #bookmark-link.bookmarking {
     color:orange;
