@@ -830,7 +830,8 @@
                                         <include>hightlighted-resources-min.css</include>
                                         <include>antibiogram-min.css</include>
                                         <include>landing-pgs-2011-min.css</include>
-                                        <include>bookmarks-min.css</include>
+                                        <include>bookmarks-min.css</include>                                        
+                                		<include>persistent-login-min.css</include>
                                     </includes>
                                 </aggregation>
                                 <aggregation>
@@ -874,7 +875,8 @@
                                         <include>menu-delay-min.js</include>
                                         <include>lane-search-printonly-min.js</include>
                                         <include>link-plugin-min.js</include>
-                                        <include>bookmarks-min.js</include>
+                                        <include>bookmarks-min.js</include>                                        
+                                		<include>lane-persistent-login-min.js</include>
                                     </includes>
                                 </aggregation>
                                 <aggregation>

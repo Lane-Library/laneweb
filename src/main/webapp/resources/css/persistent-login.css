@@ -1,0 +1,28 @@
+
+#persistent {
+	background-color: white;
+	width: 400px; 
+	height : 130px;
+	padding: 15px;
+	text-align: center;
+	height: 130px;
+}
+
+#persistent #hd {
+	padding: 0px 70px 15px 70px;
+	font-weight: bold;
+}
+
+#persistent #bd {
+	font-size: x-small;
+}
+
+#persistent #ft {
+	text-align: right;
+	font-size: xx-small;
+	padding-right: 30px;
+}
+
+#persistent #login {
+	position: inherit;
+}

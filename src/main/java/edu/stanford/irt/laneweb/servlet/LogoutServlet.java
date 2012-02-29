@@ -27,6 +27,21 @@ public class LogoutServlet extends HttpServlet {
         userCookie.setMaxAge(0);
         resp.addCookie(userCookie);
         
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie webCookie : cookies) {
+                if (PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE.equals(webCookie.getName())) {
+                    String cookieValue = webCookie.getValue();
+                	if(!"denied".equals(cookieValue)){//don't want to overwrite denied cookie
+                        webCookie.setPath("/");
+                        webCookie.setMaxAge(0);
+                        resp.addCookie(webCookie);
+                	}
+                	break;
+                }
+            }
+        }
+        
         Cookie webAuthCookie = new Cookie( WEBAUTH_COOKIE_NAME, null);
         webAuthCookie.setPath("/");
         webAuthCookie.setMaxAge(0);

@@ -1,8 +1,10 @@
 package edu.stanford.irt.laneweb.ldap;
 
 import java.security.PrivilegedAction;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.security.auth.Subject;
@@ -20,6 +22,7 @@ public class LDAPDataAccess {
 
         public Object mapFromAttributes(final Attributes attributes) throws javax.naming.NamingException {
             LDAPData ldapData = new LDAPData();
+//            attributes.getAll();
             Attribute currentAttribute = attributes.get("displayName");
             if (null != currentAttribute) {
                 ldapData.setName((String) currentAttribute.get());
@@ -27,6 +30,17 @@ public class LDAPDataAccess {
             currentAttribute = attributes.get("suunivid");
             if (null != currentAttribute) {
                 ldapData.setUnivId((String) currentAttribute.get());
+            }
+            currentAttribute = attributes.get("suAffiliation");
+            if (null != currentAttribute) {
+            	NamingEnumeration attrs =  currentAttribute.getAll();
+            	List<Affiliation> affiliations = new ArrayList<Affiliation>();
+            	 while(attrs.hasMore()) {
+            		 Affiliation aff = Affiliation.getAffiliation(((String)attrs.next()) );
+            		 affiliations.add(aff);
+            	 }
+                ldapData.setAffiliations(affiliations);
+            	 
             }
             return ldapData;
         }

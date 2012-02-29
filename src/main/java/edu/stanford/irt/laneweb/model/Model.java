@@ -43,6 +43,8 @@ public interface Model {
 
     String IPGROUP = "ipgroup";
 
+    String IS_ACTIVE_SUNETID = "isActiveSunetID";
+    
     String ITEMS = "items";
 
     String LIMIT = "limit";
