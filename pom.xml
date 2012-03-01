@@ -841,6 +841,7 @@
                                         <include>lane-min.js</include>
                                         <include>lane-ie-min.js</include>
                                         <include>lane-mobile-ad-min.js</include>
+                                        <include>lane-persistent-login-min.js</include>
                                         <include>lane-search-result-min.js</include>
                                         <include>lane-search-indicator-min.js</include>
                                         <include>lane-bassett-min.js</include>
@@ -876,7 +877,6 @@
                                         <include>lane-search-printonly-min.js</include>
                                         <include>link-plugin-min.js</include>
                                         <include>bookmarks-min.js</include>                                        
-                                		<include>lane-persistent-login-min.js</include>
                                     </includes>
                                 </aggregation>
                                 <aggregation>
