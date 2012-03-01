@@ -503,7 +503,7 @@
         BookmarkLink.ATTRS = {
                 node : {
                     valueFn : function() {
-                        return Y.Node.create("<span id='bookmark-link'>b</span>");
+                        return Y.Node.create("<span title='click to bookmark' id='bookmark-link'>b</span>");
                     }
                 },
                 bookmarks : {
