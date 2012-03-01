@@ -13,7 +13,7 @@ YUI({
         	var b = T.one("#b");
         	var right = T.DOM.viewportRegion().right;
         	var inside = false;
-        	var eventHandle = LANE.ToolTips.after("visibleChange", function(e) {
+        	var eventHandle = Y.lane.ToolTips.after("visibleChange", function(e) {
         		var boundingBox = this.get("boundingBox");
         		inside = T.DOM.inViewportRegion(T.Node.getDOMNode(boundingBox));
                 eventHandle.detach();

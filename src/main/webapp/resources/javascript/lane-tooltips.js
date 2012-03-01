@@ -432,9 +432,8 @@
     
     createTooltips = function() {
             var tooltipTriggerIds = '',
-                tt, tooltipContainer, tooltipId, i, j,
+                tooltipContainer, tooltipId, i, j, tt, content = {},
                 tooltipContainerNodeList = Y.all('.tooltips');
-            tt = undefined;
             for (i = 0; i < tooltipContainerNodeList.size(); i++) {
                 tooltipContainer = tooltipContainerNodeList.item(i).get('childNodes');
                 for (j = 0; j < tooltipContainer.size(); j++) {
@@ -444,42 +443,31 @@
                             tooltipTriggerIds += ', ';
                         }
                         tooltipTriggerIds += '#' + tooltipId;
+                        content[tooltipId] = tooltipContainer.item(j).get("innerHTML");
                     }
                 }
             }
-            
-            if (tooltipTriggerIds) {
-                tt = new Tooltip({
-                    content: {},
-                    triggerNodes: tooltipTriggerIds,
-                    shim: false,
-                    zIndex: 2,
-                    autoHideDelay: 60000,
-                    constrain:true
-                });
-                tt.render();
-                
-                tt.on("triggerEnter", function(e) {
-                    var tooltip, node = e.node;
-                    if (node && node.get("id")) {
-                        tooltip = Y.one('#' + node.get('id') + 'Tooltip');
-                        if (tooltip && tooltip.get('innerHTML')) {
-                            this.setTriggerContent(tooltip.get('innerHTML'));
-                        }
-                    }
-                });
-                tt.after('visibleChange', function(e) {
-                    if (e.newVal === false) {
-                        e.target.reset();
-                    }
-                });
-                LANE.ToolTips = tt;
-            }
+            tt = new Tooltip({
+                content : content,
+                triggerNodes : tooltipTriggerIds,
+                shim: false,
+                zIndex: 2,
+                autoHideDelay: 60000,
+                constrain:true,
+                render : true
+            });
+            tt.after('visibleChange', function(e) {
+                if (e.newVal === false) {
+                    e.target.reset();
+                }
+            });
+
+            Y.lane.ToolTips = tt;
         };
     Y.on('lane:change', function() {
-        if (LANE.ToolTips) {
-           LANE.ToolTips.destroy();
-           LANE.ToolTips = undefined;
+        if (Y.lane.ToolTips) {
+           Y.lane.ToolTips.destroy();
+           Y.lane.ToolTips = undefined;
         }
         createTooltips(); 
     });
