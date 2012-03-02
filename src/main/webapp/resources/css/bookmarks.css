@@ -1,74 +1,86 @@
 /* hover styles for #favorites currently in lane-nav.css */
-#favorites li{
-    float:none;
-    border-left:none;
-    margin:0;
-    padding:1px 5px;
+#favorites li {
+	float: none;
+	border-left: none;
+	margin: 0;
+	padding: 1px 5px;
 }
-#bookmark-link{
-    cursor:pointer;
-    color:none;
-    opacity:0.5;
-    border: 0 none;
-    background: url("/././resources/images/icons-sprite.png") repeat scroll 0 0 transparent;
-    color: black;
-    height: 15px;
-    width: 24px;
-    display: inline;
-    margin-left: 5px;
-    overflow: hidden;
-    vertical-align: text-bottom; 
+
+#bookmark-link {
+	cursor: pointer;
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll 0 0 transparent;
+	height: 15px;
+	width: 24px;
+	display: inline;
+	font-size: 16px;
+	font-weight: normal;
+	font-family: Arial;
+	text-transform: lowercase;
+	padding: 0;
+	margin-left: 5px;
+	vertical-align: text-bottom;
 }
+
 #bookmark-link.active {
-    color:none;
-   /* background-color:blue;*/
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll 0 -26px transparent;
 }
+
 #bookmark-link.bookmarking {
-    color:orange;
-    background-color:yellow;
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll 0 -26px transparent;
 }
+
 #bookmark-link.successful {
-    color:blue;
-    background-color:green;
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll 0 -53px transparent;
 }
+
 #bookmark-link.failed {
-    color:red;
-    background-color:orange;
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll 0 0 transparent;
 }
-#bookmarks-editor fieldset{
-    border:1px #DADAD8 solid;
-    background-color:#F4F5EF;
-    padding:5px 15px
+
+#bookmarks-editor fieldset {
+	border: 1px #DADAD8 solid;
+	background-color: #F4F5EF;
+	padding: 5px 15px
 }
-#bookmarks-editor button{
-    border:1px #DADAD8 solid;
-    background-color:#FAFAF8;
-    padding:5px;
-    margin-right:20px;
-    border-radius:3px;
-    cursor:pointer;
-    font-family:Georgia;
-    color:#414141
+
+#bookmarks-editor button {
+	border: 1px #DADAD8 solid;
+	background-color: #FAFAF8;
+	padding: 5px;
+	margin-right: 20px;
+	border-radius: 3px;
+	cursor: pointer;
+	font-family: Georgia;
+	color: #414141
 }
-#bookmarks-editor button:hover{
-    background-color:#F5F5F3;
-    color:#111111
+
+#bookmarks-editor button:hover {
+	background-color: #F5F5F3;
+	color: #111111
 }
-#bookmarks-editor li{
-    list-style-image:none;
-    list-style-type:none;
-    border-bottom:1px #DADAD8 solid;
-    margin-left:0;
-    padding:12px
+
+#bookmarks-editor li {
+	list-style-image: none;
+	list-style-type: none;
+	border-bottom: 1px #DADAD8 solid;
+	margin-left: 0;
+	padding: 12px
 }
-#bookmarks-editor input{
-    margin-right:12px
+
+#bookmarks-editor input {
+	margin-right: 12px
 }
-#bookmarks-editor input[type = 'text']{
-    box-shadow:rgba(0, 0, 0, 0.1) 0px 0px 8px;
-    -moz-box-shadow:rgba(0, 0, 0, 0.1) 0px 0px 8px;
-    -webkit-box-shadow:rgba(0, 0, 0, 0.1) 0px 0px 8px;
-    padding:5px;
-    border:solid 2px #C9C9C9;
-    width:25em
+
+#bookmarks-editor input[type='text'] {
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	padding: 5px;
+	border: solid 2px #C9C9C9;
+	width: 25em
 }
