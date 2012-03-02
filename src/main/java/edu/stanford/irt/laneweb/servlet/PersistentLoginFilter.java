@@ -32,7 +32,10 @@ public class PersistentLoginFilter extends AbstractLanewebFilter {
 		String sunetid = this.sunetIdSource.getSunetid(request);
 		if (null != sunetid) {
 			Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-			if (Boolean.parseBoolean(request.getParameter(("pl"))) && null != isActiveSunetID && isActiveSunetID ) {
+			if ("renew".equals(request.getParameter(("pl"))) && null != isActiveSunetID && isActiveSunetID) {
+				setLoginCookie(request, response, sunetid);
+			}
+			else if (Boolean.parseBoolean(request.getParameter(("pl")))) {
 				setLoginCookie(request, response, sunetid);
 			}
 			else if (!Boolean.parseBoolean(request.getParameter(("pl")))) {
