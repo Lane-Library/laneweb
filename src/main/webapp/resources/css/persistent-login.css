@@ -1,26 +1,29 @@
 
 #persistent {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-moz-user-select: none;
 	background-color: white;
 	width: 400px; 
-	height : 130px;
-	padding: 15px;
+	height: auto;
+	padding: 30px;
 	text-align: center;
-	height: 130px;
+	border: 1px solid #9e9d98;
 }
 
 #persistent #hd {
-	padding: 0px 70px 15px 70px;
-	font-weight: bold;
-}
-
-#persistent #bd {
-	font-size: x-small;
+    color: #414042;
+    font-weight : bold;
+    line-height : 1.4em;
+    font-size : 1.1em;
+    padding-bottom: 2em;;
 }
 
 #persistent #ft {
 	text-align: right;
-	font-size: xx-small;
 	padding-right: 30px;
+	margin-top: .7em;
 }
 
 #persistent #login {
