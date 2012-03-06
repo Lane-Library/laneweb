@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-03-05" version="1.12.20" description="1.12.20 bug fix release">
+            <action date="2012-003-02" dev="alainb" issue="66072" type="update">
+                add login flow to trunk using boomarks feature toggle 
+            </action>
+            <action date="2012-02-029" dev="ceyates" issue="66049" type="fix">
+                metasearch context reload is broken
+            </action>
+            <action date="2012-02-28" dev="ceyates" issue="66014" type="fix">
+                changes report lacks links to fogbugz cases
+            </action>
+        </release>
         <release date="2012-03-01" version="1.12.19" description="1.12.19 emergency release">
             <action date="2012-02-29" dev="alainb" issue="66042" type="fix">
                 UpToDate broken in clinical search

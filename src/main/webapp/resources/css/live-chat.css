@@ -4,41 +4,44 @@
     background-repeat : no-repeat;
 }
 #libraryContact .live-chat a {
-    background-image : url(/././resources/images/chat-top-off.gif);
-    padding-left : 26px;
-    border-bottom : none
+    background: url("/././resources/images/icons-sprite.png") no-repeat scroll -45px 0 transparent;
+    padding-left : 32px;
+    width : 26px;
+    height : 15px;
+    border-bottom : none;
+    
 }
 #libraryContact .live-chat a:hover {
-    background-image : url(/././resources/images/chat-top-on.gif)
+    background: url("/././resources/images/icons-sprite.png") no-repeat scroll -45px -26px transparent;
 }
 #libraryContact .live-chat-inactive {
     display : none
 }
 #libraryContact span {
-    border-bottom : 1px dotted #81785A
+    border-bottom : 1px dotted #81785A;
 }
 #libraryContact a:hover span {
-    border-bottom : 1px solid #820000
+    border-bottom : 1px solid #820000;
 }
 .content .live-chat-inactive, .content .live-chat a {
     width : 161px;
     height : 70px;
     background-image : url(/././resources/images/liveChat1.png);
-    margin : 5px auto
+    margin : 5px auto;
 }
 .content .live-chat-inactive {
-    background-position : 0 -210px
+    background-position : 0 -210px;
 }
 .content .live-chat a {
     font-size : 0;
     text-indent : -1000px;
-    border-bottom : none
+    border-bottom : none;
 }
 
 .content .live-chat a:hover {
-    background-position : 0 -105px
+    background-position : 0 -105px;
 }
 
 .content .live-chat-inactive a {
-    visibility : hidden
+    visibility : hidden;
 }

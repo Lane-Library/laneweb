@@ -13,7 +13,7 @@ h1 {
     color : #820000
 }
 h1 span {
-    color : black
+    color : black;
 }
 #subHeading {
     font-size : 11px;
@@ -23,15 +23,15 @@ h1 span {
 }
 h1 a {
     border-bottom : none;
-    color : #820000
+    color : #820000;
 }
 h1 a:visited {
-    color : #820000
+    color : #820000;
 }
 #som,
 h1 a:hover {
     text-decoration : underline;
-    border-bottom-style : none
+    border-bottom-style : none;
 }
 #som {
     display : block;
@@ -46,27 +46,43 @@ h1 a:hover {
 #som:hover {
     background-position : 0 -100px
 }
-#login,
-#libraryContact, #libraryHours {
+#login, #libraryHours {
     position : absolute;
-    font-size : 10px;
-    right : 1em
+    font-size : 11px;
+    right : 1em;
 }
 #libraryHours {
-    right : 24.25em
+    right : 24.25em;
 }
 #login {
-    top : 0.8em
+    top : 0.8em;
+    vertical-align: text-bottom;
 }
 #libraryContact, #libraryHours {
-    top : 54px
+    top : 54px;
+    white-space:nowrap;
 }
+#libraryContact {
+	position : absolute;
+    font-size : 11px;
+    right: 3em;
+}
+
 #libraryContact li, #login li, #libraryHours li {
     float : left;
     padding : 0 7px;
     background-image : none;
-    border-left : 1px dotted #C1C1C1
+    border-left : 1px dotted #C1C1C1;
+    height: 16px;
 }
+
+#login #favorites {
+	 background: url("/././resources/images/icons-sprite.png") no-repeat scroll -296px -26px transparent;
+	 padding-left: 22px;
+	 margin-left: 1em;
+	 border-left : none;
+	}
+
 #libraryContact li:first-child, #login li:first-child, #libraryHours li:first-child {
-    border-left : none
+    border-left : none;
 }
