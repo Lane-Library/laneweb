@@ -607,6 +607,10 @@
                     node.replaceClass("bookmarking", "failed");
                     break;
                 case BookmarkLink.TIMING :
+                    node.removeClass("active");
+                    node.removeClass("bookmarking");
+                    node.removeClass("successful");
+                    node.removeClass("failed");
                     this._timer = Y.later(this.get("hideDelay"), this, this._hide);
                 default:
                 }
