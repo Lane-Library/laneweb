@@ -512,13 +512,18 @@
                 target : {
                     value : null
                 },
+                hideDelay : {
+                    value:500
+                },
                 state : {
                     value : BookmarkLink.OFF
                 }
         };
 
         Y.extend(BookmarkLink, Y.Base, {
+            
             initializer : function() {
+                this._timer = null;
                 var node = this.get("node");
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
@@ -536,7 +541,7 @@
                 }
             },
             _handleBookmarkMouseout : function(event) {
-                this.set("status", BookmarkLink.OFF);
+                this.set("status", BookmarkLink.TIMING);
             },
             _handleBookmarkMouseover : function(event) {
                 this.set("status", BookmarkLink.ACTIVE);
@@ -554,7 +559,7 @@
                 this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
             },
             _handleTargetMouseout : function(event) {
-                this.set("status", BookmarkLink.OFF);
+                this.set("status", BookmarkLink.TIMING);
             },
             _handleTargetMouseover : function(event) {
                 if (this._isBookmarkable(event.currentTarget)) {
@@ -565,7 +570,17 @@
             _isBookmarkable : function(target) {
                 return target.getStyle("display") == "inline" && !target.one("img");
             },
+            _hide : function() {
+                this.set("status", BookmarkLink.OFF);
+            },
+            _clearTimer : function() {
+                if (this._timer) {
+                    this._timer.cancel();
+                    this._timer = null;
+                }
+            },
             _handleStatusChange : function(event) {
+                this._clearTimer();
                 var node = this.get("node");
                 switch(event.newVal) {
                 case BookmarkLink.OFF : 
@@ -591,6 +606,8 @@
                 case BookmarkLink.FAILED : 
                     node.replaceClass("bookmarking", "failed");
                     break;
+                case BookmarkLink.TIMING :
+                    this._timer = Y.later(this.get("hideDelay"), this, this._hide);
                 default:
                 }
             }
@@ -600,7 +617,8 @@
             ACTIVE : 2,
             BOOKMARKING : 3,
             SUCCESSFUL : 4,
-            FAILED : 5
+            FAILED : 5,
+            TIMEING : 6
         });
 
         Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
