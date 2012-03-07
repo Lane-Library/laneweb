@@ -50,6 +50,31 @@
 }
 
 #bookmarks-editor button {
+		-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-moz-user-select: none;
+	background-color: #edede5;
+	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
+	background: -webkit-gradient(linear, center top, from(#fafbf8),
+		to(#edede5) );
+	filter: progid :           DXImageTransform.Microsoft.gradient (     
+		   startColorstr =       '#fafbf8', endColorstr =         '#edede5' );
+	color: #444444;
+	border: 1px solid #dadad9;
+	cursor: pointer;
+	display: inline-block;
+	cursor: default;
+	display: inline-block;
+	font-size: 11px;
+	font-weight: bold;
+	height: 27px;
+	line-height: 27px;
+	min-width: 46px;
+	padding: 0 20px;
+	text-align: center;
+	margin-right: 15px;
+	/*
 	border: 1px #DADAD8 solid;
 	background-color: #FAFAF8;
 	padding: 5px;
@@ -57,12 +82,25 @@
 	border-radius: 3px;
 	cursor: pointer;
 	font-family: Georgia;
-	color: #414141
+	color: #414141;*/
 }
 
 #bookmarks-editor button:hover {
+	background-color: #eeeee5;
+	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
+	background: -webkit-gradient(linear, center top, from(#fafbf8),
+		to(#edede5) );
+	filter: progid :           DXImageTransform.Microsoft.gradient (     
+		   startColorstr =       '#fafbf8', endColorstr =       '#edede5' );
+	color: #444444;
+	border: 1px solid #9e9d98;
+	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
+	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
+	box-shadow: 1px 1px 1px 1px #e8e8e8;
+	
+	/*
 	background-color: #F5F5F3;
-	color: #111111
+	color: #111111;*/
 }
 
 #bookmarks-editor li {
