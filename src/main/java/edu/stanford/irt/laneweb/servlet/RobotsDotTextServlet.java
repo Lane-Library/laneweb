@@ -19,7 +19,7 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     private byte[] nonproduction = "User-agent: *\nDisallow: /".getBytes();
 
-    private byte[] production = ("User-agent: *\nCrawl-delay: 7\nDisallow: /about/contacts/\nDisallow: /bassett/\n"
+    private byte[] production = ("User-agent: *\nCrawl-delay: 7\nDisallow: /bassett/\n"
             + "Disallow: /howto/\nDisallow: /m/\nDisallow: /portals/history/\n"
             + "Disallow: /search.html\nDisallow: /secure/\nDisallow: /stage/").getBytes();
 
