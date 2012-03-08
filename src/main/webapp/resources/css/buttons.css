@@ -1,5 +1,62 @@
 /* styles for css buttons */
 /* default - gray css button */
+.btn span {
+  display: inline-block;
+  padding: 10px  20px;
+  background: #3194c6;
+   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3194c6), to(#5bacd6));
+  background: -moz-linear-gradient(#3194c6, #5bacd6);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+   -webkit-transition: -webkit-transform .2s ease-in-out;
+  -moz-transition: -moz-transform .2s ease-in-out;
+  -o-transition: -o-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out;
+  
+}
+
+.btn {
+  display: inline-block;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow:
+    0 8px 0 #1a74a1,
+    0 15px 20px rgba(0,0,0,.35);
+  -moz-box-shadow:
+    0 8px 0 #1a74a1,
+    0 15px 20px rgba(0,0,0,.35);
+  box-shadow:
+    0 8px 0 #1a74a1,
+    0 15px 20px rgba(0,0,0,.35);
+    -webkit-transition: -webkit-box-shadow .2s ease-in-out;
+  -moz-transition: -moz-box-shadow .2s ease-in-out;
+  -o-transition: -o-box-shadow .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out;
+    
+}
+
+btn:active {
+  -webkit-box-shadow:
+    0 8px 0 #1a74a1,
+    0 12px 10px rgba(0,0,0,.3);
+  -moz-box-shadow:
+    0 8px 0 #1a74a1,
+    0 12px 10px rgba(0,0,0,.3);
+  box-shadow:
+    0 8px 0 #1a74a1,
+    0 12px 10px rgba(0,0,0,.3);
+}
+
+.btn:active span {
+  -webkit-transform: translate(0, 4px);
+  -moz-transform: translate(0, 4px);
+  -o-transform: translate(0, 4px);
+  transform: translate(0, 4px);
+}
+
+
 .button-css {
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
