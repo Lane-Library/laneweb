@@ -544,7 +544,6 @@
                 this.set("status", BookmarkLink.ACTIVE);
             },
             _handleClick : function() {
-                alert("click");
                 var target = this.get("target"), label, url;
                 target.plug(Y.lane.LinkPlugin);
                 label = target.link.get("title");
