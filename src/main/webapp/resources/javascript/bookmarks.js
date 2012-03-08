@@ -527,9 +527,6 @@
                 var node = this.get("node");
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                node.on("mouseover",this._handleBookmarkMouseover, this);
-                node.on("mouseout", this._handleBookmarkMouseout, this);
-                node.on("click", this._handleClick, this);
                 this.on("statusChange", this._handleStatusChange);
                 this.get("bookmarks").on("addSync", this._handleSyncEvent, this);
             },
@@ -547,6 +544,7 @@
                 this.set("status", BookmarkLink.ACTIVE);
             },
             _handleClick : function() {
+                alert("click");
                 var target = this.get("target"), label, url;
                 target.plug(Y.lane.LinkPlugin);
                 label = target.link.get("title");
@@ -582,7 +580,11 @@
             _handleStatusChange : function(event) {
                 this._clearTimer();
                 var node = this.get("node");
+                //IE messes up the event handling if set up on initialization
+                //so purging and selectively set them when the status changes.
+                node.purge(false);
                 switch(event.newVal) {
+                //OFF: not visible
                 case BookmarkLink.OFF : 
                     node.remove(false);
                     node.removeClass("active");
@@ -590,23 +592,34 @@
                     node.removeClass("successful");
                     node.removeClass("failed");
                     break;
+                //READY: visible but not enabled
                 case BookmarkLink.READY :
                     this.get("target").insert(node, "after");
                     break;
+                //ACTIVE: enabled (mouseover)
                 case BookmarkLink.ACTIVE : 
-                    this.get("target").insert(node, "after");
+                    node.on("mouseout", this._handleBookmarkMouseout, this);
+                    node.on("click", this._handleClick, this);
                     node.addClass("active");
                     break;
+                //BOOKMARKING: clicked and waiting for server sync message
                 case BookmarkLink.BOOKMARKING : 
+                    node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.replaceClass("active", "bookmarking");
                     break;
+                //SUCCESSFUL: server sync was successful
                 case BookmarkLink.SUCCESSFUL : 
+                    node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.replaceClass("bookmarking", "successful");
                     break;
+                //FAILED: server sync failed
                 case BookmarkLink.FAILED : 
+                    node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.replaceClass("bookmarking", "failed");
                     break;
+                //TIMING: waiting to hide
                 case BookmarkLink.TIMING :
+                    node.on("mouseover",this._handleBookmarkMouseover, this);
                     node.removeClass("active");
                     node.removeClass("bookmarking");
                     node.removeClass("successful");
@@ -622,7 +635,7 @@
             BOOKMARKING : 3,
             SUCCESSFUL : 4,
             FAILED : 5,
-            TIMEING : 6
+            TIMING : 6
         });
 
         Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
