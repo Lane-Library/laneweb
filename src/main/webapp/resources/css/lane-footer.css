@@ -3,32 +3,66 @@
     background-color : #F6F7F2;
     background-image : url(/././resources/images/laneFooterBg1.png);
     background-repeat : repeat-x;
-    padding : 29px
+    padding : 29px;
 }
 
 #laneFooter a {
     font-family : Georgia;
     font-size : 15px;
     border-bottom : none;
-    letter-spacing : .5px
+    letter-spacing : .5px;
 }
 
 #laneFooter ul {
-    padding-top : 3px
+    padding-top : 3px;
 }
 
 #laneFooter li {
-    padding : 1.5px 0
+    padding : 1.5px 0;
 }
 
 #laneFooter ul a {
     font-family : arial;
     font-size : 11px;
-    letter-spacing : normal
+    letter-spacing : normal;
 }
 
 #socialMedia {
     position : absolute;
-    right : 24px;
-    bottom : 14px
+    right : 20px;
+    bottom : 20px;
+}
+
+.facebook {
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll -46px -118px transparent;
+    height: 24px;
+	width: 24px;
+	padding: 0 17px 10px 5px;
+}
+.facebook:hover {
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll -46px -172px transparent;
+}
+.twitter {
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll -93px -118px transparent;
+    height: 24px;
+	width: 24px;
+	padding: 0 17px 10px 5px;
+}
+.twitter:hover {
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll -93px -172px transparent;
+}
+.flickr {
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll -142px -118px transparent;
+    height: 24px;
+	width: 24px;
+	padding: 0 17px 10px 5px;
+}
+.flickr:hover {
+	background: url("/././resources/images/icons-sprite.png") no-repeat
+		scroll -142px -172px transparent;
 }
