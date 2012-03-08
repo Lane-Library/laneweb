@@ -105,7 +105,6 @@
 		var node = event.target, 
 		url = '/././', 
 		userCookie = Y.Cookie.get('user');
-		node = node.get('parentNode');
 		if (!userCookie ) {
 			url = url + 'secure/';
 		}
