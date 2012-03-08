@@ -31,7 +31,7 @@
 				link.set('rel', 'persisteanceLogin');
 				redirectUrl = escape(link.get('href'));
 				if(userCookie){
-					isActive = Y.io('/././user/active', { sync: true,});
+					isActive = Y.io('/././user/active', { sync: true});
 					if(isActive.responseText === 'true' ){
 						LANE.persistentlogin.newWindow(event, '/././plain/persistent-extension-popup.html');
 						event.preventDefault();
@@ -83,7 +83,7 @@
 					date.setFullYear(date.getFullYear()+10);
 					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', {path: "/",expires: date});
 				} else
-					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', {path: "/",});
+					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', {path: "/"});
 			});
 		}
 		if(Y.get('#dont-ask-again')){
