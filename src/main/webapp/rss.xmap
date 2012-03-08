@@ -19,7 +19,7 @@
             <map:match pattern="page2rss" type="wildcard">
             <map:match type="regex-parameter" pattern="/classes-consult/laneclasses.html">
                 <map:parameter name="parameter-name" value="page"/>
-                <map:generate type="classes"  src="apps:/classes/data.xml"/>
+                <map:generate type="classes"  src="classes:/data.xml"/>
                 <map:transform type="saxon" src="resources/xsl/classes/rss.xsl"/>
                 <map:serialize type="xml"/>
               </map:match>
