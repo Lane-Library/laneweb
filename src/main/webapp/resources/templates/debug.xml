@@ -283,15 +283,12 @@
                             </div>
                             <div id="socialMedia">
                                 <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257"
-                                    class="image-link"><img src="/resources/images/facebook-color.png" alt=""
-                                        width="27" height="28" /></a>
+                                    class="image-link facebook">&#160;</a>
                                 &#160;
                                 <a href="http://twitter.com/#!/LaneLibStanford"
-                                    class="image-link"><img src="/resources/images/twitter-icon1.png" alt=""
-                                        width="27" height="28" /></a>
+                                    class="image-link twitter">&#160;</a>
                                 &#160;
-                                <a href="http://www.flickr.com/photos/40390680@N08/" class="image-link noproxy"><img
-                                                src="/resources/images/flickr-icon.png" alt="" width="27" height="28" /></a>
+                                <a href="http://www.flickr.com/photos/40390680@N08/" class="image-link flickr noproxy">&#160;</a>
                             </div>
                         </div>
                     </div>
