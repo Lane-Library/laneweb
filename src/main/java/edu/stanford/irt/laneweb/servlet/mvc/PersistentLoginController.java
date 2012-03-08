@@ -64,6 +64,18 @@ public class PersistentLoginController {
 	}
 
 
+	@RequestMapping(value = "/persistentLogin.html")
+	public String getView(final String url, HttpServletRequest request, HttpServletResponse response) {
+		return getView(url, response);
+	}
+	
+	// /**/persistentLogin do not work for /secure/ not sure why but is working for anything else  
+	@RequestMapping(value = "/secure/persistentLogin.html")
+	public String secureView(final String url, HttpServletRequest request, HttpServletResponse response) {
+		 return getView(url, response);
+	}
+
+	
 	/**
 	 * set the lane-user cookie max age to zero.
 	 * 

@@ -28,7 +28,7 @@
 		if (link && link.get('nodeName') == 'A' && (link.get('pathname').indexOf('secure/apps/proxy/credential') > -1 || link.get('host').indexOf('laneproxy') === 0)) {
 			if (!persistentStatusCookie ||( 'denied' !== persistentStatusCookie &&  persistentStatusCookie < now.getTime() )) {
 				// don't want a redirect with the tracking see tracking.js code if !rel documment.location is not set
-				link.set('rel', 'persisteanceLogin');
+				link.set('rel', 'persistentLogin');
 				redirectUrl = escape(link.get('href'));
 				if(userCookie){
 					isActive = Y.io('/././user/active', { sync: true});
@@ -46,9 +46,9 @@
 			
 		} else if (link && link.get('nodeName') == 'A'	&& (link.get('pathname').indexOf('/././secure/login.html') > -1)) {
 			if (persistentStatusCookie && 'denied' === persistentStatusCookie) {
-				document.location =  '/././secure/persistentlogin.html?&url='+escape(document.location);
+				document.location =  '/././secure/persistentLogin.html?&url='+escape(document.location);
 			} else{
-				link.set('rel', 'persisteanceLogin');
+				link.set('rel', 'persistentLogin');
 				redirectUrl = escape(document.location);
 				LANE.persistentlogin.newWindow(event,'/././plain/persistent-login-popup.html');
 			}
@@ -108,7 +108,7 @@
 		if (!userCookie ) {
 			url = url + 'secure/';
 		}
-		url = url + 'persistentlogin.html' + node.get('search') + '&url='+ redirectUrl;
+		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
 		node.set('href', url);
 	};
 
