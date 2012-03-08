@@ -30,7 +30,7 @@
 #socialMedia {
     position : absolute;
     right : 20px;
-    bottom : 20px;
+    bottom : 10px;
 }
 
 .facebook {
@@ -38,7 +38,8 @@
 		scroll -46px -118px transparent;
     height: 24px;
 	width: 24px;
-	padding: 0 17px 10px 5px;
+	padding: 0 5px 10px 0;
+	display: inline-block;
 }
 .facebook:hover {
 	background: url("/././resources/images/icons-sprite.png") no-repeat
@@ -49,7 +50,8 @@
 		scroll -93px -118px transparent;
     height: 24px;
 	width: 24px;
-	padding: 0 17px 10px 5px;
+	padding: 0 5px 10px 0;
+	display: inline-block;
 }
 .twitter:hover {
 	background: url("/././resources/images/icons-sprite.png") no-repeat
@@ -60,9 +62,11 @@
 		scroll -142px -118px transparent;
     height: 24px;
 	width: 24px;
-	padding: 0 17px 10px 5px;
+	padding: 0 5px 10px 0;
+	display: inline-block;
 }
 .flickr:hover {
 	background: url("/././resources/images/icons-sprite.png") no-repeat
 		scroll -142px -172px transparent;
+		
 }
