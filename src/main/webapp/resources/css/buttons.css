@@ -8,6 +8,8 @@
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
 		to(#edede5) );
 	background: -moz-linear-gradient(#fafbf8, #edede5);
+	filter: progid : DXImageTransform.Microsoft.gradient
+		(startColorstr ='#fafbf8', endColorstr ='#edede5' );
 	border: 1px solid #dadad9;
 }
 
