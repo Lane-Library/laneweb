@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.stanford.irt.laneweb.model.Model;
@@ -34,18 +35,23 @@ public class PersistentLoginController {
 
 	public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
 
+   @ModelAttribute(Model.SUNETID)
+    public String getSunetid(final HttpServletRequest request) {
+        return this.sunetIdSource.getSunetid(request);
+    }
+	
 	@RequestMapping(value = "/persistentLogin.html", params = { "url", "pl=renew" })
-	public String renewCookieAndRedirect(final String url, HttpServletRequest request, HttpServletResponse response) {
+	public String renewCookieAndRedirect(@ModelAttribute final String sunetid, final String url, HttpServletRequest request, HttpServletResponse response) {
 		Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
 		if (null != isActiveSunetID && isActiveSunetID) {
-			checkSunetIdAndSetCookies(request, response);
+			checkSunetIdAndSetCookies(sunetid, request, response);
 		}
 		return "redirect:".concat(url);
 	}
 
 	@RequestMapping(value = "/secure/persistentLogin.html", params = {  "pl=true" })
-	public String createCookie(final String url, HttpServletRequest request, HttpServletResponse response) {
-		checkSunetIdAndSetCookies(request, response);
+	public String createCookie(@ModelAttribute final String sunetid, final String url, HttpServletRequest request, HttpServletResponse response) {
+		checkSunetIdAndSetCookies(sunetid, request, response);
 		return getView(url, response);
 	}
 
@@ -58,7 +64,7 @@ public class PersistentLoginController {
 	
 	// /**/persistentLogin do not work for /secure/ not sure why but is working for anything else  
 	@RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=false" })
-	public String secureRemoveCookie(final String url, HttpServletRequest request, HttpServletResponse response) {
+	public String secureRemoveCookie(final String url, final HttpServletRequest request, HttpServletResponse response) {
 		 removeCookies(request, response);
 		 return getView(url, response);
 	}
@@ -71,7 +77,7 @@ public class PersistentLoginController {
 	
 	// /**/persistentLogin do not work for /secure/ not sure why but is working for anything else  
 	@RequestMapping(value = "/secure/persistentLogin.html")
-	public String secureView(final String url, HttpServletRequest request, HttpServletResponse response) {
+	public String secureView(final String url, final HttpServletRequest request, HttpServletResponse response) {
 		 return getView(url, response);
 	}
 
@@ -82,7 +88,7 @@ public class PersistentLoginController {
 	 * @param response
 	 */
 	
-	private String getView(final String url, final HttpServletResponse response) {
+	private String getView(final String url,  HttpServletResponse response) {
 		if (null == url) {
 			response.setCharacterEncoding("UTF-8");
 			return "/persistentlogin.html";
@@ -91,7 +97,7 @@ public class PersistentLoginController {
 		}
 	}
 	
-	private void removeCookies(HttpServletRequest request, final HttpServletResponse response) {
+	private void removeCookies(final HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie webCookie : cookies) {
@@ -112,8 +118,7 @@ public class PersistentLoginController {
 		response.addCookie(cookie);
 	}
 
-	private void checkSunetIdAndSetCookies(HttpServletRequest request, HttpServletResponse response) {
-		String sunetid = this.sunetIdSource.getSunetid(request);
+	private void checkSunetIdAndSetCookies(final String sunetid, final HttpServletRequest request, HttpServletResponse response) {
 		if (null != sunetid) {
 			setCookies(request, response, sunetid);
 		} else {
@@ -129,7 +134,7 @@ public class PersistentLoginController {
 	 * @param request
 	 * @param response
 	 */
-	private void setCookies(final HttpServletRequest request, final HttpServletResponse response, String sunetid) {
+	private void setCookies(final HttpServletRequest request,  HttpServletResponse response, String sunetid) {
 		String userAgent = request.getHeader("User-Agent");
 		if (null != userAgent && null != sunetid) {
 			int twoWeeks = 3600 * 24 * 7 * 2;
