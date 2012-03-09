@@ -1,4 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
+
 /**
  * This class will add two cookies the persistent-preference and user.  
  * The user coolie will have the sunetid, the userAgent and the expired date appended and  encrypted.   
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.stanford.irt.laneweb.model.Model;
@@ -35,60 +35,56 @@ public class PersistentLoginController {
 
 	public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
 
-   @ModelAttribute(Model.SUNETID)
-    public String getSunetid(final HttpServletRequest request) {
-        return this.sunetIdSource.getSunetid(request);
-    }
-	
 	@RequestMapping(value = "/persistentLogin.html", params = { "url", "pl=renew" })
-	public String renewCookieAndRedirect(@ModelAttribute final String sunetid, final String url, HttpServletRequest request, HttpServletResponse response) {
+	public String renewCookieAndRedirect(final String url, HttpServletRequest request, HttpServletResponse response) {
 		Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
 		if (null != isActiveSunetID && isActiveSunetID) {
-			checkSunetIdAndSetCookies(sunetid, request, response);
+			checkSunetIdAndSetCookies(request, response);
 		}
 		return "redirect:".concat(url);
 	}
 
-	@RequestMapping(value = "/secure/persistentLogin.html", params = {  "pl=true" })
-	public String createCookie(@ModelAttribute final String sunetid, final String url, HttpServletRequest request, HttpServletResponse response) {
-		checkSunetIdAndSetCookies(sunetid, request, response);
+	@RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
+	public String createCookie(final String url, HttpServletRequest request, HttpServletResponse response) {
+		checkSunetIdAndSetCookies(request, response);
 		return getView(url, response);
 	}
-
 
 	@RequestMapping(value = "/persistentLogin.html", params = { "pl=false" })
 	public String removeCookieAndView(final String url, HttpServletRequest request, HttpServletResponse response) {
 		removeCookies(request, response);
 		return getView(url, response);
 	}
-	
-	// /**/persistentLogin do not work for /secure/ not sure why but is working for anything else  
+
+	// /**/persistentLogin do not work for /secure/ not sure why but is working
+	// for anything else
 	@RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=false" })
 	public String secureRemoveCookie(final String url, final HttpServletRequest request, HttpServletResponse response) {
-		 removeCookies(request, response);
-		 return getView(url, response);
+		removeCookies(request, response);
+		return getView(url, response);
 	}
-
 
 	@RequestMapping(value = "/persistentLogin.html")
 	public String getView(final String url, HttpServletRequest request, HttpServletResponse response) {
+		this.sunetIdSource.getSunetid(request);
 		return getView(url, response);
 	}
-	
-	// /**/persistentLogin do not work for /secure/ not sure why but is working for anything else  
+
+	// /**/persistentLogin do not work for /secure/ not sure why but is working
+	// for anything else
 	@RequestMapping(value = "/secure/persistentLogin.html")
 	public String secureView(final String url, final HttpServletRequest request, HttpServletResponse response) {
-		 return getView(url, response);
+		this.sunetIdSource.getSunetid(request);
+		return getView(url, response);
 	}
 
-	
 	/**
 	 * set the lane-user cookie max age to zero.
 	 * 
 	 * @param response
 	 */
-	
-	private String getView(final String url,  HttpServletResponse response) {
+
+	private String getView(final String url, HttpServletResponse response) {
 		if (null == url) {
 			response.setCharacterEncoding("UTF-8");
 			return "/persistentlogin.html";
@@ -96,7 +92,7 @@ public class PersistentLoginController {
 			return "redirect:".concat(url);
 		}
 	}
-	
+
 	private void removeCookies(final HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -118,7 +114,8 @@ public class PersistentLoginController {
 		response.addCookie(cookie);
 	}
 
-	private void checkSunetIdAndSetCookies(final String sunetid, final HttpServletRequest request, HttpServletResponse response) {
+	private void checkSunetIdAndSetCookies(final HttpServletRequest request, HttpServletResponse response) {
+		String sunetid = this.sunetIdSource.getSunetid(request);
 		if (null != sunetid) {
 			setCookies(request, response, sunetid);
 		} else {
@@ -126,7 +123,6 @@ public class PersistentLoginController {
 		}
 	}
 
-	
 	/**
 	 * create and set the lane-user cookie
 	 * 
@@ -134,7 +130,7 @@ public class PersistentLoginController {
 	 * @param request
 	 * @param response
 	 */
-	private void setCookies(final HttpServletRequest request,  HttpServletResponse response, String sunetid) {
+	private void setCookies(final HttpServletRequest request, HttpServletResponse response, String sunetid) {
 		String userAgent = request.getHeader("User-Agent");
 		if (null != userAgent && null != sunetid) {
 			int twoWeeks = 3600 * 24 * 7 * 2;
