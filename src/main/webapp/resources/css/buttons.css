@@ -1,147 +1,119 @@
 /* styles for css buttons */
-/*gray button*/
-.gray-btn {
+.red-btn span, .gray-btn span, .orange-btn span, .mgray-btn, .gold-btn span {
 	display: inline-block;
+	padding: 7px 12px;
+	font-weight: bold;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	color: #444444 !important;
-	background: #edede5;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#edede5) );
-	background: -moz-linear-gradient(#fafbf8, #edede5);
-	/*filter necessary to display gradient in IE*/
-	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fafbf8', endColorstr ='#edede5' );
-	border: 1px solid #dadad9;
-	margin: 5px;
 }
-
+.gray-btn, .red-btn, .orange-btn, .mgray-btn, .gold-btn  {
+	display: inline-block;
+	margin: 5px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+/*gray button*/
+.gray-btn {
+	color: #444444 !important;
+	background-color: #edede5;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4) );
+	background: -moz-linear-gradient(#fafbf8, #dadad4);
+	/*filter necessary to display gradient in IE*/
+	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fafbf8', endColorstr ='#dadad4' );
+	border: 1px solid #dadad9;
+}
 .gray-btn:hover {
-	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
-	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
-	box-shadow: 1px 1px 1px 1px #e8e8e8;
 	border: 1px solid #9e9d98;
 }
 
-.gray-btn span {
-	display: inline-block;
-	padding: 7px 12px;
-	font-weight: bold;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-/*-------------------------------------------------------------------------------------------------------------------------------*/
 /* red button */
 .red-btn {
-	display: inline-block;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
 	color: #ffffff !important;
-	background: #e82c2e;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e82c2e), to(#990000) );
-	background: -moz-linear-gradient(#e82c2e, #990000);
+	background-color: #e82c2e;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e82c2e), to(#940506) );
+	background: -moz-linear-gradient(#e82c2e, #940506);
 	/*filter necessary to display gradient in IE*/
-	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#e82c2e', endColorstr ='#990000' );
-	border: 1px solid #990000;
-	margin: 5px;
+	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#e82c2e', endColorstr ='#940506' );
+	border: 1px solid #b51e1f;
 }
 
 .red-btn:hover {
-	border: 1px solid #ff0000;
-	background-color: #990000;
-	background-image: -moz-linear-gradient(center top, #e82c2e, #820000);
-	background: -webkit-gradient(linear, center top, from(#e82c2e)to(#820000) );
+	border: 1px solid #660000;
+	background-color: #820000;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e82c2e), to(#820000) );
+	background-image: -moz-linear-gradient(#e82c2e, #820000);
 	/*filter necessary to display gradient in IE*/
 	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#e82c2e', endColorstr = '#820000' );
-	color: #ffffff;
-	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
-	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
-	box-shadow: 1px 1px 1px 1px #e8e8e8;
 }
 
-.red-btn span {
-	display: inline-block;
-	padding: 7px 12px;
-	font-weight: bold;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-/*-------------------------------------------------------------------------------------------------------------------------------*/
 /* orange button */
 .orange-btn {
-	display: inline-block;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	color: #ffffff !important;
-	background: #F0AF00;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F0AF00), to(#ed6b03) );
-	background: -moz-linear-gradient(#F0AF00, #ed6b03);
-	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#F0AF00', endColorstr ='#ed6b03' );
+	color: #444444 !important;
+	background-color: #fc8c09;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fc8c09), to(#d15f03) );
+	background: -moz-linear-gradient(#fc8c09, #d15f03);
+	/*filter necessary to display gradient in IE*/
+	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fc8c09', endColorstr ='#d15f03' );
 	border: 1px solid #ed6b03;
-	margin: 5px;
 }
 
 .orange-btn:hover {
-	border: 1px solid #ff9900;
-	background-color: #f9790a;
-	background-image: -moz-linear-gradient(center top, #fc8c09, #d15f03);
-	background: -webkit-gradient(linear, center top, from(#fc8c09), to(#d15f03) );
+	border: 1px solid #b74101;
+	background-color: #d15f03;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fc8c09), to(#b74101) );
+	background-image: -moz-linear-gradient(#fc8c09, #b74101);
 	/*filter necessary to display gradient in IE*/
-	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fc8c09', endColorstr ='#d15f03' );
-	color: #ffffff;
-	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
-	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
-	box-shadow: 1px 1px 1px 1px #e8e8e8;
+	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fc8c09', endColorstr ='#b74101' );
 }
 
-.orange-btn span {
-	display: inline-block;
-	padding: 7px 12px;
-	font-weight: bold;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-/*-------------------------------------------------------------------------------------------------------------------------------*/
 /* medium gray button */
 .mgray-btn {
-	display: inline-block;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
 	color: #444444 !important;
-	background: #dcdcdc;
+	background-color: #dcdcdc;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dcdcdc), to(#9d9fa2) );
 	background: -moz-linear-gradient(#dcdcdc, #9d9fa2);
 	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#dcdcdc', endColorstr ='#9d9fa2' );
 	border: 1px solid #9d9fa2;
-	margin: 5px;
 }
 
 .mgray-btn:hover {
 	border: 1px solid #414042;
-	background-color: #f9790a;
-	background-image: -moz-linear-gradient(center top, #D6DDD3, #666666);
-	background: -webkit-gradient(linear, center top, from(#D6DDD3), to(#666666) );
+	background-color: #666666;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dcdcdc), to(#666666) );
+	background-image: -moz-linear-gradient(#dcdcdc, #666666);
 	/*filter necessary to display gradient in IE*/
-	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#D6DDD3', endColorstr ='#666666' );
-	color: #ffffff;
+	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#dcdcdc', endColorstr ='#666666' );
+}
+
+/* gold button */
+.gold-btn {
+	color: #444444 !important;
+	background-color: #ede8dd;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ede8dd), to(#C2B7A1) );
+	background: -moz-linear-gradient(#ede8dd, #C2B7A1);
+	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#ede8dd', endColorstr ='#C2B7A1' );
+	border: 1px solid #C2B7A1;
+}
+
+.gold-btn:hover {
+	border: 1px solid #918873;
+	background-color: #918873;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ede8dd), to(#918873) );
+	background-image: -moz-linear-gradient(#ede8dd, #918873);
+	/*filter necessary to display gradient in IE*/
+	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#ede8dd', endColorstr ='#918873' );
+}
+
+.gray-btn:hover, .red-btn:hover, .orange-btn:hover, .mgray-btn:hover, .gold-btn:hover   {
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	box-shadow: 1px 1px 1px 1px #e8e8e8;
 }
 
-.mgray-btn span {
-	display: inline-block;
-	padding: 7px 12px;
-	font-weight: bold;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
+
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /* styles for grey buttons in sprite*/
