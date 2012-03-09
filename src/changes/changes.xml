@@ -7,11 +7,34 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-03-12" version="1.12.21" description="1.12.21 bug fix release">
+            <action date="2012-03-08" dev="ceyates" issue="66492" type="fix">
+                in IE bookmark-link does not respond to mouseout or click
+            </action>
+            <action date="2012-03-08" dev="alainb" issue="66484" type="fix">
+                404 for this url: /rss/page2rss?page=/classes-consult/laneclasses.html
+            </action>
+            <action date="2012-03-07" dev="ceyates" issue="66429" type="fix">
+                bookmark-link disappears when attempting to mouseover in IE
+            </action>
+            <action date="2012-03-06" dev="olgary" issue="66368" type="update">
+                image sprite, update styles in header, footer, feedback button to point to sprite.
+            </action>
+            <action date="2012-03-06" dev="ceyates" issue="66347" type="fix">
+                SQL information missing from javamelody page
+            </action>
+            <action date="2012-03-06" dev="olgary" issue="66342" type="update">
+                Replace Lane favicon
+            </action>
+            <action date="2012-03-07" dev="ceyates" issue="66358" type="remove">
+                remove /contacts redirects and the entry from robots.txt 
+            </action>
+        </release>
         <release date="2012-03-05" version="1.12.20" description="1.12.20 bug fix release">
-            <action date="2012-003-02" dev="alainb" issue="66072" type="update">
+            <action date="2012-03-02" dev="alainb" issue="66072" type="update">
                 add login flow to trunk using boomarks feature toggle 
             </action>
-            <action date="2012-02-029" dev="ceyates" issue="66049" type="fix">
+            <action date="2012-02-29" dev="ceyates" issue="66049" type="fix">
                 metasearch context reload is broken
             </action>
             <action date="2012-02-28" dev="ceyates" issue="66014" type="fix">
