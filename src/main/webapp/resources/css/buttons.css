@@ -122,7 +122,10 @@
 	border: 1px solid #dadad9;
 	}
 
-
+.btn-wide {
+	padding-left: 3em;
+	padding-right: 3em;
+	}
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /* styles for grey buttons in sprite*/
 .button {
