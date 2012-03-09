@@ -4,6 +4,11 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+	background: #edede5;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
+		to(#edede5) );
+	background: -moz-linear-gradient(#fafbf8, #edede5);
+	border: 1px solid #dadad9;
 }
 
 .button-css span {
@@ -28,7 +33,7 @@
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
 		to(#edede5) );
 	background: -moz-linear-gradient(#fafbf8, #edede5);
-}*/
+}
 
 .btn-gray {
 	color: #444444;
@@ -37,7 +42,7 @@
 		to(#edede5) );
 	background: -moz-linear-gradient(#fafbf8, #edede5);
 	border: 1px solid #dadad9;
-}
+}*/
 
 .btn-gray:hover {
 	border: 1px solid #9e9d98;
