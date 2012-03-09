@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-03-12" version="1.12.21" description="1.12.21 bug fix release">
+            <action date="2012-03-09" dev="olgary" issue="66526" type="update">
+                update banner.css - styles from img sprite
+            </action>
             <action date="2012-03-08" dev="ceyates" issue="66492" type="fix">
                 in IE bookmark-link does not respond to mouseout or click
             </action>
