@@ -3,13 +3,7 @@
 .button-css span {
 	display: inline-block;
 	padding: 7px 12px;
-	color: #444444;
 	font-weight: bold;
-	text-shadow: 0 -1px 1px rgba(255, 255, 255, .8);
-	background: #edede5;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
-		to(#edede5) );
-	background: -moz-linear-gradient(#fafbf8, #edede5);
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -20,14 +14,9 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	border: 1px solid #dadad9;
 }
 
 .button-css:hover {
-	background: #edede5;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
-		to(#edede5) );
-	background: -moz-linear-gradient(#fafbf8, #edede5);
 	border: 1px solid #9e9d98;
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
@@ -37,6 +26,25 @@
 .button-css:visited {
 	color: #444444;
 }
+
+/*gray button*/
+.btn-gray span {
+	color: #444444;
+	background: #edede5;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
+		to(#edede5) );
+	background: -moz-linear-gradient(#fafbf8, #edede5);
+	}
+
+.btn-gray {
+	border: 1px solid #dadad9;
+	}
+
+
+
+
+
+
 
 /* red css button */
 .var1 {
