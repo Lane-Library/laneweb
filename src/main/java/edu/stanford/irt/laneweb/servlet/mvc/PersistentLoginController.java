@@ -47,13 +47,13 @@ public class PersistentLoginController {
 	@RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
 	public String createCookie(final String url, HttpServletRequest request, HttpServletResponse response) {
 		checkSunetIdAndSetCookies(request, response);
-		return getView(url, response);
+		return setView(url, request, response);
 	}
 
 	@RequestMapping(value = "/persistentLogin.html", params = { "pl=false" })
 	public String removeCookieAndView(final String url, HttpServletRequest request, HttpServletResponse response) {
 		removeCookies(request, response);
-		return getView(url, response);
+		return setView(url, request, response);
 	}
 
 	// /**/persistentLogin do not work for /secure/ not sure why but is working
@@ -61,21 +61,19 @@ public class PersistentLoginController {
 	@RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=false" })
 	public String secureRemoveCookie(final String url, final HttpServletRequest request, HttpServletResponse response) {
 		removeCookies(request, response);
-		return getView(url, response);
+		return setView(url, request, response);
 	}
 
 	@RequestMapping(value = "/persistentLogin.html")
 	public String getView(final String url, HttpServletRequest request, HttpServletResponse response) {
-		this.sunetIdSource.getSunetid(request);
-		return getView(url, response);
+		return setView(url, request, response);
 	}
 
 	// /**/persistentLogin do not work for /secure/ not sure why but is working
 	// for anything else
 	@RequestMapping(value = "/secure/persistentLogin.html")
 	public String secureView(final String url, final HttpServletRequest request, HttpServletResponse response) {
-		this.sunetIdSource.getSunetid(request);
-		return getView(url, response);
+		return setView(url, request, response);
 	}
 
 	/**
@@ -84,7 +82,8 @@ public class PersistentLoginController {
 	 * @param response
 	 */
 
-	private String getView(final String url, HttpServletResponse response) {
+	private String setView(final String url, final HttpServletRequest request, HttpServletResponse response) {
+		this.sunetIdSource.getSunetid(request);
 		if (null == url) {
 			response.setCharacterEncoding("UTF-8");
 			return "/persistentlogin.html";
