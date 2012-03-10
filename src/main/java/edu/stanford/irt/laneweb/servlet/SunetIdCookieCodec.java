@@ -27,7 +27,11 @@ public class SunetIdCookieCodec {
 
     public SunetIdCookieCodec() {
         try {
-            this.desKey = new SecretKeySpec(Base64.decodeBase64(KEY.getBytes("UTF-8")), "AES");
+            //latest version of commons-codec (1.6) does not pad with 0 bytes to 16, so do that here:
+            byte[] src = Base64.decodeBase64(KEY.getBytes("UTF-8"));
+            byte[] dst = new byte[16];
+            System.arraycopy(src, 0, dst, 0, src.length);
+            this.desKey = new SecretKeySpec(dst, "AES");
             this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);
