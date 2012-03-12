@@ -21,7 +21,7 @@
                 bookmark-link disappears when attempting to mouseover in IE
             </action>
             <action date="2012-03-06" dev="olgary" issue="66368" type="update">
-                image sprite, update styles in header, footer, feedback button to point to sprite.
+                Add image sprite to app, replace templates (changes in footer only), changes to footer.css
             </action>
             <action date="2012-03-06" dev="ceyates" issue="66347" type="fix">
                 SQL information missing from javamelody page
