@@ -7,40 +7,24 @@
 }
 
 #bookmark-link {
-	cursor: pointer;
-	background: url("/././resources/images/icons-sprite.png") no-repeat
-		scroll 0 0 transparent;
-	height: 15px;
-	width: 24px;
-	display: inline;
-	font-size: 16px;
-	font-weight: normal;
-	font-family: Arial;
-	text-transform: lowercase;
-	padding-left: 12px;
-	padding-right: 12px;
-	margin-left: 5px;
-	vertical-align: text-bottom;
+    cursor: pointer;
+    background-image: url("/././resources/images/icons-sprite.png");
+    background-position: 0 0;
+    background-repeat:no-repeat;
+    display: inline-block;
+    height: 16px;
+    width: 26px;
+    position: absolute;
+    margin-left:5px
 }
 
-#bookmark-link.active {
-	background: url("/././resources/images/icons-sprite.png") no-repeat
-		scroll 0 -26px transparent;
-}
-
+#bookmark-link.active,
 #bookmark-link.bookmarking {
-	background: url("/././resources/images/icons-sprite.png") no-repeat
-		scroll 0 -26px transparent;
+background-position: 0 -26px
 }
 
 #bookmark-link.successful {
-	background: url("/././resources/images/icons-sprite.png") no-repeat
-		scroll 0 -53px transparent;
-}
-
-#bookmark-link.failed {
-	background: url("/././resources/images/icons-sprite.png") no-repeat
-		scroll 0 0 transparent;
+background-position: 0 -53px
 }
 
 #bookmarks-editor fieldset {
