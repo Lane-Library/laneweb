@@ -327,13 +327,12 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
-    <!-- add class="expanded" to sectionMenu li that are links to the current page and are expandies -->
-    <xsl:template match="h:ul[contains(@class,'sectionMenu')]/h:li[h:div/h:a[@href=$path]]">
+    
+    <!-- add class="active" to #tabs-2012 li when url matches child a href -->
+    <xsl:template match="h:ul[@id='tabs-2012']/h:li[h:a[@href=$path]]">
         <xsl:copy>
-            <xsl:attribute name="class">expanded</xsl:attribute>
-            <div><em><xsl:apply-templates select="child::h:div/h:a"/></em></div>
-            <xsl:apply-templates select="child::h:ul"/>
+            <xsl:attribute name="class" select="'active'"/>
+            <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
 
