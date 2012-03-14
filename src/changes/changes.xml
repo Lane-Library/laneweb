@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-03-??" version="1.12.22" description="1.12.22 bug fix release">
+            <action date="2012-03-13" dev="ceyates" issue="66664" type="update">
+                use absolute positioning for #bookmark-link
+            </action>
+            <action date="2012-03-14" dev="ceyates" issue="66248" type="fix">
+                NullPointerException in SuggestionController 
+            </action>
+        </release>
         <release date="2012-03-12" version="1.12.21" description="1.12.21 bug fix release">
             <action date="2012-03-09" dev="olgary" issue="66526" type="update">
                 update banner.css - styles from img sprite
