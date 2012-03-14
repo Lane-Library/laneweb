@@ -116,7 +116,7 @@ public class SuggestionController {
             //return an empty list for queries > 32 characters, liable to cause SQLExceptions
             return NO_SUGGESTIONS;
         }
-        if (ER_PATTERN.matcher(limit).matches()) {
+        if (limit != null && ER_PATTERN.matcher(limit).matches()) {
             return this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
         } else if ("er-mesh".equals(limit)) {
             List<Suggestion> suggestions = new LinkedList<Suggestion>();
@@ -130,7 +130,7 @@ public class SuggestionController {
             return suggestions;
         } else if ("mesh".equals(limit)) {
             return this.meshSuggestionManager.getSuggestionsForTerm(query);
-        } else if (limit.indexOf("mesh-") == 0) {
+        } else if (limit != null && limit.indexOf("mesh-") == 0) {
             return this.meshSuggestionManager.getSuggestionsForTerm(limit.substring(5), query);
         } else if ("history".equals(limit)) {
             return this.historySuggestionManager.getSuggestionsForTerm(query);

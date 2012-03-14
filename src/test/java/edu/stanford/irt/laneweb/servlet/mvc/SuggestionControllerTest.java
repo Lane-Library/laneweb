@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -27,20 +28,20 @@ public class SuggestionControllerTest {
 
     private SuggestionManager mesh;
 
-    private SuggestionController reader;
+    private SuggestionController controller;
 
     /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
-        this.reader = new SuggestionController();
+        this.controller = new SuggestionController();
         this.history = createMock(SuggestionManager.class);
         this.eresource = createMock(SuggestionManager.class);
         this.mesh = createMock(SuggestionManager.class);
-        this.reader.setHistorySuggestionManager(this.history);
-        this.reader.setEresourceSuggestionManager(this.eresource);
-        this.reader.setMeshSuggestionManager(this.mesh);
+        this.controller.setHistorySuggestionManager(this.history);
+        this.controller.setEresourceSuggestionManager(this.eresource);
+        this.controller.setMeshSuggestionManager(this.mesh);
     }
 
     /**
@@ -56,7 +57,7 @@ public class SuggestionControllerTest {
         expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis");
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));
         replay(suggestion, this.eresource, this.history, this.mesh);
-        HttpEntity<String> response = this.reader.getSuggestions("venous thrombosis", "mesh", null);
+        HttpEntity<String> response = this.controller.getSuggestions("venous thrombosis", "mesh", null);
         String suggestions = response.getBody();
         assertEquals("{\"suggest\":[\"Venous Thrombosis\"]}", suggestions);
         verify(suggestion, this.eresource, this.history, this.mesh);
@@ -73,9 +74,17 @@ public class SuggestionControllerTest {
     public void testGenerateCallback() throws IOException {
         expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion> emptyList());
         replay(this.eresource, this.history, this.mesh);
-        HttpEntity<String> response = this.reader.getSuggestions("asdfgh", "mesh", "foo");
+        HttpEntity<String> response = this.controller.getSuggestions("asdfgh", "mesh", "foo");
         String suggestions = response.getBody();
         assertEquals("foo({\"suggest\":[]});", suggestions);
+        verify(this.eresource, this.history, this.mesh);
+    }
+    
+    @Test
+    public void testNullLimit() {
+        expect(this.eresource.getSuggestionsForTerm("query")).andReturn(Collections.<Suggestion> emptyList());
+        replay(this.eresource, this.history, this.mesh);
+        assertNotNull(this.controller.getSuggestions("query", null, null));
         verify(this.eresource, this.history, this.mesh);
     }
 }
