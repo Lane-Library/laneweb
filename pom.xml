@@ -547,11 +547,6 @@
             <version>1.6.0</version>
         </dependency>
         <dependency>
-            <artifactId>icu4j</artifactId>
-            <groupId>com.ibm.icu</groupId>
-            <version>4.8.1.1</version>
-        </dependency>
-        <dependency>
             <artifactId>jackson-mapper-asl</artifactId>
             <groupId>org.codehaus.jackson</groupId>
             <version>1.9.5</version>

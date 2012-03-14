@@ -1,9 +1,8 @@
 package edu.stanford.irt.laneweb.suggest;
 
 import java.io.Serializable;
+import java.text.Normalizer;
 import java.util.Comparator;
-
-import com.ibm.icu.text.Normalizer;
 
 import edu.stanford.irt.suggest.Suggestion;
 
@@ -18,15 +17,15 @@ public class SuggestionComparator implements Comparator<Suggestion>, Serializabl
         if (query == null) {
             throw new IllegalArgumentException("null query");
         }
-        this.query = normalize(query);
+        this.query = toUpperCaseASCII(query);
     }
 
     public int compare(final Suggestion suggestion1, final Suggestion suggestion2) {
         if (suggestion1 == null || suggestion2 == null) {
             throw new IllegalArgumentException("cannot compare " + suggestion1 + " to " + suggestion2);
         }
-        String upper1 = normalize(suggestion1.getSuggestionTitle());
-        String upper2 = normalize(suggestion2.getSuggestionTitle());
+        String upper1 = toUpperCaseASCII(suggestion1.getSuggestionTitle());
+        String upper2 = toUpperCaseASCII(suggestion2.getSuggestionTitle());
         int weightDiff = queryWeight(upper2) - queryWeight(upper1);
         if (weightDiff != 0) {
             return weightDiff;
@@ -34,8 +33,8 @@ public class SuggestionComparator implements Comparator<Suggestion>, Serializabl
         return upper1.compareTo(upper2);
     }
 
-    private String normalize(final String string) {
-        String decomposed = Normalizer.decompose(string, false);
+    private String toUpperCaseASCII(final String string) {
+        String decomposed = Normalizer.normalize(string, Normalizer.Form.NFD);
         StringBuilder sb = new StringBuilder(decomposed.length());
         char theChar;
         for (int i = 0; i < decomposed.length(); i++) {
