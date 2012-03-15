@@ -33,7 +33,7 @@ public class LDAPDataAccess {
             }
             currentAttribute = attributes.get("suAffiliation");
             if (null != currentAttribute) {
-            	NamingEnumeration attrs =  currentAttribute.getAll();
+            	NamingEnumeration<?> attrs =  currentAttribute.getAll();
             	List<Affiliation> affiliations = new ArrayList<Affiliation>();
             	 while(attrs.hasMore()) {
             		 Affiliation aff = Affiliation.getAffiliation(((String)attrs.next()) );
