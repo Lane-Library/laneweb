@@ -1,21 +1,19 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.NamespacedSAXConfigurationHandler;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.Processor;
-import org.apache.cocoon.components.source.util.SourceUtil;
 import org.apache.cocoon.components.treeprocessor.ConcreteTreeProcessor;
 import org.apache.cocoon.components.treeprocessor.InvokeContext;
 import org.apache.cocoon.components.treeprocessor.ProcessingNode;
+import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.impl.DefaultExecutor;
-import org.apache.excalibur.source.Source;
-import org.xml.sax.SAXException;
+import org.xml.sax.InputSource;
 
 public class TreeProcessor implements Processor {
 
@@ -25,7 +23,9 @@ public class TreeProcessor implements Processor {
 
     private SitemapLanguage sitemapLanguage;
 
-    private Source source;
+    private InputStream source;
+
+    private SAXParser saxParser;
 
     
     public InternalPipelineDescription buildPipeline(final Environment environment) throws Exception {
@@ -63,9 +63,12 @@ public class TreeProcessor implements Processor {
 
     
     public void initialize() throws Exception {
-        Configuration sitemapProgram = createSitemapProgram(this.source);
+        NamespacedSAXConfigurationHandler handler = new NamespacedSAXConfigurationHandler();
+        InputSource inputSource = new InputSource(this.source);
+        this.saxParser.parse(inputSource, handler);
+        Configuration sitemapProgram = handler.getConfiguration();
         this.sitemapLanguage.setProcessor(new ConcreteTreeProcessor(null, new DefaultExecutor()));
-        this.rootNode = this.sitemapLanguage.build(sitemapProgram, this.source.getURI());
+        this.rootNode = this.sitemapLanguage.build(sitemapProgram, null);
     }
 
     
@@ -84,8 +87,12 @@ public class TreeProcessor implements Processor {
         throw new UnsupportedOperationException();
     }
 
-    public void setSource(final Source source) {
+    public void setSource(final InputStream source) {
         this.source = source;
+    }
+    
+    public void setSAXParser(final SAXParser saxParser) {
+        this.saxParser = saxParser;
     }
 
     public void setServiceManager(final ServiceManager serviceManager) {
@@ -94,12 +101,6 @@ public class TreeProcessor implements Processor {
 
     public void setSitemapLanguage(final SitemapLanguage sitemapLanguage) {
         this.sitemapLanguage = sitemapLanguage;
-    }
-
-    private Configuration createSitemapProgram(final Source sitemapSource) throws ProcessingException, SAXException, IOException {
-        NamespacedSAXConfigurationHandler handler = new NamespacedSAXConfigurationHandler();
-        SourceUtil.toSAX(this.serviceManager, sitemapSource, null, handler);
-        return handler.getConfiguration();
     }
 
     protected boolean process(final Environment environment, final InvokeContext context) throws Exception {
