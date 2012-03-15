@@ -23,7 +23,7 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
         if (this.isSearchUrlElement) {
             this.characters.append(ch, start, length);
         } else {
-            this.xmlConsumer.characters(ch, start, length);
+            getXMLConsumer().characters(ch, start, length);
         }
     }
 
@@ -33,11 +33,11 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
             String value = this.characters.toString();
             if (isCMEHost(value)) {
                 String link = createCMELink(value);
-                this.xmlConsumer.characters(link.toCharArray(), 0, link.length());
+                getXMLConsumer().characters(link.toCharArray(), 0, link.length());
             }
             this.isSearchUrlElement = false;
         }
-        this.xmlConsumer.endElement(uri, localName, qName);
+        getXMLConsumer().endElement(uri, localName, qName);
     }
 
     @Override
@@ -47,6 +47,6 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
             this.isSearchUrlElement = true;
             this.characters.setLength(0);
         }
-        this.xmlConsumer.startElement(uri, localName, qName, atts);
+        getXMLConsumer().startElement(uri, localName, qName, atts);
     }
 }

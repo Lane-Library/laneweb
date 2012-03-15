@@ -38,7 +38,7 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
         conf.setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
         conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", NAMESPACE);
         AbstractSAXParser parser = new HtmlSAXParser(conf);
-        parser.setContentHandler(this.xmlConsumer);
+        parser.setContentHandler(getXMLConsumer());
         InputSource inputSource = new InputSource();
         try {
             inputSource.setByteStream(getSource().getInputStream());

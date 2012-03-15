@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
@@ -12,6 +11,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.Resource;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class PagingXMLizableEresourceList extends LinkedList<Eresource> implements XMLizable, Resource {
 

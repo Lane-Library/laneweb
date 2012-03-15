@@ -24,18 +24,18 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
                 String clazz = atts.getValue(CLASS);
                 // don't proxy if class contains noproxy
                 if (null != clazz && clazz.contains("noproxy")) {
-                    this.xmlConsumer.startElement(uri, localName, name, atts);
+                    getXMLConsumer().startElement(uri, localName, name, atts);
                     return;
                 }
                 // proxy if class contains proxy or isProxyableLink
                 if ((null != clazz && clazz.contains("proxy")) || getProxyHostManager().isProxyableLink(link)) {
                     AttributesImpl newAttributes = new AttributesImpl(atts);
                     newAttributes.setValue(newAttributes.getIndex(HREF), createProxyLink(link));
-                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
+                    getXMLConsumer().startElement(uri, localName, name, newAttributes);
                     return;
                 }
             }
         }
-        this.xmlConsumer.startElement(uri, localName, name, atts);
+        getXMLConsumer().startElement(uri, localName, name, atts);
     }
 }

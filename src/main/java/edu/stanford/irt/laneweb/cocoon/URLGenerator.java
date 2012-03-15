@@ -18,11 +18,11 @@ public class URLGenerator extends AbstractGenerator implements CacheableProcessi
     public void generate() throws IOException, SAXException {
     	Source source = getSource();
     	if (source instanceof XMLizable) {
-    		((XMLizable)source).toSAX(this.xmlConsumer);
+    		((XMLizable)source).toSAX(getXMLConsumer());
     	} else {
     		InputSource inputSource = new InputSource(source.getInputStream());
     		inputSource.setSystemId(source.getURI());
-    		this.saxParser.parse(inputSource, this.xmlConsumer);
+    		this.saxParser.parse(inputSource, getXMLConsumer());
     	}
     }
 

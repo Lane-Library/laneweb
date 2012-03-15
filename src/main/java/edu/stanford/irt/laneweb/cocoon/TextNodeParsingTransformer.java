@@ -51,7 +51,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         if (this.inElement) {
             this.content.append(ch, start, length);
         } else {
-            this.xmlConsumer.characters(ch, start, length);
+            getXMLConsumer().characters(ch, start, length);
         }
     }
 
@@ -61,7 +61,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
             this.inElement = false;
             StringReader stringReader = new StringReader(this.content.toString());
             InputSource inputSource = new InputSource(stringReader);
-            XMLConsumer xmlConsumer = new ContentHandlerWrapper(this.xmlConsumer) {
+            XMLConsumer xmlConsumer = new ContentHandlerWrapper(getXMLConsumer()) {
 
                 @Override
                 public void endDocument() {
@@ -84,13 +84,13 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
             }
         }
         this.content = new StringBuilder();
-        this.xmlConsumer.endElement(uri, localName, qName);
+        getXMLConsumer().endElement(uri, localName, qName);
     }
 
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        this.xmlConsumer.startElement(uri, localName, qName, atts);
+        getXMLConsumer().startElement(uri, localName, qName, atts);
         if (this.elementName.equals(qName)) {
             this.inElement = true;
         }

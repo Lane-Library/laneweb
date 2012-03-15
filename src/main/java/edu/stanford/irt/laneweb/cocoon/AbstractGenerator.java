@@ -5,12 +5,16 @@ import org.apache.cocoon.xml.XMLConsumer;
 
 public abstract class AbstractGenerator extends AbstractSitemapModelComponent implements Generator {
 
-    protected XMLConsumer xmlConsumer;
+    private XMLConsumer xmlConsumer;
 
     public final void setConsumer(final XMLConsumer xmlConsumer) {
         if (null == xmlConsumer) {
             throw new IllegalArgumentException("null xmlConsumer");
         }
         this.xmlConsumer = xmlConsumer;
+    }
+    
+    protected XMLConsumer getXMLConsumer() {
+        return this.xmlConsumer;
     }
 }

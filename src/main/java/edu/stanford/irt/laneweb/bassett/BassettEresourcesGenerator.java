@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.bassett;
 
 import java.util.Collection;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
@@ -33,10 +34,11 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
         } else if (this.query != null) {
             eresources = this.collectionManager.search(this.query);
         }
-        this.xmlConsumer.startDocument();
+        XMLConsumer xmlConsumer = getXMLConsumer();
+        xmlConsumer.startDocument();
         XMLizable xml = new XMLLizableBassettEresourceList(eresources);
-        xml.toSAX(this.xmlConsumer);
-        this.xmlConsumer.endDocument();
+        xml.toSAX(xmlConsumer);
+        xmlConsumer.endDocument();
     }
 
     @Override

@@ -25,7 +25,7 @@ public abstract class AbstractMarshallingGenerator extends AbstractGenerator {
             throw new LanewebException("null marshaller");
         }
         try {
-            this.marshaller.marshal(object, new SAXResult(this.xmlConsumer));
+            this.marshaller.marshal(object, new SAXResult(getXMLConsumer()));
         } catch (XmlMappingException e) {
             throw new LanewebException(e);
         } catch (IOException e) {

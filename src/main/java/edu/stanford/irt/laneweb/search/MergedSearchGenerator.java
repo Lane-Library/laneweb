@@ -20,7 +20,7 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
         PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.page);
         mergedSearchResults.addAll(getEresourceList());
         mergedSearchResults.addAll(getContentResultList(doSearch()));
-        mergedSearchResults.toSAX(this.xmlConsumer);
+        mergedSearchResults.toSAX(getXMLConsumer());
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {

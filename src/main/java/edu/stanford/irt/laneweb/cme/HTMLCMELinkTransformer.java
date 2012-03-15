@@ -32,7 +32,7 @@ public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {
                 if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {
                     AttributesImpl newAttributes = new AttributesImpl(atts);
                     newAttributes.setValue(newAttributes.getIndex(HREF), createCMELink(link));
-                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
+                    getXMLConsumer().startElement(uri, localName, name, newAttributes);
                     return;
                 }
             } else if (INPUT.equals(localName)) {
@@ -40,11 +40,11 @@ public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {
                 if (null != value && REPLACEMENT_STRING.equals(value)) {
                     AttributesImpl newAttributes = new AttributesImpl(atts);
                     newAttributes.setValue(newAttributes.getIndex(VALUE), this.emrid);
-                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
+                    getXMLConsumer().startElement(uri, localName, name, newAttributes);
                     return;
                 }
             }
         }
-        this.xmlConsumer.startElement(uri, localName, name, atts);
+        getXMLConsumer().startElement(uri, localName, name, atts);
     }
 }

@@ -16,7 +16,7 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
         if (this.building) {
             this.builder.append(chars, start, length);
         } else {
-            this.xmlConsumer.characters(chars, start, length);
+            getXMLConsumer().characters(chars, start, length);
         }
     }
 
@@ -24,10 +24,10 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         if (proxyLinks() && this.elementName.equals(localName)) {
             String proxyURL = createProxyLink(this.builder.toString());
-            this.xmlConsumer.characters(proxyURL.toCharArray(), 0, proxyURL.length());
+            getXMLConsumer().characters(proxyURL.toCharArray(), 0, proxyURL.length());
             this.building = false;
         }
-        this.xmlConsumer.endElement(uri, localName, qName);
+        getXMLConsumer().endElement(uri, localName, qName);
     }
 
     public void setElementName(final String elementName) {
@@ -41,6 +41,6 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
             this.builder.setLength(0);
             this.building = true;
         }
-        this.xmlConsumer.startElement(uri, localName, qName, atts);
+        getXMLConsumer().startElement(uri, localName, qName, atts);
     }
 }

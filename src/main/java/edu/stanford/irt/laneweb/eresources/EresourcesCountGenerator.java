@@ -5,13 +5,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.apache.cocoon.xml.XMLUtils;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourcesCountGenerator extends AbstractGenerator {
 
@@ -25,23 +26,24 @@ public class EresourcesCountGenerator extends AbstractGenerator {
 
     public void generate() throws SAXException {
         Map<String, Integer> results = this.collectionManager.searchCount(this.types, null, this.query);
-        this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", SQL_NS);
-        XMLUtils.startElement(this.xmlConsumer, SQL_NS, "rowset");
+        XMLConsumer xmlConsumer = getXMLConsumer();
+        xmlConsumer.startDocument();
+        xmlConsumer.startPrefixMapping("", SQL_NS);
+        XMLUtils.startElement(xmlConsumer, SQL_NS, "rowset");
         for (Entry<String, Integer> entry : results.entrySet()) {
             String hits = entry.getValue().toString();
-            XMLUtils.startElement(this.xmlConsumer, SQL_NS, "row");
-            XMLUtils.startElement(this.xmlConsumer, SQL_NS, "genre");
-            XMLUtils.data(this.xmlConsumer, entry.getKey());
-            XMLUtils.endElement(this.xmlConsumer, SQL_NS, "genre");
-            XMLUtils.startElement(this.xmlConsumer, SQL_NS, "hits");
-            XMLUtils.data(this.xmlConsumer, hits);
-            XMLUtils.endElement(this.xmlConsumer, SQL_NS, "hits");
-            XMLUtils.endElement(this.xmlConsumer, SQL_NS, "row");
+            XMLUtils.startElement(xmlConsumer, SQL_NS, "row");
+            XMLUtils.startElement(xmlConsumer, SQL_NS, "genre");
+            XMLUtils.data(xmlConsumer, entry.getKey());
+            XMLUtils.endElement(xmlConsumer, SQL_NS, "genre");
+            XMLUtils.startElement(xmlConsumer, SQL_NS, "hits");
+            XMLUtils.data(xmlConsumer, hits);
+            XMLUtils.endElement(xmlConsumer, SQL_NS, "hits");
+            XMLUtils.endElement(xmlConsumer, SQL_NS, "row");
         }
-        XMLUtils.endElement(this.xmlConsumer, SQL_NS, "rowset");
-        this.xmlConsumer.endPrefixMapping("");
-        this.xmlConsumer.endDocument();
+        XMLUtils.endElement(xmlConsumer, SQL_NS, "rowset");
+        xmlConsumer.endPrefixMapping("");
+        xmlConsumer.endDocument();
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {

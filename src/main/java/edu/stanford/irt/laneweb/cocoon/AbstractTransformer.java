@@ -8,7 +8,7 @@ import org.xml.sax.SAXException;
 
 public abstract class AbstractTransformer extends AbstractSitemapModelComponent implements Transformer {
 
-    protected XMLConsumer xmlConsumer;
+    private XMLConsumer xmlConsumer;
 
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
         this.xmlConsumer.characters(ch, start, length);
@@ -85,5 +85,9 @@ public abstract class AbstractTransformer extends AbstractSitemapModelComponent 
 
     public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
         this.xmlConsumer.startPrefixMapping(prefix, uri);
+    }
+    
+    protected XMLConsumer getXMLConsumer() {
+        return this.xmlConsumer;
     }
 }

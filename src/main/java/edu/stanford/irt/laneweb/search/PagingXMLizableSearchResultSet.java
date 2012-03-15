@@ -3,13 +3,13 @@ package edu.stanford.irt.laneweb.search;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.resource.Resource;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implements Resource, XMLizable {
 

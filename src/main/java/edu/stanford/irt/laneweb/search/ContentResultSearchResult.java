@@ -3,11 +3,11 @@ package edu.stanford.irt.laneweb.search;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.ContentResult;
 
 /**

@@ -15,7 +15,7 @@ public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerato
         Result result = doSearch();
         SAXable xml = new SAXResult(result);
         synchronized (result) {
-            xml.toSAX(this.xmlConsumer);
+            xml.toSAX(getXMLConsumer());
         }
     }
 

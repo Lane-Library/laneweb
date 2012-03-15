@@ -3,13 +3,13 @@ package edu.stanford.irt.laneweb.bassett;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class XMLLizableBassettEresourceList implements XMLizable {
 

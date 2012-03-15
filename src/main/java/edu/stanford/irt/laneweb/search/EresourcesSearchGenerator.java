@@ -20,7 +20,7 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
     public void generate() throws IOException, SAXException {
         PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.page);
         eresources.addAll(getEresourceList());
-        eresources.toSAX(this.xmlConsumer);
+        eresources.toSAX(getXMLConsumer());
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {

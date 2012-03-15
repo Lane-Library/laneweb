@@ -3,11 +3,12 @@ package edu.stanford.irt.laneweb.bassett;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
+
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class XMLLizableBassettCount implements XMLizable {
 

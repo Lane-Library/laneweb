@@ -7,12 +7,13 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import org.apache.cocoon.xml.XMLUtils;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class LinkScanGenerator extends AbstractGenerator {
 
@@ -31,8 +32,9 @@ public class LinkScanGenerator extends AbstractGenerator {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(SQL);
-            this.xmlConsumer.startDocument();
-            XMLUtils.startElement(this.xmlConsumer, XHTML_NS, "ul");
+            XMLConsumer xmlConsumer = getXMLConsumer();
+            xmlConsumer.startDocument();
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "ul");
             int p = 1;
             String position, url, id, title;
             while (rs.next()) {
@@ -40,21 +42,21 @@ public class LinkScanGenerator extends AbstractGenerator {
                 url = rs.getString(1);
                 id = rs.getString(2) + '-' + rs.getString(3);
                 title = rs.getString(4);
-                XMLUtils.startElement(this.xmlConsumer, XHTML_NS, "li");
-                XMLUtils.data(this.xmlConsumer, position);
-                XMLUtils.startElement(this.xmlConsumer, XHTML_NS, "ul");
-                XMLUtils.startElement(this.xmlConsumer, XHTML_NS, "li");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "li");
+                XMLUtils.data(xmlConsumer, position);
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "ul");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "li");
                 AttributesImpl atts = new AttributesImpl();
                 atts.addAttribute("", "href", "href", "CDATA", url);
-                XMLUtils.startElement(this.xmlConsumer, XHTML_NS, "a", atts);
-                XMLUtils.data(this.xmlConsumer, " id: " + id + " title: " + title);
-                XMLUtils.endElement(this.xmlConsumer, XHTML_NS, "a");
-                XMLUtils.endElement(this.xmlConsumer, XHTML_NS, "li");
-                XMLUtils.endElement(this.xmlConsumer, XHTML_NS, "ul");
-                XMLUtils.endElement(this.xmlConsumer, XHTML_NS, "li");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
+                XMLUtils.data(xmlConsumer, " id: " + id + " title: " + title);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "a");
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "li");
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "ul");
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "li");
             }
-            XMLUtils.endElement(this.xmlConsumer, XHTML_NS, "ul");
-            this.xmlConsumer.endDocument();
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "ul");
+            xmlConsumer.endDocument();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         } finally {

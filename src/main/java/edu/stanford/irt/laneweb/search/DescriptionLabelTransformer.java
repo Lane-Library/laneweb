@@ -4,6 +4,7 @@ import java.nio.CharBuffer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -37,7 +38,7 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
             }
             this.chars.put(ch, start, length);
         } else {
-            this.xmlConsumer.characters(ch, start, length);
+            getXMLConsumer().characters(ch, start, length);
         }
     }
 
@@ -54,7 +55,7 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
         else if (this.inDescriptionElement) {
             ++this.parseLevel;
         }
-        this.xmlConsumer.endElement(uri, localName, qName);
+        getXMLConsumer().endElement(uri, localName, qName);
     }
 
     private void handleMatches() throws SAXException {
@@ -62,23 +63,24 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
         this.chars.rewind();
         Matcher matcher = LABEL_PATTERN.matcher(this.chars.subSequence(0, charsEnd));
         int current = 0;
+        XMLConsumer xmlConsumer = getXMLConsumer();
         while (current < charsEnd && matcher.find()) {
             int matchStart = matcher.start();
             int matchEnd = matcher.end();
             if (matchStart > current) {
                 // send chars before match:
-                this.xmlConsumer.characters(this.chars.array(), current, matchStart - current);
+                xmlConsumer.characters(this.chars.array(), current, matchStart - current);
             }
-            this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL,
+            xmlConsumer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL,
                     EMPTY_ATTRIBUTES);
             char[] match = matcher.group(1).toCharArray();
-            this.xmlConsumer.characters(match, 0, match.length);
-            this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL);
+            xmlConsumer.characters(match, 0, match.length);
+            xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL);
             current = matchEnd;
         }
         if (current < charsEnd) {
             // send chars after last match:
-            this.xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
+            xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
         }
         this.chars.clear();
     }
@@ -100,6 +102,6 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
             handleMatches();
             this.parseLevel--;
         }
-        this.xmlConsumer.startElement(uri, localName, qName, atts);
+        getXMLConsumer().startElement(uri, localName, qName, atts);
     }
 }

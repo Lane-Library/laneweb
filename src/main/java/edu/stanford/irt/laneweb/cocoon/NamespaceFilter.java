@@ -21,7 +21,7 @@ public class NamespaceFilter extends AbstractTransformer {
         if ("".equals(prefix)) {
             --this.xhtmlPrefixLevel;
             if (this.xhtmlPrefixLevel == 0) {
-                this.xmlConsumer.endPrefixMapping(prefix);
+                getXMLConsumer().endPrefixMapping(prefix);
             }
         }
     }
@@ -34,7 +34,7 @@ public class NamespaceFilter extends AbstractTransformer {
     public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
         if ("".equals(prefix) && "http://www.w3.org/1999/xhtml".equals(uri)) {
             if (this.xhtmlPrefixLevel == 0) {
-                this.xmlConsumer.startPrefixMapping(prefix, uri);
+                getXMLConsumer().startPrefixMapping(prefix, uri);
             }
             this.xhtmlPrefixLevel++;
         }
