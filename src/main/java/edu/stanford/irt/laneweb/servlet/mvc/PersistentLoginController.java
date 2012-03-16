@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.PersistentLoginFilter;
@@ -64,17 +65,6 @@ public class PersistentLoginController {
 		return setView(url, request, response);
 	}
 
-	@RequestMapping(value = "/persistentLogin.html")
-	public String getView(final String url, HttpServletRequest request, HttpServletResponse response) {
-		return setView(url, request, response);
-	}
-
-	// /**/persistentLogin do not work for /secure/ not sure why but is working
-	// for anything else
-	@RequestMapping(value = "/secure/persistentLogin.html")
-	public String secureView(final String url, final HttpServletRequest request, HttpServletResponse response) {
-		return setView(url, request, response);
-	}
 
 	/**
 	 * set the lane-user cookie max age to zero.
