@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.ldap;
 
 import java.security.PrivilegedAction;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingEnumeration;
@@ -21,28 +20,25 @@ public class LDAPDataAccess {
     private static class LDAPAttributesMapper implements AttributesMapper {
 
         public Object mapFromAttributes(final Attributes attributes) throws javax.naming.NamingException {
-            LDAPData ldapData = new LDAPData();
-//            attributes.getAll();
+            String name = null;
+            String univId = null;
+            boolean isActive = false;
             Attribute currentAttribute = attributes.get("displayName");
-            if (null != currentAttribute) {
-                ldapData.setName((String) currentAttribute.get());
+            if (currentAttribute != null) {
+                name = (String) currentAttribute.get();
             }
             currentAttribute = attributes.get("suunivid");
-            if (null != currentAttribute) {
-                ldapData.setUnivId((String) currentAttribute.get());
+            if (currentAttribute != null) {
+                univId = (String) currentAttribute.get();
             }
             currentAttribute = attributes.get("suAffiliation");
-            if (null != currentAttribute) {
+            if (currentAttribute != null) {
             	NamingEnumeration<?> attrs =  currentAttribute.getAll();
-            	List<Affiliation> affiliations = new ArrayList<Affiliation>();
-            	 while(attrs.hasMore()) {
-            		 Affiliation aff = Affiliation.getAffiliation(((String)attrs.next()) );
-            		 affiliations.add(aff);
+            	 while(!isActive && attrs.hasMore()) {
+            		 isActive = Affiliation.getAffiliation((String)attrs.next()).isActive();
             	 }
-                ldapData.setAffiliations(affiliations);
-            	 
             }
-            return ldapData;
+            return new LDAPData(name, univId, isActive);
         }
     }
 
@@ -91,8 +87,7 @@ public class LDAPDataAccess {
         }
         if (ldapData == null) {
             this.log.warn("using sunetid for name");
-            ldapData = new LDAPData();
-            ldapData.setName(sunetid);
+            ldapData = new LDAPData(sunetid, null, false);
         }
         return ldapData;
     }
