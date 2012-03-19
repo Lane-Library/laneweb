@@ -89,7 +89,7 @@
 		if(Y.get('#dont-ask-again')){
 			Y.get('#dont-ask-again').on('click', function(event) {
 				if(Y.get('#dont-ask-again') && Y.get('#dont-ask-again').get('checked')){
-					Y.get('#yes-persistent-login').set('src', '../../graphics/buttons/yes-off.gif');
+					Y.get('#yes-persistent-login').set('src', '/../../graphics/buttons/yes-off.gif');
 					Y.get('#yes-persistent-login').setStyles({cursor :'default'});
 				} else{
 					Y.get('#yes-persistent-login').set('src', '/../../graphics/buttons/yes.gif');
@@ -105,6 +105,7 @@
 		var node = event.target, 
 		url = '/././', 
 		userCookie = Y.Cookie.get('user');
+		node = node.get('parentNode');
 		if (!userCookie ) {
 			url = url + 'secure/';
 		}
