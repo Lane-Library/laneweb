@@ -44,7 +44,7 @@
 					
 			}
 			
-		} else if (link && link.get('nodeName') == 'A'	&& (link.get('pathname').indexOf('/././secure/login.html') > -1)) {
+		} else if (link && link.get('nodeName') == 'A'	&& (link.get('pathname').indexOf('secure/login.html') > -1)) {
 			if (persistentStatusCookie && 'denied' === persistentStatusCookie) {
 				document.location =  '/././secure/persistentLogin.html?&url='+escape(document.location);
 			} else{
