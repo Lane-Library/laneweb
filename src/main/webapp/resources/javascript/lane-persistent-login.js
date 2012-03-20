@@ -105,7 +105,7 @@
 	if (Y.get('#persistent-login-expiration-day')) {
 		var ONE_DAY = 1000 * 60 * 60 * 24,
 		 expDay = 0,
-		expDate = Y.Cookie.get(PERSISTENT_EXPIRATION_DAY);  
+		expDate = Y.Cookie.get('persistent-expiration-date');  
 		if (expDate) {
 			expDay = Math.round((expDate - new Date()) / ONE_DAY);
 		}
