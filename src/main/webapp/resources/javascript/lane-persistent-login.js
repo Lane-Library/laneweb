@@ -114,14 +114,14 @@
 	
 	//for the static page persistentlogin.hrml
 	// Click on YES --
-	if (Y.get('#persistent-login-expiration-day')) {
+	if (Y.get('#yes-persistent-login')) {
 		Y.get('#yes-persistent-login').on('click', function(event) {
-			if(Y.get('#dont-ask-again') && Y.get('#dont-ask-again').get('checked')){
-				event.preventDefault();
+			var url = '/././', 
+			userCookie = Y.Cookie.get('user');
+			if (!userCookie ) {
+				url = url + 'secure/';
 			}
-			else{
-				setLink(event); //cookie set in the PerssitentLoginFilter class
-			}
+			document.location =  url + 'persistentLogin.html?pl=true';
 		});
 	}
 	
