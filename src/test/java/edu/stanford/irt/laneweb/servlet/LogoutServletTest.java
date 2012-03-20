@@ -44,7 +44,7 @@ public class LogoutServletTest {
         cookies[0] =  new Cookie("test","test");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
-        expectLastCall().times(3);
+        expectLastCall().times(4);
         this.session.invalidate();
         this.response.sendRedirect("https://weblogin.stanford.edu/logout");
         replay(this.request, this.response, this.session);

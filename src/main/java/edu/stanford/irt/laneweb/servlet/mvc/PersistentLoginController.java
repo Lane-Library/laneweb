@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.PersistentLoginFilter;
@@ -36,6 +35,8 @@ public class PersistentLoginController {
 
 	public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
 
+	public static final String PERSISTENT_LOGIN_EXPIRATION_DATE = "persistent-expiration-date";
+	
 	@RequestMapping(value = "/persistentLogin.html", params = { "url", "pl=renew" })
 	public String renewCookieAndRedirect(final String url, HttpServletRequest request, HttpServletResponse response) {
 		Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
@@ -97,7 +98,12 @@ public class PersistentLoginController {
 				}
 			}
 		}
-		Cookie cookie = new Cookie(SunetIdCookieCodec.LANE_COOKIE_NAME, null);
+		Cookie cookie = new Cookie(PERSISTENT_LOGIN_EXPIRATION_DATE, null);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		
+		cookie = new Cookie(SunetIdCookieCodec.LANE_COOKIE_NAME, null);
 		cookie.setPath("/");
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
@@ -131,6 +137,11 @@ public class PersistentLoginController {
 			cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
 			response.addCookie(cookie);
 
+			cookie = new Cookie(PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(twoWeeks));
+			cookie.setPath("/");
+			cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
+			response.addCookie(cookie);
+			
 			GregorianCalendar gc = new GregorianCalendar();
 			gc.add(Calendar.SECOND, twoWeeks);
 			gc.add(Calendar.SECOND, -gracePeriod);
@@ -138,6 +149,8 @@ public class PersistentLoginController {
 			cookie.setPath("/");
 			cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
 			response.addCookie(cookie);
+			
+			
 		}
 	}
 

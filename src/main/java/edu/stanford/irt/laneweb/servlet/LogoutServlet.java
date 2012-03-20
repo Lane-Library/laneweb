@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.stanford.irt.laneweb.servlet.mvc.PersistentLoginController;
+
 public class LogoutServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -30,7 +32,7 @@ public class LogoutServlet extends HttpServlet {
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie webCookie : cookies) {
-                if (PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE.equals(webCookie.getName())) {
+                if (PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE.equals(webCookie.getName())) {
                     String cookieValue = webCookie.getValue();
                 	if(!"denied".equals(cookieValue)){//don't want to overwrite denied cookie
                         webCookie.setPath("/");
@@ -41,6 +43,11 @@ public class LogoutServlet extends HttpServlet {
                 }
             }
         }
+        Cookie cookie = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_EXPIRATION_DATE,  null);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		resp.addCookie(cookie);
+		
         
         Cookie webAuthCookie = new Cookie( WEBAUTH_COOKIE_NAME, null);
         webAuthCookie.setPath("/");
