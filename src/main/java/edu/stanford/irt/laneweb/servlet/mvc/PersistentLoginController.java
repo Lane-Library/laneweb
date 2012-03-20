@@ -137,19 +137,20 @@ public class PersistentLoginController {
 			cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
 			response.addCookie(cookie);
 
-			cookie = new Cookie(PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(twoWeeks));
+			GregorianCalendar gc = new GregorianCalendar();
+			
+			gc.add(Calendar.SECOND, twoWeeks);
+			cookie = new Cookie(PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(gc.getTime().getTime()));
 			cookie.setPath("/");
 			cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
 			response.addCookie(cookie);
 			
-			GregorianCalendar gc = new GregorianCalendar();
-			gc.add(Calendar.SECOND, twoWeeks);
+			
 			gc.add(Calendar.SECOND, -gracePeriod);
 			cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, String.valueOf(gc.getTime().getTime()));
 			cookie.setPath("/");
 			cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
 			response.addCookie(cookie);
-			
 			
 		}
 	}
