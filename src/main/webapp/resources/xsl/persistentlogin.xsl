@@ -3,10 +3,8 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="h" version="2.0">
 
-    <xsl:param name="user-cookie"/>
-    <xsl:param name="persistent-login"/>
-    <xsl:param name="remove-persistent-login"/>
-
+    <xsl:param name="peristent-login-expiration-date"/>
+	
     <xsl:template match="*">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -17,14 +15,16 @@
         <xsl:apply-templates select="h:html"/>
     </xsl:template>
 
-    <xsl:template match="h:input[@type='checkbox']">
+    <xsl:template match="h:strong[@id='persistent-login-expiration-day']">
         <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:if
-                test="$persistent-login = 'true' or ($user-cookie != '' and $remove-persistent-login != 'true')">
-                <xsl:attribute name="checked">true</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="child::node()"/>
+            <xsl:choose>
+            	<xsl:when test="$peristent-login-expiration-date">
+            		<xsl:value-of select="$peristent-login-expiration-date"/>	
+				</xsl:when>
+	            <xsl:otherwise>
+	            	 <xsl:apply-templates select="attribute::node() | child::node()"/>
+	            </xsl:otherwise>
+            </xsl:choose>
         </xsl:copy>
     </xsl:template>
 

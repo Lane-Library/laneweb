@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.mvc.PersistentLoginController;
 
 public class LogoutServlet extends HttpServlet {
@@ -43,7 +44,7 @@ public class LogoutServlet extends HttpServlet {
                 }
             }
         }
-        Cookie cookie = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_EXPIRATION_DATE,  null);
+        Cookie cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE,  null);
 		cookie.setPath("/");
 		cookie.setMaxAge(0);
 		resp.addCookie(cookie);

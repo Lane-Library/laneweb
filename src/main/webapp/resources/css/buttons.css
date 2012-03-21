@@ -120,6 +120,7 @@
 	/*filter necessary to display gradient in IE*/
 	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fafbf8', endColorstr ='#dadad4' );
 	border: 1px solid #dadad9;
+	cursor :default;
 	}
 
 .btn-wide {

@@ -35,7 +35,6 @@ public class PersistentLoginController {
 
 	public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
 
-	public static final String PERSISTENT_LOGIN_EXPIRATION_DATE = "persistent-expiration-date";
 	
 	@RequestMapping(value = "/persistentLogin.html", params = { "url", "pl=renew" })
 	public String renewCookieAndRedirect(final String url, HttpServletRequest request, HttpServletResponse response) {
@@ -98,7 +97,7 @@ public class PersistentLoginController {
 				}
 			}
 		}
-		Cookie cookie = new Cookie(PERSISTENT_LOGIN_EXPIRATION_DATE, null);
+		Cookie cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, null);
 		cookie.setPath("/");
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
@@ -140,7 +139,7 @@ public class PersistentLoginController {
 			GregorianCalendar gc = new GregorianCalendar();
 			
 			gc.add(Calendar.SECOND, twoWeeks);
-			cookie = new Cookie(PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(gc.getTime().getTime()));
+			cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(gc.getTime().getTime()));
 			cookie.setPath("/");
 			cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
 			response.addCookie(cookie);

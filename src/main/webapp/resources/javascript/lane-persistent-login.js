@@ -41,9 +41,7 @@
 					LANE.persistentlogin.newWindow(event, '/././plain/persistent-popup.html');
 					event.preventDefault();
 				}
-					
 			}
-			
 		} else if (link && link.get('nodeName') == 'A'	&& (link.get('pathname').indexOf('secure/login.html') > -1)) {
 			if (persistentStatusCookie && 'denied' === persistentStatusCookie) {
 				document.location =  '/././secure/persistentLogin.html?&url='+escape(document.location);
@@ -88,30 +86,19 @@
 		}
 		if(Y.get('#dont-ask-again')){
 			Y.get('#dont-ask-again').on('click', function(event) {
+				var node = Y.get('#yes-persistent-login').ancestor('a');	
 				if(Y.get('#dont-ask-again') && Y.get('#dont-ask-again').get('checked')){
-					Y.get('#yes-persistent-login').set('src', '/../../graphics/buttons/yes-off.gif');
-					Y.get('#yes-persistent-login').setStyles({cursor :'default'});
+					node.removeClass('red-btn');
+					node.addClass('disabled-btn');
 				} else{
-					Y.get('#yes-persistent-login').set('src', '/../../graphics/buttons/yes.gif');
-					Y.get('#yes-persistent-login').setStyles({cursor :'auto'});
+					node.removeClass('disabled-btn');
+					node.addClass('red-btn');
 				}
 			});
 		}
 	};
 		
 
-
-	// /to Display persistent login expiration day left
-	if (Y.get('#persistent-login-expiration-day')) {
-		var ONE_DAY = 1000 * 60 * 60 * 24,
-		 expDay = 0,
-		expDate = Y.Cookie.get('persistent-expiration-date');  
-		if (expDate) {
-			expDay = Math.round((expDate - new Date()) / ONE_DAY);
-		}
-		Y.get('#persistent-login-expiration-day').set("innerHTML", expDay);
-	}
-	
 	//for the static page persistentlogin.hrml
 	// Click on YES --
 	if (Y.get('#yes-persistent-login')) {
