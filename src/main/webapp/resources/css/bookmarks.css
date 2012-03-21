@@ -34,57 +34,27 @@ background-position: 0 -53px
 }
 
 #bookmarks-editor button {
-		-webkit-border-radius: 3px;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-moz-user-select: none;
-	background-color: #edede5;
-	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
-	background: -webkit-gradient(linear, center top, from(#fafbf8),
-		to(#edede5) );
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =       '#fafbf8', endColorstr =         '#edede5' );
-	color: #444444;
-	border: 1px solid #dadad9;
-	cursor: pointer;
 	display: inline-block;
-	cursor: default;
-	display: inline-block;
-	font-size: 11px;
+	margin: 5px;
+	padding: 5px 12px;
 	font-weight: bold;
-	height: 27px;
-	line-height: 27px;
-	min-width: 46px;
-	padding: 0 20px;
-	text-align: center;
-	margin-right: 15px;
-	/*
-	border: 1px #DADAD8 solid;
-	background-color: #FAFAF8;
-	padding: 5px;
-	margin-right: 20px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 	border-radius: 3px;
-	cursor: pointer;
-	font-family: Georgia;
-	color: #414141;*/
+	color: #444444 !important;
+	background-color: #edede5;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4) );
+	background: -moz-linear-gradient(#fafbf8, #dadad4);
+	/*filter necessary to display gradient in IE*/
+	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fafbf8', endColorstr ='#dadad4' );
+	border: 1px solid #dadad9;
 }
 
 #bookmarks-editor button:hover {
-	background-color: #eeeee5;
-	background-image: -moz-linear-gradient(center top, #fafbf8, #edede5);
-	background: -webkit-gradient(linear, center top, from(#fafbf8),
-		to(#edede5) );
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =       '#fafbf8', endColorstr =       '#edede5' );
-	color: #444444;
 	border: 1px solid #9e9d98;
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	box-shadow: 1px 1px 1px 1px #e8e8e8;
-	
-	/*
-	background-color: #F5F5F3;
-	color: #111111;*/
 }
 
 #bookmarks-editor li {
@@ -92,11 +62,11 @@ background-position: 0 -53px
 	list-style-type: none;
 	border-bottom: 1px #DADAD8 solid;
 	margin-left: 0;
-	padding: 12px
+	padding: 12px;
 }
 
 #bookmarks-editor input {
-	margin-right: 12px
+	margin-right: 12px;
 }
 
 #bookmarks-editor input[type='text'] {
@@ -105,5 +75,5 @@ background-position: 0 -53px
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 	padding: 5px;
 	border: solid 2px #C9C9C9;
-	width: 25em
+	width: 25em;
 }
