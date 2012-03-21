@@ -144,8 +144,9 @@
                 <map:transform type="saxon" src="resources/xsl/random.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="persistentlogin.html" type="wildcard">
-                <map:generate type="html" src="{content-base}/persistentlogin.html"/>
+            <!-- To replace persistent.html login later -->
+            <map:match pattern="account-login-test.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/account-login-test.html"/>
                 <map:transform src="resources/xsl/persistentlogin.xsl" type="saxon"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
