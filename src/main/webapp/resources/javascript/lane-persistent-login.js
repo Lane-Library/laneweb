@@ -86,13 +86,10 @@
 		}
 		if(Y.get('#dont-ask-again')){
 			Y.get('#dont-ask-again').on('click', function(event) {
-				var node = Y.get('#yes-persistent-login').ancestor('a');	
 				if(Y.get('#dont-ask-again') && Y.get('#dont-ask-again').get('checked')){
-					node.removeClass('red-btn');
-					node.addClass('disabled-btn');
+					 Y.get('#yes-persistent-login').replaceClass('red-btn','disabled-btn');
 				} else{
-					node.removeClass('disabled-btn');
-					node.addClass('red-btn');
+					 Y.get('#yes-persistent-login').replaceClass('disabled-btn','red-btn');
 				}
 			});
 		}
@@ -117,7 +114,9 @@
 		var node = event.target, 
 		url = '/././', 
 		userCookie = Y.Cookie.get('user');
-		node = node.get('parentNode');
+		if( node.get('tagName') === 'SPAN'){
+			node = node.get('parentNode');
+		}
 		if (!userCookie ) {
 			url = url + 'secure/';
 		}
