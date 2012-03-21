@@ -27,10 +27,14 @@ background-position: 0 -26px
 background-position: 0 -53px
 }
 
+#bookmarks-editor  {
+	margin-top: 1.5em;
+	}
+
 #bookmarks-editor fieldset {
 	border: 1px #DADAD8 solid;
 	background-color: #F4F5EF;
-	padding: 5px 15px
+	padding: 5px 15px;
 }
 
 #bookmarks-editor button {
