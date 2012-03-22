@@ -79,7 +79,7 @@
                                 <?laneweb bookmarks?>
                             </li>
                             <li>
-                                <a href="/persistentlogin.html">My Account</a>
+                                <a href="/myaccounts.html">My Account</a>
                             </li>
                             <li>
                                 <a id="logout" href="/logout">Logout</a>

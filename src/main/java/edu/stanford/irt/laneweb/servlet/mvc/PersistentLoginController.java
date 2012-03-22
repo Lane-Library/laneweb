@@ -76,7 +76,7 @@ public class PersistentLoginController {
 		this.sunetIdSource.getSunetid(request);
 		if (null == url) {
 			response.setCharacterEncoding("UTF-8");
-			return "/persistentlogin.html";
+			return "/myaccounts.html";
 		} else {
 			return "redirect:".concat(url);
 		}
