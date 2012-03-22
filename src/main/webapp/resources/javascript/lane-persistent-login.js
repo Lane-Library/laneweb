@@ -105,6 +105,7 @@
 			if (!userCookie ) {
 				url = url + 'secure/';
 			}
+			event.preventDefault();
 			document.location =  url + 'persistentLogin.html?pl=true';
 		});
 	}
