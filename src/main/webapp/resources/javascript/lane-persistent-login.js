@@ -44,7 +44,7 @@
 			}
 		} else if (link && link.get('nodeName') == 'A'	&& (link.get('pathname').indexOf('secure/login.html') > -1)) {
 			if (persistentStatusCookie && 'denied' === persistentStatusCookie) {
-				document.location =  '/././secure/persistentLogin.html?&url='+escape(document.location);
+				document.location =  '/././secure/persistentLogin.html?pl=false&url='+escape(document.location);
 			} else{
 				link.set('rel', 'persistentLogin');
 				redirectUrl = escape(document.location);
@@ -99,15 +99,15 @@
 	//for the static page persistentlogin.hrml
 	// Click on YES --
 	if (Y.get('#yes-persistent-login')) {
-		Y.get('#yes-persistent-login').on('click', function(event) {
-			var url = '/././', 
-			userCookie = Y.Cookie.get('user');
-			if (!userCookie ) {
-				url = url + 'secure/';
-			}
-			event.preventDefault();
-			document.location =  url + 'persistentLogin.html?pl=true';
-		});
+		Y.get('#yes-persistent-login').on('click',
+			function(event) {
+				event.preventDefault();
+				if (Y.Cookie.get('user')) {
+					document.location = '/../../persistentLogin.html?pl=renew&url='+escape(document.location);
+				} else {
+					document.location = '/../../secure/persistentLogin.html?pl=true&url='+escape(document.location);
+				}
+			});
 	}
 	
 	
