@@ -103,9 +103,9 @@
 			function(event) {
 				event.preventDefault();
 				if (Y.Cookie.get('user')) {
-					document.location = '/../../persistentLogin.html?pl=renew&url=/myaccounts.html';
+					document.location = '/././persistentLogin.html?pl=renew&url=/myaccounts.html';
 				} else {
-					document.location = '/../../secure/persistentLogin.html?pl=true';
+					document.location = '/././secure/persistentLogin.html?pl=true';
 				}
 			});
 	}
