@@ -45,7 +45,7 @@ public class PersistentLoginController {
 		return "redirect:".concat(url);
 	}
 
-	@RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
+	@RequestMapping(value = "/persistentLogin.html", params = { "pl=true" })
 	public String createCookie(final String url, HttpServletRequest request, HttpServletResponse response) {
 		checkSunetIdAndSetCookies(request, response);
 		return setView(url, request, response);
@@ -76,7 +76,7 @@ public class PersistentLoginController {
 		this.sunetIdSource.getSunetid(request);
 		if (null == url) {
 			response.setCharacterEncoding("UTF-8");
-			return "/myaccounts.html";
+			return "redirect:/myaccounts.html"; 
 		} else {
 			return "redirect:".concat(url);
 		}
@@ -109,7 +109,7 @@ public class PersistentLoginController {
 	}
 
 	private void checkSunetIdAndSetCookies(final HttpServletRequest request, HttpServletResponse response) {
-		String sunetid = this.sunetIdSource.getSunetid(request);
+		String sunetid = "alainb";//this.sunetIdSource.getSunetid(request);
 		if (null != sunetid) {
 			setCookies(request, response, sunetid);
 		} else {
