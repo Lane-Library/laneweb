@@ -7,17 +7,20 @@
 }
 /* IE6 doesn't do position : fixed, this class is added via lane-ie.js*/
 #feedbackLink.ie6Feedback {
-    position : absolute
+    position : absolute;
 }
 #feedbackLink a {
     display : block;
-    background-image : url(/././resources/images/feedback-vertical-off.png);
+    background-image : url(/././resources/images/icons-sprite.png);
+    background-position: -699px 0px;
     width : 31px;
     height : 110px;
     border-bottom : none
 }
 #feedbackLink a:hover {
-    background-image : url(/././resources/images/feedback-vertical-on.png);
+    background-image : url(/././resources/images/icons-sprite.png);
+    background-repeat: no-repeat;
+    background-position: -654px 0px;
 }
 
 .yui3-feedback-item, .yui3-purchase-item {
