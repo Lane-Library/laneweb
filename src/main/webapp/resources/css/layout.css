@@ -28,6 +28,13 @@
 .content .yui-gf .rightGrids {
     width : 785px;
 }
+.custom-narrow {
+    width: 25% !important;
+}
+.custom-wide {
+    width: 70% !important;
+    float: left;
+}
 /* nesting error corrections */
 .yui-gf .yui-g,
 .yui-u .yui-g {
