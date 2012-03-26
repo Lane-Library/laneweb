@@ -644,6 +644,7 @@
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
                 syncUI : function(config) {
                     this.on("editingChange", this._handleEditingChange, this);
+                    this.on("checkedChange", this._handleCheckedChange, this);
                 },
                 renderUI : function() {
                     this.get("srcNode").append(
@@ -714,6 +715,10 @@
                         srcNode.all("input[type='text'], button, label").setStyle("display", "none");
                         srcNode.one("a").setStyle("display", "inline");
                     }
+                },
+                _handleCheckedChange : function(event) {
+                    var checkBox = this.get("srcNode").one("input[type='checkbox']");
+                    checkBox.set("checked", event.newVal);
                 }
             }, {
                 ATTRS : {
@@ -722,13 +727,20 @@
                     },
                     editing : {
                         value : false
+                    },
+                    checked : {
+                        value : false
                     }
                 }
             });
 
             BookmarksEditor = Y.Base.create("bookmarks-editor", Y.Widget, [], {
                 renderUI : function() {
-                    var editor, editors = [], i, items = this.get("srcNode").all("li"), bookmarks = this.get("bookmarks");
+                    var editor, editors = [], i,
+                        srcNode = this.get("srcNode"),
+                        items = srcNode.all("li"),
+                        bookmarks = this.get("bookmarks"),
+                        checkBox = Y.Node.create("<input type=\"checkbox\"/>");
                     for (i = 0; i < items.size(); i++) {
                         editor = new BookmarkEditor({srcNode : items.item(i), render : true, bookmark : bookmarks.getBookmark(i)});
                         editor.after("destroy", this._handleDestroyEditor, this);
@@ -738,6 +750,8 @@
                     bookmarks.after("removeSync", this._handleBookmarkRemove, this);
                     bookmarks.after("addSync", this._handleBookmarkAdd, this);
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
+                    srcNode.one("fieldset").prepend(checkBox);
+                    checkBox.on("checkedChange", this._handleCheckedChange, this);
                 },
                 bindUI : function() {
                     this.get("srcNode").all("fieldset button").on("click", this._handleButtonClick, this);
@@ -789,11 +803,16 @@
                     var editors = this.get("editors");
                     editors[event.position].update();
                 },
+                _handleCheckedChange : function(event) {
+                    var i, editors = this.get("editors");
+                    for (i = 0; i < editors.size(); i++) {
+                        editors.item(i).set("checked", event.newVal);
+                    }
+                },
                 _getCheckedIndexes : function() {
-                    var indexes = [], i,
-                    checkboxes = this.get("srcNode").all("input[type='checkbox']");
-                    for (i = 0; i < checkboxes.size(); i++) {
-                        if (checkboxes.item(i).get("checked")) {
+                    var indexes = [], i, editors = this.get("editors");
+                    for (i = 0; i < editors.size(); i++) {
+                        if (editors.item(i).get("checked")) {
                             indexes.push(i);
                         }
                     }
