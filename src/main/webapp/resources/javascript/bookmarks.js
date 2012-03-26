@@ -806,7 +806,7 @@
                 _handleCheckedChange : function(event) {
                     var i, editors = this.get("editors");
                     for (i = 0; i < editors.length; i++) {
-                        editors[i].set("checked", event.newVal);
+                        editors[i].set("checked", event.target.get("checked"));
                     }
                 },
                 _getCheckedIndexes : function() {
