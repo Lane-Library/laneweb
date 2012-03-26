@@ -52,6 +52,7 @@ background-position: 0 -53px
 	/*filter necessary to display gradient in IE*/
 	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fafbf8', endColorstr ='#dadad4' );
 	border: 1px solid #dadad9;
+	text-transform:capitalize
 }
 
 #bookmarks-editor button:hover {
