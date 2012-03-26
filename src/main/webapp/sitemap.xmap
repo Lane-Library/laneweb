@@ -31,7 +31,14 @@
                         <map:transform type="html-cme-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+                <map:select type="bookmarks-enabled">
+                    <map:when test="true">
+                        <map:transform type="saxon" src="resources/xsl/bookmarks-laneweb.xsl"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+                    </map:otherwise>
+                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>
