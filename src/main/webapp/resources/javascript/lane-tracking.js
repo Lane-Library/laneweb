@@ -92,13 +92,14 @@
                             if (host.indexOf('/') > -1) {
                                 path = host.substring(host.indexOf('/'));
                                 if (path.indexOf('?') > -1) {
+                                	query = path.substring( path.indexOf('?')+1, path.length);
                                     path = path.substring(0, path.indexOf('?'));
                                 }
                                 host = host.substring(0, host.indexOf('/'));
                             } else {
+                            	query = '';
                                 path = '/';
                             }
-                            query = '';
                             external = true;
                         } else if (node.get('rel') && (node.get('rel').indexOf('popup local') === 0 || node.get('rel').indexOf('popup faq') === 0)) {
                             host = document.location.host;
@@ -111,7 +112,8 @@
                             }
                             path = node.get('pathname');
                             external = host != document.location.host;
-                            query = external ? '' : node.get('search');
+//                            query = external ? '' : node.get('search');
+                            query = node.get('search');
                         }
                     }
                 }

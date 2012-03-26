@@ -23,7 +23,12 @@
                 LANE.tracking.addTracker({
                     track: function(trackingData) {
                         if (trackingData.external) {
-                            gaPageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(trackingData.title));
+                        	if(trackingData.query !== undefined && trackingData.query !== '' ){
+                        		gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(trackingData.title) ,trackingData.host+trackingData.path+"?"+trackingData.query);
+                        	}else{
+                        		gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(trackingData.title) ,trackingData.host+trackingData.path);
+                        	}
+                        	gaPageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(trackingData.title));
                         } else {
                             gaPageTracker._trackPageview('/ONSITE/' + encodeURIComponent(trackingData.title) + '/' + trackingData.path);
                         }
