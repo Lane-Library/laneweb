@@ -751,7 +751,7 @@
                     bookmarks.after("addSync", this._handleBookmarkAdd, this);
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
                     srcNode.one("fieldset").prepend(checkBox);
-                    checkBox.on("checkedChange", this._handleCheckedChange, this);
+                    checkBox.on("change", this._handleCheckedChange, this);
                 },
                 bindUI : function() {
                     this.get("srcNode").all("fieldset button").on("click", this._handleButtonClick, this);
