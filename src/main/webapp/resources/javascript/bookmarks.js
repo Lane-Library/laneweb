@@ -805,14 +805,14 @@
                 },
                 _handleCheckedChange : function(event) {
                     var i, editors = this.get("editors");
-                    for (i = 0; i < editors.size(); i++) {
-                        editors.item(i).set("checked", event.newVal);
+                    for (i = 0; i < editors.length; i++) {
+                        editors[i].set("checked", event.newVal);
                     }
                 },
                 _getCheckedIndexes : function() {
                     var indexes = [], i, editors = this.get("editors");
-                    for (i = 0; i < editors.size(); i++) {
-                        if (editors.item(i).get("checked")) {
+                    for (i = 0; i < editors.length; i++) {
+                        if (editors[i].get("checked")) {
                             indexes.push(i);
                         }
                     }
