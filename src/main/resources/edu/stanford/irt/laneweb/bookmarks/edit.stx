@@ -35,10 +35,10 @@
     <stx:template match="h:a">
         <stx:choose>
             <stx:when test="$checked">
-                <label for="url">url:</label>
-                <input name="url" type="text" value="{@href}"></input>
-                <label for="label">label:</label>
+                <label for="label">Name:</label>
                 <input name="label" type="text" value="{.}"></input>
+                <label for="url">location:</label>
+                <input name="url" type="text" value="{@href}"></input>
                 <button name="action" value="save" type="submit">save</button>
                 <button value="reset" type="reset">reset</button>
                 <button name="action" value="cancel" type="submit">cancel</button>

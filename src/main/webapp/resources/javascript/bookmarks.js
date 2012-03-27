@@ -644,10 +644,10 @@
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
                 renderUI : function() {
                     this.get("srcNode").append(
-                        "<label>URL:</label>" +
-                        "<input type=\"text\" name=\"url\"/>" +
-                        "<label>Label:</label>" +
+                        "<label>Name:</label>" +
                         "<input type=\"text\" name=\"label\"/>" +
+                        "<label>location:</label>" +
+                        "<input type=\"text\" name=\"url\"/>" +
                         "<button name=\"action\" value=\"save\" type=\"submit\">save</button>" +
                         "<button value=\"reset\" type=\"reset\">reset</button>" +
                         "<button name=\"action\" value=\"cancel\" type=\"submit\">cancel</button>");
