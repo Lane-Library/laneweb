@@ -27,6 +27,23 @@ background-position: 0 -26px
 background-position: 0 -53px
 }
 
+.yui3-bookmark-editor label,
+.yui3-bookmark-editor input[type='text'],
+.yui3-bookmark-editor button {
+    display:none
+}
+
+.yui3-bookmark-editor-active label,
+.yui3-bookmark-editor-active input[type='text'],
+.yui3-bookmark-editor-active button {
+    display:inline
+}
+
+.yui3-bookmark-editor-active a,
+.yui3-bookmark-editor-active input[type='checkbox'] {
+    display:none
+}
+
 #bookmarks-editor  {
 	margin-top: 1.5em;
 	}
@@ -38,7 +55,7 @@ background-position: 0 -53px
 }
 
 #bookmarks-editor button {
-	display: inline-block;
+	/*TODO: not sure why this was here: display: inline-block;*/
 	margin: 5px;
 	padding: 5px 12px;
 	font-weight: bold;

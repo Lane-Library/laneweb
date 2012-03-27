@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-04-02" version="1.12.22" description="1.12.22 bug fix release">
+            <action date="2012-03-27" dev="ceyates" issue="67304" type="update">
+                remove checkbox after clicking 'add' or 'edit' in bookmark editor
+            </action>
             <action date="2012-03-26" dev="ceyates" issue="67302" type="update">
                 add checkbox to bookmark editor header
             </action>

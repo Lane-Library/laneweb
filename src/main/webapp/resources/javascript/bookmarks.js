@@ -642,22 +642,21 @@
         if (Y.one("#bookmarks-editor")) {
 
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
-                syncUI : function(config) {
-                    this.on("editingChange", this._handleEditingChange, this);
-                    this.on("checkedChange", this._handleCheckedChange, this);
-                },
                 renderUI : function() {
                     this.get("srcNode").append(
-                            "<label style=\"display:none\">URL:</label>" +
-                            "<input style=\"display:none\" type=\"text\" name=\"url\"/>" +
-                            "<label style=\"display:none\">Label:</label>" +
-                            "<input style=\"display:none\" type=\"text\" name=\"label\"/>" +
-                            "<button style=\"display:none\" name=\"action\" value=\"save\" type=\"submit\">save</button>" +
-                            "<button style=\"display:none\" value=\"reset\" type=\"reset\">reset</button>" +
-                    "<button style=\"display:none\" name=\"action\" value=\"cancel\" type=\"submit\">cancel</button>");
+                        "<label>URL:</label>" +
+                        "<input type=\"text\" name=\"url\"/>" +
+                        "<label>Label:</label>" +
+                        "<input type=\"text\" name=\"label\"/>" +
+                        "<button name=\"action\" value=\"save\" type=\"submit\">save</button>" +
+                        "<button value=\"reset\" type=\"reset\">reset</button>" +
+                        "<button name=\"action\" value=\"cancel\" type=\"submit\">cancel</button>");
                 },
                 bindUI : function() {
                     this.get("srcNode").all("button").on("click", this._handleButtonClick, this);
+                    this.get("srcNode").one("input[type='checkbox']").on("change", this._handleChange, this);
+                    this.on("editingChange", this._handleEditingChange, this);
+                    this.on("checkedChange", this._handleCheckedChange, this);
                 },
                 cancel : function() {
                     if (this.get("bookmark")) {
@@ -705,20 +704,22 @@
                     this[event.target.getAttribute("value")].call(this, event);
                 },
                 _handleEditingChange : function(event) {
-                    var srcNode = this.get("srcNode");
+                    var srcNode = this.get("srcNode"),
+                        activeClass = this.getClassName() + "-active";
                     if (event.newVal) {
-                        srcNode.all("input[type='text'], button, label").setStyle("display", "inline");
-                        srcNode.one("a").setStyle("display", "none");
+                        srcNode.addClass(activeClass);
                         this.reset();
 
                     } else {
-                        srcNode.all("input[type='text'], button, label").setStyle("display", "none");
-                        srcNode.one("a").setStyle("display", "inline");
+                        srcNode.removeClass(activeClass);
                     }
                 },
                 _handleCheckedChange : function(event) {
                     var checkBox = this.get("srcNode").one("input[type='checkbox']");
                     checkBox.set("checked", event.newVal);
+                },
+                _handleChange : function(event) {
+                    this.set("checked", event.target.get("checked"));
                 }
             }, {
                 ATTRS : {
