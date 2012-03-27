@@ -8,6 +8,12 @@
     </properties>
     <body>
         <release date="2012-04-02" version="1.12.22" description="1.12.22 bug fix release">
+            <action date="2012-03-26" dev="ceyates" issue="67302" type="update">
+                add checkbox to bookmark editor header
+            </action>
+            <action date="2012-03-26" dev="ceyates" issue="67301" type="update">
+                capitalize first letter in bookmark editor buttons
+            </action>
             <action date="2012-03-23" dev="olgary" issue="67193" type="update">
                 feedback.css: changed feedback button to red and sprite
             </action>
