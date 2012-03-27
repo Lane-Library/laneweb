@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-04-02" version="1.12.22" description="1.12.22 bug fix release">
+            <action date="2012-03-27" dev="ceyates" issue="67306" type="update">
+                put the labels for bookmark editor text inputs inside
+            </action>
             <action date="2012-03-27" dev="ceyates" issue="67305" type="update">
                 swap URL and Label input elements in bookmark-editor
             </action>

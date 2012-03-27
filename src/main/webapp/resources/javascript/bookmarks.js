@@ -644,9 +644,7 @@
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
                 renderUI : function() {
                     this.get("srcNode").append(
-                        "<label>Name:</label>" +
                         "<input type=\"text\" name=\"label\"/>" +
-                        "<label>location:</label>" +
                         "<input type=\"text\" name=\"url\"/>" +
                         "<button name=\"action\" value=\"save\" type=\"submit\">save</button>" +
                         "<button value=\"reset\" type=\"reset\">reset</button>" +
@@ -658,18 +656,24 @@
                     this.on("editingChange", this._handleEditingChange, this);
                     this.on("checkedChange", this._handleCheckedChange, this);
                 },
+                syncUI : function() {
+                    var srcNode = this.get("srcNode");
+                    this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"), "Name");
+                    this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"), "location");
+                },
                 cancel : function() {
                     if (this.get("bookmark")) {
                         this.set("editing", false);
                     } else {
+                        this._labelInput.destroy();
+                        this._urlInput.destroy();
                         this.destroy(true);
                     }
                 },
                 save : function() {
-                    var srcNode = this.get("srcNode"),
-                    newlabel = srcNode.one("input[name='label']").get("value"),
-                    newurl = srcNode.one("input[name='url']").get("value"),
-                    bookmark = this.get("bookmark");
+                    var newlabel = this._labelInput.getValue(),
+                        newurl = this._urlInput.getValue(),
+                        bookmark = this.get("bookmark");
                     if (bookmark) {
                         if (newlabel != bookmark.getLabel() || newurl != bookmark.getUrl()) {
                             bookmark.setValues(newlabel, newurl);
@@ -686,12 +690,11 @@
                     this.set("editing", false);
                 },
                 reset : function() {
-                    var srcNode = this.get("srcNode"),
-                    bookmark = this.get("bookmark"),
-                    resetLabel = bookmark ? bookmark.getLabel() : "",
-                    resetUrl = bookmark ? bookmark.getUrl() : "";
-                    srcNode.one("input[name='label']").set("value", resetLabel);
-                    srcNode.one("input[name='url']").set("value", resetUrl);
+                    var bookmark = this.get("bookmark"),
+                        resetLabel = bookmark ? bookmark.getLabel() : "",
+                        resetUrl = bookmark ? bookmark.getUrl() : "";
+                    this._labelInput.setValue(resetLabel);
+                    this._urlInput.setValue(resetUrl);
                 },
                 update : function() {
                     var anchor = this.get("srcNode").one("a"),
@@ -709,7 +712,6 @@
                     if (event.newVal) {
                         srcNode.addClass(activeClass);
                         this.reset();
-
                     } else {
                         srcNode.removeClass(activeClass);
                     }
