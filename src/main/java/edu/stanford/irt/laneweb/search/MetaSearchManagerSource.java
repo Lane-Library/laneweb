@@ -49,12 +49,12 @@ public class MetaSearchManagerSource {
 
     public void reload(final String url, final String login, final String password) {
         try {
-        	AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);
+            AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);
             this.manager = (MetaSearchManager) context.getBean("manager");
             this.httpClient = (HttpClient) context.getBean("httpClient");
+            this.searchCacheManager = (SearchCacheManager) context.getBean("searchCacheManager");
             this.context.destroy();
             this.context = context;
-            this.searchCacheManager = (SearchCacheManager) this.context.getBean("searchCacheManager");
         } catch (Exception e) {
             this.log.error(e.getMessage(), e);
         }
