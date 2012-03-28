@@ -780,9 +780,10 @@
 //                      this.get("bookmarks").addBookmark(new Y.lane.Bookmark({label : "", url : "", href : ""}));
                   },
                   "delete" : function() {
-                      var checked = this._getCheckedIndexes();
-                      if (checked.length > 0) {
-                          this.get("bookmarks").removeBookmark(checked[0]);
+                      var i, bookmarks = this.get("bookmarks"),
+                          checked = this._getCheckedIndexes();
+                      for (i = checked.length - 1; i >= 0; --i) {
+                          bookmarks.removeBookmark(checked[i]);
                       }
                   },
                   edit : function() {
