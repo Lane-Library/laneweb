@@ -658,8 +658,8 @@
                 },
                 syncUI : function() {
                     var srcNode = this.get("srcNode");
-                    this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"), "Name");
-                    this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"), "location");
+                    this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"));
+                    this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"));
                 },
                 cancel : function() {
                     if (this.get("bookmark")) {
@@ -674,23 +674,30 @@
                     var newlabel = this._labelInput.getValue(),
                         newurl = this._urlInput.getValue(),
                         bookmark = this.get("bookmark");
+                    if (!newlabel || !newurl) {
+                        if (!newlabel) {
+                            this._labelInput.setHintText("required");
+                        }
+                        if (!newurl) {
+                            this._urlInput.setHintText("required");
+                        }
+                        return;
+                    }
                     if (bookmark) {
                         if (newlabel != bookmark.getLabel() || newurl != bookmark.getUrl()) {
                             bookmark.setValues(newlabel, newurl);
                         }
-                    } else if (newlabel && newurl) {
+                    } else {
                         bookmark = new Bookmark(newlabel, newurl);
                         this.set("bookmark", bookmark);
                         Y.lane.BookmarksWidget.get("bookmarks").addBookmark(bookmark);
-                    } else {
-                        //do nothing if empty input field
-                        //TODO: some sort of error reporting to user
-                        return;
                     }
                     this.set("editing", false);
                 },
                 reset : function() {
                     var bookmark = this.get("bookmark");
+                    this._labelInput.setHintText("Name");
+                    this._urlInput.setHintText("location");
                     if (bookmark) {
                         this._labelInput.setValue(bookmark.getLabel());
                         this._urlInput.setValue(bookmark.getUrl());
