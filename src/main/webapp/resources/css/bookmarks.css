@@ -3,7 +3,11 @@
 	float: none;
 	border-left: none;
 	margin: 0;
-	padding: 1px 5px;
+	padding: 10px;
+}
+#favorites ul {
+	border-top: 1px solid #dadad9;
+	/* margin-top: 1em; */
 }
 
 #bookmark-link {
@@ -24,24 +28,24 @@ background-position: 0 -26px
 }
 
 #bookmark-link.successful {
-background-position: 0 -53px
+background-position: 0 -53px;
 }
 
 .yui3-bookmark-editor label,
 .yui3-bookmark-editor input[type='text'],
 .yui3-bookmark-editor button {
-    display:none
+    display:none;
 }
 
 .yui3-bookmark-editor-active label,
 .yui3-bookmark-editor-active input[type='text'],
 .yui3-bookmark-editor-active button {
-    display:inline
+    display:inline;
 }
 
 .yui3-bookmark-editor-active a,
 .yui3-bookmark-editor-active input[type='checkbox'] {
-    display:none
+    display:none;
 }
 
 #bookmarks-editor  {
@@ -55,7 +59,6 @@ background-position: 0 -53px
 }
 
 #bookmarks-editor button {
-	/*TODO: not sure why this was here: display: inline-block;*/
 	margin: 5px;
 	padding: 5px 12px;
 	font-weight: bold;
@@ -69,7 +72,7 @@ background-position: 0 -53px
 	/*filter necessary to display gradient in IE*/
 	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fafbf8', endColorstr ='#dadad4' );
 	border: 1px solid #dadad9;
-	text-transform:capitalize
+	text-transform:capitalize;
 }
 
 #bookmarks-editor button:hover {
