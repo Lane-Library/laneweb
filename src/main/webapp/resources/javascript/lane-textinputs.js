@@ -46,6 +46,10 @@
                     _reset(input);
                 }
             },
+            //added reset function so BookmarkEditor can reset
+            reset : function() {
+                _reset(input);
+            },
             destroy: function() {
                 input.detach(focusHandle);
                 input.detach(blurHandle);

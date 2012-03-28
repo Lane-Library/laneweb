@@ -690,11 +690,14 @@
                     this.set("editing", false);
                 },
                 reset : function() {
-                    var bookmark = this.get("bookmark"),
-                        resetLabel = bookmark ? bookmark.getLabel() : "",
-                        resetUrl = bookmark ? bookmark.getUrl() : "";
-                    this._labelInput.setValue(resetLabel);
-                    this._urlInput.setValue(resetUrl);
+                    var bookmark = this.get("bookmark");
+                    if (bookmark) {
+                        this._labelInput.setValue(bookmark.getLabel());
+                        this._urlInput.setValue(bookmark.getUrl());
+                    } else {
+                        this._labelInput.reset();
+                        this._urlInput.reset();
+                    }
                 },
                 update : function() {
                     var anchor = this.get("srcNode").one("a"),
