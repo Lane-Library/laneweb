@@ -448,7 +448,7 @@
             },
             _bookmarksRemoved : function(event) {
                 var i, items = this.get("srcNode").all("li");
-                for (i = items.size() - 1; i >= 0; --i) {
+                for (i = event.positions.length - 1; i >= 0; --i) {
                     items.item(event.positions[i]).remove(true);
                 }
             },
@@ -805,7 +805,7 @@
                   _handleBookmarksRemove : function(event) {
                       //TODO: handle event.success == false
                       var i, editors = this.get("editors");
-                      for (i = editors.length - 1; i >= 0; --i) {
+                      for (i = event.positions.length - 1; i >= 0; --i) {
                           editors[event.positions[i]].destroy(true);
                       }
                   },
