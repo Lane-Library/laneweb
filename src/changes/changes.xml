@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-04-02" version="1.12.22" description="1.12.22 bug fix release">
+            <action date="2012-03-28" dev="ceyates" issue="67307" type="update">
+                put 'required' into text input if empty when submitting bookmark editor
+            </action>
             <action date="2012-03-27" dev="ceyates" issue="67306" type="update">
                 put the labels for bookmark editor text inputs inside
             </action>
