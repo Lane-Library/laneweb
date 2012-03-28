@@ -440,11 +440,15 @@
                 bookmarks.after("removeSync", this._bookmarksRemoved, this);
                 bookmarks.after("updateSync", this._bookmarkUpdated, this);
             },
+            syncUI : function() {
+                this._truncateLabels();
+            },
             toString : function() {
                 return "BookmarksWidget:" + this.get("bookmarks");
             },
             _bookmarkAdded : function(event) {
                 this.get("srcNode").prepend("<li><a href='" + event.bookmark.getUrl() + "'>" + event.bookmark.getLabel() + "</a></li>");
+                this._truncateLabels();
             },
             _bookmarksRemoved : function(event) {
                 var i, items = this.get("srcNode").all("li");
@@ -457,6 +461,7 @@
                 anchor = this.get("srcNode").all("li").item(event.position).one("a");
                 anchor.set("innerHTML", bookmark.getLabel());
                 anchor.set("href", bookmark.getUrl());
+                this._truncateLabels();
             },
             _truncateLabels : function() {
                 var i, anchor, label, anchors = this.get("srcNode").all("a");
@@ -724,7 +729,7 @@
                 update : function() {
                     var anchor = this.get("srcNode").one("a"),
                         bookmark = this.get("bookmark");
-                    anchor.set("innerHTML", displayLabel);
+                    anchor.set("innerHTML", bookmark.getLabel());
                     anchor.set("href", bookmark.getUrl());
                     this._truncateLabel();
                 },
