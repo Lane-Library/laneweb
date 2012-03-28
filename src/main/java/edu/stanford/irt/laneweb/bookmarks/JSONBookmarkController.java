@@ -41,8 +41,12 @@ public class JSONBookmarkController extends BookmarkController {
     public void deleteBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.SUNETID) final String sunetid,
-            @RequestBody final int i) {
-        bookmarks.remove(i);
+            @RequestBody final int[] i) {
+        //sort the array to be sure in order
+        Arrays.sort(i);
+        for (int j = i.length - 1; j >= 0; --j) {
+            bookmarks.remove(i[j]);
+        }
         saveLinks(sunetid, bookmarks);
     }
     

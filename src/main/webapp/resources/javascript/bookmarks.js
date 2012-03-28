@@ -205,12 +205,12 @@
                 
                 /**
                  * fires a bookmark:remove event
-                 * @method removeBookmark
-                 * @param position {number} the bookmark to remove
+                 * @method removeBookmarks
+                 * @param positions {Array} the bookmarks to remove
                  */
-                removeBookmark : function(position) {
-                    Y.log(this + " firing remove: " + position);
-                    this.fire("remove", {position : position});
+                removeBookmarks : function(positions) {
+                    Y.log(this + " firing remove: " + positions);
+                    this.fire("remove", {positions : positions});
                 },
                 
                 /**
@@ -297,7 +297,7 @@
                  * @param event {CustomEvent}
                  */
                 _defRemoveFn : function(event) {
-                    var data = Y.JSON.stringify(event.position);
+                    var data = Y.JSON.stringify(event.positions);
                     Y.io("/././bookmarks", {
                         method : "delete",
                         data : data,
@@ -306,20 +306,19 @@
                         },
                         on : {
                             success : function() {
-                                Y.log(this + " firing removeSync: successful " + event.position);
-                                this.fire("removeSync", {success: true, position : event.position});
+                                Y.log(this + " firing removeSync: successful " + event.positions);
+                                this.fire("removeSync", {success: true, positions : event.positions});
                             },
                             failure : function() {
-                                Y.log(this + " firing removeSync: failed " + event.position);
-                                this.fire("removeSync", {success: false, position : event.position});
+                                Y.log(this + " firing removeSync: failed " + event.positions);
+                                this.fire("removeSync", {success: false, positions : event.positions});
                             }
                         },
                         "arguments" : {
-                            position : event.position
+                            positions : event.positions
                         },
                         context : this
                     });
-                    this._bookmarks.splice(event.position, 1);
                 },
                 
                 /**
@@ -366,7 +365,7 @@
                 },
                 
                 /**
-                 * handler for bookmarks:removeSync event, removes a bookmark from the
+                 * handler for bookmarks:removeSync event, removes bookmarks from the
                  * backing Array
                  * @method _handleRemoveSync
                  * @private
@@ -374,7 +373,9 @@
                  */
                 _handleRemoveSync : function(event) {
                     if (event.success) {
-                        this._bookmarks.splice(event.position, 1);
+                        for (var i = event.positions.length - 1; i >=0; --i) {
+                            this._bookmarks.splice(event.positions[i], 1);
+                        }
                     }
                 },
                 
@@ -436,7 +437,7 @@
             bindUI : function() {
                 var bookmarks = this.get("bookmarks");
                 bookmarks.after("addSync", this._bookmarkAdded, this);
-                bookmarks.after("removeSync", this._bookmarkRemoved, this);
+                bookmarks.after("removeSync", this._bookmarksRemoved, this);
                 bookmarks.after("updateSync", this._bookmarkUpdated, this);
             },
             toString : function() {
@@ -445,8 +446,11 @@
             _bookmarkAdded : function(event) {
                 this.get("srcNode").prepend("<li><a href='" + event.bookmark.getUrl() + "'>" + event.bookmark.getLabel() + "</a></li>");
             },
-            _bookmarkRemoved : function(event) {
-                this.get("srcNode").all("li").item(event.position).remove(true);
+            _bookmarksRemoved : function(event) {
+                var i, items = this.get("srcNode").all("li");
+                for (i = items.size() - 1; i >= 0; --i) {
+                    items.item(event.positions[i]).remove(true);
+                }
             },
             _bookmarkUpdated : function(event) {
                 var bookmark = this.get("bookmarks").getBookmark(event.position),
@@ -760,7 +764,7 @@
                         editors.push(editor);
                     }
                     this.set("editors", editors);
-                    bookmarks.after("removeSync", this._handleBookmarkRemove, this);
+                    bookmarks.after("removeSync", this._handleBookmarksRemove, this);
                     bookmarks.after("addSync", this._handleBookmarkAdd, this);
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
                     srcNode.one("fieldset").prepend(checkBox);
@@ -799,9 +803,12 @@
                           fn.call(this);
                       }
                   },
-                  _handleBookmarkRemove : function(event) {
+                  _handleBookmarksRemove : function(event) {
                       //TODO: handle event.success == false
-                      this.get("editors")[event.position].destroy(true);
+                      var i, editors = this.get("editors");
+                      for (i = editors.length - 1; i >= 0; --i) {
+                          editors[event.positions[i]].destroy(true);
+                      }
                   },
                   _handleDestroyEditor : function(event) {
                       var editors = this.get("editors"),
