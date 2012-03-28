@@ -457,6 +457,16 @@
                 anchor = this.get("srcNode").all("li").item(event.position).one("a");
                 anchor.set("innerHTML", bookmark.getLabel());
                 anchor.set("href", bookmark.getUrl());
+            },
+            _truncateLabels : function() {
+                var i, anchor, label, anchors = this.get("srcNode").all("a");
+                for (i = 0; i < anchors.size(); i++) {
+                    anchor = anchors.item(i);
+                    label = anchor.get("innerHTML");
+                    if (label.length > 32) {
+                        anchor.set("innerHTML", label.substring(0, 32) + "...");
+                    }
+                }
             }
         });
 
@@ -664,6 +674,7 @@
                     var srcNode = this.get("srcNode");
                     this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"));
                     this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"));
+                    this._truncateLabel();
                 },
                 cancel : function() {
                     if (this.get("bookmark")) {
@@ -712,9 +723,10 @@
                 },
                 update : function() {
                     var anchor = this.get("srcNode").one("a"),
-                    bookmark = this.get("bookmark");
-                    anchor.set("innerHTML", bookmark.getLabel());
+                        bookmark = this.get("bookmark");
+                    anchor.set("innerHTML", displayLabel);
                     anchor.set("href", bookmark.getUrl());
+                    this._truncateLabel();
                 },
                 _handleButtonClick : function(event) {
                     event.preventDefault();
@@ -736,6 +748,13 @@
                 },
                 _handleChange : function(event) {
                     this.set("checked", event.target.get("checked"));
+                },
+                _truncateLabel : function() {
+                    var anchor = this.get("srcNode").one("a"),
+                        label = anchor.get("innerHTML");
+                    if (label.length > 130) {
+                        anchor.set("innerHTML", label.substring(0, 130) + "...");
+                    }
                 }
             }, {
                 ATTRS : {
