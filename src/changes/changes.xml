@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-04-02" version="1.12.22" description="1.12.22 bug fix release">
+            <action date="2012-03-29" dev="ceyates" issue="67429" type="fix">
+                inscrutable behavior of checkboxes in bookmarks editor in IE8
+            </action>
             <action date="2012-03-28" dev="olgary" issue="67413" type="update">
                 lane-nav.css: changes to shading on lane nav drop down and favorite drop down 
             </action>
