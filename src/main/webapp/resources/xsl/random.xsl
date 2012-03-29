@@ -16,20 +16,7 @@
     -->    
 
     <xsl:template match="/">
-        <xsl:call-template name="display-element">
-            <xsl:with-param name="int" select="floor(math:random() * count(/h:html/h:body/h:div) + 1 )"/>
-        </xsl:call-template>
-    </xsl:template>
-
-    <xsl:template name="display-element">
-        <xsl:param name="int"/>
-        <xsl:copy-of select="/h:html/h:body/h:div[$int]"/>
-    </xsl:template>
-
-    <xsl:template match="*">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy>
+        <xsl:copy-of select="/h:html/h:body/h:div[floor(math:random() * count(/h:html/h:body/h:div) + 1 )]"/>
     </xsl:template>
 
 
