@@ -792,7 +792,7 @@
                     bookmarks.after("addSync", this._handleBookmarkAdd, this);
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
                     srcNode.one("fieldset").prepend(checkBox);
-                    checkBox.on("change", this._handleCheckedChange, this);
+                    checkBox.on("click", this._handleCheckboxClick, this);
                 },
                 bindUI : function() {
                     this.get("srcNode").all("fieldset button").on("click", this._handleButtonClick, this);
@@ -847,7 +847,7 @@
                     var editors = this.get("editors");
                     editors[event.position].update();
                 },
-                _handleCheckedChange : function(event) {
+                _handleCheckboxClick : function(event) {
                     var i, editors = this.get("editors");
                     for (i = 0; i < editors.length; i++) {
                         editors[i].set("checked", event.target.get("checked"));
