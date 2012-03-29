@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
- * This class will add two cookies the persistent-preference and user.  
+ * This class will add three cookies the persistent-expired-date, persistent-preference and user.  
  * The user coolie will have the sunetid, the userAgent and the expired date appended and  encrypted.   
  * The persistent-preference have the expired date minus 3 days
  * only pl=true have to have the secure in the path but not the other 
@@ -10,6 +10,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
  * denied because if it is equals denied the persistent window will never appear.  
  * 
  */
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -41,6 +42,9 @@ public class PersistentLoginController {
 		Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
 		if (null != isActiveSunetID && isActiveSunetID) {
 			checkSunetIdAndSetCookies(request, response);
+		}
+		else{
+			resetCookies(request, response);
 		}
 		return "redirect:".concat(url);
 	}
@@ -82,11 +86,22 @@ public class PersistentLoginController {
 		}
 	}
 
+
+	
+	private void resetCookies(final HttpServletRequest request, HttpServletResponse response) {
+		Cookie cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, null);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		removeCookies(request, response);
+	}
+
+	
 	private void removeCookies(final HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie webCookie : cookies) {
-				if (PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE.equals(webCookie.getName())) {
+				if (PERSISTENT_LOGIN_PREFERENCE.equals(webCookie.getName())) {
 					String cookieValue = webCookie.getValue();
 					if (!"denied".equals(cookieValue)) {
 						webCookie.setPath("/");
@@ -113,7 +128,7 @@ public class PersistentLoginController {
 		if (null != sunetid) {
 			setCookies(request, response, sunetid);
 		} else {
-			removeCookies(request, response);
+			resetCookies(request, response);
 		}
 	}
 
