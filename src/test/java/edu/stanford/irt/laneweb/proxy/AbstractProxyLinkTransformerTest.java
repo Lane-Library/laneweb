@@ -46,7 +46,6 @@ public class AbstractProxyLinkTransformerTest {
     @Test
     public void testHospitalIP() {
         this.model.put(Model.IPGROUP, IPGroup.SHC);
-        expect(this.parameters.getParameter(isA(String.class), (String) isNull())).andReturn(null).atLeastOnce();
         replay(this.parameters);
         this.transformer.setup(null, this.model, null, this.parameters);
         assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
@@ -56,7 +55,6 @@ public class AbstractProxyLinkTransformerTest {
     @Test
     public void testGetKeyTrue() {
     	this.model.put(Model.PROXY_LINKS, Boolean.TRUE);
-        expect(this.parameters.getParameter(isA(String.class), (String) isNull())).andReturn(null).atLeastOnce();
         replay(this.parameters);
         this.transformer.setup(null, this.model, null, this.parameters);
         assertEquals("true", this.transformer.getKey());
@@ -66,7 +64,6 @@ public class AbstractProxyLinkTransformerTest {
     @Test
     public void testGetKeyFalse() {
     	this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
-        expect(this.parameters.getParameter(isA(String.class), (String) isNull())).andReturn(null).atLeastOnce();
         replay(this.parameters);
         this.transformer.setup(null, this.model, null, this.parameters);
         assertEquals("false", this.transformer.getKey());
@@ -76,7 +73,6 @@ public class AbstractProxyLinkTransformerTest {
     @Test
     public void testGetValidityCacheable() {
     	this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
-        expect(this.parameters.getParameter(isA(String.class), (String) isNull())).andReturn(null).atLeastOnce();
         replay(this.parameters);
         this.transformer.setup(null, this.model, null, this.parameters);
         assertEquals(SourceValidity.VALID, this.transformer.getValidity().isValid());
@@ -86,7 +82,6 @@ public class AbstractProxyLinkTransformerTest {
     @Test
     public void testGetValidityNotCacheable() {
     	this.model.put(Model.PROXY_LINKS, Boolean.TRUE);
-        expect(this.parameters.getParameter(isA(String.class), (String) isNull())).andReturn(null).atLeastOnce();
         replay(this.parameters);
         this.transformer.setup(null, this.model, null, this.parameters);
         assertNull(this.transformer.getValidity());

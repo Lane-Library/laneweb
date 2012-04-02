@@ -7,6 +7,7 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -21,7 +22,7 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
 
     private String region;
 
-    public void generate() throws SAXException {
+    public void generate() {
         Collection<Eresource> eresources = null;
         if (this.bassettNumber != null) {
             eresources = this.collectionManager.getById(this.bassettNumber);
@@ -35,10 +36,14 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
             eresources = this.collectionManager.search(this.query);
         }
         XMLConsumer xmlConsumer = getXMLConsumer();
-        xmlConsumer.startDocument();
-        XMLizable xml = new XMLLizableBassettEresourceList(eresources);
-        xml.toSAX(xmlConsumer);
-        xmlConsumer.endDocument();
+        try {
+            xmlConsumer.startDocument();
+            XMLizable xml = new XMLLizableBassettEresourceList(eresources);
+            xml.toSAX(xmlConsumer);
+            xmlConsumer.endDocument();
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     @Override

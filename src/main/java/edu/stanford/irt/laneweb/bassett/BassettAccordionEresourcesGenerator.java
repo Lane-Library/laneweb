@@ -6,6 +6,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -14,13 +15,17 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
  */
 public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerator {
 
-    public void generate() throws SAXException {
+    public void generate() {
         Map<String, Integer> regionCountMap = this.collectionManager.searchCount(null, null, this.query);
         XMLConsumer xmlConsumer = getXMLConsumer();
-        xmlConsumer.startDocument();
-        XMLizable xml = new XMLLizableBassettCount(regionCountMap);
-        xml.toSAX(xmlConsumer);
-        xmlConsumer.endDocument();
+        try {
+            xmlConsumer.startDocument();
+            XMLizable xml = new XMLLizableBassettCount(regionCountMap);
+            xml.toSAX(xmlConsumer);
+            xmlConsumer.endDocument();
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     @Override

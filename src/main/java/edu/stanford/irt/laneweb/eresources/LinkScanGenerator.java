@@ -11,6 +11,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.laneweb.util.XMLUtils;
@@ -24,7 +25,7 @@ public class LinkScanGenerator extends AbstractGenerator {
 
     private DataSource dataSource;
 
-    public void generate() throws SAXException {
+    public void generate() {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -58,7 +59,9 @@ public class LinkScanGenerator extends AbstractGenerator {
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "ul");
             xmlConsumer.endDocument();
         } catch (SQLException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
+        } catch (SAXException e) {
+            throw new LanewebException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);

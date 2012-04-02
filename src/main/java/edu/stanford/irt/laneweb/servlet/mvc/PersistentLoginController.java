@@ -10,7 +10,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
  * denied because if it is equals denied the persistent window will never appear.  
  * 
  */
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.PersistentLoginFilter;
 import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
 import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.servlet.SunetIdSource;

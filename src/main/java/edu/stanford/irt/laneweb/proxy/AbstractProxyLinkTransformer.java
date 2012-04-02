@@ -68,8 +68,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer i
         this.ticket = ModelUtil.getObject(getModel(), Model.TICKET, Ticket.class);
         this.proxyLinks = ModelUtil.getObject(getModel(), Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
         this.ipGroup = ModelUtil.getObject(getModel(), Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
-        this.basePath = getParameterMap().containsKey(Model.BASE_PATH) ? getParameterMap().get(Model.BASE_PATH) : ModelUtil
-                .getString(getModel(), Model.BASE_PATH);
+        this.basePath = ModelUtil.getString(getModel(), Model.BASE_PATH);
     }
     
     protected ProxyHostManager getProxyHostManager() {

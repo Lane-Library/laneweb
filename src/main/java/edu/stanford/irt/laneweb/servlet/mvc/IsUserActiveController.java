@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-
 @Controller
 public class IsUserActiveController {
 

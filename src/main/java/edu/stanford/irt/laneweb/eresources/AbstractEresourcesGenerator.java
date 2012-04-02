@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -23,8 +24,12 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     protected String type;
 
-    public void generate() throws SAXException {
-        new PagingXMLizableEresourceList(getEresourceList(), this.page).toSAX(getXMLConsumer());
+    public void generate() {
+        try {
+            new PagingXMLizableEresourceList(getEresourceList(), this.page).toSAX(getXMLConsumer());
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {

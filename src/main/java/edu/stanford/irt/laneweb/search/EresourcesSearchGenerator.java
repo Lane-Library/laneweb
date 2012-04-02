@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -8,6 +7,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -17,10 +17,14 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
 
     private String type;
 
-    public void generate() throws IOException, SAXException {
+    public void generate() {
         PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.page);
         eresources.addAll(getEresourceList());
-        eresources.toSAX(getXMLConsumer());
+        try {
+            eresources.toSAX(getXMLConsumer());
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {

@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.ContentResult;
@@ -33,10 +34,14 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
     protected Collection<String> engines;
 
     @Override
-    public void generate() throws SAXException {
+    public void generate() {
         PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.page);
         mergedSearchResults.addAll(getContentResultList(doSearch()));
-        mergedSearchResults.toSAX(getXMLConsumer());
+        try {
+            mergedSearchResults.toSAX(getXMLConsumer());
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     public void setContentResultLimit(final int contentResultLimit) {

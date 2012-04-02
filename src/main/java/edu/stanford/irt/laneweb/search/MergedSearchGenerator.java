@@ -7,6 +7,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * @author ryanmax
@@ -16,11 +17,15 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
     private CollectionManager collectionManager;
 
     @Override
-    public void generate() throws SAXException {
+    public void generate() {
         PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.page);
         mergedSearchResults.addAll(getEresourceList());
         mergedSearchResults.addAll(getContentResultList(doSearch()));
-        mergedSearchResults.toSAX(getXMLConsumer());
+        try {
+            mergedSearchResults.toSAX(getXMLConsumer());
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {

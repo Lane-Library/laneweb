@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.util.SAXResult;
@@ -11,11 +12,15 @@ public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerato
 
     protected MetaSearchManager metaSearchManager;
 
-    public void generate() throws SAXException {
+    public void generate() {
         Result result = doSearch();
         SAXable xml = new SAXResult(result);
         synchronized (result) {
-            xml.toSAX(getXMLConsumer());
+            try {
+                xml.toSAX(getXMLConsumer());
+            } catch (SAXException e) {
+                throw new LanewebException(e);
+            }
         }
     }
 

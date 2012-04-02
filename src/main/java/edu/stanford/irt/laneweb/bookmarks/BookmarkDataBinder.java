@@ -16,13 +16,13 @@ public class BookmarkDataBinder implements DataBinder {
 
     private boolean enabled;
 
-    @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         if (this.enabled) {
             String sunetid = (String) model.get(Model.SUNETID);
             if (sunetid != null) {
                 List<Bookmark> bookmarks = null;
                 HttpSession session = request.getSession();
+                @SuppressWarnings("unchecked")
                 List<Bookmark> sessionBookmarks = (List<Bookmark>) session.getAttribute(Model.BOOKMARKS);
                 if (sessionBookmarks == null) {
                     bookmarks = this.bookmarkDAO.getLinks(sunetid);
