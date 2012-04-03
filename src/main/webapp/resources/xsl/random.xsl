@@ -4,7 +4,7 @@
                        xmlns="http://www.w3.org/1999/xhtml"
                        xmlns:math="http://exslt.org/math"
                        exclude-result-prefixes="h math"
-                       version="2.0">
+                       version="1.0">
 
     <!--
      return a random div element from a node set of divs
@@ -13,6 +13,9 @@
            href="content:/random?source=content:/random-data.html"><xi:fallback/>
         </xi:include
         where random-data.html is a simple html doc with n child divs of the body tag
+        
+     Note: this is a version 1.0 stylesheet because it uses xalan, which only knows about 1.0
+           and not saxon because later versions of saxon don't know about exslt extensions.
     -->    
 
     <xsl:template match="/">

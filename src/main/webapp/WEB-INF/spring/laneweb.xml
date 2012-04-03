@@ -93,6 +93,17 @@
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
     
+    <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/xalan"
+        class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+                <property name="transformerFactoryClass" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg ref="javax.xml.transform.URIResolver"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
+    </bean>
+    
     <bean id="javax.xml.transform.URIResolver"
         class="edu.stanford.irt.laneweb.cocoon.LanewebURIResolver">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
