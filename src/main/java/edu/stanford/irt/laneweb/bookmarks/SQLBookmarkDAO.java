@@ -110,17 +110,21 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             conn.commit();
         } catch (SQLException e) {
             this.log.error(e.getMessage(), e);
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                this.log.error(e1.getMessage(), e1);
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException e1) {
+                    this.log.error(e1.getMessage(), e1);
+                }
             }
         } catch (IOException e) {
             this.log.error(e.getMessage(), e);
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                this.log.error(e1.getMessage(), e1);
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException e1) {
+                    this.log.error(e1.getMessage(), e1);
+                }
             }
         } finally {
             JdbcUtils.closeConnection(conn);
