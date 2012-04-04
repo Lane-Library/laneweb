@@ -586,7 +586,6 @@
                     node.removeClass("active");
                     node.removeClass("bookmarking");
                     node.removeClass("successful");
-                    node.removeClass("failed");
                     break;
                 //READY: visible but not enabled
                 case BookmarkLink.READY :
@@ -608,18 +607,12 @@
                     node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.replaceClass("bookmarking", "successful");
                     break;
-                //FAILED: server sync failed
-                case BookmarkLink.FAILED : 
-                    node.on("mouseout", this._handleBookmarkMouseout, this);
-                    node.replaceClass("bookmarking", "failed");
-                    break;
                 //TIMING: waiting to hide
                 case BookmarkLink.TIMING :
                     node.on("mouseover",this._handleBookmarkMouseover, this);
                     node.removeClass("active");
                     node.removeClass("bookmarking");
                     node.removeClass("successful");
-                    node.removeClass("failed");
                     this._timer = Y.later(this.get("hideDelay"), this, this._hide);
                 default:
                 }
@@ -630,8 +623,7 @@
             ACTIVE : 2,
             BOOKMARKING : 3,
             SUCCESSFUL : 4,
-            FAILED : 5,
-            TIMING : 6
+            TIMING : 5
         });
 
         Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
@@ -713,7 +705,11 @@
                 },
                 _handleButtonClick : function(event) {
                     event.preventDefault();
-                    this[event.target.getAttribute("value")].call(this, event);
+                    //pressing return generates a click on the add button for some reason
+                    //pageX is 0 in that situation
+                    if (event.pageX !== 0) {
+                        this[event.target.getAttribute("value")].call(this, event);
+                    }
                 },
                 _handleEditingChange : function(event) {
                     var srcNode = this.get("srcNode"),
