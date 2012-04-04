@@ -259,7 +259,7 @@
                 
                 /**
                  * The default response to bookmarks:add, attempts to sync with server, fires
-                 * bookmarks:addSync if successful.
+                 * bookmarks:addSync.
                  * @method _defAddFn
                  * @private
                  * @param event {CustomEvent}
@@ -543,17 +543,17 @@
             
             initializer : function() {
                 this._timer = null;
-                var node = this.get("node");
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
                 this.on("statusChange", this._handleStatusChange);
-                this.get("bookmarks").on("addSync", this._handleSyncEvent, this);
+                this.get("bookmarks").after("addSync", this._handleSyncEvent, this);
             },
             _handleSyncEvent : function(event) {
                 if (event.success) {
                     this.set("status", BookmarkLink.SUCCESSFUL);
                 } else {
                     this.set("status", BookmarkLink.FAILED);
+                    alert("Sorry, bookmarking failed.");
                 }
             },
             _handleBookmarkMouseout : function(event) {
@@ -827,10 +827,13 @@
                       }
                   },
                   _handleBookmarksRemove : function(event) {
-                      //TODO: handle event.success == false
-                      var i, editors = this.get("editors");
-                      for (i = event.positions.length - 1; i >= 0; --i) {
-                          editors[event.positions[i]].destroy(true);
+                      if (event.success) {
+                          var i, editors = this.get("editors");
+                          for (i = event.positions.length - 1; i >= 0; --i) {
+                              editors[event.positions[i]].destroy(true);
+                          }
+                      } else {
+                          alert("Sorry, delete bookmarks failed.");
                       }
                   },
                   _handleDestroyEditor : function(event) {
@@ -839,13 +842,19 @@
                       editors.splice(position, 1);
                   },
                   _handleBookmarkAdd : function(event) {
-                      //TODO: handle event.success == false
-                      this.get("editors")[event.target.indexOf(event.bookmark)].update();
+                      if (event.success) {
+                          this.get("editors")[event.target.indexOf(event.bookmark)].update();
+                      } else {
+                          alert("Sorry, add bookmark failed.");
+                      }
                   },
                 _handleBookmarkUpdate : function(event) {
-                    //TODO: handle event.success == false
-                    var editors = this.get("editors");
-                    editors[event.position].update();
+                    if (event.success) {
+                        var editors = this.get("editors");
+                        editors[event.position].update();
+                    } else {
+                        alert("Sorry, update bookmark failed.");
+                    }
                 },
                 _handleCheckboxClick : function(event) {
                     var i, editors = this.get("editors");
