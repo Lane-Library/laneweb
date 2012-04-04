@@ -705,11 +705,7 @@
                 },
                 _handleButtonClick : function(event) {
                     event.preventDefault();
-                    //pressing return generates a click on the add button for some reason
-                    //pageX is 0 in that situation
-                    if (event.pageX !== 0) {
-                        this[event.target.getAttribute("value")].call(this, event);
-                    }
+                    this[event.target.getAttribute("value")].call(this, event);
                 },
                 _handleEditingChange : function(event) {
                     var srcNode = this.get("srcNode"),
@@ -795,9 +791,14 @@
                   },
                   _handleButtonClick : function(event) {
                       event.preventDefault();
-                      var fn = this[event.target.getAttribute("value")];
-                      if (fn) {
-                          fn.call(this);
+                      //see case 67695
+                      //pressing return generates a click on the add button for some reason
+                      //pageX is 0 in that situation
+                      if (event.pageX !== 0) {
+                          var fn = this[event.target.getAttribute("value")];
+                          if (fn) {
+                              fn.call(this);
+                          }
                       }
                   },
                   _handleBookmarksRemove : function(event) {
