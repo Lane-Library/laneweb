@@ -771,7 +771,7 @@
                     var items = this.get("srcNode").one("ul");
                     var item = Y.Node.create("<li><input type=\"checkbox\" checked=\"checked\"/><a></a></li>");
                     items.prepend(item);
-                    var editor = new BookmarkEditor({srcNode : item, render : true});
+                    var editor = new BookmarkEditor({srcNode : item, render : true, checked : true});
                     editor.after("destroy", this._handleDestroyEditor, this);
                     this.get("editors").unshift(editor);
                     editor.set("editing", true);
