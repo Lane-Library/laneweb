@@ -1,5 +1,3 @@
-
-//TODO: remove logging before deployment.
 (function() {
 
     var Bookmark, Bookmarks, BookmarksWidget, BookmarkLink, BookmarkEditor, BookmarksEditor;
@@ -17,7 +15,6 @@
         Bookmark = function(label, url) {
             this.publish("valueChange", {defaultFn : this._valueChange});
             this.setValues(label, url);
-            Y.log("created new " + this);
         };
 
         Bookmark.prototype = {
@@ -92,7 +89,6 @@
                             changed = true;
                         }
                     if (changed) {
-                        Y.log(this + " firing valueChange: newLabel:" + newLabel + ",newUrl:" + newUrl);
                         this.fire("valueChange", {prevLabel : this._label, prevUrl : this._url, newLabel : newLabel,  newUrl : newUrl});
                     }
                 },
@@ -127,7 +123,6 @@
         Bookmarks = function(bookmarks) {
             this._bookmarks = [];
             if (bookmarks && !Y.Lang.isArray(bookmarks)) {
-                Y.log('bad config', 'error', 'bookmarks');
                 throw("bad config");
             }
             if (bookmarks) {
@@ -176,7 +171,6 @@
              */
             //TODO: handle updateSync failure
             this.publish("updateSync", {preventable : false});
-            Y.log("created new " + this);
         };
 
         Bookmarks.prototype = {
@@ -190,7 +184,6 @@
                     if (!Y.Lang.isObject(bookmark)) {
                         throw ("bad bookmark");
                     }
-                    Y.log(this + " firing add: " + bookmark);
                     this.fire("add", {bookmark : bookmark});
                 },
                 
@@ -209,7 +202,6 @@
                  * @param positions {Array} the bookmarks to remove
                  */
                 removeBookmarks : function(positions) {
-                    Y.log(this + " firing remove: " + positions);
                     this.fire("remove", {positions : positions});
                 },
                 
@@ -220,7 +212,6 @@
                  */
                 updateBookmark : function(bookmark) {
                     var position = Y.Array.indexOf(this._bookmarks, bookmark);
-                    Y.log(this + " firing update: position: " + position + " " + bookmark);
                     this.fire("update", {bookmark : bookmark, position : position});
                 },
                 
@@ -274,12 +265,10 @@
                         },
                         on : {
                             success : function() {
-                                Y.log(this + " firing addSync: successful " + event.bookmark);
                                 this.fire("addSync", {success : true, bookmark : event.bookmark});
                             },
                             failure : function() {
-                                Y.log(this + " firing addSync: failed " + event.bookmark);
-                                this.fire("addSync", {success : false, bookmark : event.bookmark});
+                                this._handleSyncFailure("Sorry, add bookmark failed.");
                             }
                         },
                         "arguments" : {
@@ -306,12 +295,10 @@
                         },
                         on : {
                             success : function() {
-                                Y.log(this + " firing removeSync: successful " + event.positions);
                                 this.fire("removeSync", {success: true, positions : event.positions});
                             },
                             failure : function() {
-                                Y.log(this + " firing removeSync: failed " + event.positions);
-                                this.fire("removeSync", {success: false, positions : event.positions});
+                                this._handleSyncFailure("Sorry, delete bookmark failed.");
                             }
                         },
                         "arguments" : {
@@ -338,12 +325,10 @@
                         },
                         on : {
                             success :  function() {
-                                Y.log(this + " firing updateSync: successful " + event.position);
                                 this.fire("updateSync", {success : true, position : event.position});
                             },
                             failure :  function() {
-                                Y.log(this + " firing updateSync: failed" + event.position);
-                                this.fire("updateSync", {success: false, position : event.position});
+                                this._handleSyncFailure("Sorry, bookmark update failed.");
                             }
                         },
                         "arguments" : {
@@ -372,11 +357,9 @@
                  * @param event {CustomEvent}
                  */
                 _handleRemoveSync : function(event) {
-                    if (event.success) {
                         for (var i = event.positions.length - 1; i >=0; --i) {
                             this._bookmarks.splice(event.positions[i], 1);
                         }
-                    }
                 },
                 
                 /**
@@ -387,10 +370,11 @@
                  * @param event {CustomEvent}
                  */
                 _handleAddSync : function(event) {
-                    if (event.success) {
                         event.bookmark.after("valueChange", this._handleValueChange, this);
                         this._bookmarks.unshift(event.bookmark);
-                    }
+                },
+                _handleSyncFailure : function(message) {
+                    alert(message);
                 }
         };
 
@@ -403,7 +387,6 @@
 
         BookmarksWidget = function() {
             BookmarksWidget.superclass.constructor.apply(this, arguments);
-            Y.log("created new " + this);
         };
 
         BookmarksWidget.NAME = "bookmarks";
@@ -549,12 +532,7 @@
                 this.get("bookmarks").after("addSync", this._handleSyncEvent, this);
             },
             _handleSyncEvent : function(event) {
-                if (event.success) {
-                    this.set("status", BookmarkLink.SUCCESSFUL);
-                } else {
-                    this.set("status", BookmarkLink.FAILED);
-                    alert("Sorry, bookmarking failed.");
-                }
+                this.set("status", BookmarkLink.SUCCESSFUL);
             },
             _handleBookmarkMouseout : function(event) {
                 this.set("status", BookmarkLink.TIMING);
@@ -827,14 +805,10 @@
                       }
                   },
                   _handleBookmarksRemove : function(event) {
-                      if (event.success) {
                           var i, editors = this.get("editors");
                           for (i = event.positions.length - 1; i >= 0; --i) {
                               editors[event.positions[i]].destroy(true);
                           }
-                      } else {
-                          alert("Sorry, delete bookmarks failed.");
-                      }
                   },
                   _handleDestroyEditor : function(event) {
                       var editors = this.get("editors"),
@@ -842,19 +816,11 @@
                       editors.splice(position, 1);
                   },
                   _handleBookmarkAdd : function(event) {
-                      if (event.success) {
                           this.get("editors")[event.target.indexOf(event.bookmark)].update();
-                      } else {
-                          alert("Sorry, add bookmark failed.");
-                      }
                   },
                 _handleBookmarkUpdate : function(event) {
-                    if (event.success) {
                         var editors = this.get("editors");
                         editors[event.position].update();
-                    } else {
-                        alert("Sorry, update bookmark failed.");
-                    }
                 },
                 _handleCheckboxClick : function(event) {
                     var i, editors = this.get("editors");
