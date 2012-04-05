@@ -504,10 +504,19 @@
             }
         });
 
-        Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks")});
-        Y.lane.BookmarksWidget.render();
-        
-        
+        //create a new widget and keep a global reference to it
+        //may be able to use Widget.getByNode("#bookmarks") rather than the global reference . . . .
+        Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true});
+
+        /**
+         * A link that appears when mousing over bookmarkable links and adds that link to bookmarks
+         * when clicked.
+         * 
+         * @class BookmarksLink
+         * @uses Base
+         * @uses LinkPlugin
+         * @constructor
+         */
         BookmarkLink = function() {
             BookmarkLink.superclass.constructor.apply(this, arguments);
         };
@@ -536,6 +545,10 @@
 
         Y.extend(BookmarkLink, Y.Base, {
             
+            /**
+             * Sets up event handlers and creates the timer attribute.
+             * @method initializer
+             */
             initializer : function() {
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
@@ -543,15 +556,44 @@
                 this.on("statusChange", this._handleStatusChange);
                 this.get("bookmarks").after("addSync", this._handleSyncEvent, this);
             },
+            
+            /**
+             * Responds to bookmarks:addSync event, changes the status to SUCCESSFUL
+             * @method _handleSyncEvent
+             * @private
+             * @param event {CustomEvent}
+             */
             _handleSyncEvent : function(event) {
                 this.set("status", BookmarkLink.SUCCESSFUL);
             },
+            
+            /**
+             * Responds to mouseout event on the BookmarkLink, changes the status to TIMING
+             * @method _handleBookmarkMouseOut
+             * @private
+             * @param event {CustomEvent}
+             */
             _handleBookmarkMouseout : function(event) {
                 this.set("status", BookmarkLink.TIMING);
             },
+            
+            /**
+             * Responds to mouseover events on the BookmarkLink, changes the status to ACTIVE
+             * @method _handleBookmarkMouseover
+             * @private
+             * @param event {CustomEvent}
+             */
             _handleBookmarkMouseover : function(event) {
                 this.set("status", BookmarkLink.ACTIVE);
             },
+            
+            /**
+             * Responds to BookmarkLink clicks.  Adds the LinkPlugin to the target link and uses
+             * that to determine the url (translates proxy links to the base url).  Changes the
+             * status to BOOKMARKING
+             * @method _handleClick
+             * @private
+             */
             _handleClick : function() {
                 var target = this.get("target"), label, url;
                 target.plug(Y.lane.LinkPlugin);
@@ -564,27 +606,70 @@
                 this.set("status", BookmarkLink.BOOKMARKING);
                 this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
             },
+            
+            /**
+             * Responds to mouseout on target anchors, changes the status to TIMING.
+             * @method _handleTargetMouseout
+             * @private
+             * @param event {CustomEvent}
+             */
             _handleTargetMouseout : function(event) {
                 this.set("status", BookmarkLink.TIMING);
             },
+            
+            /**
+             * Responds to mouseover on anchors, checks if they are bookmarkable, changes the status to READY.
+             * @method _handleTargetMouseover
+             * @private
+             * @param event {CustomEvent}
+             */
             _handleTargetMouseover : function(event) {
                 if (this._isBookmarkable(event.currentTarget)) {
                     this.set("target", event.currentTarget);
                     this.set("status", BookmarkLink.READY);
                 }
             },
+            
+            /**
+             * Determine if a link is bookmarkable.  For now true if its display property is inline and
+             * it does not contain an img element.
+             * @method _isBookmarkable
+             * @private
+             * @param target the target anchor
+             * @returns {Boolean}
+             */
             _isBookmarkable : function(target) {
                 return target.getStyle("display") == "inline" && !target.one("img");
             },
-            _hide : function() {
+            
+            /**
+             * Changes the status to OFF
+             * @method _turnOff
+             * @private
+             */
+            _turnOff : function() {
                 this.set("status", BookmarkLink.OFF);
             },
+            
+            /**
+             * Cancels the timer and sets it to null.
+             * @method _clearTimer
+             * @private
+             */
             _clearTimer : function() {
                 if (this._timer) {
                     this._timer.cancel();
                     this._timer = null;
                 }
             },
+            
+            /**
+             * Respond to statusChange events, adds and removes the link and changes the link's class,
+             * and starts the timer to turn off the link when appropriate.
+             * @method _handleStatusChange
+             * @private
+             * @param event {CustomEvent}
+             */
             _handleStatusChange : function(event) {
                 this._clearTimer();
                 var node = this.get("node");
@@ -625,7 +710,7 @@
                     node.removeClass("active");
                     node.removeClass("bookmarking");
                     node.removeClass("successful");
-                    this._timer = Y.later(this.get("hideDelay"), this, this._hide);
+                    this._timer = Y.later(this.get("hideDelay"), this, this._turnOff);
                 default:
                 }
             }
