@@ -24,7 +24,7 @@
                     track: function(trackingData) {
                         if (trackingData.external) {
                         	if(trackingData.query !== undefined && trackingData.query !== '' ){
-                        		gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(trackingData.title) ,trackingData.host+trackingData.path+"?"+trackingData.query);
+                        		gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(trackingData.title) ,trackingData.host+trackingData.path+trackingData.query);
                         	}else{
                         		gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(trackingData.title) ,trackingData.host+trackingData.path);
                         	}

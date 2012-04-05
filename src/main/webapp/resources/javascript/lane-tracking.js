@@ -92,7 +92,7 @@
                             if (host.indexOf('/') > -1) {
                                 path = host.substring(host.indexOf('/'));
                                 if (path.indexOf('?') > -1) {
-                                	query = path.substring( path.indexOf('?')+1, path.length);
+                                	query = path.substring(path.indexOf('?'), path.length);
                                     path = path.substring(0, path.indexOf('?'));
                                 }
                                 host = host.substring(0, host.indexOf('/'));
