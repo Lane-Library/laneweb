@@ -8,6 +8,7 @@
          * A class for representing a bookmark with attributes for the label and url.
          * 
          * @class Bookmark
+         * @uses EventTarget
          * @constructor
          * @param label {string} the label
          * @param url {string} the url
@@ -117,6 +118,7 @@
          * It fires events when the collection changes
          * 
          * @class Bookmarks
+         * @uses EventTarget
          * @constructor
          * @param bookmarks {array} may be undefined
          */
@@ -384,61 +386,76 @@
             emitFacade : true,
             prefix     : 'bookmarks'
         });
-
-        BookmarksWidget = function() {
-            BookmarksWidget.superclass.constructor.apply(this, arguments);
-        };
-
-        BookmarksWidget.NAME = "bookmarks";
-
-        BookmarksWidget.ATTRS = {
-                items : {},
-                bookmarks : {}
-        };
-
-        BookmarksWidget.HTML_PARSER = {
-                items : ["li"],
-
-                bookmarks : function(srcNode) {
-                    var i, anchor, label, url, bookmarks = [], anchors = srcNode.all("a");
-                    for (i = 0; i < anchors.size(); i++) {
-                        anchor = anchors.item(i);
-                        anchor.plug(Y.lane.LinkPlugin);
-                        label = anchor.link.get("title");
-                        if (anchor.link.get("local")) {
-                            url = anchor.link.get("path");
-                        } else {
-                            url = anchor.link.get("url");
-                        }
-                        bookmarks.push(new Bookmark(label, url));
-                    }
-                    return new Bookmarks(bookmarks);
-                }
-        };
-
-        Y.extend(BookmarksWidget, Y.Widget, {
+        
+        /**
+         * The Bookmarks Widget.  This is created by parsing the ul element
+         * with id #bookmarks.
+         * 
+         * @class BookmarksWidget
+         * @extends Widget
+         * @constructor
+         */
+        BookmarksWidget = Y.Base.create("bookmarks", Y.Widget, [], {
+            
+            /**
+             * Set up event listeners to respond to events when the server has been updated
+             * so the bookmark markup can change appropriately
+             * @method bindUI
+             */
             bindUI : function() {
                 var bookmarks = this.get("bookmarks");
                 bookmarks.after("addSync", this._bookmarkAdded, this);
                 bookmarks.after("removeSync", this._bookmarksRemoved, this);
                 bookmarks.after("updateSync", this._bookmarkUpdated, this);
             },
+            
+            /**
+             * Set up the UI, in this case truncate text in links to 32 characters.
+             * @method syncUI
+             */
             syncUI : function() {
                 this._truncateLabels();
             },
+            
+            /**
+             * Provide a text representation of this widget.
+             * @method toString
+             * @returns "BookmarksWidget: " and the list of bookmarks.
+             */
             toString : function() {
                 return "BookmarksWidget:" + this.get("bookmarks");
             },
+            
+            /**
+             * Respond to a successful bookmark add event.  Adds a list item with a link to the top of the list.
+             * @method _bookmarkAdded
+             * @private
+             * @param event {CustomEvent}
+             */
             _bookmarkAdded : function(event) {
                 this.get("srcNode").prepend("<li><a href='" + event.bookmark.getUrl() + "'>" + event.bookmark.getLabel() + "</a></li>");
                 this._truncateLabels();
             },
+            
+            /**
+             * Respond to a successful bookmarks remove event.  Removes list items of bookmarks that were deleted.
+             * @method _bookmarksRemoved
+             * @private
+             * @param event {CustomEvent}
+             */
             _bookmarksRemoved : function(event) {
                 var i, items = this.get("srcNode").all("li");
                 for (i = event.positions.length - 1; i >= 0; --i) {
                     items.item(event.positions[i]).remove(true);
                 }
             },
+            
+            /**
+             * Respond to a successful bookmark update event.  Alters the anchor text and/or url for a bookmark.
+             * @method _bookmarkUpdated
+             * @private
+             * @param event {CustomEvent}
+             */
             _bookmarkUpdated : function(event) {
                 var bookmark = this.get("bookmarks").getBookmark(event.position),
                 anchor = this.get("srcNode").all("li").item(event.position).one("a");
@@ -446,6 +463,12 @@
                 anchor.set("href", bookmark.getUrl());
                 this._truncateLabels();
             },
+            
+            /**
+             * Shorten all anchor text to less than 32 characters, append ... if shortened.
+             * @method _truncateLabels
+             * @private
+             */
             _truncateLabels : function() {
                 var i, anchor, label, anchors = this.get("srcNode").all("a");
                 for (i = 0; i < anchors.size(); i++) {
@@ -456,44 +479,33 @@
                     }
                 }
             }
+        }, {
+            ATTRS : {
+                    items : {},
+                    bookmarks : {}
+            },
+            HTML_PARSER : {
+                    items : ["li"],
+                    bookmarks : function(srcNode) {
+                        var i, anchor, label, url, bookmarks = [], anchors = srcNode.all("a");
+                        for (i = 0; i < anchors.size(); i++) {
+                            anchor = anchors.item(i);
+                            anchor.plug(Y.lane.LinkPlugin);
+                            label = anchor.link.get("title");
+                            if (anchor.link.get("local")) {
+                                url = anchor.link.get("path");
+                            } else {
+                                url = anchor.link.get("url");
+                            }
+                            bookmarks.push(new Bookmark(label, url));
+                        }
+                        return new Bookmarks(bookmarks);
+                    }
+            }
         });
 
         Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks")});
         Y.lane.BookmarksWidget.render();
-
-//        BookmarkLink = Y.Base.create("bookmark-link", Y.Widget, [], {
-//            bindUI : function() {
-//                var display = this.get("contentBox").getStyle("display");
-//                this.get("boundingBox").setStyle("display", display);
-//                this.get("boundingBox").setStyle("position", "relative");
-//                this.get("boundingBox").append("<span style='cursor:pointer;position:absolute;right:-20px;bottom:0;display:block;border:1px black solid;padding-left:15px;background-color:pink' class='foo'>&#160;</span>");
-//            },
-//            syncUI : function() {
-//                this.get("boundingBox").on("mouseout", this.hide, this);
-//                this.get("boundingBox").one(".foo").on("mouseover", this.activate, this);
-//                this.get("boundingBox").one(".foo").on("mouseout", this.hide, this);
-//            },
-//            show : function() {
-//                this.get("boundingBox").one(".foo").setStyle("display", "block");
-//            },
-//            hide : function() {
-//                this.get("boundingBox").one(".foo").setStyle("display", "none");
-//                this.get("boundingBox").one(".foo").setStyle("background-color", "pink");
-//            },
-//            activate : function() {
-//                this.show();
-//                this.get("boundingBox").one(".foo").setStyle("background-color", "red");
-//            }
-//        });
-//        
-//        Y.delegate("mouseover", function(event) {
-//            if (!this.hasClass("yui3-bookmark-link-content")) {
-//                var foo = new BookmarkLink({srcNode:event.target});
-//                foo.render();
-//            } else {
-//                Y.Widget.getByNode(this).show();
-//            }
-//        }, document, "a");
         
         
         BookmarkLink = function() {
