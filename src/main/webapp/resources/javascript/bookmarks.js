@@ -723,11 +723,24 @@
             TIMING : 5
         });
 
+        //create a BookmarkLink and save reference
         Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
 
         if (Y.one("#bookmarks-editor")) {
 
+            /**
+             * An editor widget for an individual bookmark.
+             * @class BookmarkEditor
+             * @uses Widget
+             * @uses TextInput
+             * @constructor
+             */
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
+                
+                /**
+                 * Creates text inputs and buttons for the editor.
+                 * @method renderUI
+                 */
                 renderUI : function() {
                     this.get("srcNode").append(
                         "<input type=\"text\" name=\"label\"/>" +
@@ -736,18 +749,35 @@
                         "<button value=\"reset\" type=\"reset\">reset</button>" +
                         "<button name=\"action\" value=\"cancel\" type=\"submit\">cancel</button>");
                 },
+                
+                /**
+                 * Sets up event handlers.
+                 * @method bindUI
+                 */
                 bindUI : function() {
                     this.get("srcNode").all("button").on("click", this._handleButtonClick, this);
                     this.get("srcNode").one("input[type='checkbox']").on("change", this._handleChange, this);
                     this.on("editingChange", this._handleEditingChange, this);
                     this.on("checkedChange", this._handleCheckedChange, this);
                 },
+                
+                /**
+                 * Sets up the TextInput objects for the inputs and truncates long labels.
+                 * @method syncUI
+                 */
                 syncUI : function() {
                     var srcNode = this.get("srcNode");
                     this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"));
                     this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"));
                     this._truncateLabel();
                 },
+                
+                /**
+                 * Responds to the cancel button.  If there is no associated bookmark, like when this editor
+                 * is for a new bookmark that hasn't been created yet, this editor gets destroyed, otherwise
+                 * the editing attribute is set to false
+                 * @method cancel
+                 */
                 cancel : function() {
                     if (this.get("bookmark")) {
                         this.set("editing", false);
@@ -757,6 +787,13 @@
                         this.destroy(true);
                     }
                 },
+                
+                /**
+                 * Responds to the save button.  If the inputs lack value, puts 'required' in to the value
+                 * and does nothing else.  If there is no associated bookmark, creates a new one, otherwise
+                 * changes the bookmark label and url based on what is in the inputs.
+                 * @method save
+                 */
                 save : function() {
                     var newlabel = this._labelInput.getValue(),
                         newurl = this._urlInput.getValue(),
@@ -781,6 +818,12 @@
                     }
                     this.set("editing", false);
                 },
+                
+                /**
+                 * Responds to the reset button.  Resets the text inputs to the bookmark's values.
+                 * If there is no bookmark, resets the TextInput object.
+                 * @method reset
+                 */
                 reset : function() {
                     var bookmark = this.get("bookmark");
                     this._labelInput.setHintText("Name");
@@ -793,6 +836,11 @@
                         this._urlInput.reset();
                     }
                 },
+                
+                /**
+                 * Update the editors anchor text and url with the bookmark's label and url.
+                 * @method update
+                 */
                 update : function() {
                     var anchor = this.get("srcNode").one("a"),
                         bookmark = this.get("bookmark");
@@ -800,10 +848,24 @@
                     anchor.set("href", bookmark.getUrl());
                     this._truncateLabel();
                 },
+                
+                /**
+                 * The click handler for buttons, delegates to the function named the same as the buttons value.
+                 * @method _handleButtonClick
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _handleButtonClick : function(event) {
                     event.preventDefault();
                     this[event.target.getAttribute("value")].call(this, event);
                 },
+                
+                /**
+                 * Called when the editing attribute changes.  Toggles the yui3-bookmark-editor-active class.
+                 * @method _handleEditingChange
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _handleEditingChange : function(event) {
                     var srcNode = this.get("srcNode"),
                         activeClass = this.getClassName() + "-active";
@@ -814,13 +876,33 @@
                         srcNode.removeClass(activeClass);
                     }
                 },
+                
+                /**
+                 * Called when the checked attribute changes.  Toggles the checked state of the checkbox.
+                 * @method _handleCheckedChange
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _handleCheckedChange : function(event) {
                     var checkBox = this.get("srcNode").one("input[type='checkbox']");
                     checkBox.set("checked", event.newVal);
                 },
+                
+                /**
+                 * Handles click events on the checkbox.  Toggles the checked attribute.
+                 * @method _handleChange
+                 * @private
+                 * @param event {CustomEvent}
+                 */
                 _handleChange : function(event) {
                     this.set("checked", event.target.get("checked"));
                 },
+                
+                /**
+                 * Truncates the link text to 130 characters if necessary.
+                 * @method _truncateLabel
+                 * @private
+                 */
                 _truncateLabel : function() {
                     var anchor = this.get("srcNode").one("a"),
                         label = anchor.get("innerHTML");
