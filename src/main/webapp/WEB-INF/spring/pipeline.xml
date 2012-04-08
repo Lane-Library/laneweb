@@ -150,8 +150,7 @@
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <property name="format">
             <props>
-                <prop key="doctype-public"></prop>
-                <prop key="doctype-system"></prop>
+                <prop key="doctype-system">about:legacy-compat</prop>
                 <prop key="encoding">UTF-8</prop>
                 <prop key="indent">yes</prop>
                 <prop key="omit-xml-declaration">yes</prop>
