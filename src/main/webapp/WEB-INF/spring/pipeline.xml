@@ -145,18 +145,17 @@
     </bean>
     
     <bean name="org.apache.cocoon.serialization.Serializer/html5"
-        class="org.apache.cocoon.serialization.XMLSerializer"
-        scope="prototype"
-        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <property name="format">
+        class="edu.stanford.irt.laneweb.cocoon.HTML5Serializer"
+        scope="prototype">
+        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
+        <constructor-arg>
             <props>
-                <prop key="doctype-system">about:legacy-compat</prop>
+                <prop key="method">xhtml</prop>
                 <prop key="encoding">UTF-8</prop>
                 <prop key="indent">yes</prop>
                 <prop key="omit-xml-declaration">yes</prop>
             </props>
-        </property>
-        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+        </constructor-arg>
     </bean>
     
     <bean name="org.apache.cocoon.serialization.Serializer/html5-B"
