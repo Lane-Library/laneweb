@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-04-09" version="1.12.23" description="1.12.23 bug fix release">
+            <action date="2012-04-05" dev="alainb" issue="67824" type="fix">
+                Offsite click event: Double question marks? 
+            </action>
+            <action date="2012-04-05" dev="ceyates" issue="67700" type="fix">
+                bookmark requests that result in errors not handled properly 
+            </action>
+            <action date="2012-04-05" dev="ceyates" issue="67698" type="fix">
+                checked state of checkbox in BookmarkEditor doesn't alway match checked value 
+            </action>
+            <action date="2012-04-05" dev="ceyates" issue="67695" type="fix">
+                typing enter when adding bookmark erroneously inserts new row 
+            </action>
+            <action date="2012-04-05" dev="ceyates" issue="67689" type="update">
+                provide more instructive message with Suggest exceptions
+            </action>
+            <action date="2012-04-03" dev="ceyates" issue="50623" type="add">
+                provide bookmark links associated with sunetid 
+            </action>
+        </release>
         <release date="2012-04-02" version="1.12.22" description="1.12.22 bug fix release">
             <action date="2012-03-29" dev="ceyates" issue="67429" type="fix">
                 inscrutable behavior of checkboxes in bookmarks editor in IE8
