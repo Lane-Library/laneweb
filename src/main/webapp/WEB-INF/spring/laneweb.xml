@@ -71,35 +71,38 @@
         scope="request">
     </bean>
     
+    <bean name="javax.xml.transform.sax.SAXTransformerFactory/saxon"
+        class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+        <property name="transformerFactoryClass" value="net.sf.saxon.TransformerFactoryImpl"/>
+    </bean>
+    
+    <bean name="javax.xml.transform.sax.SAXTransformerFactory/joost"
+        class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+        <property name="transformerFactoryClass" value="net.sf.joost.trax.TransformerFactoryImpl"/>
+    </bean>
+    
+    <bean name="javax.xml.transform.sax.SAXTransformerFactory/xalan"
+        class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+        <property name="transformerFactoryClass" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
+    </bean>
+    
     <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"
         class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
-                <property name="transformerFactoryClass" value="net.sf.saxon.TransformerFactoryImpl"/>
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
         <constructor-arg ref="javax.xml.transform.URIResolver"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"
         class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
-                <property name="transformerFactoryClass" value="net.sf.joost.trax.TransformerFactoryImpl"/>
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/joost"/>
         <constructor-arg ref="javax.xml.transform.URIResolver"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.cocoon.TraxProcessor/xalan"
         class="edu.stanford.irt.laneweb.cocoon.TraxProcessor">
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
-                <property name="transformerFactoryClass" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/xalan"/>
         <constructor-arg ref="javax.xml.transform.URIResolver"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
