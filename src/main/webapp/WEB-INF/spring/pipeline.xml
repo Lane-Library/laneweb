@@ -142,7 +142,6 @@
                 <prop key="omit-xml-declaration">yes</prop>
             </props>
         </constructor-arg>
-        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
     
     <bean name="org.apache.cocoon.serialization.Serializer/html5"
