@@ -126,7 +126,6 @@
                             <xsl:value-of select="$resourceName"/>
                         </span>
                         <xsl:apply-templates select="s:contentId"/>
-                        <br />
                         <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
                             <a target="_blank" href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
                         </xsl:if>
@@ -425,7 +424,7 @@
 
     <xsl:template match="s:desc-label">
         <xsl:if test="position() > 1">
-            <br />
+            <div />
         </xsl:if>
         <strong>
             <xsl:value-of select="."/>
