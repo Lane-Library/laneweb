@@ -166,7 +166,8 @@
         <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
         <constructor-arg>
             <props>
-                <prop key="method">html5</prop>
+                <prop key="method">html</prop>
+                <prop key="version">5.0</prop>
                 <prop key="encoding">UTF-8</prop>
                 <prop key="indent">yes</prop>
                 <prop key="omit-xml-declaration">yes</prop>
