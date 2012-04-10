@@ -107,6 +107,7 @@
     <filter-mapping>
         <filter-name>tobaccoRedirectFilter</filter-name>
         <url-pattern>/tobacco</url-pattern>
+        <url-pattern>/tobacco/*</url-pattern>
     </filter-mapping>
     
     <servlet>
