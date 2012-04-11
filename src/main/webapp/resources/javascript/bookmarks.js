@@ -995,6 +995,7 @@
                 "delete" : function() {
                     var checked = this._getCheckedIndexes();
                     if (checked.length > 0) {
+                        this._clearChecked();
                         this.get("bookmarks").removeBookmarks(checked);
                     }
                 },
@@ -1105,6 +1106,18 @@
                         }
                     }
                     return indexes;
+                },
+                
+                /**
+                 * Unchecks all BookmarkEditors
+                 * @method _clearChecked
+                 * @private
+                 */
+                _clearChecked : function() {
+                    var i, editors = this.get("editors");
+                    for (i = 0; i < editors.length; i++) {
+                        editors[i].set("checked", false);
+                    }
                 }
             },
             {
