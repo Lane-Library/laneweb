@@ -7,22 +7,22 @@
             <map:match pattern="search/*" type="wildcard">
                 <map:generate type="html" src="{content-base}/error.html"/>
                 <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
-                <map:serialize type="xhtml" status-code="503"/>
+                <map:serialize type="html5" status-code="503"/>
             </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">
                 <map:generate type="file" src="resources/cookiesFetch.html"/>
                 <map:transform type="saxon" src="resources/xsl/cookiesFetch.xsl"/>
-                <map:serialize type="xhtml"/>
+                <map:serialize type="html5"/>
             </map:match>
             <map:match pattern="postMethodHelper.html" type="wildcard">
                 <map:generate type="parameter-map"/>
                 <map:transform type="saxon" src="resources/xsl/postMethodHelper.xsl"/>
-                <map:serialize type="xhtml"/>
+                <map:serialize type="html5"/>
             </map:match>
             <map:match pattern="plain/secure/.*\.html" type="regexp">
                 <map:generate type="html" src="{content-base}/error.html"/>
                 <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
-                <map:serialize type="xhtml" status-code="403"/>
+                <map:serialize type="html5" status-code="403"/>
             </map:match>
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="content:/{1}.html"/>
@@ -51,7 +51,7 @@
             <map:match pattern="test/**.html" type="wildcard">
                 <map:generate type="html" src="resources/test/{1}.html"/>
                 <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
-                <map:serialize type="xhtml"/>
+                <map:serialize type="html5"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
                 <map:aggregate element="doc" label="content">
@@ -84,7 +84,7 @@
                 </map:select>
                 <map:transform type="namespace-filter"/>
                 <map:transform type="debug"/>
-                <map:serialize type="xhtml"/>
+                <map:serialize type="html5"/>
             </map:match>
         </map:pipeline>
     </map:pipelines>
