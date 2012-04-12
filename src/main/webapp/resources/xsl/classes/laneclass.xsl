@@ -45,7 +45,7 @@
             		<xsl:text>yui-g</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="style">
-            		<xsl:text>padding:20px</xsl:text>
+            		<xsl:text>padding:20px 0px 0px 20px</xsl:text>
             </xsl:attribute>
             <div>
            	<xsl:attribute name="class">
