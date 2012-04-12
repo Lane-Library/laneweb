@@ -5,6 +5,8 @@
 
     <xsl:import href="laneclasses-common.xsl" />
 
+	
+
     <xsl:template match="/lc:classes">
         <html>
             <body>
@@ -13,6 +15,8 @@
         </html>
     </xsl:template>
 
+	 <xsl:template match="/doc/noncached-classes"/>
+	 <xsl:template match="lc:lastmodified"/>
 
     <xsl:template match="lc:event_data">
         <xsl:if test="position() mod 2 !=0 and lc:event_status/text() = 'O'">
@@ -28,10 +32,11 @@
     </xsl:template>
 
     <xsl:template name="decorator">
+    	<xsl:variable name="classId" select="./lc:module_id/text()"></xsl:variable>
         <div class="yui-gf">
             <div class="yui-u date first">
                 <strong>
-                    <xsl:call-template name="month" />
+                	<xsl:call-template name="month" />
                     <xsl:text> </xsl:text>
                     <xsl:call-template name="day" />
                 </strong>
@@ -42,7 +47,7 @@
             </div>
             <div class="yui-u">
                 <h4>
-                      <xsl:if test="number( ./lc:registrations/text()) &gt;= number( ./lc:seats/text()) ">
+                      <xsl:if test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() = '---'">
                       <b>
                         <xsl:attribute name="class">
                             <xsl:text>red-text</xsl:text>
@@ -61,6 +66,9 @@
                 <div class="lecturer">
                     <xsl:value-of select="./lc:speaker/text()" />
                 </div>
+                <xsl:if test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() != '---'">
+                	<div>Seats left: <b><xsl:value-of select="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text()"/></b></div>
+                </xsl:if>
             </div>
         </div>
         <div class="details">
@@ -114,27 +122,22 @@
                     </xsl:choose>
                 </p>
                 <a>
-                    <xsl:attribute name="href">
-                        <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
-                        <xsl:value-of select="./lc:module_id" />
-                    </xsl:attribute>
-                    <xsl:attribute name="class">image-link</xsl:attribute>
-                    <img>
-                        <xsl:attribute name="class">module-img</xsl:attribute>
-                        <xsl:choose>
-                            <xsl:when test="number(./lc:registrations/text()) &gt;= number( ./lc:seats/text())">
-                                 <xsl:attribute name="src">/graphics/buttons/button-waitlist-off.png</xsl:attribute>
-                                 <xsl:attribute name="onmouseover">this.src='/graphics/buttons/button-waitlist-on.png'</xsl:attribute>
-                                 <xsl:attribute name="onmouseout">this.src='/graphics/buttons/button-waitlist-off.png'</xsl:attribute>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                 <xsl:attribute name="src">/graphics/buttons/button-sign-up-off.png</xsl:attribute>
-                                 <xsl:attribute name="onmouseover">this.src='/graphics/buttons/button-sign-up-on.png'</xsl:attribute>
-                                 <xsl:attribute name="onmouseout">this.src='/graphics/buttons/button-sign-up-off.png'</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>                        
-                    </img>
+                   <xsl:attribute name="href">
+                      <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
+                       <xsl:value-of select="lc:module_id"/>
+                       </xsl:attribute>
+                    <xsl:choose>
+						<xsl:when test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() = '---'">
+		                   	<xsl:attribute name="class">gray-btn btn-wide</xsl:attribute>
+	           			    <span>Waitlist</span>
+                       </xsl:when>
+                       <xsl:otherwise>
+							<xsl:attribute name="class">red-btn btn-wide</xsl:attribute>
+                            <span>Sign Up</span>
+                       </xsl:otherwise>
+                   </xsl:choose>
                 </a>
+                <p></p>
             </div>
         </div>
     </xsl:template>

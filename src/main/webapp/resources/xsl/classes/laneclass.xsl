@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://www.w3.org/1999/xhtml" xmlns:lc="http://lane.stanford.edu/laneclasses" exclude-result-prefixes="lc h"
+    xmlns:h="http://www.w3.org/1999/xhtml" xmlns:lc="http://lane.stanford.edu/laneclasses" 
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    exclude-result-prefixes="lc h xi"
     version="2.0">
 
     <xsl:import href="laneclasses-common.xsl"/>    
@@ -26,11 +28,10 @@
 
 
     <xsl:template match="h:p[@id='description']">
+    	
         <xsl:copy>
         <xsl:apply-templates/>
-        
         <xsl:copy-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_description/child::node()" />     
-           
         </xsl:copy>
     </xsl:template>
 
@@ -38,32 +39,23 @@
     <xsl:template match="h:p[@id='registration']">
         <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[text() = $internal-id]/..">
         <xsl:if test="lc:event_status/text() = 'O'">
-        <p>
-            <p>
-                <a>
-                    <xsl:attribute name="href">
-                       <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
-                        <xsl:value-of select="lc:module_id"/>
-                    </xsl:attribute>
-                    <xsl:attribute name="class">image-link</xsl:attribute>
-                    <img>
-                        <xsl:attribute name="class">module-img</xsl:attribute>
-                        <xsl:choose>
-                            <xsl:when test="number(./lc:registrations/text()) &gt;=  number(./lc:seats/text())">
-                                 <xsl:attribute name="src">/graphics/buttons/button-waitlist-off.png</xsl:attribute>
-                                 <xsl:attribute name="onmouseover">this.src='/graphics/buttons/button-waitlist-on.png'</xsl:attribute>
-                                 <xsl:attribute name="onmouseout">this.src='/graphics/buttons/button-waitlist-off.png'</xsl:attribute>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                 <xsl:attribute name="src">/graphics/buttons/button-sign-up-off.png</xsl:attribute>
-                                 <xsl:attribute name="onmouseover">this.src='/graphics/buttons/button-sign-up-on.png'</xsl:attribute>
-                                 <xsl:attribute name="onmouseout">this.src='/graphics/buttons/button-sign-up-off.png'</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                     </img> 
-                 </a>
-            </p>
-            <h4>
+        <xsl:variable name="classId" select="./lc:module_id/text()"></xsl:variable>
+        <div>
+        	<xsl:attribute name="class">
+            		<xsl:text>yui-g</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="style">
+            		<xsl:text>padding:20px</xsl:text>
+            </xsl:attribute>
+            <div>
+           	<xsl:attribute name="class">
+           		<xsl:text>yui-u</xsl:text>
+           	</xsl:attribute>
+           	<xsl:attribute name="style">
+            	<xsl:text>float:right;width:66%;</xsl:text>
+            </xsl:attribute>
+            	
+           	<h4>
                 <xsl:call-template  name="month"/>
                 <xsl:text> </xsl:text>
                 <xsl:call-template  name="day"/>
@@ -72,7 +64,15 @@
                 <xsl:text>-</xsl:text>
                 <xsl:call-template  name="end-time"/>
             </h4>
-            
+             <h4>
+              <xsl:if test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() != '---'"> 
+                <xsl:attribute name="class">weak</xsl:attribute>
+                <xsl:text>Seats left: </xsl:text>
+                <b>	
+                	<xsl:value-of select="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text()" />
+                 </b>
+				</xsl:if>
+             </h4> 
             <h4> 
              <xsl:attribute name="class">weak</xsl:attribute>
              <xsl:text>With </xsl:text>
@@ -110,12 +110,36 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </h4>
-         </p>
+            </div>
+            <div>
+            	<xsl:attribute name="class">
+            		<xsl:text>first yui-u</xsl:text>
+            	</xsl:attribute>
+            	<xsl:attribute name="style">
+	            	<xsl:text>width:33%</xsl:text>
+	            </xsl:attribute>
+            	<a>
+                   <xsl:attribute name="href">
+                      <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
+                       <xsl:value-of select="lc:module_id"/>
+                       </xsl:attribute>
+                    <xsl:choose>
+						<xsl:when test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() = '---'">
+		                   	<xsl:attribute name="class">gray-btn btn-wide</xsl:attribute>
+	           			    <span>Waitlist</span>
+                       </xsl:when>
+                       <xsl:otherwise>
+							<xsl:attribute name="class">red-btn btn-wide</xsl:attribute>
+                            <span>Sign Up</span>
+                       </xsl:otherwise>
+                   </xsl:choose>
+                 </a>
+            </div>
+            </div>
+            
          </xsl:if>
         </xsl:for-each>
     </xsl:template>
-
-
 
 
     <xsl:template match="*">

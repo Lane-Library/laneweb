@@ -141,7 +141,7 @@
             </map:match>
             <map:match pattern="random/**" type="wildcard">
                 <map:generate type="file" src="{1}"/>
-                <map:transform type="xalan" src="resources/xsl/random.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/random.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- To replace persistent.html login later -->
@@ -155,6 +155,7 @@
                 <map:aggregate element="doc">
                     <map:part src="{content-base}/classes-consult/class.html"/>
                     <map:part src="classes:/all-data.xml"/>
+                    <map:part element="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="resources/xsl/classes/laneclass.xsl"/>
                 <map:transform type="xinclude"/>
