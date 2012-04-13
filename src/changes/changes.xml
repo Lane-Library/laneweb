@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-04-16" version="1.12.25" description="1.12.25 bug fix release">
+            <action date="2012-04-11" dev="ceyates" issue="68117" type="update">
+                change document type of html pages to html 5 
+            </action>
+            <action date="2012-04-11" dev="ceyates" issue="68059" type="fix">
+                clicking delete twice results in unchecked bookmarks being deleted 
+            </action>
+            <action date="2012-04-11" dev="ceyates" issue="68057" type="fix">
+                saving add bookmark results in inputs and buttons remaining visible 
+            </action>
+            <action date="2012-04-13" dev="ceyates" issue="67989" type="fix">
+                in IE7 the bookmark list appears under the #laneNav list.  
+            </action>
+        </release>
         <release date="2012-04-10" version="1.12.24" description="1.12.24 emergency release">
             <action date="2012-04-10" dev="ceyates" issue="68053" type="add">
                 permenantly redirect urls beginning with /tobacco to tobacco.stanford.edu
