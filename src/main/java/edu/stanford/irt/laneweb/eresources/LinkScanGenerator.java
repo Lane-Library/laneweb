@@ -41,8 +41,14 @@ public class LinkScanGenerator extends AbstractGenerator {
             while (rs.next()) {
                 position = " #" + p++ + ' ';
                 url = rs.getString(1);
+                if (url == null) {
+                    url = "NULL URL";
+                }
                 id = rs.getString(2) + '-' + rs.getString(3);
                 title = rs.getString(4);
+                if (title == null) {
+                    title = "NULL TITLE";
+                }
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, "li");
                 XMLUtils.data(xmlConsumer, position);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, "ul");
