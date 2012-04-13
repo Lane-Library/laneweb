@@ -141,7 +141,7 @@
             </map:match>
             <map:match pattern="random/**" type="wildcard">
                 <map:generate type="file" src="{1}"/>
-                <map:transform type="saxon" src="resources/xsl/random.xsl"/>
+                <map:transform type="xalan" src="resources/xsl/random.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- To replace persistent.html login later -->
