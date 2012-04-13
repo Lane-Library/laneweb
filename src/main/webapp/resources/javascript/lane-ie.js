@@ -1,18 +1,28 @@
 (function() {
     var i, nodes, node;
     if (Y.UA.ie && Y.UA.ie < 7) {
-    	    node = Y.one("#laneNav");
-            nodes = node.all('ul');
-            for (i = 0; i < nodes.size(); i++) {
-                nodes.item(i).get('parentNode').on('mouseover', function() {
-                    this.addClass('hover');
-                });
-                nodes.item(i).get('parentNode').on('mouseout', function() {
-                    this.removeClass('hover');
-                });
-            }
-        //instead of :first-child selector remove left border on .nav2 menus:
-        nodes = Y.all('.nav2, #libraryContact');
+    	node = Y.one("#laneNav");
+        nodes = node.all('ul');
+        for (i = 0; i < nodes.size(); i++) {
+            nodes.item(i).get('parentNode').on('mouseover', function() {
+                this.addClass('hover');
+            });
+            nodes.item(i).get('parentNode').on('mouseout', function() {
+                this.removeClass('hover');
+            });
+        }
+        //add hover class to favorites menu
+        node = Y.one("#favorites");
+        if (node) {
+            node.on('mouseover', function() {
+                this.addClass('hover');
+            });
+            node.on('mouseout', function() {
+                this.removeClass('hover');
+            });
+        }
+        //instead of :first-child selector remove left border on .nav2, #login and #libraryContact menus:
+        nodes = Y.all('.nav2, #libraryContact, #login');
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).one('li').setStyle('borderLeft', 'none');
         }
