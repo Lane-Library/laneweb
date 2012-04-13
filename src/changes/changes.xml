@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-04-16" version="1.12.25" description="1.12.25 bug fix release">
+            <action date="2012-04-13" dev="ceyates" issue="68210" type="fix">
+                NullPointerException when responding to /eresources/linkscan.html
+            </action>
             <action date="2012-04-11" dev="ceyates" issue="68117" type="update">
                 change document type of html pages to html 5 
             </action>
