@@ -42,6 +42,7 @@
 	border: 1px solid #dadad9;
 	border-top: none;
 	padding: 6px 0;
+	z-index: 2;
 	background-image: url(/././resources/images/menu-bg.gif);
 	background-position: 0 100%;
 	background-repeat: repeat-x;
