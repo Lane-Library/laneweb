@@ -14,7 +14,7 @@
                 //uncomment this for testing/debugging:
                 //gaPageTracker._setLocalServerMode();
                 gaPageTracker._setDomainName(".stanford.edu");
-                meta = Y.one('html head meta[name="WT.seg_1"]');
+                meta = Y.one('html head meta[name="ipGroup"]');
                 if (meta) {
                     gaPageTracker._setVar(meta.get('content'));
                     gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);

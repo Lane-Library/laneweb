@@ -255,8 +255,8 @@
     <!-- remove http-equiv meta elements-->
     <xsl:template match="h:meta[@http-equiv != 'refresh']"/>
 
-    <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
-    <xsl:template match="h:meta[@name='WT.seg_1']/@content">
+    <!-- add the ip-group to content of the meta element named ipGroup for reporting statistics -->
+    <xsl:template match="h:meta[@name='ipGroup']/@content">
         <xsl:attribute name="content">
             <xsl:value-of select="$ipgroup"/>
         </xsl:attribute>

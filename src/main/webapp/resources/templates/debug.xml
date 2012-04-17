@@ -47,7 +47,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/persistent-login.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
-        <meta name="WT.seg_1" content="{ipGroup}"/>
+        <meta name="ipGroup" content="{ipGroup}"/>
     </head>
     <body>
         <div id="custom-doc" class="yui-t7">
@@ -328,7 +328,6 @@
         <script type="text/javascript" src="/resources/javascript/lane-tracking.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-expandies.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-google.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-webtrends.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-lightbox.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-popup.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-metasearch.js"></script>
