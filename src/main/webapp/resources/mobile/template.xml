@@ -33,6 +33,5 @@
         <script type="text/javascript" src="/resources/javascript/mobile/m-tracking.js"> </script>
          -->
         <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${timestamp}"> </script>
-        <script type="text/javascript" src="/apps/ipGroupFetch?callback=$.LANE.setIpGroup"> </script>
     </body>
 </html>
