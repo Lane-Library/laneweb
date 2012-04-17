@@ -1,15 +1,25 @@
 // Google Analytics tracking
-var _gaq = _gaq || [];
-if(document.location.host.match("lane.stanford.edu")){
-    _gaq.push(['_setAccount', 'UA-3202241-10']);
-}
-else {
-    _gaq.push(['_setAccount', 'UA-3203486-11']);
-}
-//_gaq.push(['_setLocalServerMode']);
-_gaq.push(['_setDomainName', '.stanford.edu']);
-_gaq.push(['_setCustomVar', 1, 'ipGroup', $.LANE.ipGroup, 2]);
-_gaq.push(['_trackPageview']);
+var _gaq = _gaq || [], ipGroup;
+$.ajax({
+    url: "/././apps/ipGroupFetch",
+    dataType: "text",
+    success: function(data) {
+        if(data) {
+            ipGroup = data;
+            if(document.location.host.match("lane.stanford.edu")){
+                _gaq.push(['_setAccount', 'UA-3202241-10']);
+            }
+            else {
+                _gaq.push(['_setAccount', 'UA-3203486-11']);
+            }
+            //_gaq.push(['_setLocalServerMode']);
+            _gaq.push(['_setDomainName', '.stanford.edu']);
+            _gaq.push(['_setVar', ipGroup]);
+            _gaq.push(['_setCustomVar', 1, 'ipGroup', ipGroup, 2]);
+            _gaq.push(['_trackPageview']);
+        }
+    }
+});
 
 (function() {
     var s, ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

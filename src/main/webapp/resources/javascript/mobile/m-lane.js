@@ -168,16 +168,6 @@ $.LANE.scrollPage = function(activePage){
 };
 
 /**
- * this called at page load
- * set ipGroup for use with tracking
- * 
- * @param ipGroup
- */
-$.LANE.setIpGroup = function(ipGroup){
-    $.LANE.ipGroup = ipGroup;
-};
-
-/**
  * verify that "qSearch" data present before submitting form
  * 
  * @param event
