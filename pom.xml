@@ -232,7 +232,7 @@
                             <removeIncluded>true</removeIncluded>
                             <output>target/laneweb/resources/css/mobile/lane-mobile.css</output>
                             <includes>
-                                <include>jquery.mobile.structure-1.0-min.css</include>
+                                <include>jquery.mobile.structure-1.0.1-min.css</include>
                                 <include>jquery.ui.autocomplete-min.css</include>
                                 <include>m-lane-min.css</include>
                             </includes>
@@ -242,7 +242,7 @@
                             <output>target/laneweb/resources/javascript/mobile/lane-mobile.js</output>
                             <includes>
                                 <include>jquery-1.6.4-min.js</include>
-                                <include>jquery.mobile-1.0-min.js</include>
+                                <include>jquery.mobile-1.0.1-min.js</include>
                                 <include>jquery-ui-1.8.16.custom-min.js</include>
                                 <include>m-lane-min.js</include>
                                 <include>m-login-min.js</include>
@@ -872,7 +872,7 @@
                                     <removeIncluded>true</removeIncluded>
                                     <output>target/laneweb/resources/css/mobile/lane-mobile.css</output>
                                     <includes>
-                                        <include>jquery.mobile.structure-1.0-min.css</include>
+                                        <include>jquery.mobile.structure-1.0.1-min.css</include>
                                         <include>jquery.ui.autocomplete-min.css</include>
                                         <include>m-lane-min.css</include>
                                     </includes>
@@ -882,7 +882,7 @@
                                     <output>target/laneweb/resources/javascript/mobile/lane-mobile.js</output>
                                     <includes>
                                         <include>jquery-1.6.4-min.js</include>
-                                        <include>jquery.mobile-1.0-min.js</include>
+                                        <include>jquery.mobile-1.0.1-min.js</include>
                                         <include>jquery-ui-1.8.16.custom-min.js</include>
                                         <include>m-lane-min.js</include>
                                         <include>m-login-min.js</include>
