@@ -1,6 +1,7 @@
 (function() {
     var history,
         searchFacets = Y.one('#searchFacets');
+    LANE.Search = LANE.Search || {};
     LANE.Search.History = function(){
         if(searchFacets){
             history = new Y.HistoryHash();        

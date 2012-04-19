@@ -36,7 +36,7 @@
         loadContent = function(url) {
             url = "/././plain/biomed-resources/bassett/raw".concat(url);
             function successHandler(id, o, args) {
-                var content = new Y.Node(o.responseText),
+                var content = Y.Node.create(o.responseText),
                     container = Y.one('#bassettContent');
                 container.setContent(content);
                 registerLinksContainer(container);
