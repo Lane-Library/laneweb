@@ -503,6 +503,10 @@
         //create a new widget and keep a global reference to it
         //may be able to use Widget.getByNode("#bookmarks") rather than the global reference . . . .
         Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true});
+        
+        
+        //don't create BookmarkLink if there is a class=no-bookmarking
+        if (!Y.one(".no-bookmarking")) {
 
         /**
          * A link that appears when mousing over bookmarkable links and adds that link to bookmarks
@@ -721,6 +725,8 @@
 
         //create a BookmarkLink and save reference
         Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
+            
+        }
 
         if (Y.one("#bookmarks-editor")) {
 
