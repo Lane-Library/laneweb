@@ -61,11 +61,11 @@
 		lightbox.setContent(o.responseText);
 		lightbox.show();
 		// To hide tclose the window
-		Y.get('#lightboxClose').setStyle('visibility', 'hidden');
+		Y.one('#lightboxClose').setStyle('visibility', 'hidden');
 		
 		// Click on YES --
-		Y.get('#yes-persistent-login').on('click', function(event) {
-			if(Y.get('#dont-ask-again') && Y.get('#dont-ask-again').get('checked')){
+		Y.one('#yes-persistent-login').on('click', function(event) {
+			if(Y.one('#dont-ask-again') && Y.one('#dont-ask-again').get('checked')){
 				event.preventDefault();
 			}
 			else{
@@ -74,22 +74,22 @@
 		});
 		
 		// Click on NO
-		if(Y.get('#no-persistent-login')){
-			Y.get('#no-persistent-login').on('click', function(event) {
+		if(Y.one('#no-persistent-login')){
+			Y.one('#no-persistent-login').on('click', function(event) {
 				setLink(event);
-				if(Y.get('#dont-ask-again') && Y.get('#dont-ask-again').get('checked')){
+				if(Y.one('#dont-ask-again') && Y.one('#dont-ask-again').get('checked')){
 					date.setFullYear(date.getFullYear()+10);
 					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', {path: "/",expires: date});
 				} else
 					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', {path: "/"});
 			});
 		}
-		if(Y.get('#dont-ask-again')){
-			Y.get('#dont-ask-again').on('click', function(event) {
-				if(Y.get('#dont-ask-again') && Y.get('#dont-ask-again').get('checked')){
-					 Y.get('#yes-persistent-login').replaceClass('red-btn','disabled-btn');
+		if(Y.one('#dont-ask-again')){
+			Y.one('#dont-ask-again').on('click', function(event) {
+				if(Y.one('#dont-ask-again') && Y.one('#dont-ask-again').get('checked')){
+					 Y.one('#yes-persistent-login').replaceClass('red-btn','disabled-btn');
 				} else{
-					 Y.get('#yes-persistent-login').replaceClass('disabled-btn','red-btn');
+					 Y.one('#yes-persistent-login').replaceClass('disabled-btn','red-btn');
 				}
 			});
 		}
@@ -98,8 +98,8 @@
 
 	//for the static page persistentlogin.hrml
 	// Click on YES --
-	if (Y.get('#yes-persistent-login')) {
-		Y.get('#yes-persistent-login').on('click',
+	if (Y.one('#yes-persistent-login')) {
+		Y.one('#yes-persistent-login').on('click',
 			function(event) {
 				event.preventDefault();
 				if (Y.Cookie.get('user')) {
