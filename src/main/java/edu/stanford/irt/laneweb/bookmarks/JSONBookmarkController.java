@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.bookmarks;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,13 +21,15 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 
 @Controller
-@RequestMapping(value = "/bookmarks", consumes = "application/json")
+@RequestMapping(value = "/bookmarks")
 public class JSONBookmarkController extends BookmarkController {
+    
+    private static final Pattern COMMA_SPLIT = Pattern.compile(",");
     
     @Autowired
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void addBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
@@ -41,15 +44,22 @@ public class JSONBookmarkController extends BookmarkController {
     public void deleteBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.SUNETID) final String sunetid,
-            @RequestBody final int[] i) {
+            @RequestParam final String indexes) {
+        // convert json array to an int[]
+        String[] split = COMMA_SPLIT.split(indexes.substring(1, indexes.length() - 1));
+        int[] ints = new int[split.length];
+        for (int i = 0; i < split.length; i++) {
+            ints[i] = Integer.parseInt(split[i]);
+        }
+        
         //sort the array to be sure in order
-        Arrays.sort(i);
-        for (int j = i.length - 1; j >= 0; --j) {
-            bookmarks.remove(i[j]);
+        Arrays.sort(ints);
+        for (int j = ints.length - 1; j >= 0; --j) {
+            bookmarks.remove(ints[j]);
         }
         saveLinks(sunetid, bookmarks);
     }
-    
+
     @RequestMapping(method = RequestMethod.GET)
     public Bookmark getBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
@@ -59,7 +69,7 @@ public class JSONBookmarkController extends BookmarkController {
         return bookmarks.get(i);
     }
     
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void saveBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,

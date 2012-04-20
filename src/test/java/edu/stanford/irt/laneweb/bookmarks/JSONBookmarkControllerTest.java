@@ -51,7 +51,7 @@ public class JSONBookmarkControllerTest {
         this.bookmarks.add(this.bookmark);
         this.bookmarkDAO.saveLinks(this.sunetid, this.bookmarks);
         replay(this.bookmarkDAO);
-        this.controller.deleteBookmark(this.bookmarks, this.sunetid, new int[] { 0, 3 });
+        this.controller.deleteBookmark(this.bookmarks, this.sunetid, "[0,3]");
         verify(this.bookmarkDAO);
     }
 

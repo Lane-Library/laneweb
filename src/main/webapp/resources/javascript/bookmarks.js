@@ -288,13 +288,9 @@
                  * @param event {CustomEvent}
                  */
                 _defRemoveFn : function(event) {
-                    var data = Y.JSON.stringify(event.positions);
-                    Y.io("/././bookmarks", {
+                    var indexes = Y.JSON.stringify(event.positions);
+                    Y.io("/././bookmarks?indexes=" + indexes, {
                         method : "delete",
-                        data : data,
-                        headers : {
-                            "Content-Type" : "application/json"
-                        },
                         on : {
                             success : function() {
                                 this.fire("removeSync", {success: true, positions : event.positions});
@@ -827,7 +823,7 @@
                 reset : function() {
                     var bookmark = this.get("bookmark");
                     this._labelInput.setHintText("Name");
-                    this._urlInput.setHintText("location");
+                    this._urlInput.setHintText("Location");
                     if (bookmark) {
                         this._labelInput.setValue(bookmark.getLabel());
                         this._urlInput.setValue(bookmark.getUrl());
