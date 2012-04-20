@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-04-23" version="1.12.26" description="1.12.26 bug fix release">
+            <action date="2012-04-20" dev="ceyates" issue="68554" type="add">
+                disable BookmarkLink for selected pages 
+            </action>
+            <action date="2012-04-20" dev="ceyates" issue="68553" type="update">
+                change use of deprecated Y.get() to Y.one() in lane-persistent-login.js
+            </action>
+            <action date="2012-04-17" dev="ryanmax" issue="67635" type="update">
+                upgrade mobile interface to jQuery Mobile 1.0.1 
+            </action>
+            <action date="2012-04-17" dev="ryanmax" issue="67630" type="remove">
+                sunset Lane's use of WebTrends
+            </action>
+            <action date="2012-04-17" dev="ryanmax" issue="65204" type="fix">
+                mobile: IPGroups not being reported consistently to GA
+            </action>
+        </release>
         <release date="2012-04-16" version="1.12.25" description="1.12.25 bug fix release">
             <action date="2012-04-13" dev="ceyates" issue="68210" type="fix">
                 NullPointerException when responding to /eresources/linkscan.html
