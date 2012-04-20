@@ -61,7 +61,7 @@
                 boundingBox.setStyle("overflow", "visible");
                 boundingBox.setStyle("width","auto");
                 boundingBox.setStyle("height","auto");
-                this.set("constrain", true);
+                this.constrain([left, top], true);
                 this.fire("animEnd");
             }, this);
             boundingBox.setStyle("overflow", "hidden");
@@ -89,7 +89,6 @@
 
     Y.lane.Lightbox = new Lightbox({
         visible : false,
-        constrain : true,
         render : true
     });
 
