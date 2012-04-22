@@ -9,10 +9,11 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.cocoon.Initializable;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class EresourcesSearchGenerator extends AbstractSearchGenerator {
+public class EresourcesSearchGenerator extends AbstractSearchGenerator implements Initializable {
 
     private CollectionManager collectionManager;
 
@@ -65,9 +66,7 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
         return results;
     }
 
-    @Override
-    protected void initialize() {
-        super.initialize();
+    public void initialize() {
         this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
                 Model.TYPE);
     }

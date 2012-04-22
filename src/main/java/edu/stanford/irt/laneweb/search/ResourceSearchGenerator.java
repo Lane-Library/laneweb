@@ -49,7 +49,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void initialize() {
+    public void initialize() {
         super.initialize();
         this.resources = ModelUtil.getObject(this.model, Model.RESOURCES, Collection.class);
         if (this.resources == null) {

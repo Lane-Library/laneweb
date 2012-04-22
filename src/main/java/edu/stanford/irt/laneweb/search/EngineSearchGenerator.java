@@ -33,7 +33,7 @@ public class EngineSearchGenerator extends SearchGenerator {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void initialize() {
+    public void initialize() {
         super.initialize();
         this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class);
         if (this.engines == null) {

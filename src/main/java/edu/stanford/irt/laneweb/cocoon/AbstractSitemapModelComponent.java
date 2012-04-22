@@ -27,21 +27,8 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
                 throw new LanewebException(e);
             }
         }
-        initialize();
+        if (this instanceof Initializable) {
+            ((Initializable)this).initialize();
+        }
     }
-
-    protected void initialize() {
-    }
-    // TODO: implement these more useful protected methods instead of ModelUtil
-    // protected String getValue(String name) {
-    // return getValue(name, null);
-    // }
-    //
-    // protected String getValue(String name, String defaultValue) {
-    // String value = this.parameterMap.get(name);
-    // if (value == null) {
-    // value = ModelUtil.getString(this.model, name, defaultValue);
-    // }
-    // return value;
-    // }
 }

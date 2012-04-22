@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 import java.util.Map;
 
+import edu.stanford.irt.laneweb.cocoon.Initializable;
 import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -11,7 +12,7 @@ import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
+public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware, Initializable {
 
     private long defaultTimeout;
 
@@ -92,9 +93,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
         return result;
     }
 
-    @Override
-    protected void initialize() {
-        super.initialize();
+    public void initialize() {
         this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
         this.wait = ModelUtil.getString(this.model, "wait");
         this.synchronous = ModelUtil.getString(this.model, Model.SYNCHRONOUS, this.parameters.get(Model.SYNCHRONOUS));

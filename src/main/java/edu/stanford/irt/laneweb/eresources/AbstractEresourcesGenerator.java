@@ -8,12 +8,13 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
+import edu.stanford.irt.laneweb.cocoon.Initializable;
 import edu.stanford.irt.laneweb.cocoon.ModelAware;
 import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractEresourcesGenerator extends AbstractGenerator implements ParametersAware, ModelAware {
+public abstract class AbstractEresourcesGenerator extends AbstractGenerator implements ParametersAware, ModelAware, Initializable {
 
     protected String alpha;
 
@@ -56,8 +57,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     protected abstract Collection<edu.stanford.irt.eresources.Eresource> getEresourceList();
 
-    @Override
-    protected void initialize() {
+    public void initialize() {
         this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
                 Model.TYPE);
         this.subset = this.parameters.containsKey(Model.SUBSET) ? this.parameters.get(Model.SUBSET) : ModelUtil.getString(

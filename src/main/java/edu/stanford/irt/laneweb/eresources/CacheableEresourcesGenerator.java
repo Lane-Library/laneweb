@@ -43,8 +43,7 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
                 .append(";m=").append(null == super.mesh ? "" : super.mesh).append(";page=").append(this.page).toString();
     }
 
-    @Override
-    protected void initialize() {
+    public void initialize() {
         super.initialize();
         this.expires = this.parameters.containsKey("expires") ? Long.parseLong(this.parameters.get("expires"))
                 : this.configuredExpires;

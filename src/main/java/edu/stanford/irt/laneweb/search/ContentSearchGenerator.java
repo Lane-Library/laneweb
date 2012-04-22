@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.cocoon.Initializable;
 import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -22,7 +23,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 /**
  * @author ryanmax
  */
-public class ContentSearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
+public class ContentSearchGenerator extends AbstractMetasearchGenerator implements ParametersAware, Initializable {
 
     private static final Pattern CONTENT_PATTERN = Pattern.compile(".*_content");
 
@@ -115,10 +116,8 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
         return contentResults;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
-    protected void initialize() {
-        super.initialize();
+    public void initialize() {
         this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
         this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
         if (this.engines.size() == 0) {
