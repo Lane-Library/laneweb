@@ -14,6 +14,15 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 public class ResourceSearchGenerator extends SearchGenerator {
 
     private Collection<String> resources;
+    
+    private Map<String, String> parameters;
+    
+    private Map<String, Object> model;
+    
+    public void setModel(Map<String, Object> model) {
+        super.setModel(model);
+        this.model = model;
+    }
 
     @Override
     public Result doSearch() {
@@ -32,14 +41,19 @@ public class ResourceSearchGenerator extends SearchGenerator {
         }
         return super.doSearch(enginesToRun);
     }
+    
+    public void setParameters(Map<String, String> parameters) {
+        super.setParameters(parameters);
+        this.parameters = parameters;
+    }
 
     @SuppressWarnings("unchecked")
     @Override
     protected void initialize() {
         super.initialize();
-        this.resources = ModelUtil.getObject(getModel(), Model.RESOURCES, Collection.class);
+        this.resources = ModelUtil.getObject(this.model, Model.RESOURCES, Collection.class);
         if (this.resources == null) {
-            String resourceList = getParameterMap().get("resource-list");
+            String resourceList = this.parameters.get("resource-list");
             if (resourceList == null) {
                 throw new IllegalArgumentException("null resource-list");
             }

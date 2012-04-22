@@ -7,13 +7,14 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.cocoon.ModelAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 /**
  * @author alainb
  */
-public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerator {
+public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerator implements ModelAware {
 
     public void generate() {
         Map<String, Integer> regionCountMap = this.collectionManager.searchCount(null, null, this.query);
@@ -27,9 +28,8 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
             throw new LanewebException(e);
         }
     }
-
-    @Override
-    protected void initialize() {
-        this.query = ModelUtil.getString(getModel(), Model.QUERY, "bassett");
+    
+    public void setModel(Map<String, Object> model) {
+        this.query = ModelUtil.getString(model, Model.QUERY, "bassett");
     }
 }

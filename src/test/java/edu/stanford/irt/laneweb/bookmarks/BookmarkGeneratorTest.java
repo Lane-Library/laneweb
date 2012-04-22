@@ -40,8 +40,8 @@ public class BookmarkGeneratorTest {
         verify(this.marshaller);
     }
 
-    @Test
-    public void testInitialize() {
-        this.generator.initialize();
-    }
+//    @Test
+//    public void testInitialize() {
+//        this.generator.initialize();
+//    }
 }

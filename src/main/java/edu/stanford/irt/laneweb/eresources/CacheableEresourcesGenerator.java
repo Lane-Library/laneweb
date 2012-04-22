@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
@@ -13,6 +14,8 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
     private long expires;
 
     private String key;
+    
+    private Map<String, String> parameters;
 
     public Serializable getKey() {
         if (null == this.key) {
@@ -28,6 +31,11 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
     public void setExpires(final long expires) {
         this.configuredExpires = expires;
     }
+    
+    public void setParameters(Map<String, String> parameters) {
+        super.setParameters(parameters);
+        this.parameters = parameters;
+    }
 
     private String createKey() {
         return new StringBuilder("t=").append(null == super.type ? "" : super.type).append(";s=")
@@ -38,7 +46,7 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
     @Override
     protected void initialize() {
         super.initialize();
-        this.expires = getParameterMap().containsKey("expires") ? Long.parseLong(getParameterMap().get("expires"))
+        this.expires = this.parameters.containsKey("expires") ? Long.parseLong(this.parameters.get("expires"))
                 : this.configuredExpires;
     }
 }

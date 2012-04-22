@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.ContentResult;
@@ -21,7 +22,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 /**
  * @author ryanmax
  */
-public class ContentSearchGenerator extends AbstractMetasearchGenerator {
+public class ContentSearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
 
     private static final Pattern CONTENT_PATTERN = Pattern.compile(".*_content");
 
@@ -32,6 +33,10 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
     private String timeout;
 
     protected Collection<String> engines;
+
+    private Map<String, String> parameters;
+    
+    private Map<String, Object> model;
 
     @Override
     public void generate() {
@@ -50,6 +55,15 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 
     public void setDefaultTimeout(final long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
+    }
+    
+    public void setModel(Map<String, Object> model) {
+        super.setModel(model);
+        this.model = model;
     }
 
     @Override
@@ -105,10 +119,10 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
     @SuppressWarnings("unchecked")
     protected void initialize() {
         super.initialize();
-        this.timeout = ModelUtil.getString(getModel(), Model.TIMEOUT, getParameterMap().get(Model.TIMEOUT));
-        this.engines = ModelUtil.getObject(getModel(), Model.ENGINES, Collection.class, Collections.<String> emptyList());
+        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
+        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
         if (this.engines.size() == 0) {
-            String engineList = getParameterMap().get(Model.ENGINES);
+            String engineList = this.parameters.get(Model.ENGINES);
             if (engineList != null) {
                 this.engines = new LinkedList<String>();
                 for (StringTokenizer st = new StringTokenizer(engineList, ","); st.hasMoreTokens();) {

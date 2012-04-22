@@ -67,7 +67,6 @@ public class LanewebTraxTransformerTest {
         this.traxTransformer = createMock(Transformer.class);
         this.validity = createMock(SourceValidity.class);
         expect(this.sourceResolver.resolveURI("src")).andReturn(this.source);
-        expect(this.source.getURI()).andReturn("uri");
         expect(this.parameters.getParameter("cache-key", null)).andReturn("cache-key");
         expect(this.source.getValidity()).andReturn(this.validity);
         expect(this.traxProcessor.getTransformerHandler(this.source)).andReturn(this.handler);
@@ -149,7 +148,11 @@ public class LanewebTraxTransformerTest {
 
     @Test
     public void testGetKey() {
+        reset(this.source);
+      expect(this.source.getURI()).andReturn("uri");
+      replay(this.source);
         this.transformer.getKey();
+        verify(this.source);
     }
 
     @Test

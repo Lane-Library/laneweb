@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.StringReader;
+import java.util.Map;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.xml.ContentHandlerWrapper;
@@ -17,7 +18,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent {
+public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent, ParametersAware {
 
     private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
     
@@ -107,9 +108,8 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     }
 
     @Override
-    protected void initialize() {
-        super.initialize();
-        String name = getParameterMap().get("elementName");
+    public void setParameters(Map<String, String> parameters) {
+        String name = parameters.get("elementName");
         if (name != null) {
             this.elementName = name;
         }

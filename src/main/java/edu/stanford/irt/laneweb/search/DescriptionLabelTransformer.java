@@ -20,7 +20,7 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
 
     private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z '/,]+)##");
 
-    private CharBuffer chars;
+    private CharBuffer chars = CharBuffer.allocate(256);
 
     private boolean inDescriptionElement = false;
 
@@ -83,11 +83,6 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
             xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
         }
         this.chars.clear();
-    }
-
-    @Override
-    protected void initialize() {
-        this.chars = CharBuffer.allocate(256);
     }
 
     @Override

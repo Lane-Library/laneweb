@@ -11,11 +11,12 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
+import edu.stanford.irt.laneweb.cocoon.ModelAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class EresourcesCountGenerator extends AbstractGenerator {
+public class EresourcesCountGenerator extends AbstractGenerator implements ModelAware {
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
@@ -65,9 +66,8 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         this.types = types;
     }
 
-    @Override
-    protected void initialize() {
-        this.query = ModelUtil.getString(getModel(), Model.QUERY);
+    public void setModel(Map<String, Object> model) {
+        this.query = ModelUtil.getString(model, Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }

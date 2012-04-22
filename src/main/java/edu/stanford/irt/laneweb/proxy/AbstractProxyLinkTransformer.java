@@ -1,17 +1,19 @@
 package edu.stanford.irt.laneweb.proxy;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
+import edu.stanford.irt.laneweb.cocoon.ModelAware;
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractProxyLinkTransformer extends AbstractTransformer implements CacheableProcessingComponent {
+public abstract class AbstractProxyLinkTransformer extends AbstractTransformer implements CacheableProcessingComponent, ModelAware {
 
     private static final String EZPROXY_LINK = "http://laneproxy.stanford.edu/login?user=";
 
@@ -48,6 +50,14 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer i
 		}
 		return validity;
 	}
+	
+	public void setModel(Map<String, Object> model) {
+        this.sunetid = ModelUtil.getString(model, Model.SUNETID);
+        this.ticket = ModelUtil.getObject(model, Model.TICKET, Ticket.class);
+        this.proxyLinks = ModelUtil.getObject(model, Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
+        this.ipGroup = ModelUtil.getObject(model, Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
+        this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
+	}
 
     protected String createProxyLink(final String link) {
         StringBuilder sb = new StringBuilder(128);
@@ -60,15 +70,6 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer i
         }
         sb.append(link);
         return sb.toString();
-    }
-
-    @Override
-    protected void initialize() {
-        this.sunetid = ModelUtil.getString(getModel(), Model.SUNETID);
-        this.ticket = ModelUtil.getObject(getModel(), Model.TICKET, Ticket.class);
-        this.proxyLinks = ModelUtil.getObject(getModel(), Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
-        this.ipGroup = ModelUtil.getObject(getModel(), Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
-        this.basePath = ModelUtil.getString(getModel(), Model.BASE_PATH);
     }
     
     protected ProxyHostManager getProxyHostManager() {

@@ -1,7 +1,9 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
+import java.util.Map;
 
+import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.Result;
@@ -9,7 +11,7 @@ import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class SearchGenerator extends AbstractMetasearchGenerator {
+public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
 
     private long defaultTimeout;
 
@@ -19,9 +21,22 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
 
     private String wait;
 
+    private Map<String, String> parameters;
+
+    private Map<String, Object> model;
+    
+    public void setModel(Map<String, Object> model) {
+        super.setModel(model);
+        this.model = model;
+    }
+
     @Override
     public Result doSearch() {
         return doSearch(null);
+    }
+    
+    public void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
     }
 
     public void setDefaultTimeout(final long defaultTimeout) {
@@ -80,8 +95,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.timeout = ModelUtil.getString(getModel(), Model.TIMEOUT, getParameterMap().get(Model.TIMEOUT));
-        this.wait = ModelUtil.getString(getModel(), "wait");
-        this.synchronous = ModelUtil.getString(getModel(), Model.SYNCHRONOUS, getParameterMap().get(Model.SYNCHRONOUS));
+        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
+        this.wait = ModelUtil.getString(this.model, "wait");
+        this.synchronous = ModelUtil.getString(this.model, Model.SYNCHRONOUS, this.parameters.get(Model.SYNCHRONOUS));
     }
 }

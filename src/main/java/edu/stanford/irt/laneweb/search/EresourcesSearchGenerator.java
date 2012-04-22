@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.xml.sax.SAXException;
 
@@ -16,6 +17,10 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
     private CollectionManager collectionManager;
 
     private String type;
+    
+    private Map<String, String> parameters;
+
+    private Map<String, Object> model;
 
     public void generate() {
         PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.page);
@@ -32,6 +37,15 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
             throw new IllegalArgumentException("null collectionManager");
         }
         this.collectionManager = collectionManager;
+    }
+    
+    public void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
+    }
+    
+    public void setModel(Map<String, Object> model) {
+        super.setModel(model);
+        this.model = model;
     }
 
     protected Collection<SearchResult> getEresourceList() {
@@ -54,7 +68,7 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.type = getParameterMap().containsKey(Model.TYPE) ? getParameterMap().get(Model.TYPE) : ModelUtil.getString(getModel(),
+        this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
                 Model.TYPE);
     }
 }

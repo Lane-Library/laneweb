@@ -7,41 +7,27 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.objectmodel.helper.ParametersMap;
 import org.apache.cocoon.sitemap.SitemapModelComponent;
-import org.apache.excalibur.source.Source;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 public abstract class AbstractSitemapModelComponent implements SitemapModelComponent {
-
-    private Map<String, Object> model;
-
-    private Map<String, String> parameterMap;
-
-    private Source source;
-
-    @Override
+    
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public final void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.model = objectModel;
-        this.parameterMap = new ParametersMap(par);
-        if (null != src) {
+    public final void setup(final SourceResolver resolver, final Map model, final String src, final Parameters par) {
+        if (this instanceof ModelAware) {
+            ((ModelAware)this).setModel(model);
+        }
+        if (this instanceof ParametersAware) {
+            ((ParametersAware)this).setParameters(new ParametersMap(par));
+        }
+        if (this instanceof SourceAware) {
             try {
-                this.source = resolver.resolveURI(src);
+                ((SourceAware)this).setSource(resolver.resolveURI(src));
             } catch (IOException e) {
-                throw new IllegalArgumentException(e);
+                throw new LanewebException(e);
             }
         }
         initialize();
-    }
-
-    protected Map<String, Object> getModel() {
-        return this.model;
-    }
-
-    protected Map<String, String> getParameterMap() {
-        return this.parameterMap;
-    }
-
-    protected Source getSource() {
-        return this.source;
     }
 
     protected void initialize() {

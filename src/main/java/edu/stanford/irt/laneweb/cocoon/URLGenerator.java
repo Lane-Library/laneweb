@@ -11,30 +11,35 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-public class URLGenerator extends AbstractGenerator implements CacheableProcessingComponent {
+public class URLGenerator extends AbstractGenerator implements CacheableProcessingComponent, SourceAware {
 
     private SAXParser saxParser;
+    
+    private Source source;
 
     public void generate() throws IOException, SAXException {
-    	Source source = getSource();
-    	if (source instanceof XMLizable) {
-    		((XMLizable)source).toSAX(getXMLConsumer());
+    	if (this.source instanceof XMLizable) {
+    		((XMLizable)this.source).toSAX(getXMLConsumer());
     	} else {
-    		InputSource inputSource = new InputSource(source.getInputStream());
-    		inputSource.setSystemId(source.getURI());
+    		InputSource inputSource = new InputSource(this.source.getInputStream());
+    		inputSource.setSystemId(this.source.getURI());
     		this.saxParser.parse(inputSource, getXMLConsumer());
     	}
     }
 
     public Serializable getKey() {
-        return getSource().getURI();
+        return this.source.getURI();
     }
 
     public SourceValidity getValidity() {
-        return getSource().getValidity();
+        return this.source.getValidity();
     }
 
     public void setParser(final SAXParser saxParser) {
         this.saxParser = saxParser;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 }

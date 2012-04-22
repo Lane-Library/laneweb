@@ -1,10 +1,13 @@
 package edu.stanford.irt.laneweb.cme;
 
+import java.util.Map;
+
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
+import edu.stanford.irt.laneweb.cocoon.ModelAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractCMELinkTransformer extends AbstractTransformer {
+public abstract class AbstractCMELinkTransformer extends AbstractTransformer implements ModelAware {
 
     private static final String UTD_CME_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
 
@@ -13,6 +16,10 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer {
     private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
 
     protected String emrid;
+    
+    public void setModel(Map<String, Object> model) {
+        this.emrid = ModelUtil.getString(model, Model.EMRID);
+    }
 
     protected String createCMELink(final String link) {
         StringBuffer sb = new StringBuffer();
@@ -24,11 +31,6 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer {
             sb.append(link);
         }
         return sb.toString();
-    }
-
-    @Override
-    protected void initialize() {
-        this.emrid = ModelUtil.getString(getModel(), Model.EMRID);
     }
 
     protected boolean isCMEHost(final String link) {

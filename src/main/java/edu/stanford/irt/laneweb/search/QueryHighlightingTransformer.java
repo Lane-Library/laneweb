@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.nio.CharBuffer;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,11 +11,12 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
+import edu.stanford.irt.laneweb.cocoon.ModelAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.Resource;
 
-public class QueryHighlightingTransformer extends AbstractTransformer {
+public class QueryHighlightingTransformer extends AbstractTransformer implements ModelAware {
 
     public static final String EMPTY = "";
 
@@ -27,6 +29,15 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
     private Pattern queryPattern;
 
     private boolean inTargetElement = false;
+    
+    public void setModel(Map<String, Object> model) {
+        String query = ModelUtil.getString(model, Model.QUERY);
+        if (null == query) {
+            throw new IllegalArgumentException("null query");
+        }
+        this.queryPattern = QueryTermPattern.getPattern(query);
+        this.chars = CharBuffer.allocate(256);
+    }
     
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
@@ -99,15 +110,5 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
             xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
         }
         this.chars.clear();
-    }
-
-    @Override
-    protected void initialize() {
-        String query = ModelUtil.getString(getModel(), Model.QUERY);
-        if (null == query) {
-            throw new IllegalArgumentException("null query");
-        }
-        this.queryPattern = QueryTermPattern.getPattern(query);
-        this.chars = CharBuffer.allocate(256);
     }
 }

@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.bassett;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
@@ -8,13 +9,14 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.cocoon.ModelAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 /**
  * @author alainb
  */
-public class BassettEresourcesGenerator extends AbstractBassettGenerator {
+public class BassettEresourcesGenerator extends AbstractBassettGenerator implements ModelAware {
 
     private String bassettNumber;
 
@@ -45,11 +47,10 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
             throw new LanewebException(e);
         }
     }
-
-    @Override
-    protected void initialize() {
-        this.query = ModelUtil.getString(getModel(), Model.QUERY);
-        this.region = ModelUtil.getString(getModel(), Model.REGION);
-        this.bassettNumber = ModelUtil.getString(getModel(), Model.BASSETT_NUMBER);
+    
+    public void setModel(Map<String, Object> model) {
+        this.query = ModelUtil.getString(model, Model.QUERY);
+        this.region = ModelUtil.getString(model, Model.REGION);
+        this.bassettNumber = ModelUtil.getString(model, Model.BASSETT_NUMBER);
     }
 }

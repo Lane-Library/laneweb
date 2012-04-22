@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.transform.sax.SAXResult;
@@ -9,13 +10,16 @@ import javax.xml.transform.sax.TransformerHandler;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.transformation.Transformer;
 import org.apache.cocoon.xml.XMLConsumer;
+import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer {
+public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer, SourceAware, ParametersAware, ModelAware {
 
+    private String cacheKeyParameter;
+    
     private Serializable cacheKey;
 
     private Locator locator;
@@ -27,6 +31,12 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     private SourceValidity validity;
 
     private XMLConsumer xmlConsumer;
+    
+    private Source source;
+    
+    private Map<String, String> parameters;
+
+    private Map<String, Object> model;
 
     public LanewebTraxTransformer(final TraxProcessor traxProcessor) {
         this.traxProcessor = traxProcessor;
@@ -65,6 +75,12 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     }
 
     public Serializable getKey() {
+        if (this.cacheKey == null) {
+            this.cacheKey = this.source.getURI();
+            if (this.cacheKeyParameter != null) {
+                this.cacheKey = this.cacheKey + ";" + this.cacheKeyParameter;
+            }
+        }
         return this.cacheKey;
     }
 
@@ -131,12 +147,12 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     }
 
     private void setupTransformerHandler() {
-        this.transformerHandler = this.traxProcessor.getTransformerHandler(getSource());
+        this.transformerHandler = this.traxProcessor.getTransformerHandler(this.source);
         javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
-        for (Entry<String, Object> entry : getModel().entrySet()) {
+        for (Entry<String, Object> entry : this.model.entrySet()) {
             transformer.setParameter(entry.getKey(), entry.getValue().toString());
         }
-        for (Entry<String, String> entry : getParameterMap().entrySet()) {
+        for (Entry<String, String> entry : this.parameters.entrySet()) {
             transformer.setParameter(entry.getKey(), entry.getValue());
         }
         SAXResult result = new SAXResult(this.xmlConsumer);
@@ -144,13 +160,17 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         this.transformerHandler.setResult(result);
     }
 
-    @Override
-    protected void initialize() {
-        this.cacheKey = getSource().getURI();
-        String paramCacheKey = getParameterMap().get("cache-key");
-        if (paramCacheKey != null) {
-            this.cacheKey = this.cacheKey + ";" + paramCacheKey;
-        }
-        this.validity = getSource().getValidity();
+    public void setSource(Source source) {
+        this.source = source;
+        this.validity = source.getValidity();
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        this.cacheKeyParameter = parameters.get("cache-key");
+        this.parameters = parameters;
+    }
+    
+    public void setModel(Map<String, Object> model) {
+        this.model = model;
     }
 }

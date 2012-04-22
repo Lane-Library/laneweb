@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.io.IOException;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
+import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.cyberneko.html.HTMLConfiguration;
@@ -13,7 +14,7 @@ import org.xml.sax.SAXException;
  * The neko html generator reads HTML from a source, converts it to XHTML and
  * generates SAX Events. It uses the NekoHTML library to do this.
  */
-public class HTMLGenerator extends AbstractGenerator implements CacheableProcessingComponent {
+public class HTMLGenerator extends AbstractGenerator implements CacheableProcessingComponent, SourceAware {
     
     private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
 
@@ -23,6 +24,8 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
             super(conf);
         }
     }
+    
+    private Source source;
 
     /**
      * Generate XML data.
@@ -41,8 +44,8 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
         parser.setContentHandler(getXMLConsumer());
         InputSource inputSource = new InputSource();
         try {
-            inputSource.setByteStream(getSource().getInputStream());
-            inputSource.setSystemId(getSource().getURI());
+            inputSource.setByteStream(this.source.getInputStream());
+            inputSource.setSystemId(this.source.getURI());
             parser.parse(inputSource);
         } finally {
             if (inputSource.getByteStream() != null) {
@@ -60,7 +63,7 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
      *         not cacheable.
      */
     public java.io.Serializable getKey() {
-        return getSource().getURI();
+        return this.source.getURI();
     }
 
     /**
@@ -71,6 +74,10 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
      *         component is currently not cacheable.
      */
     public SourceValidity getValidity() {
-        return getSource().getValidity();
+        return this.source.getValidity();
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 }
