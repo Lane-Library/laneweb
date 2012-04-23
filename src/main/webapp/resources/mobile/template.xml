@@ -4,7 +4,7 @@
     <head>
         <title>Lane Medical Library</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width,maximum-scale=2.0,minimum-scale=1.0" />
+        <meta name="viewport" content="width=device-width,maximum-scale=1.0,minimum-scale=1.0" />
         <link rel="icon" type="image/png" href="/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" href="http://lane.stanford.edu/apple-touch-icon.png" />
         <!-- 
@@ -28,8 +28,11 @@
         <script type="text/javascript" src="/resources/javascript/mobile/jquery.mobile-1.0.1.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/jquery-ui-1.8.16.custom.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/m-lane.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-hours.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/m-login.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-search.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/m-spellcheck.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-suggest.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/m-tracking.js"> </script>
          -->
         <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${timestamp}"> </script>
