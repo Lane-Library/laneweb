@@ -48,8 +48,8 @@ $.ajax({
     
     $.LANE.tracking.track = function(e) {
         var node = e.srcElement || e.target, basePath, label;
-        // find parent A for IMG nodes if possible
-        if(node.nodeName == 'IMG'){
+        // find parent A for IMG and STRONG nodes if possible
+        if(node.nodeName == 'IMG'||node.nodeName == 'STRONG'){
             while (node && node.nodeName != 'A') {
                 node = node.parentNode;
                 if (node === null) {
