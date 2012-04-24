@@ -70,6 +70,5 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
     public void initialize() {
         this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
                 Model.TYPE);
-        System.out.println("");
     }
 }
