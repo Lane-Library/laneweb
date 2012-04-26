@@ -7,6 +7,19 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-04-30" version="1.12.28" description="1.12.28 bug fix release">
+            <action date="2012-04-26" dev="ceyates" issue="68803" type="update">
+                remove the proxy-links toggle links from the bookmarks template 
+            </action>
+            <action date="2012-04-23" dev="ryanmax" issue="68662" type="fix">
+                mobile search result clicks not always being tracked
+            </action>
+        </release>
+        <release date="2012-04-24" version="1.12.27" description="1.12.27 emergency release">
+            <action date="2012-04-24" dev="ryanmax" issue="68718" type="fix">
+                eresources search generating NullPointerExceptions 
+            </action>
+        </release>
         <release date="2012-04-23" version="1.12.26" description="1.12.26 bug fix release">
             <action date="2012-04-20" dev="ceyates" issue="68554" type="add">
                 disable BookmarkLink for selected pages 
