@@ -57,8 +57,8 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- the 5th #login li is the proxy-off toggle -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[5]">
+    <!-- the 5th #login li is the proxy-off toggle  DISABLED as of 4/26/2012 TODO:remove-->
+    <!--<xsl:template match="h:ul[attribute::id='login']/h:li[5]">
         <xsl:if test="$proxy-links and string-length($sunetid) = 0 and matches($ipgroup,'^(OTHER|PAVA|LPCH|SHC|ERR)$')">
             <xsl:copy>
                 <a>
@@ -84,10 +84,10 @@
                 </a>
             </xsl:copy>
         </xsl:if>
-    </xsl:template>
+    </xsl:template>-->
 
-    <!-- the 6th #login li is the proxy-on toggle -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[6]">
+    <!-- the 6th #login li is the proxy-on toggle DISABLED as of 4/26/2012 TODO:remove-->
+    <!--<xsl:template match="h:ul[attribute::id='login']/h:li[6]">
         <xsl:if test="$proxy-links and string-length($sunetid) = 0 and matches($ipgroup,'^(OTHER|PAVA|LPCH|SHC|ERR)$')">
             <xsl:copy>
                 <a>
@@ -113,6 +113,6 @@
                 </a>
             </xsl:copy>
         </xsl:if>
-    </xsl:template>
+    </xsl:template>-->
 
 </xsl:stylesheet>
