@@ -289,7 +289,7 @@
 	font-weight: bold;
 	margin-top: 2em;
 	z-index: 5;
-	margin-bottom: -4px;
+	margin-bottom: -5px;
 }
 
 #tabs-2012 .active {
@@ -317,6 +317,7 @@
 		     '#fafbf8', endColorstr =           '#dadad4' );
 	border: 1px solid #dadad9;
 	margin-left: 0;
+	margin-right: 2px;
 	list-style: none outside none;
 	float: left;
 }
@@ -338,9 +339,8 @@
 	display: inline-block;
 	text-decoration: none;
 	border-bottom: none;
-	padding: 1.2em;
+	padding: 1.5em;
 	font-weight: bold;
-	margin: .5em;
 	position: relative;
 	vertical-align: middle;
 }
