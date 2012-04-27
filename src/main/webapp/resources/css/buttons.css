@@ -282,7 +282,7 @@
 #seeAll:hover {
 	background-image: url(/././resources/images/seeall-but-on.gif);
 }
-
+/*-------------------------------------------------------------------------------------------------------------------------------*/
 /*styles for  big gray gradient tabs*/
 #tabs-2012 {
 	display: inline-block;
@@ -335,7 +335,7 @@
 }
 
 #tabs-2012 li a {
-	color: #444444 !important;
+	color: #444444 !important; /*to overwrite the color of the text links*/
 	display: inline-block;
 	text-decoration: none;
 	border-bottom: none;
@@ -346,13 +346,14 @@
 }
 
 #tabs-2012 li a:hover {
-	color: #ffffff !important;
+	color: #ffffff !important; /*to overwrite the color of the text links*/
 }
 
 #step1,#step2,#step3,#step4,#step5 {
 	border: 1px solid #dadad9;
 }
-#step1 .module,#step2 .module,#step3 .module,#step4 .module,#step5 .module
+
+#step1 .module, #step2 .module, #step3 .module, #step4 .module, #step5 .module
 	{
 	margin: 2em;
 	z-index: 1;
