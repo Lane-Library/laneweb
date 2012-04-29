@@ -41,11 +41,11 @@ public class AbstractProxyLinkTransformerTest {
     }
 
     @Test
-    public void testHospitalIP() {
-        this.model.put(Model.IPGROUP, IPGroup.SHC);
+    public void testGetKeyFalse() {
+    	this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
         replay(this.parameters);
         this.transformer.setup(null, this.model, null, this.parameters);
-        assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
+        assertEquals("false", this.transformer.getKey());
         verify(this.parameters);
     }
     
@@ -55,15 +55,6 @@ public class AbstractProxyLinkTransformerTest {
         replay(this.parameters);
         this.transformer.setup(null, this.model, null, this.parameters);
         assertEquals("true", this.transformer.getKey());
-        verify(this.parameters);
-    }
-    
-    @Test
-    public void testGetKeyFalse() {
-    	this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
-        replay(this.parameters);
-        this.transformer.setup(null, this.model, null, this.parameters);
-        assertEquals("false", this.transformer.getKey());
         verify(this.parameters);
     }
     
@@ -82,6 +73,15 @@ public class AbstractProxyLinkTransformerTest {
         replay(this.parameters);
         this.transformer.setup(null, this.model, null, this.parameters);
         assertNull(this.transformer.getValidity());
+        verify(this.parameters);
+    }
+    
+    @Test
+    public void testHospitalIP() {
+        this.model.put(Model.IPGROUP, IPGroup.SHC);
+        replay(this.parameters);
+        this.transformer.setup(null, this.model, null, this.parameters);
+        assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
         verify(this.parameters);
     }
 }

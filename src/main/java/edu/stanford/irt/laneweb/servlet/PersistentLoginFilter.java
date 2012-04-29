@@ -15,6 +15,8 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class PersistentLoginFilter extends AbstractLanewebFilter {
 
+	public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
+
 	/**
 	 * this codec codes and decodes the cookie value using sunet id, useragent
 	 * and time of creation
@@ -22,8 +24,6 @@ public class PersistentLoginFilter extends AbstractLanewebFilter {
 	private SunetIdCookieCodec codec = new SunetIdCookieCodec();
 
 	private SunetIdSource sunetIdSource = new SunetIdSource();
-
-	public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
 
 	@Override
 	public void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,

@@ -19,6 +19,11 @@ public class DebugTransformer extends AbstractTransformer implements ModelAware 
     
     private Set<Entry<String, Object>> modelEntries;
 
+    public void setModel(Map<String, Object> model) {
+        this.debug = ModelUtil.getObject(model, Model.DEBUG, Boolean.class, Boolean.FALSE);
+        this.modelEntries = model.entrySet();
+    }
+    
     @Override
     public void startDocument() throws SAXException {
         super.startDocument();
@@ -30,10 +35,5 @@ public class DebugTransformer extends AbstractTransformer implements ModelAware 
             sb.append('\n');
             comment(sb.toString().toCharArray(), 0, sb.length());
         }
-    }
-    
-    public void setModel(Map<String, Object> model) {
-        this.debug = ModelUtil.getObject(model, Model.DEBUG, Boolean.class, Boolean.FALSE);
-        this.modelEntries = model.entrySet();
     }
 }

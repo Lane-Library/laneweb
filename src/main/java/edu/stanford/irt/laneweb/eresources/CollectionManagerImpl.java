@@ -24,8 +24,6 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class CollectionManagerImpl implements CollectionManager {
     
-    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
-
     private static final String BROWSE =
             "SELECT ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_TYPE, ERESOURCE.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES, VERSION.DESCRIPTION AS V_DESCRIPTION, DESCRIPTION.DESCRIPTION AS E_DESCRIPTION, LABEL, URL, INSTRUCTION, "
@@ -151,6 +149,8 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "AND SUBSET.SUBSET = ? "
                     + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
+    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+
     protected DataSource dataSource;
 
     public Collection<Eresource> getCore(final String type) {
@@ -164,6 +164,10 @@ public class CollectionManagerImpl implements CollectionManager {
         params.add(mesh);
         params.add(type);
         return doGet(MESH, params, null);
+    }
+
+    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
+        throw new UnsupportedOperationException();
     }
 
     public Collection<Eresource> getSubset(final String subset) {
@@ -208,6 +212,11 @@ public class CollectionManagerImpl implements CollectionManager {
         return doGet(SEARCH, params, query);
     }
 
+    //TODO: remove these when upgrading to 1.8
+    public Map<String, Integer> searchCount(Set<String> types, Set<String> subsets, String query) {
+        return searchCount(types, query);
+    }
+
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         StringBuilder sb = new StringBuilder(COUNT);
@@ -241,6 +250,10 @@ public class CollectionManagerImpl implements CollectionManager {
         }
     }
 
+    public Collection<Eresource> searchSubset(String subset, String query) {
+        throw new UnsupportedOperationException();
+    }
+
     public Collection<Eresource> searchType(final String type, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
@@ -250,6 +263,7 @@ public class CollectionManagerImpl implements CollectionManager {
         params.add(type);
         return doGet(SEARCH_TYPE, params, query);
     }
+
 
     public void setDataSource(final DataSource dataSource) {
         if (null == dataSource) {
@@ -344,19 +358,5 @@ public class CollectionManagerImpl implements CollectionManager {
             }
         }
         return eresources;
-    }
-
-
-    //TODO: remove these when upgrading to 1.8
-    public Map<String, Integer> searchCount(Set<String> types, Set<String> subsets, String query) {
-        return searchCount(types, query);
-    }
-
-    public Collection<Eresource> searchSubset(String subset, String query) {
-        throw new UnsupportedOperationException();
-    }
-
-    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
-        throw new UnsupportedOperationException();
     }
 }

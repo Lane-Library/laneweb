@@ -92,6 +92,23 @@ public class NonCachingPipelineTest {
     }
 
     @Test
+    public void testProcessEnvironment() throws ProcessingException, SAXException, IOException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/null")).andReturn(this.generator);
+        expect(this.beanFactory.getBean("org.apache.cocoon.serialization.Serializer/null")).andReturn(this.serializer);
+        expect(this.environment.getObjectModel()).andReturn(null);
+        expect(this.environment.getOutputStream(0)).andReturn(null);
+        this.generator.setup(null, null, null, null);
+        this.generator.setConsumer(this.serializer);
+        this.generator.generate();
+        this.serializer.setOutputStream(null);
+    	replay(this.beanFactory, this.environment, this.generator, this.serializer);
+        this.pipeline.setGenerator(null, null, null, null);
+        this.pipeline.setSerializer(null, null, null, null, "text/plain");
+    	this.pipeline.process(this.environment);
+    	verify(this.beanFactory, this.environment, this.generator, this.serializer);
+    }
+
+    @Test
     public void testProcessEnvironmentXMLConsumer() throws ProcessingException, IOException, SAXException {
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/null")).andReturn(this.generator);
         expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/null")).andReturn(this.transformer);
@@ -147,7 +164,7 @@ public class NonCachingPipelineTest {
         this.pipeline.setSerializer(null, null, null, null, "text/plain");
         verify(this.beanFactory, this.generator, this.serializer);
     }
-
+    
     @Test
     public void testSetup() {
         expect(this.parameters.getParameter("expires", null)).andReturn("access plus 1 seconds");
@@ -157,22 +174,5 @@ public class NonCachingPipelineTest {
         assertEquals(1000, this.pipeline.getExpires());
         assertEquals(1024, this.pipeline.getOutputBufferSize());
         verify(this.parameters);
-    }
-    
-    @Test
-    public void testProcessEnvironment() throws ProcessingException, SAXException, IOException {
-        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/null")).andReturn(this.generator);
-        expect(this.beanFactory.getBean("org.apache.cocoon.serialization.Serializer/null")).andReturn(this.serializer);
-        expect(this.environment.getObjectModel()).andReturn(null);
-        expect(this.environment.getOutputStream(0)).andReturn(null);
-        this.generator.setup(null, null, null, null);
-        this.generator.setConsumer(this.serializer);
-        this.generator.generate();
-        this.serializer.setOutputStream(null);
-    	replay(this.beanFactory, this.environment, this.generator, this.serializer);
-        this.pipeline.setGenerator(null, null, null, null);
-        this.pipeline.setSerializer(null, null, null, null, "text/plain");
-    	this.pipeline.process(this.environment);
-    	verify(this.beanFactory, this.environment, this.generator, this.serializer);
     }
 }

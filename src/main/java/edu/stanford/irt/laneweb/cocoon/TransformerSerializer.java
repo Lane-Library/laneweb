@@ -59,6 +59,10 @@ public class TransformerSerializer extends AbstractXMLPipe implements Serializer
         return this.cachingKey;
     }
 
+    public String getMimeType() {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * Generate the validity object. Before this method can be invoked the
      * generateKey() method must be invoked.
@@ -81,10 +85,6 @@ public class TransformerSerializer extends AbstractXMLPipe implements Serializer
         } catch (TransformerConfigurationException e) {
             throw new LanewebException(e);
         }
-    }
-
-    public String getMimeType() {
-        throw new UnsupportedOperationException();
     }
 
     public boolean shouldSetContentLength() {

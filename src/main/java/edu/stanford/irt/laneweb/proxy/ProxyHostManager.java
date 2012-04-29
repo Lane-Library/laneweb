@@ -20,8 +20,6 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public final class ProxyHostManager {
     
-    private static final String UNION = "union ";
-
     private static class DatabaseProxyHostSet extends HashSet<String> {
 
         private static final long serialVersionUID = 1L;
@@ -75,6 +73,8 @@ public final class ProxyHostManager {
             }
         }
     }
+
+    private static final String UNION = "union ";
 
     // update every 2 hours
     private static final long UPDATE_INTERVAL = 1000 * 60 * 60 * 2;

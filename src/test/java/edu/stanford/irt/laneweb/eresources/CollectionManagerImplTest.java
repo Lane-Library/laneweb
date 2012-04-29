@@ -20,11 +20,11 @@ import org.junit.Test;
 
 public class CollectionManagerImplTest {
 	
-	private CollectionManagerImpl manager;
-	private DataSource dataSource;
 	private Connection connection;
-	private PreparedStatement statement;
+	private DataSource dataSource;
+	private CollectionManagerImpl manager;
 	private ResultSet resultSet;
+	private PreparedStatement statement;
 
 	@Before
 	public void setUp() throws Exception {
@@ -111,6 +111,16 @@ public class CollectionManagerImplTest {
 	}
 
 	@Test
+	public void testSearchCountSetOfStringSetOfStringString() throws SQLException {
+		this.statement.setString(1, "((${query})) ");
+		this.statement.setString(2, "type");
+		this.statement.setString(3, "type");
+		expect(this.resultSet.next()).andReturn(false);
+		replay(this.statement, this.resultSet);
+		this.manager.searchCount(Collections.singleton("type"), Collections.singleton("subset"), "query");
+	}
+
+	@Test
 	public void testSearchCountSetOfStringString() throws SQLException {
 		this.statement.setString(1, "((${query})) ");
 		this.statement.setString(2, "type");
@@ -128,16 +138,6 @@ public class CollectionManagerImplTest {
 		expect(this.resultSet.next()).andReturn(false);
 		replay(this.statement, this.resultSet);
 		this.manager.searchType("type", "query");
-	}
-
-	@Test
-	public void testSearchCountSetOfStringSetOfStringString() throws SQLException {
-		this.statement.setString(1, "((${query})) ");
-		this.statement.setString(2, "type");
-		this.statement.setString(3, "type");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.searchCount(Collections.singleton("type"), Collections.singleton("subset"), "query");
 	}
 
 }

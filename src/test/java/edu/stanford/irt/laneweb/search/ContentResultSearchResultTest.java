@@ -26,6 +26,8 @@ import edu.stanford.irt.search.impl.DefaultContentResult;
 
 public class ContentResultSearchResultTest {
 
+    private ContentResult contentResult;
+
     private DefaultContentResult contentResult1;
 
     private DefaultContentResult contentResult2;
@@ -33,12 +35,23 @@ public class ContentResultSearchResultTest {
     private ContentResultSearchResult contentResultSearchResult1;
 
     private ContentResultSearchResult contentResultSearchResult2;
-
-    private Pattern queryTermPattern;
     
-    private ContentResultSearchResult result;
+    private Pattern queryTermPattern;
 
-	private ContentResult contentResult;
+	private ContentResultSearchResult result;
+
+    @Before
+    public void setUp() {
+    	this.contentResult = createMock(ContentResult.class);
+    	this.queryTermPattern = QueryTermPattern.getPattern("query");
+    	expect(this.contentResult.getTitle()).andReturn("title").times(4);
+    	expect(this.contentResult.getId()).andReturn("id");
+    	expect(this.contentResult.getDescription()).andReturn("description").times(2);
+    	expect(this.contentResult.getPublicationDate()).andReturn("publicationDate").times(2);
+    	replay(this.contentResult);
+    	this.result = new ContentResultSearchResult(this.contentResult, this.queryTermPattern);
+    	verify(this.contentResult);
+    }
 
     @Test
     public void testCompareToDescriptionHits() {
@@ -115,7 +128,7 @@ public class ContentResultSearchResultTest {
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) > 0);
     }
-
+    
     @Test
     public void testCompareToWeighting() {
         this.queryTermPattern = QueryTermPattern.getPattern("query terms");
@@ -152,32 +165,6 @@ public class ContentResultSearchResultTest {
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) == 0);
     }
-    
-    @Before
-    public void setUp() {
-    	this.contentResult = createMock(ContentResult.class);
-    	this.queryTermPattern = QueryTermPattern.getPattern("query");
-    	expect(this.contentResult.getTitle()).andReturn("title").times(4);
-    	expect(this.contentResult.getId()).andReturn("id");
-    	expect(this.contentResult.getDescription()).andReturn("description").times(2);
-    	expect(this.contentResult.getPublicationDate()).andReturn("publicationDate").times(2);
-    	replay(this.contentResult);
-    	this.result = new ContentResultSearchResult(this.contentResult, this.queryTermPattern);
-    	verify(this.contentResult);
-    }
-
-	@Test
-	public void testHashCode() {
-		ContentResult result = createMock(ContentResult.class);
-    	expect(result.getTitle()).andReturn("the title").times(4);
-    	expect(result.getId()).andReturn("id");
-    	expect(result.getDescription()).andReturn("description").times(2);
-    	expect(result.getPublicationDate()).andReturn("publicationDate").times(2);
-    	replay(result);
-    	ContentResultSearchResult other = new ContentResultSearchResult(result, this.queryTermPattern);
-    	assertEquals(this.result.hashCode(), other.hashCode());
-    	verify(result);
-	}
 
 	@Test
 	public void testEqualsObject() {
@@ -211,6 +198,29 @@ public class ContentResultSearchResultTest {
 	}
 
 	@Test
+	public void testGetScore() {
+		assertEquals(1, this.result.getScore());
+	}
+
+	@Test
+	public void testGetSortTitle() {
+		assertEquals("title", this.result.getSortTitle());
+	}
+
+	@Test
+	public void testHashCode() {
+		ContentResult result = createMock(ContentResult.class);
+    	expect(result.getTitle()).andReturn("the title").times(4);
+    	expect(result.getId()).andReturn("id");
+    	expect(result.getDescription()).andReturn("description").times(2);
+    	expect(result.getPublicationDate()).andReturn("publicationDate").times(2);
+    	replay(result);
+    	ContentResultSearchResult other = new ContentResultSearchResult(result, this.queryTermPattern);
+    	assertEquals(this.result.hashCode(), other.hashCode());
+    	verify(result);
+	}
+
+	@Test
 	public void testSetGetResourceHits() {
 		this.result.setResourceHits("resourceHits");
 		assertEquals("resourceHits", this.result.getResourceHits());
@@ -232,16 +242,6 @@ public class ContentResultSearchResultTest {
 	public void testSetGetResourceUrl() {
 		this.result.setResourceUrl("resourceUrl");
 		assertEquals("resourceUrl", this.result.getResourceUrl());
-	}
-
-	@Test
-	public void testGetScore() {
-		assertEquals(1, this.result.getScore());
-	}
-
-	@Test
-	public void testGetSortTitle() {
-		assertEquals("title", this.result.getSortTitle());
 	}
 
 	@Test

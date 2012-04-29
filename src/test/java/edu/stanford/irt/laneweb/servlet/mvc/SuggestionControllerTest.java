@@ -22,13 +22,13 @@ import edu.stanford.irt.suggest.SuggestionManager;
  */
 public class SuggestionControllerTest {
 
+    private SuggestionController controller;
+
     private SuggestionManager eresource;
 
     private SuggestionManager history;
 
     private SuggestionManager mesh;
-
-    private SuggestionController controller;
 
     /**
      * @throws java.lang.Exception

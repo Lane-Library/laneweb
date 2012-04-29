@@ -28,19 +28,13 @@ import org.xml.sax.SAXException;
 
 public class LanewebTraxTransformerTest {
     
-    private LanewebTraxTransformer transformer;
+    private Attributes attributes;
     
     private char[] chars;
 
-    private XMLConsumer xmlConsumer;
+    private TransformerHandler handler;
 
     private Locator locator;
-
-    private Attributes attributes;
-
-    private TraxProcessor traxProcessor;
-
-    private SourceResolver sourceResolver;
 
     private Map<String, Object> model;
 
@@ -48,11 +42,17 @@ public class LanewebTraxTransformerTest {
 
     private Source source;
 
-    private TransformerHandler handler;
+    private SourceResolver sourceResolver;
+
+    private LanewebTraxTransformer transformer;
+
+    private TraxProcessor traxProcessor;
 
     private Transformer traxTransformer;
 
     private SourceValidity validity;
+
+    private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {

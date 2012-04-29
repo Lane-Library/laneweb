@@ -14,15 +14,20 @@ import org.junit.Test;
 
 public class BasePathSubstitutingInputStreamTest {
     
-    private String substituted = "here is some text with /stage/ in it";
-    
     private BasePathSubstitutingInputStream in;
     
     private InputStream original = new ByteArrayInputStream("here is some text with /././ in it".getBytes());
+    
+    private String substituted = "here is some text with /stage/ in it";
 
     @Before
     public void setUp() throws Exception {
         this.in = new BasePathSubstitutingInputStream(this.original, "/stage");
+    }
+
+    @Test
+    public void testMarkSupported() {
+        assertFalse(in.markSupported());
     }
 
     @Test
@@ -47,11 +52,6 @@ public class BasePathSubstitutingInputStreamTest {
         byte[] buffer = new byte[1024];
         int length = this.in.read(buffer, 10, 27);
         assertEquals(this.substituted.substring(0, 27), new String(buffer, 10, length));
-    }
-
-    @Test
-    public void testMarkSupported() {
-        assertFalse(in.markSupported());
     }
 
     @Test

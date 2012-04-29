@@ -58,6 +58,21 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
         getXMLConsumer().endElement(uri, localName, qName);
     }
 
+    @Override
+    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
+            throws SAXException {
+        if ("description".equals(localName)) {
+            ++this.parseLevel;
+            this.inDescriptionElement = true;
+        }
+        // don't process child elements of description
+        else if (this.inDescriptionElement) {
+            handleMatches();
+            this.parseLevel--;
+        }
+        getXMLConsumer().startElement(uri, localName, qName, atts);
+    }
+
     private void handleMatches() throws SAXException {
         int charsEnd = this.chars.position();
         this.chars.rewind();
@@ -83,20 +98,5 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
             xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
         }
         this.chars.clear();
-    }
-
-    @Override
-    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
-            throws SAXException {
-        if ("description".equals(localName)) {
-            ++this.parseLevel;
-            this.inDescriptionElement = true;
-        }
-        // don't process child elements of description
-        else if (this.inDescriptionElement) {
-            handleMatches();
-            this.parseLevel--;
-        }
-        getXMLConsumer().startElement(uri, localName, qName, atts);
     }
 }

@@ -10,6 +10,23 @@ import org.springframework.core.io.Resource;
 
 public class SpringResourceSource implements Source {
 
+    /**
+     * A private always invalid source validity to avoid returning a null validity.
+     */
+    private static SourceValidity INVALID = new SourceValidity() {
+
+        private static final long serialVersionUID = 1L;
+
+        public int isValid() {
+            return SourceValidity.INVALID;
+        }
+
+        public int isValid(SourceValidity newValidity) {
+            return SourceValidity.INVALID;
+        }
+        
+    };
+
     private Resource resource;
 
     public SpringResourceSource(final Resource resource) {
@@ -63,24 +80,7 @@ public class SpringResourceSource implements Source {
             return INVALID;
         }
     }
-
+    
     public void refresh() {
     }
-    
-    /**
-     * A private always invalid source validity to avoid returning a null validity.
-     */
-    private static SourceValidity INVALID = new SourceValidity() {
-
-        private static final long serialVersionUID = 1L;
-
-        public int isValid() {
-            return SourceValidity.INVALID;
-        }
-
-        public int isValid(SourceValidity newValidity) {
-            return SourceValidity.INVALID;
-        }
-        
-    };
 }

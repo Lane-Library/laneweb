@@ -12,9 +12,9 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class RegexpSitemapURIMatcherTest {
 
-    private RegexpSitemapURIMatcher matcher;
-
     Map<String, Object> model;
+
+    private RegexpSitemapURIMatcher matcher;
 
     @Before
     public void setUp() throws Exception {

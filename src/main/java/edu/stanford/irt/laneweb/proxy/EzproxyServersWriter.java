@@ -48,6 +48,13 @@ public class EzproxyServersWriter {
 
     private DataSource dataSource;
     
+    public void setDataSource(final DataSource dataSource) {
+        if (null == dataSource) {
+            throw new IllegalArgumentException("null dataSource");
+        }
+        this.dataSource = dataSource;
+    }
+
     public void write(OutputStream outputStream) throws IOException {
         Connection conn = null;
         Statement stmt = null;
@@ -71,12 +78,5 @@ public class EzproxyServersWriter {
             JdbcUtils.closeConnection(conn);
             outputStream.close();
         }
-    }
-
-    public void setDataSource(final DataSource dataSource) {
-        if (null == dataSource) {
-            throw new IllegalArgumentException("null dataSource");
-        }
-        this.dataSource = dataSource;
     }
 }

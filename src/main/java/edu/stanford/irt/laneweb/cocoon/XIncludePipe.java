@@ -293,6 +293,12 @@ class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
+    // TODO: have this make sense
+    protected void init(final String uri, final String xpointer) {
+        this.href = uri;
+        this.xpointer = xpointer;
+    }
+
     private String getLocation() {
         if (this.locator == null) {
             return "unknown location";
@@ -416,11 +422,5 @@ class XIncludePipe extends AbstractXMLPipe {
         } else if ("xml".equals(localParse)) {
             parseXML(xpointer, url);
         }
-    }
-
-    // TODO: have this make sense
-    protected void init(final String uri, final String xpointer) {
-        this.href = uri;
-        this.xpointer = xpointer;
     }
 }

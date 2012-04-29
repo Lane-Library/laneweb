@@ -167,6 +167,11 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGet(MESH, params);
     }
 
+    //TODO: remove these when upgrading to eresources-1.8
+    public Collection<Eresource> getMeshCore(String type, String mesh) {
+        throw new UnsupportedOperationException();
+    }
+
     public Collection<Eresource> getSubset(final String subset) {
         Collection<String> params = new LinkedList<String>();
         params.add(subset);
@@ -210,6 +215,10 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGetSearch(SEARCH, params, query);
     }
 
+    public Map<String, Integer> searchCount(Set<String> types, Set<String> subsets, String query) {
+        return searchCount(types, query);
+    }
+
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         StringBuffer stringBuffer = new StringBuffer(COUNT);
@@ -241,6 +250,10 @@ public class HistoryCollectionManager implements CollectionManager {
             JdbcUtils.closeConnection(conn);
         }
         return result;
+    }
+
+    public Collection<Eresource> searchSubset(final String subset, final String query) {
+        throw new UnsupportedOperationException();
     }
 
     public Collection<Eresource> searchType(final String type, final String query) {
@@ -346,18 +359,5 @@ public class HistoryCollectionManager implements CollectionManager {
             }
         }
         return eresources;
-    }
-
-    //TODO: remove these when upgrading to eresources-1.8
-    public Collection<Eresource> getMeshCore(String type, String mesh) {
-        throw new UnsupportedOperationException();
-    }
-
-    public Map<String, Integer> searchCount(Set<String> types, Set<String> subsets, String query) {
-        return searchCount(types, query);
-    }
-
-    public Collection<Eresource> searchSubset(final String subset, final String query) {
-        throw new UnsupportedOperationException();
     }
 }

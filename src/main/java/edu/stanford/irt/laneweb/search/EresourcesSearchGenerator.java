@@ -18,11 +18,11 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
 
     private CollectionManager collectionManager;
 
-    private String type;
+    private Map<String, Object> model;
     
     private Map<String, String> parameters;
 
-    private Map<String, Object> model;
+    private String type;
 
     public void generate() {
         PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.page);
@@ -34,6 +34,11 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
         }
     }
 
+    public void initialize() {
+        this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
+                Model.TYPE);
+    }
+    
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
@@ -41,13 +46,13 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
         this.collectionManager = collectionManager;
     }
     
-    public void setParameters(Map<String, String> parameters) {
-        this.parameters = parameters;
-    }
-    
     public void setModel(Map<String, Object> model) {
         super.setModel(model);
         this.model = model;
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
     }
 
     protected Collection<SearchResult> getEresourceList() {
@@ -65,10 +70,5 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
             results.add(new EresourceSearchResult(eresource));
         }
         return results;
-    }
-
-    public void initialize() {
-        this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
-                Model.TYPE);
     }
 }

@@ -8,14 +8,18 @@ import java.util.Date;
  */
 public class Schedule {
 	
-	private static final int NOON = 12;
-	
 	private static final int FIVE_PM = 17;
 	
 	private static final int NINE_AM = 9;
 	
+	private static final int NOON = 12;
+	
 	private static final int SEVEN_PM = 19;
     
+    
+    public boolean isAvailable() {
+        return isAvailableAt(null);
+    }
     
     /**
      * 
@@ -38,9 +42,5 @@ public class Schedule {
             available = hourOfDay >= NINE_AM && hourOfDay < SEVEN_PM;
         }
         return available;
-    }
-    
-    public boolean isAvailable() {
-        return isAvailableAt(null);
     }
 }

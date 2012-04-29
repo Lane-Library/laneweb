@@ -29,13 +29,13 @@ public class ContentSearchGeneratorTest {
 	
 	private ContentSearchGenerator generator;
 	
-	private Map<String, Object> model;
+	private MetaSearchManager manager;
 
-	private Parameters parameters;
+	private Map<String, Object> model;
 
 	private MetaSearchManagerSource msms;
 
-	private MetaSearchManager manager;
+	private Parameters parameters;
 
 	private Result result;
 
@@ -64,6 +64,14 @@ public class ContentSearchGeneratorTest {
 	}
 
 	@Test
+	public void testDoSearch() {
+		expect(this.manager.search(isA(SimpleQuery.class), eq(0L), eq(Collections.<String>emptyList()), eq(true))).andReturn(this.result);
+		replay(this.manager);
+		assertEquals(this.result, this.generator.doSearch());
+		verify(this.manager);
+	}
+
+	@Test
 	public void testGenerate() throws SAXException {
 		expect(this.manager.search(isA(SimpleQuery.class), eq(0L), eq(Collections.<String>emptyList()), eq(true))).andReturn(this.result);
 		expect(this.result.getChildren()).andReturn(Collections.<Result>emptyList());
@@ -79,14 +87,6 @@ public class ContentSearchGeneratorTest {
 		replay(this.manager, this.result, this.xmlConsumer);
 		this.generator.generate();
 		verify(this.manager, this.result, this.xmlConsumer);
-	}
-
-	@Test
-	public void testDoSearch() {
-		expect(this.manager.search(isA(SimpleQuery.class), eq(0L), eq(Collections.<String>emptyList()), eq(true))).andReturn(this.result);
-		replay(this.manager);
-		assertEquals(this.result, this.generator.doSearch());
-		verify(this.manager);
 	}
 
 	@Test

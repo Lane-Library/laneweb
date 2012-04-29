@@ -23,6 +23,12 @@ public class UrlTester {
 
     private HttpClient httpClient;
 
+    @Autowired
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.httpClient = msms.getHttpClient();
+    }
+
+    
     @RequestMapping(value = "/apps/url-tester")
     public void testUrl(@RequestParam final String url, HttpServletResponse response) throws IOException {
         HttpGet get = new HttpGet(url);
@@ -40,16 +46,6 @@ public class UrlTester {
         response.getOutputStream().write(baos.toByteArray());
     }
 
-    
-    private byte[] getHeaderString(final HttpGet get, final HttpResponse rep) {
-        StringBuffer result = new StringBuffer("\n\n\n<!--\n\nRequest Headers:\n\n");
-        result.append(getHeaderString(get.getAllHeaders()));
-        result.append("\n\n\nResponse Headers:\n\n");
-        result.append(getHeaderString(get.getAllHeaders()));
-        result.append("\n-->");
-        return result.toString().getBytes();
-    }
-
     private String getHeaderString(final Header[] headers) {
         StringBuffer result = new StringBuffer();
         for (Header header : headers) {
@@ -61,8 +57,12 @@ public class UrlTester {
         return result.toString();
     }
     
-    @Autowired
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        this.httpClient = msms.getHttpClient();
+    private byte[] getHeaderString(final HttpGet get, final HttpResponse rep) {
+        StringBuffer result = new StringBuffer("\n\n\n<!--\n\nRequest Headers:\n\n");
+        result.append(getHeaderString(get.getAllHeaders()));
+        result.append("\n\n\nResponse Headers:\n\n");
+        result.append(getHeaderString(get.getAllHeaders()));
+        result.append("\n-->");
+        return result.toString().getBytes();
     }
 }

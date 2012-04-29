@@ -189,41 +189,6 @@ public class XIncludePipeTest {
     }
     
     @Test
-    public void testUnknownElement() throws SAXException {
-        this.xmlBaseSupport.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
-        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
-                this.serviceManager, this.saxParser, this.xmlBaseSupport);
-        try {
-            this.pipe.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
-            fail();
-        } catch (SAXException e) {}
-        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
-                this.serviceManager, this.saxParser, this.xmlBaseSupport);
-    }
-    
-    @Test
-    public void testUnknownElementLocator() throws SAXException, MalformedURLException, IOException {
-        Locator locator = createMock(Locator.class);
-        expect(locator.getSystemId()).andReturn("systemid").times(2);
-        expect(this.sourceResolver.resolveURI("systemid")).andReturn(this.source);
-        expect(this.source.getURI()).andReturn("uri");
-        this.xmlBaseSupport.setDocumentLocation("uri");
-        this.xmlConsumer.setDocumentLocator(locator);
-        this.xmlBaseSupport.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
-        expect(locator.getColumnNumber()).andReturn(12);
-        expect(locator.getLineNumber()).andReturn(44);
-        replay(locator, this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
-                this.serviceManager, this.saxParser, this.xmlBaseSupport);
-        try {
-            this.pipe.setDocumentLocator(locator);
-            this.pipe.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
-            fail();
-        } catch (SAXException e) {}
-        verify(locator, this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
-                this.serviceManager, this.saxParser, this.xmlBaseSupport);
-    }
-
-    @Test
     public void testIgnorableWhitespace() throws SAXException {
         char[] characters = new char[0];
         this.xmlConsumer.ignorableWhitespace(characters, 0, 0);
@@ -231,7 +196,7 @@ public class XIncludePipeTest {
         this.pipe.ignorableWhitespace(characters, 0, 0);
         verify(this.xmlConsumer);
     }
-
+    
     @Test
     public void testProcessingInstructionStringString() throws SAXException {
         this.xmlConsumer.processingInstruction("target", "data");
@@ -433,5 +398,40 @@ public class XIncludePipeTest {
         this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
         verify(nodeList, xpathProcessor, doc, domResult, this.sourceResolver, this.attributes, this.source, this.inputStream,
                 this.validity, this.xmlConsumer, this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
+    public void testUnknownElement() throws SAXException {
+        this.xmlBaseSupport.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        try {
+            this.pipe.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
+            fail();
+        } catch (SAXException e) {}
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
+    public void testUnknownElementLocator() throws SAXException, MalformedURLException, IOException {
+        Locator locator = createMock(Locator.class);
+        expect(locator.getSystemId()).andReturn("systemid").times(2);
+        expect(this.sourceResolver.resolveURI("systemid")).andReturn(this.source);
+        expect(this.source.getURI()).andReturn("uri");
+        this.xmlBaseSupport.setDocumentLocation("uri");
+        this.xmlConsumer.setDocumentLocator(locator);
+        this.xmlBaseSupport.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
+        expect(locator.getColumnNumber()).andReturn(12);
+        expect(locator.getLineNumber()).andReturn(44);
+        replay(locator, this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        try {
+            this.pipe.setDocumentLocator(locator);
+            this.pipe.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
+            fail();
+        } catch (SAXException e) {}
+        verify(locator, this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
     }
 }

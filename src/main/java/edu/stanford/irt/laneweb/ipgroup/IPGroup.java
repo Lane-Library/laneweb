@@ -12,21 +12,6 @@ public final class IPGroup implements Serializable {
 
     public static final IPGroup PAVA = new IPGroup("PAVA");
 
-    private static final CIDRRange ROOT = new CIDRRange("0.0.0.0/0", OTHER) {
-
-        @Override
-        public boolean contains(final int ip) {
-            return true;
-        }
-
-        @Override
-        public boolean isSubrange(final CIDRRange other) {
-            return true;
-        }
-    };
-
-    private static final long serialVersionUID = 1L;
-
     public static final IPGroup SHC = new IPGroup("SHC");
 
     public static final IPGroup SOM_BECKMAN = new IPGroup("SOM_BECKMAN");
@@ -48,6 +33,21 @@ public final class IPGroup implements Serializable {
     public static final IPGroup STAFF = new IPGroup("STAFF");
 
     public static final IPGroup SU = new IPGroup("SU");
+
+    private static final CIDRRange ROOT = new CIDRRange("0.0.0.0/0", OTHER) {
+
+        @Override
+        public boolean contains(final int ip) {
+            return true;
+        }
+
+        @Override
+        public boolean isSubrange(final CIDRRange other) {
+            return true;
+        }
+    };
+
+    private static final long serialVersionUID = 1L;
     static {
         ROOT.addSubrange(new CIDRRange("10.252.0.0/14", SHC));
         ROOT.addSubrange(new CIDRRange("10.0.0.0/8", SU));

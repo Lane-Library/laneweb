@@ -16,9 +16,9 @@ import org.xml.sax.SAXException;
 
 public class TextNodeParsingTransformerTest {
 	
-	private TextNodeParsingTransformer transformer;
 	private Attributes attributes;
 	private Parameters parameters;
+	private TextNodeParsingTransformer transformer;
 	private XMLConsumer xmlConsumer;
 
 	@Before
@@ -50,14 +50,6 @@ public class TextNodeParsingTransformerTest {
 	}
 
 	@Test
-	public void testStartElement() throws SAXException {
-		this.xmlConsumer.startElement("uri", "localName", "qName", this.attributes);
-		replay(this.xmlConsumer);
-		this.transformer.startElement("uri", "localName", "qName", this.attributes);
-		verify(this.xmlConsumer);
-	}
-
-	@Test
 	public void testGetKey() {
 		assertEquals("textNodeParsing", this.transformer.getKey());
 	}
@@ -65,6 +57,14 @@ public class TextNodeParsingTransformerTest {
 	@Test
 	public void testGetValidity() {
 		assertEquals(NOPValidity.SHARED_INSTANCE, this.transformer.getValidity());
+	}
+
+	@Test
+	public void testStartElement() throws SAXException {
+		this.xmlConsumer.startElement("uri", "localName", "qName", this.attributes);
+		replay(this.xmlConsumer);
+		this.transformer.startElement("uri", "localName", "qName", this.attributes);
+		verify(this.xmlConsumer);
 	}
 
 }

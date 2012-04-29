@@ -17,8 +17,6 @@ public abstract class JdbcUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(JdbcUtils.class);
     
-    private JdbcUtils() {}
-
     /**
      * Close the given JDBC Connection and ignore any thrown SQLException. This is
      * useful for typical finally blocks in manual JDBC code.
@@ -69,4 +67,6 @@ public abstract class JdbcUtils {
             }
         }
     }
+
+    private JdbcUtils() {}
 }

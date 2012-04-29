@@ -79,6 +79,14 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.servletContext = servletContext;
     }
 
+    protected abstract LanewebEnvironment getEnvironment();
+
+    protected String getSitemapURI(final HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        String basePath = (String) request.getAttribute(Model.BASE_PATH);
+        return requestURI.substring(basePath.length() + this.prefix.length());
+    }
+
     private String getContentType(final String value) {
         String contentType = this.servletContext.getMimeType(value);
         if (contentType == null) {
@@ -93,13 +101,5 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             }
         }
         return contentType;
-    }
-
-    protected abstract LanewebEnvironment getEnvironment();
-
-    protected String getSitemapURI(final HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        String basePath = (String) request.getAttribute(Model.BASE_PATH);
-        return requestURI.substring(basePath.length() + this.prefix.length());
     }
 }

@@ -56,10 +56,6 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
 
     private static final String XINCLUDE_CACHE_KEY = "XInclude";
 
-    private Logger log = LoggerFactory.getLogger(LanewebXIncludeTransformer.class);
-
-    private XIncludePipe xIncludePipe;
-
     protected ServiceManager manager;
 
     protected SAXParser parser;
@@ -68,6 +64,10 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
 
     /** The {@link SourceValidity} instance associated with this request. */
     protected MultiSourceValidity validity;
+
+    private Logger log = LoggerFactory.getLogger(LanewebXIncludeTransformer.class);
+
+    private XIncludePipe xIncludePipe;
 
     /** Key to be used for caching */
     public Serializable getKey() {

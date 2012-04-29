@@ -27,26 +27,14 @@ public class LanewebEnvironment implements Environment {
         this.isExternal = isExternal;
     }
     
-    public void setModel(Map<String, Object> model) {
-        this.model = model;
-    }
-    
-    public void setOutputStream(OutputStream outputStream) {
-        this.outputStream = outputStream;
-    }
-    
-    public void setIsExternal(boolean isExternal) {
-        this.isExternal = isExternal;
-    }
-
     public void commitResponse() throws IOException {
         throw new UnsupportedOperationException();
     }
-
+    
     public void finishingProcessing() {
         throw new UnsupportedOperationException();
     }
-
+    
     public String getAction() {
         throw new UnsupportedOperationException();
     }
@@ -129,6 +117,18 @@ public class LanewebEnvironment implements Environment {
 
     public void setHttpServletResponse(final HttpServletResponse response) {
         throw new UnsupportedOperationException();
+    }
+
+    public void setIsExternal(boolean isExternal) {
+        this.isExternal = isExternal;
+    }
+
+    public void setModel(Map<String, Object> model) {
+        this.model = model;
+    }
+
+    public void setOutputStream(OutputStream outputStream) {
+        this.outputStream = outputStream;
     }
 
     public void setResponseIsNotModified() {

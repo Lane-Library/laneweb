@@ -31,6 +31,12 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         return doSearch(getSearchTypeSQL(), params);
     }
 
+    protected abstract String getSearchSQL();
+
+    protected abstract String getSearchTypeSQL();
+
+    protected abstract Collection<String> searchStringToParams(String query);
+
     private Collection<Eresource> doSearch(final String sql, final Collection<String> params) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -72,10 +78,4 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         }
         return suggestions;
     }
-
-    protected abstract String getSearchSQL();
-
-    protected abstract String getSearchTypeSQL();
-
-    protected abstract Collection<String> searchStringToParams(String query);
 }

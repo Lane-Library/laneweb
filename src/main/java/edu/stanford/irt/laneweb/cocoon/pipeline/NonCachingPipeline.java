@@ -35,9 +35,6 @@ import edu.stanford.irt.laneweb.LanewebException;
  */
 public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware {
 
-    /** True when pipeline has been prepared. */
-    private boolean prepared;
-
     /** The component manager set with compose() and recompose() */
     private BeanFactory beanFactory;
 
@@ -68,6 +65,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
 
     /** The parameters */
     private Parameters parameters;
+
+    /** True when pipeline has been prepared. */
+    private boolean prepared;
 
     // Serializer stuff
     private Serializer serializer;
@@ -267,6 +267,116 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
+     * Connect the next component
+     */
+    protected void connect(final Environment environment, final XMLProducer producer, final XMLConsumer consumer)
+            throws ProcessingException {
+        // Connect next component.
+        producer.setConsumer(consumer);
+    }
+
+    /**
+     * Connect the XML pipeline.
+     */
+    protected void connectPipeline(final Environment environment) throws ProcessingException {
+        XMLProducer prev = this.generator;
+        Iterator<Transformer> itt = this.transformers.iterator();
+        while (itt.hasNext()) {
+            Transformer next = itt.next();
+            connect(environment, prev, next);
+            prev = next;
+        }
+        // insert the serializer
+        connect(environment, prev, this.lastConsumer);
+    }
+
+    protected long getExpires() {
+        return this.expires;
+    }
+
+    protected XMLConsumer getLastConsumer() {
+        return this.lastConsumer;
+    }
+
+    protected int getOutputBufferSize() {
+        return this.outputBufferSize;
+    }
+
+    protected Parameters getParameters() {
+        return this.parameters;
+    }
+
+    protected Serializer getSerializer() {
+        return this.serializer;
+    }
+    
+    protected List<Transformer> getTransformers() {
+        return this.transformers;
+    }
+    
+    /**
+     * Prepare the pipeline
+     */
+    protected void preparePipeline(final Environment environment) throws ProcessingException {
+        setupPipeline(environment);
+        this.prepared = true;
+    }
+    
+    /**
+     * Process the SAX event pipeline
+     */
+    protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {
+        try {
+            if (this.lastConsumer == null) {
+                // internal processing
+                this.generator.generate();
+            } else {
+                    // set the output stream
+                    this.serializer.setOutputStream(environment.getOutputStream(this.outputBufferSize));
+                    // execute the pipeline:
+                    this.generator.generate();
+            }
+        } catch (IOException e) {
+        	throw new LanewebException(e);
+		} catch (SAXException e) {
+			throw new LanewebException(e);
+		}
+        return true;
+    }
+    
+    protected void setLastConsumer(XMLConsumer consumer) {
+    	this.lastConsumer = consumer;
+    }
+    
+    /**
+     * Setup pipeline components.
+     */
+    @SuppressWarnings("rawtypes")
+    protected void setupPipeline(final Environment environment) throws ProcessingException {
+        try {
+            // setup the generator
+            Map model = environment.getObjectModel();
+            this.generator.setup(this.sourceResolver, model, this.generatorSource, this.generatorParam);
+            Iterator<Transformer> transformerItt = this.transformers.iterator();
+            Iterator<String> transformerSourceItt = this.transformerSources.iterator();
+            Iterator<Parameters> transformerParamItt = this.transformerParams.iterator();
+            while (transformerItt.hasNext()) {
+                Transformer trans = transformerItt.next();
+                trans.setup(this.sourceResolver, model, transformerSourceItt.next(),
+                        transformerParamItt.next());
+            }
+            if (this.serializer instanceof SitemapModelComponent) {
+                ((SitemapModelComponent) this.serializer).setup(this.sourceResolver, model,
+                        this.serializerSource, this.serializerParam);
+            }
+        } catch (SAXException e) {
+        	throw new LanewebException(e);
+		} catch (IOException e) {
+			throw new LanewebException(e);
+		}
+    }
+    
+    /**
      * Parse the expires parameter
      */
     private long parseExpires(final String expire) {
@@ -317,115 +427,5 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             expires += number * modifier;
         }
         return expires;
-    }
-
-    /**
-     * Connect the next component
-     */
-    protected void connect(final Environment environment, final XMLProducer producer, final XMLConsumer consumer)
-            throws ProcessingException {
-        // Connect next component.
-        producer.setConsumer(consumer);
-    }
-
-    /**
-     * Connect the XML pipeline.
-     */
-    protected void connectPipeline(final Environment environment) throws ProcessingException {
-        XMLProducer prev = this.generator;
-        Iterator<Transformer> itt = this.transformers.iterator();
-        while (itt.hasNext()) {
-            Transformer next = itt.next();
-            connect(environment, prev, next);
-            prev = next;
-        }
-        // insert the serializer
-        connect(environment, prev, this.lastConsumer);
-    }
-
-    /**
-     * Prepare the pipeline
-     */
-    protected void preparePipeline(final Environment environment) throws ProcessingException {
-        setupPipeline(environment);
-        this.prepared = true;
-    }
-
-    /**
-     * Process the SAX event pipeline
-     */
-    protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {
-        try {
-            if (this.lastConsumer == null) {
-                // internal processing
-                this.generator.generate();
-            } else {
-                    // set the output stream
-                    this.serializer.setOutputStream(environment.getOutputStream(this.outputBufferSize));
-                    // execute the pipeline:
-                    this.generator.generate();
-            }
-        } catch (IOException e) {
-        	throw new LanewebException(e);
-		} catch (SAXException e) {
-			throw new LanewebException(e);
-		}
-        return true;
-    }
-
-    /**
-     * Setup pipeline components.
-     */
-    @SuppressWarnings("rawtypes")
-    protected void setupPipeline(final Environment environment) throws ProcessingException {
-        try {
-            // setup the generator
-            Map model = environment.getObjectModel();
-            this.generator.setup(this.sourceResolver, model, this.generatorSource, this.generatorParam);
-            Iterator<Transformer> transformerItt = this.transformers.iterator();
-            Iterator<String> transformerSourceItt = this.transformerSources.iterator();
-            Iterator<Parameters> transformerParamItt = this.transformerParams.iterator();
-            while (transformerItt.hasNext()) {
-                Transformer trans = transformerItt.next();
-                trans.setup(this.sourceResolver, model, transformerSourceItt.next(),
-                        transformerParamItt.next());
-            }
-            if (this.serializer instanceof SitemapModelComponent) {
-                ((SitemapModelComponent) this.serializer).setup(this.sourceResolver, model,
-                        this.serializerSource, this.serializerParam);
-            }
-        } catch (SAXException e) {
-        	throw new LanewebException(e);
-		} catch (IOException e) {
-			throw new LanewebException(e);
-		}
-    }
-
-    protected long getExpires() {
-        return this.expires;
-    }
-    
-    protected XMLConsumer getLastConsumer() {
-        return this.lastConsumer;
-    }
-    
-    protected int getOutputBufferSize() {
-        return this.outputBufferSize;
-    }
-    
-    protected Parameters getParameters() {
-        return this.parameters;
-    }
-    
-    protected Serializer getSerializer() {
-        return this.serializer;
-    }
-    
-    protected List<Transformer> getTransformers() {
-        return this.transformers;
-    }
-    
-    protected void setLastConsumer(XMLConsumer consumer) {
-    	this.lastConsumer = consumer;
     }
 }

@@ -22,6 +22,12 @@ public class HTML5Serializer extends TransformerSerializer {
     }
 
     @Override
+    public void setOutputStream(OutputStream out) {
+        super.setOutputStream(out);
+        this.outputStream = out;
+    }
+
+    @Override
     public void startDocument() throws SAXException {
         try {
             this.outputStream.write(HTML5_DOCTYPE_DECLARATION);
@@ -29,11 +35,5 @@ public class HTML5Serializer extends TransformerSerializer {
             throw new LanewebException(e);
         }
         super.startDocument();
-    }
-
-    @Override
-    public void setOutputStream(OutputStream out) {
-        super.setOutputStream(out);
-        this.outputStream = out;
     }
 }

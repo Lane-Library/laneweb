@@ -12,9 +12,9 @@ import org.w3c.dom.Node;
 
 public class XPathProcessorImplTest {
 
-	private XPathProcessorImpl processor;
-
 	private Node node;
+
+	private XPathProcessorImpl processor;
 
 	@Before
 	public void setUp() throws Exception {

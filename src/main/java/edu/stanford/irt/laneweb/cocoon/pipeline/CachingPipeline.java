@@ -116,48 +116,6 @@ public class CachingPipeline extends NonCachingPipeline {
         this.componentTypes.add(type);
     }
 
-    private void addCacheableComponent(final CacheableProcessingComponent component, final String type, final int keyType) {
-        ComponentCacheKey key = new ComponentCacheKey(keyType, type, component.getKey());
-        SourceValidity validity = component.getValidity();
-        this.cacheKey.addKey(key);
-        this.cachedValidities.add(validity);
-        if (keyType != ComponentCacheKey.ComponentType_Serializer) {
-            this.eventCacheKey.addKey(key);
-            this.eventCachedValidities.add(validity);
-        }
-    }
-
-    // TODO: also check expires value from cache
-    private CachedResponse getValidCachedResponse(final PipelineCacheKey key, final List<SourceValidity> validities) {
-        CachedResponse response = this.cache.get(key);
-        if (response != null) {
-            SourceValidity[] cachedValidities = response.getValidityObjects();
-            if (cachedValidities == null || cachedValidities.length != validities.size()) {
-                response = null;
-            } else {
-                for (int i = 0; i < cachedValidities.length; i++) {
-                    SourceValidity sourceValidity = cachedValidities[i];
-                    int validity = sourceValidity == null ? SourceValidity.INVALID : sourceValidity.isValid();
-                    if (validity == SourceValidity.INVALID) {
-                        response = null;
-                        break;
-                    } else if (validity == SourceValidity.UNKNOWN) {
-                        validity = sourceValidity.isValid(validities.get(i));
-                        if (validity != SourceValidity.VALID) {
-                            response = null;
-                            break;
-                        }
-                    }
-                }
-            }
-            // TODO: check if I really need to to this:
-            if (response == null) {
-                this.cache.remove(key);
-            }
-        }
-        return response;
-    }
-
     /**
      * Connect the pipeline.
      */
@@ -229,5 +187,47 @@ public class CachingPipeline extends NonCachingPipeline {
             addCacheableComponent(this.components.get(i), this.componentTypes.get(i), type);
             type = i == last - 1 ? ComponentCacheKey.ComponentType_Serializer : ComponentCacheKey.ComponentType_Transformer;
         }
+    }
+
+    private void addCacheableComponent(final CacheableProcessingComponent component, final String type, final int keyType) {
+        ComponentCacheKey key = new ComponentCacheKey(keyType, type, component.getKey());
+        SourceValidity validity = component.getValidity();
+        this.cacheKey.addKey(key);
+        this.cachedValidities.add(validity);
+        if (keyType != ComponentCacheKey.ComponentType_Serializer) {
+            this.eventCacheKey.addKey(key);
+            this.eventCachedValidities.add(validity);
+        }
+    }
+
+    // TODO: also check expires value from cache
+    private CachedResponse getValidCachedResponse(final PipelineCacheKey key, final List<SourceValidity> validities) {
+        CachedResponse response = this.cache.get(key);
+        if (response != null) {
+            SourceValidity[] cachedValidities = response.getValidityObjects();
+            if (cachedValidities == null || cachedValidities.length != validities.size()) {
+                response = null;
+            } else {
+                for (int i = 0; i < cachedValidities.length; i++) {
+                    SourceValidity sourceValidity = cachedValidities[i];
+                    int validity = sourceValidity == null ? SourceValidity.INVALID : sourceValidity.isValid();
+                    if (validity == SourceValidity.INVALID) {
+                        response = null;
+                        break;
+                    } else if (validity == SourceValidity.UNKNOWN) {
+                        validity = sourceValidity.isValid(validities.get(i));
+                        if (validity != SourceValidity.VALID) {
+                            response = null;
+                            break;
+                        }
+                    }
+                }
+            }
+            // TODO: check if I really need to to this:
+            if (response == null) {
+                this.cache.remove(key);
+            }
+        }
+        return response;
     }
 }

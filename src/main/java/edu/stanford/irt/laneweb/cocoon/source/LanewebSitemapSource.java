@@ -80,6 +80,8 @@ public class LanewebSitemapSource implements Source, XMLizable {
     /** The environment */
     private Environment environment;
 
+    private ByteArrayOutputStream outputStream;
+
     /** The pipeline description */
     private Processor.InternalPipelineDescription pipelineDescription;
 
@@ -88,11 +90,9 @@ public class LanewebSitemapSource implements Source, XMLizable {
 
     /** The system id used for caching */
     private String systemIdForCaching;
-
+    
     /** The internal event pipeline validities */
     private SitemapSourceValidity validity;
-    
-    private ByteArrayOutputStream outputStream;
 
     /**
      * Construct a new object

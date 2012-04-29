@@ -28,13 +28,13 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class TransformerSerializerTest {
     
-    private TransformerSerializer serializer;
-    
     private SAXTransformerFactory factory;
+    
+    private TransformerHandler handler;
     
     private Properties properties;
 
-    private TransformerHandler handler;
+    private TransformerSerializer serializer;
 
     private Transformer transformer;
 

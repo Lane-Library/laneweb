@@ -27,19 +27,15 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer i
 
     private IPGroup ipGroup;
 
-    private String sunetid;
-
-    private Ticket ticket;
-
     private ProxyHostManager proxyHostManager;
 
     private boolean proxyLinks;
 
-    public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
-        this.proxyHostManager = proxyHostManager;
-    }
+    private String sunetid;
 
-	public Serializable getKey() {
+    private Ticket ticket;
+
+    public Serializable getKey() {
 		return Boolean.toString(this.proxyLinks);
 	}
 
@@ -50,7 +46,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer i
 		}
 		return validity;
 	}
-	
+
 	public void setModel(Map<String, Object> model) {
         this.sunetid = ModelUtil.getString(model, Model.SUNETID);
         this.ticket = ModelUtil.getObject(model, Model.TICKET, Ticket.class);
@@ -58,6 +54,10 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer i
         this.ipGroup = ModelUtil.getObject(model, Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
         this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
 	}
+	
+	public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
+        this.proxyHostManager = proxyHostManager;
+    }
 
     protected String createProxyLink(final String link) {
         StringBuilder sb = new StringBuilder(128);

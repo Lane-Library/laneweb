@@ -28,10 +28,16 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
         return new ExpiresValidity(this.expires);
     }
 
+    public void initialize() {
+        super.initialize();
+        this.expires = this.parameters.containsKey("expires") ? Long.parseLong(this.parameters.get("expires"))
+                : this.configuredExpires;
+    }
+    
     public void setExpires(final long expires) {
         this.configuredExpires = expires;
     }
-    
+
     public void setParameters(Map<String, String> parameters) {
         super.setParameters(parameters);
         this.parameters = parameters;
@@ -41,11 +47,5 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
         return new StringBuilder("t=").append(null == super.type ? "" : super.type).append(";s=")
                 .append(null == super.subset ? "" : super.subset).append(";a=").append(null == super.alpha ? "" : super.alpha)
                 .append(";m=").append(null == super.mesh ? "" : super.mesh).append(";page=").append(this.page).toString();
-    }
-
-    public void initialize() {
-        super.initialize();
-        this.expires = this.parameters.containsKey("expires") ? Long.parseLong(this.parameters.get("expires"))
-                : this.configuredExpires;
     }
 }

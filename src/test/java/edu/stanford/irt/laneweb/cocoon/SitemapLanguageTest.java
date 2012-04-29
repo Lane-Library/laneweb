@@ -21,13 +21,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 public class SitemapLanguageTest {
     
-    private SitemapLanguage sitemapLanguage;
-    private ServiceManager serviceManager;
-    private PipelineComponentInfo piplineInfo;
     private Configuration configuration;
     private WebApplicationContext context;
-    private ProcessingNodeBuilder nodeBuilder;
     private ProcessingNode node;
+    private ProcessingNodeBuilder nodeBuilder;
+    private PipelineComponentInfo piplineInfo;
+    private ServiceManager serviceManager;
+    private SitemapLanguage sitemapLanguage;
 
     @Before
     public void setUp() throws Exception {
@@ -102,13 +102,13 @@ public class SitemapLanguageTest {
     }
 
     @Test
-    public void testSetupNodeProcessingNodeConfiguration() {
+    public void testResolveString() {
         replay(this.serviceManager, this.piplineInfo, this.configuration, this.context, this.nodeBuilder, this.node);
         verify(this.serviceManager, this.piplineInfo, this.configuration, this.context, this.nodeBuilder, this.node);
     }
 
     @Test
-    public void testResolveString() {
+    public void testSetupNodeProcessingNodeConfiguration() {
         replay(this.serviceManager, this.piplineInfo, this.configuration, this.context, this.nodeBuilder, this.node);
         verify(this.serviceManager, this.piplineInfo, this.configuration, this.context, this.nodeBuilder, this.node);
     }

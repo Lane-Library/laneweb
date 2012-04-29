@@ -13,17 +13,12 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
 
-    private Collection<String> resources;
+    private Map<String, Object> model;
     
     private Map<String, String> parameters;
     
-    private Map<String, Object> model;
+    private Collection<String> resources;
     
-    public void setModel(Map<String, Object> model) {
-        super.setModel(model);
-        this.model = model;
-    }
-
     @Override
     public Result doSearch() {
         Collection<String> enginesToRun = new HashSet<String>();
@@ -41,11 +36,6 @@ public class ResourceSearchGenerator extends SearchGenerator {
         }
         return super.doSearch(enginesToRun);
     }
-    
-    public void setParameters(Map<String, String> parameters) {
-        super.setParameters(parameters);
-        this.parameters = parameters;
-    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -59,5 +49,15 @@ public class ResourceSearchGenerator extends SearchGenerator {
             }
             this.resources = Arrays.asList(resourceList.split(","));
         }
+    }
+    
+    public void setModel(Map<String, Object> model) {
+        super.setModel(model);
+        this.model = model;
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        super.setParameters(parameters);
+        this.parameters = parameters;
     }
 }

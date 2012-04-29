@@ -18,25 +18,25 @@ import org.xml.sax.SAXException;
 
 public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer, SourceAware, ParametersAware, ModelAware {
 
-    private String cacheKeyParameter;
-    
     private Serializable cacheKey;
+    
+    private String cacheKeyParameter;
 
     private Locator locator;
 
+    private Map<String, Object> model;
+
+    private Map<String, String> parameters;
+
+    private Source source;
+
     private TransformerHandler transformerHandler;
-
+    
     private TraxProcessor traxProcessor;
-
+    
     private SourceValidity validity;
 
     private XMLConsumer xmlConsumer;
-    
-    private Source source;
-    
-    private Map<String, String> parameters;
-
-    private Map<String, Object> model;
 
     public LanewebTraxTransformer(final TraxProcessor traxProcessor) {
         this.traxProcessor = traxProcessor;
@@ -108,6 +108,20 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         this.locator = locator;
     }
 
+    public void setModel(Map<String, Object> model) {
+        this.model = model;
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        this.cacheKeyParameter = parameters.get("cache-key");
+        this.parameters = parameters;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
+        this.validity = source.getValidity();
+    }
+
     public void skippedEntity(final String name) throws SAXException {
         this.transformerHandler.skippedEntity(name);
     }
@@ -145,7 +159,7 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
             throws SAXException {
         this.transformerHandler.unparsedEntityDecl(name, publicId, systemId, notationName);
     }
-
+    
     private void setupTransformerHandler() {
         this.transformerHandler = this.traxProcessor.getTransformerHandler(this.source);
         javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
@@ -158,19 +172,5 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         SAXResult result = new SAXResult(this.xmlConsumer);
         result.setLexicalHandler(this.xmlConsumer);
         this.transformerHandler.setResult(result);
-    }
-
-    public void setSource(Source source) {
-        this.source = source;
-        this.validity = source.getValidity();
-    }
-
-    public void setParameters(Map<String, String> parameters) {
-        this.cacheKeyParameter = parameters.get("cache-key");
-        this.parameters = parameters;
-    }
-    
-    public void setModel(Map<String, Object> model) {
-        this.model = model;
     }
 }

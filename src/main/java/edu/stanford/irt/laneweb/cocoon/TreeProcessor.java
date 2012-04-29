@@ -19,13 +19,13 @@ public class TreeProcessor implements Processor {
 
     private ProcessingNode rootNode;
 
+    private SAXParser saxParser;
+
     private ServiceManager serviceManager;
 
     private SitemapLanguage sitemapLanguage;
 
     private InputStream source;
-
-    private SAXParser saxParser;
 
     
     public InternalPipelineDescription buildPipeline(final Environment environment) throws Exception {
@@ -87,20 +87,20 @@ public class TreeProcessor implements Processor {
         throw new UnsupportedOperationException();
     }
 
-    public void setSource(final InputStream source) {
-        this.source = source;
-    }
-    
     public void setSAXParser(final SAXParser saxParser) {
         this.saxParser = saxParser;
     }
-
+    
     public void setServiceManager(final ServiceManager serviceManager) {
         this.serviceManager = serviceManager;
     }
 
     public void setSitemapLanguage(final SitemapLanguage sitemapLanguage) {
         this.sitemapLanguage = sitemapLanguage;
+    }
+
+    public void setSource(final InputStream source) {
+        this.source = source;
     }
 
     protected boolean process(final Environment environment, final InvokeContext context) throws Exception {

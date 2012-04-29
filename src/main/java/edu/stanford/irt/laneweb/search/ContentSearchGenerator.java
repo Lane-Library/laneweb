@@ -27,17 +27,17 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     private static final Pattern CONTENT_PATTERN = Pattern.compile(".*_content");
 
+    protected Collection<String> engines;
+
     private int contentResultLimit;
 
     private long defaultTimeout;
 
-    private String timeout;
-
-    protected Collection<String> engines;
+    private Map<String, Object> model;
 
     private Map<String, String> parameters;
     
-    private Map<String, Object> model;
+    private String timeout;
 
     @Override
     public void generate() {
@@ -50,6 +50,21 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public void initialize() {
+        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
+        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
+        if (this.engines.size() == 0) {
+            String engineList = this.parameters.get(Model.ENGINES);
+            if (engineList != null) {
+                this.engines = new LinkedList<String>();
+                for (StringTokenizer st = new StringTokenizer(engineList, ","); st.hasMoreTokens();) {
+                    this.engines.add(st.nextToken());
+                }
+            }
+        }
+    }
+
     public void setContentResultLimit(final int contentResultLimit) {
         this.contentResultLimit = contentResultLimit;
     }
@@ -57,14 +72,14 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
     public void setDefaultTimeout(final long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
     }
-
-    public void setParameters(Map<String, String> parameters) {
-        this.parameters = parameters;
-    }
     
     public void setModel(Map<String, Object> model) {
         super.setModel(model);
         this.model = model;
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
     }
 
     @Override
@@ -114,20 +129,5 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
             }
         }
         return contentResults;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void initialize() {
-        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
-        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
-        if (this.engines.size() == 0) {
-            String engineList = this.parameters.get(Model.ENGINES);
-            if (engineList != null) {
-                this.engines = new LinkedList<String>();
-                for (StringTokenizer st = new StringTokenizer(engineList, ","); st.hasMoreTokens();) {
-                    this.engines.add(st.nextToken());
-                }
-            }
-        }
     }
 }

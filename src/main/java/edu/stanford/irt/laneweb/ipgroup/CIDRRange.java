@@ -109,6 +109,23 @@ public class CIDRRange {
         return getIPGroup(ipToInt(ip));
     }
 
+    /**
+     * Determine of another range is contained within this range
+     * 
+     * @param other
+     * @return true if other is within this range, otherwise false
+     */
+    public boolean isSubrange(final CIDRRange other) {
+        return other.lowest >= this.lowest && other.highest <= this.highest;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("cidr=").append(this.cidr).append(" ipGroup=").append(this.ipGroup)
+                .append(" subranges=").append(this.subranges);
+        return sb.toString();
+    }
+
     private CIDRRange getSubrangeContaining(final CIDRRange other) {
         for (CIDRRange subrange : this.subranges) {
             if (subrange.isSubrange(other)) {
@@ -132,22 +149,5 @@ public class CIDRRange {
         StringTokenizer st = new StringTokenizer(ip, ".");
         return ((Integer.parseInt(st.nextToken()) << 24) & 0xFF000000) | ((Integer.parseInt(st.nextToken()) << 16) & 0xFF0000)
                 | ((Integer.parseInt(st.nextToken()) << 8) & 0xFF00) | (Integer.parseInt(st.nextToken()) & 0xFF);
-    }
-
-    /**
-     * Determine of another range is contained within this range
-     * 
-     * @param other
-     * @return true if other is within this range, otherwise false
-     */
-    public boolean isSubrange(final CIDRRange other) {
-        return other.lowest >= this.lowest && other.highest <= this.highest;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("cidr=").append(this.cidr).append(" ipGroup=").append(this.ipGroup)
-                .append(" subranges=").append(this.subranges);
-        return sb.toString();
     }
 }

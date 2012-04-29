@@ -25,8 +25,6 @@ import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class SitemapRequestHandlerTest {
     
-    private static LanewebEnvironment environment;
-    
     private static final class TestHandler extends SitemapRequestHandler {
 
         @Override
@@ -35,6 +33,8 @@ public class SitemapRequestHandlerTest {
         }
         
     }
+    
+    private static LanewebEnvironment environment;
 
     private DataBinder dataBinder;
 

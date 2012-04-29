@@ -28,13 +28,13 @@ import org.xml.sax.SAXException;
 
 public class LanewebSitemapSourceTest {
     
-    private LanewebSitemapSource source;
     private Environment environment;
-    private String uri;
-    private Processor processor;
     private Map<String, Object> model;
-    private InternalPipelineDescription pipelineDescription;
     private ProcessingPipeline pipeline;
+    private InternalPipelineDescription pipelineDescription;
+    private Processor processor;
+    private LanewebSitemapSource source;
+    private String uri;
     private SourceValidity validity;
 
     @Before

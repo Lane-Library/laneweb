@@ -2,11 +2,11 @@ package edu.stanford.irt.laneweb.ldap;
 
 public class LDAPData {
 
+    private boolean isActive;
+
     private String name;
 
     private String univId;
-
-    private boolean isActive;
     
     public LDAPData(String name, String univId, boolean isActive) {
         this.name = name;

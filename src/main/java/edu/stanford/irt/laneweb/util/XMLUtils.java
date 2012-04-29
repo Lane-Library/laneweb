@@ -34,22 +34,12 @@ public class XMLUtils {
     public static final Attributes EMPTY_ATTRIBUTES = new AttributesImpl() {
 
         @Override
-        public void clear() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setAttributes(Attributes atts) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
         public void addAttribute(String uri, String localName, String qName, String type, String value) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public void setAttribute(int index, String uri, String localName, String qName, String type, String value) {
+        public void clear() {
             throw new UnsupportedOperationException();
         }
 
@@ -59,7 +49,12 @@ public class XMLUtils {
         }
 
         @Override
-        public void setURI(int index, String uri) {
+        public void setAttribute(int index, String uri, String localName, String qName, String type, String value) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setAttributes(Attributes atts) {
             throw new UnsupportedOperationException();
         }
 
@@ -79,24 +74,16 @@ public class XMLUtils {
         }
 
         @Override
+        public void setURI(int index, String uri) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public void setValue(int index, String value) {
             throw new UnsupportedOperationException();
         }
         
     };
-
-    /**
-     * Add string data
-     *
-     * @param contentHandler The SAX content handler
-     * @param data The string data
-     */
-    public static void data(ContentHandler contentHandler,
-                            String data)
-    throws SAXException {
-
-        contentHandler.characters(data.toCharArray(), 0, data.length());
-    }
 
     /**
      * Create a start and endElement without Attributes
@@ -117,6 +104,19 @@ public class XMLUtils {
         startElement(contentHandler, namespaceURI, localName);
         data(contentHandler, stringValue);
         endElement(contentHandler, namespaceURI, localName);
+    }
+
+    /**
+     * Add string data
+     *
+     * @param contentHandler The SAX content handler
+     * @param data The string data
+     */
+    public static void data(ContentHandler contentHandler,
+                            String data)
+    throws SAXException {
+
+        contentHandler.characters(data.toCharArray(), 0, data.length());
     }
 
     /**

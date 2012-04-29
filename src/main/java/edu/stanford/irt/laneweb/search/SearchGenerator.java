@@ -16,32 +16,38 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
 
     private long defaultTimeout;
 
+    private Map<String, Object> model;
+
+    private Map<String, String> parameters;
+
     private String synchronous;
 
     private String timeout;
 
     private String wait;
-
-    private Map<String, String> parameters;
-
-    private Map<String, Object> model;
     
+    @Override
+    public Result doSearch() {
+        return doSearch(null);
+    }
+
+    public void initialize() {
+        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
+        this.wait = ModelUtil.getString(this.model, "wait");
+        this.synchronous = ModelUtil.getString(this.model, Model.SYNCHRONOUS, this.parameters.get(Model.SYNCHRONOUS));
+    }
+    
+    public void setDefaultTimeout(final long defaultTimeout) {
+        this.defaultTimeout = defaultTimeout;
+    }
+
     public void setModel(Map<String, Object> model) {
         super.setModel(model);
         this.model = model;
     }
 
-    @Override
-    public Result doSearch() {
-        return doSearch(null);
-    }
-    
     public void setParameters(Map<String, String> parameters) {
         this.parameters = parameters;
-    }
-
-    public void setDefaultTimeout(final long defaultTimeout) {
-        this.defaultTimeout = defaultTimeout;
     }
 
     protected Result doSearch(final Collection<String> engines) {
@@ -91,11 +97,5 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
             result.setStatus(SearchStatus.FAILED);
         }
         return result;
-    }
-
-    public void initialize() {
-        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
-        this.wait = ModelUtil.getString(this.model, "wait");
-        this.synchronous = ModelUtil.getString(this.model, Model.SYNCHRONOUS, this.parameters.get(Model.SYNCHRONOUS));
     }
 }

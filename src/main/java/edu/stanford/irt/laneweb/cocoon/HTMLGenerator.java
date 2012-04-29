@@ -16,14 +16,14 @@ import org.xml.sax.SAXException;
  */
 public class HTMLGenerator extends AbstractGenerator implements CacheableProcessingComponent, SourceAware {
     
-    private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
-
     private static class HtmlSAXParser extends AbstractSAXParser {
 
         protected HtmlSAXParser(final HTMLConfiguration conf) {
             super(conf);
         }
     }
+
+    private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
     
     private Source source;
 

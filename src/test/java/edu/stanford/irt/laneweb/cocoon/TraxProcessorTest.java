@@ -31,8 +31,6 @@ public class TraxProcessorTest {
 
     private Source source;
 
-    private URIResolver uriResolver;
-
     private Store store;
 
     private Templates templates;
@@ -40,6 +38,8 @@ public class TraxProcessorTest {
     private Transformer transformer;
 
     private TransformerHandler transformerHandler;
+
+    private URIResolver uriResolver;
 
     private SourceValidity validity;
 

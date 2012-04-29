@@ -33,6 +33,16 @@ public class SuggestionComparator implements Comparator<Suggestion>, Serializabl
         return upper1.compareTo(upper2);
     }
 
+    private int queryWeight(final String heading) {
+        int index = heading.indexOf(this.query);
+        if (index == 0) {
+            return 2;
+        } else if (index > 0) {
+            return 1;
+        }
+        return 0;
+    }
+
     private String toUpperCaseASCII(final String string) {
         String decomposed = Normalizer.normalize(string, Normalizer.Form.NFD);
         StringBuilder sb = new StringBuilder(decomposed.length());
@@ -44,15 +54,5 @@ public class SuggestionComparator implements Comparator<Suggestion>, Serializabl
             }
         }
         return sb.toString().toUpperCase();
-    }
-
-    private int queryWeight(final String heading) {
-        int index = heading.indexOf(this.query);
-        if (index == 0) {
-            return 2;
-        } else if (index > 0) {
-            return 1;
-        }
-        return 0;
     }
 }

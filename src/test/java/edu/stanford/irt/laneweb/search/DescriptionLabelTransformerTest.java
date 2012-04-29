@@ -28,10 +28,6 @@ public class DescriptionLabelTransformerTest {
 
     private XMLConsumer xmlConsumer;
 
-    private void replayMocks() {
-        replay(this.xmlConsumer);
-    }
-
     @Before
     public void setUp() throws Exception {
         this.model = new HashMap<String, Object>();
@@ -75,6 +71,10 @@ public class DescriptionLabelTransformerTest {
         this.transformer.setup(null, this.model, null, null);
         this.transformer.startElement(null, null, null, null);
         verifyMocks();
+    }
+
+    private void replayMocks() {
+        replay(this.xmlConsumer);
     }
 
     private void verifyMocks() {

@@ -88,14 +88,6 @@ public class TraxProcessor {
         }
     }
     
-    private TransformerHandler prepareHandlerFromTemplates(Templates templates) throws TransformerConfigurationException {
-        TransformerHandler handler = this.factory.newTransformerHandler(templates);
-        Transformer transformer = handler.getTransformer();
-        transformer.setErrorListener(this.errorHandler);
-        transformer.setURIResolver(this.uriResolver);
-        return handler;
-    }
-
     private TransformerHandler getValidHandlerFromStore(final Source stylesheet, final String uri) throws IOException,
             TransformerException {
         // we must augment the template ID with the factory classname since one
@@ -130,6 +122,14 @@ public class TraxProcessor {
             return null;
         }
         TransformerHandler handler = prepareHandlerFromTemplates((Templates) templateAndValidity[0]);
+        return handler;
+    }
+
+    private TransformerHandler prepareHandlerFromTemplates(Templates templates) throws TransformerConfigurationException {
+        TransformerHandler handler = this.factory.newTransformerHandler(templates);
+        Transformer transformer = handler.getTransformer();
+        transformer.setErrorListener(this.errorHandler);
+        transformer.setURIResolver(this.uriResolver);
         return handler;
     }
 

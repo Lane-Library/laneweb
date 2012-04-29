@@ -14,11 +14,11 @@ import edu.stanford.irt.laneweb.servlet.mvc.PersistentLoginController;
 
 public class LogoutServlet extends HttpServlet {
 
+    private static final String EZPROXY_COOKIE_NAME = "ezproxy";
+
     private static final long serialVersionUID = 1L;
 
     private static final String WEBAUTH_COOKIE_NAME = "webauth_at";
-
-    private static final String EZPROXY_COOKIE_NAME = "ezproxy";
     
     private static final String WEBAUTH_LOGOUT_URL = "https://weblogin.stanford.edu/logout";
 

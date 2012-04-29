@@ -43,19 +43,6 @@ public class PersistentLoginControllerTest {
 
 	
 	@Test
-	public void testCreateCookieNullUrl() {
-		expect(this.session.getAttribute("sunetid")).andReturn("alainb").times(2);
-		expect(this.request.getSession()).andReturn(this.session).times(2);
-		expect(this.request.getHeader("User-Agent")).andReturn("firefox");
-		this.response.addCookie(isA(Cookie.class));
-		this.response.setCharacterEncoding(isA(String.class));
-		replay(this.request, this.response, this.session);
-		String viewUrl = this.persistenLoginController.createCookie(null, this.request, this.response);
-		assertEquals(viewUrl, "redirect:/myaccounts.html");
-		verify(this.request, this.session, this.response);
-	}
-	
-	@Test
 	public void testCreateCookieNotNullUrl() {
 		expect(this.session.getAttribute("sunetid")).andReturn("alainb").times(2);
 		expect(this.request.getSession()).andReturn(this.session).times(2);
@@ -68,31 +55,14 @@ public class PersistentLoginControllerTest {
 	}
 	
 	@Test
-	public void testRemoveCookieUrlNotNull() {
-		expect(this.session.getAttribute("sunetid")).andReturn("alainb");
-		Cookie[] cookies = new Cookie[1];
-		cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234890");
-		expect(this.request.getCookies()).andReturn(cookies);
-		expect(this.request.getSession()).andReturn(this.session);
-		this.response.addCookie(isA(Cookie.class));
-		replay(this.request, this.session, this.response);
-		String viewUrl = this.persistenLoginController.removeCookieAndView(this.url, this.request, this.response);
-		assertEquals(viewUrl, "redirect:/test.html");
-		verify(this.request, this.session, this.response);
-	}
-	
-
-	@Test
-	public void testRemoveCookieUrlNull() {
-		expect(this.session.getAttribute("sunetid")).andReturn("alainb");
-		Cookie[] cookies = new Cookie[1];
-		cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234033");
-		expect(this.request.getCookies()).andReturn(cookies);
-		expect(this.request.getSession()).andReturn(this.session);
+	public void testCreateCookieNullUrl() {
+		expect(this.session.getAttribute("sunetid")).andReturn("alainb").times(2);
+		expect(this.request.getSession()).andReturn(this.session).times(2);
+		expect(this.request.getHeader("User-Agent")).andReturn("firefox");
 		this.response.addCookie(isA(Cookie.class));
 		this.response.setCharacterEncoding(isA(String.class));
-		replay(this.request, this.session, this.response);
-		String viewUrl = this.persistenLoginController.removeCookieAndView(null, this.request, this.response);
+		replay(this.request, this.response, this.session);
+		String viewUrl = this.persistenLoginController.createCookie(null, this.request, this.response);
 		assertEquals(viewUrl, "redirect:/myaccounts.html");
 		verify(this.request, this.session, this.response);
 	}
@@ -111,6 +81,36 @@ public class PersistentLoginControllerTest {
 		expect(this.request.getCookies()).andReturn(cookies).times(3);
 		replay(this.request, this.session, this.response);
 		this.persistenLoginController.createCookie(this.url, this.request, this.response);
+		verify(this.request, this.session, this.response);
+	}
+	
+
+	@Test
+	public void testRemoveCookieUrlNotNull() {
+		expect(this.session.getAttribute("sunetid")).andReturn("alainb");
+		Cookie[] cookies = new Cookie[1];
+		cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234890");
+		expect(this.request.getCookies()).andReturn(cookies);
+		expect(this.request.getSession()).andReturn(this.session);
+		this.response.addCookie(isA(Cookie.class));
+		replay(this.request, this.session, this.response);
+		String viewUrl = this.persistenLoginController.removeCookieAndView(this.url, this.request, this.response);
+		assertEquals(viewUrl, "redirect:/test.html");
+		verify(this.request, this.session, this.response);
+	}
+	
+	@Test
+	public void testRemoveCookieUrlNull() {
+		expect(this.session.getAttribute("sunetid")).andReturn("alainb");
+		Cookie[] cookies = new Cookie[1];
+		cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234033");
+		expect(this.request.getCookies()).andReturn(cookies);
+		expect(this.request.getSession()).andReturn(this.session);
+		this.response.addCookie(isA(Cookie.class));
+		this.response.setCharacterEncoding(isA(String.class));
+		replay(this.request, this.session, this.response);
+		String viewUrl = this.persistenLoginController.removeCookieAndView(null, this.request, this.response);
+		assertEquals(viewUrl, "redirect:/myaccounts.html");
 		verify(this.request, this.session, this.response);
 	}
 	

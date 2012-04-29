@@ -33,6 +33,10 @@ public class ProxyLinks {
         }
     }
 
+    protected boolean proxyLinks(final String ip) {
+        return !isNoProxy(ip) || isProxy(ip);
+    }
+
     private boolean isNoProxy(final String ip) {
         for (Pattern pattern : this.noProxyRegex) {
             if (pattern.matcher(ip).matches()) {
@@ -49,9 +53,5 @@ public class ProxyLinks {
             }
         }
         return false;
-    }
-
-    protected boolean proxyLinks(final String ip) {
-        return !isNoProxy(ip) || isProxy(ip);
     }
 }

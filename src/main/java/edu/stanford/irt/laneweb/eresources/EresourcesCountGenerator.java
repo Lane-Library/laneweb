@@ -59,17 +59,17 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
         this.collectionManager = collectionManager;
     }
 
-    public void setTypes(final Set<String> types) {
-        if (null == types) {
-            throw new IllegalArgumentException("null types");
-        }
-        this.types = types;
-    }
-
     public void setModel(Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }
+    }
+
+    public void setTypes(final Set<String> types) {
+        if (null == types) {
+            throw new IllegalArgumentException("null types");
+        }
+        this.types = types;
     }
 }

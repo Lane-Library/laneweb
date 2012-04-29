@@ -44,36 +44,6 @@ public class Bookmark implements Serializable {
     }
     
     /**
-     * Set the label.
-     * @param label
-     * @throws LanewebException if the label is null or has already been set.
-     */
-    public void setLabel(final String label) {
-        if (label == null) {
-            throw new LanewebException("null label");
-        }
-        if (this.label != null) {
-            throw new LanewebException("cannot change label");
-        }
-        this.label = label;
-    }
-    
-    /**
-     * Set the url
-     * @param url
-     * @throws LanewebException if the url is null or has already been set.
-     */
-    public void setUrl(final String url) {
-        if (url == null) {
-            throw new LanewebException("null url");
-        }
-        if (this.url != null) {
-            throw new LanewebException("cannot change url");
-        }
-        this.url = url;
-    }
-
-    /**
      * Uses the hashCode() and equals() from the label and url.
      * @return true if url and label are the same in both Bookmarks
      */
@@ -86,7 +56,7 @@ public class Bookmark implements Serializable {
         }
         return equals;
     }
-
+    
     /**
      * Getter for the label.
      * @return the label
@@ -113,5 +83,35 @@ public class Bookmark implements Serializable {
             this.hashcode = this.label.hashCode() ^ this.url.hashCode();
         }
         return this.hashcode;
+    }
+
+    /**
+     * Set the label.
+     * @param label
+     * @throws LanewebException if the label is null or has already been set.
+     */
+    public void setLabel(final String label) {
+        if (label == null) {
+            throw new LanewebException("null label");
+        }
+        if (this.label != null) {
+            throw new LanewebException("cannot change label");
+        }
+        this.label = label;
+    }
+
+    /**
+     * Set the url
+     * @param url
+     * @throws LanewebException if the url is null or has already been set.
+     */
+    public void setUrl(final String url) {
+        if (url == null) {
+            throw new LanewebException("null url");
+        }
+        if (this.url != null) {
+            throw new LanewebException("cannot change url");
+        }
+        this.url = url;
     }
 }

@@ -24,20 +24,11 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
 
     private CharBuffer chars;
 
+    private boolean inTargetElement = false;
+
     private int parseLevel = 0;
 
     private Pattern queryPattern;
-
-    private boolean inTargetElement = false;
-    
-    public void setModel(Map<String, Object> model) {
-        String query = ModelUtil.getString(model, Model.QUERY);
-        if (null == query) {
-            throw new IllegalArgumentException("null query");
-        }
-        this.queryPattern = QueryTermPattern.getPattern(query);
-        this.chars = CharBuffer.allocate(256);
-    }
     
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
@@ -54,7 +45,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
             getXMLConsumer().characters(ch, start, length);
         }
     }
-
+    
     @Override
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         if (this.parseLevel > 0) {
@@ -69,6 +60,15 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
             ++this.parseLevel;
         }
         getXMLConsumer().endElement(uri, localName, qName);
+    }
+
+    public void setModel(Map<String, Object> model) {
+        String query = ModelUtil.getString(model, Model.QUERY);
+        if (null == query) {
+            throw new IllegalArgumentException("null query");
+        }
+        this.queryPattern = QueryTermPattern.getPattern(query);
+        this.chars = CharBuffer.allocate(256);
     }
 
     @Override

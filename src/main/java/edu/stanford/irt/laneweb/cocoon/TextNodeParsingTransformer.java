@@ -20,22 +20,22 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent, ParametersAware {
 
-    private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
-    
     private static class HtmlSAXParser extends AbstractSAXParser {
 
         protected HtmlSAXParser(final HTMLConfiguration conf) {
             super(conf);
         }
     }
+    
+    private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
 
     private StringBuilder content = new StringBuilder();
 
     private String elementName = "event_description";
 
-    private boolean inElement = false;
-
     private AbstractSAXParser htmlParser;
+
+    private boolean inElement = false;
 
     public TextNodeParsingTransformer() {
         HTMLConfiguration conf = new HTMLConfiguration();
@@ -89,15 +89,6 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     }
 
     @Override
-    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
-            throws SAXException {
-        getXMLConsumer().startElement(uri, localName, qName, atts);
-        if (this.elementName.equals(qName)) {
-            this.inElement = true;
-        }
-    }
-
-    @Override
     public Serializable getKey() {
         return "textNodeParsing";
     }
@@ -112,6 +103,15 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         String name = parameters.get("elementName");
         if (name != null) {
             this.elementName = name;
+        }
+    }
+
+    @Override
+    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
+            throws SAXException {
+        getXMLConsumer().startElement(uri, localName, qName, atts);
+        if (this.elementName.equals(qName)) {
+            this.inElement = true;
         }
     }
 }

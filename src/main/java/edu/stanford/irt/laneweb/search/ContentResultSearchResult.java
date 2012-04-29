@@ -58,6 +58,123 @@ public class ContentResultSearchResult implements SearchResult {
         return (scoreCmp != 0 ? scoreCmp : this.sortTitle.compareTo(o.getSortTitle()));
     }
 
+    @Override
+    public boolean equals(final Object other) {
+        if (!(other instanceof ContentResultSearchResult)) {
+            return false;
+        }
+        ContentResultSearchResult scmr = (ContentResultSearchResult) other;
+        return scmr.getSortTitle().equals(this.sortTitle);
+    }
+
+    public String getContentUrl() {
+        return this.contentResult.getURL();
+    }
+
+    /**
+     * @return the publicationTitle from contentResult
+     */
+    public String getPublicationTitle() {
+        return this.contentResult.getPublicationTitle();
+    }
+
+    /**
+     * @return the resourceHits
+     */
+    public String getResourceHits() {
+        return this.resourceHits;
+    }
+
+    /**
+     * @return the resourceId
+     */
+    public String getResourceId() {
+        return this.resourceId;
+    }
+
+    /**
+     * @return the resourceName
+     */
+    public String getResourceName() {
+        return this.resourceName;
+    }
+
+    /**
+     * @return the resourceUrl
+     */
+    public String getResourceUrl() {
+        return this.resourceUrl;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public String getSortTitle() {
+        return this.sortTitle;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.sortTitle.hashCode();
+    }
+
+    /**
+     * @param resourceHits
+     *            the resourceHits to set
+     */
+    public void setResourceHits(final String resourceHits) {
+        this.resourceHits = resourceHits;
+    }
+
+    /**
+     * @param resourceId
+     *            the resourceId to set
+     */
+    public void setResourceId(final String resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    /**
+     * @param resourceName
+     *            the resourceName to set
+     */
+    public void setResourceName(final String resourceName) {
+        this.resourceName = resourceName;
+    }
+
+    /**
+     * @param resourceUrl
+     *            the resourceUrl to set
+     */
+    public void setResourceUrl(final String resourceUrl) {
+        this.resourceUrl = resourceUrl;
+    }
+
+    public void toSAX(final ContentHandler handler) throws SAXException {
+        // TODO: returning result element for now ... turn into displayable?
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.getScore()));
+        atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
+        XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
+        maybeCreateElement(handler, RESOURCE_ID, this.resourceId);
+        maybeCreateElement(handler, RESOURCE_NAME, this.resourceName);
+        maybeCreateElement(handler, RESOURCE_URL, this.resourceUrl);
+        maybeCreateElement(handler, RESOURCE_HITS, this.resourceHits);
+        maybeCreateElement(handler, ID, this.contentResult.getId());
+        maybeCreateElement(handler, CONTENT_ID, this.contentResult.getContentId());
+        maybeCreateElement(handler, TITLE, this.contentResult.getTitle());
+        maybeCreateElement(handler, DESCRIPTION, this.contentResult.getDescription());
+        maybeCreateElement(handler, AUTHOR, this.contentResult.getAuthor());
+        maybeCreateElement(handler, PUBLICATION_DATE, this.contentResult.getPublicationDate());
+        maybeCreateElement(handler, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
+        maybeCreateElement(handler, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
+        maybeCreateElement(handler, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
+        maybeCreateElement(handler, PAGES, this.contentResult.getPages());
+        maybeCreateElement(handler, URL, this.contentResult.getURL());
+        XMLUtils.endElement(handler, NAMESPACE, RESULT);
+    }
+
     // return -10 to 10, based on pub date's proximity to THIS_YEAR
     private int computeDateAdjustment() {
         if (null == this.contentResult.getPublicationDate()) {
@@ -146,127 +263,10 @@ public class ContentResultSearchResult implements SearchResult {
         return 1;
     }
 
-    @Override
-    public boolean equals(final Object other) {
-        if (!(other instanceof ContentResultSearchResult)) {
-            return false;
-        }
-        ContentResultSearchResult scmr = (ContentResultSearchResult) other;
-        return scmr.getSortTitle().equals(this.sortTitle);
-    }
-
-    public String getContentUrl() {
-        return this.contentResult.getURL();
-    }
-
-    /**
-     * @return the publicationTitle from contentResult
-     */
-    public String getPublicationTitle() {
-        return this.contentResult.getPublicationTitle();
-    }
-
-    /**
-     * @return the resourceHits
-     */
-    public String getResourceHits() {
-        return this.resourceHits;
-    }
-
-    /**
-     * @return the resourceId
-     */
-    public String getResourceId() {
-        return this.resourceId;
-    }
-
-    /**
-     * @return the resourceName
-     */
-    public String getResourceName() {
-        return this.resourceName;
-    }
-
-    /**
-     * @return the resourceUrl
-     */
-    public String getResourceUrl() {
-        return this.resourceUrl;
-    }
-
-    public int getScore() {
-        return this.score;
-    }
-
-    public String getSortTitle() {
-        return this.sortTitle;
-    }
-
-    @Override
-    public int hashCode() {
-        return this.sortTitle.hashCode();
-    }
-
     private void maybeCreateElement(final ContentHandler handler, final String name, final String value)
             throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(handler, NAMESPACE, name, value);
         }
-    }
-
-    /**
-     * @param resourceHits
-     *            the resourceHits to set
-     */
-    public void setResourceHits(final String resourceHits) {
-        this.resourceHits = resourceHits;
-    }
-
-    /**
-     * @param resourceId
-     *            the resourceId to set
-     */
-    public void setResourceId(final String resourceId) {
-        this.resourceId = resourceId;
-    }
-
-    /**
-     * @param resourceName
-     *            the resourceName to set
-     */
-    public void setResourceName(final String resourceName) {
-        this.resourceName = resourceName;
-    }
-
-    /**
-     * @param resourceUrl
-     *            the resourceUrl to set
-     */
-    public void setResourceUrl(final String resourceUrl) {
-        this.resourceUrl = resourceUrl;
-    }
-
-    public void toSAX(final ContentHandler handler) throws SAXException {
-        // TODO: returning result element for now ... turn into displayable?
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.getScore()));
-        atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
-        XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
-        maybeCreateElement(handler, RESOURCE_ID, this.resourceId);
-        maybeCreateElement(handler, RESOURCE_NAME, this.resourceName);
-        maybeCreateElement(handler, RESOURCE_URL, this.resourceUrl);
-        maybeCreateElement(handler, RESOURCE_HITS, this.resourceHits);
-        maybeCreateElement(handler, ID, this.contentResult.getId());
-        maybeCreateElement(handler, CONTENT_ID, this.contentResult.getContentId());
-        maybeCreateElement(handler, TITLE, this.contentResult.getTitle());
-        maybeCreateElement(handler, DESCRIPTION, this.contentResult.getDescription());
-        maybeCreateElement(handler, AUTHOR, this.contentResult.getAuthor());
-        maybeCreateElement(handler, PUBLICATION_DATE, this.contentResult.getPublicationDate());
-        maybeCreateElement(handler, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
-        maybeCreateElement(handler, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
-        maybeCreateElement(handler, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
-        maybeCreateElement(handler, PAGES, this.contentResult.getPages());
-        maybeCreateElement(handler, URL, this.contentResult.getURL());
-        XMLUtils.endElement(handler, NAMESPACE, RESULT);
     }
 }

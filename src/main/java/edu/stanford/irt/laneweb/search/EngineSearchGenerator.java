@@ -12,25 +12,15 @@ public class EngineSearchGenerator extends SearchGenerator {
 
     private Collection<String> engines;
     
-    private Map<String, String> parameters;
-
     private Map<String, Object> model;
-    
-    public void setParameters(Map<String, String> parameters) {
-        super.setParameters(parameters);
-        this.parameters = parameters;
-    }
-    
-    public void setModel(Map<String, Object> model) {
-        super.setModel(model);
-        this.model = model;
-    }
 
+    private Map<String, String> parameters;
+    
     @Override
     public Result doSearch() {
         return super.doSearch(this.engines);
     }
-
+    
     @SuppressWarnings("unchecked")
     @Override
     public void initialize() {
@@ -43,5 +33,15 @@ public class EngineSearchGenerator extends SearchGenerator {
             }
             this.engines = Arrays.asList(engineList.split(","));
         }
+    }
+
+    public void setModel(Map<String, Object> model) {
+        super.setModel(model);
+        this.model = model;
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        super.setParameters(parameters);
+        this.parameters = parameters;
     }
 }

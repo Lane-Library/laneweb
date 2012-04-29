@@ -28,25 +28,13 @@ import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 @Controller
 public class PersistentLoginController {
 
+	public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
+
 	private SunetIdCookieCodec codec = new SunetIdCookieCodec();
 
 	private SunetIdSource sunetIdSource = new SunetIdSource();
 
-	public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
-
 	
-	@RequestMapping(value = "/persistentLogin.html", params = { "url", "pl=renew" })
-	public String renewCookieAndRedirect(final String url, HttpServletRequest request, HttpServletResponse response) {
-		Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-		if (null != isActiveSunetID && isActiveSunetID) {
-			checkSunetIdAndSetCookies(request, response);
-		}
-		else{
-			resetCookies(request, response);
-		}
-		return "redirect:".concat(url);
-	}
-
 	@RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
 	public String createCookie(final String url, HttpServletRequest request, HttpServletResponse response) {
 		checkSunetIdAndSetCookies(request, response);
@@ -59,6 +47,18 @@ public class PersistentLoginController {
 		return setView(url, request, response);
 	}
 
+	@RequestMapping(value = "/persistentLogin.html", params = { "url", "pl=renew" })
+	public String renewCookieAndRedirect(final String url, HttpServletRequest request, HttpServletResponse response) {
+		Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
+		if (null != isActiveSunetID && isActiveSunetID) {
+			checkSunetIdAndSetCookies(request, response);
+		}
+		else{
+			resetCookies(request, response);
+		}
+		return "redirect:".concat(url);
+	}
+
 	// /**/persistentLogin do not work for /secure/ not sure why but is working
 	// for anything else
 	@RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=false" })
@@ -68,31 +68,15 @@ public class PersistentLoginController {
 	}
 
 
-	/**
-	 * set the lane-user cookie max age to zero.
-	 * 
-	 * @param response
-	 */
-
-	private String setView(final String url, final HttpServletRequest request, HttpServletResponse response) {
-		this.sunetIdSource.getSunetid(request);
-		if (null == url) {
-			response.setCharacterEncoding("UTF-8");
-			return "redirect:/myaccounts.html"; 
+	private void checkSunetIdAndSetCookies(final HttpServletRequest request, HttpServletResponse response) {
+		String sunetid = this.sunetIdSource.getSunetid(request);
+		if (null != sunetid) {
+			setCookies(request, response, sunetid);
 		} else {
-			return "redirect:".concat(url);
+			resetCookies(request, response);
 		}
 	}
 
-
-	
-	private void resetCookies(final HttpServletRequest request, HttpServletResponse response) {
-		Cookie cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, null);
-		cookie.setPath("/");
-		cookie.setMaxAge(0);
-		response.addCookie(cookie);
-		removeCookies(request, response);
-	}
 
 	
 	private void removeCookies(final HttpServletRequest request, HttpServletResponse response) {
@@ -121,13 +105,13 @@ public class PersistentLoginController {
 		response.addCookie(cookie);
 	}
 
-	private void checkSunetIdAndSetCookies(final HttpServletRequest request, HttpServletResponse response) {
-		String sunetid = this.sunetIdSource.getSunetid(request);
-		if (null != sunetid) {
-			setCookies(request, response, sunetid);
-		} else {
-			resetCookies(request, response);
-		}
+	
+	private void resetCookies(final HttpServletRequest request, HttpServletResponse response) {
+		Cookie cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, null);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		removeCookies(request, response);
 	}
 
 	/**
@@ -164,6 +148,22 @@ public class PersistentLoginController {
 			cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
 			response.addCookie(cookie);
 			
+		}
+	}
+
+	/**
+	 * set the lane-user cookie max age to zero.
+	 * 
+	 * @param response
+	 */
+
+	private String setView(final String url, final HttpServletRequest request, HttpServletResponse response) {
+		this.sunetIdSource.getSunetid(request);
+		if (null == url) {
+			response.setCharacterEncoding("UTF-8");
+			return "redirect:/myaccounts.html"; 
+		} else {
+			return "redirect:".concat(url);
 		}
 	}
 
