@@ -10,7 +10,6 @@ public class LiteralExpression implements Expression {
         this.value = value;
     }
 
-    @Override
     public Object getValue(final Map<String, Object> model) {
         return this.value;
     }

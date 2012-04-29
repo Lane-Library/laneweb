@@ -16,7 +16,6 @@ public class TodaysHoursBinder implements DataBinder {
 
     private String hoursPath;
 
-    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         if (null == this.hoursPath) {
             throw new IllegalArgumentException("null hoursPath");

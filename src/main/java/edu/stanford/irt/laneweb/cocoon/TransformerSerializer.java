@@ -74,7 +74,6 @@ public class TransformerSerializer extends AbstractXMLPipe implements Serializer
         return NOPValidity.SHARED_INSTANCE;
     }
 
-    @Override
     public void setOutputStream(final OutputStream out) {
         try {
             TransformerHandler handler = this.transformerFactory.newTransformerHandler();
