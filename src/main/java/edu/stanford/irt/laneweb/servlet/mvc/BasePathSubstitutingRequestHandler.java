@@ -93,7 +93,8 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
     }
 
     @Override
-    //TODO: this can probably be a controller, and, probably can return the original Resource, not the wrapped one.
+    // TODO: this can probably be a controller, and, probably can return the
+    // original Resource, not the wrapped one.
     protected Resource getResource(final HttpServletRequest request) {
         Resource resource = super.getResource(request);
         if (resource != null) {

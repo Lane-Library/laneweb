@@ -14,17 +14,17 @@ import org.xml.sax.SAXException;
 public class URLGenerator extends AbstractGenerator implements CacheableProcessingComponent, SourceAware {
 
     private SAXParser saxParser;
-    
+
     private Source source;
 
     public void generate() throws IOException, SAXException {
-    	if (this.source instanceof XMLizable) {
-    		((XMLizable)this.source).toSAX(getXMLConsumer());
-    	} else {
-    		InputSource inputSource = new InputSource(this.source.getInputStream());
-    		inputSource.setSystemId(this.source.getURI());
-    		this.saxParser.parse(inputSource, getXMLConsumer());
-    	}
+        if (this.source instanceof XMLizable) {
+            ((XMLizable) this.source).toSAX(getXMLConsumer());
+        } else {
+            InputSource inputSource = new InputSource(this.source.getInputStream());
+            inputSource.setSystemId(this.source.getURI());
+            this.saxParser.parse(inputSource, getXMLConsumer());
+        }
     }
 
     public Serializable getKey() {
@@ -39,7 +39,7 @@ public class URLGenerator extends AbstractGenerator implements CacheableProcessi
         this.saxParser = saxParser;
     }
 
-    public void setSource(Source source) {
+    public void setSource(final Source source) {
         this.source = source;
     }
 }

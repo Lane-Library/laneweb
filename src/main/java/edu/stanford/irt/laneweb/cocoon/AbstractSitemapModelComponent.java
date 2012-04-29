@@ -11,24 +11,24 @@ import org.apache.cocoon.sitemap.SitemapModelComponent;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public abstract class AbstractSitemapModelComponent implements SitemapModelComponent {
-    
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public final void setup(final SourceResolver resolver, final Map model, final String src, final Parameters par) {
         if (this instanceof ModelAware) {
-            ((ModelAware)this).setModel(model);
+            ((ModelAware) this).setModel(model);
         }
         if (this instanceof ParametersAware) {
-            ((ParametersAware)this).setParameters(new ParametersMap(par));
+            ((ParametersAware) this).setParameters(new ParametersMap(par));
         }
         if (this instanceof SourceAware) {
             try {
-                ((SourceAware)this).setSource(resolver.resolveURI(src));
+                ((SourceAware) this).setSource(resolver.resolveURI(src));
             } catch (IOException e) {
                 throw new LanewebException(e);
             }
         }
         if (this instanceof Initializable) {
-            ((Initializable)this).initialize();
+            ((Initializable) this).initialize();
         }
     }
 }

@@ -27,7 +27,6 @@ public class TreeProcessor implements Processor {
 
     private InputStream source;
 
-    
     public InternalPipelineDescription buildPipeline(final Environment environment) throws Exception {
         InvokeContext context = new InvokeContext(true);
         if (process(environment, context)) {
@@ -36,32 +35,26 @@ public class TreeProcessor implements Processor {
         return null;
     }
 
-    
     public Object getAttribute(final String arg0) {
         throw new UnsupportedOperationException();
     }
 
-    
     public String getContext() {
         throw new UnsupportedOperationException();
     }
 
-    
     public Processor getParent() {
         throw new UnsupportedOperationException();
     }
 
-    
     public Processor getRootProcessor() {
         throw new UnsupportedOperationException();
     }
 
-    
     public SourceResolver getSourceResolver() {
         throw new UnsupportedOperationException();
     }
 
-    
     public void initialize() throws Exception {
         NamespacedSAXConfigurationHandler handler = new NamespacedSAXConfigurationHandler();
         InputSource inputSource = new InputSource(this.source);
@@ -71,18 +64,15 @@ public class TreeProcessor implements Processor {
         this.rootNode = this.sitemapLanguage.build(sitemapProgram, null);
     }
 
-    
     public boolean process(final Environment environment) throws Exception {
         InvokeContext context = new InvokeContext();
         return process(environment, context);
     }
 
-    
     public Object removeAttribute(final String arg0) {
         throw new UnsupportedOperationException();
     }
 
-    
     public void setAttribute(final String arg0, final Object arg1) {
         throw new UnsupportedOperationException();
     }
@@ -90,7 +80,7 @@ public class TreeProcessor implements Processor {
     public void setSAXParser(final SAXParser saxParser) {
         this.saxParser = saxParser;
     }
-    
+
     public void setServiceManager(final ServiceManager serviceManager) {
         this.serviceManager = serviceManager;
     }

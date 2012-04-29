@@ -9,7 +9,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class ExpressionParser {
 
-    //TODO: don't throw IOException
+    // TODO: don't throw IOException
     public List<Expression> parseExpression(final String expression) throws IOException {
         StringReader in = new StringReader(expression);
         LinkedList<Expression> expressions = new LinkedList<Expression>();
@@ -23,7 +23,7 @@ public class ExpressionParser {
                 if (inExpr) {
                     if (c == '\\') {
                         ch = in.read();
-                        //TODO: figure out what is happening with \ here:
+                        // TODO: figure out what is happening with \ here:
                         buf.append(ch == -1 ? '\\' : (char) ch);
                     } else if (c == '}') {
                         expressions.add(new VariableExpression(buf.toString()));

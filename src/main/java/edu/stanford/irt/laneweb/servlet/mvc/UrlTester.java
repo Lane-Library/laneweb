@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -28,19 +27,18 @@ public class UrlTester {
         this.httpClient = msms.getHttpClient();
     }
 
-    
     @RequestMapping(value = "/apps/url-tester")
-    public void testUrl(@RequestParam final String url, HttpServletResponse response) throws IOException {
+    public void testUrl(@RequestParam final String url, final HttpServletResponse response) throws IOException {
         HttpGet get = new HttpGet(url);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        
-        HttpResponse res = null; 
+        HttpResponse res = null;
         try {
-        	res	= this.httpClient.execute(get);
-        	baos.write(EntityUtils.toByteArray(res.getEntity()));
-		} catch (Exception e) {
-			get.abort();
-		}byte[] headers = getHeaderString(get, res);
+            res = this.httpClient.execute(get);
+            baos.write(EntityUtils.toByteArray(res.getEntity()));
+        } catch (Exception e) {
+            get.abort();
+        }
+        byte[] headers = getHeaderString(get, res);
         baos.write(headers);
         response.setHeader("Content-Type", "text/plain");
         response.getOutputStream().write(baos.toByteArray());
@@ -56,7 +54,7 @@ public class UrlTester {
         }
         return result.toString();
     }
-    
+
     private byte[] getHeaderString(final HttpGet get, final HttpResponse rep) {
         StringBuffer result = new StringBuffer("\n\n\n<!--\n\nRequest Headers:\n\n");
         result.append(getHeaderString(get.getAllHeaders()));

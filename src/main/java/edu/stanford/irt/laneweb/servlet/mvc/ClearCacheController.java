@@ -11,8 +11,7 @@ public class ClearCacheController {
 
     @Autowired
     private Cache cache;
-    
-    
+
     @RequestMapping(value = "/secure/admin/clearcache")
     @ResponseBody
     public String clearCache() {

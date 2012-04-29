@@ -77,7 +77,7 @@ public class RequestParameterDataBinderTest {
         assertEquals("foo%3Fbar", this.model.get("url-encoded-query"));
         verify(this.request, this.names);
     }
-    
+
     @Test
     public void testBothSingleAndMultiple() {
         expect(this.request.getParameterNames()).andReturn(this.names);

@@ -27,9 +27,9 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
     protected String subset;
 
     protected String type;
-    
+
     private Map<String, Object> model;
-    
+
     private Map<String, String> parameters;
 
     public void generate() {
@@ -60,19 +60,19 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         String page = ModelUtil.getString(this.model, Model.PAGE, "1");
         this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
     }
-    
+
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
         }
         this.collectionManager = collectionManager;
     }
-    
-    public void setModel(Map<String, Object> model) {
+
+    public void setModel(final Map<String, Object> model) {
         this.model = model;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
         this.parameters = parameters;
     }
 

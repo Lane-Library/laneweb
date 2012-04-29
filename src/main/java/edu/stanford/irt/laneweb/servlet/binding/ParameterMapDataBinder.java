@@ -6,11 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-
 public class ParameterMapDataBinder implements DataBinder {
 
     @SuppressWarnings("rawtypes")
-    public void bind(Map<String, Object> model, HttpServletRequest request) {
+    public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         Map parameterMap = request.getParameterMap();
         if (parameterMap.size() > 0) {
             model.put(Model.PARAMETER_MAP, request.getParameterMap());

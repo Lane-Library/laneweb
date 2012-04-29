@@ -11,13 +11,12 @@ import java.io.InputStream;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class BasePathSubstitutingInputStreamTest {
-    
+
     private BasePathSubstitutingInputStream in;
-    
+
     private InputStream original = new ByteArrayInputStream("here is some text with /././ in it".getBytes());
-    
+
     private String substituted = "here is some text with /stage/ in it";
 
     @Before
@@ -27,7 +26,7 @@ public class BasePathSubstitutingInputStreamTest {
 
     @Test
     public void testMarkSupported() {
-        assertFalse(in.markSupported());
+        assertFalse(this.in.markSupported());
     }
 
     @Test
@@ -62,7 +61,7 @@ public class BasePathSubstitutingInputStreamTest {
         int length = this.in.read(buffer);
         assertEquals("age/ in it", new String(buffer, 0, length));
     }
-    
+
     @Test
     public void testSkipALot() throws IOException {
         byte[] buffer = new byte[1024];

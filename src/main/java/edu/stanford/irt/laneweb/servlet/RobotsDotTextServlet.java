@@ -24,8 +24,7 @@ public class RobotsDotTextServlet extends HttpServlet {
             + "Disallow: /search.html\nDisallow: /secure/\nDisallow: /stage/").getBytes();
 
     @Override
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-            IOException {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         // Proxy servers add this header, may be comma separated list
         String hostHeader = req.getHeader("X-Forwarded-Host");
         if (hostHeader == null) {

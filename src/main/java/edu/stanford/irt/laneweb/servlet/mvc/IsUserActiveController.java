@@ -11,16 +11,13 @@ import edu.stanford.irt.laneweb.model.Model;
 @Controller
 public class IsUserActiveController {
 
-
     @ResponseBody
-	@RequestMapping(value = "/user/active")    
-    public String  isUserActive(final HttpServletRequest request) {
-    	Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-    	if(null == isActiveSunetID){
-    		return "false";
-    	}
-    	return String.valueOf(isActiveSunetID);	
+    @RequestMapping(value = "/user/active")
+    public String isUserActive(final HttpServletRequest request) {
+        Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
+        if (null == isActiveSunetID) {
+            return "false";
+        }
+        return String.valueOf(isActiveSunetID);
     }
 }
-
-

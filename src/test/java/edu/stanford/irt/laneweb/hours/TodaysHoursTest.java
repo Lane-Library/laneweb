@@ -31,7 +31,8 @@ public class TodaysHoursTest {
     @Test
     public final void test() throws ParseException {
         assertTrue(this.todaysHours.toString().length() > 0);
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); // move to setup
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); // move to
+                                                                    // setup
         assertEquals("Just an average Monday", this.todaysHours.toString(dateFormat.parse("1/30/2012")));
         assertEquals("8 am - 10 pm", this.todaysHours.toString(dateFormat.parse("1/31/2012")));
         assertEquals("2/9 hours", this.todaysHours.toString(dateFormat.parse("2/09/2012")));

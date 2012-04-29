@@ -59,7 +59,7 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
         this.collectionManager = collectionManager;
     }
 
-    public void setModel(Map<String, Object> model) {
+    public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");

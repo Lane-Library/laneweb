@@ -25,11 +25,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-
 public class LanewebTraxTransformerTest {
-    
+
     private Attributes attributes;
-    
+
     private char[] chars;
 
     private TransformerHandler handler;
@@ -75,7 +74,7 @@ public class LanewebTraxTransformerTest {
         this.handler.setResult(isA(SAXResult.class));
         this.handler.startDocument();
         replay(this.sourceResolver, this.source, this.parameters, this.traxProcessor, this.handler, this.traxTransformer);
-        this.transformer.setup(this.sourceResolver, this.model , "src", this.parameters);
+        this.transformer.setup(this.sourceResolver, this.model, "src", this.parameters);
         this.transformer.setConsumer(this.xmlConsumer);
         this.transformer.startDocument();
         verify(this.sourceResolver, this.source, this.parameters, this.traxProcessor, this.handler, this.traxTransformer);
@@ -149,8 +148,8 @@ public class LanewebTraxTransformerTest {
     @Test
     public void testGetKey() {
         reset(this.source);
-      expect(this.source.getURI()).andReturn("uri");
-      replay(this.source);
+        expect(this.source.getURI()).andReturn("uri");
+        replay(this.source);
         this.transformer.getKey();
         verify(this.source);
     }

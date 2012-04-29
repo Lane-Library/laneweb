@@ -25,13 +25,12 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-
 public class TransformerSerializerTest {
-    
+
     private SAXTransformerFactory factory;
-    
+
     private TransformerHandler handler;
-    
+
     private Properties properties;
 
     private TransformerSerializer serializer;
@@ -44,7 +43,7 @@ public class TransformerSerializerTest {
         this.properties = createMock(Properties.class);
         this.handler = createMock(TransformerHandler.class);
         this.transformer = createMock(Transformer.class);
-        expect(this.properties.keySet()).andReturn(Collections.<Object>singleton("foo"));
+        expect(this.properties.keySet()).andReturn(Collections.<Object> singleton("foo"));
         expect(this.properties.get("foo")).andReturn("bar");
         replay(this.properties);
         this.serializer = new TransformerSerializer(this.factory, this.properties);
@@ -80,7 +79,8 @@ public class TransformerSerializerTest {
         try {
             this.serializer.setOutputStream(null);
             fail();
-        } catch (LanewebException e) {}
+        } catch (LanewebException e) {
+        }
         verify(this.factory);
     }
 }

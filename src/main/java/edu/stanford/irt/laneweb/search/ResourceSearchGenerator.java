@@ -14,11 +14,11 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 public class ResourceSearchGenerator extends SearchGenerator {
 
     private Map<String, Object> model;
-    
+
     private Map<String, String> parameters;
-    
+
     private Collection<String> resources;
-    
+
     @Override
     public Result doSearch() {
         Collection<String> enginesToRun = new HashSet<String>();
@@ -50,13 +50,15 @@ public class ResourceSearchGenerator extends SearchGenerator {
             this.resources = Arrays.asList(resourceList.split(","));
         }
     }
-    
-    public void setModel(Map<String, Object> model) {
+
+    @Override
+    public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.model = model;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    @Override
+    public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         this.parameters = parameters;
     }

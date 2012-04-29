@@ -167,8 +167,8 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGet(MESH, params);
     }
 
-    //TODO: remove these when upgrading to eresources-1.8
-    public Collection<Eresource> getMeshCore(String type, String mesh) {
+    // TODO: remove these when upgrading to eresources-1.8
+    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
         throw new UnsupportedOperationException();
     }
 
@@ -215,7 +215,7 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGetSearch(SEARCH, params, query);
     }
 
-    public Map<String, Integer> searchCount(Set<String> types, Set<String> subsets, String query) {
+    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
         return searchCount(types, query);
     }
 

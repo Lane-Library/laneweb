@@ -26,10 +26,9 @@ public class HTMLBookmarkController extends BookmarkController {
         saveLinks(sunetid, bookmarks);
         return editBookmark(redirectAttrs, 0);
     }
-    
+
     @RequestMapping(params = "action=cancel")
-    public String cancelEdit(
-            final RedirectAttributes redirectAttrs) {
+    public String cancelEdit(final RedirectAttributes redirectAttrs) {
         return this.redirectURI;
     }
 
@@ -45,9 +44,7 @@ public class HTMLBookmarkController extends BookmarkController {
     }
 
     @RequestMapping(params = "action=edit")
-    public String editBookmark(
-            final RedirectAttributes redirectAttrs,
-            @RequestParam final int i) {
+    public String editBookmark(final RedirectAttributes redirectAttrs, @RequestParam final int i) {
         redirectAttrs.addAttribute("action", "edit");
         redirectAttrs.addAttribute("i", Integer.valueOf(i));
         return this.redirectURI;

@@ -206,11 +206,9 @@ public class ContentResultSearchResult implements SearchResult {
     private int computeScore() {
         int score;
         double weight = computeWeight(ENGINEID_PATTERN.matcher(this.contentResult.getId()).replaceFirst(""));
-        Pattern titleBeginsWithPattern = Pattern.compile("^(" + this.queryTermPattern.toString() + ").*",
-                Pattern.CASE_INSENSITIVE);
+        Pattern titleBeginsWithPattern = Pattern.compile("^(" + this.queryTermPattern.toString() + ").*", Pattern.CASE_INSENSITIVE);
         boolean titleBeginsWithQueryTerms = titleBeginsWithPattern.matcher(this.contentResult.getTitle()).matches();
-        Pattern exactTitlePattern = Pattern.compile("^(" + this.queryTermPattern.toString() + ")$",
-                Pattern.CASE_INSENSITIVE);
+        Pattern exactTitlePattern = Pattern.compile("^(" + this.queryTermPattern.toString() + ")$", Pattern.CASE_INSENSITIVE);
         boolean exactTitle = exactTitlePattern.matcher(this.contentResult.getTitle()).matches();
         int titleHits = 0;
         int descriptionHits = 0;
@@ -263,8 +261,7 @@ public class ContentResultSearchResult implements SearchResult {
         return 1;
     }
 
-    private void maybeCreateElement(final ContentHandler handler, final String name, final String value)
-            throws SAXException {
+    private void maybeCreateElement(final ContentHandler handler, final String name, final String value) throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(handler, NAMESPACE, name, value);
         }

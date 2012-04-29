@@ -16,14 +16,14 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 public class DebugTransformer extends AbstractTransformer implements ModelAware {
 
     private boolean debug;
-    
+
     private Set<Entry<String, Object>> modelEntries;
 
-    public void setModel(Map<String, Object> model) {
+    public void setModel(final Map<String, Object> model) {
         this.debug = ModelUtil.getObject(model, Model.DEBUG, Boolean.class, Boolean.FALSE);
         this.modelEntries = model.entrySet();
     }
-    
+
     @Override
     public void startDocument() throws SAXException {
         super.startDocument();

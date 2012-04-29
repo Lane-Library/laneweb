@@ -5,7 +5,6 @@ import javax.xml.transform.sax.SAXTransformerFactory;
 
 import org.springframework.beans.factory.FactoryBean;
 
-
 public class SAXTransformerFactoryBean implements FactoryBean<SAXTransformerFactory> {
 
     private SAXTransformerFactory factory;
@@ -21,8 +20,8 @@ public class SAXTransformerFactoryBean implements FactoryBean<SAXTransformerFact
     public boolean isSingleton() {
         return true;
     }
-    
-    public void setTransformerFactoryClass(String factoryClass) {
+
+    public void setTransformerFactoryClass(final String factoryClass) {
         this.factory = (SAXTransformerFactory) TransformerFactory.newInstance(factoryClass, null);
     }
 }

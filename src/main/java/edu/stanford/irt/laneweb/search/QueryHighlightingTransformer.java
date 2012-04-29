@@ -29,7 +29,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
     private int parseLevel = 0;
 
     private Pattern queryPattern;
-    
+
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
         if (this.parseLevel > 0) {
@@ -45,7 +45,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
             getXMLConsumer().characters(ch, start, length);
         }
     }
-    
+
     @Override
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         if (this.parseLevel > 0) {
@@ -56,13 +56,13 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
             this.inTargetElement = false;
         }
         // end of child element of title or description
-        else if(this.inTargetElement == true){
+        else if (this.inTargetElement == true) {
             ++this.parseLevel;
         }
         getXMLConsumer().endElement(uri, localName, qName);
     }
 
-    public void setModel(Map<String, Object> model) {
+    public void setModel(final Map<String, Object> model) {
         String query = ModelUtil.getString(model, Model.QUERY);
         if (null == query) {
             throw new IllegalArgumentException("null query");
@@ -79,7 +79,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
             this.inTargetElement = true;
         }
         // don't process child elements of title or description
-        else if(this.inTargetElement == true){
+        else if (this.inTargetElement == true) {
             handleMatches();
             this.parseLevel--;
         }

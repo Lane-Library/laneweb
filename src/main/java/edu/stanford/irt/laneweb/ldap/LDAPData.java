@@ -7,13 +7,13 @@ public class LDAPData {
     private String name;
 
     private String univId;
-    
-    public LDAPData(String name, String univId, boolean isActive) {
+
+    public LDAPData(final String name, final String univId, final boolean isActive) {
         this.name = name;
         this.univId = univId;
         this.isActive = isActive;
     }
-    
+
     public String getName() {
         return this.name;
     }
@@ -23,13 +23,12 @@ public class LDAPData {
     }
 
     public boolean isActive() {
-    	return this.isActive;
+        return this.isActive;
     }
 
-    
     @Override
     public String toString() {
-        return new StringBuilder("univid=").append(this.univId).append(",name=").append(this.name).append(",isActive=").append(this.isActive).toString();
+        return new StringBuilder("univid=").append(this.univId).append(",name=").append(this.name).append(",isActive=")
+                .append(this.isActive).toString();
     }
-
 }

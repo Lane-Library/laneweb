@@ -60,7 +60,7 @@ public class TraxProcessor {
 
     /** The store service instance */
     private Store store;
-    
+
     private URIResolver uriResolver;
 
     public TraxProcessor(final SAXTransformerFactory factory, final URIResolver uriResolver, final Store store) {
@@ -87,7 +87,7 @@ public class TraxProcessor {
             throw new LanewebException(e);
         }
     }
-    
+
     private TransformerHandler getValidHandlerFromStore(final Source stylesheet, final String uri) throws IOException,
             TransformerException {
         // we must augment the template ID with the factory classname since one
@@ -125,7 +125,7 @@ public class TraxProcessor {
         return handler;
     }
 
-    private TransformerHandler prepareHandlerFromTemplates(Templates templates) throws TransformerConfigurationException {
+    private TransformerHandler prepareHandlerFromTemplates(final Templates templates) throws TransformerConfigurationException {
         TransformerHandler handler = this.factory.newTransformerHandler(templates);
         Transformer transformer = handler.getTransformer();
         transformer.setErrorListener(this.errorHandler);

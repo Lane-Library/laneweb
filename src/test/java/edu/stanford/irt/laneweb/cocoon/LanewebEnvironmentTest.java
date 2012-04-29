@@ -162,10 +162,10 @@ public class LanewebEnvironmentTest {
     @Test
     public void testSetContentType() {
         try {
-        this.environment.setContentType(null);
-        fail();
-    } catch (UnsupportedOperationException e) {
-    }
+            this.environment.setContentType(null);
+            fail();
+        } catch (UnsupportedOperationException e) {
+        }
     }
 
     @Test

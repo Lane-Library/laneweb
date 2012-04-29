@@ -36,7 +36,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
     private Map<String, Object> model;
 
     private Map<String, String> parameters;
-    
+
     private String timeout;
 
     @Override
@@ -72,13 +72,14 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
     public void setDefaultTimeout(final long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
     }
-    
-    public void setModel(Map<String, Object> model) {
+
+    @Override
+    public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.model = model;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
         this.parameters = parameters;
     }
 

@@ -47,8 +47,8 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator impleme
             throw new LanewebException(e);
         }
     }
-    
-    public void setModel(Map<String, Object> model) {
+
+    public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
         this.region = ModelUtil.getString(model, Model.REGION);
         this.bassettNumber = ModelUtil.getString(model, Model.BASSETT_NUMBER);

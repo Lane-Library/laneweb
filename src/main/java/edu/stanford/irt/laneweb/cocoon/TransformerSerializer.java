@@ -39,7 +39,7 @@ public class TransformerSerializer extends AbstractXMLPipe implements Serializer
         this.transformerFactory = factory;
         this.properties = properties;
         StringBuilder sb = new StringBuilder();
-        //use a TreeSet to get an ordered set:
+        // use a TreeSet to get an ordered set:
         Set<Object> keys = new TreeSet<Object>(properties.keySet());
         for (Object key : keys) {
             sb.append(';').append(key).append('=').append(properties.get(key));

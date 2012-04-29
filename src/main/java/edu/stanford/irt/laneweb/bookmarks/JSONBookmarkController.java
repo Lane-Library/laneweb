@@ -23,9 +23,9 @@ import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 @Controller
 @RequestMapping(value = "/bookmarks")
 public class JSONBookmarkController extends BookmarkController {
-    
+
     private static final Pattern COMMA_SPLIT = Pattern.compile(",");
-    
+
     @Autowired
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
@@ -38,7 +38,7 @@ public class JSONBookmarkController extends BookmarkController {
         bookmarks.add(0, bookmark);
         saveLinks(sunetid, bookmarks);
     }
-    
+
     @RequestMapping(method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteBookmark(
@@ -51,8 +51,7 @@ public class JSONBookmarkController extends BookmarkController {
         for (int i = 0; i < split.length; i++) {
             ints[i] = Integer.parseInt(split[i]);
         }
-        
-        //sort the array to be sure in order
+        // sort the array to be sure in order
         Arrays.sort(ints);
         for (int j = ints.length - 1; j >= 0; --j) {
             bookmarks.remove(ints[j]);
@@ -68,7 +67,7 @@ public class JSONBookmarkController extends BookmarkController {
         //TODO: extend Bookmark or create a map to add the proxylink url
         return bookmarks.get(i);
     }
-    
+
     @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void saveBookmark(
@@ -80,7 +79,7 @@ public class JSONBookmarkController extends BookmarkController {
     }
 
     @Override
-    protected void bind(HttpServletRequest request, org.springframework.ui.Model model) {
+    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
         super.bind(request, model);
         this.proxyLinksDataBinder.bind(model.asMap(), request);
     }

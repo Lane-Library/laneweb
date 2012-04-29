@@ -38,7 +38,9 @@ public final class QueryTermPattern {
      * 
      * @param query
      * @return a Pattern constructed from the query.
-     * @throws LanewebException if there was a PatternSyntaxException in order to report the original query
+     * @throws LanewebException
+     *             if there was a PatternSyntaxException in order to report the
+     *             original query
      */
     public static Pattern getPattern(final String query) {
         String normalQuery = query.trim().toLowerCase();
@@ -47,12 +49,13 @@ public final class QueryTermPattern {
         normalQuery = REPLACE_QUOTES.matcher(normalQuery).replaceAll(MAYBE_NONWORD);
         normalQuery = normalQuery.replaceAll(" and ", "|");
         normalQuery = SPACE_HYPHEN_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
-      //education, medical AND "cognitive+load" was generated two "||" --> bug 65768  
-        normalQuery = normalQuery.replaceAll("\\|\\|", "|");   
+        // education, medical AND "cognitive+load" was generated two "||" -->
+        // bug 65768
+        normalQuery = normalQuery.replaceAll("\\|\\|", "|");
         try {
-        	return Pattern.compile(normalQuery, Pattern.CASE_INSENSITIVE);
+            return Pattern.compile(normalQuery, Pattern.CASE_INSENSITIVE);
         } catch (PatternSyntaxException e) {
-        	throw new LanewebException("error creating Pattern for: " + query + "\n" + e.getMessage(), e);
+            throw new LanewebException("error creating Pattern for: " + query + "\n" + e.getMessage(), e);
         }
     }
 

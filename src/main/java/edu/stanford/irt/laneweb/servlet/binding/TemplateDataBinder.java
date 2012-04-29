@@ -13,7 +13,7 @@ public class TemplateDataBinder implements DataBinder {
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         if (ModelUtil.getObject(model, Model.DEBUG, Boolean.class, Boolean.FALSE)) {
-            //use the debug template if debug mode is on.
+            // use the debug template if debug mode is on.
             model.put(Model.TEMPLATE, Model.DEBUG);
         } else {
             model.put(Model.TEMPLATE, this.templateChooser.getTemplate(request));

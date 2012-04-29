@@ -25,16 +25,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-
 public class LanewebSitemapSourceTest {
-    
+
     private Environment environment;
+
     private Map<String, Object> model;
+
     private ProcessingPipeline pipeline;
+
     private InternalPipelineDescription pipelineDescription;
+
     private Processor processor;
+
     private LanewebSitemapSource source;
+
     private String uri;
+
     private SourceValidity validity;
 
     @Before
@@ -86,7 +92,8 @@ public class LanewebSitemapSourceTest {
         try {
             this.source.getMimeType();
             fail();
-        } catch (UnsupportedOperationException e) {}
+        } catch (UnsupportedOperationException e) {
+        }
     }
 
     @Test
@@ -112,7 +119,8 @@ public class LanewebSitemapSourceTest {
         try {
             this.source.refresh();
             fail();
-        } catch (UnsupportedOperationException e) {}
+        } catch (UnsupportedOperationException e) {
+        }
     }
 
     @Test

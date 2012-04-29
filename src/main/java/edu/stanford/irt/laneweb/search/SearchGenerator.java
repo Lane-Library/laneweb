@@ -25,7 +25,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
     private String timeout;
 
     private String wait;
-    
+
     @Override
     public Result doSearch() {
         return doSearch(null);
@@ -36,17 +36,18 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
         this.wait = ModelUtil.getString(this.model, "wait");
         this.synchronous = ModelUtil.getString(this.model, Model.SYNCHRONOUS, this.parameters.get(Model.SYNCHRONOUS));
     }
-    
+
     public void setDefaultTimeout(final long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
     }
 
-    public void setModel(Map<String, Object> model) {
+    @Override
+    public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.model = model;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
         this.parameters = parameters;
     }
 

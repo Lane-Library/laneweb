@@ -15,7 +15,7 @@ public interface Resource extends XMLizable {
     String DESCRIPTION = "description";
 
     String DESCRIPTION_LABEL = "desc-label";
-    
+
     String EMPTY_NS = "";
 
     String ID = "id";

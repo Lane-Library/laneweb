@@ -28,7 +28,8 @@ public class CIDRRange {
      * 
      * @param cidr
      *            with the format "nnn.nnn.nnn.nnn/nn"
-     * @param ipGroup the IPGroup associated with this range
+     * @param ipGroup
+     *            the IPGroup associated with this range
      */
     public CIDRRange(final String cidr, final IPGroup ipGroup) {
         this.cidr = cidr;

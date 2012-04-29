@@ -162,13 +162,12 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         if (!this.prepared) {
             preparePipeline(environment);
         }
-
-            // If this is an internal request, lastConsumer was reset!
-            if (this.lastConsumer == null) {
-                this.lastConsumer = this.serializer;
-            }
-            connectPipeline(environment);
-            return processXMLPipeline(environment);
+        // If this is an internal request, lastConsumer was reset!
+        if (this.lastConsumer == null) {
+            this.lastConsumer = this.serializer;
+        }
+        connectPipeline(environment);
+        return processXMLPipeline(environment);
     }
 
     /**
@@ -176,7 +175,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * serializer. Instead all SAX events are streamed to the XMLConsumer.
      */
     public boolean process(final Environment environment, final XMLConsumer consumer) throws ProcessingException {
-        this.lastConsumer =  consumer;
+        this.lastConsumer = consumer;
         connectPipeline(environment);
         return processXMLPipeline(environment);
     }
@@ -193,9 +192,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      *            error handler
      */
     public void setErrorHandler(final SitemapErrorHandler errorHandler) {
-    	if (errorHandler != null) {
-    		throw new IllegalArgumentException("we don't use error handler any more.");
-    	}
+        if (errorHandler != null) {
+            throw new IllegalArgumentException("we don't use error handler any more.");
+        }
     }
 
     /**
@@ -243,9 +242,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      */
     public void setSerializer(final String role, final String source, final Parameters param, final Parameters hintParam,
             final String mimeType) {
-//    	if (mimeType == null) {
-//    		throw new IllegalArgumentException("null mimeType");
-//    	}
+        // if (mimeType == null) {
+        // throw new IllegalArgumentException("null mimeType");
+        // }
         this.serializer = (Serializer) this.beanFactory.getBean(Serializer.ROLE + '/' + role);
         this.serializerSource = source;
         this.serializerParam = param;
@@ -309,11 +308,11 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     protected Serializer getSerializer() {
         return this.serializer;
     }
-    
+
     protected List<Transformer> getTransformers() {
         return this.transformers;
     }
-    
+
     /**
      * Prepare the pipeline
      */
@@ -321,7 +320,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         setupPipeline(environment);
         this.prepared = true;
     }
-    
+
     /**
      * Process the SAX event pipeline
      */
@@ -331,23 +330,23 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
                 // internal processing
                 this.generator.generate();
             } else {
-                    // set the output stream
-                    this.serializer.setOutputStream(environment.getOutputStream(this.outputBufferSize));
-                    // execute the pipeline:
-                    this.generator.generate();
+                // set the output stream
+                this.serializer.setOutputStream(environment.getOutputStream(this.outputBufferSize));
+                // execute the pipeline:
+                this.generator.generate();
             }
         } catch (IOException e) {
-        	throw new LanewebException(e);
-		} catch (SAXException e) {
-			throw new LanewebException(e);
-		}
+            throw new LanewebException(e);
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
         return true;
     }
-    
-    protected void setLastConsumer(XMLConsumer consumer) {
-    	this.lastConsumer = consumer;
+
+    protected void setLastConsumer(final XMLConsumer consumer) {
+        this.lastConsumer = consumer;
     }
-    
+
     /**
      * Setup pipeline components.
      */
@@ -362,20 +361,19 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             Iterator<Parameters> transformerParamItt = this.transformerParams.iterator();
             while (transformerItt.hasNext()) {
                 Transformer trans = transformerItt.next();
-                trans.setup(this.sourceResolver, model, transformerSourceItt.next(),
-                        transformerParamItt.next());
+                trans.setup(this.sourceResolver, model, transformerSourceItt.next(), transformerParamItt.next());
             }
             if (this.serializer instanceof SitemapModelComponent) {
-                ((SitemapModelComponent) this.serializer).setup(this.sourceResolver, model,
-                        this.serializerSource, this.serializerParam);
+                ((SitemapModelComponent) this.serializer).setup(this.sourceResolver, model, this.serializerSource,
+                        this.serializerParam);
             }
         } catch (SAXException e) {
-        	throw new LanewebException(e);
-		} catch (IOException e) {
-			throw new LanewebException(e);
-		}
+            throw new LanewebException(e);
+        } catch (IOException e) {
+            throw new LanewebException(e);
+        }
     }
-    
+
     /**
      * Parse the expires parameter
      */

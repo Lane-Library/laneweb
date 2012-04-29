@@ -8,9 +8,8 @@ import java.util.Set;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-
 public class ParameterMapGenerator extends AbstractMarshallingGenerator implements ModelAware {
-    
+
     private Map<String, Object> model;
 
     @SuppressWarnings("unchecked")
@@ -19,9 +18,8 @@ public class ParameterMapGenerator extends AbstractMarshallingGenerator implemen
         entries.addAll(ModelUtil.getObject(this.model, Model.PARAMETER_MAP, Map.class).entrySet());
         marshall(entries);
     }
-    
-    public void setModel(Map<String, Object> model) {
+
+    public void setModel(final Map<String, Object> model) {
         this.model = model;
     }
-     
 }

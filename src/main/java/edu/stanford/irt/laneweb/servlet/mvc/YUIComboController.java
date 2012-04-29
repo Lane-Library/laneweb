@@ -25,12 +25,12 @@ import org.springframework.web.servlet.support.WebContentGenerator;
 /**
  * This class mimics the yui combo server
  */
-//TODO: maybe proxy the real combo server for gallery content
+// TODO: maybe proxy the real combo server for gallery content
 @Controller
 public class YUIComboController extends WebContentGenerator implements ResourceLoaderAware {
-    
+
     private static final SourceValidity[] EMPTY_VALIDITY = new SourceValidity[0];
-    
+
     @Autowired
     private Cache cache;
 
@@ -38,15 +38,18 @@ public class YUIComboController extends WebContentGenerator implements ResourceL
     private Resource yuiBase;
 
     /**
-     * Reads the request string and parses out the file names, sending each one to the output.
+     * Reads the request string and parses out the file names, sending each one
+     * to the output.
+     * 
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
-     * @throws ProcessingException 
+     * @throws ProcessingException
      */
     @RequestMapping(value = "/yui")
-    public void getCombo(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException, ProcessingException {
+    public void getCombo(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
+            IOException, ProcessingException {
         checkAndPrepare(request, response, true);
         OutputStream output = response.getOutputStream();
         String queryString = request.getQueryString();
@@ -72,8 +75,8 @@ public class YUIComboController extends WebContentGenerator implements ResourceL
     }
 
     /**
-     * Get the ResoureLoader.  There may be a better way to get the yuiBase value, but I haven't
-     * thought of it yet.
+     * Get the ResoureLoader. There may be a better way to get the yuiBase
+     * value, but I haven't thought of it yet.
      */
     public void setResourceLoader(final ResourceLoader resourceLoader) {
         this.yuiBase = resourceLoader.getResource("/resources/javascript/yui/");
@@ -81,6 +84,7 @@ public class YUIComboController extends WebContentGenerator implements ResourceL
 
     /**
      * copy input to output, keeping output open but closing input
+     * 
      * @param input
      * @param output
      * @throws IOException

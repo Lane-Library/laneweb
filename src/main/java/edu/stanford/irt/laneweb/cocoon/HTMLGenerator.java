@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
  * generates SAX Events. It uses the NekoHTML library to do this.
  */
 public class HTMLGenerator extends AbstractGenerator implements CacheableProcessingComponent, SourceAware {
-    
+
     private static class HtmlSAXParser extends AbstractSAXParser {
 
         protected HtmlSAXParser(final HTMLConfiguration conf) {
@@ -24,7 +24,7 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
     }
 
     private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
-    
+
     private Source source;
 
     /**
@@ -35,7 +35,7 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
      */
     public void generate() throws SAXException, IOException {
         HTMLConfiguration conf = new HTMLConfiguration();
-        //TODO: review properties
+        // TODO: review properties
         conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
         conf.setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
@@ -77,7 +77,7 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
         return this.source.getValidity();
     }
 
-    public void setSource(Source source) {
+    public void setSource(final Source source) {
         this.source = source;
     }
 }

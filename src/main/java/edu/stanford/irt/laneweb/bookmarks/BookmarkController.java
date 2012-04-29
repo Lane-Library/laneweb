@@ -14,19 +14,19 @@ public abstract class BookmarkController {
 
     @Autowired
     private BookmarkDAO bookmarkDAO;
-    
+
     @Autowired
     private BookmarkDataBinder bookmarkDataBinder;
-    
+
     @Autowired
     private SunetIdAndTicketDataBinder sunetidTicketDataBinder;
 
     public void setBookmarkDAO(final BookmarkDAO bookmarkDAO) {
         this.bookmarkDAO = bookmarkDAO;
     }
-    
+
     @ModelAttribute
-    protected void bind(HttpServletRequest request, Model model) {
+    protected void bind(final HttpServletRequest request, final Model model) {
         this.sunetidTicketDataBinder.bind(model.asMap(), request);
         this.bookmarkDataBinder.bind(model.asMap(), request);
     }

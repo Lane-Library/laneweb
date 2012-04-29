@@ -19,8 +19,8 @@ public class IPGroupFetchController {
     private static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
 
     @RequestMapping(value = "**/apps/ipGroupFetch")
-    public void getIPGroup(final HttpServletRequest request, final HttpServletResponse response, @RequestParam(required = false) final String callback)
-            throws IOException {
+    public void getIPGroup(final HttpServletRequest request, final HttpServletResponse response,
+            @RequestParam(required = false) final String callback) throws IOException {
         String currentIP = getRemoteAddress(request);
         HttpSession session = request.getSession();
         boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));

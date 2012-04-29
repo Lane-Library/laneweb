@@ -14,10 +14,10 @@ public class QueryMapController {
 
     @Autowired
     private QueryMapper queryMapper;
-    
+
     @RequestMapping(value = "**/apps/querymap/json")
     @ResponseBody
-    public QueryMap getQueryMap(@RequestParam String q) {
+    public QueryMap getQueryMap(@RequestParam final String q) {
         QueryMap queryMap = this.queryMapper.getQueryMap(q);
         return new QueryMap(q, null, queryMap.getResourceMap(), null, null);
     }

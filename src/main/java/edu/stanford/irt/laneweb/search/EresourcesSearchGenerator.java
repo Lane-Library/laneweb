@@ -19,7 +19,7 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
     private CollectionManager collectionManager;
 
     private Map<String, Object> model;
-    
+
     private Map<String, String> parameters;
 
     private String type;
@@ -38,20 +38,21 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
         this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
                 Model.TYPE);
     }
-    
+
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
         }
         this.collectionManager = collectionManager;
     }
-    
-    public void setModel(Map<String, Object> model) {
+
+    @Override
+    public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.model = model;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
         this.parameters = parameters;
     }
 

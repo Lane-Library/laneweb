@@ -41,7 +41,7 @@ public class LogoutServletTest {
         this.session = createMock(HttpSession.class);
         expect(this.request.getSession(false)).andReturn(this.session);
         Cookie[] cookies = new Cookie[1];
-        cookies[0] =  new Cookie("test","test");
+        cookies[0] = new Cookie("test", "test");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
         expectLastCall().times(4);

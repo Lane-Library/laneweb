@@ -18,28 +18,29 @@ public class LanewebEnvironment implements Environment {
     private Map<String, Object> model;
 
     private OutputStream outputStream;
-    
-    public LanewebEnvironment() {}
+
+    public LanewebEnvironment() {
+    }
 
     public LanewebEnvironment(final Map<String, Object> model, final OutputStream outputStream, final boolean isExternal) {
         this.model = model;
         this.outputStream = outputStream;
         this.isExternal = isExternal;
     }
-    
+
     public void commitResponse() throws IOException {
         throw new UnsupportedOperationException();
     }
-    
+
     public void finishingProcessing() {
         throw new UnsupportedOperationException();
     }
-    
+
     public String getAction() {
         throw new UnsupportedOperationException();
     }
 
-    //used in PipelineNode.invoke()
+    // used in PipelineNode.invoke()
     public Object getAttribute(final String name) {
         return null;
     }
@@ -62,27 +63,31 @@ public class LanewebEnvironment implements Environment {
         return this.outputStream;
     }
 
-    //used in InvokeContext.getInternalPipelineDescription(), PipelineNode.invoke()
+    // used in InvokeContext.getInternalPipelineDescription(),
+    // PipelineNode.invoke()
     public String getURI() {
         return null;
     }
 
-    //used in InvokeContext.getInternalPipelineDescription(), PipelineNode.invoke()
+    // used in InvokeContext.getInternalPipelineDescription(),
+    // PipelineNode.invoke()
     public String getURIPrefix() {
         return null;
     }
 
-    //used in AggregateNode.invoke(), also other pipeline nodes but not really.
+    // used in AggregateNode.invoke(), also other pipeline nodes but not really.
     public String getView() {
         return null;
     }
 
-    //used in PipelineNode.invoke(), ErrorHandlerHelper.prepareErrorHandler(), SerializeNode.invoke()
+    // used in PipelineNode.invoke(), ErrorHandlerHelper.prepareErrorHandler(),
+    // SerializeNode.invoke()
     public boolean isExternal() {
         return this.isExternal;
     }
 
-    //used in ErrorHandlerHelper.prepareErrorHandler(), maybe can do without this?
+    // used in ErrorHandlerHelper.prepareErrorHandler(), maybe can do without
+    // this?
     public boolean isInternalRedirect() {
         return false;
     }
@@ -108,7 +113,7 @@ public class LanewebEnvironment implements Environment {
     }
 
     public void setContentType(final String mimeType) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public void setHttpServletRequest(final HttpServletRequest request) {
@@ -119,15 +124,15 @@ public class LanewebEnvironment implements Environment {
         throw new UnsupportedOperationException();
     }
 
-    public void setIsExternal(boolean isExternal) {
+    public void setIsExternal(final boolean isExternal) {
         this.isExternal = isExternal;
     }
 
-    public void setModel(Map<String, Object> model) {
+    public void setModel(final Map<String, Object> model) {
         this.model = model;
     }
 
-    public void setOutputStream(OutputStream outputStream) {
+    public void setOutputStream(final OutputStream outputStream) {
         this.outputStream = outputStream;
     }
 
@@ -138,8 +143,8 @@ public class LanewebEnvironment implements Environment {
     public void setServletContext(final ServletContext servletContext) {
         throw new UnsupportedOperationException();
     }
-    
-    //used in SerializeNode.invoke()
+
+    // used in SerializeNode.invoke()
     public void setStatus(final int statusCode) {
     }
 

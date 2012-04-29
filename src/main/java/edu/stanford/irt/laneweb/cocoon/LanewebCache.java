@@ -11,10 +11,10 @@ import org.apache.cocoon.caching.CachedResponse;
 public class LanewebCache implements org.apache.cocoon.caching.Cache {
 
     private Cache cache;
-    
+
     private CacheManager manager;
-    
-    public LanewebCache(CacheManager manager) {
+
+    public LanewebCache(final CacheManager manager) {
         this.manager = manager;
         this.cache = manager.getCache("cocoon-ehcache");
     }
@@ -26,21 +26,21 @@ public class LanewebCache implements org.apache.cocoon.caching.Cache {
     public boolean containsKey(final Serializable key) {
         return this.cache.get(key) != null;
     }
-    
+
     public void destroy() {
         this.manager.shutdown();
     }
 
     public CachedResponse get(final Serializable key) {
-    	Element element = this.cache.get(key);
-    	return (CachedResponse) (element == null ? null : element.getValue());
+        Element element = this.cache.get(key);
+        return (CachedResponse) (element == null ? null : element.getValue());
     }
 
     public void remove(final Serializable key) {
         this.cache.remove(key);
     }
 
-    public void store(final Serializable key, final CachedResponse response){
+    public void store(final Serializable key, final CachedResponse response) {
         final Element element = new Element(key, response);
         this.cache.put(element);
     }

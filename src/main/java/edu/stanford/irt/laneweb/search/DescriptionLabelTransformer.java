@@ -86,8 +86,7 @@ public class DescriptionLabelTransformer extends AbstractTransformer {
                 // send chars before match:
                 xmlConsumer.characters(this.chars.array(), current, matchStart - current);
             }
-            xmlConsumer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL,
-                    EMPTY_ATTRIBUTES);
+            xmlConsumer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL, EMPTY_ATTRIBUTES);
             char[] match = matcher.group(1).toCharArray();
             xmlConsumer.characters(match, 0, match.length);
             xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION_LABEL, Resource.DESCRIPTION_LABEL);

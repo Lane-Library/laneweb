@@ -39,8 +39,8 @@ public class ClassesAggregator extends ContentAggregator {
         InputSource domContent = new InputSource(source.getInputStream());
         domContent.setSystemId(source.getURI());
         try {
-            XPath xpath = XPathFactory.newInstance(XPathFactory.DEFAULT_OBJECT_MODEL_URI, "com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl",
-                    null).newXPath();
+            XPath xpath = XPathFactory.newInstance(XPathFactory.DEFAULT_OBJECT_MODEL_URI,
+                    "com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl", null).newXPath();
             NodeList nodeList = (NodeList) xpath.evaluate("/eventlist/event/eventid", domContent, XPathConstants.NODESET);
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);

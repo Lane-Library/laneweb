@@ -12,8 +12,8 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator implemen
     protected int page;
 
     protected String query;
-    
-    public void setModel(Map<String, Object> model) {
+
+    public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");

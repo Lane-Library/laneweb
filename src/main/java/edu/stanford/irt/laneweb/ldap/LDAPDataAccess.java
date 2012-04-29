@@ -33,10 +33,10 @@ public class LDAPDataAccess {
             }
             currentAttribute = attributes.get("suAffiliation");
             if (currentAttribute != null) {
-            	NamingEnumeration<?> attrs =  currentAttribute.getAll();
-            	 while(!isActive && attrs.hasMore()) {
-            		 isActive = Affiliation.getAffiliation((String)attrs.next()).isActive();
-            	 }
+                NamingEnumeration<?> attrs = currentAttribute.getAll();
+                while (!isActive && attrs.hasMore()) {
+                    isActive = Affiliation.getAffiliation((String) attrs.next()).isActive();
+                }
             }
             return new LDAPData(name, univId, isActive);
         }

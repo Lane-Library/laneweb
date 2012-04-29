@@ -75,7 +75,7 @@ public enum Affiliation {
      * "Faculty (Retired)", false)
      */
     private static Map<String, Affiliation> sAffiliations = null;
-    
+
     static {
         sAffiliations = new HashMap<String, Affiliation>();
         for (Affiliation a : values()) {

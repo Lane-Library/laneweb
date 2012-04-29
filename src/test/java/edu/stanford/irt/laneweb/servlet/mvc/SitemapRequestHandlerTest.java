@@ -24,16 +24,15 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class SitemapRequestHandlerTest {
-    
+
     private static final class TestHandler extends SitemapRequestHandler {
 
         @Override
         protected LanewebEnvironment getEnvironment() {
             return environment;
         }
-        
     }
-    
+
     private static LanewebEnvironment environment;
 
     private DataBinder dataBinder;

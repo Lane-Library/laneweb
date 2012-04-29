@@ -69,11 +69,11 @@ public class TraxProcessorTest {
         expect(this.transformerHandler.getTransformer()).andReturn(this.transformer);
         this.transformer.setErrorListener(isA(ErrorListener.class));
         this.transformer.setURIResolver(this.uriResolver);
-        replay(this.store, this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler,
-                this.transformer, this.validity);
+        replay(this.store, this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler, this.transformer,
+                this.validity);
         this.processor.getTransformerHandler(this.source);
-        verify(this.store, this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler,
-                this.transformer, this.validity);
+        verify(this.store, this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler, this.transformer,
+                this.validity);
     }
 
     @Test
@@ -89,10 +89,10 @@ public class TraxProcessorTest {
         expect(this.transformerHandler.getTransformer()).andReturn(this.transformer);
         this.transformer.setErrorListener(isA(ErrorListener.class));
         this.transformer.setURIResolver(this.uriResolver);
-        replay(this.store, this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler,
-                this.transformer, this.validity);
+        replay(this.store, this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler, this.transformer,
+                this.validity);
         this.processor.getTransformerHandler(this.source);
-        verify(this.store, this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler,
-                this.transformer, this.validity);
+        verify(this.store, this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler, this.transformer,
+                this.validity);
     }
 }

@@ -11,7 +11,8 @@ import org.springframework.core.io.Resource;
 public class SpringResourceSource implements Source {
 
     /**
-     * A private always invalid source validity to avoid returning a null validity.
+     * A private always invalid source validity to avoid returning a null
+     * validity.
      */
     private static SourceValidity INVALID = new SourceValidity() {
 
@@ -21,10 +22,9 @@ public class SpringResourceSource implements Source {
             return SourceValidity.INVALID;
         }
 
-        public int isValid(SourceValidity newValidity) {
+        public int isValid(final SourceValidity newValidity) {
             return SourceValidity.INVALID;
         }
-        
     };
 
     private Resource resource;
@@ -80,7 +80,7 @@ public class SpringResourceSource implements Source {
             return INVALID;
         }
     }
-    
+
     public void refresh() {
     }
 }

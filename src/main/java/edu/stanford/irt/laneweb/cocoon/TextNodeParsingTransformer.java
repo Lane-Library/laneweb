@@ -26,7 +26,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
             super(conf);
         }
     }
-    
+
     private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
 
     private StringBuilder content = new StringBuilder();
@@ -99,7 +99,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     }
 
     @Override
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
         String name = parameters.get("elementName");
         if (name != null) {
             this.elementName = name;

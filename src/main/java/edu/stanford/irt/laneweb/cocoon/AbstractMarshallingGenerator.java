@@ -10,17 +10,17 @@ import org.springframework.oxm.XmlMappingException;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public abstract class AbstractMarshallingGenerator extends AbstractGenerator {
-    
+
     private Marshaller marshaller;
-    
-    public void setMarshaller(Marshaller marshaller) {
+
+    public void setMarshaller(final Marshaller marshaller) {
         if (marshaller == null) {
             throw new LanewebException("null marshaller");
         }
         this.marshaller = marshaller;
     }
-    
-    protected void marshall(Object object) {
+
+    protected void marshall(final Object object) {
         if (this.marshaller == null) {
             throw new LanewebException("null marshaller");
         }

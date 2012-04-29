@@ -30,20 +30,19 @@ public class TransientStore implements Store {
     }
 
     public Enumeration<Object> keys() {
-    	final Iterator<Object> iterator = this.map.keySet().iterator();
-    	return new Enumeration<Object>() {
+        final Iterator<Object> iterator = this.map.keySet().iterator();
+        return new Enumeration<Object>() {
 
-			@Override
-			public boolean hasMoreElements() {
-				return iterator.hasNext();
-			}
+            @Override
+            public boolean hasMoreElements() {
+                return iterator.hasNext();
+            }
 
-			@Override
-			public Object nextElement() {
-				return iterator.next();
-			}
-    		
-    	};
+            @Override
+            public Object nextElement() {
+                return iterator.next();
+            }
+        };
     }
 
     public void remove(final Object key) {

@@ -47,7 +47,7 @@ public class EzproxyServersWriter {
             .getBytes();
 
     private DataSource dataSource;
-    
+
     public void setDataSource(final DataSource dataSource) {
         if (null == dataSource) {
             throw new IllegalArgumentException("null dataSource");
@@ -55,7 +55,7 @@ public class EzproxyServersWriter {
         this.dataSource = dataSource;
     }
 
-    public void write(OutputStream outputStream) throws IOException {
+    public void write(final OutputStream outputStream) throws IOException {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;

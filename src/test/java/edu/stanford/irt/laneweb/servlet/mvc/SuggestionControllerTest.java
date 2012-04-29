@@ -79,7 +79,7 @@ public class SuggestionControllerTest {
         assertEquals("foo({\"suggest\":[]});", suggestions);
         verify(this.eresource, this.history, this.mesh);
     }
-    
+
     @Test
     public void testNullLimit() {
         expect(this.eresource.getSuggestionsForTerm("query")).andReturn(Collections.<Suggestion> emptyList());

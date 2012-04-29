@@ -212,8 +212,8 @@ public class CollectionManagerImpl implements CollectionManager {
         return doGet(SEARCH, params, query);
     }
 
-    //TODO: remove these when upgrading to 1.8
-    public Map<String, Integer> searchCount(Set<String> types, Set<String> subsets, String query) {
+    // TODO: remove these when upgrading to 1.8
+    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
         return searchCount(types, query);
     }
 
@@ -250,7 +250,7 @@ public class CollectionManagerImpl implements CollectionManager {
         }
     }
 
-    public Collection<Eresource> searchSubset(String subset, String query) {
+    public Collection<Eresource> searchSubset(final String subset, final String query) {
         throw new UnsupportedOperationException();
     }
 
@@ -263,7 +263,6 @@ public class CollectionManagerImpl implements CollectionManager {
         params.add(type);
         return doGet(SEARCH_TYPE, params, query);
     }
-
 
     public void setDataSource(final DataSource dataSource) {
         if (null == dataSource) {
@@ -319,13 +318,14 @@ public class CollectionManagerImpl implements CollectionManager {
                     if (query.equalsIgnoreCase(currentTitle)) {
                         eresource.setScore(Integer.MAX_VALUE);
                     } else {
-                        //core material weighted * 3
+                        // core material weighted * 3
                         int coreFactor = "Y".equals(rs.getString("CORE")) ? 3 : 1;
-                        //weighted oracle text scores for title and text averaged
+                        // weighted oracle text scores for title and text
+                        // averaged
                         int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
                         int year = rs.getInt("YEAR");
-                        //subtract number of years difference from current year
-                        //yearFactor can change score from -10 to 10 points
+                        // subtract number of years difference from current year
+                        // yearFactor can change score from -10 to 10 points
                         int yearFactor = year == 0 ? 0 : Math.max(-10, 10 - (THIS_YEAR - year));
                         eresource.setScore(scoreFactor + yearFactor);
                     }

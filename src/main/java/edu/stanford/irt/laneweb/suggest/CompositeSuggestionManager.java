@@ -7,12 +7,11 @@ import java.util.TreeSet;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
-
 public class CompositeSuggestionManager implements SuggestionManager {
-    
+
     private List<SuggestionManager> suggestionManagers;
 
-    public Collection<Suggestion> getSuggestionsForTerm(String term) {
+    public Collection<Suggestion> getSuggestionsForTerm(final String term) {
         Collection<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(term));
         for (SuggestionManager suggestionManager : this.suggestionManagers) {
             suggestions.addAll(suggestionManager.getSuggestionsForTerm(term));
@@ -20,15 +19,15 @@ public class CompositeSuggestionManager implements SuggestionManager {
         return suggestions;
     }
 
-    public Collection<Suggestion> getSuggestionsForTerm(String type, String term) {
+    public Collection<Suggestion> getSuggestionsForTerm(final String type, final String term) {
         Collection<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(term));
         for (SuggestionManager suggestionManager : this.suggestionManagers) {
             suggestions.addAll(suggestionManager.getSuggestionsForTerm(type, term));
         }
         return suggestions;
     }
-    
-    public void setSuggestionManagers(List<SuggestionManager> suggestionMangers) {
+
+    public void setSuggestionManagers(final List<SuggestionManager> suggestionMangers) {
         this.suggestionManagers = suggestionMangers;
     }
 }

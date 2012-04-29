@@ -14,7 +14,7 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
     private long expires;
 
     private String key;
-    
+
     private Map<String, String> parameters;
 
     public Serializable getKey() {
@@ -28,17 +28,19 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
         return new ExpiresValidity(this.expires);
     }
 
+    @Override
     public void initialize() {
         super.initialize();
         this.expires = this.parameters.containsKey("expires") ? Long.parseLong(this.parameters.get("expires"))
                 : this.configuredExpires;
     }
-    
+
     public void setExpires(final long expires) {
         this.configuredExpires = expires;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    @Override
+    public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         this.parameters = parameters;
     }

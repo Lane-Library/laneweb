@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public final class ProxyHostManager {
-    
+
     private static class DatabaseProxyHostSet extends HashSet<String> {
 
         private static final long serialVersionUID = 1L;

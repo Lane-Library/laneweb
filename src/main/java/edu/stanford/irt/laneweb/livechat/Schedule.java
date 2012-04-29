@@ -7,26 +7,25 @@ import java.util.Date;
  * <code>Schedule</code> contains the logic for the live chat schedule.
  */
 public class Schedule {
-	
-	private static final int FIVE_PM = 17;
-	
-	private static final int NINE_AM = 9;
-	
-	private static final int NOON = 12;
-	
-	private static final int SEVEN_PM = 19;
-    
-    
+
+    private static final int FIVE_PM = 17;
+
+    private static final int NINE_AM = 9;
+
+    private static final int NOON = 12;
+
+    private static final int SEVEN_PM = 19;
+
     public boolean isAvailable() {
         return isAvailableAt(null);
     }
-    
+
     /**
-     * 
-     * @param date can be null in which case the current time is used
+     * @param date
+     *            can be null in which case the current time is used
      * @return whether or not live chat is available at a particular time.
      */
-    public boolean isAvailableAt(Date date) {
+    public boolean isAvailableAt(final Date date) {
         boolean available = false;
         Calendar calendar = Calendar.getInstance();
         if (date != null) {

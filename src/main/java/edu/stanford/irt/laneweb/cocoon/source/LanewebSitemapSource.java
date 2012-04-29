@@ -90,7 +90,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
 
     /** The system id used for caching */
     private String systemIdForCaching;
-    
+
     /** The internal event pipeline validities */
     private SitemapSourceValidity validity;
 
@@ -99,7 +99,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
      * 
      * @throws Exception
      */
-    //TODO: a lot of this should probably be in the SourceFactory
+    // TODO: a lot of this should probably be in the SourceFactory
     @SuppressWarnings("unchecked")
     public LanewebSitemapSource(final String uri, final Environment environment, final Processor processor) {
         this.validity = new SitemapSourceValidity();

@@ -32,7 +32,7 @@ public class SuggestionController {
     private static final String JSON_2 = "]}";
 
     private static final int JSON_RETURN_LIMIT = 10;
-    
+
     private static final Collection<Suggestion> NO_SUGGESTIONS = Collections.emptyList();
 
     private static final String OPEN_CALLBACK = "(";
@@ -113,7 +113,8 @@ public class SuggestionController {
 
     private Collection<Suggestion> internalGetSuggestions(final String query, final String limit) {
         if (query.length() > 32) {
-            //return an empty list for queries > 32 characters, liable to cause SQLExceptions
+            // return an empty list for queries > 32 characters, liable to cause
+            // SQLExceptions
             return NO_SUGGESTIONS;
         }
         if (limit != null && ER_PATTERN.matcher(limit).matches()) {

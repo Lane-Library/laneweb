@@ -13,7 +13,7 @@ public abstract class AbstractGenerator extends AbstractSitemapModelComponent im
         }
         this.xmlConsumer = xmlConsumer;
     }
-    
+
     protected XMLConsumer getXMLConsumer() {
         return this.xmlConsumer;
     }

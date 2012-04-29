@@ -11,16 +11,16 @@ import edu.stanford.irt.search.Result;
 public class EngineSearchGenerator extends SearchGenerator {
 
     private Collection<String> engines;
-    
+
     private Map<String, Object> model;
 
     private Map<String, String> parameters;
-    
+
     @Override
     public Result doSearch() {
         return super.doSearch(this.engines);
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public void initialize() {
@@ -35,12 +35,14 @@ public class EngineSearchGenerator extends SearchGenerator {
         }
     }
 
-    public void setModel(Map<String, Object> model) {
+    @Override
+    public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.model = model;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    @Override
+    public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         this.parameters = parameters;
     }

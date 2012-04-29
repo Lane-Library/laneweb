@@ -86,7 +86,7 @@ public abstract class AbstractTransformer extends AbstractSitemapModelComponent 
     public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
         this.xmlConsumer.startPrefixMapping(prefix, uri);
     }
-    
+
     protected XMLConsumer getXMLConsumer() {
         return this.xmlConsumer;
     }

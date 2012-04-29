@@ -101,11 +101,11 @@ public class NonCachingPipelineTest {
         this.generator.setConsumer(this.serializer);
         this.generator.generate();
         this.serializer.setOutputStream(null);
-    	replay(this.beanFactory, this.environment, this.generator, this.serializer);
+        replay(this.beanFactory, this.environment, this.generator, this.serializer);
         this.pipeline.setGenerator(null, null, null, null);
         this.pipeline.setSerializer(null, null, null, null, "text/plain");
-    	this.pipeline.process(this.environment);
-    	verify(this.beanFactory, this.environment, this.generator, this.serializer);
+        this.pipeline.process(this.environment);
+        verify(this.beanFactory, this.environment, this.generator, this.serializer);
     }
 
     @Test
@@ -135,8 +135,8 @@ public class NonCachingPipelineTest {
     public void testSetErrorHandler() {
         this.pipeline.setErrorHandler(null);
         try {
-        	this.pipeline.setErrorHandler(createMock(SitemapErrorHandler.class));
-        	fail();
+            this.pipeline.setErrorHandler(createMock(SitemapErrorHandler.class));
+            fail();
         } catch (IllegalArgumentException e) {
         }
     }
@@ -164,7 +164,7 @@ public class NonCachingPipelineTest {
         this.pipeline.setSerializer(null, null, null, null, "text/plain");
         verify(this.beanFactory, this.generator, this.serializer);
     }
-    
+
     @Test
     public void testSetup() {
         expect(this.parameters.getParameter("expires", null)).andReturn("access plus 1 seconds");

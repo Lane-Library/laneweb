@@ -28,8 +28,8 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
             throw new LanewebException(e);
         }
     }
-    
-    public void setModel(Map<String, Object> model) {
+
+    public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY, "bassett");
     }
 }

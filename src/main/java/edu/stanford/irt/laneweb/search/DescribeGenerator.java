@@ -17,23 +17,25 @@ public class DescribeGenerator extends AbstractMetasearchGenerator implements Pa
     private static final String[] NO_ENGINES = new String[0];
 
     private String[] engines;
-    
+
     private Map<String, Object> model;
-    
+
     private Map<String, String> parameters;
-    
+
     // because query might be null which throws an exception in the parent
     // class.
     public void initialize() {
         this.query = this.parameters.get(Model.QUERY);
         this.engines = ModelUtil.getObject(this.model, Model.ENGINES, String[].class, NO_ENGINES);
     }
-    
-    public void setModel(Map<String, Object> model) {
+
+    @Override
+    public void setModel(final Map<String, Object> model) {
+        super.setModel(model);
         this.model = model;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
         this.parameters = parameters;
     }
 

@@ -19,125 +19,128 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CollectionManagerImplTest {
-	
-	private Connection connection;
-	private DataSource dataSource;
-	private CollectionManagerImpl manager;
-	private ResultSet resultSet;
-	private PreparedStatement statement;
 
-	@Before
-	public void setUp() throws Exception {
-		this.manager = new CollectionManagerImpl();
-		this.dataSource = createMock(DataSource.class);
-		this.connection = createMock(Connection.class);
-		this.statement = createMock(PreparedStatement.class);
-		this.resultSet = createMock(ResultSet.class);
-		this.manager.setDataSource(this.dataSource);
-		expect(this.dataSource.getConnection()).andReturn(this.connection);
-		expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-		expect(this.statement.executeQuery()).andReturn(this.resultSet);
-		this.resultSet.close();
-		this.statement.close();
-		this.connection.close();
-		replay(this.dataSource, this.connection);
-	}
-	
-	@After
-	public void tearDown() {
-		verify(this.dataSource, this.connection, this.statement, this.resultSet);
-	}
+    private Connection connection;
 
-	@Test
-	public void testGetCore() throws SQLException {
-		this.statement.setString(1, "type");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.getCore("type");
-	}
+    private DataSource dataSource;
 
-	@Test
-	public void testGetCoreResults() throws SQLException {
-		this.statement.setString(1, "type");
-		expect(this.resultSet.next()).andReturn(true);
-		expect(this.resultSet.getInt(isA(String.class))).andReturn(0).times(4);
-		expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(10);
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.getCore("type");
-	}
+    private CollectionManagerImpl manager;
 
-	@Test
-	public void testGetMesh() throws SQLException {
-		this.statement.setString(1, "mesh");
-		this.statement.setString(2, "type");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.getMesh("type", "mesh");
-	}
+    private ResultSet resultSet;
 
-	@Test
-	public void testGetSubset() throws SQLException {
-		this.statement.setString(1, "subset");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.getSubset("subset");
-	}
+    private PreparedStatement statement;
 
-	@Test
-	public void testGetTypeString() throws SQLException {
-		this.statement.setString(1, "type");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.getType("type");
-	}
+    @Before
+    public void setUp() throws Exception {
+        this.manager = new CollectionManagerImpl();
+        this.dataSource = createMock(DataSource.class);
+        this.connection = createMock(Connection.class);
+        this.statement = createMock(PreparedStatement.class);
+        this.resultSet = createMock(ResultSet.class);
+        this.manager.setDataSource(this.dataSource);
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
+        expect(this.statement.executeQuery()).andReturn(this.resultSet);
+        this.resultSet.close();
+        this.statement.close();
+        this.connection.close();
+        replay(this.dataSource, this.connection);
+    }
 
-	@Test
-	public void testGetTypeStringChar() throws SQLException {
-		this.statement.setString(1, "string");
-		this.statement.setString(2, "c");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.getType("string", 'c');
-	}
+    @After
+    public void tearDown() {
+        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+    }
 
-	@Test
-	public void testSearch() throws SQLException {
-		this.statement.setString(1, "((${query})) ");
-		this.statement.setString(2, "((${query})) ");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.search("query");
-	}
+    @Test
+    public void testGetCore() throws SQLException {
+        this.statement.setString(1, "type");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.getCore("type");
+    }
 
-	@Test
-	public void testSearchCountSetOfStringSetOfStringString() throws SQLException {
-		this.statement.setString(1, "((${query})) ");
-		this.statement.setString(2, "type");
-		this.statement.setString(3, "type");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.searchCount(Collections.singleton("type"), Collections.singleton("subset"), "query");
-	}
+    @Test
+    public void testGetCoreResults() throws SQLException {
+        this.statement.setString(1, "type");
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt(isA(String.class))).andReturn(0).times(4);
+        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(10);
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.getCore("type");
+    }
 
-	@Test
-	public void testSearchCountSetOfStringString() throws SQLException {
-		this.statement.setString(1, "((${query})) ");
-		this.statement.setString(2, "type");
-		this.statement.setString(3, "type");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.searchCount(Collections.singleton("type"), "query");
-	}
+    @Test
+    public void testGetMesh() throws SQLException {
+        this.statement.setString(1, "mesh");
+        this.statement.setString(2, "type");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.getMesh("type", "mesh");
+    }
 
-	@Test
-	public void testSearchType() throws SQLException {
-		this.statement.setString(1, "((${query})) ");
-		this.statement.setString(2, "((${query})) ");
-		this.statement.setString(3, "type");
-		expect(this.resultSet.next()).andReturn(false);
-		replay(this.statement, this.resultSet);
-		this.manager.searchType("type", "query");
-	}
+    @Test
+    public void testGetSubset() throws SQLException {
+        this.statement.setString(1, "subset");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.getSubset("subset");
+    }
 
+    @Test
+    public void testGetTypeString() throws SQLException {
+        this.statement.setString(1, "type");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.getType("type");
+    }
+
+    @Test
+    public void testGetTypeStringChar() throws SQLException {
+        this.statement.setString(1, "string");
+        this.statement.setString(2, "c");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.getType("string", 'c');
+    }
+
+    @Test
+    public void testSearch() throws SQLException {
+        this.statement.setString(1, "((${query})) ");
+        this.statement.setString(2, "((${query})) ");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.search("query");
+    }
+
+    @Test
+    public void testSearchCountSetOfStringSetOfStringString() throws SQLException {
+        this.statement.setString(1, "((${query})) ");
+        this.statement.setString(2, "type");
+        this.statement.setString(3, "type");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.searchCount(Collections.singleton("type"), Collections.singleton("subset"), "query");
+    }
+
+    @Test
+    public void testSearchCountSetOfStringString() throws SQLException {
+        this.statement.setString(1, "((${query})) ");
+        this.statement.setString(2, "type");
+        this.statement.setString(3, "type");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.searchCount(Collections.singleton("type"), "query");
+    }
+
+    @Test
+    public void testSearchType() throws SQLException {
+        this.statement.setString(1, "((${query})) ");
+        this.statement.setString(2, "((${query})) ");
+        this.statement.setString(3, "type");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet);
+        this.manager.searchType("type", "query");
+    }
 }

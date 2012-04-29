@@ -10,7 +10,7 @@ import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
 
 @Controller
 public class ClearSearchCacheController {
-    
+
     private MetaSearchManagerSource msms;
 
     @RequestMapping(value = "/apps/search/clearcache")

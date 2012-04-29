@@ -21,7 +21,8 @@ public class EresourceSearchResult extends EresourceResource implements SearchRe
         if (scoreCmp == 0) {
             scoreCmp = this.sortTitle.compareTo(other.getSortTitle());
             if (scoreCmp == 0 && !other.equals(this)) {
-                //This happens when more than one eresource has the same title as the query
+                // This happens when more than one eresource has the same title
+                // as the query
                 scoreCmp = -1;
             }
         }

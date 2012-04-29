@@ -18,15 +18,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.context.WebApplicationContext;
 
-
 public class SitemapLanguageTest {
-    
+
     private Configuration configuration;
+
     private WebApplicationContext context;
+
     private ProcessingNode node;
+
     private ProcessingNodeBuilder nodeBuilder;
+
     private PipelineComponentInfo piplineInfo;
+
     private ServiceManager serviceManager;
+
     private SitemapLanguage sitemapLanguage;
 
     @Before
@@ -72,7 +77,8 @@ public class SitemapLanguageTest {
         try {
             this.sitemapLanguage.getRegisteredNode("name");
             fail();
-        } catch (UnsupportedOperationException e) {}
+        } catch (UnsupportedOperationException e) {
+        }
     }
 
     @Test
@@ -98,7 +104,8 @@ public class SitemapLanguageTest {
         try {
             this.sitemapLanguage.registerNode(null, null);
             fail();
-        } catch (UnsupportedOperationException e) {}
+        } catch (UnsupportedOperationException e) {
+        }
     }
 
     @Test

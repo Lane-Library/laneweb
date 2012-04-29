@@ -14,8 +14,9 @@ import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
 import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 
 /**
- * Checks the validity of the Lane user cookie AND if cookie will still be valid GRACE_PERIOD from now. Used to provide
- * an alert to mobile users when their cookie is about to expire.
+ * Checks the validity of the Lane user cookie AND if cookie will still be valid
+ * GRACE_PERIOD from now. Used to provide an alert to mobile users when their
+ * cookie is about to expire.
  * 
  * @author ryanmax
  */
@@ -23,7 +24,7 @@ import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 public class PersistentLoginCookieValidatorController {
 
     private static final long GRACE_PERIOD = 1000 * 60 * 60 * 24 * 3; // 3 days
-    
+
     private static final Cookie[] NO_COOKIES = new Cookie[0];
 
     private static final String USER_AGENT_HEADER = "User-Agent";
@@ -45,8 +46,7 @@ public class PersistentLoginCookieValidatorController {
                 PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
                 if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
                     valid = true;
-                    validDuringGracePeriod = token.isValidFor(System.currentTimeMillis() + GRACE_PERIOD,
-                            userAgent.hashCode());
+                    validDuringGracePeriod = token.isValidFor(System.currentTimeMillis() + GRACE_PERIOD, userAgent.hashCode());
                 }
                 break;
             }

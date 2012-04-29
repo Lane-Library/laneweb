@@ -14,9 +14,10 @@ import edu.stanford.irt.laneweb.LanewebException;
 public class LanewebVariableResolver extends VariableResolver {
 
     private List<Expression> expressions;
+
     private ExpressionParser parser;
-    
-    public LanewebVariableResolver(ExpressionParser parser) {
+
+    public LanewebVariableResolver(final ExpressionParser parser) {
         this.parser = parser;
     }
 

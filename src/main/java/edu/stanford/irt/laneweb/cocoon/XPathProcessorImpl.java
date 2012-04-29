@@ -19,46 +19,47 @@ import edu.stanford.irt.laneweb.LanewebException;
 public class XPathProcessorImpl implements XPathProcessor {
 
     private XPathFactory factory;
-    
+
     public XPathProcessorImpl() {
         try {
-            this.factory = XPathFactory.newInstance(XPathFactory.DEFAULT_OBJECT_MODEL_URI,"com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl", null);
+            this.factory = XPathFactory.newInstance(XPathFactory.DEFAULT_OBJECT_MODEL_URI,
+                    "com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl", null);
         } catch (XPathFactoryConfigurationException e) {
             throw new LanewebException(e);
         }
     }
 
     public boolean evaluateAsBoolean(final Node contextNode, final String str) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public boolean evaluateAsBoolean(final Node contextNode, final String str, final PrefixResolver resolver) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public Number evaluateAsNumber(final Node contextNode, final String str) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public Number evaluateAsNumber(final Node contextNode, final String str, final PrefixResolver resolver) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public String evaluateAsString(final Node contextNode, final String str) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public String evaluateAsString(final Node contextNode, final String str, final PrefixResolver resolver) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public NodeList selectNodeList(final Node contextNode, final String str) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public NodeList selectNodeList(final Node node, final String str, final PrefixResolver resolver) {
         XPath xpath = null;
-        synchronized(this.factory) {
+        synchronized (this.factory) {
             xpath = this.factory.newXPath();
         }
         if (null != resolver) {
@@ -86,10 +87,10 @@ public class XPathProcessorImpl implements XPathProcessor {
     }
 
     public Node selectSingleNode(final Node contextNode, final String str) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public Node selectSingleNode(final Node contextNode, final String str, final PrefixResolver resolver) {
-    	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 }

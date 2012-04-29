@@ -187,7 +187,7 @@ public class XIncludePipeTest {
         verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
                 this.serviceManager, this.saxParser, this.xmlBaseSupport);
     }
-    
+
     @Test
     public void testIgnorableWhitespace() throws SAXException {
         char[] characters = new char[0];
@@ -196,7 +196,7 @@ public class XIncludePipeTest {
         this.pipe.ignorableWhitespace(characters, 0, 0);
         verify(this.xmlConsumer);
     }
-    
+
     @Test
     public void testProcessingInstructionStringString() throws SAXException {
         this.xmlConsumer.processingInstruction("target", "data");
@@ -408,7 +408,8 @@ public class XIncludePipeTest {
         try {
             this.pipe.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
             fail();
-        } catch (SAXException e) {}
+        } catch (SAXException e) {
+        }
         verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
                 this.serviceManager, this.saxParser, this.xmlBaseSupport);
     }
@@ -430,7 +431,8 @@ public class XIncludePipeTest {
             this.pipe.setDocumentLocator(locator);
             this.pipe.startElement("http://www.w3.org/2001/XInclude", "fooey", "fooey", this.attributes);
             fail();
-        } catch (SAXException e) {}
+        } catch (SAXException e) {
+        }
         verify(locator, this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
                 this.serviceManager, this.saxParser, this.xmlBaseSupport);
     }

@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * An abstract implementation of Filter that does the casting to HttpServletRequest
- * and HttpServletResponse so that the subclasses don't have to.  If the instanceof
- * checks fail, which will never happen, the processing is passed to the chain.
- *
+ * An abstract implementation of Filter that does the casting to
+ * HttpServletRequest and HttpServletResponse so that the subclasses don't have
+ * to. If the instanceof checks fail, which will never happen, the processing is
+ * passed to the chain.
  */
 public abstract class AbstractLanewebFilter implements Filter {
 

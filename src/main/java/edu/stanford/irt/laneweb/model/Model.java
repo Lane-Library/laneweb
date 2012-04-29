@@ -18,7 +18,7 @@ public interface Model {
     String BOOKMARKS = "bookmarks";
 
     String CALLBACK = "callback";
-    
+
     String CATEGORY = "category";
 
     String CLASS_ID = "class-id";
@@ -44,7 +44,7 @@ public interface Model {
     String IPGROUP = "ipgroup";
 
     String IS_ACTIVE_SUNETID = "isActiveSunetID";
-    
+
     String ITEMS = "items";
 
     String LIMIT = "limit";
@@ -62,13 +62,13 @@ public interface Model {
     String PAGE = "page";
 
     String PAGE_NUMBER = "pageNumber";
-    
+
     String PARAMETER_MAP = "parameter-map";
 
     String PASSWORD = "password";
 
     String PERSISTENT_LOGIN = "persistent-login";
-    
+
     String PERSISTENT_LOGIN_EXPIRATION_DATE = "persistent-expiration-date";
 
     String PID = "pid";
@@ -120,13 +120,13 @@ public interface Model {
     String TITLE = "title";
 
     String TODAYS_HOURS = "todays-hours";
-    
+
     String TYPE = "type";
 
     String UNIVID = "univid";
 
     String URL = "url";
-    
+
     String URL_ENCODED_QUERY = "url-encoded-query";
 
     String USER_COOKIE = "user-cookie";

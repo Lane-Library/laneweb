@@ -12,12 +12,12 @@ import edu.stanford.irt.laneweb.proxy.EzproxyServersWriter;
 
 @Controller
 public class EzproxyServersController {
-    
+
     @Autowired
     private EzproxyServersWriter writer;
-    
+
     @RequestMapping(value = "/eresources/ezproxy-servers.txt")
-    public void getEzproxyServers(HttpServletResponse response) throws IOException {
+    public void getEzproxyServers(final HttpServletResponse response) throws IOException {
         this.writer.write(response.getOutputStream());
     }
 }

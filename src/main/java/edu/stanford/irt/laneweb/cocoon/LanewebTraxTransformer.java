@@ -16,10 +16,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer, SourceAware, ParametersAware, ModelAware {
+public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer,
+        SourceAware, ParametersAware, ModelAware {
 
     private Serializable cacheKey;
-    
+
     private String cacheKeyParameter;
 
     private Locator locator;
@@ -31,9 +32,9 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     private Source source;
 
     private TransformerHandler transformerHandler;
-    
+
     private TraxProcessor traxProcessor;
-    
+
     private SourceValidity validity;
 
     private XMLConsumer xmlConsumer;
@@ -108,16 +109,16 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         this.locator = locator;
     }
 
-    public void setModel(Map<String, Object> model) {
+    public void setModel(final Map<String, Object> model) {
         this.model = model;
     }
 
-    public void setParameters(Map<String, String> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
         this.cacheKeyParameter = parameters.get("cache-key");
         this.parameters = parameters;
     }
 
-    public void setSource(Source source) {
+    public void setSource(final Source source) {
         this.source = source;
         this.validity = source.getValidity();
     }
@@ -159,7 +160,7 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
             throws SAXException {
         this.transformerHandler.unparsedEntityDecl(name, publicId, systemId, notationName);
     }
-    
+
     private void setupTransformerHandler() {
         this.transformerHandler = this.traxProcessor.getTransformerHandler(this.source);
         javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();

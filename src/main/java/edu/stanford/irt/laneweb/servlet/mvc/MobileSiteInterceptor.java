@@ -16,7 +16,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * Interceptor to switch between mobile and desktop sites. Based on Keith Donald's
+ * Interceptor to switch between mobile and desktop sites. Based on Keith
+ * Donald's
  * org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor
  * 
  * @author ryanmax
