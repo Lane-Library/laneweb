@@ -4,54 +4,38 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 
-import edu.stanford.irt.laneweb.cocoon.Initializable;
-import edu.stanford.irt.laneweb.cocoon.ModelAware;
-import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class DescribeGenerator extends AbstractMetasearchGenerator implements ParametersAware, ModelAware, Initializable {
+public class DescribeGenerator extends AbstractMetasearchGenerator {
 
     private static final String[] NO_ENGINES = new String[0];
 
     private String[] engines;
 
-    private Map<String, Object> model;
-
-    private Map<String, String> parameters;
-
-    // because query might be null which throws an exception in the parent
-    // class.
-    public void initialize() {
-        this.query = this.parameters.get(Model.QUERY);
-        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, String[].class, NO_ENGINES);
-    }
-
     @Override
     public void setModel(final Map<String, Object> model) {
-        super.setModel(model);
-        this.model = model;
-    }
-
-    public void setParameters(final Map<String, String> parameters) {
-        this.parameters = parameters;
+        // don't call super.setModel(model) because null query throws exception,
+        // instead this can be null:
+        this.query = ModelUtil.getString(model, Model.QUERY);
+        this.engines = ModelUtil.getObject(model, Model.ENGINES, String[].class, NO_ENGINES);
     }
 
     @Override
     protected Result doSearch() {
-        Collection<String> engines = null;
+        Collection<String> enginesList = null;
         if ((this.engines != null) && (this.engines.length > 0)) {
-            engines = new LinkedList<String>();
+            enginesList = new LinkedList<String>();
             for (String element : this.engines) {
-                engines.add(element);
+                enginesList.add(element);
             }
         }
         if (this.query != null) {
-            return this.metaSearchManager.describe(new SimpleQuery(this.query), engines);
+            return this.metaSearchManager.describe(new SimpleQuery(this.query), enginesList);
         } else {
-            return this.metaSearchManager.describe(new SimpleQuery(""), engines);
+            return this.metaSearchManager.describe(new SimpleQuery(""), enginesList);
         }
     }
 }
