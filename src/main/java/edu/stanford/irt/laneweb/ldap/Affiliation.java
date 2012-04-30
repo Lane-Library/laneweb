@@ -19,56 +19,56 @@ import java.util.Map;
  * @author philip constantinou
  */
 public enum Affiliation {
-    Affiliate("stanford:affiliate*", "All Stanford Affiliates", false),
-    AffiliateCourtesy("stanford:affiliate:courtesy", "Affiliate (Courtesy)", false), 
-    AffiliateFellow("stanford:affiliate:fellow", "Affiliate (Fellow)", false),
-    AffiliateNonactive("stanford:affiliate:nonactive", "Affiliate (Nonactive)", false), 
     AffiliateSponsored("stanford:affiliate:sponsored", "Affiliate (Sponsored)"),
+    Affiliate("stanford:affiliate*", "All Stanford Affiliates", false), 
+    AffiliateFellow("stanford:affiliate:fellow", "Affiliate (Fellow)", false),
+    AffiliateCourtesy("stanford:affiliate:courtesy", "Affiliate (Courtesy)", false), 
+    AffiliateNonactive("stanford:affiliate:nonactive", "Affiliate (Nonactive)", false),
     AffiliateVisitingScholarLongTerm("stanford:affiliate:visitscholarvt", "Affiliate (Visiting Scholar Long Term)", false),
     AffiliateVisitingScholarShortTerm("stanford:affiliate:visitscholarvs", "Affiliate (Visiting Scholar Short Term)", false),
     
-    AffiliationNotFound("Affiliation not found", "Affiliate Not Found", false), 
     Faculty("stanford:faculty*", "All Faculty"), 
+    FacultyOnLeave("stanford:faculty:onleave",   "Faculty (On leave)"), 
+    FacultyOtherTeaching( "stanford:faculty:otherteaching", "Faculty (Other teaching)"), 
+    FacultySLAC( "stanford:faculty:slac", "Faculty (SLAC)"), 
     FacultyActive("stanford:faculty", "Faculty (Active)"), 
     FacultyAffiliate("stanford:faculty:affiliate","Faculty affiliate"), 
-    FacultyEmeritus("stanford:faculty:emeritus", "Emeritus Faculty"), 
+    FacultyEmeritus("stanford:faculty:emeritus", "Emeritus Faculty"),
+    FacultyRetired("stanford:faculty:retired", "Retired Faculty"),
     FacultyNonactive("stanford:faculty:nonactive", "Faculty (Nonactive)", false), 
-    FacultyOnLeave("stanford:faculty:onleave",   "Faculty (On leave)"),
-    FacultyOtherTeaching( "stanford:faculty:otherteaching", "Faculty (Other teaching)"),
-    FacultyRetired("stanford:faculty:retired", "Retired Faculty"), 
     
-    FacultySLAC( "stanford:faculty:slac", "Faculty (SLAC)"), 
     Staff("stanford:staff*", "All staff"), 
+    StaffActive("stanford:staff", "Staff (Active)"), 
     StaffAcademic("stanford:staff:academic", "Staff (Academic)"), 
-    StaffActive("stanford:staff", "Staff (Active)"),
-    StaffAffiliate("stanford:faculty:affiliate","Staff affiliate", false),
-    StaffCasual("stanford:staff:casual", "Staff (Casual)"), 
-    StaffEmeritus("stanford:staff:emeritus", "Staff (Emeritus)"), 
-    StaffNonactive("stanford:staff:nonactive", "Staff (Nonactive)", false), 
-    StaffOnLeave("stanford:faculty:onleave",   "Staff (On leave)"), 
-    StaffOtherteaching("stanford:staff:otherteaching", "Staff (Otherteaching)"),
-    StaffRetired("stanford:staff:retired", "Staff (Retired)", false), 
-    StaffStudent("stanford:staff:student", "Staff (Student)", false), 
-    
-    
+    StaffOnLeave("stanford:faculty:onleave",   "Staff (On leave)"),
+    StaffEmeritus("stanford:staff:emeritus", "Staff (Emeritus)"),
+    StaffOtherteaching("stanford:staff:otherteaching", "Staff (Otherteaching)"), 
     StaffTemporary("stanford:staff:temporary", "Staff (Temporary"), 
-    Student("stanford:student*", "All students"),
-    StudentActive("stanford:student", "Student (Active)"), 
-    StudentContingent("stanford:student:contingent", "Student (Contingent)", false), 
-    StudentIncoming("stanford:student:incoming", "Sudent (Incoming)", false), 
-    StudentMLA("stanford:student:mla", "Student (MLA)"), 
+    StaffCasual("stanford:staff:casual", "Staff (Casual)"), 
+    StaffRetired("stanford:staff:retired", "Staff (Retired)", false), 
+    StaffAffiliate("stanford:faculty:affiliate","Staff affiliate", false),
+    StaffStudent("stanford:staff:student", "Staff (Student)", false), 
+    StaffNonactive("stanford:staff:nonactive", "Staff (Nonactive)", false), 
     
-    StudentNDO("stanford:student:ndo", "Student (NDO)"), 
-    StudentNonactive("stanford:student:nonactive", "Student (Nonactive)", false), 
-    StudentNotRegistered("stanford:student:notregistered", "Student (Not registered)", false), 
+    
+    Student("stanford:student*", "All students"), 
+    StudentActive("stanford:student", "Student (Active)"),
     StudentOnLeave("stanford:student:onleave", "Student (On leave)"), 
     StudentPostDoc("stanford:student:postdoc", "Student (Postdoc)"), 
+    StudentMLA("stanford:student:mla", "Student (MLA)"), 
+    StudentNDO("stanford:student:ndo", "Student (NDO)"), 
     
+    StudentIncoming("stanford:student:incoming", "Sudent (Incoming)", false), 
+    StudentContingent("stanford:student:contingent", "Student (Contingent)", false), 
+    StudentNotRegistered("stanford:student:notregistered", "Student (Not registered)", false), 
     StudentRecent("stanford:student:recent", "Student (Recent)", false), 
-    SUMCStaff("sumc:staff", "SUMC Staff"),
+    StudentNonactive("stanford:student:nonactive", "Student (Nonactive)", false), 
+    
+    SUMCStaff("sumc:staff", "SUMC Staff"), 
+    SUMCStaffNonactive("sumc:staff:nonactive", "SUMC Staff (Nonactive)", false),
     
     
-    SUMCStaffNonactive("sumc:staff:nonactive", "SUMC Staff (Nonactive)", false);
+    AffiliationNotFound("Affiliation not found", "Affiliate Not Found", false);
 
     /*
      * Removed per AS documentation: FacultyRetired( "stanford:faculty:retired",
