@@ -23,7 +23,7 @@
                 <map:transform type="saxon" src="resources/xsl/classes/rss.xsl"/>
                 <map:serialize type="xml"/>
               </map:match>
-              <map:match type="regex-parameter" pattern="^(/biomed-resources|/help)">
+              <map:match type="regex-parameter" pattern="^(/biomed-resources|/help).*">
                 <map:parameter name="parameter-name" value="page"/>
                 <map:generate type="html" src="{content-base}{page}"/>
                 <map:transform src="resources/xsl/page2rss.xsl" type="saxon"/>
