@@ -31,6 +31,7 @@ public class DescribeGeneratorTest {
 
     private Result result;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.generator = new DescribeGenerator();
@@ -44,6 +45,7 @@ public class DescribeGeneratorTest {
         this.result = createMock(Result.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
         expect(this.metaSearchManager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
@@ -52,6 +54,7 @@ public class DescribeGeneratorTest {
         verify(this.metaSearchManager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchEnginesQuery() {
         expect(this.model.get(Model.QUERY)).andReturn("query");
