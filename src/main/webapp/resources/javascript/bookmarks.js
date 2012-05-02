@@ -411,6 +411,7 @@
              */
             syncUI : function() {
                 this._truncateLabels();
+                this._hideSomeItems();
             },
             
             /**
@@ -430,7 +431,7 @@
              */
             _bookmarkAdded : function(event) {
                 this.get("srcNode").prepend("<li><a href='" + event.bookmark.getUrl() + "'>" + event.bookmark.getLabel() + "</a></li>");
-                this._truncateLabels();
+                this.syncUI();
             },
             
             /**
@@ -444,6 +445,7 @@
                 for (i = event.positions.length - 1; i >= 0; --i) {
                     items.item(event.positions[i]).remove(true);
                 }
+                this.syncUI();
             },
             
             /**
@@ -457,7 +459,7 @@
                 anchor = this.get("srcNode").all("li").item(event.position).one("a");
                 anchor.set("innerHTML", bookmark.getLabel());
                 anchor.set("href", bookmark.getUrl());
-                this._truncateLabels();
+                this.syncUI();
             },
             
             /**
@@ -474,11 +476,27 @@
                         anchor.set("innerHTML", label.substring(0, 32) + "...");
                     }
                 }
+            },
+            
+            /**
+             * Hide items > displayLimit
+             * @method _hideSomeItems()
+             * @private;
+             */
+            _hideSomeItems : function() {
+                var i, displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li");
+                for (i = 0; i < displayLimit && i < items.size(); i++) {
+                    items.item(i).setStyle("display", "block");
+                }
+                for (i = displayLimit; i < items.size(); i++) {
+                    items.item(i).setStyle("display", "none");
+                }
             }
         }, {
             ATTRS : {
                     items : {},
-                    bookmarks : {}
+                    bookmarks : {},
+                    displayLimit : {}
             },
             HTML_PARSER : {
                     items : ["li"],
@@ -502,7 +520,7 @@
 
         //create a new widget and keep a global reference to it
         //may be able to use Widget.getByNode("#bookmarks") rather than the global reference . . . .
-        Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true});
+        Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true, displayLimit:5});
         
         
         //don't create BookmarkLink if there is a class=no-bookmarking
