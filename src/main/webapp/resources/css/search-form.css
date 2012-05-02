@@ -34,8 +34,8 @@
 #searchTerms {
     width : 570px;
     border : 1px solid white;
-    position : absolute;
-    top : 29px;
+    position : relative;
+    top : 11px;
     /* Mobile Safari: remove rounded corners and input shadow */
     -webkit-appearance : none;
 }
@@ -57,8 +57,8 @@
     margin-top : 32px;
 }
 #searchSubmit {
-    position : absolute;
-    top : 25px;
+    position : relative;
+    top : 7px;
     left : 592px;
     background-color : transparent;
     border : medium none;
