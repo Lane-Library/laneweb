@@ -406,7 +406,8 @@
             },
             
             /**
-             * Set up the UI, in this case truncate text in links to 32 characters.
+             * Set up the UI, in this case truncate text in links to 32 characters,
+             * and hide items > displayLimit.
              * @method syncUI
              */
             syncUI : function() {
