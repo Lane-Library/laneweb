@@ -664,7 +664,7 @@
              * @returns {Boolean}
              */
             _isBookmarkable : function(target) {
-                return target.getStyle("display") == "inline" && !target.one("img");
+                return target.get("id") == "searchSubmit" || (target.getStyle("display") == "inline" && !target.one("img"));
             },
             
             /**
