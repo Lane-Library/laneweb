@@ -572,6 +572,8 @@
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
+                Y.one("#searchSubmit").on("mouseover", this._handleTargetMouseover, this);
+                Y.one("#searchSubmit").on("mouseout", this._handleTargetMouseover, this);
                 this.on("statusChange", this._handleStatusChange);
                 this.get("bookmarks").after("addSync", this._handleSyncEvent, this);
             },
@@ -615,15 +617,19 @@
              */
             _handleClick : function() {
                 var target = this.get("target"), label, url;
-                target.plug(Y.lane.LinkPlugin);
-                label = target.link.get("title");
-                if (target.link.get("local")) {
-                    url = target.link.get("path");
+                if (target.get("id") == "searchSubmit") {
+                    alert("save this search!");
                 } else {
-                    url = target.link.get("url");
+                    target.plug(Y.lane.LinkPlugin);
+                    label = target.link.get("title");
+                    if (target.link.get("local")) {
+                        url = target.link.get("path");
+                    } else {
+                        url = target.link.get("url");
+                    }
+                    this.set("status", BookmarkLink.BOOKMARKING);
+                    this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
                 }
-                this.set("status", BookmarkLink.BOOKMARKING);
-                this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
             },
             
             /**
