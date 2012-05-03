@@ -578,7 +578,6 @@
                 }
                 this.on("statusChange", this._handleStatusChange);
                 this.get("bookmarks").after("addSync", this._handleSyncEvent, this);
-                this.get("node").on("click", function() {alert("click");});
             },
             
             /**
