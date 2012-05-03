@@ -39,7 +39,10 @@
 
     <xsl:template match="s:engine">
         <div class="engine">
-            <h2>  <xsl:value-of select="s:description"/></h2>
+            <h2><xsl:choose>
+                <xsl:when test="s:description"><xsl:value-of select="s:description"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="s:resource/s:description"/></xsl:otherwise>
+            </xsl:choose></h2>
             <h3>Engine Name: <xsl:value-of select="@s:id"/></h3>
             <table class="engine">
                 <xsl:apply-templates select="s:resource">
