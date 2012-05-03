@@ -85,4 +85,14 @@
         class="edu.stanford.irt.laneweb.search.DescriptionLabelTransformer"
         scope="prototype">
     </bean>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/search-directory"
+        class="edu.stanford.irt.laneweb.search.SearchDirectoryTransformer"
+        scope="prototype"/>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/file-path"
+        class="edu.stanford.irt.laneweb.search.FilePathTransformer"
+        scope="prototype">
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+    </bean>
 </beans>
