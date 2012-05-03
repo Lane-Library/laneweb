@@ -621,7 +621,8 @@
             _handleClick : function() {
                 var target = this.get("target"), label, url;
                 if (target.get("id") == "search") {
-                    alert("save this search!");
+                    label = "Search for: " + LANE.SearchResult.getSearchTerms();
+                    url = "/search.html?source=" + LANE.SearchResult.getSearchSource() + "&q=" + LANE.SearchResult.getSearchTerms();
                 } else {
                     target.plug(Y.lane.LinkPlugin);
                     label = target.link.get("title");
@@ -630,9 +631,9 @@
                     } else {
                         url = target.link.get("url");
                     }
-                    this.set("status", BookmarkLink.BOOKMARKING);
-                    this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
                 }
+                this.set("status", BookmarkLink.BOOKMARKING);
+                this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
             },
             
             /**
