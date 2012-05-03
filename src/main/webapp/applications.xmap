@@ -172,15 +172,38 @@
                 <map:transform type="saxon" src="resources/xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- TODO: remove next match after changing search-monitor -->
+            <map:match pattern="/apps/cache/search/templates/xml" type="wildcard">
+                <map:generate type="search-describe"/>
+                <map:transform type="search-directory">
+                    <map:parameter name="directories" value="{content-base}/search,{content-base}/portals"/>
+                </map:transform>
+                <map:transform type="file-path"/>
+                <map:transform type="saxon" src="resources/xsl/search-templates.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <!-- search describe xml output -->
+            <!-- TODO: remove next match after changing search-monitor -->
             <map:match pattern="search/describe/xml" type="wildcard">
+                <map:generate type="search-describe"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="search-describe.xml" type="wildcard">
                 <map:generate type="search-describe"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- search describe html output -->
             <map:match pattern="search/describe/html" type="wildcard">
                 <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
-                    <map:part src="apps:/search/describe/xml"/>
+                    <map:part src="apps:/search-describe.xml"/>
+                    <map:part src="apps:/search-templates.xml"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="resources/xsl/describe.xsl"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="search-describe.html" type="wildcard">
+                <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
+                    <map:part src="apps:/search-describe.xml"/>
                     <map:part src="apps:/search-templates.xml"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="resources/xsl/describe.xsl"/>
