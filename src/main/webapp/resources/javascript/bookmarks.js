@@ -572,10 +572,13 @@
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                Y.one("#searchSubmit").on("mouseover", this._handleTargetMouseover, this);
-                Y.one("#searchSubmit").on("mouseout", this._handleTargetMouseover, this);
+                if (LANE.SearchResult.getSearchTerms()) {
+                    Y.one("#search").on("mouseover", this._handleTargetMouseover, this);
+                    Y.one("#search").on("mouseout", this._handleTargetMouseout, this);
+                }
                 this.on("statusChange", this._handleStatusChange);
                 this.get("bookmarks").after("addSync", this._handleSyncEvent, this);
+                this.get("node").on("click", function() {alert("click");});
             },
             
             /**
@@ -617,7 +620,7 @@
              */
             _handleClick : function() {
                 var target = this.get("target"), label, url;
-                if (target.get("id") == "searchSubmit") {
+                if (target.get("id") == "search") {
                     alert("save this search!");
                 } else {
                     target.plug(Y.lane.LinkPlugin);
@@ -664,7 +667,7 @@
              * @returns {Boolean}
              */
             _isBookmarkable : function(target) {
-                return target.get("id") == "searchSubmit" || (target.getStyle("display") == "inline" && !target.one("img"));
+                return target.get("id") == "search" || (target.getStyle("display") == "inline" && !target.one("img"));
             },
             
             /**
@@ -697,10 +700,16 @@
              */
             _handleStatusChange : function(event) {
                 this._clearTimer();
-                var node = this.get("node");
+                var node = this.get("node"), target = this.get("target");
                 //IE messes up the event handling if set up on initialization
                 //so purging and selectively set them when the status changes.
                 node.purge(false);
+                //style link differently if for the search form
+                if (this.get("target").get("id") == "search") {
+                    node.addClass("search");
+                } else {
+                    node.removeClass("search");
+                }
                 switch(event.newVal) {
                 //OFF: not visible
                 case BookmarkLink.OFF : 
@@ -711,7 +720,7 @@
                     break;
                 //READY: visible but not enabled
                 case BookmarkLink.READY :
-                    this.get("target").insert(node, "after");
+                    target.insert(node, "after");
                     break;
                 //ACTIVE: enabled (mouseover)
                 case BookmarkLink.ACTIVE : 
