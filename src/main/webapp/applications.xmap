@@ -139,7 +139,7 @@
                 </map:match>
                 <!-- search facet counts -->
                 <map:match pattern="search/facets/json" type="wildcard">
-                    <map:generate type="file" src="apps:/search-templates.xml"/>
+                    <map:generate type="file" src="apps:/cache/search/templates/xml"/>
                     <map:transform type="saxon" src="resources/xsl/search-facet-counts.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
