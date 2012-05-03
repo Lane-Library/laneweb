@@ -139,7 +139,7 @@
                 </map:match>
                 <!-- search facet counts -->
                 <map:match pattern="search/facets/json" type="wildcard">
-                    <map:generate type="file" src="apps:/cache/search/templates/xml"/>
+                    <map:generate type="file" src="apps:/search-templates.xml"/>
                     <map:transform type="saxon" src="resources/xsl/search-facet-counts.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
@@ -163,7 +163,6 @@
         </map:pipeline>
         <!-- caching pipeline for static documents -->
         <map:pipeline type="caching">
-            <!-- candidate replacement for search-template-generator pipeline -->
             <map:match pattern="search-templates.xml" type="wildcard">
                 <map:generate type="search-describe"/>
                 <map:transform type="search-directory">
@@ -173,13 +172,6 @@
                 <map:transform type="saxon" src="resources/xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-        	<map:match pattern="cache/search/templates/xml" type="wildcard">
-                <map:generate type="search-template-generator" src="apps:/search/describe/xml">
-                    <map:parameter name="directories" value="search,portals"/>
-                </map:generate>
-                <map:transform type="saxon" src="resources/xsl/search-templates.xsl"/>
-                <map:serialize type="xml"/>
-        	</map:match>
             <!-- search describe xml output -->
             <map:match pattern="search/describe/xml" type="wildcard">
                 <map:generate type="search-describe"/>
@@ -189,7 +181,7 @@
             <map:match pattern="search/describe/html" type="wildcard">
                 <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
                     <map:part src="apps:/search/describe/xml"/>
-                    <map:part src="apps:/cache/search/templates/xml"/>
+                    <map:part src="apps:/search-templates.xml"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="resources/xsl/describe.xsl"/>
                 <map:serialize type="xhtml"/>
