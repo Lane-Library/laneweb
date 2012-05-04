@@ -75,7 +75,7 @@
                                 <a href="/secure/login.html">Login</a>
                             </li>
                             <li id="favorites">
-                                <a href="/samples/favorites.html">My Bookmarks</a>
+                                <a href="/favorites.html">My Bookmarks</a>
                                 <?laneweb bookmarks?>
                             </li>
                             <li>
