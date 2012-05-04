@@ -782,7 +782,7 @@
                         "<input type=\"text\" name=\"label\"/>" +
                         "<input type=\"text\" name=\"url\"/>" +
                         "<button name=\"action\" value=\"save\" type=\"submit\">save</button>" +
-                        "<button value=\"undo\" type=\"reset\">undo</button>" +
+                        "<button value=\"reset\" type=\"reset\">undo</button>" +
                         "<button name=\"action\" value=\"cancel\" type=\"submit\">cancel</button>");
                 },
                 
@@ -858,9 +858,9 @@
                 /**
                  * Responds to the reset button.  Resets the text inputs to the bookmark's values.
                  * If there is no bookmark, resets the TextInput object.
-                 * @method undo
+                 * @method reset
                  */
-                undo : function() {
+                reset : function() {
                     var bookmark = this.get("bookmark");
                     this._labelInput.setHintText("Name");
                     this._urlInput.setHintText("Location");
@@ -907,7 +907,7 @@
                         activeClass = this.getClassName() + "-active";
                     if (event.newVal) {
                         srcNode.addClass(activeClass);
-                        this.undo();
+                        this.reset();
                     } else {
                         srcNode.removeClass(activeClass);
                     }
