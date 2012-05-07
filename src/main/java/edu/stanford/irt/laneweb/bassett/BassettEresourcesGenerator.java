@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
@@ -40,7 +39,7 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator impleme
         XMLConsumer xmlConsumer = getXMLConsumer();
         try {
             xmlConsumer.startDocument();
-            XMLizable xml = new XMLLizableBassettEresourceList(eresources);
+            XMLLizableBassettEresourceList xml = new XMLLizableBassettEresourceList(eresources);
             xml.toSAX(xmlConsumer);
             xmlConsumer.endDocument();
         } catch (SAXException e) {

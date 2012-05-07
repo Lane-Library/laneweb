@@ -3,15 +3,14 @@ package edu.stanford.irt.laneweb.search;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-import org.apache.excalibur.xml.sax.XMLizable;
-import org.xml.sax.ContentHandler;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implements Resource, XMLizable {
+public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implements Resource {
 
     private static final String CDATA = "CDATA";
 
@@ -38,12 +37,12 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         this.page = page;
     }
 
-    public void toSAX(final ContentHandler handler) throws SAXException {
-        if (null == handler) {
+    public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
+        if (null == xmlConsumer) {
             throw new IllegalArgumentException("null handler");
         }
-        handler.startDocument();
-        handler.startPrefixMapping("", NAMESPACE);
+        xmlConsumer.startDocument();
+        xmlConsumer.startPrefixMapping("", NAMESPACE);
         int size = size();
         int pageSize = size / MAX_PAGE_COUNT;
         pageSize = size % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
@@ -64,28 +63,28 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(length));
         atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(this.page));
         atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(pages));
-        XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
-        XMLUtils.startElement(handler, NAMESPACE, QUERY);
-        XMLUtils.data(handler, this.query);
-        XMLUtils.endElement(handler, NAMESPACE, QUERY);
-        handleSearchContentCounts(handler);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCES, atts);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, QUERY);
+        XMLUtils.data(xmlConsumer, this.query);
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, QUERY);
+        handleSearchContentCounts(xmlConsumer);
         int i = 0;
         int j = start + length;
         for (SearchResult result : this) {
             if (i >= start && i < j) {
-                result.toSAX(handler);
+                result.toSAX(xmlConsumer);
             } else if (i == j) {
                 break;
             }
             i++;
         }
-        XMLUtils.endElement(handler, NAMESPACE, RESOURCES);
-        handler.endPrefixMapping("");
-        handler.endDocument();
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCES);
+        xmlConsumer.endPrefixMapping("");
+        xmlConsumer.endDocument();
     }
 
-    private void handleSearchContentCounts(final ContentHandler handler) throws SAXException {
-        XMLUtils.startElement(handler, NAMESPACE, CONTENT_HIT_COUNTS);
+    private void handleSearchContentCounts(final XMLConsumer xmlConsumer) throws SAXException {
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
         ArrayList<String> countedResources = new ArrayList<String>();
         for (SearchResult resource : this) {
             if (resource instanceof ContentResultSearchResult) {
@@ -96,11 +95,11 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
                     atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, "CDATA", cr.getResourceId());
                     atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, "CDATA", cr.getResourceHits());
                     atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, "CDATA", cr.getResourceUrl());
-                    XMLUtils.startElement(handler, NAMESPACE, RESOURCE, atts);
-                    XMLUtils.endElement(handler, NAMESPACE, RESOURCE);
+                    XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCE, atts);
+                    XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCE);
                 }
             }
         }
-        XMLUtils.endElement(handler, NAMESPACE, CONTENT_HIT_COUNTS);
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
     }
 }

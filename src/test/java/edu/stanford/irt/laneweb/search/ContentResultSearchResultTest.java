@@ -14,10 +14,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.regex.Pattern;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.resource.Resource;
@@ -246,14 +246,14 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testToSAX() throws SAXException {
-        ContentHandler handler = createMock(ContentHandler.class);
+        XMLConsumer xmlConsumer = createMock(XMLConsumer.class);
         reset(this.contentResult);
-        handler.startElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class), isA(Attributes.class));
+        xmlConsumer.startElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class), isA(Attributes.class));
         expectLastCall().times(12);
         expect(this.contentResult.getId()).andReturn("id");
-        handler.characters(isA(char[].class), eq(0), gt(0));
+        xmlConsumer.characters(isA(char[].class), eq(0), gt(0));
         expectLastCall().times(11);
-        handler.endElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class));
+        xmlConsumer.endElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class));
         expectLastCall().times(12);
         expect(this.contentResult.getContentId()).andReturn("contentId");
         expect(this.contentResult.getTitle()).andReturn("title");
@@ -265,8 +265,8 @@ public class ContentResultSearchResultTest {
         expect(this.contentResult.getPublicationIssue()).andReturn("publicationIssue");
         expect(this.contentResult.getPages()).andReturn("pages");
         expect(this.contentResult.getURL()).andReturn("url");
-        replay(this.contentResult, handler);
-        this.result.toSAX(handler);
-        verify(this.contentResult, handler);
+        replay(this.contentResult, xmlConsumer);
+        this.result.toSAX(xmlConsumer);
+        verify(this.contentResult, xmlConsumer);
     }
 }

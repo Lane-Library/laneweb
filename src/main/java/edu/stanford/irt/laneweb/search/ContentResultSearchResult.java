@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.xml.sax.ContentHandler;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -151,28 +151,28 @@ public class ContentResultSearchResult implements SearchResult {
         this.resourceUrl = resourceUrl;
     }
 
-    public void toSAX(final ContentHandler handler) throws SAXException {
+    public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
         // TODO: returning result element for now ... turn into displayable?
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.getScore()));
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
-        XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
-        maybeCreateElement(handler, RESOURCE_ID, this.resourceId);
-        maybeCreateElement(handler, RESOURCE_NAME, this.resourceName);
-        maybeCreateElement(handler, RESOURCE_URL, this.resourceUrl);
-        maybeCreateElement(handler, RESOURCE_HITS, this.resourceHits);
-        maybeCreateElement(handler, ID, this.contentResult.getId());
-        maybeCreateElement(handler, CONTENT_ID, this.contentResult.getContentId());
-        maybeCreateElement(handler, TITLE, this.contentResult.getTitle());
-        maybeCreateElement(handler, DESCRIPTION, this.contentResult.getDescription());
-        maybeCreateElement(handler, AUTHOR, this.contentResult.getAuthor());
-        maybeCreateElement(handler, PUBLICATION_DATE, this.contentResult.getPublicationDate());
-        maybeCreateElement(handler, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
-        maybeCreateElement(handler, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
-        maybeCreateElement(handler, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
-        maybeCreateElement(handler, PAGES, this.contentResult.getPages());
-        maybeCreateElement(handler, URL, this.contentResult.getURL());
-        XMLUtils.endElement(handler, NAMESPACE, RESULT);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
+        maybeCreateElement(xmlConsumer, RESOURCE_ID, this.resourceId);
+        maybeCreateElement(xmlConsumer, RESOURCE_NAME, this.resourceName);
+        maybeCreateElement(xmlConsumer, RESOURCE_URL, this.resourceUrl);
+        maybeCreateElement(xmlConsumer, RESOURCE_HITS, this.resourceHits);
+        maybeCreateElement(xmlConsumer, ID, this.contentResult.getId());
+        maybeCreateElement(xmlConsumer, CONTENT_ID, this.contentResult.getContentId());
+        maybeCreateElement(xmlConsumer, TITLE, this.contentResult.getTitle());
+        maybeCreateElement(xmlConsumer, DESCRIPTION, this.contentResult.getDescription());
+        maybeCreateElement(xmlConsumer, AUTHOR, this.contentResult.getAuthor());
+        maybeCreateElement(xmlConsumer, PUBLICATION_DATE, this.contentResult.getPublicationDate());
+        maybeCreateElement(xmlConsumer, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
+        maybeCreateElement(xmlConsumer, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
+        maybeCreateElement(xmlConsumer, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
+        maybeCreateElement(xmlConsumer, PAGES, this.contentResult.getPages());
+        maybeCreateElement(xmlConsumer, URL, this.contentResult.getURL());
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
     }
 
     // return -10 to 10, based on pub date's proximity to THIS_YEAR
@@ -261,9 +261,9 @@ public class ContentResultSearchResult implements SearchResult {
         return 1;
     }
 
-    private void maybeCreateElement(final ContentHandler handler, final String name, final String value) throws SAXException {
+    private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value) throws SAXException {
         if (value != null && !"".equals(value)) {
-            XMLUtils.createElementNS(handler, NAMESPACE, name, value);
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, name, value);
         }
     }
 }

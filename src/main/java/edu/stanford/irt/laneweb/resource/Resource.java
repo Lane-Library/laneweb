@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.resource;
 
-import org.apache.excalibur.xml.sax.XMLizable;
+import edu.stanford.irt.laneweb.util.XMLizable;
 
 public interface Resource extends XMLizable {
 

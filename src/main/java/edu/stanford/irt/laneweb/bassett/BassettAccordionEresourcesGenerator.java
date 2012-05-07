@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.bassett;
 import java.util.Map;
 
 import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -21,7 +20,7 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
         XMLConsumer xmlConsumer = getXMLConsumer();
         try {
             xmlConsumer.startDocument();
-            XMLizable xml = new XMLLizableBassettCount(regionCountMap);
+            XMLLizableBassettCount xml = new XMLLizableBassettCount(regionCountMap);
             xml.toSAX(xmlConsumer);
             xmlConsumer.endDocument();
         } catch (SAXException e) {

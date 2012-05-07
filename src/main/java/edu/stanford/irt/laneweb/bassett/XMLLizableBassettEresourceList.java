@@ -3,13 +3,13 @@ package edu.stanford.irt.laneweb.bassett;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.excalibur.xml.sax.XMLizable;
-import org.xml.sax.ContentHandler;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
+import edu.stanford.irt.laneweb.util.XMLizable;
 
 public class XMLLizableBassettEresourceList implements XMLizable {
 
@@ -47,71 +47,71 @@ public class XMLLizableBassettEresourceList implements XMLizable {
         this.bassetts = bassetts;
     }
 
-    public void toSAX(final ContentHandler consumer) throws SAXException {
-        consumer.startPrefixMapping("", NAMESPACE);
-        XMLUtils.startElement(consumer, NAMESPACE, BASSETTS);
+    public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
+        xmlConsumer.startPrefixMapping("", NAMESPACE);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETTS);
         if (this.bassetts != null) {
             for (Eresource eresource : this.bassetts) {
-                handleEresource(consumer, eresource);
+                handleEresource(xmlConsumer, eresource);
             }
         }
-        XMLUtils.endElement(consumer, NAMESPACE, BASSETTS);
-        consumer.endPrefixMapping("");
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETTS);
+        xmlConsumer.endPrefixMapping("");
     }
 
-    private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
+    private void handleEresource(final XMLConsumer xmlConsumer, final Eresource eresource) throws SAXException {
         BassettEresource bassett = (BassettEresource) eresource;
         AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
-        XMLUtils.startElement(handler, NAMESPACE, BASSETT, attributes);
-        XMLUtils.startElement(handler, NAMESPACE, TITLE);
-        XMLUtils.data(handler, bassett.getTitle());
-        XMLUtils.endElement(handler, NAMESPACE, TITLE);
-        XMLUtils.startElement(handler, NAMESPACE, BASSETT_IMAGE);
-        XMLUtils.data(handler, bassett.getImage());
-        XMLUtils.endElement(handler, NAMESPACE, BASSETT_IMAGE);
-        XMLUtils.startElement(handler, NAMESPACE, DIAGRAM);
-        XMLUtils.data(handler, bassett.getDiagram());
-        XMLUtils.endElement(handler, NAMESPACE, DIAGRAM);
-        XMLUtils.startElement(handler, NAMESPACE, LEGEND_IMAGE);
-        XMLUtils.data(handler, bassett.getLatinLegend());
-        XMLUtils.endElement(handler, NAMESPACE, LEGEND_IMAGE);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT, attributes);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, TITLE);
+        XMLUtils.data(xmlConsumer, bassett.getTitle());
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, TITLE);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT_IMAGE);
+        XMLUtils.data(xmlConsumer, bassett.getImage());
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT_IMAGE);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, DIAGRAM);
+        XMLUtils.data(xmlConsumer, bassett.getDiagram());
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, DIAGRAM);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, LEGEND_IMAGE);
+        XMLUtils.data(xmlConsumer, bassett.getLatinLegend());
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, LEGEND_IMAGE);
         if (null != bassett.getEngishLegend()) {
-            XMLUtils.startElement(handler, NAMESPACE, LEGEND);
-            XMLUtils.data(handler, bassett.getEngishLegend());
-            XMLUtils.endElement(handler, NAMESPACE, LEGEND);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, LEGEND);
+            XMLUtils.data(xmlConsumer, bassett.getEngishLegend());
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, LEGEND);
         }
         if (null != bassett.getDescription()) {
-            XMLUtils.startElement(handler, NAMESPACE, DESCRIPTION);
-            XMLUtils.data(handler, bassett.getDescription());
-            XMLUtils.endElement(handler, NAMESPACE, DESCRIPTION);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, DESCRIPTION);
+            XMLUtils.data(xmlConsumer, bassett.getDescription());
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, DESCRIPTION);
         }
-        handleRegion(handler, bassett.getRegions());
-        XMLUtils.endElement(handler, NAMESPACE, BASSETT);
+        handleRegion(xmlConsumer, bassett.getRegions());
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT);
     }
 
-    private void handleRegion(final ContentHandler handler, final List<String> regions) throws SAXException {
+    private void handleRegion(final XMLConsumer xmlConsumer, final List<String> regions) throws SAXException {
         String currentRegion = null;
-        XMLUtils.startElement(handler, NAMESPACE, REGIONS);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, REGIONS);
         for (int i = 0; i < regions.size(); i++) {
             String region = regions.get(i);
             String[] splittedRegion = region.split("--");
             if (!splittedRegion[0].equals(currentRegion)) {
                 if (i != 0) {
-                    XMLUtils.endElement(handler, NAMESPACE, REGION);
+                    XMLUtils.endElement(xmlConsumer, NAMESPACE, REGION);
                 }
                 AttributesImpl attributes = new AttributesImpl();
                 attributes.addAttribute(NAMESPACE, NAME, NAME, "CDATA", splittedRegion[0]);
-                XMLUtils.startElement(handler, NAMESPACE, REGION, attributes);
+                XMLUtils.startElement(xmlConsumer, NAMESPACE, REGION, attributes);
                 currentRegion = splittedRegion[0];
             }
             if (splittedRegion.length > 1) {
-                XMLUtils.startElement(handler, NAMESPACE, SUB_REGION);
-                XMLUtils.data(handler, splittedRegion[1]);
-                XMLUtils.endElement(handler, NAMESPACE, SUB_REGION);
+                XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION);
+                XMLUtils.data(xmlConsumer, splittedRegion[1]);
+                XMLUtils.endElement(xmlConsumer, NAMESPACE, SUB_REGION);
             }
         }
-        XMLUtils.endElement(handler, NAMESPACE, REGION);
-        XMLUtils.endElement(handler, NAMESPACE, REGIONS);
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, REGION);
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, REGIONS);
     }
 }

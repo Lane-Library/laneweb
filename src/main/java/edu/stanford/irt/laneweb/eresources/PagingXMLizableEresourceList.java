@@ -4,8 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-import org.apache.excalibur.xml.sax.XMLizable;
-import org.xml.sax.ContentHandler;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -13,7 +12,7 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class PagingXMLizableEresourceList extends LinkedList<Eresource> implements XMLizable, Resource {
+public class PagingXMLizableEresourceList extends LinkedList<Eresource> implements Resource {
 
     private static final String CDATA = "CDATA";
 
@@ -68,25 +67,25 @@ public class PagingXMLizableEresourceList extends LinkedList<Eresource> implemen
         this.pages = this.size % this.pageSize != 0 ? this.pages + 1 : this.pages;
     }
 
-    public void toSAX(final ContentHandler handler) throws SAXException {
-        if (null == handler) {
+    public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
+        if (null == xmlConsumer) {
             throw new IllegalArgumentException("null handler");
         }
-        handler.startDocument();
-        handler.startPrefixMapping("", NAMESPACE);
+        xmlConsumer.startDocument();
+        xmlConsumer.startPrefixMapping("", NAMESPACE);
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(this.size));
         atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(this.start));
         atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(this.length));
         atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(this.page));
         atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(this.pages));
-        XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCES, atts);
         int i = 0;
         for (ListIterator<Eresource> it = listIterator(this.start); it.hasNext() && i < this.length; i++) {
-            new EresourceResource(it.next()).toSAX(handler);
+            new EresourceResource(it.next()).toSAX(xmlConsumer);
         }
-        XMLUtils.endElement(handler, NAMESPACE, RESOURCES);
-        handler.endPrefixMapping("");
-        handler.endDocument();
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCES);
+        xmlConsumer.endPrefixMapping("");
+        xmlConsumer.endDocument();
     }
 }

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.TreeSet;
 
-import org.xml.sax.ContentHandler;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -24,8 +24,8 @@ public class EresourceResource implements Resource {
         this.eresource = eresource;
     }
 
-    public void toSAX(final ContentHandler handler) throws SAXException {
-        handleEresource(handler);
+    public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
+        handleEresource(xmlConsumer);
     }
 
     @Override
@@ -33,28 +33,28 @@ public class EresourceResource implements Resource {
         return this.eresource.toString();
     }
 
-    private void handleEresource(final ContentHandler handler) throws SAXException {
+    private void handleEresource(final XMLConsumer xmlConsumer) throws SAXException {
         // TODO: returning result element for now ... turn into displayable?
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.eresource.getScore()));
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "eresource");
-        XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
-        XMLUtils.createElementNS(handler, NAMESPACE, ID, Integer.toString(this.eresource.getId()));
-        XMLUtils.createElementNS(handler, NAMESPACE, RECORD_ID, Integer.toString(this.eresource.getRecordId()));
-        XMLUtils.createElementNS(handler, NAMESPACE, RECORD_TYPE, this.eresource.getRecordType());
-        XMLUtils.createElementNS(handler, NAMESPACE, TITLE, this.eresource.getTitle());
-        maybeCreateElement(handler, DESCRIPTION, this.eresource.getDescription());
-        XMLUtils.startElement(handler, NAMESPACE, VERSIONS);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
+        XMLUtils.createElementNS(xmlConsumer, NAMESPACE, ID, Integer.toString(this.eresource.getId()));
+        XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_ID, Integer.toString(this.eresource.getRecordId()));
+        XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_TYPE, this.eresource.getRecordType());
+        XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, this.eresource.getTitle());
+        maybeCreateElement(xmlConsumer, DESCRIPTION, this.eresource.getDescription());
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, VERSIONS);
         Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);
         versions.addAll(this.eresource.getVersions());
         for (Version version : versions) {
-            handleVersion(handler, version);
+            handleVersion(xmlConsumer, version);
         }
-        XMLUtils.endElement(handler, NAMESPACE, VERSIONS);
-        XMLUtils.endElement(handler, NAMESPACE, RESULT);
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, VERSIONS);
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
     }
 
-    private void handleLink(final ContentHandler handler, final Link link) throws SAXException {
+    private void handleLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
         String label = link.getLabel();
         String type;
@@ -66,30 +66,30 @@ public class EresourceResource implements Resource {
             type = "normal";
         }
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", type);
-        XMLUtils.startElement(handler, NAMESPACE, LINK, atts);
-        maybeCreateElement(handler, LABEL, label);
-        maybeCreateElement(handler, URL, link.getUrl());
-        maybeCreateElement(handler, INSTRUCTION, link.getInstruction());
-        XMLUtils.endElement(handler, NAMESPACE, LINK);
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, LINK, atts);
+        maybeCreateElement(xmlConsumer, LABEL, label);
+        maybeCreateElement(xmlConsumer, URL, link.getUrl());
+        maybeCreateElement(xmlConsumer, INSTRUCTION, link.getInstruction());
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, LINK);
     }
 
-    private void handleVersion(final ContentHandler handler, final Version version) throws SAXException {
-        XMLUtils.startElement(handler, NAMESPACE, VERSION);
-        maybeCreateElement(handler, SUMMARY_HOLDINGS, version.getSummaryHoldings());
-        maybeCreateElement(handler, DATES, version.getDates());
-        maybeCreateElement(handler, PUBLISHER, version.getPublisher());
-        maybeCreateElement(handler, DESCRIPTION, version.getDescription());
-        XMLUtils.startElement(handler, NAMESPACE, LINKS);
+    private void handleVersion(final XMLConsumer xmlConsumer, final Version version) throws SAXException {
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, VERSION);
+        maybeCreateElement(xmlConsumer, SUMMARY_HOLDINGS, version.getSummaryHoldings());
+        maybeCreateElement(xmlConsumer, DATES, version.getDates());
+        maybeCreateElement(xmlConsumer, PUBLISHER, version.getPublisher());
+        maybeCreateElement(xmlConsumer, DESCRIPTION, version.getDescription());
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, LINKS);
         for (Link link : version.getLinks()) {
-            handleLink(handler, link);
+            handleLink(xmlConsumer, link);
         }
-        XMLUtils.endElement(handler, NAMESPACE, LINKS);
-        XMLUtils.endElement(handler, NAMESPACE, VERSION);
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, LINKS);
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, VERSION);
     }
 
-    private void maybeCreateElement(final ContentHandler handler, final String name, final String value) throws SAXException {
+    private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value) throws SAXException {
         if (value != null && !"".equals(value)) {
-            XMLUtils.createElementNS(handler, NAMESPACE, name, value);
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, name, value);
         }
     }
 }
