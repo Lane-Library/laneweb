@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-05-07" version="1.12.29" description="1.12.29 bug fix release">
+            <action date="2012-05-07" dev="ceyates" issue="69282" type="fix">
+                bookmarks from local links lack query string 
+            </action>
             <action date="2012-05-04" dev="ceyates" issue="69239" type="update">
                 rename "Reset" label in Bookmarks edit mode 
             </action>
@@ -28,9 +31,6 @@
             </action>
         </release>
         <release date="2012-04-30" version="1.12.28" description="1.12.28 bug fix release">
-            <action date="2012-04-27" dev="ceyates" issue="68881" type="add">
-                make yui3 grids available
-            </action>
             <action date="2012-04-27" dev="olgary" issue="68870" type="add">
                 buttons.css - release live - new styles for tabs2012 added
             </action>
