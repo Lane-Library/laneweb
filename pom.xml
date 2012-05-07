@@ -738,6 +738,11 @@
         	<type>zip</type>
         	<scope>runtime</scope>
         </dependency>
+        <dependency>
+        	<groupId>bouncycastle</groupId>
+        	<artifactId>bcprov-jdk16</artifactId>
+        	<version>140</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
