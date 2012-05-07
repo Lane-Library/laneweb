@@ -510,7 +510,7 @@
                             if (anchor.link.get("local")) {
                                 url = anchor.link.get("path");
                                 query = anchor.link.get("query");
-                                url = query ? url + "?" + query : url;
+                                url = query ? url + query : url;
                             } else {
                                 url = anchor.link.get("url");
                             }
