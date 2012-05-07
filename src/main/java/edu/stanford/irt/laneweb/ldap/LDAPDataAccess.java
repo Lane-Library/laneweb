@@ -19,13 +19,19 @@ public class LDAPDataAccess {
 
     private static class LDAPAttributesMapper implements AttributesMapper {
 
+        @Override
         public Object mapFromAttributes(final Attributes attributes) throws javax.naming.NamingException {
             String name = null;
+            String sunetid = null;
             String univId = null;
             boolean isActive = false;
             Attribute currentAttribute = attributes.get("displayName");
             if (currentAttribute != null) {
                 name = (String) currentAttribute.get();
+            }
+            currentAttribute = attributes.get("uid");
+            if (currentAttribute != null) {
+                sunetid = (String) currentAttribute.get();
             }
             currentAttribute = attributes.get("suunivid");
             if (currentAttribute != null) {
@@ -38,7 +44,7 @@ public class LDAPDataAccess {
                     isActive = Affiliation.getAffiliation((String) attrs.next()).isActive();
                 }
             }
-            return new LDAPData(name, univId, isActive);
+            return new LDAPData(sunetid, name, univId, isActive);
         }
     }
 
@@ -50,19 +56,41 @@ public class LDAPDataAccess {
 
         private String sunetid;
 
-        private LDAPPrivilegedAction(final LdapTemplate ldapTemplate, final String sunetid) {
+        private String univid;
+
+        private LDAPPrivilegedAction(final LdapTemplate ldapTemplate) {
             this.ldapTemplate = ldapTemplate;
-            this.sunetid = sunetid;
             this.attributesMapper = new LDAPAttributesMapper();
         }
 
+        @Override
         @SuppressWarnings("rawtypes")
         public LDAPData run() {
-            List list = this.ldapTemplate.search("", "susunetid=" + this.sunetid, this.attributesMapper);
-            if (list == null || list.size() == 0) {
-                return null;
+            String lookupFilter = null;
+            if (this.univid != null) {
+                lookupFilter = new StringBuilder("suunivid=").append(this.univid).toString();
             }
-            return (LDAPData) list.get(0);
+            if (this.sunetid != null) {
+                lookupFilter = new StringBuilder("susunetid=").append(this.sunetid).toString();
+            }
+            try {
+                List list = this.ldapTemplate.search("", lookupFilter, this.attributesMapper);
+                if (list == null || list.size() == 0) {
+                    return null;
+                }
+                return (LDAPData) list.get(0);
+            } finally {
+                this.sunetid = null;
+                this.univid = null;
+            }
+        }
+
+        public void setSunetid(final String sunetid) {
+            this.sunetid = sunetid;
+        }
+
+        public void setUnivid(final String univid) {
+            this.univid = univid;
         }
     }
 
@@ -72,9 +100,19 @@ public class LDAPDataAccess {
 
     private SubjectSource subjectSource;
 
-    public LDAPData getLdapData(final String sunetid) {
+    private String sunetid;
+
+    private String univid;
+
+    private LDAPData doGet() {
         LDAPData ldapData = null;
-        PrivilegedAction<LDAPData> action = new LDAPPrivilegedAction(this.ldapTemplate, sunetid);
+        LDAPPrivilegedAction action = new LDAPPrivilegedAction(this.ldapTemplate);
+        if (this.sunetid != null) {
+            action.setSunetid(this.sunetid);
+        }
+        if (this.univid != null) {
+            action.setUnivid(this.univid);
+        }
         try {
             Subject subject = this.subjectSource.getSubject();
             ldapData = Subject.doAs(subject, action);
@@ -85,9 +123,30 @@ public class LDAPDataAccess {
         } catch (NamingException e) {
             this.log.error("failed to get ldap data", e);
         }
+        return ldapData;
+    }
+
+    @Deprecated
+    public LDAPData getLdapData(final String sunetid) {
+        return getLdapDataForSunetid(sunetid);
+    }
+
+    public LDAPData getLdapDataForSunetid(final String sunetid) {
+        this.sunetid = sunetid;
+        LDAPData ldapData = doGet();
         if (ldapData == null) {
             this.log.warn("using sunetid for name");
-            ldapData = new LDAPData(sunetid, null, false);
+            ldapData = new LDAPData(this.sunetid, this.sunetid, this.univid, false);
+        }
+        return ldapData;
+    }
+
+    public LDAPData getLdapDataForUnivid(final String univid) {
+        this.univid = univid;
+        LDAPData ldapData = doGet();
+        if (ldapData == null) {
+            this.log.warn("using univid for name");
+            ldapData = new LDAPData(this.sunetid, this.univid, this.univid, false);
         }
         return ldapData;
     }

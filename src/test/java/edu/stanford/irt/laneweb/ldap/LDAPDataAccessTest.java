@@ -40,7 +40,7 @@ public class LDAPDataAccessTest {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
         expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
         replay(this.subjectSource, this.ldapTemplate);
-        this.lDAPDataAccess.getLdapData("ditenus");
+        this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
         verify(this.subjectSource, this.ldapTemplate);
     }
 
@@ -50,8 +50,19 @@ public class LDAPDataAccessTest {
         expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andThrow(
                 new CommunicationException(null));
         replay(this.subjectSource, this.ldapTemplate);
-        LDAPData data = this.lDAPDataAccess.getLdapData("ditenus");
+        LDAPData data = this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
         assertEquals("ditenus", data.getName());
+        verify(this.subjectSource, this.ldapTemplate);
+    }
+
+    @Test
+    public void testThrowCommunicationExceptionNounivid() {
+        expect(this.subjectSource.getSubject()).andReturn(this.subject);
+        expect(this.ldapTemplate.search(eq(""), eq("suunivid=12345678"), isA(AttributesMapper.class))).andThrow(
+                new CommunicationException(null));
+        replay(this.subjectSource, this.ldapTemplate);
+        LDAPData data = this.lDAPDataAccess.getLdapDataForUnivid("12345678");
+        assertEquals("12345678", data.getName());
         verify(this.subjectSource, this.ldapTemplate);
     }
 }
