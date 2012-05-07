@@ -507,11 +507,11 @@
                             anchor = anchors.item(i);
                             anchor.plug(Y.lane.LinkPlugin);
                             label = anchor.link.get("title");
-                            if (anchor.link.get("local")) {
-                                url = anchor.link.get("path");
-                            } else {
+//                            if (anchor.link.get("local")) {
+//                                url = anchor.link.get("path");
+//                            } else {
                                 url = anchor.link.get("url");
-                            }
+//                            }
                             bookmarks.push(new Bookmark(label, url));
                         }
                         return new Bookmarks(bookmarks);
