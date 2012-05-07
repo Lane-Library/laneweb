@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-05-07" version="1.12.29" description="1.12.29 bug fix release">
+            <action date="2012-05-04" dev="ceyates" issue="69239" type="update">
+                rename "Reset" label in Bookmarks edit mode 
+            </action>
+            <action date="2012-05-04" dev="ceyates" issue="69237" type="update">
+                make changes to Bookmarklet on "My Accounts" page 
+            </action>
+            <action date="2012-05-02" dev="ceyates" issue="" type="add">
+                provide a bookmark link for search results 
+            </action>
+            <action date="2012-05-02" dev="ceyates" issue="69081" type="add">
+                Limit bookmarks in dropdown to last 5 
+            </action>
+            <action date="2012-05-02" dev="ceyates" issue="69074" type="fix">
+                SearchContentAggregator.getValidity() is always null
+            </action>
+            <action date="2012-05-02" dev="ceyates" issue="68881" type="add">
+                make yui3 grids available 
+            </action>
+        </release>
         <release date="2012-04-30" version="1.12.28" description="1.12.28 bug fix release">
             <action date="2012-04-27" dev="ceyates" issue="68881" type="add">
                 make yui3 grids available
