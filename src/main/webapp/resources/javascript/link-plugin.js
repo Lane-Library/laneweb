@@ -70,6 +70,17 @@
                     }
                 }
             },
+            query : {
+                readOnly : true,
+                valueFn : function() {
+                    if (this.get("local")) {
+                        return this.get("host").get("search");
+                    } else {
+                        //TODO: implement query for external links.
+                        return "";
+                    }
+                }
+            },
             title : {
                 readOnly : true,
                 valueFn : function() {

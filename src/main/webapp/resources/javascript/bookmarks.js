@@ -502,16 +502,18 @@
             HTML_PARSER : {
                     items : ["li"],
                     bookmarks : function(srcNode) {
-                        var i, anchor, label, url, bookmarks = [], anchors = srcNode.all("a");
+                        var i, anchor, label, url, query, bookmarks = [], anchors = srcNode.all("a");
                         for (i = 0; i < anchors.size(); i++) {
                             anchor = anchors.item(i);
                             anchor.plug(Y.lane.LinkPlugin);
                             label = anchor.link.get("title");
-//                            if (anchor.link.get("local")) {
-//                                url = anchor.link.get("path");
-//                            } else {
+                            if (anchor.link.get("local")) {
+                                url = anchor.link.get("path");
+                                query = anchor.link.get("query");
+                                url = query ? url + "?" + query : url;
+                            } else {
                                 url = anchor.link.get("url");
-//                            }
+                            }
                             bookmarks.push(new Bookmark(label, url));
                         }
                         return new Bookmarks(bookmarks);
