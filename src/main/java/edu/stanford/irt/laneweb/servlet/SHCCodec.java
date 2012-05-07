@@ -17,6 +17,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.crypto.digests.SHA1Digest;
 import org.bouncycastle.crypto.generators.PKCS5S1ParametersGenerator;
 import org.bouncycastle.crypto.params.KeyParameter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SHCCodec {
 
@@ -33,6 +35,8 @@ public class SHCCodec {
     private Cipher cipher;
 
     private byte[] initialVectorBytes;
+
+    private Logger log = LoggerFactory.getLogger(SHCCodec.class);
 
     private byte[] saltBytes;
 
@@ -69,7 +73,7 @@ public class SHCCodec {
 
     public String decrypt(final String ciphertext) {
         byte[] ciphertextBytes = Base64.decodeBase64(ciphertext);
-        String plaintext = "";
+        String plaintext = null;
         try {
             this.cipher.init(Cipher.DECRYPT_MODE, this.secretKey, new IvParameterSpec(this.initialVectorBytes));
             plaintext = new String(this.cipher.doFinal(ciphertextBytes), "UTF-8");
@@ -80,15 +84,15 @@ public class SHCCodec {
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);
         } catch (IllegalBlockSizeException e) {
-            throw new IllegalStateException(e);
+            this.log.error(e.getMessage(), e);
         } catch (BadPaddingException e) {
-            throw new IllegalStateException(e);
+            this.log.error(e.getMessage(), e);
         }
         return plaintext;
     }
 
     public String encrypt(final String plaintext) {
-        byte[] ciphertext;
+        byte[] ciphertext = null;
         try {
             this.cipher.init(Cipher.ENCRYPT_MODE, this.secretKey, new IvParameterSpec(this.initialVectorBytes));
             ciphertext = this.cipher.doFinal(plaintext.getBytes("UTF-8"));
@@ -96,12 +100,12 @@ public class SHCCodec {
             throw new IllegalStateException(e);
         } catch (InvalidAlgorithmParameterException e) {
             throw new IllegalStateException(e);
-        } catch (IllegalBlockSizeException e) {
-            throw new IllegalStateException(e);
-        } catch (BadPaddingException e) {
-            throw new IllegalStateException(e);
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);
+        } catch (IllegalBlockSizeException e) {
+            this.log.error(e.getMessage(), e);
+        } catch (BadPaddingException e) {
+            this.log.error(e.getMessage(), e);
         }
         return Base64.encodeBase64String(ciphertext);
     }

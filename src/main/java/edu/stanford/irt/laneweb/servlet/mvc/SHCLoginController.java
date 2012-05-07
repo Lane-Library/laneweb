@@ -46,12 +46,12 @@ public class SHCLoginController {
         String sunetid = null;
         String decryptedEmrid = null;
         String decryptedUnivid = null;
-        if (emrid != null && !emrid.isEmpty()) {
-            decryptedEmrid = CODEC.decrypt(emrid);
+        decryptedEmrid = CODEC.decrypt(emrid);
+        if (decryptedEmrid != null) {
             session.setAttribute(Model.EMRID, decryptedEmrid);
         }
-        if (univid != null && !univid.isEmpty()) {
-            decryptedUnivid = CODEC.decrypt(univid);
+        decryptedUnivid = CODEC.decrypt(univid);
+        if (decryptedUnivid != null) {
             session.setAttribute(Model.UNIVID, decryptedUnivid);
             sunetid = getSunetid(session, decryptedUnivid);
         }
