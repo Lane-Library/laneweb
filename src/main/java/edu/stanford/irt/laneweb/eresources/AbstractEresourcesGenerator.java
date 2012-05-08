@@ -58,7 +58,12 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
             this.mesh = this.mesh.toLowerCase();
         }
         String page = ModelUtil.getString(this.model, Model.PAGE, "1");
-        this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
+        try {
+            this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
+        } catch (NumberFormatException e) {
+            //if not 'all' or a number just give the first page:
+            this.page = 0;
+        }
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {
