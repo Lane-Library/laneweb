@@ -233,15 +233,13 @@
                                     <li><a href="http://scopeblog.stanford.edu/">Scope Blog</a></li>
                                 </ul>
                             </div>
-                            <div id="socialMedia">
-                             <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257"
-                                 class="image-link facebook">&#160;</a>
-                             &#160;
-                             <a href="http://twitter.com/#!/LaneLibStanford"
-                                 class="image-link twitter">&#160;</a>
-                             &#160;
-                             <a href="http://www.flickr.com/photos/40390680@N08/" class="image-link flickr noproxy">&#160;</a>
-                         </div>
+                        </div>
+                        <div id="socialMedia">
+                            <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257"
+                                class="facebook"></a>
+                            <a href="http://twitter.com/#!/LaneLibStanford"
+                                class="twitter"></a>
+                            <a href="http://www.flickr.com/photos/40390680@N08/" class="flickr noproxy"></a>
                         </div>
                     </div>
                     <div class="sb-tb" id="sb-bot">
