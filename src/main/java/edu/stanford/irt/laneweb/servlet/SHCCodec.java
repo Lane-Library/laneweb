@@ -71,7 +71,7 @@ public class SHCCodec {
         }
     }
 
-    public String decrypt(final String ciphertext) {
+    public synchronized String decrypt(final String ciphertext) {
         byte[] ciphertextBytes = Base64.decodeBase64(ciphertext);
         String plaintext = null;
         try {
@@ -91,7 +91,7 @@ public class SHCCodec {
         return plaintext;
     }
 
-    public String encrypt(final String plaintext) {
+    public synchronized String encrypt(final String plaintext) {
         byte[] ciphertext = null;
         try {
             this.cipher.init(Cipher.ENCRYPT_MODE, this.secretKey, new IvParameterSpec(this.initialVectorBytes));
