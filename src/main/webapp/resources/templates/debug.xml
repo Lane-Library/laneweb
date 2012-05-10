@@ -120,7 +120,7 @@
                                 <?laneweb bookmarks?>
                             </li>
                             <li>
-                                <a href="/myaccounts.html">My Lane</a>
+                                <a href="/myaccounts.html">MyLane</a>
                             </li>
                             <li>
                                 <a id="logout" href="/logout">Logout</a>
