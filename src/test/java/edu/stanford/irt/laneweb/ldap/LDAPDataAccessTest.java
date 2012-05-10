@@ -62,7 +62,7 @@ public class LDAPDataAccessTest {
                 new CommunicationException(null));
         replay(this.subjectSource, this.ldapTemplate);
         LDAPData data = this.lDAPDataAccess.getLdapDataForUnivid("12345678");
-        assertEquals("12345678", data.getName());
+        assertEquals(null, data.getName());
         verify(this.subjectSource, this.ldapTemplate);
     }
 }
