@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -22,6 +23,8 @@ public class VoyagerLoginTest {
 
     private DataSource dataSource;
 
+    private ResultSet resultSet;
+
     private PreparedStatement statement;
 
     private VoyagerLogin voyagerLogin;
@@ -32,18 +35,25 @@ public class VoyagerLoginTest {
         this.dataSource = createMock(DataSource.class);
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
+        this.resultSet = createMock(ResultSet.class);
     }
 
     @Test
     public void testDeleteError() throws SQLException {
         this.statement.setString(1, "0999");
+        expect(this.statement.executeQuery()).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt(1)).andReturn(Integer.valueOf(1));
+        this.resultSet.close();
+        this.statement.close();
+        this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
         expect(this.statement.executeUpdate()).andThrow(new SQLException("oops"));
         this.statement.close();
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(2);
         this.connection.close();
         expect(this.dataSource.getConnection()).andReturn(this.connection);
-        replay(this.dataSource, this.connection, this.statement);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
         this.voyagerLogin.setDataSource(this.dataSource);
         this.voyagerLogin.setVoyagerDatabase("lmldb");
         this.voyagerLogin.setErrorURL("/voyagerError.html");
@@ -67,6 +77,12 @@ public class VoyagerLoginTest {
     @Test
     public void testJacksonLoginURL() throws SQLException {
         this.statement.setString(1, "0999");
+        expect(this.statement.executeQuery()).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt(1)).andReturn(Integer.valueOf(1));
+        this.resultSet.close();
+        this.statement.close();
+        this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
         expect(this.statement.executeUpdate()).andReturn(Integer.valueOf(0));
         this.statement.setString(1, "0999");
@@ -74,10 +90,10 @@ public class VoyagerLoginTest {
         expect(this.statement.executeUpdate()).andReturn(Integer.valueOf(1));
         this.statement.close();
         this.statement.close();
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(2);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(3);
         this.connection.close();
         expect(this.dataSource.getConnection()).andReturn(this.connection);
-        replay(this.dataSource, this.connection, this.statement);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
         this.voyagerLogin.setDataSource(this.dataSource);
         this.voyagerLogin.setVoyagerDatabase("jbldb");
         assertEquals("http://jbldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y",
@@ -88,6 +104,12 @@ public class VoyagerLoginTest {
     @Test
     public void testLaneLoginURL() throws SQLException {
         this.statement.setString(1, "0999");
+        expect(this.statement.executeQuery()).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt(1)).andReturn(Integer.valueOf(1));
+        this.resultSet.close();
+        this.statement.close();
+        this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
         expect(this.statement.executeUpdate()).andReturn(Integer.valueOf(0));
         this.statement.setString(1, "0999");
@@ -95,10 +117,10 @@ public class VoyagerLoginTest {
         expect(this.statement.executeUpdate()).andReturn(Integer.valueOf(1));
         this.statement.close();
         this.statement.close();
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(2);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(3);
         this.connection.close();
         expect(this.dataSource.getConnection()).andReturn(this.connection);
-        replay(this.dataSource, this.connection, this.statement);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
         this.voyagerLogin.setDataSource(this.dataSource);
         this.voyagerLogin.setVoyagerDatabase("lmldb");
         assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y",
@@ -107,7 +129,32 @@ public class VoyagerLoginTest {
     }
 
     @Test
+    public void testMissingUnivid() throws SQLException {
+        this.statement.setString(1, "0999");
+        expect(this.statement.executeQuery()).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt(1)).andReturn(Integer.valueOf(0));
+        this.resultSet.close();
+        this.statement.close();
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
+        this.connection.close();
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.voyagerLogin.setDataSource(this.dataSource);
+        this.voyagerLogin.setVoyagerDatabase("lmldb");
+        this.voyagerLogin.setErrorURL("/voyagerError.html");
+        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
+        verify(this.dataSource, this.connection, this.statement);
+    }
+
+    @Test
     public void testUpdateError() throws SQLException {
+        this.statement.setString(1, "0999");
+        expect(this.statement.executeQuery()).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt(1)).andReturn(Integer.valueOf(1));
+        this.resultSet.close();
+        this.statement.close();
         this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
         expect(this.statement.executeUpdate()).andReturn(Integer.valueOf(0));
@@ -116,10 +163,10 @@ public class VoyagerLoginTest {
         expect(this.statement.executeUpdate()).andThrow(new SQLException("oops"));
         this.statement.close();
         this.statement.close();
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(2);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(3);
         this.connection.close();
         expect(this.dataSource.getConnection()).andReturn(this.connection);
-        replay(this.dataSource, this.connection, this.statement);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
         this.voyagerLogin.setDataSource(this.dataSource);
         this.voyagerLogin.setVoyagerDatabase("lmldb");
         this.voyagerLogin.setErrorURL("/voyagerError.html");
