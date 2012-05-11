@@ -56,7 +56,7 @@ public class LDAPDataAccess {
 
         private String lookupFilter;
 
-        LDAPPrivilegedAction(final LdapTemplate ldapTemplate, final String lookupFilter) {
+        private LDAPPrivilegedAction(final LdapTemplate ldapTemplate, final String lookupFilter) {
             this.lookupFilter = lookupFilter;
             this.ldapTemplate = ldapTemplate;
             this.attributesMapper = new LDAPAttributesMapper();
@@ -79,54 +79,25 @@ public class LDAPDataAccess {
 
     private SubjectSource subjectSource;
 
-    private String sunetid;
-
-    private String univid;
-
-    private LDAPData doGet() {
-        LDAPData ldapData = null;
-        String lookupFilter = null;
-        if (this.univid != null) {
-            lookupFilter = new StringBuilder("suunivid=").append(this.univid).toString();
-        }
-        if (this.sunetid != null) {
-            lookupFilter = new StringBuilder("susunetid=").append(this.sunetid).toString();
-        }
-        LDAPPrivilegedAction action = new LDAPPrivilegedAction(this.ldapTemplate, lookupFilter);
-        try {
-            Subject subject = this.subjectSource.getSubject();
-            ldapData = Subject.doAs(subject, action);
-        } catch (SecurityException e) {
-            this.log.error("unable to authenticate", e);
-        } catch (CommunicationException e) {
-            this.log.error("unable to connect to ldap server", e);
-        } catch (NamingException e) {
-            this.log.error("failed to get ldap data", e);
-        }
-        return ldapData;
-    }
-
     @Deprecated
     public LDAPData getLdapData(final String sunetid) {
         return getLdapDataForSunetid(sunetid);
     }
 
     public LDAPData getLdapDataForSunetid(final String sunetid) {
-        this.sunetid = sunetid;
-        LDAPData ldapData = doGet();
+        LDAPData ldapData = doGet("susunetid=" + sunetid);
         if (ldapData == null) {
             this.log.warn("using sunetid for name");
-            ldapData = new LDAPData(this.sunetid, this.sunetid, this.univid, false);
+            ldapData = new LDAPData(sunetid, sunetid, null, false);
         }
         return ldapData;
     }
 
     public LDAPData getLdapDataForUnivid(final String univid) {
-        this.univid = univid;
-        LDAPData ldapData = doGet();
+        LDAPData ldapData = doGet("suunivid=" + univid);
         if (ldapData == null) {
-            this.log.warn("can't find sunetid for univid: " + this.univid);
-            ldapData = new LDAPData(this.sunetid, null, this.univid, false);
+            this.log.warn("can't find sunetid for univid: " + univid);
+            ldapData = new LDAPData(null, null, univid, false);
         }
         return ldapData;
     }
@@ -137,5 +108,20 @@ public class LDAPDataAccess {
 
     public void setSubjectSource(final SubjectSource subjectSource) {
         this.subjectSource = subjectSource;
+    }
+
+    private LDAPData doGet(final String lookupFilter) {
+        LDAPData ldapData = null;
+        try {
+            Subject subject = this.subjectSource.getSubject();
+            ldapData = Subject.doAs(subject, new LDAPPrivilegedAction(this.ldapTemplate, lookupFilter));
+        } catch (SecurityException e) {
+            this.log.error("unable to authenticate", e);
+        } catch (CommunicationException e) {
+            this.log.error("unable to connect to ldap server", e);
+        } catch (NamingException e) {
+            this.log.error("failed to get ldap data", e);
+        }
+        return ldapData;
     }
 }
