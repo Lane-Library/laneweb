@@ -20,10 +20,10 @@ public class DefaultRequestHandler implements HttpRequestHandler {
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         String uri = request.getRequestURI();
-        String basePath = (String) request.getAttribute(Model.BASE_PATH);
+//        String basePath = (String) request.getAttribute(Model.BASE_PATH);
         String queryString = request.getQueryString();
         String location = uri + "/index.html";
-        location = basePath == null ? location : basePath + location;
+//        location = basePath == null ? location : basePath + location;
         location = queryString == null ? location : location + '?' + queryString;
         response.sendRedirect(location);
     }

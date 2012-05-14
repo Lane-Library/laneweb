@@ -166,6 +166,14 @@
                 <map:transform type="saxon" src="resources/xsl/banners.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match type="wildcard" pattern="group/lane/cgi-bin/sandbox/drupal/index.html">
+                <map:generate type="html" src="http://www.stanford.edu/group/lane/cgi-bin/sandbox/drupal/"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="group/lane/cgi-bin/sandbox/drupal/**/index.html">
+                <map:generate type="html" src="http://www.stanford.edu/group/lane/cgi-bin/sandbox/drupal/{1}"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="caching" internal-only="true">
             <!-- secure/** generates an error unless used from a pipeline -->
