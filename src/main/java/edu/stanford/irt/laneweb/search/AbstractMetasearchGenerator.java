@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -12,20 +13,21 @@ public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerato
 
     protected MetaSearchManager metaSearchManager;
 
-    public void generate() {
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.metaSearchManager = msms.getMetaSearchManager();
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
         Result result = doSearch();
         SAXable xml = new SAXResult(result);
         synchronized (result) {
             try {
-                xml.toSAX(getXMLConsumer());
+                xml.toSAX(xmlConsumer);
             } catch (SAXException e) {
                 throw new LanewebException(e);
             }
         }
-    }
-
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        this.metaSearchManager = msms.getMetaSearchManager();
     }
 
     protected abstract Result doSearch();

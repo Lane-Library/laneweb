@@ -7,6 +7,10 @@ public abstract class AbstractGenerator extends AbstractSitemapModelComponent im
 
     private XMLConsumer xmlConsumer;
 
+    public void generate() {
+        doGenerate(this.xmlConsumer);
+    }
+
     public final void setConsumer(final XMLConsumer xmlConsumer) {
         if (null == xmlConsumer) {
             throw new IllegalArgumentException("null xmlConsumer");
@@ -14,7 +18,5 @@ public abstract class AbstractGenerator extends AbstractSitemapModelComponent im
         this.xmlConsumer = xmlConsumer;
     }
 
-    protected XMLConsumer getXMLConsumer() {
-        return this.xmlConsumer;
-    }
+    protected abstract void doGenerate(XMLConsumer xmlConsumer);
 }

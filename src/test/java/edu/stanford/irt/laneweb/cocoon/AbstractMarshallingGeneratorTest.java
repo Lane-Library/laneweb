@@ -11,12 +11,11 @@ import java.io.IOException;
 
 import javax.xml.transform.sax.SAXResult;
 
-import org.apache.cocoon.ProcessingException;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.XmlMappingException;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -25,7 +24,7 @@ public class AbstractMarshallingGeneratorTest {
     private static final class TestGenerator extends AbstractMarshallingGenerator {
 
         @Override
-        public void generate() throws IOException, SAXException, ProcessingException {
+        protected void doGenerate(final XMLConsumer xmlConsumer) {
         }
     }
 
@@ -45,14 +44,14 @@ public class AbstractMarshallingGeneratorTest {
         this.marshaller.marshal(eq(obj), isA(SAXResult.class));
         replay(this.marshaller);
         this.generator.setMarshaller(this.marshaller);
-        this.generator.marshall(obj);
+        this.generator.marshall(obj, null);
         verify(this.marshaller);
     }
 
     @Test
     public void testMarshallNull() {
         try {
-            this.generator.marshall(null);
+            this.generator.marshall(null, null);
             fail();
         } catch (LanewebException e) {
         }

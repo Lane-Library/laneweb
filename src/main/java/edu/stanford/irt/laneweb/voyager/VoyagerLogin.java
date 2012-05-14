@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.voyager;
 
-import edu.stanford.irt.laneweb.util.JdbcUtils;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +11,8 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class VoyagerLogin {
 

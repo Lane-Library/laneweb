@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.XmlMappingException;
+import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -33,7 +34,7 @@ public class BookmarkGeneratorTest {
     }
 
     @Test
-    public void testGenerate() throws XmlMappingException, IOException {
+    public void testGenerate() throws XmlMappingException, IOException, SAXException {
         this.marshaller.marshal(isA(List.class), isA(SAXResult.class));
         replay(this.marshaller);
         this.generator.generate();

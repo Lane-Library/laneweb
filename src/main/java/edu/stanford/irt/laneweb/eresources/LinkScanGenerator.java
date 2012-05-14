@@ -25,7 +25,15 @@ public class LinkScanGenerator extends AbstractGenerator {
 
     private DataSource dataSource;
 
-    public void generate() {
+    public void setDataSource(final DataSource dataSource) {
+        if (null == dataSource) {
+            throw new IllegalArgumentException("null dataSource");
+        }
+        this.dataSource = dataSource;
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -33,7 +41,6 @@ public class LinkScanGenerator extends AbstractGenerator {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(SQL);
-            XMLConsumer xmlConsumer = getXMLConsumer();
             xmlConsumer.startDocument();
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "ul");
             int p = 1;
@@ -73,12 +80,5 @@ public class LinkScanGenerator extends AbstractGenerator {
             JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeConnection(conn);
         }
-    }
-
-    public void setDataSource(final DataSource dataSource) {
-        if (null == dataSource) {
-            throw new IllegalArgumentException("null dataSource");
-        }
-        this.dataSource = dataSource;
     }
 }

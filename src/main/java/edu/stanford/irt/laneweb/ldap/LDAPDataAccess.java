@@ -79,11 +79,6 @@ public class LDAPDataAccess {
 
     private SubjectSource subjectSource;
 
-    @Deprecated
-    public LDAPData getLdapData(final String sunetid) {
-        return getLdapDataForSunetid(sunetid);
-    }
-
     public LDAPData getLdapDataForSunetid(final String sunetid) {
         LDAPData ldapData = doGet("susunetid=" + sunetid);
         if (ldapData == null) {

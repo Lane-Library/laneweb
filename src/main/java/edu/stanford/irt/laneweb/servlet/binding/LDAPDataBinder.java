@@ -20,7 +20,7 @@ public class LDAPDataBinder implements DataBinder {
             String name = (String) session.getAttribute(Model.NAME);
             String univid = (String) session.getAttribute(Model.UNIVID);
             if (name == null) {
-                LDAPData ldapData = this.ldapDataAccess.getLdapData(sunetid);
+                LDAPData ldapData = this.ldapDataAccess.getLdapDataForSunetid(sunetid);
                 name = ldapData.getName();
                 univid = ldapData.getUnivId();
                 session.setAttribute(Model.NAME, name);

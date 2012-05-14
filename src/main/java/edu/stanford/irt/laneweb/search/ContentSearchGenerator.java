@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -38,17 +39,6 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
     private Map<String, String> parameters;
 
     private String timeout;
-
-    @Override
-    public void generate() {
-        PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.page);
-        mergedSearchResults.addAll(getContentResultList(doSearch()));
-        try {
-            mergedSearchResults.toSAX(getXMLConsumer());
-        } catch (SAXException e) {
-            throw new LanewebException(e);
-        }
-    }
 
     @SuppressWarnings("unchecked")
     public void initialize() {
@@ -81,6 +71,17 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     public void setParameters(final Map<String, String> parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
+        PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.page);
+        mergedSearchResults.addAll(getContentResultList(doSearch()));
+        try {
+            mergedSearchResults.toSAX(xmlConsumer);
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     @Override

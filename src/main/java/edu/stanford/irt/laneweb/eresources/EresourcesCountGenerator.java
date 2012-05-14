@@ -26,9 +26,30 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
 
     private Set<String> types = Collections.emptySet();
 
-    public void generate() {
+    public void setCollectionManager(final CollectionManager collectionManager) {
+        if (null == collectionManager) {
+            throw new IllegalArgumentException("null collectionManager");
+        }
+        this.collectionManager = collectionManager;
+    }
+
+    public void setModel(final Map<String, Object> model) {
+        this.query = ModelUtil.getString(model, Model.QUERY);
+        if (null == this.query) {
+            throw new IllegalArgumentException("null query");
+        }
+    }
+
+    public void setTypes(final Set<String> types) {
+        if (null == types) {
+            throw new IllegalArgumentException("null types");
+        }
+        this.types = types;
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
         Map<String, Integer> results = this.collectionManager.searchCount(this.types, null, this.query);
-        XMLConsumer xmlConsumer = getXMLConsumer();
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", SQL_NS);
@@ -50,26 +71,5 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
-    }
-
-    public void setCollectionManager(final CollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
-        this.collectionManager = collectionManager;
-    }
-
-    public void setModel(final Map<String, Object> model) {
-        this.query = ModelUtil.getString(model, Model.QUERY);
-        if (null == this.query) {
-            throw new IllegalArgumentException("null query");
-        }
-    }
-
-    public void setTypes(final Set<String> types) {
-        if (null == types) {
-            throw new IllegalArgumentException("null types");
-        }
-        this.types = types;
     }
 }

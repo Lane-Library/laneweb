@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.eresources;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
@@ -32,14 +33,6 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     private Map<String, String> parameters;
 
-    public void generate() {
-        try {
-            new PagingXMLizableEresourceList(getEresourceList(), this.page).toSAX(getXMLConsumer());
-        } catch (SAXException e) {
-            throw new LanewebException(e);
-        }
-    }
-
     public void initialize() {
         this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
                 Model.TYPE);
@@ -61,7 +54,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         try {
             this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
         } catch (NumberFormatException e) {
-            //if not 'all' or a number just give the first page:
+            // if not 'all' or a number just give the first page:
             this.page = 0;
         }
     }
@@ -79,6 +72,15 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     public void setParameters(final Map<String, String> parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
+        try {
+            new PagingXMLizableEresourceList(getEresourceList(), this.page).toSAX(xmlConsumer);
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     protected abstract Collection<edu.stanford.irt.eresources.Eresource> getEresourceList();

@@ -15,9 +15,13 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
  */
 public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerator implements ModelAware {
 
-    public void generate() {
+    public void setModel(final Map<String, Object> model) {
+        this.query = ModelUtil.getString(model, Model.QUERY, "bassett");
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
         Map<String, Integer> regionCountMap = this.collectionManager.searchCount(null, null, this.query);
-        XMLConsumer xmlConsumer = getXMLConsumer();
         try {
             xmlConsumer.startDocument();
             XMLLizableBassettCount xml = new XMLLizableBassettCount(regionCountMap);
@@ -26,9 +30,5 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
-    }
-
-    public void setModel(final Map<String, Object> model) {
-        this.query = ModelUtil.getString(model, Model.QUERY, "bassett");
     }
 }

@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
@@ -16,23 +17,23 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
 
     private CollectionManager collectionManager;
 
-    @Override
-    public void generate() {
-        PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.page);
-        mergedSearchResults.addAll(getEresourceList());
-        mergedSearchResults.addAll(getContentResultList(doSearch()));
-        try {
-            mergedSearchResults.toSAX(getXMLConsumer());
-        } catch (SAXException e) {
-            throw new LanewebException(e);
-        }
-    }
-
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
         }
         this.collectionManager = collectionManager;
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
+        PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.page);
+        mergedSearchResults.addAll(getEresourceList());
+        mergedSearchResults.addAll(getContentResultList(doSearch()));
+        try {
+            mergedSearchResults.toSAX(xmlConsumer);
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     private Collection<EresourceSearchResult> getEresourceList() {

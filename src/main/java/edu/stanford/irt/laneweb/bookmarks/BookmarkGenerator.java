@@ -3,6 +3,8 @@ package edu.stanford.irt.laneweb.bookmarks;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.cocoon.xml.XMLConsumer;
+
 import edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator;
 import edu.stanford.irt.laneweb.cocoon.ModelAware;
 import edu.stanford.irt.laneweb.model.Model;
@@ -12,8 +14,9 @@ public class BookmarkGenerator extends AbstractMarshallingGenerator implements M
 
     private List<Bookmark> bookmarks;
 
-    public void generate() {
-        marshall(this.bookmarks);
+    @Override
+    public void doGenerate(final XMLConsumer xmlConsumer) {
+        marshall(this.bookmarks, xmlConsumer);
     }
 
     @SuppressWarnings("unchecked")

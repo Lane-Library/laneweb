@@ -9,6 +9,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testGenerate() throws SAXException {
+    public void testGenerate() throws SAXException, IOException {
         expect(this.manager.search(isA(SimpleQuery.class), eq(0L), eq(Collections.<String> emptyList()), eq(true))).andReturn(
                 this.result);
         expect(this.result.getChildren()).andReturn(Collections.<Result> emptyList());

@@ -28,7 +28,9 @@ public class SHCCodecTest {
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.servlet.SHCCodec#decrypt(java.lang.String)}.
+     * Test method for
+     * {@link edu.stanford.irt.laneweb.servlet.SHCCodec#decrypt(java.lang.String)}
+     * .
      */
     @Test
     public final void testDecrypt() {
@@ -36,7 +38,9 @@ public class SHCCodecTest {
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.servlet.SHCCodec#encrypt(java.lang.String)}.
+     * Test method for
+     * {@link edu.stanford.irt.laneweb.servlet.SHCCodec#encrypt(java.lang.String)}
+     * .
      */
     @Test
     public final void testEncrypt() {

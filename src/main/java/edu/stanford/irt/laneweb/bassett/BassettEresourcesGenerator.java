@@ -23,7 +23,14 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator impleme
 
     private String region;
 
-    public void generate() {
+    public void setModel(final Map<String, Object> model) {
+        this.query = ModelUtil.getString(model, Model.QUERY);
+        this.region = ModelUtil.getString(model, Model.REGION);
+        this.bassettNumber = ModelUtil.getString(model, Model.BASSETT_NUMBER);
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
         Collection<Eresource> eresources = null;
         if (this.bassettNumber != null) {
             eresources = this.collectionManager.getById(this.bassettNumber);
@@ -36,7 +43,6 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator impleme
         } else if (this.query != null) {
             eresources = this.collectionManager.search(this.query);
         }
-        XMLConsumer xmlConsumer = getXMLConsumer();
         try {
             xmlConsumer.startDocument();
             XMLLizableBassettEresourceList xml = new XMLLizableBassettEresourceList(eresources);
@@ -45,11 +51,5 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator impleme
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
-    }
-
-    public void setModel(final Map<String, Object> model) {
-        this.query = ModelUtil.getString(model, Model.QUERY);
-        this.region = ModelUtil.getString(model, Model.REGION);
-        this.bassettNumber = ModelUtil.getString(model, Model.BASSETT_NUMBER);
     }
 }

@@ -41,7 +41,7 @@ public class VoyagerLoginController {
     public String getUnivId(final HttpSession session, @ModelAttribute(Model.SUNETID) final String sunetid) {
         String univId = (String) session.getAttribute(Model.UNIVID);
         if (univId == null) {
-            univId = this.ldapDataSource.getLdapData(sunetid).getUnivId();
+            univId = this.ldapDataSource.getLdapDataForSunetid(sunetid).getUnivId();
             if (univId != null) {
                 session.setAttribute(Model.UNIVID, univId);
             }

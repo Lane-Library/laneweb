@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
@@ -23,16 +24,6 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
     private Map<String, String> parameters;
 
     private String type;
-
-    public void generate() {
-        PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.page);
-        eresources.addAll(getEresourceList());
-        try {
-            eresources.toSAX(getXMLConsumer());
-        } catch (SAXException e) {
-            throw new LanewebException(e);
-        }
-    }
 
     public void initialize() {
         this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
@@ -54,6 +45,17 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
 
     public void setParameters(final Map<String, String> parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
+        PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.page);
+        eresources.addAll(getEresourceList());
+        try {
+            eresources.toSAX(xmlConsumer);
+        } catch (SAXException e) {
+            throw new LanewebException(e);
+        }
     }
 
     protected Collection<SearchResult> getEresourceList() {
