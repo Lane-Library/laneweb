@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.proxy;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -14,6 +15,14 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     private static final String HTTP_SCHEME = "http";
 
+    private XMLConsumer xmlConsumer;
+
+    @Override
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
+        super.setConsumer(xmlConsumer);
+    }
+
     @Override
     public void startElement(final String uri, final String localName, final String name, final Attributes atts)
             throws SAXException {
@@ -24,18 +33,18 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
                 String clazz = atts.getValue(CLASS);
                 // don't proxy if class contains noproxy
                 if (null != clazz && clazz.contains("noproxy")) {
-                    getXMLConsumer().startElement(uri, localName, name, atts);
+                    this.xmlConsumer.startElement(uri, localName, name, atts);
                     return;
                 }
                 // proxy if class contains proxy or isProxyableLink
                 if ((null != clazz && clazz.contains("proxy")) || getProxyHostManager().isProxyableLink(link)) {
                     AttributesImpl newAttributes = new AttributesImpl(atts);
                     newAttributes.setValue(newAttributes.getIndex(HREF), createProxyLink(link));
-                    getXMLConsumer().startElement(uri, localName, name, newAttributes);
+                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
                     return;
                 }
             }
         }
-        getXMLConsumer().startElement(uri, localName, name, atts);
+        this.xmlConsumer.startElement(uri, localName, name, atts);
     }
 }

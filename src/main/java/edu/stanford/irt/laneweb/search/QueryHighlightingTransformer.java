@@ -30,6 +30,8 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
 
     private Pattern queryPattern;
 
+    private XMLConsumer xmlConsumer;
+
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
         if (this.parseLevel > 0) {
@@ -42,7 +44,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
             }
             this.chars.put(ch, start, length);
         } else {
-            getXMLConsumer().characters(ch, start, length);
+            this.xmlConsumer.characters(ch, start, length);
         }
     }
 
@@ -59,7 +61,13 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
         else if (this.inTargetElement == true) {
             ++this.parseLevel;
         }
-        getXMLConsumer().endElement(uri, localName, qName);
+        this.xmlConsumer.endElement(uri, localName, qName);
+    }
+
+    @Override
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
+        super.setConsumer(xmlConsumer);
     }
 
     public void setModel(final Map<String, Object> model) {
@@ -83,7 +91,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
             handleMatches();
             this.parseLevel--;
         }
-        getXMLConsumer().startElement(uri, localName, qName, atts);
+        this.xmlConsumer.startElement(uri, localName, qName, atts);
     }
 
     private void handleMatches() throws SAXException {
@@ -91,23 +99,22 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
         this.chars.rewind();
         Matcher matcher = this.queryPattern.matcher(this.chars.subSequence(0, charsEnd));
         int current = 0;
-        XMLConsumer xmlConsumer = getXMLConsumer();
         while (current < charsEnd && matcher.find()) {
             int matchStart = matcher.start();
             int matchEnd = matcher.end();
             if (matchStart > current) {
                 // send chars before match:
-                xmlConsumer.characters(this.chars.array(), current, matchStart - current);
+                this.xmlConsumer.characters(this.chars.array(), current, matchStart - current);
             }
-            xmlConsumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
+            this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
             char[] match = matcher.group().toCharArray();
-            xmlConsumer.characters(match, 0, match.length);
-            xmlConsumer.endElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD);
+            this.xmlConsumer.characters(match, 0, match.length);
+            this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD);
             current = matchEnd;
         }
         if (current < charsEnd) {
             // send chars after last match:
-            xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
+            this.xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
         }
         this.chars.clear();
     }

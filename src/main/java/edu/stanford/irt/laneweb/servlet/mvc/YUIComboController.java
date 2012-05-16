@@ -54,6 +54,7 @@ public class YUIComboController extends WebContentGenerator implements ResourceL
         OutputStream output = response.getOutputStream();
         String queryString = request.getQueryString();
         CachedResponse cachedResponse = this.cache.get(queryString);
+        response.addHeader("Content-Type", "text/javascript");
         if (cachedResponse == null) {
             CachingOutputStream cachingOutput = new CachingOutputStream(output);
             StringTokenizer names = new StringTokenizer(queryString, "&");

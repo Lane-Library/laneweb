@@ -6,7 +6,7 @@ import java.io.StringReader;
 import java.util.Map;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.xml.ContentHandlerWrapper;
+import org.apache.cocoon.xml.EmbeddedXMLPipe;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
@@ -37,6 +37,8 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
 
     private boolean inElement = false;
 
+    private XMLConsumer xmlConsumer;
+
     public TextNodeParsingTransformer() {
         HTMLConfiguration conf = new HTMLConfiguration();
         conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
@@ -52,7 +54,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         if (this.inElement) {
             this.content.append(ch, start, length);
         } else {
-            getXMLConsumer().characters(ch, start, length);
+            this.xmlConsumer.characters(ch, start, length);
         }
     }
 
@@ -62,30 +64,22 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
             this.inElement = false;
             StringReader stringReader = new StringReader(this.content.toString());
             InputSource inputSource = new InputSource(stringReader);
-            XMLConsumer xmlConsumer = new ContentHandlerWrapper(getXMLConsumer()) {
+            XMLConsumer pipe = new EmbeddedXMLPipe(this.xmlConsumer) {
 
                 @Override
-                public void endDocument() {
-                    // Do nothing
-                }
-
-                @Override
-                public void processingInstruction(final String target, final String data) {
-                }
-
-                @Override
-                public void startDocument() {
+                // TODO: this shouldn't be here
+                public void processingInstruction(final String target, final String data) throws SAXException {
                 }
             };
             try {
-                this.htmlParser.setContentHandler(xmlConsumer);
+                this.htmlParser.setContentHandler(pipe);
                 this.htmlParser.parse(inputSource);
             } catch (IOException e) {
                 throw new LanewebException(e);
             }
         }
         this.content = new StringBuilder();
-        getXMLConsumer().endElement(uri, localName, qName);
+        this.xmlConsumer.endElement(uri, localName, qName);
     }
 
     @Override
@@ -99,6 +93,12 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     }
 
     @Override
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
+        super.setConsumer(xmlConsumer);
+    }
+
+    @Override
     public void setParameters(final Map<String, String> parameters) {
         String name = parameters.get("elementName");
         if (name != null) {
@@ -109,7 +109,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        getXMLConsumer().startElement(uri, localName, qName, atts);
+        this.xmlConsumer.startElement(uri, localName, qName, atts);
         if (this.elementName.equals(qName)) {
             this.inElement = true;
         }

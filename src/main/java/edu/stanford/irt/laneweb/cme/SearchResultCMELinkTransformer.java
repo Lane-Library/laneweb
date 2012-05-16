@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.cme;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -18,12 +19,14 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
 
     private boolean isSearchUrlElement = false;
 
+    private XMLConsumer xmlConsumer;
+
     @Override
     public void characters(final char ch[], final int start, final int length) throws SAXException {
         if (this.isSearchUrlElement) {
             this.characters.append(ch, start, length);
         } else {
-            getXMLConsumer().characters(ch, start, length);
+            this.xmlConsumer.characters(ch, start, length);
         }
     }
 
@@ -33,11 +36,17 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
             String value = this.characters.toString();
             if (isCMEHost(value)) {
                 String link = createCMELink(value);
-                getXMLConsumer().characters(link.toCharArray(), 0, link.length());
+                this.xmlConsumer.characters(link.toCharArray(), 0, link.length());
             }
             this.isSearchUrlElement = false;
         }
-        getXMLConsumer().endElement(uri, localName, qName);
+        this.xmlConsumer.endElement(uri, localName, qName);
+    }
+
+    @Override
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
+        super.setConsumer(xmlConsumer);
     }
 
     @Override
@@ -47,6 +56,6 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
             this.isSearchUrlElement = true;
             this.characters.setLength(0);
         }
-        getXMLConsumer().startElement(uri, localName, qName, atts);
+        this.xmlConsumer.startElement(uri, localName, qName, atts);
     }
 }

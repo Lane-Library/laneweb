@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon;
 
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 /**
@@ -12,6 +13,8 @@ public class NamespaceFilter extends AbstractTransformer {
     /** the number of xhtml ns mappings withoug end mapping */
     private int xhtmlPrefixLevel = 0;
 
+    private XMLConsumer xmlConsumer;
+
     /**
      * Only reports the end mapping to the next consumer if it is the last end
      * xhtml ns mapping.
@@ -21,9 +24,15 @@ public class NamespaceFilter extends AbstractTransformer {
         if ("".equals(prefix)) {
             --this.xhtmlPrefixLevel;
             if (this.xhtmlPrefixLevel == 0) {
-                getXMLConsumer().endPrefixMapping(prefix);
+                this.xmlConsumer.endPrefixMapping(prefix);
             }
         }
+    }
+
+    @Override
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
+        super.setConsumer(xmlConsumer);
     }
 
     /**
@@ -34,7 +43,7 @@ public class NamespaceFilter extends AbstractTransformer {
     public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
         if ("".equals(prefix) && "http://www.w3.org/1999/xhtml".equals(uri)) {
             if (this.xhtmlPrefixLevel == 0) {
-                getXMLConsumer().startPrefixMapping(prefix, uri);
+                this.xmlConsumer.startPrefixMapping(prefix, uri);
             }
             this.xhtmlPrefixLevel++;
         }
