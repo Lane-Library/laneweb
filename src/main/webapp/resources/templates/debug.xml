@@ -320,6 +320,8 @@
         <script type="text/javascript" src="/resources/javascript/lane-suggest.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search-pico.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search.js"></script>
+        <script type="text/javascript" src="/resources/javascript/link-plugin.js"></script>
+        <script type="text/javascript" src="/resources/javascript/bookmarks.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-tracking.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-expandies.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-google.js"></script>
@@ -345,7 +347,5 @@
         <script type="text/javascript" src="/resources/javascript/purchase-suggestions.js"></script>
         <script type="text/javascript" src="/resources/javascript/menu-delay.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search-printonly.js"></script>
-        <script type="text/javascript" src="/resources/javascript/link-plugin.js"></script>
-        <script type="text/javascript" src="/resources/javascript/bookmarks.js"></script>
     </body>
 </html>

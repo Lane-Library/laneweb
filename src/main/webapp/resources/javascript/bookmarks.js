@@ -638,13 +638,15 @@
             },
             
             /**
-             * Responds to mouseout on target anchors, changes the status to TIMING.
+             * Responds to mouseout on target anchors, checks if they are bookmarkable, changes the status to TIMING.
              * @method _handleTargetMouseout
              * @private
              * @param event {CustomEvent}
              */
             _handleTargetMouseout : function(event) {
-                this.set("status", BookmarkLink.TIMING);
+                if (this._isBookmarkable(event.currentTarget)) {
+                    this.set("status", BookmarkLink.TIMING);
+                }
             },
             
             /**
@@ -707,7 +709,7 @@
                 //so purging and selectively set them when the status changes.
                 node.purge(false);
                 //style link differently if for the search form
-                if (this.get("target").get("id") == "search") {
+                if (target.get("id") == "search") {
                     node.addClass("search");
                 } else {
                     node.removeClass("search");

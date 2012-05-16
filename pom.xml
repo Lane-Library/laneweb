@@ -826,6 +826,8 @@
                                         <include>lane-suggest-min.js</include>
                                         <include>lane-search-pico-min.js</include>
                                         <include>lane-search-min.js</include>
+                                        <include>link-plugin-min.js</include>
+                                        <include>bookmarks-min.js</include>    
                                         <include>lane-tracking-min.js</include>
                                         <include>lane-expandies-min.js</include>
                                         <include>lane-google-min.js</include>
@@ -850,9 +852,7 @@
                                         <include>banner-min.js</include>
                                         <include>purchase-suggestions-min.js</include>
                                         <include>menu-delay-min.js</include>
-                                        <include>lane-search-printonly-min.js</include>
-                                        <include>link-plugin-min.js</include>
-                                        <include>bookmarks-min.js</include>                                        
+                                        <include>lane-search-printonly-min.js</include>                                    
                                     </includes>
                                 </aggregation>
                                 <aggregation>

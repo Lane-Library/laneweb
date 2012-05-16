@@ -247,7 +247,9 @@
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
         if (Y.lane.BookmarksWidget) {
             Y.lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
-                alert("addSync");
+                LANE.tracking.track({
+                    title: "lane:bookmark: " + event.bookmark.getLabel()
+                });
             });
         }
 })();
