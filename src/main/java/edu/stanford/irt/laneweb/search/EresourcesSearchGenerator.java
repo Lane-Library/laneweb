@@ -10,25 +10,15 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.cocoon.Initializable;
 import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class EresourcesSearchGenerator extends AbstractSearchGenerator implements ParametersAware, Initializable {
+public class EresourcesSearchGenerator extends AbstractSearchGenerator implements ParametersAware {
 
     private CollectionManager collectionManager;
 
-    private Map<String, Object> model;
-
-    private Map<String, String> parameters;
-
     private String type;
-
-    public void initialize() {
-        this.type = this.parameters.containsKey(Model.TYPE) ? this.parameters.get(Model.TYPE) : ModelUtil.getString(this.model,
-                Model.TYPE);
-    }
 
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
@@ -40,11 +30,13 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        this.model = model;
+        this.type = ModelUtil.getString(model, Model.TYPE);
     }
 
     public void setParameters(final Map<String, String> parameters) {
-        this.parameters = parameters;
+        if (parameters.containsKey(Model.TYPE)) {
+            this.type = parameters.get(Model.TYPE);
+        }
     }
 
     @Override

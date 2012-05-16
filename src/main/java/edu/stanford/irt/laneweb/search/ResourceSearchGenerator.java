@@ -13,10 +13,6 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
 
-    private Map<String, Object> model;
-
-    private Map<String, String> parameters;
-
     private Collection<String> resources;
 
     @Override
@@ -39,27 +35,20 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void initialize() {
-        super.initialize();
-        this.resources = ModelUtil.getObject(this.model, Model.RESOURCES, Collection.class);
-        if (this.resources == null) {
-            String resourceList = this.parameters.get("resource-list");
-            if (resourceList == null) {
-                throw new IllegalArgumentException("null resource-list");
-            }
-            this.resources = Arrays.asList(resourceList.split(","));
-        }
-    }
-
-    @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        this.model = model;
+        this.resources = ModelUtil.getObject(model, Model.RESOURCES, Collection.class);
     }
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
-        this.parameters = parameters;
+        if (this.resources == null) {
+            String resourceList = parameters.get("resource-list");
+            if (resourceList == null) {
+                throw new IllegalArgumentException("null resource-list");
+            }
+            this.resources = Arrays.asList(resourceList.split(","));
+        }
     }
 }

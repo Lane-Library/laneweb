@@ -1,11 +1,6 @@
 package edu.stanford.irt.laneweb.proxy;
 
-import java.io.Serializable;
 import java.util.Map;
-
-import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.validity.NOPValidity;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 import edu.stanford.irt.laneweb.cocoon.ModelAware;
@@ -13,7 +8,7 @@ import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractProxyLinkTransformer extends AbstractTransformer implements CacheableProcessingComponent, ModelAware {
+public abstract class AbstractProxyLinkTransformer extends AbstractTransformer implements ModelAware {
 
     private static final String EZPROXY_LINK = "http://laneproxy.stanford.edu/login?user=";
 
@@ -34,18 +29,6 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer i
     private String sunetid;
 
     private Ticket ticket;
-
-    public Serializable getKey() {
-        return Boolean.toString(this.proxyLinks);
-    }
-
-    public SourceValidity getValidity() {
-        SourceValidity validity = null;
-        if (!this.proxyLinks) {
-            validity = NOPValidity.SHARED_INSTANCE;
-        }
-        return validity;
-    }
 
     public void setModel(final Map<String, Object> model) {
         this.sunetid = ModelUtil.getString(model, Model.SUNETID);

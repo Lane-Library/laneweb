@@ -13,7 +13,6 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.cocoon.Initializable;
 import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -24,7 +23,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 /**
  * @author ryanmax
  */
-public class ContentSearchGenerator extends AbstractMetasearchGenerator implements ParametersAware, Initializable {
+public class ContentSearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
 
     private static final Pattern CONTENT_PATTERN = Pattern.compile(".*_content");
 
@@ -34,26 +33,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     private long defaultTimeout;
 
-    private Map<String, Object> model;
-
-    private Map<String, String> parameters;
-
     private String timeout;
-
-    @SuppressWarnings("unchecked")
-    public void initialize() {
-        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameters.get(Model.TIMEOUT));
-        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
-        if (this.engines.size() == 0) {
-            String engineList = this.parameters.get(Model.ENGINES);
-            if (engineList != null) {
-                this.engines = new LinkedList<String>();
-                for (StringTokenizer st = new StringTokenizer(engineList, ","); st.hasMoreTokens();) {
-                    this.engines.add(st.nextToken());
-                }
-            }
-        }
-    }
 
     public void setContentResultLimit(final int contentResultLimit) {
         this.contentResultLimit = contentResultLimit;
@@ -63,14 +43,27 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
         this.defaultTimeout = defaultTimeout;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        this.model = model;
+        this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
+        this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
     }
 
     public void setParameters(final Map<String, String> parameters) {
-        this.parameters = parameters;
+        if (this.timeout == null) {
+            this.timeout = parameters.get(Model.TIMEOUT);
+        }
+        if (this.engines.size() == 0) {
+            String engineList = parameters.get(Model.ENGINES);
+            if (engineList != null) {
+                this.engines = new LinkedList<String>();
+                for (StringTokenizer st = new StringTokenizer(engineList, ","); st.hasMoreTokens();) {
+                    this.engines.add(st.nextToken());
+                }
+            }
+        }
     }
 
     @Override
