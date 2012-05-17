@@ -19,17 +19,15 @@ public class SunetIdCookieCodec {
 
     private static final String COOKIE_VALUE_SEPARATOR = "%";
 
-    private static final String KEY = "stanfordlanelibraryir";
-
     private Cipher cipher;
 
     private SecretKey desKey;
 
-    public SunetIdCookieCodec() {
+    public SunetIdCookieCodec(final String key) {
         try {
             // latest version of commons-codec (1.6) does not pad with 0 bytes
             // to 16, so do that here:
-            byte[] src = Base64.decodeBase64(KEY.getBytes("UTF-8"));
+            byte[] src = Base64.decodeBase64(key.getBytes("UTF-8"));
             byte[] dst = new byte[16];
             System.arraycopy(src, 0, dst, 0, src.length);
             this.desKey = new SecretKeySpec(dst, "AES");

@@ -17,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,7 +31,7 @@ public class PersistentLoginController {
 
     public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
 
-    private SunetIdCookieCodec codec = new SunetIdCookieCodec();
+    private SunetIdCookieCodec codec;
 
     private SunetIdSource sunetIdSource = new SunetIdSource();
 
@@ -63,6 +64,11 @@ public class PersistentLoginController {
     public String secureRemoveCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
         removeCookies(request, response);
         return setView(url, request, response);
+    }
+
+    @Autowired
+    public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
+        this.codec = codec;
     }
 
     private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {

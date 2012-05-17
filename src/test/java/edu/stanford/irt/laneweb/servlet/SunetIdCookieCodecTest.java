@@ -18,7 +18,7 @@ public class SunetIdCookieCodecTest {
 
     @Before
     public void setUp() {
-        this.codec = new SunetIdCookieCodec();
+        this.codec = new SunetIdCookieCodec("key");
     }
 
     @Test
@@ -46,10 +46,5 @@ public class SunetIdCookieCodecTest {
             fail();
         } catch (IllegalArgumentException e) {
         }
-    }
-
-    @Test
-    public void testSunetIdCookieCodec() {
-        new SunetIdCookieCodec();
     }
 }

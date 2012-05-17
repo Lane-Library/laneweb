@@ -17,3 +17,6 @@ laneweb.context.medblog-base=
 laneweb.context.metasearch-failed=
 laneweb.log4j.root.priority.value=
 laneweb.log4j.root.appender-ref.ref=
+laneweb.shccodec.key=
+laneweb.shccodec.vector=
+laneweb.sunetidcookiecodec.key=

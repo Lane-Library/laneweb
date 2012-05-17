@@ -70,6 +70,10 @@
     <filter>
         <filter-name>persistent-login</filter-name>
         <filter-class>edu.stanford.irt.laneweb.servlet.PersistentLoginFilter</filter-class>
+        <init-param>
+            <param-name>laneweb.sunetidcookiecodec.key</param-name>
+            <param-value>${laneweb.sunetidcookiecodec.key}</param-value>
+        </init-param>
     </filter>
     
     <filter>

@@ -20,7 +20,7 @@ public class SunetIdSource {
      * this codec codes and decodes the cookie value using sunet id, useragent
      * and time of creation
      */
-    private SunetIdCookieCodec codec = new SunetIdCookieCodec();
+    private SunetIdCookieCodec codec;
 
     private Logger log = LoggerFactory.getLogger(SunetIdSource.class);
 
@@ -39,6 +39,10 @@ public class SunetIdSource {
             session.setAttribute(Model.SUNETID, sunetid);
         }
         return sunetid;
+    }
+
+    public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
+        this.codec = codec;
     }
 
     private String getSunetidFromCookie(final Cookie[] cookies, final String userAgent) {

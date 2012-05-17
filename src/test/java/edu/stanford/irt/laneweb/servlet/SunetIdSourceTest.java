@@ -20,7 +20,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class SunetIdSourceTest {
 
-    private SunetIdCookieCodec codec = new SunetIdCookieCodec();
+    private SunetIdCookieCodec codec = new SunetIdCookieCodec("key");
 
     private Cookie cookie;
 
@@ -33,6 +33,8 @@ public class SunetIdSourceTest {
     @Before
     public void setUp() throws Exception {
         this.sunetidSource = new SunetIdSource();
+        this.codec = new SunetIdCookieCodec("key");
+        this.sunetidSource.setSunetIdCookieCodec(this.codec);
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
         this.cookie = createMock(Cookie.class);

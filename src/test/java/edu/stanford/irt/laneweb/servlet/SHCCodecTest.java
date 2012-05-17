@@ -13,18 +13,19 @@ import org.junit.Test;
  */
 public class SHCCodecTest {
 
-    String ciphertext = "sbDXoSTqnSX0wuCP6JtvAAh9Ll9CWPdMR8Y5EcQ8WXw=";
+    private String ciphertext = "9muniFwV90BgjxJpnNC2pE/AY8pWD5iajvRw2uCTOfg=";
 
-    SHCCodec codec;
+    private SHCCodec codec;
 
-    String plaintext = "plain piece of text";
+    private String plaintext = "plain piece of text";
 
     /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
-        this.codec = new SHCCodec();
+        // note: not the real key and vector:
+        this.codec = new SHCCodec("yfGIl68aDih3DamkzIJeYA==", "ABCDEFGHIJKLMNOP");
     }
 
     /**

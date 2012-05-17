@@ -721,9 +721,11 @@
             <version>3.1.1.RELEASE</version>
         </dependency>
         <dependency>
+            <!-- required only for shccodec key generation -->
         	<groupId>bouncycastle</groupId>
         	<artifactId>bcprov-jdk16</artifactId>
         	<version>140</version>
+        	<optional>true</optional>
         </dependency>
     </dependencies>
     <profiles>

@@ -16,8 +16,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.servlet.PersistentLoginFilter;
+import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 
 public class PersistentLoginControllerTest {
+
+    private SunetIdCookieCodec codec;
 
     private PersistentLoginController persistenLoginController;
 
@@ -37,6 +40,8 @@ public class PersistentLoginControllerTest {
         this.session = createMock(HttpSession.class);
         this.response.addCookie(isA(Cookie.class));
         this.response.addCookie(isA(Cookie.class));
+        this.codec = new SunetIdCookieCodec("key");
+        this.persistenLoginController.setSunetIdCookieCodec(this.codec);
     }
 
     @Test

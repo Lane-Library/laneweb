@@ -18,11 +18,12 @@ import edu.stanford.irt.laneweb.servlet.SHCCodec;
 @Controller
 public class SHCLoginController {
 
-    private static final SHCCodec CODEC = new SHCCodec();
-
     private static final String ERROR_URL = "/shc-login-error.html?sourceid=shc";
 
     private static final String SUCCESS_URL = "/portals/shc.html?sourceid=shc";
+
+    @Autowired
+    private SHCCodec codec;
 
     @Autowired
     private LDAPDataAccess ldapDataSource;
@@ -39,18 +40,18 @@ public class SHCLoginController {
     }
 
     @RequestMapping(value = "/shclogin")
-    public void login(@RequestParam final String emrid, @RequestParam final String univid,
-            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+    public void login(@RequestParam final String emrid, @RequestParam final String univid, final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         String url = ERROR_URL;
         String sunetid = null;
         String decryptedEmrid = null;
         String decryptedUnivid = null;
-        decryptedEmrid = CODEC.decrypt(emrid);
+        decryptedEmrid = this.codec.decrypt(emrid);
         if (decryptedEmrid != null) {
             session.setAttribute(Model.EMRID, decryptedEmrid);
         }
-        decryptedUnivid = CODEC.decrypt(univid);
+        decryptedUnivid = this.codec.decrypt(univid);
         if (decryptedUnivid != null) {
             session.setAttribute(Model.UNIVID, decryptedUnivid);
             sunetid = getSunetid(session, decryptedUnivid);

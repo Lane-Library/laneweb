@@ -126,5 +126,19 @@
             </map>
         </property>
     </bean>
-
+    
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- change from default because of maven filter properties seen as properties in dev environment -->
+        <property name="placeholderPrefix" value="%{"></property>
+    </bean>
+    
+    <bean class="edu.stanford.irt.laneweb.servlet.SHCCodec">
+        <constructor-arg value="%{laneweb.shccodec.key}"/>
+        <constructor-arg value="%{laneweb.shccodec.vector}"/>
+    </bean>
+    
+    <bean class="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec">
+        <constructor-arg value="%{laneweb.sunetidcookiecodec.key}"/>
+    </bean>
+    
 </beans>

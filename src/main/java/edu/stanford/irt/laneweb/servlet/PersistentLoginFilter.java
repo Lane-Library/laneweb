@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +22,17 @@ public class PersistentLoginFilter extends AbstractLanewebFilter {
      * this codec codes and decodes the cookie value using sunet id, useragent
      * and time of creation
      */
-    private SunetIdCookieCodec codec = new SunetIdCookieCodec();
+    private SunetIdCookieCodec codec;
 
-    private SunetIdSource sunetIdSource = new SunetIdSource();
+    private SunetIdSource sunetIdSource;
+
+    @Override
+    public void init(final FilterConfig filterConfig) {
+        super.init(filterConfig);
+        this.codec = new SunetIdCookieCodec(filterConfig.getInitParameter("laneweb.sunetidcookiecodec.key"));
+        this.sunetIdSource = new SunetIdSource();
+        this.sunetIdSource.setSunetIdCookieCodec(this.codec);
+    }
 
     @Override
     public void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)

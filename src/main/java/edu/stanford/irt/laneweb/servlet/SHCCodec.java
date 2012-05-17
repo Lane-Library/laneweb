@@ -14,23 +14,42 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
-import org.bouncycastle.crypto.digests.SHA1Digest;
-import org.bouncycastle.crypto.generators.PKCS5S1ParametersGenerator;
-import org.bouncycastle.crypto.params.KeyParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SHCCodec {
 
-    private static final String INITIAL_VECTOR = "KL75*$kjodh89ds4";
-
-    private static final int ITERATIONS = 2;
-
-    private static final int KEY_LENGTH = 128;
-
-    private static final String PASSWORD = "Stanford@2012";
-
-    private static final String SALT = "Stanford1!";
+    /**
+     * prints the key for the given password (first argument) and salt (second
+     * argument)
+     * 
+     * @param args
+     * @throws UnsupportedEncodingException
+     */
+    public static void main(final String[] args) throws UnsupportedEncodingException {
+        /*
+         * Derive the key, given password, salt, iterations, and keylength, as
+         * specified here: https://irt-bugs.stanford.edu/default.asp?68825
+         */
+        /*
+         * SHC using .NET PasswordDeriveBytes Class for key generation
+         * http://msdn.microsoft.com/en-us/library/zb9zth5a%28v=vs.110%29.aspx
+         * "This class uses an extension of the PBKDF1 algorithm defined in the PKCS#5 v2.0 standard to derive bytes suitable for use as key material from a password. The standard is documented in IETF RRC 2898."
+         * mimic .NET PasswordDeriveBytes using PKCS5S1ParametersGenerator
+         * http:/
+         * /bouncy-castle.1462172.n4.nabble.com/NET-PasswordDeriveBytes-td1462616
+         * .html
+         */
+        // org.bouncycastle.crypto.generators.PKCS5S1ParametersGenerator
+        // generator = new
+        // org.bouncycastle.crypto.generators.PKCS5S1ParametersGenerator(new
+        // org.bouncycastle.crypto.digests.SHA1Digest());
+        // generator.init(args[0].getBytes("ASCII"), args[1].getBytes("ASCII"),
+        // 2);
+        // byte[] keyBytes = ((org.bouncycastle.crypto.params.KeyParameter)
+        // generator.generateDerivedParameters(128)).getKey();
+        // System.out.println(Base64.encodeBase64String(keyBytes));
+    }
 
     private Cipher cipher;
 
@@ -38,30 +57,18 @@ public class SHCCodec {
 
     private Logger log = LoggerFactory.getLogger(SHCCodec.class);
 
-    private byte[] saltBytes;
-
     private SecretKey secretKey;
 
-    public SHCCodec() {
-        /*
-         * Derive the key, given password, salt, iterations, and keylength, as specified here:
-         * https://irt-bugs.stanford.edu/default.asp?68825
-         */
+    public SHCCodec(final String key, final String vector) {
         try {
-            this.saltBytes = SALT.getBytes("ASCII");
-            /*
-             * SHC using .NET PasswordDeriveBytes Class for key generation
-             * http://msdn.microsoft.com/en-us/library/zb9zth5a%28v=vs.110%29.aspx
-             * "This class uses an extension of the PBKDF1 algorithm defined in the PKCS#5 v2.0 standard to derive bytes suitable for use as key material from a password. The standard is documented in IETF RRC 2898."
-             * mimic .NET PasswordDeriveBytes using PKCS5S1ParametersGenerator
-             * http://bouncy-castle.1462172.n4.nabble.com/NET-PasswordDeriveBytes-td1462616.html
-             */
-            PKCS5S1ParametersGenerator generator = new PKCS5S1ParametersGenerator(new SHA1Digest());
-            generator.init(PASSWORD.getBytes("ASCII"), this.saltBytes, ITERATIONS);
-            byte[] keyBytes = ((KeyParameter) generator.generateDerivedParameters(KEY_LENGTH)).getKey();
-            this.secretKey = new SecretKeySpec(keyBytes, "AES");
+            // latest version of commons-codec (1.6) does not pad with 0 bytes
+            // to 16, so do that here:
+            byte[] src = Base64.decodeBase64(key);
+            byte[] dst = new byte[16];
+            System.arraycopy(src, 0, dst, 0, src.length);
+            this.secretKey = new SecretKeySpec(dst, "AES");
             this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            this.initialVectorBytes = INITIAL_VECTOR.getBytes("ASCII");
+            this.initialVectorBytes = vector.getBytes("ASCII");
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);
         } catch (NoSuchAlgorithmException e) {

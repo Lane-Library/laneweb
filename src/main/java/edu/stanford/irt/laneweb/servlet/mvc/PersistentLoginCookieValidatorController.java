@@ -6,6 +6,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,8 @@ public class PersistentLoginCookieValidatorController {
 
     private static final String USER_AGENT_HEADER = "User-Agent";
 
-    private SunetIdCookieCodec codec = new SunetIdCookieCodec();
+    @Autowired
+    private SunetIdCookieCodec codec;
 
     @RequestMapping(value = "**/apps/loginCookieValidator")
     public void validateCookie(final HttpServletRequest request, final HttpServletResponse response,
