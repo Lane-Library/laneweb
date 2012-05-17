@@ -132,13 +132,19 @@
         <property name="placeholderPrefix" value="%{"></property>
     </bean>
     
-    <bean class="edu.stanford.irt.laneweb.servlet.SHCCodec">
+    <bean id="edu.stanford.irt.laneweb.servlet.SHCCodec"
+        class="edu.stanford.irt.laneweb.servlet.SHCCodec">
         <constructor-arg value="%{laneweb.shccodec.key}"/>
         <constructor-arg value="%{laneweb.shccodec.vector}"/>
     </bean>
     
     <bean class="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec">
         <constructor-arg value="%{laneweb.sunetidcookiecodec.key}"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.SunetIdSource"
+        class="edu.stanford.irt.laneweb.servlet.SunetIdSource">
+        <property name="sunetIdCookieCodec" ref="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec"/>
     </bean>
     
 </beans>

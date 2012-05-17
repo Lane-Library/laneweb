@@ -27,7 +27,8 @@ public class VoyagerLoginController {
     @Autowired
     private LDAPDataAccess ldapDataSource;
 
-    private SunetIdSource sunetIdSource = new SunetIdSource();
+    @Autowired
+    private SunetIdSource sunetIdSource;
 
     @Autowired
     private Map<String, VoyagerLogin> voyagerLogins;

@@ -33,7 +33,7 @@ public class PersistentLoginController {
 
     private SunetIdCookieCodec codec;
 
-    private SunetIdSource sunetIdSource = new SunetIdSource();
+    private SunetIdSource sunetIdSource;
 
     @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
     public String createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
@@ -69,6 +69,11 @@ public class PersistentLoginController {
     @Autowired
     public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
         this.codec = codec;
+    }
+    
+    @Autowired
+    public void setSunetIdSource(final SunetIdSource sunetIdSource) {
+        this.sunetIdSource = sunetIdSource;
     }
 
     private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {

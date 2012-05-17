@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
+import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 
 public class SunetIdAndTicketDataBinderTest {
 
@@ -31,6 +32,8 @@ public class SunetIdAndTicketDataBinderTest {
     private HttpServletRequest request;
 
     private HttpSession session;
+    
+    private SunetIdSource sunetIdSource;
 
     @Before
     public void setUp() throws Exception {
@@ -39,21 +42,23 @@ public class SunetIdAndTicketDataBinderTest {
         this.model = new HashMap<String, Object>();
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
+        this.sunetIdSource = createMock(SunetIdSource.class);
+        this.dataBinder.setSunetIdSource(this.sunetIdSource);
     }
 
     @Test
     public void testBind() {
-        expect(this.request.getSession()).andReturn(this.session).times(2);
-        expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.TICKET)).andReturn(null);
         this.session.setAttribute(eq(Model.TICKET), isA(Ticket.class));
-        replay(this.request, this.session);
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("ditenus");
+        replay(this.request, this.session, this.sunetIdSource);
         this.model.put(Model.SUNETID, "ditenus");
         this.dataBinder.bind(this.model, this.request);
         Ticket ticket = (Ticket) this.model.get(Model.TICKET);
         assertNotNull(ticket);
         assertTrue(ticket.isValid());
         assertEquals("ditenus", this.model.get(Model.SUNETID));
-        verify(this.request, this.session);
+        verify(this.request, this.session, this.sunetIdSource);
     }
 }

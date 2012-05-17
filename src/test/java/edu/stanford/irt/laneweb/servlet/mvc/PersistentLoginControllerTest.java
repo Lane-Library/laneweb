@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.servlet.PersistentLoginFilter;
 import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
+import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 
 public class PersistentLoginControllerTest {
 
@@ -31,6 +32,8 @@ public class PersistentLoginControllerTest {
     private HttpSession session;
 
     private String url = "/test.html";
+    
+    private SunetIdSource sunetIdSource;
 
     @Before
     public void setUp() throws Exception {
@@ -42,103 +45,96 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(isA(Cookie.class));
         this.codec = new SunetIdCookieCodec("key");
         this.persistenLoginController.setSunetIdCookieCodec(this.codec);
+        this.sunetIdSource = createMock(SunetIdSource.class);
+        this.persistenLoginController.setSunetIdSource(this.sunetIdSource);
     }
 
     @Test
     public void testCreateCookieNotNullUrl() {
-        expect(this.session.getAttribute("sunetid")).andReturn("alainb").times(2);
-        expect(this.request.getSession()).andReturn(this.session).times(2);
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb").times(2);
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         this.response.addCookie(isA(Cookie.class));
-        replay(this.request, this.response, this.session);
+        replay(this.sunetIdSource, this.request, this.response, this.session);
         String viewUrl = this.persistenLoginController.createCookie(this.url, this.request, this.response);
         assertEquals(viewUrl, "redirect:/test.html");
-        verify(this.request, this.session, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
     }
 
     @Test
     public void testCreateCookieNullUrl() {
-        expect(this.session.getAttribute("sunetid")).andReturn("alainb").times(2);
-        expect(this.request.getSession()).andReturn(this.session).times(2);
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb").times(2);
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         this.response.addCookie(isA(Cookie.class));
         this.response.setCharacterEncoding(isA(String.class));
-        replay(this.request, this.response, this.session);
+        replay(this.sunetIdSource, this.request, this.response, this.session);
         String viewUrl = this.persistenLoginController.createCookie(null, this.request, this.response);
         assertEquals(viewUrl, "redirect:/myaccounts.html");
-        verify(this.request, this.session, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
     }
 
     @Test
     public void testCreateCookieSunetIdNull() {
-        expect(this.request.getSession()).andReturn(this.session).times(2);
-        expect(this.request.getRemoteUser()).andReturn(null).times(2);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null).times(2);
-        expect(this.request.getHeader("User-Agent")).andReturn("firefox").times(2);
-        expect(this.session.getAttribute("sunetid")).andReturn(null).times(2);
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn(null).times(2);
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, null);
         this.response.addCookie(isA(Cookie.class));
         this.response.addCookie(isA(Cookie.class));
-        expect(this.request.getCookies()).andReturn(cookies).times(3);
-        replay(this.request, this.session, this.response);
+        expect(this.request.getCookies()).andReturn(cookies);
+        replay(this.sunetIdSource, this.request, this.session, this.response);
         this.persistenLoginController.createCookie(this.url, this.request, this.response);
-        verify(this.request, this.session, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
     }
 
     @Test
     public void testRemoveCookieUrlNotNull() {
-        expect(this.session.getAttribute("sunetid")).andReturn("alainb");
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234890");
         expect(this.request.getCookies()).andReturn(cookies);
-        expect(this.request.getSession()).andReturn(this.session);
         this.response.addCookie(isA(Cookie.class));
-        replay(this.request, this.session, this.response);
+        replay(this.sunetIdSource, this.request, this.session, this.response);
         String viewUrl = this.persistenLoginController.removeCookieAndView(this.url, this.request, this.response);
         assertEquals(viewUrl, "redirect:/test.html");
-        verify(this.request, this.session, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
     }
 
     @Test
     public void testRemoveCookieUrlNull() {
-        expect(this.session.getAttribute("sunetid")).andReturn("alainb");
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234033");
         expect(this.request.getCookies()).andReturn(cookies);
-        expect(this.request.getSession()).andReturn(this.session);
         this.response.addCookie(isA(Cookie.class));
         this.response.setCharacterEncoding(isA(String.class));
-        replay(this.request, this.session, this.response);
+        replay(this.sunetIdSource, this.request, this.session, this.response);
         String viewUrl = this.persistenLoginController.removeCookieAndView(null, this.request, this.response);
         assertEquals(viewUrl, "redirect:/myaccounts.html");
-        verify(this.request, this.session, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
     }
 
     @Test
     public void testRemoveWithDeniedCookie() {
-        expect(this.session.getAttribute("sunetid")).andReturn("alainb");
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "denied");
         expect(this.request.getCookies()).andReturn(cookies);
-        expect(this.request.getSession()).andReturn(this.session);
-        replay(this.request, this.session, this.response);
+        replay(this.sunetIdSource, this.request, this.session, this.response);
         String viewUrl = this.persistenLoginController.removeCookieAndView(this.url, this.request, this.response);
         assertEquals(viewUrl, "redirect:/test.html");
-        verify(this.request, this.session, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
     }
 
     @Test
     public void testRenewCookieActiveSunetId() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         expect(this.session.getAttribute("isActiveSunetID")).andReturn(true);
-        expect(this.session.getAttribute("sunetid")).andReturn("alainb");
-        expect(this.request.getSession()).andReturn(this.session).times(2);
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         this.response.addCookie(isA(Cookie.class));
-        replay(this.request, this.response, this.session);
+        replay(this.sunetIdSource, this.request, this.response, this.session);
         String viewUrl = this.persistenLoginController.renewCookieAndRedirect(this.url, this.request, this.response);
         assertEquals(viewUrl, "redirect:/test.html");
-        verify(this.request, this.session, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
     }
 
     @Test
@@ -150,9 +146,9 @@ public class PersistentLoginControllerTest {
         expect(this.request.getSession()).andReturn(this.session);
         this.response.addCookie(isA(Cookie.class));
         this.response.addCookie(isA(Cookie.class));
-        replay(this.request, this.session, this.response);
+        replay(this.sunetIdSource, this.request, this.session, this.response);
         String viewUrl = this.persistenLoginController.renewCookieAndRedirect(this.url, this.request, this.response);
         assertEquals(viewUrl, "redirect:/test.html");
-        verify(this.request, this.session, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
     }
 }

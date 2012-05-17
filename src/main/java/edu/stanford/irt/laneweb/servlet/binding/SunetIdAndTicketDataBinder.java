@@ -13,7 +13,7 @@ public class SunetIdAndTicketDataBinder implements DataBinder {
 
     private String ezproxyKey;
 
-    private SunetIdSource sunetIdSource = new SunetIdSource();
+    private SunetIdSource sunetIdSource;
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String sunetid = this.sunetIdSource.getSunetid(request);
@@ -31,5 +31,9 @@ public class SunetIdAndTicketDataBinder implements DataBinder {
 
     public void setEzproxyKey(final String ezproxyKey) {
         this.ezproxyKey = ezproxyKey;
+    }
+
+    public void setSunetIdSource(final SunetIdSource sunetIdSource) {
+        this.sunetIdSource = sunetIdSource;
     }
 }
