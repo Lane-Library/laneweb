@@ -1,6 +1,6 @@
 
 
-var cookieMock;
+
 var redirectUrl,
 	LANE_USER_COOKIE_NAME = 'user',
 	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference',
@@ -108,9 +108,7 @@ $.LANE.toggleLogin = function(){
             $(this).attr('href','/././secure/mobile-login.html');
             $(this).attr('data-ajax','false');
         });
-    }
-	if(cookieMock && cookieMock.name)
-		$('#sunetId').text(cookieMock.name);
+    }	
 };
 
 
@@ -126,8 +124,8 @@ var setLink = function(event) {
 	if (node.nodeName == 'SPAN') {
 		node = node.parentNode;
 	}
-	 if (!cookieMock.valid ) {
-	 url = url + 'secure/';
+	 if ( ! $.LANE.getCookie(LANE_USER_COOKIE_NAME) ) {
+		 url = url + 'secure/';
 	 }
 	event.preventDefault();
 	document.location = url + 'persistentLogin.html' + node.search + '&url=' + redirectUrl;
