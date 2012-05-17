@@ -31,6 +31,19 @@ body.ui-mobile-viewport,.ui-body-c {
     visibility: visible;
 }
 
+/*persistentlogin  */ 
+.ui-dialog .ui-header, 
+.ui-dialog .ui-content, 
+.ui-dialog .ui-footer { 
+	max-width: 400px;
+	background-color: #ffffff; 
+  	margin: 10% auto 15px auto; 
+}
+
+
+
+
+
 .ui-mobile .ui-page-active {
     overflow: hidden;
     height: auto;

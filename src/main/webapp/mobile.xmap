@@ -120,7 +120,7 @@
             <map:match pattern="**.html" type="wildcard">
                 <map:aggregate element="doc" label="content">
                     <map:part src="{content-base}/m/{1}.html"/>
-                    <map:part src="resources/mobile/template.xml"/>
+                    <map:part src="resources/mobile/{template}.xml"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:transform type="xinclude"/>
