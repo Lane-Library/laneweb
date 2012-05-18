@@ -49,6 +49,7 @@
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
         <meta name="ipGroup" content="{ipGroup}"/>
+        <meta name="auth" content=""/>
     </head>
     <body>
         <div id="custom-doc" class="yui-t7">

@@ -19,6 +19,9 @@
                     gaPageTracker._setVar(meta.get('content'));
                     gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);
                 }
+                if (Y.one('html head meta[name="auth"][content="true"]')) {
+                    gaPageTracker._setCustomVar(2,'authenticatedSession','true',2);
+                }
                 gaPageTracker._trackPageview();
                 LANE.tracking.addTracker({
                     track: function(trackingData) {

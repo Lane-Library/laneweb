@@ -262,6 +262,13 @@
         </xsl:attribute>
     </xsl:template>
 
+    <!-- set the content of meta element "auth" to true if user is logged in (for reporting statistics) -->
+    <xsl:template match="h:meta[@name='auth']/@content">
+        <xsl:attribute name="content">
+            <xsl:value-of select="string-length($sunetid) &gt; 0"/>
+        </xsl:attribute>
+    </xsl:template>
+
     <!-- combines the template title value with the value of the title of the source document -->
     <xsl:template match="h:title">
         <xsl:copy>
