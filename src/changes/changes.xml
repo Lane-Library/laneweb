@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-04-30" version="1.12.30" description="1.12.30 bug fix release">
+            <action date="2012-05-18" dev="ryanmax" issue="69946" type="add">
+                track authenticated visits 
+            </action>
+            <action date="2012-05-10" dev="ryanmax" issue="69445" type="add">
+                voyager login: additional error handling and logging 
+            </action>
+            <action date="2012-05-10" dev="ceyates" issue="69415" type="update">
+                Rename "My Accounts" to "MyLane" in the template 
+            </action>
+            <action date="2012-05-10" dev="ryanmax" issue="68825" type="add">
+                SHC login: decrypt credentials and redirect to SHC portal
+            </action>
+        </release>
         <release date="2012-05-07" version="1.12.29" description="1.12.29 bug fix release">
             <action date="2012-05-07" dev="ceyates" issue="69282" type="fix">
                 bookmarks from local links lack query string 
