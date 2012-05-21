@@ -35,13 +35,13 @@ public class PersistentLoginController {
 
     private SunetIdSource sunetIdSource;
 
-    @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
+    @RequestMapping(value = {"/secure/persistentLogin.html","/persistentLogin.html"}, params = { "pl=true" })
     public String createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
         checkSunetIdAndSetCookies(request, response);
         return setView(url, request, response);
     }
 
-    @RequestMapping(value = "/persistentLogin.html", params = { "pl=false" })
+    @RequestMapping(value = {"/persistentLogin.html", "/secure/persistentLogin.html"}, params = { "pl=false" })
     public String removeCookieAndView(final String url, final HttpServletRequest request, final HttpServletResponse response) {
         removeCookies(request, response);
         return setView(url, request, response);
@@ -49,21 +49,8 @@ public class PersistentLoginController {
 
     @RequestMapping(value = "/persistentLogin.html", params = { "url", "pl=renew" })
     public String renewCookieAndRedirect(final String url, final HttpServletRequest request, final HttpServletResponse response) {
-        Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-        if (null != isActiveSunetID && isActiveSunetID) {
-            checkSunetIdAndSetCookies(request, response);
-        } else {
-            resetCookies(request, response);
-        }
+        checkSunetIdAndSetCookies(request, response);
         return "redirect:".concat(url);
-    }
-
-    // /**/persistentLogin do not work for /secure/ not sure why but is working
-    // for anything else
-    @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=false" })
-    public String secureRemoveCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
-        removeCookies(request, response);
-        return setView(url, request, response);
     }
 
     @Autowired
@@ -77,8 +64,9 @@ public class PersistentLoginController {
     }
 
     private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
-        String sunetid = this.sunetIdSource.getSunetid(request);
-        if (null != sunetid) {
+    	Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
+    	String sunetid = this.sunetIdSource.getSunetid(request);
+        if ( null != sunetid && null != isActiveSunetID && isActiveSunetID) {
             setCookies(request, response, sunetid);
         } else {
             resetCookies(request, response);
