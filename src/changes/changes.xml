@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2012-04-30" version="1.12.30" description="1.12.30 bug fix release">
+        <release date="2012-05-21" version="1.12.30" description="1.12.30 bug fix release">
             <action date="2012-05-18" dev="ryanmax" issue="69946" type="add">
                 track authenticated visits 
             </action>
