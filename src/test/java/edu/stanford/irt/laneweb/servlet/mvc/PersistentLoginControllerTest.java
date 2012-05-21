@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.PersistentLoginFilter;
 import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.servlet.SunetIdSource;
@@ -50,7 +49,42 @@ public class PersistentLoginControllerTest {
         this.persistenLoginController.setSunetIdSource(this.sunetIdSource);
     }
 
-  
+    @Test
+    public void testCreateCookieNotNullUrl() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb").times(2);
+        expect(this.request.getHeader("User-Agent")).andReturn("firefox");
+        this.response.addCookie(isA(Cookie.class));
+        replay(this.sunetIdSource, this.request, this.response, this.session);
+        String viewUrl = this.persistenLoginController.createCookie(this.url, this.request, this.response);
+        assertEquals(viewUrl, "redirect:/test.html");
+        verify(this.sunetIdSource, this.request, this.session, this.response);
+    }
+
+    @Test
+    public void testCreateCookieNullUrl() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb").times(2);
+        expect(this.request.getHeader("User-Agent")).andReturn("firefox");
+        this.response.addCookie(isA(Cookie.class));
+        this.response.setCharacterEncoding(isA(String.class));
+        replay(this.sunetIdSource, this.request, this.response, this.session);
+        String viewUrl = this.persistenLoginController.createCookie(null, this.request, this.response);
+        assertEquals(viewUrl, "redirect:/myaccounts.html");
+        verify(this.sunetIdSource, this.request, this.session, this.response);
+    }
+
+    @Test
+    public void testCreateCookieSunetIdNull() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn(null).times(2);
+        Cookie[] cookies = new Cookie[1];
+        cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, null);
+        this.response.addCookie(isA(Cookie.class));
+        this.response.addCookie(isA(Cookie.class));
+        expect(this.request.getCookies()).andReturn(cookies);
+        replay(this.sunetIdSource, this.request, this.session, this.response);
+        this.persistenLoginController.createCookie(this.url, this.request, this.response);
+        verify(this.sunetIdSource, this.request, this.session, this.response);
+    }
+
     @Test
     public void testRemoveCookieUrlNotNull() {
         expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
@@ -106,7 +140,6 @@ public class PersistentLoginControllerTest {
     @Test
     public void testRenewCookieNotActiveSunetId() {
         expect(this.session.getAttribute("isActiveSunetID")).andReturn(false);
-        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, null);
         expect(this.request.getCookies()).andReturn(cookies);
