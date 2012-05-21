@@ -64,9 +64,9 @@ public class PersistentLoginController {
     }
 
     private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
-    	Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
     	String sunetid = this.sunetIdSource.getSunetid(request);
-        if ( null != sunetid && null != isActiveSunetID && isActiveSunetID) {
+    	Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
+    	if ( null != sunetid && null != isActiveSunetID && isActiveSunetID) {
             setCookies(request, response, sunetid);
         } else {
             resetCookies(request, response);
