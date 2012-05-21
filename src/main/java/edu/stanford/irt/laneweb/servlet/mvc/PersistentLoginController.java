@@ -35,7 +35,7 @@ public class PersistentLoginController {
 
     private SunetIdSource sunetIdSource;
 
-    @RequestMapping(value =  {"/secure/persistentLogin.html","/persistentLogin.html"} , params = { "pl=true" })
+    @RequestMapping(value =  "/secure/persistentLogin.html" , params = { "pl=true" })
     public String createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
         checkSunetIdAndSetCookies(request, response);
         return setView(url, request, response);

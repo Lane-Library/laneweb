@@ -114,11 +114,12 @@
 	var setLink = function(event) {
 		var node = event.target, 
 		url = '/././', 
-		userCookie = Y.Cookie.get('user');
+		userCookie = Y.Cookie.get('user'),
+		persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME);
 		if( node.get('tagName') === 'SPAN'){
 			node = node.get('parentNode');
 		}
-		if (!userCookie ) {
+		if (!userCookie && !persistentStatusCookie) {
 			url = url + 'secure/';
 		}
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
