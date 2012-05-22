@@ -24,7 +24,6 @@
 		now = new Date(),
 		isActive,
 		persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME);
-		
 		if (link && link.get('nodeName') == 'A' && (link.get('pathname').indexOf('secure/apps/proxy/credential') > -1 || link.get('host').indexOf('laneproxy') === 0)) {
 			if (!persistentStatusCookie ||( 'denied' !== persistentStatusCookie &&  persistentStatusCookie < now.getTime() )) {
 				// don't want a redirect with the tracking see tracking.js code if !rel documment.location is not set
@@ -114,19 +113,17 @@
 	var setLink = function(event) {
 		var node = event.target, 
 		url = '/././', 
-		userCookie = Y.Cookie.get('user'),
-		persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME);
+		logoutLink = Y.one("#logout"),
+		persistentExpirationDate = Y.Cookie.get("persistent-expiration-date");
+		
 		if( node.get('tagName') === 'SPAN'){
 			node = node.get('parentNode');
 		}
-		if (!userCookie && !persistentStatusCookie) {
+		if (!logoutLink || !persistentExpirationDate ||  persistentExpirationDate < (new Date().getTime())){
 			url = url + 'secure/';
 		}
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
 		node.set('href', url);
 	};
-
-	
-		
 	
 })();
