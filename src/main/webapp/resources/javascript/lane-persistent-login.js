@@ -29,7 +29,7 @@
 				// don't want a redirect with the tracking see tracking.js code if !rel documment.location is not set
 				link.set('rel', 'persistentLogin');
 				redirectUrl = escape(link.get('href'));
-				if(!logoutLink){
+				if(logoutLink){
 					isActive = Y.io('/././user/active', { sync: true});
 					if(isActive.responseText === 'true' ){
 						LANE.persistentlogin.newWindow(event, '/././plain/persistent-extension-popup.html');
