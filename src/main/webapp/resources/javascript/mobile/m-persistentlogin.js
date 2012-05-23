@@ -2,9 +2,9 @@
 
 
 var redirectUrl,
-	LANE_USER_COOKIE_NAME = 'user',
 	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference',
-	EXPIRATION_DATE_COOKIE_NAME = 'persistent-expiration-date'; 
+	EXPIRATION_DATE_COOKIE_NAME = 'persistent-expiration-date',
+	IS_VALID_USER;
 	
 
 $.LANE.popupWindow = function(url){
@@ -43,24 +43,15 @@ $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", 
 	var link = event.target, 
 	now = new Date();
 	var expirationDate = $.LANE.getCookie(EXPIRATION_DATE_COOKIE_NAME);
-	if (!$.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME) || (!'denied' === $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME)  && expirationDate < now.getTime())){
+	if ( 'denied' !== $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME) && (IS_USER_VALID != 'true' || expirationDate < now.getTime())){
 		redirectUrl = escape(link.href);
-		var isValidSundetId = "false"; 
-		$.ajax({
-			  url: '/././user/active',
-			  async : false,
-			  success:  function(data){
-			isValidSundetId = data;
-			}
-		});
-		if(isValidSundetId === "true"){ 
+		if(IS_USER_VALID != 'true'){ 
 				$.LANE.popupWindow('/././m/plain/persistentlogin-extention.html');
-				event.preventDefault();
-		}
+			}
 		else{
 			$.LANE.popupWindow('/././m/plain/persistentlogin-proxylink.html');
-			event.preventDefault();
 		}
+		event.preventDefault();
 	}
 });
 
@@ -95,7 +86,7 @@ $('#dont-ask-again').live('click', function(e) {
 
 
 $.LANE.toggleLogin = function(){
-	if(($.LANE.getCookie(LANE_USER_COOKIE_NAME) != null ) || $.LANE.getCookie('webauth_at') != null){
+	if( IS_VALID_USER == 'true' || $.LANE.getCookie('webauth_at') != null){
         $('.webauthLogin').each(function(){
             $(this).text('Logout');
             $(this).attr('href','/././logout');
@@ -116,6 +107,13 @@ $.LANE.toggleLogin = function(){
 //
 ////toggle login button at every pageinit
 $(this).bind("pageinit", function() {
+	$.ajax({
+		  url: '/././user/active',
+		  async : false,
+		  success:  function(data){
+		 IS_VALID_USER = data;
+		}
+	});
 	$.LANE.toggleLogin();
 });
 
@@ -124,7 +122,7 @@ var setLink = function(event) {
 	if (node.nodeName == 'SPAN') {
 		node = node.parentNode;
 	}
-	 if ( ! $.LANE.getCookie(LANE_USER_COOKIE_NAME) ) {
+	 if ('true' !== IS_VALID_USER) {
 		 url = url + 'secure/';
 	 }
 	event.preventDefault();
