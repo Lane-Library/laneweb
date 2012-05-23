@@ -4,7 +4,7 @@
 var redirectUrl,
 	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference',
 	EXPIRATION_DATE_COOKIE_NAME = 'persistent-expiration-date',
-	IS_VALID_USER;
+	IS_USER_VALID;
 	
 
 $.LANE.popupWindow = function(url){
@@ -43,11 +43,11 @@ $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", 
 	var link = event.target, 
 	now = new Date();
 	var expirationDate = $.LANE.getCookie(EXPIRATION_DATE_COOKIE_NAME);
-	if ( 'denied' !== $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME) && (IS_USER_VALID != 'true' || expirationDate < now.getTime())){
+	if ( 'denied' !== $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME) && (IS_USER_VALID === 'false' || expirationDate < now.getTime())){
 		redirectUrl = escape(link.href);
-		if(IS_USER_VALID != 'true'){ 
-				$.LANE.popupWindow('/././m/plain/persistentlogin-extention.html');
-			}
+		if(IS_USER_VALID === 'true'){ 
+			$.LANE.popupWindow('/././m/plain/persistentlogin-extention.html');
+		}
 		else{
 			$.LANE.popupWindow('/././m/plain/persistentlogin-proxylink.html');
 		}
@@ -86,7 +86,7 @@ $('#dont-ask-again').live('click', function(e) {
 
 
 $.LANE.toggleLogin = function(){
-	if( IS_VALID_USER == 'true' || $.LANE.getCookie('webauth_at') != null){
+	if( IS_USER_VALID === 'true' || $.LANE.getCookie('webauth_at') != null){
         $('.webauthLogin').each(function(){
             $(this).text('Logout');
             $(this).attr('href','/././logout');
@@ -111,7 +111,7 @@ $(this).bind("pageinit", function() {
 		  url: '/././user/active',
 		  async : false,
 		  success:  function(data){
-		 IS_VALID_USER = data;
+		 IS_USER_VALID = data;
 		}
 	});
 	$.LANE.toggleLogin();
@@ -122,7 +122,7 @@ var setLink = function(event) {
 	if (node.nodeName == 'SPAN') {
 		node = node.parentNode;
 	}
-	 if ('true' !== IS_VALID_USER) {
+	 if ('false' == IS_USER_VALID) {
 		 url = url + 'secure/';
 	 }
 	event.preventDefault();
