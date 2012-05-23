@@ -3,7 +3,6 @@
 
 var redirectUrl,
 	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference',
-	EXPIRATION_DATE_COOKIE_NAME = 'persistent-expiration-date',
 	IS_USER_VALID;
 	
 
@@ -42,8 +41,8 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", function(event) {
 	var link = event.target, 
 	now = new Date();
-	var expirationDate = $.LANE.getCookie(EXPIRATION_DATE_COOKIE_NAME);
-	if ( 'denied' !== $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME) && (IS_USER_VALID === 'false' || expirationDate < now.getTime())){
+	var statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
+	if ( 'denied' !== statusCookie && (IS_USER_VALID === 'false' || statusCookie < now.getTime())){
 		redirectUrl = escape(link.href);
 		if(IS_USER_VALID === 'true'){ 
 			$.LANE.popupWindow('/././m/plain/persistentlogin-extention.html');
