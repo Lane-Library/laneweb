@@ -7,9 +7,9 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.cocoon.xml.XMLizable;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.laneweb.util.XMLizable;
 
 public class XMLLizableBassettEresourceList implements XMLizable {
 

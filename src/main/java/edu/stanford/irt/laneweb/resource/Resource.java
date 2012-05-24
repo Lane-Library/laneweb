@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.resource;
 
-import edu.stanford.irt.laneweb.util.XMLizable;
+import edu.stanford.irt.cocoon.xml.XMLizable;
 
 public interface Resource extends XMLizable {
 

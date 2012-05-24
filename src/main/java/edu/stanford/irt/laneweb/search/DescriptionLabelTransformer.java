@@ -9,7 +9,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
 import edu.stanford.irt.laneweb.resource.Resource;
 
 public class DescriptionLabelTransformer extends AbstractTransformer {

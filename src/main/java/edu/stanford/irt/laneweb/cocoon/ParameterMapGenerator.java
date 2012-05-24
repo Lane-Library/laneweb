@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.apache.cocoon.xml.XMLConsumer;
 
+import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 

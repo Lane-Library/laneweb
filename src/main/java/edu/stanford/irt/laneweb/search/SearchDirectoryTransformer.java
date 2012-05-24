@@ -9,8 +9,8 @@ import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.cocoon.ParametersAware;
+import edu.stanford.irt.cocoon.pipeline.ParametersAware;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
 
 public class SearchDirectoryTransformer extends AbstractTransformer implements ParametersAware, CacheableProcessingComponent {
 

@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 import java.util.Map;
 
-import edu.stanford.irt.laneweb.cocoon.ParametersAware;
+import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.Result;

@@ -6,11 +6,11 @@ import java.util.Map;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.pipeline.ModelAware;
+import edu.stanford.irt.cocoon.pipeline.ParametersAware;
+import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
-import edu.stanford.irt.laneweb.cocoon.ModelAware;
-import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 

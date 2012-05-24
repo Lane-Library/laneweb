@@ -1,10 +1,12 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.cocoon.pipeline.transform;
 
 import org.apache.cocoon.transformation.Transformer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
 
 public abstract class AbstractTransformer extends AbstractSitemapModelComponent implements Transformer {
 

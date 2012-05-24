@@ -16,6 +16,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.pipeline.ModelAware;
+import edu.stanford.irt.cocoon.pipeline.ParametersAware;
+import edu.stanford.irt.cocoon.pipeline.SourceAware;
+
 public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer,
         SourceAware, ParametersAware, ModelAware {
 

@@ -8,6 +8,10 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.objectmodel.helper.ParametersMap;
 import org.apache.cocoon.sitemap.SitemapModelComponent;
 
+import edu.stanford.irt.cocoon.pipeline.Initializable;
+import edu.stanford.irt.cocoon.pipeline.ModelAware;
+import edu.stanford.irt.cocoon.pipeline.ParametersAware;
+import edu.stanford.irt.cocoon.pipeline.SourceAware;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public abstract class AbstractSitemapModelComponent implements SitemapModelComponent {

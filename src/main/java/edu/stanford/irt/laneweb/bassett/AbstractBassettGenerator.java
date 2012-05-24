@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.bassett;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
+import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 
 public abstract class AbstractBassettGenerator extends AbstractGenerator {
 

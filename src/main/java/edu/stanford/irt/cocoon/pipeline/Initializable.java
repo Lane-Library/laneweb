@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.cocoon.pipeline;
 
 public interface Initializable {
 

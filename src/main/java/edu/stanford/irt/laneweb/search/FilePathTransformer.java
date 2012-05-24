@@ -15,7 +15,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
 
 public class FilePathTransformer extends AbstractTransformer implements CacheableProcessingComponent {
 

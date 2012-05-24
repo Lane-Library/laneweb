@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.cocoon.ParametersAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.ContentResult;

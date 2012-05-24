@@ -2,8 +2,8 @@ package edu.stanford.irt.laneweb.proxy;
 
 import java.util.Map;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.cocoon.ModelAware;
+import edu.stanford.irt.cocoon.pipeline.ModelAware;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;

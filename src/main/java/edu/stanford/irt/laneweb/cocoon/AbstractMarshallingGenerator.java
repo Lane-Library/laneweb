@@ -8,6 +8,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.XmlMappingException;
 
+import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public abstract class AbstractMarshallingGenerator extends AbstractGenerator {
