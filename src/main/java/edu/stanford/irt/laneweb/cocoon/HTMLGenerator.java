@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -46,7 +47,7 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
      * @return The generated key or <code>0</code> if the component is currently
      *         not cacheable.
      */
-    public java.io.Serializable getKey() {
+    public Serializable getKey() {
         return this.source.getURI();
     }
 

@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.classes;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.xml.xpath.XPath;
@@ -60,7 +61,7 @@ public class ClassesAggregator extends ContentAggregator {
     }
 
     @Override
-    public java.io.Serializable getKey() {
+    public Serializable getKey() {
         return this.src;
     }
 
