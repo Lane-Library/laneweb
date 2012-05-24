@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.cocoon.pipeline.serialize;
 
 import java.io.OutputStream;
 import java.util.Properties;

@@ -129,7 +129,7 @@
         parent="org.apache.cocoon.serialization.AbstractTextSerializer"/>
     
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
-        class="edu.stanford.irt.laneweb.cocoon.TransformerSerializer"
+        class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
         scope="prototype">
         <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
         <constructor-arg>
