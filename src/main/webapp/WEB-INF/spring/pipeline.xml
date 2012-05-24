@@ -33,12 +33,15 @@
     <bean name="org.apache.cocoon.generation.Generator/file"
         class="edu.stanford.irt.cocoon.pipeline.generate.URLGenerator"
         scope="prototype">
+        <constructor-arg value="file"/>
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/html"
         class="edu.stanford.irt.laneweb.cocoon.HTMLGenerator"
-        scope="prototype"/>
+        scope="prototype">
+        <constructor-arg value="html"/>
+    </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator"
@@ -67,6 +70,7 @@
     <bean name="org.apache.cocoon.generation.Generator/classes"
         class="edu.stanford.irt.laneweb.classes.ClassesGenerator"
         scope="prototype">
+        <constructor-arg value="classes"/>
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
     
@@ -104,7 +108,9 @@
     
     <bean name="org.apache.cocoon.transformation.Transformer/textNodeParser"
         class="edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer"
-        scope="prototype"/>
+        scope="prototype">
+        <constructor-arg value="textNodeParser"/>
+    </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
         class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
@@ -131,6 +137,7 @@
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
         scope="prototype">
+        <constructor-arg value="xhtml"/>
         <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
         <constructor-arg>
             <props>
@@ -147,6 +154,7 @@
     <bean name="org.apache.cocoon.serialization.Serializer/html5"
         class="edu.stanford.irt.laneweb.cocoon.HTML5Serializer"
         scope="prototype">
+        <constructor-arg value="html5"/>
         <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
         <constructor-arg>
             <props>

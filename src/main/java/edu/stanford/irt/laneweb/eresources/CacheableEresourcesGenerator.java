@@ -9,17 +9,27 @@ import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 
 public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGenerator implements CacheableProcessingComponent {
 
+    private String componentType;
+
     private long configuredExpires = 1000 * 60 * 5;
 
     private long expires;
 
     private String key;
 
+    public CacheableEresourcesGenerator(final String componentType) {
+        this.componentType = componentType;
+    }
+
     public Serializable getKey() {
         if (null == this.key) {
             this.key = createKey();
         }
         return this.key;
+    }
+
+    public String getType() {
+        return this.componentType;
     }
 
     public SourceValidity getValidity() {

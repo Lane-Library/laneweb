@@ -35,7 +35,10 @@ public class TransformerSerializer extends AbstractXMLPipe implements Serializer
      */
     private SAXTransformerFactory transformerFactory;
 
-    public TransformerSerializer(final SAXTransformerFactory factory, final Properties properties) {
+    private String type;
+
+    public TransformerSerializer(final String type, final SAXTransformerFactory factory, final Properties properties) {
+        this.type = type;
         this.transformerFactory = factory;
         this.properties = properties;
         StringBuilder sb = new StringBuilder();
@@ -61,6 +64,10 @@ public class TransformerSerializer extends AbstractXMLPipe implements Serializer
 
     public String getMimeType() {
         throw new UnsupportedOperationException();
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     /**

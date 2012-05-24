@@ -32,6 +32,12 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
 
     private Source source;
 
+    private String type;
+
+    public HTMLGenerator(final String type) {
+        this.type = type;
+    }
+
     /**
      * Generate the unique key. This key must be unique inside the space of this
      * component. This method must be invoked before the generateValidity()
@@ -42,6 +48,10 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
      */
     public java.io.Serializable getKey() {
         return this.source.getURI();
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     /**

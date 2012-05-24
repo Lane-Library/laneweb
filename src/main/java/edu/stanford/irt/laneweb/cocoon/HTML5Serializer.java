@@ -17,8 +17,8 @@ public class HTML5Serializer extends TransformerSerializer {
 
     private OutputStream outputStream;
 
-    public HTML5Serializer(final SAXTransformerFactory factory, final Properties properties) {
-        super(factory, properties);
+    public HTML5Serializer(final String type, final SAXTransformerFactory factory, final Properties properties) {
+        super(type, factory, properties);
     }
 
     @Override

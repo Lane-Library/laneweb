@@ -6,6 +6,10 @@ import edu.stanford.irt.eresources.Eresource;
 
 public class CoreEresourcesGenerator extends CacheableEresourcesGenerator {
 
+    public CoreEresourcesGenerator(final String componentType) {
+        super(componentType);
+    }
+
     @Override
     protected Collection<Eresource> getEresourceList() {
         if (null == this.type) {

@@ -39,9 +39,12 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
 
     private boolean inElement = false;
 
+    private String type;
+
     private XMLConsumer xmlConsumer;
 
-    public TextNodeParsingTransformer() {
+    public TextNodeParsingTransformer(final String type) {
+        this.type = type;
         HTMLConfiguration conf = new HTMLConfiguration();
         conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
@@ -89,7 +92,10 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         return "textNodeParsing";
     }
 
-    @Override
+    public String getType() {
+        return this.type;
+    }
+
     public SourceValidity getValidity() {
         return NOPValidity.SHARED_INSTANCE;
     }
@@ -100,7 +106,6 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         super.setConsumer(xmlConsumer);
     }
 
-    @Override
     public void setParameters(final Map<String, String> parameters) {
         String name = parameters.get("elementName");
         if (name != null) {

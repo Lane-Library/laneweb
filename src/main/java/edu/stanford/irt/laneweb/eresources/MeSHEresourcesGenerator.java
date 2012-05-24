@@ -6,6 +6,10 @@ import edu.stanford.irt.eresources.Eresource;
 
 public class MeSHEresourcesGenerator extends CacheableEresourcesGenerator {
 
+    public MeSHEresourcesGenerator(final String componentType) {
+        super(componentType);
+    }
+
     @Override
     protected Collection<Eresource> getEresourceList() {
         if (null == this.mesh) {

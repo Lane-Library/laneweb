@@ -6,6 +6,10 @@ import edu.stanford.irt.eresources.Eresource;
 
 public class BrowseEresourcesGenerator extends CacheableEresourcesGenerator {
 
+    public BrowseEresourcesGenerator(final String type) {
+        super(type);
+    }
+
     @Override
     protected Collection<Eresource> getEresourceList() {
         if (null != this.type) {

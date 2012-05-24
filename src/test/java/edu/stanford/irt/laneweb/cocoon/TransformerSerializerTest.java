@@ -47,7 +47,7 @@ public class TransformerSerializerTest {
         expect(this.properties.keySet()).andReturn(Collections.<Object> singleton("foo"));
         expect(this.properties.get("foo")).andReturn("bar");
         replay(this.properties);
-        this.serializer = new TransformerSerializer(this.factory, this.properties);
+        this.serializer = new TransformerSerializer("type", this.factory, this.properties);
         verify(this.properties);
         reset(this.properties);
     }

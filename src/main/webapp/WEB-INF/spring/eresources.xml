@@ -37,14 +37,20 @@
 
     <bean name="org.apache.cocoon.generation.Generator/er-browse"
         class="edu.stanford.irt.laneweb.eresources.BrowseEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"/>
+        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator">
+        <constructor-arg value="er-browse"/>
+    </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/er-core"
         class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"/>
+        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator">
+        <constructor-arg value="er-core"/>
+    </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/er-mesh"
         class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"/>
+        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator">
+        <constructor-arg value="er-mesh"/>
+    </bean>
 
 </beans>

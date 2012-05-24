@@ -3,12 +3,12 @@ package edu.stanford.irt.laneweb.search;
 import java.io.IOException;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.components.source.impl.MultiSourceValidity;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.xml.EmbeddedXMLPipe;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
+import org.apache.excalibur.source.impl.validity.AggregatedValidity;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.Attributes;
@@ -34,7 +34,7 @@ public class FilePathTransformer extends AbstractTransformer implements Cacheabl
 
     private SourceResolver sourceResolver;
 
-    private MultiSourceValidity validity;
+    private AggregatedValidity validity;
 
     public FilePathTransformer(final SourceResolver sourceResolver) {
         this.sourceResolver = sourceResolver;
@@ -45,13 +45,7 @@ public class FilePathTransformer extends AbstractTransformer implements Cacheabl
         conf.setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
         conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", "http://www.w3.org/1999/xhtml");
         this.htmlSaxParser = new HtmlSAXParser(conf);
-        this.validity = new MultiSourceValidity(sourceResolver, MultiSourceValidity.CHECK_ALWAYS);
-    }
-
-    @Override
-    public void endDocument() throws SAXException {
-        this.validity.close();
-        super.endDocument();
+        this.validity = new AggregatedValidity();
     }
 
     @Override

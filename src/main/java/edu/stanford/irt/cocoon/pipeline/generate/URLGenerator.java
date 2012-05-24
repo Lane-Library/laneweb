@@ -21,8 +21,18 @@ public class URLGenerator extends AbstractGenerator implements CacheableProcessi
 
     private Source source;
 
+    private String type;
+
+    public URLGenerator(final String type) {
+        this.type = type;
+    }
+
     public Serializable getKey() {
         return this.source.getURI();
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public SourceValidity getValidity() {

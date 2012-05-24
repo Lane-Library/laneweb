@@ -26,7 +26,7 @@ public class TextNodeParsingTransformerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.transformer = new TextNodeParsingTransformer();
+        this.transformer = new TextNodeParsingTransformer("type");
         this.parameters = createMock(Parameters.class);
         expect(this.parameters.getParameter("elementName", null)).andReturn("element");
         replay(this.parameters);
