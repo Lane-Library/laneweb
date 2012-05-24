@@ -173,7 +173,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <!-- TODO: remove next match after changing search-monitor -->
-            <map:match pattern="/apps/cache/search/templates/xml" type="wildcard">
+            <map:match pattern="cache/search/templates/xml" type="wildcard">
                 <map:generate type="search-describe"/>
                 <map:transform type="search-directory">
                     <map:parameter name="directories" value="{content-base}/search,{content-base}/portals"/>
