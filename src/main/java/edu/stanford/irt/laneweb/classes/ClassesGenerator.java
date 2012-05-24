@@ -1,16 +1,10 @@
 package edu.stanford.irt.laneweb.classes;
 
-import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.excalibur.source.SourceValidity;
 
 import edu.stanford.irt.cocoon.pipeline.generate.URLGenerator;
 
-public class ClassesGenerator extends URLGenerator implements CacheableProcessingComponent {
-
-    public ClassesGenerator(final SAXParser saxParser) {
-        super.setParser(saxParser);
-    }
+public class ClassesGenerator extends URLGenerator {
 
     @Override
     public SourceValidity getValidity() {

@@ -67,7 +67,7 @@
     <bean name="org.apache.cocoon.generation.Generator/classes"
         class="edu.stanford.irt.laneweb.classes.ClassesGenerator"
         scope="prototype">
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/search-template-generator"
