@@ -31,7 +31,7 @@
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/file"
-        class="edu.stanford.irt.laneweb.cocoon.URLGenerator"
+        class="edu.stanford.irt.cocoon.pipeline.generate.URLGenerator"
         scope="prototype">
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>

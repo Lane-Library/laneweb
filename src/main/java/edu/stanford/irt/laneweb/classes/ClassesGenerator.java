@@ -4,7 +4,7 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.excalibur.source.SourceValidity;
 
-import edu.stanford.irt.laneweb.cocoon.URLGenerator;
+import edu.stanford.irt.cocoon.pipeline.generate.URLGenerator;
 
 public class ClassesGenerator extends URLGenerator implements CacheableProcessingComponent {
 
