@@ -12,8 +12,14 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class DescribeGenerator extends AbstractMetasearchGenerator implements CacheableProcessingComponent {
 
+    private static final String TYPE = "describe";
+
     public Serializable getKey() {
-        return "describe";
+        return TYPE;
+    }
+
+    public String getType() {
+        return TYPE;
     }
 
     public SourceValidity getValidity() {

@@ -87,7 +87,6 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         this.xmlConsumer.endElement(uri, localName, qName);
     }
 
-    @Override
     public Serializable getKey() {
         return "textNodeParsing";
     }
