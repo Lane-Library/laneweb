@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-05-25" version="1.12.31" description="1.12.31 bug fix release">
+            <action date="2012-05-22" dev="ceyates" issue="70022" type="add">
+                Use of bookmarklet when not logged in should send user to WebAuth
+            </action>
+            <action date="2012-05-16" dev="ceyates" issue="69710" type="add">
+                Track bookmark events 
+            </action>
+        </release>
         <release date="2012-05-21" version="1.12.30" description="1.12.30 bug fix release">
             <action date="2012-05-18" dev="ryanmax" issue="69946" type="add">
                 track authenticated visits 
