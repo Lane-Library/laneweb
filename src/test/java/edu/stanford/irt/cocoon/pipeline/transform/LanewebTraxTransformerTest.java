@@ -7,15 +7,15 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.sax.TransformerHandler;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
@@ -25,8 +25,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer;
-import edu.stanford.irt.laneweb.cocoon.TraxProcessor;
+import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 
 public class LanewebTraxTransformerTest {
 
@@ -40,15 +39,13 @@ public class LanewebTraxTransformerTest {
 
     private Map<String, Object> model;
 
-    private Parameters parameters;
+    private Map<String, String> parameters;
 
     private Source source;
 
-    private SourceResolver sourceResolver;
-
     private TraxTransformer transformer;
 
-    private TraxProcessor traxProcessor;
+    private TransformerHandlerFactory transformerHandlerFactory;
 
     private Transformer traxTransformer;
 
@@ -56,31 +53,33 @@ public class LanewebTraxTransformerTest {
 
     private XMLConsumer xmlConsumer;
 
+    @SuppressWarnings("unchecked")
     @Before
-    public void setUp() throws Exception {
-        this.traxProcessor = createMock(TraxProcessor.class);
+    public void setUp() throws IOException, SAXException {
+        this.transformerHandlerFactory = createMock(TransformerHandlerFactory.class);
         this.chars = new char[0];
-        this.transformer = new TraxTransformer(this.traxProcessor);
-        this.sourceResolver = createMock(SourceResolver.class);
+        this.transformer = new TraxTransformer("type", this.transformerHandlerFactory);
         this.source = createMock(Source.class);
-        this.parameters = createMock(Parameters.class);
+        this.parameters = createMock(Map.class);
         this.handler = createMock(TransformerHandler.class);
         this.model = Collections.emptyMap();
         this.traxTransformer = createMock(Transformer.class);
         this.validity = createMock(SourceValidity.class);
-        expect(this.sourceResolver.resolveURI("src")).andReturn(this.source);
-        expect(this.parameters.getParameter("cache-key", null)).andReturn("cache-key");
+        // expect(this.source.getURI()).andReturn("uri");
+        expect(this.parameters.get("cache-key")).andReturn("cache-key");
         expect(this.source.getValidity()).andReturn(this.validity);
-        expect(this.traxProcessor.getTransformerHandler(this.source)).andReturn(this.handler);
+        expect(this.transformerHandlerFactory.getTransformerHandler(this.source)).andReturn(this.handler);
         expect(this.handler.getTransformer()).andReturn(this.traxTransformer);
-        expect(this.parameters.getNames()).andReturn(new String[0]);
+        expect(this.parameters.entrySet()).andReturn(Collections.<Entry<String, String>> emptySet());
         this.handler.setResult(isA(SAXResult.class));
         this.handler.startDocument();
-        replay(this.sourceResolver, this.source, this.parameters, this.traxProcessor, this.handler, this.traxTransformer);
-        this.transformer.setup(this.sourceResolver, this.model, "src", this.parameters);
+        replay(this.source, this.parameters, this.transformerHandlerFactory, this.handler, this.traxTransformer);
+        this.transformer.setModel(this.model);
+        this.transformer.setParameters(this.parameters);
+        this.transformer.setSource(this.source);
         this.transformer.setConsumer(this.xmlConsumer);
         this.transformer.startDocument();
-        verify(this.sourceResolver, this.source, this.parameters, this.traxProcessor, this.handler, this.traxTransformer);
+        verify(this.source, this.parameters, this.transformerHandlerFactory, this.handler, this.traxTransformer);
         reset(this.handler);
     }
 

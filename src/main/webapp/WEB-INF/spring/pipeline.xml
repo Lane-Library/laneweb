@@ -103,7 +103,8 @@
     <bean name="org.apache.cocoon.transformation.Transformer/saxon"
         class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"/>
+        <constructor-arg value="saxon"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/textNodeParser"
@@ -115,24 +116,28 @@
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
         class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"/>
+        <constructor-arg value="joost"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/xalan"
         class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/xalan"/>
+        <constructor-arg value="xalan"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/xalan"/>
     </bean>
     
-    <bean name="org.apache.cocoon.serialization.AbstractTextSerializer"
-        init-method="init" scope="prototype" abstract="true">
-        <property name="defaultEncoding" value="UTF-8"/>
-    </bean>
-
     <bean name="org.apache.cocoon.serialization.Serializer/xml"
-        class="org.apache.cocoon.serialization.XMLSerializer"
-        scope="prototype"
-        parent="org.apache.cocoon.serialization.AbstractTextSerializer"/>
+        class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
+        scope="prototype">
+        <constructor-arg value="xml"/>
+        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
+        <constructor-arg>
+            <props>
+                <prop key="method">xml</prop>
+            </props>
+        </constructor-arg>
+    </bean>
     
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
@@ -167,8 +172,22 @@
     </bean>
     
     <bean name="org.apache.cocoon.serialization.Serializer/text"
-        class="org.apache.cocoon.serialization.TextSerializer"
-        scope="prototype"
-        parent="org.apache.cocoon.serialization.AbstractTextSerializer"/>
+        class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
+        scope="prototype">
+        <constructor-arg value="text"/>
+        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
+        <constructor-arg>
+            <props>
+                <prop key="method">text</prop>
+            </props>
+        </constructor-arg>
+    </bean>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/eventlist"
+        class="edu.stanford.irt.laneweb.classes.EventListTransformer"
+        scope="prototype">
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
+    </bean>
     
 </beans>

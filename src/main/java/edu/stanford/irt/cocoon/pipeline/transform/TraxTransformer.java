@@ -19,11 +19,10 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.SourceAware;
+import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
-import edu.stanford.irt.laneweb.cocoon.TraxProcessor;
 
-public class TraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer,
-        SourceAware, ParametersAware, ModelAware {
+public class TraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer, ModelAware, ParametersAware, SourceAware {
 
     private Serializable cacheKey;
 
@@ -39,14 +38,17 @@ public class TraxTransformer extends AbstractSitemapModelComponent implements Ca
 
     private TransformerHandler transformerHandler;
 
-    private TraxProcessor traxProcessor;
+    private TransformerHandlerFactory transformerHandlerFactory;
+
+    private String type;
 
     private SourceValidity validity;
 
     private XMLConsumer xmlConsumer;
 
-    public TraxTransformer(final TraxProcessor traxProcessor) {
-        this.traxProcessor = traxProcessor;
+    public TraxTransformer(final String type, final TransformerHandlerFactory transformerHandlerFactory) {
+        this.type = type;
+        this.transformerHandlerFactory = transformerHandlerFactory;
     }
 
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
@@ -89,6 +91,10 @@ public class TraxTransformer extends AbstractSitemapModelComponent implements Ca
             }
         }
         return this.cacheKey;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public SourceValidity getValidity() {
@@ -168,9 +174,10 @@ public class TraxTransformer extends AbstractSitemapModelComponent implements Ca
     }
 
     private void setupTransformerHandler() {
-        this.transformerHandler = this.traxProcessor.getTransformerHandler(this.source);
+        this.transformerHandler = this.transformerHandlerFactory.getTransformerHandler(this.source);
         javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
         for (Entry<String, Object> entry : this.model.entrySet()) {
+            // TODO: think about using the value object rather than toString()
             transformer.setParameter(entry.getKey(), entry.getValue().toString());
         }
         for (Entry<String, String> entry : this.parameters.entrySet()) {

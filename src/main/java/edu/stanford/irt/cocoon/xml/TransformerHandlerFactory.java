@@ -1,9 +1,11 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.cocoon.xml;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.transform.ErrorListener;
-import javax.xml.transform.SourceLocator;
 import javax.xml.transform.Templates;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -15,60 +17,30 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.store.Store;
-import org.apache.excalibur.xml.xslt.XSLTProcessor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class TraxProcessor {
 
-    private static class TraxErrorHandler implements ErrorListener {
-
-        private Logger log = LoggerFactory.getLogger(XSLTProcessor.class);
-
-        public void error(final TransformerException te) {
-            this.log.error(getMessage(te));
-        }
-
-        public void fatalError(final TransformerException te) throws TransformerException {
-            this.log.error(getMessage(te));
-            throw te;
-        }
-
-        public void warning(final TransformerException te) {
-            this.log.warn(getMessage(te));
-        }
-
-        private String getMessage(final TransformerException te) {
-            StringBuilder sb = new StringBuilder(te.getMessage());
-            SourceLocator locator = te.getLocator();
-            if (locator != null) {
-                sb.append(" publicId: ").append(locator.getPublicId()).append(" systemId: ").append(locator.getSystemId())
-                        .append(" line: ").append(locator.getLineNumber()).append(" column: ").append(locator.getColumnNumber());
-            }
-            return sb.toString();
-        }
-    }
+public class TransformerHandlerFactory {
 
     /** The error handler for the transformer */
-    private TraxErrorHandler errorHandler;
+    private ErrorListener errorHandler;
 
     /** The trax TransformerFactory this component uses */
     private SAXTransformerFactory factory;
 
     /** The store service instance */
-    private Store store;
+    private Map<String, Object[]> store;
 
     private URIResolver uriResolver;
 
-    public TraxProcessor(final SAXTransformerFactory factory, final URIResolver uriResolver, final Store store) {
+    public TransformerHandlerFactory(final SAXTransformerFactory factory, final URIResolver uriResolver,
+            final ErrorListener errorListener) {
         this.factory = factory;
         this.uriResolver = uriResolver;
-        this.store = store;
-        this.errorHandler = new TraxErrorHandler();
+        this.errorHandler = errorListener;
         this.factory.setErrorListener(this.errorHandler);
+        this.store = Collections.synchronizedMap(new HashMap<String, Object[]>());
     }
 
     public TransformerHandler getTransformerHandler(final Source stylesheet) {
@@ -103,26 +75,17 @@ public class TraxProcessor {
         }
         // Stored is an array of the templates and the caching time and list of
         // includes
-        Object[] templateAndValidity = (Object[]) this.store.get(key);
+        Object[] templateAndValidity = this.store.get(key);
         if (templateAndValidity == null) {
             // Templates not found in cache
             return null;
         }
         SourceValidity storedValidity = (SourceValidity) templateAndValidity[1];
-        int valid = storedValidity.isValid();
-        boolean isValid;
-        if (valid == SourceValidity.UNKNOWN) {
-            valid = storedValidity.isValid(newValidity);
-            isValid = (valid == SourceValidity.VALID);
-        } else {
-            isValid = (valid == SourceValidity.VALID);
-        }
-        if (!isValid) {
+        if (storedValidity.isValid() != SourceValidity.VALID) {
             this.store.remove(key);
             return null;
         }
-        TransformerHandler handler = prepareHandlerFromTemplates((Templates) templateAndValidity[0]);
-        return handler;
+        return prepareHandlerFromTemplates((Templates) templateAndValidity[0]);
     }
 
     private TransformerHandler prepareHandlerFromTemplates(final Templates templates) throws TransformerConfigurationException {
@@ -134,13 +97,12 @@ public class TraxProcessor {
     }
 
     private void putTemplates(final Templates templates, final Source stylesheet, final String id) throws IOException {
-        String key = "XSLTTemplate: " + id + '(' + this.factory.getClass().getName() + ')';
         SourceValidity validity = stylesheet.getValidity();
         if (null != validity) {
             Object[] templateAndValidity = new Object[2];
             templateAndValidity[0] = templates;
             templateAndValidity[1] = validity;
-            this.store.store(key, templateAndValidity);
+            this.store.put(id, templateAndValidity);
         }
     }
 }
