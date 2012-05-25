@@ -3,40 +3,28 @@ package edu.stanford.irt.cocoon.source;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.servlet.ServletContext;
 
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceFactory;
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.ResourceLoader;
 
-import edu.stanford.irt.laneweb.cocoon.SpringResourceSource;
+public class SourceResolverImpl implements SourceResolver {
 
-public class SourceResolverImpl implements SourceResolver, ResourceLoaderAware {
+    private SourceFactory defaultFactory;
 
     private LocationModifier locationModifier = new LocationModifier();
 
-    private ResourceLoader resourceLoader;
-
     private Map<String, SourceFactory> sourceFactories = Collections.emptyMap();
-
-    // This part is necessary because EnvironmentHelper constructor uses a
-    // jndi:/localhost/ url string
-    private Pattern tomcatURLPattern;
 
     public void release(final Source source) {
     }
 
     public Source resolveURI(final String location) throws IOException {
         String modifiedLocation = location;
-        Matcher matcher = this.tomcatURLPattern.matcher(location);
-        if (matcher.matches()) {
-            modifiedLocation = matcher.group(1);
-        }
+        // Matcher matcher = this.tomcatURLPattern.matcher(location);
+        // if (matcher.matches()) {
+        // modifiedLocation = matcher.group(1);
+        // }
         int colonPosition = modifiedLocation.indexOf(':');
         if (colonPosition > 0) {
             modifiedLocation = this.locationModifier.modify(modifiedLocation);
@@ -47,20 +35,15 @@ public class SourceResolverImpl implements SourceResolver, ResourceLoaderAware {
                 return factory.getSource(modifiedLocation, null);
             }
         }
-        return new SpringResourceSource(this.resourceLoader.getResource(modifiedLocation));
+        return this.defaultFactory.getSource(modifiedLocation, null);
     }
 
-    @SuppressWarnings("rawtypes")
     public Source resolveURI(final String location, final String base, final Map parameters) throws IOException {
-        return this.resolveURI(location);
+        return resolveURI(location);
     }
 
-    public void setResourceLoader(final ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
-
-    public void setServletContext(final ServletContext servletContext) {
-        this.tomcatURLPattern = Pattern.compile("jndi:/localhost" + servletContext.getContextPath() + "(/.*)");
+    public void setDefaultFactory(final SourceFactory defaultFactory) {
+        this.defaultFactory = defaultFactory;
     }
 
     public void setSourceFactories(final Map<String, SourceFactory> sourceFactories) {

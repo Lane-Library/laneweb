@@ -47,7 +47,6 @@
     
     <bean id="org.apache.excalibur.source.SourceResolver"
         class="edu.stanford.irt.cocoon.source.SourceResolverImpl">
-        <property name="servletContext" ref="servletContext"/>
         <property name="sourceFactories">
             <map>
                 <entry key="content" value-ref="org.apache.excalibur.source.SourceFactory/content"/>
@@ -58,6 +57,9 @@
                 <entry key="classes" value-ref="org.apache.excalibur.source.SourceFactory/classes"/>
                 <entry key="bookmarks" value-ref="org.apache.excalibur.source.SourceFactory/bookmarks"/>
             </map>
+        </property>
+        <property name="defaultFactory">
+            <bean class="edu.stanford.irt.laneweb.cocoon.SpringResourceSourceFactory"/>
         </property>
     </bean>
 
