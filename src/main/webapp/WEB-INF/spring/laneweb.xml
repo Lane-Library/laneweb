@@ -55,6 +55,11 @@
         </constructor-arg>
     </bean>
     
+    <bean id="edu.stanford.irt.cocoon.Model"
+        class="java.util.HashMap"
+        scope="request">
+    </bean>
+    
     <bean name="org.apache.excalibur.store.Store/TransientStore"
         class="edu.stanford.irt.laneweb.cocoon.TransientStore"/>
     
@@ -63,12 +68,7 @@
     
     
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
-        class="edu.stanford.irt.cocoon.sitemap.expression.LanewebObjectModel">
-    </bean>
-    
-    <bean id="org.apache.cocoon.environment.Environment"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebEnvironment"
-        scope="request">
+        class="edu.stanford.irt.laneweb.cocoon.LanewebObjectModel">
     </bean>
     
     <bean name="javax.xml.transform.sax.SAXTransformerFactory/saxon"

@@ -29,8 +29,6 @@ import edu.stanford.irt.cocoon.sitemap.source.SitemapSource;
 
 public class LanewebSitemapSourceTest {
 
-    private Environment environment;
-
     private Map<String, Object> model;
 
     private ProcessingPipeline pipeline;
@@ -47,7 +45,6 @@ public class LanewebSitemapSourceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.environment = createMock(Environment.class);
         this.processor = createMock(Processor.class);
         this.uri = "foo:/bar?foo=bar";
         this.model = new HashMap<String, Object>();
@@ -55,15 +52,14 @@ public class LanewebSitemapSourceTest {
         this.pipeline = createMock(ProcessingPipeline.class);
         this.pipelineDescription.processingPipeline = this.pipeline;
         this.validity = createMock(SourceValidity.class);
-        expect(this.environment.getObjectModel()).andReturn(this.model);
         expect(this.processor.buildPipeline(isA(Environment.class))).andReturn(this.pipelineDescription);
         this.pipeline.prepareInternal(isA(Environment.class));
         expect(this.pipeline.getValidityForEventPipeline()).andReturn(this.validity);
         expect(this.pipeline.getKeyForEventPipeline()).andReturn("key");
-        replay(this.environment, this.processor, this.pipelineDescription, this.pipeline, this.validity);
-        this.source = new SitemapSource(this.uri, this.environment, this.processor);
-        verify(this.environment, this.processor, this.pipelineDescription, this.pipeline, this.validity);
-        reset(this.environment, this.processor, this.pipelineDescription, this.pipeline, this.validity);
+        replay(this.processor, this.pipelineDescription, this.pipeline, this.validity);
+        this.source = new SitemapSource(this.uri, this.model, this.processor);
+        verify(this.processor, this.pipelineDescription, this.pipeline, this.validity);
+        reset(this.processor, this.pipelineDescription, this.pipeline, this.validity);
     }
 
     @Test

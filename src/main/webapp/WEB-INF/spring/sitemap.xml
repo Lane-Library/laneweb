@@ -125,7 +125,7 @@
         scope="prototype"/>
     
     <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
-        class="edu.stanford.irt.cocoon.sitemap.expression.LanewebVariableResolver"
+        class="edu.stanford.irt.cocoon.sitemap.expression.VariableImpl"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
     </bean>

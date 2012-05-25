@@ -102,11 +102,11 @@ public class SitemapSource implements Source, XMLizable {
      */
     // TODO: a lot of this should probably be in the SourceFactory
     @SuppressWarnings("unchecked")
-    public SitemapSource(final String uri, final Environment environment, final Processor processor) {
+    public SitemapSource(final String uri, final Map<String, Object> model, final Processor processor) {
         this.validity = new SitemapSourceValidity();
         int colon = uri.indexOf(':');
         this.protocol = uri.substring(0, colon);
-        Map<String, Object> newObjectModel = new HashMap<String, Object>(environment.getObjectModel());
+        Map<String, Object> newObjectModel = new HashMap<String, Object>(model);
         int startOfPath = uri.indexOf(":/") + 2;
         String sitemapURI = uri.substring(startOfPath);
         int qMark = sitemapURI.indexOf('?');

@@ -1,4 +1,4 @@
-package edu.stanford.irt.cocoon.sitemap.expression;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.util.HashMap;
 import java.util.Map;

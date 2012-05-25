@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.sitemap.expression.Expression;
 import edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser;
-import edu.stanford.irt.cocoon.sitemap.expression.LanewebVariableResolver;
+import edu.stanford.irt.cocoon.sitemap.expression.VariableImpl;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class LanewebVariableResolverTest {
@@ -39,12 +39,12 @@ public class LanewebVariableResolverTest {
 
     private ExpressionParser parser;
 
-    private LanewebVariableResolver resolver;
+    private VariableImpl resolver;
 
     @Before
     public void setUp() throws Exception {
         this.parser = createMock(ExpressionParser.class);
-        this.resolver = new LanewebVariableResolver(this.parser);
+        this.resolver = new VariableImpl(this.parser);
         this.context = new InvokeContext();
         this.model = new HashMap<String, Object>();
         this.manager = createMock(ServiceManager.class);

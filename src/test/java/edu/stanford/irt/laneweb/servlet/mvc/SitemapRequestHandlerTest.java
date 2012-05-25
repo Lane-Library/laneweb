@@ -8,6 +8,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.fail;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -28,12 +29,10 @@ public class SitemapRequestHandlerTest {
     private static final class TestHandler extends SitemapRequestHandler {
 
         @Override
-        protected LanewebEnvironment getEnvironment() {
-            return environment;
+        protected Map<String, Object> getModel() {
+            return new HashMap<String, Object>();
         }
     }
-
-    private static LanewebEnvironment environment;
 
     private DataBinder dataBinder;
 
@@ -55,7 +54,6 @@ public class SitemapRequestHandlerTest {
         this.processor = createMock(Processor.class);
         this.servletContext = createMock(ServletContext.class);
         this.dataBinder = createMock(DataBinder.class);
-        environment = createMock(LanewebEnvironment.class);
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
         this.handler.setDataBinder(this.dataBinder);
@@ -71,13 +69,10 @@ public class SitemapRequestHandlerTest {
         expect(this.response.getOutputStream()).andReturn(null);
         this.response.setContentType("text/html");
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
-        environment.setModel(isA(Map.class));
-        environment.setOutputStream(null);
-        environment.setIsExternal(true);
         this.dataBinder.bind(isA(Map.class), isA(HttpServletRequest.class));
-        replay(this.servletContext, this.response, this.request, this.processor, environment);
+        replay(this.servletContext, this.response, this.request, this.processor);
         this.handler.handleRequest(this.request, this.response);
-        verify(this.servletContext, this.processor, this.response, this.request, environment);
+        verify(this.servletContext, this.processor, this.response, this.request);
     }
 
     @Test

@@ -73,7 +73,7 @@
         </property>
         <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder"/>
         <property name="servletContext" ref="servletContext"/>
-        <lookup-method bean="org.apache.cocoon.environment.Environment" name="getEnvironment"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"

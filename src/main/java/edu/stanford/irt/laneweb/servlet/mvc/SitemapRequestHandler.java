@@ -38,10 +38,10 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             return;
         }
         String sitemapURI = getSitemapURI(request);
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = getModel();
         this.dataBinder.bind(model, request);
         model.put(Model.SITEMAP_URI, sitemapURI);
-        LanewebEnvironment environment = getEnvironment();
+        LanewebEnvironment environment = new LanewebEnvironment();
         environment.setModel(model);
         environment.setOutputStream(response.getOutputStream());
         environment.setIsExternal(true);
@@ -79,7 +79,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.servletContext = servletContext;
     }
 
-    protected abstract LanewebEnvironment getEnvironment();
+    protected abstract Map<String, Object> getModel();
 
     protected String getSitemapURI(final HttpServletRequest request) {
         String requestURI = request.getRequestURI();

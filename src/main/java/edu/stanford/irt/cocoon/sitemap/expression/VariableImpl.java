@@ -11,13 +11,13 @@ import org.apache.cocoon.components.treeprocessor.variables.VariableResolver;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class LanewebVariableResolver extends VariableResolver {
+public class VariableImpl extends VariableResolver {
 
     private List<Expression> expressions;
 
     private ExpressionParser parser;
 
-    public LanewebVariableResolver(final ExpressionParser parser) {
+    public VariableImpl(final ExpressionParser parser) {
         this.parser = parser;
     }
 
