@@ -31,21 +31,12 @@
         </property>
     </bean>
     
-    <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>    
-    <bean id="org.apache.cocoon.configuration.Settings" class="edu.stanford.irt.laneweb.cocoon.Settings">
-        <property name="tempDir" value="#{contextAttributes['javax.servlet.context.tempdir']}"/>
-    </bean>
+    <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
     
     <bean name="org.apache.cocoon.core.xml.SAXParser"
         class="org.apache.cocoon.core.xml.impl.JaxpSAXParser">
         <property name="validate" value="false"/>
     </bean>
-    
-    <bean id="org.apache.avalon.framework.service.ServiceManager"
-        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceManager"/>
-    
-    <bean id="org.apache.cocoon.core.container.spring.logger.Log"
-        class="org.apache.cocoon.core.container.spring.logger.LoggerFactoryBean"/>
     
     <bean id="org.apache.cocoon.caching.Cache"
         class="edu.stanford.irt.laneweb.cocoon.EHCache"
@@ -58,17 +49,6 @@
     <bean id="edu.stanford.irt.cocoon.Model"
         class="java.util.HashMap"
         scope="request">
-    </bean>
-    
-    <bean name="org.apache.excalibur.store.Store/TransientStore"
-        class="edu.stanford.irt.laneweb.cocoon.TransientStore"/>
-    
-    <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
-        class="edu.stanford.irt.laneweb.cocoon.XPathProcessorImpl"/>
-    
-    
-    <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebObjectModel">
     </bean>
     
     <bean name="javax.xml.transform.sax.SAXTransformerFactory/saxon"
@@ -112,12 +92,6 @@
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
-    <bean id="javax.servlet.ServletContext"
-        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
-    
-    <bean id="org.apache.excalibur.xmlizer.XMLizer"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
-    
     <bean id="org.springframework.oxm.Marshaller"
         class="org.springframework.oxm.xstream.XStreamMarshaller">
         <property name="aliases">
@@ -146,5 +120,31 @@
         class="edu.stanford.irt.laneweb.servlet.SunetIdSource">
         <property name="sunetIdCookieCodec" ref="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec"/>
     </bean>
+    
+    <bean id="org.apache.avalon.framework.service.ServiceManager"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceManager"/>
+    
+    <bean id="org.apache.cocoon.core.container.spring.logger.Log"
+        class="org.apache.cocoon.core.container.spring.logger.LoggerFactoryBean"/>    
+    
+    <bean id="org.apache.cocoon.configuration.Settings" class="edu.stanford.irt.laneweb.cocoon.Settings">
+        <property name="tempDir" value="#{contextAttributes['javax.servlet.context.tempdir']}"/>
+    </bean>
+    
+    <bean name="org.apache.excalibur.store.Store/TransientStore"
+        class="edu.stanford.irt.laneweb.cocoon.TransientStore"/>
+    
+    <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
+        class="edu.stanford.irt.laneweb.cocoon.XPathProcessorImpl"/>
+    
+    <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebObjectModel">
+    </bean>
+    
+    <bean id="javax.servlet.ServletContext"
+        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
+    
+    <bean id="org.apache.excalibur.xmlizer.XMLizer"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
     
 </beans>
