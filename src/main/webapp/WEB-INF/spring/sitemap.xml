@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean name="org.apache.cocoon.Processor" abstract="true" init-method="initialize"
-        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        class="edu.stanford.irt.cocoon.sitemap.SitemapImpl">
         <property name="SAXParser" ref="org.apache.cocoon.core.xml.SAXParser"/>
         <property name="sitemapLanguage" ref="org.apache.cocoon.components.treeprocessor.TreeBuilder"/>
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
@@ -57,22 +57,22 @@
     </bean>
 
     <bean name="org.apache.cocoon.matching.Matcher/wildcard"
-        class="edu.stanford.irt.laneweb.cocoon.matching.WildcardSitemapURIMatcher"/>
+        class="edu.stanford.irt.cocoon.sitemap.match.WildcardSitemapURIMatcher"/>
 
     <bean name="org.apache.cocoon.matching.Matcher/url-decoding-wildcard"
-        class="edu.stanford.irt.laneweb.cocoon.matching.URLDecodingWildcardURIMatcher"/>
+        class="edu.stanford.irt.cocoon.sitemap.match.URLDecodingWildcardURIMatcher"/>
 
     <bean name="org.apache.cocoon.matching.Matcher/regexp"
-        class="edu.stanford.irt.laneweb.cocoon.matching.RegexpSitemapURIMatcher"/>
+        class="edu.stanford.irt.cocoon.sitemap.match.RegexpSitemapURIMatcher"/>
 
     <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
-        class="edu.stanford.irt.laneweb.cocoon.matching.RegexpModelValueMatcher"/>
+        class="edu.stanford.irt.cocoon.sitemap.match.RegexpModelValueMatcher"/>
 
     <bean name="org.apache.cocoon.selection.Selector/ipgroup"
         class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"/>
     
     <bean name="org.apache.cocoon.selection.Selector/logged-in"
-        class="edu.stanford.irt.laneweb.cocoon.ModelAttributeSelector">
+        class="edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector">
         <property name="attributeName" value="sunetid"/>
     </bean>
     
@@ -125,12 +125,12 @@
         scope="prototype"/>
     
     <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
-        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebVariableResolver"
+        class="edu.stanford.irt.cocoon.sitemap.expression.LanewebVariableResolver"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.expression.ExpressionParser"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
     </bean>
     
-    <bean name="edu.stanford.irt.laneweb.cocoon.expression.ExpressionParser"
-        class="edu.stanford.irt.laneweb.cocoon.expression.ExpressionParser"/>
+    <bean name="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"
+        class="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
 
 </beans>

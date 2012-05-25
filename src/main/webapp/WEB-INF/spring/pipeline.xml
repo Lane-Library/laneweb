@@ -4,13 +4,13 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
-        class="edu.stanford.irt.laneweb.cocoon.pipeline.NonCachingPipeline"
+        class="edu.stanford.irt.cocoon.pipeline.NonCachingPipeline"
         scope="prototype">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
-        class="edu.stanford.irt.laneweb.cocoon.pipeline.ExpiresCachingPipeline"
+        class="edu.stanford.irt.cocoon.pipeline.ExpiresCachingPipeline"
         scope="prototype">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
@@ -18,13 +18,13 @@
     </bean>
     
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
-        class="edu.stanford.irt.laneweb.cocoon.pipeline.ThrottlingPipeline"
+        class="edu.stanford.irt.cocoon.pipeline.ThrottlingPipeline"
         scope="prototype">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
-        class="edu.stanford.irt.laneweb.cocoon.pipeline.CachingPipeline"
+        class="edu.stanford.irt.cocoon.pipeline.CachingPipeline"
         scope="prototype">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
@@ -50,7 +50,7 @@
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/parameter-map"
-        class="edu.stanford.irt.laneweb.cocoon.ParameterMapGenerator"
+        class="edu.stanford.irt.laneweb.search.ParameterMapGenerator"
         scope="prototype">
         <property name="marshaller" ref="org.springframework.oxm.Marshaller"/>
     </bean>
@@ -86,22 +86,22 @@
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
-        class="edu.stanford.irt.laneweb.cocoon.NamespaceFilter"
+        class="edu.stanford.irt.cocoon.pipeline.transform.NamespaceFilter"
         scope="prototype"/>
     
     <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebXIncludeTransformer"
+        class="edu.stanford.irt.cocoon.pipeline.transform.XIncludeTransformer"
         scope="prototype">
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/debug"
-        class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"
+        class="edu.stanford.irt.cocoon.pipeline.transform.DebugTransformer"
         scope="prototype"/>
     
     <bean name="org.apache.cocoon.transformation.Transformer/saxon"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
+        class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/saxon"/>
     </bean>
@@ -113,13 +113,13 @@
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
+        class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/joost"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/xalan"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
+        class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.cocoon.TraxProcessor/xalan"/>
     </bean>

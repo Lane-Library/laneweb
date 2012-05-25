@@ -48,7 +48,7 @@
         class="org.apache.cocoon.core.container.spring.logger.LoggerFactoryBean"/>
     
     <bean id="org.apache.cocoon.caching.Cache"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebCache"
+        class="edu.stanford.irt.laneweb.cocoon.EHCache"
         destroy-method="destroy">
         <constructor-arg>
             <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
@@ -56,14 +56,14 @@
     </bean>
     
     <bean name="org.apache.excalibur.store.Store/TransientStore"
-        class="edu.stanford.irt.laneweb.cocoon.store.TransientStore"/>
+        class="edu.stanford.irt.laneweb.cocoon.TransientStore"/>
     
     <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
         class="edu.stanford.irt.laneweb.cocoon.XPathProcessorImpl"/>
     
     
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
-        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModel">
+        class="edu.stanford.irt.cocoon.sitemap.expression.LanewebObjectModel">
     </bean>
     
     <bean id="org.apache.cocoon.environment.Environment"
@@ -108,7 +108,7 @@
     </bean>
     
     <bean id="javax.xml.transform.URIResolver"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebURIResolver">
+        class="edu.stanford.irt.cocoon.xml.URIResolverImpl">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     

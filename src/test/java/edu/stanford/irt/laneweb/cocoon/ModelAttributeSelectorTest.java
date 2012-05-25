@@ -9,6 +9,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector;
+
 public class ModelAttributeSelectorTest {
 
     private Map<String, Object> model;
