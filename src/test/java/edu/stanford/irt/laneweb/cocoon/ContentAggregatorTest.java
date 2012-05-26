@@ -23,9 +23,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.pipeline.generate.AggregatorImpl;
+
 public class ContentAggregatorTest {
 
-    private ContentAggregator aggregator;
+    private AggregatorImpl aggregator;
 
     private InputStream inputStream;
 
@@ -48,7 +50,7 @@ public class ContentAggregatorTest {
         this.model = Collections.emptyMap();
         this.source = createMock(Source.class);
         this.inputStream = createMock(InputStream.class);
-        this.aggregator = new ContentAggregator(this.saxParser);
+        this.aggregator = new AggregatorImpl(this.saxParser);
         this.aggregator.setRootElement("root", "namespace", "prefix");
         this.aggregator.addPart("uri", "", null, null, null);
         this.aggregator.addPart("uri", "part", "", null, null);

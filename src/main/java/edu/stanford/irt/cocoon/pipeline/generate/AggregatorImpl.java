@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.cocoon.pipeline.generate;
 
 import java.io.IOException;
 
@@ -10,11 +10,11 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class ContentAggregator extends DefaultContentAggregator {
+public class AggregatorImpl extends DefaultContentAggregator {
 
     private SAXParser saxParser;
 
-    public ContentAggregator(final SAXParser saxParser) {
+    public AggregatorImpl(final SAXParser saxParser) {
         this.saxParser = saxParser;
     }
 
