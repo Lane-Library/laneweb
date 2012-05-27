@@ -23,12 +23,12 @@
     <bean name="match"
         class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
     
-    <bean name="generate"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
+    <bean name="select"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
         scope="prototype"/>
     
-    <bean name="serialize"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
+    <bean name="generate"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
         scope="prototype"/>
     
     <bean name="aggregate"
@@ -39,8 +39,8 @@
         class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
         scope="prototype"/>
     
-    <bean name="select"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
+    <bean name="serialize"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
         scope="prototype"/>
     
     <bean name="org.apache.cocoon.matching.Matcher/wildcard"
@@ -99,12 +99,6 @@
         <property name="source" value="/svg.xmap"/>
     </bean>
     
-    <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
-        class="edu.stanford.irt.cocoon.sitemap.expression.VariableImpl"
-        scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
-    </bean>
-    
     <bean name="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"
         class="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
     
@@ -131,6 +125,12 @@
         class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
         <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
+    </bean>
+    
+    <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
+        class="edu.stanford.irt.cocoon.sitemap.expression.VariableImpl"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
     </bean>
 
 </beans>
