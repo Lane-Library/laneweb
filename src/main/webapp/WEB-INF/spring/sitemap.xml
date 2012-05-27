@@ -10,10 +10,6 @@
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
     
-    <bean name="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"
-        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoFactoryBean"
-        init-method="init"/>
-    
     <bean name="org.apache.cocoon.Processor/sitemap" parent="org.apache.cocoon.Processor">
         <property name="source" value="/sitemap.xmap"/>
     </bean>
@@ -50,12 +46,6 @@
         <property name="source" value="/svg.xmap"/>
     </bean>
 
-    <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
-    </bean>
-
     <bean name="org.apache.cocoon.matching.Matcher/wildcard"
         class="edu.stanford.irt.cocoon.sitemap.match.WildcardSitemapURIMatcher"/>
 
@@ -74,21 +64,6 @@
     <bean name="org.apache.cocoon.selection.Selector/logged-in"
         class="edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector">
         <property name="attributeName" value="sunetid"/>
-    </bean>
-    
-    <bean id="org.apache.cocoon.matching.MatcherSelector"
-        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
-        <constructor-arg value="org.apache.cocoon.matching.Matcher"/>
-    </bean>
-    
-    <bean id="org.apache.cocoon.acting.ActionSelector"
-        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
-        <constructor-arg value="org.apache.cocoon.acting.Action"/>
-    </bean>
-    
-    <bean id="org.apache.cocoon.selection.SelectorSelector"
-        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
-        <constructor-arg value="org.apache.cocoon.selection.Selector"/>
     </bean>
     
     <bean name="sitemap"
@@ -132,5 +107,30 @@
     
     <bean name="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"
         class="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
+    
+    <bean id="org.apache.cocoon.matching.MatcherSelector"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
+        <constructor-arg value="org.apache.cocoon.matching.Matcher"/>
+    </bean>
+    
+    <bean id="org.apache.cocoon.acting.ActionSelector"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
+        <constructor-arg value="org.apache.cocoon.acting.Action"/>
+    </bean>
+    
+    <bean id="org.apache.cocoon.selection.SelectorSelector"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
+        <constructor-arg value="org.apache.cocoon.selection.Selector"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"
+        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoFactoryBean"
+        init-method="init"/>
+    
+    <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder"
+        class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
+        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
+    </bean>
 
 </beans>
