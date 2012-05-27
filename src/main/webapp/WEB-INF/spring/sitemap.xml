@@ -10,6 +10,59 @@
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
     
+    <bean name="sitemap"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"/>
+    
+    <bean name="pipelines"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelinesNodeBuilder"/>
+    
+    <bean name="pipeline"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelineNodeBuilder"
+        scope="prototype"/>
+    
+    <bean name="match"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
+    
+    <bean name="generate"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
+        scope="prototype"/>
+    
+    <bean name="serialize"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
+        scope="prototype"/>
+    
+    <bean name="aggregate"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
+        scope="prototype"/>
+    
+    <bean name="transform"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
+        scope="prototype"/>
+    
+    <bean name="select"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
+        scope="prototype"/>
+    
+    <bean name="org.apache.cocoon.matching.Matcher/wildcard"
+        class="edu.stanford.irt.cocoon.sitemap.match.WildcardSitemapURIMatcher"/>
+    
+    <bean name="org.apache.cocoon.matching.Matcher/url-decoding-wildcard"
+        class="edu.stanford.irt.cocoon.sitemap.match.URLDecodingWildcardURIMatcher"/>
+    
+    <bean name="org.apache.cocoon.matching.Matcher/regexp"
+        class="edu.stanford.irt.cocoon.sitemap.match.RegexpSitemapURIMatcher"/>
+    
+    <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
+        class="edu.stanford.irt.cocoon.sitemap.match.RegexpModelValueMatcher"/>
+    
+    <bean name="org.apache.cocoon.selection.Selector/ipgroup"
+        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"/>
+    
+    <bean name="org.apache.cocoon.selection.Selector/logged-in"
+        class="edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector">
+        <property name="attributeName" value="sunetid"/>
+    </bean>
+    
     <bean name="org.apache.cocoon.Processor/sitemap" parent="org.apache.cocoon.Processor">
         <property name="source" value="/sitemap.xmap"/>
     </bean>
@@ -45,59 +98,6 @@
     <bean name="org.apache.cocoon.Processor/svg" parent="org.apache.cocoon.Processor">
         <property name="source" value="/svg.xmap"/>
     </bean>
-
-    <bean name="org.apache.cocoon.matching.Matcher/wildcard"
-        class="edu.stanford.irt.cocoon.sitemap.match.WildcardSitemapURIMatcher"/>
-
-    <bean name="org.apache.cocoon.matching.Matcher/url-decoding-wildcard"
-        class="edu.stanford.irt.cocoon.sitemap.match.URLDecodingWildcardURIMatcher"/>
-
-    <bean name="org.apache.cocoon.matching.Matcher/regexp"
-        class="edu.stanford.irt.cocoon.sitemap.match.RegexpSitemapURIMatcher"/>
-
-    <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
-        class="edu.stanford.irt.cocoon.sitemap.match.RegexpModelValueMatcher"/>
-
-    <bean name="org.apache.cocoon.selection.Selector/ipgroup"
-        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"/>
-    
-    <bean name="org.apache.cocoon.selection.Selector/logged-in"
-        class="edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector">
-        <property name="attributeName" value="sunetid"/>
-    </bean>
-    
-    <bean name="sitemap"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"/>
-    
-    <bean name="pipelines"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelinesNodeBuilder"/>
-    
-    <bean name="pipeline"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelineNodeBuilder"
-        scope="prototype"/>
-    
-    <bean name="match"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
-    
-    <bean name="generate"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
-        scope="prototype"/>
-    
-    <bean name="serialize"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
-        scope="prototype"/>
-    
-    <bean name="aggregate"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
-        scope="prototype"/>
-    
-    <bean name="transform"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
-        scope="prototype"/>
-    
-    <bean name="select"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
-        scope="prototype"/>
     
     <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
         class="edu.stanford.irt.cocoon.sitemap.expression.VariableImpl"
