@@ -44,16 +44,22 @@
         scope="prototype"/>
     
     <bean name="org.apache.cocoon.matching.Matcher/wildcard"
-        class="edu.stanford.irt.cocoon.sitemap.match.WildcardSitemapURIMatcher"/>
+        class="edu.stanford.irt.cocoon.sitemap.match.WildcardMatcher">
+        <constructor-arg value="sitemap-uri"/>
+    </bean>
     
     <bean name="org.apache.cocoon.matching.Matcher/url-decoding-wildcard"
-        class="edu.stanford.irt.cocoon.sitemap.match.URLDecodingWildcardURIMatcher"/>
+        class="edu.stanford.irt.cocoon.sitemap.match.URLDecodingMatcher">
+        <constructor-arg value="sitemap-uri"/>
+    </bean>
     
     <bean name="org.apache.cocoon.matching.Matcher/regexp"
-        class="edu.stanford.irt.cocoon.sitemap.match.RegexpSitemapURIMatcher"/>
+        class="edu.stanford.irt.cocoon.sitemap.match.RegexpMatcher">
+        <constructor-arg value="sitemap-uri"/>
+    </bean>
     
     <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
-        class="edu.stanford.irt.cocoon.sitemap.match.RegexpModelValueMatcher"/>
+        class="edu.stanford.irt.cocoon.sitemap.match.ParameterRegexpMatcher"/>
     
     <bean name="org.apache.cocoon.selection.Selector/ipgroup"
         class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"/>

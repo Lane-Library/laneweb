@@ -8,18 +8,18 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.match.RegexpSitemapURIMatcher;
+import edu.stanford.irt.cocoon.sitemap.match.RegexpMatcher;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class RegexpSitemapURIMatcherTest {
 
     Map<String, Object> model;
 
-    private RegexpSitemapURIMatcher matcher;
+    private RegexpMatcher matcher;
 
     @Before
     public void setUp() throws Exception {
-        this.matcher = new RegexpSitemapURIMatcher();
+        this.matcher = new RegexpMatcher(Model.SITEMAP_URI);
         this.model = new HashMap<String, Object>();
     }
 

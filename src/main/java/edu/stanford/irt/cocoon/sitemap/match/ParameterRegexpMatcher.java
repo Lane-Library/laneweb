@@ -7,7 +7,7 @@ import org.apache.cocoon.matching.AbstractRegexpMatcher;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class RegexpModelValueMatcher extends AbstractRegexpMatcher {
+public class ParameterRegexpMatcher extends AbstractRegexpMatcher {
 
     @SuppressWarnings("rawtypes")
     @Override

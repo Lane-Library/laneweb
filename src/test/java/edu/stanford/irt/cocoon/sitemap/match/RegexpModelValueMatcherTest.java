@@ -13,11 +13,11 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.match.RegexpModelValueMatcher;
+import edu.stanford.irt.cocoon.sitemap.match.ParameterRegexpMatcher;
 
 public class RegexpModelValueMatcherTest {
 
-    private RegexpModelValueMatcher matcher;
+    private ParameterRegexpMatcher matcher;
 
     private Map<String, Object> model;
 
@@ -25,7 +25,7 @@ public class RegexpModelValueMatcherTest {
 
     @Before
     public void setUp() throws Exception {
-        this.matcher = new RegexpModelValueMatcher();
+        this.matcher = new ParameterRegexpMatcher();
         this.model = new HashMap<String, Object>();
         this.parameters = createMock(Parameters.class);
     }

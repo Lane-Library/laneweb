@@ -6,7 +6,11 @@ import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 
-public class URLDecodingWildcardURIMatcher extends WildcardSitemapURIMatcher {
+public class URLDecodingMatcher extends WildcardMatcher {
+
+    public URLDecodingMatcher(final String key) {
+        super(key);
+    }
 
     @SuppressWarnings("rawtypes")
     @Override

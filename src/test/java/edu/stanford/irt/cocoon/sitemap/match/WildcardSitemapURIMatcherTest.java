@@ -8,18 +8,18 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.match.WildcardSitemapURIMatcher;
+import edu.stanford.irt.cocoon.sitemap.match.WildcardMatcher;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class WildcardSitemapURIMatcherTest {
 
-    private WildcardSitemapURIMatcher matcher;
+    private WildcardMatcher matcher;
 
     private Map<String, Object> model;
 
     @Before
     public void setUp() throws Exception {
-        this.matcher = new WildcardSitemapURIMatcher();
+        this.matcher = new WildcardMatcher(Model.SITEMAP_URI);
         this.model = new HashMap<String, Object>();
     }
 

@@ -8,18 +8,18 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.match.URLDecodingWildcardURIMatcher;
+import edu.stanford.irt.cocoon.sitemap.match.URLDecodingMatcher;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class URLDecodingWildcardURIMatcherTest {
 
-    private URLDecodingWildcardURIMatcher matcher;
+    private URLDecodingMatcher matcher;
 
     private Map<String, Object> model;
 
     @Before
     public void setUp() throws Exception {
-        this.matcher = new URLDecodingWildcardURIMatcher();
+        this.matcher = new URLDecodingMatcher(Model.SITEMAP_URI);
         this.model = new HashMap<String, Object>();
     }
 
