@@ -34,9 +34,7 @@
     <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
     
     <bean name="org.apache.cocoon.core.xml.SAXParser"
-        class="org.apache.cocoon.core.xml.impl.JaxpSAXParser">
-        <property name="validate" value="false"/>
-    </bean>
+        class="org.apache.cocoon.core.xml.impl.JaxpSAXParser"/>
     
     <bean id="org.apache.cocoon.caching.Cache"
         class="edu.stanford.irt.laneweb.cocoon.EHCache"
