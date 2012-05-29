@@ -7,9 +7,6 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import edu.stanford.irt.suggest.Suggestion;
-import edu.stanford.irt.suggest.SuggestionManager;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +14,9 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.suggest.Suggestion;
+import edu.stanford.irt.suggest.SuggestionManager;
 
 /**
  * @author ryanmax
@@ -46,7 +46,9 @@ public class SuggestionControllerTest {
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.SuggestionController.SuggestionReader#generate()} .
+     * Test method for
+     * {@link edu.stanford.irt.laneweb.SuggestionController.SuggestionReader#generate()}
+     * .
      * 
      * @throws IOException
      */
@@ -59,6 +61,16 @@ public class SuggestionControllerTest {
         Map<String, List<String>> suggestions = this.controller.getSuggestions("venous thrombosis", "mesh");
         assertEquals("Venous Thrombosis", suggestions.get("suggest").get(0));
         verify(suggestion, this.eresource, this.history, this.mesh);
+    }
+
+    @Test
+    public void testMaxQuerySize() {
+        assertEquals(0, this.controller.getSuggestions("123456789012345678901234567890123", "").get("suggest").size());
+    }
+
+    @Test
+    public void testMinQuerySize() {
+        assertEquals(0, this.controller.getSuggestions("12", "").get("suggest").size());
     }
 
     @Test
