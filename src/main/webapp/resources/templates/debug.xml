@@ -68,7 +68,7 @@
                             <fieldset id="searchFields">
                                 <select name="source" id="searchSource">
                                     <option value="all-all"
-                                        title="Subject, Title, Author, PMID, ISSN"
+                                        title="Subject, Title, Author, PMID, ISSN, DOI"
                                         >Lane Search</option>
                                     <option value="clinical-all"
                                         title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed ..."
