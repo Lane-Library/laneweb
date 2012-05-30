@@ -14,6 +14,10 @@ public class DummyBookmarkDAO implements BookmarkDAO {
         return bookmarks;
     }
 
+    public int getRowCount() {
+        return 0;
+    }
+
     public void saveLinks(final String sunetid, final List<Bookmark> links) {
     }
 

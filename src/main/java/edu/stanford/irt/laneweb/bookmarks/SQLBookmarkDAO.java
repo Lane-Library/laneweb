@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -26,6 +27,8 @@ public class SQLBookmarkDAO implements BookmarkDAO {
     private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE SUNETID = ?";
 
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
+
+    private static final String ROW_COUNT = "SELECT COUNT(*) FROM BOOKMARKS";
 
     private static final String WRITE_BOOKMARKS_SQL =
             "BEGIN " +
@@ -75,6 +78,28 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             JdbcUtils.closeResultSet(rs);
         }
         return links;
+    }
+
+    public int getRowCount() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = this.dataSource.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(ROW_COUNT);
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new LanewebException(e);
+        } finally {
+            JdbcUtils.closeConnection(conn);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeResultSet(rs);
+        }
+        return count;
     }
 
     public void saveLinks(final String sunetid, final List<Bookmark> links) {

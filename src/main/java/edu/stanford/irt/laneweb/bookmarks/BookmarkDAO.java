@@ -6,5 +6,7 @@ public interface BookmarkDAO {
 
     List<Bookmark> getLinks(String sunetid);
 
+    int getRowCount();
+
     void saveLinks(String sunetid, List<Bookmark> links);
 }
