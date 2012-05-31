@@ -22,12 +22,6 @@
     margin-left:5px
 }
 
-/*special style for search form*/
-#bookmark-link.search {
-    top : 76px;
-    right : 4px
-}
-
 #bookmark-link.active,
 #bookmark-link.bookmarking {
 background-position: 0 -26px

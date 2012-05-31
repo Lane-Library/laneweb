@@ -575,8 +575,10 @@
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
                 if (LANE.SearchResult.getSearchTerms()) {
-                    Y.one("#search").on("mouseover", this._handleTargetMouseover, this);
-                    Y.one("#search").on("mouseout", this._handleTargetMouseout, this);
+                    var bookmarkSearch = Y.one("#bookmarkSearch");
+                    bookmarkSearch.setStyle("display", "inline");
+                    bookmarkSearch.on("mouseover", this._handleTargetMouseover, this);
+                    bookmarkSearch.on("mouseout", this._handleTargetMouseout, this);
                 }
                 this.on("statusChange", this._handleStatusChange);
                 this.get("bookmarks").after("addSync", this._handleSyncEvent, this);
@@ -621,7 +623,7 @@
              */
             _handleClick : function() {
                 var target = this.get("target"), label, url;
-                if (target.get("id") == "search") {
+                if (target.get("id") == "bookmarkSearch") {
                     label = "Search for: " + LANE.SearchResult.getSearchTerms();
                     url = "/search.html?source=" + LANE.SearchResult.getSearchSource() + "&q=" + LANE.SearchResult.getSearchTerms();
                 } else {
@@ -671,7 +673,7 @@
              * @returns {Boolean}
              */
             _isBookmarkable : function(target) {
-                return target.get("id") == "search" || (target.getStyle("display") == "inline" && !target.one("img"));
+                return target.getStyle("display") == "inline" && !target.one("img");
             },
             
             /**
@@ -708,12 +710,6 @@
                 //IE messes up the event handling if set up on initialization
                 //so purging and selectively set them when the status changes.
                 node.purge(false);
-                //style link differently if for the search form
-                if (target.get("id") == "search") {
-                    node.addClass("search");
-                } else {
-                    node.removeClass("search");
-                }
                 switch(event.newVal) {
                 //OFF: not visible
                 case BookmarkLink.OFF : 

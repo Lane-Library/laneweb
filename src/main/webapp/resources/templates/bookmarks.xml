@@ -48,6 +48,7 @@
                                         >Textbooks</option>
                                 </select>
                                 <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187;</span>
+                                <a id="bookmarkSearch" style="display:none">Bookmark this search</a>
                                 <div id="searchIndicator"><img alt="[searching]"
                                         src="/resources/images/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
