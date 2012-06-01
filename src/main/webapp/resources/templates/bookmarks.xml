@@ -73,7 +73,7 @@
                         </ul>
                         <ul id="login">
                             <li>
-                                <a href="/secure/login.html">Login</a>
+                                <a href="/secure/login.html">MyLane login</a>
                             </li>
                             <li id="favorites">
                                 <a href="/favorites.html">My Bookmarks</a>
