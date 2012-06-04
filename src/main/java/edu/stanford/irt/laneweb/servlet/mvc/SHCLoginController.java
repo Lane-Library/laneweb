@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,8 @@ public class SHCLoginController {
     @Autowired
     private LDAPDataAccess ldapDataSource;
 
+    private final Logger log = LoggerFactory.getLogger(SHCLoginController.class);
+
     public String getSunetid(final HttpSession session, final String univid) {
         String sunetid = (String) session.getAttribute(Model.SUNETID);
         if (sunetid == null) {
@@ -40,24 +44,32 @@ public class SHCLoginController {
     }
 
     @RequestMapping(value = "/shclogin")
-    public void login(@RequestParam final String emrid, @RequestParam final String univid, final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException {
+    public void login(@RequestParam final String emrid, @RequestParam final String univid,
+            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         String url = ERROR_URL;
         String sunetid = null;
         String decryptedEmrid = null;
         String decryptedUnivid = null;
         decryptedEmrid = this.codec.decrypt(emrid);
-        if (decryptedEmrid != null) {
-            session.setAttribute(Model.EMRID, decryptedEmrid);
-        }
         decryptedUnivid = this.codec.decrypt(univid);
+        if(decryptedEmrid.isEmpty()){
+            decryptedEmrid = null;
+        }
+        if(decryptedUnivid.isEmpty()){
+            decryptedUnivid = null;
+        }
+        if (decryptedEmrid != null) {
+            session.setAttribute(Model.EMRID, "epic-" + decryptedEmrid);
+        }
         if (decryptedUnivid != null) {
             session.setAttribute(Model.UNIVID, decryptedUnivid);
             sunetid = getSunetid(session, decryptedUnivid);
         }
         if (sunetid != null) {
             url = SUCCESS_URL;
+        } else if (decryptedUnivid != null) {
+            this.log.error("missing sunetid for univid: " + decryptedUnivid);
         }
         response.sendRedirect(request.getContextPath() + url);
     }
