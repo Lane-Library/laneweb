@@ -85,12 +85,12 @@
                             <li>
                                 <a id="logout" href="/logout">Logout</a>
                             </li>
-                            <!--<li>
+                            <li>
                                 <a href="?proxy-links=false">Guest Access</a>
                             </li>
                             <li>
                                 <a href="?proxy-links=true">Stanford Access</a>
-                            </li>-->
+                            </li>
                         </ul>
                         <ul id="laneNav">
                             <li>
