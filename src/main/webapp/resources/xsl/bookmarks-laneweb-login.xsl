@@ -59,7 +59,7 @@
 
     <!-- the 5th #login li is the proxy-off toggle -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[5]">
-        <xsl:if test="$proxy-links and string-length($sunetid) = 0 and matches($ipgroup,'^(OTHER|PAVA|LPCH|SHC|ERR)$')">
+        <xsl:if test="$proxy-links ='true' and string-length($sunetid) = 0 and matches($ipgroup,'^(OTHER|PAVA|ERR)$')">
             <xsl:copy>
                 <a>
                     <xsl:attribute name="href">
@@ -88,7 +88,7 @@
 
     <!-- the 6th #login li is the proxy-on toggle -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[6]">
-        <xsl:if test="$proxy-links and string-length($sunetid) = 0 and matches($ipgroup,'^(OTHER|PAVA|LPCH|SHC|ERR)$')">
+        <xsl:if test="$proxy-links = 'false' and string-length($sunetid) = 0 and matches($ipgroup,'^(OTHER|PAVA|ERR)$')">
             <xsl:copy>
                 <a>
                     <xsl:attribute name="href">
