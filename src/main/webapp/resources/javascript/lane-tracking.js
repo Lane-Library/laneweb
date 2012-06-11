@@ -14,8 +14,8 @@
                 rel = node.get('rel');
                 if (rel && rel.indexOf('popup') === 0) {
                     relTokens = rel.split(' ');
-                    if (relTokens[1] == 'local' || relTokens[1] == 'faq') {
-                        title = 'YUI Pop-up [' + relTokens[1] + ']';
+                    if (relTokens[1] == 'local') {
+                        title = 'YUI Pop-up [local]';
                     }
                 }
                 //next try alt attribute.
@@ -101,7 +101,7 @@
                                 path = '/';
                             }
                             external = true;
-                        } else if (node.get('rel') && (node.get('rel').indexOf('popup local') === 0 || node.get('rel').indexOf('popup faq') === 0)) {
+                        } else if (node.get('rel') && (node.get('rel').indexOf('popup local') === 0)) {
                             host = document.location.host;
                             path = document.location.pathname;
                             query = document.location.search;
@@ -188,7 +188,7 @@
                             rel = link.get('rel');
                             if (rel && rel.indexOf('popup ') === 0) {
                                 relTokens = rel.split(' ');
-                                if (relTokens[1] == 'local' || relTokens[1] == 'faq') {
+                                if (relTokens[1] == 'local') {
                                     return true;
                                 }
                             }

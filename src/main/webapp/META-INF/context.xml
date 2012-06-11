@@ -25,9 +25,6 @@
     <Environment name="laneweb.context.stage-base"
         type="java.lang.String"
         value="${laneweb.context.stage-base}"/>
-    <Environment name="laneweb.context.medblog-base"
-        type="java.lang.String"
-        value="${laneweb.context.medblog-base}"/>
     <Environment name="ezproxy-key"
         type="java.lang.String"
         value="${laneweb.context.ezproxy-key}"/>

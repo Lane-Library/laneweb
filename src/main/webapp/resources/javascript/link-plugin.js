@@ -90,8 +90,8 @@
                     rel = node.get('rel');
                     if (rel && rel.indexOf('popup') === 0) {
                         relTokens = rel.split(' ');
-                        if (relTokens[1] == 'local' || relTokens[1] == 'faq') {
-                            title = 'YUI Pop-up [' + relTokens[1] + ']';
+                        if (relTokens[1] == 'local') {
+                            title = 'YUI Pop-up [local]';
                         }
                     }
                     //next try alt attribute.

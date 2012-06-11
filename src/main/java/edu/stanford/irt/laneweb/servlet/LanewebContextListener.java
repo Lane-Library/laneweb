@@ -22,8 +22,6 @@ public class LanewebContextListener implements ServletContextListener {
 
     public static final String LIVE_BASE = "laneweb.context.live-base";
 
-    public static final String MEDBLOG_BASE = "laneweb.context.medblog-base";
-
     public static final String STAGE_BASE = "laneweb.context.stage-base";
 
     public static final String VERSION = "laneweb.context.version";
@@ -39,7 +37,6 @@ public class LanewebContextListener implements ServletContextListener {
         this.servletContext = sce.getServletContext();
         this.servletContext.setAttribute(LIVE_BASE, getURL(LIVE_BASE));
         this.servletContext.setAttribute(STAGE_BASE, getURL(STAGE_BASE));
-        this.servletContext.setAttribute(MEDBLOG_BASE, getURL(MEDBLOG_BASE));
         this.servletContext.setAttribute(EZPROXY, getValue(EZPROXY));
         this.servletContext.setAttribute(VERSION, getValue(VERSION));
     }

@@ -14,7 +14,6 @@ public class ServletContextDataBinder implements DataBinder {
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         model.put(Model.VERSION, this.servletContext.getAttribute(LanewebContextListener.VERSION));
-        model.put(Model.MEDBLOG_BASE, this.servletContext.getAttribute(LanewebContextListener.MEDBLOG_BASE));
     }
 
     public void setServletContext(final ServletContext servletContext) {

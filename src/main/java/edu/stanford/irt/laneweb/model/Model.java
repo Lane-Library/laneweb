@@ -51,8 +51,6 @@ public interface Model {
 
     String LIVE_CHAT_AVAILABLE = "live-chat-available";
 
-    String MEDBLOG_BASE = "medblog-base";
-
     String MESH = "mesh";
 
     String MODEL = "model";
