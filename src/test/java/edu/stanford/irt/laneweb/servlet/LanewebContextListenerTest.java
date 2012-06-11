@@ -13,7 +13,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -42,31 +41,15 @@ public class LanewebContextListenerTest {
         MockInitialContextFactory.setMockContext(this.namingContext);
     }
 
-    @After
-    public void tearDown() throws Exception {
-        verifyMocks();
-    }
-
     @Test
     public void testContextInitialized() throws NamingException {
         expect(this.event.getServletContext()).andReturn(this.servletContext);
         expect(this.servletContext.getInitParameter(isA(String.class))).andReturn(null).atLeastOnce();
         expect(this.namingContext.lookup(isA(String.class))).andReturn("file:/foo").atLeastOnce();
         this.servletContext.setAttribute(isA(String.class), isA(Object.class));
-        expectLastCall().times(5);
-        replayMocks();
+        expectLastCall().times(4);
+        replay(this.namingContext, this.event, this.servletContext);
         this.listener.contextInitialized(this.event);
-    }
-
-    private void replayMocks() {
-        replay(this.namingContext);
-        replay(this.event);
-        replay(this.servletContext);
-    }
-
-    private void verifyMocks() {
-        verify(this.namingContext);
-        verify(this.event);
-        verify(this.servletContext);
+        verify(this.namingContext, this.event, this.servletContext);
     }
 }
