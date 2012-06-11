@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-06-11" version="1.12.32" description="1.12.32 bug fix release">
+            <action date="2012-06-11" dev="ceyates" issue="70833" type="remove">
+                OK to remove /howto/?id= &amp; index.html?category= machinery
+            </action>
+            <action date="2012-06-01" dev="ceyates" issue="70616" type="update">
+                change 'login' to 'MyLane login'
+            </action>
+            <action date="2012-05-30" dev="ceyates" issue="70615" type="add">
+                create a url that reports size of bookmarks table
+            </action>
+            <action date="2012-06-01" dev="ceyates" issue="70614" type="add">
+                add "Bookmark this search" link
+            </action>
+            <action date="2012-06-05" dev="olgary" issue="69304" type="update">
+                changed bookmarks.css to reduce margin-bottom for bookmark links in the drop down 
+            </action>
+        </release>
         <release date="2012-05-25" version="1.12.31" description="1.12.31 bug fix release">
             <action date="2012-05-22" dev="ceyates" issue="70022" type="add">
                 Use of bookmarklet when not logged in should send user to WebAuth
