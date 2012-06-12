@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * sends Disallow: / if not production server. NOTE: CAB group has asked to be notified of any robots.txt changes. Send
- * description of changes to Ryan or Tony.
+ * description of changes to irt-change@lists.stanford.edu
  * 
  * @author ceyates
  */
