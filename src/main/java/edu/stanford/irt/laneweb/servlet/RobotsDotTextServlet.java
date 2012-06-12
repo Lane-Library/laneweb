@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * sends Disallow: / if not production server.
+ * sends Disallow: / if not production server. NOTE: CAB group has asked to be notified of any robots.txt changes. Send
+ * description of changes to Ryan or Tony.
  * 
  * @author ceyates
  */
