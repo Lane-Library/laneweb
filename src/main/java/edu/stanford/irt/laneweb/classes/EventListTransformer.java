@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.classes;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
@@ -8,6 +11,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
@@ -59,7 +63,22 @@ public class EventListTransformer extends AbstractTransformer implements Cacheab
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
         if ("event".equals(localName)) {
-//            this.saxParser.parse(this.sourceResolver.resolveURI(atts.getValue("href")), this.pipe);
+            InputStream input = null;
+            try {
+                input = this.sourceResolver.resolveURI(atts.getValue("href")).getInputStream();
+                InputSource inputSource = new InputSource(input);
+                this.saxParser.parse(inputSource, this.pipe);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                if (input != null) {
+                    try {
+                        input.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
         } else {
             super.startElement(uri, localName, qName, atts);
         }
