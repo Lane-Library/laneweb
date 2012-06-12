@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-06-12" version="1.12.33" description="1.12.33 emergency release">
+            <action date="2012-06-12" dev="ceyates" issue="71263" type="fix">
+                classes not appearing on various web pages
+            </action>
+        </release>
         <release date="2012-06-11" version="1.12.32" description="1.12.32 bug fix release">
             <action date="2012-06-11" dev="ceyates" issue="70833" type="remove">
                 OK to remove /howto/?id= &amp; index.html?category= machinery
