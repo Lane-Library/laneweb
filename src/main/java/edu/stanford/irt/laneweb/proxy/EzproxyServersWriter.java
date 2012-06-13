@@ -31,21 +31,25 @@ public class EzproxyServersWriter {
         + "and url like 'http%' "
         + "and url not like '%.stanford.edu%' "
         + ") "
-        + "select substr(url, 0, instr(url,'/',1,3)) as server from urls "
+        + "select substr(url, 0, instr(url,'/',1,3)-1) as server from urls "
         + "where url like 'https://%' and instr(url,'/',1,3) > 0 "
         + UNION
         + "select url as server from urls "
         + "where url like 'https://%' and instr(url,'/',1,3) = 0 "
         + UNION
-        + "select substr(url, 0, instr(url,'/',1,3)) as server from urls "
+        + "select substr(url, 0, instr(url,'/',1,3)-1) as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) > 0 "
         + UNION
         + "select url as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
 
-    private static final byte[] SUL = "HJ jenson.stanford.edu\nHJ socrates.stanford.edu\nHJ library.stanford.edu\nHJ searchworks.stanford.edu"
+    private static final byte[] SUL = "T jenson.stanford.edu\nU http://jenson.stanford.edu\nHJ jenson.stanford.edu\n\nT socrates.stanford.edu\nU http://socrates.stanford.edu\nHJ socrates.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
             .getBytes();
 
+    private static final byte[] T = "T ".getBytes();
+    
+    private static final byte[] U = "U ".getBytes();
+    
     private DataSource dataSource;
 
     public void setDataSource(final DataSource dataSource) {
@@ -65,8 +69,15 @@ public class EzproxyServersWriter {
             rs = stmt.executeQuery(SQL);
             while (rs.next()) {
                 String host = rs.getString(1);
+                outputStream.write(T);
+                outputStream.write(host.getBytes());
+                outputStream.write('\n');
+                outputStream.write(U);
+                outputStream.write(host.getBytes());
+                outputStream.write('\n');
                 outputStream.write(HJ);
                 outputStream.write(host.getBytes());
+                outputStream.write('\n');
                 outputStream.write('\n');
             }
             outputStream.write(SUL);
