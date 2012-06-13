@@ -210,6 +210,7 @@
 	height: 48px;
 }
 
+/* TODO: remove this, at the time I commented this out there was no class="bookmarklet" in the content
 .bookmarklet {
 	background-position: -25px -529px;
 	background-color: transparent;
@@ -225,7 +226,7 @@
 	height: 36px;
 	width: 173px;
 }
-
+*/
 .info {
 	background-position: -250px -61px;
 	background-color: transparent;
