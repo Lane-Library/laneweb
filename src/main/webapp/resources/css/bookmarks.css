@@ -20,6 +20,12 @@
     position: absolute;
     margin-left:5px
 }
+
+/*styles for topResources links so appears inside li element*/
+#topResources #bookmark-link {
+    bottom: 0;
+    right: 0
+}
 /*the link in the search form for bookmarking searches*/
 #bookmarkSearch {
     display:none;
