@@ -23,7 +23,7 @@
 
 /*styles for topResources links so appears inside li element*/
 #topResources #bookmark-link {
-    bottom: 0;
+    bottom: 2px;
     right: 0
 }
 /*the link in the search form for bookmarking searches*/
@@ -41,6 +41,10 @@ background-position: 0 -26px
 background-position: 0 -53px;
 }
 
+/*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
+#bookmarkletIE {
+    display: none
+}
 .yui3-bookmark-editor label,
 .yui3-bookmark-editor input[type='text'],
 .yui3-bookmark-editor button {

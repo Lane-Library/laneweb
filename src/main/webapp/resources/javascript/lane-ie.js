@@ -54,5 +54,14 @@
     		node.append("<img id='highlightedResourcesIECorner' src='/././resources/images/highlightedResourcesIECorner.png'/>");
     		//TODO: possible further IE6 corrections
     	}
+    	//toggle bookmarklet instructions for IE on favorites page
+    	node = Y.one("#bookmarkletNotIE");
+    	if (node) {
+    	    node.setStyle("display", "none");
+    	}
+    	node = Y.one("#bookmarletIE");
+    	if (node) {
+    	    node.setStyle("display", "block");
+    	}
     }
 })();
