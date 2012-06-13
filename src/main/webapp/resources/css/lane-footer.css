@@ -29,8 +29,8 @@
 
 #socialMedia {
     position:absolute;
-    right : 21px;
-    bottom : 15px;
+    right: 32px;
+    bottom: 65px;
 }
 
 #socialMedia a {
@@ -38,8 +38,8 @@
 	width: 26px;
 	margin-left:13px;
 	display: inline-block;
-	background-image : url("/././resources/images/icons-sprite.png");
-	background-repeat : no-repeat;
+	background-image: url("/././resources/images/icons-sprite.png");
+	background-repeat: no-repeat;
 }
 
 .facebook {
@@ -65,3 +65,14 @@
 .flickr:hover {
 	background-position: -142px -172px;	
 }
+
+.makegift {
+	background-image: url("/././resources/images/icons-sprite.png");
+	background-repeat: no-repeat;
+	background-position: -480px 0px;
+	position:absolute;
+    right: 21px;
+    bottom: 110px;
+    height: 48px;
+	width: 130px;
+	}
