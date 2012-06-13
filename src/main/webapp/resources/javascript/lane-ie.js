@@ -59,7 +59,7 @@
     	if (node) {
     	    node.setStyle("display", "none");
     	}
-    	node = Y.one("#bookmarletIE");
+    	node = Y.one("#bookmarkletIE");
     	if (node) {
     	    node.setStyle("display", "block");
     	}
