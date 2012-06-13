@@ -69,10 +69,10 @@
 .makegift {
 	background-image: url("/././resources/images/icons-sprite.png");
 	background-repeat: no-repeat;
-	background-position: -480px 0px;
+	background-position: -460px 0px;
 	position:absolute;
-    right: 21px;
+    right: 15px;
     bottom: 110px;
-    height: 48px;
-	width: 130px;
+    height: 59px;
+	width: 164px;
 	}
