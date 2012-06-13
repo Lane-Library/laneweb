@@ -666,14 +666,20 @@
             
             /**
              * Determine if a link is bookmarkable.  For now true if its display property is inline and
-             * it does not contain an img element.
+             * it does not contain an img element.  Added #topResources links, case 71323.
              * @method _isBookmarkable
              * @private
              * @param target the target anchor
              * @returns {Boolean}
              */
             _isBookmarkable : function(target) {
-                return target.getStyle("display") == "inline" && !target.one("img");
+                var bookmarkable = false;
+                if (target.getStyle("display") == "inline" && !target.one("img")) {
+                    bookmarkable = true;
+                } else if (target.ancestor("#topResources")) {
+                    bookmarkable = true;
+                }
+                return bookmarkable;
             },
             
             /**
