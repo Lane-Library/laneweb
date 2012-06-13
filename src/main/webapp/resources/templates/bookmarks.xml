@@ -197,18 +197,17 @@
                         </ul>
                         <div id="laneFooter">
                             <div class="yui3-g">
-                                <div class="yui3-u-1-4">
-                                    <a href="/biomed-resources/index.html?laneNav=3">BIOMEDICAL RESOURCES</a>
+                                <div class="yui3-u-1-5">
+                                    <a href="/biomed-resources/index.html?laneNav=3">BIOMED RESOURCES</a>
                                     <ul>
                                         <li><a href="/biomed-resources/ej.html?laneNav=3">Journals</a></li>
                                         <li><a href="/biomed-resources/eb.html?laneNav=3">Books</a></li>
                                         <li><a href="/biomed-resources/db.html?laneNav=3">Databases</a></li>
                                         <li><a href="/biomed-resources/images.html?laneNav=3">Images</a></li>
                                         <li><a href="/biomed-resources/cc.html?laneNav=3">Clinical Decision Tools</a></li>
-                                        <li><a href="/biomed-resources/index.html?laneNav=3">ALL &#xBB;</a></li>
                                     </ul>
                                 </div>
-                                <div class="yui3-u-1-4">
+                                <div class="yui3-u-1-5">
                                     <a href="/portals/index.html?laneNav=3">SPECIALTY PORTALS</a>
                                     <ul>
                                         <li><a href="/portals/peds.html?laneNav=3">Pediatrics</a></li>
@@ -216,10 +215,9 @@
                                         <li><a href="/portals/cvicu.html?laneNav=3">LPCH Heart Center Nursing</a></li>
                                         <li><a href="/portals/pharmacy.html?laneNav=3">Pharmacy</a></li>
                                         <li><a href="/portals/picu.html?laneNav=3">PICU</a></li>
-                                        <li><a href="/portals/index.html?laneNav=3">ALL &#xBB;</a></li>
                                     </ul>
                                 </div>
-                                <div class="yui3-u-1-4">
+                                <div class="yui3-u-1-5">
                                     <a href="/about/index.html?laneNav=3">ABOUT LANE</a>
                                     <ul>
                                         <li><a href="/about/index.html?laneNav=3">Hours</a></li>
@@ -230,7 +228,7 @@
                                         <li><a href="/about/affiliate-privilege.html?laneNav=3">Library Affiliations</a></li>
                                     </ul>
                                 </div>
-                                <div class="yui3-u-1-4">
+                                <div class="yui3-u-1-5">
                                     <a href="http://www.stanford.edu/">STANFORD</a>
                                     <ul>
                                         <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
@@ -239,11 +237,14 @@
                                         <li><a href="http://scopeblog.stanford.edu/">Scope Blog</a></li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div id="socialMedia">
-                                <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257" class="facebook image-link"></a>
-                                <a href="http://twitter.com/#!/LaneLibStanford" class="twitter image-link"></a>
-                                <a href="http://www.flickr.com/photos/40390680@N08/" class="flickr image-link noproxy"></a>
+                                <div class="yui3-u-1-5">
+                                    <a href="http://giving.stanford.edu/goto/lanelibrarygift" class="makegift image-link" rel="popup standard"></a>
+                                    <div id="socialMedia">
+                                        <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257" class="facebook image-link"></a>
+                                        <a href="http://twitter.com/#!/LaneLibStanford" class="twitter image-link"></a>
+                                        <a href="http://www.flickr.com/photos/40390680@N08/" class="flickr image-link noproxy"></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

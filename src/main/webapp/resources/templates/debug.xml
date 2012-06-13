@@ -278,14 +278,14 @@
                                         <li><a href="http://scopeblog.stanford.edu/">Scope Blog</a></li>
                                     </ul>
                                 </div>
-                                 <div class="yui3-u-1-5">
-                                 <a href="http://giving.stanford.edu/goto/lanelibrarygift" class="makegift image-link" target="_blank"></a>
+                                <div class="yui3-u-1-5">
+                                    <a href="http://giving.stanford.edu/goto/lanelibrarygift" class="makegift image-link" rel="popup standard"></a>
                                     <div id="socialMedia">
                                         <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257" class="facebook image-link"></a>
                                         <a href="http://twitter.com/#!/LaneLibStanford" class="twitter image-link"></a>
                                         <a href="http://www.flickr.com/photos/40390680@N08/" class="flickr image-link noproxy"></a>
                                     </div>
-                               </div>
+                                </div>
                             </div>
                         </div>
                     </div>
