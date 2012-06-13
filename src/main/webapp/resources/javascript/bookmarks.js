@@ -769,11 +769,6 @@
         }
 
         if (Y.one("#bookmarks-editor")) {
-            
-            //disable clicks on bookmarklet links, case 71322
-            Y.all(".bookmarklet").on("click", function(event) {
-                event.halt();
-            });
 
             /**
              * An editor widget for an individual bookmark.
