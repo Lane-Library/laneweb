@@ -199,11 +199,6 @@
                                 <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
                             </div>
                         </xsl:when>
-                        <xsl:when test="s:recordType = 'news'">
-                            <div class="moreResults">
-                                <span class="sourceLink">Lane News</span>
-                            </div>
-                        </xsl:when>
                         <xsl:when test="s:recordType = 'web'">
                             <div class="moreResults">
                                 <span class="sourceLink">Lane Web Page</span>
