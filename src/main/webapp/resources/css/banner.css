@@ -24,7 +24,7 @@
     margin-left : 10px;
 }
 .banner-nav a {
-	background: url("/././resources/images/icons-sprite.png") no-repeat
+	background: url("/././resources/images/icons-sprite1.png") no-repeat
 		scroll -229px 0px transparent;
     width : 18px;
     height : 16px;
@@ -41,7 +41,7 @@
 }
 .banner-nav .banner-nav-active,
 .banner-nav a:hover {
-	background: url("/././resources/images/icons-sprite.png") no-repeat
+	background: url("/././resources/images/icons-sprite1.png") no-repeat
 		scroll -229px -26px transparent;
 	/*
     background-image : url(/././resources/images/bannerButtonOn1.png)*/

@@ -11,14 +11,14 @@
 }
 #feedbackLink a {
     display : block;
-    background-image : url(/././resources/images/icons-sprite.png);
+    background-image : url(/././resources/images/icons-sprite1.png);
     background-position: -699px 0px;
     width : 31px;
     height : 110px;
     border-bottom : none
 }
 #feedbackLink a:hover {
-    background-image : url(/././resources/images/icons-sprite.png);
+    background-image : url(/././resources/images/icons-sprite1.png);
     background-repeat: no-repeat;
     background-position: -654px 0px;
 }
