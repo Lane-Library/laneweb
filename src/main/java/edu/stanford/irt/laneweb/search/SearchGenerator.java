@@ -13,7 +13,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
 
-    private long defaultTimeout;
+    private static final long DEFAULT_TIMEOUT = 60000;
 
     private String synchronous;
 
@@ -24,10 +24,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
     @Override
     public Result doSearch() {
         return doSearch(null);
-    }
-
-    public void setDefaultTimeout(final long defaultTimeout) {
-        this.defaultTimeout = defaultTimeout;
     }
 
     @Override
@@ -50,12 +46,12 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
     protected Result doSearch(final Collection<String> engines) {
         Result result = null;
         if ((this.query != null) && (this.query.length() > 0)) {
-            long time = this.defaultTimeout;
+            long time = DEFAULT_TIMEOUT;
             if (null != this.timeout) {
                 try {
                     time = Long.parseLong(this.timeout);
                 } catch (NumberFormatException nfe) {
-                    time = this.defaultTimeout;
+                    time = DEFAULT_TIMEOUT;
                 }
             }
             long timeout = time;

@@ -65,7 +65,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testDoSearch() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(0L), eq(Collections.<String> emptyList()), eq(true))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(20000L), eq(Collections.<String> emptyList()), eq(true))).andReturn(
                 this.result);
         replay(this.manager);
         assertEquals(this.result, this.generator.doSearch());
@@ -74,7 +74,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGenerate() throws SAXException, IOException {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(0L), eq(Collections.<String> emptyList()), eq(true))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(20000L), eq(Collections.<String> emptyList()), eq(true))).andReturn(
                 this.result);
         expect(this.result.getChildren()).andReturn(Collections.<Result> emptyList());
         this.xmlConsumer.startDocument();

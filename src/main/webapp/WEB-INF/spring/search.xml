@@ -28,9 +28,7 @@
 
     <bean name="org.apache.cocoon.generation.Generator/search"
         class="edu.stanford.irt.laneweb.search.SearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
-        <property name="defaultTimeout" value="60000"/>
-    </bean>
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"/>
     
     <bean name="org.apache.cocoon.generation.Generator/er-search"
         class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
@@ -41,10 +39,7 @@
 
     <bean name="org.apache.cocoon.generation.Generator/search-content"
         class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
-        <property name="defaultTimeout" value="20000"/>
-        <property name="contentResultLimit" value="20"/>
-    </bean>
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"/>
 
     <bean name="org.apache.cocoon.generation.Generator/search-engine"
         class="edu.stanford.irt.laneweb.search.EngineSearchGenerator"
@@ -61,8 +56,6 @@
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-        <property name="defaultTimeout" value="20000"/>
-        <property name="contentResultLimit" value="20"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/merged-history-search"
@@ -72,8 +65,6 @@
             ref="edu.stanford.irt.eresources.CollectionManager/history"/>
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-        <property name="defaultTimeout" value="20000"/>
-        <property name="contentResultLimit" value="20"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/query-highlighting"

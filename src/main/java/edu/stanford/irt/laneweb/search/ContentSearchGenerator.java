@@ -27,21 +27,13 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     private static final Pattern CONTENT_PATTERN = Pattern.compile(".*_content");
 
+    private static final int CONTENT_RESULT_LIMIT = 20;
+
+    private static final long DEFAULT_TIMEOUT = 20000;
+
     protected Collection<String> engines;
 
-    private int contentResultLimit;
-
-    private long defaultTimeout;
-
     private String timeout;
-
-    public void setContentResultLimit(final int contentResultLimit) {
-        this.contentResultLimit = contentResultLimit;
-    }
-
-    public void setDefaultTimeout(final long defaultTimeout) {
-        this.defaultTimeout = defaultTimeout;
-    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -79,12 +71,12 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     @Override
     protected Result doSearch() {
-        long time = this.defaultTimeout;
+        long time = DEFAULT_TIMEOUT;
         if (null != this.timeout) {
             try {
                 time = Long.parseLong(this.timeout);
             } catch (NumberFormatException nfe) {
-                time = this.defaultTimeout;
+                time = DEFAULT_TIMEOUT;
             }
         }
         return this.metaSearchManager.search(new SimpleQuery(this.query), time, this.engines, true);
@@ -101,7 +93,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
                 if (CONTENT_PATTERN.matcher(resourceId).matches()) {
                     Iterator<Result> it = resource.getChildren().iterator();
                     int count = 0;
-                    while (it.hasNext() && count < this.contentResultLimit) {
+                    while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
                         count++;
                         ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(), queryTermPattern);
                         crsr.setResourceHits(parentResource.getHits());

@@ -47,7 +47,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearch() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
-        expect(this.manager.search(isA(SimpleQuery.class), eq(0L), (Collection<String>) isNull(), eq(false)))
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
                 .andReturn(this.result);
         replay(this.source, this.manager);
         this.generator.setMetaSearchManagerSource(this.source);
@@ -59,7 +59,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchEmptyQuery() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
-        // expect(this.manager.search(isA(SimpleQuery.class), eq(0L),
+        // expect(this.manager.search(isA(SimpleQuery.class), eq(60000L),
         // (Collection<String>) isNull(), eq(false))).andReturn(this.result);
         replay(this.source, this.manager);
         this.generator.setMetaSearchManagerSource(this.source);
@@ -71,7 +71,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchNullQuery() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
-        // expect(this.manager.search(isA(SimpleQuery.class), eq(0L),
+        // expect(this.manager.search(isA(SimpleQuery.class), eq(60000L),
         // (Collection<String>) isNull(), eq(false))).andReturn(this.result);
         replay(this.source, this.manager);
         this.generator.setMetaSearchManagerSource(this.source);
@@ -83,7 +83,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchNumberFormatException() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
-        expect(this.manager.search(isA(SimpleQuery.class), eq(0L), (Collection<String>) isNull(), eq(false)))
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
                 .andReturn(this.result);
         replay(this.source, this.manager);
         this.generator.setMetaSearchManagerSource(this.source);
@@ -96,7 +96,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchSynchronous() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
-        expect(this.manager.search(isA(SimpleQuery.class), eq(0L), (Collection<String>) isNull(), eq(true))).andReturn(this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(true))).andReturn(this.result);
         replay(this.source, this.manager);
         this.generator.setMetaSearchManagerSource(this.source);
         this.model.put("synchronous", "true");
@@ -108,7 +108,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchSynchronousEmpty() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
-        expect(this.manager.search(isA(SimpleQuery.class), eq(0L), (Collection<String>) isNull(), eq(false)))
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
                 .andReturn(this.result);
         replay(this.source, this.manager);
         this.generator.setMetaSearchManagerSource(this.source);
@@ -134,7 +134,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchWait() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
-        expect(this.manager.search(isA(SimpleQuery.class), eq(0L), (Collection<String>) isNull(), eq(false)))
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
                 .andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.RUNNING);
         replay(this.source, this.manager, this.result);
@@ -148,7 +148,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchWaitNumberFormatException() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
-        expect(this.manager.search(isA(SimpleQuery.class), eq(0L), (Collection<String>) isNull(), eq(false)))
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
                 .andReturn(this.result);
         // expect(this.result.getStatus()).andReturn(SearchStatus.RUNNING);
         replay(this.source, this.manager, this.result);
