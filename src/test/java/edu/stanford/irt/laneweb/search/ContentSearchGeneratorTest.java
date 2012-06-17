@@ -10,6 +10,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.resource.Resource;
+import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
@@ -42,6 +44,8 @@ public class ContentSearchGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
+    private ContentResult contentResult;
+
     @Before
     public void setUp() throws Exception {
         this.generator = new ContentSearchGenerator();
@@ -61,6 +65,7 @@ public class ContentSearchGeneratorTest {
         this.generator.setup(null, this.model, null, this.parameters);
         verify(this.parameters);
         this.result = createMock(Result.class);
+        this.contentResult = createMock(ContentResult.class);
     }
 
     @Test
@@ -93,9 +98,23 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGetContentResultList() {
-        expect(this.result.getChildren()).andReturn(Collections.<Result> emptyList());
-        replay(this.result);
-        assertEquals(0, this.generator.getContentResultList(this.result).size());
-        verify(this.result);
+        expect(this.result.getChildren()).andReturn(Collections.singletonList(this.result));
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[]{this.result, this.result}));
+        expect(this.result.getId()).andReturn("id");
+        expect(this.result.getId()).andReturn("id_content");
+        expect(this.result.getChildren()).andReturn(Collections.singletonList((Result)this.contentResult));
+        //TODO: should't have to get these values this many times . . .
+        expect(this.contentResult.getTitle()).andReturn("title").times(4);
+        expect(this.contentResult.getId()).andReturn("id");
+        expect(this.contentResult.getDescription()).andReturn("description").times(2);
+        expect(this.contentResult.getPublicationDate()).andReturn("publication date").times(2);
+        expect(this.result.getHits()).andReturn("hits");
+        expect(this.result.getId()).andReturn("id");
+        expect(this.result.getDescription()).andReturn("description");
+        expect(this.result.getURL()).andReturn("url");
+        expect(this.contentResult.getURL()).andReturn("url").times(2);
+        replay(this.result, this.contentResult);
+        assertEquals(1, this.generator.getContentResultList(this.result).size());
+        verify(this.result, this.contentResult);
     }
 }
