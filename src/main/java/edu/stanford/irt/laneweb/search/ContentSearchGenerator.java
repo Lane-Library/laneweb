@@ -25,11 +25,11 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  */
 public class ContentSearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
 
-    private static final Pattern CONTENT_PATTERN = Pattern.compile(".*_content");
-
     private static final int CONTENT_RESULT_LIMIT = 20;
 
     private static final long DEFAULT_TIMEOUT = 20000;
+
+    private static final String UNDERSCORE_CONTENT = "_content";
 
     protected Collection<String> engines;
 
@@ -90,7 +90,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
             Result parentResource = null;
             for (Result resource : engine.getChildren()) {
                 String resourceId = resource.getId();
-                if (CONTENT_PATTERN.matcher(resourceId).matches()) {
+                if (resourceId.endsWith(UNDERSCORE_CONTENT)) {
                     Iterator<Result> it = resource.getChildren().iterator();
                     int count = 0;
                     while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
