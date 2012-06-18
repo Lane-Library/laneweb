@@ -94,6 +94,7 @@ h1 a:hover {
 	font-weight: bold;
     padding: 1em;
     color : #820000;
+    z-index: 1;
 	}
 	
 #look-here .look-here-arrow {
