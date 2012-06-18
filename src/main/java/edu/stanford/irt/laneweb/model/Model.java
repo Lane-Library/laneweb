@@ -35,6 +35,8 @@ public interface Model {
 
     String FACETS = "facets";
 
+    String HASHED_SUNETID = "hashed-sunetid";
+    
     String HISTORY = "history";
 
     String HOST = "host";
