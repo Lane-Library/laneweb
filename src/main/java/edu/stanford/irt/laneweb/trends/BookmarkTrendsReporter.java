@@ -36,7 +36,7 @@ public class BookmarkTrendsReporter {
     // daily at 1:16AM
     @Scheduled(cron = "0 16 01 * * *")
     public void reportCount() {
-        this.googleTracker.trackEvent("/bookmarks", "lane:bookmark", getLocalHostname(), "dailyUserCount",
+        this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", getLocalHostname(), "dailyUserCount",
                 this.bookmarkDAO.getRowCount());
     }
 

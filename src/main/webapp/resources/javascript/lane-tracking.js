@@ -61,7 +61,7 @@
                 return title;
             },
             getTrackingData = function(event) {
-                var node = event.target, host, path, query, external, title, searchTerms, searchSource, isLaneBookmark = false;
+                var node = event.target, host, path, query, external, title, searchTerms, searchSource;
                 if (event.type == 'click') {
                     if (node.hasClass('yui3-accordion-item-trigger')) {
                         host = document.location.host;
@@ -115,7 +115,6 @@
 //                            query = external ? '' : node.get('search');
                             query = node.get('search');
                         }
-                        isLaneBookmark = (node.ancestor("#favorites") || node.ancestor("#bookmarks") || node.ancestor(".yui3-bookmark-editor-content"));
                     }
                 }
                 if (path.indexOf('/') !== 0) {
@@ -133,8 +132,7 @@
                     title: title,
                     searchTerms: searchTerms,
                     searchSource: searchSource,
-                    external: external,
-                    isLaneBookmark: isLaneBookmark
+                    external: external
                 };
             };
             return {
@@ -149,6 +147,9 @@
                 },
                 enableTracking : function () {
                     enabled = true;
+                },
+                getTrackedTitle : function (node) {
+                    return getTrackedTitle(node);
                 },
                 trackEvent: function(event) {
                     var trackingData;

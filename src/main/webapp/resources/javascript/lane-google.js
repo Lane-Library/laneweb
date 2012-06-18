@@ -36,9 +36,6 @@
                 gaPageTracker._trackPageview();
                 LANE.tracking.addTracker({
                     track: function(trackingData) {
-                        if (trackingData.isLaneBookmark) {
-                            gaPageTracker._trackEvent('lane:bookmark', "/BOOKMARK-CLICK-EVENT/"+userId ,trackingData.title);
-                        }
                         if (trackingData.external) {
                         	if(trackingData.query !== undefined && trackingData.query !== '' ){
                         		gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(trackingData.title) ,trackingData.host+trackingData.path+trackingData.query);
@@ -69,6 +66,12 @@
         resultTitle:null,
         resultPosition:null
     });
+    Y.publish("lane:bookmarkClick",{
+        broadcast:1,
+        emitFacade: true,
+        bookmarkTitle:null,
+        userId: null
+    });
     Y.on("click", function(event) {
         
         var link = event.target;
@@ -76,6 +79,12 @@
             link = link.get('parentNode');
         }
         if (link) {
+            if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
+                Y.fire("lane:bookmarkClick", {
+                    bookmarkTitle: LANE.tracking.getTrackedTitle(link),
+                    userId: getUserId()
+                });
+            }
             if (link.ancestor(".lwSearchResults")) {
                 if (LANE.SearchResult.getSearchTerms()) {
                     Y.fire("lane:searchResultClick", {
@@ -116,6 +125,11 @@
     Y.on("lane:searchFormReset",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, document.location.pathname);
+        }
+    });
+    Y.on("lane:bookmarkClick",  function(event) {
+        if (gaPageTracker !== undefined) {
+            gaPageTracker._trackEvent(event.type, event.userId, event.bookmarkTitle);
         }
     });
 })();
