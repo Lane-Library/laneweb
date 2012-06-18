@@ -85,9 +85,9 @@ h1 a:hover {
 	}
 	
 #look-here  {
-	border: 2px solid black;
+	border: 2px #DADAD8 solid;
 	text-align:center;
-    background: url("/././resources/images/icons-sprite2.png") no-repeat scroll -460px -90px transparent;
+    background: url("/././resources/images/icons-sprite2.png") no-repeat right bottom scroll -460px -90px transparent;
 	}
 
 #libraryContact li:first-child, #login li:first-child, #libraryHours li:first-child {
