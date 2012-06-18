@@ -710,6 +710,11 @@
             <version>1.0.6</version>
         </dependency>
         <dependency>
+            <artifactId>trends-tracker</artifactId>
+            <groupId>edu.stanford.trends</groupId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <artifactId>xstream</artifactId>
             <groupId>com.thoughtworks.xstream</groupId>
             <version>1.4.2</version>
