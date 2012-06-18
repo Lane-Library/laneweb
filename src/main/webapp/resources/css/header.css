@@ -89,10 +89,14 @@ h1 a:hover {
 	background-color:#fff;
 	text-align:center;
 	font-weight: bold;
-    background: url("/././resources/images/icons-sprite2.png") no-repeat right bottom scroll -460px -90px transparent;
     padding: 1em;
     position: absolute;
     left:-200px;top:-35px;
+	}
+	
+#look-here .look-here-arrow {
+	background: url("/././resources/images/icons-sprite2.png") no-repeat right bottom scroll -460px -90px transparent;
+	border; 1px solid black;
 	}
 
 #libraryContact li:first-child, #login li:first-child, #libraryHours li:first-child {
