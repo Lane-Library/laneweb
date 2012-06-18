@@ -86,7 +86,7 @@ h1 a:hover {
 	
 #look-here  {
 	position: absolute;
-    left:-210px;
+    left:-200px;
     top:-35px;
 	border: 4px #DADAD8 solid;
 	background-color:#fff;
@@ -100,8 +100,8 @@ h1 a:hover {
 	background: url("/././resources/images/icons-sprite2.png") no-repeat scroll -460px -90px transparent;
 	width: 68px;
 	height: 50px;
-	margin-right: -80px;
-	margin-bottom: -80px;
+	margin-right: -70px;
+    margin-bottom: -120px;
 	float: right;
 	border: 1px solid black;
 	}
