@@ -72,7 +72,7 @@
                             <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
                         </ul>
                         <ul id="login">
-                            <li><div id="look-here">Save Time!<br/>Login to personalize</div>
+                            <li><div id="look-here">Save Time!<br/>Login to personalize<div class="look-here-arrow"></div></div>
                                 <a href="/secure/login.html">MyLane login</a>
                             </li>
                             <li id="favorites">
