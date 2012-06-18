@@ -28,6 +28,8 @@
     <!-- a MeSH term -->
     <xsl:param name="mesh"/>
 
+    <xsl:param name="hashed-sunetid"/>
+
     <!-- LPCH and SHC don't require authentication for proxy server -->
     <xsl:param name="ipgroup"/>
 
@@ -262,6 +264,13 @@
         </xsl:attribute>
     </xsl:template>
 
+    <!-- set the content of meta element "auth" to true if user is logged in (for reporting statistics) -->
+    <xsl:template match="h:meta[@name='auth']/@content">
+        <xsl:attribute name="content">
+            <xsl:value-of select="$hashed-sunetid"/>
+        </xsl:attribute>
+    </xsl:template>
+    
     <!-- combines the template title value with the value of the title of the source document -->
     <xsl:template match="h:title">
         <xsl:copy>

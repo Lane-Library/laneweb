@@ -25,6 +25,8 @@
 
     <xsl:param name="sunetid"/>
 
+    <xsl:param name="hashed-sunetid"/>
+
     <!-- a MeSH term -->
     <xsl:param name="mesh"/>
 
@@ -265,7 +267,7 @@
     <!-- set the content of meta element "auth" to true if user is logged in (for reporting statistics) -->
     <xsl:template match="h:meta[@name='auth']/@content">
         <xsl:attribute name="content">
-            <xsl:value-of select="string-length($sunetid) &gt; 0"/>
+            <xsl:value-of select="$hashed-sunetid"/>
         </xsl:attribute>
     </xsl:template>
 

@@ -1,10 +1,18 @@
 (function() {
     var gaPageTracker,
-        gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."),
+        getUserId = function(){
+            var auth = Y.one('html head meta[name="auth"]'), userId = null;
+            if (auth && auth.get('content')) {
+                userId = auth.get('content');
+            }
+            return userId;
+        };
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = document.location.host,
-                meta;
+                meta, 
+                userId = getUserId();
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
                     gaPageTracker = _gat._createTracker("UA-3202241-2","gaPageTracker");
@@ -19,12 +27,18 @@
                     gaPageTracker._setVar(meta.get('content'));
                     gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);
                 }
-                if (Y.one('html head meta[name="auth"][content="true"]')) {
-                    gaPageTracker._setCustomVar(2,'authenticatedSession','true',2);
+                if (userId != null) {
+                    gaPageTracker._setCustomVar(2,'authenticatedSession',userId,2);
+                    if (Y.lane.BookmarksWidget && Y.lane.BookmarksWidget.get("bookmarks").size() > 0) {
+                        gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',userId,2);
+                    }
                 }
                 gaPageTracker._trackPageview();
                 LANE.tracking.addTracker({
                     track: function(trackingData) {
+                        if (trackingData.isLaneBookmark) {
+                            gaPageTracker._trackEvent('lane:bookmark', "/BOOKMARK-CLICK-EVENT/"+userId ,trackingData.title);
+                        }
                         if (trackingData.external) {
                         	if(trackingData.query !== undefined && trackingData.query !== '' ){
                         		gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(trackingData.title) ,trackingData.host+trackingData.path+trackingData.query);
