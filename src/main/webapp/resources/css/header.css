@@ -93,6 +93,7 @@ h1 a:hover {
     position: absolute;
     left:-210px;
     top:-35px;
+    float: right;
 	}
 	
 #look-here .look-here-arrow {
