@@ -816,6 +816,8 @@
                                         <include>landing-pgs-2011-min.css</include>
                                         <include>bookmarks-min.css</include>                                        
                                 		<include>persistent-login-min.css</include>
+                                		<!-- TODO: remove bookmarks-marketing when appropriate -->
+                                		<include>bookmarks-marketing-min.css</include>
                                     </includes>
                                 </aggregation>
                                 <aggregation>
@@ -859,7 +861,9 @@
                                         <include>banner-min.js</include>
                                         <include>purchase-suggestions-min.js</include>
                                         <include>menu-delay-min.js</include>
-                                        <include>lane-search-printonly-min.js</include>                                    
+                                        <include>lane-search-printonly-min.js</include>   
+                                        <!-- TODO: remove bookmarks-marketing when appropriate -->
+                                        <include>bookmarks-marketing-min.js</include>                                 
                                     </includes>
                                 </aggregation>
                                 <aggregation>

@@ -1,7 +1,7 @@
 #sb {
     padding-top : 72px;
     background-image : url(/././resources/images/headerBg1.png);
-    background-repeat : repeat-x;
+    background-repeat : repeat-x
 }
 h1 {
     position : absolute;
@@ -10,7 +10,7 @@ h1 {
     font-family : FrutigerLTStdLightCn, "Arial Narrow", Arial, Tahoma, "Trebuchet MS", sans-serif;
     font-size : 24px;
     letter-spacing : .1em;
-    color : #820000;
+    color : #820000
 }
 h1 span {
     color : black;
@@ -19,7 +19,7 @@ h1 span {
     font-size : 12px;
     text-transform : uppercase;
     display : block;
-    letter-spacing : normal;
+    letter-spacing : normal
 }
 h1 a {
     border-bottom : none;
@@ -44,7 +44,7 @@ h1 a:hover {
     background-image : url(/././resources/images/somLogo1.gif)
 }
 #som:hover {
-    background-position : 0 -100px;
+    background-position : 0 -100px
 }
 #login, #libraryHours {
     position : absolute;
@@ -78,32 +78,10 @@ h1 a:hover {
 }
 
 #login #favorites {
-	 background: url("/././resources/images/icons-sprite2.png") no-repeat scroll -296px -26px transparent;
+	 background: url("/././resources/images/icons-sprite1.png") no-repeat scroll -296px -26px transparent;
 	 padding-left: 22px;
 	 margin-left: 1em;
 	 border-left : none;
-	}
-	
-#look-here  {
-	position: absolute;
-    left:-200px;
-    top:-35px;
-	border: 4px #DADAD8 solid;
-	background-color:#fff;
-	text-align:center;
-	font-weight: bold;
-    padding: 1em;
-    color : #820000;
-    z-index: 1;
-	}
-	
-#look-here .look-here-arrow {
-	background: url("/././resources/images/icons-sprite2.png") no-repeat scroll -460px -90px transparent;
-	width: 68px;
-	height: 50px;
-	margin-right: -70px;
-    margin-bottom: -120px;
-	float: right;
 	}
 
 #libraryContact li:first-child, #login li:first-child, #libraryHours li:first-child {
