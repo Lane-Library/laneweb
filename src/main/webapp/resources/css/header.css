@@ -1,7 +1,7 @@
 #sb {
     padding-top : 72px;
     background-image : url(/././resources/images/headerBg1.png);
-    background-repeat : repeat-x
+    background-repeat : repeat-x;
 }
 h1 {
     position : absolute;
@@ -10,16 +10,16 @@ h1 {
     font-family : FrutigerLTStdLightCn, "Arial Narrow", Arial, Tahoma, "Trebuchet MS", sans-serif;
     font-size : 24px;
     letter-spacing : .1em;
-    color : #820000
+    color : #820000;
 }
 h1 span {
     color : black;
 }
 #subHeading {
-    font-size : 11px;
+    font-size : 12px;
     text-transform : uppercase;
     display : block;
-    letter-spacing : normal
+    letter-spacing : normal;
 }
 h1 a {
     border-bottom : none;
@@ -44,11 +44,11 @@ h1 a:hover {
     background-image : url(/././resources/images/somLogo1.gif)
 }
 #som:hover {
-    background-position : 0 -100px
+    background-position : 0 -100px;
 }
 #login, #libraryHours {
     position : absolute;
-    font-size : 11px;
+    font-size : 12px;
     right : 1em;
 }
 #libraryHours {
@@ -65,7 +65,7 @@ h1 a:hover {
 }
 #libraryContact {
 	position : absolute;
-    font-size : 11px;
+    font-size : 12px;
     right: 3em;
 }
 
@@ -85,15 +85,16 @@ h1 a:hover {
 	}
 	
 #look-here  {
+	position: absolute;
+    left:-210px;
+    top:-35px;
+    float: right;
 	border: 4px #DADAD8 solid;
 	background-color:#fff;
 	text-align:center;
 	font-weight: bold;
     padding: 1em;
-    position: absolute;
-    left:-210px;
-    top:-35px;
-    float: right;
+    color : #820000;
 	}
 	
 #look-here .look-here-arrow {
