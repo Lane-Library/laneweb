@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-06-18" version="1.12.34" description="1.12.34 bug fix release">
+            <action date="2012-06-13" dev="ceyates" issue="71323" type="add">
+                enable bookmarklink for topResources links 
+            </action>
+            <action date="2012-06-13" dev="ceyates" issue="71322" type="add">
+                prevent clicks on bookmarklet in page from bookmarking that page 
+            </action>
+            <action date="2012-06-13" dev="ceyates" issue="71321" type="add">
+                provide different bookmarklet instructions for IE browsers 
+            </action>
+            <action date="2012-06-14" dev="olgary" issue="69251" type="add">
+                Make a gift button in the footer
+            </action>
+        </release>
         <release date="2012-06-12" version="1.12.33" description="1.12.33 emergency release">
             <action date="2012-06-12" dev="ceyates" issue="71263" type="fix">
                 classes not appearing on various web pages
