@@ -83,6 +83,10 @@ h1 a:hover {
 	 margin-left: 1em;
 	 border-left : none;
 	}
+	
+#look-here  {
+	border: 2px solid black;
+	}
 
 #libraryContact li:first-child, #login li:first-child, #libraryHours li:first-child {
     border-left : none;
