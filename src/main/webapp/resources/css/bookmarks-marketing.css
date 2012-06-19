@@ -20,3 +20,8 @@
     margin-bottom:-120px;
     float:right;
 }
+
+/*IE7 shaded border on top of #look-here*/
+.sb_tb {
+    _z-index : -1
+}
