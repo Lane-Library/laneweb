@@ -20,10 +20,7 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
 
     private String type;
 
-    public void setCollectionManager(final CollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
+    public EresourcesSearchGenerator(final CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
 
