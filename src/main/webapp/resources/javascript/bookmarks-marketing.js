@@ -4,10 +4,12 @@
     var marketingNode = Y.one("#look-here");
         if (marketingNode) {
             setTimeout(function() {
+                var sb;
                 if (Y.UA.ie && Y.UA.ie < 8) {
-                    //need to increase z-index in IE, case 71544
-                    if (Y.one("#sb")) {
-                        Y.one("#sb").setStyle("z-index", "1");
+                    sb = Y.one(".sb-tb");
+                    //need to hide shaded background in IE < 8, case 71544
+                    if (sb) {
+                        sb.setStyle("visibility", "hidden");
                     }
                 }
                 marketingNode.setStyle("display", "block");
