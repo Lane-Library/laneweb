@@ -777,7 +777,6 @@
              * @uses TextInput
              * @constructor
              */
-            //TODO: consider using checkbox state instead of separate checked attribute.
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
                 
                 /**
@@ -798,16 +797,8 @@
                  * @method bindUI
                  */
                 bindUI : function() {
-                    var srcNode = this.get("srcNode"),
-                        checkbox = srcNode.one("input[type='checkbox']");
-                    srcNode.all("button").on("click", this._handleButtonClick, this);
-                    checkbox.on("change", this._handleChange, this);
+                    this.get("srcNode").all("button").on("click", this._handleButtonClick, this);
                     this.on("editingChange", this._handleEditingChange, this);
-                    this.on("checkedChange", this._handleCheckedChange, this);
-                    //case 71639 in IE back button checkbox may be checked with checked state false
-                    Y.on("unload", function() {
-                        checkBox.set("checked", false);
-                        });
                 },
                 
                 /**
@@ -819,6 +810,24 @@
                     this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"));
                     this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"));
                     this._truncateLabel();
+                },
+                
+                /**
+                 * Set the checkbox state.
+                 * @method setChecked
+                 * @param checked {boolean}
+                 */
+                setChecked : function(checked) {
+                    this.get("srcNode").one("input[type='checkbox']").set("checked", checked);
+                },
+                
+                /**
+                 * Get the checkbox state.
+                 * @method isChecked
+                 * @return whether or not the checkbox is checked.
+                 */
+                isChecked : function() {
+                    return this.get("srcNode").one("input[type='checkbox']").get("checked");
                 },
                 
                 /**
@@ -927,27 +936,6 @@
                 },
                 
                 /**
-                 * Called when the checked attribute changes.  Toggles the checked state of the checkbox.
-                 * @method _handleCheckedChange
-                 * @private
-                 * @param event {CustomEvent}
-                 */
-                _handleCheckedChange : function(event) {
-                    var checkBox = this.get("srcNode").one("input[type='checkbox']");
-                    checkBox.set("checked", event.newVal);
-                },
-                
-                /**
-                 * Handles click events on the checkbox.  Toggles the checked attribute.
-                 * @method _handleChange
-                 * @private
-                 * @param event {CustomEvent}
-                 */
-                _handleChange : function(event) {
-                    this.set("checked", event.target.get("checked"));
-                },
-                
-                /**
                  * Truncates the link text to 130 characters if necessary.
                  * @method _truncateLabel
                  * @private
@@ -965,9 +953,6 @@
                         value : null
                     },
                     editing : {
-                        value : false
-                    },
-                    checked : {
                         value : false
                     }
                 }
@@ -1030,7 +1015,7 @@
                         editor;
                         
                     items.prepend(item);
-                    editor = new BookmarkEditor({srcNode : item, render : true, checked : true});
+                    editor = new BookmarkEditor({srcNode : item, render : true});
                     editor.after("destroy", this._handleDestroyEditor, this);
                     this.get("editors").unshift(editor);
                     editor.set("editing", true);
@@ -1135,14 +1120,14 @@
                  * @param event {CustomEvent}
                  */
                 _handleCheckboxClick : function(event) {
-                    var i, editors = this.get("editors");
+                    var i, checked = event.target.get("checked"), editors = this.get("editors");
                     for (i = 0; i < editors.length; i++) {
-                        editors[i].set("checked", event.target.get("checked"));
+                        editors[i].setChecked(checked);
                     }
                 },
                 
                 /**
-                 * Returns an Array of indexes of those BookmarkEditors that have a checked attribute of true.
+                 * Returns an Array of indexes of those BookmarkEditors for which isChecked() is true.
                  * @method _getCheckIndexes
                  * @private
                  * @returns {Array}
@@ -1150,7 +1135,7 @@
                 _getCheckedIndexes : function() {
                     var indexes = [], i, editors = this.get("editors");
                     for (i = 0; i < editors.length; i++) {
-                        if (editors[i].get("checked")) {
+                        if (editors[i].isChecked()) {
                             indexes.push(i);
                         }
                     }
@@ -1165,7 +1150,7 @@
                 _clearChecked : function() {
                     var i, editors = this.get("editors");
                     for (i = 0; i < editors.length; i++) {
-                        editors[i].set("checked", false);
+                        editors[i].setChecked(false);
                     }
                 }
             },
