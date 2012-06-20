@@ -777,6 +777,7 @@
              * @uses TextInput
              * @constructor
              */
+            //TODO: consider using checkbox state instead of separate checked attribute.
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
                 
                 /**
@@ -805,12 +806,16 @@
                 
                 /**
                  * Sets up the TextInput objects for the inputs and truncates long labels.
+                 * It also sets the checked value based on the checkbox state.  It may be checked
+                 * when the pages is reached via the back button (case 71639).
                  * @method syncUI
                  */
                 syncUI : function() {
-                    var srcNode = this.get("srcNode");
+                    var srcNode = this.get("srcNode"),
+                        checkbox = srcNode.one("input[type='checkbox']");
                     this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"));
                     this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"));
+                    this.set("checked", checkbox.get("checked"));
                     this._truncateLabel();
                 },
                 
