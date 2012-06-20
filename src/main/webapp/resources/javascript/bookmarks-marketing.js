@@ -6,6 +6,9 @@
         if (marketingNode) {
             anim1 = new Y.Anim({node : marketingNode, to: {top:"-35px"}});
             anim2 = new Y.Anim({node : marketingNode, to: {opacity : 0}});
+            anim2.on("end", function() {
+                marketingNode.remove(true);
+            });
             setTimeout(function() {
                 anim1.run();
             }, 1500);
