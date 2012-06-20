@@ -622,7 +622,7 @@
              * @private
              */
             _handleClick : function() {
-                var target = this.get("target"), label, url;
+                var target = this.get("target"), label, url, query;
                 if (target.get("id") == "bookmarkSearch") {
                     label = "Search for: " + LANE.SearchResult.getSearchTerms();
                     url = "/search.html?source=" + LANE.SearchResult.getSearchSource() + "&q=" + LANE.SearchResult.getSearchTerms();
@@ -631,6 +631,12 @@
                     label = target.link.get("title");
                     if (target.link.get("local")) {
                         url = target.link.get("path");
+                        //case 71646 local links lack query string
+                        query = target.link.get("query");
+                        if (query) {
+                            url += query;
+                        }
+                        
                     } else {
                         url = target.link.get("url");
                     }
