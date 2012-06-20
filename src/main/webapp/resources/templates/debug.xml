@@ -46,6 +46,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/landing-pgs-2011.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/persistent-login.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks-marketing.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
         <meta name="ipGroup" content="{ipGroup}"/>
@@ -113,8 +114,8 @@
                             <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
                         </ul>
                         <ul id="login">
-                            <li>
-                                <a href="/secure/login.html">Login</a>
+                            <li><div id="look-here"><div class="look-here-arrow"></div>Save Time!<br/>Login to personalize</div>
+                                <a href="/secure/login.html">MyLane login</a>
                             </li>
                             <li id="favorites">
                                 <a href="/favorites.html">My Bookmarks</a>
@@ -349,5 +350,6 @@
         <script type="text/javascript" src="/resources/javascript/purchase-suggestions.js"></script>
         <script type="text/javascript" src="/resources/javascript/menu-delay.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search-printonly.js"></script>
+        <script type="text/javascript" src="/resources/javascript/bookmarks-marketing.js"></script>
     </body>
 </html>
