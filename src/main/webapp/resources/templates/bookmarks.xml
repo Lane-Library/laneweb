@@ -73,10 +73,10 @@
                             <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
                         </ul>
                         <ul id="login">
-                            <li><div class="look-here"><div class="look-here-arrow"></div>Create your personal bookmarks</div>
+                            <li><div class="look-here"><div class="look-here-arrow"></div>Save Time!<br/>Login to personalize</div>
                                 <a href="/secure/login.html">MyLane login</a>
                             </li>
-                            <li id="favorites"><div class="look-here"><div class="look-here-arrow"></div>Save Time!<br/>Login to personalize</div>
+                            <li id="favorites"><div class="look-here"><div class="look-here-arrow"></div>Create your personal bookmarks</div>
                                 <a href="/favorites.html">My Bookmarks</a>
                                 <?laneweb bookmarks?>
                             </li>
