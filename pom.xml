@@ -712,7 +712,7 @@
         <dependency>
             <artifactId>trends-tracker</artifactId>
             <groupId>edu.stanford.trends</groupId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>

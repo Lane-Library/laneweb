@@ -22,8 +22,7 @@
 			<value>http://lane.stanford.edu/index.html</value>
 		</property>
 		<property name="googleAccount">
-			<!-- prod <value>UA-3202241-2</value> -->
-			<value>UA-3203486-12</value>
+			<value>UA-3202241-2</value>
 		</property>
 		<property name="userAgent">
 			<value>laneweb</value>
