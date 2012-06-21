@@ -1,6 +1,7 @@
 (function() {
 
 	var redirectUrl,
+	metaGroup = Y.one('html head meta[name="ipGroup"]'),
 	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference';
 	
 	
@@ -16,43 +17,43 @@
 		};
 	}();
 
-	
-	
-	Y.on('click', function(event) {
-		var link = event.target,
-		now = new Date(),
-		isActive,
-		persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME);
-		if (link && link.get('nodeName') == 'A' && (link.get('pathname').indexOf('secure/apps/proxy/credential') > -1 || link.get('host').indexOf('laneproxy') === 0)) {
-			var logoutLink = Y.one("#logout");
-			if ('denied' !== persistentStatusCookie && (!logoutLink || persistentStatusCookie < now.getTime())){
-				// don't want a redirect with the tracking see tracking.js code if !rel documment.location is not set
-				link.set('rel', 'persistentLogin');
-				redirectUrl = escape(link.get('href'));
-				if(logoutLink){
-					isActive = Y.io('/././user/active', { sync: true});
-					if(isActive.responseText === 'true' ){
-						LANE.persistentlogin.newWindow(event, '/././plain/persistent-extension-popup.html');
+	//no persistent login for people from the hospital
+	if( !metaGroup || ("SHC" != metaGroup.get("content") && "LPCH" != metaGroup.get("content"))){
+		Y.on('click', function(event) {
+			var link = event.target,
+			now = new Date(),
+			isActive,
+			persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME);
+			if (link && link.get('nodeName') == 'A' && (link.get('pathname').indexOf('secure/apps/proxy/credential') > -1 || link.get('host').indexOf('laneproxy') === 0)) {
+				var logoutLink = Y.one("#logout");
+				if ('denied' !== persistentStatusCookie && (!logoutLink || persistentStatusCookie < now.getTime())){
+					// don't want a redirect with the tracking see tracking.js code if !rel documment.location is not set
+					link.set('rel', 'persistentLogin');
+					redirectUrl = escape(link.get('href'));
+					if(logoutLink){
+						isActive = Y.io('/././user/active', { sync: true});
+						if(isActive.responseText === 'true' ){
+							LANE.persistentlogin.newWindow(event, '/././plain/persistent-extension-popup.html');
+							event.preventDefault();
+						}
+					}
+					else{
+						LANE.persistentlogin.newWindow(event, '/././plain/persistent-popup.html');
 						event.preventDefault();
 					}
 				}
-				else{
-					LANE.persistentlogin.newWindow(event, '/././plain/persistent-popup.html');
-					event.preventDefault();
+			} else if (link && link.get('nodeName') == 'A'	&& (link.get('pathname').indexOf('secure/login.html') > -1)) {
+				if (persistentStatusCookie && 'denied' === persistentStatusCookie) {
+					document.location =  '/././secure/persistentLogin.html?pl=false&url='+escape(document.location);
+				} else{
+					link.set('rel', 'persistentLogin');
+					redirectUrl = escape(document.location);
+					LANE.persistentlogin.newWindow(event,'/././plain/persistent-login-popup.html');
 				}
+				event.preventDefault();
 			}
-		} else if (link && link.get('nodeName') == 'A'	&& (link.get('pathname').indexOf('secure/login.html') > -1)) {
-			if (persistentStatusCookie && 'denied' === persistentStatusCookie) {
-				document.location =  '/././secure/persistentLogin.html?pl=false&url='+escape(document.location);
-			} else{
-				link.set('rel', 'persistentLogin');
-				redirectUrl = escape(document.location);
-				LANE.persistentlogin.newWindow(event,'/././plain/persistent-login-popup.html');
-			}
-			event.preventDefault();
-		}
-	}, document);
-		
+		}, document);
+	}	
 	
 	var show = function(id, o, args) {
 		var lightbox = Y.lane.Lightbox,
