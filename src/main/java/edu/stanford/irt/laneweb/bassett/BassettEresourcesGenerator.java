@@ -7,7 +7,6 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
-import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -31,14 +30,14 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator impleme
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Collection<Eresource> eresources = null;
+        Collection<BassettEresource> eresources = null;
         if (this.bassettNumber != null) {
             eresources = this.collectionManager.getById(this.bassettNumber);
         } else if (this.region != null) {
             if (this.query != null) {
-                eresources = this.collectionManager.searchSubset(this.region, this.query);
+                eresources = this.collectionManager.searchRegion(this.region, this.query);
             } else {
-                eresources = this.collectionManager.getSubset(this.region);
+                eresources = this.collectionManager.getRegion(this.region);
             }
         } else if (this.query != null) {
             eresources = this.collectionManager.search(this.query);

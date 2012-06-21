@@ -10,11 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.Set;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
@@ -82,21 +80,13 @@ public class BassettCollectionManager {
 
     private DataSource dataSource;
 
-    public Collection<Eresource> getById(final String bassettNumber) {
+    public Collection<BassettEresource> getById(final String bassettNumber) {
         Collection<String> params = new LinkedList<String>();
         params.add(bassettNumber);
         return doGet(SEARCH_BY_BASSETT_NUMBER, params, true);
     }
 
-    public Collection<Eresource> getCore(final String type) {
-        throw new UnsupportedOperationException();
-    }
-
-    public Collection<Eresource> getMesh(final String type, final String mesh) {
-        throw new UnsupportedOperationException();
-    }
-
-    public Collection<Eresource> getSubset(final String region) {
+    public Collection<BassettEresource> getRegion(final String region) {
         Collection<String> params = new LinkedList<String>();
         if (region.indexOf("--") > -1) {
             String[] splittedRegion = region.split("--");
@@ -109,15 +99,7 @@ public class BassettCollectionManager {
         }
     }
 
-    public Collection<Eresource> getType(final String type) {
-        throw new UnsupportedOperationException();
-    }
-
-    public Collection<Eresource> getType(final String type, final char alpha) {
-        throw new UnsupportedOperationException();
-    }
-
-    public Collection<Eresource> search(final String query) {
+    public Collection<BassettEresource> search(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -127,7 +109,7 @@ public class BassettCollectionManager {
         return doGetSearch(SEARCH_BASSETT, params, query);
     }
 
-    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
+    public Map<String, Integer> searchCount(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Connection conn = null;
@@ -151,7 +133,7 @@ public class BassettCollectionManager {
         return result;
     }
 
-    public Collection<Eresource> searchSubset(final String region, final String query) {
+    public Collection<BassettEresource> searchRegion(final String region, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -169,10 +151,6 @@ public class BassettCollectionManager {
         }
     }
 
-    public Collection<Eresource> searchType(final String type, final String query) {
-        throw new UnsupportedOperationException();
-    }
-
     public void setDataSource(final DataSource dataSource) {
         if (null == dataSource) {
             throw new IllegalArgumentException("null dataSource");
@@ -180,15 +158,15 @@ public class BassettCollectionManager {
         this.dataSource = dataSource;
     }
 
-    private List<Eresource> doGet(final String sql, final Collection<String> params) {
+    private List<BassettEresource> doGet(final String sql, final Collection<String> params) {
         return doGet(sql, params, false);
     }
 
-    private List<Eresource> doGet(final String sql, final Collection<String> params, final boolean withLegend) {
+    private List<BassettEresource> doGet(final String sql, final Collection<String> params, final boolean withLegend) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Eresource> result = null;
+        List<BassettEresource> result = null;
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.prepareStatement(sql);
@@ -208,19 +186,19 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private Collection<Eresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
-        List<Eresource> result = doGet(sql, params);
-        List<Eresource> titleMatches = new LinkedList<Eresource>();
+    private Collection<BassettEresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
+        List<BassettEresource> result = doGet(sql, params);
+        List<BassettEresource> titleMatches = new LinkedList<BassettEresource>();
         int i = 0;
-        for (ListIterator<Eresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
-            Eresource eresource = it.next();
+        for (ListIterator<BassettEresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
+            BassettEresource eresource = it.next();
             if (query.equalsIgnoreCase(eresource.getTitle())) {
                 titleMatches.add(eresource);
                 it.remove();
             }
         }
         i = 0;
-        for (Eresource eresource : titleMatches) {
+        for (BassettEresource eresource : titleMatches) {
             result.add(i++, eresource);
         }
         return result;
@@ -241,8 +219,8 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private List<Eresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
-        List<Eresource> eresources = new LinkedList<Eresource>();
+    private List<BassettEresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
+        List<BassettEresource> eresources = new LinkedList<BassettEresource>();
         BassettEresource eresource = null;
         VersionImpl version = null;
         int currentEresourceId = -1;

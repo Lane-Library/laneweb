@@ -8,7 +8,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLizable;
-import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class XMLLizableBassettEresourceList implements XMLizable {
@@ -41,9 +40,9 @@ public class XMLLizableBassettEresourceList implements XMLizable {
 
     private static final String TITLE = "title";
 
-    private Collection<Eresource> bassetts;
+    private Collection<BassettEresource> bassetts;
 
-    public XMLLizableBassettEresourceList(final Collection<Eresource> bassetts) {
+    public XMLLizableBassettEresourceList(final Collection<BassettEresource> bassetts) {
         this.bassetts = bassetts;
     }
 
@@ -51,7 +50,7 @@ public class XMLLizableBassettEresourceList implements XMLizable {
         xmlConsumer.startPrefixMapping("", NAMESPACE);
         XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETTS);
         if (this.bassetts != null) {
-            for (Eresource eresource : this.bassetts) {
+            for (BassettEresource eresource : this.bassetts) {
                 handleEresource(xmlConsumer, eresource);
             }
         }
@@ -59,8 +58,7 @@ public class XMLLizableBassettEresourceList implements XMLizable {
         xmlConsumer.endPrefixMapping("");
     }
 
-    private void handleEresource(final XMLConsumer xmlConsumer, final Eresource eresource) throws SAXException {
-        BassettEresource bassett = (BassettEresource) eresource;
+    private void handleEresource(final XMLConsumer xmlConsumer, final BassettEresource bassett) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
         XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT, attributes);
