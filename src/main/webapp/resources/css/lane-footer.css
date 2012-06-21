@@ -38,7 +38,7 @@
 	width: 26px;
 	margin-left:13px;
 	display: inline-block;
-	background-image: url("/././resources/images/icons-sprite1.png");
+	background-image: url("/././resources/images/icons-sprite2.png");
 	background-repeat: no-repeat;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .makegift {
-	background-image: url("/././resources/images/icons-sprite1.png");
+	background-image: url("/././resources/images/icons-sprite2.png");
 	background-repeat: no-repeat;
 	background-position: -460px 0px;
 	position:absolute;
