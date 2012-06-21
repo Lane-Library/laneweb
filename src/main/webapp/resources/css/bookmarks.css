@@ -29,7 +29,9 @@
 /*the link in the search form for bookmarking searches*/
 #bookmarkSearch {
     display:none;
-    margin-left:60px
+    position:absolute;
+    left:10px;
+    top:10px;
 }
 
 #bookmark-link.active,
