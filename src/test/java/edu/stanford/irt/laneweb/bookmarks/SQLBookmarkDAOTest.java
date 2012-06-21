@@ -78,6 +78,21 @@ public class SQLBookmarkDAOTest {
     }
 
     @Test
+    public void testGetRowCount() throws SQLException {
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.connection.createStatement()).andReturn(this.statement);
+        expect(this.statement.executeQuery("SELECT COUNT(*) FROM BOOKMARKS")).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt(1)).andReturn(1);
+        this.resultSet.close();
+        this.statement.close();
+        this.connection.close();
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        assertEquals(1, this.dao.getRowCount());
+        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+    }
+
+    @Test
     public void testSaveLinks() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
