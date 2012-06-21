@@ -24,7 +24,7 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
         Map<String, Integer> regionCountMap = this.collectionManager.searchCount(this.query);
         try {
             xmlConsumer.startDocument();
-            XMLLizableBassettCount xml = new XMLLizableBassettCount(regionCountMap);
+            XMLizableBassettCount xml = new XMLizableBassettCount(regionCountMap);
             xml.toSAX(xmlConsumer);
             xmlConsumer.endDocument();
         } catch (SAXException e) {

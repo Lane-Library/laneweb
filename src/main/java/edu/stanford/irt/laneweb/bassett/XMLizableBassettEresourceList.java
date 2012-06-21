@@ -10,7 +10,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.cocoon.xml.XMLizable;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class XMLLizableBassettEresourceList implements XMLizable {
+public class XMLizableBassettEresourceList implements XMLizable {
 
     private static final String BASSETT = "bassett";
 
@@ -42,7 +42,7 @@ public class XMLLizableBassettEresourceList implements XMLizable {
 
     private Collection<BassettEresource> bassetts;
 
-    public XMLLizableBassettEresourceList(final Collection<BassettEresource> bassetts) {
+    public XMLizableBassettEresourceList(final Collection<BassettEresource> bassetts) {
         this.bassetts = bassetts;
     }
 

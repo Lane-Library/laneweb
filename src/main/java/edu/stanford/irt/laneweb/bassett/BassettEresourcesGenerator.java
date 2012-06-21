@@ -44,7 +44,7 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator impleme
         }
         try {
             xmlConsumer.startDocument();
-            XMLLizableBassettEresourceList xml = new XMLLizableBassettEresourceList(eresources);
+            XMLizableBassettEresourceList xml = new XMLizableBassettEresourceList(eresources);
             xml.toSAX(xmlConsumer);
             xmlConsumer.endDocument();
         } catch (SAXException e) {

@@ -10,7 +10,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.cocoon.xml.XMLizable;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class XMLLizableBassettCount implements XMLizable {
+public class XMLizableBassettCount implements XMLizable {
 
     private static final String COUNT = "bassett_count";
 
@@ -26,7 +26,7 @@ public class XMLLizableBassettCount implements XMLizable {
 
     private Map<String, Integer> regionMap;
 
-    public XMLLizableBassettCount(final Map<String, Integer> regions) {
+    public XMLizableBassettCount(final Map<String, Integer> regions) {
         this.regionMap = regions;
     }
 
