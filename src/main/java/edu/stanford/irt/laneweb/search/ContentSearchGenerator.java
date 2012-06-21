@@ -96,18 +96,19 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
                     while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
                         count++;
                         ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(), queryTermPattern);
+                        String crsrKey = (crsr.getContentId() != null) ? crsr.getContentId() : crsr.getContentUrl();
                         crsr.setResourceHits(parentResource.getHits());
                         crsr.setResourceId(parentResource.getId());
                         crsr.setResourceName(parentResource.getDescription());
                         crsr.setResourceUrl(parentResource.getURL());
-                        if (!resultTitles.containsKey(crsr.getContentUrl())) {
-                            resultTitles.put(crsr.getContentUrl(), crsr);
+                        if (!resultTitles.containsKey(crsrKey)) {
+                            resultTitles.put(crsrKey, crsr);
                             contentResults.add(crsr);
-                        } else if (crsr.getScore() > resultTitles.get(crsr.getContentUrl()).getScore()) {
-                            contentResults.remove(resultTitles.get(crsr.getContentUrl()));
+                        } else if (crsr.getScore() > resultTitles.get(crsrKey).getScore()) {
+                            contentResults.remove(resultTitles.get(crsrKey));
                             contentResults.add(crsr);
-                            resultTitles.remove(crsr.getContentUrl());
-                            resultTitles.put(crsr.getContentUrl(), crsr);
+                            resultTitles.remove(crsrKey);
+                            resultTitles.put(crsrKey, crsr);
                         }
                     }
                 } else {

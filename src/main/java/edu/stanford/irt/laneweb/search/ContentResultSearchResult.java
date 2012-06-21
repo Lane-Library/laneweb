@@ -67,6 +67,10 @@ public class ContentResultSearchResult implements SearchResult {
         return scmr.getSortTitle().equals(this.sortTitle);
     }
 
+    public String getContentId() {
+        return this.contentResult.getContentId();
+    }
+
     public String getContentUrl() {
         return this.contentResult.getURL();
     }

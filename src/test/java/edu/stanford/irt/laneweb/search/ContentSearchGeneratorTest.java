@@ -112,7 +112,7 @@ public class ContentSearchGeneratorTest {
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getDescription()).andReturn("description");
         expect(this.result.getURL()).andReturn("url");
-        expect(this.contentResult.getURL()).andReturn("url").times(2);
+        expect(this.contentResult.getContentId()).andReturn("id_content").times(2);
         replay(this.result, this.contentResult);
         assertEquals(1, this.generator.getContentResultList(this.result).size());
         verify(this.result, this.contentResult);
