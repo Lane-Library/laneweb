@@ -80,6 +80,10 @@ public class BassettCollectionManager {
 
     private DataSource dataSource;
 
+    public BassettCollectionManager(final DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public Collection<BassettEresource> getById(final String bassettNumber) {
         Collection<String> params = new LinkedList<String>();
         params.add(bassettNumber);
@@ -149,13 +153,6 @@ public class BassettCollectionManager {
             params.add(region);
             return doGetSearch(SEARCH_BASSETT_BY_REGION, params, query);
         }
-    }
-
-    public void setDataSource(final DataSource dataSource) {
-        if (null == dataSource) {
-            throw new IllegalArgumentException("null dataSource");
-        }
-        this.dataSource = dataSource;
     }
 
     private List<BassettEresource> doGet(final String sql, final Collection<String> params) {

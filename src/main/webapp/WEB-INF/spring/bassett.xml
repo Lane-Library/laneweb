@@ -8,7 +8,7 @@
         abstract="true">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.bassett.BassettCollectionManager">
-                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+                <constructor-arg ref="javax.sql.DataSource/eresources"/>
             </bean>
         </property>
     </bean>
