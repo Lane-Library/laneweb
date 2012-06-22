@@ -48,11 +48,11 @@ background-position: 0 -53px;
 #bookmark-instructions .yui3-accordion-item-hd {
     text-align: center
 }
-#bookmark-instruction-hide,
+#bookmark-instructions-hide,
 .yui3-accordion-item.yui3-accordion-item-active #bookmark-instructions-show {
     display:none;
 }
-#bookmark-instruction-show,
+#bookmark-instructions-show,
 .yui3-accordion-item.yui3-accordion-item-active #bookmark-instructions-hide {
     display:block;
 }
