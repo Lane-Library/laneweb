@@ -48,6 +48,14 @@ background-position: 0 -53px;
 #bookmark-instructions .yui3-accordion-item-hd {
     text-align: center
 }
+.yui3-accordion-item #bookmark-instructions-show,
+.yui3-accordion-item-active #bookmark-instructions-hide {
+    display:block;
+}
+.yui3-accordion-item-active #bookmark-instructions-show,
+.yui3-accordion-item #bookmark-instructions-hide {
+    display:none;
+}
 
 /*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 #bookmarkletIE {
