@@ -43,6 +43,13 @@ background-position: 0 -26px
 background-position: 0 -53px;
 }
 
+#bookmark-instructions li {
+    list-style:none
+}
+#bookmark-instructions .yui3-accordion-item-hd {
+    text-align: center
+}
+
 /*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 #bookmarkletIE {
     display: none
