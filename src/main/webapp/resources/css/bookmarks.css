@@ -31,7 +31,9 @@
     display:none;
     position:absolute;
     left:10px;
-    top:193px;
+    top:196px;
+    padding:2px 5px;
+    font-weight:bold
 }
 
 #bookmark-link.active,
