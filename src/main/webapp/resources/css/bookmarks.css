@@ -30,8 +30,7 @@
 #bookmarkSearch {
     display:none;
     position:absolute;
-    left:10px;
-    top:196px;
+    top:192px;
     padding:2px 5px;
     font-weight:bold
 }
