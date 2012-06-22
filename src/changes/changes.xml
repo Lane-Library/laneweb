@@ -7,6 +7,38 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-06-25" version="1.12.35" description="1.12.35 bug fix release">
+            <action date="2012-06-20" dev="ceyates" issue="71646" type="fix">
+                bookmarked local links lack query string
+            </action>
+            <action date="2012-06-20" dev="ceyates" issue="71639" type="fix">
+                MyLane Bookmarks: Delete with check does not work after "back"
+            </action>
+            <action date="2012-06-18" dev="ceyates" issue="71557" type="fix">
+                in bookmarks menu, wrapped lines lack bottom margin 
+            </action>
+            <action date="2012-06-20" dev="olgary" issue="71545" type="add">
+                Bookmarks highlight box in logged-in state 
+            </action>
+            <action date="2012-06-19" dev="ceyates" issue="71544" type="fix">
+                MyLane highlight box in IE7
+            </action>
+            <action date="2012-06-20" dev="ceyates" issue="71526" type="add">
+                Slide in down - Behavior for MyLane highlight box
+            </action>
+            <action date="2012-06-20" dev="ryanmax" issue="71434" type="add">
+                tracking for bookmarks project
+            </action>
+            <action date="2012-06-18" dev="olgary" issue="71369" type="add">
+                add markup highlighting MyLane Login 
+            </action>
+            <action date="2012-06-22" dev="ceyates" issue="70132" type="add">
+                Conditional  Bookmark instructions - open/close widget
+            </action>
+            <action date="2012-06-21" dev="ryanmax" issue="40146" type="fix">
+                duplicated search results
+            </action>
+        </release>
         <release date="2012-06-18" version="1.12.34" description="1.12.34 bug fix release">
             <action date="2012-06-13" dev="ceyates" issue="71323" type="add">
                 enable bookmarklink for topResources links 
