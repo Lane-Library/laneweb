@@ -11,7 +11,7 @@
 
 #bookmark-link {
     cursor: pointer;
-    background-image: url("/././resources/images/icons-sprite2.png");
+    background-image: url("/././resources/images/icons-sprite3.png");
     background-position: 0 0;
     background-repeat:no-repeat;
     display: inline-block;
@@ -42,10 +42,6 @@ background-position: 0 -26px
 background-position: 0 -53px;
 }
 
-/*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
-#bookmarkletIE {
-    display: none
-}
 
 /*IE doesn't work with css button - this is a graphic to replace a bookmarklet button*/
 #bookmarkletIE .mimick-btn-red{

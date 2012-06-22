@@ -1,12 +1,53 @@
-#bookmark-instructions .yui3-accordion-item-hd {
-    text-align: center;
-    font-weight:bold;
+#bookmark-instructions {
+    border: 1px solid #DADAD8;
 }
+
+#bookmark-instructions .hd {
+    font-weight:bold;
+    background-color: #e8e8e8;
+    height: 11px;
+}
+
+#bookmark-instructions .hd div {
+    background-image: url("/././resources/images/icons-sprite3.png");
+    height: 24px;
+    width: 202px;
+    margin: auto;
+    text-align:center;
+    padding:5px;
+}
+
 #bookmark-instructions-hide,
 .yui3-accordion-item.yui3-accordion-item-active #bookmark-instructions-show {
     display:none;
 }
+
 #bookmark-instructions-show,
 .yui3-accordion-item.yui3-accordion-item-active #bookmark-instructions-hide {
     display:block;
+}
+    
+#bookmark-instructions-hide {
+    background-position: 0 -347px;
+}
+ 
+#bookmark-instructions-show {
+    background-position: 0 -309px;
+}
+
+/*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
+#bookmarkletIE {
+    display: none
+}
+
+/*IE doesn't work with css button - this is a graphic to replace a bookmarklet button*/
+#bookmarkletIE .mimick-btn-red {
+    cursor: pointer;
+    background-image: url("/././resources/images/icons-sprite3.png");
+    background-position: 0 -233px;
+    background-repeat:no-repeat;
+    display: inline-block;
+    height: 249px;
+    width: 162px;
+    position: absolute;
 }
