@@ -1,5 +1,6 @@
 #bookmark-instructions .yui3-accordion-item-hd {
-    text-align: center
+    text-align: center;
+    font-weight:bold;
 }
 #bookmark-instructions-hide,
 .yui3-accordion-item.yui3-accordion-item-active #bookmark-instructions-show {
