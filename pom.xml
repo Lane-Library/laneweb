@@ -863,7 +863,8 @@
                                         <include>menu-delay-min.js</include>
                                         <include>lane-search-printonly-min.js</include>   
                                         <!-- TODO: remove bookmarks-marketing when appropriate -->
-                                        <include>bookmarks-marketing-min.js</include>                                 
+                                        <include>bookmarks-marketing-min.js</include>     
+                                        <include>bookmarks-instructions-min.js</include>                                 
                                     </includes>
                                 </aggregation>
                                 <aggregation>

@@ -178,7 +178,7 @@
         // save an array of lists
         Y.lane.ExpandyLists = [];
 
-        // instatiate them
+        // instantiate them
         for (i = 0; i < expandies.size(); i++) {
             Y.lane.ExpandyLists.push(new ExpandyList({node : expandies.item(i)}));
         }

@@ -46,7 +46,9 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/landing-pgs-2011.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/persistent-login.css"/>
+        <!-- TODO: remove bookmarks-marketing.css when done -->
         <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks-marketing.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks-instructions.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
         <meta name="ipGroup" content="{ipGroup}"/>
@@ -350,6 +352,7 @@
         <script type="text/javascript" src="/resources/javascript/purchase-suggestions.js"></script>
         <script type="text/javascript" src="/resources/javascript/menu-delay.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-search-printonly.js"></script>
+        <!-- TODO: remove bookmarks-marketing.js when done -->
         <script type="text/javascript" src="/resources/javascript/bookmarks-marketing.js"></script>
     </body>
 </html>
