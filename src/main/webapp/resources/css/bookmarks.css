@@ -42,53 +42,6 @@ background-position: 0 -26px
 background-position: 0 -53px;
 }
 
-
-/*IE doesn't work with css button - this is a graphic to replace a bookmarklet button*/
-#bookmarkletIE .mimick-btn-red{
-	cursor: pointer;
-    background-image: url("/././resources/images/icons-sprite3.png");
-    background-position: 0 -233px;
-    background-repeat:no-repeat;
-    display: inline-block;
-    height: 249px;
-    width: 162px;
-    position: absolute;
-	}
-
-#bookmark-instructions {
-	border-left: 1px solid #DADAD8;
-	border-right: 1px solid #DADAD8;
-	border-top: 1px solid #DADAD8;
-	}
-	
-#bookmark-instructions, #bookmark-instructions-hide  {
-	border-bottom: 1px solid #DADAD8;
-	}
-	
-#bookmark-instructions-show, #bookmark-instructions-hide  {
-	background-color: #e8e8e8;
-	height: 11px;
-	}
-	
-#bookmark-instructions-show span {
-    background-image: url("/././resources/images/icons-sprite3.png");
-    background-position: 0 -309px;
-    background-repeat:no-repeat;
-    height: 24px;
-    width: 202px;
-    position: absolute;
-	}
-	
-#bookmark-instructions-hide span {
-    background-image: url("/././resources/images/icons-sprite3.png");
-    background-position: 0 -347px;
-    background-repeat:no-repeat;
-    height: 24px;
-    width: 202px;
-    position: absolute;
-	}
-	
-
 .yui3-bookmark-editor label,
 .yui3-bookmark-editor input[type='text'],
 .yui3-bookmark-editor button {
