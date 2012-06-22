@@ -56,7 +56,6 @@
                                 <a id="searchReset" title="Clear Search" href="/">×</a>
                             </fieldset>
                         </form>
-                        <a id="bookmarkSearch">Bookmark this search</a>
                         <div class="content">
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                 href="content:/includes/global-announcement.html">
