@@ -817,7 +817,8 @@
                                         <include>bookmarks-min.css</include>                                        
                                 		<include>persistent-login-min.css</include>
                                 		<!-- TODO: remove bookmarks-marketing when appropriate -->
-                                		<include>bookmarks-marketing-min.css</include>
+                                		<include>bookmarks-marketing-min.css</include>     
+                                        <include>bookmark-instructions-min.css</include>
                                     </includes>
                                 </aggregation>
                                 <aggregation>
@@ -838,6 +839,8 @@
                                         <include>link-plugin-min.js</include>
                                         <include>bookmarks-min.js</include>    
                                         <include>lane-tracking-min.js</include>
+                                        <include>bookmarks-marketing-min.js</include>     
+                                        <include>bookmark-instructions-min.js</include> 
                                         <include>lane-expandies-min.js</include>
                                         <include>lane-google-min.js</include>
                                         <include>lane-lightbox-min.js</include>
@@ -862,9 +865,7 @@
                                         <include>purchase-suggestions-min.js</include>
                                         <include>menu-delay-min.js</include>
                                         <include>lane-search-printonly-min.js</include>   
-                                        <!-- TODO: remove bookmarks-marketing when appropriate -->
-                                        <include>bookmarks-marketing-min.js</include>     
-                                        <include>bookmarks-instructions-min.js</include>                                 
+                                        <!-- TODO: remove bookmarks-marketing when appropriate -->                                
                                     </includes>
                                 </aggregation>
                                 <aggregation>
