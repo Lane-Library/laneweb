@@ -10,6 +10,7 @@
             anim2 = new Y.Anim({node : marketingNode, to: {opacity : 0}});
             //set style for IE < 8 so background behind marketingNode.
             if (Y.UA.ie > 0 && Y.UA.ie < 8 && sb) {
+                sb.setStyle("zoom", "1");
                 sb.setStyle("z-index", "1");
             }
             anim2.on("end", function() {
