@@ -35,6 +35,10 @@
 	background-position: 0 -309px;
 }
 
+#bookmark-instructions .module {
+    padding: 2em 2em 1em 2em;
+}
+
 /*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 #bookmarkletIE {
 	display: none
