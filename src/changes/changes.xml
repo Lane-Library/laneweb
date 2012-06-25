@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-06-25" version="1.12.35" description="1.12.35 bug fix release">
+            <action date="2012-06-25" dev="ceyates" issue="71804" type="add">
+                fill in 'http://' automatically in add state
+            </action>
             <action date="2012-06-20" dev="ceyates" issue="71646" type="fix">
                 bookmarked local links lack query string
             </action>
