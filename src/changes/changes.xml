@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-06-25" version="1.12.35" description="1.12.35 bug fix release">
+            <action date="2012-06-22" dev="olgary" issue="71815" type="update">
+                changed link in a template.xml, debug.xml, bookmarks.xml  footer
+            </action>
             <action date="2012-06-25" dev="ceyates" issue="71804" type="add">
                 fill in 'http://' automatically in add state
             </action>
