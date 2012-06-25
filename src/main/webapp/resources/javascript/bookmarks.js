@@ -815,6 +815,7 @@
                     var srcNode = this.get("srcNode");
                     this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"));
                     this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"));
+                    this._urlInput.getInput().after("focus", this._setDefaultUrlInputText);
                     this._truncateLabel();
                 },
                 
@@ -952,6 +953,17 @@
                     if (label.length > 130) {
                         anchor.set("innerHTML", label.substring(0, 130) + "...");
                     }
+                },
+                
+                /**
+                 * Put the text http:// into url input if it is empty
+                 * @method _setDefaultUrlInputText
+                 * @private
+                 */
+                _setDefaultUrlInputText : function() {
+                	if (this._urlInput.getValue() === "") {
+                		this._urlInput.setValue("http://");
+                	}
                 }
             }, {
                 ATTRS : {
