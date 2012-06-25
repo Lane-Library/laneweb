@@ -4,63 +4,38 @@
             //TODO put conditionals into sub-functions
             //TODO more thorough documentation
             //TODO use 'track' less
-            //trackers is the array of tracker objects
             var enabled = true,
-            trackers = [],        //figures out the title string for a node
-            getTrackedTitle = function(node) {
-                //if there is a title attribute, use that.
-                var title = node.get('title'), img, i, rel, relTokens;
-                //if there is rel="popup .." then create a title from it.
-                rel = node.get('rel');
-                if (rel && rel.indexOf('popup') === 0) {
-                    relTokens = rel.split(' ');
-                    if (relTokens[1] == 'local') {
-                        title = 'YUI Pop-up [local]';
+            getEventTrackingData = function(event) {
+                var link = event.target, category = null, action = null, label = null, value = null;
+                while (link && link.get('nodeName') != 'A') {
+                    link = link.get('parentNode');
+                }
+                if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
+                    category = "lane:bookmarkClick";
+                    action = LANE.tracking.getUserId();
+                    label = LANE.tracking.getTrackedTitle(link);
+                }
+                if (link.ancestor(".lwSearchResults")) {
+                    if (LANE.SearchResult.getSearchTerms()) {
+                        category = "lane:searchResultClick";
+                        action = LANE.SearchResult.getSearchTerms();
+                        label = link.get('textContent');
+                        value = parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10);
+                    } else {
+                        category = "lane:browseResultClick";
+                        action = document.location.pathname;
+                        label = link.get('textContent');
+                        value = parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10);
                     }
                 }
-                //next try alt attribute.
-                if (!title) {
-                    title = node.get('alt');
-                }
-                //next look for alt attributes in any child img.
-                if (!title) {
-                    img = node.all('img');
-                    if (img) {
-                        for (i = 0; i < img.size(); i++) {
-                            if (img.item(i).get('alt')) {
-                                title = img.item(i).get('alt');
-                                break;
-                            }
-                            else if (img.item(i).get('src')) {
-                                title = img.item(i).get('src');
-                                break;
-                            }
-                        }
-                    }
-                }
-                //next get the text content before any nested markup
-                if (!title) {
-                    title = node.get('textContent');
-                }
-                if (!title) {
-                    title = node.get('innerText');
-                }
-                if (title) {
-                    //trim and normalize:
-                    title = title.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
-                }
-                //finally:
-                if (!title) {
-                    title = 'unknown';
-                }
-                if (node.hasClass('yui3-accordion-item-trigger')) {
-                    title = 'Expandy:' + title;
-                } else if (node.ancestor("#laneNav")) {
-                    title = "laneNav: " + title;
-                }
-                return title;
+                return {
+                    category: category,
+                    action: action,
+                    label: label,
+                    value: value
+                };
             },
-            getTrackingData = function(event) {
+            getPageviewTrackingData = function(event) {
                 var node = event.target, host, path, query, external, title, searchTerms, searchSource;
                 if (event.type == 'click') {
                     if (node.hasClass('yui3-accordion-item-trigger')) {
@@ -120,7 +95,7 @@
                 if (path.indexOf('/') !== 0) {
                     path = '/' + path;
                 }
-                title = getTrackedTitle(node);
+                title = LANE.tracking.getTrackedTitle(node);
                 if (LANE.search && LANE.SearchResult.getSearchTerms()) {
                     searchTerms = LANE.SearchResult.getSearchTerms();
                     searchSource = LANE.SearchResult.getSearchSource();
@@ -136,36 +111,92 @@
                 };
             };
             return {
-                addTracker: function(tracker) {
-                    if (!tracker || tracker.track === undefined) {
-                        throw 'tracker does not implement track()';
-                    }
-                    trackers.push(tracker);
-                },
                 disableTracking : function() {
                     enabled = false;
                 },
                 enableTracking : function () {
                     enabled = true;
                 },
-                getTrackedTitle : function (node) {
-                    return getTrackedTitle(node);
-                },
-                trackEvent: function(event) {
-                    var trackingData;
-                    if (this.isTrackable(event)) {
-                        trackingData = getTrackingData(event);
-                        this.track(trackingData);
+                //figures out the title string for a node
+                getTrackedTitle: function(node) {
+                    //if there is a title attribute, use that.
+                    var title = node.get('title'), img, i, rel, relTokens;
+                    //if there is rel="popup .." then create a title from it.
+                    rel = node.get('rel');
+                    if (rel && rel.indexOf('popup') === 0) {
+                        relTokens = rel.split(' ');
+                        if (relTokens[1] == 'local') {
+                            title = 'YUI Pop-up [local]';
+                        }
                     }
-                },
-                track: function(trackingData) {
-                    //            var td = trackingData;
-                    //                alert('host: '+td.host+'\npath: '+td.path+'\nquery: '+td.query+'\ntitle: '+td.title+'\nsearchTerms: '+td.searchTerms+'\nsearchSource: '+td.searchSource+'\nexternal: '+td.external);
-                    for (var i = 0; i < trackers.length; i++) {
-                        trackers[i].track(trackingData);
+                    //next try alt attribute.
+                    if (!title) {
+                        title = node.get('alt');
                     }
+                    //next look for alt attributes in any child img.
+                    if (!title) {
+                        img = node.all('img');
+                        if (img) {
+                            for (i = 0; i < img.size(); i++) {
+                                if (img.item(i).get('alt')) {
+                                    title = img.item(i).get('alt');
+                                    break;
+                                }
+                                else if (img.item(i).get('src')) {
+                                    title = img.item(i).get('src');
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    //next get the text content before any nested markup
+                    if (!title) {
+                        title = node.get('textContent');
+                    }
+                    if (!title) {
+                        title = node.get('innerText');
+                    }
+                    if (title) {
+                        //trim and normalize:
+                        title = title.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
+                    }
+                    //finally:
+                    if (!title) {
+                        title = 'unknown';
+                    }
+                    if (node.hasClass('yui3-accordion-item-trigger')) {
+                        title = 'Expandy:' + title;
+                    } else if (node.ancestor("#laneNav")) {
+                        title = "laneNav: " + title;
+                    }
+                    return title;
                 },
-                isTrackable: function(event) {
+                getUserId : function(){
+                    var auth = Y.one('html head meta[name="auth"]'), userId = null;
+                    if (auth && auth.get('content')) {
+                        userId = auth.get('content');
+                    }
+                    return userId;
+                },
+                isTrackableAsEvent: function(event) {
+                    if (!enabled) {
+                        return false;
+                    }
+                    var link = event.target;
+                    while (link != null && link.get('nodeName') != 'A') {
+                        link = link.get('parentNode');
+                    }
+                    if (link) {
+                        if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
+                            return true;
+                        }
+                        if (link.ancestor(".lwSearchResults")) {
+                            return true;
+                        }
+                    }
+                    return false;
+                },
+                isTrackableAsPageview: function(event) {
                     if (!enabled) {
                         return false;
                     }
@@ -220,13 +251,65 @@
                         }
                     }
                     return false;
+                },
+                // TODO: remove once biomed-resources/find-it-form.html and portals/shc.html fire lane:trackablePageview events
+                // for backwards compatibility
+                track: function(trackingData) {
+                    Y.fire("lane:trackablePageview", {
+                        host: trackingData.host,
+                        path: trackingData.path,
+                        query: trackingData.query,
+                        title: trackingData.title,
+                        searchTerms: trackingData.searchTerms,
+                        searchSource: trackingData.searchSource,
+                        external: trackingData.external
+                    });
+                },
+                trackClick: function(event) {
+                    var trackingData;
+                    if (this.isTrackableAsPageview(event)) {
+                        trackingData = getPageviewTrackingData(event);
+                        Y.fire("lane:trackablePageview", {
+                            host: trackingData.host,
+                            path: trackingData.path,
+                            query: trackingData.query,
+                            title: trackingData.title,
+                            searchTerms: trackingData.searchTerms,
+                            searchSource: trackingData.searchSource,
+                            external: trackingData.external
+                        });
+                    }
+                    if (this.isTrackableAsEvent(event)) {
+                        trackingData = getEventTrackingData(event);
+                        Y.fire("lane:trackableEvent", {
+                            category: trackingData.category,
+                            action: trackingData.action,
+                            label: trackingData.label,
+                            value: trackingData.value
+                        });
+                    }
                 }
             };
         }();
+        Y.publish("lane:trackableEvent",{
+            category:null,
+            action:null,
+            label:null,
+            value: null
+          });
+        Y.publish("lane:trackablePageview",{
+            host: null,
+            path: null,
+            query: null,
+            title: null,
+            searchTerms: null,
+            searchSource: null,
+            external: null
+        });
         Y.on('click', function(e) {
-            LANE.tracking.trackEvent(e);
+            LANE.tracking.trackClick(e);
             //put in a delay for safari to make the tracking request:
-            if (Y.UA.webkit && LANE.tracking.isTrackable(e)) {
+            if (Y.UA.webkit && (LANE.tracking.isTrackableAsPageview(e) || LANE.tracking.isTrackableAsEvent(e))) {
                     var t = e.target, f;
                     while (t) {
                         // have safari follow link if it's not:
@@ -250,9 +333,29 @@
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
         if (Y.lane.BookmarksWidget) {
             Y.lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
-                LANE.tracking.track({
+                Y.fire("lane:trackablePageview", {
+                    path: document.location.pathname,
                     title: "lane:bookmark: " + event.bookmark.getLabel()
                 });
             });
         }
+        Y.on("lane:suggestSelect",  function(event) {
+            Y.fire("lane:trackableEvent", {
+                category: event.type,
+                action: event.parentForm.source.value,
+                label: event.suggestion
+            });
+        });
+        Y.on("lane:quickLinkClick",  function(event) {
+            Y.fire("lane:trackableEvent", {
+                category: event.type,
+                action: event.linkName
+            });
+        });
+        Y.on("lane:searchFormReset",  function(event) {
+            Y.fire("lane:trackableEvent", {
+                category: event.type,
+                action: document.location.pathname
+            });
+        });
 })();
