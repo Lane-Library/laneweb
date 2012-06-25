@@ -815,7 +815,7 @@
                     var srcNode = this.get("srcNode");
                     this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"));
                     this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"));
-                    this._urlInput.getInput().after("focus", this._setDefaultUrlInputText);
+                    this._urlInput.getInput().after("focus", this._setDefaultUrlInputText, this);
                     this._truncateLabel();
                 },
                 
