@@ -83,7 +83,7 @@
                                         title="Search 200+ bioresearch resources"
                                         >Bioresearch Search</option>
                                     <option value="history-all"
-                                        title="Search Lane's historical collection">History</option>
+                                        title="Search Lane's historical collection">History Search</option>
                                     <option value="bassett"
                                         title="Find anatomical images from Lane's Bassett Collection"
                                         >Bassett Images Search</option>
