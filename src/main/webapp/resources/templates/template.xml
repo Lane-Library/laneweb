@@ -31,21 +31,21 @@
                                         >Lane Search</option>
                                     <option value="clinical-all"
                                         title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed ..."
-                                        >Clinical/PICO</option>
+                                        >Clinical/PICO Search</option>
                                     <option value="peds-all"
                                         title="Find pediatric evidence from UpToDate, PubMed, and more ..."
-                                        >Pediatrics</option>
+                                        >Pediatrics Search</option>
                                     <option value="bioresearch-all"
                                         title="Search 200+ bioresearch resources"
-                                        >Bioresearch</option>
+                                        >Bioresearch Search</option>
                                     <option value="history-all"
                                         title="Search Lane's historical collection">History</option>
                                     <option value="bassett"
                                         title="Find anatomical images from Lane's Bassett Collection"
-                                        >Bassett Images</option>
+                                        >Bassett Images Search</option>
                                     <option value="textbooks-all"
                                         title="Search selected clinical textbooks"
-                                        >Textbooks</option>
+                                        >Textbooks Search</option>
                                 </select>
                                 <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187;</span>
                                 <div id="searchIndicator"><img alt="[searching]"
