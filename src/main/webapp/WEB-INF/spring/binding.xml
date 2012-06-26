@@ -126,7 +126,7 @@
 
     <bean id="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"
         class="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser">
-        <constructor-arg value="${defaultTemplate}"/>
+        <constructor-arg value="template"/>
         <constructor-arg>
             <list>
                 <value>template</value>
