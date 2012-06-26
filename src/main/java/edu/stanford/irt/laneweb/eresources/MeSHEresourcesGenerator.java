@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import edu.stanford.irt.eresources.Eresource;
 
@@ -12,11 +13,8 @@ public class MeSHEresourcesGenerator extends CacheableEresourcesGenerator {
 
     @Override
     protected Collection<Eresource> getEresourceList() {
-        if (null == this.mesh) {
-            throw new IllegalStateException("null mesh");
-        }
-        if (null == this.type) {
-            throw new IllegalStateException("null type");
+        if (this.mesh == null || this.type == null) {
+            return Collections.emptySet();
         }
         return this.collectionManager.getMesh(this.type, this.mesh);
     }
