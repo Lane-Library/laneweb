@@ -26,7 +26,3 @@ a:visited {
 .content .leftColumn li a:hover {
     border-bottom : 1px solid #820000;
 }
-
-.content .leftColumn li:hover {
-    background-color: #E6E4DC;
-}
