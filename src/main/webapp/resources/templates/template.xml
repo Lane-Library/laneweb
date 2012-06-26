@@ -18,10 +18,11 @@
                         <div class="sb-c" id="sb-tl"/>
                         <div class="sb-c" id="sb-tr"/>
                     </div>
-                    <div id="sb">
+                    <!-- TODO: remove this style rule when mylane marketing removed -->
+                    <div id="sb" style="*z-index:1">
                         <h1>
                             <a href="/index.html"><span>Lane</span> Medical Library <span
-                                    id="subHeading">powered by LaneConnex Technology</span></a>
+                                id="subHeading">powered by LaneConnex Technology</span></a>
                         </h1>
                         <form id="search" method="get" action="/search.html">
                             <fieldset id="searchFields">
@@ -47,9 +48,9 @@
                                         title="Search selected clinical textbooks"
                                         >Textbooks Search</option>
                                 </select>
-                                <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187;</span>
+                                <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187; </span>
                                 <div id="searchIndicator"><img alt="[searching]"
-                                        src="/resources/images/search-indicator.gif"/></div>
+                                    src="/resources/images/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
                                 <input id="searchSubmit" type="submit" value="search"/>
                                 <a id="searchReset" title="Clear Search" href="/">×</a>
@@ -72,11 +73,15 @@
                             <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
                         </ul>
                         <ul id="login">
-                            <li>
-                                <a href="/secure/login.html">Off Campus Login</a>
+                            <li><div class="look-here"><div class="look-here-arrow"></div>Save Time!<br/>Login to personalize</div>
+                                <a href="/secure/login.html">MyLane login</a>
+                            </li>
+                            <li id="favorites"><div class="look-here"><div class="look-here-arrow"></div>Create your personal bookmarks</div>
+                                <a href="/favorites.html">My Bookmarks</a>
+                                <?laneweb bookmarks?>
                             </li>
                             <li>
-                                <a href="/persistentlogin.html">Account</a>
+                                <a href="/myaccounts.html">MyLane</a>
                             </li>
                             <li>
                                 <a id="logout" href="/logout">Logout</a>

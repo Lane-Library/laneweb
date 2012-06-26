@@ -41,7 +41,6 @@ public class BookmarkDataBinderTest {
         this.bookmarks = Collections.emptyList();
         this.dao = createMock(BookmarkDAO.class);
         this.binder.setBookmarkDAO(this.dao);
-        this.binder.setEnabled(true);
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
     }
