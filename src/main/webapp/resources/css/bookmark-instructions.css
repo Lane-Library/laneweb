@@ -44,27 +44,11 @@
 	display: none
 }
 
-/* Graphics to replace css button for Bookmark on Lane. CSS button doesn't allow to bookmark in IE. Text that appears on the css button, also appears on the toolbar. This is to fix both. */
-#bookmarkletNotIE .bookmark-on-lane {
+/* Graphics to replace css button for Bookmark on Lane. CSS button doesn't allow to bookmark in IE and image-sprite doesn't show in FF toolbar. Separate graphics and this style fixes both.  */
+#bookmarkletNotIE .bookmark-on-lane, #bookmarkletIE .bookmark-on-lane {
 	cursor: pointer;
 	height: 31px;
 	width: 326px;
 	display: inline-block;
-	background-image: url("/././resources/images/icons-sprite3.png");
-	background-repeat: no-repeat;
-	background-position: -396px -233px;
-	color: transparent;
-	margin-bottom: 1em;
-}
-
-#bookmarkletIE .bookmark-on-lane {
-	cursor: pointer;
-	height: 31px;
-	width: 326px;
-	display: inline-block;
-	background-image: url("/././resources/images/icons-sprite3.png");
-	background-repeat: no-repeat;
-	background-position: 0 -233px;
-	color: transparent;
 	margin-bottom: 1em;
 }
