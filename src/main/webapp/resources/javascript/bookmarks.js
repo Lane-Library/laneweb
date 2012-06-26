@@ -576,9 +576,11 @@
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
                 if (LANE.SearchResult.getSearchTerms()) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
-                    bookmarkSearch.setStyle("display", "inline");
-                    bookmarkSearch.on("mouseover", this._handleTargetMouseover, this);
-                    bookmarkSearch.on("mouseout", this._handleTargetMouseout, this);
+                    if (bookmarkSearch) {
+                        bookmarkSearch.setStyle("display", "inline");
+                        bookmarkSearch.on("mouseover", this._handleTargetMouseover, this);
+                        bookmarkSearch.on("mouseout", this._handleTargetMouseout, this);
+                    }
                 }
                 this.on("statusChange", this._handleStatusChange);
                 this.get("bookmarks").after("addSync", this._handleSyncEvent, this);
@@ -961,9 +963,9 @@
                  * @private
                  */
                 _setDefaultUrlInputText : function() {
-                	if (this._urlInput.getValue() === "") {
-                		this._urlInput.setValue("http://");
-                	}
+                    if (this._urlInput.getValue() === "") {
+                        this._urlInput.setValue("http://");
+                    }
                 }
             }, {
                 ATTRS : {
