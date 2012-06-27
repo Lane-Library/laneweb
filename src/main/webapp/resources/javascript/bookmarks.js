@@ -577,6 +577,7 @@
                 if (LANE.SearchResult.getSearchTerms()) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
+                        bookmarkSearch.get("parent").setStyle("display", "list-item");
                         bookmarkSearch.setStyle("display", "inline");
                         bookmarkSearch.on("mouseover", this._handleTargetMouseover, this);
                         bookmarkSearch.on("mouseout", this._handleTargetMouseout, this);
