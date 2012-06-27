@@ -17,10 +17,7 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
 
     private CollectionManager collectionManager;
 
-    public void setCollectionManager(final CollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
+    public MergedSearchGenerator(final CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
 

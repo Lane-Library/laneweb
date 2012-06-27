@@ -24,6 +24,7 @@ public class EresourceResource implements Resource {
         this.eresource = eresource;
     }
 
+    //TODO: delegate toSAX to an XMLizable strategy
     public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
         handleEresource(xmlConsumer);
     }

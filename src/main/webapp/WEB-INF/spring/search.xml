@@ -51,8 +51,7 @@
     <bean name="org.apache.cocoon.generation.Generator/merged-search"
         class="edu.stanford.irt.laneweb.search.MergedSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-        <property name="collectionManager"
-            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
@@ -60,8 +59,7 @@
     <bean name="org.apache.cocoon.generation.Generator/merged-history-search"
         class="edu.stanford.irt.laneweb.search.MergedSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-        <property name="collectionManager"
-            ref="edu.stanford.irt.eresources.CollectionManager/history"/>
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/history"/>
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
