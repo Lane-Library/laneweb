@@ -64,9 +64,11 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(this.page));
         atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(pages));
         XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCES, atts);
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, QUERY);
-        XMLUtils.data(xmlConsumer, this.query);
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, QUERY);
+        if (this.query != null) {
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, QUERY);
+            XMLUtils.data(xmlConsumer, this.query);
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, QUERY);
+        }
         handleSearchContentCounts(xmlConsumer);
         int i = 0;
         int j = start + length;

@@ -110,6 +110,32 @@ public class PagingXMLizableSearchResultSetTest {
     }
 
     @Test
+    public void testNullQuery() throws SAXException {
+        expect(this.results.size()).andReturn(Integer.valueOf(0));
+        expect(this.results.iterator()).andReturn(this.iterator);
+        expect(this.iterator.hasNext()).andReturn(Boolean.FALSE);
+        this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
+        Capture<Attributes> atts = new Capture<Attributes>();
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES), capture(atts));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class), isA(Attributes.class));
+        this.xmlConsumer.endElement(Resource.NAMESPACE, "contentHitCounts", "contentHitCounts");
+        this.xmlConsumer.endElement(Resource.NAMESPACE, "resources", "resources");
+        this.xmlConsumer.endPrefixMapping("");
+        this.xmlConsumer.endDocument();
+        replay(this.results, this.xmlConsumer, this.result, this.iterator);
+        PagingXMLizableSearchResultSet set = new PagingXMLizableSearchResultSet(null, 0);
+        set.addAll(this.results);
+        set.toSAX(this.xmlConsumer);
+        assertEquals("0", atts.getValue().getValue("size"));
+        assertEquals("0", atts.getValue().getValue("start"));
+        assertEquals("0", atts.getValue().getValue("length"));
+        assertEquals("0", atts.getValue().getValue("page"));
+        assertEquals("0", atts.getValue().getValue("pages"));
+        verify(this.results, this.xmlConsumer, this.result, this.iterator);
+    }
+
+    @Test
     public void testPage0ToSAX() throws SAXException {
         expect(this.results.size()).andReturn(Integer.valueOf(256));
         expect(this.results.iterator()).andReturn(this.iterator);
