@@ -18,7 +18,7 @@
     <bean name="org.apache.cocoon.generation.Generator/eresources-count"
         class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
         scope="prototype">
-        <property name="types">
+        <constructor-arg>
             <set>
                 <value>ej</value>
                 <value>database</value>
@@ -30,9 +30,8 @@
                 <value>software</value>
                 <value>statistics</value>
             </set>
-        </property>
-        <property name="collectionManager"
-            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/er-browse"

@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -24,32 +24,29 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
 
     private String query;
 
-    private Set<String> types = Collections.emptySet();
+    private Set<String> types;
 
-    public void setCollectionManager(final CollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
+    public EresourcesCountGenerator(final Set<String> types, final CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
+        this.types = types;
     }
 
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
-        if (null == this.query) {
-            throw new IllegalArgumentException("null query");
-        }
-    }
-
-    public void setTypes(final Set<String> types) {
-        if (null == types) {
-            throw new IllegalArgumentException("null types");
-        }
-        this.types = types;
     }
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Map<String, Integer> results = this.collectionManager.searchCount(this.types, null, this.query);
+        Map<String, Integer> results = null;
+        if (this.query == null || this.query.isEmpty()) {
+            results = new HashMap<String, Integer>();
+            Integer zero = Integer.valueOf(0);
+            for (String type : this.types) {
+                results.put(type, zero);
+            }
+        } else {
+            results = this.collectionManager.searchCount(this.types, null, this.query);
+        }
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", SQL_NS);
