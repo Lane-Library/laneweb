@@ -18,6 +18,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
@@ -79,7 +80,13 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
                 time = DEFAULT_TIMEOUT;
             }
         }
-        return this.metaSearchManager.search(new SimpleQuery(this.query), time, this.engines, true);
+        Result result = null;
+        if (this.query == null) {
+            result = new DefaultResult("");
+        } else {
+            return this.metaSearchManager.search(new SimpleQuery(this.query), time, this.engines, true);
+        }
+        return result;
     }
 
     protected Collection<ContentResultSearchResult> getContentResultList(final Result result) {

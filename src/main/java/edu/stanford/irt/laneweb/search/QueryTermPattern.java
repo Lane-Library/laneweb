@@ -18,6 +18,8 @@ public final class QueryTermPattern {
 
     private static final String NONWORD = "\\\\W";
 
+    private static final Pattern NULL_QUERY_PATTERN = Pattern.compile(".*");
+
     private static final Pattern REPLACE_QUOTES = Pattern.compile("\\\"");
 
     private static final Pattern SPACE_HYPHEN_PATTERN = Pattern.compile("[- ]");
@@ -43,6 +45,9 @@ public final class QueryTermPattern {
      *             original query
      */
     public static Pattern getPattern(final String query) {
+        if (query == null) {
+            return NULL_QUERY_PATTERN;
+        }
         String normalQuery = query.trim().toLowerCase();
         normalQuery = INVERT_COMMAS_PATTERN.matcher(normalQuery).replaceAll(INVERT_REPLACEMENT);
         normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
