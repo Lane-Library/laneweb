@@ -29,8 +29,8 @@
 /*the link in the search form for bookmarking searches*/
 #bookmarkSearch {
     display:none;
-    position:absolute;
-    top:192px
+   /* position:absolute;
+    top:192px*/
 }
 
 #bookmark-link.active,
