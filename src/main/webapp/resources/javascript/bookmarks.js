@@ -577,10 +577,8 @@
                 if (LANE.SearchResult.getSearchTerms()) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
-                        bookmarkSearch.get("parentNode").setStyle("display", "list-item");
                         bookmarkSearch.setStyle("display", "inline");
-                        bookmarkSearch.on("mouseover", this._handleTargetMouseover, this);
-                        bookmarkSearch.on("mouseout", this._handleTargetMouseout, this);
+                        bookmarkSearch.on("click", this._handleBookmarkSearchClick, this);
                     }
                 }
                 this.on("statusChange", this._handleStatusChange);
@@ -626,25 +624,30 @@
              */
             _handleClick : function() {
                 var target = this.get("target"), label, url, query;
-                if (target.get("id") == "bookmarkSearch") {
-                    label = "Search for: " + LANE.SearchResult.getSearchTerms();
-                    url = "/search.html?source=" + LANE.SearchResult.getSearchSource() + "&q=" + LANE.SearchResult.getSearchTerms();
-                } else {
-                    target.plug(Y.lane.LinkPlugin);
-                    label = target.link.get("title");
-                    if (target.link.get("local")) {
-                        url = target.link.get("path");
-                        //case 71646 local links lack query string
-                        query = target.link.get("query");
-                        if (query) {
-                            url += query;
-                        }
-                        
-                    } else {
-                        url = target.link.get("url");
+                target.plug(Y.lane.LinkPlugin);
+                label = target.link.get("title");
+                if (target.link.get("local")) {
+                    url = target.link.get("path");
+                    //case 71646 local links lack query string
+                    query = target.link.get("query");
+                    if (query) {
+                        url += query;
                     }
+                } else {
+                    url = target.link.get("url");
                 }
                 this.set("status", BookmarkLink.BOOKMARKING);
+                this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
+            },
+            
+            /**
+             * Handle clicks on the bookmarkSearch link.
+             * @method _handleBookmarkSearchClick
+             * @private
+             */
+            _handleBookmarkSearchClick : function(event) {
+                label = "Search for: " + LANE.SearchResult.getSearchTerms();
+                url = "/search.html?source=" + LANE.SearchResult.getSearchSource() + "&q=" + LANE.SearchResult.getSearchTerms();
                 this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
             },
             
@@ -683,9 +686,7 @@
              */
             _isBookmarkable : function(target) {
                 var bookmarkable = false;
-                if (target.get("id") == "bookmarkSearch") {
-                    bookmarkable = true;
-                } else if (target.getStyle("display") == "inline" && !target.one("img")) {
+                if (target.getStyle("display") == "inline" && !target.one("img")) {
                     bookmarkable = true;
                 } else if (target.ancestor("#topResources")) {
                     bookmarkable = true;
