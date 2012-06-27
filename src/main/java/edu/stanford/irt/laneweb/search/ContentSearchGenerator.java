@@ -81,7 +81,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
             }
         }
         Result result = null;
-        if (this.query == null) {
+        if (this.query == null || this.query.isEmpty()) {
             result = new DefaultResult("");
         } else {
             return this.metaSearchManager.search(new SimpleQuery(this.query), time, this.engines, true);

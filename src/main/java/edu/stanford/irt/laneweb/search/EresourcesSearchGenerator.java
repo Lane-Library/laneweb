@@ -50,7 +50,7 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
 
     protected Collection<SearchResult> getEresourceList() {
         Collection<Eresource> eresources = null;
-        if (this.query == null) {
+        if (this.query == null || this.query.isEmpty()) {
             eresources = Collections.emptySet();
         } else if (this.type == null) {
             eresources = this.collectionManager.search(this.query);
