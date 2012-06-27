@@ -577,7 +577,7 @@
                 if (LANE.SearchResult.getSearchTerms()) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
-                        bookmarkSearch.setStyle("display", "inline");
+                        bookmarkSearch.setStyle("display", "block");
                         bookmarkSearch.on("click", this._handleBookmarkSearchClick, this);
                     }
                 }
