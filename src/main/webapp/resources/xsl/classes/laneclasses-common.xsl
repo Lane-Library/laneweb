@@ -8,7 +8,7 @@
 
     <xsl:template name="month">
         <xsl:variable name="month">
-             <xsl:value-of select="substring-before(./lc:event_dates/lc:start_date/text(),'/')" />
+             <xsl:value-of select="substring-before(./lc:event_dates/lc:start_date[1]/text(),'/')" />
         </xsl:variable>
            <xsl:if test="$month = '1'">Jan</xsl:if>
             <xsl:if test="$month = '2'">Feb</xsl:if>
@@ -26,21 +26,21 @@
 
     <xsl:template name="day">
         <xsl:variable name="day">
-             <xsl:value-of select="substring-before(substring-after(./lc:event_dates/lc:start_date/text(),'/'),'/')" />
+             <xsl:value-of select="substring-before(substring-after(./lc:event_dates/lc:start_date[1]/text(),'/'),'/')" />
         </xsl:variable>
            <xsl:value-of select="format-number( number( $day), '00')"/>
     </xsl:template>
 
 
     <xsl:template name="start-time">
-             <xsl:value-of select="substring-before(substring-after(./lc:event_dates/lc:start_date/text(),' '),':00 ')" />
+             <xsl:value-of select="substring-before(substring-after(./lc:event_dates/lc:start_date[1]/text(),' '),':00 ')" />
     </xsl:template>
 
     <xsl:template name="end-time">
         <xsl:variable name="hour">
-            <xsl:value-of select="substring-before(substring-after(./lc:event_dates/lc:end_date/text(),' '),':00 ')" />
+            <xsl:value-of select="substring-before(substring-after(./lc:event_dates/lc:end_date[1]/text(),' '),':00 ')" />
         </xsl:variable>
-        <xsl:value-of select="concat($hour, lower-case(substring-after(./lc:event_dates/lc:end_date/text(),':00 ')))"/>
+        <xsl:value-of select="concat($hour, lower-case(substring-after(./lc:event_dates/lc:end_date[1]/text(),':00 ')))"/>
     </xsl:template>
 
     
