@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -48,14 +49,13 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
     }
 
     protected Collection<SearchResult> getEresourceList() {
-        if (null == this.query) {
-            throw new IllegalStateException("null query");
-        }
         Collection<Eresource> eresources = null;
-        if (null != this.type) {
-            eresources = this.collectionManager.searchType(this.type, this.query);
-        } else {
+        if (this.query == null) {
+            eresources = Collections.emptySet();
+        } else if (this.type == null) {
             eresources = this.collectionManager.search(this.query);
+        } else {
+            eresources = this.collectionManager.searchType(this.type, this.query);
         }
         Collection<SearchResult> results = new LinkedList<SearchResult>();
         for (Eresource eresource : eresources) {

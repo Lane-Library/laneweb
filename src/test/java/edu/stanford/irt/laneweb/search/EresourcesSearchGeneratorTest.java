@@ -9,8 +9,6 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
@@ -28,8 +26,6 @@ public class EresourcesSearchGeneratorTest {
 
     private EresourcesSearchGenerator generator;
 
-    private Map<String, Object> model;
-
     private XMLConsumer xmlConsumer;
 
     @Before
@@ -37,9 +33,6 @@ public class EresourcesSearchGeneratorTest {
         this.collectionManager = createMock(CollectionManager.class);
         this.generator = new EresourcesSearchGenerator(this.collectionManager);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.model = new HashMap<String, Object>();
-        this.model.put(Model.QUERY, "query");
-        this.generator.setModel(this.model);
     }
 
     @Test
@@ -60,6 +53,7 @@ public class EresourcesSearchGeneratorTest {
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         replay(this.xmlConsumer, this.collectionManager);
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.xmlConsumer, this.collectionManager);
     }
@@ -68,7 +62,15 @@ public class EresourcesSearchGeneratorTest {
     public void testGetEresourceList() {
         expect(this.collectionManager.search("query")).andReturn(Collections.<Eresource> emptyList());
         replay(this.collectionManager);
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         this.generator.getEresourceList();
+        verify(this.collectionManager);
+    }
+
+    @Test
+    public void testGetEresourceListNullQuery() {
+        replay(this.collectionManager);
+        assertEquals(0, this.generator.getEresourceList().size());
         verify(this.collectionManager);
     }
 
@@ -76,9 +78,10 @@ public class EresourcesSearchGeneratorTest {
     public void testGetEresourceListTypeParameter() {
         Eresource eresource = createMock(Eresource.class);
         expect(eresource.getTitle()).andReturn("title");
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.searchType("type", "query")).andReturn(Collections.<Eresource> singletonList(eresource));
         replay(this.collectionManager, eresource);
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         assertEquals(1, this.generator.getEresourceList().size());
         verify(this.collectionManager, eresource);
     }
