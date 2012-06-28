@@ -35,8 +35,10 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
 
     private Collection<EresourceSearchResult> getEresourceList() {
         Collection<EresourceSearchResult> eresourceResults = new LinkedList<EresourceSearchResult>();
-        for (Eresource eresource : this.collectionManager.search(this.query)) {
-            eresourceResults.add(new EresourceSearchResult(eresource));
+        if (this.query != null && !this.query.isEmpty()) {
+            for (Eresource eresource : this.collectionManager.search(this.query)) {
+                eresourceResults.add(new EresourceSearchResult(eresource));
+            }
         }
         return eresourceResults;
     }

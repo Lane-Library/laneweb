@@ -116,6 +116,45 @@ public class MergedSearchGeneratorTest {
     }
 
     @Test
+    public void testDoGenerateEmptyQuery() throws SAXException {
+        this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/resources/1.0");
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"),
+                isA(Attributes.class));
+        this.xmlConsumer
+                .startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("query"), eq("query"), isA(Attributes.class));
+        this.xmlConsumer.characters(aryEq(new char[0]), eq(0), eq(0));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("query"), eq("query"));
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"),
+                isA(Attributes.class));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"));
+        this.xmlConsumer.endPrefixMapping("");
+        this.xmlConsumer.endDocument();
+        replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, ""));
+        this.generator.doGenerate(this.xmlConsumer);
+        verify(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
+    }
+
+    @Test
+    public void testDoGenerateNullQuery() throws SAXException {
+        this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/resources/1.0");
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"),
+                isA(Attributes.class));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"));
+        this.xmlConsumer.endPrefixMapping("");
+        this.xmlConsumer.endDocument();
+        replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
+        this.generator.doGenerate(this.xmlConsumer);
+        verify(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
+    }
+
+    @Test
     public void testDoGenerateThrowException() throws SAXException {
         expect(this.collectionManager.search("query")).andReturn(Collections.singleton(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
