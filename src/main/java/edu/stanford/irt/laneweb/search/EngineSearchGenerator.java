@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.Result;
@@ -30,7 +31,7 @@ public class EngineSearchGenerator extends SearchGenerator {
         if (this.engines == null) {
             String engineList = parameters.get(Model.ENGINES);
             if (engineList == null) {
-                throw new IllegalArgumentException("null engines");
+                throw new LanewebException("null engines");
             }
             this.engines = Arrays.asList(engineList.split(","));
         }
