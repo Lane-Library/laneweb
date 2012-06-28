@@ -15,10 +15,11 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator implemen
 
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
-        if (null == this.query) {
-            throw new IllegalArgumentException("null query");
-        }
         String page = ModelUtil.getString(model, Model.PAGE, "1");
-        this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
+        try {
+            this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
+        } catch (NumberFormatException nfe) {
+            this.page = 0;
+        }
     }
 }

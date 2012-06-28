@@ -45,7 +45,10 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
 
     protected Result doSearch(final Collection<String> engines) {
         Result result = null;
-        if ((this.query != null) && (this.query.length() > 0)) {
+        if (this.query == null || this.query.isEmpty()) {
+            result = new DefaultResult("null");
+            result.setStatus(SearchStatus.FAILED);
+        } else {
             long time = DEFAULT_TIMEOUT;
             if (null != this.timeout) {
                 try {
@@ -84,10 +87,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
                     throw new IllegalStateException(ie);
                 }
             }
-        }
-        if (result == null) {
-            result = new DefaultResult("null");
-            result.setStatus(SearchStatus.FAILED);
         }
         return result;
     }
