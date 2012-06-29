@@ -7,6 +7,9 @@
         class="edu.stanford.irt.laneweb.bassett.BassettEresourcesGenerator"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.bassett.BassettListXMLizingStrategy"/>
+        </constructor-arg>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/bassett-accordion"

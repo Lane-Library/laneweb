@@ -7,10 +7,11 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.cocoon.xml.XMLizable;
+import edu.stanford.irt.cocoon.xml.XMLizingStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class XMLizableBassettEresourceList implements XMLizable {
+public class BassettListXMLizingStrategy implements XMLizingStrategy<Collection<BassettEresource>> {
 
     private static final String BASSETT = "bassett";
 
@@ -40,22 +41,22 @@ public class XMLizableBassettEresourceList implements XMLizable {
 
     private static final String TITLE = "title";
 
-    private Collection<BassettEresource> bassetts;
-
-    public XMLizableBassettEresourceList(final Collection<BassettEresource> bassetts) {
-        this.bassetts = bassetts;
-    }
-
-    public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
-        xmlConsumer.startPrefixMapping("", NAMESPACE);
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETTS);
-        if (this.bassetts != null) {
-            for (BassettEresource eresource : this.bassetts) {
-                handleEresource(xmlConsumer, eresource);
+    public void toSAX(final Collection<BassettEresource> bassetts, final XMLConsumer xmlConsumer) {
+        try {
+            xmlConsumer.startDocument();
+            xmlConsumer.startPrefixMapping("", NAMESPACE);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETTS);
+            if (bassetts != null) {
+                for (BassettEresource eresource : bassetts) {
+                    handleEresource(xmlConsumer, eresource);
+                }
             }
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETTS);
+            xmlConsumer.endPrefixMapping("");
+            xmlConsumer.endDocument();
+        } catch (SAXException e) {
+            throw new LanewebException(e);
         }
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETTS);
-        xmlConsumer.endPrefixMapping("");
     }
 
     private void handleEresource(final XMLConsumer xmlConsumer, final BassettEresource bassett) throws SAXException {

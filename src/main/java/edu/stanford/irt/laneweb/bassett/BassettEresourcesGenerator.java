@@ -1,14 +1,14 @@
 package edu.stanford.irt.laneweb.bassett;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 import org.apache.cocoon.xml.XMLConsumer;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.xml.XMLizingStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -25,8 +25,12 @@ public class BassettEresourcesGenerator extends AbstractGenerator implements Mod
 
     private String region;
 
-    public BassettEresourcesGenerator(final BassettCollectionManager collectionManager) {
+    private XMLizingStrategy<Collection<BassettEresource>> xmlizingStrategy;
+
+    public BassettEresourcesGenerator(final BassettCollectionManager collectionManager,
+            final XMLizingStrategy<Collection<BassettEresource>> xmlizingStrategy) {
         this.collectionManager = collectionManager;
+        this.xmlizingStrategy = xmlizingStrategy;
     }
 
     public void setModel(final Map<String, Object> model) {
@@ -48,14 +52,9 @@ public class BassettEresourcesGenerator extends AbstractGenerator implements Mod
             }
         } else if (this.query != null) {
             eresources = this.collectionManager.search(this.query);
+        } else {
+            eresources = Collections.emptySet();
         }
-        try {
-            xmlConsumer.startDocument();
-            XMLizableBassettEresourceList xml = new XMLizableBassettEresourceList(eresources);
-            xml.toSAX(xmlConsumer);
-            xmlConsumer.endDocument();
-        } catch (SAXException e) {
-            throw new LanewebException(e);
-        }
+        this.xmlizingStrategy.toSAX(eresources, xmlConsumer);
     }
 }
