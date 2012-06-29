@@ -7,6 +7,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
+import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -14,13 +15,19 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 /**
  * @author alainb
  */
-public class BassettEresourcesGenerator extends AbstractBassettGenerator implements ModelAware {
+public class BassettEresourcesGenerator extends AbstractGenerator implements ModelAware {
 
     private String bassettNumber;
+
+    private BassettCollectionManager collectionManager;
 
     private String query;
 
     private String region;
+
+    public BassettEresourcesGenerator(final BassettCollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
 
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);

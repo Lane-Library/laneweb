@@ -2,11 +2,13 @@ package edu.stanford.irt.laneweb.bassett;
 
 import org.apache.cocoon.xml.XMLConsumer;
 
+import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
+
 // import java.util.Collection;
 //
 // import edu.stanford.irt.laneweb.model.Model;
 // import edu.stanford.irt.laneweb.model.ModelUtil;
-public class BassettImageListGenerator extends AbstractBassettGenerator {
+public class BassettImageListGenerator extends AbstractGenerator {
 
     // private String bassettNumber;
     //

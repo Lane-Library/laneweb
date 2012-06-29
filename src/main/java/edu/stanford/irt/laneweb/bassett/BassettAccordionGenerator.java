@@ -2,9 +2,11 @@ package edu.stanford.irt.laneweb.bassett;
 
 import org.apache.cocoon.xml.XMLConsumer;
 
+import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
+
 // import edu.stanford.irt.laneweb.model.Model;
 // import edu.stanford.irt.laneweb.model.ModelUtil;
-public class BassettAccordionGenerator extends AbstractBassettGenerator {
+public class BassettAccordionGenerator extends AbstractGenerator {
 
     // private String query;
     @Override
