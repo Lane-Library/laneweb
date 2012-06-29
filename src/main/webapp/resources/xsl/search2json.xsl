@@ -29,6 +29,7 @@
         {
         "status": "<xsl:value-of select="@s:status"/>",
         "url": "<xsl:value-of select="s:url"/>",
+        <!-- TODO: return number value instead of string for hits -->
         "hits": "<xsl:value-of select="s:hits"/>"<xsl:text/>
         <xsl:if test="$content = 'true' and ./s:content">
             <xsl:text>,
