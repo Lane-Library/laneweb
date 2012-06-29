@@ -18,7 +18,6 @@
                         <div class="sb-c" id="sb-tl"/>
                         <div class="sb-c" id="sb-tr"/>
                     </div>
-                    <!-- TODO: remove this style rule when mylane marketing removed -->
                     <div id="sb" style="*z-index:1">
                         <h1>
                             <a href="/index.html"><span>Lane</span> Medical Library <span
@@ -270,7 +269,7 @@
             <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
         </div>
         <div id="feedbackLink"><a rel="lightbox" href="/help/feedback2.html"></a></div>
-        <script type="text/javascript" src="/resources/javascript/yui.js?${project.version}"></script>
+        <script type="text/javascript" src="/resources/javascript/yui-3.5.1.js?${project.version}"></script>
         <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}"></script>
     </body>
 </html>
