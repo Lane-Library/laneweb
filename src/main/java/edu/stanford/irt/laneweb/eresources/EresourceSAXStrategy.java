@@ -8,51 +8,40 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Link;
 import edu.stanford.irt.eresources.Version;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class EresourceResource implements Resource {
+public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
 
     private static final Comparator<Version> VERSION_COMPARATOR = new EresourceVersionComparator();
 
-    protected Eresource eresource;
-
-    public EresourceResource(final Eresource eresource) {
-        this.eresource = eresource;
-    }
-
-    //TODO: delegate toSAX to an XMLizable strategy
-    public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
-        handleEresource(xmlConsumer);
-    }
-
-    @Override
-    public String toString() {
-        return this.eresource.toString();
-    }
-
-    private void handleEresource(final XMLConsumer xmlConsumer) throws SAXException {
-        // TODO: returning result element for now ... turn into displayable?
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.eresource.getScore()));
-        atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "eresource");
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
-        XMLUtils.createElementNS(xmlConsumer, NAMESPACE, ID, Integer.toString(this.eresource.getId()));
-        XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_ID, Integer.toString(this.eresource.getRecordId()));
-        XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_TYPE, this.eresource.getRecordType());
-        XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, this.eresource.getTitle());
-        maybeCreateElement(xmlConsumer, DESCRIPTION, this.eresource.getDescription());
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, VERSIONS);
-        Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);
-        versions.addAll(this.eresource.getVersions());
-        for (Version version : versions) {
-            handleVersion(xmlConsumer, version);
+    public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
+        try {
+            AttributesImpl atts = new AttributesImpl();
+            atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(eresource.getScore()));
+            atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "eresource");
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, ID, Integer.toString(eresource.getId()));
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_ID, Integer.toString(eresource.getRecordId()));
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_TYPE, eresource.getRecordType());
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, eresource.getTitle());
+            maybeCreateElement(xmlConsumer, DESCRIPTION, eresource.getDescription());
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, VERSIONS);
+            Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);
+            versions.addAll(eresource.getVersions());
+            for (Version version : versions) {
+                handleVersion(xmlConsumer, version);
+            }
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, VERSIONS);
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
+        } catch (SAXException e) {
+            throw new LanewebException(e);
         }
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, VERSIONS);
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
     }
 
     private void handleLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {

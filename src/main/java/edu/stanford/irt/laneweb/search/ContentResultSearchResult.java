@@ -3,11 +3,6 @@ package edu.stanford.irt.laneweb.search;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.cocoon.xml.XMLConsumer;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
-
-import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.ContentResult;
 
 /**
@@ -41,12 +36,20 @@ public class ContentResultSearchResult implements SearchResult {
 
     private String sortTitle;
 
-    public ContentResultSearchResult(final ContentResult contentResult, final Pattern queryTermPattern) {
+    public ContentResultSearchResult(final ContentResult contentResult, String resourceHits, String resourceId, String resourceName, String resourceUrl, final Pattern queryTermPattern) {
         this.contentResult = contentResult;
+        this.resourceHits = resourceHits;
+        this.resourceId = resourceId;
+        this.resourceName = resourceName;
+        this.resourceUrl = resourceUrl;
         this.sortTitle = NON_FILING_PATTERN.matcher(this.contentResult.getTitle()).replaceFirst("");
         this.sortTitle = this.sortTitle.toLowerCase().replaceAll("\\W", "");
         this.queryTermPattern = queryTermPattern;
         this.score = computeScore();
+    }
+    
+    public ContentResult getResult() {
+        return this.contentResult;
     }
 
     public int compareTo(final SearchResult o) {
@@ -65,21 +68,6 @@ public class ContentResultSearchResult implements SearchResult {
         }
         ContentResultSearchResult scmr = (ContentResultSearchResult) other;
         return scmr.getSortTitle().equals(this.sortTitle);
-    }
-
-    public String getContentId() {
-        return this.contentResult.getContentId();
-    }
-
-    public String getContentUrl() {
-        return this.contentResult.getURL();
-    }
-
-    /**
-     * @return the publicationTitle from contentResult
-     */
-    public String getPublicationTitle() {
-        return this.contentResult.getPublicationTitle();
     }
 
     /**
@@ -121,62 +109,6 @@ public class ContentResultSearchResult implements SearchResult {
     @Override
     public int hashCode() {
         return this.sortTitle.hashCode();
-    }
-
-    /**
-     * @param resourceHits
-     *            the resourceHits to set
-     */
-    public void setResourceHits(final String resourceHits) {
-        this.resourceHits = resourceHits;
-    }
-
-    /**
-     * @param resourceId
-     *            the resourceId to set
-     */
-    public void setResourceId(final String resourceId) {
-        this.resourceId = resourceId;
-    }
-
-    /**
-     * @param resourceName
-     *            the resourceName to set
-     */
-    public void setResourceName(final String resourceName) {
-        this.resourceName = resourceName;
-    }
-
-    /**
-     * @param resourceUrl
-     *            the resourceUrl to set
-     */
-    public void setResourceUrl(final String resourceUrl) {
-        this.resourceUrl = resourceUrl;
-    }
-
-    public void toSAX(final XMLConsumer xmlConsumer) throws SAXException {
-        // TODO: returning result element for now ... turn into displayable?
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.getScore()));
-        atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
-        maybeCreateElement(xmlConsumer, RESOURCE_ID, this.resourceId);
-        maybeCreateElement(xmlConsumer, RESOURCE_NAME, this.resourceName);
-        maybeCreateElement(xmlConsumer, RESOURCE_URL, this.resourceUrl);
-        maybeCreateElement(xmlConsumer, RESOURCE_HITS, this.resourceHits);
-        maybeCreateElement(xmlConsumer, ID, this.contentResult.getId());
-        maybeCreateElement(xmlConsumer, CONTENT_ID, this.contentResult.getContentId());
-        maybeCreateElement(xmlConsumer, TITLE, this.contentResult.getTitle());
-        maybeCreateElement(xmlConsumer, DESCRIPTION, this.contentResult.getDescription());
-        maybeCreateElement(xmlConsumer, AUTHOR, this.contentResult.getAuthor());
-        maybeCreateElement(xmlConsumer, PUBLICATION_DATE, this.contentResult.getPublicationDate());
-        maybeCreateElement(xmlConsumer, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
-        maybeCreateElement(xmlConsumer, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
-        maybeCreateElement(xmlConsumer, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
-        maybeCreateElement(xmlConsumer, PAGES, this.contentResult.getPages());
-        maybeCreateElement(xmlConsumer, URL, this.contentResult.getURL());
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
     }
 
     // return -10 to 10, based on pub date's proximity to THIS_YEAR
@@ -263,11 +195,5 @@ public class ContentResultSearchResult implements SearchResult {
             return 0.25;
         }
         return 1;
-    }
-
-    private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value) throws SAXException {
-        if (value != null && !"".equals(value)) {
-            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, name, value);
-        }
     }
 }

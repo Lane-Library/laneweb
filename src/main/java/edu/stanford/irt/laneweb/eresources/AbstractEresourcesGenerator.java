@@ -4,13 +4,12 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.cocoon.xml.XMLConsumer;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -28,11 +27,12 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     protected String type;
 
-    public void setCollectionManager(final CollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
+    private SAXStrategy<PagingEresourceList> saxStrategy;
+
+    public AbstractEresourcesGenerator(final CollectionManager collectionManager,
+            final SAXStrategy<PagingEresourceList> saxStrategy) {
         this.collectionManager = collectionManager;
+        this.saxStrategy = saxStrategy;
     }
 
     public void setModel(final Map<String, Object> model) {
@@ -40,6 +40,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         this.subset = ModelUtil.getString(model, Model.SUBSET);
         this.alpha = ModelUtil.getString(model, Model.ALPHA);
         if (this.alpha != null && this.alpha.length() > 1) {
+            //TODO: probably should not use alpha = null for all
             if ("all".equals(this.alpha)) {
                 this.alpha = null;
             } else {
@@ -65,11 +66,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        try {
-            new PagingXMLizableEresourceList(getEresourceList(), this.page).toSAX(xmlConsumer);
-        } catch (SAXException e) {
-            throw new LanewebException(e);
-        }
+        this.saxStrategy.toSAX(new PagingEresourceList(getEresourceList(), this.page), xmlConsumer);
     }
 
     protected abstract Collection<edu.stanford.irt.eresources.Eresource> getEresourceList();

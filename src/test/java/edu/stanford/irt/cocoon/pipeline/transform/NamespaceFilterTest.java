@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.transform.NamespaceFilter;
-
 public class NamespaceFilterTest {
 
     private NamespaceFilter filter;

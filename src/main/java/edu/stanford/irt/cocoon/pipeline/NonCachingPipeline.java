@@ -27,6 +27,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * This is the base for all implementations of a <code>ProcessingPipeline</code>
@@ -256,7 +257,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      */
     public void setup(final Parameters params) {
         this.parameters = params;
-        final String expiresValue = params.getParameter("expires", null);
+        final String expiresValue = params.getParameter(Model.EXPIRES, null);
         if (expiresValue != null) {
             this.expires = parseExpires(expiresValue);
         } else {

@@ -9,6 +9,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
@@ -20,9 +21,12 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
     private CollectionManager collectionManager;
 
     private String type;
+    
+    private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
-    public EresourcesSearchGenerator(final CollectionManager collectionManager) {
+    public EresourcesSearchGenerator(final CollectionManager collectionManager, final SAXStrategy<PagingSearchResultSet> saxStrategy) {
         this.collectionManager = collectionManager;
+        this.saxStrategy = saxStrategy;
     }
 
     @Override
@@ -39,13 +43,9 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.page);
-        eresources.addAll(getEresourceList());
-        try {
-            eresources.toSAX(xmlConsumer);
-        } catch (SAXException e) {
-            throw new LanewebException(e);
-        }
+        PagingSearchResultSet eresourceSearchResults = new PagingSearchResultSet(this.query, this.page);
+        eresourceSearchResults.addAll(getEresourceList());
+        this.saxStrategy.toSAX(eresourceSearchResults, xmlConsumer);
     }
 
     protected Collection<SearchResult> getEresourceList() {

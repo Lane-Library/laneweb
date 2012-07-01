@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
@@ -27,31 +28,21 @@ public class EresourcesSearchGeneratorTest {
     private EresourcesSearchGenerator generator;
 
     private XMLConsumer xmlConsumer;
+    
+    private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);
-        this.generator = new EresourcesSearchGenerator(this.collectionManager);
+        this.saxStrategy = createMock(SAXStrategy.class);
+        this.generator = new EresourcesSearchGenerator(this.collectionManager, this.saxStrategy);
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
 
     @Test
     public void testDoGenerate() throws SAXException {
         expect(this.collectionManager.search("query")).andReturn(Collections.<Eresource> emptyList());
-        this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/resources/1.0");
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"),
-                isA(Attributes.class));
-        this.xmlConsumer
-                .startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("query"), eq("query"), isA(Attributes.class));
-        this.xmlConsumer.characters(isA(char[].class), eq(0), eq(5));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("query"), eq("query"));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"),
-                isA(Attributes.class));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"));
-        this.xmlConsumer.endPrefixMapping("");
-        this.xmlConsumer.endDocument();
+        this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
         replay(this.xmlConsumer, this.collectionManager);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);

@@ -23,7 +23,6 @@ import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class TransformerSerializerTest {

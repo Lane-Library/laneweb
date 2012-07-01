@@ -25,8 +25,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.sitemap.source.SitemapSource;
-
 public class LanewebSitemapSourceTest {
 
     private Map<String, Object> model;

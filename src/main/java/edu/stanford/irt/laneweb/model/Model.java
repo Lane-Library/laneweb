@@ -33,10 +33,12 @@ public interface Model {
 
     String ENTRY_URL = "entry-url";
 
+    String EXPIRES = "expires";
+
     String FACETS = "facets";
 
     String HASHED_SUNETID = "hashed-sunetid";
-    
+
     String HISTORY = "history";
 
     String HOST = "host";

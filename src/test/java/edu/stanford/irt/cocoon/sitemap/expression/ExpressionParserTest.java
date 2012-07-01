@@ -10,9 +10,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.expression.Expression;
-import edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser;
-
 public class ExpressionParserTest {
 
     private Map<String, Object> model;

@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import edu.stanford.irt.cocoon.pipeline.CachingPipeline;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class CachingPipelineTest {
 
@@ -391,7 +391,7 @@ public class CachingPipelineTest {
     private void doInvokeContextStuff() {
         // InvokeContext does these three things, called in GenerateNode:
         this.pipeline.setProcessorManager(null);
-        expect(this.parameters.getParameter("expires", null)).andReturn(null);
+        expect(this.parameters.getParameter(Model.EXPIRES, null)).andReturn(null);
         expect(this.parameters.getParameterAsInteger("outputBufferSize", 0)).andReturn(0);
         replay(this.parameters);
         this.pipeline.setup(this.parameters);

@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.resource;
 
-import edu.stanford.irt.cocoon.xml.XMLizable;
-
-public interface Resource extends XMLizable {
+public interface Resource {
 
     String AUTHOR = "pub-author";
 

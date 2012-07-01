@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.search.ContentResult;
@@ -40,10 +41,13 @@ public class ContentSearchGeneratorTest {
     private Result result;
 
     private XMLConsumer xmlConsumer;
+    
+    private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
     @Before
     public void setUp() throws Exception {
-        this.generator = new ContentSearchGenerator();
+        this.saxStrategy = createMock(SAXStrategy.class);
+        this.generator = new ContentSearchGenerator(this.saxStrategy);
         this.msms = createMock(MetaSearchManagerSource.class);
         this.manager = createMock(MetaSearchManager.class);
         expect(this.msms.getMetaSearchManager()).andReturn(this.manager);
@@ -61,15 +65,7 @@ public class ContentSearchGeneratorTest {
         expect(this.manager.search(isA(SimpleQuery.class), eq(20000L), eq(Collections.<String> emptyList()), eq(true))).andReturn(
                 this.result);
         expect(this.result.getChildren()).andReturn(Collections.<Result> emptyList());
-        this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class), isA(Attributes.class));
-        expectLastCall().times(3);
-        this.xmlConsumer.characters(isA(char[].class), eq(0), eq(5));
-        this.xmlConsumer.endElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class));
-        expectLastCall().times(3);
-        this.xmlConsumer.endPrefixMapping("");
-        this.xmlConsumer.endDocument();
+        this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
         replay(this.manager, this.result, this.xmlConsumer);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
@@ -78,14 +74,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testDoGenerateNullQuery() throws SAXException, IOException {
-        this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class), isA(Attributes.class));
-        expectLastCall().times(2);
-        this.xmlConsumer.endElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class));
-        expectLastCall().times(2);
-        this.xmlConsumer.endPrefixMapping("");
-        this.xmlConsumer.endDocument();
+        this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
         replay(this.manager, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.manager, this.xmlConsumer);
@@ -115,9 +104,8 @@ public class ContentSearchGeneratorTest {
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getId()).andReturn("id_content");
         expect(this.result.getChildren()).andReturn(Collections.singletonList((Result) this.contentResult));
-        // TODO: should't have to get these values this many times . . .
         expect(this.contentResult.getTitle()).andReturn("title").times(4);
-        expect(this.contentResult.getId()).andReturn("id");
+        expect(this.contentResult.getId()).andReturn("id1");
         expect(this.contentResult.getDescription()).andReturn("description").times(2);
         expect(this.contentResult.getPublicationDate()).andReturn("publication date").times(2);
         expect(this.result.getHits()).andReturn("hits");

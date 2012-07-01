@@ -7,8 +7,6 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.expression.VariableExpression;
-
 public class VariableExpressionTest {
 
     private VariableExpression expression;

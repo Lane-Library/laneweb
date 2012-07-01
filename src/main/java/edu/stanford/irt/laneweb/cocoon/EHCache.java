@@ -2,11 +2,11 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.Serializable;
 
-import org.apache.cocoon.caching.Cache;
-import org.apache.cocoon.caching.CachedResponse;
-
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
+
+import org.apache.cocoon.caching.Cache;
+import org.apache.cocoon.caching.CachedResponse;
 
 public class EHCache implements Cache {
 

@@ -6,7 +6,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
-import edu.stanford.irt.cocoon.xml.XMLizingStrategy;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -19,12 +19,12 @@ public class BassettAccordionEresourcesGenerator extends AbstractGenerator imple
 
     private String query;
 
-    private XMLizingStrategy<Map<String, Integer>> xmlizingStrategy;
+    private SAXStrategy<Map<String, Integer>> saxStrategy;
 
     public BassettAccordionEresourcesGenerator(final BassettCollectionManager collectionManager,
-            final XMLizingStrategy<Map<String, Integer>> xmlizingStrategy) {
+            final SAXStrategy<Map<String, Integer>> saxStrategy) {
         this.collectionManager = collectionManager;
-        this.xmlizingStrategy = xmlizingStrategy;
+        this.saxStrategy = saxStrategy;
     }
 
     public void setModel(final Map<String, Object> model) {
@@ -34,6 +34,6 @@ public class BassettAccordionEresourcesGenerator extends AbstractGenerator imple
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         String q = this.query == null || this.query.isEmpty() ? "bassett" : this.query;
-        this.xmlizingStrategy.toSAX(this.collectionManager.searchCount(q), xmlConsumer);
+        this.saxStrategy.toSAX(this.collectionManager.searchCount(q), xmlConsumer);
     }
 }

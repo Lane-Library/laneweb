@@ -7,17 +7,24 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.model.Model;
+
 public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGenerator implements CacheableProcessingComponent {
+    
+    private static final long DEFAULT_EXPIRES = 1000 * 60 * 5;
 
     private String componentType;
 
-    private long configuredExpires = 1000 * 60 * 5;
-
-    private long expires;
+    private long expires = DEFAULT_EXPIRES;
 
     private String key;
+    
+    private SourceValidity validity;
 
-    public CacheableEresourcesGenerator(final String componentType) {
+    public CacheableEresourcesGenerator(final String componentType, CollectionManager collectionManager, SAXStrategy<PagingEresourceList> saxStrategy) {
+        super(collectionManager, saxStrategy);
         this.componentType = componentType;
     }
 
@@ -33,17 +40,22 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
     }
 
     public SourceValidity getValidity() {
-        return new ExpiresValidity(this.expires);
+        if (this.validity == null) {
+            this.validity = new ExpiresValidity(this.expires);
+        }
+        return this.validity;
     }
 
     public void setExpires(final long expires) {
-        this.configuredExpires = expires;
+        this.expires = expires;
     }
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
-        this.expires = parameters.containsKey("expires") ? Long.parseLong(parameters.get("expires")) : this.configuredExpires;
+        if (parameters.containsKey(Model.EXPIRES)) {
+            this.expires = Long.parseLong(parameters.get(Model.EXPIRES));
+        }
     }
 
     private String createKey() {

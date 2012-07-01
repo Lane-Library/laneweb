@@ -40,8 +40,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.xml.XIncludeExceptionListener;
-import edu.stanford.irt.cocoon.xml.XIncludePipe;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class XIncludePipeTest {

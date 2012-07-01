@@ -18,8 +18,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.ThrottlingPipeline;
-
 public class ThrottlingPipelineTest {
 
     private BeanFactory beanFactory;

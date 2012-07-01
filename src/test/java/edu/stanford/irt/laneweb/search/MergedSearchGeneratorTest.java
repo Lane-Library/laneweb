@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Version;
@@ -40,11 +41,14 @@ public class MergedSearchGeneratorTest {
     private Result result;
 
     private XMLConsumer xmlConsumer;
+    
+    private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);
-        this.generator = new MergedSearchGenerator(this.collectionManager);
+        this.saxStrategy = createMock(SAXStrategy.class);
+        this.generator = new MergedSearchGenerator(this.collectionManager, this.saxStrategy);
         MetaSearchManagerSource msms = createMock(MetaSearchManagerSource.class);
         this.manager = createMock(MetaSearchManager.class);
         expect(msms.getMetaSearchManager()).andReturn(this.manager);
@@ -57,80 +61,22 @@ public class MergedSearchGeneratorTest {
     }
 
     @Test
-    public void testDoGenerate() throws SAXException {
+    public void testDoGenerate() {
         expect(this.collectionManager.search("query")).andReturn(Collections.singleton(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.manager.search(isA(Query.class), eq(20000L), eq(Collections.<String> emptyList()), eq(true))).andReturn(
                 this.result);
         expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
-        this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/resources/1.0");
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"),
-                isA(Attributes.class));
-        this.xmlConsumer
-                .startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("query"), eq("query"), isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq("query".toCharArray()), eq(0), eq(5));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("query"), eq("query"));
-        expect(this.eresource.getScore()).andReturn(0);
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("result"), eq("result"),
-                isA(Attributes.class));
-        expect(this.eresource.getId()).andReturn(0);
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("id"), eq("id"), isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq(new char[] { '0' }), eq(0), eq(1));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("id"), eq("id"));
-        expect(this.eresource.getRecordId()).andReturn(0);
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("recordId"), eq("recordId"),
-                isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq(new char[] { '0' }), eq(0), eq(1));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("recordId"), eq("recordId"));
-        expect(this.eresource.getRecordType()).andReturn("type");
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("recordType"), eq("recordType"),
-                isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq("type".toCharArray()), eq(0), eq(4));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("recordType"), eq("recordType"));
-        expect(this.eresource.getTitle()).andReturn("title");
-        this.xmlConsumer
-                .startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("title"), eq("title"), isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq("title".toCharArray()), eq(0), eq(5));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("title"), eq("title"));
-        expect(this.eresource.getDescription()).andReturn("description");
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("description"), eq("description"),
-                isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq("description".toCharArray()), eq(0), eq(11));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("description"), eq("description"));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("versions"), eq("versions"),
-                isA(Attributes.class));
-        expect(this.eresource.getVersions()).andReturn(Collections.<Version> emptySet());
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("versions"), eq("versions"));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("result"), eq("result"));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"),
-                isA(Attributes.class));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"));
-        this.xmlConsumer.endPrefixMapping("");
-        this.xmlConsumer.endDocument();
-        replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
+        this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
+        replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result, this.saxStrategy);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
+        verify(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result, this.saxStrategy);
     }
 
     @Test
-    public void testDoGenerateEmptyQuery() throws SAXException {
-        this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/resources/1.0");
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"),
-                isA(Attributes.class));
-        this.xmlConsumer
-                .startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("query"), eq("query"), isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq(new char[0]), eq(0), eq(0));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("query"), eq("query"));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"),
-                isA(Attributes.class));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"));
-        this.xmlConsumer.endPrefixMapping("");
-        this.xmlConsumer.endDocument();
+    public void testDoGenerateEmptyQuery() {
+        this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
         replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, ""));
         this.generator.doGenerate(this.xmlConsumer);
@@ -138,38 +84,10 @@ public class MergedSearchGeneratorTest {
     }
 
     @Test
-    public void testDoGenerateNullQuery() throws SAXException {
-        this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/resources/1.0");
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"),
-                isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"),
-                isA(Attributes.class));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("contentHitCounts"), eq("contentHitCounts"));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/resources/1.0"), eq("resources"), eq("resources"));
-        this.xmlConsumer.endPrefixMapping("");
-        this.xmlConsumer.endDocument();
+    public void testDoGenerateNullQuery() {
+        this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
         replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
-    }
-
-    @Test
-    public void testDoGenerateThrowException() throws SAXException {
-        expect(this.collectionManager.search("query")).andReturn(Collections.singleton(this.eresource));
-        expect(this.eresource.getTitle()).andReturn("title");
-        expect(this.manager.search(isA(Query.class), eq(20000L), eq(Collections.<String> emptyList()), eq(true))).andReturn(
-                this.result);
-        expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
-        this.xmlConsumer.startDocument();
-        expectLastCall().andThrow(new SAXException());
-        replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
-        try {
-            this.generator.doGenerate(this.xmlConsumer);
-            fail();
-        } catch (LanewebException e) {
-        }
         verify(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result);
     }
 }

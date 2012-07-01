@@ -7,11 +7,11 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.cocoon.xml.XMLizingStrategy;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class BassettCountXMLizingStrategy implements XMLizingStrategy<Map<String, Integer>> {
+public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Integer>> {
 
     private static final String BASSETT_COUNT = "bassett_count";
 

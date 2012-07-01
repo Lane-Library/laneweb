@@ -1,17 +1,18 @@
 package edu.stanford.irt.laneweb.search;
 
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.EresourceResource;
 
 /**
  * @author ryanmax
  */
-public class EresourceSearchResult extends EresourceResource implements SearchResult {
+public class EresourceSearchResult implements SearchResult {
+
+    private Eresource eresource;
 
     private String sortTitle;
 
     public EresourceSearchResult(final Eresource eresource) {
-        super(eresource);
+        this.eresource = eresource;
         this.sortTitle = NON_FILING_PATTERN.matcher(eresource.getTitle()).replaceFirst("");
         this.sortTitle = this.sortTitle.toLowerCase().replaceAll("\\W", "");
     }
@@ -35,6 +36,10 @@ public class EresourceSearchResult extends EresourceResource implements SearchRe
             return ((EresourceSearchResult) other).eresource.equals(this.eresource);
         }
         return false;
+    }
+
+    public Eresource getEresource() {
+        return this.eresource;
     }
 
     public int getScore() {

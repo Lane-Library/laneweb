@@ -1,26 +1,17 @@
 package edu.stanford.irt.laneweb.search;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.gt;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.regex.Pattern;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.impl.DefaultContentResult;
 
@@ -49,7 +40,7 @@ public class ContentResultSearchResultTest {
         expect(this.contentResult.getDescription()).andReturn("description").times(2);
         expect(this.contentResult.getPublicationDate()).andReturn("publicationDate").times(2);
         replay(this.contentResult);
-        this.result = new ContentResultSearchResult(this.contentResult, this.queryTermPattern);
+        this.result = new ContentResultSearchResult(this.contentResult, "resourceHits", "resourceId", "resourceName", "resourceUrl", this.queryTermPattern);
         verify(this.contentResult);
     }
 
@@ -59,21 +50,21 @@ public class ContentResultSearchResultTest {
         this.contentResult1 = new DefaultContentResult("pubmed");
         this.contentResult1.setTitle("bar1");
         this.contentResult1.setDescription("bar");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("pubmed");
         this.contentResult2.setTitle("bar2");
         this.contentResult2.setDescription("foo");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) > 0);
         // title hits and description hits
         this.contentResult1 = new DefaultContentResult("pubmed");
         this.contentResult1.setTitle("title foo bar1");
         this.contentResult1.setDescription("just bar");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("pubmed");
         this.contentResult2.setTitle("title foo bar2");
         this.contentResult2.setDescription("i contain foo");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) > 0);
     }
 
@@ -82,10 +73,10 @@ public class ContentResultSearchResultTest {
         this.queryTermPattern = QueryTermPattern.getPattern("exact title match");
         this.contentResult1 = new DefaultContentResult("pubmed");
         this.contentResult1.setTitle("exact title match");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("pubmed");
         this.contentResult2.setTitle("foo");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) < 0);
     }
 
@@ -94,26 +85,26 @@ public class ContentResultSearchResultTest {
         this.queryTermPattern = QueryTermPattern.getPattern("q");
         this.contentResult1 = new DefaultContentResult("foo");
         this.contentResult1.setTitle("a title");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("foo");
         this.contentResult2.setTitle("title");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) == 0);
         this.queryTermPattern = QueryTermPattern.getPattern("q");
         this.contentResult1 = new DefaultContentResult("foo");
         this.contentResult1.setTitle("an title");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("foo");
         this.contentResult2.setTitle("title");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) == 0);
         this.queryTermPattern = QueryTermPattern.getPattern("q");
         this.contentResult1 = new DefaultContentResult("foo");
         this.contentResult1.setTitle("the title");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("foo");
         this.contentResult2.setTitle("title");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) == 0);
     }
 
@@ -122,10 +113,10 @@ public class ContentResultSearchResultTest {
         this.queryTermPattern = QueryTermPattern.getPattern("title begins with");
         this.contentResult1 = new DefaultContentResult("pubmed");
         this.contentResult1.setTitle("not title begins with");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("pubmed");
         this.contentResult2.setTitle("title begins with yes");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) > 0);
     }
 
@@ -134,35 +125,35 @@ public class ContentResultSearchResultTest {
         this.queryTermPattern = QueryTermPattern.getPattern("query terms");
         this.contentResult1 = new DefaultContentResult("pubmed");
         this.contentResult1.setTitle("foo");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         // double weight
         this.contentResult2 = new DefaultContentResult("pubmed_cochrane_reviews");
         this.contentResult2.setTitle("foo bar");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) > 0);
         this.contentResult1 = new DefaultContentResult("xxxx");
         this.contentResult1.setTitle("foo");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         // half weight
         this.contentResult2 = new DefaultContentResult("pubmed_recent_reviews");
         this.contentResult2.setTitle("foo bar");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) < 0);
         this.contentResult1 = new DefaultContentResult("xxxx");
         this.contentResult1.setTitle("foo");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         // quarter weight
         this.contentResult2 = new DefaultContentResult("medlineplus_0");
         this.contentResult2.setTitle("foo bar");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) < 0);
         this.contentResult1 = new DefaultContentResult("xxxx");
         this.contentResult1.setTitle("foo");
-        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
+        this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, null, null, null, null, this.queryTermPattern);
         // equal weight, equal title
         this.contentResult2 = new DefaultContentResult("yyyy");
         this.contentResult2.setTitle("foo");
-        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
+        this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, null, null, null, null, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) == 0);
     }
 
@@ -174,27 +165,9 @@ public class ContentResultSearchResultTest {
         expect(result.getDescription()).andReturn("description").times(2);
         expect(result.getPublicationDate()).andReturn("publicationDate").times(2);
         replay(result);
-        ContentResultSearchResult other = new ContentResultSearchResult(result, this.queryTermPattern);
+        ContentResultSearchResult other = new ContentResultSearchResult(result, null, null, null, null, this.queryTermPattern);
         assertEquals(this.result, other);
         verify(result);
-    }
-
-    @Test
-    public void testGetContentUrl() {
-        reset(this.contentResult);
-        expect(this.contentResult.getURL()).andReturn("url");
-        replay(this.contentResult);
-        assertEquals("url", this.result.getContentUrl());
-        verify(this.contentResult);
-    }
-
-    @Test
-    public void testGetPublicationTitle() {
-        reset(this.contentResult);
-        expect(this.contentResult.getPublicationTitle()).andReturn("publicationTitle");
-        replay(this.contentResult);
-        assertEquals("publicationTitle", this.result.getPublicationTitle());
-        verify(this.contentResult);
     }
 
     @Test
@@ -215,35 +188,31 @@ public class ContentResultSearchResultTest {
         expect(result.getDescription()).andReturn("description").times(2);
         expect(result.getPublicationDate()).andReturn("publicationDate").times(2);
         replay(result);
-        ContentResultSearchResult other = new ContentResultSearchResult(result, this.queryTermPattern);
+        ContentResultSearchResult other = new ContentResultSearchResult(result, null, null, null, null, this.queryTermPattern);
         assertEquals(this.result.hashCode(), other.hashCode());
         verify(result);
     }
 
     @Test
-    public void testSetGetResourceHits() {
-        this.result.setResourceHits("resourceHits");
+    public void testGetResourceHits() {
         assertEquals("resourceHits", this.result.getResourceHits());
     }
 
     @Test
-    public void testSetGetResourceId() {
-        this.result.setResourceId("resourceId");
+    public void testGetResourceId() {
         assertEquals("resourceId", this.result.getResourceId());
     }
 
     @Test
-    public void testSetGetResourceName() {
-        this.result.setResourceName("resourceName");
+    public void testGetResourceName() {
         assertEquals("resourceName", this.result.getResourceName());
     }
 
     @Test
-    public void testSetGetResourceUrl() {
-        this.result.setResourceUrl("resourceUrl");
+    public void testGetResourceUrl() {
         assertEquals("resourceUrl", this.result.getResourceUrl());
     }
-
+/*
     @Test
     public void testToSAX() throws SAXException {
         XMLConsumer xmlConsumer = createMock(XMLConsumer.class);
@@ -269,4 +238,5 @@ public class ContentResultSearchResultTest {
         this.result.toSAX(xmlConsumer);
         verify(this.contentResult, xmlConsumer);
     }
+    */
 }

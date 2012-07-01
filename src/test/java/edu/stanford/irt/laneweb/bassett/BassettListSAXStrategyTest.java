@@ -17,13 +17,13 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-public class BassettListXMLizingStrategyTest {
+public class BassettListSAXStrategyTest {
 
     private Collection<BassettEresource> collection;
 
     private BassettEresource image;
 
-    private BassettListXMLizingStrategy list;
+    private BassettListSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
 
@@ -31,7 +31,7 @@ public class BassettListXMLizingStrategyTest {
     public void setUp() throws Exception {
         this.image = createMock(BassettEresource.class);
         this.collection = Collections.singletonList(this.image);
-        this.list = new BassettListXMLizingStrategy();
+        this.strategy = new BassettListSAXStrategy();
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
 
@@ -86,7 +86,7 @@ public class BassettListXMLizingStrategyTest {
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         replay(this.image, this.xmlConsumer);
-        this.list.toSAX(this.collection, this.xmlConsumer);
+        this.strategy.toSAX(this.collection, this.xmlConsumer);
         verify(this.image, this.xmlConsumer);
     }
 }

@@ -14,8 +14,6 @@ import org.apache.excalibur.source.SourceResolver;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.xml.URIResolverImpl;
-
 public class LanewebURIResolverTest {
 
     private Source source;

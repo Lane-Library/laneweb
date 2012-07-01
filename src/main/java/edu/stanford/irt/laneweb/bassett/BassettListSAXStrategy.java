@@ -7,11 +7,11 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.cocoon.xml.XMLizingStrategy;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class BassettListXMLizingStrategy implements XMLizingStrategy<Collection<BassettEresource>> {
+public class BassettListSAXStrategy implements SAXStrategy<Collection<BassettEresource>> {
 
     private static final String BASSETT = "bassett";
 

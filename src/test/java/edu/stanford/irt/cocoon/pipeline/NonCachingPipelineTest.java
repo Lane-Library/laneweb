@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.NonCachingPipeline;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class NonCachingPipelineTest {
 
@@ -169,7 +169,7 @@ public class NonCachingPipelineTest {
 
     @Test
     public void testSetup() {
-        expect(this.parameters.getParameter("expires", null)).andReturn("access plus 1 seconds");
+        expect(this.parameters.getParameter(Model.EXPIRES, null)).andReturn("access plus 1 seconds");
         expect(this.parameters.getParameterAsInteger("outputBufferSize", 0)).andReturn(1024);
         replay(this.parameters);
         this.pipeline.setup(this.parameters);

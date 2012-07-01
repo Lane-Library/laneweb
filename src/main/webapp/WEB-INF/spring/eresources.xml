@@ -8,11 +8,12 @@
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"
-        scope="prototype"
-        abstract="true">
-        <property name="collectionManager"
-            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource"
+        class="edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy"/>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"
+        class="edu.stanford.irt.laneweb.eresources.PagingEresourceListSAXStrategy">
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/eresources-count"
@@ -36,20 +37,26 @@
 
     <bean name="org.apache.cocoon.generation.Generator/er-browse"
         class="edu.stanford.irt.laneweb.eresources.BrowseEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator">
+        scope="prototype">
         <constructor-arg value="er-browse"/>
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/er-core"
         class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator">
+        scope="prototype">
         <constructor-arg value="er-core"/>
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/er-mesh"
         class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator">
+        scope="prototype">
         <constructor-arg value="er-mesh"/>
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
 
 </beans>

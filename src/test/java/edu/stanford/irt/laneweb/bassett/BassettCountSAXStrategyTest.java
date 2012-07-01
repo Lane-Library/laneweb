@@ -20,17 +20,17 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class BassettCountXMLizingStrategyTest {
+public class BassettCountSAXStrategyTest {
 
     private Map<String, Integer> map;
 
-    private BassettCountXMLizingStrategy strategy;
+    private BassettCountSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.strategy = new BassettCountXMLizingStrategy();
+        this.strategy = new BassettCountSAXStrategy();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.map = new LinkedHashMap<String, Integer>();
     }

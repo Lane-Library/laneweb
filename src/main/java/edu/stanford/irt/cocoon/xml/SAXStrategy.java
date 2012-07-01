@@ -9,7 +9,7 @@ import org.apache.cocoon.xml.XMLConsumer;
  * @param <T>
  *            any class
  */
-public interface XMLizingStrategy<T> {
+public interface SAXStrategy<T> {
 
     /**
      * Send SAX event representation of an object to an xmlConsumer.

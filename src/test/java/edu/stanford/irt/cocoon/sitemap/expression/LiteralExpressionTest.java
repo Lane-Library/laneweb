@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.expression.LiteralExpression;
-
 public class LiteralExpressionTest {
 
     private LiteralExpression expression;

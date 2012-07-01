@@ -8,7 +8,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.match.URLDecodingMatcher;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class URLDecodingWildcardURIMatcherTest {

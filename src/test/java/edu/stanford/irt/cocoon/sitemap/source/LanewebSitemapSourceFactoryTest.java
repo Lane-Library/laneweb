@@ -17,8 +17,6 @@ import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory;
-
 public class LanewebSitemapSourceFactoryTest {
 
     private static final class TestFactory extends SitemapSourceFactory {

@@ -10,10 +10,9 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import org.apache.cocoon.xml.XMLConsumer;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.ContentResult;
@@ -35,6 +34,12 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
     protected Collection<String> engines;
 
     private String timeout;
+
+    private SAXStrategy<PagingSearchResultSet> saxStrategy;
+
+    public ContentSearchGenerator(final SAXStrategy<PagingSearchResultSet> saxStrategy) {
+        this.saxStrategy = saxStrategy;
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -61,13 +66,9 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.page);
-        mergedSearchResults.addAll(getContentResultList(doSearch()));
-        try {
-            mergedSearchResults.toSAX(xmlConsumer);
-        } catch (SAXException e) {
-            throw new LanewebException(e);
-        }
+        PagingSearchResultSet contentSearchResults = new PagingSearchResultSet(this.query, this.page);
+        contentSearchResults.addAll(getContentResultList(doSearch()));
+        this.saxStrategy.toSAX(contentSearchResults, xmlConsumer);
     }
 
     @Override
@@ -101,13 +102,10 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
                     Iterator<Result> it = resource.getChildren().iterator();
                     int count = 0;
                     while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
+                        ContentResult contentResult = (ContentResult) it.next();
                         count++;
-                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(), queryTermPattern);
-                        String crsrKey = (crsr.getContentId() != null) ? crsr.getContentId() : crsr.getContentUrl();
-                        crsr.setResourceHits(parentResource.getHits());
-                        crsr.setResourceId(parentResource.getId());
-                        crsr.setResourceName(parentResource.getDescription());
-                        crsr.setResourceUrl(parentResource.getURL());
+                        ContentResultSearchResult crsr = new ContentResultSearchResult(contentResult, parentResource.getHits(), parentResource.getId(), parentResource.getDescription(), parentResource.getURL(), queryTermPattern);
+                        String crsrKey = (contentResult.getContentId() != null) ? contentResult.getContentId() : contentResult.getURL();
                         if (!resultTitles.containsKey(crsrKey)) {
                             resultTitles.put(crsrKey, crsr);
                             contentResults.add(crsr);
@@ -126,3 +124,42 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
         return contentResults;
     }
 }
+/*
+    protected Collection<ContentResultSearchResult> getContentResultList(final Result result) {
+        Map<String, ContentResultSearchResult> results = new HashMap<String, ContentResultSearchResult>();
+        Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
+        for (Result engine : result.getChildren()) {
+            Result resource = null;
+            Result contents = null;
+            for (Result child : engine.getChildren()) {
+                String resourceId = child.getId();
+                if (resourceId.endsWith(UNDERSCORE_CONTENT)) {
+                    contents = child;
+                } else {
+                    resource = child;
+                }
+            }
+            if (resource != null && contents != null) {
+                String resourceHits = resource.getHits();
+                String resourceId = resource.getId();
+                String resourceName = resource.getDescription();
+                String resourceUrl = resource.getURL();
+                Iterator<Result> it = contents.getChildren().iterator();
+                int count = 0;
+                while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
+                    count++;
+                    ContentResult content = (ContentResult) it.next();
+                    ContentResultSearchResult searchResult = new ContentResultSearchResult(content, resourceHits, resourceId,
+                            resourceName, resourceUrl, queryTermPattern);
+                    String id = content.getContentId();
+                    String key = id == null ? content.getURL() : id;
+                    SearchResult stored = results.get(key);
+                    if (stored == null || searchResult.getScore() > stored.getScore()) {
+                        results.put(key, searchResult);
+                    }
+                }
+            }
+        }
+        return results.values();
+    }
+    */

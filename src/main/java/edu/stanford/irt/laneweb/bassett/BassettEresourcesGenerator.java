@@ -8,7 +8,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
-import edu.stanford.irt.cocoon.xml.XMLizingStrategy;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -25,12 +25,12 @@ public class BassettEresourcesGenerator extends AbstractGenerator implements Mod
 
     private String region;
 
-    private XMLizingStrategy<Collection<BassettEresource>> xmlizingStrategy;
+    private SAXStrategy<Collection<BassettEresource>> saxStrategy;
 
     public BassettEresourcesGenerator(final BassettCollectionManager collectionManager,
-            final XMLizingStrategy<Collection<BassettEresource>> xmlizingStrategy) {
+            final SAXStrategy<Collection<BassettEresource>> saxStrategy) {
         this.collectionManager = collectionManager;
-        this.xmlizingStrategy = xmlizingStrategy;
+        this.saxStrategy = saxStrategy;
     }
 
     public void setModel(final Map<String, Object> model) {
@@ -55,6 +55,6 @@ public class BassettEresourcesGenerator extends AbstractGenerator implements Mod
         } else {
             eresources = Collections.emptySet();
         }
-        this.xmlizingStrategy.toSAX(eresources, xmlConsumer);
+        this.saxStrategy.toSAX(eresources, xmlConsumer);
     }
 }
