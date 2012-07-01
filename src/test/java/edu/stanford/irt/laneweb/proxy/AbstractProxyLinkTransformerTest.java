@@ -41,9 +41,7 @@ public class AbstractProxyLinkTransformerTest {
     @Test
     public void testHospitalIP() {
         this.model.put(Model.IPGROUP, IPGroup.SHC);
-        replay(this.parameters);
-        this.transformer.setup(null, this.model, null, this.parameters);
+        this.transformer.setModel(this.model);
         assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
-        verify(this.parameters);
     }
 }

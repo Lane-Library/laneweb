@@ -40,7 +40,7 @@ public class AbstractCMELinkTransformerTest {
     @Test
     public void testCreateCMELink() {
         this.model.put(Model.EMRID, "epic-123456");
-        this.transformer.setup(null, this.model, null, null);
+        this.transformer.setModel(this.model);
         assertEquals("http://www.uptodate.com/online/content/search.do?unid=epic-123456&srcsys=epic90710&eiv=2.1.0",
                 this.transformer.createCMELink("http://www.uptodate.com/online"));
         assertEquals("http://www.uptodate.com/foo?bar=true&unid=epic-123456&srcsys=epic90710&eiv=2.1.0",

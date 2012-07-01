@@ -30,7 +30,7 @@ public class BookmarkGeneratorTest {
         this.generator = new BookmarkGenerator();
         this.marshaller = createMock(Marshaller.class);
         this.generator.setMarshaller(this.marshaller);
-        this.generator.setup(null, Collections.singletonMap(Model.BOOKMARKS, Collections.emptyList()), null, null);
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.BOOKMARKS, Collections.<String> emptyList()));
     }
 
     @Test
