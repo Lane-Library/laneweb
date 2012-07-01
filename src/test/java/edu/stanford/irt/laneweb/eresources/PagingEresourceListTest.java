@@ -1,10 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -12,16 +9,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.apache.cocoon.xml.XMLConsumer;
-import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.resource.Resource;
 
 public class PagingEresourceListTest {
 

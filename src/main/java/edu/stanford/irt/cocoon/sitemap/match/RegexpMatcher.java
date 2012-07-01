@@ -13,6 +13,7 @@ public class RegexpMatcher extends AbstractRegexpMatcher {
         this.key = key;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     protected String getMatchString(final Map model, final Parameters parameters) {
         String result = null;

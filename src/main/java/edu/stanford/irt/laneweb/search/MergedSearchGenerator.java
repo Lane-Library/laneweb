@@ -4,12 +4,10 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import org.apache.cocoon.xml.XMLConsumer;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * @author ryanmax

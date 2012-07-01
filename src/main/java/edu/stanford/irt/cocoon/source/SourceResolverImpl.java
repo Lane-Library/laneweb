@@ -38,6 +38,7 @@ public class SourceResolverImpl implements SourceResolver {
         return this.defaultFactory.getSource(modifiedLocation, null);
     }
 
+    @SuppressWarnings("rawtypes")
     public Source resolveURI(final String location, final String base, final Map parameters) throws IOException {
         return resolveURI(location);
     }

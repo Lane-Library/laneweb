@@ -1,28 +1,21 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.fail;
 
 import java.util.Collections;
 
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Version;
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
@@ -44,6 +37,7 @@ public class MergedSearchGeneratorTest {
     
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);

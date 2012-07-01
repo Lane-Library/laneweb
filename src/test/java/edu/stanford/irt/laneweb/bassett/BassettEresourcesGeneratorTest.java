@@ -27,6 +27,7 @@ public class BassettEresourcesGeneratorTest {
 
     private SAXStrategy<Collection<BassettEresource>> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(BassettCollectionManager.class);

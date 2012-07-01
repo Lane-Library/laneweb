@@ -13,7 +13,6 @@ import java.util.Collections;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -31,6 +30,7 @@ public class EresourcesSearchGeneratorTest {
     
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);

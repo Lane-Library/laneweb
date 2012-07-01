@@ -15,6 +15,7 @@ public class SpringResourceSourceFactory implements SourceFactory, ResourceLoade
         return new SpringResourceSource(this.resourceLoader.getResource(location));
     }
 
+    @SuppressWarnings("rawtypes")
     public Source getSource(final String location, final Map parameters) {
         return getSource(location);
     }

@@ -44,6 +44,7 @@ public class SearchGeneratorTest {
         this.model.put(Model.QUERY, "query");
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
@@ -80,6 +81,7 @@ public class SearchGeneratorTest {
         verify(this.source, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchNumberFormatException() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
@@ -93,6 +95,7 @@ public class SearchGeneratorTest {
         verify(this.source, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchSynchronous() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
@@ -105,6 +108,7 @@ public class SearchGeneratorTest {
         verify(this.source, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchSynchronousEmpty() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
@@ -118,6 +122,7 @@ public class SearchGeneratorTest {
         verify(this.source, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchTimeout() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
@@ -131,6 +136,7 @@ public class SearchGeneratorTest {
         verify(this.source, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchWait() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
@@ -145,6 +151,7 @@ public class SearchGeneratorTest {
         verify(this.source, this.manager, this.result);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchWaitNumberFormatException() {
         expect(this.source.getMetaSearchManager()).andReturn(this.manager);
