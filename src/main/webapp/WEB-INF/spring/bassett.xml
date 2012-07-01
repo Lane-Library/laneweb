@@ -7,23 +7,25 @@
         class="edu.stanford.irt.laneweb.bassett.BassettEresourcesGenerator"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"/>
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.bassett.BassettListSAXStrategy"/>
-        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-list"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/bassett-accordion"
         class="edu.stanford.irt.laneweb.bassett.BassettAccordionEresourcesGenerator"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"/>
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.bassett.BassettCountSAXStrategy"/>
-        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-count"/>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"
         class="edu.stanford.irt.laneweb.bassett.BassettCollectionManager">
         <constructor-arg ref="javax.sql.DataSource/eresources"/>
     </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-list"
+        class="edu.stanford.irt.laneweb.bassett.BassettListSAXStrategy"/>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-count"
+        class="edu.stanford.irt.laneweb.bassett.BassettCountSAXStrategy"/>
     
 </beans>
