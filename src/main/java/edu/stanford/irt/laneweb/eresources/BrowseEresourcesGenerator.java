@@ -1,11 +1,11 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class BrowseEresourcesGenerator extends CacheableEresourcesGenerator {
 
@@ -17,8 +17,7 @@ public class BrowseEresourcesGenerator extends CacheableEresourcesGenerator {
     protected Collection<Eresource> getEresourceList() {
         Collection<Eresource> list = null;
         if (this.subset == null && this.type == null) {
-            //TODO: maybe return an empty collection
-            throw new LanewebException("null type and subset");
+            list = Collections.emptySet();
         } else if (this.subset == null && this.alpha == null) {
             list = this.collectionManager.getType(this.type);
         } else if (this.subset == null) {

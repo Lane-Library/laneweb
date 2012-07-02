@@ -4,14 +4,13 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class BrowseEresourcesGeneratorTest {
 
@@ -31,11 +30,7 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListNull() {
-        try {
-            this.generator.getEresourceList();
-            fail();
-        } catch (LanewebException e) {
-        }
+        assertEquals(0, this.generator.getEresourceList().size());
     }
 
     @Test
