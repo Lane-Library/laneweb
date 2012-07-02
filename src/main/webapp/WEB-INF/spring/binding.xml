@@ -35,10 +35,7 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/hashed-sunetid"
         class="edu.stanford.irt.laneweb.servlet.binding.HashedSunetIdDataBinder">
-        <!-- TODO : externalize sunetidHashKey once confirm IDs need hashing 
          <property name="sunetidHashKey" value="%{laneweb.sunetidhashkey}"/>
-        -->
-         <property name="sunetidHashKey" value="273b6a67601d9c92268bbaf85cc0f6cf"/>
         <property name="sunetIdSource" ref="edu.stanford.irt.laneweb.servlet.SunetIdSource"/>
     </bean>
     
