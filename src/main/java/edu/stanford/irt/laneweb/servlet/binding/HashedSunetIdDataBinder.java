@@ -27,7 +27,6 @@ public class HashedSunetIdDataBinder implements DataBinder {
             hashedSunetid = getDigest(getDigest(this.sunetidHashKey + sunetid));
             if (hashedSunetid != null) {
                 session.setAttribute(Model.HASHED_SUNETID, hashedSunetid);
-                model.put(Model.HASHED_SUNETID, hashedSunetid);
             }
         }
         model.put(Model.HASHED_SUNETID, hashedSunetid);
