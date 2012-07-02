@@ -1,9 +1,6 @@
 package edu.stanford.irt.laneweb.bassett;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.*;
 
 import java.util.Collections;
 import java.util.Map;
@@ -44,20 +41,20 @@ public class BassettAccordionEresourcesGeneratorTest {
         verify(this.collectionManager, this.saxStrategy, this.xmlConsumer);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoGenerateEmptyQuery() {
-        expect(this.collectionManager.searchCount("bassett")).andReturn(null);
-        this.saxStrategy.toSAX(null, this.xmlConsumer);
+        this.saxStrategy.toSAX(isA(Map.class), eq(this.xmlConsumer));
         replay(this.collectionManager, this.saxStrategy, this.xmlConsumer);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, ""));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.saxStrategy, this.xmlConsumer);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoGenerateNullQuery() {
-        expect(this.collectionManager.searchCount("bassett")).andReturn(null);
-        this.saxStrategy.toSAX(null, this.xmlConsumer);
+        this.saxStrategy.toSAX(isA(Map.class), eq(this.xmlConsumer));
         replay(this.collectionManager, this.saxStrategy, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.saxStrategy, this.xmlConsumer);
