@@ -75,7 +75,7 @@ public class PagingData implements Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public Object clone() throws CloneNotSupportedException {
         try {
             Object clone = super.clone();
             List<String> links = new LinkedList<String>();

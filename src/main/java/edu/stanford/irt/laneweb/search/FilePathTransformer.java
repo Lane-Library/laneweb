@@ -16,6 +16,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class FilePathTransformer extends AbstractTransformer implements CacheableProcessingComponent {
 
@@ -85,7 +86,7 @@ public class FilePathTransformer extends AbstractTransformer implements Cacheabl
                 inputSource.setSystemId(source.getURI());
                 this.htmlSaxParser.parse(inputSource);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new LanewebException(e);
             }
         } else {
             super.startElement(uri, localName, qName, atts);

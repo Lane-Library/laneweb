@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -127,7 +128,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 Blob blob = cstmt.getBlob(2);
                 OutputStream os = blob.setBinaryStream(1);
                 ObjectOutputStream oop = new ObjectOutputStream(os);
-                oop.writeObject(links);
+                oop.writeObject((Serializable)links);
                 oop.flush();
                 oop.close();
                 os.close();

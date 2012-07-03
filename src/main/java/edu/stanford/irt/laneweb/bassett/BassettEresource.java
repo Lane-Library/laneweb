@@ -86,15 +86,12 @@ public class BassettEresource extends EresourceImpl {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("bassettNumber ---->" + this.bassettNumber);
-        sb.append("Image -------->" + this.image);
-        sb.append("Diagram ------>" + this.diagram);
-        sb.append("LatinLegend -->" + this.latinLegend);
-        sb.append("EngishLegend ->" + this.engishLegend);
-        sb.append("Region size -->" + this.regions.size());
-        for (String region : this.regions) {
-            sb.append("region---->" + region);
-        }
+        sb.append("bassettNumber=").append(this.bassettNumber)
+        .append(",Image=").append(this.image)
+        .append(",Diagram=").append(this.diagram)
+        .append(",LatinLegend=").append(this.latinLegend)
+        .append(",EngishLegend=").append(this.engishLegend)
+        .append(",regions=").append(this.regions);
         return sb.toString();
     }
 }

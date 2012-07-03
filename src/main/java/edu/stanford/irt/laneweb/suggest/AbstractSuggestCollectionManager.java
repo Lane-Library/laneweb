@@ -51,7 +51,7 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
             rs = stmt.executeQuery();
             return parseResultSet(rs);
         } catch (SQLException e) {
-            throw new LanewebException(e.getMessage() + "\nparams=" + params.toString());
+            throw new LanewebException(e.getMessage() + "\nparams=" + params.toString(), e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);

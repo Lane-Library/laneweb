@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -271,7 +272,7 @@ public class CollectionManagerImpl implements CollectionManager {
         this.dataSource = dataSource;
     }
 
-    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params, final String query) {
+    private List<Eresource> doGet(final String sql, final Collection<String> params, final String query) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -293,7 +294,7 @@ public class CollectionManagerImpl implements CollectionManager {
         }
     }
 
-    private LinkedList<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
+    private List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         EresourceImpl eresource = null;
         VersionImpl version = null;
