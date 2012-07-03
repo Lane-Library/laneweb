@@ -10,11 +10,14 @@ public class EresourceSearchResult implements SearchResult {
     private Eresource eresource;
 
     private String sortTitle;
+    
+    private int hashCode;
 
     public EresourceSearchResult(final Eresource eresource) {
         this.eresource = eresource;
         this.sortTitle = NON_FILING_PATTERN.matcher(eresource.getTitle()).replaceFirst("");
-        this.sortTitle = this.sortTitle.toLowerCase().replaceAll("\\W", "");
+        this.sortTitle = WHITESPACE.matcher(this.sortTitle).replaceAll("").toLowerCase();
+        this.hashCode = this.sortTitle.hashCode();
     }
 
     public int compareTo(final SearchResult other) {
@@ -52,6 +55,6 @@ public class EresourceSearchResult implements SearchResult {
 
     @Override
     public int hashCode() {
-        return this.sortTitle.hashCode();
+        return this.hashCode;
     }
 }

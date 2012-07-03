@@ -15,11 +15,12 @@ import edu.stanford.irt.eresources.Eresource;
 public class MergedSearchGenerator extends ContentSearchGenerator {
 
     private CollectionManager collectionManager;
-    
+
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
-    public MergedSearchGenerator(final CollectionManager collectionManager, SAXStrategy<PagingSearchResultSet> saxStrategy) {
-        super(saxStrategy);
+    public MergedSearchGenerator(final CollectionManager collectionManager, final SAXStrategy<PagingSearchResultSet> saxStrategy,
+            final ScoreStrategy scoreStrategy) {
+        super(saxStrategy, scoreStrategy);
         this.collectionManager = collectionManager;
         this.saxStrategy = saxStrategy;
     }

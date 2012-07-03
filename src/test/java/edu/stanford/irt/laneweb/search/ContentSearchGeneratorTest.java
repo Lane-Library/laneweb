@@ -1,17 +1,13 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.regex.Pattern;
 
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
@@ -41,11 +37,14 @@ public class ContentSearchGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
+    private ScoreStrategy scoreStrategy;
+
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new ContentSearchGenerator(this.saxStrategy);
+        this.scoreStrategy = createMock(ScoreStrategy.class);
+        this.generator = new ContentSearchGenerator(this.saxStrategy, this.scoreStrategy);
         this.msms = createMock(MetaSearchManagerSource.class);
         this.manager = createMock(MetaSearchManager.class);
         expect(this.msms.getMetaSearchManager()).andReturn(this.manager);
@@ -64,10 +63,10 @@ public class ContentSearchGeneratorTest {
                 this.result);
         expect(this.result.getChildren()).andReturn(Collections.<Result> emptyList());
         this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
-        replay(this.manager, this.result, this.xmlConsumer);
+        replay(this.manager, this.result, this.xmlConsumer, this.saxStrategy, this.scoreStrategy);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.manager, this.result, this.xmlConsumer);
+        verify(this.manager, this.result, this.xmlConsumer, this.saxStrategy, this.scoreStrategy);
     }
 
     @Test
@@ -102,14 +101,12 @@ public class ContentSearchGeneratorTest {
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getId()).andReturn("id_content");
         expect(this.result.getChildren()).andReturn(Collections.singletonList((Result) this.contentResult));
-        expect(this.contentResult.getTitle()).andReturn("title").times(4);
-        expect(this.contentResult.getId()).andReturn("id1");
-        expect(this.contentResult.getDescription()).andReturn("description").times(2);
-        expect(this.contentResult.getPublicationDate()).andReturn("publication date").times(2);
-        expect(this.contentResult.getContentId()).andReturn("id_content").times(2);
-        replay(this.result, this.contentResult);
+        expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(100);
+        expect(this.contentResult.getTitle()).andReturn("title");
+        expect(this.contentResult.getContentId()).andReturn("contentId");
+        replay(this.result, this.contentResult, this.saxStrategy, this.scoreStrategy);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         assertEquals(1, this.generator.getContentResultList(this.result).size());
-        verify(this.result, this.contentResult);
+        verify(this.result, this.contentResult, this.saxStrategy, this.scoreStrategy);
     }
 }

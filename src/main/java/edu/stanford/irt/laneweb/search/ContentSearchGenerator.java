@@ -35,10 +35,13 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
+    private ScoreStrategy scoreStrategy;
+
     private String timeout;
 
-    public ContentSearchGenerator(final SAXStrategy<PagingSearchResultSet> saxStrategy) {
+    public ContentSearchGenerator(final SAXStrategy<PagingSearchResultSet> saxStrategy, final ScoreStrategy scoreStrategy) {
         this.saxStrategy = saxStrategy;
+        this.scoreStrategy = scoreStrategy;
     }
 
     @SuppressWarnings("unchecked")
@@ -104,10 +107,10 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
                     while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
                         ContentResult contentResult = (ContentResult) it.next();
                         count++;
-                        ContentResultSearchResult crsr = new ContentResultSearchResult(contentResult, parentResource,
-                                queryTermPattern);
-                        String crsrKey = (contentResult.getContentId() != null) ? contentResult.getContentId() : contentResult
-                                .getURL();
+                        int score = this.scoreStrategy.computeScore(contentResult, queryTermPattern);
+                        ContentResultSearchResult crsr = new ContentResultSearchResult(contentResult, parentResource, score);
+                        String contentId = contentResult.getContentId();
+                        String crsrKey = contentId != null ? contentId : contentResult.getURL();
                         if (!resultTitles.containsKey(crsrKey)) {
                             resultTitles.put(crsrKey, crsr);
                             contentResults.add(crsr);

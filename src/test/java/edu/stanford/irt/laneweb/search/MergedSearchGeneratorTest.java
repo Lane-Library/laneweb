@@ -36,13 +36,16 @@ public class MergedSearchGeneratorTest {
     private XMLConsumer xmlConsumer;
     
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
+    
+    private ScoreStrategy scoreStrategy;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new MergedSearchGenerator(this.collectionManager, this.saxStrategy);
+        this.scoreStrategy = createMock(ScoreStrategy.class);
+        this.generator = new MergedSearchGenerator(this.collectionManager, this.saxStrategy, this.scoreStrategy);
         MetaSearchManagerSource msms = createMock(MetaSearchManagerSource.class);
         this.manager = createMock(MetaSearchManager.class);
         expect(msms.getMetaSearchManager()).andReturn(this.manager);
@@ -62,10 +65,10 @@ public class MergedSearchGeneratorTest {
                 this.result);
         expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
         this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
-        replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result, this.saxStrategy);
+        replay(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result, this.saxStrategy, this.scoreStrategy);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result, this.saxStrategy);
+        verify(this.collectionManager, this.xmlConsumer, this.eresource, this.manager, this.result, this.saxStrategy, this.scoreStrategy);
     }
 
     @Test

@@ -21,6 +21,9 @@
         </constructor-arg>
     </bean>
     
+    <bean id="edu.stanford.irt.laneweb.search.ScoreStrategy"
+        class="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
+    
     <bean id="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         class="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         scope="prototype"
@@ -53,6 +56,7 @@
         class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/search-engine"
@@ -68,6 +72,7 @@
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
@@ -77,6 +82,7 @@
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/history"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
