@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.util.IOUtils;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class SQLBookmarkDAO implements BookmarkDAO {
@@ -54,17 +55,15 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Bookmark> links = null;
+        ObjectInputStream oip = null;
         try {
             conn = this.dataSource.getConnection();
             pstmt = conn.prepareStatement(READ_BOOKMARKS_SQL);
             pstmt.setString(1, sunetid);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                InputStream is = rs.getBlob(1).getBinaryStream();
-                ObjectInputStream oip = new ObjectInputStream(is);
+                oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
                 links = (List<Bookmark>) oip.readObject();
-                oip.close();
-                is.close();
             }
         } catch (SQLException e) {
             this.log.error(e.getMessage(), e);
@@ -73,6 +72,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         } catch (ClassNotFoundException e) {
             this.log.error(e.getMessage(), e);
         } finally {
+            IOUtils.closeStream(oip);
             JdbcUtils.closeConnection(conn);
             JdbcUtils.closeStatement(pstmt);
             JdbcUtils.closeResultSet(rs);
@@ -145,12 +145,10 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             }
         } catch (IOException e) {
             this.log.error(e.getMessage(), e);
-            if (conn != null) {
-                try {
-                    conn.rollback();
-                } catch (SQLException e1) {
-                    this.log.error(e1.getMessage(), e1);
-                }
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                this.log.error(e1.getMessage(), e1);
             }
         } finally {
             JdbcUtils.closeConnection(conn);

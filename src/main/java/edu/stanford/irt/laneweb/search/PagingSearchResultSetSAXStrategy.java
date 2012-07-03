@@ -73,9 +73,9 @@ public class PagingSearchResultSetSAXStrategy implements SAXStrategy<PagingSearc
                     if (null != cr.getResourceId() && !countedResources.contains(cr.getResourceId())) {
                         countedResources.add(cr.getResourceId());
                         atts = new AttributesImpl();
-                        atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, "CDATA", cr.getResourceId());
-                        atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, "CDATA", cr.getResourceHits());
-                        atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, "CDATA", cr.getResourceUrl());
+                        atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, CDATA, cr.getResourceId());
+                        atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, CDATA, cr.getResourceHits());
+                        atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, CDATA, cr.getResourceUrl());
                         XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCE, atts);
                         XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCE);
                     }

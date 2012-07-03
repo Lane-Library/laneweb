@@ -15,7 +15,7 @@ public class EzproxyServersWriter {
     
     private static final String UNION = "union ";
 
-    private static final byte[] HJ = "HJ ".getBytes();
+    private static final byte[] HJ = {'H','J',' '};
 
     private static final String SQL =
         "with urls as ( "
@@ -46,9 +46,9 @@ public class EzproxyServersWriter {
     private static final byte[] SUL = "T jenson.stanford.edu\nU http://jenson.stanford.edu\nHJ jenson.stanford.edu\n\nT socrates.stanford.edu\nU http://socrates.stanford.edu\nHJ socrates.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
             .getBytes();
 
-    private static final byte[] T = "T ".getBytes();
+    private static final byte[] T = {'T',' '};
     
-    private static final byte[] U = "U ".getBytes();
+    private static final byte[] U = {'U',' '};
     
     private DataSource dataSource;
 
@@ -70,13 +70,13 @@ public class EzproxyServersWriter {
             while (rs.next()) {
                 String host = rs.getString(1);
                 outputStream.write(T);
-                outputStream.write(host.getBytes());
+                outputStream.write(host.getBytes("UTF-8"));
                 outputStream.write('\n');
                 outputStream.write(U);
-                outputStream.write(host.getBytes());
+                outputStream.write(host.getBytes("UTF-8"));
                 outputStream.write('\n');
                 outputStream.write(HJ);
-                outputStream.write(host.getBytes());
+                outputStream.write(host.getBytes("UTF-8"));
                 outputStream.write('\n');
                 outputStream.write('\n');
             }

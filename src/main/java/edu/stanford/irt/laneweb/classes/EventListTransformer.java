@@ -15,6 +15,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class EventListTransformer extends AbstractTransformer implements CacheableProcessingComponent {
 
@@ -69,13 +70,13 @@ public class EventListTransformer extends AbstractTransformer implements Cacheab
                 InputSource inputSource = new InputSource(input);
                 this.saxParser.parse(inputSource, this.pipe);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new LanewebException(e);
             } finally {
                 if (input != null) {
                     try {
                         input.close();
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        throw new LanewebException(e);
                     }
                 }
             }
