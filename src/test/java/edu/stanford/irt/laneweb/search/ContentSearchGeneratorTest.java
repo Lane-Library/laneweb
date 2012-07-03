@@ -37,9 +37,9 @@ public class ContentSearchGeneratorTest {
 
     private Result result;
 
-    private XMLConsumer xmlConsumer;
-    
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
+
+    private XMLConsumer xmlConsumer;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -106,10 +106,6 @@ public class ContentSearchGeneratorTest {
         expect(this.contentResult.getId()).andReturn("id1");
         expect(this.contentResult.getDescription()).andReturn("description").times(2);
         expect(this.contentResult.getPublicationDate()).andReturn("publication date").times(2);
-        expect(this.result.getHits()).andReturn("hits");
-        expect(this.result.getId()).andReturn("id");
-        expect(this.result.getDescription()).andReturn("description");
-        expect(this.result.getURL()).andReturn("url");
         expect(this.contentResult.getContentId()).andReturn("id_content").times(2);
         replay(this.result, this.contentResult);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));

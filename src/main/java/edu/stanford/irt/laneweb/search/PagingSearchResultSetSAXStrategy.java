@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
@@ -10,6 +11,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
+import edu.stanford.irt.search.Result;
 
 public class PagingSearchResultSetSAXStrategy implements SAXStrategy<PagingSearchResultSet>, Resource {
 
@@ -26,14 +28,14 @@ public class PagingSearchResultSetSAXStrategy implements SAXStrategy<PagingSearc
     private static final String PAGES = "pages";
 
     private static final String START = "start";
-    
+
     private SAXStrategy<SearchResult> saxStrategy;
 
     public PagingSearchResultSetSAXStrategy(final SAXStrategy<SearchResult> saxStrategy) {
         this.saxStrategy = saxStrategy;
     }
 
-    public void toSAX(PagingSearchResultSet results, final XMLConsumer xmlConsumer) {
+    public void toSAX(final PagingSearchResultSet results, final XMLConsumer xmlConsumer) {
         int page = results.getPage();
         try {
             xmlConsumer.startDocument();
@@ -66,16 +68,17 @@ public class PagingSearchResultSetSAXStrategy implements SAXStrategy<PagingSearc
                 XMLUtils.endElement(xmlConsumer, NAMESPACE, QUERY);
             }
             XMLUtils.startElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
-            ArrayList<String> countedResources = new ArrayList<String>();
+            Set<String> countedResources = new HashSet<String>();
             for (SearchResult resource : results) {
                 if (resource instanceof ContentResultSearchResult) {
-                    ContentResultSearchResult cr = (ContentResultSearchResult) resource;
-                    if (null != cr.getResourceId() && !countedResources.contains(cr.getResourceId())) {
-                        countedResources.add(cr.getResourceId());
+                    Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
+                    String id = resourceResult.getId();
+                    if (null != id && !countedResources.contains(id)) {
+                        countedResources.add(id);
                         atts = new AttributesImpl();
-                        atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, CDATA, cr.getResourceId());
-                        atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, CDATA, cr.getResourceHits());
-                        atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, CDATA, cr.getResourceUrl());
+                        atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, CDATA, id);
+                        atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, CDATA, resourceResult.getHits());
+                        atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, CDATA, resourceResult.getURL());
                         XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCE, atts);
                         XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCE);
                     }

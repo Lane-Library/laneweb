@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.search.ContentResult;
+import edu.stanford.irt.search.Result;
 
 /**
  * @author ryanmax
@@ -24,32 +25,19 @@ public class ContentResultSearchResult implements SearchResult {
 
     private Pattern queryTermPattern;
 
-    private String resourceHits;
-
-    private String resourceId;
-
-    private String resourceName;
-
-    private String resourceUrl;
+    private Result resourceResult;
 
     private int score;
 
     private String sortTitle;
 
-    public ContentResultSearchResult(final ContentResult contentResult, String resourceHits, String resourceId, String resourceName, String resourceUrl, final Pattern queryTermPattern) {
+    public ContentResultSearchResult(final ContentResult contentResult, final Result resourceResult, final Pattern queryTermPattern) {
         this.contentResult = contentResult;
-        this.resourceHits = resourceHits;
-        this.resourceId = resourceId;
-        this.resourceName = resourceName;
-        this.resourceUrl = resourceUrl;
+        this.resourceResult = resourceResult;
         this.sortTitle = NON_FILING_PATTERN.matcher(this.contentResult.getTitle()).replaceFirst("");
         this.sortTitle = this.sortTitle.toLowerCase().replaceAll("\\W", "");
         this.queryTermPattern = queryTermPattern;
         this.score = computeScore();
-    }
-    
-    public ContentResult getResult() {
-        return this.contentResult;
     }
 
     public int compareTo(final SearchResult o) {
@@ -70,32 +58,12 @@ public class ContentResultSearchResult implements SearchResult {
         return scmr.getSortTitle().equals(this.sortTitle);
     }
 
-    /**
-     * @return the resourceHits
-     */
-    public String getResourceHits() {
-        return this.resourceHits;
+    public ContentResult getContentResult() {
+        return this.contentResult;
     }
 
-    /**
-     * @return the resourceId
-     */
-    public String getResourceId() {
-        return this.resourceId;
-    }
-
-    /**
-     * @return the resourceName
-     */
-    public String getResourceName() {
-        return this.resourceName;
-    }
-
-    /**
-     * @return the resourceUrl
-     */
-    public String getResourceUrl() {
-        return this.resourceUrl;
+    public Result getResourceResult() {
+        return this.resourceResult;
     }
 
     public int getScore() {

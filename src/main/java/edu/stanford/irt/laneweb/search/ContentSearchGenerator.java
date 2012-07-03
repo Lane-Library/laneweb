@@ -33,9 +33,9 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     protected Collection<String> engines;
 
-    private String timeout;
-
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
+
+    private String timeout;
 
     public ContentSearchGenerator(final SAXStrategy<PagingSearchResultSet> saxStrategy) {
         this.saxStrategy = saxStrategy;
@@ -104,8 +104,10 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
                     while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
                         ContentResult contentResult = (ContentResult) it.next();
                         count++;
-                        ContentResultSearchResult crsr = new ContentResultSearchResult(contentResult, parentResource.getHits(), parentResource.getId(), parentResource.getDescription(), parentResource.getURL(), queryTermPattern);
-                        String crsrKey = (contentResult.getContentId() != null) ? contentResult.getContentId() : contentResult.getURL();
+                        ContentResultSearchResult crsr = new ContentResultSearchResult(contentResult, parentResource,
+                                queryTermPattern);
+                        String crsrKey = (contentResult.getContentId() != null) ? contentResult.getContentId() : contentResult
+                                .getURL();
                         if (!resultTitles.containsKey(crsrKey)) {
                             resultTitles.put(crsrKey, crsr);
                             contentResults.add(crsr);
@@ -125,41 +127,24 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
     }
 }
 /*
-    protected Collection<ContentResultSearchResult> getContentResultList(final Result result) {
-        Map<String, ContentResultSearchResult> results = new HashMap<String, ContentResultSearchResult>();
-        Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
-        for (Result engine : result.getChildren()) {
-            Result resource = null;
-            Result contents = null;
-            for (Result child : engine.getChildren()) {
-                String resourceId = child.getId();
-                if (resourceId.endsWith(UNDERSCORE_CONTENT)) {
-                    contents = child;
-                } else {
-                    resource = child;
-                }
-            }
-            if (resource != null && contents != null) {
-                String resourceHits = resource.getHits();
-                String resourceId = resource.getId();
-                String resourceName = resource.getDescription();
-                String resourceUrl = resource.getURL();
-                Iterator<Result> it = contents.getChildren().iterator();
-                int count = 0;
-                while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
-                    count++;
-                    ContentResult content = (ContentResult) it.next();
-                    ContentResultSearchResult searchResult = new ContentResultSearchResult(content, resourceHits, resourceId,
-                            resourceName, resourceUrl, queryTermPattern);
-                    String id = content.getContentId();
-                    String key = id == null ? content.getURL() : id;
-                    SearchResult stored = results.get(key);
-                    if (stored == null || searchResult.getScore() > stored.getScore()) {
-                        results.put(key, searchResult);
-                    }
-                }
-            }
-        }
-        return results.values();
-    }
-    */
+ * protected Collection<ContentResultSearchResult> getContentResultList(final
+ * Result result) { Map<String, ContentResultSearchResult> results = new
+ * HashMap<String, ContentResultSearchResult>(); Pattern queryTermPattern =
+ * QueryTermPattern.getPattern(this.query); for (Result engine :
+ * result.getChildren()) { Result resource = null; Result contents = null; for
+ * (Result child : engine.getChildren()) { String resourceId = child.getId(); if
+ * (resourceId.endsWith(UNDERSCORE_CONTENT)) { contents = child; } else {
+ * resource = child; } } if (resource != null && contents != null) { String
+ * resourceHits = resource.getHits(); String resourceId = resource.getId();
+ * String resourceName = resource.getDescription(); String resourceUrl =
+ * resource.getURL(); Iterator<Result> it = contents.getChildren().iterator();
+ * int count = 0; while (it.hasNext() && count < CONTENT_RESULT_LIMIT) {
+ * count++; ContentResult content = (ContentResult) it.next();
+ * ContentResultSearchResult searchResult = new
+ * ContentResultSearchResult(content, resourceHits, resourceId, resourceName,
+ * resourceUrl, queryTermPattern); String id = content.getContentId(); String
+ * key = id == null ? content.getURL() : id; SearchResult stored =
+ * results.get(key); if (stored == null || searchResult.getScore() >
+ * stored.getScore()) { results.put(key, searchResult); } } } } return
+ * results.values(); }
+ */
