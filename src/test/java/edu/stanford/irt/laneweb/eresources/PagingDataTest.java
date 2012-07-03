@@ -28,7 +28,7 @@ public class PagingDataTest {
     }
 
     @Test
-    public void testClone() {
+    public void testClone() throws CloneNotSupportedException {
         PagingData clone = (PagingData) this.data.clone();
         assertEquals(this.data.getLength(), clone.getLength());
         assertEquals(this.data.getPage(), clone.getPage());
