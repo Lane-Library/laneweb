@@ -16,10 +16,10 @@
                 <xsl:text>&amp;ticket=</xsl:text>
                 <xsl:value-of select="$ticket"/>
                 <xsl:text>&amp;url=</xsl:text>
-                <xsl:value-of select="set/java.util.HashMap_-Entry[key='postAction']/value/string[1]"/>
+                <xsl:value-of select="map/entry[string='postAction']/string-array/string[1]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="set/java.util.HashMap_-Entry[key='postAction']/value/string[1]"/>
+                <xsl:value-of select="map/entry[string='postAction']/string-array/string[1]"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -42,9 +42,9 @@ function submitForm()
 
 
                 <form action="{$post-url}" name="defaultForm" method="post">
-                    <xsl:for-each select="set/java.util.HashMap_-Entry">
-                        <xsl:if test="key !='postAction'">
-                            <input type="hidden" name="{key}" value="{value/string}"/>
+                    <xsl:for-each select="map/entry">
+                        <xsl:if test="string !='postAction'">
+                            <input type="hidden" name="{string}" value="{string-array/string[1]}"/>
                         </xsl:if>
                     </xsl:for-each>
                 </form>
