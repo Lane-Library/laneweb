@@ -49,6 +49,8 @@ public class EzproxyServersWriter {
     private static final byte[] T = {'T',' '};
     
     private static final byte[] U = {'U',' '};
+
+    private static final String UTF8 = "UTF-8";
     
     private DataSource dataSource;
 
@@ -70,13 +72,13 @@ public class EzproxyServersWriter {
             while (rs.next()) {
                 String host = rs.getString(1);
                 outputStream.write(T);
-                outputStream.write(host.getBytes("UTF-8"));
+                outputStream.write(host.getBytes(UTF8));
                 outputStream.write('\n');
                 outputStream.write(U);
-                outputStream.write(host.getBytes("UTF-8"));
+                outputStream.write(host.getBytes(UTF8));
                 outputStream.write('\n');
                 outputStream.write(HJ);
-                outputStream.write(host.getBytes("UTF-8"));
+                outputStream.write(host.getBytes(UTF8));
                 outputStream.write('\n');
                 outputStream.write('\n');
             }

@@ -9,6 +9,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class RootElementProvidingGenerator extends URLGenerator {
 
+    private static final String NONCACHED_CLASSES = "noncached-classes";
+
     public RootElementProvidingGenerator(final String type) {
         super(type);
     }
@@ -16,9 +18,9 @@ public class RootElementProvidingGenerator extends URLGenerator {
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         try {
-            xmlConsumer.startElement("", "noncached-classes", "noncached-classes", new AttributesImpl());
+            xmlConsumer.startElement("", NONCACHED_CLASSES, NONCACHED_CLASSES, new AttributesImpl());
             super.doGenerate(xmlConsumer);
-            xmlConsumer.endElement("", "noncached-classes", "noncached-classes");
+            xmlConsumer.endElement("", NONCACHED_CLASSES, NONCACHED_CLASSES);
         } catch (SAXException e) {
             throw new LanewebException(e);
         }

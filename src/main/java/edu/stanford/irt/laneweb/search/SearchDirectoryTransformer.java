@@ -14,6 +14,12 @@ import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
 
 public class SearchDirectoryTransformer extends AbstractTransformer implements ParametersAware, CacheableProcessingComponent {
 
+    private static final String FILE = "file";
+
+    private static final String NAMESPACE = "http://lane.stanford.edu/search-templates/ns";
+
+    private static final String SEARCH_TEMPLATES = "search-templates";
+
     private static final String TYPE = "search-directory";
 
     private String[] directories;
@@ -23,7 +29,7 @@ public class SearchDirectoryTransformer extends AbstractTransformer implements P
         for (String directory : this.directories) {
             parseDirectory(new File(directory.substring(directory.indexOf(':') + 1)));
         }
-        endElement("http://lane.stanford.edu/search-templates/ns", "search-templates", "search-templates");
+        endElement(NAMESPACE, SEARCH_TEMPLATES, SEARCH_TEMPLATES);
         super.endDocument();
     }
 
@@ -46,7 +52,7 @@ public class SearchDirectoryTransformer extends AbstractTransformer implements P
     @Override
     public void startDocument() throws SAXException {
         super.startDocument();
-        startElement("http://lane.stanford.edu/search-templates/ns", "search-templates", "search-templates", new AttributesImpl());
+        startElement(NAMESPACE, SEARCH_TEMPLATES, SEARCH_TEMPLATES, new AttributesImpl());
     }
 
     private void parseDirectory(final File directory) throws SAXException {
@@ -56,8 +62,8 @@ public class SearchDirectoryTransformer extends AbstractTransformer implements P
             } else if (file.isFile() && file.canRead() && file.getName().endsWith(".html")) {
                 AttributesImpl attributes = new AttributesImpl();
                 attributes.addAttribute("", "path", "path", "CDATA", file.getAbsolutePath());
-                startElement("", "file", "file", attributes);
-                endElement("", "file", "file");
+                startElement("", FILE, FILE, attributes);
+                endElement("", FILE, FILE);
             }
         }
     }
