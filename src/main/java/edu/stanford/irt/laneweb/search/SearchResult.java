@@ -10,11 +10,11 @@ import edu.stanford.irt.laneweb.resource.Resource;
  */
 public interface SearchResult extends Resource, Comparable<SearchResult> {
 
-    public static final Pattern NON_FILING_PATTERN = Pattern.compile("^(a|an|the) ", Pattern.CASE_INSENSITIVE);
+    Pattern NON_FILING_PATTERN = Pattern.compile("^(a|an|the) ", Pattern.CASE_INSENSITIVE);
 
-    public static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
-    public static final Pattern YEAR_PATTERN = Pattern.compile(".*(\\d{4}).*");
+    Pattern YEAR_PATTERN = Pattern.compile(".*(\\d{4}).*");
 
     /**
      * @return the search score
