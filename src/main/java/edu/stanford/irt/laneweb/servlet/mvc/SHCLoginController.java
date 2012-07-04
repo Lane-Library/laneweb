@@ -31,7 +31,7 @@ public class SHCLoginController {
 
     private static final String ERROR_3 = "missing sunetid for univid: ";
 
-    private static final String TARGET_URL = "/portals/shc.html?sourceid=shc";
+    private static final String TARGET_URL = "/portals/shc.html?sourceid=shc&u=";
 
     private SHCCodec codec;
 
@@ -45,12 +45,23 @@ public class SHCLoginController {
         this.ldapDataAccess = ldapDataAccess;
     }
 
+    private String getSunetid(final HttpSession session, final String univid) {
+        String sunetid = (String) session.getAttribute(Model.SUNETID);
+        if (sunetid == null) {
+            sunetid = this.ldapDataAccess.getLdapDataForUnivid(univid).getSunetId();
+            if (sunetid != null) {
+                session.setAttribute(Model.SUNETID, sunetid);
+            }
+        }
+        return sunetid;
+    }
+
     @RequestMapping(value = "/shclogin")
-    public void login(@RequestParam final String emrid, @RequestParam final String univid, final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException {
+    public void login(@RequestParam final String emrid, @RequestParam final String univid,
+            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         StringBuffer errorMsg = new StringBuffer();
-        String url = TARGET_URL;
+        StringBuffer url = new StringBuffer(TARGET_URL + emrid);
         String sunetid = null;
         String decryptedEmrid = null;
         String decryptedUnivid = null;
@@ -74,21 +85,10 @@ public class SHCLoginController {
         if (sunetid == null && decryptedUnivid != null) {
             errorMsg.append(ERROR_3 + decryptedUnivid);
         }
-        if (!errorMsg.toString().isEmpty()) {
+        if (errorMsg.length() > 0) {
             this.log.error(errorMsg.toString());
-            url += AND_ERROR_EQUALS + URLEncoder.encode(errorMsg.toString(), "UTF-8");
+            url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
         }
-        response.sendRedirect(request.getContextPath() + url);
-    }
-
-    private String getSunetid(final HttpSession session, final String univid) {
-        String sunetid = (String) session.getAttribute(Model.SUNETID);
-        if (sunetid == null) {
-            sunetid = this.ldapDataAccess.getLdapDataForUnivid(univid).getSunetId();
-            if (sunetid != null) {
-                session.setAttribute(Model.SUNETID, sunetid);
-            }
-        }
-        return sunetid;
+        response.sendRedirect(request.getContextPath() + url.toString());
     }
 }

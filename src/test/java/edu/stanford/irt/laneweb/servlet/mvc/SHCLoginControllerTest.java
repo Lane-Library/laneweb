@@ -19,22 +19,21 @@ import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.SHCCodec;
 
-
 public class SHCLoginControllerTest {
-    
-    private SHCLoginController controller;
-    
+
     private SHCCodec codec;
-    
+
+    private SHCLoginController controller;
+
+    private LDAPData ldapData;
+
     private LDAPDataAccess ldapDataAccess;
 
     private HttpServletRequest request;
 
     private HttpServletResponse response;
-    
-    private HttpSession session;
 
-    private LDAPData ldapData;
+    private HttpSession session;
 
     @Before
     public void setUp() throws Exception {
@@ -56,7 +55,7 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
         expect(this.request.getContextPath()).andReturn("");
-        this.response.sendRedirect("/portals/shc.html?sourceid=shc");
+        this.response.sendRedirect("/portals/shc.html?sourceid=shc&u=emrid");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
         this.controller.login("emrid", "univid", this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
@@ -74,7 +73,7 @@ public class SHCLoginControllerTest {
         expect(this.ldapData.getSunetId()).andReturn("ditenus");
         this.session.setAttribute(Model.SUNETID, "ditenus");
         expect(this.request.getContextPath()).andReturn("");
-        this.response.sendRedirect("/portals/shc.html?sourceid=shc");
+        this.response.sendRedirect("/portals/shc.html?sourceid=shc&u=emrid");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
         this.controller.login("emrid", "univid", this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
