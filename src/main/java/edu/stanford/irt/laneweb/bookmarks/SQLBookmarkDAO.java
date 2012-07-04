@@ -3,8 +3,6 @@ package edu.stanford.irt.laneweb.bookmarks;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -113,6 +111,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         CallableStatement cstmt = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        ObjectOutputStream oop = null;
         try {
             conn = this.dataSource.getConnection();
             //TODO: this autocommit state probably persists, OK for now as this is the only place updates happen.
@@ -126,12 +125,10 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 cstmt.registerOutParameter(2, java.sql.Types.BLOB);
                 cstmt.executeUpdate();
                 Blob blob = cstmt.getBlob(2);
-                OutputStream os = blob.setBinaryStream(1);
-                ObjectOutputStream oop = new ObjectOutputStream(os);
-                oop.writeObject((Serializable)links);
+                oop = new ObjectOutputStream(blob.setBinaryStream(1));
+                oop.writeObject(links);
                 oop.flush();
                 oop.close();
-                os.close();
             }
             conn.commit();
         } catch (SQLException e) {
@@ -151,6 +148,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 this.log.error(e1.getMessage(), e1);
             }
         } finally {
+            IOUtils.closeStream(oop);
             JdbcUtils.closeConnection(conn);
             JdbcUtils.closeStatement(cstmt);
             JdbcUtils.closeStatement(pstmt);
