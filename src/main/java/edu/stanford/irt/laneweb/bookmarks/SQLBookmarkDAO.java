@@ -159,6 +159,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
      * This main method is a small program to copy bookmarks data between databases
      * @param args srcUrl srcUser srcPassword dstUrl dstUser dstPassword
      */
+    /*
     public static void main(String[] args) {
         DataSource srcDatasource = new org.springframework.jdbc.datasource.SingleConnectionDataSource(args[0], args[1], args[2], true);
         DataSource dstDatasource = new org.springframework.jdbc.datasource.SingleConnectionDataSource(args[3], args[4], args[5], true);
@@ -186,4 +187,5 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             JdbcUtils.closeResultSet(rs);
         }
     }
+    */
 }
