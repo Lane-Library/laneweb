@@ -6,7 +6,8 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.avalon.framework.parameters.Parameters;
+import java.util.Map;
+
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.junit.Before;
@@ -14,23 +15,25 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+
 public class TextNodeParsingTransformerTest {
 
     private Attributes attributes;
 
-    private Parameters parameters;
+    private Map<String, String> parameters;
 
     private TextNodeParsingTransformer transformer;
 
     private XMLConsumer xmlConsumer;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.transformer = new TextNodeParsingTransformer("type");
-        this.parameters = createMock(Parameters.class);
-        expect(this.parameters.getParameter("elementName", null)).andReturn("element");
+        this.parameters = createMock(Map.class);
+        expect(this.parameters.get("elementName")).andReturn("element");
         replay(this.parameters);
-        this.transformer.setup(null, null, null, this.parameters);
+        this.transformer.setParameters(this.parameters);
         verify(this.parameters);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer.setConsumer(this.xmlConsumer);

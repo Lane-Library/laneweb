@@ -6,9 +6,6 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,15 +18,12 @@ public class DescriptionLabelTransformerTest {
 
     private static final char[] CHARS = "some characters with ::DESCRIPTION LABEL WITH/SLASH## inside of it".toCharArray();
 
-    private Map<String, Object> model;
-
     private DescriptionLabelTransformer transformer;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.model = new HashMap<String, Object>();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer = new DescriptionLabelTransformer();
         this.transformer.setConsumer(this.xmlConsumer);
@@ -46,7 +40,6 @@ public class DescriptionLabelTransformerTest {
         this.xmlConsumer.characters(isA(char[].class), eq(53), eq(13));
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION);
         replayMocks();
-        this.transformer.setup(null, this.model, null, null);
         this.transformer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION, null);
         this.transformer.characters(CHARS, 0, CHARS.length);
         this.transformer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION);
@@ -57,7 +50,6 @@ public class DescriptionLabelTransformerTest {
     public void testEndElement() throws SAXException {
         this.xmlConsumer.endElement(null, null, null);
         replayMocks();
-        this.transformer.setup(null, this.model, null, null);
         this.transformer.endElement(null, null, null);
         verifyMocks();
     }
@@ -66,7 +58,6 @@ public class DescriptionLabelTransformerTest {
     public void testStartElement() throws SAXException {
         this.xmlConsumer.startElement(null, null, null, null);
         replayMocks();
-        this.transformer.setup(null, this.model, null, null);
         this.transformer.startElement(null, null, null, null);
         verifyMocks();
     }

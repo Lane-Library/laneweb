@@ -48,7 +48,7 @@ public class QueryHighlightingTransformerTest {
         this.xmlConsumer.characters(isA(char[].class), eq(26), eq(13));
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
         replayMocks();
-        this.transformer.setup(null, this.model, null, null);
+        this.transformer.setModel(this.model);
         this.transformer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.transformer.characters(CHARS, 0, CHARS.length);
         this.transformer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
@@ -60,7 +60,7 @@ public class QueryHighlightingTransformerTest {
         this.model.put(Model.QUERY, "query");
         this.xmlConsumer.endElement(null, null, null);
         replayMocks();
-        this.transformer.setup(null, this.model, null, null);
+        this.transformer.setModel(this.model);
         this.transformer.endElement(null, null, null);
         verifyMocks();
     }
@@ -69,7 +69,7 @@ public class QueryHighlightingTransformerTest {
     public void testInitialize() {
         replayMocks();
         try {
-            this.transformer.setup(null, this.model, null, null);
+            this.transformer.setModel(this.model);
             fail();
         } catch (IllegalArgumentException e) {
         }
@@ -81,7 +81,7 @@ public class QueryHighlightingTransformerTest {
         this.model.put(Model.QUERY, "query");
         this.xmlConsumer.startElement(null, null, null, null);
         replayMocks();
-        this.transformer.setup(null, this.model, null, null);
+        this.transformer.setModel(this.model);
         this.transformer.startElement(null, null, null, null);
         verifyMocks();
     }
