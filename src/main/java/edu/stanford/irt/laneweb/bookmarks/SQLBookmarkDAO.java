@@ -128,7 +128,6 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 oop = new ObjectOutputStream(blob.setBinaryStream(1));
                 oop.writeObject(links);
                 oop.flush();
-                oop.close();
             }
             conn.commit();
         } catch (SQLException e) {
@@ -152,6 +151,38 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             JdbcUtils.closeConnection(conn);
             JdbcUtils.closeStatement(cstmt);
             JdbcUtils.closeStatement(pstmt);
+            JdbcUtils.closeResultSet(rs);
+        }
+    }
+    
+    /**
+     * This main method is a small program to copy bookmarks data between databases
+     * @param args srcUrl srcUser srcPassword dstUrl dstUser dstPassword
+     */
+    public static void main(String[] args) {
+        DataSource srcDatasource = new org.springframework.jdbc.datasource.SingleConnectionDataSource(args[0], args[1], args[2], true);
+        DataSource dstDatasource = new org.springframework.jdbc.datasource.SingleConnectionDataSource(args[3], args[4], args[5], true);
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        BookmarkDAO srcDAO = new SQLBookmarkDAO(srcDatasource);
+        BookmarkDAO dstDAO = new SQLBookmarkDAO(dstDatasource);
+        String sunetid = null;
+        try {
+            conn = srcDatasource.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT SUNETID FROM BOOKMARKS");
+            while (rs.next()) {
+                sunetid = rs.getString(1);
+                List<Bookmark> bookmarks = srcDAO.getLinks(sunetid);
+                System.out.println(sunetid + ":" + bookmarks);
+                dstDAO.saveLinks(sunetid, bookmarks);
+            }
+        } catch (SQLException e) {
+            throw new LanewebException(e);
+        } finally {
+            JdbcUtils.closeConnection(conn);
+            JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeResultSet(rs);
         }
     }

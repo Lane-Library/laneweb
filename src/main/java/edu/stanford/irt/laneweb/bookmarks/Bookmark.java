@@ -125,4 +125,8 @@ public class Bookmark implements Serializable {
         }
         this.url = url;
     }
+    
+    public String toString() {
+        return this.label + "=" + this.url;
+    }
 }
