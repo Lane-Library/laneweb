@@ -21,4 +21,10 @@ public class QueryMapController {
         QueryMap queryMap = this.queryMapper.getQueryMap(q);
         return new QueryMap(q, null, queryMap.getResourceMap(), null, null);
     }
+
+    @RequestMapping(value = "**/apps/querymap/full-json")
+    @ResponseBody
+    public QueryMap getFullQueryMap(@RequestParam final String q) {
+        return this.queryMapper.getQueryMap(q);
+    }
 }
