@@ -106,11 +106,10 @@
                 <entry key="mresource" value="edu.stanford.irt.search.impl.DefaultContentResult"/>
                 <entry key="result" value="edu.stanford.irt.search.impl.DefaultResult"/>-->
                 <entry key="bookmark" value="edu.stanford.irt.laneweb.bookmarks.Bookmark"/>
-                <entry key="querymap" value="edu.stanford.irt.querymap.QueryMap"/>
-                <entry key="descriptor-weighted" value="edu.stanford.irt.querymap.WeightedDescriptor"/>
-                <entry key="descriptor" value="edu.stanford.irt.querymap.Descriptor"/>
             </map>
         </property>
+        <!-- setMode(XStream.NO_REFERENCES) -->
+        <property name="mode" value="1001"/>
     </bean>
     
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
