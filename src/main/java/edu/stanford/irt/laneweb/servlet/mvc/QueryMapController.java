@@ -17,14 +17,14 @@ public class QueryMapController {
 
     @RequestMapping(value = "**/apps/querymap/json")
     @ResponseBody
-    public QueryMap getQueryMap(@RequestParam final String q) {
+    public QueryMap getJSONQueryMap(@RequestParam final String q) {
         QueryMap queryMap = this.queryMapper.getQueryMap(q);
         return new QueryMap(q, null, queryMap.getResourceMap(), null, null);
     }
 
-    @RequestMapping(value = "**/apps/querymap/full-json")
+    @RequestMapping(value = "**/apps/querymap.xml", produces = "text/xml")
     @ResponseBody
-    public QueryMap getFullQueryMap(@RequestParam final String q) {
+    public QueryMap getXMLQueryMap(@RequestParam final String q) {
         return this.queryMapper.getQueryMap(q);
     }
 }
