@@ -1,6 +1,6 @@
 (function() {
     var spellCheck = Y.one('#spellCheck'),
-        searchTerms = LANE.SearchResult.getEncodedSearchTerms(), trackingImg;
+        searchTerms = LANE.SearchResult.getEncodedSearchTerms();
     if (spellCheck && searchTerms) {
         //get the suggestion
         Y.io('/././apps/spellcheck/json?q=' + searchTerms, {
@@ -10,16 +10,16 @@
                     if (sc.suggestion) {
                         //if there is a suggestion show the spellcheck markup 
                         //and add the suggestion to the href
-                        //and add laneSpellCorrected=<old term> for tracking
                         a = spellCheck.one('a');
                         a.set('href', document.location.href.replace('q=' + searchTerms, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + searchTerms));
                         a.set('innerHTML', sc.suggestion);
                         Y.fire('lane:popin', spellCheck);
-                        // track spelling suggestion and original term
-                        trackingImg = document.createElement('img');
-                        trackingImg.style.display = "none";
-                        trackingImg.src = "/././resources/images/spacer.gif?log=laneSpellSuggest&q=" + searchTerms + "&s=" + sc.suggestion;
-                        spellCheck.append(trackingImg);
+                        // track suggestion and original query
+                        Y.fire("lane:trackableEvent", {
+                            category: "lane:spellSuggest",
+                            action: "query=" + searchTerms,
+                            label: "suggestion=" + sc.suggestion
+                        });
                     }
                 }
             }
