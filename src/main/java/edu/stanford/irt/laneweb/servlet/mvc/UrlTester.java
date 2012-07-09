@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
 
 @Controller
@@ -28,20 +29,20 @@ public class UrlTester {
     }
 
     @RequestMapping(value = "/apps/url-tester")
-    public void testUrl(@RequestParam final String url, final HttpServletResponse response) throws IOException {
-        HttpGet get = new HttpGet(url);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        HttpResponse res = null;
+    public void testUrl(@RequestParam final String url, final HttpServletResponse response) {
+        HttpGet httpGet = new HttpGet(url);
         try {
-            res = this.httpClient.execute(get);
-            baos.write(EntityUtils.toByteArray(res.getEntity()));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            HttpResponse httpResponse = this.httpClient.execute(httpGet);
+            baos.write(EntityUtils.toByteArray(httpResponse.getEntity()));
+            byte[] headers = getHeaderString(httpGet, httpResponse);
+            baos.write(headers);
+            response.setHeader("Content-Type", "text/plain");
+            response.getOutputStream().write(baos.toByteArray());
         } catch (Exception e) {
-            get.abort();
+            httpGet.abort();
+            throw new LanewebException(e);
         }
-        byte[] headers = getHeaderString(get, res);
-        baos.write(headers);
-        response.setHeader("Content-Type", "text/plain");
-        response.getOutputStream().write(baos.toByteArray());
     }
 
     private String getHeaderString(final Header[] headers) {
@@ -55,12 +56,12 @@ public class UrlTester {
         return result.toString();
     }
 
-    private byte[] getHeaderString(final HttpGet get, final HttpResponse rep) {
+    private byte[] getHeaderString(final HttpGet httpGet, final HttpResponse httpResponse) throws UnsupportedEncodingException {
         StringBuffer result = new StringBuffer("\n\n\n<!--\n\nRequest Headers:\n\n");
-        result.append(getHeaderString(get.getAllHeaders()));
+        result.append(getHeaderString(httpGet.getAllHeaders()));
         result.append("\n\n\nResponse Headers:\n\n");
-        result.append(getHeaderString(get.getAllHeaders()));
+        result.append(getHeaderString(httpResponse.getAllHeaders()));
         result.append("\n-->");
-        return result.toString().getBytes();
+        return result.toString().getBytes("UTF-8");
     }
 }
