@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2012-06-28" version="1.13.0-RC1" description="1.13.0-RC1 feature release candidate">
+        <release date="2012-07-09" version="1.13.0" description="1.13.0 feature release">
             <action date="2012-06-25" issue="72075" dev="ceyates" type="update">
                 enable bookmarks and login flow features by default 
             </action>
