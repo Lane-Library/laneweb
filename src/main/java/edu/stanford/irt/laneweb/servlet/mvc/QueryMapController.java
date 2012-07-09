@@ -27,9 +27,9 @@ public class QueryMapController {
         return new QueryMap(q, null, queryMap.getResourceMap(), null, null);
     }
 
-    @RequestMapping(value = "**/apps/querymap.xml", produces = "text/xml")
-    @ResponseBody
-    public QueryMap getXMLQueryMap(@RequestParam final String q) {
-        return this.queryMapper.getQueryMap(q);
-    }
+//    @RequestMapping(value = "**/apps/querymap.xml", produces = "text/xml")
+//    @ResponseBody
+//    public QueryMap getXMLQueryMap(@RequestParam final String q) {
+//        return this.queryMapper.getQueryMap(q);
+//    }
 }

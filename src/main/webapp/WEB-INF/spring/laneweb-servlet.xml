@@ -10,12 +10,12 @@
     <context:component-scan base-package="edu.stanford.irt.laneweb.servlet.mvc,edu.stanford.irt.laneweb.bookmarks"/>
     
     <mvc:annotation-driven>
-        <mvc:message-converters>
+        <!--<mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
             <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
                 <constructor-arg ref="org.springframework.oxm.Marshaller"/>
             </bean>
-        </mvc:message-converters>
+        </mvc:message-converters>-->
     </mvc:annotation-driven>
     
     <mvc:interceptors>
