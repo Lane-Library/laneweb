@@ -17,7 +17,7 @@
                         // track suggestion and original query
                         Y.fire("lane:trackableEvent", {
                             category: "lane:spellSuggest",
-                            action: "query=" + searchTerms,
+                            action: "query=" + LANE.SearchResult.getSearchTerms(),
                             label: "suggestion=" + sc.suggestion
                         });
                     }

@@ -17,7 +17,7 @@
                         // tracking
                         Y.fire("lane:trackableEvent", {
                             category: "lane:findit",
-                            action: "query=" + searchString,
+                            action: "query=" + LANE.SearchResult.getSearchTerms(),
                             label: "result=" + findIt.result
                         });
                     }
