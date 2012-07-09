@@ -8,9 +8,19 @@
             Y.io('/././apps/querymap/json?q=' + LANE.SearchResult.getEncodedSearchTerms(), {
                 on:{
                 success: function(id, o) {
-                    var anchor, span, img, i;
+                    var anchor, span, i;
                     LANE.search.querymap = Y.JSON.parse(o.responseText);
                     if (LANE.search.querymap.resourceMap) {
+                        LANE.search.querymap.getResourcesString = function() {
+                            var i, separator = "; ", string = "";
+                            for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
+                                string += LANE.search.querymap.resourceMap.resources[i].label;
+                                if(i != LANE.search.querymap.resourceMap.resources.length-1){
+                                    string += separator;
+                                }
+                            }
+                            return string;
+                        };
                         LANE.search.querymap.getResultCounts = function() {
                             var url = '/././apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms(), i;
                             for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
@@ -64,13 +74,13 @@
                             if (document.getElementById('queryMappingDescriptor')) {
                                 document.getElementById('queryMappingDescriptor').appendChild(document.createTextNode(LANE.search.querymap.resourceMap.descriptor));
                             }
-                            // track mapped term and descriptor
-                            img = document.createElement('img');
-                            img.style.display = "none";
-                            img.src = "/././resources/images/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor.descriptorName + "&k=" + LANE.SearchResult.getEncodedSearchTerms();
-                            queryMapping.append(img);
-                            
                             LANE.search.querymap.getResultCounts();
+                            // track mapped term, descriptor, and resources
+                            Y.fire("lane:trackableEvent", {
+                                category: "lane:queryMapping",
+                                action: "query=" + LANE.SearchResult.getSearchTerms() + "; descriptor=" + LANE.search.querymap.resourceMap.descriptor.descriptorName,
+                                label: "resources=" + LANE.search.querymap.getResourcesString()
+                            });
                         }
                     }
                 }
