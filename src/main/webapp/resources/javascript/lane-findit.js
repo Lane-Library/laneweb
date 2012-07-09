@@ -14,6 +14,12 @@
                         findItLink.set('href', findIt.openurl);
                         findItLink.set('innerHTML', findIt.result);
                         Y.fire('lane:popin', findItNode);
+                        // tracking
+                        Y.fire("lane:trackableEvent", {
+                            category: "lane:findit",
+                            action: "query=" + searchString,
+                            label: "result=" + findIt.result
+                        });
                     }
                 }
             }
