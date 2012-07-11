@@ -47,7 +47,7 @@ public class PersistentLoginController {
         return setView(url, request, response);
     }
 
-    @RequestMapping(value = "/persistentLogin.html", params = { "url", "pl=renew" })
+    @RequestMapping(value = {"/secure/persistentLogin.html", "/persistentLogin.html"}, params = { "url", "pl=renew" })
     public String renewCookieAndRedirect(final String url, final HttpServletRequest request, final HttpServletResponse response) {
         Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
         if (null != isActiveSunetID && isActiveSunetID) {
