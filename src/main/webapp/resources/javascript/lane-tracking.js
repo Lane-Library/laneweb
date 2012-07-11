@@ -252,19 +252,6 @@
                     }
                     return false;
                 },
-                // TODO: remove once biomed-resources/find-it-form.html and portals/shc.html fire lane:trackablePageview events
-                // for backwards compatibility
-                track: function(trackingData) {
-                    Y.fire("lane:trackablePageview", {
-                        host: trackingData.host,
-                        path: trackingData.path,
-                        query: trackingData.query,
-                        title: trackingData.title,
-                        searchTerms: trackingData.searchTerms,
-                        searchSource: trackingData.searchSource,
-                        external: trackingData.external
-                    });
-                },
                 trackClick: function(event) {
                     var trackingData;
                     if (this.isTrackableAsPageview(event)) {
