@@ -40,11 +40,12 @@ public class PersistentLoginFilter extends AbstractLanewebFilter {
         String sunetid = this.sunetIdSource.getSunetid(request);
         if (null != sunetid) {
             Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-            if ("renew".equals(request.getParameter(("pl"))) && null != isActiveSunetID && isActiveSunetID) {
+            String pl = request.getParameter("pl");
+            if ("renew".equals(pl) && null != isActiveSunetID && isActiveSunetID) {
                 setLoginCookie(request, response, sunetid);
-            } else if (Boolean.parseBoolean(request.getParameter(("pl")))) {
+            } else if (Boolean.parseBoolean(pl)) {
                 setLoginCookie(request, response, sunetid);
-            } else if (!Boolean.parseBoolean(request.getParameter(("pl")))) {
+            } else {
                 removeLoginCookie(response);
             }
         } else {
@@ -80,7 +81,7 @@ public class PersistentLoginFilter extends AbstractLanewebFilter {
      */
     private void setLoginCookie(final HttpServletRequest request, final HttpServletResponse response, final String sunetid) {
         String userAgent = request.getHeader("User-Agent");
-        if (null != userAgent && null != sunetid) {
+        if (null != userAgent) {
             int twoWeeks = 3600 * 24 * 7 * 2;
             int gracePeriod = 3600 * 24 * 3; // three days
             PersistentLoginToken token = this.codec.createLoginToken(sunetid, userAgent.hashCode());
