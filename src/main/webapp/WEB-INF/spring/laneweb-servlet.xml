@@ -61,7 +61,6 @@
                 <entry key="**/*.js" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
                 <entry key="**/*.css" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
                 <entry key="**/*.manifest" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
-                <entry key="**/**/*.svg" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/svg"/>
                 <entry key="**/**/*.*" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
             </map>
         </property>
@@ -136,13 +135,6 @@
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
         <property name="processor" ref="org.apache.cocoon.Processor/bookmarks"/>
         <property name="prefix" value="/bookmarks"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/svg"
-        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
-        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="processor" ref="org.apache.cocoon.Processor/svg"/>
-        <property name="prefix" value="/resources/images"/>
     </bean>
     
     <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"

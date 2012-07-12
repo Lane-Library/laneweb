@@ -101,10 +101,6 @@
         <property name="source" value="classpath:/edu/stanford/irt/laneweb/bookmarks/bookmarks.xmap"/>
     </bean>
     
-    <bean name="org.apache.cocoon.Processor/svg" parent="org.apache.cocoon.Processor">
-        <property name="source" value="/svg.xmap"/>
-    </bean>
-    
     <bean name="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"
         class="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
     
