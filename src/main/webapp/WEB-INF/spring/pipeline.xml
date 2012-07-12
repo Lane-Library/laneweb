@@ -46,7 +46,7 @@
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator"
         scope="prototype">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+        <constructor-arg ref="javax.sql.DataSource/eresources"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/parameter-map"

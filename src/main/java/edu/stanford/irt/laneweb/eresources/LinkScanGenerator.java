@@ -25,10 +25,7 @@ public class LinkScanGenerator extends AbstractGenerator {
 
     private DataSource dataSource;
 
-    public void setDataSource(final DataSource dataSource) {
-        if (null == dataSource) {
-            throw new IllegalArgumentException("null dataSource");
-        }
+    public LinkScanGenerator(final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
