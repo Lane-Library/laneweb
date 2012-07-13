@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-07-15" version="1.13.2" description="1.13.2 bug fix release">
+            <action date="2012-07-09" issue="72694" dev="ryanmax" type="add">
+                track spelling and findit suggestions
+            </action>
+            <action date="2012-07-09" issue="72686" dev="ryanmax" type="add">
+                use google events in addition to log4j to record querymap suggestions
+            </action>
+            <action date="2012-07-09" issue="72681" dev="ceyates" type="fix">
+                url tester fails to report response headers
+            </action>
+            <action date="2012-07-03" issue="72480" dev="ceyates" type="add">
+                create a ScoreStrategy to generate score for ContentResultSearchResult
+            </action>
+            <action date="2012-07-01" issue="72299" dev="ceyates" type="add">
+                simplify domain objects by replacing the XMLizable interface
+            </action>
+            <action date="2012-06-28" issue="71980" dev="ceyates" type="update">
+                handle a null query more gracefully
+            </action>
+        </release>
         <release date="2012-07-11" version="1.13.1" description="1.13.1 emergency release">
             <action date="2012-07-11" issue="72795" dev="alainb" type="fix">
                 persistent login errors
