@@ -26,31 +26,32 @@ public class PersistentLoginCookieValidatorController {
 
     private static final long GRACE_PERIOD = 1000 * 60 * 60 * 24 * 3; // 3 days
 
-    private static final Cookie[] NO_COOKIES = new Cookie[0];
-
     private static final String USER_AGENT_HEADER = "User-Agent";
 
-    @Autowired
     private SunetIdCookieCodec codec;
+
+    @Autowired
+    public PersistentLoginCookieValidatorController(final SunetIdCookieCodec codec) {
+        this.codec = codec;
+    }
 
     @RequestMapping(value = "**/apps/loginCookieValidator")
     public void validateCookie(final HttpServletRequest request, final HttpServletResponse response,
             @RequestParam(required = false) final String callback) throws IOException {
         boolean valid = false;
         boolean validDuringGracePeriod = false;
-        String userAgent = request.getHeader(USER_AGENT_HEADER);
         Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            cookies = NO_COOKIES;
-        }
-        for (Cookie cookie : cookies) {
-            if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
-                PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
-                if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
-                    valid = true;
-                    validDuringGracePeriod = token.isValidFor(System.currentTimeMillis() + GRACE_PERIOD, userAgent.hashCode());
+        if (cookies != null) {
+            String userAgent = request.getHeader(USER_AGENT_HEADER);
+            for (Cookie cookie : cookies) {
+                if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                    PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
+                    if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
+                        valid = true;
+                        validDuringGracePeriod = token.isValidFor(System.currentTimeMillis() + GRACE_PERIOD, userAgent.hashCode());
+                    }
+                    break;
                 }
-                break;
             }
         }
         response.setHeader("Content-Type", "application/x-javascript");
