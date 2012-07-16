@@ -646,9 +646,20 @@
              * @private
              */
             _handleBookmarkSearchClick : function(event) {
-                label = "Search for: " + LANE.SearchResult.getSearchTerms();
-                url = "/search.html?source=" + LANE.SearchResult.getSearchSource() + "&q=" + LANE.SearchResult.getSearchTerms();
+                var label = "Search for: " + LANE.SearchResult.getSearchTerms(),
+                    url = "/search.html?source=" + LANE.SearchResult.getSearchSource() + "&q=" + LANE.SearchResult.getSearchTerms(),
+                    bookmarkSearch = Y.one("#bookmarkSearch"),
+                    eventHandle;
                 this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
+                //TODO: this is a temporary hack to take care of case 72768
+                if (bookmarkSearch) {
+                    bookmarkSearch.setStyle("cursor", "wait");
+                    eventHandle = this.get("bookmarks").after("addSync", function(event) {
+                        bookmarkSearch.setStyle("cursor", "default");
+                        bookmarkSearch.setStyle("visibility", "hidden");
+                        eventHandle.detach();
+                    }, this);
+                }
             },
             
             /**
