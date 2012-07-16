@@ -29,6 +29,9 @@
             <action date="2012-06-28" issue="71980" dev="ceyates" type="update">
                 handle a null query more gracefully
             </action>
+            <action date="2012-06-29" issue="68538" dev="ceyates" type="update">
+                upgrade yui to 3.5.1
+            </action>
         </release>
         <release date="2012-07-11" version="1.13.1" description="1.13.1 emergency release">
             <action date="2012-07-11" issue="72795" dev="alainb" type="fix">
