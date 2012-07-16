@@ -616,7 +616,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.22</version>
+            <version>1.7.23</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>
