@@ -1,13 +1,18 @@
 package edu.stanford.irt.laneweb.cocoon;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.cyberneko.html.HTMLConfiguration;
 
 public class NekoHTMLConfiguration extends HTMLConfiguration {
 
-    public NekoHTMLConfiguration() {
-        setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
-        setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-        setProperty("http://cyberneko.org/html/properties/namespaces-uri", "http://www.w3.org/1999/xhtml");
-        setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
+    public NekoHTMLConfiguration(final Map<String, String> properties, final Map<String, Boolean> features) {
+        for (Entry<String, String> entry : properties.entrySet()) {
+            setProperty(entry.getKey(), entry.getValue());
+        }
+        for (Entry<String, Boolean> entry : features.entrySet()) {
+            setFeature(entry.getKey(), entry.getValue());
+        }
     }
 }

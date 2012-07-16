@@ -6,12 +6,11 @@ import java.io.StringReader;
 import java.util.Map;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
+import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.xml.EmbeddedXMLPipe;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
-import org.apache.xerces.parsers.AbstractSAXParser;
-import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -22,20 +21,9 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent, ParametersAware {
 
-    private static class HtmlSAXParser extends AbstractSAXParser {
-
-        protected HtmlSAXParser(final HTMLConfiguration conf) {
-            super(conf);
-        }
-    }
-
-    private static final String NAMESPACE = "http://www.w3.org/1999/xhtml";
-
     private StringBuilder content = new StringBuilder();
 
     private String elementName = "event_description";
-
-    private AbstractSAXParser htmlParser;
 
     private boolean inElement = false;
 
@@ -43,15 +31,11 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
 
     private XMLConsumer xmlConsumer;
 
-    public TextNodeParsingTransformer(final String type) {
+    private SAXParser saxParser;
+
+    public TextNodeParsingTransformer(final String type, final SAXParser saxParser) {
         this.type = type;
-        HTMLConfiguration conf = new HTMLConfiguration();
-        conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
-        conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-        conf.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
-        conf.setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
-        conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", NAMESPACE);
-        this.htmlParser = new HtmlSAXParser(conf);
+        this.saxParser = saxParser;
     }
 
     @Override
@@ -72,13 +56,12 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
             XMLConsumer pipe = new EmbeddedXMLPipe(this.xmlConsumer) {
 
                 @Override
-                // TODO: this shouldn't be here
+                // TODO: this shouldn't be here, the html parser creates screwy processing instructions from the classes xml.
                 public void processingInstruction(final String target, final String data) throws SAXException {
                 }
             };
             try {
-                this.htmlParser.setContentHandler(pipe);
-                this.htmlParser.parse(inputSource);
+                this.saxParser.parse(inputSource, pipe, pipe);
             } catch (IOException e) {
                 throw new LanewebException(e);
             }

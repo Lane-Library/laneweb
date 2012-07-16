@@ -105,5 +105,6 @@
         class="edu.stanford.irt.laneweb.search.FilePathTransformer"
         scope="prototype">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/html"/>
     </bean>
 </beans>

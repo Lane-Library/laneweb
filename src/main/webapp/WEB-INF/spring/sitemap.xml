@@ -5,7 +5,7 @@
 
     <bean name="org.apache.cocoon.Processor" abstract="true" init-method="initialize"
         class="edu.stanford.irt.cocoon.sitemap.SitemapImpl">
-        <property name="SAXParser" ref="org.apache.cocoon.core.xml.SAXParser"/>
+        <property name="SAXParser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
         <property name="sitemapLanguage" ref="org.apache.cocoon.components.treeprocessor.TreeBuilder"/>
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>

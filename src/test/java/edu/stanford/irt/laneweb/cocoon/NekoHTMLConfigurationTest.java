@@ -1,7 +1,9 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,15 +14,16 @@ public class NekoHTMLConfigurationTest {
 
     @Before
     public void setUp() throws Exception {
-        this.configuration = new NekoHTMLConfiguration();
+        //TODO: set up with the features/properties we actually use
+        this.configuration = new NekoHTMLConfiguration(Collections.<String, String>emptyMap(), Collections.<String, Boolean>emptyMap());
     }
 
     @Test
     public void test() {
-        assertEquals("UTF-8", this.configuration.getProperty("http://cyberneko.org/html/properties/default-encoding"));
-        assertEquals("lower", this.configuration.getProperty("http://cyberneko.org/html/properties/names/elems"));
+        assertEquals("Windows-1252", this.configuration.getProperty("http://cyberneko.org/html/properties/default-encoding"));
+        assertEquals("upper", this.configuration.getProperty("http://cyberneko.org/html/properties/names/elems"));
         assertEquals("http://www.w3.org/1999/xhtml",
                 this.configuration.getProperty("http://cyberneko.org/html/properties/namespaces-uri"));
-        assertTrue(this.configuration.getFeature("http://cyberneko.org/html/features/insert-namespaces"));
+        assertFalse(this.configuration.getFeature("http://cyberneko.org/html/features/insert-namespaces"));
     }
 }

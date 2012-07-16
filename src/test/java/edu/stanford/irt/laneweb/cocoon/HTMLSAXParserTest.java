@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +38,8 @@ public class HTMLSAXParserTest {
 
     @Before
     public void setUp() throws Exception {
-        this.configuration = new NekoHTMLConfiguration();
+        //TODO: set up with the features/properties we actually use
+        this.configuration = new NekoHTMLConfiguration(Collections.<String, String>emptyMap(), Collections.<String, Boolean>emptyMap());
         this.parser = new HTMLSAXParser(this.configuration);
         this.contentHandler = createMock(ContentHandler.class);
         this.inputSource = createMock(InputSource.class);
@@ -54,10 +56,8 @@ public class HTMLSAXParserTest {
         expect(this.inputSource.getEncoding()).andReturn("UTF-8");
         this.contentHandler.setDocumentLocator(isA(Locator.class));
         this.contentHandler.startDocument();
-        this.contentHandler.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
-        this.contentHandler.startElement(eq("http://www.w3.org/1999/xhtml"), eq("html"), eq("html"), isA(Attributes.class));
-        this.contentHandler.endElement("http://www.w3.org/1999/xhtml", "html", "html");
-        this.contentHandler.endPrefixMapping("");
+        this.contentHandler.startElement(eq(""), eq("HTML"), eq("HTML"), isA(Attributes.class));
+        this.contentHandler.endElement("", "HTML", "HTML");
         this.contentHandler.endDocument();
         replay(this.contentHandler, this.inputSource, this.lexicalHandler);
         this.parser.parse(this.inputSource, this.contentHandler);
@@ -73,10 +73,8 @@ public class HTMLSAXParserTest {
         expect(this.inputSource.getEncoding()).andReturn("UTF-8");
         this.contentHandler.setDocumentLocator(isA(Locator.class));
         this.contentHandler.startDocument();
-        this.contentHandler.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
-        this.contentHandler.startElement(eq("http://www.w3.org/1999/xhtml"), eq("html"), eq("html"), isA(Attributes.class));
-        this.contentHandler.endElement("http://www.w3.org/1999/xhtml", "html", "html");
-        this.contentHandler.endPrefixMapping("");
+        this.contentHandler.startElement(eq(""), eq("HTML"), eq("HTML"), isA(Attributes.class));
+        this.contentHandler.endElement("", "HTML", "HTML");
         this.contentHandler.endDocument();
         replay(this.contentHandler, this.inputSource, this.lexicalHandler);
         this.parser.parse(this.inputSource, this.contentHandler, this.lexicalHandler);

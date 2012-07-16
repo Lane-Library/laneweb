@@ -33,8 +33,51 @@
     
     <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
     
-    <bean name="org.apache.cocoon.core.xml.SAXParser"
+    <bean name="org.apache.cocoon.core.xml.SAXParser/xml"
         class="org.apache.cocoon.core.xml.impl.JaxpSAXParser"/>
+    
+    <bean name="org.apache.cocoon.core.xml.SAXParser/html"
+        class="edu.stanford.irt.laneweb.cocoon.HTMLSAXParser"
+        scope="prototype">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.cocoon.NekoHTMLConfiguration">
+                <constructor-arg>
+                    <map>
+                        <entry key="http://cyberneko.org/html/properties/default-encoding" value="UTF-8"/>
+                        <entry key="http://cyberneko.org/html/properties/names/elems" value="lower"/>
+                        <entry key="http://cyberneko.org/html/properties/namespaces-uri" value="http://www.w3.org/1999/xhtml"/>
+                    </map>
+                </constructor-arg>
+                <constructor-arg>
+                    <map>
+                        <entry key="http://cyberneko.org/html/features/insert-namespaces" value="true"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+    
+    <bean name="org.apache.cocoon.core.xml.SAXParser/html-fragment"
+        class="edu.stanford.irt.laneweb.cocoon.HTMLSAXParser"
+        scope="prototype">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.cocoon.NekoHTMLConfiguration">
+                <constructor-arg>
+                    <map>
+                        <entry key="http://cyberneko.org/html/properties/default-encoding" value="UTF-8"/>
+                        <entry key="http://cyberneko.org/html/properties/names/elems" value="lower"/>
+                        <entry key="http://cyberneko.org/html/properties/namespaces-uri" value="http://www.w3.org/1999/xhtml"/>
+                    </map>
+                </constructor-arg>
+                <constructor-arg>
+                    <map>
+                        <entry key="http://cyberneko.org/html/features/insert-namespaces" value="true"/>
+                        <entry key="http://cyberneko.org/html/features/balance-tags/document-fragment" value="true"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
     
     <bean id="org.apache.cocoon.caching.Cache"
         class="edu.stanford.irt.laneweb.cocoon.EHCache"

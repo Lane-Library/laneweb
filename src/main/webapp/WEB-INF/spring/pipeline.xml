@@ -34,13 +34,14 @@
         class="edu.stanford.irt.cocoon.pipeline.generate.URLGenerator"
         scope="prototype">
         <constructor-arg value="file"/>
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/html"
-        class="edu.stanford.irt.laneweb.cocoon.HTMLGenerator"
+        class="edu.stanford.irt.cocoon.pipeline.generate.URLGenerator"
         scope="prototype">
         <constructor-arg value="html"/>
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/html"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
@@ -58,21 +59,21 @@
     <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
         class="edu.stanford.irt.cocoon.pipeline.generate.AggregatorImpl"
         scope="prototype">
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/classes"
         class="edu.stanford.irt.laneweb.classes.ClassesGenerator"
         scope="prototype">
         <constructor-arg value="classes"/>
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/noncached-classes"
         class="edu.stanford.irt.laneweb.classes.RootElementProvidingGenerator"
         scope="prototype">
         <constructor-arg value="noncached-classes"/>
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator"
@@ -87,7 +88,7 @@
     <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
         class="edu.stanford.irt.cocoon.pipeline.transform.XIncludeTransformer"
         scope="prototype">
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
     
@@ -106,6 +107,7 @@
         class="edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer"
         scope="prototype">
         <constructor-arg value="textNodeParser"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/html-fragment"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
@@ -182,7 +184,7 @@
         class="edu.stanford.irt.laneweb.classes.EventListTransformer"
         scope="prototype">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
     </bean>
     
 </beans>
