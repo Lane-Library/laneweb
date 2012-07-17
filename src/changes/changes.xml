@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-07-17" version="1.13.3" description="1.13.3 emergency release">
+            <action date="2012-07-17" issue="73203" dev="ceyates" type="fix">
+                IE7: no javascript works?
+            </action>
+        </release>
         <release date="2012-07-16" version="1.13.2" description="1.13.2 bug fix release">
             <action date="2012-07-16" issue="72768" dev="ceyates" type="add">
                 Add feedback to "Save this search" button
