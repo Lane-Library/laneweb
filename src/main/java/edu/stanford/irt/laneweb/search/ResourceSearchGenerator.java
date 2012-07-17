@@ -2,10 +2,12 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.Result;
@@ -13,16 +15,18 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
 
-    private Collection<String> resources;
+    private Collection<String> resources = Collections.emptySet();
 
     @Override
     public Result doSearch() {
+        String q = this.query == null ? "" : this.query;
         Collection<String> enginesToRun = new HashSet<String>();
-        Result describeResult = this.metaSearchManager.describe(new SimpleQuery(this.query), null);
+        Result describeResult = this.metaSearchManager.describe(new SimpleQuery(q), null);
         Map<String, String> enginesMap = new HashMap<String, String>();
         for (Result engine : describeResult.getChildren()) {
+            String engineId = engine.getId();
             for (Result resource : engine.getChildren()) {
-                enginesMap.put(resource.getId(), engine.getId());
+                enginesMap.put(resource.getId(), engineId);
             }
         }
         for (String resource : this.resources) {
@@ -46,7 +50,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
         if (this.resources == null) {
             String resourceList = parameters.get("resource-list");
             if (resourceList == null) {
-                throw new IllegalArgumentException("null resource-list");
+                throw new LanewebException("null resource-list");
             }
             this.resources = Arrays.asList(resourceList.split(","));
         }
