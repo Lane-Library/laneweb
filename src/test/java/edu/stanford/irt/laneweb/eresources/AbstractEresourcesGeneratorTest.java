@@ -95,6 +95,12 @@ public class AbstractEresourcesGeneratorTest {
     }
 
     @Test
+    public void testSetModelNumberFormatException() {
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "foo"));
+        assertEquals(0, this.generator.page);
+    }
+
+    @Test
     public void testSetModelPage() {
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "1"));
         assertEquals(0, this.generator.page);

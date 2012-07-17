@@ -52,7 +52,11 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
             this.mesh = this.mesh.toLowerCase();
         }
         String page = ModelUtil.getString(model, Model.PAGE, "1");
-        this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
+        try {
+            this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
+        } catch (NumberFormatException nfe) {
+            this.page = 0;
+        }
     }
 
     public void setParameters(final Map<String, String> parameters) {
