@@ -22,7 +22,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
 
     private static final Attributes EMPTY_ATTRIBUTES = new AttributesImpl();
 
-    private CharBuffer chars;
+    private CharBuffer chars = CharBuffer.allocate(256);
 
     private boolean inTargetElement = false;
 
@@ -34,7 +34,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
 
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
-        if (this.parseLevel > 0) {
+        if (this.parseLevel > 0 && this.queryPattern != null) {
             while (this.chars.remaining() < length) {
                 CharBuffer newChars = CharBuffer.allocate(this.chars.capacity() + 256);
                 int position = this.chars.position();
@@ -72,24 +72,24 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
 
     public void setModel(final Map<String, Object> model) {
         String query = ModelUtil.getString(model, Model.QUERY);
-        if (null == query) {
-            throw new IllegalArgumentException("null query");
+        if (query != null) {
+            this.queryPattern = QueryTermPattern.getPattern(query);
         }
-        this.queryPattern = QueryTermPattern.getPattern(query);
-        this.chars = CharBuffer.allocate(256);
     }
 
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        if ("title".equals(localName) || "description".equals(localName)) {
-            ++this.parseLevel;
-            this.inTargetElement = true;
-        }
-        // don't process child elements of title or description
-        else if (this.inTargetElement == true) {
-            handleMatches();
-            this.parseLevel--;
+        if (this.queryPattern != null) {
+            if ("title".equals(localName) || "description".equals(localName)) {
+                ++this.parseLevel;
+                this.inTargetElement = true;
+            }
+            // don't process child elements of title or description
+            else if (this.inTargetElement == true) {
+                handleMatches();
+                this.parseLevel--;
+            }
         }
         this.xmlConsumer.startElement(uri, localName, qName, atts);
     }

@@ -5,7 +5,6 @@ import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,50 +46,44 @@ public class QueryHighlightingTransformerTest {
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD));
         this.xmlConsumer.characters(isA(char[].class), eq(26), eq(13));
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
-        replayMocks();
+        replay(this.xmlConsumer);
         this.transformer.setModel(this.model);
         this.transformer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.transformer.characters(CHARS, 0, CHARS.length);
         this.transformer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
-        verifyMocks();
+        verify(this.xmlConsumer);
     }
 
     @Test
     public void testEndElement() throws SAXException {
         this.model.put(Model.QUERY, "query");
         this.xmlConsumer.endElement(null, null, null);
-        replayMocks();
+        replay(this.xmlConsumer);
         this.transformer.setModel(this.model);
         this.transformer.endElement(null, null, null);
-        verifyMocks();
+        verify(this.xmlConsumer);
     }
 
     @Test
-    public void testInitialize() {
-        replayMocks();
-        try {
-            this.transformer.setModel(this.model);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        verifyMocks();
+    public void testNullQuery() throws SAXException {
+        this.transformer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
+        this.transformer.characters(CHARS, 0, CHARS.length);
+        this.transformer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
+        replay(this.xmlConsumer);
+        this.transformer.setModel(this.model);
+        this.transformer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
+        this.transformer.characters(CHARS, 0, CHARS.length);
+        this.transformer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
+        verify(this.xmlConsumer);
     }
 
     @Test
     public void testStartElement() throws SAXException {
         this.model.put(Model.QUERY, "query");
         this.xmlConsumer.startElement(null, null, null, null);
-        replayMocks();
+        replay(this.xmlConsumer);
         this.transformer.setModel(this.model);
         this.transformer.startElement(null, null, null, null);
-        verifyMocks();
-    }
-
-    private void replayMocks() {
-        replay(this.xmlConsumer);
-    }
-
-    private void verifyMocks() {
         verify(this.xmlConsumer);
     }
 }
