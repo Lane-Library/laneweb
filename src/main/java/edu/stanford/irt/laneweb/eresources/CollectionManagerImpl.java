@@ -50,7 +50,15 @@ public class CollectionManagerImpl implements CollectionManager {
     
     private Properties sqlStatements;
 
-    protected DataSource dataSource;
+    private DataSource dataSource;
+    
+    protected Connection getConnection() throws SQLException {
+        return this.dataSource.getConnection();
+    }
+    
+    protected String getSQL(String key) {
+        return this.sqlStatements.getProperty(key);
+    }
     
     public CollectionManagerImpl(final DataSource dataSource, final Properties sqlStatements) {
         this.dataSource = dataSource;

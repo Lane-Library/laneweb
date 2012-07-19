@@ -18,6 +18,10 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends CollectionManagerImpl {
+    
+    private static final String SUGGEST_SEARCH = "suggest.search";
+    
+    private static final String SUGGEST_SEARCH_TYPE = "suggest.search.type";
 
     public AbstractSuggestCollectionManager(DataSource dataSource, Properties sqlStatements) {
         super(dataSource, sqlStatements);
@@ -28,20 +32,17 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
     @Override
     public Collection<Eresource> search(final String query) {
         Collection<String> params = searchStringToParams(query);
-        return doSearch(getSearchSQL(), params);
+        return doSearch(getSQL(SUGGEST_SEARCH), params);
     }
 
     @Override
     public Collection<Eresource> searchType(final String type, final String query) {
         Collection<String> params = searchStringToParams(query);
         params.add(type);
-        return doSearch(getSearchTypeSQL(), params);
+        return doSearch(getSQL(SUGGEST_SEARCH_TYPE), params);
     }
 
-    protected abstract String getSearchSQL();
-
-    protected abstract String getSearchTypeSQL();
-
+    //TODO: refactor this as a strategy
     protected abstract Collection<String> searchStringToParams(String query);
 
     private Collection<Eresource> doSearch(final String sql, final Collection<String> params) {
@@ -49,7 +50,7 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            conn = this.dataSource.getConnection();
+            conn = getConnection();
             stmt = conn.prepareStatement(sql);
             int index = 1;
             for (String param : params) {
