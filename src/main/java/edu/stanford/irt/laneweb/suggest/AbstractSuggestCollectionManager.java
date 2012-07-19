@@ -1,74 +1,43 @@
 package edu.stanford.irt.laneweb.suggest;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
-import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.CollectionManagerImpl;
-import edu.stanford.irt.laneweb.util.JdbcUtils;
+import edu.stanford.irt.laneweb.eresources.AbstractCollectionManager;
 import edu.stanford.irt.suggest.QueryNormalizer;
 
-public abstract class AbstractSuggestCollectionManager extends CollectionManagerImpl {
-    
-    private static final String SUGGEST_SEARCH = "suggest.search";
-    
-    private static final String SUGGEST_SEARCH_TYPE = "suggest.search.type";
-
-    public AbstractSuggestCollectionManager(DataSource dataSource, Properties sqlStatements) {
-        super(dataSource, sqlStatements);
-    }
+public abstract class AbstractSuggestCollectionManager extends AbstractCollectionManager {
 
     protected QueryNormalizer queryNormalizer = new QueryNormalizer();
+
+    public AbstractSuggestCollectionManager(final DataSource dataSource, final Properties sqlStatements) {
+        super(dataSource, sqlStatements);
+    }
 
     @Override
     public Collection<Eresource> search(final String query) {
         Collection<String> params = searchStringToParams(query);
-        return doSearch(getSQL(SUGGEST_SEARCH), params);
+        return doGet(SEARCH, params, query);
     }
 
     @Override
     public Collection<Eresource> searchType(final String type, final String query) {
         Collection<String> params = searchStringToParams(query);
         params.add(type);
-        return doSearch(getSQL(SUGGEST_SEARCH_TYPE), params);
+        return doGet(SEARCH_TYPE, params, query);
     }
 
-    //TODO: refactor this as a strategy
-    protected abstract Collection<String> searchStringToParams(String query);
-
-    private Collection<Eresource> doSearch(final String sql, final Collection<String> params) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = getConnection();
-            stmt = conn.prepareStatement(sql);
-            int index = 1;
-            for (String param : params) {
-                stmt.setString(index++, param);
-            }
-            rs = stmt.executeQuery();
-            return parseResultSet(rs);
-        } catch (SQLException e) {
-            throw new LanewebException(e.getMessage() + "\nparams=" + params.toString(), e);
-        } finally {
-            JdbcUtils.closeResultSet(rs);
-            JdbcUtils.closeStatement(stmt);
-            JdbcUtils.closeConnection(conn);
-        }
-    }
-
-    private Collection<Eresource> parseResultSet(final ResultSet rs) throws SQLException {
-        Collection<Eresource> suggestions = new LinkedList<Eresource>();
+    @Override
+    protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
+        List<Eresource> suggestions = new LinkedList<Eresource>();
         EresourceImpl eresource = null;
         int currentEresourceId = 0;
         String currentTitle = null;
@@ -86,4 +55,7 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         }
         return suggestions;
     }
+
+    // TODO: refactor this as a strategy
+    protected abstract Collection<String> searchStringToParams(String query);
 }

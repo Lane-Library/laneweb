@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -17,42 +16,37 @@ import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.impl.EresourceImpl;
-import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
-import edu.stanford.irt.eresources.impl.VersionImpl;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
-public class CollectionManagerImpl implements CollectionManager {
+public abstract class AbstractCollectionManager implements CollectionManager {
 
-    private static final String BROWSE = "eresources.browse";
+    protected static final String SEARCH = "search";
 
-    private static final String BROWSE_ALPHA = "eresources.browse.alpha";
+    protected static final String SEARCH_TYPE = "search.type";
 
-    private static final String BROWSE_CORE = "eresources.browse.core";
+    private static final String BROWSE = "browse";
 
-    private static final String BROWSE_MESH = "eresources.browse.mesh";
+    private static final String BROWSE_ALPHA = "browse.alpha";
 
-    private static final String BROWSE_NONALPHA = "eresources.browse.nonalpha";
+    private static final String BROWSE_CORE = "browse.core";
 
-    private static final String BROWSE_SUBSET = "eresources.browse.subset";
+    private static final String BROWSE_MESH = "browse.mesh";
 
-    private static final String COUNT = "eresources.search.count.0";
+    private static final String BROWSE_NONALPHA = "browse.nonalpha";
 
-    private static final String COUNT_TYPE_UNION = "eresources.search.count.1";
+    private static final String BROWSE_SUBSET = "browse.subset";
 
-    private static final String SEARCH = "eresources.search";
+    private static final String COUNT = "search.count.0";
 
-    private static final String SEARCH_TYPE = "eresources.search.type";
-
-    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    private static final String COUNT_TYPE_UNION = "search.count.1";
 
     private DataSource dataSource;
 
     private Properties sqlStatements;
 
-    public CollectionManagerImpl(final DataSource dataSource, final Properties sqlStatements) {
+    public AbstractCollectionManager(final DataSource dataSource, final Properties sqlStatements) {
         this.dataSource = dataSource;
         this.sqlStatements = sqlStatements;
     }
@@ -170,15 +164,7 @@ public class CollectionManagerImpl implements CollectionManager {
         return doGet(SEARCH_TYPE, params, query);
     }
 
-    protected Connection getConnection() throws SQLException {
-        return this.dataSource.getConnection();
-    }
-
-    protected String getSQL(final String key) {
-        return this.sqlStatements.getProperty(key);
-    }
-
-    private List<Eresource> doGet(final String sqlKey, final Collection<String> params, final String query) {
+    protected List<Eresource> doGet(final String sqlKey, final Collection<String> params, final String query) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -200,70 +186,13 @@ public class CollectionManagerImpl implements CollectionManager {
         }
     }
 
-    private List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
-        LinkedList<Eresource> eresources = new LinkedList<Eresource>();
-        EresourceImpl eresource = null;
-        VersionImpl version = null;
-        LinkImpl link;
-        int currentEresourceId = -1;
-        int currentVersionId = -1;
-        int currentLinkId = -1;
-        String currentTitle = null;
-        while (rs.next()) {
-            int rowEresourceId = rs.getInt("ERESOURCE_ID");
-            int recordId = rs.getInt("RECORD_ID");
-            String recordType = rs.getString("RECORD_TYPE");
-            String rowTitle = rs.getString("TITLE");
-            if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
-                currentTitle = rowTitle;
-                eresource = new EresourceImpl();
-                eresource.setId(rowEresourceId);
-                eresource.setRecordId(recordId);
-                eresource.setRecordType(recordType);
-                eresource.setTitle(currentTitle);
-                if (query != null) {
-                    if (query.equalsIgnoreCase(currentTitle)) {
-                        eresource.setScore(Integer.MAX_VALUE);
-                    } else {
-                        // core material weighted * 3
-                        int coreFactor = "Y".equals(rs.getString("CORE")) ? 3 : 1;
-                        // weighted oracle text scores for title and text
-                        // averaged
-                        int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
-                        int year = rs.getInt("YEAR");
-                        // subtract number of years difference from current year
-                        // yearFactor can change score from -10 to 10 points
-                        int yearFactor = year == 0 ? 0 : Math.max(-10, 10 - (THIS_YEAR - year));
-                        eresource.setScore(scoreFactor + yearFactor);
-                    }
-                }
-                eresource.setDescription(rs.getString("E_DESCRIPTION"));
-                eresources.add(eresource);
-                currentEresourceId = rowEresourceId;
-                currentVersionId = -1;
-                currentLinkId = -1;
-            }
-            int rowVersionId = rs.getInt("VERSION_ID");
-            if (rowVersionId != currentVersionId) {
-                version = new VersionImpl();
-                eresource.addVersion(version);
-                version.setPublisher(rs.getString("PUBLISHER"));
-                version.setSummaryHoldings(rs.getString("HOLDINGS"));
-                version.setDates(rs.getString("DATES"));
-                version.setDescription(rs.getString("V_DESCRIPTION"));
-                currentVersionId = rowVersionId;
-                currentLinkId = -1;
-            }
-            int rowLinkId = rs.getInt("LINK_ID");
-            if (rowLinkId != currentLinkId) {
-                link = new LinkImpl();
-                version.addLink(link);
-                link.setUrl(rs.getString("URL"));
-                link.setLabel(rs.getString("LABEL"));
-                link.setInstruction(rs.getString("INSTRUCTION"));
-                currentLinkId = rowLinkId;
-            }
-        }
-        return eresources;
+    protected Connection getConnection() throws SQLException {
+        return this.dataSource.getConnection();
     }
+
+    protected String getSQL(final String key) {
+        return this.sqlStatements.getProperty(key);
+    }
+
+    protected abstract List<Eresource> parseResultSet(ResultSet rs, String query) throws SQLException;
 }

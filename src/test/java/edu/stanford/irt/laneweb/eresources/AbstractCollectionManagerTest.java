@@ -4,40 +4,53 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CollectionManagerImplTest {
+import edu.stanford.irt.eresources.Eresource;
+
+public class AbstractCollectionManagerTest {
+
+    private static final class TestAbstractCollectionManager extends AbstractCollectionManager {
+
+        public TestAbstractCollectionManager(final DataSource dataSource, final Properties sqlStatements) {
+            super(dataSource, sqlStatements);
+        }
+
+        @Override
+        protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
+            return Collections.emptyList();
+        }
+    }
 
     private Connection connection;
 
     private DataSource dataSource;
 
-    private CollectionManagerImpl manager;
+    private AbstractCollectionManager manager;
 
     private ResultSet resultSet;
 
-    private PreparedStatement statement;
-
     private Properties sqlStatements;
+
+    private PreparedStatement statement;
 
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
         this.sqlStatements = createMock(Properties.class);
-        this.manager = new CollectionManagerImpl(this.dataSource, this.sqlStatements);
+        this.manager = new TestAbstractCollectionManager(this.dataSource, this.sqlStatements);
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
         this.resultSet = createMock(ResultSet.class);
@@ -50,14 +63,9 @@ public class CollectionManagerImplTest {
         replay(this.dataSource, this.connection);
     }
 
-    @After
-    public void tearDown() {
-        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
-    }
-
     @Test
     public void testGetCore() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.core")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.core")).andReturn("");
         this.statement.setString(1, "type");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
@@ -66,7 +74,7 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testGetCoreResults() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.core")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.core")).andReturn("");
         this.statement.setString(1, "type");
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt(isA(String.class))).andReturn(0).times(4);
@@ -78,7 +86,7 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testGetMesh() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.mesh")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.mesh")).andReturn("");
         this.statement.setString(1, "mesh");
         this.statement.setString(2, "type");
         expect(this.resultSet.next()).andReturn(false);
@@ -88,7 +96,7 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testGetSubset() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.subset")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.subset")).andReturn("");
         this.statement.setString(1, "subset");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
@@ -97,7 +105,7 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testGetTypeString() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse")).andReturn("");
         this.statement.setString(1, "type");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
@@ -106,7 +114,7 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testGetTypeStringChar() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.alpha")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.alpha")).andReturn("");
         this.statement.setString(1, "string");
         this.statement.setString(2, "c");
         expect(this.resultSet.next()).andReturn(false);
@@ -116,7 +124,7 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testSearch() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.search")).andReturn("");
+        expect(this.sqlStatements.getProperty("search")).andReturn("");
         this.statement.setString(1, "((${query})) ");
         this.statement.setString(2, "((${query})) ");
         expect(this.resultSet.next()).andReturn(false);
@@ -126,8 +134,8 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testSearchCountSetOfStringSetOfStringString() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.search.count.0")).andReturn("");
-        expect(this.sqlStatements.getProperty("eresources.search.count.1")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.0")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.1")).andReturn("");
         this.statement.setString(1, "((${query})) ");
         this.statement.setString(2, "type");
         this.statement.setString(3, "type");
@@ -138,8 +146,8 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testSearchCountSetOfStringString() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.search.count.0")).andReturn("");
-        expect(this.sqlStatements.getProperty("eresources.search.count.1")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.0")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.1")).andReturn("");
         this.statement.setString(1, "((${query})) ");
         this.statement.setString(2, "type");
         this.statement.setString(3, "type");
@@ -150,7 +158,7 @@ public class CollectionManagerImplTest {
 
     @Test
     public void testSearchType() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.search.type")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.type")).andReturn("");
         this.statement.setString(1, "((${query})) ");
         this.statement.setString(2, "((${query})) ");
         this.statement.setString(3, "type");

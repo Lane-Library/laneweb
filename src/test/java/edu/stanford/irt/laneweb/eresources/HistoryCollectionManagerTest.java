@@ -57,7 +57,7 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testGetCore() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.core")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.core")).andReturn("");
         this.statement.setString(1, "type");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
@@ -66,7 +66,7 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testGetCoreResults() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.core")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.core")).andReturn("");
         this.statement.setString(1, "type");
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt(isA(String.class))).andReturn(0).times(4);
@@ -78,7 +78,7 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testGetMesh() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.mesh")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.mesh")).andReturn("");
         this.statement.setString(1, "mesh");
         this.statement.setString(2, "type");
         expect(this.resultSet.next()).andReturn(false);
@@ -88,7 +88,7 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testGetSubset() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.subset")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.subset")).andReturn("");
         this.statement.setString(1, "subset");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
@@ -97,7 +97,7 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testGetTypeString() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse")).andReturn("");
         this.statement.setString(1, "type");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
@@ -106,7 +106,7 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testGetTypeStringChar() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.browse.alpha")).andReturn("");
+        expect(this.sqlStatements.getProperty("browse.alpha")).andReturn("");
         this.statement.setString(1, "string");
         this.statement.setString(2, "c");
         expect(this.resultSet.next()).andReturn(false);
@@ -116,7 +116,7 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testSearch() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.search")).andReturn("");
+        expect(this.sqlStatements.getProperty("search")).andReturn("");
         this.statement.setString(1, "((${query})) ");
         this.statement.setString(2, "((${query})) ");
         this.statement.setString(3, "((${query})) ");
@@ -128,8 +128,8 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testSearchCountSetOfStringSetOfStringString() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.search.count.0")).andReturn("");
-        expect(this.sqlStatements.getProperty("eresources.search.count.1")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.0")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.1")).andReturn("");
         this.statement.setString(1, "((${query})) ");
         this.statement.setString(2, "type");
         this.statement.setString(3, "type");
@@ -140,8 +140,8 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testSearchCountSetOfStringString() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.search.count.0")).andReturn("");
-        expect(this.sqlStatements.getProperty("eresources.search.count.1")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.0")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.1")).andReturn("");
         this.statement.setString(1, "((${query})) ");
         this.statement.setString(2, "type");
         this.statement.setString(3, "type");
@@ -152,7 +152,7 @@ public class HistoryCollectionManagerTest {
 
     @Test
     public void testSearchType() throws SQLException {
-        expect(this.sqlStatements.getProperty("eresources.search.type")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.type")).andReturn("");
         this.statement.setString(1, "((${query})) ");
         this.statement.setString(2, "((${query})) ");
         this.statement.setString(3, "((${query})) ");
