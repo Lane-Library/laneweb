@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.SHCCodec;
@@ -29,7 +30,7 @@ public class SHCLoginController {
 
     private static final String ERROR_2 = "no univid from shc; ";
 
-    private static final String ERROR_3 = "missing sunetid for univid: ";
+    private static final String ERROR_3 = "missing active sunetid for univid: ";
 
     private static final String TARGET_URL = "/portals/shc.html?sourceid=shc&u=";
 
@@ -48,8 +49,9 @@ public class SHCLoginController {
     private String getSunetid(final HttpSession session, final String univid) {
         String sunetid = (String) session.getAttribute(Model.SUNETID);
         if (sunetid == null) {
-            sunetid = this.ldapDataAccess.getLdapDataForUnivid(univid).getSunetId();
-            if (sunetid != null) {
+            LDAPData ldapData = this.ldapDataAccess.getLdapDataForUnivid(univid);
+            sunetid = ldapData.getSunetId();
+            if (sunetid != null & ldapData.isActive()) {
                 session.setAttribute(Model.SUNETID, sunetid);
             }
         }

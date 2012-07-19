@@ -71,6 +71,7 @@ public class SHCLoginControllerTest {
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.ldapDataAccess.getLdapDataForUnivid("univid")).andReturn(this.ldapData);
         expect(this.ldapData.getSunetId()).andReturn("ditenus");
+        expect(this.ldapData.isActive()).andReturn(Boolean.TRUE);
         this.session.setAttribute(Model.SUNETID, "ditenus");
         expect(this.request.getContextPath()).andReturn("");
         this.response.sendRedirect("/portals/shc.html?sourceid=shc&u=emrid");
