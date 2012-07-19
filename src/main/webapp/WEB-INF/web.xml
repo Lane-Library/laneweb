@@ -95,6 +95,7 @@
     <filter-mapping>
         <filter-name>LanewebHTTPSFilter</filter-name>
         <url-pattern>/secure/*</url-pattern>
+        <url-pattern>/shclogin</url-pattern>
     </filter-mapping>
     
     <filter-mapping>
