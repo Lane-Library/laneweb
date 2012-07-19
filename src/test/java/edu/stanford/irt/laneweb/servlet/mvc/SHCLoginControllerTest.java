@@ -62,6 +62,24 @@ public class SHCLoginControllerTest {
     }
 
     @Test
+    public void testLoginSunetidNotActive() throws IOException {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.codec.decrypt("emrid")).andReturn("emrid");
+        expect(this.codec.decrypt("univid")).andReturn("univid");
+        this.session.setAttribute(Model.EMRID, "epic-emrid");
+        this.session.setAttribute(Model.UNIVID, "univid");
+        expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
+        expect(this.ldapDataAccess.getLdapDataForUnivid("univid")).andReturn(this.ldapData);
+        expect(this.ldapData.isActive()).andReturn(Boolean.FALSE);
+        expect(this.request.getContextPath()).andReturn("");
+        this.response
+                .sendRedirect("/portals/shc.html?sourceid=shc&u=emrid&error=missing+active+sunetid+for+univid%3A+univid");
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+        this.controller.login("emrid", "univid", this.request, this.response);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+    }
+
+    @Test
     public void testLoginSunetidNotInSession() throws IOException {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.codec.decrypt("emrid")).andReturn("emrid");

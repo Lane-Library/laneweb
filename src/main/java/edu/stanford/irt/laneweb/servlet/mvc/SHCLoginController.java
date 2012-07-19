@@ -50,8 +50,8 @@ public class SHCLoginController {
         String sunetid = (String) session.getAttribute(Model.SUNETID);
         if (sunetid == null) {
             LDAPData ldapData = this.ldapDataAccess.getLdapDataForUnivid(univid);
-            sunetid = ldapData.getSunetId();
-            if (sunetid != null & ldapData.isActive()) {
+            sunetid = (ldapData.isActive()) ? ldapData.getSunetId() : null;
+            if (sunetid != null) {
                 session.setAttribute(Model.SUNETID, sunetid);
             }
         }
