@@ -25,41 +25,33 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class CollectionManagerImpl implements CollectionManager {
-    
+
     private static final String BROWSE = "eresources.browse";
 
     private static final String BROWSE_ALPHA = "eresources.browse.alpha";
 
+    private static final String BROWSE_CORE = "eresources.browse.core";
+
+    private static final String BROWSE_MESH = "eresources.browse.mesh";
+
     private static final String BROWSE_NONALPHA = "eresources.browse.nonalpha";
 
-    private static final String BROWSE_CORE = "eresources.browse.core";
+    private static final String BROWSE_SUBSET = "eresources.browse.subset";
 
     private static final String COUNT = "eresources.search.count.0";
 
     private static final String COUNT_TYPE_UNION = "eresources.search.count.1";
 
-    private static final String BROWSE_MESH ="eresources.browse.mesh";
-
     private static final String SEARCH = "eresources.search";
 
     private static final String SEARCH_TYPE = "eresources.search.type";
 
-    private static final String BROWSE_SUBSET = "eresources.browse.subset";
-
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
-    
-    private Properties sqlStatements;
 
     private DataSource dataSource;
-    
-    protected Connection getConnection() throws SQLException {
-        return this.dataSource.getConnection();
-    }
-    
-    protected String getSQL(String key) {
-        return this.sqlStatements.getProperty(key);
-    }
-    
+
+    private Properties sqlStatements;
+
     public CollectionManagerImpl(final DataSource dataSource, final Properties sqlStatements) {
         this.dataSource = dataSource;
         this.sqlStatements = sqlStatements;
@@ -78,6 +70,7 @@ public class CollectionManagerImpl implements CollectionManager {
         return doGet(BROWSE_MESH, params, null);
     }
 
+    // TODO: remove these when upgrading to eresources-1.8
     public Collection<Eresource> getMeshCore(final String type, final String mesh) {
         throw new UnsupportedOperationException();
     }
@@ -175,6 +168,14 @@ public class CollectionManagerImpl implements CollectionManager {
         params.add(translatedQuery);
         params.add(type);
         return doGet(SEARCH_TYPE, params, query);
+    }
+
+    protected Connection getConnection() throws SQLException {
+        return this.dataSource.getConnection();
+    }
+
+    protected String getSQL(final String key) {
+        return this.sqlStatements.getProperty(key);
     }
 
     private List<Eresource> doGet(final String sqlKey, final Collection<String> params, final String query) {

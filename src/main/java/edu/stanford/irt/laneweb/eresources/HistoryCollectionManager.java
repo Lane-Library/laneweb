@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.ListIterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.sql.DataSource;
@@ -19,152 +20,51 @@ import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class HistoryCollectionManager implements CollectionManager {
 
-    private static final String BROWSE =
-        "SELECT H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-        + "AND H_TYPE.TYPE = ? "
-        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String BROWSE = "eresources.browse";
 
-    private static final String BROWSE_ALPHA =
-        "SELECT H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-        + "AND H_TYPE.TYPE = ? "
-        + "AND NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT(?,'NLS_SORT=GENERIC_BASELETTER') "
-        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String BROWSE_ALPHA = "eresources.browse.alpha";
 
-    private static final String BROWSE_NONALPHA =
-        "SELECT H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-        + "AND H_TYPE.TYPE = ? "
-        + "AND (NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER') "
-        + "OR NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER')) "
-        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String BROWSE_CORE = "eresources.browse.core";
 
-    private static final String CORE =
-        "SELECT H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND H_ERESOURCE.CORE = 'Y'AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-        + "AND H_TYPE.TYPE = ? "
-        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String BROWSE_MESH = "eresources.browse.mesh";
 
-    private static final String COUNT =
-        "WITH FOUND AS (SELECT H_ERESOURCE.ERESOURCE_ID, H_TYPE.TYPE, H_SUBSET.SUBSET FROM H_ERESOURCE, H_TYPE, H_SUBSET "
-        + "WHERE CONTAINS(H_ERESOURCE.TEXT,?) > 0 "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_SUBSET.ERESOURCE_ID(+)) "
-        + "SELECT 'all' AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND";
+    private static final String BROWSE_NONALPHA = "eresources.browse.nonalpha";
 
-    private static final String COUNT_TYPE_UNION = " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE TYPE = ?";
+    private static final String BROWSE_SUBSET = "eresources.browse.subset";
 
-    private static final String MESH =
-        "SELECT H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
-        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
-        + "AND H_MESH.TERM = ? "
-        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-        + "AND H_TYPE.TYPE = ? "
-        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String COUNT = "eresources.search.count.0";
 
-    private static final String SEARCH =
-        "WITH FOUND AS ( "
-        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-        + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE "
-        + "FROM H_ERESOURCE "
-        + "WHERE CONTAINS(TEXT,?,1) > 0 "
-        + "AND CORE = 'Y' "
-        + "UNION "
-        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, SCORE(1) AS SCORE_TEXT, "
-        + "CONTAINS(TITLE,?) AS SCORE_TITLE "
-        + "FROM H_ERESOURCE "
-        + "WHERE CONTAINS(TEXT,?,1) > 0 "
-        + "AND CORE IS NULL "
-        + ") "
-        + "SELECT FOUND.ERESOURCE_ID, FOUND.RECORD_TYPE, FOUND.RECORD_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET "
-        + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
-        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) "
-        + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String COUNT_TYPE_UNION = "eresources.search.count.1";
 
-    private static final String SEARCH_TYPE =
-        "WITH FOUND AS ( "
-        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-        + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE "
-        + "FROM H_ERESOURCE "
-        + "WHERE CONTAINS(TEXT,?,1) > 0 "
-        + "AND CORE = 'Y' "
-        + "UNION "
-        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, SCORE(1) AS SCORE_TEXT, "
-        + "CONTAINS(TITLE,?) AS SCORE_TITLE "
-        + "FROM H_ERESOURCE "
-        + "WHERE CONTAINS(TEXT,?,1) > 0 "
-        + "AND CORE IS NULL "
-        + ") "
-        + "SELECT FOUND.ERESOURCE_ID, FOUND.RECORD_TYPE, FOUND.RECORD_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET "
-        + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
-        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) "
-        + "AND TYPE = ? "
-        + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String SEARCH = "eresources.search";
 
-    private static final String SUBSET =
-        "SELECT H_ERESOURCE.ERESOURCE_ID, H_ERESOURCE.RECORD_TYPE, H_ERESOURCE.RECORD_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_SUBSET "
-        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID "
-        + "AND H_SUBSET.SUBSET = ? "
-        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String SEARCH_TYPE = "eresources.search.type";
 
     private DataSource dataSource;
+
+    private Properties sqlStatements;
+
+    public HistoryCollectionManager(final DataSource dataSource, final Properties sqlStatements) {
+        this.dataSource = dataSource;
+        this.sqlStatements = sqlStatements;
+    }
 
     public Collection<Eresource> getCore(final String type) {
         Collection<String> params = new LinkedList<String>();
         params.add(type);
-        return doGet(CORE, params);
+        return doGet(BROWSE_CORE, params, null);
     }
 
     public Collection<Eresource> getMesh(final String type, final String mesh) {
         Collection<String> params = new LinkedList<String>();
         params.add(mesh);
         params.add(type);
-        return doGet(MESH, params);
+        return doGet(BROWSE_MESH, params, null);
     }
 
     // TODO: remove these when upgrading to eresources-1.8
@@ -175,7 +75,7 @@ public class HistoryCollectionManager implements CollectionManager {
     public Collection<Eresource> getSubset(final String subset) {
         Collection<String> params = new LinkedList<String>();
         params.add(subset);
-        return doGet(SUBSET, params);
+        return doGet(BROWSE_SUBSET, params, null);
     }
 
     public Collection<Eresource> getType(final String type) {
@@ -184,7 +84,7 @@ public class HistoryCollectionManager implements CollectionManager {
         }
         Collection<String> params = new LinkedList<String>();
         params.add(type);
-        return doGet(BROWSE, params);
+        return doGet(BROWSE, params, null);
     }
 
     public Collection<Eresource> getType(final String type, final char alpha) {
@@ -202,7 +102,7 @@ public class HistoryCollectionManager implements CollectionManager {
             params.add(type);
             params.add(alphaString);
         }
-        return doGet(sql, params);
+        return doGet(sql, params, null);
     }
 
     public Collection<Eresource> search(final String query) {
@@ -212,20 +112,22 @@ public class HistoryCollectionManager implements CollectionManager {
         for (int i = 0; i < 4; i++) {
             params.add(translatedQuery);
         }
-        return doGetSearch(SEARCH, params, query);
+        return doGet(SEARCH, params, query);
     }
 
+    // TODO: remove these when upgrading to 1.8
     public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
         return searchCount(types, query);
     }
 
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
-        StringBuffer stringBuffer = new StringBuffer(COUNT);
+        StringBuilder sb = new StringBuilder(this.sqlStatements.getProperty(COUNT));
+        String countTypeUnion = this.sqlStatements.getProperty(COUNT_TYPE_UNION);
         for (int i = 0; i < types.size(); i++) {
-            stringBuffer.append(COUNT_TYPE_UNION);
+            sb.append(' ').append(countTypeUnion);
         }
-        String sql = stringBuffer.toString();
+        String sql = sb.toString();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -242,14 +144,14 @@ public class HistoryCollectionManager implements CollectionManager {
             while (rs.next()) {
                 result.put(rs.getString(1), Integer.valueOf(rs.getInt(2)));
             }
+            return result;
         } catch (SQLException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeConnection(conn);
         }
-        return result;
     }
 
     public Collection<Eresource> searchSubset(final String subset, final String query) {
@@ -264,31 +166,32 @@ public class HistoryCollectionManager implements CollectionManager {
             params.add(translatedQuery);
         }
         params.add(type);
-        return doGetSearch(SEARCH_TYPE, params, query);
+        return doGet(SEARCH_TYPE, params, query);
     }
 
-    public void setDataSource(final DataSource dataSource) {
-        if (null == dataSource) {
-            throw new IllegalArgumentException("null dataSource");
-        }
-        this.dataSource = dataSource;
+    protected Connection getConnection() throws SQLException {
+        return this.dataSource.getConnection();
     }
 
-    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params) {
+    protected String getSQL(final String key) {
+        return this.sqlStatements.getProperty(key);
+    }
+
+    private List<Eresource> doGet(final String sqlKey, final Collection<String> params, final String query) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             conn = this.dataSource.getConnection();
-            stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(this.sqlStatements.getProperty(sqlKey));
             int index = 1;
             for (String param : params) {
                 stmt.setString(index++, param);
             }
             rs = stmt.executeQuery();
-            return parseResultSet(rs);
+            return parseResultSet(rs, query);
         } catch (SQLException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
@@ -296,27 +199,7 @@ public class HistoryCollectionManager implements CollectionManager {
         }
     }
 
-    private Collection<Eresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
-        LinkedList<Eresource> result = doGet(sql, params);
-        LinkedList<Eresource> titleMatches = new LinkedList<Eresource>();
-        String normQuery = query.replaceAll("\\W", "");
-        int i = 0;
-        for (ListIterator<Eresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
-            Eresource eresource = it.next();
-            String normTitle = eresource.getTitle().replaceAll("\\W", "");
-            if (normQuery.equalsIgnoreCase(normTitle)) {
-                titleMatches.add(eresource);
-                it.remove();
-            }
-        }
-        i = 0;
-        for (Eresource eresource : titleMatches) {
-            result.add(i++, eresource);
-        }
-        return result;
-    }
-
-    private LinkedList<Eresource> parseResultSet(final ResultSet rs) throws SQLException {
+    private List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         EresourceImpl eresource = null;
         VersionImpl version = null;

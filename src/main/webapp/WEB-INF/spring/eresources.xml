@@ -8,7 +8,7 @@
         <constructor-arg ref="javax.sql.DataSource/eresources"/>
         <constructor-arg>
             <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-                <property name="location" value="classpath:edu/stanford/irt/laneweb/eresources/sql.properties"/>
+                <property name="location" value="classpath:edu/stanford/irt/laneweb/eresources/eresources-sql.properties"/>
             </bean>
         </constructor-arg>
     </bean>
