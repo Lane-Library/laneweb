@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Properties;
+
+import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
@@ -15,6 +18,10 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends CollectionManagerImpl {
+
+    public AbstractSuggestCollectionManager(DataSource dataSource, Properties sqlStatements) {
+        super(dataSource, sqlStatements);
+    }
 
     protected QueryNormalizer queryNormalizer = new QueryNormalizer();
 

@@ -2,9 +2,16 @@ package edu.stanford.irt.laneweb.suggest;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Properties;
+
+import javax.sql.DataSource;
 
 public class EresourceCollectionManager extends AbstractSuggestCollectionManager {
   
+    public EresourceCollectionManager(DataSource dataSource, Properties sqlStatements) {
+        super(dataSource, sqlStatements);
+    }
+
     private static final String SEARCH = 
     "WITH FOUND AS( "
     + "SELECT TITLE, "

@@ -8,7 +8,10 @@
         class="edu.stanford.irt.suggest.EresourceSuggestionManager">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.suggest.EresourceCollectionManager">
-                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+                <constructor-arg ref="javax.sql.DataSource/eresources"/>
+                <constructor-arg>
+                    <props/>
+                </constructor-arg>
             </bean>
         </property>
     </bean>
@@ -17,7 +20,10 @@
         class="edu.stanford.irt.suggest.EresourceSuggestionManager">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.suggest.HistoryCollectionManager">
-                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+                <constructor-arg ref="javax.sql.DataSource/eresources"/>
+                <constructor-arg>
+                    <props/>
+                </constructor-arg>
             </bean>
         </property>
     </bean>
