@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -28,11 +29,14 @@ public class BassettCollectionManagerTest {
     private ResultSet resultSet;
 
     private PreparedStatement statement;
+    
+    private Properties sqlStatements;
 
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        this.manager = new BassettCollectionManager(this.dataSource);
+        this.sqlStatements = createMock(Properties.class);
+        this.manager = new BassettCollectionManager(this.dataSource, this.sqlStatements);
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
         this.resultSet = createMock(ResultSet.class);
@@ -41,6 +45,7 @@ public class BassettCollectionManagerTest {
     @Test
     public void testGetById() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.sqlStatements.getProperty("search.number")).andReturn("");
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         this.statement.setString(1, "bn");
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
@@ -51,14 +56,15 @@ public class BassettCollectionManagerTest {
         this.resultSet.close();
         this.statement.close();
         this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
         this.manager.getById("bn");
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
     }
 
     @Test
     public void testGetRegion() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.sqlStatements.getProperty("browse.region")).andReturn("");
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         this.statement.setString(1, "region");
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
@@ -69,14 +75,15 @@ public class BassettCollectionManagerTest {
         this.resultSet.close();
         this.statement.close();
         this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
         this.manager.getRegion("region");
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
     }
 
     @Test
     public void testSearch() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.sqlStatements.getProperty("search")).andReturn("");
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         this.statement.setString(eq(1), isA(String.class));
         this.statement.setString(eq(2), isA(String.class));
@@ -88,14 +95,15 @@ public class BassettCollectionManagerTest {
         this.resultSet.close();
         this.statement.close();
         this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
         this.manager.search("query");
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
     }
 
     @Test
     public void testSearchCount() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.sqlStatements.getProperty("search.count")).andReturn("");
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         this.statement.setString(eq(1), isA(String.class));
         this.statement.setString(eq(2), isA(String.class));
@@ -107,14 +115,15 @@ public class BassettCollectionManagerTest {
         this.resultSet.close();
         this.statement.close();
         this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
         this.manager.searchCount("query");
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
     }
 
     @Test
     public void testSearchRegion() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.sqlStatements.getProperty("search.region")).andReturn("");
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         this.statement.setString(eq(1), isA(String.class));
         this.statement.setString(eq(2), isA(String.class));
@@ -127,8 +136,8 @@ public class BassettCollectionManagerTest {
         this.resultSet.close();
         this.statement.close();
         this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
         this.manager.searchRegion("region", "query");
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
     }
 }
