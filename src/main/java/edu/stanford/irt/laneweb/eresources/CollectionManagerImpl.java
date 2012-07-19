@@ -126,7 +126,7 @@ public class CollectionManagerImpl implements CollectionManager {
         StringBuilder sb = new StringBuilder(this.sqlStatements.getProperty(COUNT));
         String countTypeUnion = this.sqlStatements.getProperty(COUNT_TYPE_UNION);
         for (int i = 0; i < types.size(); i++) {
-            sb.append(countTypeUnion);
+            sb.append(' ').append(countTypeUnion);
         }
         String sql = sb.toString();
         Connection conn = null;
@@ -217,7 +217,7 @@ public class CollectionManagerImpl implements CollectionManager {
                         eresource.setScore(Integer.MAX_VALUE);
                     } else {
                         // core material weighted * 3
-                        int coreFactor = "Y".equals(rs.getString("BROWSE_CORE")) ? 3 : 1;
+                        int coreFactor = "Y".equals(rs.getString("CORE")) ? 3 : 1;
                         // weighted oracle text scores for title and text
                         // averaged
                         int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
