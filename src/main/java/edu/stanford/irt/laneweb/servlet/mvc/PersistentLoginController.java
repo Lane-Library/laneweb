@@ -59,10 +59,6 @@ public class PersistentLoginController {
     }
 
 
-    @RequestMapping(value =  "/secure/login.html") // if not javascript
-    public String redirectToIndex(final String url, final HttpServletRequest request, final HttpServletResponse response) {
-        return "redirect:/index.html";
-    }
 
 
 
