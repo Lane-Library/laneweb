@@ -59,6 +59,13 @@ public class PersistentLoginController {
     }
 
 
+    @RequestMapping(value =  "/secure/login.html") // if not javascript
+    public String redirectToIndex(final String url, final HttpServletRequest request, final HttpServletResponse response) {
+        return "redirect:/index.html";
+    }
+
+
+
     @Autowired
     public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
         this.codec = codec;
@@ -142,6 +149,8 @@ public class PersistentLoginController {
         }
     }
 
+
+    
     /**
      * set the lane-user cookie max age to zero.
      * 
