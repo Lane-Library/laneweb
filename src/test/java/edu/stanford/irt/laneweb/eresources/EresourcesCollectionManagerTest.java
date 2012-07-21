@@ -2,25 +2,14 @@ package edu.stanford.irt.laneweb.eresources;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Properties;
 
-import javax.sql.DataSource;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.stanford.irt.eresources.impl.LinkImpl;
-import edu.stanford.irt.eresources.impl.VersionImpl;
 
 public class EresourcesCollectionManagerTest {
 
@@ -33,7 +22,7 @@ public class EresourcesCollectionManagerTest {
         this.manager = new EresourcesCollectionManager(null, null);
         this.resultSet = createMock(ResultSet.class);
     }
-    
+
     @Test
     public void testParseResultSet() throws SQLException {
         expect(this.resultSet.next()).andReturn(true);

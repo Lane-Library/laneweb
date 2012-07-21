@@ -9,6 +9,7 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class EzproxyServersWriter {
@@ -54,14 +55,14 @@ public class EzproxyServersWriter {
     
     private DataSource dataSource;
 
-    public void setDataSource(final DataSource dataSource) {
-        if (null == dataSource) {
-            throw new IllegalArgumentException("null dataSource");
-        }
+    public EzproxyServersWriter(final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     public void write(final OutputStream outputStream) throws IOException {
+        if (outputStream == null) {
+            throw new LanewebException("null outputStream");
+        }
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -84,7 +85,7 @@ public class EzproxyServersWriter {
             }
             outputStream.write(SUL);
         } catch (SQLException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);

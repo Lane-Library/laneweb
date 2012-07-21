@@ -26,6 +26,7 @@ import org.apache.cocoon.xml.XMLBaseSupport;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.cocoon.xml.dom.DOMBuilder;
 import org.apache.excalibur.source.Source;
+import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.xml.xpath.PrefixResolver;
 import org.apache.excalibur.xml.xpath.XPathProcessor;
 import org.apache.excalibur.xmlizer.XMLizer;
@@ -111,12 +112,36 @@ public class XIncludePipeTest {
     }
 
     @Test
+    public void testCharactersNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.characters(new char[0], 0, 0);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
     public void testComment() throws SAXException {
         char[] comment = new char[0];
         this.xmlConsumer.comment(comment, 0, 0);
         replay(this.xmlConsumer);
         this.pipe.comment(comment, 0, 0);
         verify(this.xmlConsumer);
+    }
+
+    @Test
+    public void testCommentNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.comment(new char[0], 0, 0);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
     }
 
     @Test
@@ -128,11 +153,36 @@ public class XIncludePipeTest {
     }
 
     @Test
+    public void testEndCDATANotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.endCDATA();
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
     public void testEndDocument() throws SAXException {
         this.xmlConsumer.endDocument();
         replay(this.xmlConsumer);
         this.pipe.endDocument();
         verify(this.xmlConsumer);
+    }
+
+    @Test
+    public void testEndELementNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        this.xmlBaseSupport.endElement("uri", "localname", "qname");
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.endElement("uri", "localname", "qname");
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
     }
 
     @Test
@@ -142,6 +192,18 @@ public class XIncludePipeTest {
         replay(this.xmlConsumer, this.xmlBaseSupport);
         this.pipe.endElement("uri", "localname", "qname");
         verify(this.xmlConsumer, this.xmlBaseSupport);
+    }
+
+    @Test
+    public void testEndEntityNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.endEntity("name");
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
     }
 
     @Test
@@ -198,6 +260,42 @@ public class XIncludePipeTest {
     }
 
     @Test
+    public void testIgnorableWhitespaceNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.ignorableWhitespace(new char[0], 0, 0);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
+    public void testPrefixMappingNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.endPrefixMapping("prefix");
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
+    public void testProcessingInstructionNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.processingInstruction("target", "data");
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
     public void testProcessingInstructionStringString() throws SAXException {
         this.xmlConsumer.processingInstruction("target", "data");
         replay(this.xmlConsumer);
@@ -250,6 +348,18 @@ public class XIncludePipeTest {
     }
 
     @Test
+    public void testSkippedEntityNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.skippedEntity("name");
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
     public void testSkippedEntityString() throws SAXException {
         this.xmlConsumer.skippedEntity("name");
         replay(this.xmlConsumer);
@@ -266,6 +376,31 @@ public class XIncludePipeTest {
     }
 
     @Test
+    public void testStartCDATANotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.startCDATA();
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
+    public void testStartElementNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        this.xmlBaseSupport.startElement(eq("uri"), eq("localname"), eq("qName"), eq(this.attributes));
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.startElement("uri", "localname", "qName", this.attributes);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
     public void testStartElementStringStringStringAttributes() throws SAXException {
         this.xmlConsumer.startElement("uri", "localname", "qName", this.attributes);
         replay(this.xmlConsumer);
@@ -274,11 +409,35 @@ public class XIncludePipeTest {
     }
 
     @Test
+    public void testStartEntityNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.startEntity("name");
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    @Test
     public void testStartEntityString() throws SAXException {
         this.xmlConsumer.startEntity("name");
         replay(this.xmlConsumer);
         this.pipe.startEntity("name");
         verify(this.xmlConsumer);
+    }
+
+    @Test
+    public void testStartPrefixMappingNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        setupNotEvaluating();
+        replay(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        this.pipe.startPrefixMapping("", "");
+        this.pipe.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
+        verify(this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
+                this.serviceManager, this.saxParser, this.xmlBaseSupport);
     }
 
     @Test
@@ -435,5 +594,17 @@ public class XIncludePipeTest {
         }
         verify(locator, this.sourceResolver, this.attributes, this.source, this.inputStream, this.validity, this.xmlConsumer,
                 this.serviceManager, this.saxParser, this.xmlBaseSupport);
+    }
+
+    private void setupNotEvaluating() throws SAXException, SourceNotFoundException, IOException {
+        this.exceptionListener.setFailFast(false);
+        this.xmlBaseSupport.startElement("http://www.w3.org/2001/XInclude", "include", "xi:include", this.attributes);
+        expect(this.attributes.getValue("", "href")).andReturn("foo");
+        expect(this.attributes.getValue("", "parse")).andReturn("text");
+        expect(this.attributes.getValue("", "xpointer")).andReturn(null);
+        expect(this.xmlBaseSupport.makeAbsolute("foo")).andReturn(this.source);
+        this.validity.addSource(this.source);
+        expect(this.source.getInputStream()).andThrow(new IOException());
+        this.xmlBaseSupport.startElement("http://www.w3.org/2001/XInclude", "fallback", "fallback", this.attributes);
     }
 }

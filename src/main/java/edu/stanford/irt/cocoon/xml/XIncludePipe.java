@@ -317,6 +317,12 @@ public class XIncludePipe extends AbstractXMLPipe {
     private boolean isEvaluatingContent() {
         return (this.xIncludeElementLevel == 0)
                 || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
+//        boolean xincludeElementLevelIsZero = this.xIncludeElementLevel == 0;
+//        boolean fallbackElementLevelGreaterThanZero = this.fallbackElementLevel > 0;
+//        boolean fallbackElementLevelEqualsUseFallbackLevel = this.fallbackElementLevel == this.useFallbackLevel;
+//        boolean fallbackElementLevelGreaterThanZeroAndFallbackElementLevelEqualsUseFallbackLevel = fallbackElementLevelGreaterThanZero && fallbackElementLevelEqualsUseFallbackLevel;
+//        boolean isEvaluatingContent = xincludeElementLevelIsZero || fallbackElementLevelGreaterThanZeroAndFallbackElementLevelEqualsUseFallbackLevel;
+//        return isEvaluatingContent;
     }
 
     private boolean isLoopInclusion(final String uri, final String xpointer) {

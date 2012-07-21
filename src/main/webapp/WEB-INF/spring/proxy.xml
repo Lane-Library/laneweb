@@ -26,7 +26,7 @@
     </bean>
     
     <bean class="edu.stanford.irt.laneweb.proxy.EzproxyServersWriter">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+        <constructor-arg ref="javax.sql.DataSource/eresources"/>
     </bean>
     
     <bean name="org.apache.cocoon.selection.Selector/proxy-links"
@@ -34,7 +34,7 @@
     
     <bean name="laneweb.context.ezproxy-key"
         class="java.lang.String">
-        <constructor-arg value="#{contextAttributes['laneweb.context.ezproxy-key']}"></constructor-arg>
+        <constructor-arg value="#{contextAttributes['laneweb.context.ezproxy-key']}"/>
     </bean>
 
 </beans>
