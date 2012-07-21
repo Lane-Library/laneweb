@@ -19,39 +19,41 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.eresources.impl.LinkImpl;
+import edu.stanford.irt.eresources.impl.VersionImpl;
+
 public class EresourcesCollectionManagerTest {
-
-    private Connection connection;
-
-    private DataSource dataSource;
 
     private AbstractCollectionManager manager;
 
     private ResultSet resultSet;
 
-    private PreparedStatement statement;
-
-    private Properties sqlStatements;
-
     @Before
     public void setUp() throws Exception {
-        this.dataSource = createMock(DataSource.class);
-        this.sqlStatements = createMock(Properties.class);
-        this.manager = new EresourcesCollectionManager(this.dataSource, this.sqlStatements);
-        this.connection = createMock(Connection.class);
-        this.statement = createMock(PreparedStatement.class);
+        this.manager = new EresourcesCollectionManager(null, null);
         this.resultSet = createMock(ResultSet.class);
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        expect(this.statement.executeQuery()).andReturn(this.resultSet);
-        this.resultSet.close();
-        this.statement.close();
-        this.connection.close();
-        replay(this.dataSource, this.connection);
     }
-
-    @After
-    public void tearDown() {
-        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
+    
+    @Test
+    public void testParseResultSet() throws SQLException {
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
+        expect(this.resultSet.getInt("RECORD_ID")).andReturn(1);
+        expect(this.resultSet.getString("RECORD_TYPE")).andReturn("type");
+        expect(this.resultSet.getString("TITLE")).andReturn("title");
+        expect(this.resultSet.getString("E_DESCRIPTION")).andReturn("description");
+        expect(this.resultSet.getInt("VERSION_ID")).andReturn(1);
+        expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher");
+        expect(this.resultSet.getString("HOLDINGS")).andReturn("holdings");
+        expect(this.resultSet.getString("DATES")).andReturn("dates");
+        expect(this.resultSet.getString("V_DESCRIPTION")).andReturn("description");
+        expect(this.resultSet.getInt("LINK_ID")).andReturn(1);
+        expect(this.resultSet.getString("URL")).andReturn("url");
+        expect(this.resultSet.getString("LABEL")).andReturn("label");
+        expect(this.resultSet.getString("INSTRUCTION")).andReturn("instruction");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.resultSet);
+        this.manager.parseResultSet(this.resultSet, null);
+        verify(this.resultSet);
     }
 }
