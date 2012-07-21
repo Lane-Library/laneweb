@@ -11,26 +11,23 @@ public class ProxyLinks {
     private List<Pattern> noProxyRegex;
 
     private List<Pattern> proxyRegex;
-
-    public Boolean getProxyLinks(final IPGroup ipGroup, final String remoteAddress) {
-        if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
-            return Boolean.TRUE;
+    
+    public ProxyLinks(final List<String> proxyRegex, final List<String> noProxyRegex) {
+        this.proxyRegex = new LinkedList<Pattern>();
+        for (String pattern : proxyRegex) {
+            this.proxyRegex.add(Pattern.compile(pattern));
         }
-        return Boolean.valueOf(proxyLinks(remoteAddress));
-    }
-
-    public void setNoProxyRegex(final List<String> noProxyRegex) {
         this.noProxyRegex = new LinkedList<Pattern>();
         for (String pattern : noProxyRegex) {
             this.noProxyRegex.add(Pattern.compile(pattern));
         }
     }
 
-    public void setProxyRegex(final List<String> proxyRegex) {
-        this.proxyRegex = new LinkedList<Pattern>();
-        for (String pattern : proxyRegex) {
-            this.proxyRegex.add(Pattern.compile(pattern));
+    public Boolean getProxyLinks(final IPGroup ipGroup, final String remoteAddress) {
+        if (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup)) {
+            return Boolean.TRUE;
         }
+        return Boolean.valueOf(proxyLinks(remoteAddress));
     }
 
     protected boolean proxyLinks(final String ip) {

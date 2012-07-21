@@ -96,7 +96,8 @@
 
     <bean id="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"
         class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks">
-        <property name="proxyRegex">
+        <!-- regular expressions for IPs to be proxied TODO: change to CIDRRanges -->
+        <constructor-arg>
             <list>
                 <!-- VPN 171.65.16.0 - 171.65.31.255 -->
                 <value>^171\.66\.(?:1[6-9]|2[0-9]|3[0-1])\.\S+</value>
@@ -109,8 +110,9 @@
                 <!-- hospital 171.65.200.0 - 171.65.255.255 -->
                 <value>^171\.65\.2[0-5][0-9]\.\S+</value>
             </list>
-        </property>
-        <property name="noProxyRegex">
+        </constructor-arg>
+        <!-- regular expressions for IPs to NOT be proxied -->
+        <constructor-arg>
             <list>
                 <value>^171\.6[4-7]\.\S+</value>
                 <!-- campus wireless 10.32.0.0 through 10.33.255.255 -->
@@ -118,7 +120,7 @@
                 <!-- library wireless 10.39.32.1 through 10.39.47.255 -->
                 <value>^10\.39\.(?:3[2-9]|4[0-7])\.\S+</value>
             </list>
-        </property>
+        </constructor-arg>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"
