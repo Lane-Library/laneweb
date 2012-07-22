@@ -18,6 +18,28 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class XPathProcessorImpl implements XPathProcessor {
 
+    private static final class LanewebNamespaceContext implements NamespaceContext {
+
+        private PrefixResolver resolver;
+
+        private LanewebNamespaceContext(final PrefixResolver resolver) {
+            this.resolver = resolver;
+        }
+
+        public String getNamespaceURI(final String prefix) {
+            return this.resolver.prefixToNamespace(prefix);
+        }
+
+        public String getPrefix(final String namespaceURI) {
+            throw new UnsupportedOperationException();
+        }
+
+        @SuppressWarnings("rawtypes")
+        public Iterator getPrefixes(final String namespaceURI) {
+            throw new UnsupportedOperationException();
+        }
+    }
+
     private XPathFactory factory;
 
     public XPathProcessorImpl() {
@@ -63,21 +85,7 @@ public class XPathProcessorImpl implements XPathProcessor {
             xpath = this.factory.newXPath();
         }
         if (null != resolver) {
-            xpath.setNamespaceContext(new NamespaceContext() {
-
-                public String getNamespaceURI(final String prefix) {
-                    return resolver.prefixToNamespace(prefix);
-                }
-
-                public String getPrefix(final String namespaceURI) {
-                    throw new UnsupportedOperationException();
-                }
-
-                @SuppressWarnings("rawtypes")
-                public Iterator getPrefixes(final String namespaceURI) {
-                    throw new UnsupportedOperationException();
-                }
-            });
+            xpath.setNamespaceContext(new LanewebNamespaceContext(resolver));
         }
         try {
             return (NodeList) xpath.evaluate(str, node, XPathConstants.NODESET);

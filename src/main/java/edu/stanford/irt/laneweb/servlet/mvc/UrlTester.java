@@ -1,12 +1,14 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
@@ -39,9 +41,12 @@ public class UrlTester {
             baos.write(headers);
             response.setHeader("Content-Type", "text/plain");
             response.getOutputStream().write(baos.toByteArray());
-        } catch (Exception e) {
-            httpGet.abort();
+        } catch (ClientProtocolException e) {
             throw new LanewebException(e);
+        } catch (IOException e) {
+            throw new LanewebException(e);
+        } finally {
+            httpGet.abort();
         }
     }
 

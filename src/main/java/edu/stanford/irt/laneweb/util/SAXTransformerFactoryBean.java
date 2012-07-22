@@ -9,7 +9,7 @@ public class SAXTransformerFactoryBean implements FactoryBean<SAXTransformerFact
 
     private SAXTransformerFactory factory;
 
-    public SAXTransformerFactory getObject() throws Exception {
+    public SAXTransformerFactory getObject() {
         return this.factory;
     }
 

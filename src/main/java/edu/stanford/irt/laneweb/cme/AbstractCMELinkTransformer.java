@@ -15,7 +15,7 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer imp
 
     private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
 
-    protected String emrid;
+    private String emrid;
 
     public void setModel(final Map<String, Object> model) {
         this.emrid = ModelUtil.getString(model, Model.EMRID);
@@ -40,5 +40,9 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer imp
             }
         }
         return false;
+    }
+    
+    protected String getEmrid() {
+        return this.emrid;
     }
 }

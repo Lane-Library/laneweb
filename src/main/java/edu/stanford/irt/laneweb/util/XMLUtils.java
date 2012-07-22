@@ -19,10 +19,8 @@ import org.xml.sax.SAXException;
 
 /**
  * XML utility methods.
- * 
- * @version $Id: XMLUtils.java 587751 2007-10-24 02:41:36Z vgritsenko $
  */
-public class XMLUtils {
+public final class XMLUtils {
 
     /**
      * Empty attributes immutable object.

@@ -21,17 +21,31 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent, ParametersAware {
 
+    // the html parser creates screwy processing instructions from the classes
+    // xml. TODO: this is specific to the classes yet this class is can be used
+    // generally
+    private static final class ProcessingInstructionSwallowingPipe extends EmbeddedXMLPipe {
+
+        public ProcessingInstructionSwallowingPipe(final XMLConsumer consumer) {
+            super(consumer);
+        }
+
+        @Override
+        public void processingInstruction(final String target, final String data) throws SAXException {
+        }
+    }
+
     private StringBuilder content = new StringBuilder();
 
     private String elementName = "event_description";
 
     private boolean inElement = false;
 
+    private SAXParser saxParser;
+
     private String type;
 
     private XMLConsumer xmlConsumer;
-
-    private SAXParser saxParser;
 
     public TextNodeParsingTransformer(final String type, final SAXParser saxParser) {
         this.type = type;
@@ -53,13 +67,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
             this.inElement = false;
             StringReader stringReader = new StringReader(this.content.toString());
             InputSource inputSource = new InputSource(stringReader);
-            XMLConsumer pipe = new EmbeddedXMLPipe(this.xmlConsumer) {
-
-                @Override
-                // TODO: this shouldn't be here, the html parser creates screwy processing instructions from the classes xml.
-                public void processingInstruction(final String target, final String data) throws SAXException {
-                }
-            };
+            XMLConsumer pipe = new ProcessingInstructionSwallowingPipe(this.xmlConsumer);
             try {
                 this.saxParser.parse(inputSource, pipe, pipe);
             } catch (IOException e) {

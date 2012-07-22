@@ -28,9 +28,9 @@ public class HttpResource extends UrlResource {
         this.authorization = authorization;
     }
 
-    public HttpResource(final URL url, final String userName, final String password) throws MalformedURLException {
+    public HttpResource(final URL url, final String userName, final String password) throws IOException {
         this(url);
-        this.authorization = new BASE64Encoder().encode((userName.concat(":").concat(password)).getBytes());
+        this.authorization = new BASE64Encoder().encode((userName.concat(":").concat(password)).getBytes("UTF-8"));
     }
 
     @Override

@@ -52,7 +52,7 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        if (this.emrid != null && URL.equals(localName)) {
+        if (getEmrid() != null && URL.equals(localName)) {
             this.isSearchUrlElement = true;
             this.characters.setLength(0);
         }

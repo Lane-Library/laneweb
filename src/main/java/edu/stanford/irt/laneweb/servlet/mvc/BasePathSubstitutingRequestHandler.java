@@ -28,7 +28,7 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
 
     private static class CachedResponseResource implements Resource {
 
-        protected Resource resource;
+        private Resource resource;
 
         private CachedResponse cachedResponse;
 

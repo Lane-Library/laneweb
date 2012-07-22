@@ -6,7 +6,11 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import edu.stanford.irt.suggest.QueryNormalizer;
+
 public class HistoryCollectionManager extends AbstractSuggestCollectionManager {
+
+    private QueryNormalizer queryNormalizer = new QueryNormalizer();
 
     public HistoryCollectionManager(DataSource dataSource, Properties sqlStatements) {
         super(dataSource, sqlStatements);

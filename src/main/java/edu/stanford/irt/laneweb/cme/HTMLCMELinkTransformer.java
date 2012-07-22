@@ -35,7 +35,8 @@ public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String name, final Attributes atts)
             throws SAXException {
-        if (null != this.emrid) {
+        String emrid = getEmrid();
+        if (null != emrid) {
             if (ANCHOR.equals(localName)) {
                 String link = atts.getValue(HREF);
                 if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {
@@ -48,7 +49,7 @@ public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {
                 String value = atts.getValue(VALUE);
                 if (null != value && REPLACEMENT_STRING.equals(value)) {
                     AttributesImpl newAttributes = new AttributesImpl(atts);
-                    newAttributes.setValue(newAttributes.getIndex(VALUE), this.emrid);
+                    newAttributes.setValue(newAttributes.getIndex(VALUE), emrid);
                     this.xmlConsumer.startElement(uri, localName, name, newAttributes);
                     return;
                 }

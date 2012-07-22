@@ -19,12 +19,18 @@ import org.apache.cocoon.components.treeprocessor.variables.VariableResolver;
 import org.apache.cocoon.components.treeprocessor.variables.VariableResolverFactory;
 import org.apache.cocoon.sitemap.PatternException;
 import org.apache.cocoon.util.location.Location;
+import org.apache.cocoon.util.location.LocationUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.WebApplicationContext;
 
 public class LanewebSitemapLanguage extends SitemapLanguage implements ApplicationContextAware {
+
+    // TODO: not sure I need this anymore
+    static {
+        LocationUtils.addFinder(new LanewebLocationFinder());
+    }
 
     private ApplicationContext applicationContext;
 

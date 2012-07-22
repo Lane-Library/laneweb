@@ -37,8 +37,7 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
-            throws Exception {
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws MalformedURLException {
         String requestURI = request.getRequestURI();
         String contextPath = request.getContextPath();
         String servletPath = requestURI.substring(contextPath.length());

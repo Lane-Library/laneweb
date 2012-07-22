@@ -16,8 +16,6 @@ import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends AbstractCollectionManager {
 
-    protected QueryNormalizer queryNormalizer = new QueryNormalizer();
-
     public AbstractSuggestCollectionManager(final DataSource dataSource, final Properties sqlStatements) {
         super(dataSource, sqlStatements);
     }

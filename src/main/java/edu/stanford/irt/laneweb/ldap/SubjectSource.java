@@ -39,8 +39,8 @@ public class SubjectSource {
             LoginContext loginContext = new LoginContext(this.name);
             loginContext.login();
             this.subject = loginContext.getSubject();
-            for (KerberosTicket ticket : this.subject.getPrivateCredentials(KerberosTicket.class)) {
-                this.ticket = ticket;
+            for (KerberosTicket subjectTicket : this.subject.getPrivateCredentials(KerberosTicket.class)) {
+                this.ticket = subjectTicket;
             }
         }
     }

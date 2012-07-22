@@ -34,7 +34,7 @@ public class URIResolverImpl implements URIResolver {
     public javax.xml.transform.Source resolve(final String href, final String base) throws TransformerException {
         org.apache.excalibur.source.Source source = null;
         try {
-            if (base == null || href.indexOf(":") > 1) {
+            if (base == null || href.indexOf(':') > 1) {
                 // Null base - href must be an absolute URL
                 source = this.sourceResolver.resolveURI(href);
             } else if (href.length() == 0) {

@@ -11,10 +11,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class LanewebLocationFinder implements LocationFinder {
 
-    static {
-        LocationUtils.addFinder(new LanewebLocationFinder());
-    }
-
     // cut and pasted from AvalonNamespaceHandler which is no longer loaded
     public Location getLocation(final Object obj, final String description) {
         if (obj instanceof Configuration) {

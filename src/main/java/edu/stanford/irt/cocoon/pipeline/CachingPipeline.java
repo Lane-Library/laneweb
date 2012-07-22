@@ -204,12 +204,12 @@ public class CachingPipeline extends NonCachingPipeline {
     private CachedResponse getValidCachedResponse(final PipelineCacheKey key, final List<SourceValidity> validities) {
         CachedResponse response = this.cache.get(key);
         if (response != null) {
-            SourceValidity[] cachedValidities = response.getValidityObjects();
-            if (cachedValidities == null || cachedValidities.length != validities.size()) {
+            SourceValidity[] responseValidities = response.getValidityObjects();
+            if (responseValidities == null || responseValidities.length != validities.size()) {
                 response = null;
             } else {
-                for (int i = 0; i < cachedValidities.length; i++) {
-                    SourceValidity sourceValidity = cachedValidities[i];
+                for (int i = 0; i < responseValidities.length; i++) {
+                    SourceValidity sourceValidity = responseValidities[i];
                     int validity = sourceValidity == null ? SourceValidity.INVALID : sourceValidity.isValid();
                     if (validity == SourceValidity.INVALID) {
                         response = null;
