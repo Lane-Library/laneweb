@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.io.IOException;
+
 import org.apache.http.client.HttpClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -17,8 +17,6 @@ public class MetaSearchManagerSource {
     private AbstractXmlApplicationContext context;
 
     private HttpClient httpClient;
-
-    private final Logger log = LoggerFactory.getLogger(MetaSearchManagerSource.class);
 
     private MetaSearchManager manager;
 
@@ -47,16 +45,12 @@ public class MetaSearchManagerSource {
         return this.searchCacheManager;
     }
 
-    public void reload(final String url, final String login, final String password) {
-        try {
-            AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);
-            this.manager = (MetaSearchManager) context.getBean("manager");
-            this.httpClient = (HttpClient) context.getBean("httpClient");
-            this.searchCacheManager = (SearchCacheManager) context.getBean("searchCacheManager");
-            this.context.destroy();
-            this.context = context;
-        } catch (Exception e) {
-            this.log.error(e.getMessage(), e);
-        }
+    public void reload(final String url, final String login, final String password) throws IOException {
+        AbstractXmlApplicationContext newContext = new HttpApplicationContext(url, login, password);
+        this.manager = (MetaSearchManager) newContext.getBean("manager");
+        this.httpClient = (HttpClient) newContext.getBean("httpClient");
+        this.searchCacheManager = (SearchCacheManager) newContext.getBean("searchCacheManager");
+        this.context.destroy();
+        this.context = newContext;
     }
 }

@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,7 @@ public class SearchContextReloaderController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView reloadContext(@RequestParam final String release, @RequestParam final String sunetid,
-            @RequestParam final String password) {
+            @RequestParam final String password) throws IOException {
         if (!"".equals(release) && !"".equals(sunetid) && !"".equals(password)) {
             this.msms.reload(this.svnUrlProject.concat(release).concat(this.svnUrlPath), sunetid, password);
         }

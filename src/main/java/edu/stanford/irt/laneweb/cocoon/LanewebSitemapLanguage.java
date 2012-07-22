@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
@@ -24,6 +25,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.WebApplicationContext;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class LanewebSitemapLanguage extends SitemapLanguage implements ApplicationContextAware {
 
@@ -47,8 +50,12 @@ public class LanewebSitemapLanguage extends SitemapLanguage implements Applicati
      * Build a processing tree from a <code>Configuration</code>.
      */
     @Override
-    public ProcessingNode build(final Configuration tree, final String location) throws Exception {
-        return createTree(tree);
+    public ProcessingNode build(final Configuration tree, final String location) {
+        try {
+            return createTree(tree);
+        } catch (Exception e) {
+            throw new LanewebException(e);
+        }
     }
 
     @Override
@@ -104,7 +111,7 @@ public class LanewebSitemapLanguage extends SitemapLanguage implements Applicati
 
     @SuppressWarnings("rawtypes")
     @Override
-    public ProcessingNode setupNode(final ProcessingNode node, final Configuration config) throws Exception {
+    public ProcessingNode setupNode(final ProcessingNode node, final Configuration config) throws ServiceException, ConfigurationException {
         Location location = getLocation(config);
         if (node instanceof AbstractProcessingNode) {
             ((AbstractProcessingNode) node).setLocation(location);
@@ -118,7 +125,11 @@ public class LanewebSitemapLanguage extends SitemapLanguage implements Applicati
             ((ParameterizableProcessingNode) node).setParameters(params);
         }
         if (node instanceof Initializable) {
-            ((Initializable) node).initialize();
+            try {
+                ((Initializable) node).initialize();
+            } catch (Exception e) {
+                throw new LanewebException(e);
+            }
         }
         return node;
     }

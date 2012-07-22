@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.util;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import edu.stanford.irt.search.impl.specials.socrates.RingBuffer;
 
@@ -22,9 +23,9 @@ public class BasePathSubstitutingInputStream extends FilterInputStream {
 
     private boolean substituting = false;
 
-    public BasePathSubstitutingInputStream(final InputStream in, final String basePath) {
+    public BasePathSubstitutingInputStream(final InputStream in, final String basePath) throws UnsupportedEncodingException {
         super(in);
-        this.basePathArray = basePath.getBytes();
+        this.basePathArray = basePath.getBytes("UTF-8");
         this.ringBuffer = new RingBuffer(5);
     }
 

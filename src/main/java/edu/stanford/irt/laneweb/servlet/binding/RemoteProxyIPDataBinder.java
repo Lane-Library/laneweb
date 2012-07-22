@@ -35,19 +35,19 @@ public class RemoteProxyIPDataBinder implements DataBinder {
             session.setAttribute(Model.IPGROUP, ipGroup);
         }
         model.put(Model.IPGROUP, ipGroup);
-        Boolean proxyLinks = null;
+        Boolean proxy = null;
         String requestParameter = request.getParameter(Model.PROXY_LINKS);
         if (requestParameter != null) {
-            proxyLinks = Boolean.parseBoolean(requestParameter);
-            session.setAttribute(Model.PROXY_LINKS, proxyLinks);
+            proxy = Boolean.parseBoolean(requestParameter);
+            session.setAttribute(Model.PROXY_LINKS, proxy);
         } else if (isSameIP) {
-            proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
+            proxy = (Boolean) session.getAttribute(Model.PROXY_LINKS);
         }
-        if (proxyLinks == null) {
-            proxyLinks = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
-            session.setAttribute(Model.PROXY_LINKS, proxyLinks);
+        if (proxy == null) {
+            proxy = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
+            session.setAttribute(Model.PROXY_LINKS, proxy);
         }
-        model.put(Model.PROXY_LINKS, proxyLinks);
+        model.put(Model.PROXY_LINKS, proxy);
     }
 
     public void setProxyLinks(final ProxyLinks proxyLinks) {

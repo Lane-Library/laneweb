@@ -387,7 +387,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         }
         long number;
         long modifier;
-        long expires = 0;
+        long result = 0;
         while (tokens.hasMoreTokens()) {
             current = tokens.nextToken();
             // get rid of the optional <plus> keyword
@@ -423,8 +423,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             } else {
                 return -1;
             }
-            expires += number * modifier;
+            result += number * modifier;
         }
-        return expires;
+        return result;
     }
 }
