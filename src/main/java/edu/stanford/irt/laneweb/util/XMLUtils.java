@@ -16,7 +16,6 @@ package edu.stanford.irt.laneweb.util;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * XML utility methods.
@@ -28,59 +27,7 @@ public class XMLUtils {
     /**
      * Empty attributes immutable object.
      */
-    public static final Attributes EMPTY_ATTRIBUTES = new AttributesImpl() {
-
-        @Override
-        public void addAttribute(final String uri, final String localName, final String qName, final String type, final String value) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void clear() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void removeAttribute(final int index) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setAttribute(final int index, final String uri, final String localName, final String qName, final String type,
-                final String value) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setAttributes(final Attributes atts) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setLocalName(final int index, final String localName) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setQName(final int index, final String qName) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setType(final int index, final String type) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setURI(final int index, final String uri) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setValue(final int index, final String value) {
-            throw new UnsupportedOperationException();
-        }
-    };
+    public static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
     /**
      * Create a start and endElement without Attributes The content of the
@@ -161,5 +108,8 @@ public class XMLUtils {
     public static void startElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName,
             final Attributes atts) throws SAXException {
         xmlConsumer.startElement(namespaceURI, localName, localName, atts);
+    }
+
+    private XMLUtils() {
     }
 }

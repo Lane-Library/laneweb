@@ -52,11 +52,11 @@ public class VoyagerLoginController {
 
     @RequestMapping(value = "/secure/voyager/{db}")
     public void login(@PathVariable final String db, @ModelAttribute(Model.UNIVID) final String univid,
-            @RequestParam final String PID, final HttpServletRequest request, final HttpServletResponse response)
+            @RequestParam("PID") final String pid, final HttpServletRequest request, final HttpServletResponse response)
             throws IOException {
         VoyagerLogin voyagerLogin = this.voyagerLogins.get(BEAN_ROOT_NAME + db);
         String queryString = request.getQueryString();
-        String url = voyagerLogin.getVoyagerURL(univid, PID, queryString);
+        String url = voyagerLogin.getVoyagerURL(univid, pid, queryString);
         response.sendRedirect(url);
     }
 

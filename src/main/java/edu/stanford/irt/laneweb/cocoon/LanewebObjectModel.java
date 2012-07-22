@@ -10,8 +10,10 @@ import org.apache.commons.collections.MultiMap;
 /**
  * A Cocoon ObjectModel that does nothing
  */
-@SuppressWarnings({ "rawtypes", "serial" })
+@SuppressWarnings({ "rawtypes" })
 public class LanewebObjectModel extends HashMap implements ObjectModel {
+
+    private static final long serialVersionUID = 1L;
 
     public void cleanupLocalContext() {
     }

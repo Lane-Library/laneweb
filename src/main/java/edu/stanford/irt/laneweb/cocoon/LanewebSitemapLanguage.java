@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
@@ -15,60 +14,23 @@ import org.apache.cocoon.components.treeprocessor.AbstractProcessingNode;
 import org.apache.cocoon.components.treeprocessor.ParameterizableProcessingNode;
 import org.apache.cocoon.components.treeprocessor.ProcessingNode;
 import org.apache.cocoon.components.treeprocessor.ProcessingNodeBuilder;
+import org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage;
 import org.apache.cocoon.components.treeprocessor.variables.VariableResolver;
 import org.apache.cocoon.components.treeprocessor.variables.VariableResolverFactory;
 import org.apache.cocoon.sitemap.PatternException;
 import org.apache.cocoon.util.location.Location;
-import org.apache.cocoon.util.location.LocationImpl;
-import org.apache.cocoon.util.location.LocationUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.WebApplicationContext;
 
-import edu.stanford.irt.laneweb.LanewebException;
-
-public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage implements
-        ApplicationContextAware {
-
-    // cut and pasted from AvalonNamespaceHandler which is no longer loaded
-    private static final LocationUtils.LocationFinder confLocFinder = new LocationUtils.LocationFinder() {
-
-        public Location getLocation(final Object obj, final String description) {
-            if (obj instanceof Configuration) {
-                Configuration config = (Configuration) obj;
-                String locString = config.getLocation();
-                Location result = LocationUtils.parse(locString);
-                if (LocationUtils.isKnown(result)) {
-                    // Add description
-                    StringBuffer desc = new StringBuffer().append('<');
-                    // Unfortunately Configuration.getPrefix() is not public
-                    try {
-                        if (config.getNamespace().startsWith("http://apache.org/cocoon/sitemap/")) {
-                            desc.append("map:");
-                        }
-                    } catch (ConfigurationException e) {
-                        throw new LanewebException(e);
-                    }
-                    desc.append(config.getName()).append('>');
-                    return new LocationImpl(desc.toString(), result);
-                } else {
-                    return result;
-                }
-            }
-            // Try next finders.
-            return null;
-        }
-    };
-    static {
-        LocationUtils.addFinder(confLocFinder);
-    }
+public class LanewebSitemapLanguage extends SitemapLanguage implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
     private ServiceManager serviceManager;
 
-    public SitemapLanguage(final ServiceManager serviceManager, final PipelineComponentInfo info) throws ServiceException {
+    public LanewebSitemapLanguage(final ServiceManager serviceManager, final PipelineComponentInfo info) throws ServiceException {
         service(serviceManager);
         this.serviceManager = serviceManager;
         this.itsNamespace = "http://apache.org/cocoon/sitemap/1.0";

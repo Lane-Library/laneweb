@@ -52,8 +52,7 @@ public class SunetIdCookieCodec {
         builder.append(COOKIE_VALUE_SEPARATOR);
         builder.append(userAgentHash);
         String encryptedValue = encrypt(builder.toString());
-        PersistentLoginToken token = new PersistentLoginToken(sunetId, now, userAgentHash, encryptedValue);
-        return token;
+        return new PersistentLoginToken(sunetId, now, userAgentHash, encryptedValue);
     }
 
     public PersistentLoginToken restoreLoginToken(final String encryptedValue) {

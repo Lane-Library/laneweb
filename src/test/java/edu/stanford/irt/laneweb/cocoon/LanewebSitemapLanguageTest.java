@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.context.WebApplicationContext;
 
-public class SitemapLanguageTest {
+public class LanewebSitemapLanguageTest {
 
     private Configuration configuration;
 
@@ -32,13 +32,13 @@ public class SitemapLanguageTest {
 
     private ServiceManager serviceManager;
 
-    private SitemapLanguage sitemapLanguage;
+    private LanewebSitemapLanguage sitemapLanguage;
 
     @Before
     public void setUp() throws Exception {
         this.serviceManager = createMock(ServiceManager.class);
         this.piplineInfo = createMock(PipelineComponentInfo.class);
-        this.sitemapLanguage = new SitemapLanguage(this.serviceManager, this.piplineInfo);
+        this.sitemapLanguage = new LanewebSitemapLanguage(this.serviceManager, this.piplineInfo);
         this.context = createMock(WebApplicationContext.class);
         this.sitemapLanguage.setApplicationContext(this.context);
         this.configuration = createMock(Configuration.class);

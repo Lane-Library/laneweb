@@ -16,7 +16,7 @@ public class SpringResourceSource implements Source {
      * A private always invalid source validity to avoid returning a null
      * validity.
      */
-    private static SourceValidity INVALID = new SourceValidity() {
+    private static final SourceValidity INVALID = new SourceValidity() {
 
         private static final long serialVersionUID = 1L;
 

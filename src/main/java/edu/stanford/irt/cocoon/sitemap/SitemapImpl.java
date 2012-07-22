@@ -15,7 +15,7 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.impl.DefaultExecutor;
 import org.xml.sax.InputSource;
 
-import edu.stanford.irt.laneweb.cocoon.SitemapLanguage;
+import edu.stanford.irt.laneweb.cocoon.LanewebSitemapLanguage;
 
 public class SitemapImpl implements Processor {
 
@@ -25,7 +25,7 @@ public class SitemapImpl implements Processor {
 
     private ServiceManager serviceManager;
 
-    private SitemapLanguage sitemapLanguage;
+    private LanewebSitemapLanguage sitemapLanguage;
 
     private InputStream source;
 
@@ -87,7 +87,7 @@ public class SitemapImpl implements Processor {
         this.serviceManager = serviceManager;
     }
 
-    public void setSitemapLanguage(final SitemapLanguage sitemapLanguage) {
+    public void setSitemapLanguage(final LanewebSitemapLanguage sitemapLanguage) {
         this.sitemapLanguage = sitemapLanguage;
     }
 

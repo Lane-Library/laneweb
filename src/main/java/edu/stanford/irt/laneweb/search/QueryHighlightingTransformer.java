@@ -58,7 +58,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
             this.inTargetElement = false;
         }
         // end of child element of title or description
-        else if (this.inTargetElement == true) {
+        else if (this.inTargetElement) {
             ++this.parseLevel;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
@@ -86,7 +86,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
                 this.inTargetElement = true;
             }
             // don't process child elements of title or description
-            else if (this.inTargetElement == true) {
+            else if (this.inTargetElement) {
                 handleMatches();
                 this.parseLevel--;
             }
