@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-07-23" version="1.13.4" description="1.13.4 bug fix release">
+            <action date="2012-07-21" issue="73401" dev="ryanmax" type="update">
+                update STAFF ip ranges 
+            </action>
+            <action date="2012-07-19" issue="73297" dev="ceyates" type="update">
+                externalize SQL statements to properties files 
+            </action>
+            <action date="2012-07-19" issue="73191" dev="ceyates" type="update">
+                catch NumberFormatException for page parameter 
+            </action>
+            <action date="2012-07-19" issue="73186" dev="ceyates" type="update">
+                do nothing in QueryHighlightingTransformer if query is null 
+            </action>
+            <action date="2012-07-16" issue="73112" dev="ceyates" type="add">
+                refactor neko HTML Parser into a separate component 
+            </action>
+        </release>
         <release date="2012-07-17" version="1.13.3" description="1.13.3 emergency release">
             <action date="2012-07-17" issue="73203" dev="ceyates" type="fix">
                 IE7: no javascript works?
