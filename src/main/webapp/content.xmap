@@ -176,6 +176,12 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching" internal-only="true">
+            <!-- secure/login.html if the user doesn't have a javascript -->
+            <map:match pattern="secure/login.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/index.html"/>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="{content-base}/secure/{1}"/>
