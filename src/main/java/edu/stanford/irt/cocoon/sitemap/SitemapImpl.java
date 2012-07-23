@@ -1,5 +1,6 @@
 package edu.stanford.irt.cocoon.sitemap;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.avalon.framework.configuration.Configuration;
@@ -14,6 +15,7 @@ import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.impl.DefaultExecutor;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.LanewebSitemapLanguage;
 
@@ -57,7 +59,7 @@ public class SitemapImpl implements Processor {
         throw new UnsupportedOperationException();
     }
 
-    public void initialize() throws Exception {
+    public void initialize() throws SAXException, IOException {
         NamespacedSAXConfigurationHandler handler = new NamespacedSAXConfigurationHandler();
         InputSource inputSource = new InputSource(this.source);
         this.saxParser.parse(inputSource, handler);

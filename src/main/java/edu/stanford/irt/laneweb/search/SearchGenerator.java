@@ -49,36 +49,32 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
             result = new DefaultResult("null");
             result.setStatus(SearchStatus.FAILED);
         } else {
-            long time = DEFAULT_TIMEOUT;
+            long searchTimeout = DEFAULT_TIMEOUT;
             if (null != this.timeout) {
                 try {
-                    time = Long.parseLong(this.timeout);
+                    searchTimeout = Long.parseLong(this.timeout);
                 } catch (NumberFormatException nfe) {
-                    time = DEFAULT_TIMEOUT;
+                    searchTimeout = DEFAULT_TIMEOUT;
                 }
             }
-            long timeout = time;
-            boolean synchronous = false;
-            if ((this.synchronous != null) && (this.synchronous.length() > 0)) {
-                synchronous = Boolean.parseBoolean(this.synchronous);
-            }
+            boolean sync = Boolean.parseBoolean(this.synchronous);
             final SimpleQuery query = new SimpleQuery(this.query);
-            result = this.metaSearchManager.search(query, timeout, engines, synchronous);
+            result = this.metaSearchManager.search(query, searchTimeout, engines, sync);
             if (null != this.wait) {
-                long wait = 0;
+                long wt = 0;
                 try {
-                    wait = Long.parseLong(this.wait);
+                    wt = Long.parseLong(this.wait);
                 } catch (NumberFormatException nfe) {
-                    wait = 0;
+                    wt = 0;
                 }
                 long start = System.currentTimeMillis();
                 try {
                     synchronized (result) {
-                        while ((wait > 0) && SearchStatus.RUNNING.equals(result.getStatus())) {
-                            result.wait(wait);
-                            if (wait != 0) {
+                        while ((wt > 0) && SearchStatus.RUNNING.equals(result.getStatus())) {
+                            result.wait(wt);
+                            if (wt != 0) {
                                 long now = System.currentTimeMillis();
-                                wait = wait - (now - start);
+                                wt = wt - (now - start);
                                 start = now;
                             }
                         }

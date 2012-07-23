@@ -122,7 +122,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         // and now prepare the caching information
         XMLConsumer lastConsumer = getLastConsumer();
         Serializer serializer = getSerializer();
-        this.cacheKey = new IdentifierCacheKey(key, serializer == lastConsumer);
+        this.cacheKey = new IdentifierCacheKey(key, serializer.equals(lastConsumer));
         if (this.cacheExpires > 0) {
             this.cacheValidity = new ExpiresValidity(this.cacheExpires * 1000);
         } else if (this.cacheExpires < 0) {
@@ -149,7 +149,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         try {
             if (this.cachedResponse != null) {
                 byte[] content = this.cachedResponse.getResponse();
-                if (serializer == lastConsumer) {
+                if (serializer.equals(lastConsumer)) {
                     environment.getOutputStream(0).write(content);
                 } else {
                     this.xmlDeserializer.setConsumer(lastConsumer);
@@ -163,7 +163,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 byte[] cachedData;
                 Generator generator = getGenerator();
                 int outputBufferSize = getOutputBufferSize();
-                if (serializer == lastConsumer) {
+                if (serializer.equals(lastConsumer)) {
                     CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
                     // set the output stream
                     serializer.setOutputStream(os);

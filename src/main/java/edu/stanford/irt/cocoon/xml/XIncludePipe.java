@@ -254,11 +254,11 @@ public class XIncludePipe extends AbstractXMLPipe {
             if (INCLUDE.equals(name)) {
                 // Process the include, unless in an ignored fallback:
                 if (isEvaluatingContent()) {
-                    String href = attr.getValue("", HREF);
-                    String parse = attr.getValue("", PARSE);
-                    String xpointer = attr.getValue("", XPOINTER);
+                    String hrefAttr = attr.getValue("", HREF);
+                    String parseAttr = attr.getValue("", PARSE);
+                    String xpointerAttr = attr.getValue("", XPOINTER);
                     try {
-                        processXIncludeElement(href, parse, xpointer);
+                        processXIncludeElement(hrefAttr, parseAttr, xpointerAttr);
                     } catch (Exception e) {
                         this.useFallbackLevel++;
                         this.exceptionListener.exception(e);
@@ -330,12 +330,12 @@ public class XIncludePipe extends AbstractXMLPipe {
         if (uri.equals(this.href) && thePointer.equals(this.xpointer == null ? "" : this.xpointer)) {
             return true;
         }
-        XIncludePipe parent = this.parent;
-        while (parent != null) {
-            if (uri.equals(parent.href) && thePointer.equals(parent.xpointer == null ? "" : parent.xpointer)) {
+        XIncludePipe parentPipe = this.parent;
+        while (parentPipe != null) {
+            if (uri.equals(parentPipe.href) && thePointer.equals(parentPipe.xpointer == null ? "" : parentPipe.xpointer)) {
                 return true;
             }
-            parent = parent.parent;
+            parentPipe = parentPipe.parent;
         }
         return false;
     }
@@ -346,7 +346,7 @@ public class XIncludePipe extends AbstractXMLPipe {
         Reader reader = null;
         try {
             is = source.getInputStream();
-            isr = new InputStreamReader(is);
+            isr = new InputStreamReader(is, "UTF-8");
             reader = new BufferedReader(isr);
             int read;
             char[] ary = new char[1024];
