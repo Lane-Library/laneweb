@@ -62,8 +62,13 @@
 		lightbox.setContent(o.responseText);
 		lightbox.show();
 		// To hide the close button on the window the window
+		// but close when the user click on the black background
 		Y.one('#lightboxClose').setStyle('visibility', 'hidden');
-
+		Y.one('.yui3-lightboxbg').on('click',function(event) {
+			event.preventDefault();
+			lightbox.hide();
+		});
+		
 		// Click on YES --
 		Y.one('#yes-persistent-login').on('click',function(event) {
 			//if the checkbox "don't ask me again" is enable so no action happen    
