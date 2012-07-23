@@ -494,6 +494,10 @@
                     <artifactId>cocoon-expression-language-impl</artifactId>
                     <groupId>org.apache.cocoon</groupId>
                 </exclusion>
+                <exclusion>
+                	<artifactId>spring-context</artifactId>
+                	<groupId>org.springframework</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -509,6 +513,10 @@
                 <exclusion>
                     <artifactId>spring-aop</artifactId>
                     <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                	<artifactId>spring-context</artifactId>
+                	<groupId>org.springframework</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -617,6 +625,12 @@
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
             <version>1.7.23</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>spring-context</artifactId>
+            		<groupId>org.springframework</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>
@@ -654,11 +668,6 @@
         </dependency>
         <dependency>
             <artifactId>spring-beans</artifactId>
-            <groupId>org.springframework</groupId>
-            <version>3.1.1.RELEASE</version>
-        </dependency>
-        <dependency>
-            <artifactId>spring-context</artifactId>
             <groupId>org.springframework</groupId>
             <version>3.1.1.RELEASE</version>
         </dependency>
@@ -701,16 +710,34 @@
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
             <version>3.1.1.RELEASE</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>spring-context</artifactId>
+            		<groupId>org.springframework</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
             <version>3.1.1.RELEASE</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>spring-context</artifactId>
+            		<groupId>org.springframework</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>spring-webmvc</artifactId>
             <groupId>org.springframework</groupId>
             <version>3.1.1.RELEASE</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>spring-context</artifactId>
+            		<groupId>org.springframework</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -721,6 +748,12 @@
             <artifactId>trends-tracker</artifactId>
             <groupId>edu.stanford.trends</groupId>
             <version>1.0.1</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>spring-jdbc</artifactId>
+            		<groupId>org.springframework</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
@@ -732,6 +765,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
             <version>3.1.1.RELEASE</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>spring-context</artifactId>
+            		<groupId>org.springframework</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <!-- required only for shccodec key generation -->
