@@ -55,5 +55,33 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
+    
+    <!-- case 73361 Autofill all the forms (ask us, feedback, etc) while logged into MyLane -->
+    <xsl:template match="h:input[@name='email']/@value">
+        <xsl:choose>
+            <xsl:when test="string-length($sunetid) &gt; 0">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="concat($sunetid, '@stanford.edu')"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- case 73361 Autofill all the forms (ask us, feedback, etc) while logged into MyLane -->
+    <xsl:template match="h:input[@name='full-name']/@value">
+        <xsl:choose>
+            <xsl:when test="string-length($name) &gt; 0">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$name"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
 </xsl:stylesheet>
