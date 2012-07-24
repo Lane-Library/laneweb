@@ -6,11 +6,14 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class CoreEresourcesGeneratorTest {
 
@@ -30,7 +33,7 @@ public class CoreEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceList() {
-        this.generator.type = "type";
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getCore("type")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList();

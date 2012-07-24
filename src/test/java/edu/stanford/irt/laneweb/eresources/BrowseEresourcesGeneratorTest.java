@@ -6,11 +6,14 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class BrowseEresourcesGeneratorTest {
 
@@ -29,34 +32,34 @@ public class BrowseEresourcesGeneratorTest {
     }
 
     @Test
+    public void testGetEresourceSubset() {
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.SUBSET, "subset"));
+        expect(this.collectionManager.getSubset("subset")).andReturn(null);
+        replay(this.collectionManager);
+        this.generator.getEresourceList();
+        verify(this.collectionManager);
+    }
+
+    @Test
     public void testGetEresourceListNull() {
         assertEquals(0, this.generator.getEresourceList().size());
     }
 
     @Test
     public void testGetEresourceListType() {
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
-        this.generator.type = "type";
         this.generator.getEresourceList();
         verify(this.collectionManager);
     }
 
     @Test
     public void testGetEresourceListTypeAlpha() {
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ALPHA, "a"));
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getType("type", 'a')).andReturn(null);
         replay(this.collectionManager);
-        this.generator.alpha = "a";
-        this.generator.type = "type";
-        this.generator.getEresourceList();
-        verify(this.collectionManager);
-    }
-
-    @Test
-    public void testGetEresourceSubset() {
-        expect(this.collectionManager.getSubset("subset")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.subset = "subset";
         this.generator.getEresourceList();
         verify(this.collectionManager);
     }

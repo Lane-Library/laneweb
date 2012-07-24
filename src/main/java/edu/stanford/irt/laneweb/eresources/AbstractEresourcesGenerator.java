@@ -1,38 +1,78 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
+import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.xml.XMLConsumer;
+import org.apache.excalibur.source.SourceValidity;
+import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractEresourcesGenerator extends AbstractGenerator implements ParametersAware, ModelAware {
+public abstract class AbstractEresourcesGenerator extends AbstractGenerator implements CacheableProcessingComponent,
+        ParametersAware, ModelAware {
 
-    protected String alpha;
+    private static final long DEFAULT_EXPIRES = 1000 * 60 * 5;
 
-    protected CollectionManager collectionManager;
+    private String alpha;
 
-    protected String mesh;
+    private CollectionManager collectionManager;
 
-    protected int page;
+    private String componentType;
 
-    protected String subset;
+    private long expires = DEFAULT_EXPIRES;
 
-    protected String type;
+    private String key;
+
+    private String mesh;
+
+    private int page;
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
 
-    public AbstractEresourcesGenerator(final CollectionManager collectionManager,
+    private String subset;
+
+    private String type;
+
+    private SourceValidity validity;
+
+    public AbstractEresourcesGenerator(final String componentType, final CollectionManager collectionManager,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
+        this.componentType = componentType;
         this.collectionManager = collectionManager;
         this.saxStrategy = saxStrategy;
+    }
+
+    public Serializable getKey() {
+        if (null == this.key) {
+            this.key = createKey();
+        }
+        return this.key;
+    }
+
+    public String getType() {
+        return this.componentType;
+    }
+
+    public SourceValidity getValidity() {
+        if (this.validity == null) {
+            this.validity = new ExpiresValidity(this.expires);
+        }
+        return this.validity;
+    }
+
+    public void setExpires(final long expires) {
+        this.expires = expires;
     }
 
     public void setModel(final Map<String, Object> model) {
@@ -40,7 +80,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         this.subset = ModelUtil.getString(model, Model.SUBSET);
         this.alpha = ModelUtil.getString(model, Model.ALPHA);
         if (this.alpha != null && this.alpha.length() > 1) {
-            //TODO: probably should not use alpha = null for all
+            // TODO: probably should not use alpha = null for all
             if ("all".equals(this.alpha)) {
                 this.alpha = null;
             } else {
@@ -66,6 +106,9 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         if (parameters.containsKey(Model.SUBSET)) {
             this.subset = parameters.get(Model.SUBSET);
         }
+        if (parameters.containsKey(Model.EXPIRES)) {
+            this.expires = Long.parseLong(parameters.get(Model.EXPIRES));
+        }
     }
 
     @Override
@@ -73,5 +116,39 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         this.saxStrategy.toSAX(new PagingEresourceList(getEresourceList(), this.page), xmlConsumer);
     }
 
-    protected abstract Collection<edu.stanford.irt.eresources.Eresource> getEresourceList();
+    protected Collection<Eresource> getCore() {
+        if (this.type == null) {
+            return Collections.emptySet();
+        }
+        return this.collectionManager.getCore(this.type);
+    }
+
+    protected abstract Collection<Eresource> getEresourceList();
+
+    protected Collection<Eresource> getMesh() {
+        if (this.mesh == null || this.type == null) {
+            return Collections.emptySet();
+        }
+        return this.collectionManager.getMesh(this.type, this.mesh);
+    }
+
+    protected Collection<Eresource> getTypeOrSubset() {
+        Collection<Eresource> list = null;
+        if (this.subset == null && this.type == null) {
+            list = Collections.emptySet();
+        } else if (this.subset == null && this.alpha == null) {
+            list = this.collectionManager.getType(this.type);
+        } else if (this.subset == null) {
+            list = this.collectionManager.getType(this.type, this.alpha.charAt(0));
+        } else {
+            list = this.collectionManager.getSubset(this.subset);
+        }
+        return list;
+    }
+
+    private String createKey() {
+        return new StringBuilder("t=").append(null == this.type ? "" : this.type).append(";s=")
+                .append(null == this.subset ? "" : this.subset).append(";a=").append(null == this.alpha ? "" : this.alpha)
+                .append(";m=").append(null == this.mesh ? "" : this.mesh).append(";page=").append(this.page).toString();
+    }
 }

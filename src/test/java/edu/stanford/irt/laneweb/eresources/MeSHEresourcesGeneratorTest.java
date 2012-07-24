@@ -6,11 +6,14 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class MeSHEresourcesGeneratorTest {
 
@@ -30,8 +33,8 @@ public class MeSHEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceList() {
-        this.generator.type = "type";
-        this.generator.mesh = "mesh";
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getMesh("type", "mesh")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList();
@@ -40,7 +43,7 @@ public class MeSHEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListNullMesh() {
-        this.generator.type = "type";
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
         replay(this.collectionManager);
         assertEquals(0, this.generator.getEresourceList().size());
         verify(this.collectionManager);
@@ -48,7 +51,7 @@ public class MeSHEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListNullType() {
-        this.generator.mesh = "mesh";
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
         replay(this.collectionManager);
         assertEquals(0, this.generator.getEresourceList().size());
         verify(this.collectionManager);
