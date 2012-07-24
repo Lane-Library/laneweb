@@ -31,7 +31,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
 
     private static final String UNDERSCORE_CONTENT = "_content";
 
-    protected Collection<String> engines;
+    private Collection<String> engines;
 
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
@@ -88,7 +88,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator implemen
         if (this.query == null || this.query.isEmpty()) {
             result = new DefaultResult("");
         } else {
-            return this.metaSearchManager.search(new SimpleQuery(this.query), time, this.engines, true);
+            return search(new SimpleQuery(this.query), time, this.engines, true);
         }
         return result;
     }

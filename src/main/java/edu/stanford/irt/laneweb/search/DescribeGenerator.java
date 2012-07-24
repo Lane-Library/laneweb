@@ -33,6 +33,6 @@ public class DescribeGenerator extends AbstractMetasearchGenerator implements Ca
 
     @Override
     protected Result doSearch() {
-        return this.metaSearchManager.describe(new SimpleQuery(""), null);
+        return describe(new SimpleQuery(""), null);
     }
 }

@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,8 +15,8 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
     private RedirectProcessor redirectProcessor;
 
     @Override
-    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
-            throws Exception {
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) 
+        throws IOException {
         String requestURI = request.getRequestURI();
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
         String sitemapURI = requestURI.substring(basePath.length());

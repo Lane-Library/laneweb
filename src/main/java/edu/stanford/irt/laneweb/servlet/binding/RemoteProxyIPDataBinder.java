@@ -62,7 +62,7 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         if (header == null) {
             return request.getRemoteAddr();
         } else if (header.indexOf(',') > 0) {
-            return header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
+            return header.substring(header.lastIndexOf(',') + 1, header.length()).trim();
         } else {
             return header;
         }

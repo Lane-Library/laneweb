@@ -21,7 +21,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
     public Result doSearch() {
         String q = this.query == null ? "" : this.query;
         Collection<String> enginesToRun = new HashSet<String>();
-        Result describeResult = this.metaSearchManager.describe(new SimpleQuery(q), null);
+        Result describeResult = describe(new SimpleQuery(q), null);
         Map<String, String> enginesMap = new HashMap<String, String>();
         for (Result engine : describeResult.getChildren()) {
             String engineId = engine.getId();
