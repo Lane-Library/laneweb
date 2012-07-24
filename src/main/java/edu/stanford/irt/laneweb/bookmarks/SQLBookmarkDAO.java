@@ -114,7 +114,8 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         ObjectOutputStream oop = null;
         try {
             conn = this.dataSource.getConnection();
-            //TODO: this autocommit state probably persists, OK for now as this is the only place updates happen.
+            // TODO: this autocommit state probably persists, OK for now as this
+            // is the only place updates happen.
             conn.setAutoCommit(false);
             pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
             pstmt.setString(1, sunetid);
@@ -131,33 +132,35 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             }
             conn.commit();
         } catch (SQLException e) {
-            this.log.error(e.getMessage(), e);
             if (conn != null) {
                 try {
                     conn.rollback();
                 } catch (SQLException e1) {
-                    this.log.error(e1.getMessage(), e1);
+                    throw new LanewebException(e1);
                 }
             }
+            throw new LanewebException(e);
         } catch (IOException e) {
-            this.log.error(e.getMessage(), e);
             try {
                 conn.rollback();
             } catch (SQLException e1) {
-                this.log.error(e1.getMessage(), e1);
+                throw new LanewebException(e1);
             }
+            throw new LanewebException(e);
         } finally {
             IOUtils.closeStream(oop);
-            JdbcUtils.closeConnection(conn);
+            JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(cstmt);
             JdbcUtils.closeStatement(pstmt);
-            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeConnection(conn);
         }
     }
-    
     /**
-     * This main method is a small program to copy bookmarks data between databases
-     * @param args srcUrl srcUser srcPassword dstUrl dstUser dstPassword
+     * This main method is a small program to copy bookmarks data between
+     * databases
+     * 
+     * @param args
+     *            srcUrl srcUser srcPassword dstUrl dstUser dstPassword
      */
     /*
     public static void main(String[] args) {

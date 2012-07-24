@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +36,10 @@ public class JSONBookmarkController extends BookmarkController {
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.SUNETID) final String sunetid,
             @RequestBody final Bookmark bookmark) {
+        List<Bookmark> clone = new ArrayList<Bookmark>(bookmarks);
+        clone.add(0, bookmark);
+        saveLinks(sunetid, clone);
         bookmarks.add(0, bookmark);
-        saveLinks(sunetid, bookmarks);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
@@ -53,10 +56,14 @@ public class JSONBookmarkController extends BookmarkController {
         }
         // sort the array to be sure in order
         Arrays.sort(ints);
+        List<Bookmark> clone = new ArrayList<Bookmark>(bookmarks);
+        for (int j = ints.length - 1; j >= 0; --j) {
+            clone.remove(ints[j]);
+        }
+        saveLinks(sunetid, clone);
         for (int j = ints.length - 1; j >= 0; --j) {
             bookmarks.remove(ints[j]);
         }
-        saveLinks(sunetid, bookmarks);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -64,7 +71,7 @@ public class JSONBookmarkController extends BookmarkController {
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.PROXY_LINKS) final Boolean proxyLinks,
             @RequestParam final int i) {
-        //TODO: extend Bookmark or create a map to add the proxylink url
+        // TODO: extend Bookmark or create a map to add the proxylink url
         return bookmarks.get(i);
     }
 
@@ -74,8 +81,12 @@ public class JSONBookmarkController extends BookmarkController {
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.SUNETID) final String sunetid,
             @RequestBody final Map<String, Object> json) {
-        bookmarks.set((Integer)json.get("position"), new Bookmark((String)json.get("label"), (String)json.get("url")));
-        saveLinks(sunetid, bookmarks);
+        Bookmark bookmark = new Bookmark((String) json.get("label"), (String) json.get("url"));
+        int position = ((Integer) json.get("position")).intValue();
+        List<Bookmark> clone = new ArrayList<Bookmark>(bookmarks);
+        clone.set(position, bookmark);
+        saveLinks(sunetid, clone);
+        bookmarks.set(position, bookmark);
     }
 
     @Override

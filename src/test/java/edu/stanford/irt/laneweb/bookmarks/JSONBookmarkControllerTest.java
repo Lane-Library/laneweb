@@ -1,11 +1,14 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
 import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +16,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO: make assertions about this.bookmark after done, also throw exceptions
+// when saving.
 public class JSONBookmarkControllerTest {
 
     private Bookmark bookmark;
@@ -37,7 +42,7 @@ public class JSONBookmarkControllerTest {
 
     @Test
     public void testAddBookmark() {
-        this.bookmarkDAO.saveLinks(this.sunetid, this.bookmarks);
+        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Collections.singletonList(this.bookmark)));
         replay(this.bookmarkDAO);
         this.controller.addBookmark(this.bookmarks, this.sunetid, this.bookmark);
         verify(this.bookmarkDAO);
@@ -49,7 +54,7 @@ public class JSONBookmarkControllerTest {
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(this.sunetid, this.bookmarks);
+        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Arrays.asList(new Bookmark[] { this.bookmark, this.bookmark })));
         replay(this.bookmarkDAO);
         this.controller.deleteBookmark(this.bookmarks, this.sunetid, "[0,3]");
         verify(this.bookmarkDAO);
@@ -70,7 +75,7 @@ public class JSONBookmarkControllerTest {
         json.put("label", "newlabel");
         json.put("url", "newurl");
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(this.sunetid, this.bookmarks);
+        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Collections.singletonList(new Bookmark("newlabel", "newurl"))));
         replay(this.bookmarkDAO);
         this.controller.saveBookmark(this.bookmarks, this.sunetid, json);
         verify(this.bookmarkDAO);
