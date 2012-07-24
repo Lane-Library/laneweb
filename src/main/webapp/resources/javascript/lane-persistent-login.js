@@ -41,7 +41,7 @@
 	}
 
 	if ( Y.one("a[href ='/././secure/login.html']")) {
-		Y.one("a[href ='/secure/login.html']").on("click",function(event) {
+		Y.one("a[href ='/././secure/login.html']").on("click",function(event) {
 			if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
 				//will be redirected to same page after the webauth
 				document.location = '/././secure/persistentLogin.html?pl=false&url='+ escape(document.location);
