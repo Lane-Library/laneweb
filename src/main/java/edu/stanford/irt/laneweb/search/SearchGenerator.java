@@ -4,8 +4,10 @@ import java.util.Collection;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
@@ -21,9 +23,17 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
 
     private String wait;
 
+    public SearchGenerator(final MetaSearchManagerSource msms, final SAXStrategy<Result> saxStrategy) {
+        super(msms, saxStrategy);
+    }
+
+    public SearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+        super(metaSearchManager, saxStrategy);
+    }
+
     @Override
-    public Result doSearch() {
-        return doSearch(null);
+    protected Result doSearch(final String query) {
+        return searchWithEngines(query, null);
     }
 
     @Override
@@ -43,9 +53,9 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
         }
     }
 
-    protected Result doSearch(final Collection<String> engines) {
+    protected Result searchWithEngines(final String query, final Collection<String> engines) {
         Result result = null;
-        if (this.query == null || this.query.isEmpty()) {
+        if (query == null || query.isEmpty()) {
             result = new DefaultResult("null");
             result.setStatus(SearchStatus.FAILED);
         } else {
@@ -58,8 +68,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
                 }
             }
             boolean sync = Boolean.parseBoolean(this.synchronous);
-            final SimpleQuery query = new SimpleQuery(this.query);
-            result = search(query, searchTimeout, engines, sync);
+            final SimpleQuery q = new SimpleQuery(query);
+            result = search(q, searchTimeout, engines, sync);
             if (null != this.wait) {
                 long wt = 0;
                 try {

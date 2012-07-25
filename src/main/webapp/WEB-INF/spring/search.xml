@@ -21,8 +21,16 @@
         </constructor-arg>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.search.ScoreStrategy"
-        class="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
+        class="edu.stanford.irt.laneweb.search.ResultSAXStrategy"/>
+    
+    
+    <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"
+        class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
+        </constructor-arg>
+    </bean>
     
     <bean id="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         class="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
@@ -33,8 +41,8 @@
         class="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         abstract="true">
-        <property name="metaSearchManagerSource"
-            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+        <constructor-arg index="0" ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/result"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/search-describe"
@@ -55,8 +63,8 @@
     <bean name="org.apache.cocoon.generation.Generator/search-content"
         class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/search-engine"
@@ -69,22 +77,18 @@
     
     <bean name="org.apache.cocoon.generation.Generator/merged-search"
         class="edu.stanford.irt.laneweb.search.MergedSearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
-        <property name="metaSearchManagerSource"
-            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg index="3" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/merged-history-search"
         class="edu.stanford.irt.laneweb.search.MergedSearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/history"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
-        <property name="metaSearchManagerSource"
-            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.eresources.CollectionManager/history"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg index="3" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/query-highlighting"

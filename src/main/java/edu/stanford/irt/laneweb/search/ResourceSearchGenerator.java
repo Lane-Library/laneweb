@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -17,9 +19,17 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
     private Collection<String> resources = Collections.emptySet();
 
+    public ResourceSearchGenerator(final MetaSearchManagerSource msms, final SAXStrategy<Result> saxStrategy) {
+        super(msms, saxStrategy);
+    }
+
+    public ResourceSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+        super(metaSearchManager, saxStrategy);
+    }
+
     @Override
-    public Result doSearch() {
-        String q = this.query == null ? "" : this.query;
+    public Result doSearch(final String query) {
+        String q = query == null ? "" : query;
         Collection<String> enginesToRun = new HashSet<String>();
         Result describeResult = describe(new SimpleQuery(q), null);
         Map<String, String> enginesMap = new HashMap<String, String>();
@@ -34,7 +44,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
                 enginesToRun.add(enginesMap.get(resource));
             }
         }
-        return super.doSearch(enginesToRun);
+        return super.searchWithEngines(query, enginesToRun);
     }
 
     @SuppressWarnings("unchecked")

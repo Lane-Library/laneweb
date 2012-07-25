@@ -1,19 +1,14 @@
 package edu.stanford.irt.laneweb.search;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
@@ -24,56 +19,59 @@ public class EresourcesSearchGeneratorTest {
 
     private CollectionManager collectionManager;
 
+    private Eresource eresource;
+
     private EresourcesSearchGenerator generator;
 
-    private XMLConsumer xmlConsumer;
-    
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new EresourcesSearchGenerator(this.collectionManager, this.saxStrategy);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.eresource = createMock(Eresource.class);
     }
 
     @Test
-    public void testDoGenerate() throws SAXException {
-        expect(this.collectionManager.search("query")).andReturn(Collections.<Eresource> emptyList());
-        this.saxStrategy.toSAX(isA(PagingSearchResultSet.class), eq(this.xmlConsumer));
-        replay(this.xmlConsumer, this.collectionManager);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
-        this.generator.doGenerate(this.xmlConsumer);
-        verify(this.xmlConsumer, this.collectionManager);
+    public void testGetSearchResults() {
+        expect(this.collectionManager.search("query")).andReturn(Collections.<Eresource> singletonList(this.eresource));
+        expect(this.eresource.getTitle()).andReturn("title");
+        replay(this.collectionManager, this.saxStrategy, this.eresource);
+        this.generator.doSearch("query");
+        verify(this.collectionManager, this.saxStrategy, this.eresource);
     }
 
     @Test
-    public void testGetEresourceList() {
-        expect(this.collectionManager.search("query")).andReturn(Collections.<Eresource> emptyList());
-        replay(this.collectionManager);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
-        this.generator.getEresourceList();
-        verify(this.collectionManager);
+    public void testGetSearchResultsModelParametersType() {
+        expect(this.collectionManager.searchType("parameterType", "query")).andReturn(
+                Collections.<Eresource> singletonList(this.eresource));
+        expect(this.eresource.getTitle()).andReturn("title");
+        replay(this.collectionManager, this.saxStrategy, this.eresource);
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TYPE, "modelType"));
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "parameterType"));
+        this.generator.doSearch("query");
+        verify(this.collectionManager, this.saxStrategy, this.eresource);
     }
 
     @Test
-    public void testGetEresourceListNullQuery() {
-        replay(this.collectionManager);
-        assertEquals(0, this.generator.getEresourceList().size());
-        verify(this.collectionManager);
+    public void testGetSearchResultsModelType() {
+        expect(this.collectionManager.searchType("type", "query")).andReturn(Collections.<Eresource> singletonList(this.eresource));
+        expect(this.eresource.getTitle()).andReturn("title");
+        replay(this.collectionManager, this.saxStrategy, this.eresource);
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TYPE, "type"));
+        this.generator.setParameters(Collections.<String, String> emptyMap());
+        this.generator.doSearch("query");
+        verify(this.collectionManager, this.saxStrategy, this.eresource);
     }
 
     @Test
-    public void testGetEresourceListTypeParameter() {
-        Eresource eresource = createMock(Eresource.class);
-        expect(eresource.getTitle()).andReturn("title");
-        expect(this.collectionManager.searchType("type", "query")).andReturn(Collections.<Eresource> singletonList(eresource));
-        replay(this.collectionManager, eresource);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        assertEquals(1, this.generator.getEresourceList().size());
-        verify(this.collectionManager, eresource);
+    public void testGetSearchResultsParametersType() {
+        expect(this.collectionManager.searchType("type", "query")).andReturn(Collections.<Eresource> singletonList(this.eresource));
+        expect(this.eresource.getTitle()).andReturn("title");
+        replay(this.collectionManager, this.saxStrategy, this.eresource);
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
+        this.generator.doSearch("query");
+        verify(this.collectionManager, this.saxStrategy, this.eresource);
     }
 }

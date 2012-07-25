@@ -1,11 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Map;
-
-import org.apache.cocoon.xml.XMLConsumer;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -14,17 +11,15 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class EresourcesSearchGenerator extends AbstractSearchGenerator implements ParametersAware {
+public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerator implements ParametersAware {
 
     private CollectionManager collectionManager;
 
     private String type;
-    
-    private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
     public EresourcesSearchGenerator(final CollectionManager collectionManager, final SAXStrategy<PagingSearchResultSet> saxStrategy) {
+        super(saxStrategy);
         this.collectionManager = collectionManager;
-        this.saxStrategy = saxStrategy;
     }
 
     @Override
@@ -40,20 +35,12 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator implement
     }
 
     @Override
-    protected void doGenerate(final XMLConsumer xmlConsumer) {
-        PagingSearchResultSet eresourceSearchResults = new PagingSearchResultSet(this.query, this.page);
-        eresourceSearchResults.addAll(getEresourceList());
-        this.saxStrategy.toSAX(eresourceSearchResults, xmlConsumer);
-    }
-
-    protected Collection<SearchResult> getEresourceList() {
+    protected Collection<SearchResult> getSearchResults(final String query) {
         Collection<Eresource> eresources = null;
-        if (this.query == null || this.query.isEmpty()) {
-            eresources = Collections.emptySet();
-        } else if (this.type == null) {
-            eresources = this.collectionManager.search(this.query);
+        if (this.type == null) {
+            eresources = this.collectionManager.search(query);
         } else {
-            eresources = this.collectionManager.searchType(this.type, this.query);
+            eresources = this.collectionManager.searchType(this.type, query);
         }
         Collection<SearchResult> results = new LinkedList<SearchResult>();
         for (Eresource eresource : eresources) {

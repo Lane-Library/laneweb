@@ -4,18 +4,28 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 
 public class EngineSearchGenerator extends SearchGenerator {
 
     private Collection<String> engines;
 
+    public EngineSearchGenerator(final MetaSearchManagerSource msms, final SAXStrategy<Result> saxStrategy) {
+        super(msms, saxStrategy);
+    }
+
+    public EngineSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+        super(metaSearchManager, saxStrategy);
+    }
+
     @Override
-    public Result doSearch() {
-        return super.doSearch(this.engines);
+    protected Result doSearch(final String query) {
+        return searchWithEngines(query, this.engines);
     }
 
     @SuppressWarnings("unchecked")
@@ -31,6 +41,7 @@ public class EngineSearchGenerator extends SearchGenerator {
         if (this.engines == null) {
             String engineList = parameters.get(Model.ENGINES);
             if (engineList == null) {
+                //TODO: maybe null engines is OK
                 throw new LanewebException("null engines");
             }
             this.engines = Arrays.asList(engineList.split(","));

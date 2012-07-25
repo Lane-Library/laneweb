@@ -2,24 +2,32 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Map;
 
+import org.apache.cocoon.xml.XMLConsumer;
+
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractSearchGenerator extends AbstractGenerator implements ModelAware {
+public abstract class AbstractSearchGenerator<T> extends AbstractGenerator implements ModelAware {
 
-    protected int page;
+    private String query;
 
-    protected String query;
+    private SAXStrategy<T> saxStrategy;
+
+    public AbstractSearchGenerator(final SAXStrategy<T> saxStrategy) {
+        this.saxStrategy = saxStrategy;
+    }
 
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
-        String page = ModelUtil.getString(model, Model.PAGE, "1");
-        try {
-            this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
-        } catch (NumberFormatException nfe) {
-            this.page = 0;
-        }
     }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
+        this.saxStrategy.toSAX(doSearch(this.query), xmlConsumer);
+    }
+
+    protected abstract T doSearch(String query);
 }

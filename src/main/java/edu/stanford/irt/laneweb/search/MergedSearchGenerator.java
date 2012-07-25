@@ -1,13 +1,13 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
-
-import org.apache.cocoon.xml.XMLConsumer;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.search.MetaSearchManager;
 
 /**
  * @author ryanmax
@@ -16,30 +16,31 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
 
     private CollectionManager collectionManager;
 
-    private SAXStrategy<PagingSearchResultSet> saxStrategy;
-
-    public MergedSearchGenerator(final CollectionManager collectionManager, final SAXStrategy<PagingSearchResultSet> saxStrategy,
-            final ScoreStrategy scoreStrategy) {
-        super(saxStrategy, scoreStrategy);
+    public MergedSearchGenerator(final MetaSearchManager metaSearchManager, final CollectionManager collectionManager,
+            final SAXStrategy<PagingSearchResultSet> saxStrategy, final ContentResultConversionStrategy scoreStrategy) {
+        super(metaSearchManager, saxStrategy, scoreStrategy);
         this.collectionManager = collectionManager;
-        this.saxStrategy = saxStrategy;
+    }
+
+    public MergedSearchGenerator(final MetaSearchManagerSource msms, final CollectionManager collectionManager,
+            final SAXStrategy<PagingSearchResultSet> saxStrategy, final ContentResultConversionStrategy scoreStrategy) {
+        super(msms, saxStrategy, scoreStrategy);
+        this.collectionManager = collectionManager;
     }
 
     @Override
-    protected void doGenerate(final XMLConsumer xmlConsumer) {
-        PagingSearchResultSet mergedSearchResults = new PagingSearchResultSet(this.query, this.page);
-        mergedSearchResults.addAll(getEresourceList());
-        mergedSearchResults.addAll(getContentResultList(doSearch()));
-        this.saxStrategy.toSAX(mergedSearchResults, xmlConsumer);
-    }
-
-    private Collection<EresourceSearchResult> getEresourceList() {
-        Collection<EresourceSearchResult> eresourceResults = new LinkedList<EresourceSearchResult>();
-        if (this.query != null && !this.query.isEmpty()) {
-            for (Eresource eresource : this.collectionManager.search(this.query)) {
+    protected Collection<SearchResult> getSearchResults(final String query) {
+        Collection<SearchResult> searchResults = null;
+        if (query == null || query.isEmpty()) {
+            searchResults = Collections.emptySet();
+        } else {
+            searchResults = super.getSearchResults(query);
+            Collection<SearchResult> eresourceResults = new LinkedList<SearchResult>();
+            for (Eresource eresource : this.collectionManager.search(query)) {
                 eresourceResults.add(new EresourceSearchResult(eresource));
             }
+            searchResults.addAll(eresourceResults);
         }
-        return eresourceResults;
+        return searchResults;
     }
 }

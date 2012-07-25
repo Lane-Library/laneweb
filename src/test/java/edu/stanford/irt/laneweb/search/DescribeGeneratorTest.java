@@ -25,19 +25,12 @@ public class DescribeGeneratorTest {
 
     private MetaSearchManager metaSearchManager;
 
-    private MetaSearchManagerSource metaSearchManagerSource;
-
     private Result result;
 
     @Before
     public void setUp() throws Exception {
-        this.generator = new DescribeGenerator();
-        this.metaSearchManagerSource = createMock(MetaSearchManagerSource.class);
         this.metaSearchManager = createMock(MetaSearchManager.class);
-        expect(this.metaSearchManagerSource.getMetaSearchManager()).andReturn(this.metaSearchManager);
-        replay(this.metaSearchManagerSource);
-        this.generator.setMetaSearchManagerSource(this.metaSearchManagerSource);
-        verify(this.metaSearchManagerSource);
+        this.generator = new DescribeGenerator(this.metaSearchManager, null);
         this.result = createMock(Result.class);
     }
 
@@ -46,13 +39,18 @@ public class DescribeGeneratorTest {
     public void testDoSearch() {
         expect(this.metaSearchManager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
         replay(this.metaSearchManager);
-        assertSame(this.result, this.generator.doSearch());
+        assertSame(this.result, this.generator.doSearch("query"));
         verify(this.metaSearchManager);
     }
 
     @Test
     public void testGetKey() {
         assertEquals("describe", this.generator.getKey());
+    }
+
+    @Test
+    public void testGeType() {
+        assertEquals("describe", this.generator.getType());
     }
 
     @Test
