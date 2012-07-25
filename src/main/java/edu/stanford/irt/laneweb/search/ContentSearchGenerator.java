@@ -34,12 +34,6 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
 
     private String timeout;
 
-    public ContentSearchGenerator(final MetaSearchManagerSource msms, final SAXStrategy<PagingSearchResultSet> saxStrategy, final ContentResultConversionStrategy conversionStrategy) {
-        super(saxStrategy);
-        this.metasearchManager = msms.getMetaSearchManager();
-        this.conversionStrategy = conversionStrategy;
-    }
-
     public ContentSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<PagingSearchResultSet> saxStrategy, final ContentResultConversionStrategy conversionStrategy) {
         super(saxStrategy);
         this.metasearchManager = metaSearchManager;

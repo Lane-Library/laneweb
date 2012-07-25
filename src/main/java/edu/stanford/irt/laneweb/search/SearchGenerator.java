@@ -23,10 +23,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
 
     private String wait;
 
-    public SearchGenerator(final MetaSearchManagerSource msms, final SAXStrategy<Result> saxStrategy) {
-        super(msms, saxStrategy);
-    }
-
     public SearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }

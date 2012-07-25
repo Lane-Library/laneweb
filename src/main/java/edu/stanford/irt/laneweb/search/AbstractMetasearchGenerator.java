@@ -11,11 +11,6 @@ public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerato
 
     private MetaSearchManager metaSearchManager;
 
-    public AbstractMetasearchGenerator(final MetaSearchManagerSource msms, final SAXStrategy<Result> saxStrategy) {
-        super(saxStrategy);
-        this.metaSearchManager = msms.getMetaSearchManager();
-    }
-
     public AbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(saxStrategy);
         this.metaSearchManager = metaSearchManager;

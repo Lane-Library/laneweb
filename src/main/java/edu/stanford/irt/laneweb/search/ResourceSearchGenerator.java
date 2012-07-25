@@ -19,10 +19,6 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
     private Collection<String> resources = Collections.emptySet();
 
-    public ResourceSearchGenerator(final MetaSearchManagerSource msms, final SAXStrategy<Result> saxStrategy) {
-        super(msms, saxStrategy);
-    }
-
     public ResourceSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }

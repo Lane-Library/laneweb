@@ -22,12 +22,6 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
         this.collectionManager = collectionManager;
     }
 
-    public MergedSearchGenerator(final MetaSearchManagerSource msms, final CollectionManager collectionManager,
-            final SAXStrategy<PagingSearchResultSet> saxStrategy, final ContentResultConversionStrategy scoreStrategy) {
-        super(msms, saxStrategy, scoreStrategy);
-        this.collectionManager = collectionManager;
-    }
-
     @Override
     protected Collection<SearchResult> getSearchResults(final String query) {
         Collection<SearchResult> searchResults = null;
