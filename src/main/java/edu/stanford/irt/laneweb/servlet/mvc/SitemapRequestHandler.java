@@ -20,15 +20,15 @@ import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
-    protected DataBinder dataBinder;
+    private DataBinder dataBinder;
 
-    protected Set<String> methodsNotAllowed = Collections.emptySet();
+    private Set<String> methodsNotAllowed = Collections.emptySet();
 
-    protected String prefix = "";
+    private String prefix = "";
 
-    protected Processor processor;
+    private Processor processor;
 
-    protected ServletContext servletContext;
+    private ServletContext servletContext;
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
             IOException {

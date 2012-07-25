@@ -87,12 +87,12 @@ public class BassettImage {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("bassettNumber ---->" + this.bassettNumber);
-        sb.append("Image -------->" + this.bassettImage);
-        sb.append("Diagram ------>" + this.diagramImage);
-        sb.append("LatinLegend -->" + this.latinLegend);
-        sb.append("EngishLegend ->" + this.engishLegend);
+        StringBuffer sb = new StringBuffer("bassettNumber ---->")
+        .append("bassettNumber ---->").append(this.bassettNumber)
+        .append("Image -------->").append(this.bassettImage)
+        .append("Diagram ------>").append(this.diagramImage)
+        .append("LatinLegend -->").append(this.latinLegend)
+        .append("EngishLegend ->").append(this.engishLegend);
         return sb.toString();
     }
 }

@@ -3,13 +3,11 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 import java.util.Map;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractPagingSearchResultGenerator extends AbstractSearchGenerator<PagingSearchResultSet> implements
-        ModelAware {
+public abstract class AbstractPagingSearchResultGenerator extends AbstractSearchGenerator<PagingSearchResultSet> {
 
     private int page;
 
@@ -20,9 +18,9 @@ public abstract class AbstractPagingSearchResultGenerator extends AbstractSearch
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        String page = ModelUtil.getString(model, Model.PAGE, "1");
+        String p = ModelUtil.getString(model, Model.PAGE, "1");
         try {
-            this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
+            this.page = "all".equals(p) ? -1 : Integer.parseInt(p) - 1;
         } catch (NumberFormatException nfe) {
             this.page = 0;
         }

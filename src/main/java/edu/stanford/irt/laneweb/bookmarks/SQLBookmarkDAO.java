@@ -71,9 +71,9 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             this.log.error(e.getMessage(), e);
         } finally {
             IOUtils.closeStream(oip);
-            JdbcUtils.closeConnection(conn);
-            JdbcUtils.closeStatement(pstmt);
             JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(pstmt);
+            JdbcUtils.closeConnection(conn);
         }
         return links;
     }
@@ -93,9 +93,9 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         } catch (SQLException e) {
             throw new LanewebException(e);
         } finally {
-            JdbcUtils.closeConnection(conn);
-            JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
         return count;
     }
@@ -110,7 +110,6 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         Connection conn = null;
         CallableStatement cstmt = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
         ObjectOutputStream oop = null;
         try {
             conn = this.dataSource.getConnection();
@@ -136,7 +135,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 try {
                     conn.rollback();
                 } catch (SQLException e1) {
-                    throw new LanewebException(e1);
+                    this.log.error(e1.getMessage(), e1);
                 }
             }
             throw new LanewebException(e);
@@ -144,12 +143,11 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             try {
                 conn.rollback();
             } catch (SQLException e1) {
-                throw new LanewebException(e1);
+                this.log.error(e1.getMessage(), e1);
             }
             throw new LanewebException(e);
         } finally {
             IOUtils.closeStream(oop);
-            JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(cstmt);
             JdbcUtils.closeStatement(pstmt);
             JdbcUtils.closeConnection(conn);

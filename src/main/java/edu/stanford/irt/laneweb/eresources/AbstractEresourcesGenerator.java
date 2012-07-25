@@ -91,9 +91,9 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         if (this.mesh != null) {
             this.mesh = this.mesh.toLowerCase();
         }
-        String page = ModelUtil.getString(model, Model.PAGE, "1");
+        String p = ModelUtil.getString(model, Model.PAGE, "1");
         try {
-            this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
+            this.page = "all".equals(p) ? -1 : Integer.parseInt(p) - 1;
         } catch (NumberFormatException nfe) {
             this.page = 0;
         }
