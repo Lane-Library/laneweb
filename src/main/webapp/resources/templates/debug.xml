@@ -3,52 +3,8 @@
     <head>
         <title>Lane Medical Library &amp; Knowledge Management Center - Stanford
             University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/reset-fonts-grids/reset-fonts-grids.css"/>
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.5.0/build/cssgrids/grids-min.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/layout.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/shaded-border.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/header.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/lane-nav.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/lists.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/anchors.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/som-footer.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/lane-footer.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/headers.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/module.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/autocomplete.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/search.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/popups.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/online-resources.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/tooltips.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/miscellaneous.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/events.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/node-accordion.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/expandies.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/breadcrumb-form.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/tutorials.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/forms.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/section-menu.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/liaisons.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/table-styles.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/follow.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/images.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/captioned-img.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/lightbox.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/feedback.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/live-chat.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/redesign-june-2011.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/banner.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/hightlighted-resources.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/antibiogram.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/landing-pgs-2011.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/persistent-login.css"/>
-        <!-- TODO: remove bookmarks-marketing.css when done -->
-        <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks-marketing.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/bookmark-instructions.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
         <meta name="ipGroup" content="{ipGroup}"/>
@@ -313,47 +269,7 @@
             <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
         </div>
         <div id="feedbackLink"><a rel="lightbox" href="/help/feedback2.html"></a></div>
-        <script type="text/javascript" src="/resources/javascript/yui-3.5.1-debug.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-ie.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-mobile-ad.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-persistent-login.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-result.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-indicator.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-bassett.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-textinputs.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-suggest.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-pico.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search.js"></script>
-        <script type="text/javascript" src="/resources/javascript/link-plugin.js"></script>
-        <script type="text/javascript" src="/resources/javascript/bookmarks.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-tracking.js"></script>
-        <script type="text/javascript" src="/resources/javascript/bookmark-instructions.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-expandies.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-google.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-lightbox.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-popup.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-metasearch.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-facets.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-facet-counts.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-history.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-tooltips.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-spellcheck.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-findit.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-querymap.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-teletype.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-selections.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-popin.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-quicklinks.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-forms.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-reset.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-hoverText.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-feedback.js"></script>
-        <script type="text/javascript" src="/resources/javascript/banner.js"></script>
-        <script type="text/javascript" src="/resources/javascript/purchase-suggestions.js"></script>
-        <script type="text/javascript" src="/resources/javascript/menu-delay.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-search-printonly.js"></script>
-        <!-- TODO: remove bookmarks-marketing.js when done -->
-        <script type="text/javascript" src="/resources/javascript/bookmarks-marketing.js"></script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.5.1/build/yui/yui-debug.js"></script>
+        <script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>
     </body>
 </html>
