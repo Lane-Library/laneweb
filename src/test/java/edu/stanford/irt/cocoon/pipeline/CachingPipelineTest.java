@@ -39,8 +39,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 public class CachingPipelineTest {
 
     private static interface CacheableGenerator extends Generator, CacheableProcessingComponent {
