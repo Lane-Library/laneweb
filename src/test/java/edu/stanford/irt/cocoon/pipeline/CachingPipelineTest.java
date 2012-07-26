@@ -391,12 +391,7 @@ public class CachingPipelineTest {
     private void doInvokeContextStuff() {
         // InvokeContext does these three things, called in GenerateNode:
         this.pipeline.setProcessorManager(null);
-        expect(this.parameters.getParameter(Model.EXPIRES, null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("outputBufferSize", 0)).andReturn(0);
-        replay(this.parameters);
         this.pipeline.setup(this.parameters);
-        verify(this.parameters);
-        reset(this.parameters);
         this.pipeline.setErrorHandler(null);
     }
 

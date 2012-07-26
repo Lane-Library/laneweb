@@ -2,18 +2,14 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.regex.Pattern;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.DefaultResult;
@@ -26,15 +22,16 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
 
     private static final long DEFAULT_TIMEOUT = 20000;
 
+    private ContentResultConversionStrategy conversionStrategy;
+
     private Collection<String> engines;
 
     private MetaSearchManager metasearchManager;
-    
-    private ContentResultConversionStrategy conversionStrategy;
 
     private String timeout;
 
-    public ContentSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<PagingSearchResultSet> saxStrategy, final ContentResultConversionStrategy conversionStrategy) {
+    public ContentSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<PagingSearchResultSet> saxStrategy,
+            final ContentResultConversionStrategy conversionStrategy) {
         super(saxStrategy);
         this.metasearchManager = metaSearchManager;
         this.conversionStrategy = conversionStrategy;
@@ -81,9 +78,8 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         if (query == null || query.isEmpty()) {
             result = new DefaultResult("");
         } else {
-            return this.metasearchManager.search(new SimpleQuery(query), time, this.engines, true);
+            result = this.metasearchManager.search(new SimpleQuery(query), time, this.engines, true);
         }
         return result;
     }
 }
-

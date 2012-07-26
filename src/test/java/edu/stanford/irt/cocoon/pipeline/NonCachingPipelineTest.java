@@ -9,7 +9,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.components.pipeline.AbstractProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
@@ -24,8 +23,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 public class NonCachingPipelineTest {
 
     private BeanFactory beanFactory;
@@ -33,8 +30,6 @@ public class NonCachingPipelineTest {
     private Environment environment;
 
     private Generator generator;
-
-    private Parameters parameters;
 
     private NonCachingPipeline pipeline;
 
@@ -46,7 +41,6 @@ public class NonCachingPipelineTest {
 
     @Before
     public void setUp() throws Exception {
-        this.parameters = createMock(Parameters.class);
         this.beanFactory = createMock(BeanFactory.class);
         this.generator = createMock(Generator.class);
         this.transformer = createMock(Transformer.class);
@@ -165,16 +159,5 @@ public class NonCachingPipelineTest {
         this.pipeline.setGenerator(null, null, null, null);
         this.pipeline.setSerializer(null, null, null, null, "text/plain");
         verify(this.beanFactory, this.generator, this.serializer);
-    }
-
-    @Test
-    public void testSetup() {
-        expect(this.parameters.getParameter(Model.EXPIRES, null)).andReturn("access plus 1 seconds");
-        expect(this.parameters.getParameterAsInteger("outputBufferSize", 0)).andReturn(1024);
-        replay(this.parameters);
-        this.pipeline.setup(this.parameters);
-        assertEquals(1000, this.pipeline.getExpires());
-        assertEquals(1024, this.pipeline.getOutputBufferSize());
-        verify(this.parameters);
     }
 }

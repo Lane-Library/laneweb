@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.io.Serializable;
-import java.util.Map;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;

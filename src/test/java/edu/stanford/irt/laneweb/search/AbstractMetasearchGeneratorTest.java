@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.junit.Assert.*;
-import static org.easymock.EasyMock.*;
-
-import java.util.Collection;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,25 +13,27 @@ import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.Result;
 
-
 public class AbstractMetasearchGeneratorTest {
-    
+
     private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator {
 
-        public TestAbstractMetasearchGenerator(MetaSearchManager metaSearchManager, SAXStrategy<Result> saxStrategy) {
+        public TestAbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
             super(metaSearchManager, saxStrategy);
         }
 
         @Override
-        protected Result doSearch(String query) {
+        protected Result doSearch(final String query) {
             return null;
         }
     }
 
     private AbstractMetasearchGenerator generator;
+
     private MetaSearchManager manager;
-    private SAXStrategy<Result> saxStrategy;
-    private Query query;;
+
+    private Query query;
+
+    private SAXStrategy<Result> saxStrategy;;
 
     @Before
     public void setUp() throws Exception {

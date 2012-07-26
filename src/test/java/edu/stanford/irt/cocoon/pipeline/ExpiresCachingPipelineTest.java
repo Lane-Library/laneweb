@@ -39,8 +39,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 public class ExpiresCachingPipelineTest {
 
     private BeanFactory beanFactory;
@@ -335,12 +333,7 @@ public class ExpiresCachingPipelineTest {
     private void doInvokeContextStuff() {
         // InvokeContext does these three things, called in GenerateNode:
         this.pipeline.setProcessorManager(null);
-        expect(this.parameters.getParameter(Model.EXPIRES, null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("outputBufferSize", 0)).andReturn(0);
-        replay(this.parameters);
         this.pipeline.setup(this.parameters);
-        verify(this.parameters);
-        reset(this.parameters);
         this.pipeline.setErrorHandler(null);
     }
 

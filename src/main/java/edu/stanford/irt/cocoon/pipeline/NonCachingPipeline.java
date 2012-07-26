@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.StringTokenizer;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -27,7 +25,6 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * This is the base for all implementations of a <code>ProcessingPipeline</code>
@@ -38,15 +35,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
 
     /** The component manager set with compose() and recompose() */
     private BeanFactory beanFactory;
-
-    /** Configured Expires value */
-    private long configuredExpires;
-
-    /** Configured Output Buffer Size */
-    private int configuredOutputBufferSize;
-
-    /** Expires value */
-    private long expires;
 
     // Generator stuff
     private Generator generator;
@@ -60,9 +48,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * custom XML consumer in case of internal processing.
      */
     private XMLConsumer lastConsumer;
-
-    /** Output Buffer Size */
-    private int outputBufferSize;
 
     /** The parameters */
     private Parameters parameters;
@@ -257,13 +242,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      */
     public void setup(final Parameters params) {
         this.parameters = params;
-        final String expiresValue = params.getParameter(Model.EXPIRES, null);
-        if (expiresValue != null) {
-            this.expires = parseExpires(expiresValue);
-        } else {
-            this.expires = this.configuredExpires;
-        }
-        this.outputBufferSize = params.getParameterAsInteger("outputBufferSize", this.configuredOutputBufferSize);
     }
 
     /**
@@ -290,16 +268,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         connect(environment, prev, this.lastConsumer);
     }
 
-    protected long getExpires() {
-        return this.expires;
-    }
-
     protected XMLConsumer getLastConsumer() {
         return this.lastConsumer;
-    }
-
-    protected int getOutputBufferSize() {
-        return this.outputBufferSize;
     }
 
     protected Parameters getParameters() {
@@ -332,7 +302,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
                 this.generator.generate();
             } else {
                 // set the output stream
-                this.serializer.setOutputStream(environment.getOutputStream(this.outputBufferSize));
+                this.serializer.setOutputStream(environment.getOutputStream(0));
                 // execute the pipeline:
                 this.generator.generate();
             }
@@ -373,58 +343,5 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         } catch (IOException e) {
             throw new LanewebException(e);
         }
-    }
-
-    /**
-     * Parse the expires parameter
-     */
-    private long parseExpires(final String expire) {
-        StringTokenizer tokens = new StringTokenizer(expire);
-        // get <base>
-        String current = tokens.nextToken();
-        if (current.equals("modification")) {
-            current = "now";
-        }
-        long number;
-        long modifier;
-        long result = 0;
-        while (tokens.hasMoreTokens()) {
-            current = tokens.nextToken();
-            // get rid of the optional <plus> keyword
-            if (current.equals("plus")) {
-                current = tokens.nextToken();
-            }
-            // We're expecting a sequence of <number> and <modification> here
-            // get <number> first
-            try {
-                number = Long.parseLong(current);
-            } catch (NumberFormatException nfe) {
-                return -1;
-            }
-            // now get <modifier>
-            try {
-                current = tokens.nextToken();
-            } catch (NoSuchElementException nsee) {
-            }
-            if (current.equals("years")) {
-                modifier = 365L * 24L * 60L * 60L * 1000L;
-            } else if (current.equals("months")) {
-                modifier = 30L * 24L * 60L * 60L * 1000L;
-            } else if (current.equals("weeks")) {
-                modifier = 7L * 24L * 60L * 60L * 1000L;
-            } else if (current.equals("days")) {
-                modifier = 24L * 60L * 60L * 1000L;
-            } else if (current.equals("hours")) {
-                modifier = 60L * 60L * 1000L;
-            } else if (current.equals("minutes")) {
-                modifier = 60L * 1000L;
-            } else if (current.equals("seconds")) {
-                modifier = 1000L;
-            } else {
-                return -1;
-            }
-            result += number * modifier;
-        }
-        return result;
     }
 }

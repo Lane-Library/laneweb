@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.laneweb.eresources.AbstractCollectionManager;
-import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends AbstractCollectionManager {
 

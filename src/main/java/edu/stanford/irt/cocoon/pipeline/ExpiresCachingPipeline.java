@@ -162,9 +162,8 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 }
                 byte[] cachedData;
                 Generator generator = getGenerator();
-                int outputBufferSize = getOutputBufferSize();
                 if (serializer.equals(lastConsumer)) {
-                    CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(outputBufferSize));
+                    CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(0));
                     // set the output stream
                     serializer.setOutputStream(os);
                     generator.generate();
