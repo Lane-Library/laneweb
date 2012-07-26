@@ -19,8 +19,8 @@
 	
 
 	//if not from hospital and user click on a link that going to be proxy
-	if (needPopup && Y.one("a[href *='secure/apps/proxy/credential'] , a[href *='laneproxy']")) {
-		Y.all("a[href *='secure/apps/proxy/credential'] , a[href *='laneproxy']").on("click",function(event) {
+	if (needPopup && Y.one("a[href *=secure/apps/proxy/credential] , a[href *=laneproxy]")) {
+		Y.all("a[href *=secure/apps/proxy/credential] , a[href *=laneproxy]").on("click",function(event) {
 			var link = event.target, isActive;
 			redirectUrl = escape(link.get('href'));
 			event.preventDefault();
@@ -40,8 +40,8 @@
 		}, document);
 	}
 
-	if ( Y.one("a[href ='/././secure/login.html']")) {
-		Y.one("a[href ='/././secure/login.html']").on("click",function(event) {
+	if ( Y.one("a[href =/././secure/login.html]")) {
+		Y.one("a[href =/././secure/login.html]").on("click",function(event) {
 			if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
 				//will be redirected to same page after the webauth
 				document.location = '/././secure/persistentLogin.html?pl=false&url='+ escape(document.location);
