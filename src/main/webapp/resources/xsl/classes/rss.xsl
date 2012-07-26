@@ -49,7 +49,7 @@
                 <xsl:text><![CDATA[<b>]]>Presentation<![CDATA[</b>: ]]></xsl:text><xsl:value-of select="./lc:event_name/text()"/><xsl:text><![CDATA[<br/>]]></xsl:text>
                 <xsl:text><![CDATA[<b>]]>Speaker<![CDATA[</b>: ]]></xsl:text>
                  <xsl:choose>
-                    <xsl:when test="./lc:more_info_url">
+                    <xsl:when test="string-length(./lc:more_info_url)">
                         <xsl:text><![CDATA[<a href="]]></xsl:text><xsl:value-of select="./lc:more_info_url"/><xsl:text><![CDATA[">]]></xsl:text>
                             <xsl:value-of select="./lc:speaker"/>
                         <xsl:text><![CDATA[</a>]]></xsl:text>
