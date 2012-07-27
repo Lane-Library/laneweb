@@ -11,7 +11,10 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,6 +42,8 @@ public class SuggestionController {
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/history")
     private SuggestionManager historySuggestionManager;
 
+    private Logger log = LoggerFactory.getLogger(SuggestionController.class);
+
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
     private SuggestionManager meshSuggestionManager;
 
@@ -58,6 +63,23 @@ public class SuggestionController {
         }
         map.put("suggest", strings);
         return map;
+    }
+
+    /**
+     * Handle situations where the SuggestionManager chokes on a String like so:
+     * java.lang.IllegalArgumentException: cleaned query is less than 3,
+     * query:,ed, cleaned:ed
+     * 
+     * @param ex
+     *            the IllegalArgumentException
+     * @return an empty map;
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    public Map<String, List<String>> handleIllegalArgumentException(final IllegalArgumentException ex) {
+        if (this.log.isWarnEnabled()) {
+            this.log.warn(ex.getMessage(), ex);
+        }
+        return Collections.emptyMap();
     }
 
     public void setEresourceSuggestionManager(final SuggestionManager eresourceSuggestionManager) {
