@@ -62,8 +62,6 @@ public class XIncludeTransformer extends AbstractTransformer implements Cacheabl
 
     private SAXParser parser;
 
-    private SourceResolver resolver;
-
     /** The {@link SourceValidity} instance associated with this request. */
     private MultiSourceValidity validity;
 
@@ -106,10 +104,9 @@ public class XIncludeTransformer extends AbstractTransformer implements Cacheabl
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void setup(final SourceResolver resolver, final Map model, final String source, final Parameters parameters) {
-        this.resolver = resolver;
         this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);
-        this.xIncludePipe = new XIncludePipe(this.resolver, this.validity, this.manager, this.parser, new ExceptionListener(model,
-                this.log), new XMLBaseSupport(this.resolver, getLogger()));
+        this.xIncludePipe = new XIncludePipe(resolver, this.validity, this.manager, this.parser, new ExceptionListener(model,
+                this.log), new XMLBaseSupport(resolver, getLogger()));
         this.xIncludePipe.init(null, null);
         super.setContentHandler(this.xIncludePipe);
         super.setLexicalHandler(this.xIncludePipe);

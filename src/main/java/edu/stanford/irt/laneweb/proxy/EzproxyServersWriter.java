@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.proxy;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,14 +45,22 @@ public class EzproxyServersWriter {
         + "select url as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
 
-    private static final byte[] SUL = "T jenson.stanford.edu\nU http://jenson.stanford.edu\nHJ jenson.stanford.edu\n\nT socrates.stanford.edu\nU http://socrates.stanford.edu\nHJ socrates.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
-            .getBytes();
+    private static final byte[] SUL;
 
     private static final byte[] T = {'T',' '};
     
     private static final byte[] U = {'U',' '};
 
     private static final String UTF8 = "UTF-8";
+    
+    static {
+        try {
+            SUL = "T jenson.stanford.edu\nU http://jenson.stanford.edu\nHJ jenson.stanford.edu\n\nT socrates.stanford.edu\nU http://socrates.stanford.edu\nHJ socrates.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
+                    .getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
     
     private DataSource dataSource;
 

@@ -29,8 +29,6 @@ public class PagingData implements Cloneable {
 
     private List<String> pagingLinks;
 
-    private boolean showingAll;
-
     private int size;
 
     private int start;
@@ -54,9 +52,8 @@ public class PagingData implements Cloneable {
         }
         this.pages = this.size / this.pageSize;
         this.pages = this.size % this.pageSize != 0 ? this.pages + 1 : this.pages;
-        this.showingAll = this.size <= this.length;
         StringBuilder sb = new StringBuilder("Displaying ");
-        if (this.showingAll) {
+        if (this.size <= this.length) {
             sb.append("all ").append(this.size).append(" matches.");
             this.pagingLinks = Collections.emptyList();
         } else {

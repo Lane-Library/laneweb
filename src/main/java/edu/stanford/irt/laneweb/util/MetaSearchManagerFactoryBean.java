@@ -13,7 +13,7 @@ public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManag
         this.msms = msms;
     }
 
-    public MetaSearchManager getObject() throws Exception {
+    public MetaSearchManager getObject() {
         return this.msms.getMetaSearchManager();
     }
 

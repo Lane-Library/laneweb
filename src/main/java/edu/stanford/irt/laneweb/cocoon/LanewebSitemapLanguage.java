@@ -105,7 +105,7 @@ public class LanewebSitemapLanguage extends SitemapLanguage implements Applicati
         throw new UnsupportedOperationException();
     }
 
-    public void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(final ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 

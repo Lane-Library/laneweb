@@ -17,7 +17,7 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
 
     private static final Pattern CLOSED_DATE_PATTERN = Pattern.compile("(\\d{4})\\-(\\d{4})\\.");
 
-    private static final List<String> favoredPublishers = Arrays.asList("sciencedirect", "wiley", "springer", "highwire", "ovid",
+    private static final List<String> FAVORED_PUBLISHERS = Arrays.asList("sciencedirect", "wiley", "springer", "highwire", "ovid",
             "nature", "liebert", "informaworld", "karger", "pubmed central");
 
     private static final Pattern OPEN_DATE_PATTERN = Pattern.compile(".*(\\d{4})\\-");
@@ -94,8 +94,8 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
      */
     private int calculatePublisherScore(final Version v) {
         int score = 1;
-        if (null != v.getPublisher() && favoredPublishers.contains(v.getPublisher().toLowerCase())) {
-            score = score + (10 - favoredPublishers.indexOf(v.getPublisher().toLowerCase()));
+        if (null != v.getPublisher() && FAVORED_PUBLISHERS.contains(v.getPublisher().toLowerCase())) {
+            score = score + (10 - FAVORED_PUBLISHERS.indexOf(v.getPublisher().toLowerCase()));
         }
         return score;
     }
