@@ -16,7 +16,17 @@
 		needPopup = false;
 	}
 	
-	
+	LANE.persistentlogin = function() {
+		return {
+			newWindow : function(event, urlPage) {
+				Y.io(urlPage, {
+					on : {
+						success : show
+					}
+				});
+			}
+		};
+	}();
 
 	//if not from hospital and user click on a link that going to be proxy
 	if (needPopup && Y.one("a[href *=secure/apps/proxy/credential] , a[href *=laneproxy]")) {
@@ -64,6 +74,7 @@
 		// To hide the close button on the window the window
 		// but close when the user click on the black background
 		Y.one('#lightboxClose').setStyle('visibility', 'hidden');
+		
 		Y.one('.yui3-lightboxbg').on('click',function(event) {
 			event.preventDefault();
 			lightbox.hide();
