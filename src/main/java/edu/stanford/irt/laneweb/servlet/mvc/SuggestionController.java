@@ -75,6 +75,7 @@ public class SuggestionController {
      * @return an empty map;
      */
     @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody
     public Map<String, List<String>> handleIllegalArgumentException(final IllegalArgumentException ex) {
         if (this.log.isWarnEnabled()) {
             this.log.warn(ex.getMessage(), ex);
