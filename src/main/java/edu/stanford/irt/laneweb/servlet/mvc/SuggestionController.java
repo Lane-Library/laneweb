@@ -76,11 +76,11 @@ public class SuggestionController {
      */
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseBody
-    public Map<String, List<String>> handleIllegalArgumentException(final IllegalArgumentException ex) {
+    public String handleIllegalArgumentException(final IllegalArgumentException ex) {
         if (this.log.isWarnEnabled()) {
             this.log.warn(ex.getMessage(), ex);
         }
-        return Collections.emptyMap();
+        return "{}";
     }
 
     public void setEresourceSuggestionManager(final SuggestionManager eresourceSuggestionManager) {
