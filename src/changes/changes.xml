@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-07-30" version="1.13.5" description="1.13.5 bug fix release">
+            <action date="2012-07-21" issue="73557" dev="ryanmax" type="fix">
+                Lane classes RSS: speaker URL often empty 
+            </action>
+            <action date="2012-07-24" issue="73496" dev="ceyates" type="update">
+                throw exceptions which occur when saving bookmarks 
+            </action>
+            <action date="2012-07-24" issue="73361" dev="ceyates" type="add">
+                Autofill all the forms (ask us, feedback, etc) while logged into MyLane
+            </action>
+            <action date="2012-07-23" issue="73320" dev="ceyates" type="fix">
+                javascript errors in IE 6, 7, 8 when using yui-3.5.1 
+            </action>
+        </release>
         <release date="2012-07-23" version="1.13.4" description="1.13.4 bug fix release">
             <action date="2012-07-21" issue="73401" dev="ryanmax" type="update">
                 update STAFF ip ranges 
