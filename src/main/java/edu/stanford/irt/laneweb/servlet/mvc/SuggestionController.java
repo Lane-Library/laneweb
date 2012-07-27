@@ -28,6 +28,8 @@ public class SuggestionController {
 
     private static final Pattern ER_PATTERN = Pattern.compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
 
+    private static final Map<String, List<String>> EMPTY_SUGGESTIONS = Collections.singletonMap("suggest", Collections.<String>emptyList());
+
     private static final int MAX_QUERY_LENGTH = 32;
 
     private static final int MIN_QUERY_LENGTH = 3;
@@ -80,7 +82,7 @@ public class SuggestionController {
         if (this.log.isWarnEnabled()) {
             this.log.warn(ex.getMessage(), ex);
         }
-        return Collections.singletonMap("suggest", Collections.<String>emptyList());
+        return EMPTY_SUGGESTIONS;
     }
 
     public void setEresourceSuggestionManager(final SuggestionManager eresourceSuggestionManager) {
