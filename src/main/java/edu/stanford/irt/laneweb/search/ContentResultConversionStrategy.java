@@ -44,7 +44,7 @@ public class ContentResultConversionStrategy {
                         if (!resultTitles.containsKey(crsrKey)) {
                             resultTitles.put(crsrKey, crsr);
                             contentResults.add(crsr);
-                        } else if (crsr.getScore() > resultTitles.get(crsrKey).getScore()) {
+                        } else if (score > resultTitles.get(crsrKey).getScore()) {
                             contentResults.remove(resultTitles.get(crsrKey));
                             contentResults.add(crsr);
                             resultTitles.remove(crsrKey);
