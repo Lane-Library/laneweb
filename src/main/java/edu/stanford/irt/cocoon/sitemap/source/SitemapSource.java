@@ -38,40 +38,6 @@ import edu.stanford.irt.cocoon.source.SourceException;
  */
 public class SitemapSource implements Source, XMLizable {
 
-    /**
-     * A simple SourceValidity protecting callers from resets.
-     */
-    public static class SitemapSourceValidity implements SourceValidity {
-
-        private static final long serialVersionUID = 1L;
-
-        private SourceValidity validity;
-
-        protected SitemapSourceValidity() {
-            super();
-        }
-
-        public SourceValidity getNestedValidity() {
-            return this.validity;
-        }
-
-        public int isValid() {
-            return (this.validity != null ? this.validity.isValid() : SourceValidity.INVALID);
-        }
-
-        public int isValid(final SourceValidity validity) {
-            if (validity instanceof SitemapSourceValidity) {
-                return (this.validity != null ? this.validity.isValid(((SitemapSourceValidity) validity).getNestedValidity())
-                        : SourceValidity.INVALID);
-            }
-            return SourceValidity.INVALID;
-        }
-
-        protected void set(final SourceValidity validity) {
-            this.validity = validity;
-        }
-    }
-
     /** The environment */
     private Environment environment;
 

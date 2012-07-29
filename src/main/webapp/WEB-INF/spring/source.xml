@@ -5,43 +5,43 @@
     
     <bean name="org.apache.excalibur.source.SourceFactory/content"
         class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
-        <property name="processor" ref="org.apache.cocoon.Processor/content"/>
+        <constructor-arg ref="org.apache.cocoon.Processor/content"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/eresources"
         class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
-        <property name="processor" ref="org.apache.cocoon.Processor/eresources"/>
+        <constructor-arg ref="org.apache.cocoon.Processor/eresources"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/applications"
         class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
-        <property name="processor" ref="org.apache.cocoon.Processor/applications"/>
+        <constructor-arg ref="org.apache.cocoon.Processor/applications"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/rss"
         class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
-        <property name="processor" ref="org.apache.cocoon.Processor/rss"/>
+        <constructor-arg ref="org.apache.cocoon.Processor/rss"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/mobile"
         class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
-        <property name="processor" ref="org.apache.cocoon.Processor/mobile"/>
+        <constructor-arg ref="org.apache.cocoon.Processor/mobile"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/classes"
         class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
-        <property name="processor" ref="org.apache.cocoon.Processor/classes"/>
+        <constructor-arg ref="org.apache.cocoon.Processor/classes"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/bookmarks"
         class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
-        <property name="processor" ref="org.apache.cocoon.Processor/bookmarks"/>
+        <constructor-arg ref="org.apache.cocoon.Processor/bookmarks"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     

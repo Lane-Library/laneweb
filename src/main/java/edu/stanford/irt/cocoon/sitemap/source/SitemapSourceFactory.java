@@ -20,6 +20,10 @@ public abstract class SitemapSourceFactory implements SourceFactory {
 
     private Processor processor;
 
+    public SitemapSourceFactory(final Processor processor) {
+        this.processor = processor;
+    }
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public Source getSource(final String uri, final Map parameters) {
         Map<String, Object> newObjectModel = new HashMap<String, Object>(getModel());
@@ -54,10 +58,6 @@ public abstract class SitemapSourceFactory implements SourceFactory {
     }
 
     public void release(final Source source) {
-    }
-
-    public void setProcessor(final Processor processor) {
-        this.processor = processor;
     }
 
     protected abstract Map<String, Object> getModel();
