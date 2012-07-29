@@ -4,19 +4,15 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.Processor;
-import org.apache.cocoon.Processor.InternalPipelineDescription;
 import org.apache.cocoon.components.pipeline.ProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -27,13 +23,11 @@ import org.xml.sax.SAXException;
 
 public class LanewebSitemapSourceTest {
 
-    private Map<String, Object> model;
+    private ByteArrayOutputStream baos;
+
+    private Environment environment;
 
     private ProcessingPipeline pipeline;
-
-    private InternalPipelineDescription pipelineDescription;
-
-    private Processor processor;
 
     private SitemapSource source;
 
@@ -43,87 +37,95 @@ public class LanewebSitemapSourceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.processor = createMock(Processor.class);
         this.uri = "foo:/bar?foo=bar";
-        this.model = new HashMap<String, Object>();
-        this.pipelineDescription = createMock(InternalPipelineDescription.class);
+        this.environment = createMock(Environment.class);
         this.pipeline = createMock(ProcessingPipeline.class);
-        this.pipelineDescription.processingPipeline = this.pipeline;
+        this.baos = createMock(ByteArrayOutputStream.class);
         this.validity = createMock(SourceValidity.class);
-        expect(this.processor.buildPipeline(isA(Environment.class))).andReturn(this.pipelineDescription);
-        this.pipeline.prepareInternal(isA(Environment.class));
-        expect(this.pipeline.getValidityForEventPipeline()).andReturn(this.validity);
-        expect(this.pipeline.getKeyForEventPipeline()).andReturn("key");
-        replay(this.processor, this.pipelineDescription, this.pipeline, this.validity);
-        this.source = new SitemapSource(this.uri, this.model, this.processor);
-        verify(this.processor, this.pipelineDescription, this.pipeline, this.validity);
-        reset(this.processor, this.pipelineDescription, this.pipeline, this.validity);
+        this.source = new SitemapSource(this.uri, this.environment, this.pipeline, this.baos);
     }
 
     @Test
     public void testExists() {
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         assertTrue(this.source.exists());
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testGetContentLength() {
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         assertEquals(-1, this.source.getContentLength());
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testGetInputStream() throws IOException, ProcessingException {
         expect(this.pipeline.process(isA(Environment.class))).andReturn(true);
-        replay(this.pipeline);
+        expect(this.baos.toByteArray()).andReturn(new byte[0]);
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         this.source.getInputStream();
-        verify(this.pipeline);
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testGetLastModified() {
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         assertEquals(0, this.source.getLastModified());
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testGetMimeType() {
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         try {
             this.source.getMimeType();
             fail();
         } catch (UnsupportedOperationException e) {
         }
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testGetScheme() {
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         assertEquals("foo", this.source.getScheme());
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testGetURI() {
+        expect(this.pipeline.getKeyForEventPipeline()).andReturn("key");
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         assertEquals("foo:/bar?foo=bar&pipelinehash=key", this.source.getURI());
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testGetValidity() {
+        expect(this.pipeline.getValidityForEventPipeline()).andReturn(this.validity);
         expect(this.validity.isValid()).andReturn(SourceValidity.VALID);
-        replay(this.validity);
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         assertEquals(SourceValidity.VALID, this.source.getValidity().isValid());
-        verify(this.validity);
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testRefresh() {
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         try {
             this.source.refresh();
             fail();
         } catch (UnsupportedOperationException e) {
         }
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 
     @Test
     public void testToSAX() throws SAXException, ProcessingException {
         expect(this.pipeline.process(isA(Environment.class), isA(XMLConsumer.class))).andReturn(true);
-        replay(this.pipeline);
+        replay(this.environment, this.pipeline, this.baos, this.validity);
         this.source.toSAX(null);
-        verify(this.pipeline);
+        verify(this.environment, this.pipeline, this.baos, this.validity);
     }
 }

@@ -17,14 +17,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.Processor;
+import org.apache.cocoon.components.pipeline.ProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
-import org.apache.cocoon.environment.wrapper.RequestParameters;
 import org.apache.cocoon.xml.ContentHandlerWrapper;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.Source;
@@ -35,8 +31,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 import edu.stanford.irt.cocoon.source.SourceException;
-import edu.stanford.irt.laneweb.cocoon.LanewebEnvironment;
-import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * Implementation of a {@link Source} that gets its content by invoking a
@@ -83,8 +77,7 @@ public class SitemapSource implements Source, XMLizable {
 
     private ByteArrayOutputStream outputStream;
 
-    /** The pipeline description */
-    private Processor.InternalPipelineDescription pipelineDescription;
+    private ProcessingPipeline pipeline;
 
     /** The used protocol */
     private String protocol;
@@ -92,62 +85,19 @@ public class SitemapSource implements Source, XMLizable {
     /** The system id used for caching */
     private String systemIdForCaching;
 
-    /** The internal event pipeline validities */
-    private SitemapSourceValidity validity;
+    private String uri;
 
-    /**
-     * Construct a new object
-     * 
-     * @throws Exception
-     */
-    // TODO: a lot of this should probably be in the SourceFactory
-    @SuppressWarnings("unchecked")
-    public SitemapSource(final String uri, final Map<String, Object> model, final Processor processor) {
-        this.validity = new SitemapSourceValidity();
+    /** The internal event pipeline validities */
+    private SourceValidity validity;
+
+    public SitemapSource(final String uri, final Environment environment, final ProcessingPipeline pipeline,
+            final ByteArrayOutputStream outputStream) {
+        this.uri = uri;
+        this.environment = environment;
+        this.pipeline = pipeline;
+        this.outputStream = outputStream;
         int colon = uri.indexOf(':');
         this.protocol = uri.substring(0, colon);
-        Map<String, Object> newObjectModel = new HashMap<String, Object>(model);
-        int startOfPath = uri.indexOf(":/") + 2;
-        String sitemapURI = uri.substring(startOfPath);
-        int qMark = sitemapURI.indexOf('?');
-        if (qMark > -1) {
-            sitemapURI = sitemapURI.substring(qMark);
-            // add uri parameters to newObjectModel
-            RequestParameters params = new RequestParameters(sitemapURI.substring(qMark + 1));
-            for (Enumeration<String> names = params.getParameterNames(); names.hasMoreElements();) {
-                String name = names.nextElement();
-                String[] value = params.getParameterValues(name);
-                if (value.length == 1) {
-                    newObjectModel.put(name, value[0]);
-                } else {
-                    newObjectModel.put(name, value);
-                }
-            }
-        }
-        newObjectModel.put(Model.SITEMAP_URI, sitemapURI);
-        this.outputStream = new ByteArrayOutputStream();
-        this.environment = new LanewebEnvironment(newObjectModel, this.outputStream, false);
-        try {
-            this.pipelineDescription = processor.buildPipeline(this.environment);
-            this.pipelineDescription.processingPipeline.prepareInternal(this.environment);
-        } catch (Exception e) {
-            throw new SourceException(e);
-        }
-        this.validity.set(this.pipelineDescription.processingPipeline.getValidityForEventPipeline());
-        String eventPipelineKey = this.pipelineDescription.processingPipeline.getKeyForEventPipeline();
-        if (eventPipelineKey != null) {
-            StringBuilder buffer = new StringBuilder(uri);
-            if (uri.indexOf('?') == -1) {
-                buffer.append('?');
-            } else {
-                buffer.append('&');
-            }
-            buffer.append("pipelinehash=");
-            buffer.append(eventPipelineKey);
-            this.systemIdForCaching = buffer.toString();
-        } else {
-            this.systemIdForCaching = uri;
-        }
     }
 
     /**
@@ -172,7 +122,7 @@ public class SitemapSource implements Source, XMLizable {
      */
     public InputStream getInputStream() throws IOException {
         try {
-            this.pipelineDescription.processingPipeline.process(this.environment);
+            this.pipeline.process(this.environment);
         } catch (ProcessingException e) {
             throw new SourceException(e);
         }
@@ -208,6 +158,22 @@ public class SitemapSource implements Source, XMLizable {
      * Returns the unique identifer for this source
      */
     public String getURI() {
+        if (this.systemIdForCaching == null) {
+            String eventPipelineKey = this.pipeline.getKeyForEventPipeline();
+            if (eventPipelineKey != null) {
+                StringBuilder buffer = new StringBuilder(this.uri);
+                if (this.uri.indexOf('?') == -1) {
+                    buffer.append('?');
+                } else {
+                    buffer.append('&');
+                }
+                buffer.append("pipelinehash=");
+                buffer.append(eventPipelineKey);
+                this.systemIdForCaching = buffer.toString();
+            } else {
+                this.systemIdForCaching = this.uri;
+            }
+        }
         return this.systemIdForCaching;
     }
 
@@ -216,7 +182,10 @@ public class SitemapSource implements Source, XMLizable {
      * pipeline. If pipeline is not cacheable, <code>null</code> is returned.
      */
     public SourceValidity getValidity() {
-        return this.validity.getNestedValidity() == null ? null : this.validity;
+        if (this.validity == null) {
+            this.validity = this.pipeline.getValidityForEventPipeline();
+        }
+        return this.validity;
     }
 
     /**
@@ -239,7 +208,7 @@ public class SitemapSource implements Source, XMLizable {
             consumer = new ContentHandlerWrapper(contentHandler);
         }
         try {
-            this.pipelineDescription.processingPipeline.process(this.environment, consumer);
+            this.pipeline.process(this.environment, consumer);
         } catch (ProcessingException e) {
             throw new SourceException(e);
         }

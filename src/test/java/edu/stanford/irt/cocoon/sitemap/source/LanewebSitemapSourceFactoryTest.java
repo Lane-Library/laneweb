@@ -55,8 +55,8 @@ public class LanewebSitemapSourceFactoryTest {
     public void testGetSource() throws Exception {
         expect(this.processor.buildPipeline(isA(Environment.class))).andReturn(this.pipelineDescription);
         this.pipeline.prepareInternal(isA(Environment.class));
-        expect(this.pipeline.getValidityForEventPipeline()).andReturn(this.validity);
-        expect(this.pipeline.getKeyForEventPipeline()).andReturn("key");
+        // expect(this.pipeline.getValidityForEventPipeline()).andReturn(this.validity);
+        // expect(this.pipeline.getKeyForEventPipeline()).andReturn("key");
         replay(this.processor, this.pipeline, this.pipelineDescription);
         this.factory.getSource("foo:/bar?foo=bar", null);
         verify(this.processor, this.pipeline, this.pipelineDescription);
