@@ -50,14 +50,14 @@ public class IPGroupFetchControllerTest {
     }
 
     @Test
-    public void testGetIPGroup() throws IOException {
+    public void testGetIPGroup() {
         replay(this.binder, this.model, this.request, this.response);
         assertEquals("callback('OTHER');", this.controller.getIPGroup(this.response, IPGroup.OTHER, "callback"));
         verify(this.binder, this.model, this.request, this.response);
     }
 
     @Test
-    public void testGetIPGroupNoCallback() throws IOException {
+    public void testGetIPGroupNoCallback() {
         replay(this.binder, this.model, this.request, this.response);
         assertEquals("OTHER", this.controller.getIPGroup(this.response, IPGroup.OTHER, null));
         verify(this.binder, this.model, this.request, this.response);

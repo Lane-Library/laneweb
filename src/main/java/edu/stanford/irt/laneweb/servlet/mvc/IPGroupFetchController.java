@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,7 +29,7 @@ public class IPGroupFetchController {
     public String getIPGroup(
             final HttpServletResponse response,
             @ModelAttribute(Model.IPGROUP) final IPGroup ipGroup,
-            @RequestParam(required = false) final String callback) throws IOException {
+            @RequestParam(required = false) final String callback) {
         if (callback == null) {
             return ipGroup.toString();
         } else {
