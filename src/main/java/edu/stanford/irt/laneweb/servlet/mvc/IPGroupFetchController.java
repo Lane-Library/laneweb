@@ -24,7 +24,7 @@ public class IPGroupFetchController {
         this.binder = binder;
     }
 
-    @RequestMapping(value = "**/apps/ipGroupFetch", produces = "application/x-javascript")
+    @RequestMapping(value = "**/apps/ipGroupFetch", produces = "application/javascript")
     @ResponseBody
     public String getIPGroup(
             final HttpServletResponse response,
