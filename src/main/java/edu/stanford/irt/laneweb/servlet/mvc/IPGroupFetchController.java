@@ -4,53 +4,43 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 
 @Controller
 public class IPGroupFetchController {
 
-    private static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
+    private RemoteProxyIPDataBinder binder;
 
-    @RequestMapping(value = "**/apps/ipGroupFetch")
-    public void getIPGroup(final HttpServletRequest request, final HttpServletResponse response,
+    @Autowired
+    public IPGroupFetchController(final RemoteProxyIPDataBinder binder) {
+        this.binder = binder;
+    }
+
+    @RequestMapping(value = "**/apps/ipGroupFetch", produces = "application/x-javascript")
+    @ResponseBody
+    public String getIPGroup(
+            final HttpServletResponse response,
+            @ModelAttribute(Model.IPGROUP) final IPGroup ipGroup,
             @RequestParam(required = false) final String callback) throws IOException {
-        String currentIP = getRemoteAddress(request);
-        HttpSession session = request.getSession();
-        boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
-        if (!isSameIP) {
-            session.setAttribute(Model.REMOTE_ADDR, currentIP);
-        }
-        IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
-        if (ipGroup == null || !isSameIP) {
-            ipGroup = IPGroup.getGroupForIP(currentIP);
-            session.setAttribute(Model.IPGROUP, ipGroup);
-        }
-        response.setHeader("Content-Type", "application/x-javascript");
-        if (callback != null) {
-            response.getWriter().write(callback + "('" + ipGroup + "');");
+        if (callback == null) {
+            return ipGroup.toString();
         } else {
-            response.getWriter().write(ipGroup.toString());
+            return callback + "('" + ipGroup + "');";
         }
     }
 
-    private String getRemoteAddress(final HttpServletRequest request) {
-        // mod_proxy puts the real remote address in an x-forwarded-for
-        // header
-        // Load balancer also does this
-        String header = request.getHeader(X_FORWARDED_FOR);
-        if (header == null) {
-            return request.getRemoteAddr();
-        } else if (header.indexOf(',') > 0) {
-            return header.substring(header.lastIndexOf(',') + 1, header.length()).trim();
-        } else {
-            return header;
-        }
+    @ModelAttribute
+    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.binder.bind(model.asMap(), request);
     }
 }
