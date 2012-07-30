@@ -27,6 +27,8 @@ public interface Model {
 
     String DEBUG = "debug";
 
+    String EMAIL = "email";
+
     String EMRID = "emrid";
 
     String ENGINES = "engines";

@@ -59,9 +59,9 @@
     <!-- case 73361 Autofill all the forms (ask us, feedback, etc) while logged into MyLane -->
     <xsl:template match="h:input[@name='email']/@value">
         <xsl:choose>
-            <xsl:when test="string-length($sunetid) &gt; 0">
+            <xsl:when test="string-length($email) &gt; 0">
                 <xsl:attribute name="value">
-                    <xsl:value-of select="concat($sunetid, '@stanford.edu')"/>
+                    <xsl:value-of select="$email"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:otherwise>

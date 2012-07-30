@@ -24,6 +24,8 @@
     <xsl:param name="proxy-links"/>
 
     <xsl:param name="sunetid"/>
+    
+    <xsl:param name="email"/>
 
     <xsl:param name="hashed-sunetid"/>
 

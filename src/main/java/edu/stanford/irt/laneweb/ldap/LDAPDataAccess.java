@@ -3,9 +3,6 @@ package edu.stanford.irt.laneweb.ldap;
 import java.security.PrivilegedAction;
 import java.util.List;
 
-import javax.naming.NamingEnumeration;
-import javax.naming.directory.Attribute;
-import javax.naming.directory.Attributes;
 import javax.security.auth.Subject;
 
 import org.slf4j.Logger;
@@ -16,37 +13,6 @@ import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
 public class LDAPDataAccess {
-
-    private static class LDAPAttributesMapper implements AttributesMapper {
-
-        @Override
-        public Object mapFromAttributes(final Attributes attributes) throws javax.naming.NamingException {
-            String name = null;
-            String sunetid = null;
-            String univId = null;
-            boolean isActive = false;
-            Attribute currentAttribute = attributes.get("displayName");
-            if (currentAttribute != null) {
-                name = (String) currentAttribute.get();
-            }
-            currentAttribute = attributes.get("uid");
-            if (currentAttribute != null) {
-                sunetid = (String) currentAttribute.get();
-            }
-            currentAttribute = attributes.get("suunivid");
-            if (currentAttribute != null) {
-                univId = (String) currentAttribute.get();
-            }
-            currentAttribute = attributes.get("suAffiliation");
-            if (currentAttribute != null) {
-                NamingEnumeration<?> attrs = currentAttribute.getAll();
-                while (!isActive && attrs.hasMore()) {
-                    isActive = Affiliation.getAffiliation((String) attrs.next()).isActive();
-                }
-            }
-            return new LDAPData(sunetid, name, univId, isActive);
-        }
-    }
 
     private static final class LDAPPrivilegedAction implements PrivilegedAction<LDAPData> {
 
@@ -83,7 +49,7 @@ public class LDAPDataAccess {
         LDAPData ldapData = doGet("susunetid=" + sunetid);
         if (ldapData == null) {
             this.log.warn("using sunetid for name");
-            ldapData = new LDAPData(sunetid, sunetid, null, false);
+            ldapData = new LDAPData(sunetid, sunetid, null, false, null);
         }
         return ldapData;
     }
@@ -92,7 +58,7 @@ public class LDAPDataAccess {
         LDAPData ldapData = doGet("suunivid=" + univid);
         if (ldapData == null) {
             this.log.warn("can't find sunetid for univid: " + univid);
-            ldapData = new LDAPData(null, null, univid, false);
+            ldapData = new LDAPData(null, null, univid, false, null);
         }
         return ldapData;
     }

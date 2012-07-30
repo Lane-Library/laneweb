@@ -47,7 +47,7 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"
         class="edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder">
-        <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"
