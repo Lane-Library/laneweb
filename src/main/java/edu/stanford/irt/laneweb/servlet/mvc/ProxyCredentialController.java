@@ -1,11 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.io.IOException;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
+import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
 
 @Controller
 public class ProxyCredentialController {
@@ -23,50 +18,46 @@ public class ProxyCredentialController {
 
     private static final String TICKET_PARAM = "&ticket=";
 
-    @Resource(name = "laneweb.context.ezproxy-key")
-    private String ezproxyKey;
+    private SunetIdAndTicketDataBinder binder;
 
     @Autowired
-    private SunetIdSource sunetIdSource;
-
-    @ModelAttribute(Model.SUNETID)
-    public String getSunetid(final HttpServletRequest request) {
-        return this.sunetIdSource.getSunetid(request);
-    }
-
-    @ModelAttribute(Model.TICKET)
-    public Ticket getTicket(@ModelAttribute(Model.SUNETID) final String sunetid, final HttpSession session) {
-        Ticket ticket = null;
-        if (sunetid != null) {
-            ticket = (Ticket) session.getAttribute(Model.TICKET);
-            if (ticket == null || !ticket.isValid()) {
-                ticket = new Ticket(sunetid, this.ezproxyKey);
-                session.setAttribute(Model.TICKET, ticket);
-            }
-        }
-        return ticket;
+    public ProxyCredentialController(final SunetIdAndTicketDataBinder binder) {
+        this.binder = binder;
     }
 
     @RequestMapping(value = "**/apps/proxy/credential")
-    public void proxyRedirect(final HttpServletResponse response, final HttpServletRequest request,
-            @ModelAttribute(Model.SUNETID) final String sunetid, @ModelAttribute(Model.TICKET) final Ticket ticket)
-            throws IOException {
+    public String proxyRedirect(
+            final HttpServletRequest request,
+            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.TICKET) final Ticket ticket) {
+        StringBuilder sb = new StringBuilder("redirect:");
         String queryString = request.getQueryString();
-        if (sunetid == null || ticket == null) {
-            response.sendRedirect("/secure/apps/proxy/credential?" + queryString);
-        } else {
-            secureProxyRedirect(response, request, sunetid, ticket);
+        if (queryString == null) {
+            throw new IllegalArgumentException("null queryString");
         }
+        if (sunetid == null || ticket == null) {
+            sb.append("/secure/apps/proxy/credential?").append(queryString);
+        } else {
+            sb.append(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket).append('&').append(queryString);
+        }
+        return sb.toString();
     }
 
     @RequestMapping(value = "**/secure/apps/proxy/credential")
-    public void secureProxyRedirect(final HttpServletResponse response, final HttpServletRequest request,
-            @ModelAttribute(Model.SUNETID) final String sunetid, @ModelAttribute(Model.TICKET) final Ticket ticket)
-            throws IOException {
+    public String secureProxyRedirect(
+            final HttpServletRequest request,
+            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.TICKET) final Ticket ticket) {
         String queryString = request.getQueryString();
         if (queryString == null) {
-            throw new IllegalArgumentException("null query-string");
+            throw new IllegalArgumentException("null queryString");
         }
-        response.sendRedirect(PROXY_URL_BASE + sunetid + TICKET_PARAM + ticket + "&" + queryString);
+        return new StringBuilder("redirect:").append(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket)
+                .append('&').append(queryString).toString();
+    }
+
+    @ModelAttribute
+    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.binder.bind(model.asMap(), request);
     }
 }
