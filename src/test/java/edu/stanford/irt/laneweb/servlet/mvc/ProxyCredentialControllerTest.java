@@ -53,7 +53,7 @@ public class ProxyCredentialControllerTest {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
         assertEquals("redirect:http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
-                + "&url=http://www.pubmed.foo/search?q=a&b=c", this.controller.proxyRedirect(this.request, "ditenus", this.ticket));
+                + "&url=http://www.pubmed.foo/search?q=a&b=c", this.controller.proxyRedirect(this.request, null, "ditenus", this.ticket));
         verify(this.request, this.binder);
     }
 
@@ -62,7 +62,7 @@ public class ProxyCredentialControllerTest {
         expect(this.request.getQueryString()).andReturn(null);
         replay(this.request, this.binder);
         try {
-            this.controller.proxyRedirect(this.request, "ditenus", this.ticket);
+            this.controller.proxyRedirect(this.request, null, "ditenus", this.ticket);
             fail("should throw IllegalStateException, null query-string");
         } catch (IllegalArgumentException e) {
         }
@@ -74,7 +74,7 @@ public class ProxyCredentialControllerTest {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
         assertEquals("redirect:/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c",
-                this.controller.proxyRedirect(this.request, null, this.ticket));
+                this.controller.proxyRedirect(this.request, null, null, this.ticket));
         verify(this.request, this.binder);
     }
 
@@ -83,7 +83,7 @@ public class ProxyCredentialControllerTest {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
         assertEquals("redirect:/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c",
-                this.controller.proxyRedirect(this.request, "ditenus", null));
+                this.controller.proxyRedirect(this.request, null, "ditenus", null));
         verify(this.request, this.binder);
     }
 
@@ -92,7 +92,7 @@ public class ProxyCredentialControllerTest {
         expect(this.request.getQueryString()).andReturn(null);
         replay(this.request, this.binder);
         try {
-            this.controller.secureProxyRedirect(this.request, "ditenus", this.ticket);
+            this.controller.secureProxyRedirect(this.request, null, "ditenus", this.ticket);
             fail("should throw IllegalStateException, null query-string");
         } catch (IllegalArgumentException e) {
         }
@@ -105,7 +105,7 @@ public class ProxyCredentialControllerTest {
         replay(this.request, this.binder);
         assertEquals("redirect:http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
                 + "&url=http://www.pubmed.foo/search?q=a&b=c",
-                this.controller.secureProxyRedirect(this.request, "ditenus", this.ticket));
+                this.controller.secureProxyRedirect(this.request, null, "ditenus", this.ticket));
         verify(this.request, this.binder);
     }
 }
