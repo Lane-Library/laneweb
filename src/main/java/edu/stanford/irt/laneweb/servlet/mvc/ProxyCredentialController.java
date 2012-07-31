@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
@@ -28,6 +29,7 @@ public class ProxyCredentialController {
     @RequestMapping(value = "**/apps/proxy/credential")
     public String proxyRedirect(
             final HttpServletRequest request,
+            final RedirectAttributes attrs,
             @ModelAttribute(Model.SUNETID) final String sunetid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
         StringBuilder sb = new StringBuilder("redirect:");
@@ -46,6 +48,7 @@ public class ProxyCredentialController {
     @RequestMapping(value = "**/secure/apps/proxy/credential")
     public String secureProxyRedirect(
             final HttpServletRequest request,
+            final RedirectAttributes attrs,
             @ModelAttribute(Model.SUNETID) final String sunetid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
         String queryString = request.getQueryString();
