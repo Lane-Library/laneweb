@@ -32,6 +32,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         int currentVersionId = -1;
         int currentLinkId = -1;
         String currentTitle = null;
+        String trimmedQuery = (query != null) ? query.trim() : null;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             int recordId = rs.getInt("RECORD_ID");
@@ -44,8 +45,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 eresource.setRecordId(recordId);
                 eresource.setRecordType(recordType);
                 eresource.setTitle(currentTitle);
-                if (query != null) {
-                    if (query.equalsIgnoreCase(currentTitle)) {
+                if (trimmedQuery != null) {
+                    if (trimmedQuery.equalsIgnoreCase(currentTitle)) {
                         eresource.setScore(Integer.MAX_VALUE);
                     } else {
                         // core material weighted * 3
