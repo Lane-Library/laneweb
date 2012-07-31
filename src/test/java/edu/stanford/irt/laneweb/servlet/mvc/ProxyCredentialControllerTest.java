@@ -7,7 +7,6 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
 import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +48,7 @@ public class ProxyCredentialControllerTest {
     }
 
     @Test
-    public void testProxyRedirect() throws IOException {
+    public void testProxyRedirect() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
         assertEquals("redirect:http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
@@ -58,7 +57,7 @@ public class ProxyCredentialControllerTest {
     }
 
     @Test
-    public void testProxyRedirectNullQueryString() throws IOException {
+    public void testProxyRedirectNullQueryString() {
         expect(this.request.getQueryString()).andReturn(null);
         replay(this.request, this.binder);
         try {
@@ -70,7 +69,7 @@ public class ProxyCredentialControllerTest {
     }
 
     @Test
-    public void testProxyRedirectNullSunetid() throws IOException {
+    public void testProxyRedirectNullSunetid() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
         assertEquals("redirect:/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c",
@@ -79,7 +78,7 @@ public class ProxyCredentialControllerTest {
     }
 
     @Test
-    public void testProxyRedirectNullTicket() throws IOException {
+    public void testProxyRedirectNullTicket() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
         assertEquals("redirect:/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c",
@@ -88,7 +87,7 @@ public class ProxyCredentialControllerTest {
     }
 
     @Test
-    public void testSecureProxyRedirectNullQueryString() throws IOException {
+    public void testSecureProxyRedirectNullQueryString() {
         expect(this.request.getQueryString()).andReturn(null);
         replay(this.request, this.binder);
         try {
