@@ -31,6 +31,7 @@ public class ContentSearchGeneratorTest {
 
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.metasearchManager = createMock(MetaSearchManager.class);
@@ -39,6 +40,7 @@ public class ContentSearchGeneratorTest {
         this.generator = new ContentSearchGenerator(this.metasearchManager, this.saxStrategy, this.conversionStrategy);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetSearchResults() {
         expect(this.metasearchManager.search(isA(Query.class), eq(20000L), (Collection<String>) isNull(), eq(true)))

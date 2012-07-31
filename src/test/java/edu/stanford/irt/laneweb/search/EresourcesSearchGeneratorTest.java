@@ -25,6 +25,7 @@ public class EresourcesSearchGeneratorTest {
 
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);

@@ -31,6 +31,7 @@ public class AbstractPagingSearchResultGeneratorTest {
 
     private SAXStrategy<PagingSearchResultSet> saxStrategy;;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.saxStrategy = createMock(SAXStrategy.class);

@@ -39,6 +39,7 @@ public class MergedSearchGeneratorTest {
 
     private SAXStrategy<PagingSearchResultSet> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);
@@ -51,6 +52,7 @@ public class MergedSearchGeneratorTest {
         this.eresource = createMock(Eresource.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetSearchResults() {
         expect(this.metaSearchManager.search(isA(Query.class), eq(20000L), (Collection<String>) isNull(), eq(true)))

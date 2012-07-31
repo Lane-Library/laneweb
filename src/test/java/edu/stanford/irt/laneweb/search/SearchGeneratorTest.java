@@ -35,6 +35,7 @@ public class SearchGeneratorTest {
 
     private SAXStrategy<Result> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.manager = createMock(MetaSearchManager.class);
@@ -58,8 +59,6 @@ public class SearchGeneratorTest {
 
     @Test
     public void testDoSearchEmptyQuery() {
-        // expect(this.manager.search(isA(SimpleQuery.class), eq(60000L),
-        // (Collection<String>) isNull(), eq(false))).andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.doSearch("");
         verify(this.saxStrategy, this.manager);
@@ -67,8 +66,6 @@ public class SearchGeneratorTest {
 
     @Test
     public void testDoSearchNullQuery() {
-        // expect(this.manager.search(isA(SimpleQuery.class), eq(60000L),
-        // (Collection<String>) isNull(), eq(false))).andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.doSearch(null);
         verify(this.saxStrategy, this.manager);
@@ -139,7 +136,6 @@ public class SearchGeneratorTest {
     public void testDoSearchWaitNumberFormatException() {
         expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
                 .andReturn(this.result);
-        // expect(this.result.getStatus()).andReturn(SearchStatus.RUNNING);
         replay(this.saxStrategy, this.manager, this.result);
         this.model.put("wait", "foo");
         this.generator.setModel(this.model);

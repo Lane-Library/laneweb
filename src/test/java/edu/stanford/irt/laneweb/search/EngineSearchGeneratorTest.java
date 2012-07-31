@@ -30,6 +30,7 @@ public class EngineSearchGeneratorTest {
 
     private SAXStrategy<Result> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.metaSearchManager = createMock(MetaSearchManager.class);
@@ -37,6 +38,7 @@ public class EngineSearchGeneratorTest {
         this.generator = new EngineSearchGenerator(this.metaSearchManager, this.saxStrategy);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchString() {
         expect(this.metaSearchManager.search(isA(Query.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
