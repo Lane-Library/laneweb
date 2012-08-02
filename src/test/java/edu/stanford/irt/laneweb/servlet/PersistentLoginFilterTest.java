@@ -87,7 +87,6 @@ public class PersistentLoginFilterTest {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
         expect(this.request.getHeader("User-Agent")).andReturn(null);
         Capture<Cookie> cookie1 = new Capture<Cookie>();
@@ -106,7 +105,6 @@ public class PersistentLoginFilterTest {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
         expect(this.request.getHeader("User-Agent")).andReturn(null);
         Capture<Cookie> cookie1 = new Capture<Cookie>();
@@ -125,7 +123,6 @@ public class PersistentLoginFilterTest {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
         expect(this.request.getHeader("User-Agent")).andReturn(null);
         Capture<Cookie> cookie1 = new Capture<Cookie>();

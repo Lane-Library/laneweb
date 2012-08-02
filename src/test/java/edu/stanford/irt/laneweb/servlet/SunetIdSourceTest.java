@@ -44,7 +44,6 @@ public class SunetIdSourceTest {
     public void testBadCookie() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
         expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
@@ -59,7 +58,6 @@ public class SunetIdSourceTest {
     public void testInCookie() throws IOException, ServletException {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
         expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
@@ -93,23 +91,10 @@ public class SunetIdSourceTest {
     }
 
     @Test
-    public void testIsInXWEBAUTHUSER() throws IOException, ServletException {
-        expect(this.request.getSession()).andReturn(this.session);
-        expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
-        expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn("ditenus");
-        this.session.setAttribute(Model.SUNETID, "ditenus");
-        replay(this.request, this.session, this.cookie);
-        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request));
-        verify(this.request, this.session, this.cookie);
-    }
-
-    @Test
     public void testNoUserNoCookies() throws IOException, ServletException {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
         expect(this.request.getHeader("User-Agent")).andReturn(null);
         replay(this.request, this.session, this.cookie);

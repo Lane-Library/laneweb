@@ -67,12 +67,12 @@ public class SunetIdSource {
 
     private String getSunetidFromRequest(final HttpServletRequest request) {
         String sunetid = request.getRemoteUser();
-        if (sunetid == null) {
-            sunetid = request.getHeader("X-WEBAUTH-USER");
-            if ("(null)".equals(sunetid)) {
-                sunetid = null;
-            }
-        }
+//        if (sunetid == null) {
+//            sunetid = request.getHeader("X-WEBAUTH-USER");
+//            if ("(null)".equals(sunetid)) {
+//                sunetid = null;
+//            }
+//        }
         return sunetid;
     }
 }
