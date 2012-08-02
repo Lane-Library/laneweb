@@ -18,11 +18,12 @@ import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class FilePathTransformer extends AbstractTransformer implements CacheableProcessingComponent {
+
     private static final String TYPE = "file-path";
 
-    private SAXParser saxParser;
-
     private XMLConsumer pipe;
+
+    private SAXParser saxParser;
 
     private SourceResolver sourceResolver;
 
