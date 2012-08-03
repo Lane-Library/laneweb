@@ -6,37 +6,34 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 
-import sun.misc.BASE64Encoder;
-
-@SuppressWarnings("restriction")
 public class HttpResource extends UrlResource {
 
     private String authorization;
 
-    private URL context;
-
-    public HttpResource(final URL url) throws MalformedURLException {
-        super(url);
-        this.context = url;
-    }
-
-    public HttpResource(final URL url, final String authorization) throws MalformedURLException {
-        this(url);
-        this.authorization = authorization;
-    }
+    private URL url;
 
     public HttpResource(final URL url, final String userName, final String password) throws IOException {
+        this(url, Base64.encodeBase64String((userName.concat(":").concat(password)).getBytes("UTF-8")));
+    }
+
+    private HttpResource(final URL url) throws MalformedURLException {
+        super(url);
+        this.url = url;
+    }
+
+    private HttpResource(final URL url, final String authorization) throws MalformedURLException {
         this(url);
-        this.authorization = new BASE64Encoder().encode((userName.concat(":").concat(password)).getBytes("UTF-8"));
+        this.authorization = authorization;
     }
 
     @Override
     public Resource createRelative(final String path) throws MalformedURLException {
         String relativePath = path.startsWith("/") ? path.substring(1) : path;
-        return new HttpResource(new URL(this.context, relativePath), this.authorization);
+        return new HttpResource(new URL(this.url, relativePath), this.authorization);
     }
 
     @Override
@@ -46,7 +43,7 @@ public class HttpResource extends UrlResource {
 
     @Override
     public InputStream getInputStream() throws IOException {
-        URLConnection con = super.getURL().openConnection();
+        URLConnection con = this.url.openConnection();
         con.setRequestProperty("Authorization", "Basic " + this.authorization);
         con.setUseCaches(false);
         return con.getInputStream();
