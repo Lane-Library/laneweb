@@ -29,7 +29,7 @@ public abstract class AbstractPagingSearchResultGenerator extends AbstractSearch
     @Override
     protected PagingSearchResultSet doSearch(final String query) {
         PagingSearchResultSet result = new PagingSearchResultSet(query, this.page);
-        if (query != null) {
+        if (query != null && !query.isEmpty()) {
             result.addAll(getSearchResults(query));
         }
         return result;

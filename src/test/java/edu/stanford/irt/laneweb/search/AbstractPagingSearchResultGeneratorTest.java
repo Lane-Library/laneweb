@@ -44,6 +44,11 @@ public class AbstractPagingSearchResultGeneratorTest {
     }
 
     @Test
+    public void testDoSearchEmpty() {
+        assertEquals(0, this.generator.doSearch("").size());
+    }
+
+    @Test
     public void testDoSearchString() {
         assertEquals(0, this.generator.doSearch("query").getPage());
     }
