@@ -17,6 +17,7 @@ import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public final class ProxyHostManager {
@@ -24,6 +25,8 @@ public final class ProxyHostManager {
     private static class DatabaseProxyHostSet extends HashSet<String> {
 
         private static final long serialVersionUID = 1L;
+
+        private static final String UNION = "union ";
 
         private static final String SQL =
             "with urls as ( "
@@ -66,7 +69,7 @@ public final class ProxyHostManager {
                 add("socrates.stanford.edu");
                 add("library.stanford.edu");
             } catch (SQLException e) {
-                throw new IllegalStateException(e);
+                throw new LanewebException(e);
             } finally {
                 JdbcUtils.closeResultSet(rs);
                 JdbcUtils.closeStatement(stmt);
@@ -74,8 +77,6 @@ public final class ProxyHostManager {
             }
         }
     }
-
-    private static final String UNION = "union ";
 
     // update every 2 hours
     private static final long UPDATE_INTERVAL = 1000 * 60 * 60 * 2;
@@ -88,8 +89,10 @@ public final class ProxyHostManager {
 
     private Set<String> proxyHosts;
 
-    public ProxyHostManager() throws UnsupportedEncodingException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt"), "UTF-8"));
+    public ProxyHostManager(final DataSource dataSource) throws UnsupportedEncodingException {
+        this.dataSource = dataSource;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt"),
+                "UTF-8"));
         this.proxyHosts = new HashSet<String>();
         String proxyHost = null;
         try {
@@ -97,12 +100,12 @@ public final class ProxyHostManager {
                 this.proxyHosts.add(proxyHost);
             }
         } catch (IOException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } finally {
             try {
                 reader.close();
             } catch (IOException e) {
-                throw new IllegalStateException(e);
+                throw new LanewebException(e);
             }
         }
     }
@@ -112,16 +115,16 @@ public final class ProxyHostManager {
     }
 
     public boolean isProxyableHost(final String host) {
-        if (null == host) {
-            throw new IllegalArgumentException("null host");
+        if (host == null) {
+            return false;
         }
         updateIfNecessary();
         return this.proxyHosts.contains(host);
     }
 
     public boolean isProxyableLink(final String link) {
-        if (null == link) {
-            throw new IllegalArgumentException("null link");
+        if (link == null) {
+            return false;
         }
         try {
             URL url = new URL(link);
@@ -129,10 +132,6 @@ public final class ProxyHostManager {
         } catch (MalformedURLException e) {
             return false;
         }
-    }
-
-    public void setDataSource(final DataSource dataSource) {
-        this.dataSource = dataSource;
     }
 
     private synchronized void updateIfNecessary() {

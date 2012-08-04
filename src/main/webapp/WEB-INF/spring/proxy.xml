@@ -6,7 +6,7 @@
     <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
         class="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
         destroy-method="destroy">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+        <constructor-arg ref="javax.sql.DataSource/eresources"/>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.proxy.AbstractProxyLinkTransformer"
