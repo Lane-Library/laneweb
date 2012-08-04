@@ -39,6 +39,7 @@ YUI({debug:true,filter:"debug",fetchCSS:false,gallery: 'gallery-2010.05.21-18-16
         "event-custom-complex",
         "event-delegate",
         "event-focus",
+        "event-key",
         "event-mouseenter",
         "event-synthetic",
         "gallery-node-accordion",
