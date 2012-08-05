@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.IOException;
 
-import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.xml.EmbeddedXMLPipe;
@@ -14,10 +13,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class FilePathTransformer extends AbstractTransformer implements CacheableProcessingComponent {
+public class FilePathTransformer extends AbstractCacheableTransformer {
 
     private static final String TYPE = "file-path";
 
@@ -30,6 +29,7 @@ public class FilePathTransformer extends AbstractTransformer implements Cacheabl
     private AggregatedValidity validity;
 
     public FilePathTransformer(final SourceResolver sourceResolver, final SAXParser saxParser) {
+        super(TYPE);
         this.sourceResolver = sourceResolver;
         this.saxParser = saxParser;
         this.validity = new AggregatedValidity();
@@ -42,14 +42,7 @@ public class FilePathTransformer extends AbstractTransformer implements Cacheabl
         }
     }
 
-    public String getKey() {
-        return TYPE;
-    }
-
-    public String getType() {
-        return TYPE;
-    }
-
+    @Override
     public SourceValidity getValidity() {
         return this.validity;
     }

@@ -3,16 +3,13 @@ package edu.stanford.irt.laneweb.search;
 import java.io.File;
 import java.util.Map;
 
-import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
 
-public class SearchDirectoryTransformer extends AbstractTransformer implements ParametersAware, CacheableProcessingComponent {
+public class SearchDirectoryTransformer extends AbstractCacheableTransformer implements ParametersAware {
 
     private static final String FILE = "file";
 
@@ -24,6 +21,10 @@ public class SearchDirectoryTransformer extends AbstractTransformer implements P
 
     private String[] directories;
 
+    public SearchDirectoryTransformer() {
+        super(TYPE);
+    }
+
     @Override
     public void endDocument() throws SAXException {
         for (String directory : this.directories) {
@@ -31,18 +32,6 @@ public class SearchDirectoryTransformer extends AbstractTransformer implements P
         }
         endElement(NAMESPACE, SEARCH_TEMPLATES, SEARCH_TEMPLATES);
         super.endDocument();
-    }
-
-    public String getKey() {
-        return TYPE;
-    }
-
-    public String getType() {
-        return TYPE;
-    }
-
-    public SourceValidity getValidity() {
-        return NOPValidity.SHARED_INSTANCE;
     }
 
     public void setParameters(final Map<String, String> parameters) {

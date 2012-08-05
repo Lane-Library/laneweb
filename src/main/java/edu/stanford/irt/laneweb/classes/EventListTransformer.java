@@ -3,21 +3,18 @@ package edu.stanford.irt.laneweb.classes;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.xml.EmbeddedXMLPipe;
 import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class EventListTransformer extends AbstractTransformer implements CacheableProcessingComponent {
+public class EventListTransformer extends AbstractCacheableTransformer {
 
     private static final String TYPE = "eventlist";
 
@@ -27,12 +24,10 @@ public class EventListTransformer extends AbstractTransformer implements Cacheab
 
     private SourceResolver sourceResolver;
 
-    private SourceValidity validity;
-
     public EventListTransformer(final SourceResolver sourceResolver, final SAXParser saxParser) {
+        super(TYPE);
         this.sourceResolver = sourceResolver;
         this.saxParser = saxParser;
-        this.validity = NOPValidity.SHARED_INSTANCE;
     }
 
     @Override
@@ -40,18 +35,6 @@ public class EventListTransformer extends AbstractTransformer implements Cacheab
         if (!"event".equals(localName)) {
             super.endElement(uri, localName, qName);
         }
-    }
-
-    public String getKey() {
-        return TYPE;
-    }
-
-    public String getType() {
-        return TYPE;
-    }
-
-    public SourceValidity getValidity() {
-        return this.validity;
     }
 
     @Override
