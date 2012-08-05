@@ -1,6 +1,5 @@
 package edu.stanford.irt.cocoon.sitemap;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.avalon.framework.configuration.Configuration;
@@ -10,26 +9,29 @@ import org.apache.cocoon.Processor;
 import org.apache.cocoon.components.treeprocessor.ConcreteTreeProcessor;
 import org.apache.cocoon.components.treeprocessor.InvokeContext;
 import org.apache.cocoon.components.treeprocessor.ProcessingNode;
+import org.apache.cocoon.components.treeprocessor.TreeBuilder;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.impl.DefaultExecutor;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import edu.stanford.irt.laneweb.cocoon.LanewebSitemapLanguage;
 
 public class SitemapImpl implements Processor {
 
     private ProcessingNode rootNode;
 
-    private SAXParser saxParser;
-
     private ServiceManager serviceManager;
 
-    private LanewebSitemapLanguage sitemapLanguage;
-
-    private InputStream source;
+    public SitemapImpl(final InputStream source, final SAXParser saxParser, final TreeBuilder treeBuilder,
+            final ServiceManager serviceManager) throws Exception {
+        this.serviceManager = serviceManager;
+        NamespacedSAXConfigurationHandler handler = new NamespacedSAXConfigurationHandler();
+        InputSource inputSource = new InputSource(source);
+        saxParser.parse(inputSource, handler);
+        Configuration sitemapProgram = handler.getConfiguration();
+        treeBuilder.setProcessor(new ConcreteTreeProcessor(null, new DefaultExecutor()));
+        this.rootNode = treeBuilder.build(sitemapProgram, null);
+    }
 
     public InternalPipelineDescription buildPipeline(final Environment environment) throws Exception {
         InvokeContext context = new InvokeContext(true);
@@ -59,15 +61,6 @@ public class SitemapImpl implements Processor {
         throw new UnsupportedOperationException();
     }
 
-    public void initialize() throws SAXException, IOException {
-        NamespacedSAXConfigurationHandler handler = new NamespacedSAXConfigurationHandler();
-        InputSource inputSource = new InputSource(this.source);
-        this.saxParser.parse(inputSource, handler);
-        Configuration sitemapProgram = handler.getConfiguration();
-        this.sitemapLanguage.setProcessor(new ConcreteTreeProcessor(null, new DefaultExecutor()));
-        this.rootNode = this.sitemapLanguage.build(sitemapProgram, null);
-    }
-
     public boolean process(final Environment environment) throws Exception {
         InvokeContext context = new InvokeContext();
         return process(environment, context);
@@ -81,23 +74,7 @@ public class SitemapImpl implements Processor {
         throw new UnsupportedOperationException();
     }
 
-    public void setSAXParser(final SAXParser saxParser) {
-        this.saxParser = saxParser;
-    }
-
-    public void setServiceManager(final ServiceManager serviceManager) {
-        this.serviceManager = serviceManager;
-    }
-
-    public void setSitemapLanguage(final LanewebSitemapLanguage sitemapLanguage) {
-        this.sitemapLanguage = sitemapLanguage;
-    }
-
-    public void setSource(final InputStream source) {
-        this.source = source;
-    }
-
-    protected boolean process(final Environment environment, final InvokeContext context) throws Exception {
+    private boolean process(final Environment environment, final InvokeContext context) throws Exception {
         context.service(this.serviceManager);
         context.setLastProcessor(this);
         return this.rootNode.invoke(environment, context);
