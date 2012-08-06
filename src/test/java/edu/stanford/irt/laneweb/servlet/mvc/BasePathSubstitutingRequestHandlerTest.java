@@ -1,15 +1,18 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +35,11 @@ public class BasePathSubstitutingRequestHandlerTest {
 
     private Cache cache;
 
+    private CachedResponse cachedResponse;
+
     private BasePathSubstitutingRequestHandler handler;
+
+    private InputStream inputStream;
 
     private MediaType mediatype;
 
@@ -41,10 +48,6 @@ public class BasePathSubstitutingRequestHandlerTest {
     private Resource resource;
 
     private HttpServletResponse response;
-
-    private CachedResponse cachedResponse;
-    
-    private InputStream inputStream;
 
     @Before
     public void setUp() throws Exception {
@@ -70,72 +73,10 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.resource.getURI()).andReturn(new URI("uri"));
         expect(this.resource.lastModified()).andReturn(0L);
         expect(this.cache.get(":uri")).andReturn(null);
-        expect(this.resource.getInputStream()).andReturn(new ByteArrayInputStream(new byte[]{1,2,3,4}));
+        expect(this.resource.getInputStream()).andReturn(new ByteArrayInputStream(new byte[] { 1, 2, 3, 4 }));
         this.cache.store(eq(":uri"), isA(CachedResponse.class));
         replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
         this.handler.getResource(this.request);
-        verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
-    }
-
-    @Test
-    public void testGetResourceThrowIOException() throws IOException, URISyntaxException, ProcessingException {
-        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("foo");
-        expect(this.resource.createRelative("foo")).andReturn(this.resource);
-        expect(this.resource.exists()).andReturn(true);
-        expect(this.resource.isReadable()).andReturn(true);
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
-        expect(this.resource.getURI()).andReturn(new URI("uri"));
-        expect(this.resource.lastModified()).andReturn(0L);
-        expect(this.cache.get(":uri")).andReturn(null);
-        expect(this.resource.getInputStream()).andReturn(this.inputStream);
-        expect(this.inputStream.read()).andThrow(new IOException());
-        this.inputStream.close();
-        replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
-        try {
-        this.handler.getResource(this.request);
-        } catch (LanewebException e) {}
-        verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
-    }
-
-    @Test
-    public void testGetResourceThrowProcessingException() throws IOException, URISyntaxException, ProcessingException {
-        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("foo");
-        expect(this.resource.createRelative("foo")).andReturn(this.resource);
-        expect(this.resource.exists()).andReturn(true);
-        expect(this.resource.isReadable()).andReturn(true);
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
-        expect(this.resource.getURI()).andReturn(new URI("uri"));
-        expect(this.resource.lastModified()).andReturn(0L);
-        expect(this.cache.get(":uri")).andReturn(null);
-        expect(this.resource.getInputStream()).andReturn(this.inputStream);
-        expect(this.inputStream.read()).andReturn(-1);
-        this.inputStream.close();        
-        this.cache.store(eq(":uri"), isA(CachedResponse.class));
-        expectLastCall().andThrow(new ProcessingException(""));
-        replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
-        try {
-        this.handler.getResource(this.request);
-        } catch (LanewebException e) {}
-        verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
-    }
-
-    @Test
-    public void testSetHeadersHttpServletResponseResourceMediaType() throws IOException {
-        // can't mock toString method
-        this.response.setContentType(this.mediatype.toString());
-        replay(this.response, this.resource, this.mediatype);
-        this.handler.setHeaders(this.response, this.resource, this.mediatype);
-        verify(this.response, this.resource, this.mediatype);
-    }
-    
-    @Test
-    public void testResourceNotFound() {
-        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("uri");
-        replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
-        try {
-            this.handler.getResource(this.request);
-        } catch (ResourceNotFoundException e) {}
         verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
     }
 
@@ -150,8 +91,9 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.resource.lastModified()).andReturn(0L);
         expect(this.cache.get(":uri")).andReturn(this.cachedResponse);
         expect(this.cachedResponse.getLastModified()).andReturn(0L);
-//        expect(this.resource.getInputStream()).andReturn(new ByteArrayInputStream(new byte[0]));
-//        this.cache.store(eq(":uri"), isA(CachedResponse.class));
+        // expect(this.resource.getInputStream()).andReturn(new
+        // ByteArrayInputStream(new byte[0]));
+        // this.cache.store(eq(":uri"), isA(CachedResponse.class));
         replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
         this.handler.getResource(this.request);
         verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
@@ -173,5 +115,70 @@ public class BasePathSubstitutingRequestHandlerTest {
         replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
         this.handler.getResource(this.request);
         verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
+    }
+
+    @Test
+    public void testGetResourceThrowIOException() throws IOException, URISyntaxException, ProcessingException {
+        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("foo");
+        expect(this.resource.createRelative("foo")).andReturn(this.resource);
+        expect(this.resource.exists()).andReturn(true);
+        expect(this.resource.isReadable()).andReturn(true);
+        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.resource.getURI()).andReturn(new URI("uri"));
+        expect(this.resource.lastModified()).andReturn(0L);
+        expect(this.cache.get(":uri")).andReturn(null);
+        expect(this.resource.getInputStream()).andReturn(this.inputStream);
+        expect(this.inputStream.read()).andThrow(new IOException());
+        this.inputStream.close();
+        replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
+        try {
+            this.handler.getResource(this.request);
+        } catch (LanewebException e) {
+        }
+        verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
+    }
+
+    @Test
+    public void testGetResourceThrowProcessingException() throws IOException, URISyntaxException, ProcessingException {
+        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("foo");
+        expect(this.resource.createRelative("foo")).andReturn(this.resource);
+        expect(this.resource.exists()).andReturn(true);
+        expect(this.resource.isReadable()).andReturn(true);
+        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.resource.getURI()).andReturn(new URI("uri"));
+        expect(this.resource.lastModified()).andReturn(0L);
+        expect(this.cache.get(":uri")).andReturn(null);
+        expect(this.resource.getInputStream()).andReturn(this.inputStream);
+        expect(this.inputStream.read()).andReturn(-1);
+        this.inputStream.close();
+        this.cache.store(eq(":uri"), isA(CachedResponse.class));
+        expectLastCall().andThrow(new ProcessingException(""));
+        replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
+        try {
+            this.handler.getResource(this.request);
+        } catch (LanewebException e) {
+        }
+        verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
+    }
+
+    @Test
+    public void testResourceNotFound() {
+        expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("");
+        expect(this.request.getRequestURI()).andReturn("uri");
+        replay(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
+        try {
+            this.handler.getResource(this.request);
+        } catch (ResourceNotFoundException e) {
+        }
+        verify(this.cache, this.request, this.resource, this.response, this.mediatype, this.cachedResponse, this.inputStream);
+    }
+
+    @Test
+    public void testSetHeadersHttpServletResponseResourceMediaType() throws IOException {
+        // can't mock toString method
+        this.response.setContentType(this.mediatype.toString());
+        replay(this.response, this.resource, this.mediatype);
+        this.handler.setHeaders(this.response, this.resource, this.mediatype);
+        verify(this.response, this.resource, this.mediatype);
     }
 }
