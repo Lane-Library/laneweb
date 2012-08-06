@@ -36,12 +36,30 @@ public class CoreEresourcesGeneratorTest {
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getCore("type")).andReturn(null);
         replay(this.collectionManager);
-        this.generator.getEresourceList();
+        this.generator.getEresourceList(this.collectionManager);
         verify(this.collectionManager);
     }
 
     @Test
     public void testGetEresourceListNullType() {
-        assertEquals(0, this.generator.getEresourceList().size());
+        assertEquals(0, this.generator.getEresourceList(this.collectionManager).size());
+    }
+
+    @Test
+    public void testSetModel() {
+        this.generator.setModel(Collections.<String, Object> emptyMap());
+        assertEquals("p=0;t=", this.generator.createKey().toString());
+    }
+
+    @Test
+    public void testSetModelType() {
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TYPE, "type"));
+        assertEquals("p=0;t=type", this.generator.createKey().toString());
+    }
+
+    @Test
+    public void testSetParametersNoType() {
+        this.generator.setParameters(Collections.<String, String> emptyMap());
+        assertEquals("p=0;t=", this.generator.createKey().toString());
     }
 }

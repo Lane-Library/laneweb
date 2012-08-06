@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.eresources;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -36,7 +35,7 @@ public class AbstractEresourcesGeneratorTest {
         }
 
         @Override
-        protected Collection<Eresource> getEresourceList() {
+        protected Collection<Eresource> getEresourceList(final CollectionManager collectionManager) {
             return this.eresourceList;
         }
     }
@@ -73,22 +72,8 @@ public class AbstractEresourcesGeneratorTest {
     }
 
     @Test
-    public void testGetCore() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
-        expect(this.collectionManager.getCore("type")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getCore();
-        verify(this.collectionManager);
-    }
-
-    @Test
-    public void testGetCoreType() {
-        assertEquals(0, this.generator.getCore().size());
-    }
-
-    @Test
     public void testGetKey() {
-        assertEquals("t=;s=;a=;m=;page=0", this.generator.getKey());
+        assertEquals("p=0", this.generator.getKey());
     }
 
     @Test
@@ -98,76 +83,8 @@ public class AbstractEresourcesGeneratorTest {
     }
 
     @Test
-    public void testGetMesh() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
-        expect(this.collectionManager.getMesh("type", "mesh")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getMesh();
-        verify(this.collectionManager);
-    }
-
-    @Test
-    public void testGetMeshNullMesh() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
-        replay(this.collectionManager);
-        assertEquals(0, this.generator.getMesh().size());
-        verify(this.collectionManager);
-    }
-
-    @Test
-    public void testGetMeshNullType() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
-        replay(this.collectionManager);
-        assertEquals(0, this.generator.getMesh().size());
-        verify(this.collectionManager);
-    }
-
-    /*
-     * @Test public void testGetKeyWithValues() { this.generator.type = "type";
-     * this.generator.subset = "subset"; this.generator.alpha = "alpha";
-     * this.generator.mesh = "mesh"; this.generator.page = 1;
-     * assertEquals("t=type;s=subset;a=alpha;m=mesh;page=1",
-     * this.generator.getKey()); }
-     */
-    @Test
     public void testGetType() {
         assertEquals("type", this.generator.getType());
-    }
-
-    @Test
-    public void testGetTypeOrSubsetNull() {
-        replay(this.collectionManager);
-        assertEquals(0, this.generator.getTypeOrSubset().size());
-        verify(this.collectionManager);
-    }
-
-    @Test
-    public void testGetTypeOrSubsetSubset() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.SUBSET, "subset"));
-        expect(this.collectionManager.getSubset("subset")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getTypeOrSubset();
-        verify(this.collectionManager);
-    }
-
-    @Test
-    public void testGetTypeOrSubsetType() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TYPE, "type"));
-        expect(this.collectionManager.getType("type")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getTypeOrSubset();
-        verify(this.collectionManager);
-    }
-
-    @Test
-    public void testGetTypeOrSubsetTypeAlpha() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ALPHA, "a"));
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
-        expect(this.collectionManager.getType("type", 'a')).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getTypeOrSubset();
-        verify(this.collectionManager);
     }
 
     @Test
@@ -188,58 +105,21 @@ public class AbstractEresourcesGeneratorTest {
     }
 
     @Test
-    public void testSetModelAlpha() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ALPHA, "a"));
-        assertEquals("t=;s=;a=a;m=;page=0", this.generator.getKey());
+    public void testSetModel() {
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "2"));
+        assertEquals("p=1", this.generator.getKey());
     }
 
     @Test
-    // TODO: probably should not use alpha = null for all
-    public void testSetModelAlphaAll() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ALPHA, "all"));
-        assertEquals("t=;s=;a=;m=;page=0", this.generator.getKey());
-    }
-
-    @Test
-    public void testSetModelAlphaString() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ALPHA, "a String"));
-        assertEquals("t=;s=;a=a;m=;page=0", this.generator.getKey());
-    }
-
-    @Test
-    public void testSetModelMesh() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
-        assertEquals("t=;s=;a=;m=mesh;page=0", this.generator.getKey());
+    public void testSetModelAll() {
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "all"));
+        assertEquals("p=-1", this.generator.getKey());
     }
 
     @Test
     public void testSetModelNumberFormatException() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "foo"));
-        assertEquals("t=;s=;a=;m=;page=0", this.generator.getKey());
-    }
-
-    @Test
-    public void testSetModelPage() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "1"));
-        assertEquals("t=;s=;a=;m=;page=0", this.generator.getKey());
-    }
-
-    @Test
-    public void testSetModelPageAll() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "all"));
-        assertEquals("t=;s=;a=;m=;page=-1", this.generator.getKey());
-    }
-
-    @Test
-    public void testSetModelSubset() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.SUBSET, "subset"));
-        assertEquals("t=;s=subset;a=;m=;page=0", this.generator.getKey());
-    }
-
-    @Test
-    public void testSetModelType() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TYPE, "type"));
-        assertEquals("t=type;s=;a=;m=;page=0", this.generator.getKey());
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "page"));
+        assertEquals("p=0", this.generator.getKey());
     }
 
     @Test
@@ -252,17 +132,5 @@ public class AbstractEresourcesGeneratorTest {
     public void testSetParametersNoValidity() {
         this.generator.setParameters(Collections.<String, String> emptyMap());
         assertEquals(SourceValidity.VALID, this.generator.getValidity().isValid());
-    }
-
-    @Test
-    public void testSetParametersSubset() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.SUBSET, "subset"));
-        assertEquals("t=;s=subset;a=;m=;page=0", this.generator.getKey());
-    }
-
-    @Test
-    public void testSetParametersType() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
-        assertEquals("t=type;s=;a=;m=;page=0", this.generator.getKey());
     }
 }
