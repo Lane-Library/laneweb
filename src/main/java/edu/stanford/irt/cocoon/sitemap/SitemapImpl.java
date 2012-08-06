@@ -16,6 +16,8 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.impl.DefaultExecutor;
 import org.xml.sax.InputSource;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class SitemapImpl implements Processor {
 
     private ProcessingNode rootNode;
@@ -33,7 +35,7 @@ public class SitemapImpl implements Processor {
         this.rootNode = treeBuilder.build(sitemapProgram, null);
     }
 
-    public InternalPipelineDescription buildPipeline(final Environment environment) throws Exception {
+    public InternalPipelineDescription buildPipeline(final Environment environment) {
         InvokeContext context = new InvokeContext(true);
         if (process(environment, context)) {
             return context.getInternalPipelineDescription(environment);
@@ -74,9 +76,13 @@ public class SitemapImpl implements Processor {
         throw new UnsupportedOperationException();
     }
 
-    private boolean process(final Environment environment, final InvokeContext context) throws Exception {
-        context.service(this.serviceManager);
-        context.setLastProcessor(this);
-        return this.rootNode.invoke(environment, context);
+    private boolean process(final Environment environment, final InvokeContext context) {
+        try {
+            context.service(this.serviceManager);
+            context.setLastProcessor(this);
+            return this.rootNode.invoke(environment, context);
+        } catch (Exception e) {
+            throw new LanewebException(e);
+        }
     }
 }

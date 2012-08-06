@@ -24,6 +24,8 @@ import org.junit.Test;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class SitemapImplTest {
 
     private ProcessingNode processingNode;
@@ -116,6 +118,19 @@ public class SitemapImplTest {
         expect(this.processingNode.invoke(eq(environment), isA(InvokeContext.class))).andReturn(true);
         replay(this.processingNode, this.serviceManager, environment);
         this.sitemap.process(environment);
+        verify(this.processingNode, this.serviceManager, environment);
+    }
+
+    @Test
+    public void testProcessThrowException() throws Exception {
+        Environment environment = createMock(Environment.class);
+        expect(this.serviceManager.lookup(ObjectModel.class.getName())).andReturn(null);
+        expect(this.processingNode.invoke(eq(environment), isA(InvokeContext.class))).andThrow(new Exception());
+        replay(this.processingNode, this.serviceManager, environment);
+        try {
+            this.sitemap.process(environment);
+        } catch (LanewebException e) {
+        }
         verify(this.processingNode, this.serviceManager, environment);
     }
 
