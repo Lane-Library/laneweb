@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-08-06" version="1.13.6" description="1.13.6 bug fix release">
+            <action date="2012-08-04" issue="73922" dev="ceyates" type="fix">
+                autocomplete: arrow keys don't work since YUI 3.5  
+            </action>
+            <action date="2012-07-30" issue="73722" dev="ceyates" type="update">
+                get email address from ldap instead of assuming sunetid@stanford.edu 
+            </action>
+            <action date="2012-07-31" issue="73719" dev="ryanmax" type="fix">
+                trailing space &amp; odd search results 
+            </action>
+        </release>
         <release date="2012-07-30" version="1.13.5" description="1.13.5 bug fix release">
             <action date="2012-07-21" issue="73557" dev="ryanmax" type="fix">
                 Lane classes RSS: speaker URL often empty 
