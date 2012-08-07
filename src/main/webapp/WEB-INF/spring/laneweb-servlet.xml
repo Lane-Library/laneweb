@@ -46,6 +46,8 @@
         <property name="urlMap">
             <map>
                 <entry key="**/apps/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
+                <!-- requests still coming in for /apps/classes/calendar.ics -->
+                <entry key="**/apps/classes/calendar.ics" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
                 <entry key="**/apps/search/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
                 <entry key="**/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"/>
                 <entry key="**/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
