@@ -1,5 +1,6 @@
 package edu.stanford.irt.cocoon.sitemap;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.avalon.framework.configuration.Configuration;
@@ -15,6 +16,7 @@ import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.impl.DefaultExecutor;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -25,14 +27,18 @@ public class SitemapImpl implements Processor {
     private ServiceManager serviceManager;
 
     public SitemapImpl(final InputStream source, final SAXParser saxParser, final TreeBuilder treeBuilder,
-            final ServiceManager serviceManager) throws Exception {
+            final ServiceManager serviceManager) throws SAXException, IOException {
         this.serviceManager = serviceManager;
         NamespacedSAXConfigurationHandler handler = new NamespacedSAXConfigurationHandler();
         InputSource inputSource = new InputSource(source);
         saxParser.parse(inputSource, handler);
         Configuration sitemapProgram = handler.getConfiguration();
         treeBuilder.setProcessor(new ConcreteTreeProcessor(null, new DefaultExecutor()));
+        try {
         this.rootNode = treeBuilder.build(sitemapProgram, null);
+        } catch (Exception e) {
+            throw new LanewebException(e);
+        }
     }
 
     public InternalPipelineDescription buildPipeline(final Environment environment) {
@@ -63,7 +69,7 @@ public class SitemapImpl implements Processor {
         throw new UnsupportedOperationException();
     }
 
-    public boolean process(final Environment environment) throws Exception {
+    public boolean process(final Environment environment) {
         InvokeContext context = new InvokeContext();
         return process(environment, context);
     }
