@@ -17,6 +17,10 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     private XMLConsumer xmlConsumer;
 
+    public HtmlProxyLinkTransformer(final ProxyHostManager proxyHostManager) {
+        super(proxyHostManager);
+    }
+
     @Override
     public void setConsumer(final XMLConsumer xmlConsumer) {
         this.xmlConsumer = xmlConsumer;
@@ -26,7 +30,7 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String name, final Attributes atts)
             throws SAXException {
-        if (proxyLinks() && ANCHOR.equals(localName)) {
+        if (ANCHOR.equals(localName)) {
             String link = atts.getValue(HREF);
             // internal links not proxied
             if (null != link && link.indexOf(HTTP_SCHEME) == 0) {
@@ -37,7 +41,7 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
                     return;
                 }
                 // proxy if class contains proxy or isProxyableLink
-                if ((null != clazz && clazz.contains("proxy")) || getProxyHostManager().isProxyableLink(link)) {
+                if ((null != clazz && clazz.contains("proxy")) || isProxyableLink(link)) {
                     AttributesImpl newAttributes = new AttributesImpl(atts);
                     newAttributes.setValue(newAttributes.getIndex(HREF), createProxyLink(link));
                     this.xmlConsumer.startElement(uri, localName, name, newAttributes);

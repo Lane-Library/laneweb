@@ -12,7 +12,7 @@
     <bean id="edu.stanford.irt.laneweb.proxy.AbstractProxyLinkTransformer"
         class="edu.stanford.irt.laneweb.proxy.AbstractProxyLinkTransformer"
         abstract="true" scope="prototype">
-        <property name="proxyHostManager" ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/proxy-links"
@@ -31,10 +31,5 @@
     
     <bean name="org.apache.cocoon.selection.Selector/proxy-links"
         class="edu.stanford.irt.laneweb.proxy.ProxyLinkSelector"/>
-    
-    <bean name="laneweb.context.ezproxy-key"
-        class="java.lang.String">
-        <constructor-arg value="#{contextAttributes['laneweb.context.ezproxy-key']}"/>
-    </bean>
 
 </beans>

@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
-public final class ProxyHostManager {
+public class ProxyHostManager {
 
     private static class DatabaseProxyHostSet extends HashSet<String> {
 
