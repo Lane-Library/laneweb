@@ -111,6 +111,7 @@ public class CIDRRange {
             return getIPGroup(ipToInt(ip));
         } catch (NumberFormatException e) {
             //TODO: temporary fix for NumberFormatException for ", 192" appearing in the log
+            //from proxy1g.external.lmco.com 192.91.171.34
             return IPGroup.ERR;
         }
     }
