@@ -82,6 +82,10 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     protected String getSitemapURI(final HttpServletRequest request) {
         String requestURI = request.getRequestURI();
+        int jsessionId = requestURI.indexOf(";jsessionid=");
+        if (jsessionId > 0) {
+            requestURI = requestURI.substring(0, jsessionId);
+        }
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
         return requestURI.substring(basePath.length() + this.prefix.length());
     }
