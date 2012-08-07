@@ -29,6 +29,10 @@ public abstract class BookmarkController {
     protected void bind(final HttpServletRequest request, final Model model) {
         this.sunetidTicketDataBinder.bind(model.asMap(), request);
         this.bookmarkDataBinder.bind(model.asMap(), request);
+        // case 73359 need to put null value into model if not present.
+        if (!model.containsAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS)) {
+            model.addAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS, null);
+        }
     }
 
     protected void saveLinks(final String sunetid, final List<Bookmark> links) {
