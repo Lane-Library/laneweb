@@ -62,5 +62,10 @@ public class ProxyCredentialController {
     @ModelAttribute
     protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
         this.binder.bind(model.asMap(), request);
+        //case 74082 /apps/proxy/credential causes an error, need to put null values into the model
+        if (!model.containsAttribute(Model.SUNETID)) {
+            model.addAttribute(Model.SUNETID, null);
+            model.addAttribute(Model.TICKET, null);
+        }
     }
 }

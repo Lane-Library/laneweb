@@ -41,6 +41,19 @@ public class ProxyCredentialControllerTest {
     @Test
     public void testBind() {
         expect(this.model.asMap()).andReturn(Collections.<String, Object> emptyMap());
+        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID)).andReturn(true);
+        this.binder.bind(Collections.<String, Object> emptyMap(), this.request);
+        replay(this.request, this.binder, this.model);
+        this.controller.bind(this.request, this.model);
+        verify(this.request, this.binder, this.model);
+    }
+
+    @Test
+    public void testBindNoSunetid() {
+        expect(this.model.asMap()).andReturn(Collections.<String, Object> emptyMap());
+        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID)).andReturn(false);
+        expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID, null)).andReturn(this.model);
+        expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.TICKET, null)).andReturn(this.model);
         this.binder.bind(Collections.<String, Object> emptyMap(), this.request);
         replay(this.request, this.binder, this.model);
         this.controller.bind(this.request, this.model);
