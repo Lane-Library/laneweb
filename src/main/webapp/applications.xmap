@@ -219,6 +219,13 @@
                 <map:transform type="saxon" src="resources/xsl/describe.xsl"/>
                 <map:serialize type="html5"/>
             </map:match>
+            <!-- requests still coming in for /apps/classes/calendar.ics so putting this here
+            in addtion to classes.xmap -->
+            <map:match pattern="classes/calendar.ics" type="wildcard">
+                <map:generate type="classes" src="classes:/data.xml"/>
+                <map:transform type="saxon" src="resources/xsl/classes/calendar-ics.xsl"/>
+                <map:serialize type="text"/>
+            </map:match>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
