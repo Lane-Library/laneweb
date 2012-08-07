@@ -107,7 +107,12 @@ public class CIDRRange {
      * @return the IPGroup or null
      */
     public IPGroup getIPGroup(final String ip) {
-        return getIPGroup(ipToInt(ip));
+        try {
+            return getIPGroup(ipToInt(ip));
+        } catch (NumberFormatException e) {
+            //TODO: temporary fix for NumberFormatException for ", 192" appearing in the log
+            return IPGroup.ERR;
+        }
     }
 
     /**
