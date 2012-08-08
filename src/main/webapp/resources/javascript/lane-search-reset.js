@@ -17,7 +17,7 @@
         searchReset.on("click", function(e){
             reset.resetSearch(e);
         });
-        eventHandle = searchTerms.on("valueChange", function(){
+        eventHandle = searchTerms.on("valuechange", function(){
             reset.syncUI();
         });
         Y.on("lane:searchPicoChange", function(){

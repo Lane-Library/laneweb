@@ -217,7 +217,7 @@ Y.Plugin.ACPlugin = Y.extend(
  **/
 function attachHandles (self, host) {
     var category = Y.stamp(this)+"|";
-    Y.on(category+"valueChange", valueChangeHandler, host, self);
+    Y.on(category+"valuechange", valueChangeHandler, host, self);
     // next/open on down
     Y.on(category+"key", self.next, host, "down:40", self);
     // previous on up
@@ -227,7 +227,7 @@ function attachHandles (self, host) {
 };
 
 /**
- * The handler that listens to valueChange events and decides whether or not
+ * The handler that listens to valuechange events and decides whether or not
  * to kick off a new query.
  *
  * @param {Object} The event object
