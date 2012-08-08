@@ -25,6 +25,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
     @Override
     public void setModel(final Map<String, Object> model) {
+        super.setModel(model);
         this.type = ModelUtil.getString(model, Model.TYPE);
         this.subset = ModelUtil.getString(model, Model.SUBSET);
         this.alpha = ModelUtil.getString(model, Model.ALPHA);
