@@ -131,6 +131,7 @@
                 <value>template</value>
                 <value>bassettLargerView</value>
                 <value>none</value>
+                <value>yui-3.6.0</value>
             </list>
         </constructor-arg>
         <constructor-arg>

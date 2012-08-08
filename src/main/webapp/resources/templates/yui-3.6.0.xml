@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Lane Medical Library &amp; Knowledge Management Center - Stanford
+            University School of Medicine</title>
+        <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
+        <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
+            href="/extensions/laneconnex-engine.xml"/>
+        <meta name="ipGroup" content="{ipGroup}"/>
+        <meta name="auth" content=""/>
+    </head>
+    <body>
+        <div id="custom-doc" class="yui-t7">
+            <div id="sb-rt" class="sb-lr">
+                <div id="sb-lft" class="sb-lr">
+                    <div class="sb-tb">
+                        <div class="sb-c" id="sb-tl"/>
+                        <div class="sb-c" id="sb-tr"/>
+                    </div>
+                    <div id="sb" style="*z-index:1">
+                        <h1>
+                            <a href="/index.html"><span>Lane</span> Medical Library <span
+                                id="subHeading">powered by LaneConnex Technology</span></a>
+                        </h1>
+                        <form id="search" method="get" action="/search.html">
+                            <fieldset id="searchFields">
+                                <select name="source" id="searchSource">
+                                    <option value="all-all"
+                                        title="Subject, Title, Author, PMID, ISSN, DOI"
+                                        >Lane Search</option>
+                                    <option value="clinical-all"
+                                        title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed ..."
+                                        >Clinical/PICO Search</option>
+                                    <option value="peds-all"
+                                        title="Find pediatric evidence from UpToDate, PubMed, and more ..."
+                                        >Pediatrics Search</option>
+                                    <option value="bioresearch-all"
+                                        title="Search 200+ bioresearch resources"
+                                        >Bioresearch Search</option>
+                                    <option value="history-all"
+                                        title="Search Lane's historical collection">History Search</option>
+                                    <option value="bassett"
+                                        title="Find anatomical images from Lane's Bassett Collection"
+                                        >Bassett Images Search</option>
+                                    <option value="textbooks-all"
+                                        title="Search selected clinical textbooks"
+                                        >Textbooks Search</option>
+                                </select>
+                                <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187; </span>
+                                <div id="searchIndicator"><img alt="[searching]"
+                                    src="/resources/images/search-indicator.gif"/></div>
+                                <input name="q" id="searchTerms" type="text"/>
+                                <input id="searchSubmit" type="submit" value="search"/>
+                                <a id="searchReset" title="Clear Search" href="/">×</a>
+                            </fieldset>
+                        </form>
+                        <div class="content">
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                href="content:/includes/global-announcement.html">
+                                <xi:fallback/>
+                            </xi:include>
+                            <?laneweb content?>
+                        </div>
+                        <ul id="libraryHours">
+                            <li>Today's hours: <?laneweb todays-hours?></li>
+                            <li><a href="/about/index.html">Hours</a></li>
+                        </ul>
+                        <ul id="libraryContact">
+                            <li>650-723-6831</li>
+                            <li><a href="/help/ask-us.html">Ask Us</a></li>
+                            <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
+                        </ul>
+                        <ul id="login">
+                            <li><div class="look-here"><div class="look-here-arrow"></div>Save Time!<br/>Login to personalize</div>
+                                <a href="/secure/login.html">MyLane login</a>
+                            </li>
+                            <li id="favorites"><div class="look-here"><div class="look-here-arrow"></div>Create your personal bookmarks</div>
+                                <a href="/favorites.html">My Bookmarks</a>
+                                <?laneweb bookmarks?>
+                            </li>
+                            <li>
+                                <a href="/myaccounts.html">MyLane</a>
+                            </li>
+                            <li>
+                                <a id="logout" href="/logout">Logout</a>
+                            </li>
+                            <li>
+                                <a href="?proxy-links=false">Guest Access</a>
+                            </li>
+                            <li>
+                                <a href="?proxy-links=true">Stanford Access</a>
+                            </li>
+                        </ul>
+                        <ul id="laneNav">
+                            <li>
+                                <a href="/biomed-resources/index.html"
+                                    >Biomed Resources</a>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="content:/includes/leftmenu-resources.html">
+                                    <xi:fallback/>
+                                </xi:include>
+                            </li>
+                            <li>
+                                <a href="/portals/index.html"
+                                    >Specialty Portals</a>
+                                <ul id="specialties-menu">
+                                    <li><a href="/portals/anesthesia.html?laneNav=1">Anesthesia</a></li>
+                                      <li><a href="/portals/obgyn.html?laneNav=1">Obstetrics &amp; Gynecology</a></li>
+                                    <li><a href="/portals/ethics.html?laneNav=1">Biomedical Ethics</a></li>
+                                      <li><a href="/portals/oncology.html?laneNav=1">Oncology</a></li>
+                                    <li><a href="/portals/bioresearch.html?laneNav=1">Bioresearch</a></li>
+                                      <li><a href="/portals/ophthalmology.html?laneNav=1">Ophthalmology</a></li>
+                                    <li><a href="/portals/cardiology.html?laneNav=1">Cardiology</a></li>
+                                      <li><a href="http://trachea.stanford.edu/">Otolaryngology</a></li>
+                                    <li><a href="/portals/clinical.html?laneNav=1">Clinical</a></li>
+                                      <li><a href="/portals/pathology.html?laneNav=1">Pathology</a></li>
+                                    <li><a href="/portals/patient.html?laneNav=1">Consumer Health</a></li>
+                                      <li><a href="/portals/peds.html?laneNav=1">Pediatrics</a></li>
+                                    <li><a href="/portals/emergency.html?laneNav=1">Emergency Medicine</a></li>
+                                      <li><a href="/portals/pharmacy.html?laneNav=1">Pharmacy</a></li>
+                                    <li><a href="/portals/ihealth.html?laneNav=1">Global Health</a></li>
+                                      <li><a href="/portals/pmr.html?laneNav=1">Physical Medicine &amp; Rehab.</a></li>
+                                    <li><a href="/portals/hematology.html?laneNav=1">Hematology</a></li>
+                                      <li><a href="/portals/picu.html?laneNav=1">PICU</a></li>
+                                    <li><a href="/portals/internal-medicine.html?laneNav=1">Internal Medicine</a></li>
+                                      <li><a href="/portals/psychiatry.html?laneNav=1">Psychiatry</a></li>
+                                    <li><a href="/portals/cvicu.html?laneNav=1">LPCH Heart Center Nursing</a></li>
+                                      <li><a href="/portals/pulmonary.html?laneNav=1">Pulmonary</a></li>
+                                    <li><a href="/portals/medicalEd.html?laneNav=1">Medical Education</a></li>
+                                      <li><a href="/portals/reference.html">Reference Desk</a></li>
+                                    <li><a href="/portals/cultural.html?laneNav=1">Multicultural Health</a></li>
+                                      <li><a href="/portals/spec-programs.html?laneNav=1">Special Programs</a></li>
+                                    <li><a href="/portals/neurology.html?laneNav=1">Neurology</a></li>
+                                      <li><a href="/portals/spiritual.html?laneNav=1">Spiritual Care</a></li>
+                                    <li><a href="/portals/nursing.html?laneNav=1">Nursing</a></li>
+                                      <li><a href="/classes-consult/infoliteracy-practice.html?laneNav=1">Student</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/classes-consult/index.html"
+                                    >Classes &amp; Consulting</a>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="content:/includes/leftmenu-classes.html">
+                                    <xi:fallback/>
+                                </xi:include>
+                            </li>
+                            <li>
+                                <a href="/med-history/index.html"
+                                    >History Center</a>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="content:/includes/leftmenu-medhistory.html">
+                                    <xi:fallback/>
+                                </xi:include>
+                            </li>
+                            <li>
+                                <a href="/about/index.html"
+                                    >About Lane</a>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="content:/includes/leftmenu-about.html">
+                                    <xi:fallback/>
+                                </xi:include>
+                            </li>
+                            <li>
+                                <a href="/help/index.html"
+                                    >How To</a>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="content:/includes/leftmenu-help.html">
+                                    <xi:fallback/>
+                                </xi:include>
+                            </li>
+                            <li>
+                                <select id="qlinks">
+                                    <option value="">Popular Links</option>
+                                    <option value=""> ---------------- </option>
+                                    <option
+                                        value="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M"
+                                        >PubMed</option>
+                                    <option
+                                        value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online"
+                                        >UpToDate</option>
+                                    <option value=""> ---------------- </option>
+                                    <option value="/biomed-resources/eb.html?laneNav=4">Books</option>
+                                    <option value="/biomed-resources/db.html?laneNav=4">Databases</option>
+                                    <option value="/biomed-resources/ej.html?laneNav=4">Journals</option>
+                                    <option value=""> ---------------- </option>
+                                    <option value="/portals/bioresearch.html?laneNav=4">Bioresearch
+                                        Portal</option>
+                                    <option value="/portals/clinical.html?laneNav=4">Clinical Portal</option>
+                                    <option value="/portals/peds.html?laneNav=4">Pediatrics Portal</option>
+                                    <option value="/portals/pharmacy.html?laneNav=4">Pharmacy Portal</option>
+                                    <option value=""> ---------------- </option>
+                                    <option value="http://docxpress.stanford.edu">DocXpress</option>
+                                    <option value="http://lmldb.stanford.edu">Lane Catalog</option>
+                                </select>
+                            </li>
+                        </ul>
+                        <div id="laneFooter">
+                            <div class="yui3-g">
+                                <div class="yui3-u-1-5">
+                                    <a href="/biomed-resources/index.html?laneNav=3">BIOMED RESOURCES</a>
+                                    <ul>
+                                        <li><a href="/biomed-resources/ej.html?laneNav=3">Journals</a></li>
+                                        <li><a href="/biomed-resources/eb.html?laneNav=3">Books</a></li>
+                                        <li><a href="/biomed-resources/db.html?laneNav=3">Databases</a></li>
+                                        <li><a href="/biomed-resources/images.html?laneNav=3">Images</a></li>
+                                        <li><a href="/biomed-resources/cc.html?laneNav=3">Clinical Decision Tools</a></li>
+                                    </ul>
+                                </div>
+                                <div class="yui3-u-1-5">
+                                    <a href="/portals/index.html?laneNav=3">SPECIALTY PORTALS</a>
+                                    <ul>
+                                        <li><a href="/portals/peds.html?laneNav=3">Pediatrics</a></li>
+                                        <li><a href="/portals/clinical.html?laneNav=3">Clinical</a></li>
+                                        <li><a href="/portals/cvicu.html?laneNav=3">LPCH Heart Center Nursing</a></li>
+                                        <li><a href="/portals/pharmacy.html?laneNav=3">Pharmacy</a></li>
+                                        <li><a href="/portals/picu.html?laneNav=3">PICU</a></li>
+                                    </ul>
+                                </div>
+                                <div class="yui3-u-1-5">
+                                    <a href="/about/index.html?laneNav=3">ABOUT LANE</a>
+                                    <ul>
+                                        <li><a href="/about/index.html?laneNav=3">Hours</a></li>
+                                        <li><a href="/about/hours-directions.html?laneNav=3">Directions &amp; Maps</a></li>
+                                        <li><a href="/about/contact.html?laneNav=3">Contact Us</a></li>
+                                        <li><a href="/about/studyspaces.html?laneNav=3">Study Spaces</a></li>
+                                        <li><a href="/about/liaisons.html?laneNav=3">Liaisons</a></li>
+                                        <li><a href="/help/get-started/affiliates.html?laneNav=3">Your eligibility</a></li>
+                                    </ul>
+                                </div>
+                                <div class="yui3-u-1-5">
+                                    <a href="http://www.stanford.edu/">STANFORD</a>
+                                    <ul>
+                                        <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
+                                        <li><a href="/biomed-resources/recent-su-pubmed.html?laneNav=3">Stanford Authors in PubMed</a></li>
+                                        <li><a href="/biomed-resources/highly-accessed.html?laneNav=3">Highly Accessed Articles @Stanford</a></li>
+                                        <li><a href="http://scopeblog.stanford.edu/">Scope Blog</a></li>
+                                    </ul>
+                                </div>
+                                <div class="yui3-u-1-5">
+                                    <a href="http://giving.stanford.edu/goto/lanelibrarygift" class="makegift image-link" rel="popup standard"></a>
+                                    <div id="socialMedia">
+                                        <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257" class="facebook image-link"></a>
+                                        <a href="http://twitter.com/#!/LaneLibStanford" class="twitter image-link"></a>
+                                        <a href="http://www.flickr.com/photos/40390680@N08/" class="flickr image-link noproxy"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sb-tb" id="sb-bot">
+                        <div class="sb-c" id="sb-bl"/>
+                        <div class="sb-c" id="sb-br"/>
+                    </div>
+                </div>
+            </div>
+            <ul id="somNav2">
+                <li>
+                    <a href="http://stanfordmedicine.stanford.edu">&#169; <?laneweb current-year?>
+                        Stanford Medicine</a>
+                </li>
+                <li>
+                    <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
+                </li>
+                <li id="irtBrand">
+                    <a href="http://med.stanford.edu/irt/">a division of <span>IRT</span></a>
+                </li>
+            </ul>
+            <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
+        </div>
+        <div id="feedbackLink"><a rel="lightbox" href="/help/feedback2.html"></a></div>
+        <script type="text/javascript" src="/resources/javascript/yui-3.6.0.js?${project.version}"></script>
+        <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}"></script>
+    </body>
+</html>
