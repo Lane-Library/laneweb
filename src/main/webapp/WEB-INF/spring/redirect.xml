@@ -17,6 +17,7 @@
                             <entry key="/lksc-print(?:.*)" value="/help/lksc-print.html"/>
                             <entry key="/classes" value="/classes-consult/laneclasses.html"/>
                             <entry key="/clinician" value="/portals/clinical.html"/>
+                            <entry key="/apps/classes/calendar.ics" value="/classes/calendar.ics"/>
                         </map>
                     </property>
                 </bean>
@@ -36,8 +37,6 @@
                             <entry key="/local/antibiogramLPCH/index\.html(.*)" value="/newpage.html?page=/biomed-resources/antibiograms-lpch.html$1"/>
                             <entry key="/local/(antibiogram(?:LPCH)?)/(.*)" value="/newpage.html?page=/biomed-resources/$1/$2"/>
                             <entry key="/m" value="/m/index\.html"/>
-							<!-- tobacco: 2012-02-14 TODO: remove in 3 months or after traffic dies down sufficiently -->
-							<entry key="/tobacco/(?:.*)" value="/newpage.html?page=http://tobacco.stanford.edu/tobacco_web/index.php"/>
                         </map>
                     </property>
                 </bean>
