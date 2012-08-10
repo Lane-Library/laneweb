@@ -48,6 +48,6 @@
         else{
             targetInput = Y.one("#searchTerms");
         }
-        new Teletype(teletypeInputs.item(i), targetInput);
+        (new Teletype(teletypeInputs.item(i), targetInput));
     }
 })();

@@ -126,7 +126,7 @@ public class CachingPipeline extends NonCachingPipeline {
     /**
      * Process the given <code>Environment</code>, producing the output.
      * 
-     * @throws
+     * @throws ProcessingException
      */
     @Override
     protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {

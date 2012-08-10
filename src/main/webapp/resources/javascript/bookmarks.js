@@ -774,6 +774,7 @@
                     node.removeClass("bookmarking");
                     node.removeClass("successful");
                     this._timer = Y.later(this.get("hideDelay"), this, this._turnOff);
+                    break;
                 default:
                 }
             }

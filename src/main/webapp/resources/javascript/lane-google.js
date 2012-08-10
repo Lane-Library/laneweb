@@ -19,7 +19,7 @@
                     gaPageTracker._setVar(meta.get('content'));
                     gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);
                 }
-                if (userId != null) {
+                if (userId !== null) {
                     gaPageTracker._setCustomVar(2,'authenticatedSession',userId,2);
                     if (Y.lane.BookmarksWidget && Y.lane.BookmarksWidget.get("bookmarks").size() > 0) {
                         gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',userId,2);

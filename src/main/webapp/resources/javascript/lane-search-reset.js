@@ -53,7 +53,7 @@
                 for(i = 0; i < inputs.size(); i++){
                     title = inputs.item(i).get('title');
                     if (title) {
-                        new Y.lane.TextInput(inputs.item(i), title);
+                        (new Y.lane.TextInput(inputs.item(i), title));
                     }
                 }
                 inputs.item(0).focus();

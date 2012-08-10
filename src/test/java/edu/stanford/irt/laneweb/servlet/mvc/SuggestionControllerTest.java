@@ -47,13 +47,13 @@ public class SuggestionControllerTest {
 
     /**
      * Test method for
-     * {@link edu.stanford.irt.laneweb.SuggestionController.SuggestionReader#generate()}
+     * {@link edu.stanford.irt.laneweb.servlet.mvc.SuggestionController#getSuggestions()}
      * .
      * 
      * @throws IOException
      */
     @Test
-    public void testGenerate() throws IOException {
+    public void testGetSuggestions() throws IOException {
         Suggestion suggestion = createMock(Suggestion.class);
         expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis");
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));

@@ -33,7 +33,7 @@ public class EresourceSearchResultTest {
 
     /**
      * Test method for
-     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}
+     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.search.SearchResult)}
      * .
      */
     @Test
@@ -50,7 +50,7 @@ public class EresourceSearchResultTest {
 
     /**
      * Test method for
-     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}
+     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.search.SearchResult)}
      * .
      */
     @Test
@@ -79,7 +79,7 @@ public class EresourceSearchResultTest {
 
     /**
      * Test method for
-     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}
+     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.search.SearchResult)}
      * .
      */
     @Test
@@ -100,7 +100,7 @@ public class EresourceSearchResultTest {
 
     /**
      * Test method for
-     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}
+     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.search.SearchResult)}
      * .
      */
     @Test
@@ -133,7 +133,7 @@ public class EresourceSearchResultTest {
 
     /**
      * Test method for
-     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}
+     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.search.SearchResult)}
      * .
      */
     @Test
@@ -158,7 +158,7 @@ public class EresourceSearchResultTest {
 
     /**
      * Test method for
-     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}
+     * {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.search.SearchResult)}
      * .
      */
     @Test

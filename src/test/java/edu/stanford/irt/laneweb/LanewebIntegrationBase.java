@@ -54,7 +54,6 @@ public class LanewebIntegrationBase {
     }
 
     /**
-     * @param args
      * @throws IOException
      * @throws ServletException
      * @throws NamingException

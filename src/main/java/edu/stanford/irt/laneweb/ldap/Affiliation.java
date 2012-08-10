@@ -9,13 +9,10 @@ import java.util.Map;
 /**
  * Created on: Mar 14, 2007 Affiliation
  * 
- * @see <a href=
- *      "https://www.stanford.edu/dept/as/mais/integration/data/data_affiliation_types.html"
- *      >LDAP
- * @see group for lane
- *      https://medwiki.stanford.edu/display/lane/Proxy+server+documentation
+ *  https://www.stanford.edu/dept/as/mais/integration/data/data_affiliation_types.html,
+ *      Also, https://medwiki.stanford.edu/x/hwFl group for lane
  *      Union between stanford:stanford,stanford:academic, stanford:admin, unc
- *      Data Affiliation types</a>
+ *      Data Affiliation types
  * @author philip constantinou
  */
 public enum Affiliation {

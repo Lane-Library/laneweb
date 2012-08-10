@@ -169,7 +169,7 @@
                     if (child.get("children").size() === 2) {
                         items.push(new ExpandyItem({node : child}));
                     }
-                };
+                }
                 node.addClass("yui3-accordion");
                 node.plug(Y.Plugin.NodeAccordion, { anim: Y.Easing.backIn });
             }

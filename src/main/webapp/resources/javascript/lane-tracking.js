@@ -183,7 +183,7 @@
                         return false;
                     }
                     var link = event.target;
-                    while (link != null && link.get('nodeName') != 'A') {
+                    while (link !== null && link.get('nodeName') != 'A') {
                         link = link.get('parentNode');
                     }
                     if (link) {

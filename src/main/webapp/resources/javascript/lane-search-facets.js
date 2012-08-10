@@ -61,8 +61,8 @@
         this._state = 'initialized';
         this._callback = {
             on: {
-                success: function(id, o, arguments){
-                    var result = arguments.result;
+                success: function(id, o, args){
+                    var result = args.result;
                     result.setContent(o.responseText);
                     LANE.search.facets.getCurrentResult().hide();
                     LANE.search.facets.setCurrentResult(result);
@@ -73,7 +73,7 @@
                     //TODO: use window.location to set page to href of facet
                 }
             },
-            arguments: {
+            "arguments": {
                 result: this
             }
         };
@@ -94,7 +94,7 @@
                 this._facet.addClass('current');
                 this._container.set("innerHTML", this._content);
                 searchIndicator.hide();
-                Y.fire('lane:change');;
+                Y.fire('lane:change');
             }
         };
         Result.prototype.getContent = function(){
