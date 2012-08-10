@@ -1,4 +1,4 @@
-package edu.stanford.irt.cocoon.pipeline.transform;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -7,6 +7,7 @@ import java.util.Set;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 

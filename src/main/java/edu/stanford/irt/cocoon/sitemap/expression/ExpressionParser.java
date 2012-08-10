@@ -5,7 +5,7 @@ import java.io.StringReader;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class ExpressionParser {
 
@@ -55,7 +55,7 @@ public class ExpressionParser {
             }
         }
         if (inExpr) {
-            throw new LanewebException("Unterminated {");
+            throw new CocoonException("Unterminated {");
         }
         if (buf.length() > 0) {
             expressions.add(new LiteralExpression(buf.toString()));

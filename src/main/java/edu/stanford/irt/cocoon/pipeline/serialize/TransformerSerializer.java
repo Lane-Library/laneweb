@@ -16,7 +16,7 @@ import org.apache.cocoon.xml.AbstractXMLPipe;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class TransformerSerializer extends AbstractXMLPipe implements Serializer, CacheableProcessingComponent {
 
@@ -89,7 +89,7 @@ public class TransformerSerializer extends AbstractXMLPipe implements Serializer
             this.setContentHandler(handler);
             this.setLexicalHandler(handler);
         } catch (TransformerConfigurationException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
     }
 

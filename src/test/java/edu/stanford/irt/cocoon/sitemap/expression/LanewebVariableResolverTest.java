@@ -20,7 +20,7 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class LanewebVariableResolverTest {
 
@@ -83,7 +83,7 @@ public class LanewebVariableResolverTest {
         try {
             this.resolver.setExpression("foo");
             fail();
-        } catch (LanewebException e) {
+        } catch (CocoonException e) {
         }
         verify(this.parser, this.expression);
     }

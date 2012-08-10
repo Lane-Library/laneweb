@@ -8,7 +8,7 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.objectmodel.helper.ParametersMap;
 import org.apache.cocoon.sitemap.SitemapModelComponent;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public abstract class AbstractSitemapModelComponent implements SitemapModelComponent {
 
@@ -24,7 +24,7 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
             try {
                 ((SourceAware) this).setSource(resolver.resolveURI(src));
             } catch (IOException e) {
-                throw new LanewebException(e);
+                throw new CocoonException(e);
             }
         }
         if (this instanceof Initializable) {

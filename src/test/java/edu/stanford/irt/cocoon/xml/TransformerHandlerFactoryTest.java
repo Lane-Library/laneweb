@@ -21,7 +21,7 @@ import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class TransformerHandlerFactoryTest {
 
@@ -164,7 +164,7 @@ public class TransformerHandlerFactoryTest {
                 this.validity);
         try {
             this.processor.getTransformerHandler(this.source);
-        } catch (LanewebException e) {
+        } catch (CocoonException e) {
         }
         verify(this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler, this.transformer,
                 this.validity);
@@ -180,7 +180,7 @@ public class TransformerHandlerFactoryTest {
                 this.validity);
         try {
             this.processor.getTransformerHandler(this.source);
-        } catch (LanewebException e) {
+        } catch (CocoonException e) {
         }
         verify(this.uriResolver, this.source, this.factory, this.templates, this.transformerHandler, this.transformer,
                 this.validity);

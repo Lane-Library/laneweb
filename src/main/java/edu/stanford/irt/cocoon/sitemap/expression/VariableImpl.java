@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import org.apache.cocoon.components.treeprocessor.InvokeContext;
 import org.apache.cocoon.components.treeprocessor.variables.VariableResolver;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class VariableImpl extends VariableResolver {
 
@@ -46,7 +46,7 @@ public class VariableImpl extends VariableResolver {
         try {
             this.expressions = this.parser.parseExpression(expression);
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
     }
 }

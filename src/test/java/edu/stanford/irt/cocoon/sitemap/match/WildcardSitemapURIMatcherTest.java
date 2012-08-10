@@ -8,8 +8,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 public class WildcardSitemapURIMatcherTest {
 
     private WildcardMatcher matcher;
@@ -18,19 +16,19 @@ public class WildcardSitemapURIMatcherTest {
 
     @Before
     public void setUp() throws Exception {
-        this.matcher = new WildcardMatcher(Model.SITEMAP_URI);
+        this.matcher = new WildcardMatcher("key");
         this.model = new HashMap<String, Object>();
     }
 
     @Test
     public void testGetMatchStringNoSlash() {
-        this.model.put(Model.SITEMAP_URI, "foo");
+        this.model.put("key", "foo");
         assertEquals("foo", this.matcher.getMatchString(this.model, null));
     }
 
     @Test
     public void testGetMatchStringSlash() {
-        this.model.put(Model.SITEMAP_URI, "/foo");
+        this.model.put("key", "/foo");
         assertEquals("foo", this.matcher.getMatchString(this.model, null));
     }
 }

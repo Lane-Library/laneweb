@@ -4,11 +4,10 @@ import java.io.IOException;
 
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.sitemap.DefaultContentAggregator;
+import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class AggregatorImpl extends DefaultContentAggregator {
 

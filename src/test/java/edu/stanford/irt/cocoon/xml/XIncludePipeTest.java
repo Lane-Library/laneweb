@@ -41,7 +41,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class XIncludePipeTest {
 
@@ -52,7 +52,7 @@ public class XIncludePipeTest {
         @Override
         public void exception(final Exception e) {
             if (this.failFast) {
-                throw new LanewebException(e);
+                throw new CocoonException(e);
             }
         }
 
@@ -325,7 +325,7 @@ public class XIncludePipeTest {
         try {
             this.pipe.setDocumentLocator(locator);
             fail();
-        } catch (LanewebException e) {
+        } catch (CocoonException e) {
         }
         verify(this.xmlConsumer, locator, this.sourceResolver, this.source, this.xmlBaseSupport);
     }
@@ -342,7 +342,7 @@ public class XIncludePipeTest {
         try {
             this.pipe.setDocumentLocator(locator);
             fail();
-        } catch (LanewebException e) {
+        } catch (CocoonException e) {
         }
         verify(this.xmlConsumer, locator, this.sourceResolver, this.source, this.xmlBaseSupport);
     }
@@ -494,7 +494,7 @@ public class XIncludePipeTest {
         expect(this.attributes.getValue("", "href")).andReturn("foo");
         expect(this.attributes.getValue("", "parse")).andReturn(null);
         expect(this.attributes.getValue("", "xpointer")).andReturn(null);
-        expect(this.xmlBaseSupport.makeAbsolute("foo")).andThrow(new LanewebException("oopsie"));
+        expect(this.xmlBaseSupport.makeAbsolute("foo")).andThrow(new CocoonException("oopsie"));
         replay(this.sourceResolver, this.attributes, this.xmlBaseSupport);
         // must call init() to create xmlBaseSupport object
         try {
@@ -530,13 +530,13 @@ public class XIncludePipeTest {
                     result.setAccessible(true);
                     result.set(builder, domResult);
                 } catch (SecurityException e) {
-                    throw new LanewebException(e);
+                    throw new CocoonException(e);
                 } catch (NoSuchFieldException e) {
-                    throw new LanewebException(e);
+                    throw new CocoonException(e);
                 } catch (IllegalArgumentException e) {
-                    throw new LanewebException(e);
+                    throw new CocoonException(e);
                 } catch (IllegalAccessException e) {
-                    throw new LanewebException(e);
+                    throw new CocoonException(e);
                 }
             }
         };

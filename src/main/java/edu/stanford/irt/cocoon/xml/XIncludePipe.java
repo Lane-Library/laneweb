@@ -28,7 +28,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 /**
  * XMLPipe that processes XInclude elements. To perform XInclude processing on
@@ -219,9 +219,9 @@ public class XIncludePipe extends AbstractXMLPipe {
                 }
             }
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         } catch (SAXException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
         this.locator = locator;
         super.setDocumentLocator(locator);
@@ -380,7 +380,7 @@ public class XIncludePipe extends AbstractXMLPipe {
             try {
                 xptr.process(context);
             } catch (ResourceNotFoundException e) {
-                throw new LanewebException(e);
+                throw new CocoonException(e);
             }
         } else if (source instanceof XMLizable) {
             ((XMLizable) source).toSAX(new IncludeXMLConsumer(subPipe));

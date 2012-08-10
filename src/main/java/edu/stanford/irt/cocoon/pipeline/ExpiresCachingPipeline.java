@@ -21,7 +21,7 @@ import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class ExpiresCachingPipeline extends NonCachingPipeline {
 
@@ -114,7 +114,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         Parameters parameters = getParameters();
         String key = parameters.getParameter("cache-key", null);
         if (key == null) {
-            throw new LanewebException("null cache-key");
+            throw new CocoonException("null cache-key");
         }
         this.cacheExpires = parameters.getParameterAsLong("cache-expires", this.defaultCacheExpires);
         // prepare the pipeline
@@ -182,9 +182,9 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 }
             }
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         } catch (SAXException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
         return true;
     }

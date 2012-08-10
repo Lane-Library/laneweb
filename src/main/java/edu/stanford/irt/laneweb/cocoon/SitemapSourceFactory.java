@@ -1,4 +1,4 @@
-package edu.stanford.irt.cocoon.sitemap.source;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Enumeration;
@@ -12,8 +12,8 @@ import org.apache.cocoon.environment.wrapper.RequestParameters;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceFactory;
 
+import edu.stanford.irt.cocoon.sitemap.source.SitemapSource;
 import edu.stanford.irt.cocoon.source.SourceException;
-import edu.stanford.irt.laneweb.cocoon.LanewebEnvironment;
 import edu.stanford.irt.laneweb.model.Model;
 
 public abstract class SitemapSourceFactory implements SourceFactory {

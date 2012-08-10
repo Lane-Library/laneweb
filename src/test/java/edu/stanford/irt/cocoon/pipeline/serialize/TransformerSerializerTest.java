@@ -23,7 +23,7 @@ import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class TransformerSerializerTest {
 
@@ -79,7 +79,7 @@ public class TransformerSerializerTest {
         try {
             this.serializer.setOutputStream(null);
             fail();
-        } catch (LanewebException e) {
+        } catch (CocoonException e) {
         }
         verify(this.factory);
     }

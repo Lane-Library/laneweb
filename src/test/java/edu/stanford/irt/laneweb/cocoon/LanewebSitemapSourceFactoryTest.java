@@ -1,4 +1,4 @@
-package edu.stanford.irt.cocoon.sitemap.source;
+package edu.stanford.irt.laneweb.cocoon;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;

@@ -25,7 +25,7 @@ import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.AggregatedValidity;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class CachingPipeline extends NonCachingPipeline {
 
@@ -171,9 +171,9 @@ public class CachingPipeline extends NonCachingPipeline {
             }
             return true;
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         } catch (SAXException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
     }
 

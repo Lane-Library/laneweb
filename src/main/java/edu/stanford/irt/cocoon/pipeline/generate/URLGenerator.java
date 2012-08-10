@@ -12,8 +12,8 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.CocoonException;
 import edu.stanford.irt.cocoon.pipeline.SourceAware;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class URLGenerator extends AbstractGenerator implements CacheableProcessingComponent, SourceAware {
 
@@ -58,9 +58,9 @@ public class URLGenerator extends AbstractGenerator implements CacheableProcessi
                 this.saxParser.parse(inputSource, xmlConsumer);
             }
         } catch (SAXException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
     }
 }

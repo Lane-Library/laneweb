@@ -18,7 +18,7 @@ import org.apache.cocoon.sitemap.impl.DefaultExecutor;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class SitemapImpl implements Processor {
 
@@ -37,7 +37,7 @@ public class SitemapImpl implements Processor {
         try {
         this.rootNode = treeBuilder.build(sitemapProgram, null);
         } catch (Exception e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
     }
 
@@ -88,7 +88,7 @@ public class SitemapImpl implements Processor {
             context.setLastProcessor(this);
             return this.rootNode.invoke(environment, context);
         } catch (Exception e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
     }
 }

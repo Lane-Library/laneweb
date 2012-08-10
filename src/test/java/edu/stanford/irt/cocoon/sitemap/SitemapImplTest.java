@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 public class SitemapImplTest {
 
@@ -129,7 +129,7 @@ public class SitemapImplTest {
         replay(this.processingNode, this.serviceManager, environment);
         try {
             this.sitemap.process(environment);
-        } catch (LanewebException e) {
+        } catch (CocoonException e) {
         }
         verify(this.processingNode, this.serviceManager, environment);
     }

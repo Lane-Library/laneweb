@@ -18,7 +18,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 
 public class TransformerHandlerFactory {
@@ -54,9 +54,9 @@ public class TransformerHandlerFactory {
             }
             return handler;
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         } catch (TransformerException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
     }
 

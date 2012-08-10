@@ -24,7 +24,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.cocoon.CocoonException;
 
 /**
  * This is the base for all implementations of a <code>ProcessingPipeline</code>
@@ -304,9 +304,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
                 this.generator.generate();
             }
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         } catch (SAXException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
         return true;
     }
@@ -336,9 +336,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
                         this.serializerParam);
             }
         } catch (SAXException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new CocoonException(e);
         }
     }
 }
