@@ -10,7 +10,7 @@
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.search.MetaSearchManager"
-        class="edu.stanford.irt.laneweb.util.MetaSearchManagerFactoryBean"
+        class="edu.stanford.irt.laneweb.search.MetaSearchManagerFactoryBean"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>

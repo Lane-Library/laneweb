@@ -156,7 +156,6 @@ public class CachingPipeline extends NonCachingPipeline {
                     xmlDeserializer.deserialize(response.getResponse());
                 }
             } else {
-                // CachedResponse response = this.cache.get(this.cacheKey);
                 CachedResponse response = getValidCachedResponse(this.cacheKey, this.cachedValidities);
                 if (response == null) {
                     CachingOutputStream cachingStream = new CachingOutputStream(environment.getOutputStream(0));

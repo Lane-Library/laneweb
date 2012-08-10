@@ -21,10 +21,6 @@ public class SourceResolverImpl implements SourceResolver {
 
     public Source resolveURI(final String location) throws IOException {
         String modifiedLocation = location;
-        // Matcher matcher = this.tomcatURLPattern.matcher(location);
-        // if (matcher.matches()) {
-        // modifiedLocation = matcher.group(1);
-        // }
         int colonPosition = modifiedLocation.indexOf(':');
         if (colonPosition > 0) {
             modifiedLocation = this.locationModifier.modify(modifiedLocation);

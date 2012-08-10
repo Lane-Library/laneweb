@@ -228,9 +228,6 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      */
     public void setSerializer(final String role, final String source, final Parameters param, final Parameters hintParam,
             final String mimeType) {
-        // if (mimeType == null) {
-        // throw new IllegalArgumentException("null mimeType");
-        // }
         this.serializer = (Serializer) this.beanFactory.getBean(Serializer.ROLE + '/' + role);
         this.serializerSource = source;
         this.serializerParam = param;

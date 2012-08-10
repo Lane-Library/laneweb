@@ -241,9 +241,6 @@ public class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
-    // private void setParent(final XIncludePipe parent) {
-    // this.parent = parent;
-    // }
     @Override
     public void startElement(final String uri, final String name, final String raw, final Attributes attr) throws SAXException {
         // Track xml:base context:

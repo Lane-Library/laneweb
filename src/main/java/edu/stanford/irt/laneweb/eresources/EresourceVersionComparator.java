@@ -44,8 +44,6 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
             return score2 - score1;
         }
         return 1;
-        // return (v1.getId() < v2.getId() ? -1 : (v1.getId() == v2.getId() ? 0
-        // : 1));
     }
 
     /**

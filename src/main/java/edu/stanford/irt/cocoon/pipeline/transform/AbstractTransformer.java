@@ -6,7 +6,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
+import edu.stanford.irt.cocoon.pipeline.AbstractSitemapModelComponent;
 
 public abstract class AbstractTransformer extends AbstractSitemapModelComponent implements Transformer {
 

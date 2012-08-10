@@ -31,7 +31,7 @@ public class SunetIdSource {
     public String getSunetid(final HttpServletRequest request) {
         HttpSession session = request.getSession();
         String sessionSunetid = (String) session.getAttribute(Model.SUNETID);
-        String sunetid = sessionSunetid == null ? getSunetidFromRequest(request) : sessionSunetid;
+        String sunetid = sessionSunetid == null ? request.getRemoteUser() : sessionSunetid;
         if (sunetid == null) {
             sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("User-Agent"));
         }
@@ -62,17 +62,6 @@ public class SunetIdSource {
                 }
             }
         }
-        return sunetid;
-    }
-
-    private String getSunetidFromRequest(final HttpServletRequest request) {
-        String sunetid = request.getRemoteUser();
-//        if (sunetid == null) {
-//            sunetid = request.getHeader("X-WEBAUTH-USER");
-//            if ("(null)".equals(sunetid)) {
-//                sunetid = null;
-//            }
-//        }
         return sunetid;
     }
 }

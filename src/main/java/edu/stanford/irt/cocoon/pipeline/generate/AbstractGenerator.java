@@ -3,7 +3,7 @@ package edu.stanford.irt.cocoon.pipeline.generate;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
+import edu.stanford.irt.cocoon.pipeline.AbstractSitemapModelComponent;
 
 public abstract class AbstractGenerator extends AbstractSitemapModelComponent implements Generator {
 
