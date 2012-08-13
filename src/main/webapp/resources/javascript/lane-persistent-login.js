@@ -70,8 +70,8 @@
 				event.preventDefault();
 			}
 			else{
-				event.detach();
 				setLink(event); //cookie set in the PerssitentLoginFilter class
+				event.detach();
 			}
 		});
 		
