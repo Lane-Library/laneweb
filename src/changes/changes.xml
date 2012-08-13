@@ -7,7 +7,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2012-08-06" version="1.13.6" description="1.13.6 bug fix release">
+        <release date="2012-08-13" version="1.13.7" description="1.13.7 bug fix release">
+            <action date="2012-08-07" issue="74082" dev="ceyates" type="fix">
+                /apps/proxy/credential causes an error  
+            </action>
+            <action date="2012-08-07" issue="73359" dev="ceyates" type="fix">
+                BeanInstantiationException appearing in logs
+            </action>
+        </release>
+        <release date="2012-08-06" version="1.13.6" description="1.13.6 bug fix release [reverted after deployment]">
             <action date="2012-08-04" issue="73922" dev="ceyates" type="fix">
                 autocomplete: arrow keys don't work since YUI 3.5  
             </action>

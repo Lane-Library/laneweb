@@ -17,7 +17,6 @@
                             <entry key="/lksc-print(?:.*)" value="/help/lksc-print.html"/>
                             <entry key="/classes" value="/classes-consult/laneclasses.html"/>
                             <entry key="/clinician" value="/portals/clinical.html"/>
-                            <entry key="/apps/classes/calendar.ics" value="/classes/calendar.ics"/>
                         </map>
                     </property>
                 </bean>
