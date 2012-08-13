@@ -59,3 +59,8 @@ h5 {
     color : #820000;
     font-size : 1.8em;
 }
+
+.smallh {
+    font-size: 14px;
+    margin-bottom: 1em;
+}
