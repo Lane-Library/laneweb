@@ -16,8 +16,8 @@
     </xsl:template>
 
     <xsl:template match="lc:event_data">
-            <div class="yui-gd">
-                <div class="yui-u first">
+            <div class="yui3-g wideline">
+                <div class="yui3-u-1-6">
                     <div class="month">
                         <xsl:call-template name="month" />
                     </div>
@@ -25,7 +25,7 @@
                         <xsl:call-template name="day" />
                     </div>
                 </div>
-                <div class="yui-u">
+                <div class="yui3-u-5-6">
                     <a>
                         <xsl:attribute name="href">
                             <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
