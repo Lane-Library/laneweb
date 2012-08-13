@@ -20,8 +20,7 @@
                     </div>
                     <div id="sb" style="*z-index:1">
                         <h1>
-                            <a href="/index.html"><span>Lane</span> Medical Library <span
-                                id="subHeading">powered by LaneConnex Technology</span></a>
+                            <a href="/index.html"><span>Lane</span> Medical Library</a>
                         </h1>
                         <form id="search" method="get" action="/search.html">
                             <fieldset id="searchFields">
@@ -234,6 +233,7 @@
                                         <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
                                         <li><a href="/biomed-resources/recent-su-pubmed.html?laneNav=3">Stanford Authors in PubMed</a></li>
                                         <li><a href="/biomed-resources/highly-accessed.html?laneNav=3">Highly Accessed Articles @Stanford</a></li>
+                                        <li><a href="/classes-consult/infoliteracy.html">Information Literacy</a></li>
                                         <li><a href="http://scopeblog.stanford.edu/">Scope Blog</a></li>
                                     </ul>
                                 </div>
@@ -264,6 +264,9 @@
                 </li>
                 <li id="irtBrand">
                     <a href="http://med.stanford.edu/irt/">a division of <span>IRT</span></a>
+                </li>
+                <li>
+                    powered by LaneConnex Technology
                 </li>
             </ul>
             <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
