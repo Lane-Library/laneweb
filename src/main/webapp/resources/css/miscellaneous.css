@@ -103,17 +103,6 @@ em {
     font-size : 1.8em
 }
 
-/*grand rounds section*/
-
-.content .grandrounds li a {
-    border-bottom : 1px dotted #81785A
-}
-.content .grandrounds li {
-    font-size : 14px;
-    font-family : Georgia, "Times New Roman", Times, serif;
-    border-bottom : none;
-    padding : 0 0 0 11px
-}
 /*table on ejpw_list.html*/
 
 .password-table table {
