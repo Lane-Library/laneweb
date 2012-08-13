@@ -7,9 +7,9 @@
     _right : 10px;
     border : 3px #5A8CB4 solid;
     width : 250px;
-    -moz-border-radius-bottomleft : 22px;
+  /*  -moz-border-radius-bottomleft : 22px;
     -webkit-border-bottom-left-radius : 22px;
-    border-radius : 0 0 0 22px
+    border-radius : 0 0 0 22px*/
 }
 #highlightedResourcesIECorner {
     display : block;
