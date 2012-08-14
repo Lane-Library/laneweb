@@ -98,8 +98,8 @@
     });
 
     //TODO: put more of this initialization into the Lightbox object
-    Y.lane.Lightbox.get("boundingBox").append("<a id='lightboxClose' title='lightboxClose'></a>");
-    Y.lane.Lightbox.get("boundingBox").one("#lightboxClose").on("click", function(event) {
+    //case 74468 remove close link, close on background click:
+    Y.lane.LightboxBg.on("click", function(event) {
         event.preventDefault();
         Y.lane.Lightbox.hide();
     });

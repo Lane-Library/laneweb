@@ -61,8 +61,6 @@
 		date = new Date();
 		lightbox.setContent(o.responseText);
 		lightbox.show();
-		// To hide tclose the window
-		Y.one('#lightboxClose').setStyle('visibility', 'hidden');
 		
 		// Click on YES --
 		Y.one('#yes-persistent-login').on('click', function(event) {
