@@ -24,18 +24,3 @@
     height : 100%;
     z-index : 2
 }
-#lightboxClose {
-    cursor : pointer;
-    display : block;
-    z-index : 4;
-    width : 26px;
-    height : 26px;
-    background-image : url(/././resources/images/lightboxCloseBg1.png);
-    border-bottom : none;
-    position : absolute;
-    right : -13px;
-    top : -13px
-}
-#lightboxClose:hover {
-    background-position : 26px 0;
-}
