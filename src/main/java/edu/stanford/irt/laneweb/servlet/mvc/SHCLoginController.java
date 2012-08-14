@@ -93,7 +93,7 @@ public class SHCLoginController {
             this.log.error(errorMsg.toString());
             url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
         }
-        response.sendRedirect(request.getContextPath() + url.toString());
+        response.sendRedirect("http://" + request.getServerName() + request.getContextPath() + url.toString());
     }
 
     private boolean validateAndPopulateEmrid(final String emrid, final HttpSession session) {

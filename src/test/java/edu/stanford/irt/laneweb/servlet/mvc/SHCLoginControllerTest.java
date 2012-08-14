@@ -60,8 +60,9 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
         expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
+        expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
-        this.response.sendRedirect("/portals/shc.html?sourceid=shc&u=emrid");
+        this.response.sendRedirect("http://server/portals/shc.html?sourceid=shc&u=emrid");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
         this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
@@ -71,8 +72,9 @@ public class SHCLoginControllerTest {
     public void testLoginExpiredTimestamp() throws IOException {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.codec.decrypt("123456789")).andReturn("123456789");
+        expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
-        this.response.sendRedirect("/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+timestamp%3B+");
+        this.response.sendRedirect("http://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+timestamp%3B+");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
         this.controller.login("emrid", "univid", "123456789", this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
@@ -90,9 +92,10 @@ public class SHCLoginControllerTest {
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.ldapDataAccess.getLdapDataForUnivid("univid")).andReturn(this.ldapData);
         expect(this.ldapData.isActive()).andReturn(Boolean.FALSE);
+        expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
         this.response
-                .sendRedirect("/portals/shc.html?sourceid=shc&u=emrid&error=missing+active+sunetid+for+univid%3A+univid");
+                .sendRedirect("http://server/portals/shc.html?sourceid=shc&u=emrid&error=missing+active+sunetid+for+univid%3A+univid");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
         this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
@@ -112,8 +115,9 @@ public class SHCLoginControllerTest {
         expect(this.ldapData.getSunetId()).andReturn("ditenus");
         expect(this.ldapData.isActive()).andReturn(Boolean.TRUE);
         this.session.setAttribute(Model.SUNETID, "ditenus");
+        expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
-        this.response.sendRedirect("/portals/shc.html?sourceid=shc&u=emrid");
+        this.response.sendRedirect("http://server/portals/shc.html?sourceid=shc&u=emrid");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
         this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
