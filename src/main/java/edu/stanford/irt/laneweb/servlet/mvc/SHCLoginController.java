@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,11 +27,15 @@ public class SHCLoginController {
 
     private static final String EPIC_PREFIX = "epic-";
 
-    private static final String ERROR_1 = "missing emrid; ";
+    private static final String ERROR_EMRID = "invalid or missing emrid; ";
 
-    private static final String ERROR_2 = "no univid from shc; ";
+    private static final String ERROR_MISSING_SUNETID = "missing active sunetid for univid: ";
 
-    private static final String ERROR_3 = "missing active sunetid for univid: ";
+    private static final String ERROR_TIMESTAMP = "invalid or missing timestamp; ";
+
+    private static final String ERROR_UNIVID = "invalid or missing univid; ";
+
+    private static final int ONE_MINUTE = 1000 * 60;
 
     private static final String TARGET_URL = "/portals/shc.html?sourceid=shc&u=";
 
@@ -60,38 +65,63 @@ public class SHCLoginController {
 
     @RequestMapping(value = "/shclogin")
     public void login(@RequestParam final String emrid, @RequestParam final String univid,
-            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            @RequestParam final String ts, final HttpServletRequest request, final HttpServletResponse response)
+            throws IOException {
         HttpSession session = request.getSession();
         StringBuffer errorMsg = new StringBuffer();
         StringBuffer url = new StringBuffer(TARGET_URL);
         url.append(URLEncoder.encode(emrid, "UTF-8"));
         String sunetid = null;
-        String decryptedEmrid = null;
         String decryptedUnivid = null;
-        decryptedEmrid = this.codec.decrypt(emrid);
-        decryptedUnivid = this.codec.decrypt(univid);
-        if (null == decryptedEmrid || decryptedEmrid.isEmpty()) {
-            errorMsg.append(ERROR_1);
-            decryptedEmrid = null;
-        }
-        if (null == decryptedUnivid || decryptedUnivid.isEmpty()) {
-            errorMsg.append(ERROR_2);
-            decryptedUnivid = null;
-        }
-        if (decryptedEmrid != null) {
-            session.setAttribute(Model.EMRID, EPIC_PREFIX + decryptedEmrid);
-        }
-        if (decryptedUnivid != null) {
-            session.setAttribute(Model.UNIVID, decryptedUnivid);
-            sunetid = getSunetid(session, decryptedUnivid);
+        if (!validateTimestamp(ts)) {
+            errorMsg.append(ERROR_TIMESTAMP);
+        } else {
+            if (!validateAndPopulateEmrid(emrid, session)) {
+                errorMsg.append(ERROR_EMRID);
+            }
+            if (!validateAndPopulateUnivid(univid, session)) {
+                errorMsg.append(ERROR_UNIVID);
+            } else {
+                decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
+                sunetid = getSunetid(session, decryptedUnivid);
+            }
         }
         if (sunetid == null && decryptedUnivid != null) {
-            errorMsg.append(ERROR_3 + decryptedUnivid);
+            errorMsg.append(ERROR_MISSING_SUNETID + decryptedUnivid);
         }
         if (errorMsg.length() > 0) {
             this.log.error(errorMsg.toString());
             url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
         }
         response.sendRedirect(request.getContextPath() + url.toString());
+    }
+
+    private boolean validateAndPopulateEmrid(final String emrid, final HttpSession session) {
+        String decryptedEmrid = this.codec.decrypt(emrid);
+        if (null != decryptedEmrid && !decryptedEmrid.isEmpty()) {
+            session.setAttribute(Model.EMRID, EPIC_PREFIX + decryptedEmrid);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateAndPopulateUnivid(final String univid, final HttpSession session) {
+        String decryptedUnivid = this.codec.decrypt(univid);
+        if (null != decryptedUnivid && !decryptedUnivid.isEmpty()) {
+            session.setAttribute(Model.UNIVID, decryptedUnivid);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateTimestamp(final String timestamp) {
+        long decryptedTimestamp;
+        try {
+            decryptedTimestamp = Long.parseLong(this.codec.decrypt(timestamp));
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        Date now = new Date();
+        return decryptedTimestamp <= now.getTime() && now.getTime() - decryptedTimestamp < ONE_MINUTE;
     }
 }
