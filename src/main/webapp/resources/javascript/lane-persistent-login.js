@@ -69,7 +69,6 @@
 			}
 			else{
 				setLink(event); //cookie set in the PerssitentLoginFilter class
-				event.detach();
 			}
 		});
 		
@@ -124,6 +123,7 @@
 		}
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
 		node.set('href', url);
+		event.detach();
 	};
 	
 })();
