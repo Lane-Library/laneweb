@@ -122,8 +122,7 @@
 			url = url + 'secure/';
 		}
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
-		node.set('href', url);
-		event.detach();
+		node.set('href', url);		
 	};
 	
 })();
