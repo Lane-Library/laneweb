@@ -63,7 +63,7 @@
 		lightbox.show();
 		
 		// Click on YES --
-		Y.one('#yes-persistent-login').on('click', function(event) {
+		Y.one('#yes-persistent-login').once('click', function(event) {
 			if(Y.one('#dont-ask-again') && Y.one('#dont-ask-again').get('checked')){
 				event.preventDefault();
 			}
