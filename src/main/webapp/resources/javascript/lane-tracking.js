@@ -320,9 +320,10 @@
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
         if (Y.lane.BookmarksWidget) {
             Y.lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
-                Y.fire("lane:trackablePageview", {
-                    path: document.location.pathname,
-                    title: "lane:bookmark: " + event.bookmark.getLabel()
+                Y.fire("lane:trackableEvent", {
+                    category: "lane:bookmarkAdd",
+                    action: LANE.tracking.getUserId(),
+                    label: event.bookmark.getLabel()
                 });
             });
         }
