@@ -263,6 +263,12 @@
                 <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- temporarily use index-2012.html for index.html TODO: remove after next release -->
+            <map:match pattern="index.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/index-2012.html"/>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="{content-base}/{1}"/>
                 <map:transform type="xinclude"/>
