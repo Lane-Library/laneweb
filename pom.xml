@@ -175,6 +175,7 @@
                                 <!-- TODO: remove bookmarks-marketing when appropriate -->
                                 <include>bookmarks-marketing-min.css</include>
                                 <include>bookmark-instructions-min.css</include>
+                                <include>subscribe-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
