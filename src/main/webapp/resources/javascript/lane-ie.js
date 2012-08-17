@@ -48,12 +48,6 @@
         }
     }
     if (Y.UA.ie) {
-    	//add rounded bottom left corner to highlighted resources
-    	node = Y.one("#highlightedResources");
-    	if (node) {
-    		node.append("<img id='highlightedResourcesIECorner' src='/././resources/images/highlightedResourcesIECorner.png'/>");
-    		//TODO: possible further IE6 corrections
-    	}
     	//toggle bookmarklet instructions for IE on favorites page
     	node = Y.one("#bookmarkletNotIE");
     	if (node) {
