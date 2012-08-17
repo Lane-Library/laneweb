@@ -327,10 +327,16 @@
                 });
             });
         }
-        Y.on("lane:suggestSelect",  function(event) {
+        Y.on("suggest:select",  function(event) {
+            var action = "";
+            //determine whether or not to include search source value.
+            if (event.input.get("id") == "searchTerms") {
+                action = LANE.Search.getSearchSource();
+            }
             Y.fire("lane:trackableEvent", {
-                category: event.type,
-                action: event.parentForm.source.value,
+                //keep category same as previous event.type:
+                category: "lane:suggestSelect",
+                action: action,
                 label: event.suggestion
             });
         });

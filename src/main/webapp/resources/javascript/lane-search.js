@@ -8,7 +8,20 @@
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             searchIndicator = new LANE.SearchIndicator(),
             searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
-            searchTermsSuggest = new LANE.Suggest(searchTextInput.getInput()),
+            getLimitForSource = function(source) {
+                var limit = "";
+                if (source.match(/^(all|articles|catalog)/)) {
+                    limit = "er-mesh";
+                } else if (source.match(/^bioresearch/)) {
+                    limit = "mesh";
+                } else if (source.match(/^history/)) {
+                    limit = "history";
+                } else if (source.match(/^bassett/)) {
+                    limit = "bassett";
+                }
+                return limit;
+            },
+            searchTermsSuggest = new Y.lane.Suggest(searchTextInput.getInput(), getLimitForSource(selectedOption.get("value"))),
             search;
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
@@ -21,12 +34,13 @@
         });
         Y.publish("lane:searchSourceChange",{broadcast:1});
         Y.publish('lane:beforeSearchSubmit', {broadcast:1});
-        Y.on('lane:searchSourceChange', function() {
+        Y.on('lane:searchSourceChange', function(event) {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
             searchTextInput.setHintText(selectedOption.get('title'));
             searchTipsLink.set('href',searchTipsLink.get('href').replace(/#.*/,'#'+searchSourceSelect.get('value')));
             form.one('input[type="text"]').focus();
             searchTextInput.setValue(searchTextInput.getValue());
+            searchTermsSuggest.setLimit(getLimitForSource(event.newVal));
         });
         searchTipsLink.set('href',searchTipsLink.get('href')+'#'+searchSourceSelect.get('value'));
         searchTextInput.setHintText(selectedOption.get('title'));
@@ -37,7 +51,7 @@
                 Y.fire('lane:searchSourceChange', {newVal:this.get("value")});
 //            }
         });
-        searchTermsSuggest.on("lane:suggestSelect",function(e){
+        searchTermsSuggest.on("select",function(e){
             search.submitSearch();
         });
         search =  {

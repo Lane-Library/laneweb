@@ -1,5 +1,5 @@
 (function() {
-    var i, hybridInputs, laneSuggest;
+    var hybridInput, laneSuggest;
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
@@ -115,12 +115,12 @@
         new LANE.SearchIndicator().show();
     }
     // hybrid search page inputs
-    hybridInputs = Y.all('.laneSuggest');
-    for (i = 0; i < hybridInputs.size(); i++) {
-        laneSuggest = new LANE.Suggest(hybridInputs.item(i));
-        laneSuggest.on("lane:suggestSelect",function(e){
+    hybridInput = Y.one('.laneSuggest');
+    if (hybridInput) {
+        laneSuggest = new Y.lane.Suggest(hybridInput);
+        laneSuggest.on("select",function(e){
             new LANE.SearchIndicator().show();
-            e.parentForm.submit();
+            hybridInput.ancestor("form").submit();
         });
     }
 })();

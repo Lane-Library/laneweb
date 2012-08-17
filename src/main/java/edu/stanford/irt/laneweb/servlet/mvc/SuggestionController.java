@@ -52,10 +52,15 @@ public class SuggestionController {
     @RequestMapping(value = "/**/apps/suggest/json")
     @ResponseBody
     public Map<String, List<String>> getSuggestions(@RequestParam final String q, @RequestParam(required = false) final String l) {
+        return Collections.singletonMap("suggest", getSuggestionList(q, l));
+    }
+
+    @RequestMapping(value = "/**/apps/suggest/getSuggestionList")
+    @ResponseBody
+    public List<String> getSuggestionList(@RequestParam final String q, @RequestParam(required = false) final String l) {
         String query = q.trim();
         TreeSet<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(query));
         suggestions.addAll(internalGetSuggestions(query, l));
-        Map<String, List<String>> map = new HashMap<String, List<String>>();
         List<String> strings = new LinkedList<String>();
         for (Suggestion suggestion : suggestions) {
             strings.add(suggestion.getSuggestionTitle());
@@ -63,8 +68,7 @@ public class SuggestionController {
                 break;
             }
         }
-        map.put("suggest", strings);
-        return map;
+        return strings;
     }
 
     /**

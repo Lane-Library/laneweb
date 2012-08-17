@@ -65,15 +65,20 @@
                 });
                 switch(inputs.item(i).get('name')){
                     case 'p':
-                        picoSuggest = new LANE.Suggest(inputs.item(i),"l=mesh-d&");
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"mesh-d");
                         break;
                     case 'i':
-                        picoSuggest = new LANE.Suggest(inputs.item(i),"l=mesh-i&");
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"mesh-i");
                         break;
                     case 'c':
-                        picoSuggest = new LANE.Suggest(inputs.item(i),"l=mesh-di&");
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"mesh-di");
                         break;
                 }
+                picoSuggest.on("select", function(event) {
+                    if(picoIsOn && getPicoQuery()){
+                        searchTerms.setValue(getPicoQuery());
+                    }
+                });
             }
             form.insert(picoFields);
         },
@@ -96,11 +101,11 @@
         Y.publish("lane:searchPicoChange",{broadcast:1});
     if (form) {
         searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"));
-        Y.on("lane:suggestSelect",  function(event) {
-            if(picoIsOn && getPicoQuery()){
-                searchTerms.setValue(getPicoQuery());
-            }
-        });
+//        Y.on("lane:suggestSelect",  function(event) {
+//            if(picoIsOn && getPicoQuery()){
+//                searchTerms.setValue(getPicoQuery());
+//            }
+//        });
         if (form.hasClass('clinical')) {
             picoOn();
         }

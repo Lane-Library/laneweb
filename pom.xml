@@ -143,7 +143,6 @@
                                 <include>lane-footer-min.css</include>
                                 <include>headers-min.css</include>
                                 <include>module-min.css</include>
-                                <include>autocomplete-min.css</include>
                                 <include>search-min.css</include>
                                 <include>popups-min.css</include>
                                 <include>online-resources-min.css</include>
@@ -176,6 +175,7 @@
                                 <include>bookmarks-marketing-min.css</include>
                                 <include>bookmark-instructions-min.css</include>
                                 <include>subscribe-min.css</include>
+                                <include>suggest-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -190,12 +190,13 @@
                                 <include>lane-search-indicator-min.js</include>
                                 <include>lane-bassett-min.js</include>
                                 <include>lane-textinputs-min.js</include>
-                                <include>lane-suggest-min.js</include>
+                                <include>suggest-min.js</include>
                                 <include>lane-search-pico-min.js</include>
                                 <include>lane-search-min.js</include>
                                 <include>link-plugin-min.js</include>
                                 <include>bookmarks-min.js</include>
                                 <include>lane-tracking-min.js</include>
+                                <!-- TODO: remove bookmarks-marketing when appropriate -->
                                 <include>bookmarks-marketing-min.js</include>
                                 <include>bookmark-instructions-min.js</include>
                                 <include>lane-expandies-min.js</include>
@@ -222,7 +223,6 @@
                                 <include>purchase-suggestions-min.js</include>
                                 <include>menu-delay-min.js</include>
                                 <include>lane-search-printonly-min.js</include>
-                                <!-- TODO: remove bookmarks-marketing when appropriate -->
                             </includes>
                         </aggregation>
                         <aggregation>

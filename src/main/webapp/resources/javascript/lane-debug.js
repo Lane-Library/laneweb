@@ -7,25 +7,30 @@
  * the previous LANE.namespace function.
  */
 
-YUI({debug:true,filter:"debug",fetchCSS:false,gallery: 'gallery-2010.05.21-18-16'}).use(
+YUI({debug:true,filter:"debug",combine:true,fetchCSS:false,gallery: 'gallery-2010.05.21-18-16'}).use(
+        "intl",
         "anim-base",
         "anim-easing",
         "anim-scroll",
+        "array-extras",
         "attribute-base",
         "attribute-complex",
         "attribute-core",
         "attribute-events",
         "attribute-extras",
+        "autocomplete-base",
+        "autocomplete-list",
+        "lang/autocomplete-list_en",
+        "autocomplete-list-keys",
+        "autocomplete-plugin",
+        "autocomplete-sources",
         "base-base",
         "base-build",
         "base-core",
         "base-pluginhost",
         "classnamemanager",
         "cookie",
-        "dataschema-base",
-        "dataschema-json",
         "datasource-io",
-        "datasource-jsonschema",
         "datasource-local",
         "datatype-number-format",
         "dom-base",
@@ -33,6 +38,7 @@ YUI({debug:true,filter:"debug",fetchCSS:false,gallery: 'gallery-2010.05.21-18-16
         "dom-screen",
         "dom-style",
         "dom-style-ie",
+        "escape",
         "event-base",
         "event-base-ie",
         "event-custom-base",
@@ -41,6 +47,7 @@ YUI({debug:true,filter:"debug",fetchCSS:false,gallery: 'gallery-2010.05.21-18-16
         "event-focus",
         "event-key",
         "event-mouseenter",
+        "event-resize",
         "event-synthetic",
         "event-valuechange",
         "gallery-node-accordion",
@@ -67,6 +74,7 @@ YUI({debug:true,filter:"debug",fetchCSS:false,gallery: 'gallery-2010.05.21-18-16
         "selector-css2",
         "selector-css3",
         "selector-native",
+        "shim-plugin",
         "widget-base",
         "widget-base-ie",
         "widget-htmlparser",
@@ -131,7 +139,7 @@ YUI({debug:true,filter:"debug",fetchCSS:false,gallery: 'gallery-2010.05.21-18-16
         return;
     }
     });
-    Y.Get.js('/././resources/javascript/lane-suggest.js', function (err) {
+    Y.Get.js('/././resources/javascript/suggest.js', function (err) {
     if (err) {
         Y.log('Error loading JS: ' + err[0].error, 'error');
         return;
