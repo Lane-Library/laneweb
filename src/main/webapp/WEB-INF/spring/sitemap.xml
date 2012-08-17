@@ -69,6 +69,11 @@
         <property name="attributeName" value="sunetid"/>
     </bean>
     
+    <bean name="org.apache.cocoon.selection.Selector/resource-exists"
+        class="edu.stanford.irt.cocoon.sitemap.select.ResourceExistsSelector">
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+    </bean>
+    
     <bean name="org.apache.cocoon.Processor/sitemap" parent="org.apache.cocoon.Processor">
         <constructor-arg index="0" value="/sitemap.xmap"/>
     </bean>
