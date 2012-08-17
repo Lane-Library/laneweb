@@ -7,25 +7,6 @@
     _right : 10px;
     border : 3px #5A8CB4 solid;
     width : 250px;
-  /*  -moz-border-radius-bottomleft : 22px;
-    -webkit-border-bottom-left-radius : 22px;
-    border-radius : 0 0 0 22px*/
-}
-#highlightedResourcesIECorner {
-    display : block;
-    position : absolute;
-    bottom : -3px;
-    left : -3px
-}
-#highlightedResources h3 {
-    background-color : #084468;
-    padding : 5px;
-    text-align : center;
-    color : white;
-    font-size : 16px;
-    font-weight : bold;
-    border-bottom : 3px #5A8CB4 solid;
-    text-transform : none;
 }
 #highlightedResources li {
     list-style : none inside none;
@@ -75,20 +56,4 @@
     background-color : #256592;
     background-image : url(/././resources/images/topResourcesOverBg1.png);
     background-repeat : no-repeat
-}
-#moreTopResources {
-    background-color : #084468;
-    padding : 20px 0 10px;
-    margin-bottom : 0;
-    text-align : right;
-    text-shadow : 0.1em 0.1em 0.1em #101010;
-    -webkit-border-radius : 0 0 0 19px;
-    -moz-border-radius : 0 0 0 19px;
-    border-radius : 0 0 0 19px
-}
-#moreTopResources li {
-    padding : 4px 16px;
-}
-#moreTopResources a {
-    color : white;
 }
