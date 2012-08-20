@@ -75,20 +75,20 @@ public class JSONBookmarkController extends BookmarkController {
         return bookmarks.get(i);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
-    @ResponseStatus(value = HttpStatus.OK)
-    public void moveBookmark(
-            @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
-            @RequestBody final Map<String, Integer> json) {
-        int to = json.get("to").intValue();
-        int from = json.get("from").intValue();
-        List<Bookmark> clone = new ArrayList<Bookmark>(bookmarks);
-        clone.add(to, clone.remove(from));
-        saveLinks(sunetid, clone);
-        // not thread safe, but consciously deciding not to synchronize:
-        bookmarks.add(to, bookmarks.remove(from));
-    }
+//    @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public void moveBookmark(
+//            @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
+//            @ModelAttribute(Model.SUNETID) final String sunetid,
+//            @RequestBody final Map<String, Integer> json) {
+//        int to = json.get("to").intValue();
+//        int from = json.get("from").intValue();
+//        List<Bookmark> clone = new ArrayList<Bookmark>(bookmarks);
+//        clone.add(to, clone.remove(from));
+//        saveLinks(sunetid, clone);
+//        // not thread safe, but consciously deciding not to synchronize:
+//        bookmarks.add(to, bookmarks.remove(from));
+//    }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
