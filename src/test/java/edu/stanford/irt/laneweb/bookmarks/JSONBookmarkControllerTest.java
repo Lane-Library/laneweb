@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
+import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.replay;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -65,6 +67,71 @@ public class JSONBookmarkControllerTest {
         this.bookmarks.add(this.bookmark);
         replay(this.bookmarkDAO);
         assertEquals(this.bookmark, this.controller.getBookmark(this.bookmarks, false, 0));
+        verify(this.bookmarkDAO);
+    }
+
+    @Test
+    public void testMoveBookmarkBadFrom() {
+        this.bookmarks.add(new Bookmark("newlabel", "newurl"));
+        this.bookmarks.add(this.bookmark);
+        Map<String, Integer> json = new HashMap<String, Integer>();
+        json.put("to", 0);
+        json.put("from", 5);
+        replay(this.bookmarkDAO);
+        try {
+            this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
+        } catch (IndexOutOfBoundsException e) {
+        }
+        assertEquals(this.bookmark, this.bookmarks.get(1));
+        verify(this.bookmarkDAO);
+    }
+
+    @Test
+    public void testMoveBookmarkBadTo() {
+        this.bookmarks.add(new Bookmark("newlabel", "newurl"));
+        this.bookmarks.add(this.bookmark);
+        Map<String, Integer> json = new HashMap<String, Integer>();
+        json.put("to", 5);
+        json.put("from", 0);
+        replay(this.bookmarkDAO);
+        try {
+            this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
+        } catch (IndexOutOfBoundsException e) {
+        }
+        assertEquals(this.bookmark, this.bookmarks.get(1));
+        verify(this.bookmarkDAO);
+    }
+
+    @Test
+    public void testMoveBookmarkDown() {
+        this.bookmarks.add(new Bookmark("newlabel", "newurl"));
+        this.bookmarks.add(this.bookmark);
+        Map<String, Integer> json = new HashMap<String, Integer>();
+        json.put("to", 0);
+        json.put("from", 1);
+        Capture<List<Bookmark>> capture = new Capture<List<Bookmark>>();
+        this.bookmarkDAO.saveLinks(eq(this.sunetid), capture(capture));
+        replay(this.bookmarkDAO);
+        this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
+        assertEquals(this.bookmark, this.bookmarks.get(0));
+        assertEquals(this.bookmarks, capture.getValue());
+        verify(this.bookmarkDAO);
+    }
+
+    @Test
+    public void testMoveBookmarkUp() {
+        this.bookmarks.add(this.bookmark);
+        this.bookmarks.add(new Bookmark("newlabel", "newurl"));
+        this.bookmarks.add(new Bookmark("anotherlabel", "anotherurl"));
+        Map<String, Integer> json = new HashMap<String, Integer>();
+        json.put("to", 2);
+        json.put("from", 0);
+        Capture<List<Bookmark>> capture = new Capture<List<Bookmark>>();
+        this.bookmarkDAO.saveLinks(eq(this.sunetid), capture(capture));
+        replay(this.bookmarkDAO);
+        this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
+        assertEquals(this.bookmark, this.bookmarks.get(2));
+        assertEquals(this.bookmarks, capture.getValue());
         verify(this.bookmarkDAO);
     }
 
