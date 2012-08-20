@@ -146,6 +146,19 @@
              * @description fired after an add is successfully synced with the server
              */
             this.publish("addSync", {defaultFn: this._handleAddSync, preventable : false});
+            
+            /**
+             * @event move
+             * @description Fired when a bookmark is moved
+             * @prefentable _defMoveFn
+             */
+            this.publish("move", {defaultFn : this._handleMoveFn});
+            
+            /**
+             * @event moveSync
+             * @description Fired when a move is successfully synced with the server
+             */
+            this.publish("moveSync", {defaultFn : this._handleMoveSync, preventable : false});
 
             /**
              * @event remove
@@ -196,6 +209,15 @@
                  */
                 getBookmark : function(position) {
                     return this._bookmarks[position];
+                },
+                
+                /**
+                 * @method moveBookmark
+                 * @param to {number} where the bookmark goes to
+                 * @param from {number} where the bookmark comes from
+                 */
+                moveBookmark : function(to, from) {
+                    this.fire("move", {to : to, from : from});
                 },
                 
                 /**
@@ -281,6 +303,32 @@
                 },
                 
                 /**
+                 * The default response to bookmarks:move, attempts to sync the move with the
+                 * server, fires bookmarks:moveSync if successful
+                 * @method _defMoveFn
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _defMoveFn : function(event) {
+                    var data = Y.JSON.stringify({to : event.to, from : event.from});
+                    Y.io("/././bookmarks/move", {
+                        method : "post",
+                        data : data,
+                        headers : {
+                            "Content-Type" : "application/json"
+                        },
+                        on : {
+                            success : function() {
+                                this.fire("moveSync", {success : true, to : event.to, from : event.from});
+                            },
+                            failure : function() {
+                                this._handleSyncFailure("Sorry, move bookmark failed");
+                            }
+                        }
+                    });
+                },
+                
+                /**
                  * The default response to bookmarks:remove, attempts to sync with server,
                  * fires bookmarks:removeSync if successful
                  * @method _defRemoveFn
@@ -348,6 +396,28 @@
                 },
                 
                 /**
+                 * handler for bookmarks:addSync event, adds a bookmark to index 0 of the
+                 * backing Array
+                 * @method _handleAddSync
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleAddSync : function(event) {
+                        event.bookmark.after("valueChange", this._handleValueChange, this);
+                        this._bookmarks.unshift(event.bookmark);
+                },
+                
+                /**
+                 * handler from bookmarks:moveSync event, moves a bookmark.
+                 * @method _handleMoveSync
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleMoveSync : function(event) {
+                    this._bookmarks.splice(event.to, 0, this._bookmarks.splice(event.from, 1)[0]);
+                },
+                
+                /**
                  * handler for bookmarks:removeSync event, removes bookmarks from the
                  * backing Array
                  * @method _handleRemoveSync
@@ -361,16 +431,9 @@
                 },
                 
                 /**
-                 * handler for bookmarks:addSync event, adds a bookmark to index 0 of the
-                 * backing Array
-                 * @method _handleAddSync
-                 * @private
-                 * @param event {CustomEvent}
+                 * handler for sync failures, shows an alert message.
+                 * @param message {String}
                  */
-                _handleAddSync : function(event) {
-                        event.bookmark.after("valueChange", this._handleValueChange, this);
-                        this._bookmarks.unshift(event.bookmark);
-                },
                 _handleSyncFailure : function(message) {
                     alert(message);
                 }
@@ -401,6 +464,7 @@
             bindUI : function() {
                 var bookmarks = this.get("bookmarks");
                 bookmarks.after("addSync", this._bookmarkAdded, this);
+                bookmarks.after("moveSync", this._bookmarkMoved, this);
                 bookmarks.after("removeSync", this._bookmarksRemoved, this);
                 bookmarks.after("updateSync", this._bookmarkUpdated, this);
             },
@@ -433,6 +497,19 @@
             _bookmarkAdded : function(event) {
                 this.get("srcNode").prepend("<li><a href='" + event.bookmark.getUrl() + "'>" + event.bookmark.getLabel() + "</a></li>");
                 this.syncUI();
+            },
+            
+            /**
+             * Respond to a successful bookmark moved revent.  Moves the corresponding list item.
+             * @method _bookmarkMoved
+             * @private
+             * @param event {CustomEvent}
+             */
+            _bookmarkMoved : function(event) {
+                var srcNode = this.get("srcNode"),
+                    children = srcNode.get("children"),
+                    moved = children.item(event.from);
+                srcNode.insert(srcNode.removeChild(moved), event.to);
             },
             
             /**
