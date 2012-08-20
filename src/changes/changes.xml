@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-08-20" version="1.13.8" description="1.13.8 bug fix release">
+            <action date="2012-08-17" issue="74602" dev="ceyates" type="update">
+                use yui autocomplete instead of local version
+            </action>
+            <action date="2012-08-16" issue="74588" dev="ryanmax" type="update">
+                change bookmark-add reporting to be more like bookmark-click reporting
+            </action>
+            <action date="2012-08-14" issue="74468" dev="ceyates" type="update">
+                Feedback window - same behavior as login 
+            </action>
+            <action date="2012-08-20" issue="74162" dev="olgary" type="update">
+                list of files to be updated in live
+            </action>
+        </release>
         <release date="2012-08-13" version="1.13.7" description="1.13.7 bug fix release">
             <action date="2012-08-07" issue="74082" dev="ceyates" type="fix">
                 /apps/proxy/credential causes an error  
