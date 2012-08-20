@@ -20,6 +20,9 @@
             <action date="2012-08-20" issue="74162" dev="olgary" type="update">
                 list of files to be updated in live
             </action>
+            <action date="2012-08-15" issue="74032" dev="alainb" type="fix">
+                persistent login causing 404s
+            </action>
         </release>
         <release date="2012-08-13" version="1.13.7" description="1.13.7 bug fix release">
             <action date="2012-08-07" issue="74082" dev="ceyates" type="fix">
