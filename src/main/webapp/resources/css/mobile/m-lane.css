@@ -242,8 +242,7 @@ body.ui-mobile-viewport,.ui-body-c {
     -webkit-box-shadow: 0 3px 5px #A3A1A1 inset;
     box-shadow: 0 3px 5px #A3A1A1 inset;
     font-size: 1.3em;
-    height: 20px;
-    margin: 10px -12px;
+    margin: 10px 0px;
     padding: 6px 0 4px 25px;
     background: url(/././resources/images/mobile/search_bg.png) no-repeat
         5px 6px #ffffff;
@@ -253,7 +252,7 @@ body.ui-mobile-viewport,.ui-body-c {
     font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     position: relative;
-    left: -2px;
+    left: -1px;
     display: none;
 }
 
@@ -262,7 +261,7 @@ body.ui-mobile-viewport,.ui-body-c {
 }
 
 .search .ui-input-search {
-    width: 88%;
+    width: 97%;
     background: none repeat scroll 0 0 transparent;
     margin: 0 auto;
     position: relative;
@@ -286,12 +285,13 @@ body.ui-mobile-viewport,.ui-body-c {
         right top transparent;
     -webkit-background-size: 100%;
     background-size: 100%;
-    margin-top: -11px;
+    margin-top: -9px;
     position: absolute;
-    right: -13px;
+    right: 5px;
     top: 50%;
     width: 19px;
     height: 19px;
+    text-decoration:none;
 }
 
 .ui-icon-delete {
@@ -997,8 +997,13 @@ div.absInfo a {
 */
 /* loading icon */
 .ui-icon-loading {
-    background-image: url(/././resources/images/mobile/ajax-loader.png);
+    background-image: url(/././resources/images/mobile/ajax-loader.gif);
 }
 .ui-loader {
-    background-color: #b7b8b0;
+    background: 0;
+    opacity: .38;
+    width: 46px;
+    height: 46px;
+    margin-left: -23px;
+    margin-top: -23px;
 }

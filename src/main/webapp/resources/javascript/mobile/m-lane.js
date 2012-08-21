@@ -18,8 +18,8 @@ if (typeof ($.LANE) === "undefined") {
  */
 $.LANE.scrollPage = function(activePage){
     var delay = 50, // wait for jqm to finish its scrolling. TODO: verify this is long enough on slower devices
-    hideSearchScroll = 96,
-    hideHeaderScroll = 46;
+    hideSearchScroll = 100,
+    hideHeaderScroll = 50;
     if(activePage.find(".results").size() || activePage.find(".absInfo").size()){ // search results and abstract/info pages
         setTimeout(function(){
             if(window.pageYOffset < $.mobile.minScrollBack){
