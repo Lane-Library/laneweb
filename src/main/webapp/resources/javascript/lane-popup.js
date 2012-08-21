@@ -20,12 +20,7 @@
             boundingBox.one("#popupClose").on("click", function() {
                 popup.hide();
             });
-            //TODO: figure out why I need to sandbox this:
-            YUI().use('dd-drag', function(Y) {
-                var dd = new Y.DD.Drag({
-                    node: ".yui3-popup"
-                });   
-            });
+            (new Y.DD.Drag({node: ".yui3-popup"}));
         }
         popup.set("headerContent", title);
         popup.set("bodyContent", body);
