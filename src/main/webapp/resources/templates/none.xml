@@ -7,7 +7,7 @@
 </head>
 <body>
     <?laneweb content?>
-    <script type="text/javascript" src="/resources/javascript/yui-3.5.1.js?${project.version}"></script>
+    <script type="text/javascript" src="/resources/javascript/yui-3.6.0.js?${project.version}"></script>
     <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}"></script>
 </body>
 </html>
