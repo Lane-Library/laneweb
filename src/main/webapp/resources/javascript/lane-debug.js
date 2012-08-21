@@ -33,6 +33,8 @@ YUI({debug:true,filter:"debug",combine:true,fetchCSS:false,gallery: 'gallery-201
         "datasource-io",
         "datasource-local",
         "datatype-number-format",
+        "dd-ddm-base",
+        "dd-drag",
         "dom-base",
         "dom-core",
         "dom-screen",
@@ -85,6 +87,7 @@ YUI({debug:true,filter:"debug",combine:true,fetchCSS:false,gallery: 'gallery-201
         "widget-stack",
         "widget-stdmod",
         "widget-uievents",
+        "yui-throttle",
         function(Y) {
     
     //keep a global reference of this YUI object
