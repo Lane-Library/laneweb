@@ -1000,10 +1000,5 @@ div.absInfo a {
     background-image: url(/././resources/images/mobile/ajax-loader.gif);
 }
 .ui-loader {
-    background: 0;
-    opacity: .38;
-    width: 46px;
-    height: 46px;
-    margin-left: -23px;
-    margin-top: -23px;
+    opacity: .7;
 }
