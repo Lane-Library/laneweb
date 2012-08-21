@@ -59,6 +59,16 @@
 	var show = function(id, o, args) {
 		var lightbox = Y.lane.Lightbox,
 		date = new Date();
+		if (Y.UA.ie && Y.UA.ie < 8) {
+	        lightbox.on("visibleChange", function(event) {
+	            if (event.newVal) {
+	                var boundingBox = this.get("boundingBox");
+//	              //this forces the markup to be rendered, not sure why it is needed.
+	              boundingBox.setStyle("visibility", "hidden");
+	              boundingBox.setStyle("visibility", "visible");
+	            }
+	        }, lightbox);
+		}
 		lightbox.setContent(o.responseText);
 		lightbox.show();
 		
