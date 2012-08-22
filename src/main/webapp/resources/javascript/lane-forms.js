@@ -952,7 +952,7 @@
                         else {
                             el.style.display = 'none';
                         }
-                    }
+                    };
                 }
                 val.el = _BaseInputField.staticFunctions.standardElSetter(val.el);
                 val.el.style.display = 'none'; // start off as hidden.

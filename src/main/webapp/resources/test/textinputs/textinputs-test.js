@@ -22,7 +22,7 @@ YUI({
             hintEnabled: {
                 value:false
             }
-        }
+        };
         this.addAttrs(defaultConfig);
         node.on("valueChange", function(event) {
             this.set("value", event.newVal);
