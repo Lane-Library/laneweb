@@ -1092,88 +1092,19 @@
                 bindUI : function() {
                     var srcNode = this.get("srcNode"),
                         bookmarks = this.get("bookmarks"),
-                        goingUp = false, lastY = 0;
+                        dragManager = Y.DD.DDM;
                     srcNode.all("fieldset button").on("click", this._handleButtonClick, this);
                     bookmarks.after("removeSync", this._handleBookmarksRemove, this);
                     bookmarks.after("addSync", this._handleBookmarkAdd, this);
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
                     srcNode.one("fieldset input[type='checkbox']").on("click", this._handleCheckboxClick, this);
                     
-//                  dragManager.on('drag:start', this._handleDragStart);
-//                  dragManager.on('drag:end', this._handleDragEnd);
-//                  this._lastY = 0;
-//                  this._goingUp = false;
-//                  dragManager.on('drag:drag', this._handleDrag);
-//                  dragManager.on('drop:over', this._handleDragOver);
-//                  //TODO: don't think I need this:
-//                  dragManager.on('drag:drophit', this._handleDropHit);
-                    
-                    Y.DD.DDM.on('drag:start', function(e) {
-                        //Get our drag object
-                        var drag = e.target;
-                        //Set some styles here
-                        drag.get('node').setStyle('opacity', '.25');
-                        drag.get('dragNode').set('innerHTML', drag.get('node').get('innerHTML'));
-                        drag.get('dragNode').setStyles({
-                            opacity: '.5',
-                            borderColor: drag.get('node').getStyle('borderColor'),
-                            backgroundColor: drag.get('node').getStyle('backgroundColor')
-                        });
-                    });
-
-                    Y.DD.DDM.on('drag:end', function(e) {
-                        var drag = e.target;
-                        //Put our styles back
-                        drag.get('node').setStyles({
-                            visibility: '',
-                            opacity: '1'
-                        });
-                    });
-                    
-                    Y.DD.DDM.on('drag:drag', function(e) {
-                        //Get the last y point
-                        var y = e.target.lastXY[1];
-                        //is it greater than the lastY var?
-                        if (y < lastY) {
-                            //We are going up
-                            goingUp = true;
-                        } else {
-                            //We are going down.
-                            goingUp = false;
-                        }
-                        //Cache for next check
-                        lastY = y;
-                    });
-                    
-                    Y.DD.DDM.on('drop:over', function(e) {
-                        //Get a reference to our drag and drop nodes
-                        var drag = e.drag.get('node'),
-                            drop = e.drop.get('node');
-                        
-                        //Are we dropping on an editor node?
-                        if (drop.hasClass('yui3-bookmark-editor')) {
-                            //Are we not going up?
-                            if (!goingUp) {
-                                drop = drop.get('nextSibling');
-                            }
-                            //Add the node to this list
-                            e.drop.get('node').get('parentNode').insertBefore(drag, drop);
-                            //Resize this nodes shim, so we can drop on it later.
-                            e.drop.sizeShim();
-                        }
-                    });
-                    
-                    Y.DD.DDM.on('drag:drophit', function(e) {
-                        var drop = e.drop.get('node'),
-                            drag = e.drag.get('node');
-
-                        //if we are not on an li, we must have been dropped on a ul
-                        if (drop.hasClass('yui3-bookmark-editor')) {
-                            if (!drop.contains(drag)) {
-                                drop.appendChild(drag);
-                            }
-                        }
-                    });
+                  dragManager.on('drag:start', this._handleDragStart);
+                  dragManager.on('drag:end', this._handleDragEnd);
+                  this._lastY = 0;
+                  this._goingUp = false;
+                  dragManager.on('drag:drag', this._handleDrag, this);
+                  dragManager.on('drop:over', this._handleDropOver, this);
                 },
                 
                 /**
@@ -1357,7 +1288,7 @@
                  * @private
                  * @param event {CustomEvent}
                  */
-                _handleDrage :  function(event) {
+                _handleDrag :  function(event) {
                     //Get the last y point
                     var y = event.target.lastXY[1];
                     //is it greater than the lastY var?
@@ -1387,29 +1318,6 @@
                 },
                 
                 /**
-                 * @method _handleDragOver
-                 * @private
-                 * @param event {CustomEvent}
-                 */
-                _handleDragOver : function(event) {
-                    //Get a reference to our drag and drop nodes
-                    var drag = event.drag.get('node'),
-                        drop = event.drop.get('node');
-                    
-                    //Are we dropping on an editor node?
-                    if (drop.hasClass('yui3-bookmark-editor')) {
-                        //Are we not going up?
-                        if (!this._goingUp) {
-                            drop = drop.get('nextSibling');
-                        }
-                        //Add the node to this list
-                        event.drop.get('node').get('parentNode').insertBefore(drag, drop);
-                        //Resize this nodes shim, so we can drop on it later.
-                        event.drop.sizeShim();
-                    }
-                },
-                
-                /**
                  * @method _handleDragStart
                  * @private
                  * @param event {CustomEvent}
@@ -1428,20 +1336,25 @@
                 },
                 
                 /**
-                 * @method _handleDropHit
+                 * @method _handleDragOver
                  * @private
                  * @param event {CustomEvent}
-                 * TODO: don't think I need this
                  */
-                _handleDropHit :  function(event) {
-                    var drop = event.drop.get('node'),
-                        drag = event.drag.get('node');
-
-                    //if we are not on an li, we must have been dropped on a ul
+                _handleDropOver : function(event) {
+                    //Get a reference to our drag and drop nodes
+                    var drag = event.drag.get('node'),
+                        drop = event.drop.get('node');
+                    
+                    //Are we dropping on an editor node?
                     if (drop.hasClass('yui3-bookmark-editor')) {
-                        if (!drop.contains(drag)) {
-                            drop.appendChild(drag);
+                        //Are we not going up?
+                        if (!this._goingUp) {
+                            drop = drop.get('nextSibling');
                         }
+                        //Add the node to this list
+                        event.drop.get('node').get('parentNode').insertBefore(drag, drop);
+                        //Resize this nodes shim, so we can drop on it later.
+                        event.drop.sizeShim();
                     }
                 }
             },
