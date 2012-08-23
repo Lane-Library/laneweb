@@ -2,7 +2,7 @@
     
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
     
-    var popup, container, maybeCreatePopup, popupWindow, showWindow;
+    var popup, maybeCreatePopup, popupWindow, showWindow;
     
     maybeCreatePopup = function(title, body, width, xy) {
         var boundingBox;

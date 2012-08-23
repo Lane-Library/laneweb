@@ -7,7 +7,7 @@
  * the previous LANE.namespace function.
  */
 
-YUI({debug:true,filter:"debug",combine:true,fetchCSS:false,gallery: 'gallery-2010.05.21-18-16'}).use(
+YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-2010.05.21-18-16'}).use(
         "intl",
         "anim-base",
         "anim-easing",
@@ -33,8 +33,13 @@ YUI({debug:true,filter:"debug",combine:true,fetchCSS:false,gallery: 'gallery-201
         "datasource-io",
         "datasource-local",
         "datatype-number-format",
+        "dd-constrain",
+        "dd-ddm",
         "dd-ddm-base",
+        "dd-ddm-drop",
         "dd-drag",
+        "dd-drop",
+        "dd-proxy",
         "dom-base",
         "dom-core",
         "dom-screen",

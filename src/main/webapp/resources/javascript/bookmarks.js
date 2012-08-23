@@ -1091,13 +1091,79 @@
                  */
                 bindUI : function() {
                     var srcNode = this.get("srcNode"),
-                        bookmarks = this.get("bookmarks");
+                        bookmarks = this.get("bookmarks"),
+                        goingUp = false, lastY = 0;
                     srcNode.all("fieldset button").on("click", this._handleButtonClick, this);
                     bookmarks.after("removeSync", this._handleBookmarksRemove, this);
                     bookmarks.after("addSync", this._handleBookmarkAdd, this);
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
                     srcNode.one("fieldset input[type='checkbox']").on("click", this._handleCheckboxClick, this);
+                    Y.DD.DDM.on('drag:start', function(e) {
+                        //Get our drag object
+                        var drag = e.target;
+                        //Set some styles here
+                        drag.get('node').setStyle('opacity', '.25');
+                        drag.get('dragNode').set('innerHTML', drag.get('node').get('innerHTML'));
+                        drag.get('dragNode').setStyles({
+                            opacity: '.5',
+                            borderColor: drag.get('node').getStyle('borderColor'),
+                            backgroundColor: drag.get('node').getStyle('backgroundColor')
+                        });
+                    });
+
+                    Y.DD.DDM.on('drag:end', function(e) {
+                        var drag = e.target;
+                        //Put our styles back
+                        drag.get('node').setStyles({
+                            visibility: '',
+                            opacity: '1'
+                        });
+                    });
                     
+                    Y.DD.DDM.on('drag:drag', function(e) {
+                        //Get the last y point
+                        var y = e.target.lastXY[1];
+                        //is it greater than the lastY var?
+                        if (y < lastY) {
+                            //We are going up
+                            goingUp = true;
+                        } else {
+                            //We are going down.
+                            goingUp = false;
+                        }
+                        //Cache for next check
+                        lastY = y;
+                    });
+                    
+                    Y.DD.DDM.on('drop:over', function(e) {
+                        //Get a reference to our drag and drop nodes
+                        var drag = e.drag.get('node'),
+                            drop = e.drop.get('node');
+                        
+                        //Are we dropping on an editor node?
+                        if (drop.hasClass('yui3-bookmark-editor')) {
+                            //Are we not going up?
+                            if (!goingUp) {
+                                drop = drop.get('nextSibling');
+                            }
+                            //Add the node to this list
+                            e.drop.get('node').get('parentNode').insertBefore(drag, drop);
+                            //Resize this nodes shim, so we can drop on it later.
+                            e.drop.sizeShim();
+                        }
+                    });
+                    
+                    Y.DD.DDM.on('drag:drophit', function(e) {
+                        var drop = e.drop.get('node'),
+                            drag = e.drag.get('node');
+
+                        //if we are not on an li, we must have been dropped on a ul
+                        if (drop.hasClass('yui3-bookmark-editor')) {
+                            if (!drop.contains(drag)) {
+                                drop.appendChild(drag);
+                            }
+                        }
+                    });
                 },
                 
                 /**
@@ -1112,6 +1178,15 @@
                     for (i = 0; i < items.size(); i++) {
                         editor = new BookmarkEditor({srcNode : items.item(i), render : true, bookmark : bookmarks.getBookmark(i)});
                         editor.after("destroy", this._handleDestroyEditor, this);
+                        (new Y.DD.Drag({
+                            node : editor.get("boundingBox"),
+                            target: {
+                                padding: '0 0 0 20'
+                            }}).plug(Y.Plugin.DDConstrained, {
+                                constrain : srcNode.one("ul")
+                            }).plug(Y.Plugin.DDProxy, {
+                                moveOnEnd: false
+                            }));
                         editors.push(editor);
                     }
                     this.set("editors", editors);
