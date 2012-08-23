@@ -1098,6 +1098,16 @@
                     bookmarks.after("addSync", this._handleBookmarkAdd, this);
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
                     srcNode.one("fieldset input[type='checkbox']").on("click", this._handleCheckboxClick, this);
+                    
+//                  dragManager.on('drag:start', this._handleDragStart);
+//                  dragManager.on('drag:end', this._handleDragEnd);
+//                  this._lastY = 0;
+//                  this._goingUp = false;
+//                  dragManager.on('drag:drag', this._handleDrag);
+//                  dragManager.on('drop:over', this._handleDragOver);
+//                  //TODO: don't think I need this:
+//                  dragManager.on('drag:drophit', this._handleDropHit);
+                    
                     Y.DD.DDM.on('drag:start', function(e) {
                         //Get our drag object
                         var drag = e.target;
@@ -1233,84 +1243,16 @@
                         editors[checked[i]].set("editing", true);
                     }
                 },
-                  
+                
                 /**
-                 * The click handler for buttons, delegates to the function named the same as the buttons value.
-                 * @method _handleButtonClick
+                 * Unchecks all BookmarkEditors
+                 * @method _clearChecked
                  * @private
-                 * @param event {CustomEvent}
                  */
-                _handleButtonClick : function(event) {
-                    event.preventDefault();
-                    //see case 67695
-                    //pressing return generates a click on the add button for some reason
-                    //pageX is 0 in that situation
-                    if (event.pageX !== 0) {
-                        var fn = this[event.target.getAttribute("value")];
-                        if (fn) {
-                            fn.call(this);
-                        }
-                    }
-                },
-                  
-                /**
-                 * Responds to the bookmarks:removeSync event, calls destroy on each BookmarkEditor
-                 * associated with removed bookmarks.
-                 * @method _handleBookmarksRemove
-                 * @private
-                 * @param event {CustomEvent}
-                 */
-                _handleBookmarksRemove : function(event) {
+                _clearChecked : function() {
                     var i, editors = this.get("editors");
-                    for (i = event.positions.length - 1; i >= 0; --i) {
-                        editors[event.positions[i]].destroy(true);
-                    }
-                },
-                
-                /**
-                 * Removes a destroyed editor from the backing Array.
-                 * @method _handleDestroyEditor
-                 * @private
-                 * @param event {CustomEvent}
-                 */
-                _handleDestroyEditor : function(event) {
-                    var editors = this.get("editors"),
-                        position = Y.Array.indexOf(editors, event.target);
-                    editors.splice(position, 1);
-                },
-                
-                /**
-                 * Responds to the bookmarks:addSync event, call update() on the appropriate BookmarkEditor.
-                 * @method _handleBookmarkAdd
-                 * @private
-                 * @param event {CustomEvent}
-                 */
-                _handleBookmarkAdd : function(event) {
-                    this.get("editors")[event.target.indexOf(event.bookmark)].update();
-                },
-                
-                /**
-                 * Responds to the bookmarks:updateSync event, calls update() on the appropriate BookmarkEditor.
-                 * @method _handleBookmarkUpdate
-                 * @private
-                 * @param event {CustomEvent}
-                 */
-                _handleBookmarkUpdate : function(event) {
-                    var editors = this.get("editors");
-                    editors[event.position].update();
-                },
-                
-                /**
-                 * Responds to click event on the master checkbox.  Sets the checked state of all BookmarkEditors
-                 * to the whatever the master is.
-                 * @method _handleCheckboxClick
-                 * @private
-                 * @param event {CustomEvent}
-                 */
-                _handleCheckboxClick : function(event) {
-                    var i, checked = event.target.get("checked"), editors = this.get("editors");
                     for (i = 0; i < editors.length; i++) {
-                        editors[i].setChecked(checked);
+                        editors[i].setChecked(false);
                     }
                 },
                 
@@ -1331,14 +1273,175 @@
                 },
                 
                 /**
-                 * Unchecks all BookmarkEditors
-                 * @method _clearChecked
+                 * Responds to the bookmarks:addSync event, call update() on the appropriate BookmarkEditor.
+                 * @method _handleBookmarkAdd
                  * @private
+                 * @param event {CustomEvent}
                  */
-                _clearChecked : function() {
+                _handleBookmarkAdd : function(event) {
+                    this.get("editors")[event.target.indexOf(event.bookmark)].update();
+                },
+                  
+                /**
+                 * Responds to the bookmarks:removeSync event, calls destroy on each BookmarkEditor
+                 * associated with removed bookmarks.
+                 * @method _handleBookmarksRemove
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleBookmarksRemove : function(event) {
                     var i, editors = this.get("editors");
+                    for (i = event.positions.length - 1; i >= 0; --i) {
+                        editors[event.positions[i]].destroy(true);
+                    }
+                },
+                
+                /**
+                 * Responds to the bookmarks:updateSync event, calls update() on the appropriate BookmarkEditor.
+                 * @method _handleBookmarkUpdate
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleBookmarkUpdate : function(event) {
+                    var editors = this.get("editors");
+                    editors[event.position].update();
+                },
+                  
+                /**
+                 * The click handler for buttons, delegates to the function named the same as the buttons value.
+                 * @method _handleButtonClick
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleButtonClick : function(event) {
+                    event.preventDefault();
+                    //see case 67695
+                    //pressing return generates a click on the add button for some reason
+                    //pageX is 0 in that situation
+                    if (event.pageX !== 0) {
+                        var fn = this[event.target.getAttribute("value")];
+                        if (fn) {
+                            fn.call(this);
+                        }
+                    }
+                },
+                
+                /**
+                 * Responds to click event on the master checkbox.  Sets the checked state of all BookmarkEditors
+                 * to the whatever the master is.
+                 * @method _handleCheckboxClick
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleCheckboxClick : function(event) {
+                    var i, checked = event.target.get("checked"), editors = this.get("editors");
                     for (i = 0; i < editors.length; i++) {
-                        editors[i].setChecked(false);
+                        editors[i].setChecked(checked);
+                    }
+                },
+                
+                /**
+                 * Removes a destroyed editor from the backing Array.
+                 * @method _handleDestroyEditor
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleDestroyEditor : function(event) {
+                    var editors = this.get("editors"),
+                        position = Y.Array.indexOf(editors, event.target);
+                    editors.splice(position, 1);
+                },
+                
+                /**
+                 * @method _handleDrag
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleDrage :  function(event) {
+                    //Get the last y point
+                    var y = event.target.lastXY[1];
+                    //is it greater than the lastY var?
+                    if (y < this._lastY) {
+                        //We are going up
+                        this._goingUp = true;
+                    } else {
+                        //We are going down.
+                        this._goingUp = false;
+                    }
+                    //Cache for next check
+                    this._lastY = y;
+                },
+                
+                /**
+                 * @method _handleDragEnd
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleDragEnd : function(event) {
+                    var drag = event.target;
+                    //Put our styles back
+                    drag.get('node').setStyles({
+                        visibility: '',
+                        opacity: '1'
+                    });
+                },
+                
+                /**
+                 * @method _handleDragOver
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleDragOver : function(event) {
+                    //Get a reference to our drag and drop nodes
+                    var drag = event.drag.get('node'),
+                        drop = event.drop.get('node');
+                    
+                    //Are we dropping on an editor node?
+                    if (drop.hasClass('yui3-bookmark-editor')) {
+                        //Are we not going up?
+                        if (!this._goingUp) {
+                            drop = drop.get('nextSibling');
+                        }
+                        //Add the node to this list
+                        event.drop.get('node').get('parentNode').insertBefore(drag, drop);
+                        //Resize this nodes shim, so we can drop on it later.
+                        event.drop.sizeShim();
+                    }
+                },
+                
+                /**
+                 * @method _handleDragStart
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _handleDragStart : function(event) {
+                    //Get our drag object
+                    var drag = event.target;
+                    //Set some styles here
+                    drag.get('node').setStyle('opacity', '.25');
+                    drag.get('dragNode').set('innerHTML', drag.get('node').get('innerHTML'));
+                    drag.get('dragNode').setStyles({
+                        opacity: '.5',
+                        borderColor: drag.get('node').getStyle('borderColor'),
+                        backgroundColor: drag.get('node').getStyle('backgroundColor')
+                    });
+                },
+                
+                /**
+                 * @method _handleDropHit
+                 * @private
+                 * @param event {CustomEvent}
+                 * TODO: don't think I need this
+                 */
+                _handleDropHit :  function(event) {
+                    var drop = event.drop.get('node'),
+                        drag = event.drag.get('node');
+
+                    //if we are not on an li, we must have been dropped on a ul
+                    if (drop.hasClass('yui3-bookmark-editor')) {
+                        if (!drop.contains(drag)) {
+                            drop.appendChild(drag);
+                        }
                     }
                 }
             },
