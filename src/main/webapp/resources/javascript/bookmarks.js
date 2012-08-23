@@ -512,8 +512,11 @@
             _bookmarkMoved : function(event) {
                 var srcNode = this.get("srcNode"),
                     children = srcNode.get("children"),
-                    moved = children.item(event.from);
-                srcNode.insert(srcNode.removeChild(moved), event.to);
+                    moved = children.item(event.from),
+                    current = children.item(event.to),
+                    position = event.to > event.from ? "after" : "before";
+                srcNode.removeChild(moved);
+                current.insert(moved, position);
             },
             
             /**

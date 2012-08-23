@@ -30,6 +30,7 @@ YUI({
         
         setUp : function() {
             var bm = [];
+            bm.push(new Bookmark("0","0"));
             bm.push(new Bookmark("1","1"));
             bm.push(new Bookmark("2","2"));
             bm.push(new Bookmark("3","3"));
@@ -126,6 +127,18 @@ YUI({
             T.Assert.areSame(bookmark, b);
             T.Assert.areEqual(0, p);
             T.Assert.areEqual("newlabel", bookmark.getLabel());
+        },
+        
+        testMoveBookmarkUp : function() {
+            this.bookmarks.moveBookmark(0, 2);
+            T.Assert.areEqual("2", this.bookmarks.getBookmark(0).getLabel());
+            T.Assert.areEqual("0", this.bookmarks.getBookmark(1).getLabel());
+        },
+        
+        testMoveBookmarkDown : function() {
+            this.bookmarks.moveBookmark(3, 0);
+            T.Assert.areEqual("0", this.bookmarks.getBookmark(3).getLabel());
+            T.Assert.areEqual("1", this.bookmarks.getBookmark(0).getLabel());
         }
     });
 

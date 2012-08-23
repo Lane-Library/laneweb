@@ -64,6 +64,20 @@ YUI({
             this.bookmarks.addBookmark(bookmark);
             bookmark.setLabel("newlabel");
             T.Assert.areEqual("newlabel", Y.one("#bookmarks a").get("innerHTML"));
+        },
+        
+        testMoveBookmarkUp : function() {
+            this.bookmarks.moveBookmark(0, 3);
+            var anchors = Y.all("#bookmarks a");
+            T.Assert.areEqual("Paget disease of bone", anchors.item(0).get("innerHTML"));
+            T.Assert.areEqual("newlabel", anchors.item(1).get("innerHTML"));
+        },
+        
+        testMoveBookmarkDown : function() {
+            this.bookmarks.moveBookmark(3, 0);
+            var anchors = Y.all("#bookmarks a");
+            T.Assert.areEqual("Paget disease of bone", anchors.item(3).get("innerHTML"));
+            T.Assert.areEqual("newlabel", anchors.item(0).get("innerHTML"));
         }
     });
 
