@@ -152,7 +152,7 @@
              * @description Fired when a bookmark is moved
              * @prefentable _defMoveFn
              */
-            this.publish("move", {defaultFn : this._handleMoveFn});
+            this.publish("move", {defaultFn : this._defMoveFn});
             
             /**
              * @event moveSync
@@ -324,7 +324,8 @@
                             failure : function() {
                                 this._handleSyncFailure("Sorry, move bookmark failed");
                             }
-                        }
+                        },
+                        context : this
                     });
                 },
                 
@@ -1099,12 +1100,13 @@
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
                     srcNode.one("fieldset input[type='checkbox']").on("click", this._handleCheckboxClick, this);
                     
-                  dragManager.on('drag:start', this._handleDragStart);
-                  dragManager.on('drag:end', this._handleDragEnd);
+                  dragManager.on('drag:start', this._handleDragStart, this);
+                  dragManager.on('drag:end', this._handleDragEnd, this);
                   this._lastY = 0;
                   this._goingUp = false;
                   dragManager.on('drag:drag', this._handleDrag, this);
                   dragManager.on('drop:over', this._handleDropOver, this);
+                  this.publish("move", {defaultFn : this._editorMoved});
                 },
                 
                 /**
@@ -1185,6 +1187,15 @@
                     for (i = 0; i < editors.length; i++) {
                         editors[i].setChecked(false);
                     }
+                },
+                
+                /**
+                 * @method _editorMoved
+                 * @private
+                 * @param event {CustomEvent}
+                 */
+                _editorMoved : function(event) {
+                	this.get("bookmarks").moveBookmark(this._to, this._from);
                 },
                 
                 /**
@@ -1315,6 +1326,9 @@
                         visibility: '',
                         opacity: '1'
                     });
+                    this._to = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(drag.get("node"));
+
+                    this.fire("move", {to : this._to, from : this._from});
                 },
                 
                 /**
@@ -1333,6 +1347,7 @@
                         borderColor: drag.get('node').getStyle('borderColor'),
                         backgroundColor: drag.get('node').getStyle('backgroundColor')
                     });
+                    this._from = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(drag.get("node"));
                 },
                 
                 /**
