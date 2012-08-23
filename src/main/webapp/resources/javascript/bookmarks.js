@@ -446,6 +446,9 @@
             emitFacade : true,
             prefix     : 'bookmarks'
         });
+
+        //make the Bookmarks constructor globally accessible
+        Y.lane.Bookmarks = Bookmarks;
         
         /**
          * The Bookmarks Widget.  This is created by parsing the ul element
