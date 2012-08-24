@@ -76,3 +76,8 @@
     height : 0;
     visibility : hidden;
 }
+ /*style moved from redesign-june-2011.css*/
+.noMarginContent {
+    position : relative;
+    margin : -10px -15px 0 -20px
+}

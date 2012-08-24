@@ -49,3 +49,37 @@ dt {
 .content .rightColumn .cite li {
 	margin-bottom: .5em;
 }
+
+/*styles for the list of portals on /portals/index.html*/
+#portalList {
+    padding : 11px;
+    background-color : #e6e4dc;
+    /*requred for IE < 8:*/
+    *height:404px
+}
+#portalList:after {
+    content : ".";
+    display : block;
+    height : 0;
+    font-size : 0;
+    clear : both;
+    visibility : hidden;
+}
+#portalList li {
+    float : left;
+    list-style : none inside none;
+    margin-left : 0
+}
+#portalList a {
+    display : block;
+    width : 200px;
+    padding : 15px;
+    border-bottom : none;
+    background-color : white;
+    font-size : 15px;
+    font-family : Georgia, 'Times New Roman', Times, serif;
+    margin : 1px
+}
+#portalList a:hover {
+    background-color : #e6e4dc
+}

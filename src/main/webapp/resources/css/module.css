@@ -63,6 +63,14 @@
 	font-family: arial, helvetica, clean, sans-serif
 }
 
+/* module with shadow on bottom*/
+.bd.bottomShadow {
+    margin-top : 0;
+    background-image : url(/././resources/images/bottomShadow1.png);
+    background-position : bottom;
+    background-repeat : no-repeat;
+    padding-bottom : 15px
+}
 /*left nav module with the shadow*/
 .left-shadow {
 	background-image: url(/././resources/images/grandroundsItemBg1.png);
