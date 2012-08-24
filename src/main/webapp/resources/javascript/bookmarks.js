@@ -1333,8 +1333,9 @@
                         opacity: '1'
                     });
                     this._to = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(drag.get("node"));
-
-                    this.fire("move", {to : this._to, from : this._from});
+                    if (this._to !== this._from) {
+                        this.fire("move", {to : this._to, from : this._from});
+                    }
                 },
                 
                 /**
@@ -1344,16 +1345,23 @@
                  */
                 _handleDragStart : function(event) {
                     //Get our drag object
-                    var drag = event.target;
+                    var drag = event.target, node = drag.get("node"), dragNode = drag.get("dragNode");
                     //Set some styles here
-                    drag.get('node').setStyle('opacity', '.25');
-                    drag.get('dragNode').set('innerHTML', drag.get('node').get('innerHTML'));
-                    drag.get('dragNode').setStyles({
+                    dragNode.empty();
+                    node.setStyle('opacity', '.25');
+                    dragNode.append(node.one("a").cloneNode(true));
+                    dragNode.setStyles({
                         opacity: '.5',
-                        borderColor: drag.get('node').getStyle('borderColor'),
-                        backgroundColor: drag.get('node').getStyle('backgroundColor')
+                        textAlign: "left",
+                        borderColor: node.getStyle('borderColor'),
+                        backgroundColor: node.getStyle('backgroundColor')
                     });
-                    this._from = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(drag.get("node"));
+                    dragNode.one("a").setStyles({
+                        display: "block",
+                        padding: "12px 0 12px 36px",
+                        fontSize: "12px"
+                    });
+                    this._from = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(node);
                 },
                 
                 /**
