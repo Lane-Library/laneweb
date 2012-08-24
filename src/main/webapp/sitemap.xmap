@@ -41,7 +41,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <!-- javascript unit tests: -->
-            <map:match pattern="test/**.html" type="wildcard">
+            <map:match pattern="resources/test/**.html" type="wildcard">
                 <map:generate type="html" src="resources/test/{1}.html"/>
                 <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
                 <map:serialize type="html5"/>
