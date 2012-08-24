@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
@@ -64,6 +65,34 @@
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>com.github.timurstrekalov</groupId>
+                <artifactId>saga-maven-plugin</artifactId>
+                <version>1.1.2</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>coverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <baseDir>src/main/webapp/resources/test</baseDir>
+                    <includes> **/*.html </includes>
+                    <excludes> **/popup-test.html, **/index.html </excludes>
+                    <noInstrumentPatterns>
+                        <pattern>.+/yui-.+\.js</pattern>
+                        <pattern>.+/jquery.+\.js</pattern>
+                        <pattern>.+/swfobject\.js</pattern>
+                        <pattern>.+-test\.js</pattern>
+                        <pattern>.+yahooapis.+</pattern>
+                        <pattern>.+google-analytics.+</pattern>
+                    </noInstrumentPatterns>
+                    <backgroundJavaScriptTimeout>1000</backgroundJavaScriptTimeout>
+                    <outputDir>${project.build.directory}/coverage</outputDir>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -279,13 +308,13 @@
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-checkstyle-plugin</artifactId>
                             <version>2.9.1</version>
-    <reportSets>
-        <reportSet>
-            <reports>
-                <report>checkstyle</report>
-            </reports>
-        </reportSet>
-    </reportSets>
+                            <reportSets>
+                                <reportSet>
+                                    <reports>
+                                        <report>checkstyle</report>
+                                    </reports>
+                                </reportSet>
+                            </reportSets>
                         </plugin>
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
@@ -393,7 +422,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>
@@ -728,10 +757,10 @@
             <groupId>edu.stanford.trends</groupId>
             <version>1.0.1</version>
             <exclusions>
-            	<exclusion>
-            		<artifactId>spring-jdbc</artifactId>
-            		<groupId>org.springframework</groupId>
-            	</exclusion>
+                <exclusion>
+                    <artifactId>spring-jdbc</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
