@@ -517,6 +517,7 @@
                     position = event.to > event.from ? "after" : "before";
                 srcNode.removeChild(moved);
                 current.insert(moved, position);
+                this.syncUI();
             },
             
             /**
