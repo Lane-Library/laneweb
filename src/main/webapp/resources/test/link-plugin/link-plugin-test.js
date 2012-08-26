@@ -14,47 +14,47 @@ YUI({
         name: "Lane Link Test Case",
         
         testIsLocalLink : function() {
-        	var anchor = T.one("#local");
+        	var anchor = Y.one("#local");
         	T.Assert.isTrue(anchor.link.get("local"));
         },
         
         testIsProxyLoginLink : function () {
-        	var anchor = T.one("#proxylogin");
+        	var anchor = Y.one("#proxylogin");
         	T.Assert.isTrue(anchor.link.get("proxyLogin"));
         },
         
         testIsProxyLink : function() {
-        	var anchor = T.one("#proxyurl");
+        	var anchor = Y.one("#proxyurl");
         	T.Assert.isTrue(anchor.link.get("proxy"));
         },
         
         testProxyLoginIsNotLocal : function() {
-        	var anchor = T.one("#proxylogin");
+        	var anchor = Y.one("#proxylogin");
         	T.Assert.isFalse(anchor.link.get("local"));
         },
         
         testGetURL : function() {
-        	var anchor = T.one("#example");
+        	var anchor = Y.one("#example");
         	T.Assert.areEqual("http://www.example.com/example", anchor.link.get("url"));
         },
         
         testGetProxiedLoginURL : function() {
-        	var anchor = T.one("#proxylogin");
+        	var anchor = Y.one("#proxylogin");
         	T.Assert.areEqual("http://www.nejm.org/", anchor.link.get("url"));
         }, 
         
         testGetProxiedURL : function() {
-        	var anchor = T.one("#proxyurl");
+        	var anchor = Y.one("#proxyurl");
         	T.Assert.areEqual("http://www.nejm.org/", anchor.link.get("url"));
         },
         
         testCookiesFetchIsNotLocal : function() {
-        	var anchor = T.one("#cookiesFetch");
+        	var anchor = Y.one("#cookiesFetch");
         	T.Assert.isFalse(anchor.link.get("local"));
         },
         
         testGetCookiesFetchURL : function() {
-        	var anchor = T.one("#cookiesFetch");
+        	var anchor = Y.one("#cookiesFetch");
         	T.Assert.areEqual("http://www.thomsonhc.com/carenotes/librarian/", anchor.link.get("url"));
         },
         
@@ -67,7 +67,7 @@ YUI({
         }
     });
     
-	T.all("a").plug(Y.lane.LinkPlugin);
+	Y.all("a").plug(Y.lane.LinkPlugin);
     
     T.one("body").addClass("yui3-skin-sam");
     new T.Console({
