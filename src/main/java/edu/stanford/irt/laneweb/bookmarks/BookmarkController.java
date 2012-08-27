@@ -36,7 +36,12 @@ public abstract class BookmarkController {
     public String getBookmarksTSV(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks) {
         StringBuilder sb = new StringBuilder("label\turl\n");
         for (Bookmark bookmark : bookmarks) {
-            sb.append(bookmark.getLabel()).append('\t').append(bookmark.getUrl()).append('\n');
+            sb.append(bookmark.getLabel()).append('\t');
+            String url = bookmark.getUrl();
+            if (url.charAt(0) == '/') {
+                sb.append("http://lane.stanford.edu");
+            }
+            sb.append(url).append('\n');
         }
         return sb.toString();
     }
