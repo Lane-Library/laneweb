@@ -15,7 +15,7 @@ import edu.stanford.irt.laneweb.model.Model;
 @RequestMapping(value = "/bookmarks", method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded")
 public class HTMLBookmarkController extends BookmarkController {
 
-    private String redirectURI = "redirect:/samples/favorites.html";
+    private String redirectURI = "redirect:/favorites.html";
 
     @RequestMapping(params = "action=add")
     public String addBookmark(
