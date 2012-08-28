@@ -59,7 +59,7 @@ YUI({
         },
         
         testGetTitle: function() {
-        	var i, anchor, anchors = T.all("#testGetTitle a");
+        	var i, anchor, anchors = Y.all("#testGetTitle a");
         	for (i = 0; i < anchors.size(); i++) {
         		anchor = anchors.item(i);
         		T.Assert.areEqual(anchor.get("rel"), anchor.link.get("title"));
