@@ -1,6 +1,3 @@
-/**
- * @author ceyates
- */
 if (!window.location.search) {
     window.location = window.location + '?source=foo&q=bar+baz';
 }

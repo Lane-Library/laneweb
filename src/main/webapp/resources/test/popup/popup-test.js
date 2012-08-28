@@ -9,25 +9,25 @@ YUI({
 
     var lanePopupTestCase = new T.Test.Case({
         name: 'Lane Popup Test Case',
-        testConsole: function() {
-            T.all('a').item(0).simulate('click');
-        },
-        testStandard: function() {
-            T.all('a').item(1).simulate('click');
-        },
-        testConsoleWithScrollbars: function() {
-            T.all('a').item(2).simulate('click');
-        },
-        testFullscreen: function() {
-            T.all('a').item(3).simulate('click');
-        },
+//        testConsole: function() {
+//            T.all('a').item(0).simulate('click');
+//        },
+//        testStandard: function() {
+//            T.all('a').item(1).simulate('click');
+//        },
+//        testConsoleWithScrollbars: function() {
+//            T.all('a').item(2).simulate('click');
+//        },
+//        testFullscreen: function() {
+//            T.all('a').item(3).simulate('click');
+//        },
         testLocal: function() {
-            T.all('a').item(4).simulate('click');
+            T.one('a').simulate('click');
         }
     });
     
     T.one('body').addClass('yui3-skin-sam');
-    var console = new T.Console({
+    new T.Console({
         newestOnTop: false
     }).render('#log');
     
