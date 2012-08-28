@@ -36,7 +36,7 @@
 			} else {
 				var link = event.target;
 				link.set('rel', 'persistentLogin');
-				redirectUrl = encodeURI(document.location);
+				redirectUrl = encodeURIComponent(document.location);
 				LANE.persistentlogin.newWindow(event,'/././plain/persistent-login-popup.html');
 			}
 			event.preventDefault();
@@ -47,7 +47,7 @@
 	
     function _proxiedResourceClickedOn(event) {
 		var link = event.target, isActive;
-		redirectUrl = encodeURI(link.get('href'));
+		redirectUrl = encodeURIComponent(link.get('href'));
 		event.preventDefault();
 		// don\'t want a redirect with the tracking see tracking.js code if !rel
 		// documment.location is not set
