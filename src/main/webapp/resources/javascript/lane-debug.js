@@ -339,6 +339,12 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
             return;
         }
         });
+    Y.Get.js('/././resources/javascript/ie-security-zone.js', function (err) {
+        if (err) {
+            Y.log('Error loading JS: ' + err[0].error, 'error');
+            return;
+        }
+    });
     
     Y.log('lane-all.js loaded successfully!');
     

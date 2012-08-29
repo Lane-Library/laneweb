@@ -31,6 +31,10 @@ public class PersistentLoginController {
 
     public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
 
+    public static final String PROXY_CREDENTIAL_LINK = "apps/proxy/credential";
+
+    public static final String SECURE_COOKIE_SET = "scs=1"; // to indicate cookies modified in an HTTPS request
+
     private SunetIdCookieCodec codec;
 
     private SunetIdSource sunetIdSource;
@@ -55,7 +59,7 @@ public class PersistentLoginController {
         } else {
             resetCookies(request, response);
         }
-        return "redirect:".concat(url);
+        return "redirect:".concat(appendSecureCookieSetParameter(request, url));
     }
 
 
@@ -72,6 +76,22 @@ public class PersistentLoginController {
         this.sunetIdSource = sunetIdSource;
     }
 
+    /**
+     * Append scs=1 (secure cookie set) to redirect URL when request is HTTPS. This will allow testing of IE security
+     * zone problems. See case 74904 for more information.
+     * 
+     * @param request
+     * @param url
+     * @return url with SECURE_COOKIE_SET parameter added if appropriate
+     */
+    private String appendSecureCookieSetParameter(final HttpServletRequest request, final String url) {
+        if (!"https".equals(request.getScheme()) || url.contains(PROXY_CREDENTIAL_LINK)) {
+            return url;
+        }
+        String ampOrQuestion = (url.contains("?")) ? "&" : "?";
+        return url + ampOrQuestion + SECURE_COOKIE_SET;
+    }
+    
     private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
         String sunetid = this.sunetIdSource.getSunetid(request);
         if (null != sunetid) {
@@ -146,7 +166,6 @@ public class PersistentLoginController {
     }
 
 
-    
     /**
      * set the lane-user cookie max age to zero.
      * 
@@ -154,11 +173,12 @@ public class PersistentLoginController {
      */
     private String setView(final String url, final HttpServletRequest request, final HttpServletResponse response) {
         this.sunetIdSource.getSunetid(request);
-        if (null == url) {
+        String redirectUrl = url;
+        if (null == redirectUrl) {
             response.setCharacterEncoding("UTF-8");
-            return "redirect:/myaccounts.html";
-        } else {
-            return "redirect:".concat(url);
+            redirectUrl = "/myaccounts.html";
         }
+        redirectUrl = appendSecureCookieSetParameter(request, redirectUrl);
+        return "redirect:".concat(redirectUrl);
     }
 }
