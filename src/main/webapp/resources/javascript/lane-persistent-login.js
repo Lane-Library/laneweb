@@ -28,20 +28,18 @@
     
 	
 	//if someone click on MyLane Login 
-	if(Y.one('a[href=/././secure/login.html]')){
-		 Y.on("click",function(event) {
-			 if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
-				//will be redirected to same page after the webauth
-				document.location = '/././secure/persistentLogin.html?pl=false&url='+ encodeURI(document.location);
-			} else {
-				var link = event.target;
-				link.set('rel', 'persistentLogin');
-				redirectUrl = encodeURIComponent(document.location);
-				LANE.persistentlogin.newWindow(event,'/././plain/persistent-login-popup.html');
-			}
-			event.preventDefault();
-		}, 'a[href=/././secure/login.html]');
-	}
+	 Y.on("click",function(event) {
+		 if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
+			//will be redirected to same page after the webauth
+			document.location = '/././secure/persistentLogin.html?pl=false&url='+ encodeURIComponent(document.location);
+		} else {
+			var link = event.target;
+			link.set('rel', 'persistentLogin');
+			redirectUrl = encodeURIComponent(document.location);
+			LANE.persistentlogin.newWindow(event,'/././plain/persistent-login-popup.html');
+		}
+		event.preventDefault();
+	}, 'a[href=/././secure/login.html]');
 
 	
 	
@@ -66,7 +64,6 @@
 			LANE.persistentlogin.newWindow(event,'/././plain/persistent-popup.html');
 		}
 	}
-
 	
 // The popup window
 	var popupWindow = function(id, o, args) {
@@ -86,56 +83,58 @@
 		
 		// Click on YES --
 		Y.one('#yes-persistent-login').once('click',function(event) {
-			
-			//if the checkbox "don't ask me again" is enable so no action happen    
-			if (Y.one('#dont-ask-again') && Y.one('#dont-ask-again').get('checked')) {
-				event.preventDefault();
-			} else {
 				setLink(event); // cookie set in the PerssitentLoginFilter class
-			}
 		});
+		
 
 		// Click on NO
-		if (Y.one('#no-persistent-login')) {
-			Y.one('#no-persistent-login').on('click',function(event) {
-				setLink(event);
-				//if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
-				//otherwise it is set for the session only
-				if (Y.one('#dont-ask-again') && Y.one('#dont-ask-again').get('checked')) {
-						date.setFullYear(date.getFullYear() + 10);
-						Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,	'denied', {
-								path : "/",
-								expires : date
-							});
-				} else
-					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {	path : "/"	});
+		Y.on('click',function(event) {
+			setLink(event);
+			//if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
+			//otherwise it is set for the session only
+			if (Y.one('#dont-ask-again') && Y.one('#dont-ask-again').get('checked')) {
+					date.setFullYear(date.getFullYear() + 10);
+					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,	'denied', {
+							path : "/",
+							expires : date
+						});
+			} else
+				Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {	path : "/"	});
+		}, '#no-persistent-login');
+	
+	
+		//if someone click on the don't ask me again" the yes button clas should look disable
+		Y.on('click',function(event) {
+			var yesButton = Y.one('#yes-persistent-login');
+			if (Y.one('#dont-ask-again').get('checked')) {
+				yesButton.replaceClass('red-btn', 'disabled-btn');
+				yesButton.detach('click');
+				yesButton.on('click',function(event) {
+					event.preventDefault();
+				});
+			} else {
+				yesButton.replaceClass('disabled-btn', 'red-btn');
+				yesButton.detach('click');
+				yesButton.once('click',function(event) {
+					setLink(event); // cookie set in the PerssitentLoginFilter class
 			});
-		}
-		if (Y.one('#dont-ask-again')) {
-			//if someone click on the don't ask me again" the yes button clas should look disable
-			Y.one('#dont-ask-again').on('click',function(event) {
-				if (Y.one('#dont-ask-again')&& Y.one('#dont-ask-again').get('checked')) {
-					Y.one('#yes-persistent-login').replaceClass('red-btn', 'disabled-btn');
-				} else {
-					Y.one('#yes-persistent-login').replaceClass('disabled-btn', 'red-btn');
-				}
-			});
-		}
+			}
+		},'#dont-ask-again');
 	};
 
 	
 	// for the static page persistentlogin.hrml Click on YES this way the user 
 	// will not have to go through webauth.
-	if (Y.one('#yes-persistent-login')) {
-		Y.one('#yes-persistent-login').on('click',function(event) {
-		event.preventDefault();
-		if (auth && "" != auth.get("content")) {
-			document.location = '/././persistentLogin.html?pl=renew&url=/myaccounts.html';
-		} else {
-			document.location = '/././secure/persistentLogin.html?pl=true';
-		}
-		});
-	}
+		Y.on('click',function(event) {
+			event.preventDefault();
+			if (auth && "" != auth.get("content")) {
+				document.location = '/././persistentLogin.html?pl=renew&url=/myaccounts.html';
+			} else {
+				document.location = '/././secure/persistentLogin.html?pl=true';
+			}
+		}, '#persistent-login');
+
+	
 	
 	
 
