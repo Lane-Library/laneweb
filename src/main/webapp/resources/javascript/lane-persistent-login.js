@@ -18,15 +18,6 @@
 	}
 
 	
-	
-	//if not from hospital and user click on a link that going to be proxy
-    if (needPopup ){
-        Y.on("click", _proxiedResourceClickedOn, 'a[href*=secure/apps/proxy/credential]');        
-        Y.on("click", _proxiedResourceClickedOn, 'a[href*=laneproxy]');
-    }
-
-    
-	
 	//if someone click on MyLane Login 
 	 Y.on("click",function(event) {
 		 if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
@@ -36,11 +27,19 @@
 			var link = event.target;
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(document.location);
-			LANE.persistentlogin.newWindow(event,'/././plain/persistent-login-popup.html');
+			LANE.PersistentLoginPopup('/././plain/persistent-login-popup.html');
 		}
 		event.preventDefault();
 	}, 'a[href=/././secure/login.html]');
-
+	
+	
+	//if not from hospital and user click on a link that going to be proxy
+    if (needPopup ){
+    	if(Y.one('a[href*=secure/apps/proxy/credential]'))
+    		Y.on("click", _proxiedResourceClickedOn, 'a[href*=secure/apps/proxy/credential]');
+    	if(Y.one('a[href*=laneproxy]'))
+    		Y.on("click", _proxiedResourceClickedOn, 'a[href*=laneproxy]');
+    }
 	
 	
     function _proxiedResourceClickedOn(event) {
@@ -57,74 +56,18 @@
 				sync : true
 			});
 			if (isActive.responseText === 'true') {
-				LANE.persistentlogin.newWindow(event,'/././plain/persistent-extension-popup.html');
+				LANE.PersistentLoginPopup('/././plain/persistent-extension-popup.html');
 			}
 		} // no preference cookie at all
 		else if (!persistentStatusCookie) {
-			LANE.persistentlogin.newWindow(event,'/././plain/persistent-popup.html');
+			LANE.PersistentLoginPopup('/././plain/persistent-popup.html');
 		}
 	}
 	
-// The popup window
-	var popupWindow = function(id, o, args) {
-		var lightbox = Y.lane.Lightbox, date = new Date();
-		if (Y.UA.ie && Y.UA.ie < 8) {
-	        lightbox.on("visibleChange", function(event) {
-	            if (event.newVal) {
-	                var boundingBox = this.get("boundingBox");
-//	              //this forces the markup to be rendered, not sure why it is needed.
-	              boundingBox.setStyle("visibility", "hidden");
-	              boundingBox.setStyle("visibility", "visible");
-	            }
-	        }, lightbox);
-		}
-		lightbox.setContent(o.responseText);
-		lightbox.show();
-		
-		// Click on YES --
-		Y.one('#yes-persistent-login').once('click',function(event) {
-				setLink(event); // cookie set in the PerssitentLoginFilter class
-		});
-		
 
-		// Click on NO
-		Y.on('click',function(event) {
-			setLink(event);
-			//if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
-			//otherwise it is set for the session only
-			if (Y.one('#dont-ask-again') && Y.one('#dont-ask-again').get('checked')) {
-					date.setFullYear(date.getFullYear() + 10);
-					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,	'denied', {
-							path : "/",
-							expires : date
-						});
-			} else
-				Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {	path : "/"	});
-		}, '#no-persistent-login');
-	
-	
-		//if someone click on the don't ask me again" the yes button clas should look disable
-		Y.on('click',function(event) {
-			var yesButton = Y.one('#yes-persistent-login');
-			if (Y.one('#dont-ask-again').get('checked')) {
-				yesButton.replaceClass('red-btn', 'disabled-btn');
-				yesButton.detach('click');
-				yesButton.on('click',function(event) {
-					event.preventDefault();
-				});
-			} else {
-				yesButton.replaceClass('disabled-btn', 'red-btn');
-				yesButton.detach('click');
-				yesButton.once('click',function(event) {
-					setLink(event); // cookie set in the PerssitentLoginFilter class
-			});
-			}
-		},'#dont-ask-again');
-	};
-
-	
 	// for the static page persistentlogin.hrml Click on YES this way the user 
 	// will not have to go through webauth.
+	if(Y.one('#persistent-login')){
 		Y.on('click',function(event) {
 			event.preventDefault();
 			if (auth && "" != auth.get("content")) {
@@ -133,7 +76,7 @@
 				document.location = '/././secure/persistentLogin.html?pl=true';
 			}
 		}, '#persistent-login');
-
+	}
 	
 	
 	
@@ -148,20 +91,81 @@
 		}
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
 		node.set('href', url);
-	}
+	};
 
 	
-	LANE.persistentlogin = function() {
-		return {
-			newWindow : function(event, urlPage) {
-				Y.io(urlPage, {
-					on : {
-						success : popupWindow
-						}
-				});
-			}
+	LANE.PersistentLoginPopup = function(urlPage) {
+		Y.io(urlPage, {
+			on : {
+				success : popupWindow
+				}
+		});
+	};
+	
+	// The popup window
+	var popupWindow = function(id, o, args) {
+		var lightbox = Y.lane.Lightbox, date = new Date(), content, yesButton, noButton, dontAskCheckBox;
+		if (Y.UA.ie && Y.UA.ie < 8) {
+	        lightbox.on("visibleChange", function(event) {
+	            if (event.newVal) {
+	                var boundingBox = this.get("boundingBox");
+//	              //this forces the markup to be rendered, not sure why it is needed.
+	              boundingBox.setStyle("visibility", "hidden");
+	              boundingBox.setStyle("visibility", "visible");
+	            }
+	        }, lightbox);
+		}
+		
+		lightbox.setContent(o.responseText);
+		lightbox.show();
+		content = lightbox.get("contentBox");
+		yesButton = content.one('#yes-persistent-login');
+		noButton = content.one('#no-persistent-login');
+		dontAskCheckBox = content.one('#dont-ask-again');
+
+		// Click on YES --
+		yesButton.once('click',function(event) {
+				setLink(event); // cookie set in the PerssitentLoginFilter class
+		});
+		
+		// Click on NO
+		noButton.on('click',function(event) {
+			setLink(event);
+			//if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
+			//otherwise it is set for the session only
+			if(dontAskCheckBox && dontAskCheckBox.get('checked')) {
+					date.setFullYear(date.getFullYear() + 10);
+					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,	'denied', {
+							path : "/",
+							expires : date
+						});
+			} else
+				Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {	path : "/"	});
+		});
+	
+	
+		//if someone click on the don't ask me again" the yes button class should look disable
+		if(dontAskCheckBox){
+			dontAskCheckBox.on('click',function(event) {
+				if (dontAskCheckBox.get('checked')) {
+					yesButton.replaceClass('red-btn', 'disabled-btn');
+					yesButton.detach('click');
+					yesButton.on('click',function(event) {
+						event.preventDefault();
+					});
+				} else {
+					yesButton.replaceClass('disabled-btn', 'red-btn');
+					yesButton.detach('click');
+					yesButton.once('click',function(event) {
+						setLink(event); 
+					});
+				}
+			});
 		};
-	}();
+	};
+	//END POPUP
+	
+	
 	
 })();
 
