@@ -40,7 +40,7 @@ public class BookmarkExportController extends BookmarkController {
             maybePrependLane(sb, bookmark.getUrl());
             sb.append("\">").append(bookmark.getLabel()).append("</A>\n");
         }
-        sb.append("</DL><p>\n</DT><p>/n</DL><p>\n");
+        sb.append("</DL><p>\n</DT><p>\n</DL><p>\n");
         return sb.toString();
     }
 
