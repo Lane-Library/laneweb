@@ -129,20 +129,21 @@
 		});
 		
 		// Click on NO
-		noButton.on('click',function(event) {
-			setLink(event);
-			//if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
-			//otherwise it is set for the session only
-			if(dontAskCheckBox && dontAskCheckBox.get('checked')) {
-					date.setFullYear(date.getFullYear() + 10);
-					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,	'denied', {
-							path : "/",
-							expires : date
-						});
-			} else
-				Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {	path : "/"	});
-		});
-	
+		if(noButton){
+			noButton.on('click',function(event) {
+				setLink(event);
+				//if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
+				//otherwise it is set for the session only
+				if(dontAskCheckBox && dontAskCheckBox.get('checked')) {
+						date.setFullYear(date.getFullYear() + 10);
+						Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,	'denied', {
+								path : "/",
+								expires : date
+							});
+				} else
+					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {	path : "/"	});
+			});
+		}
 	
 		//if someone click on the don't ask me again" the yes button class should look disable
 		if(dontAskCheckBox){
