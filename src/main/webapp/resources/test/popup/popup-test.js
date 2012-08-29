@@ -1,36 +1,33 @@
 /**
  * @author ceyates
  */
-YUI({
-    logInclude: {
-        TestRunner: true
-    }
-}).use('node-event-simulate', 'console', 'test', function(T) {
+Y.applyConfig({fetchCSS:true});
+Y.use('node-event-simulate', 'console', 'test', function(Y) {
 
-    var lanePopupTestCase = new T.Test.Case({
+    var lanePopupTestCase = new Y.Test.Case({
         name: 'Lane Popup Test Case',
 //        testConsole: function() {
-//            T.all('a').item(0).simulate('click');
+//            Y.all('a').item(0).simulate('click');
 //        },
 //        testStandard: function() {
-//            T.all('a').item(1).simulate('click');
+//            Y.all('a').item(1).simulate('click');
 //        },
 //        testConsoleWithScrollbars: function() {
-//            T.all('a').item(2).simulate('click');
+//            Y.all('a').item(2).simulate('click');
 //        },
 //        testFullscreen: function() {
-//            T.all('a').item(3).simulate('click');
+//            Y.all('a').item(3).simulate('click');
 //        },
         testLocal: function() {
-            T.one('a').simulate('click');
+            Y.one('a').simulate('click');
         }
     });
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false
     }).render('#log');
     
-    T.Test.Runner.add(lanePopupTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(lanePopupTestCase);
+    Y.Test.Runner.run();
 });

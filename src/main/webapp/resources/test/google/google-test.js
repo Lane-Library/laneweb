@@ -13,11 +13,8 @@
 //        }
 //    };
 //    timer();
-YUI({
-    logInclude: {
-        TestRunner: true
-    }
-}).use('lane-tracking','node-event-simulate', 'console', 'test', function(Y){
+Y.applyConfig({fetchCSS:true});
+Y.use('lane-tracking','node-event-simulate', 'console', 'test', function(Y){
 
     var googleTestCase = new Y.Test.Case({
         name: 'Lane Google Test Case',

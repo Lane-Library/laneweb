@@ -1,8 +1,5 @@
-YUI({
-    logInclude: {
-        TestRunner: true
-    }
-}).use("node-event-simulate", "console", "test", function(Y){
+Y.applyConfig({fetchCSS:true});
+Y.use("node-event-simulate", "console", "test", function(Y){
 
     var searchHoverTextTestCase = new Y.Test.Case({
         name: "Lane Search Hover Text Test Case",

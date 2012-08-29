@@ -2,22 +2,19 @@
  * @author ceyates
  */
 
-YUI({
-    logInclude: {
-        TestRunner: true
-    }
-}).use('node-event-simulate', 'console', 'test', function(T){
+Y.applyConfig({fetchCSS:true});
+Y.use('node-event-simulate', 'console', 'test', function(Y){
 
-    var feedbackTestCase = new T.Test.Case({
+    var feedbackTestCase = new Y.Test.Case({
         name: 'Lane Feedback Test Case'
     });
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false
     }).render('#log');
     
     
-    T.Test.Runner.add(feedbackTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(feedbackTestCase);
+    Y.Test.Runner.run();
 });

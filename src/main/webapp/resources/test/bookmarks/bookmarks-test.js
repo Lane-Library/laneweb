@@ -1,17 +1,14 @@
 /**
  * @author ceyates
  */
-YUI({
-    logInclude: {
-        TestRunner: true
-    }
-}).use('console', 'test', function(T) {
+Y.applyConfig({fetchCSS:true});
+Y.use('console', 'test', function(Y) {
     
     var Bookmark = Y.lane.Bookmark,
     
     Bookmarks = Y.lane.Bookmarks,
     
-    bookmarksTestCase = new T.Test.Case({
+    bookmarksTestCase = new Y.Test.Case({
         
         name : 'Bookmarks Test Case',
         
@@ -46,19 +43,19 @@ YUI({
         },
         
         testConstructor : function() {
-        	T.Assert.isObject(this.bookmarks);
+        	Y.Assert.isObject(this.bookmarks);
         },
         
         testAddBookmark : function() {
         	this.bookmarks.addBookmark(new Bookmark("label1","url1"));
-            T.Assert.areEqual(this.initialSize + 1, this.bookmarks.size());
+            Y.Assert.areEqual(this.initialSize + 1, this.bookmarks.size());
         },
         
         testAddBadBookmark : function() {
         	try {
             	this.bookmarks.addBookmark(null);
         	} catch(e) {}
-            T.Assert.areEqual(this.initialSize, this.bookmarks.size());
+            Y.Assert.areEqual(this.initialSize, this.bookmarks.size());
         },
         
         testAddBookmarkEvent : function() {
@@ -67,7 +64,7 @@ YUI({
                 added = event.bookmark;
             });
             this.bookmarks.addBookmark(bookmark);
-            T.Assert.areSame(added, bookmark);
+            Y.Assert.areSame(added, bookmark);
         },
         
         testAddBookmarkEventPrevent : function() {
@@ -75,19 +72,19 @@ YUI({
                 event.preventDefault();
             });
             this.bookmarks.addBookmark(new Bookmark("label3", "url3"));
-            T.Assert.areEqual(this.initialSize, this.bookmarks.size());
+            Y.Assert.areEqual(this.initialSize, this.bookmarks.size());
         },
         
         testGetBookmark : function() {
         	var bookmark = new Bookmark("label4", "url4");
         	this.bookmarks.addBookmark(bookmark);
-        	T.Assert.areEqual(bookmark, this.bookmarks.getBookmark(0));
+        	Y.Assert.areEqual(bookmark, this.bookmarks.getBookmark(0));
         },
         
         testRemoveBookmarks : function() {
             this.bookmarks.addBookmark(new Bookmark("label5", "url5"));
             this.bookmarks.removeBookmarks([0]);
-            T.Assert.areEqual(this.initialSize, this.bookmarks.size());
+            Y.Assert.areEqual(this.initialSize, this.bookmarks.size());
         },
         
         testRemoveBookmarksBadPosition : function() {
@@ -103,8 +100,8 @@ YUI({
                 positions = event.positions;
             });
             this.bookmarks.removeBookmarks([0]);
-            T.Assert.areEqual(1, positions.length);
-            T.Assert.areEqual(0, positions[0]);
+            Y.Assert.areEqual(1, positions.length);
+            Y.Assert.areEqual(0, positions[0]);
         },
         
         testRemoveBookmarksEventPrevent : function() {
@@ -113,7 +110,7 @@ YUI({
                 event.preventDefault();
             });
             this.bookmarks.removeBookmarks([0]);
-            T.Assert.areEqual(this.initialSize + 1, this.bookmarks.size());
+            Y.Assert.areEqual(this.initialSize + 1, this.bookmarks.size());
         },
         
         testUpdateBookmark : function() {
@@ -124,30 +121,30 @@ YUI({
                 p = event.position;
             });
             bookmark.setLabel("newlabel");
-            T.Assert.areSame(bookmark, b);
-            T.Assert.areEqual(0, p);
-            T.Assert.areEqual("newlabel", bookmark.getLabel());
+            Y.Assert.areSame(bookmark, b);
+            Y.Assert.areEqual(0, p);
+            Y.Assert.areEqual("newlabel", bookmark.getLabel());
         },
         
         testMoveBookmarkUp : function() {
             this.bookmarks.moveBookmark(0, 2);
-            T.Assert.areEqual("2", this.bookmarks.getBookmark(0).getLabel());
-            T.Assert.areEqual("0", this.bookmarks.getBookmark(1).getLabel());
+            Y.Assert.areEqual("2", this.bookmarks.getBookmark(0).getLabel());
+            Y.Assert.areEqual("0", this.bookmarks.getBookmark(1).getLabel());
         },
         
         testMoveBookmarkDown : function() {
             this.bookmarks.moveBookmark(3, 0);
-            T.Assert.areEqual("0", this.bookmarks.getBookmark(3).getLabel());
-            T.Assert.areEqual("1", this.bookmarks.getBookmark(0).getLabel());
+            Y.Assert.areEqual("0", this.bookmarks.getBookmark(3).getLabel());
+            Y.Assert.areEqual("1", this.bookmarks.getBookmark(0).getLabel());
         }
     });
 
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false
     }).render('#log');
 
-    T.Test.Runner.add(bookmarksTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(bookmarksTestCase);
+    Y.Test.Runner.run();
 });

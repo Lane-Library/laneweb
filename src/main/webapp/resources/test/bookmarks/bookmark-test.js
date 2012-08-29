@@ -1,15 +1,12 @@
 /**
  * @author ceyates
  */
-YUI({
-    logInclude: {
-        TestRunner: true
-    }
-}).use('console', 'test', function(T) {
+Y.applyConfig({fetchCSS:true});
+Y.use('console', 'test', function(Y) {
     
     var Bookmark = Y.lane.Bookmark,
 
-    bookmarkTestCase = new T.Test.Case({
+    bookmarkTestCase = new Y.Test.Case({
         
         name : 'Bookmark Test Case',
         
@@ -24,7 +21,7 @@ YUI({
             try {
                 this.bookmark = new Bookmark();
             } catch(e) {}
-            T.Assert.isNull(this.bookmark);
+            Y.Assert.isNull(this.bookmark);
         },
         
         testNewBookmarkNoUrl : function() {
@@ -32,7 +29,7 @@ YUI({
             try {
                 bookmark = new Bookmark(null, "url");
             } catch(e) {}
-            T.Assert.isNull(bookmark);
+            Y.Assert.isNull(bookmark);
         },
         
         testNewBookmarkNoLabel : function() {
@@ -40,31 +37,31 @@ YUI({
             try {
                 bookmark = new Bookmark("label", null);
             } catch(e) {}
-            T.Assert.isNull(bookmark);
+            Y.Assert.isNull(bookmark);
         },
         
         testSetNullValues : function() {
             try {
                 this.bookmark.setValues(null, null);
             } catch(e) {}
-            T.Assert.areEqual("label", this.bookmark.getLabel());
-            T.Assert.areEqual("url", this.bookmark.getUrl());
+            Y.Assert.areEqual("label", this.bookmark.getLabel());
+            Y.Assert.areEqual("url", this.bookmark.getUrl());
         },
         
         testGetSetLabel : function() {
             this.bookmark.setLabel("newlabel");
-            T.Assert.areEqual("newlabel", this.bookmark.getLabel());
+            Y.Assert.areEqual("newlabel", this.bookmark.getLabel());
         },
         
         testGetSetUrl : function() {
             this.bookmark.setUrl("newurl");
-            T.Assert.areEqual("newurl", this.bookmark.getUrl());    
+            Y.Assert.areEqual("newurl", this.bookmark.getUrl());    
         },
         
         testGetSetValues : function() {
             this.bookmark.setValues("newlabel", "newurl");
-            T.Assert.areEqual("newlabel", this.bookmark.getLabel());
-            T.Assert.areEqual("newurl", this.bookmark.getUrl());   
+            Y.Assert.areEqual("newlabel", this.bookmark.getLabel());
+            Y.Assert.areEqual("newurl", this.bookmark.getUrl());   
         },
         
         testChangeEventSetLabel : function() {
@@ -73,7 +70,7 @@ YUI({
                 label = event.newLabel;
             });
             this.bookmark.setLabel("newlabel");
-            T.Assert.areEqual(label, "newlabel");
+            Y.Assert.areEqual(label, "newlabel");
         },
         
         testSetLabelPreventDefault : function() {
@@ -82,7 +79,7 @@ YUI({
                 event.preventDefault();
             });
             this.bookmark.setLabel("newlabel");
-            T.Assert.areEqual(label, this.bookmark.getLabel());
+            Y.Assert.areEqual(label, this.bookmark.getLabel());
         },
         
         testChangeEventSetUrl : function() {
@@ -91,7 +88,7 @@ YUI({
                 url = event.newUrl;
             });
             this.bookmark.setUrl("newurl");
-            T.Assert.areEqual(url, "newurl");   
+            Y.Assert.areEqual(url, "newurl");   
         },
         
         testSetUrlPreventDefault : function() {
@@ -100,7 +97,7 @@ YUI({
                 event.preventDefault();
             });
             this.bookmark.setUrl("newurl");
-            T.Assert.areEqual(url, this.bookmark.getUrl());   
+            Y.Assert.areEqual(url, this.bookmark.getUrl());   
         },
         
         testChangeEventSetValues : function() {
@@ -111,8 +108,8 @@ YUI({
                 url = event.newUrl;
             });
             this.bookmark.setValues("newlabel", "newurl");
-            T.Assert.areEqual(label, "newlabel");
-            T.Assert.areEqual(url, "newurl");   
+            Y.Assert.areEqual(label, "newlabel");
+            Y.Assert.areEqual(url, "newurl");   
         },
         
         testSetValuesPreventDefault : function() {
@@ -122,18 +119,18 @@ YUI({
                 event.preventDefault();
             });
             this.bookmark.setValues("newlabel", "newurl");
-            T.Assert.areEqual(label, this.bookmark.getLabel());
-            T.Assert.areEqual(url, this.bookmark.getUrl());   
+            Y.Assert.areEqual(label, this.bookmark.getLabel());
+            Y.Assert.areEqual(url, this.bookmark.getUrl());   
         }
         
     });
 
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false
     }).render('#log');
 
-    T.Test.Runner.add(bookmarkTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(bookmarkTestCase);
+    Y.Test.Runner.run();
 });

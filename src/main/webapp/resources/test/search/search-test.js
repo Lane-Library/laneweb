@@ -1,7 +1,8 @@
 /**
  * @author ceyates
  */
-YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','test', function(Y) {
+Y.applyConfig({fetchCSS:true});
+Y.use('node-event-simulate','console','test', function(Y) {
 
     
     var searchTestCase = new Y.Test.Case({
@@ -27,10 +28,9 @@ YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','t
             }
         },
         testSourceChangeEvent: function() {
-            var theSearchSource = this.searchSource;
             Y.Global.on('lane:searchSourceChange', function(search) {
-                Y.Assert.areEqual(search.getSearchSource(), theSearchSource.get('value'));
-            });
+                Y.Assert.areEqual(search.getSearchSource(), this.searchSource.get('value'));
+            }, this);
             this.searchSource.set('selectedIndex',1);
             this.searchSource.simulate('change');
         },

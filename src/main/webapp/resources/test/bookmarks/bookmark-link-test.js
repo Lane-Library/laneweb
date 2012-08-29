@@ -1,13 +1,10 @@
 /**
  * @author ceyates
  */
-YUI({
-    logInclude: {
-        TestRunner: true
-    }
-}).use('console', 'test', function(T) {
+Y.applyConfig({fetchCSS:true});
+Y.use('console', 'test', function(Y) {
     
-    bookmarkLinkTestCase = new T.Test.Case({
+    bookmarkLinkTestCase = new Y.Test.Case({
         
         name : "BookmarkLink Test Case",
         
@@ -18,17 +15,17 @@ YUI({
         },
     
         testExists : function() {
-            T.Assert.isTrue(T.Lang.isObject(this.link));
+            Y.Assert.isTrue(Y.Lang.isObject(this.link));
         }
         
     });
 
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false
     }).render('#log');
 
-    T.Test.Runner.add(bookmarkLinkTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(bookmarkLinkTestCase);
+    Y.Test.Runner.run();
 });

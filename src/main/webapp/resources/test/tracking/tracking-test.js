@@ -1,11 +1,8 @@
 /**
  * @author ceyates
  */
-YUI({
-//    logInclude: {
-//        TestRunner: true
-//    }
-}).use('dump', 'lane-tracking', 'node-event-simulate', 'console', 'test', function(Y){
+Y.applyConfig({fetchCSS:true});
+Y.use('dump', 'lane-tracking', 'node-event-simulate', 'console', 'test', function(Y){
 
     var trackingTestCase = new Y.Test.Case({
         name: "Lane Tracking TestCase",

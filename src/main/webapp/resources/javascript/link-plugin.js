@@ -34,7 +34,12 @@
                 readOnly : true,
                 valueFn : function() {
                     var host = this.get("host").get("host");
-                    return host !== undefined && host !== "" ? host : LinkPlugin.DOCUMENT_HOST;
+                    host = host || LinkPlugin.DOCUMENT_HOST;
+                    //TODO: need to check for :443, too?
+                    if (host.indexOf(":80") > -1) {
+                        host = host.substring(0, host.indexOf(":"));
+                    }
+                    return host;
                 }
             },
             local : {
@@ -63,7 +68,7 @@
             proxyLogin : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get("linkHost") !== LinkPlugin.DOCUMENT_HOST) {
+                    if (this.get("linkHost") != LinkPlugin.DOCUMENT_HOST) {
                         return false;
                     } else {
                         return this.get("path") === LinkPlugin.LOGIN_PATH;

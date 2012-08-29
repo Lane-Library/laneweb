@@ -1,15 +1,12 @@
 /**
  * @author ceyates
  */
-YUI({
-    logInclude: {
-        TestRunner: true
-    }
-}).use('console', 'test', function(T) {
+Y.applyConfig({fetchCSS:true});
+Y.use('console', 'test', function(Y) {
     
     var Bookmark = Y.lane.Bookmark,
     
-    bookmarksWidgetTestCase = new T.Test.Case({
+    bookmarksWidgetTestCase = new Y.Test.Case({
         
         name : 'BookmarksWidget Test Case',
         
@@ -34,28 +31,28 @@ YUI({
         },
         
         testExists : function() {
-            T.Assert.isTrue(T.Lang.isObject(this.widget));
+            Y.Assert.isTrue(Y.Lang.isObject(this.widget));
         },
         
         testHasBookmarks : function() {
-            T.Assert.isTrue(T.Lang.isObject(this.bookmarks));
+            Y.Assert.isTrue(Y.Lang.isObject(this.bookmarks));
         },
         
         testHasItems : function() {
-            T.Assert.isTrue(T.Lang.isObject(this.items));
+            Y.Assert.isTrue(Y.Lang.isObject(this.items));
         },
         
         testAddBookmark : function() {
             var size = Y.all("#bookmarks li").size();
             this.bookmarks.addBookmark(new Bookmark("label", "url"));
-            T.Assert.isTrue(Y.all("#bookmarks li").size() == size + 1);
-            T.Assert.areEqual("label", Y.one("#bookmarks a").get("innerHTML"));
+            Y.Assert.isTrue(Y.all("#bookmarks li").size() == size + 1);
+            Y.Assert.areEqual("label", Y.one("#bookmarks a").get("innerHTML"));
         },
         
         testRemoveBookmark : function() {
             var size = Y.all("#bookmarks li").size();
             this.bookmarks.removeBookmarks([size - 1]);
-            T.Assert.isTrue(Y.all("#bookmarks li").size() == size - 1);
+            Y.Assert.isTrue(Y.all("#bookmarks li").size() == size - 1);
         },
         
         testUpdateBookmark : function() {
@@ -63,30 +60,30 @@ YUI({
                 bookmark = new Bookmark("label", "url");
             this.bookmarks.addBookmark(bookmark);
             bookmark.setLabel("newlabel");
-            T.Assert.areEqual("newlabel", Y.one("#bookmarks a").get("innerHTML"));
+            Y.Assert.areEqual("newlabel", Y.one("#bookmarks a").get("innerHTML"));
         },
         
         testMoveBookmarkUp : function() {
             this.bookmarks.moveBookmark(0, 3);
             var anchors = Y.all("#bookmarks a");
-            T.Assert.areEqual("Paget disease of bone", anchors.item(0).get("innerHTML"));
-            T.Assert.areEqual("newlabel", anchors.item(1).get("innerHTML"));
+            Y.Assert.areEqual("Paget disease of bone", anchors.item(0).get("innerHTML"));
+            Y.Assert.areEqual("newlabel", anchors.item(1).get("innerHTML"));
         },
         
         testMoveBookmarkDown : function() {
             this.bookmarks.moveBookmark(3, 0);
             var anchors = Y.all("#bookmarks a");
-            T.Assert.areEqual("Paget disease of bone", anchors.item(3).get("innerHTML"));
-            T.Assert.areEqual("newlabel", anchors.item(0).get("innerHTML"));
+            Y.Assert.areEqual("Paget disease of bone", anchors.item(3).get("innerHTML"));
+            Y.Assert.areEqual("newlabel", anchors.item(0).get("innerHTML"));
         }
     });
 
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false
     }).render('#log');
 
-    T.Test.Runner.add(bookmarksWidgetTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(bookmarksWidgetTestCase);
+    Y.Test.Runner.run();
 });

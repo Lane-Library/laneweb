@@ -1,25 +1,26 @@
-YUI({logInclude: { TestRunner: true } }).use('console','test', function(T) {
+Y.applyConfig({fetchCSS:true});
+Y.use('console','test', function(Y) {
     
-    var laneTestCase = new T.Test.Case({
+    var laneTestCase = new Y.Test.Case({
         name: "Lane TestCase",
         "test LANE exists" : function() {
-            T.Assert.isObject(LANE);
+            Y.Assert.isObject(LANE);
         },
         "test LANE.search exists": function() {
-            T.Assert.isObject(LANE.search);
+            Y.Assert.isObject(LANE.search);
         },
         "test Y.lane exists" : function() {
-        	T.Assert.isObject(Y.lane);
+        	Y.Assert.isObject(Y.lane);
         }
     });
     
     
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false                   
     }).render('#log');
  
     
-    T.Test.Runner.add(laneTestCase);
-    T.Test.Runner.run();
+    Y.Test.Runner.add(laneTestCase);
+    Y.Test.Runner.run();
 });
