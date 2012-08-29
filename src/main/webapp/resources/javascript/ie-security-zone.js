@@ -6,13 +6,16 @@
      * Detect and report for now ... may alert and instruct the user.
      */
     if(Y.UA.ie){
-        var userId = LANE.tracking.getUserId();
+        var userId = LANE.tracking.getUserId(),f;
         if(document.location.search.match(/scs=1/) && null == userId){
-            Y.fire("lane:trackableEvent", {
-                category: "ie-security-zone-error",
-                action: document.location.href,
-                label: Y.UA.userAgent
-            });
+            f = function(){
+                Y.fire("lane:trackableEvent", {
+                    category: "ie-security-zone-error",
+                    action: document.location.href,
+                    label: Y.UA.userAgent
+                });
+            };
+            setTimeout(f, 500);
         }
     }
 })();
