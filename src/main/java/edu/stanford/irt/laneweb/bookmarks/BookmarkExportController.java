@@ -16,9 +16,11 @@ public class BookmarkExportController extends BookmarkController {
 
     private static final String HTML_HEADER = "<!DOCTYPE NETSCAPE-Bookmark-file-1>\n"
             + "<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=UTF-8\">\n"
-            + "<TITLE>Lane Bookmarks</TITLE>\n"
+            + "<TITLE>Bookmarks</TITLE>\n"
             + "<H1>Lane Bookmarks</H1>\n"
-            + "<DL><p\n>";
+            + "<DL><p>\n"
+            + "<DT><H3>Lane Bookmarks</H3>\n"
+            + "<DL><p>\n";
 
     private static final String HTML_ITEM = "<DT><A HREF=\"";
 
@@ -38,7 +40,7 @@ public class BookmarkExportController extends BookmarkController {
             maybePrependLane(sb, bookmark.getUrl());
             sb.append("\">").append(bookmark.getLabel()).append("</A>\n");
         }
-        sb.append("</DL><p>");
+        sb.append("</DL><p>\n</DT><p>/n</DL><p>\n");
         return sb.toString();
     }
 
@@ -64,6 +66,8 @@ public class BookmarkExportController extends BookmarkController {
     private void maybePrependLane(final StringBuilder sb, final String url) {
         if (url.charAt(0) == '/') {
             sb.append("http://lane.stanford.edu");
+        } else {
+            sb.append(url);
         }
     }
 }
