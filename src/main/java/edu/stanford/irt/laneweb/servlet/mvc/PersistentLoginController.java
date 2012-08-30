@@ -27,17 +27,37 @@ import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 @Controller
 public class PersistentLoginController {
 
-    public static final String PERSISTENT_COOKIE_ACTION = "pca=";
-
     public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
-
-    public static final String PROXY_CREDENTIAL_LINK = "apps/proxy/credential";
-
-    public static final String PROXY_HOST = "laneproxy.stanford.edu";
 
     private SunetIdCookieCodec codec;
 
     private SunetIdSource sunetIdSource;
+
+    @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
+    public String createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
+        checkSunetIdAndSetCookies(request, response);
+        return setView(url, request, response);
+    }
+
+    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
+    public String removeCookieAndView(final String url, final HttpServletRequest request,
+            final HttpServletResponse response) {
+        removeCookies(request, response);
+        this.sunetIdSource.getSunetid(request);
+        return setView(url, request, response);
+    }
+
+    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
+    public String renewCookieAndRedirect(final String url, final HttpServletRequest request,
+            final HttpServletResponse response) {
+        Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
+        if (null != isActiveSunetID && isActiveSunetID) {
+            checkSunetIdAndSetCookies(request, response);
+        } else {
+            resetCookies(request, response);
+        }
+        return "redirect:".concat(url);
+    }
 
     private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
         String sunetid = this.sunetIdSource.getSunetid(request);
@@ -46,27 +66,6 @@ public class PersistentLoginController {
         } else {
             resetCookies(request, response);
         }
-    }
-
-    @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
-    public String createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
-        checkSunetIdAndSetCookies(request, response);
-        return setView(url, "true", request, response);
-    }
-
-    private boolean isProxyUrl(final String url) {
-        if (url.contains(PROXY_CREDENTIAL_LINK) || url.contains(PROXY_HOST)) {
-            return true;
-        }
-        return false;
-    }
-
-    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
-    public String removeCookieAndView(final String url, final HttpServletRequest request,
-            final HttpServletResponse response) {
-        removeCookies(request, response);
-        this.sunetIdSource.getSunetid(request);
-        return setView(url, "false", request, response);
     }
 
     private void removeCookies(final HttpServletRequest request, final HttpServletResponse response) {
@@ -92,18 +91,6 @@ public class PersistentLoginController {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-    }
-
-    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
-    public String renewCookieAndRedirect(final String url, final HttpServletRequest request,
-            final HttpServletResponse response) {
-        Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-        if (null != isActiveSunetID && isActiveSunetID) {
-            checkSunetIdAndSetCookies(request, response);
-        } else {
-            resetCookies(request, response);
-        }
-        return setView(url, "renew", request, response);
     }
 
     private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
@@ -145,26 +132,6 @@ public class PersistentLoginController {
         }
     }
 
-    /**
-     * Append pca=true|false|renew to redirect URL when request is HTTPS. This will allow testing of IE security
-     * zone problems. See case 74904 for more information.
-     * 
-     * @param request
-     * @param url
-     * @return url with PERSISTENT_COOKIE_ACTION parameter and action if appropriate
-     */
-    private String setPersistentCookieActionParam(final HttpServletRequest request, final String url,
-            final String plAction) {
-        // FIXME: check gohttps header as well
-        if (!"https".equals(request.getScheme()) || isProxyUrl(url)) {
-            return url;
-        }
-        String ampOrQuestion = (url.contains("?")) ? "&" : "?";
-        StringBuffer sb = new StringBuffer();
-        sb.append(url).append(ampOrQuestion).append(PERSISTENT_COOKIE_ACTION).append(plAction);
-        return sb.toString();
-    }
-
     @Autowired
     public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
         this.codec = codec;
@@ -175,14 +142,11 @@ public class PersistentLoginController {
         this.sunetIdSource = sunetIdSource;
     }
 
-    private String setView(final String url, final String plAction, final HttpServletRequest request,
-            final HttpServletResponse response) {
-        String redirectUrl = url;
-        if (null == redirectUrl) {
+    private String setView(final String url, final HttpServletRequest request, final HttpServletResponse response) {
+        if (null == url) {
             response.setCharacterEncoding("UTF-8");
-            redirectUrl = "/myaccounts.html";
+            return "redirect:/myaccounts.html";
         }
-        redirectUrl = setPersistentCookieActionParam(request, redirectUrl, plAction);
-        return "redirect:".concat(redirectUrl);
+        return "redirect:".concat(url);
     }
 }
