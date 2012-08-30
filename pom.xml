@@ -250,7 +250,6 @@
                                 <include>purchase-suggestions-min.js</include>
                                 <include>menu-delay-min.js</include>
                                 <include>lane-search-printonly-min.js</include>
-                                <include>ie-security-zone-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
