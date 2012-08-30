@@ -72,8 +72,7 @@ public class BookmarkExportController extends BookmarkController {
     private void maybePrependLane(final StringBuilder sb, final String url) {
         if (url.charAt(0) == '/') {
             sb.append("http://lane.stanford.edu");
-        } else {
-            sb.append(url);
         }
+        sb.append(url);
     }
 }
