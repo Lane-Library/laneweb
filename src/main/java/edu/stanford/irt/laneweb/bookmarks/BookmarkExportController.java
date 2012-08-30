@@ -14,15 +14,21 @@ import edu.stanford.irt.laneweb.model.Model;
 @RequestMapping(value = "/bookmarks/export")
 public class BookmarkExportController extends BookmarkController {
 
-    private static final String HTML_HEADER = "<!DOCTYPE NETSCAPE-Bookmark-file-1>\n"
+    private static final String DOCUMENT_HEADER = "<!DOCTYPE NETSCAPE-Bookmark-file-1>\n"
             + "<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=UTF-8\">\n"
             + "<TITLE>Bookmarks</TITLE>\n"
             + "<H1>Lane Bookmarks</H1>\n"
             + "<DL><p>\n"
-            + "<DT><H3>Lane Bookmarks</H3>\n"
-            + "<DL><p>\n";
+            + "    <DT><H3 ADD_DATE=\"0\">Lane Bookmarks</H3>\n"
+            + "    <DL><p>\n";
 
-    private static final String HTML_ITEM = "<DT><A HREF=\"";
+    private static final String ITEM_PREFIX = "        <DT><A HREF=\"";
+    
+    private static final String ITEM_MIDDLEFIX = "\" ADD_DATE=\"0\">";
+    
+    private static final String ITEM_SUFFIX = "</A>\n";
+    
+    private static final String DOCUMENT_FOOTER = "    </DL><p>\n</DL><p>\n";
 
     /**
      * Produces importable html bookmarks.
@@ -34,13 +40,13 @@ public class BookmarkExportController extends BookmarkController {
     @RequestMapping(value = "/bookmarks.html", method = RequestMethod.GET, produces = "application/x-netscape-bookmarks")
     @ResponseBody
     public String getBookmarksHTML(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks) {
-        StringBuilder sb = new StringBuilder(HTML_HEADER);
+        StringBuilder sb = new StringBuilder(DOCUMENT_HEADER);
         for (Bookmark bookmark : bookmarks) {
-            sb.append(HTML_ITEM);
+            sb.append(ITEM_PREFIX);
             maybePrependLane(sb, bookmark.getUrl());
-            sb.append("\">").append(bookmark.getLabel()).append("</A>\n");
+            sb.append(ITEM_MIDDLEFIX).append(bookmark.getLabel()).append(ITEM_SUFFIX);
         }
-        sb.append("</DL><p>\n</DT><p>\n</DL><p>\n");
+        sb.append(DOCUMENT_FOOTER);
         return sb.toString();
     }
 
