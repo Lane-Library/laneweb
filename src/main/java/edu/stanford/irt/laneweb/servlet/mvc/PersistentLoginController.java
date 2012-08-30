@@ -33,6 +33,8 @@ public class PersistentLoginController {
 
     public static final String PROXY_CREDENTIAL_LINK = "apps/proxy/credential";
 
+    public static final String PROXY_HOST = "laneproxy.stanford.edu";
+
     public static final String SECURE_COOKIE_SET = "scs=1"; // to indicate cookies modified in an HTTPS request
 
     private SunetIdCookieCodec codec;
@@ -85,7 +87,7 @@ public class PersistentLoginController {
      * @return url with SECURE_COOKIE_SET parameter added if appropriate
      */
     private String appendSecureCookieSetParameter(final HttpServletRequest request, final String url) {
-        if (!"https".equals(request.getScheme()) || url.contains(PROXY_CREDENTIAL_LINK)) {
+        if (!"https".equals(request.getScheme()) || isProxyUrl(url)) {
             return url;
         }
         String ampOrQuestion = (url.contains("?")) ? "&" : "?";
@@ -101,6 +103,13 @@ public class PersistentLoginController {
         }
     }
 
+    private boolean isProxyUrl(final String url){
+        if(url.contains(PROXY_CREDENTIAL_LINK) || url.contains(PROXY_HOST)){
+            return true;
+        }
+        return false;
+    }
+    
     private void removeCookies(final HttpServletRequest request, final HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
