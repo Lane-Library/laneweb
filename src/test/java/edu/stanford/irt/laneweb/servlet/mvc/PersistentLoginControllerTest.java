@@ -31,9 +31,9 @@ public class PersistentLoginControllerTest {
 
     private HttpSession session;
 
-    private String url = "/test.html";
-    
     private SunetIdSource sunetIdSource;
+
+    private String url = "/test.html";
 
     @Before
     public void setUp() throws Exception {

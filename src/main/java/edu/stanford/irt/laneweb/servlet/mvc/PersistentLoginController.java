@@ -1,14 +1,12 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
- * This class will add three cookies the persistent-expired-date,
- * persistent-preference and user. The user coolie will have the sunetid, the
- * userAgent and the expired date appended and encrypted. The
- * persistent-preference have the expired date minus 3 days only pl=true have to
- * have the secure in the path but not the other But if pl=renew the status of
- * the user is looked up see it is active or not. Before to delete the cookie,
- * we check if the persistent-preference value is not equals to denied because
- * if it is equals denied the persistent window will never appear.
+ * This class will add three cookies the persistent-expired-date, persistent-preference and user. The user coolie will
+ * have the sunetid, the userAgent and the expired date appended and encrypted. The persistent-preference have the
+ * expired date minus 3 days only pl=true have to have the secure in the path but not the other But if pl=renew the
+ * status of the user is looked up see it is active or not. Before to delete the cookie, we check if the
+ * persistent-preference value is not equals to denied because if it is equals denied the persistent window will never
+ * appear.
  */
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -35,43 +33,6 @@ public class PersistentLoginController {
 
     private SunetIdSource sunetIdSource;
 
-    @RequestMapping(value =  "/secure/persistentLogin.html" , params = { "pl=true" })
-    public String createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
-        checkSunetIdAndSetCookies(request, response);
-        return setView(url, request, response);
-    }
-
-    @RequestMapping(value = {"/secure/persistentLogin.html","/persistentLogin.html"}, params = { "pl=false" })
-    public String removeCookieAndView(final String url, final HttpServletRequest request, final HttpServletResponse response) {
-        removeCookies(request, response);
-        return setView(url, request, response);
-    }
-
-    @RequestMapping(value = {"/secure/persistentLogin.html", "/persistentLogin.html"}, params = { "url", "pl=renew" })
-    public String renewCookieAndRedirect(final String url, final HttpServletRequest request, final HttpServletResponse response) {
-        Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-        if (null != isActiveSunetID && isActiveSunetID) {
-            checkSunetIdAndSetCookies(request, response);
-        } else {
-            resetCookies(request, response);
-        }
-        return "redirect:".concat(url);
-    }
-
-
-
-
-
-    @Autowired
-    public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
-        this.codec = codec;
-    }
-    
-    @Autowired
-    public void setSunetIdSource(final SunetIdSource sunetIdSource) {
-        this.sunetIdSource = sunetIdSource;
-    }
-
     private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
         String sunetid = this.sunetIdSource.getSunetid(request);
         if (null != sunetid) {
@@ -79,6 +40,19 @@ public class PersistentLoginController {
         } else {
             resetCookies(request, response);
         }
+    }
+
+    @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
+    public String createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response) {
+        checkSunetIdAndSetCookies(request, response);
+        return setView(url, request, response);
+    }
+
+    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
+    public String removeCookieAndView(final String url, final HttpServletRequest request,
+            final HttpServletResponse response) {
+        removeCookies(request, response);
+        return setView(url, request, response);
     }
 
     private void removeCookies(final HttpServletRequest request, final HttpServletResponse response) {
@@ -104,6 +78,18 @@ public class PersistentLoginController {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
+    }
+
+    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
+    public String renewCookieAndRedirect(final String url, final HttpServletRequest request,
+            final HttpServletResponse response) {
+        Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
+        if (null != isActiveSunetID && isActiveSunetID) {
+            checkSunetIdAndSetCookies(request, response);
+        } else {
+            resetCookies(request, response);
+        }
+        return "redirect:".concat(url);
     }
 
     private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
@@ -145,8 +131,16 @@ public class PersistentLoginController {
         }
     }
 
+    @Autowired
+    public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
+        this.codec = codec;
+    }
 
-    
+    @Autowired
+    public void setSunetIdSource(final SunetIdSource sunetIdSource) {
+        this.sunetIdSource = sunetIdSource;
+    }
+
     /**
      * set the lane-user cookie max age to zero.
      * 
