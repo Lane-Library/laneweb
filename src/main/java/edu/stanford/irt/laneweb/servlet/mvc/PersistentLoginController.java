@@ -155,6 +155,7 @@ public class PersistentLoginController {
      */
     private String setPersistentCookieActionParam(final HttpServletRequest request, final String url,
             final String plAction) {
+        // FIXME: check gohttps header as well
         if (!"https".equals(request.getScheme()) || isProxyUrl(url)) {
             return url;
         }
