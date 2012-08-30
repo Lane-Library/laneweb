@@ -65,6 +65,7 @@ public class PersistentLoginController {
     public String removeCookieAndView(final String url, final HttpServletRequest request,
             final HttpServletResponse response) {
         removeCookies(request, response);
+        this.sunetIdSource.getSunetid(request);
         return setView(url, "false", request, response);
     }
 

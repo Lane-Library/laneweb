@@ -115,6 +115,7 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testRemoveCookieUrlNotNull() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         expect(this.request.getScheme()).andReturn("http");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234890");
@@ -128,6 +129,7 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testRemoveCookieUrlNotNullHttps() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         expect(this.request.getScheme()).andReturn("https");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234890");
@@ -141,6 +143,7 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testRemoveCookieUrlNull() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         expect(this.request.getScheme()).andReturn("http");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234033");
@@ -155,6 +158,7 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testRemoveCookieUrlNullHttps() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         expect(this.request.getScheme()).andReturn("https");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "234033");
@@ -169,6 +173,7 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testRemoveWithDeniedCookie() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         expect(this.request.getScheme()).andReturn("http");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "denied");
@@ -181,6 +186,7 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testRemoveWithDeniedCookieHttps() {
+        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         expect(this.request.getScheme()).andReturn("https");
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginFilter.PERSISTENT_LOGIN_PREFERENCE, "denied");
