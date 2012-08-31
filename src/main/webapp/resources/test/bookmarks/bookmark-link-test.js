@@ -20,7 +20,7 @@ Y.use('console', 'test', "node-event-simulate", function(Y) {
         
         testDontShowAlreadyBookmarked : function() {
             Y.one("#alreadyBookmarked").simulate("mouseover");
-            Y.Assert.areEqual(0, this.link.get("state"));
+            Y.Assert.areEqual(0, this.link.get("status"));
         }
         
     });

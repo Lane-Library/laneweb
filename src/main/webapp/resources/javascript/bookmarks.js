@@ -644,7 +644,7 @@
                 hideDelay : {
                     value:500
                 },
-                state : {
+                status : {
                     value : 0 //BookmarkLink.OFF
                 }
         };
@@ -771,6 +771,33 @@
             },
             
             /**
+             * Determine if a link has already been bookmarked. (case 71323)
+             * @method _isAlreadyBookmarked
+             * @private
+             * @param target the target anchor
+             * @returns {Boolean}
+             */
+            _isAlreadyBookmarked : function(target) {
+                var url, i, bookmarks, size;
+                target.plug(Y.lane.LinkPlugin);
+                if (target.link.get("local")) {
+                    url = target.link.get("path");
+                    query = target.link.get("query");
+                    url = query ? url + query : url;
+                } else {
+                    url = target.link.get("url");
+                }
+                bookmarks = this.get("bookmarks");
+                size = bookmarks.size();
+                for (i = 0; i < size; i++) {
+                    if (url === bookmarks.getBookmark(i).getUrl()) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            
+            /**
              * Determine if a link is bookmarkable.  For now true if its display property is inline and
              * it does not contain an img element.  Added #topResources links, case 71323.  Added
              * logic for if link was already bookmarked case 75199
@@ -780,28 +807,14 @@
              * @returns {Boolean}
              */
             _isBookmarkable : function(target) {
-                var bookmarkable = false, bookmarks, url, i, size;
+                var bookmarkable = false;
                 if (target.getStyle("display") == "inline" && !target.one("img")) {
                     bookmarkable = true;
                 } else if (target.ancestor("#topResources")) {
                     bookmarkable = true;
-                } else {
-                    target.plug(Y.lane.LinkPlugin);
-                    if (target.link.get("local")) {
-                        url = target.link.get("path");
-                        query = target.link.get("query");
-                        url = query ? url + query : url;
-                    } else {
-                        url = target.link.get("url");
-                    }
-                    bookmarks = this.get("bookmarks");
-                    size = bookmarks.size();
-                    for (i = 0; i < size; i++) {
-                        if (url === bookmarks.getBookmark(i).getURL()) {
-                            bookmarkable = false;
-                            break;
-                        }
-                    }
+                }
+                if (bookmarkable) {
+                    bookmarkable = !this._isAlreadyBookmarked(target);
                 }
                 return bookmarkable;
             },
