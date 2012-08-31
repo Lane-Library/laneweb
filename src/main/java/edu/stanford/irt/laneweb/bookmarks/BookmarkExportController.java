@@ -49,20 +49,20 @@ public class BookmarkExportController extends BookmarkController {
         sb.append(DOCUMENT_FOOTER);
         return sb.toString();
     }
-    
+
     /**
      * Converts bookmarks to RIS (Research Information Systems) format
-     * @param bookmarks the bookmarks
+     * 
+     * @param bookmarks
+     *            the bookmarks
      * @return the bookmarks in RIS format
      */
-    @RequestMapping (value = "/bookmarks.ris", method = RequestMethod.GET, produces = "application/x-research-info-systems")
+    @RequestMapping(value = "/bookmarks.ris", method = RequestMethod.GET, produces = "application/x-research-info-systems")
     @ResponseBody
     public String getBookmarksRIS(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks) {
         StringBuilder sb = new StringBuilder();
         for (Bookmark bookmark : bookmarks) {
-            sb.append("TY  - ELEC\r\n")
-            .append("TI  - ").append(bookmark.getLabel()).append("\r\n")
-            .append("UR  - ");
+            sb.append("TY  - ELEC\r\n").append("TI  - ").append(bookmark.getLabel()).append("\r\n").append("UR  - ");
             maybePrependLane(sb, bookmark.getUrl());
             sb.append("\r\nER  -\r\n");
         }
