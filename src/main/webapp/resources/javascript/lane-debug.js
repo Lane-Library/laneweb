@@ -150,7 +150,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     
     //load each javascript file separately
     for (i = 0; i < laneJavascript.length; i++) {
-        Y.Get("/././resources/javascript/" + laneJavascript[i], function (err) {
+        Y.Get.js("/././resources/javascript/" + laneJavascript[i], function (err) {
             if (err) {
                 Y.log('Error loading JS: ' + err[0].error, 'error');
                 return;
