@@ -52,6 +52,9 @@
 
     <!-- this is the a= parameter for the online resources -->
     <xsl:param name="alpha"/>
+    
+    <!-- json version of the data model -->
+    <xsl:param name="model"/>
 
     <!-- ==========================  VARIABLES  ========================== -->
 
@@ -183,6 +186,14 @@
                 <xsl:text>//</xsl:text>
             </xsl:comment>
         </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:script[@id='model']/text()">
+        <xsl:text>
+            model = </xsl:text>
+        <xsl:value-of select="$model"/>
+        <xsl:text>
+        </xsl:text>
     </xsl:template>
     
     <!-- match and copy the template body with the attributes from the content body -->

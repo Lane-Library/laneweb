@@ -108,7 +108,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     
     var i, laneJavascript = [
         "lane-ie.js",
-        "lane-mobile-add.js",
+        "lane-mobile-ad.js",
         "lane-persistent-login.js",
         "lane-search-result.js",
         "lane-search-indicator.js",
@@ -127,7 +127,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-lightbox.js",
         "lane-popup.js",
         "lane-metasearch.js",
-        "lane-sarch-facets.js",
+        "lane-search-facets.js",
         "lane-search-facet-counts.js",
         "lane-search-history.js",
         "lane-tooltips.js",

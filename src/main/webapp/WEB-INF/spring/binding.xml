@@ -23,8 +23,26 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmark"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/parameter-map"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/model"/>
             </list>
         </property>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/model"
+        class="edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder">
+        <constructor-arg>
+            <set>
+                <value>ipgroup</value>
+                <value>live-chat-available</value>
+                <value>hashed-sunetid</value>
+                <value>proxy-links</value>
+                <value>base-path</value>
+                <value>sunetid</value>
+                <value>bookmarks</value>
+                <value>name</value>
+                <value>ticket</value>
+            </set>
+        </constructor-arg>
     </bean>
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"
@@ -131,7 +149,6 @@
                 <value>template</value>
                 <value>bassettLargerView</value>
                 <value>none</value>
-                <value>yui-3.6.0</value>
             </list>
         </constructor-arg>
         <constructor-arg>
