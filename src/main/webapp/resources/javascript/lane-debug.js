@@ -105,241 +105,57 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     LANE = {
         search : {}
     };
-    Y.Get.js('/././resources/javascript/lane-ie.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-mobile-ad.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-persistent-login.js', function (err) {
-        if (err) {
-            Y.log('Error loading JS: ' + err[0].error, 'error');
-            return;
-        }
-        });
-    Y.Get.js('/././resources/javascript/lane-search-result.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search-indicator.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-bassett.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-textinputs.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/suggest.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search-pico.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/link-plugin.js', function (err) {
-        if (err) {
-            Y.log('Error loading JS: ' + err[0].error, 'error');
-            return;
-        }
-        });
-    Y.Get.js('/././resources/javascript/bookmarks.js', function (err) {
-        if (err) {
-            Y.log('Error loading JS: ' + err[0].error, 'error');
-            return;
-        }
-        });
-    Y.Get.js('/././resources/javascript/lane-tracking.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/bookmarks-marketing.js', function (err) {
-        if (err) {
-            Y.log('Error loading JS: ' + err[0].error, 'error');
-            return;
-        }
-        });
-    Y.Get.js('/././resources/javascript/bookmark-instructions.js', function (err) {
-        if (err) {
-            Y.log('Error loading JS: ' + err[0].error, 'error');
-            return;
-        }
-        });
-    Y.Get.js('/././resources/javascript/lane-expandies.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-google.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-lightbox.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-popup.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-metasearch.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search-facets.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search-facet-counts.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search-history.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-tooltips.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-spellcheck.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-findit.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-querymap.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-teletype.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-selections.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-popin.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-quicklinks.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-forms.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search-reset.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search-hoverText.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-feedback.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/banner.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/purchase-suggestions.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/menu-delay.js', function (err) {
-    if (err) {
-        Y.log('Error loading JS: ' + err[0].error, 'error');
-        return;
-    }
-    });
-    Y.Get.js('/././resources/javascript/lane-search-printonly.js', function (err) {
-        if (err) {
-            Y.log('Error loading JS: ' + err[0].error, 'error');
-            return;
-        }
-        });
     
-    Y.log('lane-all.js loaded successfully!');
+    var i, laneJavascript = [
+        "lane-ie.js",
+        "lane-mobile-add.js",
+        "lane-persistent-login.js",
+        "lane-search-result.js",
+        "lane-search-indicator.js",
+        "lane-bassett.js",
+        "lane-textinputs.js",
+        "suggest.js",
+        "lane-search-pico.js",
+        "lane-search.js",
+        "link-plugin.js",
+        "bookmarks.js",
+        "lane-tracking.js",
+        "bookmarks-marketing.js",
+        "bookmark-instructions.js",
+        "lane-expandies.js",
+        "lane-google.js",
+        "lane-lightbox.js",
+        "lane-popup.js",
+        "lane-metasearch.js",
+        "lane-sarch-facets.js",
+        "lane-search-facet-counts.js",
+        "lane-search-history.js",
+        "lane-tooltips.js",
+        "lane-spellcheck.js",
+        "lane-findit.js",
+        "lane-querymap.js",
+        "lane-teletype.js",
+        "lane-selections.js",
+        "lane-popin.js",
+        "lane-quicklinks.js",
+        "lane-forms.js",
+        "lane-search-reset.js",
+        "lane-search-hoverText.js",
+        "lane-feedback.js",
+        "banner.js",
+        "purchase-suggestions.js",
+        "menu-delay.js",
+        "lane-search-printonly.js"
+    ];
+    
+    //load each javascript file separately
+    for (i = 0; i < laneJavascript.length; i++) {
+        Y.Get("/././resources/javascript/" + laneJavascript[i], function (err) {
+            if (err) {
+                Y.log('Error loading JS: ' + err[0].error, 'error');
+                return;
+            }
+        });
+    }
     
 });
