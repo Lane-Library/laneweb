@@ -2,7 +2,7 @@
  * @author ceyates
  */
 Y.applyConfig({fetchCSS:true});
-Y.use('console', 'test', function(Y) {
+Y.use('console', 'test', "node-event-simulate", function(Y) {
     
     bookmarkLinkTestCase = new Y.Test.Case({
         
@@ -16,6 +16,11 @@ Y.use('console', 'test', function(Y) {
     
         testExists : function() {
             Y.Assert.isTrue(Y.Lang.isObject(this.link));
+        },
+        
+        testDontShowAlreadyBookmarked : function() {
+            Y.one("#alreadyBookmarked").simulate("mouseover");
+            Y.Assert.areEqual(0, this.link.get("state"));
         }
         
     });
