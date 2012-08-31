@@ -4,15 +4,11 @@
 Y.applyConfig({fetchCSS:true});
 Y.use('console', 'test', "node-event-simulate", function(Y) {
     
-    bookmarkLinkTestCase = new Y.Test.Case({
+    var bookmarkLinkTestCase = new Y.Test.Case({
         
         name : "BookmarkLink Test Case",
         
-        link : null,
-        
-        setUp : function() {
-            this.link = Y.lane.BookmarkLink;
-        },
+        link : Y.lane.BookmarkLink,
     
         testExists : function() {
             Y.Assert.isTrue(Y.Lang.isObject(this.link));
@@ -20,6 +16,11 @@ Y.use('console', 'test', "node-event-simulate", function(Y) {
         
         testDontShowAlreadyBookmarked : function() {
             Y.one("#alreadyBookmarked").simulate("mouseover");
+            Y.Assert.areEqual(0, this.link.get("status"));
+        },
+        
+        testAnotherDontShowAlreadyBookmarked : function() {
+            Y.one("#anotherAlreadyBookmarked").simulate("mouseover");
             Y.Assert.areEqual(0, this.link.get("status"));
         }
         
