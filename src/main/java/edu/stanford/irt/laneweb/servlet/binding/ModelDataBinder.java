@@ -10,7 +10,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -20,6 +19,7 @@ import org.codehaus.jackson.map.module.SimpleModule;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.proxy.Ticket;
 
 public class ModelDataBinder implements DataBinder {
 
@@ -31,8 +31,20 @@ public class ModelDataBinder implements DataBinder {
         }
 
         @Override
-        public void serialize(final IPGroup value, final JsonGenerator jgen, final SerializerProvider provider) throws IOException,
-                JsonProcessingException {
+        public void serialize(final IPGroup value, final JsonGenerator jgen, final SerializerProvider provider) throws IOException {
+            jgen.writeString(value.toString());
+        }
+    }
+
+    private static final class TicketSerializer extends JsonSerializer<Ticket> {
+
+        @Override
+        public Class<Ticket> handledType() {
+            return Ticket.class;
+        }
+
+        @Override
+        public void serialize(final Ticket value, final JsonGenerator jgen, final SerializerProvider provider) throws IOException {
             jgen.writeString(value.toString());
         }
     }
@@ -44,9 +56,10 @@ public class ModelDataBinder implements DataBinder {
     public ModelDataBinder(final Set<String> keys) {
         this.keys = keys;
         this.objectMapper = new ObjectMapper();
-        //add serializer for IPGroup:
+        //add serializers for IPGroup and Ticket:
         SimpleModule module = new SimpleModule("ipgroup", new Version(1, 0, 0, null));
         module.addSerializer(new IPGroupSerializer());
+        module.addSerializer(new TicketSerializer());
         this.objectMapper.registerModule(module);
     }
 
