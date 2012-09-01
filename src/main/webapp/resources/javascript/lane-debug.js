@@ -107,6 +107,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     };
     
     var i, laneJavascript = [
+        "model.js",
         "lane-ie.js",
         "lane-mobile-ad.js",
         "lane-persistent-login.js",
@@ -145,8 +146,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "banner.js",
         "purchase-suggestions.js",
         "menu-delay.js",
-        "lane-search-printonly.js",
-        "model.js"
+        "lane-search-printonly.js"
     ];
     
     //load each javascript file separately
