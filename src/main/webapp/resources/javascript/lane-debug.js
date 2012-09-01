@@ -145,7 +145,8 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "banner.js",
         "purchase-suggestions.js",
         "menu-delay.js",
-        "lane-search-printonly.js"
+        "lane-search-printonly.js",
+        "model.js"
     ];
     
     //load each javascript file separately
