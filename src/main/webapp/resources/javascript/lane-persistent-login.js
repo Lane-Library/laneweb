@@ -9,8 +9,7 @@
 	auth = Y.one('html head meta[name="auth"]'),
 	metaGroup = Y.one('html head meta[name="ipGroup"]'),	
 	fromHospital = false;
-	
-	if (!metaGroup && ("SHC" == metaGroup.get("content") || "LPCH" == metaGroup.get("content"))){
+	if (metaGroup && ("SHC" == metaGroup.get("content") || "LPCH" == metaGroup.get("content"))){
 		fromHospital = true;
 	}
 	if(fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
