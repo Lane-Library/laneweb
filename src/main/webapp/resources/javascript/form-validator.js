@@ -1,3 +1,4 @@
+
 (function() {
     //All that is left of lane-forms.js after switching to the gallery version of formvalidator
 
@@ -12,4 +13,44 @@
     }
 
     
+
+Y.add("lane-form-validator", function(Y) {
+    
+    Y.namespace("lane");
+    
+    var FormValidator = function(form) {
+        var i, node, validator, inputFields,
+            nodes = form.all("input[title='required']"),
+            fieldJSON = [];
+        for (i = 0; i < nodes.size(); i++) {
+            node = nodes.item(i);
+            (new Y.lane.TextInput(node));
+            fieldJSON.push({
+                type : Y.TextBaseField,
+                atts : {
+                    inputDOM : Y.Node.getDOMNode(node),
+                    correctCss : "correct",
+                    incorrectCss : "incorrect",
+                    isOn : true
+                }
+            });
+        }
+        validator = new Y.Validator({
+            form : Y.Node.getDOMNode(form),
+            fieldJSON : fieldJSON,
+            checkOnSubmit : true
+        });
+        inputFields = validator.get("inputFields");
+        for (i = 0; i < inputFields.length; i++) {
+            inputFields[i].isEmpty = function() {
+                var node = this.get("inputDOM");
+                return node.value === '' || node.value == node.title;
+            };
+        }
+    };
+    
+    Y.lane.FormValidator = FormValidator;
+}, "", { requires: ["gallery-formvalidator"]});
+
+
 })();

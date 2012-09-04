@@ -57,7 +57,7 @@ public class ModelDataBinder implements DataBinder {
         this.keys = keys;
         this.objectMapper = new ObjectMapper();
         //add serializers for IPGroup and Ticket:
-        SimpleModule module = new SimpleModule("ipgroup", new Version(1, 0, 0, null));
+        SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null));
         module.addSerializer(new IPGroupSerializer());
         module.addSerializer(new TicketSerializer());
         this.objectMapper.registerModule(module);
