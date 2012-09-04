@@ -32,15 +32,15 @@
         class="edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder">
         <constructor-arg>
             <set>
-                <value>ipgroup</value>
+                <value>base-path</value>
+                <!--<value>ipgroup</value>
                 <value>live-chat-available</value>
                 <value>hashed-sunetid</value>
                 <value>proxy-links</value>
-                <value>base-path</value>
                 <value>sunetid</value>
                 <value>bookmarks</value>
                 <value>name</value>
-                <value>ticket</value>
+                <value>ticket</value>-->
             </set>
         </constructor-arg>
     </bean>
