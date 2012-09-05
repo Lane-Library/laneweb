@@ -6,8 +6,9 @@
 	persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME), 
 	now = new Date(),
 	needPopup= true,
-	auth = Y.one('html head meta[name="auth"]'),
-	ipgroup = Y.lane.Model.get("ipgroup"),
+	model = Y.lane.Model,
+	auth = model.get("auth"),
+	ipgroup = model.get("ipgroup"),
 	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup;
 	
 	if(fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
@@ -67,7 +68,7 @@
 	if(Y.one('#persistent-login')){
 		Y.on('click',function(event) {
 			event.preventDefault();
-			if (auth && "" != auth.get("content")) {
+			if (auth) {
 				document.location = '/././persistentLogin.html?pl=renew&url=/myaccounts.html';
 			} else {
 				document.location = '/././secure/persistentLogin.html?pl=true';
@@ -83,7 +84,7 @@
 		if (node.get('tagName') === 'SPAN') {
 			node = node.get('parentNode');
 		}
-		if ( auth && "" === auth.get("content") ||  node.get('search').indexOf("pl=true") >0 ) {	
+		if ( !auth ||  node.get('search').indexOf("pl=true") >0 ) {	
 			url = url + 'secure/';
 		}
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;

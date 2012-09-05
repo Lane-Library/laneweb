@@ -6,6 +6,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 
 public class HashedSunetIdDataBinderTest {
 
@@ -29,8 +29,6 @@ public class HashedSunetIdDataBinderTest {
 
     private HttpSession session;
 
-    private SunetIdSource sunetIdSource;
-
     @Before
     public void setUp() throws Exception {
         this.dataBinder = new HashedSunetIdDataBinder();
@@ -38,34 +36,39 @@ public class HashedSunetIdDataBinderTest {
         this.model = new HashMap<String, Object>();
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
-        this.sunetIdSource = createMock(SunetIdSource.class);
-        this.dataBinder.setSunetIdSource(this.sunetIdSource);
     }
 
     @Test
     public void testBind() {
+        this.model.put(Model.SUNETID, "ditenus");
         expect(this.request.getSession()).andReturn(this.session);
-        expect(this.session.getAttribute(Model.HASHED_SUNETID)).andReturn(null);
-        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("ditenus");
-        this.session.setAttribute(Model.HASHED_SUNETID, "027204c8263a79b02a8cf231399073ed");
-        this.model.put(Model.HASHED_SUNETID, "027204c8263a79b02a8cf231399073ed");
-        replay(this.request, this.session, this.sunetIdSource);
+        expect(this.session.getAttribute(Model.AUTH)).andReturn(null);
+        this.session.setAttribute(Model.AUTH, "027204c8263a79b02a8cf231399073ed");
+        this.model.put(Model.AUTH, "027204c8263a79b02a8cf231399073ed");
+        replay(this.request, this.session);
         this.dataBinder.bind(this.model, this.request);
-        assertNotNull(this.model.get(Model.HASHED_SUNETID));
-        assertEquals("027204c8263a79b02a8cf231399073ed", this.model.get(Model.HASHED_SUNETID));
-        verify(this.request, this.session, this.sunetIdSource);
+        assertNotNull(this.model.get(Model.AUTH));
+        assertEquals("027204c8263a79b02a8cf231399073ed", this.model.get(Model.AUTH));
+        verify(this.request, this.session);
     }
 
     @Test
     public void testBindNoSunetId() {
         expect(this.request.getSession()).andReturn(this.session);
-        expect(this.session.getAttribute(Model.HASHED_SUNETID)).andReturn(null);
-        expect(this.sunetIdSource.getSunetid(this.request)).andReturn(null);
-        this.model.put(Model.HASHED_SUNETID, "");
-        replay(this.request, this.session, this.sunetIdSource);
+        expect(this.session.getAttribute(Model.AUTH)).andReturn(null);
+        replay(this.request, this.session);
         this.dataBinder.bind(this.model, this.request);
-        assertNotNull(this.model.get(Model.HASHED_SUNETID));
-        assertEquals("", this.model.get(Model.HASHED_SUNETID));
-        verify(this.request, this.session, this.sunetIdSource);
+        assertNull(this.model.get(Model.AUTH));
+        verify(this.request, this.session);
+    }
+    
+    @Test
+    public void testHashedInSession() {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.session.getAttribute(Model.AUTH)).andReturn(Model.AUTH);
+        replay(this.request, this.session);
+        this.dataBinder.bind(this.model, this.request);
+        assertEquals(Model.AUTH, this.model.get(Model.AUTH));
+        verify(this.request, this.session);
     }
 }

@@ -3,8 +3,9 @@
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = document.location.host,
-                ipgroup,
-                userId = LANE.tracking.getUserId();
+                model = Y.lane.Model,
+                ipgroup = model.get("ipgroup"),
+                auth = model.get("auth");
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
                     gaPageTracker = _gat._createTracker("UA-3202241-2","gaPageTracker");
@@ -14,15 +15,14 @@
                 //uncomment this for testing/debugging:
                 //gaPageTracker._setLocalServerMode();
                 gaPageTracker._setDomainName(".stanford.edu");
-                ipgroup = Y.lane.Model.get("ipgroup");
                 if (ipgroup) {
                     gaPageTracker._setVar(ipgroup);
                     gaPageTracker._setCustomVar(1,'ipGroup',ipgroup ,2);
                 }
-                if (userId !== null) {
-                    gaPageTracker._setCustomVar(2,'authenticatedSession',userId,2);
+                if (auth) {
+                    gaPageTracker._setCustomVar(2,'authenticatedSession',auth,2);
                     if (Y.lane.BookmarksWidget && Y.lane.BookmarksWidget.get("bookmarks").size() > 0) {
-                        gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',userId,2);
+                        gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',auth,2);
                     }
                 }
                 gaPageTracker._trackPageview();

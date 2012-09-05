@@ -1,4 +1,7 @@
 (function() {
+    
+    var model = Y.lane.Model;
+    
         LANE.tracking = function() {
             //TODO more descriptive variable names
             //TODO put conditionals into sub-functions
@@ -12,7 +15,7 @@
                 }
                 if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
                     category = "lane:bookmarkClick";
-                    action = LANE.tracking.getUserId();
+                    action = model.get("auth");
                     label = LANE.tracking.getTrackedTitle(link);
                 }
                 if (link.ancestor(".lwSearchResults")) {
@@ -171,13 +174,6 @@
                     }
                     return title;
                 },
-                getUserId : function(){
-                    var auth = Y.one('html head meta[name="auth"]'), userId = null;
-                    if (auth && auth.get('content')) {
-                        userId = auth.get('content');
-                    }
-                    return userId;
-                },
                 isTrackableAsEvent: function(event) {
                     if (!enabled) {
                         return false;
@@ -322,7 +318,7 @@
             Y.lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
                 Y.fire("lane:trackableEvent", {
                     category: "lane:bookmarkAdd",
-                    action: LANE.tracking.getUserId(),
+                    action: model.get("auth"),
                     label: event.bookmark.getLabel()
                 });
             });

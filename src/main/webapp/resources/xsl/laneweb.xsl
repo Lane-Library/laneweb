@@ -27,8 +27,6 @@
     
     <xsl:param name="email"/>
 
-    <xsl:param name="hashed-sunetid"/>
-
     <!-- a MeSH term -->
     <xsl:param name="mesh"/>
 
@@ -269,13 +267,6 @@
 
     <!-- remove http-equiv meta elements-->
     <xsl:template match="h:meta[@http-equiv != 'refresh']"/>
-
-    <!-- set the content of meta element "auth" to true if user is logged in (for reporting statistics) -->
-    <xsl:template match="h:meta[@name='auth']/@content">
-        <xsl:attribute name="content">
-            <xsl:value-of select="$hashed-sunetid"/>
-        </xsl:attribute>
-    </xsl:template>
 
     <!-- combines the template title value with the value of the title of the source document -->
     <xsl:template match="h:title">

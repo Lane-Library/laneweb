@@ -8,7 +8,7 @@
         <property name="dataBinders">
             <list>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/hashed-sunetid"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/auth"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"/>
@@ -34,8 +34,8 @@
             <set>
                 <value>base-path</value>
                 <value>ipgroup</value>
+                <value>auth</value>
                 <!--<value>live-chat-available</value>
-                <value>hashed-sunetid</value>
                 <value>proxy-links</value>
                 <value>sunetid</value>
                 <value>bookmarks</value>
@@ -51,10 +51,9 @@
         <property name="sunetIdSource" ref="edu.stanford.irt.laneweb.servlet.SunetIdSource"/>
     </bean>
     
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/hashed-sunetid"
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/auth"
         class="edu.stanford.irt.laneweb.servlet.binding.HashedSunetIdDataBinder">
          <property name="sunetidHashKey" value="%{laneweb.sunetidhashkey}"/>
-        <property name="sunetIdSource" ref="edu.stanford.irt.laneweb.servlet.SunetIdSource"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"

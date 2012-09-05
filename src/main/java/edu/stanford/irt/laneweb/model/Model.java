@@ -9,6 +9,8 @@ public interface Model {
 
     String ALPHA = "alpha";
 
+    String AUTH = "auth";
+
     String BANNER = "banner";
 
     String BASE_PATH = "base-path";
@@ -38,8 +40,6 @@ public interface Model {
     String EXPIRES = "expires";
 
     String FACETS = "facets";
-
-    String HASHED_SUNETID = "hashed-sunetid";
 
     String HISTORY = "history";
 

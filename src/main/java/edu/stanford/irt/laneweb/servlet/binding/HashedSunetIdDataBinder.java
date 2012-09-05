@@ -10,26 +10,26 @@ import javax.servlet.http.HttpSession;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 
+//TODO: combine this into SunetIdAndTicketDataBinder
 public class HashedSunetIdDataBinder implements DataBinder {
 
     private String sunetidHashKey;
 
-    private SunetIdSource sunetIdSource;
-
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String sessionHashedSunetid = (String) session.getAttribute(Model.HASHED_SUNETID);
-        String hashedSunetid = sessionHashedSunetid != null ? sessionHashedSunetid : "";
-        String sunetid = this.sunetIdSource.getSunetid(request);
-        if (hashedSunetid.isEmpty() && sunetid != null) {
-            hashedSunetid = getDigest(getDigest(this.sunetidHashKey + sunetid));
-            if (hashedSunetid != null) {
-                session.setAttribute(Model.HASHED_SUNETID, hashedSunetid);
+        String sessionHashedSunetid = (String) session.getAttribute(Model.AUTH);
+        if (sessionHashedSunetid == null) {
+            String sunetid = ModelUtil.getString(model, Model.SUNETID);
+            if (sunetid != null) {
+                String hashedSunetid = getDigest(getDigest(this.sunetidHashKey + sunetid));
+                session.setAttribute(Model.AUTH, hashedSunetid);
+                model.put(Model.AUTH, hashedSunetid);
             }
+        } else {
+            model.put(Model.AUTH, sessionHashedSunetid);
         }
-        model.put(Model.HASHED_SUNETID, hashedSunetid);
     }
 
     private String getDigest(final String buffer) {
@@ -50,9 +50,5 @@ public class HashedSunetIdDataBinder implements DataBinder {
 
     public void setSunetidHashKey(final String sunetidHashKey) {
         this.sunetidHashKey = sunetidHashKey;
-    }
-
-    public void setSunetIdSource(final SunetIdSource sunetIdSource) {
-        this.sunetIdSource = sunetIdSource;
     }
 }

@@ -7,7 +7,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
-        <meta name="auth" content=""/>
     </head>
     <body>
         <div id="custom-doc" class="yui-t7">
