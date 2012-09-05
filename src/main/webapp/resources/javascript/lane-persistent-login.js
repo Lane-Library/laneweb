@@ -7,11 +7,9 @@
 	now = new Date(),
 	needPopup= true,
 	auth = Y.one('html head meta[name="auth"]'),
-	metaGroup = Y.one('html head meta[name="ipGroup"]'),	
-	fromHospital = false;
-	if (metaGroup && ("SHC" == metaGroup.get("content") || "LPCH" == metaGroup.get("content"))){
-		fromHospital = true;
-	}
+	ipgroup = Y.lane.Model.get("ipgroup"),
+	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup;
+	
 	if(fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
 		needPopup = false;
 	}

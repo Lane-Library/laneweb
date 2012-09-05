@@ -3,7 +3,7 @@
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = document.location.host,
-                meta, 
+                ipgroup,
                 userId = LANE.tracking.getUserId();
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
@@ -14,10 +14,10 @@
                 //uncomment this for testing/debugging:
                 //gaPageTracker._setLocalServerMode();
                 gaPageTracker._setDomainName(".stanford.edu");
-                meta = Y.one('html head meta[name="ipGroup"]');
-                if (meta) {
-                    gaPageTracker._setVar(meta.get('content'));
-                    gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);
+                ipgroup = Y.lane.Model.get("ipgroup");
+                if (ipgroup) {
+                    gaPageTracker._setVar(ipgroup);
+                    gaPageTracker._setCustomVar(1,'ipGroup',ipgroup ,2);
                 }
                 if (userId !== null) {
                     gaPageTracker._setCustomVar(2,'authenticatedSession',userId,2);
