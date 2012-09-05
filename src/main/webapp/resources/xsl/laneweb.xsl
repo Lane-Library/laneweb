@@ -190,9 +190,9 @@
     
     <xsl:template match="h:script[@id='model']/text()">
         <xsl:text>
-            model = </xsl:text>
+            var model = </xsl:text>
         <xsl:value-of select="$model"/>
-        <xsl:text>
+        <xsl:text>;
         </xsl:text>
     </xsl:template>
     
