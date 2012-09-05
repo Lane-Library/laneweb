@@ -50,9 +50,13 @@
             });
         },
         syncUI : function() {
-            var activeItem = this.get("activeItem");
+            var activeItem = this.get("activeItem"), items = this.get("items"), i;
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
-            this.get("items").item(activeItem).addClass(this.getClassName("item", "active"));
+            items.item(activeItem).addClass(this.getClassName("item", "active"));
+            //add form validator to each form:
+            for (i = 0; i < items.size(); i++) {
+            	(new Y.lane.FormValidator(items.item(i).one("form")));
+            }
         },
         _fixForIE6 : function() {
             var boundingBox = this.get("boundingBox");
@@ -93,7 +97,7 @@
         if (Y.one("#feedback")) {
             var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
                 url = Y.lane.Lightbox.get("url"),
-                hash, items, index, textInputs, title, i;
+                hash, items, index;//, textInputs, title, i;
             feedback.render();
             //if there is a hash in the url, choose that as the active item
             if (url.indexOf("#") > -1) {
@@ -106,13 +110,13 @@
             }
 
             //create a TextInput object for each <input type="text"/>
-            textInputs = new Y.one("#feedback").all('input[type="text"]');
-            for (i = 0; i < textInputs.size(); i++) {
-                title = textInputs.item(i).get('title');
-                if (title) {
-                    (new Y.lane.TextInput(textInputs.item(i), title));
-                }
-            }
+//            textInputs = new Y.one("#feedback").all('input[type="text"]');
+//            for (i = 0; i < textInputs.size(); i++) {
+//                title = textInputs.item(i).get('title');
+//                if (title) {
+//                    (new Y.lane.TextInput(textInputs.item(i), title));
+//                }
+//            }
         }
     });
     
