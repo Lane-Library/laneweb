@@ -19,7 +19,9 @@
             fieldJSON = [];
         for (i = 0; i < nodes.size(); i++) {
             node = nodes.item(i);
-            (new Y.lane.TextInput(node));
+            (new Y.lane.TextInput(node, "required"));
+            //remove incorrect styling on focus
+            node.on("focus", function(event) {event.target.removeClass("incorrect");});
             fieldJSON.push({
                 type : Y.TextBaseField,
                 atts : {

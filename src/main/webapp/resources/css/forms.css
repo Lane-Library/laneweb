@@ -34,11 +34,3 @@
 .fieldRow {
     clear : both;
 }
-/* .incorrect is for the suggestions for purchase lightbox form */
-#purchase .incorrect {
-    background-color : #F0E8D8;
-    color : #920000;
-    background-image : url(/././resources/images/required.png);
-    background-repeat : no-repeat;
-    background-position : right center
-}

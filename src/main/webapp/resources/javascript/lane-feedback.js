@@ -22,6 +22,9 @@
         items : {
             value : null,
             writeOnce : true
+        },
+        validator : {
+            value: null
         }
     };
     
@@ -53,9 +56,11 @@
             var activeItem = this.get("activeItem"), items = this.get("items"), i;
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
             items.item(activeItem).addClass(this.getClassName("item", "active"));
-            //add form validator to each form:
+            //add form validator to each form that has required inputs:
             for (i = 0; i < items.size(); i++) {
-            	(new Y.lane.FormValidator(items.item(i).one("form")));
+                if (items.item(i).one("input[title='required']")) {
+                    this.set("validator", new Y.lane.FormValidator(items.item(i).one("form")));
+                }
             }
         },
         _fixForIE6 : function() {

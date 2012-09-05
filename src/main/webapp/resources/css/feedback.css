@@ -160,6 +160,14 @@
     -webkit-box-shadow : rgba(0, 0, 0, 0.1) 0px 0px 8px;
 }
 
+/* .incorrect is for the invalid for text inputs */
+#feedback .incorrect {
+    background-color : #F0E8D8;
+    color : #920000;
+    background-image : url(/././resources/images/required.png);
+    background-repeat : no-repeat;
+    background-position : right center
+}
 #feedback select {
 	border: 2px solid #C9C9C9;
 	width : 100%;
