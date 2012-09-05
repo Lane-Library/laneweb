@@ -1,9 +1,6 @@
-if (!window.location.search) {
-    window.location = window.location + '?source=foo&q=bar+baz';
-}
 Y.applyConfig({fetchCSS:true});
 Y.use('node-event-simulate','console','test', function(Y) {
-    
+
     var resultTestCase = new Y.Test.Case({
         
         name: 'Lane Result Test Case',

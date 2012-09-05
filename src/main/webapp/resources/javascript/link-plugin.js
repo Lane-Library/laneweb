@@ -23,6 +23,7 @@
 	    TITLE = "title",
 	    PROXY = "proxy",
 	    ALT = "alt",
+	    SRC = "src",
     
     LinkPlugin = function(config) {
         LinkPlugin.superclass.constructor.apply(this, arguments);
