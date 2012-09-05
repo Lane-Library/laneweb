@@ -2,7 +2,7 @@
  * @author ceyates
  */
 Y.applyConfig({fetchCSS:true});
-Y.use('node-event-simulate','console','test', function(Y) {
+Y.use('console','test', function(Y) {
 
     
     var modelTestCase = new Y.Test.Case({
