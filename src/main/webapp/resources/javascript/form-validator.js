@@ -12,12 +12,7 @@
         });
     }
 
-    
-//TODO: Y.add doesn't work, unless maybe I do a Y.use after it.
-Y.add("lane-form-validator", function(Y) {
-    
-    Y.namespace("lane");
-    
+//FormValidator class    
     var FormValidator = function(form) {
         var i, node, validator, inputFields,
             nodes = form.all("input[title='required']"),
@@ -49,13 +44,8 @@ Y.add("lane-form-validator", function(Y) {
         }
     };
     
+    Y.namespace("lane");
     Y.lane.FormValidator = FormValidator;
-}, "", { requires: ["gallery-formvalidator"]});
 
 
 })();
-
-Y.use("lane-form-validator", function(Y) {
-	var form = Y.Node.create("<form><input type='text' title='required'/></form>");
-	(new Y.lane.FormValidator(form));
-});
