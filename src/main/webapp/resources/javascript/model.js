@@ -1,15 +1,23 @@
+//YUI.add("lane-model", function(Y){
 (function() {
-
-	var Model = function() {
+    
+    Y.namespace("lane");
+    
+    var LANE = Y.lane,
+    
+    Model = function() {
         Model.superclass.constructor.apply(this, arguments);
     };
     
     Model.NAME = "model";
     
-	Y.extend(Model, Y.Base);
+    Y.extend(Model, Y.Base);
     
-    Y.lane.Model = new Model();
+    LANE.Model = new Model();
     
-    Y.lane.Model.setAttrs(window.model);
+    LANE.Model.setAttrs(window.model || {});
     
 })();
+//},"", {
+//    requires: ["base"]
+//});

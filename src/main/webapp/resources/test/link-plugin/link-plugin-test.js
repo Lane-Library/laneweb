@@ -1,6 +1,5 @@
 Y.applyConfig({fetchCSS:true});
-Y.use("test", "console", function(Y){
-    
+Y.use("test", "console", "lane-link-plugin", "node-pluginhost", function(Y){
 
     var linkTestCase = new Y.Test.Case({
         name: "Lane Link Test Case",

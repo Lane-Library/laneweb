@@ -2,9 +2,29 @@
  * LinkPlugin is an plugin for anchor nodes to provide
  * valuable information about such things as proxy status, etc.
  */
+//YUI.add("lane-link-plugin", function(Y) {
 (function() {
+	
+	Y.namespace("lane");
+	
+	var LANE = Y.lane,
+	    basePath = LANE.Model.get("base-path") || "",
+	    DOCUMENT_HOST = document.location.host,
+	    PROXY_HOST = "laneproxy.stanford.edu",
+	    PROXY_LOGIN_PATH = "/login",
+	    COOKIES_FETCH_PATH = basePath + "/cookiesFetch.html",
+	    LOGIN_PATH = basePath + "/secure/apps/proxy/credential",
+	    PATH = "path",
+	    HOST = "host",
+	    LINK_HOST = "linkHost",
+	    PROXY_LOGIN = "proxyLogin",
+	    COOKIES_FETCH = "cookiesFetch",
+	    LOCAL = "local",
+	    TITLE = "title",
+	    PROXY = "proxy",
+	    ALT = "alt",
     
-    var LinkPlugin = function(config) {
+    LinkPlugin = function(config) {
         LinkPlugin.superclass.constructor.apply(this, arguments);
     };
     
@@ -12,29 +32,19 @@
     
     LinkPlugin.NAME = "linkPlugin";
     
-    LinkPlugin.COOKIES_FETCH_PATH = "/././cookiesFetch.html";
-    
-    LinkPlugin.DOCUMENT_HOST = document.location.host;
-    
-    LinkPlugin.LOGIN_PATH = "/././secure/apps/proxy/credential";
-    
-    LinkPlugin.PROXY_HOST = "laneproxy.stanford.edu";
-    
-    LinkPlugin.PROXY_LOGIN_PATH = "/login";
-    
     LinkPlugin.ATTRS = {
             cookiesFetch : {
                 readOnly : true,
                 valueFn : function() {
-                    var path = this.get("path");
-                    return path !== undefined && path.indexOf(LinkPlugin.COOKIES_FETCH_PATH) === 0;
+                    var path = this.get(PATH);
+                    return path !== undefined && path.indexOf(COOKIES_FETCH_PATH) === 0;
                 }
             },
             linkHost : {
                 readOnly : true,
                 valueFn : function() {
-                    var host = this.get("host").get("host");
-                    host = host || LinkPlugin.DOCUMENT_HOST;
+                    var host = this.get(HOST).get(HOST);
+                    host = host || DOCUMENT_HOST;
                     //TODO: need to check for :443, too?
                     if (host.indexOf(":80") > -1) {
                         host = host.substring(0, host.indexOf(":"));
@@ -45,15 +55,15 @@
             local : {
                 readOnly : true,
                 valueFn : function() {
-                    return this.get("linkHost") === LinkPlugin.DOCUMENT_HOST ?
-                            !this.get("proxyLogin") && !this.get("cookiesFetch")
+                    return this.get(LINK_HOST) === DOCUMENT_HOST ?
+                            !this.get(PROXY_LOGIN) && !this.get(COOKIES_FETCH)
                             : false;
                 }
             },
             path : {
                 readOnly : true,
                 valueFn : function() {
-                    var path = this.get("host").get("pathname");
+                    var path = this.get(HOST).get("pathname");
                     path = path === undefined || path === "" ? document.location.pathname : path;
                     return path.indexOf("/") === 0 ? path : "/" + path;
                 }
@@ -61,25 +71,25 @@
             proxy : {
                 readOnly : true,
                 valueFn : function() {
-                    return this.get("linkHost") === LinkPlugin.PROXY_HOST
-                    && this.get("path") === LinkPlugin.PROXY_LOGIN_PATH;
+                    return this.get(LINK_HOST) === PROXY_HOST
+                    && this.get(PATH) === PROXY_LOGIN_PATH;
                 }
             },
             proxyLogin : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get("linkHost") != LinkPlugin.DOCUMENT_HOST) {
+                    if (this.get(LINK_HOST) != DOCUMENT_HOST) {
                         return false;
                     } else {
-                        return this.get("path") === LinkPlugin.LOGIN_PATH;
+                        return this.get(PATH) === LOGIN_PATH;
                     }
                 }
             },
             query : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get("local")) {
-                        return this.get("host").get("search");
+                    if (this.get(LOCAL)) {
+                        return this.get(HOST).get("search");
                     } else {
                         //TODO: implement query for external links.
                         return "";
@@ -90,30 +100,30 @@
                 readOnly : true,
                 valueFn : function() {
                     //if there is a title attribute, use that.
-                    var node = this.get("host"), title = node.get('title'), img, i, rel, relTokens;
+                    var node = this.get(HOST), title = node.get(TITLE), img, i, rel, relTokens;
                     //if there is rel="popup .." then create a title from it.
                     rel = node.get('rel');
                     if (rel && rel.indexOf('popup') === 0) {
                         relTokens = rel.split(' ');
-                        if (relTokens[1] == 'local') {
+                        if (relTokens[1] == LOCAL) {
                             title = 'YUI Pop-up [local]';
                         }
                     }
                     //next try alt attribute.
                     if (!title) {
-                        title = node.get('alt');
+                        title = node.get(ALT);
                     }
                     //next look for alt attributes in any child img.
                     if (!title) {
                         img = node.all('img');
                         if (img) {
                             for (i = 0; i < img.size(); i++) {
-                                if (img.item(i).get('alt')) {
-                                    title = img.item(i).get('alt');
+                                if (img.item(i).get(ALT)) {
+                                    title = img.item(i).get(ALT);
                                     break;
                                 }
-                                else if (img.item(i).get('src')) {
-                                    title = img.item(i).get('src');
+                                else if (img.item(i).get(SRC)) {
+                                    title = img.item(i).get(SRC);
                                     break;
                                 }
                             }
@@ -146,9 +156,9 @@
             trackable : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get("host").getAttribute("trackable")) {
+                    if (this.get(HOST).getAttribute("trackable")) {
                         return true;
-                    } else if (this.get("local") && (/\.html$/).test(this.get("path"))) {
+                    } else if (this.get(LOCAL) && (/\.html$/).test(this.get(PATH))) {
                         return false;
                     } else {
                         return true;
@@ -159,7 +169,7 @@
                 readOnly : true,
                 valueFn : function() {
                     var host, path, query, title, external;
-                    if (this.get("cookiesFetch") || this.get("proxy") || this.get("proxyLogin")) {
+                    if (this.get(COOKIES_FETCH) || this.get(PROXY) || this.get(PROXY_LOGIN)) {
                         host = this.get("url");
                         host = host.substring(host.indexOf("//") + 2);
                         if (host.indexOf("/") > -1) {
@@ -167,11 +177,11 @@
                             host = host.substring(0, host.indexOf("/"));
                         }
                     } else {
-                        host = this.get("linkHost");
-                        path = this.get("path");
+                        host = this.get(LINK_HOST);
+                        path = this.get(PATH);
                     }
-                    title = this.get("title");
-                    external = !this.get("local");
+                    title = this.get(TITLE);
+                    external = !this.get(LOCAL);
                     query = external ? "" : document.location.search;
                     return {
                         host: host,
@@ -185,10 +195,10 @@
             url : {
                 readOnly : true,
                 valueFn : function() {
-                    var href = this.get("host").get("href");
-                    if (this.get("proxy") || this.get("proxyLogin")) {
+                    var href = this.get(HOST).get("href");
+                    if (this.get(PROXY) || this.get(PROXY_LOGIN)) {
                         href = href.substring(href.indexOf("url=") + 4);
-                    } else if (this.get("cookiesFetch")) {
+                    } else if (this.get(COOKIES_FETCH)) {
                         href = href.substring(href.indexOf("url=") + 4);
                         href = href.substring(0, href.indexOf("&"));
                         href = window.decodeURIComponent(href);
@@ -200,6 +210,10 @@
 
     Y.extend(LinkPlugin, Y.Plugin.Base);
     
-    Y.lane.LinkPlugin = LinkPlugin;
-
+    LANE.LinkPlugin = LinkPlugin;
+    
 })();
+
+//}, "", {
+//	requires : ["lane-model", "plugin"]
+//});

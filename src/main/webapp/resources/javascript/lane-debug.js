@@ -109,6 +109,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     
     var i, laneJavascript = [
         "model.js",
+        "link-plugin.js",
         "lane-ie.js",
         "lane-mobile-ad.js",
         "lane-persistent-login.js",
@@ -119,7 +120,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "suggest.js",
         "lane-search-pico.js",
         "lane-search.js",
-        "link-plugin.js",
         "bookmarks.js",
         "lane-tracking.js",
         "bookmarks-marketing.js",

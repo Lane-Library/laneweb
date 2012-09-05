@@ -211,6 +211,7 @@
                             <includes>
                                 <include>lane-min.js</include>
                                 <include>model-min.js</include>
+                                <include>link-plugin-min.js</include>
                                 <include>lane-ie-min.js</include>
                                 <include>lane-mobile-ad-min.js</include>
                                 <include>lane-persistent-login-min.js</include>
@@ -221,7 +222,6 @@
                                 <include>suggest-min.js</include>
                                 <include>lane-search-pico-min.js</include>
                                 <include>lane-search-min.js</include>
-                                <include>link-plugin-min.js</include>
                                 <include>bookmarks-min.js</include>
                                 <include>lane-tracking-min.js</include>
                                 <!-- TODO: remove bookmarks-marketing when appropriate -->

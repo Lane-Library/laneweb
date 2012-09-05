@@ -13,7 +13,7 @@
     }
 
     
-
+//TODO: Y.add doesn't work, unless maybe I do a Y.use after it.
 Y.add("lane-form-validator", function(Y) {
     
     Y.namespace("lane");
@@ -54,3 +54,8 @@ Y.add("lane-form-validator", function(Y) {
 
 
 })();
+
+Y.use("lane-form-validator", function(Y) {
+	var form = Y.Node.create("<form><input type='text' title='required'/></form>");
+	(new Y.lane.FormValidator(form));
+});
