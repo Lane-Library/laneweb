@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-09-10" version="1.13.10" description="1.13.10 bug fix release">
+            <action date="2012-09-05" issue="75365" dev="ceyates" type="update">
+                enable validation for inputs in all feedback forms 
+            </action>
+            <action date="2012-09-05" issue="75288" dev="ceyates" type="add">
+                put some of the data model into the page as a json object 
+            </action>
+            <action date="2012-08-31" issue="75248" dev="alainb" type="fix">
+                Feedback-bug:  logging in wipes out whatever I have in the Lane search 
+            </action>
+            <action date="2012-08-31" issue="75199" dev="ceyates" type="update">
+                don't show bookmark link for links with urls already bookmarked 
+            </action>
+            <action date="2012-08-29" issue="75099" dev="ceyates" type="update">
+                Reduce frequency of appearance of  'create personal bookmarks' 
+            </action>
+            <action date="2012-08-31" issue="74996" dev="ceyates" type="add">
+                provide bookmarks in various formats for export 
+            </action>
+        </release>
         <release date="2012-08-27" version="1.13.9" description="1.13.9 bug fix release">
             <action date="2012-08-24" issue="74954" dev="olgary" type="update">
                 redesign-june-2011 styles merged 
