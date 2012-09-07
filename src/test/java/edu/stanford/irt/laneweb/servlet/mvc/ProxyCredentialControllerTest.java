@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.proxy.Ticket;
 import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
@@ -64,8 +65,9 @@ public class ProxyCredentialControllerTest {
     public void testProxyRedirect() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
-        assertEquals("redirect:http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
-                + "&url=http://www.pubmed.foo/search?q=a&b=c", this.controller.proxyRedirect(this.request, null, "ditenus", this.ticket));
+        RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, "ditenus", this.ticket);
+        assertEquals("http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
+                + "&url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.binder);
     }
 
@@ -85,8 +87,8 @@ public class ProxyCredentialControllerTest {
     public void testProxyRedirectNullSunetid() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
-        assertEquals("redirect:/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c",
-                this.controller.proxyRedirect(this.request, null, null, this.ticket));
+        RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, null, this.ticket);
+        assertEquals("/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.binder);
     }
 
@@ -94,8 +96,8 @@ public class ProxyCredentialControllerTest {
     public void testProxyRedirectNullTicket() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
-        assertEquals("redirect:/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c",
-                this.controller.proxyRedirect(this.request, null, "ditenus", null));
+        RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, "ditenus", null);
+        assertEquals("/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.binder);
     }
 
@@ -115,9 +117,9 @@ public class ProxyCredentialControllerTest {
     public void testSecureRedirect() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
-        assertEquals("redirect:http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
-                + "&url=http://www.pubmed.foo/search?q=a&b=c",
-                this.controller.secureProxyRedirect(this.request, null, "ditenus", this.ticket));
+        RedirectView view = (RedirectView) this.controller.secureProxyRedirect(this.request, null, "ditenus", this.ticket);
+        assertEquals("http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
+                + "&url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.binder);
     }
 }

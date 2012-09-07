@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
@@ -27,12 +29,12 @@ public class ProxyCredentialController {
     }
 
     @RequestMapping(value = "**/apps/proxy/credential")
-    public String proxyRedirect(
+    public View proxyRedirect(
             final HttpServletRequest request,
             final RedirectAttributes attrs,
             @ModelAttribute(Model.SUNETID) final String sunetid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
-        StringBuilder sb = new StringBuilder("redirect:");
+        StringBuilder sb = new StringBuilder();
         String queryString = request.getQueryString();
         if (queryString == null) {
             throw new IllegalArgumentException("null queryString");
@@ -42,11 +44,13 @@ public class ProxyCredentialController {
         } else {
             sb.append(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket).append('&').append(queryString);
         }
-        return sb.toString();
+        RedirectView view = new RedirectView(sb.toString(), true, true);
+        view.setExpandUriTemplateVariables(false);
+        return view;
     }
 
     @RequestMapping(value = "**/secure/apps/proxy/credential")
-    public String secureProxyRedirect(
+    public View secureProxyRedirect(
             final HttpServletRequest request,
             final RedirectAttributes attrs,
             @ModelAttribute(Model.SUNETID) final String sunetid,
@@ -55,8 +59,11 @@ public class ProxyCredentialController {
         if (queryString == null) {
             throw new IllegalArgumentException("null queryString");
         }
-        return new StringBuilder("redirect:").append(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket)
+        String url = new StringBuilder(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket)
                 .append('&').append(queryString).toString();
+        RedirectView view = new RedirectView(url, true, true);
+        view.setExpandUriTemplateVariables(false);
+        return view;
     }
 
     @ModelAttribute
