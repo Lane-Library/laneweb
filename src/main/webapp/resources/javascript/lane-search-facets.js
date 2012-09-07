@@ -1,6 +1,7 @@
 (function() {
     var elt = Y.one('#searchFacets'),
         searchIndicator = new LANE.SearchIndicator(),
+        basePath = Y.lane.Model.get("base-path") || "",
         facets, i, type, source, container;
     LANE.search.facets = function(){
         var currentResult;
@@ -57,7 +58,7 @@
         this._source = source;
         this._facet = facet;
         this._container = container;
-        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.SearchResult.getEncodedSearchTerms();
+        this._url = basePath + '/plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.SearchResult.getEncodedSearchTerms();
         this._state = 'initialized';
         this._callback = {
             on: {

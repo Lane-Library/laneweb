@@ -7,6 +7,7 @@
 	now = new Date(),
 	needPopup= true,
 	model = Y.lane.Model,
+	basePath = model.get("base-path") || "",
 	auth = model.get("auth"),
 	ipgroup = model.get("ipgroup"),
 	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup;
@@ -20,15 +21,15 @@
 	 Y.on("click",function(event) {
 		 if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
 			//will be redirected to same page after the webauth
-			document.location = '/././secure/persistentLogin.html?pl=false&url='+ encodeURIComponent(document.location);
+			document.location = basePath + '/secure/persistentLogin.html?pl=false&url='+ encodeURIComponent(document.location);
 		} else {
 			var link = event.target;
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(document.location);
-			LANE.PersistentLoginPopup('/././plain/persistent-login-popup.html');
+			LANE.PersistentLoginPopup(basePath + '/plain/persistent-login-popup.html');
 		}
 		event.preventDefault();
-	}, 'a[href=/././secure/login.html]');
+	}, 'a[href=' + basePath + '/secure/login.html]');
 	
 	
 	//if not from hospital and user click on a link that going to be proxy
@@ -50,15 +51,15 @@
 
 		// if preference cookie is present but date get into grace period
 		if (persistentStatusCookie && now.getTime() > persistentStatusCookie) {
-			isActive = Y.io('/././user/active', {
+			isActive = Y.io(basePath + '/user/active', {
 				sync : true
 			});
 			if (isActive.responseText === 'true') {
-				LANE.PersistentLoginPopup('/././plain/persistent-extension-popup.html');
+				LANE.PersistentLoginPopup(basePath + '/plain/persistent-extension-popup.html');
 			}
 		} // no preference cookie at all
 		else if (!persistentStatusCookie) {
-			LANE.PersistentLoginPopup('/././plain/persistent-popup.html');
+			LANE.PersistentLoginPopup(basePath + '/plain/persistent-popup.html');
 		}
 	}
 	
@@ -69,9 +70,9 @@
 		Y.on('click',function(event) {
 			event.preventDefault();
 			if (auth) {
-				document.location = '/././persistentLogin.html?pl=renew&url=/myaccounts.html';
+				document.location = basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html';
 			} else {
-				document.location = '/././secure/persistentLogin.html?pl=true';
+				document.location = basePath + '/secure/persistentLogin.html?pl=true';
 			}
 		}, '#persistent-login');
 	}
@@ -80,7 +81,7 @@
 	
 
 	var setLink = function(event) {
-		var node = event.target, url = '/././';
+		var node = event.target, url = basePath + '/';
 		if (node.get('tagName') === 'SPAN') {
 			node = node.get('parentNode');
 		}

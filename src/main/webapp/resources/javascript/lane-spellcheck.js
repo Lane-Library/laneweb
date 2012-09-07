@@ -1,9 +1,10 @@
 (function() {
     var spellCheck = Y.one('#spellCheck'),
-        searchTerms = LANE.SearchResult.getEncodedSearchTerms();
+        searchTerms = LANE.SearchResult.getEncodedSearchTerms(),
+        basePath = Y.lane.Model.get("base-path") || "";
     if (spellCheck && searchTerms) {
         //get the suggestion
-        Y.io('/././apps/spellcheck/json?q=' + searchTerms, {
+        Y.io(basePath + '/apps/spellcheck/json?q=' + searchTerms, {
             on: {
                 success:function(id, o) {
                     var sc = Y.JSON.parse(o.responseText), a;

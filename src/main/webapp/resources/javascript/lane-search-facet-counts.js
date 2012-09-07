@@ -3,6 +3,7 @@
     var searchString = LANE.SearchResult.getEncodedSearchTerms(),
         facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
+        basePath = Y.lane.Model.get("base-path") || "",
         requestString, j,
         makeRequest = function() {
             requestString = '';
@@ -14,7 +15,7 @@
                 }
             }
             if(requestString !== ''){
-                Y.io('/././apps/search/facets/json?q=' + searchString + '&f=' + requestString + '&rd=' + Math.random(), {
+                Y.io(basePath + '/apps/search/facets/json?q=' + searchString + '&f=' + requestString + '&rd=' + Math.random(), {
                     on: {
                         success:function(id, o) {
                             var response = Y.JSON.parse(o.responseText),

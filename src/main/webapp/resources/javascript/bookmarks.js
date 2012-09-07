@@ -133,6 +133,7 @@
                     this._bookmarks.push(bookmarks[i]);
                 }
             }
+            this._basePath = Y.lane.Model.get("base-path") || "";
 
             /**
              * @event add
@@ -281,7 +282,7 @@
                  */
                 _defAddFn : function(event) {
                     var data = Y.JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
-                    Y.io("/././bookmarks", {
+                    Y.io(this._basePath + "/bookmarks", {
                         method : "post",
                         data : data,
                         headers : {
@@ -311,7 +312,7 @@
                  */
                 _defMoveFn : function(event) {
                     var data = Y.JSON.stringify({to : event.to, from : event.from});
-                    Y.io("/././bookmarks/move", {
+                    Y.io(this._basePath + "/bookmarks/move", {
                         method : "post",
                         data : data,
                         headers : {
@@ -338,7 +339,7 @@
                  */
                 _defRemoveFn : function(event) {
                     var indexes = Y.JSON.stringify(event.positions);
-                    Y.io("/././bookmarks?indexes=" + indexes, {
+                    Y.io(this._basePath + "/bookmarks?indexes=" + indexes, {
                         method : "delete",
                         on : {
                             success : function() {
@@ -364,7 +365,7 @@
                  */
                 _defUpdateFn : function(event) {
                     var data = Y.JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
-                    Y.io("/././bookmarks", {
+                    Y.io(this._basePath + "/bookmarks", {
                         method : "put",
                         data : data,
                         headers : {

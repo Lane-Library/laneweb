@@ -1,6 +1,8 @@
 
 (function() {
-    var BASE_URL = "/././apps/suggest/getSuggestionList?q={query}&l=",
+
+    var basePath = Y.lane.Model.get("base-path") || "",
+    SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
     DEFAULT_LIMIT = "mesh-di",
     SELECT = "select",
     
@@ -16,7 +18,7 @@
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {
             minQueryLength: 3,
-            source: BASE_URL + (limit || DEFAULT_LIMIT)
+            source: SOURCE_BASE + (limit || DEFAULT_LIMIT)
         });
         
         /**
@@ -94,7 +96,7 @@
          * @param limit {String} the limit parameter
          */
         setLimit : function(limit) {
-            this._ac.set("source", BASE_URL + (limit || DEFAULT_LIMIT));
+            this._ac.set("source", SOURCE_BASE + (limit || DEFAULT_LIMIT));
         }
     };
     

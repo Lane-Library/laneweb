@@ -150,9 +150,16 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-search-printonly.js"
     ];
     
+    //Model doesn't exist yet, get basePath by hand:
+    var basePath = "";
+    
+    if (window.model) {
+    	basePath = window.model.base-path || basePath;
+    }
+    
     //load each javascript file separately
     for (i = 0; i < laneJavascript.length; i++) {
-        Y.Get.js("/././resources/javascript/" + laneJavascript[i], function (err) {
+        Y.Get.js(basePath + "/resources/javascript/" + laneJavascript[i], function (err) {
             if (err) {
                 Y.log('Error loading JS: ' + err[0].error, 'error');
                 return;

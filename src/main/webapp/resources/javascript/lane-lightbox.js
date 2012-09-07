@@ -107,12 +107,13 @@
     Y.on("click", function(event) {
         var href, regex, url,
             anchor = event.target.ancestor("a") || event.target,
-            rel = anchor.get("rel");
+            rel = anchor.get("rel"),
+            basePath = Y.lane.Model.get("base-path") || "";
         if (rel && rel.indexOf("lightbox") === 0) {
             event.preventDefault();
             // need to dynamically create regex for getting /plain url because
             // of various base paths (eg /stage)
-            regex = new RegExp("(.+)//([^/]+)(/././)(.+)".replace(/\//g, "\\\/"));
+            regex = new RegExp("(.+)//([^/]+)(" + basePath + "/)(.+)".replace(/\//g, "\\\/"));
             href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
             //IE <= 7 includes the hash in the href, so remove it from request url:
             url = href.indexOf("#") == -1 ? href : href.substring(0, href.indexOf("#"));

@@ -1,9 +1,10 @@
 (function() {
     var findItNode = Y.one('#findIt'),
         searchString = LANE.SearchResult.getEncodedSearchTerms(),
+        basePath = Y.lane.Model.get("base-path") || "",
         url;
     if (findItNode && searchString) {
-        url = '/././apps/sfx/json?q=' + searchString;
+        url = basePath + '/apps/sfx/json?q=' + searchString;
         Y.io(url, {
             on: {
                 success: function(id, o) {

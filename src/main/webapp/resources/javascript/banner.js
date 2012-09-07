@@ -37,10 +37,11 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 		contentBox.one(".banner-content").set("innerHTML", content);
 	},
 	_handleIndexChange : function(event) {
-		var navNodes = this.get("navNodes");
+		var navNodes = this.get("navNodes"),
+		    basePath = Y.lane.Model.get("base-path") || "";
 		navNodes.item(event.prevVal).removeClass("banner-nav-active");
 		navNodes.item(event.newVal).addClass("banner-nav-active");
-        Y.io("/././plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
+        Y.io(basePath + "/plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
             on : {
                 success : function(id, o, args) {
                 	var fragment = Y.Node.create(o.responseText),

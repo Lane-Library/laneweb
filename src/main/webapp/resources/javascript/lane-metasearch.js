@@ -1,5 +1,6 @@
 (function() {
-    var hybridInput, laneSuggest;
+    var hybridInput, laneSuggest,
+        basePath = Y.lane.Model.get("base-path") || "";
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
@@ -8,7 +9,7 @@
             startTime,
             searchIndicator = new LANE.SearchIndicator(),
             getSearchUrl = function() {
-                var add, i, y, searchUrl = '/././apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms();
+                var add, i, y, searchUrl = basePath + '/apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms();
                 for (y = 0; y < searchables.length; y++) {
                     add = true;
                     for (i = 0; i < uberEngines.length; i++) {

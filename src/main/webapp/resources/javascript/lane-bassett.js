@@ -4,6 +4,7 @@
 
 
         var bassettContent = Y.one('#bassettContent'),
+            basePath = Y.lane.Model.get("base-path") || "",
             diagramDisplay = false,
             accordion,
             history,
@@ -34,7 +35,7 @@
         },
 
         loadContent = function(url) {
-            url = "/././plain/biomed-resources/bassett/raw".concat(url);
+            url = basePath + "/plain/biomed-resources/bassett/raw".concat(url);
             function successHandler(id, o, args) {
                 var content = Y.Node.create(o.responseText),
                     container = Y.one('#bassettContent');

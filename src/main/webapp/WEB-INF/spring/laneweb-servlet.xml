@@ -58,7 +58,7 @@
                 <entry key="/google708f1eef3c6d1e52.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
                 <entry key="/y_key_01fe447429961ab5.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
                 <entry key="**/**/*.html" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
-                <entry key="**/*.js" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
+                <entry key="**/m/*.js" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
                 <entry key="**/*.css" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
                 <entry key="**/*.manifest" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
                 <entry key="**/**/*.*" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
