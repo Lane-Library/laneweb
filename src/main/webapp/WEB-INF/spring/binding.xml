@@ -8,7 +8,6 @@
         <property name="dataBinders">
             <list>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/auth"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"/>
@@ -47,13 +46,9 @@
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"
         class="edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder">
-        <property name="ezproxyKey" value="%{laneweb.context.ezproxy-key}"/>
-        <property name="sunetIdSource" ref="edu.stanford.irt.laneweb.servlet.SunetIdSource"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/auth"
-        class="edu.stanford.irt.laneweb.servlet.binding.HashedSunetIdDataBinder">
-         <property name="sunetidHashKey" value="%{laneweb.sunetidhashkey}"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.SunetIdSource"/>
+        <constructor-arg value="%{laneweb.context.ezproxy-key}"/>
+        <constructor-arg value="%{laneweb.sunetidhashkey}"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"
