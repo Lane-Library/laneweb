@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class PersistentLoginToken {
 
     private static final int TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
@@ -14,10 +16,10 @@ public class PersistentLoginToken {
 
     public PersistentLoginToken(final String sunetId, final long dateValue, final int userAgentHash, final String encryptedValue) {
         if (null == sunetId) {
-            throw new IllegalArgumentException("null sunetId");
+            throw new LanewebException("null sunetId");
         }
         if (null == encryptedValue) {
-            throw new IllegalArgumentException("null encryptedValue");
+            throw new LanewebException("null encryptedValue");
         }
         this.sunetId = sunetId;
         this.dateValue = dateValue;

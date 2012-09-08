@@ -6,6 +6,8 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class SunetIdCookieCodecTest {
 
     private SunetIdCookieCodec codec;
@@ -26,7 +28,7 @@ public class SunetIdCookieCodecTest {
         try {
             this.codec.createLoginToken(null, 0);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (LanewebException e) {
         }
     }
 
@@ -35,7 +37,7 @@ public class SunetIdCookieCodecTest {
         try {
             this.codec.restoreLoginToken("abc");
             fail();
-        } catch (IllegalStateException e) {
+        } catch (LanewebException e) {
         }
     }
 
@@ -44,7 +46,7 @@ public class SunetIdCookieCodecTest {
         try {
             this.codec.restoreLoginToken(null);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (LanewebException e) {
         }
     }
 }

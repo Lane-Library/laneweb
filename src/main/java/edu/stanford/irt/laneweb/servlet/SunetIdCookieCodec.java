@@ -13,6 +13,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class SunetIdCookieCodec {
 
     public static final String LANE_COOKIE_NAME = "user";
@@ -35,11 +37,11 @@ public class SunetIdCookieCodec {
             this.desKey = new SecretKeySpec(dst, "AES");
             this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } catch (NoSuchPaddingException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         }
     }
 
@@ -57,17 +59,17 @@ public class SunetIdCookieCodec {
 
     public PersistentLoginToken restoreLoginToken(final String encryptedValue) {
         if (encryptedValue == null) {
-            throw new IllegalArgumentException("null encryptedValue");
+            throw new LanewebException("null encryptedValue");
         }
         String decrypted = decrypt(encryptedValue);
         String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
         if (values.length != 3) {
-            throw new IllegalArgumentException("invalid encryptedValue");
+            throw new LanewebException("invalid encryptedValue");
         }
         try {
             return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]), encryptedValue);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("invalid encryptedValue", e);
+            throw new LanewebException("invalid encryptedValue", e);
         }
     }
 
@@ -78,13 +80,13 @@ public class SunetIdCookieCodec {
             byte[] cleartext = this.cipher.doFinal(base);
             return new String(cleartext, UTF8);
         } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } catch (InvalidKeyException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } catch (IllegalBlockSizeException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } catch (BadPaddingException e) {
-            throw new IllegalArgumentException(e);
+            throw new LanewebException(e);
         }
     }
 
@@ -95,13 +97,13 @@ public class SunetIdCookieCodec {
             byte[] ciphertext = this.cipher.doFinal(cleartext);
             return new String(Base64.encodeBase64(ciphertext), UTF8);
         } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } catch (InvalidKeyException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } catch (IllegalBlockSizeException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         } catch (BadPaddingException e) {
-            throw new IllegalStateException(e);
+            throw new LanewebException(e);
         }
     }
 }

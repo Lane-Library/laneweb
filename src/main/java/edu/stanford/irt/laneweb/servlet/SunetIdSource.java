@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
@@ -55,7 +56,7 @@ public class SunetIdSource {
                         if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
                             sunetid = token.getSunetId();
                         }
-                    } catch (IllegalArgumentException e) {
+                    } catch (LanewebException e) {
                         this.log.error("failed to decode sunetid from: " + cookie.getValue(), e);
                     }
                     break;
