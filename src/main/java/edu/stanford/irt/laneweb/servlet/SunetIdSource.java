@@ -55,7 +55,7 @@ public class SunetIdSource {
                         if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
                             sunetid = token.getSunetId();
                         }
-                    } catch (IllegalStateException e) {
+                    } catch (IllegalArgumentException e) {
                         this.log.error("failed to decode sunetid from: " + cookie.getValue(), e);
                     }
                     break;
