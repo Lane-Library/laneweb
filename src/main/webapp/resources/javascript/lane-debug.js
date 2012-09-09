@@ -154,7 +154,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     var basePath = "";
     
     if (window.model) {
-    	basePath = window.model.base-path || basePath;
+    	basePath = window.model["base-path"] || basePath;
     }
     
     //load each javascript file separately
