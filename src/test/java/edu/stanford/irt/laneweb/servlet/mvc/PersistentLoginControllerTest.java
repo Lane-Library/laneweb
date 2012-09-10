@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.servlet.PersistentLoginFilter;
