@@ -10,16 +10,15 @@ import java.util.regex.Pattern;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.Result;
 
-
 public class ContentResultConversionStrategy {
 
     private static final int CONTENT_RESULT_LIMIT = 20;
 
     private static final String UNDERSCORE_CONTENT = "_content";
-    
+
     private ScoreStrategy scoreStrategy;
-    
-    public ContentResultConversionStrategy(ScoreStrategy scoreStrategy) {
+
+    public ContentResultConversionStrategy(final ScoreStrategy scoreStrategy) {
         this.scoreStrategy = scoreStrategy;
     }
 

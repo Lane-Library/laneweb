@@ -20,7 +20,6 @@ import org.apache.excalibur.source.SourceValidity;
 
 import edu.stanford.irt.cocoon.CocoonException;
 
-
 public class TransformerHandlerFactory {
 
     /** The error handler for the transformer */

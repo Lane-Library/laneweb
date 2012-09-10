@@ -11,8 +11,8 @@ import edu.stanford.irt.suggest.QueryNormalizer;
 public class EresourceCollectionManager extends AbstractSuggestCollectionManager {
 
     private QueryNormalizer queryNormalizer = new QueryNormalizer();
-  
-    public EresourceCollectionManager(DataSource dataSource, Properties sqlStatements) {
+
+    public EresourceCollectionManager(final DataSource dataSource, final Properties sqlStatements) {
         super(dataSource, sqlStatements);
     }
 

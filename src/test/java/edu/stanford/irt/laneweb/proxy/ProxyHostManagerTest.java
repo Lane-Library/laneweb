@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 
-//TODO: set up mocks so they don't throw exceptions in background update thread
+// TODO: set up mocks so they don't throw exceptions in background update thread
 public class ProxyHostManagerTest {
 
     private Connection connection;

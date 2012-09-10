@@ -24,9 +24,9 @@ public class ProxyHostManager {
 
     private static class DatabaseProxyHostSet extends HashSet<String> {
 
-        private static final long serialVersionUID = 1L;
-
         private static final String UNION = "union ";
+
+        private static final long serialVersionUID = 1L;
 
         private static final String SQL =
             "with urls as ( "

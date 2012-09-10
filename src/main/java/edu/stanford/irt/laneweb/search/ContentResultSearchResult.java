@@ -10,13 +10,13 @@ public class ContentResultSearchResult implements SearchResult {
 
     private ContentResult contentResult;
 
+    private int hashCode;
+
     private Result resourceResult;
 
     private int score;
 
     private String sortTitle;
-    
-    private int hashCode;
 
     public ContentResultSearchResult(final ContentResult contentResult, final Result resourceResult, final int score) {
         this.contentResult = contentResult;

@@ -51,22 +51,9 @@ public class SHCLoginController {
         this.ldapDataAccess = ldapDataAccess;
     }
 
-    private String getSunetid(final HttpSession session, final String univid) {
-        String sunetid = (String) session.getAttribute(Model.SUNETID);
-        if (sunetid == null) {
-            LDAPData ldapData = this.ldapDataAccess.getLdapDataForUnivid(univid);
-            sunetid = (ldapData.isActive()) ? ldapData.getSunetId() : null;
-            if (sunetid != null) {
-                session.setAttribute(Model.SUNETID, sunetid);
-            }
-        }
-        return sunetid;
-    }
-
     @RequestMapping(value = "/shclogin")
-    public void login(@RequestParam final String emrid, @RequestParam final String univid,
-            @RequestParam final String ts, final HttpServletRequest request, final HttpServletResponse response)
-            throws IOException {
+    public void login(@RequestParam final String emrid, @RequestParam final String univid, @RequestParam final String ts,
+            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         StringBuffer errorMsg = new StringBuffer();
         StringBuffer url = new StringBuffer(TARGET_URL);
@@ -94,6 +81,18 @@ public class SHCLoginController {
             url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
         }
         response.sendRedirect("http://" + request.getServerName() + request.getContextPath() + url.toString());
+    }
+
+    private String getSunetid(final HttpSession session, final String univid) {
+        String sunetid = (String) session.getAttribute(Model.SUNETID);
+        if (sunetid == null) {
+            LDAPData ldapData = this.ldapDataAccess.getLdapDataForUnivid(univid);
+            sunetid = (ldapData.isActive()) ? ldapData.getSunetId() : null;
+            if (sunetid != null) {
+                session.setAttribute(Model.SUNETID, sunetid);
+            }
+        }
+        return sunetid;
     }
 
     private boolean validateAndPopulateEmrid(final String emrid, final HttpSession session) {

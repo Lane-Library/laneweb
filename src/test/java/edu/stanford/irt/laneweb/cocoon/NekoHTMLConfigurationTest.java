@@ -14,8 +14,9 @@ public class NekoHTMLConfigurationTest {
 
     @Before
     public void setUp() throws Exception {
-        //TODO: set up with the features/properties we actually use
-        this.configuration = new NekoHTMLConfiguration(Collections.<String, String>emptyMap(), Collections.<String, Boolean>emptyMap());
+        // TODO: set up with the features/properties we actually use
+        this.configuration = new NekoHTMLConfiguration(Collections.<String, String> emptyMap(),
+                Collections.<String, Boolean> emptyMap());
     }
 
     @Test

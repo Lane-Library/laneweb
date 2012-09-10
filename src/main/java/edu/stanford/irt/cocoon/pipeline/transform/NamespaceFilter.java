@@ -3,7 +3,6 @@ package edu.stanford.irt.cocoon.pipeline.transform;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
-
 /**
  * A Transformer that removes all start/end prefix mapping but the first xhtml
  * empty prefix (&gt;html xmlns="http://www.w3.org/1999/xhtml"&gt;) and its

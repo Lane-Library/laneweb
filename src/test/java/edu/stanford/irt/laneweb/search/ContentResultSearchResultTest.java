@@ -43,18 +43,18 @@ public class ContentResultSearchResultTest {
     }
 
     @Test
-    public void testNotEquals() {
-        ContentResult result = createMock(ContentResult.class);
-        expect(result.getTitle()).andReturn("not the title");
-        replay(result);
-        ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
-        assertFalse(this.searchResult.equals(other));
-        verify(result);
-    }
-    
-    @Test
     public void testEqualsDifferentObject() {
         assertFalse(this.searchResult.equals(new Object()));
+    }
+
+    @Test
+    public void testGetContentResult() {
+        assertTrue(this.contentResult == this.searchResult.getContentResult());
+    }
+
+    @Test
+    public void testGetResourceResult() {
+        assertTrue(this.resourceResult == this.searchResult.getResourceResult());
     }
 
     @Test
@@ -66,16 +66,6 @@ public class ContentResultSearchResultTest {
     public void testGetSortTitle() {
         assertEquals("title", this.searchResult.getSortTitle());
     }
-    
-    @Test
-    public void testGetResourceResult() {
-        assertTrue(this.resourceResult == this.searchResult.getResourceResult());
-    }
-    
-    @Test
-    public void testGetContentResult() {
-        assertTrue(this.contentResult == this.searchResult.getContentResult());
-    }
 
     @Test
     public void testHashCode() {
@@ -84,6 +74,16 @@ public class ContentResultSearchResultTest {
         replay(result);
         ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
         assertEquals(this.searchResult.hashCode(), other.hashCode());
+        verify(result);
+    }
+
+    @Test
+    public void testNotEquals() {
+        ContentResult result = createMock(ContentResult.class);
+        expect(result.getTitle()).andReturn("not the title");
+        replay(result);
+        ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
+        assertFalse(this.searchResult.equals(other));
         verify(result);
     }
 }

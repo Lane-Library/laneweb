@@ -20,19 +20,6 @@ public class BookmarkTrendsReporter {
 
     private Logger log = LoggerFactory.getLogger(BookmarkTrendsReporter.class);
 
-    private String getLocalHostname() {
-        if (null != this.localHostname) {
-            return this.localHostname;
-        }
-        try {
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            this.localHostname = inetAddress.getHostName();
-        } catch (UnknownHostException e) {
-            this.log.error(e.getMessage(), e);
-        }
-        return this.localHostname;
-    }
-
     // daily at 1:16AM
     @Scheduled(cron = "0 16 01 * * *")
     public void reportCount() {
@@ -54,5 +41,18 @@ public class BookmarkTrendsReporter {
      */
     public void setGoogleTracker(final GoogleTracker googleTracker) {
         this.googleTracker = googleTracker;
+    }
+
+    private String getLocalHostname() {
+        if (null != this.localHostname) {
+            return this.localHostname;
+        }
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            this.localHostname = inetAddress.getHostName();
+        } catch (UnknownHostException e) {
+            this.log.error(e.getMessage(), e);
+        }
+        return this.localHostname;
     }
 }

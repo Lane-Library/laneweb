@@ -23,9 +23,9 @@ public class AbstractProxyLinkTransformerTest {
 
     private Parameters parameters;
 
-    private AbstractProxyLinkTransformer transformer;
-
     private ProxyHostManager proxyHostManager;
+
+    private AbstractProxyLinkTransformer transformer;
 
     @Before
     public void setUp() throws Exception {
@@ -44,10 +44,11 @@ public class AbstractProxyLinkTransformerTest {
     }
 
     @Test
-    public void testSHCIP() {
-        this.model.put(Model.IPGROUP, IPGroup.SHC);
-        this.transformer.setModel(this.model);
-        assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
+    public void testIsProxyableLink() {
+        expect(this.proxyHostManager.isProxyableLink("link")).andReturn(true);
+        replay(this.proxyHostManager);
+        assertTrue(this.transformer.isProxyableLink("link"));
+        verify(this.proxyHostManager);
     }
 
     @Test
@@ -56,7 +57,14 @@ public class AbstractProxyLinkTransformerTest {
         this.transformer.setModel(this.model);
         assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
     }
-    
+
+    @Test
+    public void testSHCIP() {
+        this.model.put(Model.IPGROUP, IPGroup.SHC);
+        this.transformer.setModel(this.model);
+        assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
+    }
+
     @Test
     public void testSunetidAndTicket() {
         this.model.put(Model.BASE_PATH, "");
@@ -64,15 +72,7 @@ public class AbstractProxyLinkTransformerTest {
         Ticket ticket = new Ticket("", "");
         this.model.put(Model.TICKET, ticket);
         this.transformer.setModel(this.model);
-        assertEquals("http://laneproxy.stanford.edu/login?user=sunetid&ticket=" + ticket + "&url=foo", this.transformer.createProxyLink("foo"));
-        
-    }
-    
-    @Test
-    public void testIsProxyableLink() {
-        expect(this.proxyHostManager.isProxyableLink("link")).andReturn(true);
-        replay(this.proxyHostManager);
-        assertTrue(this.transformer.isProxyableLink("link"));
-        verify(this.proxyHostManager);
+        assertEquals("http://laneproxy.stanford.edu/login?user=sunetid&ticket=" + ticket + "&url=foo",
+                this.transformer.createProxyLink("foo"));
     }
 }

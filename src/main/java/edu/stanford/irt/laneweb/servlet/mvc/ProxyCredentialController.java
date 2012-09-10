@@ -59,8 +59,8 @@ public class ProxyCredentialController {
         if (queryString == null) {
             throw new IllegalArgumentException("null queryString");
         }
-        String url = new StringBuilder(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket)
-                .append('&').append(queryString).toString();
+        String url = new StringBuilder(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket).append('&')
+                .append(queryString).toString();
         RedirectView view = new RedirectView(url, true, true);
         view.setExpandUriTemplateVariables(false);
         return view;
@@ -69,7 +69,8 @@ public class ProxyCredentialController {
     @ModelAttribute
     protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
         this.binder.bind(model.asMap(), request);
-        //case 74082 /apps/proxy/credential causes an error, need to put null values into the model
+        // case 74082 /apps/proxy/credential causes an error, need to put null
+        // values into the model
         if (!model.containsAttribute(Model.SUNETID)) {
             model.addAttribute(Model.SUNETID, null);
             model.addAttribute(Model.TICKET, null);

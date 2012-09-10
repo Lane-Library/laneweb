@@ -39,13 +39,13 @@ public class AbstractPagingSearchResultGeneratorTest {
     }
 
     @Test
-    public void testDoSearchNull() {
-        assertEquals(0, this.generator.doSearch(null).size());
+    public void testDoSearchEmpty() {
+        assertEquals(0, this.generator.doSearch("").size());
     }
 
     @Test
-    public void testDoSearchEmpty() {
-        assertEquals(0, this.generator.doSearch("").size());
+    public void testDoSearchNull() {
+        assertEquals(0, this.generator.doSearch(null).size());
     }
 
     @Test

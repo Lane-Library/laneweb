@@ -19,11 +19,6 @@ public class EngineSearchGenerator extends SearchGenerator {
         super(metaSearchManager, saxStrategy);
     }
 
-    @Override
-    protected Result doSearch(final String query) {
-        return searchWithEngines(query, this.engines);
-    }
-
     @SuppressWarnings("unchecked")
     @Override
     public void setModel(final Map<String, Object> model) {
@@ -37,10 +32,15 @@ public class EngineSearchGenerator extends SearchGenerator {
         if (this.engines == null) {
             String engineList = parameters.get(Model.ENGINES);
             if (engineList == null) {
-                //TODO: maybe null engines is OK
+                // TODO: maybe null engines is OK
                 throw new LanewebException("null engines");
             }
             this.engines = Arrays.asList(engineList.split(","));
         }
+    }
+
+    @Override
+    protected Result doSearch(final String query) {
+        return searchWithEngines(query, this.engines);
     }
 }

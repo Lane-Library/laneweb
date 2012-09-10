@@ -28,9 +28,9 @@ public class BassettCollectionManagerTest {
 
     private ResultSet resultSet;
 
-    private PreparedStatement statement;
-    
     private Properties sqlStatements;
+
+    private PreparedStatement statement;
 
     @Before
     public void setUp() throws Exception {

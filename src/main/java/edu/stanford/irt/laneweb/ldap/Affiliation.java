@@ -8,11 +8,11 @@ import java.util.Map;
 
 /**
  * Created on: Mar 14, 2007 Affiliation
+ * https://www.stanford.edu/dept/as/mais/integration
+ * /data/data_affiliation_types.html, Also, https://medwiki.stanford.edu/x/hwFl
+ * group for lane Union between stanford:stanford,stanford:academic,
+ * stanford:admin, unc Data Affiliation types
  * 
- *  https://www.stanford.edu/dept/as/mais/integration/data/data_affiliation_types.html,
- *      Also, https://medwiki.stanford.edu/x/hwFl group for lane
- *      Union between stanford:stanford,stanford:academic, stanford:admin, unc
- *      Data Affiliation types
  * @author philip constantinou
  */
 public enum Affiliation {

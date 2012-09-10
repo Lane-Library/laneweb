@@ -80,7 +80,6 @@ public class BassettAccordionEresourcesGenerator extends AbstractGenerator imple
             { "Upper Extremity--Wrist", "8" } };
 
     private static final Map<String, Integer> TOTALS_MAP;
-
     static {
         Map<String, Integer> totals = new LinkedHashMap<String, Integer>();
         for (String[] element : TOTALS) {

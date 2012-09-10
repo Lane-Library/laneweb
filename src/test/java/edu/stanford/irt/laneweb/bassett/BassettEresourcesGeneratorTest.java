@@ -23,9 +23,9 @@ public class BassettEresourcesGeneratorTest {
 
     private BassettEresourcesGenerator generator;
 
-    private XMLConsumer xmlConsumer;
-
     private SAXStrategy<Collection<BassettEresource>> saxStrategy;
+
+    private XMLConsumer xmlConsumer;
 
     @SuppressWarnings("unchecked")
     @Before

@@ -194,6 +194,12 @@ public class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
+    // TODO: have this make sense
+    public void init(final String uri, final String xpointer) {
+        this.href = uri;
+        this.xpointer = xpointer;
+    }
+
     @Override
     public void processingInstruction(final String target, final String data) throws SAXException {
         if (isEvaluatingContent()) {
@@ -290,12 +296,6 @@ public class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
-    // TODO: have this make sense
-    public void init(final String uri, final String xpointer) {
-        this.href = uri;
-        this.xpointer = xpointer;
-    }
-
     private String getLocation() {
         if (this.locator == null) {
             return "unknown location";
@@ -314,12 +314,18 @@ public class XIncludePipe extends AbstractXMLPipe {
     private boolean isEvaluatingContent() {
         return (this.xIncludeElementLevel == 0)
                 || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
-//        boolean xincludeElementLevelIsZero = this.xIncludeElementLevel == 0;
-//        boolean fallbackElementLevelGreaterThanZero = this.fallbackElementLevel > 0;
-//        boolean fallbackElementLevelEqualsUseFallbackLevel = this.fallbackElementLevel == this.useFallbackLevel;
-//        boolean fallbackElementLevelGreaterThanZeroAndFallbackElementLevelEqualsUseFallbackLevel = fallbackElementLevelGreaterThanZero && fallbackElementLevelEqualsUseFallbackLevel;
-//        boolean isEvaluatingContent = xincludeElementLevelIsZero || fallbackElementLevelGreaterThanZeroAndFallbackElementLevelEqualsUseFallbackLevel;
-//        return isEvaluatingContent;
+        // boolean xincludeElementLevelIsZero = this.xIncludeElementLevel == 0;
+        // boolean fallbackElementLevelGreaterThanZero =
+        // this.fallbackElementLevel > 0;
+        // boolean fallbackElementLevelEqualsUseFallbackLevel =
+        // this.fallbackElementLevel == this.useFallbackLevel;
+        // boolean
+        // fallbackElementLevelGreaterThanZeroAndFallbackElementLevelEqualsUseFallbackLevel
+        // = fallbackElementLevelGreaterThanZero &&
+        // fallbackElementLevelEqualsUseFallbackLevel;
+        // boolean isEvaluatingContent = xincludeElementLevelIsZero ||
+        // fallbackElementLevelGreaterThanZeroAndFallbackElementLevelEqualsUseFallbackLevel;
+        // return isEvaluatingContent;
     }
 
     private boolean isLoopInclusion(final String uri, final String xpointer) {

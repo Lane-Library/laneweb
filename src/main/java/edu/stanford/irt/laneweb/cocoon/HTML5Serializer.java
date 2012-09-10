@@ -15,7 +15,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 public class HTML5Serializer extends TransformerSerializer {
 
     private static final byte[] HTML5_DOCTYPE_DECLARATION;
-
     static {
         try {
             HTML5_DOCTYPE_DECLARATION = "<!DOCTYPE html>\n".getBytes("UTF-8");

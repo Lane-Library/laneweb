@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 
-//TODO: revisit conscious decision not to synchronize list operations.
+// TODO: revisit conscious decision not to synchronize list operations.
 @Controller
 @RequestMapping(value = "/bookmarks")
 public class JSONBookmarkController extends BookmarkController {

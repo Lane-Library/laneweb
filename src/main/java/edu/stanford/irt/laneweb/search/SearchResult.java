@@ -10,7 +10,7 @@ import edu.stanford.irt.laneweb.resource.Resource;
 public interface SearchResult extends Resource, Comparable<SearchResult> {
 
     Pattern NON_FILING_PATTERN = Pattern.compile("^(a|an|the) ", Pattern.CASE_INSENSITIVE);
-    
+
     Pattern WHITESPACE = Pattern.compile("\\W");
 
     /**

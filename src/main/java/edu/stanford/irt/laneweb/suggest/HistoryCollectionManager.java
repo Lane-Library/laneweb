@@ -12,7 +12,7 @@ public class HistoryCollectionManager extends AbstractSuggestCollectionManager {
 
     private QueryNormalizer queryNormalizer = new QueryNormalizer();
 
-    public HistoryCollectionManager(DataSource dataSource, Properties sqlStatements) {
+    public HistoryCollectionManager(final DataSource dataSource, final Properties sqlStatements) {
         super(dataSource, sqlStatements);
     }
 

@@ -49,8 +49,8 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
-                .andReturn(this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+                this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
@@ -74,8 +74,8 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchNumberFormatException() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
-                .andReturn(this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+                this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
         this.generator.setParameters(Collections.singletonMap("timeout", "foo"));
@@ -86,7 +86,8 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchSynchronous() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(true))).andReturn(this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(true))).andReturn(
+                this.result);
         replay(this.saxStrategy, this.manager);
         this.model.put("synchronous", "true");
         this.generator.setModel(this.model);
@@ -97,8 +98,8 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchSynchronousEmpty() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
-                .andReturn(this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+                this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setParameters(Collections.singletonMap("synchronous", ""));
         this.generator.setModel(this.model);
@@ -121,8 +122,8 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchWait() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
-                .andReturn(this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+                this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.RUNNING);
         replay(this.saxStrategy, this.manager, this.result);
         this.model.put("wait", "10");
@@ -134,8 +135,8 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchWaitNumberFormatException() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false)))
-                .andReturn(this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+                this.result);
         replay(this.saxStrategy, this.manager, this.result);
         this.model.put("wait", "foo");
         this.generator.setModel(this.model);

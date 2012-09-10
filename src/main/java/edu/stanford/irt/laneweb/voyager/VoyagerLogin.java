@@ -59,7 +59,8 @@ public class VoyagerLogin {
                 checkStmt.setString(1, voyagerUnivId);
                 rs = checkStmt.executeQuery();
                 rs.next();
-                if (rs.getInt(1) > 0) { // univid found so write to voyager tables
+                if (rs.getInt(1) > 0) { // univid found so write to voyager
+                                        // tables
                     clearStmt = conn.prepareStatement(this.clearSessionSQL);
                     clearStmt.setString(1, voyagerUnivId);
                     clearStmt.setString(2, pid);

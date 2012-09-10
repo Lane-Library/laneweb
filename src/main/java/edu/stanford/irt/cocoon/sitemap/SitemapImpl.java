@@ -35,7 +35,7 @@ public class SitemapImpl implements Processor {
         Configuration sitemapProgram = handler.getConfiguration();
         treeBuilder.setProcessor(new ConcreteTreeProcessor(null, new DefaultExecutor()));
         try {
-        this.rootNode = treeBuilder.build(sitemapProgram, null);
+            this.rootNode = treeBuilder.build(sitemapProgram, null);
         } catch (Exception e) {
             throw new CocoonException(e);
         }

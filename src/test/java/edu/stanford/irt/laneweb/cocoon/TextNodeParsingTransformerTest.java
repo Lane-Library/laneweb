@@ -16,18 +16,17 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-
 public class TextNodeParsingTransformerTest {
 
     private Attributes attributes;
 
     private Map<String, String> parameters;
 
+    private SAXParser saxParser;
+
     private TextNodeParsingTransformer transformer;
 
     private XMLConsumer xmlConsumer;
-    
-    private SAXParser saxParser;
 
     @SuppressWarnings("unchecked")
     @Before

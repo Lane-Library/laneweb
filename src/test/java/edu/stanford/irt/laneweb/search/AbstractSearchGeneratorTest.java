@@ -20,6 +20,7 @@ public class AbstractSearchGeneratorTest {
             super(saxStrategy);
         }
 
+        @Override
         protected Object doSearch(final String query) {
             return null;
         }
@@ -43,9 +44,9 @@ public class AbstractSearchGeneratorTest {
         this.generator.doGenerate(null);
         verify(this.saxStrategy);
     }
-    
+
     @Test
     public void testSetModel() {
-        this.generator.setModel(Collections.<String, Object>singletonMap(Model.QUERY, "query"));
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
     }
 }

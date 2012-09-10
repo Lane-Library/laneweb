@@ -41,8 +41,8 @@ public class IPGroupFetchControllerTest {
 
     @Test
     public void testBind() {
-        expect(this.model.asMap()).andReturn(Collections.<String, Object>emptyMap());
-        this.binder.bind(Collections.<String, Object>emptyMap(), this.request);
+        expect(this.model.asMap()).andReturn(Collections.<String, Object> emptyMap());
+        this.binder.bind(Collections.<String, Object> emptyMap(), this.request);
         replay(this.binder, this.model, this.request, this.response);
         this.controller.bind(this.request, this.model);
         verify(this.binder, this.model, this.request, this.response);

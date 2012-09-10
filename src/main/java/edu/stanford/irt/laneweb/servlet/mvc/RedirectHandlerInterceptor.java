@@ -15,8 +15,8 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
     private RedirectProcessor redirectProcessor;
 
     @Override
-    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) 
-        throws IOException {
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
+            throws IOException {
         String requestURI = request.getRequestURI();
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
         String sitemapURI = requestURI.substring(basePath.length());

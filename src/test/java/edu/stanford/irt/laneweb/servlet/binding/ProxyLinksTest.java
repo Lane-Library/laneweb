@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 
@@ -9,14 +10,14 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 
-
 public class ProxyLinksTest {
-    
+
     private ProxyLinks proxyLinks;
 
     @Before
     public void setUp() throws Exception {
-        this.proxyLinks = new ProxyLinks(Collections.<String>singletonList("^171\\.65\\.44\\.\\S+"), Collections.<String>singletonList("^171\\.6[4-7]\\.\\S+"));
+        this.proxyLinks = new ProxyLinks(Collections.<String> singletonList("^171\\.65\\.44\\.\\S+"),
+                Collections.<String> singletonList("^171\\.6[4-7]\\.\\S+"));
     }
 
     @Test
@@ -25,13 +26,13 @@ public class ProxyLinksTest {
     }
 
     @Test
-    public void testGetProxyLinksSHC() {
-        assertTrue(this.proxyLinks.getProxyLinks(IPGroup.SHC, "127.0.0.1"));
+    public void testGetProxyLinksNull() {
+        assertTrue(this.proxyLinks.getProxyLinks(null, "127.0.0.1"));
     }
 
     @Test
-    public void testGetProxyLinksNull() {
-        assertTrue(this.proxyLinks.getProxyLinks(null, "127.0.0.1"));
+    public void testGetProxyLinksSHC() {
+        assertTrue(this.proxyLinks.getProxyLinks(IPGroup.SHC, "127.0.0.1"));
     }
 
     @Test

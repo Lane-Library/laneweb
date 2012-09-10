@@ -135,7 +135,8 @@ public class PersistentLoginControllerTest {
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         this.response.addCookie(isA(Cookie.class));
         replay(this.sunetIdSource, this.request, this.response, this.session);
-        RedirectView view = (RedirectView) this.persistenLoginController.renewCookieAndRedirect(this.url, this.request, this.response);
+        RedirectView view = (RedirectView) this.persistenLoginController.renewCookieAndRedirect(this.url, this.request,
+                this.response);
         assertEquals(view.getUrl(), "/test.html");
         verify(this.sunetIdSource, this.request, this.session, this.response);
     }
@@ -150,7 +151,8 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(isA(Cookie.class));
         this.response.addCookie(isA(Cookie.class));
         replay(this.sunetIdSource, this.request, this.session, this.response);
-        RedirectView view = (RedirectView) this.persistenLoginController.renewCookieAndRedirect(this.url, this.request, this.response);
+        RedirectView view = (RedirectView) this.persistenLoginController.renewCookieAndRedirect(this.url, this.request,
+                this.response);
         assertEquals(view.getUrl(), "/test.html");
         verify(this.sunetIdSource, this.request, this.session, this.response);
     }

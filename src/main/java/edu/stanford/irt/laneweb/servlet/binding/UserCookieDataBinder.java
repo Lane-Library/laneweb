@@ -11,7 +11,7 @@ import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 public class UserCookieDataBinder implements DataBinder {
 
     private static final int MAX_COOKIE = 2;
-    
+
     private static final int ONE_DAY = 1000 * 60 * 60 * 24;
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -30,8 +30,7 @@ public class UserCookieDataBinder implements DataBinder {
                         long now = System.currentTimeMillis();
                         long cookieValue = Long.valueOf(cookie.getValue());
                         if (cookieValue - now > 0) {
-                            model.put(Model.PERSISTENT_LOGIN_EXPIRATION_DATE,
-                                    String.valueOf((cookieValue - now) / ONE_DAY));
+                            model.put(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf((cookieValue - now) / ONE_DAY));
                         }
                     } catch (Exception e) {
                         model.put(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, "ERROR");

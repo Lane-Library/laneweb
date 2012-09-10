@@ -22,7 +22,8 @@ import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.SourceAware;
 import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 
-public class TraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer, ModelAware, ParametersAware, SourceAware {
+public class TraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer,
+        ModelAware, ParametersAware, SourceAware {
 
     private Serializable cacheKey;
 

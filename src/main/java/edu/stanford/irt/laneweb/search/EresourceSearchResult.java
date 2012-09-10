@@ -9,9 +9,9 @@ public class EresourceSearchResult implements SearchResult {
 
     private Eresource eresource;
 
-    private String sortTitle;
-    
     private int hashCode;
+
+    private String sortTitle;
 
     public EresourceSearchResult(final Eresource eresource) {
         this.eresource = eresource;

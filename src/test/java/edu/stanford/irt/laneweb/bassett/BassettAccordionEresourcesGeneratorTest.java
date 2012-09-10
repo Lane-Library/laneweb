@@ -23,9 +23,9 @@ public class BassettAccordionEresourcesGeneratorTest {
 
     private BassettAccordionEresourcesGenerator generator;
 
-    private XMLConsumer xmlConsumer;
-
     private SAXStrategy<Map<String, Integer>> saxStrategy;
+
+    private XMLConsumer xmlConsumer;
 
     @SuppressWarnings("unchecked")
     @Before

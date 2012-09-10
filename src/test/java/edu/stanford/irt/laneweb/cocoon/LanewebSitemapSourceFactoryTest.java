@@ -20,7 +20,7 @@ public class LanewebSitemapSourceFactoryTest {
 
     private static final class TestFactory extends SitemapSourceFactory {
 
-        public TestFactory(Processor processor) {
+        public TestFactory(final Processor processor) {
             super(processor);
         }
 

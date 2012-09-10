@@ -12,7 +12,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-
 public class PagingEresourceListSAXStrategy implements SAXStrategy<PagingEresourceList>, Resource {
 
     private static final String CDATA = "CDATA";
@@ -26,12 +25,12 @@ public class PagingEresourceListSAXStrategy implements SAXStrategy<PagingEresour
     private static final String START = "start";
 
     private SAXStrategy<Eresource> saxStrategy;
-    
-    public PagingEresourceListSAXStrategy(SAXStrategy<Eresource> saxStrategy) {
-        this.saxStrategy  = saxStrategy;
+
+    public PagingEresourceListSAXStrategy(final SAXStrategy<Eresource> saxStrategy) {
+        this.saxStrategy = saxStrategy;
     }
 
-    public void toSAX(PagingEresourceList list, XMLConsumer xmlConsumer) {
+    public void toSAX(final PagingEresourceList list, final XMLConsumer xmlConsumer) {
         int start = list.getStart();
         int length = list.getLength();
         try {

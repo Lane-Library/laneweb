@@ -33,6 +33,10 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer imp
         return sb.toString();
     }
 
+    protected String getEmrid() {
+        return this.emrid;
+    }
+
     protected boolean isCMEHost(final String link) {
         for (String host : UTD_HOSTS) {
             if (link.contains(host)) {
@@ -40,9 +44,5 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer imp
             }
         }
         return false;
-    }
-    
-    protected String getEmrid() {
-        return this.emrid;
     }
 }

@@ -28,11 +28,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
     }
 
     @Override
-    protected Result doSearch(final String query) {
-        return searchWithEngines(query, null);
-    }
-
-    @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
@@ -47,6 +42,11 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
         if (this.synchronous == null) {
             this.synchronous = parameters.get(Model.SYNCHRONOUS);
         }
+    }
+
+    @Override
+    protected Result doSearch(final String query) {
+        return searchWithEngines(query, null);
     }
 
     protected Result searchWithEngines(final String query, final Collection<String> engines) {

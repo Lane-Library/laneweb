@@ -66,7 +66,7 @@ public class RequestParameterDataBinder implements DataBinder {
                 model.put(name, value);
             } else if (this.parameterModelMap.containsKey(name)) {
                 if ("q".equals(name)) {
-                    //trim the query case 73719
+                    // trim the query case 73719
                     model.put(Model.QUERY, value.trim());
                     try {
                         model.put(Model.URL_ENCODED_QUERY, URLEncoder.encode(value, "UTF-8"));

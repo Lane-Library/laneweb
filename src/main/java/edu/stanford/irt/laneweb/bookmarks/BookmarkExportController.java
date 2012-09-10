@@ -14,21 +14,21 @@ import edu.stanford.irt.laneweb.model.Model;
 @RequestMapping(value = "/bookmarks/export")
 public class BookmarkExportController extends BookmarkController {
 
-    private static final String DOCUMENT_HEADER = "<!DOCTYPE NETSCAPE-Bookmark-file-1>\n"
+    private static final String DOCUMENT_FOOTER = "    </DL><p>\n</DL><p>\n";
+
+    private static final String DOCUMENT_HEADER =
+            "<!DOCTYPE NETSCAPE-Bookmark-file-1>\n"
             + "<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=UTF-8\">\n"
             + "<TITLE>Bookmarks</TITLE>\n"
-            + "<H1>Lane Bookmarks</H1>\n"
-            + "<DL><p>\n"
+            + "<H1>Lane Bookmarks</H1>\n" + "<DL><p>\n"
             + "    <DT><H3 ADD_DATE=\"0\">Lane Bookmarks</H3>\n"
             + "    <DL><p>\n";
 
-    private static final String ITEM_PREFIX = "        <DT><A HREF=\"";
-    
     private static final String ITEM_MIDDLEFIX = "\" ADD_DATE=\"0\">";
-    
+
+    private static final String ITEM_PREFIX = "        <DT><A HREF=\"";
+
     private static final String ITEM_SUFFIX = "</A>\n";
-    
-    private static final String DOCUMENT_FOOTER = "    </DL><p>\n</DL><p>\n";
 
     /**
      * Produces importable html bookmarks.

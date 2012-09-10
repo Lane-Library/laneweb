@@ -25,9 +25,10 @@ import edu.stanford.irt.suggest.SuggestionManager;
 @Controller
 public class SuggestionController {
 
-    private static final Pattern ER_PATTERN = Pattern.compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
+    private static final Map<String, List<String>> EMPTY_SUGGESTIONS = Collections.singletonMap("suggest",
+            Collections.<String> emptyList());
 
-    private static final Map<String, List<String>> EMPTY_SUGGESTIONS = Collections.singletonMap("suggest", Collections.<String>emptyList());
+    private static final Pattern ER_PATTERN = Pattern.compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
 
     private static final int MAX_QUERY_LENGTH = 32;
 
@@ -48,12 +49,6 @@ public class SuggestionController {
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
     private SuggestionManager meshSuggestionManager;
 
-    @RequestMapping(value = "/**/apps/suggest/json")
-    @ResponseBody
-    public Map<String, List<String>> getSuggestions(@RequestParam final String q, @RequestParam(required = false) final String l) {
-        return Collections.singletonMap("suggest", getSuggestionList(q, l));
-    }
-
     @RequestMapping(value = "/**/apps/suggest/getSuggestionList")
     @ResponseBody
     public List<String> getSuggestionList(@RequestParam final String q, @RequestParam(required = false) final String l) {
@@ -68,6 +63,12 @@ public class SuggestionController {
             }
         }
         return strings;
+    }
+
+    @RequestMapping(value = "/**/apps/suggest/json")
+    @ResponseBody
+    public Map<String, List<String>> getSuggestions(@RequestParam final String q, @RequestParam(required = false) final String l) {
+        return Collections.singletonMap("suggest", getSuggestionList(q, l));
     }
 
     /**

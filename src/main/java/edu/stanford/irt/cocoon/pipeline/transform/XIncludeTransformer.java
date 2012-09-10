@@ -58,14 +58,14 @@ public class XIncludeTransformer extends AbstractTransformer implements Cacheabl
 
     private static final String XINCLUDE_CACHE_KEY = "XInclude";
 
+    private Logger log = LoggerFactory.getLogger(XIncludeTransformer.class);
+
     private ServiceManager manager;
 
     private SAXParser parser;
 
     /** The {@link SourceValidity} instance associated with this request. */
     private MultiSourceValidity validity;
-
-    private Logger log = LoggerFactory.getLogger(XIncludeTransformer.class);
 
     private XIncludePipe xIncludePipe;
 

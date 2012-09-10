@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-//TODO: use the captures to assert things about cookies
+// TODO: use the captures to assert things about cookies
 public class PersistentLoginFilterTest {
 
     private FilterChain chain;

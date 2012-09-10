@@ -11,7 +11,7 @@ public class ProxyLinks {
     private List<Pattern> noProxyRegex;
 
     private List<Pattern> proxyRegex;
-    
+
     public ProxyLinks(final List<String> proxyRegex, final List<String> noProxyRegex) {
         this.proxyRegex = new LinkedList<Pattern>();
         for (String pattern : proxyRegex) {

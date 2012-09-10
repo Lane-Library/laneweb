@@ -35,7 +35,7 @@ public class BassettCollectionManager {
     private static final String SEARCH_COUNT = "search.count";
 
     private DataSource dataSource;
-    
+
     private Properties sqlStatements;
 
     public BassettCollectionManager(final DataSource dataSource, final Properties sqlStatements) {

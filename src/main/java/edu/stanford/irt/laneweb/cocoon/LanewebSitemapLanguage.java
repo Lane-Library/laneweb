@@ -110,7 +110,8 @@ public class LanewebSitemapLanguage extends SitemapLanguage implements Applicati
 
     @SuppressWarnings("rawtypes")
     @Override
-    public ProcessingNode setupNode(final ProcessingNode node, final Configuration config) throws ServiceException, ConfigurationException {
+    public ProcessingNode setupNode(final ProcessingNode node, final Configuration config) throws ServiceException,
+            ConfigurationException {
         Location location = getLocation(config);
         if (node instanceof AbstractProcessingNode) {
             ((AbstractProcessingNode) node).setLocation(location);

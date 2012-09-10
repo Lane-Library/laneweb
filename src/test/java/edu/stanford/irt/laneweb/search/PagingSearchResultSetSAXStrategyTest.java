@@ -32,13 +32,13 @@ public class PagingSearchResultSetSAXStrategyTest {
 
     private Set<SearchResult> results;
 
-    private XMLConsumer xmlConsumer;
-    
     private SAXStrategy<SearchResult> resultStrategy;
-    
-    private PagingSearchResultSetSAXStrategy strategy;
-    
+
     private PagingSearchResultSet set;
+
+    private PagingSearchResultSetSAXStrategy strategy;
+
+    private XMLConsumer xmlConsumer;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -64,7 +64,8 @@ public class PagingSearchResultSetSAXStrategyTest {
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("query".toCharArray()), eq(0), eq(5));
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS),
+                isA(Attributes.class));
         expect(this.set.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS));
@@ -99,7 +100,8 @@ public class PagingSearchResultSetSAXStrategyTest {
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("query".toCharArray()), eq(0), eq(5));
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS),
+                isA(Attributes.class));
         expect(this.set.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS));
@@ -131,7 +133,8 @@ public class PagingSearchResultSetSAXStrategyTest {
         this.xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
         Capture<Attributes> atts = new Capture<Attributes>();
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES), capture(atts));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS),
+                isA(Attributes.class));
         expect(this.set.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS));
@@ -162,7 +165,8 @@ public class PagingSearchResultSetSAXStrategyTest {
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("query".toCharArray()), eq(0), eq(5));
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS),
+                isA(Attributes.class));
         expect(this.set.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS));
@@ -197,7 +201,8 @@ public class PagingSearchResultSetSAXStrategyTest {
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("query".toCharArray()), eq(0), eq(5));
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS),
+                isA(Attributes.class));
         expect(this.set.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS));
@@ -232,7 +237,8 @@ public class PagingSearchResultSetSAXStrategyTest {
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("query".toCharArray()), eq(0), eq(5));
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.QUERY), eq(Resource.QUERY));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS),
+                isA(Attributes.class));
         expect(this.set.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.CONTENT_HIT_COUNTS), eq(Resource.CONTENT_HIT_COUNTS));

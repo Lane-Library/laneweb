@@ -14,10 +14,10 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class EzproxyServersWriter {
-    
-    private static final String UNION = "union ";
 
-    private static final byte[] HJ = {'H','J',' '};
+    private static final byte[] HJ = { 'H', 'J', ' ' };
+
+    private static final String UNION = "union ";
 
     private static final String SQL =
         "with urls as ( "
@@ -41,18 +41,18 @@ public class EzproxyServersWriter {
         + UNION
         + "select substr(url, 0, instr(url,'/',1,3)-1) as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) > 0 "
-        + UNION
+        + UNION 
         + "select url as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
 
     private static final byte[] SUL;
 
-    private static final byte[] T = {'T',' '};
-    
-    private static final byte[] U = {'U',' '};
+    private static final byte[] T = { 'T', ' ' };
+
+    private static final byte[] U = { 'U', ' ' };
 
     private static final String UTF8 = "UTF-8";
-    
+
     static {
         try {
             SUL = "T jenson.stanford.edu\nU http://jenson.stanford.edu\nHJ jenson.stanford.edu\n\nT socrates.stanford.edu\nU http://socrates.stanford.edu\nHJ socrates.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
@@ -61,7 +61,7 @@ public class EzproxyServersWriter {
             throw new ExceptionInInitializerError(e);
         }
     }
-    
+
     private DataSource dataSource;
 
     public EzproxyServersWriter(final DataSource dataSource) {
