@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2012-09-10" version="1.13.10" description="1.13.10 bug fix release">
+            <action date="2012-09-07" issue="75550" dev="ceyates" type="fix">
+                /apps/proxy/credential fails when curly braces in query string 
+            </action>
             <action date="2012-09-05" issue="75365" dev="ceyates" type="update">
                 enable validation for inputs in all feedback forms 
             </action>
