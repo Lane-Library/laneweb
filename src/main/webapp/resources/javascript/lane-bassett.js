@@ -41,7 +41,6 @@
                     container = Y.one('#bassettContent');
                 container.setContent(content);
                 registerLinksContainer(container);
-                Y.fire('lane:change');
             }
             Y.io(url, {on : {success : successHandler}});
         },

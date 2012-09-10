@@ -464,13 +464,6 @@
 
             Y.lane.ToolTips = tt;
         };
-    Y.on('lane:change', function() {
-        if (Y.lane.ToolTips) {
-           Y.lane.ToolTips.destroy();
-           Y.lane.ToolTips = undefined;
-        }
-        createTooltips(); 
-    });
-    
+
     createTooltips();
 })();
