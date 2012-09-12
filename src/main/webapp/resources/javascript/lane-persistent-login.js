@@ -42,7 +42,8 @@
 	
 	
     function _proxiedResourceClickedOn(event) {
-		var link = event.target, isActive;
+		var link = anchor = event.target.ancestor("a") || event.target,
+		isActive;
 		redirectUrl = encodeURIComponent(link.get('href'));
 		event.preventDefault();
 		// don\'t want a redirect with the tracking see tracking.js code if !rel
