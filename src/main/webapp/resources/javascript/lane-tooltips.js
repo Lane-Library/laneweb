@@ -454,7 +454,8 @@
                 zIndex: 2,
                 autoHideDelay: 60000,
                 constrain:true,
-                render : true
+                render : true,
+                delegate : ".content"
             });
             tt.after('visibleChange', function(e) {
                 if (e.newVal === false) {

@@ -142,7 +142,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-quicklinks.js",
         "form-validator.js",
         "lane-search-reset.js",
-        "lane-search-hoverText.js",
+        "hover-controller.js",
         "lane-feedback.js",
         "banner.js",
         "purchase-suggestions.js",

@@ -9,6 +9,5 @@
         LANE.search.facets.setActiveFacet(printId);
         LANE.Search.History.addValue("facet", printId);
         Y.one('#all-allFacet').addClass('inactiveFacet');
-        Y.fire('lane:change');
     }
 })();

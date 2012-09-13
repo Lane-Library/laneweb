@@ -93,18 +93,41 @@
 #searchResults ul {
     padding:5px;
 }
-#searchResults .showAbstract{
+
+/* abstract and description related styles*/
+/*.hoverTrigger class added by javascript (also removes .hvrTrig)*/
+#searchResults .showAbstract {
     margin-left:20px;
 }
-#searchResults .hvrTarg {
+.hvrTrig:hover .showAbstract, .active .showAbstract {
+	display:none
+}
+.hvrTarg {
     display:none;
     margin-top:5px;
     padding:2px;
     border-top:1px dotted #CCCCCC;
 }
-.hvrTrig, .hvrTrig a {
+.hoverTrigger, .hoverTrigger a {
     cursor:help;
 }
+.hvrTrig:hover, .hoverTrigger.active {
+    background-color: #F2F3ED;
+    padding:4px;
+    border:1px solid
+}
+
+.hvrTrig:hover .hvrTarg, .hoverTrigger.active .hvrTarg {
+    display:block
+}
+
+.hoverTrigger.active {
+    cursor:default
+}
+.hoverTrigger.active a {
+    cursor:pointer
+}
+
 .sourceLink {
     color:#666666;
 }

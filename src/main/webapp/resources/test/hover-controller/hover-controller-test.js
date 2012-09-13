@@ -9,14 +9,13 @@ Y.use("node-event-simulate", "console", "test", function(Y){
         testHoverTriggerPresent: function() {
             Y.Assert.isNotNull(Y.one(".hvrTrig"));
         },
-        testHoverTargetVisibleThenHidden: function() {
-            var trigger = Y.one(".hvrTrig"),
-                target = trigger.one(".hvrTarg");
+        testHoverToggleActive: function() {
+            var trigger = Y.one(".hvrTrig");
             trigger.simulate('mouseover');
             this.wait(function() {
-                Y.Assert.areEqual("block", target.getStyle("display"));
+                Y.Assert.isTrue(trigger.hasClass("active"));
                 trigger.simulate('mouseout');
-                Y.Assert.areEqual("none", target.getStyle("display"));
+                Y.Assert.isFalse(trigger.hasClass("active"));
             }, 1500);
         }
     });

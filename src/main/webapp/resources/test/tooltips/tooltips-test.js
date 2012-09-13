@@ -20,12 +20,6 @@ Y.use("overlay", 'node-event-simulate', 'console', 'test', function(Y){
             	Y.Assert.isTrue(inside);
             }, 500);
             b.simulate("mouseout");
-        },
-        
-        testOnlyOneWidget : function() {
-        	Y.Assert.areEqual(1, Y.all(".yui3-tooltip").size());
-        	Y.fire("lane:change");
-        	Y.Assert.areEqual(1, Y.all(".yui3-tooltip").size());
         }
     });
     Y.one('body').addClass('yui3-skin-sam');

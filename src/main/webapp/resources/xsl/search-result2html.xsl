@@ -90,7 +90,8 @@
         </xsl:variable>
 
         <dd>
-            <ul class="r-{/s:resources/@start + position()}">
+            <ul>
+                <xsl:call-template name="ulClass"/>
                 <li>
                     <a class="primaryLink" href="{$primaryLink}">
                         <xsl:apply-templates select="s:title"/>
@@ -145,7 +146,8 @@
     <!-- tranforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
         <dd>
-            <ul class="r-{/s:resources/@start + position()}">
+            <ul>
+                <xsl:call-template name="ulClass"/>
                 <li>
                     <xsl:choose>
                         <xsl:when
@@ -447,6 +449,15 @@
                 <xsl:with-param name="query-string" select="$query-string"/>
             </xsl:call-template>
         </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="ulClass">
+        <xsl:attribute name="class">
+            <xsl:value-of select="concat('r-', /s:resources/@start + position())"/>
+            <xsl:if test="s:description">
+                <xsl:text> hvrTrig</xsl:text>
+            </xsl:if>
+        </xsl:attribute>
     </xsl:template>
 
 </xsl:stylesheet>
