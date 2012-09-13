@@ -88,8 +88,8 @@
             this._facet.removeClass('current');
         };
         Result.addShowAbstract = function(container) {
-            if (Y.UA.ios) {
-                //add showAbstract link to in ios
+            if (Y.UA.ios && !container.one(".showAbstract")) {
+                //add showAbstract links in ios
             	container.all(".hvrTrig").each(function(node) {
                     var label = (node.one(".pmid")) ? 'Abstract' : 'Description';
                     node.one(".hvrTarg").insert("<li class='showAbstract'>[<a href='#'>Show " + label + "</a>]</li>", "before");
