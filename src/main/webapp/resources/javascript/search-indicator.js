@@ -1,5 +1,9 @@
 (function() {
 	
+	/**
+	 * Provides static show and hide methods to (surprise!) show
+	 * and hide the search indicator animated gif.
+	 */
 	var SearchIndicator = Y.namespace("lane.SearchIndicator"),
 	    node = Y.one("#searchIndicator");
 	
