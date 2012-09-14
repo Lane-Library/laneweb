@@ -1,6 +1,6 @@
 (function() {
     var spellCheck = Y.one('#spellCheck'),
-        searchTerms = Y.lane.SearchResult.getSearchTerms(location.search),
+        searchTerms = Y.lane.SearchResult.getSearchTerms(),
         basePath = Y.lane.Model.get("base-path") || "";
     if (spellCheck && searchTerms) {
         //get the suggestion

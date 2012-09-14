@@ -35,6 +35,7 @@
                 <value>ipgroup</value>
                 <value>auth</value>
                 <value>query</value>
+                <value>source</value>
                 <value>url-encoded-query</value>
                 <!--<value>live-chat-available</value>
                 <value>proxy-links</value>

@@ -2,7 +2,7 @@
 //check if there is a query
 (function() {
 	
-	var searchTerms = Y.lane.SearchResult.getSearchTerms(location.search),
+	var searchTerms = Y.lane.SearchResult.getSearchTerms(),
 	    queryMapping = Y.one('#queryMapping'),
 	    basePath;
         if (searchTerms && queryMapping) {

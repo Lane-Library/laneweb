@@ -1,7 +1,7 @@
 (function() {
     var hybridInput, laneSuggest,
         basePath = Y.lane.Model.get("base-path") || "",
-        searchTerms = Y.lane.SearchResult.getSearchTerms(location.search);
+        searchTerms = Y.lane.SearchResult.getSearchTerms();
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search

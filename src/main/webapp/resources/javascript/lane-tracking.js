@@ -2,8 +2,8 @@
     
     var model = Y.lane.Model,
         searchResult = Y.lane.SearchResult,
-        searchTerms = searchResult.getSearchTerms(location.search),
-        searchSource = searchResult.getSearchSource(location.search);
+        searchTerms = searchResult.getSearchTerms(),
+        searchSource = searchResult.getSearchSource();
     
         LANE.tracking = function() {
             //TODO more descriptive variable names

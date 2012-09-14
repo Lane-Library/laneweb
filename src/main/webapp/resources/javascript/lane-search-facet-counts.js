@@ -1,6 +1,6 @@
 //TODO: should this stop polling when all facets are complete? currently polls until search app done or timeout
 (function() {
-    var searchTerms = Y.lane.SearchResult.getSearchTerms(location.search),
+    var searchTerms = Y.lane.SearchResult.getSearchTerms(),
         facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
         basePath = Y.lane.Model.get("base-path") || "",

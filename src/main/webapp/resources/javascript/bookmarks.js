@@ -661,7 +661,7 @@
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                if (searchResult.getSearchTerms(location.search)) {
+                if (searchResult.getSearchTerms()) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
                         bookmarkSearch.setStyle("display", "block");
@@ -731,8 +731,8 @@
              * @private
              */
             _handleBookmarkSearchClick : function(event) {
-                var label = "Search for: " + searchResult.getSearchTerms(location.search),
-                    url = "/search.html?source=" + searchResult.getSearchSource(location.search) + "&q=" + searchResult.getSearchTerms(location.search),
+                var label = "Search for: " + searchResult.getSearchTerms(),
+                    url = "/search.html?source=" + searchResult.getSearchSource() + "&q=" + encodeURIComponent(searchResult.getSearchTerms()),
                     bookmarkSearch = Y.one("#bookmarkSearch"),
                     eventHandle;
                 this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));

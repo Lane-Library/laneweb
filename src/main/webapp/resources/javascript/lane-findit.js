@@ -1,6 +1,6 @@
 (function() {
     var findItNode = Y.one('#findIt'),
-        searchTerms = Y.lane.SearchResult.getSearchTerms(location.search),
+        searchTerms = Y.lane.SearchResult.getSearchTerms(),
         basePath = Y.lane.Model.get("base-path") || "",
         url;
     if (findItNode && searchTerms) {
