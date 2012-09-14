@@ -3,14 +3,14 @@
         model = Y.lane.Model,
         basePath = model.get(model.BASE_PATH) || "",
         query = model.get(model.QUERY),
-        encodedQuery = model.get(model.URL_ENCODED_QUERY);
+        encodedQuery = model.get(model.URL_ENCODED_QUERY),
+        searchIndicator = Y.lane.SearchIndicator;
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
             searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
             uberEngines = ['cro_', 'mdc_'], // engines with multiple resources
             startTime,
-            searchIndicator = new LANE.SearchIndicator(),
             getSearchUrl = function() {
                 var add, i, y, searchUrl = basePath + '/apps/search/json?q=' + encodedQuery;
                 for (y = 0; y < searchables.length; y++) {
@@ -116,14 +116,14 @@
     if (Y.all('.metasearch').size() > 0 && query) {
         LANE.metasearch.initialize();
         LANE.metasearch.getResultCounts();
-        new LANE.SearchIndicator().show();
+        searchIndicator.show();
     }
     // hybrid search page inputs
     hybridInput = Y.one('.laneSuggest');
     if (hybridInput) {
         laneSuggest = new Y.lane.Suggest(hybridInput);
         laneSuggest.on("select",function(e){
-            new LANE.SearchIndicator().show();
+        	searchIndicator.show();
             hybridInput.ancestor("form").submit();
         });
     }

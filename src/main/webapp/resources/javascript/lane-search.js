@@ -6,7 +6,7 @@
             searchOptions = searchSourceSelect.all('option'),
             searchTipsLink = Y.one('#searchTips a'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
-            searchIndicator = new LANE.SearchIndicator(),
+            searchIndicator = Y.lane.SearchIndicator,
             searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
             getLimitForSource = function(source) {
                 var limit = "";

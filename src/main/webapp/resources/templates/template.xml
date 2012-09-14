@@ -45,8 +45,7 @@
                                         >Textbooks Search</option>
                                 </select>
                                 <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187; </span>
-                                <div id="searchIndicator"><img alt="[searching]"
-                                    src="/resources/images/search-indicator.gif"/></div>
+                                <div id="searchIndicator"></div>
                                 <input name="q" id="searchTerms" type="text"/>
                                 <input id="searchSubmit" type="submit" value="search"/>
                                 <a id="searchReset" title="Clear Search" href="/">×</a>

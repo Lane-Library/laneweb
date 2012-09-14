@@ -1,9 +1,8 @@
 (function() {
     var elt = Y.one('#searchFacets'),
-        searchIndicator = new LANE.SearchIndicator(),
+        searchIndicator = Y.lane.SearchIndicator,
         model = Y.lane.Model,
         basePath = model.get(model.BASE_PATH) || "",
-        query = model.get(model.QUERY),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         container = Y.one('#searchResults'),
         facets, i, type, source, Result;

@@ -6,36 +6,15 @@ Y.use("node-event-simulate", "console", "test", function(Y){
 
     var searchIndicatorTestCase = new Y.Test.Case({
         name: "Lane Search Indicator Test Case",
-        setUp: function() {
-            var indicator = Y.one("#searchIndicator");
-            if (indicator) {
-                indicator.remove();
-            }
-        },
-        testImageNotPresent: function() {
-            Y.Assert.isNull(Y.one("#searchIndicator"));
-        },
-        testConstructorCreatesImage: function() {
-            new LANE.SearchIndicator();
-            Y.Assert.isObject(Y.one("#searchIndicator"));
-        },
+        
+        indicator : Y.lane.SearchIndicator,
+        
         testShowAndHide: function() {
-            var indicator = new LANE.SearchIndicator();
             var node = Y.one("#searchIndicator");
-            indicator.show();
-            Y.Assert.areEqual("block", node.getStyle("display"));
-            indicator.hide();
-            Y.Assert.areEqual("none", node.getStyle("display"));
-        },
-        testTwoIndicatorsPlayNice: function() {
-            var indicator1 = new LANE.SearchIndicator();
-            var indicator2 = new LANE.SearchIndicator();
-            Y.Assert.areEqual(1, Y.all("#searchIndicator").size());
-            var node = Y.one("#searchIndicator");
-            indicator1.show();
-            Y.Assert.areEqual("block", node.getStyle("display"));
-            indicator2.hide();
-            Y.Assert.areEqual("none", node.getStyle("display"));
+            this.indicator.show();
+            Y.Assert.isTrue(node.hasClass("on"));
+            this.indicator.hide();
+            Y.Assert.isFalse(node.hasClass("on"));
         }
     });
     

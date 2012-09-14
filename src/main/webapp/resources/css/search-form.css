@@ -89,10 +89,16 @@
 }
 #searchIndicator {
     display : none;
+    background-image: url(/././resources/images/search-indicator.gif);
     position : absolute;
     top : 0px;
     left : 280px;
+    width: 220px;
+    height: 19px;
     z-index : 1;
+}
+#searchIndicator.on {
+	display:block
 }
 #searchTips {
     position : absolute;
