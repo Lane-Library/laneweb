@@ -76,8 +76,10 @@
     hc = new HoverController();
     
     //delegate mouseenter events on class "hvrTrig" and "hoverTrigger"
-    Y.delegate("mouseenter", function(event) {
-        hc.setTarget(event.currentTarget);
-    }, "#searchResults", ".hvrTrig, .hoverTrigger");
+    if (Y.one("#searchResults")) {
+        Y.delegate("mouseenter", function(event) {
+            hc.setTarget(event.currentTarget);
+        }, "#searchResults", ".hvrTrig, .hoverTrigger");
+    }
     
 })();
