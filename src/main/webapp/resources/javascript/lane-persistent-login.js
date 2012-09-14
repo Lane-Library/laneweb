@@ -42,7 +42,7 @@
 	
 	
     function _proxiedResourceClickedOn(event) {
-		var link =  event.target.ancestor("a") || event.target,
+		var link = event.currentTarget,
 		isActive;
 		redirectUrl = encodeURIComponent(link.get('href'));
 		event.preventDefault();
