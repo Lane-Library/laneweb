@@ -2,9 +2,9 @@
     var elt = Y.one('#searchFacets'),
         searchIndicator = new LANE.SearchIndicator(),
         model = Y.lane.Model,
-        basePath = model.get("base-path") || "",
-        query = model.get("query"),
-        encodedQuery = model.get("url-encoded-query"),
+        basePath = model.get(model.BASE_PATH) || "",
+        query = model.get(model.QUERY),
+        encodedQuery = model.get(model.URL_ENCODED_QUERY),
         container = Y.one('#searchResults'),
         facets, i, type, source, Result;
     LANE.search.facets = function(){

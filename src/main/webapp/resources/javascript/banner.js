@@ -38,7 +38,8 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 	},
 	_handleIndexChange : function(event) {
 		var navNodes = this.get("navNodes"),
-		    basePath = Y.lane.Model.get("base-path") || "";
+		    model = Y.lane.Model,
+		    basePath = model.get(model.BASE_PATH) || "";
 		navNodes.item(event.prevVal).removeClass("banner-nav-active");
 		navNodes.item(event.newVal).addClass("banner-nav-active");
         Y.io(basePath + "/plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {

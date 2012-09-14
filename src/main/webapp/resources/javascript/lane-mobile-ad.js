@@ -1,7 +1,8 @@
 //advertise existence of mobile interface to iPad, iPhone, iPod and Android clients
 (function() {
     var advert, device, link,
-        basePath = Y.lane.Model.get("base-path") || "";
+        model = Y.lane.Model,
+        basePath = model.get(model.BASE_PATH) || "";
     if(navigator.userAgent.match(/(iPhone|iPod|Android)/) && !location.search.match(/mad=0/)){
         device = RegExp.$1;
         link = basePath + '/index.html?site_preference=mobile';

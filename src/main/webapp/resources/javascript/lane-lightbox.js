@@ -108,7 +108,8 @@
         var href, regex, url,
             anchor = event.target.ancestor("a") || event.target,
             rel = anchor.get("rel"),
-            basePath = Y.lane.Model.get("base-path") || "";
+            model = Y.lane.Model,
+            basePath = model.get(model.BASE_PATH) || "";
         if (rel && rel.indexOf("lightbox") === 0) {
             event.preventDefault();
             // need to dynamically create regex for getting /plain url because

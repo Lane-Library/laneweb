@@ -7,9 +7,9 @@
 	now = new Date(),
 	needPopup= true,
 	model = Y.lane.Model,
-	basePath = model.get("base-path") || "",
-	auth = model.get("auth"),
-	ipgroup = model.get("ipgroup"),
+	basePath = model.get(model.BASE_PATH) || "",
+	auth = model.get(model.AUTH),
+	ipgroup = model.get(model.IPGROUP),
 	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup;
 	
 	if(fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){

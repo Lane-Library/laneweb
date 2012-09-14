@@ -4,8 +4,8 @@
         onSuccess: function() {
             var host = document.location.host,
                 model = Y.lane.Model,
-                ipgroup = model.get("ipgroup"),
-                auth = model.get("auth");
+                ipgroup = model.get(model.IPGROUP),
+                auth = model.get(model.AUTH);
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
                     gaPageTracker = _gat._createTracker("UA-3202241-2","gaPageTracker");

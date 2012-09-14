@@ -123,17 +123,18 @@
          * @param bookmarks {array} may be undefined
          */
         Bookmarks = function(bookmarks) {
+        	var i, model = Y.lane.Model;
             this._bookmarks = [];
             if (bookmarks && !Y.Lang.isArray(bookmarks)) {
                 throw("bad config");
             }
             if (bookmarks) {
-                for (var i = 0; i < bookmarks.length; i++) {
+                for (i = 0; i < bookmarks.length; i++) {
                     bookmarks[i].after("valueChange", this._handleValueChange, this);
                     this._bookmarks.push(bookmarks[i]);
                 }
             }
-            this._basePath = Y.lane.Model.get("base-path") || "";
+            this._basePath = model.get(model.BASE_PATH) || "";
 
             /**
              * @event add
@@ -657,10 +658,11 @@
              * @method initializer
              */
             initializer : function() {
+            	var model = Y.lane.Model;
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                if (Y.lane.Model.get("query")) {
+                if (model.get(model.QUERY)) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
                         bookmarkSearch.setStyle("display", "block");
@@ -731,9 +733,9 @@
              */
             _handleBookmarkSearchClick : function(event) {
                 var model = Y.lane.Model,
-                    query = model.get("query"),
-                    source = model.get("source"),
-                    encodedQuery = model.get("url-encoded-query"),
+                    query = model.get(model.QUERY),
+                    source = model.get(model.SOURCE),
+                    encodedQuery = model.get(model.URL_ENCODED_QUERY),
                     label = "Search for: " + query,
                     url = "/search.html?source=" + source + "&q=" + encodedQuery,
                     bookmarkSearch = Y.one("#bookmarkSearch"),

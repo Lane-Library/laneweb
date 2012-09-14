@@ -1,5 +1,6 @@
 (function() {
-	var basePath = Y.lane.Model.get("base-path") || "";
+	var model = Y.lane.Model,
+	    basePath = model.get(model.BASE_PATH) || "";
     LANE.SearchIndicator = function() {
         var indicator = Y.one("#searchIndicator");
         if (!indicator) {

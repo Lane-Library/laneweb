@@ -3,9 +3,9 @@
 (function() {
 	
 	var model = Y.lane.Model,
-	    query = model.get("query"),
-	    basePath = model.get("base-path") || "",
-	    encodedQuery = model.get("url-encoded-query"),
+	    query = model.get(model.QUERY),
+	    basePath = model.get(model.BASE_PATH) || "",
+	    encodedQuery = model.get(model.URL_ENCODED_QUERY),
 	    queryMapping = Y.one('#queryMapping');
         if (query && queryMapping) {
             Y.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {

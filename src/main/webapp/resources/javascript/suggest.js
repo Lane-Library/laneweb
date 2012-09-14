@@ -1,7 +1,8 @@
 
 (function() {
 
-    var basePath = Y.lane.Model.get("base-path") || "",
+    var model = Y.lane.Model,
+        basePath = model.get(model.BASE_PATH) || "",
     SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
     DEFAULT_LIMIT = "mesh-di",
     SELECT = "select",

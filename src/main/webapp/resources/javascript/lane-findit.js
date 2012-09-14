@@ -1,9 +1,9 @@
 (function() {
     var findItNode = Y.one('#findIt'),
         model = Y.lane.Model,
-        query = model.get("query"),
-        encodedQuery = model.get("url-encoded-query"),
-        basePath = model.get("base-path") || "",
+        query = model.get(model.QUERY),
+        encodedQuery = model.get(model.URL_ENCODED_QUERY),
+        basePath = model.get(model.BASE_PATH) || "",
         url;
     if (findItNode && query) {
         url = basePath + '/apps/sfx/json?q=' + encodedQuery;

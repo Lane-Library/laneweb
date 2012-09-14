@@ -4,7 +4,8 @@
 
 
         var bassettContent = Y.one('#bassettContent'),
-            basePath = Y.lane.Model.get("base-path") || "",
+            model = Y.lane.Model,
+            basePath = model.get(model.BASE_PATH) || "",
             diagramDisplay = false,
             accordion,
             history,

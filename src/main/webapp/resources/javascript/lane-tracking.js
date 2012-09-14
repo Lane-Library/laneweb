@@ -1,8 +1,8 @@
 (function() {
     
     var model = Y.lane.Model,
-        searchTerms = model.get("query"),
-        searchSource = model.get("source");
+        searchTerms = model.get(model.QUERY),
+        searchSource = model.get(model.SOURCE);
     
         LANE.tracking = function() {
             //TODO more descriptive variable names
@@ -17,7 +17,7 @@
                 }
                 if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
                     category = "lane:bookmarkClick";
-                    action = model.get("auth");
+                    action = model.get(model.AUTH);
                     label = LANE.tracking.getTrackedTitle(link);
                 }
                 if (link.ancestor(".lwSearchResults")) {
@@ -316,7 +316,7 @@
             Y.lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
                 Y.fire("lane:trackableEvent", {
                     category: "lane:bookmarkAdd",
-                    action: model.get("auth"),
+                    action: model.get(model.AUTH),
                     label: event.bookmark.getLabel()
                 });
             });

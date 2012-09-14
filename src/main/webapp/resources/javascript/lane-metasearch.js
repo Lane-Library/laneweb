@@ -1,9 +1,9 @@
 (function() {
     var hybridInput, laneSuggest,
         model = Y.lane.Model,
-        basePath = model.get("base-path") || "",
-        query = model.get("query"),
-        encodedQuery = model.get("url-encoded-query");
+        basePath = model.get(model.BASE_PATH) || "",
+        query = model.get(model.QUERY),
+        encodedQuery = model.get(model.URL_ENCODED_QUERY);
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search

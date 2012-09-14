@@ -9,9 +9,17 @@
         Model.superclass.constructor.apply(this, arguments);
     };
     
-    Model.NAME = "model";
-    
-    Y.extend(Model, Y.Base);
+    Y.extend(Model, Y.Base, {
+    	//keep this in sync with edu.stanford.irt.laneweb.model.Model
+    	AUTH : "auth",
+    	BASE_PATH : "base-path",
+    	IPGROUP : "ipgroup",
+    	QUERY : "query",
+    	SOURCE : "source",
+    	URL_ENCODED_QUERY : "url-encoded-query"
+    }, {
+    	NAME : "model"
+    });
     
     LANE.Model = new Model();
     
