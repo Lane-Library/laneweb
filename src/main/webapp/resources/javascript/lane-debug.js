@@ -113,7 +113,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-ie.js",
         "lane-mobile-ad.js",
         "lane-persistent-login.js",
-        "lane-search-result.js",
+        "search-result.js",
         "lane-search-indicator.js",
         "lane-bassett.js",
         "lane-textinputs.js",

@@ -1,6 +1,9 @@
 (function() {
     
-    var model = Y.lane.Model;
+    var model = Y.lane.Model,
+        searchResult = Y.lane.SearchResult,
+        searchTerms = searchResult.getSearchTerms(location.search),
+        searchSource = searchResult.getSearchSource(location.search);
     
         LANE.tracking = function() {
             //TODO more descriptive variable names
@@ -19,9 +22,9 @@
                     label = LANE.tracking.getTrackedTitle(link);
                 }
                 if (link.ancestor(".lwSearchResults")) {
-                    if (LANE.SearchResult.getSearchTerms()) {
+                    if (searchTerms) {
                         category = "lane:searchResultClick";
-                        action = LANE.SearchResult.getSearchTerms();
+                        action = searchTerms;
                         label = link.get('textContent');
                         value = parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10);
                     } else {
@@ -39,7 +42,7 @@
                 };
             },
             getPageviewTrackingData = function(event) {
-                var node = event.target, host, path, query, external, title, searchTerms, searchSource;
+                var node = event.target, host, path, query, external, title;
                 if (event.type == 'click') {
                     if (node.hasClass('yui3-accordion-item-trigger')) {
                         host = document.location.host;
@@ -99,10 +102,6 @@
                     path = '/' + path;
                 }
                 title = LANE.tracking.getTrackedTitle(node);
-                if (LANE.search && LANE.SearchResult.getSearchTerms()) {
-                    searchTerms = LANE.SearchResult.getSearchTerms();
-                    searchSource = LANE.SearchResult.getSearchSource();
-                }
                 return {
                     host: host,
                     path: path,

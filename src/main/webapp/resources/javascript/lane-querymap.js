@@ -1,12 +1,13 @@
 //TODO: this needs some cleaning up
 //check if there is a query
 (function() {
-    if (LANE.SearchResult.getEncodedSearchTerms()) {
-        //check if there is id=queryMapping
-        var queryMapping = Y.one('#queryMapping'), basePath;
-        if (queryMapping) {
+	
+	var searchTerms = Y.lane.SearchResult.getSearchTerms(location.search),
+	    queryMapping = Y.one('#queryMapping'),
+	    basePath;
+        if (searchTerms && queryMapping) {
         	basePath = Y.lane.Model.get("base-path") || "";
-            Y.io(basePath + '/apps/querymap/json?q=' + LANE.SearchResult.getEncodedSearchTerms(), {
+            Y.io(basePath + '/apps/querymap/json?q=' + encodeURIComponent(searchTerms), {
                 on:{
                 success: function(id, o) {
                     var anchor, span, i;
@@ -23,7 +24,7 @@
                             return string;
                         };
                         LANE.search.querymap.getResultCounts = function() {
-                            var url = basePath + '/apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms(), i;
+                            var url = basePath + '/apps/search/json?q=' + encodeURIComponent(searchTerms), i;
                             for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
                                 if (!LANE.search.querymap.resourceMap.resources[i].status) {
                                     url += '&r=' + LANE.search.querymap.resourceMap.resources[i].id;
@@ -79,7 +80,7 @@
                             // track mapped term, descriptor, and resources
                             Y.fire("lane:trackableEvent", {
                                 category: "lane:queryMapping",
-                                action: "query=" + LANE.SearchResult.getSearchTerms() + "; descriptor=" + LANE.search.querymap.resourceMap.descriptor.descriptorName,
+                                action: "query=" + searchTerms + "; descriptor=" + LANE.search.querymap.resourceMap.descriptor.descriptorName,
                                 label: "resources=" + LANE.search.querymap.getResourcesString()
                             });
                         }
@@ -87,6 +88,5 @@
                 }
             });
         }
-    }
 })();
 

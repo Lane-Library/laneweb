@@ -4,16 +4,23 @@ Y.use('node-event-simulate','console','test', function(Y) {
     var resultTestCase = new Y.Test.Case({
         
         name: 'Lane Result Test Case',
-        result: LANE.SearchResult,
+        
+        result: Y.lane.SearchResult,
         
         testGetSearchSource: function() {
-            Y.Assert.areEqual('foo', this.result.getSearchSource());
+            Y.Assert.areEqual('foo', this.result.getSearchSource("source=foo&q=bar+baz"));
         },
         testGetSearchTerms: function() {
-            Y.Assert.areEqual('bar baz', this.result.getSearchTerms());
+            Y.Assert.areEqual('bar baz', this.result.getSearchTerms("source=foo&q=bar+baz"));
         },
-        testGetEncodedSearchTerms: function() {
-            Y.Assert.areEqual('bar+baz', this.result.getEncodedSearchTerms());
+        testEncodeGetSearchTerms: function() {
+            Y.Assert.areEqual('bar%20baz', encodeURIComponent(this.result.getSearchTerms("source=foo&q=bar+baz")));
+        },
+        testGetSearchSourceUndefined: function() {
+        	Y.Assert.isUndefined(this.result.getSearchSource());
+        },
+        testGetSearchTermsUndefined: function() {
+        	Y.Assert.isUndefined(this.result.getSearchTerms());
         }
     });
     

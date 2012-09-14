@@ -1,6 +1,6 @@
 //TODO: should this stop polling when all facets are complete? currently polls until search app done or timeout
 (function() {
-    var searchString = LANE.SearchResult.getEncodedSearchTerms(),
+    var searchTerms = Y.lane.SearchResult.getSearchTerms(location.search),
         facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
         basePath = Y.lane.Model.get("base-path") || "",
@@ -15,7 +15,7 @@
                 }
             }
             if(requestString !== ''){
-                Y.io(basePath + '/apps/search/facets/json?q=' + searchString + '&f=' + requestString + '&rd=' + Math.random(), {
+                Y.io(basePath + '/apps/search/facets/json?q=' + encodeURIComponent(searchTerms) + '&f=' + requestString + '&rd=' + Math.random(), {
                     on: {
                         success:function(id, o) {
                             var response = Y.JSON.parse(o.responseText),
@@ -52,7 +52,7 @@
                 });
             }
     };
-    if (searchString && facets.size() > 0) {
+    if (searchTerms && facets.size() > 0) {
         makeRequest();
     }
 })();

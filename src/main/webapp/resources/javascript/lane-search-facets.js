@@ -32,7 +32,7 @@
         this._source = source;
         this._facet = facet;
         this._container = container;
-        this._url = basePath + '/plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.SearchResult.getEncodedSearchTerms();
+        this._url = basePath + '/plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + encodeURIComponent(Y.lane.SearchResult.getSearchTerms(location.search));
         this._state = 'initialized';
         this._callback = {
             on: {

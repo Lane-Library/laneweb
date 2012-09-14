@@ -1,10 +1,10 @@
 (function() {
     var findItNode = Y.one('#findIt'),
-        searchString = LANE.SearchResult.getEncodedSearchTerms(),
+        searchTerms = Y.lane.SearchResult.getSearchTerms(location.search),
         basePath = Y.lane.Model.get("base-path") || "",
         url;
-    if (findItNode && searchString) {
-        url = basePath + '/apps/sfx/json?q=' + searchString;
+    if (findItNode && searchTerms) {
+        url = basePath + '/apps/sfx/json?q=' + encodeURIComponent(searchTerms);
         Y.io(url, {
             on: {
                 success: function(id, o) {
@@ -18,7 +18,7 @@
                         // tracking
                         Y.fire("lane:trackableEvent", {
                             category: "lane:findit",
-                            action: "query=" + LANE.SearchResult.getSearchTerms(),
+                            action: "query=" + searchTerms,
                             label: "result=" + findIt.result
                         });
                     }
