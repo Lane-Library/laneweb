@@ -1,9 +1,8 @@
 (function() {
     
     var model = Y.lane.Model,
-        searchResult = Y.lane.SearchResult,
-        searchTerms = searchResult.getSearchTerms(),
-        searchSource = searchResult.getSearchSource();
+        searchTerms = model.get("query"),
+        searchSource = model.get("source");
     
         LANE.tracking = function() {
             //TODO more descriptive variable names

@@ -2,12 +2,13 @@
 //check if there is a query
 (function() {
 	
-	var searchTerms = Y.lane.SearchResult.getSearchTerms(),
-	    queryMapping = Y.one('#queryMapping'),
-	    basePath;
-        if (searchTerms && queryMapping) {
-        	basePath = Y.lane.Model.get("base-path") || "";
-            Y.io(basePath + '/apps/querymap/json?q=' + encodeURIComponent(searchTerms), {
+	var model = Y.lane.Model,
+	    query = model.get("query"),
+	    basePath = model.get("base-path") || "",
+	    encodedQuery = model.get("url-encoded-query"),
+	    queryMapping = Y.one('#queryMapping');
+        if (query && queryMapping) {
+            Y.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
                 on:{
                 success: function(id, o) {
                     var anchor, span, i;
@@ -24,7 +25,7 @@
                             return string;
                         };
                         LANE.search.querymap.getResultCounts = function() {
-                            var url = basePath + '/apps/search/json?q=' + encodeURIComponent(searchTerms), i;
+                            var url = basePath + '/apps/search/json?q=' + encodedQuery, i;
                             for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
                                 if (!LANE.search.querymap.resourceMap.resources[i].status) {
                                     url += '&r=' + LANE.search.querymap.resourceMap.resources[i].id;
@@ -80,7 +81,7 @@
                             // track mapped term, descriptor, and resources
                             Y.fire("lane:trackableEvent", {
                                 category: "lane:queryMapping",
-                                action: "query=" + searchTerms + "; descriptor=" + LANE.search.querymap.resourceMap.descriptor.descriptorName,
+                                action: "query=" + query + "; descriptor=" + LANE.search.querymap.resourceMap.descriptor.descriptorName,
                                 label: "resources=" + LANE.search.querymap.getResourcesString()
                             });
                         }

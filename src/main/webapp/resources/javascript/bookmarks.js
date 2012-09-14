@@ -1,7 +1,6 @@
 (function() {
 
-    var Bookmark, Bookmarks, BookmarksWidget, BookmarkLink, BookmarkEditor, BookmarksEditor,
-        searchResult = Y.lane.SearchResult;
+    var Bookmark, Bookmarks, BookmarksWidget, BookmarkLink, BookmarkEditor, BookmarksEditor;
 
     if (Y.one("#bookmarks")) {
 
@@ -661,7 +660,7 @@
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                if (searchResult.getSearchTerms()) {
+                if (Y.lane.Model.get("query")) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
                         bookmarkSearch.setStyle("display", "block");
@@ -731,10 +730,14 @@
              * @private
              */
             _handleBookmarkSearchClick : function(event) {
-                var label = "Search for: " + searchResult.getSearchTerms(),
-                    url = "/search.html?source=" + searchResult.getSearchSource() + "&q=" + encodeURIComponent(searchResult.getSearchTerms()),
+                var model = Y.lane.Model,
+                    query = model.get("query"),
+                    source = model.get("source"),
+                    encodedQuery = model.get("url-encoded-query"),
+                    label = "Search for: " + query,
+                    url = "/search.html?source=" + source + "&q=" + encodedQuery,
                     bookmarkSearch = Y.one("#bookmarkSearch"),
-                    eventHandle;
+                    eventHandle = null;
                 this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
                 //TODO: this is a temporary hack to take care of case 72768
                 if (bookmarkSearch) {

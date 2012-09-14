@@ -1,10 +1,12 @@
 (function() {
     var findItNode = Y.one('#findIt'),
-        searchTerms = Y.lane.SearchResult.getSearchTerms(),
-        basePath = Y.lane.Model.get("base-path") || "",
+        model = Y.lane.Model,
+        query = model.get("query"),
+        encodedQuery = model.get("url-encoded-query"),
+        basePath = model.get("base-path") || "",
         url;
-    if (findItNode && searchTerms) {
-        url = basePath + '/apps/sfx/json?q=' + encodeURIComponent(searchTerms);
+    if (findItNode && query) {
+        url = basePath + '/apps/sfx/json?q=' + encodedQuery;
         Y.io(url, {
             on: {
                 success: function(id, o) {
@@ -18,7 +20,7 @@
                         // tracking
                         Y.fire("lane:trackableEvent", {
                             category: "lane:findit",
-                            action: "query=" + searchTerms,
+                            action: "query=" + query,
                             label: "result=" + findIt.result
                         });
                     }
