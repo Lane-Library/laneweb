@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -42,16 +40,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
                 enginesToRun.add(enginesMap.get(resource));
             }
         }
-        Result result = searchWithEngines(query, enginesToRun);
-        //remove unrequested resources
-        for (Result engine : result.getChildren()) {
-            for (Result resource : engine.getChildren()) {
-                if (!this.resources.contains(resource.getId())) {
-                    engine.removeChild(resource);
-                }
-            }
-        }
-        return result;
+        return super.searchWithEngines(query, enginesToRun);
     }
 
     @SuppressWarnings("unchecked")

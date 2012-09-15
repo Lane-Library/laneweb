@@ -4,7 +4,6 @@ import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
@@ -51,7 +50,7 @@ public class ResourceSearchGeneratorTest {
     @Test
     public void testDoSearch() {
         expect(this.manager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
-        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(6);
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(3);
         expect(this.result.getId()).andReturn("engine-1");
         expect(this.result.getId()).andReturn("resource-1-1");
         expect(this.result.getId()).andReturn("resource-1-2");
@@ -60,12 +59,6 @@ public class ResourceSearchGeneratorTest {
         expect(this.result.getId()).andReturn("resource-2-2");
         expect(this.manager.search(isA(Query.class), eq(60000L), eq(Collections.singleton("engine-2")), eq(false))).andReturn(
                 this.result);
-        expect(this.result.getId()).andReturn("resource-1-1");
-        expect(this.result.getId()).andReturn("resource-1-2");
-        expect(this.result.getId()).andReturn("resource-2-1");
-        expect(this.result.getId()).andReturn("resource-2-2");
-        this.result.removeChild(this.result);
-        expectLastCall().times(3);
         replay(this.manager, this.saxStrategy, this.result);
         Map<String, Object> model = new HashMap<String, Object>();
         model.put(Model.QUERY, "query");
@@ -78,9 +71,9 @@ public class ResourceSearchGeneratorTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testDoSearchNullQuery() {
+    public void testDoSearchNullQUery() {
         expect(this.manager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
-        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(6);
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(3);
         expect(this.result.getId()).andReturn("engine-1");
         expect(this.result.getId()).andReturn("resource-1-1");
         expect(this.result.getId()).andReturn("resource-1-2");
@@ -88,12 +81,6 @@ public class ResourceSearchGeneratorTest {
         expect(this.result.getId()).andReturn("resource-2-1");
         expect(this.result.getId()).andReturn("resource-2-2");
         expect(this.manager.search(isA(Query.class), eq(60000L), isA(Collection.class), eq(false))).andReturn(this.result);
-        expect(this.result.getId()).andReturn("resource-1-1");
-        expect(this.result.getId()).andReturn("resource-1-2");
-        expect(this.result.getId()).andReturn("resource-2-1");
-        expect(this.result.getId()).andReturn("resource-2-2");
-        this.result.removeChild(this.result);
-        expectLastCall().times(3);
         replay(this.manager, this.saxStrategy, this.result);
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("resources", Collections.singleton("resource-2-1"));
@@ -106,7 +93,7 @@ public class ResourceSearchGeneratorTest {
     @Test
     public void testDoSearchParameters() {
         expect(this.manager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
-        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(6);
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(3);
         expect(this.result.getId()).andReturn("engine-1");
         expect(this.result.getId()).andReturn("resource-1-1");
         expect(this.result.getId()).andReturn("resource-1-2");
@@ -115,12 +102,6 @@ public class ResourceSearchGeneratorTest {
         expect(this.result.getId()).andReturn("resource-2-2");
         Capture<Collection<String>> list = new Capture<Collection<String>>();
         expect(this.manager.search(isA(Query.class), eq(60000L), capture(list), eq(false))).andReturn(this.result);
-        expect(this.result.getId()).andReturn("resource-1-1");
-        expect(this.result.getId()).andReturn("resource-1-2");
-        expect(this.result.getId()).andReturn("resource-2-1");
-        expect(this.result.getId()).andReturn("resource-2-2");
-        this.result.removeChild(this.result);
-        expectLastCall().times(2);
         replay(this.manager, this.saxStrategy, this.result);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         Map<String, String> parameters = new HashMap<String, String>();
