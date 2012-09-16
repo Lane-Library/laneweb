@@ -43,7 +43,7 @@ public class MetaSearchController {
      *            the desired resources to search
      * @return a Map representation of the Result for jsonification
      */
-    @RequestMapping(value = "/doResourceSearch")
+    @RequestMapping(value = "/apps/resourceSearch")
     @ResponseBody
     public Map<String, Object> search(
             @ModelAttribute(Model.QUERY) final String query,
