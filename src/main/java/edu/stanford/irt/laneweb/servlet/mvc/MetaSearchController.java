@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.Result;
@@ -24,15 +27,23 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 /**
  * A Controller that provides metasearch results
  */
-//TODO: this needs proxy link handling
 @Controller
 public class MetaSearchController {
 
     @Autowired
-    private RequestParameterDataBinder binder;
+    private MetaSearchManager manager;
 
     @Autowired
-    private MetaSearchManager manager;
+    private RequestParameterDataBinder parameterBinder;
+
+    @Autowired
+    private RemoteProxyIPDataBinder proxyBinder;
+
+    @Autowired
+    private BaseProxyURLDataBinder proxyURLBinder;
+
+    @Autowired
+    private SunetIdAndTicketDataBinder sunetidBinder;
 
     /**
      * Do a metasearch for a query and return only the requested resources.
@@ -45,13 +56,18 @@ public class MetaSearchController {
      */
     @RequestMapping(value = "/apps/resourceSearch")
     @ResponseBody
-    public Map<String, Object> search(
-            @ModelAttribute(Model.QUERY) final String query,
-            @ModelAttribute(Model.RESOURCES) final List<String> resources) {
+    public Map<String, Object> search(@ModelAttribute(Model.QUERY) final String query,
+            @ModelAttribute(Model.RESOURCES) final List<String> resources,
+            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks,
+            @ModelAttribute(Model.BASE_PROXY_URL) final String baseProxyURL) {
         Query simpleQuery = new SimpleQuery(query);
         Collection<String> engines = getEnginesForResources(resources);
         Result result = this.manager.search(simpleQuery, 60000, engines, false);
-        return getMapForResult(result, resources);
+        Map<String, Object> resultMap = getMapForResult(result, resources);
+        if (proxyLinks) {
+            createProxyLinks(resultMap, baseProxyURL);
+        }
+        return resultMap;
     }
 
     /**
@@ -64,12 +80,38 @@ public class MetaSearchController {
      */
     @ModelAttribute
     protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.binder.bind(model.asMap(), request);
-        if (!model.containsAttribute(Model.QUERY)) {
-            model.addAttribute(Model.QUERY, null);
+        this.sunetidBinder.bind(model.asMap(), request);
+        this.proxyBinder.bind(model.asMap(), request);
+        this.parameterBinder.bind(model.asMap(), request);
+        this.proxyURLBinder.bind(model.asMap(), request);
+        if (!model.containsAttribute(Model.PROXY_LINKS)) {
+            model.addAttribute(Model.PROXY_LINKS, Boolean.FALSE);
         }
-        if (!model.containsAttribute(Model.RESOURCES)) {
-            model.addAttribute(Model.RESOURCES, null);
+        if (!model.containsAttribute(Model.BASE_PROXY_URL)) {
+            model.addAttribute(Model.BASE_PROXY_URL, null);
+        }
+    }
+
+    /**
+     * Converts the urls to proxy links
+     * 
+     * @param resultMap
+     *            the result map
+     * @param ipgroup
+     *            the IPGroup
+     * @param sunetid
+     *            the sunetid
+     * @param ticket
+     *            the Ticket
+     */
+    private void createProxyLinks(final Map<String, Object> resultMap, final String baseProxyURL) {
+        StringBuilder sb = new StringBuilder();
+        Map<String, Object> resources = (Map<String, Object>) resultMap.get("resources");
+        for (Object value : resources.values()) {
+            sb.setLength(0);
+            Map<String, Object> resource = (Map<String, Object>) value;
+            sb.append(baseProxyURL).append(resource.get("url"));
+            resource.put("url", sb.toString());
         }
     }
 
@@ -124,8 +166,8 @@ public class MetaSearchController {
      *            the resource list
      * @return a map of resource results
      */
-    private Map<String, Object> getResourceResultMap(final Collection<Result> engines, final List<String> resources) {
-        Map<String, Object> map = new HashMap<String, Object>();
+    private Map<String, Map<String, Object>> getResourceResultMap(final Collection<Result> engines, final List<String> resources) {
+        Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
         for (Result engine : engines) {
             for (Result resource : engine.getChildren()) {
                 String id = resource.getId();
