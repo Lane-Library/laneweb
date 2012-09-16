@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.RequestAttributeDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
 import edu.stanford.irt.search.MetaSearchManager;
@@ -41,6 +42,9 @@ public class MetaSearchController {
 
     @Autowired
     private BaseProxyURLDataBinder proxyURLBinder;
+
+    @Autowired
+    private RequestAttributeDataBinder requestDataBinder;
 
     @Autowired
     private SunetIdAndTicketDataBinder sunetidBinder;
@@ -83,6 +87,7 @@ public class MetaSearchController {
         this.sunetidBinder.bind(model.asMap(), request);
         this.proxyBinder.bind(model.asMap(), request);
         this.parameterBinder.bind(model.asMap(), request);
+        this.requestDataBinder.bind(model.asMap(), request);
         this.proxyURLBinder.bind(model.asMap(), request);
         if (!model.containsAttribute(Model.PROXY_LINKS)) {
             model.addAttribute(Model.PROXY_LINKS, Boolean.FALSE);
