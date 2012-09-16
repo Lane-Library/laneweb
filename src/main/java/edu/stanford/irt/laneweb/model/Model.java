@@ -15,6 +15,8 @@ public interface Model {
 
     String BASE_PATH = "base-path";
 
+    String BASE_PROXY_URL = "base-proxy-url";
+
     String BASSETT_NUMBER = "basset-number";
 
     String BOOKMARKS = "bookmarks";
