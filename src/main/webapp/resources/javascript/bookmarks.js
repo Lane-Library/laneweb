@@ -610,7 +610,7 @@
 
         //create a new widget and keep a global reference to it
         //may be able to use Widget.getByNode("#bookmarks") rather than the global reference . . . .
-        Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true, displayLimit:5});
+        Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true, displayLimit:10});
         
         
         //don't create BookmarkLink if there is a class=no-bookmarking
