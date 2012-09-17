@@ -36,6 +36,9 @@ background-position: 0 -26px
 background-position: 0 -53px;
 }
 
+.yui3-bookmark-editor {
+	cursor:move
+}
 .yui3-bookmark-editor label,
 .yui3-bookmark-editor input[type='text'],
 .yui3-bookmark-editor button {
