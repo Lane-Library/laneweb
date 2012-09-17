@@ -14,7 +14,7 @@
 	 */
 	SearchIndicator.show = function() {
 		if (node) {
-			node.addClass("on");
+			node.addClass("show");
 		}
 	};
 	/**
@@ -24,7 +24,7 @@
 	 */	
 	SearchIndicator.hide = function() {
 		if (node) {
-			node.removeClass("on");
+			node.removeClass("show");
 		}
 	};
 	

@@ -97,7 +97,7 @@
     height: 19px;
     z-index : 1;
 }
-#searchIndicator.on {
+#searchIndicator.show {
 	display:block
 }
 #searchTips {
