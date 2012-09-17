@@ -9,9 +9,9 @@
     ResourceSearch = {
 
 	    search: function(query, resources) {
-	    	var i, resourcesParams = "&";
+	    	var i, resourcesParams = "";
 	    	for (i = 0; i < resources.length; i++) {
-	    		resourcesParams += "r=" + resources[i];
+	    		resourcesParams += "&r=" + resources[i];
 	    	}
             Y.io(basePath + "/apps/search/json?q=" + query + resourcesParams, {
                 on : {

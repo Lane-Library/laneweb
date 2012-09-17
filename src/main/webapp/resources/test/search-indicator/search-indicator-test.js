@@ -12,9 +12,9 @@ Y.use("node-event-simulate", "console", "test", function(Y){
         testShowAndHide: function() {
             var node = Y.one("#searchIndicator");
             this.indicator.show();
-            Y.Assert.isTrue(node.hasClass("on"));
+            Y.Assert.isTrue(node.hasClass("show"));
             this.indicator.hide();
-            Y.Assert.isFalse(node.hasClass("on"));
+            Y.Assert.isFalse(node.hasClass("show"));
         }
     });
     
