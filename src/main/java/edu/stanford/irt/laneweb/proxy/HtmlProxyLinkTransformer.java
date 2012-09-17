@@ -17,8 +17,10 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     private XMLConsumer xmlConsumer;
 
+    private ProxyHostManager proxyHostManager;
+
     public HtmlProxyLinkTransformer(final ProxyHostManager proxyHostManager) {
-        super(proxyHostManager);
+        this.proxyHostManager = proxyHostManager;
     }
 
     @Override
@@ -40,8 +42,8 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
                     this.xmlConsumer.startElement(uri, localName, name, atts);
                     return;
                 }
-                // proxy if class contains proxy or isProxyableLink
-                if ((null != clazz && clazz.contains("proxy")) || isProxyableLink(link)) {
+                // proxy if isProxyableLink
+                if (this.proxyHostManager.isProxyableLink(link)) {
                     AttributesImpl newAttributes = new AttributesImpl(atts);
                     newAttributes.setValue(newAttributes.getIndex(HREF), createProxyLink(link));
                     this.xmlConsumer.startElement(uri, localName, name, newAttributes);

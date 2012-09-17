@@ -14,10 +14,6 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     private XMLConsumer xmlConsumer;
 
-    public ElementProxyLinkTransformer(final ProxyHostManager proxyHostManager) {
-        super(proxyHostManager);
-    }
-
     @Override
     public void characters(final char[] chars, final int start, final int length) throws SAXException {
         if (this.building) {
