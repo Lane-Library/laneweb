@@ -82,10 +82,7 @@
 	
 
 	var setLink = function(event) {
-		var node = event.target, url = basePath + '/';
-		if (node.get('tagName') === 'SPAN') {
-			node = node.get('parentNode');
-		}
+		var node = event.currentTarget, url = basePath + '/';
 		if ( !auth ||  node.get('search').indexOf("pl=true") >0 ) {	
 			url = url + 'secure/';
 		}
@@ -130,7 +127,7 @@
 		
 		// Click on NO
 		if(noButton){
-			noButton.on('click',function(event) {
+			noButton.once('click',function(event) {
 				setLink(event);
 				//if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
 				//otherwise it is set for the session only
