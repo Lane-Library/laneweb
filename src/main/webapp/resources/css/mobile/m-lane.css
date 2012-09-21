@@ -40,9 +40,13 @@ body.ui-mobile-viewport,.ui-body-c {
   	margin: 10% auto 15px auto; 
 }
 
-
-
-
+#persistent #hd {
+    color: #414042;
+    font-weight: bold;
+    line-height: 1.4em;
+    font-size: 1.3em;
+    padding-bottom: .75em;
+}
 
 .ui-mobile .ui-page-active {
     overflow: hidden;
