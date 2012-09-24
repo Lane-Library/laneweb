@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-09-24" version="1.13.12" description="1.13.12 bug fix release">
+            <action date="2012-09-17" issue="75957" dev="ceyates" type="update">
+                show 10 bookmarks in My Bookmarks menu 
+            </action>
+            <action date="2012-09-17" issue="75945" dev="ceyates" type="update">
+                put BASE_PROXY_URL into the model instead of deriving it for each link.
+            </action>
+            <action date="2012-09-14" issue="75870" dev="ceyates" type="update">
+                replace class LANE.SearchIndicator with static Y.lane.SearchIndicator 
+            </action>
+            <action date="2012-09-13" issue="75649" dev="ceyates" type="remove">
+                remove lane:change event and handlers 
+            </action>
+        </release>
         <release date="2012-09-17" version="1.13.11" description="1.13.11 bug fix release">
             <action date="2012-09-14" issue="75683" dev="alainb" type="fix">
                 persistent login returns to page not found 
