@@ -5,7 +5,7 @@
 	    encodedQuery = model.get(model.URL_ENCODED_QUERY),
 	    queryMapper = Y.lane.QueryMapper,
 	    resourceSearch = Y.lane.ResourceSearch,
-	    ResourceSearchView = Y.lane.ResourceSearchView,
+	    ResourceResultView = Y.lane.ResourceResultView,
 	    resources,
 	    queryMapping = Y.one('#queryMapping');
         if (query && queryMapping) {
@@ -19,7 +19,7 @@
                     	resourceNames.push(resources[i].id);
                         span = Y.Node.create('<span><a title="QueryMapping: ' + resources[i].label + '">' + resources[i].label + "</a></span>");
                         queryMapping.append(span);
-                        (new ResourceSearchView(resources[i].id, function() {
+                        (new ResourceResultView(resources[i].id, function() {
                         	span.one("a").set("href", this.url);
                         	if (this.status === "successful") {
                             	span.append(": " + this.hits + " ");

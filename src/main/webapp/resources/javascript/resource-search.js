@@ -32,7 +32,7 @@
     
     },
     
-    ResourceSearchView = function(id, fn) {
+    ResourceResultView = function(id, fn) {
     	this._handle = ResourceSearch.on("update", function(result) {
     		var resourceResult = result.resources[id];
 			fn.call(resourceResult);
@@ -46,6 +46,6 @@
     
     lane.ResourceSearch = ResourceSearch;
     
-    lane.ResourceSearchView = ResourceSearchView;
+    lane.ResourceResultView = ResourceResultView;
 	
 })();
