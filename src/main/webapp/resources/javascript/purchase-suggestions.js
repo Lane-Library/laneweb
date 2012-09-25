@@ -24,7 +24,8 @@
             menuActiveClass = this.getClassName("menu", "active"),
             itemsList = Y.one("#purchaseItems"),
             item = itemsList.one("li"),
-            focusElement;
+            focusElement,
+            validator;
         menu.item(event.prevVal).removeClass(menuActiveClass);
         menu.item(event.newVal).addClass(menuActiveClass);
         if (item) {
@@ -34,6 +35,10 @@
         item.addClass(this.getClassName("item", "active"));
         itemsList.append(item);
         focusElement = itemsList.one("textarea, input[type='text']");
+        validator = this.get("validator");
+        if (validator) {
+        	validator.destroy();
+        }
         this.set("validator", new Y.lane.FormValidator(this.get("srcNode").one("form")));
         if (focusElement) {
             focusElement.focus();

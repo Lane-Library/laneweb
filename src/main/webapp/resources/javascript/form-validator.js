@@ -44,6 +44,14 @@
                 return node.value === '' || node.value == node.title;
             };
         }
+        return {
+        	destroy : function() {
+        		var form = validator.get("form");
+        		Y.Event.detach("submit", validator._onFormSubmit, form);
+        		Y.Event.detach("reset", validator._onFormReset, form);
+        		validator.destroy();
+        	}
+        };
     };
     
     Y.namespace("lane");
