@@ -135,6 +135,8 @@ public interface Model {
 
     String URL_ENCODED_QUERY = "url-encoded-query";
 
+    String USER_AGENT = "user-agent";
+
     String USER_COOKIE = "user-cookie";
 
     String VERSION = "version";

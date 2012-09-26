@@ -17,9 +17,5 @@ public class RequestMethodDataBinder implements DataBinder {
         if (value != null) {
             model.put(Model.REQUEST_URI, value);
         }
-        value = request.getHeader("referer");
-        if (value != null) {
-            model.put(Model.REFERRER, value);
-        }
     }
 }

@@ -15,6 +15,7 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-method"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-header"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"/>
@@ -90,6 +91,9 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-method"
         class="edu.stanford.irt.laneweb.servlet.binding.RequestMethodDataBinder"/>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-header"
+        class="edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder"/>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"
         class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
