@@ -20,6 +20,7 @@ public class EMailController {
 
     @ModelAttribute
     protected void getParameters(final HttpServletRequest request, final Model model) {
+        @SuppressWarnings("unchecked")
         Map<String, String[]> map = request.getParameterMap();
         for (Entry<String, String[]> entry : map.entrySet()) {
             model.addAttribute(entry.getKey(), entry.getValue()[0]);
