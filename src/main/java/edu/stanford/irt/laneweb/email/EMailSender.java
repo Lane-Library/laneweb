@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.email;
 
-import java.security.PrivilegedAction;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -8,13 +7,11 @@ import java.util.regex.Pattern;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.security.auth.Subject;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.ldap.SubjectSource;
 
 
 public class EMailSender {
@@ -23,13 +20,10 @@ public class EMailSender {
     
     private JavaMailSender mailSender;
     
-    private SubjectSource subjectSource;
-    
     private Set<String> recipients;
     
-    public EMailSender(Set<String> recipients, SubjectSource subjectSource, JavaMailSender mailSender) {
+    public EMailSender(Set<String> recipients, JavaMailSender mailSender) {
         this.recipients = recipients;
-        this.subjectSource = subjectSource;
         this.mailSender = mailSender;
     }
     
@@ -53,15 +47,7 @@ public class EMailSender {
         } catch (MessagingException e) {
             throw new LanewebException(e);
         }
-        Subject subject = this.subjectSource.getSubject();
-        Subject.doAs(subject, new PrivilegedAction<Object>() {
-
-            @Override
-            public Object run() {
-                EMailSender.this.mailSender.send(message);
-                return null;
-            }
-        });
+        this.mailSender.send(message);
     }
 
     private void validateModel(Map<String, Object> map) {

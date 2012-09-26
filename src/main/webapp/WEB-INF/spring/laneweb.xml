@@ -36,21 +36,9 @@
                 <value>lanelibacqs@lists.stanford.edu</value>
             </set>
         </constructor-arg>
-        <constructor-arg ref="edu.stanford.irt.laneweb.ldap.SubjectSource"/>
         <constructor-arg>
             <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-                <property name="host" value="smtp-roam.stanford.edu"/>
-                <property name="port" value="465"/>
-                <property name="javaMailProperties">
-                    <props>
-                        <prop key="mail.smtp.starttls.enable">true</prop>
-                        <prop key="mail.smtp.socketFactory.port">465</prop>
-                        <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-                        <prop key="mail.smtp.socketFactory.fallback">false</prop>
-                        <prop key="mail.smtp.sasl.enable">true</prop>
-                        <prop key="mail.smtp.sasl.mechanisms">GSSAPI</prop>
-                    </props>
-                </property>
+                <property name="host" value="medmail.stanford.edu"/>
             </bean>
         </constructor-arg>
     </bean>
