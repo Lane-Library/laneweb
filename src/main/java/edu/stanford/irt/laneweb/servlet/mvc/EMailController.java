@@ -6,10 +6,14 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -18,6 +22,7 @@ import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 
 @Controller
+@RequestMapping(value = "/apps/mail", method = RequestMethod.POST)
 public class EMailController {
 
     @Autowired
@@ -29,11 +34,25 @@ public class EMailController {
     @Autowired
     private EMailSender sender;
 
-    @RequestMapping(value = "/apps/mail")
-    public String sendMail(final Model model, final RedirectAttributes atts) {
+    @RequestMapping(consumes = "application/x-www-form-urlencoded")
+    public String formSubmit(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
         this.sender.sendEmail(map);
-        return "redirect:" + map.get("redirect");
+        String redirectTo = (String) map.get("redirect");
+        if (redirectTo == null) {
+            redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
+        }
+        if (redirectTo == null) {
+            redirectTo = "/index.html";
+        }
+        return "redirect:" + redirectTo;
+    }
+    
+    @RequestMapping(consumes = "application/json")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void jsonSubmit(@RequestBody Map<String, Object> feedback, Model model) {
+        feedback.putAll(model.asMap());
+        this.sender.sendEmail(feedback);
     }
 
     @ModelAttribute

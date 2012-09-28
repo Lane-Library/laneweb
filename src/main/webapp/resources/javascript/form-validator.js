@@ -50,6 +50,9 @@
         		Y.Event.detach("submit", validator._onFormSubmit, form);
         		Y.Event.detach("reset", validator._onFormReset, form);
         		validator.destroy();
+        	},
+        	isValid : function() {
+        		return validator.checkFormValues();
         	}
         };
     };
