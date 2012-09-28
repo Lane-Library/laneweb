@@ -15,16 +15,16 @@
         activeItem : {
             value : 0
         },
-        menu : {
-            value : null,
-            writeOnce : true
-        },
         items : {
             value : null,
             writeOnce : true
         },
+        menu : {
+            value : null,
+            writeOnce : true
+        },
         validator : {
-            value: null
+        	value : null
         }
     };
     
@@ -37,6 +37,8 @@
             var self = this, eventHandle1, eventHandle2;
             this.get("menu").on("click", this._handleMenuClick, this);
             this.on("activeItemChange", this._handleActiveItemChange);
+            this.on("validatorChange", this._handleValidatorChange);
+            this.get("srcNode").all("form").on("submit", this._handleSubmit, this);
             eventHandle1 = Y.lane.Lightbox.on("animEnd", function() {
                 self.get("items").item(self.get("activeItem")).one("textarea, input[type='text']").focus();
             });
@@ -53,21 +55,47 @@
             });
         },
         syncUI : function() {
-            var activeItem = this.get("activeItem"), items = this.get("items"), i;
+            var activeItem = this.get("activeItem"), items = this.get("items");
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
             items.item(activeItem).addClass(this.getClassName("item", "active"));
-            //add form validator to each form that has required inputs:
-            for (i = 0; i < items.size(); i++) {
-                if (items.item(i).one("input[title='required']")) {
-                    this.set("validator", new Y.lane.FormValidator(items.item(i).one("form")));
-                }
-            }
+            this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
+        },
+        sendFeedback : function(form) {
+        	this.get("contentBox").set("innerHTML", "<div style='background-color:white'>Sending feedback.</div>");
+            var data = Y.JSON.stringify(this._getFeedback(form));
+            Y.io(Y.lane.Model.get("base-path") + "/apps/mail", {
+                method : "post",
+                data : data,
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                on : {
+                    success : function() {
+                    	this.get("contentBox").set("innerHTML", "<div style='background-color:white' onclick='Y.lane.Lightbox.hide();'>Thank you for your feedback.</div>");
+                    },
+                    failure : function() {
+                        alert("Sorry, sending feedback failed.");
+                    }
+                },
+                context : this
+            });
         },
         _fixForIE6 : function() {
             var boundingBox = this.get("boundingBox");
 //            //this forces the markup to be rendered, not sure why it is needed.
             boundingBox.setStyle("visibility", "hidden");
             boundingBox.setStyle("visibility", "visible");
+        },
+        _getFeedback : function(form) {
+            var nodes = form.all("input, textarea, select"), feedback = {}, i, node, name;
+            for (i = 0; i < nodes.size(); i++) {
+            	node = nodes.item(i);
+            	name = node.get("name");
+            	if (name) {
+                	feedback[name] = node.get("value");
+            	}
+            }
+            return feedback;
         },
         _handleActiveItemChange : function(event) {
             var menu = this.get("menu"),
@@ -79,6 +107,7 @@
             items.item(event.prevVal).removeClass(itemActiveClass);
             menu.item(event.newVal).addClass(menuActiveClass);
             items.item(event.newVal).addClass(itemActiveClass);
+            this.set("validator", new Y.lane.FormValidator(items.item(event.newVal).one("form")));
             focusElement = items.item(event.newVal).one("textarea, input[type='text']");
             if (focusElement) {
                 try {
@@ -93,6 +122,17 @@
         _handleMenuClick : function(event) {
             event.preventDefault();
             this.set("activeItem", this.get("menu").indexOf(event.currentTarget));
+        },
+        _handleSubmit : function(event) {
+        	event.preventDefault();
+        	if (this.get("validator").isValid()) {
+        		this.sendFeedback(event.currentTarget);
+        	}
+        },
+        _handleValidatorChange : function(event) {
+        	if (event.prevVal) {
+        		event.prevVal.destroy();
+        	}
         }
     });
     
