@@ -180,4 +180,25 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- full version link is context sensitive, pulling link from page's @data-desktop-url -->
+    <xsl:template match="h:a[@id='desktop-url']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:choose>
+                <xsl:when test="//h:div[@data-desktop-url]">
+                    <xsl:attribute name="href">
+		                <xsl:call-template name="make-link">
+		                    <xsl:with-param name="link" select="//h:div/@data-desktop-url"/>
+		                    <xsl:with-param name="attr" select="'data-desktop-url'"/>
+		                </xsl:call-template>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="attribute::node()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+
 </xsl:stylesheet>

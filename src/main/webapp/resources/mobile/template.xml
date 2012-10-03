@@ -15,7 +15,7 @@
                
         <div class="footer2copy">
             <a href="http://stanfordmedicine.stanford.edu/">&#169; <?laneweb current-year?> Stanford Medicine</a>
-            <a rel="external" href="/index.html?site_preference=normal">Full Version</a>
+            <a id="desktop-url" rel="external" href="/index.html?site_preference=normal">Full Version</a>
         </div>
 
         <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${timestamp}"> </script>
