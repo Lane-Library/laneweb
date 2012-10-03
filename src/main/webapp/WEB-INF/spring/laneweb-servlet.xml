@@ -32,7 +32,15 @@
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**/*.html"/>
-            <bean class="edu.stanford.irt.laneweb.servlet.mvc.MobileSiteInterceptor"/>
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.MobileSiteInterceptor">
+                <constructor-arg>
+		            <map>
+		                <entry key="/index.html" value="/m/index.html"/>
+		                <entry key="/biomed-resources/eb.html" value="/m/book.html"/>
+		                <entry key="/biomed-resources/ej.html" value="/m/ej.html"/>
+		            </map>
+                </constructor-arg>
+            </bean>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>

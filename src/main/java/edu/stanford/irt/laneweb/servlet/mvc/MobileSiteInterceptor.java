@@ -1,6 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,27 +19,26 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * Interceptor to switch between mobile and desktop sites. Based on Keith
- * Donald's
+ * Interceptor to switch between mobile and desktop sites. Based on Keith Donald's
  * org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor
  * 
  * @author ryanmax
  */
 public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
 
-    private static final String HOME_PATH = "/index.html";
-
     private static final String MOBILE_HELP_PATH = "/help/m.html";
 
     private static final String MOBILE_PATH = "/m/";
+
+    private Map<String, String> desktopRedirectMap = Collections.emptyMap();
 
     private final SitePreferenceHandler sitePreferenceHandler;
 
     /**
      * Creates a new Interceptor with a StandardSitePreferenceHandler
      */
-    public MobileSiteInterceptor() {
-        this(new StandardSitePreferenceHandler(new CookieSitePreferenceRepository()));
+    public MobileSiteInterceptor(final Map<String, String> desktopRedirects) {
+        this(new StandardSitePreferenceHandler(new CookieSitePreferenceRepository()), desktopRedirects);
     }
 
     /**
@@ -45,8 +47,10 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
      * @param sitePreferenceHandler
      *            the handler for the user site preference
      */
-    public MobileSiteInterceptor(final SitePreferenceHandler sitePreferenceHandler) {
+    public MobileSiteInterceptor(final SitePreferenceHandler sitePreferenceHandler,
+            final Map<String, String> desktopRedirects) {
         this.sitePreferenceHandler = sitePreferenceHandler;
+        this.desktopRedirectMap = desktopRedirects;
     }
 
     @Override
@@ -55,17 +59,20 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
         SitePreference sitePreference = this.sitePreferenceHandler.handleSitePreference(request, response);
         String requestURI = request.getRequestURI();
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
-        // only redirect for /m/ and /index.html requests
         if (requestURI.indexOf(MOBILE_PATH) > -1) {
             if (sitePreference == SitePreference.NORMAL) {
                 response.sendRedirect(basePath + MOBILE_HELP_PATH);
                 return false;
             }
-        } else if (requestURI.equals(basePath + HOME_PATH)) {
-            Device device = DeviceUtils.getRequiredCurrentDevice(request);
-            if (sitePreference == SitePreference.MOBILE || device.isMobile() && sitePreference == null) {
-                response.sendRedirect(basePath + MOBILE_PATH);
-                return false;
+        } else {
+            for (Entry<String, String> entry : this.desktopRedirectMap.entrySet()) {
+                if (requestURI.equals(basePath + entry.getKey())) {
+                    Device device = DeviceUtils.getRequiredCurrentDevice(request);
+                    if (sitePreference == SitePreference.MOBILE || device.isMobile() && sitePreference == null) {
+                        response.sendRedirect(basePath + entry.getValue());
+                        return false;
+                    }
+                }
             }
         }
         return true;
