@@ -36,9 +36,14 @@
             <stx:copy>
                 <stx:attribute name="href">
                     <stx:value-of select="@href"/>
-                    <stx:if test="starts-with(@href,'/')">
-                        <stx:value-of select="'?laneNav=1'"/>
-                    </stx:if>
+                    <stx:choose>
+                        <stx:when test="starts-with(@href,'/') and contains(@href,'?')">
+                            <stx:value-of select="'&amp;laneNav=1'"/>
+                        </stx:when>
+                        <stx:when test="starts-with(@href,'/')">
+                            <stx:value-of select="'?laneNav=1'"/>
+                        </stx:when>
+                    </stx:choose>
                 </stx:attribute>
                 <stx:process-children/>
             </stx:copy>

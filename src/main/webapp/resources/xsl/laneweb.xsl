@@ -308,7 +308,7 @@
     </xsl:template>
 
     <!-- add class="active" to online resource alpha browse links if link is for current page -->
-    <xsl:template match="h:ul[attribute::id='browseTabs']/h:li/h:a[ends-with(@href, concat('?a=',$alpha)) or @href = $path]">
+    <xsl:template match="h:ul[attribute::id='browseTabs']/h:li/h:a[matches(@href, concat('a=',$alpha,'(\W|$)')) or @href = $path]">
         <xsl:copy>
             <xsl:attribute name="class">active</xsl:attribute>
             <xsl:apply-templates select="attribute::node() | child::node()"/>
