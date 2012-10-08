@@ -7,6 +7,21 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-10-08" version="1.13.14" description="1.13.14 bug fix release">
+            <action date="2012-10-04" issue="76789" dev="ryanmax" type="fix">
+                browse pages highlighting not working correctly 
+            </action>
+            <action date="2012-10-03" issue="76674" dev="ryanmax" type="update">
+                extend mobile redirects 
+            </action>
+            <action date="2012-10-01" issue="76597" dev="olgary" type="update">
+                template.xml,  debug.xml  - partially remove links from Popular links drop-down
+            </action>
+            <action date="2012-09-25" issue="76002" dev="ceyates" type="fix">
+                Feedback-bug: Suggestion for purchase not working 
+            </action>
+        </release>
+        <release date="2012-09-28" version="1.13.13" description="1.13.13 bug fix release"/>
         <release date="2012-09-24" version="1.13.12" description="1.13.12 bug fix release">
             <action date="2012-09-17" issue="75957" dev="ceyates" type="update">
                 show 10 bookmarks in My Bookmarks menu 
