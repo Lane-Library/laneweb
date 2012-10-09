@@ -1,5 +1,16 @@
 /*this file also has styles for the tabs*/
 /* styles for css buttons */
+
+#close{
+	position:absolute; 
+	top:-5px; 
+	left:406px; 
+	padding-left: .25em; 
+	padding-right: .25em; 
+	font-size: 15px; 
+	font-weight: bold;
+}
+
 .red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn
 	{
 	display: inline-block;
