@@ -308,7 +308,7 @@
     </xsl:template>
 
     <!-- add class="active" to online resource alpha browse links if link is for current page -->
-    <xsl:template match="h:ul[attribute::id='browseTabs']/h:li/h:a[matches(@href, concat('a=',$alpha,'(\W|$)')) or @href = $path]">
+    <xsl:template match="h:ul[attribute::id='browseTabs']/h:li/h:a[(matches(@href, concat('a=',$alpha,'$')) or (matches(@href, 'a=%23') and $alpha = '#') or @href = $path)]">
         <xsl:copy>
             <xsl:attribute name="class">active</xsl:attribute>
             <xsl:apply-templates select="attribute::node() | child::node()"/>
@@ -350,6 +350,9 @@
                     <xsl:value-of select="substring-before(.,'#')"/>
                     <xsl:text>?laneNav=2#</xsl:text>
                     <xsl:value-of select="substring-after(.,'#')"/>
+                </xsl:when>
+                <xsl:when test="contains(.,'?')">
+                    <xsl:value-of select="concat(.,'&amp;laneNav=2')"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="concat(.,'?laneNav=2')"/>
