@@ -32,7 +32,7 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 		document.location = '/././secure/persistentLogin.html?pl=false&url='+ document.location;
 	} else {
 		$.LANE.popupWindow("/././m/plain/persistent-login.html");
-		redirectUrl = escape(document.location);
+		redirectUrl = encodeURIComponent(document.location);
 	}
 });
 
@@ -43,7 +43,7 @@ $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", 
 	now = new Date();
 	var statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
 	if ( 'denied' !== statusCookie && (IS_USER_VALID === 'false' || statusCookie < now.getTime())){
-		redirectUrl = escape(link.href);
+		redirectUrl = encodeURIComponent(link.href);
 		if(IS_USER_VALID === 'true'){ 
 			$.LANE.popupWindow('/././m/plain/persistentlogin-extention.html');
 		}
@@ -101,7 +101,9 @@ $.LANE.toggleLogin = function(){
     }	
 };
 
-
+$('#close').live('click', function(e) {
+	$.mobile.changePage(decodeURIComponent(redirectUrl));
+});
 
 //
 ////toggle login button at every pageinit
