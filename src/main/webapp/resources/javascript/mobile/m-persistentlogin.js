@@ -102,7 +102,7 @@ $.LANE.toggleLogin = function(){
 };
 
 $('#close').live('click', function(e) {
-	$.mobile.changePage(decodeURIComponent(redirectUrl));
+	document.location =  decodeURIComponent(redirectUrl);
 });
 
 //
