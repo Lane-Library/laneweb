@@ -1,21 +1,21 @@
 /* display : block for button behavior with background-image*/
+/*live chat link in the header - has an icon*/
 .live-chat a {
     display : block;
     background-repeat : no-repeat;
 }
 #libraryContact .live-chat a {
-    background: url("/././resources/images/icons-sprite3.png") no-repeat scroll -45px 0 transparent;
+    background : url("/././resources/images/icons-sprite3.png") no-repeat scroll -45px 0 transparent;
     padding-left : 32px;
     width : 26px;
     height : 15px;
-    border-bottom : none;
-    
+    border-bottom : none;  
 }
 #libraryContact .live-chat a:hover {
     background: url("/././resources/images/icons-sprite3.png") no-repeat scroll -45px -26px transparent;
 }
 #libraryContact .live-chat-inactive {
-    display : none
+    display : none;
 }
 #libraryContact span {
     border-bottom : 1px dotted #81785A;
@@ -23,25 +23,12 @@
 #libraryContact a:hover span {
     border-bottom : 1px solid #820000;
 }
-.content .live-chat-inactive, .content .live-chat a {
-    width : 161px;
-    height : 70px;
-    background-image : url(/././resources/images/liveChat1.png);
-    margin : 5px auto;
-}
-.content .live-chat-inactive {
-    background-position : 0 -210px;
-}
-.content .live-chat a {
-    font-size : 0;
-    text-indent : -1000px;
-    border-bottom : none;
-}
 
-.content .live-chat a:hover {
-    background-position : 0 -105px;
+/* live chat link in the body of the homepage */
+.content .live-chat-inactive {
+    display : none;
 }
 
 .content .live-chat-inactive a {
-    visibility : hidden;
+    display : none;
 }
