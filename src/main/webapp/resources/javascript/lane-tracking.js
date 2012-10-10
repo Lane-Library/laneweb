@@ -15,12 +15,28 @@
                 while (link && link.get('nodeName') != 'A') {
                     link = link.get('parentNode');
                 }
+                //TODO: this counts My Bookmarks clicks as well: check if href=/favorites.html and skip?
                 if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
                     category = "lane:bookmarkClick";
                     action = model.get(model.AUTH);
                     label = LANE.tracking.getTrackedTitle(link);
                 }
-                if (link.ancestor(".lwSearchResults")) {
+                else if (link.ancestor("#laneNav")) {
+                    category = "lane:laneNav-1";
+                    action = link.get('href');
+                    label = link.get('textContent');
+                }
+                else if (link.ancestor(".sectionMenu")) {
+                    category = "lane:laneNav-sectionMenu";
+                    action = link.get('href');
+                    label = link.get('textContent');
+                }
+                else if (link.ancestor("#laneFooter")) {
+                    category = "lane:laneNav-footer";
+                    action = link.get('href');
+                    label = link.get('textContent');
+                }
+                else if (link.ancestor(".lwSearchResults")) {
                     if (searchTerms) {
                         category = "lane:searchResultClick";
                         action = searchTerms;
@@ -181,10 +197,16 @@
                         link = link.get('parentNode');
                     }
                     if (link) {
+                        // bookmarks
                         if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
                             return true;
                         }
+                        // search results
                         if (link.ancestor(".lwSearchResults")) {
+                            return true;
+                        }
+                        // laneNav click events
+                        if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter")) {
                             return true;
                         }
                     }
