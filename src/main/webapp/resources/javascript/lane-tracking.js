@@ -22,7 +22,7 @@
                     label = LANE.tracking.getTrackedTitle(link);
                 }
                 else if (link.ancestor("#laneNav")) {
-                    category = "lane:laneNav-1";
+                    category = "lane:laneNav-top";
                     action = link.get('href');
                     label = link.get('textContent');
                 }

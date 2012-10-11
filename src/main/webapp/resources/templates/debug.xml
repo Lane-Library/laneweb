@@ -101,36 +101,36 @@
                                 <a href="/portals/index.html"
                                     >Specialty Portals</a>
                                 <ul id="specialties-menu">
-                                    <li><a href="/portals/anesthesia.html?laneNav=1">Anesthesia</a></li>
-                                      <li><a href="/portals/obgyn.html?laneNav=1">Obstetrics &amp; Gynecology</a></li>
-                                    <li><a href="/portals/ethics.html?laneNav=1">Biomedical Ethics</a></li>
-                                      <li><a href="/portals/oncology.html?laneNav=1">Oncology</a></li>
-                                    <li><a href="/portals/bioresearch.html?laneNav=1">Bioresearch</a></li>
-                                      <li><a href="/portals/ophthalmology.html?laneNav=1">Ophthalmology</a></li>
-                                    <li><a href="/portals/cardiology.html?laneNav=1">Cardiology</a></li>
+                                    <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
+                                      <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
+                                    <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
+                                      <li><a href="/portals/oncology.html">Oncology</a></li>
+                                    <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
+                                      <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>
+                                    <li><a href="/portals/cardiology.html">Cardiology</a></li>
                                       <li><a href="http://trachea.stanford.edu/">Otolaryngology</a></li>
-                                    <li><a href="/portals/clinical.html?laneNav=1">Clinical</a></li>
-                                      <li><a href="/portals/pathology.html?laneNav=1">Pathology</a></li>
-                                    <li><a href="/portals/patient.html?laneNav=1">Consumer Health</a></li>
-                                      <li><a href="/portals/peds.html?laneNav=1">Pediatrics</a></li>
-                                    <li><a href="/portals/emergency.html?laneNav=1">Emergency Medicine</a></li>
-                                      <li><a href="/portals/pharmacy.html?laneNav=1">Pharmacy</a></li>
-                                    <li><a href="/portals/ihealth.html?laneNav=1">Global Health</a></li>
-                                      <li><a href="/portals/pmr.html?laneNav=1">Physical Medicine &amp; Rehab.</a></li>
-                                    <li><a href="/portals/hematology.html?laneNav=1">Hematology</a></li>
-                                      <li><a href="/portals/picu.html?laneNav=1">PICU</a></li>
-                                    <li><a href="/portals/internal-medicine.html?laneNav=1">Internal Medicine</a></li>
-                                      <li><a href="/portals/psychiatry.html?laneNav=1">Psychiatry</a></li>
-                                    <li><a href="/portals/cvicu.html?laneNav=1">LPCH Heart Center Nursing</a></li>
-                                      <li><a href="/portals/pulmonary.html?laneNav=1">Pulmonary</a></li>
-                                    <li><a href="/portals/medicalEd.html?laneNav=1">Medical Education</a></li>
+                                    <li><a href="/portals/clinical.html">Clinical</a></li>
+                                      <li><a href="/portals/pathology.html">Pathology</a></li>
+                                    <li><a href="/portals/patient.html">Consumer Health</a></li>
+                                      <li><a href="/portals/peds.html">Pediatrics</a></li>
+                                    <li><a href="/portals/emergency.html">Emergency Medicine</a></li>
+                                      <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
+                                    <li><a href="/portals/ihealth.html">Global Health</a></li>
+                                      <li><a href="/portals/pmr.html">Physical Medicine &amp; Rehab.</a></li>
+                                    <li><a href="/portals/hematology.html">Hematology</a></li>
+                                      <li><a href="/portals/picu.html">PICU</a></li>
+                                    <li><a href="/portals/internal-medicine.html">Internal Medicine</a></li>
+                                      <li><a href="/portals/psychiatry.html">Psychiatry</a></li>
+                                    <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
+                                      <li><a href="/portals/pulmonary.html">Pulmonary</a></li>
+                                    <li><a href="/portals/medicalEd.html">Medical Education</a></li>
                                       <li><a href="/portals/reference.html">Reference Desk</a></li>
-                                    <li><a href="/portals/cultural.html?laneNav=1">Multicultural Health</a></li>
-                                      <li><a href="/portals/spec-programs.html?laneNav=1">Special Programs</a></li>
-                                    <li><a href="/portals/neurology.html?laneNav=1">Neurology</a></li>
-                                      <li><a href="/portals/spiritual.html?laneNav=1">Spiritual Care</a></li>
-                                    <li><a href="/portals/nursing.html?laneNav=1">Nursing</a></li>
-                                      <li><a href="/classes-consult/infoliteracy-practice.html?laneNav=1">Student</a></li>
+                                    <li><a href="/portals/cultural.html">Multicultural Health</a></li>
+                                      <li><a href="/portals/spec-programs.html">Special Programs</a></li>
+                                    <li><a href="/portals/neurology.html">Neurology</a></li>
+                                      <li><a href="/portals/spiritual.html">Spiritual Care</a></li>
+                                    <li><a href="/portals/nursing.html">Nursing</a></li>
+                                      <li><a href="/classes-consult/infoliteracy-practice.html">Student</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -176,51 +176,51 @@
                                         value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online"
                                         >UpToDate</option>
                                     <option value=""> ---------------- </option>
-                                    <option value="/biomed-resources/eb.html?laneNav=4">Books</option>
-                                    <option value="/biomed-resources/db.html?laneNav=4">Databases</option>
-                                    <option value="/biomed-resources/ej.html?laneNav=4">Journals</option>
+                                    <option value="/biomed-resources/eb.html">Books</option>
+                                    <option value="/biomed-resources/db.html">Databases</option>
+                                    <option value="/biomed-resources/ej.html">Journals</option>
                                 </select>
                             </li>
                         </ul>
                         <div id="laneFooter">
                             <div class="yui3-g">
                                 <div class="yui3-u-1-5">
-                                    <a href="/biomed-resources/index.html?laneNav=3">BIOMED RESOURCES</a>
+                                    <a href="/biomed-resources/index.html">BIOMED RESOURCES</a>
                                     <ul>
-                                        <li><a href="/biomed-resources/ej.html?laneNav=3">Journals</a></li>
-                                        <li><a href="/biomed-resources/eb.html?laneNav=3">Books</a></li>
-                                        <li><a href="/biomed-resources/db.html?laneNav=3">Databases</a></li>
-                                        <li><a href="/biomed-resources/images.html?laneNav=3">Images</a></li>
-                                        <li><a href="/biomed-resources/cc.html?laneNav=3">Clinical Decision Tools</a></li>
+                                        <li><a href="/biomed-resources/ej.html">Journals</a></li>
+                                        <li><a href="/biomed-resources/eb.html">Books</a></li>
+                                        <li><a href="/biomed-resources/db.html">Databases</a></li>
+                                        <li><a href="/biomed-resources/images.html">Images</a></li>
+                                        <li><a href="/biomed-resources/cc.html">Clinical Decision Tools</a></li>
                                     </ul>
                                 </div>
                                 <div class="yui3-u-1-5">
-                                    <a href="/portals/index.html?laneNav=3">SPECIALTY PORTALS</a>
+                                    <a href="/portals/index.html">SPECIALTY PORTALS</a>
                                     <ul>
-                                        <li><a href="/portals/peds.html?laneNav=3">Pediatrics</a></li>
-                                        <li><a href="/portals/clinical.html?laneNav=3">Clinical</a></li>
-                                        <li><a href="/portals/cvicu.html?laneNav=3">LPCH Heart Center Nursing</a></li>
-                                        <li><a href="/portals/pharmacy.html?laneNav=3">Pharmacy</a></li>
-                                        <li><a href="/portals/picu.html?laneNav=3">PICU</a></li>
+                                        <li><a href="/portals/peds.html">Pediatrics</a></li>
+                                        <li><a href="/portals/clinical.html">Clinical</a></li>
+                                        <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
+                                        <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
+                                        <li><a href="/portals/picu.html">PICU</a></li>
                                     </ul>
                                 </div>
                                 <div class="yui3-u-1-5">
-                                    <a href="/about/index.html?laneNav=3">ABOUT LANE</a>
+                                    <a href="/about/index.html">ABOUT LANE</a>
                                     <ul>
-                                        <li><a href="/about/index.html?laneNav=3">Hours</a></li>
-                                        <li><a href="/about/hours-directions.html?laneNav=3">Directions &amp; Maps</a></li>
-                                        <li><a href="/about/contact.html?laneNav=3">Contact Us</a></li>
-                                        <li><a href="/about/studyspaces.html?laneNav=3">Study Spaces</a></li>
-                                        <li><a href="/about/liaisons.html?laneNav=3">Liaisons</a></li>
-                                        <li><a href="/help/get-started/affiliates.html?laneNav=3">Your eligibility</a></li>
+                                        <li><a href="/about/index.html">Hours</a></li>
+                                        <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
+                                        <li><a href="/about/contact.html">Contact Us</a></li>
+                                        <li><a href="/about/studyspaces.html">Study Spaces</a></li>
+                                        <li><a href="/about/liaisons.html">Liaisons</a></li>
+                                        <li><a href="/help/get-started/affiliates.html">Your eligibility</a></li>
                                     </ul>
                                 </div>
                                 <div class="yui3-u-1-5">
                                     <a href="http://www.stanford.edu/">STANFORD</a>
                                     <ul>
                                         <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
-                                        <li><a href="/biomed-resources/recent-su-pubmed.html?laneNav=3">Stanford Authors in PubMed</a></li>
-                                        <li><a href="/biomed-resources/highly-accessed.html?laneNav=3">Highly Accessed Articles @Stanford</a></li>
+                                        <li><a href="/biomed-resources/recent-su-pubmed.html">Stanford Authors in PubMed</a></li>
+                                        <li><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles @Stanford</a></li>
                                         <li><a href="/classes-consult/infoliteracy.html">Information Literacy</a></li>
                                         <li><a href="http://scopeblog.stanford.edu/">Scope Blog</a></li>
                                     </ul>
