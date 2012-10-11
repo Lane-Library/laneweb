@@ -101,8 +101,8 @@ $.LANE.toggleLogin = function(){
     }	
 };
 
-$('#close').live('click', function(e) {
-	document.location =  decodeURIComponent(redirectUrl);
+$('.persistent-header').live('click', function(e) {
+	document.location =  decodeURIComponent(redirectUrl);	
 });
 
 //

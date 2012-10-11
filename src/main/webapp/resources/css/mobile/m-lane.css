@@ -31,13 +31,36 @@ body.ui-mobile-viewport,.ui-body-c {
     visibility: visible;
 }
 
-/*persistentlogin  */ 
-.ui-dialog .ui-header, 
-.ui-dialog .ui-content, 
-.ui-dialog .ui-footer { 
-	max-width: 400px;
-	background-color: #ffffff; 
-  	margin: 10% auto 15px auto; 
+
+/*persistentlogin  */
+#close{
+    z-index:2; 
+    padding-left: .40em; 
+    padding-right: .40em; 
+    font-size: 18px; 
+    font-weight: bold;
+    position: relative;
+    top: -10px;
+    left: -127px;
+    margin: 0px;
+}
+
+ .persistent-header{
+    margin: 40px auto 0px auto;
+    padding-left: 15px; 
+    padding-right: 15px;
+    height: 1px;
+ } 
+ 
+ .ui-header, 
+ .ui-content, 
+ .ui-footer { 
+	max-width: 225px;
+	background-color: #ffffff;
+ }
+
+.ui-content{ 
+  	margin: 0px auto 20px auto; 
 }
 
 #persistent #hd {

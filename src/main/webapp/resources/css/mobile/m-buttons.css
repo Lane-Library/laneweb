@@ -1,16 +1,7 @@
 /*this file also has styles for the tabs*/
 /* styles for css buttons */
 
-#close{
-	position:absolute;
-	z-index:2; 
-	top:50px; 
-	right:92px; 
-	padding-left: .25em; 
-	padding-right: .25em; 
-	font-size: 15px; 
-	font-weight: bold;
-}
+
 
 .red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn
 	{
