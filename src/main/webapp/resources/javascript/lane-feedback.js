@@ -71,7 +71,7 @@
                 },
                 on : {
                     success : function() {
-                    	this.get("contentBox").set("innerHTML", "<div style='background-color:white' onclick='Y.lane.Lightbox.hide();'>Thank you for your feedback.</div>");
+                    	this.get("contentBox").set("innerHTML", "<div style='background-color:white;padding:100px' onclick='Y.lane.Lightbox.hide();'>Thank you for your feedback.</div>");
                     },
                     failure : function() {
                         alert("Sorry, sending feedback failed.");
