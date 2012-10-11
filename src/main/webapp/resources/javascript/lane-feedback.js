@@ -61,7 +61,7 @@
             this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
         },
         sendFeedback : function(form) {
-        	this.get("contentBox").set("innerHTML", "<div style='background-color:white'>Sending feedback.</div>");
+        	this.get("contentBox").set("innerHTML", "<div style='background-color:white;padding:100px'>Sending feedback.</div>");
             var data = Y.JSON.stringify(this._getFeedback(form));
             Y.io(Y.lane.Model.get("base-path") + "/apps/mail", {
                 method : "post",
