@@ -38,7 +38,7 @@
             this.get("menu").on("click", this._handleMenuClick, this);
             this.on("activeItemChange", this._handleActiveItemChange);
             this.on("validatorChange", this._handleValidatorChange);
-            this.get("srcNode").all("form").on("submit", this._handleSubmit, this);
+//            this.get("srcNode").all("form").on("submit", this._handleSubmit, this);
             eventHandle1 = Y.lane.Lightbox.on("animEnd", function() {
                 self.get("items").item(self.get("activeItem")).one("textarea, input[type='text']").focus();
             });

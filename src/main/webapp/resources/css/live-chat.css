@@ -1,15 +1,13 @@
 /* display : block for button behavior with background-image*/
 /*live chat link in the header - has an icon*/
-.live-chat a {
-    display : block;
-    background-repeat : no-repeat;
-}
 #libraryContact .live-chat a {
     background : url("/././resources/images/icons-sprite3.png") no-repeat scroll -45px 0 transparent;
     padding-left : 32px;
     width : 26px;
     height : 15px;
-    border-bottom : none;  
+    border-bottom : none;
+    display : block;
+    background-repeat : no-repeat;
 }
 #libraryContact .live-chat a:hover {
     background: url("/././resources/images/icons-sprite3.png") no-repeat scroll -45px -26px transparent;
@@ -26,9 +24,5 @@
 
 /* live chat link in the body of the homepage */
 .content .live-chat-inactive {
-    display : none;
-}
-
-.content .live-chat-inactive a {
     display : none;
 }
