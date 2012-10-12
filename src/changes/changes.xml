@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2012-10-12" version="1.13.15" description="1.13.15 bug fix release">
+            <action date="2012-10-10" issue="77002" dev="ceyates" type="remove">
+                Turn off the "personalization" (Save Time! Login to...) popup 
+            </action>
+            <action date="2012-10-11" issue="76979" dev="ryanmax" type="update">
+                laneNav links: migrate to use GA event reporting instead of link processing 
+            </action>
+            <action date="2012-10-10" issue="76902" dev="olgary" type="update">
+                Updated live-chat styles: live-chat.css 
+            </action>
+            <action date="2012-10-10" issue="76789" dev="olgary" type="fix">
+                browse pages highlighting not working correctly 
+            </action>
+        </release>
         <release date="2012-10-08" version="1.13.14" description="1.13.14 bug fix release">
             <action date="2012-10-04" issue="76789" dev="ryanmax" type="fix">
                 browse pages highlighting not working correctly 
