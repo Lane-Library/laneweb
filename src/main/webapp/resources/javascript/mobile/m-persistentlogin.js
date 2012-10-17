@@ -102,7 +102,7 @@ $.LANE.toggleLogin = function(){
 };
 
 $('.persistent-header').live('click', function(e) {
-	 $('#persistent-dialog').dialog('close');	
+	document.location = '/././';
 });
 
 //
