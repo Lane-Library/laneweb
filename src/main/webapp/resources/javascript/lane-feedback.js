@@ -25,6 +25,14 @@
             value : null,
             writeOnce : true
         },
+        sending : {
+            value : null,
+            writeOnce : true
+        },
+        thanks : {
+            value : null,
+            writeOnce : true
+        },
         validator : {
         	value : null
         }
