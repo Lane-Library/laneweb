@@ -8,7 +8,9 @@
     
     Feedback.HTML_PARSER = {
             menu : ["#feedbackMenu > li"],
-            items : ["#feedbackItems > li"]
+            items : ["#feedbackItems > li"],
+            sending : "#sending",
+            thanks : "#thanks"
     };
     
     Feedback.ATTRS = {
@@ -61,7 +63,7 @@
             this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
         },
         sendFeedback : function(form) {
-        	this.get("contentBox").set("innerHTML", "<div style='background-color:white;padding:100px'>Sending feedback.</div>");
+        	this.get("contentBox").set("innerHTML", this.get("sending").get("innerHTML"));
             var data = Y.JSON.stringify(this._getFeedback(form));
             Y.io(Y.lane.Model.get("base-path") + "/apps/mail", {
                 method : "post",
@@ -71,7 +73,7 @@
                 },
                 on : {
                     success : function() {
-                    	this.get("contentBox").set("innerHTML", "<div style='background-color:white;padding:100px' onclick='Y.lane.Lightbox.hide();'>Thank you for your feedback.</div>");
+                    	this.get("contentBox").set("innerHTML", this.get("thanks").get("innerHTML"));
                     },
                     failure : function() {
                         alert("Sorry, sending feedback failed.");
