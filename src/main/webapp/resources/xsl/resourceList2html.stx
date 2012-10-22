@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns" 
+    xmlns="http://www.w3.org/1999/xhtml" 
+    version="1.0" 
+    pass-through="none">
+    
+    <stx:param name="emrid"/>
+    
+    <stx:template match="/linked-list">
+        <html><body><stx:process-children/></body></html>
+    </stx:template>
+    
+    <!-- no hits -->
+    <stx:template match="/linked-list/string">
+        <p><stx:value-of select="."/></p>
+    </stx:template>
+    
+    <stx:variable name="hitsURL"/>
+    <stx:variable name="showPubmedStrategies"/>
+    
+    <stx:template match="map">
+        <stx:assign name="hitsURL" select="''"/>
+        <stx:assign name="showPubmedStrategies" select="false()"/>
+        <div id="search-content-counts">
+            <!-- empty div causes problems when facets are imported with JS -->
+            <stx:text>&#160;</stx:text>
+            <stx:process-children/>
+        </div>
+        <stx:if test="$showPubmedStrategies">
+            <span id="showPubMedStrategies">true</span>
+        </stx:if>
+    </stx:template>
+    
+    <stx:template match="entry">
+        <span><stx:process-children/></span>
+    </stx:template>
+    
+    <stx:template match="entry/string">
+        <stx:attribute name="id" select="."/>
+        <stx:if test="contains(.,'pubmed')">
+            <stx:assign name="showPubmedStrategies" select="true()"/>
+        </stx:if>
+    </stx:template>
+    
+    <stx:template match="string-array/string[1]">
+        <stx:assign name="hitsURL" select="."/>
+    </stx:template>
+    
+    <stx:template match="string-array/string[2]">
+        <a href="{$hitsURL}"><stx:value-of select="."/></a>
+    </stx:template>
+    
+    <stx:variable name="currentPagingPage"/>
+    <stx:variable name="size"/>
+    <stx:variable name="allLink"/>
+    
+    <stx:template match="paging">
+        <stx:assign name="currentPagingPage" select="0"/>
+        <stx:assign name="size" select="0"/>
+        <stx:assign name="allLink" select="''"/>
+        <div>
+            <stx:process-children/>
+            <stx:if test="$allLink != ''">
+                <stx:text> | </stx:text>
+                <a href="{$allLink}">See All</a>
+            </stx:if>
+        </div>
+    </stx:template>
+    
+    <stx:template match="displayText">
+        <stx:value-of select="."/>
+        <stx:if test="$allLink != ''">
+            <a href="{$allLink}"><stx:value-of select="$size"/></a> matches.
+        </stx:if>
+    </stx:template>
+    
+    <stx:template match="size">
+        <stx:assign name="size" select="."/>
+    </stx:template>
+    
+    <stx:template match="allLink">
+        <stx:assign name="allLink" select="."/>
+    </stx:template>
+    
+    <stx:template match="pagingLinks/string">
+        <stx:assign name="currentPagingPage" select="$currentPagingPage + 1"/>
+        <stx:if test="$currentPagingPage != 1">
+            <stx:text> | </stx:text>
+        </stx:if>
+        <stx:choose>
+            <stx:when test=".=''">
+                <stx:value-of select="$currentPagingPage"/>
+            </stx:when>
+            <stx:otherwise>
+                <a href="{.}"><stx:text><stx:value-of select="$currentPagingPage"/></stx:text></a>
+            </stx:otherwise>
+        </stx:choose>
+    </stx:template>
+    
+    <stx:template match="linked-list|list">
+        <dl class="lwSearchResults">
+            <stx:process-children/>
+        </dl>
+    </stx:template>
+
+    <stx:variable name="url"/>
+    <stx:variable name="label"/>
+    <stx:variable name="instruction"/>
+    <stx:variable name="type"/>
+    <stx:variable name="link-number"/>
+    <stx:variable name="description"/>
+    <stx:variable name="title"/>
+    <stx:variable name="score"/>
+    <stx:variable name="password"/>
+    
+    <stx:template match="eresource|seresource">
+        <stx:assign name="type" select="''"/>
+        <stx:assign name="description" select="''"/>
+        <stx:assign name="title" select="''"/>
+        <stx:assign name="score" select="''"/>
+        <dd><ul>
+            <stx:process-children/>
+            <stx:if test="$description">
+                <li class="hvrTarg"><stx:value-of select="$description"/></li>
+            </stx:if>
+            <li><stx:value-of select="$score"/></li>
+        </ul></dd>
+    </stx:template>
+    
+    <stx:template match="links">
+        <stx:assign name="link-number" select="0"/>
+        <li>
+            <stx:process-children/>
+            <stx:choose>
+                <stx:when test="$type = 'auth'">
+                    <div class="moreResults">Lane Community Info File</div>
+                </stx:when>
+                <stx:when test="$type = 'class'">
+                    <div class="moreResults">Lane Class</div>
+                </stx:when>
+                <stx:when test="$type = 'faq'">
+                    <div class="moreResults">Lane FAQ</div>
+                </stx:when>
+                <stx:when test="$type = 'news'">
+                    <div class="moreResults">Lane News</div>
+                </stx:when>
+                <stx:when test="$type = 'web'">
+                    <div class="moreResults">Lane Web Page</div>
+                </stx:when>
+            </stx:choose>
+        </li>
+    </stx:template>
+
+    <stx:template match="link">
+        <stx:assign name="label" select="''"/>
+        <stx:assign name="url" select="''"/>
+        <stx:assign name="instruction" select="''"/>
+        <stx:assign name="password" select="false()"/>
+        <stx:assign name="link-number" select="$link-number + 1"/>
+        <stx:process-children/>
+        <stx:variable name="class">
+            <stx:choose>
+                <stx:when test="$link-number = 1">
+                    <stx:value-of select="'primaryLink'"/>
+                </stx:when>
+                <stx:otherwise>
+                    <stx:value-of select="'moreResults'"/>
+                </stx:otherwise>
+            </stx:choose>
+        </stx:variable>
+        <stx:choose>
+            <stx:when test="$link-number = 1">
+                <a class="{$class}" href="{$url}"><stx:value-of select="$title"/></a>
+                <stx:text>, </stx:text>
+                <stx:if test="$instruction">
+                    <stx:value-of select="$instruction"/>
+                    <stx:text>, </stx:text>
+                </stx:if>
+                <stx:value-of select="$label"/>
+                <stx:if test="$password">
+                    <stx:text> </stx:text>
+                    <a href="/secure/ejpw.html">Get Password</a>
+                </stx:if>
+            </stx:when>
+            <stx:otherwise>
+                <div class="{$class}">
+                    <a href="{$url}"><stx:value-of select="$label"/></a>
+                    <stx:value-of select="$instruction"/>
+                </div>
+            </stx:otherwise>
+        </stx:choose>
+    </stx:template>
+
+    <stx:template match="title">
+        <stx:assign name="title" select="."/>
+    </stx:template>
+
+    <stx:template match="url">
+        <stx:assign name="url" select="."/>
+    </stx:template>
+
+    <stx:template match="label">
+        <stx:assign name="label" select="."/>
+    </stx:template>
+
+    <stx:template match="instruction">
+        <stx:assign name="password" select="contains(.,'GETPASSWORD')"/>
+        <stx:choose>
+            <stx:when test="$password">
+                <stx:assign name="instruction" select="concat(' ', substring-before(.,'GETPASSWORD'))"/>
+            </stx:when>
+            <stx:otherwise>
+                <stx:assign name="instruction" select="concat(' ',.)"/>
+            </stx:otherwise>
+        </stx:choose>
+    </stx:template>
+    
+    <stx:template match="type">
+        <stx:assign name="type" select="."/>
+    </stx:template>
+    
+    <stx:template match="description">
+        <stx:assign name="description" select="."/>
+    </stx:template>
+
+    <stx:template match="score">
+        <stx:assign name="score" select="."/>
+    </stx:template>
+    
+    <stx:variable name="author"/>
+    <stx:variable name="pages"/>
+    <stx:variable name="publication"/>
+    <stx:variable name="date"/>
+    <stx:variable name="issue"/>
+    <stx:variable name="volume"/>
+    <stx:variable name="name"/>
+    <stx:variable name="hits"/>
+    <stx:variable name="id"/>
+    <stx:variable name="searchURL"/>
+    
+    <stx:template match="mresource">
+        <stx:assign name="title" select="''"/>
+        <stx:assign name="author" select="''"/>
+        <stx:assign name="pages" select="''"/>
+        <stx:assign name="date" select="''"/>
+        <stx:assign name="issue" select="''"/>
+        <stx:assign name="volume" select="''"/>
+        <stx:assign name="name" select="''"/>
+        <stx:assign name="hits" select="0"/>
+        <stx:assign name="id" select="''"/>
+        <stx:assign name="searchURL" select="''"/>
+        <stx:assign name="description" select="''"/>
+        <stx:assign name="score" select="''"/>
+        <dd><ul>
+            <stx:process-children/>
+            <li>
+                <a class="primaryLink" href="{$url}"><stx:value-of select="$title"/></a>
+                <stx:if test="$author">
+                    <div class="pubAuthor"><stx:value-of select="$author"/></div>
+                </stx:if>
+                <div class="pubTitle">
+                    <stx:choose>
+                        <stx:when test="$publication">
+                            <stx:if test="$publication"><stx:value-of select="$publication"/>. </stx:if>
+                            <stx:value-of select="$date"/>
+                            <stx:if test="$volume">;<stx:value-of select="$volume"/></stx:if>
+                            <stx:if test="$issue">(<stx:value-of select="$issue"/>)</stx:if>
+                            <stx:if test="$pages">:<stx:value-of select="$pages"/>.</stx:if>
+                            <stx:if test="$name = 'PubMed' or $hits &lt; 10">
+                                <span class="sourceLink"> - <stx:value-of select="$name"/></span>
+                            </stx:if>
+                            <stx:if test="starts-with($id, 'PMID:')">
+                                <stx:variable name="pmid">
+                                    <stx:value-of select="substring-after($id,'PMID:')"/>
+                                </stx:variable>
+                                <span class="pmid"> PMID: <a href="{concat('http://www.ncbi.nlm.nih.gov/pubmed/',$pmid,'?otool=stanford')}"><stx:value-of select="$pmid"/></a></span>
+                            </stx:if>
+                            <br/>
+                            <stx:if test="$name != 'PubMed' and $hits > 10">
+                                <a href="{$searchURL}">All results from <stx:value-of select="$name"/></a>
+                                <stx:text> &#187;</stx:text>
+                            </stx:if>
+                        </stx:when>
+                        <stx:otherwise>
+                            <stx:choose>
+                                <stx:when test="$name != 'PubMed' and $hits > 10">
+                                    <a href="{$searchURL}">All results from <stx:value-of select="$name"/></a>
+                                    <stx:text> &#187;</stx:text>
+                                    <stx:if test="$emrid and $name = 'UpToDate'">
+                                        <span class="utdCMEnote"> &#8592; Use this link for CME</span>
+                                    </stx:if>
+                                </stx:when>
+                                <stx:when test="10 &gt;= $hits">
+                                    <span class="sourceLink">
+                                        <stx:value-of select="$name"/>
+                                    </span>
+                                </stx:when>
+                            </stx:choose>
+                        </stx:otherwise>
+                    </stx:choose>
+                </div>
+            </li>
+            <stx:if test="$description">
+                <li class="hvrTarg"><stx:value-of select="$description"/></li>
+            </stx:if>
+            <li><stx:value-of select="$score"/></li>
+        </ul></dd>
+    </stx:template>
+    
+    <stx:template match="author">
+        <stx:assign name="author" select="."/>
+    </stx:template>
+    
+    <stx:template match="publication">
+        <stx:assign name="publication" select="."/>
+    </stx:template>
+    
+    <stx:template match="date">
+        <stx:assign name="date" select="."/>
+    </stx:template>
+    
+    <stx:template match="volume">
+        <stx:assign name="volume" select="."/>
+    </stx:template>
+    
+    <stx:template match="issue">
+        <stx:assign name="issue" select="."/>
+    </stx:template>
+    
+    <stx:template match="pages">
+        <stx:assign name="pages" select="."/>
+    </stx:template>
+    
+    <stx:template match="name">
+        <stx:assign name="name" select="."/>
+    </stx:template>
+    
+    <stx:template match="hits">
+        <stx:assign name="hits" select="number(.)"/>
+    </stx:template>
+    
+    <stx:template match="id">
+        <stx:assign name="id" select="."/>
+    </stx:template>
+    
+    <stx:template match="searchURL">
+        <stx:assign name="searchURL" select="."/>
+    </stx:template>
+
+</stx:transform>

@@ -7,11 +7,11 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 
 import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
@@ -56,7 +56,7 @@ public class SearchDirectoryTransformerTest {
 
     @Test
     public void testGetValidity() {
-        assertEquals(SourceValidity.VALID, this.transformer.getValidity().isValid());
+        assertTrue(this.transformer.getValidity().isValid());
     }
 
     @Test

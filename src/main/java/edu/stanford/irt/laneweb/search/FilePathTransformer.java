@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.io.IOException;
-
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.xml.EmbeddedXMLPipe;
@@ -10,11 +8,9 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.AggregatedValidity;
 import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class FilePathTransformer extends AbstractCacheableTransformer {
 
@@ -57,15 +53,9 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
         if ("file".equals(localName)) {
-            try {
-                Source source = this.sourceResolver.resolveURI("file:" + atts.getValue("path"));
-                this.validity.add(source.getValidity());
-                InputSource inputSource = new InputSource(source.getInputStream());
-                inputSource.setSystemId(source.getURI());
-                this.saxParser.parse(inputSource, this.pipe, this.pipe);
-            } catch (IOException e) {
-                throw new LanewebException(e);
-            }
+            Source source = this.sourceResolver.resolveURI("file:" + atts.getValue("path"));
+            this.validity.add(source.getValidity());
+            this.saxParser.parse(source, this.pipe);
         } else {
             super.startElement(uri, localName, qName, atts);
         }

@@ -4,43 +4,43 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <bean name="org.apache.excalibur.source.SourceFactory/content"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.cocoon.Processor/content"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/eresources"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.cocoon.Processor/eresources"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/applications"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.cocoon.Processor/applications"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/rss"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.cocoon.Processor/rss"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/mobile"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.cocoon.Processor/mobile"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/classes"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.cocoon.Processor/classes"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/bookmarks"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.cocoon.Processor/bookmarks"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>

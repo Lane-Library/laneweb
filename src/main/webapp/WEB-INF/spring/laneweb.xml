@@ -172,6 +172,14 @@
         <property name="mode" value="1001"/>
     </bean>
     
+    <bean id="edu.stanford.irt.cocoon.sitemap.ComponentFactory"
+        class="edu.stanford.irt.laneweb.cocoon.SpringComponentFactory"/>
+    
+    <bean id="edu.stanford.irt.cocoon.xml.XPointerProcessor"
+        class="edu.stanford.irt.cocoon.xml.xpointer.XPointerProcessorImpl">
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+    </bean>
+    
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <!-- change from default because of maven filter properties seen as properties in dev environment -->
         <property name="placeholderPrefix" value="%{"></property>
@@ -191,28 +199,5 @@
         class="edu.stanford.irt.laneweb.servlet.SunetIdSource">
         <property name="sunetIdCookieCodec" ref="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec"/>
     </bean>
-    
-    <bean id="org.apache.avalon.framework.service.ServiceManager"
-        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceManager"/>
-    
-    <bean id="org.apache.cocoon.core.container.spring.logger.Log"
-        class="org.apache.cocoon.core.container.spring.logger.LoggerFactoryBean"/>    
-    
-    <bean id="org.apache.cocoon.configuration.Settings" class="edu.stanford.irt.laneweb.cocoon.Settings">
-        <property name="tempDir" value="#{contextAttributes['javax.servlet.context.tempdir']}"/>
-    </bean>
-    
-    <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
-        class="edu.stanford.irt.laneweb.cocoon.XPathProcessorImpl"/>
-    
-    <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebObjectModel">
-    </bean>
-    
-    <bean id="javax.servlet.ServletContext"
-        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
-    
-    <bean id="org.apache.excalibur.xmlizer.XMLizer"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
     
 </beans>

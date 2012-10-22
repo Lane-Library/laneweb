@@ -6,13 +6,11 @@
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
         class="edu.stanford.irt.cocoon.pipeline.NonCachingPipeline"
         scope="prototype">
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
         class="edu.stanford.irt.cocoon.pipeline.ExpiresCachingPipeline"
         scope="prototype">
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
         <constructor-arg value="300"/>
     </bean>
@@ -20,13 +18,11 @@
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
         class="edu.stanford.irt.cocoon.pipeline.ThrottlingPipeline"
         scope="prototype">
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
         class="edu.stanford.irt.cocoon.pipeline.CachingPipeline"
         scope="prototype">
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
     </bean>
     
@@ -59,7 +55,7 @@
     <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
         class="edu.stanford.irt.cocoon.pipeline.generate.AggregatorImpl"
         scope="prototype">
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+        <constructor-arg value="&lt;aggregator&gt;"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/classes"
@@ -88,8 +84,13 @@
     <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
         class="edu.stanford.irt.cocoon.pipeline.transform.XIncludeTransformer"
         scope="prototype">
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
-        <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg value="xinclude"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl"/>
+        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.XPointerProcessor"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/debug"

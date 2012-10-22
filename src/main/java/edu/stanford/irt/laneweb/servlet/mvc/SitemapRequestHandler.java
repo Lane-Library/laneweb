@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.cocoon.Processor;
+import org.apache.cocoon.components.pipeline.ProcessingPipeline;
 import org.springframework.web.HttpRequestHandler;
 
-import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.cocoon.LanewebEnvironment;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
@@ -40,19 +39,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         Map<String, Object> model = getModel();
         this.dataBinder.bind(model, request);
         model.put(Model.SITEMAP_URI, sitemapURI);
-        LanewebEnvironment environment = new LanewebEnvironment();
-        environment.setModel(model);
-        environment.setOutputStream(response.getOutputStream());
-        environment.setIsExternal(true);
         String mimeType = getContentType(sitemapURI);
         if (mimeType != null) {
             response.setContentType(mimeType);
         }
-        try {
-            this.processor.process(environment);
-        } catch (Exception e) {
-            throw new LanewebException(model.toString(), e);
-        }
+        ProcessingPipeline pipeline = this.processor.buildPipeline(model);
+        pipeline.process(response.getOutputStream());
     }
 
     public void setDataBinder(final DataBinder dataBinder) {

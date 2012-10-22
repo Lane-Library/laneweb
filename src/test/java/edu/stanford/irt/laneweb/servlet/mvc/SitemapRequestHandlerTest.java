@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.fail;
 
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.cocoon.Processor;
-import org.apache.cocoon.environment.Environment;
+import org.apache.cocoon.components.pipeline.ProcessingPipeline;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,13 +38,15 @@ public class SitemapRequestHandlerTest {
 
     private SitemapRequestHandler handler;
 
-    private Processor processor;
+    private ProcessingPipeline pipeline;
 
     private HttpServletRequest request;
 
     private HttpServletResponse response;
 
     private ServletContext servletContext;
+
+    private Processor processor;
 
     @Before
     public void setUp() throws Exception {
@@ -56,6 +59,7 @@ public class SitemapRequestHandlerTest {
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
         this.handler.setDataBinder(this.dataBinder);
+        this.pipeline = createMock(ProcessingPipeline.class);
     }
 
     @SuppressWarnings("unchecked")
@@ -67,11 +71,12 @@ public class SitemapRequestHandlerTest {
         expect(this.servletContext.getMimeType("/index.html")).andReturn("text/html");
         expect(this.response.getOutputStream()).andReturn(null);
         this.response.setContentType("text/html");
-        expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
+        expect(this.processor.buildPipeline(isA(Map.class))).andReturn(this.pipeline);
+        this.pipeline.process((OutputStream) null);
         this.dataBinder.bind(isA(Map.class), isA(HttpServletRequest.class));
-        replay(this.servletContext, this.response, this.request, this.processor);
+        replay(this.servletContext, this.response, this.request, this.processor, this.pipeline);
         this.handler.handleRequest(this.request, this.response);
-        verify(this.servletContext, this.processor, this.response, this.request);
+        verify(this.servletContext, this.processor, this.response, this.request, this.pipeline);
     }
 
     @Test

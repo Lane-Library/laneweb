@@ -17,20 +17,16 @@ public class ClassesValidity implements SourceValidity {
         this.expires = System.currentTimeMillis() + DELAY;
     }
 
-    public int isValid() {
+    public boolean isValid() {
         final long now = System.currentTimeMillis();
         if (now <= this.expires) {
-            return SourceValidity.VALID;
+            return true;
         }
         GregorianCalendar cal = new GregorianCalendar();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         if (hour == 23) {
-            return SourceValidity.INVALID;
+            return false;
         }
-        return SourceValidity.VALID;
-    }
-
-    public int isValid(final SourceValidity newValidity) {
-        return SourceValidity.INVALID;
+        return true;
     }
 }

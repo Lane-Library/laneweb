@@ -5,43 +5,54 @@
 
     <bean name="org.apache.cocoon.Processor" abstract="true"
         class="edu.stanford.irt.cocoon.sitemap.SitemapImpl">
-        <constructor-arg index="1" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
-        <constructor-arg index="2" ref="org.apache.cocoon.components.treeprocessor.TreeBuilder"/>
-        <constructor-arg index="3" ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg index="1" ref="sitemap"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+    </bean>
+    
+    <bean id="parentNodeBuilder" abstract="true">
+        <property name="componentFactory" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+        <property name="expressionParser" ref="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
     </bean>
     
     <bean name="sitemap"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"/>
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"
+        parent="parentNodeBuilder"/>
     
     <bean name="pipelines"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelinesNodeBuilder"/>
+        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelinesNodeBuilder"
+        parent="parentNodeBuilder"/>
     
     <bean name="pipeline"
         class="org.apache.cocoon.components.treeprocessor.sitemap.PipelineNodeBuilder"
-        scope="prototype"/>
+        parent="parentNodeBuilder"/>
     
     <bean name="match"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
+        class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"
+        parent="parentNodeBuilder"/>
     
     <bean name="select"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
-        scope="prototype"/>
+        parent="parentNodeBuilder"/>
     
     <bean name="generate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
-        scope="prototype"/>
+        parent="parentNodeBuilder"/>
     
     <bean name="aggregate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
-        scope="prototype"/>
+        parent="parentNodeBuilder"/>
+    
+    <bean name="part"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.PartNodeBuilder"
+        parent="parentNodeBuilder"/>
     
     <bean name="transform"
         class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
-        scope="prototype"/>
+        parent="parentNodeBuilder"/>
     
     <bean name="serialize"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
-        scope="prototype"/>
+        parent="parentNodeBuilder"/>
     
     <bean name="org.apache.cocoon.matching.Matcher/wildcard"
         class="edu.stanford.irt.cocoon.sitemap.match.WildcardMatcher">
@@ -109,35 +120,49 @@
     <bean name="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"
         class="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
     
-    <bean id="org.apache.cocoon.matching.MatcherSelector"
-        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
-        <constructor-arg value="org.apache.cocoon.matching.Matcher"/>
-    </bean>
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.PipelinesNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.PipelinesNode"
+        scope="prototype"/>
     
-    <bean id="org.apache.cocoon.acting.ActionSelector"
-        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
-        <constructor-arg value="org.apache.cocoon.acting.Action"/>
-    </bean>
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.PipelineNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.PipelineNode"
+        scope="prototype"/>
     
-    <bean id="org.apache.cocoon.selection.SelectorSelector"
-        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
-        <constructor-arg value="org.apache.cocoon.selection.Selector"/>
-    </bean>
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.MatchNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.MatchNode"
+        scope="prototype"/>
     
-    <bean name="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"
-        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoFactoryBean"
-        init-method="init"/>
-    
-    <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebSitemapLanguage" scope="prototype">
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
-    </bean>
-    
-    <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
-        class="edu.stanford.irt.cocoon.sitemap.expression.VariableImpl"
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.SelectNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.SelectNode"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
+        <property name="componentFactory" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
     </bean>
+    
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.AbstractPipelineComponentNode"
+        scope="prototype"
+        abstract="true">
+        <property name="componentFactory" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
+    </bean>
+        
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.GenerateNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.GenerateNode"
+        parent="edu.stanford.irt.cocoon.sitemap.node.AbstractPipelineComponentNode"/>
+    
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.AggregateNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.AggregateNode"
+        parent="edu.stanford.irt.cocoon.sitemap.node.AbstractPipelineComponentNode"/>
+    
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.PartNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.PartNode"
+        parent="edu.stanford.irt.cocoon.sitemap.node.AbstractPipelineComponentNode"/>
+    
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.TransformNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.TransformNode"
+        parent="edu.stanford.irt.cocoon.sitemap.node.AbstractPipelineComponentNode"/>
+    
+    <bean id="edu.stanford.irt.cocoon.sitemap.node.SerializeNode"
+        class="edu.stanford.irt.cocoon.sitemap.node.SerializeNode"
+        parent="edu.stanford.irt.cocoon.sitemap.node.AbstractPipelineComponentNode"/>
 
 </beans>

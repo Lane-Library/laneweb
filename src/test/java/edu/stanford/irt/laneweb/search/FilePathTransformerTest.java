@@ -6,9 +6,9 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
@@ -18,10 +18,7 @@ import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class FilePathTransformerTest {
 
@@ -77,7 +74,7 @@ public class FilePathTransformerTest {
     @Test
     public void testGetValidity() {
         replay(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes);
-        assertEquals(SourceValidity.VALID, this.transformer.getValidity().isValid());
+        assertTrue(this.transformer.getValidity().isValid());
         verify(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes);
     }
 
@@ -88,33 +85,10 @@ public class FilePathTransformerTest {
         expect(this.attributes.getValue("path")).andReturn("path");
         expect(this.sourceResolver.resolveURI("file:path")).andReturn(source);
         expect(source.getValidity()).andReturn(validity);
-        InputStream inputStream = createMock(InputStream.class);
-        expect(source.getInputStream()).andReturn(inputStream);
-        expect(source.getURI()).andReturn("uri");
-        this.saxParser.parse(isA(InputSource.class), isA(XMLConsumer.class), isA(XMLConsumer.class));
-        replay(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, source, validity, inputStream);
+        this.saxParser.parse(isA(Source.class), isA(XMLConsumer.class));
+        replay(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, source, validity);
         this.transformer.startElement("", "file", "file", this.attributes);
-        verify(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, source, validity, inputStream);
-    }
-
-    @Test
-    public void testStartElementFileThrowsIOException() throws SAXException, IOException {
-        Source source = createMock(Source.class);
-        SourceValidity validity = createMock(SourceValidity.class);
-        expect(this.attributes.getValue("path")).andReturn("path");
-        expect(this.sourceResolver.resolveURI("file:path")).andReturn(source);
-        expect(source.getValidity()).andReturn(validity);
-        InputStream inputStream = createMock(InputStream.class);
-        expect(source.getInputStream()).andThrow(new IOException());
-        // expect(source.getURI()).andReturn("uri");
-        // this.saxParser.parse(isA(InputSource.class), isA(XMLConsumer.class),
-        // isA(XMLConsumer.class));
-        replay(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, source, validity, inputStream);
-        try {
-            this.transformer.startElement("", "file", "file", this.attributes);
-        } catch (LanewebException e) {
-        }
-        verify(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, source, validity, inputStream);
+        verify(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, source, validity);
     }
 
     @Test

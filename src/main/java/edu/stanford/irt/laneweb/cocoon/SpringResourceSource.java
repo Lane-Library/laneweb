@@ -5,29 +5,12 @@ import java.io.InputStream;
 
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.validity.FileTimeStampValidity;
 import org.springframework.core.io.Resource;
 
+import edu.stanford.irt.cocoon.source.FileTimeStampValidity;
 import edu.stanford.irt.cocoon.source.SourceException;
 
 public class SpringResourceSource implements Source {
-
-    /**
-     * A private always invalid source validity to avoid returning a null
-     * validity.
-     */
-    private static final SourceValidity INVALID = new SourceValidity() {
-
-        private static final long serialVersionUID = 1L;
-
-        public int isValid() {
-            return SourceValidity.INVALID;
-        }
-
-        public int isValid(final SourceValidity newValidity) {
-            return SourceValidity.INVALID;
-        }
-    };
 
     private Resource resource;
 
@@ -35,36 +18,15 @@ public class SpringResourceSource implements Source {
         this.resource = resource;
     }
 
+    /**
+     * Whether or not this Source exists, delegates to the Spring Resource.
+     */
     public boolean exists() {
         return this.resource.exists();
     }
 
-    public long getContentLength() {
-        try {
-            return this.resource.contentLength();
-        } catch (IOException e) {
-            return -1;
-        }
-    }
-
     public InputStream getInputStream() throws IOException {
         return this.resource.getInputStream();
-    }
-
-    public long getLastModified() {
-        try {
-            return this.resource.lastModified();
-        } catch (IOException e) {
-            return 0;
-        }
-    }
-
-    public String getMimeType() {
-        return null;
-    }
-
-    public String getScheme() {
-        throw new UnsupportedOperationException();
     }
 
     public String getURI() {
@@ -79,10 +41,7 @@ public class SpringResourceSource implements Source {
         try {
             return new FileTimeStampValidity(this.resource.getFile());
         } catch (IOException e) {
-            return INVALID;
+            return null;
         }
-    }
-
-    public void refresh() {
     }
 }

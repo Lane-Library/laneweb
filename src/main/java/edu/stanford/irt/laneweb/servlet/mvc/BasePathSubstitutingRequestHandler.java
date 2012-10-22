@@ -7,14 +7,13 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.caching.Cache;
 import org.apache.cocoon.caching.CachedResponse;
-import org.apache.excalibur.source.SourceValidity;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import edu.stanford.irt.cocoon.source.FileTimeStampValidity;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 import edu.stanford.irt.laneweb.model.Model;
@@ -37,9 +36,8 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
             try {
                 String basePath = (String) request.getAttribute(Model.BASE_PATH);
                 String cacheKey = basePath + ":" + resource.getURI();
-                long lastModified = resource.lastModified();
                 CachedResponse cachedResponse = this.cache.get(cacheKey);
-                if (cachedResponse == null || lastModified > cachedResponse.getLastModified()) {
+                if (cachedResponse == null || !cachedResponse.getValidity().isValid()) {
                     InputStream input = new BasePathSubstitutingInputStream(resource.getInputStream(), basePath);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     int i;
@@ -51,13 +49,11 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
                         input.close();
                         baos.close();
                     }
-                    cachedResponse = new CachedResponse((SourceValidity[]) null, baos.toByteArray());
+                    cachedResponse = new CachedResponse(new FileTimeStampValidity(resource.getFile()), baos.toByteArray());
                     this.cache.store(cacheKey, cachedResponse);
                 }
                 return new CachedResponseResource(cachedResponse, resource);
             } catch (IOException e) {
-                throw new LanewebException(e);
-            } catch (ProcessingException e) {
                 throw new LanewebException(e);
             }
         } else {

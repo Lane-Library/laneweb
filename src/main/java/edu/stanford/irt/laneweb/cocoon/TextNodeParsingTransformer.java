@@ -1,23 +1,23 @@
 package edu.stanford.irt.laneweb.cocoon;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.io.StringReader;
 import java.util.Map;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.xml.EmbeddedXMLPipe;
 import org.apache.cocoon.xml.XMLConsumer;
+import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent, ParametersAware {
 
@@ -65,14 +65,25 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         if (this.elementName.equals(qName)) {
             this.inElement = false;
-            StringReader stringReader = new StringReader(this.content.toString());
-            InputSource inputSource = new InputSource(stringReader);
+            final ByteArrayInputStream inputStream = new ByteArrayInputStream(this.content.toString().getBytes());
+            Source source = new Source() {
+
+                public boolean exists() {
+                    return true;
+                }
+                public InputStream getInputStream() throws IOException {
+                    return inputStream;
+                }
+                public String getURI() {
+                    return null;
+                }
+
+                public SourceValidity getValidity() {
+                    throw new UnsupportedOperationException();
+                }
+            };
             XMLConsumer pipe = new ProcessingInstructionSwallowingPipe(this.xmlConsumer);
-            try {
-                this.saxParser.parse(inputSource, pipe, pipe);
-            } catch (IOException e) {
-                throw new LanewebException(e);
-            }
+            this.saxParser.parse(source, pipe);
         }
         this.content = new StringBuilder();
         this.xmlConsumer.endElement(uri, localName, qName);

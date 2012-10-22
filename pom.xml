@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>1.13.17-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/maven/projects/laneweb/</url>
     <inceptionYear>2002</inceptionYear>
@@ -439,123 +439,14 @@
             <version>2.2.2</version>
         </dependency>
         <dependency>
-            <artifactId>cocoon-configuration-api</artifactId>
-            <groupId>org.apache.cocoon</groupId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <artifactId>cocoon-core</artifactId>
-            <groupId>org.apache.cocoon</groupId>
-            <version>2.2.0</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>cocoon-spring-configurator</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-thread-api</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-thread-impl</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-io</artifactId>
-                    <groupId>commons-io</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-jexl</artifactId>
-                    <groupId>commons-jexl</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-jxpath</artifactId>
-                    <groupId>commons-jxpath</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-lang</artifactId>
-                    <groupId>commons-lang</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>concurrent</artifactId>
-                    <groupId>concurrent</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>ehcache</artifactId>
-                    <groupId>net.sf.ehcache</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>excalibur-instrument-api</artifactId>
-                    <groupId>org.apache.excalibur.containerkit</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>excalibur-logger</artifactId>
-                    <groupId>org.apache.excalibur.containerkit</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>js</artifactId>
-                    <groupId>rhino</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>log4j</artifactId>
-                    <groupId>log4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-aop</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>xalan</artifactId>
-                    <groupId>xalan</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>xercesImpl</artifactId>
-                    <groupId>xerces</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>xml-apis</artifactId>
-                    <groupId>xml-apis</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-store-impl</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-expression-language-impl</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <artifactId>cocoon-spring-configurator</artifactId>
-            <groupId>org.apache.cocoon</groupId>
-            <scope>runtime</scope>
-            <version>2.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-aop</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-            </exclusions>
+        	<groupId>edu.stanford.irt</groupId>
+        	<artifactId>irt-cocoon</artifactId>
+        	<version>1.4.0</version>
         </dependency>
         <dependency>
             <artifactId>commons-codec</artifactId>
             <groupId>commons-codec</groupId>
             <version>1.6</version>
-        </dependency>
-        <dependency>
-            <artifactId>commons-io</artifactId>
-            <groupId>commons-io</groupId>
-            <scope>runtime</scope>
-            <version>2.4</version>
         </dependency>
         <dependency>
             <artifactId>commons-lang</artifactId>

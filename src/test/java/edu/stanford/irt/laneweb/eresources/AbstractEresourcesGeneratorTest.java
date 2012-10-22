@@ -6,6 +6,7 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.Serializable;
@@ -89,7 +90,7 @@ public class AbstractEresourcesGeneratorTest {
 
     @Test
     public void testGetValidity() {
-        assertEquals(SourceValidity.VALID, this.generator.getValidity().isValid());
+        assertTrue(this.generator.getValidity().isValid());
     }
 
     @Test
@@ -101,7 +102,7 @@ public class AbstractEresourcesGeneratorTest {
     @Test
     public void testSetExpires() {
         this.generator.setExpires(-1);
-        assertEquals(SourceValidity.INVALID, this.generator.getValidity().isValid());
+        assertFalse(this.generator.getValidity().isValid());
     }
 
     @Test
@@ -125,12 +126,12 @@ public class AbstractEresourcesGeneratorTest {
     @Test
     public void testSetParameters() {
         this.generator.setParameters(Collections.singletonMap(Model.EXPIRES, "-1"));
-        assertEquals(SourceValidity.INVALID, this.generator.getValidity().isValid());
+        assertFalse(this.generator.getValidity().isValid());
     }
 
     @Test
     public void testSetParametersNoValidity() {
         this.generator.setParameters(Collections.<String, String> emptyMap());
-        assertEquals(SourceValidity.VALID, this.generator.getValidity().isValid());
+        assertTrue(this.generator.getValidity().isValid());
     }
 }

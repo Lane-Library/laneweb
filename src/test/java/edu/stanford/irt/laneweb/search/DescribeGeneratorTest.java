@@ -8,10 +8,10 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 
-import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,6 +55,6 @@ public class DescribeGeneratorTest {
 
     @Test
     public void testValid() {
-        assertEquals(SourceValidity.VALID, this.generator.getValidity().isValid());
+        assertTrue(this.generator.getValidity().isValid());
     }
 }
