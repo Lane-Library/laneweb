@@ -34,10 +34,33 @@ public class EMailController {
     @Autowired
     private EMailSender sender;
 
-    @RequestMapping(consumes = "application/x-www-form-urlencoded")
-    public String formSubmit(final Model model, final RedirectAttributes atts) {
-        Map<String, Object> map = model.asMap();
-        this.sender.sendEmail(map);
+    @RequestMapping(value = "/apps/mail/lane-issue", consumes = "application/x-www-form-urlencoded")
+    public String formSubmitLaneissue(final Model model, final RedirectAttributes atts) {
+        sendEmail("lane-issue@med.stanford.edu", model.asMap());
+        return getRedirectTo(model.asMap());
+    }
+
+    @RequestMapping(value = "/apps/mail/lanelibacqs", consumes = "application/x-www-form-urlencoded")
+    public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) {
+        sendEmail("lanelibacqs@lists.stanford.edu", model.asMap());
+        return getRedirectTo(model.asMap());
+    }
+
+    @RequestMapping(value = "/apps/mail/lane-issue", consumes = "application/json")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void jsonSubmitLaneissue(@RequestBody final Map<String, Object> feedback, final Model model) {
+        feedback.putAll(model.asMap());
+        sendEmail("lane-issue@med.stanford.edu", feedback);
+    }
+
+    @RequestMapping(value = "/apps/mail/lanelibacqs", consumes = "application/json")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback, final Model model) {
+        feedback.putAll(model.asMap());
+        sendEmail("lanelibacqs@lists.stanford.edu", feedback);
+    }
+
+    private String getRedirectTo(final Map<String, Object> map) {
         String redirectTo = (String) map.get("redirect");
         if (redirectTo == null) {
             redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
@@ -47,12 +70,10 @@ public class EMailController {
         }
         return "redirect:" + redirectTo;
     }
-    
-    @RequestMapping(consumes = "application/json")
-    @ResponseStatus(value = HttpStatus.OK)
-    public void jsonSubmit(@RequestBody Map<String, Object> feedback, Model model) {
-        feedback.putAll(model.asMap());
-        this.sender.sendEmail(feedback);
+
+    private void sendEmail(final String recipient, final Map<String, Object> data) {
+        data.put("recipient", recipient);
+        this.sender.sendEmail(data);
     }
 
     @ModelAttribute
