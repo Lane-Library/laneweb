@@ -34,26 +34,26 @@ public class EMailController {
     @Autowired
     private EMailSender sender;
 
-    @RequestMapping(value = "/apps/mail/lane-issue", consumes = "application/x-www-form-urlencoded")
+    @RequestMapping(value = "/lane-issue", consumes = "application/x-www-form-urlencoded")
     public String formSubmitLaneissue(final Model model, final RedirectAttributes atts) {
         sendEmail("lane-issue@med.stanford.edu", model.asMap());
         return getRedirectTo(model.asMap());
     }
 
-    @RequestMapping(value = "/apps/mail/lanelibacqs", consumes = "application/x-www-form-urlencoded")
+    @RequestMapping(value = "/lanelibacqs", consumes = "application/x-www-form-urlencoded")
     public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) {
         sendEmail("lanelibacqs@lists.stanford.edu", model.asMap());
         return getRedirectTo(model.asMap());
     }
 
-    @RequestMapping(value = "/apps/mail/lane-issue", consumes = "application/json")
+    @RequestMapping(value = "/lane-issue", consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitLaneissue(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
         sendEmail("lane-issue@med.stanford.edu", feedback);
     }
 
-    @RequestMapping(value = "/apps/mail/lanelibacqs", consumes = "application/json")
+    @RequestMapping(value = "/lanelibacqs", consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
