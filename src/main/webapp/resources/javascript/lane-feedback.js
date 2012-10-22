@@ -73,7 +73,7 @@
         sendFeedback : function(form) {
         	this.get("contentBox").set("innerHTML", this.get("sending").get("innerHTML"));
             var data = Y.JSON.stringify(this._getFeedback(form));
-            Y.io(Y.lane.Model.get("base-path") + "/apps/mail", {
+            Y.io(form.getAttribute("action"), {
                 method : "post",
                 data : data,
                 headers : {
