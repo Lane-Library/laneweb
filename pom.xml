@@ -541,7 +541,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.29</version>
+            <version>1.7.30</version>
             <exclusions>
             	<exclusion>
             		<artifactId>commons-logging</artifactId>
