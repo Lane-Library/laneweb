@@ -119,11 +119,6 @@
         <property name="transformerFactoryClass" value="net.sf.joost.trax.TransformerFactoryImpl"/>
     </bean>
     
-    <bean name="javax.xml.transform.sax.SAXTransformerFactory/xalan"
-        class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
-        <property name="transformerFactoryClass" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
-    </bean>
-    
     <bean name="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon"
         class="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory">
         <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
@@ -134,13 +129,6 @@
     <bean name="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost"
         class="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory">
         <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/joost"/>
-        <constructor-arg ref="javax.xml.transform.URIResolver"/>
-        <constructor-arg ref="javax.xml.transform.ErrorListener"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/xalan"
-        class="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory">
-        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/xalan"/>
         <constructor-arg ref="javax.xml.transform.URIResolver"/>
         <constructor-arg ref="javax.xml.transform.ErrorListener"/>
     </bean>
