@@ -256,9 +256,15 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml" status-code="403"/>
             </map:match>
-            <!-- reference portal is the only page with xincluded rss -->
+            <!-- reference & palliative-care are the only pages with xincluded rss -->
             <map:match pattern="portals/reference.html" type="wildcard">
                 <map:generate type="html" src="{content-base}/portals/reference.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="portals/palliative-care.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/portals/palliative-care.html"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
