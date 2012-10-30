@@ -71,25 +71,24 @@
             this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
         },
         sendFeedback : function(form) {
-        	this.get("contentBox").set("innerHTML", this.get("sending").get("innerHTML"));
             var data = Y.JSON.stringify(this._getFeedback(form));
-//            Y.io(form.getAttribute("action"), {
-//                method : "post",
-//                data : data,
-//                headers : {
-//                    "Content-Type" : "application/json"
-//                },
-//                on : {
-//                    success : function() {
-//                    	alert("success");
-//                    	this.get("contentBox").set("innerHTML", this.get("thanks").get("innerHTML"));
-//                    },
-//                    failure : function() {
-//                        alert("Sorry, sending feedback failed.");
-//                    }
-//                },
-//                context : this
-//            });
+        	this.get("contentBox").set("innerHTML", this.get("sending").get("innerHTML"));
+            Y.io(form.getAttribute("action"), {
+                method : "post",
+                data : data,
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                on : {
+                    success : function() {
+                    	this.get("contentBox").set("innerHTML", this.get("thanks").get("innerHTML"));
+                    },
+                    failure : function() {
+                        alert("Sorry, sending feedback failed.");
+                    }
+                },
+                context : this
+            });
         },
         _fixForIE6 : function() {
             var boundingBox = this.get("boundingBox");
@@ -99,7 +98,6 @@
         },
         _getFeedback : function(form) {
             var nodes = form.all("input, textarea, select"), feedback = {}, i, node, name;
-            alert(Y.dump(nodes));
             for (i = 0; i < nodes.size(); i++) {
             	node = nodes.item(i);
             	name = node.get("name");
