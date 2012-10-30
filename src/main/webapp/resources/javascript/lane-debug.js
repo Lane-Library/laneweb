@@ -45,6 +45,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "dom-screen",
         "dom-style",
         "dom-style-ie",
+        "dump",
         "escape",
         "event-base",
         "event-base-ie",
