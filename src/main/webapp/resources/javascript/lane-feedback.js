@@ -8,9 +8,7 @@
     
     Feedback.HTML_PARSER = {
             menu : ["#feedbackMenu > li"],
-            items : ["#feedbackItems > li"],
-            sending : "#sending",
-            thanks : "#thanks"
+            items : ["#feedbackItems > li"]
     };
     
     Feedback.ATTRS = {
@@ -26,12 +24,10 @@
             writeOnce : true
         },
         sending : {
-            value : null,
-            writeOnce : true
+            value : "Sending feedback."
         },
         thanks : {
-            value : null,
-            writeOnce : true
+            value : "Thank you for your feedback."
         },
         validator : {
         	value : null
@@ -55,7 +51,7 @@
             eventHandle2 = Y.lane.Lightbox.on("visibleChange", function(event) {
                 if (event.newVal) {
                     if (Y.UA.ie === 6) {
-                        self._fixForIE6();
+                        self._toggleVisibility();
                     }
                 } else {
                     eventHandle1.detach();
@@ -65,14 +61,24 @@
             });
         },
         syncUI : function() {
-            var activeItem = this.get("activeItem"), items = this.get("items");
+            var activeItem = this.get("activeItem"),
+                items = this.get("items"),
+                srcNode = this.get("srcNode"),
+                sending = srcNode.one("#sending"),
+                thanks = srcNode.one("#thanks");
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
             items.item(activeItem).addClass(this.getClassName("item", "active"));
             this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
+            if (sending) {
+            	this.set("sending", sending.get("innerHTML"));
+            }
+            if (thanks) {
+            	this.set("thanks", thanks.get("innerHTML"));
+            }
         },
         sendFeedback : function(form) {
             var data = Y.JSON.stringify(this._getFeedback(form));
-        	this.get("contentBox").set("innerHTML", this.get("sending").get("innerHTML"));
+        	this.get("contentBox").set("innerHTML", this.get("sending"));
             Y.io(form.getAttribute("action"), {
                 method : "post",
                 data : data,
@@ -81,7 +87,7 @@
                 },
                 on : {
                     success : function() {
-                    	this.get("contentBox").set("innerHTML", this.get("thanks").get("innerHTML"));
+                    	this.get("contentBox").set("innerHTML", this.get("thanks"));
                     },
                     failure : function() {
                         alert("Sorry, sending feedback failed.");
@@ -90,7 +96,7 @@
                 context : this
             });
         },
-        _fixForIE6 : function() {
+        _toggleVisibility : function() {
             var boundingBox = this.get("boundingBox");
 //            //this forces the markup to be rendered, not sure why it is needed.
             boundingBox.setStyle("visibility", "hidden");
