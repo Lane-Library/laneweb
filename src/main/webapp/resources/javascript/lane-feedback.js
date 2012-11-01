@@ -77,8 +77,10 @@
             }
         },
         sendFeedback : function(form) {
-            var data = Y.JSON.stringify(this._getFeedback(form));
-        	this.get("contentBox").set("innerHTML", this.get("sending"));
+            var contentBox = this.get("contentBox"),
+                data = Y.JSON.stringify(this._getFeedback(form));
+        	contentBox.set("innerHTML", this.get("sending"));
+        	contentBox.scrollIntoView();
             Y.io(form.getAttribute("action"), {
                 method : "post",
                 data : data,
