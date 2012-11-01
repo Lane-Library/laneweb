@@ -175,10 +175,6 @@
                                     <option
                                         value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online"
                                         >UpToDate</option>
-                                    <option value=""> ---------------- </option>
-                                    <option value="/biomed-resources/eb.html">Books</option>
-                                    <option value="/biomed-resources/db.html">Databases</option>
-                                    <option value="/biomed-resources/ej.html">Journals</option>
                                 </select>
                             </li>
                         </ul>
@@ -187,7 +183,7 @@
                                 <div class="yui3-u-1-5">
                                     <a href="/biomed-resources/index.html">BIOMED RESOURCES</a>
                                     <ul>
-                                        <li><a href="/biomed-resources/ej.html">Journals</a></li>
+                                        <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
                                         <li><a href="/biomed-resources/eb.html">Books</a></li>
                                         <li><a href="/biomed-resources/db.html">Databases</a></li>
                                         <li><a href="/biomed-resources/images.html">Images</a></li>
