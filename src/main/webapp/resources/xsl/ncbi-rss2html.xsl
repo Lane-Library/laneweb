@@ -66,7 +66,7 @@
             <xsl:choose>
                 <xsl:when test="starts-with(guid,'PubMed:') and description">
                     <span xmlns="http://www.w3.org/1999/xhtml" id="pubmed_{substring-after(guid,':')}Tooltip" style="width:60%">
-                        <xsl:apply-templates select="description/*[not(name()='title')]"/>
+                        <xsl:apply-templates select="description/*[not(name()='title') and not(name()='table')]"/>
                     </span>
                 </xsl:when>
                 <xsl:when test="starts-with(guid,'PubMed:')">
