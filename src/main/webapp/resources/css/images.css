@@ -2,6 +2,22 @@
     padding : 6px 7px 8px 6px;
     background-repeat : no-repeat
 }
+.drop-shadow-noimg{
+	/*-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;*/
+    border: 2px solid #fff;
+    box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+    -moz-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+    -webkit-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+	/* For IE 8 */
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid : DXImageTransform.Microsoft.Shadow ( Strength = 4,
+		Direction = 135, Color = '#000000' );
+}
+
 .ds1 {
     background-image : url(/././resources/images/imgbg1.gif)
 }
