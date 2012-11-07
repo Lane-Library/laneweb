@@ -12,9 +12,9 @@
     -webkit-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
 	/* For IE 8 */
 	-ms-filter:
-		"progid:DXImageTransform.Microsoft.Shadow(Strength=6, Direction=135, Color='#989898')";
+		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
 	/* For IE 5.5 - 7 */
-	filter: progid : DXImageTransform.Microsoft.Shadow ( Strength = 6,
+	filter: progid : DXImageTransform.Microsoft.Shadow ( Strength = 3,
 		Direction = 135, Color = '#989898' );
 }
 
