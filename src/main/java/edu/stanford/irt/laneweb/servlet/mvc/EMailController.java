@@ -34,6 +34,12 @@ public class EMailController {
     @Autowired
     private EMailSender sender;
 
+    @RequestMapping(value = "/askus", consumes = "application/x-www-form-urlencoded")
+    public String formSubmitAskUs(final Model model, final RedirectAttributes atts) {
+        sendEmail("LaneAskUs@stanford.edu", model.asMap());
+        return getRedirectTo(model.asMap());
+    }
+
     @RequestMapping(value = "/lane-issue", consumes = "application/x-www-form-urlencoded")
     public String formSubmitLaneissue(final Model model, final RedirectAttributes atts) {
         sendEmail("lane-issue@med.stanford.edu", model.asMap());
@@ -44,6 +50,13 @@ public class EMailController {
     public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) {
         sendEmail("lanelibacqs@lists.stanford.edu", model.asMap());
         return getRedirectTo(model.asMap());
+    }
+
+    @RequestMapping(value = "/askus", consumes = "application/json")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
+        feedback.putAll(model.asMap());
+        sendEmail("LaneAskUs@stanford.edu", feedback);
     }
 
     @RequestMapping(value = "/lane-issue", consumes = "application/json")
