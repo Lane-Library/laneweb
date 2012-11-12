@@ -4,12 +4,12 @@
 
     var forms = Y.all('.formvalidator'), i;
     for (i = 0; i < forms.size(); i++) {
-        new Y.Validator( {
+        (new Y.Validator( {
             form : forms.item(i).get('id'),
             defaultIndicatorDomType : 'DIV',
             defaultIncorrectIndicatorCss : 'validator',
             defaultCorrectIndicatorCss : 'indicator'
-        });
+        }));
     }
 
 //FormValidator class    

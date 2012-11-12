@@ -2,7 +2,7 @@
     
     function PurchaseSuggestions(config) {
         PurchaseSuggestions.superclass.constructor.apply(this, arguments);
-    };
+    }
     
     PurchaseSuggestions.NAME = "purchase";
     
