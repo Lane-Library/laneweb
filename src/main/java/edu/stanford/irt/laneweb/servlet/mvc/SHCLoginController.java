@@ -27,13 +27,13 @@ public class SHCLoginController {
 
     private static final String EPIC_PREFIX = "epic-";
 
-    private static final String ERROR_EMRID = "invalid or missing emrid; ";
+    private static final String ERROR_EMRID = "invalid or missing emrid: ";
 
     private static final String ERROR_MISSING_SUNETID = "missing active sunetid for univid: ";
 
-    private static final String ERROR_TIMESTAMP = "invalid or missing timestamp; ";
+    private static final String ERROR_TIMESTAMP = "invalid or missing timestamp: ";
 
-    private static final String ERROR_UNIVID = "invalid or missing univid; ";
+    private static final String ERROR_UNIVID = "invalid or missing univid: ";
 
     private static final int ONE_MINUTE = 1000 * 60;
 
@@ -61,13 +61,13 @@ public class SHCLoginController {
         String sunetid = null;
         String decryptedUnivid = null;
         if (!validateTimestamp(ts)) {
-            errorMsg.append(ERROR_TIMESTAMP);
+            errorMsg.append(ERROR_TIMESTAMP + ts);
         } else {
             if (!validateAndPopulateEmrid(emrid, session)) {
-                errorMsg.append(ERROR_EMRID);
+                errorMsg.append(ERROR_EMRID + emrid);
             }
             if (!validateAndPopulateUnivid(univid, session)) {
-                errorMsg.append(ERROR_UNIVID);
+                errorMsg.append(ERROR_UNIVID + univid);
             } else {
                 decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
                 sunetid = getSunetid(session, decryptedUnivid);
