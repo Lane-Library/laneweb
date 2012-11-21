@@ -47,6 +47,9 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 if (query != null) {
                     if (query.equalsIgnoreCase(currentTitle)) {
                         eresource.setScore(Integer.MAX_VALUE);
+                    } else if (currentTitle.indexOf('(') > -1
+                            && query.equalsIgnoreCase(currentTitle.replaceFirst(" \\(.*", ""))) {
+                        eresource.setScore(Integer.MAX_VALUE);
                     } else {
                         // core material weighted * 3
                         int coreFactor = "Y".equals(rs.getString("CORE")) ? 3 : 1;
