@@ -48,9 +48,9 @@
             this._visibleHandle = this._ac.on("visibleChange", this._handleVisibleChange, this);
         }
         
-        // close suggestion list after lane search submitted
+        // disable suggestion list after lane search submitted
         Y.on("lane:beforeSearchSubmit", function(){
-            input.ac.hide();
+            input.ac.destroy();
         });
     };
     
