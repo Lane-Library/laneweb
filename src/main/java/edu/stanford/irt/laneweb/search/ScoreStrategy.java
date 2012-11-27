@@ -44,7 +44,7 @@ public class ScoreStrategy {
         Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern.toString() + ").*", Pattern.CASE_INSENSITIVE);
         String title = searchResult.getTitle();
         boolean titleBeginsWithQueryTerms = titleBeginsWithPattern.matcher(title).matches();
-        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern.toString() + ")$", Pattern.CASE_INSENSITIVE);
+        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern.toString() + "\\W?)$", Pattern.CASE_INSENSITIVE);
         boolean exactTitle = exactTitlePattern.matcher(title).matches();
         int titleHits = 0;
         int descriptionHits = 0;

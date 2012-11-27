@@ -79,6 +79,17 @@ public class ScoreStrategyTest {
     }
 
     @Test
+    public void testComputeExactTitleScoreWithPeriodInResult() {
+        expect(this.result.getId()).andReturn("foo_content_1");
+        expect(this.result.getTitle()).andReturn("title with period.");
+        expect(this.result.getDescription()).andReturn("description");
+        expect(this.result.getPublicationDate()).andReturn("2012");
+        replay(this.result);
+        assertEquals(110, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title with period")));
+        verify(this.result);
+    }
+
+    @Test
     public void testComputeLowScore() {
         expect(this.result.getId()).andReturn("foo_content_1");
         expect(this.result.getTitle()).andReturn("title");
