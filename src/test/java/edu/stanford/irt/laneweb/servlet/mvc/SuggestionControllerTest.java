@@ -55,7 +55,7 @@ public class SuggestionControllerTest {
     @Test
     public void testGetSuggestions() throws IOException {
         Suggestion suggestion = createMock(Suggestion.class);
-        expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis");
+        expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis").atLeastOnce(); //java 7 does this
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));
         replay(suggestion, this.eresource, this.history, this.mesh);
         Map<String, List<String>> suggestions = this.controller.getSuggestions("venous thrombosis", "mesh");
