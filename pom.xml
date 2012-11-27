@@ -269,7 +269,7 @@
                                 <include>jquery.mobile-1.1.1-min.js</include>
                                 <include>jquery-ui-1.8.23.custom-min.js</include>
                                 <include>m-lane-min.js</include>
-                                <include>m-login-min.js</include>
+                                <include>m-persistentlogin-min.js</include>
                                 <include>m-hours-min.js</include>
                                 <include>m-search-min.js</include>
                                 <include>m-spellcheck-min.js</include>
