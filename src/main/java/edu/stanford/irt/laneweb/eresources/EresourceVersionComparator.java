@@ -3,11 +3,13 @@ package edu.stanford.irt.laneweb.eresources;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import edu.stanford.irt.eresources.Link;
 import edu.stanford.irt.eresources.Version;
 
 /**
@@ -29,10 +31,12 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
     public int compare(final Version v1, final Version v2) {
         int score1 = calculateHoldingsScore(v1);
         int score2 = calculateHoldingsScore(v2);
+        int yearsCovered1 = getYearsCovered(v1);
+        int yearsCovered2 = getYearsCovered(v2);
         // factor in years covered only if available in both versions
-        if (getYearsCovered(v1) != -1 && getYearsCovered(v2) != -1) {
-            score1 = score1 + getYearsCovered(v1);
-            score2 = score2 + getYearsCovered(v2);
+        if (yearsCovered1 != -1 && yearsCovered2 != -1) {
+            score1 = score1 + yearsCovered1;
+            score2 = score2 + yearsCovered2;
         }
         if (score1 != score2) {
             return score2 - score1;
@@ -61,24 +65,28 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
      */
     private int calculateHoldingsScore(final Version v) {
         int score = 0;
-        if (v.getLinks().size() > 0 && "Impact Factor".equals(v.getLinks().iterator().next().getLabel())) {
+        Collection<Link> links = v.getLinks();
+        if (links.size() > 0 && "Impact Factor".equals(links.iterator().next().getLabel())) {
             return -99;
         }
-        if (null != v.getSummaryHoldings()) {
-            if (v.getSummaryHoldings().endsWith("-") || v.getSummaryHoldings().startsWith("v. 1-")) {
+        String summaryHoldings = v.getSummaryHoldings();
+        if (summaryHoldings != null) {
+            if (summaryHoldings.endsWith("-") || summaryHoldings.startsWith("v. 1-")) {
                 score++;
-            } else if (v.getSummaryHoldings().endsWith(".")) {
+            } else if (summaryHoldings.endsWith(".")) {
                 score--;
             }
         }
-        if (null != v.getDates()) {
-            if (v.getDates().endsWith("-")) {
+        String dates = v.getDates();
+        if (dates != null) {
+            if (dates.endsWith("-")) {
                 score++;
-            } else if (v.getDates().endsWith(".")) {
+            } else if (dates.endsWith(".")) {
                 score--;
             }
         }
-        if (null != v.getDescription() && v.getDescription().contains("delayed")) {
+        String description = v.getDescription();
+        if (description != null && description.contains("delayed")) {
             score--;
         }
         return score;
@@ -92,16 +100,21 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
      */
     private int calculatePublisherScore(final Version v) {
         int score = 1;
-        if (null != v.getPublisher() && FAVORED_PUBLISHERS.contains(v.getPublisher().toLowerCase())) {
-            score = score + (10 - FAVORED_PUBLISHERS.indexOf(v.getPublisher().toLowerCase()));
+        String publisher = v.getPublisher();
+        if (publisher != null) {
+            publisher = publisher.toLowerCase();
+            if (FAVORED_PUBLISHERS.contains(publisher)) {
+                score = score + (10 - FAVORED_PUBLISHERS.indexOf(publisher));
+            }
         }
         return score;
     }
 
     private int getYearsCovered(final Version v) {
-        if (null != v.getDates()) {
-            Matcher closedMatcher = CLOSED_DATE_PATTERN.matcher(v.getDates());
-            Matcher openMatcher = OPEN_DATE_PATTERN.matcher(v.getDates());
+        String dates = v.getDates();
+        if (dates != null) {
+            Matcher closedMatcher = CLOSED_DATE_PATTERN.matcher(dates);
+            Matcher openMatcher = OPEN_DATE_PATTERN.matcher(dates);
             if (closedMatcher.matches()) {
                 int date1 = Integer.parseInt(closedMatcher.group(1));
                 int date2 = Integer.parseInt(closedMatcher.group(2));
