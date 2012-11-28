@@ -4,7 +4,49 @@
         <title>Lane Medical Library &amp; Knowledge Management Center - Stanford
             University School of Medicine</title>
         <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/layout.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/shaded-border.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/header.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-nav.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lists.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/anchors.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/som-footer.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-footer.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/headers.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/module.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/search.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/popups.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/online-resources.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/tooltips.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/miscellaneous.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/events.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/node-accordion.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/expandies.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/breadcrumb-form.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/tutorials.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/forms.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/section-menu.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/liaisons.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/table-styles.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/follow.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/images.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/captioned-img.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lightbox.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/feedback.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/live-chat.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/banner.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/hightlighted-resources.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/antibiogram.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/landing-pgs-2011.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/persistent-login.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks-marketing.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/bookmark-instructions.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/subscribe.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/suggest.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
     </head>
