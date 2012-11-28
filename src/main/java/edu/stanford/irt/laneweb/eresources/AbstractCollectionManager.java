@@ -178,7 +178,8 @@ public abstract class AbstractCollectionManager implements CollectionManager {
             rs = stmt.executeQuery();
             return parseResultSet(rs, query);
         } catch (SQLException e) {
-            throw new LanewebException("sqlKey: " + sqlKey + ", params: " + params.toString() + ", query: " + query, e);
+            StringBuilder sb = new StringBuilder("sqlKey: ").append(sqlKey).append(", params: ").append(params).append(", query: ").append(query);
+            throw new LanewebException(sb.toString(), e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
