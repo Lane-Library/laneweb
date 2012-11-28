@@ -77,7 +77,7 @@ public class SHCLoginController {
             errorMsg.append(ERROR_MISSING_SUNETID + decryptedUnivid);
         }
         if (errorMsg.length() > 0) {
-            this.log.error(errorMsg.toString());
+            this.log.error(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
             url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
         }
         response.sendRedirect("https://" + request.getServerName() + request.getContextPath() + url.toString());
@@ -118,9 +118,14 @@ public class SHCLoginController {
         try {
             decryptedTimestamp = Long.parseLong(this.codec.decrypt(timestamp));
         } catch (NumberFormatException e) {
+            this.log.error("error parsing " + timestamp, e);
             return false;
         }
         Date now = new Date();
-        return decryptedTimestamp <= now.getTime() && now.getTime() - decryptedTimestamp < ONE_MINUTE;
+        if (Math.abs(now.getTime() - decryptedTimestamp) < ONE_MINUTE) {
+            return true;
+        }
+        this.log.error("invalid timestamp -- now: " + now.getTime() + ", timestamp: " + decryptedTimestamp);
+        return false;
     }
 }
