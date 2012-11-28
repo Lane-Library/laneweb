@@ -259,6 +259,7 @@
                                 <include>jquery.mobile.structure-1.1.1-min.css</include>
                                 <include>jquery.ui.autocomplete-min.css</include>
                                 <include>m-lane-min.css</include>
+                                <include>m-buttons-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
