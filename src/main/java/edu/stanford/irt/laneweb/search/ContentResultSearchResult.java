@@ -35,12 +35,16 @@ public class ContentResultSearchResult implements SearchResult {
         StringBuffer sb = new StringBuffer();
         String pubDate = cResult.getPublicationDate();
         String pubVolume = cResult.getPublicationVolume();
+        String pubIssue = cResult.getPublicationIssue();
         String pubAuthor = cResult.getAuthor();
         if (null != pubDate) {
             sb.append(YEAR_PATTERN.matcher(pubDate).replaceFirst("$1"));
         }
         if (null != pubVolume) {
             sb.append(pubVolume);
+        }
+        if (null != pubIssue) {
+            sb.append(pubIssue);
         }
         if (null != pubAuthor) {
             sb.append(WHITESPACE.matcher(pubAuthor).replaceAll("").toLowerCase());
