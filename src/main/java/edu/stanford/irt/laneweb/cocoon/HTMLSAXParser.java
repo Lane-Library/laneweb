@@ -21,7 +21,9 @@ public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
     public void parse(final Source source, final XMLConsumer xmlConsumer) {
         try {
             setContentHandler(xmlConsumer);
-            setLexicalHandler(xmlConsumer);
+            // case 79097 processing instructions with joost transformations
+            // nekohtml doesn't send endDTD which confuses joost.  fix by not setting lexicalHandler
+//            setLexicalHandler(xmlConsumer);
             InputSource inputSource = new InputSource();
             inputSource.setSystemId(source.getURI());
             inputSource.setByteStream(source.getInputStream());
