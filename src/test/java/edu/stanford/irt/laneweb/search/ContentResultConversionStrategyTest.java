@@ -100,7 +100,7 @@ public class ContentResultConversionStrategyTest {
         expect(this.uberResult.getQuery()).andReturn(this.query);
         expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.resourceResult, this.contentParentResult }));
-        expect(this.resourceResult.getId()).andReturn("id").times(3);
+        expect(this.resourceResult.getId()).andReturn("id");
         expect(this.contentParentResult.getId()).andReturn("id_content");
         expect(this.contentParentResult.getChildren()).andReturn(
                 Arrays.asList(new Result[] { this.contentResult, this.contentResult }));

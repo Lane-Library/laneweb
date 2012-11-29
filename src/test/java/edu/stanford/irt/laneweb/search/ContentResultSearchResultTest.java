@@ -37,7 +37,6 @@ public class ContentResultSearchResultTest {
         Result aResourceResult = createMock(Result.class);
         ContentResult aContentResult = createMock(ContentResult.class);
         expect(aContentResult.getContentId()).andReturn("cid").times(2);
-        expect(aResourceResult.getId()).andReturn("rid").times(2);
         expect(aContentResult.getTitle()).andReturn("the title").times(2);
         replay(aContentResult);
         replay(aResourceResult);
