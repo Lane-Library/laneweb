@@ -100,16 +100,16 @@ public class ContentResultConversionStrategyTest {
         expect(this.uberResult.getQuery()).andReturn(this.query);
         expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.resourceResult, this.contentParentResult }));
-        expect(this.resourceResult.getId()).andReturn("id");
+        expect(this.resourceResult.getId()).andReturn("id").times(3);
         expect(this.contentParentResult.getId()).andReturn("id_content");
         expect(this.contentParentResult.getChildren()).andReturn(
                 Arrays.asList(new Result[] { this.contentResult, this.contentResult }));
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getTitle()).andReturn("firsttitle");
-        expect(this.contentResult.getContentId()).andReturn("contentId");
+        expect(this.contentResult.getContentId()).andReturn("contentId").times(2);
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(100);
         expect(this.contentResult.getTitle()).andReturn("secondtitle");
-        expect(this.contentResult.getContentId()).andReturn("contentId");
+        expect(this.contentResult.getContentId()).andReturn("contentId").times(2);
         replay(this.scoreStrategy, this.uberResult, this.query, this.result, this.resourceResult, this.contentParentResult,
                 this.contentResult);
         Collection<SearchResult> searchResults = this.conversionStrategy.convertResult(this.uberResult);
