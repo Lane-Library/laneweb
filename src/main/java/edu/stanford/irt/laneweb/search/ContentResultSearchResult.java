@@ -30,10 +30,18 @@ public class ContentResultSearchResult implements SearchResult {
     public int compareTo(final SearchResult o) {
         int scoreCmp = o.getScore() - this.score;
         int titleCmp = this.sortTitle.compareTo(o.getSortTitle());
-        if (titleCmp == 0) {
-            return titleCmp;
+        if (titleCmp == 0 && scoreCmp == 0) {
+            ContentResultSearchResult other = (ContentResultSearchResult) o;
+            if (other.getResourceResult().getId().equals(this.getResourceResult().getId())) {
+                String otherContentId = other.contentResult.getContentId();
+                String thisContentId = this.contentResult.getContentId();
+                if (null == otherContentId || null == thisContentId) {
+                    return other.contentResult.getURL().compareTo(this.contentResult.getURL());
+                }
+                return otherContentId.compareTo(thisContentId);
+            }
         }
-        return (scoreCmp != 0 ? scoreCmp : this.sortTitle.compareTo(o.getSortTitle()));
+        return (scoreCmp != 0 ? scoreCmp : titleCmp);
     }
 
     @Override
@@ -41,6 +49,14 @@ public class ContentResultSearchResult implements SearchResult {
         if (object instanceof ContentResultSearchResult) {
             ContentResultSearchResult other = (ContentResultSearchResult) object;
             if (other.hashCode == this.hashCode) {
+                if (other.getResourceResult().getId().equals(this.getResourceResult().getId())) {
+                    String otherContentId = other.contentResult.getContentId();
+                    String thisContentId = this.contentResult.getContentId();
+                    if (null == otherContentId || null == thisContentId) {
+                        return other.contentResult.getURL().equals(this.contentResult.getURL());
+                    }
+                    return otherContentId.equals(thisContentId);
+                }
                 return other.sortTitle.equals(this.sortTitle);
             }
         }

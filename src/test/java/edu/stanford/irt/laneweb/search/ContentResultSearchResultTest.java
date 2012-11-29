@@ -34,12 +34,18 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testEquals() {
-        ContentResult result = createMock(ContentResult.class);
-        expect(result.getTitle()).andReturn("the title");
-        replay(result);
-        ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
-        assertTrue(this.searchResult.equals(other));
-        verify(result);
+        Result aResourceResult = createMock(Result.class);
+        ContentResult aContentResult = createMock(ContentResult.class);
+        expect(aContentResult.getContentId()).andReturn("cid").times(2);
+        expect(aResourceResult.getId()).andReturn("rid").times(2);
+        expect(aContentResult.getTitle()).andReturn("the title").times(2);
+        replay(aContentResult);
+        replay(aResourceResult);
+        ContentResultSearchResult one = new ContentResultSearchResult(aContentResult, aResourceResult, 100);
+        ContentResultSearchResult two = new ContentResultSearchResult(aContentResult, aResourceResult, 100);
+        assertTrue(one.equals(two));
+        verify(aContentResult);
+        verify(aResourceResult);
     }
 
     @Test
