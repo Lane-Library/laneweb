@@ -14,6 +14,7 @@ laneweb.context.ezproxy-key=
 laneweb.context.live-base=
 laneweb.context.stage-base=
 laneweb.context.metasearch-failed=
+laneweb.disaster-mode=
 laneweb.log4j.root.priority.value=
 laneweb.log4j.root.appender-ref.ref=
 laneweb.shccodec.key=

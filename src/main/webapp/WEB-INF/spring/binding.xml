@@ -50,7 +50,9 @@
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"
-        class="edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder"/>
+        class="edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder">
+        <constructor-arg value="%{laneweb.disaster-mode}"/>
+    </bean>
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"
         class="edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder">
