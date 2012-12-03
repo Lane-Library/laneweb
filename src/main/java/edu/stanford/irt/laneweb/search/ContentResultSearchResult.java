@@ -32,7 +32,7 @@ public class ContentResultSearchResult implements SearchResult {
     }
 
     private String buildCompareString(final ContentResult cResult) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String pubDate = cResult.getPublicationDate();
         String pubVolume = cResult.getPublicationVolume();
         String pubIssue = cResult.getPublicationIssue();

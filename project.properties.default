@@ -19,3 +19,4 @@ laneweb.log4j.root.appender-ref.ref=
 laneweb.shccodec.key=
 laneweb.shccodec.vector=
 laneweb.sunetidcookiecodec.key=
+laneweb.sunetidhashkey=
