@@ -543,7 +543,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.31</version>
+            <version>1.7.32</version>
             <exclusions>
             	<exclusion>
             		<artifactId>commons-logging</artifactId>
