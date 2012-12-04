@@ -1,26 +1,73 @@
+/*---------------lightbox positioning-------------------------------------------------------*/
 .yui3-lightbox {
-    position : absolute;
-    z-index : 3;
-    margin-top : 13px
+	position: absolute;
+	z-index: 3;
+	margin-top: 13px;
 }
 
-.yui3-lightbox-hidden,
-.yui3-lightboxbg-hidden {
-    visibility : hidden
+.yui3-lightbox-hidden,.yui3-lightboxbg-hidden {
+	visibility: hidden;
 }
 
 .yui3-lightbox-content {
-    position : relative
+	position: relative;
 }
 
 .yui3-lightboxbg {
-    position : fixed;
-    /* IE needs left:0*/
-    left : 0;
-    background-color : black;
-    opacity : .75;
-    filter : alpha(opacity=75);
-    width : 100%;
-    height : 100%;
-    z-index : 2
+	position: fixed;
+	left: 0; /* IE needs left:0*/
+	background-color: black;
+	opacity: .75;
+	filter: alpha(opacity =   75);
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+}
+
+/*---------------feedback button graphic at the edge of a browser window----------------------*/
+#feedbackLink {
+	position: fixed;
+	top: 45%;
+	right: 0;
+	z-index: 1
+}
+/* IE6 doesn't do position : fixed, this class is added via lane-ie.js*/
+#feedbackLink.ie6Feedback {
+	position: absolute;
+}
+
+#feedbackLink a {
+	display: block;
+	background-image: url(/././resources/images/icons-sprite3.png);
+	background-position: -699px 0px;
+	width: 31px;
+	height: 110px;
+	border-bottom: none;
+}
+
+#feedbackLink a:hover {
+	background-image: url(/././resources/images/icons-sprite3.png);
+	background-repeat: no-repeat;
+	background-position: -654px 0px;
+}
+
+/*---------------the lightbox overall look (the same box for all lightboxes)------------------*/
+#persistent,.yui3-lightbox #feedback,.yui3-lightbox #subscribe {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-moz-user-select: none;
+	background-color: white;
+	height: auto;
+	padding: 30px;
+	text-align: left;
+	border: 1px solid #9e9d98;
+}
+
+#persistent,.yui3-lightbox #subscribe {
+	width: 400px;
+}
+
+.yui3-lightbox #feedback {
+	width: 750px;
 }

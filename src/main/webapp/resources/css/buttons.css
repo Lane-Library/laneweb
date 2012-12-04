@@ -1,6 +1,7 @@
 /*this file also has styles for the tabs*/
 /* styles for css buttons */
-.red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn
+
+.red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn, .submitButton
 	{
 	display: inline-block;
 	padding: 7px 12px;

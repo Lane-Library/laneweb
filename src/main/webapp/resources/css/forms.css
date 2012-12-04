@@ -1,3 +1,172 @@
+#feedback .mainFeedback /*looks the same as h4*/ {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 1.8em;
+	letter-spacing: 0.05em;
+	line-height: 1.2em;
+	margin-bottom: .2em;
+	color: #820000;
+}
+#feedbackMenu /*tabs on the left */ {
+	text-align: left;
+	margin-top: 40px;
+	/*IE6 fix*/
+	_overflow: hidden
+}
+
+/*--------------ALL forms within lightbox-----------------------------------------------------*/
+
+#feedback form,#subscribe form {
+	padding: 20px;
+	text-align: left;
+}
+#feedback label,#subscribe label {
+	display: block;
+	margin-top: .5em;
+}
+#subscribe  input,#subscribe textarea,#subscribe select,#feedback input,#feedback textarea,#feedback select
+	{
+	box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+}
+#feedback textarea {
+	height: 150px;
+	line-height: 150%;
+}
+.feedbackText {
+	padding: 9px;
+	margin-bottom: .5em;
+	border: solid 2px #C9C9C9;
+	outline: 0;
+	font: normal 13px/100% Arial, Verdana, sans-serif;
+	background: #FFFFFF;
+	width: 100%;
+	*width: 95%;
+	_width: 95%;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#feedback select,#subscribe select {
+	border: 2px solid #C9C9C9;
+	width: 100%;
+	height: 37px;
+	padding: 6px;
+	margin-top: 24px;
+}
+#subscribe input:hover,#subscribe textarea:hover,#subscribe input:focus,#subscribe textarea:focus,#feedback input:hover,#feedback textarea:hover,#feedback input:focus,#feedback textarea:focus
+	{
+	border-color: #9d9b94;
+}
+
+/*-------------------------submit button is the same for all forms in the lightbox-----------------------------------*/
+
+.submit-btn {
+	text-align: center;
+}
+
+/*-------------------------persistent login--------------------------------------------------------------------------*/
+#persistent #hd  {
+	color: #414042;
+	font-weight: bold;
+	line-height: 1.4em;
+	font-size: 1.1em;
+	padding-bottom: 2em;;
+}
+
+#persistent #ft {
+	text-align: right;
+	padding-right: 30px;
+	margin-top: .7em;
+}
+
+#persistent #login {
+	position: inherit;
+}
+
+/*-------------------------feedback widget--------------------------------------------------------------------------*/
+#feedback li {
+	list-style: none outside none;
+}
+#feedbackMenu li {
+	padding: 10px 15px;
+}
+.yui3-lightbox #feedbackItems {
+	background-color: white;
+	border: 2px solid #fff;
+	box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+	-moz-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+	-webkit-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+	/* For IE 8 */
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
+	/* For IE 5.5 - 7 */
+	filter: progid :   DXImageTransform.Microsoft.Shadow (   Strength =   3,
+		Direction =   135, Color =   '#989898' );
+}
+.yui3-feedback-item,.yui3-purchase-item {
+	display: none;
+}
+.yui3-feedback-item-active,.yui3-purchase-item-active {
+	display: block;
+}
+.yui3-feedback-menu-active {
+	background-color: white;
+	width: 225px;
+	border-top: 2px solid #fff;
+	border-left: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+	border-right: none;
+	box-shadow: rgba(152, 152, 152, 5) -4px 0px 6px;
+	-moz-box-shadow: rgba(152, 152, 152, 5) -4px 0px 6px;
+	-webkit-box-shadow: rgba(152, 152, 152, 5) -4px 0px 6px;
+	/* For IE 8 */
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
+	/* For IE 5.5 - 7 */
+	filter: progid :   DXImageTransform.Microsoft.Shadow (   Strength =   3,
+		Direction =   135, Color =   '#989898' );
+}
+/*a couple of IE6 fixes*/
+#feedbackItems .yui-g .yui-u .feedbackText {
+	*width: 90%;
+	_width: 90%
+}
+#feedback .yui-gd .first {
+	_overflow: hidden
+}
+
+/*--------------suggestion for purchase styles--------------------------------------------*/
+#purchaseMenu {
+	margin: 9px 0 40px;
+}
+#purchaseMenu li {
+	float: left
+}
+#purchaseMenu a {
+	display: block;
+	border: 2px solid #C9C9C9;
+	color: #585347;
+	padding: 4px 50px;
+	margin-right: 12px;
+}
+#purchaseMenu a:hover {
+	background: #F4F5EF;
+	border-color: #9D9B94;
+	color: #585347;
+}
+/*-------------------  .incorrect is for the invalid for text inputs-------------------------*/
+#feedback .incorrect {
+	background-color: #F0E8D8;
+	color: #920000;
+	background-image: url(/././resources/images/required.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+
+/*contentForm is due for cleanup - remove once the new css and widget is implemented----------*?
 .contentForm legend {
     border : 1px solid #C1C1C1;
     color : #444444;

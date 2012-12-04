@@ -85,3 +85,7 @@
     margin-right:15px;
     margin-left: 20px;
 }
+
+.module-form  /*module inside the feedback widget to  keep the margins*/{
+margin-right:15px;
+}
