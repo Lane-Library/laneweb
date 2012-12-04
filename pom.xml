@@ -190,18 +190,15 @@
                                 <include>images-min.css</include>
                                 <include>captioned-img-min.css</include>
                                 <include>lightbox-min.css</include>
-                                <include>feedback-min.css</include>
                                 <include>live-chat-min.css</include>
                                 <include>banner-min.css</include>
                                 <include>hightlighted-resources-min.css</include>
                                 <include>antibiogram-min.css</include>
                                 <include>landing-pgs-2011-min.css</include>
                                 <include>bookmarks-min.css</include>
-                                <include>persistent-login-min.css</include>
                                 <!-- TODO: remove bookmarks-marketing when appropriate -->
                                 <include>bookmarks-marketing-min.css</include>
                                 <include>bookmark-instructions-min.css</include>
-                                <include>subscribe-min.css</include>
                                 <include>suggest-min.css</include>
                             </includes>
                         </aggregation>
