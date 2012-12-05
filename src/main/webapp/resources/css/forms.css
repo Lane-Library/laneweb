@@ -1,17 +1,3 @@
-#feedback .mainFeedback /*looks the same as h4*/ {
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-size: 1.8em;
-	letter-spacing: 0.05em;
-	line-height: 1.2em;
-	margin-bottom: .2em;
-	color: #820000;
-}
-#feedbackMenu /*tabs on the left */ {
-	text-align: left;
-	margin-top: 40px;
-	/*IE6 fix*/
-	_overflow: hidden
-}
 
 /*--------------ALL forms within lightbox-----------------------------------------------------*/
 
@@ -19,11 +5,11 @@
 	padding: 20px;
 	text-align: left;
 }
-#feedback label,#subscribe label {
+#feedback label, #subscribe label {
 	display: block;
 	margin-top: .5em;
 }
-#subscribe  input,#subscribe textarea,#subscribe select,#feedback input,#feedback textarea,#feedback select
+#subscribe input,#subscribe textarea,#subscribe select,#feedback input,#feedback textarea,#feedback select
 	{
 	box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
@@ -57,7 +43,7 @@
 }
 #subscribe input:hover,#subscribe textarea:hover,#subscribe input:focus,#subscribe textarea:focus,#feedback input:hover,#feedback textarea:hover,#feedback input:focus,#feedback textarea:focus
 	{
-	border-color: #9d9b94;
+	border-color: #9D9B94;
 }
 
 /*-------------------------submit button is the same for all forms in the lightbox-----------------------------------*/
@@ -86,8 +72,23 @@
 }
 
 /*-------------------------feedback widget--------------------------------------------------------------------------*/
+#feedback .mainFeedback /*looks the same as h4*/ {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 1.8em;
+	letter-spacing: 0.05em;
+	line-height: 1.2em;
+	margin-bottom: .2em;
+	color: #820000;
+}
 #feedback li {
 	list-style: none outside none;
+}
+
+#feedbackMenu /*tabs on the left */ {
+	text-align: left;
+	margin-top: 40px;
+	/*IE6 fix*/
+	_overflow: hidden
 }
 #feedbackMenu li {
 	padding: 10px 15px;
@@ -147,7 +148,6 @@
 #purchaseMenu a {
 	display: block;
 	border: 2px solid #C9C9C9;
-	color: #585347;
 	padding: 4px 50px;
 	margin-right: 12px;
 }
@@ -158,8 +158,8 @@
 }
 /*-------------------  .incorrect is for the invalid for text inputs-------------------------*/
 #feedback .incorrect {
-	background-color: #F0E8D8;
-	color: #920000;
+	background-color: #F4F5EF;
+	color: #8C1515;
 	background-image: url(/././resources/images/required.png);
 	background-repeat: no-repeat;
 	background-position: right center;
