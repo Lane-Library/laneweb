@@ -123,7 +123,7 @@ var setLink = function(event) {
 	if (node.nodeName == 'SPAN') {
 		node = node.parentNode;
 	}
-	 if ('false' == IS_USER_VALID) {
+	if ('false' == IS_USER_VALID || node.search.indexOf("pl=true") >0 ) {
 		 url = url + 'secure/';
 	 }
 	event.preventDefault();
