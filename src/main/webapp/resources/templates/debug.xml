@@ -3,10 +3,10 @@
     <head>
         <title>Lane Medical Library &amp; Knowledge Management Center - Stanford
             University School of Medicine</title>
-       <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
-            href="/extensions/laneconnex-engine.xml"/>     
+            href="/extensions/laneconnex-engine.xml"/>
     </head>
     <body>
         <div id="custom-doc" class="yui-t7">
@@ -88,6 +88,14 @@
                                 <a href="?proxy-links=true">Stanford Access</a>
                             </li>
                         </ul>
+                        <ul id="qlinks">
+                           <li>
+                               <a href="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</a>
+                           </li>
+                           <li>
+                               <a href="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online">UpToDate</a>
+                           </li>
+                        </ul>
                         <ul id="laneNav">
                             <li>
                                 <a href="/biomed-resources/index.html"
@@ -164,18 +172,6 @@
                                     href="content:/includes/leftmenu-help.html">
                                     <xi:fallback/>
                                 </xi:include>
-                            </li>
-                            <li>
-                                <select id="qlinks">
-                                    <option value="">Popular Links</option>
-                                    <option value=""> ---------------- </option>
-                                    <option
-                                        value="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M"
-                                        >PubMed</option>
-                                    <option
-                                        value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online"
-                                        >UpToDate</option>
-                                </select>
                             </li>
                         </ul>
                         <div id="laneFooter">
