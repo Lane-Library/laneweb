@@ -85,9 +85,25 @@
 }
 
 #qlinks {
+	position: absolute;
 	margin: 13px 0 0 32px;
+	top: 110px;
+	right: 10px;
 }
 
+#qlinks li {
+	display: inline;
+}
+
+#qlinks li a {
+	color: white;
+	border-bottom: none;
+}
+
+#qlinks li a:hover{
+	color: #F4F5EF;
+	border-bottom: 1px dotted #F4F5EF;
+}
 #laneNav #specialties-menu {
 	width: 350px;
 }
