@@ -238,7 +238,6 @@
                                 <include>lane-teletype-min.js</include>
                                 <include>lane-selections-min.js</include>
                                 <include>lane-popin-min.js</include>
-                                <include>lane-quicklinks-min.js</include>
                                 <include>form-validator-min.js</include>
                                 <include>lane-search-reset-min.js</include>
                                 <include>hover-controller-min.js</include>

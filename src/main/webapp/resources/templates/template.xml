@@ -50,6 +50,14 @@
                                 <input id="searchSubmit" type="submit" value="search"/>
                                 <a id="searchReset" title="Clear Search" href="/">×</a>
                             </fieldset>
+                            <ul id="qlinks">
+                               <li>
+                                   <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</a>
+                               </li>
+                               <li>
+                                   <a href="http://www.uptodate.com/online">UpToDate</a>
+                               </li>
+                            </ul>
                         </form>
                         <div class="content">
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -87,14 +95,6 @@
                             <li>
                                 <a href="?proxy-links=true">Stanford Access</a>
                             </li>
-                        </ul>
-                        <ul id="qlinks">
-                           <li>
-                               <a href="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</a>
-                           </li>
-                           <li>
-                               <a href="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online">UpToDate</a>
-                           </li>
                         </ul>
                         <ul id="laneNav">
                             <li>

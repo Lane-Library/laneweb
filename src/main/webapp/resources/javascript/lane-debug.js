@@ -139,7 +139,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-teletype.js",
         "lane-selections.js",
         "lane-popin.js",
-        "lane-quicklinks.js",
         "form-validator.js",
         "lane-search-reset.js",
         "hover-controller.js",

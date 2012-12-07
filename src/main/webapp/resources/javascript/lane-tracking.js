@@ -356,12 +356,6 @@
                 label: event.suggestion
             });
         });
-        Y.on("lane:quickLinkClick",  function(event) {
-            Y.fire("lane:trackableEvent", {
-                category: event.type,
-                action: event.linkName
-            });
-        });
         Y.on("lane:searchFormReset",  function(event) {
             Y.fire("lane:trackableEvent", {
                 category: event.type,

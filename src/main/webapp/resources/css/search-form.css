@@ -12,6 +12,9 @@
     display : block;
     width : 165px;
 }
+#search a:hover {
+    border-bottom : 1px solid #fff;
+}
 #searchFields {
     position : absolute;
     z-index : 1;
@@ -130,4 +133,33 @@
 #clinicalO {
     left : 683px;
     width : 210px;
+}
+
+/* pubmed and uptodate links inside the form: */
+
+#qlinks {
+    float: right;
+    margin: 43px 9px;
+}
+
+.clinical #qlinks {
+	margin-top: 74px
+}
+
+#qlinks li {
+    padding : 0 8px 0 3px;
+    display: inline;
+}
+
+#qlinks li:first-child {
+    border-right : 1px dotted #C1C1C1;;
+}
+
+#qlinks a {
+    color: white;
+	border-bottom: none;
+}
+
+#qlinks a:hover {
+	border-bottom: 1px dotted white;
 }
