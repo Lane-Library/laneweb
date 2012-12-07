@@ -110,13 +110,13 @@
                                     >Specialty Portals</a>
                                 <ul id="specialties-menu">
                                     <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
-                                      <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
-                                    <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
                                       <li><a href="/portals/oncology.html">Oncology</a></li>
-                                    <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
+                                    <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
                                       <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>
-                                    <li><a href="/portals/cardiology.html">Cardiology</a></li>
+                                    <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
                                       <li><a href="http://trachea.stanford.edu/">Otolaryngology</a></li>
+                                    <li><a href="/portals/cardiology.html">Cardiology</a></li>
+                                      <li><a href="/portals/palliative-care.html">Palliative Care</a></li>
                                     <li><a href="/portals/clinical.html">Clinical</a></li>
                                       <li><a href="/portals/pathology.html">Pathology</a></li>
                                     <li><a href="/portals/patient.html">Consumer Health</a></li>
@@ -139,6 +139,7 @@
                                       <li><a href="/portals/spiritual.html">Spiritual Care</a></li>
                                     <li><a href="/portals/nursing.html">Nursing</a></li>
                                       <li><a href="/classes-consult/infoliteracy-practice.html">Student IL Materials</a></li>
+                                    <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
                                 </ul>
                             </li>
                             <li>
