@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
+import edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
 @Controller
@@ -25,32 +23,16 @@ public class VoyagerLoginController {
     private static final String BEAN_ROOT_NAME = VoyagerLogin.class.getName() + "/";
 
     @Autowired
-    private LDAPDataAccess ldapDataSource;
-
-    @Autowired
-    private SunetIdSource sunetIdSource;
+    private LDAPDataBinder ldapDataBinder;
 
     @Autowired
     private Map<String, VoyagerLogin> voyagerLogins;
 
-    @ModelAttribute(Model.SUNETID)
-    public String getSunetid(final HttpServletRequest request) {
-        return this.sunetIdSource.getSunetid(request);
+    @ModelAttribute
+    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.ldapDataBinder.bind(model.asMap(), request);
     }
 
-    @ModelAttribute(Model.UNIVID)
-    public String getUnivId(final HttpSession session, @ModelAttribute(Model.SUNETID) final String sunetid) {
-        String univId = (String) session.getAttribute(Model.UNIVID);
-        if (univId == null) {
-            univId = this.ldapDataSource.getLdapDataForSunetid(sunetid).getUnivId();
-            if (univId != null) {
-                session.setAttribute(Model.UNIVID, univId);
-            }
-        }
-        return univId;
-    }
-
-    @ModelAttribute(Model.SUNETID)
     @RequestMapping(value = "/secure/voyager/{db}")
     public void login(@PathVariable final String db, @ModelAttribute(Model.UNIVID) final String univid,
             @RequestParam("PID") final String pid, final HttpServletRequest request, final HttpServletResponse response)
