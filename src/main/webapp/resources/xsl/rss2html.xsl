@@ -24,11 +24,23 @@
   </xsl:template>
     
   <xsl:template match="rss:item|item">
-    <li>
-      <a href="{rss:link|link}" title="feed link---{../rss:channel/rss:title|../../channel/title}---{rss:title|title}">
-        <xsl:value-of select="rss:title|title"/>
-      </a>
-    </li>
-  </xsl:template>
+	<li>
+		<xsl:choose>
+			<xsl:when test="starts-with(guid,'PubMed:')">
+				<a xmlns="http://www.w3.org/1999/xhtml" id="pubmed_{substring-after(guid,':')}"
+					href="{concat('http://www.ncbi.nlm.nih.gov/pubmed/',substring-after(guid,':'),'?otool=stanford&amp;holding=F1000,F1000M')}"
+					title="feed link---{../../channel/title}---{title}">
+					<xsl:value-of select="title" />
+				</a>
+			</xsl:when>
+			<xsl:otherwise>
+				<a xmlns="http://www.w3.org/1999/xhtml" href="{link}"
+					title="feed link---{../../channel/title}---{title}">
+					<xsl:value-of select="rss:title|title" />
+				</a>
+			</xsl:otherwise>
+		</xsl:choose>
+	</li>
+</xsl:template>
 
 </xsl:stylesheet>
