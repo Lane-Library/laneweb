@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,9 +35,9 @@ public class VoyagerLoginController {
     }
 
     @RequestMapping(value = "/secure/voyager/{db}")
-    public void login(@PathVariable final String db, @ModelAttribute(Model.UNIVID) final String univid,
-            @RequestParam("PID") final String pid, final HttpServletRequest request, final HttpServletResponse response)
-            throws IOException {
+    public void login(@PathVariable final String db, @RequestParam("PID") final String pid, final HttpSession session,
+            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+        String univid = (String) session.getAttribute(Model.UNIVID);
         VoyagerLogin voyagerLogin = this.voyagerLogins.get(BEAN_ROOT_NAME + db);
         String queryString = request.getQueryString();
         String url = voyagerLogin.getVoyagerURL(univid, pid, queryString);
