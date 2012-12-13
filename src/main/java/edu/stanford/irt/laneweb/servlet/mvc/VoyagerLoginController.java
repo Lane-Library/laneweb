@@ -39,15 +39,15 @@ public class VoyagerLoginController {
     @ModelAttribute(Model.SUNETID)
     public String getSunetid(final HttpServletRequest request) {
         String sunetid = this.sunetIdSource.getSunetid(request);
-        this.log.info("getSunetid: " + sunetid);
+        this.log.error("getSunetid: " + sunetid);
         return sunetid;
     }
 
     @ModelAttribute(Model.UNIVID)
     public void getUnivid(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.log.info("model before ldapDataBinder: " + model);
+        this.log.error("model before ldapDataBinder: " + model);
         this.ldapDataBinder.bind(model.asMap(), request);
-        this.log.info("model after ldapDataBinder: " + model);
+        this.log.error("model after ldapDataBinder: " + model);
     }
 
     @RequestMapping(value = "/secure/voyager/{db}")
