@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 import edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
@@ -27,17 +27,25 @@ public class VoyagerLoginController {
     private LDAPDataBinder ldapDataBinder;
 
     @Autowired
+    private SunetIdSource sunetIdSource;
+
+    @Autowired
     private Map<String, VoyagerLogin> voyagerLogins;
 
-    @ModelAttribute
-    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+    @ModelAttribute(Model.SUNETID)
+    public String getSunetid(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        return this.sunetIdSource.getSunetid(request);
+    }
+
+    @ModelAttribute(Model.UNIVID)
+    public void getUnivid(final HttpServletRequest request, final org.springframework.ui.Model model) {
         this.ldapDataBinder.bind(model.asMap(), request);
     }
 
     @RequestMapping(value = "/secure/voyager/{db}")
-    public void login(@PathVariable final String db, @RequestParam("PID") final String pid, final HttpSession session,
+    public void login(@PathVariable final String db, @RequestParam("PID") final String pid,
+            @ModelAttribute(Model.SUNETID) final String sunetid, @ModelAttribute(Model.UNIVID) final String univid,
             final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        String univid = (String) session.getAttribute(Model.UNIVID);
         VoyagerLogin voyagerLogin = this.voyagerLogins.get(BEAN_ROOT_NAME + db);
         String queryString = request.getQueryString();
         String url = voyagerLogin.getVoyagerURL(univid, pid, queryString);
