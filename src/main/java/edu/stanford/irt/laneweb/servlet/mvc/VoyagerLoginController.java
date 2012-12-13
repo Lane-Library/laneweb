@@ -50,7 +50,8 @@ public class VoyagerLoginController {
         return univId;
     }
 
-    @RequestMapping(value = "/secure/voyager/{db}")
+    @ModelAttribute(Model.SUNETID)
+    @RequestMapping(value = "/voyager/{db}")
     public void login(@PathVariable final String db, @ModelAttribute(Model.UNIVID) final String univid,
             @RequestParam("PID") final String pid, final HttpServletRequest request, final HttpServletResponse response)
             throws IOException {
