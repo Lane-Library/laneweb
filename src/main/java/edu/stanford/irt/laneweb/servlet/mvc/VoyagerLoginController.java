@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +28,8 @@ public class VoyagerLoginController {
     @Autowired
     private LDAPDataBinder ldapDataBinder;
 
+    private final Logger log = LoggerFactory.getLogger(VoyagerLoginController.class);
+
     @Autowired
     private SunetIdSource sunetIdSource;
 
@@ -33,13 +37,17 @@ public class VoyagerLoginController {
     private Map<String, VoyagerLogin> voyagerLogins;
 
     @ModelAttribute(Model.SUNETID)
-    public String getSunetid(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        return this.sunetIdSource.getSunetid(request);
+    public String getSunetid(final HttpServletRequest request) {
+        String sunetid = this.sunetIdSource.getSunetid(request);
+        this.log.info("getSunetid: " + sunetid);
+        return sunetid;
     }
 
     @ModelAttribute(Model.UNIVID)
     public void getUnivid(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.log.info("model before ldapDataBinder: " + model);
         this.ldapDataBinder.bind(model.asMap(), request);
+        this.log.info("model after ldapDataBinder: " + model);
     }
 
     @RequestMapping(value = "/secure/voyager/{db}")
