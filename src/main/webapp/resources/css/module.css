@@ -46,21 +46,10 @@
 }
 
 .core-covers {
-	margin-bottom: 15px;
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-size: 1.1em;
-	letter-spacing: 0.05em;
-}
-
-.core-covers .module-img {
-	margin-right: 0.5em
-}
-
-.core-covers strong {
-	display: block;
-	font-size: 12px;
-	letter-spacing: normal;
-	font-family: arial, helvetica, clean, sans-serif
+	float: left;
+	width: 47%;
+	margin-bottom: 13px;
+	margin-right: 1em;
 }
 
 /* module with shadow on bottom*/
@@ -71,6 +60,20 @@
     background-repeat : no-repeat;
     padding-bottom : 15px
 }
+
+.shadow {
+    padding-bottom : 15px;
+    margin-bottom : 15px;
+    background-image : url(/././resources/images/grandroundsItemBg1.png);
+    background-position : bottom;
+    background-repeat : no-repeat;
+}
+.border {
+    border-right : 1px solid #eae9e6;
+    padding-bottom : 15px;
+    padding-right: 15px;
+}
+
 /*left nav module with the shadow*/
 .left-shadow {
 	background-image: url(/././resources/images/grandroundsItemBg1.png);
@@ -88,4 +91,9 @@
 
 .module-form  /*module inside the feedback widget to  keep the margins*/{
 margin-right:15px;
+}
+
+.module-links-narrow {
+    float : left;
+    width : 50%;
 }
