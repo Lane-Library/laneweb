@@ -256,8 +256,8 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml" status-code="403"/>
             </map:match>
-            <!-- reference & palliative-care are the only pages with xincluded rss -->
-            <map:match type="regexp" pattern="portals/(reference|palliative-care)\.html$">
+            <!-- reference, palliative-care & rheumatology are the only pages with xincluded rss -->
+            <map:match type="regexp" pattern="portals/(reference|palliative-care|rheumatology)\.html$">
                 <map:generate type="html" src="{content-base}/portals/{1}.html"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
