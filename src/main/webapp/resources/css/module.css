@@ -44,14 +44,20 @@
 .popular ul {
 	margin: 10px 20px 20px;
 }
-
+/* book covers in 2 columns*/
 .core-covers {
 	float: left;
 	width: 47%;
 	margin-bottom: 13px;
 	margin-right: 1em;
 }
-
+/* book covers in 3 columns*/
+.core-covers-3 {
+	float: left;
+	width: 33%;
+	margin-bottom: 13px;
+	margin-right: 1em;
+}
 /* module with shadow on bottom*/
 .bd.bottomShadow {
     margin-top : 0;
