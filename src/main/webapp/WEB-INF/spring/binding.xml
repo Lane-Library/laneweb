@@ -163,6 +163,8 @@
             <map>
                 <entry key="^(?:/\w+|)/biomed-resources/bassett/raw/bassettLargerView.html"
                     value="bassettLargerView"/>
+                <entry key="^(?:/\w+|)/portals/shc.html"
+                    value="shc"/>
             </map>
         </constructor-arg>
     </bean>
