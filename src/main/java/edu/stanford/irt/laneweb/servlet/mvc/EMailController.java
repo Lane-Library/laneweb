@@ -36,6 +36,7 @@ public class EMailController {
 
     @RequestMapping(value = "/askus", consumes = "application/x-www-form-urlencoded")
     public String formSubmitAskUs(final Model model, final RedirectAttributes atts) {
+        appendNameToSubject(model.asMap());
         sendEmail("LaneAskUs@stanford.edu", model.asMap());
         return getRedirectTo(model.asMap());
     }
@@ -56,6 +57,7 @@ public class EMailController {
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
+        appendNameToSubject(feedback);
         sendEmail("LaneAskUs@stanford.edu", feedback);
     }
 
@@ -71,6 +73,12 @@ public class EMailController {
     public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
         sendEmail("lanelibacqs@lists.stanford.edu", feedback);
+    }
+    
+    private void appendNameToSubject(Map<String, Object> feedback) {
+        StringBuilder subject = new StringBuilder((String)feedback.get("subject"));
+        subject.append(" (").append(feedback.get("name")).append(")");
+        feedback.put("subject", subject.toString());
     }
 
     private String getRedirectTo(final Map<String, Object> map) {
