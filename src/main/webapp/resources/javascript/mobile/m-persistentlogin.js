@@ -39,7 +39,7 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 
 //when a click is coming from a external resource
 $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", function(event) {
-	var link = event.target, 
+	var link = event.currentTarget, 
 	now = new Date();
 	var statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
 	if ( 'denied' !== statusCookie && (IS_USER_VALID === 'false' || statusCookie < now.getTime())){
