@@ -1,16 +1,4 @@
 /*styles for redesigned main elements on the landing pages*/
-.h2-border {
-    border-bottom : 5px #575347 solid;
-    margin-bottom : 0;
-    padding-top : 25px;
-}
-.alternate {
-    color : #920000;
-    text-transform : none;
-    text-align : center;
-    border-bottom : none;
-    font-weight : bold;
-}
 .popular-shadow {
     background-color : #F4F5EF;
     background-image : url(/././resources/images/bottomShadow1.png);
@@ -29,33 +17,11 @@
 .popular-shadow .bd {
     margin-bottom : 2.5em;
 }
-.header {
-    border-bottom : none;
-    font-weight : bold;
-}
 .detailInfo {
     color : #999;
     font-size : 10px;
 }
-.module-margin {
-    margin-bottom : 1em;
-}
-.shadow {
-    padding-bottom : 15px;
-    margin-bottom : 15px;
-    background-image : url(/././resources/images/grandroundsItemBg1.png);
-    background-position : bottom;
-    background-repeat : no-repeat;
-}
-.border {
-    border-right : 1px solid #eae9e6;
-    padding-bottom : 15px;
-    padding-right: 15px;
-}
-.module-links-narrow {
-    float : left;
-    width : 50%;
-}
+
 .content .calendar li {
     width : 75px;
     height : 64px;
@@ -87,10 +53,6 @@
     background-position : top center;
     /*padding-bottom : 15px;*/
     /*margin-bottom : 20px;*/
-}
-.buttons-inline {
-    display : inline;
-    list-style-type : none;
 }
 #portalList .empty-cell {
     background-color : white;
