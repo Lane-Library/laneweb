@@ -6,12 +6,16 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Calendar;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.search.ContentResult;
 
 public class ScoreStrategyTest {
+
+    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
     private ContentResult result;
 
@@ -39,7 +43,7 @@ public class ScoreStrategyTest {
         expect(this.result.getId()).andReturn("pubmed_cochrane_reviews_content_1");
         expect(this.result.getTitle()).andReturn("title");
         expect(this.result.getDescription()).andReturn("description");
-        expect(this.result.getPublicationDate()).andReturn("2012");
+        expect(this.result.getPublicationDate()).andReturn(Integer.toString(THIS_YEAR));
         replay(this.result);
         assertEquals(220, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title")));
         verify(this.result);
@@ -50,7 +54,7 @@ public class ScoreStrategyTest {
         expect(this.result.getId()).andReturn("pubmed_clinicaltrial_content_1");
         expect(this.result.getTitle()).andReturn("title");
         expect(this.result.getDescription()).andReturn("description");
-        expect(this.result.getPublicationDate()).andReturn("2012");
+        expect(this.result.getPublicationDate()).andReturn(Integer.toString(THIS_YEAR));
         replay(this.result);
         assertEquals(55, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title")));
         verify(this.result);
@@ -61,7 +65,7 @@ public class ScoreStrategyTest {
         expect(this.result.getId()).andReturn("aafp_patients_content_1");
         expect(this.result.getTitle()).andReturn("title");
         expect(this.result.getDescription()).andReturn("description");
-        expect(this.result.getPublicationDate()).andReturn("2012");
+        expect(this.result.getPublicationDate()).andReturn(Integer.toString(THIS_YEAR));
         replay(this.result);
         assertEquals(27, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title")));
         verify(this.result);
@@ -72,7 +76,7 @@ public class ScoreStrategyTest {
         expect(this.result.getId()).andReturn("foo_content_1");
         expect(this.result.getTitle()).andReturn("title");
         expect(this.result.getDescription()).andReturn("description");
-        expect(this.result.getPublicationDate()).andReturn("2012");
+        expect(this.result.getPublicationDate()).andReturn(Integer.toString(THIS_YEAR));
         replay(this.result);
         assertEquals(110, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title")));
         verify(this.result);
@@ -83,9 +87,10 @@ public class ScoreStrategyTest {
         expect(this.result.getId()).andReturn("foo_content_1");
         expect(this.result.getTitle()).andReturn("title with period.");
         expect(this.result.getDescription()).andReturn("description");
-        expect(this.result.getPublicationDate()).andReturn("2012");
+        expect(this.result.getPublicationDate()).andReturn(Integer.toString(THIS_YEAR));
         replay(this.result);
-        assertEquals(110, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title with period")));
+        assertEquals(110,
+                this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title with period")));
         verify(this.result);
     }
 
@@ -138,7 +143,7 @@ public class ScoreStrategyTest {
         expect(this.result.getId()).andReturn("foo_content_1");
         expect(this.result.getTitle()).andReturn("title");
         expect(this.result.getDescription()).andReturn("description");
-        expect(this.result.getPublicationDate()).andReturn("2010");
+        expect(this.result.getPublicationDate()).andReturn(Integer.toString(THIS_YEAR - 2));
         replay(this.result);
         assertEquals(108, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title")));
         verify(this.result);
