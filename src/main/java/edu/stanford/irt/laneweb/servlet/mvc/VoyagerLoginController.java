@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 import edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
 @Controller
@@ -31,29 +31,24 @@ public class VoyagerLoginController {
     private final Logger log = LoggerFactory.getLogger(VoyagerLoginController.class);
 
     @Autowired
-    private SunetIdSource sunetIdSource;
+    private SunetIdAndTicketDataBinder sunetidTicketDataBinder;
 
     @Autowired
     private Map<String, VoyagerLogin> voyagerLogins;
 
-    @ModelAttribute(Model.SUNETID)
-    public String getSunetid(final HttpServletRequest request) {
-        String sunetid = this.sunetIdSource.getSunetid(request);
-        this.log.error("getSunetid: " + sunetid);
-        return sunetid;
-    }
-
     @ModelAttribute(Model.UNIVID)
     public void getUnivid(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.log.error("model before sunetidTicketDataBinder: " + model);
+        this.sunetidTicketDataBinder.bind(model.asMap(), request);
         this.log.error("model before ldapDataBinder: " + model);
         this.ldapDataBinder.bind(model.asMap(), request);
-        this.log.error("model after ldapDataBinder: " + model);
+        this.log.error("model after binding: " + model);
     }
 
     @RequestMapping(value = "/secure/voyager/{db}")
     public void login(@PathVariable final String db, @RequestParam("PID") final String pid,
-            @ModelAttribute(Model.SUNETID) final String sunetid, @ModelAttribute(Model.UNIVID) final String univid,
-            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            @ModelAttribute(Model.UNIVID) final String univid, final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException {
         VoyagerLogin voyagerLogin = this.voyagerLogins.get(BEAN_ROOT_NAME + db);
         String queryString = request.getQueryString();
         String url = voyagerLogin.getVoyagerURL(univid, pid, queryString);

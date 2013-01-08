@@ -45,8 +45,8 @@ public class VoyagerLoginControllerTest {
         voyagerLogins.put(VoyagerLogin.class.getName() + "/lmldb", this.voyagerLogin);
         voyagerLogins.put(VoyagerLogin.class.getName() + "/jbldb", this.voyagerLogin);
         this.voyagerLoginController.setVoyagerLogins(voyagerLogins);
-        this.voyagerLoginController.login("lmldb", "123", "ditenus", "1234", this.request, this.response);
-        this.voyagerLoginController.login("jbldb", "123", "ditenus", "1234", this.request, this.response);
+        this.voyagerLoginController.login("lmldb", "123", "1234", this.request, this.response);
+        this.voyagerLoginController.login("jbldb", "123", "1234", this.request, this.response);
         verify(this.voyagerLogin, this.request, this.response);
     }
 }
