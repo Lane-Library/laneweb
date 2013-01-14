@@ -54,6 +54,13 @@ h5 {
     font-size : 11px;
     font-weight : normal;
 }
+
+.h2-border {
+    border-bottom : 5px #575347 solid;
+    margin-bottom : 0;
+    padding-top : 25px;
+}
+
 /*style for h4 - bigger font, red; good for long pages, not portals*/
 .plain {
     color : #820000;
