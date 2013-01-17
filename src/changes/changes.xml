@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-01-17" version="2.0.1" description="2.0.1 bug fix release">
+            <action date="2013-01-17" issue="81408" dev="ryanmax" type="update">
+                preserve JavaMelody stats between releases
+            </action>
+            <action date="2013-01-16" issue="81393" dev="ceyates" type="fix">
+                XIncludeTransformer fails to process fallback if href missing
+            </action>
+            <action date="2013-01-14" issue="81324" dev="olgary" type="update">
+                updated h2 and font size in header
+            </action>
+            <action date="2013-01-14" issue="81313" dev="ceyates" type="fix">
+                How to in main nav not getting class='active'
+            </action>
+            <action date="2013-01-16" issue="80483" dev="ryanmax" type="fix">
+                voyager authentication not working
+            </action>
+        </release>
         <release date="2013-01-09" version="2.0.0" description="2.0.0 refactor release">
             <action date="2013-01-09" issue="80513" dev="ceyates" type="update">
                 change build jdk to 1.7  
