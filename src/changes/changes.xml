@@ -20,6 +20,9 @@
             <action date="2013-01-14" issue="81313" dev="ceyates" type="fix">
                 How to in main nav not getting class='active'
             </action>
+            <action date="2013-01-16" issue="80721" dev="ryanmax" type="update">
+                expand number of search results returned per metasearch engine
+            </action>
             <action date="2013-01-16" issue="80483" dev="ryanmax" type="fix">
                 voyager authentication not working
             </action>
