@@ -12,7 +12,7 @@
                 preserve JavaMelody stats between releases
             </action>
             <action date="2013-01-16" issue="81393" dev="ceyates" type="fix">
-                XIncludeTransformer fails to process fallback if href missing
+                XIncludeTransformer fails to process fallback
             </action>
             <action date="2013-01-14" issue="81324" dev="olgary" type="update">
                 updated h2 and font size in header
