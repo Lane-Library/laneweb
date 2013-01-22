@@ -26,6 +26,11 @@
                     action = link.get('href');
                     label = link.get('textContent');
                 }
+                else if (link.ancestor("#qlinks")) {
+                    category = "lane:quickLinkClick";
+                    action = link.get('href');
+                    label = link.get('textContent');
+                }
                 else if (link.ancestor(".sectionMenu")) {
                     category = "lane:laneNav-sectionMenu";
                     action = link.get('href');
@@ -205,8 +210,8 @@
                         if (link.ancestor(".lwSearchResults")) {
                             return true;
                         }
-                        // laneNav click events
-                        if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter")) {
+                        // navigation click events
+                        if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter") || link.ancestor("#qlinks")) {
                             return true;
                         }
                     }
