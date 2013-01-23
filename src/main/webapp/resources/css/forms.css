@@ -58,7 +58,8 @@
 	font-weight: bold;
 	line-height: 1.4em;
 	font-size: 1.1em;
-	padding-bottom: 2em;;
+	padding-bottom: 2em;
+	text-align:center;
 }
 
 #persistent #ft {
