@@ -20,8 +20,7 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
             { "/ceyates", "file:/afs/ir.stanford.edu/users/c/e/ceyates/laneweb" },
             { "/olgary", "file:/afs/ir.stanford.edu/users/o/l/olgary/laneweb" },
             { "/ryanmax", "file:/afs/ir.stanford.edu/users/r/y/ryanmax/laneweb" },
-            { "/ajchrist", "file:/afs/ir.stanford.edu/users/a/j/ajchrist/laneweb" },
-            { "/rzwies", "file:/afs/ir.stanford.edu/users/r/z/rzwies/laneweb" } };
+            { "/ajchrist", "file:/afs/ir.stanford.edu/users/a/j/ajchrist/laneweb" } };
 
     private Map<String, URL> baseMappings;
 

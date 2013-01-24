@@ -46,12 +46,6 @@
             <email>ryanmax@stanford.edu</email>
             <organization>Lane Medical Library</organization>
         </developer>
-        <developer>
-            <id>rzwies</id>
-            <name>Rick Zwies</name>
-            <email>rzwies@stanford.edu</email>
-            <organization>Lane Medical Library</organization>
-        </developer>
     </developers>
     <scm>
         <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
