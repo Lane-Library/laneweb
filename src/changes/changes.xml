@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-01-17" version="2.0.2" description="2.0.2 bug fix release">
+            <action date="2013-01-23" issue="81544" dev="olgary" type="update">
+                forms.css updated - to fix the center alignment for hd
+            </action>
+            <action date="2013-01-23" issue="81536" dev="ryanmax" type="add">
+                track clicks of UpToDate and PubMed in red nav bar
+            </action>
+            <action date="2013-01-22" issue="81516" dev="ryanmax" type="add">
+                report GA event for blue top resources clicks
+            </action>
+        </release>
         <release date="2013-01-17" version="2.0.1" description="2.0.1 bug fix release">
             <action date="2013-01-17" issue="81408" dev="ryanmax" type="update">
                 preserve JavaMelody stats between releases
