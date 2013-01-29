@@ -48,7 +48,7 @@
                                 <div id="searchIndicator"></div>
                                 <input name="q" id="searchTerms" type="text"/>
                                 <input id="searchSubmit" type="submit" value="search"/>
-                                <a id="searchReset" title="Clear Search" href="/">×</a>
+                                <a id="searchReset" title="Clear Search" href="/">&#215;</a>
                             </fieldset>
                             <ul id="qlinks">
                                <li>
