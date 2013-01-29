@@ -62,7 +62,7 @@
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
-                    <map:transform type="saxon" src="resources/xsl/search-result2html.xsl"/>
+                    <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- return raw xml metasearch content results -->
@@ -84,7 +84,7 @@
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
-                    <map:transform type="saxon" src="resources/xsl/search-result2html.xsl"/>
+                    <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- return raw xml merged metasearch and eresources results -->
@@ -107,7 +107,7 @@
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
-                    <map:transform type="saxon" src="resources/xsl/search-result2html.xsl"/>
+                    <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search2json.xsl converts the result xml to json -->
