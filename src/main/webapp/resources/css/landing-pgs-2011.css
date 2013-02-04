@@ -23,12 +23,10 @@
 }
 
 .content .calendar li {
-    width : 75px;
     height : 64px;
     float : left;
     margin : .2em;
     padding : .5em;
-    font-family : Georgia, "Times New Roman", Times, serif;
     font-weight : bold;
     list-style : none inside none;
     margin-left : 0;
