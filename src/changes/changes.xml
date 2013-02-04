@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2013-02-04" version="2.0.3" description="2.0.3 bug fix release">
+            <action date="2013-02-04" issue="81800" dev="olgary" type="update">
+                update template.xml, debug.xml, landing-pgs-2011.css - 'mainnav'
+            </action>
             <action date="2013-01-29" issue="81687" dev="ceyates" type="fix">
                 build is not platform encoding independent
             </action>
