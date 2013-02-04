@@ -159,10 +159,18 @@
                                 </xi:include>
                             </li>
                             <li>
+                                <a href="/using-lib/index.html"
+                                    >Using the Library</a>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="content:/includes/leftmenu-using.html">
+                                    <xi:fallback/>
+                                </xi:include>
+                            </li>
+                            <li>
                                 <a href="/about/index.html"
                                     >About Lane</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="content:/includes/leftmenu-about.html">
+                                    href="content:/includes/leftmenu-aboutlane.html">
                                     <xi:fallback/>
                                 </xi:include>
                             </li>
@@ -170,7 +178,7 @@
                                 <a href="/help/index.html"
                                     >How To</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="content:/includes/leftmenu-help.html">
+                                    href="content:/includes/leftmenu-helpshort.html">
                                     <xi:fallback/>
                                 </xi:include>
                             </li>
