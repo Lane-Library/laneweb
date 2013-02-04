@@ -78,6 +78,7 @@
         <div><span>Specialty Portals</span><span>/portals</span></div>
         <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
         <div><span>History Center</span><span>/med-history</span></div>
+        <div><span>Using the Library</span><span>/using-lib</span></div>
         <div><span>About Lane</span><span>/about</span></div>
         <div><span>How To</span><span>/help</span></div>
     </xsl:variable>
