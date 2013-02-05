@@ -45,11 +45,11 @@
                                 <xsl:value-of select="upper-case(substring(lh:label,1,3))" />
                                 <xsl:if test="lh:date">
                                     <div>
-                                        <xsl:copy-of select="lh:date" />
+                                        <xsl:value-of select="lh:date" />
                                     </div>
                                 </xsl:if>
                                 <p>
-                                    <xsl:copy-of select="lh:description" />
+                                    <xsl:value-of select="lh:description" />
                                 </p>
                             </li>
                         </xsl:for-each>
@@ -78,13 +78,13 @@
                 <xsl:choose>
                     <xsl:when test="$mode = 'brief'">
                         <li>
-                            <xsl:copy-of select="lh:label" />
+                            <xsl:value-of select="lh:label" />
                             <xsl:if test="lh:date">
                                 <xsl:text>, </xsl:text>
-                                <xsl:copy-of select="lh:date" />
+                                <xsl:value-of select="lh:date" />
                             </xsl:if>
                             <xsl:text>: </xsl:text>
-                            <xsl:copy-of select="lh:description" />
+                            <xsl:value-of select="lh:description" />
                         </li>
                     </xsl:when>
                     <xsl:when test="$mode = 'mobile'">
@@ -141,19 +141,19 @@
         <xsl:choose>
             <xsl:when test="$mode = 'brief'">
                 <li>
-                    <xsl:copy-of select="$start-day/lh:label" />
+                    <xsl:value-of select="$start-day/lh:label" />
                     <xsl:if test="$start-day/lh:date">
                         <xsl:text>, </xsl:text>
-                        <xsl:copy-of select="$start-day/lh:date" />
+                        <xsl:value-of select="$start-day/lh:date" />
                     </xsl:if>
                     <xsl:text> &#8211; </xsl:text>
-                    <xsl:copy-of select="$end-day/lh:label" />
+                    <xsl:value-of select="$end-day/lh:label" />
                     <xsl:if test="$end-day/lh:date">
                         <xsl:text>, </xsl:text>
-                        <xsl:copy-of select="$end-day/lh:date" />
+                        <xsl:value-of select="$end-day/lh:date" />
                     </xsl:if>
                     <xsl:text>: </xsl:text>
-                    <xsl:copy-of select="$end-day/lh:description" />
+                    <xsl:value-of select="$end-day/lh:description" />
                 </li>
             </xsl:when>
             <xsl:when test="$mode = 'mobile'">
