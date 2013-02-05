@@ -6,20 +6,20 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Map;
 
-import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.core.xml.SAXParser;
-import org.apache.cocoon.xml.EmbeddedXMLPipe;
-import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.source.NOPValidity;
+import edu.stanford.irt.cocoon.source.Source;
+import edu.stanford.irt.cocoon.source.SourceValidity;
+import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
+import edu.stanford.irt.cocoon.xml.SAXParser;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
-public class TextNodeParsingTransformer extends AbstractTransformer implements CacheableProcessingComponent, ParametersAware {
+public class TextNodeParsingTransformer extends AbstractTransformer implements CacheablePipelineComponent, ParametersAware {
 
     // the html parser creates screwy processing instructions from the classes
     // xml. TODO: this is specific to the classes yet this class is can be used
@@ -102,9 +102,9 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     }
 
     @Override
-    public void setConsumer(final XMLConsumer xmlConsumer) {
+    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
         this.xmlConsumer = xmlConsumer;
-        super.setConsumer(xmlConsumer);
+        super.setXMLConsumer(xmlConsumer);
     }
 
     public void setParameters(final Map<String, String> parameters) {

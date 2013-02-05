@@ -2,13 +2,13 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
 
-import org.apache.cocoon.core.xml.SAXParser;
-import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.Source;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.source.Source;
+import edu.stanford.irt.cocoon.xml.SAXParser;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {

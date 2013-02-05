@@ -50,10 +50,10 @@
     
     <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
     
-    <bean name="org.apache.cocoon.core.xml.SAXParser/xml"
-        class="org.apache.cocoon.core.xml.impl.JaxpSAXParser"/>
+    <bean name="edu.stanford.irt.cocoon.xml.SAXParser/xml"
+        class="edu.stanford.irt.cocoon.xml.JaxpSAXParser"/>
     
-    <bean name="org.apache.cocoon.core.xml.SAXParser/html"
+    <bean name="edu.stanford.irt.cocoon.xml.SAXParser/html"
         class="edu.stanford.irt.laneweb.cocoon.HTMLSAXParser"
         scope="prototype">
         <constructor-arg>
@@ -74,7 +74,7 @@
         </constructor-arg>
     </bean>
     
-    <bean name="org.apache.cocoon.core.xml.SAXParser/html-fragment"
+    <bean name="edu.stanford.irt.cocoon.xml.SAXParser/html-fragment"
         class="edu.stanford.irt.laneweb.cocoon.HTMLSAXParser"
         scope="prototype">
         <constructor-arg>
@@ -96,7 +96,7 @@
         </constructor-arg>
     </bean>
     
-    <bean id="org.apache.cocoon.caching.Cache"
+    <bean id="edu.stanford.irt.cocoon.cache.Cache"
         class="edu.stanford.irt.laneweb.cocoon.EHCache"
         destroy-method="destroy">
         <constructor-arg>
@@ -119,6 +119,11 @@
         <property name="transformerFactoryClass" value="net.sf.joost.trax.TransformerFactoryImpl"/>
     </bean>
     
+    <bean name="javax.xml.transform.sax.SAXTransformerFactory/xalan"
+        class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
+        <property name="transformerFactoryClass" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
+    </bean>
+    
     <bean name="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon"
         class="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory">
         <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/saxon"/>
@@ -133,9 +138,16 @@
         <constructor-arg ref="javax.xml.transform.ErrorListener"/>
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/xalan"
+        class="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory">
+        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/xalan"/>
+        <constructor-arg ref="javax.xml.transform.URIResolver"/>
+        <constructor-arg ref="javax.xml.transform.ErrorListener"/>
+    </bean>
+    
     <bean id="javax.xml.transform.URIResolver"
         class="edu.stanford.irt.cocoon.xml.URIResolverImpl">
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
     </bean>
     
     <bean name="javax.xml.transform.ErrorListener"
@@ -165,7 +177,7 @@
     
     <bean id="edu.stanford.irt.cocoon.xml.XPointerProcessor"
         class="edu.stanford.irt.cocoon.xml.xpointer.XPointerProcessorImpl">
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

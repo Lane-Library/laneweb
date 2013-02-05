@@ -58,4 +58,10 @@
     	    node.setStyle("display", "block");
     	}
     }
+//    if (Y.UA.ie && (Y.UA.ie == 8 || Y.UA.ie == 9)) {
+//    	if(Y.Cookie.get("GO_HTTPS_IE") && document.location.href.match("^http://")){
+//    		document.location.href = document.location.href.replace('http', 'https');
+//    	}
+//    }
+    
 })();

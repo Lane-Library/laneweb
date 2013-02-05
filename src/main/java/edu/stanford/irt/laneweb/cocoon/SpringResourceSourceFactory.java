@@ -1,9 +1,10 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceFactory;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
+
+import edu.stanford.irt.cocoon.source.Source;
+import edu.stanford.irt.cocoon.source.SourceFactory;
 
 public class SpringResourceSourceFactory implements SourceFactory, ResourceLoaderAware {
 

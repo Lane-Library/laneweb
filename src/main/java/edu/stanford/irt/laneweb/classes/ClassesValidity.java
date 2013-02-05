@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.classes;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.apache.excalibur.source.SourceValidity;
+import edu.stanford.irt.cocoon.source.SourceValidity;
 
 public class ClassesValidity implements SourceValidity {
 

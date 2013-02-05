@@ -2,16 +2,15 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.Serializable;
 
-import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.validity.NOPValidity;
-
+import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
+import edu.stanford.irt.cocoon.source.NOPValidity;
+import edu.stanford.irt.cocoon.source.SourceValidity;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class DescribeGenerator extends AbstractMetasearchGenerator implements CacheableProcessingComponent {
+public class DescribeGenerator extends AbstractMetasearchGenerator implements CacheablePipelineComponent {
 
     private static final String TYPE = "describe";
 

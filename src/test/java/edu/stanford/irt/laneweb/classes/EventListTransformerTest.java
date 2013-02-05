@@ -9,14 +9,15 @@ import static org.easymock.EasyMock.verify;
 
 import java.io.IOException;
 
-import org.apache.cocoon.core.xml.SAXParser;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.Source;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.cocoon.source.Source;
+import edu.stanford.irt.cocoon.source.SourceResolver;
+import edu.stanford.irt.cocoon.xml.SAXParser;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class EventListTransformerTest {
 
@@ -38,7 +39,7 @@ public class EventListTransformerTest {
         this.sourceResolver = createMock(SourceResolver.class);
         this.transformer = new EventListTransformer(this.sourceResolver, this.saxParser);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.transformer.setConsumer(this.xmlConsumer);
+        this.transformer.setXMLConsumer(this.xmlConsumer);
         this.attributes = createMock(Attributes.class);
         this.source = createMock(Source.class);
     }

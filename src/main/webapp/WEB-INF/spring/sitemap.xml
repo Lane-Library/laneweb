@@ -3,117 +3,117 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean name="org.apache.cocoon.Processor" abstract="true"
+    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap" abstract="true"
         class="edu.stanford.irt.cocoon.sitemap.SitemapImpl">
         <constructor-arg index="1" ref="sitemap"/>
         <constructor-arg index="2" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
     </bean>
     
     <bean id="parentNodeBuilder" abstract="true">
-        <property name="componentFactory" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
-        <property name="expressionParser" ref="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.expression.ExpressionParser"/>
     </bean>
     
     <bean name="sitemap"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.RootNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="pipelines"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelinesNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.PipelinesNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="pipeline"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelineNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.PipelineNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="match"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.MatchNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="select"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.SelectNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="generate"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.GenerateNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="aggregate"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.AggregateNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="part"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.PartNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.PartNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="transform"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.TransformNodeBuilder"
         parent="parentNodeBuilder"/>
     
     <bean name="serialize"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
+        class="edu.stanford.irt.cocoon.sitemap.node.SerializeNodeBuilder"
         parent="parentNodeBuilder"/>
     
-    <bean name="org.apache.cocoon.matching.Matcher/wildcard"
+    <bean name="edu.stanford.irt.cocoon.sitemap.match.Matcher/wildcard"
         class="edu.stanford.irt.cocoon.sitemap.match.WildcardMatcher">
         <constructor-arg value="sitemap-uri"/>
     </bean>
     
-    <bean name="org.apache.cocoon.matching.Matcher/url-decoding-wildcard"
+    <bean name="edu.stanford.irt.cocoon.sitemap.match.Matcher/url-decoding-wildcard"
         class="edu.stanford.irt.cocoon.sitemap.match.URLDecodingMatcher">
         <constructor-arg value="sitemap-uri"/>
     </bean>
     
-    <bean name="org.apache.cocoon.matching.Matcher/regexp"
+    <bean name="edu.stanford.irt.cocoon.sitemap.match.Matcher/regexp"
         class="edu.stanford.irt.cocoon.sitemap.match.RegexpMatcher">
         <constructor-arg value="sitemap-uri"/>
     </bean>
     
-    <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
+    <bean name="edu.stanford.irt.cocoon.sitemap.match.Matcher/regex-parameter"
         class="edu.stanford.irt.cocoon.sitemap.match.ParameterRegexpMatcher"/>
     
-    <bean name="org.apache.cocoon.selection.Selector/ipgroup"
+    <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/ipgroup"
         class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"/>
     
-    <bean name="org.apache.cocoon.selection.Selector/logged-in"
+    <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/logged-in"
         class="edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector">
         <property name="attributeName" value="sunetid"/>
     </bean>
     
-    <bean name="org.apache.cocoon.selection.Selector/resource-exists"
+    <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/resource-exists"
         class="edu.stanford.irt.cocoon.sitemap.select.ResourceExistsSelector">
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
     </bean>
     
-    <bean name="org.apache.cocoon.Processor/sitemap" parent="org.apache.cocoon.Processor">
+    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
         <constructor-arg index="0" value="/sitemap.xmap"/>
     </bean>
 
-    <bean name="org.apache.cocoon.Processor/content" parent="org.apache.cocoon.Processor">
+    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/content" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
         <constructor-arg index="0" value="/content.xmap"/>
     </bean>
 
-    <bean name="org.apache.cocoon.Processor/eresources" parent="org.apache.cocoon.Processor">
+    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
         <constructor-arg index="0" value="/eresources.xmap"/>
     </bean>
 
-    <bean name="org.apache.cocoon.Processor/applications" parent="org.apache.cocoon.Processor">
+    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/applications" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
         <constructor-arg index="0" value="/applications.xmap"/>
     </bean>
 
-    <bean name="org.apache.cocoon.Processor/rss" parent="org.apache.cocoon.Processor">
+    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/rss" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
         <constructor-arg index="0" value="/rss.xmap"/>
     </bean>
 	
-	<bean name="org.apache.cocoon.Processor/classes" parent="org.apache.cocoon.Processor">
-        <constructor-arg index="0" value="/classes.xmap"/>
+	<bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/classes" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
+	    <constructor-arg index="0" value="/classes.xmap"/>
     </bean>
 
-    <bean name="org.apache.cocoon.Processor/mobile" parent="org.apache.cocoon.Processor">
+    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
         <constructor-arg index="0" value="/mobile.xmap"/>
     </bean>
     
-    <bean name="org.apache.cocoon.Processor/bookmarks" parent="org.apache.cocoon.Processor">
+    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
         <constructor-arg index="0" value="classpath:/edu/stanford/irt/laneweb/bookmarks/bookmarks.xmap"/>
     </bean>
     
@@ -141,8 +141,8 @@
     <bean id="edu.stanford.irt.cocoon.sitemap.node.AbstractPipelineComponentNode"
         scope="prototype"
         abstract="true">
-        <property name="componentFactory" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
     </bean>
         
     <bean id="edu.stanford.irt.cocoon.sitemap.node.GenerateNode"

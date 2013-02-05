@@ -8,11 +8,11 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 
 
@@ -26,7 +26,7 @@ public class DebugTransformerTest {
     public void setUp() {
         this.consumer = createMock(XMLConsumer.class);
         this.transformer = new DebugTransformer();
-        this.transformer.setConsumer(this.consumer);
+        this.transformer.setXMLConsumer(this.consumer);
     }
 
     @Test

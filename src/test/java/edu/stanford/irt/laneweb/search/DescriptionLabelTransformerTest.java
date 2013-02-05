@@ -6,12 +6,12 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.resource.Resource;
 
 public class DescriptionLabelTransformerTest {
@@ -26,7 +26,7 @@ public class DescriptionLabelTransformerTest {
     public void setUp() throws Exception {
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer = new DescriptionLabelTransformer();
-        this.transformer.setConsumer(this.xmlConsumer);
+        this.transformer.setXMLConsumer(this.xmlConsumer);
     }
 
     @Test

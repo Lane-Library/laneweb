@@ -9,13 +9,13 @@
         <constructor-arg ref="javax.sql.DataSource/eresources"/>
     </bean>
 
-    <bean name="org.apache.cocoon.transformation.Transformer/proxy-links"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/proxy-links"
         class="edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
     </bean>
     
-    <bean name="org.apache.cocoon.transformation.Transformer/search-proxy-links"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/search-proxy-links"
         class="edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer"
         scope="prototype">
         <property name="elementName" value="url"/>
@@ -25,7 +25,7 @@
         <constructor-arg ref="javax.sql.DataSource/eresources"/>
     </bean>
     
-    <bean name="org.apache.cocoon.selection.Selector/proxy-links"
+    <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/proxy-links"
         class="edu.stanford.irt.laneweb.proxy.ProxyLinkSelector"/>
 
 </beans>

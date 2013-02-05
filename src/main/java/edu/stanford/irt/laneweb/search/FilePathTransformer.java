@@ -1,16 +1,16 @@
 package edu.stanford.irt.laneweb.search;
 
-import org.apache.cocoon.core.xml.SAXParser;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.xml.EmbeddedXMLPipe;
-import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.validity.AggregatedValidity;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
+import edu.stanford.irt.cocoon.source.AggregatedValidity;
+import edu.stanford.irt.cocoon.source.Source;
+import edu.stanford.irt.cocoon.source.SourceResolver;
+import edu.stanford.irt.cocoon.source.SourceValidity;
+import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
+import edu.stanford.irt.cocoon.xml.SAXParser;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class FilePathTransformer extends AbstractCacheableTransformer {
 
@@ -44,9 +44,9 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
     }
 
     @Override
-    public void setConsumer(final XMLConsumer xmlConsumer) {
+    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
         this.pipe = new EmbeddedXMLPipe(xmlConsumer);
-        super.setConsumer(xmlConsumer);
+        super.setXMLConsumer(xmlConsumer);
     }
 
     @Override

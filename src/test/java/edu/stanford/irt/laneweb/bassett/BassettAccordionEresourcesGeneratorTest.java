@@ -10,11 +10,11 @@ import static org.easymock.EasyMock.verify;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class BassettAccordionEresourcesGeneratorTest {

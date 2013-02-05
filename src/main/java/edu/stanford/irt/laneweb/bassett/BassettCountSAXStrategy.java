@@ -3,11 +3,11 @@ package edu.stanford.irt.laneweb.bassett;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 

@@ -13,12 +13,12 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.SourceValidity;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.cocoon.source.SourceValidity;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;

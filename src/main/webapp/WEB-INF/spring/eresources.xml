@@ -21,7 +21,7 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource"/>
     </bean>
 
-    <bean name="org.apache.cocoon.generation.Generator/eresources-count"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/eresources-count"
         class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
         scope="prototype">
         <constructor-arg>
@@ -40,7 +40,7 @@
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
 
-    <bean name="org.apache.cocoon.generation.Generator/er-browse"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-browse"
         class="edu.stanford.irt.laneweb.eresources.BrowseEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-browse"/>
@@ -48,7 +48,7 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
 
-    <bean name="org.apache.cocoon.generation.Generator/er-core"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-core"
         class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-core"/>
@@ -56,7 +56,7 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
 
-    <bean name="org.apache.cocoon.generation.Generator/er-mesh"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-mesh"
         class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-mesh"/>

@@ -7,11 +7,11 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.laneweb.util.XMLUtils;

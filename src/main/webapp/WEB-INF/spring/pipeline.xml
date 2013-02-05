@@ -3,73 +3,73 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
-    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Pipeline/noncaching"
         class="edu.stanford.irt.cocoon.pipeline.NonCachingPipeline"
         scope="prototype">
     </bean>
     
-    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Pipeline/expires"
         class="edu.stanford.irt.cocoon.pipeline.ExpiresCachingPipeline"
         scope="prototype">
-        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.cache.Cache"/>
         <constructor-arg value="300"/>
     </bean>
     
-    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Pipeline/throttling"
         class="edu.stanford.irt.cocoon.pipeline.ThrottlingPipeline"
         scope="prototype">
     </bean>
     
-    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Pipeline/caching"
         class="edu.stanford.irt.cocoon.pipeline.CachingPipeline"
         scope="prototype">
-        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.cache.Cache"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/file"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/file"
         class="edu.stanford.irt.cocoon.pipeline.generate.URLGenerator"
         scope="prototype">
         <constructor-arg value="file"/>
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+        <property name="parser" ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/html"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/html"
         class="edu.stanford.irt.cocoon.pipeline.generate.URLGenerator"
         scope="prototype">
         <constructor-arg value="html"/>
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/html"/>
+        <property name="parser" ref="edu.stanford.irt.cocoon.xml.SAXParser/html"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/link-scan"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/link-scan"
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator"
         scope="prototype">
         <constructor-arg ref="javax.sql.DataSource/eresources"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/parameter-map"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/parameter-map"
         class="edu.stanford.irt.laneweb.search.ParameterMapGenerator"
         scope="prototype">
         <property name="marshaller" ref="org.springframework.oxm.Marshaller"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/&lt;aggregator&gt;"
         class="edu.stanford.irt.cocoon.pipeline.generate.AggregatorImpl"
         scope="prototype">
         <constructor-arg value="&lt;aggregator&gt;"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/classes"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/classes"
         class="edu.stanford.irt.laneweb.classes.ClassesGenerator"
         scope="prototype">
         <constructor-arg value="classes"/>
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+        <property name="parser" ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/noncached-classes"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/noncached-classes"
         class="edu.stanford.irt.laneweb.classes.RootElementProvidingGenerator"
         scope="prototype">
         <constructor-arg value="noncached-classes"/>
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+        <property name="parser" ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator"
@@ -77,48 +77,55 @@
         <property name="marshaller" ref="org.springframework.oxm.Marshaller"/>
     </bean>
     
-    <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/namespace-filter"
         class="edu.stanford.irt.cocoon.pipeline.transform.NamespaceFilter"
         scope="prototype"/>
     
-    <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/xinclude"
         class="edu.stanford.irt.cocoon.pipeline.transform.XIncludeTransformer"
         scope="prototype">
         <constructor-arg value="xinclude"/>
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl"/>
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.XPointerProcessor"/>
     </bean>
     
-    <bean name="org.apache.cocoon.transformation.Transformer/debug"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/debug"
         class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"
         scope="prototype"/>
     
-    <bean name="org.apache.cocoon.transformation.Transformer/saxon"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/saxon"
         class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
         scope="prototype">
         <constructor-arg value="saxon"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon"/>
     </bean>
     
-    <bean name="org.apache.cocoon.transformation.Transformer/textNodeParser"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/textNodeParser"
         class="edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer"
         scope="prototype">
         <constructor-arg value="textNodeParser"/>
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/html-fragment"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/html-fragment"/>
     </bean>
     
-    <bean name="org.apache.cocoon.transformation.Transformer/joost"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/joost"
         class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
         scope="prototype">
         <constructor-arg value="joost"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost"/>
     </bean>
     
-    <bean name="org.apache.cocoon.serialization.Serializer/xml"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/xalan"
+        class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
+        scope="prototype">
+        <constructor-arg value="xalan"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/xalan"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Serializer/xml"
         class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
         scope="prototype">
         <constructor-arg value="xml"/>
@@ -130,7 +137,7 @@
         </constructor-arg>
     </bean>
     
-    <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Serializer/xhtml"
         class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
         scope="prototype">
         <constructor-arg value="xhtml"/>
@@ -147,7 +154,7 @@
         </constructor-arg>
     </bean>
     
-    <bean name="org.apache.cocoon.serialization.Serializer/html5"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Serializer/html5"
         class="edu.stanford.irt.laneweb.cocoon.HTML5Serializer"
         scope="prototype">
         <constructor-arg value="html5"/>
@@ -162,7 +169,7 @@
         </constructor-arg>
     </bean>
     
-    <bean name="org.apache.cocoon.serialization.Serializer/text"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Serializer/text"
         class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
         scope="prototype">
         <constructor-arg value="text"/>
@@ -174,11 +181,11 @@
         </constructor-arg>
     </bean>
     
-    <bean name="org.apache.cocoon.transformation.Transformer/eventlist"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/eventlist"
         class="edu.stanford.irt.laneweb.classes.EventListTransformer"
         scope="prototype">
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
-        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser/xml"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
 </beans>

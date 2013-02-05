@@ -3,12 +3,12 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceValidity;
 import org.springframework.core.io.Resource;
 
 import edu.stanford.irt.cocoon.source.FileTimeStampValidity;
+import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceException;
+import edu.stanford.irt.cocoon.source.SourceValidity;
 
 public class SpringResourceSource implements Source {
 

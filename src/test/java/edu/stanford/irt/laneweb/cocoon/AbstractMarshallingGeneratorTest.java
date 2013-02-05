@@ -11,12 +11,12 @@ import java.io.IOException;
 
 import javax.xml.transform.sax.SAXResult;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.XmlMappingException;
 
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class AbstractMarshallingGeneratorTest {

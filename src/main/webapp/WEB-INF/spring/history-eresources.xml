@@ -13,14 +13,14 @@
         </constructor-arg>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/history-search"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/history-search"
         class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/history"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/history-count"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/history-count"
         class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
         scope="prototype">
         <constructor-arg>

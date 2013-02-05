@@ -4,11 +4,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.cocoon.xml.XMLConsumer;
-
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 

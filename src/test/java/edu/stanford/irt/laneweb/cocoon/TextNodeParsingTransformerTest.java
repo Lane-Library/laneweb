@@ -8,13 +8,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import org.apache.cocoon.core.xml.SAXParser;
-import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.cocoon.source.NOPValidity;
+import edu.stanford.irt.cocoon.xml.SAXParser;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
+
 
 public class TextNodeParsingTransformerTest {
 
@@ -39,7 +41,7 @@ public class TextNodeParsingTransformerTest {
         this.transformer.setParameters(this.parameters);
         verify(this.parameters);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.transformer.setConsumer(this.xmlConsumer);
+        this.transformer.setXMLConsumer(this.xmlConsumer);
     }
 
     @Test

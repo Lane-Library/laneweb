@@ -12,14 +12,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 
-import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.Source;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
+
+import edu.stanford.irt.cocoon.source.Source;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class HTMLSAXParserTest {
 

@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.Resource;
@@ -65,9 +65,9 @@ public class QueryHighlightingTransformer extends AbstractTransformer implements
     }
 
     @Override
-    public void setConsumer(final XMLConsumer xmlConsumer) {
+    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
         this.xmlConsumer = xmlConsumer;
-        super.setConsumer(xmlConsumer);
+        super.setXMLConsumer(xmlConsumer);
     }
 
     public void setModel(final Map<String, Object> model) {

@@ -13,9 +13,10 @@
  */
 package edu.stanford.irt.laneweb.util;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 /**
  * XML utility methods.

@@ -16,11 +16,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.cocoon.Processor;
-import org.apache.cocoon.components.pipeline.ProcessingPipeline;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.cocoon.pipeline.Pipeline;
+import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
@@ -38,7 +38,7 @@ public class SitemapRequestHandlerTest {
 
     private SitemapRequestHandler handler;
 
-    private ProcessingPipeline pipeline;
+    private Pipeline pipeline;
 
     private HttpServletRequest request;
 
@@ -46,20 +46,20 @@ public class SitemapRequestHandlerTest {
 
     private ServletContext servletContext;
 
-    private Processor processor;
+    private Sitemap processor;
 
     @Before
     public void setUp() throws Exception {
         this.handler = new TestHandler();
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
-        this.processor = createMock(Processor.class);
+        this.processor = createMock(Sitemap.class);
         this.servletContext = createMock(ServletContext.class);
         this.dataBinder = createMock(DataBinder.class);
-        this.handler.setProcessor(this.processor);
+        this.handler.setSitemap(this.processor);
         this.handler.setServletContext(this.servletContext);
         this.handler.setDataBinder(this.dataBinder);
-        this.pipeline = createMock(ProcessingPipeline.class);
+        this.pipeline = createMock(Pipeline.class);
     }
 
     @SuppressWarnings("unchecked")

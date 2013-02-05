@@ -1,13 +1,13 @@
 package edu.stanford.irt.laneweb.classes;
 
-import org.apache.cocoon.core.xml.SAXParser;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.xml.EmbeddedXMLPipe;
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-
+ 
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
+import edu.stanford.irt.cocoon.source.SourceResolver;
+import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
+import edu.stanford.irt.cocoon.xml.SAXParser;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class EventListTransformer extends AbstractCacheableTransformer {
 
@@ -33,9 +33,9 @@ public class EventListTransformer extends AbstractCacheableTransformer {
     }
 
     @Override
-    public void setConsumer(final XMLConsumer xmlConsumer) {
+    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
         this.pipe = new EmbeddedXMLPipe(xmlConsumer);
-        super.setConsumer(xmlConsumer);
+        super.setXMLConsumer(xmlConsumer);
     }
 
     @Override

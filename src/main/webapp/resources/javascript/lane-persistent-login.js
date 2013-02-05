@@ -122,7 +122,8 @@
 
 		// Click on YES --
 		yesButton.once('click',function(event) {
-				setLink(event); // cookie set in the PerssitentLoginFilter class
+		//	createGoHttpsIE();
+			setLink(event); // cookie set in the PerssitentLoginController class
 		});
 		
 		// Click on NO
@@ -163,7 +164,15 @@
 	};
 	//END POPUP
 	
-	
+//	var createGoHttpsIE = function(){
+//		if (Y.UA.ie && (Y.UA.ie == 8 || Y.UA.ie == 9)) {
+//		now.setFullYear(now.getFullYear() + 10);
+//		Y.Cookie.set("GO_HTTPS_IE",	'please', {
+//				path : "/",
+//				expires : now
+//			});
+//		}
+//	};
 	
 })();
 

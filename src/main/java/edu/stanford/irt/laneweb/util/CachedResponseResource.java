@@ -7,8 +7,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 
-import org.apache.cocoon.caching.CachedResponse;
 import org.springframework.core.io.Resource;
+
+import edu.stanford.irt.cocoon.cache.CachedResponse;
 
 public class CachedResponseResource implements Resource {
 
@@ -22,7 +23,7 @@ public class CachedResponseResource implements Resource {
     }
 
     public long contentLength() throws IOException {
-        return this.cachedResponse.getResponse().length;
+        return this.cachedResponse.getBytes().length;
     }
 
     public Resource createRelative(final String relativePath) throws IOException {
@@ -46,7 +47,7 @@ public class CachedResponseResource implements Resource {
     }
 
     public InputStream getInputStream() throws IOException {
-        return new ByteArrayInputStream(this.cachedResponse.getResponse());
+        return new ByteArrayInputStream(this.cachedResponse.getBytes());
     }
 
     public URI getURI() throws IOException {

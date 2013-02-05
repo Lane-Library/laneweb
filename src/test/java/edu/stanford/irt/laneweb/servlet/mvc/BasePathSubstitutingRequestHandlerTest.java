@@ -18,16 +18,16 @@ import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.cocoon.caching.Cache;
-import org.apache.cocoon.caching.CachedResponse;
-import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.HandlerMapping;
 
+import edu.stanford.irt.cocoon.cache.Cache;
+import edu.stanford.irt.cocoon.cache.CachedResponse;
+import edu.stanford.irt.cocoon.source.NOPValidity;
+import edu.stanford.irt.cocoon.source.SourceValidity;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 import edu.stanford.irt.laneweb.model.Model;

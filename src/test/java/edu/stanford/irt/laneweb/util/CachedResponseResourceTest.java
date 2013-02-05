@@ -10,10 +10,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
-import org.apache.cocoon.caching.CachedResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
+
+import edu.stanford.irt.cocoon.cache.CachedResponse;
 
 public class CachedResponseResourceTest {
 
@@ -32,7 +33,7 @@ public class CachedResponseResourceTest {
 
     @Test
     public void testContentLength() throws IOException {
-        expect(this.cachedResponse.getResponse()).andReturn(new byte[1]);
+        expect(this.cachedResponse.getBytes()).andReturn(new byte[1]);
         replay(this.cachedResponse, this.realResource);
         assertEquals(1L, this.resource.contentLength());
         verify(this.cachedResponse, this.realResource);
@@ -80,7 +81,7 @@ public class CachedResponseResourceTest {
 
     @Test
     public void testGetInputStream() throws IOException {
-        expect(this.cachedResponse.getResponse()).andReturn(new byte[0]);
+        expect(this.cachedResponse.getBytes()).andReturn(new byte[0]);
         replay(this.cachedResponse, this.realResource);
         assertEquals(-1, this.resource.getInputStream().read());
         verify(this.cachedResponse, this.realResource);

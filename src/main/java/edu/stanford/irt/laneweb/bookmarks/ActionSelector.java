@@ -2,9 +2,7 @@ package edu.stanford.irt.laneweb.bookmarks;
 
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.selection.Selector;
-
+import edu.stanford.irt.cocoon.sitemap.select.Selector;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -20,8 +18,7 @@ public class ActionSelector implements Selector {
      * 
      * @return true if the expression equals the value of "action" in the model.
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public boolean select(final String expression, final Map objectModel, final Parameters parameters) {
+    public boolean select(final String expression, final Map<String, Object> objectModel, final Map<String, String> parameters) {
         return expression.equals(ModelUtil.getString(objectModel, Model.ACTION));
     }
 }

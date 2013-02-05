@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
-import org.apache.cocoon.xml.XMLConsumer;
-
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.Eresource;
 
 public class MergedSearchSAXStrategy implements SAXStrategy<SearchResult> {

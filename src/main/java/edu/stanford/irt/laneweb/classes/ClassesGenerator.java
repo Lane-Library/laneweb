@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.classes;
 
-import org.apache.excalibur.source.SourceValidity;
-
 import edu.stanford.irt.cocoon.pipeline.generate.URLGenerator;
+import edu.stanford.irt.cocoon.source.SourceValidity;
 
 public class ClassesGenerator extends URLGenerator {
 

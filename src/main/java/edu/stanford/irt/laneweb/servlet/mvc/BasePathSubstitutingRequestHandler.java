@@ -7,12 +7,12 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.cocoon.caching.Cache;
-import org.apache.cocoon.caching.CachedResponse;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import edu.stanford.irt.cocoon.cache.Cache;
+import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.source.FileTimeStampValidity;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;

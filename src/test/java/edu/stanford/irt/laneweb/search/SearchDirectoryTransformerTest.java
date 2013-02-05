@@ -11,11 +11,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class SearchDirectoryTransformerTest {
 
@@ -27,7 +28,7 @@ public class SearchDirectoryTransformerTest {
     public void setUp() throws Exception {
         this.transformer = new SearchDirectoryTransformer();
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.transformer.setConsumer(this.xmlConsumer);
+        this.transformer.setXMLConsumer(this.xmlConsumer);
         this.transformer.setParameters(Collections.singletonMap("directories", "file:" + System.getProperty("user.dir")));
     }
 

@@ -11,11 +11,12 @@ import static org.easymock.EasyMock.verify;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class BassettListSAXStrategyTest {
 

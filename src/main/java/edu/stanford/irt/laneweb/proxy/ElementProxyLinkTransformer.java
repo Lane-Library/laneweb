@@ -1,8 +1,9 @@
 package edu.stanford.irt.laneweb.proxy;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
@@ -33,14 +34,14 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
         this.xmlConsumer.endElement(uri, localName, qName);
     }
 
-    @Override
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        this.xmlConsumer = xmlConsumer;
-        super.setConsumer(xmlConsumer);
-    }
-
     public void setElementName(final String elementName) {
         this.elementName = elementName;
+    }
+
+    @Override
+    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
+        super.setXMLConsumer(xmlConsumer);
     }
 
     @Override

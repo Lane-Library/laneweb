@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.search;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.util.SAXResult;

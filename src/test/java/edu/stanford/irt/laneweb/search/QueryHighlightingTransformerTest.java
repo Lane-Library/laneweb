@@ -9,12 +9,12 @@ import static org.easymock.EasyMock.verify;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.resource.Resource;
 
@@ -33,7 +33,7 @@ public class QueryHighlightingTransformerTest {
         this.model = new HashMap<String, Object>();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer = new QueryHighlightingTransformer();
-        this.transformer.setConsumer(this.xmlConsumer);
+        this.transformer.setXMLConsumer(this.xmlConsumer);
     }
 
     @Test

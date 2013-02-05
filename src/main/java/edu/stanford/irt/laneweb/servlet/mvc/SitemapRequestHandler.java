@@ -10,10 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.cocoon.Processor;
-import org.apache.cocoon.components.pipeline.ProcessingPipeline;
 import org.springframework.web.HttpRequestHandler;
 
+import edu.stanford.irt.cocoon.pipeline.Pipeline;
+import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
@@ -25,7 +25,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private String prefix = "";
 
-    private Processor processor;
+    private Sitemap sitemap;
 
     private ServletContext servletContext;
 
@@ -43,7 +43,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         if (mimeType != null) {
             response.setContentType(mimeType);
         }
-        ProcessingPipeline pipeline = this.processor.buildPipeline(model);
+        Pipeline pipeline = this.sitemap.buildPipeline(model);
         pipeline.process(response.getOutputStream());
     }
 
@@ -62,8 +62,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.prefix = prefix;
     }
 
-    public void setProcessor(final Processor processor) {
-        this.processor = processor;
+    public void setSitemap(final Sitemap sitemap) {
+        this.sitemap = sitemap;
     }
 
     public void setServletContext(final ServletContext servletContext) {
