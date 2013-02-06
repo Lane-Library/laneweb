@@ -16,11 +16,17 @@ public class PagingEresourceListSAXStrategy implements SAXStrategy<PagingEresour
 
     private static final String CDATA = "CDATA";
 
+    private static final String END = "end";
+
     private static final String LENGTH = "length";
 
     private static final String PAGE = "page";
 
     private static final String PAGES = "pages";
+
+    private static final String PAGING_LABEL = "pagingLabel";
+
+    private static final String RESULTS = "results";
 
     private static final String START = "start";
 
@@ -43,6 +49,15 @@ public class PagingEresourceListSAXStrategy implements SAXStrategy<PagingEresour
             atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(list.getPage()));
             atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(list.getPages()));
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCES, atts);
+            for (ListIterator<PagingLabel> it = list.getPagingLabels().listIterator(); it.hasNext();) {
+                PagingLabel pagingLabel = it.next();
+                AttributesImpl plAtts = new AttributesImpl();
+                plAtts.addAttribute(EMPTY_NS, START, START, CDATA, pagingLabel.getStart());
+                plAtts.addAttribute(EMPTY_NS, END, END, CDATA, pagingLabel.getEnd());
+                plAtts.addAttribute(EMPTY_NS, RESULTS, RESULTS, CDATA, Integer.toString(pagingLabel.getResults()));
+                XMLUtils.startElement(xmlConsumer, NAMESPACE, PAGING_LABEL, plAtts);
+                XMLUtils.endElement(xmlConsumer, NAMESPACE, PAGING_LABEL);
+            }
             int i = 0;
             for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 this.saxStrategy.toSAX(it.next(), xmlConsumer);

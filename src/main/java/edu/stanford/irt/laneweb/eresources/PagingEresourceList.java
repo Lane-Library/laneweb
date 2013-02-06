@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import edu.stanford.irt.eresources.Eresource;
 
@@ -19,6 +20,12 @@ public class PagingEresourceList extends LinkedList<Eresource> {
 
     private int pages;
 
+    private int pageSize;
+
+    private List<PagingLabel> pagingLabels;
+
+    private int size;
+
     private int start;
 
     public PagingEresourceList(final Collection<Eresource> eresources) {
@@ -31,19 +38,19 @@ public class PagingEresourceList extends LinkedList<Eresource> {
             throw new IllegalArgumentException("not so many pages: " + page);
         }
         this.page = page;
-        int size = size();
-        int pageSize = size / MAX_PAGE_COUNT;
-        pageSize = size % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
-        pageSize = pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : pageSize;
-        if (page < 0 || size <= pageSize) {
+        this.size = size();
+        this.pageSize = this.size / MAX_PAGE_COUNT;
+        this.pageSize = this.size % MAX_PAGE_COUNT != 0 ? this.pageSize + 1 : this.pageSize;
+        this.pageSize = this.pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : this.pageSize;
+        if (page < 0 || this.size <= this.pageSize) {
             this.start = 0;
-            this.length = size;
+            this.length = this.size;
         } else {
-            this.start = page * pageSize;
-            this.length = size - this.start < pageSize ? size - this.start : pageSize;
+            this.start = page * this.pageSize;
+            this.length = this.size - this.start < this.pageSize ? this.size - this.start : this.pageSize;
         }
-        this.pages = size / pageSize;
-        this.pages = size % pageSize != 0 ? this.pages + 1 : this.pages;
+        this.pages = this.size / this.pageSize;
+        this.pages = this.size % this.pageSize != 0 ? this.pages + 1 : this.pages;
     }
 
     public int getLength() {
@@ -56,6 +63,30 @@ public class PagingEresourceList extends LinkedList<Eresource> {
 
     public int getPages() {
         return this.pages;
+    }
+
+    public List<PagingLabel> getPagingLabels() {
+        if (null != this.pagingLabels) {
+            return this.pagingLabels;
+        }
+        this.pagingLabels = new LinkedList<PagingLabel>();
+        for (int i = 0; i < this.pages && this.page >= 0; i++) {
+            int pageLabelStart;
+            int pageLabelEnd;
+            int numResults;
+            if (i == 0) {
+                pageLabelStart = 0;
+                pageLabelEnd = this.pageSize - 1;
+            } else {
+                pageLabelStart = i * this.pageSize;
+                pageLabelEnd = ((i + 1) * this.pageSize) - 1;
+            }
+            pageLabelEnd = pageLabelEnd >= this.size ? this.size - 1 : pageLabelEnd;
+            numResults = (pageLabelEnd - pageLabelStart) + 1;
+            this.pagingLabels.add(new PagingLabel(this.get(pageLabelStart).getTitle(), this.get(pageLabelEnd)
+                    .getTitle(), numResults));
+        }
+        return this.pagingLabels;
     }
 
     public int getStart() {
