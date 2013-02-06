@@ -33,7 +33,7 @@ public class EHCache implements Cache {
 
     public CachedResponse get(final Serializable key) {
         Element element = this.cache.get(key);
-        return (CachedResponse) (element == null ? null : element.getValue());
+        return (CachedResponse) (element == null ? null : element.getObjectValue());
     }
 
     public void remove(final Serializable key) {
