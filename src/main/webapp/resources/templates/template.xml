@@ -183,10 +183,10 @@
                                 </xi:include>
                             </li>
                         </ul>
-                        <div id="laneFooter">
+                          <div id="laneFooter">
                             <div class="yui3-g">
-                                <div class="yui3-u-1-5">
-                                    <a href="/biomed-resources/index.html">BIOMED RESOURCES</a>
+                                <div class="yui3-u-1-6">
+                                    <a href="/biomed-resources/index.html">RESOURCES</a>
                                     <ul>
                                         <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
                                         <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
@@ -195,8 +195,8 @@
                                         <li><a href="/biomed-resources/cc.html?a=a">Clinical Decision Tools</a></li>
                                     </ul>
                                 </div>
-                                <div class="yui3-u-1-5">
-                                    <a href="/portals/index.html">SPECIALTY PORTALS</a>
+                                <div class="yui3-u-1-6">
+                                    <a href="/portals/index.html">PORTALS</a>
                                     <ul>
                                         <li><a href="/portals/peds.html">Pediatrics</a></li>
                                         <li><a href="/portals/clinical.html">Clinical</a></li>
@@ -205,32 +205,44 @@
                                         <li><a href="/portals/picu.html">PICU</a></li>
                                     </ul>
                                 </div>
-                                <div class="yui3-u-1-5">
-                                    <a href="/about/index.html">ABOUT LANE</a>
+                                  <div class="yui3-u-1-6">
+                                    <a href="/using-lib/index.html">USING</a>
+                                    <ul>
+                                        <li><a href="/using-lib/get-started/affiliates.html">Get Started at Lane</a></li>
+                                        <li><a href="/using-lib/get-started/affiliates.html">Your eligibility</a></li>
+                                        <li><a href="/using-lib/get-started/sunetid.html">Manage Your SUNet ID</a></li>
+                                        <li><a href="/using-lib/docdeliver.html">DocXpress</a></li>
+                                        <li><a href="/using-lib/computing.html">Computing Spaces</a></li>
+                                        <li><a href="/using-lib/studyspaces.html">Places to Study</a></li>
+                                    </ul>
+                                </div>
+                                <div class="yui3-u-1-6">
+                                    <a href="/about/index.html">ABOUT</a>
                                     <ul>
                                         <li><a href="/about/index.html">Hours</a></li>
                                         <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
                                         <li><a href="/about/contact.html">Contact Us</a></li>
-                                        <li><a href="/about/studyspaces.html">Study Spaces</a></li>
                                         <li><a href="/about/liaisons.html">Liaisons</a></li>
-                                        <li><a href="/help/get-started/affiliates.html">Your eligibility</a></li>
+                                        <li><a href="/about/donations.html">Donating to Lane</a></li>
+                                        <li><a href="/about/grantwriters.html">Info for Grant Writers</a></li>
                                     </ul>
                                 </div>
-                                <div class="yui3-u-1-5">
+                                <div class="yui3-u-1-6">
                                     <a href="http://www.stanford.edu/">STANFORD</a>
                                     <ul>
                                         <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
                                         <li><a href="/biomed-resources/recent-su-pubmed.html">Stanford Authors in PubMed</a></li>
-                                        <li><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles @Stanford</a></li>
+                                        <li><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles</a></li>
                                         <li><a href="/classes-consult/infoliteracy.html">Information Literacy</a></li>
                                         <li><a href="http://scopeblog.stanford.edu/">Scope Blog</a></li>
                                     </ul>
                                 </div>
-                                <div class="yui3-u-1-5">
+                                <div class="yui3-u-1-6">
                                     <a href="http://giving.stanford.edu/goto/lanelibrarygift" class="makegift image-link" rel="popup standard"></a>
                                     <div id="socialMedia">
                                         <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257" class="facebook image-link"></a>
                                         <a href="http://twitter.com/#!/LaneLibStanford" class="twitter image-link"></a>
+                                        <a href="http://gplus.to/lanelib" class="googleplus image-link"></a>
                                         <a href="http://www.flickr.com/photos/40390680@N08/" class="flickr image-link noproxy"></a>
                                     </div>
                                 </div>
