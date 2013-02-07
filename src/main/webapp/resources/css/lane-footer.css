@@ -5,43 +5,36 @@
     background-repeat : repeat-x;
     padding : 29px;
 }
-
 #laneFooter a {
     font-family : Georgia;
     font-size : 15px;
     border-bottom : none;
     letter-spacing : .5px;
 }
-
 #laneFooter ul {
     padding-top : 3px;
 }
-
 #laneFooter li {
     padding : 1.5px 0;
 }
-
 #laneFooter ul a {
     font-family : arial;
     font-size : 11px;
     letter-spacing : normal;
 }
-
 #socialMedia {
     position:absolute;
-    right: 43px;
+    right: 17px;
     bottom: 65px;
 }
-
 #socialMedia a {
 	height: 25px;
 	width: 26px;
-	margin-left:13px;
+	margin-left:19px;
 	display: inline-block;
-	background-image: url("/././resources/images/icons-sprite3.png");
+	background-image: url("/././resources/images/icons-sprite4.png");
 	background-repeat: no-repeat;
 }
-
 .facebook {
 	background-position: -46px -118px;
 }
@@ -49,25 +42,26 @@
 .facebook:hover {
 	background-position: -46px -172px;
 }
-
 .twitter {
 	background-position: -93px -118px;
 }
-
 .twitter:hover {
 	background-position: -93px -172px;
 }
-
+.googleplus {
+	background-position: -237px -118px;
+}
+.googleplus:hover {
+	background-position: -237px -172px;
+}
 .flickr {
-	background-position: -142px -118px;
+	background-position: -140px -118px;
 }
-
 .flickr:hover {
-	background-position: -142px -172px;	
+	background-position: -140px -172px;	
 }
-
 .makegift {
-	background-image: url("/././resources/images/icons-sprite3.png");
+	background-image: url("/././resources/images/icons-sprite4.png");
 	background-repeat: no-repeat;
 	background-position: -460px 0px;
 	position:absolute;
@@ -75,4 +69,4 @@
     bottom: 110px;
     height: 59px;
 	width: 164px;
-	}
+}
