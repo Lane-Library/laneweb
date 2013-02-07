@@ -1,0 +1,36 @@
+.resourceListPagination {
+    background-color:#F7F3E5;
+    padding:10px 5px 24px;
+    font-size:11px;
+}
+.paginationContainer  {
+    width:100%; 
+    margin-top:-13px;
+    float:right;
+}
+.resourceListPagination select {
+    border-radius:5px;
+    -webkit-border-radius:0;
+    background:-moz-linear-gradient(#fff, #f1f1f1);
+    width:130px;
+    font-size:13px;
+    color:#3f3c30;
+    border-color:gray;
+    border:1px solid lightgray;
+    margin:-5px 5px 0px 5px;
+    height:25px;
+    float:right;
+    text-align:center;
+    padding-top:2px;
+    _padding-top:0px;
+    padding-top/* ie 8 */:0px\9
+}
+.resourceListPagination select option {
+    text-align:left;
+    padding-left:10px;
+    color:#1C4B70;
+    background-color:#f1f1f1;
+}
+.paginationNumbers {
+    float:right;
+}
