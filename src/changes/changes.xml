@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-02-11" version="2.0.4" description="2.0.4 bug fix release">
+            <action date="2013-02-07" issue="81888" dev="olgary" type="update">
+                updated template.xml, debug.xml, lane-footer.css, - new image-sprite4.png
+            </action>
+            <action date="2013-02-05" issue="81823" dev="ryanmax" type="fix">
+                &lt;description&gt; and &lt;label&gt; elements appearing in html output
+            </action>
+        </release>
         <release date="2013-02-04" version="2.0.3" description="2.0.3 bug fix release">
             <action date="2013-02-04" issue="81800" dev="olgary" type="update">
                 update template.xml, debug.xml, landing-pgs-2011.css - 'mainnav'
