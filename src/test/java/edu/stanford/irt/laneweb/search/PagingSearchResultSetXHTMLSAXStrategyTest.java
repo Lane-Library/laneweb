@@ -37,7 +37,7 @@ public class PagingSearchResultSetXHTMLSAXStrategyTest {
 
     private PagingSearchResultSet set;
 
-    private PagingSearchResultSetSAXStrategy strategy;
+    private PagingSearchResultSetXHTMLSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
 
@@ -49,7 +49,7 @@ public class PagingSearchResultSetXHTMLSAXStrategyTest {
         this.result = createMock(SearchResult.class);
         this.iterator = createMock(Iterator.class);
         this.resultStrategy = createMock(SAXStrategy.class);
-        this.strategy = new PagingSearchResultSetSAXStrategy(this.resultStrategy);
+        this.strategy = new PagingSearchResultSetXHTMLSAXStrategy(this.resultStrategy);
         this.set = createMock(PagingSearchResultSet.class);
     }
 

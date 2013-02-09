@@ -37,7 +37,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
 
     private ListIterator<PagingLabel> pagingLabelsIterator;
 
-    private PagingEresourceListSAXStrategy strategy;
+    private PagingEresourceListXHTMLSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
 
@@ -48,7 +48,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         this.eresource = createMock(Eresource.class);
         Arrays.fill(this.eresourceArray, this.eresource);
         this.eresourceStrategy = createMock(SAXStrategy.class);
-        this.strategy = new PagingEresourceListSAXStrategy(this.eresourceStrategy);
+        this.strategy = new PagingEresourceListXHTMLSAXStrategy(this.eresourceStrategy);
         this.list = createMock(PagingEresourceList.class);
         this.listIterator = createMock(ListIterator.class);
         this.pagingLabel = createMock(PagingLabel.class);
