@@ -65,7 +65,6 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "lwSearchResults");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "dl", atts);
             int i = 0;
-            xmlConsumer.startPrefixMapping(NO_PREFIX, XHTML_NS);
             for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, DD);
                 StringBuilder sb = new StringBuilder("r-");
