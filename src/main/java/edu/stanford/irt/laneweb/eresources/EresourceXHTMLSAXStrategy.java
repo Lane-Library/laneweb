@@ -66,35 +66,37 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.data(xmlConsumer, eresource.getTitle());
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
             StringBuilder sb = new StringBuilder(" ");
-            sb.append(firstVersion.getSummaryHoldings());
+            if (firstVersion.getSummaryHoldings() != null) {
+                sb.append(firstVersion.getSummaryHoldings());
+            }
             if (firstVersion.getDates() != null) {
-                if (sb.length() > 0) {
+                if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append(firstVersion.getDates());
             }
             if (firstVersion.getPublisher() != null) {
-                if (sb.length() > 0) {
+                if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append(firstVersion.getPublisher());
             }
             if (firstVersion.getDescription() != null) {
-                if (sb.length() > 0) {
+                if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append(firstVersion.getDescription());
             }
-            if (sb.length() == 0) {
+            if (sb.length() == 1) {
                 sb.append(firstLink.getLabel());
             }
             if (firstLink.getInstruction() != null) {
-                if (sb.length() > 0) {
+                if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append(firstLink.getInstruction());
             }
-            if (sb.length() > 0) {
+            if (sb.length() > 1) {
                 sb.append(" ");
                 XMLUtils.data(xmlConsumer, sb.toString());
             }
@@ -122,10 +124,12 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                         if (impactFactor) {
                             sb.append("Impact Factor");
                         } else {
-                            sb.append(version.getSummaryHoldings());
-                            if (sb.length() > 0) {
+                            if (version.getSummaryHoldings() != null) {
+                                sb.append(version.getSummaryHoldings());
+                            }
+                            if (sb.length() > 0 && version.getDates() != null) {
                                 sb.append(", ").append(version.getDates());
-                            } else {
+                            } else if (link.getLabel() != null) {
                                 sb.append(link.getLabel());
                             }
                             if (sb.length() == 0) {
