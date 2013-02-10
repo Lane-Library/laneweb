@@ -109,7 +109,7 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                 XMLUtils.data(xmlConsumer, getPassword.getLabel());
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
             }
-            for (Version version : eresource.getVersions()) {
+            for (Version version : versions) {
                 for (Link link : version.getLinks()) {
                     if (!(link.equals(firstLink)) && !(link.equals(getPassword))) {
                         boolean impactFactor = "impact factor".equalsIgnoreCase(link.getLabel());
