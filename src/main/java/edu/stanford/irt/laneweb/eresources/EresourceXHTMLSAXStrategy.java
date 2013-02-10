@@ -126,9 +126,9 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                         } else {
                             if (version.getSummaryHoldings() != null) {
                                 sb.append(version.getSummaryHoldings());
-                            }
-                            if (sb.length() > 0 && version.getDates() != null) {
-                                sb.append(", ").append(version.getDates());
+                                if (version.getDates() != null) {
+                                    sb.append(", ").append(version.getDates());
+                                }
                             } else if (link.getLabel() != null) {
                                 sb.append(link.getLabel());
                             }
