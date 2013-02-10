@@ -127,8 +127,9 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                             if (version.getSummaryHoldings() != null) {
                                 sb.append(version.getSummaryHoldings());
                                 //TODO: remove this later, necessary for backwards compatibility
+                                sb.append(", ");
                                 if (version.getDates() != null) {
-                                    sb.append(", ").append(version.getDates());
+                                    sb.append(version.getDates());
                                 }
                             } else if (link.getLabel() != null) {
                                 sb.append(link.getLabel());
