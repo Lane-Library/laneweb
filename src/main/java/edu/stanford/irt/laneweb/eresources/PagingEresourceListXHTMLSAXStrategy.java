@@ -66,13 +66,17 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "dl", atts);
             int i = 0;
             for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
+                Eresource eresource = it.next();
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, DD);
                 StringBuilder sb = new StringBuilder("r-");
                 sb.append(start + 1 + i);
+                if (eresource.getDescription() != null) {
+                    sb.append(" hvrTrig");
+                }
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, sb.toString());
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
-                this.saxStrategy.toSAX(it.next(), xmlConsumer);
+                this.saxStrategy.toSAX(eresource, xmlConsumer);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, DD);
             }
