@@ -65,7 +65,7 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
             XMLUtils.data(xmlConsumer, eresource.getTitle());
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(" ");
             sb.append(firstVersion.getSummaryHoldings());
             if (firstVersion.getPublisher() != null) {
                 if (sb.length() > 0) {
@@ -95,6 +95,7 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                 sb.append(firstLink.getInstruction());
             }
             if (sb.length() > 0) {
+                sb.append(" ");
                 XMLUtils.data(xmlConsumer, sb.toString());
             }
             if (getPassword != null) {
