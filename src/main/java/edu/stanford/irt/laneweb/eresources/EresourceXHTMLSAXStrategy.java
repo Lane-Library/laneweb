@@ -94,6 +94,9 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                 }
                 sb.append(firstLink.getInstruction());
             }
+            if (sb.length() > 0) {
+                XMLUtils.data(xmlConsumer, sb.toString());
+            }
             if (getPassword != null) {
                 XMLUtils.data(xmlConsumer, " ");
                 atts = new AttributesImpl();
