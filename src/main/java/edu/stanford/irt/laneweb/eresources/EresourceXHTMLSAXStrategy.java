@@ -65,7 +65,8 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
             XMLUtils.data(xmlConsumer, eresource.getTitle());
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-            StringBuilder sb = new StringBuilder(firstVersion.getSummaryHoldings());
+            StringBuilder sb = new StringBuilder();
+            sb.append(firstVersion.getSummaryHoldings());
             if (firstVersion.getPublisher() != null) {
                 if (sb.length() > 0) {
                     sb.append(", ");
