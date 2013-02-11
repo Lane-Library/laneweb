@@ -69,6 +69,12 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             throw new LanewebException(e);
         }
     }
+    
+    private void maybeAppend(StringBuilder sb, String string) {
+        if (string != null && string.length() > 0) {
+            sb.append(", ").append(string);
+        }
+    }
 
     private void createFirstVersionLinks(final XMLConsumer xmlConsumer, final Version firstVersion, final String title)
             throws SAXException {
@@ -91,36 +97,17 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
         XMLUtils.data(xmlConsumer, title);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
         StringBuilder sb = new StringBuilder(" ");
-        if (firstVersion.getSummaryHoldings() != null) {
-            sb.append(firstVersion.getSummaryHoldings());
+        String summaryHoldings = firstVersion.getSummaryHoldings();
+        if (summaryHoldings != null) {
+            sb.append(summaryHoldings);
         }
-        if (firstVersion.getDates() != null) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(firstVersion.getDates());
-        }
-        if (firstVersion.getPublisher() != null) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(firstVersion.getPublisher());
-        }
-        if (firstVersion.getDescription() != null) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(firstVersion.getDescription());
-        }
+        maybeAppend(sb, firstVersion.getDates());
+        maybeAppend(sb, firstVersion.getPublisher());
+        maybeAppend(sb, firstVersion.getDescription());
         if (sb.length() == 1 && firstLink.getLabel() != null) {
             sb.append(firstLink.getLabel());
         }
-        if (firstLink.getInstruction() != null) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(firstLink.getInstruction());
-        }
+        maybeAppend(sb, firstLink.getInstruction());
         if (sb.length() > 1) {
             sb.append(" ");
             XMLUtils.data(xmlConsumer, sb.toString());
@@ -167,21 +154,28 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
         if (impactFactor) {
             sb.append("Impact Factor");
         } else {
-            if (version.getSummaryHoldings() != null && version.getLinks().size() == 1) {
-                sb.append(version.getSummaryHoldings());
-                // TODO: remove this later, necessary for backwards compatibility
-                sb.append(", ");
-                if (version.getDates() != null) {
-                    sb.append(version.getDates());
+            String summaryHoldings = version.getSummaryHoldings();
+            if (summaryHoldings != null && version.getLinks().size() == 1) {
+                sb.append(summaryHoldings);
+                String dates = version.getDates();
+                if (dates != null) {
+                    sb.append(", ").append(dates);
+                } else {
+                    // TODO: remove this later, necessary for backwards compatibility
+                    sb.append(", ");
                 }
-            } else if (link.getLabel() != null) {
-                sb.append(link.getLabel());
+            } else {
+                String label = link.getLabel();
+                if (label != null) {
+                    sb.append(link.getLabel());
+                }
             }
             if (sb.length() == 0) {
                 sb.append(link.getUrl());
             }
-            if (version.getDescription() != null) {
-                sb.append(" ").append(version.getDescription());
+            String description = version.getDescription();
+            if (description != null) {
+                sb.append(" ").append(description);
             }
         }
         XMLUtils.data(xmlConsumer, sb.toString());
