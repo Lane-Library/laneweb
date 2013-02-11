@@ -47,131 +47,19 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
             List<Version> versions = new LinkedList<Version>(eresource.getVersions());
             Collections.sort(versions, VERSION_COMPARATOR);
-            Link getPassword = null;
-            Link firstLink = null;
             Version firstVersion = versions.get(0);
-            for (Link link : firstVersion.getLinks()) {
-                if (getPassword == null && "get password".equalsIgnoreCase(link.getLabel())) {
-                    getPassword = link;
-                } else if (firstLink == null) {
-                    firstLink = link;
-                } else {
-                    break;
-                }
-            }
-            AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, PRIMARY_LINK);
-            atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, firstLink.getUrl());
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-            XMLUtils.data(xmlConsumer, eresource.getTitle());
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-            StringBuilder sb = new StringBuilder(" ");
-            if (firstVersion.getSummaryHoldings() != null) {
-                sb.append(firstVersion.getSummaryHoldings());
-            }
-            if (firstVersion.getDates() != null) {
-                if (sb.length() > 1) {
-                    sb.append(", ");
-                }
-                sb.append(firstVersion.getDates());
-            }
-            if (firstVersion.getPublisher() != null) {
-                if (sb.length() > 1) {
-                    sb.append(", ");
-                }
-                sb.append(firstVersion.getPublisher());
-            }
-            if (firstVersion.getDescription() != null) {
-                if (sb.length() > 1) {
-                    sb.append(", ");
-                }
-                sb.append(firstVersion.getDescription());
-            }
-            if (sb.length() == 1 && firstLink.getLabel() != null) {
-                sb.append(firstLink.getLabel());
-            }
-            if (firstLink.getInstruction() != null) {
-                if (sb.length() > 1) {
-                    sb.append(", ");
-                }
-                sb.append(firstLink.getInstruction());
-            }
-            if (sb.length() > 1) {
-                sb.append(" ");
-                XMLUtils.data(xmlConsumer, sb.toString());
-            }
-            if (getPassword != null) {
-                XMLUtils.data(xmlConsumer, " ");
-                atts = new AttributesImpl();
-                atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, getPassword.getUrl());
-                atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, getPassword.getLabel());
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-                XMLUtils.data(xmlConsumer, getPassword.getLabel());
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-            }
-            for (Version version : versions) {
+            createFirstVersionLinks(xmlConsumer, firstVersion, eresource.getTitle());
+            for (int i = 1; i < versions.size(); i++) {
+                Version version = versions.get(i);
                 for (Link link : version.getLinks()) {
-                    if (!(link.equals(firstLink)) && !(link.equals(getPassword))) {
-                        boolean impactFactor = "impact factor".equalsIgnoreCase(link.getLabel());
-                        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
-                        atts = new AttributesImpl();
-                        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, link.getUrl());
-                        if (!impactFactor) {
-                            atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, link.getLabel());
-                        }
-                        XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-                        sb.setLength(0);
-                        if (impactFactor) {
-                            sb.append("Impact Factor");
-                        } else {
-                            if (version.getSummaryHoldings() != null && version.getLinks().size() == 1) {
-                                sb.append(version.getSummaryHoldings());
-                                //TODO: remove this later, necessary for backwards compatibility
-                                sb.append(", ");
-                                if (version.getDates() != null) {
-                                    sb.append(version.getDates());
-                                }
-                            } else if (link.getLabel() != null) {
-                                sb.append(link.getLabel());
-                            }
-                            if (sb.length() == 0) {
-                                sb.append(link.getUrl());
-                            }
-                            if (version.getDescription() != null) {
-                                sb.append(" ").append(version.getDescription());
-                            }
-                        }
-                        XMLUtils.data(xmlConsumer, sb.toString());
-                        XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-                        sb.setLength(0);
-                        if (link.getInstruction() != null) {
-                            sb.append(" ").append(link.getInstruction());
-                        }
-                        if (version.getPublisher() != null) {
-                            sb.append(" ").append(version.getPublisher());
-                        }
-                        if (sb.length() > 0) {
-                            XMLUtils.data(xmlConsumer, sb.toString());
-                        }
-                        XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-                    }
+                    createSecondaryLink(xmlConsumer, version, link);
                 }
             }
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "moreResults");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            atts = new AttributesImpl();
-            sb.setLength(0);
-            sb.append("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=").append(eresource.getRecordId());
-            atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-            XMLUtils.data(xmlConsumer, "Lane Catalog record");
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+            createMoreResultsLink(xmlConsumer, eresource);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             String description = eresource.getDescription();
             if (description != null && description.length() > 0) {
-                atts = new AttributesImpl();
+                AttributesImpl atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, HVRTARG);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
                 XMLUtils.data(xmlConsumer, description);
@@ -180,5 +68,134 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
+    }
+
+    private void createFirstVersionLinks(final XMLConsumer xmlConsumer, final Version firstVersion, final String title)
+            throws SAXException {
+        Link getPassword = null;
+        Link firstLink = null;
+        List<Link> remainderLinks = new LinkedList<Link>();
+        for (Link link : firstVersion.getLinks()) {
+            if (getPassword == null && "get password".equalsIgnoreCase(link.getLabel())) {
+                getPassword = link;
+            } else if (firstLink == null) {
+                firstLink = link;
+            } else {
+                remainderLinks.add(link);
+            }
+        }
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, PRIMARY_LINK);
+        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, firstLink.getUrl());
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
+        XMLUtils.data(xmlConsumer, title);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+        StringBuilder sb = new StringBuilder(" ");
+        if (firstVersion.getSummaryHoldings() != null) {
+            sb.append(firstVersion.getSummaryHoldings());
+        }
+        if (firstVersion.getDates() != null) {
+            if (sb.length() > 1) {
+                sb.append(", ");
+            }
+            sb.append(firstVersion.getDates());
+        }
+        if (firstVersion.getPublisher() != null) {
+            if (sb.length() > 1) {
+                sb.append(", ");
+            }
+            sb.append(firstVersion.getPublisher());
+        }
+        if (firstVersion.getDescription() != null) {
+            if (sb.length() > 1) {
+                sb.append(", ");
+            }
+            sb.append(firstVersion.getDescription());
+        }
+        if (sb.length() == 1 && firstLink.getLabel() != null) {
+            sb.append(firstLink.getLabel());
+        }
+        if (firstLink.getInstruction() != null) {
+            if (sb.length() > 1) {
+                sb.append(", ");
+            }
+            sb.append(firstLink.getInstruction());
+        }
+        if (sb.length() > 1) {
+            sb.append(" ");
+            XMLUtils.data(xmlConsumer, sb.toString());
+        }
+        if (getPassword != null) {
+            XMLUtils.data(xmlConsumer, " ");
+            atts = new AttributesImpl();
+            atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, getPassword.getUrl());
+            atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, getPassword.getLabel());
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
+            XMLUtils.data(xmlConsumer, getPassword.getLabel());
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+        }
+        for (Link link : remainderLinks) {
+            createSecondaryLink(xmlConsumer, firstVersion, link);
+        }
+    }
+
+    private void createMoreResultsLink(final XMLConsumer xmlConsumer, final Eresource eresource) throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "moreResults");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+        atts = new AttributesImpl();
+        StringBuilder sb = new StringBuilder();
+        sb.append("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=").append(eresource.getRecordId());
+        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
+        XMLUtils.data(xmlConsumer, "Lane Catalog record");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+    }
+
+    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Version version, final Link link)
+            throws SAXException {
+        boolean impactFactor = "impact factor".equalsIgnoreCase(link.getLabel());
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, link.getUrl());
+        if (!impactFactor) {
+            atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, link.getLabel());
+        }
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
+        StringBuilder sb = new StringBuilder();
+        if (impactFactor) {
+            sb.append("Impact Factor");
+        } else {
+            if (version.getSummaryHoldings() != null && version.getLinks().size() == 1) {
+                sb.append(version.getSummaryHoldings());
+                // TODO: remove this later, necessary for backwards compatibility
+                sb.append(", ");
+                if (version.getDates() != null) {
+                    sb.append(version.getDates());
+                }
+            } else if (link.getLabel() != null) {
+                sb.append(link.getLabel());
+            }
+            if (sb.length() == 0) {
+                sb.append(link.getUrl());
+            }
+            if (version.getDescription() != null) {
+                sb.append(" ").append(version.getDescription());
+            }
+        }
+        XMLUtils.data(xmlConsumer, sb.toString());
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+        sb.setLength(0);
+        if (link.getInstruction() != null) {
+            sb.append(" ").append(link.getInstruction());
+        }
+        if (version.getPublisher() != null) {
+            sb.append(" ").append(version.getPublisher());
+        }
+        if (sb.length() > 0) {
+            XMLUtils.data(xmlConsumer, sb.toString());
+        }
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
     }
 }
