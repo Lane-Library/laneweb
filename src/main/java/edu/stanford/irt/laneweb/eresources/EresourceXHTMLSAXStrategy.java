@@ -124,7 +124,7 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                         if (impactFactor) {
                             sb.append("Impact Factor");
                         } else {
-                            if (version.getSummaryHoldings() != null) {
+                            if (version.getSummaryHoldings() != null && version.getLinks().size() == 1) {
                                 sb.append(version.getSummaryHoldings());
                                 //TODO: remove this later, necessary for backwards compatibility
                                 sb.append(", ");
