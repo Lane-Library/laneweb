@@ -134,6 +134,11 @@
 .pmid {
     font-weight:bold;
 }
+.results-nav {
+    background-color:#F7F3E5;
+    padding:10px 5px 24px;
+    font-size:11px;
+}
 .rightSearchTips {
     margin-top:40px;
     padding:20px;

@@ -27,12 +27,7 @@
     <xsl:variable name="guest-mode">
         <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
     </xsl:variable>
-    
-    <xsl:variable name="er-browse-mode">
-        <xsl:if test="contains($request-uri,'biomed-resources')">true</xsl:if>
-    </xsl:variable>
-    
-    
+
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
 
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
@@ -46,18 +41,14 @@
                 <title>search results</title>
             </head>
             <body>
-                <xsl:if test="$er-browse-mode = 'true' and number(@size) &gt; 100">
-	                <xsl:call-template name="paginationLinks">
-	                    <xsl:with-param name="browse-mode" select="$er-browse-mode"/>
-	                </xsl:call-template>
+                <xsl:if test="contains($request-uri,'biomed-resources') and number(@size) &gt; 100">
+                    <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
                 <dl class="lwSearchResults">
                     <xsl:apply-templates select="//s:result"/>
                 </dl>
                 <xsl:if test="number(@size) &gt; 100">
-                <xsl:call-template name="paginationLinks">
-                    <xsl:with-param name="browse-mode" select="$er-browse-mode"/>
-                </xsl:call-template>
+                    <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
                 <div id="search-content-counts">
                     <!-- empty div causes problems when facets are imported with JS -->
