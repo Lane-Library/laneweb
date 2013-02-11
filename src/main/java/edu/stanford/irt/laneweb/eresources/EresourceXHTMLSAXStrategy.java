@@ -71,7 +71,7 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
     }
     
     private void maybeAppend(StringBuilder sb, String string) {
-        if (string != null && string.length() > 0) {
+        if (string != null && string.length() > 1) {
             sb.append(", ").append(string);
         }
     }
