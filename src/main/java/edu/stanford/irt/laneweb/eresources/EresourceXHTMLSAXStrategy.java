@@ -87,7 +87,7 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                 }
                 sb.append(firstVersion.getDescription());
             }
-            if (sb.length() == 1) {
+            if (sb.length() == 1 && firstLink.getLabel() != null) {
                 sb.append(firstLink.getLabel());
             }
             if (firstLink.getInstruction() != null) {
