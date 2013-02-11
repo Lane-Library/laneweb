@@ -163,9 +163,6 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                 String dates = version.getDates();
                 if (dates != null) {
                     sb.append(", ").append(dates);
-                } else {
-                    // TODO: remove this later, necessary for backwards compatibility
-                    sb.append(", ");
                 }
             } else {
                 String label = link.getLabel();
