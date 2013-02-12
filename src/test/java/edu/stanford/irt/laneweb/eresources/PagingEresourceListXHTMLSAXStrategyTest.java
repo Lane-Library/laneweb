@@ -222,6 +222,18 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
 
     private void recordTail() throws SAXException {
         this.xmlConsumer.endElement(XHTML_NS, DL, DL);
+        expect(this.list.size()).andReturn(0);
+        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
+        this.xmlConsumer.characters(aryEq("Displaying all 0 matches".toCharArray()), eq(0), eq(24));
+        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
+        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
+        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
+        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
+        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
+        this.xmlConsumer.characters(aryEq(" ".toCharArray()), eq(0), eq(1));
+        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endElement(XHTML_NS, BODY, BODY);
         this.xmlConsumer.endElement(XHTML_NS, HTML, HTML);
         this.xmlConsumer.endPrefixMapping("");
