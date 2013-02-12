@@ -233,7 +233,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq(" ".toCharArray()), eq(0), eq(1));
+        this.xmlConsumer.characters(aryEq("\u00A0".toCharArray()), eq(0), eq(1));
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endElement(XHTML_NS, BODY, BODY);
         this.xmlConsumer.endElement(XHTML_NS, HTML, HTML);

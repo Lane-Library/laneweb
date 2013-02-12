@@ -83,7 +83,7 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
             atts = new AttributesImpl();
             atts.addAttribute(NO_PREFIX, CLASS, CLASS, CDATA, "yui-u");
-            atts.addAttribute(NO_PREFIX, "stle", "style", CDATA, "text-align:right");
+            atts.addAttribute(NO_PREFIX, "style", "style", CDATA, "text-align:right");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
@@ -91,7 +91,7 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
             atts = new AttributesImpl();
             atts.addAttribute(NO_PREFIX, "id", "id", CDATA, "search-content-counts");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            XMLUtils.data(xmlConsumer, " ");
+            XMLUtils.data(xmlConsumer, "\u00A0");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
             
             
