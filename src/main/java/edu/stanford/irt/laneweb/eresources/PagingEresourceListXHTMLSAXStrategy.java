@@ -77,9 +77,21 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
             atts = new AttributesImpl();
             atts.addAttribute(NO_PREFIX, CLASS, CLASS, CDATA, "yui-u first");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            StringBuilder sb = new StringBuilder("Displaying all ");
-            sb.append(list.size()).append(" matches");
-            XMLUtils.data(xmlConsumer, sb.toString());
+            int size = list.size();
+            StringBuilder sb = new StringBuilder("Displaying ");
+            if (size > length) {
+                sb.append(start + 1).append(" to ").append(start + length).append(" of ");
+                XMLUtils.data(xmlConsumer, sb.toString());
+                atts = new AttributesImpl();
+                atts.addAttribute(NO_PREFIX, "href", "href", CDATA, "?page=all");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
+                XMLUtils.data(xmlConsumer, Integer.toString(size));
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "a");
+                XMLUtils.data(xmlConsumer, " matches");
+            } else {
+                sb.append("all ").append(size).append(" matches");
+                XMLUtils.data(xmlConsumer, sb.toString());
+            }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
             atts = new AttributesImpl();
             atts.addAttribute(NO_PREFIX, CLASS, CLASS, CDATA, "yui-u");
