@@ -87,6 +87,7 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
             atts = new AttributesImpl();
             atts.addAttribute(NO_PREFIX, "id", "id", CDATA, "search-content-counts");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
