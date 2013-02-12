@@ -68,6 +68,7 @@ public class EresourceXHTMLSAXStrategyTest {
         this.xmlConsumer.characters(
                 aryEq(" summary holdings, dates, publisher, description, instruction ".toCharArray()), eq(0), eq(62));
         this.xmlConsumer.startElement(eq(XHTML_NS), eq(DIV), eq(DIV), isA(Attributes.class));
+        expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         this.xmlConsumer.startElement(eq(XHTML_NS), eq(A), eq(A), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("Lane Catalog record".toCharArray()), eq(0), eq(19));

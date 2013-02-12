@@ -36,6 +36,8 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
 
     private static final String PRIMARY_LINK = "primaryLink";
 
+    private static final String SPAN = "span";
+
     private static final String TITLE = "title";
 
     private static final Comparator<Version> VERSION_COMPARATOR = new EresourceVersionComparator();
@@ -67,15 +69,6 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             }
         } catch (SAXException e) {
             throw new LanewebException(e);
-        }
-    }
-    
-    private void maybeAppend(StringBuilder sb, String string) {
-        if (string != null && string.length() > 0) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(string);
         }
     }
 
@@ -134,12 +127,27 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
         atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "moreResults");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         atts = new AttributesImpl();
-        StringBuilder sb = new StringBuilder();
-        sb.append("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=").append(eresource.getRecordId());
-        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-        XMLUtils.data(xmlConsumer, "Lane Catalog record");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+        String recordType = eresource.getRecordType();
+        if ("bib".equals(recordType)) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=").append(eresource.getRecordId());
+            atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
+            XMLUtils.data(xmlConsumer, "Lane Catalog record");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+        } else {
+            atts = new AttributesImpl();
+            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "sourceLink");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
+            if ("auth".equals(recordType)) {
+                XMLUtils.data(xmlConsumer, "Lane Community Info File");
+            } else if ("web".equals(recordType)) {
+                XMLUtils.data(xmlConsumer, "Lane Web Page");
+            } else if ("class".equals(recordType)) {
+                XMLUtils.data(xmlConsumer, "Lane Class");
+            }
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
+        }
         XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
     }
 
@@ -191,5 +199,14 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.data(xmlConsumer, sb.toString());
         }
         XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+    }
+
+    private void maybeAppend(final StringBuilder sb, final String string) {
+        if (string != null && string.length() > 0) {
+            if (sb.length() > 1) {
+                sb.append(", ");
+            }
+            sb.append(string);
+        }
     }
 }
