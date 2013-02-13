@@ -74,7 +74,7 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-core"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-core-xhtml"
         class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-core-xhtml"/>
@@ -90,7 +90,7 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-mesh"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-mesh-xhtml"
         class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-mesh-xhtml"/>
