@@ -20,6 +20,16 @@
         class="edu.stanford.irt.laneweb.eresources.PagingEresourceListSAXStrategy">
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource"/>
     </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-xhtml"
+        class="edu.stanford.irt.laneweb.eresources.PagingEresourceListXHTMLSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.eresources.PagingDataSAXStrategy"/>
+        </constructor-arg>
+    </bean>
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/eresources-count"
         class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
@@ -53,18 +63,9 @@
         scope="prototype">
         <constructor-arg value="er-browse-xhtml"/>
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.eresources.PagingEresourceListXHTMLSAXStrategy">
-                <constructor-arg>
-                    <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
-                </constructor-arg>
-                <constructor-arg>
-                    <bean class="edu.stanford.irt.laneweb.eresources.PagingDataSAXStrategy"/>
-                </constructor-arg>
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-xhtml"/>
     </bean>
-
+    
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-core"
         class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator"
         scope="prototype">
@@ -72,13 +73,29 @@
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
-
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-core"
+        class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator"
+        scope="prototype">
+        <constructor-arg value="er-core-xhtml"/>
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-xhtml"/>
+    </bean>
+    
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-mesh"
         class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-mesh"/>
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-mesh"
+        class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
+        scope="prototype">
+        <constructor-arg value="er-mesh-xhtml"/>
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-xhtml"/>
     </bean>
 
 </beans>

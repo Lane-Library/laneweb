@@ -57,17 +57,15 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="mesh/type/*" type="wildcard">
-                <map:generate type="er-mesh">
+                <map:generate type="er-mesh-xhtml">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="core/type/*" type="wildcard">
-                <map:generate type="er-core">
+                <map:generate type="er-core-xhtml">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
