@@ -65,9 +65,17 @@
 					test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
 					<xsl:choose>
 						<xsl:when test="$browse-mode = 'true'">
+							<xsl:variable name="chooseString">
+								<xsl:choose>
+									<xsl:when test="string-length($alpha) = 1">
+										<xsl:value-of select="concat('Choose ', upper-case($alpha), 'a-', upper-case($alpha), 'z')" />
+									</xsl:when>
+									<xsl:otherwise>Choose A-Z</xsl:otherwise>
+								</xsl:choose>									
+							</xsl:variable>
 							<ul class="plsContainer">
 								<li>
-									<a href="#"><xsl:value-of select="concat('Choose ', upper-case($alpha), 'a-', upper-case($alpha), 'z')" /></a>
+									<a href="#"><xsl:value-of select="$chooseString" /></a>
 								</li>
 								<li class="pagingLabels">
 									<ul>
