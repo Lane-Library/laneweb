@@ -12,7 +12,7 @@ public class PagingEresourceList extends LinkedList<Eresource> {
 
     private PagingData pagingData;
 
-    private LinkedList<PagingLabel> pagingLabels;
+    private List<PagingLabel> pagingLabels;
 
     public PagingEresourceList(final Collection<Eresource> eresources, final PagingData pagingData) {
         super(eresources);

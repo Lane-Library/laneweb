@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
 
-public class PagingData implements Cloneable {
+public class PagingData {
 
     private static final int DEFAULT_PAGE_SIZE = 100;
 
