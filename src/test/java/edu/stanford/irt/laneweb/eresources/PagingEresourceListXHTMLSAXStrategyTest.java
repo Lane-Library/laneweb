@@ -82,6 +82,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(256);
+        expect(this.list.size()).andReturn(0);
         recordHead();
         expect(this.eresource.getDescription()).andReturn(null).times(256);
         expect(this.list.listIterator(0)).andReturn(this.listIterator);
@@ -111,6 +112,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(100);
+        expect(this.list.size()).andReturn(0);
         recordHead();
         expect(this.eresource.getDescription()).andReturn(null).times(100);
         expect(this.list.listIterator(0)).andReturn(this.listIterator);
@@ -139,6 +141,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(100);
         expect(this.pagingData.getLength()).andReturn(100);
+        expect(this.list.size()).andReturn(0);
         recordHead();
         expect(this.eresource.getDescription()).andReturn(null).times(100);
         expect(this.list.listIterator(100)).andReturn(this.listIterator);
@@ -167,6 +170,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(200);
         expect(this.pagingData.getLength()).andReturn(56);
+        expect(this.list.size()).andReturn(0);
         recordHead();
         expect(this.eresource.getDescription()).andReturn(null).times(56);
         expect(this.list.listIterator(200)).andReturn(this.listIterator);
@@ -195,6 +199,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(447);
         expect(this.pagingData.getLength()).andReturn(149);
+        expect(this.list.size()).andReturn(0);
         recordHead();
         expect(this.eresource.getDescription()).andReturn(null).times(149);
         expect(this.list.listIterator(447)).andReturn(this.listIterator);
@@ -243,9 +248,9 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
 //        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
 //        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
 //        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
-        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq("\u00A0".toCharArray()), eq(0), eq(1));
-        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
+//        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
+//        this.xmlConsumer.characters(aryEq("\u00A0".toCharArray()), eq(0), eq(1));
+//        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endElement(XHTML_NS, BODY, BODY);
         this.xmlConsumer.endElement(XHTML_NS, HTML, HTML);
         this.xmlConsumer.endPrefixMapping("");

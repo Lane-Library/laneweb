@@ -48,10 +48,10 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-browse-test"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-browse-xhtml"
         class="edu.stanford.irt.laneweb.eresources.BrowseEresourcesGenerator"
         scope="prototype">
-        <constructor-arg value="er-browse-test"/>
+        <constructor-arg value="er-browse-xhtml"/>
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.eresources.PagingEresourceListXHTMLSAXStrategy">

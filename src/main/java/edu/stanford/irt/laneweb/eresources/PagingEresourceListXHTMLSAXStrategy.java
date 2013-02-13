@@ -41,6 +41,7 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
         PagingData pagingData = list.getPagingData();
         int start = pagingData.getStart();
         int length = pagingData.getLength();
+        int size = list.size();
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping(NO_PREFIX, XHTML_NS);
@@ -52,6 +53,9 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "title");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "head");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "body");
+            if (size > 100) {
+                this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
+            }
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "lwSearchResults");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "dl", atts);
             int i = 0;
@@ -71,12 +75,9 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, DD);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "dl");
-            this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, "id", "id", CDATA, "search-content-counts");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            XMLUtils.data(xmlConsumer, "\u00A0");
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
+            if (size > 100) {
+                this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
+            }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "body");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "html");
             xmlConsumer.endPrefixMapping(NO_PREFIX);
