@@ -35,7 +35,7 @@
 	background-color: transparent;
 }
 
-#laneNav ul,#favorites ul {
+#laneNav ul,#favorites ul, .resourceListPagination ul {
 	display: none;
 	background-color: white;
 	position: absolute;

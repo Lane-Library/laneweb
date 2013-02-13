@@ -195,23 +195,6 @@
 }
 */
 
-/*see all button on ej and search pages------------------------------------------------------------------*/
-#seeAll {
-	background-image: url(/././resources/images/seeall-but-off.gif);
-	border-bottom: none;
-	float: right;
-	height: 26px;
-	position: relative;
-	color: white;
-	font-size: 0;
-	top: -6px;
-	margin: 0 0 -12px 5px;
-	width: 95px;
-}
-
-#seeAll:hover {
-	background-image: url(/././resources/images/seeall-but-on.gif);
-}
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /*styles for  big gray gradient tabs*/
 #tabs-2012 {

@@ -1,36 +1,86 @@
 .resourceListPagination {
-    background-color:#F7F3E5;
-    padding:10px 5px 24px;
-    font-size:11px;
+    background-color: #F7F3E5;
+    padding: 10px 5px 24px;
+    font-size: 13px;
 }
-.paginationContainer  {
-    width:100%; 
-    margin-top:-13px;
-    float:right;
+
+.paginationContainer {
+    width: 100%;
+    margin-top: -13px;
+    float: right;
 }
-.resourceListPagination select {
-    border-radius:5px;
-    -webkit-border-radius:0;
-    background:-moz-linear-gradient(#fff, #f1f1f1);
-    width:130px;
-    font-size:13px;
-    color:#3f3c30;
-    border-color:gray;
-    border:1px solid lightgray;
-    margin:-5px 5px 0px 5px;
-    height:25px;
-    float:right;
-    text-align:center;
-    padding-top:2px;
-    _padding-top:0px;
-    padding-top/* ie 8 */:0px\9
-}
-.resourceListPagination select option {
-    text-align:left;
-    padding-left:10px;
-    color:#1C4B70;
-    background-color:#f1f1f1;
-}
+
 .paginationNumbers {
-    float:right;
+    float: right;
+}
+
+.resourceListPagination ul.plsContainer {
+    display: block;
+    position: relative;
+    width: 100px;
+    float: right;
+    background: white;
+    margin: -6px 0;
+    border-top: 1px solid #dadad9;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-radius: 3px
+}
+
+.plsContainer li {
+    text-align: center;
+}
+
+.plsContainer li.show ul {
+    display: block;
+}
+
+.plsContainer li.pagingLabels ul {
+    text-align: left;
+    width: 350px;
+    left: -251px;
+}
+
+.resourceListPagination li.pagingLabels ul {
+    border-top-left-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+}
+
+.pagingLabels li {
+    float: left;
+    white-space: nowrap;
+    width: 159px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.pagingLabels .plResults {
+    width: 20px;
+    padding-left: 2px;
+    overflow: visible;
+    color: gray;
+}
+
+.pagingLabels .plDash {
+    padding: 0 5px;
+}
+
+#searchResults .pagingLabels a {
+    border-bottom: none;
+    color: #1C4B70;
+}
+
+#searchResults .pagingLabels a:hover {
+    color: #820000;
+    border-bottom: 1px solid #820000;
+}
+
+/*see all button on ej and search pages------------------------------------------------------------------*/
+.seeAll {
+    float: right;
+    position: relative;
+    margin: 0 15px 0 10px;
 }
