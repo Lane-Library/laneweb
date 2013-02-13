@@ -11,6 +11,8 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
+    
+    private static final String ALL = "all";
 
     private String alpha;
 
@@ -28,14 +30,13 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         super.setModel(model);
         this.type = ModelUtil.getString(model, Model.TYPE);
         this.subset = ModelUtil.getString(model, Model.SUBSET);
-        this.alpha = ModelUtil.getString(model, Model.ALPHA);
+        this.alpha = ModelUtil.getString(model, Model.ALPHA, ALL);
+        if (this.alpha.length() == 0) {
+            this.alpha = ALL;
+        }
+        if (!ALL.equals(this.alpha) && this.alpha.length() > 1)
         if (this.alpha != null && this.alpha.length() > 1) {
-            // TODO: probably should not use alpha = null for all
-            if ("all".equals(this.alpha)) {
-                this.alpha = null;
-            } else {
-                this.alpha = this.alpha.substring(0, 1);
-            }
+            this.alpha = this.alpha.substring(0, 1);
         }
     }
 
@@ -62,7 +63,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         Collection<Eresource> list = null;
         if (this.subset == null && this.type == null) {
             list = Collections.emptySet();
-        } else if (this.subset == null && this.alpha == null) {
+        } else if (this.subset == null && ALL.equals(this.alpha)) {
             list = collectionManager.getType(this.type);
         } else if (this.subset == null) {
             list = collectionManager.getType(this.type, this.alpha.charAt(0));

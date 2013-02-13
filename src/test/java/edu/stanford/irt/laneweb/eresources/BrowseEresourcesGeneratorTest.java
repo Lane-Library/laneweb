@@ -38,6 +38,7 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListType() {
+        this.generator.setModel(Collections.<String, Object>emptyMap());
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
@@ -52,7 +53,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=;t=type;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=all;t=type;s=", this.generator.createKey().toString());
         verify(this.collectionManager);
     }
 
@@ -84,7 +85,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=;t=type;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=all;t=type;s=", this.generator.createKey().toString());
         verify(this.collectionManager);
     }
 
