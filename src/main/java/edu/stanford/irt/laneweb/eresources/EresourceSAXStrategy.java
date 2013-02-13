@@ -77,7 +77,8 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
         XMLUtils.endElement(xmlConsumer, NAMESPACE, VERSION);
     }
 
-    private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value) throws SAXException {
+    private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value)
+            throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, name, value);
         }

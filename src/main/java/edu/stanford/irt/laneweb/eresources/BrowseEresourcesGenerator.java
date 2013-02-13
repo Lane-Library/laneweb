@@ -53,7 +53,8 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     protected StringBuilder createKey() {
         return super.createKey().append(";a=").append(null == this.alpha ? "" : this.alpha).append(";t=")
-                .append(null == this.type ? "" : this.type).append(";s=").append(null == this.subset ? "" : this.subset);
+                .append(null == this.type ? "" : this.type).append(";s=")
+                .append(null == this.subset ? "" : this.subset);
     }
 
     @Override
@@ -69,5 +70,14 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
             list = collectionManager.getSubset(this.subset);
         }
         return list;
+    }
+
+    @Override
+    protected PagingData getPagingData(final Collection<Eresource> eresources, final int page) {
+        if (this.alpha == null) {
+            return new PagingData(eresources, page);
+        } else {
+            return new PagingData(eresources, page, "a=" + this.alpha);
+        }
     }
 }

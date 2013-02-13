@@ -22,10 +22,6 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public abstract class AbstractCollectionManager implements CollectionManager {
 
-    protected static final String SEARCH = "search";
-
-    protected static final String SEARCH_TYPE = "search.type";
-
     private static final String BROWSE = "browse";
 
     private static final String BROWSE_ALPHA = "browse.alpha";
@@ -41,6 +37,10 @@ public abstract class AbstractCollectionManager implements CollectionManager {
     private static final String COUNT = "search.count.0";
 
     private static final String COUNT_TYPE_UNION = "search.count.1";
+
+    protected static final String SEARCH = "search";
+
+    protected static final String SEARCH_TYPE = "search.type";
 
     private DataSource dataSource;
 
@@ -178,7 +178,8 @@ public abstract class AbstractCollectionManager implements CollectionManager {
             rs = stmt.executeQuery();
             return parseResultSet(rs, query);
         } catch (SQLException e) {
-            StringBuilder sb = new StringBuilder("sqlKey: ").append(sqlKey).append(", params: ").append(params).append(", query: ").append(query);
+            StringBuilder sb = new StringBuilder("sqlKey: ").append(sqlKey).append(", params: ").append(params)
+                    .append(", query: ").append(query);
             throw new LanewebException(sb.toString(), e);
         } finally {
             JdbcUtils.closeResultSet(rs);

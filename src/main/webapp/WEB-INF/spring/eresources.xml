@@ -58,6 +58,9 @@
                 <constructor-arg>
                     <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
                 </constructor-arg>
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.eresources.PagingDataSAXStrategy"/>
+                </constructor-arg>
             </bean>
         </constructor-arg>
     </bean>

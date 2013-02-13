@@ -19,23 +19,28 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
 
     private static final String DD = "dd";
 
+    private static final String EMPTY_NS = "";
+
     private static final String NO_PREFIX = "";
 
     private static final String UL = "ul";
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
-    private static final String EMPTY_NS = "";
+    private SAXStrategy<PagingData> pagingSaxStrategy;
 
     private SAXStrategy<Eresource> saxStrategy;
 
-    public PagingEresourceListXHTMLSAXStrategy(final SAXStrategy<Eresource> saxStrategy) {
+    public PagingEresourceListXHTMLSAXStrategy(final SAXStrategy<Eresource> saxStrategy,
+            final SAXStrategy<PagingData> pagingSaxStrategy) {
         this.saxStrategy = saxStrategy;
+        this.pagingSaxStrategy = pagingSaxStrategy;
     }
 
     public void toSAX(final PagingEresourceList list, final XMLConsumer xmlConsumer) {
-        int start = list.getStart();
-        int length = list.getLength();
+        PagingData pagingData = list.getPagingData();
+        int start = pagingData.getStart();
+        int length = pagingData.getLength();
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping(NO_PREFIX, XHTML_NS);
@@ -66,47 +71,12 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, DD);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "dl");
-            
-            
+            this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             atts = new AttributesImpl();
-            atts.addAttribute(NO_PREFIX, CLASS, CLASS, CDATA, "results-nav");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            atts = new AttributesImpl();
-            atts.addAttribute(NO_PREFIX, CLASS, CLASS, CDATA, "yui-g");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            atts = new AttributesImpl();
-            atts.addAttribute(NO_PREFIX, CLASS, CLASS, CDATA, "yui-u first");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            int size = list.size();
-            StringBuilder sb = new StringBuilder("Displaying ");
-            if (size > length) {
-                sb.append(start + 1).append(" to ").append(start + length).append(" of ");
-                XMLUtils.data(xmlConsumer, sb.toString());
-                atts = new AttributesImpl();
-                atts.addAttribute(NO_PREFIX, "href", "href", CDATA, "?page=all");
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
-                XMLUtils.data(xmlConsumer, Integer.toString(size));
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "a");
-                XMLUtils.data(xmlConsumer, " matches");
-            } else {
-                sb.append("all ").append(size).append(" matches");
-                XMLUtils.data(xmlConsumer, sb.toString());
-            }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
-            atts = new AttributesImpl();
-            atts.addAttribute(NO_PREFIX, CLASS, CLASS, CDATA, "yui-u");
-            atts.addAttribute(NO_PREFIX, "style", "style", CDATA, "text-align:right");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
-            atts = new AttributesImpl();
-            atts.addAttribute(NO_PREFIX, "id", "id", CDATA, "search-content-counts");
+            atts.addAttribute(EMPTY_NS, "id", "id", CDATA, "search-content-counts");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
             XMLUtils.data(xmlConsumer, "\u00A0");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
-            
-            
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "body");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "html");
             xmlConsumer.endPrefixMapping(NO_PREFIX);

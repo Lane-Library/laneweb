@@ -52,4 +52,9 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
         }
         return collectionManager.getMesh(this.type, this.mesh);
     }
+
+    @Override
+    protected PagingData getPagingData(final Collection<Eresource> eresources, final int page) {
+        return new PagingData(eresources, page, "m=" + this.mesh);
+    }
 }

@@ -28,35 +28,8 @@ public class PagingDataTest {
     }
 
     @Test
-    public void testClone() throws CloneNotSupportedException {
-        PagingData clone = (PagingData) this.data.clone();
-        assertEquals(this.data.getLength(), clone.getLength());
-        assertEquals(this.data.getPage(), clone.getPage());
-        assertEquals(this.data.getPages(), clone.getPages());
-        assertEquals(this.data.getPageSize(), clone.getPageSize());
-        assertEquals(this.data.getSize(), clone.getSize());
-        // etc if desired
-    }
-
-    @Test
-    // TODO: can this be right?
-    public void testGetAllLink() {
-        assertEquals("/foo/barpage=all", this.data.getAllLink());
-    }
-
-    @Test
-    public void testGetDisplayText() {
-        assertEquals("Displaying 301 to 351 of ", this.data.getDisplayText());
-    }
-
-    @Test
     public void testGetLength() {
         assertEquals(51, this.data.getLength());
-    }
-
-    @Test
-    public void testGetNoPageQuery() {
-        assertEquals("/foo/bar", this.data.getNoPageQuery());
     }
 
     @Test

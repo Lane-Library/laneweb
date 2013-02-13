@@ -1,11 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class PagingData implements Cloneable {
 
@@ -13,11 +8,7 @@ public class PagingData implements Cloneable {
 
     private static final int MAX_PAGE_COUNT = 4;
 
-    private String allLink;
-
     private String baseQuery = "";
-
-    private String displayText;
 
     private int length;
 
@@ -27,11 +18,13 @@ public class PagingData implements Cloneable {
 
     private int pageSize;
 
-    private List<String> pagingLinks;
-
     private int size;
 
     private int start;
+
+    public PagingData(final Collection<? extends Object> resources, final int page) {
+        this(resources, page, "");
+    }
 
     public PagingData(final Collection<? extends Object> resources, final int page, final String baseQuery) {
         if (page >= MAX_PAGE_COUNT) {
@@ -52,52 +45,14 @@ public class PagingData implements Cloneable {
         }
         this.pages = this.size / this.pageSize;
         this.pages = this.size % this.pageSize != 0 ? this.pages + 1 : this.pages;
-        StringBuilder sb = new StringBuilder("Displaying ");
-        if (this.size <= this.length) {
-            sb.append("all ").append(this.size).append(" matches.");
-            this.pagingLinks = Collections.emptyList();
-        } else {
-            sb.append(this.start + 1).append(" to ").append(this.start + this.length).append(" of ");
-            this.pagingLinks = new LinkedList<String>();
-            for (int i = 1; i <= this.pages; i++) {
-                if (i - 1 == this.page) {
-                    this.pagingLinks.add("");
-                } else {
-                    this.pagingLinks.add(this.baseQuery + "page=" + i);
-                }
-            }
-            this.allLink = this.baseQuery + "page=all";
-        }
-        this.displayText = sb.toString();
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        try {
-            Object clone = super.clone();
-            List<String> links = new LinkedList<String>();
-            links.addAll(this.pagingLinks);
-            ((PagingData) clone).pagingLinks = links;
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new LanewebException(e);
-        }
-    }
-
-    public String getAllLink() {
-        return this.allLink;
-    }
-
-    public String getDisplayText() {
-        return this.displayText;
+    public String getBaseQuery() {
+        return this.baseQuery;
     }
 
     public int getLength() {
         return this.length;
-    }
-
-    public String getNoPageQuery() {
-        return this.baseQuery;
     }
 
     public int getPage() {

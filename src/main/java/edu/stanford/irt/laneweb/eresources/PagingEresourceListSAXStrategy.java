@@ -37,8 +37,9 @@ public class PagingEresourceListSAXStrategy implements SAXStrategy<PagingEresour
     }
 
     public void toSAX(final PagingEresourceList list, final XMLConsumer xmlConsumer) {
-        int start = list.getStart();
-        int length = list.getLength();
+        PagingData pagingData = list.getPagingData();
+        int start = pagingData.getStart();
+        int length = pagingData.getLength();
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", NAMESPACE);
@@ -46,8 +47,8 @@ public class PagingEresourceListSAXStrategy implements SAXStrategy<PagingEresour
             atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(list.size()));
             atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(start));
             atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(length));
-            atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(list.getPage()));
-            atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(list.getPages()));
+            atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(pagingData.getPage()));
+            atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(pagingData.getPages()));
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCES, atts);
             for (ListIterator<PagingLabel> it = list.getPagingLabels().listIterator(); it.hasNext();) {
                 PagingLabel pagingLabel = it.next();

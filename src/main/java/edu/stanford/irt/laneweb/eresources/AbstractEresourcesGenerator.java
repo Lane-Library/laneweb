@@ -86,8 +86,14 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        this.saxStrategy.toSAX(new PagingEresourceList(getEresourceList(this.collectionManager), this.page), xmlConsumer);
+        Collection<Eresource> eresources = getEresourceList(this.collectionManager);
+        PagingData pagingData = getPagingData(eresources, this.page);
+        this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData), xmlConsumer);
     }
 
     protected abstract Collection<Eresource> getEresourceList(CollectionManager collectionManager);
+
+    protected PagingData getPagingData(final Collection<Eresource> eresources, final int page) {
+        return new PagingData(eresources, page);
+    }
 }

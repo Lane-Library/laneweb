@@ -19,8 +19,8 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
 
     private static final Pattern CLOSED_DATE_PATTERN = Pattern.compile("(\\d{4})\\-(\\d{4})\\.");
 
-    private static final List<String> FAVORED_PUBLISHERS = Arrays.asList("sciencedirect", "wiley", "springer", "highwire", "ovid",
-            "nature", "liebert", "informaworld", "karger", "pubmed central");
+    private static final List<String> FAVORED_PUBLISHERS = Arrays.asList("sciencedirect", "wiley", "springer",
+            "highwire", "ovid", "nature", "liebert", "informaworld", "karger", "pubmed central");
 
     private static final Pattern OPEN_DATE_PATTERN = Pattern.compile(".*(\\d{4})\\-");
 
