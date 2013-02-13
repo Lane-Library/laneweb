@@ -15,7 +15,6 @@ public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener 
 
     public void exception(final Exception e) {
         this.log.error(this.model.toString(), e);
-        throw new edu.stanford.irt.laneweb.LanewebException(this.model.toString(), e);
     }
 
     public void setModel(final Map<String, Object> model) {
