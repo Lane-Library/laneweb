@@ -130,13 +130,15 @@
                                 <xsl:apply-templates select="s:contentId"/>
                                 <br />
                                 <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                                    <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/>  </a> &#187;
+                                    <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/>  </a>
+                                    <xsl:text> &#187;</xsl:text>
                                 </xsl:if>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:choose>
                                     <xsl:when test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                                        <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/>  </a> &#187;
+                                        <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/>  </a>
+                                        <xsl:text> &#187;</xsl:text>
                                         <xsl:if test="$emrid and $resourceName = 'UpToDate'"> <span class="utdCMEnote"> &#8592; Use this link for CME</span></xsl:if>
                                     </xsl:when>
                                     <xsl:when test="$moreResultsLimit &gt;= number(s:resourceHits)">
