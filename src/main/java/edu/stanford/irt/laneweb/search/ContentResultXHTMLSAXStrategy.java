@@ -74,11 +74,11 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                     sb.append(pubDate);
                 }
                 String pubVolume = contentResult.getPublicationVolume();
-                if (pubVolume != null) {
+                if (pubVolume != null && pubVolume.length() > 0) {
                     sb.append(';').append(pubVolume);
                 }
                 String pubIssue = contentResult.getPublicationIssue();
-                if (pubIssue != null) {
+                if (pubIssue != null && pubIssue.length() > 0) {
                     sb.append('(').append(pubIssue).append(')');
                 }
                 //TODO: pages not used in xsl
@@ -121,7 +121,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                     atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, resourceResult.getURL());
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                     sb.setLength(0);
-                    sb.append("All results from ").append(resourceName).append("  ");
+                    sb.append("All results from ").append(resourceName);
                     XMLUtils.data(xmlConsumer, sb.toString());
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                     XMLUtils.data(xmlConsumer, " \u00BB");
@@ -131,7 +131,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, resourceResult.getURL());
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                 sb.setLength(0);
-                sb.append("All results from").append(resourceName).append("  ");
+                sb.append("All results from").append(resourceName);
                 XMLUtils.data(xmlConsumer, sb.toString());
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                 XMLUtils.data(xmlConsumer, " \u00BB");
