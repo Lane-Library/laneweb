@@ -1,19 +1,14 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.Result;
 
-public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultSet>, Resource {
+public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultSet> {
 
     private static final String CDATA = "CDATA";
 
@@ -23,17 +18,11 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
 
     private static final int DEFAULT_PAGE_SIZE = 100;
 
-    private static final String LENGTH = "length";
+    private static final String EMPTY_NS = "";
 
     private static final int MAX_PAGE_COUNT = 4;
 
     private static final String NO_PREFIX = "";
-
-    private static final String PAGE = "page";
-
-    private static final String PAGES = "pages";
-
-    private static final String START = "start";
 
     private static final String UL = "ul";
 
@@ -49,7 +38,7 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
         int page = results.getPage();
         try {
             xmlConsumer.startDocument();
-            xmlConsumer.startPrefixMapping(NO_PREFIX, NAMESPACE);
+            xmlConsumer.startPrefixMapping(NO_PREFIX, XHTML_NS);
             int size = results.size();
             int pageSize = size / MAX_PAGE_COUNT;
             pageSize = size % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
@@ -64,40 +53,18 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
             }
             int pages = size / pageSize;
             pages = size % pageSize != 0 ? pages + 1 : pages;
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "html");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "head");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "title");
+            XMLUtils.data(xmlConsumer, "search results");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "title");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "head");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "body");
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(size));
-            atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(start));
-            atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(length));
-            atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(page));
-            atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(pages));
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCES, atts);
-            String query = results.getQuery();
-            if (query != null) {
-                XMLUtils.startElement(xmlConsumer, NAMESPACE, QUERY);
-                XMLUtils.data(xmlConsumer, query);
-                XMLUtils.endElement(xmlConsumer, NAMESPACE, QUERY);
-            }
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
-            Set<String> countedResources = new HashSet<String>();
-            for (SearchResult resource : results) {
-                if (resource instanceof ContentResultSearchResult) {
-                    Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
-                    String id = resourceResult.getId();
-                    if (null != id && !countedResources.contains(id)) {
-                        countedResources.add(id);
-                        atts = new AttributesImpl();
-                        atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, CDATA, id);
-                        atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, CDATA, resourceResult.getHits());
-                        atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, CDATA, resourceResult.getURL());
-                        XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCE, atts);
-                        XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCE);
-                    }
-                }
-            }
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
+            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "lwSearchResults");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "dl", atts);
             int i = 0;
             int j = start + length;
-            xmlConsumer.startPrefixMapping(NO_PREFIX, XHTML_NS);
             for (SearchResult result : results) {
                 if (i >= start && i < j) {
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, DD);
@@ -106,9 +73,7 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, sb.toString());
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
-                    xmlConsumer.startPrefixMapping(NO_PREFIX, NAMESPACE);
                     this.saxStrategy.toSAX(result, xmlConsumer);
-                    xmlConsumer.endPrefixMapping(NO_PREFIX);
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, DD);
                 } else if (i == j) {
@@ -116,8 +81,9 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
                 }
                 i++;
             }
-            xmlConsumer.endPrefixMapping(NO_PREFIX);
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCES);
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "dl");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "body");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "html");
             xmlConsumer.endPrefixMapping(NO_PREFIX);
             xmlConsumer.endDocument();
         } catch (SAXException e) {

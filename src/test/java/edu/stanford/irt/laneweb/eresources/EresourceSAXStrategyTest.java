@@ -53,8 +53,8 @@ public class EresourceSAXStrategyTest {
     public void testToSAX() throws SAXException {
         expect(this.eresource.getScore()).andReturn(1);
         Capture<Attributes> attributesCapture1 = new Capture<Attributes>();
-        this.xmlConsumer
-                .startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT), capture(attributesCapture1));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT),
+                capture(attributesCapture1));
         expect(this.eresource.getId()).andReturn(2);
         recordElement(Resource.ID, 2);
         expect(this.eresource.getRecordId()).andReturn(3);
@@ -71,9 +71,11 @@ public class EresourceSAXStrategyTest {
         // eq(0), eq(11));
         // this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION,
         // Resource.DESCRIPTION);
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.VERSIONS), eq(Resource.VERSIONS), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.VERSIONS), eq(Resource.VERSIONS),
+                isA(Attributes.class));
         expect(this.eresource.getVersions()).andReturn(Collections.singleton(this.version));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.VERSION), eq(Resource.VERSION), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.VERSION), eq(Resource.VERSION),
+                isA(Attributes.class));
         expect(this.version.getSummaryHoldings()).andReturn(Resource.SUMMARY_HOLDINGS).times(3);
         recordElement(Resource.SUMMARY_HOLDINGS);
         expect(this.version.getDates()).andReturn(Resource.DATES).atLeastOnce();
@@ -82,10 +84,13 @@ public class EresourceSAXStrategyTest {
         recordElement(Resource.PUBLISHER);
         expect(this.version.getDescription()).andReturn(Resource.DESCRIPTION).atLeastOnce();
         recordElement(Resource.DESCRIPTION);
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINKS), eq(Resource.LINKS), isA(Attributes.class));
-        expect(this.version.getLinks()).andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link })).atLeastOnce();
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINKS), eq(Resource.LINKS),
+                isA(Attributes.class));
+        expect(this.version.getLinks()).andReturn(
+                Arrays.asList(new Link[] { this.link, this.link, this.link, this.link })).atLeastOnce();
         Capture<Attributes> attributesCapture2 = new Capture<Attributes>();
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK), capture(attributesCapture2));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK),
+                capture(attributesCapture2));
         expect(this.link.getLabel()).andReturn(Resource.LABEL).times(3);
         recordElement(Resource.LABEL);
         expect(this.link.getUrl()).andReturn(Resource.URL).atLeastOnce();
@@ -95,18 +100,21 @@ public class EresourceSAXStrategyTest {
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.LINK, Resource.LINK);
         expectLastCall().times(4);
         Capture<Attributes> attributesCapture3 = new Capture<Attributes>();
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK), capture(attributesCapture3));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK),
+                capture(attributesCapture3));
         expect(this.link.getLabel()).andReturn("get password");
         recordElement(Resource.LABEL, "get password");
         recordElement(Resource.URL);
         recordElement(Resource.INSTRUCTION);
         Capture<Attributes> attributesCapture4 = new Capture<Attributes>();
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK), capture(attributesCapture4));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK),
+                capture(attributesCapture4));
         expect(this.link.getLabel()).andReturn("impact factor");
         recordElement(Resource.LABEL, "impact factor");
         recordElement(Resource.URL);
         recordElement(Resource.INSTRUCTION);
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK),
+                isA(Attributes.class));
         expect(this.link.getLabel()).andReturn(null);
         recordElement(Resource.URL);
         recordElement(Resource.INSTRUCTION);
@@ -127,7 +135,8 @@ public class EresourceSAXStrategyTest {
     @Test
     public void testToSAXThrowsException() throws SAXException {
         expect(this.eresource.getScore()).andReturn(1);
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT),
+                isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.xmlConsumer, this.eresource);
         try {

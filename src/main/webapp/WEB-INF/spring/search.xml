@@ -27,6 +27,20 @@
         </constructor-arg>
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-xhtml"
+        class="edu.stanford.irt.laneweb.search.PagingSearchResultSetXHTMLSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.MergedSearchSAXStrategy">
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.search.ContentResultXHTMLSAXStrategy"/>
+                </constructor-arg>
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+    
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
         class="edu.stanford.irt.laneweb.search.ResultSAXStrategy"/>
     

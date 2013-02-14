@@ -22,7 +22,7 @@ public class PagingEresourceListTest {
     private Eresource[] eresourceArray = new Eresource[256];
 
     private Collection<Eresource> eresources;
-    
+
     private PagingData pagingData;
 
     @SuppressWarnings("unchecked")
@@ -32,15 +32,6 @@ public class PagingEresourceListTest {
         this.eresource = createMock(Eresource.class);
         this.pagingData = createMock(PagingData.class);
         Arrays.fill(this.eresourceArray, this.eresource);
-    }
-
-    @Test
-    public void testPagingEresourceList256() throws SAXException {
-        expect(this.eresources.toArray()).andReturn(this.eresourceArray);
-        replay(this.eresources, this.eresource, this.pagingData);
-        PagingEresourceList list = new PagingEresourceList(this.eresources, this.pagingData);
-        assertEquals(256, list.size());
-        verify(this.eresources, this.eresource, this.pagingData);
     }
 
     @Test
@@ -61,6 +52,15 @@ public class PagingEresourceListTest {
             assertEquals("er title", pagingLabel.getStart());
             assertEquals("er title", pagingLabel.getEnd());
         }
+        verify(this.eresources, this.eresource, this.pagingData);
+    }
+
+    @Test
+    public void testPagingEresourceList256() throws SAXException {
+        expect(this.eresources.toArray()).andReturn(this.eresourceArray);
+        replay(this.eresources, this.eresource, this.pagingData);
+        PagingEresourceList list = new PagingEresourceList(this.eresources, this.pagingData);
+        assertEquals(256, list.size());
         verify(this.eresources, this.eresource, this.pagingData);
     }
 }

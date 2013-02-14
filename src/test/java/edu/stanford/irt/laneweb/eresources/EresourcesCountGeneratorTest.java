@@ -47,12 +47,16 @@ public class EresourcesCountGeneratorTest {
                 Collections.singletonMap("type", Integer.valueOf(1)));
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://apache.org/cocoon/SQL/2.0");
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"),
+                isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("type".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"),
+                isA(Attributes.class));
         this.xmlConsumer.characters(aryEq(new char[] { '1' }), eq(0), eq(1));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"));
@@ -69,12 +73,16 @@ public class EresourcesCountGeneratorTest {
     public void testDoGenerateEmptyQuery() throws SAXException {
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://apache.org/cocoon/SQL/2.0");
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"),
+                isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("type".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"),
+                isA(Attributes.class));
         this.xmlConsumer.characters(aryEq(new char[] { '0' }), eq(0), eq(1));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"));
@@ -91,12 +99,16 @@ public class EresourcesCountGeneratorTest {
     public void testDoGenerateNullQuery() throws SAXException {
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://apache.org/cocoon/SQL/2.0");
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"),
+                isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("type".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"));
-        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"),
+                isA(Attributes.class));
         this.xmlConsumer.characters(aryEq(new char[] { '0' }), eq(0), eq(1));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"));
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"));

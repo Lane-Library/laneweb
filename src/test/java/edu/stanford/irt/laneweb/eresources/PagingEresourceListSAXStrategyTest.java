@@ -37,6 +37,8 @@ public class PagingEresourceListSAXStrategyTest {
 
     private ListIterator<Eresource> listIterator;
 
+    private PagingData pagingData;
+
     private PagingLabel pagingLabel;
 
     private List<PagingLabel> pagingLabels;
@@ -46,8 +48,6 @@ public class PagingEresourceListSAXStrategyTest {
     private PagingEresourceListSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
-    
-    private PagingData pagingData;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -90,16 +90,16 @@ public class PagingEresourceListSAXStrategyTest {
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("0", atts.getValue().getValue("start"));
         assertEquals("256", atts.getValue().getValue("length"));
         assertEquals("-1", atts.getValue().getValue("page"));
         assertEquals("3", atts.getValue().getValue("pages"));
-        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
     }
 
     @Test
@@ -142,8 +142,8 @@ public class PagingEresourceListSAXStrategyTest {
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("0", atts.getValue().getValue("start"));
@@ -159,8 +159,8 @@ public class PagingEresourceListSAXStrategyTest {
                 assertEquals("100", pagingLabelAtts.get(i).getValue().getValue("results"));
             }
         }
-        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
     }
 
     @Test
@@ -203,8 +203,8 @@ public class PagingEresourceListSAXStrategyTest {
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("100", atts.getValue().getValue("start"));
@@ -220,8 +220,8 @@ public class PagingEresourceListSAXStrategyTest {
                 assertEquals("100", pagingLabelAtts.get(i).getValue().getValue("results"));
             }
         }
-        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
     }
 
     @Test
@@ -264,8 +264,8 @@ public class PagingEresourceListSAXStrategyTest {
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("200", atts.getValue().getValue("start"));
@@ -281,8 +281,8 @@ public class PagingEresourceListSAXStrategyTest {
                 assertEquals("100", pagingLabelAtts.get(i).getValue().getValue("results"));
             }
         }
-        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
     }
 
     @Test
@@ -321,8 +321,8 @@ public class PagingEresourceListSAXStrategyTest {
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        replay(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals("596", atts.getValue().getValue("size"));
         assertEquals("447", atts.getValue().getValue("start"));
@@ -334,7 +334,7 @@ public class PagingEresourceListSAXStrategyTest {
             assertEquals("end title", pagingLabelAtts.get(i).getValue().getValue("end"));
             assertEquals("149", pagingLabelAtts.get(i).getValue().getValue("results"));
         }
-        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator,
-                this.pagingData, this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
+        verify(this.xmlConsumer, this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData,
+                this.pagingLabel, this.pagingLabels, this.pagingLabelsIterator);
     }
 }

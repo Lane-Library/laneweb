@@ -61,7 +61,8 @@ public class AbstractEresourcesGeneratorTest {
         this.eresourceList = Collections.singleton(this.eresource);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.generator = new TestAbstractEresourcesGenerator(this.collectionManager, this.saxStrategy, this.eresourceList);
+        this.generator = new TestAbstractEresourcesGenerator(this.collectionManager, this.saxStrategy,
+                this.eresourceList);
     }
 
     @Test
