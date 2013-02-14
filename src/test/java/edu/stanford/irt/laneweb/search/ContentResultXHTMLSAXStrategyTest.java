@@ -55,8 +55,36 @@ public class ContentResultXHTMLSAXStrategyTest {
 		this.strategy.toSAX(this.result, this.xmlConsumer);
 		XMLUtils.endElement(xmlConsumer, "", "test");
 		this.xmlConsumer.endDocument();
-		System.out.println(this.xmlConsumer.getStringValue());
 		assertEquals(this.xmlConsumer.getExpectedResult(this, "ContentResultXHTMLSAXStrategyTest-testToSAX.xml"), this.xmlConsumer.getStringValue());
+		verify(this.result, this.contentResult, this.resourceResult);
+	}
+
+	@Test
+	public void testToSAXPubMed() throws SAXException, IOException {
+		expect(this.result.getContentResult()).andReturn(this.contentResult);
+		expect(this.result.getResourceResult()).andReturn(this.resourceResult);
+		expect(this.resourceResult.getDescription()).andReturn("PubMed");
+		expect(this.resourceResult.getHits()).andReturn("20");
+		expect(this.contentResult.getURL()).andReturn("url");
+		expect(this.contentResult.getTitle()).andReturn("title");
+		expect(this.contentResult.getAuthor()).andReturn("author");
+		expect(this.contentResult.getPublicationTitle()).andReturn("title");
+		expect(this.contentResult.getPublicationDate()).andReturn("date");
+		expect(this.contentResult.getPublicationVolume()).andReturn("volume");
+		expect(this.contentResult.getPublicationIssue()).andReturn("issue");
+		expect(this.contentResult.getPages()).andReturn("pages");
+		expect(this.contentResult.getContentId()).andReturn("id");
+//		expect(this.resourceResult.getURL()).andReturn("url");
+		expect(this.contentResult.getDescription()).andReturn("description");
+		replay(this.result, this.contentResult, this.resourceResult);
+		
+		this.xmlConsumer.startDocument();
+		XMLUtils.startElement(this.xmlConsumer, "", "test");
+		this.strategy.toSAX(this.result, this.xmlConsumer);
+		XMLUtils.endElement(xmlConsumer, "", "test");
+		this.xmlConsumer.endDocument();
+//		System.out.println(this.xmlConsumer.getStringValue());
+		assertEquals(this.xmlConsumer.getExpectedResult(this, "ContentResultXHTMLSAXStrategyTest-testToSAXPubMed.xml"), this.xmlConsumer.getStringValue());
 		verify(this.result, this.contentResult, this.resourceResult);
 	}
 
