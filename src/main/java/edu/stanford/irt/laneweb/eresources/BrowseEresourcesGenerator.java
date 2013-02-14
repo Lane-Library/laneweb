@@ -34,8 +34,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         if (this.alpha.length() == 0) {
             this.alpha = ALL;
         }
-        if (!ALL.equals(this.alpha) && this.alpha.length() > 1)
-        if (this.alpha != null && this.alpha.length() > 1) {
+        if (!ALL.equals(this.alpha) && this.alpha.length() > 1) {
             this.alpha = this.alpha.substring(0, 1);
         }
     }

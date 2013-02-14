@@ -34,6 +34,7 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
         this.saxStrategy = saxStrategy;
     }
 
+    //TODO: use a PagingData object
     public void toSAX(final PagingSearchResultSet results, final XMLConsumer xmlConsumer) {
         int page = results.getPage();
         try {
@@ -51,8 +52,8 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
                 start = page * pageSize;
                 length = size - start < pageSize ? size - start : pageSize;
             }
-            int pages = size / pageSize;
-            pages = size % pageSize != 0 ? pages + 1 : pages;
+//            int pages = size / pageSize;
+//            pages = size % pageSize != 0 ? pages + 1 : pages;
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "html");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "head");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "title");

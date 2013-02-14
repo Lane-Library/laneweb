@@ -32,6 +32,10 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
+	private static final String PUBMED = "PubMed";
+	
+	private static final int MORE_RESULTS_LIMIT = 10;
+
     @Override
     public void toSAX(final ContentResultSearchResult result, final XMLConsumer xmlConsumer) {
         ContentResult contentResult = result.getContentResult();
@@ -40,8 +44,8 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
             XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
             String resourceName = resourceResult.getDescription();
             int resourceHits = Integer.parseInt(resourceResult.getHits());
-            if (resourceName.indexOf("PubMed") == 0) {
-                resourceName = "PubMed";
+            if (resourceName.indexOf(PUBMED) == 0) {
+                resourceName = PUBMED;
             }
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "primaryLink");
@@ -79,7 +83,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                     sb.append(':').append(pages).append('.');
                 }
                 XMLUtils.data(xmlConsumer, sb.toString());
-                if (resourceName.equals("PubMed") && resourceHits <= 10) {
+                if (resourceName.equals(PUBMED) && resourceHits <= MORE_RESULTS_LIMIT) {
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "sourceLink");
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
@@ -108,7 +112,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 }
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, BR);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, BR);
-                if (!"PubMed".equals(resourceName) && resourceHits > 10) {
+                if (!PUBMED.equals(resourceName) && resourceHits > MORE_RESULTS_LIMIT) {
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, resourceResult.getURL());
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
@@ -118,7 +122,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                     XMLUtils.data(xmlConsumer, " \u00BB");
                 }
-            } else if (!"PubMed".equals(resourceName) && resourceHits > 10) {
+            } else if (!PUBMED.equals(resourceName) && resourceHits > MORE_RESULTS_LIMIT) {
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, resourceResult.getURL());
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
@@ -128,7 +132,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                 XMLUtils.data(xmlConsumer, " \u00BB");
                 // TODO: emrid link for uptodate here . . . .
-            } else if (resourceHits <= 10) {
+            } else if (resourceHits <= MORE_RESULTS_LIMIT) {
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "sourceLink");
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);

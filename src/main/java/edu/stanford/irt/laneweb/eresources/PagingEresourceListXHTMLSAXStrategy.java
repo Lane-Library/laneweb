@@ -19,6 +19,8 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
 
     private static final String DD = "dd";
 
+    private static final int DEFAULT_PAGE_SIZE = 100;
+
     private static final String EMPTY_NS = "";
 
     private static final String NO_PREFIX = "";
@@ -53,7 +55,7 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "title");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "head");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "body");
-            if (size > 100) {
+            if (size > DEFAULT_PAGE_SIZE) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "lwSearchResults");
@@ -75,7 +77,7 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, DD);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "dl");
-            if (size > 100) {
+            if (size > DEFAULT_PAGE_SIZE) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "body");
