@@ -4,7 +4,9 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import org.junit.Before;
@@ -39,7 +41,7 @@ public class EresourceXHTMLSAXStrategyTest {
     }
 
     @Test
-    public void testToSAX() throws SAXException {
+    public void testToSAX() throws SAXException, IOException {
         expect(this.eresource.getVersions()).andReturn(Collections.singletonList(this.version));
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.version.getLinks()).andReturn(Collections.singletonList(this.link));
@@ -59,6 +61,7 @@ public class EresourceXHTMLSAXStrategyTest {
         this.strategy.toSAX(this.eresource, this.xmlConsumer);
         XMLUtils.endElement(this.xmlConsumer, "", "test");
         this.xmlConsumer.endDocument();
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "EeresourceXHTMLSAXStrategyTest-testToSAX.xml"), this.xmlConsumer.getStringValue());
         System.out.println(this.xmlConsumer.getStringValue());
         verify(this.eresource, this.link, this.version);
     }
