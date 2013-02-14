@@ -97,7 +97,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
                 }
                 String contentId = contentResult.getContentId();
-                if (contentId.indexOf("PMID:") == 0) {
+                if (contentId != null && contentId.indexOf("PMID:") == 0) {
                     String pmid = contentId.substring(5);
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "pmid");
