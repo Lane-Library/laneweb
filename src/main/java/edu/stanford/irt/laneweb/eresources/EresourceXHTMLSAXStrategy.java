@@ -109,12 +109,12 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.data(xmlConsumer, sb.toString());
         }
         if (getPassword != null) {
-            XMLUtils.data(xmlConsumer, " ");
+            String label = getPassword.getLabel();
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, getPassword.getUrl());
-            atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, getPassword.getLabel());
+            atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, label);
             XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-            XMLUtils.data(xmlConsumer, getPassword.getLabel());
+            XMLUtils.data(xmlConsumer, label);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
         }
         for (Link link : remainderLinks) {
