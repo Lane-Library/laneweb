@@ -5,8 +5,10 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
+import edu.stanford.irt.search.ContentResult;
 
 public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultSet> {
 
@@ -71,6 +73,9 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, DD);
                     StringBuilder sb = new StringBuilder("r-");
                     sb.append(start + 1 + i);
+                    if (isHvrTrig(result)) {
+                        sb.append(" hvrTrig");
+                    }
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, sb.toString());
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
@@ -90,5 +95,17 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
+    }
+
+    private boolean isHvrTrig(SearchResult result) {
+        String description = null;
+        if (result instanceof EresourceSearchResult) {
+            Eresource eresource = ((EresourceSearchResult) result).getEresource();
+            description = eresource.getDescription();
+        } else if (result instanceof ContentResultSearchResult) {
+            ContentResult contentResult = ((ContentResultSearchResult) result).getContentResult();
+            description = contentResult.getDescription();
+        }
+        return description != null && description.length() > 0;
     }
 }

@@ -54,11 +54,14 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
             XMLUtils.data(xmlConsumer, contentResult.getTitle());
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
             // TODO: pubAuthor conditional on search source
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "pubAuthor");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            XMLUtils.data(xmlConsumer, contentResult.getAuthor());
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+            String author = contentResult.getAuthor();
+            if (author != null) {
+                atts = new AttributesImpl();
+                atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "pubAuthor");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+                XMLUtils.data(xmlConsumer, author);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+            }
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "pubTitle");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
@@ -78,12 +81,13 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 if (pubIssue != null) {
                     sb.append('(').append(pubIssue).append(')');
                 }
-                String pages = contentResult.getPages();
-                if (pages != null) {
-                    sb.append(':').append(pages).append('.');
-                }
+                //TODO: pages not used in xsl
+//                String pages = contentResult.getPages();
+//                if (pages != null) {
+//                    sb.append(':').append(pages).append('.');
+//                }
                 XMLUtils.data(xmlConsumer, sb.toString());
-                if (resourceName.equals(PUBMED) && resourceHits <= MORE_RESULTS_LIMIT) {
+                if (resourceName.equals(PUBMED) || resourceHits <= MORE_RESULTS_LIMIT) {
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "sourceLink");
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);

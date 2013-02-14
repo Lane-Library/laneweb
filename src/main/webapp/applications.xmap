@@ -65,6 +65,19 @@
                     <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
+                <map:match pattern="search/content/test/*" type="wildcard">
+                    <map:generate type="search-content">
+                        <map:parameter name="engines" value="{1}"/>
+                    </map:generate>
+                    <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="search/content/xhtml/*" type="wildcard">
+                    <map:generate type="search-content-xhtml">
+                        <map:parameter name="engines" value="{1}"/>
+                    </map:generate>
+                    <map:serialize type="xml"/>
+                </map:match>
                 <!-- return raw xml metasearch content results -->
                 <!-- this is used in mobile.xmap -->
                 <map:match pattern="search/content/xml/*" type="wildcard">

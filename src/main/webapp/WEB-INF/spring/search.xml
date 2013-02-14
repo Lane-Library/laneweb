@@ -79,11 +79,25 @@
         <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
     </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search-xhtml"
+        class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-xhtml"/>
+    </bean>
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-content"
         class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
         <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-content-xhtml"
+        class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-xhtml"/>
         <constructor-arg index="2" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
     </bean>
 
