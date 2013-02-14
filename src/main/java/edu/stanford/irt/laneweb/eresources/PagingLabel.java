@@ -8,9 +8,9 @@ public class PagingLabel {
 
     private String start;
 
-    public PagingLabel(final String startTitle, final String endString, final int resultCount) {
+    public PagingLabel(final String startTitle, final String endTitle, final int resultCount) {
         this.start = startTitle;
-        this.end = endString;
+        this.end = endTitle;
         this.results = resultCount;
     }
 
