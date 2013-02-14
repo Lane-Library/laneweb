@@ -113,7 +113,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                     atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, resourceResult.getURL());
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                     sb.setLength(0);
-                    sb.append("All results from").append(resourceName).append("  ");
+                    sb.append("All results from ").append(resourceName).append("  ");
                     XMLUtils.data(xmlConsumer, sb.toString());
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                     XMLUtils.data(xmlConsumer, " \u00BB");
@@ -135,6 +135,8 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 XMLUtils.data(xmlConsumer, resourceName);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
+            
             String description = contentResult.getDescription();
             if (description != null && description.length() > 0) {
                 atts = new AttributesImpl();
@@ -143,7 +145,6 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 XMLUtils.data(xmlConsumer, description);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
