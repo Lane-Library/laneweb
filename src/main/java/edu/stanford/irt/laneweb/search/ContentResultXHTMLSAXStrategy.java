@@ -111,7 +111,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                     XMLUtils.data(xmlConsumer, pmid);
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-                } else {
+                } else if (contentId != null) {
                     XMLUtils.data(xmlConsumer, contentId);
                 }
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, BR);
