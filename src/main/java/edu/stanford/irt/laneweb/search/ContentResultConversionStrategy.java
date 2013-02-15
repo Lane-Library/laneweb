@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -20,9 +20,9 @@ public class ContentResultConversionStrategy {
         this.scoreStrategy = scoreStrategy;
     }
 
-    public Collection<SearchResult> convertResult(final Result result) {
+    public List<SearchResult> convertResult(final Result result) {
         Pattern queryTermPattern = QueryTermPattern.getPattern(result.getQuery().toString());
-        Collection<SearchResult> contentResults = new LinkedList<SearchResult>();
+        List<SearchResult> contentResults = new LinkedList<SearchResult>();
         Map<String, ContentResultSearchResult> resultTitles = new HashMap<String, ContentResultSearchResult>();
         for (Result engine : result.getChildren()) {
             Result parentResource = null;

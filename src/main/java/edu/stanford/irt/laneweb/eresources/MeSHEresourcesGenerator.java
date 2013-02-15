@@ -9,6 +9,7 @@ import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
 

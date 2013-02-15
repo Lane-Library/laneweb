@@ -10,7 +10,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.ContentResult;
 
-public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultSet> {
+public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultSet> {
 
     private static final String CDATA = "CDATA";
 
@@ -32,7 +32,7 @@ public class PagingSearchResultSetXHTMLSAXStrategy implements SAXStrategy<Paging
 
     private SAXStrategy<SearchResult> saxStrategy;
 
-    public PagingSearchResultSetXHTMLSAXStrategy(final SAXStrategy<SearchResult> saxStrategy) {
+    public PagingSearchResultListXHTMLSAXStrategy(final SAXStrategy<SearchResult> saxStrategy) {
         this.saxStrategy = saxStrategy;
     }
 

@@ -1,17 +1,20 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.resource.PagingData;
 
-public abstract class AbstractPagingSearchResultGenerator extends AbstractSearchGenerator<PagingSearchResultSet> {
+public abstract class AbstractPagingSearchResultGenerator extends AbstractSearchGenerator<PagingSearchResultList> {
 
     private int page;
+    private String urlEncodedQuery;
 
-    public AbstractPagingSearchResultGenerator(final SAXStrategy<PagingSearchResultSet> saxStrategy) {
+    public AbstractPagingSearchResultGenerator(final SAXStrategy<PagingSearchResultList> saxStrategy) {
         super(saxStrategy);
     }
 
@@ -24,16 +27,21 @@ public abstract class AbstractPagingSearchResultGenerator extends AbstractSearch
         } catch (NumberFormatException nfe) {
             this.page = 0;
         }
+        this.urlEncodedQuery = ModelUtil.getString(model, Model.URL_ENCODED_QUERY);
     }
 
     @Override
-    protected PagingSearchResultSet doSearch(final String query) {
-        PagingSearchResultSet result = new PagingSearchResultSet(query, this.page);
+    protected PagingSearchResultList doSearch(final String query) {
+        List<SearchResult> results = null;
         if (query != null && !query.isEmpty()) {
-            result.addAll(getSearchResults(query));
+            results = getSearchResults(query);
+            Collections.sort(results);
+        } else {
+            results = Collections.emptyList();
         }
-        return result;
+        PagingData pagingData = new PagingData(results, this.page, "q=" + this.urlEncodedQuery);
+        return new PagingSearchResultList(results, pagingData, query);
     }
 
-    protected abstract Collection<SearchResult> getSearchResults(String query);
+    protected abstract List<SearchResult> getSearchResults(String query);
 }

@@ -23,7 +23,7 @@ public class EresourcesSearchGeneratorTest {
 
     private EresourcesSearchGenerator generator;
 
-    private SAXStrategy<PagingSearchResultSet> saxStrategy;
+    private SAXStrategy<PagingSearchResultList> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -38,7 +38,7 @@ public class EresourcesSearchGeneratorTest {
     public void testGetSearchResults() {
         expect(this.collectionManager.search("query")).andReturn(Collections.<Eresource> singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
-        expect(this.eresource.getScore()).andReturn(0).times(2);
+//        expect(this.eresource.getScore()).andReturn(0).times(2);
         replay(this.collectionManager, this.saxStrategy, this.eresource);
         this.generator.doSearch("query");
         verify(this.collectionManager, this.saxStrategy, this.eresource);
@@ -49,7 +49,7 @@ public class EresourcesSearchGeneratorTest {
         expect(this.collectionManager.searchType("parameterType", "query")).andReturn(
                 Collections.<Eresource> singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
-        expect(this.eresource.getScore()).andReturn(0).times(2);
+//        expect(this.eresource.getScore()).andReturn(0).times(2);
         replay(this.collectionManager, this.saxStrategy, this.eresource);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.TYPE, "modelType"));
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "parameterType"));
@@ -61,7 +61,7 @@ public class EresourcesSearchGeneratorTest {
     public void testGetSearchResultsModelType() {
         expect(this.collectionManager.searchType("type", "query")).andReturn(Collections.<Eresource> singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
-        expect(this.eresource.getScore()).andReturn(0).times(2);
+//        expect(this.eresource.getScore()).andReturn(0).times(2);
         replay(this.collectionManager, this.saxStrategy, this.eresource);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.TYPE, "type"));
         this.generator.setParameters(Collections.<String, String> emptyMap());
@@ -73,7 +73,7 @@ public class EresourcesSearchGeneratorTest {
     public void testGetSearchResultsParametersType() {
         expect(this.collectionManager.searchType("type", "query")).andReturn(Collections.<Eresource> singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
-        expect(this.eresource.getScore()).andReturn(0).times(2);
+//        expect(this.eresource.getScore()).andReturn(0).times(2);
         replay(this.collectionManager, this.saxStrategy, this.eresource);
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
         this.generator.doSearch("query");

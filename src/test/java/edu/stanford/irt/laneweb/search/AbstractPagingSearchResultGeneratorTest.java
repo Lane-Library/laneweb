@@ -3,9 +3,9 @@ package edu.stanford.irt.laneweb.search;
 import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,19 +17,19 @@ public class AbstractPagingSearchResultGeneratorTest {
 
     private static final class TestAbstractPagingSearchResultGenerator extends AbstractPagingSearchResultGenerator {
 
-        public TestAbstractPagingSearchResultGenerator(final SAXStrategy<PagingSearchResultSet> saxStrategy) {
+        public TestAbstractPagingSearchResultGenerator(final SAXStrategy<PagingSearchResultList> saxStrategy) {
             super(saxStrategy);
         }
 
         @Override
-        protected Collection<SearchResult> getSearchResults(final String query) {
+        protected List<SearchResult> getSearchResults(final String query) {
             return new LinkedList<SearchResult>();
         }
     }
 
     private TestAbstractPagingSearchResultGenerator generator;
 
-    private SAXStrategy<PagingSearchResultSet> saxStrategy;;
+    private SAXStrategy<PagingSearchResultList> saxStrategy;;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -50,24 +50,24 @@ public class AbstractPagingSearchResultGeneratorTest {
 
     @Test
     public void testDoSearchString() {
-        assertEquals(0, this.generator.doSearch("query").getPage());
+        assertEquals(0, this.generator.doSearch("query").getPagingData().getPage());
     }
 
     @Test
     public void testDoSearchStringAll() {
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "all"));
-        assertEquals(-1, this.generator.doSearch("query").getPage());
+        assertEquals(-1, this.generator.doSearch("query").getPagingData().getPage());
     }
 
     @Test
     public void testDoSearchStringNFE() {
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "foo"));
-        assertEquals(0, this.generator.doSearch("query").getPage());
+        assertEquals(0, this.generator.doSearch("query").getPagingData().getPage());
     }
 
     @Test
     public void testDoSearchStringPage1() {
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "2"));
-        assertEquals(1, this.generator.doSearch("query").getPage());
+        assertEquals(1, this.generator.doSearch("query").getPagingData().getPage());
     }
 }

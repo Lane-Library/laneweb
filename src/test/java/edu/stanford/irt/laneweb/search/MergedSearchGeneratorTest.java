@@ -37,7 +37,7 @@ public class MergedSearchGeneratorTest {
 
     private SearchResult result;
 
-    private SAXStrategy<PagingSearchResultSet> saxStrategy;
+    private SAXStrategy<PagingSearchResultList> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -62,7 +62,7 @@ public class MergedSearchGeneratorTest {
         expect(this.conversionStrategy.convertResult(null)).andReturn(list);
         expect(this.collectionManager.search("query")).andReturn(Collections.singleton(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
-        expect(this.result.compareTo(this.result)).andReturn(0);
+//        expect(this.result.compareTo(this.result)).andReturn(0);
         expect(this.result.getScore()).andReturn(1);
         expect(this.eresource.getScore()).andReturn(0);
         replay(this.collectionManager, this.conversionStrategy, this.metaSearchManager, this.saxStrategy, this.result,

@@ -5,22 +5,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.resource.PagingList;
 
-public class PagingEresourceList extends LinkedList<Eresource> {
+public class PagingEresourceList extends PagingList<Eresource> {
 
     private static final long serialVersionUID = 1L;
-
-    private PagingData pagingData;
 
     private List<PagingLabel> pagingLabels;
 
     public PagingEresourceList(final Collection<Eresource> eresources, final PagingData pagingData) {
-        super(eresources);
-        this.pagingData = pagingData;
-    }
-
-    public PagingData getPagingData() {
-        return this.pagingData;
+        super(eresources, pagingData);
     }
 
     public List<PagingLabel> getPagingLabels() {
@@ -28,9 +23,10 @@ public class PagingEresourceList extends LinkedList<Eresource> {
             return this.pagingLabels;
         }
         this.pagingLabels = new LinkedList<PagingLabel>();
-        int pages = this.pagingData.getPages();
-        int page = this.pagingData.getPage();
-        int pageSize = this.pagingData.getPageSize();
+        PagingData pagingData = getPagingData();
+        int pages = pagingData.getPages();
+        int page = pagingData.getPage();
+        int pageSize = pagingData.getPageSize();
         int size = this.size();
         for (int i = 0; i < pages && page >= 0; i++) {
             int pageLabelStart;

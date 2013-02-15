@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
@@ -17,7 +18,7 @@ public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerat
 
     private String type;
 
-    public EresourcesSearchGenerator(final CollectionManager collectionManager, final SAXStrategy<PagingSearchResultSet> saxStrategy) {
+    public EresourcesSearchGenerator(final CollectionManager collectionManager, final SAXStrategy<PagingSearchResultList> saxStrategy) {
         super(saxStrategy);
         this.collectionManager = collectionManager;
     }
@@ -35,14 +36,14 @@ public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerat
     }
 
     @Override
-    protected Collection<SearchResult> getSearchResults(final String query) {
+    protected List<SearchResult> getSearchResults(final String query) {
         Collection<Eresource> eresources = null;
         if (this.type == null) {
             eresources = this.collectionManager.search(query);
         } else {
             eresources = this.collectionManager.searchType(this.type, query);
         }
-        Collection<SearchResult> results = new LinkedList<SearchResult>();
+        List<SearchResult> results = new LinkedList<SearchResult>();
         for (Eresource eresource : eresources) {
             results.add(new EresourceSearchResult(eresource));
         }

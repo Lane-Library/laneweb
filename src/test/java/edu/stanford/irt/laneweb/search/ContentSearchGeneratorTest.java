@@ -29,7 +29,7 @@ public class ContentSearchGeneratorTest {
 
     private MetaSearchManager metasearchManager;
 
-    private SAXStrategy<PagingSearchResultSet> saxStrategy;
+    private SAXStrategy<PagingSearchResultList> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before

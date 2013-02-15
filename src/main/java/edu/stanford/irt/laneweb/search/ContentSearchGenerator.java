@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -30,7 +31,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
 
     private String timeout;
 
-    public ContentSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<PagingSearchResultSet> saxStrategy,
+    public ContentSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<PagingSearchResultList> saxStrategy,
             final ContentResultConversionStrategy conversionStrategy) {
         super(saxStrategy);
         this.metasearchManager = metaSearchManager;
@@ -61,7 +62,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
     }
 
     @Override
-    protected Collection<SearchResult> getSearchResults(final String query) {
+    protected List<SearchResult> getSearchResults(final String query) {
         return this.conversionStrategy.convertResult(doMetaSearch(query));
     }
 
