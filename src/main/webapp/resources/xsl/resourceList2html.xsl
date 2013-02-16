@@ -29,7 +29,7 @@
     </xsl:variable>
     
     <xsl:variable name="er-browse-mode">
-        <xsl:if test="contains($request-uri,'biomed-resources') or contains($request-uri, 'eresources')">true</xsl:if>
+        <xsl:if test="contains($request-uri,'biomed-resources')">true</xsl:if>
     </xsl:variable>
     
     

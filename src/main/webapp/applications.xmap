@@ -66,7 +66,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- a couple of pipelines for testing xhtml sax strategies -->
-                <map:match pattern="search/foo/*" type="wildcard">
+                <!--<map:match pattern="search/foo/*" type="wildcard">
                     <map:generate type="search-content">
                         <map:parameter name="engines" value="{1}"/>
                     </map:generate>
@@ -78,7 +78,7 @@
                         <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:serialize type="xml"/>
-                </map:match>
+                </map:match>-->
                 <!-- return raw xml metasearch content results -->
                 <!-- this was used in mobile.xmap -->
                 <map:match pattern="search/content/xml/*" type="wildcard">
