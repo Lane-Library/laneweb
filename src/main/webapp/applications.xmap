@@ -81,16 +81,16 @@
                 </map:match>-->
                 <!-- return raw xml metasearch content results -->
                 <!-- this was used in mobile.xmap -->
-                <map:match pattern="search/content/xml/*" type="wildcard">
+                <!--<map:match pattern="search/content/xml/*" type="wildcard">
                     <map:generate type="search-content">
                         <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
                     <map:serialize type="xml"/>
-                </map:match>
+                </map:match>-->
                 <!-- search/merged/html returns xhtmlized merged metasearch and eresources results -->
-                <!-- this was used in content search/all/all-all.html -->
+                <!-- this is used in content search/all/all-all.html -->
                 <map:match pattern="search/merged/html/*" type="wildcard">
                     <map:generate type="merged-search">
                         <map:parameter name="timeout" value="5000"/>
@@ -102,8 +102,8 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- return raw xml merged metasearch and eresources results -->
-                <!-- this is used in mobile.xmap -->
-                <map:match pattern="search/merged/xml/*" type="wildcard">
+                <!-- this was used in mobile.xmap -->
+                <!--<map:match pattern="search/merged/xml/*" type="wildcard">
                     <map:generate type="merged-search">
                         <map:parameter name="timeout" value="5000"/>
                         <map:parameter name="engines" value="{1}"/>
@@ -111,7 +111,7 @@
                     <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
                     <map:serialize type="xml"/>
-                </map:match>
+                </map:match>-->
                 <!-- search/merged/history/html returns xhtmlized merged metasearch and history eresources results -->
                 <!-- this is used in content search/history/history-all.html -->
                 <map:match pattern="search/merged/history/html/*" type="wildcard">
