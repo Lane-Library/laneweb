@@ -51,13 +51,13 @@
 							<xsl:text> of </xsl:text>
 							<a href="?{$no-page-query-string}page=all">
 								<xsl:value-of select="/s:resources/@size" />
-								matches
+								<xsl:text> matches</xsl:text>
 							</a>
 						</xsl:when>
 						<xsl:otherwise>
-							all
+							<xsl:text> all </xsl:text>
 							<xsl:value-of select="/s:resources/@size" />
-							matches
+							<xsl:text> matches</xsl:text>
 						</xsl:otherwise>
 					</xsl:choose>
 				</div>
