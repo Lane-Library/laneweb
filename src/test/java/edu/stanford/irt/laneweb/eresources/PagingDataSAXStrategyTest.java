@@ -42,11 +42,9 @@ public class PagingDataSAXStrategyTest {
         this.xmlConsumer.startPrefixMapping("fx", "http://lane.stanford.edu/fx");
         this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
         this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("Displaying all 0 matches".toCharArray()), eq(0), eq(24));
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
-        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endPrefixMapping("fx");

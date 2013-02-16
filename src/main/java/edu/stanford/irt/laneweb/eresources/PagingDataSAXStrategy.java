@@ -67,10 +67,6 @@ public class PagingDataSAXStrategy implements SAXStrategy<PagingData> {
                 XMLUtils.data(xmlConsumer, sb.toString());
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "yui-u");
-            atts.addAttribute(EMPTY_NS, STYLE, STYLE, CDATA, "text-align:right");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             if (size > length) {
                 // <a id="seeAll" href="?{$no-page-query-string}page=all">See All</a>
                 atts = new AttributesImpl();
@@ -85,6 +81,9 @@ public class PagingDataSAXStrategy implements SAXStrategy<PagingData> {
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                 XMLUtils.data(xmlConsumer, "See All");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+              atts = new AttributesImpl();
+              atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "paginationNumbers");
+              XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
                 int pages = pagingData.getPages();
                 int page = pagingData.getPage();
                 for (int i = 0; i < pages; i++) {
@@ -109,8 +108,8 @@ public class PagingDataSAXStrategy implements SAXStrategy<PagingData> {
                         XMLUtils.data(xmlConsumer, " | ");
                     }
                 }
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             xmlConsumer.endPrefixMapping("fx");
