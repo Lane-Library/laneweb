@@ -24,11 +24,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
 
     private static final String DD = "dd";
 
-    private static final int DEFAULT_PAGE_SIZE = 100;
-
     private static final String EMPTY_NS = "";
-
-    private static final int MAX_PAGE_COUNT = 4;
 
     private static final String NO_PREFIX = "";
 
@@ -54,7 +50,6 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
         this.saxStrategy = saxStrategy;
     }
 
-    //TODO: use a PagingData object
     public void toSAX(final PagingSearchResultList list, final XMLConsumer xmlConsumer) {
         PagingData pagingData = list.getPagingData();
         int start = pagingData.getStart();
