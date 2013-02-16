@@ -39,6 +39,7 @@ public class PagingDataSAXStrategyTest {
         expect(this.pagingData.getLength()).andReturn(0);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getBaseQuery()).andReturn("");
+        this.xmlConsumer.startPrefixMapping("fx", "http://lane.stanford.edu/fx");
         this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
         this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
         this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
@@ -48,6 +49,7 @@ public class PagingDataSAXStrategyTest {
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
         this.xmlConsumer.endElement(XHTML_NS, "div", "div");
+        this.xmlConsumer.endPrefixMapping("fx");
         replay(this.pagingData, this.xmlConsumer);
         this.strategy.toSAX(this.pagingData, this.xmlConsumer);
         verify(this.pagingData, this.xmlConsumer);

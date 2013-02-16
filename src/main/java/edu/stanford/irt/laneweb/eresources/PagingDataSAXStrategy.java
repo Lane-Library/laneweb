@@ -34,8 +34,9 @@ public class PagingDataSAXStrategy implements SAXStrategy<PagingData> {
             int size = pagingData.getSize();
             int length = pagingData.getLength();
             int start = pagingData.getStart();
+            xmlConsumer.startPrefixMapping("fx", "http://lane.stanford.edu/fx");
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "results-nav");
+            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "resourceListPagination");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "yui-g");
@@ -112,6 +113,7 @@ public class PagingDataSAXStrategy implements SAXStrategy<PagingData> {
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+            xmlConsumer.endPrefixMapping("fx");
         } catch (SAXException e) {
             throw new LanewebException(e);
         }

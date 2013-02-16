@@ -68,6 +68,8 @@ public class PagingSearchResultListXHTMLSAXStrategyTest {
         this.resultStrategy.toSAX(this.result, this.xmlConsumer);
         expectLastCall().times(539);
         expect(this.iterator.hasNext()).andReturn(false);
+        //TODO: pagingData
+        expect(this.list.size()).andReturn(0);
         expect(this.list.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
@@ -89,6 +91,8 @@ public class PagingSearchResultListXHTMLSAXStrategyTest {
         this.resultStrategy.toSAX(this.result, this.xmlConsumer);
         expectLastCall().times(256);
         expect(this.iterator.hasNext()).andReturn(false);
+        //TODO: pagingData
+        expect(this.list.size()).andReturn(0);
         expect(this.list.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
@@ -109,6 +113,8 @@ public class PagingSearchResultListXHTMLSAXStrategyTest {
         this.resultStrategy.toSAX(this.result, this.xmlConsumer);
         expectLastCall().times(100);
         expect(this.iterator.hasNext()).andReturn(false);
+        //TODO: pagingData
+        expect(this.list.size()).andReturn(0);
         expect(this.list.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
@@ -129,6 +135,8 @@ public class PagingSearchResultListXHTMLSAXStrategyTest {
         this.resultStrategy.toSAX(this.result, this.xmlConsumer);
         expectLastCall().times(100);
         expect(this.iterator.hasNext()).andReturn(false);
+        //TODO: pagingData
+        expect(this.list.size()).andReturn(0);
         expect(this.list.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
@@ -149,6 +157,8 @@ public class PagingSearchResultListXHTMLSAXStrategyTest {
         this.resultStrategy.toSAX(this.result, this.xmlConsumer);
         expectLastCall().times(56);
         expect(this.iterator.hasNext()).andReturn(false);
+        //TODO: pagingData
+        expect(this.list.size()).andReturn(0);
         expect(this.list.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(false);
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
@@ -168,6 +178,8 @@ public class PagingSearchResultListXHTMLSAXStrategyTest {
         expect(this.iterator.next()).andReturn(this.result);
         this.resultStrategy.toSAX(this.result, this.xmlConsumer);
         expect(this.iterator.hasNext()).andReturn(false);
+        //TODO: pagingData
+        expect(this.list.size()).andReturn(0);
         expect(this.list.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(true);
         expect(this.iterator.next()).andReturn(this.contentResult);

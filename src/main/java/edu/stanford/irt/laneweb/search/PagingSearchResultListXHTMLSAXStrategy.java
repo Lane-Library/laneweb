@@ -11,6 +11,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.eresources.PagingDataSAXStrategy;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.ContentResult;
@@ -45,6 +46,8 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
     private static final String STYLE = "style";
 
     private SAXStrategy<SearchResult> saxStrategy;
+    
+    private SAXStrategy<PagingData> pagingDataStrategy = new PagingDataSAXStrategy();
 
     public PagingSearchResultListXHTMLSAXStrategy(final SAXStrategy<SearchResult> saxStrategy) {
         this.saxStrategy = saxStrategy;
@@ -84,6 +87,11 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, DD);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "dl");
+            
+            int size = list.size();
+            if (size > 100) {
+            	this.pagingDataStrategy.toSAX(pagingData, xmlConsumer);
+            }
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "search-content-counts");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
