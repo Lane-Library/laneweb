@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.RequestAttributeDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.Result;
@@ -35,19 +31,14 @@ public class MetaSearchController {
     private MetaSearchManager manager;
 
     @Autowired
-    private RequestParameterDataBinder parameterBinder;
+    private CompositeDataBinder dataBinder;
+    
+    public MetaSearchController() {}
 
-    @Autowired
-    private RemoteProxyIPDataBinder proxyBinder;
-
-    @Autowired
-    private BaseProxyURLDataBinder proxyURLBinder;
-
-    @Autowired
-    private RequestAttributeDataBinder requestDataBinder;
-
-    @Autowired
-    private SunetIdAndTicketDataBinder sunetidBinder;
+    public MetaSearchController(final MetaSearchManager manager, final CompositeDataBinder dataBinder) {
+        this.manager = manager;
+        this.dataBinder = dataBinder;
+    }
 
     /**
      * Do a metasearch for a query and return only the requested resources.
@@ -72,29 +63,6 @@ public class MetaSearchController {
             createProxyLinks(resultMap, baseProxyURL);
         }
         return resultMap;
-    }
-
-    /**
-     * puts the q and r request parameters into the model.
-     * 
-     * @param request
-     *            the request
-     * @param model
-     *            the model
-     */
-    @ModelAttribute
-    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.sunetidBinder.bind(model.asMap(), request);
-        this.proxyBinder.bind(model.asMap(), request);
-        this.parameterBinder.bind(model.asMap(), request);
-        this.requestDataBinder.bind(model.asMap(), request);
-        this.proxyURLBinder.bind(model.asMap(), request);
-        if (!model.containsAttribute(Model.PROXY_LINKS)) {
-            model.addAttribute(Model.PROXY_LINKS, Boolean.FALSE);
-        }
-        if (!model.containsAttribute(Model.BASE_PROXY_URL)) {
-            model.addAttribute(Model.BASE_PROXY_URL, null);
-        }
     }
 
     /**
@@ -128,7 +96,7 @@ public class MetaSearchController {
      */
     private Collection<String> getEnginesForResources(final List<String> resources) {
         Collection<String> engines = new LinkedList<String>();
-        Result describeResult = this.manager.describe(new SimpleQuery(""), null);
+        Result describeResult = this.manager.describe(new SimpleQuery(""), resources);
         for (Result engine : describeResult.getChildren()) {
             for (Result resource : engine.getChildren()) {
                 if (resources.contains(resource.getId())) {
@@ -147,8 +115,7 @@ public class MetaSearchController {
      *            the Result to convert
      * @param resources
      *            the resources requested
-     * @return a Map representation of the Result with only the requested
-     *         resources
+     * @return a Map representation of the Result with only the requested resources
      */
     private Map<String, Object> getMapForResult(final Result result, final List<String> resources) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -162,8 +129,8 @@ public class MetaSearchController {
     }
 
     /**
-     * Converts each resource result into a map entry, the key is the id and the
-     * value is another map with status, url and hits if avaliable
+     * Converts each resource result into a map entry, the key is the id and the value is another map with status, url
+     * and hits if avaliable
      * 
      * @param engines
      *            a list of engine results
@@ -171,7 +138,8 @@ public class MetaSearchController {
      *            the resource list
      * @return a map of resource results
      */
-    private Map<String, Map<String, Object>> getResourceResultMap(final Collection<Result> engines, final List<String> resources) {
+    private Map<String, Map<String, Object>> getResourceResultMap(final Collection<Result> engines,
+            final List<String> resources) {
         Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
         for (Result engine : engines) {
             for (Result resource : engine.getChildren()) {
@@ -183,11 +151,30 @@ public class MetaSearchController {
                     resourceMap.put("url", resource.getURL());
                     String hitsString = resource.getHits();
                     if (hitsString != null) {
-                        resourceMap.put("hits", Integer.parseInt(resource.getHits()));
+                        resourceMap.put("hits", Integer.parseInt(hitsString));
                     }
                 }
             }
         }
         return map;
+    }
+
+    /**
+     * puts the q and r request parameters into the model.
+     * 
+     * @param request
+     *            the request
+     * @param model
+     *            the model
+     */
+    @ModelAttribute
+    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.dataBinder.bind(model.asMap(), request);
+        if (!model.containsAttribute(Model.PROXY_LINKS)) {
+            model.addAttribute(Model.PROXY_LINKS, Boolean.FALSE);
+        }
+        if (!model.containsAttribute(Model.BASE_PROXY_URL)) {
+            model.addAttribute(Model.BASE_PROXY_URL, null);
+        }
     }
 }

@@ -11,21 +11,21 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> {
 
+    private static final String A = "a";
+
     private static final String CDATA = "CDATA";
 
     private static final String CLASS = "class";
-    
+
     private static final String DIV = "div";
 
     private static final String EMPTY_NS = "";
 
+    private static final String HREF = "href";
+
+    private static final String ID = "id";
+
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
-
-	private static final String A = "a";
-
-	private static final String ID = "id";
-
-	private static final String HREF = "href";
 
     public void toSAX(final PagingData pagingData, final XMLConsumer xmlConsumer) {
         try {
@@ -79,9 +79,9 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                 XMLUtils.data(xmlConsumer, "See All");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-              atts = new AttributesImpl();
-              atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "paginationNumbers");
-              XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+                atts = new AttributesImpl();
+                atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "paginationNumbers");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
                 int pages = pagingData.getPages();
                 int page = pagingData.getPage();
                 for (int i = 0; i < pages; i++) {
