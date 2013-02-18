@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.classes;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
- 
+
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.search;
 
 import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.createMock;
@@ -16,19 +16,19 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.resource.PagingData;
 
-public class PagingDataSAXStrategyTest {
+public class SearchListPagingDataSAXStrategyTest {
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     private PagingData pagingData;
 
-    private PagingDataSAXStrategy strategy;
+    private SearchListPagingDataSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.strategy = new PagingDataSAXStrategy();
+        this.strategy = new SearchListPagingDataSAXStrategy();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.pagingData = createMock(PagingData.class);
     }

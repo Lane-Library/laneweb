@@ -36,27 +36,6 @@ public class PagingEresourceListTest {
     }
 
     @Test
-    public void testGetPagingLabels256() throws SAXException {
-        expect(this.eresources.toArray()).andReturn(this.eresourceArray);
-        expect(this.pagingData.getPages()).andReturn(3);
-        expect(this.pagingData.getPage()).andReturn(0);
-        expect(this.pagingData.getPageSize()).andReturn(100);
-        expect(this.eresource.getTitle()).andReturn("er title").times(6);
-        replay(this.eresources, this.eresource, this.pagingData);
-        PagingEresourceList list = new PagingEresourceList(this.eresources, this.pagingData);
-        assertEquals(256, list.size());
-        assertEquals(3, list.getPagingLabels().size());
-        assertEquals(100, list.getPagingLabels().get(0).getResults());
-        assertEquals(100, list.getPagingLabels().get(1).getResults());
-        assertEquals(56, list.getPagingLabels().get(2).getResults());
-        for (PagingLabel pagingLabel : list.getPagingLabels()) {
-            assertEquals("er title", pagingLabel.getStart());
-            assertEquals("er title", pagingLabel.getEnd());
-        }
-        verify(this.eresources, this.eresource, this.pagingData);
-    }
-
-    @Test
     public void testPagingEresourceList256() throws SAXException {
         expect(this.eresources.toArray()).andReturn(this.eresourceArray);
         replay(this.eresources, this.eresource, this.pagingData);

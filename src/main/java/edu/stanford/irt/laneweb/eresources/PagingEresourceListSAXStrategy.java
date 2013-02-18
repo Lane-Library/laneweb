@@ -9,7 +9,6 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
@@ -38,7 +37,7 @@ public class PagingEresourceListSAXStrategy implements SAXStrategy<PagingEresour
     }
 
     public void toSAX(final PagingEresourceList list, final XMLConsumer xmlConsumer) {
-        PagingData pagingData = list.getPagingData();
+        EresourceListPagingData pagingData = (EresourceListPagingData) list.getPagingData();
         int start = pagingData.getStart();
         int length = pagingData.getLength();
         try {
@@ -51,7 +50,7 @@ public class PagingEresourceListSAXStrategy implements SAXStrategy<PagingEresour
             atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(pagingData.getPage()));
             atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(pagingData.getPages()));
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCES, atts);
-            for (ListIterator<PagingLabel> it = list.getPagingLabels().listIterator(); it.hasNext();) {
+            for (ListIterator<PagingLabel> it = pagingData.getPagingLabels().listIterator(); it.hasNext();) {
                 PagingLabel pagingLabel = it.next();
                 AttributesImpl plAtts = new AttributesImpl();
                 plAtts.addAttribute(EMPTY_NS, START, START, CDATA, pagingLabel.getStart());

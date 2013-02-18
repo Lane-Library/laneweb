@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
@@ -36,6 +38,8 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
     private SAXStrategy<PagingEresourceList> saxStrategy;
 
     private SourceValidity validity;
+
+	private String queryString;
 
     public AbstractEresourcesGenerator(final String componentType, final CollectionManager collectionManager,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
@@ -73,6 +77,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         } catch (NumberFormatException nfe) {
             this.page = 0;
         }
+        this.queryString = ModelUtil.getString(model, Model.QUERY_STRING, "");
     }
 
     public void setParameters(final Map<String, String> parameters) {
@@ -88,13 +93,22 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         Collection<Eresource> eresources = getEresourceList(this.collectionManager);
-        PagingData pagingData = getPagingData(eresources, this.page);
-        this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData), xmlConsumer);
+        //coerce the Collection to a List for PagingData
+        List<Eresource> list = null;
+        if (eresources instanceof List) {
+        	list = (List) eresources;
+        } else {
+        	list = new LinkedList<Eresource>(eresources);
+        }
+        String baseQuery = this.queryString;
+        if (baseQuery.indexOf("&page=") > 0) {
+        	baseQuery = baseQuery.substring(0, baseQuery.indexOf("&page="));
+        } else if (baseQuery.indexOf("page=") == 0) {
+        	baseQuery = "";
+        }
+        PagingData pagingData = new PagingData(list, this.page, baseQuery);
+        this.saxStrategy.toSAX(new PagingEresourceList(list, pagingData), xmlConsumer);
     }
 
     protected abstract Collection<Eresource> getEresourceList(CollectionManager collectionManager);
-
-    protected PagingData getPagingData(final Collection<Eresource> eresources, final int page) {
-        return new PagingData(eresources, page);
-    }
 }

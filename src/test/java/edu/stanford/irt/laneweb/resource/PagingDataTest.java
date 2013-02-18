@@ -6,7 +6,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,12 +15,12 @@ public class PagingDataTest {
 
     private PagingData data;
 
-    private Collection<? extends Object> resources;
+    private List<Object> resources;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.resources = createMock(Collection.class);
+        this.resources = createMock(List.class);
         expect(this.resources.size()).andReturn(351);
         replay(this.resources);
         this.data = new PagingData(this.resources, 3, "/foo/bar");

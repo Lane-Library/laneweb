@@ -23,7 +23,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.Resource;
 
 public class PagingEresourceListSAXStrategyTest {
@@ -38,7 +37,7 @@ public class PagingEresourceListSAXStrategyTest {
 
     private ListIterator<Eresource> listIterator;
 
-    private PagingData pagingData;
+    private EresourceListPagingData pagingData;
 
     private PagingLabel pagingLabel;
 
@@ -63,7 +62,7 @@ public class PagingEresourceListSAXStrategyTest {
         this.pagingLabel = createMock(PagingLabel.class);
         this.pagingLabels = createMock(List.class);
         this.pagingLabelsIterator = createMock(ListIterator.class);
-        this.pagingData = createMock(PagingData.class);
+        this.pagingData = createMock(EresourceListPagingData.class);
     }
 
     @Test
@@ -79,7 +78,7 @@ public class PagingEresourceListSAXStrategyTest {
         Capture<Attributes> atts = new Capture<Attributes>();
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES),
                 capture(atts));
-        expect(this.list.getPagingLabels()).andReturn(this.pagingLabels);
+        expect(this.pagingData.getPagingLabels()).andReturn(this.pagingLabels);
         expect(this.pagingLabels.listIterator()).andReturn(this.pagingLabelsIterator);
         expect(this.pagingLabelsIterator.hasNext()).andReturn(false);
         expect(this.list.listIterator(0)).andReturn(this.listIterator);
@@ -116,7 +115,7 @@ public class PagingEresourceListSAXStrategyTest {
         Capture<Attributes> atts = new Capture<Attributes>();
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES),
                 capture(atts));
-        expect(this.list.getPagingLabels()).andReturn(this.pagingLabels);
+        expect(this.pagingData.getPagingLabels()).andReturn(this.pagingLabels);
         expect(this.pagingLabels.listIterator()).andReturn(this.pagingLabelsIterator);
         List<Capture<Attributes>> pagingLabelAtts = new LinkedList<>();
         for (int i = 0; i < 3; i++) {
@@ -177,7 +176,7 @@ public class PagingEresourceListSAXStrategyTest {
         Capture<Attributes> atts = new Capture<Attributes>();
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES),
                 capture(atts));
-        expect(this.list.getPagingLabels()).andReturn(this.pagingLabels);
+        expect(this.pagingData.getPagingLabels()).andReturn(this.pagingLabels);
         expect(this.pagingLabels.listIterator()).andReturn(this.pagingLabelsIterator);
         List<Capture<Attributes>> pagingLabelAtts = new LinkedList<>();
         for (int i = 0; i < 3; i++) {
@@ -238,7 +237,7 @@ public class PagingEresourceListSAXStrategyTest {
         Capture<Attributes> atts = new Capture<Attributes>();
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES),
                 capture(atts));
-        expect(this.list.getPagingLabels()).andReturn(this.pagingLabels);
+        expect(this.pagingData.getPagingLabels()).andReturn(this.pagingLabels);
         expect(this.pagingLabels.listIterator()).andReturn(this.pagingLabelsIterator);
         List<Capture<Attributes>> pagingLabelAtts = new LinkedList<>();
         for (int i = 0; i < 3; i++) {
@@ -299,7 +298,7 @@ public class PagingEresourceListSAXStrategyTest {
         Capture<Attributes> atts = new Capture<Attributes>();
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES),
                 capture(atts));
-        expect(this.list.getPagingLabels()).andReturn(this.pagingLabels);
+        expect(this.pagingData.getPagingLabels()).andReturn(this.pagingLabels);
         expect(this.pagingLabels.listIterator()).andReturn(this.pagingLabelsIterator);
         List<Capture<Attributes>> pagingLabelAtts = new LinkedList<>();
         for (int i = 0; i < 4; i++) {

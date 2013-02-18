@@ -11,7 +11,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXTransformerFactory;
 
 import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class TestXMLConsumer extends TransformerSerializer {
     

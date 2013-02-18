@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.search;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -9,7 +9,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class PagingDataSAXStrategy implements SAXStrategy<PagingData> {
+public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> {
 
     private static final String CDATA = "CDATA";
 

@@ -11,7 +11,6 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.PagingDataSAXStrategy;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.ContentResult;
@@ -47,7 +46,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
 
     private SAXStrategy<SearchResult> saxStrategy;
     
-    private SAXStrategy<PagingData> pagingDataStrategy = new PagingDataSAXStrategy();
+    private SAXStrategy<PagingData> pagingDataStrategy = new SearchListPagingDataSAXStrategy();
 
     public PagingSearchResultListXHTMLSAXStrategy(final SAXStrategy<SearchResult> saxStrategy) {
         this.saxStrategy = saxStrategy;

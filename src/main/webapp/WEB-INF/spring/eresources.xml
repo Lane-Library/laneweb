@@ -27,7 +27,7 @@
             <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
         </constructor-arg>
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.eresources.PagingDataSAXStrategy"/>
+            <bean class="edu.stanford.irt.laneweb.eresources.EresourceListPagingDataSAXStrategy"/>
         </constructor-arg>
     </bean>
 

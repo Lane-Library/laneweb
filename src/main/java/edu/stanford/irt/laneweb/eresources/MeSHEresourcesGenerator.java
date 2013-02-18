@@ -9,7 +9,6 @@ import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
 
@@ -52,10 +51,5 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
             return Collections.emptySet();
         }
         return collectionManager.getMesh(this.type, this.mesh);
-    }
-
-    @Override
-    protected PagingData getPagingData(final Collection<Eresource> eresources, final int page) {
-        return new PagingData(eresources, page, "m=" + this.mesh);
     }
 }

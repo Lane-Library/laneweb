@@ -9,7 +9,6 @@ import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     
@@ -71,14 +70,5 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
             list = collectionManager.getSubset(this.subset);
         }
         return list;
-    }
-
-    @Override
-    protected PagingData getPagingData(final Collection<Eresource> eresources, final int page) {
-        if (this.alpha == null) {
-            return new PagingData(eresources, page);
-        } else {
-            return new PagingData(eresources, page, "a=" + this.alpha);
-        }
     }
 }
