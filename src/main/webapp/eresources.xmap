@@ -51,6 +51,7 @@
                 <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- temporary pipeline for testing xhtml sax stratgies -->
             <map:match pattern="browse/foo/*" type="wildcard">
                 <map:generate type="er-browse-xhtml">
                     <map:parameter name="type" value="{1}"/>

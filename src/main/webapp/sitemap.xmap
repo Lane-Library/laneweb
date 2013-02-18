@@ -3,6 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
+        <!-- TODO: status-code attributes no longer have any affect -->
         <map:pipeline type="noncaching">
             <map:match pattern="search/*" type="wildcard">
                 <map:generate type="html" src="{content-base}/error.html"/>
