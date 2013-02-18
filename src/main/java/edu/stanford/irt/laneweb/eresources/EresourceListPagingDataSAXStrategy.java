@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -9,6 +12,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourceListPagingDataSAXStrategy implements SAXStrategy<EresourceListPagingData> {
+    
+    private static final Pattern ALPHA_PATTERN = Pattern.compile("(^|.+&)a=([a-z])(&.+|$)");
 
     private static final String CDATA = "CDATA";
 
@@ -75,10 +80,14 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, "#");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-            String alpha = pagingData.getAlpha();
+            String alpha = null;
+            Matcher matcher = ALPHA_PATTERN.matcher(hrefBase);
+            if (matcher.matches()) {
+                alpha = matcher.group(2);
+            }
             sb.setLength(0);
             sb.append("Choose ");
-            if (alpha == null || alpha.length() == 0 || "all".equals(alpha)) {
+            if (alpha == null) {
             	sb.append("A-Z");
             } else {
             	alpha = alpha.toUpperCase();

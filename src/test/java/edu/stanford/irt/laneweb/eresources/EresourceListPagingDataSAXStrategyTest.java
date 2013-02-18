@@ -38,7 +38,6 @@ public class EresourceListPagingDataSAXStrategyTest {
 		expect(this.pagingData.getLength()).andReturn(260);
 		expect(this.pagingData.getStart()).andReturn(0);
 		expect(this.pagingData.getBaseQuery()).andReturn("a=a");
-		expect(this.pagingData.getAlpha()).andReturn("a");
 		expect(this.pagingData.getPagingLabels()).andReturn(Arrays.asList(new PagingLabel[]{this.pagingLabel, this.pagingLabel, this.pagingLabel, this.pagingLabel}));
 		expect(this.pagingLabel.getStart()).andReturn("Aa");
 		expect(this.pagingLabel.getEnd()).andReturn("Ad");

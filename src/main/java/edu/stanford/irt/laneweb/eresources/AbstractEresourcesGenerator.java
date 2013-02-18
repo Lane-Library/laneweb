@@ -106,7 +106,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         } else if (baseQuery.indexOf("page=") == 0) {
         	baseQuery = "";
         }
-        PagingData pagingData = new PagingData(list, this.page, baseQuery);
+        PagingData pagingData = new EresourceListPagingData(list, this.page, baseQuery);
         this.saxStrategy.toSAX(new PagingEresourceList(list, pagingData), xmlConsumer);
     }
 

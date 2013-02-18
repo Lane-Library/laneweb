@@ -26,14 +26,9 @@ public class EresourceListPagingDataTest {
 		this.eresources = createMock(PagingEresourceList.class);
 		expect(this.eresources.size()).andReturn(256);
 		replay(this.eresources);
-		this.pagingData = new EresourceListPagingData(this.eresources, 0, "", "a");
+		this.pagingData = new EresourceListPagingData(this.eresources, 0, "");
 		verify(this.eresources);
 		this.eresource = createMock(Eresource.class);
-	}
-
-	@Test
-	public void testGetAlpha() {
-		assertEquals("a", this.pagingData.getAlpha());
 	}
 
 	@Test

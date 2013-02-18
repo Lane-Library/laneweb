@@ -3,25 +3,18 @@ package edu.stanford.irt.laneweb.eresources;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class EresourceListPagingData extends PagingData {
 
-    private String alpha;
-
-    private PagingEresourceList list;
+    private List<Eresource> list;
 
     private LinkedList<PagingLabel> pagingLabels;
 
-    public EresourceListPagingData(final PagingEresourceList list, final int page, final String baseQuery,
-            final String alpha) {
+    public EresourceListPagingData(final List<Eresource> list, final int page, final String baseQuery) {
         super(list, page, baseQuery);
         this.list = list;
-        this.alpha = alpha;
-    }
-
-    public String getAlpha() {
-        return this.alpha;
     }
 
     public List<PagingLabel> getPagingLabels() {
