@@ -130,7 +130,7 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
-                XMLUtils.startElement(xmlConsumer, SPAN, SPAN, plDash);
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, plDash);
                 XMLUtils.data(xmlConsumer, " — ");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
