@@ -12,31 +12,31 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourceListPagingDataSAXStrategy implements SAXStrategy<EresourceListPagingData> {
-    
+
+    private static final String A = "a";
+
     private static final Pattern ALPHA_PATTERN = Pattern.compile("(^|.+&)a=([a-z])(&.+|$)");
 
     private static final String CDATA = "CDATA";
 
     private static final String CLASS = "class";
-    
+
     private static final String DIV = "div";
 
     private static final String EMPTY_NS = "";
 
+    private static final String HREF = "href";
+
+    private static final String LI = "li";
+
+    private static final String SPAN = "span";
+
+    private static final String UL = "ul";
+
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
-	private static final String A = "a";
-
-	private static final String HREF = "href";
-
-	private static final String UL = "ul";
-
-	private static final String LI = "li";
-
-	private static final String SPAN = "span";
-
     @Override
-	public void toSAX(final EresourceListPagingData pagingData, final XMLConsumer xmlConsumer) {
+    public void toSAX(final EresourceListPagingData pagingData, final XMLConsumer xmlConsumer) {
         try {
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "resourceListPagination");
@@ -88,10 +88,10 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
             sb.setLength(0);
             sb.append("Choose ");
             if (alpha == null) {
-            	sb.append("A-Z");
+                sb.append("A-Z");
             } else {
-            	alpha = alpha.toUpperCase();
-            	sb.append(alpha).append("a-").append(alpha).append('z');
+                alpha = alpha.toUpperCase();
+                sb.append(alpha).append("a-").append(alpha).append('z');
             }
             XMLUtils.data(xmlConsumer, sb.toString());
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
@@ -106,8 +106,6 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
             AttributesImpl plResults = new AttributesImpl();
             plResults.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "plResults");
             for (PagingLabel label : pagingData.getPagingLabels()) {
-            	
-
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
                 sb.setLength(0);
                 sb.append("?");
@@ -118,7 +116,17 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-                XMLUtils.data(xmlConsumer, label.getStart());
+                sb.setLength(0);
+                sb.append(label.getStart());
+                if (sb.length() > 37) {
+                    sb.setLength(37);
+                } else {
+                    sb.append(' ');
+                }
+                while (sb.length() < 40) {
+                    sb.append('.');
+                }
+                XMLUtils.data(xmlConsumer, sb.toString());
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
@@ -126,7 +134,17 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                 XMLUtils.data(xmlConsumer, " — ");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-                XMLUtils.data(xmlConsumer, label.getEnd());
+                sb.setLength(0);
+                sb.append(label.getEnd());
+                if (sb.length() > 37) {
+                    sb.setLength(37);
+                } else {
+                    sb.append(' ');
+                }
+                while (sb.length() < 40) {
+                    sb.append('.');
+                }
+                XMLUtils.data(xmlConsumer, sb.toString());
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, plResults);
