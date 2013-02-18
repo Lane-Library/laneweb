@@ -23,8 +23,6 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
 
 	private static final String A = "a";
 
-	private static final String STYLE = "style";
-
 	private static final String ID = "id";
 
 	private static final String HREF = "href";
