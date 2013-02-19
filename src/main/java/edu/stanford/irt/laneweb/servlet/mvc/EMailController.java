@@ -33,24 +33,35 @@ public class EMailController {
 
     @Autowired
     private EMailSender sender;
+    
+    public EMailController() {}
+    
+    public EMailController(RequestHeaderDataBinder headerBinder, RemoteProxyIPDataBinder remoteIPBinder, EMailSender sender) {
+        this.headerBinder = headerBinder;
+        this.remoteIPBinder = remoteIPBinder;
+        this.sender = sender;
+    }
 
     @RequestMapping(value = "/askus", consumes = "application/x-www-form-urlencoded")
     public String formSubmitAskUs(final Model model, final RedirectAttributes atts) {
-        appendNameToSubject(model.asMap());
-        sendEmail("LaneAskUs@stanford.edu", model.asMap());
-        return getRedirectTo(model.asMap());
+        Map<String, Object> map = model.asMap();
+        appendNameToSubject(map);
+        sendEmail("LaneAskUs@stanford.edu", map);
+        return getRedirectTo(map);
     }
 
     @RequestMapping(value = "/lane-issue", consumes = "application/x-www-form-urlencoded")
     public String formSubmitLaneissue(final Model model, final RedirectAttributes atts) {
-        sendEmail("lane-issue@med.stanford.edu", model.asMap());
-        return getRedirectTo(model.asMap());
+        Map<String, Object> map = model.asMap();
+        sendEmail("lane-issue@med.stanford.edu", map);
+        return getRedirectTo(map);
     }
 
     @RequestMapping(value = "/lanelibacqs", consumes = "application/x-www-form-urlencoded")
     public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) {
-        sendEmail("lanelibacqs@lists.stanford.edu", model.asMap());
-        return getRedirectTo(model.asMap());
+        Map<String, Object> map = model.asMap();
+        sendEmail("lanelibacqs@lists.stanford.edu", map);
+        return getRedirectTo(map);
     }
 
     @RequestMapping(value = "/askus", consumes = "application/json")
@@ -99,8 +110,9 @@ public class EMailController {
 
     @ModelAttribute
     protected void getParameters(final HttpServletRequest request, final Model model) {
-        this.remoteIPBinder.bind(model.asMap(), request);
-        this.headerBinder.bind(model.asMap(), request);
+        Map<String, Object> modelMap = model.asMap();
+        this.remoteIPBinder.bind(modelMap, request);
+        this.headerBinder.bind(modelMap, request);
         @SuppressWarnings("unchecked")
         Map<String, String[]> map = request.getParameterMap();
         for (Entry<String, String[]> entry : map.entrySet()) {
