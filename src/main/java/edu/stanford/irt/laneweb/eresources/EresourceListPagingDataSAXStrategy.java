@@ -29,7 +29,11 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
 
     private static final String LI = "li";
 
+    private static final int LINK_LENGTH = 40;
+
     private static final String SPAN = "span";
+
+    private static final int TEXT_LENGTH = 37;
 
     private static final String UL = "ul";
 
@@ -118,12 +122,12 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                 sb.setLength(0);
                 sb.append(label.getStart());
-                if (sb.length() > 37) {
-                    sb.setLength(37);
+                if (sb.length() > TEXT_LENGTH) {
+                    sb.setLength(TEXT_LENGTH);
                 } else {
                     sb.append(' ');
                 }
-                while (sb.length() < 40) {
+                while (sb.length() < LINK_LENGTH) {
                     sb.append('.');
                 }
                 XMLUtils.data(xmlConsumer, sb.toString());
@@ -136,12 +140,12 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                 sb.setLength(0);
                 sb.append(label.getEnd());
-                if (sb.length() > 37) {
-                    sb.setLength(37);
+                if (sb.length() > TEXT_LENGTH) {
+                    sb.setLength(TEXT_LENGTH);
                 } else {
                     sb.append(' ');
                 }
-                while (sb.length() < 40) {
+                while (sb.length() < LINK_LENGTH) {
                     sb.append('.');
                 }
                 XMLUtils.data(xmlConsumer, sb.toString());

@@ -10,7 +10,7 @@ public class EresourceListPagingData extends PagingData {
 
     private List<Eresource> list;
 
-    private LinkedList<PagingLabel> pagingLabels;
+    private List<PagingLabel> pagingLabels;
 
     public EresourceListPagingData(final List<Eresource> list, final int page, final String baseQuery) {
         super(list, page, baseQuery);
