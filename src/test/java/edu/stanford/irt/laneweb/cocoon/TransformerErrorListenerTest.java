@@ -28,7 +28,7 @@ public class TransformerErrorListenerTest {
         this.locator = createMock(SourceLocator.class);
     }
 
-    // @Test TODO:reenable
+    @Test
     public void testError() {
         expect(this.exception.getMessage()).andReturn("message");
         expect(this.exception.getLocator()).andReturn(this.locator);
@@ -37,7 +37,10 @@ public class TransformerErrorListenerTest {
         expect(this.locator.getLineNumber()).andReturn(0);
         expect(this.locator.getColumnNumber()).andReturn(0);
         replay(this.exception, this.locator);
-        this.listener.error(this.exception);
+        try {
+            this.listener.error(this.exception);
+        } catch (LanewebException e) {
+        }
         verify(this.exception, this.locator);
     }
 
@@ -57,7 +60,7 @@ public class TransformerErrorListenerTest {
         verify(this.exception, this.locator);
     }
 
-    // @Test
+    @Test
     public void testWarning() {
         expect(this.exception.getMessage()).andReturn("message");
         expect(this.exception.getLocator()).andReturn(this.locator);
@@ -66,16 +69,22 @@ public class TransformerErrorListenerTest {
         expect(this.locator.getLineNumber()).andReturn(0);
         expect(this.locator.getColumnNumber()).andReturn(0);
         replay(this.exception, this.locator);
-        this.listener.warning(this.exception);
+        try {
+            this.listener.warning(this.exception);
+        } catch (LanewebException e) {
+        }
         verify(this.exception, this.locator);
     }
 
-    // @Test
+    @Test
     public void testWarningNoLocator() {
         expect(this.exception.getMessage()).andReturn("message");
         expect(this.exception.getLocator()).andReturn(null);
         replay(this.exception);
-        this.listener.warning(this.exception);
+        try {
+            this.listener.warning(this.exception);
+        } catch (LanewebException e) {
+        }
         verify(this.exception);
     }
 }
