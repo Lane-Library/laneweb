@@ -1,55 +1,81 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class SearchListPagingDataSAXStrategyTest {
-
-    private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     private PagingData pagingData;
 
     private SearchListPagingDataSAXStrategy strategy;
 
-    private XMLConsumer xmlConsumer;
+    private TestXMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
         this.strategy = new SearchListPagingDataSAXStrategy();
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = new TestXMLConsumer();
         this.pagingData = createMock(PagingData.class);
     }
 
     @Test
-    public void testToSAX() throws SAXException {
+    public void testToSAX() throws SAXException, IOException {
         expect(this.pagingData.getSize()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(0);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getBaseQuery()).andReturn("");
-        this.xmlConsumer.startPrefixMapping("fx", "http://lane.stanford.edu/fx");
-        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq("Displaying all 0 matches".toCharArray()), eq(0), eq(24));
-        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
-        this.xmlConsumer.startElement(eq(XHTML_NS), eq("div"), eq("div"), isA(Attributes.class));
-        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
-        this.xmlConsumer.endElement(XHTML_NS, "div", "div");
-        this.xmlConsumer.endPrefixMapping("fx");
-        replay(this.pagingData, this.xmlConsumer);
+        replay(this.pagingData);
+        this.xmlConsumer.startDocument();
         this.strategy.toSAX(this.pagingData, this.xmlConsumer);
-        verify(this.pagingData, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "SearchListPagingDataSAXStrategyTest-testToSAX.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.pagingData);
+    }
+
+    @Test
+    public void testToSAX320() throws SAXException, IOException {
+        expect(this.pagingData.getSize()).andReturn(320);
+        expect(this.pagingData.getLength()).andReturn(100);
+        expect(this.pagingData.getStart()).andReturn(100);
+        expect(this.pagingData.getBaseQuery()).andReturn("");
+        expect(this.pagingData.getPages()).andReturn(4);
+        expect(this.pagingData.getPage()).andReturn(1);
+        replay(this.pagingData);
+        this.xmlConsumer.startDocument();
+        this.strategy.toSAX(this.pagingData, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "SearchListPagingDataSAXStrategyTest-testToSAX320.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.pagingData);
+    }
+
+    @Test
+    public void testToSAX220Alpha() throws SAXException, IOException {
+        expect(this.pagingData.getSize()).andReturn(220);
+        expect(this.pagingData.getLength()).andReturn(100);
+        expect(this.pagingData.getStart()).andReturn(0);
+        expect(this.pagingData.getBaseQuery()).andReturn("a=a");
+        expect(this.pagingData.getPages()).andReturn(3);
+        expect(this.pagingData.getPage()).andReturn(0);
+        replay(this.pagingData);
+        this.xmlConsumer.startDocument();
+        this.strategy.toSAX(this.pagingData, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "SearchListPagingDataSAXStrategyTest-testToSAX220Alpha.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.pagingData);
     }
 }
