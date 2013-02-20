@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.resource;
 
-import java.util.Collection;
 import java.util.List;
 
 public class PagingData {
