@@ -67,11 +67,6 @@
     -webkit-border-top-left-radius: 3px;
 }
 
-/* ie one pixel off */
-.pagingLabels {
-    right: 368px\9;
-}
-
 #searchResults .pagingLabels {
     padding: 10px 10px 10px 15px;
 }
