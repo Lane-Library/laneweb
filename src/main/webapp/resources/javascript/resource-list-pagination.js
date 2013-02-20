@@ -1,10 +1,11 @@
 (function() {
-    var nodes = Y.all(".plsContainer"), i;
+    var nodes = Y.all(".pagingButton"), i;
     if(nodes.size() > 0){
         for (i = 0; i < nodes.size(); i++) {
-            nodes.item(i).one('li').on('click', function(e) {
+            nodes.item(i).on('click', function(e) {
                 e.preventDefault();
-                this.next().toggleClass('show');
+                this.toggleClass('pagingButtonActive');
+                this.next('.pagingLabels').toggleClass('show');
             });
         }
     }

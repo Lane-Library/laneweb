@@ -37,7 +37,7 @@
 			</xsl:choose>
 		</xsl:variable>
 		
-		<div class="resourceListPagination">
+		<div class="resourceListPagination no-bookmarking">
 			<div class="yui-g">
 				<div class="yui-u first">
 					<xsl:text>Displaying </xsl:text>
@@ -73,30 +73,30 @@
 									<xsl:otherwise>Choose A-Z</xsl:otherwise>
 								</xsl:choose>									
 							</xsl:variable>
-							<ul class="plsContainer">
-								<li>
-									<a href="#"><xsl:value-of select="$chooseString" /></a>
-								</li>
-								<li class="pagingLabels">
-									<ul>
-										<xsl:for-each select="/s:resources/s:pagingLabel">
+							<a class="pagingButton gray-btn" href="#">
+								<span>
+									<xsl:value-of select="$chooseString"/>
+								</span>
+							</a>
+							<ul class="pagingLabels">
+								<xsl:for-each select="/s:resources/s:pagingLabel">
+									<li>
+										<a href="{concat($request-uri,'?',$no-page-query-string,'page=',position())}">
+											<ul>
 												<li>
-													<a href="{concat($request-uri,'?',$no-page-query-string,'page=',position())}">
 														<xsl:value-of select="fx:pad-string(@start)" />
-													</a>
 												</li>
 												<li>
 													<span class="plDash"> &#8212; </span>
-													<a href="{concat($request-uri,'?',$no-page-query-string,'page=',position())}">
 														<xsl:value-of select="fx:pad-string(@end)" />
-													</a>
 												</li>
 												<li class="plResults">
 													<xsl:value-of select="concat(' (', @results, ')')" />
 												</li>
-										</xsl:for-each>
-									</ul>
-								</li>
+											</ul>
+										</a>
+									</li>
+								</xsl:for-each>
 							</ul>
 							<a class="seeAll" href="?{$no-page-query-string}page=all">See All</a>
 						</xsl:when>

@@ -4,57 +4,97 @@
     font-size: 13px;
 }
 
-.paginationContainer {
-    width: 100%;
-    margin-top: -13px;
+.pagingButton {
+    width: 115px;
+    padding: 5px 5px 5px 10px;
+    margin: -7px 0;
     float: right;
+}
+
+.pagingButton span {
+    /* TODO arrow images are placeholders ... replace and move to sprite */
+    background-image: url(/././resources/images/down_arrow_transparent.gif);
+    background-repeat: no-repeat;
+    background-position: 100px 2px;
+    font-weight: normal;
+    padding: 0 0px 0 5px;
+    width: 100%;
+}
+
+.pagingButtonActive {
+    background-image: url(/././resources/images/menu-bg.gif);
+    border-right: 1px solid #dadad9;
+    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    padding-bottom: 10px;
+    filter: none;
+}
+
+.pagingButtonActive:hover {
+    border: 1px solid #dadad9;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.pagingButtonActive span {
+    /* TODO arrow images are placeholders ... replace and move to sprite */
+    background-image: url(/././resources/images/up_arrow_transparent.gif);
 }
 
 .paginationNumbers {
     float: right;
 }
 
-.resourceListPagination ul.plsContainer {
-    display: block;
-    position: relative;
-    width: 100px;
-    float: right;
-    background: white;
-    margin: -6px 0;
-    border-top: 1px solid #dadad9;
-    -moz-border-radius-topleft: 3px;
-    -moz-border-radius-topright: 3px;
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    border-radius: 3px
-}
-
-.plsContainer li {
-    text-align: center;
-}
-
-.plsContainer li.show ul {
+.pagingLabels.show {
     display: block;
 }
 
-.plsContainer li.pagingLabels ul {
+.pagingLabels li {
+    width: 100%;
+    padding: 0 0 5px 0;
+}
+
+.pagingLabels {
+    display: none;
     text-align: left;
-    width: 350px;
-    left: -251px;
-}
-
-.resourceListPagination li.pagingLabels ul {
+    width: 360px;
+    right: 369px;
+    margin-top: 23px;
+    border: 1px solid #dadad9;
+    border-top: none;
     border-top-left-radius: 3px;
     -moz-border-radius-topleft: 3px;
     -webkit-border-top-left-radius: 3px;
 }
 
-.pagingLabels li {
+/* ie one pixel off */
+.pagingLabels {
+    right: 368px\9;
+}
+
+#searchResults .pagingLabels {
+    padding: 10px 10px 10px 15px;
+}
+
+.pagingLabels li li {
     float: left;
     white-space: nowrap;
     width: 159px;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+#searchResults .pagingLabels ul {
+    height: 15px;
+    padding: 5px 5px 0 0;
+    margin-bottom: 0;
+}
+
+#searchResults .pagingLabels ul:hover {
+    color: #820000;
+    border-bottom: 1px solid #820000;
+    height: 14px;
+    margin-right: 10px;
 }
 
 .pagingLabels .plResults {
@@ -68,17 +108,11 @@
     padding: 0 5px;
 }
 
-#searchResults .pagingLabels a {
+.pagingLabels a {
     border-bottom: none;
     color: #1C4B70;
 }
 
-#searchResults .pagingLabels a:hover {
-    color: #820000;
-    border-bottom: 1px solid #820000;
-}
-
-/*see all button on ej and search pages------------------------------------------------------------------*/
 .seeAll {
     float: right;
     position: relative;
