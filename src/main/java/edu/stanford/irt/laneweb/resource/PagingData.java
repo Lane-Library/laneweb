@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.resource;
 
 import java.util.Collection;
+import java.util.List;
 
 public class PagingData {
 
@@ -22,7 +23,7 @@ public class PagingData {
 
     private int start;
 
-    public PagingData(final Collection<? extends Object> resources, final int page, final String baseQuery) {
+    public PagingData(final List<? extends Object> resources, final int page, final String baseQuery) {
         if (page >= MAX_PAGE_COUNT) {
             throw new IllegalArgumentException("not so many pages: " + page);
         }
