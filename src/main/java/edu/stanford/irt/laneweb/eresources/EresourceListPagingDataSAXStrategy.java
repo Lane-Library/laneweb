@@ -78,10 +78,7 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "plsContainer");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
-            atts = new AttributesImpl();
+            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "pagingButton gray-btn");
             atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, "#");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
             String alpha = null;
@@ -97,13 +94,13 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                 alpha = alpha.toUpperCase();
                 sb.append(alpha).append("a-").append(alpha).append('z');
             }
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN);
             XMLUtils.data(xmlConsumer, sb.toString());
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "pagingLabels");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, UL);
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
             int i = 1;
             AttributesImpl plDash = new AttributesImpl();
             plDash.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "plDash");
@@ -120,6 +117,8 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, UL);
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
                 sb.setLength(0);
                 sb.append(label.getStart());
                 if (sb.length() > TEXT_LENGTH) {
@@ -131,13 +130,11 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                     sb.append('.');
                 }
                 XMLUtils.data(xmlConsumer, sb.toString());
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, plDash);
                 XMLUtils.data(xmlConsumer, " — ");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                 sb.setLength(0);
                 sb.append(label.getEnd());
                 if (sb.length() > TEXT_LENGTH) {
@@ -148,16 +145,17 @@ public class EresourceListPagingDataSAXStrategy implements SAXStrategy<Eresource
                 while (sb.length() < LINK_LENGTH) {
                     sb.append('.');
                 }
+                sb.append(" ");
                 XMLUtils.data(xmlConsumer, sb.toString());
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, plResults);
                 XMLUtils.data(xmlConsumer, " (" + label.getResults() + ")");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
                 i++;
             }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "seeAll");
