@@ -91,7 +91,7 @@ public class EresourceSAXStrategyTest {
         Capture<Attributes> attributesCapture2 = new Capture<Attributes>();
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.LINK), eq(Resource.LINK),
                 capture(attributesCapture2));
-        expect(this.link.getLabel()).andReturn(Resource.LABEL).times(3);
+        expect(this.link.getLabel()).andReturn(Resource.LABEL).times(5);
         recordElement(Resource.LABEL);
         expect(this.link.getUrl()).andReturn(Resource.URL).atLeastOnce();
         recordElement(Resource.URL);

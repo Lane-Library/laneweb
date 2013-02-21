@@ -58,6 +58,8 @@ public class EresourceVersionComparatorTest {
     @Test
     public void testCompareDelayedHoldings() {
         this.v1.setSummaryHoldings("v. 1-");
+        this.v1.addLink(this.link);
+        this.v2.addLink(this.link);
         this.v2.setSummaryHoldings("v. 1-");
         this.v2.setDescription("foo delayed bar");
         assertTrue(this.comparator.compare(this.v1, this.v2) < 0);

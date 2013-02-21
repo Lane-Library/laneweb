@@ -89,6 +89,12 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
         if (description != null && description.contains("delayed")) {
             score--;
         }
+        //make sure installed software product description is first:
+        if (score == 0) {
+            if ("Product Description".equals(links.iterator().next().getLabel())) {
+                score = 1;
+            }
+        }
         return score;
     }
 

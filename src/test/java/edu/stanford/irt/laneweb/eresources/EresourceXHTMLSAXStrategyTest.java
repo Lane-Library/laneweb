@@ -72,7 +72,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.version.getLinks()).andReturn(Collections.singletonList(this.link)).times(5);
         expect(this.link.getLabel()).andReturn("Impact Factor");
         expect(this.version.getDates()).andReturn(null).times(3);
-        expect(this.link.getLabel()).andReturn("label").times(4);
+        expect(this.link.getLabel()).andReturn("label").times(5);
         expect(this.version.getSummaryHoldings()).andReturn("summary holdings").times(3);
         expect(this.version.getDescription()).andReturn("description").times(3);
         expect(this.eresource.getTitle()).andReturn("title");
