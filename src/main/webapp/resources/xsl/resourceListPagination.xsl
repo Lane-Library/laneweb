@@ -37,7 +37,7 @@
 			</xsl:choose>
 		</xsl:variable>
 		
-		<div class="resourceListPagination no-bookmarking">
+		<div class="resourceListPagination">
 			<div class="yui-g">
 				<div class="yui-u first">
 					<xsl:text>Displaying </xsl:text>

@@ -104,6 +104,7 @@
 }
 
 .pagingLabels a {
+    display: block; /* to disable bookmarking */
     border-bottom: none;
     color: #1C4B70;
 }
