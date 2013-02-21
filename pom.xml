@@ -573,7 +573,7 @@
         <dependency>
             <artifactId>querymap</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.2.4</version>
+            <version>1.2.5</version>
         </dependency>
         <dependency>
             <artifactId>saxonhe</artifactId>
