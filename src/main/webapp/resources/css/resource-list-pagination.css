@@ -12,10 +12,9 @@
 }
 
 .pagingButton span {
-    /* TODO arrow images are placeholders ... replace and move to sprite */
-    background-image: url(/././resources/images/down_arrow_transparent.gif);
+    background-image: url(/././resources/images/sprite-all.png);
     background-repeat: no-repeat;
-    background-position: 100px 2px;
+    background-position: 100px -277px;
     font-weight: normal;
     padding: 0 0px 0 5px;
     width: 100%;
@@ -37,8 +36,7 @@
 }
 
 .pagingButtonActive span {
-    /* TODO arrow images are placeholders ... replace and move to sprite */
-    background-image: url(/././resources/images/up_arrow_transparent.gif);
+    background-position: 100px -237px;
 }
 
 .paginationNumbers {
