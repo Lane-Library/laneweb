@@ -131,7 +131,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, resourceResult.getURL());
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
                 sb.setLength(0);
-                sb.append("All results from").append(resourceName);
+                sb.append("All results from ").append(resourceName);
                 XMLUtils.data(xmlConsumer, sb.toString());
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                 XMLUtils.data(xmlConsumer, " \u00BB");
@@ -141,6 +141,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "sourceLink");
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
                 XMLUtils.data(xmlConsumer, resourceName);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);

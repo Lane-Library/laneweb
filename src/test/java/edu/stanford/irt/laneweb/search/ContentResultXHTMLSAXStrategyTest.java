@@ -43,12 +43,12 @@ public class ContentResultXHTMLSAXStrategyTest {
 		expect(this.contentResult.getURL()).andReturn("url");
 		expect(this.contentResult.getTitle()).andReturn("title");
 		expect(this.contentResult.getAuthor()).andReturn("author");
-		expect(this.contentResult.getPublicationTitle()).andReturn("title");
-		expect(this.contentResult.getPublicationDate()).andReturn("date");
-		expect(this.contentResult.getPublicationVolume()).andReturn("volume");
-		expect(this.contentResult.getPublicationIssue()).andReturn("issue");
+		expect(this.contentResult.getPublicationTitle()).andReturn(null);
+//		expect(this.contentResult.getPublicationDate()).andReturn("date");
+//		expect(this.contentResult.getPublicationVolume()).andReturn("volume");
+//		expect(this.contentResult.getPublicationIssue()).andReturn("issue");
 //		expect(this.contentResult.getPages()).andReturn("pages");
-		expect(this.contentResult.getContentId()).andReturn("id");
+//		expect(this.contentResult.getContentId()).andReturn("id");
 		expect(this.resourceResult.getURL()).andReturn("url");
 		expect(this.contentResult.getDescription()).andReturn("description");
 		replay(this.result, this.contentResult, this.resourceResult);
@@ -76,7 +76,7 @@ public class ContentResultXHTMLSAXStrategyTest {
 		expect(this.contentResult.getPublicationVolume()).andReturn("volume");
 		expect(this.contentResult.getPublicationIssue()).andReturn("issue");
 //		expect(this.contentResult.getPages()).andReturn("pages");
-		expect(this.contentResult.getContentId()).andReturn("id");
+		expect(this.contentResult.getContentId()).andReturn("PMID:12");
 //		expect(this.resourceResult.getURL()).andReturn("url");
 		expect(this.contentResult.getDescription()).andReturn("description");
 		replay(this.result, this.contentResult, this.resourceResult);
