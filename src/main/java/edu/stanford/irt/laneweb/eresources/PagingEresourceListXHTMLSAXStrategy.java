@@ -18,7 +18,7 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
 
     private static final String CLASS = "class";
 
-    private static final String DD = "dd";
+    private static final String LI = "li";
 
     private static final int DEFAULT_PAGE_SIZE = 100;
 
@@ -60,11 +60,11 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "lwSearchResults");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "dl", atts);
+//            atts.addAttribute(EMPTY_NS, "style", "style", CDATA, "padding:0;margin-bottom:0");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
             int i = 0;
             for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 Eresource eresource = it.next();
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, DD);
                 StringBuilder sb = new StringBuilder("r-");
                 sb.append(start + 1 + i);
                 if (eresource.getDescription() != null) {
@@ -72,12 +72,12 @@ public class PagingEresourceListXHTMLSAXStrategy implements SAXStrategy<PagingEr
                 }
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, sb.toString());
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
+//                atts.addAttribute(EMPTY_NS, "style", "style", CDATA, "padding:5px;margin-bottom:10px");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
                 this.saxStrategy.toSAX(eresource, xmlConsumer);
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, DD);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "dl");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
             if (size > DEFAULT_PAGE_SIZE) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }

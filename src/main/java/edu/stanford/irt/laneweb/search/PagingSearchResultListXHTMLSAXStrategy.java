@@ -22,7 +22,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
 
     private static final String CLASS = "class";
 
-    private static final String DD = "dd";
+    private static final String LI = "li";
 
     private static final String EMPTY_NS = "";
 
@@ -68,11 +68,10 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "body");
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "lwSearchResults");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "dl", atts);
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "ul", atts);
             int i = 0;
             for (ListIterator<SearchResult> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 SearchResult result = it.next();
-                    XMLUtils.startElement(xmlConsumer, XHTML_NS, DD);
                     StringBuilder sb = new StringBuilder("r-");
                     sb.append(start + 1 + i);
                     if (isHvrTrig(result)) {
@@ -80,12 +79,11 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
                     }
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, sb.toString());
-                    XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
+                    XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
                     this.saxStrategy.toSAX(result, xmlConsumer);
-                    XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
-                    XMLUtils.endElement(xmlConsumer, XHTML_NS, DD);
+                    XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "dl");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "ul");
             
             int size = list.size();
             if (size > 100) {

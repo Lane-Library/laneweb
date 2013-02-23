@@ -46,7 +46,6 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
 
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
             List<Version> versions = new LinkedList<Version>(eresource.getVersions());
             Collections.sort(versions, VERSION_COMPARATOR);
             Version firstVersion = versions.get(0);
@@ -58,14 +57,13 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                 }
             }
             createMoreResultsLink(xmlConsumer, eresource);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             String description = eresource.getDescription();
             if (description != null && description.length() > 0) {
                 AttributesImpl atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, HVRTARG);
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
                 XMLUtils.data(xmlConsumer, description);
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             }
         } catch (SAXException e) {
             throw new LanewebException(e);
@@ -86,6 +84,7 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                 remainderLinks.add(link);
             }
         }
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, PRIMARY_LINK);
         atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, firstLink.getUrl());
@@ -117,6 +116,7 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.data(xmlConsumer, label);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
         }
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
         for (Link link : remainderLinks) {
             createSecondaryLink(xmlConsumer, firstVersion, link);
         }
