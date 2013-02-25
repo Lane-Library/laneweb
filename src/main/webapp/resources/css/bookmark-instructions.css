@@ -9,7 +9,7 @@
 }
 
 #bookmark-instructions .hd div {
-	background-image: url("/././resources/images/icons-sprite3.png");
+	background-image: url("/././resources/images/sprite-all.png");
 	height: 24px;
 	width: 202px;
 	margin: auto;
@@ -28,11 +28,11 @@
 }
 
 #bookmark-instructions-hide {
-	background-position: 0 -347px;
+	background-position: -80px -160px;
 }
 
 #bookmark-instructions-show {
-	background-position: 0 -309px;
+	background-position: -80px -200px;
 }
 
 #bookmark-instructions .module {

@@ -37,7 +37,7 @@ html {
 }
 #sb-rt {
     padding-right:6px;
-    background-position:right
+    background-position:right;
 }
 /*
   sb is nested inside .sb-lr with a white background to cover the part of the
@@ -56,14 +56,14 @@ html {
 .sb-tb {
     position:relative;
     height:6px;
-    background-image:url(/././resources/images/sprite-vert.gif);
-    background-position:0 -120px;
+    background-image:url(/././resources/images/sprite-vertall.png);
+    background-position:0 0;
     background-repeat:repeat-x;
     z-index:1;
 }
 /* the bottom just has a different background-position */
 #sb-bot {
-    background-position:0 -126px
+    background-position:0 -6px;
 }
 /* .sbc are the corners */
 /* font size is for IE6 */
@@ -72,25 +72,25 @@ html {
     width:12px;
     font-size:0;
     position:absolute;
-    background-image:url(/././resources/images/sprite.gif);
+    background-image:url(/././resources/images/sprite-all.png);
 }
 #sb-tl {
     top:-1px;
     left:-7px;
-    background-position:0 -700px;
+    background-position:-520px 0;
 }
 #sb-tr {
     top:-1px;
     right:-7px;
-    background-position:-12px -700px;
+    background-position:-532px 0;
 }
 #sb-bl {
     bottom:-1px;
     left:-7px;
-    background-position:0 -712px
+    background-position:-520px -12px;
 }
 #sb-br {
-    background-position:-12px -712px;
+    background-position:-532px -12px;
     bottom:-1px;
-    right:-7px
+    right:-7px;
 }

@@ -11,8 +11,8 @@
 }
 
 .look-here .look-here-arrow{
-    background-image:url("/././resources/images/icons-sprite3.png");
-    background-position: -460px -90px;
+    background-image:url("/././resources/images/sprite-all.png");
+    background-position: -720px 0px;
     width:68px;
     height:50px;
     position:absolute;

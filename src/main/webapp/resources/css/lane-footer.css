@@ -1,7 +1,8 @@
 #laneFooter {
     position : relative;
     background-color : #F6F7F2;
-    background-image : url(/././resources/images/laneFooterBg1.png);
+    background-image : url(/././resources/images/sprite-vertall.png);
+    background-position: 0px -520px;
     background-repeat : repeat-x;
     padding : 29px;
 }
@@ -24,46 +25,52 @@
 }
 #socialMedia {
     position:absolute;
-    right: 17px;
+    right: 16px;
     bottom: 65px;
 }
 #socialMedia a {
 	height: 25px;
 	width: 26px;
-	margin-left:19px;
+	margin-left:8px;
 	display: inline-block;
-	background-image: url("/././resources/images/icons-sprite4.png");
+	background-image: url("/././resources/images/sprite-all.png");
 	background-repeat: no-repeat;
 }
 .facebook {
-	background-position: -46px -118px;
+	background-position: -600px -600px;
 }
 
 .facebook:hover {
-	background-position: -46px -172px;
+	background-position: -600px -640px;
 }
 .twitter {
-	background-position: -93px -118px;
+	background-position: -640px -600px;
 }
 .twitter:hover {
-	background-position: -93px -172px;
+	background-position: -640px -640px;
 }
 .googleplus {
-	background-position: -237px -118px;
+	background-position: -760px -600px;
 }
 .googleplus:hover {
-	background-position: -237px -172px;
+	background-position: -760px -640px;
 }
 .flickr {
-	background-position: -140px -118px;
+	background-position: -680px -600px;	
 }
 .flickr:hover {
-	background-position: -140px -172px;	
+	background-position: -680px -640px;	
+}
+.youtube {
+	background-position: -560px -600px;
+}
+.youtube:hover {
+	background-position: -560px -640px;
 }
 .makegift {
-	background-image: url("/././resources/images/icons-sprite4.png");
+	background-image: url("/././resources/images/sprite-all.png");
 	background-repeat: no-repeat;
-	background-position: -460px 0px;
+	background-position: -600px -520px;
 	position:absolute;
     right: 15px;
     bottom: 110px;

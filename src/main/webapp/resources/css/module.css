@@ -61,7 +61,7 @@
 /* module with shadow on bottom*/
 .bd.bottomShadow {
     margin-top : 0;
-    background-image : url(/././resources/images/bottomShadow1.png);
+    background-image : url(/././resources/images/shadow-wide.png);
     background-position : bottom;
     background-repeat : no-repeat;
     padding-bottom : 15px
@@ -70,7 +70,7 @@
 .shadow {
     padding-bottom : 15px;
     margin-bottom : 15px;
-    background-image : url(/././resources/images/grandroundsItemBg1.png);
+    background-image : url(/././resources/images/shadow-narrow.png);
     background-position : bottom;
     background-repeat : no-repeat;
 }
@@ -82,7 +82,7 @@
 
 /*left nav module with the shadow*/
 .left-shadow {
-	background-image: url(/././resources/images/grandroundsItemBg1.png);
+	background-image: url(/././resources/images/shadow-narrow.png);
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	position: relative;
@@ -102,4 +102,10 @@ margin-right:15px;
 .module-links-narrow {
     float : left;
     width : 50%;
+}
+/*only one style for the left column nav remain to keep the current page link bold*/
+.sectionMenu em {
+    font-style:normal;
+    font-weight:bold;
+    color:#820000;
 }

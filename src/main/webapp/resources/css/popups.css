@@ -1,40 +1,49 @@
 .popups {
-    display : none
+    display: none;
 }
 .yui3-popup {
-    z-index : 2;
-    position : absolute
+    z-index: 2;
+    position: absolute;
 }
 .yui3-popup-hidden {
-    visibility : hidden
+    visibility: hidden;
 }
 .yui3-popup-content {
-    background-color : #fff;
-    border : 4px solid #B2A77A;
-    text-align : left
+    -webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-moz-user-select: none;
+	background-color: white;
+	height: auto;
+	padding: 20px;
+	text-align: left;
+	border: 1px solid #9e9d98;
 }
 .yui3-popup-content .yui3-widget-hd {
-    background-color : #cdcfbe;
-    color : #820000;
-    font-family : Georgia, "Times New Roman", Times, serif;
-    font-size : 1.3em;
-    padding : 4px;
-    font-weight : bold;
-    cursor : move
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #820000;
+    font-size: 1.8em;
+    letter-spacing: 0.05em;
+    line-height: 1.2em;
+    margin-bottom: .2em;
+    cursor: move;
 }
 #popupClose {
-    background-image : url(/././resources/images/close-button-off.gif);
-    width : 22px;
-    height : 22px;
-    position : absolute;
-    right : 5px;
-    top : 5px;
-    border-bottom : none;
+    background-image : url(/././resources/images/sprite-all.png);
+    background-position: -40px -160px;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 7px;
+    top: 5px;
+    border-bottom: none;
 }
 #popupClose:hover {
-    background-image : url(/././resources/images/close-button-on.gif)
+    background-image: url(/././resources/images/sprite-all.png);
+    background-position: -40px -200px;
 }
 .yui3-popup-content .yui3-widget-bd {
-    padding : 4px;
-    font-size : 90%
+	font-size: 1em;
+    line-height: 1.6em;
+    margin: 0 0 1em;
 }

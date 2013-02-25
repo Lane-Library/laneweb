@@ -1,7 +1,7 @@
 /*styles for redesigned main elements on the landing pages*/
 .popular-shadow {
     background-color : #F4F5EF;
-    background-image : url(/././resources/images/bottomShadow1.png);
+    background-image : url(/././resources/images/shadow-wide.png);
     background-position : center bottom;
     background-repeat : no-repeat;
     padding : 1em 1em 2em 2em;
@@ -46,11 +46,9 @@
     padding-top : 10px;
     clear : left;
     text-align : center;
-    background-image : url(/././resources/images/bottomShadow1.png);
+    background-image : url(/././resources/images/shadow-wide.png);
     background-repeat : no-repeat;
     background-position : top center;
-    /*padding-bottom : 15px;*/
-    /*margin-bottom : 20px;*/
 }
 #portalList .empty-cell {
     background-color : white;

@@ -53,18 +53,21 @@ em {
 }
 .rss-link {
     float : right;
-    background-image : url(/././resources/images/rss.png);
+    background-image : url(/././resources/images/sprite-all.png);
+    background-position: -80px -240px;
     height : 13px;
     width : 13px;
     background-repeat : no-repeat;
     font-size : 0;
     text-indent : -10000px;
     display : block;
-    margin-top : 6px
+    margin-top : 6px;
+    border-bottom : none;
 }
 .rss-link:hover {
-    background-image : url(/././resources/images/rss_over.png);
-    border-bottom : none
+    background-image : url(/././resources/images/sprite-all.png);
+    background-position: -80px -280px;
+    border-bottom : none;
 }
 .red-text {
     color : #820000

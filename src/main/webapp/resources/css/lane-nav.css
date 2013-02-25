@@ -5,7 +5,9 @@
 	height: 46px;
 	/* IE6 doesn't get width 100% right */
 	_width: 989px;
-	background-image: url(/././resources/images/laneNavBg1.png);
+	background-image: url(/././resources/images/sprite-vertall.png);
+	background-repeat : repeat-x;
+    background-position:0 -240px;
 }
 
 .yui3-js-enabled #laneNav.clinical {
@@ -43,8 +45,8 @@
 	border-top: none;
 	padding: 6px 0;
 	z-index: 2;
-	background-image: url(/././resources/images/menu-bg.gif);
-	background-position: 0 100%;
+	background-image: url(/././resources/images/sprite-vertall.png);
+	background-position: 0 bottom;
 	background-repeat: repeat-x;
 	-moz-border-radius-bottomleft: 3px;
 	-moz-border-radius-bottomright: 3px;

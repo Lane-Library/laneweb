@@ -1,7 +1,6 @@
 #sb {
     padding-top : 72px;
-    background-image : url(/././resources/images/headerBg1.png);
-    background-repeat : repeat-x
+    background-position:0 -40px;
 }
 h1 {
     font-family : FrutigerLTStdLightCn, "Arial Narrow", Arial, Tahoma, "Trebuchet MS", sans-serif;
@@ -42,10 +41,12 @@ h1 a:hover {
     top : 22px;
     width : 203px;
     text-indent : -9000px;
-    background-image : url(/././resources/images/somLogo1.gif)
+    background-image : url(/././resources/images/sprite-all.png);
+    background-position : 0px 0px;
+    background-repeat:no-repeat;
 }
 #som:hover {
-    background-position : 0 -100px
+    background-position : 0 -80px;
 }
 #login, #libraryHours {
     position : absolute;  
@@ -77,7 +78,7 @@ h1 a:hover {
 }
 
 #login #favorites {
-	 background: url("/././resources/images/icons-sprite3.png") no-repeat scroll -296px -26px transparent;
+	 background: url("/././resources/images/sprite-all.png") no-repeat scroll -680px -40px transparent;
 	 padding-left: 22px;
 	 margin-left: 1em;
 	 border-left : none;

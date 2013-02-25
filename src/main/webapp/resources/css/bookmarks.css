@@ -11,14 +11,14 @@
 
 #bookmark-link {
     cursor: pointer;
-    background-image: url("/././resources/images/icons-sprite3.png");
-    background-position: 0 0;
+    background-image: url("/././resources/images/sprite-all.png");
+    background-position: -600px 0px;
     background-repeat:no-repeat;
     display: inline-block;
     height: 16px;
     width: 26px;
     position: absolute;
-    margin-left:5px
+    margin-left: 5px;
 }
 
 /*styles for topResources links so appears inside li element*/
@@ -29,11 +29,11 @@
 
 #bookmark-link.active,
 #bookmark-link.bookmarking {
-background-position: 0 -26px
+background-position: -600px -40px;
 }
 
 #bookmark-link.successful {
-background-position: 0 -53px;
+background-position: -600px -80px;
 }
 
 .yui3-bookmark-editor {

@@ -53,6 +53,8 @@
 }
 .type1 .yui3-accordion-item-active .yui3-accordion-item-trigger {
   background-image:url(/././resources/images/minus.png);
+    background-repeat:no-repeat;
+  background-position:18px 11px;
 }
 .type1 .expanded .show, .type1 .yui3-accordion-item-active .show {
     display:none;

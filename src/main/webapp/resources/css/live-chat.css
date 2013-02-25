@@ -1,7 +1,7 @@
 /* display : block for button behavior with background-image*/
 /*live chat link in the header - has an icon*/
 #libraryContact .live-chat a {
-    background : url("/././resources/images/icons-sprite3.png") no-repeat scroll -45px 0 transparent;
+    background : url("/././resources/images/sprite-all.png") no-repeat scroll -120px -240px transparent;
     padding-left : 32px;
     width : 26px;
     height : 15px;
@@ -10,7 +10,7 @@
     background-repeat : no-repeat;
 }
 #libraryContact .live-chat a:hover {
-    background: url("/././resources/images/icons-sprite3.png") no-repeat scroll -45px -26px transparent;
+    background: url("/././resources/images/sprite-all.png") no-repeat scroll -120px -280px transparent;
 }
 #libraryContact .live-chat-inactive {
     display : none;

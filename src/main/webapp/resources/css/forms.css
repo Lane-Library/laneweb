@@ -161,9 +161,9 @@
 #feedback .incorrect {
 	background-color: #F4F5EF;
 	color: #8C1515;
-	background-image: url(/././resources/images/required.png);
-	background-repeat: no-repeat;
-	background-position: right center;
+	border: 2px solid #820000;
+	display : block;
+	font-weight: bold;
 }
 
 
