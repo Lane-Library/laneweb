@@ -10,7 +10,7 @@
     margin: -7px 0;
     float: right;
     position:relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .pagingButton span {
@@ -73,7 +73,7 @@
     border-top-left-radius: 3px;
     -moz-border-radius-topleft: 3px;
     -webkit-border-top-left-radius: 3px;
-    z-index: 0;
+    z-index: 1;
 }
 
 #searchResults .pagingLabels {
