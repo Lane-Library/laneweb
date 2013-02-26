@@ -52,7 +52,7 @@
                     </xsl:call-template>
                 </xsl:if>
                 <dl class="lwSearchResults">
-                    <xsl:apply-templates select="//s:result"/>
+                    <xsl:apply-templates select="s:result"/>
                 </dl>
                 <xsl:if test="number(@size) &gt; 100">
                 <xsl:call-template name="paginationLinks">
@@ -63,7 +63,7 @@
                     <!-- empty div causes problems when facets are imported with JS -->
                     <xsl:text>&#160;</xsl:text>
                     <xsl:for-each
-                        select="/s:resources/s:contentHitCounts/s:resource">
+                        select="s:contentHitCounts/s:resource">
                         <span id="{@resourceId}">
                             <a href="{@resourceUrl}">
                                 <xsl:value-of select="@resourceHits"/>
@@ -164,26 +164,26 @@
                 <li>
                     <xsl:choose>
                         <xsl:when
-                            test="s:versions/s:version[1]/s:links/s:link[1]/@type = 'getPassword'">
+                            test="s:version[1]/s:link[1]/@type = 'getPassword'">
                             <xsl:call-template name="buildAnchor">
                                 <xsl:with-param name="type">first</xsl:with-param>
                                 <xsl:with-param name="link">
                                     <xsl:copy-of
-                                        select="s:versions/s:version[1]/s:links/s:link[2]/node()"/>
+                                        select="s:version[1]/s:link[2]/node()"/>
                                 </xsl:with-param>
                                 <xsl:with-param name="title" select="s:title"/>
                             </xsl:call-template>
                             <xsl:call-template name="firstLinkText">
-                                <xsl:with-param name="version" select="s:versions/s:version[1]"/>
+                                <xsl:with-param name="version" select="s:version[1]"/>
                             </xsl:call-template>
                             <xsl:call-template name="buildAnchor">
                                 <xsl:with-param name="type">getPassword</xsl:with-param>
                                 <xsl:with-param name="link">
                                     <xsl:copy-of
-                                        select="s:versions/s:version[1]/s:links/s:link[1]/node()"/>
+                                        select="s:version[1]/s:link[1]/node()"/>
                                 </xsl:with-param>
                             </xsl:call-template>
-                            <xsl:apply-templates select="s:versions//s:link[@type!='getPassword']"
+                            <xsl:apply-templates select="s:version/s:link[@type!='getPassword']"
                                 mode="remainder-links"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -191,14 +191,14 @@
                                 <xsl:with-param name="type">first</xsl:with-param>
                                 <xsl:with-param name="link">
                                     <xsl:copy-of
-                                        select="s:versions/s:version[1]/s:links/s:link[1]/node()"/>
+                                        select="s:version[1]/s:link[1]/node()"/>
                                 </xsl:with-param>
                                 <xsl:with-param name="title" select="s:title"/>
                             </xsl:call-template>
                             <xsl:call-template name="firstLinkText">
-                                <xsl:with-param name="version" select="s:versions/s:version[1]"/>
+                                <xsl:with-param name="version" select="s:version[1]"/>
                             </xsl:call-template>
-                            <xsl:apply-templates select="s:versions//s:link" mode="remainder-links"
+                            <xsl:apply-templates select="s:version/s:link" mode="remainder-links"
                             />
                         </xsl:otherwise>
                     </xsl:choose>
@@ -209,7 +209,7 @@
                             </div>
                         </xsl:when>
                         <!-- add catalog link to all bibs except those that already have one (history) -->
-                        <xsl:when test="s:recordType = 'bib' and not(s:versions//s:label[.='catalog record'])">
+                        <xsl:when test="s:recordType = 'bib' and not(s:version/s:link/s:label[.='catalog record'])">
                             <div class="moreResults">
                                 <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
                             </div>
@@ -239,7 +239,7 @@
                     <xsl:copy-of select="node()"/>
                 </xsl:with-param>
                 <xsl:with-param name="version">
-                    <xsl:copy-of select="../../node()"/>
+                    <xsl:copy-of select="../node()"/>
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:if>
@@ -250,7 +250,7 @@
         <xsl:text> </xsl:text>
         <xsl:if
             test="not($version/s:summaryHoldings or $version/s:publisher or $version/s:dates or $version/s:description)">
-            <xsl:value-of select="$version/s:links/s:link[1]/s:label"/>
+            <xsl:value-of select="$version/s:link[1]/s:label"/>
         </xsl:if>
         <xsl:for-each
             select="$version/s:summaryHoldings|$version/s:publisher|$version/s:dates|$version/s:description">
@@ -259,9 +259,9 @@
                 <xsl:text>, </xsl:text>
             </xsl:if>
         </xsl:for-each>
-        <xsl:if test="$version/s:links/s:link/s:instruction">
+        <xsl:if test="$version/s:link/s:instruction">
             <xsl:text>, </xsl:text>
-            <xsl:value-of select="$version/s:links/s:link/s:instruction"/>
+            <xsl:value-of select="$version/s:link/s:instruction"/>
         </xsl:if>
         <xsl:text> </xsl:text>
     </xsl:template>
@@ -272,7 +272,7 @@
         <xsl:param name="version"/>
         <xsl:choose>
             <xsl:when
-                test="($type = 'getPassword' and count($version//s:link) = 2) or ($version/s:summaryHoldings and count($version//s:link) = 1)">
+                test="($type = 'getPassword' and count($version/s:link) = 2) or ($version/s:summaryHoldings and count($version/s:link) = 1)">
                 <xsl:value-of select="$version/s:summaryHoldings"/>
                 <xsl:text>, </xsl:text>
                 <xsl:value-of select="$version/s:dates"/>

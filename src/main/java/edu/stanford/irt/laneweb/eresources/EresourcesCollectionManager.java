@@ -10,9 +10,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.impl.EresourceImpl;
-import edu.stanford.irt.eresources.impl.LinkImpl;
-import edu.stanford.irt.eresources.impl.VersionImpl;
+import edu.stanford.irt.eresources.Version;
 
 public class EresourcesCollectionManager extends AbstractCollectionManager {
 
@@ -25,13 +23,15 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
     @Override
     protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
-        EresourceImpl eresource = null;
-        VersionImpl version = null;
-        LinkImpl link;
+        Eresource eresource = null;
+        Version version = null;
+        TypedLink link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
         String currentTitle = null;
+        // collector for versions so they can be added after they have all their links:
+        List<Version> versions = new LinkedList<Version>();
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             int recordId = rs.getInt("RECORD_ID");
@@ -39,7 +39,14 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             String rowTitle = rs.getString("TITLE");
             if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
-                eresource = new EresourceImpl();
+                // add the collected versions to the previously created eresource
+                if (eresource != null) {
+                    for (Version v : versions) {
+                        eresource.addVersion(v);
+                    }
+                    versions.clear();
+                }
+                eresource = new ComparableVersionEresource();
                 eresource.setId(rowEresourceId);
                 eresource.setRecordId(recordId);
                 eresource.setRecordType(recordType);
@@ -71,8 +78,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
-                version = new VersionImpl();
-                eresource.addVersion(version);
+                version = new ComparableVersion();
+                versions.add(version);
                 version.setPublisher(rs.getString("PUBLISHER"));
                 version.setSummaryHoldings(rs.getString("HOLDINGS"));
                 version.setDates(rs.getString("DATES"));
@@ -82,12 +89,28 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             }
             int rowLinkId = rs.getInt("LINK_ID");
             if (rowLinkId != currentLinkId) {
-                link = new LinkImpl();
+                // determine the link type from the label
+                String label = rs.getString("LABEL");
+                LinkType type = null;
+                if ((null != label) && "get password".equalsIgnoreCase(label)) {
+                    type = LinkType.GETPASSWORD;
+                } else if ((null != label) && "impact factor".equalsIgnoreCase(label)) {
+                    type = LinkType.IMPACTFACTOR;
+                } else {
+                    type = LinkType.NORMAL;
+                }
+                link = new TypedLink(type);
                 version.addLink(link);
                 link.setUrl(rs.getString("URL"));
-                link.setLabel(rs.getString("LABEL"));
+                link.setLabel(label);
                 link.setInstruction(rs.getString("INSTRUCTION"));
                 currentLinkId = rowLinkId;
+            }
+        }
+        // add the versions to the last created eresource
+        if (eresource != null) {
+            for (Version v : versions) {
+                eresource.addVersion(v);
             }
         }
         return eresources;

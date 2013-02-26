@@ -26,8 +26,6 @@ public interface Resource {
 
     String LINK = "link";
 
-    String LINKS = "links";
-
     String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
 
     String PAGES = "pub-pages";
@@ -75,6 +73,4 @@ public interface Resource {
     String URL = "url";
 
     String VERSION = "version";
-
-    String VERSIONS = "versions";
 }
