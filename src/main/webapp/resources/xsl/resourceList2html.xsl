@@ -162,46 +162,17 @@
             <ul>
                 <xsl:call-template name="ulClass"/>
                 <li>
-                    <xsl:choose>
-                        <xsl:when
-                            test="s:version[1]/s:link[1]/@type = 'getPassword'">
                             <xsl:call-template name="buildAnchor">
                                 <xsl:with-param name="type">first</xsl:with-param>
-                                <xsl:with-param name="link">
-                                    <xsl:copy-of
-                                        select="s:version[1]/s:link[2]/node()"/>
-                                </xsl:with-param>
+                                <xsl:with-param name="link" select="s:version[1]/s:link[1]"/>
                                 <xsl:with-param name="title" select="s:title"/>
                             </xsl:call-template>
                             <xsl:call-template name="firstLinkText">
                                 <xsl:with-param name="version" select="s:version[1]"/>
                             </xsl:call-template>
-                            <xsl:call-template name="buildAnchor">
-                                <xsl:with-param name="type">getPassword</xsl:with-param>
-                                <xsl:with-param name="link">
-                                    <xsl:copy-of
-                                        select="s:version[1]/s:link[1]/node()"/>
-                                </xsl:with-param>
-                            </xsl:call-template>
-                            <xsl:apply-templates select="s:version/s:link[@type!='getPassword']"
+                            <xsl:apply-templates select="s:version/s:link"
                                 mode="remainder-links"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:call-template name="buildAnchor">
-                                <xsl:with-param name="type">first</xsl:with-param>
-                                <xsl:with-param name="link">
-                                    <xsl:copy-of
-                                        select="s:version[1]/s:link[1]/node()"/>
-                                </xsl:with-param>
-                                <xsl:with-param name="title" select="s:title"/>
-                            </xsl:call-template>
-                            <xsl:call-template name="firstLinkText">
-                                <xsl:with-param name="version" select="s:version[1]"/>
-                            </xsl:call-template>
-                            <xsl:apply-templates select="s:version/s:link" mode="remainder-links"
-                            />
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    
                     <xsl:choose>
                         <xsl:when test="s:recordType = 'auth'">
                             <div class="moreResults">
@@ -235,12 +206,8 @@
         <xsl:if test="position() != 1">
             <xsl:call-template name="buildAnchor">
                 <xsl:with-param name="type" select="@type"/>
-                <xsl:with-param name="link">
-                    <xsl:copy-of select="node()"/>
-                </xsl:with-param>
-                <xsl:with-param name="version">
-                    <xsl:copy-of select="../node()"/>
-                </xsl:with-param>
+                <xsl:with-param name="link" select="."/>
+                <xsl:with-param name="version" select=".."/>
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
@@ -264,6 +231,9 @@
             <xsl:value-of select="$version/s:link/s:instruction"/>
         </xsl:if>
         <xsl:text> </xsl:text>
+        <xsl:if test="$version/s:link[1]/@type = 'getPassword'">
+            <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="linkText">
@@ -272,7 +242,7 @@
         <xsl:param name="version"/>
         <xsl:choose>
             <xsl:when
-                test="($type = 'getPassword' and count($version/s:link) = 2) or ($version/s:summaryHoldings and count($version/s:link) = 1)">
+                test="$version/s:summaryHoldings and count($version/s:link) = 1">
                 <xsl:value-of select="$version/s:summaryHoldings"/>
                 <xsl:text>, </xsl:text>
                 <xsl:value-of select="$version/s:dates"/>
@@ -301,17 +271,18 @@
                     <xsl:apply-templates select="$title"/>
                 </a>
             </xsl:when>
-            <xsl:when test="$type = 'normal'">
+            <xsl:when test="$type = 'impactFactor'">
+                <div>
+                    <a href="{$link/s:url}">Impact Factor</a>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
                 <div>
                     <a href="{$link/s:url}" title="{$link/s:label}">
                         <xsl:call-template name="linkText">
                             <xsl:with-param name="type" select="@type"/>
-                            <xsl:with-param name="link">
-                                <xsl:copy-of select="$link"/>
-                            </xsl:with-param>
-                            <xsl:with-param name="version">
-                                <xsl:copy-of select="$version"/>
-                            </xsl:with-param>
+                            <xsl:with-param name="link" select="."/>
+                            <xsl:with-param name="version" select="$version"/>
                         </xsl:call-template>
                     </a>
                     <xsl:if test="$link/s:instruction">
@@ -322,19 +293,12 @@
                         <xsl:text> </xsl:text>
                         <xsl:value-of select="$version/s:publisher"/>
                     </xsl:if>
+                    <xsl:if test="$type = 'getPassword'">
+                        <xsl:text> </xsl:text>
+                        <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
+                    </xsl:if>
                 </div>
-            </xsl:when>
-            <xsl:when test="$type = 'getPassword'">
-                <xsl:text> </xsl:text>
-                <a href="{$link/s:url}" title="{$link/s:label}">
-                    <xsl:value-of select="$link/s:label"/>
-                </a>
-            </xsl:when>
-            <xsl:when test="$type = 'impactFactor'">
-                <div>
-                    <a href="{$link/s:url}">Impact Factor</a>
-                </div>
-            </xsl:when>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 

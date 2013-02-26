@@ -32,6 +32,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         String currentTitle = null;
         // collector for versions so they can be added after they have all their links:
         List<Version> versions = new LinkedList<Version>();
+        boolean createGetPassword = false;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             int recordId = rs.getInt("RECORD_ID");
@@ -91,19 +92,25 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             if (rowLinkId != currentLinkId) {
                 // determine the link type from the label
                 String label = rs.getString("LABEL");
-                LinkType type = null;
+                // if label is "get password" then the next link gets type getPassword
                 if ((null != label) && "get password".equalsIgnoreCase(label)) {
-                    type = LinkType.GETPASSWORD;
-                } else if ((null != label) && "impact factor".equalsIgnoreCase(label)) {
-                    type = LinkType.IMPACTFACTOR;
+                    createGetPassword = true;
                 } else {
-                    type = LinkType.NORMAL;
+                    LinkType type = null;
+                    if (createGetPassword) {
+                        type = LinkType.GETPASSWORD;
+                        createGetPassword = false;
+                    } else if ((null != label) && "impact factor".equalsIgnoreCase(label)) {
+                        type = LinkType.IMPACTFACTOR;
+                    } else {
+                        type = LinkType.NORMAL;
+                    }
+                    link = new TypedLink(type);
+                    version.addLink(link);
+                    link.setUrl(rs.getString("URL"));
+                    link.setLabel(label);
+                    link.setInstruction(rs.getString("INSTRUCTION"));
                 }
-                link = new TypedLink(type);
-                version.addLink(link);
-                link.setUrl(rs.getString("URL"));
-                link.setLabel(label);
-                link.setInstruction(rs.getString("INSTRUCTION"));
                 currentLinkId = rowLinkId;
             }
         }
