@@ -34,9 +34,9 @@
             </xsl:when>
             <xsl:when test="$mode = 'full'">
                 <xsl:if test="@title">
-                    <h3 class="calTitle alternate">
+                    <h4 class="calTitle alternate plain">
                         <xsl:value-of select="@title" />
-                    </h3>
+                    </h4>
                 </xsl:if>
                 <div class="calendar">
                     <ul>
