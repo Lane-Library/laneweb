@@ -22,6 +22,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
 
     @Override
     protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
+        // TODO: this is an incredibly ugly and complex method, due to be refactored out into different db schema
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;
@@ -32,6 +33,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         String currentTitle = null;
         // collector for versions so they can be added after they have all their links:
         List<Version> versions = new LinkedList<Version>();
+        // collector for links so the first one can get getPassword type
+        List<TypedLink> links = new LinkedList<TypedLink>();
         boolean createGetPassword = false;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
@@ -42,6 +45,18 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 currentTitle = rowTitle;
                 // add the collected versions to the previously created eresource
                 if (eresource != null) {
+                    // add the links to the previously created versions, setting type getPassword if required
+                    if (version != null) {
+                        if (createGetPassword) {
+                            links.get(0).setType(LinkType.GETPASSWORD);
+                            createGetPassword = false;
+                        }
+                        for (TypedLink l : links) {
+                            version.addLink(l);
+                        }
+                        links.clear();
+                        version = null;
+                    }
                     for (Version v : versions) {
                         eresource.addVersion(v);
                     }
@@ -79,6 +94,17 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
+                // add the links to the previously created versions, setting type getPassword if required
+                if (version != null) {
+                    if (createGetPassword) {
+                        links.get(0).setType(LinkType.GETPASSWORD);
+                        createGetPassword = false;
+                    }
+                    for (TypedLink l : links) {
+                        version.addLink(l);
+                    }
+                    links.clear();
+                }
                 version = new ComparableVersion();
                 versions.add(version);
                 version.setPublisher(rs.getString("PUBLISHER"));
@@ -97,21 +123,29 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                     createGetPassword = true;
                 } else {
                     LinkType type = null;
-                    if (createGetPassword) {
-                        type = LinkType.GETPASSWORD;
-                        createGetPassword = false;
-                    } else if ((null != label) && "impact factor".equalsIgnoreCase(label)) {
+                    if ((label != null) && "impact factor".equalsIgnoreCase(label)) {
                         type = LinkType.IMPACTFACTOR;
                     } else {
                         type = LinkType.NORMAL;
                     }
-                    link = new TypedLink(type);
-                    version.addLink(link);
+                    link = new TypedLink();
+                    link.setType(type);
                     link.setUrl(rs.getString("URL"));
                     link.setLabel(label);
                     link.setInstruction(rs.getString("INSTRUCTION"));
+                    links.add(link);
                 }
                 currentLinkId = rowLinkId;
+            }
+        }
+        // add the links to the last created version, setting type getPassword if required
+        if (version != null) {
+            if (createGetPassword) {
+                links.get(0).setType(LinkType.GETPASSWORD);
+                createGetPassword = false;
+            }
+            for (TypedLink l : links) {
+                version.addLink(l);
             }
         }
         // add the versions to the last created eresource

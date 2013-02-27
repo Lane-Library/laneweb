@@ -10,12 +10,12 @@ public class TypedLink extends LinkImpl {
     private LinkType type;
 
     /**
-     * Create a TypedLink of a particular LinkTYpe
+     * set the LinkType
      * 
      * @param type
      *            the LinkType
      */
-    public TypedLink(final LinkType type) {
+    public void setType(final LinkType type) {
         this.type = type;
     }
 
