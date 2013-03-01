@@ -87,7 +87,7 @@ public class ProxyHostManagerTest {
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
         this.manager.isProxyableHost("foo.bar");
-        Thread.sleep(100L);
+        Thread.sleep(200L);
         assertTrue(this.manager.isProxyableHost("foo.bar"));
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
