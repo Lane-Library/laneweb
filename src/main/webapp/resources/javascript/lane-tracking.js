@@ -47,16 +47,18 @@
                     label = link.get('textContent');
                 }
                 else if (link.ancestor(".lwSearchResults")) {
+                	var list = link.ancestor(".lwSearchResults"),
+                	    pageStart = Y.one("#pageStart");
+                	// pageStart is the value in the pageStart span or 1 if its not there.
+                	pageStart = pageStart ? parseInt(pageStart.get("textContent"), 10) : 1;
+                	value = list.all("dd").indexOf(link.ancestor("dd")) + pageStart;
+                    label = link.get('textContent');
                     if (searchTerms) {
                         category = "lane:searchResultClick";
                         action = searchTerms;
-                        label = link.get('textContent');
-                        value = parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10);
                     } else {
                         category = "lane:browseResultClick";
                         action = document.location.pathname;
-                        label = link.get('textContent');
-                        value = parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10);
                     }
                 }
                 return {

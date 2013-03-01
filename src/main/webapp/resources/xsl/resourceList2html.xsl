@@ -367,12 +367,9 @@
     </xsl:template>
 
     <xsl:template name="ulClass">
-        <xsl:attribute name="class">
-            <xsl:value-of select="concat('r-', /s:resources/@start + position())"/>
-            <xsl:if test="s:description">
-                <xsl:text> hvrTrig</xsl:text>
-            </xsl:if>
-        </xsl:attribute>
+        <xsl:if test="s:description">
+            <xsl:attribute name="class" select="'hvrTrig'"/>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -44,7 +44,7 @@
 					<xsl:choose>
 						<xsl:when
 							test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
-							<xsl:value-of select="number(/s:resources/@start) + 1" />
+							<span id="pageStart"><xsl:value-of select="number(/s:resources/@start) + 1" /></span>
 							<xsl:text> to </xsl:text>
 							<xsl:value-of
 								select="number(/s:resources/@start) + number(/s:resources/@length)" />
