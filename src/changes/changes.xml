@@ -7,61 +7,39 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2013-02-11" version="2.0.4" description="2.0.4 bug fix release">
-            <action date="2013-02-07" issue="81888" dev="olgary" type="update">
-                updated template.xml, debug.xml, lane-footer.css, - new image-sprite4.png
+        <release date="2013-03-04" version="2.1.0" description="2.1.0 refactor release">
+            <action date="2013-03-01" dev="ceyates" issue="82529" type="fix">
+                search for Rheumatology throws an IllegalArgumentException
             </action>
-            <action date="2013-02-05" issue="81823" dev="ryanmax" type="fix">
-                &lt;description&gt; and &lt;label&gt; elements appearing in html output
+            <action date="2013-02-27" dev="olgary" issue="82459" type="update">
+                update pom and css directory
             </action>
-        </release>
-        <release date="2013-02-04" version="2.0.3" description="2.0.3 bug fix release">
-            <action date="2013-02-04" issue="81800" dev="olgary" type="update">
-                update template.xml, debug.xml, landing-pgs-2011.css - 'mainnav'
+            <action date="2013-02-27" dev="olgary" issue="82419" type="update">
+                hours.xsl - fix the title appearance
             </action>
-            <action date="2013-01-29" issue="81687" dev="ceyates" type="fix">
-                build is not platform encoding independent
+            <action date="2013-02-26" dev="ceyates" issue="82416" type="update">
+                have the CollectionManager provide information that a link needs 'get password' reference
             </action>
-        </release>
-        <release date="2013-01-28" version="2.0.2" description="2.0.2 bug fix release [not deployed]">
-            <action date="2013-01-23" issue="81544" dev="olgary" type="update">
-                forms.css updated - to fix the center alignment for hd
+            <action date="2013-08-26" dev="ceyates" issue="82412" type="update">
+                have the CollectionManager determine link type
             </action>
-            <action date="2013-01-23" issue="81536" dev="ryanmax" type="add">
-                track clicks of UpToDate and PubMed in red nav bar
+            <action date="2013-02-26" dev="ceyates" issue="82404" type="update">
+                have CollectionManager return sorted Versions
             </action>
-            <action date="2013-01-22" issue="81516" dev="ryanmax" type="add">
-                report GA event for blue top resources clicks
+            <action date="2013-02-25" dev="ceyates" issue="82376" type="update">
+                remove &lt;versions> and &lt;links> elements from eresources markup
             </action>
-        </release>
-        <release date="2013-01-17" version="2.0.1" description="2.0.1 bug fix release">
-            <action date="2013-01-17" issue="81408" dev="ryanmax" type="update">
-                preserve JavaMelody stats between releases
+            <action date="2013-02-26" dev="ryanmax" issue="82135" type="fix">
+                FF. 18.0+ cursor problem in feedback widget
             </action>
-            <action date="2013-01-16" issue="81393" dev="ceyates" type="fix">
-                XIncludeTransformer fails to process fallback
+            <action date="2013-02-05" dev="ceyates" issue="81828" type="update">
+                upgrade to irt-cocoon-1.5
             </action>
-            <action date="2013-01-14" issue="81324" dev="olgary" type="update">
-                updated h2 and font size in header
-            </action>
-            <action date="2013-01-14" issue="81313" dev="ceyates" type="fix">
-                How to in main nav not getting class='active'
-            </action>
-            <action date="2013-01-16" issue="80721" dev="ryanmax" type="update">
-                expand number of search results returned per metasearch engine
-            </action>
-            <action date="2013-01-16" issue="80483" dev="ryanmax" type="fix">
-                voyager authentication not working
+            <action date="2013-02-27" dev="olgary" issue="48229" type="update">
+                Refactor &amp; reorganize template sprites
             </action>
         </release>
-        <release date="2013-01-09" version="2.0.0" description="2.0.0 refactor release">
-            <action date="2013-01-09" issue="80513" dev="ceyates" type="update">
-                change build jdk to 1.7  
-            </action>
-            <action date="2013-01-09" issue="75266" dev="ceyates" type="update">
-                change dependency from apache cocoon to irt-cocoon 
-            </action>
-        </release>
+        <release date="2013-01-09" version="2.0.0" description="2.0.0 refactor release"/>
         <release date="2012-07-09" version="1.13.0" description="1.13.0 feature release"/>
         <release date="2011-09-02" version="1.12.0" description="1.12.0 refactor release"/>
         <release date="2010-09-20" version="1.11.0" description="1.11.0 redesign release"/>
