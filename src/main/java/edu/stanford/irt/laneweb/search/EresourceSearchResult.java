@@ -21,13 +21,17 @@ public class EresourceSearchResult implements SearchResult {
     }
 
     public int compareTo(final SearchResult other) {
-        int scoreCmp = other.getScore() - this.eresource.getScore();
+        int scoreCmp = other.getScore() - getScore();
         if (scoreCmp == 0) {
             scoreCmp = this.sortTitle.compareTo(other.getSortTitle());
             if (scoreCmp == 0 && !other.equals(this)) {
                 // This happens when more than one eresource has the same title
                 // as the query
-                scoreCmp = -1;
+                if (other instanceof EresourceSearchResult) {
+                    scoreCmp = ((EresourceSearchResult)other).getEresource().getRecordId() - this.eresource.getRecordId();
+                } else {
+                    scoreCmp = -1;
+                }
             }
         }
         return scoreCmp;
@@ -46,7 +50,8 @@ public class EresourceSearchResult implements SearchResult {
     }
 
     public int getScore() {
-        return this.eresource.getScore();
+        int score = this.eresource.getScore();
+        return score < 0 ? 0 : score;
     }
 
     public String getSortTitle() {
