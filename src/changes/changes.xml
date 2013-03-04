@@ -11,6 +11,9 @@
             <action date="2013-03-01" dev="ceyates" issue="82529" type="fix">
                 search for Rheumatology throws an IllegalArgumentException
             </action>
+            <action date="2013-02-28" dev="ceyates" issue="82519" type="update">
+                use javascript to determine resource position for tracking
+            </action>
             <action date="2013-02-27" dev="olgary" issue="82459" type="update">
                 update pom and css directory
             </action>
