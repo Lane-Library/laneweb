@@ -19,10 +19,6 @@
     <xsl:param name="emrid"/>
     
     <xsl:param name="mesh"/>
-    
-    <xsl:variable name="search-terms">
-        <xsl:value-of select="/s:resources/s:query"/>
-    </xsl:variable>
 
     <xsl:variable name="guest-mode">
         <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
@@ -162,150 +158,109 @@
             <ul>
                 <xsl:call-template name="ulClass"/>
                 <li>
-                            <xsl:call-template name="buildAnchor">
-                                <xsl:with-param name="type">first</xsl:with-param>
-                                <xsl:with-param name="link" select="s:version[1]/s:link[1]"/>
-                                <xsl:with-param name="title" select="s:title"/>
-                            </xsl:call-template>
-                            <xsl:call-template name="firstLinkText">
-                                <xsl:with-param name="version" select="s:version[1]"/>
-                            </xsl:call-template>
-                            <xsl:apply-templates select="s:version/s:link"
-                                mode="remainder-links"/>
-                    
-                    <xsl:choose>
-                        <xsl:when test="s:recordType = 'auth'">
-                            <div class="moreResults">
-                                <span class="sourceLink">Lane Community Info File</span>
-                            </div>
-                        </xsl:when>
-                        <!-- add catalog link to all bibs except those that already have one (history) -->
-                        <xsl:when test="s:recordType = 'bib' and not(s:version/s:link/s:label[.='catalog record'])">
-                            <div class="moreResults">
-                                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
-                            </div>
-                        </xsl:when>
-                        <xsl:when test="s:recordType = 'web'">
-                            <div class="moreResults">
-                                <span class="sourceLink">Lane Web Page</span>
-                            </div>
-                        </xsl:when>
-                        <xsl:when test="s:recordType = 'class'">
-                            <div class="moreResults">
-                                <span class="sourceLink">Lane Class</span>
-                            </div>
-                        </xsl:when>
-                    </xsl:choose>
+                    <xsl:apply-templates select="s:version"/>
+                    <div class="moreResults">
+                        <xsl:apply-templates select="s:recordType"/>
+                    </div>
                 </li>
                 <xsl:apply-templates select="s:description"/>
             </ul>
         </dd>
     </xsl:template>
-
-    <xsl:template match="s:link" mode="remainder-links">
-        <xsl:if test="position() != 1">
-            <xsl:call-template name="buildAnchor">
-                <xsl:with-param name="type" select="@type"/>
-                <xsl:with-param name="link" select="."/>
-                <xsl:with-param name="version" select=".."/>
-            </xsl:call-template>
-        </xsl:if>
+    
+    <xsl:template match="s:version">
+        <xsl:apply-templates select="s:link"/>
     </xsl:template>
-
-    <xsl:template name="firstLinkText">
-        <xsl:param name="version"/>
+    
+    <xsl:template match="s:recordType">
+        <xsl:choose>
+            <xsl:when test=". = 'auth'">
+                <span class="sourceLink">Lane Community Info File</span>
+            </xsl:when>
+            <!-- add catalog link to all bibs except those that already have one (history) -->
+            <xsl:when test=". = 'bib' and not(../s:version/s:link/s:label[.='catalog record'])">
+                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
+            </xsl:when>
+            <xsl:when test=". = 'web'">
+                <span class="sourceLink">Lane Web Page</span>
+            </xsl:when>
+            <xsl:when test=". = 'class'">
+                <span class="sourceLink">Lane Class</span>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="s:description">
+        <li class="hvrTarg">
+            <xsl:apply-templates/>
+        </li>
+    </xsl:template>
+    
+    <xsl:template match="s:version[1]/s:link[1]">
+        <a class="primaryLink" href="{s:url}" title="{../../s:title}"><xsl:value-of select="../../s:title"/></a>
         <xsl:text> </xsl:text>
         <xsl:if
-            test="not($version/s:summaryHoldings or $version/s:publisher or $version/s:dates or $version/s:description)">
-            <xsl:value-of select="$version/s:link[1]/s:label"/>
+            test="not(../s:summaryHoldings or ../s:publisher or ../s:dates or ../s:description)">
+            <xsl:value-of select="s:label"/>
         </xsl:if>
         <xsl:for-each
-            select="$version/s:summaryHoldings|$version/s:publisher|$version/s:dates|$version/s:description">
+            select="../s:summaryHoldings|../s:publisher|../s:dates|../s:description">
             <xsl:value-of select="."/>
             <xsl:if test="position() != last()">
                 <xsl:text>, </xsl:text>
             </xsl:if>
         </xsl:for-each>
-        <xsl:if test="$version/s:link/s:instruction">
+        <xsl:if test="/s:instruction">
             <xsl:text>, </xsl:text>
-            <xsl:value-of select="$version/s:link/s:instruction"/>
+            <xsl:value-of select="s:instruction"/>
         </xsl:if>
         <xsl:text> </xsl:text>
-        <xsl:if test="$version/s:link[1]/@type = 'getPassword'">
+        <xsl:if test="@type = 'getPassword'">
             <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
         </xsl:if>
     </xsl:template>
-
-    <xsl:template name="linkText">
-        <xsl:param name="link"/>
-        <xsl:param name="type"/>
-        <xsl:param name="version"/>
-        <xsl:choose>
-            <xsl:when
-                test="$version/s:summaryHoldings and count($version/s:link) = 1">
-                <xsl:value-of select="$version/s:summaryHoldings"/>
-                <xsl:text>, </xsl:text>
-                <xsl:value-of select="$version/s:dates"/>
-            </xsl:when>
-            <xsl:when test="$link/s:label">
-                <xsl:value-of select="$link/s:label"/>
-            </xsl:when>
-            <xsl:when test="$link/s:url">
-                <xsl:value-of select="$link/s:url"/>
-            </xsl:when>
-        </xsl:choose>
-        <xsl:if test="$version/s:description">
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="$version/s:description"/>
-        </xsl:if>
+    
+    <xsl:template match="s:link">
+        <div>
+            <a href="{s:url}" title="{s:label}">
+                <xsl:choose>
+                    <xsl:when
+                        test="../s:summaryHoldings and count(../s:link) = 1">
+                        <xsl:value-of select="../s:summaryHoldings"/>
+                        <xsl:text>, </xsl:text>
+                        <xsl:value-of select="../s:dates"/>
+                    </xsl:when>
+                    <xsl:when test="s:label">
+                        <xsl:value-of select="s:label"/>
+                    </xsl:when>
+                    <xsl:when test="s:url">
+                        <xsl:value-of select="s:url"/>
+                    </xsl:when>
+                </xsl:choose>
+                <xsl:if test="../s:description">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="../s:description"/>
+                </xsl:if>
+            </a>
+            <xsl:if test="s:instruction">
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="s:instruction"/>
+            </xsl:if>
+            <xsl:if test="../s:publisher">
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="../s:publisher"/>
+            </xsl:if>
+            <xsl:if test="@type = 'getPassword'">
+                <xsl:text> </xsl:text>
+                <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
+            </xsl:if>
+        </div>
     </xsl:template>
-
-    <xsl:template name="buildAnchor">
-        <xsl:param name="type"/>
-        <xsl:param name="link"/>
-        <xsl:param name="version"/>
-        <xsl:param name="title"/>
-        <xsl:choose>
-            <xsl:when test="$type = 'first'">
-                <a class="primaryLink" href="{$link/s:url}">
-                    <xsl:apply-templates select="$title"/>
-                </a>
-            </xsl:when>
-            <xsl:when test="$type = 'impactFactor'">
-                <div>
-                    <a href="{$link/s:url}">Impact Factor</a>
-                </div>
-            </xsl:when>
-            <xsl:otherwise>
-                <div>
-                    <a href="{$link/s:url}" title="{$link/s:label}">
-                        <xsl:call-template name="linkText">
-                            <xsl:with-param name="type" select="@type"/>
-                            <xsl:with-param name="link" select="."/>
-                            <xsl:with-param name="version" select="$version"/>
-                        </xsl:call-template>
-                    </a>
-                    <xsl:if test="$link/s:instruction">
-                        <xsl:text> </xsl:text>
-                        <xsl:value-of select="$link/s:instruction"/>
-                    </xsl:if>
-                    <xsl:if test="$version/s:publisher">
-                        <xsl:text> </xsl:text>
-                        <xsl:value-of select="$version/s:publisher"/>
-                    </xsl:if>
-                    <xsl:if test="$type = 'getPassword'">
-                        <xsl:text> </xsl:text>
-                        <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
-                    </xsl:if>
-                </div>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <xsl:template match="s:description">
-        <li class="hvrTarg">
-            <xsl:apply-templates/>
-        </li>
+    
+    <xsl:template match="s:link[@type = 'impactFactor']">
+        <div>
+            <a href="{s:url}">Impact Factor</a>
+        </div>
     </xsl:template>
 
     <xsl:template match="s:pub-author">
