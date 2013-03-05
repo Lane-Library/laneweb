@@ -84,7 +84,8 @@ public class ScoreStrategy {
         } else {
             score = 1;
         }
-        return (int) ((score + computeDateAdjustment(searchResult.getPublicationDate())) * weight);
+        score = (int) ((score + computeDateAdjustment(searchResult.getPublicationDate())) * weight);
+        return score < 0 ? 0 : score;
     }
 
     // return -10 to 10, based on pub date's proximity to THIS_YEAR
