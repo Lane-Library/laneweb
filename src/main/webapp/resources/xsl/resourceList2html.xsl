@@ -159,9 +159,7 @@
                 <xsl:call-template name="ulClass"/>
                 <li>
                     <xsl:apply-templates select="s:version"/>
-                    <div class="moreResults">
-                        <xsl:apply-templates select="s:recordType"/>
-                    </div>
+                    <xsl:apply-templates select="s:recordType"/>
                 </li>
                 <xsl:apply-templates select="s:description"/>
             </ul>
@@ -173,21 +171,23 @@
     </xsl:template>
     
     <xsl:template match="s:recordType">
-        <xsl:choose>
-            <xsl:when test=". = 'auth'">
-                <span class="sourceLink">Lane Community Info File</span>
-            </xsl:when>
-            <!-- add catalog link to all bibs except those that already have one (history) -->
-            <xsl:when test=". = 'bib' and not(../s:version/s:link/s:label[.='catalog record'])">
-                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
-            </xsl:when>
-            <xsl:when test=". = 'web'">
-                <span class="sourceLink">Lane Web Page</span>
-            </xsl:when>
-            <xsl:when test=". = 'class'">
-                <span class="sourceLink">Lane Class</span>
-            </xsl:when>
-        </xsl:choose>
+        <div class="moreResults">
+            <xsl:choose>
+                <xsl:when test=". = 'auth'">
+                    <span class="sourceLink">Lane Community Info File</span>
+                </xsl:when>
+                <!-- add catalog link to all bibs except those that already have one (history) -->
+                <xsl:when test=". = 'bib' and not(../s:version/s:link/s:label[.='catalog record'])">
+                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
+                </xsl:when>
+                <xsl:when test=". = 'web'">
+                    <span class="sourceLink">Lane Web Page</span>
+                </xsl:when>
+                <xsl:when test=". = 'class'">
+                    <span class="sourceLink">Lane Class</span>
+                </xsl:when>
+            </xsl:choose>
+        </div>
     </xsl:template>
     
     <xsl:template match="s:description">
