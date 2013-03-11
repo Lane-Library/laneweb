@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-03-11" version="2.1.1" description="2.1.1 bug fix release">
+            <action date="2013-03-05" dev="ceyates" issue="82626" type="fix">
+                search for 'pediatric grand rounds' fails
+            </action>
+        </release>
         <release date="2013-03-04" version="2.1.0" description="2.1.0 refactor release">
             <action date="2013-03-01" dev="ceyates" issue="82529" type="fix">
                 search for Rheumatology throws an IllegalArgumentException
