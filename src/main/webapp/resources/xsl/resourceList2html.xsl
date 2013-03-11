@@ -197,7 +197,7 @@
     </xsl:template>
     
     <xsl:template match="s:version[1]/s:link[1]">
-        <a class="primaryLink" href="{s:url}" title="{../../s:title}"><xsl:value-of select="../../s:title"/></a>
+        <a class="primaryLink" href="{s:url}" title="{../../s:title}"><xsl:apply-templates select="../../s:title"/></a>
         <xsl:text> </xsl:text>
         <xsl:if
             test="not(../s:summaryHoldings or ../s:publisher or ../s:dates or ../s:description)">
