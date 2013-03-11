@@ -11,6 +11,8 @@ import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Version;
+import edu.stanford.irt.eresources.impl.EresourceImpl;
+import edu.stanford.irt.eresources.impl.VersionImpl;
 
 public class EresourcesCollectionManager extends AbstractCollectionManager {
 
@@ -31,10 +33,6 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         int currentVersionId = -1;
         int currentLinkId = -1;
         String currentTitle = null;
-        // collector for versions so they can be added after they have all their links:
-        List<Version> versions = new LinkedList<Version>();
-        // collector for links so the first one can get getPassword type
-        List<TypedLink> links = new LinkedList<TypedLink>();
         boolean createGetPassword = false;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
@@ -43,26 +41,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             String rowTitle = rs.getString("TITLE");
             if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
-                // add the collected versions to the previously created eresource
-                if (eresource != null) {
-                    // add the links to the previously created versions, setting type getPassword if required
-                    if (version != null) {
-                        if (createGetPassword) {
-                            links.get(0).setType(LinkType.GETPASSWORD);
-                            createGetPassword = false;
-                        }
-                        for (TypedLink l : links) {
-                            version.addLink(l);
-                        }
-                        links.clear();
-                        version = null;
-                    }
-                    for (Version v : versions) {
-                        eresource.addVersion(v);
-                    }
-                    versions.clear();
-                }
-                eresource = new ComparableVersionEresource();
+                eresource = new EresourceImpl();
                 eresource.setId(rowEresourceId);
                 eresource.setRecordId(recordId);
                 eresource.setRecordType(recordType);
@@ -94,19 +73,9 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
-                // add the links to the previously created versions, setting type getPassword if required
-                if (version != null) {
-                    if (createGetPassword) {
-                        links.get(0).setType(LinkType.GETPASSWORD);
-                        createGetPassword = false;
-                    }
-                    for (TypedLink l : links) {
-                        version.addLink(l);
-                    }
-                    links.clear();
-                }
-                version = new ComparableVersion();
-                versions.add(version);
+                createGetPassword = "T".equals(rs.getString("GETPASSWORD"));
+                version = new VersionImpl();
+                eresource.addVersion(version);
                 version.setPublisher(rs.getString("PUBLISHER"));
                 version.setSummaryHoldings(rs.getString("HOLDINGS"));
                 version.setDates(rs.getString("DATES"));
@@ -118,40 +87,22 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             if (rowLinkId != currentLinkId) {
                 // determine the link type from the label
                 String label = rs.getString("LABEL");
-                // if label is "get password" then the next link gets type getPassword
-                if ((null != label) && "get password".equalsIgnoreCase(label)) {
-                    createGetPassword = true;
+                LinkType type = null;
+                if (createGetPassword) {
+                    type = LinkType.GETPASSWORD;
+                    createGetPassword = false;
+                } else if (label != null && "impact factor".equalsIgnoreCase(label)) {
+                    type = LinkType.IMPACTFACTOR;
                 } else {
-                    LinkType type = null;
-                    if ((label != null) && "impact factor".equalsIgnoreCase(label)) {
-                        type = LinkType.IMPACTFACTOR;
-                    } else {
-                        type = LinkType.NORMAL;
-                    }
-                    link = new TypedLink();
-                    link.setType(type);
-                    link.setUrl(rs.getString("URL"));
-                    link.setLabel(label);
-                    link.setInstruction(rs.getString("INSTRUCTION"));
-                    links.add(link);
+                    type = LinkType.NORMAL;
                 }
+                link = new TypedLink();
+                link.setType(type);
+                link.setUrl(rs.getString("URL"));
+                link.setLabel(label);
+                link.setInstruction(rs.getString("INSTRUCTION"));
+                version.addLink(link);
                 currentLinkId = rowLinkId;
-            }
-        }
-        // add the links to the last created version, setting type getPassword if required
-        if (version != null) {
-            if (createGetPassword) {
-                links.get(0).setType(LinkType.GETPASSWORD);
-                createGetPassword = false;
-            }
-            for (TypedLink l : links) {
-                version.addLink(l);
-            }
-        }
-        // add the versions to the last created eresource
-        if (eresource != null) {
-            for (Version v : versions) {
-                eresource.addVersion(v);
             }
         }
         return eresources;

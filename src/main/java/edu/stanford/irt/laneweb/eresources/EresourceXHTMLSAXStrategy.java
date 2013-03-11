@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -40,20 +41,19 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
 
     private static final String TITLE = "title";
 
-    private static final Comparator<Version> VERSION_COMPARATOR = new EresourceVersionComparator();
-
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
-            List<Version> versions = new LinkedList<Version>(eresource.getVersions());
-            Collections.sort(versions, VERSION_COMPARATOR);
-            Version firstVersion = versions.get(0);
-            createFirstVersionLinks(xmlConsumer, firstVersion, eresource.getTitle());
-            for (int i = 1; i < versions.size(); i++) {
-                Version version = versions.get(i);
-                for (Link link : version.getLinks()) {
-                    createSecondaryLink(xmlConsumer, version, link);
+            boolean processedFirstVersion = false;
+            for (Version version : eresource.getVersions()) {
+                if (!processedFirstVersion) {
+                    createFirstVersionLinks(xmlConsumer, version, eresource.getTitle());
+                    processedFirstVersion = true;
+                } else {
+                    for (Link link : version.getLinks()) {
+                        createSecondaryLink(xmlConsumer, version, link);
+                    }
                 }
             }
             createMoreResultsLink(xmlConsumer, eresource);
