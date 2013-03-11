@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>2.1.1</version>
+    <version>2.1.2-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/maven/projects/laneweb/</url>
     <inceptionYear>2002</inceptionYear>
@@ -48,8 +48,8 @@
         </developer>
     </developers>
     <scm>
-        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/tags/laneweb-2.1.1</developerConnection>
-        <url>https://irt-svn.stanford.edu/repos/irt/lane/laneweb/tags/laneweb-2.1.1</url>
+        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
+        <url>https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</url>
     </scm>
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
