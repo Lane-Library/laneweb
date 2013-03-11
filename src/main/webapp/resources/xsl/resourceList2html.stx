@@ -98,9 +98,9 @@
     </stx:template>
     
     <stx:template match="linked-list|list">
-        <dl class="lwSearchResults">
+        <ul class="lwSearchResults">
             <stx:process-children/>
-        </dl>
+        </ul>
     </stx:template>
 
     <stx:variable name="url"/>

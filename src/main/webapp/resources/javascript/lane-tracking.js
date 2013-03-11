@@ -51,7 +51,7 @@
                 	    pageStart = Y.one("#pageStart");
                 	// pageStart is the value in the pageStart span or 1 if its not there.
                 	pageStart = pageStart ? parseInt(pageStart.get("textContent"), 10) : 1;
-                	value = list.all("dd").indexOf(link.ancestor("dd")) + pageStart;
+                	value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
                     label = link.get('textContent');
                     if (searchTerms) {
                         category = "lane:searchResultClick";

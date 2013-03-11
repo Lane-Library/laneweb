@@ -109,20 +109,20 @@
                         <xsl:value-of select="$url" />
                     </link>
                 </image>
-                <xsl:apply-templates select="//h:dl/h:dd/h:ul/h:li" />
+                <xsl:apply-templates select="//h:ul[@class='lwSearchResults']/h:li/h:div[1]" />
             </channel>
         </rss>
     </xsl:template>
 
 
-    <xsl:template match="h:li">
+    <xsl:template match="h:div">
         <item>
             <title>
-                <xsl:value-of select="h:a" />
+                <xsl:value-of select="h:a[1]" />
             </title>
             <link>http://lane.stanford.edu/secure/apps/proxy/credential?url=<xsl:value-of select="h:a[1]/@href"/></link>
             <description>
-                <xsl:value-of select="h:a" />
+                <xsl:value-of select="h:a[1]" />
                 -
                 <xsl:value-of select="text()" />
             </description>

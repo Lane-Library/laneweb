@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-    This counts the number of dd elements and if none 0 processes #noHitsText
+    This counts the number of li children of @class='lwSearchResults' and if none 0 processes #noHitsText
 -->
 <stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
     xmlns:h="http://www.w3.org/1999/xhtml"
@@ -10,7 +10,7 @@
     
     <stx:variable name="count" select="0"/>
     
-    <stx:template match="h:dd">
+    <stx:template match="h:ul[@class='lwSearchResults']/h:li">
         <stx:assign name="count" select="$count + 1"/>
         <stx:copy>
             <stx:process-attributes/>
