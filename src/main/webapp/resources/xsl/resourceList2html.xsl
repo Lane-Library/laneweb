@@ -185,6 +185,8 @@
             </xsl:choose>
         </div>
     </xsl:template>
+    
+    <xsl:template match="s:recordType"/>
 
     <xsl:template match="s:description">
         <div class="hvrTarg">
