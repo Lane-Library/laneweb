@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-03-12" version="2.1.2" description="2.1.2 bug fix release">
+            <action date="2013-03-12" dev="ceyates" issue="82861" type="fix">
+                search of 'Glossary of genetic terms' fails
+            </action>
+        </release>
         <release date="2013-03-11" version="2.1.1" description="2.1.1 bug fix release">
             <action date="2013-03-05" dev="ceyates" issue="82626" type="fix">
                 search for 'pediatric grand rounds' fails
