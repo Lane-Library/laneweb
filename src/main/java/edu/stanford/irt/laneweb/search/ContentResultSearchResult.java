@@ -55,7 +55,7 @@ public class ContentResultSearchResult implements SearchResult {
     public int compareTo(final SearchResult o) {
         int scoreCmp = o.getScore() - this.score;
         int titleCmp = this.sortTitle.compareTo(o.getSortTitle());
-        if (titleCmp == 0) {
+        if (titleCmp == 0 && o instanceof ContentResultSearchResult) {
             ContentResultSearchResult other = (ContentResultSearchResult) o;
             String otherContentId = other.contentResult.getContentId();
             String thisContentId = this.contentResult.getContentId();
