@@ -85,23 +85,25 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             }
             int rowLinkId = rs.getInt("LINK_ID");
             if (rowLinkId != currentLinkId) {
-                // determine the link type from the label
                 String label = rs.getString("LABEL");
-                LinkType type = null;
-                if (createGetPassword) {
-                    type = LinkType.GETPASSWORD;
-                    createGetPassword = false;
-                } else if (label != null && "impact factor".equalsIgnoreCase(label)) {
-                    type = LinkType.IMPACTFACTOR;
-                } else {
-                    type = LinkType.NORMAL;
+                // don't include get password links, TODO: remove them from the database
+                if (label == null || !"get password".equalsIgnoreCase(label)) {
+                    LinkType type = null;
+                    if (createGetPassword) {
+                        type = LinkType.GETPASSWORD;
+                        createGetPassword = false;
+                    } else if (label != null && "impact factor".equalsIgnoreCase(label)) {
+                        type = LinkType.IMPACTFACTOR;
+                    } else {
+                        type = LinkType.NORMAL;
+                    }
+                    link = new TypedLink();
+                    link.setType(type);
+                    link.setUrl(rs.getString("URL"));
+                    link.setLabel(label);
+                    link.setInstruction(rs.getString("INSTRUCTION"));
+                    version.addLink(link);
                 }
-                link = new TypedLink();
-                link.setType(type);
-                link.setUrl(rs.getString("URL"));
-                link.setLabel(label);
-                link.setInstruction(rs.getString("INSTRUCTION"));
-                version.addLink(link);
                 currentLinkId = rowLinkId;
             }
         }
