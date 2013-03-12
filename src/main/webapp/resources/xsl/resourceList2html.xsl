@@ -174,7 +174,7 @@
                 </xsl:when>
                 <!-- add catalog link to all bibs except those that already have one (history) -->
                 <xsl:when test=". = 'bib'">
-                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
+                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog record</a>
                 </xsl:when>
                 <xsl:when test=". = 'web'">
                     <span class="sourceLink">Lane Web Page</span>
