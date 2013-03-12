@@ -166,14 +166,14 @@
         <xsl:apply-templates select="s:link"/>
     </xsl:template>
 
-    <xsl:template match="s:recordType">
+    <xsl:template match="s:recordType[not(../s:version/s:link/s:label[.='catalog record'])]">
         <div class="moreResults">
             <xsl:choose>
                 <xsl:when test=". = 'auth'">
                     <span class="sourceLink">Lane Community Info File</span>
                 </xsl:when>
                 <!-- add catalog link to all bibs except those that already have one (history) -->
-                <xsl:when test=". = 'bib' and not(../s:version/s:link/s:label[.='catalog record'])">
+                <xsl:when test=". = 'bib'">
                     <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
                 </xsl:when>
                 <xsl:when test=". = 'web'">
