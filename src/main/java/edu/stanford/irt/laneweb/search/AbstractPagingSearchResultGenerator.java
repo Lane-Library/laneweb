@@ -13,6 +13,7 @@ import edu.stanford.irt.laneweb.resource.PagingData;
 public abstract class AbstractPagingSearchResultGenerator extends AbstractSearchGenerator<PagingSearchResultList> {
 
     private int page;
+
     private String urlEncodedQuery;
 
     public AbstractPagingSearchResultGenerator(final SAXStrategy<PagingSearchResultList> saxStrategy) {
@@ -37,17 +38,7 @@ public abstract class AbstractPagingSearchResultGenerator extends AbstractSearch
         if (query != null && !query.isEmpty()) {
             results = getSearchResults(query);
             Collections.sort(results);
-            // de-duplicate results (remove scopus articles when pubmed version present)
-            // TODO: find a more robust method of doing this.
-            SearchResult previous = null;
-            for (Iterator<SearchResult> it = results.iterator(); it.hasNext();) {
-                SearchResult next = it.next();
-                if (previous != null && next.equals(previous)) {
-                    it.remove();
-                } else {
-                    previous = next;
-                }
-            }
+            removeDuplicates(results);
         } else {
             results = Collections.emptyList();
         }
@@ -56,4 +47,18 @@ public abstract class AbstractPagingSearchResultGenerator extends AbstractSearch
     }
 
     protected abstract List<SearchResult> getSearchResults(String query);
+
+    // de-duplicate results (remove scopus articles when pubmed version present)
+    // TODO: find a more robust method of doing this.
+    private void removeDuplicates(final List<SearchResult> results) {
+        SearchResult previous = null;
+        for (Iterator<SearchResult> it = results.iterator(); it.hasNext();) {
+            SearchResult next = it.next();
+            if (previous != null && next.equals(previous)) {
+                it.remove();
+            } else {
+                previous = next;
+            }
+        }
+    }
 }
