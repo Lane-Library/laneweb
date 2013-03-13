@@ -17,10 +17,10 @@
     color:#820000;
     border-bottom:1px solid #820000;
 }
-#searchResults a:visited {
+.lwSearchResults a:visited {
     color: #565347;
 }
-#searchResults a.primaryLink {
+.lwSearchResults a.primaryLink {
     font-size:16px;
     color: #1C4B70;
 }
@@ -45,11 +45,11 @@
     list-style-type:disc;
     padding-left: 0;
 }
-#searchFacets li, #searchResults li {
+#searchFacets li, .content .lwSearchResults li {
     list-style-image:none;
     list-style-type:none;
 }
-#searchFacets ul, #searchResults li {
+#searchFacets ul, .lwSearchResults li {
     padding-bottom:10px;
 }
 #searchFacets li.current a {
@@ -87,7 +87,7 @@
 #searchResults {
     margin-top:30px;
 }
-#searchResults li {
+.content .lwSearchResults li {
     margin-left:0;
     padding:5px;
     margin-bottom:10px
@@ -95,7 +95,7 @@
 
 /* abstract and description related styles*/
 /*.hoverTrigger class added by javascript (also removes .hvrTrig)*/
-#searchResults .showAbstract {
+.lwSearchResults .showAbstract {
     margin-left:20px;
 }
 .hvrTrig:hover .showAbstract, .active .showAbstract {

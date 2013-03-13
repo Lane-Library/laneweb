@@ -1,15 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Link;
@@ -17,150 +9,56 @@ import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
-
-    private static final String A = "a";
-
-    private static final String CDATA = "CDATA";
-
-    private static final String CLASS = "class";
-
-    private static final String DIV = "div";
-
-    private static final String EMPTY_NS = "";
-
-    private static final String HREF = "href";
+public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresource> {
 
     private static final String HVRTARG = "hvrTarg";
 
-    private static final String LI = "li";
-
     private static final String PRIMARY_LINK = "primaryLink";
-
-    private static final String SPAN = "span";
-
-    private static final String TITLE = "title";
-
-    private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
-            boolean processedFirstVersion = false;
+            boolean processedFirstLink = false;
             for (Version version : eresource.getVersions()) {
-                if (!processedFirstVersion) {
-                    createFirstVersionLinks(xmlConsumer, version, eresource.getTitle());
-                    processedFirstVersion = true;
-                } else {
-                    for (Link link : version.getLinks()) {
-                        createSecondaryLink(xmlConsumer, version, link);
+                for (Link link : version.getLinks()) {
+                    if (!processedFirstLink) {
+                        processFirstLink(xmlConsumer, (TypedLink) link, version, eresource.getTitle());
+                        processedFirstLink = true;
+                    } else {
+                        createSecondaryLink(xmlConsumer, version, (TypedLink) link);
                     }
                 }
             }
             createMoreResultsLink(xmlConsumer, eresource);
             String description = eresource.getDescription();
             if (description != null && description.length() > 0) {
-                AttributesImpl atts = new AttributesImpl();
-                atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, HVRTARG);
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-                XMLUtils.data(xmlConsumer, description);
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+                createDivWithClass(xmlConsumer, HVRTARG, description);
             }
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
     }
 
-    private void createFirstVersionLinks(final XMLConsumer xmlConsumer, final Version firstVersion, final String title)
-            throws SAXException {
-        Link getPassword = null;
-        Link firstLink = null;
-        List<Link> remainderLinks = new LinkedList<Link>();
-        for (Link link : firstVersion.getLinks()) {
-            if (getPassword == null && "get password".equalsIgnoreCase(link.getLabel())) {
-                getPassword = link;
-            } else if (firstLink == null) {
-                firstLink = link;
-            } else {
-                remainderLinks.add(link);
-            }
-        }
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, PRIMARY_LINK);
-        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, firstLink.getUrl());
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-        XMLUtils.data(xmlConsumer, title);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-        StringBuilder sb = new StringBuilder(" ");
-        String summaryHoldings = firstVersion.getSummaryHoldings();
-        if (summaryHoldings != null) {
-            sb.append(summaryHoldings);
-        }
-        maybeAppend(sb, firstVersion.getDates());
-        maybeAppend(sb, firstVersion.getPublisher());
-        maybeAppend(sb, firstVersion.getDescription());
-        if (sb.length() == 1 && firstLink.getLabel() != null) {
-            sb.append(firstLink.getLabel());
-        }
-        maybeAppend(sb, firstLink.getInstruction());
-        if (sb.length() > 1) {
-            sb.append(" ");
-            XMLUtils.data(xmlConsumer, sb.toString());
-        }
-        if (getPassword != null) {
-            String label = getPassword.getLabel();
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, getPassword.getUrl());
-            atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, label);
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-            XMLUtils.data(xmlConsumer, label);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-        }
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-        for (Link link : remainderLinks) {
-            createSecondaryLink(xmlConsumer, firstVersion, link);
-        }
-    }
-
     private void createMoreResultsLink(final XMLConsumer xmlConsumer, final Eresource eresource) throws SAXException {
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "moreResults");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-        atts = new AttributesImpl();
+        startDivWithClass(xmlConsumer, "moreResults");
         String recordType = eresource.getRecordType();
         if ("bib".equals(recordType)) {
             StringBuilder sb = new StringBuilder();
             sb.append("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=").append(eresource.getRecordId());
-            atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-            XMLUtils.data(xmlConsumer, "Lane Catalog record");
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
-        } else {
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "sourceLink");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
-            if ("auth".equals(recordType)) {
-                XMLUtils.data(xmlConsumer, "Lane Community Info File");
-            } else if ("web".equals(recordType)) {
-                XMLUtils.data(xmlConsumer, "Lane Web Page");
-            } else if ("class".equals(recordType)) {
-                XMLUtils.data(xmlConsumer, "Lane Class");
-            }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
+            createAnchor(xmlConsumer, sb.toString(), "Lane Catalog record");
+        } else if ("auth".equals(recordType)) {
+            XMLUtils.data(xmlConsumer, "Lane Community Info File");
+        } else if ("web".equals(recordType)) {
+            createSpanWithClass(xmlConsumer, "sourceLink", "Lane Web Page");
+        } else if ("class".equals(recordType)) {
+            createSpanWithClass(xmlConsumer, "sourceLink", "Lane Class");
         }
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+        endDiv(xmlConsumer);
     }
 
-    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Version version, final Link link)
+    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Version version, final TypedLink link)
             throws SAXException {
-        boolean impactFactor = "impact factor".equalsIgnoreCase(link.getLabel());
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, link.getUrl());
-        if (!impactFactor) {
-            atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, link.getLabel());
-        }
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
+        boolean impactFactor = LinkType.IMPACTFACTOR.equals(link.getType());
+        startDiv(xmlConsumer);
         StringBuilder sb = new StringBuilder();
         if (impactFactor) {
             sb.append("Impact Factor");
@@ -186,8 +84,11 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
                 sb.append(" ").append(description);
             }
         }
-        XMLUtils.data(xmlConsumer, sb.toString());
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+        if (!impactFactor) {
+            createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), sb.toString());
+        } else {
+            createAnchor(xmlConsumer, link.getUrl(), sb.toString());
+        }
         sb.setLength(0);
         if (link.getInstruction() != null) {
             sb.append(" ").append(link.getInstruction());
@@ -198,7 +99,11 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
         if (sb.length() > 0) {
             XMLUtils.data(xmlConsumer, sb.toString());
         }
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+        if (LinkType.GETPASSWORD.equals(link.getType())) {
+            XMLUtils.data(xmlConsumer, " ");
+            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", "Get Password", "Get Password");
+        }
+        endDiv(xmlConsumer);
     }
 
     private void maybeAppend(final StringBuilder sb, final String string) {
@@ -208,5 +113,31 @@ public class EresourceXHTMLSAXStrategy implements SAXStrategy<Eresource> {
             }
             sb.append(string);
         }
+    }
+
+    private void processFirstLink(final XMLConsumer xmlConsumer, final TypedLink link, final Version firstVersion,
+            final String title) throws SAXException {
+        startDiv(xmlConsumer);
+        createAnchorWithClass(xmlConsumer, link.getUrl(), PRIMARY_LINK, title);
+        StringBuilder sb = new StringBuilder(" ");
+        String summaryHoldings = firstVersion.getSummaryHoldings();
+        if (summaryHoldings != null) {
+            sb.append(summaryHoldings);
+        }
+        maybeAppend(sb, firstVersion.getDates());
+        maybeAppend(sb, firstVersion.getPublisher());
+        maybeAppend(sb, firstVersion.getDescription());
+        if (sb.length() == 1 && link.getLabel() != null) {
+            sb.append(link.getLabel());
+        }
+        maybeAppend(sb, link.getInstruction());
+        if (sb.length() > 1) {
+            sb.append(" ");
+            XMLUtils.data(xmlConsumer, sb.toString());
+        }
+        if (LinkType.GETPASSWORD.equals(link.getType())) {
+            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", "Get Password", "Get Password");
+        }
+        endDiv(xmlConsumer);
     }
 }

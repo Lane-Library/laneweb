@@ -1,20 +1,17 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements. See the NOTICE file distributed with this
- * work for additional information regarding copyright ownership. The ASF
- * licenses this file to You under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law
- * or agreed to in writing, software distributed under the License is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the specific language
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE
+ * file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file
+ * to You under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+ * applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
 package edu.stanford.irt.laneweb.util;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
@@ -28,9 +25,15 @@ public final class XMLUtils {
      */
     public static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
+    public static void createElement(final XMLConsumer xmlConsumer, final String ns, final String name,
+            final AttributesImpl atts, final String text) throws SAXException {
+        startElement(xmlConsumer, ns, name, atts);
+        data(xmlConsumer, text);
+        endElement(xmlConsumer, ns, name);
+    }
+
     /**
-     * Create a start and endElement without Attributes The content of the
-     * Element is set to the stringValue parameter
+     * Create a start and endElement without Attributes The content of the Element is set to the stringValue parameter
      * 
      * @param localName
      *            The local name (without prefix)
@@ -39,8 +42,8 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void createElementNS(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName,
-            final String stringValue) throws SAXException {
+    public static void createElementNS(final XMLConsumer xmlConsumer, final String namespaceURI,
+            final String localName, final String stringValue) throws SAXException {
         startElement(xmlConsumer, namespaceURI, localName);
         data(xmlConsumer, stringValue);
         endElement(xmlConsumer, namespaceURI, localName);
@@ -75,8 +78,7 @@ public final class XMLUtils {
     }
 
     /**
-     * Create a startElement without Attributes Prefix must be mapped to empty
-     * String
+     * Create a startElement without Attributes Prefix must be mapped to empty String
      * 
      * @param namespaceURI
      *            The Namespace URI
@@ -91,16 +93,15 @@ public final class XMLUtils {
     }
 
     /**
-     * Create a startElement with a empty Namespace Prefix must be mapped to
-     * empty String
+     * Create a startElement with a empty Namespace Prefix must be mapped to empty String
      * 
      * @param namespaceURI
      *            The Namespace URI
      * @param localName
      *            The local name (without prefix)
      * @param atts
-     *            The attributes attached to the element. If there are no
-     *            attributes, it shall be an empty Attributes object.
+     *            The attributes attached to the element. If there are no attributes, it shall be an empty Attributes
+     *            object.
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */

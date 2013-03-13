@@ -37,7 +37,7 @@ public class EresourceListPagingDataSAXStrategyTest {
 		expect(this.pagingData.getSize()).andReturn(1039);
 		expect(this.pagingData.getLength()).andReturn(260);
 		expect(this.pagingData.getStart()).andReturn(0);
-		expect(this.pagingData.getBaseQuery()).andReturn("a=a");
+		expect(this.pagingData.getBaseQuery()).andReturn("a=a").times(2);
 		expect(this.pagingData.getPagingLabels()).andReturn(Arrays.asList(new PagingLabel[]{this.pagingLabel, this.pagingLabel, this.pagingLabel, this.pagingLabel}));
 		expect(this.pagingLabel.getStart()).andReturn("A.M.A. American journal of diseases of children");
 		expect(this.pagingLabel.getEnd()).andReturn("Advances in immunology");

@@ -80,6 +80,10 @@
     padding: 10px 10px 10px 15px;
 }
 
+.content .pagingLabels li {
+    list-style:none outside none;
+    margin-left: 0
+}
 .pagingLabels li li {
     float: left;
     white-space: nowrap;
