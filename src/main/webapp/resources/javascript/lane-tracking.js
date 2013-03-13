@@ -36,6 +36,11 @@
                     action = link.get('href');
                     label = link.get('textContent');
                 }
+                else if (link.ancestor(".banner-content")) {
+                    category = "lane:bannerClick";
+                    action = link.get('href');
+                    label = link.get('title');
+                }
                 else if (link.ancestor(".sectionMenu")) {
                     category = "lane:laneNav-sectionMenu";
                     action = link.get('href');
@@ -218,7 +223,7 @@
                             return true;
                         }
                         // navigation click events
-                        if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter") || link.ancestor("#qlinks") || link.ancestor("#topResources")) {
+                        if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter") || link.ancestor("#qlinks") || link.ancestor("#topResources") || link.ancestor(".banner-content")) {
                             return true;
                         }
                     }
