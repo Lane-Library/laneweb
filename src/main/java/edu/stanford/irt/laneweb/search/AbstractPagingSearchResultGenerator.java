@@ -37,13 +37,12 @@ public abstract class AbstractPagingSearchResultGenerator extends AbstractSearch
         if (query != null && !query.isEmpty()) {
             results = getSearchResults(query);
             Collections.sort(results);
-            // de-duplicate results (remove scopus articles when pubmed version present):
+            // de-duplicate results (remove scopus articles when pubmed version present)
+            // TODO: find a more robust method of doing this.
             SearchResult previous = null;
             for (Iterator<SearchResult> it = results.iterator(); it.hasNext();) {
                 SearchResult next = it.next();
-                if (previous == null) {
-                    previous = next;
-                } else if (next.equals(previous)) {
+                if (previous != null && next.equals(previous)) {
                     it.remove();
                 } else {
                     previous = next;
