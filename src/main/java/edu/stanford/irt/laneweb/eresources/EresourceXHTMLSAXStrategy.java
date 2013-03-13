@@ -46,7 +46,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             sb.append("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=").append(eresource.getRecordId());
             createAnchor(xmlConsumer, sb.toString(), "Lane Catalog record");
         } else if ("auth".equals(recordType)) {
-            XMLUtils.data(xmlConsumer, "Lane Community Info File");
+            createSpanWithClass(xmlConsumer, "sourceLink", "Lane Community Info File");
         } else if ("web".equals(recordType)) {
             createSpanWithClass(xmlConsumer, "sourceLink", "Lane Web Page");
         } else if ("class".equals(recordType)) {
@@ -118,7 +118,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
     private void processFirstLink(final XMLConsumer xmlConsumer, final TypedLink link, final Version firstVersion,
             final String title) throws SAXException {
         startDiv(xmlConsumer);
-        createAnchorWithClass(xmlConsumer, link.getUrl(), PRIMARY_LINK, title);
+        createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, title, title);
         StringBuilder sb = new StringBuilder(" ");
         String summaryHoldings = firstVersion.getSummaryHoldings();
         if (summaryHoldings != null) {
