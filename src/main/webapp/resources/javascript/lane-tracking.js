@@ -342,7 +342,7 @@
                                 window.location = t.get('href');
                             };
                             e.preventDefault();
-                            setTimeout(f, 300);
+                            setTimeout(f, 200);
                             break;
                         }
                         t = t.get('parentNode');
