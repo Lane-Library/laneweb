@@ -29,6 +29,11 @@
             }
         }
     });
+    Y.on("lane:trackableEvent",  function(event) {
+        if (gaPageTracker !== undefined) {
+            gaPageTracker._trackEvent(event.category, event.action, event.label, event.value);
+        }
+    });
     Y.on("lane:trackablePageview",  function(event) {
         if (gaPageTracker !== undefined) {
             if (event.external) {
@@ -41,11 +46,6 @@
             } else {
                 gaPageTracker._trackPageview('/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path);
             }
-        }
-    });
-    Y.on("lane:trackableEvent",  function(event) {
-        if (gaPageTracker !== undefined) {
-            gaPageTracker._trackEvent(event.category, event.action, event.label, event.value);
         }
     });
 })();
