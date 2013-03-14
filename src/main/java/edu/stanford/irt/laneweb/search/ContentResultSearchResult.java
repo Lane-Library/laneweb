@@ -89,19 +89,19 @@ public class ContentResultSearchResult implements SearchResult {
             if (title != null) {
                 sb.append(title).append(". ");
                 String date = this.contentResult.getPublicationDate();
-                if (date != null) {
+                if (date != null && date.length() > 0) {
                     sb.append(date);
                 }
                 String volume = this.contentResult.getPublicationVolume();
-                if (volume != null) {
+                if (volume != null && volume.length() > 0) {
                     sb.append(';').append(volume);
                 }
                 String issue = this.contentResult.getPublicationIssue();
-                if (issue != null) {
+                if (issue != null && issue.length() > 0) {
                     sb.append('(').append(issue).append(')');
                 }
                 String pages = this.contentResult.getPages();
-                if (pages != null) {
+                if (pages != null && pages.length() > 0) {
                     sb.append(':').append(pages).append('.');
                 }
             }
