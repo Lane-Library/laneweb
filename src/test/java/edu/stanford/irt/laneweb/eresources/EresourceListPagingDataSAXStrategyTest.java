@@ -34,8 +34,8 @@ public class EresourceListPagingDataSAXStrategyTest {
 
 	@Test
 	public void testToSAX() throws SAXException, IOException {
-		expect(this.pagingData.getSize()).andReturn(1039);
-		expect(this.pagingData.getLength()).andReturn(260);
+		expect(this.pagingData.getSize()).andReturn(1039).times(2);
+		expect(this.pagingData.getLength()).andReturn(260).times(2);
 		expect(this.pagingData.getStart()).andReturn(0);
 		expect(this.pagingData.getBaseQuery()).andReturn("a=a").times(2);
 		expect(this.pagingData.getPagingLabels()).andReturn(Arrays.asList(new PagingLabel[]{this.pagingLabel, this.pagingLabel, this.pagingLabel, this.pagingLabel}));

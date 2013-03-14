@@ -25,16 +25,18 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             startDivWithClass(xmlConsumer, "yui-u first");
             createDisplayingMarkup(xmlConsumer, pagingData);
             endDiv(xmlConsumer);
-            String hrefBase = pagingData.getBaseQuery();
-            createPagingButton(xmlConsumer, hrefBase);
-            startUlWithClass(xmlConsumer, "pagingLabels");
-            int i = 1;
-            for (PagingLabel label : pagingData.getPagingLabels()) {
-                createPagingLabelMarkup(xmlConsumer, label, hrefBase, i);
-                i++;
+            if (pagingData.getSize() > pagingData.getLength()) {
+                String hrefBase = pagingData.getBaseQuery();
+                createPagingButton(xmlConsumer, hrefBase);
+                startUlWithClass(xmlConsumer, "pagingLabels");
+                int i = 1;
+                for (PagingLabel label : pagingData.getPagingLabels()) {
+                    createPagingLabelMarkup(xmlConsumer, label, hrefBase, i);
+                    i++;
+                }
+                endUl(xmlConsumer);
+                createSeeAllMarkup(xmlConsumer, hrefBase);
             }
-            endUl(xmlConsumer);
-            createSeeAllMarkup(xmlConsumer, hrefBase);
             endDiv(xmlConsumer);
             endDiv(xmlConsumer);
         } catch (SAXException e) {
