@@ -74,7 +74,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/bar/*" type="wildcard">
-                    <map:generate type="search-content-xhtml">
+                    <map:generate type="search-content-html">
                         <map:parameter name="engines" value="{1}"/>
                     </map:generate>
                     <map:serialize type="xml"/>
