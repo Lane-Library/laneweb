@@ -37,6 +37,7 @@ public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearch
             maybeCreateElement(xmlConsumer, PUBLICATION_ISSUE, contentResult.getPublicationIssue());
             maybeCreateElement(xmlConsumer, PAGES, contentResult.getPages());
             maybeCreateElement(xmlConsumer, URL, contentResult.getURL());
+            maybeCreateElement(xmlConsumer, PUBLICATION_TEXT, result.getPublicationText());
             XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
         } catch (SAXException e) {
             throw new LanewebException(e);

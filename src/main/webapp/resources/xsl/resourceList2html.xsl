@@ -111,12 +111,8 @@
 
             <div class="pubTitle">
                 <xsl:choose>
-                    <xsl:when test="s:pub-title">
-                        <xsl:apply-templates select="s:pub-title"/>
-                        <xsl:apply-templates select="s:pub-date"/>
-                        <xsl:apply-templates select="s:pub-volume"/>
-                        <xsl:apply-templates select="s:pub-issue"/>
-                        <xsl:apply-templates select="s:pub-pages"/>
+                    <xsl:when test="s:pub-text">
+                        <xsl:value-of select="s:pub-text"/>
                         <xsl:if test="$resourceName = 'PubMed' or number(s:resourceHits) &lt;= $moreResultsLimit">
                             <span class="sourceLink">
                                 <xsl:text> - </xsl:text>
@@ -266,32 +262,6 @@
         <div class="pubAuthor">
             <xsl:value-of select="."/>
         </div>
-    </xsl:template>
-
-    <xsl:template match="s:pub-title">
-        <xsl:value-of select="."/>
-        <xsl:text>. </xsl:text>
-    </xsl:template>
-
-    <xsl:template match="s:pub-date">
-        <xsl:value-of select="."/>
-    </xsl:template>
-
-    <xsl:template match="s:pub-volume">
-        <xsl:text>;</xsl:text>
-        <xsl:value-of select="."/>
-    </xsl:template>
-
-    <xsl:template match="s:pub-issue">
-        <xsl:text>(</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>)</xsl:text>
-    </xsl:template>
-
-    <xsl:template match="s:pub-pages">
-        <xsl:text>:</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>.</xsl:text>
     </xsl:template>
 
     <xsl:template match="s:contentId[starts-with(.,'PMID:')]">

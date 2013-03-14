@@ -27,6 +27,10 @@ public class ContentResultSearchResultTest {
         this.contentResult = createMock(ContentResult.class);
         this.resourceResult = createMock(Result.class);
         expect(this.contentResult.getTitle()).andReturn("title");
+        expect(this.contentResult.getPublicationDate()).andReturn("date");
+        expect(this.contentResult.getPublicationVolume()).andReturn("volume");
+        expect(this.contentResult.getPublicationIssue()).andReturn("issue");
+        expect(this.contentResult.getAuthor()).andReturn("author");
         replay(this.contentResult);
         this.searchResult = new ContentResultSearchResult(this.contentResult, this.resourceResult, 100);
         verify(this.contentResult);
@@ -38,6 +42,10 @@ public class ContentResultSearchResultTest {
         expect(aContentResult.getTitle()).andReturn("same title").times(2);
         expect(aContentResult.getContentId()).andReturn("99999");
         expect(aContentResult.getContentId()).andReturn("999");
+        expect( aContentResult.getPublicationDate()).andReturn("date").times(2);
+        expect( aContentResult.getPublicationVolume()).andReturn("volume").times(2);
+        expect( aContentResult.getPublicationIssue()).andReturn("issue").times(2);
+        expect( aContentResult.getAuthor()).andReturn("author").times(2);
         replay(aContentResult);
         ContentResultSearchResult first = new ContentResultSearchResult(aContentResult, this.resourceResult, 900);
         ContentResultSearchResult second = new ContentResultSearchResult(aContentResult, this.resourceResult, 0);
@@ -83,6 +91,10 @@ public class ContentResultSearchResultTest {
         ContentResult aContentResult = createMock(ContentResult.class);
         expect(aContentResult.getTitle()).andReturn("same title").times(2);
         expect(aContentResult.getContentId()).andReturn("999").times(2);
+        expect( aContentResult.getPublicationDate()).andReturn("date").times(2);
+        expect( aContentResult.getPublicationVolume()).andReturn("volume").times(2);
+        expect( aContentResult.getPublicationIssue()).andReturn("issue").times(2);
+        expect( aContentResult.getAuthor()).andReturn("author").times(2);
         replay(aContentResult);
         ContentResultSearchResult first = new ContentResultSearchResult(aContentResult, this.resourceResult, 900);
         ContentResultSearchResult second = new ContentResultSearchResult(aContentResult, this.resourceResult, 0);
@@ -94,6 +106,10 @@ public class ContentResultSearchResultTest {
     public void testCompareToTitle() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("first title");
+        expect(result.getPublicationDate()).andReturn("date");
+        expect(result.getPublicationVolume()).andReturn("volume");
+        expect(result.getPublicationIssue()).andReturn("issue");
+        expect(result.getAuthor()).andReturn("author");
         replay(result);
         ContentResultSearchResult first = new ContentResultSearchResult(result, this.resourceResult, 100);
         assertTrue(this.searchResult.compareTo(first) > 0);
@@ -105,6 +121,10 @@ public class ContentResultSearchResultTest {
         ContentResult aContentResult = createMock(ContentResult.class);
         expect(aContentResult.getContentId()).andReturn("cid").times(2);
         expect(aContentResult.getTitle()).andReturn("the title").times(2);
+        expect( aContentResult.getPublicationDate()).andReturn("date").times(2);
+        expect( aContentResult.getPublicationVolume()).andReturn("volume").times(2);
+        expect( aContentResult.getPublicationIssue()).andReturn("issue").times(2);
+        expect( aContentResult.getAuthor()).andReturn("author").times(2);
         replay(aContentResult);
         ContentResultSearchResult one = new ContentResultSearchResult(aContentResult, this.resourceResult, 100);
         ContentResultSearchResult two = new ContentResultSearchResult(aContentResult, this.resourceResult, 100);
@@ -157,6 +177,10 @@ public class ContentResultSearchResultTest {
     public void testHashCode() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("the title");
+        expect(result.getPublicationDate()).andReturn("date");
+        expect(result.getPublicationVolume()).andReturn("volume");
+        expect(result.getPublicationIssue()).andReturn("issue");
+        expect(result.getAuthor()).andReturn("author");
         replay(result);
         ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
         assertEquals(this.searchResult.hashCode(), other.hashCode());
@@ -167,6 +191,10 @@ public class ContentResultSearchResultTest {
     public void testNotEquals() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("not the title");
+        expect(result.getPublicationDate()).andReturn("date");
+        expect(result.getPublicationVolume()).andReturn("volume");
+        expect(result.getPublicationIssue()).andReturn("issue");
+        expect(result.getAuthor()).andReturn("author");
         replay(result);
         ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
         assertFalse(this.searchResult.equals(other));
@@ -176,10 +204,18 @@ public class ContentResultSearchResultTest {
     @Test
     public void testNotEqualsDifferentContentIds() {
         ContentResult aContentResult = createMock(ContentResult.class);
+        expect( aContentResult.getPublicationDate()).andReturn("date");
+        expect( aContentResult.getPublicationVolume()).andReturn("volume");
+        expect( aContentResult.getPublicationIssue()).andReturn("issue");
+        expect( aContentResult.getAuthor()).andReturn("author");
         expect(aContentResult.getTitle()).andReturn("same title");
         expect(aContentResult.getContentId()).andReturn("cid");
         replay(aContentResult);
         ContentResult bContentResult = createMock(ContentResult.class);
+        expect( bContentResult.getPublicationDate()).andReturn("date");
+        expect( bContentResult.getPublicationVolume()).andReturn("volume");
+        expect( bContentResult.getPublicationIssue()).andReturn("issue");
+        expect( bContentResult.getAuthor()).andReturn("author");
         expect(bContentResult.getTitle()).andReturn("same title");
         expect(bContentResult.getContentId()).andReturn("different cid");
         replay(bContentResult);
@@ -220,10 +256,18 @@ public class ContentResultSearchResultTest {
         ContentResult aContentResult = createMock(ContentResult.class);
         expect(aContentResult.getContentId()).andReturn("cid");
         expect(aContentResult.getTitle()).andReturn("same title");
+        expect( aContentResult.getPublicationDate()).andReturn("date");
+        expect( aContentResult.getPublicationVolume()).andReturn("volume");
+        expect( aContentResult.getPublicationIssue()).andReturn("issue");
+        expect( aContentResult.getAuthor()).andReturn("author");
         replay(aContentResult);
         ContentResult bContentResult = createMock(ContentResult.class);
         expect(bContentResult.getContentId()).andReturn("different cid");
         expect(bContentResult.getTitle()).andReturn("same title");
+        expect( bContentResult.getPublicationDate()).andReturn("date");
+        expect( bContentResult.getPublicationVolume()).andReturn("volume");
+        expect( bContentResult.getPublicationIssue()).andReturn("issue");
+        expect( bContentResult.getAuthor()).andReturn("author");
         replay(bContentResult);
         ContentResultSearchResult one = new ContentResultSearchResult(aContentResult, this.resourceResult, 100);
         ContentResultSearchResult two = new ContentResultSearchResult(bContentResult, this.resourceResult, 100);

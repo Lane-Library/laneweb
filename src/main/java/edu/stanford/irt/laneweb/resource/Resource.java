@@ -33,6 +33,8 @@ public interface Resource {
     String PUBLICATION_DATE = "pub-date";
 
     String PUBLICATION_ISSUE = "pub-issue";
+    
+    String PUBLICATION_TEXT = "pub-text";
 
     String PUBLICATION_TITLE = "pub-title";
 

@@ -80,6 +80,8 @@ public class ContentResultSAXStrategyTest {
         recordElement(Resource.PAGES);
         expect(this.contentResult.getURL()).andReturn(Resource.URL);
         recordElement(Resource.URL);
+        expect(this.searchResult.getPublicationText()).andReturn(Resource.PUBLICATION_TEXT);
+        recordElement(Resource.PUBLICATION_TEXT);
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.RESULT, Resource.RESULT);
         replay(this.searchResult, this.xmlConsumer, this.contentResult, this.resourceResult);
         this.strategy.toSAX(this.searchResult, this.xmlConsumer);
