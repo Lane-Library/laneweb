@@ -80,11 +80,7 @@
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
-            <xsl:apply-templates select="s:pub-title"/>
-            <xsl:apply-templates select="s:pub-date"/>
-            <xsl:apply-templates select="s:pub-volume"/>
-            <xsl:apply-templates select="s:pub-issue"/>
-            <xsl:apply-templates select="s:page"/>
+            <xsl:value-of select="s:pub-text"/>
             <div class="sourceLink">
                 <xsl:value-of select="$resourceName"/>
             </div>
@@ -115,12 +111,8 @@
             <xsl:apply-templates select="s:pub-author[string-length(.) > 1]"/>
             <div class="pubInfo">
                 <xsl:choose>
-                    <xsl:when test="s:pub-title">
-                        <xsl:apply-templates select="s:pub-title"/>
-                        <xsl:apply-templates select="s:pub-date"/>
-                        <xsl:apply-templates select="s:pub-volume"/>
-                        <xsl:apply-templates select="s:pub-issue"/>
-                        <xsl:apply-templates select="s:page"/>
+                    <xsl:when test="s:pub-text">
+                        <xsl:value-of select="s:pub-text"/>
                         <span class="sourceLink">
                             <xsl:text> - </xsl:text>
                             <xsl:value-of select="$resourceName"/>
@@ -147,15 +139,7 @@
 
     <xsl:template match="s:result[@type='eresource']" mode="brief">
         <li rank="{position()}">
-                    <xsl:call-template name="buildAnchor">
-                        <xsl:with-param name="type">first</xsl:with-param>
-                        <xsl:with-param name="link" select="s:version[1]/s:link[1]"/>
-                        <xsl:with-param name="title" select="s:title"/>
-                    </xsl:call-template>
-                    <xsl:call-template name="firstLinkText">
-                        <xsl:with-param name="version" select="s:version[1]"/>
-                    </xsl:call-template>
-            
+            <xsl:apply-templates select="s:version[1]/s:link[1]"/>
             <xsl:if test="s:description or count(s:version) > 1">
                 <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">more info</a>
             </xsl:if>
@@ -164,18 +148,7 @@
     
     <xsl:template match="s:result[@type='eresource']" mode="full">
         <div class="absInfo">
-                    <xsl:call-template name="buildAnchor">
-                        <xsl:with-param name="type">first</xsl:with-param>
-                        <xsl:with-param name="link" select="s:version[1]/s:link[1]"/>
-                        <xsl:with-param name="title" select="s:title"/>
-                    </xsl:call-template>
-                    <xsl:call-template name="firstLinkText">
-                        <xsl:with-param name="version" select="s:version[1]"/>
-                    </xsl:call-template>
-                    <xsl:apply-templates select="s:version/s:link" mode="remainder-links"
-                    />
-                
-            
+            <xsl:apply-templates select="s:version/s:link"/>
             <xsl:choose>
                 <xsl:when test="s:recordType = 'auth'">
                     <div class="moreResults">
@@ -197,105 +170,74 @@
         <xsl:apply-templates select="s:description"/>
         </div>  
     </xsl:template>
-
-    <xsl:template match="s:link" mode="remainder-links">
-        <xsl:if test="position() != 1">
-            <xsl:call-template name="buildAnchor">
-                <xsl:with-param name="type" select="@type"/>
-                <xsl:with-param name="link" select="."/>
-                <xsl:with-param name="version" select=".."/>
-            </xsl:call-template>
-        </xsl:if>
-    </xsl:template>
-
-    <xsl:template name="firstLinkText">
-        <xsl:param name="version"/>
+    
+    <xsl:template match="s:version[1]/s:link[1]">
+        <a target="_blank" class="newWindow" href="{s:url}">
+            <xsl:apply-templates select="../../s:title"/>
+        </a>
         <xsl:text> </xsl:text>
         <xsl:if
-            test="not($version/s:summaryHoldings or $version/s:publisher or $version/s:dates or $version/s:description)">
-            <xsl:value-of select="$version/s:link[1]/s:label"/>
+            test="not(../s:summaryHoldings or ../s:publisher or ../s:dates or ../s:description)">
+            <xsl:value-of select="s:label"/>
         </xsl:if>
         <xsl:for-each
-            select="$version/s:summaryHoldings|$version/s:publisher|$version/s:dates|$version/s:description">
+            select="../s:summaryHoldings|../s:publisher|../s:dates|../s:description">
             <xsl:value-of select="."/>
             <xsl:if test="position() != last()">
                 <xsl:text>, </xsl:text>
             </xsl:if>
         </xsl:for-each>
-        <xsl:if test="$version/s:link/s:instruction">
+        <xsl:if test="s:instruction">
             <xsl:text>, </xsl:text>
-            <xsl:value-of select="$version/s:link/s:instruction"/>
+            <xsl:value-of select="s:instruction"/>
         </xsl:if>
         <xsl:text> </xsl:text>
-        <xsl:if test="$version/s:link[1]/@type = 'getPassword'">
+        <xsl:if test="@type = 'getPassword'">
             <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
         </xsl:if>
     </xsl:template>
-
-    <xsl:template name="linkText">
-        <xsl:param name="link"/>
-        <xsl:param name="type"/>
-        <xsl:param name="version"/>
-        <xsl:choose>
-            <xsl:when
-                test="$version/s:summaryHoldings and count($version/s:link) = 1">
-                <xsl:value-of select="$version/s:summaryHoldings"/>
-                <xsl:text>, </xsl:text>
-                <xsl:value-of select="$version/s:dates"/>
-            </xsl:when>
-            <xsl:when test="$link/s:label">
-                <xsl:value-of select="$link/s:label"/>
-            </xsl:when>
-            <xsl:when test="$link/s:url">
-                <xsl:value-of select="$link/s:url"/>
-            </xsl:when>
-        </xsl:choose>
-        <xsl:if test="$version/s:description">
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="$version/s:description"/>
-        </xsl:if>
+    
+    <xsl:template match="s:link">
+        <div>
+            <a target="_blank" href="{s:url}" title="{s:label}">
+                <xsl:choose>
+                    <xsl:when
+                        test="../s:summaryHoldings and count(../s:link) = 1">
+                        <xsl:value-of select="../s:summaryHoldings"/>
+                        <xsl:text>, </xsl:text>
+                        <xsl:value-of select="../s:dates"/>
+                    </xsl:when>
+                    <xsl:when test="s:label">
+                        <xsl:value-of select="s:label"/>
+                    </xsl:when>
+                    <xsl:when test="s:url">
+                        <xsl:value-of select="s:url"/>
+                    </xsl:when>
+                </xsl:choose>
+                <xsl:if test="../s:description">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="../s:description"/>
+                </xsl:if>
+            </a>
+            <xsl:if test="s:instruction">
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="s:instruction"/>
+            </xsl:if>
+            <xsl:if test="../s:publisher">
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="../s:publisher"/>
+            </xsl:if>
+            <xsl:if test="@type = 'getPassword'">
+                <xsl:text> </xsl:text>
+                <a target="_blank" href="/secure/ejpw.html" title="Get Password">Get Password</a>
+            </xsl:if>
+        </div>
     </xsl:template>
-
-    <xsl:template name="buildAnchor">
-        <xsl:param name="type"/>
-        <xsl:param name="link"/>
-        <xsl:param name="version"/>
-        <xsl:param name="title"/>
-        <xsl:choose>
-            <xsl:when test="$type = 'first'">
-                <a target="_blank" class="newWindow" href="{$link/s:url}">
-                    <xsl:apply-templates select="$title"/>
-                </a>
-            </xsl:when>
-            <xsl:when test="$type = 'impactFactor'">
-                <div>
-                    <a target="_blank" href="{$link/s:url}">Impact Factor</a>
-                </div>
-            </xsl:when>
-            <xsl:otherwise>
-                <div>
-                    <a target="_blank" href="{$link/s:url}" title="{$link/s:label}">
-                        <xsl:call-template name="linkText">
-                            <xsl:with-param name="type" select="@type"/>
-                            <xsl:with-param name="link" select="$link"/>
-                            <xsl:with-param name="version" select="$version"/>
-                        </xsl:call-template>
-                    </a>
-                    <xsl:if test="$link/s:instruction">
-                        <xsl:text> </xsl:text>
-                        <xsl:value-of select="$link/s:instruction"/>
-                    </xsl:if>
-                    <xsl:if test="$version/s:publisher">
-                        <xsl:text> </xsl:text>
-                        <xsl:value-of select="$version/s:publisher"/>
-                    </xsl:if>
-                    <xsl:if test="$type = 'getPassword'">
-                        <xsl:text> </xsl:text>
-                        <a target="_blank" href="/secure/ejpw.html" title="Get Password">Get Password</a>
-                    </xsl:if>
-                </div>
-            </xsl:otherwise>
-        </xsl:choose>
+    
+    <xsl:template match="s:link[@type='impactFactor']">
+        <div>
+            <a target="_blank" href="{s:url}">Impact Factor</a>
+        </div>
     </xsl:template>
 
     <xsl:template match="s:description">
@@ -308,32 +250,6 @@
         <div class="pubAuthor">
             <xsl:value-of select="."/>
         </div>
-    </xsl:template>
-
-    <xsl:template match="s:pub-title">
-        <xsl:value-of select="."/>
-        <xsl:text>. </xsl:text>
-    </xsl:template>
-
-    <xsl:template match="s:pub-date">
-        <xsl:value-of select="."/>
-    </xsl:template>
-
-    <xsl:template match="s:pub-volume">
-        <xsl:text>;</xsl:text>
-        <xsl:value-of select="."/>
-    </xsl:template>
-
-    <xsl:template match="s:pub-issue">
-        <xsl:text>(</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>)</xsl:text>
-    </xsl:template>
-
-    <xsl:template match="s:page">
-        <xsl:text>:</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>.</xsl:text>
     </xsl:template>
 
     <xsl:template match="s:contentId[starts-with(.,'PMID:')]">
