@@ -11,10 +11,7 @@ public class EHCache implements Cache {
 
     private net.sf.ehcache.Cache cache;
 
-    private CacheManager manager;
-
     public EHCache(final CacheManager manager) {
-        this.manager = manager;
         this.cache = manager.getCache("cocoon-ehcache");
     }
 
@@ -24,10 +21,6 @@ public class EHCache implements Cache {
 
     public boolean containsKey(final Serializable key) {
         return this.cache.get(key) != null;
-    }
-
-    public void destroy() {
-        this.manager.shutdown();
     }
 
     public CachedResponse get(final Serializable key) {

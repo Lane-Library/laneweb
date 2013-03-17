@@ -97,8 +97,7 @@
     </bean>
     
     <bean id="edu.stanford.irt.cocoon.cache.Cache"
-        class="edu.stanford.irt.laneweb.cocoon.EHCache"
-        destroy-method="destroy">
+        class="edu.stanford.irt.laneweb.cocoon.EHCache">
         <constructor-arg>
             <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
         </constructor-arg>
