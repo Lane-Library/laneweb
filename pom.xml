@@ -470,11 +470,6 @@
     </build>
     <dependencies>
         <dependency>
-            <artifactId>aspectjrt</artifactId>
-            <groupId>org.aspectj</groupId>
-            <version>1.7.1</version>
-        </dependency>
-        <dependency>
             <artifactId>cglib-nodep</artifactId>
             <groupId>cglib</groupId>
             <scope>runtime</scope>
