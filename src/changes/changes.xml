@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2013-03-18" version="2.1.2" description="2.1.2 bug fix release">
+            <action date="2013-03-12" dev="ryanmax" issue="82873" type="update">
+                track banner clicks
+            </action>
             <action date="2013-03-12" dev="ceyates" issue="82880" type="fix">
                 search result duplication
             </action>
