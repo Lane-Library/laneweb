@@ -48,7 +48,7 @@ public class ContentResultSearchResultTest {
         expect( aContentResult.getAuthor()).andReturn("author").times(2);
         replay(aContentResult);
         ContentResultSearchResult first = new ContentResultSearchResult(aContentResult, this.resourceResult, 900);
-        ContentResultSearchResult second = new ContentResultSearchResult(aContentResult, this.resourceResult, 0);
+        ContentResultSearchResult second = new ContentResultSearchResult(aContentResult, this.resourceResult, 900);
         assertTrue(second.compareTo(first) > 0);
         verify(aContentResult);
     }
@@ -57,7 +57,6 @@ public class ContentResultSearchResultTest {
     public void testCompareToSameTitleDifferentDates() {
         ContentResult aContentResult = createMock(ContentResult.class);
         expect(aContentResult.getTitle()).andReturn("same title").times(2);
-        expect(aContentResult.getContentId()).andReturn(null).times(2);
         expect(aContentResult.getPublicationDate()).andReturn("2012");
         expect(aContentResult.getPublicationDate()).andReturn("2010");
         expect(aContentResult.getPublicationVolume()).andReturn(null).times(2);
@@ -74,7 +73,6 @@ public class ContentResultSearchResultTest {
     public void testCompareToSameTitleDifferentScore() {
         ContentResult aContentResult = createMock(ContentResult.class);
         expect(aContentResult.getTitle()).andReturn("same title").times(2);
-        expect(aContentResult.getContentId()).andReturn(null).times(2);
         expect(aContentResult.getPublicationDate()).andReturn(null).times(2);
         expect(aContentResult.getPublicationVolume()).andReturn(null).times(2);
         expect(aContentResult.getPublicationIssue()).andReturn(null).times(2);
@@ -97,7 +95,7 @@ public class ContentResultSearchResultTest {
         expect( aContentResult.getAuthor()).andReturn("author").times(2);
         replay(aContentResult);
         ContentResultSearchResult first = new ContentResultSearchResult(aContentResult, this.resourceResult, 900);
-        ContentResultSearchResult second = new ContentResultSearchResult(aContentResult, this.resourceResult, 0);
+        ContentResultSearchResult second = new ContentResultSearchResult(aContentResult, this.resourceResult, 900);
         assertEquals(0, second.compareTo(first));
         verify(aContentResult);
     }

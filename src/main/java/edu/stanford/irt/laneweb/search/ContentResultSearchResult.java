@@ -18,7 +18,7 @@ public class ContentResultSearchResult implements SearchResult {
 
     private int hashCode;
 
-    //TODO: move this to the ContentResult
+    // TODO: move this to the ContentResult
     private String publicationText;
 
     private Result resourceResult;
@@ -37,10 +37,32 @@ public class ContentResultSearchResult implements SearchResult {
         this.hashCode = this.sortTitle.hashCode();
     }
 
+    private String buildCompareString(final ContentResult cResult) {
+        StringBuilder sb = new StringBuilder();
+        String pubDate = cResult.getPublicationDate();
+        String pubVolume = cResult.getPublicationVolume();
+        String pubIssue = cResult.getPublicationIssue();
+        String pubAuthor = cResult.getAuthor();
+        if (null != pubDate) {
+            sb.append(YEAR_PATTERN.matcher(pubDate).replaceFirst("$1"));
+        }
+        if (null != pubVolume) {
+            sb.append(pubVolume);
+        }
+        if (null != pubIssue) {
+            sb.append(pubIssue);
+        }
+        if (null != pubAuthor) {
+            sb.append(WHITESPACE.matcher(pubAuthor).replaceAll("").toLowerCase());
+        }
+        return sb.toString();
+    }
+
+    @Override
     public int compareTo(final SearchResult o) {
         int scoreCmp = o.getScore() - this.score;
         int titleCmp = this.sortTitle.compareTo(o.getSortTitle());
-        if (titleCmp == 0 && o instanceof ContentResultSearchResult) {
+        if (titleCmp == 0 && scoreCmp == 0 && o instanceof ContentResultSearchResult) {
             ContentResultSearchResult other = (ContentResultSearchResult) o;
             String otherContentId = other.contentResult.getContentId();
             String thisContentId = this.contentResult.getContentId();
@@ -49,7 +71,7 @@ public class ContentResultSearchResult implements SearchResult {
                     return 0;
                 }
                 // different contentIds: compare by score, then by contentId (newer PMIDs are larger and come first)
-                return (scoreCmp != 0 ? scoreCmp : otherContentId.compareTo(thisContentId));
+                return otherContentId.compareTo(thisContentId);
             }
             if (!other.compareString.isEmpty() && !this.compareString.isEmpty()) {
                 // opposite order from title compare because newer should come first (date is first string)
@@ -114,10 +136,12 @@ public class ContentResultSearchResult implements SearchResult {
         return this.resourceResult;
     }
 
+    @Override
     public int getScore() {
         return this.score;
     }
 
+    @Override
     public String getSortTitle() {
         return this.sortTitle;
     }
@@ -125,26 +149,5 @@ public class ContentResultSearchResult implements SearchResult {
     @Override
     public int hashCode() {
         return this.hashCode;
-    }
-
-    private String buildCompareString(final ContentResult cResult) {
-        StringBuilder sb = new StringBuilder();
-        String pubDate = cResult.getPublicationDate();
-        String pubVolume = cResult.getPublicationVolume();
-        String pubIssue = cResult.getPublicationIssue();
-        String pubAuthor = cResult.getAuthor();
-        if (null != pubDate) {
-            sb.append(YEAR_PATTERN.matcher(pubDate).replaceFirst("$1"));
-        }
-        if (null != pubVolume) {
-            sb.append(pubVolume);
-        }
-        if (null != pubIssue) {
-            sb.append(pubIssue);
-        }
-        if (null != pubAuthor) {
-            sb.append(WHITESPACE.matcher(pubAuthor).replaceAll("").toLowerCase());
-        }
-        return sb.toString();
     }
 }
