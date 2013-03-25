@@ -578,18 +578,13 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.39</version>
+            <version>1.7.40</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
                     <groupId>commons-logging</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <artifactId>search-spring</artifactId>
-            <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.11</version>
         </dependency>
         <dependency>
             <artifactId>servlet-api</artifactId>
