@@ -22,8 +22,6 @@ public class ScoreStrategy extends AbstractScoreStrategy {
             // weighted oracle text scores for title and text
             // averaged
             score = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
-            // subtract number of years difference from current year
-            // yearFactor can change score from -10 to 10 points
         }
         score = score + computeDateAdjustment(year);
         return score;
