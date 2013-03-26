@@ -11,6 +11,9 @@
                 <property name="location" value="classpath:edu/stanford/irt/laneweb/eresources/eresources-sql.properties"/>
             </bean>
         </constructor-arg>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.eresources.ScoreStrategy"/>
+        </constructor-arg>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"

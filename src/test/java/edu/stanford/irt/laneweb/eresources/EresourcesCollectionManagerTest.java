@@ -19,7 +19,7 @@ public class EresourcesCollectionManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.manager = new EresourcesCollectionManager(null, null);
+        this.manager = new EresourcesCollectionManager(null, null, null);
         this.resultSet = createMock(ResultSet.class);
     }
 

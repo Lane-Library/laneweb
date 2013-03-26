@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import edu.stanford.irt.laneweb.resource.AbstractScoreStrategy;
 import edu.stanford.irt.search.ContentResult;
 
-public class ScoreStrategy {
+public class ScoreStrategy extends AbstractScoreStrategy {
 
     private static final Pattern DOUBLE_WEIGHT_PATTERN = Pattern
             .compile("pubmed_cochrane_reviews|dare|acpjc|bmj_clinical_evidence");
@@ -17,10 +17,6 @@ public class ScoreStrategy {
             .compile("^pubmed_(clinicaltrial|recent_reviews|treatment_focused|diagnosis_focused|prognosis_focused|harm_focused|etiology_focused|epidemiology_focused)");
 
     private static final Pattern QUARTER_WEIGHT_PATTERN = Pattern.compile("aafp_patients|medlineplus_0");
-
-    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
-
-    private static final Pattern YEAR_PATTERN = Pattern.compile(".*(\\d{4}).*");
 
     /**
      * <pre>
@@ -41,10 +37,12 @@ public class ScoreStrategy {
     public int computeScore(final ContentResult searchResult, final Pattern queryTermPattern) {
         int score;
         double weight = computeWeight(ENGINEID_PATTERN.matcher(searchResult.getId()).replaceFirst(""));
-        Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern.toString() + ").*", Pattern.CASE_INSENSITIVE);
+        Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern.toString() + ").*",
+                Pattern.CASE_INSENSITIVE);
         String title = searchResult.getTitle();
         boolean titleBeginsWithQueryTerms = titleBeginsWithPattern.matcher(title).matches();
-        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern.toString() + "\\W?)$", Pattern.CASE_INSENSITIVE);
+        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern.toString() + "\\W?)$",
+                Pattern.CASE_INSENSITIVE);
         boolean exactTitle = exactTitlePattern.matcher(title).matches();
         int titleHits = 0;
         int descriptionHits = 0;
@@ -86,18 +84,6 @@ public class ScoreStrategy {
         }
         score = (int) ((score + computeDateAdjustment(searchResult.getPublicationDate())) * weight);
         return score < 0 ? 0 : score;
-    }
-
-    // return -10 to 10, based on pub date's proximity to THIS_YEAR
-    private int computeDateAdjustment(final String publicationDate) {
-        if (null == publicationDate) {
-            return 0;
-        }
-        Matcher yearMatcher = YEAR_PATTERN.matcher(publicationDate);
-        if (yearMatcher.matches()) {
-            return Math.max(-10, 10 - (THIS_YEAR - Integer.parseInt(yearMatcher.group(1))));
-        }
-        return 0;
     }
 
     private double computeWeight(final String engineId) {

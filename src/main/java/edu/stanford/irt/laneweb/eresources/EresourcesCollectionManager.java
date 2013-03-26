@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -16,10 +15,11 @@ import edu.stanford.irt.eresources.impl.VersionImpl;
 
 public class EresourcesCollectionManager extends AbstractCollectionManager {
 
-    protected static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    private ScoreStrategy scoreStrategy;
 
-    public EresourcesCollectionManager(final DataSource dataSource, final Properties sqlStatements) {
+    public EresourcesCollectionManager(final DataSource dataSource, final Properties sqlStatements, final ScoreStrategy strategy) {
         super(dataSource, sqlStatements);
+        this.scoreStrategy = strategy;
     }
 
     @Override
@@ -47,23 +47,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 eresource.setRecordType(recordType);
                 eresource.setTitle(currentTitle);
                 if (query != null) {
-                    if (query.equalsIgnoreCase(currentTitle)) {
-                        eresource.setScore(Integer.MAX_VALUE);
-                    } else if (currentTitle.indexOf('(') > -1
-                            && query.equalsIgnoreCase(currentTitle.replaceFirst(" \\(.*", ""))) {
-                        eresource.setScore(Integer.MAX_VALUE);
-                    } else {
-                        // core material weighted * 3
-                        int coreFactor = "Y".equals(rs.getString("CORE")) ? 3 : 1;
-                        // weighted oracle text scores for title and text
-                        // averaged
-                        int scoreFactor = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
-                        int year = rs.getInt("YEAR");
-                        // subtract number of years difference from current year
-                        // yearFactor can change score from -10 to 10 points
-                        int yearFactor = year == 0 ? 0 : Math.max(-10, 10 - (THIS_YEAR - year));
-                        eresource.setScore(scoreFactor + yearFactor);
-                    }
+                    eresource.setScore(this.scoreStrategy.computeScore(query, currentTitle, rs));
                 }
                 eresource.setDescription(rs.getString("E_DESCRIPTION"));
                 eresources.add(eresource);
