@@ -7,7 +7,7 @@ import edu.stanford.irt.laneweb.resource.AbstractScoreStrategy;
 
 public class ScoreStrategy extends AbstractScoreStrategy {
 
-    private static int MAX_INT_MINUS_100 = Integer.MAX_VALUE - 100;
+    private static final int MAX_INT_MINUS_100 = Integer.MAX_VALUE - 100;
 
     public int computeScore(final String query, final String title, final ResultSet rs) throws SQLException {
         int score = 0;
