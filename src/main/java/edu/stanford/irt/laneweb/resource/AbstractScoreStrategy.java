@@ -6,13 +6,17 @@ import java.util.regex.Pattern;
 
 public abstract class AbstractScoreStrategy {
 
+    private static final int MAX_SCORE = 10;
+
+    private static final int MIN_SCORE = -10;
+
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
     private static final Pattern YEAR_PATTERN = Pattern.compile(".*(\\d{4}).*");
 
     // return -10 to 10, based on pub date's proximity to THIS_YEAR
     protected int computeDateAdjustment(final int year) {
-        return year == 0 ? 0 : Math.max(-10, 10 - (THIS_YEAR - year));
+        return year == 0 ? 0 : Math.max(MIN_SCORE, MAX_SCORE - (THIS_YEAR - year));
     }
 
     // return -10 to 10, based on pub date's proximity to THIS_YEAR
