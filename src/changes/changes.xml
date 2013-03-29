@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+    <properties>
+        <author email="ceyates@stanford.edu">Charles Yates</author>
+        <title>Laneweb Releases</title>
+    </properties>
+    <body>
+        <release date="2013-03-25" version="2.1.3" description="2.1.3 bug fix release">
+            <action date="2013-03-20" dev="ryanmax" issue="83034" type="fix">
+                peds search errors
+            </action>
+        </release>
+        <release date="2013-03-18" version="2.1.2" description="2.1.2 bug fix release">
+            <action date="2013-03-12" dev="ryanmax" issue="82873" type="update">
+                track banner clicks
+            </action>
+            <action date="2013-03-12" dev="ceyates" issue="82880" type="fix">
+                search result duplication
+            </action>
+            <action date="2013-03-12" dev="ceyates" issue="82861" type="fix">
+                search of 'Glossary of genetic terms' fails
+            </action>
+        </release>
+        <release date="2013-03-11" version="2.1.1" description="2.1.1 bug fix release">
+            <action date="2013-03-05" dev="ceyates" issue="82626" type="fix">
+                search for 'pediatric grand rounds' fails
+            </action>
+        </release>
+        <release date="2013-03-04" version="2.1.0" description="2.1.0 refactor release">
+            <action date="2013-03-01" dev="ceyates" issue="82529" type="fix">
+                search for Rheumatology throws an IllegalArgumentException
+            </action>
+            <action date="2013-02-28" dev="ceyates" issue="82519" type="update">
+                use javascript to determine resource position for tracking
+            </action>
+            <action date="2013-02-27" dev="olgary" issue="82459" type="update">
+                update pom and css directory
+            </action>
+            <action date="2013-02-27" dev="olgary" issue="82419" type="update">
+                hours.xsl - fix the title appearance
+            </action>
+            <action date="2013-02-26" dev="ceyates" issue="82416" type="update">
+                have the CollectionManager provide information that a link needs 'get password' reference
+            </action>
+            <action date="2013-08-26" dev="ceyates" issue="82412" type="update">
+                have the CollectionManager determine link type
+            </action>
+            <action date="2013-02-26" dev="ceyates" issue="82404" type="update">
+                have CollectionManager return sorted Versions
+            </action>
+            <action date="2013-02-25" dev="ceyates" issue="82376" type="update">
+                remove &lt;versions> and &lt;links> elements from eresources markup
+            </action>
+            <action date="2013-02-26" dev="ryanmax" issue="82135" type="fix">
+                FF. 18.0+ cursor problem in feedback widget
+            </action>
+            <action date="2013-02-05" dev="ceyates" issue="81828" type="update">
+                upgrade to irt-cocoon-1.5
+            </action>
+            <action date="2013-02-27" dev="olgary" issue="48229" type="update">
+                Refactor &amp; reorganize template sprites
+            </action>
+        </release>
+        <release date="2013-01-09" version="2.0.0" description="2.0.0 refactor release"/>
+        <release date="2012-07-09" version="1.13.0" description="1.13.0 feature release"/>
+        <release date="2011-09-02" version="1.12.0" description="1.12.0 refactor release"/>
+        <release date="2010-09-20" version="1.11.0" description="1.11.0 redesign release"/>
+    </body>
+</document>

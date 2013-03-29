@@ -1,0 +1,165 @@
+#yui-history-iframe {
+    position:absolute;
+    top:0; left:0;
+    width:1px; height:1px;
+    visibility:hidden;
+}
+.tooltips, #search-content-counts, #findIt, #spellCheck, #queryMapping {
+    display:none;
+}
+#queryMapping span {
+    padding-right:25px;
+}
+.search a, .search a:visited {
+    color: #1C4B70;
+}
+.search a:hover {
+    color:#820000;
+    border-bottom:1px solid #820000;
+}
+.lwSearchResults a:visited {
+    color: #565347;
+}
+.lwSearchResults a.primaryLink {
+    font-size:16px;
+    color: #1C4B70;
+}
+#searchFacets {
+    margin-top:5px;
+    background-color:#fff; /* IE needs for opacity animation */
+}
+#searchFacets a {
+    border-bottom:none;
+}
+#searchFacets .facetHeader {
+    text-transform:uppercase;
+    font-weight:bold;
+    list-style: none outside none;
+    /*list-style-image:url(/././resources/images/raquo.gif);
+    list-style-type:disc;*/
+    margin-top: 1em;
+}
+#searchFacets .facetIndent {
+    margin-left:30px;
+    list-style-image:none;
+    list-style-type:disc;
+    padding-left: 0;
+}
+#searchFacets li, .content .lwSearchResults li {
+    list-style-image:none;
+    list-style-type:none;
+}
+#searchFacets ul, .lwSearchResults li {
+    padding-bottom:10px;
+}
+#searchFacets li.current a {
+    color:#9a0003;
+}
+#searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a {
+    display:none;
+}
+#popInContent {
+    display:none;
+    position:relative;
+    overflow:hidden;
+    background-color: #F4F5EF;
+    border: 1px solid #E6E4DC;
+    margin-left: 160px;
+    margin-top: -10px;
+    padding: 7px;
+    white-space: nowrap;
+    width: 792px;
+    _margin-right:-15px;
+    _width: 793px;
+}
+#popInContent .popInLabel {
+    color:#FF6600;
+    padding-right:25px;
+    padding-left:10px;
+}
+.hitCountPopIn#popInContent {
+    margin-left:305px;
+    margin-top:-54px;
+    margin-bottom:24px;
+    width:647px;
+    _width:648px;
+}
+#searchResults {
+    margin-top:30px;
+}
+.content .lwSearchResults li {
+    margin-left:0;
+    padding:5px;
+    margin-bottom:10px
+}
+
+/* abstract and description related styles*/
+/*.hoverTrigger class added by javascript (also removes .hvrTrig)*/
+.lwSearchResults .showAbstract {
+    margin-left:20px;
+}
+.hvrTrig:hover .showAbstract, .active .showAbstract {
+	display:none
+}
+.hvrTarg {
+    display:none;
+    margin-top:5px;
+    padding:2px;
+    border-top:1px dotted #CCCCCC;
+}
+.hoverTrigger, .hoverTrigger a {
+    cursor:help;
+}
+.hvrTrig:hover, .hoverTrigger.active {
+    background-color: #F2F3ED;
+    padding:4px;
+    border:1px solid
+}
+
+.hvrTrig:hover .hvrTarg, .hoverTrigger.active .hvrTarg {
+    display:block
+}
+
+.hoverTrigger.active {
+    cursor:default
+}
+.hoverTrigger.active a {
+    cursor:pointer
+}
+
+.sourceLink {
+    color:#666666;
+}
+.pmid {
+    font-weight:bold;
+}
+.results-nav {
+    background-color:#F7F3E5;
+    padding:10px 5px 24px;
+    font-size:11px;
+}
+.rightSearchTips {
+    margin-top:40px;
+    padding:20px;
+    background-color:#edecdf;
+}
+.rightSearchTips h4 {
+    text-align:center;
+    color:#333;
+    font-size:18px;
+}
+/* used for successful metasearch links on hybrid pages */
+.searchSuccess {
+    font-weight:bold;
+}
+.searchTerms {
+    text-transform:none;
+    font-weight:bold;
+    font-style:italic;
+}
+.utdCMEnote {
+    color:#820000;
+}
+.abstractLabel {
+    font-weight:bold;
+}

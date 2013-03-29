@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <bean name="edu.stanford.irt.cocoon.source.SourceFactory/content"
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.source.SourceFactory/eresources"
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.source.SourceFactory/applications"
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/applications"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.source.SourceFactory/rss"
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/rss"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.source.SourceFactory/mobile"
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.source.SourceFactory/classes"
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/classes"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.source.SourceFactory/bookmarks"
+        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceFactory">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+    </bean>
+    
+    <bean id="edu.stanford.irt.cocoon.source.SourceResolver"
+        class="edu.stanford.irt.cocoon.source.SourceResolverImpl">
+        <property name="sourceFactories">
+            <map>
+                <entry key="content" value-ref="edu.stanford.irt.cocoon.source.SourceFactory/content"/>
+                <entry key="apps" value-ref="edu.stanford.irt.cocoon.source.SourceFactory/applications"/>
+                <entry key="eresources" value-ref="edu.stanford.irt.cocoon.source.SourceFactory/eresources"/>
+                <entry key="rss" value-ref="edu.stanford.irt.cocoon.source.SourceFactory/rss"/>
+                <entry key="mobile" value-ref="edu.stanford.irt.cocoon.source.SourceFactory/mobile"/>
+                <entry key="classes" value-ref="edu.stanford.irt.cocoon.source.SourceFactory/classes"/>
+                <entry key="bookmarks" value-ref="edu.stanford.irt.cocoon.source.SourceFactory/bookmarks"/>
+            </map>
+        </property>
+        <property name="defaultFactory">
+            <bean class="edu.stanford.irt.laneweb.cocoon.SpringResourceSourceFactory"/>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,91 @@
+package edu.stanford.irt.laneweb.servlet.binding;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import edu.stanford.irt.laneweb.ipgroup.IPGroup;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.proxy.Ticket;
+
+public class BaseProxyURLDataBinderTest {
+
+    private BaseProxyURLDataBinder binder;
+
+    private Map<String, Object> model;
+
+    @Before
+    public void setUp() throws Exception {
+        this.binder = new BaseProxyURLDataBinder(false);
+        this.model = new HashMap<String, Object>();
+        this.model.put(Model.PROXY_LINKS, Boolean.TRUE);
+    }
+
+    @Test
+    public void testBindDisasterModeTrue() {
+        this.binder = new BaseProxyURLDataBinder(true);
+        this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
+        this.binder.bind(this.model, null);
+        assertEquals("http://laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
+    }
+    
+    @Test
+    public void testBindProxyLinksFalse() {
+        this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
+        this.binder.bind(this.model, null);
+        assertNull(this.model.get(Model.BASE_PROXY_URL));
+    }
+
+    @Test
+    public void testBindProxyLinksNull() {
+        this.model.remove(Model.PROXY_LINKS);
+        this.binder.bind(this.model, null);
+        assertNull(this.model.get(Model.BASE_PROXY_URL));
+    }
+
+    @Test
+    public void testLPCHIP() {
+        this.model.put(Model.IPGROUP, IPGroup.LPCH);
+        this.binder.bind(this.model, null);
+        assertEquals("http://laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
+    }
+
+    @Test
+    public void testSHCIP() {
+        this.model.put(Model.IPGROUP, IPGroup.SHC);
+        this.binder.bind(this.model, null);
+        assertEquals("http://laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
+    }
+
+    @Test
+    public void testSunetidAndTicket() {
+        this.model.put(Model.BASE_PATH, "");
+        this.model.put(Model.SUNETID, "sunetid");
+        Ticket ticket = new Ticket("", "");
+        this.model.put(Model.TICKET, ticket);
+        this.binder.bind(this.model, null);
+        assertEquals("http://laneproxy.stanford.edu/login?user=sunetid&ticket=" + ticket + "&url=",
+                this.model.get(Model.BASE_PROXY_URL));
+    }
+
+    @Test
+    public void testNullTicket() {
+        this.model.put(Model.BASE_PATH, "");
+        this.model.put(Model.SUNETID, "sunetid");
+        this.binder.bind(this.model, null);
+        assertEquals("/secure/apps/proxy/credential?url=", this.model.get(Model.BASE_PROXY_URL));
+    }
+
+    @Test
+    public void testNullSunetid() {
+        this.model.put(Model.BASE_PATH, "");
+        this.model.put(Model.TICKET, new Ticket("", ""));
+        this.binder.bind(this.model, null);
+        assertEquals("/secure/apps/proxy/credential?url=", this.model.get(Model.BASE_PROXY_URL));
+    }
+}

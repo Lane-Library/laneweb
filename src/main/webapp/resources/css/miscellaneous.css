@@ -1,0 +1,129 @@
+/* This file has rules that don't seem to fit anywhere else */
+p {
+    margin-bottom : 10px
+}
+/* styles for the long paragraphs, not short lists - to spread out the lines for better readability*/
+.wideline {
+    font-size : 1em;
+    line-height : 1.6em;
+    margin : 0 0 1em;
+
+}
+.content {
+    color : #3F3C30;
+    font-size : 12px
+}
+strong {
+    font-weight : bold
+}
+em {
+    font-style : italic
+}
+.term {
+    font-style : italic
+}
+.inputHint {
+    color : #808080
+}
+.more {
+    text-transform : uppercase;
+    text-align : right;
+    border-bottom : 1px solid #EAE9E6;
+    border-top : 1px solid #EAE9E6;
+    clear : left;
+    font-size : 9px;
+    letter-spacing : 1px;
+    padding : 3px
+}
+.more.classes {
+    border-top : none;
+    font-size : 10px;
+    padding : 6px;
+}
+.more a {
+    border : none;
+}
+/* used for pubmed and highly accessed article lists */
+.citationList li {
+    list-style : decimal;
+    margin-bottom : 1em
+}
+.divider {
+    text-align : center
+}
+.rss-link {
+    float : right;
+    background-image : url(/././resources/images/sprite-all.png);
+    background-position: -80px -240px;
+    height : 13px;
+    width : 13px;
+    background-repeat : no-repeat;
+    font-size : 0;
+    text-indent : -10000px;
+    display : block;
+    margin-top : 6px;
+    border-bottom : none;
+}
+.rss-link:hover {
+    background-image : url(/././resources/images/sprite-all.png);
+    background-position: -80px -280px;
+    border-bottom : none;
+}
+.red-text {
+    color : #820000
+}
+.announce {
+	text-align: center;
+	background-color: #F4F5EF;
+	margin-left: -1.3em;
+	margin-right: -0.9em;
+	border-top: 1px solid #dadad9;
+	border-bottom: 1px solid #dadad9;
+	border-left: none;
+	border-right: none;
+}
+#mphoneAd {
+    width : 988px;
+    position : absolute;
+    left : 6px;
+    top : -35px;
+    z-index : 2;
+    text-align : center;
+    background-color : #d5672e;
+    height : 114px
+}
+#mphoneAd a{
+    color : #fff;
+    font-weight : bold;
+    border-bottom : none
+}
+#mphoneAd div {
+    color : #fff;
+    padding-top : 10px;
+    font-size : 200%
+}
+#class-title {
+    font-size : 1.8em
+}
+
+/*table on ejpw_list.html*/
+
+.password-table table {
+    border-collapse : collapse;
+    background-color : #fff;
+}
+.password-table th {
+    padding : .7em;
+    vertical-align : top;
+    border : 1px solid #ccc;
+}
+.password-table td {
+    padding : .7em;
+    vertical-align : top;
+    border : 1px solid #ccc;
+}
+.password-table table th {
+    background-color : #e6e8d5;
+    font-weight : bold;
+    font-size : 1.1em;
+}

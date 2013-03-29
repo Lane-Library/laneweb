@@ -1,0 +1,61 @@
+
+#highlightedResources {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /*required for IE6:*/
+    _right: 10px;
+    border: 3px #5A8CB4 solid;
+    width: 250px;
+}
+#highlightedResources li {
+    list-style: none inside none;
+    margin-left: 0;
+}
+#highlightedResources a {
+    border-bottom: none;
+}
+#highlightedResources a:hover {
+    color: #ff9933;
+}
+#topResources {
+    background-image: url(/././resources/images/sprite-all.png);
+    background-position: -320px -200px;
+    background-repeat: no-repeat;
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 0.1em 0.1em 0.1em #101010;
+    margin-bottom: 0;
+    white-space: nowrap;
+    /* required for IE6:*/
+    position : relative;
+    /* required for IE7:*/
+    height: 100%;
+}
+#topResources:after, #topResources .after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+}
+#topResources li {
+    float: left;
+    /* required for IE6:*/
+    position: relative;
+}
+#topResources a {
+    display: block;
+    width: 111px;
+    height: 25px;
+    padding: 9px 0 0 14px;
+    margin-bottom: 1px;
+    color: #FFECC1;
+}
+#topResources a:hover {
+    background-color: #256592;
+    background-image: url(/././resources/images/sprite-all.png);
+    background-repeat: no-repeat;
+    background-position: -320px -160px;
+}

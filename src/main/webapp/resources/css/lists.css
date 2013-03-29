@@ -1,0 +1,84 @@
+/* these are the default list styles */
+ol li {
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+
+dt {
+	margin-top: .5em;
+	font-weight: bold;
+}
+
+.content ul {
+	margin-bottom: 10px;
+}
+
+.content ul li {
+	list-style-image: url(/././resources/images/raquo.gif);
+	list-style-type: disc;
+	list-style-position: outside;
+	margin-left: 15px;
+}
+/*this is the left column*/
+.content .leftColumn li {
+	font-size: 11px;
+	list-style: none outside none;
+	padding: 5px 5px 5px 18px;
+	border-bottom: 1px solid #E6E4DC;
+	margin-left: 0;
+}
+.content .leftColumn li ul {
+	padding-top: 4px;
+}
+.content .leftColumn li ul li{
+	padding: 1px 5px 0px 6px;
+	border-bottom: 0;
+}
+/*this is the middle column*/
+.content .middleColumn li {
+	padding-bottom: 0.2em;
+}
+
+/*this is the right column*/
+.content .rightColumn li {
+	font-size: 11px;
+	line-height: 12px;
+	padding: 2.5px 0;
+}
+
+.content .rightColumn .cite li {
+	margin-bottom: .5em;
+}
+
+/*styles for the list of portals on /portals/index.html*/
+#portalList {
+    padding : 11px;
+    background-color : #e6e4dc;
+    /*requred for IE < 8:*/
+    *height:404px
+}
+#portalList:after {
+    content : ".";
+    display : block;
+    height : 0;
+    font-size : 0;
+    clear : both;
+    visibility : hidden;
+}
+#portalList li {
+    float : left;
+    list-style : none inside none;
+    margin-left : 0
+}
+#portalList a {
+    display : block;
+    width : 200px;
+    padding : 15px;
+    border-bottom : none;
+    background-color : white;
+    font-size : 15px;
+    margin : 1px
+}
+#portalList a:hover {
+    background-color : #e6e4dc
+}

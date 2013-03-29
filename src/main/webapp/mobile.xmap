@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
+    <!-- publishable paths for mobile search and browse -->
+    <map:pipelines>
+        <map:pipeline type="noncaching">
+            <!-- Merged Search Content (er and metasearch) -->
+            <map:match pattern="search/lane/*" type="wildcard">
+                <map:generate type="merged-search">
+                    <map:parameter name="timeout" value="5000"/>
+                    <map:parameter name="engines" value="{1}"/>
+                </map:generate>
+                <map:transform type="query-highlighting"/>
+                <map:transform type="description-labeling"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- Search Content (metasearch) -->
+            <map:match pattern="search/content/*" type="wildcard">
+                <map:generate type="search-content">
+                    <map:parameter name="engines" value="{1}"/>
+                </map:generate>
+                <map:transform type="query-highlighting"/>
+                <map:transform type="description-labeling"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- EResources search -->
+            <map:match pattern="search/er" type="wildcard">
+                <map:generate type="er-search"/>
+                <map:transform type="query-highlighting"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="search/er/type/*" type="wildcard">
+                <map:generate type="er-search">
+                    <map:parameter name="type" value="{1}"/>
+                </map:generate>
+                <map:transform type="query-highlighting"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="includes/**.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/includes/{1}.html"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:transform type="xinclude"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="plain/**.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/m/{1}.html"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:transform type="xinclude"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="html5"/>
+            </map:match>
+            <map:match pattern="**.html" type="wildcard">
+                <map:aggregate element="doc" label="content">
+                    <map:part src="{content-base}/m/{1}.html"/>
+                    <map:part src="resources/mobile/{template}.xml"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:transform type="xinclude"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="html5"/>
+            </map:match>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

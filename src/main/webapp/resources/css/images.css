@@ -1,0 +1,15 @@
+.drop-shadow-noimg {
+	/*-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;*/
+    border: 2px solid #fff;
+    box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+    -moz-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+    -webkit-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+	/* For IE 8 */
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
+	/* For IE 5.5 - 7 */
+	filter: progid : DXImageTransform.Microsoft.Shadow ( Strength = 3,
+		Direction = 135, Color = '#989898' );
+}

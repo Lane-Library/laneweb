@@ -1,0 +1,1031 @@
+@charset "UTF-8";
+
+/*
+*
+*  Styles for Lane Mobile site
+*
+*
+*/
+
+/*
+*
+*  General
+*
+*
+*/
+body {
+    visibility: hidden;
+}
+
+body.ui-mobile-viewport,.ui-body-c {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: none repeat scroll 0 0 #ebebde;
+    text-align: center;
+    color: #333333;
+    -webkit-text-shadow: 0 0 0 transparent;
+    -moz-text-shadow: 0 0 0 transparent;
+    text-shadow: 0 0 0 transparent;
+    visibility: visible;
+}
+
+
+/*persistentlogin  */
+#close{
+    z-index:2; 
+    padding-left: .40em; 
+    padding-right: .40em; 
+    font-size: 18px; 
+    font-weight: bold;
+    position: relative;
+    top: -10px;
+    left: -127px;
+    margin: 0px;
+}
+
+ .persistent-header{
+    margin: 40px auto 0px auto;
+    padding-left: 15px; 
+    padding-right: 15px;
+    height: 1px;
+ } 
+ 
+ .ui-header, 
+ .ui-content, 
+ .ui-footer { 
+	max-width: 225px;
+	background-color: #ffffff;
+ }
+
+.ui-content{ 
+  	margin: 0px auto 20px auto; 
+}
+
+#persistent #hd {
+    color: #414042;
+    font-weight: bold;
+    line-height: 1.4em;
+    font-size: 1.3em;
+    padding-bottom: .75em;
+}
+
+.ui-mobile .ui-page-active {
+    overflow: hidden;
+    height: auto;
+    display: block;
+    padding-bottom: 80px;
+}
+
+.ui-body-c .ui-link {
+    font-weight: normal;
+}
+
+.ui-body-c .ui-link:hover, .ui-body-c .ui-link:visited, .ui-body-c .ui-link:active {
+    color:#000;
+}
+
+/*
+*
+*  Branding area at top of pages
+*
+*
+*/
+.ui-body-c .brand {
+    width: 100%;
+    height: 44px;
+    background-color: #bdbdbb;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff),
+        to(#bdbdbb) );
+    background-image: -webkit-linear-gradient(#ffffff, #bdbdbb);
+    background-image: linear-gradient(#ffffff, #bdbdbb);
+    border-bottom: solid 1px #651006;
+    position: relative;
+    z-index: 202;
+}
+
+.smLogo {
+    width: 105px;
+    height: auto;
+    margin: 10px 0 0 8px;
+    float: left;
+}
+
+.brand .subTitle {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+.brandedSiteName {
+    float: left;
+    border-left: solid 1px #9c9a90;
+    padding: 0 0 0 7px;
+    margin: 10px 0 0 8px;
+    font-family: 'Arial Narrow', Arial, Tahoma, 'Trebuchet MS', sans-serif;
+    text-transform: uppercase;
+    color: #920000;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    text-shadow: 0 1px #ffffff;
+    line-height: 0.8em;
+    font-weight: bold;
+}
+
+.brandedSiteName .subTitle {
+    font-size: 0.5em;
+    color: #5c5b5a;
+    left: 2px;
+    position: relative;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.ui-body-c .webauthLogin.ui-link,.ui-body-c .homeBtn.ui-link {
+    display: block;
+    float: right;
+    margin: 8px 8px 0 0;
+    border: 1px solid #cbcbc3;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    width: 50px;
+    height: 17px;
+    background-color: #e8e7e3;
+    -webkit-box-shadow: -1px 1px 1px #a9a59c;
+    box-shadow: -1px 1px 1px #a9a59c;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+    color: #454442;
+    text-shadow: 1px 1px #ffffff;
+    font-size: 1.1em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#eeedeb),
+        color-stop(50%, #ccc8c5), color-stop(51%, #bbb7b2),
+        color-stop(100%, #f2ede8) );
+    background-image: -webkit-linear-gradient(top, #eeedeb 0%, #ccc8c5 50%, #bbb7b2 51%,
+        #f2ede8 100%);
+    background: linear-gradient(top, #eeedeb 0%, #ccc8c5 50%, #bbb7b2 51%, #f2ede8 100%);
+}
+
+.ui-body-c .homeBtn.ui-link {
+    float: left;
+    margin-left: 8px;
+    width: 25px;
+    padding-left: 3px;
+}
+
+.ui-body-c .webauthLogin.ui-link:active,.ui-body-c .homeBtn.ui-link:active
+    {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f2ede8),
+        color-stop(50%, #bbb7b2), color-stop(51%, #ccc8c5),
+        color-stop(100%, #eeedeb) );
+    background-image: -webkit-linear-gradient(top, #f2ede8 0%, #bbb7b2 50%, #ccc8c5 51%,
+        #eeedeb 100%);
+    background: linear-gradient(top, #f2ede8 0%, #bbb7b2 50%, #ccc8c5 51%, #eeedeb 100%);
+    -webkit-box-shadow: 0 0 8px #fff;
+    box-shadow: 0 0 8px #fff;
+}
+
+/*
+*
+*  Search area
+*
+*
+*/
+.search {
+    position: absolute;
+    z-index: 51;
+    background-color: #620B09;
+    clear: right;
+    top: 45px;
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 6px #b5b5ab;
+    box-shadow: 0 0 6px #b5b5ab;
+}
+
+.search form {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#de2a29),
+        color-stop(50%, #762625), color-stop(51%, #620b09),
+        color-stop(100%, #620b09) );
+    background-image: -webkit-linear-gradient(top, #de2a29 0%, #762625 50%, #620b09 51%,
+        #620b09 100%);
+    background: linear-gradient(top, #de2a29 0%, #762625 50%, #620b09 51%, #620b09 100%);
+    background-color: #620B09;
+    border: medium none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+}
+
+.search form:nth-child(2),.search form:nth-child(3) {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#de2a29),
+        color-stop(13%, #762625), color-stop(14%, #620b09),
+        color-stop(100%, #620b09) );
+    background-image: -webkit-linear-gradient(top, #de2a29 0%, #762625 13%, #620b09 14%,
+        #620b09 100%);
+    background: linear-gradient(top, #de2a29 0%, #762625 13%, #620b09 14%, #620b09 100%);
+}
+
+.search form.selected {
+    -webkit-transition-property: opacity;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-in;
+    height: auto;
+    opacity: 1;
+}
+
+.search legend {
+    display: none;
+}
+
+.search fieldset {
+    border: medium none;
+    margin: 0;
+}
+
+.search form:nth-child(2) legend {
+    margin-left: 33%;
+}
+
+.search form:nth-child(3) legend {
+    margin-left: 65%;
+    width: 35.5%;
+}
+
+.ui-body-c .search input {
+    -webkit-appearance: none;
+    border: 1px solid #FFFFFF;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    border-radius: 15px 15px 15px 15px;
+    -webkit-box-shadow: 0 3px 5px #A3A1A1 inset;
+    box-shadow: 0 3px 5px #A3A1A1 inset;
+    font-size: 1.3em;
+    margin: 10px 0px;
+    padding: 6px 0 4px 25px;
+    background: url(/././resources/images/mobile/search_bg.png) no-repeat
+        5px 6px #ffffff;
+    line-height: 1.5em;
+    -webkit-background-size: 18px;
+    background-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    position: relative;
+    left: -1px;
+    display: none;
+}
+
+.ui-body-c .search form.selected input {
+    display: block;
+}
+
+.search .ui-input-search {
+    width: 97%;
+    background: none repeat scroll 0 0 transparent;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+}
+
+.search .ui-btn-corner-all {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    border: medium none;
+    -webkit-box-shadow: 0 0 0 transparent;
+    box-shadow: 0 0 0 transparent;
+}
+
+.search input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.ui-input-search .ui-input-clear {
+    background: url(/././resources/images/mobile/clear_search.png) no-repeat
+        right top transparent;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    margin-top: -9px;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    width: 19px;
+    height: 19px;
+    text-decoration:none;
+}
+
+.ui-icon-delete {
+    background: none repeat scroll 0 0 transparent;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 0 transparent;
+    box-shadow: 0 0 0 transparent;
+}
+
+.search label.ui-input-text {
+    display: none;
+}
+
+.ui-body-c .search input.searchSubmit {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.ui-input-search input.ui-input-text {
+    text-align:left;
+}
+
+.ui-icon-searchfield::after {
+    background:none;
+}
+
+/*
+*
+*  Autocomplete for search boxes
+*
+*
+*/
+.ui-autocomplete {
+    left: 1px !important;
+    width: 99% !important;
+    padding: 9px 0 0 0 !important;
+    text-align: left;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-bottom: 1px solid #ABABAB;
+}
+
+.ui-menu-item:first-child {
+    border-top: medium none !important;
+}
+
+.ui-menu-item:last-child {
+    border-bottom: 2px solid #B5B5AB;
+}
+
+.ui-menu-item {
+    background-color: #EBEBDE;
+    border-left: 1px solid #ABABAB;
+    border-right: 2px solid #B5B5AB;
+    border-top: 1px solid #ABABAB;
+    font-size: 1.2em;
+}
+
+.ui-menu .ui-menu-item a.ui-state-hover {
+    margin: 0;
+}
+
+.ui-menu .ui-menu-item a:active {
+    color: #fff;
+    background-color: #b7b8b0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+/*
+*
+*  Tabs below the search box on the homepage, which allow for switching between Lane, Clinical, and Pediatric searches
+*
+*
+*/
+#searchTabs {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#e7d79f),
+        to(#9f9065) );
+    background-image: -webkit-linear-gradient(#e7d79f, #9f9065);
+    background-image: linear-gradient(#e7d79f, #9f9065);
+    display: block;
+    width: 100%;
+    position: relative;
+    list-style: none;
+    border-bottom: 1px solid #ffffff;
+    float: left;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#searchTabs li {
+    display: block;
+    float: left;
+    width: 33.5%;
+    height: 19px;
+    padding: 86px 0 0;
+    font-weight: bold;
+    color: #084676;
+    margin: 0;
+    text-align: center;
+    background: url(/././resources/images/mobile/icon_sprite.png) no-repeat
+        center 11px transparent;
+    -webkit-background-size: 70px auto;
+    background-size: 70px;
+    position: relative;
+}
+
+#searchTabs li.selected,#searchTabs li:active {
+    background-color: #620b09;
+    color: #ffffff;
+}
+
+#searchTabs li:after,#searchTabs li:before {
+    content: " ";
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#e7d79f),
+        to(#9f9065) );
+    background-image: -webkit-linear-gradient(#e7d79f, #9f9065);
+    background-image: linear-gradient(#e7d79f, #9f9065);
+    width: 4%;
+    height: 105px;
+    position: absolute;
+    top: 0;
+}
+
+#searchTabs li:nth-child(2):before {
+    left: -3px;
+}
+
+#searchTabs li.selected:after,#searchTabs li.selected:before,#searchTabs li:active:after,#searchTabs li:active:before
+    {
+    display: none;
+}
+
+#searchTabs li:nth-child(2):active:after,#searchTabs li:nth-child(3):active:before
+    {
+    content: " ";
+    background: none repeat scroll 0 0 #620b09;
+    width: 5%;
+    height: 105px;
+    position: absolute;
+    top: 0;
+    right: -3px;
+    color: #fff;
+    display: block;
+    border-radius: 0;
+}
+
+#searchTabs li:nth-child(3):active:before {
+    left: -2px;
+    width: 2%;
+}
+
+#searchTabs li:after {
+    -webkit-border-radius: 0 8px 0 0;
+    border-radius: 0 8px 0 0;
+    right: -4%;
+    z-index: 7;
+}
+
+#searchTabs li:before {
+    -webkit-border-radius: 8px 0 0 0;
+    border-radius: 8px 0 0 0;
+    left: -4%;
+}
+
+#searchTabs li:nth-child(1) {
+    background-position: center -128px;
+}
+
+#searchTabs li.selected:nth-child(1) {
+    background-position: center 11px;
+}
+
+#searchTabs li:nth-child(2) {
+    background-position: center -408px;
+}
+
+#searchTabs li.selected:nth-child(2) {
+    background-position: center -268px;
+}
+
+#searchTabs li:nth-child(3) {
+    background-position: center -688px;
+    position: relative;
+    width: 33%;
+    right: -2px;
+}
+
+#searchTabs li.selected:nth-child(3) {
+    background-position: center -548px;
+}
+
+/*
+*
+*  List of links on homepage and on secondary pages
+*
+*
+*/
+.resourceList {
+    position: relative;
+    display: block;
+    margin: 175px auto 0 auto;
+    padding: 0;
+    list-style: none;
+    width: 90%;
+}
+
+.resourceList li {
+    -webkit-box-shadow: 0 4px 6px #B5B5AB;
+    box-shadow: 0 4px 6px #B5B5AB;
+    background-color: #ffffff;
+    display: block;
+    font-weight: bold;
+    padding: 0;
+    text-align: left;
+    font-size: 1.4em;
+    border-bottom: 1px solid #ababab;
+    color: #000000;
+}
+
+.resourceList li .ui-loader {
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    z-index: 1;
+    left: 0;
+}
+
+.resourceList li:first-child {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fefffa),
+        color-stop(15%, #f5f5f5), color-stop(16%, #f5f5f5),
+        color-stop(60%, #ffffff) );
+    background-image: -webkit-linear-gradient(top, #fefffa 0%, #f5f5f5 15%, #f5f5f5 16%,
+        #ffffff 60%);
+    background: linear-gradient(top, #fefffa 0%, #f5f5f5 15%, #f5f5f5 16%, #ffffff 60%);
+    -webkit-border-radius: 8px 8px 0 0;
+    border-radius: 8px 8px 0 0;
+}
+
+.resourceList li.rlLabel {
+    border-bottom: medium none;
+    color: #464646;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 11px;
+    text-align: center;
+    width: 40%;
+}
+
+.resourceList li a,.resourceList li a:link,.resourceList li a:visited {
+    color: #000000;
+    text-decoration: none;
+    display: block;
+    padding: 8px 51px 8px 24px;
+    font-weight: bold;
+}
+
+.resourceList li a.newWindow:active,.resourceList li a.sameWindow:active
+    {
+    color: #fff;
+    background-color: #b7b8b0;
+}
+
+.resourceList li:first-child a:active {
+    -webkit-border-radius: 8px 8px 0 0;
+    border-radius: 8px 8px 0 0;
+}
+
+.resourceList li:last-child a:active {
+    -webkit-border-radius: 0 0 8px 8px;
+    border-radius: 0 0 8px 8px;
+}
+
+.resourceList li a.newWindow {
+    background: url(/././resources/images/mobile/link_bg_sprite.png)
+        no-repeat right -39px transparent;
+    -webkit-background-size: 36px;
+    background-size: 36px;
+}
+
+.resourceList li a.sameWindow {
+    background: url(/././resources/images/mobile/link_bg_sprite.png)
+        no-repeat right 11px transparent;
+    -webkit-background-size: 36px;
+    background-size: 36px;
+}
+
+.resourceList li:last-child {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fff),
+        color-stop(15%, #fff), color-stop(16%, #fff),
+        color-stop(90%, #f5f3f4), color-stop(91%, #f5f3f4),
+        color-stop(100%, #fffefa) );
+    background-image: -webkit-linear-gradient(top, #fff 0%, #fff 15%, #fff 16%, #f5f3f4 90%,
+        #f5f3f4 91%, #fffefa 100%);
+    background: linear-gradient(top, #fff 0%, #fff 15%, #fff 16%, #f5f3f4 90%, #f5f3f4
+        91%, #fffefa 100%);
+    border-bottom: medium none;
+    -webkit-border-radius: 0 0 8px 8px;
+    border-radius: 0 0 8px 8px;
+}
+
+/*
+*
+*  Expandable section for hours of operation
+*
+*
+*/
+#hours {
+    margin: 20px auto;
+    width: 265px;
+    text-align: left;
+    height: 20px;
+}
+
+#hours h4 {
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0 0 8px 20px;
+}
+
+#hours h4:before {
+    content: "+";
+    font-weight: bold;
+    padding: 1px;
+    line-height: 0.6em;
+    font-size: 1.4em;
+    width: 12px;
+    height: 12px;
+    display: block;
+    float: left;
+    border: 1px solid #9e9d98;
+    color: #620b09;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fdfcf9),
+        color-stop(2%, #f1ede2), color-stop(3%, #ede9dd),
+        color-stop(98%, #c4c0b2), color-stop(99%, #b4b0a3),
+        color-stop(100%, #a7a395) );
+    background-image: -webkit-linear-gradient(top, #fdfcf9 0%, #f1ede2 2%, #ede9dd 3%, #f2ede8
+        98%, #b4b0a3 99%, #a7a395 100%);
+    background: linear-gradient(top, #fdfcf9 0%, #f1ede2 2%, #ede9dd 3%, #f2ede8 98%,
+        #b4b0a3 99%, #a7a395 100%);
+    text-shadow: 0 1px #f4f3ef;
+    margin: 0 8px 0 0;
+}
+
+#hours.expanded h4:before {
+    content: "-";
+    font-weight: normal;
+    padding: 1px 1px 5px 3px;
+    line-height: 0.3em;
+    font-size: 1.8em;
+    width: 10px;
+    height: 8px;
+}
+
+#hours dl {
+    font-size: 1em;
+    margin: 0 0 5px 0;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+}
+
+#hours dt {
+    display: inline-block;
+    width: 34%;
+    margin: 0 0 0 20px;
+    vertical-align: top;
+}
+
+#hours dd {
+    display: inline-block;
+    width: 50%;
+    margin: 0;
+}
+
+#hours .calTitle {
+    font-style: italic;
+}
+
+/*
+*
+*  Row of buttons below the hours of operation: Phone, Directions, Ask Us 
+*
+*
+*/
+#contactButtons {
+    display: block;
+    width: 100%;
+    margin: 20px auto;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+#contactButtons li {
+    display: inline;
+    margin: 0 4px 0 0;
+}
+
+#contactButtons li:last-child {
+    margin: 0;
+}
+
+#contactButtons li a,#contactButtons li a:link,#contactButtons li a:visited,#contactButtons li a:hover,.ui-body-c .askUsBtn.ui-link,.ui-body-c .askUsBtn.ui-link:link,.ui-body-c .askUsBtn.ui-link:visited,.ui-body-c .askUsBtn.ui-link:hover,#loggedIn button
+    {
+    border: 1px solid #9e9d98;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    padding: 8px;
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fdfcf9),
+        color-stop(2%, #f1ede2), color-stop(50%, #ede9dd),
+        color-stop(98%, #c4c0b2), color-stop(99%, #b4b0a3),
+        color-stop(100%, #a7a395) );
+    background-image: -webkit-linear-gradient(top, #fdfcf9 0%, #f1ede2 2%, #ede9dd 50%, #c4c0b2
+        98%, #b4b0a3 99%, #a7a395 100%);
+    background: linear-gradient(top, #fdfcf9 0%, #f1ede2 2%, #ede9dd 50%, #c4c0b2 98%,
+        #b4b0a3 99%, #a7a395 100%);
+    text-shadow: 0 1px #f4f3ef;
+    position: relative;
+}
+
+#contactButtons li a:active,#loggedIn button:active,.ui-body-c .askUsBtn.ui-link:active
+    {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#a7a395),
+        color-stop(2%, #b4b0a3), color-stop(3%, #c4c0b2),
+        color-stop(98%, #ede9dd), color-stop(99%, #f1ede2),
+        color-stop(100%, #fdfcf9) );
+    background-image: -webkit-linear-gradient(top, #a7a395 0%, #b4b0a3 2%, #c4c0b2 3%, #ede9dd
+        98%, #f1ede2 99%, #fdfcf9 100%);
+    background: linear-gradient(top, #a7a395 0%, #b4b0a3 2%, #c4c0b2 3%, #ede9dd 98%,
+        #f1ede2 99%, #fdfcf9 100%);
+    -webkit-box-shadow: 0 0 8px #fff;
+    box-shadow: 0 0 8px #fff;
+}
+
+.ui-body-c .askUsBtn.ui-link,.ui-body-c .askUsBtn.ui-link:link,.ui-body-c .askUsBtn.ui-link:visited,.ui-body-c .askUsBtn.ui-link:active,.ui-body-c .askUsBtn.ui-link:hover
+    {
+    float: right;
+    margin: 67px 6% 0 0;
+    padding: 7px;
+    width: 38%;
+    z-index: 2;
+}
+
+/*
+*
+*  Row of buttons below the hours of operation: Phone, Directions, Ask Us 
+*
+*
+*/
+.footer {
+    margin-top: 60px;
+    background-color: #6e6a60;
+    padding: 19px 5px 16px 5px;
+    overflow: hidden;
+    width: 99%;
+    position: absolute;
+    bottom: 0;
+}
+
+.ui-body-c .ui-body-c .footer a.ui-link,.ui-body-c .footer a.ui-link:link,.ui-body-c .footer a.ui-link:visited,.ui-body-c .footer a.ui-link:hover
+    {
+    color: #ffffff;
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+.ui-body-c .footer a.ui-link:active {
+    text-decoration: underline;
+}
+
+.ui-body-c .footer a.ui-link:first-child {
+    float: left;
+    margin-left: 3%;
+}
+
+.ui-body-c .footer a.ui-link:last-child {
+    text-transform: uppercase;
+    float: right;
+    margin-right: 5%;
+}
+
+/*
+*
+*  Secondary pages
+*
+*
+*/
+.secondary {
+    position: relative;
+}
+
+.secondary .resourceList {
+    margin-top: 67px;
+}
+
+.secondary .footer {
+    margin-top: 20px;
+}
+
+.pageName {
+    color: #920000;
+    font-family: 'Arial Narrow', Arial, Tahoma, 'Trebuchet MS', sans-serif;
+    font-size: 1.6em;
+    line-height: 0.8em;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    left:50%;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    margin-left:-115px;
+    position: absolute;
+    width:205px;
+    text-shadow: 1px 1px #ffffff;
+    font-weight: bold;
+}
+
+/*
+*
+*  Overlay mask that appears when clinical search and pediatrics search are displayed
+*
+*
+*/
+#overlayMask {
+    background-color: #000000;
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+}
+
+/*
+*
+*  Search results page 
+*
+*
+*/
+.results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    padding: 51px 0 0;
+}
+
+.results li:first-child {
+    background: none repeat scroll 0 0 #EBEBDE;
+    border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 8px;
+    padding: 13px 46px 10px 10px;
+}
+
+.results li {
+    padding: 5px 5px 18px 10px;
+    text-align: left;
+    font-size: 1.2em;
+    color: #656565;
+}
+
+.results li a:first-child {
+    padding-right: 46px;
+    background: url(/././resources/images/mobile/link_bg_sprite.png)
+        no-repeat right -42px transparent;
+    -webkit-background-size: 32px;
+    background-size: 32px;
+    overflow:visible;
+}
+
+.results li.resultsNav {
+    background: none repeat scroll 0 0 transparent;
+    text-align: right;
+}
+
+.results li.resultsNav a {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.results li a,.results li a.ui-link {
+    display: block;
+    color: #184b73;
+}
+
+.results li a.more,.results li a.more:link,.results li a.more:visited {
+    text-decoration: none;
+}
+
+.results li a.more:after,.results li.resultsNav a:after {
+    content: "\00BB";
+    margin-left: 3px;
+}
+
+#searchResults .footer {
+    margin-top: 0;
+}
+
+.ui-mobile #searchResults.ui-page-active {
+    padding-bottom: 48px;
+}
+
+.results {
+    min-height: 415px;
+}
+
+.results .spell {
+    color:#FF6600;
+    padding-bottom:10px;
+}
+
+.results .spell a {
+    display: inline;
+    font-weight: bold;    
+}
+
+/*
+*
+*  Login notification page 
+*
+*
+*/
+#loggedIn h2 {
+    width: 100%;
+    margin: 0 0 35px 0;
+    padding: 21px 0 21px 0;
+    font-size: 2em;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#de2a29),
+        color-stop(50%, #762625), color-stop(51%, #620b09),
+        color-stop(100%, #620b09) );
+    background-image: -webkit-linear-gradient(top, #de2a29 0%, #762625 50%, #620b09 51%,
+        #620b09 100%);
+    background: linear-gradient(top, #de2a29 0%, #762625 50%, #620b09 51%, #620b09 100%);
+    background-color: #620B09;
+    color: #e1d6a0;
+    border-bottom: 10px solid #9F9062;
+    -webkit-box-shadow: 0 0 6px #b5b5ab;
+    box-shadow: 0 0 6px #b5b5ab;
+    text-shadow: 0 -1px #1c110e;
+}
+
+#loggedIn h3 {
+    color: #990000;
+}
+
+#loggedIn p {
+    font-weight: bold;
+}
+
+#loggedIn button {
+    width: 60%;
+    margin-bottom: 5px;
+}
+
+#loggedIn button .btnSubText {
+    font-size: 0.7em;
+    color: #4d4c47;
+    display: block;
+}
+
+/*
+*
+*  Abstract/info page 
+*
+*
+*/
+div.absInfo {
+    box-sizing: border-box;
+    -webkit-user-select: text;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 10px;
+    margin-top: 50px;
+    text-align: left;
+    font-size: 1.25em;
+    min-height: 415px;
+}
+
+div.absInfo a {
+    color: #2489CE;
+}
+
+.pubInfo {
+    font-weight: bold;
+}
+
+.rDesc {
+    padding-top: 10px;
+}
+
+/*
+* override jquery image location
+*/
+/* loading icon */
+.ui-icon-loading {
+    background-image: url(/././resources/images/mobile/ajax-loader.gif);
+}
+.ui-loader {
+    opacity: .7;
+}

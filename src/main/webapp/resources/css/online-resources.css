@@ -1,0 +1,36 @@
+#browseTabs li {
+    list-style:none outside none;
+    float:left;
+    padding:0;
+    margin:0;
+}
+#browseTabs:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility:hidden;
+}
+#browseTabs a {
+    border:1px solid #CDCFBE;
+    font-family:Georgia;
+    font-size:14px;
+    display:block;
+    padding:10px;
+    text-align:center;
+    width:18px;
+}
+#browseTabs .long a {
+    width: 98px;
+}
+#browseTabs .longer a {
+    width: 218px;
+}
+#browseTabs a:hover {
+    border: 1px solid #820000;
+}
+#browseTabs .active {
+    background-color:#920000;
+    border-color:#920000;
+    color:white;
+}

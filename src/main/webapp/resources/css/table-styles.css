@@ -1,0 +1,8 @@
+th, td {
+    padding:.5em;
+    border:1px solid #ccc;
+    vertical-align:top;
+}
+th {
+    font-weight:bold;
+}

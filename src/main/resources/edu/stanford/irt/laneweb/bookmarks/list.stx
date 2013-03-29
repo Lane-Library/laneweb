@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    version="1.0"
+    pass-through="all">
+    
+    <!-- if the list is null, xstream outputs <null/> -->
+    <stx:template match="null"/>
+    
+    <stx:template match="list">
+        <ul id="bookmarks" xmlns="http://www.w3.org/1999/xhtml">
+            <stx:process-children/>
+        </ul>
+    </stx:template>
+    
+    <stx:variable name="label"/>
+    <stx:variable name="url"/>
+    
+    <stx:template match="bookmark">
+        <stx:assign name="label" select="''"/>
+        <stx:assign name="url" select="''"/>
+        <li xmlns="http://www.w3.org/1999/xhtml">
+            <stx:process-children/>
+            <a xmlns="http://www.w3.org/1999/xhtml" href="{$url}"><stx:value-of select="$label"/></a>
+        </li>
+    </stx:template>
+    
+    <stx:template match="label">
+        <stx:assign name="label" select="."/>
+    </stx:template>
+    
+    <stx:template match="url">
+        <stx:assign name="url" select="."/>
+    </stx:template>
+    
+</stx:transform>

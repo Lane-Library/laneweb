@@ -1,0 +1,9 @@
+/* form on portal pages for hybrid metasearch ... NOT finalized */
+.breadcrumbForm {
+    position:absolute;
+    left:775px;
+    margin-top:10px;
+}
+.breadcrumbForm input {
+    width:192px;
+}

@@ -1,0 +1,79 @@
+#laneFooter {
+    position : relative;
+    background-color : #F6F7F2;
+    background-image : url(/././resources/images/sprite-vertall.png);
+    background-position: 0px -520px;
+    background-repeat : repeat-x;
+    padding : 29px;
+}
+#laneFooter a {
+    font-family : Georgia;
+    font-size : 15px;
+    border-bottom : none;
+    letter-spacing : .5px;
+}
+#laneFooter ul {
+    padding-top : 3px;
+}
+#laneFooter li {
+    padding : 1.5px 0;
+}
+#laneFooter ul a {
+    font-family : arial;
+    font-size : 11px;
+    letter-spacing : normal;
+}
+#socialMedia {
+    position:absolute;
+    right: 16px;
+    bottom: 65px;
+}
+#socialMedia a {
+	height: 25px;
+	width: 26px;
+	margin-left:8px;
+	display: inline-block;
+	background-image: url("/././resources/images/sprite-all.png");
+	background-repeat: no-repeat;
+}
+.facebook {
+	background-position: -600px -600px;
+}
+
+.facebook:hover {
+	background-position: -600px -640px;
+}
+.twitter {
+	background-position: -640px -600px;
+}
+.twitter:hover {
+	background-position: -640px -640px;
+}
+.googleplus {
+	background-position: -760px -600px;
+}
+.googleplus:hover {
+	background-position: -760px -640px;
+}
+.flickr {
+	background-position: -680px -600px;	
+}
+.flickr:hover {
+	background-position: -680px -640px;	
+}
+.youtube {
+	background-position: -560px -600px;
+}
+.youtube:hover {
+	background-position: -560px -640px;
+}
+.makegift {
+	background-image: url("/././resources/images/sprite-all.png");
+	background-repeat: no-repeat;
+	background-position: -600px -520px;
+	position:absolute;
+    right: 15px;
+    bottom: 110px;
+    height: 59px;
+	width: 164px;
+}

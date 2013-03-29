@@ -1,0 +1,15 @@
+<ehcache name="laneweb">
+    
+    <cache
+        name="cocoon-ehcache"
+        maxElementsInMemory="1000"
+        eternal="false"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="false"
+        diskPersistent="false"
+        statistics="true"
+    />
+    
+    
+</ehcache>

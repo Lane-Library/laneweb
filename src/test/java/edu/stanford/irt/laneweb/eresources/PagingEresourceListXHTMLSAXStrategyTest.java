@@ -1,0 +1,175 @@
+package edu.stanford.irt.laneweb.eresources;
+
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.xml.sax.SAXException;
+
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.TestXMLConsumer;
+import edu.stanford.irt.laneweb.resource.PagingData;
+
+public class PagingEresourceListXHTMLSAXStrategyTest {
+
+    private Eresource eresource;
+
+    private Eresource[] eresourceArray = new Eresource[256];
+
+    private SAXStrategy<Eresource> eresourceStrategy;
+
+    private PagingEresourceList list;
+
+    private ListIterator<Eresource> listIterator;
+
+    private PagingData pagingData;
+
+    private PagingLabel pagingLabel;
+
+    private List<PagingLabel> pagingLabels;
+
+    private ListIterator<PagingLabel> pagingLabelsIterator;
+
+    private SAXStrategy<PagingData> pagingSaxStrategy;
+
+    private PagingEresourceListXHTMLSAXStrategy strategy;
+
+    private TestXMLConsumer xmlConsumer;
+
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() throws Exception {
+        this.xmlConsumer = new TestXMLConsumer();
+        this.eresource = createMock(Eresource.class);
+        Arrays.fill(this.eresourceArray, this.eresource);
+        this.eresourceStrategy = createMock(SAXStrategy.class);
+        this.pagingSaxStrategy = createMock(SAXStrategy.class);
+        this.strategy = new PagingEresourceListXHTMLSAXStrategy(this.eresourceStrategy, this.pagingSaxStrategy);
+        this.list = createMock(PagingEresourceList.class);
+        this.listIterator = createMock(ListIterator.class);
+        this.pagingLabel = createMock(PagingLabel.class);
+        this.pagingLabels = createMock(List.class);
+        this.pagingLabelsIterator = createMock(ListIterator.class);
+        this.pagingData = createMock(PagingData.class);
+    }
+
+    @Test
+    public void testAllPagesToSAX() throws SAXException, IOException {
+        expect(this.list.getPagingData()).andReturn(this.pagingData);
+        expect(this.pagingData.getStart()).andReturn(0);
+        expect(this.pagingData.getLength()).andReturn(256);
+        expect(this.list.size()).andReturn(0);
+        expect(this.eresource.getDescription()).andReturn(null).times(256);
+        expect(this.list.listIterator(0)).andReturn(this.listIterator);
+        expect(this.listIterator.hasNext()).andReturn(true).times(256);
+        expect(this.listIterator.next()).andReturn(this.eresource).times(256);
+        this.eresourceStrategy.toSAX(this.eresource, this.xmlConsumer);
+        expectLastCall().times(256);
+        expect(this.listIterator.hasNext()).andReturn(false);
+        replay(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+        this.strategy.toSAX(this.list, this.xmlConsumer);
+        assertEquals(this.xmlConsumer.getExpectedResult(this,
+                "PagingEresourceListXHTMLSAXStrategyTest-testAllPagesToSAX.xml"), this.xmlConsumer.getStringValue());
+        verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+    }
+
+    @Test
+    public void testPage0ToSAX() throws SAXException, IOException {
+        expect(this.list.getPagingData()).andReturn(this.pagingData);
+        expect(this.pagingData.getStart()).andReturn(0);
+        expect(this.pagingData.getLength()).andReturn(100);
+        expect(this.list.size()).andReturn(0);
+        expect(this.eresource.getDescription()).andReturn(null).times(100);
+        expect(this.list.listIterator(0)).andReturn(this.listIterator);
+        expect(this.listIterator.hasNext()).andReturn(true).times(101);
+        expect(this.listIterator.next()).andReturn(this.eresource).times(100);
+        this.eresourceStrategy.toSAX(this.eresource, this.xmlConsumer);
+        expectLastCall().times(100);
+        replay(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+        this.strategy.toSAX(this.list, this.xmlConsumer);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "PagingEresourceListXHTMLSAXStrategyTest-testPage0ToSAX.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+    }
+
+    @Test
+    public void testPage1ToSAX() throws SAXException, IOException {
+        expect(this.list.getPagingData()).andReturn(this.pagingData);
+        expect(this.pagingData.getStart()).andReturn(100);
+        expect(this.pagingData.getLength()).andReturn(100);
+        expect(this.list.size()).andReturn(0);
+        expect(this.eresource.getDescription()).andReturn(null).times(100);
+        expect(this.list.listIterator(100)).andReturn(this.listIterator);
+        expect(this.listIterator.hasNext()).andReturn(true).times(101);
+        expect(this.listIterator.next()).andReturn(this.eresource).times(100);
+        this.eresourceStrategy.toSAX(this.eresource, this.xmlConsumer);
+        expectLastCall().times(100);
+        replay(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+        this.strategy.toSAX(this.list, this.xmlConsumer);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "PagingEresourceListXHTMLSAXStrategyTest-testPage1ToSAX.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+    }
+
+    @Test
+    public void testPage2ToSAX() throws SAXException, IOException {
+        expect(this.list.getPagingData()).andReturn(this.pagingData);
+        expect(this.pagingData.getStart()).andReturn(200);
+        expect(this.pagingData.getLength()).andReturn(56);
+        expect(this.list.size()).andReturn(0);
+        expect(this.eresource.getDescription()).andReturn(null).times(56);
+        expect(this.list.listIterator(200)).andReturn(this.listIterator);
+        expect(this.listIterator.hasNext()).andReturn(true).times(57);
+        expect(this.listIterator.next()).andReturn(this.eresource).times(56);
+        this.eresourceStrategy.toSAX(this.eresource, this.xmlConsumer);
+        expectLastCall().times(56);
+        replay(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+        this.strategy.toSAX(this.list, this.xmlConsumer);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "PagingEresourceListXHTMLSAXStrategyTest-testPage2ToSAX.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+    }
+
+    @Test
+    public void testPage3With596ToSAX() throws SAXException, IOException {
+        expect(this.list.getPagingData()).andReturn(this.pagingData);
+        expect(this.pagingData.getStart()).andReturn(447);
+        expect(this.pagingData.getLength()).andReturn(149);
+        expect(this.list.size()).andReturn(0);
+        expect(this.eresource.getDescription()).andReturn(null).times(149);
+        expect(this.list.listIterator(447)).andReturn(this.listIterator);
+        expect(this.listIterator.hasNext()).andReturn(true).times(150);
+        expect(this.listIterator.next()).andReturn(this.eresource).times(149);
+        this.eresourceStrategy.toSAX(this.eresource, this.xmlConsumer);
+        expectLastCall().times(149);
+        replay(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+        this.strategy.toSAX(this.list, this.xmlConsumer);
+        assertEquals(this.xmlConsumer.getExpectedResult(this,
+                "PagingEresourceListXHTMLSAXStrategyTest-testPage3With596ToSAX.xml"), this.xmlConsumer.getStringValue());
+        verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+    }
+}

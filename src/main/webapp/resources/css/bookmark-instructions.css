@@ -1,0 +1,54 @@
+#bookmark-instructions {
+	border: 1px solid #DADAD8;
+}
+
+#bookmark-instructions .hd {
+	font-weight: bold;
+	background-color: #e8e8e8;
+	height: 11px;
+}
+
+#bookmark-instructions .hd div {
+	background-image: url("/././resources/images/sprite-all.png");
+	height: 24px;
+	width: 202px;
+	margin: auto;
+	text-align: center;
+	padding: 5px;
+}
+
+#bookmark-instructions-hide,.yui3-accordion-item.yui3-accordion-item-active #bookmark-instructions-show
+	{
+	display: none;
+}
+
+#bookmark-instructions-show,.yui3-accordion-item.yui3-accordion-item-active #bookmark-instructions-hide
+	{
+	display: block;
+}
+
+#bookmark-instructions-hide {
+	background-position: -80px -160px;
+}
+
+#bookmark-instructions-show {
+	background-position: -80px -200px;
+}
+
+#bookmark-instructions .module {
+    padding: 2em 2em 1em 2em;
+}
+
+/*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
+#bookmarkletIE {
+	display: none
+}
+
+/* Graphics to replace css button for Bookmark on Lane. CSS button doesn't allow to bookmark in IE and image-sprite doesn't show in FF toolbar. Separate graphics and this style fixes both.  */
+#bookmarkletNotIE .bookmark-on-lane, #bookmarkletIE .bookmark-on-lane {
+	cursor: pointer;
+	height: 31px;
+	width: 326px;
+	display: inline-block;
+	margin-bottom: 1em;
+}

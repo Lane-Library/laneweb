@@ -1,0 +1,23 @@
+CACHE MANIFEST
+# ${timestamp}
+# uncomment next 2 lines to turn on js, css caching for production
+/././resources/javascript/mobile/lane-mobile.js?${timestamp}
+/././resources/css/mobile/lane-mobile.css?${timestamp}
+/././apple-touch-icon.png
+/././resources/images/mobile/ajax-loader.png
+/././resources/images/mobile/clear_search.png
+/././resources/images/mobile/home_btn_bg.png
+/././resources/images/mobile/icon_sprite.png
+/././resources/images/mobile/search_bg.png
+/././resources/images/mobile/link_bg_sprite.png
+/././resources/images/mobile/logo_header_sm.gif
+http://www.google-analytics.com/ga.js
+
+NETWORK:
+#*
+/././m/
+/././apps/
+http://www.google-analytics.com/__utm.gif
+# comment next 2 lines to turn on js, css caching for production
+#/././resources/css/mobile/lane-mobile.css
+#/././resources/javascript/mobile/lane-mobile.js

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder"
+        class="edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder">
+        <property name="dataBinders">
+            <list>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-method"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-header"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmark"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/parameter-map"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/model"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/model"
+        class="edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder">
+        <constructor-arg>
+            <set>
+                <value>base-path</value>
+                <value>ipgroup</value>
+                <value>auth</value>
+                <value>query</value>
+                <value>source</value>
+                <value>url-encoded-query</value>
+                <!--<value>live-chat-available</value>
+                <value>proxy-links</value>
+                <value>sunetid</value>
+                <value>bookmarks</value>
+                <value>name</value>
+                <value>ticket</value>-->
+            </set>
+        </constructor-arg>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"
+        class="edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder">
+        <constructor-arg value="%{laneweb.disaster-mode}"/>
+    </bean>
+
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"
+        class="edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder">
+        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.SunetIdSource"/>
+        <constructor-arg value="%{laneweb.context.ezproxy-key}"/>
+        <constructor-arg value="%{laneweb.sunetidhashkey}"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"
+        class="edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder">
+        <property name="parameterName" value="debug"/>
+        <property name="modelKey" value="debug"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"
+        class="edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder">
+        <constructor-arg ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"
+        class="edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder">
+        <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"
+        class="edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder">
+        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"
+        class="edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder">
+        <property name="parameterName" value="emrid"/>
+        <property name="modelKey" value="emrid"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"
+        class="edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder"/>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-method"
+        class="edu.stanford.irt.laneweb.servlet.binding.RequestMethodDataBinder"/>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-header"
+        class="edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder"/>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"
+        class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"
+        class="edu.stanford.irt.laneweb.servlet.binding.RequestAttributeDataBinder"/>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"
+        class="edu.stanford.irt.laneweb.servlet.binding.ServletContextDataBinder">
+        <property name="servletContext" ref="servletContext"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"
+        class="edu.stanford.irt.laneweb.servlet.binding.LiveChatScheduleBinder"/>
+
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"
+        class="edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder">
+        <property name="hoursPath" value="/includes/hours.xml"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/parameter-map"
+        class="edu.stanford.irt.laneweb.servlet.binding.ParameterMapDataBinder"/>
+
+    <bean id="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"
+        class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks">
+        <!-- regular expressions for IPs to be proxied TODO: change to CIDRRanges -->
+        <constructor-arg>
+            <list>
+                <!-- VPN 171.65.16.0 - 171.65.31.255 -->
+                <value>^171\.66\.(?:1[6-9]|2[0-9]|3[0-1])\.\S+</value>
+                <!-- hospital 171.65.44.0 - 171.65.44.255 -->
+                <value>^171\.65\.44\.\S+</value>
+                <!-- hospital 171.65.125.0 - 171.65.125.255 -->
+                <value>^171\.65\.125\.\S+</value>
+                <!-- hospital 171.65.128.0 - 171.65.199.255 -->
+                <value>^171\.65\.1(?:2[8-9]|[3-9][0-9])\.\S+</value>
+                <!-- hospital 171.65.200.0 - 171.65.255.255 -->
+                <value>^171\.65\.2[0-5][0-9]\.\S+</value>
+            </list>
+        </constructor-arg>
+        <!-- regular expressions for IPs to NOT be proxied -->
+        <constructor-arg>
+            <list>
+                <value>^171\.6[4-7]\.\S+</value>
+                <!-- campus wireless 10.32.0.0 through 10.33.255.255 -->
+                <value>^10\.3[2-3]\.\S+</value>
+                <!-- library wireless 10.39.32.1 through 10.39.47.255 -->
+                <value>^10\.39\.(?:3[2-9]|4[0-7])\.\S+</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"
+        class="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser">
+        <constructor-arg value="template"/>
+        <constructor-arg>
+            <list>
+                <value>template</value>
+                <value>bassettLargerView</value>
+                <value>none</value>
+                <value>shc</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <map>
+                <entry key="^(?:/\w+|)/biomed-resources/bassett/raw/bassettLargerView.html"
+                    value="bassettLargerView"/>
+                <entry key="^(?:/\w+|)/portals/shc.html"
+                    value="shc"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

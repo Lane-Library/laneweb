@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
+        class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
+        destroy-method="dispose">
+        <constructor-arg value="search-lane.xml"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.search.MetaSearchManager"
+        class="edu.stanford.irt.laneweb.search.MetaSearchManagerFactoryBean"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"
+        class="edu.stanford.irt.laneweb.search.PagingSearchResultListSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.MergedSearchSAXStrategy">
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.search.ContentResultSAXStrategy"/>
+                </constructor-arg>
+                <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"
+        class="edu.stanford.irt.laneweb.search.PagingSearchResultListXHTMLSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.MergedSearchSAXStrategy">
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.search.ContentResultXHTMLSAXStrategy"/>
+                </constructor-arg>
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
+        class="edu.stanford.irt.laneweb.search.ResultSAXStrategy"/>
+    
+    
+    <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"
+        class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
+        class="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
+        scope="prototype"
+        abstract="true"/>
+    
+    <bean id="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"
+        class="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
+        abstract="true">
+        <constructor-arg index="0" ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/result"/>
+    </bean>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-describe"
+        class="edu.stanford.irt.laneweb.search.DescribeGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"/>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search"
+        class="edu.stanford.irt.laneweb.search.SearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"/>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search"
+        class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search-html"
+        class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
+        <constructor-arg ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"/>
+    </bean>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-content"
+        class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-content-html"
+        class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
+    </bean>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-engine"
+        class="edu.stanford.irt.laneweb.search.EngineSearchGenerator"
+        parent="edu.stanford.irt.cocoon.pipeline.Generator/search"/>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-resource"
+        class="edu.stanford.irt.laneweb.search.ResourceSearchGenerator"
+        parent="edu.stanford.irt.cocoon.pipeline.Generator/search"/>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/merged-search"
+        class="edu.stanford.irt.laneweb.search.MergedSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg index="3" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/merged-history-search"
+        class="edu.stanford.irt.laneweb.search.MergedSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.eresources.CollectionManager/history"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg index="3" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/query-highlighting"
+        class="edu.stanford.irt.laneweb.search.QueryHighlightingTransformer"
+        scope="prototype">
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/description-labeling"
+        class="edu.stanford.irt.laneweb.search.DescriptionLabelTransformer"
+        scope="prototype">
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/search-directory"
+        class="edu.stanford.irt.laneweb.search.SearchDirectoryTransformer"
+        scope="prototype"/>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/file-path"
+        class="edu.stanford.irt.laneweb.search.FilePathTransformer"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/html"/>
+    </bean>
+</beans>

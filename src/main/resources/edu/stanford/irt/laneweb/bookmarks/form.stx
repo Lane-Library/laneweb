@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    version="1.0"
+    pass-through="all">
+    
+    <!-- item is a counter for the li elements, incremented with each one -->
+    <stx:variable name="item" select="0"/>
+    
+    <stx:template match="/">
+        <form action="/bookmarks" method="post" id="bookmarks-editor">
+            <fieldset>
+                <button name="action" value="add" type="submit">add</button>
+                <button name="action" value="delete" type="submit">delete</button>
+                <button name="action" value="edit" type="submit">edit</button>
+            </fieldset>
+            <stx:process-children/>
+        </form>
+    </stx:template>
+    
+    <!-- remove id="bookmarks" -->
+    <stx:template match="h:ul">
+        <stx:copy>
+            <stx:process-children/>
+        </stx:copy>
+    </stx:template>
+    
+    <stx:template match="h:li">
+        <stx:copy>
+            <input name="i" value="{$item}" type="checkbox"></input>
+            <stx:process-children/>
+        </stx:copy>
+        <stx:assign name="item" select="$item + 1"/>
+    </stx:template>
+    
+</stx:transform>

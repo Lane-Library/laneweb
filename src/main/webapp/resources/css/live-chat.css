@@ -1,0 +1,28 @@
+/* display : block for button behavior with background-image*/
+/*live chat link in the header - has an icon*/
+#libraryContact .live-chat a {
+    background : url("/././resources/images/sprite-all.png") no-repeat scroll -120px -240px transparent;
+    padding-left : 32px;
+    width : 26px;
+    height : 15px;
+    border-bottom : none;
+    display : block;
+    background-repeat : no-repeat;
+}
+#libraryContact .live-chat a:hover {
+    background: url("/././resources/images/sprite-all.png") no-repeat scroll -120px -280px transparent;
+}
+#libraryContact .live-chat-inactive {
+    display : none;
+}
+#libraryContact span {
+    border-bottom : 1px dotted #81785A;
+}
+#libraryContact a:hover span {
+    border-bottom : 1px solid #820000;
+}
+
+/* live chat link in the body of the homepage */
+.content .live-chat-inactive {
+    display : none;
+}

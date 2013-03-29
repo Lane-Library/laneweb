@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">    
+    
+    <context:component-scan base-package="edu.stanford.irt.laneweb.servlet.mvc,edu.stanford.irt.laneweb.bookmarks"/>
+    
+    <mvc:annotation-driven>
+        <!--<mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+                <constructor-arg ref="org.springframework.oxm.Marshaller"/>
+            </bean>
+        </mvc:message-converters>-->
+    </mvc:annotation-driven>
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.LanewebPathInterceptor">
+                <property name="defaultContentBase" value="#{contextAttributes['laneweb.context.live-base']}"/>
+                <property name="stageBase" value="#{contextAttributes['laneweb.context.stage-base']}"/>
+            </bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/*.html"/>
+            <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/*.html"/>
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.MobileSiteInterceptor">
+                <constructor-arg>
+		            <map>
+		                <entry key="/index.html" value="/m/index.html"/>
+		                <entry key="/biomed-resources/eb.html" value="/m/book.html"/>
+		                <entry key="/biomed-resources/ej.html" value="/m/ej.html"/>
+		            </map>
+                </constructor-arg>
+            </bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.RedirectHandlerInterceptor">
+                <property name="redirectProcessor" ref="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="urlMap">
+            <map>
+                <entry key="**/apps/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
+                <entry key="**/apps/search/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"/>
+                <entry key="**/content/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"/>
+                <entry key="**/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
+                <entry key="**/classes/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/classes"/>
+                <entry key="**/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
+                <entry key="**/bookmarks/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/bookmarks"/>
+                <entry key="**/test/bookmarks/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
+                <entry key="**/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
+                <entry key="/BingSiteAuth.xml" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="/google708f1eef3c6d1e52.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="/y_key_01fe447429961ab5.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+                <entry key="**/**/*.html" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
+                <entry key="**/m/*.js" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
+                <entry key="**/*.css" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
+                <entry key="**/*.manifest" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"/>
+                <entry key="**/**/*.*" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"/>
+            </map>
+        </property>
+        <property name="defaultHandler">
+            <bean class="edu.stanford.irt.laneweb.servlet.mvc.DefaultRequestHandler"/>
+        </property>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        abstract="true">
+        <property name="methodsNotAllowed">
+            <set>
+                <value>OPTIONS</value>
+                <value>PROPFIND</value>
+            </set>
+        </property>
+        <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder"/>
+        <property name="servletContext" ref="servletContext"/>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/applications"/>
+        <property name="prefix" value="/apps"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile"/>
+        <property name="prefix" value="/m"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/rss"/>
+        <property name="prefix" value="/rss"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources"/>
+        <property name="prefix" value="/eresources"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>
+        <property name="prefix" value="/content"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/classes"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/classes"/>
+        <property name="prefix" value="/classes"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/bookmarks"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
+        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
+        <property name="prefix" value="/bookmarks"/>
+    </bean>
+    
+    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"
+        class="edu.stanford.irt.laneweb.servlet.mvc.ContentBaseAwareHttpRequestHandler">
+        <property name="locations">
+            <list>
+                <value>/</value>
+                <value>/resources/site-verification/</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="31536000"/>
+        <property name="supportedMethods" value="HEAD,GET"/>
+    </bean>
+    
+    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/base-path-substituting"
+        class="edu.stanford.irt.laneweb.servlet.mvc.BasePathSubstitutingRequestHandler">
+        <property name="locations">
+            <list>
+                <value>/</value>
+                <value>/resources/</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="31536000"/>
+        <property name="supportedMethods" value="HEAD,GET"/>
+        <property name="cache" ref="edu.stanford.irt.cocoon.cache.Cache"/>
+    </bean>
+    
+    <bean class="org.springframework.web.servlet.DispatcherServlet">
+        <property name="detectAllHandlerMappings" value="true"/>
+        <property name="detectAllHandlerAdapters" value="true"/>
+        <property name="detectAllHandlerExceptionResolvers" value="false"/>
+        <property name="detectAllViewResolvers" value="false"/>
+        <property name="publishContext" value="false"/>
+        <property name="publishEvents" value="false"/>
+    </bean>
+    
+    <bean id="handlerAdapter"
+        class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+    
+    <bean id="lifecycleProcessor"
+        class="org.springframework.context.support.DefaultLifecycleProcessor"/>
+    
+    <bean id="localeResolver"
+        class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/>
+    
+    <bean id="themeResolver"
+        class="org.springframework.web.servlet.theme.FixedThemeResolver"/>
+    
+    <bean id="handlerExceptionResolver"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapHandlerExceptionResolver"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
+    
+    <bean id="viewNameTranslator"
+        class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator"/>
+    
+    <bean id="messageSource"
+        class="org.springframework.context.support.DelegatingMessageSource"/>
+    
+    <bean id="applicationEventMulticaster"
+        class="org.springframework.context.event.SimpleApplicationEventMulticaster"/>
+    
+    <bean  id="themeSource"
+        class="org.springframework.ui.context.support.DelegatingThemeSource"/>
+    
+</beans>
