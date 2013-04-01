@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-04-01" version="2.1.4" description="2.1.4 bug fix release">
+            <action date="2013-03-29" dev="ryanmax" issue="83329" type="fix">
+                eresource ranking not working with multiple exact title matches
+            </action>
+        </release>
         <release date="2013-03-25" version="2.1.3" description="2.1.3 bug fix release">
             <action date="2013-03-20" dev="ryanmax" issue="83034" type="fix">
                 peds search errors
