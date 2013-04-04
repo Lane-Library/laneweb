@@ -48,7 +48,7 @@
         <property name="name" value="IRT_K5"/>
     </bean>
     
-    <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
+    <bean class="edu.stanford.irt.spell.PubmedESpellChecker"/>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXParser/xml"
         class="edu.stanford.irt.cocoon.xml.JaxpSAXParser"/>
