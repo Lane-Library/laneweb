@@ -30,6 +30,14 @@
             /WEB-INF/spring/suggest.xml
             /WEB-INF/spring/trends.xml
             /WEB-INF/spring/voyager-login.xml
+            /applications.xmap
+            classpath:/edu/stanford/irt/laneweb/bookmarks/bookmarks.xmap
+            /classes.xmap
+            /content.xmap
+            /eresources.xmap
+            /mobile.xmap
+            /rss.xmap
+            /sitemap.xmap
         </param-value>
     </context-param>
 
