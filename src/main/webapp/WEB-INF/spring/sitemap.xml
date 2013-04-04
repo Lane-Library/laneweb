@@ -9,15 +9,6 @@
         <constructor-arg index="1" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
     </bean>
     
-    <import resource="../../applications.xmap"/>
-    <import resource="classpath:/edu/stanford/irt/laneweb/bookmarks/bookmarks.xmap"/>
-    <import resource="../../classes.xmap"/>
-    <import resource="../../content.xmap"/>
-    <import resource="../../eresources.xmap"/>
-    <import resource="../../mobile.xmap"/>
-    <import resource="../../rss.xmap"/>
-    <import resource="../../sitemap.xmap"/>
-    
     <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
         <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/sitemap.xmap"/>
     </bean>
