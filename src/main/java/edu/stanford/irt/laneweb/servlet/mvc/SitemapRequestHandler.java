@@ -44,7 +44,10 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             response.setContentType(mimeType);
         }
         Pipeline pipeline = this.sitemap.buildPipeline(model);
-        pipeline.process(response.getOutputStream());
+        if ("GET".equals(request.getMethod())) {
+            // only process GET requests
+            pipeline.process(response.getOutputStream());
+        }
     }
 
     public void setDataBinder(final DataBinder dataBinder) {
