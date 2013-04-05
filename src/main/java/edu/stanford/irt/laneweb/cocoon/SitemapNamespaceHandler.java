@@ -30,13 +30,14 @@ import edu.stanford.irt.cocoon.sitemap.node.MatchNode;
 import edu.stanford.irt.cocoon.sitemap.node.PartNode;
 import edu.stanford.irt.cocoon.sitemap.node.PipelineNode;
 import edu.stanford.irt.cocoon.sitemap.node.PipelinesNode;
-import edu.stanford.irt.laneweb.cocoon.SelectNode;
 import edu.stanford.irt.cocoon.sitemap.node.SerializeNode;
 import edu.stanford.irt.cocoon.sitemap.node.TransformNode;
 
 public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
 
-    private static abstract class AbstractSitemapBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+    private abstract static class AbstractSitemapBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+
+        protected static final String TYPE = "type";
 
         protected void addAttributes(final MutablePropertyValues values, final Element element,
                 final Map<String, String> attributeMap) {
@@ -89,15 +90,20 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
         }
     }
 
-    private static abstract class AbstractSitemapComponentBeanDefinitionParser extends
+    private abstract static class AbstractSitemapComponentBeanDefinitionParser extends
             AbstractSitemapBeanDefinitionParser {
 
         private static final Map<String, String> ATTRIBUTE_MAP = new HashMap<String, String>();
 
         private static final String[] CHILD_ELEMENTS = new String[] {};
         static {
-            ATTRIBUTE_MAP.put("type", "type");
+            ATTRIBUTE_MAP.put(TYPE, TYPE);
             ATTRIBUTE_MAP.put("source", "src");
+        }
+
+        @Override
+        protected void addChildren(final MutablePropertyValues values, final ParserContext parserContext,
+                final AbstractBeanDefinition def, final Element element, final String... childNames) {
         }
 
         @Override
@@ -107,6 +113,16 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
             def.setBeanClass(getBeanClass());
             def.setPropertyValues(getPropertyValues(element, parserContext, def));
             builder.getBeanDefinition().setConstructorArgumentValues(getConstructorArgumentValues());
+        }
+
+        @Override
+        protected Map<String, String> getAttributeMap() {
+            return ATTRIBUTE_MAP;
+        }
+
+        @Override
+        protected String[] getChildNames() {
+            return CHILD_ELEMENTS;
         }
 
         private ConstructorArgumentValues getConstructorArgumentValues() {
@@ -119,21 +135,6 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
             cav.addGenericArgumentValue(fact);
             return cav;
         }
-
-        @Override
-        protected void addChildren(final MutablePropertyValues values, final ParserContext parserContext,
-                final AbstractBeanDefinition def, final Element element, final String... childNames) {
-        }
-
-        @Override
-        protected Map<String, String> getAttributeMap() {
-            return ATTRIBUTE_MAP;
-        }
-
-        @Override
-        protected String[] getChildNames() {
-            return CHILD_ELEMENTS;
-        }
     }
 
     private static class AggregateBeanDefinitionParser extends AbstractSitemapComponentBeanDefinitionParser {
@@ -142,12 +143,12 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
 
         private static final String[] CHILD_ELEMENTS = new String[] { "part" };
         static {
-//            ATTRIBUTE_MAP.put("type", "type");
             ATTRIBUTE_MAP.put("element", "element");
             ATTRIBUTE_MAP.put("namespace", "ns");
             ATTRIBUTE_MAP.put("prefix", "prefix");
         }
 
+        @Override
         protected void addChildren(final MutablePropertyValues values, final ParserContext parserContext,
                 final AbstractBeanDefinition def, final Element element, final String... childNames) {
             List<Element> children = DomUtils.getChildElementsByTagName(element, childNames);
@@ -157,7 +158,7 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
                 target.add(parserContext.getDelegate().parseCustomElement(child, def));
             }
             values.add("children", target);
-            values.add("type", "<aggregator>");
+            values.add(TYPE, "<aggregator>");
         }
 
         @Override
@@ -199,7 +200,7 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
                     .getPropertyValues()
                     .add("matcher",
                             new RuntimeBeanReference("edu.stanford.irt.cocoon.sitemap.match.Matcher/"
-                                    + element.getAttribute("type")));
+                                    + element.getAttribute(TYPE)));
         }
 
         @Override
@@ -218,9 +219,26 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
         }
     }
 
+    private static class PartBeanDefinitionParser extends AbstractSitemapComponentBeanDefinitionParser {
+
+        @Override
+        protected void addAttributes(final MutablePropertyValues values, final Element element,
+                final Map<String, String> attributeMap) {
+            super.addAttributes(values, element, attributeMap);
+            // this is a hack to use the element attribute as type
+            String type = element.getAttribute("element");
+            values.add(TYPE, !"".equals(type) ? type : "file");
+        }
+
+        @Override
+        protected Class<?> getBeanClass() {
+            return PartNode.class;
+        }
+    }
+
     private static class PipelineBeanDefinitionParser extends AbstractSitemapBeanDefinitionParser {
 
-        private static final Map<String, String> ATTRIBUTE_MAP = Collections.singletonMap("type", "type");
+        private static final Map<String, String> ATTRIBUTE_MAP = Collections.singletonMap(TYPE, TYPE);
 
         private static final String[] CHILD_ELEMENTS = new String[] { "aggregate", "generate", "match", "select",
                 "serialize", "transform" };
@@ -299,12 +317,11 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
 
         private static final String[] CHILD_ELEMENTS = new String[] { "pipeline" };
 
-
         @Override
         protected void addChildren(final MutablePropertyValues values, final ParserContext parserContext,
                 final AbstractBeanDefinition def, final Element element, final String... childNames) {
             List<Element> pipelines = DomUtils.getChildElementsByTagName(element, "pipelines");
-            super.addChildren(values,  parserContext, def, pipelines.get(0), getChildNames());
+            super.addChildren(values, parserContext, def, pipelines.get(0), getChildNames());
         }
 
         @Override
@@ -330,23 +347,9 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
 
         @Override
         protected String resolveId(final Element element, final AbstractBeanDefinition definition,
-                final ParserContext parserContext) throws BeanDefinitionStoreException {
-            return "edu.stanford.irt.cocoon.sitemap.SitemapNode/" + parserContext.getReaderContext().getResource().getFilename();
-        }
-    }
-
-    private static class PartBeanDefinitionParser extends AbstractSitemapComponentBeanDefinitionParser {
-
-        @Override
-        protected void addAttributes(MutablePropertyValues values, Element element, Map<String, String> attributeMap) {
-            super.addAttributes(values, element, attributeMap);
-            String type = element.getAttribute("element");
-            values.add("type", !"".equals(type) ? type : "file");
-        }
-
-        @Override
-        protected Class<?> getBeanClass() {
-            return PartNode.class;
+                final ParserContext parserContext) {
+            return "edu.stanford.irt.cocoon.sitemap.SitemapNode/"
+                    + parserContext.getReaderContext().getResource().getFilename();
         }
     }
 
