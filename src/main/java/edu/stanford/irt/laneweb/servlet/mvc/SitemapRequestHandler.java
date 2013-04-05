@@ -31,7 +31,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
             IOException {
-        if (this.methodsNotAllowed.contains(request.getMethod())) {
+        String method = request.getMethod();
+        if (this.methodsNotAllowed.contains(method)) {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return;
         }
@@ -44,7 +45,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             response.setContentType(mimeType);
         }
         Pipeline pipeline = this.sitemap.buildPipeline(model);
-        if ("GET".equals(request.getMethod())) {
+        if ("GET".equals(method)) {
             // only process GET requests
             pipeline.process(response.getOutputStream());
         }
