@@ -694,7 +694,7 @@
         <dependency>
             <artifactId>trends-tracker</artifactId>
             <groupId>edu.stanford.trends</groupId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
             <exclusions>
                 <exclusion>
                     <artifactId>spring-jdbc</artifactId>
