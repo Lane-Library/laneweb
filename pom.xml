@@ -609,7 +609,7 @@
             <version>2.0.0</version>
         </dependency>
         <dependency>
-            <artifactId>spellcheck-pubmed-espell</artifactId>
+            <artifactId>spellcheck-google-toolbar</artifactId>
             <groupId>edu.stanford.irt</groupId>
             <scope>runtime</scope>
             <version>2.0.0</version>
