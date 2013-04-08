@@ -578,7 +578,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.40</version>
+            <version>1.7.41</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
@@ -609,7 +609,7 @@
             <version>2.0.0</version>
         </dependency>
         <dependency>
-            <artifactId>spellcheck-pubmed-espell</artifactId>
+            <artifactId>spellcheck-google-toolbar</artifactId>
             <groupId>edu.stanford.irt</groupId>
             <scope>runtime</scope>
             <version>2.0.0</version>
@@ -694,7 +694,7 @@
         <dependency>
             <artifactId>trends-tracker</artifactId>
             <groupId>edu.stanford.trends</groupId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
             <exclusions>
                 <exclusion>
                     <artifactId>spring-jdbc</artifactId>
