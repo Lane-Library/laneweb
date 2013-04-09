@@ -9,20 +9,23 @@ import edu.stanford.irt.cocoon.sitemap.SitemapContext;
 import edu.stanford.irt.cocoon.sitemap.SitemapContextImpl;
 import edu.stanford.irt.cocoon.sitemap.SitemapException;
 import edu.stanford.irt.cocoon.sitemap.SitemapNode;
+import edu.stanford.irt.cocoon.source.SourceResolver;
 
 
 public class SitemapImpl implements Sitemap {
     
     private SitemapNode rootNode;
     private ComponentFactory componentFactory;
+    private SourceResolver sourceResolver;
     
-    public SitemapImpl(SitemapNode rootNode, ComponentFactory componentFactory) {
+    public SitemapImpl(SitemapNode rootNode, ComponentFactory componentFactory, SourceResolver sourceResolver) {
         this.rootNode = rootNode;
         this.componentFactory = componentFactory;
+        this.sourceResolver = sourceResolver;
     }
 
     public Pipeline buildPipeline(final Map<String, Object> model) {
-        SitemapContext context = new SitemapContextImpl(model, this.componentFactory);
+        SitemapContext context = new SitemapContextImpl(model, this.componentFactory, this.sourceResolver);
         if (this.rootNode.invoke(context)) {
             return context.getPipeline();
         } else {
