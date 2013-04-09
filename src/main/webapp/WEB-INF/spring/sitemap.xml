@@ -7,6 +7,7 @@
         class="edu.stanford.irt.laneweb.cocoon.SitemapImpl"
         abstract="true">
         <constructor-arg index="1" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
