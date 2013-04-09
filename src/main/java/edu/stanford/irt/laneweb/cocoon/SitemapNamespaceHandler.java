@@ -28,6 +28,7 @@ import edu.stanford.irt.cocoon.sitemap.node.GenerateNode;
 import edu.stanford.irt.cocoon.sitemap.node.MatchNode;
 import edu.stanford.irt.cocoon.sitemap.node.PipelineNode;
 import edu.stanford.irt.cocoon.sitemap.node.RootNode;
+import edu.stanford.irt.cocoon.sitemap.node.SelectNode;
 import edu.stanford.irt.cocoon.sitemap.node.SerializeNode;
 import edu.stanford.irt.cocoon.sitemap.node.TransformNode;
 
@@ -320,8 +321,8 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
         @Override
         protected String resolveId(final Element element, final AbstractBeanDefinition definition,
                 final ParserContext parserContext) {
-            return "edu.stanford.irt.cocoon.sitemap.SitemapNode/"
-                    + parserContext.getReaderContext().getResource().getFilename();
+            String filename = parserContext.getReaderContext().getResource().getFilename();
+            return "edu.stanford.irt.cocoon.sitemap.Sitemap/" + filename.substring(0, filename.indexOf('.'));
         }
     }
 

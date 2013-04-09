@@ -3,45 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
-    <bean id="edu.stanford.irt.cocoon.sitemap.Sitemap"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapImpl"
-        abstract="true">
-        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
-        <constructor-arg index="2" ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/sitemap.xmap"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/content" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/content.xmap"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/eresources.xmap"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/applications" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/applications.xmap"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/rss" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/rss.xmap"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/classes" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/classes.xmap"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/mobile.xmap"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks" parent="edu.stanford.irt.cocoon.sitemap.Sitemap">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.sitemap.SitemapNode/bookmarks.xmap"/>
-    </bean>
-    
     <bean name="edu.stanford.irt.cocoon.sitemap.match.Matcher/wildcard"
         class="edu.stanford.irt.cocoon.sitemap.match.WildcardMatcher">
         <constructor-arg value="sitemap-uri"/>
