@@ -40,21 +40,22 @@
         <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[text() = $internal-id]/..">
         <xsl:if test="lc:event_status/text() = 'O'">
         <xsl:variable name="classId" select="./lc:module_id/text()"></xsl:variable>
-        <div>
-        	<xsl:attribute name="class">
-            		<xsl:text>yui-g</xsl:text>
-            </xsl:attribute>
-            <xsl:attribute name="style">
-            		<xsl:text>padding:20px 0px 0px 20px</xsl:text>
-            </xsl:attribute>
-            <div>
-           	<xsl:attribute name="class">
-           		<xsl:text>yui-u</xsl:text>
-           	</xsl:attribute>
-           	<xsl:attribute name="style">
-            	<xsl:text>float:right;width:66%;</xsl:text>
-            </xsl:attribute>
-            	
+            <div class="yui3-g" style="margin-top:20px">
+                <div class="yui3-u-1-3">
+                    <a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}">
+                        <xsl:choose>
+                            <xsl:when test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() = '---'">
+                                <xsl:attribute name="class">gray-btn btn-wide</xsl:attribute>
+                                <span>Waitlist</span>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="class">red-btn btn-wide</xsl:attribute>
+                                <span>Sign Up</span>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </a>
+                </div>
+            <div class="yui3-u-2-3">
            	<h4>
                 <xsl:call-template  name="month"/>
                 <xsl:text> </xsl:text>
@@ -110,30 +111,6 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </h4>
-            </div>
-            <div>
-            	<xsl:attribute name="class">
-            		<xsl:text>first yui-u</xsl:text>
-            	</xsl:attribute>
-            	<xsl:attribute name="style">
-	            	<xsl:text>width:33%</xsl:text>
-	            </xsl:attribute>
-            	<a>
-                   <xsl:attribute name="href">
-                      <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
-                       <xsl:value-of select="lc:module_id"/>
-                       </xsl:attribute>
-                    <xsl:choose>
-						<xsl:when test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() = '---'">
-		                   	<xsl:attribute name="class">gray-btn btn-wide</xsl:attribute>
-	           			    <span>Waitlist</span>
-                       </xsl:when>
-                       <xsl:otherwise>
-							<xsl:attribute name="class">red-btn btn-wide</xsl:attribute>
-                            <span>Sign Up</span>
-                       </xsl:otherwise>
-                   </xsl:choose>
-                 </a>
             </div>
             </div>
             
