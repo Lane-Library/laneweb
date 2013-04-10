@@ -1,6 +1,6 @@
 .resourceListPagination {
     background-color: #F7F3E5;
-    padding: 10px 5px 24px;
+    padding: 10px 5px;
     font-size: 13px;
 }
 
@@ -9,7 +9,6 @@
     padding: 5px 5px 5px 10px;
     margin: -7px 0;
     float: right;
-    position:relative;
     z-index: 2;
 }
 
@@ -124,6 +123,5 @@
 
 .seeAll {
     float: right;
-    position: relative;
     margin: 0 15px 0 10px;
 }
