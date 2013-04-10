@@ -38,8 +38,6 @@
 		</xsl:variable>
 		
 		<div class="resourceListPagination">
-			<div class="yui-g">
-				<div class="yui-u first">
 					<xsl:text>Displaying </xsl:text>
 					<xsl:choose>
 						<xsl:when
@@ -60,7 +58,6 @@
 							<xsl:text> matches</xsl:text>
 						</xsl:otherwise>
 					</xsl:choose>
-				</div>
 				<xsl:if
 					test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
 					<xsl:choose>
@@ -111,7 +108,6 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:if>
-			</div>
 		</div>
 	</xsl:template>
 	

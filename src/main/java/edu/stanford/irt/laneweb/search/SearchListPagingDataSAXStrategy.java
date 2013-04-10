@@ -36,12 +36,6 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "resourceListPagination");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "yui-g");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "yui-u first");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             StringBuilder sb = new StringBuilder("Displaying ");
             String hrefBase = pagingData.getBaseQuery();
             if (size > length) {
@@ -64,7 +58,6 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
                 sb.append("all ").append(size).append(" matches");
                 XMLUtils.data(xmlConsumer, sb.toString());
             }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             if (size > length) {
                 // <a id="seeAll" href="?{$no-page-query-string}page=all">See All</a>
                 atts = new AttributesImpl();
@@ -108,7 +101,6 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
                 }
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             xmlConsumer.endPrefixMapping("fx");
         } catch (SAXException e) {
