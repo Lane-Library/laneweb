@@ -54,19 +54,17 @@ em {
 .rss-link {
     float : right;
     background-image : url(/././resources/images/sprite-all.png);
-    background-position: -80px -240px;
-    height : 13px;
-    width : 13px;
-    background-repeat : no-repeat;
+    background-position: -41px -240px;
+    height : 15px;
+    width : 15px;
     font-size : 0;
     text-indent : -10000px;
     display : block;
-    margin-top : 6px;
+    margin-top : 4px;
     border-bottom : none;
 }
 .rss-link:hover {
-    background-image : url(/././resources/images/sprite-all.png);
-    background-position: -80px -280px;
+    background-position: -41px -280px;
     border-bottom : none;
 }
 .red-text {
