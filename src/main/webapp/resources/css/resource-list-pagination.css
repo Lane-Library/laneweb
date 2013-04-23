@@ -1,6 +1,6 @@
 .resourceListPagination {
     background-color: #F7F3E5;
-    padding: 10px 5px 24px;
+    padding: 10px 5px;
     font-size: 13px;
 }
 
@@ -68,7 +68,7 @@
     text-align: left;
     width: 360px;
     right: 369px;
-    margin-top: 23px;
+    margin-top: 7px;
     border: 1px solid #dadad9;
     border-top-left-radius: 3px;
     -moz-border-radius-topleft: 3px;
@@ -124,6 +124,5 @@
 
 .seeAll {
     float: right;
-    position: relative;
     margin: 0 15px 0 10px;
 }

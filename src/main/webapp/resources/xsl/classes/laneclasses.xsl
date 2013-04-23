@@ -33,8 +33,8 @@
 
     <xsl:template name="decorator">
     	<xsl:variable name="classId" select="./lc:module_id/text()"></xsl:variable>
-        <div class="yui-gf">
-            <div class="yui-u date first">
+        <div class="yui3-g">
+            <div class="yui3-u-1-4 date">
                 <strong>
                 	<xsl:call-template name="month" />
                     <xsl:text> </xsl:text>
@@ -45,7 +45,7 @@
                 <xsl:text>–</xsl:text>
                 <xsl:call-template name="end-time" />
             </div>
-            <div class="yui-u">
+            <div class="yui3-u-3-4">
                 <h4>
                       <xsl:if test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() = '---'">
                       <b>

@@ -21,10 +21,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
     public void toSAX(final EresourceListPagingData pagingData, final XMLConsumer xmlConsumer) {
         try {
             startDivWithClass(xmlConsumer, "resourceListPagination");
-            startDivWithClass(xmlConsumer, "yui-g");
-            startDivWithClass(xmlConsumer, "yui-u first");
             createDisplayingMarkup(xmlConsumer, pagingData);
-            endDiv(xmlConsumer);
             if (pagingData.getSize() > pagingData.getLength()) {
                 String hrefBase = pagingData.getBaseQuery();
                 createPagingButton(xmlConsumer, hrefBase);
@@ -37,7 +34,6 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
                 endUl(xmlConsumer);
                 createSeeAllMarkup(xmlConsumer, hrefBase);
             }
-            endDiv(xmlConsumer);
             endDiv(xmlConsumer);
         } catch (SAXException e) {
             throw new LanewebException(e);
