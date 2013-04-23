@@ -48,8 +48,7 @@
         </developer>
     </developers>
     <scm>
-        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
-        <url>https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</url>
+        <developerConnection>scm:git:ssh://corn.stanford.edu/afs/ir/group/lane/git/laneweb.git</developerConnection>
     </scm>
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
@@ -332,7 +331,7 @@
                             <artifactId>maven-pmd-plugin</artifactId>
                             <version>2.7.1</version>
                             <configuration>
-                                <targetJdk>1.6</targetJdk>
+                                <targetJdk>1.7</targetJdk>
                             </configuration>
                         </plugin>
                         <plugin>
@@ -478,7 +477,7 @@
         <dependency>
         	<groupId>edu.stanford.irt</groupId>
         	<artifactId>irt-cocoon</artifactId>
-        	<version>1.6.0</version>
+        	<version>1.7.0</version>
         </dependency>
         <dependency>
             <artifactId>commons-codec</artifactId>
