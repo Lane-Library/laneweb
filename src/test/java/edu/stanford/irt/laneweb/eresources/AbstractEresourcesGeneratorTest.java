@@ -16,7 +16,7 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.source.SourceValidity;
+import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.CollectionManager;
@@ -97,7 +97,7 @@ public class AbstractEresourcesGeneratorTest {
 
     @Test
     public void testGetValidityAgain() {
-        SourceValidity validity = this.generator.getValidity();
+        Validity validity = this.generator.getValidity();
         assertTrue(validity == this.generator.getValidity());
     }
 

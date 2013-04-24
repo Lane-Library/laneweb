@@ -12,9 +12,9 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
-import edu.stanford.irt.cocoon.source.NOPValidity;
+import edu.stanford.irt.cocoon.cache.validity.NOPValidity;
 import edu.stanford.irt.cocoon.source.Source;
-import edu.stanford.irt.cocoon.source.SourceValidity;
+import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -78,8 +78,12 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
                     return null;
                 }
 
-                public SourceValidity getValidity() {
+                public Validity getValidity() {
                     throw new UnsupportedOperationException();
+                }
+                
+                public Serializable getKey() {
+                    return null;
                 }
             };
             XMLConsumer pipe = new ProcessingInstructionSwallowingPipe(this.xmlConsumer);
@@ -97,7 +101,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
         return this.type;
     }
 
-    public SourceValidity getValidity() {
+    public Validity getValidity() {
         return NOPValidity.SHARED_INSTANCE;
     }
 

@@ -2,13 +2,14 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 
 import org.springframework.core.io.Resource;
 
-import edu.stanford.irt.cocoon.source.FileTimeStampValidity;
+import edu.stanford.irt.cocoon.cache.validity.FileTimeStampValidity;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceException;
-import edu.stanford.irt.cocoon.source.SourceValidity;
+import edu.stanford.irt.cocoon.cache.Validity;
 
 public class SpringResourceSource implements Source {
 
@@ -37,11 +38,15 @@ public class SpringResourceSource implements Source {
         }
     }
 
-    public SourceValidity getValidity() {
+    public Validity getValidity() {
         try {
             return new FileTimeStampValidity(this.resource.getFile());
         } catch (IOException e) {
             return null;
         }
+    }
+
+    public Serializable getKey() {
+        return getURI();
     }
 }
