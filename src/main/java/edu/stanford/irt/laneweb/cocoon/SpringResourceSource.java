@@ -9,9 +9,10 @@ import org.springframework.core.io.Resource;
 import edu.stanford.irt.cocoon.cache.validity.FileTimeStampValidity;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceException;
+import edu.stanford.irt.cocoon.cache.Cacheable;
 import edu.stanford.irt.cocoon.cache.Validity;
 
-public class SpringResourceSource implements Source {
+public class SpringResourceSource implements Cacheable, Source {
 
     private Resource resource;
 

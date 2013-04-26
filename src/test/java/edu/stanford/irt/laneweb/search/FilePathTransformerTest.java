@@ -17,11 +17,14 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceResolver;
+import edu.stanford.irt.cocoon.cache.Cacheable;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class FilePathTransformerTest {
+    
+    private interface CacheableSource extends Cacheable, Source {}
 
     private Attributes attributes;
 
@@ -81,7 +84,7 @@ public class FilePathTransformerTest {
 
     @Test
     public void testStartElementFile() throws SAXException, IOException {
-        Source source = createMock(Source.class);
+        CacheableSource source = createMock(CacheableSource.class);
         Validity validity = createMock(Validity.class);
         expect(this.attributes.getValue("path")).andReturn("path");
         expect(this.sourceResolver.resolveURI("file:path")).andReturn(source);
