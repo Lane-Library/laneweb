@@ -70,3 +70,19 @@
 .yui3-lightbox #feedback {
 	width: 750px;
 }
+
+/* case 81447 add the 'x' button back to the feedback widget*/
+.yui3-lightbox #feedbackClose {
+    width:24px;
+    height:24px;
+    position:absolute;
+    right:3px;
+    top:3px;
+    background-image:url(/././resources/images/sprite-all.png);
+    background-position:-40px -160px;
+    cursor:pointer
+}
+
+.yui3-lightbox #feedbackClose:hover {
+    background-position:-40px -200px
+}
