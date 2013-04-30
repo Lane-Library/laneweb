@@ -688,7 +688,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.0.8</version>
+            <version>1.0.11</version>
         </dependency>
         <dependency>
             <artifactId>trends-tracker</artifactId>
