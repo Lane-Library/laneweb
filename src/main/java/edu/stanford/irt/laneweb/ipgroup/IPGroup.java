@@ -171,6 +171,7 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("171.65.82.21/32", STAFF));
         ROOT.addSubrange(new CIDRRange("171.65.82.24/32", STAFF));
         ROOT.addSubrange(new CIDRRange("171.65.82.56/32", STAFF));
+        ROOT.addSubrange(new CIDRRange("171.65.82.62/32", STAFF));
         ROOT.addSubrange(new CIDRRange("171.65.82.74/32", STAFF));
         ROOT.addSubrange(new CIDRRange("171.65.82.83/32", STAFF));
         ROOT.addSubrange(new CIDRRange("171.65.82.92/32", STAFF));

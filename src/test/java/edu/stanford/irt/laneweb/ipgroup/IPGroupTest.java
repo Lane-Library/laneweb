@@ -295,7 +295,6 @@ public class IPGroupTest {
         assertEquals(IPGroup.SOM_LANE, IPGroup.getGroupForIP("171.65.82.41"));
         assertEquals(IPGroup.SOM_LANE, IPGroup.getGroupForIP("171.65.82.43"));
         assertEquals(IPGroup.SOM_LANE, IPGroup.getGroupForIP("171.65.82.60"));
-        assertEquals(IPGroup.SOM_LANE, IPGroup.getGroupForIP("171.65.82.62"));
         assertEquals(IPGroup.SOM_LANE, IPGroup.getGroupForIP("171.65.82.67"));
         assertEquals(IPGroup.SOM_LANE, IPGroup.getGroupForIP("171.65.82.69"));
         assertEquals(IPGroup.SOM_LANE, IPGroup.getGroupForIP("171.65.82.73"));
@@ -387,6 +386,7 @@ public class IPGroupTest {
         assertEquals(IPGroup.STAFF, IPGroup.getGroupForIP("171.65.82.239"));
         assertEquals(IPGroup.STAFF, IPGroup.getGroupForIP("171.65.82.24"));
         assertEquals(IPGroup.STAFF, IPGroup.getGroupForIP("171.65.82.240"));
+        assertEquals(IPGroup.STAFF, IPGroup.getGroupForIP("171.65.82.62"));
         assertEquals(IPGroup.STAFF, IPGroup.getGroupForIP("171.65.82.74"));
         assertEquals(IPGroup.STAFF, IPGroup.getGroupForIP("171.65.83.132"));
         assertEquals(IPGroup.STAFF, IPGroup.getGroupForIP("171.65.83.157"));
