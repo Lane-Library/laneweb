@@ -31,6 +31,8 @@ public interface Model {
 
     String DEBUG = "debug";
 
+    String DISASTER_MODE = "disaster-mode";
+
     String EMAIL = "email";
 
     String EMRID = "emrid";

@@ -47,7 +47,7 @@ public class LanewebContextListenerTest {
         expect(this.servletContext.getInitParameter(isA(String.class))).andReturn(null).atLeastOnce();
         expect(this.namingContext.lookup(isA(String.class))).andReturn("file:/foo").atLeastOnce();
         this.servletContext.setAttribute(isA(String.class), isA(Object.class));
-        expectLastCall().times(4);
+        expectLastCall().times(5);
         replay(this.namingContext, this.event, this.servletContext);
         this.listener.contextInitialized(this.event);
         verify(this.namingContext, this.event, this.servletContext);
