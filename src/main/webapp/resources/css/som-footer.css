@@ -1,20 +1,12 @@
 #somNav2 {
-	font-size: 0.9em;
-	border-top: none;
+	font-size: 0.7em;
 	padding: 5px 0;
 	text-align: center;
 }
 
 #somNav2 li {
-	border-color: #818181;
 	padding: 0 14px 0 14px;
-	border-left: 1px dotted #C1C1C1;
 	display: inline;
-	background-image: none;
-}
-
-#somNav2 li:first-child {
-	border-left: none;
 }
 
 #irtBrand span {
@@ -27,14 +19,14 @@
 }
 
 #somNav2 a {
-	color: #1C4B70;
-}
-
-#somNav2 a {
-	border-bottom: none;
+    color: #1C4B70;
+    text-decoration: none;
+    border-bottom: none;
+    cursor: pointer;
 }
 
 #somNav2 a:hover {
-	text-decoration: underline;
-	border-bottom-style: none;
+	color: #820000;
+    border-color: #820000;
+    border-bottom: 1px solid #820000;
 }
