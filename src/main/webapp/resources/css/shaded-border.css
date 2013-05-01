@@ -44,9 +44,12 @@ html {
   side shading that needs to be hidden.
  */
 #sb {
+    padding-top : 80px;
+    background-position:0 -40px;
     background-color:white;
     position:relative;
 }
+
 /*
   .sb-tb are the divs that hold the top and bottom shading image.
   They need position:relative so corners can be positioned inside them.
@@ -73,16 +76,6 @@ html {
     font-size:0;
     position:absolute;
     background-image:url(/././resources/images/sprite-all.png);
-}
-#sb-tl {
-    top:-1px;
-    left:-7px;
-    background-position:-520px 0;
-}
-#sb-tr {
-    top:-1px;
-    right:-7px;
-    background-position:-532px 0;
 }
 #sb-bl {
     bottom:-1px;

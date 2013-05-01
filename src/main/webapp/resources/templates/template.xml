@@ -12,11 +12,7 @@
         <div id="custom-doc" class="yui-t7">
             <div id="sb-rt" class="sb-lr">
                 <div id="sb-lft" class="sb-lr">
-                    <div class="sb-tb">
-                        <div class="sb-c" id="sb-tl"/>
-                        <div class="sb-c" id="sb-tr"/>
-                    </div>
-                    <div id="sb" style="*z-index:1">
+                    <div id="sb">
                         <h1>
                             <a href="/index.html"><span>Lane</span> Medical Library</a>
                         </h1>
@@ -24,30 +20,30 @@
                             <fieldset id="searchFields">
                                 <select name="source" id="searchSource">
                                     <option value="all-all"
-                                        title="Subject, Title, Author, PMID, ISSN, DOI"
+                                        title="Enter Subject, Title, Author, PMID, ISSN, DOI"
                                         >Lane Search</option>
                                     <option value="clinical-all"
-                                        title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed ..."
-                                        >Clinical/PICO Search</option>
+                                        title="Clinical evidence: Cochrane, DARE, ACP Journal Club, UpToDate, PubMed"
+                                        >Clinical/PICO</option>
                                     <option value="peds-all"
-                                        title="Find pediatric evidence from UpToDate, PubMed, and more ..."
-                                        >Pediatrics Search</option>
+                                        title="Pediatric evidence: UpToDate, PubMed"
+                                        >Pediatrics</option>
                                     <option value="bioresearch-all"
-                                        title="Search 200+ bioresearch resources"
-                                        >Bioresearch Search</option>
+                                        title="200+ bioresearch resources"
+                                        >Bioresearch</option>
                                     <option value="history-all"
-                                        title="Search Lane's historical collection">History Search</option>
+                                        title="Lane's historical collection">History</option>
                                     <option value="bassett"
-                                        title="Find anatomical images from Lane's Bassett Collection"
-                                        >Bassett Images Search</option>
+                                        title="Anatomical images from Lane's Bassett collection"
+                                        >Bassett Images</option>
                                     <option value="textbooks-all"
-                                        title="Search selected clinical textbooks"
-                                        >Textbooks Search</option>
+                                        title="Selected clinical textbooks"
+                                        >Textbooks</option>
                                 </select>
-                                <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> &#187; </span>
+                                <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
                                 <div id="searchIndicator"></div>
-                                <input name="q" id="searchTerms" type="text"/>
-                                <input id="searchSubmit" type="submit" value="search"/>
+                                <input name="q" id="searchTerms" type="text" class="feedbackText"/>
+                                <input id="searchSubmit" class="gray-btn btn-wide submitButton" type="submit" value="Search"/>
                                 <a id="searchReset" title="Clear Search" href="/">&#215;</a>
                             </fieldset>
                             <ul id="qlinks">
@@ -57,20 +53,21 @@
                                <li>
                                    <a href="http://www.uptodate.com/online">UpToDate</a>
                                </li>
+                               <li>
+                                   <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
+                               </li>
                             </ul>
                         </form>
                         <div class="content">
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                 href="content:/announcement.html">
+                                href="content:/announcement.html">
                                 <xi:fallback/>
                             </xi:include>
                             <?laneweb content?>
                         </div>
-                        <ul id="libraryHours">
-                            <li>Today's hours: <?laneweb todays-hours?></li>
-                            <li><a href="/about/index.html">Hours</a></li>
-                        </ul>
                         <ul id="libraryContact">
+                             <li>Today's hours: <?laneweb todays-hours?></li>
+                            <li><a href="/about/index.html">Hours</a></li>
                             <li>650-723-6831</li>
                             <li><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>
                             <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
@@ -158,7 +155,7 @@
                                     <xi:fallback/>
                                 </xi:include>
                             </li>
-                            <li>
+                             <li>
                                 <a href="/using-lib/index.html"
                                     >Using the Library</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -183,7 +180,7 @@
                                 </xi:include>
                             </li>
                         </ul>
-                          <div id="laneFooter">
+                        <div id="laneFooter">
                             <div class="yui3-g">
                                 <div class="yui3-u-1-6">
                                     <a href="/biomed-resources/index.html">RESOURCES</a>
