@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-05-06" version="2.1.7" description="2.1.7 bug fix release">
+            <action date="2013-04-30" dev="ryanmax" issue="84737" type="fix">
+                Lane DR: persistent login popup should not appear when in DR mode
+            </action>
+            <action date="2013-04-30" dev="ryanmax" issue="84735" type="update">
+                Lane DR: disable My Lane login links while in DR mode
+            </action>
+            <action date="2013-04-30" dev="ryanmax" issue="84734" type="fix">
+                Choose Aa-Az button not covered by login widget background
+            </action>
+            <action date="2013-04-29" dev="olgary" issue="84674" type="update">
+                update, simplify styles in som-footer.css
+            </action>
+            <action date="2013-04-30" dev="ceyates" issue="81447" type="update">
+                add the 'x' button back to the feedback widget
+            </action>
+        </release>
         <release date="2013-04-22" version="2.1.6" description="2.1.6 bug fix release">
             <action date="2013-04-17" dev="ceyates" issue="84201" type="fix">
                 .rss-link background image positioned incorrectly
