@@ -10,9 +10,10 @@
 	basePath = model.get(model.BASE_PATH) || "",
 	auth = model.get(model.AUTH),
 	ipgroup = model.get(model.IPGROUP),
+	drMode = model.get(model.DISASTER_MODE),
 	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup;
 	
-	if(fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
+	if(drMode || fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
 		needPopup = false;
 	}
 

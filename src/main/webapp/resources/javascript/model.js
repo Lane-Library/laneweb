@@ -13,6 +13,7 @@
     	//keep this in sync with edu.stanford.irt.laneweb.model.Model
     	AUTH : "auth",
     	BASE_PATH : "base-path",
+    	DISASTER_MODE : "disaster-mode",
     	IPGROUP : "ipgroup",
     	QUERY : "query",
     	SOURCE : "source",

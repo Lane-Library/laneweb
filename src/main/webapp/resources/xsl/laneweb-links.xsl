@@ -22,6 +22,9 @@
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
+            <xsl:when test=". = '/secure/login.html' and $disaster-mode = 'true'">
+                <xsl:attribute name="href" select="'/login-disabled.html'"/>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link" select="."/>

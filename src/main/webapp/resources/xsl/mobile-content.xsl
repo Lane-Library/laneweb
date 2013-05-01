@@ -37,6 +37,9 @@
     <!-- sourceid used for tracking to ID request origin: shc, cerner, laneconnex-engine, etc. -->
     <xsl:param name="sourceid"/>
     
+    <!-- boolean: is app running in DR mode -->
+    <xsl:param name="disaster-mode"/>
+    
     <xsl:variable name="path">
         <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
     </xsl:variable>

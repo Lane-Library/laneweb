@@ -34,6 +34,7 @@
         <constructor-arg>
             <set>
                 <value>base-path</value>
+                <value>disaster-mode</value>
                 <value>ipgroup</value>
                 <value>auth</value>
                 <value>query</value>
@@ -50,9 +51,7 @@
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"
-        class="edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder">
-        <constructor-arg value="%{laneweb.disaster-mode}"/>
-    </bean>
+        class="edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder"/>
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"
         class="edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder">
