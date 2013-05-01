@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/~ceyates/irt-cocoon-sitemap-1.0.xsd">
+    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="noncaching">
         <!-- I did a benchmark first using the pipeline below and I got a average of 358.382 [ms] (mean)  -->
         <!-- and I tried the get the data on the fly every and do all the transformations the response was very disappointing  Time per request: 2191.253 [ms] (mean) -->
