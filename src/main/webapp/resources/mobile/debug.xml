@@ -34,5 +34,6 @@
         <script type="text/javascript" src="/resources/javascript/mobile/m-spellcheck.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/m-suggest.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/m-tracking.js"> </script>
+        <script type="text/javascript" id="model">//</script>
     </body>
 </html>
