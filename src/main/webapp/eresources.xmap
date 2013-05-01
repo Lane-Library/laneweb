@@ -42,80 +42,22 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
-        <map:match pattern="browse/type/*.html" type="wildcard">
-            <map:generate type="er-browse-html">
+        <map:match type="wildcard" pattern="browse/*/*.*">
+            <map:generate type="er-browse-{3}">
+                <map:parameter name="{1}" value="{2}"/>
+            </map:generate>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="mesh/type/*.*" type="wildcard">
+            <map:generate type="er-mesh-{2}">
                 <map:parameter name="type" value="{1}"/>
             </map:generate>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="browse/type/*.xml" type="wildcard">
-            <map:generate type="er-browse-xml">
+        <map:match pattern="core/type/*.*" type="wildcard">
+            <map:generate type="er-core-{2}">
                 <map:parameter name="type" value="{1}"/>
             </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="browse/type/*" type="wildcard">
-            <map:generate type="er-browse-xml">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="browse/subset/*.html" type="wildcard">
-            <map:generate type="er-browse-html">
-                <map:parameter name="subset" value="{1}"/>
-            </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="browse/subset/*.xml" type="wildcard">
-            <map:generate type="er-browse-xml">
-                <map:parameter name="subset" value="{1}"/>
-            </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="browse/subset/*" type="wildcard">
-            <map:generate type="er-browse-xml">
-                <map:parameter name="subset" value="{1}"/>
-            </map:generate>
-            <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="mesh/type/*.html" type="wildcard">
-            <map:generate type="er-mesh-html">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="mesh/type/*.xml" type="wildcard">
-            <map:generate type="er-mesh-xml">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="mesh/type/*" type="wildcard">
-            <map:generate type="er-mesh-xml">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="core/type/*.html" type="wildcard">
-            <map:generate type="er-core-html">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="core/type/*.xml" type="wildcard">
-            <map:generate type="er-core-xml">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="core/type/*" type="wildcard">
-            <map:generate type="er-core-xml">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
