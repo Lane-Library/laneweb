@@ -21,15 +21,14 @@ public class BaseProxyURLDataBinderTest {
 
     @Before
     public void setUp() throws Exception {
-        this.binder = new BaseProxyURLDataBinder(false);
+        this.binder = new BaseProxyURLDataBinder();
         this.model = new HashMap<String, Object>();
         this.model.put(Model.PROXY_LINKS, Boolean.TRUE);
     }
 
     @Test
     public void testBindDisasterModeTrue() {
-        this.binder = new BaseProxyURLDataBinder(true);
-        this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
+        this.model.put(Model.DISASTER_MODE, Boolean.TRUE);
         this.binder.bind(this.model, null);
         assertEquals("http://laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
     }

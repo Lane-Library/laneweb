@@ -54,6 +54,9 @@
     <!-- json version of the data model -->
     <xsl:param name="model"/>
 
+    <!-- boolean: is app running in DR mode -->
+    <xsl:param name="disaster-mode"/>
+
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->

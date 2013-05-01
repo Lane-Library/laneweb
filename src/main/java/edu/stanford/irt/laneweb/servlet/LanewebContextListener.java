@@ -18,6 +18,8 @@ import javax.servlet.ServletContextListener;
  */
 public class LanewebContextListener implements ServletContextListener {
 
+    public static final String DISASTER_MODE = "laneweb.disaster-mode";
+
     public static final String EZPROXY = "laneweb.context.ezproxy-key";
 
     public static final String LIVE_BASE = "laneweb.context.live-base";
@@ -39,6 +41,7 @@ public class LanewebContextListener implements ServletContextListener {
         this.servletContext.setAttribute(STAGE_BASE, getURL(STAGE_BASE));
         this.servletContext.setAttribute(EZPROXY, getValue(EZPROXY));
         this.servletContext.setAttribute(VERSION, getValue(VERSION));
+        this.servletContext.setAttribute(DISASTER_MODE, Boolean.valueOf(getValue(DISASTER_MODE)));
     }
 
     /**

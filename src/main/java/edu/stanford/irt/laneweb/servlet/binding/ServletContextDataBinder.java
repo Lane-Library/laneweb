@@ -13,6 +13,7 @@ public class ServletContextDataBinder implements DataBinder {
     private ServletContext servletContext;
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
+        model.put(Model.DISASTER_MODE, this.servletContext.getAttribute(LanewebContextListener.DISASTER_MODE));
         model.put(Model.VERSION, this.servletContext.getAttribute(LanewebContextListener.VERSION));
     }
 

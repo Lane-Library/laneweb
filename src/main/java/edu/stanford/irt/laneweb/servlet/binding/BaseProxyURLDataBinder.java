@@ -25,20 +25,15 @@ public class BaseProxyURLDataBinder implements DataBinder {
     private static final String URL = "&url=";
 
     private static final String WEBAUTH = "/secure/apps/proxy/credential?url=";
-    
-    private boolean disasterMode;
 
-    public BaseProxyURLDataBinder(final boolean drMode) {
-        this.disasterMode = drMode;
-    }
-    
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         Boolean proxyLinks = ModelUtil.getObject(model, Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
-        if (this.disasterMode || proxyLinks.equals(Boolean.TRUE)) {
+        Boolean disasterMode = ModelUtil.getObject(model, Model.DISASTER_MODE, Boolean.class, Boolean.FALSE);
+        if (disasterMode.equals(Boolean.TRUE) || proxyLinks.equals(Boolean.TRUE)) {
             StringBuilder baseProxyURL = new StringBuilder();
             IPGroup ipgroup = ModelUtil.getObject(model, Model.IPGROUP, IPGroup.class);
-            if (this.disasterMode || IPGroup.SHC.equals(ipgroup) || IPGroup.LPCH.equals(ipgroup)) {
+            if (disasterMode.equals(Boolean.TRUE) || IPGroup.SHC.equals(ipgroup) || IPGroup.LPCH.equals(ipgroup)) {
                 baseProxyURL.append(HOSPITAL);
             } else {
                 String sunetid = ModelUtil.getString(model, Model.SUNETID);
