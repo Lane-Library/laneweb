@@ -1,42 +1,29 @@
 (function() {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
+        container = Y.one("#searchFormContainer"),
         searchTerms,
         picoIsOn = false,
         picoTextInputs = [],
-        picoFields, //formAnim, navAnim,
+        picoFields,
         picoOn = function() {
             if (!picoIsOn) {
                 if (!picoFields) {
                     createPicoFields();
                 }
                 picoFields.setStyle("display", "block");
-//                formAnim.set('to',{height:124});
-//                navAnim.set('to',{top:174});
-//                formAnim.on('end', function() {
                     form.addClass('clinical');
-//                });
-//                navAnim.on('end', function() {
+                    container.addClass("clinical");
                     nav.addClass('clinical');
-//                });
-//                formAnim.run();
-//                navAnim.run();
                 picoIsOn = true;
             }
         },
         picoOff = function() {
             if (picoIsOn) {
                 picoFields.setStyle("display", "none");
-//                formAnim.set('to',{height:94});
-//                navAnim.set('to',{top:144});
-//                formAnim.on('end', function() {
                     form.removeClass('clinical');
-//                });
-//                navAnim.on('end', function() {
+                    container.removeClass("clinical");
                     nav.removeClass('clinical');
-//                });
-//                formAnim.run();
-//                navAnim.run();
                 picoIsOn = false;
             }
             
@@ -80,7 +67,7 @@
                     }
                 });
             }
-            form.insert(picoFields);
+            form.insert(picoFields,0);
         },
          getPicoQuery = function(){ //build query terms from pico inputs
             var qString = '', i;
@@ -101,24 +88,9 @@
         Y.publish("lane:searchPicoChange",{broadcast:1});
     if (form) {
         searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"));
-//        Y.on("lane:suggestSelect",  function(event) {
-//            if(picoIsOn && getPicoQuery()){
-//                searchTerms.setValue(getPicoQuery());
-//            }
-//        });
         if (form.hasClass('clinical')) {
             picoOn();
         }
-//        formAnim = new Y.Anim({
-//            node: '#search',
-//            easing: Y.Easing.easeOut,
-//            duration: 0.3
-//        });
-//        navAnim = new Y.Anim({
-//            node: '#laneNav',
-//            easing: Y.Easing.easOut,
-//            duration: 0.3 
-//        });
         Y.on('lane:searchSourceChange', function(event) {
             if (event.newVal == 'clinical-all'||event.newVal.indexOf('peds') === 0) {
                 picoOn();

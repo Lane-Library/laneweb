@@ -16,8 +16,12 @@
                         <h1>
                             <a href="/index.html"><span>Lane</span> Medical Library</a>
                         </h1>
-                        <form id="search" method="get" action="/search.html">
+                        <div id="searchFormContainer">
+                            <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
+                            <img id="searchIndicator" src="/resources/images/search-indicator.gif" alt="search indicator"/>    
+                            <form id="search" method="get" action="/search.html">
                             <fieldset id="searchFields">
+                                <div>
                                 <select name="source" id="searchSource">
                                     <option value="all-all"
                                         title="Enter Subject, Title, Author, PMID, ISSN, DOI"
@@ -40,24 +44,24 @@
                                         title="Selected clinical textbooks"
                                         >Textbooks</option>
                                 </select>
-                                <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
-                                <div id="searchIndicator"></div>
-                                <input name="q" id="searchTerms" type="text" class="feedbackText"/>
-                                <input id="searchSubmit" class="gray-btn btn-wide submitButton" type="submit" value="Search"/>
+                                <input name="q" id="searchTerms" type="text"/>
                                 <a id="searchReset" title="Clear Search" href="/">&#215;</a>
+                                </div>
+                                <input id="searchSubmit" type="submit" value="Search"/>
                             </fieldset>
+                            </form>
                             <ul id="qlinks">
-                               <li>
-                                   <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</a>
-                               </li>
-                               <li>
-                                   <a href="http://www.uptodate.com/online">UpToDate</a>
-                               </li>
-                               <li>
-                                   <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
-                               </li>
+                                <li>
+                                    <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.uptodate.com/online">UpToDate</a>
+                                </li>
+                                <li>
+                                    <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
+                                </li>
                             </ul>
-                        </form>
+                        </div>
                         <div class="content">
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                 href="content:/announcement.html">
