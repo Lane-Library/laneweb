@@ -30,7 +30,10 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 	var persistentStatusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
 	if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
 		document.location = '/././secure/persistentLogin.html?pl=false&url='+ document.location;
-	} else {
+	} else if($.LANE.model['disaster-mode'] == true){
+        document.location = '/././login-disabled.html';
+    }
+	else {
 		$.LANE.popupWindow("/././m/plain/persistent-login.html");
 		redirectUrl = encodeURIComponent(document.location);
 	}
@@ -40,9 +43,8 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 //when a click is coming from a external resource
 $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", function(event) {
 	var link = event.currentTarget, 
-	now = new Date();
-	var statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-	if ( 'denied' !== statusCookie && (IS_USER_VALID === 'false' || statusCookie < now.getTime())){
+	now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
+	if ($.LANE.model['disaster-mode'] != true && 'denied' !== statusCookie && (IS_USER_VALID === 'false' || statusCookie < now.getTime())){
 		redirectUrl = encodeURIComponent(link.href);
 		if(IS_USER_VALID === 'true'){ 
 			$.LANE.popupWindow('/././m/plain/persistentlogin-extention.html');

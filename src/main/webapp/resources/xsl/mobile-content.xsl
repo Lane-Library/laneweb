@@ -37,6 +37,9 @@
     <!-- sourceid used for tracking to ID request origin: shc, cerner, laneconnex-engine, etc. -->
     <xsl:param name="sourceid"/>
     
+    <!-- json version of the data model -->
+    <xsl:param name="model"/>
+    
     <!-- boolean: is app running in DR mode -->
     <xsl:param name="disaster-mode"/>
     
@@ -139,6 +142,14 @@
                 </xsl:choose>
             </xsl:attribute>
         </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="h:script[@id='model']/text()">
+        <xsl:text>
+            $.LANE.model = </xsl:text>
+        <xsl:value-of select="$model"/>
+        <xsl:text>;
+        </xsl:text>
     </xsl:template>
     
     <!-- external links get blank target, exclude login links  -->
