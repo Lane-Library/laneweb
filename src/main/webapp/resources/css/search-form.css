@@ -39,7 +39,9 @@
 #searchFields>div {
     background-color:white;
     float:left;
-    position:relative
+    position:relative;
+    /*IE7 seems to need this z-index*/
+    z-index:1
 }
 #picoFields {
     background-color: white;
