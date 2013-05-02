@@ -33,17 +33,24 @@
 	}, 'a[href=' + basePath + '/secure/login.html]');
 	
 	
+
 	//if not from hospital and user click on a link that going to be proxy
-    if (needPopup ){
-    	if(Y.one('a[href*=secure/apps/proxy/credential]'))
-    		Y.on("click", _proxiedResourceClickedOn, 'a[href*=secure/apps/proxy/credential]');
-    	if(Y.one('a[href*=laneproxy]'))
-    		Y.on("click", _proxiedResourceClickedOn, 'a[href*=laneproxy]');
-    }
-	
+	 //If there are click subscriptions at multiple points in the DOM heirarchy, they will be executed in order from
+	 //most specific (the button) to least specific (document) unless e.stopPropagation() is called along the line. 
+	 //This will prevent subscriptions from elements higher up the parent axis from executing.
+	 Y.on("click",
+		function(event) {
+		 if (needPopup) {
+			 	var link = event.target; 
+				redirectUrl = link.get('href');
+				if (redirectUrl.indexOf("secure/apps/proxy/credential") > 0 || redirectUrl.indexOf("laneproxy") > 0) {
+					_proxiedResourceClickedOn(event);
+				}
+			}
+		},document.body);
 	
     function _proxiedResourceClickedOn(event) {
-		var link = event.currentTarget,
+    	var link = event.target,
 		isActive;
 		redirectUrl = encodeURIComponent(link.get('href'));
 		event.preventDefault();
