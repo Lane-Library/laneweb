@@ -2,7 +2,10 @@
     padding: 3px 0 0 28px;
     height : 87px;
     margin-bottom: 46px;
-    background-image: linear-gradient(#9B0D00, #600700)
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9B0D00), to(#600700));
+    background-image: -moz-linear-gradient(#9B0D00, #9B0D00);
+    background-image: linear-gradient(#9B0D00, #600700);
+    filter: progid : DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#9B0D00'); 
 }
 #searchFormContainer.clinical {
     height:125px
