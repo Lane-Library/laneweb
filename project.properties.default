@@ -21,3 +21,6 @@ laneweb.shccodec.key=
 laneweb.shccodec.vector=
 laneweb.sunetidcookiecodec.key=
 laneweb.sunetidhashkey=
+laneweb.disaster-mode=
+sun.net.client.defaultConnectTimeout=
+sun.net.client.defaultReadTimeout=
