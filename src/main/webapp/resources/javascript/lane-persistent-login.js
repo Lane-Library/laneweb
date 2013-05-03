@@ -43,7 +43,7 @@
 		 if (needPopup) {
 			 	var link = event.target; 
 				redirectUrl = link.get('href');
-				if (redirectUrl.indexOf("secure/apps/proxy/credential") > 0 || redirectUrl.indexOf("laneproxy") > 0) {
+				if (redirectUrl && (redirectUrl.indexOf("secure/apps/proxy/credential") > 0 || redirectUrl.indexOf("laneproxy") > 0)) {
 					_proxiedResourceClickedOn(event);
 				}
 			}
