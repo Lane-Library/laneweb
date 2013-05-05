@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2013-05-06" version="2.1.7" description="2.1.7 bug fix release">
+            <action date="2013-05-06" dev="ceyates" issue="84882" type="fix">
+                server threads hung waiting to read from http connections
+            </action>
             <action date="2013-04-30" dev="ryanmax" issue="84737" type="fix">
                 Lane DR: persistent login popup should not appear when in DR mode
             </action>
