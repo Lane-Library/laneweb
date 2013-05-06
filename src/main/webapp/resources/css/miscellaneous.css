@@ -67,9 +67,6 @@ em {
     background-position: -41px -280px;
     border-bottom : none;
 }
-.red-text {
-    color : #820000
-}
 .announce {
 	text-align: center;
 	background-color: #F4F5EF;
@@ -124,4 +121,12 @@ em {
     background-color : #e6e8d5;
     font-weight : bold;
     font-size : 1.1em;
+}
+
+/*scroll window on portals to display article feed, such as rheumatology*/
+.scroll-window {
+	height: 400px;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
