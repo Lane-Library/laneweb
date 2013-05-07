@@ -52,7 +52,7 @@
         <property name="marshaller" ref="org.springframework.oxm.Marshaller"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/&lt;aggregator&gt;"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Aggregator/&lt;aggregator&gt;"
         class="edu.stanford.irt.cocoon.pipeline.generate.AggregatorImpl"
         scope="prototype">
         <constructor-arg value="&lt;aggregator&gt;"/>
