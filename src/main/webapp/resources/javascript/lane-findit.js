@@ -2,10 +2,11 @@
     var findItNode = Y.one('#findIt'),
         model = Y.lane.Model,
         query = model.get(model.QUERY),
+        queryIsNumeric = query == +query, // SFX responds very slowly to numeric requests (PMIDs)
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
         url;
-    if (findItNode && query) {
+    if (findItNode && query && !queryIsNumeric) {
         url = basePath + '/apps/sfx/json?q=' + encodedQuery;
         Y.io(url, {
             on: {
