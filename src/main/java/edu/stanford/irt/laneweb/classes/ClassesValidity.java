@@ -3,9 +3,9 @@ package edu.stanford.irt.laneweb.classes;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import edu.stanford.irt.cocoon.source.SourceValidity;
+import edu.stanford.irt.cocoon.cache.Validity;
 
-public class ClassesValidity implements SourceValidity {
+public class ClassesValidity implements Validity {
 
     private static final long DELAY = 3600 * 1000;
 

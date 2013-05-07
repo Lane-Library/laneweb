@@ -3,11 +3,12 @@ package edu.stanford.irt.laneweb.search;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.cache.Cacheable;
+import edu.stanford.irt.cocoon.cache.Validity;
+import edu.stanford.irt.cocoon.cache.validity.AggregatedValidity;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
-import edu.stanford.irt.cocoon.source.AggregatedValidity;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceResolver;
-import edu.stanford.irt.cocoon.source.SourceValidity;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -39,7 +40,7 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
     }
 
     @Override
-    public SourceValidity getValidity() {
+    public Validity getValidity() {
         return this.validity;
     }
 
@@ -54,7 +55,11 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
             throws SAXException {
         if ("file".equals(localName)) {
             Source source = this.sourceResolver.resolveURI("file:" + atts.getValue("path"));
-            this.validity.add(source.getValidity());
+            if (source instanceof Cacheable) {
+                this.validity.add(((Cacheable)source).getValidity());
+            } else {
+                this.validity.add(null);
+            }
             this.saxParser.parse(source, this.pipe);
         } else {
             super.startElement(uri, localName, qName, atts);

@@ -6,12 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import edu.stanford.irt.cocoon.cache.Validity;
+import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
-import edu.stanford.irt.cocoon.source.ExpiresValidity;
-import edu.stanford.irt.cocoon.source.SourceValidity;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.eresources.CollectionManager;
@@ -37,7 +37,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
 
-    private SourceValidity validity;
+    private Validity validity;
 
 	private String queryString;
 
@@ -59,7 +59,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         return this.componentType;
     }
 
-    public SourceValidity getValidity() {
+    public Validity getValidity() {
         if (this.validity == null) {
             this.validity = new ExpiresValidity(this.expires);
         }
