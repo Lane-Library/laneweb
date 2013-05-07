@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-05-07" version="2.1.8" description="2.1.8 emergency release">
+            <action date="2013-05-07" dev="ceyates" issue="85054" type="fix">
+                eresources browse rss links are broken
+            </action>
+        </release>
         <release date="2013-05-06" version="2.1.7" description="2.1.7 bug fix release">
             <action date="2013-05-06" dev="ceyates" issue="84882" type="fix">
                 server threads hung waiting to read from http connections
