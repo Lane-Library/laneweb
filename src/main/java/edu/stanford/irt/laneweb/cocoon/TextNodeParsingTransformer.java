@@ -77,14 +77,6 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
                 public String getURI() {
                     return null;
                 }
-
-                public Validity getValidity() {
-                    throw new UnsupportedOperationException();
-                }
-                
-                public Serializable getKey() {
-                    return null;
-                }
             };
             XMLConsumer pipe = new ProcessingInstructionSwallowingPipe(this.xmlConsumer);
             this.saxParser.parse(source, pipe);

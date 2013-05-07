@@ -9,8 +9,8 @@ public class SpringComponentFactory implements ComponentFactory, BeanFactoryAwar
 
     private BeanFactory beanFactory;
 
-    public Object getComponent(final String name) {
-        return this.beanFactory.getBean(name);
+    public <T> T getComponent(final String name, Class<T> requiredType) {
+        return this.beanFactory.getBean(name, requiredType);
     }
 
     public void setBeanFactory(final BeanFactory beanFactory) {
