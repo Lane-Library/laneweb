@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.classes;
 
-import edu.stanford.irt.cocoon.pipeline.generate.URLGenerator;
 import edu.stanford.irt.cocoon.cache.Validity;
+import edu.stanford.irt.cocoon.pipeline.generate.URLGenerator;
 
 public class ClassesGenerator extends URLGenerator {
 

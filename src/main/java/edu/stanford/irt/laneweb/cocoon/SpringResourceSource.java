@@ -6,11 +6,11 @@ import java.io.Serializable;
 
 import org.springframework.core.io.Resource;
 
+import edu.stanford.irt.cocoon.cache.Cacheable;
+import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.FileTimeStampValidity;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceException;
-import edu.stanford.irt.cocoon.cache.Cacheable;
-import edu.stanford.irt.cocoon.cache.Validity;
 
 public class SpringResourceSource implements Cacheable, Source {
 

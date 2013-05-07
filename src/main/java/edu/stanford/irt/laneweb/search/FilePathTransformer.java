@@ -3,12 +3,12 @@ package edu.stanford.irt.laneweb.search;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
-import edu.stanford.irt.cocoon.cache.validity.AggregatedValidity;
-import edu.stanford.irt.cocoon.source.Source;
-import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.cache.Cacheable;
 import edu.stanford.irt.cocoon.cache.Validity;
+import edu.stanford.irt.cocoon.cache.validity.AggregatedValidity;
+import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
+import edu.stanford.irt.cocoon.source.Source;
+import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;

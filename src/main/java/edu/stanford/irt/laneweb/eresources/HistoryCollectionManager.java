@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
-import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
 
