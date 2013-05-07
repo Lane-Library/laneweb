@@ -13,7 +13,7 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import edu.stanford.irt.cocoon.cache.Cache;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
-import edu.stanford.irt.cocoon.source.FileTimeStampValidity;
+import edu.stanford.irt.cocoon.cache.validity.FileTimeStampValidity;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 import edu.stanford.irt.laneweb.model.Model;

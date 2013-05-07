@@ -34,8 +34,8 @@
 				</a>
 			</xsl:when>
 			<xsl:otherwise>
-				<a xmlns="http://www.w3.org/1999/xhtml" href="{link}"
-					title="feed link---{../../channel/title}---{title}">
+				<a xmlns="http://www.w3.org/1999/xhtml" href="{link|rss:link}"
+					title="feed link---{../../channel/title|../rss:channel/rss:title}---{title|rss:title}">
 					<xsl:value-of select="rss:title|title" />
 				</a>
 			</xsl:otherwise>

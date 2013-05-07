@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.source.NOPValidity;
+import edu.stanford.irt.cocoon.cache.validity.NOPValidity;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
