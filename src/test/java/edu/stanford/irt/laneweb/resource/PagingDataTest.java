@@ -33,13 +33,11 @@ public class PagingDataTest {
     }
 
     @Test
-    // TODO: can this be right?
     public void testGetPage() {
         assertEquals(3, this.data.getPage());
     }
 
     @Test
-    // TODO: can this be right?
     public void testGetPages() {
         assertEquals(3, this.data.getPage());
     }

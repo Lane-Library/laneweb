@@ -24,7 +24,6 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
 
     @Override
     protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
-        // TODO: this is an incredibly ugly and complex method, due to be refactored out into different db schema
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;

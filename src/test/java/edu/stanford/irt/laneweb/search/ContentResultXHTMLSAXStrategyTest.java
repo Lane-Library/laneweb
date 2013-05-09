@@ -75,7 +75,7 @@ public class ContentResultXHTMLSAXStrategyTest {
 		expect(this.contentResult.getPublicationDate()).andReturn("date");
 		expect(this.contentResult.getPublicationVolume()).andReturn("volume");
 		expect(this.contentResult.getPublicationIssue()).andReturn("issue");
-//		expect(this.contentResult.getPages()).andReturn("pages");
+		expect(this.contentResult.getPages()).andReturn("pages");
 		expect(this.contentResult.getContentId()).andReturn("PMID:12");
 //		expect(this.resourceResult.getURL()).andReturn("url");
 		expect(this.contentResult.getDescription()).andReturn("description");

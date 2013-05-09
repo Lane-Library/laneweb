@@ -28,8 +28,6 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
 
     private static final String NO_PREFIX = "";
 
-    private static final String UL = "ul";
-
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     private static final String ID = "id";
