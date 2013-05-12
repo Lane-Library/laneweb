@@ -20,6 +20,7 @@
             /WEB-INF/spring/eresources.xml
             /WEB-INF/spring/history-eresources.xml
             /WEB-INF/spring/laneweb.xml
+            /WEB-INF/spring/mapping.xml
             /WEB-INF/spring/pipeline.xml
             /WEB-INF/spring/proxy.xml
             /WEB-INF/spring/querymap.xml
