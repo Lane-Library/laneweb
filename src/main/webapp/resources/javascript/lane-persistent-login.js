@@ -45,7 +45,9 @@
 			    while (link && link.get('nodeName') != 'A') {
                     link = link.get('parentNode');
                 }
-			 	clickedUrl = link.get('href');
+			    if(link){
+			    	clickedUrl = link.get('href');
+			    }
 				if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("laneproxy") > 0)) {
 					redirectUrl = encodeURIComponent(link.get('href'));
 					event.preventDefault();
