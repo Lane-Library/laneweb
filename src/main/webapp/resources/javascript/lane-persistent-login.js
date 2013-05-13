@@ -41,38 +41,33 @@
 	 Y.on("click",
 		function(event) {
 		 if (needPopup) {
-			 	var link = event.target; 
-				redirectUrl = link.get('href');
-				if (redirectUrl && (redirectUrl.indexOf("secure/apps/proxy/credential") > 0 || redirectUrl.indexOf("laneproxy") > 0)) {
-					_proxiedResourceClickedOn(event);
+			 	var link = event.target, clickedUrl;
+			    while (link && link.get('nodeName') != 'A') {
+                    link = link.get('parentNode');
+                }
+			 	clickedUrl = link.get('href');
+				if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("laneproxy") > 0)) {
+					redirectUrl = encodeURIComponent(link.get('href'));
+					event.preventDefault();
+					// don\'t want a redirect with the tracking see tracking.js code if !rel  documment.location is not set
+					link.set('rel', 'persistentLogin');
+					// if preference cookie is present but date get into grace period
+					if (persistentStatusCookie && now.getTime() > persistentStatusCookie) {
+						isActive = Y.io(basePath + '/user/active', {
+							sync : true
+						});
+						if (isActive.responseText === 'true') {
+							LANE.PersistentLoginPopup(basePath + '/plain/persistent-extension-popup.html');
+						}
+					} // no preference cookie at all
+					else if (!persistentStatusCookie) {
+						LANE.PersistentLoginPopup(basePath + '/plain/persistent-popup.html');
+					}
 				}
 			}
 		},document.body);
 	
-    function _proxiedResourceClickedOn(event) {
-    	var link = event.target,
-		isActive;
-		redirectUrl = encodeURIComponent(link.get('href'));
-		event.preventDefault();
-		// don\'t want a redirect with the tracking see tracking.js code if !rel
-		// documment.location is not set
-		link.set('rel', 'persistentLogin');
-
-		// if preference cookie is present but date get into grace period
-		if (persistentStatusCookie && now.getTime() > persistentStatusCookie) {
-			isActive = Y.io(basePath + '/user/active', {
-				sync : true
-			});
-			if (isActive.responseText === 'true') {
-				LANE.PersistentLoginPopup(basePath + '/plain/persistent-extension-popup.html');
-			}
-		} // no preference cookie at all
-		else if (!persistentStatusCookie) {
-			LANE.PersistentLoginPopup(basePath + '/plain/persistent-popup.html');
-		}
-	}
-	
-
+    
 	// for the static page persistentlogin.hrml Click on YES this way the user 
 	// will not have to go through webauth.
 	if(Y.one('#persistent-login')){
@@ -94,6 +89,8 @@
 		if ( !auth ||  node.get('search').indexOf("pl=true") >0 ) {	
 			url = url + 'secure/';
 		}
+		if(!redirectUrl)
+			redirectUrl = "/index.html";
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
 		node.set('href', url);
 	};

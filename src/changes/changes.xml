@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-05-09" version="2.1.9" description="2.1.9 emergency release">
+            <action date="2013-05-09" dev="alainb" issue="85089" type="fix">
+                Page Not Found: /secure/undefined/index.html
+            </action>
+        </release>
         <release date="2013-05-07" version="2.1.8" description="2.1.8 emergency release">
             <action date="2013-05-07" dev="ceyates" issue="85054" type="fix">
                 eresources browse rss links are broken

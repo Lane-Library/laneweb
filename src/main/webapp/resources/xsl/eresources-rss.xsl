@@ -54,20 +54,14 @@
         <xsl:text>?</xsl:text>
         <xsl:value-of select="$query-string" />
     </xsl:variable>
-
-    <xsl:variable name="title-string">
+    
+    <xsl:variable name="title">
+        <xsl:text>LaneConnex </xsl:text>
         <xsl:choose>
-            <xsl:when test="$mode = 'search'">
-                Search
-            </xsl:when>
-            <xsl:otherwise>
-                Browse
-            </xsl:otherwise>
+            <xsl:when test="$mode = 'search'">Search</xsl:when>
+            <xsl:otherwise>Browse</xsl:otherwise>
         </xsl:choose>
-    </xsl:variable>
-
-
-    <xsl:variable name="title-variable">
+        <xsl:text> Results for </xsl:text>
         <xsl:choose>
             <xsl:when test="$mode = 'search'">
                 <xsl:value-of select="$query" />
@@ -86,19 +80,13 @@
         <rss version="2.0">
             <channel>
                 <title>
-                    LaneConnex
-                    <xsl:value-of select="$title-string" />
-                    Results for
-                    <xsl:value-of select="$title-variable" />
+                    <xsl:value-of select="$title"/>
                 </title>
                 <link>
                     <xsl:value-of select="$url" />
                 </link>
                 <description>
-                    LaneConnex
-                    <xsl:value-of select="$title-string" />
-                    Results for
-                    <xsl:value-of select="$title-variable" />
+                    <xsl:value-of select="$title"/>
                 </description>
                 <language>en-us</language>
                 <ttl>1440</ttl>
@@ -123,7 +111,7 @@
             <link>http://lane.stanford.edu/secure/apps/proxy/credential?url=<xsl:value-of select="h:a[1]/@href"/></link>
             <description>
                 <xsl:value-of select="h:a[1]" />
-                -
+                <xsl:text> - </xsl:text>
                 <xsl:value-of select="text()" />
             </description>
         </item>

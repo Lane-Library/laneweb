@@ -26,7 +26,8 @@
 #socialMedia {
     position:absolute;
     right: 16px;
-    bottom: 65px;
+    top: 100px;
+    width:170px;
 }
 #socialMedia a {
 	height: 25px;
@@ -73,7 +74,8 @@
 	background-position: -600px -520px;
 	position:absolute;
     right: 15px;
-    bottom: 110px;
+    top: 25px;
+    display:block;
     height: 59px;
 	width: 164px;
 }

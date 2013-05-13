@@ -81,11 +81,10 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 if (pubIssue != null && pubIssue.length() > 0) {
                     sb.append('(').append(pubIssue).append(')');
                 }
-                //TODO: pages not used in xsl
-//                String pages = contentResult.getPages();
-//                if (pages != null) {
-//                    sb.append(':').append(pages).append('.');
-//                }
+                String pages = contentResult.getPages();
+                if (pages != null) {
+                    sb.append(':').append(pages).append('.');
+                }
                 XMLUtils.data(xmlConsumer, sb.toString());
                 if (resourceName.equals(PUBMED) || resourceHits <= MORE_RESULTS_LIMIT) {
                     atts = new AttributesImpl();
