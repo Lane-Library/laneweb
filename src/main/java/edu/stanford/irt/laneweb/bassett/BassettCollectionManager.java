@@ -14,8 +14,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.eresources.impl.QueryTranslator;
-import edu.stanford.irt.eresources.impl.VersionImpl;
+import edu.stanford.irt.laneweb.eresources.QueryTranslator;
+import edu.stanford.irt.laneweb.eresources.Version;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class BassettCollectionManager {
@@ -178,7 +178,7 @@ public class BassettCollectionManager {
     private List<BassettEresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
         List<BassettEresource> eresources = new LinkedList<BassettEresource>();
         BassettEresource eresource = null;
-        VersionImpl version = null;
+        Version version = null;
         int currentEresourceId = -1;
         String currentTitle = null;
         while (rs.next()) {
@@ -198,7 +198,7 @@ public class BassettCollectionManager {
                     eresource.setDescription(rs.getString("BASSETT_DESCRIPTION"));
                 }
                 currentEresourceId = rowEresourceId;
-                version = new VersionImpl();
+                version = new Version();
                 eresource.addVersion(version);
                 version.setPublisher(rs.getString("PUBLISHER"));
                 version.setSummaryHoldings(rs.getString("HOLDINGS"));

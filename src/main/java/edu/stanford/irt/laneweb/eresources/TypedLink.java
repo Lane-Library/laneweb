@@ -1,11 +1,10 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import edu.stanford.irt.eresources.impl.LinkImpl;
 
 /**
  * A Link that has a particular LinkType
  */
-public class TypedLink extends LinkImpl {
+public class TypedLink extends Link {
 
     private LinkType type;
 

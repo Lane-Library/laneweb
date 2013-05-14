@@ -9,10 +9,6 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.impl.EresourceImpl;
-import edu.stanford.irt.eresources.impl.QueryTranslator;
-import edu.stanford.irt.eresources.impl.VersionImpl;
 
 public class HistoryCollectionManager extends AbstractCollectionManager {
 
@@ -46,8 +42,8 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
     @Override
     protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
-        EresourceImpl eresource = null;
-        VersionImpl version = null;
+        Eresource eresource = null;
+        Version version = null;
         TypedLink link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
@@ -57,7 +53,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             int recordId = rs.getInt("RECORD_ID");
             String recordType = rs.getString("RECORD_TYPE");
             if (rowEresourceId != currentEresourceId) {
-                eresource = new EresourceImpl();
+                eresource = new Eresource();
                 eresource.setId(rowEresourceId);
                 eresource.setRecordId(recordId);
                 eresource.setRecordType(recordType);
@@ -68,7 +64,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
-                version = new VersionImpl();
+                version = new Version();
                 eresource.addVersion(version);
                 version.setPublisher(rs.getString("PUBLISHER"));
                 version.setSummaryHoldings(rs.getString("HOLDINGS"));

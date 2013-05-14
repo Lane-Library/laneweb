@@ -19,7 +19,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 

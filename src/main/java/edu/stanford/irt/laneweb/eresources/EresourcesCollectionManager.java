@@ -8,10 +8,6 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Version;
-import edu.stanford.irt.eresources.impl.EresourceImpl;
-import edu.stanford.irt.eresources.impl.VersionImpl;
 
 public class EresourcesCollectionManager extends AbstractCollectionManager {
 
@@ -40,7 +36,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             String rowTitle = rs.getString("TITLE");
             if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
-                eresource = new EresourceImpl();
+                eresource = new Eresource();
                 eresource.setId(rowEresourceId);
                 eresource.setRecordId(recordId);
                 eresource.setRecordType(recordType);
@@ -57,7 +53,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
                 createGetPassword = "T".equals(rs.getString("GETPASSWORD"));
-                version = new VersionImpl();
+                version = new Version();
                 eresource.addVersion(version);
                 version.setPublisher(rs.getString("PUBLISHER"));
                 version.setSummaryHoldings(rs.getString("HOLDINGS"));

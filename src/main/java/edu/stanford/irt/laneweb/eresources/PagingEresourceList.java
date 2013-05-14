@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
 
-import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.PagingList;
 
