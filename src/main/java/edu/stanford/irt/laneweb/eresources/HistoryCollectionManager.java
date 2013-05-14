@@ -44,7 +44,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;
-        TypedLink link;
+        Link link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
@@ -74,7 +74,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             }
             int rowLinkId = rs.getInt("LINK_ID");
             if (rowLinkId != currentLinkId) {
-                link = new TypedLink();
+                link = new Link();
                 link.setType(LinkType.NORMAL);
                 version.addLink(link);
                 link.setUrl(rs.getString("URL"));

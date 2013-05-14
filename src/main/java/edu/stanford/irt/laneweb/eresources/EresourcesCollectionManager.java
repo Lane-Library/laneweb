@@ -23,7 +23,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;
-        TypedLink link;
+        Link link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
@@ -75,7 +75,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 } else {
                     type = LinkType.NORMAL;
                 }
-                link = new TypedLink();
+                link = new Link();
                 link.setType(type);
                 link.setUrl(rs.getString("URL"));
                 link.setLabel(label);

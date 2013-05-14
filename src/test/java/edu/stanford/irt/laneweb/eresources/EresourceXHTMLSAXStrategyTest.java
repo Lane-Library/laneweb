@@ -35,7 +35,7 @@ public class EresourceXHTMLSAXStrategyTest {
         this.xmlConsumer = new TestXMLConsumer();
         this.eresource = createMock(Eresource.class);
         this.version = createMock(Version.class);
-        this.link = createMock(TypedLink.class);
+        this.link = createMock(Link.class);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.version.getLinks()).andReturn(Collections.singletonList(this.link));
         expect(this.link.getUrl()).andReturn("url");
-        expect(((TypedLink)this.link).getType()).andReturn(LinkType.NORMAL);
+        expect(((Link)this.link).getType()).andReturn(LinkType.NORMAL);
         expect(this.version.getSummaryHoldings()).andReturn("summary holdings");
         expect(this.version.getDates()).andReturn("dates");
         expect(this.version.getPublisher()).andReturn("publisher");
@@ -71,7 +71,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.version.getLinks()).andReturn(Collections.singletonList(this.link)).times(3);
         expect(this.link.getLabel()).andReturn("label").times(1);
         expect(this.link.getUrl()).andReturn("url").times(2);
-        expect(((TypedLink)this.link).getType()).andReturn(LinkType.NORMAL).times(3);
+        expect(((Link)this.link).getType()).andReturn(LinkType.NORMAL).times(3);
         expect(this.version.getSummaryHoldings()).andReturn("summary holdings").times(2);
         expect(this.version.getDates()).andReturn("dates").times(2);
         expect(this.version.getPublisher()).andReturn("publisher").times(3);
@@ -96,7 +96,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.eresource.getVersions()).andReturn(Collections.singletonList(this.version));
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.version.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
-        expect(((TypedLink)this.link).getType()).andReturn(LinkType.GETPASSWORD);
+        expect(((Link)this.link).getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.link.getUrl()).andReturn("url");
         expect(this.version.getSummaryHoldings()).andReturn("summary holdings");
         expect(this.version.getDates()).andReturn("dates");

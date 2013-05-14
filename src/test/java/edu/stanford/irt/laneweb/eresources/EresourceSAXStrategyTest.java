@@ -28,7 +28,7 @@ public class EresourceSAXStrategyTest {
 
     private Eresource eresource;
 
-    private TypedLink link;
+    private Link link;
 
     private EresourceSAXStrategy strategy;
 
@@ -42,7 +42,7 @@ public class EresourceSAXStrategyTest {
         this.eresource = createMock(Eresource.class);
         this.xmlConsumer = new TestXMLConsumer();
         this.version = createMock(Version.class);
-        this.link = createMock(TypedLink.class);
+        this.link = createMock(Link.class);
     }
 
     @Test

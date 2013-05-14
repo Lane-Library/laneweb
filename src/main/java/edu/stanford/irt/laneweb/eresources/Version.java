@@ -28,6 +28,8 @@ public class Version {
 
     private String summaryHoldings;
 
+    private String firstLinkText;
+
     /*
      * (non-Javadoc)
      * @see
@@ -162,5 +164,13 @@ public class Version {
     public String toString() {
         return new StringBuilder("publisher:").append(this.publisher).append(" holdings:").append(this.summaryHoldings)
                 .append(" links:").append(this.links).toString();
+    }
+
+    public String getFirstLinkText() {
+        return this.firstLinkText;
+    }
+
+    public void setFirstLinkText(String firstLinkText) {
+        this.firstLinkText = firstLinkText;
     }
 }

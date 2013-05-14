@@ -15,6 +15,12 @@ public class Link {
 
     private String url;
 
+    private LinkType type;
+
+    private String additionalText;
+
+    private String text;
+
     // private int seqnum;
     //	
     // public int getSeqnum() {
@@ -76,5 +82,40 @@ public class Link {
     @Override
     public String toString() {
         return new StringBuilder("url:").append(this.url).toString();
+    }
+
+    /**
+     * set the LinkType
+     * 
+     * @param type
+     *            the LinkType
+     */
+    public void setType(final LinkType type) {
+        this.type = type;
+    }
+
+    /**
+     * get the LinkType of this Link
+     * 
+     * @return the LinkType
+     */
+    public LinkType getType() {
+        return this.type;
+    }
+
+    public String getAdditionalText() {
+        return this.additionalText;
+    }
+
+    public void setAdditionalText(String text) {
+        this.additionalText = text;
+    }
+
+    public String getText() {
+        return this.text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
