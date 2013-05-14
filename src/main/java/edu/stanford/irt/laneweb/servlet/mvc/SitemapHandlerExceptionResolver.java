@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.SocketException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,8 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
             }
             if (ultimateCause instanceof FileNotFoundException) {
                 this.log.error(ultimateCause.toString());
+            } else if (ultimateCause instanceof SocketException) {
+                this.log.error(ultimateCause.toString() + " " + getModel());
             } else {
                 this.log.error(ex.toString(), ultimateCause);
             }
@@ -40,9 +43,11 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
         try {
             handleRequest(request, response);
         } catch (ServletException e) {
-            throw new LanewebException(e);
+            logMessage(e);
         } catch (IOException e) {
-            throw new LanewebException(e);
+            logMessage(e);
+        } catch (LanewebException e) {
+            logMessage(e);
         }
         return new ModelAndView();
     }
@@ -50,5 +55,9 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
     @Override
     protected String getSitemapURI(final HttpServletRequest request) {
         return "/error.html";
+    }
+    
+    private void logMessage(Exception e) {
+        this.log.error("Exception while handling exception: " + e.toString());
     }
 }
