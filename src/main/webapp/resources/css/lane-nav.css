@@ -29,6 +29,10 @@
 	font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+#laneNav>li:first-child>a {
+    padding-left:20px
+}
+
 #laneNav li:hover a,#laneNav .hover a,#laneNav .active a {
 	background-color: white;
 }
