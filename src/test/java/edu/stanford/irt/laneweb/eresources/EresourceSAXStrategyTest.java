@@ -20,9 +20,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.Resource;
@@ -31,7 +28,7 @@ public class EresourceSAXStrategyTest {
 
     private Eresource eresource;
 
-    private TypedLink link;
+    private Link link;
 
     private EresourceSAXStrategy strategy;
 
@@ -45,7 +42,7 @@ public class EresourceSAXStrategyTest {
         this.eresource = createMock(Eresource.class);
         this.xmlConsumer = new TestXMLConsumer();
         this.version = createMock(Version.class);
-        this.link = createMock(TypedLink.class);
+        this.link = createMock(Link.class);
     }
 
     @Test

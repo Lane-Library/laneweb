@@ -9,19 +9,18 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.impl.EresourceImpl;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 
 /**
  * @author ryanmax
  */
 public class EresourceSearchResultTest {
 
-    private EresourceImpl eresource1;
+    private Eresource eresource1;
 
-    private EresourceImpl eresource2;
+    private Eresource eresource2;
 
-    private EresourceImpl eresource3;
+    private Eresource eresource3;
 
     private EresourceSearchResult eresourceSearchResult1;
 
@@ -31,11 +30,11 @@ public class EresourceSearchResultTest {
 
     @Before
     public void setUp() {
-        this.eresource1 = new EresourceImpl();
+        this.eresource1 = new Eresource();
         this.eresource1.setRecordId(1);
-        this.eresource2 = new EresourceImpl();
+        this.eresource2 = new Eresource();
         this.eresource2.setRecordId(2);
-        this.eresource3 = new EresourceImpl();
+        this.eresource3 = new Eresource();
         this.eresource3.setRecordId(3);
     }
 

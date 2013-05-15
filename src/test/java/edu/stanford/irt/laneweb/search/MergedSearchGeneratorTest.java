@@ -18,8 +18,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
 

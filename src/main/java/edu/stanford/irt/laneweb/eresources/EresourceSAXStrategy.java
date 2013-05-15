@@ -5,9 +5,6 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
@@ -41,7 +38,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
         }
     }
 
-    private void handleLink(final XMLConsumer xmlConsumer, final TypedLink link) throws SAXException {
+    private void handleLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", link.getType().toString());
         XMLUtils.startElement(xmlConsumer, NAMESPACE, LINK, atts);
@@ -58,7 +55,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
         maybeCreateElement(xmlConsumer, PUBLISHER, version.getPublisher());
         maybeCreateElement(xmlConsumer, DESCRIPTION, version.getDescription());
         for (Link link : version.getLinks()) {
-            handleLink(xmlConsumer, (TypedLink) link);
+            handleLink(xmlConsumer, (Link) link);
         }
         XMLUtils.endElement(xmlConsumer, NAMESPACE, VERSION);
     }

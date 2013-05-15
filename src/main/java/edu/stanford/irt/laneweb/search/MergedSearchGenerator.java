@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.search.MetaSearchManager;
 
 /**

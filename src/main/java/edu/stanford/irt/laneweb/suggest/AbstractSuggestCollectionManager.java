@@ -9,9 +9,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.laneweb.eresources.AbstractCollectionManager;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 
 public abstract class AbstractSuggestCollectionManager extends AbstractCollectionManager {
 
@@ -35,7 +34,7 @@ public abstract class AbstractSuggestCollectionManager extends AbstractCollectio
     @Override
     protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
         List<Eresource> suggestions = new LinkedList<Eresource>();
-        EresourceImpl eresource = null;
+        Eresource eresource = null;
         int currentEresourceId = 0;
         String currentTitle = null;
         while (rs.next()) {
@@ -44,7 +43,7 @@ public abstract class AbstractSuggestCollectionManager extends AbstractCollectio
             if (rowEresourceId != currentEresourceId || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
                 currentEresourceId = rowEresourceId;
-                eresource = new EresourceImpl();
+                eresource = new Eresource();
                 eresource.setId(currentEresourceId);
                 eresource.setTitle(currentTitle);
                 suggestions.add(eresource);
