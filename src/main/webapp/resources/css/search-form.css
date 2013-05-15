@@ -1,5 +1,5 @@
 #searchFormContainer {
-    padding: 3px 0 0 28px;
+    padding: 3px 0 0 20px;
     height : 87px;
     margin-bottom: 46px;
     background-color: #9B0D00;
@@ -53,9 +53,13 @@
     border-width:0;
     /* Mobile Safari: remove rounded corners and input shadow */
     -webkit-appearance : none;
-    padding: 9px 0;
-    width:167px;
-    text-align:center
+    margin: 9px 0;
+    width:166px;
+    text-align:center;
+    border-right:1px rgb(220,220,220) solid
+}
+#picoFields #clinicalO {
+    border-right:none
 }
 #searchTerms {
     border : 0 solid white;
