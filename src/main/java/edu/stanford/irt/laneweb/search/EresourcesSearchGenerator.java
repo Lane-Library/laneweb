@@ -7,8 +7,8 @@ import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 

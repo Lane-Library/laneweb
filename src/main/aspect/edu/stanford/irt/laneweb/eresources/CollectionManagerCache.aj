@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 
 
 

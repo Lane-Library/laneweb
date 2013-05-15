@@ -14,9 +14,6 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 

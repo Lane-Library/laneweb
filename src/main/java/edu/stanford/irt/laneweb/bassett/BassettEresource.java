@@ -3,9 +3,9 @@ package edu.stanford.irt.laneweb.bassett;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.stanford.irt.eresources.impl.EresourceImpl;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 
-public class BassettEresource extends EresourceImpl {
+public class BassettEresource extends Eresource {
 
     private String bassettNumber;
 

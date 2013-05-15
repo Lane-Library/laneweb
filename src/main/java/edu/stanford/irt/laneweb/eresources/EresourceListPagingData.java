@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.eresources;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class EresourceListPagingData extends PagingData {

@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 
 public class MergedSearchSAXStrategyTest {
 

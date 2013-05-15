@@ -3,9 +3,6 @@ package edu.stanford.irt.laneweb.eresources;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
@@ -21,10 +18,10 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             for (Version version : eresource.getVersions()) {
                 for (Link link : version.getLinks()) {
                     if (!processedFirstLink) {
-                        processFirstLink(xmlConsumer, (TypedLink) link, version, eresource.getTitle());
+                        processFirstLink(xmlConsumer, (Link) link, version, eresource.getTitle());
                         processedFirstLink = true;
                     } else {
-                        createSecondaryLink(xmlConsumer, version, (TypedLink) link);
+                        createSecondaryLink(xmlConsumer, version, (Link) link);
                     }
                 }
             }
@@ -55,7 +52,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         endDiv(xmlConsumer);
     }
 
-    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Version version, final TypedLink link)
+    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Version version, final Link link)
             throws SAXException {
         boolean impactFactor = LinkType.IMPACTFACTOR.equals(link.getType());
         startDiv(xmlConsumer);
@@ -115,7 +112,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         }
     }
 
-    private void processFirstLink(final XMLConsumer xmlConsumer, final TypedLink link, final Version firstVersion,
+    private void processFirstLink(final XMLConsumer xmlConsumer, final Link link, final Version firstVersion,
             final String title) throws SAXException {
         startDiv(xmlConsumer);
         createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, title, title);
