@@ -38,7 +38,7 @@
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
             searchTextInput.setHintText(selectedOption.get('title'));
             searchTipsLink.set('href',searchTipsLink.get('href').replace(/#.*/,'#'+searchSourceSelect.get('value')));
-            form.one('input[type="text"]').focus();
+            form.one('#searchTerms').focus();
             searchTextInput.setValue(searchTextInput.getValue());
             searchTermsSuggest.setLimit(getLimitForSource(event.newVal));
         });
