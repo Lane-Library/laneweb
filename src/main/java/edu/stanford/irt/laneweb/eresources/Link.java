@@ -1,77 +1,62 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.eresources;
 
-
-/**
- * @author ceyates
- */
 public class Link {
+
+    private String additionalText;
 
     private String instruction;
 
     private String label;
 
-    private String url;
+    private String text;
 
     private LinkType type;
 
-    private String additionalText;
+    private String url;
 
-    private String text;
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#getInstruction()
-     */
+    public String getAdditionalText() {
+        return this.additionalText;
+    }
+
     public String getInstruction() {
         return this.instruction;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#getLabel()
-     */
     public String getLabel() {
         return this.label;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#getUrl()
+    public String getText() {
+        return this.text;
+    }
+
+    /**
+     * get the LinkType of this Link
+     * 
+     * @return the LinkType
      */
+    public LinkType getType() {
+        return this.type;
+    }
+
     public String getUrl() {
         return this.url;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * edu.stanford.irt.eresources.impl.Link#setInstruction(java.lang.String)
-     */
+    public void setAdditionalText(final String text) {
+        this.additionalText = text;
+    }
+
     public void setInstruction(final String instruction) {
         this.instruction = instruction;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#setLabel(java.lang.String)
-     */
     public void setLabel(final String label) {
         this.label = label;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#setUrl(java.lang.String)
-     */
-    public void setUrl(final String url) {
-        this.url = url;
-    }
-
-    @Override
-    public String toString() {
-        return new StringBuilder("url:").append(this.url).toString();
+    public void setText(final String text) {
+        this.text = text;
     }
 
     /**
@@ -84,28 +69,12 @@ public class Link {
         this.type = type;
     }
 
-    /**
-     * get the LinkType of this Link
-     * 
-     * @return the LinkType
-     */
-    public LinkType getType() {
-        return this.type;
+    public void setUrl(final String url) {
+        this.url = url;
     }
 
-    public String getAdditionalText() {
-        return this.additionalText;
-    }
-
-    public void setAdditionalText(String text) {
-        this.additionalText = text;
-    }
-
-    public String getText() {
-        return this.text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
+    @Override
+    public String toString() {
+        return new StringBuilder("url:").append(this.url).toString();
     }
 }

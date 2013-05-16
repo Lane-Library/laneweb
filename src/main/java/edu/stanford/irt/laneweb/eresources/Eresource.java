@@ -1,29 +1,14 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedList;
 
-
-/**
- * @author ceyates
- */
 public class Eresource {
 
     private String description;
 
     private int id;
-
-    private String keywords;
-
-    private Collection<String> meshTerms;
-
-    private String preferredTitle;
 
     private int recordId;
 
@@ -33,25 +18,7 @@ public class Eresource {
 
     private String title;
 
-    private Collection<String> types;
-
-    private Date updated;
-
     private Collection<Version> versions;
-
-    public void addMeshTerm(final String meshTerm) {
-        if (null == this.meshTerms) {
-            this.meshTerms = new HashSet<String>();
-        }
-        this.meshTerms.add(meshTerm);
-    }
-
-    public void addType(final String type) {
-        if (null == this.types) {
-            this.types = new HashSet<String>();
-        }
-        this.types.add(type);
-    }
 
     public void addVersion(final Version version) {
         if (null == this.versions) {
@@ -66,21 +33,6 @@ public class Eresource {
 
     public int getId() {
         return this.id;
-    }
-
-    public String getKeywords() {
-        return this.keywords;
-    }
-
-    public Collection<String> getMeshTerms() {
-        if (null == this.meshTerms) {
-            return Collections.emptySet();
-        }
-        return this.meshTerms;
-    }
-
-    public String getPreferredTitle() {
-        return this.preferredTitle;
     }
 
     public int getRecordId() {
@@ -99,26 +51,11 @@ public class Eresource {
         return this.title;
     }
 
-    public Collection<String> getTypes() {
-        if (null == this.types) {
-            return Collections.emptySet();
-        }
-        return Collections.unmodifiableCollection(this.types);
-    }
-
-    public Date getUpdated() {
-        return this.updated;
-    }
-
     public Collection<Version> getVersions() {
         if (null == this.versions) {
             return Collections.emptySet();
         }
         return Collections.unmodifiableCollection(this.versions);
-    }
-
-    public boolean isCore() {
-        return (null != this.types) && this.types.contains("core material");
     }
 
     public void setDescription(final String description) {
@@ -127,14 +64,6 @@ public class Eresource {
 
     public void setId(final int id) {
         this.id = id;
-    }
-
-    public void setKeywords(final String keywords) {
-        this.keywords = keywords;
-    }
-
-    public void setPreferredTitle(final String preferredTitle) {
-        this.preferredTitle = preferredTitle;
     }
 
     public void setRecordId(final int recordId) {
@@ -153,13 +82,9 @@ public class Eresource {
         this.title = title;
     }
 
-    public void setUpdated(final Date updated) {
-        this.updated = updated;
-    }
-
     @Override
     public String toString() {
         return new StringBuilder("title:").append(this.title).append(" score:").append(this.score).append(" updated:")
-                .append(this.updated).append(" versions:").append(this.versions).toString();
+                .append(" versions:").append(this.versions).toString();
     }
 }
