@@ -44,7 +44,6 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;
-        Link link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
@@ -53,13 +52,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             int recordId = rs.getInt("RECORD_ID");
             String recordType = rs.getString("RECORD_TYPE");
             if (rowEresourceId != currentEresourceId) {
-                eresource = new Eresource();
-                eresource.setId(rowEresourceId);
-                eresource.setRecordId(recordId);
-                eresource.setRecordType(recordType);
-                String title = rs.getString("TITLE");
-                eresource.setTitle(title);
-                eresources.add(eresource);
+                eresource = new Eresource(null, rowEresourceId, recordId, recordType, 0, rs.getString("TITLE"));
                 currentEresourceId = rowEresourceId;
             }
             int rowVersionId = rs.getInt("VERSION_ID");

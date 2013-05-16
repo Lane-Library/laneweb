@@ -28,7 +28,6 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         int currentLinkId = -1;
         String currentTitle = null;
         boolean createGetPassword = false;
-        List<Link> links = null;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             int recordId = rs.getInt("RECORD_ID");
@@ -36,15 +35,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             String rowTitle = rs.getString("TITLE");
             if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
-                eresource = new Eresource();
-                eresource.setId(rowEresourceId);
-                eresource.setRecordId(recordId);
-                eresource.setRecordType(recordType);
-                eresource.setTitle(currentTitle);
-                if (query != null) {
-                    eresource.setScore(this.scoreStrategy.computeScore(query, currentTitle, rs));
-                }
-                eresource.setDescription(rs.getString("E_DESCRIPTION"));
+                int score = query == null ? 0 : this.scoreStrategy.computeScore(query, currentTitle, rs);
+                eresource = new Eresource(rs.getString("E_DESCRIPTION"), rowEresourceId, recordId, recordType, score, currentTitle);
                 eresources.add(eresource);
                 currentEresourceId = rowEresourceId;
                 currentVersionId = -1;

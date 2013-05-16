@@ -18,13 +18,16 @@ public class Eresource {
 
     private String title;
 
-    private Collection<Version> versions;
+    private Collection<Version> versions = new LinkedList<Version>();
 
-    public void addVersion(final Version version) {
-        if (null == this.versions) {
-            this.versions = new LinkedList<Version>();
-        }
-        this.versions.add(version);
+    public Eresource(final String description, final int id, final int recordId, final String recordType,
+            final int score, final String title) {
+        this.description = description;
+        this.id = id;
+        this.recordId = recordId;
+        this.recordType = recordType;
+        this.score = score;
+        this.title = title;
     }
 
     public String getDescription() {
@@ -52,39 +55,17 @@ public class Eresource {
     }
 
     public Collection<Version> getVersions() {
-        if (null == this.versions) {
-            return Collections.emptySet();
-        }
         return Collections.unmodifiableCollection(this.versions);
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    public void setId(final int id) {
-        this.id = id;
-    }
-
-    public void setRecordId(final int recordId) {
-        this.recordId = recordId;
-    }
-
-    public void setRecordType(final String recordType) {
-        this.recordType = recordType;
-    }
-
-    public void setScore(final int score) {
-        this.score = score;
-    }
-
-    public void setTitle(final String title) {
-        this.title = title;
     }
 
     @Override
     public String toString() {
         return new StringBuilder("title:").append(this.title).append(" score:").append(this.score).append(" updated:")
                 .append(" versions:").append(this.versions).toString();
+    }
+
+    void addVersion(final Version version) {
+        version.setEresource(this);
+        this.versions.add(version);
     }
 }

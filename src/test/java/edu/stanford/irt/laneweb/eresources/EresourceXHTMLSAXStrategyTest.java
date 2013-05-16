@@ -41,9 +41,10 @@ public class EresourceXHTMLSAXStrategyTest {
     @Test
     public void testToSAX() throws SAXException, IOException {
         expect(this.eresource.getVersions()).andReturn(Collections.singletonList(this.version));
-        expect(this.eresource.getTitle()).andReturn("title");
         expect(this.version.getLinks()).andReturn(Collections.singletonList(this.link));
-        expect(this.link.getVersion()).andReturn(this.version);
+        expect(this.link.getVersion()).andReturn(this.version).times(2);
+        expect(this.version.getEresource()).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("title");
         expect(this.link.getUrl()).andReturn("url");
         expect(((Link)this.link).getType()).andReturn(LinkType.NORMAL);
         expect(this.version.getSummaryHoldings()).andReturn("summary holdings");
@@ -68,9 +69,10 @@ public class EresourceXHTMLSAXStrategyTest {
     @Test
     public void testToSAX2Versions() throws SAXException, IOException {
         expect(this.eresource.getVersions()).andReturn(Arrays.asList(new Version[] { this.version, this.version }));
-        expect(this.eresource.getTitle()).andReturn("title");
         expect(this.version.getLinks()).andReturn(Collections.singletonList(this.link)).times(3);
-        expect(this.link.getVersion()).andReturn(this.version).times(2);
+        expect(this.link.getVersion()).andReturn(this.version).times(3);
+        expect(this.version.getEresource()).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("title");
         expect(this.link.getLabel()).andReturn("label").times(1);
         expect(this.link.getUrl()).andReturn("url").times(2);
         expect(((Link)this.link).getType()).andReturn(LinkType.NORMAL).times(3);
@@ -96,9 +98,10 @@ public class EresourceXHTMLSAXStrategyTest {
     @Test
     public void testToSAXGetPassword() throws SAXException, IOException {
         expect(this.eresource.getVersions()).andReturn(Collections.singletonList(this.version));
-        expect(this.eresource.getTitle()).andReturn("title");
         expect(this.version.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
-        expect(this.link.getVersion()).andReturn(this.version);
+        expect(this.link.getVersion()).andReturn(this.version).times(2);
+        expect(this.version.getEresource()).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("title");
         expect(((Link)this.link).getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.link.getUrl()).andReturn("url");
         expect(this.version.getSummaryHoldings()).andReturn("summary holdings");
