@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.bassett;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.xml.sax.SAXException;
@@ -11,7 +10,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class BassettListSAXStrategy implements SAXStrategy<Collection<BassettEresource>> {
+public class BassettImageListSAXStrategy implements SAXStrategy<List<BassettImage>> {
 
     private static final String BASSETT = "bassett";
 
@@ -41,13 +40,13 @@ public class BassettListSAXStrategy implements SAXStrategy<Collection<BassettEre
 
     private static final String TITLE = "title";
 
-    public void toSAX(final Collection<BassettEresource> bassetts, final XMLConsumer xmlConsumer) {
+    public void toSAX(final List<BassettImage> bassetts, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", NAMESPACE);
             XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETTS);
             if (bassetts != null) {
-                for (BassettEresource eresource : bassetts) {
+                for (BassettImage eresource : bassetts) {
                     handleEresource(xmlConsumer, eresource);
                 }
             }
@@ -59,7 +58,7 @@ public class BassettListSAXStrategy implements SAXStrategy<Collection<BassettEre
         }
     }
 
-    private void handleEresource(final XMLConsumer xmlConsumer, final BassettEresource bassett) throws SAXException {
+    private void handleEresource(final XMLConsumer xmlConsumer, final BassettImage bassett) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
         XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT, attributes);

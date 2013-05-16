@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,14 +41,14 @@ public class BassettCollectionManager {
         this.sqlStatements = sqlStatements;
     }
 
-    public Collection<BassettEresource> getById(final String bassettNumber) {
-        Collection<String> params = new LinkedList<String>();
+    public List<BassettImage> getById(final String bassettNumber) {
+        List<String> params = new LinkedList<String>();
         params.add(bassettNumber);
         return doGet(SEARCH_BY_BASSETT_NUMBER, params, true);
     }
 
-    public Collection<BassettEresource> getRegion(final String region) {
-        Collection<String> params = new LinkedList<String>();
+    public List<BassettImage> getRegion(final String region) {
+        List<String> params = new LinkedList<String>();
         if (region.indexOf("--") > -1) {
             String[] splittedRegion = region.split("--");
             params.add(splittedRegion[0]);
@@ -61,10 +60,10 @@ public class BassettCollectionManager {
         }
     }
 
-    public Collection<BassettEresource> search(final String query) {
+    public List<BassettImage> search(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
-        Collection<String> params = new LinkedList<String>();
+        List<String> params = new LinkedList<String>();
         for (int i = 0; i < 2; i++) {
             params.add(translatedQuery);
         }
@@ -95,10 +94,10 @@ public class BassettCollectionManager {
         return result;
     }
 
-    public Collection<BassettEresource> searchRegion(final String region, final String query) {
+    public List<BassettImage> searchRegion(final String region, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
-        Collection<String> params = new LinkedList<String>();
+        List<String> params = new LinkedList<String>();
         for (int i = 0; i < 2; i++) {
             params.add(translatedQuery);
         }
@@ -113,15 +112,15 @@ public class BassettCollectionManager {
         }
     }
 
-    private List<BassettEresource> doGet(final String sqlKey, final Collection<String> params) {
+    private List<BassettImage> doGet(final String sqlKey, final List<String> params) {
         return doGet(sqlKey, params, false);
     }
 
-    private List<BassettEresource> doGet(final String sqlKey, final Collection<String> params, final boolean withLegend) {
+    private List<BassettImage> doGet(final String sqlKey, final List<String> params, final boolean withLegend) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<BassettEresource> result = null;
+        List<BassettImage> result = null;
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.prepareStatement(this.sqlStatements.getProperty(sqlKey));
@@ -141,20 +140,20 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private Collection<BassettEresource> doGetSearch(final String sqlKey, final Collection<String> params,
+    private List<BassettImage> doGetSearch(final String sqlKey, final List<String> params,
             final String query) {
-        List<BassettEresource> result = doGet(sqlKey, params);
-        List<BassettEresource> titleMatches = new LinkedList<BassettEresource>();
+        List<BassettImage> result = doGet(sqlKey, params);
+        List<BassettImage> titleMatches = new LinkedList<BassettImage>();
         int i = 0;
-        for (ListIterator<BassettEresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
-            BassettEresource eresource = it.next();
+        for (ListIterator<BassettImage> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
+            BassettImage eresource = it.next();
             if (query.equalsIgnoreCase(eresource.getTitle())) {
                 titleMatches.add(eresource);
                 it.remove();
             }
         }
         i = 0;
-        for (BassettEresource eresource : titleMatches) {
+        for (BassettImage eresource : titleMatches) {
             result.add(i++, eresource);
         }
         return result;
@@ -175,9 +174,9 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private List<BassettEresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
-        List<BassettEresource> eresources = new LinkedList<BassettEresource>();
-        BassettEresource eresource = null;
+    private List<BassettImage> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
+        List<BassettImage> eresources = new LinkedList<BassettImage>();
+        BassettImage eresource = null;
         int currentEresourceId = -1;
         String currentTitle = null;
         while (rs.next()) {
@@ -186,7 +185,7 @@ public class BassettCollectionManager {
             if (rowEresourceId != currentEresourceId) {
                 currentTitle = rowTitle;
                 String description = fullResult ? rs.getString("BASSETT_DESCRIPTION") : null;
-                eresource = new BassettEresource(description, currentTitle);
+                eresource = new BassettImage(description, currentTitle);
                 eresource.setImage(rs.getString("IMAGE"));
                 eresource.setLatinLegend(rs.getString("LATIN_LEGEND"));
                 eresource.setBassettNumber(rs.getString("BASSETT_NUMBER"));
