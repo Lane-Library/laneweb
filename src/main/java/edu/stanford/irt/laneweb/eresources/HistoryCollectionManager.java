@@ -17,7 +17,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
     }
 
     @Override
-    public Collection<Eresource> search(final String query) {
+    public List<Eresource> search(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -28,7 +28,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
     }
 
     @Override
-    public Collection<Eresource> searchType(final String type, final String query) {
+    public List<Eresource> searchType(final String type, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();

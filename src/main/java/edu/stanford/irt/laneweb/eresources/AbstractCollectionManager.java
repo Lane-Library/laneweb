@@ -48,13 +48,13 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         this.sqlStatements = sqlStatements;
     }
 
-    public Collection<Eresource> getCore(final String type) {
+    public List<Eresource> getCore(final String type) {
         Collection<String> params = new LinkedList<String>();
         params.add(type);
         return doGet(BROWSE_CORE, params, null);
     }
 
-    public Collection<Eresource> getMesh(final String type, final String mesh) {
+    public List<Eresource> getMesh(final String type, final String mesh) {
         Collection<String> params = new LinkedList<String>();
         params.add(mesh);
         params.add(type);
@@ -62,17 +62,17 @@ public abstract class AbstractCollectionManager implements CollectionManager {
     }
 
     // TODO: remove these when upgrading to eresources-1.8
-    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
+    public List<Eresource> getMeshCore(final String type, final String mesh) {
         throw new UnsupportedOperationException();
     }
 
-    public Collection<Eresource> getSubset(final String subset) {
+    public List<Eresource> getSubset(final String subset) {
         Collection<String> params = new LinkedList<String>();
         params.add(subset);
         return doGet(BROWSE_SUBSET, params, null);
     }
 
-    public Collection<Eresource> getType(final String type) {
+    public List<Eresource> getType(final String type) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
@@ -81,7 +81,7 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         return doGet(BROWSE, params, null);
     }
 
-    public Collection<Eresource> getType(final String type, final char alpha) {
+    public List<Eresource> getType(final String type, final char alpha) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
@@ -99,7 +99,7 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         return doGet(sql, params, null);
     }
 
-    public Collection<Eresource> search(final String query) {
+    public List<Eresource> search(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -147,11 +147,11 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         }
     }
 
-    public Collection<Eresource> searchSubset(final String subset, final String query) {
+    public List<Eresource> searchSubset(final String subset, final String query) {
         throw new UnsupportedOperationException();
     }
 
-    public Collection<Eresource> searchType(final String type, final String query) {
+    public List<Eresource> searchType(final String type, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();

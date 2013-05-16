@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.suggest;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
-
-import java.util.Collection;
-import java.util.LinkedList;
 
 public class EresourceSuggestionManager implements SuggestionManager {
 
