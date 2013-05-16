@@ -77,6 +77,7 @@ public class MetaSearchController {
      * @param ticket
      *            the Ticket
      */
+    @SuppressWarnings("unchecked")
     private void createProxyLinks(final Map<String, Object> resultMap, final String baseProxyURL) {
         StringBuilder sb = new StringBuilder();
         Map<String, Object> resources = (Map<String, Object>) resultMap.get("resources");

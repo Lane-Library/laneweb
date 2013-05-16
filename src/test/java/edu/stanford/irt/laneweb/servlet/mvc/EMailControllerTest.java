@@ -37,6 +37,7 @@ public class EMailControllerTest {
 
     private Map<String, Object> map;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.headerBinder = createMock(RequestHeaderDataBinder.class);
