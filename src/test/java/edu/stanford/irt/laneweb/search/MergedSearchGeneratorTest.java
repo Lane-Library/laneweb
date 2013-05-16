@@ -60,7 +60,7 @@ public class MergedSearchGeneratorTest {
         List<SearchResult> list = new LinkedList<SearchResult>();
         list.add(this.result);
         expect(this.conversionStrategy.convertResult(null)).andReturn(list);
-        expect(this.collectionManager.search("query")).andReturn(Collections.singleton(this.eresource));
+        expect(this.collectionManager.search("query")).andReturn(Collections.singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
 //        expect(this.result.compareTo(this.result)).andReturn(0);
         expect(this.result.getScore()).andReturn(1);

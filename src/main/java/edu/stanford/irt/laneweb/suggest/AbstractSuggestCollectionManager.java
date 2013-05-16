@@ -19,13 +19,13 @@ public abstract class AbstractSuggestCollectionManager extends AbstractCollectio
     }
 
     @Override
-    public Collection<Eresource> search(final String query) {
+    public List<Eresource> search(final String query) {
         Collection<String> params = searchStringToParams(query);
         return doGet(SEARCH, params, query);
     }
 
     @Override
-    public Collection<Eresource> searchType(final String type, final String query) {
+    public List<Eresource> searchType(final String type, final String query) {
         Collection<String> params = searchStringToParams(query);
         params.add(type);
         return doGet(SEARCH_TYPE, params, query);
@@ -43,9 +43,7 @@ public abstract class AbstractSuggestCollectionManager extends AbstractCollectio
             if (rowEresourceId != currentEresourceId || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
                 currentEresourceId = rowEresourceId;
-                eresource = new Eresource();
-                eresource.setId(currentEresourceId);
-                eresource.setTitle(currentTitle);
+                eresource = new Eresource(null, currentEresourceId, 0, null, 0, currentTitle);
                 suggestions.add(eresource);
             }
         }

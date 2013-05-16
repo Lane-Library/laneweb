@@ -120,7 +120,7 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
 
         private static final Map<String, String> ATTRIBUTE_MAP = new HashMap<String, String>();
 
-        private static final String[] CHILD_ELEMENTS = new String[] { "generate" };
+        private static final String[] CHILD_ELEMENTS = new String[] { GENERATE };
         static {
             ATTRIBUTE_MAP.put("element", "element");
             ATTRIBUTE_MAP.put("namespace", "ns");
@@ -168,8 +168,8 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
 
         private static final Map<String, String> ATTRIBUTE_MAP = Collections.singletonMap("pattern", "pattern");
 
-        private static final String[] CHILD_ELEMENTS = new String[] { "aggregate", "generate", "match", "select",
-                "serialize", "transform" };
+        private static final String[] CHILD_ELEMENTS = new String[] { AGGREGATE, GENERATE, MATCH, SELECT, SERIALIZE,
+                TRANSFORM };
 
         @Override
         protected void doParse(final Element element, final ParserContext parserContext,
@@ -202,8 +202,8 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
 
         private static final Map<String, String> ATTRIBUTE_MAP = Collections.singletonMap(TYPE, TYPE);
 
-        private static final String[] CHILD_ELEMENTS = new String[] { "aggregate", "generate", "match", "select",
-                "serialize", "transform" };
+        private static final String[] CHILD_ELEMENTS = new String[] { AGGREGATE, GENERATE, MATCH, SELECT, SERIALIZE,
+                TRANSFORM };
 
         @Override
         protected Map<String, String> getAttributeMap() {
@@ -277,24 +277,13 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
 
         private static final Map<String, String> ATTRIBUTE_MAP = Collections.emptyMap();
 
-        private static final String[] CHILD_ELEMENTS = new String[] { "pipeline" };
+        private static final String[] CHILD_ELEMENTS = new String[] { PIPELINE };
 
         @Override
         protected void doParse(final Element element, final ParserContext parserContext,
                 final BeanDefinitionBuilder builder) {
             super.doParse(element, parserContext, builder);
             builder.getBeanDefinition().setConstructorArgumentValues(getConstructorArgumentValues());
-        }
-
-        private ConstructorArgumentValues getConstructorArgumentValues() {
-            ConstructorArgumentValues cav = new ConstructorArgumentValues();
-            ValueHolder fact = new ValueHolder(new RuntimeBeanReference(
-                    "edu.stanford.irt.cocoon.sitemap.ComponentFactory"));
-            ValueHolder resolver = new ValueHolder(
-                    new RuntimeBeanReference("edu.stanford.irt.cocoon.source.SourceResolver"));
-            cav.addGenericArgumentValue(resolver);
-            cav.addGenericArgumentValue(fact);
-            return cav;
         }
 
         @Override
@@ -324,6 +313,17 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
             String filename = parserContext.getReaderContext().getResource().getFilename();
             return "edu.stanford.irt.cocoon.sitemap.Sitemap/" + filename.substring(0, filename.indexOf('.'));
         }
+
+        private ConstructorArgumentValues getConstructorArgumentValues() {
+            ConstructorArgumentValues cav = new ConstructorArgumentValues();
+            ValueHolder fact = new ValueHolder(new RuntimeBeanReference(
+                    "edu.stanford.irt.cocoon.sitemap.ComponentFactory"));
+            ValueHolder resolver = new ValueHolder(new RuntimeBeanReference(
+                    "edu.stanford.irt.cocoon.source.SourceResolver"));
+            cav.addGenericArgumentValue(resolver);
+            cav.addGenericArgumentValue(fact);
+            return cav;
+        }
     }
 
     private static class TransformBeanDefinitionParser extends AbstractSitemapComponentBeanDefinitionParser {
@@ -334,15 +334,31 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
         }
     }
 
+    private static final String AGGREGATE = "aggregate";
+
+    private static final String GENERATE = "generate";
+
+    private static final String MATCH = "match";
+
+    private static final String PIPELINE = "pipeline";
+
+    private static final String SELECT = "select";
+
+    private static final String SERIALIZE = "serialize";
+
+    private static final String SITEMAP = "sitemap";
+
+    private static final String TRANSFORM = "transform";
+
     @Override
     public void init() {
-        registerBeanDefinitionParser("sitemap", new SitemapBeanDefinitionParser());
-        registerBeanDefinitionParser("pipeline", new PipelineBeanDefinitionParser());
-        registerBeanDefinitionParser("match", new MatchBeanDefinitionParser());
-        registerBeanDefinitionParser("select", new SelectBeanDefinitionParser());
-        registerBeanDefinitionParser("generate", new GenerateBeanDefinitionParser());
-        registerBeanDefinitionParser("transform", new TransformBeanDefinitionParser());
-        registerBeanDefinitionParser("serialize", new SerializeBeanDefinitionParser());
-        registerBeanDefinitionParser("aggregate", new AggregateBeanDefinitionParser());
+        registerBeanDefinitionParser(SITEMAP, new SitemapBeanDefinitionParser());
+        registerBeanDefinitionParser(PIPELINE, new PipelineBeanDefinitionParser());
+        registerBeanDefinitionParser(MATCH, new MatchBeanDefinitionParser());
+        registerBeanDefinitionParser(SELECT, new SelectBeanDefinitionParser());
+        registerBeanDefinitionParser(GENERATE, new GenerateBeanDefinitionParser());
+        registerBeanDefinitionParser(TRANSFORM, new TransformBeanDefinitionParser());
+        registerBeanDefinitionParser(SERIALIZE, new SerializeBeanDefinitionParser());
+        registerBeanDefinitionParser(AGGREGATE, new AggregateBeanDefinitionParser());
     }
 }

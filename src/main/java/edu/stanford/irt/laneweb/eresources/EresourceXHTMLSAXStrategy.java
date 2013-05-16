@@ -7,6 +7,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresource> {
+    
+    private static final String GET_PASSWORD = "Get Password";
 
     private static final String HVRTARG = "hvrTarg";
 
@@ -18,10 +20,10 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             for (Version version : eresource.getVersions()) {
                 for (Link link : version.getLinks()) {
                     if (!processedFirstLink) {
-                        processFirstLink(xmlConsumer, (Link) link, version, eresource.getTitle());
+                        processFirstLink(xmlConsumer, link);
                         processedFirstLink = true;
                     } else {
-                        createSecondaryLink(xmlConsumer, version, (Link) link);
+                        createSecondaryLink(xmlConsumer, link);
                     }
                 }
             }
@@ -52,88 +54,32 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         endDiv(xmlConsumer);
     }
 
-    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Version version, final Link link)
-            throws SAXException {
-        boolean impactFactor = LinkType.IMPACTFACTOR.equals(link.getType());
+    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
+        String linkText = link.getLinkText();
         startDiv(xmlConsumer);
-        StringBuilder sb = new StringBuilder();
-        if (impactFactor) {
-            sb.append("Impact Factor");
+        if (LinkType.IMPACTFACTOR.equals(link.getType())) {
+            createAnchor(xmlConsumer, link.getUrl(), linkText);
         } else {
-            String summaryHoldings = version.getSummaryHoldings();
-            if (summaryHoldings != null && version.getLinks().size() == 1) {
-                sb.append(summaryHoldings);
-                String dates = version.getDates();
-                if (dates != null) {
-                    sb.append(", ").append(dates);
-                }
-            } else {
-                String label = link.getLabel();
-                if (label != null) {
-                    sb.append(link.getLabel());
-                }
-            }
-            if (sb.length() == 0) {
-                sb.append(link.getUrl());
-            }
-            String description = version.getDescription();
-            if (description != null) {
-                sb.append(" ").append(description);
-            }
+            createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), linkText);
         }
-        if (!impactFactor) {
-            createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), sb.toString());
-        } else {
-            createAnchor(xmlConsumer, link.getUrl(), sb.toString());
-        }
-        sb.setLength(0);
-        if (link.getInstruction() != null) {
-            sb.append(" ").append(link.getInstruction());
-        }
-        if (version.getPublisher() != null) {
-            sb.append(" ").append(version.getPublisher());
-        }
-        if (sb.length() > 0) {
-            XMLUtils.data(xmlConsumer, sb.toString());
+        String text = link.getAdditionalText();
+        if (text.length() > 0) {
+            XMLUtils.data(xmlConsumer, text);
         }
         if (LinkType.GETPASSWORD.equals(link.getType())) {
             XMLUtils.data(xmlConsumer, " ");
-            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", "Get Password", "Get Password");
+            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);
     }
 
-    private void maybeAppend(final StringBuilder sb, final String string) {
-        if (string != null && string.length() > 0) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(string);
-        }
-    }
-
-    private void processFirstLink(final XMLConsumer xmlConsumer, final Link link, final Version firstVersion,
-            final String title) throws SAXException {
+    private void processFirstLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
         startDiv(xmlConsumer);
+        String title = link.getVersion().getEresource().getTitle();
         createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, title, title);
-        StringBuilder sb = new StringBuilder(" ");
-        String summaryHoldings = firstVersion.getSummaryHoldings();
-        if (summaryHoldings != null) {
-            sb.append(summaryHoldings);
-        }
-        maybeAppend(sb, firstVersion.getDates());
-        maybeAppend(sb, firstVersion.getPublisher());
-        maybeAppend(sb, firstVersion.getDescription());
-        if (sb.length() == 1 && link.getLabel() != null) {
-            sb.append(link.getLabel());
-        }
-        maybeAppend(sb, link.getInstruction());
-        if (sb.length() > 1) {
-            sb.append(" ");
-            XMLUtils.data(xmlConsumer, sb.toString());
-        }
+        XMLUtils.data(xmlConsumer, link.getPrimaryAdditionalText());
         if (LinkType.GETPASSWORD.equals(link.getType())) {
-            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", "Get Password", "Get Password");
+            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);
     }
