@@ -3,9 +3,7 @@ package edu.stanford.irt.laneweb.bassett;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.stanford.irt.laneweb.eresources.Eresource;
-
-public class BassettEresource extends Eresource {
+public class BassettEresource {
 
     private String bassettNumber;
 
@@ -21,6 +19,13 @@ public class BassettEresource extends Eresource {
 
     private List<String> regions = new ArrayList<String>();
 
+    private String title;
+
+    public BassettEresource(final String description, final String title) {
+        this.description = description;
+        this.title = title;
+    }
+
     public void addRegion(final String region) {
         this.regions.add(region);
     }
@@ -29,7 +34,6 @@ public class BassettEresource extends Eresource {
         return this.bassettNumber;
     }
 
-    @Override
     public String getDescription() {
         return this.description;
     }
@@ -54,13 +58,12 @@ public class BassettEresource extends Eresource {
         return this.regions;
     }
 
-    public void setBassettNumber(final String bassettNumber) {
-        this.bassettNumber = bassettNumber;
+    public String getTitle() {
+        return this.title;
     }
 
-    @Override
-    public void setDescription(final String description) {
-        this.description = description;
+    public void setBassettNumber(final String bassettNumber) {
+        this.bassettNumber = bassettNumber;
     }
 
     public void setDiagram(final String diagram) {
@@ -86,12 +89,9 @@ public class BassettEresource extends Eresource {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("bassettNumber=").append(this.bassettNumber)
-        .append(",Image=").append(this.image)
-        .append(",Diagram=").append(this.diagram)
-        .append(",LatinLegend=").append(this.latinLegend)
-        .append(",EngishLegend=").append(this.engishLegend)
-        .append(",regions=").append(this.regions);
+        sb.append("bassettNumber=").append(this.bassettNumber).append(",Image=").append(this.image).append(",Diagram=")
+                .append(this.diagram).append(",LatinLegend=").append(this.latinLegend).append(",EngishLegend=")
+                .append(this.engishLegend).append(",regions=").append(this.regions);
         return sb.toString();
     }
 }

@@ -15,7 +15,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import edu.stanford.irt.laneweb.eresources.QueryTranslator;
-import edu.stanford.irt.laneweb.eresources.Version;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class BassettCollectionManager {
@@ -142,7 +141,8 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private Collection<BassettEresource> doGetSearch(final String sqlKey, final Collection<String> params, final String query) {
+    private Collection<BassettEresource> doGetSearch(final String sqlKey, final Collection<String> params,
+            final String query) {
         List<BassettEresource> result = doGet(sqlKey, params);
         List<BassettEresource> titleMatches = new LinkedList<BassettEresource>();
         int i = 0;
@@ -178,7 +178,6 @@ public class BassettCollectionManager {
     private List<BassettEresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
         List<BassettEresource> eresources = new LinkedList<BassettEresource>();
         BassettEresource eresource = null;
-        Version version = null;
         int currentEresourceId = -1;
         String currentTitle = null;
         while (rs.next()) {
@@ -186,20 +185,16 @@ public class BassettCollectionManager {
             String rowTitle = rs.getString("TITLE");
             if (rowEresourceId != currentEresourceId) {
                 currentTitle = rowTitle;
-                eresource = new BassettEresource();
-                eresource.setId(rowEresourceId);
-                eresource.setTitle(currentTitle);
+                String description = fullResult ? rs.getString("BASSETT_DESCRIPTION") : null;
+                eresource = new BassettEresource(description, currentTitle);
                 eresource.setImage(rs.getString("IMAGE"));
                 eresource.setLatinLegend(rs.getString("LATIN_LEGEND"));
                 eresource.setBassettNumber(rs.getString("BASSETT_NUMBER"));
                 eresource.setDiagram(rs.getString("DIAGRAM"));
                 if (fullResult) {
                     eresource.setEngishLegend(rs.getString("ENGLISH_LEGEND"));
-                    eresource.setDescription(rs.getString("BASSETT_DESCRIPTION"));
                 }
                 currentEresourceId = rowEresourceId;
-                version = new Version(rs.getString("DATES"), rs.getString("VERSION_DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"));
-                eresource.addVersion(version);
                 eresources.add(eresource);
             }
             if (rs.getString("SUB_REGION") != null) {
