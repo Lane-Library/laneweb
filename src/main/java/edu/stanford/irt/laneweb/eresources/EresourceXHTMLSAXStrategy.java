@@ -55,48 +55,16 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
     }
 
     private void createSecondaryLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
-        Version version = link.getVersion();
-        boolean impactFactor = LinkType.IMPACTFACTOR.equals(link.getType());
+        String linkText = link.getLinkText();
         startDiv(xmlConsumer);
-        StringBuilder sb = new StringBuilder();
-        if (impactFactor) {
-            sb.append("Impact Factor");
+        if (LinkType.IMPACTFACTOR.equals(link.getType())) {
+            createAnchor(xmlConsumer, link.getUrl(), linkText);
         } else {
-            String summaryHoldings = version.getSummaryHoldings();
-            if (summaryHoldings != null && version.getLinks().size() == 1) {
-                sb.append(summaryHoldings);
-                String dates = version.getDates();
-                if (dates != null) {
-                    sb.append(", ").append(dates);
-                }
-            } else {
-                String label = link.getLabel();
-                if (label != null) {
-                    sb.append(link.getLabel());
-                }
-            }
-            if (sb.length() == 0) {
-                sb.append(link.getUrl());
-            }
-            String description = version.getDescription();
-            if (description != null) {
-                sb.append(" ").append(description);
-            }
+            createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), linkText);
         }
-        if (!impactFactor) {
-            createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), sb.toString());
-        } else {
-            createAnchor(xmlConsumer, link.getUrl(), sb.toString());
-        }
-        sb.setLength(0);
-        if (link.getInstruction() != null) {
-            sb.append(" ").append(link.getInstruction());
-        }
-        if (version.getPublisher() != null) {
-            sb.append(" ").append(version.getPublisher());
-        }
-        if (sb.length() > 0) {
-            XMLUtils.data(xmlConsumer, sb.toString());
+        String text = link.getAdditionalText();
+        if (text.length() > 0) {
+            XMLUtils.data(xmlConsumer, text);
         }
         if (LinkType.GETPASSWORD.equals(link.getType())) {
             XMLUtils.data(xmlConsumer, " ");
@@ -105,36 +73,11 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         endDiv(xmlConsumer);
     }
 
-    private void maybeAppend(final StringBuilder sb, final String string) {
-        if (string != null && string.length() > 0) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(string);
-        }
-    }
-
     private void processFirstLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
-        Version firstVersion = link.getVersion();
         startDiv(xmlConsumer);
         String title = link.getVersion().getEresource().getTitle();
         createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, title, title);
-        StringBuilder sb = new StringBuilder(" ");
-        String summaryHoldings = firstVersion.getSummaryHoldings();
-        if (summaryHoldings != null) {
-            sb.append(summaryHoldings);
-        }
-        maybeAppend(sb, firstVersion.getDates());
-        maybeAppend(sb, firstVersion.getPublisher());
-        maybeAppend(sb, firstVersion.getDescription());
-        if (sb.length() == 1 && link.getLabel() != null) {
-            sb.append(link.getLabel());
-        }
-        maybeAppend(sb, link.getInstruction());
-        if (sb.length() > 1) {
-            sb.append(" ");
-            XMLUtils.data(xmlConsumer, sb.toString());
-        }
+        XMLUtils.data(xmlConsumer, link.getPrimaryAdditionalText());
         if (LinkType.GETPASSWORD.equals(link.getType())) {
             createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }

@@ -12,8 +12,6 @@ public class Version {
 
     private Eresource eresource;
 
-    private String firstLinkText;
-
     private Collection<Link> links = new LinkedList<Link>();
 
     private String publisher;
@@ -39,8 +37,15 @@ public class Version {
         return this.eresource;
     }
 
-    public String getFirstLinkText() {
-        return this.firstLinkText;
+    public String getPrimaryAdditionalText() {
+        StringBuilder sb = new StringBuilder(" ");
+        if (this.summaryHoldings != null) {
+            sb.append(this.summaryHoldings);
+        }
+        maybeAppend(sb, this.dates);
+        maybeAppend(sb, this.publisher);
+        maybeAppend(sb, this.description);
+        return sb.toString();
     }
 
     public Collection<Link> getLinks() {
@@ -68,5 +73,14 @@ public class Version {
 
     void setEresource(final Eresource eresource) {
         this.eresource = eresource;
+    }
+
+    private void maybeAppend(final StringBuilder sb, final String string) {
+        if (string != null && string.length() > 0) {
+            if (sb.length() > 1) {
+                sb.append(", ");
+            }
+            sb.append(string);
+        }
     }
 }
