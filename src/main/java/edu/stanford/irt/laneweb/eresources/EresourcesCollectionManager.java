@@ -28,6 +28,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         int currentLinkId = -1;
         String currentTitle = null;
         boolean createGetPassword = false;
+        List<Link> links = null;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             int recordId = rs.getInt("RECORD_ID");
@@ -52,12 +53,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
                 createGetPassword = "T".equals(rs.getString("GETPASSWORD"));
-                version = new Version();
+                version = new Version(rs.getString("DATES"), rs.getString("V_DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"));
                 eresource.addVersion(version);
-                version.setPublisher(rs.getString("PUBLISHER"));
-                version.setSummaryHoldings(rs.getString("HOLDINGS"));
-                version.setDates(rs.getString("DATES"));
-                version.setDescription(rs.getString("V_DESCRIPTION"));
                 currentVersionId = rowVersionId;
                 currentLinkId = -1;
             }
@@ -74,7 +71,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 } else {
                     type = LinkType.NORMAL;
                 }
-                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL"), version));
+                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL")));
                 currentLinkId = rowLinkId;
             }
         }

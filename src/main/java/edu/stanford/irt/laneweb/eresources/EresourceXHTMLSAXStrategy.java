@@ -20,7 +20,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             for (Version version : eresource.getVersions()) {
                 for (Link link : version.getLinks()) {
                     if (!processedFirstLink) {
-                        processFirstLink(xmlConsumer, link, eresource.getTitle());
+                        processFirstLink(xmlConsumer, link);
                         processedFirstLink = true;
                     } else {
                         createSecondaryLink(xmlConsumer, link);
@@ -114,10 +114,11 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         }
     }
 
-    private void processFirstLink(final XMLConsumer xmlConsumer, final Link firstLink, final String title) throws SAXException {
-        Version firstVersion = firstLink.getVersion();
+    private void processFirstLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
+        Version firstVersion = link.getVersion();
         startDiv(xmlConsumer);
-        createAnchorWithClassAndTitle(xmlConsumer, firstLink.getUrl(), PRIMARY_LINK, title, title);
+        String title = link.getVersion().getEresource().getTitle();
+        createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, title, title);
         StringBuilder sb = new StringBuilder(" ");
         String summaryHoldings = firstVersion.getSummaryHoldings();
         if (summaryHoldings != null) {
@@ -126,15 +127,15 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         maybeAppend(sb, firstVersion.getDates());
         maybeAppend(sb, firstVersion.getPublisher());
         maybeAppend(sb, firstVersion.getDescription());
-        if (sb.length() == 1 && firstLink.getLabel() != null) {
-            sb.append(firstLink.getLabel());
+        if (sb.length() == 1 && link.getLabel() != null) {
+            sb.append(link.getLabel());
         }
-        maybeAppend(sb, firstLink.getInstruction());
+        maybeAppend(sb, link.getInstruction());
         if (sb.length() > 1) {
             sb.append(" ");
             XMLUtils.data(xmlConsumer, sb.toString());
         }
-        if (LinkType.GETPASSWORD.equals(firstLink.getType())) {
+        if (LinkType.GETPASSWORD.equals(link.getType())) {
             createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);

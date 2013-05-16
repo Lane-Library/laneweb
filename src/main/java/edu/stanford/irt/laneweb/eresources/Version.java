@@ -10,19 +10,21 @@ public class Version {
 
     private String description;
 
+    private Eresource eresource;
+
     private String firstLinkText;
 
-    private Collection<Link> links;
+    private Collection<Link> links = new LinkedList<Link>();
 
     private String publisher;
 
     private String summaryHoldings;
 
-    public void addLink(final Link link) {
-        if (null == this.links) {
-            this.links = new LinkedList<Link>();
-        }
-        this.links.add(link);
+    public Version(final String dates, final String description, final String publisher, final String summaryHoldings) {
+        this.dates = dates;
+        this.description = description;
+        this.publisher = publisher;
+        this.summaryHoldings = summaryHoldings;
     }
 
     public String getDates() {
@@ -33,14 +35,15 @@ public class Version {
         return this.description;
     }
 
+    public Eresource getEresource() {
+        return this.eresource;
+    }
+
     public String getFirstLinkText() {
         return this.firstLinkText;
     }
 
     public Collection<Link> getLinks() {
-        if (null == this.links) {
-            return Collections.emptySet();
-        }
         return Collections.unmodifiableCollection(this.links);
     }
 
@@ -52,29 +55,18 @@ public class Version {
         return this.summaryHoldings;
     }
 
-    public void setDates(final String dates) {
-        this.dates = dates;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    public void setFirstLinkText(final String firstLinkText) {
-        this.firstLinkText = firstLinkText;
-    }
-
-    public void setPublisher(final String publisher) {
-        this.publisher = publisher;
-    }
-
-    public void setSummaryHoldings(final String summaryHoldings) {
-        this.summaryHoldings = summaryHoldings;
-    }
-
     @Override
     public String toString() {
         return new StringBuilder("publisher:").append(this.publisher).append(" holdings:").append(this.summaryHoldings)
                 .append(" links:").append(this.links).toString();
+    }
+
+    void addLink(final Link link) {
+        link.setVersion(this);
+        this.links.add(link);
+    }
+
+    void setEresource(final Eresource eresource) {
+        this.eresource = eresource;
     }
 }

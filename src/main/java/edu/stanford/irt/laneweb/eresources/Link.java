@@ -16,13 +16,11 @@ public class Link {
 
     private Version version;
 
-    public Link(final String instruction, final String label, final LinkType type, final String url,
-            final Version version) {
+    public Link(final String instruction, final String label, final LinkType type, final String url) {
         this.instruction = instruction;
         this.label = label;
         this.type = type;
         this.url = url;
-        this.version = version;
     }
 
     public String getAdditionalText() {
@@ -61,5 +59,9 @@ public class Link {
     @Override
     public String toString() {
         return new StringBuilder("url:").append(this.url).toString();
+    }
+
+    void setVersion(final Version version) {
+        this.version = version;
     }
 }

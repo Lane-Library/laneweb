@@ -198,12 +198,8 @@ public class BassettCollectionManager {
                     eresource.setDescription(rs.getString("BASSETT_DESCRIPTION"));
                 }
                 currentEresourceId = rowEresourceId;
-                version = new Version();
+                version = new Version(rs.getString("DATES"), rs.getString("VERSION_DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"));
                 eresource.addVersion(version);
-                version.setPublisher(rs.getString("PUBLISHER"));
-                version.setSummaryHoldings(rs.getString("HOLDINGS"));
-                version.setDates(rs.getString("DATES"));
-                version.setDescription(rs.getString("VERSION_DESCRIPTION"));
                 eresources.add(eresource);
             }
             if (rs.getString("SUB_REGION") != null) {
