@@ -7,6 +7,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresource> {
+    
+    private static final String GET_PASSWORD = "Get Password";
 
     private static final String HVRTARG = "hvrTarg";
 
@@ -98,7 +100,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         }
         if (LinkType.GETPASSWORD.equals(link.getType())) {
             XMLUtils.data(xmlConsumer, " ");
-            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", "Get Password", "Get Password");
+            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);
     }
@@ -133,7 +135,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             XMLUtils.data(xmlConsumer, sb.toString());
         }
         if (LinkType.GETPASSWORD.equals(link.getType())) {
-            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", "Get Password", "Get Password");
+            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);
     }

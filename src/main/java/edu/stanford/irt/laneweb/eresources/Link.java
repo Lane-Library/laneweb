@@ -20,16 +20,6 @@ public class Link {
     private String additionalText;
 
     private String text;
-
-    // private int seqnum;
-    //	
-    // public int getSeqnum() {
-    // return this.seqnum;
-    // }
-    //	
-    // public void setSeqnum(int seqnum) {
-    // this.seqnum = seqnum;
-    // }
     /*
      * (non-Javadoc)
      * @see edu.stanford.irt.eresources.impl.Link#getInstruction()
