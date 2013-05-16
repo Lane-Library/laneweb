@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>2.1.10-SNAPSHOT</version>
+    <version>2.1.12-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/maven/projects/laneweb/</url>
     <inceptionYear>2002</inceptionYear>
@@ -489,7 +489,7 @@
         <dependency>
             <artifactId>commons-codec</artifactId>
             <groupId>commons-codec</groupId>
-            <version>1.7</version>
+            <version>1.8</version>
         </dependency>
         <dependency>
             <artifactId>commons-lang</artifactId>
@@ -507,11 +507,6 @@
             <artifactId>ehcache-core</artifactId>
             <groupId>net.sf.ehcache</groupId>
             <version>2.6.5</version>
-        </dependency>
-        <dependency>
-            <artifactId>eresources-impl</artifactId>
-            <groupId>edu.stanford.irt</groupId>
-            <version>1.6.0</version>
         </dependency>
         <dependency>
             <artifactId>jackson-mapper-asl</artifactId>
@@ -601,13 +596,13 @@
         <dependency>
             <artifactId>slf4j-api</artifactId>
             <groupId>org.slf4j</groupId>
-            <version>1.7.2</version>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
             <artifactId>slf4j-log4j12</artifactId>
             <groupId>org.slf4j</groupId>
             <scope>runtime</scope>
-            <version>1.7.2</version>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
             <artifactId>spellcheck-core</artifactId>
@@ -696,6 +691,12 @@
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
             <version>1.0.11</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>eresources-api</artifactId>
+            		<groupId>edu.stanford.irt</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>trends-tracker</artifactId>
@@ -729,7 +730,7 @@
         <dependency>
         	<groupId>org.slf4j</groupId>
         	<artifactId>jcl-over-slf4j</artifactId>
-        	<version>1.7.2</version>
+        	<version>1.7.5</version>
         </dependency>
         <dependency>
         	<groupId>javax.mail</groupId>

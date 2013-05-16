@@ -7,6 +7,22 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-05-13" version="2.1.11" description="2.1.11 bug fix release">
+            <action date="2013-05-13" dev="alainb" issue="85269" type="fix">
+                looping behavior when extending persistent login
+            </action>
+        </release>
+        <release date="2013-05-13" version="2.1.10" description="2.1.10 bug fix release [not deployed]">
+            <action date="2013-05-07" dev="ryanmax" issue="85058" type="fix">
+                requests for FindIt@Lane suggestions are timing out 
+            </action>
+            <action date="2013-05-06" dev="ceyates" issue="84987" type="fix">
+                href attributes empty when transforming xincluded rss content 
+            </action>
+            <action date="2013-05-06" dev="olgary" issue="84985" type="update">
+                update miscellaneous.css
+            </action>
+        </release>
         <release date="2013-05-09" version="2.1.9" description="2.1.9 emergency release">
             <action date="2013-05-09" dev="alainb" issue="85089" type="fix">
                 Page Not Found: /secure/undefined/index.html

@@ -18,7 +18,6 @@ import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.eresources.Eresource;
 
 public class AbstractCollectionManagerTest {
 

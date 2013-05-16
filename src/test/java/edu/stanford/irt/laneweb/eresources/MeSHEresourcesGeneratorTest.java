@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class MeSHEresourcesGeneratorTest {

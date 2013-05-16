@@ -156,9 +156,9 @@
         class="org.springframework.oxm.xstream.XStreamMarshaller">
         <property name="aliases">
             <map>
-                <!--<entry key="eresource" value="edu.stanford.irt.eresources.impl.EresourceImpl"/>
+                <!--<entry key="eresource" value="edu.stanford.irt.eresources.EresourceImpl"/>
                 <entry key="seresource" value="edu.stanford.irt.eresources.impl.SearchEresourceImpl"/>
-                <entry key="link" value="edu.stanford.irt.eresources.impl.LinkImpl"/>
+                <entry key="link" value="edu.stanford.irt.eresources.LinkImpl"/>
                 <entry key="paging" value="edu.stanford.irt.laneweb.eresources.PagingData"/>
                 <entry key="region" value="edu.stanford.irt.laneweb.bassett.RegionCount"/>
                 <entry key="bassett" value="edu.stanford.irt.laneweb.bassett.BassettImage"/>
