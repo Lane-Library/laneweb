@@ -14,6 +14,17 @@ public class Link {
 
     private String url;
 
+    private Version version;
+
+    public Link(final String instruction, final String label, final LinkType type, final String url,
+            final Version version) {
+        this.instruction = instruction;
+        this.label = label;
+        this.type = type;
+        this.url = url;
+        this.version = version;
+    }
+
     public String getAdditionalText() {
         return this.additionalText;
     }
@@ -43,34 +54,8 @@ public class Link {
         return this.url;
     }
 
-    public void setAdditionalText(final String text) {
-        this.additionalText = text;
-    }
-
-    public void setInstruction(final String instruction) {
-        this.instruction = instruction;
-    }
-
-    public void setLabel(final String label) {
-        this.label = label;
-    }
-
-    public void setText(final String text) {
-        this.text = text;
-    }
-
-    /**
-     * set the LinkType
-     * 
-     * @param type
-     *            the LinkType
-     */
-    public void setType(final LinkType type) {
-        this.type = type;
-    }
-
-    public void setUrl(final String url) {
-        this.url = url;
+    public Version getVersion() {
+        return this.version;
     }
 
     @Override

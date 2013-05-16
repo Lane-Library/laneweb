@@ -20,10 +20,10 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             for (Version version : eresource.getVersions()) {
                 for (Link link : version.getLinks()) {
                     if (!processedFirstLink) {
-                        processFirstLink(xmlConsumer, (Link) link, version, eresource.getTitle());
+                        processFirstLink(xmlConsumer, link, eresource.getTitle());
                         processedFirstLink = true;
                     } else {
-                        createSecondaryLink(xmlConsumer, version, (Link) link);
+                        createSecondaryLink(xmlConsumer, link);
                     }
                 }
             }
@@ -54,8 +54,8 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         endDiv(xmlConsumer);
     }
 
-    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Version version, final Link link)
-            throws SAXException {
+    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
+        Version version = link.getVersion();
         boolean impactFactor = LinkType.IMPACTFACTOR.equals(link.getType());
         startDiv(xmlConsumer);
         StringBuilder sb = new StringBuilder();
@@ -114,10 +114,10 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         }
     }
 
-    private void processFirstLink(final XMLConsumer xmlConsumer, final Link link, final Version firstVersion,
-            final String title) throws SAXException {
+    private void processFirstLink(final XMLConsumer xmlConsumer, final Link firstLink, final String title) throws SAXException {
+        Version firstVersion = firstLink.getVersion();
         startDiv(xmlConsumer);
-        createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, title, title);
+        createAnchorWithClassAndTitle(xmlConsumer, firstLink.getUrl(), PRIMARY_LINK, title, title);
         StringBuilder sb = new StringBuilder(" ");
         String summaryHoldings = firstVersion.getSummaryHoldings();
         if (summaryHoldings != null) {
@@ -126,15 +126,15 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         maybeAppend(sb, firstVersion.getDates());
         maybeAppend(sb, firstVersion.getPublisher());
         maybeAppend(sb, firstVersion.getDescription());
-        if (sb.length() == 1 && link.getLabel() != null) {
-            sb.append(link.getLabel());
+        if (sb.length() == 1 && firstLink.getLabel() != null) {
+            sb.append(firstLink.getLabel());
         }
-        maybeAppend(sb, link.getInstruction());
+        maybeAppend(sb, firstLink.getInstruction());
         if (sb.length() > 1) {
             sb.append(" ");
             XMLUtils.data(xmlConsumer, sb.toString());
         }
-        if (LinkType.GETPASSWORD.equals(link.getType())) {
+        if (LinkType.GETPASSWORD.equals(firstLink.getType())) {
             createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);

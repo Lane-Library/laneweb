@@ -74,12 +74,8 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             }
             int rowLinkId = rs.getInt("LINK_ID");
             if (rowLinkId != currentLinkId) {
-                link = new Link();
-                link.setType(LinkType.NORMAL);
+                link = new Link(rs.getString("INSTRUCTION"), rs.getString("LABEL"), LinkType.NORMAL, rs.getString("URL"), version);
                 version.addLink(link);
-                link.setUrl(rs.getString("URL"));
-                link.setLabel(rs.getString("LABEL"));
-                link.setInstruction(rs.getString("INSTRUCTION"));
                 currentLinkId = rowLinkId;
             }
         }

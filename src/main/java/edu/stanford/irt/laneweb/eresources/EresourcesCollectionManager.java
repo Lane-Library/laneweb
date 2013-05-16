@@ -23,7 +23,6 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;
-        Link link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
@@ -75,12 +74,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 } else {
                     type = LinkType.NORMAL;
                 }
-                link = new Link();
-                link.setType(type);
-                link.setUrl(rs.getString("URL"));
-                link.setLabel(label);
-                link.setInstruction(rs.getString("INSTRUCTION"));
-                version.addLink(link);
+                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL"), version));
                 currentLinkId = rowLinkId;
             }
         }
