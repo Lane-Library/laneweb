@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 /**
  * @author alainb
  */
-public class BassettAccordionEresourcesGenerator extends AbstractGenerator implements ModelAware {
+public class BassettAccordionGenerator extends AbstractGenerator implements ModelAware {
 
     private static final String[][] TOTALS = { { "Abdomen", "140" }, { "Abdomen--Adrenal Gland", "29" },
             { "Abdomen--Bones Cartilage Joints", "4" }, { "Abdomen--Central Nervous System", "2" },
@@ -99,7 +99,7 @@ public class BassettAccordionEresourcesGenerator extends AbstractGenerator imple
 
     private SAXStrategy<Map<String, Integer>> saxStrategy;
 
-    public BassettAccordionEresourcesGenerator(final BassettCollectionManager collectionManager,
+    public BassettAccordionGenerator(final BassettCollectionManager collectionManager,
             final SAXStrategy<Map<String, Integer>> saxStrategy) {
         this.collectionManager = collectionManager;
         this.saxStrategy = saxStrategy;

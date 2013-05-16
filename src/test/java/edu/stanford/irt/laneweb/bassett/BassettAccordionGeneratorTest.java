@@ -17,11 +17,11 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 
-public class BassettAccordionEresourcesGeneratorTest {
+public class BassettAccordionGeneratorTest {
 
     private BassettCollectionManager collectionManager;
 
-    private BassettAccordionEresourcesGenerator generator;
+    private BassettAccordionGenerator generator;
 
     private SAXStrategy<Map<String, Integer>> saxStrategy;
 
@@ -32,7 +32,7 @@ public class BassettAccordionEresourcesGeneratorTest {
     public void setUp() throws Exception {
         this.collectionManager = createMock(BassettCollectionManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new BassettAccordionEresourcesGenerator(this.collectionManager, this.saxStrategy);
+        this.generator = new BassettAccordionGenerator(this.collectionManager, this.saxStrategy);
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
 

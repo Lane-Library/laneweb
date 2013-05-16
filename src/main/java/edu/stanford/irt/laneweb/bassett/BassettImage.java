@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.bassett;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BassettEresource {
+public class BassettImage {
 
     private String bassettNumber;
 
@@ -21,7 +21,7 @@ public class BassettEresource {
 
     private String title;
 
-    public BassettEresource(final String description, final String title) {
+    public BassettImage(final String description, final String title) {
         this.description = description;
         this.title = title;
     }
