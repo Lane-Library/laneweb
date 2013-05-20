@@ -73,8 +73,9 @@ public class Link {
         }
         if (this.instruction != null) {
             if (sb.length() > 1) {
-                sb.append(", ").append(this.instruction);
+                sb.append(", ");
             }
+            sb.append(this.instruction);
         }
         if (sb.length() > 1) {
             sb.append(" ");
