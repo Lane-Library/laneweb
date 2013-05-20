@@ -129,7 +129,8 @@
 
 		// Click on YES --
 		yesButton.once('click',function(event) {
-		//	createGoHttpsIE();
+		    //  createGoHttpsIE();
+		    event.stopPropagation(); // don't allow event to bubble up to main click handler (line ~41) 
 			setLink(event); // cookie set in the PerssitentLoginController class
 		});
 		
