@@ -138,6 +138,7 @@
 		if(noButton){
 			noButton.once('click',function(event) {
 				setLink(event);
+				event.stopPropagation(); // don't allow event to bubble up to main click handler (line ~41)
 				//if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
 				//otherwise it is set for the session only
 				if(dontAskCheckBox && dontAskCheckBox.get('checked')) {
