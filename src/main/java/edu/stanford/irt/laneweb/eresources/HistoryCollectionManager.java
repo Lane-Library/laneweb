@@ -53,11 +53,12 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             String recordType = rs.getString("RECORD_TYPE");
             if (rowEresourceId != currentEresourceId) {
                 eresource = new Eresource(null, rowEresourceId, recordId, recordType, 0, rs.getString("TITLE"));
+                eresources.add(eresource);
                 currentEresourceId = rowEresourceId;
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
-                version = new Version(rs.getString("DATES"), rs.getString("V_DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"));
+                version = new Version(rs.getString("DATES"), rs.getString("DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"));
                 eresource.addVersion(version);
                 currentVersionId = rowVersionId;
             }
