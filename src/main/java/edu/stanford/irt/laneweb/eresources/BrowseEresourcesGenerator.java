@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -56,10 +56,10 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     }
 
     @Override
-    protected Collection<Eresource> getEresourceList(final CollectionManager collectionManager) {
-        Collection<Eresource> list = null;
+    protected List<Eresource> getEresourceList(final CollectionManager collectionManager) {
+        List<Eresource> list = null;
         if (this.subset == null && this.type == null) {
-            list = Collections.emptySet();
+            list = Collections.emptyList();
         } else if (this.subset == null && ALL.equals(this.alpha)) {
             list = collectionManager.getType(this.type);
         } else if (this.subset == null) {

@@ -51,7 +51,7 @@ public class BassettCollectionManagerTest {
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
-        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(14);
+        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(10);
         expect(this.resultSet.next()).andReturn(false);
         this.resultSet.close();
         this.statement.close();
@@ -70,7 +70,7 @@ public class BassettCollectionManagerTest {
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
-        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(12);
+        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(8);
         expect(this.resultSet.next()).andReturn(false);
         this.resultSet.close();
         this.statement.close();
@@ -90,7 +90,7 @@ public class BassettCollectionManagerTest {
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
-        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(12);
+        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(8);
         expect(this.resultSet.next()).andReturn(false);
         this.resultSet.close();
         this.statement.close();
@@ -131,7 +131,7 @@ public class BassettCollectionManagerTest {
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
-        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(12);
+        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(8);
         expect(this.resultSet.next()).andReturn(false);
         this.resultSet.close();
         this.statement.close();

@@ -23,7 +23,6 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;
-        Link link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
@@ -36,15 +35,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             String rowTitle = rs.getString("TITLE");
             if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
-                eresource = new Eresource();
-                eresource.setId(rowEresourceId);
-                eresource.setRecordId(recordId);
-                eresource.setRecordType(recordType);
-                eresource.setTitle(currentTitle);
-                if (query != null) {
-                    eresource.setScore(this.scoreStrategy.computeScore(query, currentTitle, rs));
-                }
-                eresource.setDescription(rs.getString("E_DESCRIPTION"));
+                int score = query == null ? 0 : this.scoreStrategy.computeScore(query, currentTitle, rs);
+                eresource = new Eresource(rs.getString("E_DESCRIPTION"), rowEresourceId, recordId, recordType, score, currentTitle);
                 eresources.add(eresource);
                 currentEresourceId = rowEresourceId;
                 currentVersionId = -1;
@@ -53,12 +45,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
                 createGetPassword = "T".equals(rs.getString("GETPASSWORD"));
-                version = new Version();
+                version = new Version(rs.getString("DATES"), rs.getString("V_DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"));
                 eresource.addVersion(version);
-                version.setPublisher(rs.getString("PUBLISHER"));
-                version.setSummaryHoldings(rs.getString("HOLDINGS"));
-                version.setDates(rs.getString("DATES"));
-                version.setDescription(rs.getString("V_DESCRIPTION"));
                 currentVersionId = rowVersionId;
                 currentLinkId = -1;
             }
@@ -75,12 +63,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 } else {
                     type = LinkType.NORMAL;
                 }
-                link = new Link();
-                link.setType(type);
-                link.setUrl(rs.getString("URL"));
-                link.setLabel(label);
-                link.setInstruction(rs.getString("INSTRUCTION"));
-                version.addLink(link);
+                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL")));
                 currentLinkId = rowLinkId;
             }
         }

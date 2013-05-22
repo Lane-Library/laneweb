@@ -13,8 +13,6 @@ import java.net.URLDecoder;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.eresources.QueryTranslator;
-
 /**
  * @author ceyates
  */

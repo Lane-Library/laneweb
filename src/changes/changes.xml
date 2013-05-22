@@ -7,6 +7,25 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-05-22" version="2.1.13" description="2.1.13 emergency release">
+            <action date="2013-05-21" dev="ceyates" issue="85623" type="fix">
+                history search fails
+            </action>
+        </release>
+        <release date="2013-05-20" version="2.1.12" description="2.1.12 bug fix release">
+                <action date="2013-05-20" dev="ryanmax" issue="85533" type="fix">
+                    problem renewing persistent login
+                </action>
+            <action date="2013-05-16" dev="ceyates" issue="85363" type="update">
+                move eresource interfaces and implementations into laneweb
+            </action>
+            <action date="2013-05-15" dev="ceyates" issue="85357" type="add">
+                create a mapping package for serializing objects to json
+            </action>
+            <action date="2013-05-14" dev="ceyates" issue="85326" type="update">
+                reduce logging due to SocketExceptions
+            </action>
+        </release>
         <release date="2013-05-13" version="2.1.11" description="2.1.11 bug fix release">
             <action date="2013-05-13" dev="alainb" issue="85269" type="fix">
                 looping behavior when extending persistent login

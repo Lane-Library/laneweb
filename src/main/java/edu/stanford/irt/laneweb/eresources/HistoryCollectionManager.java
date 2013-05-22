@@ -17,7 +17,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
     }
 
     @Override
-    public Collection<Eresource> search(final String query) {
+    public List<Eresource> search(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -28,7 +28,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
     }
 
     @Override
-    public Collection<Eresource> searchType(final String type, final String query) {
+    public List<Eresource> searchType(final String type, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -44,7 +44,6 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;
-        Link link;
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
@@ -53,33 +52,19 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             int recordId = rs.getInt("RECORD_ID");
             String recordType = rs.getString("RECORD_TYPE");
             if (rowEresourceId != currentEresourceId) {
-                eresource = new Eresource();
-                eresource.setId(rowEresourceId);
-                eresource.setRecordId(recordId);
-                eresource.setRecordType(recordType);
-                String title = rs.getString("TITLE");
-                eresource.setTitle(title);
+                eresource = new Eresource(null, rowEresourceId, recordId, recordType, 0, rs.getString("TITLE"));
                 eresources.add(eresource);
                 currentEresourceId = rowEresourceId;
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
-                version = new Version();
+                version = new Version(rs.getString("DATES"), rs.getString("DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"));
                 eresource.addVersion(version);
-                version.setPublisher(rs.getString("PUBLISHER"));
-                version.setSummaryHoldings(rs.getString("HOLDINGS"));
-                version.setDates(rs.getString("DATES"));
-                version.setDescription(rs.getString("DESCRIPTION"));
                 currentVersionId = rowVersionId;
             }
             int rowLinkId = rs.getInt("LINK_ID");
             if (rowLinkId != currentLinkId) {
-                link = new Link();
-                link.setType(LinkType.NORMAL);
-                version.addLink(link);
-                link.setUrl(rs.getString("URL"));
-                link.setLabel(rs.getString("LABEL"));
-                link.setInstruction(rs.getString("INSTRUCTION"));
+                version.addLink(new Link(rs.getString("INSTRUCTION"), rs.getString("LABEL"), LinkType.NORMAL, rs.getString("URL")));
                 currentLinkId = rowLinkId;
             }
         }

@@ -1,97 +1,86 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.eresources;
 
-
-/**
- * @author ceyates
- */
 public class Link {
 
     private String instruction;
 
     private String label;
 
-    private String url;
-
     private LinkType type;
 
-    private String additionalText;
+    private String url;
 
-    private String text;
+    private Version version;
 
-    // private int seqnum;
-    //	
-    // public int getSeqnum() {
-    // return this.seqnum;
-    // }
-    //	
-    // public void setSeqnum(int seqnum) {
-    // this.seqnum = seqnum;
-    // }
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#getInstruction()
-     */
+    public Link(final String instruction, final String label, final LinkType type, final String url) {
+        this.instruction = instruction;
+        this.label = label;
+        this.type = type;
+        this.url = url;
+    }
+    
+    public String getLinkText() {
+        StringBuilder sb = new StringBuilder();
+        if (LinkType.IMPACTFACTOR.equals(this.type)) {
+            sb.append("Impact Factor");
+        } else {
+            String summaryHoldings = this.version.getSummaryHoldings();
+            if (summaryHoldings != null && this.version.getLinks().size() == 1) {
+                sb.append(summaryHoldings);
+                String dates = this.version.getDates();
+                if (dates != null) {
+                    sb.append(", ").append(dates);
+                }
+            } else {
+                if (this.label != null) {
+                    sb.append(this.label);
+                }
+            }
+            if (sb.length() == 0) {
+                sb.append(this.url);
+            }
+            String description = this.version.getDescription();
+            if (description != null) {
+                sb.append(" ").append(description);
+            }
+        }
+        return sb.toString();
+    }
+
+    public String getAdditionalText() {
+        StringBuilder sb = new StringBuilder();
+        if (this.instruction != null) {
+            sb.append(" ").append(this.instruction);
+        }
+        if (this.version.getPublisher() != null) {
+            sb.append(" ").append(this.version.getPublisher());
+        }
+        return sb.toString();
+    }
+
     public String getInstruction() {
         return this.instruction;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#getLabel()
-     */
     public String getLabel() {
         return this.label;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#getUrl()
-     */
-    public String getUrl() {
-        return this.url;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * edu.stanford.irt.eresources.impl.Link#setInstruction(java.lang.String)
-     */
-    public void setInstruction(final String instruction) {
-        this.instruction = instruction;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#setLabel(java.lang.String)
-     */
-    public void setLabel(final String label) {
-        this.label = label;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.eresources.impl.Link#setUrl(java.lang.String)
-     */
-    public void setUrl(final String url) {
-        this.url = url;
-    }
-
-    @Override
-    public String toString() {
-        return new StringBuilder("url:").append(this.url).toString();
-    }
-
-    /**
-     * set the LinkType
-     * 
-     * @param type
-     *            the LinkType
-     */
-    public void setType(final LinkType type) {
-        this.type = type;
+    public String getPrimaryAdditionalText() {
+        StringBuilder sb = new StringBuilder(this.version.getPrimaryAdditionalText());
+        if (sb.length() == 1 && this.label != null) {
+            sb.append(this.label);
+        }
+        if (this.instruction != null) {
+            if (sb.length() > 1) {
+                sb.append(", ");
+            }
+            sb.append(this.instruction);
+        }
+        if (sb.length() > 1) {
+            sb.append(" ");
+        }
+        return sb.toString();
     }
 
     /**
@@ -103,19 +92,20 @@ public class Link {
         return this.type;
     }
 
-    public String getAdditionalText() {
-        return this.additionalText;
+    public String getUrl() {
+        return this.url;
     }
 
-    public void setAdditionalText(String text) {
-        this.additionalText = text;
+    public Version getVersion() {
+        return this.version;
     }
 
-    public String getText() {
-        return this.text;
+    @Override
+    public String toString() {
+        return new StringBuilder("url:").append(this.url).toString();
     }
 
-    public void setText(String text) {
-        this.text = text;
+    void setVersion(final Version version) {
+        this.version = version;
     }
 }

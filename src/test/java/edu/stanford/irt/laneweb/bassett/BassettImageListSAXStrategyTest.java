@@ -8,8 +8,8 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,21 +18,21 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
-public class BassettListSAXStrategyTest {
+public class BassettImageListSAXStrategyTest {
 
-    private Collection<BassettEresource> collection;
+    private List<BassettImage> collection;
 
-    private BassettEresource image;
+    private BassettImage image;
 
-    private BassettListSAXStrategy strategy;
+    private BassettImageListSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.image = createMock(BassettEresource.class);
+        this.image = createMock(BassettImage.class);
         this.collection = Collections.singletonList(this.image);
-        this.strategy = new BassettListSAXStrategy();
+        this.strategy = new BassettImageListSAXStrategy();
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
 

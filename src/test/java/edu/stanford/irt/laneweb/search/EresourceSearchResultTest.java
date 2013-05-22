@@ -11,9 +11,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
 
-/**
- * @author ryanmax
- */
 public class EresourceSearchResultTest {
 
     private Eresource eresource1;
@@ -30,12 +27,9 @@ public class EresourceSearchResultTest {
 
     @Before
     public void setUp() {
-        this.eresource1 = new Eresource();
-        this.eresource1.setRecordId(1);
-        this.eresource2 = new Eresource();
-        this.eresource2.setRecordId(2);
-        this.eresource3 = new Eresource();
-        this.eresource3.setRecordId(3);
+        this.eresource1 = createMock(Eresource.class);
+        this.eresource2 = createMock(Eresource.class);
+        this.eresource3 = createMock(Eresource.class);
     }
 
     /**
@@ -45,14 +39,18 @@ public class EresourceSearchResultTest {
      */
     @Test
     public void testCompareToCase() {
-        this.eresource1.setTitle("foo");
-        this.eresource1.setScore(99);
+        expect(this.eresource1.getTitle()).andReturn("foo").times(1);
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource1.getRecordId()).andReturn(1).times(2);
+        expect(this.eresource2.getTitle()).andReturn("FOO").times(1);
+        expect(this.eresource2.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getRecordId()).andReturn(2).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("FOO");
-        this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) < 0);
+        verify(this.eresource1, this.eresource2);
     }
 
     /**
@@ -62,26 +60,39 @@ public class EresourceSearchResultTest {
      */
     @Test
     public void testCompareToEqual() {
-        this.eresource1.setTitle("foo");
-        this.eresource1.setScore(99);
+        expect(this.eresource1.getTitle()).andReturn("foo");
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource1.getRecordId()).andReturn(1).times(2);
+        expect(this.eresource2.getTitle()).andReturn("The Foo");
+        expect(this.eresource2.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getRecordId()).andReturn(2).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("The Foo");
-        this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) < 0);
-        this.eresource1.setTitle("a foo");
-        this.eresource1.setScore(0);
+        verify(this.eresource1, this.eresource2);
+    }
+    
+    @Test
+    public void anotherTestCompareToEqual() {
+        expect(this.eresource1.getTitle()).andReturn("a foo");
+        expect(this.eresource1.getScore()).andReturn(0).times(2);
+        expect(this.eresource1.getRecordId()).andReturn(1).times(2);
+        expect(this.eresource2.getTitle()).andReturn("Foo");
+        expect(this.eresource2.getScore()).andReturn(0).times(2);
+        expect(this.eresource2.getRecordId()).andReturn(2).times(2);
+        expect(this.eresource3.getTitle()).andReturn("the foo");
+        expect(this.eresource3.getScore()).andReturn(0).times(2);
+        expect(this.eresource3.getRecordId()).andReturn(3).times(2);
+        replay(this.eresource1, this.eresource2, this.eresource3);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("Foo");
-        this.eresource2.setScore(0);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
-        this.eresource3.setTitle("the foo");
-        this.eresource3.setScore(0);
         this.eresourceSearchResult3 = new EresourceSearchResult(this.eresource3);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult3) > 0);
         assertTrue(this.eresourceSearchResult3.compareTo(this.eresourceSearchResult1) < 0);
+        verify(this.eresource1, this.eresource2, this.eresource3);
     }
 
     /**
@@ -91,18 +102,20 @@ public class EresourceSearchResultTest {
      */
     @Test
     public void testCompareToIntransitive() {
-        this.eresource1.setTitle("the bar");
-        this.eresource1.setScore(99);
+        expect(this.eresource1.getTitle()).andReturn("the bar");
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getTitle()).andReturn("a bar");
+        expect(this.eresource2.getScore()).andReturn(100).times(2);
+        expect(this.eresource3.getTitle()).andReturn("a bar");
+        expect(this.eresource3.getScore()).andReturn(101).times(2);
+        replay(this.eresource1, this.eresource2, this.eresource3);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("a bar");
-        this.eresource2.setScore(100);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
-        this.eresource3.setTitle("a bar");
-        this.eresource3.setScore(101);
         this.eresourceSearchResult3 = new EresourceSearchResult(this.eresource3);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult3) > 0);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult3) > 0);
+        verify(this.eresource1, this.eresource2, this.eresource3);
     }
 
     /**
@@ -112,30 +125,50 @@ public class EresourceSearchResultTest {
      */
     @Test
     public void testCompareToNonFiling() {
-        this.eresource1.setTitle("a foo");
-        this.eresource1.setScore(99);
+        expect(this.eresource1.getTitle()).andReturn("a foo");
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource1.getRecordId()).andReturn(1).times(2);
+        expect(this.eresource2.getTitle()).andReturn("foo");
+        expect(this.eresource2.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getRecordId()).andReturn(2).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("foo");
-        this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) < 0);
-        this.eresource1.setTitle("an foo");
-        this.eresource1.setScore(99);
+        verify(this.eresource1, this.eresource2);
+    }
+    
+    @Test
+    public void anotherCompareToNonFiling() {
+        expect(this.eresource1.getTitle()).andReturn("an foo");
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource1.getRecordId()).andReturn(1).times(2);
+        expect(this.eresource2.getTitle()).andReturn("foo");
+        expect(this.eresource2.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getRecordId()).andReturn(2).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("foo");
-        this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) < 0);
-        this.eresource1.setTitle("the foo");
-        this.eresource1.setScore(99);
+        verify(this.eresource1, this.eresource2);
+    }
+    
+    @Test
+    public void yetAnotherCompareToNonFiling() {
+        expect(this.eresource1.getTitle()).andReturn("the foo");
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource1.getRecordId()).andReturn(1).times(2);
+        expect(this.eresource2.getTitle()).andReturn("foo");
+        expect(this.eresource2.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getRecordId()).andReturn(2).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("foo");
-        this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) < 0);
+        verify(this.eresource1, this.eresource2);
     }
 
     /**
@@ -145,22 +178,32 @@ public class EresourceSearchResultTest {
      */
     @Test
     public void testCompareToScore() {
-        this.eresource1.setTitle("foo");
-        this.eresource1.setScore(99);
+        expect(this.eresource1.getTitle()).andReturn("foo");
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource1.getRecordId()).andReturn(1).times(2);
+        expect(this.eresource2.getTitle()).andReturn("foo");
+        expect(this.eresource2.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getRecordId()).andReturn(2).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("foo");
-        this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) < 0);
-        this.eresource1.setTitle("foo");
-        this.eresource1.setScore(100);
+        verify(this.eresource1, this.eresource2);
+    }
+    
+    @Test
+    public void anotherCompareToScore() {
+        expect(this.eresource1.getTitle()).andReturn("foo");
+        expect(this.eresource1.getScore()).andReturn(100).times(2);
+        expect(this.eresource2.getTitle()).andReturn("foo");
+        expect(this.eresource2.getScore()).andReturn(99).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("foo");
-        this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) < 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) > 0);
+        verify(this.eresource1, this.eresource2);
     }
 
     /**
@@ -170,59 +213,61 @@ public class EresourceSearchResultTest {
      */
     @Test
     public void testCompareToUnequal() {
-        this.eresource1.setTitle("bar");
-        this.eresource1.setScore(99);
+        expect(this.eresource1.getTitle()).andReturn("bar");
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getTitle()).andReturn("a bar");
+        expect(this.eresource2.getScore()).andReturn(100).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("a bar");
-        this.eresource2.setScore(100);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) < 0);
-        this.eresource1.setTitle("foo bar");
-        this.eresource1.setScore(99);
+        verify(this.eresource1, this.eresource2);
+    }
+    
+    @Test
+    public void anotherCompareToUnequal() {
+        expect(this.eresource1.getTitle()).andReturn("foo bar");
+        expect(this.eresource1.getScore()).andReturn(99).times(2);
+        expect(this.eresource2.getTitle()).andReturn("bar foo");
+        expect(this.eresource2.getScore()).andReturn(99).times(2);
+        replay(this.eresource1, this.eresource2);
         this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
-        this.eresource2.setTitle("bar foo");
-        this.eresource2.setScore(99);
         this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         assertTrue(this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2) > 0);
         assertTrue(this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1) < 0);
+        verify(this.eresource1, this.eresource2);
     }
     
     @Test
     public void testDemonstrateCase82529() {
-        Eresource eresourceA = createMock(Eresource.class);
-        Eresource eresourceB = createMock(Eresource.class);
-        expect(eresourceA.getTitle()).andReturn("Rheumatology");
-        expect(eresourceB.getTitle()).andReturn("Rheumatology");
-        expect(eresourceA.getScore()).andReturn(Integer.MAX_VALUE).times(2);
-        expect(eresourceA.getRecordId()).andReturn(1).times(2);
-        expect(eresourceB.getScore()).andReturn(Integer.MAX_VALUE).times(2);
-        expect(eresourceB.getRecordId()).andReturn(2).times(2);
-        replay(eresourceA, eresourceB);
-        this.eresourceSearchResult1 = new EresourceSearchResult(eresourceA);
-        this.eresourceSearchResult2 = new EresourceSearchResult(eresourceB);
+        expect(this.eresource1.getTitle()).andReturn("Rheumatology");
+        expect(this.eresource2.getTitle()).andReturn("Rheumatology");
+        expect(this.eresource1.getScore()).andReturn(Integer.MAX_VALUE).times(2);
+        expect(this.eresource1.getRecordId()).andReturn(1).times(2);
+        expect(this.eresource2.getScore()).andReturn(Integer.MAX_VALUE).times(2);
+        expect(this.eresource2.getRecordId()).andReturn(2).times(2);
+        replay(this.eresource1, this.eresource2);
+        this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
+        this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         int xcompareToy = this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2);
         int ycompareTox = this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1);
         assertTrue(xcompareToy > 0 && ycompareTox < 0);
-        verify(eresourceA, eresourceB);
+        verify(this.eresource1, this.eresource2);
     }
     
     @Test
     public void testAnotherDemonstrateCase82529() {
-        Eresource eresourceA = createMock(Eresource.class);
-        Eresource eresourceB = createMock(Eresource.class);
-        expect(eresourceA.getTitle()).andReturn("actarheumatologicascandinavica");
-        expect(eresourceB.getTitle()).andReturn("rheumatology");
-        expect(eresourceA.getScore()).andReturn(-1).times(2);
-        expect(eresourceB.getScore()).andReturn(Integer.MAX_VALUE).times(2);
-        replay(eresourceA, eresourceB);
-        this.eresourceSearchResult1 = new EresourceSearchResult(eresourceA);
-        this.eresourceSearchResult2 = new EresourceSearchResult(eresourceB);
+        expect(this.eresource1.getTitle()).andReturn("actarheumatologicascandinavica");
+        expect(this.eresource2.getTitle()).andReturn("rheumatology");
+        expect(this.eresource1.getScore()).andReturn(-1).times(2);
+        expect(this.eresource2.getScore()).andReturn(Integer.MAX_VALUE).times(2);
+        replay(this.eresource1, this.eresource2);
+        this.eresourceSearchResult1 = new EresourceSearchResult(this.eresource1);
+        this.eresourceSearchResult2 = new EresourceSearchResult(this.eresource2);
         int xcompareToy = this.eresourceSearchResult1.compareTo(this.eresourceSearchResult2);
         int ycompareTox = this.eresourceSearchResult2.compareTo(this.eresourceSearchResult1);
-        System.out.println(xcompareToy);
-        System.out.println(ycompareTox);
         assertTrue(xcompareToy > 0 && ycompareTox < 0);
-        verify(eresourceA, eresourceB);
+        verify(this.eresource1, this.eresource2);
     }
 }

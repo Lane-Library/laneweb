@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -44,9 +44,9 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
     }
 
     @Override
-    protected Collection<Eresource> getEresourceList(final CollectionManager collectionManager) {
+    protected List<Eresource> getEresourceList(final CollectionManager collectionManager) {
         if (this.mesh == null || this.type == null) {
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
         return collectionManager.getMesh(this.type, this.mesh);
     }

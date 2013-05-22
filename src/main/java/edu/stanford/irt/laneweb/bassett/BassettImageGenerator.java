@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.bassett;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 /**
  * @author alainb
  */
-public class BassettEresourcesGenerator extends AbstractGenerator implements ModelAware {
+public class BassettImageGenerator extends AbstractGenerator implements ModelAware {
 
     private String bassettNumber;
 
@@ -24,10 +24,10 @@ public class BassettEresourcesGenerator extends AbstractGenerator implements Mod
 
     private String region;
 
-    private SAXStrategy<Collection<BassettEresource>> saxStrategy;
+    private SAXStrategy<List<BassettImage>> saxStrategy;
 
-    public BassettEresourcesGenerator(final BassettCollectionManager collectionManager,
-            final SAXStrategy<Collection<BassettEresource>> saxStrategy) {
+    public BassettImageGenerator(final BassettCollectionManager collectionManager,
+            final SAXStrategy<List<BassettImage>> saxStrategy) {
         this.collectionManager = collectionManager;
         this.saxStrategy = saxStrategy;
     }
@@ -40,7 +40,7 @@ public class BassettEresourcesGenerator extends AbstractGenerator implements Mod
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Collection<BassettEresource> eresources = null;
+        List<BassettImage> eresources = null;
         if (this.bassettNumber != null) {
             eresources = this.collectionManager.getById(this.bassettNumber);
         } else if (this.region != null) {
@@ -52,7 +52,7 @@ public class BassettEresourcesGenerator extends AbstractGenerator implements Mod
         } else if (this.query != null) {
             eresources = this.collectionManager.search(this.query);
         } else {
-            eresources = Collections.emptySet();
+            eresources = Collections.emptyList();
         }
         this.saxStrategy.toSAX(eresources, xmlConsumer);
     }

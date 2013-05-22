@@ -10,8 +10,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,16 +25,16 @@ public class AbstractEresourcesGeneratorTest {
 
     private static final class TestAbstractEresourcesGenerator extends AbstractEresourcesGenerator {
 
-        private Collection<Eresource> eresourceList;
+        private List<Eresource> eresourceList;
 
         public TestAbstractEresourcesGenerator(final CollectionManager collectionManager,
-                final SAXStrategy<PagingEresourceList> saxStrategy, final Collection<Eresource> eresourceList) {
+                final SAXStrategy<PagingEresourceList> saxStrategy, final List<Eresource> eresourceList) {
             super("type", collectionManager, saxStrategy);
             this.eresourceList = eresourceList;
         }
 
         @Override
-        protected Collection<Eresource> getEresourceList(final CollectionManager collectionManager) {
+        protected List<Eresource> getEresourceList(final CollectionManager collectionManager) {
             return this.eresourceList;
         }
     }
@@ -43,7 +43,7 @@ public class AbstractEresourcesGeneratorTest {
 
     private Eresource eresource;
 
-    private Collection<Eresource> eresourceList;
+    private List<Eresource> eresourceList;
 
     private AbstractEresourcesGenerator generator;
 
@@ -56,7 +56,7 @@ public class AbstractEresourcesGeneratorTest {
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);
         this.eresource = createMock(Eresource.class);
-        this.eresourceList = Collections.singleton(this.eresource);
+        this.eresourceList = Collections.singletonList(this.eresource);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.generator = new TestAbstractEresourcesGenerator(this.collectionManager, this.saxStrategy,

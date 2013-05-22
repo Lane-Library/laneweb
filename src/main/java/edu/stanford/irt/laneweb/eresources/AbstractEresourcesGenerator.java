@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -90,23 +88,16 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Collection<Eresource> eresources = getEresourceList(this.collectionManager);
-        //coerce the Collection to a List for PagingData
-        List<Eresource> list = null;
-        if (eresources instanceof List) {
-        	list = (List) eresources;
-        } else {
-        	list = new LinkedList<Eresource>(eresources);
-        }
+        List<Eresource> eresources = getEresourceList(this.collectionManager);
         String baseQuery = this.queryString;
         if (baseQuery.indexOf("&page=") > 0) {
         	baseQuery = baseQuery.substring(0, baseQuery.indexOf("&page="));
         } else if (baseQuery.indexOf("page=") == 0) {
         	baseQuery = "";
         }
-        PagingData pagingData = new EresourceListPagingData(list, this.page, baseQuery);
-        this.saxStrategy.toSAX(new PagingEresourceList(list, pagingData), xmlConsumer);
+        PagingData pagingData = new EresourceListPagingData(eresources, this.page, baseQuery);
+        this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData), xmlConsumer);
     }
 
-    protected abstract Collection<Eresource> getEresourceList(CollectionManager collectionManager);
+    protected abstract List<Eresource> getEresourceList(CollectionManager collectionManager);
 }

@@ -4,14 +4,14 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/bassett"
-        class="edu.stanford.irt.laneweb.bassett.BassettEresourcesGenerator"
+        class="edu.stanford.irt.laneweb.bassett.BassettImageGenerator"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-list"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion"
-        class="edu.stanford.irt.laneweb.bassett.BassettAccordionEresourcesGenerator"
+        class="edu.stanford.irt.laneweb.bassett.BassettAccordionGenerator"
         scope="prototype">
         <constructor-arg ref="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-count"/>
@@ -28,7 +28,7 @@
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-list"
-        class="edu.stanford.irt.laneweb.bassett.BassettListSAXStrategy"/>
+        class="edu.stanford.irt.laneweb.bassett.BassettImageListSAXStrategy"/>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-count"
         class="edu.stanford.irt.laneweb.bassett.BassettCountSAXStrategy"/>

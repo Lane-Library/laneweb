@@ -5,9 +5,9 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -17,13 +17,13 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 
-public class BassettEresourcesGeneratorTest {
+public class BassettImageGeneratorTest {
 
     private BassettCollectionManager collectionManager;
 
-    private BassettEresourcesGenerator generator;
+    private BassettImageGenerator generator;
 
-    private SAXStrategy<Collection<BassettEresource>> saxStrategy;
+    private SAXStrategy<List<BassettImage>> saxStrategy;
 
     private XMLConsumer xmlConsumer;
 
@@ -32,7 +32,7 @@ public class BassettEresourcesGeneratorTest {
     public void setUp() throws Exception {
         this.collectionManager = createMock(BassettCollectionManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new BassettEresourcesGenerator(this.collectionManager, this.saxStrategy);
+        this.generator = new BassettImageGenerator(this.collectionManager, this.saxStrategy);
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
 
@@ -48,7 +48,7 @@ public class BassettEresourcesGeneratorTest {
 
     @Test
     public void testDoGenerateNull() {
-        this.saxStrategy.toSAX(Collections.<BassettEresource> emptySet(), this.xmlConsumer);
+        this.saxStrategy.toSAX(Collections.<BassettImage> emptyList(), this.xmlConsumer);
         replay(this.collectionManager, this.xmlConsumer, this.saxStrategy);
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.xmlConsumer, this.saxStrategy);
