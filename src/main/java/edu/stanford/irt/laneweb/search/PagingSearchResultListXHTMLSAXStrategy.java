@@ -118,7 +118,6 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             if (showPubMedStrategies) {
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "showPubMedStrategies");
-                atts.addAttribute(EMPTY_NS, STYLE, STYLE, CDATA, "display:none;");
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
                 XMLUtils.data(xmlConsumer, "true");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
