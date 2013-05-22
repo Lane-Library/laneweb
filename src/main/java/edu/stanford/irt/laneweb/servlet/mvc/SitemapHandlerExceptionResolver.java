@@ -34,20 +34,22 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
             if (ultimateCause instanceof FileNotFoundException) {
                 this.log.error(ultimateCause.toString());
             } else if (ultimateCause instanceof SocketException) {
-                this.log.error(ultimateCause.toString() + " " + getModel());
+                this.log.error(ultimateCause.toString() + " ip=" + request.getRemoteAddr() + " url=" + request.getRequestURL().toString());
             } else {
                 this.log.error(ex.toString(), ultimateCause);
             }
         }
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        try {
-            handleRequest(request, response);
-        } catch (ServletException e) {
-            logMessage(e);
-        } catch (IOException e) {
-            logMessage(e);
-        } catch (LanewebException e) {
-            logMessage(e);
+        if (!response.isCommitted()) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            try {
+                handleRequest(request, response);
+            } catch (ServletException e) {
+                logMessage(e);
+            } catch (IOException e) {
+                logMessage(e);
+            } catch (LanewebException e) {
+                logMessage(e);
+            }
         }
         return new ModelAndView();
     }
@@ -56,8 +58,8 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
     protected String getSitemapURI(final HttpServletRequest request) {
         return "/error.html";
     }
-    
-    private void logMessage(Exception e) {
+
+    private void logMessage(final Exception e) {
         this.log.error("Exception while handling exception: " + e.toString());
     }
 }
