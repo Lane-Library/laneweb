@@ -21,7 +21,8 @@
 			var newIndex = typeof index === "string" ? this._items.indexOf(index) : index;
 			if (newIndex !== this._index) {
 				this.fire("selectedChange", {
-                    newIndex : newIndex
+                    newIndex : newIndex,
+                    newVal : this._items[newIndex]
                 });
 				// this.fire("selectedChange", {index: newIndex, prevVal :
 				// this._items[this._index], newVal :
@@ -37,16 +38,21 @@
 	Y.lane.Select = Select;
 	
 	var SearchSelectWidget = Y.Base.create("searchSelect", Y.Widget, [], {
+		renderUI : function() {
+			this.get("boundingBox").insertBefore("<span class='searchselect-selected-content'>" + this.get("model").getSelected() + "</span>", this.get("srcNode"));
+		},
 		bindUI : function() {
 			this.get("model").after("selectedChange", this._handleModelChange, this);
             this.get("srcNode").after("change", this._handleViewChange, this);
 		},
 		_handleViewChange : function(event) {
-			var srcNode = this.get("srcNode");
-			this.get("model").setSelected(srcNode.get("selectedIndex"));
+			this.get("model").setSelected(this.get("srcNode").get("selectedIndex"));
 		},
 		_handleModelChange : function(event) {
-			this.get("srcNode").set("value", this.get("model").getSelected());
+			var srcNode = this.get("srcNode"),
+			    selected = event.newVal;
+			srcNode.set("value", selected);
+			this.get("boundingBox").one(".searchselect-selected-content").set("innerHTML", selected);
 		}
 	}, {
 		ATTRS : {

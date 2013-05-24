@@ -54,9 +54,6 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
             	this.srcNode = this.srcNode || Y.one("#searchSource");
             	this.widget =  this.widget || new Y.lane.SearchSelectWidget({srcNode:this.srcNode,render:true});
             	this.model = this.model || this.widget.get("model");
-            	this.eventHandle = this.eventHandle || this.model.after("selectedChange", function() {
-            		Y.one("#selected").set("innerHTML", this.model.getSelected());
-            	}, this);
             },
             testExists : function() {
             	Y.Assert.isNotNull(this.widget);
@@ -69,9 +66,15 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
             },
             testViewChanges : function() {
             	this.srcNode.set("value","bar");
-//            	this.srcNode.set("selectedIndex", 2);
             	this.srcNode.simulate("change");
             	Y.Assert.areEqual("bar", this.model.getSelected());
+            },
+            testSelectedContentChanges : function() {
+            	var selectedContent = Y.one(".searchselect-selected-content");
+            	this.model.setSelected("foo");
+            	Y.Assert.areEqual("foo", selectedContent.get("innerHTML"));
+            	this.model.setSelected("bar");
+            	Y.Assert.areEqual("bar", selectedContent.get("innerHTML"));
             }
     });
     
