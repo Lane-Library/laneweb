@@ -1,50 +1,78 @@
 Y.applyConfig({fetchCSS:true});
-Y.use("node-event-simulate", "console", "test", function(Y){
+Y.use("node-event-simulate", "console", "test", "dump", function(Y){
 
-    var searchSelectTestCase = new Y.Test.Case({
-        name: "Lane Search Select Test Case",
+    var selectTestCase = new Y.Test.Case({
+        name: "Select Test Case",
         eventHandle : null,
-        searchSelect : null,
+        select : null,
         setUp : function() {
-        	this.searchSelect = new Y.lane.SearchSelect(["foo","bar","baz"]);
+        	this.select = new Y.lane.Select(["foo","bar","baz"]);
         },
         tearDown : function() {
         	if (this.eventHandle) {
-        		this.searchSelect.detach(this.eventHandle);
+        		this.select.detach(this.eventHandle);
         	}
         },
         testExists : function() {
-        	Y.Assert.isObject(this.searchSelect);
+        	Y.Assert.isNotNull(this.select);
         },
         testGetSelected : function() {
-        	Y.Assert.areEqual("foo", this.searchSelect.getSelected());
+        	Y.Assert.areEqual("foo", this.select.getSelected());
         },
         testGetSelectedWithIndex : function() {
-        	Y.Assert.areEqual("bar", new Y.lane.SearchSelect(["foo","bar"], 1).getSelected());
+        	Y.Assert.areEqual("bar", new Y.lane.Select(["foo","bar"], 1).getSelected());
         },
         testSetSelected : function() {
-        	this.searchSelect.setSelected(1);
-        	Y.Assert.areEqual("bar", this.searchSelect.getSelected());
+        	this.select.setSelected(1);
+        	Y.Assert.areEqual("bar", this.select.getSelected());
         },
         testSetSelectedString : function() {
-        	this.searchSelect.setSelected("bar");
-        	Y.Assert.areEqual("bar", this.searchSelect.getSelected());
+        	this.select.setSelected("bar");
+        	Y.Assert.areEqual("bar", this.select.getSelected());
         },
         testSelectedChange : function() {
         	var selectedChange = null;
-            this.eventHandle = this.searchSelect.on("selectedChange", function(event) {
+            this.eventHandle = this.select.on("selectedChange", function(event) {
                 selectedChange = event;
             });
-            this.searchSelect.setSelected(1);
+            this.select.setSelected(1);
             Y.Assert.areEqual(1, selectedChange.newIndex);
         },
         testSelectedChangePreventDefault : function() {
-            this.eventHandle = this.searchSelect.on("selectedChange", function(event) {
+            this.eventHandle = this.select.on("selectedChange", function(event) {
                 event.preventDefault();
             });
-            this.searchSelect.setSelected("bar");
-            Y.Assert.areEqual("foo", this.searchSelect.getSelected());
+            this.select.setSelected("bar");
+            Y.Assert.areEqual("foo", this.select.getSelected());
         }
+    });
+    
+
+    var searchSelectWidgetTestCase = new Y.Test.Case({
+        name: "SearchSelectWidget Test Case",
+            setUp : function() {
+            	this.srcNode = this.srcNode || Y.one("#searchSource");
+            	this.widget =  this.widget || new Y.lane.SearchSelectWidget({srcNode:this.srcNode,render:true});
+            	this.model = this.model || this.widget.get("model");
+            	this.eventHandle = this.eventHandle || this.model.after("selectedChange", function() {
+            		Y.one("#selected").set("innerHTML", this.model.getSelected());
+            	}, this);
+            },
+            testExists : function() {
+            	Y.Assert.isNotNull(this.widget);
+            },
+            testGetSelect : function() {
+            	Y.Assert.isNotNull(this.model);
+            },
+            testGetSelected : function() {
+            	Y.Assert.areEqual("baz", this.model.getSelected());
+            },
+            testViewChanges : function() {
+            	this.srcNode.set("value","bar");
+//            	this.srcNode.set("selectedIndex", 2);
+            	this.srcNode.simulate("change");
+            	Y.Assert.areEqual("bar", this.model.getSelected());
+            }
     });
     
     Y.one("body").addClass("yui3-skin-sam");
@@ -52,7 +80,8 @@ Y.use("node-event-simulate", "console", "test", function(Y){
         newestOnTop: false
     }).render("#log");
     
-    
-    Y.Test.Runner.add(searchSelectTestCase);
+
+    Y.Test.Runner.add(selectTestCase);
+    Y.Test.Runner.add(searchSelectWidgetTestCase);
     Y.Test.Runner.run();
 });
