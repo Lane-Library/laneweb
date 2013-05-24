@@ -66,7 +66,7 @@
                     </xsl:for-each>
                 </div>
                 <xsl:if test="/s:resources/s:contentHitCounts/s:resource[contains(@resourceId,'pubmed')]">
-                    <span id="showPubMedStrategies" style="display:none;">true</span>
+                    <span id="showPubMedStrategies">true</span>
                 </xsl:if>
             </body>
         </html>

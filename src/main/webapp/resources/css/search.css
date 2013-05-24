@@ -4,7 +4,7 @@
     width:1px; height:1px;
     visibility:hidden;
 }
-.tooltips, #search-content-counts, #findIt, #spellCheck, #queryMapping {
+.tooltips, #search-content-counts, #findIt, #spellCheck, #queryMapping, #showPubMedStrategies {
     display:none;
 }
 #queryMapping span {
