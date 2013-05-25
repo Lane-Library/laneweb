@@ -70,11 +70,11 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
             	Y.Assert.areEqual("bar", this.model.getSelected());
             },
             testSelectedContentChanges : function() {
-            	var selectedContent = Y.one(".searchselect-selected-content");
+            	var selectedContent = Y.one("." + this.widget.getClassName() + "-selected");
             	this.model.setSelected("foo");
-            	Y.Assert.areEqual("foo", selectedContent.get("innerHTML"));
+            	Y.Assert.areEqual("foo content", selectedContent.get("innerHTML"));
             	this.model.setSelected("bar");
-            	Y.Assert.areEqual("bar", selectedContent.get("innerHTML"));
+            	Y.Assert.areEqual("bar content", selectedContent.get("innerHTML"));
             }
     });
     

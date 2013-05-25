@@ -44,6 +44,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/bookmark-instructions.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/suggest.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/resource-list-pagination.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/search-select.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
     </head>

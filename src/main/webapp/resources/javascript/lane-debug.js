@@ -118,6 +118,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-bassett.js",
         "lane-textinputs.js",
         "suggest.js",
+        "search-select.js",
         "lane-search-pico.js",
         "lane-search.js",
         "bookmarks.js",

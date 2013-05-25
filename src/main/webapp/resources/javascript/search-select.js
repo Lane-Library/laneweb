@@ -24,9 +24,6 @@
                     newIndex : newIndex,
                     newVal : this._items[newIndex]
                 });
-				// this.fire("selectedChange", {index: newIndex, prevVal :
-				// this._items[this._index], newVal :
-				// this._items[newIndex]});
 			}
 		}
 	};
@@ -40,7 +37,9 @@
 	//TODO: use a constructor to create a wrapping div then use Y.extend instead of Y.Base.create
 	var SearchSelectWidget = Y.Base.create("searchSelect", Y.Widget, [], {
 		renderUI : function() {
-			this.get("boundingBox").insertBefore("<span class='searchselect-selected-content'>" + this.get("model").getSelected() + "</span>", this.get("srcNode"));
+			var srcNode = this.get("srcNode");
+			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("textContent");
+			this.get("boundingBox").insertBefore("<span class='" + this.getClassName() + "-selected'>" + content + "</span>", srcNode);
 		},
 		bindUI : function() {
 			this.get("model").after("selectedChange", this._handleModelChange, this);
@@ -53,7 +52,8 @@
 			var srcNode = this.get("srcNode"),
 			    selected = event.newVal;
 			srcNode.set("value", selected);
-			this.get("boundingBox").one(".searchselect-selected-content").set("innerHTML", selected);
+			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("textContent");
+			this.get("boundingBox").one("." + this.getClassName() + "-selected").set("innerHTML", content);
 		}
 	}, {
 		ATTRS : {

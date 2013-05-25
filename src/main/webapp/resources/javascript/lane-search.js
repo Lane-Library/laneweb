@@ -23,6 +23,7 @@
             },
             searchTermsSuggest = new Y.lane.Suggest(searchTextInput.getInput(), getLimitForSource(selectedOption.get("value"))),
             search;
+        (new Y.lane.SearchSelectWidget({srcNode:searchSourceSelect,render:true}));
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
