@@ -18,7 +18,7 @@
 			return this._items[this._index];
 		},
 		setSelected : function(index) {
-			var newIndex = typeof index === "string" ? this._items.indexOf(index) : index;
+			var newIndex = typeof index === "string" ? Y.Array.indexOf(this._items, index) : index;
 			if (newIndex !== this._index) {
 				this.fire("selectedChange", {
                     newIndex : newIndex,
@@ -37,6 +37,7 @@
 	});
 	Y.lane.Select = Select;
 	
+	//TODO: use a constructor to create a wrapping div then use Y.extend instead of Y.Base.create
 	var SearchSelectWidget = Y.Base.create("searchSelect", Y.Widget, [], {
 		renderUI : function() {
 			this.get("boundingBox").insertBefore("<span class='searchselect-selected-content'>" + this.get("model").getSelected() + "</span>", this.get("srcNode"));
