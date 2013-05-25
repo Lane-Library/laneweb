@@ -39,7 +39,7 @@
 		renderUI : function() {
 			var srcNode = this.get("srcNode");
 			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("textContent");
-			this.get("boundingBox").insertBefore("<button class='gray-btn " + this.getClassName() + "-selected'>" + content + "<span></span></button>", srcNode);
+			this.get("boundingBox").insertBefore("<span class='gray-btn " + this.getClassName() + "-selected'>" + content + "<span></span></span>", srcNode);
 		},
 		bindUI : function() {
 			this.get("model").after("selectedChange", this._handleModelChange, this);
