@@ -23,15 +23,9 @@
 }
 #searchSource {
     position:absolute;
-    width : 125px;    
-    border: 2px solid white;
-    height: 35px;
-    padding: 7px 3px;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4));
-    background: -moz-linear-gradient(#fafbf8, #dadad4);
-    /*filter necessary to display gradient in IE*/
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafbf8', endColorStr='#dadad4');
-    
+    width : 125px;
+    height: 37px;
+    padding: 8px 3px;
 }
 #search a:hover {
     border-bottom : 1px solid #fff;
@@ -41,13 +35,15 @@
     float:left;
     position:relative;
     /*IE7 seems to need this z-index*/
-    z-index:1
+    z-index:1;
+    border-radius:3px;
 }
 #picoFields {
     background-color: white;
     height: 35px;
     margin-bottom: 11px;
     width: 669px;
+    border-radius:3px
 }
 #picoFields input {
     border-width:0;
@@ -69,6 +65,7 @@
     padding: 7px;
     /* Mobile Safari: remove rounded corners and input shadow */
     -webkit-appearance : none;
+    border-radius:3px;
 }
 #search input:focus {
     /* webkit: remove border from active inputs */

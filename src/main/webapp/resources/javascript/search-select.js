@@ -39,7 +39,7 @@
 		renderUI : function() {
 			var srcNode = this.get("srcNode");
 			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("textContent");
-			this.get("boundingBox").insertBefore("<span class='" + this.getClassName() + "-selected'>" + content + "</span>", srcNode);
+			this.get("boundingBox").insertBefore("<button class='gray-btn " + this.getClassName() + "-selected'>" + content + "<span></span></button>", srcNode);
 		},
 		bindUI : function() {
 			this.get("model").after("selectedChange", this._handleModelChange, this);
@@ -53,7 +53,7 @@
 			    selected = event.newVal;
 			srcNode.set("value", selected);
 			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("textContent");
-			this.get("boundingBox").one("." + this.getClassName() + "-selected").set("innerHTML", content);
+			this.get("boundingBox").one("." + this.getClassName() + "-selected").set("innerHTML", content + "<span></span>");
 		}
 	}, {
 		ATTRS : {
