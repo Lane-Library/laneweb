@@ -7,9 +7,14 @@
     left:0
 }
 #searchTerms {
-    padding-left:90px
+    margin-left:120px
 }
 .yui3-searchselect-selected {
     display:inline-block;
-    padding:11px 5px
+    background-image: url(/././resources/images/sprite-all.png);
+    background-repeat: no-repeat;
+    background-position: 100px -270px;
+    padding: 6px 35px 6px 6px;
+    margin:3px;
+    width:90px
 }
