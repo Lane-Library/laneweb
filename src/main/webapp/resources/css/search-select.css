@@ -6,9 +6,6 @@
     position:absolute;
     left:0
 }
-#searchTerms {
-    margin-left:120px
-}
 .yui3-searchselect-selected {
     display:inline-block;
     background-image: url(/././resources/images/sprite-all.png);
