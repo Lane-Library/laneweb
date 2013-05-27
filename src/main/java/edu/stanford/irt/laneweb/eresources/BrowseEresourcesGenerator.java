@@ -74,7 +74,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     }
 
     /**
-     * A convenience method for to URLDecode a string.
+     * A convenience method to URLDecode a string.
      * 
      * @param string
      *            a string to decode
@@ -84,7 +84,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         try {
             return URLDecoder.decode(string, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            throw new LanewebException("won't happen");
+            throw new LanewebException("won't happen", e);
         }
     }
 }
