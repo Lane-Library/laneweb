@@ -46,7 +46,7 @@
     </bean>
     
     <bean id="edu.stanford.irt.cocoon.source.SourceResolver"
-        class="edu.stanford.irt.laneweb.cocoon.SpringResourceSourceResolver">
+        class="edu.stanford.irt.laneweb.cocoon.LocationModifyingSourceResolver">
         <property name="sourceResolvers">
             <map>
                 <entry key="content" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/content"/>
@@ -57,6 +57,9 @@
                 <entry key="classes" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/classes"/>
                 <entry key="bookmarks" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/bookmarks"/>
             </map>
+        </property>
+        <property name="defaultResolver">
+            <bean class="edu.stanford.irt.laneweb.cocoon.SpringResourceSourceResolver"/>
         </property>
     </bean>
 

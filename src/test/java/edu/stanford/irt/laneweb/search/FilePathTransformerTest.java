@@ -9,6 +9,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -83,11 +85,11 @@ public class FilePathTransformerTest {
     }
 
     @Test
-    public void testStartElementFile() throws SAXException, IOException {
+    public void testStartElementFile() throws SAXException, IOException, URISyntaxException {
         CacheableSource source = createMock(CacheableSource.class);
         Validity validity = createMock(Validity.class);
         expect(this.attributes.getValue("path")).andReturn("path");
-        expect(this.sourceResolver.resolveURI("file:path")).andReturn(source);
+        expect(this.sourceResolver.resolveURI(new URI("file:path"))).andReturn(source);
         expect(source.getValidity()).andReturn(validity);
         this.saxParser.parse(isA(Source.class), isA(XMLConsumer.class));
         replay(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, source, validity);

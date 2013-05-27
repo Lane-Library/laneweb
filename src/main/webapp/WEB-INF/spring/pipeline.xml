@@ -30,14 +30,14 @@
         class="edu.stanford.irt.cocoon.pipeline.generate.URLGenerator"
         scope="prototype">
         <constructor-arg value="file"/>
-        <property name="parser" ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/html"
         class="edu.stanford.irt.cocoon.pipeline.generate.URLGenerator"
         scope="prototype">
         <constructor-arg value="html"/>
-        <property name="parser" ref="edu.stanford.irt.cocoon.xml.SAXParser/html"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/html"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/link-scan"
@@ -62,14 +62,14 @@
         class="edu.stanford.irt.laneweb.classes.ClassesGenerator"
         scope="prototype">
         <constructor-arg value="classes"/>
-        <property name="parser" ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/noncached-classes"
         class="edu.stanford.irt.laneweb.classes.RootElementProvidingGenerator"
         scope="prototype">
         <constructor-arg value="noncached-classes"/>
-        <property name="parser" ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator"
