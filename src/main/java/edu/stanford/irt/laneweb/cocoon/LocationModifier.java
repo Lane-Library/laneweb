@@ -3,46 +3,35 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class LocationModifier {
 
     public URI modify(final URI location) throws URISyntaxException {
         String scheme = location.getScheme();
         String authority = location.getAuthority();
-        if (scheme == null || (authority != null && location.getScheme().equals("cocoon"))) {
-            return location;
+        String path = location.getPath();
+        String query = location.getQuery();
+        URI result = null;
+        if ("cocoon".equals(scheme) && authority == null) {
+            result = new URI("cocoon://content" + path);
+        } else if ("content".equals(scheme)) {
+            result = new URI("cocoon://content" + path);
+        } else if ("eresources".equals(scheme)) {
+            result = new URI("cocoon://eresources" + path);
+        } else if ("classes".equals(scheme)) {
+            result = new URI("cocoon://classes" + path);
+        } else if ("apps".equals(scheme)) {
+            result = new URI("cocoon://apps" + path);
+        } else if ("mobile".equals(scheme)) {
+            result = new URI("cocoon://mobile" + path);
+        } else if ("rss".equals(scheme)) {
+            result = new URI("cocoon://rss" + path);
         }
-        if ("content".equals(scheme)) {
-            return new URI("cocoon://content" + location.getPath());
+        
+        if (query != null && result != null) {
+            throw new LanewebException("need to add query ?" + query + " to uri " + result);
         }
-        if ("classes".equals(scheme)) {
-            return new URI("cocoon://classes" + location.getPath());
-        }
-        if ("cocoon".equals(scheme)) {
-            return new URI("cocoon://content" + location.getPath());
-        }
-        URI modifiedLocation = getModifiedLocation(location.toASCIIString());
-        return modifiedLocation == null ? location : modifiedLocation;
-    }
-
-    private URI getModifiedLocation(final String location) throws URISyntaxException {
-        if (location.indexOf("cocoon://eresources") == 0) {
-            return new URI("eresources:" + location.substring("cocoon://eresources".length()));
-        }
-        if (location.indexOf("cocoon://apps") == 0) {
-            return new URI("apps:" + location.substring("cocoon://apps".length()));
-        }
-        if (location.indexOf("cocoon://content") == 0) {
-            return new URI("content:" + location.substring("cocoon://content".length()));
-        }
-        if (location.indexOf("cocoon://rss/ncbi-rss2html") == 0) {
-            return new URI("content:" + location.substring("cocoon://rss".length()));
-        }
-        if (location.indexOf("cocoon://rss") == 0) {
-            return new URI("rss:" + location.substring("cocoon://rss".length()));
-        }
-        if (location.indexOf("cocoon:") == 0) {
-            return new URI("content:" + location.substring("cocoon:".length()));
-        }
-        return null;
+        return result == null ? location : result;
     }
 }
