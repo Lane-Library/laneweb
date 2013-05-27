@@ -3,64 +3,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
-    <bean name="edu.stanford.irt.cocoon.source.SourceResolver/content"
-        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>
-        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.source.SourceResolver/eresources"
-        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources"/>
-        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.source.SourceResolver/applications"
-        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/applications"/>
-        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.source.SourceResolver/rss"
-        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/rss"/>
-        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.source.SourceResolver/mobile"
-        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile"/>
-        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.source.SourceResolver/classes"
-        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/classes"/>
-        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.source.SourceResolver/bookmarks"
-        class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
-        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
-    </bean>
-    
     <bean id="edu.stanford.irt.cocoon.source.SourceResolver"
         class="edu.stanford.irt.laneweb.cocoon.LocationModifyingSourceResolver">
-        <property name="sourceResolvers">
+        <property name="sitemaps">
             <map>
-                <entry key="content" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/content"/>
-                <entry key="apps" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/applications"/>
-                <entry key="eresources" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/eresources"/>
-                <entry key="rss" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/rss"/>
-                <entry key="mobile" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/mobile"/>
-                <entry key="classes" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/classes"/>
-                <entry key="bookmarks" value-ref="edu.stanford.irt.cocoon.source.SourceResolver/bookmarks"/>
+                <entry key="content" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>
+                <entry key="apps" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/applications"/>
+                <entry key="eresources" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources"/>
+                <entry key="rss" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/rss"/>
+                <entry key="mobile" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile"/>
+                <entry key="classes" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/classes"/>
+                <entry key="bookmarks" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
             </map>
         </property>
         <property name="defaultResolver">
             <bean class="edu.stanford.irt.laneweb.cocoon.SpringResourceSourceResolver"/>
         </property>
+        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
 
 </beans>

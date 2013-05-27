@@ -19,17 +19,19 @@ public class LocationModifierTest {
 
     @Test
     public void testApps() throws URISyntaxException {
-        assertEquals(new URI("cocoon://apps/search/xml/foo"), this.locationModifier.modify(new URI("cocoon://apps/search/xml/foo")));
+        assertEquals(new URI("cocoon://apps/search/xml/foo"),
+                this.locationModifier.modify(new URI("cocoon://apps/search/xml/foo")));
     }
 
     @Test
     public void testContent() throws URISyntaxException {
-        assertEquals(new URI("cocoon://content/foo/bar"), this.locationModifier.modify(new URI("cocoon:/foo/bar")));
+        assertEquals(new URI("cocoon:/foo/bar"), this.locationModifier.modify(new URI("cocoon:/foo/bar")));
     }
 
     @Test
     public void testEresources() throws URISyntaxException {
-        assertEquals(new URI("cocoon://eresources/browse/type/ej"), this.locationModifier.modify(new URI("cocoon://eresources/browse/type/ej")));
+        assertEquals(new URI("cocoon://eresources/browse/type/ej"),
+                this.locationModifier.modify(new URI("cocoon://eresources/browse/type/ej")));
     }
 
     @Test

@@ -9,13 +9,10 @@ public class LocationModifier {
 
     public URI modify(final URI location) throws URISyntaxException {
         String scheme = location.getScheme();
-        String authority = location.getAuthority();
         String path = location.getPath();
         String query = location.getQuery();
         URI result = null;
-        if ("cocoon".equals(scheme) && authority == null) {
-            result = new URI("cocoon://content" + path);
-        } else if ("content".equals(scheme)) {
+        if ("content".equals(scheme)) {
             result = new URI("cocoon://content" + path);
         } else if ("eresources".equals(scheme)) {
             result = new URI("cocoon://eresources" + path);
@@ -28,7 +25,6 @@ public class LocationModifier {
         } else if ("rss".equals(scheme)) {
             result = new URI("cocoon://rss" + path);
         }
-        
         if (query != null && result != null) {
             throw new LanewebException("need to add query ?" + query + " to uri " + result);
         }

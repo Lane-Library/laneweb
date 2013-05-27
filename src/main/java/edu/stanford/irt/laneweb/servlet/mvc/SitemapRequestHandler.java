@@ -25,12 +25,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private String prefix = "";
 
-    private Sitemap sitemap;
-
     private ServletContext servletContext;
 
-    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
-            IOException {
+    private Sitemap sitemap;
+
+    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
         String method = request.getMethod();
         if (this.methodsNotAllowed.contains(method)) {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -40,6 +40,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         Map<String, Object> model = getModel();
         this.dataBinder.bind(model, request);
         model.put(Model.SITEMAP_URI, sitemapURI);
+        model.put(Sitemap.class.getName(), this.sitemap);
         String mimeType = getContentType(sitemapURI);
         if (mimeType != null) {
             response.setContentType(mimeType);
@@ -66,12 +67,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.prefix = prefix;
     }
 
-    public void setSitemap(final Sitemap sitemap) {
-        this.sitemap = sitemap;
-    }
-
     public void setServletContext(final ServletContext servletContext) {
         this.servletContext = servletContext;
+    }
+
+    public void setSitemap(final Sitemap sitemap) {
+        this.sitemap = sitemap;
     }
 
     protected abstract Map<String, Object> getModel();
