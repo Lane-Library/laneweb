@@ -1,10 +1,13 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -26,7 +29,13 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        this.type = ModelUtil.getString(model, Model.TYPE);
+        if (model.containsKey(Model.TYPE)) {
+            try {
+                this.type = URLDecoder.decode(ModelUtil.getString(model, Model.TYPE), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new LanewebException("won't happen");
+            }
+        }
         this.subset = ModelUtil.getString(model, Model.SUBSET);
         this.alpha = ModelUtil.getString(model, Model.ALPHA, ALL);
         if (this.alpha.length() == 0) {
@@ -41,7 +50,11 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (parameters.containsKey(Model.TYPE)) {
-            this.type = parameters.get(Model.TYPE);
+            try {
+                this.type = URLDecoder.decode(parameters.get(Model.TYPE), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new LanewebException("won't happen");
+            }
         }
         if (parameters.containsKey(Model.SUBSET)) {
             this.subset = parameters.get(Model.SUBSET);
