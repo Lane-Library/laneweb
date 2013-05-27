@@ -31,6 +31,27 @@ public class BrowseEresourcesGeneratorTest {
     }
 
     @Test
+    public void testEncodedSubset() {
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.SUBSET, "subset%20space"));
+        expect(this.collectionManager.getSubset("subset space")).andReturn(null);
+        replay(this.collectionManager);
+        this.generator.getEresourceList(this.collectionManager);
+        assertEquals("p=0;a=;t=;s=subset space", this.generator.createKey().toString());
+        verify(this.collectionManager);
+    }
+
+    @Test
+    public void testEncodedType() {
+        this.generator.setModel(Collections.<String, Object> emptyMap());
+        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type%20space"));
+        expect(this.collectionManager.getType("type space")).andReturn(null);
+        replay(this.collectionManager);
+        this.generator.getEresourceList(this.collectionManager);
+        assertEquals("p=0;a=all;t=type space;s=", this.generator.createKey().toString());
+        verify(this.collectionManager);
+    }
+
+    @Test
     public void testGetEresourceListNull() {
         assertEquals(0, this.generator.getEresourceList(this.collectionManager).size());
     }
