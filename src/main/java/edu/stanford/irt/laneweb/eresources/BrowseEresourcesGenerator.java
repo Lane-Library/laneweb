@@ -12,7 +12,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
-    
+
     private static final String ALL = "all";
 
     private String alpha;
@@ -29,13 +29,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        if (model.containsKey(Model.TYPE)) {
-        try {
-            this.type = URLDecoder.decode(ModelUtil.getString(model, Model.TYPE), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new LanewebException("won't happen");
-        }
-        }
+        this.type = ModelUtil.getString(model, Model.TYPE);
         this.subset = ModelUtil.getString(model, Model.SUBSET);
         this.alpha = ModelUtil.getString(model, Model.ALPHA, ALL);
         if (this.alpha.length() == 0) {
@@ -50,14 +44,10 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (parameters.containsKey(Model.TYPE)) {
-            try {
-                this.type = URLDecoder.decode(parameters.get(Model.TYPE), "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                throw new LanewebException("won't happen");
-            }
+            this.type = decode(parameters.get(Model.TYPE));
         }
         if (parameters.containsKey(Model.SUBSET)) {
-            this.subset = parameters.get(Model.SUBSET);
+            this.subset = decode(parameters.get(Model.SUBSET));
         }
     }
 
@@ -81,5 +71,20 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
             list = collectionManager.getSubset(this.subset);
         }
         return list;
+    }
+
+    /**
+     * A convenience method to URLDecode a string.
+     * 
+     * @param string
+     *            a string to decode
+     * @return the decoded string
+     */
+    private String decode(final String string) {
+        try {
+            return URLDecoder.decode(string, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new LanewebException("won't happen", e);
+        }
     }
 }

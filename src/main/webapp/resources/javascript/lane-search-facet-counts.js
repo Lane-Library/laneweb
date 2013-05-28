@@ -6,14 +6,17 @@
         basePath = model.get(model.BASE_PATH) || "",
         facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
-        requestString, j,
         makeRequest = function() {
-            requestString = '';
+    	    var id, j, facet, requestString = "";
             for (j = 0; j < facets.size(); j++) {
-                var id = facets.item(j).get('id');
-                facets.item(j).setAttribute('facetId', id.substring(0, id.indexOf('Facet')));
-                if(facets.item(j).hasClass('searchableFacet')){
-                    requestString+=facets.item(j).getAttribute('facetId') + ',';
+            	facet = facets.item(j);
+                id = facet.get('id');
+                id = id.substring(0, id.indexOf("Facet"));
+                if (id) {
+                    facet.setAttribute('facetId', id);
+                    if(facet.hasClass('searchableFacet')){
+                        requestString+=id + ',';
+                    }
                 }
             }
             if(requestString !== ''){
