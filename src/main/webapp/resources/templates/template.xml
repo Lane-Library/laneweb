@@ -52,13 +52,13 @@
                             </form>
                             <ul id="qlinks">
                                 <li>
+                                    <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
+                                </li>
+                                <li>
                                     <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</a>
                                 </li>
                                 <li>
                                     <a href="http://www.uptodate.com/online">UpToDate</a>
-                                </li>
-                                <li>
-                                    <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
                                 </li>
                             </ul>
                         </div>
