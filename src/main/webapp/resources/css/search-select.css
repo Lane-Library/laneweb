@@ -4,6 +4,9 @@
 .yui3-searchselect-content {
     opacity:0;
 }
+#searchSource {
+    width:122px
+}
 .yui3-searchselect-selected {
     margin: 2px;
     padding: 6px;

@@ -42,14 +42,14 @@ cursor:pointer;
     background-color: white;
     height: 35px;
     margin-bottom: 11px;
-    width: 669px;
+    width: 678px;
 }
 #picoFields input {
     border-width:0;
     /* Mobile Safari: remove rounded corners and input shadow */
     -webkit-appearance : none;
     margin: 9px 0;
-    width:166px;
+    width:168px;
     text-align:center;
     border-right:1px rgb(220,220,220) solid;
     border-radius:0
