@@ -6,8 +6,9 @@
 }
 .yui3-searchselect-selected {
     margin: 2px;
-    padding: 6px 3px;
+    padding: 6px;
     position:absolute;
+    width: 108px;
 }
 .yui3-searchselect-selected span {
     display:inline-block;
@@ -15,4 +16,5 @@
     background-repeat: no-repeat;
     background-position: 3px -277px;
     padding: 6px 8px;
+    float:right
 }
