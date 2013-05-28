@@ -13,11 +13,17 @@
     position:absolute;
     width: 108px;
 }
+.yui3-searchselect:hover .yui3-searchselect-selected {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadad4), to(#fafbf8) );
+    background: -moz-linear-gradient(#dadad4, #fafbf8);
+    filter: progid : DXImageTransform.Microsoft.gradient(startColorst ='#dadad4',endColorstr='#fafbf8');
+    border: 1px solid #dadad9;
+}
 .yui3-searchselect-selected span {
     display:inline-block;
     background-image: url(/././resources/images/sprite-all.png);
     background-repeat: no-repeat;
-    background-position: 3px -277px;
-    padding: 6px 8px;
+    background-position: -2px -277px;
+    padding: 6px;
     float:right
 }
