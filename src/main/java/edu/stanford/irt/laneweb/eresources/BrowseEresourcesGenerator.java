@@ -1,15 +1,18 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
-    
+
     private static final String ALL = "all";
 
     private String alpha;
@@ -41,10 +44,10 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (parameters.containsKey(Model.TYPE)) {
-            this.type = parameters.get(Model.TYPE);
+            this.type = decode(parameters.get(Model.TYPE));
         }
         if (parameters.containsKey(Model.SUBSET)) {
-            this.subset = parameters.get(Model.SUBSET);
+            this.subset = decode(parameters.get(Model.SUBSET));
         }
     }
 
@@ -68,5 +71,20 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
             list = collectionManager.getSubset(this.subset);
         }
         return list;
+    }
+
+    /**
+     * A convenience method to URLDecode a string.
+     * 
+     * @param string
+     *            a string to decode
+     * @return the decoded string
+     */
+    private String decode(final String string) {
+        try {
+            return URLDecoder.decode(string, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new LanewebException("won't happen", e);
+        }
     }
 }
