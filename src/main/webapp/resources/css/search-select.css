@@ -1,29 +1,44 @@
 .yui3-searchselect {
-    display:inline
+    position:relative
 }
 .yui3-searchselect-content {
-    opacity:0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    border: none;
+    background: none;
+    height:34px;
+    position:absolute;
+    cursor:pointer;
 }
-#searchSource {
-    width:122px
-}
-.yui3-searchselect-selected {
+#search .yui3-searchselect-selected {
+display:inline-block;
     margin: 2px;
     padding: 6px;
-    position:absolute;
-    width: 108px;
+    width:108px;
+    height:18px;
+    
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4) );
+    background: -moz-linear-gradient(#fafbf8, #dadad4);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr ='#fafbf8',endColorstr='#dadad4');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr ='#fafbf8',endColorstr='#dadad4')";
+    background:linear-gradient(#fafbf8, #dadad4);
 }
-.yui3-searchselect:hover .yui3-searchselect-selected {
+#search .yui3-searchselect:hover .yui3-searchselect-selected {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadad4), to(#fafbf8) );
     background: -moz-linear-gradient(#dadad4, #fafbf8);
-    filter: progid : DXImageTransform.Microsoft.gradient(startColorst ='#dadad4',endColorstr='#fafbf8');
-    border: 1px solid #dadad9;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr ='#dadad4',endColorstr='#fafbf8');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr ='#dadad4',endColorstr='#fafbf8')";
+    background:linear-gradient(#dadad4,#fafbf8);
 }
 .yui3-searchselect-selected span {
-    display:inline-block;
     background-image: url(/././resources/images/sprite-all.png);
     background-repeat: no-repeat;
     background-position: -2px -277px;
     padding: 6px;
-    float:right
+    display:block;
+    position:absolute;
+    right:8px;
+    top:8px;
+    _display:none;
 }

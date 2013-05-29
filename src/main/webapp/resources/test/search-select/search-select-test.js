@@ -72,9 +72,9 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
             testSelectedContentChanges : function() {
             	var selectedContent = Y.one("." + this.widget.getClassName() + "-selected");
             	this.model.setSelected("foo");
-            	Y.Assert.areEqual("foo content", selectedContent.get("innerHTML"));
+            	Y.Assert.areEqual("foo content", selectedContent.get("firstChild").get("nodeValue"));
             	this.model.setSelected("bar");
-            	Y.Assert.areEqual("bar content", selectedContent.get("innerHTML"));
+            	Y.Assert.areEqual("bar content", selectedContent.get("firstChild").get("nodeValue"));
             }
     });
     

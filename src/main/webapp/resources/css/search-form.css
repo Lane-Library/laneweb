@@ -5,8 +5,9 @@
     background-color: #9B0D00;
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9B0D00), to(#600700));
     background-image: -moz-linear-gradient(#9B0D00, #600700);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700');
+    _ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700')";
     background-image: linear-gradient(#9B0D00, #600700);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700'); 
 }
 #searchFormContainer.clinical {
     height:125px
@@ -14,56 +15,20 @@
 #search {
     margin-top:1px
 }
-#search * {
-    border-radius:3px
+#search div {
+    background-color:white;
+    float:left;
 }
 #searchSource {
-vertical-align:bottom;
-border: 1px solid #DADAD4;
-    margin: 2px;
-    padding: 5px 0;
-height:30px;
-cursor:pointer;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4));
-    background: -moz-linear-gradient(#fafbf8, #dadad4);
-    /*filter necessary to display gradient in IE*/
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafbf8', endColorStr='#dadad4');
-
-    background-image: linear-gradient(#fafbf8, #dadad4);
+    width:124px;
 }
-#search a:hover {
-    border-bottom : 1px solid #fff;
-}
-#searchFields>div {
-    display:inline-block;
-    background-color:white;
-}
-#picoFields {
-    background-color: white;
-    height: 35px;
-    margin-bottom: 11px;
-    width: 678px;
-}
-#picoFields input {
-    border-width:0;
-    /* Mobile Safari: remove rounded corners and input shadow */
-    -webkit-appearance : none;
-    margin: 9px 0;
-    width:168px;
-    text-align:center;
-    border-right:1px rgb(220,220,220) solid;
-    border-radius:0
-}
-#picoFields #clinicalO {
-    border-right:none
+#searchSource option {
 }
 #searchTerms {
-    width : 450px;
-    height: 34px;
-    border:none;
-}
-#search input:focus {
-    outline-style : none;
+    width:450px;
+    border:0 none;
+    height:18px;
+    padding:8px;
 }
 #searchSubmit {
     -webkit-border-radius: 3px;
@@ -72,8 +37,9 @@ cursor:pointer;
     color: #820000;
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4));
     background: -moz-linear-gradient(#fafbf8, #dadad4);
-    /*filter necessary to display gradient in IE*/
-    filter: progid : DXImageTransform.Microsoft.gradient(startColorstr='#fafbf8', endColorstr='#dadad4');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafbf8', endColorstr='#dadad4');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafbf8', endColorstr='#dadad4')";
+    background: linear-gradient(#fafbf8, #dadad4);
     border: 1px solid #dadad9;
     font-weight:bold;
     height:34px;
@@ -81,6 +47,38 @@ cursor:pointer;
     cursor:pointer;
     vertical-align:bottom;
     margin-left:8px;
+}
+#searchSubmit:hover {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadad4), to(#fafbf8));
+    background: -moz-linear-gradient(#dadad4, #fafbf8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8')";
+    background: linear-gradient(#dadad4, #fafbf8);
+}
+#search a:hover {
+    border-bottom : 1px solid #fff;
+}
+#picoFields {
+    background-color: white;
+    height: 35px;
+    margin-bottom: 11px;
+    width: 688px;
+}
+#picoFields input {
+    border-width:0;
+    /* Mobile Safari: remove rounded corners and input shadow */
+    -webkit-appearance : none;
+    margin: 8px 0;
+    width:171px;
+    text-align:center;
+    border-right:1px rgb(220,220,220) solid;
+    border-radius:0
+}
+#picoFields #clinicalO {
+    border-right:none
+}
+#search input:focus {
+    outline-style : none;
 }
 #searchReset {
     display : none;
@@ -94,6 +92,7 @@ cursor:pointer;
 #searchReset:hover {
     color : #79455C;
 }
+
 #searchIndicator {
     visibility : hidden;
     margin-left:250px;

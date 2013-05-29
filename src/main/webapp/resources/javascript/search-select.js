@@ -38,8 +38,8 @@
 	var SearchSelectWidget = Y.Base.create("searchSelect", Y.Widget, [], {
 		renderUI : function() {
 			var srcNode = this.get("srcNode");
-			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("textContent");
-			this.get("boundingBox").insertBefore("<span class='gray-btn " + this.getClassName() + "-selected'>" + content + "<span></span></span>", srcNode);
+			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("innerHTML");
+			this.get("boundingBox").appendChild("<span class='" + this.getClassName() + "-selected'>" + content + "<span></span></span>", srcNode);
 		},
 		bindUI : function() {
 			this.get("model").after("selectedChange", this._handleModelChange, this);
@@ -49,11 +49,11 @@
 			this.get("model").setSelected(this.get("srcNode").get("selectedIndex"));
 		},
 		_handleModelChange : function(event) {
-			var srcNode = this.get("srcNode"),
+			var content, srcNode = this.get("srcNode"),
 			    selected = event.newVal;
 			srcNode.set("value", selected);
-			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("textContent");
-			this.get("boundingBox").one("." + this.getClassName() + "-selected").set("innerHTML", content + "<span></span>");
+			content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("innerHTML");
+			this.get("boundingBox").one("." + this.getClassName() + "-selected").get("firstChild").set("nodeValue", content);
 		}
 	}, {
 		ATTRS : {
