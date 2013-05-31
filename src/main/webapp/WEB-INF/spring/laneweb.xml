@@ -179,6 +179,17 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.xml.XIncludePipe"
+        class="edu.stanford.irt.cocoon.xml.XIncludePipe"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl"/>
+        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.XPointerProcessor"/>
+    </bean>
+    
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <!-- change from default because of maven filter properties seen as properties in dev environment -->
         <property name="placeholderPrefix" value="%{"></property>

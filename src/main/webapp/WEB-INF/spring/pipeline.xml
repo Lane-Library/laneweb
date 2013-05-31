@@ -84,13 +84,7 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/xinclude"
         class="edu.stanford.irt.cocoon.pipeline.transform.XIncludeTransformer"
         scope="prototype">
-        <constructor-arg value="xinclude"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl"/>
-        </constructor-arg>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.XPointerProcessor"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.XIncludePipe"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/debug"
