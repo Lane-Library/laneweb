@@ -478,12 +478,6 @@
     </build>
     <dependencies>
         <dependency>
-            <artifactId>cglib-nodep</artifactId>
-            <groupId>cglib</groupId>
-            <scope>runtime</scope>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
         	<groupId>edu.stanford.irt</groupId>
         	<artifactId>irt-cocoon</artifactId>
         	<version>1.8.0</version>
@@ -621,22 +615,22 @@
             <artifactId>spring-aop</artifactId>
             <groupId>org.springframework</groupId>
             <scope>runtime</scope>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-beans</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-core</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
             <exclusions>
             	<exclusion>
             		<artifactId>commons-logging</artifactId>
@@ -672,22 +666,22 @@
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
             <scope>test</scope>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-webmvc</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -720,7 +714,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-            <version>3.2.2.RELEASE</version>
+            <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <!-- required only for shccodec key generation -->

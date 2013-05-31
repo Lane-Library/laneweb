@@ -40,8 +40,6 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
 
     private static final String A = "a";
 
-    private static final String STYLE = "style";
-
     private SAXStrategy<SearchResult> saxStrategy;
     
     private SAXStrategy<PagingData> pagingDataStrategy = new SearchListPagingDataSAXStrategy();
