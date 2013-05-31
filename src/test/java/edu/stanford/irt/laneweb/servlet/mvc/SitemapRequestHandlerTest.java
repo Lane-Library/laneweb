@@ -20,13 +20,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.pipeline.Pipeline;
+import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
+import edu.stanford.irt.cocoon.sitemap.SitemapContext;
+import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class SitemapRequestHandlerTest {
 
     private static final class TestHandler extends SitemapRequestHandler {
+
+        public TestHandler(ComponentFactory componentFactory, SourceResolver sourceResolver) {
+            super(componentFactory, sourceResolver);
+        }
 
         @Override
         protected Map<String, Object> getModel() {
@@ -50,7 +57,7 @@ public class SitemapRequestHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.handler = new TestHandler();
+        this.handler = new TestHandler(null, null);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.processor = createMock(Sitemap.class);
@@ -71,7 +78,7 @@ public class SitemapRequestHandlerTest {
         expect(this.servletContext.getMimeType("/index.html")).andReturn("text/html");
         expect(this.response.getOutputStream()).andReturn(null);
         this.response.setContentType("text/html");
-        expect(this.processor.buildPipeline(isA(Map.class))).andReturn(this.pipeline);
+        expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
         this.pipeline.process((OutputStream) null);
         this.dataBinder.bind(isA(Map.class), isA(HttpServletRequest.class));
         replay(this.servletContext, this.response, this.request, this.processor, this.pipeline);

@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.beans.factory.config.ConstructorArgumentValues.ValueHolder;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.parsing.BeanComponentDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -280,13 +278,6 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
         private static final String[] CHILD_ELEMENTS = new String[] { PIPELINE };
 
         @Override
-        protected void doParse(final Element element, final ParserContext parserContext,
-                final BeanDefinitionBuilder builder) {
-            super.doParse(element, parserContext, builder);
-            builder.getBeanDefinition().setConstructorArgumentValues(getConstructorArgumentValues());
-        }
-
-        @Override
         protected Map<String, String> getAttributeMap() {
             return ATTRIBUTE_MAP;
         }
@@ -312,17 +303,6 @@ public class SitemapNamespaceHandler extends NamespaceHandlerSupport {
                 final ParserContext parserContext) {
             String filename = parserContext.getReaderContext().getResource().getFilename();
             return "edu.stanford.irt.cocoon.sitemap.Sitemap/" + filename.substring(0, filename.indexOf('.'));
-        }
-
-        private ConstructorArgumentValues getConstructorArgumentValues() {
-            ConstructorArgumentValues cav = new ConstructorArgumentValues();
-            ValueHolder fact = new ValueHolder(new RuntimeBeanReference(
-                    "edu.stanford.irt.cocoon.sitemap.ComponentFactory"));
-            ValueHolder resolver = new ValueHolder(new RuntimeBeanReference(
-                    "edu.stanford.irt.cocoon.source.SourceResolver"));
-            cav.addGenericArgumentValue(resolver);
-            cav.addGenericArgumentValue(fact);
-            return cav;
         }
     }
 

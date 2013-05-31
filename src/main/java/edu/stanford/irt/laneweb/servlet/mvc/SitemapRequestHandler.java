@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.cocoon.pipeline.Pipeline;
+import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
+import edu.stanford.irt.cocoon.sitemap.SitemapContextImpl;
+import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
@@ -28,6 +31,15 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     private ServletContext servletContext;
 
     private Sitemap sitemap;
+
+    private ComponentFactory componentFactory;
+
+    private SourceResolver sourceResolver;
+    
+    public SitemapRequestHandler(ComponentFactory componentFactory, SourceResolver sourceResolver) {
+        this.componentFactory = componentFactory;
+        this.sourceResolver = sourceResolver;
+    }
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,7 +57,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         if (mimeType != null) {
             response.setContentType(mimeType);
         }
-        Pipeline pipeline = this.sitemap.buildPipeline(model);
+        Pipeline pipeline = this.sitemap.buildPipeline(new SitemapContextImpl(model, this.componentFactory, this.sourceResolver));
         if ("GET".equals(method)) {
             // only process GET requests
             pipeline.process(response.getOutputStream());

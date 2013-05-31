@@ -3,11 +3,16 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceResolverImpl;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public abstract class LocationModifyingSourceResolver extends SourceResolverImpl {
+
+    public LocationModifyingSourceResolver(ComponentFactory componentFactory) {
+        super(componentFactory);
+    }
 
     private LocationModifier modifier = new LocationModifier();
 

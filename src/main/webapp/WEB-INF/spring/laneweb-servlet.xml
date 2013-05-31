@@ -81,6 +81,8 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         abstract="true">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
         <property name="methodsNotAllowed">
             <set>
                 <value>OPTIONS</value>

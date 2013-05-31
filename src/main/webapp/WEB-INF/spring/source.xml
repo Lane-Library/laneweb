@@ -5,6 +5,7 @@
     
     <bean id="edu.stanford.irt.cocoon.source.SourceResolver"
         class="edu.stanford.irt.laneweb.cocoon.LocationModifyingSourceResolver">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
         <property name="sitemaps">
             <map>
                 <entry key="content" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>

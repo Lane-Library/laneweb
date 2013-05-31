@@ -13,10 +13,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
+import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
 public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
+
+    public SitemapHandlerExceptionResolver(ComponentFactory componentFactory, SourceResolver sourceResolver) {
+        super(componentFactory, sourceResolver);
+    }
 
     private final Logger log = LoggerFactory.getLogger("error handler");
 
