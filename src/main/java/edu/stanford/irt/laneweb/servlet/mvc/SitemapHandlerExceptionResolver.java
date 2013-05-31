@@ -39,7 +39,7 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
             }
             if (ultimateCause instanceof FileNotFoundException) {
                 this.log.error(ultimateCause.toString());
-            } else if (ultimateCause instanceof SocketException) {
+            } else if (ultimateCause instanceof SocketException && "Broken pipe".equals(ultimateCause.getMessage())) {
                 this.log.error(ultimateCause.toString() + " ip=" + request.getRemoteAddr() + " url=" + request.getRequestURL().toString());
             } else {
                 this.log.error(ex.toString(), ultimateCause);
