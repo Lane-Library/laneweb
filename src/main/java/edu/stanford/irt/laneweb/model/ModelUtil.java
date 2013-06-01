@@ -7,9 +7,8 @@ import java.util.Map;
  */
 public abstract class ModelUtil {
 
-    @SuppressWarnings("unchecked")
     public static <T> T getObject(final Map<String, Object> map, final String name, final Class<T> clazz) {
-        return (T) map.get(name);
+        return clazz.cast(map.get(name));
     }
 
     public static <T> T getObject(final Map<String, Object> map, final String name, final Class<T> clazz, final T defaultValue) {
