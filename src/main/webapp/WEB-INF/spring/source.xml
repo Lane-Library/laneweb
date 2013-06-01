@@ -5,22 +5,31 @@
     
     <bean id="edu.stanford.irt.cocoon.source.SourceResolver"
         class="edu.stanford.irt.laneweb.cocoon.LocationModifyingSourceResolver">
-        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
-        <property name="sitemaps">
+        <property name="sourceResolvers">
             <map>
-                <entry key="content" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>
-                <entry key="apps" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/applications"/>
-                <entry key="eresources" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources"/>
-                <entry key="rss" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/rss"/>
-                <entry key="mobile" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile"/>
-                <entry key="classes" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/classes"/>
-                <entry key="bookmarks" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
+                <entry key="cocoon">
+                    <bean class="edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver">
+                        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+                        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
+                        <property name="sitemaps">
+                            <map>
+                                <entry key="content" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>
+                                <entry key="apps" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/applications"/>
+                                <entry key="eresources" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources"/>
+                                <entry key="rss" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/rss"/>
+                                <entry key="mobile" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile"/>
+                                <entry key="classes" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/classes"/>
+                                <entry key="bookmarks" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
+                            </map>
+                        </property>
+                        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+                    </bean>
+                </entry>
             </map>
         </property>
         <property name="defaultResolver">
             <bean class="edu.stanford.irt.laneweb.cocoon.SpringResourceSourceResolver"/>
         </property>
-        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
 
 </beans>
