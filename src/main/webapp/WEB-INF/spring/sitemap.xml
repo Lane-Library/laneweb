@@ -29,6 +29,10 @@
         <property name="attributeName" value="sunetid"/>
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/not-cacheable"
+        class="edu.stanford.irt.laneweb.cocoon.NotCacheableSelector">
+    </bean>
+    
     <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/resource-exists"
         class="edu.stanford.irt.cocoon.sitemap.select.ResourceExistsSelector">
         <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
