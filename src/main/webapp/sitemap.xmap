@@ -47,6 +47,9 @@
             <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="**.html" type="wildcard">
+            <map:select type="cacheable">
+                <map:when test=""/> 
+            </map:select>
             <map:aggregate type="default" element="doc">
                 <map:generate type="file" src="content:/{1}.html"/>
                 <map:generate type="file" src="content:/templates/{template}.xml"/>
