@@ -24,9 +24,9 @@ public class MetaSearchManagerSource {
 
     public MetaSearchManagerSource(final String springFileName) {
         this.context = new ClassPathXmlApplicationContext(springFileName);
-        this.manager = (MetaSearchManager) this.context.getBean("manager");
-        this.searchCacheManager = (SearchCacheManager) this.context.getBean("searchCacheManager");
-        this.httpClient = (HttpClient) this.context.getBean("httpClient");
+        this.manager = this.context.getBean("manager", MetaSearchManager.class);
+        this.searchCacheManager = this.context.getBean("searchCacheManager", SearchCacheManager.class);
+        this.httpClient = this.context.getBean("httpClient", HttpClient.class);
     }
 
     public void dispose() {
@@ -47,9 +47,9 @@ public class MetaSearchManagerSource {
 
     public void reload(final String url, final String login, final String password) throws IOException {
         AbstractXmlApplicationContext newContext = new HttpApplicationContext(url, login, password);
-        this.manager = (MetaSearchManager) newContext.getBean("manager");
-        this.httpClient = (HttpClient) newContext.getBean("httpClient");
-        this.searchCacheManager = (SearchCacheManager) newContext.getBean("searchCacheManager");
+        this.manager = newContext.getBean("manager", MetaSearchManager.class);
+        this.httpClient = newContext.getBean("httpClient", HttpClient.class);
+        this.searchCacheManager = newContext.getBean("searchCacheManager", SearchCacheManager.class);
         this.context.destroy();
         this.context = newContext;
     }
