@@ -54,7 +54,7 @@
     
     <category name="edu.stanford.irt.laneweb.cocoon.CacheableSelector" additivity="false">
         <priority value="INFO"/>
-        <appender-ref ref="console"/>
+        <appender-ref ref="nocache"/>
     </category>
     
     <!--<category name="httpclient.wire.header" additivity="false">
