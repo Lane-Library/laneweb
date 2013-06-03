@@ -41,7 +41,7 @@
         </layout> 
     </appender>
     
-    <appender name="nocache"
+    <appender name="cacheable"
         class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${catalina.base}/logs/nocache.log"/>
         <param name="Append" value="true"/>
@@ -54,7 +54,7 @@
     
     <category name="edu.stanford.irt.laneweb.cocoon.CacheableSelector" additivity="false">
         <priority value="INFO"/>
-        <appender-ref ref="nocache"/>
+        <appender-ref ref="cacheable"/>
     </category>
     
     <!--<category name="httpclient.wire.header" additivity="false">
