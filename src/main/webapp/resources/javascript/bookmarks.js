@@ -1,8 +1,8 @@
 (function() {
 
-    var Bookmark, Bookmarks, BookmarksWidget, BookmarkLink, BookmarkEditor, BookmarksEditor;
+    var Bookmark, Bookmarks, BookmarksWidget, BookmarkLink, BookmarkEditor, BookmarksEditor, model = Y.lane.Model;
 
-    if (Y.one("#bookmarks")) {
+    if (Y.one("#bookmarks") && model.get(model.DISASTER_MODE)) {
 
         /**
          * A class for representing a bookmark with attributes for the label and url.
@@ -123,7 +123,7 @@
          * @param bookmarks {array} may be undefined
          */
         Bookmarks = function(bookmarks) {
-        	var i, model = Y.lane.Model;
+        	var i;
             this._bookmarks = [];
             if (bookmarks && !Y.Lang.isArray(bookmarks)) {
                 throw("bad config");
