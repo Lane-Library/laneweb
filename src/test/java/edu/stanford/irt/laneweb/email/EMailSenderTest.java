@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class EMailSenderTest {
 
@@ -36,7 +37,8 @@ public class EMailSenderTest {
     @Before
     public void setUp() throws Exception {
         this.javaMailSender = createMock(JavaMailSender.class);
-        this.eMailSender = new EMailSender(Collections.singleton("recipient"), this.javaMailSender);
+        this.eMailSender = new EMailSender(Collections.singleton("recipient"), this.javaMailSender,
+                Collections.singleton("127.0.0.1"));
         this.map = new HashMap<String, Object>();
         this.message = createMock(MimeMessage.class);
     }
@@ -111,6 +113,18 @@ public class EMailSenderTest {
         expect(this.javaMailSender.createMimeMessage()).andReturn(this.message);
         this.message.setSubject("subject");
         expectLastCall().andThrow(new MessagingException());
+        replay(this.javaMailSender, this.message);
+        try {
+            this.eMailSender.sendEmail(this.map);
+        } catch (LanewebException e) {
+        }
+        verify(this.javaMailSender, this.message);
+    }
+
+    @Test
+    public void testSendMailSpamIP() throws MessagingException {
+        this.map.put("recipient", "recipient");
+        this.map.put(Model.REMOTE_ADDR, "127.0.0.1");
         replay(this.javaMailSender, this.message);
         try {
             this.eMailSender.sendEmail(this.map);

@@ -41,6 +41,11 @@
                 <property name="host" value="medmail.stanford.edu"/>
             </bean>
         </constructor-arg>
+        <constructor-arg>
+            <set>
+                <value>173.44.37.242</value>
+            </set>
+        </constructor-arg>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.ldap.SubjectSource"
