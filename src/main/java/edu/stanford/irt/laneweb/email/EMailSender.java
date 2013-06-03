@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class EMailSender {
 
@@ -27,9 +28,12 @@ public class EMailSender {
 
     private Set<String> recipients;
 
-    public EMailSender(final Set<String> recipients, final JavaMailSender mailSender) {
+    private Set<String> spamIps;
+
+    public EMailSender(final Set<String> recipients, final JavaMailSender mailSender, final Set<String> spamIps) {
         this.recipients = recipients;
         this.mailSender = mailSender;
+        this.spamIps = spamIps;
         this.excludedFields = new HashSet<String>();
         for (String element : EXCLUDED_FIELDS) {
             this.excludedFields.add(element);
@@ -66,6 +70,10 @@ public class EMailSender {
         Object recipient = map.get("recipient");
         if (!this.recipients.contains(recipient)) {
             throw new LanewebException("recipient " + recipient + " not permitted");
+        }
+        Object remoteIp = map.get(Model.REMOTE_ADDR);
+        if (this.spamIps.contains(remoteIp)) {
+            throw new LanewebException(remoteIp + " is in the spam list");
         }
     }
 }

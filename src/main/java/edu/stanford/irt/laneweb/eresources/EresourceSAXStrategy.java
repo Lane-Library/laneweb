@@ -55,7 +55,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
         maybeCreateElement(xmlConsumer, PUBLISHER, version.getPublisher());
         maybeCreateElement(xmlConsumer, DESCRIPTION, version.getDescription());
         for (Link link : version.getLinks()) {
-            handleLink(xmlConsumer, (Link) link);
+            handleLink(xmlConsumer, link);
         }
         XMLUtils.endElement(xmlConsumer, NAMESPACE, VERSION);
     }
