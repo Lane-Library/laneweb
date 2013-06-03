@@ -25,6 +25,9 @@
             <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="plain/**.html" type="wildcard">
+            <map:select type="cacheable">
+                <map:when test=""/> 
+            </map:select>
             <map:generate type="file" src="content:/{1}.html"/>
             <map:select type="cme-links">
                 <map:when test="true">
