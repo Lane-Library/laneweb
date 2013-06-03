@@ -68,7 +68,7 @@
     border-width:0;
     /* Mobile Safari: remove rounded corners and input shadow */
     -webkit-appearance : none;
-    margin: 8px 0;
+    margin: 10px 0;
     width:171px;
     text-align:center;
     border-right:1px rgb(220,220,220) solid;
