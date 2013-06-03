@@ -43,7 +43,7 @@
     
     <appender name="cacheable"
         class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${catalina.base}/logs/nocache.log"/>
+        <param name="File" value="${catalina.base}/logs/cacheable.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>
         <param name="MaxBackupIndex" value="10"/>
