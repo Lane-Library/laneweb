@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-05-22" version="2.1.14" description="2.1.14 bug fix release">
+            <action date="2013-06-03" dev="ceyates" issue="85790" type="fix">
+                json search facets request from pedschild-all search fails
+            </action>
+            <action date="2013-05-29" dev="olgary" issue="85981" type="update">
+                Remove IRT and 'powered by..' from footer
+            </action>
+        </release>
         <release date="2013-05-22" version="2.1.13" description="2.1.13 emergency release">
             <action date="2013-05-21" dev="ceyates" issue="85623" type="fix">
                 history search fails
