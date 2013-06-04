@@ -14,7 +14,7 @@ public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener 
     private Map<String, Object> model;
 
     public void exception(final Exception e) {
-        this.log.error(this.model.toString(), e);
+        this.log.error(e.toString() + "\nmodel=" + this.model.toString(), e);
     }
 
     public void setModel(final Map<String, Object> model) {
