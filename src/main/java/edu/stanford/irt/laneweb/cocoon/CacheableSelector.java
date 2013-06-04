@@ -25,6 +25,7 @@ public class CacheableSelector implements Selector {
 //        boolean result =  (model.containsKey(Model.SUNETID)
 //                || model.containsKey(Model.QUERY)
 //                || model.containsKey(Model.EMRID)
+//                || "/error.html".equals(ModelUtil.getString(model, Model.SITEMAP_URI))
 //                || model.containsKey(Model.DEBUG)
 //                || ModelUtil.getString(model, Model.BASE_PATH, "").contains("/stage"));
         String reason = getReason(model);
@@ -39,6 +40,8 @@ public class CacheableSelector implements Selector {
             result = ":sunetid";
         } else if (model.containsKey(Model.QUERY)) {
             result = ":query";
+        } else if ("/error.html".equals(ModelUtil.getString(model, Model.SITEMAP_URI))) {
+            result = ":/error.html";
         } else if (model.containsKey(Model.EMRID)) {
             result = ":emrid";
         } else if (model.containsKey(Model.DEBUG)) {
