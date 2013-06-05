@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="expires">
         <map:parameter name="cache-expires" value="60"/>
-        <map:parameter name="cache-key" value="{sitemap-uri}?{query-string};{ipgroup}"/>
+        <map:parameter name="cache-key" value="{sitemap-uri}?{query-string};ipgroup={ipgroup};proxy-links={proxy-links}"/>
         <map:select type="cacheable">
             <map:when test="">
                 <map:match pattern="plain/**.html" type="wildcard">
