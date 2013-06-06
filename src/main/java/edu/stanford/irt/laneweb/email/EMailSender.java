@@ -40,6 +40,14 @@ public class EMailSender {
         }
     }
 
+    public void addSpamIP(final String spamIP) {
+        this.spamIps.add(spamIP);
+    }
+
+    public boolean removeSpamIP(final String spamIP) {
+        return this.spamIps.remove(spamIP);
+    }
+
     public void sendEmail(final Map<String, Object> map) {
         validateModel(map);
         final MimeMessage message = this.mailSender.createMimeMessage();
