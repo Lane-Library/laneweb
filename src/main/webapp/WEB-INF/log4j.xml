@@ -41,6 +41,22 @@
         </layout> 
     </appender>
     
+    <appender name="cacheable"
+        class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.base}/logs/cacheable.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
+        </layout>
+    </appender>
+    
+    <category name="edu.stanford.irt.laneweb.cocoon.CacheableSelector" additivity="false">
+        <priority value="INFO"/>
+        <appender-ref ref="cacheable"/>
+    </category>
+    
     <!--<category name="httpclient.wire.header" additivity="false">
         <priority value="DEBUG"/>
         <appender-ref ref="headers"/>

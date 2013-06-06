@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
@@ -31,7 +34,11 @@ public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerat
 
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.TYPE)) {
-            this.type = parameters.get(Model.TYPE);
+            try {
+                this.type = URLDecoder.decode(parameters.get(Model.TYPE), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new LanewebException("won't happen");
+            }
         }
     }
 

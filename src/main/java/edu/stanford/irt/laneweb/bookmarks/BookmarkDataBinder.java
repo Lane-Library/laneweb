@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class BookmarkDataBinder implements DataBinder {
@@ -15,7 +16,7 @@ public class BookmarkDataBinder implements DataBinder {
     private BookmarkDAO bookmarkDAO;
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        String sunetid = (String) model.get(Model.SUNETID);
+        String sunetid = ModelUtil.getString(model, Model.SUNETID);
         if (sunetid != null) {
             List<Bookmark> bookmarks = null;
             HttpSession session = request.getSession();
