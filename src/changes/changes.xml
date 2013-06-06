@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-06-10" version="2.1.15" description="2.1.15 bug fix release">
+            <action date="2013-06-05" dev="ceyates" issue="86277" type="update">
+                combine lane and yui css, javascript into single files
+            </action>
+            <action date="2013-06-03" dev="olgary" issue="86193" type="update">
+                debug.xml, template.xml - added a new (Inf diseases) portal to a drop down
+            </action>
+            <action date="2013-06-03" dev="ryanmax" issue="86183" type="add">
+                disable bookmarks while in DR mode
+            </action>
+        </release>
         <release date="2013-06-03" version="2.1.14" description="2.1.14 bug fix release">
             <action date="2013-06-03" dev="ceyates" issue="86173" type="add">
                 prevent particular ip addresses from sending email
