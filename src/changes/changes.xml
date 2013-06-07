@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2013-06-10" version="2.1.15" description="2.1.15 bug fix release">
+            <action date="2013-06-06" dev="ceyates" issue="86340" type="add">
+                permit remote configuration of spam IP addresses
+            </action>
             <action date="2013-06-05" dev="ceyates" issue="86277" type="update">
                 combine lane and yui css, javascript into single files
             </action>
