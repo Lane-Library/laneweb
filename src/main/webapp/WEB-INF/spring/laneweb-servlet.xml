@@ -61,6 +61,7 @@
                 <entry key="**/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
                 <entry key="**/classes/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/classes"/>
                 <entry key="**/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
+                <!-- TODO: need to figure out how to get the bookmark js tests running on the server -->
                 <entry key="**/bookmarks/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/bookmarks"/>
                 <entry key="**/test/bookmarks/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
                 <entry key="**/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>

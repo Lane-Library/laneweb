@@ -163,14 +163,13 @@
                         <exclude>**/lane-mobile.css</exclude>
                         <exclude>**/lane-mobile.js</exclude>
                         <exclude>**/test/*/*.js</exclude>
-                        <exclude>**/yui-*.js</exclude>
-                        <exclude>**/yui.css</exclude>
                     </excludes>
                     <aggregations>
                         <aggregation>
                             <removeIncluded>true</removeIncluded>
                             <output>target/laneweb/resources/css/lane-all.css</output>
                             <includes>
+                                <include>yui-min.css</include>
                                 <include>layout-min.css</include>
                                 <include>bassett-min.css</include>
                                 <include>shaded-border-min.css</include>
@@ -219,6 +218,7 @@
                             <removeIncluded>true</removeIncluded>
                             <output>target/laneweb/resources/javascript/lane-all.js</output>
                             <includes>
+                                <include>yui-3.6.0-min.js</include>
                                 <include>lane-min.js</include>
                                 <include>model-min.js</include>
                                 <include>link-plugin-min.js</include>
