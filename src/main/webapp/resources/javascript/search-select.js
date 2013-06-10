@@ -39,7 +39,7 @@
 		renderUI : function() {
 			var srcNode = this.get("srcNode");
 			var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("innerHTML");
-			this.get("boundingBox").appendChild("<span class='" + this.getClassName() + "-selected'>" + content + "<span></span></span>", srcNode);
+			this.get("boundingBox").appendChild("<span class='" + this.getClassName() + "-selected'><span>" + content + "</span></span>", srcNode);
 		},
 		bindUI : function() {
 			this.get("model").after("selectedChange", this._handleModelChange, this);
@@ -53,7 +53,7 @@
 			    selected = event.newVal;
 			srcNode.set("value", selected);
 			content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("innerHTML");
-			this.get("boundingBox").one("." + this.getClassName() + "-selected").get("firstChild").set("nodeValue", content);
+			this.get("boundingBox").one("." + this.getClassName() + "-selected").get("firstChild").set("innerHTML", content);
 		}
 	}, {
 		ATTRS : {
