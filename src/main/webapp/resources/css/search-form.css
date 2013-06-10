@@ -15,6 +15,11 @@
 #search {
     margin-top:1px
 }
+#searchFields {
+    /*IE7 requires this z-index for the autocomplete to show up over the laneNav menus*/
+    z-index:1;
+    position:relative
+}
 #search div {
     background-color:white;
     float:left;
@@ -25,10 +30,11 @@
 #searchSource option {
 }
 #searchTerms {
-    width:450px;
+    width:436px;
     border:0 none;
     height:18px;
     padding:8px;
+    padding-right:22px;
 }
 #searchSubmit {
     -webkit-border-radius: 3px;
@@ -62,7 +68,7 @@
     background-color: white;
     height: 35px;
     margin-bottom: 11px;
-    width: 688px;
+    width: 690px;
 }
 #picoFields input {
     border-width:0;
@@ -81,13 +87,19 @@
     outline-style : none;
 }
 #searchReset {
+    cursor : pointer;
     display : none;
     color : #A1B9ED;
-    border-bottom : none;
+    background-color:white;
+    /*border-bottom : none;*/
     font-size : 175%;
     position:absolute;
-    top:4px;
-    right:10px
+    top:0;
+    left:570px;
+    width:22px;
+    height:26px;
+    padding:4px 0;
+    text-align:center;
 }
 #searchReset:hover {
     color : #79455C;

@@ -85,7 +85,6 @@
                                         >Textbooks</option>
                                 </select>
                                 <input name="q" id="searchTerms" type="text"/>
-                                <a id="searchReset" title="Clear Search" href="/">&#215;</a>
                                 </div>
                                 <input id="searchSubmit" type="submit" value="Search"/>
                             </fieldset>
