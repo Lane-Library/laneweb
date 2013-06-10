@@ -32,13 +32,10 @@ display:inline-block;
     background:linear-gradient(#dadad4,#fafbf8);
 }
 .yui3-searchselect-selected span {
+    float:right;
     background-image: url(/././resources/images/sprite-all.png);
     background-repeat: no-repeat;
     background-position: -2px -277px;
-    padding: 6px;
-    display:block;
-    position:absolute;
-    right:8px;
-    top:8px;
-    _display:none;
+    padding:6px;
+    *display:none;
 }
