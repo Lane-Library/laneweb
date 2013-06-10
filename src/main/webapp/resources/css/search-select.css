@@ -1,3 +1,9 @@
+.yui3-js-enabled #searchSource {
+    visibility:hidden;
+}
+.yui3-js-enabled .yui3-searchselect #searchSource {
+    visibility:visible;
+}
 .yui3-searchselect {
     position:relative
 }
