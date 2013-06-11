@@ -24,6 +24,8 @@ public class LocationModifier {
             result = new URI("cocoon://mobile" + path);
         } else if ("rss".equals(scheme)) {
             result = new URI("cocoon://rss" + path);
+        } else if ("bookmarks".equals(scheme)) {
+            result = new URI("cocoon://bookmarks" + path);
         }
         if (query != null && result != null) {
             throw new LanewebException("need to add query ?" + query + " to uri " + result);
