@@ -156,15 +156,12 @@
                 <value>template</value>
                 <value>bassettLargerView</value>
                 <value>none</value>
-                <value>shc</value>
             </list>
         </constructor-arg>
         <constructor-arg>
             <map>
                 <entry key="^(?:/\w+|)/biomed-resources/bassett/raw/bassettLargerView.html"
                     value="bassettLargerView"/>
-                <entry key="^(?:/\w+|)/portals/shc.html"
-                    value="shc"/>
             </map>
         </constructor-arg>
     </bean>
