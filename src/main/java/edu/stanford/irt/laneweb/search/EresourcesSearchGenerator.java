@@ -37,7 +37,7 @@ public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerat
             try {
                 this.type = URLDecoder.decode(parameters.get(Model.TYPE), "UTF-8");
             } catch (UnsupportedEncodingException e) {
-                throw new LanewebException("won't happen");
+                throw new LanewebException("won't happen", e);
             }
         }
     }

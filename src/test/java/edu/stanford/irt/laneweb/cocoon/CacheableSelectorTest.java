@@ -36,6 +36,12 @@ public class CacheableSelectorTest {
     }
 
     @Test
+    public void testBassett() {
+        this.model.put(Model.SITEMAP_URI, "/biomed-resources/bassett/foo");
+        assertFalse(this.selector.select(null, this.model, null));
+    }
+
+    @Test
     public void testDebug() {
         this.model.put(Model.DEBUG, Boolean.FALSE);
         assertFalse(this.selector.select(null, this.model, null));
