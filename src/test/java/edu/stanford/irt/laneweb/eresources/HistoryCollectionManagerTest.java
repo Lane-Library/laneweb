@@ -70,7 +70,7 @@ public class HistoryCollectionManagerTest {
         this.statement.setString(1, "type");
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt(isA(String.class))).andReturn(0).times(4);
-        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(9);
+        expect(this.resultSet.getString(isA(String.class))).andReturn("string").times(10);
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
         this.manager.getCore("type");

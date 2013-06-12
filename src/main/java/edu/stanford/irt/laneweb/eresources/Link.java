@@ -11,40 +11,19 @@ public class Link {
     private String url;
 
     private Version version;
+    
+    private String linkText;
 
-    public Link(final String instruction, final String label, final LinkType type, final String url) {
+    public Link(final String instruction, final String label, final LinkType type, final String url, final String linkText) {
         this.instruction = instruction;
         this.label = label;
         this.type = type;
         this.url = url;
+        this.linkText = linkText;
     }
     
     public String getLinkText() {
-        StringBuilder sb = new StringBuilder();
-        if (LinkType.IMPACTFACTOR.equals(this.type)) {
-            sb.append("Impact Factor");
-        } else {
-            String summaryHoldings = this.version.getSummaryHoldings();
-            if (summaryHoldings != null && this.version.getLinks().size() == 1) {
-                sb.append(summaryHoldings);
-                String dates = this.version.getDates();
-                if (dates != null) {
-                    sb.append(", ").append(dates);
-                }
-            } else {
-                if (this.label != null) {
-                    sb.append(this.label);
-                }
-            }
-            if (sb.length() == 0) {
-                sb.append(this.url);
-            }
-            String description = this.version.getDescription();
-            if (description != null) {
-                sb.append(" ").append(description);
-            }
-        }
-        return sb.toString();
+        return this.linkText;
     }
 
     public String getAdditionalText() {
