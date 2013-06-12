@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-06-12" version="2.1.16" description="2.1.16 bug fix release">
+            <action date="2013-06-10" dev="ceyates" issue="8507" type="add">
+                debug.xml, template.xml - added a new (Immunology/Rheumatology) portal to a drop down
+            </action>
+        </release>
         <release date="2013-06-10" version="2.1.15" description="2.1.15 bug fix release">
             <action date="2013-06-06" dev="ceyates" issue="86340" type="add">
                 permit remote configuration of spam IP addresses
