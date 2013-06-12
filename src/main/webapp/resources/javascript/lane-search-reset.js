@@ -9,9 +9,9 @@
         eventHandle,
         reset;
         if (!searchReset) {
-            searchReset = Y.Node.create("<a id='searchReset' title='Clear Search' href='/'>×</a>");
+            searchReset = Y.Node.create("<span id='searchReset' title='Clear Search'>×</span>");
             searchReset.setStyle("display","none");
-            form.one("fieldset").append(searchReset);
+            form.one("#searchFields").append(searchReset);
         }
         Y.publish("lane:searchFormReset",{broadcast:1,emitFacade: true});
         searchReset.on("click", function(e){

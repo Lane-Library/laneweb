@@ -19,7 +19,8 @@
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {
             minQueryLength: 3,
-            source: SOURCE_BASE + (limit || DEFAULT_LIMIT)
+            source: SOURCE_BASE + (limit || DEFAULT_LIMIT),
+            width: "auto"
         });
         
         /**
@@ -89,11 +90,11 @@
          * @private
          */
         _handleVisibleChange : function(event) {
-            if (event.newVal) {
-                this._ac.set("width", this._ac.get("inputNode").get("offsetWidth"));
-                this._visibleHandle.detach();
-                this._visibleHandle = null;
-            }
+//            if (event.newVal) {
+//                this._ac.set("width", this._ac.get("inputNode").get("offsetWidth"));
+//                this._visibleHandle.detach();
+//                this._visibleHandle = null;
+//            }
         },
         
         /**

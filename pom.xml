@@ -206,11 +206,10 @@
                                 <include>antibiogram-min.css</include>
                                 <include>landing-pgs-2011-min.css</include>
                                 <include>bookmarks-min.css</include>
-                                <!-- TODO: remove bookmarks-marketing when appropriate -->
-                                <include>bookmarks-marketing-min.css</include>
                                 <include>bookmark-instructions-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
+                                <include>search-select-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -228,12 +227,11 @@
                                 <include>lane-bassett-min.js</include>
                                 <include>lane-textinputs-min.js</include>
                                 <include>suggest-min.js</include>
+                                <include>search-select-min.js</include>
                                 <include>lane-search-pico-min.js</include>
                                 <include>lane-search-min.js</include>
                                 <include>bookmarks-min.js</include>
                                 <include>lane-tracking-min.js</include>
-                                <!-- TODO: remove bookmarks-marketing when appropriate -->
-                                <include>bookmarks-marketing-min.js</include>
                                 <include>bookmark-instructions-min.js</include>
                                 <include>lane-expandies-min.js</include>
                                 <include>lane-google-min.js</include>
