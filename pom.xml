@@ -206,8 +206,6 @@
                                 <include>antibiogram-min.css</include>
                                 <include>landing-pgs-2011-min.css</include>
                                 <include>bookmarks-min.css</include>
-                                <!-- TODO: remove bookmarks-marketing when appropriate -->
-                                <include>bookmarks-marketing-min.css</include>
                                 <include>bookmark-instructions-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
@@ -234,8 +232,6 @@
                                 <include>lane-search-min.js</include>
                                 <include>bookmarks-min.js</include>
                                 <include>lane-tracking-min.js</include>
-                                <!-- TODO: remove bookmarks-marketing when appropriate -->
-                                <include>bookmarks-marketing-min.js</include>
                                 <include>bookmark-instructions-min.js</include>
                                 <include>lane-expandies-min.js</include>
                                 <include>lane-google-min.js</include>

@@ -16,7 +16,7 @@
                             <a href="/index.html"><span>Lane</span> Medical Library</a>
                         </h1>
                         <div id="searchFormContainer">
-                            <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>  
+                            <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
                             <form id="search" method="get" action="/search.html">
                             <fieldset id="searchFields">
                                 <div>
@@ -45,7 +45,7 @@
                                 <input name="q" id="searchTerms" type="text"/>
                                 </div>
                                 <input id="searchSubmit" type="submit" value="Search"/>
-                                <img id="searchIndicator" src="/resources/images/search-indicator.gif" alt="search indicator"/>  
+                                <img id="searchIndicator" src="/resources/images/search-indicator.gif" alt="search indicator"/>
                             </fieldset>
                             </form>
                             <ul id="qlinks">
@@ -75,10 +75,10 @@
                             <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
                         </ul>
                         <ul id="login">
-                            <li><!--<div class="look-here"><div class="look-here-arrow"></div>Save Time!<br/>Login to personalize</div>-->
+                            <li>
                                 <a href="/secure/login.html">MyLane login</a>
                             </li>
-                            <li id="favorites"><div class="look-here"><div class="look-here-arrow"></div>Create your personal bookmarks</div>
+                            <li id="favorites">
                                 <a href="/favorites.html">My Bookmarks</a>
                                 <?laneweb bookmarks?>
                             </li>
