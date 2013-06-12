@@ -13,7 +13,7 @@
     height:125px
 }
 #search {
-    margin-top:1px
+    margin-top:6px
 }
 #searchFields {
     /*IE7 requires this z-index for the autocomplete to show up over the laneNav menus*/
@@ -107,8 +107,9 @@
 
 #searchIndicator {
     visibility : hidden;
-    margin-left:250px;
-    vertical-align:middle
+    position: absolute;
+    left: 240px;
+    top: 8px;
 }
 #searchIndicator.show {
     visibility:visible

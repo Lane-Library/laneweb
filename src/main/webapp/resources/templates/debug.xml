@@ -57,8 +57,7 @@
                             <a href="/index.html"><span>Lane</span> Medical Library</a>
                         </h1>
                         <div id="searchFormContainer">
-                            <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
-                            <img id="searchIndicator" src="/resources/images/search-indicator.gif" alt="search indicator"/>    
+                            <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>    
                             <form id="search" method="get" action="/search.html">
                             <fieldset id="searchFields">
                                 <div>
@@ -87,6 +86,7 @@
                                 <input name="q" id="searchTerms" type="text"/>
                                 </div>
                                 <input id="searchSubmit" type="submit" value="Search"/>
+                                <img id="searchIndicator" src="/resources/images/search-indicator.gif" alt="search indicator"/>
                             </fieldset>
                             </form>
                             <ul id="qlinks">
