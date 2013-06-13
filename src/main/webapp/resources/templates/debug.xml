@@ -60,7 +60,7 @@
                             <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
                             <form id="search" method="get" action="/search.html">
                             <fieldset id="searchFields">
-                                <div>
+                                <div id="selectAndInput">
                                 <select name="source" id="searchSource">
                                     <option value="all-all"
                                         title="Enter Subject, Title, Author, PMID, ISSN, DOI"

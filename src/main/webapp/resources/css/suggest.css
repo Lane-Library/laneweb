@@ -23,8 +23,7 @@
     list-style:none;
     padding:2px 5px;
     border-bottom:1px solid #ccc;
-    margin-left:0;
-    white-space:nowrap
+    margin-left:0
 }
 .yui3-aclist-item-active{
     background-color:#426FD9;

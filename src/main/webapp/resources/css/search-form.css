@@ -20,7 +20,7 @@
     z-index:1;
     position:relative
 }
-#search div {
+#selectAndInput {
     background-color:white;
     float:left;
 }
@@ -30,11 +30,11 @@
 #searchSource option {
 }
 #searchTerms {
-    width:436px;
+    width:458px;
     border:0 none;
     height:18px;
-    padding:8px;
-    padding-right:22px;
+    padding:8px 0 8px 0;
+    margin-left: 8px
 }
 #searchSubmit {
     -webkit-border-radius: 3px;

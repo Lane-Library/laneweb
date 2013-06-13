@@ -14,13 +14,14 @@
      * @uses EventTarget
      * @constructor
      * @param input {Node} the input node.
-     * @param limit {String} the limit parameter for the reqeust.
+     * @param limit {String} the limit parameter for the request.
      */
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {
             minQueryLength: 3,
             source: SOURCE_BASE + (limit || DEFAULT_LIMIT),
-            width: "auto"
+            //constrain width to the width of the associated input
+            width : input.get("scrollWidth") + "px"
         });
         
         /**

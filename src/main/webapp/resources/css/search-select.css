@@ -5,7 +5,8 @@
     visibility:visible;
 }
 .yui3-searchselect {
-    position:relative
+    position:relative;
+    float:left;
 }
 .yui3-searchselect-content {
     opacity: 0;
