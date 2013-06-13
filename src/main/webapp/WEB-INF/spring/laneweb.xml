@@ -44,6 +44,7 @@
         <constructor-arg>
             <set>
                 <value>173.44.37.242</value>
+                <value>96.47.224.218</value>
             </set>
         </constructor-arg>
     </bean>
