@@ -19,9 +19,7 @@
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {
             minQueryLength: 3,
-            source: SOURCE_BASE + (limit || DEFAULT_LIMIT),
-            //constrain width to the width of the associated input
-            width : input.get("scrollWidth") + "px"
+            source: SOURCE_BASE + (limit || DEFAULT_LIMIT)
         });
         
         /**
@@ -91,11 +89,11 @@
          * @private
          */
         _handleVisibleChange : function(event) {
-//            if (event.newVal) {
-//                this._ac.set("width", this._ac.get("inputNode").get("offsetWidth"));
-//                this._visibleHandle.detach();
-//                this._visibleHandle = null;
-//            }
+            if (event.newVal) {
+                this._ac.set("width", this._ac.get("inputNode").get("offsetWidth"));
+                this._visibleHandle.detach();
+                this._visibleHandle = null;
+            }
         },
         
         /**
