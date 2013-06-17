@@ -1,7 +1,7 @@
 (function() {
-    var self;
+    var self,
     
-    LANE.SearchReset = function() {
+     SearchReset = function() {
         var searchTerms = Y.one('#searchTerms'),
         searchReset = Y.one('#searchReset'),
         form = Y.one("#search"),
@@ -67,8 +67,9 @@
         };
         return reset;
     };
+    Y.lane.SearchReset = SearchReset;
     if (Y.one("#search")) {
-        self = new LANE.SearchReset();
+        self = new SearchReset();
         self.syncUI();
     }
 })();
