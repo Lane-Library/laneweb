@@ -11,7 +11,15 @@
 	auth = model.get(model.AUTH),
 	ipgroup = model.get(model.IPGROUP),
 	drMode = model.get(model.DISASTER_MODE),
-	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup;
+	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup,
+	
+	getPopup = function(urlPage) {
+		Y.io(urlPage, {
+			on : {
+				success : popupWindow
+				}
+		});
+	};
 	
 	if(drMode || fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
 		needPopup = false;
@@ -27,7 +35,7 @@
 			var link = event.target;
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(document.location);
-			LANE.PersistentLoginPopup(basePath + '/plain/persistent-login-popup.html');
+			getPopup(basePath + '/plain/persistent-login-popup.html');
 		}
 		event.preventDefault();
 	}, 'a[href=' + basePath + '/secure/login.html]');
@@ -59,11 +67,11 @@
 							sync : true
 						});
 						if (isActive.responseText === 'true') {
-							LANE.PersistentLoginPopup(basePath + '/plain/persistent-extension-popup.html');
+							getPopup(basePath + '/plain/persistent-extension-popup.html');
 						}
 					} // no preference cookie at all
 					else if (!persistentStatusCookie) {
-						LANE.PersistentLoginPopup(basePath + '/plain/persistent-popup.html');
+						getPopup(basePath + '/plain/persistent-popup.html');
 					}
 				}
 			}
@@ -95,15 +103,6 @@
 			redirectUrl = "/index.html";
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
 		node.set('href', url);
-	};
-
-	
-	LANE.PersistentLoginPopup = function(urlPage) {
-		Y.io(urlPage, {
-			on : {
-				success : popupWindow
-				}
-		});
 	};
 	
 	// The popup window
