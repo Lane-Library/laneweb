@@ -116,7 +116,7 @@
                         Y.on('click',function(event) {
                             var result = this.getData('result');
                             try {
-                                LANE.Search.History.addValue("facet", this.getData('result')._source);
+                                Y.lane.Search.History.addValue("facet", this.getData('result')._source);
                             } catch (e) {
                                 //log somewhere ... no need to break/alert
                                 result.show();
@@ -132,8 +132,8 @@
 (function() {
     var history,
         searchFacets = Y.one('#searchFacets');
-    LANE.Search = LANE.Search || {};
-    LANE.Search.History = function(){
+    Y.lane.Search = Y.lane.Search || {};
+    Y.lane.Search.History = function(){
         if(searchFacets){
             history = new Y.HistoryHash();        
             if(history.get('facet')){
@@ -143,7 +143,7 @@
                 LANE.search.facets.setActiveFacet(e.newVal);
             });
             history.on("facetRemove",function(e) {
-                LANE.search.facets.setActiveFacet(LANE.Search.getSearchSource());
+                LANE.search.facets.setActiveFacet(Y.lane.Search.getSearchSource());
             });
         }
         return history;
@@ -161,7 +161,7 @@
     printFacet = Y.one('#'+printId+'Facet');
     if(noHits && printFacet && !printFacet.hasClass('inactiveFacet')){
         LANE.search.facets.setActiveFacet(printId);
-        LANE.Search.History.addValue("facet", printId);
+        Y.lane.Search.History.addValue("facet", printId);
         Y.one('#all-allFacet').addClass('inactiveFacet');
     }
 })();

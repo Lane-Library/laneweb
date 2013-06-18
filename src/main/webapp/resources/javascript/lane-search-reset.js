@@ -39,7 +39,7 @@
                 searchReset.setStyle("display", "none");
             },
             syncUI : function() {
-                if(LANE.Search.searchTermsPresent()){
+                if(Y.lane.Search.searchTermsPresent()){
                     reset.show();
                 }
                 else{

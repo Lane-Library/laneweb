@@ -1,7 +1,7 @@
 (function() {
     var form = Y.one("#search");//the form Element
     if (form) {
-    LANE.Search = function() {
+    Y.lane.Search = function() {
         var searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             searchTipsLink = Y.one('#searchTips a'),
