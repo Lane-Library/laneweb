@@ -12,10 +12,10 @@ Y.use('dump', 'lane-tracking', 'node-event-simulate', 'console', 'test', functio
         },
         setUp: function() {
             this.trackingData = {};
-        },
-        testExists: function() {
-            Y.Assert.isObject(LANE.tracking);
         }//,
+//        testExists: function() {
+//            Y.Assert.isObject(LANE.tracking);
+//        },
 //        testIsTrackable: function() {
 //            var i;
 //            var images = Y.one('#testIsTrackable').all('img');

@@ -1,10 +1,7 @@
 /*
  * This attaches the Y object with all dependencies to the window
  * so we can use it object globally.  It also creates
- * the Y.lane object that is our local namespace.  The
- * LANE object is retained for backwards compatiblity
- * and the LANE.search object is created taking place of
- * the previous LANE.namespace function.
+ * the Y.lane object that is our local namespace.
  */
 
 YUI({fetchCSS:false}).use("*", function(Y) {
@@ -14,11 +11,7 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     
     //create the lane namespace
     Y.namespace("lane");
-    
-    //create the LANE.search object that gets used elsewhere
-    LANE = {
-        search : {}
-    };
+
 });
 /*
  * uses these modules: (intl first because autocomplete chokes if it hasn't been added already)

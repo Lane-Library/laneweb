@@ -1,10 +1,7 @@
 /*
  * This attaches the Y object with all dependencies to the window
  * so we can use it object globally.  It also creates
- * the Y.lane object that is our local namespace.  The
- * LANE object is retained for backwards compatiblity
- * and the LANE.search object is created taking place of
- * the previous LANE.namespace function.
+ * the Y.lane object that is our local namespace.
  */
 
 YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-2010.05.21-18-16'}).use(
@@ -102,11 +99,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     
     //create the lane namespace
     Y.namespace("lane");
-    
-    //create the LANE.search object that gets used elsewhere
-    LANE = {
-        search : {}
-    };
     
     var i, laneJavascript = [
         "model.js",
