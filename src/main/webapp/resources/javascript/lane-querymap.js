@@ -11,14 +11,16 @@
             Y.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
                 on:{
                 success: function(id, o) {
-                    var anchor, span, i,
-                        queryMap = Y.JSON.parse(o.responseText);
-                    if (queryMap.resourceMap) {
+                    var anchor, span, i, queryMapResources,
+                        queryMap = Y.JSON.parse(o.responseText),
+                        resourceMap = queryMap.resourceMap;
+                    if (resourceMap) {
+                    	queryMapResources = resourceMap.resources;
                         queryMap.getResourcesString = function() {
                             var i, separator = "; ", string = "";
-                            for (i = 0; i < queryMap.resourceMap.resources.length; i++) {
-                                string += queryMap.resourceMap.resources[i].label;
-                                if(i != queryMap.resourceMap.resources.length-1){
+                            for (i = 0; i < queryMapResources.length; i++) {
+                                string += queryMapResources[i].label;
+                                if(i != queryMapResources.length-1){
                                     string += separator;
                                 }
                             }
@@ -26,9 +28,9 @@
                         };
                         queryMap.getResultCounts = function() {
                             var url = basePath + '/apps/search/json?q=' + encodedQuery, i;
-                            for (i = 0; i < queryMap.resourceMap.resources.length; i++) {
-                                if (!queryMap.resourceMap.resources[i].status) {
-                                    url += '&r=' + queryMap.resourceMap.resources[i].id;
+                            for (i = 0; i < queryMapResources.length; i++) {
+                                if (!queryMapResources[i].status) {
+                                    url += '&r=' + queryMapResources[i].id;
                                 }
                             }
                             url += '&rd=' + Math.random();
@@ -36,21 +38,20 @@
                                 on:{
                                     success: function(id, o) {
                                             var results = Y.JSON.parse(o.responseText),
-                                                rs = queryMap.resourceMap.resources,
                                                 i, needMore = false, result;
-                                            for (i = 0; i < rs.length; i++) {
-                                                if (!rs[i].status) {
-                                                    result = results.resources[rs[i].id];
+                                            for (i = 0; i < queryMapResources.length; i++) {
+                                                if (!queryMapResources[i].status) {
+                                                    result = results.resources[queryMapResources[i].id];
                                                     if (result !== undefined && result.url) {
-                                                        rs[i].anchor.href = result.url;
+                                                        queryMapResources[i].anchor.href = result.url;
                                                     }
                                                     if (result === undefined || !result.status) {
                                                         needMore = (results.status != 'successful');
                                                     }
                                                     else{
-                                                        rs[i].status = result.status;
+                                                        queryMapResources[i].status = result.status;
                                                         if (result.status == 'successful') {
-                                                            rs[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
+                                                            queryMapResources[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
                                                         }
                                                     }
                                                 }
@@ -64,24 +65,24 @@
                                     }
                                 });
                             };
-                            for (i = 0; i < queryMap.resourceMap.resources.length; i++) {
-                                queryMap.resourceMap.resources[i].status = '';
+                            for (i = 0; i < queryMapResources.length; i++) {
+                                queryMapResources[i].status = '';
                                 span = document.createElement('span');
                                 anchor = document.createElement('a');
-                                anchor.title = 'QueryMapping: ' + queryMap.resourceMap.resources[i].label;
+                                anchor.title = 'QueryMapping: ' + queryMapResources[i].label;
                                 span.appendChild(anchor);
-                                anchor.appendChild(document.createTextNode(queryMap.resourceMap.resources[i].label));
+                                anchor.appendChild(document.createTextNode(queryMapResources[i].label));
                                 queryMapping.append(span);
-                                queryMap.resourceMap.resources[i].anchor = anchor;
+                                queryMapResources[i].anchor = anchor;
                             }
                             if (document.getElementById('queryMappingDescriptor')) {
-                                document.getElementById('queryMappingDescriptor').appendChild(document.createTextNode(queryMap.resourceMap.descriptor));
+                                document.getElementById('queryMappingDescriptor').appendChild(document.createTextNode(resourceMap.descriptor));
                             }
                             queryMap.getResultCounts();
                             // track mapped term, descriptor, and resources
                             Y.fire("lane:trackableEvent", {
                                 category: "lane:queryMapping",
-                                action: "query=" + query + "; descriptor=" + queryMap.resourceMap.descriptor.descriptorName,
+                                action: "query=" + query + "; descriptor=" + resourceMap.descriptor.descriptorName,
                                 label: "resources=" + queryMap.getResourcesString()
                             });
                         }
