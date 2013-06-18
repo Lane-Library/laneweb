@@ -3,7 +3,7 @@
     
     Y.namespace("lane");
     
-    var LANE = Y.lane,
+    var Lane = Y.lane,
     
     Model = function() {
         Model.superclass.constructor.apply(this, arguments);
@@ -22,9 +22,9 @@
     	NAME : "model"
     });
     
-    LANE.Model = new Model();
+    Lane.Model = new Model();
     
-    LANE.Model.setAttrs(window.model || {});
+    Lane.Model.setAttrs(window.model || {});
     
 })();
 //},"", {
