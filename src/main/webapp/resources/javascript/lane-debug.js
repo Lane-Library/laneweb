@@ -131,7 +131,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-metasearch.js",
         "lane-search-facets.js",
         "lane-search-facet-counts.js",
-        "lane-search-history.js",
         "lane-tooltips.js",
         "lane-spellcheck.js",
         "lane-findit.js",
@@ -146,7 +145,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "banner.js",
         "purchase-suggestions.js",
         "menu-delay.js",
-        "lane-search-printonly.js",
         "resource-list-pagination.js"
     ];
     
