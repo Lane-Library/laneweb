@@ -72,7 +72,7 @@
     Search.prototype = {
             
         /**
-         * The default submit handler
+         * The default submit handler.  Does nothing if there is no input.
          * @method _doSubmit
          * @private
          * @param event {CustomEvent} the submit event fired by submitSearch()
