@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-0" version="2.1.18" description="2.1.18 bug fix release">
+            <action date="2013-06-20" dev="ceyates" issue="87101" type="fix">
+                submitted feedback fails to correctly indicate usability checkbox state
+            </action>
+        </release>
         <release date="2013-06-17" version="2.1.17" description="2.1.17 bug fix release">
             <action date="2013-06-12" dev="ceyates" issue="86565" type="remove">
                 remove shc template
