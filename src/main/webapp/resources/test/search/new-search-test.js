@@ -26,12 +26,9 @@ YUI().use('node-event-simulate','console','test', function(T) {
             this.searchSource.simulate("change");
         },
         testSubmitSearchNoQuery: function() {
-            try {
-                this.search.submitSearch();
-                T.Assert.fail('should cause exception');
-            } catch (ex) {
-                T.Assert.areEqual('nothing to search for', ex.toString());
-            }
+        	var location = document.location;
+            this.search.submitSearch();
+            T.Assert.areEqual(location, document.location);
         },
         testSourceChange: function() {
         	var value = null;
@@ -40,7 +37,7 @@ YUI().use('node-event-simulate','console','test', function(T) {
             });
             this.searchSource.set('selectedIndex',1);
             this.searchSource.simulate("change");
-            T.Assert.areEqual(value, this.searchSource.get('value'));
+            T.Assert.areEqual(this.searchSource.get('value'), value);
         },
         testSourceChangeBubble: function() {
         	var value = null;
