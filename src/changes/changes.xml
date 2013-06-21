@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2013-0" version="2.1.18" description="2.1.18 bug fix release">
+            <action date="2013-06-21" dev="ceyates" issue="87195" type="add">
+                Create a SourceResolver for a cache: scheme
+            </action>
             <action date="2013-06-20" dev="ceyates" issue="87101" type="fix">
                 submitted feedback fails to correctly indicate usability checkbox state
             </action>
