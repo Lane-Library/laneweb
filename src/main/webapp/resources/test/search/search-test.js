@@ -6,6 +6,8 @@ YUI().use('node-event-simulate','console','test', function(T) {
 
     
     var searchTestCase = new T.Test.Case({
+    	
+    	//TODO: add tests for reset
         
         name: 'Lane Search Test Case',
         search: Y.lane.Search,

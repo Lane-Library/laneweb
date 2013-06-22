@@ -13,7 +13,9 @@
      * @param form {Node}
      */
     Search = function(form) {
-        var widget, tips, suggest;
+        var widget, tips, suggest, reset;
+        
+        //TODO: consistently handle events, either bubble or subscribe
         
         //sanity check, is there a form?
         if (form) {
@@ -66,6 +68,12 @@
             });
             this._select.addTarget(suggest);
             suggest.on("select", this.submitSearch, this);
+            
+            //set up the SearchReset object
+            reset = new Lane.SearchReset();
+            reset.on("reset", this._handleReset, this);
+            //TODO: have lane respond to this and fire lane:searchFormReset
+            this.publish("reset", {defaultFn : reset});
         }
     };
     
@@ -82,6 +90,10 @@
                 SearchIndicator.show();
                 this._form.submit();
             }
+        },
+        
+        _handleReset : function() {
+        	this.fire("reset");
         },
         
         /**
@@ -110,6 +122,10 @@
          */
         getSearchTerms : function() {
             return this._input.getValue();
+        },
+        
+        reset : function() {
+        	this._input.reset();
         },
         
         /**
