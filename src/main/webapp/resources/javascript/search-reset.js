@@ -4,7 +4,7 @@
       this._searchReset = Y.Node.create("<span id='searchReset' title='Clear Search'>×</span>");
       this._searchReset.setStyle("display","none");
       Y.one("#searchFields").append(this._searchReset);
-      this.publish("reset");
+      this.publish("reset", {defaultFn:this.hide});
       this._searchReset.on("click", this._handleClick, this);
 	};
 	

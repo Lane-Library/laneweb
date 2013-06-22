@@ -13,7 +13,7 @@
      * @param form {Node}
      */
     Search = function(form) {
-        var widget, tips, suggest, reset;
+        var widget, tips, suggest, searchReset;
         
         //TODO: consistently handle events, either bubble or subscribe
         
@@ -70,10 +70,17 @@
             suggest.on("select", this.submitSearch, this);
             
             //set up the SearchReset object
-            reset = new Lane.SearchReset();
-            reset.on("reset", this._handleReset, this);
+            searchReset = new Lane.SearchReset();
+            searchReset.on("reset", this._handleReset, this);
+            this._input.getInput().on("valueChange", function() {
+            	if (this.getValue()) {
+            		searchReset.show();
+            	} else {
+            		searchReset.hide();
+            	}
+            }, this._input);
             //TODO: have lane respond to this and fire lane:searchFormReset
-            this.publish("reset", {defaultFn : reset});
+            this.publish("reset", {defaultFn : this.reset});
         }
     };
     
@@ -126,6 +133,7 @@
         
         reset : function() {
         	this._input.reset();
+        	this._input.getInput().focus();
         },
         
         /**

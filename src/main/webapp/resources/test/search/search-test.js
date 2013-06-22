@@ -108,6 +108,16 @@ YUI().use('node-event-simulate','console','test', function(T) {
             this.searchSource.set('selectedIndex',1);
             this.searchSource.simulate("change");
             T.Assert.areEqual("title2", Y.one("#searchTerms").get("value"));
+        },
+        testResetClickClearsInput : function() {
+        	T.one("#searchTerms").set("value","foo");
+        	T.one("#searchReset").simulate("click");
+        	T.Assert.areEqual("", T.one("#searchTerms").get("value"));
+        },
+        testResetVisbleOnInputText : function() {
+        	Y.one("#searchTerms").set("value","foo");
+        	//TODO: fix this, the valueChange event doesn't happen before checking the changed style
+//        	T.Assert.areEqual("block", Y.one("#searchReset").getStyle("display"));
         }
     });
     
