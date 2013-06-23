@@ -13,7 +13,7 @@
      * @param form {Node}
      */
     Search = function(form) {
-        var widget, tips, suggest, searchReset;
+        var widget, tips, suggest;
         
         //TODO: consistently handle events, either bubble or subscribe
         
@@ -33,12 +33,14 @@
             this.publish("sourceChange");
             
             //create the input and set up event handler
+            //TODO: augment TextInput with EventTarget
             this._input = new Lane.TextInput(form.one("#searchTerms"), this._select.getSelectedTitle());
             Y.augment(this._input, Y.EventTarget);
             this._select.addTarget(this._input);
             this._input.after("select:selectedChange", function(event) {
                 this.setHintText(event.target.getSelectedTitle());
             });
+            this._input.getInput().on("valueChange", this._handleValueChange, this);
             
             //set up the search tips link
             tips = Y.one('#searchTips a');
@@ -70,16 +72,11 @@
             suggest.on("select", this.submitSearch, this);
             
             //set up the SearchReset object
-            searchReset = new Lane.SearchReset();
-            searchReset.on("reset", this._handleReset, this);
-            //TODO: show reset when input has value at load, hide it on submit
-            this._input.getInput().on("valueChange", function() {
-            	if (this.getValue()) {
-            		searchReset.show();
-            	} else {
-            		searchReset.hide();
-            	}
-            }, this._input);
+            this._searchReset = new Lane.SearchReset();
+            if (this._input.getValue()) {
+            	this._searchReset.show();
+            }
+            this._searchReset.on("reset", this._handleReset, this);
             this.publish("reset", {defaultFn : this.reset});
         }
     };
@@ -93,6 +90,7 @@
          * @param event {CustomEvent} the submit event fired by submitSearch()
          */
         _doSubmit : function(event) {
+        	this._searchReset.hide();
             if (this._input.getValue()) {
                 SearchIndicator.show();
                 this._form.submit();
@@ -101,6 +99,18 @@
         
         _handleReset : function() {
         	this.fire("reset");
+        	//TODO: do this part somewhere else:
+        	if (Y.one(".search")) {
+        		Y.one(".search").setStyle("visibility", "hidden");
+        	}
+        },
+        
+        _handleValueChange : function() {
+        	if (this._input.getValue()) {
+        		this._searchReset.show();
+        	} else {
+        		this._searchReset.hide();
+        	}
         },
         
         /**
