@@ -6,8 +6,6 @@ YUI().use('node-event-simulate','console','test', function(T) {
 
     
     var searchTestCase = new T.Test.Case({
-    	
-    	//TODO: add tests for reset
         
         name: 'Lane Search Test Case',
         search: Y.lane.Search,
@@ -118,6 +116,30 @@ YUI().use('node-event-simulate','console','test', function(T) {
         	Y.one("#searchTerms").set("value","foo");
         	//TODO: fix this, the valueChange event doesn't happen before checking the changed style
 //        	T.Assert.areEqual("block", Y.one("#searchReset").getStyle("display"));
+        },
+        testReset : function() {
+        	var reset = false;
+        	this.handle = this.search.on("reset", function(event) {
+        		reset = true;
+        	});
+        	T.one("#searchReset").simulate("click");
+        	T.Assert.isTrue(reset);
+        },
+        testBubbleReset : function() {
+        	var reset = false;
+        	this.handle = Y.lane.on("searchFormReset", function(event) {
+        		reset = true;
+        	});
+        	T.one("#searchReset").simulate("click");
+        	T.Assert.isTrue(reset);
+        },
+        testBroadcastReset : function() {
+        	var reset = false;
+        	this.handle = Y.on("lane:searchFormReset", function(event) {
+        		reset = true;
+        	});
+        	T.one("#searchReset").simulate("click");
+        	T.Assert.isTrue(reset);
         }
     });
     

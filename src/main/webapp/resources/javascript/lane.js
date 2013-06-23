@@ -20,14 +20,20 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     
     lane.publish("beforeSearchSubmit");
     
+    lane.publish("searchFormReset");
+    
     lane.publish("searchSourceChange");
     
-    lane.on("search:submit", function(event) {
-    	this.fire("beforeSearchSubmit", {originalEvent : event});
+    lane.on("search:reset", function(event) {
+    	this.fire("searchFormReset");
     });
     
     lane.on("search:sourceChange", function(event) {
     	this.fire("searchSourceChange", {newVal : event.newVal});
+    });
+    
+    lane.on("search:submit", function(event) {
+    	this.fire("beforeSearchSubmit", {originalEvent : event});
     });
 
 });

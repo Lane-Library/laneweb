@@ -72,6 +72,7 @@
             //set up the SearchReset object
             searchReset = new Lane.SearchReset();
             searchReset.on("reset", this._handleReset, this);
+            //TODO: show reset when input has value at load, hide it on submit
             this._input.getInput().on("valueChange", function() {
             	if (this.getValue()) {
             		searchReset.show();
@@ -79,7 +80,6 @@
             		searchReset.hide();
             	}
             }, this._input);
-            //TODO: have lane respond to this and fire lane:searchFormReset
             this.publish("reset", {defaultFn : this.reset});
         }
     };
