@@ -7,7 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2013-0" version="2.1.18" description="2.1.18 bug fix release">
+        <release date="2013-0" version="2.1.20" description="2.1.20 bug fix release">
+        </release>
+        <release date="2013-07-08" version="2.1.19" description="2.1.19 bug fix release">
+            <action date="2013-07-02" dev="olgary" issue="87741" type="add">
+                add internal medicine link to the drop down menu
+            </action>
+            <action date="2013-07-02" dev="ryanmax" issue="87495" type="fix">
+                remove orange bar advertising mobile interface
+            </action>
+            <action date="2013-07-02" dev="ryanmax" issue="87283" type="fix">
+                a particular query causes prolonged max CPU usage
+            </action>
+        </release>
+        <release date="2013-06-24" version="2.1.18" description="2.1.18 bug fix release">
             <action date="2013-06-21" dev="ceyates" issue="87195" type="add">
                 Create a SourceResolver for a cache: scheme
             </action>
