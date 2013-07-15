@@ -7,7 +7,16 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2013-0" version="2.1.20" description="2.1.20 bug fix release">
+        <release date="2013-07-15" version="2.1.20" description="2.1.20 bug fix release">
+            <action date="2013-07-10" dev="ryanmax" issue="88161" type="fix">
+                querymap suggestions are out of date
+            </action>
+            <action date="2013-07-09" dev="ryanmax" issue="87948" type="fix">
+                persistent login extension only works in Firefox
+            </action>
+            <action date="2013-07-15" dev="ryanmax" issue="83604" type="fix">
+                google spell checker returning errors; replace with NCBI spell checker
+            </action>
         </release>
         <release date="2013-07-08" version="2.1.19" description="2.1.19 bug fix release">
             <action date="2013-07-02" dev="olgary" issue="87741" type="add">
