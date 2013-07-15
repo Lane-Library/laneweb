@@ -61,7 +61,7 @@
             <map:match pattern="biomed-resources/otolaryngrandrounds.html" type="wildcard">
                 <map:generate type="html" src="{content-base}/biomed-resources/otolaryngrandrounds.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/youtube.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/youtubeAtom2Html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:match>
