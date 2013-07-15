@@ -58,6 +58,12 @@
                 <map:generate type="bassett-accordion"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="biomed-resources/otolaryngrandrounds.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/biomed-resources/otolaryngrandrounds.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="resources/xsl/youtube.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:match>
         <!-- search.html -->
         <map:match pattern="search.html" type="wildcard">
