@@ -1,6 +1,6 @@
 #laneNav {
 	position: absolute;
-	top: 144px;
+	top: 160px;
 	width: 100%;
 	height: 46px;
 	/* IE6 doesn't get width 100% right */
@@ -11,7 +11,7 @@
 }
 
 .yui3-js-enabled #laneNav.clinical {
-	top: 174px;
+	top: 198px;
 }
 
 #laneNav li {
@@ -27,6 +27,10 @@
 	font-size: 15px;
 	text-shadow: 0 1px 0 #DEDCB4;
 	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#laneNav>li:first-child>a {
+    padding-left:20px
 }
 
 #laneNav li:hover a,#laneNav .hover a,#laneNav .active a {

@@ -77,26 +77,6 @@ em {
 	border-left: none;
 	border-right: none;
 }
-#mphoneAd {
-    width : 988px;
-    position : absolute;
-    left : 6px;
-    top : -35px;
-    z-index : 2;
-    text-align : center;
-    background-color : #d5672e;
-    height : 114px
-}
-#mphoneAd a{
-    color : #fff;
-    font-weight : bold;
-    border-bottom : none
-}
-#mphoneAd div {
-    color : #fff;
-    padding-top : 10px;
-    font-size : 200%
-}
 #class-title {
     font-size : 1.8em
 }

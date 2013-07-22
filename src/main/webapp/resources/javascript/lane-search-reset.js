@@ -1,7 +1,7 @@
 (function() {
-    var self;
+    var self,
     
-    LANE.SearchReset = function() {
+     SearchReset = function() {
         var searchTerms = Y.one('#searchTerms'),
         searchReset = Y.one('#searchReset'),
         form = Y.one("#search"),
@@ -9,9 +9,9 @@
         eventHandle,
         reset;
         if (!searchReset) {
-            searchReset = Y.Node.create("<a id='searchReset' title='Clear Search' href='/'>×</a>");
+            searchReset = Y.Node.create("<span id='searchReset' title='Clear Search'>×</span>");
             searchReset.setStyle("display","none");
-            form.one("fieldset").append(searchReset);
+            form.one("#searchFields").append(searchReset);
         }
         Y.publish("lane:searchFormReset",{broadcast:1,emitFacade: true});
         searchReset.on("click", function(e){
@@ -39,7 +39,7 @@
                 searchReset.setStyle("display", "none");
             },
             syncUI : function() {
-                if(LANE.Search.searchTermsPresent()){
+                if(Y.lane.Search.searchTermsPresent()){
                     reset.show();
                 }
                 else{
@@ -67,8 +67,9 @@
         };
         return reset;
     };
+    Y.lane.SearchReset = SearchReset;
     if (Y.one("#search")) {
-        self = new LANE.SearchReset();
+        self = new SearchReset();
         self.syncUI();
     }
 })();

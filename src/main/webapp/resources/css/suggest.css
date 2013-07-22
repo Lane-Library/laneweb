@@ -1,13 +1,11 @@
 .yui3-aclist{
-    position:absolute;
-    z-index:1
+    z-index:2;
 }
 .yui3-aclist-hidden{
     visibility:hidden
 }
 .yui3-aclist-aria{
-    left:-9999px;
-    position:absolute
+    display:none
 }
 .yui3-aclist-content{
     background-color:white
@@ -15,7 +13,6 @@
 .yui3-aclist-list{
     list-style:none;
     margin:0;
-    overflow:hidden;
     padding:0;
     border:1px solid #ccc;
     border-bottom:none

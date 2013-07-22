@@ -1,10 +1,7 @@
 /*
  * This attaches the Y object with all dependencies to the window
  * so we can use it object globally.  It also creates
- * the Y.lane object that is our local namespace.  The
- * LANE object is retained for backwards compatiblity
- * and the LANE.search object is created taking place of
- * the previous LANE.namespace function.
+ * the Y.lane object that is our local namespace.
  */
 
 YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-2010.05.21-18-16'}).use(
@@ -103,11 +100,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     //create the lane namespace
     Y.namespace("lane");
     
-    //create the LANE.search object that gets used elsewhere
-    LANE = {
-        search : {}
-    };
-    
     var i, laneJavascript = [
         "model.js",
         "link-plugin.js",
@@ -118,11 +110,11 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-bassett.js",
         "lane-textinputs.js",
         "suggest.js",
+        "search-select.js",
         "lane-search-pico.js",
         "lane-search.js",
         "bookmarks.js",
         "lane-tracking.js",
-        "bookmarks-marketing.js",
         "bookmark-instructions.js",
         "lane-expandies.js",
         "lane-google.js",
@@ -131,7 +123,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-metasearch.js",
         "lane-search-facets.js",
         "lane-search-facet-counts.js",
-        "lane-search-history.js",
         "lane-tooltips.js",
         "lane-spellcheck.js",
         "lane-findit.js",
@@ -146,7 +137,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "banner.js",
         "purchase-suggestions.js",
         "menu-delay.js",
-        "lane-search-printonly.js",
         "resource-list-pagination.js"
     ];
     

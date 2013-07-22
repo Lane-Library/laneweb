@@ -14,7 +14,7 @@
      * @uses EventTarget
      * @constructor
      * @param input {Node} the input node.
-     * @param limit {String} the limit parameter for the reqeust.
+     * @param limit {String} the limit parameter for the request.
      */
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {

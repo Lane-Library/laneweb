@@ -1,7 +1,7 @@
 (function() {
     var form = Y.one("#search");//the form Element
     if (form) {
-    LANE.Search = function() {
+    Y.lane.Search = function() {
         var searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             searchTipsLink = Y.one('#searchTips a'),
@@ -23,6 +23,7 @@
             },
             searchTermsSuggest = new Y.lane.Suggest(searchTextInput.getInput(), getLimitForSource(selectedOption.get("value"))),
             search;
+        (new Y.lane.SearchSelectWidget({srcNode:searchSourceSelect,render:true}));
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
@@ -38,7 +39,7 @@
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
             searchTextInput.setHintText(selectedOption.get('title'));
             searchTipsLink.set('href',searchTipsLink.get('href').replace(/#.*/,'#'+searchSourceSelect.get('value')));
-            form.one('input[type="text"]').focus();
+            form.one('#searchTerms').focus();
             searchTextInput.setValue(searchTextInput.getValue());
             searchTermsSuggest.setLimit(getLimitForSource(event.newVal));
         });

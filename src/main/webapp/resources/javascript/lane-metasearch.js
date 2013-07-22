@@ -4,8 +4,8 @@
         basePath = model.get(model.BASE_PATH) || "",
         query = model.get(model.QUERY),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
-        searchIndicator = Y.lane.SearchIndicator;
-    LANE.metasearch = function() {
+        searchIndicator = Y.lane.SearchIndicator,
+    metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
             searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
@@ -101,7 +101,7 @@
                                 if (remainingTime > 20 * 1000) {
                                     sleepingTime = 10000;
                                 }
-                                searchRequests.push(setTimeout(LANE.metasearch.getResultCounts, sleepingTime));
+                                searchRequests.push(setTimeout(metasearch.getResultCounts, sleepingTime));
                             } else {
                                 searchIndicator.hide();
                             }
@@ -114,8 +114,8 @@
     
     // check for presence of search term and metasearch classNames
     if (Y.all('.metasearch').size() > 0 && query) {
-        LANE.metasearch.initialize();
-        LANE.metasearch.getResultCounts();
+        metasearch.initialize();
+        metasearch.getResultCounts();
         searchIndicator.show();
     }
     // hybrid search page inputs

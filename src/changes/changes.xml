@@ -7,6 +7,60 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-07-22" version="2.1.21" description="2.1.21 bug fix release">
+            <action date="2013-07-16" dev="ryanmax" issue="88517" type="fix">
+                spelling suggestions should ignore case
+            </action>
+            <action date="2013-07-15" dev="olgary" issue="88439" type="update">
+                Changed link to IL in the portal dropdown in debug.xml, template.xml
+            </action>
+            <action date="2013-07-15" dev="ceyates" issue="76910" type="add">
+                Create Otolaryngology page from YouTube RSS
+            </action>
+        </release>
+        <release date="2013-07-15" version="2.1.20" description="2.1.20 bug fix release">
+            <action date="2013-07-10" dev="ryanmax" issue="88161" type="fix">
+                querymap suggestions are out of date
+            </action>
+            <action date="2013-07-09" dev="ryanmax" issue="87948" type="fix">
+                persistent login extension only works in Firefox
+            </action>
+            <action date="2013-07-15" dev="ryanmax" issue="83604" type="fix">
+                google spell checker returning errors; replace with NCBI spell checker
+            </action>
+        </release>
+        <release date="2013-07-08" version="2.1.19" description="2.1.19 bug fix release">
+            <action date="2013-07-02" dev="olgary" issue="87741" type="add">
+                add internal medicine link to the drop down menu
+            </action>
+            <action date="2013-07-02" dev="ryanmax" issue="87495" type="fix">
+                remove orange bar advertising mobile interface
+            </action>
+            <action date="2013-07-02" dev="ryanmax" issue="87283" type="fix">
+                a particular query causes prolonged max CPU usage
+            </action>
+        </release>
+        <release date="2013-06-24" version="2.1.18" description="2.1.18 bug fix release">
+            <action date="2013-06-21" dev="ceyates" issue="87195" type="add">
+                Create a SourceResolver for a cache: scheme
+            </action>
+            <action date="2013-06-20" dev="ceyates" issue="87101" type="fix">
+                submitted feedback fails to correctly indicate usability checkbox state
+            </action>
+        </release>
+        <release date="2013-06-17" version="2.1.17" description="2.1.17 bug fix release">
+            <action date="2013-06-12" dev="ceyates" issue="86565" type="remove">
+                remove shc template
+            </action>
+            <action date="2013-06-12" dev="ceyates" issue="84776" type="update">
+                search boxes updates, add Dynamed to red bar links
+            </action>
+        </release>
+        <release date="2013-06-12" version="2.1.16" description="2.1.16 bug fix release">
+            <action date="2013-06-10" dev="olgary" issue="86507" type="add">
+                debug.xml, template.xml - added a new (Immunology/Rheumatology) portal to a drop down
+            </action>
+        </release>
         <release date="2013-06-10" version="2.1.15" description="2.1.15 bug fix release">
             <action date="2013-06-06" dev="ceyates" issue="86340" type="add">
                 permit remote configuration of spam IP addresses

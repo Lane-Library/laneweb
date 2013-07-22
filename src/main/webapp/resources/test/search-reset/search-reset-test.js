@@ -13,23 +13,23 @@ Y.use("node-event-simulate", "console", "test", function(Y){
             Y.Assert.isNull(Y.one("#searchReset"));
         },
         testConstructorCreatesLink: function() {
-            var instance = new LANE.SearchReset();
+            var instance = new Y.lane.SearchReset();
             Y.Assert.isObject(Y.one("#searchReset"));
         },
         testShow: function() {
-            var instance = new LANE.SearchReset();
+            var instance = new Y.lane.SearchReset();
             var searchReset = Y.one("#searchReset");
             instance.show();
             Y.Assert.areEqual("block", searchReset.getStyle("display"));
         },
         testHide: function() {
-            var instance = new LANE.SearchReset();
+            var instance = new Y.lane.SearchReset();
             var searchReset = Y.one("#searchReset");
             instance.hide();
             Y.Assert.areEqual("none", searchReset.getStyle("display"));
         },
         testSyncUI: function() {
-            var instance = new LANE.SearchReset();
+            var instance = new Y.lane.SearchReset();
             var searchReset = Y.one("#searchReset"), searchTerms = Y.one("#searchTerms");
             searchTerms.set('value','foo');
             instance.syncUI();
@@ -39,7 +39,7 @@ Y.use("node-event-simulate", "console", "test", function(Y){
             Y.Assert.areEqual("none", searchReset.getStyle("display"));
         },
         testResetSearch: function() {
-            var instance = new LANE.SearchReset();
+            var instance = new Y.lane.SearchReset();
             var searchReset = Y.one("#searchReset"), searchTerms = Y.one("#searchTerms");
             searchTerms.set('value','foo');
             instance.syncUI();
