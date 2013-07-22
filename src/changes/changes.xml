@@ -14,6 +14,9 @@
             <action date="2013-07-15" dev="olgary" issue="88439" type="update">
                 Changed link to IL in the portal dropdown in debug.xml, template.xml
             </action>
+            <action date="2013-07-15" dev="ceyates" issue="76910" type="add">
+                Create Otolaryngology page from YouTube RSS
+            </action>
         </release>
         <release date="2013-07-15" version="2.1.20" description="2.1.20 bug fix release">
             <action date="2013-07-10" dev="ryanmax" issue="88161" type="fix">
