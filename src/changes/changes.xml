@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-07-22" version="2.1.21" description="2.1.21 bug fix release">
+            <action date="2013-07-16" dev="ryanmax" issue="88517" type="fix">
+                spelling suggestions should ignore case
+            </action>
+            <action date="2013-07-15" dev="olgary" issue="88439" type="update">
+                Changed link to IL in the portal dropdown in debug.xml, template.xml
+            </action>
+        </release>
         <release date="2013-07-15" version="2.1.20" description="2.1.20 bug fix release">
             <action date="2013-07-10" dev="ryanmax" issue="88161" type="fix">
                 querymap suggestions are out of date
