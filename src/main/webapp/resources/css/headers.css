@@ -17,8 +17,8 @@ h3 {
     text-transform : uppercase;
     font-size : 15px;
     font-weight : 400;
-    border-bottom : 5px #820000 solid;
-    color : #820000;
+    border-bottom : 5px #575347; solid;
+    color : #575347;
     padding-bottom : 2px;
     letter-spacing : 1.1px;
 }
@@ -46,10 +46,6 @@ h5 {
     text-transform : uppercase;
 }
 
-.alt {
-    color : #575347;
-    border-bottom-color : #575347;
-}
 .weak {
     font-size : 11px;
     font-weight : normal;
