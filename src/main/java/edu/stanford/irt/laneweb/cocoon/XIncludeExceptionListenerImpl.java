@@ -11,7 +11,11 @@ public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener 
     private Logger log = LoggerFactory.getLogger(XIncludeExceptionListener.class);
 
     public void exception(Locator locator, final Exception e) {
-        this.log.error(createMessage(locator), e);
+        if (locator == null) {
+            this.log.error(e.getMessage(), e);
+        } else {
+            this.log.error(createMessage(locator), e);
+        }
     }
     
     private String createMessage(Locator locator) {
