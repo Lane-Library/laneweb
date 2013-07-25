@@ -5,6 +5,11 @@
     
     <bean name="edu.stanford.irt.laneweb.voyager.VoyagerLogin/lmldb"
         class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
+        <constructor-arg>
+            <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
+                <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.voyager.VoyagerLogin"/>        
+            </bean>
+        </constructor-arg>
         <property name="voyagerDatabase" value="lmldb"/>
         <property name="errorURL" value="/voyagerError.html"/>
         <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
@@ -12,6 +17,11 @@
     
     <bean name="edu.stanford.irt.laneweb.voyager.VoyagerLogin/jbldb"
         class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
+        <constructor-arg>
+            <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
+                <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.voyager.VoyagerLogin"/>        
+            </bean>
+        </constructor-arg>
         <property name="voyagerDatabase" value="jbldb"/>
         <property name="errorURL" value="http://jbldb.stanford.edu/login-error.html"/>
         <property name="dataSource" ref="javax.sql.DataSource/voyager"/>

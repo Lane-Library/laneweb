@@ -8,7 +8,12 @@
     <task:annotation-driven/>
     
     <bean name="edu.stanford.irt.laneweb.trends.BookmarkTrendsReporter" 
-            class="edu.stanford.irt.laneweb.trends.BookmarkTrendsReporter">
+    	class="edu.stanford.irt.laneweb.trends.BookmarkTrendsReporter">
+    	<constructor-arg>
+    		<bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
+    			<constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.trends.BookmarkTrendsReporter"/>        
+    		</bean>
+    	</constructor-arg>
 		<property name="googleTracker" ref="edu.stanford.irt.lane.trends.GoogleTracker"/>
         <property name="bookmarkDAO" ref="edu.stanford.irt.laneweb.bookmarks.BookmarkDAO"/>
     </bean>

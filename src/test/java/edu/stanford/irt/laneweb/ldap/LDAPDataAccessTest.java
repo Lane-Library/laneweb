@@ -12,6 +12,7 @@ import javax.security.auth.Subject;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 import org.springframework.ldap.CommunicationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
@@ -26,13 +27,14 @@ public class LDAPDataAccessTest {
 
     private SubjectSource subjectSource;
 
+    private Logger log;
+
     @Before
     public void setUp() {
-        this.subjectSource = createMock(SubjectSource.class);
         this.ldapTemplate = createMock(LdapTemplate.class);
-        this.lDAPDataAccess = new LDAPDataAccess();
-        this.lDAPDataAccess.setSubjectSource(this.subjectSource);
-        this.lDAPDataAccess.setLdapTemplate(this.ldapTemplate);
+        this.log = createMock(Logger.class);
+        this.subjectSource = createMock(SubjectSource.class);
+        this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.log, this.subjectSource);
     }
 
     @Test

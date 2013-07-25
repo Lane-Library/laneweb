@@ -14,7 +14,11 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
  */
 public class CacheableSelector implements Selector {
     
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private Logger log;
+    
+    public CacheableSelector(Logger log) {
+        this.log = log;
+    }
 
     /**
      * Checks to see if the model contains particular values, currently SUNETID, DEBUG, QUERY, EMRID,

@@ -5,9 +5,7 @@
 
     <bean id="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"
         class="edu.stanford.irt.laneweb.ldap.LDAPDataAccess">
-        <property name="subjectSource" ref="edu.stanford.irt.laneweb.ldap.SubjectSource">
-        </property>
-        <property name="ldapTemplate">
+        <constructor-arg>
             <bean class="org.springframework.ldap.core.LdapTemplate">
                 <constructor-arg>
                     <bean class="org.springframework.ldap.core.support.LdapContextSource">
@@ -25,7 +23,13 @@
                     </bean>
                 </constructor-arg>
             </bean>
-        </property>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
+                <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>        
+            </bean>
+        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.laneweb.ldap.SubjectSource"/>
     </bean>
     
     <bean class="edu.stanford.irt.laneweb.email.EMailSender">
@@ -156,7 +160,13 @@
     </bean>
     
     <bean name="javax.xml.transform.ErrorListener"
-        class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener"/>
+        class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener">
+        <constructor-arg>
+            <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
+                <constructor-arg type="java.lang.Class" value="javax.xml.transform.ErrorListener"/>        
+            </bean>
+        </constructor-arg>
+    </bean>
     
     <bean id="org.springframework.oxm.Marshaller"
         class="org.springframework.oxm.xstream.XStreamMarshaller">
@@ -191,7 +201,13 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl"/>
+            <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl">
+                <constructor-arg>
+                    <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
+                        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.cocoon.xml.XIncludeExceptionListener"/>        
+                    </bean>
+                </constructor-arg>
+            </bean>
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.XPointerProcessor"/>
     </bean>
