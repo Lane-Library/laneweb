@@ -35,4 +35,8 @@
         <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder"/>        
     </bean>
     
+    <bean name="org.slf4j.Logger/SHCCodec" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.SHCCodec"/>        
+    </bean>
+    
 </beans>

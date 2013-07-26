@@ -55,11 +55,12 @@ public class SHCCodec {
 
     private byte[] initialVectorBytes;
 
-    private Logger log = LoggerFactory.getLogger(SHCCodec.class);
+    private final Logger log;
 
     private SecretKey secretKey;
 
-    public SHCCodec(final String key, final String vector) {
+    public SHCCodec(final String key, final String vector, final Logger log) {
+        this.log = log;
         try {
             // latest version of commons-codec (1.6) does not pad with 0 bytes
             // to 16, so do that here:

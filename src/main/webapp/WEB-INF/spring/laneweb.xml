@@ -209,6 +209,7 @@
         class="edu.stanford.irt.laneweb.servlet.SHCCodec">
         <constructor-arg value="%{laneweb.shccodec.key}"/>
         <constructor-arg value="%{laneweb.shccodec.vector}"/>
+        <constructor-arg ref="org.slf4j.Logger/SHCCodec"/>
     </bean>
     
     <bean class="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec">
