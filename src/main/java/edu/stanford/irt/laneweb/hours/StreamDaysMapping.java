@@ -8,18 +8,16 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class StreamDaysMapping extends HashMap<String, String> {
 
     private static final DocumentBuilderFactory FACTORY = DocumentBuilderFactory.newInstance();
-
-    private static final Logger LOG = LoggerFactory.getLogger(StreamDaysMapping.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -59,12 +57,8 @@ public class StreamDaysMapping extends HashMap<String, String> {
                     super.put(key, value);
                 }
             }
-        } catch (ParserConfigurationException e) {
-            LOG.error("error parsing hours file", e);
-        } catch (SAXException e) {
-            LOG.error("error parsing hours file", e);
-        } catch (IOException e) {
-            LOG.error("IO error while parsing hours file", e);
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            throw new LanewebException(e);
         }
     }
 }
