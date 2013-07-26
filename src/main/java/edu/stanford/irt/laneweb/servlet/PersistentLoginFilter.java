@@ -12,6 +12,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.LoggerFactory;
+
 import edu.stanford.irt.laneweb.model.Model;
 
 public class PersistentLoginFilter extends AbstractLanewebFilter {
@@ -30,8 +32,7 @@ public class PersistentLoginFilter extends AbstractLanewebFilter {
     public void init(final FilterConfig filterConfig) {
         super.init(filterConfig);
         this.codec = new SunetIdCookieCodec(filterConfig.getInitParameter("laneweb.sunetidcookiecodec.key"));
-        this.sunetIdSource = new SunetIdSource();
-        this.sunetIdSource.setSunetIdCookieCodec(this.codec);
+        this.sunetIdSource = new SunetIdSource(this.codec, LoggerFactory.getLogger(SunetIdSource.class));
     }
 
     @Override

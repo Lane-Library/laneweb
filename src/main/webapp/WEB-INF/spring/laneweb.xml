@@ -218,7 +218,8 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.SunetIdSource"
         class="edu.stanford.irt.laneweb.servlet.SunetIdSource">
-        <property name="sunetIdCookieCodec" ref="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec"/>
+        <constructor-arg ref="org.slf4j.Logger/SunetIdSource"/>
     </bean>
     
 </beans>

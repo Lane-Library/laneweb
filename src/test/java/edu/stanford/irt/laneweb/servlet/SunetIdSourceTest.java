@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -24,6 +25,8 @@ public class SunetIdSourceTest {
 
     private Cookie cookie;
 
+    private Logger log;
+
     private HttpServletRequest request;
 
     private HttpSession session;
@@ -32,9 +35,9 @@ public class SunetIdSourceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.sunetidSource = new SunetIdSource();
         this.codec = new SunetIdCookieCodec("key");
-        this.sunetidSource.setSunetIdCookieCodec(this.codec);
+        this.log = createMock(Logger.class);
+        this.sunetidSource = new SunetIdSource(this.codec, this.log);
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
         this.cookie = createMock(Cookie.class);
