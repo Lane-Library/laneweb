@@ -24,11 +24,7 @@
                 </constructor-arg>
             </bean>
         </constructor-arg>
-        <constructor-arg>
-            <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
-                <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>        
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="org.slf4j.Logger/LDAPDataAccess"/>
         <constructor-arg ref="edu.stanford.irt.laneweb.ldap.SubjectSource"/>
     </bean>
     
@@ -161,11 +157,7 @@
     
     <bean name="javax.xml.transform.ErrorListener"
         class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener">
-        <constructor-arg>
-            <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
-                <constructor-arg type="java.lang.Class" value="javax.xml.transform.ErrorListener"/>        
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="org.slf4j.Logger/ErrorListener"/>
     </bean>
     
     <bean id="org.springframework.oxm.Marshaller"
@@ -202,11 +194,7 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl">
-                <constructor-arg>
-                    <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
-                        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.cocoon.xml.XIncludeExceptionListener"/>        
-                    </bean>
-                </constructor-arg>
+                <constructor-arg ref="org.slf4j.Logger/XIncludeExceptionListener"/>
             </bean>
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.XPointerProcessor"/>
