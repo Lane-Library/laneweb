@@ -12,7 +12,7 @@
 .type1 .even {
     background-color:#f6f3e5;
 }
-.type1 h4 {
+/*.type1 h4 {
     color:#3F3C30;
     font-family:inherit;
     font-weight:bold;
@@ -31,7 +31,7 @@
 .type1 .alt {
     color:#575347;
     border-bottom-color:#575347;
-}
+}*/
 .type1 .hide, .type1 .show {
     border-bottom:1px dotted #81785A;
     color:#565347;
