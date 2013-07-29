@@ -39,11 +39,17 @@ public class LDAPDataAccess {
         }
     }
 
-    private LdapTemplate ldapTemplate;
+    private final LdapTemplate ldapTemplate;
 
-    private final Logger log = LoggerFactory.getLogger(LDAPDataAccess.class);
+    private final Logger log;
 
-    private SubjectSource subjectSource;
+    private final SubjectSource subjectSource;
+    
+    public LDAPDataAccess(LdapTemplate ldapTemplate, Logger log, SubjectSource subjectSource) {
+        this.ldapTemplate = ldapTemplate;
+        this.log = log;
+        this.subjectSource = subjectSource;
+    }
 
     public LDAPData getLdapDataForSunetid(final String sunetid) {
         LDAPData ldapData = doGet("susunetid=" + sunetid);
@@ -61,14 +67,6 @@ public class LDAPDataAccess {
             ldapData = new LDAPData(null, null, univid, false, null);
         }
         return ldapData;
-    }
-
-    public void setLdapTemplate(final LdapTemplate ldapTemplate) {
-        this.ldapTemplate = ldapTemplate;
-    }
-
-    public void setSubjectSource(final SubjectSource subjectSource) {
-        this.subjectSource = subjectSource;
     }
 
     private LDAPData doGet(final String lookupFilter) {

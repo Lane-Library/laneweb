@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    
+    <bean name="org.slf4j.Logger/LDAPDataAccess" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/ErrorListener" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="javax.xml.transform.ErrorListener"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/XIncludeExceptionListener" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.cocoon.xml.XIncludeExceptionListener"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/SQLBookmarkDAO" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.bookmarks.SQLBookmarkDAO"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/CacheableSelector" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.cocoon.CacheableSelector"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/BookmarkTrendsReporter" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.trends.BookmarkTrendsReporter"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/VoyagerLogin" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.voyager.VoyagerLogin"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/TodaysHoursBinder" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/SHCCodec" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.SHCCodec"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/SunetIdSource" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.SunetIdSource"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/SHCLoginController" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.mvc.SHCLoginController"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/SuggestionController" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.mvc.SuggestionController"/>        
+    </bean>
+    
+    <bean name="org.slf4j.Logger/errorhandler" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.String" value="error handler"/>        
+    </bean>
+    
+</beans>

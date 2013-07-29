@@ -15,7 +15,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.IOUtils;
@@ -38,10 +37,11 @@ public class SQLBookmarkDAO implements BookmarkDAO {
 
     private DataSource dataSource;
 
-    private Logger log = LoggerFactory.getLogger(SQLBookmarkDAO.class);
+    private Logger log;
 
-    public SQLBookmarkDAO(final DataSource dataSource) {
+    public SQLBookmarkDAO(final DataSource dataSource, Logger log) {
         this.dataSource = dataSource;
+        this.log = log;
     }
 
     @SuppressWarnings("unchecked")

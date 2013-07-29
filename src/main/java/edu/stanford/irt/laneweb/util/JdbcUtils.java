@@ -5,17 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * shamelessly stolen from org.springframework.jdbc.support.JdbcUtils
- * 
- * @author ceyates
  */
 public abstract class JdbcUtils {
-
-    private static final Logger LOG = LoggerFactory.getLogger(JdbcUtils.class);
 
     /**
      * Close the given JDBC Connection and ignore any thrown SQLException. This
@@ -28,8 +23,8 @@ public abstract class JdbcUtils {
         if (con != null) {
             try {
                 con.close();
-            } catch (SQLException ex) {
-                LOG.warn("Could not close JDBC Connection", ex);
+            } catch (SQLException e) {
+                throw new LanewebException(e);
             }
         }
     }
@@ -45,8 +40,8 @@ public abstract class JdbcUtils {
         if (rs != null) {
             try {
                 rs.close();
-            } catch (SQLException ex) {
-                LOG.warn("Could not close JDBC ResultSet", ex);
+            } catch (SQLException e) {
+                throw new LanewebException(e);
             }
         }
     }
@@ -62,8 +57,8 @@ public abstract class JdbcUtils {
         if (stmt != null) {
             try {
                 stmt.close();
-            } catch (SQLException ex) {
-                LOG.warn("Could not close JDBC Statement", ex);
+            } catch (SQLException e) {
+                throw new LanewebException(e);
             }
         }
     }
