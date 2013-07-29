@@ -66,7 +66,7 @@
 						isActive = Y.io(basePath + '/user/active', {
 							sync : true
 						});
-						if (isActive.responseText === 'true') {
+						if (isActive.responseText.indexOf('true') > -1) {
 							getPopup(basePath + '/plain/persistent-extension-popup.html');
 						}
 					} // no preference cookie at all

@@ -10,7 +10,7 @@ import edu.stanford.irt.laneweb.LanewebException;
  */
 public final class QueryTermPattern {
 
-    private static final Pattern INVERT_COMMAS_PATTERN = Pattern.compile("(\\(?((\\w| |-|_)+), ((\\w| |-|_)+)\\)?)");
+    private static final Pattern INVERT_COMMAS_PATTERN = Pattern.compile("(\\(?((\\w| |-)+), ((\\w| |-)+)\\)?)");
 
     private static final String INVERT_REPLACEMENT = "$1 and $4 $2";
 

@@ -29,6 +29,7 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -48,6 +49,8 @@ public class SQLBookmarkDAOTest {
 
     private DataSource dataSource;
 
+    private Logger log;
+
     private ResultSet resultSet;
 
     private PreparedStatement statement;
@@ -55,7 +58,8 @@ public class SQLBookmarkDAOTest {
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        this.dao = new SQLBookmarkDAO(this.dataSource);
+        this.log = createMock(Logger.class);
+        this.dao = new SQLBookmarkDAO(this.dataSource, this.log);
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
         this.resultSet = createMock(ResultSet.class);
@@ -301,12 +305,14 @@ public class SQLBookmarkDAOTest {
         this.callableStatement.close();
         this.statement.close();
         this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement, output);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
+                output);
         try {
             this.dao.saveLinks("ditenus", Collections.<Bookmark> singletonList(this.bookmark));
         } catch (LanewebException e) {
         }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement, output);
+        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
+                output);
     }
 
     @Test
@@ -330,12 +336,14 @@ public class SQLBookmarkDAOTest {
         this.callableStatement.close();
         this.statement.close();
         this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement, output);
+        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
+                output);
         try {
             this.dao.saveLinks("ditenus", Collections.<Bookmark> singletonList(this.bookmark));
         } catch (LanewebException e) {
         }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement, output);
+        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
+                output);
     }
 
     @Test

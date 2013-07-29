@@ -7,6 +7,58 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-07-29" version="2.1.22" description="2.1.22 bug fix release">
+            <action date="2013-07-26" dev="olgary" issue="89133" type="update">
+                replace expandes.css - removed all font-size style
+            </action>
+            <action date="2013-07-25" dev="olgary" issue="89080" type="update">
+                headers.css - removed 'alt' from h3
+            </action>
+            <action date="2013-07-25" dev="ceyates" issue="89065" type="fix">
+                occasional NullPointerException in XIncludeExceptionListenerImpl
+            </action>
+        </release>
+        <release date="2013-07-22" version="2.1.21" description="2.1.21 bug fix release">
+            <action date="2013-07-16" dev="ryanmax" issue="88517" type="fix">
+                spelling suggestions should ignore case
+            </action>
+            <action date="2013-07-15" dev="olgary" issue="88439" type="update">
+                Changed link to IL in the portal dropdown in debug.xml, template.xml
+            </action>
+            <action date="2013-07-15" dev="ceyates" issue="76910" type="add">
+                Create Otolaryngology page from YouTube RSS
+            </action>
+        </release>
+        <release date="2013-07-15" version="2.1.20" description="2.1.20 bug fix release">
+            <action date="2013-07-10" dev="ryanmax" issue="88161" type="fix">
+                querymap suggestions are out of date
+            </action>
+            <action date="2013-07-09" dev="ryanmax" issue="87948" type="fix">
+                persistent login extension only works in Firefox
+            </action>
+            <action date="2013-07-15" dev="ryanmax" issue="83604" type="fix">
+                google spell checker returning errors; replace with NCBI spell checker
+            </action>
+        </release>
+        <release date="2013-07-08" version="2.1.19" description="2.1.19 bug fix release">
+            <action date="2013-07-02" dev="olgary" issue="87741" type="add">
+                add internal medicine link to the drop down menu
+            </action>
+            <action date="2013-07-02" dev="ryanmax" issue="87495" type="fix">
+                remove orange bar advertising mobile interface
+            </action>
+            <action date="2013-07-02" dev="ryanmax" issue="87283" type="fix">
+                a particular query causes prolonged max CPU usage
+            </action>
+        </release>
+        <release date="2013-06-24" version="2.1.18" description="2.1.18 bug fix release">
+            <action date="2013-06-21" dev="ceyates" issue="87195" type="add">
+                Create a SourceResolver for a cache: scheme
+            </action>
+            <action date="2013-06-20" dev="ceyates" issue="87101" type="fix">
+                submitted feedback fails to correctly indicate usability checkbox state
+            </action>
+        </release>
         <release date="2013-06-17" version="2.1.17" description="2.1.17 bug fix release">
             <action date="2013-06-12" dev="ceyates" issue="86565" type="remove">
                 remove shc template

@@ -1,17 +1,24 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Locator;
 
 import edu.stanford.irt.cocoon.xml.XIncludeExceptionListener;
 
 public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener {
 
-    private Logger log = LoggerFactory.getLogger(XIncludeExceptionListener.class);
+    private Logger log;
+    
+    public XIncludeExceptionListenerImpl(Logger log) {
+        this.log = log;
+    }
 
     public void exception(Locator locator, final Exception e) {
-        this.log.error(createMessage(locator), e);
+        if (locator == null) {
+            this.log.error(e.getMessage(), e);
+        } else {
+            this.log.error(createMessage(locator), e);
+        }
     }
     
     private String createMessage(Locator locator) {

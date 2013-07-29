@@ -6,22 +6,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class TodaysHours {
 
-    private static final String UNKNOWN = "??";
+    public static final String UNKNOWN = "??";
 
     private Map<String, String> daysMap = new HashMap<String, String>();
 
     private Resource hoursFileResource = null;
 
     private long hoursLastModified = 0;
-
-    private final Logger log = LoggerFactory.getLogger(TodaysHours.class);
 
     private final SimpleDateFormat todaysDateFormat = new SimpleDateFormat("MMM d");
 
@@ -68,7 +66,7 @@ public class TodaysHours {
                 this.daysMap = new StreamDaysMapping(this.hoursFileResource.getInputStream());
             }
         } catch (IOException e) {
-            this.log.error("can't find hours file", e);
+            throw new LanewebException(e);
         }
     }
 }

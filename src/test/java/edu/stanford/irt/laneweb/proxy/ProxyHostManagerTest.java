@@ -18,7 +18,6 @@ import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 
-// TODO: set up mocks so they don't throw exceptions in background update thread
 public class ProxyHostManagerTest {
 
     private Connection connection;
@@ -41,14 +40,22 @@ public class ProxyHostManagerTest {
     }
 
     @Test
-    public void testDestroy() {
+    public void testDestroy() throws InterruptedException, SQLException {
         this.manager.destroy();
     }
 
     @Test
-    public void testIsProxyableHost() {
+    public void testIsProxyableHost() throws SQLException, InterruptedException {
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.connection.createStatement()).andReturn(this.statement);
+        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(false);
+        this.connection.close();
+        this.statement.close();
+        this.resultSet.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
         assertTrue(this.manager.isProxyableHost("library.stanford.edu"));
+        Thread.sleep(100);
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
@@ -58,9 +65,17 @@ public class ProxyHostManagerTest {
     }
 
     @Test
-    public void testIsProxyableLink() {
+    public void testIsProxyableLink() throws SQLException, InterruptedException {
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.connection.createStatement()).andReturn(this.statement);
+        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(false);
+        this.connection.close();
+        this.statement.close();
+        this.resultSet.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
         assertTrue(this.manager.isProxyableLink("http://library.stanford.edu/foo"));
+        Thread.sleep(100);
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 

@@ -115,7 +115,9 @@
             	node = nodes.item(i);
             	name = node.get("name");
             	if (name) {
-                	feedback[name] = node.get("value");
+            		if (node.get("type") !== "radio" || node.get("checked")) {
+                    	feedback[name] = node.get("value");
+            		}
             	}
             }
             return feedback;
