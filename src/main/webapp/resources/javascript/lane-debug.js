@@ -136,7 +136,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "suggest.js",
         "search-select.js",
         "lane-search-pico.js",
-        "search-reset.js",
         "search.js",
         "bookmarks.js",
         "lane-tracking.js",

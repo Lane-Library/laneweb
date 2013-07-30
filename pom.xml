@@ -229,7 +229,6 @@
                                 <include>suggest-min.js</include>
                                 <include>search-select-min.js</include>
                                 <include>lane-search-pico-min.js</include>
-                                <include>search-reset-min.js</include>
                                 <include>search-min.js</include>
                                 <include>bookmarks-min.js</include>
                                 <include>lane-tracking-min.js</include>

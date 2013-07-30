@@ -71,12 +71,12 @@
             this._select.addTarget(suggest);
             suggest.on("select", this.submitSearch, this);
             
-            //set up the SearchReset object
-            this._searchReset = new Lane.SearchReset();
+            //set up search reset
+            this._searchReset = Y.one("#searchReset");
             if (this._input.getValue()) {
-            	this._searchReset.show();
+            	this._searchReset.addClass("active");
             }
-            this._searchReset.on("reset", this._handleReset, this);
+            this._searchReset.on("click", this._handleResetClick, this);
             this.publish("reset", {defaultFn : this.reset});
         }
     };
@@ -90,26 +90,22 @@
          * @param event {CustomEvent} the submit event fired by submitSearch()
          */
         _doSubmit : function(event) {
-        	this._searchReset.hide();
+        	this._searchReset.removeClass("active");
             if (this._input.getValue()) {
                 SearchIndicator.show();
                 this._form.submit();
             }
         },
         
-        _handleReset : function() {
+        _handleResetClick : function() {
         	this.fire("reset");
-        	//TODO: do this part somewhere else:
-        	if (Y.one(".search")) {
-        		Y.one(".search").setStyle("visibility", "hidden");
-        	}
         },
         
         _handleValueChange : function() {
         	if (this._input.getValue()) {
-        		this._searchReset.show();
+        		this._searchReset.addClass("active");
         	} else {
-        		this._searchReset.hide();
+        		this._searchReset.removeClass("active");
         	}
         },
         
@@ -141,8 +137,16 @@
             return this._input.getValue();
         },
         
+        /**
+         * Clears the search input and results if present.
+         * @method reset
+         */
         reset : function() {
         	this._input.reset();
+        	this._searchReset.removeClass("active");
+        	if (Y.one(".search")) {
+        		Y.one(".search").setStyle("visibility", "hidden");
+        	}
         	this._input.getInput().focus();
         },
         
