@@ -18,6 +18,7 @@
     <bean name="edu.stanford.irt.laneweb.bookmarks.BookmarkDAO"
         class="edu.stanford.irt.laneweb.bookmarks.SQLBookmarkDAO">
         <constructor-arg ref="javax.sql.DataSource/eresources"/>
+        <constructor-arg ref="org.slf4j.Logger/SQLBookmarkDAO"/>
     </bean>
     
 </beans>

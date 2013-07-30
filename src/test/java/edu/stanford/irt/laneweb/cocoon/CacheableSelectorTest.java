@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon;
 
+import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -8,10 +9,13 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.model.Model;
 
 public class CacheableSelectorTest {
+
+    private Logger log;
 
     private Map<String, Object> model;
 
@@ -19,7 +23,8 @@ public class CacheableSelectorTest {
 
     @Before
     public void setUp() throws Exception {
-        this.selector = new CacheableSelector();
+        this.log = createMock(Logger.class);
+        this.selector = new CacheableSelector(this.log);
         this.model = new HashMap<String, Object>();
     }
 

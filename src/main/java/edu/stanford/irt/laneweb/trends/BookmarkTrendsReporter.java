@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import edu.stanford.irt.lane.trends.GoogleTracker;
@@ -18,7 +17,11 @@ public class BookmarkTrendsReporter {
 
     private String localHostname;
 
-    private Logger log = LoggerFactory.getLogger(BookmarkTrendsReporter.class);
+    private final Logger log;
+    
+    public BookmarkTrendsReporter(Logger log) {
+        this.log = log;
+    }
 
     // daily at 1:16AM
     @Scheduled(cron = "0 16 01 * * *")

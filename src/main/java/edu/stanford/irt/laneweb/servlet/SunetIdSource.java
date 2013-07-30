@@ -5,29 +5,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * This tries to discover the sunetid associated with a request. It does this by
- * looking in a number of places described below. If it finds it it puts it in
- * the session if it wasn't there already.
+ * This tries to discover the sunetid associated with a request. It does this by looking in a number of places described
+ * below. If it finds it it puts it in the session if it wasn't there already.
  */
 public class SunetIdSource {
 
     /**
-     * this codec codes and decodes the cookie value using sunet id, useragent
-     * and time of creation
+     * this codec codes and decodes the cookie value using sunet id, useragent and time of creation
      */
-    private SunetIdCookieCodec codec;
+    private final SunetIdCookieCodec codec;
 
-    private Logger log = LoggerFactory.getLogger(SunetIdSource.class);
+    private final Logger log;
+
+    public SunetIdSource(final SunetIdCookieCodec codec, final Logger log) {
+        this.codec = codec;
+        this.log = log;
+    }
 
     /**
-     * looks up the sunet id from the session, request, and lane-user cookie in
-     * that order. If it is not in the session it is put there.
+     * looks up the sunet id from the session, request, and lane-user cookie in that order. If it is not in the session
+     * it is put there.
      */
     public String getSunetid(final HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -40,10 +42,6 @@ public class SunetIdSource {
             session.setAttribute(Model.SUNETID, sunetid);
         }
         return sunetid;
-    }
-
-    public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
-        this.codec = codec;
     }
 
     private String getSunetidFromCookie(final Cookie[] cookies, final String userAgent) {

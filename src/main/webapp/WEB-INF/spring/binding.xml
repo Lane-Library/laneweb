@@ -113,7 +113,8 @@
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"
         class="edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder">
-        <property name="hoursPath" value="/includes/hours.xml"/>
+        <constructor-arg value="/includes/hours.xml"/>
+        <constructor-arg ref="org.slf4j.Logger/TodaysHoursBinder"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/parameter-map"

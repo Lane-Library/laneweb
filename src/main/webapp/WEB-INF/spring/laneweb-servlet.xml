@@ -198,7 +198,9 @@
     
     <bean id="handlerExceptionResolver"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapHandlerExceptionResolver"
-        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap">
+        <constructor-arg index="2" ref="org.slf4j.Logger/errorhandler"/>
+    </bean>
     
     <bean id="viewNameTranslator"
         class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator"/>

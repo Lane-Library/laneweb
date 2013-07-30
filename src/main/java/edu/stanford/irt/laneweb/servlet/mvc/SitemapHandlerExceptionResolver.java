@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,11 +19,13 @@ import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
 public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
 
-    public SitemapHandlerExceptionResolver(ComponentFactory componentFactory, SourceResolver sourceResolver) {
-        super(componentFactory, sourceResolver);
-    }
+    private final Logger log;
 
-    private final Logger log = LoggerFactory.getLogger("error handler");
+    public SitemapHandlerExceptionResolver(final ComponentFactory componentFactory,
+            final SourceResolver sourceResolver, final Logger log) {
+        super(componentFactory, sourceResolver);
+        this.log = log;
+    }
 
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
@@ -40,7 +41,8 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
             if (ultimateCause instanceof FileNotFoundException) {
                 this.log.error(ultimateCause.toString());
             } else if (ultimateCause instanceof SocketException && "Broken pipe".equals(ultimateCause.getMessage())) {
-                this.log.error(ultimateCause.toString() + " ip=" + request.getRemoteAddr() + " url=" + request.getRequestURL().toString());
+                this.log.error(ultimateCause.toString() + " ip=" + request.getRemoteAddr() + " url="
+                        + request.getRequestURL().toString());
             } else {
                 this.log.error(ex.toString(), ultimateCause);
             }
