@@ -16,14 +16,15 @@
     border-bottom: none;
 }
 #highlightedResources a:hover {
-    color: #ff9933;
+    color: #dadad4;
+    
+    /*#ff9933;*/
 }
 #topResources {
     background-image: url(/././resources/images/sprite-all.png);
     background-position: -320px -200px;
     background-repeat: no-repeat;
     font-size: 15px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     text-shadow: 0.1em 0.1em 0.1em #101010;
     margin-bottom: 0;
     white-space: nowrap;
@@ -51,7 +52,7 @@
     height: 25px;
     padding: 9px 0 0 14px;
     margin-bottom: 1px;
-    color: #FFECC1;
+    color: #FFF;
 }
 #topResources a:hover {
     background-color: #256592;

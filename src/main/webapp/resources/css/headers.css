@@ -1,53 +1,51 @@
-h2,
-h3,
-h4 {
-    font-family : Georgia, "Times New Roman", Times, serif;
+h1,h2,h3,h4 {
+	font-family: Source Sans Pro, Arial, Helvetica, clean, sans-serif;
 }
-h2 a,
-h2 a:visited {
-    color : inherit;
+h2 a,h2 a:visited {
+	color: inherit;
 }
 h2 {
-    color : #575347;
-    font-size : 250%;
-    padding-top : 15px;
-    margin-bottom : 0
+	color: #565245;
+	font-size: 250%;
+	padding-top: 15px;
+	font-weight: 400;
+	margin-bottom: 0;
 }
 h3 {
-    text-transform : uppercase;
-    font-size : 15px;
-    font-weight : 400;
-    border-bottom : 5px solid #575347;
-    color : #575347;
-    padding-bottom : 2px;
-    letter-spacing : 1.1px;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	font-weight: 400;
+	color: #575347;
+	border-bottom: 5px #575347 solid;
+	padding-bottom: 2px;
 }
 h4 {
-    color : black;
-    font-size : 1.6em;
-    letter-spacing : 0.05em;
-    line-height : 1.2em;
-    margin-bottom : .2em;
+	color: black;
+	font-size: 1.4em;
+	letter-spacing: 0.04em;
+	line-height: 1.2em;
+	margin-bottom: .2em;
 }
 h5 {
-    color : black;
-    font-weight : bold;
-    letter-spacing : 0.05em;
-    line-height : 1.2em;
-    margin-bottom : .2em;
-    font-size : 1.1em;
+	color: black;
+	font-weight: bold;
+	letter-spacing: 0.05em;
+	line-height: 1.2em;
+	margin-bottom: .2em;
+	font-size: 1.1em;
+}
+.h2-border {
+	border-bottom: 5px #575347 solid;
+	margin-bottom: 0;
+	padding-top: 25px;
+}
+
+/*style for h4 - bigger font, red*/
+.plain {
+	color: #820000;
+	font-size: 1.8em;
 }
 .weak {
     font-size : 11px;
     font-weight : normal;
-}
-.h2-border {
-    border-bottom : 5px #575347 solid;
-    margin-bottom : 0;
-    padding-top : 25px;
-}
-/*style for h4 - bigger font, red; good for long pages, not portals*/
-.plain {
-    color : #820000;
-    font-size : 1.8em;
 }

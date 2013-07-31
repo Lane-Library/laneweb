@@ -192,9 +192,7 @@
                                 <include>expandies-min.css</include>
                                 <include>buttons-min.css</include>
                                 <include>breadcrumb-form-min.css</include>
-                                <include>tutorials-min.css</include>
                                 <include>forms-min.css</include>
-                                <include>liaisons-min.css</include>
                                 <include>table-styles-min.css</include>
                                 <include>follow-min.css</include>
                                 <include>images-min.css</include>
@@ -204,12 +202,12 @@
                                 <include>banner-min.css</include>
                                 <include>hightlighted-resources-min.css</include>
                                 <include>antibiogram-min.css</include>
-                                <include>landing-pgs-2011-min.css</include>
                                 <include>bookmarks-min.css</include>
                                 <include>bookmark-instructions-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
                                 <include>search-select-min.css</include>
+                                <include>fonts-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>

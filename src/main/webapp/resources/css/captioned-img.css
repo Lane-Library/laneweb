@@ -2,9 +2,6 @@
 
 .captioned-img {
     text-align : center;
-    font-size : .9em;
-    font-family : Georgia, 'Times New Roman', Times, serif;
-    color : #666666
 }
 .captioned-img.left {
     float : left;
@@ -16,30 +13,4 @@
 }
 .captioned-img div {
     padding : 0 5px
-}
-.captioned-img a {
-    border-bottom : none;
-    cursor : pointer
-}
-.captioned-img div a {
-    border-bottom : 1px dotted #81785A;
-    font-size : 10px
-}
-.captioned-img div a:hover {
-    border-bottom : 1px solid #820000
-}
-
-/*light box related rules*/
-.yui3-lightbox-content .captioned-img {
-    font-size : 18px;
-    padding : 18px;
-    background-color : #F6F3E5;
-    -webkit-border-radius : 5px;
-    -moz-border-radius : 5px;
-    border-radius : 5px
-}
-.yui3-lightbox-content .captioned-img img {
-    padding : 9px;
-    background-color : white;
-    border : 1px #B5B3AA solid
 }
