@@ -17,8 +17,6 @@
 }
 #highlightedResources a:hover {
     color: #dadad4;
-    
-    /*#ff9933;*/
 }
 #topResources {
     background-image: url(/././resources/images/sprite-all.png);
