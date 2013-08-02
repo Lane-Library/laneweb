@@ -1,4 +1,7 @@
 /* This file has rules that don't seem to fit anywhere else */
+body, select,input,button,textarea,button{
+	font-family: Source Sans Pro, Arial, Helvetica, clean, sans-serif;
+}
 p {
 	margin-bottom: 10px;
 }
