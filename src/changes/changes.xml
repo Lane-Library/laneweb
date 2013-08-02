@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2013-07-29" version="2.1.23" description="2.1.23 bug fix release">
+        <release date="2013-08-05" version="2.1.23" description="2.1.23 bug fix release">
             <action date="2013-07-31" dev="olgary" issue="89319" type="update">
                 updates styles with Stanford fonts
             </action>
