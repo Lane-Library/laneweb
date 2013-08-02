@@ -6,7 +6,6 @@ import java.util.List;
 import javax.security.auth.Subject;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.ldap.CommunicationException;
 import org.springframework.ldap.NamingException;
 import org.springframework.ldap.core.AttributesMapper;
