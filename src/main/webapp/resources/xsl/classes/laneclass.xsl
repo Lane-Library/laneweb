@@ -56,7 +56,7 @@
                     </a>
                 </div>
             <div class="yui3-u-2-3">
-           	<h4>
+           	<p>
                 <xsl:call-template  name="month"/>
                 <xsl:text> </xsl:text>
                 <xsl:call-template  name="day"/>
@@ -64,18 +64,16 @@
                 <xsl:call-template  name="start-time"/>
                 <xsl:text>-</xsl:text>
                 <xsl:call-template  name="end-time"/>
-            </h4>
-             <h4>
-              <xsl:if test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() != '---'"> 
-                <xsl:attribute name="class">weak</xsl:attribute>
+            </p>
+             <p>
+              <xsl:if test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() != '---'">
                 <xsl:text>Seats left: </xsl:text>
                 <b>	
                 	<xsl:value-of select="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text()" />
                  </b>
 				</xsl:if>
-             </h4> 
-            <h4> 
-             <xsl:attribute name="class">weak</xsl:attribute>
+             </p> 
+            <p> 
              <xsl:text>With </xsl:text>
              <xsl:choose>
                 <xsl:when test="./lc:more_info_url/text() != ''">
@@ -90,10 +88,9 @@
                     <xsl:value-of select="./lc:speaker/text()" />
                 </xsl:otherwise>
             </xsl:choose>
-            </h4>
+            </p>
                 
-            <h4> 
-                <xsl:attribute name="class">weak</xsl:attribute>
+            <p> 
                 <xsl:text>At </xsl:text>
                 <xsl:variable name="link"><xsl:value-of select="./lc:venue/lc:venue_website"></xsl:value-of> </xsl:variable>
                 <xsl:choose>
@@ -110,7 +107,7 @@
                         <xsl:value-of select="./lc:venue/lc:venue_name" />
                     </xsl:otherwise>
                 </xsl:choose>
-            </h4>
+            </p>
             </div>
             </div>
             
