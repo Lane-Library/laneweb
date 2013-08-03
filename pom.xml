@@ -169,6 +169,7 @@
                             <removeIncluded>true</removeIncluded>
                             <output>target/laneweb/resources/css/lane-all.css</output>
                             <includes>
+                                <include>fonts-min.css</include>
                                 <include>yui-min.css</include>
                                 <include>layout-min.css</include>
                                 <include>bassett-min.css</include>
@@ -207,7 +208,6 @@
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
                                 <include>search-select-min.css</include>
-                                <include>fonts-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
