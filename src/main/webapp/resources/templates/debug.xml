@@ -3,7 +3,7 @@
     <head>
         <title>Lane Medical Library &amp; Knowledge Management Center - Stanford
             University School of Medicine</title>
-         <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/layout.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/shaded-border.css"/>
@@ -26,9 +26,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/expandies.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/breadcrumb-form.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/tutorials.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/forms.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/liaisons.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/table-styles.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/follow.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/images.css"/>
@@ -38,12 +36,12 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/banner.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/hightlighted-resources.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/antibiogram.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/landing-pgs-2011.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/bookmark-instructions.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/suggest.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/resource-list-pagination.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/search-select.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/fonts.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
     </head>
