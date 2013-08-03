@@ -6,7 +6,7 @@
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9B0D00), to(#600700));
     background-image: -moz-linear-gradient(#9B0D00, #600700);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700');
-    _ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700')";
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700')";
     background-image: linear-gradient(#9B0D00, #600700);
 }
 #searchFormContainer.clinical {
