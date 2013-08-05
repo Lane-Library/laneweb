@@ -24,6 +24,7 @@
             /WEB-INF/spring/datasources.xml
             /WEB-INF/spring/eresources.xml
             /WEB-INF/spring/history-eresources.xml
+            /WEB-INF/spring/logger.xml
             /WEB-INF/spring/laneweb.xml
             /WEB-INF/spring/mapping.xml
             /WEB-INF/spring/pipeline.xml

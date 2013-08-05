@@ -21,7 +21,6 @@ dt {
 }
 /*this is the left column*/
 .content .leftColumn li {
-	font-size: 11px;
 	list-style: none outside none;
 	padding: 5px 5px 5px 18px;
 	border-bottom: 1px solid #E6E4DC;
@@ -41,13 +40,8 @@ dt {
 
 /*this is the right column*/
 .content .rightColumn li {
-	font-size: 11px;
 	line-height: 12px;
 	padding: 2.5px 0;
-}
-
-.content .rightColumn .cite li {
-	margin-bottom: .5em;
 }
 
 /*styles for the list of portals on /portals/index.html*/

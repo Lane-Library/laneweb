@@ -7,6 +7,31 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-08-05" version="2.1.23" description="2.1.23 bug fix release">
+            <action date="2013-07-31" dev="olgary" issue="89319" type="update">
+                updates styles with Stanford fonts
+            </action>
+            <action date="2013-07-30" dev="ryanmax" issue="89271" type="fix">
+                spelling suggestions are noisy
+            </action>
+            <action date="2013-08-02" dev="ceyates" issue="89079" type="update">
+                remove 'weak' class from laneclass.xsl
+            </action>
+            <action date="2013-07-29" dev="ceyates" issue="89073" type="update">
+                provide loggers via dependency injection
+            </action>
+        </release>
+        <release date="2013-07-29" version="2.1.22" description="2.1.22 bug fix release">
+            <action date="2013-07-26" dev="olgary" issue="89133" type="update">
+                replace expandes.css - removed all font-size style
+            </action>
+            <action date="2013-07-25" dev="olgary" issue="89080" type="update">
+                headers.css - removed 'alt' from h3
+            </action>
+            <action date="2013-07-25" dev="ceyates" issue="89065" type="fix">
+                occasional NullPointerException in XIncludeExceptionListenerImpl
+            </action>
+        </release>
         <release date="2013-07-22" version="2.1.21" description="2.1.21 bug fix release">
             <action date="2013-07-16" dev="ryanmax" issue="88517" type="fix">
                 spelling suggestions should ignore case

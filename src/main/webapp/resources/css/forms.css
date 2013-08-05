@@ -24,7 +24,7 @@
 	margin-bottom: .5em;
 	border: solid 2px #C9C9C9;
 	outline: 0;
-	font: normal 13px/100% Arial, Verdana, sans-serif;
+	font: normal 13px/100% Source Sans Pro, Arial, Helvetica, clean, sans-serif;
 	background: #FFFFFF;
 	width: 100%;
 	*width: 95%;
@@ -74,7 +74,6 @@
 
 /*-------------------------feedback widget--------------------------------------------------------------------------*/
 #feedback .mainFeedback /*looks the same as h4*/ {
-	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 1.8em;
 	letter-spacing: 0.05em;
 	line-height: 1.2em;

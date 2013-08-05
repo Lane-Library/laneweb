@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
@@ -38,7 +37,11 @@ public class VoyagerLogin {
 
     private String errorURL;
 
-    private final Logger log = LoggerFactory.getLogger(VoyagerLogin.class);
+    private final Logger log;
+    
+    public VoyagerLogin(Logger log) {
+        this.log = log;
+    }
 
     public String getVoyagerURL(final String univId, final String pid, final String queryString) {
         String voyagerURL = this.errorURL;

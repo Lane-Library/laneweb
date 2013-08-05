@@ -31,6 +31,7 @@
     
     <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/cacheable"
         class="edu.stanford.irt.laneweb.cocoon.CacheableSelector">
+        <constructor-arg ref="org.slf4j.Logger/CacheableSelector"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/resource-exists"
