@@ -98,7 +98,31 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     window.Y = Y;
     
     //create the lane namespace
-    Y.namespace("lane");
+    var lane = Y.namespace("lane");
+    
+    Y.augment(lane, Y.EventTarget, null, null, {
+    	prefix : "lane",
+    	emitFacade : true,
+    	broadcast : 1
+    });
+    
+    lane.publish("beforeSearchSubmit");
+    
+    lane.publish("searchFormReset");
+    
+    lane.publish("searchSourceChange");
+    
+    lane.on("search:reset", function(event) {
+    	this.fire("searchFormReset");
+    });
+    
+    lane.on("search:sourceChange", function(event) {
+    	this.fire("searchSourceChange", {newVal : event.newVal});
+    });
+    
+    lane.on("search:submit", function(event) {
+    	this.fire("beforeSearchSubmit", {originalEvent : event});
+    });
     
     var i, laneJavascript = [
         "model.js",
@@ -112,7 +136,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "suggest.js",
         "search-select.js",
         "lane-search-pico.js",
-        "lane-search.js",
+        "search.js",
         "bookmarks.js",
         "lane-tracking.js",
         "bookmark-instructions.js",
@@ -131,7 +155,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-selections.js",
         "lane-popin.js",
         "form-validator.js",
-        "lane-search-reset.js",
         "hover-controller.js",
         "lane-feedback.js",
         "banner.js",

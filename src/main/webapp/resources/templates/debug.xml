@@ -80,7 +80,8 @@
                                         title="Selected clinical textbooks"
                                         >Textbooks</option>
                                 </select>
-                                <input name="q" id="searchTerms" type="text"/>
+                                    <input name="q" id="searchTerms" type="text"/>
+                                    <span id="searchReset" title="Clear Search">×</span>
                                 </div>
                                 <input id="searchSubmit" type="submit" value="Search"/>
                                 <img id="searchIndicator" src="/resources/images/search-indicator.gif" alt="search indicator"/>
