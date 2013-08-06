@@ -1,5 +1,6 @@
 (function() {
-    var form = Y.one('#search'),
+    var Lane = Y.lane,
+        form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         container = Y.one("#searchFormContainer"),
         searchTerms,
@@ -43,7 +44,7 @@
                 if (queryString[inputs.item(i).get('name')] !== undefined) {
                     inputs.item(i).set('value',queryString[inputs.item(i).get('name')]);
                 }
-                picoTextInputs.push(new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
+                picoTextInputs.push(new Lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
                 inputs.item(i).on("blur",function(){
                     searchTerms.setValue(getPicoQuery());
                 });
@@ -52,13 +53,13 @@
                 });
                 switch(inputs.item(i).get('name')){
                     case 'p':
-                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"mesh-d");
+                        picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-d");
                         break;
                     case 'i':
-                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"mesh-i");
+                        picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-i");
                         break;
                     case 'c':
-                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"mesh-di");
+                        picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-di");
                         break;
                 }
                 picoSuggest.on("select", function(event) {
@@ -87,11 +88,11 @@
         };
         Y.publish("lane:searchPicoChange",{broadcast:1});
     if (form) {
-        searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"));
+        searchTerms = new Lane.TextInput(Y.one("#searchTerms"));
         if (form.hasClass('clinical')) {
             picoOn();
         }
-        Y.on('lane:searchSourceChange', function(event) {
+        Lane.on('search:sourceChange', function(event) {
             if (event.newVal == 'clinical-all'||event.newVal.indexOf('peds') === 0) {
                 picoOn();
                 form.one('#clinicalP').focus();
@@ -99,7 +100,7 @@
                     picoTextInputs[0].setValue(picoTextInputs[0].getValue());
                 }
                 else{
-                    picoTextInputs[0].setValue(Y.lane.Search.getSearchTerms());
+                    picoTextInputs[0].setValue(Lane.Search.getSearchTerms());
                 }
             } else {
                 picoOff();

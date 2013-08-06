@@ -17,12 +17,6 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     	emitFacade : true,
     	broadcast : 1
     });
-    
-    lane.publish("searchSourceChange");
-    
-    lane.on("search:sourceChange", function(event) {
-    	this.fire("searchSourceChange", {newVal : event.newVal});
-    });
 
 });
 /*

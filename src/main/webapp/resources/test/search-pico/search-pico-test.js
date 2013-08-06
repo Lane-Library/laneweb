@@ -5,7 +5,7 @@ Y.use('console', "node-event-simulate", 'test', function(Y){
         name: "Lane Search PICO Testcase",
         
         testSourceChangeClinical : function() {
-            Y.fire('lane:searchSourceChange', {
+            Y.lane.fire('search:sourceChange', {
                 newVal:'clinical-all',
                 oldVal:'all-all'
             });
@@ -16,7 +16,7 @@ Y.use('console', "node-event-simulate", 'test', function(Y){
                 Y.Assert.isTrue(Y.Lang.isObject(Y.one('#picoFields')), 'no pico fields');
         },
         testSourceChangeNotClinical : function() {
-            Y.fire('lane:searchSourceChange', {
+            Y.lane.fire('search:sourceChange', {
                 newVal:'all-all',
                 oldVal:'clinical-all'
             });
@@ -30,7 +30,7 @@ Y.use('console', "node-event-simulate", 'test', function(Y){
         testSetPatientCondition: function() {
             //simulate blur broken in IE http://yuilibrary.com/projects/yui3/ticket/2531702
             if (!Y.UA.ie) {
-                Y.fire('lane:searchSourceChange', {
+                Y.lane.fire('search:sourceChange', {
                     newVal:'clinical-all',
                     oldVal:'all-all'
                 });

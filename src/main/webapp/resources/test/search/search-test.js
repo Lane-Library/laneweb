@@ -41,16 +41,7 @@ YUI().use('node-event-simulate','console','test', function(T) {
         },
         testSourceChangeBubble: function() {
         	var value = null;
-            this.handle = Y.lane.on('searchSourceChange', function(event) {
-            	value = event.newVal;
-            });
-            this.searchSource.set('selectedIndex',1);
-            this.searchSource.simulate("change");
-            T.Assert.areEqual(value, this.searchSource.get('value'));
-        },
-        testSourceChangeBroadcast: function() {
-        	var value = null;
-            this.handle = Y.on('lane:searchSourceChange', function(event) {
+            this.handle = Y.lane.on('search:sourceChange', function(event) {
             	value = event.newVal;
             });
             this.searchSource.set('selectedIndex',1);

@@ -106,12 +106,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     	broadcast : 1
     });
     
-    lane.publish("searchSourceChange");
-    
-    lane.on("search:sourceChange", function(event) {
-    	this.fire("searchSourceChange", {newVal : event.newVal});
-    });
-    
     var i, laneJavascript = [
         "model.js",
         "link-plugin.js",
