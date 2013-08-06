@@ -91,7 +91,6 @@
     display : none;
     color : #A1B9ED;
     background-color:white;
-    /*border-bottom : none;*/
     font-size : 175%;
     position:absolute;
     top:0;
@@ -103,6 +102,9 @@
 }
 #searchReset:hover {
     color : #79455C;
+}
+#searchReset.active {
+    display:block;
 }
 
 #searchIndicator {

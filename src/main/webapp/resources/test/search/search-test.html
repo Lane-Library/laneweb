@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>lane-search javascript unit tests</title>
-        <style type="text/css">
-            #searchIndicator { visibility:hidden }
-        </style>
+        <title>search javascript unit tests</title>
+        <meta charset="UTF-8"/>
     </head>
     <body>
         <form id="search" method="get" action="">
@@ -15,6 +13,7 @@
                     <option value="option3" title="title3">Option 3</option>
                 </select>
                 <input name="q" id="searchTerms" type="text"/>
+                <span id="searchReset" title="Clear Search">×</span>
                 <input id="searchSubmit" type="submit" value="search"/>
             </fieldset>
             <div id="searchIndicator"></div>
@@ -25,8 +24,9 @@
         <script src="../../javascript/model.js" type="text/javascript"></script>
         <script src="../../javascript/search-indicator.js" type="text/javascript"></script>
         <script src="../../javascript/lane-textinputs.js" type="text/javascript"></script>
+        <script src="../../javascript/search-select.js" type="text/javascript"></script>
         <script src="../../javascript/suggest.js" type="text/javascript"></script>
-        <script src="../../javascript/lane-search.js" type="text/javascript"></script>
+        <script src="../../javascript/search.js" type="text/javascript"></script>
         <script src="search-test.js" type="text/javascript"></script>
     </body>
 </html>

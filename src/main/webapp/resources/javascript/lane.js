@@ -10,7 +10,31 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     window.Y = Y;
     
     //create the lane namespace
-    Y.namespace("lane");
+    var lane = Y.namespace("lane");
+    
+    Y.augment(lane, Y.EventTarget, null, null, {
+    	prefix : "lane",
+    	emitFacade : true,
+    	broadcast : 1
+    });
+    
+    lane.publish("beforeSearchSubmit");
+    
+    lane.publish("searchFormReset");
+    
+    lane.publish("searchSourceChange");
+    
+    lane.on("search:reset", function(event) {
+    	this.fire("searchFormReset");
+    });
+    
+    lane.on("search:sourceChange", function(event) {
+    	this.fire("searchSourceChange", {newVal : event.newVal});
+    });
+    
+    lane.on("search:submit", function(event) {
+    	this.fire("beforeSearchSubmit", {originalEvent : event});
+    });
 
 });
 /*
