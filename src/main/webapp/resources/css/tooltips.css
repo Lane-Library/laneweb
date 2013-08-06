@@ -6,6 +6,7 @@
     position:absolute;
     border: 1px solid #9e9d98;
     background-color:#F2F3ED;
+    text-align:left;
 }
 .yui3-tooltip-hidden {
     visibility:hidden;
