@@ -9,12 +9,15 @@
         Y.io(basePath + '/apps/spellcheck/json?q=' + encodedQuery, {
             on: {
                 success:function(id, o) {
-                    var sc = Y.JSON.parse(o.responseText), a;
+                    var sc = Y.JSON.parse(o.responseText), a, correctedUrl;
                     if (sc.suggestion) {
                         //if there is a suggestion show the spellcheck markup 
                         //and add the suggestion to the href
+                        correctedUrl = document.location.href.replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery);
+                        //strip #facet stuff from URL (#facet=catalog-lois added when no hits)
+                        correctedUrl = correctedUrl.replace(/#.*/,'');
                         a = spellCheck.one('a');
-                        a.set('href', document.location.href.replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery));
+                        a.set('href', correctedUrl);
                         a.set('innerHTML', sc.suggestion);
                         Y.fire('lane:popin', spellCheck);
                         // track suggestion and original query
