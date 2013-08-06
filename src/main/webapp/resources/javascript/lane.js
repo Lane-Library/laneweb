@@ -18,8 +18,6 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     	broadcast : 1
     });
     
-    lane.publish("beforeSearchSubmit");
-    
     lane.publish("searchFormReset");
     
     lane.publish("searchSourceChange");
@@ -30,10 +28,6 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     
     lane.on("search:sourceChange", function(event) {
     	this.fire("searchSourceChange", {newVal : event.newVal});
-    });
-    
-    lane.on("search:submit", function(event) {
-    	this.fire("beforeSearchSubmit", {originalEvent : event});
     });
 
 });

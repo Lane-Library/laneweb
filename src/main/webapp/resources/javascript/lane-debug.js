@@ -106,8 +106,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     	broadcast : 1
     });
     
-    lane.publish("beforeSearchSubmit");
-    
     lane.publish("searchFormReset");
     
     lane.publish("searchSourceChange");
@@ -118,10 +116,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     
     lane.on("search:sourceChange", function(event) {
     	this.fire("searchSourceChange", {newVal : event.newVal});
-    });
-    
-    lane.on("search:submit", function(event) {
-    	this.fire("beforeSearchSubmit", {originalEvent : event});
     });
     
     var i, laneJavascript = [

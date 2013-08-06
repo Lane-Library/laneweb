@@ -79,18 +79,9 @@ YUI().use('node-event-simulate','console','test', function(T) {
         },
         testBubbleOnSubmit : function() {
         	var submitted = false;
-        	this.handle = Y.lane.on("beforeSearchSubmit", function(event) {
+        	this.handle = Y.lane.on("search:submit", function(event) {
         		submitted = true;
-        		event.originalEvent.preventDefault();
-        	});
-        	this.search.submitSearch();
-        	T.Assert.isTrue(submitted);
-        },
-        testBroadcastOnSubmit : function() {
-        	var submitted = false;
-        	this.handle = Y.on("lane:beforeSearchSubmit", function(event) {
-        		submitted = true;
-        		event.originalEvent.preventDefault();
+        		event.preventDefault();
         	});
         	this.search.submitSearch();
         	T.Assert.isTrue(submitted);
