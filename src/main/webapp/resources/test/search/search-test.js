@@ -118,15 +118,7 @@ YUI().use('node-event-simulate','console','test', function(T) {
         },
         testBubbleReset : function() {
         	var reset = false;
-        	this.handle = Y.lane.on("searchFormReset", function(event) {
-        		reset = true;
-        	});
-        	T.one("#searchReset").simulate("click");
-        	T.Assert.isTrue(reset);
-        },
-        testBroadcastReset : function() {
-        	var reset = false;
-        	this.handle = Y.on("lane:searchFormReset", function(event) {
+        	this.handle = Y.lane.on("search:reset", function(event) {
         		reset = true;
         	});
         	T.one("#searchReset").simulate("click");

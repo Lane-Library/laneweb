@@ -1,6 +1,7 @@
 (function() {
     
-    var model = Y.lane.Model,
+    var Lane = Y.lane,
+        model = Lane.Model,
         searchTerms = model.get(model.QUERY),
         searchSource = model.get(model.SOURCE),
         Tracker = function() {
@@ -350,8 +351,8 @@
         }, document);
         
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
-        if (Y.lane.BookmarksWidget) {
-            Y.lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
+        if (Lane.BookmarksWidget) {
+            Lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
                 Y.fire("lane:trackableEvent", {
                     category: "lane:bookmarkAdd",
                     action: model.get(model.AUTH),
@@ -363,7 +364,7 @@
             var action = "";
             //determine whether or not to include search source value.
             if (event.input.get("id") == "searchTerms") {
-                action = Y.lane.Search.getSearchSource();
+                action = Lane.Search.getSearchSource();
             }
             Y.fire("lane:trackableEvent", {
                 //keep category same as previous event.type:
@@ -372,9 +373,9 @@
                 label: event.suggestion
             });
         });
-        Y.on("lane:searchFormReset",  function(event) {
+        Lane.on("search:reset",  function(event) {
             Y.fire("lane:trackableEvent", {
-                category: event.type,
+                category: "lane:searchFormReset",
                 action: document.location.pathname
             });
         });
