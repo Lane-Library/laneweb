@@ -8,6 +8,8 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,9 +62,9 @@ public class EventListTransformerTest {
     }
 
     @Test
-    public void testStartElement() throws SAXException, IOException {
+    public void testStartElement() throws SAXException, IOException, URISyntaxException {
         expect(this.attributes.getValue("href")).andReturn("value");
-        expect(this.sourceResolver.resolveURI("value")).andReturn(this.source);
+        expect(this.sourceResolver.resolveURI(new URI("value"))).andReturn(this.source);
         this.saxParser.parse(eq(this.source), isA(XMLConsumer.class));
         replay(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, this.source);
         this.transformer.startElement("", "event", "event", this.attributes);

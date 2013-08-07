@@ -77,7 +77,7 @@
             <map:select type="cacheable">
                 <map:when test=""/> 
             </map:select>
-            <map:generate type="file" src="content:/{1}.html"/>
+            <map:generate type="file" src="cocoon://content/{1}.html"/>
             <map:select type="cme-links">
                 <map:when test="true">
                     <map:transform type="html-cme-links"/>
@@ -103,8 +103,8 @@
                 <map:when test=""/> 
             </map:select>
             <map:aggregate type="default" element="doc">
-                <map:generate type="file" src="content:/{1}.html"/>
-                <map:generate type="file" src="content:/templates/{template}.xml"/>
+                <map:generate type="file" src="cocoon://content/{1}.html"/>
+                <map:generate type="file" src="cocoon://content/templates/{template}.xml"/>
             </map:aggregate>
             <map:select type="cme-links">
                 <map:when test="true">

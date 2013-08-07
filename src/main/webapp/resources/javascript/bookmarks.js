@@ -1,8 +1,15 @@
 (function() {
 
-    var Bookmark, Bookmarks, BookmarksWidget, BookmarkLink, BookmarkEditor, BookmarksEditor, model = Y.lane.Model;
+    var Bookmark,
+        Bookmarks,
+        BookmarksWidget,
+        BookmarkLink,
+        BookmarkEditor,
+        BookmarksEditor,
+        Lane = Y.lane,
+        Model = Lane.Model;
 
-    if (Y.one("#bookmarks") && !model.get(model.DISASTER_MODE)) {
+    if (Y.one("#bookmarks") && !Model.get(Model.DISASTER_MODE)) {
 
         /**
          * A class for representing a bookmark with attributes for the label and url.
@@ -111,7 +118,7 @@
         });
 
         //make the Bookmark constructor globally accessible
-        Y.lane.Bookmark = Bookmark;
+        Lane.Bookmark = Bookmark;
 
         /**
          * A class for representing an ordered collection of Bookmarks.
@@ -134,7 +141,7 @@
                     this._bookmarks.push(bookmarks[i]);
                 }
             }
-            this._basePath = model.get(model.BASE_PATH) || "";
+            this._basePath = Model.get(Model.BASE_PATH) || "";
 
             /**
              * @event add
@@ -450,7 +457,7 @@
         });
 
         //make the Bookmarks constructor globally accessible
-        Y.lane.Bookmarks = Bookmarks;
+        Lane.Bookmarks = Bookmarks;
         
         /**
          * The Bookmarks Widget.  This is created by parsing the ul element
@@ -592,7 +599,7 @@
                         var i, anchor, label, url, query, bookmarks = [], anchors = srcNode.all("a");
                         for (i = 0; i < anchors.size(); i++) {
                             anchor = anchors.item(i);
-                            anchor.plug(Y.lane.LinkPlugin);
+                            anchor.plug(Lane.LinkPlugin);
                             label = anchor.link.get("title");
                             if (anchor.link.get("local")) {
                                 url = anchor.link.get("path");
@@ -610,7 +617,7 @@
 
         //create a new widget and keep a global reference to it
         //may be able to use Widget.getByNode("#bookmarks") rather than the global reference . . . .
-        Y.lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true, displayLimit:10});
+        Lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true, displayLimit:10});
         
         
         //don't create BookmarkLink if there is a class=no-bookmarking
@@ -658,11 +665,10 @@
              * @method initializer
              */
             initializer : function() {
-            	var model = Y.lane.Model;
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                if (model.get(model.QUERY)) {
+                if (Model.get(Model.QUERY)) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
                         bookmarkSearch.setStyle("display", "block");
@@ -712,7 +718,7 @@
              */
             _handleClick : function() {
                 var target = this.get("target"), label, url, query;
-                target.plug(Y.lane.LinkPlugin);
+                target.plug(Lane.LinkPlugin);
                 label = target.link.get("title");
                 if (target.link.get("local")) {
                     url = target.link.get("path");
@@ -723,7 +729,7 @@
                     url = target.link.get("url");
                 }
                 this.set("status", BookmarkLink.BOOKMARKING);
-                this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
+                this.get("bookmarks").addBookmark(new Lane.Bookmark(label, url));
             },
             
             /**
@@ -732,15 +738,14 @@
              * @private
              */
             _handleBookmarkSearchClick : function(event) {
-                var model = Y.lane.Model,
-                    query = model.get(model.QUERY),
-                    source = model.get(model.SOURCE),
-                    encodedQuery = model.get(model.URL_ENCODED_QUERY),
+                var query = Model.get(Model.QUERY),
+                    source = Model.get(Model.SOURCE),
+                    encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
                     label = "Search for: " + query,
                     url = "/search.html?source=" + source + "&q=" + encodedQuery,
                     bookmarkSearch = Y.one("#bookmarkSearch"),
                     eventHandle = null;
-                this.get("bookmarks").addBookmark(new Y.lane.Bookmark(label, url));
+                this.get("bookmarks").addBookmark(new Lane.Bookmark(label, url));
                 //TODO: this is a temporary hack to take care of case 72768
                 if (bookmarkSearch) {
                     bookmarkSearch.setStyle("cursor", "wait");
@@ -786,7 +791,7 @@
              */
             _isAlreadyBookmarked : function(target) {
                 var url, i, bookmarks, size;
-                target.plug(Y.lane.LinkPlugin);
+                target.plug(Lane.LinkPlugin);
                 if (target.link.get("local")) {
                     url = target.link.get("path");
                     query = target.link.get("query");
@@ -909,7 +914,7 @@
         });
 
         //create a BookmarkLink and save reference
-        Y.lane.BookmarkLink = new BookmarkLink({bookmarks:Y.lane.BookmarksWidget.get("bookmarks")});
+        Lane.BookmarkLink = new BookmarkLink({bookmarks:Lane.BookmarksWidget.get("bookmarks")});
             
         }
 
@@ -952,8 +957,8 @@
                  */
                 syncUI : function() {
                     var srcNode = this.get("srcNode");
-                    this._labelInput = new Y.lane.TextInput(srcNode.one("input[name='label']"));
-                    this._urlInput = new Y.lane.TextInput(srcNode.one("input[name='url']"));
+                    this._labelInput = new Lane.TextInput(srcNode.one("input[name='label']"));
+                    this._urlInput = new Lane.TextInput(srcNode.one("input[name='url']"));
                     this._urlInput.getInput().after("focus", this._setDefaultUrlInputText, this);
                     this._truncateLabel();
                 },
@@ -1018,7 +1023,7 @@
                     } else {
                         bookmark = new Bookmark(newlabel, newurl);
                         this.set("bookmark", bookmark);
-                        Y.lane.BookmarksWidget.get("bookmarks").addBookmark(bookmark);
+                        Lane.BookmarksWidget.get("bookmarks").addBookmark(bookmark);
                     }
                     this.set("editing", false);
                 },
@@ -1436,9 +1441,9 @@
             });
 
             //Create a new BookmarksEditor
-            Y.lane.BookmarksEditor = new BookmarksEditor({
+            Lane.BookmarksEditor = new BookmarksEditor({
                 srcNode:Y.one("#bookmarks-editor"),
-                bookmarks : Y.lane.BookmarksWidget.get("bookmarks"),
+                bookmarks : Lane.BookmarksWidget.get("bookmarks"),
                 render : true});
         }
     }

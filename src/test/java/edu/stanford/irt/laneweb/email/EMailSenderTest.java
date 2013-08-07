@@ -7,10 +7,14 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.mail.Address;
 import javax.mail.Message.RecipientType;
@@ -34,13 +38,28 @@ public class EMailSenderTest {
 
     private MimeMessage message;
 
+    private Set<String> spamIPs;
+
     @Before
     public void setUp() throws Exception {
         this.javaMailSender = createMock(JavaMailSender.class);
-        this.eMailSender = new EMailSender(Collections.singleton("recipient"), this.javaMailSender,
-                Collections.singleton("127.0.0.1"));
+        this.spamIPs = new HashSet<String>();
+        this.spamIPs.add("127.0.0.1");
+        this.eMailSender = new EMailSender(Collections.singleton("recipient"), this.javaMailSender, this.spamIPs);
         this.map = new HashMap<String, Object>();
         this.message = createMock(MimeMessage.class);
+    }
+
+    @Test
+    public void testAddSpamIP() {
+        this.eMailSender.addSpamIP("127.0.0.2");
+        assertTrue(this.spamIPs.contains("127.0.0.2"));
+    }
+
+    @Test
+    public void testRemoveSpanIP() {
+        this.eMailSender.removeSpamIP("127.0.0.1");
+        assertFalse(this.spamIPs.contains("127.0.0.1"));
     }
 
     @Test

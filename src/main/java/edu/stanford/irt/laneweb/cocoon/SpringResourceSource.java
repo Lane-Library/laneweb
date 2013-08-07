@@ -31,6 +31,10 @@ public class SpringResourceSource implements Cacheable, Source {
         return this.resource.getInputStream();
     }
 
+    public Serializable getKey() {
+        return getURI();
+    }
+
     public String getURI() {
         try {
             return this.resource.getURI().toString();
@@ -47,7 +51,8 @@ public class SpringResourceSource implements Cacheable, Source {
         }
     }
 
-    public Serializable getKey() {
-        return getURI();
+    @Override
+    public String toString() {
+        return this.resource.toString();
     }
 }

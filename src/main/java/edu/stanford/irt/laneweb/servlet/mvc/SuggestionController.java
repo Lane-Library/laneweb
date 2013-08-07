@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +43,8 @@ public class SuggestionController {
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/history")
     private SuggestionManager historySuggestionManager;
 
-    private Logger log = LoggerFactory.getLogger(SuggestionController.class);
+    @Resource(name = "org.slf4j.Logger/SuggestionController")
+    private Logger log;
 
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
     private SuggestionManager meshSuggestionManager;

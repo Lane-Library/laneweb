@@ -1,15 +1,12 @@
 
 /*styles for classes on homepage*/
  .module .bd .month {
-	font-family:Georgia, "Times New Roman", Times, serif;
 	font-weight:bold;
-    font-size:11px;
     color:#820000;
     text-transform:uppercase;
 }
 
  .module .bd .day {
-    font-family:Georgia, "Times New Roman", Times, serif;
     font-size:21px;
     color:#565347;
     margin-top:0;
@@ -17,6 +14,5 @@
 }
 
  .module .bd .time {
-    font-family:Georgia, "Times New Roman", Times, serif;
     color:#820000;
 }

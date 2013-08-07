@@ -1,12 +1,13 @@
 (function() {
     var elt = Y.one('#searchFacets'),
-        searchIndicator = Y.lane.SearchIndicator,
-        model = Y.lane.Model,
-        basePath = model.get(model.BASE_PATH) || "",
-        encodedQuery = model.get(model.URL_ENCODED_QUERY),
+        Lane = Y.lane,
+        searchIndicator = Lane.SearchIndicator,
+        Model = Lane.Model,
+        basePath = Model.get(Model.BASE_PATH) || "",
+        encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
         container = Y.one('#searchResults'),
-        facets, i, type, source, Result;
-    LANE.search.facets = function(){
+        facets, i, type, source, Result,
+    SearchFacets = function(){
         var currentResult = null;
         return {
             setCurrentResult: function(result){
@@ -21,14 +22,18 @@
                     if (result._state == 'initialized') {
                         result.show();
                     } else if (result._state == 'searched') {
-                        LANE.search.facets.getCurrentResult().hide();
-                        LANE.search.facets.setCurrentResult(result);
+                        SearchFacets.getCurrentResult().hide();
+                        SearchFacets.setCurrentResult(result);
                         result.show();
                     }
                 }
             }
         };
     }();
+    
+    //TODO: remove the following line when no longer need global reference
+    Y.lane.SearchFacets = SearchFacets;
+    
     Result = function(type, source, facet, container){
         this._type = type;
         this._source = source;
@@ -41,8 +46,8 @@
                 success: function(id, o, args){
                     var result = args.result;
                     result.setContent(o.responseText);
-                    LANE.search.facets.getCurrentResult().hide();
-                    LANE.search.facets.setCurrentResult(result);
+                    SearchFacets.getCurrentResult().hide();
+                    SearchFacets.setCurrentResult(result);
                     result.show();
                 },
                 failure: function(){
@@ -65,8 +70,8 @@
             } else if (this._state == 'searching') {
                 alert('search in progress');
             } else {
-                LANE.search.facets.getCurrentResult().hide();
-                LANE.search.facets.setCurrentResult(this);
+                SearchFacets.getCurrentResult().hide();
+                SearchFacets.setCurrentResult(this);
                 this._facet.addClass('current');
                 this._container.set("innerHTML", this._content);
                 Result.addShowAbstract(this._container);
@@ -111,12 +116,12 @@
                         facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
                         if (facets.item(i).hasClass('current')) {
                             facets.item(i).getData('result').setContent(container.get('innerHTML'));
-                            LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
+                            SearchFacets.setCurrentResult(facets.item(i).getData('result'));
                         }
                         Y.on('click',function(event) {
                             var result = this.getData('result');
                             try {
-                                LANE.Search.History.addValue("facet", this.getData('result')._source);
+                                Lane.SearchHistory.addValue("facet", this.getData('result')._source);
                             } catch (e) {
                                 //log somewhere ... no need to break/alert
                                 result.show();
@@ -127,4 +132,43 @@
                 }
             }
         }
+})();
+
+(function() {
+    var history,
+        searchFacets = Y.one('#searchFacets'),
+        Lane = Y.lane,
+        SearchFacets = Lane.SearchFacets;
+    Lane.SearchHistory = function(){
+        if(searchFacets){
+            history = new Y.HistoryHash();        
+            if(history.get('facet')){
+                SearchFacets.setActiveFacet(history.get('facet'));
+            }
+            history.on("facetChange",function(e) {
+                SearchFacets.setActiveFacet(e.newVal);
+            });
+            history.on("facetRemove",function(e) {
+                SearchFacets.setActiveFacet(Lane.Search.getSearchSource());
+            });
+        }
+        return history;
+        
+    }();
+        
+})();
+
+/*
+ * Display PRINT MATERIALS (catalog-lois) filter if print results are only results present
+ */
+(function() {
+    var printId = 'catalog-lois', 
+    noHits = Y.one('#noHitsText'), 
+    printFacet = Y.one('#'+printId+'Facet'),
+    Lane = Y.lane;
+    if(noHits && printFacet && !printFacet.hasClass('inactiveFacet')){
+        Lane.SearchFacets.setActiveFacet(printId);
+        Lane.SearchHistory.addValue("facet", printId);
+        Y.one('#all-allFacet').addClass('inactiveFacet');
+    }
 })();

@@ -41,6 +41,7 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("URL")).andReturn("url");
         expect(this.resultSet.getString("LABEL")).andReturn("label");
         expect(this.resultSet.getString("INSTRUCTION")).andReturn("instruction");
+        expect(this.resultSet.getString("LINK_TEXT")).andReturn("link-text");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.resultSet);
         this.manager.parseResultSet(this.resultSet, null);

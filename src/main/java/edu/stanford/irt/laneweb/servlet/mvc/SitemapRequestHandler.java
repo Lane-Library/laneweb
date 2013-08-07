@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.cocoon.pipeline.Pipeline;
+import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
+import edu.stanford.irt.cocoon.sitemap.SitemapContextImpl;
+import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
@@ -25,12 +28,21 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private String prefix = "";
 
-    private Sitemap sitemap;
-
     private ServletContext servletContext;
 
-    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
-            IOException {
+    private Sitemap sitemap;
+
+    private ComponentFactory componentFactory;
+
+    private SourceResolver sourceResolver;
+    
+    public SitemapRequestHandler(ComponentFactory componentFactory, SourceResolver sourceResolver) {
+        this.componentFactory = componentFactory;
+        this.sourceResolver = sourceResolver;
+    }
+
+    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
         String method = request.getMethod();
         if (this.methodsNotAllowed.contains(method)) {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -40,11 +52,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         Map<String, Object> model = getModel();
         this.dataBinder.bind(model, request);
         model.put(Model.SITEMAP_URI, sitemapURI);
+        model.put(Sitemap.class.getName(), this.sitemap);
         String mimeType = getContentType(sitemapURI);
         if (mimeType != null) {
             response.setContentType(mimeType);
         }
-        Pipeline pipeline = this.sitemap.buildPipeline(model);
+        Pipeline pipeline = this.sitemap.buildPipeline(new SitemapContextImpl(model, this.componentFactory, this.sourceResolver));
         if ("GET".equals(method)) {
             // only process GET requests
             pipeline.process(response.getOutputStream());
@@ -66,12 +79,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.prefix = prefix;
     }
 
-    public void setSitemap(final Sitemap sitemap) {
-        this.sitemap = sitemap;
-    }
-
     public void setServletContext(final ServletContext servletContext) {
         this.servletContext = servletContext;
+    }
+
+    public void setSitemap(final Sitemap sitemap) {
+        this.sitemap = sitemap;
     }
 
     protected abstract Map<String, Object> getModel();

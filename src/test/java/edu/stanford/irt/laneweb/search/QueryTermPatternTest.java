@@ -19,9 +19,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 public class QueryTermPatternTest {
 
     /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.search.QueryTermPattern#getPattern(java.lang.String)}
-     * .
+     * Test method for {@link edu.stanford.irt.laneweb.search.QueryTermPattern#getPattern(java.lang.String)} .
      */
     @Test
     public final void testGetPattern1() {
@@ -40,8 +38,8 @@ public class QueryTermPatternTest {
 
     @Test
     public final void testGetPattern4() {
-        assertEquals("heparin,\\Wlow\\Wmolecular\\Wweight|low\\Wmolecular\\Wweight\\Wheparin",
-                QueryTermPattern.getPattern("Heparin, Low-Molecular-Weight").toString());
+        assertEquals("heparin,\\Wlow\\Wmolecular\\Wweight|low\\Wmolecular\\Wweight\\Wheparin", QueryTermPattern
+                .getPattern("Heparin, Low-Molecular-Weight").toString());
     }
 
     @Test
@@ -56,8 +54,8 @@ public class QueryTermPatternTest {
 
     @Test
     public final void testGetPattern7() {
-        assertTrue(QueryTermPattern.getPattern("Hypertension, Pulmonary").matcher("title with hypertension, pulmonary in it")
-                .find());
+        assertTrue(QueryTermPattern.getPattern("Hypertension, Pulmonary")
+                .matcher("title with hypertension, pulmonary in it").find());
     }
 
     @Test
@@ -68,8 +66,10 @@ public class QueryTermPatternTest {
 
     @Test
     public final void testGetPattern9() {
-        assertEquals(" in infants with", QueryTermPattern.getPattern("(Hypertension, Pulmonary) AND (Bronchopulmonary Dysplasia)")
-                .matcher("pulmonary hypertension in infants with bronchopulmonary dysplasia.").replaceAll(""));
+        assertEquals(
+                " in infants with",
+                QueryTermPattern.getPattern("(Hypertension, Pulmonary) AND (Bronchopulmonary Dysplasia)")
+                        .matcher("pulmonary hypertension in infants with bronchopulmonary dysplasia.").replaceAll(""));
     }
 
     @Test
@@ -81,6 +81,16 @@ public class QueryTermPatternTest {
         } catch (LanewebException e) {
             fail("getPattern() should handle a String an open square bracket");
         }
+    }
+
+    @Test
+    public final void testPegCPU() {
+        assertEquals(
+                "a_g_e_\\W_a_t_\\W_n_a_t_u_r_a_l_\\W_m_e_n_o_p_a_u_s_e_\\W_a_n_d_\\W_r_i_s_k_\\W_o_f_\\W_i_s_c_h_e_m_i_c_\\W_s_t_r_o_k_e_:_\\W_t_h_e_\\W_f_r_a_m_i_n_g_h_a_m_\\W_h_e_a_r_t_\\W_s_t_u_d_y_._",
+                QueryTermPattern
+                        .getPattern(
+                                "A_g_e_ _a_t_ _n_a_t_u_r_a_l_ _m_e_n_o_p_a_u_s_e_ _a_n_d_ _r_i_s_k_ _o_f_ _i_s_c_h_e_m_i_c_ _s_t_r_o_k_e_:_ _t_h_e_ _F_r_a_m_i_n_g_h_a_m_ _h_e_a_r_t_ _s_t_u_d_y_._")
+                        .toString());
     }
 
     @Test

@@ -7,6 +7,99 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-08-05" version="2.1.23" description="2.1.23 bug fix release">
+            <action date="2013-07-31" dev="olgary" issue="89319" type="update">
+                updates styles with Stanford fonts
+            </action>
+            <action date="2013-07-30" dev="ryanmax" issue="89271" type="fix">
+                spelling suggestions are noisy
+            </action>
+            <action date="2013-08-02" dev="ceyates" issue="89079" type="update">
+                remove 'weak' class from laneclass.xsl
+            </action>
+            <action date="2013-07-29" dev="ceyates" issue="89073" type="update">
+                provide loggers via dependency injection
+            </action>
+        </release>
+        <release date="2013-07-29" version="2.1.22" description="2.1.22 bug fix release">
+            <action date="2013-07-26" dev="olgary" issue="89133" type="update">
+                replace expandes.css - removed all font-size style
+            </action>
+            <action date="2013-07-25" dev="olgary" issue="89080" type="update">
+                headers.css - removed 'alt' from h3
+            </action>
+            <action date="2013-07-25" dev="ceyates" issue="89065" type="fix">
+                occasional NullPointerException in XIncludeExceptionListenerImpl
+            </action>
+        </release>
+        <release date="2013-07-22" version="2.1.21" description="2.1.21 bug fix release">
+            <action date="2013-07-16" dev="ryanmax" issue="88517" type="fix">
+                spelling suggestions should ignore case
+            </action>
+            <action date="2013-07-15" dev="olgary" issue="88439" type="update">
+                Changed link to IL in the portal dropdown in debug.xml, template.xml
+            </action>
+            <action date="2013-07-15" dev="ceyates" issue="76910" type="add">
+                Create Otolaryngology page from YouTube RSS
+            </action>
+        </release>
+        <release date="2013-07-15" version="2.1.20" description="2.1.20 bug fix release">
+            <action date="2013-07-10" dev="ryanmax" issue="88161" type="fix">
+                querymap suggestions are out of date
+            </action>
+            <action date="2013-07-09" dev="ryanmax" issue="87948" type="fix">
+                persistent login extension only works in Firefox
+            </action>
+            <action date="2013-07-15" dev="ryanmax" issue="83604" type="fix">
+                google spell checker returning errors; replace with NCBI spell checker
+            </action>
+        </release>
+        <release date="2013-07-08" version="2.1.19" description="2.1.19 bug fix release">
+            <action date="2013-07-02" dev="olgary" issue="87741" type="add">
+                add internal medicine link to the drop down menu
+            </action>
+            <action date="2013-07-02" dev="ryanmax" issue="87495" type="fix">
+                remove orange bar advertising mobile interface
+            </action>
+            <action date="2013-07-02" dev="ryanmax" issue="87283" type="fix">
+                a particular query causes prolonged max CPU usage
+            </action>
+        </release>
+        <release date="2013-06-24" version="2.1.18" description="2.1.18 bug fix release">
+            <action date="2013-06-21" dev="ceyates" issue="87195" type="add">
+                Create a SourceResolver for a cache: scheme
+            </action>
+            <action date="2013-06-20" dev="ceyates" issue="87101" type="fix">
+                submitted feedback fails to correctly indicate usability checkbox state
+            </action>
+        </release>
+        <release date="2013-06-17" version="2.1.17" description="2.1.17 bug fix release">
+            <action date="2013-06-12" dev="ceyates" issue="86565" type="remove">
+                remove shc template
+            </action>
+            <action date="2013-06-12" dev="ceyates" issue="84776" type="update">
+                search boxes updates, add Dynamed to red bar links
+            </action>
+        </release>
+        <release date="2013-06-12" version="2.1.16" description="2.1.16 bug fix release">
+            <action date="2013-06-10" dev="olgary" issue="86507" type="add">
+                debug.xml, template.xml - added a new (Immunology/Rheumatology) portal to a drop down
+            </action>
+        </release>
+        <release date="2013-06-10" version="2.1.15" description="2.1.15 bug fix release">
+            <action date="2013-06-06" dev="ceyates" issue="86340" type="add">
+                permit remote configuration of spam IP addresses
+            </action>
+            <action date="2013-06-05" dev="ceyates" issue="86277" type="update">
+                combine lane and yui css, javascript into single files
+            </action>
+            <action date="2013-06-03" dev="olgary" issue="86193" type="update">
+                debug.xml, template.xml - added a new (Inf diseases) portal to a drop down
+            </action>
+            <action date="2013-06-03" dev="ryanmax" issue="86183" type="add">
+                disable bookmarks while in DR mode
+            </action>
+        </release>
         <release date="2013-06-03" version="2.1.14" description="2.1.14 bug fix release">
             <action date="2013-06-03" dev="ceyates" issue="86173" type="add">
                 prevent particular ip addresses from sending email

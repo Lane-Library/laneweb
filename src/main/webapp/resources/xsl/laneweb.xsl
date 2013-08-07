@@ -163,7 +163,7 @@
                 <xsl:value-of select="$todays-hours"/>
             </xsl:when>
             <xsl:when test=".='bookmarks' and string-length($sunetid) &gt; 0">
-                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="bookmarks:/list.html">
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://bookmarks/list.html">
                     <xi:fallback/>
                 </xi:include>
             </xsl:when>

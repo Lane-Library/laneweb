@@ -7,8 +7,6 @@
     padding : 29px;
 }
 #laneFooter a {
-    font-family : Georgia;
-    font-size : 15px;
     border-bottom : none;
     letter-spacing : .5px;
 }
@@ -18,11 +16,7 @@
 #laneFooter li {
     padding : 1.5px 0;
 }
-#laneFooter ul a {
-    font-family : arial;
-    font-size : 11px;
-    letter-spacing : normal;
-}
+
 #socialMedia {
     position:absolute;
     right: 16px;

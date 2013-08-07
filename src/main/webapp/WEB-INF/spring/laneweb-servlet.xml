@@ -61,6 +61,7 @@
                 <entry key="**/rss/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"/>
                 <entry key="**/classes/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/classes"/>
                 <entry key="**/eresources/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"/>
+                <!-- TODO: need to figure out how to get the bookmark js tests running on the server -->
                 <entry key="**/bookmarks/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/bookmarks"/>
                 <entry key="**/test/bookmarks/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
                 <entry key="**/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
@@ -81,6 +82,8 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         abstract="true">
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
         <property name="methodsNotAllowed">
             <set>
                 <value>OPTIONS</value>
@@ -195,7 +198,9 @@
     
     <bean id="handlerExceptionResolver"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapHandlerExceptionResolver"
-        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"/>
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap">
+        <constructor-arg index="2" ref="org.slf4j.Logger/errorhandler"/>
+    </bean>
     
     <bean id="viewNameTranslator"
         class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator"/>

@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -12,6 +15,7 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class FilePathTransformer extends AbstractCacheableTransformer {
 
@@ -54,7 +58,12 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
         if ("file".equals(localName)) {
-            Source source = this.sourceResolver.resolveURI("file:" + atts.getValue("path"));
+            Source source;
+            try {
+                source = this.sourceResolver.resolveURI(new URI("file:" + atts.getValue("path")));
+            } catch (URISyntaxException e) {
+                throw new LanewebException(e);
+            }
             if (source instanceof Cacheable) {
                 this.validity.add(((Cacheable)source).getValidity());
             } else {

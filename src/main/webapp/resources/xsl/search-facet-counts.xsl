@@ -33,7 +33,7 @@
     </xsl:variable>
     
     <xsl:variable name="search-node">
-        <xsl:copy-of select="document(concat('apps:/search/engine/xml/',$engines-string))"/>
+        <xsl:copy-of select="document(concat('cocoon://apps/search/engine/xml/',$engines-string))"/>
     </xsl:variable>
     
     <xsl:template match="search-facet-counts">

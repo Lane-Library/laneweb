@@ -1,10 +1,10 @@
 (function() {
     
-    var model = Y.lane.Model,
+    var Lane = Y.lane,
+        model = Lane.Model,
         searchTerms = model.get(model.QUERY),
-        searchSource = model.get(model.SOURCE);
-    
-        LANE.tracking = function() {
+        searchSource = model.get(model.SOURCE),
+        Tracker = function() {
             //TODO more descriptive variable names
             //TODO put conditionals into sub-functions
             //TODO more thorough documentation
@@ -19,7 +19,7 @@
                 if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
                     category = "lane:bookmarkClick";
                     action = model.get(model.AUTH);
-                    label = LANE.tracking.getTrackedTitle(link);
+                    label = Tracker.getTrackedTitle(link);
                 }
                 else if (link.ancestor("#laneNav")) {
                     category = "lane:laneNav-top";
@@ -133,7 +133,7 @@
                 if (path.indexOf('/') !== 0) {
                     path = '/' + path;
                 }
-                title = LANE.tracking.getTrackedTitle(node);
+                title = Tracker.getTrackedTitle(node);
                 return {
                     host: host,
                     path: path,
@@ -327,9 +327,9 @@
             external: null
         });
         Y.on('click', function(e) {
-            LANE.tracking.trackClick(e);
+            Tracker.trackClick(e);
             //put in a delay for safari to make the tracking request:
-            if (Y.UA.webkit && (LANE.tracking.isTrackableAsPageview(e) || LANE.tracking.isTrackableAsEvent(e))) {
+            if (Y.UA.webkit && (Tracker.isTrackableAsPageview(e) || Tracker.isTrackableAsEvent(e))) {
                     var t = e.target, f;
                     while (t) {
                         // have safari follow link if it's not:
@@ -351,8 +351,8 @@
         }, document);
         
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
-        if (Y.lane.BookmarksWidget) {
-            Y.lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
+        if (Lane.BookmarksWidget) {
+            Lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
                 Y.fire("lane:trackableEvent", {
                     category: "lane:bookmarkAdd",
                     action: model.get(model.AUTH),
@@ -364,7 +364,7 @@
             var action = "";
             //determine whether or not to include search source value.
             if (event.input.get("id") == "searchTerms") {
-                action = LANE.Search.getSearchSource();
+                action = Lane.Search.getSearchSource();
             }
             Y.fire("lane:trackableEvent", {
                 //keep category same as previous event.type:
@@ -373,9 +373,9 @@
                 label: event.suggestion
             });
         });
-        Y.on("lane:searchFormReset",  function(event) {
+        Lane.on("search:reset",  function(event) {
             Y.fire("lane:trackableEvent", {
-                category: event.type,
+                category: "lane:searchFormReset",
                 action: document.location.pathname
             });
         });

@@ -1,0 +1,47 @@
+.yui3-js-enabled #searchSource {
+    visibility:hidden;
+}
+.yui3-js-enabled .yui3-searchselect #searchSource {
+    visibility:visible;
+}
+.yui3-searchselect {
+    position:relative;
+    float:left;
+}
+.yui3-searchselect-content {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    border: none;
+    background: none;
+    height:34px;
+    position:absolute;
+    cursor:pointer;
+}
+#search .yui3-searchselect-selected {
+display:inline-block;
+    margin: 2px;
+    padding: 6px;
+    width:108px;
+    border: 1px solid #dadad9;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4) );
+    background: -moz-linear-gradient(#fafbf8, #dadad4);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr ='#fafbf8',endColorstr='#dadad4');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr ='#fafbf8',endColorstr='#dadad4')";
+    background:linear-gradient(#fafbf8, #dadad4);
+}
+#search .yui3-searchselect:hover .yui3-searchselect-selected {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadad4), to(#fafbf8) );
+    background: -moz-linear-gradient(#dadad4, #fafbf8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr ='#dadad4',endColorstr='#fafbf8');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr ='#dadad4',endColorstr='#fafbf8')";
+    background:linear-gradient(#dadad4,#fafbf8);
+}
+.yui3-searchselect-selected span {
+    background-image: url(/././resources/images/sprite-all.png);
+    background-repeat: no-repeat;
+    background-position: 94px -277px;
+    padding-right: 10px;
+    display: inline-block;
+    width: 100%;
+}

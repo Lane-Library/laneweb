@@ -1,89 +1,84 @@
-#sb {
-    padding-top : 72px;
-    background-position:0 -40px;
-}
 h1 {
-    font-family : FrutigerLTStdLightCn, "Arial Narrow", Arial, Tahoma, "Trebuchet MS", sans-serif;
-    font-size : 24px;
-    position : absolute;
-    top : 24px;
-    left : 224px;
-    display:block;
-    letter-spacing : .1em;
-    color : #820000;
-}
-h1 span {
-    color : black;
-}
-#subHeading {
-    font-size : 12px;
-    text-transform : uppercase;
-    display : block;
-    letter-spacing : normal
-}
-h1 a {
-    border-bottom : none;
-    color : #820000;
-}
-h1 a:visited {
-    color : #820000;
-}
-#som,
-h1 a:hover {
-    text-decoration : underline;
-    border-bottom-style : none;
-}
-#som {
-    display : block;
-    height : 50px;
-    left : 18px;
-    position : absolute;
-    top : 22px;
-    width : 203px;
-    text-indent : -9000px;
-    background-image : url(/././resources/images/sprite-all.png);
-    background-position : 0px 0px;
-    background-repeat:no-repeat;
-}
-#som:hover {
-    background-position : 0 -80px;
-}
-#login, #libraryHours {
-    position : absolute;  
-    right : 1em;
-}
-#libraryHours {
-    right : 24.25em;
-}
-#login {
-    top : 0.8em;
-    vertical-align: text-bottom;
-    z-index: 1;
-}
-#libraryContact, #libraryHours {
-    top : 54px;
-    white-space:nowrap;
-}
-#libraryContact {
-	position : absolute;
-    right: 3em;
+	font-size: 26px;
+	position: absolute;
+	top: 24px;
+	left: 224px;
+	display: block;
+	color: #820000;
 }
 
-#libraryContact li, #login li, #libraryHours li {
-    float : left;
-    padding : 0 7px;
-    background-image : none;
-    border-left : 1px dotted #C1C1C1;
-    height: 16px;
+h1 span {
+	color: black;
+}
+
+h1 a {
+	border-bottom: none;
+	color: #820000;
+}
+
+h1 a:visited {
+	color: #820000;
+}
+
+#som,h1 a:hover {
+	text-decoration: underline;
+	border-bottom-style: none;
+}
+
+#som {
+	display: block;
+	height: 50px;
+	left: 18px;
+	position: absolute;
+	top: 22px;
+	width: 203px;
+	text-indent: -9000px;
+	background-image: url(/././resources/images/sprite-all.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+
+#som:hover {
+	background-position: 0 -80px;
+}
+
+#login {
+	position: absolute;
+	right: 1em;
+}
+
+#login {
+	top: 0.8em;
+	vertical-align: text-bottom;
+	z-index: 1;
+}
+
+#libraryContact {
+	top: 62px;
+	white-space: nowrap;
+}
+
+#libraryContact {
+	position: absolute;
+	right: 3em;
+}
+
+#libraryContact li,#login li {
+	float: left;
+	padding: 0 7px;
+	background-image: none;
+	border-left: 1px dotted #C1C1C1;
+	height: 16px;
 }
 
 #login #favorites {
-	 background: url("/././resources/images/sprite-all.png") no-repeat scroll -680px -40px transparent;
-	 padding-left: 22px;
-	 margin-left: 1em;
-	 border-left : none;
-	}
+	background: url("/././resources/images/sprite-all.png") no-repeat scroll
+		-680px -40px transparent;
+	padding-left: 22px;
+	margin-left: 1em;
+	border-left: none;
+}
 
-#libraryContact li:first-child, #login li:first-child, #libraryHours li:first-child {
-    border-left : none;
+#libraryContact li:first-child,#login li:first-child {
+	border-left: none;
 }

@@ -2,6 +2,11 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>${project.build.finalName}</param-value>
+    </context-param>
 
     <context-param>
         <param-name>log4jConfigLocation</param-name>
@@ -19,6 +24,7 @@
             /WEB-INF/spring/datasources.xml
             /WEB-INF/spring/eresources.xml
             /WEB-INF/spring/history-eresources.xml
+            /WEB-INF/spring/logger.xml
             /WEB-INF/spring/laneweb.xml
             /WEB-INF/spring/mapping.xml
             /WEB-INF/spring/pipeline.xml

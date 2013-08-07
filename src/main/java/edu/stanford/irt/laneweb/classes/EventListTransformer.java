@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.classes;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -8,6 +11,7 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class EventListTransformer extends AbstractCacheableTransformer {
 
@@ -42,7 +46,11 @@ public class EventListTransformer extends AbstractCacheableTransformer {
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
         if ("event".equals(localName)) {
-            this.saxParser.parse(this.sourceResolver.resolveURI(atts.getValue("href")), this.pipe);
+            try {
+                this.saxParser.parse(this.sourceResolver.resolveURI(new URI(atts.getValue("href"))), this.pipe);
+            } catch (URISyntaxException e) {
+                throw new LanewebException(e);
+            }
         } else {
             super.startElement(uri, localName, qName, atts);
         }

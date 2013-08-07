@@ -7,8 +7,8 @@
 	
 	Y.namespace("lane");
 	
-	var LANE = Y.lane,
-	    basePath = LANE.Model.get("base-path") || "",
+	var Lane = Y.lane,
+	    basePath = Lane.Model.get("base-path") || "",
 	    DOCUMENT_HOST = document.location.host,
 	    PROXY_HOST = "laneproxy.stanford.edu",
 	    PROXY_LOGIN_PATH = "/login",
@@ -211,7 +211,7 @@
 
     Y.extend(LinkPlugin, Y.Plugin.Base);
     
-    LANE.LinkPlugin = LinkPlugin;
+    Lane.LinkPlugin = LinkPlugin;
     
 })();
 

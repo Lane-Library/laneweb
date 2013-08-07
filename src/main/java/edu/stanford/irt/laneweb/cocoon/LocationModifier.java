@@ -1,31 +1,35 @@
 package edu.stanford.irt.laneweb.cocoon;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class LocationModifier {
 
-    public String modify(final String location) {
-        String modifiedLocation = getModifiedLocation(location);
-        return modifiedLocation == null ? location : modifiedLocation;
-    }
-
-    private String getModifiedLocation(final String location) {
-        if (location.indexOf("cocoon://eresources") == 0) {
-            return "eresources:" + location.substring("cocoon://eresources".length());
+    public URI modify(final URI location) throws URISyntaxException {
+        String scheme = location.getScheme();
+        String path = location.getPath();
+        String query = location.getQuery();
+        URI result = null;
+        if ("content".equals(scheme)) {
+            result = new URI("cocoon://content" + path);
+        } else if ("eresources".equals(scheme)) {
+            result = new URI("cocoon://eresources" + path);
+        } else if ("classes".equals(scheme)) {
+            result = new URI("cocoon://classes" + path);
+        } else if ("apps".equals(scheme)) {
+            result = new URI("cocoon://apps" + path);
+        } else if ("mobile".equals(scheme)) {
+            result = new URI("cocoon://mobile" + path);
+        } else if ("rss".equals(scheme)) {
+            result = new URI("cocoon://rss" + path);
+        } else if ("bookmarks".equals(scheme)) {
+            result = new URI("cocoon://bookmarks" + path);
         }
-        if (location.indexOf("cocoon://apps") == 0) {
-            return "apps:" + location.substring("cocoon://apps".length());
+        if (query != null && result != null) {
+            throw new LanewebException("need to add query ?" + query + " to uri " + result);
         }
-        if (location.indexOf("cocoon://content") == 0) {
-            return "content:" + location.substring("cocoon://content".length());
-        }
-        if (location.indexOf("cocoon://rss/ncbi-rss2html") == 0) {
-            return "content:" + location.substring("cocoon://rss".length());
-        }
-        if (location.indexOf("cocoon://rss") == 0) {
-            return "rss:" + location.substring("cocoon://rss".length());
-        }
-        if (location.indexOf("cocoon:") == 0) {
-            return "content:" + location.substring("cocoon:".length());
-        }
-        return null;
+        return result == null ? location : result;
     }
 }

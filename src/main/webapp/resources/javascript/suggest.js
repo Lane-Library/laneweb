@@ -1,7 +1,8 @@
 
 (function() {
 
-    var model = Y.lane.Model,
+    var Lane = Y.lane,
+        model = Lane.Model,
         basePath = model.get(model.BASE_PATH) || "",
     SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
     DEFAULT_LIMIT = "mesh-di",
@@ -14,7 +15,7 @@
      * @uses EventTarget
      * @constructor
      * @param input {Node} the input node.
-     * @param limit {String} the limit parameter for the reqeust.
+     * @param limit {String} the limit parameter for the request.
      */
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {
@@ -49,7 +50,7 @@
         }
         
         // disable suggestion list after lane search submitted
-        Y.on("lane:beforeSearchSubmit", function(){
+        Lane.on("search:submit", function(){
             input.ac.destroy();
         });
     };
@@ -113,5 +114,5 @@
     });
     
     //make the Suggest constructor globally accessible
-    Y.lane.Suggest = Suggest;
+    Lane.Suggest = Suggest;
 })();

@@ -16,7 +16,7 @@
     </xsl:template>
 
     <xsl:template match="lc:event_data">
-            <div class="yui3-g wideline">
+            <div class="yui3-g">
                 <div class="yui3-u-1-6">
                     <div class="month">
                         <xsl:call-template name="month" />
