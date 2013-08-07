@@ -12,19 +12,19 @@
                 if (!picoFields) {
                     createPicoFields();
                 }
-                picoFields.setStyle("display", "block");
-                    form.addClass('clinical');
-                    container.addClass("clinical");
-                    nav.addClass('clinical');
+                picoFields.addClass("active");
+                form.addClass('clinical');
+                container.addClass("clinical");
+                nav.addClass('clinical');
                 picoIsOn = true;
             }
         },
         picoOff = function() {
             if (picoIsOn) {
-                picoFields.setStyle("display", "none");
-                    form.removeClass('clinical');
-                    container.removeClass("clinical");
-                    nav.removeClass('clinical');
+                picoFields.removeClass("active");
+                form.removeClass('clinical');
+                container.removeClass("clinical");
+                nav.removeClass('clinical');
                 picoIsOn = false;
             }
             
