@@ -36,7 +36,10 @@
                '<input name="o" id="clinicalO" type="text" title="outcome"/>' +
                '</fieldset>',
         createPicoFields = function() {
-            var i, inputs, picoSuggest, queryString = Y.QueryString.parse(location.search);
+            var i, inputs, picoSuggest, queryString = {};
+            if (location.search) {
+            	queryString = Y.QueryString.parse(location.search.substring(1));
+            }
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
