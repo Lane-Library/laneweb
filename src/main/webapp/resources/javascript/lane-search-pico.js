@@ -86,10 +86,8 @@
                     qString = qString.replace(/(\(|\))/g, '');
                 }
             }
-            Y.fire('lane:searchPicoChange');
             return qString;
         };
-        Y.publish("lane:searchPicoChange",{broadcast:1});
     if (form) {
         searchTerms = new Lane.TextInput(Y.one("#searchTerms"));
         if (form.hasClass('clinical')) {
