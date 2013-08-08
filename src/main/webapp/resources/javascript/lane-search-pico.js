@@ -109,5 +109,10 @@
                 picoOff();
             }
         });
+        Lane.on("search:reset", function() {
+        	for (var i = 0; i < picoTextInputs.length; i++) {
+        		picoTextInputs[i].reset();
+        	}
+        });
     }
 })();
