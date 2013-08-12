@@ -52,6 +52,7 @@
                 }
                 this.setLimit(limit);
             };
+            this._suggest.setLimitForSource(this._select.getSelected());
             this._suggest.on("select", this.submitSearch, this);
             
             //set up search reset
