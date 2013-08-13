@@ -20,7 +20,7 @@ public class EMailSender {
     private static final Pattern EMAIL = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$",
             Pattern.CASE_INSENSITIVE);
 
-    private static final String[] EXCLUDED_FIELDS = new String[] { "subject", "recipient", "email" };
+    private static final String[] EXCLUDED_FIELDS = new String[] { "subject", "recipient", "email", "org.springframework.validation.BindingResult.map" };
 
     private Set<String> excludedFields;
 

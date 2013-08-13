@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-08-12" version="2.1.24" description="2.1.24 bug fix release">
+            <action date="2013-08-07" dev="olgary" issue="89652" type="remove">
+                remove 'special programs' from Portal menu - debug.xml, template.xml
+            </action>
+            <action date="2013-08-05" dev="ceyates" issue="89596" type="update">
+                refactor lane-search.js
+            </action>
+            <action date="2013-08-06" dev="ryanmax" issue="89589" type="fix">
+                disappearing search results when using spelling suggestions
+            </action>
+            <action date="2013-08-05" dev="ceyates" issue="86397" type="update">
+                precompose secondary link text in the eresources database
+            </action>
+        </release>
         <release date="2013-08-05" version="2.1.23" description="2.1.23 bug fix release">
             <action date="2013-07-31" dev="olgary" issue="89319" type="update">
                 updates styles with Stanford fonts

@@ -2,8 +2,6 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -12,42 +10,29 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
  * A Selector that returns false if the model contains any values that would make caching pointless or inefficient
  */
 public class CacheableSelector implements Selector {
-    
-    private Logger log;
-    
-    public CacheableSelector(Logger log) {
-        this.log = log;
-    }
 
     /**
      * Checks to see if the model contains particular values, currently SUNETID, DEBUG, QUERY, EMRID,
-     * BASE_PATH.contains(/stage)
+     * BASE_PATH.contains(/stage) or the sitemap-uri is /error.html or contains /bassett/, and if it does return false.
      */
     @Override
     public boolean select(final String expression, final Map<String, Object> model, final Map<String, String> parameters) {
-        String reason = getReason(model);
-        boolean result = "".equals(reason);
-        this.log.info(new StringBuilder().append(result).append(reason).append(':').append(model).toString());
-        return result;
-    }
-    
-    private String getReason(Map<String, Object> model) {
-        String result = "";
+        boolean result = true;
         String sitemapURI = ModelUtil.getString(model, Model.SITEMAP_URI, "");
         if (model.containsKey(Model.SUNETID)) {
-            result = ":sunetid";
+            result = false;
         } else if (model.containsKey(Model.QUERY)) {
-            result = ":query";
+            result = false;
         } else if (sitemapURI.indexOf("/bassett/") > -1) {
-            result = ":bassett";
+            result = false;
         } else if ("/error.html".equals(sitemapURI)) {
-            result = ":error";
+            result = false;
         } else if (model.containsKey(Model.EMRID)) {
-            result = ":emrid";
+            result = false;
         } else if (model.containsKey(Model.DEBUG)) {
-            result = ":debug";
+            result = false;
         } else if (ModelUtil.getString(model, Model.BASE_PATH, "").contains("/stage")) {
-            result = ":stage";
+            result = false;
         }
         return result;
     }

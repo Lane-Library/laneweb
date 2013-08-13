@@ -12,19 +12,19 @@
                 if (!picoFields) {
                     createPicoFields();
                 }
-                picoFields.setStyle("display", "block");
-                    form.addClass('clinical');
-                    container.addClass("clinical");
-                    nav.addClass('clinical');
+                picoFields.addClass("active");
+                form.addClass('clinical');
+                container.addClass("clinical");
+                nav.addClass('clinical');
                 picoIsOn = true;
             }
         },
         picoOff = function() {
             if (picoIsOn) {
-                picoFields.setStyle("display", "none");
-                    form.removeClass('clinical');
-                    container.removeClass("clinical");
-                    nav.removeClass('clinical');
+                picoFields.removeClass("active");
+                form.removeClass('clinical');
+                container.removeClass("clinical");
+                nav.removeClass('clinical');
                 picoIsOn = false;
             }
             
@@ -36,7 +36,10 @@
                '<input name="o" id="clinicalO" type="text" title="outcome"/>' +
                '</fieldset>',
         createPicoFields = function() {
-            var i, inputs, picoSuggest, queryString = Y.QueryString.parse(location.search);
+            var i, inputs, picoSuggest, queryString = {};
+            if (location.search) {
+            	queryString = Y.QueryString.parse(location.search.substring(1));
+            }
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
@@ -83,10 +86,8 @@
                     qString = qString.replace(/(\(|\))/g, '');
                 }
             }
-            Y.fire('lane:searchPicoChange');
             return qString;
         };
-        Y.publish("lane:searchPicoChange",{broadcast:1});
     if (form) {
         searchTerms = new Lane.TextInput(Y.one("#searchTerms"));
         if (form.hasClass('clinical')) {
@@ -105,6 +106,11 @@
             } else {
                 picoOff();
             }
+        });
+        Lane.on("search:reset", function() {
+        	for (var i = 0; i < picoTextInputs.length; i++) {
+        		picoTextInputs[i].reset();
+        	}
         });
     }
 })();
