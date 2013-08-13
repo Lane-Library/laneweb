@@ -11,9 +11,16 @@
     version="2.0">
     
     <xsl:template match="atom:feed">
-        <ul>
-            <xsl:apply-templates select="atom:entry"/>
-        </ul>
+        <xsl:for-each select="atom:entry[position() mod 2 = 1]">
+            <div class="yui3-g">
+                <xsl:call-template name="entry">
+                    <xsl:with-param name="entry" select="self::node()"/>
+                </xsl:call-template>
+                <xsl:call-template name="entry">
+                    <xsl:with-param name="entry" select="following-sibling::node()[1]"/>
+                </xsl:call-template>
+            </div>
+        </xsl:for-each>
     </xsl:template>
     
     <xsl:template match="child::node()">
@@ -26,23 +33,15 @@
         <xsl:copy-of select="."/>
     </xsl:template>
     
-    <xsl:template match="atom:entry">
-            <li>
-                <xsl:call-template name="create-markup">
-                    <xsl:with-param name="href" select="atom:link[@rel='alternate']/@href"/>
-                    <xsl:with-param name="src" select="media:group/media:thumbnail[@yt:name='mqdefault']/@url"/>
-                    <xsl:with-param name="title" select="atom:title"/>
-                </xsl:call-template>
-            </li>
-    </xsl:template>
-    
-    <xsl:template name="create-markup">
-        <xsl:param name="href"/>
-        <xsl:param name="src"/>
-        <xsl:param name="title"/>
-        <div class="module">
-            <a href="{$href}" title="{$title}"><img src="{$src}" alt="{$title}"/>
-                <xsl:value-of select="$title"/></a>
+    <xsl:template name="entry">
+        <xsl:param name="entry"/>
+        <div class="yui3-u-1-2">
+            <div class="module">
+            <iframe type="text/html" width="230" height="130"
+                src="http://www.youtube.com/embed/{$entry/media:group/yt:videoid}"
+                frameborder="0"/>
+            <p><xsl:value-of select="$entry/atom:title"/></p>
+            </div>
         </div>
     </xsl:template>
     
