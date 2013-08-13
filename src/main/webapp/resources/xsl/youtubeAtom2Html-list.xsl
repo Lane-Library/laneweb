@@ -30,7 +30,7 @@
             <li>
                 <xsl:call-template name="create-markup">
                     <xsl:with-param name="href" select="atom:link[@rel='alternate']/@href"/>
-                    <xsl:with-param name="src" select="media:group/media:thumbnail[@yt:name='default']/@url"/>
+                    <xsl:with-param name="src" select="media:group/media:thumbnail[@yt:name='mqdefault']/@url"/>
                     <xsl:with-param name="title" select="atom:title"/>
                 </xsl:call-template>
             </li>
