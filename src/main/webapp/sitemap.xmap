@@ -30,8 +30,9 @@
             <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
+    <!-- holding of on caching for now . . .
     </map:pipeline>
-    <!-- cache responses for 20 minutes if cacheable (see CacheableSelector.java) -->
+    <!-/- cache responses for 20 minutes if cacheable (see CacheableSelector.java) -/->
     <map:pipeline type="expires">
         <map:parameter name="cache-expires" value="1200"/>
         <map:parameter name="cache-key" value="{sitemap-uri}?{query-string};ipgroup={ipgroup};proxy-links={proxy-links}"/>
@@ -82,6 +83,7 @@
         </map:select>
     </map:pipeline>
     <map:pipeline type="noncaching">
+    -->
        <map:match pattern="plain/**.html" type="wildcard">
             <map:generate type="file" src="cocoon://content/{1}.html"/>
             <map:select type="cme-links">
