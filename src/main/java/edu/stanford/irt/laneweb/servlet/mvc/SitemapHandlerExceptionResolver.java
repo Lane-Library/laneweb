@@ -31,7 +31,7 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
         if (ex instanceof ResourceNotFoundException) {
-            this.log.error(ex.toString());
+            this.log.warn(ex.toString());
         } else {
             Throwable cause = ex.getCause();
             Throwable reportableCause = ex;
@@ -40,9 +40,9 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
                 cause = cause.getCause();
             }
             if (reportableCause instanceof FileNotFoundException) {
-                this.log.error(reportableCause.toString());
+                this.log.warn(reportableCause.toString());
             } else if (reportableCause instanceof ClientAbortException) {
-                this.log.error(reportableCause.toString() + " ip=" + request.getRemoteAddr() + " url="
+                this.log.warn(reportableCause.toString() + " ip=" + request.getRemoteAddr() + " url="
                         + request.getRequestURL().toString());
             } else {
                 this.log.error(ex.toString(), reportableCause);
