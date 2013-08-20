@@ -18,6 +18,5 @@ public class PHPFilter extends AbstractLanewebFilter {
     protected void internalDoFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         response.sendError(HttpURLConnection.HTTP_NOT_FOUND);
-        response.getOutputStream().write(new byte[] {0});
     }
 }
