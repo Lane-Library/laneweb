@@ -88,8 +88,8 @@
     </filter>
       
     <filter>
-        <filter-name>showParameterRedirectFilter</filter-name>
-        <filter-class>edu.stanford.irt.laneweb.servlet.ShowParameterRedirectFilter</filter-class>
+        <filter-name>PHPFilter</filter-name>
+        <filter-class>edu.stanford.irt.laneweb.servlet.PHPFilter</filter-class>
     </filter>
     
     <filter>
@@ -109,8 +109,8 @@
     </filter-mapping>
     
     <filter-mapping>
-        <filter-name>showParameterRedirectFilter</filter-name>
-        <url-pattern>/biomed-resources/*</url-pattern>
+        <filter-name>PHPFilter</filter-name>
+        <url-pattern>*.php</url-pattern>
     </filter-mapping>
     
     <filter-mapping>
@@ -155,6 +155,11 @@
         <servlet-name>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-name>
         <url-pattern>/robots.txt</url-pattern>
     </servlet-mapping>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/notfound.txt</location>
+    </error-page>
     
     <!--<error-page>
         <exception-type>java.lang.Exception</exception-type>
