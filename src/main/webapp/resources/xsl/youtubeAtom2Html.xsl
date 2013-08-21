@@ -39,8 +39,7 @@
         <xsl:if test="$entry">
             <div class="yui3-u-1-2">
                 <xsl:call-template name="create-markup">
-                    <xsl:with-param name="href" select="$entry/atom:link[@rel='alternate']/@href"/>
-                    <xsl:with-param name="src" select="$entry/media:group/media:thumbnail[@yt:name='mqdefault']/@url"/>
+                    <xsl:with-param name="videoid" select="$entry/media:group/yt:videoid"/>
                     <xsl:with-param name="title" select="$entry/atom:title"/>
                     <xsl:with-param name="recorded" select="$entry/yt:recorded"/>
                     <xsl:with-param name="description" select="$entry/media:group/media:description"/>
@@ -50,13 +49,14 @@
     </xsl:template>
     
     <xsl:template name="create-markup">
-        <xsl:param name="href"/>
-        <xsl:param name="src"/>
+        <xsl:param name="videoid"/>
         <xsl:param name="title"/>
         <xsl:param name="recorded"/>
         <xsl:param name="description"/>
         <div class="module">
-            <a style="border-bottom:none" href="{$href}" title="{$title}"><img style="width:100%;" class="drop-shadow-noimg" src="{$src}" alt="{$title}"/></a>
+            <iframe type="text/html" width="256" height="144"
+                src="http://www.youtube.com/embed/{$videoid}"
+                frameborder="0"/>
             <h5><xsl:value-of select="$title"/></h5>
             <p class="detailInfo"><xsl:value-of select="$recorded"/></p>
             <div><xsl:value-of select="$description"/></div>
