@@ -130,7 +130,7 @@
          * @param bookmarks {array} may be undefined
          */
         Bookmarks = function(bookmarks) {
-        	var i;
+            var i;
             this._bookmarks = [];
             if (bookmarks && !Y.Lang.isArray(bookmarks)) {
                 throw("bad config");
@@ -1243,7 +1243,7 @@
                  * @param event {CustomEvent}
                  */
                 _editorMoved : function(event) {
-                	this.get("bookmarks").moveBookmark(this._to, this._from);
+                    this.get("bookmarks").moveBookmark(this._to, this._from);
                 },
                 
                 /**

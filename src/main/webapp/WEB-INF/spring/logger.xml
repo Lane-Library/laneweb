@@ -7,20 +7,12 @@
         <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>        
     </bean>
     
-    <bean name="org.slf4j.Logger/ErrorListener" class="org.slf4j.LoggerFactory" factory-method="getLogger">
-        <constructor-arg type="java.lang.Class" value="javax.xml.transform.ErrorListener"/>        
-    </bean>
-    
     <bean name="org.slf4j.Logger/XIncludeExceptionListener" class="org.slf4j.LoggerFactory" factory-method="getLogger">
         <constructor-arg type="java.lang.Class" value="edu.stanford.irt.cocoon.xml.XIncludeExceptionListener"/>        
     </bean>
     
     <bean name="org.slf4j.Logger/SQLBookmarkDAO" class="org.slf4j.LoggerFactory" factory-method="getLogger">
         <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.bookmarks.SQLBookmarkDAO"/>        
-    </bean>
-    
-    <bean name="org.slf4j.Logger/CacheableSelector" class="org.slf4j.LoggerFactory" factory-method="getLogger">
-        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.cocoon.CacheableSelector"/>        
     </bean>
     
     <bean name="org.slf4j.Logger/BookmarkTrendsReporter" class="org.slf4j.LoggerFactory" factory-method="getLogger">

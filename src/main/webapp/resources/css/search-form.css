@@ -69,6 +69,10 @@
     height: 35px;
     margin-bottom: 11px;
     width: 690px;
+    display: none;
+}
+#picoFields.active {
+    display: block;
 }
 #picoFields input {
     border-width:0;
@@ -135,7 +139,7 @@
 }
 
 .clinical #qlinks {
-	margin-top: -8px
+    margin-top: -8px
 }
 
 #qlinks li {
@@ -150,9 +154,9 @@
 
 #qlinks a {
     color: white;
-	border-bottom: none;
+    border-bottom: none;
 }
 
 #qlinks a:hover {
-	border-bottom: 1px dotted white;
+    border-bottom: 1px dotted white;
 }

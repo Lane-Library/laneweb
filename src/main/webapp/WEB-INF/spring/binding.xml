@@ -40,6 +40,7 @@
                 <value>query</value>
                 <value>source</value>
                 <value>url-encoded-query</value>
+                <value>isActiveSunetID</value>
                 <!--<value>live-chat-available</value>
                 <value>proxy-links</value>
                 <value>sunetid</value>

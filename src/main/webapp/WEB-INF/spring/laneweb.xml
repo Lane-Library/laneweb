@@ -45,6 +45,8 @@
             <set>
                 <value>173.44.37.242</value>
                 <value>96.47.224.218</value>
+                <value>192.119.144.96</value>
+                <value>192.119.151.127</value>
             </set>
         </constructor-arg>
     </bean>
@@ -156,9 +158,7 @@
     </bean>
     
     <bean name="javax.xml.transform.ErrorListener"
-        class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener">
-        <constructor-arg ref="org.slf4j.Logger/ErrorListener"/>
-    </bean>
+        class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener"/>
     
     <bean id="org.springframework.oxm.Marshaller"
         class="org.springframework.oxm.xstream.XStreamMarshaller">
