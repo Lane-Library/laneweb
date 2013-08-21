@@ -26,7 +26,6 @@ import org.springframework.web.servlet.HandlerMapping;
 
 import edu.stanford.irt.cocoon.cache.Cache;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
-import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.cache.validity.NeverValid;
 import edu.stanford.irt.laneweb.LanewebException;

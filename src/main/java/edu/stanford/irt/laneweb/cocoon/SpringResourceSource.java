@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
-import net.sf.saxon.expr.flwor.ReturnClauseIterator;
-
 import org.springframework.core.io.Resource;
 
 import edu.stanford.irt.cocoon.cache.Cacheable;
