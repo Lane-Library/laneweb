@@ -10,7 +10,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.cache.Validity;
-import edu.stanford.irt.cocoon.cache.validity.NOPValidity;
+import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
@@ -94,7 +94,7 @@ public class TextNodeParsingTransformer extends AbstractTransformer implements C
     }
 
     public Validity getValidity() {
-        return NOPValidity.SHARED_INSTANCE;
+        return AlwaysValid.SHARED_INSTANCE;
     }
 
     @Override

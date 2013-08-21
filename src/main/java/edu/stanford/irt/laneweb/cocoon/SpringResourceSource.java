@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
+import net.sf.saxon.expr.flwor.ReturnClauseIterator;
+
 import org.springframework.core.io.Resource;
 
 import edu.stanford.irt.cocoon.cache.Cacheable;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.FileTimeStampValidity;
+import edu.stanford.irt.cocoon.cache.validity.NeverValid;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceException;
 
@@ -47,7 +50,7 @@ public class SpringResourceSource implements Cacheable, Source {
         try {
             return new FileTimeStampValidity(this.resource.getFile());
         } catch (IOException e) {
-            return null;
+            return NeverValid.SHARED_INSTANCE;
         }
     }
 

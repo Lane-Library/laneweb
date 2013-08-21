@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.io.Serializable;
 
 import edu.stanford.irt.cocoon.cache.Validity;
-import edu.stanford.irt.cocoon.cache.validity.NOPValidity;
+import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.search.MetaSearchManager;
@@ -27,7 +27,7 @@ public class DescribeGenerator extends AbstractMetasearchGenerator implements Ca
     }
 
     public Validity getValidity() {
-        return NOPValidity.SHARED_INSTANCE;
+        return AlwaysValid.SHARED_INSTANCE;
     }
 
     @Override

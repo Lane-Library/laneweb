@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.SocketException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.cache.validity.NOPValidity;
+import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
@@ -67,7 +67,7 @@ public class TextNodeParsingTransformerTest {
 
     @Test
     public void testGetValidity() {
-        assertEquals(NOPValidity.SHARED_INSTANCE, this.transformer.getValidity());
+        assertEquals(AlwaysValid.SHARED_INSTANCE, this.transformer.getValidity());
     }
 
     @Test

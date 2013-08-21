@@ -27,7 +27,8 @@ import org.springframework.web.servlet.HandlerMapping;
 import edu.stanford.irt.cocoon.cache.Cache;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.Validity;
-import edu.stanford.irt.cocoon.cache.validity.NOPValidity;
+import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
+import edu.stanford.irt.cocoon.cache.validity.NeverValid;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 import edu.stanford.irt.laneweb.model.Model;
@@ -151,7 +152,7 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
         expect(this.resource.getURI()).andReturn(new URI("uri"));
         expect(this.cache.get(":uri")).andReturn(this.cachedResponse);
-        expect(this.cachedResponse.getValidity()).andReturn(NOPValidity.SHARED_INSTANCE);
+        expect(this.cachedResponse.getValidity()).andReturn(AlwaysValid.SHARED_INSTANCE);
 //        expect(this.cachedResponse.getLastModified()).andReturn(0L);
 //        expect(this.resource.getInputStream()).andReturn(new ByteArrayInputStream(new byte[0]));
 //        this.cache.store(eq(":uri"), isA(CachedResponse.class));
@@ -169,10 +170,7 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
         expect(this.resource.getURI()).andReturn(new URI("uri"));
         expect(this.cache.get(":uri")).andReturn(this.cachedResponse);
-        expect(this.cachedResponse.getValidity()).andReturn(new Validity() {
-            private static final long serialVersionUID = 1L;
-            public boolean isValid() {return false;}
-        });
+        expect(this.cachedResponse.getValidity()).andReturn(NeverValid.SHARED_INSTANCE);
 //        expect(this.cachedResponse.getLastModified()).andReturn(0L);
         expect(this.resource.getFile()).andReturn(this.file);
         expect(this.file.lastModified()).andReturn(0L);
