@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
@@ -71,7 +72,11 @@ public class EMailSender {
         } catch (MessagingException e) {
             throw new LanewebException(e);
         }
-        this.mailSender.send(message);
+        try {
+            this.mailSender.send(message);
+        } catch (MailException e) {
+            throw new LanewebException(map.toString(), e);
+        }
     }
 
     private void validateModel(final Map<String, Object> map) {
