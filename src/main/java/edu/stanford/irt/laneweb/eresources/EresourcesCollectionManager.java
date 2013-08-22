@@ -63,7 +63,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 } else {
                     type = LinkType.NORMAL;
                 }
-                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL"), rs.getString("LINK_TEXT")));
+                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL"), rs.getString("LINK_TEXT"), rs.getString("ADDITIONAL_TEXT")));
                 currentLinkId = rowLinkId;
             }
         }

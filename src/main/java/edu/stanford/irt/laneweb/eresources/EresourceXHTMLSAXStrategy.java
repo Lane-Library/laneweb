@@ -7,7 +7,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresource> {
-    
+
     private static final String GET_PASSWORD = "Get Password";
 
     private static final String HVRTARG = "hvrTarg";
@@ -16,15 +16,11 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
 
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
-            boolean processedFirstLink = false;
+            boolean first = true;
             for (Version version : eresource.getVersions()) {
                 for (Link link : version.getLinks()) {
-                    if (!processedFirstLink) {
-                        processFirstLink(xmlConsumer, link);
-                        processedFirstLink = true;
-                    } else {
-                        createSecondaryLink(xmlConsumer, link);
-                    }
+                    createLink(xmlConsumer, link, first);
+                    first = false;
                 }
             }
             createMoreResultsLink(xmlConsumer, eresource);
@@ -35,6 +31,26 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
+    }
+
+    private void createLink(final XMLConsumer xmlConsumer, final Link link, final boolean first) throws SAXException {
+        String linkText = link.getLinkText();
+        startDiv(xmlConsumer);
+        if (first) {
+            createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, linkText, linkText);
+        } else {
+            createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), linkText);
+        }
+        String text = link.getAdditionalText();
+        if (text != null && text.length() > 0) {
+            XMLUtils.data(xmlConsumer, " ");
+            XMLUtils.data(xmlConsumer, text);
+        }
+        if (LinkType.GETPASSWORD.equals(link.getType())) {
+            XMLUtils.data(xmlConsumer, " ");
+            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
+        }
+        endDiv(xmlConsumer);
     }
 
     private void createMoreResultsLink(final XMLConsumer xmlConsumer, final Eresource eresource) throws SAXException {
@@ -50,36 +66,6 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             createSpanWithClass(xmlConsumer, "sourceLink", "Lane Web Page");
         } else if ("class".equals(recordType)) {
             createSpanWithClass(xmlConsumer, "sourceLink", "Lane Class");
-        }
-        endDiv(xmlConsumer);
-    }
-
-    private void createSecondaryLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
-        String linkText = link.getLinkText();
-        startDiv(xmlConsumer);
-        if (LinkType.IMPACTFACTOR.equals(link.getType())) {
-            createAnchor(xmlConsumer, link.getUrl(), linkText);
-        } else {
-            createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), linkText);
-        }
-        String text = link.getAdditionalText();
-        if (text.length() > 0) {
-            XMLUtils.data(xmlConsumer, text);
-        }
-        if (LinkType.GETPASSWORD.equals(link.getType())) {
-            XMLUtils.data(xmlConsumer, " ");
-            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
-        }
-        endDiv(xmlConsumer);
-    }
-
-    private void processFirstLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
-        startDiv(xmlConsumer);
-        String title = link.getVersion().getEresource().getTitle();
-        createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, title, title);
-        XMLUtils.data(xmlConsumer, link.getPrimaryAdditionalText());
-        if (LinkType.GETPASSWORD.equals(link.getType())) {
-            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);
     }

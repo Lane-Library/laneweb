@@ -8,7 +8,7 @@ public class HistoryLink extends Link {
     private String linkText;
 
     public HistoryLink(final String instruction, final String label, final LinkType type, final String url) {
-        super(instruction, label, type, url, null);
+        super(instruction, label, type, url, null, null);
     }
 
     @Override
