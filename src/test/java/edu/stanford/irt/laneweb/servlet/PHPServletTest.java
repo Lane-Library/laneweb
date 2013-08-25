@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PHPFilterTest {
+public class PHPServletTest {
 
-    private PHPFilter filter;
+    private PHPServlet filter;
 
     private HttpServletResponse response;
 
     @Before
     public void setUp() throws Exception {
-        this.filter = new PHPFilter();
+        this.filter = new PHPServlet();
         this.response = createMock(HttpServletResponse.class);
     }
 
@@ -28,7 +28,7 @@ public class PHPFilterTest {
     public void testInternalDoFilterPHP() throws IOException, ServletException {
         this.response.sendError(404);
         replay(this.response);
-        this.filter.internalDoFilter(null, this.response, null);
+        this.filter.service(null, this.response);
         verify(this.response);
     }
 }
