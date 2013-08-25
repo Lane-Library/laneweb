@@ -86,11 +86,6 @@
         <filter-name>LanewebHTTPSFilter</filter-name>
         <filter-class>edu.stanford.irt.laneweb.servlet.LanewebHTTPSFilter</filter-class>
     </filter>
-      
-    <filter>
-        <filter-name>PHPFilter</filter-name>
-        <filter-class>edu.stanford.irt.laneweb.servlet.PHPFilter</filter-class>
-    </filter>
     
     <filter>
         <filter-name>tobaccoRedirectFilter</filter-name>
@@ -106,11 +101,6 @@
         <filter-name>LanewebHTTPSFilter</filter-name>
         <url-pattern>/secure/*</url-pattern>
         <url-pattern>/shclogin</url-pattern>
-    </filter-mapping>
-    
-    <filter-mapping>
-        <filter-name>PHPFilter</filter-name>
-        <url-pattern>*.php</url-pattern>
     </filter-mapping>
     
     <filter-mapping>
@@ -147,13 +137,23 @@
     </servlet>
     
     <servlet-mapping>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-name>
+        <url-pattern>/robots.txt</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>PHPServlet</servlet-name>
+        <servlet-class>edu.stanford.irt.laneweb.servlet.PHPServlet</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-name>
-        <url-pattern>/robots.txt</url-pattern>
+        <servlet-name>PHPServlet</servlet-name>
+        <url-pattern>*.php</url-pattern>
     </servlet-mapping>
     
     <error-page>
