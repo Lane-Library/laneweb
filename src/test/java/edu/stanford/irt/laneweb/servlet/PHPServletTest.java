@@ -25,7 +25,7 @@ public class PHPServletTest {
     }
 
     @Test
-    public void testInternalDoFilterPHP() throws IOException, ServletException {
+    public void testService() throws IOException, ServletException {
         this.response.sendError(404);
         replay(this.response);
         this.filter.service(null, this.response);
