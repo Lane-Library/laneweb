@@ -3,7 +3,7 @@
 
 var redirectUrl,
 	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference',
-	IS_USER_VALID;
+	IS_USER_VALID = $.LANE.model["isActiveSunetID"];
 	
 
 $.LANE.popupWindow = function(url){
@@ -44,9 +44,9 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", function(event) {
 	var link = event.currentTarget, 
 	now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-	if ($.LANE.model['disaster-mode'] != true && 'denied' !== statusCookie && (IS_USER_VALID === 'false' || statusCookie < now.getTime())){
+	if ($.LANE.model['disaster-mode'] != true && 'denied' !== statusCookie && (!IS_USER_VALID || statusCookie < now.getTime())){
 		redirectUrl = encodeURIComponent(link.href);
-		if(IS_USER_VALID === 'true'){ 
+		if(IS_USER_VALID){ 
 			$.LANE.popupWindow('/././m/plain/persistentlogin-extention.html');
 		}
 		else{
@@ -87,7 +87,7 @@ $('#dont-ask-again').live('click', function(e) {
 
 
 $.LANE.toggleLogin = function(){
-	if( IS_USER_VALID === 'true' || $.LANE.getCookie('webauth_at') != null){
+	if( IS_USER_VALID || $.LANE.getCookie('webauth_at') != null){
         $('.webauthLogin').each(function(){
             $(this).text('Logout');
             $(this).attr('href','/././logout');
@@ -110,13 +110,6 @@ $('.persistent-header').live('click', function(e) {
 //
 ////toggle login button at every pageinit
 $(this).bind("pageinit", function() {
-	$.ajax({
-		  url: '/././user/active',
-		  async : false,
-		  success:  function(data){
-		 IS_USER_VALID = data;
-		}
-	});
 	$.LANE.toggleLogin();
 });
 
@@ -125,7 +118,7 @@ var setLink = function(event) {
 	if (node.nodeName == 'SPAN') {
 		node = node.parentNode;
 	}
-	if ('false' == IS_USER_VALID || node.search.indexOf("pl=true") >0 ) {
+	if (!IS_USER_VALID || node.search.indexOf("pl=true") >0 ) {
 		 url = url + 'secure/';
 	 }
 	event.preventDefault();
