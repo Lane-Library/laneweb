@@ -246,6 +246,7 @@
                                 <include>lane-popin-min.js</include>
                                 <include>form-validator-min.js</include>
                                 <include>hover-controller-min.js</include>
+                                <include>telinput-min.js</include>
                                 <include>lane-feedback-min.js</include>
                                 <include>banner-min.js</include>
                                 <include>purchase-suggestions-min.js</include>

@@ -64,6 +64,10 @@
                 event.preventDefault();
                 Y.lane.Lightbox.hide();
             });
+            //create a TelInput object for each input with type="tel" (see telinput.js)
+            this.get("srcNode").all("input[type='tel']").each(function(input) {
+                (new Y.lane.TelInput(input));
+            });
         },
         syncUI : function() {
             var activeItem = this.get("activeItem"),

@@ -138,6 +138,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-popin.js",
         "form-validator.js",
         "hover-controller.js",
+        "telinput.js",
         "lane-feedback.js",
         "banner.js",
         "purchase-suggestions.js",
