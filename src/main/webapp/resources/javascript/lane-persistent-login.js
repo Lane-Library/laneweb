@@ -69,6 +69,12 @@
 					else if (!persistentStatusCookie) {
 						getPopup(basePath + '/plain/persistent-popup.html');
 					}
+					else{// if the user not active and on "grace period" the cookies will be deleted and the page will be reload 
+                        Y.io(basePath + '/logout', {
+                            sync : true
+                        });
+		            document.location.reload() ;
+		            }
 				}
 			}
 		},document.body);
