@@ -40,7 +40,7 @@
 	background-color: transparent;
 }
 
-#laneNav ul,#favorites ul, .pagingLabels {
+#laneNav ul,#favorites ul {
 	display: none;
 	background-color: white;
 	position: absolute;

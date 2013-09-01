@@ -13,7 +13,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
 
     private static final Pattern ALPHA_PATTERN = Pattern.compile("(^|.+&)a=([a-z])(&.+|$)");
 
-    private static final int LINK_LENGTH = 40;
+    private static final int LINK_LENGTH = 45;
 
     private static final int TEXT_LENGTH = 37;
 
@@ -24,14 +24,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             createDisplayingMarkup(xmlConsumer, pagingData);
             if (pagingData.getSize() > pagingData.getLength()) {
                 String hrefBase = pagingData.getBaseQuery();
-                createPagingButton(xmlConsumer, hrefBase);
-                startUlWithClass(xmlConsumer, "pagingLabels");
-                int i = 1;
-                for (PagingLabel label : pagingData.getPagingLabels()) {
-                    createPagingLabelMarkup(xmlConsumer, label, hrefBase, i);
-                    i++;
-                }
-                endUl(xmlConsumer);
+                createPagingButton(xmlConsumer, hrefBase, pagingData);
                 createSeeAllMarkup(xmlConsumer, hrefBase);
             }
             endDiv(xmlConsumer);
@@ -66,8 +59,8 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
     }
 
-    private void createPagingButton(final XMLConsumer xmlConsumer, final String hrefBase) throws SAXException {
-        startAnchorWithClass(xmlConsumer, "#", "pagingButton gray-btn");
+    private void createPagingButton(final XMLConsumer xmlConsumer, final String hrefBase, EresourceListPagingData pagingData) throws SAXException {
+        startDivWithClass(xmlConsumer, "pagingButton gray-btn");
         String alpha = null;
         Matcher matcher = ALPHA_PATTERN.matcher(hrefBase);
         if (matcher.matches()) {
@@ -81,7 +74,14 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append(alpha).append("a-").append(alpha).append('z');
         }
         createSpan(xmlConsumer, sb.toString());
-        endAnchor(xmlConsumer);
+        startUlWithClass(xmlConsumer, "pagingLabels");
+        int i = 1;
+        for (PagingLabel label : pagingData.getPagingLabels()) {
+            createPagingLabelMarkup(xmlConsumer, label, hrefBase, i);
+            i++;
+        }
+        endUl(xmlConsumer);
+        endDiv(xmlConsumer);
     }
 
     private void createPagingLabelMarkup(final XMLConsumer xmlConsumer, final PagingLabel label, final String hrefBase,
@@ -93,8 +93,6 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
         sb.append("page=").append(i);
         startAnchor(xmlConsumer, sb.toString());
-        startUl(xmlConsumer);
-        startLi(xmlConsumer);
         sb.setLength(0);
         sb.append(label.getStart());
         if (sb.length() > TEXT_LENGTH) {
@@ -105,9 +103,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         while (sb.length() < LINK_LENGTH) {
             sb.append('.');
         }
-        XMLUtils.data(xmlConsumer, sb.toString());
-        endLi(xmlConsumer);
-        startLi(xmlConsumer);
+        createSpan(xmlConsumer, sb.toString());
         createSpanWithClass(xmlConsumer, "plDash", " — ");
         sb.setLength(0);
         sb.append(label.getEnd());
@@ -120,12 +116,8 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append('.');
         }
         sb.append(" ");
-        XMLUtils.data(xmlConsumer, sb.toString());
-        endLi(xmlConsumer);
-        startLiWithClass(xmlConsumer, "plResults");
-        XMLUtils.data(xmlConsumer, " (" + label.getResults() + ")");
-        endLi(xmlConsumer);
-        endUl(xmlConsumer);
+        createSpan(xmlConsumer, sb.toString());
+        createSpanWithClass(xmlConsumer, "plResults", " (" + label.getResults() + ")");
         endAnchor(xmlConsumer);
         endLi(xmlConsumer);
     }
