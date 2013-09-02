@@ -22,12 +22,12 @@
 }
 
 .pagingLabels {
-    display:none;
-    background-color: white;
-    left: -254px;
-    position: absolute;
+    right:-1px;
+    top:30px;
     white-space: nowrap;
-    width: 245px;
+    width: 400px;
+    padding:10px;
+    line-height:normal;
 }
 .pagingButton:hover .pagingLabels {
     display:block;
@@ -40,23 +40,20 @@
     text-overflow:ellipsis;
     padding: 0 5px;
 }
-
-/*
-.pagingButtonActive {
-    background-image: url(/././resources/images/sprite-vertall.png);
-    background-position: 0 -1866px;
-    border-right: 1px solid #dadad9;
-    border-bottom: none;
-    -webkit-box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
-    box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
-    padding-bottom: 9px;
-    filter: none;
-    -webkit-border-radius: 3px 3px 0 0;
-    -moz-border-radius: 3px 3px 0 0;
-    border-radius: 3px 3px 0 0;
+.pagingLabels a {
+    border-bottom:none;
+}
+.pagingLabels a:hover {
+    border-bottom:1px solid #820000;
 }
 
+
+.pagingButton:hover {
+    border-color:#dadad9;
+    background-image:none;
+    background-color:white;
+}
+/*
 .pagingButtonActive:hover {
     border: 1px solid #dadad9;
     border-bottom: none;
@@ -98,11 +95,12 @@
 #searchResults .pagingLabels {
     padding: 10px 10px 10px 15px;
 }
-
+*/
 .content .pagingLabels li {
     list-style:none outside none;
     margin-left: 0
 }
+/*
 .pagingLabels li li {
     float: left;
     white-space: nowrap;
