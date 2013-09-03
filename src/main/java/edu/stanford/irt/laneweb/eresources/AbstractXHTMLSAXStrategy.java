@@ -19,15 +19,13 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     private static final String DIV = "div";
 
-    private static final String EMPTY_NS = "";
+    private static final String EMPTY = "";
 
     private static final String HEAD = "head";
 
     private static final String HREF = "href";
 
     private static final String LI = "li";
-
-    private static final String NO_PREFIX = "";
 
     private static final String SPAN = "span";
 
@@ -101,7 +99,7 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     protected void endHTMLDocument(final XMLConsumer xmlConsumer) throws SAXException {
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "html");
-        xmlConsumer.endPrefixMapping(NO_PREFIX);
+        xmlConsumer.endPrefixMapping(EMPTY);
         xmlConsumer.endDocument();
     }
 
@@ -115,32 +113,32 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     protected void startAnchor(final XMLConsumer xmlConsumer, final String href) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, href);
+        atts.addAttribute(EMPTY, HREF, HREF, CDATA, href == null ? EMPTY : href);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
     }
 
     protected void startAnchorWithClass(final XMLConsumer xmlConsumer, final String href, final String clazz)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, clazz);
-        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, href);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
+        atts.addAttribute(EMPTY, HREF, HREF, CDATA, href == null ? EMPTY : href);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
     }
 
     protected void startAnchorWithClassAndTitle(final XMLConsumer xmlConsumer, final String href, final String clazz,
             final String title) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, clazz);
-        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, href);
-        atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, title);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
+        atts.addAttribute(EMPTY, HREF, HREF, CDATA, href == null ? EMPTY : href);
+        atts.addAttribute(EMPTY, TITLE, TITLE, CDATA, title == null ? EMPTY : title);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
     }
 
     protected void startAnchorWithTitle(final XMLConsumer xmlConsumer, final String href, final String title)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, href);
-        atts.addAttribute(EMPTY_NS, TITLE, TITLE, CDATA, title);
+        atts.addAttribute(EMPTY, HREF, HREF, CDATA, href == null ? EMPTY : href);
+        atts.addAttribute(EMPTY, TITLE, TITLE, CDATA, title == null ? EMPTY : title);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
     }
 
@@ -162,7 +160,7 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     protected void startHTMLDocument(final XMLConsumer xmlConsumer) throws SAXException {
         xmlConsumer.startDocument();
-        xmlConsumer.startPrefixMapping(NO_PREFIX, XHTML_NS);
+        xmlConsumer.startPrefixMapping(EMPTY, XHTML_NS);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "html");
     }
 
@@ -189,14 +187,14 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
     private void createElementWithClass(final XMLConsumer xmlConsumer, final String name, final String clazz,
             final String text) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, clazz);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
         XMLUtils.createElement(xmlConsumer, XHTML_NS, name, atts, text);
     }
 
     private void startElementWithClass(final XMLConsumer xmlConsumer, final String name, final String clazz)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, clazz);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, name, atts);
     }
 }

@@ -11,6 +11,7 @@
 	auth = model.get(model.AUTH),
 	ipgroup = model.get(model.IPGROUP),
 	drMode = model.get(model.DISASTER_MODE),
+	isActive = model.get(model.IS_ACTIVE_SUNETID),
 	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup,
 	
 	getPopup = function(urlPage) {
@@ -62,17 +63,18 @@
 					// don\'t want a redirect with the tracking see tracking.js code if !rel  documment.location is not set
 					link.set('rel', 'persistentLogin');
 					// if preference cookie is present but date get into grace period
-					if (persistentStatusCookie && now.getTime() > persistentStatusCookie) {
-						isActive = Y.io(basePath + '/user/active', {
-							sync : true
-						});
-						if (isActive.responseText.indexOf('true') > -1) {
-							getPopup(basePath + '/plain/persistent-extension-popup.html');
-						}
+					if (persistentStatusCookie && now.getTime() > persistentStatusCookie && isActive) {
+						getPopup(basePath + '/plain/persistent-extension-popup.html');
 					} // no preference cookie at all
 					else if (!persistentStatusCookie) {
 						getPopup(basePath + '/plain/persistent-popup.html');
 					}
+					else{// if the user not active and on "grace period" the cookies will be deleted and the page will be reload 
+                        Y.io(basePath + '/logout', {
+                            sync : true
+                        });
+		            document.location.reload() ;
+		            }
 				}
 			}
 		},document.body);

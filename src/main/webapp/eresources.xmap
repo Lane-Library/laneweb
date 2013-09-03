@@ -4,7 +4,6 @@
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="throttling">
         <map:parameter name="request-key" value="{remote-addr}/{request-uri}/{query-string}"/>
-        <!-- TODO: the following matches with suffixes will replace those further below once deployed and the content includes are changed -->
         <map:match pattern="search.html" type="wildcard">
             <map:generate type="er-search"/>
             <map:transform type="query-highlighting"/>
@@ -23,48 +22,7 @@
             <map:generate type="eresources-count"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match type="wildcard" pattern="history/**">
-            <map:match pattern="history/search.html" type="wildcard">
-                <map:generate type="history-search"/>
-                <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="history/search/type/*.html" type="wildcard">
-                <map:generate type="history-search">
-                    <map:parameter name="type" value="{1}"/>
-                </map:generate>
-                <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="history/count.xml" type="wildcard">
-                <map:generate type="history-count"/>
-                <map:serialize type="xml"/>
-            </map:match>
-        </map:match>
-        <!-- end replacement matches -->
-        <map:match pattern="search" type="wildcard">
-            <map:generate type="er-search"/>
-            <map:transform type="query-highlighting"/>
-            <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="search/type/*" type="wildcard">
-            <map:generate type="er-search">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:transform type="query-highlighting"/>
-            <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="histdb" type="wildcard">
-            <map:generate type="history-search"/>
-            <map:transform type="query-highlighting"/>
-            <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="histdb/type/*" type="wildcard">
+        <map:match pattern="history/search/type/*.html" type="wildcard">
             <map:generate type="history-search">
                 <map:parameter name="type" value="{1}"/>
             </map:generate>
@@ -72,11 +30,7 @@
             <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="count" type="wildcard">
-            <map:generate type="eresources-count"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="history-count" type="wildcard">
+        <map:match pattern="history/count.xml" type="wildcard">
             <map:generate type="history-count"/>
             <map:serialize type="xml"/>
         </map:match>
