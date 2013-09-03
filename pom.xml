@@ -155,6 +155,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <encoding>UTF-8</encoding>
                     <webappDirectory>target/laneweb</webappDirectory>
                     <excludes>
                         <exclude>**/swfobject.js</exclude>
