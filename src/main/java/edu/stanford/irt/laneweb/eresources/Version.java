@@ -37,17 +37,6 @@ public class Version {
         return this.eresource;
     }
 
-    public String getPrimaryAdditionalText() {
-        StringBuilder sb = new StringBuilder(" ");
-        if (this.summaryHoldings != null) {
-            sb.append(this.summaryHoldings);
-        }
-        maybeAppend(sb, this.dates);
-        maybeAppend(sb, this.publisher);
-        maybeAppend(sb, this.description);
-        return sb.toString();
-    }
-
     public Collection<Link> getLinks() {
         return Collections.unmodifiableCollection(this.links);
     }
@@ -73,14 +62,5 @@ public class Version {
 
     void setEresource(final Eresource eresource) {
         this.eresource = eresource;
-    }
-
-    private void maybeAppend(final StringBuilder sb, final String string) {
-        if (string != null && string.length() > 0) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(string);
-        }
     }
 }

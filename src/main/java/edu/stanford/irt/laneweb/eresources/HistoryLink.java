@@ -21,7 +21,15 @@ public class HistoryLink extends Link {
         if (this.additionalText == null) {
             StringBuilder sb = new StringBuilder();
             if (isFirstLink()) {
-                sb.append(getVersion().getPrimaryAdditionalText());
+                Version version = getVersion();
+                sb.append(" ");
+                String summaryHoldings = version.getSummaryHoldings();
+                if (summaryHoldings != null) {
+                    sb.append(summaryHoldings);
+                }
+                maybeAppend(sb, version.getDates());
+                maybeAppend(sb, version.getPublisher());
+                maybeAppend(sb, version.getDescription());
                 if (sb.length() == 1 && getLabel() != null) {
                     sb.append(getLabel());
                 }
@@ -92,5 +100,14 @@ public class HistoryLink extends Link {
             }
         }
         return Boolean.valueOf(this.isFirstLink);
+    }
+
+    private void maybeAppend(final StringBuilder sb, final String string) {
+        if (string != null && string.length() > 0) {
+            if (sb.length() > 1) {
+                sb.append(", ");
+            }
+            sb.append(string);
+        }
     }
 }

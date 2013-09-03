@@ -28,6 +28,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         int currentLinkId = -1;
         String currentTitle = null;
         boolean createGetPassword = false;
+        boolean isFirstLink = true;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             int recordId = rs.getInt("RECORD_ID");
@@ -41,6 +42,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 currentEresourceId = rowEresourceId;
                 currentVersionId = -1;
                 currentLinkId = -1;
+                isFirstLink = true;
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
@@ -63,8 +65,11 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 } else {
                     type = LinkType.NORMAL;
                 }
-                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL"), rs.getString("LINK_TEXT"), rs.getString("ADDITIONAL_TEXT")));
+                String linkText = isFirstLink ? rowTitle : rs.getString("LINK_TEXT");
+                String additionalText = isFirstLink ? rs.getString("V_ADDITIONAL_TEXT") : rs.getString("L_ADDITIONAL_TEXT");
+                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL"), linkText, additionalText));
                 currentLinkId = rowLinkId;
+                isFirstLink = false;
             }
         }
         return eresources;
