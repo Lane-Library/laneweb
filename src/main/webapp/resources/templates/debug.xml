@@ -84,7 +84,7 @@
                                     <span id="searchReset" title="Clear Search">×</span>
                                 </div>
                                 <input id="searchSubmit" type="submit" value="Search"/>
-                                <img id="searchIndicator" src="/resources/images/search-indicator.gif" alt="search indicator"/>
+                                <img id="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator"/>
                             </fieldset>
                             </form>
                             <ul id="qlinks">
