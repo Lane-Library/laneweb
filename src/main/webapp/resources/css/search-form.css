@@ -115,8 +115,7 @@
     visibility : hidden;
     position: absolute;
     left: 710px;
-    top: -6px;
-    width: 48px;
+    top: 0;
 }
 #searchIndicator.show {
     visibility:visible
