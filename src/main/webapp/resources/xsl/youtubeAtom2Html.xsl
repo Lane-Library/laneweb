@@ -54,7 +54,7 @@
         <xsl:param name="recorded"/>
         <xsl:param name="description"/>
         <div class="module">
-            <iframe type="text/html" width="256" height="144"
+            <iframe type="text/html" width="230" height="130" class="module-img drop-shadow-noimg"
                 src="http://www.youtube.com/embed/{$videoid}"
                 frameborder="0"/>
             <h5><xsl:value-of select="$title"/></h5>
