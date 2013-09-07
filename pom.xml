@@ -562,7 +562,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.47</version>
+            <version>1.7.48-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
@@ -725,11 +725,6 @@
         	<artifactId>catalina</artifactId>
         	<version>6.0.35</version>
         	<scope>provided</scope>
-        </dependency>
-        <dependency>
-        	<groupId>edu.stanford.irt.search</groupId>
-        	<artifactId>search-core</artifactId>
-        	<version>1.7.9-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
