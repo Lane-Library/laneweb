@@ -27,18 +27,8 @@ public interface Resource {
     String LINK = "link";
 
     String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
-
-    String PAGES = "pub-pages";
-
-    String PUBLICATION_DATE = "pub-date";
-
-    String PUBLICATION_ISSUE = "pub-issue";
     
     String PUBLICATION_TEXT = "pub-text";
-
-    String PUBLICATION_TITLE = "pub-title";
-
-    String PUBLICATION_VOLUME = "pub-volume";
 
     String PUBLISHER = "publisher";
 

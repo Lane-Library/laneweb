@@ -18,9 +18,6 @@ public class ContentResultSearchResult implements SearchResult {
 
     private int hashCode;
 
-    // TODO: move this to the ContentResult
-    private String publicationText;
-
     private Result resourceResult;
 
     private int score;
@@ -80,34 +77,6 @@ public class ContentResultSearchResult implements SearchResult {
 
     public ContentResult getContentResult() {
         return this.contentResult;
-    }
-
-    public String getPublicationText() {
-        if (this.publicationText == null) {
-            StringBuilder sb = new StringBuilder();
-            String title = this.contentResult.getPublicationTitle();
-            if (title != null) {
-                sb.append(title).append(". ");
-                String date = this.contentResult.getPublicationDate();
-                if (date != null && date.length() > 0) {
-                    sb.append(date);
-                }
-                String volume = this.contentResult.getPublicationVolume();
-                if (volume != null && volume.length() > 0) {
-                    sb.append(';').append(volume);
-                }
-                String issue = this.contentResult.getPublicationIssue();
-                if (issue != null && issue.length() > 0) {
-                    sb.append('(').append(issue).append(')');
-                }
-                String pages = this.contentResult.getPages();
-                if (pages != null && pages.length() > 0) {
-                    sb.append(':').append(pages).append('.');
-                }
-            }
-            this.publicationText = sb.toString();
-        }
-        return this.publicationText;
     }
 
     public Result getResourceResult() {

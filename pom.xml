@@ -726,5 +726,10 @@
         	<version>6.0.35</version>
         	<scope>provided</scope>
         </dependency>
+        <dependency>
+        	<groupId>edu.stanford.irt.search</groupId>
+        	<artifactId>search-core</artifactId>
+        	<version>1.7.9-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

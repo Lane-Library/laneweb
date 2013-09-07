@@ -31,20 +31,16 @@ public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearch
             maybeCreateElement(xmlConsumer, TITLE, contentResult.getTitle());
             maybeCreateElement(xmlConsumer, DESCRIPTION, contentResult.getDescription());
             maybeCreateElement(xmlConsumer, AUTHOR, contentResult.getAuthor());
-            maybeCreateElement(xmlConsumer, PUBLICATION_DATE, contentResult.getPublicationDate());
-            maybeCreateElement(xmlConsumer, PUBLICATION_TITLE, contentResult.getPublicationTitle());
-            maybeCreateElement(xmlConsumer, PUBLICATION_VOLUME, contentResult.getPublicationVolume());
-            maybeCreateElement(xmlConsumer, PUBLICATION_ISSUE, contentResult.getPublicationIssue());
-            maybeCreateElement(xmlConsumer, PAGES, contentResult.getPages());
+            maybeCreateElement(xmlConsumer, PUBLICATION_TEXT, contentResult.getPublicationText());
             maybeCreateElement(xmlConsumer, URL, contentResult.getURL());
-            maybeCreateElement(xmlConsumer, PUBLICATION_TEXT, result.getPublicationText());
             XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
     }
 
-    private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value) throws SAXException {
+    private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value)
+            throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, name, value);
         }
