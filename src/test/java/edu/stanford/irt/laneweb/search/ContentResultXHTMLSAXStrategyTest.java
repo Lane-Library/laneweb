@@ -47,12 +47,7 @@ public class ContentResultXHTMLSAXStrategyTest {
         expect(this.contentResult.getURL()).andReturn("url");
         expect(this.contentResult.getTitle()).andReturn("title");
         expect(this.contentResult.getAuthor()).andReturn("author");
-        expect(this.contentResult.getPublicationTitle()).andReturn(null);
-        // expect(this.contentResult.getPublicationDate()).andReturn("date");
-        // expect(this.contentResult.getPublicationVolume()).andReturn("volume");
-        // expect(this.contentResult.getPublicationIssue()).andReturn("issue");
-        // expect(this.contentResult.getPages()).andReturn("pages");
-        // expect(this.contentResult.getContentId()).andReturn("id");
+        expect(this.contentResult.getPublicationText()).andReturn(null);
         expect(this.resourceResult.getURL()).andReturn("url");
         expect(this.contentResult.getDescription()).andReturn("description");
         replay(this.result, this.contentResult, this.resourceResult);
@@ -75,9 +70,7 @@ public class ContentResultXHTMLSAXStrategyTest {
         expect(this.contentResult.getURL()).andReturn("url");
         expect(this.contentResult.getTitle()).andReturn("title");
         expect(this.contentResult.getAuthor()).andReturn("author");
-        expect(this.contentResult.getPublicationTitle()).andReturn("title");
         expect(this.contentResult.getContentId()).andReturn("PMID:12");
-        // expect(this.resourceResult.getURL()).andReturn("url");
         expect(this.contentResult.getDescription()).andReturn("description");
         expect(this.contentResult.getPublicationText()).andReturn("title. date;volume(issue):pages.");
         replay(this.result, this.contentResult, this.resourceResult);
@@ -86,7 +79,6 @@ public class ContentResultXHTMLSAXStrategyTest {
         this.strategy.toSAX(this.result, this.xmlConsumer);
         XMLUtils.endElement(this.xmlConsumer, "", "test");
         this.xmlConsumer.endDocument();
-        // System.out.println(this.xmlConsumer.getStringValue());
         assertEquals(this.xmlConsumer.getExpectedResult(this, "ContentResultXHTMLSAXStrategyTest-testToSAXPubMed.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.result, this.contentResult, this.resourceResult);

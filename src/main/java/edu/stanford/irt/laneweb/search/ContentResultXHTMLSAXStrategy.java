@@ -65,10 +65,10 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "pubTitle");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            String pubTitle = contentResult.getPublicationTitle();
+            String pubText = contentResult.getPublicationText();
             StringBuilder sb = new StringBuilder();
-            if (pubTitle != null && pubTitle.length() > 0) {
-                XMLUtils.data(xmlConsumer, contentResult.getPublicationText());
+            if (pubText != null && pubText.length() > 0) {
+                XMLUtils.data(xmlConsumer, pubText);
                 if (resourceName.equals(PUBMED) || resourceHits <= MORE_RESULTS_LIMIT) {
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "sourceLink");
