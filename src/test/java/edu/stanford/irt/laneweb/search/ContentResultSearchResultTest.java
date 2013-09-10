@@ -29,6 +29,17 @@ public class ContentResultSearchResultTest {
         this.resourceResult = createMock(Result.class);
         this.searchResult = new ContentResultSearchResult(this.contentResult, this.resourceResult, 100);
     }
+    
+    @Test
+    public void testNotContentResultSearchResult() {
+        SearchResult result = createMock(SearchResult.class);
+        expect(result.getScore()).andReturn(100);
+        expect(this.contentResult.getTitle()).andReturn("title");
+        expect(result.getSortTitle()).andReturn("title");
+        replay(this.contentResult, result);
+        assertTrue(this.searchResult.compareTo(result) > 0);
+        verify(this.contentResult, result);
+    }
 
     @Test
     public void testCompareToSameTitleDifferentContentIds() {
@@ -195,7 +206,7 @@ public class ContentResultSearchResultTest {
         result1.setContentId("cid");
         DefaultContentResult result2 = new DefaultContentResult("1");
         result2.setTitle("same title");
-        result1.setContentId("different cid");
+        result2.setContentId("different cid");
         ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
         ContentResultSearchResult two = new ContentResultSearchResult(result2, this.resourceResult, 100);
         assertFalse(one.equals(two));
