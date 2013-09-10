@@ -31,7 +31,7 @@ public class ContentResultSearchResult implements SearchResult {
                 value = this.contentResult.compareTo(other.getContentResult());
             } else if (value == 0) {
                 //arbitrarily rank eresource results higher
-                value = -1;
+                value = 1;
             }
         }
         return value;
@@ -63,8 +63,8 @@ public class ContentResultSearchResult implements SearchResult {
 
     public String getSortTitle() {
         if (this.sortTitle == null) {
-            this.sortTitle = NON_FILING_PATTERN.matcher(this.contentResult.getTitle()).replaceFirst("");
-            this.sortTitle = WHITESPACE.matcher(this.sortTitle).replaceAll("").toLowerCase();
+            String temp = NON_FILING_PATTERN.matcher(this.contentResult.getTitle()).replaceFirst("");
+            this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
         }
         return this.sortTitle;
     }
