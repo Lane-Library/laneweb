@@ -82,7 +82,7 @@ public class ScoreStrategy extends AbstractScoreStrategy {
         } else {
             score = 1;
         }
-        score = (int) ((score + computeDateAdjustment(searchResult.getPublicationDate())) * weight);
+        score = (int) ((score + computeDateAdjustment(searchResult.getYear())) * weight);
         return score < 0 ? 0 : score;
     }
 

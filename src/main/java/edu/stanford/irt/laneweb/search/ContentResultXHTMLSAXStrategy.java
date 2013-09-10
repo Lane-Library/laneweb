@@ -28,13 +28,13 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
 
     private static final String LI = "li";
 
+    private static final int MORE_RESULTS_LIMIT = 10;
+
+    private static final String PUBMED = "PubMed";
+
     private static final String SPAN = "span";
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
-
-	private static final String PUBMED = "PubMed";
-	
-	private static final int MORE_RESULTS_LIMIT = 10;
 
     @Override
     public void toSAX(final ContentResultSearchResult result, final XMLConsumer xmlConsumer) {
@@ -65,27 +65,10 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "pubTitle");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            String pubTitle = contentResult.getPublicationTitle();
+            String pubText = contentResult.getPublicationText();
             StringBuilder sb = new StringBuilder();
-            if (pubTitle != null && pubTitle.length() > 0) {
-                sb.append(pubTitle).append(". ");
-                String pubDate = contentResult.getPublicationDate();
-                if (pubDate != null) {
-                    sb.append(pubDate);
-                }
-                String pubVolume = contentResult.getPublicationVolume();
-                if (pubVolume != null && pubVolume.length() > 0) {
-                    sb.append(';').append(pubVolume);
-                }
-                String pubIssue = contentResult.getPublicationIssue();
-                if (pubIssue != null && pubIssue.length() > 0) {
-                    sb.append('(').append(pubIssue).append(')');
-                }
-                String pages = contentResult.getPages();
-                if (pages != null) {
-                    sb.append(':').append(pages).append('.');
-                }
-                XMLUtils.data(xmlConsumer, sb.toString());
+            if (pubText != null && pubText.length() > 0) {
+                XMLUtils.data(xmlConsumer, pubText);
                 if (resourceName.equals(PUBMED) || resourceHits <= MORE_RESULTS_LIMIT) {
                     atts = new AttributesImpl();
                     atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "sourceLink");
@@ -144,7 +127,6 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
-            
             String description = contentResult.getDescription();
             if (description != null && description.length() > 0) {
                 atts = new AttributesImpl();

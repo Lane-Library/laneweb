@@ -60,10 +60,6 @@ public class ContentResultConversionStrategyTest {
         expect(this.contentParentResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getTitle()).andReturn("title");
-        expect(this.contentResult.getPublicationDate()).andReturn("date");
-        expect(this.contentResult.getPublicationVolume()).andReturn("volume");
-        expect(this.contentResult.getPublicationIssue()).andReturn("issue");
-        expect(this.contentResult.getAuthor()).andReturn("author");
         expect(this.contentResult.getContentId()).andReturn("contentId");
         replay(this.scoreStrategy, this.uberResult, this.query, this.result, this.resourceResult, this.contentParentResult,
                 this.contentResult);
@@ -86,10 +82,6 @@ public class ContentResultConversionStrategyTest {
         expect(this.contentParentResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getTitle()).andReturn("title");
-        expect(this.contentResult.getPublicationDate()).andReturn("date");
-        expect(this.contentResult.getPublicationVolume()).andReturn("volume");
-        expect(this.contentResult.getPublicationIssue()).andReturn("issue");
-        expect(this.contentResult.getAuthor()).andReturn("author");
         expect(this.contentResult.getContentId()).andReturn(null);
         expect(this.contentResult.getURL()).andReturn("url");
         replay(this.scoreStrategy, this.uberResult, this.query, this.result, this.resourceResult, this.contentParentResult,
@@ -114,13 +106,10 @@ public class ContentResultConversionStrategyTest {
                 Arrays.asList(new Result[] { this.contentResult, this.contentResult }));
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getTitle()).andReturn("firsttitle");
-        expect(this.contentResult.getPublicationDate()).andReturn("date").times(2);
-        expect(this.contentResult.getPublicationVolume()).andReturn("volume").times(2);
-        expect(this.contentResult.getPublicationIssue()).andReturn("issue").times(2);
-        expect(this.contentResult.getAuthor()).andReturn("author").times(2);
-        expect(this.contentResult.getContentId()).andReturn("contentId").times(4);
+        expect(this.contentResult.getContentId()).andReturn("contentId").times(2);
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(100);
         expect(this.contentResult.getTitle()).andReturn("secondtitle");
+        expect(this.contentResult.compareTo(this.contentResult)).andReturn(0);
         replay(this.scoreStrategy, this.uberResult, this.query, this.result, this.resourceResult, this.contentParentResult,
                 this.contentResult);
         Collection<SearchResult> searchResults = this.conversionStrategy.convertResult(this.uberResult);
@@ -143,13 +132,8 @@ public class ContentResultConversionStrategyTest {
                 Arrays.asList(new Result[] { this.contentResult, this.contentResult }));
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getTitle()).andReturn("firsttitle");
-        expect(this.contentResult.getPublicationDate()).andReturn("date").times(2);
-        expect(this.contentResult.getPublicationVolume()).andReturn("volume").times(2);
-        expect(this.contentResult.getPublicationIssue()).andReturn("issue").times(2);
-        expect(this.contentResult.getAuthor()).andReturn("author").times(2);
         expect(this.contentResult.getContentId()).andReturn("contentId");
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
-        expect(this.contentResult.getTitle()).andReturn("secondtitle");
         expect(this.contentResult.getContentId()).andReturn("contentId");
         replay(this.scoreStrategy, this.uberResult, this.query, this.result, this.resourceResult, this.contentParentResult,
                 this.contentResult);
