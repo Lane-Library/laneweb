@@ -6,7 +6,7 @@
     <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
         class="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
         destroy-method="destroy">
-        <constructor-arg ref="javax.sql.DataSource/eresources"/>
+        <constructor-arg ref="javax.sql.DataSource/voyager"/>
     </bean>
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/proxy-links"
@@ -22,7 +22,7 @@
     </bean>
     
     <bean class="edu.stanford.irt.laneweb.proxy.EzproxyServersWriter">
-        <constructor-arg ref="javax.sql.DataSource/eresources"/>
+        <constructor-arg ref="javax.sql.DataSource/voyager"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/proxy-links"

@@ -24,35 +24,15 @@ public class ProxyHostManager {
 
     private static class DatabaseProxyHostSet extends HashSet<String> {
 
-        private static final String UNION = "union ";
-
         private static final long serialVersionUID = 1L;
 
-        private static final String SQL =
-            "with urls as ( "
-            + "select url from link, version "
-            + "where link.version_id = version.version_id "
-            + "and proxy = 'T' "
-            + "and url like 'http%' "
-            + "and url not like '%.stanford.edu%' "
-            + UNION
-            + "select url from h_link, h_version "
-            + "where h_link.version_id = h_version.version_id "
-            + "and proxy = 'T' "
-            + "and url like 'http%' "
-            + "and url not like '%.stanford.edu%' "
-            + ") "
-            + "select substr(url, 9, instr(url,'/',1,3) - 9) as server from urls "
-            + "where url like 'https://%' and instr(url,'/',1,3) > 0 "
-            + UNION
-            + "select substr(url, 9) as server from urls "
-            + "where url like 'https://%' and instr(url,'/',1,3) = 0 "
-            + UNION
-            + "select substr(url, 8, instr(url,'/',1,3) - 8) as server from urls "
-            + "where url like 'http://%' and instr(url,'/',1,3) > 0 "
-            + UNION
-            + "select substr(url, 8) as server from urls "
-            + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
+        private static final String SQL = "WITH HOSTS AS " + "  ( SELECT DISTINCT URL_HOST AS HOST "
+                + "  FROM LMLDB.ELINK_INDEX " + "  WHERE ELINK_INDEX.RECORD_TYPE = 'A' " + "  UNION "
+                + "  SELECT DISTINCT URL_HOST AS HOST " + "  FROM LMLDB.ELINK_INDEX, " + "    LMLDB.MFHD_MASTER "
+                + "  WHERE ELINK_INDEX.RECORD_ID  = MFHD_MASTER.MFHD_ID " + "  AND ELINK_INDEX.RECORD_TYPE  = 'M' "
+                + "  AND MFHD_MASTER.MFHD_ID NOT IN " + "    (SELECT MFHD_ID " + "    FROM LMLDB.MFHD_DATA "
+                + "    WHERE LOWER(RECORD_SEGMENT) LIKE '%, noproxy%' " + "    ) " + "  ) "
+                + "SELECT HOST FROM HOSTS WHERE HOST NOT LIKE '%.stanford.edu'";
 
         DatabaseProxyHostSet(final DataSource dataSource) {
             Connection conn = null;
@@ -91,8 +71,8 @@ public class ProxyHostManager {
 
     public ProxyHostManager(final DataSource dataSource) throws UnsupportedEncodingException {
         this.dataSource = dataSource;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt"),
-                "UTF-8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "ezproxy-servers.txt"), "UTF-8"));
         this.proxyHosts = new HashSet<String>();
         String proxyHost = null;
         try {
