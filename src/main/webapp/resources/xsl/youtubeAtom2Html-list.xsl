@@ -37,10 +37,10 @@
         <xsl:param name="entry"/>
         <div class="yui3-u-1-2">
             <div class="module">
-            <iframe type="text/html" width="230" height="130"
+            <iframe type="text/html" width="230" height="130" class="module-img drop-shadow-noimg"
                 src="http://www.youtube.com/embed/{$entry/media:group/yt:videoid}"
                 frameborder="0"/>
-            <p><xsl:value-of select="$entry/atom:title"/></p>
+            <h5><xsl:value-of select="$entry/atom:title"/></h5>
             </div>
         </div>
     </xsl:template>

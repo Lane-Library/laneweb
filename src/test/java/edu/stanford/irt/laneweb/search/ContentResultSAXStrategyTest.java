@@ -51,7 +51,8 @@ public class ContentResultSAXStrategyTest {
         expect(this.searchResult.getResourceResult()).andReturn(this.resourceResult);
         expect(this.searchResult.getScore()).andReturn(1);
         Capture<Attributes> attributesCapture = new Capture<Attributes>();
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT), capture(attributesCapture));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT),
+                capture(attributesCapture));
         expect(this.resourceResult.getId()).andReturn(Resource.RESOURCE_ID);
         recordElement(Resource.RESOURCE_ID);
         expect(this.resourceResult.getDescription()).andReturn(Resource.RESOURCE_NAME);
@@ -69,18 +70,9 @@ public class ContentResultSAXStrategyTest {
         expect(this.contentResult.getDescription()).andReturn(Resource.DESCRIPTION);
         recordElement(Resource.DESCRIPTION);
         expect(this.contentResult.getAuthor()).andReturn(null);
-        expect(this.contentResult.getPublicationDate()).andReturn("");
-        expect(this.contentResult.getPublicationTitle()).andReturn(Resource.PUBLICATION_TITLE);
-        recordElement(Resource.PUBLICATION_TITLE);
-        expect(this.contentResult.getPublicationVolume()).andReturn(Resource.PUBLICATION_VOLUME);
-        recordElement(Resource.PUBLICATION_VOLUME);
-        expect(this.contentResult.getPublicationIssue()).andReturn(Resource.PUBLICATION_ISSUE);
-        recordElement(Resource.PUBLICATION_ISSUE);
-        expect(this.contentResult.getPages()).andReturn(Resource.PAGES);
-        recordElement(Resource.PAGES);
         expect(this.contentResult.getURL()).andReturn(Resource.URL);
         recordElement(Resource.URL);
-        expect(this.searchResult.getPublicationText()).andReturn(Resource.PUBLICATION_TEXT);
+        expect(this.contentResult.getPublicationText()).andReturn(Resource.PUBLICATION_TEXT);
         recordElement(Resource.PUBLICATION_TEXT);
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.RESULT, Resource.RESULT);
         replay(this.searchResult, this.xmlConsumer, this.contentResult, this.resourceResult);
@@ -95,7 +87,8 @@ public class ContentResultSAXStrategyTest {
         expect(this.searchResult.getContentResult()).andReturn(this.contentResult);
         expect(this.searchResult.getResourceResult()).andReturn(this.resourceResult);
         expect(this.searchResult.getScore()).andReturn(1);
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT),
+                isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.searchResult, this.xmlConsumer, this.contentResult, this.resourceResult);
         try {

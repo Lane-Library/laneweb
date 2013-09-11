@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-09-09" version="2.1.26" description="2.1.26 bug fix release">
+            <action date="2013-09-05" dev="olgary" issue="90914" type="update">
+                youtubeAtom2Html.xsl, youtubeAtom2Html-list.xsl
+            </action>
+            <action date="2013-09-05" dev="ceyates" issue="90910" type="remove">
+                remove Jackson Library login
+            </action>
+            <action date="2013-08-31" dev="ceyates" issue="90697" type="fix">
+                lack of 856 ^z in catalog can cause page not found errors in eresources
+            </action>
+            <action date="2013-08-30" dev="alainb" issue="90640" type="fix">
+                Feedback-suggestion: persistent login problem?
+            </action>
+            <action date="2013-09-04" dev="ryanmax" issue="87142" type="update">
+                progress bar overlaps search terms
+            </action>
+            <action date="2013-08-29" dev="ceyates" issue="50369" type="add">
+                dynamically add dashes in phone fields
+            </action>
+        </release>
         <release date="2013-08-26" version="2.1.25" description="2.1.25 bug fix release">
             <action date="2013-08-23" dev="olgary" issue="90321" type="update">
                 update laneclasses.xsl, laneclasses-list.xsl - new layout, no expandees

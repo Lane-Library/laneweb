@@ -44,13 +44,8 @@
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
         class="edu.stanford.irt.laneweb.search.ResultSAXStrategy"/>
     
-    
     <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"
-        class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy">
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
-        </constructor-arg>
-    </bean>
+        class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
     
     <bean id="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         class="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"

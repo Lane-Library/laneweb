@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +37,6 @@ public abstract class AbstractPagingSearchResultGenerator extends AbstractSearch
         if (query != null && !query.isEmpty()) {
             results = getSearchResults(query);
             Collections.sort(results);
-            removeDuplicates(results);
         } else {
             results = Collections.emptyList();
         }
@@ -47,18 +45,4 @@ public abstract class AbstractPagingSearchResultGenerator extends AbstractSearch
     }
 
     protected abstract List<SearchResult> getSearchResults(String query);
-
-    // de-duplicate results (remove scopus articles when pubmed version present)
-    // TODO: find a more robust method of doing this.
-    private void removeDuplicates(final List<SearchResult> results) {
-        SearchResult previous = null;
-        for (Iterator<SearchResult> it = results.iterator(); it.hasNext();) {
-            SearchResult next = it.next();
-            if (previous != null && next.equals(previous)) {
-                it.remove();
-            } else {
-                previous = next;
-            }
-        }
-    }
 }
