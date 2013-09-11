@@ -562,7 +562,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.9-SNAPSHOT</version>
+            <version>1.7.9</version>
         </dependency>
         <dependency>
             <artifactId>search-lane</artifactId>
