@@ -17,6 +17,8 @@ public class EzproxyServersWriter {
 
     private static final byte[] HJ = { 'H', 'J', ' ' };
 
+    private static final String UNION = "union ";
+
     private static final String SQL = "WITH HOSTS AS " + "  ( SELECT DISTINCT LINK AS HOST "
             + "  FROM LMLDB.ELINK_INDEX " + "  WHERE ELINK_INDEX.RECORD_TYPE = 'A' "
             + "  AND URL_HOST NOT LIKE '%.stanford.edu%' "
@@ -52,8 +54,6 @@ public class EzproxyServersWriter {
     private static final byte[] T = { 'T', ' ' };
 
     private static final byte[] U = { 'U', ' ' };
-
-    private static final String UNION = "union ";
 
     private static final String UTF8 = "UTF-8";
     static {
