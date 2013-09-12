@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Lane Medical Library &amp; Knowledge Management Center - Stanford
-            University School of Medicine</title>
+        <title>Lane Medical Library - Stanford University School of Medicine</title>
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print"/>
