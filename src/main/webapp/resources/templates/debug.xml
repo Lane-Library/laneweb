@@ -218,7 +218,7 @@
                                 <a href="/help/index.html"
                                     >How To</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="cocoon://content/includes/leftmenu-helpshort.html">
+                                    href="cocoon://content/includes/leftmenu-help.html">
                                     <xi:fallback/>
                                 </xi:include>
                             </li>

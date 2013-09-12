@@ -1,9 +1,11 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.junit.Assert.*;
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertFalse;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,26 +14,25 @@ import org.junit.Test;
 
 import edu.stanford.irt.search.Result;
 
-
 public class ScopusDeduplicatorTest {
-    
-    private ScopusDeduplicator deduplicator;
-    
-    private ContentResultSearchResult scopusResult;
-    
-    private ContentResultSearchResult otherResult;
-    
+
     private ContentResultSearchResult anotherResult;
-    
+
+    private ScopusDeduplicator deduplicator;
+
+    private Result duplicateResource;
+
     private ContentResultSearchResult duplicateResult;
-    
-    private Set<ContentResultSearchResult> searchResults;
 
     private Result otherResource;
-    
+
+    private ContentResultSearchResult otherResult;
+
     private Result scopusResource;
-    
-    private Result duplicateResource;
+
+    private ContentResultSearchResult scopusResult;
+
+    private Set<ContentResultSearchResult> searchResults;
 
     @Before
     public void setUp() throws Exception {
@@ -63,10 +64,12 @@ public class ScopusDeduplicatorTest {
         expect(this.otherResult.getSortTitle()).andReturn("other title").times(0, 2);
         expect(this.anotherResult.getSortTitle()).andReturn("other title").times(0, 2);
         expect(this.duplicateResult.getSortTitle()).andReturn("title");
-        replay(this.anotherResult, this.duplicateResult, this.otherResult, this.otherResource, this.scopusResult, this.scopusResource, this.duplicateResource);
+        replay(this.anotherResult, this.duplicateResult, this.otherResult, this.otherResource, this.scopusResult,
+                this.scopusResource, this.duplicateResource);
         this.deduplicator.removeDuplicates(this.searchResults);
         assertFalse(this.searchResults.contains(this.scopusResult));
-        verify(this.anotherResult, this.otherResource, this.scopusResource, this.duplicateResource, this.otherResult, this.scopusResult, this.duplicateResult);
+        verify(this.anotherResult, this.otherResource, this.scopusResource, this.duplicateResource, this.otherResult,
+                this.scopusResult, this.duplicateResult);
     }
 
     @Test
@@ -79,9 +82,11 @@ public class ScopusDeduplicatorTest {
         expect(this.otherResource.getId()).andReturn("other").atLeastOnce();
         expect(this.duplicateResult.getResourceResult()).andReturn(this.duplicateResource).atLeastOnce();
         expect(this.duplicateResource.getId()).andReturn("duplicate").atLeastOnce();
-        replay(this.anotherResult, this.duplicateResult, this.otherResult, this.otherResource, this.scopusResult, this.scopusResource, this.duplicateResource);
+        replay(this.anotherResult, this.duplicateResult, this.otherResult, this.otherResource, this.scopusResult,
+                this.scopusResource, this.duplicateResource);
         this.deduplicator.removeDuplicates(this.searchResults);
         assertFalse(this.searchResults.contains(this.scopusResult));
-        verify(this.anotherResult, this.otherResource, this.scopusResource, this.duplicateResource, this.otherResult, this.scopusResult, this.duplicateResult);
+        verify(this.anotherResult, this.otherResource, this.scopusResource, this.duplicateResource, this.otherResult,
+                this.scopusResult, this.duplicateResult);
     }
 }
