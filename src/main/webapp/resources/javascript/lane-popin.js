@@ -19,8 +19,8 @@
                 if (elms.item(i) !== null) {
                     if (el.get('id') === elms.item(i).get('id') && i <= activeEl) {
                         activeEl = i;
-                        elms.item(i).get('parentNode').setStyle('display','block');
-                        elms.item(i).setStyle('display','inline');
+                        elms.item(i).get('parentNode').addClass('active');
+                        elms.item(i).addClass('active');
                         if(searchResults){
                             if (Y.UA.ie <= 7){
                                 searchResults.setStyle('marginTop','0');
@@ -36,7 +36,7 @@
                             searchFacets.setStyle('marginTop','-28px');
                         }
                     } else if (i > activeEl) {
-                        elms.item(i).setStyle('display','none');
+                        elms.item(i).removeClass('active');
                     }
                 }
             }

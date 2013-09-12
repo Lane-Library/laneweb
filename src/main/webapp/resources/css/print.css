@@ -1,0 +1,19 @@
+#laneNav,#libraryContact,#login,#banner,#highlightedResources,#laneFooter,#searchFormContainer,#popInContent.active,.leftColumn,.rightColumn {
+    display: none;
+}
+
+.lwSearchResults {
+    position: relative;
+    left: -100px;
+    width: 800px;
+}
+
+.hvrTrig,.hoverTrigger {
+    background-color: #F2F3ED;
+    padding: 10px;
+    border: 2px solid
+}
+
+.hvrTarg,.hvrTrig .hvrTarg,.hoverTrigger .hvrTarg {
+    display: block
+}
