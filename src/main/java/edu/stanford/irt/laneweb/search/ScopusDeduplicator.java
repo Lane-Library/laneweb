@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class ScopusDeduplicator {
 
-    public void removeDuplicates(final Set<ContentResultSearchResult> searchResults) {
+    public void removeDuplicates(final Collection<ContentResultSearchResult> searchResults) {
         List<ContentResultSearchResult> scopusResults = new LinkedList<ContentResultSearchResult>();
         for (ContentResultSearchResult searchResult : searchResults) {
             if ("scopus".equals(searchResult.getResourceResult().getId())) {
@@ -21,7 +21,7 @@ public class ScopusDeduplicator {
     }
 
     private boolean isDuplicate(final ContentResultSearchResult scopusResult,
-            final Set<ContentResultSearchResult> searchResults) {
+            final Collection<ContentResultSearchResult> searchResults) {
         boolean isDuplicate = false;
         String scopusSortTitle = scopusResult.getSortTitle();
         for (ContentResultSearchResult searchResult : searchResults) {

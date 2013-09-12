@@ -30,7 +30,7 @@ public class ContentResultSearchResult implements SearchResult {
                 ContentResultSearchResult other = (ContentResultSearchResult) o;
                 value = this.contentResult.compareTo(other.getContentResult());
             } else if (value == 0) {
-                //arbitrarily rank eresource results higher
+                // arbitrarily rank eresource results higher
                 value = 1;
             }
         }
@@ -43,7 +43,7 @@ public class ContentResultSearchResult implements SearchResult {
         if (object instanceof ContentResultSearchResult) {
             ContentResultSearchResult other = (ContentResultSearchResult) object;
             if (other.hashCode() == hashCode()) {
-                equals = compareTo(other) == 0;
+                equals = compareToIgnoreScore(other) == 0;
             }
         }
         return equals;
@@ -72,5 +72,13 @@ public class ContentResultSearchResult implements SearchResult {
     @Override
     public int hashCode() {
         return getSortTitle().hashCode();
+    }
+
+    private int compareToIgnoreScore(final ContentResultSearchResult other) {
+        int value = getSortTitle().compareTo(other.getSortTitle());
+        if (value == 0) {
+            value = this.contentResult.compareTo(other.getContentResult());
+        }
+        return value;
     }
 }
