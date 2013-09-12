@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-09-12" version="2.1.27" description="2.1.27 emergency release">
+            <action date="2013-09-12" dev="ryanmax" issue="91257" type="fix">91257
+                Feedback: Lane Mobile javascript errors
+            </action>
+        </release>
         <release date="2013-09-09" version="2.1.26" description="2.1.26 bug fix release">
             <action date="2013-09-05" dev="olgary" issue="90914" type="update">
                 youtubeAtom2Html.xsl, youtubeAtom2Html-list.xsl
