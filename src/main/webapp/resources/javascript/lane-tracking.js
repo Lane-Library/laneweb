@@ -66,6 +66,11 @@
                         action = document.location.pathname;
                     }
                 }
+                else if ("dragend" == event.type && link.get('href').match('^javascript:.*bookmarklet.*')) {
+                    category = "lane:bookmarkletDrag";
+                    action = link.get('href');
+                    label = link.get('title');
+                }
                 return {
                     category: category,
                     action: action,
@@ -226,6 +231,10 @@
                         if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter") || link.ancestor("#qlinks") || link.ancestor("#topResources") || link.ancestor(".banner-content")) {
                             return true;
                         }
+                        // bookmarklet drag
+                        if ("dragend" == event.type && link.get('href').match('^javascript:void.*bookmarklet.*')) {
+                            return true;
+                        }
                     }
                     return false;
                 },
@@ -285,7 +294,7 @@
                     }
                     return false;
                 },
-                trackClick: function(event) {
+                trackEvent: function(event) {
                     var trackingData;
                     if (this.isTrackableAsPageview(event)) {
                         trackingData = getPageviewTrackingData(event);
@@ -327,7 +336,7 @@
             external: null
         });
         Y.on('click', function(e) {
-            Tracker.trackClick(e);
+            Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
             if (Y.UA.webkit && (Tracker.isTrackableAsPageview(e) || Tracker.isTrackableAsEvent(e))) {
                     var t = e.target, f;
@@ -349,6 +358,11 @@
                     }
             }
         }, document);
+
+        // limit dragend listener to bookmarklet links
+        Y.on('dragend', function(e) {
+            Tracker.trackEvent(e);
+        }, 'a[href*=bookmarklet]');
         
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
         if (Lane.BookmarksWidget) {
