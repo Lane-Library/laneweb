@@ -560,14 +560,9 @@
             <version>9.4.0.6</version>
         </dependency>
         <dependency>
-            <artifactId>search-core</artifactId>
-            <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.9</version>
-        </dependency>
-        <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.48-SNAPSHOT</version>
+            <version>1.7.48</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
