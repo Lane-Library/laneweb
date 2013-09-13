@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ul xmlns="http://www.w3.org/1999/xhtml" id="login">
+   <li>
+      <a href="/secure/login.html">MyLane login</a>
+   </li>
+</ul>

@@ -1,0 +1,21 @@
+<ul id="login" xmlns="http://www.w3.org/1999/xhtml">
+    <li>
+        <a href="/secure/login.html">MyLane login</a>
+    </li>
+    <li id="favorites">
+        <a href="/favorites.html">My Bookmarks</a>
+        <?laneweb bookmarks?>
+    </li>
+    <li>
+        <a href="/myaccounts.html">MyLane</a>
+    </li>
+    <li>
+        <a id="logout" href="/logout">Logout</a>
+    </li>
+    <li>
+        <a href="?proxy-links=false">Guest Access</a>
+    </li>
+    <li>
+        <a href="?proxy-links=true">Stanford Access</a>
+    </li>
+</ul>
