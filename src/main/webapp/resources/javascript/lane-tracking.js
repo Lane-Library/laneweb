@@ -66,8 +66,14 @@
                         action = document.location.pathname;
                     }
                 }
-                else if ("dragend" == event.type && link.get('href').match('^javascript:.*bookmarklet.*')) {
-                    category = "lane:bookmarkletDrag";
+                else if (link.get('href').match('^javascript:.*bookmarklet.*')) {
+                    category = "lane:bookmarklet";
+                    if ("dragend" == event.type) {
+                        category += "Drag";
+                    }
+                    else if ("contextmenu" == event.type) {
+                        category += "RightClick";
+                    }
                     action = link.get('href');
                     label = link.get('title');
                 }
@@ -231,8 +237,8 @@
                         if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter") || link.ancestor("#qlinks") || link.ancestor("#topResources") || link.ancestor(".banner-content")) {
                             return true;
                         }
-                        // bookmarklet drag
-                        if ("dragend" == event.type && link.get('href').match('^javascript:void.*bookmarklet.*')) {
+                        // bookmarklet drag or right-click
+                        if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" == event.type || "contextmenu" == event.type) ) {
                             return true;
                         }
                     }
@@ -361,6 +367,11 @@
 
         // limit dragend listener to bookmarklet links
         Y.on('dragend', function(e) {
+            Tracker.trackEvent(e);
+        }, 'a[href*=bookmarklet]');
+        
+        // limit right-click listener to bookmarklet links
+        Y.on('contextmenu', function(e) {
             Tracker.trackEvent(e);
         }, 'a[href*=bookmarklet]');
         
