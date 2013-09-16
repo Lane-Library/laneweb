@@ -66,6 +66,17 @@
                         action = document.location.pathname;
                     }
                 }
+                else if (link.get('href').match('^javascript:.*bookmarklet.*')) {
+                    category = "lane:bookmarklet";
+                    if ("dragend" == event.type) {
+                        category += "Drag";
+                    }
+                    else if ("contextmenu" == event.type) {
+                        category += "RightClick";
+                    }
+                    action = link.get('href');
+                    label = link.get('title');
+                }
                 return {
                     category: category,
                     action: action,
@@ -155,14 +166,6 @@
                 getTrackedTitle: function(node) {
                     //if there is a title attribute, use that.
                     var title = node.get('title'), img, i, rel, relTokens;
-                    //if there is rel="popup .." then create a title from it.
-                    rel = node.get('rel');
-                    if (rel && rel.indexOf('popup') === 0) {
-                        relTokens = rel.split(' ');
-                        if (relTokens[1] == 'local') {
-                            title = 'YUI Pop-up [local]';
-                        }
-                    }
                     //next try alt attribute.
                     if (!title) {
                         title = node.get('alt');
@@ -203,6 +206,14 @@
                     } else if (node.ancestor("#laneNav")) {
                         title = "laneNav: " + title;
                     }
+                    //if there is rel="popup .." then add "pop-up" to the title
+                    rel = node.get('rel');
+                    if (rel && rel.indexOf('popup') === 0) {
+                        relTokens = rel.split(' ');
+                        if (relTokens[1] == 'local') {
+                            title = 'YUI Pop-up [local]: ' + title;
+                        }
+                    }
                     return title;
                 },
                 isTrackableAsEvent: function(event) {
@@ -224,6 +235,10 @@
                         }
                         // navigation click events
                         if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter") || link.ancestor("#qlinks") || link.ancestor("#topResources") || link.ancestor(".banner-content")) {
+                            return true;
+                        }
+                        // bookmarklet drag or right-click
+                        if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" == event.type || "contextmenu" == event.type) ) {
                             return true;
                         }
                     }
@@ -285,7 +300,7 @@
                     }
                     return false;
                 },
-                trackClick: function(event) {
+                trackEvent: function(event) {
                     var trackingData;
                     if (this.isTrackableAsPageview(event)) {
                         trackingData = getPageviewTrackingData(event);
@@ -327,7 +342,7 @@
             external: null
         });
         Y.on('click', function(e) {
-            Tracker.trackClick(e);
+            Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
             if (Y.UA.webkit && (Tracker.isTrackableAsPageview(e) || Tracker.isTrackableAsEvent(e))) {
                     var t = e.target, f;
@@ -349,6 +364,16 @@
                     }
             }
         }, document);
+
+        // limit dragend listener to bookmarklet links
+        Y.on('dragend', function(e) {
+            Tracker.trackEvent(e);
+        }, 'a[href*=bookmarklet]');
+        
+        // limit right-click listener to bookmarklet links
+        Y.on('contextmenu', function(e) {
+            Tracker.trackEvent(e);
+        }, 'a[href*=bookmarklet]');
         
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
         if (Lane.BookmarksWidget) {

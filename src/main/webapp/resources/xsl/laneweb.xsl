@@ -274,13 +274,16 @@
 
     <!-- combines the template title value with the value of the title of the source document -->
     <xsl:template match="h:title">
+        <xsl:variable name="source-doc-title">
+            <xsl:value-of select="replace($source-doc/h:head/h:title,'\{search-terms\}',$regex-query)"/>
+        </xsl:variable>
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="$path = '/index.html' or $path = '/m/index.html'">
                     <xsl:value-of select="."/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="concat($source-doc/h:head/h:title, ' - ', .)"/>
+                    <xsl:value-of select="concat($source-doc-title, ' - ', .)"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:copy>

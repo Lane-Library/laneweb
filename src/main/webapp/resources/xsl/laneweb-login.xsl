@@ -64,19 +64,19 @@
                 <a>
                     <xsl:attribute name="href">
                         <xsl:choose>
-                            <xsl:when
-                                test="string-length($query-string) = 0 or $query-string = 'proxy-links=true'">
+                            <xsl:when test="string-length($query-string) = 0">
                                 <xsl:text>?proxy-links=false</xsl:text>
                             </xsl:when>
-                            <xsl:when test="ends-with($query-string, 'proxy-links=true')">
-                                <xsl:text>?</xsl:text>
-                                <xsl:value-of
-                                    select="substring-before($query-string,'proxy-links=true')"/>
-                                <xsl:text>proxy-links=false</xsl:text>
-                            </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of
-                                    select="concat('?',$query-string,'&amp;proxy-links=false')"/>
+                                <xsl:text>?</xsl:text>
+                                <xsl:analyze-string select="$query-string" regex="(.*)(proxy-links=true)(.*)">
+                                    <xsl:matching-substring>
+                                        <xsl:value-of select="concat(regex-group(1), 'proxy-links=false', regex-group(3))"/>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="concat($query-string, '&amp;proxy-links=false')"/>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:attribute>
@@ -93,19 +93,19 @@
                 <a>
                     <xsl:attribute name="href">
                         <xsl:choose>
-                            <xsl:when
-                                test="string-length($query-string) = 0 or $query-string = 'proxy-links=false'">
+                            <xsl:when test="string-length($query-string) = 0">
                                 <xsl:text>?proxy-links=true</xsl:text>
                             </xsl:when>
-                            <xsl:when test="ends-with($query-string, 'proxy-links=false')">
-                                <xsl:text>?</xsl:text>
-                                <xsl:value-of
-                                    select="substring-before($query-string,'proxy-links=false')"/>
-                                <xsl:text>proxy-links=true</xsl:text>
-                            </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of
-                                    select="concat('?',$query-string,'&amp;proxy-links=true')"/>
+                                <xsl:text>?</xsl:text>
+                                <xsl:analyze-string select="$query-string" regex="(.*)(proxy-links=false)(.*)">
+                                    <xsl:matching-substring>
+                                        <xsl:value-of select="concat(regex-group(1), 'proxy-links=true', regex-group(3))"/>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="concat($query-string, '&amp;proxy-links=true')"/>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:attribute>

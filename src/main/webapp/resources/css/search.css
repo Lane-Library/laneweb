@@ -7,6 +7,9 @@
 .tooltips, #search-content-counts, #findIt, #spellCheck, #queryMapping, #showPubMedStrategies {
     display:none;
 }
+#findIt.active, #spellCheck.active, #queryMapping.active {
+    display:inline;
+}
 #queryMapping span {
     padding-right:25px;
 }
@@ -76,6 +79,9 @@
     color:#FF6600;
     padding-right:25px;
     padding-left:10px;
+}
+#popInContent.active {
+    display: block;
 }
 .hitCountPopIn#popInContent {
     margin-left:305px;

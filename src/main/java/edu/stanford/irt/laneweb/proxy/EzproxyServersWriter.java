@@ -19,31 +19,35 @@ public class EzproxyServersWriter {
 
     private static final String UNION = "union ";
 
-    private static final String SQL =
-        "with urls as ( "
-        + "select url from link, version "
-        + "where link.version_id = version.version_id "
-        + "and proxy = 'T' "
-        + "and url like 'http%' "
-        + "and url not like '%.stanford.edu%' "
-        + UNION
-        + "select url from h_link, h_version "
-        + "where h_link.version_id = h_version.version_id "
-        + "and proxy = 'T' "
-        + "and url like 'http%' "
-        + "and url not like '%.stanford.edu%' "
-        + ") "
-        + "select substr(url, 0, instr(url,'/',1,3)-1) as server from urls "
-        + "where url like 'https://%' and instr(url,'/',1,3) > 0 "
-        + UNION
-        + "select url as server from urls "
-        + "where url like 'https://%' and instr(url,'/',1,3) = 0 "
-        + UNION
-        + "select substr(url, 0, instr(url,'/',1,3)-1) as server from urls "
-        + "where url like 'http://%' and instr(url,'/',1,3) > 0 "
-        + UNION 
-        + "select url as server from urls "
-        + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
+    private static final String SQL = "WITH HOSTS AS " + "  ( SELECT DISTINCT LINK AS HOST "
+            + "  FROM LMLDB.ELINK_INDEX " + "  WHERE ELINK_INDEX.RECORD_TYPE = 'A' "
+            + "  AND URL_HOST NOT LIKE '%.stanford.edu%' "
+            + UNION
+            + "  SELECT DISTINCT LINK AS HOST "
+            + "  FROM LMLDB.ELINK_INDEX, "
+            + "    LMLDB.MFHD_MASTER "
+            + "  WHERE ELINK_INDEX.RECORD_ID = MFHD_MASTER.MFHD_ID "
+            + "  AND ELINK_INDEX.RECORD_TYPE = 'M' "
+            + "  AND URL_HOST NOT LIKE '%.stanford.edu%' "
+            + "  AND MFHD_MASTER.MFHD_ID NOT IN "
+            + "    (SELECT MFHD_ID "
+            + "    FROM LMLDB.MFHD_DATA "
+            + "    WHERE LOWER(RECORD_SEGMENT) LIKE '%, noproxy%' "
+            + "    ) "
+            + "  ) "
+            + "SELECT SUBSTR(HOST, 0, instr(HOST,'/',1,3)-1) "
+            + "FROM HOSTS "
+            + "WHERE HOST LIKE 'https://%' "
+            + "AND instr(HOST,'/',1,3) > 0 "
+            + UNION
+            + "SELECT HOST FROM HOSTS WHERE HOST LIKE 'https://%' AND instr(HOST,'/',1,3) = 0 "
+            + UNION
+            + "SELECT SUBSTR(HOST, 0, instr(HOST,'/',1,3)-1) "
+            + "FROM HOSTS "
+            + "WHERE HOST LIKE 'http://%' "
+            + "AND instr(HOST,'/',1,3) > 0 "
+            + UNION
+            + "SELECT HOST FROM HOSTS WHERE HOST LIKE 'http://%' AND INSTR(HOST,'/',1,3) = 0";
 
     private static final byte[] SUL;
 
@@ -52,7 +56,6 @@ public class EzproxyServersWriter {
     private static final byte[] U = { 'U', ' ' };
 
     private static final String UTF8 = "UTF-8";
-
     static {
         try {
             SUL = "T jenson.stanford.edu\nU http://jenson.stanford.edu\nHJ jenson.stanford.edu\n\nT socrates.stanford.edu\nU http://socrates.stanford.edu\nHJ socrates.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
