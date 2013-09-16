@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2013-09-12" version="2.1.27" description="2.1.28 bug fix release">
+        <release date="2013-09-12" version="2.1.28" description="2.1.28 bug fix release">
             <action date="2013-09-13" dev="ceyates" issue="91240" type="fix">
                 urls with multiple proxy-link parameters can be generated
             </action>
