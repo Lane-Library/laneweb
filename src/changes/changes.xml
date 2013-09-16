@@ -8,7 +8,24 @@
     </properties>
     <body>
         <release date="2013-09-12" version="2.1.27" description="2.1.27 emergency release">
-            <action date="2013-09-12" dev="ryanmax" issue="91257" type="fix">91257
+            <action date="2013-09-13" dev="ceyates" issue="91240" type="fix">
+                urls with multiple proxy-link parameters can be generated
+            </action>
+            <action date="2013-09-11" dev="ryanmax" issue="91205" type="update">
+                proxy all hosts found in catalog instead of just eresources/history subsets
+            </action>
+            <action date="2013-09-16" dev="ryanmax" issue="91159" type="add">
+                report GA Event to track in-context help bookmarklet drag &amp; drop
+            </action>
+            <action date="2013-09-12" dev="olgary" issue="91138" type="update">
+                template.xml, debug.xml - update a link to dropdown menu
+            </action>
+            <action date="2013-09-12" dev="ryanmax" issue="89510" type="add">
+                Feedback-suggestion:  Create a link to print an abstract
+            </action>
+        </release>
+        <release date="2013-09-12" version="2.1.27" description="2.1.27 emergency release">
+            <action date="2013-09-12" dev="ryanmax" issue="91257" type="fix">
                 Feedback: Lane Mobile javascript errors
             </action>
         </release>
