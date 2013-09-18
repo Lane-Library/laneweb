@@ -7,12 +7,14 @@ import java.util.List;
 public class ScopusDeduplicator {
 
     public void removeDuplicates(final Collection<ContentResultSearchResult> searchResults) {
+        //create a list of scopus results
         List<ContentResultSearchResult> scopusResults = new LinkedList<ContentResultSearchResult>();
         for (ContentResultSearchResult searchResult : searchResults) {
             if ("scopus".equals(searchResult.getResourceResult().getId())) {
                 scopusResults.add(searchResult);
             }
         }
+        // go through the list of scopus results and remove ones that are duplicates
         for (ContentResultSearchResult scopusResult : scopusResults) {
             if (isDuplicate(scopusResult, searchResults)) {
                 searchResults.remove(scopusResult);
@@ -23,10 +25,9 @@ public class ScopusDeduplicator {
     private boolean isDuplicate(final ContentResultSearchResult scopusResult,
             final Collection<ContentResultSearchResult> searchResults) {
         boolean isDuplicate = false;
-        String scopusSortTitle = scopusResult.getSortTitle();
         for (ContentResultSearchResult searchResult : searchResults) {
             if (!"scopus".equals(searchResult.getResourceResult().getId())
-                    && scopusSortTitle.equals(searchResult.getSortTitle())) {
+                    && scopusResult.getContentResult().isSameArticle(searchResult.getContentResult())) {
                 isDuplicate = true;
                 break;
             }
