@@ -729,7 +729,7 @@
         <dependency>
         	<groupId>edu.stanford.irt.search</groupId>
         	<artifactId>search-core</artifactId>
-        	<version>1.7.11-SNAPSHOT</version>
+        	<version>1.7.11</version>
         </dependency>
     </dependencies>
 </project>
