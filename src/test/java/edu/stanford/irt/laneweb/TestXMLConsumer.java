@@ -20,6 +20,7 @@ public class TestXMLConsumer extends TransformerSerializer {
         PROPS = new Properties();
         PROPS.setProperty("method", "xml");
         PROPS.setProperty("encoding", "UTF-8");
+        PROPS.setProperty("indent", "yes");
     }
     
     private ByteArrayOutputStream baos = new ByteArrayOutputStream();
