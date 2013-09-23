@@ -119,6 +119,12 @@
                 <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match type="regex-parameter" pattern="flickr">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:generate type="file" src="cocoon://apps/search/flickr.xml"/>
+                <map:transform type="joost" src="resources/xsl/flickr.stx"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <!-- TODO is this error handling ever invoked? -->
             <map:match pattern="search.html" type="wildcard">
                 <map:generate type="html" src="{content-base}/error.html"/>

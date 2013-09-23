@@ -1,0 +1,20 @@
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    xmlns="http://www.w3.org/1999/xhtml"
+    version="1.0"
+    pass-through="all">
+    
+    <stx:template match="rsp">
+        <html><head><title>flickr photos</title></head><body><stx:process-children/></body></html>
+    </stx:template>
+    
+    <stx:template match="photos">
+        <ul>
+            <stx:process-children/>
+        </ul>
+    </stx:template>
+    
+    <stx:template match="photo">
+        <li style="float:left"><a href="http://farm{@farm}.staticflickr.com/{@server}/{@id}_{@secret}_b.jpg"><img src="http://farm{@farm}.staticflickr.com/{@server}/{@id}_{@secret}_t.jpg" alt="photo"/></a></li>
+    </stx:template>
+    
+</stx:transform>
