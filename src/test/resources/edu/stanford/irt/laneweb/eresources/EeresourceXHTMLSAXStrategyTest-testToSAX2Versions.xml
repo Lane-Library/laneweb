@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <test>
    <div>
-      <a class="primaryLink" href="url" title="title">title</a> summary holdings, dates, publisher, description, instruction </div>
+      <a class="primaryLink" href="url" title="title">title</a> summary holdings, dates, publisher, description, instruction</div>
    <div>
       <a href="url" title="label">summary holdings, dates description</a> instruction publisher</div>
    <div class="moreResults">
