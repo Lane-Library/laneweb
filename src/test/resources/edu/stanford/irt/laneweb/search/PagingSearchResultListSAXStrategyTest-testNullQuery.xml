@@ -1,1 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><resources xmlns="http://lane.stanford.edu/resources/1.0" size="0" start="0" length="0" page="0" pages="1"><contentHitCounts/></resources>
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns="http://lane.stanford.edu/resources/1.0"
+           size="0"
+           start="0"
+           length="0"
+           page="0"
+           pages="1">
+   <contentHitCounts/>
+</resources>

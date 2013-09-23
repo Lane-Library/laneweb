@@ -26,8 +26,6 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
 
     private static final String HREF = "href";
 
-    private static final String LI = "li";
-
     private static final int MORE_RESULTS_LIMIT = 10;
 
     private static final String PUBMED = "PubMed";
@@ -41,18 +39,19 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
         ContentResult contentResult = result.getContentResult();
         Result resourceResult = result.getResourceResult();
         try {
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
             String resourceName = resourceResult.getDescription();
             int resourceHits = Integer.parseInt(resourceResult.getHits());
             if (resourceName.indexOf(PUBMED) == 0) {
                 resourceName = PUBMED;
             }
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "primaryLink");
             atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, contentResult.getURL());
             XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
             XMLUtils.data(xmlConsumer, contentResult.getTitle());
             XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             // TODO: pubAuthor conditional on search source
             String author = contentResult.getAuthor();
             if (author != null) {
@@ -126,14 +125,13 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             String description = contentResult.getDescription();
             if (description != null && description.length() > 0) {
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "hvrTarg");
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
                 XMLUtils.data(xmlConsumer, description);
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
             }
         } catch (SAXException e) {
             throw new LanewebException(e);

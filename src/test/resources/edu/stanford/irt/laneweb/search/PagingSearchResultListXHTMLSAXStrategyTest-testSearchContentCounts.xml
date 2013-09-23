@@ -1,1 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml"><head><title>search results</title></head><body><ul class="lwSearchResults"><li class="r-1"/></ul><div id="search-content-counts"> <span id="pubmed"><a href="url">hits</a></span></div><span id="showPubMedStrategies">true</span></body></html>
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>search results</title>
+   </head>
+   <body>
+      <ul class="lwSearchResults">
+         <li/>
+      </ul>
+      <div id="search-content-counts"> <span id="pubmed">
+            <a href="url">hits</a>
+         </span>
+      </div>
+      <span id="showPubMedStrategies">true</span>
+   </body>
+</html>
