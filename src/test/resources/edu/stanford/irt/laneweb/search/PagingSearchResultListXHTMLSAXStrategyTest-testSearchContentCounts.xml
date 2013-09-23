@@ -5,7 +5,7 @@
    </head>
    <body>
       <ul class="lwSearchResults">
-         <li class="r-1"/>
+         <li/>
       </ul>
       <div id="search-content-counts"> <span id="pubmed">
             <a href="url">hits</a>
