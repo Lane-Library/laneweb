@@ -30,7 +30,9 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, eresource.getTitle());
             maybeCreateElement(xmlConsumer, DESCRIPTION, eresource.getDescription());
             for (Version version : eresource.getVersions()) {
-                handleVersion(xmlConsumer, version);
+                for (Link link : version.getLinks()) {
+                    handleLink(xmlConsumer, link);
+                }
             }
             XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
         } catch (SAXException e) {
@@ -43,21 +45,10 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", link.getType().toString());
         XMLUtils.startElement(xmlConsumer, NAMESPACE, LINK, atts);
         maybeCreateElement(xmlConsumer, LABEL, link.getLabel());
+        maybeCreateElement(xmlConsumer, "link-text", link.getLinkText());
         maybeCreateElement(xmlConsumer, URL, link.getUrl());
-        maybeCreateElement(xmlConsumer, INSTRUCTION, link.getInstruction());
+        maybeCreateElement(xmlConsumer, "additional-text", link.getAdditionalText());
         XMLUtils.endElement(xmlConsumer, NAMESPACE, LINK);
-    }
-
-    private void handleVersion(final XMLConsumer xmlConsumer, final Version version) throws SAXException {
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, VERSION);
-        maybeCreateElement(xmlConsumer, SUMMARY_HOLDINGS, version.getSummaryHoldings());
-        maybeCreateElement(xmlConsumer, DATES, version.getDates());
-        maybeCreateElement(xmlConsumer, PUBLISHER, version.getPublisher());
-        maybeCreateElement(xmlConsumer, DESCRIPTION, version.getDescription());
-        for (Link link : version.getLinks()) {
-            handleLink(xmlConsumer, link);
-        }
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, VERSION);
     }
 
     private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value)
