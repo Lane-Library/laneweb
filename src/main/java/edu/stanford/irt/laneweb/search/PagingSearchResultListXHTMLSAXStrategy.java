@@ -68,14 +68,13 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             int i = 0;
             for (ListIterator<SearchResult> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 SearchResult result = it.next();
-                    StringBuilder sb = new StringBuilder("r-");
-                    sb.append(start + 1 + i);
                     if (isHvrTrig(result)) {
-                        sb.append(" hvrTrig");
+                        atts = new AttributesImpl();
+                        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "hvrTrig");
+                        XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
+                    } else {
+                        XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
                     }
-                    atts = new AttributesImpl();
-                    atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, sb.toString());
-                    XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
                     this.saxStrategy.toSAX(result, xmlConsumer);
                     XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             }
