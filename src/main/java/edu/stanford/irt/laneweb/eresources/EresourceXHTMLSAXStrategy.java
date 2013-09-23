@@ -79,6 +79,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, title, title);
         XMLUtils.data(xmlConsumer, link.getPrimaryAdditionalText());
         if (LinkType.GETPASSWORD.equals(link.getType())) {
+            XMLUtils.data(xmlConsumer, " ");
             createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);

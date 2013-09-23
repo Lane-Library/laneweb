@@ -47,7 +47,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.link.getUrl()).andReturn("url");
         expect(((Link)this.link).getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getPrimaryAdditionalText()).andReturn(" summary holdings, dates, publisher, description, instruction ");
+        expect(this.link.getPrimaryAdditionalText()).andReturn(" summary holdings, dates, publisher, description, instruction");
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
@@ -71,7 +71,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.link.getUrl()).andReturn("url").times(2);
         expect(((Link)this.link).getType()).andReturn(LinkType.NORMAL).times(3);
-        expect(this.link.getPrimaryAdditionalText()).andReturn(" summary holdings, dates, publisher, description, instruction ");
+        expect(this.link.getPrimaryAdditionalText()).andReturn(" summary holdings, dates, publisher, description, instruction");
         expect(this.link.getLinkText()).andReturn("summary holdings, dates description");
         expect(this.link.getLabel()).andReturn("label");
         expect(this.link.getAdditionalText()).andReturn(" instruction publisher");
@@ -98,7 +98,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.eresource.getTitle()).andReturn("title");
         expect(((Link)this.link).getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.link.getUrl()).andReturn("url");
-        expect(this.link.getPrimaryAdditionalText()).andReturn(" summary holdings, dates, publisher, description, instruction ");
+        expect(this.link.getPrimaryAdditionalText()).andReturn(" summary holdings, dates, publisher, description, instruction");
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
