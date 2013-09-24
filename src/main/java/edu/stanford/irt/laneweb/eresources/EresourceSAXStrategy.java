@@ -45,9 +45,9 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", link.getType().toString());
         XMLUtils.startElement(xmlConsumer, NAMESPACE, LINK, atts);
         maybeCreateElement(xmlConsumer, LABEL, link.getLabel());
-        maybeCreateElement(xmlConsumer, "link-text", link.getLinkText());
+        maybeCreateElement(xmlConsumer, LINK_TEXT, link.getLinkText());
         maybeCreateElement(xmlConsumer, URL, link.getUrl());
-        maybeCreateElement(xmlConsumer, "additional-text", link.getAdditionalText());
+        maybeCreateElement(xmlConsumer, ADDITIONAL_TEXT, link.getAdditionalText());
         XMLUtils.endElement(xmlConsumer, NAMESPACE, LINK);
     }
 
