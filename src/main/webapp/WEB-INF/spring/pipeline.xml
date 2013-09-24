@@ -142,7 +142,7 @@
                 <prop key="doctype-public">-//W3C//DTD XHTML 1.0 Strict//EN</prop>
                 <prop key="doctype-system">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</prop>
                 <prop key="encoding">UTF-8</prop>
-                <prop key="indent">yes</prop>
+                <prop key="indent">no</prop>
                 <prop key="omit-xml-declaration">yes</prop>
             </props>
         </constructor-arg>
@@ -157,7 +157,7 @@
             <props>
                 <prop key="method">xhtml</prop>
                 <prop key="encoding">UTF-8</prop>
-                <prop key="indent">yes</prop>
+                <prop key="indent">no</prop>
                 <prop key="omit-xml-declaration">yes</prop>
             </props>
         </constructor-arg>
