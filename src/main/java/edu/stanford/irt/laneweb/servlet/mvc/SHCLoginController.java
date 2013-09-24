@@ -78,7 +78,7 @@ public class SHCLoginController {
             errorMsg.append(ERROR_MISSING_SUNETID + decryptedUnivid);
         }
         if (errorMsg.length() > 0) {
-            this.log.error(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
+            this.log.info(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
             url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
         }
         response.sendRedirect("https://" + request.getServerName() + request.getContextPath() + url.toString());
