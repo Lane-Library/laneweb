@@ -177,7 +177,6 @@
         </a>
         <xsl:value-of select="s:additional-text"/>
         <xsl:if test="@type = 'getPassword'">
-            <xsl:text> </xsl:text>
             <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
         </xsl:if>
     </xsl:template>

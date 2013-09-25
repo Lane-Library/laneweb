@@ -41,11 +41,13 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         }
         String text = link.getAdditionalText();
         if (text != null && text.length() > 0) {
-            XMLUtils.data(xmlConsumer, " ");
             XMLUtils.data(xmlConsumer, text);
         }
         if (LinkType.GETPASSWORD.equals(link.getType())) {
-            XMLUtils.data(xmlConsumer, " ");
+            if (!first) {
+                //the one getpassword link that is not a first link doesn't have trailing space in additional_text
+                XMLUtils.data(xmlConsumer, " ");
+            }
             createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
         }
         endDiv(xmlConsumer);
