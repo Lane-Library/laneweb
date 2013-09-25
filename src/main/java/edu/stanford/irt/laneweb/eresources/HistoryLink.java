@@ -12,15 +12,19 @@ public class HistoryLink extends Link {
 
     private String linkText;
 
-    public HistoryLink(final String instruction, final String label, final LinkType type, final String url) {
-        super(instruction, label, type, url, null, null);
+    private String instruction;
+
+    public HistoryLink(final String instruction, final String label, final LinkType type, final String url, final boolean isFirstLink) {
+        super(label, type, url, null, null);
+        this.instruction = instruction;
+        this.isFirstLink = isFirstLink;
     }
 
     @Override
     public String getAdditionalText() {
         if (this.additionalText == null) {
             StringBuilder sb = new StringBuilder();
-            if (isFirstLink()) {
+            if (this.isFirstLink) {
                 Version version = getVersion();
                 sb.append(" ");
                 String summaryHoldings = version.getSummaryHoldings();
@@ -33,18 +37,18 @@ public class HistoryLink extends Link {
                 if (sb.length() == 1 && getLabel() != null) {
                     sb.append(getLabel());
                 }
-                if (getInstruction() != null) {
+                if (this.instruction != null) {
                     if (sb.length() > 1) {
                         sb.append(", ");
                     }
-                    sb.append(getInstruction());
+                    sb.append(this.instruction);
                 }
                 if (sb.length() > 1) {
                     sb.append(" ");
                 }
             } else {
-                if (getInstruction() != null) {
-                    sb.append(" ").append(getInstruction());
+                if (this.instruction != null) {
+                    sb.append(" ").append(this.instruction);
                 }
                 if (getVersion().getPublisher() != null) {
                     sb.append(" ").append(getVersion().getPublisher());
@@ -58,7 +62,7 @@ public class HistoryLink extends Link {
     @Override
     public String getLinkText() {
         if (this.linkText == null) {
-            if (isFirstLink()) {
+            if (this.isFirstLink) {
                 this.linkText = getVersion().getEresource().getTitle();
             } else {
                 StringBuilder sb = new StringBuilder();
@@ -87,19 +91,6 @@ public class HistoryLink extends Link {
             }
         }
         return this.linkText;
-    }
-
-    private boolean isFirstLink() {
-        if (this.isFirstLink == null) {
-            Version version = getVersion();
-            if (equals(version.getLinks().iterator().next())
-                    && version.equals(version.getEresource().getVersions().iterator().next())) {
-                this.isFirstLink = Boolean.TRUE;
-            } else {
-                this.isFirstLink = Boolean.FALSE;
-            }
-        }
-        return Boolean.valueOf(this.isFirstLink);
     }
 
     private void maybeAppend(final StringBuilder sb, final String string) {

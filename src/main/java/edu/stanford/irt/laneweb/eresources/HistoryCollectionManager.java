@@ -47,6 +47,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
         int currentEresourceId = -1;
         int currentVersionId = -1;
         int currentLinkId = -1;
+        boolean isFirstLink = true;
         while (rs.next()) {
             int rowEresourceId = rs.getInt("ERESOURCE_ID");
             int recordId = rs.getInt("RECORD_ID");
@@ -55,6 +56,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
                 eresource = new Eresource(null, rowEresourceId, recordId, recordType, 0, rs.getString("TITLE"));
                 eresources.add(eresource);
                 currentEresourceId = rowEresourceId;
+                isFirstLink = true;
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
@@ -64,8 +66,9 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             }
             int rowLinkId = rs.getInt("LINK_ID");
             if (rowLinkId != currentLinkId) {
-                version.addLink(new HistoryLink(rs.getString("INSTRUCTION"), rs.getString("LABEL"), LinkType.NORMAL, rs.getString("URL")));
+                version.addLink(new HistoryLink(rs.getString("INSTRUCTION"), rs.getString("LABEL"), LinkType.NORMAL, rs.getString("URL"), isFirstLink));
                 currentLinkId = rowLinkId;
+                isFirstLink = false;
             }
         }
         return eresources;
