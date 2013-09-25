@@ -33,15 +33,10 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("E_DESCRIPTION")).andReturn("description");
         expect(this.resultSet.getInt("VERSION_ID")).andReturn(1);
         expect(this.resultSet.getString("GETPASSWORD")).andReturn("T");
-        expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher");
-        expect(this.resultSet.getString("HOLDINGS")).andReturn("holdings");
-        expect(this.resultSet.getString("DATES")).andReturn("dates");
-        expect(this.resultSet.getString("V_DESCRIPTION")).andReturn("description");
         expect(this.resultSet.getInt("LINK_ID")).andReturn(1);
         expect(this.resultSet.getString("URL")).andReturn("url");
         expect(this.resultSet.getString("LABEL")).andReturn("label");
-        expect(this.resultSet.getString("INSTRUCTION")).andReturn("instruction");
-        expect(this.resultSet.getString("LINK_TEXT")).andReturn("link-text");
+        expect(this.resultSet.getString("V_ADDITIONAL_TEXT")).andReturn("additional-text");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.resultSet);
         this.manager.parseResultSet(this.resultSet, null);

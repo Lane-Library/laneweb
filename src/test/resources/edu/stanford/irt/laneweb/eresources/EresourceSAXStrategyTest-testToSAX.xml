@@ -4,29 +4,27 @@
    <recordId>3</recordId>
    <recordType>recordType</recordType>
    <title>title</title>
-   <version>
-      <summaryHoldings>summaryHoldings</summaryHoldings>
-      <dates>dates</dates>
-      <publisher>publisher</publisher>
-      <description>description</description>
-      <link type="normal">
-         <label>label</label>
-         <url>url</url>
-         <instruction>instruction</instruction>
-      </link>
-      <link type="getPassword">
-         <label>get password</label>
-         <url>url</url>
-         <instruction>instruction</instruction>
-      </link>
-      <link type="impactFactor">
-         <label>impact factor</label>
-         <url>url</url>
-         <instruction>instruction</instruction>
-      </link>
-      <link type="normal">
-         <url>url</url>
-         <instruction>instruction</instruction>
-      </link>
-   </version>
+   <link type="normal">
+      <label>label</label>
+      <link-text>link-text</link-text>
+      <url>url</url>
+      <additional-text>additional-text</additional-text>
+   </link>
+   <link type="getPassword">
+      <label>get password</label>
+      <link-text>link-text</link-text>
+      <url>url</url>
+      <additional-text>additional-text</additional-text>
+   </link>
+   <link type="impactFactor">
+      <label>impact factor</label>
+      <link-text>link-text</link-text>
+      <url>url</url>
+      <additional-text>additional-text</additional-text>
+   </link>
+   <link type="normal">
+      <link-text>link-text</link-text>
+      <url>url</url>
+      <additional-text>additional-text</additional-text>
+   </link>
 </result>

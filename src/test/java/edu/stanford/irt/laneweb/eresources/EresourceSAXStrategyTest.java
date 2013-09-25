@@ -12,7 +12,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,29 +52,28 @@ public class EresourceSAXStrategyTest {
         expect(this.eresource.getRecordType()).andReturn(Resource.RECORD_TYPE);
         expect(this.eresource.getTitle()).andReturn(Resource.TITLE);
         expect(this.eresource.getDescription()).andReturn("");
-        expect(this.eresource.getVersions()).andReturn(Collections.singleton(this.version));
-        expect(this.version.getSummaryHoldings()).andReturn(Resource.SUMMARY_HOLDINGS);
-        expect(this.version.getDates()).andReturn(Resource.DATES);
-        expect(this.version.getPublisher()).andReturn(Resource.PUBLISHER);
-        expect(this.version.getDescription()).andReturn(Resource.DESCRIPTION);
-        expect(this.version.getLinks()).andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
 
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(Resource.LABEL);
         expect(this.link.getUrl()).andReturn(Resource.URL);
-        expect(this.link.getInstruction()).andReturn(Resource.INSTRUCTION);
+        expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);
+        expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
         expect(this.link.getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.link.getLabel()).andReturn("get password");
         expect(this.link.getUrl()).andReturn(Resource.URL);
-        expect(this.link.getInstruction()).andReturn(Resource.INSTRUCTION);
+        expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);
+        expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
         expect(this.link.getType()).andReturn(LinkType.IMPACTFACTOR);
         expect(this.link.getLabel()).andReturn("impact factor");
         expect(this.link.getUrl()).andReturn(Resource.URL);
-        expect(this.link.getInstruction()).andReturn(Resource.INSTRUCTION);
+        expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);
+        expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(null);
         expect(this.link.getUrl()).andReturn(Resource.URL);
-        expect(this.link.getInstruction()).andReturn(Resource.INSTRUCTION);
+        expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);
+        expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
         replay(this.eresource, this.version, this.link);
         this.xmlConsumer.startDocument();
         this.strategy.toSAX(this.eresource, this.xmlConsumer);

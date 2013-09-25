@@ -12,17 +12,19 @@ public class Version {
 
     private Eresource eresource;
 
-    private Collection<Link> links = new LinkedList<Link>();
+    private Collection<HistoryLink> links = new LinkedList<HistoryLink>();
 
     private String publisher;
 
     private String summaryHoldings;
 
-    public Version(final String dates, final String description, final String publisher, final String summaryHoldings) {
+    public Version(final String dates, final String description, final String publisher, final String summaryHoldings,
+            final Eresource eresource) {
         this.dates = dates;
         this.description = description;
         this.publisher = publisher;
         this.summaryHoldings = summaryHoldings;
+        this.eresource = eresource;
     }
 
     public String getDates() {
@@ -37,18 +39,7 @@ public class Version {
         return this.eresource;
     }
 
-    public String getPrimaryAdditionalText() {
-        StringBuilder sb = new StringBuilder(" ");
-        if (this.summaryHoldings != null) {
-            sb.append(this.summaryHoldings);
-        }
-        maybeAppend(sb, this.dates);
-        maybeAppend(sb, this.publisher);
-        maybeAppend(sb, this.description);
-        return sb.toString();
-    }
-
-    public Collection<Link> getLinks() {
+    public Collection<HistoryLink> getLinks() {
         return Collections.unmodifiableCollection(this.links);
     }
 
@@ -60,27 +51,7 @@ public class Version {
         return this.summaryHoldings;
     }
 
-    @Override
-    public String toString() {
-        return new StringBuilder("publisher:").append(this.publisher).append(" holdings:").append(this.summaryHoldings)
-                .append(" links:").append(this.links).toString();
-    }
-
-    void addLink(final Link link) {
-        link.setVersion(this);
+    void addLink(final HistoryLink link) {
         this.links.add(link);
-    }
-
-    void setEresource(final Eresource eresource) {
-        this.eresource = eresource;
-    }
-
-    private void maybeAppend(final StringBuilder sb, final String string) {
-        if (string != null && string.length() > 0) {
-            if (sb.length() > 1) {
-                sb.append(", ");
-            }
-            sb.append(string);
-        }
     }
 }
