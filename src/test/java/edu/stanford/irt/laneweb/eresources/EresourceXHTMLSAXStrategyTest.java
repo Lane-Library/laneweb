@@ -40,8 +40,7 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAX() throws SAXException, IOException {
-        expect(this.eresource.getVersions()).andReturn(Collections.singletonList(this.version));
-        expect(this.version.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
         expect(this.link.getLinkText()).andReturn("title");
         expect(this.link.getUrl()).andReturn("url");
         expect(((Link)this.link).getType()).andReturn(LinkType.NORMAL);
@@ -62,8 +61,7 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAX2Versions() throws SAXException, IOException {
-        expect(this.eresource.getVersions()).andReturn(Arrays.asList(new Version[] { this.version, this.version }));
-        expect(this.version.getLinks()).andReturn(Collections.singletonList(this.link)).times(2);
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link, this.link }));
         expect(this.link.getLinkText()).andReturn("title");
         expect(this.link.getUrl()).andReturn("url").times(2);
         expect(((Link)this.link).getType()).andReturn(LinkType.NORMAL).times(2);
@@ -87,8 +85,7 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXGetPassword() throws SAXException, IOException {
-        expect(this.eresource.getVersions()).andReturn(Collections.singletonList(this.version));
-        expect(this.version.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
         expect(((Link)this.link).getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.link.getUrl()).andReturn("url");

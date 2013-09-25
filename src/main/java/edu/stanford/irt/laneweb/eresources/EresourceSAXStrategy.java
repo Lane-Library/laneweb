@@ -10,8 +10,7 @@ import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 /**
- * A SAXStrategy that converts an Eresource into http://lane.stanford.edu/resources/1.0
- * namespaced SAX events.
+ * A SAXStrategy that converts an Eresource into http://lane.stanford.edu/resources/1.0 namespaced SAX events.
  */
 public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
 
@@ -29,10 +28,8 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_TYPE, eresource.getRecordType());
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, eresource.getTitle());
             maybeCreateElement(xmlConsumer, DESCRIPTION, eresource.getDescription());
-            for (Version version : eresource.getVersions()) {
-                for (Link link : version.getLinks()) {
-                    handleLink(xmlConsumer, link);
-                }
+            for (Link link : eresource.getLinks()) {
+                handleLink(xmlConsumer, link);
             }
             XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
         } catch (SAXException e) {

@@ -17,11 +17,9 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             boolean first = true;
-            for (Version version : eresource.getVersions()) {
-                for (Link link : version.getLinks()) {
-                    createLink(xmlConsumer, link, first);
-                    first = false;
-                }
+            for (Link link : eresource.getLinks()) {
+                createLink(xmlConsumer, link, first);
+                first = false;
             }
             createMoreResultsLink(xmlConsumer, eresource);
             String description = eresource.getDescription();

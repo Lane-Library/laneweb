@@ -60,13 +60,14 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             }
             int rowVersionId = rs.getInt("VERSION_ID");
             if (rowVersionId != currentVersionId) {
-                version = new Version(rs.getString("DATES"), rs.getString("DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"));
-                eresource.addVersion(version);
+                version = new Version(rs.getString("DATES"), rs.getString("DESCRIPTION"), rs.getString("PUBLISHER"), rs.getString("HOLDINGS"), eresource);
                 currentVersionId = rowVersionId;
             }
             int rowLinkId = rs.getInt("LINK_ID");
             if (rowLinkId != currentLinkId) {
-                version.addLink(new HistoryLink(rs.getString("INSTRUCTION"), rs.getString("LABEL"), LinkType.NORMAL, rs.getString("URL"), isFirstLink, version));
+                HistoryLink link = new HistoryLink(rs.getString("INSTRUCTION"), rs.getString("LABEL"), LinkType.NORMAL, rs.getString("URL"), isFirstLink, version);
+                version.addLink(link);
+                eresource.addLink(link);
                 currentLinkId = rowLinkId;
                 isFirstLink = false;
             }

@@ -53,6 +53,7 @@ public class ContentResultConversionStrategyTest {
         this.contentResult = createMock(ContentResult.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testConvertResult() {
         expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
@@ -74,6 +75,7 @@ public class ContentResultConversionStrategyTest {
                 this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testConvertResultNullChildren() {
         expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
