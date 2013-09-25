@@ -2,8 +2,6 @@ package edu.stanford.irt.laneweb.eresources;
 
 public class Link {
 
-    private String instruction;
-
     private String label;
 
     private LinkType type;
@@ -16,8 +14,7 @@ public class Link {
 
     private String additionalText;
 
-    public Link(final String instruction, final String label, final LinkType type, final String url, final String linkText, final String additionalText) {
-        this.instruction = instruction;
+    public Link(final String label, final LinkType type, final String url, final String linkText, final String additionalText) {
         this.label = label;
         this.type = type;
         this.url = url;
@@ -31,10 +28,6 @@ public class Link {
 
     public String getAdditionalText() {
         return this.additionalText;
-    }
-
-    public String getInstruction() {
-        return this.instruction;
     }
 
     public String getLabel() {

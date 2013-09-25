@@ -40,7 +40,6 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getInt("LINK_ID")).andReturn(1);
         expect(this.resultSet.getString("URL")).andReturn("url");
         expect(this.resultSet.getString("LABEL")).andReturn("label");
-        expect(this.resultSet.getString("INSTRUCTION")).andReturn("instruction");
         expect(this.resultSet.getString("V_ADDITIONAL_TEXT")).andReturn("additional-text");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.resultSet);

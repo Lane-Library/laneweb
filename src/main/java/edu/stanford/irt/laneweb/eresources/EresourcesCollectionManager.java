@@ -67,7 +67,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 }
                 String linkText = isFirstLink ? rowTitle : rs.getString("LINK_TEXT");
                 String additionalText = isFirstLink ? rs.getString("V_ADDITIONAL_TEXT") : rs.getString("L_ADDITIONAL_TEXT");
-                version.addLink(new Link(rs.getString("INSTRUCTION"), label, type, rs.getString("URL"), linkText, additionalText));
+                version.addLink(new Link(label, type, rs.getString("URL"), linkText, additionalText));
                 currentLinkId = rowLinkId;
                 isFirstLink = false;
             }
