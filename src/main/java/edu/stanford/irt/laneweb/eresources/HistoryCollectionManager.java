@@ -66,7 +66,7 @@ public class HistoryCollectionManager extends AbstractCollectionManager {
             }
             int rowLinkId = rs.getInt("LINK_ID");
             if (rowLinkId != currentLinkId) {
-                version.addLink(new HistoryLink(rs.getString("INSTRUCTION"), rs.getString("LABEL"), LinkType.NORMAL, rs.getString("URL"), isFirstLink));
+                version.addLink(new HistoryLink(rs.getString("INSTRUCTION"), rs.getString("LABEL"), LinkType.NORMAL, rs.getString("URL"), isFirstLink, version));
                 currentLinkId = rowLinkId;
                 isFirstLink = false;
             }
