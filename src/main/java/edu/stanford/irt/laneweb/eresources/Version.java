@@ -56,7 +56,6 @@ public class Version {
     }
 
     void addLink(final Link link) {
-        link.setVersion(this);
         this.links.add(link);
     }
 

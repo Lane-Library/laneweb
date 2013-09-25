@@ -7,8 +7,6 @@ public class Link {
     private LinkType type;
 
     private String url;
-
-    private Version version;
     
     private String linkText;
 
@@ -47,16 +45,8 @@ public class Link {
         return this.url;
     }
 
-    public Version getVersion() {
-        return this.version;
-    }
-
     @Override
     public String toString() {
         return new StringBuilder("url:").append(this.url).toString();
-    }
-
-    void setVersion(final Version version) {
-        this.version = version;
     }
 }
