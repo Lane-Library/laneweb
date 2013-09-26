@@ -1,6 +1,8 @@
 package edu.stanford.irt.laneweb.resource;
 
 public interface Resource {
+    
+    String ADDITIONAL_TEXT = "additional-text";
 
     String AUTHOR = "pub-author";
 
@@ -18,19 +20,17 @@ public interface Resource {
 
     String ID = "id";
 
-    String INSTRUCTION = "instruction";
-
     String KEYWORD = "keyword";
 
     String LABEL = "label";
 
     String LINK = "link";
+    
+    String LINK_TEXT = "link-text";
 
     String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
     
     String PUBLICATION_TEXT = "pub-text";
-
-    String PUBLISHER = "publisher";
 
     String QUERY = "query";
 
@@ -55,8 +55,6 @@ public interface Resource {
     String SCORE = "score";
 
     String SIZE = "size";
-
-    String SUMMARY_HOLDINGS = "summaryHoldings";
 
     String TITLE = "title";
 

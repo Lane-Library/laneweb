@@ -14,6 +14,11 @@
                         <property name="location" value="classpath:edu/stanford/irt/laneweb/suggest/eresource-sql.properties"/>
                     </bean>
                 </constructor-arg>
+                <constructor-arg>
+                    <bean class="org.slf4j.LoggerFactory" factory-method="getLogger">
+                        <constructor-arg type="java.lang.String" value="suggest-timing"/>        
+                    </bean>
+                </constructor-arg>
             </bean>
         </property>
     </bean>

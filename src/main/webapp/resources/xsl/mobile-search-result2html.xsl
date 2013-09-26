@@ -139,8 +139,8 @@
 
     <xsl:template match="s:result[@type='eresource']" mode="brief">
         <li rank="{position()}">
-            <xsl:apply-templates select="s:version[1]/s:link[1]"/>
-            <xsl:if test="s:description or count(s:version) > 1">
+            <xsl:apply-templates select="s:link[1]"/>
+            <xsl:if test="s:description or count(s:link) > 1">
                 <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">more info</a>
             </xsl:if>
         </li>
@@ -148,7 +148,7 @@
     
     <xsl:template match="s:result[@type='eresource']" mode="full">
         <div class="absInfo">
-            <xsl:apply-templates select="s:version/s:link"/>
+            <xsl:apply-templates select="s:link"/>
             <xsl:choose>
                 <xsl:when test="s:recordType = 'auth'">
                     <div class="moreResults">
@@ -156,7 +156,7 @@
                     </div>
                 </xsl:when>
                 <!-- add catalog link to all bibs except those that already have one (history) -->
-                <xsl:when test="s:recordType = 'bib' and not(s:version/s:link/s:label[.='catalog record'])">
+                <xsl:when test="s:recordType = 'bib' and not(s:link/s:label[.='catalog record'])">
                     <div class="moreResults">
                         <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
                     </div>
@@ -171,27 +171,11 @@
         </div>  
     </xsl:template>
     
-    <xsl:template match="s:version[1]/s:link[1]">
+    <xsl:template match="s:link[1]">
         <a target="_blank" class="newWindow" href="{s:url}">
-            <xsl:apply-templates select="../../s:title"/>
+            <xsl:apply-templates select="../s:title"/>
         </a>
-        <xsl:text> </xsl:text>
-        <xsl:if
-            test="not(../s:summaryHoldings or ../s:publisher or ../s:dates or ../s:description)">
-            <xsl:value-of select="s:label"/>
-        </xsl:if>
-        <xsl:for-each
-            select="../s:summaryHoldings|../s:publisher|../s:dates|../s:description">
-            <xsl:value-of select="."/>
-            <xsl:if test="position() != last()">
-                <xsl:text>, </xsl:text>
-            </xsl:if>
-        </xsl:for-each>
-        <xsl:if test="s:instruction">
-            <xsl:text>, </xsl:text>
-            <xsl:value-of select="s:instruction"/>
-        </xsl:if>
-        <xsl:text> </xsl:text>
+        <xsl:value-of select="s:additional-text"/>
         <xsl:if test="@type = 'getPassword'">
             <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
         </xsl:if>
@@ -200,33 +184,9 @@
     <xsl:template match="s:link">
         <div>
             <a target="_blank" href="{s:url}" title="{s:label}">
-                <xsl:choose>
-                    <xsl:when
-                        test="../s:summaryHoldings and count(../s:link) = 1">
-                        <xsl:value-of select="../s:summaryHoldings"/>
-                        <xsl:text>, </xsl:text>
-                        <xsl:value-of select="../s:dates"/>
-                    </xsl:when>
-                    <xsl:when test="s:label">
-                        <xsl:value-of select="s:label"/>
-                    </xsl:when>
-                    <xsl:when test="s:url">
-                        <xsl:value-of select="s:url"/>
-                    </xsl:when>
-                </xsl:choose>
-                <xsl:if test="../s:description">
-                    <xsl:text> </xsl:text>
-                    <xsl:value-of select="../s:description"/>
-                </xsl:if>
+                <xsl:value-of select="s:link-text"/>
             </a>
-            <xsl:if test="s:instruction">
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="s:instruction"/>
-            </xsl:if>
-            <xsl:if test="../s:publisher">
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="../s:publisher"/>
-            </xsl:if>
+            <xsl:value-of select="s:additional-text"/>
             <xsl:if test="@type = 'getPassword'">
                 <xsl:text> </xsl:text>
                 <a target="_blank" href="/secure/ejpw.html" title="Get Password">Get Password</a>

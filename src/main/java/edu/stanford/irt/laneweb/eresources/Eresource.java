@@ -10,6 +10,8 @@ public class Eresource {
 
     private int id;
 
+    private Collection<Link> links = new LinkedList<Link>();
+
     private int recordId;
 
     private String recordType;
@@ -17,8 +19,6 @@ public class Eresource {
     private int score;
 
     private String title;
-
-    private Collection<Version> versions = new LinkedList<Version>();
 
     public Eresource(final String description, final int id, final int recordId, final String recordType,
             final int score, final String title) {
@@ -38,6 +38,10 @@ public class Eresource {
         return this.id;
     }
 
+    public Collection<Link> getLinks() {
+        return Collections.unmodifiableCollection(this.links);
+    }
+
     public int getRecordId() {
         return this.recordId;
     }
@@ -54,18 +58,13 @@ public class Eresource {
         return this.title;
     }
 
-    public Collection<Version> getVersions() {
-        return Collections.unmodifiableCollection(this.versions);
-    }
-
     @Override
     public String toString() {
         return new StringBuilder("title:").append(this.title).append(" score:").append(this.score).append(" updated:")
-                .append(" versions:").append(this.versions).toString();
+                .append(" versions:").append(this.links).toString();
     }
 
-    void addVersion(final Version version) {
-        version.setEresource(this);
-        this.versions.add(version);
+    void addLink(final Link link) {
+        this.links.add(link);
     }
 }

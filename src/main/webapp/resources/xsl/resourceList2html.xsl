@@ -152,17 +152,13 @@
             <xsl:if test="s:description">
                 <xsl:attribute name="class" select="'hvrTrig'"/>
             </xsl:if>
-            <xsl:apply-templates select="s:version"/>
+            <xsl:apply-templates select="s:link"/>
             <xsl:apply-templates select="s:recordType"/>
             <xsl:apply-templates select="s:description"/>
         </li>
     </xsl:template>
 
-    <xsl:template match="s:version">
-        <xsl:apply-templates select="s:link"/>
-    </xsl:template>
-
-    <xsl:template match="s:recordType[not(../s:version/s:link/s:label[.='catalog record'])]">
+    <xsl:template match="s:recordType[not(../s:link/s:label[.='catalog record'])]">
         <div class="moreResults">
             <xsl:choose>
                 <xsl:when test=". = 'auth'">
@@ -190,26 +186,12 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="s:version[1]/s:link[1]">
+    <xsl:template match="s:link[1]">
         <div>
-            <a class="primaryLink" href="{s:url}" title="{../../s:title}">
-                <xsl:apply-templates select="../../s:title"/>
+            <a class="primaryLink" href="{s:url}" title="{../s:title}">
+                <xsl:apply-templates select="../s:title"/>
             </a>
-            <xsl:text> </xsl:text>
-            <xsl:if test="not(../s:summaryHoldings or ../s:publisher or ../s:dates or ../s:description)">
-                <xsl:value-of select="s:label"/>
-            </xsl:if>
-            <xsl:for-each select="../s:summaryHoldings|../s:publisher|../s:dates|../s:description">
-                <xsl:value-of select="."/>
-                <xsl:if test="position() != last()">
-                    <xsl:text>, </xsl:text>
-                </xsl:if>
-            </xsl:for-each>
-            <xsl:if test="/s:instruction">
-                <xsl:text>, </xsl:text>
-                <xsl:value-of select="s:instruction"/>
-            </xsl:if>
-            <xsl:text> </xsl:text>
+            <xsl:value-of select="s:additional-text"/>
             <xsl:if test="@type = 'getPassword'">
                 <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
             </xsl:if>
@@ -219,32 +201,9 @@
     <xsl:template match="s:link">
         <div>
             <a href="{s:url}" title="{s:label}">
-                <xsl:choose>
-                    <xsl:when test="../s:summaryHoldings and count(../s:link) = 1">
-                        <xsl:value-of select="../s:summaryHoldings"/>
-                        <xsl:text>, </xsl:text>
-                        <xsl:value-of select="../s:dates"/>
-                    </xsl:when>
-                    <xsl:when test="s:label">
-                        <xsl:value-of select="s:label"/>
-                    </xsl:when>
-                    <xsl:when test="s:url">
-                        <xsl:value-of select="s:url"/>
-                    </xsl:when>
-                </xsl:choose>
-                <xsl:if test="../s:description">
-                    <xsl:text> </xsl:text>
-                    <xsl:value-of select="../s:description"/>
-                </xsl:if>
+                <xsl:value-of select="s:link-text"/>
             </a>
-            <xsl:if test="s:instruction">
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="s:instruction"/>
-            </xsl:if>
-            <xsl:if test="../s:publisher">
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="../s:publisher"/>
-            </xsl:if>
+            <xsl:value-of select="s:additional-text"/>
             <xsl:if test="@type = 'getPassword'">
                 <xsl:text> </xsl:text>
                 <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
