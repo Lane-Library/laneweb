@@ -170,6 +170,10 @@
             </map:transform>
             <map:serialize type="text"/>
         </map:match>
+        <map:match pattern="pubpeer/json/*" type="wildcard">
+            <map:generate type="html" src="http://api.pubpeer.com/v1/publications/{1}&amp;devkey=14d2f447913beb5d973cbff06df6e0d0"/>
+            <map:serialize type="text"/>
+        </map:match>
     </map:pipeline>
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">
