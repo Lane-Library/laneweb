@@ -19,7 +19,8 @@ import edu.stanford.irt.laneweb.resource.PagingData;
 public abstract class AbstractEresourcesGenerator extends AbstractGenerator implements CacheablePipelineComponent,
         ParametersAware, ModelAware {
 
-    private static final long DEFAULT_EXPIRES = 1000 * 60 * 5;
+    /** the default cache expiration time, 20 minutes */
+    private static final long DEFAULT_EXPIRES = 1000 * 60 * 20;
 
     private CollectionManager collectionManager;
 
@@ -31,11 +32,11 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     private int page;
 
+    private String queryString;
+
     private SAXStrategy<PagingEresourceList> saxStrategy;
 
     private Validity validity;
-
-	private String queryString;
 
     public AbstractEresourcesGenerator(final String componentType, final CollectionManager collectionManager,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
@@ -91,9 +92,9 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         List<Eresource> eresources = getEresourceList(this.collectionManager);
         String baseQuery = this.queryString;
         if (baseQuery.indexOf("&page=") > 0) {
-        	baseQuery = baseQuery.substring(0, baseQuery.indexOf("&page="));
+            baseQuery = baseQuery.substring(0, baseQuery.indexOf("&page="));
         } else if (baseQuery.indexOf("page=") == 0) {
-        	baseQuery = "";
+            baseQuery = "";
         }
         PagingData pagingData = new EresourceListPagingData(eresources, this.page, baseQuery);
         this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData), xmlConsumer);
