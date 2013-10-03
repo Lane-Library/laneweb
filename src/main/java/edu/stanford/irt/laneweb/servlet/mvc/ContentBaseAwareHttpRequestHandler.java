@@ -32,15 +32,9 @@ public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandl
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
-        if (this.logger.isDebugEnabled()) {
-            this.logger.debug("Trying relative path [" + path + "] against base location: " + contentBase);
-        }
         try {
             resource = contentBase.createRelative(path);
             if (resource.exists() && resource.isReadable()) {
-                if (this.logger.isDebugEnabled()) {
-                    this.logger.debug("Found matching resource: " + resource);
-                }
                 return resource;
             }
         } catch (IOException e) {
