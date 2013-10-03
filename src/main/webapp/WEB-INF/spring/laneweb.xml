@@ -158,7 +158,9 @@
     </bean>
     
     <bean name="javax.xml.transform.ErrorListener"
-        class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener"/>
+        class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener">
+        <constructor-arg ref="org.slf4j.Logger/ErrorListener"/>
+    </bean>
     
     <bean id="org.springframework.oxm.Marshaller"
         class="org.springframework.oxm.xstream.XStreamMarshaller">

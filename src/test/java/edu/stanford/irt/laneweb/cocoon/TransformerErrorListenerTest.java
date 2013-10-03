@@ -10,6 +10,7 @@ import javax.xml.transform.TransformerException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -21,9 +22,12 @@ public class TransformerErrorListenerTest {
 
     private SourceLocator locator;
 
+    private Logger log;
+
     @Before
     public void setUp() {
-        this.listener = new TransformerErrorListener();
+        this.log = createMock(Logger.class);
+        this.listener = new TransformerErrorListener(this.log);
         this.exception = createMock(TransformerException.class);
         this.locator = createMock(SourceLocator.class);
     }

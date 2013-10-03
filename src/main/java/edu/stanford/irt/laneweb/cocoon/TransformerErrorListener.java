@@ -4,9 +4,17 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
+import org.slf4j.Logger;
+
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class TransformerErrorListener implements ErrorListener {
+    
+    private Logger log;
+    
+    public TransformerErrorListener(Logger log) {
+        this.log = log;
+    }
 
     public void error(final TransformerException te) {
         throw new LanewebException(getMessage(te), te);
@@ -17,7 +25,7 @@ public class TransformerErrorListener implements ErrorListener {
     }
 
     public void warning(final TransformerException te) {
-        throw new LanewebException(getMessage(te), te);
+        this.log.warn(getMessage(te));
     }
 
     private String getMessage(final TransformerException te) {

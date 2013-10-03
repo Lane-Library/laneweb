@@ -43,6 +43,10 @@
         <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.mvc.SuggestionController"/>        
     </bean>
     
+    <bean name="org.slf4j.Logger/ErrorListener" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="javax.xml.transform.ErrorListener"/>        
+    </bean>
+    
     <bean name="org.slf4j.Logger/errorhandler" class="org.slf4j.LoggerFactory" factory-method="getLogger">
         <constructor-arg type="java.lang.String" value="error handler"/>        
     </bean>
