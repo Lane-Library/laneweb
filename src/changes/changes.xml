@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-10-07" version="2.1.30" description="2.1.30 bug fix release">
+            <action date="2013-10-01" dev="ryanmax" issue="91895" type="add">
+                integrate PubPeer comments into search results
+            </action>
+        </release>
         <release date="2013-09-30" version="2.1.29" description="2.1.29 bug fix release">
             <action date="2013-09-25" dev="ceyates" issue="91735" type="update">
                 use precomposed text from eresource data in html output
