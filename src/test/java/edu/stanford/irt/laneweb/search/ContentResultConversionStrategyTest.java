@@ -9,8 +9,8 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.junit.Before;
@@ -67,7 +67,7 @@ public class ContentResultConversionStrategyTest {
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getParent()).andReturn(this.resourceResult);
         expect(this.contentResult.getTitle()).andReturn("title");
-        this.scopusDeduplicator.removeDuplicates(isA(Set.class));
+        this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
         replay(this.contentParentResult, this.contentResult, this.query, this.resourceResult, this.result,
                 this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
         assertEquals(1, this.conversionStrategy.convertResult(this.uberResult).size());
@@ -85,7 +85,7 @@ public class ContentResultConversionStrategyTest {
         expect(this.contentParentResult.getId()).andReturn("id_content");
         expect(this.contentParentResult.getChildren()).andReturn(null);
         expect(this.uberResult.getQuery()).andReturn(this.query);
-        this.scopusDeduplicator.removeDuplicates(isA(Set.class));
+        this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
         replay(this.contentParentResult, this.contentResult, this.query, this.resourceResult, this.result,
                 this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
         assertEquals(0, this.conversionStrategy.convertResult(this.uberResult).size());

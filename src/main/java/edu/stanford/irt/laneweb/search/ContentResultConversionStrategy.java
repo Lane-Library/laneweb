@@ -42,8 +42,8 @@ public class ContentResultConversionStrategy {
                 resultMap.put(current, current);
             }
         }
-        this.scopusDeduplicator.removeDuplicates(resultMap.keySet());
-        return new LinkedList<SearchResult>(resultMap.keySet());
+        this.scopusDeduplicator.removeDuplicates(resultMap.values());
+        return new LinkedList<SearchResult>(resultMap.values());
     }
 
     // extracts a list of ContentResults from the initial Result object
