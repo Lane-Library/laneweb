@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-10-14" version="2.1.31" description="2.1.31 bug fix release">
+            <action date="2013-10-14" dev="ceyates" issue="92313" type="remove">
+                remove suggestion timing log
+            </action>
+            <action date="2013-10-11" dev="ceyates" issue="92173" type="fix">
+                Clinical search: odd date ranking
+            </action>
+        </release>
         <release date="2013-10-07" version="2.1.30" description="2.1.30 bug fix release">
             <action date="2013-10-01" dev="ryanmax" issue="91895" type="add">
                 integrate PubPeer comments into search results
