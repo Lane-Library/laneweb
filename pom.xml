@@ -214,7 +214,7 @@
                             <removeIncluded>true</removeIncluded>
                             <output>target/laneweb/resources/javascript/lane-all.js</output>
                             <includes>
-                                <include>yui-3.6.0-min.js</include>
+                                <include>yui-3.13.0-min.js</include>
                                 <include>lane-min.js</include>
                                 <include>model-min.js</include>
                                 <include>link-plugin-min.js</include>
