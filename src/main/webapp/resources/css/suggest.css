@@ -1,5 +1,6 @@
 .yui3-aclist{
     z-index:2;
+    position:absolute
 }
 .yui3-aclist-hidden{
     visibility:hidden
