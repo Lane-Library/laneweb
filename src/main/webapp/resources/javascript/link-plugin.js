@@ -7,23 +7,24 @@
 	
 	Y.namespace("lane");
 	
-	var Lane = Y.lane,
-	    basePath = Lane.Model.get("base-path") || "",
-	    DOCUMENT_HOST = document.location.host,
-	    PROXY_HOST = "laneproxy.stanford.edu",
-	    PROXY_LOGIN_PATH = "/login",
-	    COOKIES_FETCH_PATH = basePath + "/cookiesFetch.html",
-	    LOGIN_PATH = basePath + "/secure/apps/proxy/credential",
-	    PATH = "path",
-	    HOST = "host",
-	    LINK_HOST = "linkHost",
-	    PROXY_LOGIN = "proxyLogin",
+	var ALT = "alt",
 	    COOKIES_FETCH = "cookiesFetch",
-	    LOCAL = "local",
-	    TITLE = "title",
-	    PROXY = "proxy",
-	    ALT = "alt",
-	    SRC = "src",
+        LINK_HOST = "linkHost",
+        LOCAL = "local",
+        HOST_NAME = "hostname",
+        HOST_NODE = "host",
+        PATH = "path",
+        PROXY = "proxy",
+        PROXY_HOST = "laneproxy.stanford.edu",
+        PROXY_LOGIN = "proxyLogin",
+        PROXY_LOGIN_PATH = "/login",
+        SRC = "src",
+        TITLE = "title",
+        lane = Y.lane,
+	    basePath = lane.Model.get("base-path") || "",
+        cookiesFetchPath = basePath + "/cookiesFetch.html",
+	    documentHostName = document.location.hostname,
+	    loginPath = basePath + "/secure/apps/proxy/credential",
     
     LinkPlugin = function(config) {
         LinkPlugin.superclass.constructor.apply(this, arguments);
@@ -38,14 +39,14 @@
                 readOnly : true,
                 valueFn : function() {
                     var path = this.get(PATH);
-                    return path !== undefined && path.indexOf(COOKIES_FETCH_PATH) === 0;
+                    return path !== undefined && path.indexOf(cookiesFetchPath) === 0;
                 }
             },
             linkHost : {
                 readOnly : true,
                 valueFn : function() {
-                    var host = this.get(HOST).get(HOST);
-                    host = host || DOCUMENT_HOST;
+                    var host = this.get(HOST_NODE).get(HOST_NAME);
+                    host = host || documentHostName;
                     //TODO: need to check for :443, too?
                     if (host.indexOf(":80") > -1) {
                         host = host.substring(0, host.indexOf(":"));
@@ -56,7 +57,7 @@
             local : {
                 readOnly : true,
                 valueFn : function() {
-                    return this.get(LINK_HOST) === DOCUMENT_HOST ?
+                    return this.get(LINK_HOST) === documentHostName ?
                             !this.get(PROXY_LOGIN) && !this.get(COOKIES_FETCH)
                             : false;
                 }
@@ -64,7 +65,7 @@
             path : {
                 readOnly : true,
                 valueFn : function() {
-                    var path = this.get(HOST).get("pathname");
+                    var path = this.get(HOST_NODE).get("pathname");
                     path = path === undefined || path === "" ? document.location.pathname : path;
                     return path.indexOf("/") === 0 ? path : "/" + path;
                 }
@@ -79,10 +80,10 @@
             proxyLogin : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get(LINK_HOST) != DOCUMENT_HOST) {
+                    if (this.get(LINK_HOST) != documentHostName) {
                         return false;
                     } else {
-                        return this.get(PATH) === LOGIN_PATH;
+                        return this.get(PATH) === loginPath;
                     }
                 }
             },
@@ -90,7 +91,7 @@
                 readOnly : true,
                 valueFn : function() {
                     if (this.get(LOCAL)) {
-                        return this.get(HOST).get("search");
+                        return this.get(HOST_NODE).get("search");
                     } else {
                         //TODO: implement query for external links.
                         return "";
@@ -101,7 +102,7 @@
                 readOnly : true,
                 valueFn : function() {
                     //if there is a title attribute, use that.
-                    var node = this.get(HOST), title = node.get(TITLE), img, i, rel, relTokens;
+                    var node = this.get(HOST_NODE), title = node.get(TITLE), img, i, rel, relTokens;
                     //if there is rel="popup .." then create a title from it.
                     rel = node.get('rel');
                     if (rel && rel.indexOf('popup') === 0) {
@@ -157,7 +158,7 @@
             trackable : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get(HOST).getAttribute("trackable")) {
+                    if (this.get(HOST_NODE).getAttribute("trackable")) {
                         return true;
                     } else if (this.get(LOCAL) && (/\.html$/).test(this.get(PATH))) {
                         return false;
@@ -196,7 +197,7 @@
             url : {
                 readOnly : true,
                 valueFn : function() {
-                    var href = this.get(HOST).get("href");
+                    var href = this.get(HOST_NODE).get("href");
                     if (this.get(PROXY) || this.get(PROXY_LOGIN)) {
                         href = href.substring(href.indexOf("url=") + 4);
                     } else if (this.get(COOKIES_FETCH)) {
@@ -211,7 +212,7 @@
 
     Y.extend(LinkPlugin, Y.Plugin.Base);
     
-    Lane.LinkPlugin = LinkPlugin;
+    lane.LinkPlugin = LinkPlugin;
     
 })();
 
