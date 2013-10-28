@@ -407,9 +407,9 @@
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>yeti-maven-plugin</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.2-SNAPSHOT</version>
                 <configuration>
-                    <yetiServerUrl>http://noserver.example.com</yetiServerUrl>
+                    <yetiServerUrl>http://localhost:9999</yetiServerUrl>
                     <failureIgnore>true</failureIgnore>
                     <tests>
                         <test>src/main/webapp/resources/test/banner/banner-test.html</test>
