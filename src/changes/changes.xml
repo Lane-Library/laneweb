@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-10-28" version="2.1.32" description="2.1.32 bug fix release">
+            <action date="2013-10-23" dev="ryanmax" issue="92684" type="fix">
+                pages do not print properly in Firefox
+            </action>
+            <action date="2013-10-23" dev="ryanmax" issue="92659" type="fix">
+                Object blocking some text in printed pages
+            </action>
+            <action date="2013-10-22" dev="ryanmax" issue="92640" type="fix">
+                browse lists do not print properly
+            </action>
+            <action date="2013-10-22" dev="ceyates" issue="78079" type="update">
+                upgrade to the latest yui version, 3.13.0
+            </action>
+        </release>
         <release date="2013-10-14" version="2.1.31" description="2.1.31 bug fix release">
             <action date="2013-10-14" dev="ceyates" issue="92313" type="remove">
                 remove suggestion timing log
