@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
@@ -70,8 +72,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
-                <configuration> 
-                    <encoding>UTF-8</encoding> 
+                <configuration>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -403,6 +405,62 @@
                     </reportPlugins>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>edu.stanford.irt</groupId>
+                <artifactId>yeti-maven-plugin</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <failOnYetiException>false</failOnYetiException>
+                    <tests>
+                        <test>src/main/webapp/resources/test/banner/banner-test.html</test>
+                        <test>src/main/webapp/resources/test/bassett/bassett-test.html</test>
+                        <test>src/main/webapp/resources/test/bookmarks/bookmark-link-test.html</test>
+                        <test>src/main/webapp/resources/test/bookmarks/bookmark-test.html</test>
+                        <test>src/main/webapp/resources/test/bookmarks/bookmarks-test.html</test>
+                        <test>src/main/webapp/resources/test/bookmarks/bookmarks-widget-test.html</test>
+                        <test>src/main/webapp/resources/test/expandies/expandies-test.html</test>
+                        <test>src/main/webapp/resources/test/feedback/feedback-test.html</test>
+                        <test>src/main/webapp/resources/test/findit/findit-test.html</test>
+                        <test>src/main/webapp/resources/test/form-validator/form-validator-test.html</test>
+                        <test>src/main/webapp/resources/test/google/google-test.html</test>
+                        <test>src/main/webapp/resources/test/hover-controller/hover-controller-test.html</test>
+                        <test>src/main/webapp/resources/test/ie/ie-test.html</test>
+                        <test>src/main/webapp/resources/test/lane/lane-test.html</test>
+                        <test>src/main/webapp/resources/test/lightbox/lightbox-test.html</test>
+                        <test>src/main/webapp/resources/test/link-plugin/link-plugin-test.html</test>
+                        <test>src/main/webapp/resources/test/menu-items/menu-items-test.html</test>
+                        <test>src/main/webapp/resources/test/metasearch/metasearch-test.html</test>
+                        <test>src/main/webapp/resources/test/model/model-test.html</test>
+                        <test>src/main/webapp/resources/test/popin/popin-test.html</test>
+                        <test>src/main/webapp/resources/test/popup/popup-test.html</test>
+                        <test>src/main/webapp/resources/test/querymapper/querymapper-test.html</test>
+                        <test>src/main/webapp/resources/test/resource-search/resource-search-test.html</test>
+                        <test>src/main/webapp/resources/test/search/search-test.html</test>
+                        <test>src/main/webapp/resources/test/search-facet-counts/search-facet-counts-test.html</test>
+                        <test>src/main/webapp/resources/test/search-facets/search-facets-test.html</test>
+                        <test>src/main/webapp/resources/test/search-indicator/search-indicator-test.html</test>
+                        <test>src/main/webapp/resources/test/search-pico/search-pico-test.html</test>
+                        <test>src/main/webapp/resources/test/search-select/search-select-test.html</test>
+                        <test>src/main/webapp/resources/test/selections/selections-test.html</test>
+                        <test>src/main/webapp/resources/test/spellcheck/spellcheck-test.html</test>
+                        <test>src/main/webapp/resources/test/suggest/suggest-test.html</test>
+                        <test>src/main/webapp/resources/test/teletype/teletype-test.html</test>
+                        <test>src/main/webapp/resources/test/telinput/telinput-test.html</test>
+                        <test>src/main/webapp/resources/test/textinputs/textinputs-test.html</test>
+                        <test>src/main/webapp/resources/test/tooltips/tooltips-test.html</test>
+                        <test>src/main/webapp/resources/test/tracking/tracking-test.html</test>
+                    </tests>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>yeti</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
@@ -448,7 +506,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>
@@ -467,9 +525,9 @@
     </build>
     <dependencies>
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>irt-cocoon</artifactId>
-        	<version>1.9.2</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>irt-cocoon</artifactId>
+            <version>1.9.2</version>
         </dependency>
         <dependency>
             <artifactId>commons-codec</artifactId>
@@ -626,10 +684,10 @@
             <groupId>org.springframework</groupId>
             <version>3.2.4.RELEASE</version>
             <exclusions>
-            	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -682,10 +740,10 @@
             <groupId>edu.stanford.irt.suggest</groupId>
             <version>1.0.12</version>
             <exclusions>
-            	<exclusion>
-            		<artifactId>eresources-api</artifactId>
-            		<groupId>edu.stanford.irt</groupId>
-            	</exclusion>
+                <exclusion>
+                    <artifactId>eresources-api</artifactId>
+                    <groupId>edu.stanford.irt</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -718,25 +776,25 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-        	<groupId>org.slf4j</groupId>
-        	<artifactId>jcl-over-slf4j</artifactId>
-        	<version>1.7.5</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
-        	<groupId>javax.mail</groupId>
-        	<artifactId>mail</artifactId>
-        	<version>1.4.7</version>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
         </dependency>
         <dependency>
-        	<groupId>org.apache.tomcat</groupId>
-        	<artifactId>catalina</artifactId>
-        	<version>6.0.35</version>
-        	<scope>provided</scope>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>catalina</artifactId>
+            <version>6.0.35</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>edu.stanford.irt.search</groupId>
-        	<artifactId>search-core</artifactId>
-        	<version>1.7.11</version>
+            <groupId>edu.stanford.irt.search</groupId>
+            <artifactId>search-core</artifactId>
+            <version>1.7.11</version>
         </dependency>
     </dependencies>
 </project>
