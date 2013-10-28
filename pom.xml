@@ -408,7 +408,7 @@
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>yeti-maven-plugin</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.0.1</version>
                 <configuration>
                     <failureIgnore>true</failureIgnore>
                     <tests>
