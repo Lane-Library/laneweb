@@ -410,6 +410,7 @@
                 <artifactId>yeti-maven-plugin</artifactId>
                 <version>0.0.1</version>
                 <configuration>
+                    <yetiServerUrl>http://noserver.example.com</yetiServerUrl>
                     <failureIgnore>true</failureIgnore>
                     <tests>
                         <test>src/main/webapp/resources/test/banner/banner-test.html</test>
