@@ -410,8 +410,7 @@
                 <artifactId>yeti-maven-plugin</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
                 <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
-                    <failOnYetiException>false</failOnYetiException>
+                    <failureIgnore>true</failureIgnore>
                     <tests>
                         <test>src/main/webapp/resources/test/banner/banner-test.html</test>
                         <test>src/main/webapp/resources/test/bassett/bassett-test.html</test>
