@@ -259,7 +259,7 @@
                             </includes>
                         </aggregation>
                         <aggregation>
-                            <removeIncluded>true</removeIncluded>
+                            <removeIncluded>false</removeIncluded>
                             <output>target/laneweb/resources/css/mobile/lane-mobile.css</output>
                             <includes>
                                 <include>jquery.mobile.structure-1.1.1-min.css</include>
@@ -269,7 +269,7 @@
                             </includes>
                         </aggregation>
                         <aggregation>
-                            <removeIncluded>true</removeIncluded>
+                            <removeIncluded>false</removeIncluded>
                             <output>target/laneweb/resources/javascript/mobile/lane-mobile.js</output>
                             <includes>
                                 <include>jquery-1.7.1-min.js</include>
@@ -409,7 +409,6 @@
                 <artifactId>grover-maven-plugin</artifactId>
                 <version>0.0.1</version>
                 <configuration>
-                    <ignoreFailure>true</ignoreFailure>
                     <tests>
                         <test>src/main/webapp/resources/test/banner/banner-test.html</test>
                         <test>src/main/webapp/resources/test/bassett/bassett-test.html</test>
