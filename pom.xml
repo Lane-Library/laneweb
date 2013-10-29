@@ -406,11 +406,10 @@
             </plugin>
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
-                <artifactId>yeti-maven-plugin</artifactId>
-                <version>0.0.2-SNAPSHOT</version>
+                <artifactId>grover-maven-plugin</artifactId>
+                <version>0.0.1</version>
                 <configuration>
-                    <yetiServerUrl>http://localhost:9999</yetiServerUrl>
-                    <failureIgnore>true</failureIgnore>
+                    <ignoreFailure>true</ignoreFailure>
                     <tests>
                         <test>src/main/webapp/resources/test/banner/banner-test.html</test>
                         <test>src/main/webapp/resources/test/bassett/bassett-test.html</test>
@@ -455,7 +454,7 @@
                     <execution>
                         <phase>test</phase>
                         <goals>
-                            <goal>yeti</goal>
+                            <goal>grover</goal>
                         </goals>
                     </execution>
                 </executions>
