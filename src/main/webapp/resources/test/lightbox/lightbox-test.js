@@ -16,5 +16,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(lightboxTestCase);
+    Y.Test.Runner.masterSuite.name = "lightbox-test.js";
     Y.Test.Runner.run();
 });

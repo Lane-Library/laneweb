@@ -31,5 +31,6 @@ Y.use('console', 'test', function(Y){
     
     
     Y.Test.Runner.add(querymapTestCase);
+    Y.Test.Runner.masterSuite.name = "querymapper-test.js";
     Y.Test.Runner.run();
 });

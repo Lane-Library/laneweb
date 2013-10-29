@@ -85,5 +85,6 @@ Y.use('console', 'test', function(Y) {
     }).render('#log');
 
     Y.Test.Runner.add(bookmarksWidgetTestCase);
+    Y.Test.Runner.masterSuite.name = "bookmarks-widget-test.js";
     Y.Test.Runner.run();
 });

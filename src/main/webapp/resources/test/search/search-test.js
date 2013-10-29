@@ -123,5 +123,6 @@ YUI().use('node-event-simulate','console','test', function(T) {
     }).render('#log');
     
     T.Test.Runner.add(searchTestCase);
+    T.Test.Runner.masterSuite.name = "search-test.js";
     T.Test.Runner.run();
 });

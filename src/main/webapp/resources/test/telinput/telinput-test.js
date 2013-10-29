@@ -52,5 +52,6 @@ YUI().use('node-event-simulate', 'console', 'test', function(T){
     
     
     T.Test.Runner.add(telinputTestCase);
+    T.Test.Runner.masterSuite.name = "telinput-test.js";
     T.Test.Runner.run();
 });

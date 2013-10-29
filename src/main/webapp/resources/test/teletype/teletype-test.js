@@ -15,5 +15,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     }).render('#log');
     
     Y.Test.Runner.add(teletypeTestCase);
+    Y.Test.Runner.masterSuite.name = "teletype-test.js";
     Y.Test.Runner.run();
 });

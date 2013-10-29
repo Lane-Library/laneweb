@@ -16,5 +16,6 @@ Y.use('console', 'test', function(Y){
     
     
     Y.Test.Runner.add(resourceSearchTestCase);
+    Y.Test.Runner.masterSuite.name = "resource-search-test.js";
     Y.Test.Runner.run();
 });

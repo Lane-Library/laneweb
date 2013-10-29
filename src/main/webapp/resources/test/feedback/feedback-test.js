@@ -16,5 +16,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(feedbackTestCase);
+    Y.Test.Runner.masterSuite.name = "feedback-test.js";
     Y.Test.Runner.run();
 });

@@ -16,5 +16,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
     }).render('#log');
     
     Y.Test.Runner.add(bannerTestCase);
+    Y.Test.Runner.masterSuite.name = "banner-test.js";
     Y.Test.Runner.run();
 });

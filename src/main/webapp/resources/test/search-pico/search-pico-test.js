@@ -54,5 +54,6 @@ Y.use('console', "node-event-simulate", 'test', function(Y){
     
     
     Y.Test.Runner.add(searchpicoTestCase);
+    Y.Test.Runner.masterSuite.name = "search-pico-test.js";
     Y.Test.Runner.run();
 });

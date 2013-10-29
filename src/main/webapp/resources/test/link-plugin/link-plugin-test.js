@@ -66,5 +66,6 @@ Y.use("test", "console", "node-pluginhost", function(Y){
     }).render("#log");
 
     Y.Test.Runner.add(linkTestCase);
+    Y.Test.Runner.masterSuite.name = "link-plugin-test.js";
     Y.Test.Runner.run();
 });

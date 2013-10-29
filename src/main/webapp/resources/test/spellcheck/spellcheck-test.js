@@ -15,5 +15,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(spellCheckTestCase);
+    Y.Test.Runner.masterSuite.name = "spellcheck-test.js";
     Y.Test.Runner.run();
 });

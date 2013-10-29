@@ -57,5 +57,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(selectionsTestCase);
+    Y.Test.Runner.masterSuite.name = "selections-test.js";
     Y.Test.Runner.run();
 });

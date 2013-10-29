@@ -27,5 +27,6 @@ Y.use('console','test', function(Y) {
     }).render('#log');
     
     Y.Test.Runner.add(modelTestCase);
+    Y.Test.Runner.masterSuite.name = "model-test.js";
     Y.Test.Runner.run();
 });

@@ -43,5 +43,6 @@ Y.use('lane-tracking','node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(googleTestCase);
+    Y.Test.Runner.masterSuite.name = "google-test.js";
     Y.Test.Runner.run();
 });

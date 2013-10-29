@@ -27,5 +27,6 @@ Y.use("node-event-simulate", "console", "test", function(Y){
     
     
     Y.Test.Runner.add(searchHoverTextTestCase);
+    Y.Test.Runner.masterSuite.name = "hover-controller-test.js";
     Y.Test.Runner.run();
 });

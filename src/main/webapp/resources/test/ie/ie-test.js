@@ -15,5 +15,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(ieTestCase);
+    Y.Test.Runner.masterSuite.name = "ie-test.js";
     Y.Test.Runner.run();
 });

@@ -86,5 +86,6 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
 
     Y.Test.Runner.add(selectTestCase);
     Y.Test.Runner.add(searchSelectWidgetTestCase);
+    Y.Test.Runner.masterSuite.name = "search-select-test.js";
     Y.Test.Runner.run();
 });

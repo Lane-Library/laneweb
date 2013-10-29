@@ -15,5 +15,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(popinTestCase);
+    Y.Test.Runner.masterSuite.name = "popin-test.js";
     Y.Test.Runner.run();
 });

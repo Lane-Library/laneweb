@@ -15,6 +15,7 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(metasearchTestCase);
+    Y.Test.Runner.masterSuite.name = "metasearch-test.js";
     Y.Test.Runner.run();
 });
 

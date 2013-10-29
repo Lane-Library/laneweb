@@ -16,5 +16,6 @@ Y.use('console','test', function(Y) {
  
     
     Y.Test.Runner.add(laneTestCase);
+    Y.Test.Runner.masterSuite.name = "lane-test.js";
     Y.Test.Runner.run();
 });

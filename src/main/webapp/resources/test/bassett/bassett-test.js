@@ -39,5 +39,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(bassettTestCase);
+    Y.Test.Runner.masterSuite.name = "bassett-test.js";
     Y.Test.Runner.run();
 });

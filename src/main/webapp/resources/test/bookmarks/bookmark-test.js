@@ -132,5 +132,6 @@ Y.use('console', 'test', function(Y) {
     }).render('#log');
 
     Y.Test.Runner.add(bookmarkTestCase);
+    Y.Test.Runner.masterSuite.name = "bookmark-test.js";
     Y.Test.Runner.run();
 });

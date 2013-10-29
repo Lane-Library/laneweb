@@ -72,5 +72,6 @@ Y.use('node', 'node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(expandiesTestCase);
+    Y.Test.Runner.masterSuite.name = "expandies-test.js";
     Y.Test.Runner.run();
 });

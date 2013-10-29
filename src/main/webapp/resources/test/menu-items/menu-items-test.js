@@ -39,5 +39,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
     }).render('#log');
     
     Y.Test.Runner.add(menuItemsTestCase);
+    Y.Test.Runner.masterSuite.name = "menu-items-test.js";
     Y.Test.Runner.run();
 });

@@ -133,5 +133,6 @@ Y.use('dump', 'lane-tracking', 'node-event-simulate', 'console', 'test', functio
     
     
     Y.Test.Runner.add(trackingTestCase);
+    Y.Test.Runner.masterSuite.name = "tracking-test.js";
     Y.Test.Runner.run();
 });

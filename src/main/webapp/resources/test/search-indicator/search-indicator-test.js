@@ -25,5 +25,6 @@ Y.use("node-event-simulate", "console", "test", function(Y){
     
     
     Y.Test.Runner.add(searchIndicatorTestCase);
+    Y.Test.Runner.masterSuite.name = "search-indicator-test.js";
     Y.Test.Runner.run();
 });

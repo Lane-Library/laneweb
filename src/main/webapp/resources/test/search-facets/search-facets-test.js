@@ -15,5 +15,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     }).render('#log');
     
     Y.Test.Runner.add(searchFacetsTestCase);
+    Y.Test.Runner.masterSuite.name = "search-facets-test.js";
     Y.Test.Runner.run();
 });

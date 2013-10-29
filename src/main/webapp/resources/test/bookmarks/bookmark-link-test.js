@@ -33,5 +33,6 @@ Y.use('console', 'test', "node-event-simulate", function(Y) {
     }).render('#log');
 
     Y.Test.Runner.add(bookmarkLinkTestCase);
+    Y.Test.Runner.masterSuite.name = "bookmark-link-test.js";
     Y.Test.Runner.run();
 });

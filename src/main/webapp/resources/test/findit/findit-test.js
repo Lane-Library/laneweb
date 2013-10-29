@@ -15,5 +15,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     
     
     Y.Test.Runner.add(finditTestCase);
+    Y.Test.Runner.masterSuite.name = "findit-test.js";
     Y.Test.Runner.run();
 });

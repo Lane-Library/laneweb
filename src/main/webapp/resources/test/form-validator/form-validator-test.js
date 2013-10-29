@@ -33,5 +33,6 @@ Y.use("lane-form-validator", 'node-event-simulate', 'console', 'test', function(
     
     
     Y.Test.Runner.add(formsTestCase);
+    Y.Test.Runner.masterSuite.name = "form-validator-test.js";
     Y.Test.Runner.run();
 });

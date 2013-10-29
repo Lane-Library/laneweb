@@ -65,5 +65,6 @@ Y.use("attribute", "node-event-simulate", "console", "test", function(Y){
     
     
     Y.Test.Runner.add(textinputsTestCase);
+    Y.Test.Runner.masterSuite.name = "textinputs-test.js";
     Y.Test.Runner.run();
 });
