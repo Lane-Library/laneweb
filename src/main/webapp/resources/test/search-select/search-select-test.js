@@ -20,7 +20,7 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
         	Y.Assert.areEqual("foo", this.select.getSelected());
         },
         testGetSelectedWithIndex : function() {
-        	Y.Assert.areEqual("bar", new Y.lane.Select(["foo","bar"], 1).getSelected());
+        	Y.Assert.areEqual("bar", new Y.lane.Select(["foo","bar"],["Foo","Bar"], 1).getSelected());
         },
         testSetSelected : function() {
         	this.select.setSelected(1);
@@ -72,9 +72,9 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
             testSelectedContentChanges : function() {
             	var selectedContent = Y.one("." + this.widget.getClassName() + "-selected");
             	this.model.setSelected("foo");
-            	Y.Assert.areEqual("foo content", selectedContent.get("firstChild").get("nodeValue"));
+            	Y.Assert.areEqual("<span>foo content</span>", selectedContent.get("innerHTML"));
             	this.model.setSelected("bar");
-            	Y.Assert.areEqual("bar content", selectedContent.get("firstChild").get("nodeValue"));
+            	Y.Assert.areEqual("<span>bar content</span>", selectedContent.get("innerHTML"));
             }
     });
     

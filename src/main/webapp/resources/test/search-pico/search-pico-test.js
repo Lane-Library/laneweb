@@ -23,9 +23,9 @@ Y.use('console', "node-event-simulate", 'test', function(Y){
             var nav = Y.one('#laneNav');
             var search = Y.one('#search');
             var picoFields = Y.one("#picoFields");
-            Y.Assert.isFalse(nav.hasClass('clinical'), 'nav class clinical');
-                Y.Assert.isFalse(search.hasClass('clinical'), 'search form class clinical');
-                Y.Assert.areEqual("none", picoFields.getStyle("display"));
+            Y.Assert.isFalse(nav.hasClass('clinical'));
+            Y.Assert.isFalse(search.hasClass('clinical'));
+            Y.Assert.isFalse(picoFields.hasClass("active"));
         },
         testSetPatientCondition: function() {
             //simulate blur broken in IE http://yuilibrary.com/projects/yui3/ticket/2531702
