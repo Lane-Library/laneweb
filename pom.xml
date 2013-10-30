@@ -75,6 +75,7 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>com.github.timurstrekalov</groupId>
                 <artifactId>saga-maven-plugin</artifactId>
@@ -104,6 +105,7 @@
                     <outputDir>${project.build.directory}/coverage</outputDir>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
