@@ -5,6 +5,9 @@
         searchTerms = model.get(model.QUERY),
         searchSource = model.get(model.SOURCE),
         Tracker = function() {
+            model.on(model.QUERY + "Change", function(event) {
+                searchTerms = event.newVal;
+            });
             //TODO more descriptive variable names
             //TODO put conditionals into sub-functions
             //TODO more thorough documentation
