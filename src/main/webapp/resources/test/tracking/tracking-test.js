@@ -2,17 +2,154 @@
  * @author ceyates
  */
 Y.applyConfig({fetchCSS:true});
-Y.use('dump', 'lane-tracking', 'node-event-simulate', 'console', 'test', function(Y){
+Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
+    
+    Y.on("click", function(event) {
+        event.preventDefault();
+        event._event.preventDefault();
+    });
 
     var trackingTestCase = new Y.Test.Case({
+        
         name: "Lane Tracking TestCase",
-        trackingData: {},
-        track: function(td) {
-            this.trackingData = td;
-        },
+        
+        event: null,
+        
+        pageView: null,
+        
         setUp: function() {
-            this.trackingData = {};
-        }//,
+            this.event = null;
+            Y.on("lane:trackableEvent", this.eventCallback, this);
+            this.pageView = null;
+            Y.on("lane:trackablePageview", this.pageViewCallback, this);
+        },
+        
+        eventCallback: function(event) {
+            this.event = event;
+        },
+        
+        pageViewCallback: function(event) {
+            this.pageView = event;
+        },
+        
+        tearDown: function() {
+            Y.detach("lane:trackableEvent", this);
+            Y.detach("lane:trackablePageview", this);
+        },
+        
+        testBodyClickDoesNothing : function() {
+            Y.one("body").simulate("click");
+            Y.Assert.isNull(this.event);
+            Y.Assert.isNull(this.pageView);
+        },
+        
+        testSearchFacetClick: function() {
+            Y.one(".searchFacet a").simulate("click");
+            Y.Assert.areEqual("search facet", this.pageView.title);
+        },
+        
+        testExpandyTriggerClick: function() {
+            var link = Y.one('.yui3-accordion-item-trigger');
+            link.simulate('click');
+            Y.Assert.areEqual("Expandy:head", this.pageView.title);
+        },
+        
+        testFavoritesClick: function() {
+            var link = Y.one("#favorites a");
+            link.simulate("click");
+            Y.Assert.areEqual("favorites", this.event.label);
+            Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
+        },
+        
+        testBookmarksClick: function() {
+            var link = Y.one("#bookmarks a");
+            link.simulate("click");
+            Y.Assert.areEqual("bookmarks", this.event.label);
+            Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
+        },
+        
+        testBookmarksEditorClick: function() {
+            var link = Y.one(".yui3-bookmark-editor-content a");
+            link.simulate("click");
+            Y.Assert.areEqual("bookmarks editor", this.event.label);
+            Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
+        },
+        
+        testLaneNavClick: function() {
+            var link = Y.one("#laneNav a");
+            link.simulate("click");
+            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual("lane:laneNav-top", this.event.category);
+            Y.Assert.areEqual(link.get("href"), this.event.action);
+        },
+        
+        testQLinkClick: function() {
+            var link = Y.one("#qlinks a");
+            link.simulate("click");
+            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual("lane:quickLinkClick", this.event.category);
+            Y.Assert.areEqual(link.get("href"), this.event.action);
+        },
+        
+        testTopResourcesClick: function() {
+            var link = Y.one("#topResources a");
+            link.simulate("click");
+            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual("lane:topResources", this.event.category);
+            Y.Assert.areEqual(link.get("href"), this.event.action);
+        },
+        
+        testBannerContentClick: function() {
+            var link = Y.one(".banner-content a");
+            link.simulate("click");
+            Y.Assert.areEqual(link.get("title"), this.event.label);
+            Y.Assert.areEqual("lane:bannerClick", this.event.category);
+            Y.Assert.areEqual(link.get("href"), this.event.action);
+        },
+        
+        testSectionMenuClick: function() {
+            var link = Y.one(".sectionMenu a");
+            link.simulate("click");
+            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual("lane:laneNav-sectionMenu", this.event.category);
+            Y.Assert.areEqual(link.get("href"), this.event.action);
+        },
+        
+        testLaneFooterClick: function() {
+            var link = Y.one("#laneFooter a");
+            link.simulate("click");
+            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual("lane:laneNav-footer", this.event.category);
+            Y.Assert.areEqual(link.get("href"), this.event.action);
+        },
+        
+        testBrowseResultClick: function() {
+            var link = Y.one(".lwSearchResults a");
+            link.simulate("click");
+            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual("lane:browseResultClick", this.event.category);
+            Y.Assert.areEqual(document.location.pathname, this.event.action);
+            Y.Assert.areEqual(101, this.event.value);
+        },
+        
+        testSearchResultClick: function() {
+            Y.lane.Model.set(Y.lane.Model.QUERY, "query");
+            var link = Y.one(".lwSearchResults a");
+            link.simulate("click");
+            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual("lane:searchResultClick", this.event.category);
+            Y.Assert.areEqual("query", this.event.action);
+            Y.Assert.areEqual(101, this.event.value);
+            Y.lane.Model.set(Y.lane.Model.QUERY, null);
+        }
+        
+//        trackingData: {},
+//        track: function(td) {
+//            this.trackingData = td;
+//        },
+//        setUp: function() {
+//            this.trackingData = {};
+//        },
 //        testExists: function() {
 //            Y.Assert.isObject(LANE.tracking);
 //        },
