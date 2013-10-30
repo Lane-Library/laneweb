@@ -24,6 +24,8 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
     private static final String HREF = "href";
 
     private static final String ID = "id";
+    
+    private static final String SPAN = "span";
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
@@ -36,10 +38,16 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "resourceListPagination");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            StringBuilder sb = new StringBuilder("Displaying ");
             String hrefBase = pagingData.getBaseQuery();
             if (size > length) {
-                sb.append(start + 1).append(" to ").append(start + length).append(" of ");
+                XMLUtils.data(xmlConsumer, "Displaying ");
+                atts = new AttributesImpl();
+                atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "pageStart");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
+                XMLUtils.data(xmlConsumer, Integer.toString(start + 1));
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
+                StringBuilder sb = new StringBuilder(" to ");
+                sb.append(start + length).append(" of ");
                 XMLUtils.data(xmlConsumer, sb.toString());
                 atts = new AttributesImpl();
                 sb.setLength(0);
@@ -55,6 +63,7 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
                 XMLUtils.data(xmlConsumer, sb.toString());
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
             } else {
+                StringBuilder sb = new StringBuilder("Displaying ");
                 sb.append("all ").append(size).append(" matches");
                 XMLUtils.data(xmlConsumer, sb.toString());
             }
@@ -62,8 +71,7 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
                 // <a id="seeAll" href="?{$no-page-query-string}page=all">See All</a>
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "seeAll");
-                sb.setLength(0);
-                sb.append("?");
+                StringBuilder sb = new StringBuilder("?");
                 if (hrefBase.length() > 0) {
                     sb.append(hrefBase).append("&");
                 }

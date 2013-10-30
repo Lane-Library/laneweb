@@ -25,6 +25,8 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     private static final String HREF = "href";
 
+    private static final String ID = "id";
+
     private static final String LI = "li";
 
     private static final String SPAN = "span";
@@ -75,6 +77,11 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
     protected void createSpanWithClass(final XMLConsumer xmlConsumer, final String clazz, final String text)
             throws SAXException {
         createElementWithClass(xmlConsumer, SPAN, clazz, text);
+    }
+
+    protected void createSpanWithId(final XMLConsumer xmlConsumer, final String id, final String text)
+            throws SAXException {
+        createElementWithId(xmlConsumer, SPAN, id, text);
     }
 
     protected void createTitle(final XMLConsumer xmlConsumer, final String title) throws SAXException {
@@ -188,6 +195,13 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
             final String text) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
+        XMLUtils.createElement(xmlConsumer, XHTML_NS, name, atts, text);
+    }
+
+    private void createElementWithId(final XMLConsumer xmlConsumer, final String name, final String id,
+            final String text) throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, ID, ID, CDATA, id == null ? EMPTY : id);
         XMLUtils.createElement(xmlConsumer, XHTML_NS, name, atts, text);
     }
 
