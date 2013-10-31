@@ -9,13 +9,13 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
         form: Y.one("form"),
         
         testForClassIncorrect: function() {
-            form.one("input[type='submit']").simulate("click");
+            form.simulate("submit");
             Y.Assert.isTrue(form.one("input").hasClass("incorrect"));
         },
         
         testForClassCorrect: function() {
             form.one("input").set("value", "foo");
-            form.one("input[type='submit']").simulate("click");
+            form.simulate("submit");
             Y.Assert.isTrue(form.one("input").hasClass("correct"));
         }
     });

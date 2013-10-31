@@ -73,14 +73,13 @@
             proxy : {
                 readOnly : true,
                 valueFn : function() {
-                    return this.get(LINK_HOST) === PROXY_HOST
-                    && this.get(PATH) === PROXY_LOGIN_PATH;
+                    return this.get(LINK_HOST) === PROXY_HOST && this.get(PATH) === PROXY_LOGIN_PATH;
                 }
             },
             proxyLogin : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get(LINK_HOST) != documentHostName) {
+                    if (this.get(LINK_HOST) !== documentHostName) {
                         return false;
                     } else {
                         return this.get(PATH) === loginPath;

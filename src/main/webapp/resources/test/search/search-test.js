@@ -92,7 +92,9 @@ Y.use('node-event-simulate','console','test', function(T) {
         testResetClickClearsInput : function() {
         	T.one("#searchTerms").set("value","foo");
         	T.one("#searchReset").simulate("click");
-        	T.Assert.areEqual("", T.one("#searchTerms").get("value"));
+        	setTimeout(function() {
+                T.Assert.areEqual("", T.one("#searchTerms").get("value"));
+        	},500);
         },
         testResetVisbleOnInputText : function() {
         	Y.one("#searchTerms").set("value","foo");
