@@ -1,4 +1,4 @@
-YUI().use('node-event-simulate', 'console', 'test', function(T){
+Y.use('node-event-simulate', 'console', 'test', function(T){
 
     var telinputTestCase = new T.Test.Case({
         name: "Lane telinput Testcase",

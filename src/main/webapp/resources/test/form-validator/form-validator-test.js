@@ -1,5 +1,5 @@
 Y.applyConfig({fetchCSS:true});
-Y.use("lane-form-validator", 'node-event-simulate', 'console', 'test', function(Y){
+Y.use('node-event-simulate', 'console', 'test', function(Y){
 
     var form = Y.one("form"),
     

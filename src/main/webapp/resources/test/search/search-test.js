@@ -2,7 +2,7 @@
  * @author ceyates
  */
 //Y.applyConfig({fetchCSS:true});
-YUI().use('node-event-simulate','console','test', function(T) {
+Y.use('node-event-simulate','console','test', function(T) {
 
     
     var searchTestCase = new T.Test.Case({
