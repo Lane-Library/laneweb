@@ -137,6 +137,30 @@ Y.use("*",  function(){
             Y.Assert.areEqual("query", this.event.action);
             Y.Assert.areEqual(101, this.event.value);
             Y.lane.Model.set(Y.lane.Model.QUERY, null);
+        },
+        
+        testPopupClick: function() {
+            var link = Y.one("#popup");
+            link.simulate("click");
+            Y.Assert.areEqual(document.location.host, this.pageView.host);
+            Y.Assert.areEqual(document.location.pathname, this.pageView.path);
+            Y.Assert.areEqual("YUI Pop-up [local]: foo", this.pageView.title);
+        },
+        
+        testCookieFetchClick: function() {
+            var link = Y.one("#cookiefetch");
+            link.simulate("click");
+            Y.Assert.areEqual("www.example.com", this.pageView.host);
+            Y.Assert.areEqual("/foo/bar", this.pageView.path);
+            Y.Assert.areEqual("cookie fetch", this.pageView.title);
+        },
+        
+        testProxyLoginClick: function() {
+            var link = Y.one("#proxylogin");
+            link.simulate("click");
+            Y.Assert.areEqual("www.nejm.org", this.pageView.host);
+            Y.Assert.areEqual("/", this.pageView.path);
+            Y.Assert.areEqual("proxy login", this.pageView.title);
         }
         
 //        trackingData: {},
