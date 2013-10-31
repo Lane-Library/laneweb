@@ -1,8 +1,4 @@
-/**
- * @author ceyates
- */
-Y.applyConfig({fetchCSS:true});
-Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
+Y.use("*",  function(){
     
     Y.on("click", function(event) {
         event.preventDefault();
@@ -78,7 +74,7 @@ Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
         testLaneNavClick: function() {
             var link = Y.one("#laneNav a");
             link.simulate("click");
-            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:laneNav-top", this.event.category);
             Y.Assert.areEqual(link.get("href"), this.event.action);
         },
@@ -86,7 +82,7 @@ Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
         testQLinkClick: function() {
             var link = Y.one("#qlinks a");
             link.simulate("click");
-            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:quickLinkClick", this.event.category);
             Y.Assert.areEqual(link.get("href"), this.event.action);
         },
@@ -94,7 +90,7 @@ Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
         testTopResourcesClick: function() {
             var link = Y.one("#topResources a");
             link.simulate("click");
-            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:topResources", this.event.category);
             Y.Assert.areEqual(link.get("href"), this.event.action);
         },
@@ -110,7 +106,7 @@ Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
         testSectionMenuClick: function() {
             var link = Y.one(".sectionMenu a");
             link.simulate("click");
-            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:laneNav-sectionMenu", this.event.category);
             Y.Assert.areEqual(link.get("href"), this.event.action);
         },
@@ -118,7 +114,7 @@ Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
         testLaneFooterClick: function() {
             var link = Y.one("#laneFooter a");
             link.simulate("click");
-            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:laneNav-footer", this.event.category);
             Y.Assert.areEqual(link.get("href"), this.event.action);
         },
@@ -126,7 +122,7 @@ Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
         testBrowseResultClick: function() {
             var link = Y.one(".lwSearchResults a");
             link.simulate("click");
-            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:browseResultClick", this.event.category);
             Y.Assert.areEqual(document.location.pathname, this.event.action);
             Y.Assert.areEqual(101, this.event.value);
@@ -136,7 +132,7 @@ Y.use('dump', 'node-event-simulate', "console", 'test', function(Y){
             Y.lane.Model.set(Y.lane.Model.QUERY, "query");
             var link = Y.one(".lwSearchResults a");
             link.simulate("click");
-            Y.Assert.areEqual(link.get("textContent"), this.event.label);
+            Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:searchResultClick", this.event.category);
             Y.Assert.areEqual("query", this.event.action);
             Y.Assert.areEqual(101, this.event.value);
