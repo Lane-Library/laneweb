@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li>
-                <a href="/apps/proxy/credential?url=http://www.google.com" rel="trackable">trackable proxy</a>
+                <a id="proxylink" href="/secure/apps/proxy/credential?url=http://www.google.com/foo/bar?baz" rel="trackable">trackable proxy</a>
             </li>
             <li>
                 <a href="lane-tracking-test.pdf?foo=bar" rel="trackable">trackable pdf</a>
@@ -96,12 +96,12 @@
             <li><a href="result">result</a></li>
         </ul>
         <a id="bookmarklet" href="javascript:voidfoobookmarkletfoo">bookmarklet</a>
-        <a id="popup" rel="popup local foo">foo</a>
-        <a href="/cookiesFetch.html?entryURL=http%3A%2F%2Fwww.example.com%2FgetCookies&amp;path=http%3A%2F%2Fwww.example.com%2Ffoo%2Fbar" id="cookiefetch">cookie fetch</a>
-        <a id="proxylogin" href="/secure/apps/proxy/credential?url=http://www.nejm.org/"
-            >proxy login</a>
-
-
+        <a href="foo.jpg"><img alt="title" id="eventImageLink" src="../../images/plus.png"/></a> 
+        <a href="foo.jpg"><img id="eventImageNoAlt" src="../../images/plus.png"/></a> 
+        <a id="popup" rel="popup local foo">popup</a>
+<a id="laneproxy"
+                    href="http://laneproxy.stanford.edu/login?user=ditenus&amp;ticket=tekcit&amp;url=http://www.nejm.org/"
+                    >proxy link</a>
         <script type="text/javascript" src="../yui-test-3.13.0.js"></script>
         <script src="../../javascript/lane.js" type="text/javascript"></script>
         <script src="../../javascript/model.js" type="text/javascript"></script>
