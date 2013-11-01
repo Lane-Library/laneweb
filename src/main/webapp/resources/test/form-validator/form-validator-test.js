@@ -1,5 +1,5 @@
 Y.applyConfig({fetchCSS:true});
-Y.use("lane-form-validator", 'node-event-simulate', 'console', 'test', function(Y){
+Y.use('node-event-simulate', 'console', 'test', function(Y){
 
     var form = Y.one("form"),
     
@@ -9,13 +9,13 @@ Y.use("lane-form-validator", 'node-event-simulate', 'console', 'test', function(
         form: Y.one("form"),
         
         testForClassIncorrect: function() {
-            form.one("input[type='submit']").simulate("click");
+            form.simulate("submit");
             Y.Assert.isTrue(form.one("input").hasClass("incorrect"));
         },
         
         testForClassCorrect: function() {
             form.one("input").set("value", "foo");
-            form.one("input[type='submit']").simulate("click");
+            form.simulate("submit");
             Y.Assert.isTrue(form.one("input").hasClass("correct"));
         }
     });

@@ -42,13 +42,15 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
 
     private void createDisplayingMarkup(final XMLConsumer xmlConsumer, final EresourceListPagingData pagingData)
             throws SAXException {
-        StringBuilder sb = new StringBuilder("Displaying ");
         String hrefBase = pagingData.getBaseQuery();
         int size = pagingData.getSize();
         int length = pagingData.getLength();
         int start = pagingData.getStart();
         if (size > length) {
-            sb.append(start + 1).append(" to ").append(start + length).append(" of ");
+            XMLUtils.data(xmlConsumer, "Displaying ");
+            createSpanWithId(xmlConsumer, "pageStart", Integer.toString(start + 1));
+            StringBuilder sb = new StringBuilder(" to ");
+            sb.append(start + length).append(" of ");
             XMLUtils.data(xmlConsumer, sb.toString());
             sb.setLength(0);
             sb.append("?");
@@ -58,6 +60,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append("page=all");
             createAnchor(xmlConsumer, sb.toString(), size + " matches");
         } else {
+            StringBuilder sb = new StringBuilder("Displaying ");
             sb.append("all ").append(size).append(" matches");
             XMLUtils.data(xmlConsumer, sb.toString());
         }

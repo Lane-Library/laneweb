@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div class="resourceListPagination">Displaying 1 to 260 of <a href="?a=a&amp;page=all">1039 matches</a>
+<div class="resourceListPagination">Displaying <span id="pageStart">1</span> to 260 of <a href="?a=a&amp;page=all">1039 matches</a>
    <a class="pagingButton gray-btn" href="#">
       <span>Choose Aa-Az</span>
    </a>

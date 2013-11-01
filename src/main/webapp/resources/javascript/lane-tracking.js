@@ -5,6 +5,9 @@
         searchTerms = model.get(model.QUERY),
         searchSource = model.get(model.SOURCE),
         Tracker = function() {
+            model.on(model.QUERY + "Change", function(event) {
+                searchTerms = event.newVal;
+            });
             //TODO more descriptive variable names
             //TODO put conditionals into sub-functions
             //TODO more thorough documentation
@@ -24,17 +27,17 @@
                 else if (link.ancestor("#laneNav")) {
                     category = "lane:laneNav-top";
                     action = link.get('href');
-                    label = link.get('textContent');
+                    label = link.get('text');
                 }
                 else if (link.ancestor("#qlinks")) {
                     category = "lane:quickLinkClick";
                     action = link.get('href');
-                    label = link.get('textContent');
+                    label = link.get('text');
                 }
                 else if (link.ancestor("#topResources")) {
                     category = "lane:topResources";
                     action = link.get('href');
-                    label = link.get('textContent');
+                    label = link.get('text');
                 }
                 else if (link.ancestor(".banner-content")) {
                     category = "lane:bannerClick";
@@ -44,20 +47,20 @@
                 else if (link.ancestor(".sectionMenu")) {
                     category = "lane:laneNav-sectionMenu";
                     action = link.get('href');
-                    label = link.get('textContent');
+                    label = link.get('text');
                 }
                 else if (link.ancestor("#laneFooter")) {
                     category = "lane:laneNav-footer";
                     action = link.get('href');
-                    label = link.get('textContent');
+                    label = link.get('text');
                 }
                 else if (link.ancestor(".lwSearchResults")) {
                 	var list = link.ancestor(".lwSearchResults"),
                 	    pageStart = Y.one("#pageStart");
                 	// pageStart is the value in the pageStart span or 1 if its not there.
-                	pageStart = pageStart ? parseInt(pageStart.get("textContent"), 10) : 1;
+                	pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
                 	value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
-                    label = link.get('textContent');
+                    label = link.get('text');
                     if (searchTerms) {
                         category = "lane:searchResultClick";
                         action = searchTerms;
@@ -188,7 +191,7 @@
                     }
                     //next get the text content before any nested markup
                     if (!title) {
-                        title = node.get('textContent');
+                        title = node.get('text');
                     }
                     if (!title) {
                         title = node.get('innerText');

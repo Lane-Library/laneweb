@@ -75,10 +75,11 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>com.github.timurstrekalov</groupId>
                 <artifactId>saga-maven-plugin</artifactId>
-                <version>1.4.2</version>
+                <version>1.5.0</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
@@ -88,9 +89,10 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <threadCount>36</threadCount>
                     <baseDir>src/main/webapp/resources/test</baseDir>
-                    <includes> **/*.html </includes>
-                    <excludes> **/popup-test.html, **/index.html </excludes>
+                    <includes> **/*-test.html </includes>
+                    <excludes> **/popup-test.html </excludes>
                     <noInstrumentPatterns>
                         <pattern>.+/yui-.+\.js</pattern>
                         <pattern>.+/jquery.+\.js</pattern>
@@ -103,6 +105,7 @@
                     <outputDir>${project.build.directory}/coverage</outputDir>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
