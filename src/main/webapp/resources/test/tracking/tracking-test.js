@@ -50,28 +50,37 @@ Y.use("*",  function(){
         },
         
         testFavoritesClick: function() {
+            Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
             var link = Y.one("#favorites a");
             link.simulate("click");
+            Y.lane.Model.set(Y.lane.Model.AUTH, null);
             Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
+            Y.Assert.areEqual("auth", this.event.action);
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
         
         testBookmarksClick: function() {
+            Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
             var link = Y.one("#bookmarks a");
             link.simulate("click");
+            Y.lane.Model.set(Y.lane.Model.AUTH, null);
             Y.Assert.areEqual(link.get("text"), this.event.label);
+            Y.Assert.areEqual("auth", this.event.action);
             Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
         
         testBookmarksEditorClick: function() {
+            Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
             var link = Y.one(".yui3-bookmark-editor-content a");
             link.simulate("click");
+            Y.lane.Model.set(Y.lane.Model.AUTH, null);
             Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
+            Y.Assert.areEqual("auth", this.event.action);
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
