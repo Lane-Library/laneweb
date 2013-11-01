@@ -57,7 +57,7 @@
 			    if(link){
 			    	clickedUrl = link.get('href');
 			    }
-				if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("laneproxy") > 0)) {
+				if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("laneproxy") > 0) && clickedUrl.indexOf("javascript") != 0) {
 					redirectUrl = encodeURIComponent(link.get('href'));
 					event.preventDefault();
 					// don\'t want a redirect with the tracking see tracking.js code if !rel  documment.location is not set
