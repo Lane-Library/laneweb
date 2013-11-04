@@ -1,12 +1,23 @@
-/**
- * @author ceyates
- */
-
-Y.applyConfig({fetchCSS:true});
-Y.use('node-event-simulate', 'console', 'test', function(Y){
+(function(){
+    
+    Y.io = function(url, config) {
+        config.on.success.apply(config.context);
+    };
 
     var feedbackTestCase = new Y.Test.Case({
-        name: 'Lane Feedback Test Case'
+        name: 'Lane Feedback Test Case',
+        
+        resetContent: function() {
+            Y.lane.Lightbox.set("url", "url#feedback1");
+            Y.lane.Lightbox.setContent("<div id='feedback'>" + Y.one("#xfeedback").get("innerHTML") + "</div>");
+        },
+        
+        testSendFeedback: function() {
+            this.resetContent();
+            var feedback = Y.Widget.getByNode("#feedback");
+            feedback.sendFeedback(Y.one("form"));
+            Y.Assert.areEqual(feedback.get("thanks"), feedback.get("contentBox").get("text"));
+        }
     });
     
     Y.one('body').addClass('yui3-skin-sam');
@@ -18,4 +29,5 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
     Y.Test.Runner.add(feedbackTestCase);
     Y.Test.Runner.masterSuite.name = "feedback-test.js";
     Y.Test.Runner.run();
-});
+    
+})();
