@@ -5,7 +5,12 @@ Y.applyConfig({fetchCSS:true});
 Y.use('node-event-simulate', 'console', 'test', function(Y){
 
     var spellCheckTestCase = new Y.Test.Case({
-        name: 'Lane Spellcheck Test Case'
+        name: 'Lane Spellcheck Test Case',
+        testSpellCheck: function() {
+            var node = Y.one("#spellCheck").one("a");
+            Y.Assert.areEqual("suggestion", node.get("text"));
+            Y.Assert.areEqual(document.location, node.get("href"));
+        }
     });
     
     Y.one('body').addClass('yui3-skin-sam');

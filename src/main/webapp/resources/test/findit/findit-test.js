@@ -5,7 +5,13 @@ Y.applyConfig({fetchCSS:true});
 Y.use('node-event-simulate', 'console', 'test', function(Y){
 
     var finditTestCase = new Y.Test.Case({
-        name: 'Lane Findit Test Case'
+        name: 'Lane Findit Test Case',
+        
+        testFindIt: function() {
+            var node = Y.one("#findIt").one("a");
+            Y.Assert.areEqual("http://www.example.com/openurl", node.get("href"));
+            Y.Assert.areEqual("title", node.get("text"));
+        }
     });
     
     Y.one('body').addClass('yui3-skin-sam');
