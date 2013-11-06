@@ -12,7 +12,6 @@
                     <property name="redirectMap">
                         <map>
                             <entry key="/classes/index\.html" value="/classes-consult/laneclasses.html"/>
-                            <entry key="/index\.html\?template=shc(.*)" value="/index\.html\?sourceid=shc$1"/>
                             <entry key="/lksc-print(?:.*)" value="/help/lksc-print.html"/>
                             <entry key="/classes" value="/classes-consult/laneclasses.html"/>
                         </map>
