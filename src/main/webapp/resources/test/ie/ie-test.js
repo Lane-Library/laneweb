@@ -25,7 +25,8 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
         
         testLibraryContextHasNoBorder: function() {
             var node = Y.one("#libraryContact").one("li");
-            Y.Assert.areEqual("none", node.getStyle("borderLeft"));
+            var style = node.getStyle("borderLeft");
+            Y.Assert.isTrue(style.indexOf("none") >= 0 || style === "currentColor");
         },
         
         testType1DetailsDivHasClassChild: function() {
