@@ -27,14 +27,6 @@
                             <entry key="/online/(.*)" value="/newpage.html?page=/biomed-resources/$1"/>
                             <entry key="/portals/bassett/(.*)" value="/newpage.html?page=/biomed-resources/bassett/$1"/>
                             <entry key="/bassett/(.*)" value="/newpage.html?page=/biomed-resources/bassett/$1"/>
-                            <entry key="/search\.html\?source=all&amp;(.*)" value="/newpage.html?page=/search\.html\?source=all-all%26$1"/>
-                            <entry key="/search\.html\?source=(ej|database|book|software|video|cc|lanesite)&amp;(.*)" value="/newpage.html?page=/search\.html\?source=catalog-$1%26$2"/>
-                            <entry key="/search\.html\?source=(clinical|history)&amp;(.*)" value="/newpage.html?page=/search\.html\?source=$1-all%26$2"/>
-                            <entry key="/search\.html\?source=research&amp;(.*)" value="/newpage.html?page=/search\.html\?source=bioresearch-all%26$1"/>
-                            <entry key="/search\.html\?source=peds&amp;(.*)" value="/newpage.html?page=/portals\/peds\.html\?$1"/>
-                            <entry key="/local/antibiogram/index\.html(.*)" value="/newpage.html?page=/biomed-resources/antibiograms-shc.html$1"/>
-                            <entry key="/local/antibiogramLPCH/index\.html(.*)" value="/newpage.html?page=/biomed-resources/antibiograms-lpch.html$1"/>
-                            <entry key="/local/(antibiogram(?:LPCH)?)/(.*)" value="/newpage.html?page=/biomed-resources/$1/$2"/>
                             <entry key="/m" value="/m/index\.html"/>
                         </map>
                     </property>
