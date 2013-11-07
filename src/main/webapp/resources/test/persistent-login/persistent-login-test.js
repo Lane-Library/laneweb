@@ -1,7 +1,15 @@
 (function(){
 
+    Y.io = function(url, config) {
+        config.on.success.apply(this, [0,{responseText:'<div><a id="yes-persistent-login">yes</a><a id="no-persistent-login">no</a><input type="checkbox" id="dont-ask-again"/></div>'}]);
+    };
     var persistentLoginTestCase = new Y.Test.Case({
-        name: 'persistent-login Test Case'
+        name: 'persistent-login Test Case',
+        
+        testLoginClick: function() {
+            Y.one("#login").simulate("click");
+            Y.Assert.areEqual("yes", Y.one("#yes-persistent-login").get("text"));
+        }
     });
 
     
