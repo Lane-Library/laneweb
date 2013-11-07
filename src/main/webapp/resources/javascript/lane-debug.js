@@ -116,6 +116,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     });
     
     var i, laneJavascript = [
+        "location.js",
         "model.js",
         "link-plugin.js",
         "lane-ie.js",

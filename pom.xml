@@ -221,6 +221,7 @@
                             <includes>
                                 <include>../../../../src/main/webapp/resources/javascript/yui-3.13.0.js</include>
                                 <include>lane-min.js</include>
+                                <include>location-min.js</include>
                                 <include>model-min.js</include>
                                 <include>link-plugin-min.js</include>
                                 <include>lane-ie-min.js</include>
@@ -429,6 +430,7 @@
                         <test>src/main/webapp/resources/test/lane/lane-test.html</test>
                         <test>src/main/webapp/resources/test/lightbox/lightbox-test.html</test>
                         <test>src/main/webapp/resources/test/link-plugin/link-plugin-test.html</test>
+                        <test>src/main/webapp/resources/test/location/location-test.html</test>
                         <test>src/main/webapp/resources/test/menu-delay/menu-delay-test.html</test>
                         <test>src/main/webapp/resources/test/menu-items/menu-items-test.html</test>
                         <test>src/main/webapp/resources/test/metasearch/metasearch-test.html</test>
