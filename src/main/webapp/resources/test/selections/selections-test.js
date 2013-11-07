@@ -17,9 +17,11 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
             Y.Assert.isTrue(allVisible);
         },
         testOthersHiddenOnSelect: function() {
-            var selections = Y.all('selections');
-            var selection = Y.all('option').item(1).get('value');
-            Y.all('option').item(1).simulate('click');
+            var selections = Y.all('#selections li');
+            var select = Y.one('#selections-select');
+            select.set("selectedIndex", 1);
+            select.simulate("change");
+            var selection = select.get("value");
             var othersVisible = false;
             for (var i = 0; i < selections.size(); i++) {
                 if (selections.item(i).get('id') != selection) {
@@ -28,12 +30,14 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
                     }
                 }
             }
-            Y.Assert.isTrue(othersVisible === false);
+            Y.Assert.isFalse(othersVisible);
         },
         testAnotherOthersHiddenOnSelect: function() {
             var selections = Y.all('selections');
-            var selection = Y.all('option').item(3).get('value');
-            Y.all('option').item(3).simulate('click');
+            var select = Y.one('#selections-select');
+            select.set("selectedIndex", 3);
+            select.simulate("change");
+            var selection = select.get("value");
             var othersVisible = false;
             for (var i = 0; i < selections.size(); i++) {
                 if (selections.item(i).get('id') != selection) {
@@ -42,10 +46,12 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
                     }
                 }
             }
-            Y.Assert.isTrue(othersVisible === false);
+            Y.Assert.isFalse(othersVisible);
         },
         testAllVisibleOnSelectAll: function() {
-            Y.one('option').simulate('click');
+            var select = Y.one('#selections-select');
+            select.set("selectedIndex", 0);
+            select.simulate("change");
             this.testAllVisible();
         }
     });
