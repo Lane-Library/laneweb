@@ -51,7 +51,7 @@
                     result.show();
                 },
                 failure: function(){
-                    //TODO: use window.location to set page to href of facet
+                    //TODO: use Y.lane.Location.set("href", href) to set page to href of facet
                 }
             },
             "arguments": {

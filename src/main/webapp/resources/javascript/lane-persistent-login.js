@@ -6,6 +6,7 @@
 	persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME), 
 	now = new Date(),
 	needPopup= true,
+	location = Y.lane.Location,
 	model = Y.lane.Model,
 	basePath = model.get(model.BASE_PATH) || "",
 	auth = model.get(model.AUTH),
@@ -29,13 +30,15 @@
 	
 	//if someone click on MyLane Login 
 	 Y.on("click",function(event) {
+	     var locationHref = location.get("href"),
+	         encodedHref = encodeURIComponent(locationHref);
 		 if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
 			//will be redirected to same page after the webauth
-			document.location = basePath + '/secure/persistentLogin.html?pl=false&url='+ encodeURIComponent(document.location);
+		     location.set("href", basePath + '/secure/persistentLogin.html?pl=false&url='+ encodedHref);
 		} else {
 			var link = event.target;
 			link.set('rel', 'persistentLogin');
-			redirectUrl = encodeURIComponent(document.location);
+			redirectUrl = encodedHref;
 			getPopup(basePath + '/plain/persistent-login-popup.html');
 		}
 		event.preventDefault();
@@ -73,7 +76,7 @@
                         Y.io(basePath + '/logout', {
                             sync : true
                         });
-		            document.location.reload() ;
+		            location.reload() ;
 		            }
 				}
 			}
@@ -86,9 +89,9 @@
 		Y.on('click',function(event) {
 			event.preventDefault();
 			if (auth) {
-				document.location = basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html';
+			    location.set("href", basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
 			} else {
-				document.location = basePath + '/secure/persistentLogin.html?pl=true';
+			    location.set("href", basePath + '/secure/persistentLogin.html?pl=true');
 			}
 		}, '#persistent-login');
 	}

@@ -22,6 +22,7 @@
             var currentHref = this.location.get("href");
             this.location.set("hash", "foo");
             Y.Assert.areEqual(currentHref + "#foo", this.location.get("href"));
+            Y.Assert.areEqual("#foo", this.location.get("hash"));
         }
     });
     

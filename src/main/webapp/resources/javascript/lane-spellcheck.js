@@ -13,7 +13,7 @@
                     if (sc.suggestion) {
                         //if there is a suggestion show the spellcheck markup 
                         //and add the suggestion to the href
-                        correctedUrl = document.location.href.replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery);
+                        correctedUrl = Y.lane.Location.get("href").replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery);
                         //strip #facet stuff from URL (#facet=catalog-lois added when no hits)
                         correctedUrl = correctedUrl.replace(/#.*/,'');
                         a = spellCheck.one('a');

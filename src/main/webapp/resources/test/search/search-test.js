@@ -26,9 +26,9 @@ Y.use('node-event-simulate','console','test', function(T) {
             this.searchSource.simulate("change");
         },
         testSubmitSearchNoQuery: function() {
-        	var location = document.location;
+        	var location = Y.lane.Location.get("href");
             this.search.submitSearch();
-            T.Assert.areEqual(location, document.location);
+            T.Assert.areEqual(location, Y.lane.Location.get("href"));
         },
         testSourceChange: function() {
         	var value = null;

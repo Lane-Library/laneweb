@@ -1,6 +1,7 @@
 (function() {
     
     var Lane = Y.lane,
+        location = Lane.Location,
         model = Lane.Model,
         searchTerms = model.get(model.QUERY),
         searchSource = model.get(model.SOURCE),
@@ -66,7 +67,7 @@
                         action = searchTerms;
                     } else {
                         category = "lane:browseResultClick";
-                        action = document.location.pathname;
+                        action = location.get("pathname");
                     }
                 }
                 else if (link.get('href').match('^javascript:.*bookmarklet.*')) {
@@ -91,9 +92,9 @@
                 var node = event.target, host, path, query, external, title;
                 if (event.type == 'click') {
                     if (node.hasClass('yui3-accordion-item-trigger')) {
-                        host = document.location.host;
-                        path = document.location.pathname;
-                        query = document.location.search;
+                        host = location.get("host");
+                        path = location.get("pathname");
+                        query = location.get("search");
                         external = false;
                     } else {
                         if (node.get('nodeName') != 'A' && node.one('a')) {
@@ -129,16 +130,16 @@
                             }
                             external = true;
                         } else if (node.get('rel') && (node.get('rel').indexOf('popup local') === 0)) {
-                            host = document.location.host;
-                            path = document.location.pathname;
-                            query = document.location.search;
+                            host = location.get("host");
+                            path = location.get("pathname");
+                            query = location.get("search");
                         } else {
                             host = node.get('host');
                             if (host.indexOf(':') > -1) {
                                 host = host.substring(0, host.indexOf(':'));
                             }
                             path = node.get('pathname');
-                            external = host != document.location.host;
+                            external = host != location.get("host");
 //                            query = external ? '' : node.get('search');
                             query = node.get('search');
                         }
@@ -252,7 +253,7 @@
                         return false;
                     }
                     var link, documentHost, linkHost, rel, relTokens;
-                    documentHost = document.location.host;
+                    documentHost = location.get("host");
                     if (documentHost.indexOf(':') > -1) {
                         documentHost = documentHost.substring(0, documentHost.indexOf(':'));
                     }
@@ -357,7 +358,7 @@
                                 (!t.get('rel') && !t.get('target')) &&
                                 !t.get('parentNode').hasClass('searchFacet') ) {
                             f = function() {
-                                window.location = t.get('href');
+                                Y.lane.Location.set("href", t.get('href'));
                             };
                             e.preventDefault();
                             setTimeout(f, 200);
@@ -404,7 +405,7 @@
         Lane.on("search:reset",  function(event) {
             Y.fire("lane:trackableEvent", {
                 category: "lane:searchFormReset",
-                action: document.location.pathname
+                action: location.get("pathname")
             });
         });
 })();

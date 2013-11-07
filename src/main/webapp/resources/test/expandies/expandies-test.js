@@ -36,7 +36,7 @@ Y.use('node', 'node-event-simulate', 'console', 'test', function(Y){
         },
         testAnchor: function() {
             var panel = Y.one('#panel3');
-            if (document.location.hash == '#anchor') {
+            if (Y.lane.Location.get("hash") == '#anchor') {
                 Y.Assert.isTrue(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));
             } else {
                 Y.Assert.isFalse(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));

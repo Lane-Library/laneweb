@@ -72,7 +72,7 @@
                 loadContent(e.newVal);
             });
             history.on("bassettRemove",function(e) {
-                loadContent(formatAjaxUrl(window.location.toString()));
+                loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
             });
         };
 

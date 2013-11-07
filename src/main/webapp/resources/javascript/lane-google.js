@@ -1,8 +1,8 @@
 (function() {
-    var gaPageTracker, gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    var gaPageTracker, location = Y.lane.Location, gaJsHost = (("https:" == location.get("protocol")) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
-            var host = document.location.host,
+            var host = location.get("host"),
                 model = Y.lane.Model,
                 ipgroup = model.get(model.IPGROUP),
                 auth = model.get(model.AUTH);
