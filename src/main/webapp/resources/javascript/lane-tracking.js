@@ -13,8 +13,7 @@
             //TODO put conditionals into sub-functions
             //TODO more thorough documentation
             //TODO use 'track' less
-            var enabled = true,
-            getEventTrackingData = function(event) {
+            var getEventTrackingData = function(event) {
                 var link = event.target, category = null, action = null, label = null, value = null;
                 while (link && link.get('nodeName') != 'A') {
                     link = link.get('parentNode');
@@ -160,12 +159,6 @@
                 };
             };
             return {
-                disableTracking : function() {
-                    enabled = false;
-                },
-                enableTracking : function () {
-                    enabled = true;
-                },
                 //figures out the title string for a node
                 getTrackedTitle: function(node) {
                     //if there is a title attribute, use that.
@@ -221,9 +214,6 @@
                     return title;
                 },
                 isTrackableAsEvent: function(event) {
-                    if (!enabled) {
-                        return false;
-                    }
                     var link = event.target;
                     while (link !== null && link.get('nodeName') != 'A') {
                         link = link.get('parentNode');
@@ -249,9 +239,6 @@
                     return false;
                 },
                 isTrackableAsPageview: function(event) {
-                    if (!enabled) {
-                        return false;
-                    }
                     var link, documentHost, linkHost, rel, relTokens;
                     documentHost = location.get("host");
                     if (documentHost.indexOf(':') > -1) {
