@@ -103,14 +103,6 @@
                 valueFn : function() {
                     //if there is a title attribute, use that.
                     var node = this.get(HOST_NODE), title = node.get(TITLE), img, i, rel, relTokens;
-                    //if there is rel="popup .." then create a title from it.
-                    rel = node.get('rel');
-                    if (rel && rel.indexOf('popup') === 0) {
-                        relTokens = rel.split(' ');
-                        if (relTokens[1] == LOCAL) {
-                            title = 'YUI Pop-up [local]';
-                        }
-                    }
                     //next try alt attribute.
                     if (!title) {
                         title = node.get(ALT);
@@ -150,6 +142,14 @@
                         title = 'Expandy:' + title;
                     } else if (node.ancestor("#laneNav")) {
                         title = "laneNav: " + title;
+                    }
+                    //if there is rel="popup .." then create a title from it.
+                    rel = node.get('rel');
+                    if (rel && rel.indexOf('popup') === 0) {
+                        relTokens = rel.split(' ');
+                        if (relTokens[1] == LOCAL) {
+                            title = 'YUI Pop-up [local]: ' + title;
+                        }
                     }
                     return title;
                 
