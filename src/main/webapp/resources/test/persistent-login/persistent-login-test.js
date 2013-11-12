@@ -6,9 +6,45 @@
     var persistentLoginTestCase = new Y.Test.Case({
         name: 'persistent-login Test Case',
         
-        testLoginClick: function() {
+        tearDown: function() {
+            Y.lane.Lightbox.hide();
+            Y.lane.Lightbox.setContent("");
+        },
+        
+        testLoginClickYesClick: function() {
             Y.one("#login").simulate("click");
-            Y.Assert.areEqual("yes", Y.one("#yes-persistent-login").get("text"));
+            var yes = Y.one("#yes-persistent-login");
+            var handle = yes.on("click", function(event) {
+                event.preventDefault();
+            });
+            yes.simulate("click");
+            handle.detach();
+            //TODO: why &url=, not ?url=
+            Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
+        },
+        
+        testLoginClickNoClick: function() {
+            Y.one("#login").simulate("click");
+            var no = Y.one("#no-persistent-login");
+            var handle = no.on("click", function(event) {
+                event.preventDefault();
+            });
+            no.simulate("click");
+            handle.detach();
+            //TODO: why &url=, not ?url=
+            Y.Assert.isTrue(no.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
+        },
+        
+        testProxyLoginClick: function() {
+            Y.one("#proxylogin").simulate("click");
+            var yes = Y.one("#yes-persistent-login");
+            var handle = yes.on("click", function(event) {
+                event.preventDefault();
+            });
+            yes.simulate("click");
+            handle.detach();
+            //TODO: why &url=, not ?url=
+            Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
         }
     });
 
