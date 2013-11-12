@@ -1,9 +1,13 @@
 (function() {
-    var gaPageTracker, location = Y.lane.Location, gaJsHost = (("https:" == location.get("protocol")) ? "https://ssl." : "http://www.");
+    var gaPageTracker,
+        lane = Y.lane,
+        tracker = lane.Tracker,
+        location = lane.Location,
+        gaJsHost = (("https:" == location.get("protocol")) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = location.get("host"),
-                model = Y.lane.Model,
+                model = lane.Model,
                 ipgroup = model.get(model.IPGROUP),
                 auth = model.get(model.AUTH);
             if (_gat !== undefined) {
@@ -21,7 +25,7 @@
                 }
                 if (auth) {
                     gaPageTracker._setCustomVar(2,'authenticatedSession',auth,2);
-                    if (Y.lane.BookmarksWidget && Y.lane.BookmarksWidget.get("bookmarks").size() > 0) {
+                    if (lane.BookmarksWidget && lane.BookmarksWidget.get("bookmarks").size() > 0) {
                         gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',auth,2);
                     }
                 }
@@ -29,12 +33,12 @@
             }
         }
     });
-    Y.on("lane:trackableEvent",  function(event) {
+    tracker.on("trackableEvent",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.category, event.action, event.label, event.value);
         }
     });
-    Y.on("lane:trackablePageview",  function(event) {
+    tracker.on("trackablePageview",  function(event) {
         if (gaPageTracker !== undefined) {
             if (event.external) {
                 if(event.query !== undefined && event.query !== '' ){

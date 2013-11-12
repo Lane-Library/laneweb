@@ -295,7 +295,7 @@
                     var trackingData;
                     if (this.isTrackableAsPageview(event)) {
                         trackingData = getPageviewTrackingData(event);
-                        Y.fire("lane:trackablePageview", {
+                        this.fire("trackablePageview", {
                             host: trackingData.host,
                             path: trackingData.path,
                             query: trackingData.query,
@@ -307,7 +307,7 @@
                     }
                     if (this.isTrackableAsEvent(event)) {
                         trackingData = getEventTrackingData(event);
-                        Y.fire("lane:trackableEvent", {
+                        this.fire("trackableEvent", {
                             category: trackingData.category,
                             action: trackingData.action,
                             label: trackingData.label,
@@ -317,21 +317,7 @@
                 }
             };
         }();
-        Y.publish("lane:trackableEvent",{
-            category:null,
-            action:null,
-            label:null,
-            value: null
-          });
-        Y.publish("lane:trackablePageview",{
-            host: null,
-            path: null,
-            query: null,
-            title: null,
-            searchTerms: null,
-            searchSource: null,
-            external: null
-        });
+
         Y.on('click', function(e) {
             Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
@@ -345,7 +331,7 @@
                                 (!t.get('rel') && !t.get('target')) &&
                                 !t.get('parentNode').hasClass('searchFacet') ) {
                             f = function() {
-                                Y.lane.Location.set("href", t.get('href'));
+                                Lane.Location.set("href", t.get('href'));
                             };
                             e.preventDefault();
                             setTimeout(f, 200);
@@ -369,7 +355,7 @@
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
         if (Lane.BookmarksWidget) {
             Lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
-                Y.fire("lane:trackableEvent", {
+                Tracker.fire("trackableEvent", {
                     category: "lane:bookmarkAdd",
                     action: model.get(model.AUTH),
                     label: event.bookmark.getLabel()
@@ -382,7 +368,7 @@
             if (event.input.get("id") == "searchTerms") {
                 action = Lane.Search.getSearchSource();
             }
-            Y.fire("lane:trackableEvent", {
+            Tracker.fire("trackableEvent", {
                 //keep category same as previous event.type:
                 category: "lane:suggestSelect",
                 action: action,
@@ -390,9 +376,18 @@
             });
         });
         Lane.on("search:reset",  function(event) {
-            Y.fire("lane:trackableEvent", {
+            Tracker.fire("trackableEvent", {
                 category: "lane:searchFormReset",
                 action: location.get("pathname")
             });
         });
+        
+        Y.augment(Tracker, Y.EventTarget, null, null, {
+            prefix : "tracker",
+            emitFacade : true
+        });
+        
+        Tracker.addTarget(Lane);
+        
+        Lane.Tracker = Tracker;
 })();

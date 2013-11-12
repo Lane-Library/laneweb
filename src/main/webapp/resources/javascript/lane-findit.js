@@ -19,7 +19,7 @@
                         findItLink.set('innerHTML', findIt.result);
                         Y.fire('lane:popin', findItNode);
                         // tracking
-                        Y.fire("lane:trackableEvent", {
+                        Y.lane.Tracker.fire("trackableEvent", {
                             category: "lane:findit",
                             action: "query=" + query,
                             label: "result=" + findIt.result
