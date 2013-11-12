@@ -80,7 +80,7 @@
                             }
                             queryMap.getResultCounts();
                             // track mapped term, descriptor, and resources
-                            Y.lane.Tracker.fire("trackableEvent", {
+                            Y.lane.fire("tracker:trackableEvent", {
                                 category: "lane:queryMapping",
                                 action: "query=" + query + "; descriptor=" + resourceMap.descriptor.descriptorName,
                                 label: "resources=" + queryMap.getResourcesString()

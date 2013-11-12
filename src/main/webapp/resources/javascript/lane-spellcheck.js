@@ -21,7 +21,7 @@
                         a.set('innerHTML', sc.suggestion);
                         Y.fire('lane:popin', spellCheck);
                         // track suggestion and original query
-                        Y.lane.Tracker.fire("trackableEvent", {
+                        Y.lane.fire("tracker:trackableEvent", {
                             category: "lane:spellSuggest",
                             action: "query=" + query,
                             label: "suggestion=" + sc.suggestion

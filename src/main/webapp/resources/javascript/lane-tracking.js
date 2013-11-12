@@ -388,6 +388,4 @@
         });
         
         Tracker.addTarget(Lane);
-        
-        Lane.Tracker = Tracker;
 })();

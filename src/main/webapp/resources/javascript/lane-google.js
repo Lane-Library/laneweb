@@ -1,7 +1,6 @@
 (function() {
     var gaPageTracker,
         lane = Y.lane,
-        tracker = lane.Tracker,
         location = lane.Location,
         gaJsHost = (("https:" == location.get("protocol")) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
@@ -33,12 +32,12 @@
             }
         }
     });
-    tracker.on("trackableEvent",  function(event) {
+    lane.on("tracker:trackableEvent",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.category, event.action, event.label, event.value);
         }
     });
-    tracker.on("trackablePageview",  function(event) {
+    lane.on("tracker:trackablePageview",  function(event) {
         if (gaPageTracker !== undefined) {
             if (event.external) {
                 if(event.query !== undefined && event.query !== '' ){

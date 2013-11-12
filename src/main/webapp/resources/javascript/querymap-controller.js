@@ -37,7 +37,7 @@
                 }
 
                 // track mapped term, descriptor, and resources
-                Y.lane.Tracker.fire("trackableEvent", {
+                Y.lane.fire("tracker:trackableEvent", {
                     category: "lane:queryMapping",
                     action: "query=" + query + "; descriptor=" + queryMap.resourceMap.descriptor.descriptorName,
                     label: "resources=" + labels

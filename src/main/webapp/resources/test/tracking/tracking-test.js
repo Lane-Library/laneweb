@@ -226,8 +226,8 @@ Y.use("*",  function(){
         }
     });
 
-    Y.lane.Tracker.on("trackableEvent", trackingTestCase.eventCallback, trackingTestCase);
-    Y.lane.Tracker.on("trackablePageview", trackingTestCase.pageViewCallback, trackingTestCase);
+    Y.lane.on("tracker:trackableEvent", trackingTestCase.eventCallback, trackingTestCase);
+    Y.lane.on("tracker:trackablePageview", trackingTestCase.pageViewCallback, trackingTestCase);
     
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
