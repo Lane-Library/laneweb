@@ -745,7 +745,6 @@
                     url = "/search.html?source=" + source + "&q=" + encodedQuery,
                     bookmarkSearch = Y.one("#bookmarkSearch"),
                     eventHandle = null;
-                this.get("bookmarks").addBookmark(new Lane.Bookmark(label, url));
                 //TODO: this is a temporary hack to take care of case 72768
                 if (bookmarkSearch) {
                     bookmarkSearch.setStyle("cursor", "wait");
@@ -755,6 +754,7 @@
                         eventHandle.detach();
                     }, this);
                 }
+                this.get("bookmarks").addBookmark(new Lane.Bookmark(label, url));
             },
             
             /**
