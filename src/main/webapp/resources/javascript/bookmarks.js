@@ -331,7 +331,7 @@
                                 this.fire("moveSync", {success : true, to : event.to, from : event.from});
                             },
                             failure : function() {
-                                this._handleSyncFailure("Sorry, move bookmark failed");
+                                this._handleSyncFailure("Sorry, move bookmark failed.");
                             }
                         },
                         context : this
