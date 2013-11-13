@@ -75,6 +75,16 @@ Y.use('console', 'test', function(Y) {
             var anchors = Y.all("#bookmarks a");
             Y.Assert.areEqual("Paget disease of bone", anchors.item(3).get("innerHTML"));
             Y.Assert.areEqual("newlabel", anchors.item(0).get("innerHTML"));
+        },
+        
+        testHiddenItems: function() {
+            var displayLimit = this.widget.get("displayLimit");
+            var hidden = Y.all("li").item(displayLimit);
+            Y.Assert.areSame("none", hidden.getStyle("display"));
+        },
+        
+        testToString: function() {
+            Y.Assert.areSame("BookmarksWidget:Bookmarks[Bookmark{label:", this.widget.toString().substring(0, 41));
         }
     });
 

@@ -18,6 +18,10 @@ Y.use('console', 'test', function(Y) {
         
         eventHandle : null,
         
+        alert: function(message) {
+            bookmarksTestCase.message = message;
+        },
+        
         ioSuccess : function() {
             var bar = arguments[1].on.success;
             var args = arguments[1]["arguments"];
@@ -34,6 +38,8 @@ Y.use('console', 'test', function(Y) {
             this.bookmarks =  new Bookmarks(bm);
             this.initialSize = this.bookmarks.size();
             Y.io = this.ioSuccess;
+            this.message = null;
+            window.alert = this.alert;
         },
         
         tearDown : function() {
@@ -136,6 +142,51 @@ Y.use('console', 'test', function(Y) {
             this.bookmarks.moveBookmark(3, 0);
             Y.Assert.areEqual("0", this.bookmarks.getBookmark(3).getLabel());
             Y.Assert.areEqual("1", this.bookmarks.getBookmark(0).getLabel());
+        },
+        
+        testBadConfig: function() {
+            try {
+                (new Bookmarks({}));
+            } catch(e) {
+                Y.Assert.areSame("bad config", e);
+            }
+        },
+        
+        testIndexOf: function() {
+            var bookmark = this.bookmarks.getBookmark(2);
+            Y.Assert.areSame(2, this.bookmarks.indexOf(bookmark));
+        },
+        
+        testAddFail: function() {
+            Y.io = function(url, config) {
+                config.on.failure.apply(config.context, [0]);
+            };
+            this.bookmarks.addBookmark(new Bookmark("label9", "url9"));
+            Y.Assert.areSame("Sorry, add bookmark failed.", this.message);
+        },
+        
+        testMoveFail: function() {
+            Y.io = function(url, config) {
+                config.on.failure.apply(config.context, [0]);
+            };
+            this.bookmarks.moveBookmark(3, 0);
+            Y.Assert.areSame("Sorry, move bookmark failed.", this.message);
+        },
+        
+        testRemoveFail: function() {
+            Y.io = function(url, config) {
+                config.on.failure.apply(config.context, [0]);
+            };
+            this.bookmarks.removeBookmarks([0]);
+            Y.Assert.areSame("Sorry, delete bookmark failed.", this.message);
+        },
+        
+        testUpdateFail: function() {
+            Y.io = function(url, config) {
+                config.on.failure.apply(config.context, [0]);
+            };
+            this.bookmarks.getBookmark(0).setLabel("foo");
+            Y.Assert.areSame("Sorry, bookmark update failed.", this.message);
         }
     });
 
