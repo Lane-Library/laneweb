@@ -33,7 +33,7 @@ public class QueryTermPatternTest {
 
     @Test
     public final void testGetPattern3() {
-        assertEquals("replace\\W\\W\\W\\W\\W", QueryTermPattern.getPattern("replace '+*& ").toString());
+        assertEquals("replace\\W\\W\\W\\W&", QueryTermPattern.getPattern("replace '+*& ").toString());
     }
 
     @Test

@@ -10,6 +10,8 @@ import edu.stanford.irt.laneweb.LanewebException;
  */
 public final class QueryTermPattern {
 
+    private static final Pattern AND_PATTERN = Pattern.compile(" (and|&) ");
+
     private static final Pattern INVERT_COMMAS_PATTERN = Pattern.compile("(\\(?((\\w| |-)+), ((\\w| |-)+)\\)?)");
 
     private static final String INVERT_REPLACEMENT = "$1 and $4 $2";
@@ -20,11 +22,13 @@ public final class QueryTermPattern {
 
     private static final Pattern NULL_QUERY_PATTERN = Pattern.compile(".*");
 
+    private static final String PIPE = "|";
+
     private static final Pattern REPLACE_QUOTES = Pattern.compile("\\\"");
 
     private static final Pattern SPACE_HYPHEN_PATTERN = Pattern.compile("[- ]");
 
-    private static final Pattern UNACCEPTABLE_CHARS_PATTERN = Pattern.compile("[^a-zA-Z0-9,-_\" [\\\\\\?\\[]]");
+    private static final Pattern UNACCEPTABLE_CHARS_PATTERN = Pattern.compile("[^a-zA-Z0-9,-_\" [\\\\\\?\\[]&]");
 
     /**
      * normalize query terms for use in regex pattern, where normal means:
@@ -41,8 +45,7 @@ public final class QueryTermPattern {
      * @param query
      * @return a Pattern constructed from the query.
      * @throws LanewebException
-     *             if there was a PatternSyntaxException in order to report the
-     *             original query
+     *             if there was a PatternSyntaxException in order to report the original query
      */
     public static Pattern getPattern(final String query) {
         if (query == null) {
@@ -52,7 +55,7 @@ public final class QueryTermPattern {
         normalQuery = INVERT_COMMAS_PATTERN.matcher(normalQuery).replaceAll(INVERT_REPLACEMENT);
         normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = REPLACE_QUOTES.matcher(normalQuery).replaceAll(MAYBE_NONWORD);
-        normalQuery = normalQuery.replaceAll(" and ", "|");
+        normalQuery = AND_PATTERN.matcher(normalQuery).replaceAll(PIPE);
         normalQuery = SPACE_HYPHEN_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         // education, medical AND "cognitive+load" was generated two "||" -->
         // bug 65768
