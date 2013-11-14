@@ -235,11 +235,13 @@
                                 <include>lane-search-pico-min.js</include>
                                 <include>search-min.js</include>
                                 <include>bookmarks-min.js</include>
+                                <include>bookmark-link-min.js</include>
+                                <include>lane-lightbox-min.js</include>
+                                <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
                                 <include>bookmark-instructions-min.js</include>
                                 <include>lane-expandies-min.js</include>
                                 <include>lane-google-min.js</include>
-                                <include>lane-lightbox-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>
                                 <include>lane-search-facets-min.js</include>
@@ -416,7 +418,8 @@
                         <test>src/main/webapp/resources/test/banner/banner-test.html</test>
                         <test>src/main/webapp/resources/test/bassett/bassett-test.html</test>
                         <test>src/main/webapp/resources/test/bookmark-instructions/bookmark-instructions-test.html</test>
-                        <test>src/main/webapp/resources/test/bookmarks/bookmark-link-test.html</test>
+                        <test>src/main/webapp/resources/test/bookmark-link/bookmark-link-test.html</test>
+                        <test>src/main/webapp/resources/test/bookmark-login/bookmark-login-test.html</test>
                         <test>src/main/webapp/resources/test/bookmarks/bookmark-test.html</test>
                         <test>src/main/webapp/resources/test/bookmarks/bookmarks-test.html</test>
                         <test>src/main/webapp/resources/test/bookmarks/bookmarks-widget-test.html</test>
