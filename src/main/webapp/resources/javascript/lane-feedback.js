@@ -49,11 +49,7 @@
                 self.get("items").item(self.get("activeItem")).one("textarea, input[type='text']").focus();
             });
             eventHandle2 = Y.lane.Lightbox.on("visibleChange", function(event) {
-                if (event.newVal) {
-                    if (Y.UA.ie === 6) {
-                        self._toggleVisibility();
-                    }
-                } else {
+                if (!event.newVal) {
                     eventHandle1.detach();
                     eventHandle2.detach();
                     self.destroy();
@@ -106,12 +102,6 @@
                 },
                 context : this
             });
-        },
-        _toggleVisibility : function() {
-            var boundingBox = this.get("boundingBox");
-//            //this forces the markup to be rendered, not sure why it is needed.
-            boundingBox.setStyle("visibility", "hidden");
-            boundingBox.setStyle("visibility", "visible");
         },
         _getFeedback : function(form) {
             var nodes = form.all("input, textarea, select"), feedback = {}, i, node, name;

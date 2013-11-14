@@ -36,6 +36,13 @@
             	}
             	//TODO: make the background a property of Lightbox
                 Y.lane.LightboxBg.hide();
+                if (Y.UA.ie && Y.UA.ie < 8) {
+                    var boundingBox = this.get("boundingBox");
+                    //this forces the markup to be rendered, not sure why it is needed.
+                    boundingBox.setStyle("visibility", "visible");
+                    boundingBox.setStyle("visibility", "hidden");
+                }
+//                this.setContent("");
             }
         },
         _animate : function() {
@@ -74,6 +81,12 @@
             if (event.newVal) {
             	if (Y.UA.ie === 6) {
                 	Y.all("select").setStyle("visibility", "hidden");
+            	}
+            	if (Y.UA.ie && Y.UA.ie < 8) {
+                    var boundingBox = this.get("boundingBox");
+                    //this forces the markup to be rendered, not sure why it is needed.
+                    boundingBox.setStyle("visibility", "hidden");
+                    boundingBox.setStyle("visibility", "visible");
             	}
                 Y.lane.LightboxBg.show();
                 this._animate();
