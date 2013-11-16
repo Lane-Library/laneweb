@@ -141,17 +141,16 @@
                     url = "/search.html?source=" + source + "&q=" + encodedQuery,
                     bookmarkSearch = Y.one("#bookmarkSearch"),
                     eventHandle = null,
-                    bookmarks;
+                    bookmarks = this.get("bookmarks");
                 //TODO: this is a temporary hack to take care of case 72768
-                if (bookmarkSearch) {
+                if (bookmarkSearch && bookmarks) {
                     bookmarkSearch.setStyle("cursor", "wait");
-                    eventHandle = this.get("bookmarks").after("addSync", function(event) {
+                    eventHandle = bookmarks.after("addSync", function(event) {
                         bookmarkSearch.setStyle("cursor", "default");
                         bookmarkSearch.setStyle("visibility", "hidden");
                         eventHandle.detach();
                     }, this);
                 }
-                bookmarks = this.get("bookmarks");
                 if (bookmarks) {
                     bookmarks.addBookmark(new Lane.Bookmark(label, url));
                 } else {
