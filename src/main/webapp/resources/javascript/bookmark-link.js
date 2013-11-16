@@ -56,8 +56,7 @@
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                //TODO: need to handle enable search bookmarking if not logged in
-                if (Model.get(Model.QUERY) && Y.one("#bookmarks")) {
+                if (Model.get(Model.QUERY)) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
                         bookmarkSearch.setStyle("display", "block");
@@ -123,7 +122,7 @@
                 this.set("status", BookmarkLink.BOOKMARKING);
                 bookmarks = this.get("bookmarks");
                 if (bookmarks) {
-                    this.get("bookmarks").addBookmark(new Lane.Bookmark(label, url));
+                    bookmarks.addBookmark(new Lane.Bookmark(label, url));
                 } else {
                     Y.lane.BookmarkLogin.addBookmark(label, url);
                 }
@@ -141,7 +140,8 @@
                     label = "Search for: " + query,
                     url = "/search.html?source=" + source + "&q=" + encodedQuery,
                     bookmarkSearch = Y.one("#bookmarkSearch"),
-                    eventHandle = null;
+                    eventHandle = null,
+                    bookmarks;
                 //TODO: this is a temporary hack to take care of case 72768
                 if (bookmarkSearch) {
                     bookmarkSearch.setStyle("cursor", "wait");
@@ -151,7 +151,12 @@
                         eventHandle.detach();
                     }, this);
                 }
-                this.get("bookmarks").addBookmark(new Lane.Bookmark(label, url));
+                bookmarks = this.get("bookmarks");
+                if (bookmarks) {
+                    bookmarks.addBookmark(new Lane.Bookmark(label, url));
+                } else {
+                    Y.lane.BookmarkLogin.addBookmark(label, url);
+                }
             },
             
             /**
