@@ -56,7 +56,8 @@
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                if (Model.get(Model.QUERY)) {
+                //TODO: need to handle enable search bookmarking if not logged in
+                if (Model.get(Model.QUERY) && Y.one("#bookmarks")) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
                         bookmarkSearch.setStyle("display", "block");
