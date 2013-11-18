@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-11-18" version="2.1.35" description="2.1.35 bug fix release">
+            <action date="2013-11-14" dev="ryanmax" issue="93664" type="fix">
+                keyword highlighting not working on queries with ampersands
+            </action>
+            <action date="2013-11-14" dev="ceyates" issue="93662" type="fix">
+                lightbox content remains visible in IE7
+            </action>
+            <action date="2013-11-14" dev="ceyates" issue="93612" type="add">
+                Make bookmark feature available (including icons) in logged out state
+            </action>
+        </release>
         <release date="2013-11-11" version="2.1.34" description="2.1.34 bug fix release">
             <action date="2013-11-05" dev="olgary" issue="93307" type="update">
                 new portal added - updated template.xml, debug.xml
