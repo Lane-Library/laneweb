@@ -563,9 +563,9 @@
             <version>2.6.6</version>
         </dependency>
         <dependency>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <groupId>org.codehaus.jackson</groupId>
-            <version>1.9.13</version>
+            <artifactId>jackson-databind</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <version>2.3.0</version>
         </dependency>
         <dependency>
             <artifactId>javamelody-core</artifactId>

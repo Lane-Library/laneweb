@@ -9,8 +9,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
@@ -37,7 +37,7 @@ public class ModelDataBinder implements DataBinder {
         }
         StringWriter stringWriter = new StringWriter();
         try {
-            JsonGenerator jsonGenerator = this.objectMapper.getJsonFactory().createJsonGenerator(stringWriter);
+            JsonGenerator jsonGenerator = this.objectMapper.getFactory().createGenerator(stringWriter);
             this.objectMapper.writeValue(jsonGenerator, modelModel);
             model.put(Model.MODEL, stringWriter.toString());
         } catch (IOException e) {

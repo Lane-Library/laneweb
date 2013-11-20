@@ -1,13 +1,15 @@
 package edu.stanford.irt.laneweb.mapping;
 
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.module.SimpleModule;
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class LanewebObjectMapper extends ObjectMapper {
 
+    private static final long serialVersionUID = 1L;
+
     public LanewebObjectMapper() {
-        SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null));
+        SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));
         module.addSerializer(new IPGroupSerializer());
         module.addSerializer(new TicketSerializer());
         registerModule(module);

@@ -49,7 +49,7 @@
                 <value>ticket</value>-->
             </set>
         </constructor-arg>
-        <constructor-arg ref="org.codehaus.jackson.map.ObjectMapper"/>
+        <constructor-arg ref="com.fasterxml.jackson.databind.ObjectMapper"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"

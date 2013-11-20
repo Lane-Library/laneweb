@@ -11,8 +11,8 @@
     
     <mvc:annotation-driven>
         <mvc:message-converters>
-            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-                <property name="objectMapper" ref="org.codehaus.jackson.map.ObjectMapper" />
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="com.fasterxml.jackson.databind.ObjectMapper" />
             </bean>
             <!--<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
                 <constructor-arg ref="org.springframework.oxm.Marshaller"/>
