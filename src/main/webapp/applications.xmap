@@ -6,7 +6,6 @@
         <!-- matches /apps/search/ requests -->
         <map:match pattern="search/**" type="wildcard">
             <!-- /apps/search/xml returns the xmlized search result -->
-            <!-- this is used in the bioresearch and textbook searches -->
             <map:match type="wildcard" pattern="search/xml">
                 <map:generate type="search"/>
                 <map:select type="cme-links">
