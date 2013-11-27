@@ -155,8 +155,7 @@
 	</xsl:template>
     <xsl:template name="microdata">
         <xsl:variable name="classUrl">
-            <!-- TODO: absolute URLs needed? -->
-	        <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
+	        <xsl:text>http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text>
 	        <xsl:value-of select="lc:module_id/text()" />
         </xsl:variable>
         <xsl:variable name="shortDescription">
