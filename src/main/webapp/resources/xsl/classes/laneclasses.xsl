@@ -15,6 +15,7 @@
 	<xsl:template match="lc:lastmodified" />
 	<xsl:template match="lc:event_data">
 		<div class="bd">
+			<xsl:call-template name="microdata" />
 			<xsl:call-template name="decorator" />
 			<div class="bottomShadowWide"></div>
 		</div>
@@ -152,4 +153,25 @@
 			</xsl:if>
 		</xsl:if>
 	</xsl:template>
+    <xsl:template name="microdata">
+        <xsl:variable name="classUrl">
+            <!-- TODO: absolute URLs needed? -->
+	        <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
+	        <xsl:value-of select="lc:module_id/text()" />
+        </xsl:variable>
+        <xsl:variable name="shortDescription">
+	        <xsl:call-template name="firstWords">
+	            <xsl:with-param name="value" select="./lc:event_description" />
+	            <xsl:with-param name="count" select="50" />
+	        </xsl:call-template>
+        </xsl:variable>
+        <span itemscope="" itemtype="http://data-vocabulary.org/Event">
+	        <meta itemprop="url" content="{$classUrl}"  />
+	        <meta itemprop="summary" content="{./lc:event_name}"  />
+	        <meta itemprop="description" content="{$shortDescription}"  />
+            <meta itemprop="startDate" content="{./lc:event_dates/lc:start_date[1]/text()}"  />
+            <meta itemprop="endDate" content="{./lc:event_dates/lc:end_date[1]/text()}"  />
+	        <meta itemprop="location" content="{./lc:venue/lc:venue_name}"  />
+        </span>
+    </xsl:template>
 </xsl:stylesheet>

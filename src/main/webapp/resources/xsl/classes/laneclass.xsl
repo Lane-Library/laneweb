@@ -17,7 +17,21 @@
         <xsl:apply-templates select="h:html" />
     </xsl:template>
 
-
+    <xsl:template match="h:body">
+        <xsl:copy>
+            <!-- start microdata -->
+            <xsl:attribute name="itemscope"/>
+            <xsl:attribute name="itemtype">http://data-vocabulary.org/Event</xsl:attribute>
+            <xsl:variable name="event" select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/.."/>
+            <meta itemprop="summary" content="{$event/lc:event_name/text()}"  />
+            <meta itemprop="description" content="{$event/lc:event_description/child::node()}"  />
+            <meta itemprop="startDate" content="{$event/lc:event_dates/lc:start_date[1]/text()}"  />
+            <meta itemprop="endDate" content="{$event/lc:event_dates/lc:end_date[1]/text()}"  />
+            <meta itemprop="location" content="{$event/lc:venue/lc:venue_name}"  />
+            <!-- end microdata -->
+            <xsl:apply-templates select="attribute::node()|child::node()"/>
+        </xsl:copy>
+    </xsl:template>
 
     <xsl:template match="h:h4[@id='class-title']">
         <xsl:copy>
