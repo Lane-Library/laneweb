@@ -63,11 +63,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
                 links = (List<Bookmark>) oip.readObject();
             }
-        } catch (SQLException e) {
-            this.log.error(e.getMessage(), e);
-        } catch (IOException e) {
-            this.log.error(e.getMessage(), e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | IOException | ClassNotFoundException e) {
             this.log.error(e.getMessage(), e);
         } finally {
             IOUtils.closeStream(oip);
@@ -130,20 +126,13 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 oop.flush();
             }
             conn.commit();
-        } catch (SQLException e) {
+        } catch (IOException | SQLException e) {
             if (conn != null) {
                 try {
                     conn.rollback();
                 } catch (SQLException e1) {
                     this.log.error(e1.getMessage(), e1);
                 }
-            }
-            throw new LanewebException(e);
-        } catch (IOException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                this.log.error(e1.getMessage(), e1);
             }
             throw new LanewebException(e);
         } finally {

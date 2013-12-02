@@ -31,7 +31,8 @@ public class CacheSourceResolver implements SourceResolver {
         private String uri;
 
         private ByteArraySource(final byte[] byteArray, final String uri) {
-            this.byteArray = byteArray;
+            this.byteArray = new byte[byteArray.length];
+            System.arraycopy(byteArray, 0, this.byteArray, 0, byteArray.length);;
             this.uri = uri;
         }
 
