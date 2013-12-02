@@ -97,7 +97,7 @@
 			</xsl:call-template>
 		</xsl:variable>
 
-		<p class="seminar">
+		<div class="seminar">
 			<div class="semTitle">
 				<xsl:copy-of select="$anchor" />
 			</div>
@@ -113,7 +113,7 @@
 			<div class="semInstr">
 				<xsl:value-of select="$cme-instructions" />
 			</div>
-		</p>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>
