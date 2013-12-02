@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-12-02" version="2.1.36" description="2.1.36 bug fix release">
+            <action date="2013-11-26" dev="ryanmax" issue="94092" type="add">
+                expose class data with microdata for Google rich snippets
+            </action>
+        </release>
         <release date="2013-11-18" version="2.1.35" description="2.1.35 bug fix release">
             <action date="2013-11-14" dev="ryanmax" issue="93664" type="fix">
                 keyword highlighting not working on queries with ampersands
