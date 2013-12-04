@@ -17,20 +17,6 @@
 	<xsl:variable name="moreUrl"
 		select="concat('http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&amp;selMonth=',$cMonth,'&amp;selDay=',$cDay,'&amp;selYear=',$cYear,'&amp;futureNumberDays=',$days,'&amp;departmentId=0&amp;seminarLocation=0&amp;keyword=&amp;courseType=',$type)" />
 
-	<xsl:variable name="page-title">
-		<xsl:choose>
-			<xsl:when test="$type = 'all'">
-				All
-			</xsl:when>
-			<xsl:when test="$type = 'cme'">
-				CME Courses
-			</xsl:when>
-			<xsl:when test="$type = 'gran'">
-				Grand Rounds
-			</xsl:when>
-		</xsl:choose>
-	</xsl:variable>
-
 	<xsl:variable name="seminars-node">
 		<xsl:copy-of
 			select="document(concat('cocoon://apps/seminars/',$type,'/',$cYear,'/',$cMonth,'/',$cDay,'/',$days,'.xml'))" />
@@ -43,20 +29,11 @@
 	<xsl:template match="/">
 		<html>
 			<head>
-				<title>
-					<xsl:value-of select="$page-title" />
-				</title>
+				<title>seminars</title>
 			</head>
 			<body>
-				<h3>
-					<xsl:value-of select="$page-title" />
-				</h3>
 				<xsl:copy-of select="$seminars-formatted" />
-				<a href="{$moreUrl}">
-					More
-					<xsl:value-of select="$page-title" />
-					»
-				</a>
+				<a href="{$moreUrl}">More »</a>
 			</body>
 		</html>
 	</xsl:template>
