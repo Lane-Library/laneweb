@@ -91,7 +91,7 @@
 			select="replace($date,'.* ([0-9]{2}), .*','$1')" />
 		<xsl:variable name="time">
 			<xsl:variable name="replaced_time"
-				select="replace($date,'.* ([0-9]{1,2}:[0-9]{2} .M) - [0-9]{1,2}:[0-9]{2} .M','$1')" />
+				select="replace($date,'.* ([0-9]{1,2}:[0-9]{2} .M - [0-9]{1,2}:[0-9]{2} .M)','$1')" />
 			<xsl:choose>
 				<xsl:when test="$replaced_time = $date" />
 				<xsl:otherwise>
@@ -115,16 +115,16 @@
 					<div class="day">
 						<xsl:value-of select="$day" />
 					</div>
-					<xsl:if test="$time != ''">
-						<div class="time">
-							<xsl:value-of select="replace($time,':00','')" />
-						</div>
-					</xsl:if>
 				</div>
 				<div class="yui3-u-5-6">
 					<div class="semTitle">
 						<xsl:copy-of select="$anchor" />
 					</div>
+					<xsl:if test="$time != ''">
+						<div class="time">
+							<xsl:value-of select="$time" />
+						</div>
+					</xsl:if>
 				</div>
 			</div>
 		</div>
