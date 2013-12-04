@@ -14,6 +14,9 @@
 
 	<xsl:variable name="cYear" select="format-date(current-date(),'[Y,4]')" />
 
+	<xsl:variable name="moreUrl"
+		select="concat('http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&amp;selMonth=',$cMonth,'&amp;selDay=',$cDay,'&amp;selYear=',$cYear,'&amp;futureNumberDays=',$days,'&amp;departmentId=0&amp;seminarLocation=0&amp;keyword=&amp;courseType=',$type)" />
+
 	<xsl:variable name="page-title">
 		<xsl:choose>
 			<xsl:when test="$type = 'all'">
@@ -49,8 +52,7 @@
 					<xsl:value-of select="$page-title" />
 				</h3>
 				<xsl:copy-of select="$seminars-formatted" />
-				<a
-					href="http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&amp;selMonth={$cMonth}&amp;selDay={$cDay}&amp;selYear={$cYear}&amp;futureNumberDays={$days}&amp;departmentId=0&amp;seminarLocation=0&amp;keyword=&amp;courseType={$type}">
+				<a href="{$moreUrl}">
 					More
 					<xsl:value-of select="$page-title" />
 					»
@@ -64,32 +66,39 @@
 		<xsl:param name="title" />
 		<xsl:choose>
 			<xsl:when test="contains($url,'do?semid=')">
-				<a title="{concat($title,' [',$type, '-seminar]')}" href="{$url}">
-					<xsl:value-of select="$title" />
-				</a>
-			</xsl:when>
-			<xsl:when test="string-length($url) &gt; 0">
-				<a title="{concat($title,' [',$type, '-seminar]')}" href="{$url}">
+				<a title="{concat($title,' [',$type, '-seminar]')}" href="{concat('http://med.stanford.edu/seminars/',$url)}">
 					<xsl:value-of select="$title" />
 				</a>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="$title" />
+				<a title="{concat($title,' [',$type, '-seminar]')}" href="{$moreUrl}">
+					<xsl:value-of select="$title" />
+				</a>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="h:div[@class='eventInfo']">
 		<xsl:variable name="title" select="h:div[@class='eventTitle']" />
-		<xsl:variable name="location" select="h:div[@class='eventText']" />
 		<xsl:variable name="url" select=".//h:a[1]/@href" />
 		<xsl:variable name="datelineNode"
 			select="preceding-sibling::h:div[@class='dateline'][1]" />
 		<xsl:variable name="date"
 			select="replace($datelineNode/h:span[@class='date'],'\(.*\)','')" />
-		<xsl:variable name="dept"
-			select="substring-after($datelineNode/text()[2],'|')" />
-		<xsl:variable name="cme-instructions" select="h:div[3]" />
+		<xsl:variable name="month"
+			select="replace($date,'([A-Za-z]{2}) .*','$1')" />
+		<xsl:variable name="day"
+			select="replace($date,'.* ([0-9]{2}), .*','$1')" />
+		<xsl:variable name="time">
+			<xsl:variable name="replaced_time"
+				select="replace($date,'.* ([0-9]{1,2}:[0-9]{2} .M) - [0-9]{1,2}:[0-9]{2} .M','$1')" />
+			<xsl:choose>
+				<xsl:when test="$replaced_time = $date" />
+				<xsl:otherwise>
+					<xsl:value-of select="lower-case($replaced_time)" />
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:variable name="anchor">
 			<xsl:call-template name="build-anchor">
 				<xsl:with-param name="url" select="$url" />
@@ -98,20 +107,25 @@
 		</xsl:variable>
 
 		<div class="seminar">
-			<div class="semTitle">
-				<xsl:copy-of select="$anchor" />
-			</div>
-			<div class="semDept">
-				<xsl:value-of select="$dept" />
-			</div>
-			<div class="semDate">
-				<xsl:value-of select="$date" />
-			</div>
-			<div class="semLoc">
-				<xsl:value-of select="$location" />
-			</div>
-			<div class="semInstr">
-				<xsl:value-of select="$cme-instructions" />
+			<div class="yui3-g">
+				<div class="yui3-u-1-6">
+					<div class="month">
+						<xsl:value-of select="$month" />
+					</div>
+					<div class="day">
+						<xsl:value-of select="$day" />
+					</div>
+					<xsl:if test="$time != ''">
+						<div class="time">
+							<xsl:value-of select="replace($time,':00','')" />
+						</div>
+					</xsl:if>
+				</div>
+				<div class="yui3-u-5-6">
+					<div class="semTitle">
+						<xsl:copy-of select="$anchor" />
+					</div>
+				</div>
 			</div>
 		</div>
 	</xsl:template>
