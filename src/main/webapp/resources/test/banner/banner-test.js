@@ -49,7 +49,7 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
             Y.Assert.isTrue(anchors.item(0).hasClass("banner-nav-active"));
             Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner1", bannerContent.get("text"));
-		    Y.one("doc").simulate("keydown", { keyCode: 37 });
+		    Y.one("doc").simulate("keyup", { keyCode: 37 });
             Y.Assert.isFalse(anchors.item(0).hasClass("banner-nav-active"));
             Y.Assert.isTrue(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner2", bannerContent.get("text"));
@@ -61,7 +61,7 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
             Y.Assert.isFalse(anchors.item(0).hasClass("banner-nav-active"));
             Y.Assert.isTrue(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner2", bannerContent.get("text"));
-            Y.one("doc").simulate("keydown", { keyCode: 39 });
+            Y.one("doc").simulate("keyup", { keyCode: 39 });
             Y.Assert.isTrue(anchors.item(0).hasClass("banner-nav-active"));
             Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner1", bannerContent.get("text"));

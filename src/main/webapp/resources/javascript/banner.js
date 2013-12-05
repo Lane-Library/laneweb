@@ -18,7 +18,7 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 		var navNodes = this.get("navNodes");
 		if (navNodes.size() > 0) {
 		    // prev/next on left/right arrows
-		    Y.one("doc").on("keydown", function(e){
+		    Y.one("doc").on("keyup", function(e){
 		        if (e.keyCode === 37) {
 		            this.prev();
 		        }
