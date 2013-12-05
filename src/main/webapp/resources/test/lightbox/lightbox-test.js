@@ -15,6 +15,12 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
         testLightbox: function() {
             Y.one("a").simulate("click");
             Y.Assert.areEqual("responseText", Y.one(".yui3-lightbox").get("text"));
+        },
+        
+        testLightboxEsc: function() {
+            Y.Assert.areEqual("visible", Y.one(".yui3-lightbox").getStyle("visibility"));
+            Y.one("doc").simulate("keydown", { keyCode: 27 });
+            Y.Assert.areEqual("hidden", Y.one(".yui3-lightbox").getStyle("visibility"));
         }
     });
     

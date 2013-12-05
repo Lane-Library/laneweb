@@ -41,11 +41,34 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
             Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner1", bannerContent.get("text"));
             Y.Assert.isFalse(this.banner.get("automate"));
-		}
+		},
+		
+		testNavLeftArrow: function() {
+		    var anchors = Y.all(".banner-nav a");
+		    var bannerContent = Y.one(".banner-content");
+            Y.Assert.isTrue(anchors.item(0).hasClass("banner-nav-active"));
+            Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
+            Y.Assert.areEqual("banner1", bannerContent.get("text"));
+		    Y.one("doc").simulate("keydown", { keyCode: 37 });
+            Y.Assert.isFalse(anchors.item(0).hasClass("banner-nav-active"));
+            Y.Assert.isTrue(anchors.item(1).hasClass("banner-nav-active"));
+            Y.Assert.areEqual("banner2", bannerContent.get("text"));
+		},
 
+		testNavRightArrow: function() {
+            var anchors = Y.all(".banner-nav a");
+            var bannerContent = Y.one(".banner-content");
+            Y.Assert.isFalse(anchors.item(0).hasClass("banner-nav-active"));
+            Y.Assert.isTrue(anchors.item(1).hasClass("banner-nav-active"));
+            Y.Assert.areEqual("banner2", bannerContent.get("text"));
+            Y.one("doc").simulate("keydown", { keyCode: 39 });
+            Y.Assert.isTrue(anchors.item(0).hasClass("banner-nav-active"));
+            Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
+            Y.Assert.areEqual("banner1", bannerContent.get("text"));
+		}
+		
 	});
 
-    
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
