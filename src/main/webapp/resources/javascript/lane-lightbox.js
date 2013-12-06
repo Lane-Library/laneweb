@@ -116,7 +116,11 @@
         event.preventDefault();
         Y.lane.Lightbox.hide();
     });
-
+    // close on escape
+    Y.one("doc").on("key", function() {
+        Y.lane.Lightbox.hide();
+    }, "esc");
+    
     Y.on("click", function(event) {
         var href, regex, url,
             anchor = event.target.ancestor("a") || event.target,

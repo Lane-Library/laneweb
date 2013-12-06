@@ -17,6 +17,15 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 	bindUI : function() {
 		var navNodes = this.get("navNodes");
 		if (navNodes.size() > 0) {
+		    // prev/next on left/right arrows
+		    Y.one("doc").on("keyup", function(e){
+		        if (e.keyCode === 37) {
+		            this.prev();
+		        }
+		        if (e.keyCode === 39) {
+		            this.next();
+		        }
+		    }, this);
 			navNodes.on("click", this._handleNavClick, this);
 			this.on("indexChange", this._handleIndexChange);
 			this.autoNext();
@@ -30,6 +39,12 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 			this.set("cycleCount", this.get("cycleCount") + 1);
 		}
 		this.set("index", next);
+	},
+	prev : function() {
+	    var index = this.get("index"),
+	    navNodes = this.get("navNodes"),
+	    prev = (index - 1) < 0 ? navNodes.size() - 1 : index - 1;
+	    this.set("index", prev);
 	},
 	setNewContent : function(imgSrc, content) {
 		var contentBox = this.get("contentBox");
