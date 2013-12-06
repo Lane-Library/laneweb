@@ -21,6 +21,12 @@
         <system>Jenson</system>
         <url>https://irt-lane-stage.stanford.edu/hudson/job/laneweb/</url>
     </ciManagement>
+    <distributionManagement>
+        <site>
+            <id>lane-preprod</id>
+            <url>scp://lane-preprod.stanford.edu/var/www/maven/projects</url>
+        </site>
+    </distributionManagement>
     <developers>
         <developer>
             <id>ceyates</id>
