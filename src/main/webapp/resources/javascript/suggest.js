@@ -19,7 +19,7 @@
      */
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {
-            minQueryLength: 3,
+            minQueryLength: limit === "history" ? -1 : 3,
             source: SOURCE_BASE + (limit || DEFAULT_LIMIT)
         });
         
@@ -98,12 +98,14 @@
         },
         
         /**
-         * Set the limit parameter for the request.
+         * Set the limit parameter for the request.  If it is history disable ac by setting
+         * minQueryLength to -1, otherwise setting it to the default.
          * @method setLimit
          * @param limit {String} the limit parameter
          */
         setLimit : function(limit) {
             this._ac.set("source", SOURCE_BASE + (limit || DEFAULT_LIMIT));
+            this._ac.set("minQueryLength", limit === "history" ? -1 : 3);
         }
     };
     
