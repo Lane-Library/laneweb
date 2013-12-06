@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2013-12-09" version="2.1.37" description="2.1.37 bug fix release">
+            <action date="2013-12-05" dev="ryanmax" issue="94427" type="add">
+                keyboard conveniences for lightbox and banner
+            </action>
+            <action date="2013-12-04" dev="ryanmax" issue="94071" type="add">
+                CME and grand rounds course data for front page
+            </action>
+            <action date="2013-12-05" dev="ceyates" issue="93609" type="add">
+                Internet Archive search for History search
+            </action>
+        </release>
         <release date="2013-12-02" version="2.1.36" description="2.1.36 bug fix release">
             <action date="2013-11-26" dev="ryanmax" issue="94092" type="add">
                 expose class data with microdata for Google rich snippets
