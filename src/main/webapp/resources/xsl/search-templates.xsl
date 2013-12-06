@@ -8,7 +8,7 @@
     exclude-result-prefixes="h s st xi"
     version="2.0">
     
-    <xsl:variable name="all-engines" select="//s:search/s:engine"/>
+    <xsl:variable name="all-engines" select="/st:search-templates/s:search/s:engine"/>
     
     <xsl:template match="st:search-templates">
         <xsl:copy>
@@ -21,16 +21,21 @@
     </xsl:template>
     
     <xsl:template match="h:html[@id]">
-        <template id="{@id}">
-            <xsl:apply-templates/>
-        </template>
+        <xsl:variable name="templates">
+            <template id="{@id}">
+                <xsl:apply-templates/>
+            </template>
+        </xsl:variable>
+        <xsl:if test="count($templates/st:template/*) > 0">
+            <xsl:copy-of select="$templates"/>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="h:html"/>
     
     <xsl:template match="h:a[@id and contains(@class,'metasearch')]">
         <xsl:variable name="res-id" select="@id"/>
-        <xsl:if test="count(//s:resource[@s:id = $res-id]) > 0">
+        <xsl:if test="count(/st:search-templates/s:search/s:engine/s:resource[@s:id = $res-id]) > 0">
             <engine idref="{@id}"/>
         </xsl:if>
     </xsl:template>
