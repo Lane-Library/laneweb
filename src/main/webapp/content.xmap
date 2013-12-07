@@ -123,7 +123,8 @@
             <map:match type="regex-parameter" pattern="^history-(.*)$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:aggregate type="default" element="doc">
-                    <map:generate type="history-count"/>
+                    <!-- TODO: disabling, probably going away pending history search changes -CY 12/6/13 -->
+                    <!--<map:generate type="history-count"/>-->
                     <map:generate type="file" src="cocoon://content/cached/search/history.html"/>
                     <map:generate type="file" src="cocoon://content/cached/search/history/{source}.html"/>
                 </map:aggregate>
