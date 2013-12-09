@@ -23,6 +23,8 @@
         bindUI : function () {
             this.on("visibleChange", this._onVisibleChange);
             this.after("visibleChange", this._afterVisibleChange);
+            // close on escape
+            Y.one("doc").on("key", this.hide, "esc", this);
         },
         setContent : function(content) {
             this.get("contentBox").set("innerHTML", content);
@@ -116,10 +118,6 @@
         event.preventDefault();
         Y.lane.Lightbox.hide();
     });
-    // close on escape
-    Y.one("doc").on("key", function() {
-        Y.lane.Lightbox.hide();
-    }, "esc");
     
     Y.on("click", function(event) {
         var href, regex, url,

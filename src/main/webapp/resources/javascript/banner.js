@@ -15,17 +15,12 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
     	window.setTimeout(recursion, 10000);
     },
 	bindUI : function() {
-		var navNodes = this.get("navNodes");
+		var navNodes = this.get("navNodes"),
+		    doc = Y.one("doc");
 		if (navNodes.size() > 0) {
 		    // prev/next on left/right arrows
-		    Y.one("doc").on("keyup", function(e){
-		        if (e.keyCode === 37) {
-		            this.prev();
-		        }
-		        if (e.keyCode === 39) {
-		            this.next();
-		        }
-		    }, this);
+            doc.on("key", this.prev, "up:37", this);
+            doc.on("key", this.next, "up:39", this);
 			navNodes.on("click", this._handleNavClick, this);
 			this.on("indexChange", this._handleIndexChange);
 			this.autoNext();
@@ -55,20 +50,23 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 		var navNodes = this.get("navNodes"),
 		    model = Y.lane.Model,
 		    basePath = model.get(model.BASE_PATH) || "";
-		navNodes.item(event.prevVal).removeClass("banner-nav-active");
-		navNodes.item(event.newVal).addClass("banner-nav-active");
-        Y.io(basePath + "/plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
-            on : {
-                success : function(id, o, args) {
-                	var fragment = Y.Node.create(o.responseText),
-            		    childNodes = fragment.get("childNodes"),
-            		    imgSrc = childNodes.filter("img").item(0).getAttribute("src"),
-            		    bannerContent = childNodes.filter(".banner-content").item(0);
-                	this.setNewContent(imgSrc, bannerContent ? bannerContent.get("innerHTML") : "");
-                }
-            },
-            context : this
-        });
+		//don't do anything if the index hasn't actually changed
+		if (event.newVal !== event.prevVal) {
+	        navNodes.item(event.prevVal).removeClass("banner-nav-active");
+	        navNodes.item(event.newVal).addClass("banner-nav-active");
+	        Y.io(basePath + "/plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
+	            on : {
+	                success : function(id, o, args) {
+	                    var fragment = Y.Node.create(o.responseText),
+	                        childNodes = fragment.get("childNodes"),
+	                        imgSrc = childNodes.filter("img").item(0).getAttribute("src"),
+	                        bannerContent = childNodes.filter(".banner-content").item(0);
+	                    this.setNewContent(imgSrc, bannerContent ? bannerContent.get("innerHTML") : "");
+	                }
+	            },
+	            context : this
+	        });
+		}
 	},
     _handleNavClick : function(event) {
     	event.preventDefault();
