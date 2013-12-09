@@ -19,7 +19,7 @@
     </issueManagement>
     <ciManagement>
         <system>Jenson</system>
-        <url>https://irt-lane-stage.stanford.edu/hudson/job/laneweb/</url>
+        <url>https://irt-lane-stage.stanford.edu/jenkins/job/laneweb/</url>
     </ciManagement>
     <distributionManagement>
         <site>
