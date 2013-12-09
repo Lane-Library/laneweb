@@ -24,7 +24,7 @@
     <distributionManagement>
         <site>
             <id>lane-preprod</id>
-            <url>scp://lane-preprod.stanford.edu/var/www/maven/projects</url>
+            <url>scp://lane-preprod.stanford.edu/var/www/maven/projects/laneweb</url>
         </site>
     </distributionManagement>
     <developers>
