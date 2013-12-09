@@ -18,7 +18,7 @@
         <url>http://irt-bugs.stanford.edu/default.php</url>
     </issueManagement>
     <ciManagement>
-        <system>Jenson</system>
+        <system>Jenkins</system>
         <url>https://irt-lane-stage.stanford.edu/jenkins/job/laneweb/</url>
     </ciManagement>
     <distributionManagement>
