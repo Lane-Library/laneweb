@@ -4,16 +4,8 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
     
     <bean name="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"
-        class="edu.stanford.irt.laneweb.eresources.EresourcesCollectionManager">
-        <constructor-arg ref="javax.sql.DataSource/eresources"/>
-        <constructor-arg>
-            <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-                <property name="location" value="classpath:edu/stanford/irt/laneweb/eresources/eresources-sql.properties"/>
-            </bean>
-        </constructor-arg>
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.eresources.ScoreStrategy"/>
-        </constructor-arg>
+        class="edu.stanford.irt.laneweb.eresources.SolrCollectionManager">
+        <constructor-arg ref="laneSearchSolrServer"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"

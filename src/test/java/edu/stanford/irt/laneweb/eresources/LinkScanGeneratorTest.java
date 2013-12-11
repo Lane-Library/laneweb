@@ -11,13 +11,18 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 
-import javax.sql.DataSource;
-
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,40 +34,41 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class LinkScanGeneratorTest {
 
-    private Connection connection;
+    private SolrDocument document;
 
-    private DataSource datasource;
+    private SolrDocumentList documentList;
 
     private LinkScanGenerator generator;
 
-    private ResultSet resultSet;
+    private QueryResponse queryResponse;
 
-    private Statement statement;
+    private SolrServer solrServer;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.datasource = createMock(DataSource.class);
-        this.generator = new LinkScanGenerator(this.datasource);
+        this.solrServer = createMock(HttpSolrServer.class);
+        this.generator = new LinkScanGenerator(this.solrServer);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.connection = createMock(Connection.class);
-        this.statement = createMock(Statement.class);
-        this.resultSet = createMock(ResultSet.class);
+        this.queryResponse = createMock(QueryResponse.class);
+        this.documentList = new SolrDocumentList();
+        this.document = createMock(SolrDocument.class);
+        this.documentList.add(this.document);
     }
 
     @Test
-    public void testDoGenerate() throws SQLException, SAXException {
-        expect(this.datasource.getConnection()).andReturn(this.connection);
-        expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+    public void testDoGenerate() throws SAXException, SolrServerException, IOException {
+        Collection<Object> links = new LinkedList<>();
+        links.add("http://foo/bar");
+        expect(this.solrServer.query(isA(SolrQuery.class))).andReturn(this.queryResponse);
+        expect(this.queryResponse.getResults()).andReturn(this.documentList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
-        expect(this.resultSet.next()).andReturn(true);
-        expect(this.resultSet.getString(1)).andReturn("url");
-        expect(this.resultSet.getString(2)).andReturn("type");
-        expect(this.resultSet.getString(3)).andReturn("id");
-        expect(this.resultSet.getString(4)).andReturn("title");
+        expect(this.document.getFieldValue("id")).andReturn("type-id");
+        expect(this.document.getFieldValue("title")).andReturn("title");
+        expect(this.document.containsKey("links")).andReturn(true);
+        expect(this.document.getFieldValues("links")).andReturn(links);
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq(" #1 ".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
@@ -74,81 +80,47 @@ public class LinkScanGeneratorTest {
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "li", "li");
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "ul", "ul");
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "li", "li");
-        expect(this.resultSet.next()).andReturn(false);
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "ul", "ul");
         this.xmlConsumer.endDocument();
-        this.resultSet.close();
-        this.statement.close();
-        this.connection.close();
-        replay(this.datasource, this.xmlConsumer, this.connection, this.statement, this.resultSet);
+        replay(this.solrServer, this.xmlConsumer, this.queryResponse, this.document);
         this.generator.doGenerate(this.xmlConsumer);
-        assertEquals("url", attributes.getValue().getValue("href"));
-        verify(this.datasource, this.xmlConsumer, this.connection, this.statement, this.resultSet);
+        assertEquals("http://foo/bar", attributes.getValue().getValue("href"));
+        verify(this.solrServer, this.xmlConsumer, this.queryResponse, this.document);
     }
 
     @Test
-    public void testDoGenerateNullTitleUrl() throws SQLException, SAXException {
-        expect(this.datasource.getConnection()).andReturn(this.connection);
-        expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+    public void testDoGenerateNullTitleUrl() throws SAXException, IOException, SolrServerException {
+        expect(this.solrServer.query(isA(SolrQuery.class))).andReturn(this.queryResponse);
+        expect(this.queryResponse.getResults()).andReturn(this.documentList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
-        expect(this.resultSet.next()).andReturn(true);
-        expect(this.resultSet.getString(1)).andReturn(null);
-        expect(this.resultSet.getString(2)).andReturn("type");
-        expect(this.resultSet.getString(3)).andReturn("id");
-        expect(this.resultSet.getString(4)).andReturn(null);
-        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), isA(Attributes.class));
-        this.xmlConsumer.characters(aryEq(" #1 ".toCharArray()), eq(0), eq(4));
-        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), isA(Attributes.class));
-        Capture<Attributes> attributes = new Capture<Attributes>();
-        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
-        this.xmlConsumer.characters(aryEq(" id: type-id title: NULL TITLE".toCharArray()), eq(0), eq(30));
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "li", "li");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "ul", "ul");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "li", "li");
-        expect(this.resultSet.next()).andReturn(false);
+        expect(this.document.getFieldValue("id")).andReturn("type-id");
+        expect(this.document.getFieldValue("title")).andReturn(null);
+        expect(this.document.containsKey("links")).andReturn(true);
+        expect(this.document.getFieldValues("links")).andReturn(Collections.emptyList());
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "ul", "ul");
         this.xmlConsumer.endDocument();
-        this.resultSet.close();
-        this.statement.close();
-        this.connection.close();
-        replay(this.datasource, this.xmlConsumer, this.connection, this.statement, this.resultSet);
+        replay(this.solrServer, this.xmlConsumer, this.queryResponse, this.document);
         this.generator.doGenerate(this.xmlConsumer);
-        assertEquals("NULL URL", attributes.getValue().getValue("href"));
-        verify(this.datasource, this.xmlConsumer, this.connection, this.statement, this.resultSet);
+        verify(this.solrServer, this.xmlConsumer, this.queryResponse, this.document);
     }
 
-    @Test
-    public void testDoGenerateThrowSAXException() throws SQLException, SAXException {
-        expect(this.datasource.getConnection()).andReturn(this.connection);
-        expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+    @Test(expected = LanewebException.class)
+    public void testDoGenerateThrowSAXException() throws SAXException, SolrServerException {
+        expect(this.solrServer.query(isA(SolrQuery.class))).andReturn(this.queryResponse);
+        expect(this.queryResponse.getResults()).andReturn(this.documentList);
         this.xmlConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
-        this.resultSet.close();
-        this.statement.close();
-        this.connection.close();
-        replay(this.datasource, this.xmlConsumer, this.connection, this.statement, this.resultSet);
-        try {
-            this.generator.doGenerate(this.xmlConsumer);
-        } catch (LanewebException e) {
-        }
-        verify(this.datasource, this.xmlConsumer, this.connection, this.statement, this.resultSet);
+        replay(this.solrServer, this.xmlConsumer);
+        this.generator.doGenerate(this.xmlConsumer);
+        verify(this.solrServer, this.xmlConsumer);
     }
 
-    @Test
-    public void testDoGenerateThrowSQLException() throws SQLException, SAXException {
-        expect(this.datasource.getConnection()).andReturn(this.connection);
-        expect(this.connection.createStatement()).andThrow(new SQLException());
-        this.connection.close();
-        replay(this.datasource, this.xmlConsumer, this.connection, this.statement, this.resultSet);
-        try {
-            this.generator.doGenerate(this.xmlConsumer);
-        } catch (LanewebException e) {
-        }
-        verify(this.datasource, this.xmlConsumer, this.connection, this.statement, this.resultSet);
+    @Test(expected = LanewebException.class)
+    public void testDoGenerateThrowSolrException() throws SolrServerException {
+        expect(this.solrServer.query(isA(SolrQuery.class))).andThrow(new SolrServerException("foo"));
+        replay(this.solrServer, this.xmlConsumer);
+        this.generator.doGenerate(this.xmlConsumer);
+        verify(this.solrServer, this.xmlConsumer);
     }
 }

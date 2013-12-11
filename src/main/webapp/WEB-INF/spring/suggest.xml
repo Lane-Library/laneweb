@@ -5,31 +5,13 @@
     
     
     <bean name="edu.stanford.irt.suggest.SuggestionManager/eresource"
-        class="edu.stanford.irt.laneweb.suggest.EresourceSuggestionManager">
-        <property name="collectionManager">
-            <bean class="edu.stanford.irt.laneweb.suggest.EresourceCollectionManager">
-                <constructor-arg ref="javax.sql.DataSource/eresources"/>
-                <constructor-arg>
-                    <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-                        <property name="location" value="classpath:edu/stanford/irt/laneweb/suggest/eresource-sql.properties"/>
-                    </bean>
-                </constructor-arg>
-            </bean>
-        </property>
+        class="edu.stanford.irt.laneweb.suggest.SolrSuggestionManager">
+        <constructor-arg ref="laneSearchSolrServer"/>
     </bean>
     
     <bean name="edu.stanford.irt.suggest.SuggestionManager/history"
-        class="edu.stanford.irt.laneweb.suggest.EresourceSuggestionManager">
-        <property name="collectionManager">
-            <bean class="edu.stanford.irt.laneweb.suggest.HistoryCollectionManager">
-                <constructor-arg ref="javax.sql.DataSource/eresources"/>
-                <constructor-arg>
-                    <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-                        <property name="location" value="classpath:edu/stanford/irt/laneweb/suggest/history-sql.properties"/>
-                    </bean>
-                </constructor-arg>
-            </bean>
-        </property>
+        class="edu.stanford.irt.laneweb.suggest.SolrSuggestionManager">
+        <constructor-arg ref="historySearchSolrServer"/>
     </bean>
     
     <bean name="edu.stanford.irt.suggest.SuggestionManager/mesh"

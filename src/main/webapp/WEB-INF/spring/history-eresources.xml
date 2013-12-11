@@ -4,13 +4,8 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
     
     <bean name="edu.stanford.irt.laneweb.eresources.CollectionManager/history"
-        class="edu.stanford.irt.laneweb.eresources.HistoryCollectionManager">
-        <constructor-arg ref="javax.sql.DataSource/eresources"/>
-        <constructor-arg>
-            <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-                <property name="location" value="classpath:edu/stanford/irt/laneweb/eresources/history-sql.properties"/>
-            </bean>
-        </constructor-arg>
+        class="edu.stanford.irt.laneweb.eresources.SolrCollectionManager">
+        <constructor-arg ref="historySearchSolrServer"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/history-search"

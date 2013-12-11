@@ -22,5 +22,7 @@ laneweb.shccodec.vector=
 laneweb.sunetidcookiecodec.key=
 laneweb.sunetidhashkey=
 laneweb.disaster-mode=
+laneweb.solr-url-laneSearch=
+laneweb.solr-url-historySearch=
 sun.net.client.defaultConnectTimeout=
 sun.net.client.defaultReadTimeout=
