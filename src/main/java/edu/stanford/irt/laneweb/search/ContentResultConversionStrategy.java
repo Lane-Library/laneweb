@@ -60,10 +60,6 @@ public class ContentResultConversionStrategy {
                     parent = resource;
                 }
             }
-            //parent is null in history content search
-            if (parent == null) {
-                parent = engine;
-            }
             if (children != null) {
                 for (Result child : children) {
                     child.setParent(parent);
