@@ -577,7 +577,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.46.0</version>
+            <version>1.48.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -613,7 +613,7 @@
         <dependency>
             <artifactId>nekohtml</artifactId>
             <groupId>net.sourceforge.nekohtml</groupId>
-            <version>1.9.11</version>
+            <version>1.9.19</version>
             <exclusions>
                 <exclusion>
                     <artifactId>xercesImpl</artifactId>
@@ -634,7 +634,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.5.1-2</version>
+            <version>9.5.1-3</version>
         </dependency>
         <dependency>
             <artifactId>search-lane</artifactId>
@@ -679,27 +679,27 @@
             <artifactId>spring-aop</artifactId>
             <groupId>org.springframework</groupId>
             <scope>runtime</scope>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-beans</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context-support</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-core</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
@@ -735,22 +735,22 @@
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
             <scope>test</scope>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-webmvc</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -777,13 +777,13 @@
         <dependency>
             <artifactId>xstream</artifactId>
             <groupId>com.thoughtworks.xstream</groupId>
-            <version>1.4.4</version>
+            <version>1.4.5</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-            <version>3.2.4.RELEASE</version>
+            <version>3.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <!-- required only for shccodec key generation -->
