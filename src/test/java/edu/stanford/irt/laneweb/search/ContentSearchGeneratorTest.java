@@ -27,7 +27,7 @@ public class ContentSearchGeneratorTest {
 
     private ContentSearchGenerator generator;
 
-    private MetaSearchManager metasearchManager;
+    private MetaSearchManager<Result> metasearchManager;
 
     private SAXStrategy<PagingSearchResultList> saxStrategy;
 

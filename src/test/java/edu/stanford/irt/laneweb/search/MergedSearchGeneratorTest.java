@@ -22,6 +22,7 @@ import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
+import edu.stanford.irt.search.Result;
 
 public class MergedSearchGeneratorTest {
 
@@ -33,7 +34,7 @@ public class MergedSearchGeneratorTest {
 
     private MergedSearchGenerator generator;
 
-    private MetaSearchManager metaSearchManager;
+    private MetaSearchManager<Result> metaSearchManager;
 
     private SearchResult result;
 

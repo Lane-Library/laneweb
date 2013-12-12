@@ -31,7 +31,7 @@ public class ResourceSearchGeneratorTest {
 
     private ResourceSearchGenerator generator;
 
-    private MetaSearchManager manager;
+    private MetaSearchManager<Result> manager;
 
     private Result result;
 

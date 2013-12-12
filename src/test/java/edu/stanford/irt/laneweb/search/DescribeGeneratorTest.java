@@ -23,10 +23,11 @@ public class DescribeGeneratorTest {
 
     private DescribeGenerator generator;
 
-    private MetaSearchManager metaSearchManager;
+    private MetaSearchManager<Result> metaSearchManager;
 
     private Result result;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.metaSearchManager = createMock(MetaSearchManager.class);

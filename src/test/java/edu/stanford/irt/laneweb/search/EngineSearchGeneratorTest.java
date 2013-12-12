@@ -26,7 +26,7 @@ public class EngineSearchGeneratorTest {
 
     private EngineSearchGenerator generator;
 
-    private MetaSearchManager metaSearchManager;
+    private MetaSearchManager<Result> metaSearchManager;
 
     private SAXStrategy<Result> saxStrategy;
 

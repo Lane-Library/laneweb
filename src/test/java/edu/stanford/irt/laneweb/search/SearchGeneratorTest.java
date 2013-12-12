@@ -27,7 +27,7 @@ public class SearchGeneratorTest {
 
     private SearchGenerator generator;
 
-    private MetaSearchManager manager;
+    private MetaSearchManager<Result> manager;
 
     private Map<String, Object> model;
 

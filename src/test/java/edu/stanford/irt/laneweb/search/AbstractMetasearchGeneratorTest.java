@@ -17,7 +17,7 @@ public class AbstractMetasearchGeneratorTest {
 
     private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator {
 
-        public TestAbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+        public TestAbstractMetasearchGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
             super(metaSearchManager, saxStrategy);
         }
 
@@ -29,7 +29,7 @@ public class AbstractMetasearchGeneratorTest {
 
     private AbstractMetasearchGenerator generator;
 
-    private MetaSearchManager manager;
+    private MetaSearchManager<Result> manager;
 
     private Query query;
 

@@ -15,7 +15,7 @@ public class EngineSearchGenerator extends SearchGenerator {
 
     private Collection<String> engines;
 
-    public EngineSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public EngineSearchGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 

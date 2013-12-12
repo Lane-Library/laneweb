@@ -14,7 +14,7 @@ public class DescribeGenerator extends AbstractMetasearchGenerator implements Ca
 
     private static final String TYPE = "describe";
 
-    public DescribeGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public DescribeGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 

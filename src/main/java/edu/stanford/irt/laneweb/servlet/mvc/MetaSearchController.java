@@ -28,14 +28,14 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 public class MetaSearchController {
 
     @Autowired
-    private MetaSearchManager manager;
+    private MetaSearchManager<Result> manager;
 
     @Autowired
     private CompositeDataBinder dataBinder;
     
     public MetaSearchController() {}
 
-    public MetaSearchController(final MetaSearchManager manager, final CompositeDataBinder dataBinder) {
+    public MetaSearchController(final MetaSearchManager<Result> manager, final CompositeDataBinder dataBinder) {
         this.manager = manager;
         this.dataBinder = dataBinder;
     }

@@ -30,7 +30,7 @@ public class MetaSearchControllerTest {
 
     private CompositeDataBinder dataBinder;
 
-    private MetaSearchManager manager;
+    private MetaSearchManager<Result> manager;
 
     private Map<String, Object> map;
 
@@ -40,6 +40,7 @@ public class MetaSearchControllerTest {
 
     private Result result;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.manager = createMock(MetaSearchManager.class);

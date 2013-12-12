@@ -9,9 +9,9 @@ import edu.stanford.irt.search.Result;
 
 public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerator<Result> {
 
-    private MetaSearchManager metaSearchManager;
+    private MetaSearchManager<Result> metaSearchManager;
 
-    public AbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public AbstractMetasearchGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(saxStrategy);
         this.metaSearchManager = metaSearchManager;
     }
