@@ -3,11 +3,12 @@ package edu.stanford.irt.laneweb.proxy;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
+import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractProxyLinkTransformer extends AbstractTransformer implements ModelAware {
+public abstract class AbstractProxyLinkTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
 
     private String baseProxyURL;
 
