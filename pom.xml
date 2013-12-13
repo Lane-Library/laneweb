@@ -729,7 +729,7 @@
         <dependency>
             <artifactId>spring-mobile-device</artifactId>
             <groupId>org.springframework.mobile</groupId>
-            <version>1.0.2.RELEASE</version>
+            <version>1.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-test</artifactId>
