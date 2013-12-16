@@ -3,24 +3,24 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.MetaSearchable;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.Result;
 
-public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerator<DefaultResult> {
+public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerator<Result> {
 
-    private MetaSearchManager<DefaultResult> metaSearchManager;
+    private MetaSearchable<Result> metaSearchable;
 
-    public AbstractMetasearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<DefaultResult> saxStrategy) {
+    public AbstractMetasearchGenerator(final MetaSearchable<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(saxStrategy);
-        this.metaSearchManager = metaSearchManager;
+        this.metaSearchable = metaSearchManager;
     }
 
-    public DefaultResult describe(final Query query, final Collection<String> engines) {
-        return this.metaSearchManager.describe(query, engines);
+    public Result describe(final Query query, final Collection<String> engines) {
+        return this.metaSearchable.describe(query, engines);
     }
 
-    public DefaultResult search(final Query query, final long arg1, final Collection<String> arg2, final boolean arg3) {
-        return this.metaSearchManager.search(query, arg1, arg2, arg3);
+    public Result search(final Query query, final long arg1, final Collection<String> arg2, final boolean arg3) {
+        return this.metaSearchable.search(query, arg1, arg2, arg3);
     }
 }

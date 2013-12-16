@@ -11,27 +11,27 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.MetaSearchable;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
 
     private Collection<String> resources = Collections.emptySet();
 
-    public ResourceSearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<DefaultResult> saxStrategy) {
+    public ResourceSearchGenerator(final MetaSearchable<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 
     @Override
-    public DefaultResult doSearch(final String query) {
+    public Result doSearch(final String query) {
         String q = query == null ? "" : query;
         Collection<String> enginesToRun = new HashSet<String>();
-        DefaultResult describeResult = describe(new SimpleQuery(q), null);
+        Result describeResult = describe(new SimpleQuery(q), null);
         Map<String, String> enginesMap = new HashMap<String, String>();
-        for (DefaultResult engine : describeResult.getChildren()) {
+        for (Result engine : describeResult.getChildren()) {
             String engineId = engine.getId();
-            for (DefaultResult resource : engine.getChildren()) {
+            for (Result resource : engine.getChildren()) {
                 enginesMap.put(resource.getId(), engineId);
             }
         }

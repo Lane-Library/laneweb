@@ -15,33 +15,33 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.MetaSearchable;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class DescribeGeneratorTest {
 
     private DescribeGenerator generator;
 
-    private MetaSearchManager<DefaultResult> metaSearchManager;
+    private MetaSearchable<Result> metaSearchable;
 
-    private DefaultResult result;
+    private Result result;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.metaSearchManager = createMock(MetaSearchManager.class);
-        this.generator = new DescribeGenerator(this.metaSearchManager, null);
-        this.result = createMock(DefaultResult.class);
+        this.metaSearchable = createMock(MetaSearchable.class);
+        this.generator = new DescribeGenerator(this.metaSearchable, null);
+        this.result = createMock(Result.class);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
-        expect(this.metaSearchManager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
-        replay(this.metaSearchManager);
+        expect(this.metaSearchable.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
+        replay(this.metaSearchable);
         assertSame(this.result, this.generator.doSearch("query"));
-        verify(this.metaSearchManager);
+        verify(this.metaSearchable);
     }
 
     @Test

@@ -6,8 +6,8 @@ import org.apache.http.client.HttpClient;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.MetaSearchable;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
 /**
@@ -19,14 +19,14 @@ public class MetaSearchManagerSource {
 
     private HttpClient httpClient;
 
-    private MetaSearchManager<DefaultResult> manager;
+    private MetaSearchable<Result> manager;
 
     private SearchCacheManager searchCacheManager;
 
     @SuppressWarnings("unchecked")
     public MetaSearchManagerSource(final String springFileName) {
         this.context = new ClassPathXmlApplicationContext(springFileName);
-        this.manager = this.context.getBean("manager", MetaSearchManager.class);
+        this.manager = this.context.getBean("manager", MetaSearchable.class);
         this.searchCacheManager = this.context.getBean("searchCacheManager", SearchCacheManager.class);
         this.httpClient = this.context.getBean("httpClient", HttpClient.class);
     }
@@ -39,7 +39,7 @@ public class MetaSearchManagerSource {
         return this.httpClient;
     }
 
-    public MetaSearchManager<DefaultResult> getMetaSearchManager() {
+    public MetaSearchable<Result> getMetaSearchManager() {
         return this.manager;
     }
 
@@ -50,7 +50,7 @@ public class MetaSearchManagerSource {
     @SuppressWarnings("unchecked")
     public void reload(final String url, final String login, final String password) throws IOException {
         AbstractXmlApplicationContext newContext = new HttpApplicationContext(url, login, password);
-        this.manager = newContext.getBean("manager", MetaSearchManager.class);
+        this.manager = newContext.getBean("manager", MetaSearchable.class);
         this.httpClient = newContext.getBean("httpClient", HttpClient.class);
         this.searchCacheManager = newContext.getBean("searchCacheManager", SearchCacheManager.class);
         this.context.destroy();

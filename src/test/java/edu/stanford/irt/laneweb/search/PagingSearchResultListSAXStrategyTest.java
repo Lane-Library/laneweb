@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.PagingData;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListSAXStrategyTest {
 
@@ -38,7 +38,7 @@ public class PagingSearchResultListSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
     
-    private DefaultResult resourceResult;
+    private Result resourceResult;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -51,7 +51,7 @@ public class PagingSearchResultListSAXStrategyTest {
         this.strategy = new PagingSearchResultListSAXStrategy(this.resultStrategy);
         this.list = createMock(PagingSearchResultList.class);
         this.pagingData = createMock(PagingData.class);
-        this.resourceResult = createMock(DefaultResult.class);
+        this.resourceResult = createMock(Result.class);
     }
 
     @Test

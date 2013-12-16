@@ -12,20 +12,20 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.ContentResult;
 
 public class ScoreStrategyTest {
 
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
-    private DefaultContentResult result;
+    private ContentResult result;
 
     private ScoreStrategy scoreStrategy;
 
     @Before
     public void setUp() throws Exception {
         this.scoreStrategy = new ScoreStrategy();
-        this.result = createMock(DefaultContentResult.class);
+        this.result = createMock(ContentResult.class);
     }
 
     @Test

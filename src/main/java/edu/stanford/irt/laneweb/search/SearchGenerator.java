@@ -7,9 +7,9 @@ import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.MetaSearchable;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
@@ -22,7 +22,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
 
     private String wait;
 
-    public SearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<DefaultResult> saxStrategy) {
+    public SearchGenerator(final MetaSearchable<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 
@@ -44,14 +44,14 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
     }
 
     @Override
-    protected DefaultResult doSearch(final String query) {
+    protected Result doSearch(final String query) {
         return searchWithEngines(query, null);
     }
 
-    protected DefaultResult searchWithEngines(final String query, final Collection<String> engines) {
-        DefaultResult result = null;
+    protected Result searchWithEngines(final String query, final Collection<String> engines) {
+        Result result = null;
         if (query == null || query.isEmpty()) {
-            result = new DefaultResult("null");
+            result = new Result("null");
             result.setStatus(SearchStatus.FAILED);
         } else {
             long searchTimeout = DEFAULT_TIMEOUT;

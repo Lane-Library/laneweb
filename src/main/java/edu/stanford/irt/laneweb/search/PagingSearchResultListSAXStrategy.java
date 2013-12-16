@@ -13,7 +13,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSearchResultList>, Resource {
 
@@ -54,10 +54,10 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
                 XMLUtils.endElement(xmlConsumer, NAMESPACE, QUERY);
             }
             XMLUtils.startElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
-            Set<DefaultResult> countedResources = new HashSet<DefaultResult>();
+            Set<Result> countedResources = new HashSet<Result>();
             for (SearchResult resource : list) {
                 if (resource instanceof ContentResultSearchResult) {
-                    DefaultResult resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
+                    Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
                     if (!countedResources.contains(resourceResult)) {
                         countedResources.add(resourceResult);
                         atts = new AttributesImpl();

@@ -14,14 +14,14 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.impl.DefaultContentResult;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultXHTMLSAXStrategyTest {
 
-    private DefaultContentResult contentResult;
+    private ContentResult contentResult;
 
-    private DefaultResult resourceResult;
+    private Result resourceResult;
 
     private ContentResultSearchResult result;
 
@@ -34,8 +34,8 @@ public class ContentResultXHTMLSAXStrategyTest {
         this.strategy = new ContentResultXHTMLSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
         this.result = createMock(ContentResultSearchResult.class);
-        this.contentResult = createMock(DefaultContentResult.class);
-        this.resourceResult = createMock(DefaultResult.class);
+        this.contentResult = createMock(ContentResult.class);
+        this.resourceResult = createMock(Result.class);
     }
 
     @Test

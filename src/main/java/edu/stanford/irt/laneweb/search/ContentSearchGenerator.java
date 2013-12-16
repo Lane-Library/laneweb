@@ -11,8 +11,8 @@ import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.MetaSearchable;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
@@ -26,11 +26,11 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
 
     private Collection<String> engines;
 
-    private MetaSearchManager<DefaultResult> metasearchManager;
+    private MetaSearchable<Result> metasearchManager;
 
     private String timeout;
 
-    public ContentSearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<PagingSearchResultList> saxStrategy,
+    public ContentSearchGenerator(final MetaSearchable<Result> metaSearchManager, final SAXStrategy<PagingSearchResultList> saxStrategy,
             final ContentResultConversionStrategy conversionStrategy) {
         super(saxStrategy);
         this.metasearchManager = metaSearchManager;
@@ -65,7 +65,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         return this.conversionStrategy.convertResult(doMetaSearch(query));
     }
 
-    private DefaultResult doMetaSearch(final String query) {
+    private Result doMetaSearch(final String query) {
         long time = DEFAULT_TIMEOUT;
         if (null != this.timeout) {
             try {
@@ -74,9 +74,9 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
                 time = DEFAULT_TIMEOUT;
             }
         }
-        DefaultResult result = null;
+        Result result = null;
         if (query == null || query.isEmpty()) {
-            result = new DefaultResult("");
+            result = new Result("");
         } else {
             result = this.metasearchManager.search(new SimpleQuery(query), time, this.engines, true);
         }

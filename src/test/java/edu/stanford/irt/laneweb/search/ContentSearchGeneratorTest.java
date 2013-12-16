@@ -17,9 +17,9 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.MetaSearchable;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentSearchGeneratorTest {
 
@@ -27,14 +27,14 @@ public class ContentSearchGeneratorTest {
 
     private ContentSearchGenerator generator;
 
-    private MetaSearchManager<DefaultResult> metasearchManager;
+    private MetaSearchable<Result> metasearchManager;
 
     private SAXStrategy<PagingSearchResultList> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.metasearchManager = createMock(MetaSearchManager.class);
+        this.metasearchManager = createMock(MetaSearchable.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.conversionStrategy = createMock(ContentResultConversionStrategy.class);
         this.generator = new ContentSearchGenerator(this.metasearchManager, this.saxStrategy, this.conversionStrategy);
@@ -53,7 +53,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGetSearchResultsEmptyQuery() {
-        expect(this.conversionStrategy.convertResult(isA(DefaultResult.class))).andReturn(null);
+        expect(this.conversionStrategy.convertResult(isA(Result.class))).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
         this.generator.getSearchResults("");
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
@@ -74,7 +74,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGetSearchResultsNullQuery() {
-        expect(this.conversionStrategy.convertResult(isA(DefaultResult.class))).andReturn(null);
+        expect(this.conversionStrategy.convertResult(isA(Result.class))).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
         this.generator.getSearchResults(null);
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);

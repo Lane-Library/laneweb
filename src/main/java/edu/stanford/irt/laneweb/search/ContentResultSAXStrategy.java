@@ -8,15 +8,15 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.impl.DefaultContentResult;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearchResult>, Resource {
 
     @Override
     public void toSAX(final ContentResultSearchResult result, final XMLConsumer xmlConsumer) {
-        DefaultContentResult contentResult = result.getContentResult();
-        DefaultResult resourceResult = result.getResourceResult();
+        ContentResult contentResult = result.getContentResult();
+        Result resourceResult = result.getResourceResult();
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(result.getScore()));
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");

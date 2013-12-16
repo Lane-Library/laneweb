@@ -19,10 +19,10 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
-import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.MetaSearchable;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class MetaSearchControllerTest {
 
@@ -30,7 +30,7 @@ public class MetaSearchControllerTest {
 
     private CompositeDataBinder dataBinder;
 
-    private MetaSearchManager<DefaultResult> manager;
+    private MetaSearchable<Result> manager;
 
     private Map<String, Object> map;
 
@@ -38,18 +38,18 @@ public class MetaSearchControllerTest {
 
     private HttpServletRequest request;
 
-    private DefaultResult result;
+    private Result result;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.manager = createMock(MetaSearchManager.class);
+        this.manager = createMock(MetaSearchable.class);
         this.dataBinder = createMock(CompositeDataBinder.class);
         this.controller = new MetaSearchController(this.manager, this.dataBinder);
         this.model = createMock(org.springframework.ui.Model.class);
         this.request = createMock(HttpServletRequest.class);
         this.map = new HashMap<String, Object>();
-        this.result = createMock(DefaultResult.class);
+        this.result = createMock(Result.class);
     }
 
     @Test

@@ -1,22 +1,22 @@
 package edu.stanford.irt.laneweb.search;
 
-import edu.stanford.irt.search.impl.DefaultContentResult;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 /**
  * @author ryanmax
  */
 public class ContentResultSearchResult implements SearchResult {
 
-    private DefaultContentResult contentResult;
+    private ContentResult contentResult;
 
-    private DefaultResult resourceResult;
+    private Result resourceResult;
 
     private int score;
 
     private String sortTitle;
 
-    public ContentResultSearchResult(final DefaultContentResult contentResult, final DefaultResult resourceResult, final int score) {
+    public ContentResultSearchResult(final ContentResult contentResult, final Result resourceResult, final int score) {
         this.contentResult = contentResult;
         this.resourceResult = resourceResult;
         this.score = score;
@@ -49,11 +49,11 @@ public class ContentResultSearchResult implements SearchResult {
         return equals;
     }
 
-    public DefaultContentResult getContentResult() {
+    public ContentResult getContentResult() {
         return this.contentResult;
     }
 
-    public DefaultResult getResourceResult() {
+    public Result getResourceResult() {
         return this.resourceResult;
     }
 

@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.laneweb.resource.AbstractScoreStrategy;
-import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.ContentResult;
 
 public class ScoreStrategy extends AbstractScoreStrategy {
 
@@ -34,7 +34,7 @@ public class ScoreStrategy extends AbstractScoreStrategy {
      *  1
      * </pre>
      */
-    public int computeScore(final DefaultContentResult searchResult, final Pattern queryTermPattern) {
+    public int computeScore(final ContentResult searchResult, final Pattern queryTermPattern) {
         int score;
         double weight = computeWeight(ENGINEID_PATTERN.matcher(searchResult.getId()).replaceFirst(""));
         Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern.toString() + ").*",

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
-import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.MetaSearchable;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
@@ -28,14 +28,14 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 public class MetaSearchController {
 
     @Autowired
-    private MetaSearchManager<DefaultResult> manager;
+    private MetaSearchable<Result> manager;
 
     @Autowired
     private CompositeDataBinder dataBinder;
     
     public MetaSearchController() {}
 
-    public MetaSearchController(final MetaSearchManager<DefaultResult> manager, final CompositeDataBinder dataBinder) {
+    public MetaSearchController(final MetaSearchable<Result> manager, final CompositeDataBinder dataBinder) {
         this.manager = manager;
         this.dataBinder = dataBinder;
     }
@@ -57,7 +57,7 @@ public class MetaSearchController {
             @ModelAttribute(Model.BASE_PROXY_URL) final String baseProxyURL) {
         Query simpleQuery = new SimpleQuery(query);
         Collection<String> engines = getEnginesForResources(resources);
-        DefaultResult result = this.manager.search(simpleQuery, 60000, engines, false);
+        Result result = this.manager.search(simpleQuery, 60000, engines, false);
         Map<String, Object> resultMap = getMapForResult(result, resources);
         if (proxyLinks) {
             createProxyLinks(resultMap, baseProxyURL);
@@ -97,9 +97,9 @@ public class MetaSearchController {
      */
     private Collection<String> getEnginesForResources(final List<String> resources) {
         Collection<String> engines = new LinkedList<String>();
-        DefaultResult describeResult = this.manager.describe(new SimpleQuery(""), resources);
-        for (DefaultResult engine : describeResult.getChildren()) {
-            for (DefaultResult resource : engine.getChildren()) {
+        Result describeResult = this.manager.describe(new SimpleQuery(""), resources);
+        for (Result engine : describeResult.getChildren()) {
+            for (Result resource : engine.getChildren()) {
                 if (resources.contains(resource.getId())) {
                     engines.add(engine.getId());
                     break;
@@ -118,7 +118,7 @@ public class MetaSearchController {
      *            the resources requested
      * @return a Map representation of the Result with only the requested resources
      */
-    private Map<String, Object> getMapForResult(final DefaultResult result, final List<String> resources) {
+    private Map<String, Object> getMapForResult(final Result result, final List<String> resources) {
         Map<String, Object> map = new HashMap<String, Object>();
         // synchronized because otherwise search might update the result while
         // this is happening
@@ -139,11 +139,11 @@ public class MetaSearchController {
      *            the resource list
      * @return a map of resource results
      */
-    private Map<String, Map<String, Object>> getResourceResultMap(final Collection<DefaultResult> engines,
+    private Map<String, Map<String, Object>> getResourceResultMap(final Collection<Result> engines,
             final List<String> resources) {
         Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
-        for (DefaultResult engine : engines) {
-            for (DefaultResult resource : engine.getChildren()) {
+        for (Result engine : engines) {
+            for (Result resource : engine.getChildren()) {
                 String id = resource.getId();
                 if (resources.contains(id)) {
                     Map<String, Object> resourceMap = new HashMap<String, Object>();

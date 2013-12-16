@@ -2,10 +2,10 @@ package edu.stanford.irt.laneweb.search;
 
 import org.springframework.beans.factory.FactoryBean;
 
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.MetaSearchable;
+import edu.stanford.irt.search.impl.Result;
 
-public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManager<DefaultResult>> {
+public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchable<Result>> {
 
     private MetaSearchManagerSource msms;
 
@@ -13,12 +13,12 @@ public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManag
         this.msms = msms;
     }
 
-    public MetaSearchManager<DefaultResult> getObject() {
+    public MetaSearchable<Result> getObject() {
         return this.msms.getMetaSearchManager();
     }
 
     public Class<?> getObjectType() {
-        return MetaSearchManager.class;
+        return MetaSearchable.class;
     }
 
     public boolean isSingleton() {
