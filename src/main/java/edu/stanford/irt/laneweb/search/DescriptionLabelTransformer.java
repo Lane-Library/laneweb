@@ -8,11 +8,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
+import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.resource.Resource;
 
-public class DescriptionLabelTransformer extends AbstractTransformer {
+public class DescriptionLabelTransformer extends AbstractXMLPipe implements Transformer {
 
     public static final String EMPTY = "";
 

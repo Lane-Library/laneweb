@@ -10,13 +10,14 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
+import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.Resource;
 
-public class QueryHighlightingTransformer extends AbstractTransformer implements ModelAware {
+public class QueryHighlightingTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
 
     public static final String EMPTY = "";
 

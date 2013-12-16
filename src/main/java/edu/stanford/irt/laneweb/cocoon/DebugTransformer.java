@@ -7,7 +7,8 @@ import java.util.Set;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
+import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
@@ -15,7 +16,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
  * This transformer puts a comment with all model attributes at the top of a
  * document.
  */
-public class DebugTransformer extends AbstractTransformer implements ModelAware {
+public class DebugTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
 
     private boolean debug;
 
