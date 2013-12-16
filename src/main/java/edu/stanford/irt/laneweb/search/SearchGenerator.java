@@ -8,7 +8,6 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;

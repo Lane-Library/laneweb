@@ -11,8 +11,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class ContentResultSearchResultTest {
 

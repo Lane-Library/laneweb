@@ -21,8 +21,8 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.SearchStatus;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class MetaSearchControllerTest {
 
