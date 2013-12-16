@@ -11,29 +11,29 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class AbstractMetasearchGeneratorTest {
 
     private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator {
 
-        public TestAbstractMetasearchGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+        public TestAbstractMetasearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<DefaultResult> saxStrategy) {
             super(metaSearchManager, saxStrategy);
         }
 
         @Override
-        protected Result doSearch(final String query) {
+        protected DefaultResult doSearch(final String query) {
             return null;
         }
     }
 
     private AbstractMetasearchGenerator generator;
 
-    private MetaSearchManager<Result> manager;
+    private MetaSearchManager<DefaultResult> manager;
 
     private Query query;
 
-    private SAXStrategy<Result> saxStrategy;;
+    private SAXStrategy<DefaultResult> saxStrategy;;
 
     @SuppressWarnings("unchecked")
     @Before

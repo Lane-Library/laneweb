@@ -8,7 +8,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
@@ -23,7 +23,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
 
     private String wait;
 
-    public SearchGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public SearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<DefaultResult> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 
@@ -45,12 +45,12 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
     }
 
     @Override
-    protected Result doSearch(final String query) {
+    protected DefaultResult doSearch(final String query) {
         return searchWithEngines(query, null);
     }
 
-    protected Result searchWithEngines(final String query, final Collection<String> engines) {
-        Result result = null;
+    protected DefaultResult searchWithEngines(final String query, final Collection<String> engines) {
+        DefaultResult result = null;
         if (query == null || query.isEmpty()) {
             result = new DefaultResult("null");
             result.setStatus(SearchStatus.FAILED);

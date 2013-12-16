@@ -21,7 +21,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.SearchStatus;
 
 public class MetaSearchControllerTest {
@@ -30,7 +30,7 @@ public class MetaSearchControllerTest {
 
     private CompositeDataBinder dataBinder;
 
-    private MetaSearchManager<Result> manager;
+    private MetaSearchManager<DefaultResult> manager;
 
     private Map<String, Object> map;
 
@@ -38,7 +38,7 @@ public class MetaSearchControllerTest {
 
     private HttpServletRequest request;
 
-    private Result result;
+    private DefaultResult result;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -49,7 +49,7 @@ public class MetaSearchControllerTest {
         this.model = createMock(org.springframework.ui.Model.class);
         this.request = createMock(HttpServletRequest.class);
         this.map = new HashMap<String, Object>();
-        this.result = createMock(Result.class);
+        this.result = createMock(DefaultResult.class);
     }
 
     @Test

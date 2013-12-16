@@ -17,22 +17,22 @@ import org.junit.Test;
 
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class DescribeGeneratorTest {
 
     private DescribeGenerator generator;
 
-    private MetaSearchManager<Result> metaSearchManager;
+    private MetaSearchManager<DefaultResult> metaSearchManager;
 
-    private Result result;
+    private DefaultResult result;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.metaSearchManager = createMock(MetaSearchManager.class);
         this.generator = new DescribeGenerator(this.metaSearchManager, null);
-        this.result = createMock(Result.class);
+        this.result = createMock(DefaultResult.class);
     }
 
     @SuppressWarnings("unchecked")

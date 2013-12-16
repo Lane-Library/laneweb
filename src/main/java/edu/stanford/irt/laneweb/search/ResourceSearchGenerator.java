@@ -12,26 +12,26 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
 
     private Collection<String> resources = Collections.emptySet();
 
-    public ResourceSearchGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public ResourceSearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<DefaultResult> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 
     @Override
-    public Result doSearch(final String query) {
+    public DefaultResult doSearch(final String query) {
         String q = query == null ? "" : query;
         Collection<String> enginesToRun = new HashSet<String>();
-        Result describeResult = describe(new SimpleQuery(q), null);
+        DefaultResult describeResult = describe(new SimpleQuery(q), null);
         Map<String, String> enginesMap = new HashMap<String, String>();
-        for (Result engine : describeResult.getChildren()) {
+        for (DefaultResult engine : describeResult.getChildren()) {
             String engineId = engine.getId();
-            for (Result resource : engine.getChildren()) {
+            for (DefaultResult resource : engine.getChildren()) {
                 enginesMap.put(resource.getId(), engineId);
             }
         }

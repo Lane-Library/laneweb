@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class ContentResultConversionStrategy {
 
@@ -27,11 +27,11 @@ public class ContentResultConversionStrategy {
         this.scopusDeduplicator = deduplicator;
     }
 
-    public List<SearchResult> convertResult(final Result result) {
+    public List<SearchResult> convertResult(final DefaultResult result) {
         Map<ContentResultSearchResult, ContentResultSearchResult> resultMap = new HashMap<ContentResultSearchResult, ContentResultSearchResult>();
-        List<ContentResult> contentResults = getContentResultList(result);
+        List<DefaultContentResult> contentResults = getContentResultList(result);
         Pattern queryTermPattern = QueryTermPattern.getPattern(result.getQuery().toString());
-        for (ContentResult contentResult : contentResults) {
+        for (DefaultContentResult contentResult : contentResults) {
             // create a ContentResultSearch result from each ContentResult, retain the highest scoring one if more than
             // one the same
             int score = this.scoreStrategy.computeScore(contentResult, queryTermPattern);
@@ -47,12 +47,12 @@ public class ContentResultConversionStrategy {
     }
 
     // extracts a list of ContentResults from the initial Result object
-    private List<ContentResult> getContentResultList(final Result result) {
-        List<ContentResult> list = new LinkedList<ContentResult>();
-        for (Result engine : result.getChildren()) {
-            Result parent = null;
-            Collection<Result> children = null;
-            for (Result resource : engine.getChildren()) {
+    private List<DefaultContentResult> getContentResultList(final DefaultResult result) {
+        List<DefaultContentResult> list = new LinkedList<DefaultContentResult>();
+        for (DefaultResult engine : result.getChildren()) {
+            DefaultResult parent = null;
+            Collection<DefaultResult> children = null;
+            for (DefaultResult resource : engine.getChildren()) {
                 String resourceId = resource.getId();
                 if (resourceId.endsWith(UNDERSCORE_CONTENT)) {
                     children = resource.getChildren();
@@ -61,9 +61,9 @@ public class ContentResultConversionStrategy {
                 }
             }
             if (children != null) {
-                for (Result child : children) {
+                for (DefaultResult child : children) {
                     child.setParent(parent);
-                    list.add((ContentResult) child);
+                    list.add((DefaultContentResult) child);
                 }
             }
         }

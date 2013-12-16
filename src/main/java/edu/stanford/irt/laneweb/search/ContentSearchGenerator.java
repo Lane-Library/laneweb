@@ -12,7 +12,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -27,11 +27,11 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
 
     private Collection<String> engines;
 
-    private MetaSearchManager<Result> metasearchManager;
+    private MetaSearchManager<DefaultResult> metasearchManager;
 
     private String timeout;
 
-    public ContentSearchGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<PagingSearchResultList> saxStrategy,
+    public ContentSearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<PagingSearchResultList> saxStrategy,
             final ContentResultConversionStrategy conversionStrategy) {
         super(saxStrategy);
         this.metasearchManager = metaSearchManager;
@@ -66,7 +66,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         return this.conversionStrategy.convertResult(doMetaSearch(query));
     }
 
-    private Result doMetaSearch(final String query) {
+    private DefaultResult doMetaSearch(final String query) {
         long time = DEFAULT_TIMEOUT;
         if (null != this.timeout) {
             try {
@@ -75,7 +75,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
                 time = DEFAULT_TIMEOUT;
             }
         }
-        Result result = null;
+        DefaultResult result = null;
         if (query == null || query.isEmpty()) {
             result = new DefaultResult("");
         } else {

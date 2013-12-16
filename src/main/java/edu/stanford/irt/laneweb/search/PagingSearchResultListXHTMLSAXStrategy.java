@@ -13,8 +13,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultList> {
 
@@ -88,11 +88,11 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "search-content-counts");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             XMLUtils.data(xmlConsumer, "\u00A0");
-            Set<Result> countedResources = new HashSet<Result>();
+            Set<DefaultResult> countedResources = new HashSet<DefaultResult>();
             boolean showPubMedStrategies = false;
             for (SearchResult resource : list) {
                 if (resource instanceof ContentResultSearchResult) {
-                    Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
+                    DefaultResult resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
                     if (!countedResources.contains(resourceResult)) {
                         countedResources.add(resourceResult);
                         String id = resourceResult.getId();
@@ -135,7 +135,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             Eresource eresource = ((EresourceSearchResult) result).getEresource();
             description = eresource.getDescription();
         } else if (result instanceof ContentResultSearchResult) {
-            ContentResult contentResult = ((ContentResultSearchResult) result).getContentResult();
+            DefaultContentResult contentResult = ((ContentResultSearchResult) result).getContentResult();
             description = contentResult.getDescription();
         }
         return description != null && description.length() > 0;

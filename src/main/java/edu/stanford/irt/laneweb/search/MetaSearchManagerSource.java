@@ -7,7 +7,7 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
 /**
@@ -19,7 +19,7 @@ public class MetaSearchManagerSource {
 
     private HttpClient httpClient;
 
-    private MetaSearchManager<Result> manager;
+    private MetaSearchManager<DefaultResult> manager;
 
     private SearchCacheManager searchCacheManager;
 
@@ -39,7 +39,7 @@ public class MetaSearchManagerSource {
         return this.httpClient;
     }
 
-    public MetaSearchManager<Result> getMetaSearchManager() {
+    public MetaSearchManager<DefaultResult> getMetaSearchManager() {
         return this.manager;
     }
 

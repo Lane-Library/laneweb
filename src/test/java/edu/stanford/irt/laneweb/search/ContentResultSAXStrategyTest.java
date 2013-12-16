@@ -21,14 +21,14 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class ContentResultSAXStrategyTest {
 
-    private ContentResult contentResult;
+    private DefaultContentResult contentResult;
 
-    private Result resourceResult;
+    private DefaultResult resourceResult;
 
     private ContentResultSearchResult searchResult;
 
@@ -41,8 +41,8 @@ public class ContentResultSAXStrategyTest {
         this.strategy = new ContentResultSAXStrategy();
         this.searchResult = createMock(ContentResultSearchResult.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.contentResult = createMock(ContentResult.class);
-        this.resourceResult = createMock(Result.class);
+        this.contentResult = createMock(DefaultContentResult.class);
+        this.resourceResult = createMock(DefaultResult.class);
     }
 
     @Test

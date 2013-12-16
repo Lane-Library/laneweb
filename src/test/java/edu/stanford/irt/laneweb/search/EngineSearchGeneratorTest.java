@@ -20,15 +20,15 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class EngineSearchGeneratorTest {
 
     private EngineSearchGenerator generator;
 
-    private MetaSearchManager<Result> metaSearchManager;
+    private MetaSearchManager<DefaultResult> metaSearchManager;
 
-    private SAXStrategy<Result> saxStrategy;
+    private SAXStrategy<DefaultResult> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before

@@ -25,17 +25,17 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class ResourceSearchGeneratorTest {
 
     private ResourceSearchGenerator generator;
 
-    private MetaSearchManager<Result> manager;
+    private MetaSearchManager<DefaultResult> manager;
 
-    private Result result;
+    private DefaultResult result;
 
-    private SAXStrategy<Result> saxStrategy;
+    private SAXStrategy<DefaultResult> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -43,14 +43,14 @@ public class ResourceSearchGeneratorTest {
         this.manager = createMock(MetaSearchManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new ResourceSearchGenerator(this.manager, this.saxStrategy);
-        this.result = createMock(Result.class);
+        this.result = createMock(DefaultResult.class);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
         expect(this.manager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
-        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(3);
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new DefaultResult[] { this.result, this.result })).times(3);
         expect(this.result.getId()).andReturn("engine-1");
         expect(this.result.getId()).andReturn("resource-1-1");
         expect(this.result.getId()).andReturn("resource-1-2");
@@ -73,7 +73,7 @@ public class ResourceSearchGeneratorTest {
     @Test
     public void testDoSearchNullQUery() {
         expect(this.manager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
-        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(3);
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new DefaultResult[] { this.result, this.result })).times(3);
         expect(this.result.getId()).andReturn("engine-1");
         expect(this.result.getId()).andReturn("resource-1-1");
         expect(this.result.getId()).andReturn("resource-1-2");
@@ -93,7 +93,7 @@ public class ResourceSearchGeneratorTest {
     @Test
     public void testDoSearchParameters() {
         expect(this.manager.describe(isA(Query.class), (Collection<String>) isNull())).andReturn(this.result);
-        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(3);
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new DefaultResult[] { this.result, this.result })).times(3);
         expect(this.result.getId()).andReturn("engine-1");
         expect(this.result.getId()).andReturn("resource-1-1");
         expect(this.result.getId()).andReturn("resource-1-2");

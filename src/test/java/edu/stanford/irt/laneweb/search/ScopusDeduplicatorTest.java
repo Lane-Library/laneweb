@@ -12,26 +12,26 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class ScopusDeduplicatorTest {
 
     private ContentResultSearchResult anotherResult;
 
-    private ContentResult contentResult;
+    private DefaultContentResult contentResult;
 
     private ScopusDeduplicator deduplicator;
 
-    private Result duplicateResource;
+    private DefaultResult duplicateResource;
 
     private ContentResultSearchResult duplicateResult;
 
-    private Result otherResource;
+    private DefaultResult otherResource;
 
     private ContentResultSearchResult otherResult;
 
-    private Result scopusResource;
+    private DefaultResult scopusResource;
 
     private ContentResultSearchResult scopusResult;
 
@@ -45,10 +45,10 @@ public class ScopusDeduplicatorTest {
         this.anotherResult = createMock(ContentResultSearchResult.class);
         this.scopusResult = createMock(ContentResultSearchResult.class);
         this.searchResults = new HashSet<ContentResultSearchResult>();
-        this.otherResource = createMock(Result.class);
-        this.duplicateResource = createMock(Result.class);
-        this.scopusResource = createMock(Result.class);
-        this.contentResult = createMock(ContentResult.class);
+        this.otherResource = createMock(DefaultResult.class);
+        this.duplicateResource = createMock(DefaultResult.class);
+        this.scopusResource = createMock(DefaultResult.class);
+        this.contentResult = createMock(DefaultContentResult.class);
     }
 
     @Test

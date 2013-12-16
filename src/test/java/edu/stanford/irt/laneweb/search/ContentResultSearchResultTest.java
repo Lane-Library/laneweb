@@ -11,22 +11,21 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.DefaultContentResult;
 
 public class ContentResultSearchResultTest {
 
-    private ContentResult contentResult;
+    private DefaultContentResult contentResult;
 
-    private Result resourceResult;
+    private DefaultResult resourceResult;
 
     private ContentResultSearchResult searchResult;
 
     @Before
     public void setUp() {
-        this.contentResult = createMock(ContentResult.class);
-        this.resourceResult = createMock(Result.class);
+        this.contentResult = createMock(DefaultContentResult.class);
+        this.resourceResult = createMock(DefaultResult.class);
         this.searchResult = new ContentResultSearchResult(this.contentResult, this.resourceResult, 100);
     }
     
@@ -91,7 +90,7 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testCompareToTitle() {
-        ContentResult result = createMock(ContentResult.class);
+        DefaultContentResult result = createMock(DefaultContentResult.class);
         expect(result.getTitle()).andReturn("first title");
         expect(this.contentResult.getTitle()).andReturn("title");
         replay(result, this.contentResult);
@@ -152,7 +151,7 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testHashCode() {
-        ContentResult result = createMock(ContentResult.class);
+        DefaultContentResult result = createMock(DefaultContentResult.class);
         expect(result.getTitle()).andReturn("the title");
         expect(this.contentResult.getTitle()).andReturn("title");
         replay(result, this.contentResult);
@@ -163,7 +162,7 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testNotEquals() {
-        ContentResult result = createMock(ContentResult.class);
+        DefaultContentResult result = createMock(DefaultContentResult.class);
         expect(result.getTitle()).andReturn("not the title");
         expect(this.contentResult.getTitle()).andReturn("title");
         replay(this.contentResult, result);

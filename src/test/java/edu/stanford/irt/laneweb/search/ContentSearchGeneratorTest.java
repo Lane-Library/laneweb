@@ -19,7 +19,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class ContentSearchGeneratorTest {
 
@@ -27,7 +27,7 @@ public class ContentSearchGeneratorTest {
 
     private ContentSearchGenerator generator;
 
-    private MetaSearchManager<Result> metasearchManager;
+    private MetaSearchManager<DefaultResult> metasearchManager;
 
     private SAXStrategy<PagingSearchResultList> saxStrategy;
 
@@ -53,7 +53,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGetSearchResultsEmptyQuery() {
-        expect(this.conversionStrategy.convertResult(isA(Result.class))).andReturn(null);
+        expect(this.conversionStrategy.convertResult(isA(DefaultResult.class))).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
         this.generator.getSearchResults("");
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
@@ -74,7 +74,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGetSearchResultsNullQuery() {
-        expect(this.conversionStrategy.convertResult(isA(Result.class))).andReturn(null);
+        expect(this.conversionStrategy.convertResult(isA(DefaultResult.class))).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
         this.generator.getSearchResults(null);
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);

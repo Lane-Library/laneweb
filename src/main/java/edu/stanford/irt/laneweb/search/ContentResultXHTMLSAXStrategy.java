@@ -7,8 +7,8 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultSearchResult> {
 
@@ -36,8 +36,8 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
 
     @Override
     public void toSAX(final ContentResultSearchResult result, final XMLConsumer xmlConsumer) {
-        ContentResult contentResult = result.getContentResult();
-        Result resourceResult = result.getResourceResult();
+        DefaultContentResult contentResult = result.getContentResult();
+        DefaultResult resourceResult = result.getResourceResult();
         try {
             String resourceName = resourceResult.getDescription();
             int resourceHits = Integer.parseInt(resourceResult.getHits());

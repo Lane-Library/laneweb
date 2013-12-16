@@ -9,13 +9,13 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 
 public class EngineSearchGenerator extends SearchGenerator {
 
     private Collection<String> engines;
 
-    public EngineSearchGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public EngineSearchGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<DefaultResult> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 
@@ -40,7 +40,7 @@ public class EngineSearchGenerator extends SearchGenerator {
     }
 
     @Override
-    protected Result doSearch(final String query) {
+    protected DefaultResult doSearch(final String query) {
         return searchWithEngines(query, this.engines);
     }
 }

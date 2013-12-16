@@ -3,9 +3,9 @@ package edu.stanford.irt.laneweb.search;
 import org.springframework.beans.factory.FactoryBean;
 
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 
-public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManager<Result>> {
+public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManager<DefaultResult>> {
 
     private MetaSearchManagerSource msms;
 
@@ -13,7 +13,7 @@ public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManag
         this.msms = msms;
     }
 
-    public MetaSearchManager<Result> getObject() {
+    public MetaSearchManager<DefaultResult> getObject() {
         return this.msms.getMetaSearchManager();
     }
 

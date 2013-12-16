@@ -7,14 +7,14 @@ import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class DescribeGenerator extends AbstractMetasearchGenerator implements CacheablePipelineComponent {
 
     private static final String TYPE = "describe";
 
-    public DescribeGenerator(final MetaSearchManager<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public DescribeGenerator(final MetaSearchManager<DefaultResult> metaSearchManager, final SAXStrategy<DefaultResult> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 
@@ -31,7 +31,7 @@ public class DescribeGenerator extends AbstractMetasearchGenerator implements Ca
     }
 
     @Override
-    protected Result doSearch(final String query) {
+    protected DefaultResult doSearch(final String query) {
         return describe(new SimpleQuery(""), null);
     }
 }
