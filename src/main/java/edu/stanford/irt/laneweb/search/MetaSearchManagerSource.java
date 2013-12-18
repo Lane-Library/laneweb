@@ -6,7 +6,7 @@ import org.apache.http.client.HttpClient;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import edu.stanford.irt.search.impl.LegacyMetaSearch;
+import edu.stanford.irt.search.legacy.LegacyMetaSearch;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
 /**

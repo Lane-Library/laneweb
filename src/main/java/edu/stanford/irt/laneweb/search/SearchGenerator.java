@@ -8,9 +8,9 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.LegacyMetaSearch;
-import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
+import edu.stanford.irt.search.legacy.LegacyMetaSearch;
+import edu.stanford.irt.search.legacy.Result;
 
 public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
 

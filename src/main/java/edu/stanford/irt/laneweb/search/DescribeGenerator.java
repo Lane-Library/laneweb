@@ -6,9 +6,9 @@ import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.search.impl.LegacyMetaSearch;
-import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
+import edu.stanford.irt.search.legacy.LegacyMetaSearch;
+import edu.stanford.irt.search.legacy.Result;
 
 public class DescribeGenerator extends AbstractMetasearchGenerator implements CacheablePipelineComponent {
 

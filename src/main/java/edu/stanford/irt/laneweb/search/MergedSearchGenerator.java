@@ -7,7 +7,7 @@ import java.util.List;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.search.impl.LegacyMetaSearch;
+import edu.stanford.irt.search.legacy.LegacyMetaSearch;
 
 /**
  * @author ryanmax

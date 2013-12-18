@@ -15,8 +15,8 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.LegacyMetaSearch;
-import edu.stanford.irt.search.impl.Result;
+import edu.stanford.irt.search.legacy.LegacyMetaSearch;
+import edu.stanford.irt.search.legacy.Result;
 
 public class ContentSearchGeneratorTest {
 

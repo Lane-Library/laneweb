@@ -2,8 +2,8 @@ package edu.stanford.irt.laneweb.search;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.LegacyMetaSearch;
-import edu.stanford.irt.search.impl.Result;
+import edu.stanford.irt.search.legacy.LegacyMetaSearch;
+import edu.stanford.irt.search.legacy.Result;
 
 public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerator<Result> {
 
