@@ -6,7 +6,7 @@ import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.search.MetaSearchable;
+import edu.stanford.irt.search.impl.LegacyMetaSearch;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -14,7 +14,7 @@ public class DescribeGenerator extends AbstractMetasearchGenerator implements Ca
 
     private static final String TYPE = "describe";
 
-    public DescribeGenerator(final MetaSearchable<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public DescribeGenerator(final LegacyMetaSearch metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 

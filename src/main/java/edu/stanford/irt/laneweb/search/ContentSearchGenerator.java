@@ -11,7 +11,7 @@ import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchable;
+import edu.stanford.irt.search.impl.LegacyMetaSearch;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -26,11 +26,11 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
 
     private Collection<String> engines;
 
-    private MetaSearchable<Result> metasearchManager;
+    private LegacyMetaSearch metasearchManager;
 
     private String timeout;
 
-    public ContentSearchGenerator(final MetaSearchable<Result> metaSearchManager, final SAXStrategy<PagingSearchResultList> saxStrategy,
+    public ContentSearchGenerator(final LegacyMetaSearch metaSearchManager, final SAXStrategy<PagingSearchResultList> saxStrategy,
             final ContentResultConversionStrategy conversionStrategy) {
         super(saxStrategy);
         this.metasearchManager = metaSearchManager;

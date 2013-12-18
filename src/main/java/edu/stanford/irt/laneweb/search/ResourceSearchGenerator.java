@@ -11,7 +11,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchable;
+import edu.stanford.irt.search.impl.LegacyMetaSearch;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -19,7 +19,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
     private Collection<String> resources = Collections.emptySet();
 
-    public ResourceSearchGenerator(final MetaSearchable<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public ResourceSearchGenerator(final LegacyMetaSearch metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 

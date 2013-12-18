@@ -7,8 +7,7 @@ import java.util.List;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.search.MetaSearchable;
-import edu.stanford.irt.search.impl.Result;
+import edu.stanford.irt.search.impl.LegacyMetaSearch;
 
 /**
  * @author ryanmax
@@ -17,7 +16,7 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
 
     private CollectionManager collectionManager;
 
-    public MergedSearchGenerator(final MetaSearchable<Result> metaSearchManager, final CollectionManager collectionManager,
+    public MergedSearchGenerator(final LegacyMetaSearch metaSearchManager, final CollectionManager collectionManager,
             final SAXStrategy<PagingSearchResultList> saxStrategy, final ContentResultConversionStrategy scoreStrategy) {
         super(metaSearchManager, saxStrategy, scoreStrategy);
         this.collectionManager = collectionManager;

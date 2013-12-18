@@ -18,8 +18,8 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.search.MetaSearchable;
 import edu.stanford.irt.search.SearchStatus;
+import edu.stanford.irt.search.impl.LegacyMetaSearch;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -27,7 +27,7 @@ public class SearchGeneratorTest {
 
     private SearchGenerator generator;
 
-    private MetaSearchable<Result> manager;
+    private LegacyMetaSearch manager;
 
     private Map<String, Object> model;
 
@@ -38,7 +38,7 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.manager = createMock(MetaSearchable.class);
+        this.manager = createMock(LegacyMetaSearch.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new SearchGenerator(this.manager, this.saxStrategy);
         this.result = createMock(Result.class);

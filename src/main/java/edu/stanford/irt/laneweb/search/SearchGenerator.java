@@ -7,8 +7,8 @@ import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchable;
 import edu.stanford.irt.search.SearchStatus;
+import edu.stanford.irt.search.impl.LegacyMetaSearch;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -22,7 +22,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
 
     private String wait;
 
-    public SearchGenerator(final MetaSearchable<Result> metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public SearchGenerator(final LegacyMetaSearch metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 
