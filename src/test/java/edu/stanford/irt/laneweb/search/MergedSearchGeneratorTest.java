@@ -4,12 +4,10 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,10 +50,9 @@ public class MergedSearchGeneratorTest {
         this.eresource = createMock(Eresource.class);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testGetSearchResults() {
-        expect(this.LegacyMetaSearch.search(isA(Query.class), eq(20000L), (Collection<String>) isNull(), eq(true)))
+        expect(this.LegacyMetaSearch.search(isA(Query.class), eq(20000L), eq(true)))
                 .andReturn(null);
         List<SearchResult> list = new LinkedList<SearchResult>();
         list.add(this.result);

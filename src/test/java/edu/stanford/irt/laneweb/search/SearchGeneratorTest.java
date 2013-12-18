@@ -4,11 +4,9 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,10 +44,9 @@ public class SearchGeneratorTest {
         this.model.put(Model.QUERY, "query");
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
                 this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
@@ -71,10 +68,9 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchNumberFormatException() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
                 this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
@@ -83,10 +79,9 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchSynchronous() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(true))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(true))).andReturn(
                 this.result);
         replay(this.saxStrategy, this.manager);
         this.model.put("synchronous", "true");
@@ -95,10 +90,9 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchSynchronousEmpty() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
                 this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setParameters(Collections.singletonMap("synchronous", ""));
@@ -107,10 +101,9 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchTimeout() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(10L), (Collection<String>) isNull(), eq(false))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(10L), eq(false))).andReturn(
                 this.result);
         replay(this.saxStrategy, this.manager);
         this.model.put("timeout", "10");
@@ -119,10 +112,9 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchWait() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
                 this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.RUNNING);
         replay(this.saxStrategy, this.manager, this.result);
@@ -132,10 +124,9 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager, this.result);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchWaitNumberFormatException() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
                 this.result);
         replay(this.saxStrategy, this.manager, this.result);
         this.model.put("wait", "foo");

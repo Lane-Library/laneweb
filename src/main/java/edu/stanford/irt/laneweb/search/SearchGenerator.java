@@ -63,8 +63,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
                 }
             }
             boolean sync = Boolean.parseBoolean(this.synchronous);
-            final SimpleQuery q = new SimpleQuery(query);
-            result = search(q, searchTimeout, engines, sync);
+            final SimpleQuery q = new SimpleQuery(query, engines);
+            result = search(q, searchTimeout, sync);
             if (null != this.wait) {
                 long wt = 0;
                 try {

@@ -78,7 +78,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         if (query == null || query.isEmpty()) {
             result = new Result("");
         } else {
-            result = this.metasearchManager.search(new SimpleQuery(query), time, this.engines, true);
+            result = this.metasearchManager.search(new SimpleQuery(query, this.engines), time, true);
         }
         return result;
     }

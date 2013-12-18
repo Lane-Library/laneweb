@@ -32,6 +32,6 @@ public class DescribeGenerator extends AbstractMetasearchGenerator implements Ca
 
     @Override
     protected Result doSearch(final String query) {
-        return describe(new SimpleQuery(""), null);
+        return describe(new SimpleQuery(""));
     }
 }

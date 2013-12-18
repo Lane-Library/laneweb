@@ -4,12 +4,10 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 import org.junit.Before;
@@ -38,10 +36,9 @@ public class EngineSearchGeneratorTest {
         this.generator = new EngineSearchGenerator(this.LegacyMetaSearch, this.saxStrategy);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchString() {
-        expect(this.LegacyMetaSearch.search(isA(Query.class), eq(60000L), (Collection<String>) isNull(), eq(false))).andReturn(
+        expect(this.LegacyMetaSearch.search(isA(Query.class), eq(60000L), eq(false))).andReturn(
                 null);
         replay(this.LegacyMetaSearch, this.saxStrategy);
         this.generator.doSearch("query");
@@ -51,7 +48,7 @@ public class EngineSearchGeneratorTest {
     @Test
     public void testDoSearchStringEngines() {
         expect(
-                this.LegacyMetaSearch.search(isA(Query.class), eq(60000L), eq(Arrays.asList(new String[] { "a", "b", "c" })),
+                this.LegacyMetaSearch.search(isA(Query.class), eq(60000L),
                         eq(false))).andReturn(null);
         replay(this.LegacyMetaSearch, this.saxStrategy);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.ENGINES,
@@ -64,7 +61,7 @@ public class EngineSearchGeneratorTest {
     @Test
     public void testDoSearchStringParameterEngines() {
         expect(
-                this.LegacyMetaSearch.search(isA(Query.class), eq(60000L), eq(Arrays.asList(new String[] { "a", "b", "c" })),
+                this.LegacyMetaSearch.search(isA(Query.class), eq(60000L),
                         eq(false))).andReturn(null);
         replay(this.LegacyMetaSearch, this.saxStrategy);
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c"));

@@ -66,12 +66,12 @@ public class MetaSearchControllerTest {
 
     @Test
     public void testSearch() {
-        expect(this.manager.describe(isA(Query.class), eq(Collections.singletonList("resource")))).andReturn(
+        expect(this.manager.describe(isA(Query.class))).andReturn(
                 this.result);
         expect(this.result.getChildren()).andReturn(Collections.singletonList(this.result)).times(4);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
-        expect(this.manager.search(isA(Query.class), eq(60000L), eq(Collections.singletonList("engine")), eq(false)))
+        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false)))
                 .andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL).times(2);
         expect(this.result.getId()).andReturn("resource");
