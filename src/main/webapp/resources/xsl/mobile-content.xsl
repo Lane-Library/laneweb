@@ -146,7 +146,7 @@
     
     <xsl:template match="h:script[@id='model']/text()">
         <xsl:text>
-            $.LANE.model = </xsl:text>
+            model = </xsl:text>
         <xsl:value-of select="$model"/>
         <xsl:text>;
         </xsl:text>
