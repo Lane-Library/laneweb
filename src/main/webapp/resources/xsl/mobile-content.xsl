@@ -128,22 +128,6 @@
     <!--  remove template version of footer after copying to 'page' div -->
     <xsl:template match="h:body/h:div[@class='footer2copy']"/>
     
-    <!-- strip html @manifest for all but index.html requests-->
-    <xsl:template match="@manifest">
-        <xsl:if test="contains($request-uri,'/m/index.html')">
-            <xsl:attribute name="{name()}">
-                <xsl:choose>
-                    <xsl:when test="starts-with(.,'/')">
-                        <xsl:value-of select="concat($base-path,.)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="."/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-        </xsl:if>
-    </xsl:template>
-    
     <xsl:template match="h:script[@id='model']/text()">
         <xsl:text>
             model = </xsl:text>
