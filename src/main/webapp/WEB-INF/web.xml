@@ -54,10 +54,6 @@
     </context-param>
 
     <listener>
-        <listener-class>edu.stanford.irt.laneweb.servlet.LanewebContextListener</listener-class>
-    </listener>
-
-    <listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
 
