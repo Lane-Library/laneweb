@@ -41,10 +41,25 @@
         </layout> 
     </appender>
     
+    <appender name="querymap" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.base}/logs/querymap.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p %m%n"/>
+        </layout>
+    </appender>
+    
     <!--<category name="httpclient.wire.header" additivity="false">
         <priority value="DEBUG"/>
         <appender-ref ref="headers"/>
         </category>-->
+    
+    <category name="querymap" additivity="false">
+        <priority value="INFO"/>
+        <appender-ref ref="querymap"/>
+    </category>
     
     <root>
         <priority value="${laneweb.log4j.root.priority.value}"/>
