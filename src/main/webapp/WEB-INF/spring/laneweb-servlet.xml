@@ -24,8 +24,8 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="edu.stanford.irt.laneweb.servlet.mvc.LanewebPathInterceptor">
-                <property name="defaultContentBase" value="#{contextAttributes['laneweb.context.live-base']}"/>
-                <property name="stageBase" value="#{contextAttributes['laneweb.context.stage-base']}"/>
+                <property name="defaultContentBase" value="%{laneweb.context.live-base}"/>
+                <property name="stageBase" value="%{laneweb.context.stage-base}"/>
             </bean>
         </mvc:interceptor>
         <mvc:interceptor>
