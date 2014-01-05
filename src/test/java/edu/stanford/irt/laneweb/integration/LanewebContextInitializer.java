@@ -1,18 +1,15 @@
 package edu.stanford.irt.laneweb.integration;
 
-import javax.annotation.Resource;
 import javax.naming.NamingException;
-import javax.servlet.ServletContext;
 
 import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.mock.jndi.SimpleNamingContextBuilder;
+import org.springframework.mock.web.MockServletContext;
+import org.springframework.web.context.WebApplicationContext;
 
 public class LanewebContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-    @Resource
-    private ServletContext servletContext;
 
     @Override
     public void initialize(final ConfigurableApplicationContext applicationContext) {
@@ -33,5 +30,8 @@ public class LanewebContextInitializer implements ApplicationContextInitializer<
         System.setProperty("laneweb.context.stage-base", "file:/Users/ceyates/Documents/workspace/laneweb-content-svn");
         System.setProperty("laneweb.context.version", "foo");
         System.setProperty("laneweb.disaster-mode", "false");
+        MockServletContext servletContext = (MockServletContext) ((WebApplicationContext) applicationContext)
+                .getServletContext();
+        servletContext.setInitParameter("laneweb.context.version", "version");
     }
 }

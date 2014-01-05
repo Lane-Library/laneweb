@@ -4,7 +4,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContextEvent;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
-
-import edu.stanford.irt.laneweb.servlet.LanewebContextListener;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -43,8 +40,6 @@ public class LanewebIT {
 
     @Before
     public void setupFixture() {
-        new LanewebContextListener().contextInitialized(new ServletContextEvent(this.webApplicationContext
-                .getServletContext()));
         this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
     }
 
