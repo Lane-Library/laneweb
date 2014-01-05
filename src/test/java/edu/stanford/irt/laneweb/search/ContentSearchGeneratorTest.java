@@ -15,8 +15,8 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentSearchGeneratorTest {
 
@@ -24,14 +24,14 @@ public class ContentSearchGeneratorTest {
 
     private ContentSearchGenerator generator;
 
-    private LegacyMetaSearch metasearchManager;
+    private MetaSearchManager metasearchManager;
 
     private SAXStrategy<PagingSearchResultList> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.metasearchManager = createMock(LegacyMetaSearch.class);
+        this.metasearchManager = createMock(MetaSearchManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.conversionStrategy = createMock(ContentResultConversionStrategy.class);
         this.generator = new ContentSearchGenerator(this.metasearchManager, this.saxStrategy, this.conversionStrategy);

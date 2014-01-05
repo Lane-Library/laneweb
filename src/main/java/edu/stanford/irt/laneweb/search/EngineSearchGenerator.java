@@ -8,14 +8,14 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class EngineSearchGenerator extends SearchGenerator {
 
     private Collection<String> engines;
 
-    public EngineSearchGenerator(final LegacyMetaSearch metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public EngineSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 

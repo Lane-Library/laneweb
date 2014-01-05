@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.laneweb.resource.AbstractScoreStrategy;
-import edu.stanford.irt.search.legacy.ContentResult;
+import edu.stanford.irt.search.impl.ContentResult;
 
 public class ScoreStrategy extends AbstractScoreStrategy {
 

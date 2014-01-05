@@ -19,7 +19,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
+import edu.stanford.irt.search.impl.MetaSearchManager;
 
 public class MergedSearchGeneratorTest {
 
@@ -31,7 +31,7 @@ public class MergedSearchGeneratorTest {
 
     private MergedSearchGenerator generator;
 
-    private LegacyMetaSearch LegacyMetaSearch;
+    private MetaSearchManager MetaSearchManager;
 
     private SearchResult result;
 
@@ -42,9 +42,9 @@ public class MergedSearchGeneratorTest {
     public void setUp() throws Exception {
         this.collectionManager = createMock(CollectionManager.class);
         this.conversionStrategy = createMock(ContentResultConversionStrategy.class);
-        this.LegacyMetaSearch = createMock(LegacyMetaSearch.class);
+        this.MetaSearchManager = createMock(MetaSearchManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new MergedSearchGenerator(this.LegacyMetaSearch, this.collectionManager, this.saxStrategy,
+        this.generator = new MergedSearchGenerator(this.MetaSearchManager, this.collectionManager, this.saxStrategy,
                 this.conversionStrategy);
         this.result = createMock(SearchResult.class);
         this.eresource = createMock(Eresource.class);
@@ -52,7 +52,7 @@ public class MergedSearchGeneratorTest {
 
     @Test
     public void testGetSearchResults() {
-        expect(this.LegacyMetaSearch.search(isA(Query.class), eq(20000L), eq(true)))
+        expect(this.MetaSearchManager.search(isA(Query.class), eq(20000L), eq(true)))
                 .andReturn(null);
         List<SearchResult> list = new LinkedList<SearchResult>();
         list.add(this.result);
@@ -62,28 +62,28 @@ public class MergedSearchGeneratorTest {
 //        expect(this.result.compareTo(this.result)).andReturn(0);
         expect(this.result.getScore()).andReturn(1);
         expect(this.eresource.getScore()).andReturn(0);
-        replay(this.collectionManager, this.conversionStrategy, this.LegacyMetaSearch, this.saxStrategy, this.result,
+        replay(this.collectionManager, this.conversionStrategy, this.MetaSearchManager, this.saxStrategy, this.result,
                 this.eresource);
         assertEquals(2, this.generator.doSearch("query").size());
-        verify(this.collectionManager, this.conversionStrategy, this.LegacyMetaSearch, this.saxStrategy, this.result,
+        verify(this.collectionManager, this.conversionStrategy, this.MetaSearchManager, this.saxStrategy, this.result,
                 this.eresource);
     }
 
     @Test
     public void testGetSearchResultsEmptyQuery() {
-        replay(this.collectionManager, this.conversionStrategy, this.LegacyMetaSearch, this.saxStrategy, this.result,
+        replay(this.collectionManager, this.conversionStrategy, this.MetaSearchManager, this.saxStrategy, this.result,
                 this.eresource);
         assertEquals(0, this.generator.doSearch("").size());
-        verify(this.collectionManager, this.conversionStrategy, this.LegacyMetaSearch, this.saxStrategy, this.result,
+        verify(this.collectionManager, this.conversionStrategy, this.MetaSearchManager, this.saxStrategy, this.result,
                 this.eresource);
     }
 
     @Test
     public void testGetSearchResultsNullQuery() {
-        replay(this.collectionManager, this.conversionStrategy, this.LegacyMetaSearch, this.saxStrategy, this.result,
+        replay(this.collectionManager, this.conversionStrategy, this.MetaSearchManager, this.saxStrategy, this.result,
                 this.eresource);
         assertEquals(0, this.generator.doSearch(null).size());
-        verify(this.collectionManager, this.conversionStrategy, this.LegacyMetaSearch, this.saxStrategy, this.result,
+        verify(this.collectionManager, this.conversionStrategy, this.MetaSearchManager, this.saxStrategy, this.result,
                 this.eresource);
     }
 }

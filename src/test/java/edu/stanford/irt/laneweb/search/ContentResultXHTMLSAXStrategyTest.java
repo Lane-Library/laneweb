@@ -14,8 +14,8 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.legacy.ContentResult;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultXHTMLSAXStrategyTest {
 

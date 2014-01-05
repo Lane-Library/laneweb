@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import edu.stanford.irt.search.legacy.ContentResult;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultConversionStrategy {
 

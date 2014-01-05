@@ -8,8 +8,8 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.legacy.ContentResult;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearchResult>, Resource {
 

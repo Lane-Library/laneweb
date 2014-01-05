@@ -21,8 +21,8 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class MetaSearchControllerTest {
 
@@ -30,7 +30,7 @@ public class MetaSearchControllerTest {
 
     private CompositeDataBinder dataBinder;
 
-    private LegacyMetaSearch manager;
+    private MetaSearchManager manager;
 
     private Map<String, Object> map;
 
@@ -42,7 +42,7 @@ public class MetaSearchControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.manager = createMock(LegacyMetaSearch.class);
+        this.manager = createMock(MetaSearchManager.class);
         this.dataBinder = createMock(CompositeDataBinder.class);
         this.controller = new MetaSearchController(this.manager, this.dataBinder);
         this.model = createMock(org.springframework.ui.Model.class);

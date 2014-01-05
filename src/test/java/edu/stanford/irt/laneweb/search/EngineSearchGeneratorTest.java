@@ -17,66 +17,66 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class EngineSearchGeneratorTest {
 
     private EngineSearchGenerator generator;
 
-    private LegacyMetaSearch LegacyMetaSearch;
+    private MetaSearchManager MetaSearchManager;
 
     private SAXStrategy<Result> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.LegacyMetaSearch = createMock(LegacyMetaSearch.class);
+        this.MetaSearchManager = createMock(MetaSearchManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new EngineSearchGenerator(this.LegacyMetaSearch, this.saxStrategy);
+        this.generator = new EngineSearchGenerator(this.MetaSearchManager, this.saxStrategy);
     }
 
     @Test
     public void testDoSearchString() {
-        expect(this.LegacyMetaSearch.search(isA(Query.class), eq(60000L), eq(false))).andReturn(
+        expect(this.MetaSearchManager.search(isA(Query.class), eq(60000L), eq(false))).andReturn(
                 null);
-        replay(this.LegacyMetaSearch, this.saxStrategy);
+        replay(this.MetaSearchManager, this.saxStrategy);
         this.generator.doSearch("query");
-        verify(this.LegacyMetaSearch, this.saxStrategy);
+        verify(this.MetaSearchManager, this.saxStrategy);
     }
 
     @Test
     public void testDoSearchStringEngines() {
         expect(
-                this.LegacyMetaSearch.search(isA(Query.class), eq(60000L),
+                this.MetaSearchManager.search(isA(Query.class), eq(60000L),
                         eq(false))).andReturn(null);
-        replay(this.LegacyMetaSearch, this.saxStrategy);
+        replay(this.MetaSearchManager, this.saxStrategy);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.ENGINES,
                 Arrays.asList(new String[] { "a", "b", "c" })));
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c,d"));
         this.generator.doSearch("query");
-        verify(this.LegacyMetaSearch, this.saxStrategy);
+        verify(this.MetaSearchManager, this.saxStrategy);
     }
 
     @Test
     public void testDoSearchStringParameterEngines() {
         expect(
-                this.LegacyMetaSearch.search(isA(Query.class), eq(60000L),
+                this.MetaSearchManager.search(isA(Query.class), eq(60000L),
                         eq(false))).andReturn(null);
-        replay(this.LegacyMetaSearch, this.saxStrategy);
+        replay(this.MetaSearchManager, this.saxStrategy);
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c"));
         this.generator.doSearch("query");
-        verify(this.LegacyMetaSearch, this.saxStrategy);
+        verify(this.MetaSearchManager, this.saxStrategy);
     }
 
     @Test
     public void testSetParametersEnginesNull() {
-        replay(this.LegacyMetaSearch, this.saxStrategy);
+        replay(this.MetaSearchManager, this.saxStrategy);
         this.generator.setModel(Collections.<String, Object> emptyMap());
         try {
             this.generator.setParameters(Collections.<String, String> emptyMap());
         } catch (LanewebException e) {
         }
-        verify(this.LegacyMetaSearch, this.saxStrategy);
+        verify(this.MetaSearchManager, this.saxStrategy);
     }
 }

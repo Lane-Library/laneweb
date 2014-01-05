@@ -13,7 +13,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSearchResultList>, Resource {
 

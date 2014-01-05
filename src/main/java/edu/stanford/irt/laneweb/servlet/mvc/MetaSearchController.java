@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.Query;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
-import edu.stanford.irt.search.legacy.Result;
 
 /**
  * A Controller that provides metasearch results
@@ -28,14 +28,14 @@ import edu.stanford.irt.search.legacy.Result;
 public class MetaSearchController {
 
     @Autowired
-    private LegacyMetaSearch manager;
+    private MetaSearchManager manager;
 
     @Autowired
     private CompositeDataBinder dataBinder;
     
     public MetaSearchController() {}
 
-    public MetaSearchController(final LegacyMetaSearch manager, final CompositeDataBinder dataBinder) {
+    public MetaSearchController(final MetaSearchManager manager, final CompositeDataBinder dataBinder) {
         this.manager = manager;
         this.dataBinder = dataBinder;
     }

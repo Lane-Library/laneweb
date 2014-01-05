@@ -6,7 +6,7 @@ import org.apache.http.client.HttpClient;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
+import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
 /**
@@ -18,13 +18,13 @@ public class MetaSearchManagerSource {
 
     private HttpClient httpClient;
 
-    private LegacyMetaSearch manager;
+    private MetaSearchManager manager;
 
     private SearchCacheManager searchCacheManager;
 
     public MetaSearchManagerSource(final String springFileName) {
         this.context = new ClassPathXmlApplicationContext(springFileName);
-        this.manager = this.context.getBean("manager", LegacyMetaSearch.class);
+        this.manager = this.context.getBean("manager", MetaSearchManager.class);
         this.searchCacheManager = this.context.getBean("searchCacheManager", SearchCacheManager.class);
         this.httpClient = this.context.getBean("httpClient", HttpClient.class);
     }
@@ -37,7 +37,7 @@ public class MetaSearchManagerSource {
         return this.httpClient;
     }
 
-    public LegacyMetaSearch getMetaSearchManager() {
+    public MetaSearchManager getMetaSearchManager() {
         return this.manager;
     }
 
@@ -47,7 +47,7 @@ public class MetaSearchManagerSource {
 
     public void reload(final String url, final String login, final String password) throws IOException {
         AbstractXmlApplicationContext newContext = new HttpApplicationContext(url, login, password);
-        this.manager = newContext.getBean("manager", LegacyMetaSearch.class);
+        this.manager = newContext.getBean("manager", MetaSearchManager.class);
         this.httpClient = newContext.getBean("httpClient", HttpClient.class);
         this.searchCacheManager = newContext.getBean("searchCacheManager", SearchCacheManager.class);
         this.context.destroy();

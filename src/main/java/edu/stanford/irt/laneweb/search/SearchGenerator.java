@@ -8,9 +8,9 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.SearchStatus;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
-import edu.stanford.irt.search.legacy.Result;
 
 public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
 
@@ -22,7 +22,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
 
     private String wait;
 
-    public SearchGenerator(final LegacyMetaSearch metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public SearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
 

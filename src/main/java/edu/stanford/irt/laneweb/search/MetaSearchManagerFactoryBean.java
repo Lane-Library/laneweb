@@ -2,9 +2,9 @@ package edu.stanford.irt.laneweb.search;
 
 import org.springframework.beans.factory.FactoryBean;
 
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
+import edu.stanford.irt.search.impl.MetaSearchManager;
 
-public class MetaSearchManagerFactoryBean implements FactoryBean<LegacyMetaSearch> {
+public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManager> {
 
     private MetaSearchManagerSource msms;
 
@@ -12,12 +12,12 @@ public class MetaSearchManagerFactoryBean implements FactoryBean<LegacyMetaSearc
         this.msms = msms;
     }
 
-    public LegacyMetaSearch getObject() {
+    public MetaSearchManager getObject() {
         return this.msms.getMetaSearchManager();
     }
 
     public Class<?> getObjectType() {
-        return LegacyMetaSearch.class;
+        return MetaSearchManager.class;
     }
 
     public boolean isSingleton() {

@@ -10,14 +10,14 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class AbstractMetasearchGeneratorTest {
 
     private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator {
 
-        public TestAbstractMetasearchGenerator(final LegacyMetaSearch metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+        public TestAbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
             super(metaSearchManager, saxStrategy);
         }
 
@@ -29,7 +29,7 @@ public class AbstractMetasearchGeneratorTest {
 
     private AbstractMetasearchGenerator generator;
 
-    private LegacyMetaSearch manager;
+    private MetaSearchManager manager;
 
     private Query query;
 
@@ -38,7 +38,7 @@ public class AbstractMetasearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.manager = createMock(LegacyMetaSearch.class);
+        this.manager = createMock(MetaSearchManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new TestAbstractMetasearchGenerator(this.manager, this.saxStrategy);
         this.query = createMock(Query.class);

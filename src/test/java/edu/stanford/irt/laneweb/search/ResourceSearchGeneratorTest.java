@@ -19,14 +19,14 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.legacy.LegacyMetaSearch;
-import edu.stanford.irt.search.legacy.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class ResourceSearchGeneratorTest {
 
     private ResourceSearchGenerator generator;
 
-    private LegacyMetaSearch manager;
+    private MetaSearchManager manager;
 
     private Result result;
 
@@ -35,7 +35,7 @@ public class ResourceSearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.manager = createMock(LegacyMetaSearch.class);
+        this.manager = createMock(MetaSearchManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new ResourceSearchGenerator(this.manager, this.saxStrategy);
         this.result = createMock(Result.class);
