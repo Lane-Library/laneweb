@@ -34,7 +34,7 @@
             </map>
         </property>
         <property name="defaultResolver">
-            <bean class="edu.stanford.irt.laneweb.cocoon.SpringResourceSourceResolver"/>
+            <bean class="edu.stanford.irt.cocoon.spring.SpringResourceSourceResolver"/>
         </property>
     </bean>
 
