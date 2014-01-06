@@ -57,7 +57,7 @@
 
 	<xsl:template match="h:div[@class='eventInfo']">
 		<xsl:variable name="title" select="h:div[@class='eventTitle']" />
-		<xsl:variable name="url" select=".//h:a[1]/@href" />
+		<xsl:variable name="url" select="(.//h:a/@href)[1]" />
 		<xsl:variable name="datelineNode"
 			select="preceding-sibling::h:div[@class='dateline'][1]" />
 		<xsl:variable name="date"
