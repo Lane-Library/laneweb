@@ -244,13 +244,6 @@
             <map:generate src="{content-base}/{1}" type="html"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match type="wildcard" pattern="newpage.html">
-            <map:generate type="html" src="{content-base}/newpage.html"/>
-            <map:transform type="joost" src="resources/xsl/newpage.stx">
-                <map:parameter name="cache-key" value=";{page}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="hours/*.xml" type="wildcard">
             <map:generate type="file" src="{content-base}/includes/hours.xml"/>
             <map:transform type="saxon" src="resources/xsl/hours.xsl">
