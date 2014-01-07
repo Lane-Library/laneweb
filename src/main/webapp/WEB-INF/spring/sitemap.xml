@@ -40,7 +40,7 @@
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
         <property name="customEditors">
             <map>
-                <entry key="edu.stanford.irt.cocoon.sitemap.expression.Variable" value="edu.stanford.irt.laneweb.cocoon.VariablePropertyEditor"/>
+                <entry key="edu.stanford.irt.cocoon.sitemap.expression.Variable" value="edu.stanford.irt.cocoon.spring.VariablePropertyEditor"/>
             </map>
         </property>
     </bean>
