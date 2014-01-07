@@ -45,8 +45,6 @@ public interface Model {
 
     String FACETS = "facets";
 
-    String HISTORY = "history";
-
     String HOST = "host";
 
     String ID = "id";

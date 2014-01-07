@@ -20,7 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
         "file:src/main/webapp/WEB-INF/spring/bassett.xml", "file:src/main/webapp/WEB-INF/spring/binding.xml",
         "file:src/main/webapp/WEB-INF/spring/bookmarks.xml", "file:src/main/webapp/WEB-INF/spring/cme.xml",
         "file:src/main/webapp/WEB-INF/spring/datasources.xml", "file:src/main/webapp/WEB-INF/spring/eresources.xml",
-        "file:src/main/webapp/WEB-INF/spring/history-eresources.xml", "file:src/main/webapp/WEB-INF/spring/logger.xml",
+        "file:src/main/webapp/WEB-INF/spring/logger.xml",
         "file:src/main/webapp/WEB-INF/spring/laneweb.xml", "file:src/main/webapp/WEB-INF/spring/mapping.xml",
         "file:src/main/webapp/WEB-INF/spring/pipeline.xml", "file:src/main/webapp/WEB-INF/spring/proxy.xml",
         "file:src/main/webapp/WEB-INF/spring/querymap.xml", "file:src/main/webapp/WEB-INF/spring/redirect.xml",
