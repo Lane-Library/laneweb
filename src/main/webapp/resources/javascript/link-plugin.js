@@ -58,9 +58,7 @@
             local : {
                 readOnly : true,
                 valueFn : function() {
-                    return this.get(LINK_HOST) === documentHostName ?
-                            !this.get(PROXY_LOGIN) && !this.get(COOKIES_FETCH)
-                            : false;
+                    return this.get(LINK_HOST) === documentHostName ? !this.get(PROXY_LOGIN) && !this.get(COOKIES_FETCH) : false;
                 }
             },
             path : {
