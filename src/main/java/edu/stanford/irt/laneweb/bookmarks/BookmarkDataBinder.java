@@ -15,23 +15,21 @@ public class BookmarkDataBinder implements DataBinder {
 
     private BookmarkDAO bookmarkDAO;
 
+    @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String sunetid = ModelUtil.getString(model, Model.SUNETID);
         if (sunetid != null) {
             List<Bookmark> bookmarks = null;
             HttpSession session = request.getSession();
-            @SuppressWarnings("unchecked")
-            List<Bookmark> sessionBookmarks = (List<Bookmark>) session.getAttribute(Model.BOOKMARKS);
-            if (sessionBookmarks == null) {
-                bookmarks = this.bookmarkDAO.getLinks(sunetid);
-            } else {
-                bookmarks = sessionBookmarks;
-            }
-            if (bookmarks == null) {
-                bookmarks = new ArrayList<Bookmark>();
-            }
-            if (sessionBookmarks == null) {
-                session.setAttribute(Model.BOOKMARKS, bookmarks);
+            synchronized (session) {
+                bookmarks = (List<Bookmark>) session.getAttribute(Model.BOOKMARKS);
+                if (bookmarks == null) {
+                    bookmarks = this.bookmarkDAO.getLinks(sunetid);
+                    if (bookmarks == null) {
+                        bookmarks = new ArrayList<Bookmark>();
+                    }
+                    session.setAttribute(Model.BOOKMARKS, bookmarks);
+                }
             }
             model.put(Model.BOOKMARKS, bookmarks);
         }
