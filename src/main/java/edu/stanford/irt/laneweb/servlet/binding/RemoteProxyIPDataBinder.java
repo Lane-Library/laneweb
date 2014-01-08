@@ -23,7 +23,7 @@ public class RemoteProxyIPDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String currentIP = getRemoteAddress(request);
         IPGroup ipGroup = null;
-        Boolean proxyLinks = null;
+        Boolean proxy = null;
         String requestParameter = request.getParameter(Model.PROXY_LINKS);
         HttpSession session = request.getSession();
         synchronized (session) {
@@ -36,19 +36,19 @@ public class RemoteProxyIPDataBinder implements DataBinder {
                 ipGroup = IPGroup.getGroupForIP(currentIP);
                 session.setAttribute(Model.IPGROUP, ipGroup);
             }
-            proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
-            if (requestParameter != null || proxyLinks == null || !isSameIP) {
+            proxy = (Boolean) session.getAttribute(Model.PROXY_LINKS);
+            if (requestParameter != null || proxy == null || !isSameIP) {
                 if (requestParameter == null) {
-                    proxyLinks = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
+                    proxy = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
                 } else {
-                    proxyLinks = Boolean.parseBoolean(requestParameter);
+                    proxy = Boolean.parseBoolean(requestParameter);
                 }
-                session.setAttribute(Model.PROXY_LINKS, proxyLinks);
+                session.setAttribute(Model.PROXY_LINKS, proxy);
             }
         }
         model.put(Model.REMOTE_ADDR, currentIP);
         model.put(Model.IPGROUP, ipGroup);
-        model.put(Model.PROXY_LINKS, proxyLinks);
+        model.put(Model.PROXY_LINKS, proxy);
     }
 
     public void setProxyLinks(final ProxyLinks proxyLinks) {
