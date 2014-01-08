@@ -5,10 +5,8 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -58,7 +56,22 @@ public class SunetIdSourceTest {
     }
 
     @Test
-    public void testInCookie() throws IOException, ServletException {
+    public void testCookieNotValid() {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.request.getRemoteUser()).andReturn(null);
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.request.getHeader("User-Agent")).andReturn("user agent");
+        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
+        expect(this.session.getAttribute("sunetid")).andReturn(null);
+        String value = this.codec.createLoginToken("ditenus", "different".hashCode()).getEncryptedValue();
+        expect(this.cookie.getValue()).andReturn(value);
+        replay(this.request, this.session, this.cookie);
+        assertNull(this.sunetidSource.getSunetid(this.request));
+        verify(this.request, this.session, this.cookie);
+    }
+
+    @Test
+    public void testInCookie() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
@@ -74,7 +87,7 @@ public class SunetIdSourceTest {
     }
 
     @Test
-    public void testIsInRemoteUser() throws IOException, ServletException {
+    public void testIsInRemoteUser() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn("ditenus");
@@ -85,7 +98,7 @@ public class SunetIdSourceTest {
     }
 
     @Test
-    public void testIsInSession() throws IOException, ServletException {
+    public void testIsInSession() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
         replay(this.request, this.session, this.cookie);
@@ -94,14 +107,51 @@ public class SunetIdSourceTest {
     }
 
     @Test
-    public void testNoUserNoCookies() throws IOException, ServletException {
+    public void testNotRightCookie() {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
+        expect(this.request.getRemoteUser()).andReturn(null);
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.request.getHeader("User-Agent")).andReturn("userAgent");
+        expect(this.cookie.getName()).andReturn("not " + SunetIdCookieCodec.LANE_COOKIE_NAME);
+        replay(this.request, this.session, this.cookie);
+        assertNull(this.sunetidSource.getSunetid(this.request));
+        verify(this.request, this.session, this.cookie);
+    }
+
+    @Test
+    public void testNoUserNoCookies() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
+        expect(this.request.getHeader("User-Agent")).andReturn("userAgent");
+        replay(this.request, this.session, this.cookie);
+        assertNull(this.sunetidSource.getSunetid(this.request));
+        verify(this.request, this.session, this.cookie);
+    }
+
+    @Test
+    public void testNullCookies() {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
+        expect(this.request.getRemoteUser()).andReturn(null);
+        expect(this.request.getCookies()).andReturn(null);
+        expect(this.request.getHeader("User-Agent")).andReturn("userAgent");
+        replay(this.request, this.session, this.cookie);
+        assertNull(this.sunetidSource.getSunetid(this.request));
+        verify(this.request, this.session, this.cookie);
+    }
+
+    @Test
+    public void testNullUserAgent() {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
+        expect(this.request.getRemoteUser()).andReturn(null);
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn(null);
         replay(this.request, this.session, this.cookie);
-        this.sunetidSource.getSunetid(this.request);
+        assertNull(this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);
     }
 }

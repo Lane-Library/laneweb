@@ -32,14 +32,19 @@ public class SunetIdSource {
      * it is put there.
      */
     public String getSunetid(final HttpServletRequest request) {
+        String sunetid = null;
         HttpSession session = request.getSession();
-        String sessionSunetid = (String) session.getAttribute(Model.SUNETID);
-        String sunetid = sessionSunetid == null ? request.getRemoteUser() : sessionSunetid;
-        if (sunetid == null) {
-            sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("User-Agent"));
-        }
-        if (sunetid != null && sessionSunetid == null) {
-            session.setAttribute(Model.SUNETID, sunetid);
+        synchronized(session) {
+            sunetid = (String) session.getAttribute(Model.SUNETID);
+            if (sunetid == null) {
+                sunetid = request.getRemoteUser();
+                if (sunetid == null) {
+                    sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("User-Agent"));
+                }
+                if (sunetid != null) {
+                    session.setAttribute(Model.SUNETID, sunetid);
+                }
+            }
         }
         return sunetid;
     }
