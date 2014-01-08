@@ -40,9 +40,6 @@ public class SuggestionController {
     @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/eresource")
     private SuggestionManager eresourceSuggestionManager;
 
-    @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/history")
-    private SuggestionManager historySuggestionManager;
-
     @Resource(name = "org.slf4j.Logger/SuggestionController")
     private Logger log;
 
@@ -96,13 +93,6 @@ public class SuggestionController {
         this.eresourceSuggestionManager = eresourceSuggestionManager;
     }
 
-    public void setHistorySuggestionManager(final SuggestionManager historySuggestionManager) {
-        if (null == historySuggestionManager) {
-            throw new IllegalArgumentException("null historySuggestionManager");
-        }
-        this.historySuggestionManager = historySuggestionManager;
-    }
-
     public void setMeshSuggestionManager(final SuggestionManager meshSuggestionManager) {
         if (null == meshSuggestionManager) {
             throw new IllegalArgumentException("null meshSuggestionManager");
@@ -134,8 +124,6 @@ public class SuggestionController {
             return this.meshSuggestionManager.getSuggestionsForTerm(query);
         } else if (limit != null && limit.indexOf("mesh-") == 0) {
             return this.meshSuggestionManager.getSuggestionsForTerm(limit.substring(5), query);
-        } else if ("history".equals(limit)) {
-            return this.historySuggestionManager.getSuggestionsForTerm(query);
         } else {
             return this.eresourceSuggestionManager.getSuggestionsForTerm(query);
         }

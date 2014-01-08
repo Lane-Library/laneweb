@@ -6,8 +6,6 @@
     
     <solr:solr-server id="laneSearchSolrServer" url="%{laneweb.solr-url-laneSearch}" />
     
-    <solr:solr-server id="historySearchSolrServer" url="%{laneweb.solr-url-historySearch}" />
-    
     <bean name="javax.sql.DataSource/eresources"
         class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/eresources"/>

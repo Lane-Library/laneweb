@@ -25,8 +25,6 @@ public class EresourceXHTMLSAXStrategyTest {
 
     private EresourceXHTMLSAXStrategy strategy;
 
-    private Version version;
-
     private TestXMLConsumer xmlConsumer;
 
     @Before
@@ -34,7 +32,6 @@ public class EresourceXHTMLSAXStrategyTest {
         this.strategy = new EresourceXHTMLSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
         this.eresource = createMock(Eresource.class);
-        this.version = createMock(Version.class);
         this.link = createMock(Link.class);
     }
 
@@ -48,7 +45,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
-        replay(this.eresource, this.link, this.version);
+        replay(this.eresource, this.link);
         this.xmlConsumer.startDocument();
         XMLUtils.startElement(this.xmlConsumer, "", "test");
         this.strategy.toSAX(this.eresource, this.xmlConsumer);
@@ -56,7 +53,7 @@ public class EresourceXHTMLSAXStrategyTest {
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "EeresourceXHTMLSAXStrategyTest-testToSAX.xml"),
                 this.xmlConsumer.getStringValue());
-        verify(this.eresource, this.link, this.version);
+        verify(this.eresource, this.link);
     }
 
     @Test
@@ -72,7 +69,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
-        replay(this.eresource, this.link, this.version);
+        replay(this.eresource, this.link);
         this.xmlConsumer.startDocument();
         XMLUtils.startElement(this.xmlConsumer, "", "test");
         this.strategy.toSAX(this.eresource, this.xmlConsumer);
@@ -80,7 +77,7 @@ public class EresourceXHTMLSAXStrategyTest {
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "EeresourceXHTMLSAXStrategyTest-testToSAX2Links.xml"),
                 this.xmlConsumer.getStringValue());
-        verify(this.eresource, this.link, this.version);
+        verify(this.eresource, this.link);
     }
 
     @Test
@@ -93,7 +90,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
-        replay(this.eresource, this.link, this.version);
+        replay(this.eresource, this.link);
         this.xmlConsumer.startDocument();
         XMLUtils.startElement(this.xmlConsumer, "", "test");
         this.strategy.toSAX(this.eresource, this.xmlConsumer);
@@ -102,6 +99,6 @@ public class EresourceXHTMLSAXStrategyTest {
         assertEquals(
                 this.xmlConsumer.getExpectedResult(this, "EeresourceXHTMLSAXStrategyTest-testToSAXGetPassword.xml"),
                 this.xmlConsumer.getStringValue());
-        verify(this.eresource, this.link, this.version);
+        verify(this.eresource, this.link);
     }
 }

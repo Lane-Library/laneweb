@@ -23,7 +23,6 @@
             /WEB-INF/spring/cme.xml
             /WEB-INF/spring/datasources.xml
             /WEB-INF/spring/eresources.xml
-            /WEB-INF/spring/history-eresources.xml
             /WEB-INF/spring/logger.xml
             /WEB-INF/spring/laneweb.xml
             /WEB-INF/spring/mapping.xml
@@ -52,10 +51,6 @@
         <param-name>laneweb.context.version</param-name>
         <param-value>${project.version}</param-value>
     </context-param>
-
-    <listener>
-        <listener-class>edu.stanford.irt.laneweb.servlet.LanewebContextListener</listener-class>
-    </listener>
 
     <listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>

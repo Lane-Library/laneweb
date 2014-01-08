@@ -14,8 +14,8 @@ import edu.stanford.irt.laneweb.proxy.Ticket;
 import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 
 /**
- * This DataBinder puts thing related to the sunetid into the model, including
- * the sunetid, the ticket and the hashed sunetid.
+ * This DataBinder puts thing related to the sunetid into the model, including the sunetid, the ticket and the hashed
+ * sunetid.
  */
 public class SunetIdAndTicketDataBinder implements DataBinder {
 
@@ -25,7 +25,8 @@ public class SunetIdAndTicketDataBinder implements DataBinder {
 
     private SunetIdSource sunetIdSource;
 
-    public SunetIdAndTicketDataBinder(final SunetIdSource sunetIdSource, final String ezproxyKey, final String sunetidHashKey) {
+    public SunetIdAndTicketDataBinder(final SunetIdSource sunetIdSource, final String ezproxyKey,
+            final String sunetidHashKey) {
         this.sunetIdSource = sunetIdSource;
         this.ezproxyKey = ezproxyKey;
         this.sunetidHashKey = sunetidHashKey;
@@ -40,22 +41,26 @@ public class SunetIdAndTicketDataBinder implements DataBinder {
         // this package.
         String sunetid = this.sunetIdSource.getSunetid(request);
         if (sunetid != null) {
-            model.put(Model.SUNETID, sunetid);
+            Ticket ticket = null;
+            String auth = null;
             HttpSession session = request.getSession();
-            // create a new Ticket if it is not in the session or it is not
-            // valid.
-            Ticket ticket = (Ticket) session.getAttribute(Model.TICKET);
-            if (ticket == null || !ticket.isValid()) {
-                ticket = new Ticket(sunetid, this.ezproxyKey);
-                session.setAttribute(Model.TICKET, ticket);
+            synchronized (session) {
+                // create a new Ticket if it is not in the session or it is not
+                // valid.
+                ticket = (Ticket) session.getAttribute(Model.TICKET);
+                if (ticket == null || !ticket.isValid()) {
+                    ticket = new Ticket(sunetid, this.ezproxyKey);
+                    session.setAttribute(Model.TICKET, ticket);
+                }
+                // create a new hashed sunetid if it is not in the session
+                auth = (String) session.getAttribute(Model.AUTH);
+                if (auth == null) {
+                    auth = getDigest(getDigest(this.sunetidHashKey + sunetid));
+                    session.setAttribute(Model.AUTH, auth);
+                }
             }
+            model.put(Model.SUNETID, sunetid);
             model.put(Model.TICKET, ticket);
-            // create a new hashed sunetid if it is not in the session
-            String auth = (String) session.getAttribute(Model.AUTH);
-            if (auth == null) {
-                auth = getDigest(getDigest(this.sunetidHashKey + sunetid));
-                session.setAttribute(Model.AUTH, auth);
-            }
             model.put(Model.AUTH, auth);
         }
     }
@@ -68,9 +73,7 @@ public class SunetIdAndTicketDataBinder implements DataBinder {
             for (byte element : bytes) {
                 sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
             }
-        } catch (UnsupportedEncodingException e) {
-            throw new LanewebException(e);
-        } catch (NoSuchAlgorithmException e) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             throw new LanewebException(e);
         }
         return sb.toString();

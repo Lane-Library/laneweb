@@ -3,11 +3,12 @@ package edu.stanford.irt.laneweb.cme;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
+import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractCMELinkTransformer extends AbstractTransformer implements ModelAware {
+public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
 
     private static final String UTD_CME_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
 

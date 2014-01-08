@@ -13,13 +13,15 @@ import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
-import edu.stanford.irt.cocoon.pipeline.transform.AbstractTransformer;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.source.Source;
+import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
-public class TextNodeParsingTransformer extends AbstractTransformer implements CacheablePipelineComponent, ParametersAware {
+// TODO: maybe create an AbstractTransformer that extends AbstractXMLPipe and implements Transformer
+public class TextNodeParsingTransformer extends AbstractXMLPipe implements Transformer, CacheablePipelineComponent, ParametersAware {
 
     // the html parser creates screwy processing instructions from the classes
     // xml. TODO: this is specific to the classes yet this class is can be used

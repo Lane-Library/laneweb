@@ -28,12 +28,12 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 	e.preventDefault();
 	var persistentStatusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
 	if (persistentStatusCookie	&& 'denied' === persistentStatusCookie) {
-		document.location = '/././secure/persistentLogin.html?pl=false&url='+ document.location;
-	} else if($.LANE.model['disaster-mode'] == true){
-        document.location = '/././login-disabled.html';
+		document.location = model['base-path'] + '/secure/persistentLogin.html?pl=false&url='+ document.location;
+	} else if(model['disaster-mode'] == true){
+        document.location = model['base-path'] + '/login-disabled.html';
     }
 	else {
-		$.LANE.popupWindow("/././m/plain/persistent-login.html");
+		$.LANE.popupWindow(model['base-path'] + "/m/plain/persistent-login.html");
 		redirectUrl = encodeURIComponent(document.location);
 	}
 });
@@ -43,13 +43,13 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", function(event) {
 	var link = event.currentTarget, 
 	now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-	if ($.LANE.model['disaster-mode'] != true && 'denied' !== statusCookie && (!$.LANE.model["isActiveSunetID"] || statusCookie < now.getTime())){
+	if (model['disaster-mode'] != true && 'denied' !== statusCookie && (!model["isActiveSunetID"] || statusCookie < now.getTime())){
 		redirectUrl = encodeURIComponent(link.href);
-		if($.LANE.model["isActiveSunetID"]){ 
-			$.LANE.popupWindow('/././m/plain/persistentlogin-extention.html');
+		if(model["isActiveSunetID"]){ 
+			$.LANE.popupWindow(model['base-path'] + '/m/plain/persistentlogin-extention.html');
 		}
 		else{
-			$.LANE.popupWindow('/././m/plain/persistentlogin-proxylink.html');
+			$.LANE.popupWindow(model['base-path'] + '/m/plain/persistentlogin-proxylink.html');
 		}
 		event.preventDefault();
 	}
@@ -86,24 +86,24 @@ $('#dont-ask-again').live('click', function(e) {
 
 
 $.LANE.toggleLogin = function(){
-	if( $.LANE.model["isActiveSunetID"] || $.LANE.getCookie('webauth_at') != null){
+	if( model["isActiveSunetID"] || $.LANE.getCookie('webauth_at') != null){
         $('.webauthLogin').each(function(){
             $(this).text('Logout');
-            $(this).attr('href','/././logout');
+            $(this).attr('href',model['base-path'] + '/logout');
             $(this).attr('data-ajax','false');
         });
     }
     else{
         $('.webauthLogin').each(function(){
             $(this).text('Login');
-            $(this).attr('href','/././secure/mobile-login.html');
+            $(this).attr('href',model['base-path'] + '/secure/mobile-login.html');
             $(this).attr('data-ajax','false');
         });
     }	
 };
 
 $('.persistent-header').live('click', function(e) {
-	document.location = '/././';
+	document.location = model['base-path'] + '/';
 });
 
 //
@@ -113,11 +113,11 @@ $(this).bind("pageinit", function() {
 });
 
 var setLink = function(event) {
-	var node = event.target, url = '/././'; 
+	var node = event.target, url = model['base-path'] + '/'; 
 	if (node.nodeName == 'SPAN') {
 		node = node.parentNode;
 	}
-	if (!$.LANE.model["isActiveSunetID"] || node.search.indexOf("pl=true") >0 ) {
+	if (!model["isActiveSunetID"] || node.search.indexOf("pl=true") >0 ) {
 		 url = url + 'secure/';
 	 }
 	event.preventDefault();

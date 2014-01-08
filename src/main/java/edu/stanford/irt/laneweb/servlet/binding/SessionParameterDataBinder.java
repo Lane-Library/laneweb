@@ -11,28 +11,26 @@ public abstract class SessionParameterDataBinder<T> implements DataBinder {
 
     private String parameterName;
 
+    public SessionParameterDataBinder(final String modelKey, final String parameterName) {
+        this.modelKey = modelKey;
+        this.parameterName = parameterName;
+    }
+
     @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         HttpSession session = request.getSession();
         String parameterValue = request.getParameter(this.parameterName);
-        T value = null;
-        if (parameterValue == null) {
-            value = (T) session.getAttribute(this.modelKey);
-        } else {
-            value = getParameterAsObject(parameterValue);
+        T value = parameterValue == null ? null : getParameterAsObject(parameterValue);
+        synchronized (session) {
+            if (value == null) {
+                value = (T) session.getAttribute(this.modelKey);
+            } else {
+                session.setAttribute(this.modelKey, value);
+            }
         }
         if (value != null) {
-            session.setAttribute(this.modelKey, value);
             model.put(this.modelKey, value);
         }
-    }
-
-    public void setModelKey(final String modelKey) {
-        this.modelKey = modelKey;
-    }
-
-    public void setParameterName(final String parameterName) {
-        this.parameterName = parameterName;
     }
 
     protected abstract T getParameterAsObject(String parameterValue);

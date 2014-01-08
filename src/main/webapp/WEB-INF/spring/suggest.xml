@@ -9,11 +9,6 @@
         <constructor-arg ref="laneSearchSolrServer"/>
     </bean>
     
-    <bean name="edu.stanford.irt.suggest.SuggestionManager/history"
-        class="edu.stanford.irt.laneweb.suggest.SolrSuggestionManager">
-        <constructor-arg ref="historySearchSolrServer"/>
-    </bean>
-    
     <bean name="edu.stanford.irt.suggest.SuggestionManager/mesh"
         class="edu.stanford.irt.suggest.MeshSuggestionManager"/>
     

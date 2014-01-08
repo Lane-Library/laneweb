@@ -18,7 +18,8 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-header"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/version"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/disaster-mode"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmark"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"/>
@@ -64,8 +65,8 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"
         class="edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder">
-        <property name="parameterName" value="debug"/>
-        <property name="modelKey" value="debug"/>
+        <constructor-arg value="debug"/>
+        <constructor-arg value="debug"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"
@@ -85,8 +86,8 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"
         class="edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder">
-        <property name="parameterName" value="emrid"/>
-        <property name="modelKey" value="emrid"/>
+        <constructor-arg value="emrid"/>
+        <constructor-arg value="emrid"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"
@@ -104,9 +105,14 @@
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"
         class="edu.stanford.irt.laneweb.servlet.binding.RequestAttributeDataBinder"/>
     
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"
-        class="edu.stanford.irt.laneweb.servlet.binding.ServletContextDataBinder">
-        <property name="servletContext" ref="servletContext"/>
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/version"
+        class="edu.stanford.irt.laneweb.servlet.binding.VersionDataBinder">
+        <constructor-arg ref="servletContext"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/disaster-mode"
+        class="edu.stanford.irt.laneweb.servlet.binding.DisasterModeDataBinder">
+        <constructor-arg value="%{laneweb.disaster-mode}"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"

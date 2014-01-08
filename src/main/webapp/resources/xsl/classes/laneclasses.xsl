@@ -15,14 +15,22 @@
 	<xsl:template match="lc:lastmodified" />
 	<xsl:template match="lc:event_data">
 		<div class="bd">
-			<xsl:call-template name="microdata" />
 			<xsl:call-template name="decorator" />
 			<div class="bottomShadowWide"></div>
 		</div>
 	</xsl:template>
 	<xsl:template name="decorator">
-		<xsl:variable name="classId" select="./lc:module_id/text()"></xsl:variable>
-		<div class="yui3-g">
+		<xsl:variable name="classId" select="./lc:module_id/text()"/>
+        <xsl:variable name="description-text" select="./lc:event_description" />
+        <xsl:variable name="firstParagraphDescription"
+            select="substring-before($description-text, '.')" />
+        <xsl:variable name="first-words">
+            <xsl:call-template name="firstWords">
+                <xsl:with-param name="value" select="$description-text" />
+                <xsl:with-param name="count" select="50" />
+            </xsl:call-template>
+        </xsl:variable>
+		<div class="yui3-g" itemscope="" itemtype="http://data-vocabulary.org/Event">
 			<div class="yui3-u-1-5">
 				<div class="month">
 					<xsl:call-template name="month" />
@@ -31,9 +39,13 @@
 					<xsl:call-template name="day" />
 				</div>
 				<div class="time">
-					<xsl:call-template name="start-time" />
+				    <time itemprop="startDate" datetime="{./lc:event_dates/lc:start_date[1]/text()}">
+    					<xsl:call-template name="start-time" />
+				    </time>
 					<xsl:text>–</xsl:text>
-					<xsl:call-template name="end-time" />
+				    <time itemprop="endDate" datetime="{./lc:event_dates/lc:end_date[1]/text()}">
+						<xsl:call-template name="end-time" />
+				    </time>
 				</div>
 			</div>
 
@@ -48,7 +60,10 @@
                         <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
                         <xsl:value-of select="lc:module_id/text()" />
                     	</xsl:attribute>
-						<xsl:value-of select="./lc:event_name" />
+						<xsl:attribute name="itemprop">url</xsl:attribute>
+                    	<span itemprop="summary">
+							<xsl:value-of select="./lc:event_name" />
+                    	</span>
 					</a>
 				</h4>
 				<p>
@@ -84,15 +99,6 @@
 			</div>
 		</div>
 		<p>
-			<xsl:variable name="description-text" select="./lc:event_description" />
-			<xsl:variable name="firstParagraphDescription"
-				select="substring-before($description-text, '.')" />
-			<xsl:variable name="first-words">
-				<xsl:call-template name="firstWords">
-					<xsl:with-param name="value" select="$description-text" />
-					<xsl:with-param name="count" select="50" />
-				</xsl:call-template>
-			</xsl:variable>
 			<xsl:choose>
 				<xsl:when
 					test="count(tokenize($description-text, '\W+')[. != ''])  &gt; 50">
@@ -153,24 +159,4 @@
 			</xsl:if>
 		</xsl:if>
 	</xsl:template>
-    <xsl:template name="microdata">
-        <xsl:variable name="classUrl">
-	        <xsl:text>http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text>
-	        <xsl:value-of select="lc:module_id/text()" />
-        </xsl:variable>
-        <xsl:variable name="shortDescription">
-	        <xsl:call-template name="firstWords">
-	            <xsl:with-param name="value" select="./lc:event_description" />
-	            <xsl:with-param name="count" select="50" />
-	        </xsl:call-template>
-        </xsl:variable>
-        <span itemscope="" itemtype="http://data-vocabulary.org/Event">
-	        <meta itemprop="url" content="{$classUrl}"  />
-	        <meta itemprop="summary" content="{./lc:event_name}"  />
-	        <meta itemprop="description" content="{$shortDescription}"  />
-            <meta itemprop="startDate" content="{./lc:event_dates/lc:start_date[1]/text()}"  />
-            <meta itemprop="endDate" content="{./lc:event_dates/lc:end_date[1]/text()}"  />
-	        <meta itemprop="location" content="{./lc:venue/lc:venue_name}"  />
-        </span>
-    </xsl:template>
 </xsl:stylesheet>

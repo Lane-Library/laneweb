@@ -72,7 +72,7 @@
 					values.push(item.get("value"));
 					titles.push(item.get("title"));
 					
-				};
+				}
 				return new Select(values, titles, index);
 			}
 		}

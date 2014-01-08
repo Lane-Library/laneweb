@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-01-06" version="2.1.38" description="2.1.38 bug fix release">
+            <action date="2014-01-06" dev="ryanmax" issue="94946" type="fix">
+                seminars feed breaks when source contains multiple links
+            </action>
+            <action date="2014-01-02" dev="ceyates" issue="94915" type="fix">
+                eresource search fails when result has resource with only impact factor holding
+            </action>
+            <action date="2013-12-18" dev="ryanmax" issue="94727" type="fix">
+                base path not expanded in mobile interface
+            </action>
+        </release>
         <release date="2013-12-09" version="2.1.37" description="2.1.37 bug fix release">
             <action date="2013-12-05" dev="ryanmax" issue="94427" type="add">
                 keyboard conveniences for lightbox and banner
