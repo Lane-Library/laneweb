@@ -9,9 +9,8 @@ import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * This DataBinder handles Model attributes that are related to the remote ip
- * address combined here in order to accommodate a change in the client's ip
- * during a session
+ * This DataBinder handles Model attributes that are related to the remote ip address combined here in order to
+ * accommodate a change in the client's ip during a session
  * 
  * @author ceyates
  */
@@ -23,31 +22,33 @@ public class RemoteProxyIPDataBinder implements DataBinder {
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String currentIP = getRemoteAddress(request);
+        IPGroup ipGroup = null;
+        Boolean proxyLinks = null;
+        String requestParameter = request.getParameter(Model.PROXY_LINKS);
         HttpSession session = request.getSession();
-        boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
-        if (!isSameIP) {
-            session.setAttribute(Model.REMOTE_ADDR, currentIP);
+        synchronized (session) {
+            boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
+            if (!isSameIP) {
+                session.setAttribute(Model.REMOTE_ADDR, currentIP);
+            }
+            ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
+            if (ipGroup == null || !isSameIP) {
+                ipGroup = IPGroup.getGroupForIP(currentIP);
+                session.setAttribute(Model.IPGROUP, ipGroup);
+            }
+            proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
+            if (requestParameter != null || proxyLinks == null || !isSameIP) {
+                if (requestParameter == null) {
+                    proxyLinks = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
+                } else {
+                    proxyLinks = Boolean.parseBoolean(requestParameter);
+                }
+                session.setAttribute(Model.PROXY_LINKS, proxyLinks);
+            }
         }
         model.put(Model.REMOTE_ADDR, currentIP);
-        IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
-        if (ipGroup == null || !isSameIP) {
-            ipGroup = IPGroup.getGroupForIP(currentIP);
-            session.setAttribute(Model.IPGROUP, ipGroup);
-        }
         model.put(Model.IPGROUP, ipGroup);
-        Boolean proxy = null;
-        String requestParameter = request.getParameter(Model.PROXY_LINKS);
-        if (requestParameter != null) {
-            proxy = Boolean.parseBoolean(requestParameter);
-            session.setAttribute(Model.PROXY_LINKS, proxy);
-        } else if (isSameIP) {
-            proxy = (Boolean) session.getAttribute(Model.PROXY_LINKS);
-        }
-        if (proxy == null) {
-            proxy = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
-            session.setAttribute(Model.PROXY_LINKS, proxy);
-        }
-        model.put(Model.PROXY_LINKS, proxy);
+        model.put(Model.PROXY_LINKS, proxyLinks);
     }
 
     public void setProxyLinks(final ProxyLinks proxyLinks) {
