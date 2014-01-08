@@ -65,8 +65,8 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"
         class="edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder">
-        <property name="parameterName" value="debug"/>
-        <property name="modelKey" value="debug"/>
+        <constructor-arg value="debug"/>
+        <constructor-arg value="debug"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"
@@ -86,8 +86,8 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"
         class="edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder">
-        <property name="parameterName" value="emrid"/>
-        <property name="modelKey" value="emrid"/>
+        <constructor-arg value="emrid"/>
+        <constructor-arg value="emrid"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"
