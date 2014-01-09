@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-01-08" version="2.1.39" description="2.1.39 emergency release">
+            <action date="2014-01-08" dev="ryanmax" issue="95005" type="fix">
+                latest version of neko html parser requires tbody for every table
+            </action>
+        </release>
         <release date="2014-01-06" version="2.1.38" description="2.1.38 bug fix release">
             <action date="2014-01-06" dev="ryanmax" issue="94946" type="fix">
                 seminars feed breaks when source contains multiple links
