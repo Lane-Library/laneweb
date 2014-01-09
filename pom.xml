@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>2.1.38</version>
+    <version>2.1.39-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/maven/projects/laneweb/</url>
     <inceptionYear>2002</inceptionYear>
@@ -626,7 +626,7 @@
         <dependency>
             <artifactId>nekohtml</artifactId>
             <groupId>net.sourceforge.nekohtml</groupId>
-            <version>1.9.19</version>
+            <version>1.9.11</version>
             <exclusions>
                 <exclusion>
                     <artifactId>xercesImpl</artifactId>
