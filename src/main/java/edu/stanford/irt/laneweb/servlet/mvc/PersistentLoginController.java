@@ -63,8 +63,7 @@ public class PersistentLoginController {
         } else {
             resetCookies(request, response);
         }
-        url = URLDecoder.decode(url, "utf-8");
-        RedirectView view = new RedirectView(url, true, true);
+        RedirectView view = new RedirectView(URLDecoder.decode(url, "utf-8"), true, true);
         view.setExpandUriTemplateVariables(false);
         return view;
     }
@@ -158,8 +157,7 @@ public class PersistentLoginController {
             response.setCharacterEncoding("UTF-8");
             view = new RedirectView("/myaccounts.html", true, true);
         } else {
-            url = URLDecoder.decode(url, "utf-8");
-            view = new RedirectView(url, true, true);
+            view = new RedirectView(URLDecoder.decode(url, "utf-8"), true, true);
         }
         view.setExpandUriTemplateVariables(false);
         return view;
