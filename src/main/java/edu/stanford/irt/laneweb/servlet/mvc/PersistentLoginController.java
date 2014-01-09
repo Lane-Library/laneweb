@@ -131,22 +131,26 @@ public class PersistentLoginController {
         String userAgent = request.getHeader("User-Agent");
         if (null != userAgent && null != sunetid) {
             int twoWeeks = 3600 * 24 * 7 * 2;
-            int gracePeriod = 3600 * 24 * 3; // three days
+            // gracePeriod is three days
+            int gracePeriod = 3600 * 24 * 3;
             PersistentLoginToken token = this.codec.createLoginToken(sunetid, userAgent.hashCode());
             Cookie cookie = new Cookie(SunetIdCookieCodec.LANE_COOKIE_NAME, token.getEncryptedValue());
             cookie.setPath("/");
-            cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
+            // cookie is available for 2 weeks
+            cookie.setMaxAge(twoWeeks);
             response.addCookie(cookie);
             GregorianCalendar gc = new GregorianCalendar();
             gc.add(Calendar.SECOND, twoWeeks);
             cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(gc.getTime().getTime()));
             cookie.setPath("/");
-            cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
+            // cookie is available for 2 weeks
+            cookie.setMaxAge(twoWeeks);
             response.addCookie(cookie);
             gc.add(Calendar.SECOND, -gracePeriod);
             cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, String.valueOf(gc.getTime().getTime()));
             cookie.setPath("/");
-            cookie.setMaxAge(twoWeeks); // cookie is available for 2 // weeks
+            // cookie is available for 2 weeks
+            cookie.setMaxAge(twoWeeks);
             response.addCookie(cookie);
         }
     }
