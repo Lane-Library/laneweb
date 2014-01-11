@@ -37,7 +37,7 @@
             /WEB-INF/spring/trends.xml
             /WEB-INF/spring/voyager-login.xml
             /applications.xmap
-            classpath:/edu/stanford/irt/laneweb/bookmarks/bookmarks.xmap
+            /bookmarks.xmap
             /classes.xmap
             /content.xmap
             /eresources.xmap
