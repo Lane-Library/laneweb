@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bookmarks;
+package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 

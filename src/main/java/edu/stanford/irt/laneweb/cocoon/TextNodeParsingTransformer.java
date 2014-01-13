@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
@@ -19,6 +20,7 @@ import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.LanewebException;
 
 // TODO: maybe create an AbstractTransformer that extends AbstractXMLPipe and implements Transformer
 public class TextNodeParsingTransformer extends AbstractXMLPipe implements Transformer, CacheablePipelineComponent, ParametersAware {
@@ -67,7 +69,12 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         if (this.elementName.equals(qName)) {
             this.inElement = false;
-            final ByteArrayInputStream inputStream = new ByteArrayInputStream(this.content.toString().getBytes());
+            final ByteArrayInputStream inputStream;
+            try {
+                inputStream = new ByteArrayInputStream(this.content.toString().getBytes("UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                throw new LanewebException(e);
+            }
             Source source = new Source() {
 
                 public boolean exists() {

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bookmarks;
+package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class BookmarkDataBinder implements DataBinder {
 

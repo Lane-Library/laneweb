@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bookmarks;
+package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
 import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
@@ -17,6 +17,10 @@ import java.util.Map;
 import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.servlet.mvc.bookmarks.JSONBookmarkController;
 
 // TODO: make assertions about this.bookmark after done, also throw exceptions
 // when saving.

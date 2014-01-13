@@ -33,9 +33,8 @@ public class LogoutServlet extends HttpServlet {
             for (Cookie webCookie : cookies) {
                 if (PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE.equals(webCookie.getName())) {
                     String cookieValue = webCookie.getValue();
-                    if (!"denied".equals(cookieValue)) {// don't want to
-                                                        // overwrite denied
-                                                        // cookie
+                    // don't want to overwrite denied cookie
+                    if (!"denied".equals(cookieValue)) {
                         webCookie.setPath("/");
                         webCookie.setMaxAge(0);
                         resp.addCookie(webCookie);
