@@ -27,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
         "file:src/main/webapp/WEB-INF/spring/search.xml", "file:src/main/webapp/WEB-INF/spring/sitemap.xml",
         "file:src/main/webapp/WEB-INF/spring/source.xml", "file:src/main/webapp/WEB-INF/spring/suggest.xml",
         "file:src/main/webapp/WEB-INF/spring/trends.xml", "file:src/main/webapp/WEB-INF/spring/voyager-login.xml",
-        "file:src/main/webapp/applications.xmap", "classpath:/edu/stanford/irt/laneweb/bookmarks/bookmarks.xmap",
+        "file:src/main/webapp/applications.xmap", "file:src/main/webapp/bookmarks.xmap",
         "file:src/main/webapp/classes.xmap", "file:src/main/webapp/content.xmap",
         "file:src/main/webapp/eresources.xmap", "file:src/main/webapp/mobile.xmap", "file:src/main/webapp/rss.xmap",
         "file:src/main/webapp/sitemap.xmap", "file:src/main/webapp/WEB-INF/spring/laneweb-servlet.xml" }, initializers = LanewebContextInitializer.class)
