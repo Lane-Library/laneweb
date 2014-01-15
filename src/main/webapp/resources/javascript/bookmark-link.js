@@ -191,7 +191,7 @@
              * @returns {Boolean}
              */
             _isAlreadyBookmarked : function(target) {
-                var url, i, bookmarks, size;
+                var url, i, bookmarks, size, query;
                 target.plug(Lane.LinkPlugin);
                 if (target.link.get("local")) {
                     url = target.link.get("path");
