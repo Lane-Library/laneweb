@@ -37,6 +37,10 @@
     <xsl:template match="@action | @src">
         <xsl:attribute name="{name()}">
             <xsl:choose>
+                <!-- permit schemeless urls -->
+                <xsl:when test="starts-with(.,'//')">
+                    <xsl:value-of select="."/>
+                </xsl:when>
                 <xsl:when test="starts-with(.,'/')">
                     <xsl:value-of select="concat($base-path,.)"/>
                 </xsl:when>
