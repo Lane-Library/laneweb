@@ -182,7 +182,7 @@
     </bean>
     
     <bean id="edu.stanford.irt.cocoon.sitemap.ComponentFactory"
-        class="edu.stanford.irt.laneweb.cocoon.SpringComponentFactory"/>
+        class="edu.stanford.irt.cocoon.spring.SpringComponentFactory"/>
     
     <bean id="edu.stanford.irt.cocoon.xml.XPointerProcessor"
         class="edu.stanford.irt.cocoon.xml.xpointer.XPointerProcessorImpl">

@@ -61,19 +61,19 @@ public class RingBuffer {
      * @return a byte array of all bytes in the buffer
      */
     public byte[] getBytes() {
-        byte[] data = new byte[this.count];
-        if (data.length != 0) {
+        byte[] bytes = new byte[this.count];
+        if (bytes.length != 0) {
             int i = 0;
             int j = this.outputIndex;
             while ((j < this.data.length) && (i < this.count)) {
-                data[i++] = this.data[j++];
+                bytes[i++] = this.data[j++];
             }
             j = 0;
             while (i < this.count) {
-                data[i++] = this.data[j++];
+                bytes[i++] = this.data[j++];
             }
         }
-        return data;
+        return bytes;
     }
 
     /**
@@ -107,16 +107,16 @@ public class RingBuffer {
     /**
      * overrides Object.toString()
      * 
-     * @return a String represnentation of this RingBuffer
+     * @return a String representation of this RingBuffer
      */
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer("[");
-        byte[] data = this.getBytes();
-        for (int i = 0; i < data.length; i++) {
-            sb.append(data[i]);
-            sb.append("(" + (char) data[i] + ")");
-            if (i != data.length - 1) {
+        byte[] bytes = this.getBytes();
+        for (int i = 0; i < bytes.length; i++) {
+            sb.append(bytes[i]);
+            sb.append("(" + (char) bytes[i] + ")");
+            if (i != bytes.length - 1) {
                 sb.append(",");
             }
         }

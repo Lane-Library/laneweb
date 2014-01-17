@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bookmarks;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.util.Map;
 

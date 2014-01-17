@@ -10,11 +10,13 @@ Y.use('console', 'test', function(Y){
     };
 
     var resourceSearchTestCase = new Y.Test.Case({
+        
         name: 'Lane ResourceSearch Test Case',
         
         search: Y.lane.ResourceSearch,
         
-        view: new Y.lane.ResourceResultView(0, this.foo),
+        //FIXME: 'use strict' breaks this:
+//        view: new Y.lane.ResourceResultView(0, this.foo),
         
         foo: function(id, result) {
             this.result = result;

@@ -31,8 +31,6 @@ public class EresourceSAXStrategyTest {
 
     private EresourceSAXStrategy strategy;
 
-    private Version version;
-
     private TestXMLConsumer xmlConsumer;
 
     @Before
@@ -40,7 +38,6 @@ public class EresourceSAXStrategyTest {
         this.strategy = new EresourceSAXStrategy();
         this.eresource = createMock(Eresource.class);
         this.xmlConsumer = new TestXMLConsumer();
-        this.version = createMock(Version.class);
         this.link = createMock(Link.class);
     }
 
@@ -74,13 +71,13 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getUrl()).andReturn(Resource.URL);
         expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
-        replay(this.eresource, this.version, this.link);
+        replay(this.eresource, this.link);
         this.xmlConsumer.startDocument();
         this.strategy.toSAX(this.eresource, this.xmlConsumer);
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "EresourceSAXStrategyTest-testToSAX.xml"),
                 this.xmlConsumer.getStringValue());
-        verify(this.eresource, this.version, this.link);
+        verify(this.eresource, this.link);
     }
 
     @Test

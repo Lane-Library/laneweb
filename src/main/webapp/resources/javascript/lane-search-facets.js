@@ -81,7 +81,7 @@
         Result.prototype.getContent = function(){
             if (this._state == 'initialized') {
                 this._state = 'searching';
-                request = Y.io(this._url, this._callback);
+                Y.io(this._url, this._callback);
             } else 
                 if (this._state == 'searched') {
                     this.show();

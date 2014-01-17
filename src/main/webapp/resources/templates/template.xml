@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro"/>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
@@ -110,38 +110,40 @@
                                 <a href="/portals/index.html">Specialty Portals</a>
                             <ul id="specialties-menu">
                                     <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
-                                    <li><a href="/portals/neurology.html">Neurology</a></li>  
+                                    <li><a href="/portals/nursing.html">Nursing</a></li>  
                                     <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
                                     <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
-                                    <li><a href="/portals/oncology.html">Oncology</a></li>
                                     <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
-                                    <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li> 
+                                    <li><a href="/portals/oncology.html">Oncology</a></li>
                                     <li><a href="/portals/cardiology.html">Cardiology</a></li>
-                                    <li><a href="http://trachea.stanford.edu/">Otolaryngology</a></li> 
+                                    <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>   
                                     <li><a href="/portals/clinical.html">Clinical</a></li>
-                                    <li><a href="/portals/palliative-care.html">Palliative Care</a></li>  
-                                    <li><a href="/portals/comp-med.html">Comparative Medicine</a></li> 
-                                    <li><a href="/portals/pathology.html">Pathology</a></li>
+                                    <li><a href="http://trachea.stanford.edu/">Otolaryngology</a></li>
+                                    <li><a href="/portals/comp-med.html">Comparative Medicine</a></li>
+                                    <li><a href="/portals/palliative-care.html">Palliative Care</a></li> 
                                     <li><a href="/portals/patient.html">Consumer Health</a></li>
-                                    <li><a href="/portals/peds.html">Pediatrics</a></li>
+                                    <li><a href="/portals/pathology.html">Pathology</a></li>
                                     <li><a href="/portals/emergency.html">Emergency Medicine</a></li> 
-                                    <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
+                                    <li><a href="/portals/pcap.html">PCAP</a></li>
                                     <li><a href="/portals/ihealth.html">Global Health</a></li>  
-                                    <li><a href="/portals/pmr.html">Physical Medicine &amp; Rehab.</a></li>
+                                    <li><a href="/portals/peds.html">Pediatrics</a></li>
                                     <li><a href="/portals/hematology.html">Hematology</a></li>
-                                    <li><a href="/portals/picu.html">PICU</a></li>
-                                    <li><a href="/portals/rheumatology.html">Immunology/Rheumatology</a> </li>     
-                                    <li><a href="/portals/psychiatry.html">Psychiatry</a></li>    
-                                    <li><a href="/portals/infectious-diseases.html">Infectious Diseases</a> </li>      
-                                    <li><a href="/portals/pulmonary.html">Pulmonary</a></li>            
+                                    <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
+                                    <li><a href="/portals/rheumatology.html">Immunology/Rheumatology</a> </li>   
+                                    <li><a href="/portals/pmr.html">Physical Medicine &amp; Rehab.</a></li>
+                                    <li><a href="/portals/infectious-diseases.html">Infectious Diseases</a> </li>   
+                                    <li><a href="/portals/picu.html">PICU</a></li> 
                                     <li><a href="/portals/internal-medicine.html">Internal Medicine</a> </li> 
-                                    <li><a href="/portals/reference.html">Reference Desk</a></li>
+                                    <li><a href="/portals/psychiatry.html">Psychiatry</a></li>      
                                     <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li> 
-                                    <li><a href="/portals/spiritual.html">Spiritual Care</a></li>  
-                                    <li><a href="/portals/medicalEd.html">Medical Education</a></li>  
-                                    <li><a href="/classes-consult/infoliteracy.html">Student IL Materials</a></li>
+                                    <li><a href="/portals/pulmonary.html">Pulmonary</a></li>    
+                                    <li><a href="/portals/medicalEd.html">Medical Education</a></li> 
+                                    <li><a href="/portals/reference.html">Reference Desk</a></li> 
                                     <li><a href="/portals/cultural.html">Multicultural Health</a></li>  
-                                </ul>
+                                    <li><a href="/portals/spiritual.html">Spiritual Care</a></li>                                
+                                    <li><a href="/portals/neurology.html">Neurology</a></li>  
+                                    <li><a href="/classes-consult/infoliteracy.html">Student IL Materials</a></li>   
+                              </ul>
                             </li>
                             <li>
                                 <a href="/classes-consult/index.html"

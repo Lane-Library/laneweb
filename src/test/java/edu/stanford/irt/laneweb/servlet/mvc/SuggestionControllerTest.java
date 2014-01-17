@@ -27,8 +27,6 @@ public class SuggestionControllerTest {
 
     private SuggestionManager eresource;
 
-    private SuggestionManager history;
-
     private SuggestionManager mesh;
 
     /**
@@ -37,10 +35,8 @@ public class SuggestionControllerTest {
     @Before
     public void setUp() throws Exception {
         this.controller = new SuggestionController();
-        this.history = createMock(SuggestionManager.class);
         this.eresource = createMock(SuggestionManager.class);
         this.mesh = createMock(SuggestionManager.class);
-        this.controller.setHistorySuggestionManager(this.history);
         this.controller.setEresourceSuggestionManager(this.eresource);
         this.controller.setMeshSuggestionManager(this.mesh);
     }
@@ -57,10 +53,10 @@ public class SuggestionControllerTest {
         Suggestion suggestion = createMock(Suggestion.class);
         expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis").atLeastOnce(); //java 7 does this
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));
-        replay(suggestion, this.eresource, this.history, this.mesh);
+        replay(suggestion, this.eresource, this.mesh);
         Map<String, List<String>> suggestions = this.controller.getSuggestions("venous thrombosis", "mesh");
         assertEquals("Venous Thrombosis", suggestions.get("suggest").get(0));
-        verify(suggestion, this.eresource, this.history, this.mesh);
+        verify(suggestion, this.eresource, this.mesh);
     }
 
     @Test
@@ -76,8 +72,8 @@ public class SuggestionControllerTest {
     @Test
     public void testNullLimit() {
         expect(this.eresource.getSuggestionsForTerm("query")).andReturn(Collections.<Suggestion> emptyList());
-        replay(this.eresource, this.history, this.mesh);
+        replay(this.eresource, this.mesh);
         assertNotNull(this.controller.getSuggestions("query", null));
-        verify(this.eresource, this.history, this.mesh);
+        verify(this.eresource, this.mesh);
     }
 }

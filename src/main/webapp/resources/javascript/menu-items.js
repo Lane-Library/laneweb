@@ -2,7 +2,7 @@
     
     Y.namespace("lane");
     
-    MenuAndItems = function() {
+    var MenuAndItems = function() {
         MenuAndItems.superclass.constructor.apply(this, arguments);
     };
     

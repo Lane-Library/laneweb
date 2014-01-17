@@ -24,7 +24,7 @@ public class CacheSourceResolver implements SourceResolver {
     /**
      * A Source implementation that wraps a byte array.
      */
-    private static class ByteArraySource implements Source {
+    private static final class ByteArraySource implements Source {
 
         private byte[] byteArray;
 
@@ -32,7 +32,7 @@ public class CacheSourceResolver implements SourceResolver {
 
         private ByteArraySource(final byte[] byteArray, final String uri) {
             this.byteArray = new byte[byteArray.length];
-            System.arraycopy(byteArray, 0, this.byteArray, 0, byteArray.length);;
+            System.arraycopy(byteArray, 0, this.byteArray, 0, byteArray.length);
             this.uri = uri;
         }
 

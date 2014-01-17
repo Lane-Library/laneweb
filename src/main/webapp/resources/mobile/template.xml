@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!-- <html xmlns="http://www.w3.org/1999/xhtml" manifest="/resources/mobile/lane.manifest">-->
     <head>
         <title>Lane Medical Library</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -18,7 +17,7 @@
             <a id="desktop-url" rel="external" href="/index.html?site_preference=normal">Full Version</a>
         </div>
 
-        <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${timestamp}"> </script>
         <script type="text/javascript" id="model">//</script>
+        <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${timestamp}"> </script>
     </body>
 </html>

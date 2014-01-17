@@ -5,7 +5,7 @@ $(this).bind("pagechange", function() {
     form = activePage.find('form');
     if(resultsHeader && qInput.val()){
         $.ajax({
-            url: "/././apps/spellcheck/json",
+            url: model['base-path'] + "/apps/spellcheck/json",
             dataType: "json",
             data : {q : qInput.val()},
             success: function(data) {

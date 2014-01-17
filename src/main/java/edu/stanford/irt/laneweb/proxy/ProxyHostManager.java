@@ -17,6 +17,8 @@ import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
@@ -67,10 +69,13 @@ public class ProxyHostManager {
 
     private long lastUpdate = 0;
 
+    private Logger log;
+
     private Set<String> proxyHosts;
 
-    public ProxyHostManager(final DataSource dataSource) throws UnsupportedEncodingException {
+    public ProxyHostManager(final DataSource dataSource, final Logger log) throws UnsupportedEncodingException {
         this.dataSource = dataSource;
+        this.log = log;
         BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
                 "ezproxy-servers.txt"), "UTF-8"));
         this.proxyHosts = new HashSet<String>();
@@ -121,8 +126,12 @@ public class ProxyHostManager {
             this.executor.execute(new Runnable() {
 
                 public void run() {
-                    Set<String> newSet = new DatabaseProxyHostSet(ProxyHostManager.this.dataSource);
-                    ProxyHostManager.this.proxyHosts = newSet;
+                    try {
+                        Set<String> newSet = new DatabaseProxyHostSet(ProxyHostManager.this.dataSource);
+                        ProxyHostManager.this.proxyHosts = newSet;
+                    } catch (LanewebException e) {
+                        ProxyHostManager.this.log.error("proxy hosts not updated", e);
+                    }
                 }
             });
         }

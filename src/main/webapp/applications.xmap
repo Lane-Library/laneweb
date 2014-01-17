@@ -111,18 +111,6 @@
                     <map:transform type="description-labeling"/>
                     <map:serialize type="xml"/>
                 </map:match>-->
-            <!-- search/merged/history/html returns xhtmlized merged metasearch and history eresources results -->
-            <!-- this is used in content search/history/history-all.html -->
-            <map:match pattern="search/merged/history/html/*" type="wildcard">
-                <map:generate type="merged-history-search">
-                    <map:parameter name="timeout" value="20000"/>
-                    <map:parameter name="engines" value="{1}"/>
-                </map:generate>
-                <map:transform type="query-highlighting"/>
-                <map:transform type="description-labeling"/>
-                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <!-- search2json.xsl converts the result xml to json -->
             <!-- it is used in lane-metasearch.js and lane-querymap.js -->
             <map:match pattern="search/json" type="wildcard">

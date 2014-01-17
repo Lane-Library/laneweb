@@ -7,6 +7,30 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-01-13" version="2.1.40" description="2.1.40 bug fix release">
+            <action date="2014-01-10" dev="olgary" issue="95036" type="update">
+                update template.xml, debug.xml - fix link order in portal dropdown, add new link for PCAP portal
+            </action>
+            <action date="2014-01-06" dev="ryanmax" issue="94949" type="remove">
+                remove newpage redirects
+            </action>
+        </release>
+        <release date="2014-01-08" version="2.1.39" description="2.1.39 emergency release">
+            <action date="2014-01-08" dev="ryanmax" issue="95005" type="fix">
+                latest version of neko html parser requires tbody for every table
+            </action>
+        </release>
+        <release date="2014-01-06" version="2.1.38" description="2.1.38 bug fix release">
+            <action date="2014-01-06" dev="ryanmax" issue="94946" type="fix">
+                seminars feed breaks when source contains multiple links
+            </action>
+            <action date="2014-01-02" dev="ceyates" issue="94915" type="fix">
+                eresource search fails when result has resource with only impact factor holding
+            </action>
+            <action date="2013-12-18" dev="ryanmax" issue="94727" type="fix">
+                base path not expanded in mobile interface
+            </action>
+        </release>
         <release date="2013-12-09" version="2.1.37" description="2.1.37 bug fix release">
             <action date="2013-12-05" dev="ryanmax" issue="94427" type="add">
                 keyboard conveniences for lightbox and banner

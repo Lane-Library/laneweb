@@ -1,6 +1,6 @@
 Y.Get.script = function(url, config) {
     
-    _gat = {
+    window._gat = {
             _createTracker : function() {
                 return {
                     _setDomainName: function(name) {
