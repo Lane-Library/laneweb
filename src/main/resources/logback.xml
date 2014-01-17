@@ -36,13 +36,11 @@
         </triggeringPolicy>
     </appender>
     
-    <category name="querymap" additivity="false">
-        <priority value="INFO"/>
+    <logger name="querymap" level="info" additivity="false">
         <appender-ref ref="querymap"/>
-    </category>
+    </logger>
     
-    <root>
-        <priority value="${laneweb.log4j.root.priority.value}"/>
+    <root level="${laneweb.log4j.root.priority.value}">
         <appender-ref ref="${laneweb.log4j.root.appender-ref.ref}"/>
     </root>
     
