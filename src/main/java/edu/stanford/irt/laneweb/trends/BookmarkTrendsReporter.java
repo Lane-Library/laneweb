@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 import org.slf4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import edu.stanford.irt.lane.trends.GoogleTracker;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 
 public class BookmarkTrendsReporter {
