@@ -127,7 +127,7 @@
         <property name="ignoringElementContentWhitespace" value="false"/>
         <property name="namespaceAware" value="true"/>
         <property name="validating" value="false"/>
-        <property name="xIncludeAware" value="false"/>
+        <property name="XIncludeAware" value="false"/>
     </bean>
     
     <bean name="javax.xml.parsers.SAXParserFactory"
@@ -135,7 +135,7 @@
         <constructor-arg value="com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl"/>
         <property name="namespaceAware" value="true"/>
         <property name="validating" value="false"/>
-        <property name="xIncludeAware" value="false"/>
+        <property name="XIncludeAware" value="false"/>
     </bean>
     
     <bean name="javax.xml.transform.sax.SAXTransformerFactory/saxon"
