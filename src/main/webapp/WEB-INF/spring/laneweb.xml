@@ -136,6 +136,11 @@
         <property name="namespaceAware" value="true"/>
         <property name="validating" value="false"/>
         <property name="XIncludeAware" value="false"/>
+        <property name="features">
+            <map>
+                <entry key="http://apache.org/xml/features/nonvalidating/load-external-dtd" value="false"/>
+            </map>
+        </property>
     </bean>
     
     <bean name="javax.xml.transform.sax.SAXTransformerFactory/saxon"
