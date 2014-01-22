@@ -16,6 +16,7 @@
     	DISASTER_MODE : "disaster-mode",
     	IPGROUP : "ipgroup",
     	IS_ACTIVE_SUNETID : "isActiveSunetID",
+    	PROXY_LINKS : "proxy-links",
     	QUERY : "query",
     	SOURCE : "source",
     	URL_ENCODED_QUERY : "url-encoded-query"

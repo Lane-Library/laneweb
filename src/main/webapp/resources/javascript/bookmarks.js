@@ -6,9 +6,12 @@
         BookmarkEditor,
         BookmarksEditor,
         Lane = Y.lane,
-        Model = Lane.Model;
+        Model = Lane.Model,
+        DISASTER_MODE = Model.get(Model.DISASTER_MODE),
+        BASE_PATH = Model.get(Model.BASE_PATH) || "",
+        PROXY_LINKS = Model.get(Model.PROXY_LINKS);
 
-    if (Y.one("#bookmarks") && !Model.get(Model.DISASTER_MODE)) {
+    if (Y.one("#bookmarks") && !DISASTER_MODE) {
 
         /**
          * A class for representing a bookmark with attributes for the label and url.
@@ -140,7 +143,6 @@
                     this._bookmarks.push(bookmarks[i]);
                 }
             }
-            this._basePath = Model.get(Model.BASE_PATH) || "";
 
             /**
              * @event add
@@ -289,7 +291,7 @@
                  */
                 _defAddFn : function(event) {
                     var data = Y.JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
-                    Y.io(this._basePath + "/bookmarks", {
+                    Y.io(BASE_PATH + "/bookmarks", {
                         method : "post",
                         data : data,
                         headers : {
@@ -319,7 +321,7 @@
                  */
                 _defMoveFn : function(event) {
                     var data = Y.JSON.stringify({to : event.to, from : event.from});
-                    Y.io(this._basePath + "/bookmarks/move", {
+                    Y.io(BASE_PATH + "/bookmarks/move", {
                         method : "post",
                         data : data,
                         headers : {
@@ -346,7 +348,7 @@
                  */
                 _defRemoveFn : function(event) {
                     var indexes = Y.JSON.stringify(event.positions);
-                    Y.io(this._basePath + "/bookmarks?indexes=" + indexes, {
+                    Y.io(BASE_PATH + "/bookmarks?indexes=" + indexes, {
                         method : "delete",
                         on : {
                             success : function() {
@@ -372,7 +374,7 @@
                  */
                 _defUpdateFn : function(event) {
                     var data = Y.JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
-                    Y.io(this._basePath + "/bookmarks", {
+                    Y.io(BASE_PATH + "/bookmarks", {
                         method : "put",
                         data : data,
                         headers : {
@@ -507,7 +509,11 @@
              * @param event {CustomEvent}
              */
             _bookmarkAdded : function(event) {
-                this.get("srcNode").prepend("<li><a href='" + event.bookmark.getUrl() + "'>" + event.bookmark.getLabel() + "</a></li>");
+                var url = event.bookmark.getUrl();
+                if (PROXY_LINKS && url.match(/http[s]?:/)) {
+                    url = BASE_PATH + "/secure/apps/proxy/credential?url=" + url;
+                }
+                this.get("srcNode").prepend("<li><a href='" +url + "'>" + event.bookmark.getLabel() + "</a></li>");
                 this.syncUI();
             },
             
