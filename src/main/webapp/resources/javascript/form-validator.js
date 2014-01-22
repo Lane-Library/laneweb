@@ -16,12 +16,13 @@
     var FormValidator = function(form) {
         var i, node, validator, inputFields,
             nodes = form.all("input[title='required']"),
-            fieldJSON = [];
+            fieldJSON = [],
+            focusHandler = function(event) {event.target.removeClass("incorrect");};
         for (i = 0; i < nodes.size(); i++) {
             node = nodes.item(i);
             (new Y.lane.TextInput(node, "required"));
             //remove incorrect styling on focus
-            node.on("focus", function(event) {event.target.removeClass("incorrect");});
+            node.on("focus", focusHandler);
             fieldJSON.push({
                 type : Y.TextBaseField,
                 atts : {
@@ -46,9 +47,12 @@
         }
         return {
         	destroy : function() {
-        		var form = validator.get("form");
+        		var i, nodes = form.all("input[title='required']");
         		Y.Event.detach("submit", validator._onFormSubmit, form);
         		Y.Event.detach("reset", validator._onFormReset, form);
+        		for (i = 0; i < nodes.size(); i++) {
+        		    Y.Event.detach("focus", focusHandler, nodes.item(i));
+        		}
         		validator.destroy();
         	},
         	isValid : function() {
