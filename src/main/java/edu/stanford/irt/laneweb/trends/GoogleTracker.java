@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -16,6 +14,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * <pre>
@@ -53,14 +53,6 @@ public class GoogleTracker {
         this.logger = logger;
     }
 
-    /**
-     * generate a new visitorId which and utma cookie value and thus a new visit/visitor
-     */
-    public void createVisitorSession() {
-        this.visitorId = generateVisitorId();
-        this.utmaCookie = generateUtmaCookie();
-    }
-
     public void setDomainName(final String domainName) {
         this.domainName = domainName;
     }
@@ -79,23 +71,19 @@ public class GoogleTracker {
 
     public void trackEvent(final String path, final String category, final String action, final String label,
             final int value) {
-        String utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
-                + encode(this.domainName) + "&utmt=" + "event" + "&utme=" + "5(" + encode(category) + "*"
-                + encode(action) + "*" + encode(label) + ")(" + value + ")" + "&utmr=" + encode(this.referer)
-                + "&utmp=" + encode(path) + "&utmac=" + this.googleAccount + "&utmcc=__utma" + getUtmaCookie()
-                + "&utmvid=" + getVisitorId() + "&utmip=" + anonymizeIP(getLocalHostIP());
-        sendRequestToGoogleAnalytics(utmUrl);
+        String utmUrl;
+        try {
+            utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
+                    + encode(this.domainName) + "&utmt=" + "event" + "&utme=" + "5(" + encode(category) + "*"
+                    + encode(action) + "*" + encode(label) + ")(" + value + ")" + "&utmr=" + encode(this.referer)
+                    + "&utmp=" + encode(path) + "&utmac=" + this.googleAccount + "&utmcc=__utma" + getUtmaCookie()
+                    + "&utmvid=" + getVisitorId() + "&utmip=" + anonymizeIP(getLocalHostIP());
+            sendRequestToGoogleAnalytics(utmUrl);
+        } catch (NoSuchAlgorithmException | IOException e) {
+            throw new LanewebException(e);
+        }
         this.logger.info(new StringBuilder(path).append("/").append(category).append("/").append(action).append("/")
                 .append(label).append("/").append(value).toString());
-    }
-
-    public void trackPageView(final String path) {
-        String utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
-                + encode(this.domainName) + "&utmr=" + encode(this.referer) + "&utmp=" + encode(path) + "&utmac="
-                + this.googleAccount + "&utmcc=__utma" + getUtmaCookie() + "&utmvid=" + getVisitorId() + "&utmip="
-                + anonymizeIP(getLocalHostIP());
-        sendRequestToGoogleAnalytics(utmUrl);
-        this.logger.info(path);
     }
 
     /**
@@ -123,18 +111,15 @@ public class GoogleTracker {
     /**
      * @param string
      * @return URL encoded string, with %20 instead of plus for spaces
+     * @throws UnsupportedEncodingException
      */
-    private String encode(final String string) {
+    private String encode(final String string) throws IOException {
         String encodedString = string;
-        try {
-            if (isEmpty(encodedString)) {
-                encodedString = "";
-            } else {
-                encodedString = URLEncoder.encode((encodedString), "UTF-8");
-                encodedString = encodedString.replaceAll("\\+", "%20");
-            }
-        } catch (UnsupportedEncodingException e) {
-            this.logger.error(e.getMessage(), e);
+        if (isEmpty(encodedString)) {
+            encodedString = "";
+        } else {
+            encodedString = URLEncoder.encode((encodedString), "UTF-8");
+            encodedString = encodedString.replaceAll("\\+", "%20");
         }
         return encodedString;
     }
@@ -147,25 +132,23 @@ public class GoogleTracker {
      * when their last visit occurred. Values are hashed:
      * __utma=<domainHash>.<sessionId>.<firstTime>.<lastTime>.<currentTime>.<sessionCount>. Here we give dummy values
      * for all but domain and visitorId
+     * 
+     * @throws IOException
+     * @throws NoSuchAlgorithmException
      */
-    private String generateUtmaCookie() {
+    private String generateUtmaCookie() throws NoSuchAlgorithmException, IOException {
         return "%3D" + hash(this.domainName) + '.' + hash(getVisitorId()) + ".999.999.999.1%3B";
     }
 
     /**
      * @return a random visitorId
+     * @throws NoSuchAlgorithmException
+     * @throws IOException
      */
-    private String generateVisitorId() {
+    private String generateVisitorId() throws NoSuchAlgorithmException, IOException {
         String message = this.userAgent + getRandomNumber() + UUID.randomUUID().toString();
-        MessageDigest m = null;
-        try {
-            m = MessageDigest.getInstance("MD5");
-            m.update(message.getBytes("UTF-8"), 0, message.length());
-        } catch (UnsupportedEncodingException e) {
-            this.logger.error(e.getMessage(), e);
-        } catch (NoSuchAlgorithmException e) {
-            this.logger.error(e.getMessage(), e);
-        }
+        MessageDigest m = MessageDigest.getInstance("MD5");
+        m.update(message.getBytes("UTF-8"), 0, message.length());
         byte[] sum = m.digest();
         BigInteger messageAsNumber = new BigInteger(1, sum);
         String md5String = messageAsNumber.toString(16);
@@ -176,16 +159,12 @@ public class GoogleTracker {
         return "0x" + md5String.substring(0, 16);
     }
 
-    private String getLocalHostIP() {
+    private String getLocalHostIP() throws IOException {
         if (null != this.localHostIp) {
             return this.localHostIp;
         }
-        try {
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            this.localHostIp = inetAddress.getHostAddress();
-        } catch (UnknownHostException e) {
-            this.logger.error(e.getMessage(), e);
-        }
+        InetAddress inetAddress = InetAddress.getLocalHost();
+        this.localHostIp = inetAddress.getHostAddress();
         return this.localHostIp;
     }
 
@@ -196,14 +175,14 @@ public class GoogleTracker {
         return Integer.toString((int) (Math.random() * 0x7fffffff));
     }
 
-    private String getUtmaCookie() {
+    private String getUtmaCookie() throws NoSuchAlgorithmException, IOException {
         if (null == this.utmaCookie) {
             this.utmaCookie = generateUtmaCookie();
         }
         return this.utmaCookie;
     }
 
-    private String getVisitorId() {
+    private String getVisitorId() throws NoSuchAlgorithmException, IOException {
         if (null == this.visitorId) {
             this.visitorId = generateVisitorId();
         }
@@ -251,19 +230,14 @@ public class GoogleTracker {
      * Make a tracking request to Google Analytics from this server.
      * 
      * @param utmUrl
+     * @throws IOException
      */
-    private void sendRequestToGoogleAnalytics(final String utmUrl) {
-        try {
-            URL url = new URL(utmUrl);
-            URLConnection connection = url.openConnection();
-            connection.setUseCaches(false);
-            connection.addRequestProperty("User-Agent", this.userAgent);
-            connection.addRequestProperty("Accept-Language", "en-us,en;q=0.5");
-            connection.getContent();
-        } catch (MalformedURLException e) {
-            this.logger.error(e.getMessage(), e);
-        } catch (IOException e) {
-            this.logger.error(e.getMessage(), e);
-        }
+    private void sendRequestToGoogleAnalytics(final String utmUrl) throws IOException {
+        URL url = new URL(utmUrl);
+        URLConnection connection = url.openConnection();
+        connection.setUseCaches(false);
+        connection.addRequestProperty("User-Agent", this.userAgent);
+        connection.addRequestProperty("Accept-Language", "en-us,en;q=0.5");
+        connection.getContent();
     }
 }

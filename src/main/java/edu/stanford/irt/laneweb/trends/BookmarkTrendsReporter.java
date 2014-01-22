@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 import org.slf4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 
 public class BookmarkTrendsReporter {
@@ -17,16 +18,20 @@ public class BookmarkTrendsReporter {
     private String localHostname;
 
     private final Logger log;
-    
-    public BookmarkTrendsReporter(Logger log) {
+
+    public BookmarkTrendsReporter(final Logger log) {
         this.log = log;
     }
 
     // daily at 1:16AM
     @Scheduled(cron = "0 16 01 * * *")
     public void reportCount() {
-        this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", getLocalHostname(), "dailyUserCount",
-                this.bookmarkDAO.getRowCount());
+        try {
+            this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", getLocalHostname(), "dailyUserCount",
+                    this.bookmarkDAO.getRowCount());
+        } catch (UnknownHostException | LanewebException e) {
+            this.log.error(e.getMessage(), e);
+        }
     }
 
     /**
@@ -45,16 +50,12 @@ public class BookmarkTrendsReporter {
         this.googleTracker = googleTracker;
     }
 
-    private String getLocalHostname() {
+    private String getLocalHostname() throws UnknownHostException {
         if (null != this.localHostname) {
             return this.localHostname;
         }
-        try {
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            this.localHostname = inetAddress.getHostName();
-        } catch (UnknownHostException e) {
-            this.log.error(e.getMessage(), e);
-        }
+        InetAddress inetAddress = InetAddress.getLocalHost();
+        this.localHostname = inetAddress.getHostName();
         return this.localHostname;
     }
 }
