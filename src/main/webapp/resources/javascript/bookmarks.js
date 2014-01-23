@@ -511,7 +511,7 @@
             _bookmarkAdded : function(event) {
                 var url = event.bookmark.getUrl();
                 if (PROXY_LINKS && url.match(/http[s]?:/)) {
-                    url = BASE_PATH + "/secure/apps/proxy/credential?url=" + url;
+                    url = BASE_PATH + "/apps/proxy/credential?url=" + url;
                 }
                 this.get("srcNode").prepend("<li><a href='" +url + "'>" + event.bookmark.getLabel() + "</a></li>");
                 this.syncUI();
