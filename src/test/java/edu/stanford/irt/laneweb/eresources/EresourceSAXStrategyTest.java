@@ -49,6 +49,8 @@ public class EresourceSAXStrategyTest {
         expect(this.eresource.getRecordType()).andReturn(Resource.RECORD_TYPE);
         expect(this.eresource.getTitle()).andReturn(Resource.TITLE);
         expect(this.eresource.getDescription()).andReturn("");
+        expect(this.eresource.getPublicationAuthorsText()).andReturn("");
+        expect(this.eresource.getPublicationText()).andReturn("");
         expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
 
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
