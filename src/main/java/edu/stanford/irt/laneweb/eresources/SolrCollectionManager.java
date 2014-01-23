@@ -60,6 +60,8 @@ public class SolrCollectionManager implements CollectionManager {
             String recordType = null;
             int score = 0;
             String title = null;
+            String publicationAuthorsText = null;
+            String publicationText = null;
             int year = 0;
             if (doc.containsKey("description")) {
                 description = (String) doc.getFieldValue("description");
@@ -79,11 +81,20 @@ public class SolrCollectionManager implements CollectionManager {
             if (doc.containsKey("year")) {
                 year = (int) doc.getFieldValue("year");
             }
+            if (doc.containsKey("title")) {
+                title = (String) doc.getFieldValue("title");
+            }
+            if (doc.containsKey("publicationText")) {
+                publicationText = (String) doc.getFieldValue("publicationText");
+            }
+            if (doc.containsKey("publicationAuthorsText")) {
+                publicationAuthorsText = (String) doc.getFieldValue("publicationAuthorsText");
+            }
             if (doc.containsKey("score")) {
                 score = this.scoreStrategy.computeScore(q, title, year, (Float) doc.getFieldValue("score"), maxScore);
             }
             Eresource eresource = new Eresource(description, docId, Integer.parseInt(recordId), recordType, score,
-                    title);
+                    title, publicationAuthorsText, publicationText);
             List<LinkedHashMap<String, Object>> versionData;
             try {
                 versionData = this.mapper.readValue((String) doc.getFieldValue("versionsJson"), List.class);

@@ -43,7 +43,7 @@ public abstract class AbstractSuggestCollectionManager extends AbstractCollectio
             if (rowEresourceId != currentEresourceId || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
                 currentEresourceId = rowEresourceId;
-                eresource = new Eresource(null, currentEresourceId, 0, null, 0, currentTitle);
+                eresource = new Eresource(null, currentEresourceId, 0, null, 0, currentTitle, null, null);
                 suggestions.add(eresource);
             }
         }

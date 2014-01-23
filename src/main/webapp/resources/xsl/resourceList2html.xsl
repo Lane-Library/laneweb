@@ -154,6 +154,9 @@
             </xsl:if>
             <xsl:apply-templates select="s:link"/>
             <xsl:apply-templates select="s:recordType"/>
+            <xsl:apply-templates select="s:pub-author"/>
+            <xsl:apply-templates select="s:pub-text"/>
+			<xsl:apply-templates select="s:recordId"/>
             <xsl:apply-templates select="s:description"/>
         </li>
     </xsl:template>
@@ -233,6 +236,17 @@
                 <xsl:value-of select="$pmid"/>
             </a>
         </span>
+    </xsl:template>
+
+    <xsl:template match="s:recordId">
+        <xsl:if test="../s:recordType = 'pubmed'">
+	        <span class="pmid">
+	            <xsl:text> PMID: </xsl:text>
+	            <a href="{concat($pubmed-baseUrl,.,'?otool=stanford')}">
+	                <xsl:value-of select="."/>
+	            </a>
+	        </span>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="s:keyword">

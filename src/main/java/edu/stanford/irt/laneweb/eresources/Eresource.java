@@ -12,6 +12,10 @@ public class Eresource {
 
     private Collection<Link> links = new LinkedList<Link>();
 
+    private String publicationAuthorsText;
+
+    private String publicationText;
+
     private int recordId;
 
     private String recordType;
@@ -21,13 +25,19 @@ public class Eresource {
     private String title;
 
     public Eresource(final String description, final int id, final int recordId, final String recordType,
-            final int score, final String title) {
+            final int score, final String title, final String publicationAuthorsText, final String publicationText) {
         this.description = description;
         this.id = id;
         this.recordId = recordId;
         this.recordType = recordType;
         this.score = score;
         this.title = title;
+        this.publicationAuthorsText = publicationAuthorsText;
+        this.publicationText = publicationText;
+    }
+
+    void addLink(final Link link) {
+        this.links.add(link);
     }
 
     public String getDescription() {
@@ -40,6 +50,14 @@ public class Eresource {
 
     public Collection<Link> getLinks() {
         return Collections.unmodifiableCollection(this.links);
+    }
+
+    public String getPublicationAuthorsText() {
+        return this.publicationAuthorsText;
+    }
+
+    public String getPublicationText() {
+        return this.publicationText;
     }
 
     public int getRecordId() {
@@ -62,9 +80,5 @@ public class Eresource {
     public String toString() {
         return new StringBuilder("title:").append(this.title).append(" score:").append(this.score).append(" updated:")
                 .append(" versions:").append(this.links).toString();
-    }
-
-    void addLink(final Link link) {
-        this.links.add(link);
     }
 }
