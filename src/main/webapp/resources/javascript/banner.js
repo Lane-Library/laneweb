@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
     autoNext : function() {

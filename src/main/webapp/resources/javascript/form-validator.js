@@ -12,7 +12,7 @@
         }));
     }
 
-//FormValidator class    
+//FormValidator class
     var FormValidator = function(form) {
         var i, node, validator, inputFields,
             nodes = form.all("input[title='required']"),
@@ -60,7 +60,7 @@
         	}
         };
     };
-    
+
     Y.namespace("lane");
     Y.lane.FormValidator = FormValidator;
 

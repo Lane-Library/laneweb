@@ -1,6 +1,6 @@
 /**
  * append "q" querystring from PICO form elements
- * 
+ *
  * @param form
  * @returns {String}
  */
@@ -22,7 +22,7 @@ $.LANE.getPicoQuery = function(form){
 
 /**
  * verify that "qSearch" data present before submitting form
- * 
+ *
  * @param event
  * @returns {Boolean}
  */
@@ -51,7 +51,7 @@ $.LANE.validateForm = function(event){
 };
 
 /**
- * 
+ *
  * @param event
  * @returns
  */
@@ -85,7 +85,7 @@ $("#_home").live("pageinit", function() {
         }
         window.scrollTo(0, 46);
     });
-    
+
     // attach vclick listener (doesn't have 700 ms delay)
     // set LI background to red to avoid flicker
     $("#searchTabs li").bind('vclick',function(e) {
@@ -93,14 +93,14 @@ $("#_home").live("pageinit", function() {
         $("#searchTabs li").removeClass("selected");
         $(this).addClass("selected");
         // shameless agent detection ... remove if find solution for vclick on android (below)
-        if(navigator.userAgent.match(/(iPhone|iP.d)/)){ 
+        if(navigator.userAgent.match(/(iPhone|iP.d)/)){
             e.preventDefault();
             $(this).trigger("click");
         }
     });
-    
+
     // ideally, only use vclick handler, but can't get android to NOT set input focus
-    /* 
+    /*
     $("#searchTabs li").bind('vclick',function(e) {
         e.preventDefault();
         $("li").bind('click', function(e){
@@ -178,5 +178,5 @@ $("form").live("focus", function() {
             // scroll down to the top of this field
             window.scrollTo(0, $(this).offset().top - 6);
         });
-    });    
+    });
 });

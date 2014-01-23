@@ -1,6 +1,6 @@
 (function() {
-    
-    
+
+
 
 
         var bassettContent = Y.one('#bassettContent'),

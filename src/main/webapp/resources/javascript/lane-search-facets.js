@@ -30,10 +30,10 @@
             }
         };
     }();
-    
+
     //TODO: remove the following line when no longer need global reference
     Y.lane.SearchFacets = SearchFacets;
-    
+
     Result = function(type, source, facet, container){
         this._type = type;
         this._source = source;
@@ -82,10 +82,10 @@
             if (this._state == 'initialized') {
                 this._state = 'searching';
                 Y.io(this._url, this._callback);
-            } else 
+            } else
                 if (this._state == 'searched') {
                     this.show();
-                } else 
+                } else
                     if (this._state == 'searching') {
                         alert('search in progress');
                     }
@@ -141,7 +141,7 @@
         SearchFacets = Lane.SearchFacets;
     Lane.SearchHistory = function(){
         if(searchFacets){
-            history = new Y.HistoryHash();        
+            history = new Y.HistoryHash();
             if(history.get('facet')){
                 SearchFacets.setActiveFacet(history.get('facet'));
             }
@@ -153,17 +153,17 @@
             });
         }
         return history;
-        
+
     }();
-        
+
 })();
 
 /*
  * Display PRINT MATERIALS (catalog-lois) filter if print results are only results present
  */
 (function() {
-    var printId = 'catalog-lois', 
-    noHits = Y.one('#noHitsText'), 
+    var printId = 'catalog-lois',
+    noHits = Y.one('#noHitsText'),
     printFacet = Y.one('#'+printId+'Facet'),
     Lane = Y.lane;
     if(noHits && printFacet && !printFacet.hasClass('inactiveFacet')){

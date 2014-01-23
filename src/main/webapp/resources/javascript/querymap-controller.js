@@ -1,5 +1,5 @@
 (function() {
-	
+
 	var model = Y.lane.Model,
 	    query = model.get(model.QUERY),
 	    encodedQuery = model.get(model.URL_ENCODED_QUERY),

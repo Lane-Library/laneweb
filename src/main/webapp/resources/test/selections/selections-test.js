@@ -55,13 +55,13 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
             this.testAllVisible();
         }
     });
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
-    
+
+
     Y.Test.Runner.add(selectionsTestCase);
     Y.Test.Runner.masterSuite.name = "selections-test.js";
     Y.Test.Runner.run();

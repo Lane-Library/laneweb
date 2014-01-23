@@ -16,7 +16,7 @@
                 for (y = 0; y < searchables.length; y++) {
                     add = true;
                     for (i = 0; i < uberEngines.length; i++) {
-                        // don't add if: 
+                        // don't add if:
                         // - engine is uber and uber already on url
                         // - engine already on url
                         if (searchables[y].match(uberEngines[i]) && searchUrl.match(uberEngines[i])) {
@@ -52,7 +52,7 @@
                     on: {
                         success: function(id, o) {
                             var response = Y.JSON.parse(o.responseText), results = response.resources, needMore = false, i, y, result, updateables, resultSpan, sleepingTime, remainingTime;
-                            
+
                             for (i = 0; i < searchables.length; i++) {
                                 updateables = Y.all('#' + searchables[i]); // search content may have more than one element with same ID
                                 result = results[searchables[i]];
@@ -78,7 +78,7 @@
                                             result.name = (updateables.item(y).get('innerHTML')) ? updateables.item(y).get('innerHTML') : '';
                                             updateables.item(y).setAttribute('href', result.url);
                                             // fix for IE: @ in text of element will cause element text to be replaced by href value
-                                            // relies on result.name being set before url is changed 
+                                            // relies on result.name being set before url is changed
                                             // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
                                             if (Y.UA.ie) {
                                                 updateables.item(y).set('innerHTML',result.name);
@@ -111,7 +111,7 @@
             }// end getResultCounts
         };
     }();
-    
+
     // check for presence of search term and metasearch classNames
     if (Y.all('.metasearch').size() > 0 && query) {
         metasearch.initialize();

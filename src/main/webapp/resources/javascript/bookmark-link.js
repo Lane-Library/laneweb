@@ -5,14 +5,14 @@
         Model = Lane.Model;
 
     if (!Model.get(Model.DISASTER_MODE)) {
-        
+
         //don't create BookmarkLink if there is a class=no-bookmarking
         if (!Y.one(".no-bookmarking")) {
 
         /**
          * A link that appears when mousing over bookmarkable links and adds that link to bookmarks
          * when clicked.
-         * 
+         *
          * @class BookmarksLink
          * @uses Base
          * @uses LinkPlugin
@@ -47,7 +47,7 @@
         };
 
         Y.extend(BookmarkLink, Y.Base, {
-            
+
             /**
              * Sets up event handlers and creates the timer attribute.
              * @method initializer
@@ -69,7 +69,7 @@
                     bookmarks.after("addSync", this._handleSyncEvent, this);
                 }
             },
-            
+
             /**
              * Responds to bookmarks:addSync event, changes the status to SUCCESSFUL
              * @method _handleSyncEvent
@@ -79,7 +79,7 @@
             _handleSyncEvent : function(event) {
                 this.set("status", BookmarkLink.SUCCESSFUL);
             },
-            
+
             /**
              * Responds to mouseout event on the BookmarkLink, changes the status to TIMING
              * @method _handleBookmarkMouseOut
@@ -89,7 +89,7 @@
             _handleBookmarkMouseout : function(event) {
                 this.set("status", BookmarkLink.TIMING);
             },
-            
+
             /**
              * Responds to mouseover events on the BookmarkLink, changes the status to ACTIVE
              * @method _handleBookmarkMouseover
@@ -99,7 +99,7 @@
             _handleBookmarkMouseover : function(event) {
                 this.set("status", BookmarkLink.ACTIVE);
             },
-            
+
             /**
              * Responds to BookmarkLink clicks.  Adds the LinkPlugin to the target link and uses
              * that to determine the url (translates proxy links to the base url).  Changes the
@@ -127,7 +127,7 @@
                     Y.lane.BookmarkLogin.addBookmark(label, url);
                 }
             },
-            
+
             /**
              * Handle clicks on the bookmarkSearch link.
              * @method _handleBookmarkSearchClick
@@ -157,7 +157,7 @@
                     Y.lane.BookmarkLogin.addBookmark(label, url);
                 }
             },
-            
+
             /**
              * Responds to mouseout on target anchors, checks if they are bookmarkable, changes the status to TIMING.
              * @method _handleTargetMouseout
@@ -169,7 +169,7 @@
                     this.set("status", BookmarkLink.TIMING);
                 }
             },
-            
+
             /**
              * Responds to mouseover on anchors, checks if they are bookmarkable, changes the status to READY.
              * @method _handleTargetMouseover
@@ -182,7 +182,7 @@
                     this.set("status", BookmarkLink.READY);
                 }
             },
-            
+
             /**
              * Determine if a link has already been bookmarked. (case 71323)
              * @method _isAlreadyBookmarked
@@ -211,7 +211,7 @@
                 }
                 return false;
             },
-            
+
             /**
              * Determine if a link is bookmarkable.  For now true if its display property is inline and
              * it does not contain an img element.  Added #topResources links, case 71323.  Added
@@ -233,7 +233,7 @@
                 }
                 return bookmarkable;
             },
-            
+
             /**
              * Changes the status to OFF
              * @method _turnOff
@@ -242,7 +242,7 @@
             _turnOff : function() {
                 this.set("status", BookmarkLink.OFF);
             },
-            
+
             /**
              * Cancels the timer and sets it to null.
              * @method _clearTimer
@@ -254,7 +254,7 @@
                     this._timer = null;
                 }
             },
-            
+
             /**
              * Respond to statusChange events, adds and removes the link and changes the link's class,
              * and starts the timer to turn off the link when appropriate.
@@ -270,7 +270,7 @@
                 node.purge(false);
                 switch(event.newVal) {
                 //OFF: not visible
-                case BookmarkLink.OFF : 
+                case BookmarkLink.OFF :
                     node.remove(false);
                     node.removeClass("active");
                     node.removeClass("bookmarking");
@@ -281,18 +281,18 @@
                     target.insert(node, "after");
                     break;
                 //ACTIVE: enabled (mouseover)
-                case BookmarkLink.ACTIVE : 
+                case BookmarkLink.ACTIVE :
                     node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.on("click", this._handleClick, this);
                     node.addClass("active");
                     break;
                 //BOOKMARKING: clicked and waiting for server sync message
-                case BookmarkLink.BOOKMARKING : 
+                case BookmarkLink.BOOKMARKING :
                     node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.replaceClass("active", "bookmarking");
                     break;
                 //SUCCESSFUL: server sync was successful
-                case BookmarkLink.SUCCESSFUL : 
+                case BookmarkLink.SUCCESSFUL :
                     node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.replaceClass("bookmarking", "successful");
                     break;
@@ -318,7 +318,7 @@
 
         //create a BookmarkLink and save reference
         Lane.BookmarkLink = new BookmarkLink();
-            
+
         }
     }
 })();

@@ -102,19 +102,19 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "widget-uievents",
         "yui-throttle",
         function(Y) {
-    
+
     //keep a global reference of this YUI object
     window.Y = Y;
-    
+
     //create the lane namespace
     var lane = Y.namespace("lane");
-    
+
     Y.augment(lane, Y.EventTarget, null, null, {
     	prefix : "lane",
     	emitFacade : true,
     	broadcast : 1
     });
-    
+
     var i, laneJavascript = [
         "location.js",
         "model.js",
@@ -157,14 +157,14 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "menu-delay.js",
         "resource-list-pagination.js"
     ];
-    
+
     //Model doesn't exist yet, get basePath by hand:
     var basePath = "";
-    
+
     if (window.model) {
     	basePath = window.model["base-path"] || basePath;
     }
-    
+
     //load each javascript file separately
     for (i = 0; i < laneJavascript.length; i++) {
         Y.Get.js(basePath + "/resources/javascript/" + laneJavascript[i], function (err) {
@@ -174,5 +174,5 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
             }
         });
     }
-    
+
 });

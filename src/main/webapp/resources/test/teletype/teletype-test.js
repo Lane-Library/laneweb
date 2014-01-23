@@ -3,23 +3,23 @@
  */
 Y.applyConfig({fetchCSS:true});
 Y.use('node-event-simulate', 'console', 'test', function(Y){
-    
+
     Y.lane.Search = {};
 
     var teletypeTestCase = new Y.Test.Case({
         name: 'Lane Teletype Test Case',
-        
+
         searchTerms: Y.one("#searchTerms"),
         teletypeInput: Y.one("#teletypeInput"),
          clinicalP: Y.one("#clinicalP"),
          picoTeletypeInput: Y.one("#picoTeletypeInput"),
          submitted: false,
-         
+
          submit: function() {
              teletypeTestCase.submitted = true;
          },
-    
-        
+
+
         setUp: function() {
             this.searchTerms.set("value","");
             this.teletypeInput.set("value","");
@@ -28,19 +28,19 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
             this.submitted = false;
             Y.lane.Search.submitSearch = this.submit;
         },
-        
+
         testTeletypeSearchTerms: function() {
             this.teletypeInput.set("value","value");
             this.teletypeInput.simulate("keyup");
             Y.Assert.areEqual("value", this.searchTerms.get("value"));
         },
-        
+
         testTeletypePico: function() {
             this.picoTeletypeInput.set("value", "value");
             this.picoTeletypeInput.simulate("keyup");
             Y.Assert.areEqual("value", this.clinicalP.get("value"));
         },
-        
+
         testBlurTeletypeSearchTerms: function() {
             this.teletypeInput.set("value","value");
             this.teletypeInput.simulate("blur");
@@ -49,7 +49,7 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
                 Y.Assert.areEqual("value", this.searchTerms.get("value"));
             }
         },
-        
+
         testBlurTeletypePico: function() {
             this.picoTeletypeInput.set("value", "value");
             this.picoTeletypeInput.simulate("blur");
@@ -58,18 +58,18 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
                 Y.Assert.areEqual("value", this.clinicalP.get("value"));
             }
         },
-        
+
         testSubmit: function() {
             Y.one("form").simulate("submit");
             Y.Assert.isTrue(this.submitted);
         },
-        
+
         testInputValueEqualsTitle: function() {
             this.teletypeInput.set("value", this.teletypeInput.get("title"));
             this.teletypeInput.simulate("keyup");
             Y.Assert.areEqual(this.searchTerms.get("title"), this.searchTerms.get("value"));
         },
-        
+
         testSubmitThrowsError: function() {
             var alert = window.alert;
             var message = "";
@@ -85,12 +85,12 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
         }
     });
 
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
+
     Y.Test.Runner.add(teletypeTestCase);
     Y.Test.Runner.masterSuite.name = "teletype-test.js";
     Y.Test.Runner.run();

@@ -7,10 +7,10 @@
     SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
     DEFAULT_LIMIT = "mesh-di",
     SELECT = "select",
-    
+
     /**
      * A class that provides an autocomplete widget for inputs.
-     * 
+     *
      * @class Suggest
      * @uses EventTarget
      * @constructor
@@ -22,7 +22,7 @@
             minQueryLength: limit === "history" ? -1 : 3,
             source: SOURCE_BASE + (limit || DEFAULT_LIMIT)
         });
-        
+
         /**
          * @event select
          * @description fired when a suggestion is selected
@@ -31,32 +31,32 @@
             broadcast : 1,
             emitFacade : true
         });
-        
+
         //save the input
         this._input = input;
-        
+
         //save the autocomplete object
         this._ac = input.ac;
-        
+
         //hoveredItemChange is fired on mouseover events in the suggestion list
         this._ac.after("hoveredItemChange", this._handleHoveredItemChange, this);
-        
+
         //select is fired on clicks or return pressed in suggestion list
         this._ac.after(SELECT, this._handleSelect, this);
-        
+
         //pico inputs don't have width when the Suggest is constructed
         if (!this._ac.get("width")) {
             this._visibleHandle = this._ac.on("visibleChange", this._handleVisibleChange, this);
         }
-        
+
         // disable suggestion list after lane search submitted
         Lane.on("search:submit", function(){
             input.ac.destroy();
         });
     };
-    
+
     Suggest.prototype = {
-            
+
         /**
          * Sets the active item to the mouseovered one.
          * @method _handleHoveredItemChanage
@@ -68,7 +68,7 @@
                 this._ac.set("activeItem", event.newVal);
             }
         },
-        
+
         /**
          * Fires the select event when an autocomplete item is selected
          * @method _handleSelect
@@ -81,7 +81,7 @@
                 input : this._input
             });
         },
-        
+
         /**
          * Set the autocomplete width if necessary. Pico inputs don't have width
          * when the Suggest is constructed.
@@ -96,7 +96,7 @@
                 this._visibleHandle = null;
             }
         },
-        
+
         /**
          * Set the limit parameter for the request.  If it is history disable ac by setting
          * minQueryLength to -1, otherwise setting it to the default.
@@ -108,13 +108,13 @@
             this._ac.set("minQueryLength", limit === "history" ? -1 : 3);
         }
     };
-    
+
     //Add EventTarget attributes to the Suggest prototype
     Y.augment(Suggest, Y.EventTarget, null, null, {
         emitFacade : true,
         prefix     : 'suggest'
     });
-    
+
     //make the Suggest constructor globally accessible
     Lane.Suggest = Suggest;
 })();

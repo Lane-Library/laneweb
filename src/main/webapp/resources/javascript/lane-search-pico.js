@@ -27,7 +27,7 @@
                 nav.removeClass('clinical');
                 picoIsOn = false;
             }
-            
+
         },
         PICO = '<fieldset id="picoFields">' +
                '<input name="p" id="clinicalP" type="text" title="patient condition"/>' +

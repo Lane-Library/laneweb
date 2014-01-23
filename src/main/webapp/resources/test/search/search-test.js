@@ -4,17 +4,17 @@
 //Y.applyConfig({fetchCSS:true});
 Y.use('node-event-simulate','console','test', function(T) {
 
-    
+
     var searchTestCase = new T.Test.Case({
-        
+
         name: 'Lane Search Test Case',
         search: Y.lane.Search,
-        
+
         searchTermsInput: T.one('#searchTerms'),
         searchIndicator: T.one('#searchIndicator'),
         searchSource: T.one('#searchSource'),
         handle : null,
-        
+
         setUp: function() {
             this.searchTermsInput.set('value', '');
             this.searchTermsInput.set('title', '');
@@ -118,12 +118,12 @@ Y.use('node-event-simulate','console','test', function(T) {
         	T.Assert.isTrue(reset);
         }
     });
-    
+
     T.one('body').addClass('yui3-skin-sam');
     new T.Console({
-        newestOnTop: false                   
+        newestOnTop: false
     }).render('#log');
-    
+
     T.Test.Runner.add(searchTestCase);
     T.Test.Runner.masterSuite.name = "search-test.js";
     T.Test.Runner.run();

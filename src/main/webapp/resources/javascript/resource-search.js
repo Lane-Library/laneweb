@@ -1,12 +1,12 @@
 (function() {
-    
+
     Y.namespace("lane");
-    
+
     var lane = Y.lane,
         model = lane.Model,
         basePath = model.get(model.BASE_PATH) || "",
         SEARCH_INTERVAL = 2000,
-    
+
     ResourceSearch = {
 
 	    search: function(query, resources) {
@@ -29,9 +29,9 @@
                 context : this
             });
         }
-    
+
     },
-    
+
     ResourceResultView = function(id, fn) {
     	this._handle = ResourceSearch.on("update", function(result) {
     		var resourceResult = result.resources[id];
@@ -43,9 +43,9 @@
     };
 
     Y.augment(ResourceSearch, Y.EventTarget);
-    
+
     lane.ResourceSearch = ResourceSearch;
-    
+
     lane.ResourceResultView = ResourceResultView;
-	
+
 })();

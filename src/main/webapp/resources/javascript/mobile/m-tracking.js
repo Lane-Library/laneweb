@@ -26,26 +26,26 @@ $.ajax({
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
- 
+
 (function() {
     if (typeof ($.LANE.tracking) === "undefined") {
         $.LANE.tracking = {};
     }
-    
+
     $.LANE.tracking.decode = function(value) {
         if (decodeURIComponent) {
             return decodeURIComponent(value);
         }
         return unescape(value);
     };
-    
+
     $.LANE.tracking.encode = function(value) {
         if (encodeURIComponent) {
             return encodeURIComponent(value);
         }
         return escape(value);
     };
-    
+
     $.LANE.tracking.track = function(e) {
         var node = e.srcElement || e.target, basePath, label;
         // find parent A for IMG and STRONG nodes if possible
@@ -81,7 +81,7 @@ $.ajax({
             _gaq.push(['_trackEvent', "suggestSelect", e.target.id, $.LANE.tracking.decode(node.textContent)]);
         }
     };
-    
+
     $.LANE.tracking.isExternal = function(node) {
         if(node.nodeName != 'A'){
             return false;
@@ -91,7 +91,7 @@ $.ajax({
         }
         return false;
     };
-    
+
     $.LANE.tracking.getTrackingTitle = function(node) {
         // if there is a title attribute, use that.
         var title = node.title, img, i = 0;

@@ -26,7 +26,7 @@
                             var response = Y.JSON.parse(o.responseText),
                                 hitLink, hitLinkParent, hits, sleepingTime,
                                 remainingTime, searchStatus, engineStatus, facetId;
-                            
+
                             for (j = 0; j < facets.size(); j++) {
                                 hits = null;
                                 hitLink = facets.item(j).one('a');

@@ -1,5 +1,5 @@
 (function() {
-    
+
     /**
      * A class that handles mouseover and mouseleave events on search and browse
      * resources that have abstracts or descriptions.
@@ -7,16 +7,16 @@
      * @constructor
      */
     var HoverController = function() {
-        
+
         //timer for activating hover state
         var timer = null,
 
             //the mouseleave handle so it can be detached when done
             mouseLeaveHandler = null,
-            
+
             // delay for all but iPhone/p*d
             timeout = Y.UA.ios ? 0 : 1000,
-            
+
             /**
              * Turn the hover state off by removing the "active" class.  Also calls
              * reset to cancel the timer and detach the mouseleave event handler.
@@ -27,7 +27,7 @@
                 this.removeClass("active");
                 reset();
             },
-            
+
             /**
              * Turn the hover state on by adding the "active" class.
              * @method activate
@@ -36,7 +36,7 @@
             activate = function() {
                 this.addClass("active");
             },
-            
+
             /**
              * Detach the mouseleave event handler and cancel the timer.
              * @method reset
@@ -54,7 +54,7 @@
             };
 
         return {
-            
+
             /**
              * Initiates control of the hover state of a node.  It first removes the class "hvrTrig"
              * to prevent immediate css based hover state and adds the class "hoverTrigger".  It
@@ -71,15 +71,15 @@
             }
         };
     },
-    
+
     //create a HoverController
     hc = new HoverController();
-    
+
     //delegate mouseenter events on class "hvrTrig" and "hoverTrigger"
     if (Y.one("#searchResults")) {
         Y.delegate("mouseenter", function(event) {
             hc.setTarget(event.currentTarget);
         }, "#searchResults", ".hvrTrig, .hoverTrigger");
     }
-    
+
 })();

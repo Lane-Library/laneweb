@@ -12,8 +12,8 @@ if (typeof ($.LANE) === "undefined") {
 
 /**
  * scroll pages to hide header and/or search form
- * only scrolls when jqm hasn't already set scroll from previous page  
- * 
+ * only scrolls when jqm hasn't already set scroll from previous page
+ *
  * @param activePage
  */
 $.LANE.scrollPage = function(activePage){

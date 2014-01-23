@@ -1,16 +1,16 @@
 (function() {
-    
+
     function Feedback(config) {
         Feedback.superclass.constructor.apply(this, arguments);
     }
-    
+
     Feedback.NAME = "feedback";
-    
+
     Feedback.HTML_PARSER = {
             menu : ["#feedbackMenu > li"],
             items : ["#feedbackItems > li"]
     };
-    
+
     Feedback.ATTRS = {
         activeItem : {
             value : 0
@@ -33,7 +33,7 @@
         	value : null
         }
     };
-    
+
     Y.extend(Feedback, Y.Widget, {
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
@@ -154,9 +154,9 @@
         	}
         }
     });
-    
+
     Y.lane.Feedback = Feedback;
-    
+
     Y.lane.Lightbox.on("contentChanged", function(event) {
         if (Y.one("#feedback")) {
             var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
@@ -183,5 +183,5 @@
 //            }
         }
     });
-    
+
 })();

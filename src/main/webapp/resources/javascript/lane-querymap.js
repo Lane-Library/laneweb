@@ -1,7 +1,7 @@
 //TODO: this needs some cleaning up
 //check if there is a query
 (function() {
-	
+
 	var Model = Y.lane.Model,
 	    query = Model.get(Model.QUERY),
 	    basePath = Model.get(Model.BASE_PATH) || "",

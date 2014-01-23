@@ -1,14 +1,14 @@
 //YUI.add("lane-model", function(Y){
 (function() {
-    
+
     Y.namespace("lane");
-    
+
     var Lane = Y.lane,
-    
+
     Model = function() {
         Model.superclass.constructor.apply(this, arguments);
     };
-    
+
     Y.extend(Model, Y.Base, {
     	//keep this in sync with edu.stanford.irt.laneweb.model.Model
     	AUTH : "auth",
@@ -23,11 +23,11 @@
     }, {
     	NAME : "model"
     });
-    
+
     Lane.Model = new Model();
-    
+
     Lane.Model.setAttrs(window.model || {});
-    
+
 })();
 //},"", {
 //    requires: ["base"]

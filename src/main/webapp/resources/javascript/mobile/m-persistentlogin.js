@@ -3,7 +3,7 @@
 
 var redirectUrl,
 	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference';
-	
+
 
 $.LANE.popupWindow = function(url){
 	$.mobile.changePage(url, {
@@ -41,11 +41,11 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 
 //when a click is coming from a external resource
 $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", function(event) {
-	var link = event.currentTarget, 
+	var link = event.currentTarget,
 	now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
 	if (model['disaster-mode'] != true && 'denied' !== statusCookie && (!model["isActiveSunetID"] || statusCookie < now.getTime())){
 		redirectUrl = encodeURIComponent(link.href);
-		if(model["isActiveSunetID"]){ 
+		if(model["isActiveSunetID"]){
 			$.LANE.popupWindow(model['base-path'] + '/m/plain/persistentlogin-extention.html');
 		}
 		else{
@@ -99,7 +99,7 @@ $.LANE.toggleLogin = function(){
             $(this).attr('href',model['base-path'] + '/secure/mobile-login.html');
             $(this).attr('data-ajax','false');
         });
-    }	
+    }
 };
 
 $('.persistent-header').live('click', function(e) {
@@ -113,7 +113,7 @@ $(this).bind("pageinit", function() {
 });
 
 var setLink = function(event) {
-	var node = event.target, url = model['base-path'] + '/'; 
+	var node = event.target, url = model['base-path'] + '/';
 	if (node.nodeName == 'SPAN') {
 		node = node.parentNode;
 	}

@@ -41,7 +41,7 @@
             };
 
             // Publish events introduced by Tooltip. Note the triggerEnter event is preventable,
-            // with the default behavior defined in the _defTriggerEnterFn method 
+            // with the default behavior defined in the _defTriggerEnterFn method
             this.publish("triggerEnter", {defaultFn: this._defTriggerEnterFn, preventable:true});
             this.publish("triggerLeave", {preventable:false});
         },
@@ -95,7 +95,7 @@
         },
 
         /*
-         * Default attribute change listener for 
+         * Default attribute change listener for
          * the triggerNodes attribute
          */
         _afterSetNodes : function(e) {
@@ -103,7 +103,7 @@
         },
 
         /*
-         * Default attribute change listener for 
+         * Default attribute change listener for
          * the delegate attribute
          */
         _afterSetDelegate : function(e) {
@@ -126,7 +126,7 @@
         },
 
         /*
-         * Attaches the default mouseover DOM listener to the 
+         * Attaches the default mouseover DOM listener to the
          * current delegate node
          */
         _bindDelegate : function() {
@@ -141,7 +141,7 @@
 
         /*
          * Default mouse enter DOM event listener.
-         * 
+         *
          * Delegates to the _enterTrigger method,
          * if the mouseover enters a trigger node.
          */
@@ -154,7 +154,7 @@
 
         /*
          * Default mouse leave DOM event listener
-         * 
+         *
          * Delegates to _leaveTrigger if the mouse
          * leaves the current trigger node
          */
@@ -172,7 +172,7 @@
         /*
          * Default handler invoked when the mouse enters
          * a trigger node. Fires the triggerEnter
-         * event which can be prevented by listeners to 
+         * event which can be prevented by listeners to
          * show the tooltip from being displayed.
          */
         _enterTrigger : function(node, x, y) {
@@ -210,7 +210,7 @@
 
         /*
          * Default handler invoked for mousemove events
-         * on the trigger node. Stores the current mouse 
+         * on the trigger node. Stores the current mouse
          * x, y positions
          */
         _overTrigger : function(x, y) {
@@ -245,9 +245,9 @@
         /*
          * Set the rendered content of the tooltip for the current
          * trigger, based on (in order of precedence):
-         * 
+         *
          * a). The string/node content attribute value
-         * b). From the content lookup map if it is set, or 
+         * b). From the content lookup map if it is set, or
          * c). From the title attribute if set.
          */
         _setTriggerContent : function(node) {
@@ -259,8 +259,8 @@
         },
 
         /*
-         * Set the currently bound trigger node information, clearing 
-         * out the title attribute if set and setting up mousemove/out 
+         * Set the currently bound trigger node information, clearing
+         * out the title attribute if set and setting up mousemove/out
          * listeners.
          */
         _setCurrentTrigger : function(node, x, y) {
@@ -285,7 +285,7 @@
 
         /*
          * Clear out the current trigger state, restoring
-         * the title attribute on the trigger node, 
+         * the title attribute on the trigger node,
          * if it was originally set.
          */
         _clearCurrentTrigger : function() {
@@ -343,27 +343,27 @@
             }
         }
     }, {
-    
+
         // STATIC METHODS/PROPERTIES
-       
+
         OFFSET_X : 15,
         OFFSET_Y : 15,
         OFFSCREEN_X : OX,
         OFFSCREEN_Y : OY,
 
         ATTRS : {
-    
-            /* 
-             * The tooltip content. This can either be a fixed content value, 
+
+            /*
+             * The tooltip content. This can either be a fixed content value,
              * or a map of id-to-values, designed to be used when a single
              * tooltip is mapped to multiple trigger elements.
              */
             content : {
                 value: null
             },
-    
-            /* 
-             * The set of nodes to bind to the tooltip instance. Can be a string, 
+
+            /*
+             * The set of nodes to bind to the tooltip instance. Can be a string,
              * or a node instance.
              */
             triggerNodes : {
@@ -375,7 +375,7 @@
                     return val;
                 }
             },
-    
+
             /*
              * The delegate node to which event listeners should be attached.
              * This node should be an ancestor of all trigger nodes bound
@@ -387,7 +387,7 @@
                     return Y.one(val) || Y.one("document");
                 }
             },
-    
+
             /*
              * The time to wait, after the mouse enters the trigger node,
              * to display the tooltip
@@ -395,7 +395,7 @@
             showDelay : {
                 value:250
             },
-    
+
             /*
              * The time to wait, after the mouse leaves the trigger node,
              * to hide the tooltip
@@ -403,23 +403,23 @@
             hideDelay : {
                 value:10
             },
-    
+
             /*
-             * The time to wait, after the tooltip is first displayed for 
-             * a trigger node, to hide it, if the mouse has not left the 
+             * The time to wait, after the tooltip is first displayed for
+             * a trigger node, to hide it, if the mouse has not left the
              * trigger node
              */
             autoHideDelay : {
                 value:2000
             },
-    
+
             /*
              * Override the default visibility set by the widget base class
              */
             visible : {
                 value:false
             },
-    
+
             /*
              * Override the default XY value set by the widget base class,
              * to position the tooltip offscreen
@@ -429,7 +429,7 @@
             }
         }
     }),
-    
+
     createTooltips = function() {
             var tooltipTriggerIds = '',
                 tooltipContainer, tooltipId, i, j, tt, content = {},

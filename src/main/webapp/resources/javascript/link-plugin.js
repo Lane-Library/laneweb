@@ -4,9 +4,9 @@
  */
 //YUI.add("lane-link-plugin", function(Y) {
 (function() {
-	
+
 	Y.namespace("lane");
-	
+
 	var ALT = "alt",
 	    COOKIES_FETCH = "cookiesFetch",
         LINK_HOST = "linkHost",
@@ -26,15 +26,15 @@
         cookiesFetchPath = basePath + "/cookiesFetch.html",
 	    documentHostName = location.get("hostname"),
 	    loginPath = basePath + "/secure/apps/proxy/credential",
-    
+
     LinkPlugin = function(config) {
         LinkPlugin.superclass.constructor.apply(this, arguments);
     };
-    
+
     LinkPlugin.NS = "link";
-    
+
     LinkPlugin.NAME = "linkPlugin";
-    
+
     LinkPlugin.ATTRS = {
             cookiesFetch : {
                 readOnly : true,
@@ -150,7 +150,7 @@
                         }
                     }
                     return title;
-                
+
                 }
             },
             trackable : {
@@ -209,9 +209,9 @@
     };
 
     Y.extend(LinkPlugin, Y.Plugin.Base);
-    
+
     lane.LinkPlugin = LinkPlugin;
-    
+
 })();
 
 //}, "", {

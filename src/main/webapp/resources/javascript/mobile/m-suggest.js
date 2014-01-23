@@ -1,7 +1,7 @@
 /**
  * Initialize and return an object to be used by each of the autocomplete instances attached to search boxes.
  * The function expects an input element
- * 
+ *
  * @param input
  * @returns {AutocompleteObj}
  */
@@ -44,7 +44,7 @@ $.LANE.createAutocompleteObject = function(input) {
 
 /**
  * return appropriate data limit for this input element
- * 
+ *
  * @param input
  * @returns {String}
  */
@@ -69,7 +69,7 @@ $.LANE.getACLimit = function(input){
         return "er-mesh";
     }
 };
-    
+
 // Activate autocomplete on every input
 $(this).bind("pageinit", function() {
     $(":input[data-type=search]").each(function(){
@@ -97,5 +97,5 @@ $("form").live("focus", function() {
                 $(this).autocomplete('enable');
             }
         });
-    });    
+    });
 });

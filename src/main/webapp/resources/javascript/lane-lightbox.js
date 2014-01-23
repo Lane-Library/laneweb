@@ -94,8 +94,8 @@
                 this._animate();
             }
         }
-    }); 
-    
+    });
+
     Lightbox.ATTRS = {
     	url : {
     		value : null
@@ -118,7 +118,7 @@
         event.preventDefault();
         Y.lane.Lightbox.hide();
     });
-    
+
     Y.on("click", function(event) {
         var href, regex, url,
             anchor = event.target.ancestor("a") || event.target,

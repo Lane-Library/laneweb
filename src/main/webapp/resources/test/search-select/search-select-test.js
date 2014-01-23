@@ -46,7 +46,7 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
             Y.Assert.areEqual("foo", this.select.getSelected());
         }
     });
-    
+
 
     var searchSelectWidgetTestCase = new Y.Test.Case({
         name: "SearchSelectWidget Test Case",
@@ -77,12 +77,12 @@ Y.use("node-event-simulate", "console", "test", "dump", function(Y){
             	Y.Assert.areEqual("bar content", selectedContent.get("text"));
             }
     });
-    
+
     Y.one("body").addClass("yui3-skin-sam");
     new Y.Console({
         newestOnTop: false
     }).render("#log");
-    
+
 
     Y.Test.Runner.add(selectTestCase);
     Y.Test.Runner.add(searchSelectWidgetTestCase);

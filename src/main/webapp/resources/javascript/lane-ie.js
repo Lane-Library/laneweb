@@ -58,5 +58,5 @@
     	    node.setStyle("display", "block");
     	}
     }
-    
+
 })();

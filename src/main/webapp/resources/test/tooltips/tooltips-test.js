@@ -26,7 +26,7 @@ Y.use("overlay", 'node-event-simulate', 'console', 'test', function(Y){
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
+
     Y.Test.Runner.add(tooltipTestCase);
     Y.Test.Runner.masterSuite.name = "tooltips-test.js";
     Y.Test.Runner.run();

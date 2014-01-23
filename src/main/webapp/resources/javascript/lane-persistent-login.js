@@ -1,9 +1,9 @@
 
 (function() {
 
-	var redirectUrl = null,  
-	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference', 
-	persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME), 
+	var redirectUrl = null,
+	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference',
+	persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME),
 	now = new Date(),
 	needPopup= true,
 	location = Y.lane.Location,
@@ -14,7 +14,7 @@
 	drMode = model.get(model.DISASTER_MODE),
 	isActive = model.get(model.IS_ACTIVE_SUNETID),
 	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup,
-	
+
 	getPopup = function(urlPage) {
 		Y.io(urlPage, {
 			on : {
@@ -22,13 +22,13 @@
 				}
 		});
 	};
-	
+
 	if(drMode || fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
 		needPopup = false;
 	}
 
-	
-	//if someone click on MyLane Login 
+
+	//if someone click on MyLane Login
 	 Y.on("click",function(event) {
 	     var locationHref = location.get("href"),
 	         encodedHref = encodeURIComponent(locationHref);
@@ -43,12 +43,12 @@
 		}
 		event.preventDefault();
 	}, 'a[href=' + basePath + '/secure/login.html]');
-	
-	
+
+
 
 	//if not from hospital and user click on a link that going to be proxy
 	 //If there are click subscriptions at multiple points in the DOM heirarchy, they will be executed in order from
-	 //most specific (the button) to least specific (document) unless e.stopPropagation() is called along the line. 
+	 //most specific (the button) to least specific (document) unless e.stopPropagation() is called along the line.
 	 //This will prevent subscriptions from elements higher up the parent axis from executing.
 	 Y.on("click",
 		function(event) {
@@ -72,7 +72,7 @@
 					else if (!persistentStatusCookie) {
 						getPopup(basePath + '/plain/persistent-popup.html');
 					}
-					else{// if the user not active and on "grace period" the cookies will be deleted and the page will be reload 
+					else{// if the user not active and on "grace period" the cookies will be deleted and the page will be reload
                         Y.io(basePath + '/logout', {
                             sync : true
                         });
@@ -81,9 +81,9 @@
 				}
 			}
 		},document.body);
-	
-    
-	// for the static page persistentlogin.hrml Click on YES this way the user 
+
+
+	// for the static page persistentlogin.hrml Click on YES this way the user
 	// will not have to go through webauth.
 	if(Y.one('#persistent-login')){
 		Y.on('click',function(event) {
@@ -95,13 +95,13 @@
 			}
 		}, '#persistent-login');
 	}
-	
-	
-	
+
+
+
 
 	var setLink = function(event) {
 		var node = event.currentTarget, url = basePath + '/';
-		if ( !auth ||  node.get('search').indexOf("pl=true") >0 ) {	
+		if ( !auth ||  node.get('search').indexOf("pl=true") >0 ) {
 			url = url + 'secure/';
 		}
 		if(!redirectUrl)
@@ -109,11 +109,11 @@
 		url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
 		node.set('href', url);
 	};
-	
+
 	// The popup window
 	var popupWindow = function(id, o, args) {
 		var lightbox = Y.lane.Lightbox, date = new Date(), content, yesButton, noButton, dontAskCheckBox;
-		
+
 		lightbox.setContent(o.responseText);
 		lightbox.show();
 		content = lightbox.get("contentBox");
@@ -124,10 +124,10 @@
 		// Click on YES --
 		yesButton.once('click',function(event) {
 		    //  createGoHttpsIE();
-		    event.stopPropagation(); // don't allow event to bubble up to main click handler (line ~41) 
+		    event.stopPropagation(); // don't allow event to bubble up to main click handler (line ~41)
 			setLink(event); // cookie set in the PerssitentLoginController class
 		});
-		
+
 		// Click on NO
 		if(noButton){
 			noButton.once('click',function(event) {
@@ -145,7 +145,7 @@
 					Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {	path : "/"	});
 			});
 		}
-	
+
 		//if someone click on the don't ask me again" the yes button class should look disable
 		if(dontAskCheckBox){
 			dontAskCheckBox.on('click',function(event) {
@@ -159,14 +159,14 @@
 					yesButton.replaceClass('disabled-btn', 'red-btn');
 					yesButton.detach('click');
 					yesButton.once('click',function(event) {
-						setLink(event); 
+						setLink(event);
 					});
 				}
 			});
 		};
 	};
 	//END POPUP
-	
+
 //	var createGoHttpsIE = function(){
 //		if (Y.UA.ie && (Y.UA.ie == 8 || Y.UA.ie == 9)) {
 //		now.setFullYear(now.getFullYear() + 10);
@@ -176,6 +176,6 @@
 //			});
 //		}
 //	};
-	
+
 })();
 

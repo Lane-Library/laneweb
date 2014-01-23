@@ -6,7 +6,7 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
 
     var popinTestCase = new Y.Test.Case({
         name: 'Lane Popin Test Case',
-        
+
         testPopinEvent: function() {
             var node = Y.one("#spellCheck");
             node.setStyle("display", "inline");
@@ -26,7 +26,7 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
                 Y.Assert.areEqual("0px", Y.one("#searchFacets").getStyle("marginTop"));
             }
         },
-        
+
         testPopinEventIE8: function() {
             Y.UA.ie = 8;
             var node = Y.one("#queryMapping");
@@ -39,13 +39,13 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
             Y.Assert.areEqual("-28px", Y.one("#searchFacets").getStyle("marginTop"));
         }
     });
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
-    
+
+
     Y.Test.Runner.add(popinTestCase);
     Y.Test.Runner.masterSuite.name = "popin-test.js";
     Y.Test.Runner.run();

@@ -5,7 +5,7 @@
  *  clears default help text on focus and adds back on blur
  */
 (function() {
-    
+
     Y.lane.TextInput = function(input, hintText) {
         var hintStyle = "inputHint",
             _hintText = hintText || '',
@@ -30,7 +30,7 @@
         return {
             getValue: function() {
                 var value = input.get('value');
-                return value == _hintText ? '' : value; 
+                return value == _hintText ? '' : value;
             },
             setValue: function(value) {
                 input.set('value', value);
@@ -62,12 +62,12 @@
     };
 
     var i, title, textInputs = new Y.all('input[type="text"]');
-    
+
     for (i = 0; i < textInputs.size(); i++) {
         title = textInputs.item(i).get('title');
         if (title) {
             (new Y.lane.TextInput(textInputs.item(i), title));
         }
     }
-    
+
 })();

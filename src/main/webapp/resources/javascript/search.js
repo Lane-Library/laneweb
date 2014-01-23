@@ -1,42 +1,42 @@
 (function() {
-    
+
     var Lane = Y.lane,
-    
+
     SearchIndicator = Lane.SearchIndicator,
-    
+
     /**
      * A Class that encapsulates the search form behavior.
-     * 
+     *
      * @class Search
      * @uses EventTarget
      * @constructor
      * @param form {Node}
      */
     Search = function(form) {
-        
+
         //sanity check, is there a form?
         if (form) {
 
         	// bubble search events to the Y.lane object
             this.addTarget(Lane);
-            
+
             this._form = form;
             form.on("submit", this.submitSearch, this);
             this.publish("submit",{defaultFn : this._doSubmit});
-            
+
             //create the SearchSelectWidget and set up the Select model
             this._select = new Lane.SearchSelectWidget({srcNode:form.one("#searchSource"),render:true}).get("model");
             this._select.after("selectedChange", this._selectedChange, this);
             this.publish("sourceChange", {defaultFn : this._sourceChange});
-            
+
             //create the input and set up event handler
             this._input = new Lane.TextInput(form.one("#searchTerms"), this._select.getSelectedTitle());
             this._input.getInput().on("valueChange", this._handleValueChange, this);
-            
+
             //set up the search tips link
             this._tips = Y.one('#searchTips a');
             this._tips.set("href", this._tips.get("href") + "#" + this._select.getSelected());
-            
+
             //set up the auto-complete suggestions
             this._suggest = new Lane.Suggest(this._input.getInput());
             this._suggest.setLimitForSource = function(source) {
@@ -54,7 +54,7 @@
             };
             this._suggest.setLimitForSource(this._select.getSelected());
             this._suggest.on("select", this.submitSearch, this);
-            
+
             //set up search reset
             this._searchReset = Y.one("#searchReset");
             if (this._input.getValue()) {
@@ -64,9 +64,9 @@
             this.publish("reset", {defaultFn : this._reset});
         }
     };
-    
+
     Search.prototype = {
-            
+
         /**
          * The default submit handler.  Does nothing if there is no input.
          * @method _doSubmit
@@ -80,7 +80,7 @@
                 this._form.submit();
             }
         },
-        
+
         /**
          * Handles clicks on the reset button, fires a reset event.
          * @method _handleResetClick
@@ -89,7 +89,7 @@
         _handleResetClick : function() {
         	this.fire("reset");
         },
-        
+
         /**
          * Handles search input value changes and toggles the active class
          * of the reset button appropriately.
@@ -103,7 +103,7 @@
         		this._searchReset.removeClass("active");
         	}
         },
-        
+
         /**
          * Clears the search input and results if present.
          * @method reset
@@ -117,7 +117,7 @@
         	}
         	this._input.getInput().focus();
         },
-        
+
         /**
          * The event handler for changes in the Select object.  Fires a sourceChange event.
          * @method _selectedChange
@@ -127,7 +127,7 @@
         _selectedChange : function(event) {
             this.fire("sourceChange", {newVal:event.newVal});
         },
-        
+
         /**
          * Default handler for sourceChange. Changes the hash on the search tips,
          * the limit parameter for the suggestions, and the input hint text.
@@ -139,7 +139,7 @@
         	this._tips.set("href", this._tips.get("href").replace(/#.*/, "#" + event.newVal));
         	this._suggest.setLimitForSource(event.newVal);
         },
-        
+
         /**
          * Accessor for the Select object's selected value.
          * @method getSearchSource
@@ -148,7 +148,7 @@
         getSearchSource : function() {
             return this._select.getSelected();
         },
-        
+
         /**
          * Accessor for the search input's text.
          * @method getSearchTerms
@@ -157,7 +157,7 @@
         getSearchTerms : function() {
             return this._input.getValue();
         },
-        
+
         /**
          * Reports whether or not the search input has a value.
          * @method searchTermsPresent
@@ -166,7 +166,7 @@
         searchTermsPresent : function() {
             return this._input.getValue() ? true : false;
         },
-        
+
         /**
          * Setter for the search input
          * @method setSearchTerms
@@ -175,7 +175,7 @@
         setSearchTerms : function(terms) {
             this._input.setValue(terms);
         },
-        
+
         /**
          * Submit the form by firing a submit event.
          * @method submitSearch
@@ -187,14 +187,14 @@
             this.fire("submit");
         }
     };
-    
+
     // Add EventTarget attributes to the Search prototype
     Y.augment(Search, Y.EventTarget, null, null, {
         prefix : "search",
         emitFacade : true
     });
-    
+
     // create an instance and make it globally accessible
     Lane.Search = new Search(Y.one("#search"));
-    
+
 })();

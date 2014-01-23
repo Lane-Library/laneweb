@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * Load contents of the Hours of Operation section from HTML document.
  */
 $.LANE.getHours = function(){

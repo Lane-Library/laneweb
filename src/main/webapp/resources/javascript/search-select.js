@@ -37,7 +37,7 @@
 		prefix : "select"
 	});
 	Y.lane.Select = Select;
-	
+
 	//TODO: use a constructor to create a wrapping div then use Y.extend instead of Y.Base.create
 	var SearchSelectWidget = Y.Base.create("searchSelect", Y.Widget, [], {
 		renderUI : function() {
@@ -71,13 +71,13 @@
 					item = options.item(i);
 					values.push(item.get("value"));
 					titles.push(item.get("title"));
-					
+
 				}
 				return new Select(values, titles, index);
 			}
 		}
 	});
-	
+
 	Y.lane.SearchSelectWidget = SearchSelectWidget;
 
 })();

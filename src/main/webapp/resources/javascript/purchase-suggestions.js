@@ -1,23 +1,23 @@
 (function() {
-    
+
     function PurchaseSuggestions(config) {
         PurchaseSuggestions.superclass.constructor.apply(this, arguments);
     }
-    
+
     PurchaseSuggestions.NAME = "purchase";
-    
+
     PurchaseSuggestions.ATTRS = {
     	form : {
     		value : null
-    	}	
+    	}
     };
-    
+
     PurchaseSuggestions.HTML_PARSER = {
             menu : ["#purchaseMenu > li"],
             items : ["#purchaseItems > li"],
             form : "form"
     };
-    
+
     Y.extend(PurchaseSuggestions, Y.lane.Feedback, {
     	bindUI : function() {
             this.get("menu").on("click", this._handleMenuClick, this);
@@ -52,9 +52,9 @@
         	}
         }
     });
-    
+
     Y.lane.PurchaseSuggestions = PurchaseSuggestions;
-    
+
     Y.lane.Lightbox.on("contentChanged", function(event) {
         if (Y.one("#purchase")) {
             var purchase = new Y.lane.PurchaseSuggestions({srcNode : "#purchase"});
