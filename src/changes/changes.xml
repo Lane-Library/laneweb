@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2014-01-27" version="2.1.41" description="2.1.41 bug fix release">
+            <action date="2014-01-24" dev="ceyates" issue="95298" type="update">
+                widen metasearch input on portal pages
+            </action>
             <action date="2014-01-17" dev="ceyates" issue="95122" type="update">
                 change logging framework from log4j to logback
             </action>
