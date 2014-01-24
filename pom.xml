@@ -201,7 +201,6 @@
                                 <include>miscellaneous-min.css</include>
                                 <include>events-min.css</include>
                                 <include>node-accordion-min.css</include>
-                                <include>expandies-min.css</include>
                                 <include>buttons-min.css</include>
                                 <include>forms-min.css</include>
                                 <include>table-styles-min.css</include>
