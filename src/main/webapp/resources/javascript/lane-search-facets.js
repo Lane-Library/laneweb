@@ -19,9 +19,9 @@
             setActiveFacet: function(facetId){
                 var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
                 if (result !== undefined) {
-                    if (result._state == 'initialized') {
+                    if (result._state === 'initialized') {
                         result.show();
-                    } else if (result._state == 'searched') {
+                    } else if (result._state === 'searched') {
                         SearchFacets.getCurrentResult().hide();
                         SearchFacets.setCurrentResult(result);
                         result.show();
@@ -64,10 +64,10 @@
             this._state = 'searched';
         };
         Result.prototype.show = function(){
-            if (this._state == 'initialized') {
+            if (this._state === 'initialized') {
                 this.getContent();
                 searchIndicator.show();
-            } else if (this._state == 'searching') {
+            } else if (this._state === 'searching') {
                 alert('search in progress');
             } else {
                 SearchFacets.getCurrentResult().hide();
@@ -79,14 +79,14 @@
             }
         };
         Result.prototype.getContent = function(){
-            if (this._state == 'initialized') {
+            if (this._state === 'initialized') {
                 this._state = 'searching';
                 Y.io(this._url, this._callback);
             } else
-                if (this._state == 'searched') {
+                if (this._state === 'searched') {
                     this.show();
                 } else
-                    if (this._state == 'searching') {
+                    if (this._state === 'searching') {
                         alert('search in progress');
                     }
         };

@@ -37,7 +37,7 @@
                 var i;
                 searchElms = Y.all(".metasearch");
                 for (i = 0; i < searchElms.size(); i++) {
-                    if (Y.Array.indexOf(searchables, searchElms.item(i).get('id')) == -1) {
+                    if (Y.Array.indexOf(searchables, searchElms.item(i).get('id')) === -1) {
                         searchables.push(searchElms.item(i).get('id'));
                     }
                 }
@@ -66,7 +66,7 @@
                                             resultSpan = Y.Node.create('<span class="searchCount"></span>');
                                             updateables.item(y).get('parentNode').insert(resultSpan);
                                         }
-                                        if (result.status == 'successful') {
+                                        if (result.status === 'successful') {
                                             updateables.item(y).addClass("searchSuccess");
                                             // process display of each updateable node
                                             // once all processed, remove id from searchables
@@ -86,7 +86,7 @@
                                             updateables.item(y).setAttribute('target', '_blank');
                                             updateables.item(y).removeClass('metasearch');
                                             searchables.splice(i--, 1);
-                                        } else if (result.status == 'failed' || result.status == 'canceled') {
+                                        } else if (result.status === 'failed' || result.status === 'canceled') {
                                             resultSpan.setContent('&#160;? ');
                                             updateables.item(y).removeClass('metasearch');
                                             searchables.splice(i--, 1);
@@ -96,7 +96,7 @@
                             }
                             sleepingTime = 2000;
                             remainingTime = (new Date().getTime()) - startTime;
-                            if (response.status != 'successful' && needMore && searchables.length > 0 && (remainingTime <= 60 * 1000)) {
+                            if (response.status !== 'successful' && needMore && searchables.length > 0 && (remainingTime <= 60 * 1000)) {
                                 // at more than 20 seconds the sleeping time becomes 10 seconds
                                 if (remainingTime > 20 * 1000) {
                                     sleepingTime = 10000;
