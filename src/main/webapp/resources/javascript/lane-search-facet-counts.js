@@ -35,7 +35,7 @@
                                     hits = parseInt(response.results.facets[facetId].hits, 10);
                                     engineStatus = response.results.facets[facetId].status;
                                 }
-                                if ((engineStatus == 'successful' || engineStatus == 'canceled') && hitLink !== null && hits === 0) {
+                                if ((engineStatus === 'successful' || engineStatus === 'canceled') && hitLink !== null && hits === 0) {
                                     hitLinkParent = hitLink.get('parentNode');
                                     hitLinkParent.addClass('inactiveFacet');
                                     hitLinkParent.removeClass('searchableFacet');
@@ -46,7 +46,7 @@
                             sleepingTime = 2000;
                             remainingTime = (new Date().getTime()) - startTime;
                             searchStatus = response.results.status;
-                            if (searchStatus != 'successful' && (remainingTime <= 60 * 1000)) { // at more than 20 seconds the sleeping time becomes 10 seconds
+                            if (searchStatus !== 'successful' && (remainingTime <= 60 * 1000)) { // at more than 20 seconds the sleeping time becomes 10 seconds
                                 if (remainingTime > 20 * 1000) {
                                     sleepingTime = 10000;
                                 }

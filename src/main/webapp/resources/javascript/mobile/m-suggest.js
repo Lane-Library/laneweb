@@ -81,7 +81,7 @@ $(this).bind("pageinit", function() {
 });
 // submit form on autocomplete select if input is "qSearch"
 $("form").live("autocompleteselect", function(e, ui) {
-    if(ui.item && $(e.target).attr('name') == 'qSearch'){
+    if(ui.item && $(e.target).attr('name') === 'qSearch'){
         $(e.target).val(ui.item.value);
         $.mobile.showPageLoadingMsg();
         //$(this)[0].submit();

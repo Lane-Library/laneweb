@@ -20,7 +20,7 @@
                             var i, separator = "; ", string = "";
                             for (i = 0; i < queryMapResources.length; i++) {
                                 string += queryMapResources[i].label;
-                                if(i != queryMapResources.length-1){
+                                if(i !== queryMapResources.length-1){
                                     string += separator;
                                 }
                             }
@@ -46,11 +46,11 @@
                                                         queryMapResources[i].anchor.href = result.url;
                                                     }
                                                     if (result === undefined || !result.status) {
-                                                        needMore = (results.status != 'successful');
+                                                        needMore = (results.status !== 'successful');
                                                     }
                                                     else{
                                                         queryMapResources[i].status = result.status;
-                                                        if (result.status == 'successful') {
+                                                        if (result.status === 'successful') {
                                                             queryMapResources[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
                                                         }
                                                     }

@@ -132,7 +132,7 @@
             regex = new RegExp("(.+)//([^/]+)(" + basePath + "/)(.+)".replace(/\//g, "\\\/"));
             href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
             //IE <= 7 includes the hash in the href, so remove it from request url:
-            url = href.indexOf("#") == -1 ? href : href.substring(0, href.indexOf("#"));
+            url = href.indexOf("#") === -1 ? href : href.substring(0, href.indexOf("#"));
             Y.io(url, {
                 on : {
                     success : function(id, o, args) {

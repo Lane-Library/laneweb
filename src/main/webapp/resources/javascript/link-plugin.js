@@ -145,7 +145,7 @@
                     rel = node.get('rel');
                     if (rel && rel.indexOf('popup') === 0) {
                         relTokens = rel.split(' ');
-                        if (relTokens[1] == LOCAL) {
+                        if (relTokens[1] === LOCAL) {
                             title = 'YUI Pop-up [local]: ' + title;
                         }
                     }

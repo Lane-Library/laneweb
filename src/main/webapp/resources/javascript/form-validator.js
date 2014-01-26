@@ -42,7 +42,7 @@
         for (i = 0; i < inputFields.length; i++) {
             inputFields[i].isEmpty = function() {
                 var node = this.get("inputDOM");
-                return node.value === '' || node.value == node.title;
+                return node.value === '' || node.value === node.title;
             };
         }
         return {

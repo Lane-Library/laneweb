@@ -13,7 +13,7 @@ $.LANE.getPicoQuery = function(form){
     });
     if (qString.length) {
         qString = qString.replace(/\)\(/g, ") AND (");
-        if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
+        if (qString.indexOf('(') === 0 && qString.indexOf(')') === qString.length - 1) {
             qString = qString.replace(/(\(|\))/g, '');
         }
     }
@@ -156,7 +156,7 @@ $(this).bind("pageinit", function() {
         if($(this).data('events') && $(this).data('events').submit){
             for(i = 0; i < $(this).data('events').submit.length; i++){
                 handler = $(this).data('events').submit[i].handler;
-                if(handler == $.LANE.validateForm||handler == $.LANE.validatePicoForm){
+                if(handler === $.LANE.validateForm||handler === $.LANE.validatePicoForm){
                     needsListener = false;
                 }
             }

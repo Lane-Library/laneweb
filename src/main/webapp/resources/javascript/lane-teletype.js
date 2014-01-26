@@ -9,7 +9,7 @@
         if (!targetElm){
             return false;
         }
-        if (inputElm.get('value') != inputElm.get('title')) {
+        if (inputElm.get('value') !== inputElm.get('title')) {
             qString = inputElm.get('value');
         }
         if (!qString){

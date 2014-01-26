@@ -14,7 +14,7 @@ $.LANE.getHours = function(){
                     rows = hours.find("dt").size()/hours.find("dl").size();
                     hours.find("h4").click(function() {
                         hours.toggleClass("expanded");
-                        if(hours.attr("class") == "expanded") {
+                        if(hours.attr("class") === "expanded") {
                             hours.css("height", "auto");
                             window.scrollTo(0, $(this).offset().top);
                             hours.find("dl").animate({

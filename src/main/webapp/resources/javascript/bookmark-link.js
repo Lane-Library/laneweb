@@ -223,7 +223,7 @@
              */
             _isBookmarkable : function(target) {
                 var bookmarkable = false;
-                if (target.getStyle("display") == "inline" && !target.one("img")) {
+                if (target.getStyle("display") === "inline" && !target.one("img")) {
                     bookmarkable = true;
                 } else if (target.ancestor("#topResources")) {
                     bookmarkable = true;

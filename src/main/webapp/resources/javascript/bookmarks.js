@@ -723,7 +723,7 @@
                         return;
                     }
                     if (bookmark) {
-                        if (newlabel != bookmark.getLabel() || newurl != bookmark.getUrl()) {
+                        if (newlabel !== bookmark.getLabel() || newurl !== bookmark.getUrl()) {
                             bookmark.setValues(newlabel, newurl);
                         }
                     } else {

@@ -82,7 +82,7 @@
             }
             if ( qString.length ){
                 qString = qString.replace(/\)\(/g, ") AND (");
-                if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
+                if (qString.indexOf('(') === 0 && qString.indexOf(')') === qString.length - 1) {
                     qString = qString.replace(/(\(|\))/g, '');
                 }
             }
@@ -94,7 +94,7 @@
             picoOn();
         }
         Lane.on('search:sourceChange', function(event) {
-            if (event.newVal == 'clinical-all'||event.newVal.indexOf('peds') === 0) {
+            if (event.newVal === 'clinical-all'||event.newVal.indexOf('peds') === 0) {
                 picoOn();
                 form.one('#clinicalP').focus();
                 if(picoTextInputs[0].getValue()){

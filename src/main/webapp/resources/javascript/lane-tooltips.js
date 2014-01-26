@@ -437,7 +437,7 @@
             for (i = 0; i < tooltipContainerNodeList.size(); i++) {
                 tooltipContainer = tooltipContainerNodeList.item(i).get('childNodes');
                 for (j = 0; j < tooltipContainer.size(); j++) {
-                    if (tooltipContainer.item(j).get('nodeType') == 1) {
+                    if (tooltipContainer.item(j).get('nodeType') === 1) {
                         tooltipId = tooltipContainer.item(j).get('id').replace(/Tooltip$/, '');
                         if (tooltipTriggerIds) {
                             tooltipTriggerIds += ', ';

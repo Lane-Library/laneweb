@@ -13,7 +13,7 @@
 	ipgroup = model.get(model.IPGROUP),
 	drMode = model.get(model.DISASTER_MODE),
 	isActive = model.get(model.IS_ACTIVE_SUNETID),
-	fromHospital = "SHC" == ipgroup || "LPCH" == ipgroup,
+	fromHospital = "SHC" === ipgroup || "LPCH" === ipgroup,
 
 	getPopup = function(urlPage) {
 		Y.io(urlPage, {
@@ -23,7 +23,7 @@
 		});
 	};
 
-	if(drMode || fromHospital ||  'denied' == persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
+	if(drMode || fromHospital ||  'denied' === persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
 		needPopup = false;
 	}
 
@@ -54,13 +54,13 @@
 		function(event) {
 		 if (needPopup) {
 			 	var link = event.target, clickedUrl;
-			    while (link && link.get('nodeName') != 'A') {
+			    while (link && link.get('nodeName') !== 'A') {
                     link = link.get('parentNode');
                 }
 			    if(link){
 			    	clickedUrl = link.get('href');
 			    }
-				if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("laneproxy") > 0) && clickedUrl.indexOf("javascript") != 0) {
+				if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("laneproxy") > 0) && clickedUrl.indexOf("javascript") !== 0) {
 					redirectUrl = encodeURIComponent(link.get('href'));
 					event.preventDefault();
 					// don\'t want a redirect with the tracking see tracking.js code if !rel  documment.location is not set

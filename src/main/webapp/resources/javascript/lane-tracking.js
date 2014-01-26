@@ -232,7 +232,7 @@
                             return true;
                         }
                         // bookmarklet drag or right-click
-                        if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" == event.type) ) {
+                        if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
                             return true;
                         }
                     }

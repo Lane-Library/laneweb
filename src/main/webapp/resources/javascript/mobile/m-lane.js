@@ -27,7 +27,7 @@ $.LANE.scrollPage = function(activePage){
             }
         },delay);
     }
-    else if(activePage.attr('id') != '_home' && activePage.find(".resourceList").size()){ // resource list pages
+    else if(activePage.attr('id') !== '_home' && activePage.find(".resourceList").size()){ // resource list pages
         setTimeout(function(){
             if(window.pageYOffset < $.mobile.minScrollBack){
                 window.scrollTo(0, hideHeaderScroll);

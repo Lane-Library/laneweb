@@ -11,7 +11,7 @@
                 searchFacets = Y.one('#searchFacets'),
                 rightSearchTips = Y.one('.rightSearchTips');
             for (i = 0; i < elms.size(); i++) {
-                if (elms.item(i) !== null && elms.item(i).getStyle('display') == 'inline') {
+                if (elms.item(i) !== null && elms.item(i).getStyle('display') === 'inline') {
                     activeEl = i;
                 }
             }
