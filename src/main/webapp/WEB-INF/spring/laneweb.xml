@@ -120,7 +120,7 @@
     
     <bean name="javax.xml.parsers.DocumentBuilderFactory"
         class="edu.stanford.irt.cocoon.spring.DocumentBuilderFactoryBean">
-        <constructor-arg value="com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl"/>
+        <constructor-arg value="org.apache.xerces.jaxp.DocumentBuilderFactoryImpl"/>
         <property name="coalescing" value="false"/>
         <property name="expandEntityReferences" value="true"/>
         <property name="ignoringComments" value="false"/>
@@ -137,7 +137,7 @@
     
     <bean name="javax.xml.parsers.SAXParserFactory"
         class="edu.stanford.irt.cocoon.spring.SAXParserFactoryBean">
-        <constructor-arg value="com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl"/>
+        <constructor-arg value="org.apache.xerces.jaxp.SAXParserFactoryImpl"/>
         <property name="namespaceAware" value="true"/>
         <property name="validating" value="false"/>
         <property name="XIncludeAware" value="false"/>
@@ -160,7 +160,7 @@
     
     <bean name="javax.xml.transform.TransformerFactory"
         class="edu.stanford.irt.cocoon.spring.TransformerFactoryBean">
-        <constructor-arg value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
+        <constructor-arg value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
     
     <bean name="javax.xml.xpath.XPathFactory"
