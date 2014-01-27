@@ -52,7 +52,7 @@
         popupWindow.focus();
     };
     Y.on("click", function(event) {
-        var args, href, popupElement, title, body,
+        var args, popupElement, title, body,
             anchor = event.target.get("nodeName") === "A" ? event.target : event.target.ancestor("a"),
             rel = anchor !== null && anchor.get("rel");
         if (rel && rel.indexOf("popup") === 0) {
