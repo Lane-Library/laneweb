@@ -139,7 +139,6 @@
                             }
                             path = node.get('pathname');
                             external = host !== location.get("host");
-//                            query = external ? '' : node.get('search');
                             query = node.get('search');
                         }
                     }

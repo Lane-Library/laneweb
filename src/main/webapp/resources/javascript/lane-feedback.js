@@ -161,7 +161,7 @@
         if (Y.one("#feedback")) {
             var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
                 url = Y.lane.Lightbox.get("url"),
-                hash, items, index;//, textInputs, title, i;
+                hash, items, index;
             feedback.render();
             //if there is a hash in the url, choose that as the active item
             if (url.indexOf("#") > -1) {
@@ -172,15 +172,6 @@
                     feedback.set("activeItem", index);
                 }
             }
-
-            //create a TextInput object for each <input type="text"/>
-//            textInputs = new Y.one("#feedback").all('input[type="text"]');
-//            for (i = 0; i < textInputs.size(); i++) {
-//                title = textInputs.item(i).get('title');
-//                if (title) {
-//                    (new Y.lane.TextInput(textInputs.item(i), title));
-//                }
-//            }
         }
     });
 

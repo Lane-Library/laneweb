@@ -1,4 +1,3 @@
-//YUI.add("lane-model", function(Y){
 (function() {
 
     Y.namespace("lane");
@@ -29,6 +28,3 @@
     Lane.Model.setAttrs(window.model || {});
 
 })();
-//},"", {
-//    requires: ["base"]
-//});

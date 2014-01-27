@@ -59,7 +59,6 @@
                                             if (needMore) {
                                                 setTimeout(queryMap.getResultCounts, 2000);
                                             }
-                                            //queryMapping.style.display = 'inline';
                                             Y.fire('lane:popin', queryMapping);
                                         }
                                     }

@@ -44,7 +44,6 @@
                     boundingBox.setStyle("visibility", "visible");
                     boundingBox.setStyle("visibility", "hidden");
                 }
-//                this.setContent("");
             }
         },
         _animate : function() {

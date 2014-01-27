@@ -2,7 +2,6 @@
  * LinkPlugin is an plugin for anchor nodes to provide
  * valuable information about such things as proxy status, etc.
  */
-//YUI.add("lane-link-plugin", function(Y) {
 (function() {
 
 	Y.namespace("lane");
@@ -213,7 +212,3 @@
     lane.LinkPlugin = LinkPlugin;
 
 })();
-
-//}, "", {
-//	requires : ["lane-model", "plugin"]
-//});

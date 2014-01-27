@@ -123,7 +123,6 @@
 
 		// Click on YES --
 		yesButton.once('click',function(event) {
-		    //  createGoHttpsIE();
 		    event.stopPropagation(); // don't allow event to bubble up to main click handler (line ~41)
 			setLink(event); // cookie set in the PerssitentLoginController class
 		});
@@ -166,16 +165,6 @@
 		};
 	};
 	//END POPUP
-
-//	var createGoHttpsIE = function(){
-//		if (Y.UA.ie && (Y.UA.ie == 8 || Y.UA.ie == 9)) {
-//		now.setFullYear(now.getFullYear() + 10);
-//		Y.Cookie.set("GO_HTTPS_IE",	'please', {
-//				path : "/",
-//				expires : now
-//			});
-//		}
-//	};
 
 })();
 
