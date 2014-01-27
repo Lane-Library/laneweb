@@ -622,7 +622,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.7.55</version>
+            <version>1.7.56</version>
             <exclusions>
             	<exclusion>
             		<artifactId>log4j</artifactId>
