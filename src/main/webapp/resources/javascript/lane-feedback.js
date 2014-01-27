@@ -1,8 +1,8 @@
 (function() {
 
-    function Feedback(config) {
+    var Feedback = function(config) {
         Feedback.superclass.constructor.apply(this, arguments);
-    }
+    };
 
     Feedback.NAME = "feedback";
 

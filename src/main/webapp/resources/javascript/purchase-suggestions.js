@@ -1,8 +1,8 @@
 (function() {
 
-    function PurchaseSuggestions(config) {
+    var PurchaseSuggestions = function(config) {
         PurchaseSuggestions.superclass.constructor.apply(this, arguments);
-    }
+    };
 
     PurchaseSuggestions.NAME = "purchase";
 
