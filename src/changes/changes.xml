@@ -7,7 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2014-01-27" version="2.1.41" description="2.1.41 bug fix release">
+        <release date="2014-01-27" version="2.1.42" description="2.1.42 bug fix release">
+            <action date="2014-01-27" dev="ceyates" issue="95443" type="fix">
+                xincludes with xpointer attribute are broken
+            </action>
+        </release>
+        <release date="2014-01-27" version="2.1.41" description="2.1.41 bug fix release [not deployed]">
             <action date="2014-01-24" dev="ceyates" issue="95298" type="update">
                 widen metasearch input on portal pages
             </action>
