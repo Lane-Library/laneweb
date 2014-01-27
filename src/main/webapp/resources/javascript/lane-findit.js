@@ -2,7 +2,8 @@
     var findItNode = Y.one('#findIt'),
         model = Y.lane.Model,
         query = model.get(model.QUERY),
-        queryIsNumeric = query === +query, // SFX responds very slowly to numeric requests (PMIDs)
+        // SFX responds very slowly to numeric requests (PMIDs)
+        queryIsNumeric = +query !== NaN,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
         url;
