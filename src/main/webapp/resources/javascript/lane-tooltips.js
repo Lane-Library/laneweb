@@ -12,7 +12,7 @@
          * Initialization Code: Sets up privately used state
          * properties, and publishes the events Tooltip introduces
          */
-        initializer : function(config) {
+        initializer : function() {
 
             this._triggerClassName = this.getClassName("trigger");
 
@@ -199,7 +199,7 @@
          * the current trigger node. Fires the triggerLeave
          * event and sets up the hide timer
          */
-        _leaveTrigger : function(node) {
+        _leaveTrigger : function() {
             this.fire("triggerLeave");
 
             this._clearCurrentTrigger();
@@ -222,7 +222,7 @@
          * Shows the tooltip, after moving it to the current mouse
          * position.
          */
-        _showTooltip : function(node) {
+        _showTooltip : function() {
             var x = this._currTrigger.mouseX,
                 y = this._currTrigger.mouseY;
 

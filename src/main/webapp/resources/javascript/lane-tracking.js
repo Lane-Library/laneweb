@@ -374,7 +374,7 @@
                 label: event.suggestion
             });
         });
-        Lane.on("search:reset",  function(event) {
+        Lane.on("search:reset",  function() {
             Tracker.fire("trackableEvent", {
                 category: "lane:searchFormReset",
                 action: location.get("pathname")

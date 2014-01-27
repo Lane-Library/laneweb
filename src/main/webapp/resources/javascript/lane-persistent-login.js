@@ -111,7 +111,7 @@
 	};
 
 	// The popup window
-	var popupWindow = function(id, o, args) {
+	var popupWindow = function(id, o) {
 		var lightbox = Y.lane.Lightbox, date = new Date(), content, yesButton, noButton, dontAskCheckBox;
 
 		lightbox.setContent(o.responseText);
@@ -147,7 +147,7 @@
 
 		//if someone click on the don't ask me again" the yes button class should look disable
 		if(dontAskCheckBox){
-			dontAskCheckBox.on('click',function(event) {
+			dontAskCheckBox.on('click',function() {
 				if (dontAskCheckBox.get('checked')) {
 					yesButton.replaceClass('red-btn', 'disabled-btn');
 					yesButton.detach('click');

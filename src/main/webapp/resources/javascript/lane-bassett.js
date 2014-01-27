@@ -37,7 +37,7 @@
 
         loadContent = function(url) {
             url = basePath + "/plain/biomed-resources/bassett/raw".concat(url);
-            function successHandler(id, o, args) {
+            function successHandler(id, o) {
                 var content = Y.Node.create(o.responseText),
                     container = Y.one('#bassettContent');
                 container.setContent(content);
@@ -71,7 +71,7 @@
             history.on("bassettChange",function(e) {
                 loadContent(e.newVal);
             });
-            history.on("bassettRemove",function(e) {
+            history.on("bassettRemove",function() {
                 loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
             });
         };

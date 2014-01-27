@@ -132,7 +132,7 @@ $.ajax({
     };
 })();
 
-$("form").live( "autocompleteselect", function(e, ui) {
+$("form").live( "autocompleteselect", function(e) {
     $.LANE.tracking.track(e);
 });
 $("form").live( "submit", function(e) {

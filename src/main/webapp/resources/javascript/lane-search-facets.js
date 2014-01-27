@@ -148,7 +148,7 @@
             history.on("facetChange",function(e) {
                 SearchFacets.setActiveFacet(e.newVal);
             });
-            history.on("facetRemove",function(e) {
+            history.on("facetRemove",function() {
                 SearchFacets.setActiveFacet(Lane.Search.getSearchSource());
             });
         }

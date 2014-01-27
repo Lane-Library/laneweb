@@ -76,7 +76,7 @@ $('#no-persistent-login').live('click', function(event) {
 	setLink(event);
 });
 
-$('#dont-ask-again').live('click', function(e) {
+$('#dont-ask-again').live('click', function() {
 	if ($('#dont-ask-again:checked').val() === 'on') {
 		$('#yes-persistent-login').removeClass('red-btn').addClass('disabled-btn');
 	} else {
@@ -102,7 +102,7 @@ $.LANE.toggleLogin = function(){
     }
 };
 
-$('.persistent-header').live('click', function(e) {
+$('.persistent-header').live('click', function() {
 	document.location = model['base-path'] + '/';
 });
 

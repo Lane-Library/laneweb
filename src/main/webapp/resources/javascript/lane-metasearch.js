@@ -122,7 +122,7 @@
     hybridInput = Y.one('.laneSuggest');
     if (hybridInput) {
         laneSuggest = new Y.lane.Suggest(hybridInput);
-        laneSuggest.on("select",function(e){
+        laneSuggest.on("select",function(){
         	searchIndicator.show();
             hybridInput.ancestor("form").submit();
         });

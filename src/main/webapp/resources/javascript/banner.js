@@ -56,7 +56,7 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 	        navNodes.item(event.newVal).addClass("banner-nav-active");
 	        Y.io(basePath + "/plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
 	            on : {
-	                success : function(id, o, args) {
+	                success : function(id, o) {
 	                    var fragment = Y.Node.create(o.responseText),
 	                        childNodes = fragment.get("childNodes"),
 	                        imgSrc = childNodes.filter("img").item(0).getAttribute("src"),

@@ -946,9 +946,8 @@
                 /**
                  * @method _editorMoved
                  * @private
-                 * @param event {CustomEvent}
                  */
-                _editorMoved : function(event) {
+                _editorMoved : function() {
                     this.get("bookmarks").moveBookmark(this._to, this._from);
                 },
 

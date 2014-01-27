@@ -20,7 +20,7 @@ $.LANE.createAutocompleteObject = function(input) {
                   q : request.term
                 },
                 autocompleteRequest: ++requestIndex,
-                success: function( data, status ) {
+                success: function( data ) {
                     if ( this.autocompleteRequest === requestIndex ) {
                         response($.map(data.suggest, function(item) {
                             return {

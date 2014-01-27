@@ -22,9 +22,8 @@
          * adds a dash to the end of the value if appropriate.
          * @method _handleKeyup
          * @private
-         * @param event {CustomEvent}
          */
-        _handleKeyup : function(event) {
+        _handleKeyup : function() {
             var value = this._input.get("value");
             if(DASHABLE.test(value)) {
                 this._input.set("value", value + "–");

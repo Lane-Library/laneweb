@@ -74,9 +74,8 @@
              * Responds to bookmarks:addSync event, changes the status to SUCCESSFUL
              * @method _handleSyncEvent
              * @private
-             * @param event {CustomEvent}
              */
-            _handleSyncEvent : function(event) {
+            _handleSyncEvent : function() {
                 this.set("status", BookmarkLink.SUCCESSFUL);
             },
 
@@ -84,9 +83,8 @@
              * Responds to mouseout event on the BookmarkLink, changes the status to TIMING
              * @method _handleBookmarkMouseOut
              * @private
-             * @param event {CustomEvent}
              */
-            _handleBookmarkMouseout : function(event) {
+            _handleBookmarkMouseout : function() {
                 this.set("status", BookmarkLink.TIMING);
             },
 
@@ -94,9 +92,8 @@
              * Responds to mouseover events on the BookmarkLink, changes the status to ACTIVE
              * @method _handleBookmarkMouseover
              * @private
-             * @param event {CustomEvent}
              */
-            _handleBookmarkMouseover : function(event) {
+            _handleBookmarkMouseover : function() {
                 this.set("status", BookmarkLink.ACTIVE);
             },
 
@@ -133,7 +130,7 @@
              * @method _handleBookmarkSearchClick
              * @private
              */
-            _handleBookmarkSearchClick : function(event) {
+            _handleBookmarkSearchClick : function() {
                 var query = Model.get(Model.QUERY),
                     source = Model.get(Model.SOURCE),
                     encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
@@ -145,7 +142,7 @@
                 //TODO: this is a temporary hack to take care of case 72768
                 if (bookmarkSearch && bookmarks) {
                     bookmarkSearch.setStyle("cursor", "wait");
-                    eventHandle = bookmarks.after("addSync", function(event) {
+                    eventHandle = bookmarks.after("addSync", function() {
                         bookmarkSearch.setStyle("cursor", "default");
                         bookmarkSearch.setStyle("visibility", "hidden");
                         eventHandle.detach();

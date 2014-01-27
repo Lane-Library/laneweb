@@ -49,7 +49,7 @@
 			this.get("model").after("selectedChange", this._handleModelChange, this);
             this.get("srcNode").after("change", this._handleViewChange, this);
 		},
-		_handleViewChange : function(event) {
+		_handleViewChange : function() {
 			this.get("model").setSelected(this.get("srcNode").get("selectedIndex"));
 		},
 		_handleModelChange : function(event) {

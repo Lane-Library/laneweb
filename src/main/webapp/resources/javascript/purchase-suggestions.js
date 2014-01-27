@@ -55,7 +55,7 @@
 
     Y.lane.PurchaseSuggestions = PurchaseSuggestions;
 
-    Y.lane.Lightbox.on("contentChanged", function(event) {
+    Y.lane.Lightbox.on("contentChanged", function() {
         if (Y.one("#purchase")) {
             var purchase = new Y.lane.PurchaseSuggestions({srcNode : "#purchase"});
             purchase.render();

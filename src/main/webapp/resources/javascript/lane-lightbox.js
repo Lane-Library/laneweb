@@ -134,7 +134,7 @@
             url = href.indexOf("#") === -1 ? href : href.substring(0, href.indexOf("#"));
             Y.io(url, {
                 on : {
-                    success : function(id, o, args) {
+                    success : function(id, o) {
                         var lightbox = Y.lane.Lightbox;
                         lightbox.set("url", href);
                         lightbox.setContent(o.responseText);

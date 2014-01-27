@@ -65,7 +65,7 @@
                         picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-di");
                         break;
                 }
-                picoSuggest.on("select", function(event) {
+                picoSuggest.on("select", function() {
                     if(picoIsOn && getPicoQuery()){
                         searchTerms.setValue(getPicoQuery());
                     }

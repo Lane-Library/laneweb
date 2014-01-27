@@ -157,7 +157,7 @@
 
     Y.lane.Feedback = Feedback;
 
-    Y.lane.Lightbox.on("contentChanged", function(event) {
+    Y.lane.Lightbox.on("contentChanged", function() {
         if (Y.one("#feedback")) {
             var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
                 url = Y.lane.Lightbox.get("url"),

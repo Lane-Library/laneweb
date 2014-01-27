@@ -71,9 +71,8 @@
          * The default submit handler.  Does nothing if there is no input.
          * @method _doSubmit
          * @private
-         * @param event {CustomEvent} the submit event fired by submitSearch()
          */
-        _doSubmit : function(event) {
+        _doSubmit : function() {
         	this._searchReset.removeClass("active");
             if (this._input.getValue()) {
                 SearchIndicator.show();
