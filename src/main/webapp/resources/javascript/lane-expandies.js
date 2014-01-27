@@ -114,7 +114,9 @@
                 for (i = 0; i < size; i++) {
                     anchor = anchors.item(i);
                     if (anchor.get("href") && !anchor.get("rel")) {
-                        anchor.on("click", function(event) {event.stopPropagation();});
+                        anchor.on("click", function(event) {
+                            event.stopPropagation();
+                        });
                     }
                 }
                 this.get("hd").addClass("yui3-accordion-item-hd");
