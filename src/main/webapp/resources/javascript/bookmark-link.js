@@ -4,10 +4,8 @@
         Lane = Y.lane,
         Model = Lane.Model;
 
-    if (!Model.get(Model.DISASTER_MODE)) {
-
-        //don't create BookmarkLink if there is a class=no-bookmarking
-        if (!Y.one(".no-bookmarking")) {
+    //don't create BookmarkLink if there is a class=no-bookmarking or in disaster mode
+    if (!Model.get(Model.DISASTER_MODE) && !Y.one(".no-bookmarking")) {
 
         /**
          * A link that appears when mousing over bookmarkable links and adds that link to bookmarks
@@ -315,7 +313,5 @@
 
         //create a BookmarkLink and save reference
         Lane.BookmarkLink = new BookmarkLink();
-
-        }
     }
 })();
