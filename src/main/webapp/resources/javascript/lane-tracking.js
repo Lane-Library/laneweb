@@ -55,11 +55,11 @@
                     label = link.get('text');
                 }
                 else if (link.ancestor(".lwSearchResults")) {
-                	var list = link.ancestor(".lwSearchResults"),
-                	    pageStart = Y.one("#pageStart");
-                	// pageStart is the value in the pageStart span or 1 if its not there.
-                	pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
-                	value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
+                    var list = link.ancestor(".lwSearchResults"),
+                        pageStart = Y.one("#pageStart");
+                    // pageStart is the value in the pageStart span or 1 if its not there.
+                    pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
+                    value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
                     label = link.get('text');
                     if (searchTerms) {
                         category = "lane:searchResultClick";
@@ -119,12 +119,12 @@
                             if (host.indexOf('/') > -1) {
                                 path = host.substring(host.indexOf('/'));
                                 if (path.indexOf('?') > -1) {
-                                	query = path.substring(path.indexOf('?'), path.length);
+                                    query = path.substring(path.indexOf('?'), path.length);
                                     path = path.substring(0, path.indexOf('?'));
                                 }
                                 host = host.substring(0, host.indexOf('/'));
                             } else {
-                            	query = '';
+                                query = '';
                                 path = '/';
                             }
                             external = true;

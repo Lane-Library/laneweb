@@ -30,7 +30,7 @@
             value : "Thank you for your feedback."
         },
         validator : {
-        	value : null
+            value : null
         }
     };
 
@@ -75,17 +75,17 @@
             items.item(activeItem).addClass(this.getClassName("item", "active"));
             this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
             if (sending) {
-            	this.set("sending", sending.get("innerHTML"));
+                this.set("sending", sending.get("innerHTML"));
             }
             if (thanks) {
-            	this.set("thanks", thanks.get("innerHTML"));
+                this.set("thanks", thanks.get("innerHTML"));
             }
         },
         sendFeedback : function(form) {
             var contentBox = this.get("contentBox"),
                 data = Y.JSON.stringify(this._getFeedback(form));
-        	contentBox.set("innerHTML", this.get("sending"));
-        	contentBox.scrollIntoView();
+            contentBox.set("innerHTML", this.get("sending"));
+            contentBox.scrollIntoView();
             Y.io(form.getAttribute("action"), {
                 method : "post",
                 data : data,
@@ -94,7 +94,7 @@
                 },
                 on : {
                     success : function() {
-                    	this.get("contentBox").set("innerHTML", this.get("thanks"));
+                        this.get("contentBox").set("innerHTML", this.get("thanks"));
                     },
                     failure : function() {
                         alert("Sorry, sending feedback failed.");
@@ -106,13 +106,13 @@
         _getFeedback : function(form) {
             var nodes = form.all("input, textarea, select"), feedback = {}, i, node, name;
             for (i = 0; i < nodes.size(); i++) {
-            	node = nodes.item(i);
-            	name = node.get("name");
-            	if (name) {
-            		if (node.get("type") !== "radio" || node.get("checked")) {
-                    	feedback[name] = node.get("value");
-            		}
-            	}
+                node = nodes.item(i);
+                name = node.get("name");
+                if (name) {
+                    if (node.get("type") !== "radio" || node.get("checked")) {
+                        feedback[name] = node.get("value");
+                    }
+                }
             }
             return feedback;
         },
@@ -143,15 +143,15 @@
             this.set("activeItem", this.get("menu").indexOf(event.currentTarget));
         },
         _handleSubmit : function(event) {
-        	event.preventDefault();
-        	if (this.get("validator").isValid()) {
-        		this.sendFeedback(event.currentTarget);
-        	}
+            event.preventDefault();
+            if (this.get("validator").isValid()) {
+                this.sendFeedback(event.currentTarget);
+            }
         },
         _handleValidatorChange : function(event) {
-        	if (event.prevVal) {
-        		event.prevVal.destroy();
-        	}
+            if (event.prevVal) {
+                event.prevVal.destroy();
+            }
         }
     });
 

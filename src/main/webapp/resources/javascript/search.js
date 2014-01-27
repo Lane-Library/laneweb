@@ -17,7 +17,7 @@
         //sanity check, is there a form?
         if (form) {
 
-        	// bubble search events to the Y.lane object
+            // bubble search events to the Y.lane object
             this.addTarget(Lane);
 
             this._form = form;
@@ -58,7 +58,7 @@
             //set up search reset
             this._searchReset = Y.one("#searchReset");
             if (this._input.getValue()) {
-            	this._searchReset.addClass("active");
+                this._searchReset.addClass("active");
             }
             this._searchReset.on("click", this._handleResetClick, this);
             this.publish("reset", {defaultFn : this._reset});
@@ -73,7 +73,7 @@
          * @private
          */
         _doSubmit : function() {
-        	this._searchReset.removeClass("active");
+            this._searchReset.removeClass("active");
             if (this._input.getValue()) {
                 SearchIndicator.show();
                 this._form.submit();
@@ -86,7 +86,7 @@
          * @private
          */
         _handleResetClick : function() {
-        	this.fire("reset");
+            this.fire("reset");
         },
 
         /**
@@ -96,11 +96,11 @@
          * @private
          */
         _handleValueChange : function() {
-        	if (this._input.getValue()) {
-        		this._searchReset.addClass("active");
-        	} else {
-        		this._searchReset.removeClass("active");
-        	}
+            if (this._input.getValue()) {
+                this._searchReset.addClass("active");
+            } else {
+                this._searchReset.removeClass("active");
+            }
         },
 
         /**
@@ -109,12 +109,12 @@
          * @private
          */
         _reset : function() {
-        	this._input.reset();
-        	this._searchReset.removeClass("active");
-        	if (Y.one(".search")) {
-        		Y.one(".search").setStyle("visibility", "hidden");
-        	}
-        	this._input.getInput().focus();
+            this._input.reset();
+            this._searchReset.removeClass("active");
+            if (Y.one(".search")) {
+                Y.one(".search").setStyle("visibility", "hidden");
+            }
+            this._input.getInput().focus();
         },
 
         /**
@@ -134,9 +134,9 @@
          * @private
          */
         _sourceChange : function(event) {
-        	this._input.setHintText(this._select.getSelectedTitle());
-        	this._tips.set("href", this._tips.get("href").replace(/#.*/, "#" + event.newVal));
-        	this._suggest.setLimitForSource(event.newVal);
+            this._input.setHintText(this._select.getSelectedTitle());
+            this._tips.set("href", this._tips.get("href").replace(/#.*/, "#" + event.newVal));
+            this._suggest.setLimitForSource(event.newVal);
         },
 
         /**
@@ -180,9 +180,9 @@
          * @method submitSearch
          */
         submitSearch : function(event) {
-        	if (event) {
-        		event.preventDefault();
-        	}
+            if (event) {
+                event.preventDefault();
+            }
             this.fire("submit");
         }
     };

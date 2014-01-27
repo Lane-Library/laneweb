@@ -9,20 +9,20 @@
 
     ResourceSearch = {
 
-	    search: function(query, resources) {
-	    	var i, resourcesParams = "";
-	    	for (i = 0; i < resources.length; i++) {
-	    		resourcesParams += "&r=" + resources[i];
-	    	}
+        search: function(query, resources) {
+            var i, resourcesParams = "";
+            for (i = 0; i < resources.length; i++) {
+                resourcesParams += "&r=" + resources[i];
+            }
             Y.io(basePath + "/apps/search/json?q=" + query + resourcesParams, {
                 on : {
                     success : function(id, o) {
-                    	var result = Y.JSON.parse(o.responseText);
+                        var result = Y.JSON.parse(o.responseText);
                         this.fire("update", result);
                         if (result.status === "running") {
-                        	Y.later(SEARCH_INTERVAL, window, function() {
-                        		ResourceSearch.search(query, resources);
-                        	});
+                            Y.later(SEARCH_INTERVAL, window, function() {
+                                ResourceSearch.search(query, resources);
+                            });
                         }
                     }
                 },
@@ -33,13 +33,13 @@
     },
 
     ResourceResultView = function(id, fn) {
-    	this._handle = ResourceSearch.on("update", function(result) {
-    		var resourceResult = result.resources[id];
-			fn.call(resourceResult);
-    		if (resourceResult.status) {
-    			this._handle.detach();
-    		}
-    	}, this);
+        this._handle = ResourceSearch.on("update", function(result) {
+            var resourceResult = result.resources[id];
+            fn.call(resourceResult);
+            if (resourceResult.status) {
+                this._handle.detach();
+            }
+        }, this);
     };
 
     Y.augment(ResourceSearch, Y.EventTarget);

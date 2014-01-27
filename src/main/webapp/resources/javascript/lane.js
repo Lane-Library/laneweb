@@ -13,9 +13,9 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     var lane = Y.namespace("lane");
 
     Y.augment(lane, Y.EventTarget, null, null, {
-    	prefix : "lane",
-    	emitFacade : true,
-    	broadcast : 1
+        prefix : "lane",
+        emitFacade : true,
+        broadcast : 1
     });
 
 });

@@ -7,9 +7,9 @@
         facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
         makeRequest = function() {
-    	    var id, j, facet, requestString = "";
+            var id, j, facet, requestString = "";
             for (j = 0; j < facets.size(); j++) {
-            	facet = facets.item(j);
+                facet = facets.item(j);
                 id = facet.get('id');
                 id = id.substring(0, id.indexOf("Facet"));
                 if (id) {

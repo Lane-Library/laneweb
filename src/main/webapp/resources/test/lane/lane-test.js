@@ -4,7 +4,7 @@ Y.use('console','test', function(Y) {
     var laneTestCase = new Y.Test.Case({
         name: "Lane TestCase",
         "test Y.lane exists" : function() {
-        	Y.Assert.isObject(Y.lane);
+            Y.Assert.isObject(Y.lane);
         }
     });
 

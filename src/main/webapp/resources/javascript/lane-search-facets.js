@@ -97,14 +97,14 @@
         Result.addShowAbstract = function(container) {
             if (Y.UA.ios && !container.one(".showAbstract")) {
                 //add showAbstract links in ios
-            	container.all(".hvrTrig").each(function(node) {
+                container.all(".hvrTrig").each(function(node) {
                     var label = (node.one(".pmid")) ? 'Abstract' : 'Description';
                     node.one(".hvrTarg").insert("<li class='showAbstract'>[<a href='#'>Show " + label + "</a>]</li>", "before");
                 });
             }
         };
         if (container) {
-        	Result.addShowAbstract(container);
+            Result.addShowAbstract(container);
         }
         if (elt) {
             facets = elt.all('.searchFacet');

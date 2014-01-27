@@ -46,18 +46,18 @@
             };
         }
         return {
-        	destroy : function() {
-        		var i, nodes = form.all("input[title='required']");
-        		Y.Event.detach("submit", validator._onFormSubmit, form);
-        		Y.Event.detach("reset", validator._onFormReset, form);
-        		for (i = 0; i < nodes.size(); i++) {
-        		    Y.Event.detach("focus", focusHandler, nodes.item(i));
-        		}
-        		validator.destroy();
-        	},
-        	isValid : function() {
-        		return validator.checkFormValues();
-        	}
+            destroy : function() {
+                var i, nodes = form.all("input[title='required']");
+                Y.Event.detach("submit", validator._onFormSubmit, form);
+                Y.Event.detach("reset", validator._onFormReset, form);
+                for (i = 0; i < nodes.size(); i++) {
+                    Y.Event.detach("focus", focusHandler, nodes.item(i));
+                }
+                validator.destroy();
+            },
+            isValid : function() {
+                return validator.checkFormValues();
+            }
         };
     };
 

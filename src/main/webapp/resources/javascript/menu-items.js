@@ -10,23 +10,23 @@
 
     Y.extend(MenuAndItems, Y.Widget, {
 
-    	bindUI : function() {
+        bindUI : function() {
             this.get("menu").on("click", this._handleMenuClick, this);
-    		this.after("activeItemChange", this._handleActiveItemChange);
-    	},
+            this.after("activeItemChange", this._handleActiveItemChange);
+        },
 
-    	renderUI : function() {
+        renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
             this.get("items").addClass(this.getClassName("item"));
-    	},
+        },
 
-    	syncUI : function() {
+        syncUI : function() {
             var activeItem = this.get("activeItem");
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
             this.get("items").item(activeItem).addClass(this.getClassName("item", "active"));
         },
 
-    	_handleActiveItemChange : function(event) {
+        _handleActiveItemChange : function(event) {
             var prevVal = event.prevVal,
                 newVal = event.newVal,
                 menu = this.get("menu"),
@@ -37,26 +37,26 @@
             items.item(prevVal).removeClass(itemActiveClass);
             menu.item(newVal).addClass(menuActiveClass);
             items.item(newVal).addClass(itemActiveClass);
-    	},
+        },
 
-    	_handleMenuClick : function(event) {
+        _handleMenuClick : function(event) {
             event.preventDefault();
             this.set("activeItem", this.get("menu").indexOf(event.currentTarget));
-    	}
+        }
 
     }, {
-    	ATTRS : {
+        ATTRS : {
             activeItem : {
                 value : 0
             },
-    		menu : {
+            menu : {
                 value : null
             },
-    		items : {
+            items : {
                 value : null
             }
-    	},
-    	NAME : "menu-items"
+        },
+        NAME : "menu-items"
     });
 
 })();

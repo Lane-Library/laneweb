@@ -2,11 +2,11 @@
 //check if there is a query
 (function() {
 
-	var Model = Y.lane.Model,
-	    query = Model.get(Model.QUERY),
-	    basePath = Model.get(Model.BASE_PATH) || "",
-	    encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
-	    queryMapping = Y.one('#queryMapping');
+    var Model = Y.lane.Model,
+        query = Model.get(Model.QUERY),
+        basePath = Model.get(Model.BASE_PATH) || "",
+        encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
+        queryMapping = Y.one('#queryMapping');
         if (query && queryMapping) {
             Y.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
                 on:{
@@ -15,7 +15,7 @@
                         queryMap = Y.JSON.parse(o.responseText),
                         resourceMap = queryMap.resourceMap;
                     if (resourceMap) {
-                    	queryMapResources = resourceMap.resources;
+                        queryMapResources = resourceMap.resources;
                         queryMap.getResourcesString = function() {
                             var i, separator = "; ", string = "";
                             for (i = 0; i < queryMapResources.length; i++) {

@@ -13,13 +13,13 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
     };
 
     var bannerTestCase = new Y.Test.Case({
-		name : 'Banner Test Case',
+        name : 'Banner Test Case',
 
-		banner: Y.Widget.getByNode("#banner"),
+        banner: Y.Widget.getByNode("#banner"),
 
-		testAnchorActive: function() {
-		    var anchors = Y.all(".banner-nav a");
-		    var bannerContent = Y.one(".banner-content");
+        testAnchorActive: function() {
+            var anchors = Y.all(".banner-nav a");
+            var bannerContent = Y.one(".banner-content");
             Y.Assert.isTrue(anchors.item(0).hasClass("banner-nav-active"));
             Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner1", bannerContent.get("text"));
@@ -28,9 +28,9 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
                 Y.Assert.isTrue(anchors.item(1).hasClass("banner-nav-active"));
                 Y.Assert.areEqual("banner2", bannerContent.get("text"));
             }, 10000);
-		},
+        },
 
-		testNavAnchorClick: function() {
+        testNavAnchorClick: function() {
             var anchors = Y.all(".banner-nav a");
             var bannerContent = Y.one(".banner-content");
             Y.Assert.isFalse(anchors.item(0).hasClass("banner-nav-active"));
@@ -41,21 +41,21 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
             Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner1", bannerContent.get("text"));
             Y.Assert.isFalse(this.banner.get("automate"));
-		},
+        },
 
-		testNavLeftArrow: function() {
-		    var anchors = Y.all(".banner-nav a");
-		    var bannerContent = Y.one(".banner-content");
+        testNavLeftArrow: function() {
+            var anchors = Y.all(".banner-nav a");
+            var bannerContent = Y.one(".banner-content");
             Y.Assert.isTrue(anchors.item(0).hasClass("banner-nav-active"));
             Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner1", bannerContent.get("text"));
-		    Y.one("doc").simulate("keyup", { keyCode: 37 });
+            Y.one("doc").simulate("keyup", { keyCode: 37 });
             Y.Assert.isFalse(anchors.item(0).hasClass("banner-nav-active"));
             Y.Assert.isTrue(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner2", bannerContent.get("text"));
-		},
+        },
 
-		testNavRightArrow: function() {
+        testNavRightArrow: function() {
             var anchors = Y.all(".banner-nav a");
             var bannerContent = Y.one(".banner-content");
             Y.Assert.isFalse(anchors.item(0).hasClass("banner-nav-active"));
@@ -65,9 +65,9 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
             Y.Assert.isTrue(anchors.item(0).hasClass("banner-nav-active"));
             Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
             Y.Assert.areEqual("banner1", bannerContent.get("text"));
-		}
+        }
 
-	});
+    });
 
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({

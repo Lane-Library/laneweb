@@ -110,9 +110,9 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     var lane = Y.namespace("lane");
 
     Y.augment(lane, Y.EventTarget, null, null, {
-    	prefix : "lane",
-    	emitFacade : true,
-    	broadcast : 1
+        prefix : "lane",
+        emitFacade : true,
+        broadcast : 1
     });
 
     var i, laneJavascript = [
@@ -162,7 +162,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     var basePath = "";
 
     if (window.model) {
-    	basePath = window.model["base-path"] || basePath;
+        basePath = window.model["base-path"] || basePath;
     }
 
     //load each javascript file separately

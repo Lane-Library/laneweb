@@ -49,18 +49,18 @@ Y.use('console', 'test', function(Y) {
         },
 
         testConstructor : function() {
-        	Y.Assert.isObject(this.bookmarks);
+            Y.Assert.isObject(this.bookmarks);
         },
 
         testAddBookmark : function() {
-        	this.bookmarks.addBookmark(new Bookmark("label1","url1"));
+            this.bookmarks.addBookmark(new Bookmark("label1","url1"));
             Y.Assert.areEqual(this.initialSize + 1, this.bookmarks.size());
         },
 
         testAddBadBookmark : function() {
-        	try {
-            	this.bookmarks.addBookmark(null);
-        	} catch(e) {}
+            try {
+                this.bookmarks.addBookmark(null);
+            } catch(e) {}
             Y.Assert.areEqual(this.initialSize, this.bookmarks.size());
         },
 
@@ -82,9 +82,9 @@ Y.use('console', 'test', function(Y) {
         },
 
         testGetBookmark : function() {
-        	var bookmark = new Bookmark("label4", "url4");
-        	this.bookmarks.addBookmark(bookmark);
-        	Y.Assert.areEqual(bookmark, this.bookmarks.getBookmark(0));
+            var bookmark = new Bookmark("label4", "url4");
+            this.bookmarks.addBookmark(bookmark);
+            Y.Assert.areEqual(bookmark, this.bookmarks.getBookmark(0));
         },
 
         testRemoveBookmarks : function() {

@@ -4,10 +4,10 @@
  */
 (function() {
 
-	Y.namespace("lane");
+    Y.namespace("lane");
 
-	var ALT = "alt",
-	    COOKIES_FETCH = "cookiesFetch",
+    var ALT = "alt",
+        COOKIES_FETCH = "cookiesFetch",
         LINK_HOST = "linkHost",
         LOCAL = "local",
         HOST_NAME = "hostname",
@@ -21,10 +21,10 @@
         TITLE = "title",
         lane = Y.lane,
         location = lane.Location,
-	    basePath = lane.Model.get("base-path") || "",
+        basePath = lane.Model.get("base-path") || "",
         cookiesFetchPath = basePath + "/cookiesFetch.html",
-	    documentHostName = location.get("hostname"),
-	    loginPath = basePath + "/secure/apps/proxy/credential",
+        documentHostName = location.get("hostname"),
+        loginPath = basePath + "/secure/apps/proxy/credential",
 
     LinkPlugin = function(config) {
         LinkPlugin.superclass.constructor.apply(this, arguments);

@@ -9,18 +9,18 @@
     };
 
     Y.extend(Model, Y.Base, {
-    	//keep this in sync with edu.stanford.irt.laneweb.model.Model
-    	AUTH : "auth",
-    	BASE_PATH : "base-path",
-    	DISASTER_MODE : "disaster-mode",
-    	IPGROUP : "ipgroup",
-    	IS_ACTIVE_SUNETID : "isActiveSunetID",
-    	PROXY_LINKS : "proxy-links",
-    	QUERY : "query",
-    	SOURCE : "source",
-    	URL_ENCODED_QUERY : "url-encoded-query"
+        //keep this in sync with edu.stanford.irt.laneweb.model.Model
+        AUTH : "auth",
+        BASE_PATH : "base-path",
+        DISASTER_MODE : "disaster-mode",
+        IPGROUP : "ipgroup",
+        IS_ACTIVE_SUNETID : "isActiveSunetID",
+        PROXY_LINKS : "proxy-links",
+        QUERY : "query",
+        SOURCE : "source",
+        URL_ENCODED_QUERY : "url-encoded-query"
     }, {
-    	NAME : "model"
+        NAME : "model"
     });
 
     Lane.Model = new Model();

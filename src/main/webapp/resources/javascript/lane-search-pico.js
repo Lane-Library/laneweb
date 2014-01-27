@@ -38,7 +38,7 @@
         createPicoFields = function() {
             var i, inputs, picoSuggest, queryString = {};
             if (location.search) {
-            	queryString = Y.QueryString.parse(location.search.substring(1));
+                queryString = Y.QueryString.parse(location.search.substring(1));
             }
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
@@ -108,9 +108,9 @@
             }
         });
         Lane.on("search:reset", function() {
-        	for (var i = 0; i < picoTextInputs.length; i++) {
-        		picoTextInputs[i].reset();
-        	}
+            for (var i = 0; i < picoTextInputs.length; i++) {
+                picoTextInputs[i].reset();
+            }
         });
     }
 })();

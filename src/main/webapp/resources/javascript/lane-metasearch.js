@@ -123,7 +123,7 @@
     if (hybridInput) {
         laneSuggest = new Y.lane.Suggest(hybridInput);
         laneSuggest.on("select",function(){
-        	searchIndicator.show();
+            searchIndicator.show();
             hybridInput.ancestor("form").submit();
         });
     }
