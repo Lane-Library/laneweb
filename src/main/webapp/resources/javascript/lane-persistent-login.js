@@ -104,8 +104,9 @@
         if ( !auth ||  node.get('search').indexOf("pl=true") >0 ) {
             url = url + 'secure/';
         }
-        if(!redirectUrl)
+        if(!redirectUrl) {
             redirectUrl = "/index.html";
+        }
         url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
         node.set('href', url);
     };
@@ -140,8 +141,9 @@
                                 path : "/",
                                 expires : date
                             });
-                } else
+                } else {
                     Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {    path : "/"    });
+                }
             });
         }
 

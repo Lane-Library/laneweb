@@ -71,8 +71,9 @@ $('#yes-persistent-login').live('click', function(e) {
 $('#no-persistent-login').live('click', function(event) {
     if ($('#dont-ask-again') && $('#dont-ask-again:checked').val() === 'on') {
         $.LANE.setCookie(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', 3650);
-    } else
+    } else {
         $.LANE.setCookie(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', null);
+    }
     setLink(event);
 });
 
