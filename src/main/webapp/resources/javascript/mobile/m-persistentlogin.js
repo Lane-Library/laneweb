@@ -18,7 +18,7 @@ $.LANE.popupWindow = function(url){
 // click on login link
 $(".webauthLogin:contains('Logout')").live("click",function(e) {
     e.preventDefault();
-    if(true === confirm("Do you really want to logout?")){
+    if(confirm("Do you really want to logout?")){
         document.location.href = e.target.href;
      }
 });
@@ -29,7 +29,7 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
     var persistentStatusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
     if (persistentStatusCookie    && 'denied' === persistentStatusCookie) {
         document.location = model['base-path'] + '/secure/persistentLogin.html?pl=false&url='+ document.location;
-    } else if(model['disaster-mode'] === true){
+    } else if(model['disaster-mode']){
         document.location = model['base-path'] + '/login-disabled.html';
     }
     else {
@@ -43,7 +43,7 @@ $(".webauthLogin:contains('Login')").live("click",function(e) {
 $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').live("click", function(event) {
     var link = event.currentTarget,
     now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-    if (model['disaster-mode'] !== true && 'denied' !== statusCookie && (!model["isActiveSunetID"] || statusCookie < now.getTime())){
+    if (!model['disaster-mode'] && 'denied' !== statusCookie && (!model["isActiveSunetID"] || statusCookie < now.getTime())){
         redirectUrl = encodeURIComponent(link.href);
         if(model["isActiveSunetID"]){
             $.LANE.popupWindow(model['base-path'] + '/m/plain/persistentlogin-extention.html');

@@ -458,7 +458,7 @@
                 delegate : ".content"
             });
             tt.after('visibleChange', function(e) {
-                if (e.newVal === false) {
+                if (!e.newVal) {
                     e.target.reset();
                 }
             });
