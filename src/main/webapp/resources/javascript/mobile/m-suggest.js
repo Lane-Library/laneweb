@@ -77,6 +77,12 @@ $(this).bind("pageinit", function() {
             $(this).attr('autocorrect','off'); // TODO: shouldn't be necessary?
             $(this).autocomplete($.LANE.createAutocompleteObject($(this)));
         }
+        $(this).bind("focus", function() {
+            // create or enable autocomplete on input
+            if($(this).hasClass('ui-autocomplete-input')){
+                $(this).autocomplete('enable');
+            }
+        });
     });
 });
 // submit form on autocomplete select if input is "qSearch"
@@ -87,15 +93,4 @@ $("form").on("autocompleteselect", function(e, ui) {
         //$(this)[0].submit();
         $(this).trigger('submit');
     }
-});
-
-$("form").on("focus", function() {
-    $(this).find(":input[data-type=search]").each(function(){
-        $(this).bind("focus", function() {
-            // create or enable autocomplete on input
-            if($(this).hasClass('ui-autocomplete-input')){
-                $(this).autocomplete('enable');
-            }
-        });
-    });
 });
