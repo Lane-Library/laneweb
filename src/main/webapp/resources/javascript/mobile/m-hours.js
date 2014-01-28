@@ -36,7 +36,7 @@ $.LANE.getHours = function(){
 };
 
 //When the homepage is loaded load content for Hours of operation through Ajax.
-$("#_home").live("pageinit", function() {
+$("#_home").on("pageinit", function() {
     // fetch hours content
     $.LANE.getHours();
 });
