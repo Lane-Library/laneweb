@@ -135,10 +135,10 @@ $.ajax({
     };
 })();
 
-$("form").live( "autocompleteselect", function(e) {
+$("form").one( "autocompleteselect", function(e) {
     $.LANE.tracking.track(e);
 });
-$("form").live( "submit", function(e) {
+$("form").on( "submit", function(e) {
     $.LANE.tracking.track(e);
 });
 $(document).bind("click", function(e) {

@@ -272,8 +272,8 @@
                             <removeIncluded>false</removeIncluded>
                             <output>target/laneweb/resources/css/mobile/lane-mobile.css</output>
                             <includes>
-                                <include>jquery.mobile.structure-1.1.1-min.css</include>
-                                <include>jquery.ui.autocomplete-min.css</include>
+                                <include>jquery.mobile.structure-1.4.0-min.css</include>
+                                <include>jquery-ui-1.10.4.custom-min.css</include>
                                 <include>m-lane-min.css</include>
                                 <include>m-buttons-min.css</include>
                             </includes>
@@ -282,9 +282,9 @@
                             <removeIncluded>false</removeIncluded>
                             <output>target/laneweb/resources/javascript/mobile/lane-mobile.js</output>
                             <includes>
-                                <include>jquery-1.7.1-min.js</include>
-                                <include>jquery.mobile-1.1.1-min.js</include>
-                                <include>jquery-ui-1.8.23.custom-min.js</include>
+                                <include>jquery-1.9.1-min.js</include>
+                                <include>jquery.mobile-1.4.0.custom-min.js</include>
+                                <include>jquery-ui-1.10.4.custom-min.js</include>
                                 <include>m-lane-min.js</include>
                                 <include>m-persistentlogin-min.js</include>
                                 <include>m-cookie-min.js</include>

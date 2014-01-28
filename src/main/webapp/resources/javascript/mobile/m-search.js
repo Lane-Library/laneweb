@@ -63,7 +63,7 @@ $.LANE.validatePicoForm = function(event){
 
 
 //When the homepage is loaded, attach event listeners for search tabs and search boxes
-$("#_home").live("pageinit", function() {
+$("#_home").on("pageinit", function() {
     // Attach click event listener to the search tabs.
     // User can select Lane, Clinical, Pediatric search by clicking/tapping on the appropriate icon.
     $("#searchTabs li").click(function() {
@@ -172,7 +172,7 @@ $(this).bind("pageinit", function() {
     });
 });
 
-$("form").live("focus", function() {
+$("form").on("focus", function() {
     $(this).find(":input[data-type=search]").each(function(){
         $(this).bind("focus", function() {
             // scroll down to the top of this field
