@@ -24,7 +24,7 @@
 
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="/resources/javascript/mobile/jquery-1.9.1.js"> </script>
-        <script type="text/javascript" src="/resources/javascript/mobile/jquery.mobile-1.4.0.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/jquery.mobile-1.4.0.custom.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/jquery-ui-1.10.4.custom.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/m-lane.js"> </script>
         <script type="text/javascript" src="/resources/javascript/mobile/m-cookie.js"> </script>
