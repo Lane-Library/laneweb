@@ -83,7 +83,7 @@ $(this).bind("pageinit", function() {
 $("form").on("autocompleteselect", function(e, ui) {
     if(ui.item && $(e.target).attr('name') === 'qSearch'){
         $(e.target).val(ui.item.value);
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading('show');
         //$(this)[0].submit();
         $(this).trigger('submit');
     }
