@@ -58,12 +58,16 @@
         <tag>HEAD</tag>
     </scm>
     <properties>
+        <laneweb.build.sourceDirectory>src/main/java</laneweb.build.sourceDirectory>
+        <laneweb.build.testSourceDirectory>src/test/java</laneweb.build.testSourceDirectory>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
         <defaultGoal>package</defaultGoal>
+        <sourceDirectory>${laneweb.build.sourceDirectory}</sourceDirectory>
+        <testSourceDirectory>${laneweb.build.testSourceDirectory}</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -804,4 +808,17 @@
         	<scope>runtime</scope>
         </dependency>
     </dependencies>
+    <profiles>
+        <profile>
+            <id>js-sonar</id>
+            <properties>
+                <sonar.branch>JavaScript</sonar.branch>
+                <sonar.language>js</sonar.language>
+                <sonar.exclusions>**/yui*.js,**/jquery*.js,**/swfobject.js</sonar.exclusions>
+                <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+                <laneweb.build.sourceDirectory>src/main/webapp/resources/javascript</laneweb.build.sourceDirectory>
+                <laneweb.build.testSourceDirectory>src/main/webapp/resources/test</laneweb.build.testSourceDirectory>
+            </properties>
+        </profile>
+    </profiles>
 </project>
