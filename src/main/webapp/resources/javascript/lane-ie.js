@@ -26,10 +26,6 @@
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).one('li').setStyle('borderLeft', 'none');
         }
-        nodes = Y.all(".type1 .details > div");
-        for (i = 0; i < nodes.size(); i++) {
-            nodes.item(i).addClass("child");
-        }
         //add ie6Feedback to feedbackLink to get position : absolute from feedback.css
         node = Y.one("#feedbackLink");
         if (node) {

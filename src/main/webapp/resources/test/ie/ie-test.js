@@ -29,10 +29,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
             Y.Assert.isTrue(style.indexOf("none") >= 0 || style === "currentColor");
         },
 
-        testType1DetailsDivHasClassChild: function() {
-            Y.Assert.isTrue(Y.one(".type1 .details > div").hasClass("child"));
-        },
-
         testFeedbackLinkHasClassIe6Feedback: function() {
             Y.Assert.isTrue(Y.one("#feedbackLink").hasClass("ie6Feedback"));
         },
