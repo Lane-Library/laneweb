@@ -170,10 +170,7 @@ $(this).bind("pageinit", function() {
             }
         }
     });
-});
-
-$("form").on("focus", function() {
-    $(this).find(":input[data-type=search]").each(function(){
+    $(":input[data-type=search]").each(function(){
         $(this).bind("focus", function() {
             // scroll down to the top of this field
             window.scrollTo(0, $(this).offset().top - 6);
