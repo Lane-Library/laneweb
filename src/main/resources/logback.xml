@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    
+    <appender name="LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${catalina.base}/logs/laneweb.log</File>
+        <encoder>
+            <pattern>%d %p [%t][%c] - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <maxIndex>10</maxIndex>
+            <FileNamePattern>laneweb.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-5p %c{1} - %m%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="querymap" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${catalina.base}/logs/querymap.log</File>
+        <encoder>
+            <pattern>%d %p %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <maxIndex>10</maxIndex>
+            <FileNamePattern>querymap.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <logger name="querymap" level="info" additivity="false">
+        <appender-ref ref="querymap"/>
+    </logger>
+    
+    <root level="${laneweb.log4j.root.priority.value}">
+        <appender-ref ref="${laneweb.log4j.root.appender-ref.ref}"/>
+    </root>
+    
+</configuration>
+

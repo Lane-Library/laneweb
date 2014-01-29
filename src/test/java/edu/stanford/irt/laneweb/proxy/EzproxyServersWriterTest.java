@@ -27,7 +27,7 @@ public class EzproxyServersWriterTest {
 
     private DataSource dataSource;
 
-    private String expected = "T value\nU value\nHJ value\n\nT jenson.stanford.edu\nU http://jenson.stanford.edu\nHJ jenson.stanford.edu\n\nT socrates.stanford.edu\nU http://socrates.stanford.edu\nHJ socrates.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu";
+    private String expected = "T value\nU value\nHJ value\n\nT bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu";
 
     private ResultSet resultSet;
 

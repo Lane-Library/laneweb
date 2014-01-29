@@ -1,6 +1,6 @@
 (function() {
-    
-    
+
+
 
 
         var bassettContent = Y.one('#bassettContent'),
@@ -16,10 +16,10 @@
                 for (i = 0; i < anchor.size(); i++) {
                     if (anchor.item(i).get('rel') === null || anchor.item(i).get('rel') === "" ||  anchor.item(i).get('rel') === "propagation") {
                         anchor.item(i).on('click',function(ev) {
-                            if (this.get('id') == "diagram-choice") {
+                            if (this.get('id') === "diagram-choice") {
                                 diagramDisplay = true;
                             }
-                            if (this.get('id') == "photo-choice") {
+                            if (this.get('id') === "photo-choice") {
                                 diagramDisplay = false;
                             }
                             url = formatAjaxUrl(this.get('href'));
@@ -37,7 +37,7 @@
 
         loadContent = function(url) {
             url = basePath + "/plain/biomed-resources/bassett/raw".concat(url);
-            function successHandler(id, o, args) {
+            function successHandler(id, o) {
                 var content = Y.Node.create(o.responseText),
                     container = Y.one('#bassettContent');
                 container.setContent(content);
@@ -51,7 +51,7 @@
             href = href.replace("search.html", "/biomed-resources/bassett/bassettsView.html");
             href = href.substr(href.indexOf("/bassett/") + 8);
             href = href.split("?");
-            if (href.length == 1) {
+            if (href.length === 1) {
                 url = href[0];
             }
             if (href.length > 1) {
@@ -71,7 +71,7 @@
             history.on("bassettChange",function(e) {
                 loadContent(e.newVal);
             });
-            history.on("bassettRemove",function(e) {
+            history.on("bassettRemove",function() {
                 loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
             });
         };

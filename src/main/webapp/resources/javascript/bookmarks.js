@@ -6,13 +6,16 @@
         BookmarkEditor,
         BookmarksEditor,
         Lane = Y.lane,
-        Model = Lane.Model;
+        Model = Lane.Model,
+        DISASTER_MODE = Model.get(Model.DISASTER_MODE),
+        BASE_PATH = Model.get(Model.BASE_PATH) || "",
+        PROXY_LINKS = Model.get(Model.PROXY_LINKS);
 
-    if (Y.one("#bookmarks") && !Model.get(Model.DISASTER_MODE)) {
+    if (Y.one("#bookmarks") && !DISASTER_MODE) {
 
         /**
          * A class for representing a bookmark with attributes for the label and url.
-         * 
+         *
          * @class Bookmark
          * @uses EventTarget
          * @constructor
@@ -25,7 +28,7 @@
         };
 
         Bookmark.prototype = {
-                
+
                 /**
                  * The default changeEvent handler
                  * @method _valueChange
@@ -36,7 +39,7 @@
                     this._label = event.newLabel;
                     this._url = event.newUrl;
                 },
-                
+
                 /**
                  * getter for the label
                  * @method getLabel
@@ -54,7 +57,7 @@
                 getUrl : function() {
                     return this._url;
                 },
-                
+
                 /**
                  * setter for the label, delegates to setValues with the current
                  * url as the url value.
@@ -64,12 +67,12 @@
                 setLabel : function(newLabel) {
                     this.setValues(newLabel, this._url);
                 },
-                
+
                 /**
                  * setter for the url, delegates to setValues with the current
                  * @method setUrl
                  * label as the label value.
-                 * 
+                 *
                  * @param newUrl {string}
                  */
                 setUrl : function(newUrl) {
@@ -122,7 +125,7 @@
         /**
          * A class for representing an ordered collection of Bookmarks.
          * It fires events when the collection changes
-         * 
+         *
          * @class Bookmarks
          * @uses EventTarget
          * @constructor
@@ -140,7 +143,6 @@
                     this._bookmarks.push(bookmarks[i]);
                 }
             }
-            this._basePath = Model.get(Model.BASE_PATH) || "";
 
             /**
              * @event add
@@ -148,20 +150,20 @@
              * @preventable _defAddFn
              */
             this.publish("add", {defaultFn: this._defAddFn});
-            
+
             /**
              * @event addSync
              * @description fired after an add is successfully synced with the server
              */
             this.publish("addSync", {defaultFn: this._handleAddSync, preventable : false});
-            
+
             /**
              * @event move
              * @description Fired when a bookmark is moved
              * @prefentable _defMoveFn
              */
             this.publish("move", {defaultFn : this._defMoveFn});
-            
+
             /**
              * @event moveSync
              * @description Fired when a move is successfully synced with the server
@@ -174,7 +176,7 @@
              * @preventable _defRemoveFn
              */
             this.publish("remove", {defaultFn: this._defRemoveFn});
-            
+
             /**
              * @event removeSync
              * @description fired when a removal is successfully synced with the server
@@ -185,9 +187,9 @@
              * @event update
              * @description Fired when a bookmark is updated.
              * @preventable _defUpdateFn
-             */            
+             */
             this.publish("update", {defaultFn: this._defUpdateFn});
-            
+
             /**
              * @event updateSync
              * @description fired when an update is successfully synced with the server
@@ -209,7 +211,7 @@
                     }
                     this.fire("add", {bookmark : bookmark});
                 },
-                
+
                 /**
                  * @method getBookmark
                  * @param position {number}
@@ -218,7 +220,7 @@
                 getBookmark : function(position) {
                     return this._bookmarks[position];
                 },
-                
+
                 /**
                  * @method moveBookmark
                  * @param to {number} where the bookmark goes to
@@ -227,7 +229,7 @@
                 moveBookmark : function(to, from) {
                     this.fire("move", {to : to, from : from});
                 },
-                
+
                 /**
                  * fires a bookmark:remove event
                  * @method removeBookmarks
@@ -236,7 +238,7 @@
                 removeBookmarks : function(positions) {
                     this.fire("remove", {positions : positions});
                 },
-                
+
                 /**
                  * fires a bookmark:update event
                  * @method updateBookmark
@@ -246,7 +248,7 @@
                     var position = Y.Array.indexOf(this._bookmarks, bookmark);
                     this.fire("update", {bookmark : bookmark, position : position});
                 },
-                
+
                 /**
                  * @method size
                  * @returns {number} the number of bookmarks
@@ -254,7 +256,7 @@
                 size : function() {
                     return this._bookmarks.length;
                 },
-                
+
                 /**
                  * @method indexOf
                  * @param bookmark {Bookmark}
@@ -263,7 +265,7 @@
                 indexOf : function(bookmark) {
                     return Y.Array.indexOf(this._bookmarks, bookmark);
                 },
-                
+
                 /**
                  * @method toString
                  * @returns {String} a string representation
@@ -279,7 +281,7 @@
                     string += "]";
                     return string;
                 },
-                
+
                 /**
                  * The default response to bookmarks:add, attempts to sync with server, fires
                  * bookmarks:addSync.
@@ -289,7 +291,7 @@
                  */
                 _defAddFn : function(event) {
                     var data = Y.JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
-                    Y.io(this._basePath + "/bookmarks", {
+                    Y.io(BASE_PATH + "/bookmarks", {
                         method : "post",
                         data : data,
                         headers : {
@@ -309,7 +311,7 @@
                         context : this
                     });
                 },
-                
+
                 /**
                  * The default response to bookmarks:move, attempts to sync the move with the
                  * server, fires bookmarks:moveSync if successful
@@ -319,7 +321,7 @@
                  */
                 _defMoveFn : function(event) {
                     var data = Y.JSON.stringify({to : event.to, from : event.from});
-                    Y.io(this._basePath + "/bookmarks/move", {
+                    Y.io(BASE_PATH + "/bookmarks/move", {
                         method : "post",
                         data : data,
                         headers : {
@@ -336,7 +338,7 @@
                         context : this
                     });
                 },
-                
+
                 /**
                  * The default response to bookmarks:remove, attempts to sync with server,
                  * fires bookmarks:removeSync if successful
@@ -346,7 +348,7 @@
                  */
                 _defRemoveFn : function(event) {
                     var indexes = Y.JSON.stringify(event.positions);
-                    Y.io(this._basePath + "/bookmarks?indexes=" + indexes, {
+                    Y.io(BASE_PATH + "/bookmarks?indexes=" + indexes, {
                         method : "delete",
                         on : {
                             success : function() {
@@ -362,7 +364,7 @@
                         context : this
                     });
                 },
-                
+
                 /**
                  * The default response to bookmarks:update, attempts to sync with server,
                  * fires bookmarks:updateSync if successful.
@@ -372,7 +374,7 @@
                  */
                 _defUpdateFn : function(event) {
                     var data = Y.JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
-                    Y.io(this._basePath + "/bookmarks", {
+                    Y.io(BASE_PATH + "/bookmarks", {
                         method : "put",
                         data : data,
                         headers : {
@@ -393,7 +395,7 @@
                     });
 
                 },
-                
+
                 /**
                  * handler for bookmark:valueChange events
                  * @method _handleValueChange
@@ -403,7 +405,7 @@
                 _handleValueChange : function(event) {
                     this.updateBookmark(event.target);
                 },
-                
+
                 /**
                  * handler for bookmarks:addSync event, adds a bookmark to index 0 of the
                  * backing Array
@@ -415,7 +417,7 @@
                         event.bookmark.after("valueChange", this._handleValueChange, this);
                         this._bookmarks.unshift(event.bookmark);
                 },
-                
+
                 /**
                  * handler from bookmarks:moveSync event, moves a bookmark.
                  * @method _handleMoveSync
@@ -425,7 +427,7 @@
                 _handleMoveSync : function(event) {
                     this._bookmarks.splice(event.to, 0, this._bookmarks.splice(event.from, 1)[0]);
                 },
-                
+
                 /**
                  * handler for bookmarks:removeSync event, removes bookmarks from the
                  * backing Array
@@ -438,7 +440,7 @@
                             this._bookmarks.splice(event.positions[i], 1);
                         }
                 },
-                
+
                 /**
                  * handler for sync failures, shows an alert message.
                  * @param message {String}
@@ -457,17 +459,17 @@
 
         //make the Bookmarks constructor globally accessible
         Lane.Bookmarks = Bookmarks;
-        
+
         /**
          * The Bookmarks Widget.  This is created by parsing the ul element
          * with id #bookmarks.
-         * 
+         *
          * @class BookmarksWidget
          * @extends Widget
          * @constructor
          */
         BookmarksWidget = Y.Base.create("bookmarks", Y.Widget, [], {
-            
+
             /**
              * Set up event listeners to respond to events when the server has been updated
              * so the bookmark markup can change appropriately
@@ -480,7 +482,7 @@
                 bookmarks.after("removeSync", this._bookmarksRemoved, this);
                 bookmarks.after("updateSync", this._bookmarkUpdated, this);
             },
-            
+
             /**
              * Set up the UI, in this case truncate text in links to 32 characters,
              * and hide items > displayLimit.
@@ -490,7 +492,7 @@
                 this._truncateLabels();
                 this._hideSomeItems();
             },
-            
+
             /**
              * Provide a text representation of this widget.
              * @method toString
@@ -499,7 +501,7 @@
             toString : function() {
                 return "BookmarksWidget:" + this.get("bookmarks");
             },
-            
+
             /**
              * Respond to a successful bookmark add event.  Adds a list item with a link to the top of the list.
              * @method _bookmarkAdded
@@ -507,10 +509,14 @@
              * @param event {CustomEvent}
              */
             _bookmarkAdded : function(event) {
-                this.get("srcNode").prepend("<li><a href='" + event.bookmark.getUrl() + "'>" + event.bookmark.getLabel() + "</a></li>");
+                var url = event.bookmark.getUrl();
+                if (PROXY_LINKS && url.match(/^http[s]?:/)) {
+                    url = BASE_PATH + "/apps/proxy/credential?url=" + url;
+                }
+                this.get("srcNode").prepend("<li><a href='" +url + "'>" + event.bookmark.getLabel() + "</a></li>");
                 this.syncUI();
             },
-            
+
             /**
              * Respond to a successful bookmark moved revent.  Moves the corresponding list item.
              * @method _bookmarkMoved
@@ -527,7 +533,7 @@
                 current.insert(moved, position);
                 this.syncUI();
             },
-            
+
             /**
              * Respond to a successful bookmarks remove event.  Removes list items of bookmarks that were deleted.
              * @method _bookmarksRemoved
@@ -541,7 +547,7 @@
                 }
                 this.syncUI();
             },
-            
+
             /**
              * Respond to a successful bookmark update event.  Alters the anchor text and/or url for a bookmark.
              * @method _bookmarkUpdated
@@ -555,7 +561,7 @@
                 anchor.set("href", bookmark.getUrl());
                 this.syncUI();
             },
-            
+
             /**
              * Shorten all anchor text to less than 32 characters, append ... if shortened.
              * @method _truncateLabels
@@ -571,7 +577,7 @@
                     }
                 }
             },
-            
+
             /**
              * Hide items > displayLimit
              * @method _hideSomeItems()
@@ -628,7 +634,7 @@
              * @constructor
              */
             BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
-                
+
                 /**
                  * Creates text inputs and buttons for the editor.
                  * @method renderUI
@@ -641,7 +647,7 @@
                         "<button value=\"reset\" type=\"reset\">undo</button>" +
                         "<button name=\"action\" value=\"cancel\" type=\"submit\">cancel</button>");
                 },
-                
+
                 /**
                  * Sets up event handlers.
                  * @method bindUI
@@ -650,7 +656,7 @@
                     this.get("srcNode").all("button").on("click", this._handleButtonClick, this);
                     this.on("editingChange", this._handleEditingChange, this);
                 },
-                
+
                 /**
                  * Sets up the TextInput objects for the inputs and truncates long labels.
                  * @method syncUI
@@ -662,7 +668,7 @@
                     this._urlInput.getInput().after("focus", this._setDefaultUrlInputText, this);
                     this._truncateLabel();
                 },
-                
+
                 /**
                  * Set the checkbox state.
                  * @method setChecked
@@ -671,7 +677,7 @@
                 setChecked : function(checked) {
                     this.get("srcNode").one("input[type='checkbox']").set("checked", checked);
                 },
-                
+
                 /**
                  * Get the checkbox state.
                  * @method isChecked
@@ -680,7 +686,7 @@
                 isChecked : function() {
                     return this.get("srcNode").one("input[type='checkbox']").get("checked");
                 },
-                
+
                 /**
                  * Responds to the cancel button.  If there is no associated bookmark, like when this editor
                  * is for a new bookmark that hasn't been created yet, this editor gets destroyed, otherwise
@@ -696,7 +702,7 @@
                         this.destroy(true);
                     }
                 },
-                
+
                 /**
                  * Responds to the save button.  If the inputs lack value, puts 'required' in to the value
                  * and does nothing else.  If there is no associated bookmark, creates a new one, otherwise
@@ -717,7 +723,7 @@
                         return;
                     }
                     if (bookmark) {
-                        if (newlabel != bookmark.getLabel() || newurl != bookmark.getUrl()) {
+                        if (newlabel !== bookmark.getLabel() || newurl !== bookmark.getUrl()) {
                             bookmark.setValues(newlabel, newurl);
                         }
                     } else {
@@ -727,7 +733,7 @@
                     }
                     this.set("editing", false);
                 },
-                
+
                 /**
                  * Responds to the reset button.  Resets the text inputs to the bookmark's values.
                  * If there is no bookmark, resets the TextInput object.
@@ -745,7 +751,7 @@
                         this._urlInput.reset();
                     }
                 },
-                
+
                 /**
                  * Update the editors anchor text and url with the bookmark's label and url.
                  * @method update
@@ -757,7 +763,7 @@
                     anchor.set("href", bookmark.getUrl());
                     this._truncateLabel();
                 },
-                
+
                 /**
                  * The click handler for buttons, delegates to the function named the same as the buttons value.
                  * @method _handleButtonClick
@@ -768,7 +774,7 @@
                     event.preventDefault();
                     this[event.target.getAttribute("value")].call(this, event);
                 },
-                
+
                 /**
                  * Called when the editing attribute changes.  Toggles the yui3-bookmark-editor-active class.
                  * @method _handleEditingChange
@@ -785,7 +791,7 @@
                         srcNode.removeClass(activeClass);
                     }
                 },
-                
+
                 /**
                  * Truncates the link text to 130 characters if necessary.
                  * @method _truncateLabel
@@ -798,7 +804,7 @@
                         anchor.set("innerHTML", label.substring(0, 130) + "...");
                     }
                 },
-                
+
                 /**
                  * Put the text http:// into url input if it is empty
                  * @method _setDefaultUrlInputText
@@ -825,7 +831,7 @@
              * Contains one BookmarkEditor for each bookmark.
              */
             BookmarksEditor = Y.Base.create("bookmarks-editor", Y.Widget, [], {
-                
+
                 /**
                  * Adds a checkbox that will trigger all other checkboxes to toggle to a similar state.
                  * @method renderUI
@@ -833,7 +839,7 @@
                 renderUI : function() {
                     this.get("srcNode").one("fieldset").prepend(Y.Node.create("<input type=\"checkbox\"/>"));
                 },
-                
+
                 /**
                  * Sets up various event handlers.
                  * @method bindUI
@@ -847,7 +853,7 @@
                     bookmarks.after("addSync", this._handleBookmarkAdd, this);
                     bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
                     srcNode.one("fieldset input[type='checkbox']").on("click", this._handleCheckboxClick, this);
-                    
+
                   dragManager.on('drag:start', this._handleDragStart, this);
                   dragManager.on('drag:end', this._handleDragEnd, this);
                   this._lastY = 0;
@@ -856,7 +862,7 @@
                   dragManager.on('drop:over', this._handleDropOver, this);
                   this.publish("move", {defaultFn : this._editorMoved});
                 },
-                
+
                 /**
                  * Creates the BookmarkEditors.
                  * @method syncUI
@@ -882,7 +888,7 @@
                     }
                     this.set("editors", editors);
                 },
-                
+
                 /**
                  * Responds to a click on the add button.  Adds a list item and associated BookmarkEditor to
                  * the top of the list and sets it editing state to true.
@@ -892,14 +898,14 @@
                     var items = this.get("srcNode").one("ul"),
                         item = Y.Node.create("<li><input type=\"checkbox\" checked=\"checked\"/><a></a></li>"),
                         editor;
-                        
+
                     items.prepend(item);
                     editor = new BookmarkEditor({srcNode : item, render : true});
                     editor.after("destroy", this._handleDestroyEditor, this);
                     this.get("editors").unshift(editor);
                     editor.set("editing", true);
                 },
-                  
+
                 /**
                  * Responds to a click on the delete button.  Gets an array of the indexes of the checked editors
                  * and calls removeBookmarks on the bookmarks object.
@@ -912,7 +918,7 @@
                         this.get("bookmarks").removeBookmarks(checked);
                     }
                 },
-                  
+
                 /**
                  * Responds to a click on the edit button.  Gets an array of the indexes of the checked editors
                  * and sets there editing attribute to true.
@@ -924,7 +930,7 @@
                         editors[checked[i]].set("editing", true);
                     }
                 },
-                
+
                 /**
                  * Unchecks all BookmarkEditors
                  * @method _clearChecked
@@ -936,16 +942,15 @@
                         editors[i].setChecked(false);
                     }
                 },
-                
+
                 /**
                  * @method _editorMoved
                  * @private
-                 * @param event {CustomEvent}
                  */
-                _editorMoved : function(event) {
+                _editorMoved : function() {
                     this.get("bookmarks").moveBookmark(this._to, this._from);
                 },
-                
+
                 /**
                  * Returns an Array of indexes of those BookmarkEditors for which isChecked() is true.
                  * @method _getCheckIndexes
@@ -961,7 +966,7 @@
                     }
                     return indexes;
                 },
-                
+
                 /**
                  * Responds to the bookmarks:addSync event, call update() on the appropriate BookmarkEditor.
                  * @method _handleBookmarkAdd
@@ -971,7 +976,7 @@
                 _handleBookmarkAdd : function(event) {
                     this.get("editors")[event.target.indexOf(event.bookmark)].update();
                 },
-                  
+
                 /**
                  * Responds to the bookmarks:removeSync event, calls destroy on each BookmarkEditor
                  * associated with removed bookmarks.
@@ -985,7 +990,7 @@
                         editors[event.positions[i]].destroy(true);
                     }
                 },
-                
+
                 /**
                  * Responds to the bookmarks:updateSync event, calls update() on the appropriate BookmarkEditor.
                  * @method _handleBookmarkUpdate
@@ -996,7 +1001,7 @@
                     var editors = this.get("editors");
                     editors[event.position].update();
                 },
-                  
+
                 /**
                  * The click handler for buttons, delegates to the function named the same as the buttons value.
                  * @method _handleButtonClick
@@ -1015,7 +1020,7 @@
                         }
                     }
                 },
-                
+
                 /**
                  * Responds to click event on the master checkbox.  Sets the checked state of all BookmarkEditors
                  * to the whatever the master is.
@@ -1029,7 +1034,7 @@
                         editors[i].setChecked(checked);
                     }
                 },
-                
+
                 /**
                  * Removes a destroyed editor from the backing Array.
                  * @method _handleDestroyEditor
@@ -1041,7 +1046,7 @@
                         position = Y.Array.indexOf(editors, event.target);
                     editors.splice(position, 1);
                 },
-                
+
                 /**
                  * @method _handleDrag
                  * @private
@@ -1061,7 +1066,7 @@
                     //Cache for next check
                     this._lastY = y;
                 },
-                
+
                 /**
                  * @method _handleDragEnd
                  * @private
@@ -1079,7 +1084,7 @@
                         this.fire("move", {to : this._to, from : this._from});
                     }
                 },
-                
+
                 /**
                  * @method _handleDragStart
                  * @private
@@ -1105,7 +1110,7 @@
                     });
                     this._from = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(node);
                 },
-                
+
                 /**
                  * @method _handleDragOver
                  * @private
@@ -1115,7 +1120,7 @@
                     //Get a reference to our drag and drop nodes
                     var drag = event.drag.get('node'),
                         drop = event.drop.get('node');
-                    
+
                     //Are we dropping on an editor node?
                     if (drop.hasClass('yui3-bookmark-editor')) {
                         //Are we not going up?

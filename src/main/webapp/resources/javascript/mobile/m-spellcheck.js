@@ -1,7 +1,7 @@
 $(this).bind("pagechange", function() {
     var activePage = $(".ui-page-active"),
-    resultsHeader = activePage.find('.results li:first-child'), 
-    qInput = activePage.find('input[name=qSearch]'), 
+    resultsHeader = activePage.find('.results li:first-child'),
+    qInput = activePage.find('input[name=qSearch]'),
     form = activePage.find('form');
     if(resultsHeader && qInput.val()){
         $.ajax({

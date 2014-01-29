@@ -3,7 +3,7 @@
  */
 Y.applyConfig({fetchCSS:true});
 Y.use("attribute", "node-event-simulate", "console", "test", function(Y){
-    
+
     var textinputsTestCase = new Y.Test.Case({
         name: "Lane TextInputs Test Case",
         testConstructorHintText : function() {
@@ -57,13 +57,13 @@ Y.use("attribute", "node-event-simulate", "console", "test", function(Y){
             Y.Assert.isTrue(input.hasClass("inputHint"));
         }
     });
-    
+
     Y.one("body").addClass("yui3-skin-sam");
     new Y.Console({
         newestOnTop: false
     }).render("#log");
-    
-    
+
+
     Y.Test.Runner.add(textinputsTestCase);
     Y.Test.Runner.masterSuite.name = "textinputs-test.js";
     Y.Test.Runner.run();

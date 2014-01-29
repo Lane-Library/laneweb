@@ -1,6 +1,6 @@
 Y.Get.script = function(url, config) {
-    
-    _gat = {
+
+    window._gat = {
             _createTracker : function() {
                 return {
                     _setDomainName: function(name) {
@@ -54,15 +54,15 @@ Y.Get.script = function(url, config) {
             Y.Assert.areSame("hostpathquery", this.eventArgs[2]);
         }
     });
-    
+
     config.onSuccess.apply(this);
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
-    
+
+
     Y.Test.Runner.add(googleTestCase);
     Y.Test.Runner.masterSuite.name = "google-test.js";
     Y.Test.Runner.run();

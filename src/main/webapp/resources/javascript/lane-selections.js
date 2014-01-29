@@ -9,7 +9,7 @@
         },
         hideAllBut = function(selection) {
             for (i = 0; i < selections.size(); i++) {
-                if (selections.item(i).get('id') == selection) {
+                if (selections.item(i).get('id') === selection) {
                     selections.item(i).setStyle('display', 'block');
                 } else {
                     selections.item(i).setStyle('display', 'none');

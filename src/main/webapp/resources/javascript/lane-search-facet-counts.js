@@ -7,9 +7,9 @@
         facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
         makeRequest = function() {
-    	    var id, j, facet, requestString = "";
+            var id, j, facet, requestString = "";
             for (j = 0; j < facets.size(); j++) {
-            	facet = facets.item(j);
+                facet = facets.item(j);
                 id = facet.get('id');
                 id = id.substring(0, id.indexOf("Facet"));
                 if (id) {
@@ -26,7 +26,7 @@
                             var response = Y.JSON.parse(o.responseText),
                                 hitLink, hitLinkParent, hits, sleepingTime,
                                 remainingTime, searchStatus, engineStatus, facetId;
-                            
+
                             for (j = 0; j < facets.size(); j++) {
                                 hits = null;
                                 hitLink = facets.item(j).one('a');
@@ -35,7 +35,7 @@
                                     hits = parseInt(response.results.facets[facetId].hits, 10);
                                     engineStatus = response.results.facets[facetId].status;
                                 }
-                                if ((engineStatus == 'successful' || engineStatus == 'canceled') && hitLink !== null && hits === 0) {
+                                if ((engineStatus === 'successful' || engineStatus === 'canceled') && hitLink !== null && hits === 0) {
                                     hitLinkParent = hitLink.get('parentNode');
                                     hitLinkParent.addClass('inactiveFacet');
                                     hitLinkParent.removeClass('searchableFacet');
@@ -46,7 +46,7 @@
                             sleepingTime = 2000;
                             remainingTime = (new Date().getTime()) - startTime;
                             searchStatus = response.results.status;
-                            if (searchStatus != 'successful' && (remainingTime <= 60 * 1000)) { // at more than 20 seconds the sleeping time becomes 10 seconds
+                            if (searchStatus !== 'successful' && (remainingTime <= 60 * 1000)) { // at more than 20 seconds the sleeping time becomes 10 seconds
                                 if (remainingTime > 20 * 1000) {
                                     sleepingTime = 10000;
                                 }

@@ -1,17 +1,17 @@
 (function() {
-    
+
     // custom popin event
     var onPopinHandler;
     Y.publish('lane:popin',{broadcast:1});
-    
+
         onPopinHandler = function(el) {
             //FIXME: are elms returned in the right order? probably not.
-            var i, activeEl = 99, elms = Y.all('#spellCheck, #queryMapping, #findIt'), 
-                searchResults = Y.one('#searchResults'), 
-                searchFacets = Y.one('#searchFacets'), 
+            var i, activeEl = 99, elms = Y.all('#spellCheck, #queryMapping, #findIt'),
+                searchResults = Y.one('#searchResults'),
+                searchFacets = Y.one('#searchFacets'),
                 rightSearchTips = Y.one('.rightSearchTips');
             for (i = 0; i < elms.size(); i++) {
-                if (elms.item(i) !== null && elms.item(i).getStyle('display') == 'inline') {
+                if (elms.item(i) !== null && elms.item(i).getStyle('display') === 'inline') {
                     activeEl = i;
                 }
             }

@@ -40,12 +40,17 @@ public class EMailSenderTest {
 
     private Set<String> spamIPs;
 
+    private Set<String> spamReferrers;
+
     @Before
     public void setUp() throws Exception {
         this.javaMailSender = createMock(JavaMailSender.class);
         this.spamIPs = new HashSet<String>();
         this.spamIPs.add("127.0.0.1");
-        this.eMailSender = new EMailSender(Collections.singleton("recipient"), this.javaMailSender, this.spamIPs);
+        this.spamReferrers = new HashSet<String>();
+        this.spamReferrers.add("http://spam/ref.html");
+        this.eMailSender = new EMailSender(Collections.singleton("recipient"), this.javaMailSender, this.spamIPs,
+                this.spamReferrers);
         this.map = new HashMap<String, Object>();
         this.message = createMock(MimeMessage.class);
     }
@@ -54,6 +59,18 @@ public class EMailSenderTest {
     public void testAddSpamIP() {
         this.eMailSender.addSpamIP("127.0.0.2");
         assertTrue(this.spamIPs.contains("127.0.0.2"));
+    }
+
+    @Test
+    public void testAddSpamReferrer() {
+        this.eMailSender.addSpamReferrer("http://spam/ref2.html");
+        assertTrue(this.spamReferrers.contains("http://spam/ref2.html"));
+    }
+
+    @Test
+    public void testRemoveSpamReferrer() {
+        this.eMailSender.removeSpamReferrer("http://spam/ref.html");
+        assertFalse(this.spamIPs.contains("http://spam/ref.html"));
     }
 
     @Test
@@ -144,6 +161,18 @@ public class EMailSenderTest {
     public void testSendMailSpamIP() throws MessagingException {
         this.map.put("recipient", "recipient");
         this.map.put(Model.REMOTE_ADDR, "127.0.0.1");
+        replay(this.javaMailSender, this.message);
+        try {
+            this.eMailSender.sendEmail(this.map);
+        } catch (LanewebException e) {
+        }
+        verify(this.javaMailSender, this.message);
+    }
+
+    @Test
+    public void testSendMailSpamReferrer() throws MessagingException {
+        this.map.put("recipient", "recipient");
+        this.map.put(Model.REFERRER, "http://spam/ref.html");
         replay(this.javaMailSender, this.message);
         try {
             this.eMailSender.sendEmail(this.map);

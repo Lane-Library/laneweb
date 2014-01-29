@@ -21,7 +21,8 @@ public class EMailSender {
     private static final Pattern EMAIL = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$",
             Pattern.CASE_INSENSITIVE);
 
-    private static final String[] EXCLUDED_FIELDS = new String[] { "subject", "recipient", "email", "org.springframework.validation.BindingResult.map" };
+    private static final String[] EXCLUDED_FIELDS = new String[] { "subject", "recipient", "email",
+            "org.springframework.validation.BindingResult.map" };
 
     private Set<String> excludedFields;
 
@@ -31,10 +32,14 @@ public class EMailSender {
 
     private Set<String> spamIps;
 
-    public EMailSender(final Set<String> recipients, final JavaMailSender mailSender, final Set<String> spamIps) {
+    private Set<String> spamReferrers;
+
+    public EMailSender(final Set<String> recipients, final JavaMailSender mailSender, final Set<String> spamIps,
+            final Set<String> spamReferrers) {
         this.recipients = recipients;
         this.mailSender = mailSender;
         this.spamIps = spamIps;
+        this.spamReferrers = spamReferrers;
         this.excludedFields = new HashSet<String>();
         for (String element : EXCLUDED_FIELDS) {
             this.excludedFields.add(element);
@@ -45,8 +50,16 @@ public class EMailSender {
         this.spamIps.add(spamIP);
     }
 
+    public void addSpamReferrer(final String spamReferrer) {
+        this.spamReferrers.add(spamReferrer);
+    }
+
     public boolean removeSpamIP(final String spamIP) {
         return this.spamIps.remove(spamIP);
+    }
+
+    public boolean removeSpamReferrer(final String spamReferrer) {
+        return this.spamReferrers.remove(spamReferrer);
     }
 
     public void sendEmail(final Map<String, Object> map) {
@@ -86,7 +99,11 @@ public class EMailSender {
         }
         Object remoteIp = map.get(Model.REMOTE_ADDR);
         if (this.spamIps.contains(remoteIp)) {
-            throw new LanewebException(remoteIp + " is in the spam list");
+            throw new LanewebException(remoteIp + " is in the spam IP list");
+        }
+        Object referrer = map.get(Model.REFERRER);
+        if (this.spamReferrers.contains(referrer)) {
+            throw new LanewebException(referrer + " is in the spam referrer list");
         }
     }
 }

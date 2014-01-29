@@ -3,13 +3,13 @@
  */
 (function() {
     Y.all("#laneNav>li").on("mouseenter", function(event) {
-    	var list = event.currentTarget.one("ul");
-    	if (list) {
-    		list.setStyle("visibility", "hidden");
-    		setTimeout(function() {
-    			list.setStyle("visibility", "visible");
-    		}, 500);
-    	}
+        var list = event.currentTarget.one("ul");
+        if (list) {
+            list.setStyle("visibility", "hidden");
+            setTimeout(function() {
+                list.setStyle("visibility", "visible");
+            }, 500);
+        }
     });
 
 })();

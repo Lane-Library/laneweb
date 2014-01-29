@@ -1,12 +1,12 @@
 //TODO: this needs some cleaning up
 //check if there is a query
 (function() {
-	
-	var Model = Y.lane.Model,
-	    query = Model.get(Model.QUERY),
-	    basePath = Model.get(Model.BASE_PATH) || "",
-	    encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
-	    queryMapping = Y.one('#queryMapping');
+
+    var Model = Y.lane.Model,
+        query = Model.get(Model.QUERY),
+        basePath = Model.get(Model.BASE_PATH) || "",
+        encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
+        queryMapping = Y.one('#queryMapping');
         if (query && queryMapping) {
             Y.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
                 on:{
@@ -15,12 +15,12 @@
                         queryMap = Y.JSON.parse(o.responseText),
                         resourceMap = queryMap.resourceMap;
                     if (resourceMap) {
-                    	queryMapResources = resourceMap.resources;
+                        queryMapResources = resourceMap.resources;
                         queryMap.getResourcesString = function() {
                             var i, separator = "; ", string = "";
                             for (i = 0; i < queryMapResources.length; i++) {
                                 string += queryMapResources[i].label;
-                                if(i != queryMapResources.length-1){
+                                if(i !== queryMapResources.length-1){
                                     string += separator;
                                 }
                             }
@@ -46,11 +46,11 @@
                                                         queryMapResources[i].anchor.href = result.url;
                                                     }
                                                     if (result === undefined || !result.status) {
-                                                        needMore = (results.status != 'successful');
+                                                        needMore = (results.status !== 'successful');
                                                     }
                                                     else{
                                                         queryMapResources[i].status = result.status;
-                                                        if (result.status == 'successful') {
+                                                        if (result.status === 'successful') {
                                                             queryMapResources[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
                                                         }
                                                     }
@@ -59,7 +59,6 @@
                                             if (needMore) {
                                                 setTimeout(queryMap.getResultCounts, 2000);
                                             }
-                                            //queryMapping.style.display = 'inline';
                                             Y.fire('lane:popin', queryMapping);
                                         }
                                     }

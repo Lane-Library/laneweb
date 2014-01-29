@@ -1,10 +1,10 @@
 (function(){
-    
+
     Y.lane.Location.on("hrefChange", function(event) {
         event.preventDefault();
         persistentLoginTestCase.href = event.newVal;
     });
-    
+
     Y.all("a").on("click", function(event) {
         event.preventDefault();
         persistentLoginTestCase.path = event.target.get("pathname");
@@ -15,20 +15,20 @@
     };
     var persistentLoginTestCase = new Y.Test.Case({
         name: 'persistent-login Test Case',
-        
+
         cookie: Y.Cookie.get("persistent-preference"),
-        
+
         href: null,
-        
+
         path: null,
-        
+
         tearDown: function() {
             Y.lane.Lightbox.hide();
             Y.lane.Lightbox.setContent("");
             this.href = null;
             this.path = null;
         },
-        
+
         testLoginClickYesClick: function() {
             Y.one("#login").simulate("click");
             if (this.cookie === "denied") {
@@ -44,7 +44,7 @@
                 Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
             }
         },
-        
+
         testLoginClickNoClick: function() {
             Y.one("#login").simulate("click");
             if (this.cookie === "denied") {
@@ -60,7 +60,7 @@
                 Y.Assert.isTrue(no.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
             }
         },
-        
+
         testProxyLoginClick: function() {
             Y.one("#proxylogin").simulate("click");
             if (this.cookie === "denied") {
@@ -78,13 +78,13 @@
         }
     });
 
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
-    
+
+
     Y.Test.Runner.add(persistentLoginTestCase);
     Y.Test.Runner.masterSuite.name = "persistent-login.js";
     Y.Test.Runner.run();

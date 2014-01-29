@@ -3,7 +3,7 @@ Y.use('console', "node-event-simulate", 'test', function(Y){
 
     var searchpicoTestCase = new Y.Test.Case({
         name: "Lane Search PICO Testcase",
-        
+
         testSourceChangeClinical : function() {
             Y.lane.fire('search:sourceChange', {
                 newVal:'clinical-all',
@@ -46,13 +46,13 @@ Y.use('console', "node-event-simulate", 'test', function(Y){
             }
         }
     });
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
-    
+
+
     Y.Test.Runner.add(searchpicoTestCase);
     Y.Test.Runner.masterSuite.name = "search-pico-test.js";
     Y.Test.Runner.run();

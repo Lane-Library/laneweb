@@ -112,13 +112,6 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/xalan"
-        class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
-        scope="prototype">
-        <constructor-arg value="xalan"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/xalan"/>
-    </bean>
-    
     <bean name="edu.stanford.irt.cocoon.pipeline.Serializer/xml"
         class="edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer"
         scope="prototype">

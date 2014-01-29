@@ -3,7 +3,7 @@
  */
 Y.applyConfig({fetchCSS:true});
 Y.use('node-event-simulate', 'console', 'test', function(Y){
-    
+
 
     Y.lane.Model.set("query","query");
     Y.io = function(url, config) {
@@ -12,21 +12,21 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
 
         var searchFacetCountsTestCase = new Y.Test.Case({
             name: 'Lane search-facet-counts Test Case',
-            
+
             testUpdated: function() {
                 var facet = Y.one("#fooFacet");
                 Y.Assert.isTrue(facet.one("a") === null);
                 Y.Assert.isTrue(facet.hasClass("inactiveFacet"));
             }
-        
+
         });
 
-        
+
         Y.one('body').addClass('yui3-skin-sam');
         new Y.Console({
             newestOnTop: false
         }).render('#log');
-        
+
         Y.Test.Runner.add(searchFacetCountsTestCase);
         Y.Test.Runner.masterSuite.name = "search-facet-counts-test.js";
         Y.Test.Runner.run();

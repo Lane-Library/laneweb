@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro"/>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
@@ -245,7 +245,7 @@
                                     <div id="socialMedia">
                                         <a href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257" class="facebook image-link"></a>
                                         <a href="http://twitter.com/#!/LaneLibStanford" class="twitter image-link"></a>
-                                        <a href="http://gplus.to/lanelib" class="googleplus image-link"></a>
+                                        <a href="https://plus.google.com/101896624694637406510/" class="googleplus image-link"></a>
                                         <a href="http://www.flickr.com/photos/40390680@N08/" class="flickr image-link noproxy"></a>
                                         <a href="http://www.youtube.com/user/lanemedical?feature=mhee" class="youtube image-link noproxy"></a>
                                     </div>

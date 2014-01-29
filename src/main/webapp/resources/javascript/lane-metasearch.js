@@ -16,7 +16,7 @@
                 for (y = 0; y < searchables.length; y++) {
                     add = true;
                     for (i = 0; i < uberEngines.length; i++) {
-                        // don't add if: 
+                        // don't add if:
                         // - engine is uber and uber already on url
                         // - engine already on url
                         if (searchables[y].match(uberEngines[i]) && searchUrl.match(uberEngines[i])) {
@@ -37,7 +37,7 @@
                 var i;
                 searchElms = Y.all(".metasearch");
                 for (i = 0; i < searchElms.size(); i++) {
-                    if (Y.Array.indexOf(searchables, searchElms.item(i).get('id')) == -1) {
+                    if (Y.Array.indexOf(searchables, searchElms.item(i).get('id')) === -1) {
                         searchables.push(searchElms.item(i).get('id'));
                     }
                 }
@@ -52,7 +52,7 @@
                     on: {
                         success: function(id, o) {
                             var response = Y.JSON.parse(o.responseText), results = response.resources, needMore = false, i, y, result, updateables, resultSpan, sleepingTime, remainingTime;
-                            
+
                             for (i = 0; i < searchables.length; i++) {
                                 updateables = Y.all('#' + searchables[i]); // search content may have more than one element with same ID
                                 result = results[searchables[i]];
@@ -66,7 +66,7 @@
                                             resultSpan = Y.Node.create('<span class="searchCount"></span>');
                                             updateables.item(y).get('parentNode').insert(resultSpan);
                                         }
-                                        if (result.status == 'successful') {
+                                        if (result.status === 'successful') {
                                             updateables.item(y).addClass("searchSuccess");
                                             // process display of each updateable node
                                             // once all processed, remove id from searchables
@@ -78,7 +78,7 @@
                                             result.name = (updateables.item(y).get('innerHTML')) ? updateables.item(y).get('innerHTML') : '';
                                             updateables.item(y).setAttribute('href', result.url);
                                             // fix for IE: @ in text of element will cause element text to be replaced by href value
-                                            // relies on result.name being set before url is changed 
+                                            // relies on result.name being set before url is changed
                                             // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
                                             if (Y.UA.ie) {
                                                 updateables.item(y).set('innerHTML',result.name);
@@ -86,7 +86,7 @@
                                             updateables.item(y).setAttribute('target', '_blank');
                                             updateables.item(y).removeClass('metasearch');
                                             searchables.splice(i--, 1);
-                                        } else if (result.status == 'failed' || result.status == 'canceled') {
+                                        } else if (result.status === 'failed' || result.status === 'canceled') {
                                             resultSpan.setContent('&#160;? ');
                                             updateables.item(y).removeClass('metasearch');
                                             searchables.splice(i--, 1);
@@ -96,7 +96,7 @@
                             }
                             sleepingTime = 2000;
                             remainingTime = (new Date().getTime()) - startTime;
-                            if (response.status != 'successful' && needMore && searchables.length > 0 && (remainingTime <= 60 * 1000)) {
+                            if (response.status !== 'successful' && needMore && searchables.length > 0 && (remainingTime <= 60 * 1000)) {
                                 // at more than 20 seconds the sleeping time becomes 10 seconds
                                 if (remainingTime > 20 * 1000) {
                                     sleepingTime = 10000;
@@ -111,7 +111,7 @@
             }// end getResultCounts
         };
     }();
-    
+
     // check for presence of search term and metasearch classNames
     if (Y.all('.metasearch').size() > 0 && query) {
         metasearch.initialize();
@@ -122,8 +122,8 @@
     hybridInput = Y.one('.laneSuggest');
     if (hybridInput) {
         laneSuggest = new Y.lane.Suggest(hybridInput);
-        laneSuggest.on("select",function(e){
-        	searchIndicator.show();
+        laneSuggest.on("select",function(){
+            searchIndicator.show();
             hybridInput.ancestor("form").submit();
         });
     }

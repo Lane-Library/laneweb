@@ -17,6 +17,8 @@ import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
@@ -26,12 +28,23 @@ public class ProxyHostManager {
 
         private static final long serialVersionUID = 1L;
 
-        private static final String SQL = "WITH HOSTS AS " + "  ( SELECT DISTINCT URL_HOST AS HOST "
-                + "  FROM LMLDB.ELINK_INDEX " + "  WHERE ELINK_INDEX.RECORD_TYPE = 'A' " + "  UNION "
-                + "  SELECT DISTINCT URL_HOST AS HOST " + "  FROM LMLDB.ELINK_INDEX, " + "    LMLDB.MFHD_MASTER "
-                + "  WHERE ELINK_INDEX.RECORD_ID  = MFHD_MASTER.MFHD_ID " + "  AND ELINK_INDEX.RECORD_TYPE  = 'M' "
-                + "  AND MFHD_MASTER.MFHD_ID NOT IN " + "    (SELECT MFHD_ID " + "    FROM LMLDB.MFHD_DATA "
-                + "    WHERE LOWER(RECORD_SEGMENT) LIKE '%, noproxy%' " + "    ) " + "  ) "
+        private static final String SQL =
+                "WITH HOSTS AS "
+                + "  ( SELECT DISTINCT URL_HOST AS HOST "
+                + "  FROM LMLDB.ELINK_INDEX "
+                + "  WHERE ELINK_INDEX.RECORD_TYPE = 'A' "
+                + "  UNION "
+                + "  SELECT DISTINCT URL_HOST AS HOST "
+                + "  FROM LMLDB.ELINK_INDEX, "
+                + "    LMLDB.MFHD_MASTER "
+                + "  WHERE ELINK_INDEX.RECORD_ID  = MFHD_MASTER.MFHD_ID "
+                + "  AND ELINK_INDEX.RECORD_TYPE  = 'M' "
+                + "  AND MFHD_MASTER.MFHD_ID NOT IN "
+                + "    (SELECT MFHD_ID "
+                + "    FROM LMLDB.MFHD_DATA "
+                + "    WHERE LOWER(RECORD_SEGMENT) LIKE '%, noproxy%' "
+                + "    ) "
+                + "  ) "
                 + "SELECT HOST FROM HOSTS WHERE HOST NOT LIKE '%.stanford.edu'";
 
         DatabaseProxyHostSet(final DataSource dataSource) {
@@ -45,9 +58,9 @@ public class ProxyHostManager {
                 while (rs.next()) {
                     add(rs.getString(1));
                 }
-                add("jensen.stanford.edu");
-                add("socrates.stanford.edu");
+                add("bodoni.stanford.edu");
                 add("library.stanford.edu");
+                add("searchworks.stanford.edu");
             } catch (SQLException e) {
                 throw new LanewebException(e);
             } finally {
@@ -67,10 +80,13 @@ public class ProxyHostManager {
 
     private long lastUpdate = 0;
 
+    private Logger log;
+
     private Set<String> proxyHosts;
 
-    public ProxyHostManager(final DataSource dataSource) throws UnsupportedEncodingException {
+    public ProxyHostManager(final DataSource dataSource, final Logger log) throws UnsupportedEncodingException {
         this.dataSource = dataSource;
+        this.log = log;
         BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
                 "ezproxy-servers.txt"), "UTF-8"));
         this.proxyHosts = new HashSet<String>();
@@ -121,8 +137,12 @@ public class ProxyHostManager {
             this.executor.execute(new Runnable() {
 
                 public void run() {
-                    Set<String> newSet = new DatabaseProxyHostSet(ProxyHostManager.this.dataSource);
-                    ProxyHostManager.this.proxyHosts = newSet;
+                    try {
+                        Set<String> newSet = new DatabaseProxyHostSet(ProxyHostManager.this.dataSource);
+                        ProxyHostManager.this.proxyHosts = newSet;
+                    } catch (LanewebException e) {
+                        ProxyHostManager.this.log.error("proxy hosts not updated", e);
+                    }
                 }
             });
         }

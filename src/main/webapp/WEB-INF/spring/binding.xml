@@ -34,16 +34,16 @@
         class="edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder">
         <constructor-arg>
             <set>
+                <value>auth</value>
                 <value>base-path</value>
                 <value>disaster-mode</value>
+                <value>isActiveSunetID</value>
                 <value>ipgroup</value>
-                <value>auth</value>
+                <value>proxy-links</value>
                 <value>query</value>
                 <value>source</value>
                 <value>url-encoded-query</value>
-                <value>isActiveSunetID</value>
                 <!--<value>live-chat-available</value>
-                <value>proxy-links</value>
                 <value>sunetid</value>
                 <value>bookmarks</value>
                 <value>name</value>

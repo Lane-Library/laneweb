@@ -28,7 +28,7 @@ public class ProxyCredentialController {
         this.binder = binder;
     }
 
-    @RequestMapping(value = "**/apps/proxy/credential")
+    @RequestMapping(value = "/apps/proxy/credential")
     public View proxyRedirect(
             final HttpServletRequest request,
             final RedirectAttributes attrs,
@@ -49,7 +49,7 @@ public class ProxyCredentialController {
         return view;
     }
 
-    @RequestMapping(value = "**/secure/apps/proxy/credential")
+    @RequestMapping(value = "/secure/apps/proxy/credential")
     public View secureProxyRedirect(
             final HttpServletRequest request,
             final RedirectAttributes attrs,

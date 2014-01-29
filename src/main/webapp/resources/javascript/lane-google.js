@@ -2,7 +2,7 @@
     var gaPageTracker,
         lane = Y.lane,
         location = lane.Location,
-        gaJsHost = (("https:" == location.get("protocol")) ? "https://ssl." : "http://www.");
+        gaJsHost = (("https:" === location.get("protocol")) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = location.get("host"),

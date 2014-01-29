@@ -7,6 +7,28 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-01-27" version="2.1.42" description="2.1.42 bug fix release">
+            <action date="2014-01-27" dev="ceyates" issue="95443" type="fix">
+                xincludes with xpointer attribute are broken
+            </action>
+        </release>
+        <release date="2014-01-27" version="2.1.41" description="2.1.41 bug fix release [not deployed]">
+            <action date="2014-01-24" dev="ceyates" issue="95298" type="update">
+                widen metasearch input on portal pages
+            </action>
+            <action date="2014-01-17" dev="ceyates" issue="95122" type="update">
+                change logging framework from log4j to logback
+            </action>
+            <action date="2014-01-22" dev="ceyates" issue="79330" type="fix">
+                bookmarked links added to list without proxied urls
+            </action>
+            <action date="2014-01-21" dev="ceyates" issue="79139" type="update">
+                refactor feedback handler so that there is a separate validator for each form.
+            </action>
+            <action date="2014-01-21" dev="ceyates" issue="78579" type="fix">
+                DocumentBuilder attempts to connect to www.w3.org
+            </action>
+        </release>
         <release date="2014-01-13" version="2.1.40" description="2.1.40 bug fix release">
             <action date="2014-01-10" dev="olgary" issue="95036" type="update">
                 update template.xml, debug.xml - fix link order in portal dropdown, add new link for PCAP portal

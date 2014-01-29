@@ -48,7 +48,7 @@ Y.use('node', 'node-event-simulate', 'console', 'test', function(Y){
             link.on("click", function(event) {event.preventDefault();});
             link.simulate("click");
             Y.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
-            
+
         },
         testTriggerLinkWithRel: function() {
             var panel = Y.one("#panel6");
@@ -61,16 +61,16 @@ Y.use('node', 'node-event-simulate', 'console', 'test', function(Y){
             link.simulate("click");
             Y.Assert.isTrue(clicked);
             Y.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
-            
+
         }
     });
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
-    
+
+
     Y.Test.Runner.add(expandiesTestCase);
     Y.Test.Runner.masterSuite.name = "expandies-test.js";
     Y.Test.Runner.run();
