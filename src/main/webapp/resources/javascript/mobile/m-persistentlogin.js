@@ -16,7 +16,7 @@ $.LANE.popupWindow = function(url){
 
 
 // click on login link
-$(".webauthLogin:contains('Logout')").on("click",function(e) {
+$(document).on("click", ".webauthLogin:contains('Logout')", function(e) {
     e.preventDefault();
     if(confirm("Do you really want to logout?")){
         document.location.href = e.target.href;
@@ -24,7 +24,7 @@ $(".webauthLogin:contains('Logout')").on("click",function(e) {
 });
 
 
-$(".webauthLogin:contains('Login')").on("click",function(e) {
+$(document).on("click", ".webauthLogin:contains('Login')", function(e) {
     e.preventDefault();
     var persistentStatusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
     if (persistentStatusCookie    && 'denied' === persistentStatusCookie) {
@@ -40,7 +40,7 @@ $(".webauthLogin:contains('Login')").on("click",function(e) {
 
 
 //when a click is coming from a external resource
-$('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').on("click", function(event) {
+$(document).on("click", 'a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]', function(event) {
     var link = event.currentTarget,
     now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
     if (!model['disaster-mode'] && 'denied' !== statusCookie && (!model["isActiveSunetID"] || statusCookie < now.getTime())){
@@ -57,7 +57,7 @@ $('a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]').on("click", fu
 
 
 
-$('#yes-persistent-login').on('click', function(e) {
+$(document).on("click", "#yes-persistent-login", function(e) {
     if ($('#dont-ask-again:checked').val() === 'on') {
         e.preventDefault();
     } else {
@@ -68,7 +68,7 @@ $('#yes-persistent-login').on('click', function(e) {
 
 
 // Click on NO
-$('#no-persistent-login').on('click', function(event) {
+$(document).on("click", "#no-persistent-login", function(event) {
     if ($('#dont-ask-again') && $('#dont-ask-again:checked').val() === 'on') {
         $.LANE.setCookie(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', 3650);
     } else {
@@ -77,7 +77,7 @@ $('#no-persistent-login').on('click', function(event) {
     setLink(event);
 });
 
-$('#dont-ask-again').on('click', function() {
+$(document).on("click", "#dont-ask-again", function() {
     if ($('#dont-ask-again:checked').val() === 'on') {
         $('#yes-persistent-login').removeClass('red-btn').addClass('disabled-btn');
     } else {
@@ -103,7 +103,7 @@ $.LANE.toggleLogin = function(){
     }
 };
 
-$('.persistent-header').on('click', function() {
+$(document).on("click", ".persistent-header", function() {
     document.location = model['base-path'] + '/';
 });
 
