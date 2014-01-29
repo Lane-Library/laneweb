@@ -49,6 +49,12 @@
                 <value>192.119.151.127</value>
             </set>
         </constructor-arg>
+        <constructor-arg>
+            <set>
+                <value>http://lane.stanford.edu/dept/anthropology/cgi-bin/web/index.html?q=user</value>
+                <value>http://lane.stanford.edu/dept/anthropology/cgi-bin/web/index.html?q=user/register</value>
+            </set>
+        </constructor-arg>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.ldap.SubjectSource"
