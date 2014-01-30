@@ -17,17 +17,17 @@
         <bean name="javax.sql.DataSource/eresources" class="org.apache.commons.dbcp.BasicDataSource"
             destroy-method="close">
             <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-            <property name="url" value="${laneweb.test.eresources.url}"/>
-            <property name="username" value="${laneweb.test.eresources.username}"/>
-            <property name="password" value="${laneweb.test.eresources.password}"/>
+            <property name="url" value="%{laneweb.test.eresources.url}"/>
+            <property name="username" value="%{laneweb.test.eresources.username}"/>
+            <property name="password" value="%{laneweb.test.eresources.password}"/>
         </bean>
 
         <bean name="javax.sql.DataSource/voyager" class="org.apache.commons.dbcp.BasicDataSource"
             destroy-method="close">
             <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-            <property name="url" value="${laneweb.test.voyager.url}"/>
-            <property name="username" value="${laneweb.test.voyager.username}"/>
-            <property name="password" value="${laneweb.test.voyager.password}"/>
+            <property name="url" value="%{laneweb.test.voyager.url}"/>
+            <property name="username" value="%{laneweb.test.voyager.username}"/>
+            <property name="password" value="%{laneweb.test.voyager.password}"/>
         </bean>
 
     </beans>
