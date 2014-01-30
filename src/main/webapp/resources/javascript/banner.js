@@ -51,7 +51,7 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
         contentBox.one("img").set("src", imgSrc);
         contentBox.one(".banner-content").set("innerHTML", content);
         anim.run();
-        },
+    },
     _handleIndexChange : function(event) {
         var navNodes = this.get("navNodes"),
             model = Y.lane.Model,
