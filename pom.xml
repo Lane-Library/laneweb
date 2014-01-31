@@ -22,7 +22,7 @@
         <url>https://irt-lane-stage.stanford.edu/jenkins/job/laneweb/</url>
     </ciManagement>
     <distributionManagement>
-        <site> 
+        <site>
             <id>lane-preprod</id>
             <url>scp://lane-preprod.stanford.edu/var/www/maven/projects/laneweb</url>
         </site>
