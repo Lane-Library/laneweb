@@ -25,6 +25,10 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class SolrCollectionManager implements CollectionManager {
 
+    private static final String LANE_BROWSE_HANDLER = "/lane-browse";
+
+    private static final String LANE_SEARCH_HANDLER = "/lane-search";
+
     private static final String QUOTE = "\"";
 
     private ObjectMapper mapper = new ObjectMapper();
@@ -37,9 +41,9 @@ public class SolrCollectionManager implements CollectionManager {
         this.solrServer = solrServer;
     }
 
-    protected List<Eresource> doGet(final SolrParams params) {
+    protected List<Eresource> doGet(final String handler, final SolrParams params) {
         SolrQuery solrQuery = new SolrQuery();
-        solrQuery.setRequestHandler("/lane");
+        solrQuery.setRequestHandler(handler);
         solrQuery.add(params);
         // TODO: efficiencies to be gained here by NOT returning all results
         solrQuery.add("rows", Integer.toString(Integer.MAX_VALUE));
@@ -80,9 +84,6 @@ public class SolrCollectionManager implements CollectionManager {
             }
             if (doc.containsKey("year")) {
                 year = (int) doc.getFieldValue("year");
-            }
-            if (doc.containsKey("title")) {
-                title = (String) doc.getFieldValue("title");
             }
             if (doc.containsKey("publicationText")) {
                 publicationText = (String) doc.getFieldValue("publicationText");
@@ -155,9 +156,8 @@ public class SolrCollectionManager implements CollectionManager {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "isCore:1");
         params.add("fq", "type:" + quoteWrap(type));
-        params.set("sort", "title_sort asc");
         params.set("q", "*:*");
-        return doGet(params);
+        return doGet(LANE_BROWSE_HANDLER, params);
     }
 
     @Override
@@ -171,9 +171,8 @@ public class SolrCollectionManager implements CollectionManager {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "mesh:" + quoteWrap(mesh));
         params.add("fq", "type:" + quoteWrap(type));
-        params.set("sort", "title_sort asc");
         params.set("q", "*:*");
-        return doGet(params);
+        return doGet(LANE_BROWSE_HANDLER, params);
     }
 
     // TODO: remove these when upgrading to eresources-1.8
@@ -188,9 +187,8 @@ public class SolrCollectionManager implements CollectionManager {
         }
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "subset:" + quoteWrap(subset));
-        params.set("sort", "title_sort asc");
         params.set("q", "*:*");
-        return doGet(params);
+        return doGet(LANE_BROWSE_HANDLER, params);
     }
 
     @Override
@@ -200,9 +198,8 @@ public class SolrCollectionManager implements CollectionManager {
         }
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "type:" + quoteWrap(type));
-        params.set("sort", "title_sort asc");
         params.set("q", "*:*");
-        return doGet(params);
+        return doGet(LANE_BROWSE_HANDLER, params);
     }
 
     @Override
@@ -210,16 +207,16 @@ public class SolrCollectionManager implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        String sAlpha = Character.toString(alpha);
-        if ('#' == alpha) {
-            sAlpha = "/[^a-z].*/";
+        char sAlpha = alpha;
+        // solr stores starts with numeric as '1'
+        if ('#' == sAlpha) {
+            sAlpha = '1';
         }
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "type:" + quoteWrap(type));
-        params.add("fq", "title_sort:" + sAlpha + "*");
-        params.set("sort", "title_sort asc");
-        params.set("q", "*:*");
-        return doGet(params);
+        // ertlsw = random, uncommon string so single letter isn't stopword'd out of results
+        params.set("q", "ertlsw" + sAlpha);
+        return doGet(LANE_BROWSE_HANDLER, params);
     }
 
     private String quoteWrap(final String string) {
@@ -232,7 +229,7 @@ public class SolrCollectionManager implements CollectionManager {
     public List<Eresource> search(final String query) {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("q", query);
-        return doGet(params);
+        return doGet(LANE_SEARCH_HANDLER, params);
     }
 
     // TODO: remove these when upgrading to 1.8
@@ -244,7 +241,7 @@ public class SolrCollectionManager implements CollectionManager {
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         SolrQuery solrQuery = new SolrQuery();
-        solrQuery.setRequestHandler("/lane");
+        solrQuery.setRequestHandler(LANE_SEARCH_HANDLER);
         solrQuery.setQuery(query);
         solrQuery.setFacet(true);
         solrQuery.addFacetField("type");
@@ -272,7 +269,7 @@ public class SolrCollectionManager implements CollectionManager {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "subset:" + quoteWrap(subset));
         params.set("q", query);
-        return doGet(params);
+        return doGet(LANE_SEARCH_HANDLER, params);
     }
 
     @Override
@@ -283,6 +280,6 @@ public class SolrCollectionManager implements CollectionManager {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "type:" + quoteWrap(type));
         params.set("q", query);
-        return doGet(params);
+        return doGet(LANE_SEARCH_HANDLER, params);
     }
 }
