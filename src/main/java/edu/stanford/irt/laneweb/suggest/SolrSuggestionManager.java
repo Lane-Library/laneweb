@@ -49,6 +49,7 @@ public class SolrSuggestionManager implements SuggestionManager {
         }
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("q", term);
+        params.set("fl", "id,title");
         return doGet(params);
     }
 
@@ -62,6 +63,7 @@ public class SolrSuggestionManager implements SuggestionManager {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "type:\"" + type + "\"");
         params.set("q", term);
+        params.set("fl", "id,title");
         return doGet(params);
     }
 }
