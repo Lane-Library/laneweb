@@ -41,6 +41,7 @@
                 <value>software</value>
                 <value>statistics</value>
                 <value>print</value>
+                <value>article</value>
             </set>
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
