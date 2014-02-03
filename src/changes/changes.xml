@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-02-03" version="2.1.43" description="2.1.43 bug fix release">
+            <action date="2014-01-29" dev="ryanmax" issue="95577" type="update">
+                spam assistance: filter by referrer before sending mail
+            </action>
+            <action date="2014-01-28" dev="ryanmax" issue="95502" type="fix">
+                null username and ticket in proxy server requests
+            </action>
+            <action date="2014-01-31" dev="olgary" issue="95321" type="remove">
+                remove expandees classes
+            </action>
+            <action date="2014-01-29" dev="olgary" issue="95130" type="update">
+                Change Google + link - template.xml, debug.xml
+            </action>
+        </release>
         <release date="2014-01-27" version="2.1.42" description="2.1.42 bug fix release">
             <action date="2014-01-27" dev="ceyates" issue="95443" type="fix">
                 xincludes with xpointer attribute are broken

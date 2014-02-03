@@ -42,9 +42,15 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
         this.set("index", prev);
     },
     setNewContent : function(imgSrc, content) {
-        var contentBox = this.get("contentBox");
+        var contentBox = this.get("contentBox"),
+        anim = new Y.Anim({
+            node: contentBox,
+            to: {opacity: 1}
+        });
+        contentBox.setStyle('opacity', '0');
         contentBox.one("img").set("src", imgSrc);
         contentBox.one(".banner-content").set("innerHTML", content);
+        anim.run();
     },
     _handleIndexChange : function(event) {
         var navNodes = this.get("navNodes"),

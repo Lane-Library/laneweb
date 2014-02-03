@@ -11,9 +11,28 @@
         <property name="jndiName" value="java:comp/env/jdbc/eresources"/>
     </bean>
 
-    <bean name="javax.sql.DataSource/voyager"
-        class="org.springframework.jndi.JndiObjectFactoryBean">
+    <bean name="javax.sql.DataSource/voyager" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/voyager"/>
     </bean>
+
+    <beans profile="test">
+
+        <bean name="javax.sql.DataSource/eresources" class="org.apache.commons.dbcp.BasicDataSource"
+            destroy-method="close">
+            <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+            <property name="url" value="%{laneweb.context.eresources.url}"/>
+            <property name="username" value="%{laneweb.context.eresources.username}"/>
+            <property name="password" value="%{laneweb.context.eresources.password}"/>
+        </bean>
+
+        <bean name="javax.sql.DataSource/voyager" class="org.apache.commons.dbcp.BasicDataSource"
+            destroy-method="close">
+            <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+            <property name="url" value="%{laneweb.context.voyager.url}"/>
+            <property name="username" value="%{laneweb.context.voyager.username}"/>
+            <property name="password" value="%{laneweb.context.voyager.password}"/>
+        </bean>
+
+    </beans>
 
 </beans>
