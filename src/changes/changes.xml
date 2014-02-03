@@ -14,6 +14,9 @@
             <action date="2014-01-28" dev="ryanmax" issue="95502" type="fix">
                 null username and ticket in proxy server requests
             </action>
+            <action date="2014-01-28" dev="ryanmax" issue="95514" type="update">
+                upgrade jquery mobile library
+            </action>
             <action date="2014-01-31" dev="olgary" issue="95321" type="remove">
                 remove expandees classes
             </action>
