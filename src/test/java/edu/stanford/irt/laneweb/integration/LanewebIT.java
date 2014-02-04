@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.integration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.annotation.Resource;
 
@@ -46,7 +47,17 @@ public class LanewebIT {
     }
 
     @Test
-    public void testFoo() throws Exception {
-        this.mockMvc.perform(get("/index.html"));
+    public void testIndex() throws Exception {
+        this.mockMvc.perform(get("/index.html")).andExpect(status().isOk());
+    }
+    
+    @Test
+    public void testBioresearchSearch() throws Exception {
+        this.mockMvc.perform(get("/search.html?source=bioresearch-all&q=test")).andExpect(status().isOk());
+    }
+    
+    @Test
+    public void testTextbookSearch() throws Exception {
+        this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test")).andExpect(status().isOk());
     }
 }
