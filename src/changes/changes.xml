@@ -7,6 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        
+        <release date="2014-02-04" version="2.1.43" description="2.1.44 emergency release">
+            <action date="2014-02-04" dev="ceyates" issue="96184" type="update">
+                bioresearch metasearch broken
+            </action>
+        </release>
         <release date="2014-02-03" version="2.1.43" description="2.1.43 bug fix release">
             <action date="2014-01-29" dev="ryanmax" issue="95577" type="update">
                 spam assistance: filter by referrer before sending mail
