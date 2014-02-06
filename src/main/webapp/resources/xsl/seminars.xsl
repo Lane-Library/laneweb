@@ -3,25 +3,16 @@
 	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/seminars/ns"
 	version="2.0">
 
-	<xsl:variable name="type" select="s:link/@s:type" />
+	<xsl:variable name="type" select="/s:seminars/@s:type" />
 
-	<xsl:variable name="seminars-node">
-		<xsl:copy-of
-			select="document(concat('cocoon://apps/seminars/',s:link/@s:type,'/',s:link/@s:year,'/',s:link/@s:month,'/',s:link/@s:day,'/',s:link/@s:days,'.xml'))" />
-	</xsl:variable>
-
-	<xsl:variable name="seminars-formatted">
-		<xsl:apply-templates select="$seminars-node//h:div[@class='eventInfo']" />
-	</xsl:variable>
-
-	<xsl:template match="/">
+	<xsl:template match="/s:seminars">
 		<html>
 			<head>
 				<title>seminars</title>
 			</head>
 			<body>
-				<xsl:copy-of select="$seminars-formatted" />
-				<a href="{s:link/@s:url}">More »</a>
+				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt; 3]" />
+				<a href="{/s:seminars/@s:url}">More »</a>
 			</body>
 		</html>
 	</xsl:template>
@@ -36,7 +27,7 @@
 				</a>
 			</xsl:when>
 			<xsl:otherwise>
-				<a title="{concat($title,' [',$type, '-seminar]')}" href="{s:link/@s:url}">
+				<a title="{concat($title,' [',$type, '-seminar]')}" href="{/s:seminars/@s:url}">
 					<xsl:value-of select="$title" />
 				</a>
 			</xsl:otherwise>
