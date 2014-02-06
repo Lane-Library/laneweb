@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.seminars;
 
-import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
@@ -11,9 +10,6 @@ import java.util.Map;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.cocoon.cache.Validity;
-import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
-import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.source.Source;
@@ -25,7 +21,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class SeminarsGenerator extends AbstractGenerator implements CacheablePipelineComponent, ParametersAware {
+public class SeminarsGenerator extends AbstractGenerator implements ParametersAware {
 
     private static final String SEMINARS_NS = "http://lane.stanford.edu/seminars/ns";
 
@@ -51,21 +47,6 @@ public class SeminarsGenerator extends AbstractGenerator implements CacheablePip
     public SeminarsGenerator(final SAXParser saxParser, final SourceResolver sourceResolver) {
         this.saxParser = saxParser;
         this.sourceResolver = sourceResolver;
-    }
-
-    @Override
-    public Serializable getKey() {
-        return this.source.getURI();
-    }
-
-    @Override
-    public String getType() {
-        return "seminars";
-    }
-
-    @Override
-    public Validity getValidity() {
-        return AlwaysValid.SHARED_INSTANCE;
     }
 
     @Override

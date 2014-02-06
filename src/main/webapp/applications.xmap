@@ -147,11 +147,6 @@
             <map:generate type="search-engine"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="seminars/*/*/*/*/*.xml" type="wildcard">
-            <!-- cache for 6 hours -->
-            <map:generate type="html" src="cache:360:http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&amp;selMonth={3}&amp;selDay={4}&amp;selYear={2}&amp;futureNumberDays={5}&amp;departmentId=0&amp;seminarLocation=0&amp;keyword=&amp;courseType={1}"/>
-            <map:serialize type="xml"/>
-        </map:match>
     </map:pipeline>
     <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{request-uri};q={query}"/>
@@ -163,8 +158,10 @@
             <map:serialize type="text"/>
         </map:match>
     </map:pipeline>
-    <!-- caching pipeline for static documents -->
-    <map:pipeline type="caching">
+    <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{sitemap-uri}"/>
+        <!-- cache expires in 21600 seconds = 6 hours -->
+        <map:parameter name="cache-expires" value="21600"/>
         <map:match pattern="seminars/type/*/days/*.xml" type="wildcard">
             <map:generate type="seminars">
                 <map:parameter name="type" value="{1}"/>
@@ -173,6 +170,9 @@
             <map:transform type="saxon" src="resources/xsl/seminars.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
+    </map:pipeline>
+    <!-- caching pipeline for static documents -->
+    <map:pipeline type="caching">
         <map:match pattern="search-templates.xml" type="wildcard">
             <map:generate type="search-describe"/>
             <map:transform type="search-directory">
