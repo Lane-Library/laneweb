@@ -58,6 +58,15 @@
         <constructor-arg value="&lt;aggregator&gt;"/>
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/seminars-url"
+        class="edu.stanford.irt.laneweb.seminars.SeminarsLinkSAXStrategy"/>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/seminars"
+        class="edu.stanford.irt.laneweb.seminars.SeminarsLinkGenerator"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/seminars-url"/>
+    </bean>
+    
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/classes"
         class="edu.stanford.irt.laneweb.classes.ClassesGenerator"
         scope="prototype">

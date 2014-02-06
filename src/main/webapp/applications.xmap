@@ -148,11 +148,11 @@
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="seminars/type/*/days/*.xml" type="wildcard">
-            <map:generate type="file" src="resources/xsl/seminars.xsl"/>
-            <map:transform type="saxon" src="resources/xsl/seminars.xsl">
-                <map:parameter name="days" value="{2}"/>
+            <map:generate type="seminars">
                 <map:parameter name="type" value="{1}"/>
-            </map:transform>
+                <map:parameter name="days" value="{2}"/>
+            </map:generate>
+            <map:transform type="saxon" src="resources/xsl/seminars.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="seminars/*/*/*/*/*.xml" type="wildcard">

@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/seminars/ns"
 	version="2.0">
 
-	<xsl:param name="days" />
-
-	<xsl:param name="type" />
-
-	<xsl:variable name="cDay" select="format-date(current-date(),'[D,2]')" />
-
-	<xsl:variable name="cMonth"
-		select="format-date(current-date(),'[MNn,*-3]')" />
-
-	<xsl:variable name="cYear" select="format-date(current-date(),'[Y,4]')" />
-
-	<xsl:variable name="moreUrl"
-		select="concat('http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&amp;selMonth=',$cMonth,'&amp;selDay=',$cDay,'&amp;selYear=',$cYear,'&amp;futureNumberDays=',$days,'&amp;departmentId=0&amp;seminarLocation=0&amp;keyword=&amp;courseType=',$type)" />
+	<xsl:variable name="type" select="s:link/@s:type" />
 
 	<xsl:variable name="seminars-node">
 		<xsl:copy-of
-			select="document(concat('cocoon://apps/seminars/',$type,'/',$cYear,'/',$cMonth,'/',$cDay,'/',$days,'.xml'))" />
+			select="document(concat('cocoon://apps/seminars/',s:link/@s:type,'/',s:link/@s:year,'/',s:link/@s:month,'/',s:link/@s:day,'/',s:link/@s:days,'.xml'))" />
 	</xsl:variable>
 
 	<xsl:variable name="seminars-formatted">
@@ -33,7 +21,7 @@
 			</head>
 			<body>
 				<xsl:copy-of select="$seminars-formatted" />
-				<a href="{$moreUrl}">More »</a>
+				<a href="{s:link/@s:url}">More »</a>
 			</body>
 		</html>
 	</xsl:template>
@@ -48,7 +36,7 @@
 				</a>
 			</xsl:when>
 			<xsl:otherwise>
-				<a title="{concat($title,' [',$type, '-seminar]')}" href="{$moreUrl}">
+				<a title="{concat($title,' [',$type, '-seminar]')}" href="{s:link/@s:url}">
 					<xsl:value-of select="$title" />
 				</a>
 			</xsl:otherwise>
