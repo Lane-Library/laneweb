@@ -12,7 +12,9 @@
 			</head>
 			<body>
 				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt; 3]" />
-				<a href="{/s:seminars/@s:url}">More »</a>
+                <div class="more classes">
+                    <a href="{/s:seminars/@s:url}">More »</a>
+                </div>
 			</body>
 		</html>
 	</xsl:template>

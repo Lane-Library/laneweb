@@ -162,10 +162,11 @@
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <!-- cache expires in 21600 seconds = 6 hours -->
         <map:parameter name="cache-expires" value="21600"/>
-        <map:match pattern="seminars/type/*/days/*.xml" type="wildcard">
+        <!-- TODO: change pattern after 2.1.45 release and content coordination -->
+        <!--<map:match pattern="seminars/type/*.xml" type="wildcard">-->
+        <map:match pattern="seminars/type/(all|cme|gran).*\.xml" type="regexp">
             <map:generate type="seminars">
                 <map:parameter name="type" value="{1}"/>
-                <map:parameter name="days" value="{2}"/>
             </map:generate>
             <map:transform type="saxon" src="resources/xsl/seminars.xsl"/>
             <map:serialize type="xml"/>
