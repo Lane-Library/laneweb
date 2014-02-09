@@ -34,13 +34,9 @@ public class SeminarsGenerator extends AbstractGenerator implements ParametersAw
 
     private SAXParser saxParser;
 
-    private Source source;
-
     private SourceResolver sourceResolver;
 
     private String type;
-
-    private String url;
 
     private final SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
 
@@ -52,36 +48,27 @@ public class SeminarsGenerator extends AbstractGenerator implements ParametersAw
     @Override
     public void setParameters(final Map<String, String> parameters) {
         this.type = parameters.get(Model.TYPE);
-        Date today = new Date();
-        String day;
-        String month;
-        String year;
-        synchronized (this) {
-            day = this.dayFormat.format(today);
-            month = this.monthFormat.format(today);
-            year = this.yearFormat.format(today);
-        }
-        Object[] urlParams = { month, day, year, this.type };
-        this.url = URL_FORMAT.format(urlParams);
-        try {
-            this.source = this.sourceResolver.resolveURI(new URI(this.url));
-        } catch (URISyntaxException e) {
-            throw new LanewebException(e);
-        }
     }
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
+        Date today = new Date();
+        String day = this.dayFormat.format(today);
+        String month = this.monthFormat.format(today);
+        String year = this.yearFormat.format(today);
+        Object[] urlParams = { month, day, year, this.type };
+        String url = URL_FORMAT.format(urlParams);
         try {
+            Source source = this.sourceResolver.resolveURI(new URI(url));
             xmlConsumer.startDocument();
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(SEMINARS_NS, "type", "type", "CDATA", this.type);
-            atts.addAttribute(SEMINARS_NS, "url", "url", "CDATA", this.url);
+            atts.addAttribute(SEMINARS_NS, "url", "url", "CDATA", url);
             XMLUtils.startElement(xmlConsumer, SEMINARS_NS, "seminars", atts);
-            this.saxParser.parse(this.source, new EmbeddedXMLPipe(xmlConsumer));
+            this.saxParser.parse(source, new EmbeddedXMLPipe(xmlConsumer));
             XMLUtils.endElement(xmlConsumer, SEMINARS_NS, "seminars");
             xmlConsumer.endDocument();
-        } catch (SAXException e) {
+        } catch (SAXException | URISyntaxException e) {
             throw new LanewebException(e);
         }
     }
