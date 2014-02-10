@@ -20,17 +20,8 @@
 		</div>
 	</xsl:template>
 	<xsl:template name="decorator">
-		<xsl:variable name="classId" select="./lc:module_id/text()"/>
-        <xsl:variable name="description-text" select="./lc:event_description" />
-        <xsl:variable name="firstParagraphDescription"
-            select="substring-before($description-text, '.')" />
-        <xsl:variable name="first-words">
-            <xsl:call-template name="firstWords">
-                <xsl:with-param name="value" select="$description-text" />
-                <xsl:with-param name="count" select="50" />
-            </xsl:call-template>
-        </xsl:variable>
-		<div class="yui3-g" itemscope="" itemtype="http://data-vocabulary.org/Event">
+		<xsl:variable name="classId" select="./lc:module_id/text()"></xsl:variable>
+		<div class="yui3-g">
 			<div class="yui3-u-1-5">
 				<div class="month">
 					<xsl:call-template name="month" />
@@ -39,13 +30,9 @@
 					<xsl:call-template name="day" />
 				</div>
 				<div class="time">
-				    <time itemprop="startDate" datetime="{./lc:event_dates/lc:start_date[1]/text()}">
-    					<xsl:call-template name="start-time" />
-				    </time>
+					<xsl:call-template name="start-time" />
 					<xsl:text>–</xsl:text>
-				    <time itemprop="endDate" datetime="{./lc:event_dates/lc:end_date[1]/text()}">
-						<xsl:call-template name="end-time" />
-				    </time>
+					<xsl:call-template name="end-time" />
 				</div>
 			</div>
 
@@ -60,10 +47,7 @@
                         <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
                         <xsl:value-of select="lc:module_id/text()" />
                     	</xsl:attribute>
-						<xsl:attribute name="itemprop">url</xsl:attribute>
-                    	<span itemprop="summary">
-							<xsl:value-of select="./lc:event_name" />
-                    	</span>
+						<xsl:value-of select="./lc:event_name" />
 					</a>
 				</h4>
 				<p>
@@ -99,6 +83,15 @@
 			</div>
 		</div>
 		<p>
+			<xsl:variable name="description-text" select="./lc:event_description" />
+			<xsl:variable name="firstParagraphDescription"
+				select="substring-before($description-text, '.')" />
+			<xsl:variable name="first-words">
+				<xsl:call-template name="firstWords">
+					<xsl:with-param name="value" select="$description-text" />
+					<xsl:with-param name="count" select="50" />
+				</xsl:call-template>
+			</xsl:variable>
 			<xsl:choose>
 				<xsl:when
 					test="count(tokenize($description-text, '\W+')[. != ''])  &gt; 50">
