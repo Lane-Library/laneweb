@@ -15,7 +15,7 @@ public class SpellCheckController {
     @Autowired
     private SpellChecker spellChecker;
 
-    @RequestMapping(value = "**/apps/spellcheck/json")
+    @RequestMapping(value = "/apps/spellcheck/json")
     @ResponseBody
     public SpellCheckResult checkSpelling(@RequestParam final String q) {
         return this.spellChecker.spellCheck(q);

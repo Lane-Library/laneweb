@@ -13,7 +13,7 @@ public class CacheableSelector implements Selector {
 
     /**
      * Checks to see if the model contains particular values, currently SUNETID, DEBUG, QUERY, EMRID,
-     * BASE_PATH.contains(/stage) or the sitemap-uri is /error.html or contains /bassett/, and if it does return false.
+     * or the sitemap-uri is /error.html or contains /bassett/, and if it does return false.
      */
     @Override
     public boolean select(final String expression, final Map<String, Object> model, final Map<String, String> parameters) {
@@ -30,8 +30,6 @@ public class CacheableSelector implements Selector {
         } else if (model.containsKey(Model.EMRID)) {
             result = false;
         } else if (model.containsKey(Model.DEBUG)) {
-            result = false;
-        } else if (ModelUtil.getString(model, Model.BASE_PATH, "").contains("/stage")) {
             result = false;
         }
         return result;
