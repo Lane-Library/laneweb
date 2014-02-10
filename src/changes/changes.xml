@@ -7,7 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        
+        <release date="2014-02-10" version="2.1.45" description="2.1.45 bug fix release">
+            <action date="2014-02-06" dev="ryanmax" issue="95792" type="fix">
+                stale content in CME and Grand Rounds sections of home page
+            </action>
+        </release>
         <release date="2014-02-04" version="2.1.44" description="2.1.44 emergency release">
             <action date="2014-02-04" dev="ceyates" issue="96184" type="fix">
                 bioresearch metasearch broken
