@@ -60,4 +60,9 @@ public class LanewebIT {
     public void testTextbookSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test")).andExpect(status().isOk());
     }
+    
+    @Test
+    public void testContentAwareRequestHandler() throws Exception {
+        this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk());
+    }
 }

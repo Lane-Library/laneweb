@@ -13,9 +13,14 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
-import edu.stanford.irt.laneweb.model.Model;
 
 public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandler {
+    
+    private URL contentBase;
+
+    public ContentBaseAwareHttpRequestHandler(final URL contentBase) {
+        this.contentBase = contentBase;
+    }
 
     @Override
     protected Resource getResource(final HttpServletRequest request) {
@@ -25,10 +30,9 @@ public class ContentBaseAwareHttpRequestHandler extends ResourceHttpRequestHandl
             throw new IllegalStateException("Required request attribute '" + HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE
                     + "' is not set");
         }
-        URL url = (URL) request.getAttribute(Model.CONTENT_BASE);
         Resource contentBase;
         try {
-            contentBase = new UrlResource(url.toString() + "/");
+            contentBase = new UrlResource(this.contentBase.toString() + "/");
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
