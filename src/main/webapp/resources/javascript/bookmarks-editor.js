@@ -31,6 +31,7 @@
             bookmarks.after("removeSync", this._handleBookmarksRemove, this);
             bookmarks.after("addSync", this._handleBookmarkAdd, this);
             bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
+            bookmarks.after("moveSync", this._handleBookmarkMove, this);
             srcNode.one("fieldset input[type='checkbox']").on("click", this._handleCheckboxClick, this);
 
             dragManager.on('drag:start', this._handleDragStart, this);
@@ -154,6 +155,17 @@
          */
         _handleBookmarkAdd : function(event) {
             this.get("editors")[event.target.indexOf(event.bookmark)].update();
+        },
+        
+        /**
+         * Responds to the bookmarks:moveSync event, rearranges the editors appropriately
+         * @method _handleBookmarkMove
+         * @private
+         * @param event {CustomEvent}
+         */
+        _handleBookmarkMove : function(event) {
+            var editors = this.get("editors");
+            editors.splice(event.to, 0, editors.splice(event.from, 1)[0]);
         },
 
         /**
