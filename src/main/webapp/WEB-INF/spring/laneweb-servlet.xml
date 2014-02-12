@@ -149,7 +149,7 @@
     
     <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"
         class="edu.stanford.irt.laneweb.servlet.mvc.ContentBaseAwareHttpRequestHandler">
-        <constructor-arg value="%{laneweb.context.live-base}"></constructor-arg>
+        <constructor-arg value="%{laneweb.context.live-base}/"></constructor-arg>
         <property name="locations">
             <list>
                 <value>/</value>
