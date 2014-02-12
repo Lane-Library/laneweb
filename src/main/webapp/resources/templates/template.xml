@@ -3,6 +3,7 @@
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
@@ -70,14 +71,13 @@
                             <?laneweb content?>
                         </div>
                         <ul id="libraryContact">
-                             <li>Today's hours: <?laneweb todays-hours?></li>
-                            <li><a href="/about/index.html">Hours</a></li>
-                            <li>650-723-6831</li>
-                            <li><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>
-                            <li class="live-chat"><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
+                             <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/index.html">Hours</a>: <?laneweb todays-hours?></li>
+                             <li><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</li>
+                             <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/help/live-chat-only.html?template=none" rel="popup console 575 550"><span>Live Chat</span></a></li>
+                             <li><i class="fa fa-envelope fa-fw"></i><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>   
                         </ul>
                         <ul id="login">
-                            <li>
+                            <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
                                 <a href="/secure/login.html">MyLane login</a>
                             </li>
                             <li id="favorites">

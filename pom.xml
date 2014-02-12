@@ -160,6 +160,7 @@
                                 <include>layout-min.css</include>
                                 <include>bassett-min.css</include>
                                 <include>shaded-border-min.css</include>
+                                <include>font-awesome-min.css</include>
                                 <include>header-min.css</include>
                                 <include>search-form-min.css</include>
                                 <include>lane-nav-min.css</include>
@@ -183,7 +184,6 @@
                                 <include>images-min.css</include>
                                 <include>captioned-img-min.css</include>
                                 <include>lightbox-min.css</include>
-                                <include>live-chat-min.css</include>
                                 <include>banner-min.css</include>
                                 <include>hightlighted-resources-min.css</include>
                                 <include>antibiogram-min.css</include>
