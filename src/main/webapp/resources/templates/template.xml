@@ -80,7 +80,7 @@
                             <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
                                 <a href="/secure/login.html">MyLane login</a>
                             </li>
-                            <li id="favorites">
+                            <li id="favorites"><i class="fa fa-star fa-lg fa-fw"></i>
                                 <a href="/favorites.html">My Bookmarks</a>
                                 <?laneweb bookmarks?>
                             </li>
