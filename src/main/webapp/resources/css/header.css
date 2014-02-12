@@ -76,11 +76,3 @@ h1 a:visited {
 .content .live-chat-inactive {
 	display: none;
 }
-
-#login #favorites {
-	background: url("/././resources/images/sprite-all.png") no-repeat scroll
-		-680px -40px transparent;
-	padding-left: 22px;
-	margin-left: 1em;
-	border-left: none;
-}
