@@ -213,7 +213,11 @@
                                 <include>search-select-min.js</include>
                                 <include>lane-search-pico-min.js</include>
                                 <include>search-min.js</include>
+                                <include>bookmark-min.js</include>
                                 <include>bookmarks-min.js</include>
+                                <include>bookmarks-widget-min.js</include>
+                                <include>bookmark-editor-min.js</include>
+                                <include>bookmarks-editor-min.js</include>
                                 <include>bookmark-link-min.js</include>
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
