@@ -46,9 +46,7 @@
     </head>
     <body>
         <div id="custom-doc" class="yui-t7">
-            <div id="sb-rt" class="sb-lr">
-                <div id="sb-lft" class="sb-lr">
-                    <div id="sb">
+                 <div id="sb">
                         <h1>
                             <a href="/index.html"><span>Lane</span> Medical Library</a>
                         </h1>
@@ -288,12 +286,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sb-tb" id="sb-bot">
-                        <div class="sb-c" id="sb-bl"/>
-                        <div class="sb-c" id="sb-br"/>
-                    </div>
-                </div>
-            </div>
             <ul id="somNav2">
                 <li>
                     <a href="http://stanfordmedicine.stanford.edu">&#169; <?laneweb current-year?>
