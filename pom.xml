@@ -287,56 +287,9 @@
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>grover-maven-plugin</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.2</version>
                 <configuration>
-                    <tests>
-                        <test>src/main/webapp/resources/test/banner/banner-test.html</test>
-                        <test>src/main/webapp/resources/test/bassett/bassett-test.html</test>
-                        <test>src/main/webapp/resources/test/bookmark-instructions/bookmark-instructions-test.html</test>
-                        <test>src/main/webapp/resources/test/bookmark-link/bookmark-link-test.html</test>
-                        <test>src/main/webapp/resources/test/bookmark-login/bookmark-login-test.html</test>
-                        <test>src/main/webapp/resources/test/bookmarks/bookmark-test.html</test>
-                        <test>src/main/webapp/resources/test/bookmarks/bookmarks-test.html</test>
-                        <test>src/main/webapp/resources/test/bookmarks/bookmarks-widget-test.html</test>
-                        <test>src/main/webapp/resources/test/expandies/expandies-test.html</test>
-                        <test>src/main/webapp/resources/test/feedback/feedback-test.html</test>
-                        <test>src/main/webapp/resources/test/findit/findit-test.html</test>
-                        <test>src/main/webapp/resources/test/form-validator/form-validator-test.html</test>
-                        <test>src/main/webapp/resources/test/google/google-test.html</test>
-                        <test>src/main/webapp/resources/test/hover-controller/hover-controller-test.html</test>
-                        <test>src/main/webapp/resources/test/ie/ie-test.html</test>
-                        <test>src/main/webapp/resources/test/lane/lane-test.html</test>
-                        <test>src/main/webapp/resources/test/lightbox/lightbox-test.html</test>
-                        <test>src/main/webapp/resources/test/link-plugin/link-plugin-test.html</test>
-                        <test>src/main/webapp/resources/test/location/location-test.html</test>
-                        <test>src/main/webapp/resources/test/menu-delay/menu-delay-test.html</test>
-                        <test>src/main/webapp/resources/test/menu-items/menu-items-test.html</test>
-                        <test>src/main/webapp/resources/test/metasearch/metasearch-test.html</test>
-                        <test>src/main/webapp/resources/test/mobile-ad/mobile-ad-test.html</test>
-                        <test>src/main/webapp/resources/test/model/model-test.html</test>
-                        <test>src/main/webapp/resources/test/persistent-login/persistent-login-test.html</test>
-                        <test>src/main/webapp/resources/test/popin/popin-test.html</test>
-                        <test>src/main/webapp/resources/test/popup/popup-test.html</test>
-                        <test>src/main/webapp/resources/test/purchase-suggestions/purchase-suggestions-test.html</test>
-                        <test>src/main/webapp/resources/test/querymap/querymap-test.html</test>
-                        <test>src/main/webapp/resources/test/querymapper/querymapper-test.html</test>
-                        <test>src/main/webapp/resources/test/resource-list-pagination/resource-list-pagination-test.html</test>
-                        <test>src/main/webapp/resources/test/resource-search/resource-search-test.html</test>
-                        <test>src/main/webapp/resources/test/search/search-test.html</test>
-                        <test>src/main/webapp/resources/test/search-facet-counts/search-facet-counts-test.html</test>
-                        <test>src/main/webapp/resources/test/search-facets/search-facets-test.html</test>
-                        <test>src/main/webapp/resources/test/search-indicator/search-indicator-test.html</test>
-                        <test>src/main/webapp/resources/test/search-pico/search-pico-test.html</test>
-                        <test>src/main/webapp/resources/test/search-select/search-select-test.html</test>
-                        <test>src/main/webapp/resources/test/selections/selections-test.html</test>
-                        <test>src/main/webapp/resources/test/spellcheck/spellcheck-test.html</test>
-                        <test>src/main/webapp/resources/test/suggest/suggest-test.html</test>
-                        <test>src/main/webapp/resources/test/teletype/teletype-test.html</test>
-                        <test>src/main/webapp/resources/test/telinput/telinput-test.html</test>
-                        <test>src/main/webapp/resources/test/textinputs/textinputs-test.html</test>
-                        <test>src/main/webapp/resources/test/tooltips/tooltips-test.html</test>
-                        <test>src/main/webapp/resources/test/tracking/tracking-test.html</test>
-                    </tests>
+                    <testDir>src/main/webapp/resources/test</testDir>
                 </configuration>
                 <executions>
                     <execution>
