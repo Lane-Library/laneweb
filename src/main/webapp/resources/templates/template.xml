@@ -10,8 +10,6 @@
             href="/extensions/laneconnex-engine.xml"/>
     </head>
     <body>
-        <div id="custom-doc" class="yui-t7">
-              <div id="sb">
                         <h1>
                             <a href="/index.html"><span>Lane</span> Medical Library</a>
                         </h1>
@@ -250,7 +248,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
             <ul id="somNav2">
                 <li>
                     <a href="http://stanfordmedicine.stanford.edu">&#169; <?laneweb current-year?>
@@ -261,7 +258,6 @@
                 </li>
             </ul>
             <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
-        </div>
         <div id="feedbackLink"><a rel="lightbox" href="/help/feedback.html"></a></div>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}"></script>
