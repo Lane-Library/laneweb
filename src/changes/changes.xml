@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2014-02-13" version="2.1.46" description="2.1.45 emergency release">
+        <release date="2014-02-13" version="2.1.46" description="2.1.46 emergency release">
             <action date="2014-02-13" dev="ceyates" issue="96335" type="fix">
                 logs are not rotating
             </action>
