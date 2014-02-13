@@ -24,7 +24,6 @@ import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.sitemap.SitemapContext;
 import edu.stanford.irt.cocoon.source.SourceResolver;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class SitemapRequestHandlerTest {
@@ -73,7 +72,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getRequestURI()).andReturn("/index.html");
         expect(this.servletContext.getMimeType("/index.html")).andReturn("text/html");
         expect(this.response.getOutputStream()).andReturn(null);

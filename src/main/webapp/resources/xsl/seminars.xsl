@@ -1,39 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/seminars/ns"
 	version="2.0">
 
-	<xsl:param name="days" />
+	<xsl:variable name="type" select="/s:seminars/@s:type" />
 
-	<xsl:param name="type" />
-
-	<xsl:variable name="cDay" select="format-date(current-date(),'[D,2]')" />
-
-	<xsl:variable name="cMonth"
-		select="format-date(current-date(),'[MNn,*-3]')" />
-
-	<xsl:variable name="cYear" select="format-date(current-date(),'[Y,4]')" />
-
-	<xsl:variable name="moreUrl"
-		select="concat('http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&amp;selMonth=',$cMonth,'&amp;selDay=',$cDay,'&amp;selYear=',$cYear,'&amp;futureNumberDays=',$days,'&amp;departmentId=0&amp;seminarLocation=0&amp;keyword=&amp;courseType=',$type)" />
-
-	<xsl:variable name="seminars-node">
-		<xsl:copy-of
-			select="document(concat('cocoon://apps/seminars/',$type,'/',$cYear,'/',$cMonth,'/',$cDay,'/',$days,'.xml'))" />
-	</xsl:variable>
-
-	<xsl:variable name="seminars-formatted">
-		<xsl:apply-templates select="$seminars-node//h:div[@class='eventInfo']" />
-	</xsl:variable>
-
-	<xsl:template match="/">
+	<xsl:template match="/s:seminars">
 		<html>
 			<head>
 				<title>seminars</title>
 			</head>
 			<body>
-				<xsl:copy-of select="$seminars-formatted" />
-				<a href="{$moreUrl}">More »</a>
+				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt; 3]" />
+                <div class="more classes">
+                    <a href="{/s:seminars/@s:url}">More »</a>
+                </div>
 			</body>
 		</html>
 	</xsl:template>
@@ -48,7 +29,7 @@
 				</a>
 			</xsl:when>
 			<xsl:otherwise>
-				<a title="{concat($title,' [',$type, '-seminar]')}" href="{$moreUrl}">
+				<a title="{concat($title,' [',$type, '-seminar]')}" href="{/s:seminars/@s:url}">
 					<xsl:value-of select="$title" />
 				</a>
 			</xsl:otherwise>

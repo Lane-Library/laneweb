@@ -24,15 +24,9 @@ public class CacheableSelectorTest {
     }
 
     @Test
-    public void testBasePathNotStage() {
-        this.model.put(Model.BASE_PATH, "/");
+    public void testBasePath() {
+        this.model.put(Model.BASE_PATH, "/path");
         assertTrue(this.selector.select(null, this.model, null));
-    }
-
-    @Test
-    public void testBasePathStage() {
-        this.model.put(Model.BASE_PATH, "/stage");
-        assertFalse(this.selector.select(null, this.model, null));
     }
 
     @Test

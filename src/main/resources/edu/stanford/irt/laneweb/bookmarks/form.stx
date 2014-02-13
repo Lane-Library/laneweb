@@ -5,18 +5,27 @@
     version="1.0"
     pass-through="all">
     
+    <stx:param name="disaster-mode"/>
+    
     <!-- item is a counter for the li elements, incremented with each one -->
     <stx:variable name="item" select="0"/>
     
     <stx:template match="/">
-        <form action="/bookmarks" method="post" id="bookmarks-editor">
-            <fieldset>
-                <button name="action" value="add" type="submit">add</button>
-                <button name="action" value="delete" type="submit">delete</button>
-                <button name="action" value="edit" type="submit">edit</button>
-            </fieldset>
-            <stx:process-children/>
-        </form>
+        <stx:choose>
+            <stx:when test="$disaster-mode = 'true'">
+                <div>Bookmark editing is not available at the moment.</div>
+            </stx:when>
+            <stx:otherwise>
+                <form action="/bookmarks" method="post" id="bookmarks-editor">
+                    <fieldset>
+                        <button name="action" value="add" type="submit">add</button>
+                        <button name="action" value="delete" type="submit">delete</button>
+                        <button name="action" value="edit" type="submit">edit</button>
+                    </fieldset>
+                    <stx:process-children/>
+                </form>
+            </stx:otherwise>
+        </stx:choose>
     </stx:template>
     
     <!-- remove id="bookmarks" -->

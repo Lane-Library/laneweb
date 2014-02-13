@@ -7,12 +7,25 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-02-10" version="2.1.45" description="2.1.45 bug fix release">
+            <action date="2014-02-06" dev="ryanmax" issue="95792" type="fix">
+                stale content in CME and Grand Rounds sections of home page
+            </action>
+        </release>
+        <release date="2014-02-04" version="2.1.44" description="2.1.44 emergency release">
+            <action date="2014-02-04" dev="ceyates" issue="96184" type="fix">
+                bioresearch metasearch broken
+            </action>
+        </release>
         <release date="2014-02-03" version="2.1.43" description="2.1.43 bug fix release">
             <action date="2014-01-29" dev="ryanmax" issue="95577" type="update">
                 spam assistance: filter by referrer before sending mail
             </action>
             <action date="2014-01-28" dev="ryanmax" issue="95502" type="fix">
                 null username and ticket in proxy server requests
+            </action>
+            <action date="2014-01-28" dev="ryanmax" issue="95514" type="update">
+                upgrade jquery mobile library
             </action>
             <action date="2014-01-31" dev="olgary" issue="95321" type="remove">
                 remove expandees classes

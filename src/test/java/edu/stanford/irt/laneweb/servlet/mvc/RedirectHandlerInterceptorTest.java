@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
 public class RedirectHandlerInterceptorTest {
@@ -36,7 +35,7 @@ public class RedirectHandlerInterceptorTest {
     @Test
     public void testSlashClasses() throws Exception {
         expect(this.request.getRequestURI()).andReturn("/classes");
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/classes", "", null)).andReturn("/classes/");
         this.response.sendRedirect("/classes/");
@@ -48,7 +47,7 @@ public class RedirectHandlerInterceptorTest {
     @Test
     public void testSlashClinician() throws Exception {
         expect(this.request.getRequestURI()).andReturn("/clinician");
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/clinician", "", null)).andReturn("/clinician/");
         this.response.sendRedirect("/clinician/");
@@ -60,7 +59,7 @@ public class RedirectHandlerInterceptorTest {
     @Test
     public void testSlashLKSCPrint() throws Exception {
         expect(this.request.getRequestURI()).andReturn("/lksc-print.html");
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/lksc-print.html", "", null)).andReturn("/help/lksc-print.html");
         this.response.sendRedirect("/help/lksc-print.html");
@@ -72,7 +71,7 @@ public class RedirectHandlerInterceptorTest {
     @Test
     public void testSlashM() throws Exception {
         expect(this.request.getRequestURI()).andReturn("/laneweb/m");
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("/laneweb");
+        expect(this.request.getContextPath()).andReturn("/laneweb");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/m", "/laneweb", null)).andReturn("/laneweb/m/");
         this.response.sendRedirect("/laneweb/m/");
