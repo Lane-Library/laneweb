@@ -2,7 +2,7 @@
 
     /**
      * A class for representing a bookmark with attributes for the label and url.
-     * 
+     *
      * @class Bookmark
      * @uses EventTarget
      * @constructor
@@ -22,7 +22,7 @@
 
         /**
          * The default changeEvent handler
-         * 
+         *
          * @method _valueChange
          * @private
          * @param event
@@ -35,7 +35,7 @@
 
         /**
          * getter for the label
-         * 
+         *
          * @method getLabel
          * @returns {string} the label
          */
@@ -45,7 +45,7 @@
 
         /**
          * getter for the url
-         * 
+         *
          * @method getUrl
          * @returns {string} the url
          */
@@ -56,7 +56,7 @@
         /**
          * setter for the label, delegates to setValues with the current url as
          * the url value.
-         * 
+         *
          * @method setLabel
          * @param newLabel
          *            {string}
@@ -67,9 +67,9 @@
 
         /**
          * setter for the url, delegates to setValues with the current
-         * 
+         *
          * @method setUrl label as the label value.
-         * 
+         *
          * @param newUrl
          *            {string}
          */
@@ -79,7 +79,7 @@
 
         /**
          * Set both the label and url then fire a changed event
-         * 
+         *
          * @method setValues
          * @param newLabel
          *            {string}
