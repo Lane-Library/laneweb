@@ -69,7 +69,7 @@
             <xsl:apply-templates select="@*"/>
             <xsl:for-each select="child::node()">
                 <xsl:choose>
-                    <xsl:when test="@class='metasearch'">
+                    <xsl:when test="contains(@class,'metasearch')">
                         <xsl:copy>
                             <xsl:apply-templates select="@*"/>
                             <xsl:attribute name="href">
