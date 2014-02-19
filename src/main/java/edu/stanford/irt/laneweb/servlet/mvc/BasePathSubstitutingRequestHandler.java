@@ -16,7 +16,6 @@ import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.validity.FileTimeStampValidity;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.BasePathSubstitutingInputStream;
 import edu.stanford.irt.laneweb.util.CachedResponseResource;
 
@@ -34,7 +33,7 @@ public class BasePathSubstitutingRequestHandler extends ResourceHttpRequestHandl
         Resource resource = super.getResource(request);
         if (resource != null) {
             try {
-                String basePath = (String) request.getAttribute(Model.BASE_PATH);
+                String basePath = request.getContextPath();
                 String cacheKey = basePath + ":" + resource.getURI();
                 CachedResponse cachedResponse = this.cache.get(cacheKey);
                 if (cachedResponse == null || !cachedResponse.getValidity().isValid()) {

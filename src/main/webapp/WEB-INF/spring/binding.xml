@@ -18,6 +18,7 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-header"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/content-base"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/version"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/disaster-mode"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"/>
@@ -34,16 +35,16 @@
         class="edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder">
         <constructor-arg>
             <set>
+                <value>auth</value>
                 <value>base-path</value>
                 <value>disaster-mode</value>
+                <value>isActiveSunetID</value>
                 <value>ipgroup</value>
-                <value>auth</value>
+                <value>proxy-links</value>
                 <value>query</value>
                 <value>source</value>
                 <value>url-encoded-query</value>
-                <value>isActiveSunetID</value>
                 <!--<value>live-chat-available</value>
-                <value>proxy-links</value>
                 <value>sunetid</value>
                 <value>bookmarks</value>
                 <value>name</value>
@@ -103,7 +104,14 @@
         class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"
-        class="edu.stanford.irt.laneweb.servlet.binding.RequestAttributeDataBinder"/>
+        class="edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder">
+        <constructor-arg ref="servletContext"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/content-base"
+        class="edu.stanford.irt.laneweb.servlet.binding.ContentBaseDataBinder">
+        <constructor-arg value="%{laneweb.context.live-base}"/>
+    </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/version"
         class="edu.stanford.irt.laneweb.servlet.binding.VersionDataBinder">

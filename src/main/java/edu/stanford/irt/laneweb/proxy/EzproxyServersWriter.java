@@ -58,7 +58,7 @@ public class EzproxyServersWriter {
     private static final String UTF8 = "UTF-8";
     static {
         try {
-            SUL = "T jenson.stanford.edu\nU http://jenson.stanford.edu\nHJ jenson.stanford.edu\n\nT socrates.stanford.edu\nU http://socrates.stanford.edu\nHJ socrates.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
+            SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
                     .getBytes("UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new ExceptionInInitializerError(e);

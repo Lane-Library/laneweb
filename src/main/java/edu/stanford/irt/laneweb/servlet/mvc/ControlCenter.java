@@ -47,6 +47,23 @@ public class ControlCenter {
         return this.context.getBean(EMailSender.class).removeSpamIP(ip);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/email/spamReferrer")
+    @ResponseBody
+    public String addSpamReferrer(@RequestParam final String referrer,
+            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID) final String sunetid) {
+        checkAccess(sunetid);
+        this.context.getBean(EMailSender.class).addSpamReferrer(referrer);
+        return referrer;
+    }
+    
+    @RequestMapping(method = RequestMethod.DELETE, value = "/email/spamReferrer")
+    @ResponseBody
+    public boolean removeSpamReferrer(@RequestParam final String referrer,
+            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID) final String sunetid) {
+        checkAccess(sunetid);
+        return this.context.getBean(EMailSender.class).removeSpamReferrer(referrer);
+    }
+    
     @ModelAttribute
     protected void getParameters(final HttpServletRequest request, final Model model) {
         this.sunetidBinder.bind(model.asMap(), request);

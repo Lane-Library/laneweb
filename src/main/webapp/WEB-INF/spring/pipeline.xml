@@ -57,6 +57,13 @@
         scope="prototype">
         <constructor-arg value="&lt;aggregator&gt;"/>
     </bean>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/seminars"
+        class="edu.stanford.irt.laneweb.seminars.SeminarsGenerator"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/html"/>
+    </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/classes"
         class="edu.stanford.irt.laneweb.classes.ClassesGenerator"
@@ -110,13 +117,6 @@
         scope="prototype">
         <constructor-arg value="joost"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/xalan"
-        class="edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer"
-        scope="prototype">
-        <constructor-arg value="xalan"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/xalan"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Serializer/xml"

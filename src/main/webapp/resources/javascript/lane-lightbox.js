@@ -1,22 +1,22 @@
 (function() {
 
     var LightboxBg = Y.Base.create("lightboxbg", Y.Widget, [], {
-    	//tweak background for IE6, no position : fixed, need to set height depending on body height
-    	bindUI : function() {
-    		if (Y.UA.ie && Y.UA.ie < 7) {
-    			var boundingBox = this.get("boundingBox");
-    			boundingBox.setStyle("position", "absolute");
-    			this.on("visibleChange", this._visibleChange, this);
-    		}
-    	},
-    	_visibleChange : function(event) {
-    		if (event.newVal) {
-    			var bodyHeight = Y.one("body").get("clientHeight") + 40,
-    			    htmlHeight = document.documentElement.offsetHeight,
-    			    height = htmlHeight > bodyHeight ? htmlHeight : bodyHeight;
-    			this.get("boundingBox").setStyle("height", height + "px");
-    		}
-    	}
+        //tweak background for IE6, no position : fixed, need to set height depending on body height
+        bindUI : function() {
+            if (Y.UA.ie && Y.UA.ie < 7) {
+                var boundingBox = this.get("boundingBox");
+                boundingBox.setStyle("position", "absolute");
+                this.on("visibleChange", this._visibleChange, this);
+            }
+        },
+        _visibleChange : function(event) {
+            if (event.newVal) {
+                var bodyHeight = Y.one("body").get("clientHeight") + 40,
+                    htmlHeight = document.documentElement.offsetHeight,
+                    height = htmlHeight > bodyHeight ? htmlHeight : bodyHeight;
+                this.get("boundingBox").setStyle("height", height + "px");
+            }
+        }
     });
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
@@ -33,10 +33,10 @@
         },
         _afterVisibleChange : function(event) {
             if (!event.newVal) {
-            	if (Y.UA.ie === 6) {
-                	Y.all("select").setStyle("visibility", "visible");
-            	}
-            	//TODO: make the background a property of Lightbox
+                if (Y.UA.ie === 6) {
+                    Y.all("select").setStyle("visibility", "visible");
+                }
+                //TODO: make the background a property of Lightbox
                 Y.lane.LightboxBg.hide();
                 if (Y.UA.ie && Y.UA.ie < 8) {
                     var boundingBox = this.get("boundingBox");
@@ -44,7 +44,6 @@
                     boundingBox.setStyle("visibility", "visible");
                     boundingBox.setStyle("visibility", "hidden");
                 }
-//                this.setContent("");
             }
         },
         _animate : function() {
@@ -81,25 +80,25 @@
         },
         _onVisibleChange : function(event) {
             if (event.newVal) {
-            	if (Y.UA.ie === 6) {
-                	Y.all("select").setStyle("visibility", "hidden");
-            	}
-            	if (Y.UA.ie && Y.UA.ie < 8) {
+                if (Y.UA.ie === 6) {
+                    Y.all("select").setStyle("visibility", "hidden");
+                }
+                if (Y.UA.ie && Y.UA.ie < 8) {
                     var boundingBox = this.get("boundingBox");
                     //this forces the markup to be rendered, not sure why it is needed.
                     boundingBox.setStyle("visibility", "hidden");
                     boundingBox.setStyle("visibility", "visible");
-            	}
+                }
                 Y.lane.LightboxBg.show();
                 this._animate();
             }
         }
-    }); 
-    
+    });
+
     Lightbox.ATTRS = {
-    	url : {
-    		value : null
-    	}
+        url : {
+            value : null
+        }
     };
 
     Y.lane.Lightbox = new Lightbox({
@@ -118,7 +117,7 @@
         event.preventDefault();
         Y.lane.Lightbox.hide();
     });
-    
+
     Y.on("click", function(event) {
         var href, regex, url,
             anchor = event.target.ancestor("a") || event.target,
@@ -132,10 +131,10 @@
             regex = new RegExp("(.+)//([^/]+)(" + basePath + "/)(.+)".replace(/\//g, "\\\/"));
             href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
             //IE <= 7 includes the hash in the href, so remove it from request url:
-            url = href.indexOf("#") == -1 ? href : href.substring(0, href.indexOf("#"));
+            url = href.indexOf("#") === -1 ? href : href.substring(0, href.indexOf("#"));
             Y.io(url, {
                 on : {
-                    success : function(id, o, args) {
+                    success : function(id, o) {
                         var lightbox = Y.lane.Lightbox;
                         lightbox.set("url", href);
                         lightbox.setContent(o.responseText);

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class TodaysHoursBinder implements DataBinder {
 
@@ -27,9 +28,9 @@ public class TodaysHoursBinder implements DataBinder {
     }
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        String basePath = request.getAttribute(Model.BASE_PATH).toString();
+        String basePath = ModelUtil.getString(model, Model.BASE_PATH);
         if (null == this.hours.get(basePath)) {
-            URL contentBase = (URL) request.getAttribute(Model.CONTENT_BASE);
+            URL contentBase = ModelUtil.getObject(model, Model.CONTENT_BASE, URL.class);
             this.hours.put(basePath, new TodaysHours(contentBase.getPath() + this.hoursPath));
         }
         String todaysHoursString = null;

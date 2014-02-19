@@ -19,9 +19,9 @@
             setActiveFacet: function(facetId){
                 var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
                 if (result !== undefined) {
-                    if (result._state == 'initialized') {
+                    if (result._state === 'initialized') {
                         result.show();
-                    } else if (result._state == 'searched') {
+                    } else if (result._state === 'searched') {
                         SearchFacets.getCurrentResult().hide();
                         SearchFacets.setCurrentResult(result);
                         result.show();
@@ -30,10 +30,10 @@
             }
         };
     }();
-    
+
     //TODO: remove the following line when no longer need global reference
     Y.lane.SearchFacets = SearchFacets;
-    
+
     Result = function(type, source, facet, container){
         this._type = type;
         this._source = source;
@@ -64,10 +64,10 @@
             this._state = 'searched';
         };
         Result.prototype.show = function(){
-            if (this._state == 'initialized') {
+            if (this._state === 'initialized') {
                 this.getContent();
                 searchIndicator.show();
-            } else if (this._state == 'searching') {
+            } else if (this._state === 'searching') {
                 alert('search in progress');
             } else {
                 SearchFacets.getCurrentResult().hide();
@@ -79,14 +79,14 @@
             }
         };
         Result.prototype.getContent = function(){
-            if (this._state == 'initialized') {
+            if (this._state === 'initialized') {
                 this._state = 'searching';
                 Y.io(this._url, this._callback);
-            } else 
-                if (this._state == 'searched') {
+            } else
+                if (this._state === 'searched') {
                     this.show();
-                } else 
-                    if (this._state == 'searching') {
+                } else
+                    if (this._state === 'searching') {
                         alert('search in progress');
                     }
         };
@@ -97,14 +97,14 @@
         Result.addShowAbstract = function(container) {
             if (Y.UA.ios && !container.one(".showAbstract")) {
                 //add showAbstract links in ios
-            	container.all(".hvrTrig").each(function(node) {
+                container.all(".hvrTrig").each(function(node) {
                     var label = (node.one(".pmid")) ? 'Abstract' : 'Description';
                     node.one(".hvrTarg").insert("<li class='showAbstract'>[<a href='#'>Show " + label + "</a>]</li>", "before");
                 });
             }
         };
         if (container) {
-        	Result.addShowAbstract(container);
+            Result.addShowAbstract(container);
         }
         if (elt) {
             facets = elt.all('.searchFacet');
@@ -141,29 +141,29 @@
         SearchFacets = Lane.SearchFacets;
     Lane.SearchHistory = function(){
         if(searchFacets){
-            history = new Y.HistoryHash();        
+            history = new Y.HistoryHash();
             if(history.get('facet')){
                 SearchFacets.setActiveFacet(history.get('facet'));
             }
             history.on("facetChange",function(e) {
                 SearchFacets.setActiveFacet(e.newVal);
             });
-            history.on("facetRemove",function(e) {
+            history.on("facetRemove",function() {
                 SearchFacets.setActiveFacet(Lane.Search.getSearchSource());
             });
         }
         return history;
-        
+
     }();
-        
+
 })();
 
 /*
  * Display PRINT MATERIALS (catalog-lois) filter if print results are only results present
  */
 (function() {
-    var printId = 'catalog-lois', 
-    noHits = Y.one('#noHitsText'), 
+    var printId = 'catalog-lois',
+    noHits = Y.one('#noHitsText'),
     printFacet = Y.one('#'+printId+'Facet'),
     Lane = Y.lane;
     if(noHits && printFacet && !printFacet.hasClass('inactiveFacet')){

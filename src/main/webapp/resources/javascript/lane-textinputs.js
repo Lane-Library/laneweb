@@ -5,7 +5,7 @@
  *  clears default help text on focus and adds back on blur
  */
 (function() {
-    
+
     Y.lane.TextInput = function(input, hintText) {
         var hintStyle = "inputHint",
             _hintText = hintText || '',
@@ -14,7 +14,7 @@
                 input.set('value', _hintText);
             },
             focusHandle = input.on('focus', function(event) {
-                if (event.target.get('value') == _hintText) {
+                if (event.target.get('value') === _hintText) {
                     event.target.set('value', '');
                     event.target.removeClass(hintStyle);
                 }
@@ -24,13 +24,13 @@
                     _reset(event.target);
                 }
             });
-        if (input.get('value') === '' || input.get('value') == _hintText) {
+        if (input.get('value') === '' || input.get('value') === _hintText) {
             _reset(input);
         }
         return {
             getValue: function() {
                 var value = input.get('value');
-                return value == _hintText ? '' : value; 
+                return value === _hintText ? '' : value;
             },
             setValue: function(value) {
                 input.set('value', value);
@@ -42,7 +42,7 @@
             setHintText: function(hintText) {
                 var oldHintText = _hintText;
                 _hintText = hintText;
-                if (input.get('value') === '' || input.get('value') == oldHintText) {
+                if (input.get('value') === '' || input.get('value') === oldHintText) {
                     _reset(input);
                 }
             },
@@ -54,7 +54,7 @@
                 input.detach(focusHandle);
                 input.detach(blurHandle);
                 input.removeClass('inputHint');
-                if (input.get('value') == _hintText) {
+                if (input.get('value') === _hintText) {
                     input.set('value', '');
                 }
             }
@@ -62,12 +62,12 @@
     };
 
     var i, title, textInputs = new Y.all('input[type="text"]');
-    
+
     for (i = 0; i < textInputs.size(); i++) {
         title = textInputs.item(i).get('title');
         if (title) {
             (new Y.lane.TextInput(textInputs.item(i), title));
         }
     }
-    
+
 })();

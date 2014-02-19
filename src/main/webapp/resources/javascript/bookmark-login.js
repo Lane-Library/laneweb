@@ -1,17 +1,17 @@
 (function() {
-    
+
     var lane = Y.lane,
         model = lane.Model,
         lightbox = lane.Lightbox,
         basePath = model.get(model.BASE_PATH),
         location = lane.Location,
-    
+
         /**
          * An Object that controls interactions when bookmarking occurs without the
          * user being logged in.
          */
         BookmarkLogin = {
-        
+
             /**
              * Add a bookmark when not logged in.  Constructs a query string with the bookmark
              * information and the page to return to, then fetches a popup page and passes control
@@ -34,7 +34,7 @@
                     }
                 });
             },
-            
+
             /**
              * Handler for when the login popup fetch fails.  Simply informs user that logging in
              * is necessary for bookmarking.
@@ -44,7 +44,7 @@
             _handleFailure: function() {
                 alert("You must log in in order to create bookmarks.");
             },
-            
+
             /**
              * Handler for when the login popup fetch succeeds.  Adds the query string to the login
              * link in the popup then puts the popup into the lightbox.
@@ -67,7 +67,7 @@
                 lightbox.show();
             }
     };
-    
+
     //make BookmarkLogin globally available
     Y.lane.BookmarkLogin = BookmarkLogin;
 })();

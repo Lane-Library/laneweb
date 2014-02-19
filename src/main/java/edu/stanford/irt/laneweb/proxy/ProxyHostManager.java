@@ -28,12 +28,23 @@ public class ProxyHostManager {
 
         private static final long serialVersionUID = 1L;
 
-        private static final String SQL = "WITH HOSTS AS " + "  ( SELECT DISTINCT URL_HOST AS HOST "
-                + "  FROM LMLDB.ELINK_INDEX " + "  WHERE ELINK_INDEX.RECORD_TYPE = 'A' " + "  UNION "
-                + "  SELECT DISTINCT URL_HOST AS HOST " + "  FROM LMLDB.ELINK_INDEX, " + "    LMLDB.MFHD_MASTER "
-                + "  WHERE ELINK_INDEX.RECORD_ID  = MFHD_MASTER.MFHD_ID " + "  AND ELINK_INDEX.RECORD_TYPE  = 'M' "
-                + "  AND MFHD_MASTER.MFHD_ID NOT IN " + "    (SELECT MFHD_ID " + "    FROM LMLDB.MFHD_DATA "
-                + "    WHERE LOWER(RECORD_SEGMENT) LIKE '%, noproxy%' " + "    ) " + "  ) "
+        private static final String SQL =
+                "WITH HOSTS AS "
+                + "  ( SELECT DISTINCT URL_HOST AS HOST "
+                + "  FROM LMLDB.ELINK_INDEX "
+                + "  WHERE ELINK_INDEX.RECORD_TYPE = 'A' "
+                + "  UNION "
+                + "  SELECT DISTINCT URL_HOST AS HOST "
+                + "  FROM LMLDB.ELINK_INDEX, "
+                + "    LMLDB.MFHD_MASTER "
+                + "  WHERE ELINK_INDEX.RECORD_ID  = MFHD_MASTER.MFHD_ID "
+                + "  AND ELINK_INDEX.RECORD_TYPE  = 'M' "
+                + "  AND MFHD_MASTER.MFHD_ID NOT IN "
+                + "    (SELECT MFHD_ID "
+                + "    FROM LMLDB.MFHD_DATA "
+                + "    WHERE LOWER(RECORD_SEGMENT) LIKE '%, noproxy%' "
+                + "    ) "
+                + "  ) "
                 + "SELECT HOST FROM HOSTS WHERE HOST NOT LIKE '%.stanford.edu'";
 
         DatabaseProxyHostSet(final DataSource dataSource) {
@@ -47,9 +58,9 @@ public class ProxyHostManager {
                 while (rs.next()) {
                     add(rs.getString(1));
                 }
-                add("jensen.stanford.edu");
-                add("socrates.stanford.edu");
+                add("bodoni.stanford.edu");
                 add("library.stanford.edu");
+                add("searchworks.stanford.edu");
             } catch (SQLException e) {
                 throw new LanewebException(e);
             } finally {

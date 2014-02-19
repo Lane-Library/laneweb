@@ -21,7 +21,7 @@ public class QueryMapController {
     @Autowired
     private QueryMapper queryMapper;
 
-    @RequestMapping(value = "**/apps/querymap/json")
+    @RequestMapping(value = "/apps/querymap/json")
     @ResponseBody
     public QueryMap getJSONQueryMap(@RequestParam final String q) {
         QueryMap queryMap = this.queryMapper.getQueryMap(q);

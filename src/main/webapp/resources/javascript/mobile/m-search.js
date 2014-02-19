@@ -1,6 +1,6 @@
 /**
  * append "q" querystring from PICO form elements
- * 
+ *
  * @param form
  * @returns {String}
  */
@@ -13,7 +13,7 @@ $.LANE.getPicoQuery = function(form){
     });
     if (qString.length) {
         qString = qString.replace(/\)\(/g, ") AND (");
-        if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
+        if (qString.indexOf('(') === 0 && qString.indexOf(')') === qString.length - 1) {
             qString = qString.replace(/(\(|\))/g, '');
         }
     }
@@ -22,7 +22,7 @@ $.LANE.getPicoQuery = function(form){
 
 /**
  * verify that "qSearch" data present before submitting form
- * 
+ *
  * @param event
  * @returns {Boolean}
  */
@@ -51,7 +51,7 @@ $.LANE.validateForm = function(event){
 };
 
 /**
- * 
+ *
  * @param event
  * @returns
  */
@@ -63,7 +63,7 @@ $.LANE.validatePicoForm = function(event){
 
 
 //When the homepage is loaded, attach event listeners for search tabs and search boxes
-$("#_home").live("pageinit", function() {
+$("#_home").on("pageinit", function() {
     // Attach click event listener to the search tabs.
     // User can select Lane, Clinical, Pediatric search by clicking/tapping on the appropriate icon.
     $("#searchTabs li").click(function() {
@@ -85,7 +85,7 @@ $("#_home").live("pageinit", function() {
         }
         window.scrollTo(0, 46);
     });
-    
+
     // attach vclick listener (doesn't have 700 ms delay)
     // set LI background to red to avoid flicker
     $("#searchTabs li").bind('vclick',function(e) {
@@ -93,14 +93,14 @@ $("#_home").live("pageinit", function() {
         $("#searchTabs li").removeClass("selected");
         $(this).addClass("selected");
         // shameless agent detection ... remove if find solution for vclick on android (below)
-        if(navigator.userAgent.match(/(iPhone|iP.d)/)){ 
+        if(navigator.userAgent.match(/(iPhone|iP.d)/)){
             e.preventDefault();
             $(this).trigger("click");
         }
     });
-    
+
     // ideally, only use vclick handler, but can't get android to NOT set input focus
-    /* 
+    /*
     $("#searchTabs li").bind('vclick',function(e) {
         e.preventDefault();
         $("li").bind('click', function(e){
@@ -156,7 +156,7 @@ $(this).bind("pageinit", function() {
         if($(this).data('events') && $(this).data('events').submit){
             for(i = 0; i < $(this).data('events').submit.length; i++){
                 handler = $(this).data('events').submit[i].handler;
-                if(handler == $.LANE.validateForm||handler == $.LANE.validatePicoForm){
+                if(handler === $.LANE.validateForm||handler === $.LANE.validatePicoForm){
                     needsListener = false;
                 }
             }
@@ -170,13 +170,10 @@ $(this).bind("pageinit", function() {
             }
         }
     });
-});
-
-$("form").live("focus", function() {
-    $(this).find(":input[data-type=search]").each(function(){
+    $(":input[data-type=search]").each(function(){
         $(this).bind("focus", function() {
             // scroll down to the top of this field
             window.scrollTo(0, $(this).offset().top - 6);
         });
-    });    
+    });
 });

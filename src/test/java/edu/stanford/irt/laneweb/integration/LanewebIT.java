@@ -2,12 +2,14 @@ package edu.stanford.irt.laneweb.integration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.annotation.Resource;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -16,6 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
+@ActiveProfiles("test")
 @ContextConfiguration(locations = { "classpath:net/bull/javamelody/monitoring-spring.xml",
         "file:src/main/webapp/WEB-INF/spring/bassett.xml", "file:src/main/webapp/WEB-INF/spring/binding.xml",
         "file:src/main/webapp/WEB-INF/spring/bookmarks.xml", "file:src/main/webapp/WEB-INF/spring/cme.xml",
@@ -44,7 +47,22 @@ public class LanewebIT {
     }
 
     @Test
-    public void testFoo() throws Exception {
-        this.mockMvc.perform(get("/index.html"));
+    public void testIndex() throws Exception {
+        this.mockMvc.perform(get("/index.html")).andExpect(status().isOk());
+    }
+    
+    @Test
+    public void testBioresearchSearch() throws Exception {
+        this.mockMvc.perform(get("/search.html?source=bioresearch-all&q=test")).andExpect(status().isOk());
+    }
+    
+    @Test
+    public void testTextbookSearch() throws Exception {
+        this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test")).andExpect(status().isOk());
+    }
+    
+    @Test
+    public void testContentAwareRequestHandler() throws Exception {
+        this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk());
     }
 }

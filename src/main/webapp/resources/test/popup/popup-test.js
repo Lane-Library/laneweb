@@ -22,12 +22,12 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
             Y.one('a').simulate('click');
         }
     });
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
+
     Y.Test.Runner.add(lanePopupTestCase);
     Y.Test.Runner.masterSuite.name = "popup-test.js";
     Y.Test.Runner.run();

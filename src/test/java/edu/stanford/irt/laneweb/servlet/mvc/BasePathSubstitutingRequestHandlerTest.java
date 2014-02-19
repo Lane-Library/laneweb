@@ -30,7 +30,6 @@ import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.cache.validity.NeverValid;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
-import edu.stanford.irt.laneweb.model.Model;
 
 public class BasePathSubstitutingRequestHandlerTest {
 
@@ -73,7 +72,7 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.resource.createRelative("foo")).andReturn(this.resource);
         expect(this.resource.exists()).andReturn(true);
         expect(this.resource.isReadable()).andReturn(true);
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.resource.getURI()).andReturn(new URI("uri"));
         expect(this.cache.get(":uri")).andReturn(null);
         expect(this.resource.getInputStream()).andReturn(new ByteArrayInputStream(new byte[]{1,2,3,4}));
@@ -91,7 +90,7 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.resource.createRelative("foo")).andReturn(this.resource);
         expect(this.resource.exists()).andReturn(true);
         expect(this.resource.isReadable()).andReturn(true);
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.resource.getURI()).andReturn(new URI("uri"));
         expect(this.cache.get(":uri")).andReturn(null);
         expect(this.resource.getInputStream()).andReturn(this.inputStream);
@@ -110,7 +109,7 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.resource.createRelative("foo")).andReturn(this.resource);
         expect(this.resource.exists()).andReturn(true);
         expect(this.resource.isReadable()).andReturn(true);
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.resource.getURI()).andReturn(new URI("uri"));
         expect(this.cache.get(":uri")).andReturn(null);
         expect(this.resource.getInputStream()).andReturn(new ByteArrayInputStream(new byte[0]));
@@ -148,7 +147,7 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.resource.createRelative("foo")).andReturn(this.resource);
         expect(this.resource.exists()).andReturn(true);
         expect(this.resource.isReadable()).andReturn(true);
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.resource.getURI()).andReturn(new URI("uri"));
         expect(this.cache.get(":uri")).andReturn(this.cachedResponse);
         expect(this.cachedResponse.getValidity()).andReturn(AlwaysValid.SHARED_INSTANCE);
@@ -166,7 +165,7 @@ public class BasePathSubstitutingRequestHandlerTest {
         expect(this.resource.createRelative("foo")).andReturn(this.resource);
         expect(this.resource.exists()).andReturn(true);
         expect(this.resource.isReadable()).andReturn(true);
-        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.resource.getURI()).andReturn(new URI("uri"));
         expect(this.cache.get(":uri")).andReturn(this.cachedResponse);
         expect(this.cachedResponse.getValidity()).andReturn(NeverValid.SHARED_INSTANCE);

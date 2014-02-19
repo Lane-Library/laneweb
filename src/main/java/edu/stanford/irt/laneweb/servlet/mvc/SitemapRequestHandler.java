@@ -95,7 +95,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         if (jsessionId > 0) {
             requestURI = requestURI.substring(0, jsessionId);
         }
-        String basePath = (String) request.getAttribute(Model.BASE_PATH);
+        String basePath = request.getContextPath();
         return requestURI.substring(basePath.length() + this.prefix.length());
     }
 

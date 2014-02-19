@@ -1,10 +1,10 @@
 (function() {
-    
+
     var locationTestCase = new Y.Test.Case({
         name: "Location TestCase",
-        
+
         location: Y.lane.Location,
-        
+
         testSetHref : function() {
             var currentHref = this.location.get("href");
             var newHref = "";
@@ -17,7 +17,7 @@
             Y.Assert.areEqual("http://www.example.com", newHref);
             Y.Assert.areEqual(currentHref, this.location.get("href"));
         },
-        
+
         testSetHash: function() {
             var currentHref = this.location.get("href");
             this.location.set("hash", "foo");
@@ -25,16 +25,16 @@
             Y.Assert.areEqual("#foo", this.location.get("hash"));
         }
     });
-    
-    
+
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
-        newestOnTop: false                   
+        newestOnTop: false
     }).render('#log');
- 
-    
+
+
     Y.Test.Runner.add(locationTestCase);
     Y.Test.Runner.masterSuite.name = "location-test.js";
     Y.Test.Runner.run();
-    
+
 })();

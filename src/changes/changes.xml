@@ -7,6 +7,77 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-02-24" version="2.1.47" description="2.1.47 bug fix release">
+            <action date="2014-02-12" dev="ceyates" issue="96317" type="remove">
+                remove the shaded borders, corners
+            </action>
+            <action date="2014-02-12" dev="olgary" issue="96308" type="update">
+                add font awesome icons, change  styles, remove reference to icons in sprite
+            </action>
+            <action date="2014-02-12" dev="ceyates" issue="96304" type="fix">
+                bookmarks editor and widget get out of sync
+            </action>
+            <action date="2014-02-10" dev="ceyates" issue="95798" type="remove">
+                remove /stage processing feature
+            </action>
+            <action date="2014-02-18" dev="ceyates" issue="94950" type="update">
+                provide hit count results for history search
+            </action>
+        </release>
+        <release date="2014-02-13" version="2.1.46" description="2.1.46 emergency release">
+            <action date="2014-02-13" dev="ceyates" issue="96335" type="fix">
+                logs are not rotating
+            </action>
+        </release>
+        <release date="2014-02-10" version="2.1.45" description="2.1.45 bug fix release">
+            <action date="2014-02-06" dev="ryanmax" issue="95792" type="fix">
+                stale content in CME and Grand Rounds sections of home page
+            </action>
+        </release>
+        <release date="2014-02-04" version="2.1.44" description="2.1.44 emergency release">
+            <action date="2014-02-04" dev="ceyates" issue="96184" type="fix">
+                bioresearch metasearch broken
+            </action>
+        </release>
+        <release date="2014-02-03" version="2.1.43" description="2.1.43 bug fix release">
+            <action date="2014-01-29" dev="ryanmax" issue="95577" type="update">
+                spam assistance: filter by referrer before sending mail
+            </action>
+            <action date="2014-01-28" dev="ryanmax" issue="95502" type="fix">
+                null username and ticket in proxy server requests
+            </action>
+            <action date="2014-01-28" dev="ryanmax" issue="95514" type="update">
+                upgrade jquery mobile library
+            </action>
+            <action date="2014-01-31" dev="olgary" issue="95321" type="remove">
+                remove expandees classes
+            </action>
+            <action date="2014-01-29" dev="olgary" issue="95130" type="update">
+                Change Google + link - template.xml, debug.xml
+            </action>
+        </release>
+        <release date="2014-01-27" version="2.1.42" description="2.1.42 bug fix release">
+            <action date="2014-01-27" dev="ceyates" issue="95443" type="fix">
+                xincludes with xpointer attribute are broken
+            </action>
+        </release>
+        <release date="2014-01-27" version="2.1.41" description="2.1.41 bug fix release [not deployed]">
+            <action date="2014-01-24" dev="ceyates" issue="95298" type="update">
+                widen metasearch input on portal pages
+            </action>
+            <action date="2014-01-17" dev="ceyates" issue="95122" type="update">
+                change logging framework from log4j to logback
+            </action>
+            <action date="2014-01-22" dev="ceyates" issue="79330" type="fix">
+                bookmarked links added to list without proxied urls
+            </action>
+            <action date="2014-01-21" dev="ceyates" issue="79139" type="update">
+                refactor feedback handler so that there is a separate validator for each form.
+            </action>
+            <action date="2014-01-21" dev="ceyates" issue="78579" type="fix">
+                DocumentBuilder attempts to connect to www.w3.org
+            </action>
+        </release>
         <release date="2014-01-13" version="2.1.40" description="2.1.40 bug fix release">
             <action date="2014-01-10" dev="olgary" issue="95036" type="update">
                 update template.xml, debug.xml - fix link order in portal dropdown, add new link for PCAP portal
