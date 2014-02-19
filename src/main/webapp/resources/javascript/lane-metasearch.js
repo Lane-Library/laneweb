@@ -70,7 +70,6 @@
                                             updateables.item(y).get('parentNode').insert(resultSpan);
                                         }
                                         if (result.status === 'successful') {
-                                            updateables.item(y).addClass("searchSuccess");
                                             // process display of each updateable node
                                             // once all processed, remove id from searchables
                                             //TODO: see search2json.xsl todo note about number value for hits
