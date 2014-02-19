@@ -7,6 +7,7 @@
         class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
         destroy-method="dispose">
         <constructor-arg value="search-lane.xml"/>
+        <constructor-arg ref="org.slf4j.Logger/errorhandler"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.search.MetaSearchManager"
