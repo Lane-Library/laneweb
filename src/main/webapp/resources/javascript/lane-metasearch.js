@@ -5,6 +5,7 @@
         query = model.get(model.QUERY),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         searchIndicator = Y.lane.SearchIndicator,
+        searchSource = Y.lane.Search.getSearchSource(),
     metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
@@ -12,7 +13,9 @@
             uberEngines = ['cro_', 'mdc_'], // engines with multiple resources
             startTime,
             getSearchUrl = function() {
-                var add, i, y, searchUrl = basePath + '/apps/search/json?q=' + encodedQuery;
+                var add, i, y,
+                    appsSearch = searchSource === "history-all" ? "/apps/search/noproxy/json?q=" : "/apps/search/json?q=",
+                    searchUrl = basePath + appsSearch + encodedQuery;
                 for (y = 0; y < searchables.length; y++) {
                     add = true;
                     for (i = 0; i < uberEngines.length; i++) {
