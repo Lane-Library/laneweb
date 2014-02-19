@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-02-24" version="2.1.47" description="2.1.47 bug fix release">
+            <action date="2014-02-12" dev="ceyates" issue="96317" type="remove">
+                remove the shaded borders, corners
+            </action>
+            <action date="2014-02-12" dev="olgary" issue="96308" type="update">
+                add font awesome icons, change  styles, remove reference to icons in sprite
+            </action>
+            <action date="2014-02-12" dev="ceyates" issue="96304" type="fix">
+                bookmarks editor and widget get out of sync
+            </action>
+            <action date="2014-02-10" dev="ceyates" issue="95798" type="remove">
+                remove /stage processing feature
+            </action>
+            <action date="2014-02-18" dev="ceyates" issue="94950" type="update">
+                provide hit count results for history search
+            </action>
+        </release>
         <release date="2014-02-13" version="2.1.46" description="2.1.46 emergency release">
             <action date="2014-02-13" dev="ceyates" issue="96335" type="fix">
                 logs are not rotating
