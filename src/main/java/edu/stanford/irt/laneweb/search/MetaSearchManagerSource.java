@@ -67,7 +67,7 @@ public class MetaSearchManagerSource {
         private void maybeLogException(final Result r) {
             Exception e = r.getException();
             if (e != null) {
-                this.log.error(e.getMessage(), e);
+                this.log.error(r.toString(), e);
             }
         }
     }
