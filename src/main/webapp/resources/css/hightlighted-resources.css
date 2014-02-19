@@ -3,8 +3,6 @@
     position: absolute;
     top: 0;
     right: 0;
-    /*required for IE6:*/
-    _right: 10px;
     border: 3px #5A8CB4 solid;
     width: 250px;
 }
@@ -15,19 +13,13 @@
 #highlightedResources a {
     border-bottom: none;
 }
-#highlightedResources a:hover {
-    color: #dadad4;
-}
 #topResources {
     background-image: url(/././resources/images/sprite-all.png);
     background-position: -320px -200px;
     background-repeat: no-repeat;
     font-size: 15px;
-    text-shadow: 0.1em 0.1em 0.1em #101010;
     margin-bottom: 0;
     white-space: nowrap;
-    /* required for IE6:*/
-    position : relative;
     /* required for IE7:*/
     height: 100%;
 }
@@ -41,8 +33,6 @@
 }
 #topResources li {
     float: left;
-    /* required for IE6:*/
-    position: relative;
 }
 #topResources a {
     display: block;
