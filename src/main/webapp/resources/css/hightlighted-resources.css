@@ -33,6 +33,8 @@
 }
 #topResources li {
     float: left;
+    /*need this to get bookmark link in the right place*/
+    position: relative
 }
 #topResources a {
     display: block;
