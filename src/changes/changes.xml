@@ -8,6 +8,12 @@
     </properties>
     <body>
         <release date="2014-02-24" version="2.1.47" description="2.1.47 bug fix release">
+            <action date="2014-02-19" dev="olgary" issue="96394" type="remove">
+                removed shadow from highlighted resources, removed IE6 styles
+            </action>
+            <action date="2014-02-19" dev="olgary" issue="96391" type="remove">
+                removed bold font style for meta search results (.searchSuccess)
+            </action>
             <action date="2014-02-12" dev="ceyates" issue="96317" type="remove">
                 remove the shaded borders, corners
             </action>
