@@ -154,10 +154,6 @@
     color:#333;
     font-size:18px;
 }
-/* used for successful metasearch links on hybrid pages */
-.searchSuccess {
-    font-weight:bold;
-}
 .searchTerms {
     text-transform:none;
     font-weight:bold;
