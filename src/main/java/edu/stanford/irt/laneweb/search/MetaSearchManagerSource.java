@@ -50,9 +50,6 @@ public class MetaSearchManagerSource {
                     maybeLogException(t);
                     for (Result u : t.getChildren()) {
                         maybeLogException(u);
-                        for (Result v : u.getChildren()) {
-                            maybeLogException(v);
-                        }
                     }
                 }
             }
