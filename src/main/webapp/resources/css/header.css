@@ -1,9 +1,6 @@
 h1 {
-	font-size: 26px;
-	position: absolute;
-	top: 24px;
-	left: 224px;
-	display: block;
+    font-size: 26px;
+    padding: 24px 0 24px 224px;
 	color: #820000;
 }
 
@@ -28,7 +25,7 @@ h1 a:visited {
 #som {
 	display: block;
 	height: 50px;
-	left: 18px;
+	left: 12px;
 	position: absolute;
 	top: 22px;
 	width: 203px;

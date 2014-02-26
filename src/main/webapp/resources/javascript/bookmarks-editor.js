@@ -156,7 +156,7 @@
         _handleBookmarkAdd : function(event) {
             this.get("editors")[event.target.indexOf(event.bookmark)].update();
         },
-        
+
         /**
          * Responds to the bookmarks:moveSync event, rearranges the editors appropriately
          * @method _handleBookmarkMove

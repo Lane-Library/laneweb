@@ -7,8 +7,9 @@
             <pattern>%d %p [%t][%c] - %m%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <minIndex>1</minIndex>
             <maxIndex>10</maxIndex>
-            <FileNamePattern>laneweb.log.%i</FileNamePattern>
+            <FileNamePattern>${catalina.base}/logs/laneweb.log.%i</FileNamePattern>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <MaxFileSize>10MB</MaxFileSize>
@@ -29,7 +30,7 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <maxIndex>10</maxIndex>
-            <FileNamePattern>querymap.log.%i</FileNamePattern>
+            <FileNamePattern>${catalina.base}/logs/querymap.log.%i</FileNamePattern>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <MaxFileSize>10MB</MaxFileSize>

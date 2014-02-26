@@ -125,9 +125,13 @@
                         <map:transform type="search-proxy-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="saxon" src="resources/xsl/search2json.xsl">
-                    <map:parameter name="content-to-display" value="5"/>
-                </map:transform>
+                <map:transform type="saxon" src="resources/xsl/search2json.xsl"/>
+                <map:serialize type="text"/>
+            </map:match>
+            <!-- this is used in lane-metasearch.js when the source is history-all -->
+            <map:match pattern="search/noproxy/json" type="wildcard">
+                <map:generate type="search-resource"/>
+                <map:transform type="saxon" src="resources/xsl/search2json.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
             <!-- search facet counts -->
