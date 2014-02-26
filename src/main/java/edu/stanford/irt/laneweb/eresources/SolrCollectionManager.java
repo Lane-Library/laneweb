@@ -46,7 +46,8 @@ public class SolrCollectionManager implements CollectionManager {
         solrQuery.setRequestHandler(handler);
         solrQuery.add(params);
         // TODO: efficiencies to be gained here by NOT returning all results
-        solrQuery.add("rows", Integer.toString(Integer.MAX_VALUE));
+        //solrQuery.add("rows", Integer.toString(Integer.MAX_VALUE));
+        solrQuery.add("rows", "1000");
         String q = solrQuery.getQuery();
         QueryResponse rsp;
         try {
