@@ -4,6 +4,7 @@
    <li id="favorites">
       <a href="/favorites.html">My Bookmarks</a>
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                  xmlns:template="http://lane.stanford.edu/ns/template"
                   href="cocoon://bookmarks/list.html">
          <xi:fallback/>
       </xi:include>
