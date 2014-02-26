@@ -2,6 +2,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:template="http://lane.stanford.edu/ns/template"
     exclude-result-prefixes="h">
 
     <xsl:strip-space elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
@@ -60,10 +61,10 @@
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->
-    <xsl:variable name="source-doc" select="/*/h:html[1]"/>
+    <xsl:variable name="source-doc" select="/template:doc/h:html[1]"/>
 
     <!-- the template document -->
-    <xsl:variable name="template" select="/*/h:html[2]"/>
+    <xsl:variable name="template" select="/template:doc/h:html[2]"/>
 
     <xsl:variable name="path">
         <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
@@ -121,6 +122,9 @@
 
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- root template applies templates on the template document -->
+    <xsl:template match="/template:doc">
+        
+    </xsl:template>
     <xsl:template match="/">
         <xsl:choose>
             <xsl:when test="$template">
