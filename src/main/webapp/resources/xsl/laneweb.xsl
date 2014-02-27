@@ -3,7 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:template="http://lane.stanford.edu/ns/template"
-    exclude-result-prefixes="h">
+    exclude-result-prefixes="h template">
 
     <xsl:strip-space elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
 
@@ -63,9 +63,6 @@
     <!-- the root node of the requested content document -->
     <xsl:variable name="source-doc" select="/template:doc/h:html[1]"/>
 
-    <!-- the template document -->
-    <xsl:variable name="template" select="/template:doc/h:html[2]"/>
-
     <xsl:variable name="path">
         <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
     </xsl:variable>
@@ -121,20 +118,14 @@
     <xsl:include href="laneweb-yui-grid.xsl"/>
 
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
-    <!-- root template applies templates on the template document -->
+    <!-- applies templates on the template document -->
     <xsl:template match="/template:doc">
-        
+        <xsl:apply-templates select="h:html[2]"/>
     </xsl:template>
-    <xsl:template match="/">
-        <xsl:choose>
-            <xsl:when test="$template">
-                <xsl:apply-templates select="$template"/>
-            </xsl:when>
-            <!-- when there is not a template (ie the request is for /plain/**.html) process whole document -->
-            <xsl:otherwise>
-                <xsl:apply-templates select="child::node()"/>
-            </xsl:otherwise>
-        </xsl:choose>
+    
+    <!-- when there is not a template (ie the request is for /plain/**.html) process whole document -->
+    <xsl:template match="/h:html">
+        <xsl:apply-templates select="child::node()"/>
     </xsl:template>
 
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
