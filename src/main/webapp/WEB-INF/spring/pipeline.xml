@@ -84,6 +84,10 @@
         <property name="marshaller" ref="org.springframework.oxm.Marshaller"/>
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/exception"
+        class="edu.stanford.irt.laneweb.cocoon.ExceptionGenerator"
+        scope="prototype"/>
+    
     <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/namespace-filter"
         class="edu.stanford.irt.cocoon.pipeline.transform.NamespaceFilter"
         scope="prototype"/>

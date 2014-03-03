@@ -103,6 +103,8 @@ public interface Model {
 
     String SELECTION = "selection";
 
+    String SHOW = "show";
+
     String SITEMAP_URI = "sitemap-uri";
 
     String SOURCE = "source";
