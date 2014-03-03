@@ -11,11 +11,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -44,6 +39,8 @@ public class LinkScanGeneratorTest {
 
     private SolrServer solrServer;
 
+    private String versionsJson;
+
     private XMLConsumer xmlConsumer;
 
     @Before
@@ -58,17 +55,15 @@ public class LinkScanGeneratorTest {
     }
 
     @Test
-    public void testDoGenerate() throws SAXException, SolrServerException, IOException {
-        Collection<Object> links = new LinkedList<>();
-        links.add("http://foo/bar");
+    public void testDoGenerate() throws Exception {
+        this.versionsJson = "[{\"links\":[{\"url\":\"http://foo/bar\"}]}]";
         expect(this.solrServer.query(isA(SolrQuery.class))).andReturn(this.queryResponse);
         expect(this.queryResponse.getResults()).andReturn(this.documentList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         expect(this.document.getFieldValue("id")).andReturn("type-id");
         expect(this.document.getFieldValue("title")).andReturn("title");
-        expect(this.document.containsKey("links")).andReturn(true);
-        expect(this.document.getFieldValues("links")).andReturn(links);
+        expect(this.document.getFieldValue("versionsJson")).andReturn(this.versionsJson);
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq(" #1 ".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
@@ -89,15 +84,15 @@ public class LinkScanGeneratorTest {
     }
 
     @Test
-    public void testDoGenerateNullTitleUrl() throws SAXException, IOException, SolrServerException {
+    public void testDoGenerateNullTitleUrl() throws Exception {
+        this.versionsJson = "[{\"links\":[]}]";
         expect(this.solrServer.query(isA(SolrQuery.class))).andReturn(this.queryResponse);
         expect(this.queryResponse.getResults()).andReturn(this.documentList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         expect(this.document.getFieldValue("id")).andReturn("type-id");
         expect(this.document.getFieldValue("title")).andReturn(null);
-        expect(this.document.containsKey("links")).andReturn(true);
-        expect(this.document.getFieldValues("links")).andReturn(Collections.emptyList());
+        expect(this.document.getFieldValue("versionsJson")).andReturn(this.versionsJson);
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "ul", "ul");
         this.xmlConsumer.endDocument();
         replay(this.solrServer, this.xmlConsumer, this.queryResponse, this.document);

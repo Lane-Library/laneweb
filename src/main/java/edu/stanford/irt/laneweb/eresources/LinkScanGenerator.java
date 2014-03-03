@@ -1,10 +1,13 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.solr.client.solrj.SolrQuery;
@@ -15,6 +18,8 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
@@ -31,6 +36,8 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
+    private ObjectMapper mapper = new ObjectMapper();
+
     private SolrServer solrServer;
 
     private Validity validity;
@@ -43,8 +50,8 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         SolrQuery solrQuery = new SolrQuery();
-        solrQuery.setRequestHandler("/lane");
-        solrQuery.setQuery("*:*");
+        solrQuery.setRequestHandler("/lane-search");
+        solrQuery.setQuery("-recordType:pubmed");
         solrQuery.add("rows", Integer.toString(Integer.MAX_VALUE));
         QueryResponse rsp;
         try {
@@ -93,22 +100,34 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
         return KEY;
     }
 
-    private Set<URI> getLinks(final SolrDocument document) {
+    public Set<URI> getLinks(final SolrDocument document) {
         HashSet<URI> urls = new HashSet<URI>();
-        if (document.containsKey("links")) {
-            Collection<Object> links = document.getFieldValues("links");
-            for (Object obj : links) {
-                String link = (String) obj;
-                URI url;
-                try {
-                    url = new URI(link);
-                    String scheme = url.getScheme();
-                    if (null != scheme && scheme.startsWith("http")) {
-                        urls.add(url);
+        List<LinkedHashMap<String, Object>> versionData;
+        try {
+            versionData = this.mapper.readValue((String) document.getFieldValue("versionsJson"), List.class);
+        } catch (IOException e) {
+            throw new LanewebException(e);
+        }
+        for (LinkedHashMap<String, Object> versionMap : versionData) {
+            if (versionMap.containsKey("links")) {
+                for (Object linkObj : (ArrayList<Object>) versionMap.get("links")) {
+                    LinkedHashMap<String, Object> link = (LinkedHashMap<String, Object>) linkObj;
+                    if (link.containsKey("url")) {
+                        String linkUrl = (String) link.get("url");
+                        if (null != linkUrl) {
+                            URI url;
+                            try {
+                                url = new URI(linkUrl);
+                                String scheme = url.getScheme();
+                                if (null != scheme && scheme.startsWith("http")) {
+                                    urls.add(url);
+                                }
+                            } catch (URISyntaxException e) {
+                                // TODO report these to RM?
+                                // System.out.println(document.getFieldValue("id") + ": " + e);
+                            }
+                        }
                     }
-                } catch (URISyntaxException e) {
-                    // TODO report these to RM?
-                    // System.out.println(doc.getFieldValue("id") + ": " + e);
                 }
             }
         }
