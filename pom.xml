@@ -568,27 +568,27 @@
             <artifactId>spring-aop</artifactId>
             <groupId>org.springframework</groupId>
             <scope>runtime</scope>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-beans</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context-support</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-core</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
@@ -616,22 +616,22 @@
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
             <scope>test</scope>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-webmvc</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -653,7 +653,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-            <version>3.2.7.RELEASE</version>
+            <version>3.2.8.RELEASE</version>
         </dependency>
         <dependency>
             <!-- required only for shccodec key generation -->
