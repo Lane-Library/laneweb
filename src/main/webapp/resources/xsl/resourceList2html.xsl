@@ -174,6 +174,9 @@
                 <xsl:when test=". = 'class'">
                     <span class="sourceLink">Lane Class</span>
                 </xsl:when>
+                <xsl:when test=". = 'print'">
+                    <span class="sourceLink">Print Material</span>
+                </xsl:when>
             </xsl:choose>
         </div>
     </xsl:template>
