@@ -7,6 +7,13 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-03-10" version="2.1.49" description="2.1.49 bug fix release">
+            <action date="2014-03-10" dev="ceyates" issue="96655" type="fix">
+                increase in CPU and memory usage since laneweb-2.1.47
+            </action>
+        </release>
+        <release date="2014-03-03" version="2.1.48" description="2.1.48 bug fix release">
+        </release>
         <release date="2014-02-24" version="2.1.47" description="2.1.47 bug fix release">
             <action date="2014-02-19" dev="olgary" issue="96394" type="remove">
                 removed shadow from highlighted resources, removed IE6 styles

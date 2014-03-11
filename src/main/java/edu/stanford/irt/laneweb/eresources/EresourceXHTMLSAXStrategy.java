@@ -66,6 +66,8 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             createSpanWithClass(xmlConsumer, "sourceLink", "Lane Web Page");
         } else if ("class".equals(recordType)) {
             createSpanWithClass(xmlConsumer, "sourceLink", "Lane Class");
+        } else if ("print".equals(recordType)) {
+            createSpanWithClass(xmlConsumer, "sourceLink", "Print Material");
         }
         endDiv(xmlConsumer);
     }
