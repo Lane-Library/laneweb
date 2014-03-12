@@ -23,6 +23,24 @@
         </encoder>
     </appender>
     
+    <appender name="search" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${catalina.base}/logs/search.log</File>
+        <encoder>
+            <pattern>%d %p [%t][%c] - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <maxIndex>10</maxIndex>
+            <FileNamePattern>${catalina.base}/logs/search.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <logger name="edu.stanford.irt.search" level="error" additivity="false">
+        <appender-ref ref="search"/>
+    </logger>
+    
     <appender name="querymap" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${catalina.base}/logs/querymap.log</File>
         <encoder>
