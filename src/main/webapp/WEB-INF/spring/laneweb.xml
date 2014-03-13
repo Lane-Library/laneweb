@@ -59,7 +59,8 @@
 
     <bean id="edu.stanford.irt.laneweb.ldap.SubjectSource"
           class="edu.stanford.irt.laneweb.ldap.SubjectSource">
-        <property name="name" value="IRT_K5"/>
+        <constructor-arg value="IRT_K5"/>
+        <constructor-arg ref="org.slf4j.Logger/errorhandler"/>
     </bean>
     
     <bean class="edu.stanford.irt.spell.PubmedESpellChecker"/>

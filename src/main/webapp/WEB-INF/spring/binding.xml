@@ -101,7 +101,9 @@
         class="edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder"/>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"
-        class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
+        class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder">
+        <constructor-arg ref="org.slf4j.Logger/errorhandler"/>
+    </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"
         class="edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder">
