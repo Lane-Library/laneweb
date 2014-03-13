@@ -115,7 +115,6 @@
     <xsl:include href="laneweb-forms.xsl"/>
     <xsl:include href="laneweb-links.xsl"/>
     <xsl:include href="laneweb-login.xsl"/>
-    <xsl:include href="laneweb-yui-grid.xsl"/>
 
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- applies templates on the template document -->
