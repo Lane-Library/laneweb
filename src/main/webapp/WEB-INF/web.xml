@@ -142,6 +142,16 @@
         <url-pattern>*.php</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ErrordocsServlet</servlet-name>
+        <servlet-class>edu.stanford.irt.laneweb.servlet.ErrordocsServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ErrordocsServlet</servlet-name>
+        <url-pattern>/errordocs/*</url-pattern>
+    </servlet-mapping>
+    
     <error-page>
         <error-code>404</error-code>
         <location>/notfound.txt</location>
