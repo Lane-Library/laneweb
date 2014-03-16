@@ -18,7 +18,7 @@ public class QueryTranslator {
             throw new IllegalArgumentException("'}' and '{' should not appear in input");
         }
         processString(input);
-        if (this.reqWords.size() == 0) {
+        if (this.reqWords.isEmpty()) {
             throw new IllegalArgumentException("no 'required' words in query: " + input);
         }
         String translatedQuery = getQuery();
@@ -42,7 +42,7 @@ public class QueryTranslator {
         boolOp = "";
         reqCount = this.reqWords.size();
         notCount = this.notWords.size();
-        if (this.reqWords.size() > 0) {
+        if (!this.reqWords.isEmpty()) {
             // Required words - first time
             sb.append("((");
             for (i = 0; i < reqCount; i++) {

@@ -31,7 +31,7 @@ public class LDAPDataAccess {
         @SuppressWarnings("rawtypes")
         public LDAPData run() {
             List list = this.ldapTemplate.search("", this.lookupFilter, this.attributesMapper);
-            if (list == null || list.size() == 0) {
+            if (list == null || list.isEmpty()) {
                 return null;
             }
             return (LDAPData) list.get(0);
