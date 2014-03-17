@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-03-17" version="2.1.50" description="2.1.50 bug fix release">
+            <action date="2014-03-14" dev="ceyates" issue="96722" type="fix">
+                respond to /errordocs/&lt;code&gt;err.html
+            </action>
+            <action date="2014-03-13" dev="ceyates" issue="96659" type="remove">
+                remove yui2 grids
+            </action>
+            <action date="2014-03-11" dev="ryanmax" issue="95169" type="add">
+                label print resources
+            </action>
+        </release>
         <release date="2014-03-10" version="2.1.49" description="2.1.49 bug fix release">
             <action date="2014-03-10" dev="ceyates" issue="96655" type="fix">
                 increase in CPU and memory usage since laneweb-2.1.47

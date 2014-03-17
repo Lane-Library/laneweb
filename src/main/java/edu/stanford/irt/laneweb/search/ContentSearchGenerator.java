@@ -49,7 +49,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         if (this.timeout == null) {
             this.timeout = parameters.get(Model.TIMEOUT);
         }
-        if (this.engines.size() == 0) {
+        if (this.engines.isEmpty()) {
             String engineList = parameters.get(Model.ENGINES);
             if (engineList != null) {
                 this.engines = new LinkedList<String>();

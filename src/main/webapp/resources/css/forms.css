@@ -129,14 +129,6 @@
 	filter: progid :   DXImageTransform.Microsoft.Shadow (   Strength =   3,
 		Direction =   135, Color =   '#989898' );
 }
-/*a couple of IE6 fixes*/
-#feedbackItems .yui-g .yui-u .feedbackText {
-	*width: 90%;
-	_width: 90%
-}
-#feedback .yui-gd .first {
-	_overflow: hidden
-}
 
 /*--------------suggestion for purchase styles--------------------------------------------*/
 #purchaseMenu {

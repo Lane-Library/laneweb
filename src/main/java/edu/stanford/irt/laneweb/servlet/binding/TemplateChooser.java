@@ -54,7 +54,7 @@ public class TemplateChooser {
         if (!this.existingTemplates.contains(template)) {
             template = null;
         }
-        if (null == template && this.templateMap.size() > 0) {
+        if (null == template && !this.templateMap.isEmpty()) {
             String uri = request.getRequestURI().substring(request.getContextPath().length());
             for (Entry<String, Pattern> entry : this.patternMap.entrySet()) {
                 if (entry.getValue().matcher(uri).matches()) {
