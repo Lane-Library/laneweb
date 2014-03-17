@@ -115,7 +115,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
             pstmt.setString(1, sunetid);
             pstmt.execute();
-            if (links.size() > 0) {
+            if (!links.isEmpty()) {
                 cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL);
                 cstmt.setString(1, sunetid);
                 cstmt.registerOutParameter(2, java.sql.Types.BLOB);

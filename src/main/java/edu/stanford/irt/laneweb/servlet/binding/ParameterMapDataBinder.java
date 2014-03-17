@@ -11,7 +11,7 @@ public class ParameterMapDataBinder implements DataBinder {
     @SuppressWarnings("rawtypes")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         Map parameterMap = request.getParameterMap();
-        if (parameterMap.size() > 0) {
+        if (!parameterMap.isEmpty()) {
             model.put(Model.PARAMETER_MAP, request.getParameterMap());
         }
     }

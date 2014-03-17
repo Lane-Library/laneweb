@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 
@@ -13,6 +15,12 @@ public class UserCookieDataBinder implements DataBinder {
     private static final int MAX_COOKIE = 2;
 
     private static final int ONE_DAY = 1000 * 60 * 60 * 24;
+
+    private Logger log;
+    
+    public UserCookieDataBinder(final Logger log) {
+        this.log = log;
+    }
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
@@ -33,6 +41,7 @@ public class UserCookieDataBinder implements DataBinder {
                             model.put(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf((cookieValue - now) / ONE_DAY));
                         }
                     } catch (Exception e) {
+                        this.log.error(e.getMessage(), e);
                         model.put(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, "ERROR");
                     }
                     if (++cookieNumber == MAX_COOKIE) {

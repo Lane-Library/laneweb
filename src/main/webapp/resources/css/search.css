@@ -13,19 +13,8 @@
 #queryMapping span {
     padding-right:25px;
 }
-.search a, .search a:visited {
-    color: #1C4B70;
-}
-.search a:hover {
-    color:#820000;
-    border-bottom:1px solid #820000;
-}
-.lwSearchResults a:visited {
-    color: #565347;
-}
 .lwSearchResults a.primaryLink {
     font-size:16px;
-    color: #1C4B70;
 }
 #searchFacets {
     margin-top:5px;
