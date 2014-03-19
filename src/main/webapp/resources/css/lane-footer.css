@@ -1,11 +1,13 @@
 #laneFooter {
     position : relative;
-    background-color : #d6d5c7;
+    background-color : rgb(111,0,0);
     padding : 29px;
+    margin-top:10px
 }
 #laneFooter a {
     border-bottom : none;
     letter-spacing : .5px;
+    color: white
 }
 #laneFooter ul {
     padding-top : 3px;

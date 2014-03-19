@@ -342,14 +342,14 @@
         }, document);
 
         // limit dragend listener to bookmarklet links
-        Y.on('dragend', function(e) {
-            Tracker.trackEvent(e);
-        }, 'a[href*=bookmarklet]');
-
-        // limit right-click listener to bookmarklet links
-        Y.on('contextmenu', function(e) {
-            Tracker.trackEvent(e);
-        }, 'a[href*=bookmarklet]');
+//        Y.on('dragend', function(e) {
+//            Tracker.trackEvent(e);
+//        }, 'a[href*=bookmarklet]');
+//
+//        // limit right-click listener to bookmarklet links
+//        Y.on('contextmenu', function(e) {
+//            Tracker.trackEvent(e);
+//        }, 'a[href*=bookmarklet]');
 
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
         if (Lane.BookmarksWidget) {
