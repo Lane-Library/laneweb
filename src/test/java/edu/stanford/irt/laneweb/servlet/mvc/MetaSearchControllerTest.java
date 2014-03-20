@@ -64,6 +64,7 @@ public class MetaSearchControllerTest {
         verify(this.manager, this.dataBinder, this.model);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testSearch() {
         expect(this.manager.describe(isA(Query.class))).andReturn(
@@ -78,8 +79,12 @@ public class MetaSearchControllerTest {
         expect(this.result.getURL()).andReturn("url");
         expect(this.result.getHits()).andReturn("2");
         replay(this.manager, this.dataBinder, this.model, this.result);
-        assertEquals("{resources={resource={hits=2, status=SUCCESSFUL, url=url}}, status=SUCCESSFUL}", this.controller
-                .search("query", Collections.singletonList("resource"), false, "baseProxyURL").toString());
+        Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), false, "baseProxyURL");
+        assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
+        map = (Map<String, Object>) map.get("resources");
+        map = (Map<String, Object>) map.get("resource");
+        assertEquals(Integer.valueOf("2"), map.get("hits"));
+        assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
         verify(this.manager, this.dataBinder, this.model, this.result);
     }
 }
