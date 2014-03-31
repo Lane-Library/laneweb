@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-03-31" version="2.1.51" description="2.1.51 bug fix release">
+            <action date="2014-03-" dev="ryanmax" issue="96798" type="add">
+                Google Analytics - Tracking search "selection" for mobile site
+            </action>
+            <action date="2014-03-19" dev="ceyates" issue="96771" type="update">
+                History search: Order results with highest # of hits at the top
+            </action>
+            <action date="2014-03-19" dev="ceyates" issue="96764" type="update">
+                Remove the search results when 0 results
+            </action>
+        </release>
         <release date="2014-03-17" version="2.1.50" description="2.1.50 bug fix release">
             <action date="2014-03-14" dev="ceyates" issue="96722" type="fix">
                 respond to /errordocs/&lt;code&gt;err.html
