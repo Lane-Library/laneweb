@@ -76,6 +76,9 @@ $.ajax({
             }
             _gaq.push(['_trackPageview', basePath + $.LANE.tracking.encode($.LANE.tracking.getTrackingTitle(node))]);
         }
+        else if (e.type === 'click' && node.parentNode.id === 'searchTabs' && node.nodeName === 'LI' && node.className != 'selected') {
+            _gaq.push(['_trackEvent', "searchTabClick", e.target.textContent]);
+        }
         else if (e.type === 'submit' && node.nodeName === 'FORM') {
             _gaq.push(['_trackPageview', "/search?source="+$(e.target).attr('action')+"&"+$(e.target).serialize()]);
         }
