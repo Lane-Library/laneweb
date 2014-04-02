@@ -51,7 +51,7 @@ public class UrlTester {
     }
 
     private String getHeaderString(final Header[] headers) {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         for (Header header : headers) {
             result.append(header.getName());
             result.append(" ==> ");
@@ -62,7 +62,7 @@ public class UrlTester {
     }
 
     private byte[] getHeaderString(final HttpGet httpGet, final HttpResponse httpResponse) throws UnsupportedEncodingException {
-        StringBuffer result = new StringBuffer("\n\n\n<!--\n\nRequest Headers:\n\n");
+        StringBuilder result = new StringBuilder("\n\n\n<!--\n\nRequest Headers:\n\n");
         result.append(getHeaderString(httpGet.getAllHeaders()));
         result.append("\n\n\nResponse Headers:\n\n");
         result.append(getHeaderString(httpResponse.getAllHeaders()));
