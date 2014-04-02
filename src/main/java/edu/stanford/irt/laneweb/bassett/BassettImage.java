@@ -88,7 +88,7 @@ public class BassettImage {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("bassettNumber=").append(this.bassettNumber).append(",Image=").append(this.image).append(",Diagram=")
                 .append(this.diagram).append(",LatinLegend=").append(this.latinLegend).append(",EngishLegend=")
                 .append(this.engishLegend).append(",regions=").append(this.regions);

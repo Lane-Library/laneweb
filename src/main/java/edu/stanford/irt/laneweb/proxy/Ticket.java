@@ -48,7 +48,7 @@ public class Ticket implements Serializable {
     }
 
     private String getKeyedDigest(final String buffer) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         MessageDigest digest = MessageDigest.getInstance("MD5");
         byte[] bytes = digest.digest(buffer.getBytes("UTF-8"));
         for (byte element : bytes) {

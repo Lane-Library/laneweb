@@ -56,8 +56,8 @@ public class SHCLoginController {
     public void login(@RequestParam final String emrid, @RequestParam final String univid, @RequestParam final String ts,
             final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        StringBuffer errorMsg = new StringBuffer();
-        StringBuffer url = new StringBuffer(TARGET_URL);
+        StringBuilder errorMsg = new StringBuilder();
+        StringBuilder url = new StringBuilder(TARGET_URL);
         url.append(URLEncoder.encode(emrid, "UTF-8"));
         String sunetid = null;
         String decryptedUnivid = null;
