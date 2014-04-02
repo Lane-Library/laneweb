@@ -7,11 +7,11 @@ import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.Result;
 
-public abstract class AbstractMetasearchGenerator extends AbstractSearchGenerator<Result> {
+public abstract class AbstractMetasearchGenerator<T> extends AbstractSearchGenerator<T> {
 
     private MetaSearchManager metaSearchManager;
 
-    public AbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+    public AbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<T> saxStrategy) {
         super(saxStrategy);
         this.metaSearchManager = metaSearchManager;
     }

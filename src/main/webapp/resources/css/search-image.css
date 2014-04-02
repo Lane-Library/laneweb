@@ -1,0 +1,49 @@
+#imageList {
+	/*requred for IE < 8:*/
+	*height: 404px;
+	text-align: center;
+}
+
+#imageList:after {
+	content: ".";
+	display: block;
+	height: 0;
+	font-size: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+#imageList li {
+	float: left;
+	list-style: none inside none;
+	margin: 0px 10px 10px 10px;
+	height: 200px;
+	min-width: 200px;
+}
+
+
+#imageList a {
+	display: block;
+	min-width: 200px;
+	border-bottom: none;
+}
+
+#imageList div {
+	width: 190px;
+}
+
+#imageList a:hover {
+	background-color: #e6e4dc
+}
+
+#searchImageTitle {
+	margin-top: 40px;
+	margin-bottom: 30px;
+	font-size: large;
+	font-weight: bold;
+}
+
+#searchImageTitle  span {
+	font-size: x-large;
+	font-weight: bolder;
+}

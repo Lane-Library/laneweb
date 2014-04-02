@@ -54,6 +54,12 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="search/image/*" type="wildcard">
+                <map:generate type="search-image">
+                    <map:parameter name="engines" value="{1}"/>
+                </map:generate>
+                <map:serialize type="xml"/>
+            </map:match>
             <!-- search/content/html returns xhtmlized metasearch content results -->
             <map:match pattern="search/content/html/*" type="wildcard">
                 <map:generate type="search-content">
