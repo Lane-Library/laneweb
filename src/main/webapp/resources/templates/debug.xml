@@ -52,12 +52,16 @@
                         <div id="searchFormContainer">
                             <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
                             <form id="search" method="get" action="/search.html">
+                            <input type="hidden" name="debug" value="true"/>
                             <fieldset id="searchFields">
                                 <div id="selectAndInput">
                                 <select name="source" id="searchSource">
                                     <option value="all-all"
                                         title="Enter Subject, Title, Author, PMID, ISSN, DOI"
                                         >Lane Search</option>
+                                    <option value="images-all"
+                                        title="Images from metasearch"
+                                        >Images Search</option>
                                     <option value="clinical-all"
                                         title="Clinical evidence: Cochrane, DARE, ACP Journal Club, UpToDate, PubMed"
                                         >Clinical/PICO</option>
