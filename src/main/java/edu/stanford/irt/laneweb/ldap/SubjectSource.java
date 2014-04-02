@@ -19,7 +19,7 @@ public class SubjectSource {
     private Subject subject;
 
     private KerberosTicket ticket;
-    
+
     public SubjectSource(final String name, final Logger log) {
         this.name = name;
         this.log = log;

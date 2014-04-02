@@ -9,6 +9,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Collections;
+
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
@@ -30,7 +32,7 @@ public class LDAPAttributesMapperTest {
 
     @Before
     public void setUp() throws Exception {
-        this.mapper = new LDAPAttributesMapper();
+        this.mapper = new LDAPAttributesMapper(Collections.singleton("stanford:staff"));
         this.attributes = createMock(Attributes.class);
         this.attribute = createMock(Attribute.class);
         this.enumeration = createMock(NamingEnumeration.class);
