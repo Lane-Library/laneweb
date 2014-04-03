@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 import org.xml.sax.SAXException;
@@ -12,7 +11,6 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.bassett.BassettImage;
-import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.Result;
@@ -21,9 +19,8 @@ public class ImageSearchSAXStrategy implements
 		SAXStrategy<HashMap<String, Object>> {
 
 	private static final String CDATA = "CDATA";
-
 	private static final String DIV = "div";
-	private static final String CLASS = "class";
+	private static final String HEIGHT = "height";
 	private static final String SPAN = "span";
 	private static final String ANCHOR = "a";
 	private static final String HREF = "href";
@@ -39,10 +36,7 @@ public class ImageSearchSAXStrategy implements
 	private static final String BASSETT_ICON_SRC_URI = "http://elane.stanford.edu/public/L254573/small/";
 	private static final String BASSETT_SEARCH_URL = "http://lane.stanford.edu/search.html?source=bassett&q=";
 
-	public ImageSearchSAXStrategy() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	@Override
 	public void toSAX(HashMap<String, Object> result, XMLConsumer xmlConsumer) {
 
@@ -73,46 +67,35 @@ public class ImageSearchSAXStrategy implements
 				 }
 				 XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
 			 }
-
 			Collection<Result> engines = metaSearchResult.getChildren();
-
 			String hits = null;
-			
 			for (Result engineResult : engines) {
 				XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
 				Collection<Result> resources = engineResult.getChildren();
 				hits = engineResult.getHits();
 				String url = null;
 				for (Result resource : resources) {
-					
 					if(resource.getId().indexOf("_content") == -1){
 						url = resource.getURL();
 					}
-					
 					if (!"0".equals(resource.getHits()) && resource.getId().endsWith("_content")) {
 						createTitle(xmlConsumer, engineResult.getDescription(),
-								resource.getHits(), hits, url);
+						resource.getHits(), hits, url);
 					}
 					AttributesImpl atts = new AttributesImpl();
 					atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
 					XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
 					Collection<Result> contents = resource.getChildren();
-					
 					for (Result content : contents) {
-
 						if (content.getId().contains("_content_")) {
 							ContentResult contentResult = (ContentResult) content;
-							generateImages(xmlConsumer,
-									contentResult.getTitle(),
-									contentResult.getURL(),
-									contentResult.getDescription());
+							generateImages(xmlConsumer, contentResult.getTitle(), contentResult.getURL(), contentResult.getDescription());
 						}
 					}
 					XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
 				}
 				XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 			}
-
 			XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 			xmlConsumer.endDocument();
 		} catch (SAXException e) {
@@ -128,13 +111,13 @@ public class ImageSearchSAXStrategy implements
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, src);
+		atts.addAttribute(XHTML_NS, HEIGHT, HEIGHT, CDATA, "120px");
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
 		XMLUtils.data(xmlConsumer, title);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
 	}
 
@@ -146,7 +129,7 @@ public class ImageSearchSAXStrategy implements
 		XMLUtils.data(xmlConsumer, title.concat(" "));
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
 		XMLUtils.data(xmlConsumer, hits.concat(" of "));
-		 atts = new AttributesImpl();
+		atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, url);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		XMLUtils.data(xmlConsumer, total.concat(" images found"));
