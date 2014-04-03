@@ -118,7 +118,7 @@ public class GoogleTracker {
         if (isEmpty(encodedString)) {
             encodedString = "";
         } else {
-            encodedString = URLEncoder.encode((encodedString), "UTF-8");
+            encodedString = URLEncoder.encode(encodedString, "UTF-8");
             encodedString = encodedString.replaceAll("\\+", "%20");
         }
         return encodedString;
