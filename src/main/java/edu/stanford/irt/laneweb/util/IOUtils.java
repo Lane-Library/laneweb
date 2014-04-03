@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public abstract class IOUtils {
+    
+    private IOUtils() {}
 
     public static void closeStream(final InputStream inputStream) {
         if (inputStream != null) {
