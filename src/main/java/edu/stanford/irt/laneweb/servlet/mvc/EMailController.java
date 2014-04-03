@@ -34,7 +34,9 @@ public class EMailController {
     @Autowired
     private EMailSender sender;
     
-    public EMailController() {}
+    public EMailController() {
+        // empty default constructor
+    }
     
     public EMailController(RequestHeaderDataBinder headerBinder, RemoteProxyIPDataBinder remoteIPBinder, EMailSender sender) {
         this.headerBinder = headerBinder;

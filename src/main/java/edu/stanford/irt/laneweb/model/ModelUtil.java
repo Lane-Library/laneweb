@@ -7,7 +7,9 @@ import java.util.Map;
  */
 public abstract class ModelUtil {
     
-    private ModelUtil() {}
+    private ModelUtil() {
+        // empty private default constructor
+    }
 
     public static <T> T getObject(final Map<String, Object> map, final String name, final Class<T> clazz) {
         return clazz.cast(map.get(name));

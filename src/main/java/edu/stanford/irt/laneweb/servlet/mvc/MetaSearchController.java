@@ -33,7 +33,9 @@ public class MetaSearchController {
     @Autowired
     private CompositeDataBinder dataBinder;
     
-    public MetaSearchController() {}
+    public MetaSearchController() {
+        // empty default constructor
+    }
 
     public MetaSearchController(final MetaSearchManager manager, final CompositeDataBinder dataBinder) {
         this.manager = manager;

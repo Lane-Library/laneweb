@@ -8,7 +8,9 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public abstract class IOUtils {
     
-    private IOUtils() {}
+    private IOUtils() {
+        // empty private default constructor
+    }
 
     public static void closeStream(final InputStream inputStream) {
         if (inputStream != null) {
