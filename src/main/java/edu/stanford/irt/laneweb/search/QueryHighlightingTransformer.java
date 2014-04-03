@@ -57,18 +57,11 @@ public class QueryHighlightingTransformer extends AbstractXMLPipe implements Tra
         if ("title".equals(localName) || "description".equals(localName)) {
             this.parseLevel--;
             this.inTargetElement = false;
-        }
-        // end of child element of title or description
-        else if (this.inTargetElement) {
+        } else if (this.inTargetElement) {
+            // end of child element of title or description
             ++this.parseLevel;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
-    }
-
-    @Override
-    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
-        this.xmlConsumer = xmlConsumer;
-        super.setXMLConsumer(xmlConsumer);
     }
 
     public void setModel(final Map<String, Object> model) {
@@ -76,6 +69,12 @@ public class QueryHighlightingTransformer extends AbstractXMLPipe implements Tra
         if (query != null) {
             this.queryPattern = QueryTermPattern.getPattern(query);
         }
+    }
+
+    @Override
+    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
+        super.setXMLConsumer(xmlConsumer);
     }
 
     @Override
