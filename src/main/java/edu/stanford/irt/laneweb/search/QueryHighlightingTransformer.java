@@ -84,9 +84,8 @@ public class QueryHighlightingTransformer extends AbstractXMLPipe implements Tra
             if ("title".equals(localName) || "description".equals(localName)) {
                 ++this.parseLevel;
                 this.inTargetElement = true;
-            }
-            // don't process child elements of title or description
-            else if (this.inTargetElement) {
+            } else if (this.inTargetElement) {
+                // don't process child elements of title or description
                 handleMatches();
                 this.parseLevel--;
             }
