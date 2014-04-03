@@ -38,11 +38,16 @@
 #searchImageTitle {
 	margin-top: 40px;
 	margin-bottom: 30px;
-	font-size: large;
 	font-weight: bold;
 }
 
-#searchImageTitle  span {
+#searchImageTitle span:last-child{
+	padding-left: 20px;
+	
+	
+}
+ 
+ #searchImageTitle  span:first-child{
 	font-size: x-large;
 	font-weight: bolder;
 }
