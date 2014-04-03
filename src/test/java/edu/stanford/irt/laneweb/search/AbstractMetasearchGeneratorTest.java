@@ -15,7 +15,7 @@ import edu.stanford.irt.search.Result;
 
 public class AbstractMetasearchGeneratorTest {
 
-    private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator {
+    private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator<Result> {
 
         public TestAbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
             super(metaSearchManager, saxStrategy);
@@ -27,7 +27,7 @@ public class AbstractMetasearchGeneratorTest {
         }
     }
 
-    private AbstractMetasearchGenerator generator;
+    private AbstractMetasearchGenerator<Result> generator;
 
     private MetaSearchManager manager;
 
