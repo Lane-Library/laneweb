@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.AlgorithmParameterSpec;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -19,10 +20,12 @@ import org.slf4j.Logger;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class SHCCodec {
+    
+    private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private Cipher cipher;
 
-    private byte[] initialVectorBytes;
+    private AlgorithmParameterSpec initialVector;
 
     private final Logger log;
 
@@ -30,32 +33,36 @@ public class SHCCodec {
 
     public SHCCodec(final String key, final String vector, final Logger log) {
         this.log = log;
-        // latest version of commons-codec (1.6) does not pad with 0 bytes
-        // to 16, so do that here:
+        // pad with 0 bytes to 16:
         byte[] src = Base64.decodeBase64(key);
         byte[] dst = new byte[16];
         System.arraycopy(src, 0, dst, 0, src.length);
         this.secretKey = new SecretKeySpec(dst, "AES");
+        this.initialVector = new IvParameterSpec(vector.getBytes(Charset.forName("ASCII")));
         try {
             this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            this.initialVectorBytes = vector.getBytes(Charset.forName("ASCII"));
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException  e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             throw new LanewebException(e);
         }
     }
 
-    public synchronized String decrypt(final String ciphertext) {
+    public String decrypt(final String ciphertext) {
         byte[] ciphertextBytes = Base64.decodeBase64(ciphertext);
-        String plaintext = null;
-        initializeCipher(Cipher.DECRYPT_MODE);
-        plaintext = new String(doFinal(ciphertextBytes), Charset.forName("UTF-8"));
-        return plaintext;
+        byte[] plaintext = null;
+        synchronized(this.cipher) {
+            initializeCipher(Cipher.DECRYPT_MODE);
+            plaintext = doFinal(ciphertextBytes);
+        }
+        return new String(plaintext, UTF8);
     }
 
     public synchronized String encrypt(final String plaintext) {
+        byte[] plainTextBytes = plaintext.getBytes(UTF8);
         byte[] ciphertext = null;
-        initializeCipher(Cipher.ENCRYPT_MODE);
-        ciphertext = doFinal(plaintext.getBytes(Charset.forName("UTF-8")));
+        synchronized(this.cipher) {
+            initializeCipher(Cipher.ENCRYPT_MODE);
+            ciphertext = doFinal(plainTextBytes);
+        }
         return Base64.encodeBase64String(ciphertext);
     }
 
@@ -69,9 +76,9 @@ public class SHCCodec {
         return result;
     }
 
-    private void initializeCipher(int mode) {
+    private void initializeCipher(final int mode) {
         try {
-            this.cipher.init(mode, this.secretKey, new IvParameterSpec(this.initialVectorBytes));
+            this.cipher.init(mode, this.secretKey, this.initialVector);
         } catch (InvalidKeyException | InvalidAlgorithmParameterException e) {
             throw new LanewebException(e);
         }
