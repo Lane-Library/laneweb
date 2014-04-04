@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.proxy;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,14 +55,11 @@ public class EzproxyServersWriter {
 
     private static final byte[] U = { 'U', ' ' };
 
-    private static final String UTF8 = "UTF-8";
+    private static final Charset UTF8 = Charset.forName("UTF-8");
+
     static {
-        try {
-            SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
-                    .getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new ExceptionInInitializerError(e);
-        }
+        SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
+                .getBytes(UTF8);
     }
 
     private DataSource dataSource;

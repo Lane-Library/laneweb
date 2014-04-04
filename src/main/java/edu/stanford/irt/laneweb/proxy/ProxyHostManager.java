@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -88,7 +89,7 @@ public class ProxyHostManager {
         this.dataSource = dataSource;
         this.log = log;
         BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
-                "ezproxy-servers.txt"), "UTF-8"));
+                "ezproxy-servers.txt"), Charset.forName("UTF-8")));
         this.proxyHosts = new HashSet<String>();
         String proxyHost = null;
         try {

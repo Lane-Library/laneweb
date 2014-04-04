@@ -14,7 +14,6 @@ import edu.stanford.irt.laneweb.bassett.BassettCollectionManager;
 import edu.stanford.irt.laneweb.bassett.BassettImage;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.DefaultResult;

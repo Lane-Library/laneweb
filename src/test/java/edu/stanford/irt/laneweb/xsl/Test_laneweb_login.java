@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -185,7 +186,7 @@ public class Test_laneweb_login {
 
     private String getExpectedResult(final String fileName) throws IOException {
         StringWriter sw = new StringWriter();
-        InputStreamReader br = new InputStreamReader(getClass().getResourceAsStream(fileName), "UTF-8");
+        InputStreamReader br = new InputStreamReader(getClass().getResourceAsStream(fileName), Charset.forName("UTF-8"));
         char[] cbuf = new char[1024];
         while (true) {
             int i = br.read(cbuf);
