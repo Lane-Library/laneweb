@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -47,23 +48,15 @@ public class SHCCodec {
     public synchronized String decrypt(final String ciphertext) {
         byte[] ciphertextBytes = Base64.decodeBase64(ciphertext);
         String plaintext = null;
-        try {
-            initializeCipher();
-            plaintext = new String(doFinal(ciphertextBytes), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new LanewebException(e);
-        }
+        initializeCipher(Cipher.DECRYPT_MODE);
+        plaintext = new String(doFinal(ciphertextBytes), Charset.forName("UTF-8"));
         return plaintext;
     }
 
     public synchronized String encrypt(final String plaintext) {
         byte[] ciphertext = null;
-        try {
-            initializeCipher();
-            ciphertext = doFinal(plaintext.getBytes("UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e);
-        }
+        initializeCipher(Cipher.ENCRYPT_MODE);
+        ciphertext = doFinal(plaintext.getBytes(Charset.forName("UTF-8")));
         return Base64.encodeBase64String(ciphertext);
     }
 
@@ -77,9 +70,9 @@ public class SHCCodec {
         return result;
     }
 
-    private void initializeCipher() {
+    private void initializeCipher(int mode) {
         try {
-            this.cipher.init(Cipher.DECRYPT_MODE, this.secretKey, new IvParameterSpec(this.initialVectorBytes));
+            this.cipher.init(mode, this.secretKey, new IvParameterSpec(this.initialVectorBytes));
         } catch (InvalidKeyException | InvalidAlgorithmParameterException e) {
             throw new LanewebException(e);
         }
