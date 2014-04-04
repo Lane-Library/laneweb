@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.codec;
 
 import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
+// TODO: remove code duplicated with SunetidCookieCodec
 public class SHCCodec {
     
     private static final Charset UTF8 = Charset.forName("UTF-8");

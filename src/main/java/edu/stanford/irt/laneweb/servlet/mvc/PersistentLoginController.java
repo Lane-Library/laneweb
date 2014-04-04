@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
+import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
+import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
-import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 
 @Controller

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.codec;
 
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
@@ -15,6 +15,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
+//TODO: remove code duplicated with SHCCodec
 public class SunetIdCookieCodec {
 
     public static final String LANE_COOKIE_NAME = "user";
