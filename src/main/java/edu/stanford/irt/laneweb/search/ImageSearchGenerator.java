@@ -14,9 +14,8 @@ import edu.stanford.irt.laneweb.bassett.BassettCollectionManager;
 import edu.stanford.irt.laneweb.bassett.BassettImage;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<String, Object>> implements ParametersAware{
@@ -55,9 +54,9 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
         result.put(BASSETT_RESULT, bassettResult);
         Result metaSearchResult = null;
         if (query == null || query.isEmpty()) {
-        	metaSearchResult = new DefaultResult("");
+        	metaSearchResult = new Result("");
         } else {
-        	metaSearchResult = this.metasearchManager.search(new SimpleQuery(query), time, this.engines, true);
+        	metaSearchResult = this.metasearchManager.search(new SimpleQuery(query, this.engines), time, true);
         }
         result.put(METASEARCH_RESULT, metaSearchResult);
 		return result;

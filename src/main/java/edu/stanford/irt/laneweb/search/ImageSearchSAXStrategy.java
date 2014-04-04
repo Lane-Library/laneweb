@@ -12,8 +12,8 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.bassett.BassettImage;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ImageSearchSAXStrategy implements
 		SAXStrategy<HashMap<String, Object>> {
