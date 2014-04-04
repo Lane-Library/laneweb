@@ -48,7 +48,7 @@ public class ImageSearchSAXStrategy implements
 			 List<BassettImage> bassettResult = (List<BassettImage>)result.get(ImageSearchGenerator.BASSETT_RESULT);
 			 int bassettMaxResult = ((bassettResult.size() > MAX_BASSETT_RESULT) ? MAX_BASSETT_RESULT: bassettResult.size());
 			 if (bassettResult.size() != 0) {
-				 createTitle(xmlConsumer, "Bassett",String.valueOf(bassettMaxResult),String.valueOf(bassettResult.size()),
+				 createTitle(xmlConsumer, "bassett", "Bassett",String.valueOf(bassettMaxResult),String.valueOf(bassettResult.size()),
 				 BASSETT_SEARCH_URL.concat(query));
 				 AttributesImpl atts = new AttributesImpl();
 				 atts = new AttributesImpl();
@@ -79,8 +79,7 @@ public class ImageSearchSAXStrategy implements
 						url = resource.getURL();
 					}
 					if (!"0".equals(resource.getHits()) && resource.getId().endsWith("_content")) {
-						createTitle(xmlConsumer, engineResult.getDescription(),
-						resource.getHits(), hits, url);
+						createTitle(xmlConsumer,resource.getId(), engineResult.getDescription(), resource.getHits(), hits, url);
 					}
 					AttributesImpl atts = new AttributesImpl();
 					atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
@@ -121,7 +120,7 @@ public class ImageSearchSAXStrategy implements
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
 	}
 
-	private void createTitle(XMLConsumer xmlConsumer, String title, String hits, String total, String url) throws SAXException {
+	private void createTitle(XMLConsumer xmlConsumer, String id, String title, String hits, String total, String url) throws SAXException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, ID, ID, CDATA, "searchImageTitle");
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
@@ -134,7 +133,14 @@ public class ImageSearchSAXStrategy implements
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		XMLUtils.data(xmlConsumer, total.concat(" images found"));
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
+		atts = new AttributesImpl();
+		atts.addAttribute(XHTML_NS, ID, ID, CDATA, id);
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
+		XMLUtils.data(xmlConsumer, "Rights: Most images in this collection");
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 	}
+	
+	
 
 }
