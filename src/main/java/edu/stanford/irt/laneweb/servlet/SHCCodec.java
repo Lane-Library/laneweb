@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -39,8 +38,8 @@ public class SHCCodec {
         this.secretKey = new SecretKeySpec(dst, "AES");
         try {
             this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            this.initialVectorBytes = vector.getBytes("ASCII");
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | UnsupportedEncodingException e) {
+            this.initialVectorBytes = vector.getBytes(Charset.forName("ASCII"));
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException  e) {
             throw new LanewebException(e);
         }
     }
