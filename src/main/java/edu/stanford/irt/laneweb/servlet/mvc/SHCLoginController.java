@@ -15,10 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.stanford.irt.laneweb.codec.SHCCodec;
 import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.SHCCodec;
 
 @Controller
 public class SHCLoginController {
@@ -56,8 +56,8 @@ public class SHCLoginController {
     public void login(@RequestParam final String emrid, @RequestParam final String univid, @RequestParam final String ts,
             final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        StringBuffer errorMsg = new StringBuffer();
-        StringBuffer url = new StringBuffer(TARGET_URL);
+        StringBuilder errorMsg = new StringBuilder();
+        StringBuilder url = new StringBuilder(TARGET_URL);
         url.append(URLEncoder.encode(emrid, "UTF-8"));
         String sunetid = null;
         String decryptedUnivid = null;

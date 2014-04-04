@@ -16,10 +16,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import edu.stanford.irt.laneweb.codec.SHCCodec;
 import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.SHCCodec;
 
 public class SHCLoginControllerTest {
 

@@ -16,7 +16,7 @@ public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManag
         return this.msms.getMetaSearchManager();
     }
 
-    public Class<?> getObjectType() {
+    public Class<MetaSearchManager> getObjectType() {
         return MetaSearchManager.class;
     }
 

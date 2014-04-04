@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 
+import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 
 public class UserCookieDataBinder implements DataBinder {
 

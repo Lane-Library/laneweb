@@ -2,11 +2,12 @@ package edu.stanford.irt.laneweb.proxy;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -17,58 +18,26 @@ public class EzproxyServersWriter {
 
     private static final byte[] HJ = { 'H', 'J', ' ' };
 
-    private static final String UNION = "union ";
-
-    private static final String SQL = "WITH HOSTS AS " + "  ( SELECT DISTINCT LINK AS HOST "
-            + "  FROM LMLDB.ELINK_INDEX " + "  WHERE ELINK_INDEX.RECORD_TYPE = 'A' "
-            + "  AND URL_HOST NOT LIKE '%.stanford.edu%' "
-            + UNION
-            + "  SELECT DISTINCT LINK AS HOST "
-            + "  FROM LMLDB.ELINK_INDEX, "
-            + "    LMLDB.MFHD_MASTER "
-            + "  WHERE ELINK_INDEX.RECORD_ID = MFHD_MASTER.MFHD_ID "
-            + "  AND ELINK_INDEX.RECORD_TYPE = 'M' "
-            + "  AND URL_HOST NOT LIKE '%.stanford.edu%' "
-            + "  AND MFHD_MASTER.MFHD_ID NOT IN "
-            + "    (SELECT MFHD_ID "
-            + "    FROM LMLDB.MFHD_DATA "
-            + "    WHERE LOWER(RECORD_SEGMENT) LIKE '%, noproxy%' "
-            + "    ) "
-            + "  ) "
-            + "SELECT SUBSTR(HOST, 0, instr(HOST,'/',1,3)-1) "
-            + "FROM HOSTS "
-            + "WHERE HOST LIKE 'https://%' "
-            + "AND instr(HOST,'/',1,3) > 0 "
-            + UNION
-            + "SELECT HOST FROM HOSTS WHERE HOST LIKE 'https://%' AND instr(HOST,'/',1,3) = 0 "
-            + UNION
-            + "SELECT SUBSTR(HOST, 0, instr(HOST,'/',1,3)-1) "
-            + "FROM HOSTS "
-            + "WHERE HOST LIKE 'http://%' "
-            + "AND instr(HOST,'/',1,3) > 0 "
-            + UNION
-            + "SELECT HOST FROM HOSTS WHERE HOST LIKE 'http://%' AND INSTR(HOST,'/',1,3) = 0";
-
     private static final byte[] SUL;
 
     private static final byte[] T = { 'T', ' ' };
 
     private static final byte[] U = { 'U', ' ' };
 
-    private static final String UTF8 = "UTF-8";
+    private static final Charset UTF8 = Charset.forName("UTF-8");
+
     static {
-        try {
-            SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
-                    .getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new ExceptionInInitializerError(e);
-        }
+        SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
+                .getBytes(UTF8);
     }
 
     private DataSource dataSource;
+    
+    private String sql;
 
-    public EzproxyServersWriter(final DataSource dataSource) {
+    public EzproxyServersWriter(final DataSource dataSource, final Properties sql) {
         this.dataSource = dataSource;
+        this.sql = sql.getProperty("ezproxy-servers.query");
     }
 
     public void write(final OutputStream outputStream) throws IOException {
@@ -81,7 +50,7 @@ public class EzproxyServersWriter {
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(SQL);
+            rs = stmt.executeQuery(this.sql);
             while (rs.next()) {
                 String host = rs.getString(1);
                 outputStream.write(T);

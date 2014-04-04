@@ -12,7 +12,7 @@ import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
+public class SearchGenerator extends AbstractMetasearchGenerator<Result> implements ParametersAware {
 
     private static final long DEFAULT_TIMEOUT = 60000;
 

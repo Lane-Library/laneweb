@@ -10,7 +10,7 @@ import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class DescribeGenerator extends AbstractMetasearchGenerator implements CacheablePipelineComponent {
+public class DescribeGenerator extends AbstractMetasearchGenerator<Result> implements CacheablePipelineComponent {
 
     private static final String TYPE = "describe";
 

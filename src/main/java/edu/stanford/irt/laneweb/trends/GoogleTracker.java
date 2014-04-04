@@ -7,6 +7,7 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -113,12 +114,12 @@ public class GoogleTracker {
      * @return URL encoded string, with %20 instead of plus for spaces
      * @throws UnsupportedEncodingException
      */
-    private String encode(final String string) throws IOException {
+    private String encode(final String string) throws UnsupportedEncodingException {
         String encodedString = string;
         if (isEmpty(encodedString)) {
             encodedString = "";
         } else {
-            encodedString = URLEncoder.encode((encodedString), "UTF-8");
+            encodedString = URLEncoder.encode(encodedString, "UTF-8");
             encodedString = encodedString.replaceAll("\\+", "%20");
         }
         return encodedString;
@@ -148,7 +149,7 @@ public class GoogleTracker {
     private String generateVisitorId() throws NoSuchAlgorithmException, IOException {
         String message = this.userAgent + getRandomNumber() + UUID.randomUUID().toString();
         MessageDigest m = MessageDigest.getInstance("MD5");
-        m.update(message.getBytes("UTF-8"), 0, message.length());
+        m.update(message.getBytes(Charset.forName("UTF-8")), 0, message.length());
         byte[] sum = m.digest();
         BigInteger messageAsNumber = new BigInteger(1, sum);
         String md5String = messageAsNumber.toString(16);

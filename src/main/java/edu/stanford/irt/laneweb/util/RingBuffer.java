@@ -111,7 +111,7 @@ public class RingBuffer {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("[");
+        StringBuilder sb = new StringBuilder("[");
         byte[] bytes = this.getBytes();
         for (int i = 0; i < bytes.length; i++) {
             sb.append(bytes[i]);

@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class SunetIdSourceTest {

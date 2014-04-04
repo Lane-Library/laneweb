@@ -25,6 +25,24 @@ import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 @RequestMapping(value = "/apps/mail", method = RequestMethod.POST)
 public class EMailController {
 
+    private static final String ACQUISITIONS_ADDRESS = "lanelibacqs@lists.stanford.edu";
+
+    private static final String AQUISITIONS_PATH = "/lanelibacqs";
+
+    private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
+
+    private static final String ASKUS_PATH = "/askus";
+
+    private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
+
+    private static final String ISSUE_ADDRESS = "lane-issue@med.stanford.edu";
+
+    private static final String ISSUE_PATH = "/lane-issue";
+
+    private static final String JSON_MIME_TYPE = "application/json";
+
+    private static final String SUBJECT = "subject";
+
     @Autowired
     private RequestHeaderDataBinder headerBinder;
 
@@ -33,79 +51,60 @@ public class EMailController {
 
     @Autowired
     private EMailSender sender;
-    
-    public EMailController() {}
-    
-    public EMailController(RequestHeaderDataBinder headerBinder, RemoteProxyIPDataBinder remoteIPBinder, EMailSender sender) {
+
+    public EMailController() {
+        // empty default constructor
+    }
+
+    public EMailController(final RequestHeaderDataBinder headerBinder, final RemoteProxyIPDataBinder remoteIPBinder,
+            final EMailSender sender) {
         this.headerBinder = headerBinder;
         this.remoteIPBinder = remoteIPBinder;
         this.sender = sender;
     }
 
-    @RequestMapping(value = "/askus", consumes = "application/x-www-form-urlencoded")
+    @RequestMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitAskUs(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
         appendNameToSubject(map);
-        sendEmail("LaneAskUs@stanford.edu", map);
+        sendEmail(ASKUS_ADDRESS, map);
         return getRedirectTo(map);
     }
 
-    @RequestMapping(value = "/lane-issue", consumes = "application/x-www-form-urlencoded")
+    @RequestMapping(value = ISSUE_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitLaneissue(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
-        sendEmail("lane-issue@med.stanford.edu", map);
+        sendEmail(ISSUE_ADDRESS, map);
         return getRedirectTo(map);
     }
 
-    @RequestMapping(value = "/lanelibacqs", consumes = "application/x-www-form-urlencoded")
+    @RequestMapping(value = AQUISITIONS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
-        sendEmail("lanelibacqs@lists.stanford.edu", map);
+        sendEmail(ACQUISITIONS_ADDRESS, map);
         return getRedirectTo(map);
     }
 
-    @RequestMapping(value = "/askus", consumes = "application/json")
+    @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
         appendNameToSubject(feedback);
-        sendEmail("LaneAskUs@stanford.edu", feedback);
+        sendEmail(ASKUS_ADDRESS, feedback);
     }
 
-    @RequestMapping(value = "/lane-issue", consumes = "application/json")
+    @RequestMapping(value = ISSUE_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitLaneissue(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
-        sendEmail("lane-issue@med.stanford.edu", feedback);
+        sendEmail(ISSUE_ADDRESS, feedback);
     }
 
-    @RequestMapping(value = "/lanelibacqs", consumes = "application/json")
+    @RequestMapping(value = AQUISITIONS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
-        sendEmail("lanelibacqs@lists.stanford.edu", feedback);
-    }
-    
-    private void appendNameToSubject(Map<String, Object> feedback) {
-        StringBuilder subject = new StringBuilder((String)feedback.get("subject"));
-        subject.append(" (").append(feedback.get("name")).append(")");
-        feedback.put("subject", subject.toString());
-    }
-
-    private String getRedirectTo(final Map<String, Object> map) {
-        String redirectTo = (String) map.get("redirect");
-        if (redirectTo == null) {
-            redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
-        }
-        if (redirectTo == null) {
-            redirectTo = "/index.html";
-        }
-        return "redirect:" + redirectTo;
-    }
-
-    private void sendEmail(final String recipient, final Map<String, Object> data) {
-        data.put("recipient", recipient);
-        this.sender.sendEmail(data);
+        sendEmail(ACQUISITIONS_ADDRESS, feedback);
     }
 
     @ModelAttribute
@@ -123,5 +122,27 @@ public class EMailController {
                 throw new LanewebException("multiple values for parameter " + entry.getKey());
             }
         }
+    }
+
+    private void appendNameToSubject(final Map<String, Object> feedback) {
+        StringBuilder subject = new StringBuilder((String) feedback.get(SUBJECT));
+        subject.append(" (").append(feedback.get("name")).append(")");
+        feedback.put(SUBJECT, subject.toString());
+    }
+
+    private String getRedirectTo(final Map<String, Object> map) {
+        String redirectTo = (String) map.get("redirect");
+        if (redirectTo == null) {
+            redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
+        }
+        if (redirectTo == null) {
+            redirectTo = "/index.html";
+        }
+        return "redirect:" + redirectTo;
+    }
+
+    private void sendEmail(final String recipient, final Map<String, Object> data) {
+        data.put("recipient", recipient);
+        this.sender.sendEmail(data);
     }
 }

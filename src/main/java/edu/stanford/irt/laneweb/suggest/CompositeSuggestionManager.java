@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.suggest;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -9,25 +10,36 @@ import edu.stanford.irt.suggest.SuggestionManager;
 
 public class CompositeSuggestionManager implements SuggestionManager {
 
+    private static final int MINIMUM_TERM_LENGTH = 3;
+
+    private static final Collection<Suggestion> NO_SUGGESTIONS = Collections.emptySet();
+
     private List<SuggestionManager> suggestionManagers;
 
+    public CompositeSuggestionManager(final List<SuggestionManager> suggestionManagers) {
+        this.suggestionManagers = suggestionManagers;
+    }
+
     public Collection<Suggestion> getSuggestionsForTerm(final String term) {
-        Collection<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(term));
-        for (SuggestionManager suggestionManager : this.suggestionManagers) {
-            suggestions.addAll(suggestionManager.getSuggestionsForTerm(term));
-        }
-        return suggestions;
+        return doGetSuggestions(null, term);
     }
 
     public Collection<Suggestion> getSuggestionsForTerm(final String type, final String term) {
-        Collection<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(term));
-        for (SuggestionManager suggestionManager : this.suggestionManagers) {
-            suggestions.addAll(suggestionManager.getSuggestionsForTerm(type, term));
-        }
-        return suggestions;
+        return doGetSuggestions(type, term);
     }
 
-    public void setSuggestionManagers(final List<SuggestionManager> suggestionMangers) {
-        this.suggestionManagers = suggestionMangers;
+    private Collection<Suggestion> doGetSuggestions(final String type, final String term) {
+        if (term.length() < MINIMUM_TERM_LENGTH) {
+            return NO_SUGGESTIONS;
+        }
+        Collection<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(term));
+        for (SuggestionManager suggestionManager : this.suggestionManagers) {
+            if (type == null) {
+                suggestions.addAll(suggestionManager.getSuggestionsForTerm(term));
+            } else {
+                suggestions.addAll(suggestionManager.getSuggestionsForTerm(type, term));
+            }
+        }
+        return suggestions;
     }
 }

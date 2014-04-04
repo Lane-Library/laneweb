@@ -23,12 +23,12 @@
     
     <bean name="edu.stanford.irt.suggest.SuggestionManager/extensions-suggest"
         class="edu.stanford.irt.laneweb.suggest.CompositeSuggestionManager">
-        <property name="suggestionManagers">
+        <constructor-arg>
             <list>
                 <ref bean="edu.stanford.irt.suggest.SuggestionManager/eresource"/>
                 <ref bean="edu.stanford.irt.suggest.SuggestionManager/mesh"/>
             </list>
-        </property>
+        </constructor-arg>
     </bean>
     
 </beans>

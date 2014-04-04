@@ -23,7 +23,7 @@ public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe impleme
     }
 
     protected String createCMELink(final String link) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (link.contains("?")) {
             sb.append(link).append("&").append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
         } else if (link.endsWith("/") || link.endsWith("online")) {

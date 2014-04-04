@@ -22,7 +22,6 @@ import org.junit.Test;
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 
 public class BookmarkDataBinderTest {
 

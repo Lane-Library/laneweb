@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 import javax.xml.transform.sax.SAXTransformerFactory;
@@ -14,14 +14,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class HTML5Serializer extends TransformerSerializer {
 
-    private static final byte[] HTML5_DOCTYPE_DECLARATION;
-    static {
-        try {
-            HTML5_DOCTYPE_DECLARATION = "<!DOCTYPE html>\n".getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new ExceptionInInitializerError(e);
-        }
-    }
+    private static final byte[] HTML5_DOCTYPE_DECLARATION = "<!DOCTYPE html>\n".getBytes(Charset.forName("UTF-8"));
 
     private OutputStream outputStream;
 
