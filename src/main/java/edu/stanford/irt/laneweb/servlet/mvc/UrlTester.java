@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 import javax.servlet.http.HttpServletResponse;
@@ -62,7 +61,7 @@ public class UrlTester {
         return result.toString();
     }
 
-    private byte[] getHeaderString(final HttpGet httpGet, final HttpResponse httpResponse) throws UnsupportedEncodingException {
+    private byte[] getHeaderString(final HttpGet httpGet, final HttpResponse httpResponse) {
         StringBuilder result = new StringBuilder("\n\n\n<!--\n\nRequest Headers:\n\n");
         result.append(getHeaderString(httpGet.getAllHeaders()));
         result.append("\n\n\nResponse Headers:\n\n");

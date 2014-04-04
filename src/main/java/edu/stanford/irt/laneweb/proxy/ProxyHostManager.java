@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.proxy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -85,7 +84,7 @@ public class ProxyHostManager {
 
     private Set<String> proxyHosts;
 
-    public ProxyHostManager(final DataSource dataSource, final Logger log) throws UnsupportedEncodingException {
+    public ProxyHostManager(final DataSource dataSource, final Logger log) {
         this.dataSource = dataSource;
         this.log = log;
         BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(

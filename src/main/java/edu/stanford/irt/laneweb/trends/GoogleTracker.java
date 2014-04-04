@@ -114,7 +114,7 @@ public class GoogleTracker {
      * @return URL encoded string, with %20 instead of plus for spaces
      * @throws UnsupportedEncodingException
      */
-    private String encode(final String string) throws IOException {
+    private String encode(final String string) throws UnsupportedEncodingException {
         String encodedString = string;
         if (isEmpty(encodedString)) {
             encodedString = "";
