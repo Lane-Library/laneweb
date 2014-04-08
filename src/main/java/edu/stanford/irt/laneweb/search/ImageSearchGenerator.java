@@ -76,7 +76,7 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
 	        if (this.timeout == null) {
 	            this.timeout = parameters.get(Model.TIMEOUT);
 	        }
-	        if (this.engines.size() == 0) {
+	        if (this.engines == null || this.engines.size() == 0) {
 	            String engineList = parameters.get(Model.ENGINES);
 	            if (engineList != null) {
 	                this.engines = new LinkedList<String>();
