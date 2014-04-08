@@ -37,7 +37,8 @@ public class ImageSearchSAXStrategy implements
 	private static final String BASSETT_SEARCH_URL = "http://lane.stanford.edu/search.html?source=bassett&q=";
 
 	
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	public void toSAX(HashMap<String, Object> result, XMLConsumer xmlConsumer) {
 
 		try {
