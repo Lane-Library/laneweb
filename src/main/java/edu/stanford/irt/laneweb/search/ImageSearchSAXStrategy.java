@@ -78,7 +78,7 @@ public class ImageSearchSAXStrategy implements
 					if(resource.getId().indexOf("_content") == -1){
 						url = resource.getURL();
 					}
-					if (!"0".equals(resource.getHits()) && resource.getId().endsWith("_content")) {
+					if (resource.getHits() != null && !"0".equals(resource.getHits()) && resource.getId().endsWith("_content")) {
 						createTitle(xmlConsumer,resource.getId(), engineResult.getDescription(), resource.getHits(), hits, url);
 					}
 					AttributesImpl atts = new AttributesImpl();
