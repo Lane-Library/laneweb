@@ -51,7 +51,6 @@ public class ImageSearchSAXStrategy implements
 				 createTitle(xmlConsumer, "bassett", "Bassett",String.valueOf(bassettMaxResult),String.valueOf(bassettResult.size()),
 				 BASSETT_SEARCH_URL.concat(query));
 				 AttributesImpl atts = new AttributesImpl();
-				 atts = new AttributesImpl();
 				 atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
 				 XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
 				 for (BassettImage bassettImage : bassettResult) {
