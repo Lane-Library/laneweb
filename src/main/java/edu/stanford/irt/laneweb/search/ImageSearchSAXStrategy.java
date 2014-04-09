@@ -24,6 +24,7 @@ public class ImageSearchSAXStrategy implements
 	private static final String SPAN = "span";
 	private static final String ANCHOR = "a";
 	private static final String HREF = "href";
+	private static final String REL = "rel";
 	private static final String UL = "ul";
 	private static final String LI = "li";
 	private static final String ID = "id";
@@ -129,9 +130,10 @@ public class ImageSearchSAXStrategy implements
 	private void createTitle(XMLConsumer xmlConsumer, String id, String title, String hits, String total, String url) throws SAXException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, ID, ID, CDATA, "searchImageTitle");
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+		atts.addAttribute(XHTML_NS, "class", "class", CDATA, "plain");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, "h4", atts);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN);
-		XMLUtils.data(xmlConsumer, title.concat(" "));
+		XMLUtils.data(xmlConsumer, title);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
 		XMLUtils.data(xmlConsumer, hits.concat(" of "));
 		atts = new AttributesImpl();
@@ -140,11 +142,11 @@ public class ImageSearchSAXStrategy implements
 		XMLUtils.data(xmlConsumer, total.concat(" images found"));
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
 		atts = new AttributesImpl();
-		atts.addAttribute(XHTML_NS, ID, ID, CDATA, id);
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
+		atts.addAttribute(XHTML_NS, REL, REL, CDATA, "popup local ".concat(id));
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		XMLUtils.data(xmlConsumer, "Copyright Information");
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, "h4");
 	}
 	
 	
