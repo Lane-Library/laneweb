@@ -44,29 +44,9 @@ public class ImageSearchSAXStrategy implements
 		try {
 			xmlConsumer.startDocument();
 			XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
+			
+			//Metasearch content
 			Result metaSearchResult = (Result) result.get(ImageSearchGenerator.METASEARCH_RESULT);
-			String query = metaSearchResult.getQuery().toString();
-			 List<BassettImage> bassettResult = (List<BassettImage>)result.get(ImageSearchGenerator.BASSETT_RESULT);
-			 int bassettMaxResult = ((bassettResult.size() > MAX_BASSETT_RESULT) ? MAX_BASSETT_RESULT: bassettResult.size());
-			 if (bassettResult.size() != 0) {
-				 createTitle(xmlConsumer, "bassett", "Bassett",String.valueOf(bassettMaxResult),String.valueOf(bassettResult.size()),
-				 BASSETT_SEARCH_URL.concat(query));
-				 AttributesImpl atts = new AttributesImpl();
-				 atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
-				 XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
-				 for (BassettImage bassettImage : bassettResult) {
-					 String titleAndSubtitle = bassettImage.getTitle();
-					 String bassettTitle = "";
-	                 if (titleAndSubtitle != null) {
-	                         String[] title = titleAndSubtitle.split("\\.");
-	                         bassettTitle = title[0];
-	                 }
-				 generateImages(xmlConsumer, bassettTitle, BASSETT_PAGE_PATH.concat(bassettImage.getBassettNumber()), BASSETT_ICON_SRC_URI.concat(bassettImage.getImage()));
-				 if (--bassettMaxResult == 0)
-				 break;
-				 }
-				 XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
-			 }
 			Collection<Result> engines = metaSearchResult.getChildren();
 			String hits = null;
 			for (Result engineResult : engines) {
@@ -95,6 +75,32 @@ public class ImageSearchSAXStrategy implements
 				}
 				XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 			}
+			
+			
+			//Bassett content
+			String query = metaSearchResult.getQuery().toString();
+			List<BassettImage> bassettResult = (List<BassettImage>)result.get(ImageSearchGenerator.BASSETT_RESULT);
+			 int bassettMaxResult = ((bassettResult.size() > MAX_BASSETT_RESULT) ? MAX_BASSETT_RESULT: bassettResult.size());
+			 if (bassettResult.size() != 0) {
+				 createTitle(xmlConsumer, "bassett", "Bassett",String.valueOf(bassettMaxResult),String.valueOf(bassettResult.size()),
+				 BASSETT_SEARCH_URL.concat(query));
+				 AttributesImpl atts = new AttributesImpl();
+				 atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
+				 XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
+				 for (BassettImage bassettImage : bassettResult) {
+					 String titleAndSubtitle = bassettImage.getTitle();
+					 String bassettTitle = "";
+	                 if (titleAndSubtitle != null) {
+	                         String[] title = titleAndSubtitle.split("\\.");
+	                         bassettTitle = title[0];
+	                 }
+				 generateImages(xmlConsumer, bassettTitle, BASSETT_PAGE_PATH.concat(bassettImage.getBassettNumber()), BASSETT_ICON_SRC_URI.concat(bassettImage.getImage()));
+				 if (--bassettMaxResult == 0)
+				 break;
+				 }
+				 XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
+			 }
+			
 			XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 			xmlConsumer.endDocument();
 		} catch (SAXException e) {
@@ -136,7 +142,7 @@ public class ImageSearchSAXStrategy implements
 		atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, ID, ID, CDATA, id);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
-		XMLUtils.data(xmlConsumer, "Rights: Most images in this collection");
+		XMLUtils.data(xmlConsumer, "Copyright Information");
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 	}
