@@ -13,6 +13,11 @@ public class ClearSearchCacheController {
 
     private MetaSearchManagerSource msms;
 
+    @Autowired
+    public ClearSearchCacheController(final MetaSearchManagerSource msms) {
+        this.msms = msms;
+    }
+
     @RequestMapping(value = "/apps/search/clearcache")
     @ResponseBody
     public String clearCache(@RequestParam(required = false) final String q) {
@@ -22,13 +27,5 @@ public class ClearSearchCacheController {
             this.msms.getSearchCacheManager().clearAllCaches();
         }
         return "OK";
-    }
-
-    @Autowired
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        if (null == msms) {
-            throw new IllegalArgumentException("null metaSearchManagerSource");
-        }
-        this.msms = msms;
     }
 }
