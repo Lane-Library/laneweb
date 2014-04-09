@@ -130,7 +130,12 @@
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"
         class="edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder">
-        <constructor-arg value="/includes/hours.xml"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.hours.TodaysHours">
+                <constructor-arg value="%{laneweb.context.live-base}"/>
+                <constructor-arg value="/includes/hours.xml"/>
+            </bean>
+        </constructor-arg>
         <constructor-arg ref="org.slf4j.Logger/TodaysHoursBinder"/>
     </bean>
     
