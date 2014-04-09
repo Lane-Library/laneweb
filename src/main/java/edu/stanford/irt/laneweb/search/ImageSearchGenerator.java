@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,6 +34,8 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
     private BassettCollectionManager bassettCollection;
     
     private String timeout;
+    
+    private String selectedTab;
 	
 	public ImageSearchGenerator(final MetaSearchManager metaSearchManager, final BassettCollectionManager collectionManager, final SAXStrategy<HashMap<String, Object>> saxStrategy) {
 		super(metaSearchManager, saxStrategy);
@@ -51,7 +54,7 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
                 time = DEFAULT_TIMEOUT;
             }
         }
-        List<BassettImage> bassettResult = bassettCollection.search(query);
+        List<BassettImage> bassettResult = this.bassettCollection.search(query);
         result.put(BASSETT_RESULT, bassettResult);
         Result metaSearchResult = null;
         if (query == null || query.isEmpty()) {
@@ -60,6 +63,7 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
         	metaSearchResult = this.metasearchManager.search(new SimpleQuery(query), time, this.engines, true);
         }
         result.put(METASEARCH_RESULT, metaSearchResult);
+        result.put("selectedTab", this.selectedTab);
 		return result;
 	}
 	
@@ -70,6 +74,7 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
 	        super.setModel(model);
 	        this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
 	        this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
+	        this.selectedTab = ModelUtil.getString(model, Model.TYPE);
 	    }
 
 	    public void setParameters(final Map<String, String> parameters) {
