@@ -24,6 +24,8 @@ public class ImageSearchSAXStrategy implements
 	private static final String SPAN = "span";
 	private static final String ANCHOR = "a";
 	private static final String HREF = "href";
+	private static final String CLASS = "class";
+	private static final String H4 = "h4";
 	private static final String REL = "rel";
 	private static final String UL = "ul";
 	private static final String LI = "li";
@@ -130,12 +132,12 @@ public class ImageSearchSAXStrategy implements
 	private void createTitle(XMLConsumer xmlConsumer, String id, String title, String hits, String total, String url) throws SAXException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, ID, ID, CDATA, "searchImageTitle");
-		atts.addAttribute(XHTML_NS, "class", "class", CDATA, "plain");
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, "h4", atts);
+		atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "plain");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, H4, atts);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN);
 		XMLUtils.data(xmlConsumer, title);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-		XMLUtils.data(xmlConsumer, hits.concat(" of "));
+		XMLUtils.data(xmlConsumer, " ".concat(hits).concat(" of "));
 		atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, url);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
@@ -146,7 +148,7 @@ public class ImageSearchSAXStrategy implements
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		XMLUtils.data(xmlConsumer, "Copyright Information");
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, "h4");
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, H4);
 	}
 	
 	
