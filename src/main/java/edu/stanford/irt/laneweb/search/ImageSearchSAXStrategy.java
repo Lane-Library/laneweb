@@ -15,11 +15,11 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.Result;
 
-public class ImageSearchSAXStrategy implements SAXStrategy<HashMap<String, Object>> {
+public class ImageSearchSAXStrategy implements
+		SAXStrategy<HashMap<String, Object>> {
 
 	private static final String CDATA = "CDATA";
 	private static final String DIV = "div";
-	private static final String CLASS = "class";
 	private static final String HEIGHT = "height";
 	private static final String SPAN = "span";
 	private static final String ANCHOR = "a";
@@ -29,109 +29,74 @@ public class ImageSearchSAXStrategy implements SAXStrategy<HashMap<String, Objec
 	private static final String ID = "id";
 	private static final String SRC = "src";
 	private static final String IMAGE = "image";
-	private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
+    private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
 	private final int MAX_BASSETT_RESULT = 12;
-	private final int DEFAULT_TAB = 2;
-	
 	private static final String BASSETT_PAGE_PATH = "/biomed-resources/bassett/bassettView.html?bn=";
 	private static final String BASSETT_ICON_SRC_URI = "http://elane.stanford.edu/public/L254573/small/";
 	private static final String BASSETT_SEARCH_URL = "http://lane.stanford.edu/search.html?source=bassett&q=";
-	private static final String SEARCH_URL = "/search.html?source=images-all&q=";
 
+	
 	@SuppressWarnings("unchecked")
-	@Override
+    @Override
 	public void toSAX(HashMap<String, Object> result, XMLConsumer xmlConsumer) {
 
 		try {
-			int tab = 0;
 			xmlConsumer.startDocument();
-			AttributesImpl atts = new AttributesImpl();
-			atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "bd");
-			XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+			XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
 			Result metaSearchResult = (Result) result.get(ImageSearchGenerator.METASEARCH_RESULT);
 			String query = metaSearchResult.getQuery().toString();
-			List<BassettImage> bassettResult = (List<BassettImage>) result.get(ImageSearchGenerator.BASSETT_RESULT);
-			int selectedTab = getSelectedTab(result);
-
-			// Generate TABs
-			XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
-			atts = new AttributesImpl();
-			atts.addAttribute(XHTML_NS, ID, ID, CDATA, "tabs-2012");
-			XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
+			 List<BassettImage> bassettResult = (List<BassettImage>)result.get(ImageSearchGenerator.BASSETT_RESULT);
+			 int bassettMaxResult = ((bassettResult.size() > MAX_BASSETT_RESULT) ? MAX_BASSETT_RESULT: bassettResult.size());
+			 if (bassettResult.size() != 0) {
+				 createTitle(xmlConsumer, "bassett", "Bassett",String.valueOf(bassettMaxResult),String.valueOf(bassettResult.size()),
+				 BASSETT_SEARCH_URL.concat(query));
+				 AttributesImpl atts = new AttributesImpl();
+				 atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
+				 XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
+				 for (BassettImage bassettImage : bassettResult) {
+					 String titleAndSubtitle = bassettImage.getTitle();
+					 String bassettTitle = "";
+	                 if (titleAndSubtitle != null) {
+	                         String[] title = titleAndSubtitle.split("\\.");
+	                         bassettTitle = title[0];
+	                 }
+				 generateImages(xmlConsumer, bassettTitle, BASSETT_PAGE_PATH.concat(bassettImage.getBassettNumber()), BASSETT_ICON_SRC_URI.concat(bassettImage.getImage()));
+				 if (--bassettMaxResult == 0)
+				 break;
+				 }
+				 XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
+			 }
 			Collection<Result> engines = metaSearchResult.getChildren();
-			if (bassettResult.size() != 0) {
-				tab++;
-				createTab(xmlConsumer, "bassett", "Bassett", query,  tab, selectedTab, String.valueOf(bassettResult.size()));
-			}
+			String hits = null;
 			for (Result engineResult : engines) {
-				if (engineResult.getHits() != null && !"0".equals(engineResult.getHits())) {
-					tab++;
-					createTab(xmlConsumer, engineResult.getId(), engineResult.getDescription(), query, tab, selectedTab, engineResult.getHits());
-				}
-			}
-			XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
-			XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-
-			int bassettMaxResult = ((bassettResult.size() > MAX_BASSETT_RESULT) ? MAX_BASSETT_RESULT : bassettResult.size());
-			tab = 0;
-			if (bassettResult.size() != 0 && selectedTab == ++tab ) {
 				XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
-				createTitle(xmlConsumer, "bassett", "Bassett", String.valueOf(bassettMaxResult), String.valueOf(bassettResult.size()),BASSETT_SEARCH_URL.concat(query));
-				atts = new AttributesImpl();
-				atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
-				XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
-				for (BassettImage bassettImage : bassettResult) {
-					String titleAndSubtitle = bassettImage.getTitle();
-					String bassettTitle = "";
-					if (titleAndSubtitle != null) {
-						String[] title = titleAndSubtitle.split("\\.");
-						bassettTitle = title[0];
+				Collection<Result> resources = engineResult.getChildren();
+				hits = engineResult.getHits();
+				String url = null;
+				for (Result resource : resources) {
+					if(resource.getId().indexOf("_content") == -1){
+						url = resource.getURL();
 					}
-					generateImages(xmlConsumer, bassettTitle, BASSETT_PAGE_PATH.concat(bassettImage.getBassettNumber()),
-							BASSETT_ICON_SRC_URI.concat(bassettImage.getImage()));
-					if (--bassettMaxResult == 0)
-						break;
-				}
-				XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
-				XMLUtils.endElement(xmlConsumer, DIV, DIV);
-			}
-
-			
-			for (Result engineResult : engines) {
-				if (selectedTab == ++tab) {
-					XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
-					Collection<Result> resources = engineResult.getChildren();
-					String url = null;
-					String hits = engineResult.getHits();
-					for (Result resource : resources) {
-						if(resource.getId().indexOf("_content") == -1){
-							url = resource.getURL();
-						}
-						if (resource.getHits() != null && !"0".equals(resource.getHits()) && resource.getId().endsWith("_content")) {
-							
-							createTitle(xmlConsumer,resource.getId(), engineResult.getDescription(), resource.getHits(), hits, url);
-							atts = new AttributesImpl();
-							atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
-							XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
-							Collection<Result> contents = resource.getChildren();
-							for (Result content : contents) {
-								if (content.getId().contains("_content_")) {
-									ContentResult contentResult = (ContentResult) content;
-									generateImages(xmlConsumer, contentResult.getTitle(), contentResult.getURL(),
-											contentResult.getDescription());
-								}
-							}
-							XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
+					if (resource.getHits() != null && !"0".equals(resource.getHits()) && resource.getId().endsWith("_content")) {
+						createTitle(xmlConsumer,resource.getId(), engineResult.getDescription(), resource.getHits(), hits, url);
+					}
+					AttributesImpl atts = new AttributesImpl();
+					atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
+					XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
+					Collection<Result> contents = resource.getChildren();
+					for (Result content : contents) {
+						if (content.getId().contains("_content_")) {
+							ContentResult contentResult = (ContentResult) content;
+							generateImages(xmlConsumer, contentResult.getTitle(), contentResult.getURL(), contentResult.getDescription());
 						}
 					}
-					XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+					XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
 				}
+				XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 			}
-			
 			XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 			xmlConsumer.endDocument();
-
 		} catch (SAXException e) {
 			throw new LanewebException(e);
 		}
@@ -155,20 +120,6 @@ public class ImageSearchSAXStrategy implements SAXStrategy<HashMap<String, Objec
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
 	}
 
-	private void createTab(XMLConsumer xmlConsumer, String id, String title, String query, int tab, int activeTab, String totalResult) throws SAXException {
-		AttributesImpl atts = new AttributesImpl();
-		if (tab == activeTab ) {
-			atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "active");
-		}
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
-		atts = new AttributesImpl();
-		atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, SEARCH_URL.concat(query).concat("&debug=true&t=").concat(String.valueOf(tab)));
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-		XMLUtils.data(xmlConsumer, title.concat(" (").concat(totalResult).concat(")"));
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
-	}
-
 	private void createTitle(XMLConsumer xmlConsumer, String id, String title, String hits, String total, String url) throws SAXException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, ID, ID, CDATA, "searchImageTitle");
@@ -189,13 +140,7 @@ public class ImageSearchSAXStrategy implements SAXStrategy<HashMap<String, Objec
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 	}
-
-	private int getSelectedTab(HashMap<String, Object> result) {
-		String selectedTab = (String)result.get("selectedTab");
-		if(selectedTab != null)
-			return Integer.valueOf(selectedTab);
-		return DEFAULT_TAB;
-		
-	}
+	
+	
 
 }
