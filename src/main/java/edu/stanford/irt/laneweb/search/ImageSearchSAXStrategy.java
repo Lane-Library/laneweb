@@ -134,9 +134,11 @@ public class ImageSearchSAXStrategy implements
 		atts.addAttribute(XHTML_NS, ID, ID, CDATA, "searchImageTitle");
 		atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "plain");
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, H4, atts);
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN);
 		XMLUtils.data(xmlConsumer, title);
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, H4);
+		atts = new AttributesImpl();
+		atts.addAttribute(XHTML_NS, ID, ID, CDATA, "copyright");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
 		XMLUtils.data(xmlConsumer, " ".concat(hits).concat(" of "));
 		atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, url);
@@ -148,7 +150,8 @@ public class ImageSearchSAXStrategy implements
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		XMLUtils.data(xmlConsumer, "Copyright Information");
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, H4);
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+		
 	}
 	
 	

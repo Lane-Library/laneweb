@@ -1,3 +1,4 @@
+
 #imageList {
 	/*requred for IE < 8:*/
 	*height: 404px;
@@ -37,10 +38,16 @@
 
 #searchImageTitle {
 	margin-top: 40px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 
-#searchImageTitle a[rel]{
-	margin-left: 50px;
-	font-size: small;
+#copyright{
+	margin-bottom: 40px;
 }
+
+#copyright a[rel]{
+	margin-left: 50px;	
+}
+
+
+copyright
