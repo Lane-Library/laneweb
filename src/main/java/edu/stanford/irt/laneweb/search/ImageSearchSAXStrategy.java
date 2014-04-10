@@ -24,6 +24,9 @@ public class ImageSearchSAXStrategy implements
 	private static final String SPAN = "span";
 	private static final String ANCHOR = "a";
 	private static final String HREF = "href";
+	private static final String CLASS = "class";
+	private static final String H4 = "h4";
+	private static final String REL = "rel";
 	private static final String UL = "ul";
 	private static final String LI = "li";
 	private static final String ID = "id";
@@ -37,36 +40,16 @@ public class ImageSearchSAXStrategy implements
 	private static final String BASSETT_SEARCH_URL = "http://lane.stanford.edu/search.html?source=bassett&q=";
 
 	
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	public void toSAX(HashMap<String, Object> result, XMLConsumer xmlConsumer) {
 
 		try {
 			xmlConsumer.startDocument();
 			XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
+			
+			//Metasearch content
 			Result metaSearchResult = (Result) result.get(ImageSearchGenerator.METASEARCH_RESULT);
-			String query = metaSearchResult.getQuery().toString();
-			 List<BassettImage> bassettResult = (List<BassettImage>)result.get(ImageSearchGenerator.BASSETT_RESULT);
-			 int bassettMaxResult = ((bassettResult.size() > MAX_BASSETT_RESULT) ? MAX_BASSETT_RESULT: bassettResult.size());
-			 if (bassettResult.size() != 0) {
-				 createTitle(xmlConsumer, "bassett", "Bassett",String.valueOf(bassettMaxResult),String.valueOf(bassettResult.size()),
-				 BASSETT_SEARCH_URL.concat(query));
-				 AttributesImpl atts = new AttributesImpl();
-				 atts = new AttributesImpl();
-				 atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
-				 XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
-				 for (BassettImage bassettImage : bassettResult) {
-					 String titleAndSubtitle = bassettImage.getTitle();
-					 String bassettTitle = "";
-	                 if (titleAndSubtitle != null) {
-	                         String[] title = titleAndSubtitle.split("\\.");
-	                         bassettTitle = title[0];
-	                 }
-				 generateImages(xmlConsumer, bassettTitle, BASSETT_PAGE_PATH.concat(bassettImage.getBassettNumber()), BASSETT_ICON_SRC_URI.concat(bassettImage.getImage()));
-				 if (--bassettMaxResult == 0)
-				 break;
-				 }
-				 XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
-			 }
 			Collection<Result> engines = metaSearchResult.getChildren();
 			String hits = null;
 			for (Result engineResult : engines) {
@@ -78,7 +61,7 @@ public class ImageSearchSAXStrategy implements
 					if(resource.getId().indexOf("_content") == -1){
 						url = resource.getURL();
 					}
-					if (!"0".equals(resource.getHits()) && resource.getId().endsWith("_content")) {
+					if (resource.getHits() != null && !"0".equals(resource.getHits()) && resource.getId().endsWith("_content")) {
 						createTitle(xmlConsumer,resource.getId(), engineResult.getDescription(), resource.getHits(), hits, url);
 					}
 					AttributesImpl atts = new AttributesImpl();
@@ -95,6 +78,32 @@ public class ImageSearchSAXStrategy implements
 				}
 				XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 			}
+			
+			
+			//Bassett content
+			String query = metaSearchResult.getQuery().toString();
+			List<BassettImage> bassettResult = (List<BassettImage>)result.get(ImageSearchGenerator.BASSETT_RESULT);
+			 int bassettMaxResult = ((bassettResult.size() > MAX_BASSETT_RESULT) ? MAX_BASSETT_RESULT: bassettResult.size());
+			 if (bassettResult.size() != 0) {
+				 createTitle(xmlConsumer, "bassett", "Bassett",String.valueOf(bassettMaxResult),String.valueOf(bassettResult.size()),
+				 BASSETT_SEARCH_URL.concat(query));
+				 AttributesImpl atts = new AttributesImpl();
+				 atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageList");
+				 XMLUtils.startElement(xmlConsumer, XHTML_NS, UL, atts);
+				 for (BassettImage bassettImage : bassettResult) {
+					 String titleAndSubtitle = bassettImage.getTitle();
+					 String bassettTitle = "";
+	                 if (titleAndSubtitle != null) {
+	                         String[] title = titleAndSubtitle.split("\\.");
+	                         bassettTitle = title[0];
+	                 }
+				 generateImages(xmlConsumer, bassettTitle, BASSETT_PAGE_PATH.concat(bassettImage.getBassettNumber()), BASSETT_ICON_SRC_URI.concat(bassettImage.getImage()));
+				 if (--bassettMaxResult == 0)
+				 break;
+				 }
+				 XMLUtils.endElement(xmlConsumer, XHTML_NS, UL);
+			 }
+			
 			XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 			xmlConsumer.endDocument();
 		} catch (SAXException e) {
@@ -123,22 +132,23 @@ public class ImageSearchSAXStrategy implements
 	private void createTitle(XMLConsumer xmlConsumer, String id, String title, String hits, String total, String url) throws SAXException {
 		AttributesImpl atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, ID, ID, CDATA, "searchImageTitle");
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+		atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "plain");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, H4, atts);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN);
-		XMLUtils.data(xmlConsumer, title.concat(" "));
+		XMLUtils.data(xmlConsumer, title);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-		XMLUtils.data(xmlConsumer, hits.concat(" of "));
+		XMLUtils.data(xmlConsumer, " ".concat(hits).concat(" of "));
 		atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, url);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		XMLUtils.data(xmlConsumer, total.concat(" images found"));
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
 		atts = new AttributesImpl();
-		atts.addAttribute(XHTML_NS, ID, ID, CDATA, id);
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
-		XMLUtils.data(xmlConsumer, "Rights: Most images in this collection");
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+		atts.addAttribute(XHTML_NS, REL, REL, CDATA, "popup local ".concat(id));
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
+		XMLUtils.data(xmlConsumer, "Copyright Information");
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, H4);
 	}
 	
 	
