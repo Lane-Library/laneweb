@@ -165,7 +165,7 @@ public class EMailControllerTest {
     }
 
     @Test
-    public void testRedirectToReferer() {
+    public void testRedirectToReferrer() {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("subject")).andReturn("subject");
         expect(this.map.get("name")).andReturn("name");
@@ -173,9 +173,9 @@ public class EMailControllerTest {
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
         this.sender.sendEmail(this.map);
         expect(this.map.get("redirect")).andReturn(null);
-        expect(this.map.get("referrer")).andReturn("referer");
+        expect(this.map.get("referrer")).andReturn("referrer");
         replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
-        assertEquals("redirect:referer", this.controller.formSubmitAskUs(this.model, this.atts));
+        assertEquals("redirect:referrer", this.controller.formSubmitAskUs(this.model, this.atts));
         verify(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
     }
 }
