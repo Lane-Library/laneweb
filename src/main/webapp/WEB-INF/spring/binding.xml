@@ -82,7 +82,7 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"
         class="edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder">
-        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"
