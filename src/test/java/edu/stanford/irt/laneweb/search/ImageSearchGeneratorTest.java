@@ -21,9 +21,9 @@ import org.junit.Test;
 import edu.stanford.irt.laneweb.bassett.BassettCollectionManager;
 import edu.stanford.irt.laneweb.bassett.BassettImage;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class ImageSearchGeneratorTest {
 
@@ -40,7 +40,6 @@ public class ImageSearchGeneratorTest {
     private List<BassettImage> bassettResult =new ArrayList<BassettImage>();
     
 	
-	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() throws Exception {
 	   	this.metasearchManager = createMock(MetaSearchManager.class);
@@ -52,11 +51,10 @@ public class ImageSearchGeneratorTest {
     }
 	
 	
-	@SuppressWarnings("unchecked")
 	@Test
     public void testDoSearch() {
 		expect(this.bassettManager.search("query")).andReturn((List<BassettImage>) this.bassettResult);
-        expect(this.metasearchManager.search(isA(Query.class), eq(20000L), eq(Collections.singleton("engine-2")), eq(true))).andReturn(this.result);
+        expect(this.metasearchManager.search(isA(Query.class), eq(20000L), eq(true))).andReturn(this.result);
         replay(this.bassettManager, this.metasearchManager, this.saxStrategy, this.result);
         Map<String, Object> model = new HashMap<String, Object>();
         model.put(Model.QUERY, "query");
