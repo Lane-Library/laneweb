@@ -17,37 +17,37 @@
 #imageList li {
 	float: left;
 	list-style: none inside none;
-	margin: 20px 15px 0px 15px;
+	margin: 1px 1px 1px 1px;
 	display: block;
-	height: 195px;
+	background-color: #F7F6F2;
+	height: 230px;
+	width: 230px;
+	text-align: -webkit-center;
+	color: black;
 }
+
+#imageList li:hover {
+	background-color: #F7F5EB;
+}
+
 
 #imageList img{
 	max-width: 200px;
 	max-height: 120px;
 	}
 
-
 #imageList a {
+	display: block;
 	border-bottom: none;
+	
 }
 
-
-
 #imageList div:last-child {
-	width: 190px;
+	width: 200px;
 	height: 50px;
 	margin-top:10px;
 	margin-bottom: 20px;
-}
-
-#imageList a:hover {
-	background-color: #e6e4dc
-}
-
-#searchImageTitle {
-	margin-top: 40px;
-	margin-bottom: 10px;
+	
 }
 
 #image{
@@ -55,16 +55,21 @@
 	height: 125px;
 	display: table-cell;
 	vertical-align: middle;
+	float: initial;
+	padding-top: 30px;
 }
 
-
+#searchImageTitle {
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
 
 #copyright{
 	margin-bottom: 15px;
 	font-size: inherit;
 }
 
-#copyright a:last-child{
-	margin-left: 50px;	
+#copyright a{
+	margin-right: 50px;	
 }
 
