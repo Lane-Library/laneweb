@@ -17,18 +17,27 @@
 #imageList li {
 	float: left;
 	list-style: none inside none;
-	margin: 0px 30px 0px 5px;
+	margin: 20px 15px 0px 15px;
+	display: block;
+	height: 195px;
 }
+
+#imageList img{
+	max-width: 200px;
+	max-height: 120px;
+	}
 
 
 #imageList a {
-	display: block;
 	border-bottom: none;
 }
 
-#imageList div {
+
+
+#imageList div:last-child {
 	width: 190px;
 	height: 50px;
+	margin-top:10px;
 	margin-bottom: 20px;
 }
 
@@ -41,13 +50,21 @@
 	margin-bottom: 10px;
 }
 
-#copyright{
-	margin-bottom: 40px;
+#image{
+	width: 200px;
+	height: 125px;
+	display: table-cell;
+	vertical-align: middle;
 }
 
-#copyright a[rel]{
+
+
+#copyright{
+	margin-bottom: 15px;
+	font-size: inherit;
+}
+
+#copyright a:last-child{
 	margin-left: 50px;	
 }
 
-
-copyright

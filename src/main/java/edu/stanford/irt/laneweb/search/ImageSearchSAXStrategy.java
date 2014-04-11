@@ -114,15 +114,19 @@ public class ImageSearchSAXStrategy implements
 
 	private void generateImages(XMLConsumer xmlConsumer, String title, String url, String src) throws SAXException {
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
+		
 		AttributesImpl atts = new AttributesImpl();
+		atts.addAttribute(XHTML_NS, ID, ID, CDATA, "image");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+		 atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, url);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		atts = new AttributesImpl();
 		atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, src);
-		atts.addAttribute(XHTML_NS, HEIGHT, HEIGHT, CDATA, "120px");
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
+		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV);
 		XMLUtils.data(xmlConsumer, title);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
@@ -145,9 +149,7 @@ public class ImageSearchSAXStrategy implements
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		XMLUtils.data(xmlConsumer, total.concat(" images found"));
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
-		atts = new AttributesImpl();
-		atts.addAttribute(XHTML_NS, REL, REL, CDATA, "popup local ".concat(id));
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR);
 		XMLUtils.data(xmlConsumer, "Copyright Information");
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
