@@ -19,7 +19,7 @@
 	list-style: none inside none;
 	margin: 1px 1px 1px 1px;
 	display: block;
-	background-color: #F7F6F2;
+	background-color: #f0f4f5;
 	height: 230px;
 	width: 230px;
 	text-align: -webkit-center;
@@ -27,7 +27,7 @@
 }
 
 #imageList li:hover {
-	background-color: #F7F5EB;
+	background-color: #d0d8da;
 }
 
 
