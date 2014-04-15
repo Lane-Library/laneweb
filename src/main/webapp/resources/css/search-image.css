@@ -1,4 +1,6 @@
 
+
+
 #imageList:after {
 	content: ".";
 	display: block;
@@ -55,3 +57,16 @@
 	margin-right: 50px;	
 }
 
+#copyrightSection{
+	color : #504596;
+	float: right;
+	width: 500px;
+	text-align:  justify;
+	position: absolute;
+	left:435px;
+	top:220px;
+	box-shadow: 5px 7px 5px #888888;
+	padding : 10px;
+	border:1px solid #888888;
+
+}
