@@ -87,22 +87,15 @@ public class ProxyHostManager {
     public ProxyHostManager(final DataSource dataSource, final Logger log) {
         this.dataSource = dataSource;
         this.log = log;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
-                "ezproxy-servers.txt"), Charset.forName("UTF-8")));
         this.proxyHosts = new HashSet<String>();
         String proxyHost = null;
-        try {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "ezproxy-servers.txt"), Charset.forName("UTF-8")))) {
             while ((proxyHost = reader.readLine()) != null) {
                 this.proxyHosts.add(proxyHost);
             }
         } catch (IOException e) {
             throw new LanewebException(e);
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                throw new LanewebException(e);
-            }
         }
     }
 
