@@ -1,10 +1,4 @@
 
-#imageList {
-	/*requred for IE < 8:*/
-	*height: 404px;
-	text-align: center;
-}
-
 #imageList:after {
 	content: ".";
 	display: block;
@@ -18,7 +12,6 @@
 	float: left;
 	list-style: none inside none;
 	margin: 1px 1px 1px 1px;
-	display: block;
 	background-color: #f0f4f5;
 	height: 230px;
 	width: 235px;
@@ -36,25 +29,16 @@
 	max-height: 120px;
 	}
 
-#imageList a {
-	display: block;
-	border-bottom: none;
-	
-}
-
-#imageList div:last-child {
-	width: 200px;
-	height: 50px;
-	margin:10px;
-}
-
 #image{
-	width: 235px;
+	width: 100%;
 	height: 125px;
 	display: table-cell;
 	vertical-align: middle;
-	float: initial;
 	padding-top: 30px;
+}
+
+#imageList div:last-child {
+	margin:15px;
 }
 
 #searchImageTitle {
