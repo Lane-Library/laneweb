@@ -57,18 +57,11 @@ public class QueryHighlightingTransformer extends AbstractXMLPipe implements Tra
         if ("title".equals(localName) || "description".equals(localName)) {
             this.parseLevel--;
             this.inTargetElement = false;
-        }
-        // end of child element of title or description
-        else if (this.inTargetElement) {
+        } else if (this.inTargetElement) {
+            // end of child element of title or description
             ++this.parseLevel;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
-    }
-
-    @Override
-    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
-        this.xmlConsumer = xmlConsumer;
-        super.setXMLConsumer(xmlConsumer);
     }
 
     public void setModel(final Map<String, Object> model) {
@@ -79,15 +72,20 @@ public class QueryHighlightingTransformer extends AbstractXMLPipe implements Tra
     }
 
     @Override
+    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
+        super.setXMLConsumer(xmlConsumer);
+    }
+
+    @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
         if (this.queryPattern != null) {
             if ("title".equals(localName) || "description".equals(localName)) {
                 ++this.parseLevel;
                 this.inTargetElement = true;
-            }
-            // don't process child elements of title or description
-            else if (this.inTargetElement) {
+            } else if (this.inTargetElement) {
+                // don't process child elements of title or description
                 handleMatches();
                 this.parseLevel--;
             }

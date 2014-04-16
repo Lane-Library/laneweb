@@ -1,6 +1,9 @@
 package edu.stanford.irt.laneweb.ldap;
 
+import java.util.Set;
+
 import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 
@@ -8,8 +11,14 @@ import org.springframework.ldap.core.AttributesMapper;
 
 public class LDAPAttributesMapper implements AttributesMapper {
 
+    private Set<String> activeAffiliations;
+
+    public LDAPAttributesMapper(final Set<String> activeAffiliations) {
+        this.activeAffiliations = activeAffiliations;
+    }
+
     @Override
-    public Object mapFromAttributes(final Attributes attributes) throws javax.naming.NamingException {
+    public Object mapFromAttributes(final Attributes attributes) throws NamingException {
         String name = null;
         String sunetid = null;
         String univId = null;
@@ -31,7 +40,7 @@ public class LDAPAttributesMapper implements AttributesMapper {
         if (currentAttribute != null) {
             NamingEnumeration<?> attrs = currentAttribute.getAll();
             while (!isActive && attrs.hasMore()) {
-                isActive = Affiliation.getAffiliation((String) attrs.next()).isActive();
+                isActive = this.activeAffiliations.contains(attrs.next());
             }
         }
         currentAttribute = attributes.get("mail");

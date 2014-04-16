@@ -53,9 +53,8 @@ public class DescriptionLabelTransformer extends AbstractXMLPipe implements Tran
         if ("description".equals(localName)) {
             this.parseLevel--;
             this.inDescriptionElement = false;
-        }
-        // end of child element of description
-        else if (this.inDescriptionElement) {
+        } else if (this.inDescriptionElement) {
+            // end of child element of description
             ++this.parseLevel;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
@@ -73,9 +72,8 @@ public class DescriptionLabelTransformer extends AbstractXMLPipe implements Tran
         if ("description".equals(localName)) {
             ++this.parseLevel;
             this.inDescriptionElement = true;
-        }
-        // don't process child elements of description
-        else if (this.inDescriptionElement) {
+        } else if (this.inDescriptionElement) {
+            // don't process child elements of description
             handleMatches();
             this.parseLevel--;
         }

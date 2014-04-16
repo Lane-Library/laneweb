@@ -7,8 +7,16 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-04-07" version="2.1.52" description="2.1.52 bug fix release">
+            <action date="2014-04-01" dev="ceyates" issue="96960" type="add">
+                return a 403 error for requests containing a show parameter
+            </action>
+            <action date="2014-04-01" dev="ceyates" issue="96959" type="update">
+                don't create 404 page for short extension-suggest requests
+            </action>
+        </release>
         <release date="2014-03-31" version="2.1.51" description="2.1.51 bug fix release">
-            <action date="2014-03-" dev="ryanmax" issue="96798" type="add">
+            <action date="2014-03-20" dev="ryanmax" issue="96798" type="add">
                 Google Analytics - Tracking search "selection" for mobile site
             </action>
             <action date="2014-03-19" dev="ceyates" issue="96771" type="update">

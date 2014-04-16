@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.codec;
 
 import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertEquals;
@@ -9,6 +9,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
+
+import edu.stanford.irt.laneweb.codec.SHCCodec;
 
 /**
  * @author ryanmax
@@ -34,7 +36,7 @@ public class SHCCodecTest {
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.servlet.SHCCodec#decrypt(java.lang.String)} .
+     * Test method for {@link edu.stanford.irt.laneweb.codec.SHCCodec#decrypt(java.lang.String)} .
      */
     @Test
     public final void testDecrypt() {
@@ -42,7 +44,7 @@ public class SHCCodecTest {
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.servlet.SHCCodec#encrypt(java.lang.String)} .
+     * Test method for {@link edu.stanford.irt.laneweb.codec.SHCCodec#encrypt(java.lang.String)} .
      */
     @Test
     public final void testEncrypt() {

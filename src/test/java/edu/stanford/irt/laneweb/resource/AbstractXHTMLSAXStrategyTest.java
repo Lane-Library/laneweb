@@ -14,7 +14,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
 
 public class AbstractXHTMLSAXStrategyTest {
 
