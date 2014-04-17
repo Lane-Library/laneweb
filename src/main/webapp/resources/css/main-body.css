@@ -9,15 +9,3 @@ html{
     position:relative;
     margin-top:50px
 }
-
-/* putting the following rules here temporarily for convenience */
-#somHeader{
-    position:absolute;
-    top:0;
-    width:100%;
-    height:50px;
-    background-color:rgb(236,241,242) 
-}
-#somHeader span {
-    float:right
-}
