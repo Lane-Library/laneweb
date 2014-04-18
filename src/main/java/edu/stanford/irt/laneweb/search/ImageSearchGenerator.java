@@ -23,6 +23,8 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
 
 	public static  final String BASSETT_RESULT = "bassett";
 	public static  final String METASEARCH_RESULT = "metasearch";
+	public static  final String SEARCH_TERM = "search-term";
+	
 	
 	private static final long DEFAULT_TIMEOUT = 20000;
 
@@ -31,6 +33,8 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
     private MetaSearchManager metasearchManager;
 
     private BassettCollectionManager bassettCollection;
+    
+    private String urlEncodedSearchTerm;
     
     private String timeout;
 	
@@ -60,6 +64,7 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
         	metaSearchResult = this.metasearchManager.search(new SimpleQuery(query), time, this.engines, true);
         }
         result.put(METASEARCH_RESULT, metaSearchResult);
+        result.put(SEARCH_TERM, this.urlEncodedSearchTerm);
 		return result;
 	}
 	
@@ -70,6 +75,7 @@ public class ImageSearchGenerator  extends AbstractMetasearchGenerator<HashMap<S
 	        super.setModel(model);
 	        this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
 	        this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
+	        this.urlEncodedSearchTerm = ModelUtil.getString(model, Model.URL_ENCODED_QUERY);
 	    }
 
 	    public void setParameters(final Map<String, String> parameters) {

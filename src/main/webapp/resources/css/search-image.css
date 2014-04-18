@@ -7,6 +7,8 @@
 	visibility: hidden;
 }
 
+
+
 #imageList li {
 	float: left;
 	list-style: none inside none;
@@ -41,7 +43,7 @@
 }
 
 #searchImageTitle {
-	margin-top: 40px;
+	padding-top: 30px;
 	margin-bottom: 10px;
 }
 
@@ -57,12 +59,13 @@
 #copyrightSection{
 	width: 500px;
 	position: absolute;
-	left:460px;
-	top:235px;
+	left:477px;
+	top:245px;
 	display:inline-flex;
 	}
 
-	
+
+
 #copyrightSection div:first-child{
 	color : #009abb;
 	margin-top: 8px;
