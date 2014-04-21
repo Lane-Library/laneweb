@@ -45,7 +45,16 @@
         class="edu.stanford.irt.laneweb.search.ResultSAXStrategy"/>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image"
-        class="edu.stanford.irt.laneweb.search.ImageSearchSAXStrategy"/>
+        class="edu.stanford.irt.laneweb.search.ImageSearchSAXStrategy">
+        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image-bassett"/>
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image-metasearch"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image-bassett"
+        class="edu.stanford.irt.laneweb.search.ImageBassettSearchSAXStrategy"/>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image-metasearch"
+        class="edu.stanford.irt.laneweb.search.ImageMetasearchSAXStrategy"/>
     
     <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"
         class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>

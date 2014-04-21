@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
@@ -50,7 +51,7 @@ public class SuggestionController {
     @ResponseBody
     public List<String> getSuggestionList(@RequestParam final String q, @RequestParam(required = false) final String l) {
         String query = q.trim();
-        TreeSet<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(query));
+        Set<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(query));
         suggestions.addAll(internalGetSuggestions(query, l));
         List<String> strings = new LinkedList<String>();
         for (Suggestion suggestion : suggestions) {
