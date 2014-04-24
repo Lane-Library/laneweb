@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 
 import org.junit.Before;
