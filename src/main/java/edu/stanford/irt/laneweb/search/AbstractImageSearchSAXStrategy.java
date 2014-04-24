@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.util.HashMap;
-
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
