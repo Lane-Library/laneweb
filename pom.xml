@@ -190,6 +190,7 @@
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
                                 <include>search-select-min.css</include>
+                                <include>search-image-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
