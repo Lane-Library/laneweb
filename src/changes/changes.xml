@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-04-28" version="2.1.54" description="2.1.54 bug fix release">
+            <action date="2014-04-28" dev="ceyates" issue="97227" type="update">
+                upgrade to search-2.0
+            </action>
+        </release>
         <release date="2014-04-14" version="2.1.53" description="2.1.53 bug fix release">
         </release>
         <release date="2014-04-07" version="2.1.52" description="2.1.52 bug fix release">
