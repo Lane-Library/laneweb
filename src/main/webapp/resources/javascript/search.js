@@ -124,7 +124,7 @@
          * @param event {CustomEvent} the selectedChange event from the Select object.
          */
         _selectedChange : function(event) {
-            this.fire("sourceChange", {newVal:event.newVal});
+            this.fire("sourceChange", {newVal:event.newVal, prevVal:event.prevVal});
         },
 
         /**

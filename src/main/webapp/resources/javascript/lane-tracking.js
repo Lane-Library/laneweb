@@ -380,6 +380,13 @@
                 action: location.get("pathname")
             });
         });
+        Lane.on("search:sourceChange", function(event) {
+            Tracker.fire("trackableEvent", {
+                category: "lane:searchDropdownSelection",
+                action: event.newVal,
+                label: "from " + event.prevVal + " to " + event.newVal
+            });
+        });
 
         Y.augment(Tracker, Y.EventTarget, null, null, {
             prefix : "tracker",

@@ -10,10 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
-import edu.stanford.irt.search.impl.DefaultContentResult;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 @Controller
@@ -28,18 +27,18 @@ public class ImagesSearchController {
 		 Result searchResult = null;
 		 String engines = "elasticsearch-endoatlas,wellcomeimages,philcdc_photos";
 	        if (q == null || q.isEmpty()) {
-	        	searchResult = new DefaultResult("");
+	        	searchResult = new Result("");
 	        } else {
-	        	searchResult = this.metasearchManager.search(new SimpleQuery(q), 30000L, Arrays.asList(engines.split(",")) , true);
+	        	searchResult = this.metasearchManager.search(new SimpleQuery(q, Arrays.asList(engines.split(","))), 30000L , true);
 	        }
-		 List<DefaultContentResult> result = new LinkedList<>();
+		 List<ContentResult> result = new LinkedList<>();
 		 Collection<Result> enginesResult = searchResult.getChildren();
 		 for (Result engine : enginesResult) {
 			Collection<Result> resources = engine.getChildren();
 			for (Result resourceResult : resources) {
 				if(resourceResult.getId() != null && resourceResult.getId().contains("_content")){
 					for (Result content : resourceResult.getChildren()) {
-						result.add((DefaultContentResult) content);
+						result.add((ContentResult) content);
 					}
 				}
 			}

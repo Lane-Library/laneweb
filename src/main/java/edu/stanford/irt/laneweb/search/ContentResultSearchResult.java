@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.search;
-
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 /**
  * @author ryanmax

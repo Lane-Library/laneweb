@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import org.springframework.beans.factory.FactoryBean;
 
-import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.impl.MetaSearchManager;
 
 public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManager> {
 

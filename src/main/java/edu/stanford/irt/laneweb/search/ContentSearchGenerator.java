@@ -11,9 +11,8 @@ import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
@@ -77,9 +76,9 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         }
         Result result = null;
         if (query == null || query.isEmpty()) {
-            result = new DefaultResult("");
+            result = new Result("");
         } else {
-            result = this.metasearchManager.search(new SimpleQuery(query), time, this.engines, true);
+            result = this.metasearchManager.search(new SimpleQuery(query, this.engines), time, true);
         }
         return result;
     }

@@ -22,16 +22,12 @@
             return this._titles[this._index];
         },
         setSelected : function(index) {
-        	var newIndex = typeof index === "string" ? Y.Array.indexOf(this._values, index) : index;
-        	if (newIndex !== this._index) {
-        		Y.lane.fire("tracker:trackableEvent", {
-                    category: "lane:searchDropdownSelection",
-                    action: this._values[newIndex],
-                    label: "from "+ this.getSelected()+ " to " + this._values[newIndex] 
-                });
+            var newIndex = typeof index === "string" ? Y.Array.indexOf(this._values, index) : index;
+            if (newIndex !== this._index) {
                 this.fire("selectedChange", {
                     newIndex : newIndex,
-                    newVal : this._values[newIndex]
+                    newVal : this._values[newIndex],
+                    prevVal : this._values[this._index]
                 });
             }
         }

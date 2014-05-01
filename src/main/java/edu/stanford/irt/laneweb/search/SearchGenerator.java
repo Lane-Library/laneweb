@@ -7,10 +7,9 @@ import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class SearchGenerator extends AbstractMetasearchGenerator<Result> implements ParametersAware {
@@ -52,7 +51,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
     protected Result searchWithEngines(final String query, final Collection<String> engines) {
         Result result = null;
         if (query == null || query.isEmpty()) {
-            result = new DefaultResult("null");
+            result = new Result("null");
             result.setStatus(SearchStatus.FAILED);
         } else {
             long searchTimeout = DEFAULT_TIMEOUT;
@@ -64,8 +63,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
                 }
             }
             boolean sync = Boolean.parseBoolean(this.synchronous);
-            final SimpleQuery q = new SimpleQuery(query);
-            result = search(q, searchTimeout, engines, sync);
+            final SimpleQuery q = new SimpleQuery(query, engines);
+            result = search(q, searchTimeout, sync);
             if (null != this.wait) {
                 long wt = 0;
                 try {
