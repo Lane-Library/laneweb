@@ -16,12 +16,13 @@
 	background-color: #f0f4f5;
 	height: 230px;
 	width: 235px;
-	text-align: -webkit-center;
+	
 	color: black;
 }
 
 #imageList li:hover {
 	background-color: #d0d8da;
+	text-align: -webkit-center;
 }
 
 
@@ -33,9 +34,9 @@
 #image{
 	width: 100%;
 	height: 125px;
-	display: table-cell;
 	vertical-align: middle;
 	padding-top: 30px;
+	text-align: center;
 }
 
 #imageList div:last-child {
@@ -57,18 +58,17 @@
 }
 
 #copyrightSection{
-	width: 500px;
+	width: 470px;
 	position: absolute;
-	left:477px;
+	left:490px;
 	top:245px;
-	display:inline-flex;
+	
 	}
-
-
 
 #copyrightSection div:first-child{
 	color : #009abb;
 	margin-top: 8px;
+	float:left;
 	}
 
 #copyrightSection div:last-child{
