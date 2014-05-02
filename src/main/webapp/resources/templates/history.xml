@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Medical History Center</title>
         <link rel="stylesheet" type="text/css"
             href="http://yui.yahooapis.com/3.16.0/build/cssreset/cssreset-min.css" />
+        <link rel="stylesheet" type="text/css"
+            href="http://yui.yahooapis.com/3.16.0/build/cssgrids/cssgrids-min.css" />
         <style type="text/css">
             body{
                 background-color:rgb(236, 241, 242);
                 font-family:sans-serif;
             }
-            .content{
+            .centered{
                 width:950px;
                 margin:auto
             }
@@ -17,12 +20,12 @@
                 margin-top:32px;
                 height:92px;
                 background-color:white;
-                box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+                box-shadow:0 0 6px 0 rgba(0, 0, 0, 0.5);
             }
             h1{
                 font-size:20px;
                 font-weight:400;
-                padding: 52px 0 0 190px;
+                padding:52px 0 0 190px;
             }
             h1 a{
                 color:#333333;
@@ -59,24 +62,38 @@
                 float:left;
                 width:25%;
                 list-style-type:none
+            }
+            .menu{
+                border-top:12px solid #8C1515
+            }
+            .menu a{
+                color:white;
+                background-color:#333333;
+                text-decoration:none;
+                font-weight:300;
+                display:block;
+                padding:9px 20px 9px 13px;
+                background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+            }
+            .menu a:hover{
+                background-color:#555555;
             }</style>
     </head>
     <body>
         <div id="header">
-            <div class="content">
+            <div class="centered">
                 <h1><a href="/med-history/index.html">Medical History Center</a></h1>
             </div>
         </div>
-        <div class="content">
+        <div class="centered">
             <?laneweb content?>
         </div>
-        <div id="sm-header">
-        </div>
-        <div class="content">
+        <div id="sm-header"> </div>
+        <div class="centered">
             <a id="sm" href="http://med.stanford.edu/">Stanford Medicine</a>
         </div>
         <div id="sm-footer">
-            <ul class="content">
+            <ul class="centered">
                 <li>Stanford School of Medicine</li>
                 <li>Stanford University</li>
                 <li>Stanford Children's Hospital</li>
