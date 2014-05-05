@@ -5,13 +5,13 @@
       <a rel="popup local bassett">Copyright Information</a>
    </div>
    <ul id="imageList">
-      <a href="/biomed-resources/bassett/bassettView.html?bn=bassettNumber">
-         <li>
+      <li>
+         <a href="/biomed-resources/bassett/bassettView.html?bn=bassettNumber">
             <div id="image">
                <image src="http://elane.stanford.edu/public/L254573/small/bassettSrc"/>
             </div>
             <div>title</div>
-         </li>
-      </a>
+         </a>
+      </li>
    </ul>
 </div>
