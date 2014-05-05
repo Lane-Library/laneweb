@@ -16,7 +16,7 @@
 	background-color: #f0f4f5;
 	height: 230px;
 	width: 235px;
-	
+	text-align: -webkit-center;
 	color: black;
 }
 
@@ -36,6 +36,7 @@
 	height: 125px;
 	vertical-align: middle;
 	padding-top: 30px;
+	display: table-cell;
 	text-align: center;
 }
 
