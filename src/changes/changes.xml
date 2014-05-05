@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-05-05" version="2.1.55" description="2.1.55 bug fix release">
+            <action date="2014-05-01" dev="ceyates" issue="97393" type="remove">
+                remove crossdb_unists from metasearch
+            </action>
+        </release>
         <release date="2014-04-28" version="2.1.54" description="2.1.54 bug fix release">
             <action date="2014-04-28" dev="ceyates" issue="97227" type="update">
                 upgrade to search-2.0
