@@ -25,16 +25,17 @@ public abstract class AbstractImageSearchSAXStrategy<T extends Object> extends A
 
     
 	protected void generateImages(XMLConsumer xmlConsumer, String title, String url, String src) throws SAXException {
-		startAnchor(xmlConsumer, url);
 		startLi(xmlConsumer);
+		startAnchor(xmlConsumer, url);
 		startElementWithId(xmlConsumer, DIV, "image");
 		createImage(xmlConsumer, src);
 		endDiv(xmlConsumer);
 		startDiv(xmlConsumer);
 		XMLUtils.data(xmlConsumer, title);
 		endDiv(xmlConsumer);
-		endLi(xmlConsumer);
 		endAnchor(xmlConsumer);
+		endLi(xmlConsumer);
+		
 	}
 
 	
