@@ -58,10 +58,36 @@
                 height:100px;
                 padding:30px 0 30px 0;
             }
+            #sm-footer ul{
+                pading:16px 0 64px;
+                }
             #sm-footer li{
-                float:left;
+                display:inline-block;
                 width:25%;
                 list-style-type:none
+            }
+            #sm-footer a{
+                display:block;
+                text-indent:-9999px;
+                background-image:url(../resources/images/history/logo-sprite-globalfooter.png);
+                margin:auto;
+                height:50px;
+                cursor:pointer;
+            }
+            #footer-sm{
+                width:102px;
+            }
+            #footer-su{
+                background-position: -120px 0;
+                width:182px;
+            }
+            #footer-shc{
+                background-position: -326px 0px;
+                width:172px;
+            }
+            #footer-sch{
+                background-position: -518px 0px;
+                width:148px;
             }
             .menu{
                 border-top:12px solid #8C1515
@@ -94,10 +120,10 @@
         </div>
         <div id="sm-footer">
             <ul class="centered">
-                <li>Stanford School of Medicine</li>
-                <li>Stanford University</li>
-                <li>Stanford Children's Hospital</li>
-                <li>Stanford Hospitals and Clinics</li>
+                <li><a id="footer-sm" href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
+                <li><a id="footer-su" href="http://www.stanford.edu/">Stanford University</a></li>
+                <li><a id="footer-shc" href="http://stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
+                <li><a id="footer-sch" href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
             </ul>
         </div>
     </body>
