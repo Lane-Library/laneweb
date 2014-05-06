@@ -64,46 +64,13 @@ $.LANE.validatePicoForm = function(event){
 
 //When the homepage is loaded, attach event listeners for search tabs and search boxes
 $("#_home").on("pageinit", function() {
+    // shameless agent detection ... can't get android to NOT set input focus on vclick
+    var eHandler = (navigator.userAgent.match(/(iPhone|iP.d)/)) ? 'vclick' : 'click';
     // Attach click event listener to the search tabs.
     // User can select Lane, Clinical, Pediatric search by clicking/tapping on the appropriate icon.
-    $("#searchTabs li").click(function() {
-        $("#_home .search form").removeClass("selected");
-        $($("#_home .search form").get($(this).index())).addClass("selected");
-        if($(this).index() > 0 && $(this).index() < 3) {
-            if(!$("#overlayMask").length) {
-                var maskHeight = $('.ui-mobile .ui-page-active').height();
-                $("#_home").append("<div id='overlayMask'></div>");
-                $("#overlayMask").css("height", maskHeight + 100 + "px");
-                $("#overlayMask").click(function() {
-                    $($("#searchTabs li").get(0)).trigger("vclick");
-                    $($("#searchTabs li").get(0)).trigger("click");
-                });
-            }
-        }
-        else if($("#overlayMask").length) {
-            $("#overlayMask").remove();
-        }
-        window.scrollTo(0, 46);
-    });
-
-    // attach vclick listener (doesn't have 700 ms delay)
-    // set LI background to red to avoid flicker
-    $("#searchTabs li").bind('vclick',function(e) {
-        e.stopPropagation();
-        $("#searchTabs li").removeClass("selected");
-        $(this).addClass("selected");
-        // shameless agent detection ... remove if find solution for vclick on android (below)
-        if(navigator.userAgent.match(/(iPhone|iP.d)/)){
-            e.preventDefault();
-            $(this).trigger("click");
-        }
-    });
-
-    // ideally, only use vclick handler, but can't get android to NOT set input focus
-    /*
-    $("#searchTabs li").bind('vclick',function(e) {
+    $("#searchTabs li").bind(eHandler,function(e) {
         e.preventDefault();
-        $("li").bind('click', function(e){
+        $(this).bind('click', function(e){
             e.preventDefault();
         });
         $("#searchTabs li").removeClass("selected");
@@ -117,7 +84,7 @@ $("#_home").on("pageinit", function() {
                 $("#overlayMask").css("height", maskHeight + 100 + "px");
                 $("#overlayMask").bind('click',function(e) {
                     e.preventDefault();
-                    $($("#searchTabs li").get(0)).trigger("vclick");
+                    $($("#searchTabs li").get(0)).trigger(eHandler);
                 });
             }
         }
@@ -126,7 +93,6 @@ $("#_home").on("pageinit", function() {
         }
         window.scrollTo(0, 46);
     });
-    */
 });
 
 $(this).bind("pagebeforechange", function(e,obj) {

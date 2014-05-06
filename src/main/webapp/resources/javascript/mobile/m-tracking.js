@@ -76,7 +76,7 @@ $.ajax({
             }
             _gaq.push(['_trackPageview', basePath + $.LANE.tracking.encode($.LANE.tracking.getTrackingTitle(node))]);
         }
-        else if (e.type === 'click' && node.parentNode.id === 'searchTabs' && node.nodeName === 'LI') {
+        else if (e.type === 'vclick' && node.parentNode && node.parentNode.id === 'searchTabs' && node.nodeName === 'LI') {
             _gaq.push(['_trackEvent', "searchTabClick", e.target.textContent]);
         }
         else if (e.type === 'submit' && node.nodeName === 'FORM') {
@@ -145,6 +145,9 @@ $("form").on( "submit", function(e) {
     $.LANE.tracking.track(e);
 });
 $(document).bind("click", function(e) {
+    $.LANE.tracking.track(e);
+});
+$(document).bind("vclick", function(e) {
     $.LANE.tracking.track(e);
 });
 $(document).bind('spellSuggestion spellSuggestionClick', function(e, form, searchTerm, suggestion) {
