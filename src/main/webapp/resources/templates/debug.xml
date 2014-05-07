@@ -31,7 +31,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/images.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/captioned-img.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/lightbox.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/live-chat.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/banner.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/hightlighted-resources.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/antibiogram.css"/>
@@ -40,6 +39,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/suggest.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/resource-list-pagination.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/search-select.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/search-image.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css" media="print"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
@@ -51,12 +51,16 @@
                         <div id="searchFormContainer">
                             <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
                             <form id="search" method="get" action="/search.html">
+                            <input type="hidden" name="debug" value="true"/>
                             <fieldset id="searchFields">
                                 <div id="selectAndInput">
                                 <select name="source" id="searchSource">
                                     <option value="all-all"
                                         title="Enter Subject, Title, Author, PMID, ISSN, DOI"
                                         >Lane Search</option>
+                                    <option value="images-all"
+                                        title="Images from metasearch"
+                                        >Images Search</option>
                                     <option value="clinical-all"
                                         title="Clinical evidence: Cochrane, DARE, ACP Journal Club, UpToDate, PubMed"
                                         >Clinical/PICO</option>

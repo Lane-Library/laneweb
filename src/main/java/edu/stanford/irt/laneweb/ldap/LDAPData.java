@@ -12,7 +12,8 @@ public class LDAPData {
 
     private String univId;
 
-    public LDAPData(final String sunetid, final String name, final String univId, final boolean isActive, final String emailAddress) {
+    public LDAPData(final String sunetid, final String name, final String univId, final boolean isActive,
+            final String emailAddress) {
         this.name = name;
         this.sunetid = sunetid;
         this.univId = univId;
@@ -42,7 +43,8 @@ public class LDAPData {
 
     @Override
     public String toString() {
-        return new StringBuilder("sunetid=").append(this.sunetid).append(",univid=").append(this.univId).append(",name=")
-                .append(this.name).append(",isActive=").append(this.isActive).append("email=").append(this.emailAddress).toString();
+        return new StringBuilder("sunetid=").append(this.sunetid).append(",univid=").append(this.univId)
+                .append(",name=").append(this.name).append(",isActive=").append(this.isActive).append("email=")
+                .append(this.emailAddress).toString();
     }
 }

@@ -7,6 +7,48 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-05-05" version="2.1.55" description="2.1.55 bug fix release">
+            <action date="2014-05-01" dev="ceyates" issue="97393" type="remove">
+                remove crossdb_unists from metasearch
+            </action>
+        </release>
+        <release date="2014-04-28" version="2.1.54" description="2.1.54 bug fix release">
+            <action date="2014-04-28" dev="ceyates" issue="97227" type="update">
+                upgrade to search-2.0
+            </action>
+        </release>
+        <release date="2014-04-14" version="2.1.53" description="2.1.53 bug fix release">
+        </release>
+        <release date="2014-04-07" version="2.1.52" description="2.1.52 bug fix release">
+            <action date="2014-04-01" dev="ceyates" issue="96960" type="add">
+                return a 403 error for requests containing a show parameter
+            </action>
+            <action date="2014-04-01" dev="ceyates" issue="96959" type="update">
+                don't create 404 page for short extension-suggest requests
+            </action>
+        </release>
+        <release date="2014-03-31" version="2.1.51" description="2.1.51 bug fix release">
+            <action date="2014-03-20" dev="ryanmax" issue="96798" type="add">
+                Google Analytics - Tracking search "selection" for mobile site
+            </action>
+            <action date="2014-03-19" dev="ceyates" issue="96771" type="update">
+                History search: Order results with highest # of hits at the top
+            </action>
+            <action date="2014-03-19" dev="ceyates" issue="96764" type="update">
+                Remove the search results when 0 results
+            </action>
+        </release>
+        <release date="2014-03-17" version="2.1.50" description="2.1.50 bug fix release">
+            <action date="2014-03-14" dev="ceyates" issue="96722" type="fix">
+                respond to /errordocs/&lt;code&gt;err.html
+            </action>
+            <action date="2014-03-13" dev="ceyates" issue="96659" type="remove">
+                remove yui2 grids
+            </action>
+            <action date="2014-03-11" dev="ryanmax" issue="95169" type="add">
+                label print resources
+            </action>
+        </release>
         <release date="2014-03-10" version="2.1.49" description="2.1.49 bug fix release">
             <action date="2014-03-10" dev="ceyates" issue="96655" type="fix">
                 increase in CPU and memory usage since laneweb-2.1.47

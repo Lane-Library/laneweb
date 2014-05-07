@@ -11,8 +11,8 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
@@ -27,7 +27,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
     public Result doSearch(final String query) {
         String q = query == null ? "" : query;
         Collection<String> enginesToRun = new HashSet<String>();
-        Result describeResult = describe(new SimpleQuery(q), null);
+        Result describeResult = describe(new SimpleQuery(q));
         Map<String, String> enginesMap = new HashMap<String, String>();
         for (Result engine : describeResult.getChildren()) {
             String engineId = engine.getId();

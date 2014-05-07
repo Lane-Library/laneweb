@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Medical History Center</title>
+        <link rel="stylesheet" type="text/css"
+            href="http://yui.yahooapis.com/3.16.0/build/cssreset/cssreset-min.css" />
+        <link rel="stylesheet" type="text/css"
+            href="http://yui.yahooapis.com/3.16.0/build/cssgrids/cssgrids-min.css" />
+        <style type="text/css">
+            body{
+                background-color:rgb(236, 241, 242);
+                font-family:sans-serif;
+            }
+            .centered{
+                width:950px;
+                margin:auto
+            }
+            #header{
+                margin-top:32px;
+                height:92px;
+                background-color:white;
+                box-shadow:0 0 6px 0 rgba(0, 0, 0, 0.5);
+            }
+            h1{
+                font-size:20px;
+                font-weight:400;
+                padding:52px 0 0 190px;
+            }
+            h1 a{
+                color:#333333;
+                text-decoration:none
+            }
+            #sm-header{
+                position:absolute;
+                top:0;
+                width:100%;
+                height:32px;
+                background-color:black
+            }
+            #sm-header span{
+                float:right
+            }
+            #sm{
+                position:absolute;
+                display:block;
+                height:45px;
+                width:179px;
+                background-repeat:no-repeat;
+                background-image:url(../resources/images/history/sm.png);
+                top:58px;
+                border-right:1px black solid;
+                text-indent:-9999px
+            }
+            #sm-footer{
+                background-color:rgb(38, 38, 38);
+                color:rgb(158, 158, 158);
+                height:100px;
+                padding:30px 0 30px 0;
+            }
+            #sm-footer ul{
+                pading:16px 0 64px;
+                }
+            #sm-footer li{
+                display:inline-block;
+                width:25%;
+                list-style-type:none
+            }
+            #sm-footer a{
+                display:block;
+                text-indent:-9999px;
+                background-image:url(../resources/images/history/logo-sprite-globalfooter.png);
+                margin:auto;
+                height:50px;
+                cursor:pointer;
+            }
+            #footer-sm{
+                width:102px;
+            }
+            #footer-su{
+                background-position: -120px 0;
+                width:182px;
+            }
+            #footer-shc{
+                background-position: -326px 0px;
+                width:172px;
+            }
+            #footer-sch{
+                background-position: -518px 0px;
+                width:148px;
+            }
+            .menu{
+                border-top:12px solid #8C1515
+            }
+            .menu a{
+                color:white;
+                background-color:#333333;
+                text-decoration:none;
+                font-weight:300;
+                display:block;
+                padding:9px 20px 9px 13px;
+                background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+            }
+            .menu a:hover{
+                background-color:#555555;
+            }</style>
+    </head>
+    <body>
+        <div id="header">
+            <div class="centered">
+                <h1><a href="/med-history/index.html">Medical History Center</a></h1>
+            </div>
+        </div>
+        <div class="centered">
+            <?laneweb content?>
+        </div>
+        <div id="sm-header"> </div>
+        <div class="centered">
+            <a id="sm" href="http://med.stanford.edu/">Stanford Medicine</a>
+        </div>
+        <div id="sm-footer">
+            <ul class="centered">
+                <li><a id="footer-sm" href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
+                <li><a id="footer-su" href="http://www.stanford.edu/">Stanford University</a></li>
+                <li><a id="footer-shc" href="http://stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
+                <li><a id="footer-sch" href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
+            </ul>
+        </div>
+    </body>
+</html>

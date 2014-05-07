@@ -110,10 +110,11 @@
             </xsl:if>
 
             <div class="pubTitle">
+                <xsl:variable name="hits" select="number(s:resourceHits)"/>
                 <xsl:choose>
                     <xsl:when test="s:pub-text">
                         <xsl:value-of select="s:pub-text"/>
-                        <xsl:if test="$resourceName = 'PubMed' or number(s:resourceHits) &lt;= $moreResultsLimit">
+                        <xsl:if test="$resourceName = 'PubMed' or $hits &lt;= $moreResultsLimit">
                             <span class="sourceLink">
                                 <xsl:text> - </xsl:text>
                                 <xsl:value-of select="$resourceName"/>
@@ -121,19 +122,19 @@
                         </xsl:if>
                         <xsl:apply-templates select="s:contentId"/>
                         <br/>
-                        <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
+                        <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
                             <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a><xsl:text> &#187;</xsl:text>
                         </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
-                            <xsl:when test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
+                            <xsl:when test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
                                 <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a><xsl:text> &#187;</xsl:text>
                                 <xsl:if test="$emrid and $resourceName = 'UpToDate'">
                                     <span class="utdCMEnote"> &#8592; Use this link for CME</span>
                                 </xsl:if>
                             </xsl:when>
-                            <xsl:when test="$moreResultsLimit &gt;= number(s:resourceHits)">
+                            <xsl:when test="not(s:resourceHits) or $moreResultsLimit &gt;= $hits">
                                 <span class="sourceLink">
                                     <xsl:value-of select="$resourceName"/>
                                 </span>

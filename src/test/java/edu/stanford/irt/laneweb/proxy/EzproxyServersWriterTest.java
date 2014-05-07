@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.proxy;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -13,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -38,7 +38,9 @@ public class EzproxyServersWriterTest {
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        this.writer = new EzproxyServersWriter(this.dataSource);
+        Properties props = new Properties();
+        props.setProperty("ezproxy-servers.query", "sql query");
+        this.writer = new EzproxyServersWriter(this.dataSource, props);
         this.connection = createMock(Connection.class);
         this.statement = createMock(Statement.class);
         this.resultSet = createMock(ResultSet.class);
@@ -56,7 +58,7 @@ public class EzproxyServersWriterTest {
     public void testWrite() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+        expect(this.statement.executeQuery("sql query")).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getString(1)).andReturn("value");
         expect(this.resultSet.next()).andReturn(false);
@@ -74,7 +76,7 @@ public class EzproxyServersWriterTest {
     public void testWriteThrowsSQLException() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+        expect(this.statement.executeQuery("sql query")).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getString(1)).andReturn("value");
         expect(this.resultSet.next()).andThrow(new SQLException());

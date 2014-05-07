@@ -8,11 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.HttpRequestHandler;
 
 /**
- * A request handler that is designed to catch any requests that aren't handled
- * by others, It redirects to request.getRequestURI()/index.html, mimicking the
- * way we had the last match in cocoon do a redirect.
- * 
- * @author ceyates
+ * A request handler that is designed to catch any requests that aren't handled by others, It redirects to
+ * request.getRequestURI()/index.html, mimicking the way we had the last match in cocoon do a redirect.
  */
 public class DefaultRequestHandler implements HttpRequestHandler {
 

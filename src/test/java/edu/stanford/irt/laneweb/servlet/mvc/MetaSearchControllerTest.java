@@ -19,10 +19,10 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
-import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class MetaSearchControllerTest {
 
@@ -64,22 +64,27 @@ public class MetaSearchControllerTest {
         verify(this.manager, this.dataBinder, this.model);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testSearch() {
-        expect(this.manager.describe(isA(Query.class), eq(Collections.singletonList("resource")))).andReturn(
+        expect(this.manager.describe(isA(Query.class))).andReturn(
                 this.result);
         expect(this.result.getChildren()).andReturn(Collections.singletonList(this.result)).times(4);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
-        expect(this.manager.search(isA(Query.class), eq(60000L), eq(Collections.singletonList("engine")), eq(false)))
+        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false)))
                 .andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL).times(2);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getURL()).andReturn("url");
         expect(this.result.getHits()).andReturn("2");
         replay(this.manager, this.dataBinder, this.model, this.result);
-        assertEquals("{resources={resource={hits=2, status=SUCCESSFUL, url=url}}, status=SUCCESSFUL}", this.controller
-                .search("query", Collections.singletonList("resource"), false, "baseProxyURL").toString());
+        Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), false, "baseProxyURL");
+        assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
+        map = (Map<String, Object>) map.get("resources");
+        map = (Map<String, Object>) map.get("resource");
+        assertEquals(Integer.valueOf("2"), map.get("hits"));
+        assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
         verify(this.manager, this.dataBinder, this.model, this.result);
     }
 }

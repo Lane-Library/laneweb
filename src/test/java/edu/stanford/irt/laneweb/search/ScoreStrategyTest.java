@@ -12,7 +12,7 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.search.ContentResult;
+import edu.stanford.irt.search.impl.ContentResult;
 
 public class ScoreStrategyTest {
 

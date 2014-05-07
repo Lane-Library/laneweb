@@ -13,8 +13,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultList> {
 

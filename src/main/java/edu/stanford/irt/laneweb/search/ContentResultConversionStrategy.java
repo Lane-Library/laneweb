@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultConversionStrategy {
 
@@ -59,10 +59,6 @@ public class ContentResultConversionStrategy {
                 } else {
                     parent = resource;
                 }
-            }
-            //parent is null in history content search
-            if (parent == null) {
-                parent = engine;
             }
             if (children != null) {
                 for (Result child : children) {

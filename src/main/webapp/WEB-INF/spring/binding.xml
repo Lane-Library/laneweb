@@ -82,7 +82,7 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"
         class="edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder">
-        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"
@@ -101,7 +101,9 @@
         class="edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder"/>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"
-        class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
+        class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder">
+        <constructor-arg ref="org.slf4j.Logger/errorhandler"/>
+    </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"
         class="edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder">
@@ -128,7 +130,12 @@
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"
         class="edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder">
-        <constructor-arg value="/includes/hours.xml"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.hours.TodaysHours">
+                <constructor-arg value="%{laneweb.context.live-base}"/>
+                <constructor-arg value="/includes/hours.xml"/>
+            </bean>
+        </constructor-arg>
         <constructor-arg ref="org.slf4j.Logger/TodaysHoursBinder"/>
     </bean>
     
@@ -176,8 +183,9 @@
         </constructor-arg>
         <constructor-arg>
             <map>
-                <entry key="^(?:/\w+|)/biomed-resources/bassett/raw/bassettLargerView.html"
+                <entry key="^/biomed-resources/bassett/raw/bassettLargerView.html"
                     value="bassettLargerView"/>
+                <entry key="^/med-history-new/.*" value="history"/>
             </map>
         </constructor-arg>
     </bean>

@@ -20,7 +20,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
 
     @Override
     protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
-        LinkedList<Eresource> eresources = new LinkedList<Eresource>();
+        List<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         int currentEresourceId = -1;
         int currentVersionId = -1;

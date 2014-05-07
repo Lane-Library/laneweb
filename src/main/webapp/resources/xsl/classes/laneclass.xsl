@@ -23,7 +23,7 @@
 		<xsl:copy>
 			<xsl:if test="$hasOpenClass">
     			<xsl:attribute name="itemscope" />
-				<xsl:attribute name="itemtype">http://data-vocabulary.org/Event</xsl:attribute>
+				<xsl:attribute name="itemtype">http://schema.org/Event</xsl:attribute>
 			</xsl:if>
 			<xsl:apply-templates select="attribute::node()|child::node()" />
 		</xsl:copy>
@@ -32,7 +32,7 @@
 	<xsl:template match="h:h4[@id='class-title']">
 		<xsl:copy>
             <xsl:if test="$hasOpenClass">
-    			<xsl:attribute name="itemprop">summary</xsl:attribute>
+    			<xsl:attribute name="itemprop">name</xsl:attribute>
 			</xsl:if>
 			<xsl:apply-templates select="attribute::node()|child::node()" />
 			<xsl:value-of

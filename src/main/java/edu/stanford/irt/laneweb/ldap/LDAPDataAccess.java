@@ -1,7 +1,9 @@
 package edu.stanford.irt.laneweb.ldap;
 
 import java.security.PrivilegedAction;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javax.security.auth.Subject;
 
@@ -21,33 +23,38 @@ public class LDAPDataAccess {
 
         private String lookupFilter;
 
-        private LDAPPrivilegedAction(final LdapTemplate ldapTemplate, final String lookupFilter) {
+        private LDAPPrivilegedAction(final LdapTemplate ldapTemplate, final String lookupFilter,
+                final AttributesMapper attributesMapper) {
             this.lookupFilter = lookupFilter;
             this.ldapTemplate = ldapTemplate;
-            this.attributesMapper = new LDAPAttributesMapper();
+            this.attributesMapper = attributesMapper;
         }
 
         @Override
         @SuppressWarnings("rawtypes")
         public LDAPData run() {
             List list = this.ldapTemplate.search("", this.lookupFilter, this.attributesMapper);
-            if (list == null || list.size() == 0) {
+            if (list == null || list.isEmpty()) {
                 return null;
             }
             return (LDAPData) list.get(0);
         }
     }
 
+    private AttributesMapper attributesMapper;
+
     private final LdapTemplate ldapTemplate;
 
     private final Logger log;
 
     private final SubjectSource subjectSource;
-    
-    public LDAPDataAccess(LdapTemplate ldapTemplate, Logger log, SubjectSource subjectSource) {
+
+    public LDAPDataAccess(final LdapTemplate ldapTemplate, final SubjectSource subjectSource,
+            final Set<String> activeAffiliations, final Logger log) {
         this.ldapTemplate = ldapTemplate;
-        this.log = log;
         this.subjectSource = subjectSource;
+        this.attributesMapper = new LDAPAttributesMapper(Collections.unmodifiableSet(activeAffiliations));
+        this.log = log;
     }
 
     public LDAPData getLdapDataForSunetid(final String sunetid) {
@@ -72,7 +79,8 @@ public class LDAPDataAccess {
         LDAPData ldapData = null;
         try {
             Subject subject = this.subjectSource.getSubject();
-            ldapData = Subject.doAs(subject, new LDAPPrivilegedAction(this.ldapTemplate, lookupFilter));
+            ldapData = Subject.doAs(subject, new LDAPPrivilegedAction(this.ldapTemplate, lookupFilter,
+                    this.attributesMapper));
         } catch (SecurityException e) {
             this.log.error("unable to authenticate", e);
         } catch (CommunicationException e) {

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.resource;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;

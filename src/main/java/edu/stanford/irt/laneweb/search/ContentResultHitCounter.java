@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultHitCounter {
 

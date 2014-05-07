@@ -1,6 +1,6 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.codec;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -15,13 +15,14 @@ import org.apache.commons.codec.binary.Base64;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
+//TODO: remove code duplicated with SHCCodec
 public class SunetIdCookieCodec {
 
     public static final String LANE_COOKIE_NAME = "user";
 
     private static final String COOKIE_VALUE_SEPARATOR = "%";
 
-    private static final String UTF8 = "UTF-8";
+    private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private Cipher cipher;
 
@@ -36,8 +37,6 @@ public class SunetIdCookieCodec {
             System.arraycopy(src, 0, dst, 0, src.length);
             this.desKey = new SecretKeySpec(dst, "AES");
             this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        } catch (UnsupportedEncodingException e) {
-            throw new LanewebException(e);
         } catch (NoSuchAlgorithmException e) {
             throw new LanewebException(e);
         } catch (NoSuchPaddingException e) {
@@ -79,8 +78,6 @@ public class SunetIdCookieCodec {
             byte[] base = Base64.decodeBase64(codedInput.getBytes(UTF8));
             byte[] cleartext = this.cipher.doFinal(base);
             return new String(cleartext, UTF8);
-        } catch (UnsupportedEncodingException e) {
-            throw new LanewebException(e);
         } catch (InvalidKeyException e) {
             throw new LanewebException(e);
         } catch (IllegalBlockSizeException e) {
@@ -96,8 +93,6 @@ public class SunetIdCookieCodec {
             byte[] cleartext = input.getBytes(UTF8);
             byte[] ciphertext = this.cipher.doFinal(cleartext);
             return new String(Base64.encodeBase64(ciphertext), UTF8);
-        } catch (UnsupportedEncodingException e) {
-            throw new LanewebException(e);
         } catch (InvalidKeyException e) {
             throw new LanewebException(e);
         } catch (IllegalBlockSizeException e) {

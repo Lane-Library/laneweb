@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.view.RedirectView;
 
-import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
+import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 
 public class PersistentLoginControllerTest {

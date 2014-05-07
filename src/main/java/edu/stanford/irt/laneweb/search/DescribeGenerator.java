@@ -6,11 +6,11 @@ import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class DescribeGenerator extends AbstractMetasearchGenerator implements CacheablePipelineComponent {
+public class DescribeGenerator extends AbstractMetasearchGenerator<Result> implements CacheablePipelineComponent {
 
     private static final String TYPE = "describe";
 
@@ -32,6 +32,6 @@ public class DescribeGenerator extends AbstractMetasearchGenerator implements Ca
 
     @Override
     protected Result doSearch(final String query) {
-        return describe(new SimpleQuery(""), null);
+        return describe(new SimpleQuery(""));
     }
 }

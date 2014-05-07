@@ -1,0 +1,99 @@
+
+#imageList {
+	/*requred for IE < 8:*/
+	*height: 404px;
+	text-align: center;
+}
+
+#imageList:after {
+	content: ".";
+	display: block;
+	height: 0;
+	font-size: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+#imageList li {
+	float: left;
+	list-style: none inside none;
+	margin: 1px 1px 1px 1px;
+	display: block;
+	background-color: #f0f4f5;
+	height: 230px;
+	width: 235px;
+	
+}
+
+#imageList li:hover {
+	background-color: #d0d8da;
+}
+
+
+#imageList img{
+	max-width: 200px;
+	max-height: 120px;
+	}
+
+#imageList a {
+	display: block;
+	border-bottom: none;
+	color:black;	
+}
+
+#imageList div:last-child {
+	width: 200px;
+	height: 50px;
+	margin:10px;
+}
+
+#image{
+	width: 235px;
+	height: 125px;
+	display: table-cell;
+	vertical-align: middle;
+	float: initial;
+	padding-top: 30px;
+}
+
+#searchImageTitle {
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
+
+#copyright{
+	margin-bottom: 15px;
+	font-size: inherit;
+}
+
+#copyright a{
+	margin-right: 50px;	
+}
+
+
+#copyrightSection{
+	width: 470px;
+	position: absolute;
+	left:490px;
+	top:245px;
+	
+	}
+
+#copyrightSection div:first-child{
+	color : #009abb;
+	margin-top: 8px;
+	float:left;
+	}
+
+#copyrightSection div:last-child{
+	margin-left: 5px;
+	}
+
+
+#copyrightSection li{
+	list-style: none;
+	}
+
+#copyrightSection span{
+	color : #009abb;
+	}

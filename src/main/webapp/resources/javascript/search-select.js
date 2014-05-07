@@ -26,7 +26,8 @@
             if (newIndex !== this._index) {
                 this.fire("selectedChange", {
                     newIndex : newIndex,
-                    newVal : this._values[newIndex]
+                    newVal : this._values[newIndex],
+                    prevVal : this._values[this._index]
                 });
             }
         }
