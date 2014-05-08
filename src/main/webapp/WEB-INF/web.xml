@@ -79,6 +79,11 @@
     </filter>
     
     <filter>
+        <filter-name>NegativeOneAposFilter</filter-name>
+        <filter-class>edu.stanford.irt.laneweb.servlet.NegativeOneAposFilter</filter-class>
+    </filter>
+    
+    <filter>
         <filter-name>tobaccoRedirectFilter</filter-name>
         <filter-class>edu.stanford.irt.laneweb.servlet.TobaccoRedirectFilter</filter-class>
     </filter>
@@ -98,6 +103,13 @@
         <filter-name>ShowParameterFilter</filter-name>
         <url-pattern>/biomed-resources/*</url-pattern>
         <url-pattern>/rss/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>NegativeOneAposFilter</filter-name>
+        <url-pattern>/search.html</url-pattern>
+        <url-pattern>/biomed-resources/*</url-pattern>
+        <url-pattern>/apps/*</url-pattern>
     </filter-mapping>
     
     <filter-mapping>
