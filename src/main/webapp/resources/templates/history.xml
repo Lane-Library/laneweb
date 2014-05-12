@@ -119,7 +119,14 @@
             }
             .menu a:hover{
                 background-color:#555555;
-            }</style>
+            }
+            .gutter-left{
+                margin-left:10px;
+            }
+            .gutter-right{
+                margin-right:10px;
+            }
+        </style>
     </head>
     <body>
         <div id="header">
