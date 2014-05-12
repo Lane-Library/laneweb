@@ -49,6 +49,10 @@ public class MetaSearchController {
      *            the query
      * @param resources
      *            the desired resources to search
+     * @param proxyLinks
+     *            whether to proxy the url
+     * @param baseProxyURL
+     *            the text to preprend for proxied links
      * @return a Map representation of the Result for jsonification
      */
     @RequestMapping(value = "/apps/resourceSearch")

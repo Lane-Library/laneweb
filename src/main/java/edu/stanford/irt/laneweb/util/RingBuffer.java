@@ -20,7 +20,7 @@ public class RingBuffer {
     /**
      * creates a ring buffer of aSize bytes
      * 
-     * @param aSize
+     * @param size
      *            the number of bytes
      */
     public RingBuffer(final int size) {

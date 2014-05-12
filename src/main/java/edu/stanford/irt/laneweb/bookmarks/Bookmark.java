@@ -30,8 +30,8 @@ public class Bookmark implements Serializable {
     /**
      * Create a new Bookmark.
      * 
-     * @param label
-     * @param url
+     * @param label the text associated with the bookmark
+     * @param url the url associated with the bookmark
      * @throws LanewebException
      *             if either the label or url are null.
      */
@@ -95,7 +95,7 @@ public class Bookmark implements Serializable {
     /**
      * Set the label.
      * 
-     * @param label
+     * @param label the text associted with the bookmark
      * @throws LanewebException
      *             if the label is null or has already been set.
      */
@@ -112,7 +112,7 @@ public class Bookmark implements Serializable {
     /**
      * Set the url
      * 
-     * @param url
+     * @param url the url associated with the bookmark
      * @throws LanewebException
      *             if the url is null or has already been set.
      */
