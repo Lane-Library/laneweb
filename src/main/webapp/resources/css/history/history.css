@@ -62,7 +62,7 @@ display:block;
     height:45px;
     width:179px;
     background-repeat:no-repeat;
-    background-image:url(../resources/images/history/sm.png);
+    background-image:url(/././resources/images/history/sm.png);
     top:58px;
     border-right:1px black solid;
     text-indent:-9999px
@@ -84,7 +84,7 @@ display:block;
 #sm-footer a{
     display:block;
     text-indent:-9999px;
-    background-image:url(../resources/images/history/logo-sprite-globalfooter.png);
+    background-image:url(/././resources/images/history/logo-sprite-globalfooter.png);
     margin:auto;
     height:50px;
     cursor:pointer;
