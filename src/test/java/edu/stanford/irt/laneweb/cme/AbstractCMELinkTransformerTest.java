@@ -33,9 +33,7 @@ public class AbstractCMELinkTransformerTest {
     }
 
     /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.cme.AbstractCMELinkTransformer#createCMELink(java.lang.String)}
-     * .
+     * Test method for {@link edu.stanford.irt.laneweb.cme.AbstractCMELinkTransformer#createCMELink(java.lang.String)} .
      */
     @Test
     public void testCreateCMELink() {
@@ -48,12 +46,20 @@ public class AbstractCMELinkTransformerTest {
         assertEquals("http://www.uptodate.com/online/content/search.do?unid=epic-123456&srcsys=epic90710&eiv=2.1.0",
                 this.transformer.createCMELink("http://www.uptodate.com/"));
         assertEquals("http://www.uptodate.com", this.transformer.createCMELink("http://www.uptodate.com"));
+        this.model.remove(Model.EMRID);
+        this.model.put(Model.AUTH, "hashedSunet");
+        this.transformer.setModel(this.model);
+        assertEquals("http://www.uptodate.com/online/content/search.do?unid=hashedSunet&srcsys=EZPX90710&eiv=2.1.0",
+                this.transformer.createCMELink("http://www.uptodate.com/online"));
+        assertEquals("http://www.uptodate.com/foo?bar=true&unid=hashedSunet&srcsys=EZPX90710&eiv=2.1.0",
+                this.transformer.createCMELink("http://www.uptodate.com/foo?bar=true"));
+        assertEquals("http://www.uptodate.com/online/content/search.do?unid=hashedSunet&srcsys=EZPX90710&eiv=2.1.0",
+                this.transformer.createCMELink("http://www.uptodate.com/"));
+        assertEquals("http://www.uptodate.com", this.transformer.createCMELink("http://www.uptodate.com"));
     }
 
     /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.cme.AbstractCMELinkTransformer#isCMEHost(java.lang.String)}
-     * .
+     * Test method for {@link edu.stanford.irt.laneweb.cme.AbstractCMELinkTransformer#isCMEHost(java.lang.String)} .
      */
     @Test
     public void testIsCMEHost() {
@@ -61,9 +67,7 @@ public class AbstractCMELinkTransformerTest {
     }
 
     /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.cme.AbstractCMELinkTransformer#isCMEHost(java.lang.String)}
-     * .
+     * Test method for {@link edu.stanford.irt.laneweb.cme.AbstractCMELinkTransformer#isCMEHost(java.lang.String)} .
      */
     @Test
     public void testIsNotCMEHost() {
