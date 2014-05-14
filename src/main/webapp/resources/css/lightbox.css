@@ -38,7 +38,7 @@
 
 #feedbackLink a {
 	display: block;
-	background-image: url(/././resources/images/sprite-all.png);
+	background-image: url(../images/sprite-all.png);
 	background-position: -760px -120px;
 	width: 31px;
 	height: 110px;
@@ -46,7 +46,7 @@
 }
 
 #feedbackLink a:hover {
-	background-image: url(/././resources/images/sprite-all.png);
+	background-image: url(../images/sprite-all.png);
 	background-repeat: no-repeat;
 	background-position: -720px -120px;
 }
@@ -78,7 +78,7 @@
     position:absolute;
     right:3px;
     top:3px;
-    background-image:url(/././resources/images/sprite-all.png);
+    background-image:url(../images/sprite-all.png);
     background-position:-40px -160px;
     cursor:pointer
 }
