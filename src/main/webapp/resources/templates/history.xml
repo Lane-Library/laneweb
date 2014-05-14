@@ -7,7 +7,8 @@
             href="http://yui.yahooapis.com/3.16.0/build/cssreset/cssreset-min.css" />
         <link rel="stylesheet" type="text/css"
             href="http://yui.yahooapis.com/3.16.0/build/cssgrids/cssgrids-min.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/history/history.css"/>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/history/history.css" />
     </head>
     <body>
         <div id="header">
@@ -20,216 +21,336 @@
         </div>
         <div id="sm-header">
             <div class="centered">
-            <ul>
-                <li>
-                    <a href="#">Health Care</a>
-                    <div>
-                        <div class="yui3-g">
-                            <div class="yui3-u-1-2">
-                            <ul>
-                                <li><a href="#"><h3>Stanford Hospital &amp; Clinics</h3></a></li>
-                                <li><a href="http://stanfordmedicine.org/getting_care/find_physician.html">Find a Doctor</a></li>
-                                <li><a href="#">Find a Stanford Clinic</a></li>
-                                <li><a href="#">Find Conditions &amp; Treatments</a></li>
-                                <li><a href="#">Refer a Patient</a></li>
-                                <li><a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a></li>
-                                <li><a href="#">Make an Appointment <i class="fa fa-arrow-right"></i></a></li>
-                                <li><a href="#"><h3>Stanford Children's Health</h3></a></li>
-                                <li><a href="http://stanfordmedicine.org/getting_care/find_physician.html">Find a Doctor</a></li>
-                                <li><a href="#">Find a Service</a></li>
-                                <li><a href="#">Refer a Patient</a></li>
-                                <li><a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a></li>
-                            </ul>
-                            </div>
-                            
-                            <div class="yui3-u-1-2">
-                                <ul>
-                                    <li><a href="#"><h3>Emergency Services</h3></a></li>
-                                    <li><a href="#">Directions &amp; Maps</a></li>
-                                    <li><em>Dial 911 in the event of a medical emergency</em></li>
-                                </ul>
+                <ul>
+                    <li>
+                        <a href="#">Health Care</a>
+                        <div>
+                            <div class="yui3-g">
+                                <div class="yui3-u-1-2">
+                                    <ul>
+                                        <li><a href="#"><h3>Stanford Hospital &amp;
+                                            Clinics</h3></a></li>
+                                        <li><a
+                                                href="http://stanfordmedicine.org/getting_care/find_physician.html"
+                                                >Find a Doctor</a></li>
+                                        <li><a href="#">Find a Stanford Clinic</a></li>
+                                        <li><a href="#">Find Conditions &amp; Treatments</a></li>
+                                        <li><a href="#">Refer a Patient</a></li>
+                                        <li><a href="http://med.stanford.edu/clinicaltrials/"
+                                                >Clinical Trials</a></li>
+                                        <li><a href="#">Make an Appointment <i
+                                                  class="fa fa-arrow-right"></i></a></li>
+                                        <li><a href="#"><h3>Stanford Children's Health</h3></a></li>
+                                        <li><a
+                                                href="http://stanfordmedicine.org/getting_care/find_physician.html"
+                                                >Find a Doctor</a></li>
+                                        <li><a href="#">Find a Service</a></li>
+                                        <li><a href="#">Refer a Patient</a></li>
+                                        <li><a href="http://med.stanford.edu/clinicaltrials/"
+                                                >Clinical Trials</a></li>
+                                    </ul>
+                                </div>
+                                <div class="yui3-u-1-2">
+                                    <ul>
+                                        <li><a href="#"><h3>Emergency Services</h3></a></li>
+                                        <li><a href="#">Directions &amp; Maps</a></li>
+                                        <li><em>Dial 911 in the event of a medical
+                                            emergency</em></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="#">Research</a>
-                    <div>
-                        <section>
-                            <ul>
-                                <li><a href="#">Basic Science Departments</a></li>
-                                <li><a href="#">Clinical Science Departments</a></li>
-                                <li><a href="#">Institutes</a></li>
-                                <li><a href="#">Research Centers</a></li>
-                                <li><a href="http://med.standford.edu/guide/">See Full Directory</a></li>
-                                <li><a href="#"><h3>Research Resources</h3></a></li>
-                                <li><a href="http://med.stanford.edu/profiles/">Academic Profiles</a></li>
-                                <li><a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a></li>
-                                <li><a href="#">Research Administration</a></li>
-                                <li><a href="#">Research Resources</a></li>
-                                <li><a href="#"><h3>Professional Training</h3></a></li>
-                                <li><a href="#">Postdoctoral Scholars</a></li>
-                                <li><a href="#">Clinical Research Fellows</a></li>
-                            </ul>
-                            
-                            <aside>
-                                <a href="#">
-                                    <h3>Research News</h3>
-                                    <div data-alt="girl-looking-down" data-picture=""><div data-media="(min-width: 1px)" data-src="/content/dam/sm/commons/images/girl-looking-down.png.img.320.low.png"></div><noscript><img alt="girl-looking-down" src="/content/dam/sm/commons/images/girl-looking-down.png.img.620.high.png"/></noscript></div><!--[if lt IE 9]><img alt="girl-looking-down" src='/content/dam/sm/commons/images/girl-looking-down.png.img.620.high.png' /><![endif]-->
-                                    
-                                    <p>Stanford celebrates two 2013 Nobel Laureates <i class="fa fa-arrow-right"></i></p>
-                                </a>
-                            </aside>
-                            
-                            <aside>
-                                <a href="#">
-                                    <h3>Explore Research</h3>
-                                    <p>Our signature strengths what feuls innovation at Stanford Medicine <i class="fa fa-arrow-right"></i></p>
-                                </a>
-                            </aside>
-                            
-                            <a href="#"><i class="fa fa-angle-left"></i> Back</a>
-                        </section>
-                    </div>
-                </li>
-                <li>
-                    <a href="#">Education</a>
-                    <div>
-                        <section>
-                            <ul>
-                                <li><a href="#">MD Programs</a></li>
-                                <li><a href="#">PhD Programs</a></li>
-                                <li><a href="#">Masters Programs</a></li>
-                                <li><a href="http://med.stanford.edu/cme/">Continuing Medical Education</a></li>
-                                <li><a href="http://postdocs.stanford.edu/">Postdoctoral Scholars</a></li>
-                                <li><a href="#">Residencies &amp; Fellowships</a></li>
-                                <li><a href="#">See All</a></li>
-                                <li><a href="#"><h3>Education Resources</h3></a></li>
-                                <li><a href="http://med.stanford.edu/alumni/">Alumni Services</a></li>
-                                <li><a href="#">Faculty Resources</a></li>
-                                <li><a href="http://lane.stanford.edu/index.html">Lane Library</a></li>
-                                <li><a href="#">Student Resources</a></li>
-                            </ul>
-                            
-                            <aside>
-                                <a href="#">
-                                    <h3>Education News</h3>
-                                    <div data-alt="superheader-hover-education" data-picture=""><div data-media="(min-width: 1px)" data-src="/content/dam/sm/commons/images/superheader-hover-education.jpg.img.320.low.png"></div><noscript><img alt="superheader-hover-education" src="/content/dam/sm/commons/images/superheader-hover-education.jpg.img.620.high.png"/></noscript></div><!--[if lt IE 9]><img alt="superheader-hover-education" src='/content/dam/sm/commons/images/superheader-hover-education.jpg.img.620.high.png' /><![endif]-->
-                                    
-                                    <p>Stanford celebrates two 2013 Nobel Laureates <i class="fa fa-arrow-right"></i></p>
-                                </a>
-                            </aside>
-                            
-                            <aside>
-                                <a href="#">
-                                    <h3>Explore Education</h3>
-                                    <p>Learn how we empower tomorrow's leaders <i class="fa fa-arrow-right"></i></p>
-                                </a>
-                            </aside>
-                            
-                            <a href="#"><i class="fa fa-angle-left"></i> Back</a>
-                        </section>
-                    </div>
-                </li>
-                <li>
-                    <a href="#">Give</a>
-                    <div>
-                        <section>
-                            <div>
-                                <a href="#">
-                                    <div data-alt="Campaign for Stanford Medicine + You =" data-picture=""><div data-media="(min-width: 1px)" data-src="/content/dam/sm/commons/images/MCD-campaign-logo.png.img.320.low.png"></div><noscript><img alt="Campaign for Stanford Medicine + You =" src="/content/dam/sm/commons/images/MCD-campaign-logo.png.img.620.high.png"/></noscript></div><!--[if lt IE 9]><img alt="Campaign for Stanford Medicine + You =" src='/content/dam/sm/commons/images/MCD-campaign-logo.png.img.620.high.png' /><![endif]-->
-                                    
-                                </a>
-                            </div>
-                            
-                            <ul>
-                                <li><a href="#"><h3>Be a part of the Equation</h3></a></li>
-                                <li><a href="#">Biomedical Innovation Initiative</a></li>
-                                <li><a href="#">New Stanford Hospital</a></li>
-                                <li><a href="#">Clinical Excellence Research: Better Health, Less spending</a></li>
-                                <li><a href="#"><h3>Learn More</h3></a></li>
-                                <li><a href="#">Transforming Patient Care</a></li>
-                                <li><a href="#">Big Data</a></li>
-                                <li><a href="#">Biomedical Innovation Building</a></li>
-                            </ul>
-                            
-                            <aside>
+                    </li>
+                    <li>
+                        <a href="#">Research</a>
+                        <div>
+                            <section>
                                 <ul>
-                                    <li><a href="#">Why Giving Matters</a></li>
-                                    <li><a href="#">Ways to Give</a></li>
-                                    <li><a href="#">Make a Gift</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="#">Basic Science Departments</a></li>
+                                    <li><a href="#">Clinical Science Departments</a></li>
+                                    <li><a href="#">Institutes</a></li>
+                                    <li><a href="#">Research Centers</a></li>
+                                    <li><a href="http://med.standford.edu/guide/">See Full
+                                            Directory</a></li>
+                                    <li><a href="#"><h3>Research Resources</h3></a></li>
+                                    <li><a href="http://med.stanford.edu/profiles/">Academic
+                                            Profiles</a></li>
+                                    <li><a href="http://med.stanford.edu/clinicaltrials/">Clinical
+                                            Trials</a></li>
+                                    <li><a href="#">Research Administration</a></li>
+                                    <li><a href="#">Research Resources</a></li>
+                                    <li><a href="#"><h3>Professional Training</h3></a></li>
+                                    <li><a href="#">Postdoctoral Scholars</a></li>
+                                    <li><a href="#">Clinical Research Fellows</a></li>
                                 </ul>
-                            </aside>
-                            
-                            
-                            
-                            <aside>
-                                <a href="#">
-                                    <h3>Explore Giving</h3>
-                                    <p>Learn how you can give <i class="fa fa-arrow-right"></i></p>
-                                </a>
-                            </aside>
-                            
-                            <a href="#"><i class="fa fa-angle-left"></i> Back</a>
-                        </section>
-                    </div>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                    <div>
-                        <section>
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Contacts</a></li>
-                                <li><a href="#">Maps &amp; Directions</a></li>
-                                <li><a href="#">Leadership</a></li>
-                                <li><a href="#">Diversity</a></li>
-                                <li><a href="#">Global Health</a></li>
-                                <li><a href="#">Community Engagement</a></li>
-                                <li><a href="#">Events</a></li>
-                                <li><a href="#">How You Can Help</a></li>
-                            </ul>
-                            
-                            <aside>
-                                <p><a href="http://med.stanford.edu/">Stanford School of Medicine</a></p>
-                                <p><a href="http://stanfordhospital.org/">Stanford Hospital &amp; Clinics</a></p>
-                                <p><a href="http://www.stanfordchildrens.org">Stanford Children's Health</a></p>
-                            </aside>
-                            
-                            <a href="#"><i class="fa fa-angle-left"></i> Back</a>
-                        </section>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><span>Site Search</span><i class="fa fa-search"></i></a>
-                    <div>
-                        
-                        <form role="search" action="/content/sm-mcd/en/search.html">
-                            <label for="globalHeaderSearch">Search by name or topic</label>
-                            <div>
-                                <input type="text" placeholder="Search by name or topic..." name="q" id="globalHeaderSearch"/>
+                                <aside>
+                                    <a href="#">
+                                        <h3>Research News</h3>
+                                        <div data-alt="girl-looking-down" data-picture=""><div
+                                                data-media="(min-width: 1px)"
+                                                data-src="/content/dam/sm/commons/images/girl-looking-down.png.img.320.low.png"
+                                                  ></div><noscript><img alt="girl-looking-down"
+                                                  src="/content/dam/sm/commons/images/girl-looking-down.png.img.620.high.png"
+                                                 /></noscript></div><!--[if lt IE 9]><img alt="girl-looking-down" src='/content/dam/sm/commons/images/girl-looking-down.png.img.620.high.png' /><![endif]-->
+                                        <p>Stanford celebrates two 2013 Nobel Laureates <i
+                                                class="fa fa-arrow-right"></i></p>
+                                    </a>
+                                </aside>
+                                <aside>
+                                    <a href="#">
+                                        <h3>Explore Research</h3>
+                                        <p>Our signature strengths what feuls innovation at Stanford
+                                            Medicine <i class="fa fa-arrow-right"></i></p>
+                                    </a>
+                                </aside>
+                                <a href="#"><i class="fa fa-angle-left"></i> Back</a>
+                            </section>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">Education</a>
+                        <div>
+                            <section>
+                                <ul>
+                                    <li><a href="#">MD Programs</a></li>
+                                    <li><a href="#">PhD Programs</a></li>
+                                    <li><a href="#">Masters Programs</a></li>
+                                    <li><a href="http://med.stanford.edu/cme/">Continuing Medical
+                                            Education</a></li>
+                                    <li><a href="http://postdocs.stanford.edu/">Postdoctoral
+                                            Scholars</a></li>
+                                    <li><a href="#">Residencies &amp; Fellowships</a></li>
+                                    <li><a href="#">See All</a></li>
+                                    <li><a href="#"><h3>Education Resources</h3></a></li>
+                                    <li><a href="http://med.stanford.edu/alumni/">Alumni
+                                            Services</a></li>
+                                    <li><a href="#">Faculty Resources</a></li>
+                                    <li><a href="http://lane.stanford.edu/index.html">Lane
+                                            Library</a></li>
+                                    <li><a href="#">Student Resources</a></li>
+                                </ul>
+                                <aside>
+                                    <a href="#">
+                                        <h3>Education News</h3>
+                                        <div data-alt="superheader-hover-education" data-picture=""
+                                                ><div data-media="(min-width: 1px)"
+                                                data-src="/content/dam/sm/commons/images/superheader-hover-education.jpg.img.320.low.png"
+                                                  ></div><noscript><img
+                                                  alt="superheader-hover-education"
+                                                  src="/content/dam/sm/commons/images/superheader-hover-education.jpg.img.620.high.png"
+                                                 /></noscript></div><!--[if lt IE 9]><img alt="superheader-hover-education" src='/content/dam/sm/commons/images/superheader-hover-education.jpg.img.620.high.png' /><![endif]-->
+                                        <p>Stanford celebrates two 2013 Nobel Laureates <i
+                                                class="fa fa-arrow-right"></i></p>
+                                    </a>
+                                </aside>
+                                <aside>
+                                    <a href="#">
+                                        <h3>Explore Education</h3>
+                                        <p>Learn how we empower tomorrow's leaders <i
+                                                class="fa fa-arrow-right"></i></p>
+                                    </a>
+                                </aside>
+                                <a href="#"><i class="fa fa-angle-left"></i> Back</a>
+                            </section>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">Give</a>
+                        <div>
+                            <section>
+                                <div>
+                                    <a href="#">
+                                        <div data-alt="Campaign for Stanford Medicine + You ="
+                                            data-picture=""><div data-media="(min-width: 1px)"
+                                                data-src="/content/dam/sm/commons/images/MCD-campaign-logo.png.img.320.low.png"
+                                                  ></div><noscript><img
+                                                  alt="Campaign for Stanford Medicine + You ="
+                                                  src="/content/dam/sm/commons/images/MCD-campaign-logo.png.img.620.high.png"
+                                                 /></noscript></div><!--[if lt IE 9]><img alt="Campaign for Stanford Medicine + You =" src='/content/dam/sm/commons/images/MCD-campaign-logo.png.img.620.high.png' /><![endif]-->
+                                    </a>
+                                </div>
+                                <ul>
+                                    <li><a href="#"><h3>Be a part of the Equation</h3></a></li>
+                                    <li><a href="#">Biomedical Innovation Initiative</a></li>
+                                    <li><a href="#">New Stanford Hospital</a></li>
+                                    <li><a href="#">Clinical Excellence Research: Better Health,
+                                            Less spending</a></li>
+                                    <li><a href="#"><h3>Learn More</h3></a></li>
+                                    <li><a href="#">Transforming Patient Care</a></li>
+                                    <li><a href="#">Big Data</a></li>
+                                    <li><a href="#">Biomedical Innovation Building</a></li>
+                                </ul>
+                                <aside>
+                                    <ul>
+                                        <li><a href="#">Why Giving Matters</a></li>
+                                        <li><a href="#">Ways to Give</a></li>
+                                        <li><a href="#">Make a Gift</a></li>
+                                        <li><a href="#">Contact</a></li>
+                                    </ul>
+                                </aside>
+                                <aside>
+                                    <a href="#">
+                                        <h3>Explore Giving</h3>
+                                        <p>Learn how you can give <i class="fa fa-arrow-right"
+                                            ></i></p>
+                                    </a>
+                                </aside>
+                                <a href="#"><i class="fa fa-angle-left"></i> Back</a>
+                            </section>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                        <div>
+                            <section>
+                                <ul>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">News</a></li>
+                                    <li><a href="#">Contacts</a></li>
+                                    <li><a href="#">Maps &amp; Directions</a></li>
+                                    <li><a href="#">Leadership</a></li>
+                                    <li><a href="#">Diversity</a></li>
+                                    <li><a href="#">Global Health</a></li>
+                                    <li><a href="#">Community Engagement</a></li>
+                                    <li><a href="#">Events</a></li>
+                                    <li><a href="#">How You Can Help</a></li>
+                                </ul>
+                                <aside>
+                                    <p><a href="http://med.stanford.edu/">Stanford School of
+                                            Medicine</a></p>
+                                    <p><a href="http://stanfordhospital.org/">Stanford Hospital
+                                            &amp; Clinics</a></p>
+                                    <p><a href="http://www.stanfordchildrens.org">Stanford
+                                            Children's Health</a></p>
+                                </aside>
+                                <a href="#"><i class="fa fa-angle-left"></i> Back</a>
+                            </section>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><span>Site Search</span><i class="fa fa-search"></i></a>
+                        <div>
+                            <form role="search" action="/content/sm-mcd/en/search.html">
+                                <label for="globalHeaderSearch">Search by name or topic</label>
+                                <div>
+                                    <input type="text" placeholder="Search by name or topic..."
+                                        name="q" id="globalHeaderSearch" />
                                     <span>
-                                        <button type="submit"><span>Submit Search Query</span><i class="fa fa-arrow-right"></i></button>
+                                        <button type="submit"><span>Submit Search Query</span><i
+                                                class="fa fa-arrow-right"></i></button>
                                     </span>
-                            </div>
-                        </form>
-                        
-                    </div>
-                </li>
-            </ul>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="centered">
             <a id="sm" href="http://med.stanford.edu/">Stanford Medicine</a>
         </div>
+        <div id="lane-footer">
+            <div class="centered">
+            <div class="yui3-g">
+                <div class="yui3-u-1-6">
+                    <a href="/biomed-resources/index.html">All RESOURCES</a>
+                        <ul>
+                        <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
+                        <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
+                        <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
+                        <li><a href="/biomed-resources/images.html?a=a">Images</a></li>
+                        <li><a href="/biomed-resources/cc.html?a=a">Clinical Decision Tools</a></li>
+                    </ul>
+                </div>
+                <div class="yui3-u-1-6">
+                    <a href="/portals/index.html">SPECIALTY PORTALS</a>
+                    <ul>
+                        <li><a href="/portals/peds.html">Pediatrics</a></li>
+                        <li><a href="/portals/clinical.html">Clinical</a></li>
+                        <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
+                        <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
+                        <li><a href="/portals/picu.html">PICU</a></li>
+                    </ul>
+                </div>
+                <div class="yui3-u-1-6">
+                    <a href="/classes-consult/index.html">CLASSES &amp; CONSULTING</a>
+                    <ul>
+                        <li><a href="/classes-consult/laneclasses.html">Currently Offered Classes</a></li>
+                        <li><a href="/classes-consult/laneclasses-archive.html">ClassesArchive</a></li>
+                        <li><a href="/classes-consult/tutorials.html">Videos &amp; Tutorials</a></li>
+                        <li><a href="http://med.stanford.edu/irt/teaching/index.html">Teaching Support</a></li>
+                        <li><a href="/help/index.html">Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="yui3-u-1-6">
+                    <a href="/using-lib/index.html">USING THE LIBRARY</a>
+                    <ul>
+                        <li><a href="/using-lib/get-started/affiliates.html">Get Started at Lane</a></li>
+                        <li><a href="/using-lib/get-started/affiliates.html">Your eligibility</a></li>
+                        <li><a href="/using-lib/get-started/sunetid.html">Manage Your SUNet ID</a></li>
+                        <li><a href="/using-lib/docdeliver.html">DocXpress</a></li>
+                        <li><a href="/using-lib/computing.html">Computing Spaces</a></li>
+                    </ul>
+                </div>
+                <div class="yui3-u-1-6">
+                    <a href="/about/index.html">ABOUT LANE</a>
+                    <ul>
+                        <li><a href="/about/index.html">Hours</a></li>
+                        <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
+                        <li><a href="/about/contact.html">Contact Us</a></li>
+                        <li><a href="/about/liaisons.html">Liaisons</a></li>
+                        <li><a href="/about/grantwriters.html">Info for Grant  Writers</a></li>
+                    </ul>
+                </div>
+                <div class="yui3-u-1-6">
+                    <a href="/help/index.html">HOW TO</a>
+                    <ul>
+                        <li><a href="/help/choose-search.html">Choose Your Search</a></li>
+                        <li><a href="/help/lit-search.html">Search the Literature</a></li>
+                        <li><a href="/help/references.html">Manage References</a></li>
+                        <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
+                        <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div id="lane-subfooter">
+            <div class="centered">
+                <div class="yui3-g">
+                    <div class="yui3-u-1-2">©2014 Stanford Medicine</div>
+                    <div class="yui3-u-1-2">
+                        <ul>
+                            <li>
+                                <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
+                            </li>
+                            <li style="list-style:disc;margin-left:16px">
+                                <a href="http://med.stanford.edu/irt/help/?group=webnewmedia">Help</a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/stanfordmedicine">
+                                    <span>See us on Facebook</span><i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/sumedicine">
+                                    <span>See us on Twitter</span><i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="sm-footer">
             <ul class="centered">
-                <li><a id="footer-sm" href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
+                <li><a id="footer-sm" href="http://med.stanford.edu/">Stanford School of
+                        Medicine</a></li>
                 <li><a id="footer-su" href="http://www.stanford.edu/">Stanford University</a></li>
-                <li><a id="footer-shc" href="http://stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
-                <li><a id="footer-sch" href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
+                <li><a id="footer-shc" href="http://stanfordhospital.org/">Stanford Hospitals and
+                        Clinics</a></li>
+                <li><a id="footer-sch" href="http://www.stanfordchildrens.org/">Stanford Children's
+                        Hospital</a></li>
             </ul>
         </div>
     </body>
