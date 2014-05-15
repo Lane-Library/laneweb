@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.cme;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -8,6 +9,8 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * @author ryanmax
@@ -43,5 +46,14 @@ public class AbstractCMELinkTransformerTest {
     @Test
     public void testIsNotCMEHost() {
         assertFalse(this.transformer.isCMEHost("http://www.google.com/"));
+    }
+
+    @Test
+    public void testSetModel() {
+        this.model.put(Model.BASE_PATH, "/bp");
+        this.model.put(Model.EMRID, "emrid");
+        this.transformer.setModel(this.model);
+        assertEquals("/bp", this.transformer.getBasePath());
+        assertEquals("emrid", this.transformer.getEmrid());
     }
 }
