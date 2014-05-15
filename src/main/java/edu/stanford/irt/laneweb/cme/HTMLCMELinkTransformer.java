@@ -36,25 +36,25 @@ public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String name, final Attributes atts)
             throws SAXException {
-        String emrid = getEmrid();
-        String sunetHash = getSunetHash();
-        if (null != emrid || sunetHash != null) {
-            if (ANCHOR.equals(localName)) {
-                String link = atts.getValue(HREF);
-                if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {
-                    AttributesImpl newAttributes = new AttributesImpl(atts);
-                    newAttributes.setValue(newAttributes.getIndex(HREF), createCMELink(link));
-                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
-                    return;
-                }
-            } else if (INPUT.equals(localName)) {
-                String value = atts.getValue(VALUE);
-                if (null != value && EMRID_REPLACEMENT_STRING.equals(value)) {
-                    AttributesImpl newAttributes = new AttributesImpl(atts);
-                    newAttributes.setValue(newAttributes.getIndex(VALUE), emrid);
-                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
-                    return;
-                }
+        if (ANCHOR.equals(localName)) {
+            String link = atts.getValue(HREF);
+            if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {
+                AttributesImpl newAttributes = new AttributesImpl(atts);
+                StringBuilder url = new StringBuilder();
+                url.append(getBasePath());
+                url.append(CME_REDIRECT);
+                url.append(link);
+                newAttributes.setValue(newAttributes.getIndex(HREF), url.toString());
+                this.xmlConsumer.startElement(uri, localName, name, newAttributes);
+                return;
+            }
+        } else if (INPUT.equals(localName)) {
+            String value = atts.getValue(VALUE);
+            if (null != value && EMRID_REPLACEMENT_STRING.equals(value)) {
+                AttributesImpl newAttributes = new AttributesImpl(atts);
+                newAttributes.setValue(newAttributes.getIndex(VALUE), getEmrid());
+                this.xmlConsumer.startElement(uri, localName, name, newAttributes);
+                return;
             }
         }
         this.xmlConsumer.startElement(uri, localName, name, atts);

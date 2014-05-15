@@ -35,8 +35,11 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
         if (this.isSearchUrlElement) {
             String value = this.characters.toString();
             if (isCMEHost(value)) {
-                String link = createCMELink(value);
-                this.xmlConsumer.characters(link.toCharArray(), 0, link.length());
+                StringBuilder link = new StringBuilder();
+                link.append(getBasePath());
+                link.append(CME_REDIRECT);
+                link.append(value);
+                this.xmlConsumer.characters(link.toString().toCharArray(), 0, link.length());
             }
             this.isSearchUrlElement = false;
         }
@@ -52,7 +55,7 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        if ((getEmrid() != null || getSunetHash() != null) && URL.equals(localName)) {
+        if (URL.equals(localName)) {
             this.isSearchUrlElement = true;
             this.characters.setLength(0);
         }
