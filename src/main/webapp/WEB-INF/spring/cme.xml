@@ -14,6 +14,8 @@
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/cme-links"
-        class="edu.stanford.irt.laneweb.cme.CMELinkSelector"/>
+        class="edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector">
+        <property name="attributeName" value="emrid"/>
+    </bean>
     
 </beans>

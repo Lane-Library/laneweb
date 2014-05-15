@@ -6,8 +6,9 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 /**
- * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements to rewrite include: - url element of
- * metasearch results when value is known CME host
+ * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements
+ * to rewrite include: - url element of metasearch results when value is known
+ * CME host
  * 
  * @author ryanmax
  */
@@ -22,7 +23,7 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
     private XMLConsumer xmlConsumer;
 
     @Override
-    public void characters(final char[] ch, final int start, final int length) throws SAXException {
+    public void characters(final char ch[], final int start, final int length) throws SAXException {
         if (this.isSearchUrlElement) {
             this.characters.append(ch, start, length);
         } else {
@@ -52,7 +53,7 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        if ((getEmrid() != null || getSunetHash() != null) && URL.equals(localName)) {
+        if (getEmrid() != null && URL.equals(localName)) {
             this.isSearchUrlElement = true;
             this.characters.setLength(0);
         }

@@ -10,9 +10,7 @@ public class CMELinkSelector implements Selector {
 
     private static final String EMPTY_STRING = "";
 
-    public boolean select(final String expression, final Map<String, Object> objectModel,
-            final Map<String, String> parameters) {
-        return !EMPTY_STRING.equals(ModelUtil.getString(objectModel, Model.AUTH, EMPTY_STRING))
-                || !EMPTY_STRING.equals(ModelUtil.getString(objectModel, Model.EMRID, EMPTY_STRING));
+    public boolean select(final String expression, final Map<String, Object> objectModel, final Map<String, String> parameters) {
+        return !EMPTY_STRING.equals(ModelUtil.getString(objectModel, Model.EMRID, EMPTY_STRING));
     }
 }

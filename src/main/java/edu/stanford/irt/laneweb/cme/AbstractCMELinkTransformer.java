@@ -10,33 +10,24 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
 
-    private static final String SHC_EMRID_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
-
-    private static final String SU_SUNETID_ARGS = "unid=?&srcsys=EZPX90710&eiv=2.1.0";
+    private static final String UTD_CME_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
 
     private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
 
-    private static final String UTD_HOST = "www.uptodate.com";
+    private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
 
     private String emrid;
 
-    private String sunetHash;
+    public void setModel(final Map<String, Object> model) {
+        this.emrid = ModelUtil.getString(model, Model.EMRID);
+    }
 
     protected String createCMELink(final String link) {
         StringBuilder sb = new StringBuilder();
-        String id = null;
-        String args = null;
-        if (this.emrid != null) {
-            id = this.emrid;
-            args = SHC_EMRID_ARGS;
-        } else if (this.sunetHash != null) {
-            id = this.sunetHash;
-            args = SU_SUNETID_ARGS;
-        }
         if (link.contains("?")) {
-            sb.append(link).append("&").append(args.replaceFirst("\\?", id));
+            sb.append(link).append("&").append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
         } else if (link.endsWith("/") || link.endsWith("online")) {
-            sb.append(UTD_CME_URL).append(args.replaceFirst("\\?", id));
+            sb.append(UTD_CME_URL).append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
         } else {
             sb.append(link);
         }
@@ -47,16 +38,12 @@ public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe impleme
         return this.emrid;
     }
 
-    protected String getSunetHash() {
-        return this.sunetHash;
-    }
-
     protected boolean isCMEHost(final String link) {
-        return link.contains(UTD_HOST);
-    }
-
-    public void setModel(final Map<String, Object> model) {
-        this.emrid = ModelUtil.getString(model, Model.EMRID);
-        this.sunetHash = ModelUtil.getString(model, Model.AUTH);
+        for (String host : UTD_HOSTS) {
+            if (link.contains(host)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
