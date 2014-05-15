@@ -40,10 +40,14 @@
             <map:when test="">
                 <map:match pattern="plain/**.html" type="wildcard">
                     <map:generate type="file" src="content:/{1}.html"/>
+                    <map:select type="cme-links">
+                        <map:when test="true">
+                            <map:transform type="html-cme-links"/>
+                        </map:when>
+                    </map:select>
                     <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
                     <map:select type="proxy-links">
                         <map:when test="true">
-                            <map:transform type="html-cme-links"/>
                             <map:transform type="proxy-links"/>
                         </map:when>
                     </map:select>
@@ -55,6 +59,11 @@
                         <map:generate type="file" src="content:/{1}.html"/>
                         <map:generate type="file" src="content:/templates/{template}.xml"/>
                     </map:aggregate>
+                    <map:select type="cme-links">
+                        <map:when test="true">
+                            <map:transform type="html-cme-links"/>
+                        </map:when>
+                    </map:select>
                     <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
                     <map:select type="logged-in">
                         <map:when test="true">
@@ -63,7 +72,6 @@
                     </map:select>
                     <map:select type="proxy-links">
                         <map:when test="true">
-                            <map:transform type="html-cme-links"/>
                             <map:transform type="proxy-links"/>
                         </map:when>
                     </map:select>
@@ -78,10 +86,14 @@
     -->
        <map:match pattern="plain/**.html" type="wildcard">
             <map:generate type="file" src="cocoon://content/{1}.html"/>
+            <map:select type="cme-links">
+                <map:when test="true">
+                    <map:transform type="html-cme-links"/>
+                </map:when>
+            </map:select>
             <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
             <map:select type="proxy-links">
                 <map:when test="true">
-                    <map:transform type="html-cme-links"/>
                     <map:transform type="proxy-links"/>
                 </map:when>
             </map:select>
@@ -93,6 +105,11 @@
                 <map:generate type="file" src="cocoon://content/{1}.html"/>
                 <map:generate type="file" src="cocoon://content/templates/{template}.xml"/>
             </map:aggregate>
+            <map:select type="cme-links">
+                <map:when test="true">
+                    <map:transform type="html-cme-links"/>
+                </map:when>
+            </map:select>
             <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
             <map:select type="logged-in">
                 <map:when test="true">
@@ -101,7 +118,6 @@
             </map:select>
             <map:select type="proxy-links">
                 <map:when test="true">
-                    <map:transform type="html-cme-links"/>
                     <map:transform type="proxy-links"/>
                 </map:when>
             </map:select>

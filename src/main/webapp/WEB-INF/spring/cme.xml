@@ -13,4 +13,7 @@
         scope="prototype">
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/cme-links"
+        class="edu.stanford.irt.laneweb.cme.CMELinkSelector"/>
+    
 </beans>
