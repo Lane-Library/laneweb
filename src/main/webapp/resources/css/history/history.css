@@ -92,7 +92,8 @@ display:block;
     font-weight:400;
 }
 #lane-subfooter{
-    padding-bottom:24px
+    padding-bottom:24px;
+    line-height: 22px;
 }
 #lane-subfooter, #lane-subfooter a{
     color:  #999999;
@@ -110,12 +111,13 @@ display:block;
 }
 #lane-subfooter i{
     background-color: #999999;
+    border-radius: 11px;
     color: #8C1515;
-    height:22px;
-    width:22px;
-    border-radius:11px;
-    text-align:start;
-    vertical-align:bottom;
+    height: 22px;
+    line-height: 20px;
+    margin-left: 0;
+    text-align: center;
+    width: 22px;
 }
 #sm-footer{
     background-color:rgb(38, 38, 38);

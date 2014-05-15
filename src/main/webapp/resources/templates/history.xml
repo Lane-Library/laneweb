@@ -318,7 +318,9 @@
         <div id="lane-subfooter">
             <div class="centered">
                 <div class="yui3-g">
-                    <div class="yui3-u-1-2">©2014 Stanford Medicine</div>
+                    <div class="yui3-u-1-2">
+                        <div style="height:26px;padding-top:4px">©2014 Stanford Medicine</div>
+                    </div>
                     <div class="yui3-u-1-2">
                         <ul>
                             <li>
