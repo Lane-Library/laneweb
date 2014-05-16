@@ -3,12 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Medical History Center</title>
-        <link rel="stylesheet" type="text/css"
-            href="http://yui.yahooapis.com/3.16.0/build/cssreset/cssreset-min.css" />
-        <link rel="stylesheet" type="text/css"
-            href="http://yui.yahooapis.com/3.16.0/build/cssgrids/cssgrids-min.css" />
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/history/history.css" />
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/history/lane-history.css" />
     </head>
     <body>
         <div id="header">
