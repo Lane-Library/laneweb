@@ -71,13 +71,14 @@ display:block;
     background-color: #8C1515;
 }
 #lane-footer{
-    padding:24px 0;
     margin-top:10px
 }
-#lane-footer ul{
-    border-top: 1px solid #902827;
+#lane-footer h2{
+    font-size:24px;
+    padding:17px 0 12px;
+    margin-bottom:24px
 }
-#lane-footer li{
+#lane-footer li, #lane-footer h3, #lane-footer h2{
     border-bottom: 1px solid #902827;
 }
 #lane-footer a{
@@ -92,8 +93,8 @@ display:block;
     font-weight:400;
 }
 #lane-subfooter{
-    padding-bottom:24px;
     line-height: 22px;
+    padding: 22px 0 7px;
 }
 #lane-subfooter, #lane-subfooter a{
     color:  #999999;
