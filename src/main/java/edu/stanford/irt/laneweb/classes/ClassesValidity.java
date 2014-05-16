@@ -1,20 +1,29 @@
 package edu.stanford.irt.laneweb.classes;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import edu.stanford.irt.cocoon.cache.Validity;
 
+// TODO: have isValid() return false if it has been more than one day
 public class ClassesValidity implements Validity {
 
-    private static final long DELAY = 3600 * 1000;
+    private static final long ONE_HOUR_DELAY = 3600 * 1000;
+    
+    private static final int ELEVEN_PM = 23;
 
     private static final long serialVersionUID = 1L;
 
     private long expires;
+    
+    int hour;
 
     public ClassesValidity() {
-        this.expires = System.currentTimeMillis() + DELAY;
+        this(ELEVEN_PM, ONE_HOUR_DELAY);
+    }
+    
+    public ClassesValidity(int hour, long delay) {
+        this.hour = hour;
+        this.expires = System.currentTimeMillis() + delay;
     }
 
     public boolean isValid() {
@@ -22,9 +31,7 @@ public class ClassesValidity implements Validity {
         if (now <= this.expires) {
             return true;
         }
-        GregorianCalendar cal = new GregorianCalendar();
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        if (hour == 23) {
+        if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == this.hour) {
             return false;
         }
         return true;
