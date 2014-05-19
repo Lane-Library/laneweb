@@ -216,6 +216,15 @@ Y.use("*",  function(){
             Y.Assert.isNull(this.event);
         },
 
+        testClickProxyCme: function() {
+            var link = Y.one("#cmelink");
+            link.simulate("click");
+            Y.Assert.areEqual("www.uptodate.com", this.pageView.host);
+            Y.Assert.areEqual("/online" , this.pageView.path);
+            Y.Assert.areEqual(link.get("text"), this.pageView.title);
+            Y.Assert.isNull(this.event);
+        },
+        
         testClickLaneproxy: function() {
             var link = Y.one("#laneproxy");
             link.simulate("click");

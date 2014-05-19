@@ -75,6 +75,22 @@
                 //TODO: why &url=, not ?url=
                 Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
             }
+        },
+        
+        testCmeRedirectClick: function() {
+            Y.one("#cmeredirect").simulate("click");
+            if (this.cookie === "denied") {
+                Y.Assert.isTrue(-1 < this.path.indexOf("redirect/cme") < 2);
+            } else {
+                var yes = Y.one("#yes-persistent-login");
+                var handle = yes.on("click", function(event) {
+                    event.preventDefault();
+                });
+                yes.simulate("click");
+                handle.detach();
+                //TODO: why &url=, not ?url=
+                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
+            }
         }
     });
 
