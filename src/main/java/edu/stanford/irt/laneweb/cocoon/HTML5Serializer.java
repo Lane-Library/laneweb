@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import javax.xml.transform.sax.SAXTransformerFactory;
@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class HTML5Serializer extends TransformerSerializer {
 
-    private static final byte[] HTML5_DOCTYPE_DECLARATION = "<!DOCTYPE html>\n".getBytes(Charset.forName("UTF-8"));
+    private static final byte[] HTML5_DOCTYPE_DECLARATION = "<!DOCTYPE html>\n".getBytes(StandardCharsets.UTF_8);
 
     private OutputStream outputStream;
 

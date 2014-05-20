@@ -4,7 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
@@ -69,7 +69,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         if (this.elementName.equals(qName)) {
             this.inElement = false;
-            final ByteArrayInputStream inputStream = new ByteArrayInputStream(this.content.toString().getBytes(Charset.forName("UTF-8")));
+            final ByteArrayInputStream inputStream = new ByteArrayInputStream(this.content.toString().getBytes(StandardCharsets.UTF_8));
             Source source = new Source() {
 
                 public boolean exists() {

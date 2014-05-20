@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -149,7 +149,7 @@ public class GoogleTracker {
     private String generateVisitorId() throws NoSuchAlgorithmException, IOException {
         String message = this.userAgent + getRandomNumber() + UUID.randomUUID().toString();
         MessageDigest m = MessageDigest.getInstance("MD5");
-        m.update(message.getBytes(Charset.forName("UTF-8")), 0, message.length());
+        m.update(message.getBytes(StandardCharsets.UTF_8), 0, message.length());
         byte[] sum = m.digest();
         BigInteger messageAsNumber = new BigInteger(1, sum);
         String md5String = messageAsNumber.toString(16);

@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.proxy;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,11 +24,9 @@ public class EzproxyServersWriter {
 
     private static final byte[] U = { 'U', ' ' };
 
-    private static final Charset UTF8 = Charset.forName("UTF-8");
-
     static {
         SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
-                .getBytes(UTF8);
+                .getBytes(StandardCharsets.UTF_8);
     }
 
     private DataSource dataSource;
@@ -54,13 +52,13 @@ public class EzproxyServersWriter {
             while (rs.next()) {
                 String host = rs.getString(1);
                 outputStream.write(T);
-                outputStream.write(host.getBytes(UTF8));
+                outputStream.write(host.getBytes(StandardCharsets.UTF_8));
                 outputStream.write('\n');
                 outputStream.write(U);
-                outputStream.write(host.getBytes(UTF8));
+                outputStream.write(host.getBytes(StandardCharsets.UTF_8));
                 outputStream.write('\n');
                 outputStream.write(HJ);
-                outputStream.write(host.getBytes(UTF8));
+                outputStream.write(host.getBytes(StandardCharsets.UTF_8));
                 outputStream.write('\n');
                 outputStream.write('\n');
             }

@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -67,6 +67,6 @@ public class UrlTester {
         result.append("\n\n\nResponse Headers:\n\n");
         result.append(getHeaderString(httpResponse.getAllHeaders()));
         result.append("\n-->");
-        return result.toString().getBytes(Charset.forName("UTF-8"));
+        return result.toString().getBytes(StandardCharsets.UTF_8);
     }
 }

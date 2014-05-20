@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import javax.xml.transform.TransformerFactory;
@@ -33,12 +33,12 @@ public class TestXMLConsumer extends TransformerSerializer {
     }
     
     public String getStringValue() {
-        return new String(this.baos.toByteArray(), Charset.forName("UTF-8"));
+        return new String(this.baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     public String getExpectedResult(Object test, final String fileName) throws IOException {
         StringWriter sw = new StringWriter();
-        InputStreamReader br = new InputStreamReader(test.getClass().getResourceAsStream(fileName), Charset.forName("UTF-8"));
+        InputStreamReader br = new InputStreamReader(test.getClass().getResourceAsStream(fileName), StandardCharsets.UTF_8);
         char[] cbuf = new char[1024];
         while (true) {
             int i = br.read(cbuf);
