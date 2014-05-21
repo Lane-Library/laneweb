@@ -3,12 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Medical History Center</title>
-        <link rel="stylesheet" type="text/css"
-            href="http://yui.yahooapis.com/3.16.0/build/cssreset/cssreset-min.css" />
-        <link rel="stylesheet" type="text/css"
-            href="http://yui.yahooapis.com/3.16.0/build/cssgrids/cssgrids-min.css" />
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/history/history.css" />
+        <link  rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,200italic,300italic,400italic|Fjord+One"/>
+        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/history/lane-history.css" />
     </head>
     <body>
         <div id="header">
@@ -251,74 +248,56 @@
         </div>
         <div id="lane-footer">
             <div class="centered">
-            <div class="yui3-g">
-                <div class="yui3-u-1-6">
-                    <a href="/biomed-resources/index.html">All RESOURCES</a>
+                <h2><a href="http://med.stanford.edu/">Stanford Medicine</a></h2>
+                <div class="yui3-g">
+                    <div class="yui3-u-1-2">
+                        <h3><a href="http://med.stanford.edu/">Stanford School of Medicine</a></h3>
+                        <div class="yui3-g">
+                            <div class="yui3-u-1-2">
+                                <ul>
+                                    <li><a href="//med.stanford.edu/school">About</a></li>
+                                    <li><a href="//med.stanford.edu/school/contacts">Contact</a></li>
+                                    <li><a href="//med.stanford.edu/school/maps">Maps &amp; Directions</a></li>
+                                    <li><a href="//stanfordcareers.stanford.edu/">Jobs</a></li>
+                                </ul>
+                            </div>
+                            <div class="yui3-u-1-2">
+                                <ul>
+                                    <li><a href="//med.stanford.edu/school/directory">Departments</a></li>
+                                    <li><a href="//med.stanford.eu/education">Academic Programs</a></li>
+                                    <li><a href="//med.stanford.edu/vision">Vision</a></li>
+                                    <li><a href="//med.stanford.edu/school/leadership">Leadership</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yui3-u-1-4">
+                        <h3><a href="http://www.stanfordhospital.org">Stanford Hospital &amp; Clinics</a></h3>
                         <ul>
-                        <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
-                        <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
-                        <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
-                        <li><a href="/biomed-resources/images.html?a=a">Images</a></li>
-                        <li><a href="/biomed-resources/cc.html?a=a">Clinical Decision Tools</a></li>
-                    </ul>
+                            <li><a href="http://stanfordhospital.org/profiles/frdActionServlet?choiceId=searchClinicalService">Find a Physician</a></li>
+                            <li><a href="http://stanfordhospital.org/clinicsmedServices/trials/">Clinical Trials</a></li>
+                            <li><a href="http://stanfordhospital.org/aboutUs/contact.html">Contact</a></li>
+                            <li><a href="http://stanfordhospital.org/directions/maps/">Maps &amp; Directions</a></li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u-1-4">
+                        <h3><a href="http://www.stanfordchildrens.org">Stanford Children's Health</a></h3>
+                        <ul>
+                            <li><a href="http://www.stanfordchildrens.org/en/search/default?tab=doctors">Find a Physician</a></li>
+                            <li><a href="http://med.stanford.edu/clinicaltrials/conditions/Pediatrics">Clinical Trials</a></li>
+                            <li><a href="http://www.stanfordchildrens.org/en/about/contact">Contact</a></li>
+                            <li><a href="http://www.stanfordchildrens.org/en/locations-directions">Maps &amp; Directions</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="yui3-u-1-6">
-                    <a href="/portals/index.html">SPECIALTY PORTALS</a>
-                    <ul>
-                        <li><a href="/portals/peds.html">Pediatrics</a></li>
-                        <li><a href="/portals/clinical.html">Clinical</a></li>
-                        <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
-                        <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
-                        <li><a href="/portals/picu.html">PICU</a></li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-6">
-                    <a href="/classes-consult/index.html">CLASSES &amp; CONSULTING</a>
-                    <ul>
-                        <li><a href="/classes-consult/laneclasses.html">Currently Offered Classes</a></li>
-                        <li><a href="/classes-consult/laneclasses-archive.html">ClassesArchive</a></li>
-                        <li><a href="/classes-consult/tutorials.html">Videos &amp; Tutorials</a></li>
-                        <li><a href="http://med.stanford.edu/irt/teaching/index.html">Teaching Support</a></li>
-                        <li><a href="/help/index.html">Consulting</a></li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-6">
-                    <a href="/using-lib/index.html">USING THE LIBRARY</a>
-                    <ul>
-                        <li><a href="/using-lib/get-started/affiliates.html">Get Started at Lane</a></li>
-                        <li><a href="/using-lib/get-started/affiliates.html">Your eligibility</a></li>
-                        <li><a href="/using-lib/get-started/sunetid.html">Manage Your SUNet ID</a></li>
-                        <li><a href="/using-lib/docdeliver.html">DocXpress</a></li>
-                        <li><a href="/using-lib/computing.html">Computing Spaces</a></li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-6">
-                    <a href="/about/index.html">ABOUT LANE</a>
-                    <ul>
-                        <li><a href="/about/index.html">Hours</a></li>
-                        <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
-                        <li><a href="/about/contact.html">Contact Us</a></li>
-                        <li><a href="/about/liaisons.html">Liaisons</a></li>
-                        <li><a href="/about/grantwriters.html">Info for Grant  Writers</a></li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-6">
-                    <a href="/help/index.html">HOW TO</a>
-                    <ul>
-                        <li><a href="/help/choose-search.html">Choose Your Search</a></li>
-                        <li><a href="/help/lit-search.html">Search the Literature</a></li>
-                        <li><a href="/help/references.html">Manage References</a></li>
-                        <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
-                        <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
-                    </ul>
-                </div>
-            </div>
             </div>
         </div>
         <div id="lane-subfooter">
             <div class="centered">
                 <div class="yui3-g">
-                    <div class="yui3-u-1-2">©2014 Stanford Medicine</div>
+                    <div class="yui3-u-1-2">
+                        <div style="height:26px;padding-top:4px">©2014 Stanford Medicine</div>
+                    </div>
                     <div class="yui3-u-1-2">
                         <ul>
                             <li>

@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.codec;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -21,8 +21,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 // TODO: remove code duplicated with SunetidCookieCodec
 public class SHCCodec {
-    
-    private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private Cipher cipher;
 
@@ -39,7 +37,7 @@ public class SHCCodec {
         byte[] dst = new byte[16];
         System.arraycopy(src, 0, dst, 0, src.length);
         this.secretKey = new SecretKeySpec(dst, "AES");
-        this.initialVector = new IvParameterSpec(vector.getBytes(Charset.forName("ASCII")));
+        this.initialVector = new IvParameterSpec(vector.getBytes(StandardCharsets.US_ASCII));
         try {
             this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
@@ -54,11 +52,11 @@ public class SHCCodec {
             initializeCipher(Cipher.DECRYPT_MODE);
             plaintext = doFinal(ciphertextBytes);
         }
-        return new String(plaintext, UTF8);
+        return new String(plaintext, StandardCharsets.UTF_8);
     }
 
     public synchronized String encrypt(final String plaintext) {
-        byte[] plainTextBytes = plaintext.getBytes(UTF8);
+        byte[] plainTextBytes = plaintext.getBytes(StandardCharsets.UTF_8);
         byte[] ciphertext = null;
         synchronized(this.cipher) {
             initializeCipher(Cipher.ENCRYPT_MODE);

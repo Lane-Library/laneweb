@@ -45,10 +45,8 @@ public class BassettImageListSAXStrategy implements SAXStrategy<List<BassettImag
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", NAMESPACE);
             XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETTS);
-            if (bassetts != null) {
-                for (BassettImage eresource : bassetts) {
-                    handleEresource(xmlConsumer, eresource);
-                }
+            for (BassettImage eresource : bassetts) {
+                handleEresource(xmlConsumer, eresource);
             }
             XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETTS);
             xmlConsumer.endPrefixMapping("");

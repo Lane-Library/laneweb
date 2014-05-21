@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.codec;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -22,8 +22,6 @@ public class SunetIdCookieCodec {
 
     private static final String COOKIE_VALUE_SEPARATOR = "%";
 
-    private static final Charset UTF8 = Charset.forName("UTF-8");
-
     private Cipher cipher;
 
     private SecretKey desKey;
@@ -32,7 +30,7 @@ public class SunetIdCookieCodec {
         try {
             // latest version of commons-codec (1.6) does not pad with 0 bytes
             // to 16, so do that here:
-            byte[] src = Base64.decodeBase64(key.getBytes(UTF8));
+            byte[] src = Base64.decodeBase64(key.getBytes(StandardCharsets.UTF_8));
             byte[] dst = new byte[16];
             System.arraycopy(src, 0, dst, 0, src.length);
             this.desKey = new SecretKeySpec(dst, "AES");
@@ -75,9 +73,9 @@ public class SunetIdCookieCodec {
     private synchronized String decrypt(final String codedInput) {
         try {
             this.cipher.init(Cipher.DECRYPT_MODE, this.desKey);
-            byte[] base = Base64.decodeBase64(codedInput.getBytes(UTF8));
+            byte[] base = Base64.decodeBase64(codedInput.getBytes(StandardCharsets.UTF_8));
             byte[] cleartext = this.cipher.doFinal(base);
-            return new String(cleartext, UTF8);
+            return new String(cleartext, StandardCharsets.UTF_8);
         } catch (InvalidKeyException e) {
             throw new LanewebException(e);
         } catch (IllegalBlockSizeException e) {
@@ -90,9 +88,9 @@ public class SunetIdCookieCodec {
     private synchronized String encrypt(final String input) {
         try {
             this.cipher.init(Cipher.ENCRYPT_MODE, this.desKey);
-            byte[] cleartext = input.getBytes(UTF8);
+            byte[] cleartext = input.getBytes(StandardCharsets.UTF_8);
             byte[] ciphertext = this.cipher.doFinal(cleartext);
-            return new String(Base64.encodeBase64(ciphertext), UTF8);
+            return new String(Base64.encodeBase64(ciphertext), StandardCharsets.UTF_8);
         } catch (InvalidKeyException e) {
             throw new LanewebException(e);
         } catch (IllegalBlockSizeException e) {

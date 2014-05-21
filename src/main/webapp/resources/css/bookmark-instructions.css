@@ -9,7 +9,7 @@
 }
 
 #bookmark-instructions .hd div {
-	background-image: url("/././resources/images/sprite-all.png");
+	background-image: url("../images/sprite-all.png");
 	height: 24px;
 	width: 202px;
 	margin: auto;

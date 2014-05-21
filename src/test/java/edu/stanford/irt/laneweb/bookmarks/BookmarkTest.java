@@ -12,9 +12,9 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class BookmarkTest {
 
-    private String label;
+    private Bookmark bookmark;
 
-    private Bookmark link;
+    private String label;
 
     private String url;
 
@@ -22,42 +22,71 @@ public class BookmarkTest {
     public void setUp() throws Exception {
         this.label = "label";
         this.url = "url";
-        this.link = new Bookmark(this.label, this.url);
+        this.bookmark = new Bookmark(this.label, this.url);
     }
 
     @Test
     public void testEquals() {
-        assertTrue(this.link.equals(new Bookmark(this.label, this.url)));
+        assertTrue(this.bookmark.equals(new Bookmark(this.label, this.url)));
     }
 
     @Test
     public void testEqualsDifferent() {
-        assertFalse(this.link.equals(new Bookmark(this.url, this.label)));
+        assertFalse(this.bookmark.equals(new Bookmark("foo", "bar")));
+    }
+
+    @Test
+    public void testEqualsNotBookmark() {
+        assertFalse(this.bookmark.equals(new Object()));
     }
 
     @Test
     public void testEqualsNull() {
-        assertFalse(this.link.equals(null));
+        assertFalse(this.bookmark.equals(null));
     }
 
     @Test
     public void testEqualsSame() {
-        assertTrue(this.link.equals(this.link));
+        assertTrue(this.bookmark.equals(this.bookmark));
+    }
+
+    @SuppressWarnings("serial")
+    @Test
+    public void testEqualsSameHashDifferentLabel() {
+        assertFalse(this.bookmark.equals(new Bookmark("newlabel", this.url) {
+
+            @Override
+            public int hashCode() {
+                return BookmarkTest.this.bookmark.hashCode();
+            }
+        }));
+    }
+
+    @SuppressWarnings("serial")
+    @Test
+    public void testEqualsSameHashDifferentUrl() {
+        assertFalse(this.bookmark.equals(new Bookmark(this.label, "newurl") {
+
+            @Override
+            public int hashCode() {
+                return BookmarkTest.this.bookmark.hashCode();
+            }
+        }));
     }
 
     @Test
     public void testGetLabel() {
-        assertEquals(this.label, this.link.getLabel());
+        assertEquals(this.label, this.bookmark.getLabel());
     }
 
     @Test
     public void testGetUrl() {
-        assertEquals(this.url, this.link.getUrl());
+        assertEquals(this.url, this.bookmark.getUrl());
     }
 
     @Test
     public void testHashCode() {
-        assertEquals((this.label.hashCode() ^ this.url.hashCode()), this.link.hashCode());
+        assertEquals((this.label.hashCode() ^ this.url.hashCode()), this.bookmark.hashCode());
     }
 
     @Test
@@ -76,5 +105,46 @@ public class BookmarkTest {
             fail();
         } catch (LanewebException e) {
         }
+    }
+
+    @Test
+    public void testSetLabel() {
+        Bookmark b = new Bookmark();
+        b.setLabel(this.label);
+        assertEquals(this.label, b.getLabel());
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testSetLabelAlreadySet() {
+        this.bookmark.setLabel(this.label);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testSetLabelNull() {
+        Bookmark b = new Bookmark();
+        b.setLabel(null);
+    }
+
+    @Test
+    public void testSetUrl() {
+        Bookmark b = new Bookmark();
+        b.setUrl(this.url);
+        assertEquals(this.url, b.getUrl());
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testSetUrlAlreadySet() {
+        this.bookmark.setUrl(this.url);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testSetUrlNull() {
+        Bookmark b = new Bookmark();
+        b.setUrl(null);
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals("label=url", this.bookmark.toString());
     }
 }

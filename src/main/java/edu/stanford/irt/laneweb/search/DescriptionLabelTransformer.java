@@ -19,7 +19,7 @@ public class DescriptionLabelTransformer extends AbstractXMLPipe implements Tran
 
     private static final Attributes EMPTY_ATTRIBUTES = new AttributesImpl();
 
-    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z '/,]+)##");
+    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Z '/,-]+)##");
 
     private CharBuffer chars = CharBuffer.allocate(256);
 

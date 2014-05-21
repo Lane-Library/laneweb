@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -31,8 +31,8 @@ public class RobotsDotTextServlet extends HttpServlet {
     private byte[] production;
 
     public RobotsDotTextServlet() {
-        this.production = PRODUCTION.getBytes(Charset.forName("UTF-8"));
-        this.nonproduction = NONPRODUCTION.getBytes(Charset.forName("UTF-8"));
+        this.production = PRODUCTION.getBytes(StandardCharsets.UTF_8);
+        this.nonproduction = NONPRODUCTION.getBytes(StandardCharsets.UTF_8);
     }
 
     @Override
