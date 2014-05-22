@@ -40,11 +40,6 @@ public class QueryTranslatorTest {
         }
     }
 
-    /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.eresources.QueryTranslator#processString(java.lang.String)}
-     * .
-     */
     @Test
     public void testProcessString() {
         this.translator.processString("green  red");
