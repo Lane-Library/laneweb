@@ -5,7 +5,7 @@ body {
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class*="yui3-u"] {
 	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 12 px;
+	font-size: 14 px;
 }
 
 .centered {
@@ -18,6 +18,7 @@ body {
 	height: 92px;
 	background-color: white;
 	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+	margin-bottom: 24px;
 }
 
 h1 {
@@ -29,6 +30,10 @@ h1 {
 h1 a {
 	color: #333333;
 	text-decoration: none
+}
+
+p {
+	margin: 0 0 11px; 
 }
 
 #sm-header {
@@ -326,4 +331,8 @@ h3 {
 	font-size: 14px;
 	float: left;
 	margin-bottom: 36px;
+}
+b {
+color: #8c1515;
+text-transform: uppercase;
 }
