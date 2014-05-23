@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.ldap;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.isA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.powermock.api.easymock.PowerMock.createMock;
@@ -114,11 +113,13 @@ public class SubjectSourceTest {
     }
 
     @Test
-    public void testLoginException() {
-        SubjectSource s = new SubjectSource("name", this.log);
-        this.log.error(isA(String.class), isA(LoginException.class));
-        replay(this.log);
-        assertNull(s.getSubject());
-        verify(this.log);
+    public void testLoginException() throws LoginException {
+        LoginException ex = new LoginException("oopsie");
+        this.loginContext.login();
+        expectLastCall().andThrow(ex);
+        this.log.error("oopsie", ex);
+        replay(this.log, this.loginContext);
+        assertNull(this.subjectSource.getSubject());
+        verify(this.log, this.loginContext);
     }
 }
