@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +20,13 @@ public class ExtensionsSuggestController {
 
     private static final int RETURN_LIMIT = 10;
 
-    @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/extensions-suggest")
     private SuggestionManager suggestionManager;
+
+    @Autowired
+    public ExtensionsSuggestController(
+            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/extensions-suggest") final SuggestionManager suggestionManager) {
+        this.suggestionManager = suggestionManager;
+    }
 
     @RequestMapping(value = "/eresources/extensions-suggest")
     @ResponseBody

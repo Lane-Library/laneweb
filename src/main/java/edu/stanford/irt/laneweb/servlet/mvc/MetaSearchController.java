@@ -27,16 +27,11 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 @Controller
 public class MetaSearchController {
 
-    @Autowired
     private MetaSearchManager manager;
 
-    @Autowired
     private CompositeDataBinder dataBinder;
-    
-    public MetaSearchController() {
-        // empty default constructor
-    }
 
+    @Autowired
     public MetaSearchController(final MetaSearchManager manager, final CompositeDataBinder dataBinder) {
         this.manager = manager;
         this.dataBinder = dataBinder;
@@ -103,7 +98,7 @@ public class MetaSearchController {
      */
     private Collection<String> getEnginesForResources(final List<String> resources) {
         Collection<String> engines = new LinkedList<String>();
-        Result describeResult = this.manager.describe(new SimpleQuery("", resources));
+        Result describeResult = this.manager.describe(new SimpleQuery("", null));
         for (Result engine : describeResult.getChildren()) {
             for (Result resource : engine.getChildren()) {
                 if (resources.contains(resource.getId())) {
