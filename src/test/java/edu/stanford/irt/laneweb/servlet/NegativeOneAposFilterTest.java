@@ -25,6 +25,7 @@ public class NegativeOneAposFilterTest {
     private HttpServletResponse response;
     private Enumeration<String> names;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.filter = new NegativeOneAposFilter();
