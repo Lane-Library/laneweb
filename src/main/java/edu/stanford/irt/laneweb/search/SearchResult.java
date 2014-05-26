@@ -1,11 +1,9 @@
 package edu.stanford.irt.laneweb.search;
 
-import edu.stanford.irt.laneweb.resource.Resource;
-
 /**
  * @author ryanmax
  */
-public interface SearchResult extends Resource, Comparable<SearchResult> {
+public interface SearchResult extends Comparable<SearchResult> {
 
     /**
      * @return the search score
