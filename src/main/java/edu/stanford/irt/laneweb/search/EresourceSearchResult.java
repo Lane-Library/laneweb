@@ -5,25 +5,19 @@ import edu.stanford.irt.laneweb.eresources.Eresource;
 /**
  * @author ryanmax
  */
-public class EresourceSearchResult implements SearchResult {
+public class EresourceSearchResult extends AbstractSearchResult {
 
     private Eresource eresource;
 
-    private int hashCode;
-
-    private String sortTitle;
-
     public EresourceSearchResult(final Eresource eresource) {
+        super(eresource.getScore(), eresource.getTitle());
         this.eresource = eresource;
-        this.sortTitle = NON_FILING_PATTERN.matcher(eresource.getTitle()).replaceFirst("");
-        this.sortTitle = WHITESPACE.matcher(this.sortTitle).replaceAll("").toLowerCase();
-        this.hashCode = this.sortTitle.hashCode();
     }
 
     public int compareTo(final SearchResult other) {
         int scoreCmp = other.getScore() - getScore();
         if (scoreCmp == 0) {
-            scoreCmp = this.sortTitle.compareTo(other.getSortTitle());
+            scoreCmp = getSortTitle().compareTo(other.getSortTitle());
             if (scoreCmp == 0 && !other.equals(this)) {
                 // This happens when more than one eresource has the same title
                 // as the query
@@ -47,19 +41,5 @@ public class EresourceSearchResult implements SearchResult {
 
     public Eresource getEresource() {
         return this.eresource;
-    }
-
-    public int getScore() {
-        int score = this.eresource.getScore();
-        return score < 0 ? 0 : score;
-    }
-
-    public String getSortTitle() {
-        return this.sortTitle;
-    }
-
-    @Override
-    public int hashCode() {
-        return this.hashCode;
     }
 }

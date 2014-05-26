@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.regex.Pattern;
 
-public class AbstractSearchResult implements SearchResult {
+public abstract class AbstractSearchResult implements SearchResult {
 
     private static final Pattern NON_FILING_PATTERN = Pattern.compile("^(a|an|the) ", Pattern.CASE_INSENSITIVE);
 
@@ -14,26 +14,16 @@ public class AbstractSearchResult implements SearchResult {
 
     private String sortTitle;
 
+    private String title;
+
     public AbstractSearchResult(final int score, final String title) {
         this.score = score < 0 ? 0 : score;
-        this.sortTitle = AbstractSearchResult.WHITESPACE
-                .matcher(AbstractSearchResult.NON_FILING_PATTERN.matcher(title).replaceFirst("")).replaceAll("")
-                .toLowerCase();
-        this.hashCode = this.sortTitle.hashCode();
+        this.title = title;
     }
 
-    public int compareTo(final SearchResult o) {
-        int value = o.getScore() - this.score;
-        if (value == 0) {
-            value = this.sortTitle.compareTo(o.getSortTitle());
-        }
-        return value;
-    }
-
-    // explicitly call Object.equals() to satisfy sonar
     @Override
     public boolean equals(final Object obj) {
-        return super.equals(obj);
+        return this == obj;
     }
 
     public int getScore() {
@@ -41,11 +31,18 @@ public class AbstractSearchResult implements SearchResult {
     }
 
     public String getSortTitle() {
+        if (this.sortTitle == null) {
+            String temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");
+            this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
+        }
         return this.sortTitle;
     }
 
     @Override
     public int hashCode() {
+        if (this.hashCode == 0) {
+            this.hashCode = getSortTitle().hashCode();
+        }
         return this.hashCode;
     }
 }
