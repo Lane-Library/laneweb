@@ -164,10 +164,14 @@ public class GoogleTracker {
      * @return hash value of input string
      */
     private int hash(final String input) {
-        int hash = 1; // hash buffer
-        int leftMost7 = 0; // left-most 7 bits
-        int pos; // character position in string
-        int current; // current character in string
+        // hash buffer
+        int hash = 1;
+        // left-most 7 bits
+        int leftMost7 = 0;
+        // character position in string
+        int pos;
+        // current character in string
+        int current;
         // if input is null or empty, hash value is 1
         if (input != null && !input.isEmpty()) {
             hash = 0;
