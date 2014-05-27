@@ -8,8 +8,6 @@ public abstract class AbstractSearchResult implements SearchResult {
 
     private static final Pattern WHITESPACE = Pattern.compile("\\W");
 
-    private int hashCode;
-
     private int score;
 
     private String sortTitle;
@@ -19,11 +17,6 @@ public abstract class AbstractSearchResult implements SearchResult {
     public AbstractSearchResult(final int score, final String title) {
         this.score = score < 0 ? 0 : score;
         this.title = title;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        return this == obj;
     }
 
     public int getScore() {
@@ -36,13 +29,5 @@ public abstract class AbstractSearchResult implements SearchResult {
             this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
         }
         return this.sortTitle;
-    }
-
-    @Override
-    public int hashCode() {
-        if (this.hashCode == 0) {
-            this.hashCode = getSortTitle().hashCode();
-        }
-        return this.hashCode;
     }
 }

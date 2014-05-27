@@ -1,4 +1,5 @@
 package edu.stanford.irt.laneweb.search;
+
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;
 
@@ -8,6 +9,8 @@ import edu.stanford.irt.search.impl.Result;
 public class ContentResultSearchResult extends AbstractSearchResult {
 
     private ContentResult contentResult;
+
+    private int hashCode;
 
     private Result resourceResult;
 
@@ -50,6 +53,14 @@ public class ContentResultSearchResult extends AbstractSearchResult {
 
     public Result getResourceResult() {
         return this.resourceResult;
+    }
+
+    @Override
+    public int hashCode() {
+        if (this.hashCode == 0) {
+            this.hashCode = getSortTitle().hashCode();
+        }
+        return this.hashCode;
     }
 
     private int compareToIgnoreScore(final ContentResultSearchResult other) {
