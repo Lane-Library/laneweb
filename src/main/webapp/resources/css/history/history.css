@@ -514,7 +514,7 @@ h4 {
 	overflow: hidden;
 }
 
-.border-and-shadow a {
+.border-and-shadow a,.contact a {
 	color: #428bca;
 	text-decoration: none;
 }
@@ -529,7 +529,7 @@ h4 {
 	margin: 0 0 12px;
 }
 
-.border-and-shadow ul {
+.border-and-shadow ul,.contact ul {
 	margin-top: 0;
 	margin-bottom: 11px;
 	display: block;
@@ -541,6 +541,10 @@ h4 {
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #333333;
 	line-height: 1.4;
+}
+
+.contact {
+	margin: 24px 12px 36px 12px;
 }
 
 .core-covers {
@@ -572,7 +576,8 @@ h4 {
 .feature .block-heading {
 	width: 100%;
 	height: auto;
-	min-height: 1%; padding-top : 0px;
+	min-height: 1%;
+	padding-top: 0px;
 	padding-bottom: 12px;
 	margin: 0px 12px 12px 0px;
 	text-align: left;
@@ -593,7 +598,6 @@ h4 {
 
 .block-content {
 	width: 65%;
-	font-size: 14px;
 	float: left;
 	margin-bottom: 36px;
 }
@@ -601,7 +605,14 @@ h4 {
 .feature  .block-content {
 	clear: both;
 	display: block;
-	width: 100%
+	width: 100%;
+	font-size: 14px;
+}
+
+.contact-links,.contact p {
+	display: block;
+	font-size: 14px;
+	float: left;
 }
 
 b {
@@ -609,7 +620,7 @@ b {
 	text-transform: uppercase;
 	font-size: 14px;
 	float: left;
-	margin-bottom: 36px;
+	margin-bottom: 6px;
 }
 
 blockquote {
@@ -628,4 +639,21 @@ blockquote {
 	margin: 0px 0px 0px 0px;
 	margin: 0rem 0rem 0rem 0rem;
 	margin-top: -45px;
+}
+
+.clearfix {
+	content: " ";
+	display: table;
+}
+
+.button-container {
+	display: block;
+	font-size: 14px;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.0;
+	text-align: left;
+	width: auto;
+	margin: 3px;
+	padding: 5px;
 }
