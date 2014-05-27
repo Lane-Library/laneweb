@@ -468,25 +468,24 @@ p {
 }
 
 /*content styles start here*/
-h2 {
+h3 {
 	display: block;
 	font-size: 22px;
 	padding: 6px 6px 6px 0;
 	line-height: 1.2em;
 	margin-bottom: .2em;
 	font-size: 18px;
-	padding: 6px 6px 6px 6px;
 	line-height: 1.2em;
 	margin-bottom: .2em;
 	/*color: #ffffff;
 	text-transform: uppercase;*/
 }
 
-h3 {
+h4 {
 	color: #8c1515;
 	font-size: 18 px;
 	line-height: 1.2em;
-	margin-bottom: .2em;
+	margin-bottom: 1em;
 	display: block;
 }
 
@@ -557,7 +556,6 @@ h3 {
 	float: left;
 	min-height: 100px;
 	padding-top: 0px;
-	padding-top: 0rem;
 	padding-bottom: 12px;
 	margin: 0px 12px 12px 0px;
 	text-align: right;
@@ -565,17 +563,25 @@ h3 {
 	background-color: #009abb;
 	max-height: 200px;
 	float: left;
-	min-height: 100px;
-	padding-top: 0px;
-	padding-top: 0rem;
-	padding-bottom: 12px;
-	margin: 0px 12px 12px 0px;
-	text-align: right;
-	overflow: hidden;
-	background-color: #009abb;
 }
 
-.block-heading h2 {
+.feature {
+	padding-left: 12px;
+}
+
+.feature .block-heading {
+	width: 100%;
+	height: auto;
+	min-height: 1%; padding-top : 0px;
+	padding-bottom: 12px;
+	margin: 0px 12px 12px 0px;
+	text-align: left;
+	overflow: hidden;
+	background-color: #8c1515;
+	padding-top: 0px;
+}
+
+.block-heading h3 {
 	display: block;
 	font-size: 18px;
 	padding: 6px 6px 6px 6px;
@@ -592,10 +598,34 @@ h3 {
 	margin-bottom: 36px;
 }
 
+.feature  .block-content {
+	clear: both;
+	display: block;
+	width: 100%
+}
+
 b {
 	color: #8c1515;
-	text-transform: uppercase; 
+	text-transform: uppercase;
 	font-size: 14px;
 	float: left;
 	margin-bottom: 36px;
+}
+
+blockquote {
+	float: left;
+	width: 45%;
+	color: #666666;
+	font-family: 'Fjord One', serif;
+	font-style: italic;
+	border: none;
+	padding-top: 24px;
+	padding-bottom: 0px;
+	padding-left: 57px;
+	padding-right: 12px;
+	text-indent: -45px;
+	overflow: hidden;
+	margin: 0px 0px 0px 0px;
+	margin: 0rem 0rem 0rem 0rem;
+	margin-top: -45px;
 }
