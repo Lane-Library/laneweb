@@ -144,4 +144,23 @@
             });
         }
     }, document);
+    
+    // anchor with class=autoLightbox will automatically render on page load
+    var initializeAutoLightbox = function() {
+        var href, autoLightboxAnchor = Y.one("a.autoLightbox");
+        if (autoLightboxAnchor) {
+            href = autoLightboxAnchor.get("href");
+            Y.io(href, {
+                on : {
+                    success : function(id, o) {
+                        var lightbox = Y.lane.Lightbox;
+                        lightbox.set("url", href);
+                        lightbox.setContent(o.responseText);
+                        lightbox.show();
+                    }
+                }
+            });
+        }
+    };
+    initializeAutoLightbox();
 })();
