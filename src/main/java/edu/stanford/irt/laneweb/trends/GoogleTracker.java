@@ -140,7 +140,7 @@ public class GoogleTracker {
      * @return a random number string.
      */
     private String getRandomNumber() {
-        return Integer.toString((int) (Math.random() * 0x7fffffff));
+        return Integer.toString((new java.util.Random()).nextInt(Integer.MAX_VALUE));
     }
 
     private String getUtmaCookie() throws NoSuchAlgorithmException, IOException {
