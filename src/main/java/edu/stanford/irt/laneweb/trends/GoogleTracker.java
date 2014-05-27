@@ -54,39 +54,6 @@ public class GoogleTracker {
         this.logger = logger;
     }
 
-    public void setDomainName(final String domainName) {
-        this.domainName = domainName;
-    }
-
-    public void setGoogleAccount(final String googleAccount) {
-        this.googleAccount = googleAccount;
-    }
-
-    public void setReferer(final String referer) {
-        this.referer = referer;
-    }
-
-    public void setUserAgent(final String userAgent) {
-        this.userAgent = userAgent;
-    }
-
-    public void trackEvent(final String path, final String category, final String action, final String label,
-            final int value) {
-        String utmUrl;
-        try {
-            utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
-                    + encode(this.domainName) + "&utmt=" + "event" + "&utme=" + "5(" + encode(category) + "*"
-                    + encode(action) + "*" + encode(label) + ")(" + value + ")" + "&utmr=" + encode(this.referer)
-                    + "&utmp=" + encode(path) + "&utmac=" + this.googleAccount + "&utmcc=__utma" + getUtmaCookie()
-                    + "&utmvid=" + getVisitorId() + "&utmip=" + anonymizeIP(getLocalHostIP());
-            sendRequestToGoogleAnalytics(utmUrl);
-        } catch (NoSuchAlgorithmException | IOException e) {
-            throw new LanewebException(e);
-        }
-        this.logger.info(new StringBuilder(path).append("/").append(category).append("/").append(action).append("/")
-                .append(label).append("/").append(value).toString());
-    }
-
     /**
      * The last octect of the IP address is removed to anonymize the user.
      * 
@@ -240,5 +207,38 @@ public class GoogleTracker {
         connection.addRequestProperty("User-Agent", this.userAgent);
         connection.addRequestProperty("Accept-Language", "en-us,en;q=0.5");
         connection.getContent();
+    }
+
+    public void setDomainName(final String domainName) {
+        this.domainName = domainName;
+    }
+
+    public void setGoogleAccount(final String googleAccount) {
+        this.googleAccount = googleAccount;
+    }
+
+    public void setReferer(final String referer) {
+        this.referer = referer;
+    }
+
+    public void setUserAgent(final String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    public void trackEvent(final String path, final String category, final String action, final String label,
+            final int value) {
+        String utmUrl;
+        try {
+            utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
+                    + encode(this.domainName) + "&utmt=" + "event" + "&utme=" + "5(" + encode(category) + "*"
+                    + encode(action) + "*" + encode(label) + ")(" + value + ")" + "&utmr=" + encode(this.referer)
+                    + "&utmp=" + encode(path) + "&utmac=" + this.googleAccount + "&utmcc=__utma" + getUtmaCookie()
+                    + "&utmvid=" + getVisitorId() + "&utmip=" + anonymizeIP(getLocalHostIP());
+            sendRequestToGoogleAnalytics(utmUrl);
+        } catch (NoSuchAlgorithmException | IOException e) {
+            throw new LanewebException(e);
+        }
+        this.logger.info(new StringBuilder(path).append("/").append(category).append("/").append(action).append("/")
+                .append(label).append("/").append(value).toString());
     }
 }
