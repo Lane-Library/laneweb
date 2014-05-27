@@ -7,7 +7,9 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +54,7 @@ public class MetaSearchControllerTest {
     }
 
     @Test
-    public void testBind() {
+    public void testBindValuesNotPresent() {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.model.containsAttribute(Model.PROXY_LINKS)).andReturn(false);
         expect(this.model.addAttribute(Model.PROXY_LINKS, false)).andReturn(this.model);
@@ -64,27 +66,100 @@ public class MetaSearchControllerTest {
         verify(this.manager, this.dataBinder, this.model);
     }
 
+    @Test
+    public void testBindValuesPresent() {
+        this.map.put(Model.PROXY_LINKS, Boolean.TRUE);
+        this.map.put(Model.BASE_PROXY_URL, "baseProxyURL");
+        expect(this.model.asMap()).andReturn(this.map);
+        expect(this.model.containsAttribute(Model.PROXY_LINKS)).andReturn(true);
+        expect(this.model.containsAttribute(Model.BASE_PROXY_URL)).andReturn(true);
+        this.dataBinder.bind(this.map, this.request);
+        replay(this.manager, this.dataBinder, this.model);
+        this.controller.bind(this.request, this.model);
+        verify(this.manager, this.dataBinder, this.model);
+    }
+
     @SuppressWarnings("unchecked")
     @Test
     public void testSearch() {
-        expect(this.manager.describe(isA(Query.class))).andReturn(
-                this.result);
+        expect(this.manager.describe(isA(Query.class))).andReturn(this.result);
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(2);
+        expect(this.result.getId()).andReturn("id");
+        expect(this.result.getId()).andReturn("resource");
+        expect(this.result.getId()).andReturn("engine");
+        expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
+        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false))).andReturn(this.result);
+        expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result }));
+        expect(this.result.getId()).andReturn("resource");
+        expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
+        expect(this.result.getURL()).andReturn("url");
+        expect(this.result.getHits()).andReturn("2");
+        expect(this.result.getId()).andReturn("id");
+        replay(this.manager, this.dataBinder, this.model, this.result);
+        Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), false,
+                "baseProxyURL");
+        assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
+        map = (Map<String, Object>) map.get("resources");
+        map = (Map<String, Object>) map.get("resource");
+        assertEquals(2, map.get("hits"));
+        assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
+        assertEquals("url", map.get("url"));
+        verify(this.manager, this.dataBinder, this.model, this.result);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testSearchNullHits() {
+        expect(this.manager.describe(isA(Query.class))).andReturn(this.result);
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(2);
+        expect(this.result.getId()).andReturn("id");
+        expect(this.result.getId()).andReturn("resource");
+        expect(this.result.getId()).andReturn("engine");
+        expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
+        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false))).andReturn(this.result);
+        expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
+        expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result }));
+        expect(this.result.getId()).andReturn("resource");
+        expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
+        expect(this.result.getURL()).andReturn("url");
+        expect(this.result.getHits()).andReturn(null);
+        expect(this.result.getId()).andReturn("id");
+        replay(this.manager, this.dataBinder, this.model, this.result);
+        Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), false,
+                "baseProxyURL");
+        assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
+        map = (Map<String, Object>) map.get("resources");
+        map = (Map<String, Object>) map.get("resource");
+        assertNull(map.get("hits"));
+        assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
+        assertEquals("url", map.get("url"));
+        verify(this.manager, this.dataBinder, this.model, this.result);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testSearchProxyLinks() {
+        expect(this.manager.describe(isA(Query.class))).andReturn(this.result);
         expect(this.result.getChildren()).andReturn(Collections.singletonList(this.result)).times(4);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
-        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false)))
-                .andReturn(this.result);
+        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL).times(2);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getURL()).andReturn("url");
         expect(this.result.getHits()).andReturn("2");
         replay(this.manager, this.dataBinder, this.model, this.result);
-        Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), false, "baseProxyURL");
+        Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), true,
+                "baseProxyURL");
         assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
         map = (Map<String, Object>) map.get("resources");
         map = (Map<String, Object>) map.get("resource");
         assertEquals(Integer.valueOf("2"), map.get("hits"));
         assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
+        assertEquals("baseProxyURLurl", map.get("url"));
         verify(this.manager, this.dataBinder, this.model, this.result);
     }
 }

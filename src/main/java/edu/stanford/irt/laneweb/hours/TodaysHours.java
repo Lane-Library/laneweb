@@ -24,9 +24,9 @@ public class TodaysHours {
     private final SimpleDateFormat todaysDateFormat = new SimpleDateFormat("MMM d");
 
     private final SimpleDateFormat todaysDayFormat = new SimpleDateFormat("EEEE");
-
-    public TodaysHours(final String contentBase, final String hoursPath) {
-        this.hoursFile = new File(contentBase.substring("file:".length()) + hoursPath);
+    
+    public TodaysHours(final File hoursFile) {
+        this.hoursFile = hoursFile;
     }
 
     public String getHours() {

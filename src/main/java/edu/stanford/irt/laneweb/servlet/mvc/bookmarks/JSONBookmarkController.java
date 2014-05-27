@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
 
 // TODO: revisit conscious decision not to synchronize list operations.
 @Controller
@@ -29,8 +32,14 @@ public class JSONBookmarkController extends BookmarkController {
 
     private static final Pattern COMMA_SPLIT = Pattern.compile(",");
 
-    @Autowired
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
+
+    @Autowired
+    public JSONBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
+            SunetIdAndTicketDataBinder sunetidTicketDataBinder, RemoteProxyIPDataBinder proxyLinksDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, sunetidTicketDataBinder);
+        this.proxyLinksDataBinder = proxyLinksDataBinder;
+    }
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)

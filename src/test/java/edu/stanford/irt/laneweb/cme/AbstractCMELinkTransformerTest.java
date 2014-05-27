@@ -32,17 +32,11 @@ public class AbstractCMELinkTransformerTest {
         this.model = new HashMap<String, Object>();
     }
 
-    /**
-     * Test method for {@link edu.stanford.irt.laneweb.cme.AbstractCMELinkTransformer#isCMEHost(java.lang.String)} .
-     */
     @Test
     public void testIsCMEHost() {
         assertTrue(this.transformer.isCMEHost("http://www.uptodate.com/online"));
     }
 
-    /**
-     * Test method for {@link edu.stanford.irt.laneweb.cme.AbstractCMELinkTransformer#isCMEHost(java.lang.String)} .
-     */
     @Test
     public void testIsNotCMEHost() {
         assertFalse(this.transformer.isCMEHost("http://www.google.com/"));

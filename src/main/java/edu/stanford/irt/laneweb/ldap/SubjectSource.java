@@ -42,12 +42,17 @@ public class SubjectSource {
 
     private void authenticateIfNecessary() throws LoginException {
         if (null == this.subject || null == this.ticket || !this.ticket.isCurrent()) {
-            LoginContext loginContext = new LoginContext(this.name);
+            LoginContext loginContext = getLoginContext(this.name);
             loginContext.login();
             this.subject = loginContext.getSubject();
             for (KerberosTicket subjectTicket : this.subject.getPrivateCredentials(KerberosTicket.class)) {
                 this.ticket = subjectTicket;
             }
         }
+    }
+    
+    // protected method so that tests can mock the LoginContext
+    protected LoginContext getLoginContext(String name) throws LoginException {
+        return new LoginContext(name);
     }
 }

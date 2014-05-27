@@ -1,7 +1,10 @@
 package edu.stanford.irt.laneweb.cocoon;
 
+import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -14,9 +17,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
+import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-
 
 public class TextNodeParsingTransformerTest {
 
@@ -66,6 +69,11 @@ public class TextNodeParsingTransformerTest {
     }
 
     @Test
+    public void testGetType() {
+        assertEquals("type", this.transformer.getType());
+    }
+
+    @Test
     public void testGetValidity() {
         assertEquals(AlwaysValid.SHARED_INSTANCE, this.transformer.getValidity());
     }
@@ -75,6 +83,20 @@ public class TextNodeParsingTransformerTest {
         this.xmlConsumer.startElement("uri", "localName", "qName", this.attributes);
         replay(this.saxParser, this.xmlConsumer);
         this.transformer.startElement("uri", "localName", "qName", this.attributes);
+        verify(this.saxParser, this.xmlConsumer);
+    }
+
+    @Test
+    public void testStartParsedElement() throws SAXException {
+        this.xmlConsumer.startElement("uri", "element", "element", this.attributes);
+        this.saxParser.parse(isA(Source.class), isA(XMLConsumer.class));
+        this.xmlConsumer.endElement("uri", "element", "element");
+        this.xmlConsumer.characters(aryEq("<foo>bar</foo>".toCharArray()), eq(0), eq(14));
+        replay(this.saxParser, this.xmlConsumer);
+        this.transformer.startElement("uri", "element", "element", this.attributes);
+        this.transformer.characters("<foo>bar</foo>".toCharArray(), 0, 14);
+        this.transformer.endElement("uri", "element", "element");
+        this.transformer.characters("<foo>bar</foo>".toCharArray(), 0, 14);
         verify(this.saxParser, this.xmlConsumer);
     }
 }

@@ -1,11 +1,11 @@
 
 body{
     background-color:rgb(236, 241, 242);
-    font-family:'Source Sans Pro',sans-serif;
+    font-family:'Source Sans Pro', sans-serif;
 }
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class *= "yui3-u"]{
-    font-family:'Source Sans Pro',sans-serif;
+    font-family:'Source Sans Pro', sans-serif;
 }
 .centered{
     width:950px;
@@ -40,15 +40,15 @@ h1 a{
     float:left;
     position:relative
 }
-#sm-header>div>ul>li>div{
+#sm-header > div > ul > li > div{
     display:none;
     position:absolute;
     background-color:#666666;
     width:320px;
     padding:8px
 }
-#sm-header>div>ul>li:hover>div{
-display:block;
+#sm-header > div > ul > li:hover > div{
+    display:block;
 }
 #sm-header a{
     color:#DDDDDD;
@@ -71,8 +71,9 @@ display:block;
     border-right:1px black solid;
     text-indent:-9999px
 }
-#lane-footer, #lane-subfooter{
-    background-color: #8C1515;
+#lane-footer,
+#lane-subfooter{
+    background-color:#8C1515;
 }
 #lane-footer{
     margin-top:10px
@@ -82,8 +83,10 @@ display:block;
     padding:17px 0 12px;
     margin-bottom:24px
 }
-#lane-footer li, #lane-footer h3, #lane-footer h2{
-    border-bottom: 1px solid #902827;
+#lane-footer li,
+#lane-footer h3,
+#lane-footer h2{
+    border-bottom:1px solid #902827;
 }
 #lane-footer a{
     color:white;
@@ -92,16 +95,18 @@ display:block;
     font-weight:300;
     white-space:nowrap
 }
-#lane-footer ul a, #lane-subfooter{
+#lane-footer ul a,
+#lane-subfooter{
     font-size:12px;
     font-weight:400;
 }
 #lane-subfooter{
-    line-height: 22px;
-    padding: 22px 0 7px;
+    line-height:22px;
+    padding:22px 0 7px;
 }
-#lane-subfooter, #lane-subfooter a{
-    color:  #999999;
+#lane-subfooter,
+#lane-subfooter a{
+    color:#999999;
     text-decoration:none;
 }
 #lane-subfooter ul{
@@ -115,14 +120,14 @@ display:block;
     display:none
 }
 #lane-subfooter i{
-    background-color: #999999;
-    border-radius: 11px;
-    color: #8C1515;
-    height: 22px;
-    line-height: 20px;
-    margin-left: 0;
-    text-align: center;
-    width: 22px;
+    background-color:#999999;
+    border-radius:11px;
+    color:#8C1515;
+    height:22px;
+    line-height:20px;
+    margin-left:0;
+    text-align:center;
+    width:22px;
 }
 #sm-footer{
     background-color:rgb(38, 38, 38);
@@ -182,16 +187,38 @@ display:block;
 .gutter-right{
     margin-right:10px;
 }
+#search{
+    background-color:#8C1515;
+    height:100px;
+    color:white;
+    padding:6px;
+    font-weight:300
+}
+#search fieldset{
+    background-color:white;
+    display:inline-block;
+    padding:2px
+}
+#search input[type = 'text']{
+    width:350px
+}
+#search input[type = 'submit']{
+    background-color:#009abb;
+    border:medium none;
+    border-radius:6px;
+    color:white;
+    padding:2px;
+}
 
 
 /*content styles start here*/
-h2 {
-	display: block;
-	font-size: 18px;
-	padding: 6px 6px 6px 6px;
-	line-height: 1.2em;
-	margin-bottom: .2em;
-	/*color: #ffffff;
+h2{
+    display:block;
+    font-size:18px;
+    padding:6px 6px 6px 6px;
+    line-height:1.2em;
+    margin-bottom:.2em;
+    /*color: #ffffff;
 	text-transform: uppercase;*/
 }
 /*a {
@@ -215,31 +242,31 @@ ul {
 	color: #333333;
 	line-height: 1.4;
 }*/
-.border-and-shadow {
-	padding: 12px;
-	margin-top: 12px;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	-webkit-box-shadow: 1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
-	box-shadow: 1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
+.border-and-shadow{
+    padding:12px;
+    margin-top:12px;
+    background-color:#fff;
+    border:1px solid #ccc;
+    -webkit-box-shadow:1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow:1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
+    box-shadow:1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
 }
-.block-heading {
-	width: 30%;
-	max-height: 200px;
-	float: left;
-	min-height: 100px;
-	padding-top: 0px;
-	padding-top: 0rem;
-	padding-bottom: 12px;
-	margin: 0px 12px 12px 0px;
-	text-align: right;
-	overflow: hidden;
-	background-color: #009abb;
+.block-heading{
+    width:30%;
+    max-height:200px;
+    float:left;
+    min-height:100px;
+    padding-top:0px;
+    padding-top:0rem;
+    padding-bottom:12px;
+    margin:0px 12px 12px 0px;
+    text-align:right;
+    overflow:hidden;
+    background-color:#009abb;
 }
-.block-content {
-	width: 65%;
-	font-size: 14px;
-	float: left;
-	margin-bottom: 36px;
+.block-content{
+    width:65%;
+    font-size:14px;
+    float:left;
+    margin-bottom:36px;
 }
