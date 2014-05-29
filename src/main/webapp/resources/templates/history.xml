@@ -225,7 +225,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#"><span>Site Search</span><i class="fa fa-search"></i></a>
+                        <a href="#"><i class="fa fa-search"></i></a>
                         <div>
                             <form role="search" action="/content/sm-mcd/en/search.html">
                                 <label for="globalHeaderSearch">Search by name or topic</label>
