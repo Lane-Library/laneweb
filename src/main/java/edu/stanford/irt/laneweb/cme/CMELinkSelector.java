@@ -11,12 +11,29 @@ public class CMELinkSelector implements Selector {
 
     private static final String EMPTY_STRING = "";
 
+    private boolean hasEmrid(final Map<String, Object> objectModel) {
+        return !EMPTY_STRING.equals(ModelUtil.getString(objectModel, Model.EMRID, EMPTY_STRING));
+    }
+
+    private boolean isNotHospital(final Map<String, Object> objectModel) {
+        IPGroup ipGroup = ModelUtil.getObject(objectModel, Model.IPGROUP, IPGroup.class, IPGroup.ERR);
+        return !(IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup));
+    }
+
+    private boolean isProxy(final Map<String, Object> objectModel) {
+        return ModelUtil.getObject(objectModel, Model.PROXY_LINKS, Boolean.class, Boolean.FALSE).booleanValue();
+    }
+
+    private boolean isProxyNotHospital(final Map<String, Object> objectModel) {
+        if (isProxy(objectModel)) {
+            return isNotHospital(objectModel);
+        }
+        return false;
+    }
+
     @Override
     public boolean select(final String expression, final Map<String, Object> objectModel,
             final Map<String, String> parameters) {
-        IPGroup ipGroup = ModelUtil.getObject(objectModel, Model.IPGROUP, IPGroup.class, IPGroup.ERR);
-        boolean isHospital = (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup));
-        return (!EMPTY_STRING.equals(ModelUtil.getString(objectModel, Model.EMRID, EMPTY_STRING)) || (ModelUtil
-                .getObject(objectModel, Model.PROXY_LINKS, Boolean.class, Boolean.FALSE).booleanValue() && !isHospital));
+        return (hasEmrid(objectModel) || isProxyNotHospital(objectModel));
     }
 }
