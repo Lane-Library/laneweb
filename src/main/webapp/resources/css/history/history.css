@@ -205,7 +205,8 @@ h1 a {
 	font-weight: 300;
 	display: block;
 	padding: 9px 20px 9px 13px;
-	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%,
+		rgba(0, 0, 0, 0) 100%);
 }
 
 .menu a:hover {
@@ -245,7 +246,6 @@ h1 a {
 	color: white;
 	padding: 2px;
 }
-
 
 /*content styles start here*/
 h3 {
@@ -324,7 +324,12 @@ h4 {
 }
 
 .contact {
-	margin: 24px 12px 36px 12px;
+	margin: 24px 0px 6px 0px;
+	clear: both;
+	display: block;
+	height: auto;
+	min-height: 1%;
+	overflow: hidden;
 }
 
 .core-covers {
@@ -345,7 +350,6 @@ h4 {
 	text-align: right;
 	overflow: hidden;
 	background-color: #009abb;
-	max-height: 200px;
 	float: left;
 }
 
@@ -391,8 +395,17 @@ h4 {
 
 .contact-links,.contact p {
 	display: block;
-	font-size: 14px;
+	font-size: 12px;
 	float: left;
+}
+
+contact p {
+	clear: both;
+}
+
+.contact img {
+	float: left;
+	margin-right: 6px;
 }
 
 b {
@@ -405,7 +418,7 @@ b {
 
 blockquote {
 	float: left;
-	width: 45%;
+	width: 85%;
 	color: #666666;
 	font-family: 'Fjord One', serif;
 	font-style: italic;
@@ -426,6 +439,33 @@ blockquote {
 	display: table;
 }
 
+.btn {
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 0.375rem 0.75rem;
+	font-size: 16px;
+	line-height: 1.428571429;
+	border-radius: 0.25rem;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+btn-default {
+	color: #333333;
+	background-color: #ffffff;
+	border-color: #cccccc;
+}
+
 .button-container {
 	display: block;
 	font-size: 14px;
@@ -436,4 +476,16 @@ blockquote {
 	width: auto;
 	margin: 3px;
 	padding: 5px;
+}
+
+.button-container {
+	display: block;
+	width: auto;
+	margin: 3px;
+	padding: 5px;
+	font-size: 14px;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.0;
+	text-align: left;
 }
