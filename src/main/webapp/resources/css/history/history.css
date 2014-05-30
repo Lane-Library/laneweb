@@ -214,11 +214,12 @@ h1 a {
 }
 
 .gutter-left {
-	margin-left: 10px;
+	margin-left: 6px;
 }
 
 .gutter-right {
-	margin-right: 10px;
+	margin-right: 6px;
+	margin-top: 6px;
 }
 
 #search {
@@ -294,7 +295,7 @@ h4 {
 	overflow: hidden;
 }
 
-.border-and-shadow a,.contact a {
+.border-and-shadow a,.side-box a {
 	color: #428bca;
 	text-decoration: none;
 }
@@ -309,7 +310,7 @@ h4 {
 	margin: 0 0 12px;
 }
 
-.border-and-shadow ul,.contact ul {
+.border-and-shadow ul,.side-box ul {
 	margin-top: 0;
 	margin-bottom: 11px;
 	display: block;
@@ -323,7 +324,7 @@ h4 {
 	line-height: 1.4;
 }
 
-.contact {
+.side-box {
 	margin: 24px 0px 6px 0px;
 	clear: both;
 	display: block;
@@ -393,17 +394,17 @@ h4 {
 	font-size: 14px;
 }
 
-.contact-links,.contact p {
+.contact-links,.side-box p {
 	display: block;
 	font-size: 12px;
 	float: left;
 }
 
-contact p {
+side-box p {
 	clear: both;
 }
 
-.contact img {
+.side-box img {
 	float: left;
 	margin-right: 6px;
 }
