@@ -12,7 +12,7 @@
 }
 
 #irtBrand span {
-	background-image: url(/././resources/images/sprite-all.png);
+	background-image: url(../images/sprite-all.png);
 	background-position: -760px -680px;
 	display: inline-block;
 	height: 14px;

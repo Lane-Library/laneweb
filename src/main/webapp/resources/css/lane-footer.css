@@ -27,7 +27,7 @@
 	width: 26px;
 	margin-left:8px;
 	display: inline-block;
-	background-image: url("/././resources/images/sprite-all.png");
+	background-image: url("../images/sprite-all.png");
 	background-repeat: no-repeat;
 }
 .facebook {
@@ -62,7 +62,7 @@
 	background-position: -560px -640px;
 }
 .makegift {
-	background-image: url("/././resources/images/sprite-all.png");
+	background-image: url("../images/sprite-all.png");
 	background-repeat: no-repeat;
 	background-position: -600px -520px;
 	position:absolute;

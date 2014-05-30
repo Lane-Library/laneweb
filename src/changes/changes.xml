@@ -7,6 +7,25 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-05-12" version="2.1.56" description="2.1.56 bug fix release">
+            <action date="2014-05-08" dev="ceyates" issue="97524" type="add">
+                Create filter to return an error code if there is a -1%27 parameter
+            </action>
+            <action date="2014-05-06" dev="ceyates" issue="97496" type="update">
+                update STAFF ip group
+            </action>
+            <action date="2014-05-06" dev="ryanmax" issue="96798" type="add">
+                Google Analytics - Tracking search "selection" for mobile site
+            </action>
+            <action date="2014-05-06" dev="ryanmax" issue="94676" type="fix">
+                Uncaught RangeError: Maximum call stack size exceeded in m-search.js
+            </action>
+        </release>
+        <release date="2014-05-05" version="2.1.55" description="2.1.55 bug fix release">
+            <action date="2014-05-01" dev="ceyates" issue="97393" type="remove">
+                remove crossdb_unists from metasearch
+            </action>
+        </release>
         <release date="2014-04-28" version="2.1.54" description="2.1.54 bug fix release">
             <action date="2014-04-28" dev="ceyates" issue="97227" type="update">
                 upgrade to search-2.0

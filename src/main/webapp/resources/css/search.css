@@ -27,7 +27,7 @@
     text-transform:uppercase;
     font-weight:bold;
     list-style: none outside none;
-    /*list-style-image:url(/././resources/images/raquo.gif);
+    /*list-style-image:url(../images/raquo.gif);
     list-style-type:disc;*/
     margin-top: 1em;
 }

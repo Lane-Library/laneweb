@@ -10,8 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import edu.stanford.irt.laneweb.codec.SHCCodec;
-
 /**
  * @author ryanmax
  */

@@ -18,14 +18,14 @@
     margin: 0
 }
 #followFBLane,#followFBSoM {
-    background-image: url(/././resources/images/share_face.png)
+    background-image: url(../images/share_face.png)
 }
 #followScope {
-    background-image: url(/././resources/images/share_scope.png)
+    background-image: url(../images/share_scope.png)
 }
 #followFBLane:hover,#followFBSoM:hover {
-    background-image: url(/././resources/images/share_facebook_over.png)
+    background-image: url(../images/share_facebook_over.png)
 }
 #followScope:hover {
-    background-image: url(/././resources/images/share_scope_over.png)
+    background-image: url(../images/share_scope_over.png)
 }

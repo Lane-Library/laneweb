@@ -13,6 +13,10 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
 
     private RedirectProcessor redirectProcessor;
 
+    public RedirectHandlerInterceptor(final RedirectProcessor redirectProcessor) {
+        this.redirectProcessor = redirectProcessor;
+    }
+
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws IOException {
@@ -25,9 +29,5 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         return true;
-    }
-
-    public void setRedirectProcessor(final RedirectProcessor redirectProcessor) {
-        this.redirectProcessor = redirectProcessor;
     }
 }

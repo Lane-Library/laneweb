@@ -40,11 +40,6 @@ public class QueryTranslatorTest {
         }
     }
 
-    /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.eresources.QueryTranslator#processString(java.lang.String)}
-     * .
-     */
     @Test
     public void testProcessString() {
         this.translator.processString("green  red");
@@ -84,7 +79,7 @@ public class QueryTranslatorTest {
     // "ASCII"));
     // for (String query = reader.readLine(); null != query; query =
     // reader.readLine()) {
-    // String decodedQuery = URLDecoder.decode(query,Charset.forName("UTF-8"));
+    // String decodedQuery = URLDecoder.decode(query,StandardCharsets.UTF_8);
     // try {
     // String translatedQuery = this.translator.translate(decodedQuery);
     // stmt.setString(1, translatedQuery);

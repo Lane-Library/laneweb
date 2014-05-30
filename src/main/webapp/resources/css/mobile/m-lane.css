@@ -271,7 +271,7 @@ body.ui-mobile-viewport{
     font-size: 1.3em;
     margin: 10px 0px;
     padding: 6px 0 4px 25px;
-    background: url(/././resources/images/mobile/search_bg.png) no-repeat
+    background: url(../../images/mobile/search_bg.png) no-repeat
         5px 6px #ffffff;
     line-height: 1.5em;
     -webkit-background-size: 18px;
@@ -313,7 +313,7 @@ body.ui-mobile-viewport{
 }
 
 .ui-input-search.ui-input-has-clear .ui-btn.ui-input-clear {
-    background: url(/././resources/images/mobile/clear_search.png) no-repeat
+    background: url(../../images/mobile/clear_search.png) no-repeat
         right top transparent;
     -webkit-background-size: 100%;
     background-size: 100%;
@@ -426,7 +426,7 @@ body.ui-mobile-viewport{
     color: #084676;
     margin: 0;
     text-align: center;
-    background: url(/././resources/images/mobile/icon_sprite.png) no-repeat
+    background: url(../../images/mobile/icon_sprite.png) no-repeat
         center 11px transparent;
     -webkit-background-size: 70px auto;
     background-size: 70px;
@@ -600,14 +600,14 @@ body.ui-mobile-viewport{
 }
 
 .resourceList li a.newWindow {
-    background: url(/././resources/images/mobile/link_bg_sprite.png)
+    background: url(../../images/mobile/link_bg_sprite.png)
         no-repeat right -39px transparent;
     -webkit-background-size: 36px;
     background-size: 36px;
 }
 
 .resourceList li a.sameWindow {
-    background: url(/././resources/images/mobile/link_bg_sprite.png)
+    background: url(../../images/mobile/link_bg_sprite.png)
         no-repeat right 11px transparent;
     -webkit-background-size: 36px;
     background-size: 36px;
@@ -894,7 +894,7 @@ body.ui-mobile-viewport{
 
 .results li a:first-child {
     padding-right: 46px;
-    background: url(/././resources/images/mobile/link_bg_sprite.png)
+    background: url(../../images/mobile/link_bg_sprite.png)
         no-repeat right -42px transparent;
     -webkit-background-size: 32px;
     background-size: 32px;
@@ -1027,7 +1027,7 @@ div.absInfo a {
 */
 /* loading icon */
 .ui-loader .ui-icon-loading {
-    background-image: url(/././resources/images/mobile/ajax-loader.gif);
+    background-image: url(../../images/mobile/ajax-loader.gif);
     width: 46px;
     height: 46px;
 }

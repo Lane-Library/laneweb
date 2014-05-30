@@ -38,7 +38,7 @@ display:inline-block;
     background:linear-gradient(#dadad4,#fafbf8);
 }
 .yui3-searchselect-selected span {
-    background-image: url(/././resources/images/sprite-all.png);
+    background-image: url(../images/sprite-all.png);
     background-repeat: no-repeat;
     background-position: 94px -277px;
     padding-right: 10px;

@@ -14,7 +14,7 @@
     border-bottom: none;
 }
 #topResources {
-    background-image: url(/././resources/images/sprite-all.png);
+    background-image: url(../images/sprite-all.png);
     background-position: -320px -200px;
     background-repeat: no-repeat;
     font-size: 15px;
@@ -46,7 +46,7 @@
 }
 #topResources a:hover {
     background-color: #256592;
-    background-image: url(/././resources/images/sprite-all.png);
+    background-image: url(../images/sprite-all.png);
     background-repeat: no-repeat;
     background-position: -320px -160px;
 }

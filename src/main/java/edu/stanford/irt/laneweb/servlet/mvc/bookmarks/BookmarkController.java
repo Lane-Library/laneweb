@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
@@ -14,17 +13,17 @@ import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
 
 public abstract class BookmarkController {
 
-    @Autowired
     private BookmarkDAO bookmarkDAO;
 
-    @Autowired
     private BookmarkDataBinder bookmarkDataBinder;
 
-    @Autowired
     private SunetIdAndTicketDataBinder sunetidTicketDataBinder;
 
-    public void setBookmarkDAO(final BookmarkDAO bookmarkDAO) {
+    public BookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+            final SunetIdAndTicketDataBinder sunetidTicketDataBinder) {
         this.bookmarkDAO = bookmarkDAO;
+        this.bookmarkDataBinder = bookmarkDataBinder;
+        this.sunetidTicketDataBinder = sunetidTicketDataBinder;
     }
 
     @ModelAttribute

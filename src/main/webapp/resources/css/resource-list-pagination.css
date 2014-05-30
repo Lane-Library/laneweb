@@ -14,7 +14,7 @@
 }
 
 .pagingButton span {
-    background-image: url(/././resources/images/sprite-all.png);
+    background-image: url(../images/sprite-all.png);
     background-repeat: no-repeat;
     background-position: 100px -277px;
     font-weight: normal;
@@ -24,7 +24,7 @@
 
 
 .pagingButtonActive {
-    background-image: url(/././resources/images/sprite-vertall.png);
+    background-image: url(../images/sprite-vertall.png);
     background-position: 0 -1866px;
     border-right: 1px solid #dadad9;
     border-bottom: none;

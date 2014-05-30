@@ -17,6 +17,7 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
+// TODO: simplify testing of this by injecting a RequestHandler instead of extending one
 public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
 
     private final Logger log;

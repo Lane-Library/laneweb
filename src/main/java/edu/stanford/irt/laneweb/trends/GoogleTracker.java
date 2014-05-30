@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -52,39 +52,6 @@ public class GoogleTracker {
 
     public GoogleTracker(final Logger logger) {
         this.logger = logger;
-    }
-
-    public void setDomainName(final String domainName) {
-        this.domainName = domainName;
-    }
-
-    public void setGoogleAccount(final String googleAccount) {
-        this.googleAccount = googleAccount;
-    }
-
-    public void setReferer(final String referer) {
-        this.referer = referer;
-    }
-
-    public void setUserAgent(final String userAgent) {
-        this.userAgent = userAgent;
-    }
-
-    public void trackEvent(final String path, final String category, final String action, final String label,
-            final int value) {
-        String utmUrl;
-        try {
-            utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
-                    + encode(this.domainName) + "&utmt=" + "event" + "&utme=" + "5(" + encode(category) + "*"
-                    + encode(action) + "*" + encode(label) + ")(" + value + ")" + "&utmr=" + encode(this.referer)
-                    + "&utmp=" + encode(path) + "&utmac=" + this.googleAccount + "&utmcc=__utma" + getUtmaCookie()
-                    + "&utmvid=" + getVisitorId() + "&utmip=" + anonymizeIP(getLocalHostIP());
-            sendRequestToGoogleAnalytics(utmUrl);
-        } catch (NoSuchAlgorithmException | IOException e) {
-            throw new LanewebException(e);
-        }
-        this.logger.info(new StringBuilder(path).append("/").append(category).append("/").append(action).append("/")
-                .append(label).append("/").append(value).toString());
     }
 
     /**
@@ -149,7 +116,7 @@ public class GoogleTracker {
     private String generateVisitorId() throws NoSuchAlgorithmException, IOException {
         String message = this.userAgent + getRandomNumber() + UUID.randomUUID().toString();
         MessageDigest m = MessageDigest.getInstance("MD5");
-        m.update(message.getBytes(Charset.forName("UTF-8")), 0, message.length());
+        m.update(message.getBytes(StandardCharsets.UTF_8), 0, message.length());
         byte[] sum = m.digest();
         BigInteger messageAsNumber = new BigInteger(1, sum);
         String md5String = messageAsNumber.toString(16);
@@ -173,7 +140,7 @@ public class GoogleTracker {
      * @return a random number string.
      */
     private String getRandomNumber() {
-        return Integer.toString((int) (Math.random() * 0x7fffffff));
+        return Integer.toString((new java.util.Random()).nextInt(Integer.MAX_VALUE));
     }
 
     private String getUtmaCookie() throws NoSuchAlgorithmException, IOException {
@@ -197,10 +164,14 @@ public class GoogleTracker {
      * @return hash value of input string
      */
     private int hash(final String input) {
-        int hash = 1; // hash buffer
-        int leftMost7 = 0; // left-most 7 bits
-        int pos; // character position in string
-        int current; // current character in string
+        // hash buffer
+        int hash = 1;
+        // left-most 7 bits
+        int leftMost7 = 0;
+        // character position in string
+        int pos;
+        // current character in string
+        int current;
         // if input is null or empty, hash value is 1
         if (input != null && !input.isEmpty()) {
             hash = 0;
@@ -240,5 +211,38 @@ public class GoogleTracker {
         connection.addRequestProperty("User-Agent", this.userAgent);
         connection.addRequestProperty("Accept-Language", "en-us,en;q=0.5");
         connection.getContent();
+    }
+
+    public void setDomainName(final String domainName) {
+        this.domainName = domainName;
+    }
+
+    public void setGoogleAccount(final String googleAccount) {
+        this.googleAccount = googleAccount;
+    }
+
+    public void setReferer(final String referer) {
+        this.referer = referer;
+    }
+
+    public void setUserAgent(final String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    public void trackEvent(final String path, final String category, final String action, final String label,
+            final int value) {
+        String utmUrl;
+        try {
+            utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
+                    + encode(this.domainName) + "&utmt=" + "event" + "&utme=" + "5(" + encode(category) + "*"
+                    + encode(action) + "*" + encode(label) + ")(" + value + ")" + "&utmr=" + encode(this.referer)
+                    + "&utmp=" + encode(path) + "&utmac=" + this.googleAccount + "&utmcc=__utma" + getUtmaCookie()
+                    + "&utmvid=" + getVisitorId() + "&utmip=" + anonymizeIP(getLocalHostIP());
+            sendRequestToGoogleAnalytics(utmUrl);
+        } catch (NoSuchAlgorithmException | IOException e) {
+            throw new LanewebException(e);
+        }
+        this.logger.info(new StringBuilder(path).append("/").append(category).append("/").append(action).append("/")
+                .append(label).append("/").append(value).toString());
     }
 }

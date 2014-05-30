@@ -1,9 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -26,14 +23,16 @@ public class ContentResultSearchResultTest {
     public void setUp() {
         this.contentResult = createMock(ContentResult.class);
         this.resourceResult = createMock(Result.class);
+        expect(this.contentResult.getTitle()).andReturn("title");
+        replay(this.contentResult);
         this.searchResult = new ContentResultSearchResult(this.contentResult, this.resourceResult, 100);
+        reset(this.contentResult);
     }
     
     @Test
     public void testNotContentResultSearchResult() {
         SearchResult result = createMock(SearchResult.class);
         expect(result.getScore()).andReturn(100);
-        expect(this.contentResult.getTitle()).andReturn("title");
         expect(result.getSortTitle()).andReturn("title");
         replay(this.contentResult, result);
         assertTrue(this.searchResult.compareTo(result) > 0);
@@ -68,6 +67,7 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testCompareToSameTitleDifferentScore() {
+        expect(this.contentResult.getTitle()).andReturn("title").times(2);
         replay(this.contentResult);
         ContentResultSearchResult first = new ContentResultSearchResult(this.contentResult, this.resourceResult, 900);
         ContentResultSearchResult second = new ContentResultSearchResult(this.contentResult, this.resourceResult, 0);
@@ -92,7 +92,6 @@ public class ContentResultSearchResultTest {
     public void testCompareToTitle() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("first title");
-        expect(this.contentResult.getTitle()).andReturn("title");
         replay(result, this.contentResult);
         ContentResultSearchResult first = new ContentResultSearchResult(result, this.resourceResult, 100);
         assertTrue(this.searchResult.compareTo(first) > 0);
@@ -143,17 +142,18 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testGetSortTitle() {
-        expect(this.contentResult.getTitle()).andReturn("the title");
-        replay(this.contentResult);
-        assertEquals("title", this.searchResult.getSortTitle());
-        verify(this.contentResult);
+        ContentResult r = createMock(ContentResult.class);
+        expect(r.getTitle()).andReturn("the title");
+        replay(r);
+        ContentResultSearchResult c = new ContentResultSearchResult(r, this.resourceResult, 0);
+        assertEquals("title", c.getSortTitle());
+        verify(r);
     }
 
     @Test
     public void testHashCode() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("the title");
-        expect(this.contentResult.getTitle()).andReturn("title");
         replay(result, this.contentResult);
         ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
         assertEquals(this.searchResult.hashCode(), other.hashCode());
@@ -164,7 +164,6 @@ public class ContentResultSearchResultTest {
     public void testNotEquals() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("not the title");
-        expect(this.contentResult.getTitle()).andReturn("title");
         replay(this.contentResult, result);
         ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
         assertFalse(this.searchResult.equals(other));
