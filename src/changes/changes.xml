@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-05-12" version="2.1.57" description="2.1.57 bug fix release">
+            <action date="2014-05-28" dev="ryanmax" issue="97775" type="update">
+                print search results: hide left column for Firefox
+            </action>
+            <action date="2014-05-27" dev="ceyates" issue="97768" type="update">
+                Update bookmark hover message
+            </action>
+            <action date="2014-05-29" dev="ryanmax" issue="97767" type="add">
+                separate feedback form into 4 pages with distinct URLs
+            </action>
+            <action date="2014-05-20" dev="ryanmax" issue="97715" type="fix">
+                pubmed abstract formatting bug
+            </action>
+            <action date="2014-05-14" dev="ceyates" issue="97657" type="update">
+                use relative urls in css files
+            </action>
+        </release>
         <release date="2014-05-12" version="2.1.56" description="2.1.56 bug fix release">
             <action date="2014-05-08" dev="ceyates" issue="97524" type="add">
                 Create filter to return an error code if there is a -1%27 parameter
