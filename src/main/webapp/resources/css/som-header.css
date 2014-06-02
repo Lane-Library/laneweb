@@ -1,0 +1,32 @@
+#somHeader{
+    position:absolute;
+    top:0;
+    width:100%;
+    height:50px;
+    background-color:rgb(236, 241, 242)
+}
+#som2{
+    float:left
+}
+#su{
+    float:right
+}
+#somHeader ul{
+    display:none
+}
+#somHeader div:hover ul{
+    display:block
+}
+#somHeader h2{
+    text-indent:-9999px;
+    background-image:url(../images/somHeader.png);
+    background-repeat:no-repeat;
+    margin:0 10px;
+}
+#som2 h2{
+    background-position:0 50%;
+    width:150px;
+}
+#su h2{
+    background-position:100% 50%;
+}

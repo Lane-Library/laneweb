@@ -1,72 +1,61 @@
-#laneFooter {
-    position : relative;
-    background-color : #d6d5c7;
-    padding : 29px;
+#laneFooter{
+    background-color:#8C1515;
+    margin-top:10px;
+    padding-top:17px;
 }
-#laneFooter a {
-    border-bottom : none;
-    letter-spacing : .5px;
+#laneFooter h3{
+    font-size:16px;
+    font-weight:300;
+    padding:0;
+    line-height:24px;
+    text-transform:none;
 }
-#laneFooter ul {
-    padding-top : 3px;
+#laneFooter li,
+#laneFooter h3{
+    border-bottom:1px solid #902827;
 }
-#laneFooter li {
-    padding : 1.5px 0;
+#laneFooter a{
+    border-bottom:none;
+    color:white
 }
-
-#socialMedia {
-    position:absolute;
-    right: 16px;
-    top: 100px;
-    width:170px;
+#laneFooter li{
+    font-size:12px;
+    line-height:24px;
 }
-#socialMedia a {
-	height: 25px;
-	width: 26px;
-	margin-left:8px;
-	display: inline-block;
-	background-image: url("../images/sprite-all.png");
-	background-repeat: no-repeat;
-}
-.facebook {
-	background-position: -600px -600px;
+#lane-subfooter{
+    font-size:12px;
+    font-weight:400;
+    background-color:#8C1515;
+    line-height:22px;
+    padding:22px 0 7px;
 }
 
-.facebook:hover {
-	background-position: -600px -640px;
+#lane-subfooter,
+#lane-subfooter a{
+    color:#999999;
+    text-decoration:none;
 }
-.twitter {
-	background-position: -640px -600px;
+
+#lane-subfooter ul{
+    float:right;
 }
-.twitter:hover {
-	background-position: -640px -640px;
+
+#lane-subfooter li{
+    float:left;
+    padding:3px 5px 5px 0
 }
-.googleplus {
-	background-position: -760px -600px;
+
+#lane-subfooter span{
+    display:none
 }
-.googleplus:hover {
-	background-position: -760px -640px;
-}
-.flickr {
-	background-position: -680px -600px;	
-}
-.flickr:hover {
-	background-position: -680px -640px;	
-}
-.youtube {
-	background-position: -560px -600px;
-}
-.youtube:hover {
-	background-position: -560px -640px;
-}
-.makegift {
-	background-image: url("../images/sprite-all.png");
-	background-repeat: no-repeat;
-	background-position: -600px -520px;
-	position:absolute;
-    right: 15px;
-    top: 25px;
-    display:block;
-    height: 59px;
-	width: 164px;
+
+#lane-subfooter i{
+    background-color:#999999;
+    border-radius:11px;
+    color:#8C1515;
+    height:22px;
+    line-height:20px;
+    margin-left:0;
+    text-align:center;
+    width:22px;
 }

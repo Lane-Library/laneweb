@@ -2,7 +2,8 @@
 	font-size: 0.7em;
 	padding: 5px 0;
 	text-align: center;
-	background-color:#d6d5c7
+	background-color:rgb(38,38,38);
+	height:100px;
 }
 
 #somNav2 li {
@@ -20,7 +21,7 @@
 }
 
 #somNav2 a {
-    color: #1C4B70;
+    color: white;
     text-decoration: none;
     border-bottom: none;
     cursor: pointer;

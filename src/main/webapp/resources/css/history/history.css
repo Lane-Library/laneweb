@@ -3,7 +3,20 @@ body {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 14px;
 }
-
+a {
+    color: #007c92;
+    text-decoration: none;
+    border-bottom: none;
+    cursor: pointer;
+}
+a:visited, a:active, a:hover {
+	color: #428bca;
+    text-decoration: none;
+}
+.image-link,
+.image-link:hover {
+    border-bottom: none;
+}
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class*="yui3-u"] {
 	font-family: 'Source Sans Pro', sans-serif;
