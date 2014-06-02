@@ -12,15 +12,3 @@ html{
     min-width:989px;
     margin:auto;
 }
-
-/* putting the following rules here temporarily for convenience */
-#somHeader{
-    position:absolute;
-    top:0;
-    width:100%;
-    height:50px;
-    background-color:rgb(236,241,242) 
-}
-#somHeader span {
-    float:right
-}

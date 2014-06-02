@@ -187,7 +187,25 @@
             
             <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
         </div>
-        <div id="somHeader">Stanford Medicine <span>Stanford University</span></div>
+        <div id="somHeader">
+            <div id="som2">
+                <h2>Stanford Medicine</h2>
+                <ul>
+                    <li><a href="">Health Care</a></li>
+                    <li><a href="">Research</a></li>
+                    <li><a href="">Education</a></li>
+                    <li><a href="">Give</a></li>
+                    <li><a href="">About</a></li>
+                </ul>
+            </div>
+            <div id="su">
+                <h2>Stanford University</h2>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Stanford Libraries</a></li>
+                </ul>
+            </div>
+        </div>
         <div id="laneFooter">
             <div class="centered">
                 <div class="yui3-g">
@@ -239,6 +257,45 @@
                             <li><a href="/help/references.html">Manage References</a></li>
                             <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
                             <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lane-subfooter">
+            <div class="centered">
+                <div class="yui3-g">
+                    <div class="yui3-u-1-2">
+                        <div style="height:26px;padding-top:4px">©<?laneweb current-year?> Stanford Medicine</div>
+                    </div>
+                    <div class="yui3-u-1-2">
+                        <ul>
+                            <li>
+                                <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
+                            </li>
+                            <li style="list-style:disc;margin-left:16px">
+                                <a href="http://med.stanford.edu/irt/help/?group=webnewmedia">Help</a>
+                            </li>
+                            <li>
+                                <a title="See us on Facebook" href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257">
+                                    <span>See us on Facebook</span><i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="See us on Google Plus" href="https://plus.google.com/101896624694637406510/">
+                                    <span>See us on Google Plus</span><i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="See our Flickr photo collection" href="https://www.flickr.com/photos/40390680@N08/">
+                                    <span>See our Flickr photo collection</span><i class="fa fa-flickr"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="see us on Twitter" href="http://twitter.com/#!/LaneLibStanford">
+                                    <span>See us on Twitter</span><i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
