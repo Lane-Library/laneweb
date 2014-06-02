@@ -22,10 +22,10 @@
     background-image:url(../images/somHeader.png);
     background-repeat:no-repeat;
     margin:0 10px;
+    width:150px;
 }
 #som2 h2{
     background-position:0 50%;
-    width:150px;
 }
 #su h2{
     background-position:100% 50%;
