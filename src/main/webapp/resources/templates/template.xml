@@ -97,7 +97,7 @@
                         <ul id="laneNav">
                             <li>
                                 <a href="/biomed-resources/index.html"
-                                    >Biomed Resources</a>
+                                    >All Resources</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon://content/includes/leftmenu-resources.html">
                                     <xi:fallback/>
@@ -266,16 +266,13 @@
             <div class="centered">
                 <div class="yui3-g">
                     <div class="yui3-u-1-2">
-                        <div style="height:26px;padding-top:4px">©<?laneweb current-year?> Stanford Medicine</div>
-                    </div>
-                    <div class="yui3-u-1-2">
                         <ul>
-                            <li>
+                            <li>©<?laneweb current-year?> Stanford Medicine</li>
+                            <li style="margin-left:20px">
                                 <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
                             </li>
-                            <li style="list-style:disc;margin-left:16px">
-                                <a href="http://med.stanford.edu/irt/help/?group=webnewmedia">Help</a>
-                            </li>
+                        </ul>
+                        <ul>
                             <li>
                                 <a title="See us on Facebook" href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257">
                                     <span>See us on Facebook</span><i class="fa fa-facebook"></i>
@@ -298,21 +295,19 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="yui3-u-1-2">
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="somNav2">
-            <div class="centered">
-                <ul>
-                    <li>
-                        <a href="http://stanfordmedicine.stanford.edu">&#169; <?laneweb current-year?>
-                            Stanford Medicine</a>
-                    </li>
-                    <li>
-                        <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
-                    </li>
-                </ul>
-            </div>
+        <div id="sm-footer">
+            <ul class="centered">
+                <li id="footer-sm"><a href="http://med.stanford.edu/">Stanford School of  Medicine</a></li>
+                <li id="footer-su"><a href="http://www.stanford.edu/">Stanford University</a></li>
+                <li id="footer-shc"><a href="http://stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
+                <li id="footer-sch"><a href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
+                <li id="footer-sul"><a href="http://library.stanford.edu/">Stanford University Libraries</a></li>
+            </ul>
         </div>
         <div id="feedbackLink"><a rel="lightbox" href="/help/feedback.html"></a></div>
         <script type="text/javascript" id="model">//</script>

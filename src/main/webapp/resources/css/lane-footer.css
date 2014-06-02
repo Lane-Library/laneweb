@@ -37,7 +37,7 @@
 }
 
 #lane-subfooter ul{
-    float:right;
+    clear:left;
 }
 
 #lane-subfooter li{
