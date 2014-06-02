@@ -399,7 +399,7 @@ h4 {
 	float: left;
 }
 
-side-box p {
+.side-box p {
 	clear: both;
 }
 
@@ -416,7 +416,6 @@ b {
 	color: #8c1515;
 	text-transform: uppercase;
 	font-size: 14px;
-	float: left;
 	margin-bottom: 6px;
 }
 
