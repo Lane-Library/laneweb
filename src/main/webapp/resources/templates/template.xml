@@ -265,7 +265,7 @@
         <div id="lane-subfooter">
             <div class="centered">
                 <div class="yui3-g">
-                    <div class="yui3-u-1-2">
+                    <div class="yui3-u-1-3">
                         <ul>
                             <li>©<?laneweb current-year?> Stanford Medicine</li>
                             <li style="margin-left:20px">
@@ -295,7 +295,18 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="yui3-u-1-2">
+                    <div class="yui3-u-1-6">
+                        <p><a href="http://scopeblog.stanford.edu/">Scope Blog</a></p>
+                        <p><a href="">Open Access &amp; NIH Policy</a></p>
+                    </div>
+                    <div class="yui3-u-1-6">
+                        <p><a href="/biomed-resources/recent-su-pubmed.html">Sanford Authors in PubMed</a></p>
+                        <p><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles</a></p>
+                    </div>
+                    <div class="yui3-u-1-3">
+                        <a id="gift" href="http://giving.stanford.edu/goto/lanelibrarygift" rel="popup standard"
+                            ><strong>Make a difference.</strong>
+                            <br/>Help us by making a contribution.</a>
                     </div>
                 </div>
             </div>
