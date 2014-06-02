@@ -292,7 +292,6 @@ h4 {
 	height: 100%;
 	overflow: hidden;
 	clear: both;
-	overflow: hidden;
 }
 
 .border-and-shadow a,.side-box a {
@@ -407,8 +406,12 @@ side-box p {
 .side-box img {
 	float: left;
 	margin-right: 6px;
+	clear:both;
 }
 
+.content p{
+	margin-bottom: 24px;
+}
 b {
 	color: #8c1515;
 	text-transform: uppercase;
