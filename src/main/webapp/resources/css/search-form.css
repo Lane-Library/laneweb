@@ -1,7 +1,7 @@
 #searchFormContainer {
     padding: 3px 0 0 20px;
-    height : 97px;
-    margin-bottom: 36px;
+    height : 77px;
+    margin-bottom: 46px;
     background-color: #9B0D00;
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9B0D00), to(#600700));
     background-image: -moz-linear-gradient(#9B0D00, #600700);
@@ -10,7 +10,7 @@
     background-image: linear-gradient(#9B0D00, #600700);
 }
 #searchFormContainer.clinical {
-    height:135px
+    height:115px
 }
 #search {
     margin-top:6px
