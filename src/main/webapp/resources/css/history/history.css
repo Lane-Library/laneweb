@@ -1,7 +1,6 @@
 body {
 	background-color: rgb(236, 241, 242);
 	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 14px;
 }
 
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
@@ -195,7 +194,8 @@ h1 a {
 }
 
 .menu {
-	border-top: 12px solid #8C1515
+	border-top: 12px solid #8C1515;
+	margin-bottom: 24px;
 }
 
 .menu a {
@@ -224,20 +224,25 @@ h1 a {
 
 #search {
 	background-color: #8C1515;
-	height: 100px;
-	color: white;
+	height: auto;
+	color: #fff;
 	padding: 6px;
-	font-weight: 300
+	font-weight: 300;
+}
+#search h2 {
+	color: #fff;
+	margin: 6px 0 24px 6px;
 }
 
 #search fieldset {
 	background-color: white;
 	display: inline-block;
-	padding: 2px
+	padding: 2px;
+	margin: 6px 0 6px 6px;
 }
 
 #search input[type='text'] {
-	width: 350px
+	width: 500px;
 }
 
 #search input[type='submit'] {
@@ -245,10 +250,16 @@ h1 a {
 	border: medium none;
 	border-radius: 6px;
 	color: white;
-	padding: 2px;
+	padding: 12px;
 }
 
 /*content styles start here*/
+h2 {
+	color: #333333;
+	font-weight: 400;
+	font-size: 28px;
+}
+
 h3 {
 	display: block;
 	font-size: 22px;
@@ -268,6 +279,11 @@ h4 {
 	line-height: 1.2em;
 	margin-bottom: 1em;
 	display: block;
+}
+
+.section-header {
+	position: relative;
+	margin-bottom: 24px;
 }
 
 .header-border {
@@ -309,7 +325,7 @@ h4 {
 	margin: 0 0 12px;
 }
 
-.border-and-shadow ul,.side-box ul {
+.border-and-shadow ul,.side-box ul,.content ul {
 	margin-top: 0;
 	margin-bottom: 11px;
 	display: block;
@@ -324,7 +340,7 @@ h4 {
 }
 
 .side-box {
-	margin: 24px 0px 6px 0px;
+	margin: 12px 0px 24px 0px;
 	clear: both;
 	display: block;
 	height: auto;
@@ -406,12 +422,13 @@ h4 {
 .side-box img {
 	float: left;
 	margin-right: 6px;
-	clear:both;
+	clear: both;
 }
 
-.content p{
+.content p {
 	margin-bottom: 24px;
 }
+
 b {
 	color: #8c1515;
 	text-transform: uppercase;
