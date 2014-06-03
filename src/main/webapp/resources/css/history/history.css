@@ -323,7 +323,7 @@ h4 {
 	clear: both;
 }
 
-.border-and-shadow a,.side-box a {
+.border-and-shadow a,.side-box a, .content a {
 	color: #428bca;
 	text-decoration: none;
 }
