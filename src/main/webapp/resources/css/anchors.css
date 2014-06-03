@@ -1,28 +1,15 @@
 /* these are the default anchor styles*/
 a {
-    color : #1C4B70;
-    text-decoration : none;
-    border-bottom : 1px dotted #81785A;
-    cursor : pointer
+    color: #007c92;
+    text-decoration: none;
+    border-bottom: none;
+    cursor: pointer;
 }
-a:hover {
-    color : #820000;
-    border-color : #820000;
-    border-bottom : 1px solid #820000
-}
-a:visited {
-    color : #79455C
+a:visited, a:active, a:hover {
+	color: #428bca;
+    text-decoration: none;
 }
 .image-link,
 .image-link:hover {
-    border-bottom : none
-}
-
-/*styles for links in the left column*/
-.content .leftColumn li a {
-   border-bottom : none;
-}
-
-.content .leftColumn li a:hover {
-    border-bottom : 1px solid #820000;
+    border-bottom: none;
 }

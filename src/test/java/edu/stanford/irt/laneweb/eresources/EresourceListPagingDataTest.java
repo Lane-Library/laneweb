@@ -14,39 +14,39 @@ import org.junit.Test;
 
 
 public class EresourceListPagingDataTest {
-	
-	private EresourceListPagingData pagingData;
-	
-	private PagingEresourceList eresources;
-	private Eresource eresource;
+    
+    private EresourceListPagingData pagingData;
+    
+    private PagingEresourceList eresources;
+    private Eresource eresource;
 
-	@Before
-	public void setUp() throws Exception {
-		this.eresources = createMock(PagingEresourceList.class);
-		expect(this.eresources.size()).andReturn(256);
-		replay(this.eresources);
-		this.pagingData = new EresourceListPagingData(this.eresources, 0, "");
-		verify(this.eresources);
-		this.eresource = createMock(Eresource.class);
-	}
+    @Before
+    public void setUp() throws Exception {
+        this.eresources = createMock(PagingEresourceList.class);
+        expect(this.eresources.size()).andReturn(256);
+        replay(this.eresources);
+        this.pagingData = new EresourceListPagingData(this.eresources, 0, "");
+        verify(this.eresources);
+        this.eresource = createMock(Eresource.class);
+    }
 
-	@Test
-	public void testGetPagingLabels() {
-		reset(this.eresources);
-		expect(this.eresources.get(0)).andReturn(this.eresource);
-		expect(this.eresource.getTitle()).andReturn("er title");
-		expect(this.eresources.get(99)).andReturn(this.eresource);
-		expect(this.eresource.getTitle()).andReturn("er title");
-		expect(this.eresources.get(100)).andReturn(this.eresource);
-		expect(this.eresource.getTitle()).andReturn("er title");
-		expect(this.eresources.get(199)).andReturn(this.eresource);
-		expect(this.eresource.getTitle()).andReturn("er title");
-		expect(this.eresources.get(200)).andReturn(this.eresource);
-		expect(this.eresource.getTitle()).andReturn("er title");
-		expect(this.eresources.get(255)).andReturn(this.eresource);
-		expect(this.eresource.getTitle()).andReturn("er title");
-		replay(this.eresources, this.eresource);
-		List<PagingLabel> labels = this.pagingData.getPagingLabels();
+    @Test
+    public void testGetPagingLabels() {
+        reset(this.eresources);
+        expect(this.eresources.get(0)).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("er title");
+        expect(this.eresources.get(99)).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("er title");
+        expect(this.eresources.get(100)).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("er title");
+        expect(this.eresources.get(199)).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("er title");
+        expect(this.eresources.get(200)).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("er title");
+        expect(this.eresources.get(255)).andReturn(this.eresource);
+        expect(this.eresource.getTitle()).andReturn("er title");
+        replay(this.eresources, this.eresource);
+        List<PagingLabel> labels = this.pagingData.getPagingLabels();
         assertEquals(3, labels.size());
         assertEquals(100, labels.get(0).getResults());
         assertEquals(100, labels.get(1).getResults());
@@ -55,7 +55,7 @@ public class EresourceListPagingDataTest {
             assertEquals("er title", pagingLabel.getStart());
             assertEquals("er title", pagingLabel.getEnd());
         }
-		verify(this.eresources, this.eresource);
-	}
+        verify(this.eresources, this.eresource);
+    }
 
 }

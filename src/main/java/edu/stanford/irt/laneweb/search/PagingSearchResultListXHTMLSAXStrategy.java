@@ -82,7 +82,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             
             int size = list.size();
             if (size > 100) {
-            	this.pagingDataStrategy.toSAX(pagingData, xmlConsumer);
+                this.pagingDataStrategy.toSAX(pagingData, xmlConsumer);
             }
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "search-content-counts");
