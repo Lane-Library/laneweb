@@ -16,7 +16,7 @@
 }
 #somHeader h2{
     text-indent:-9999px;
-    background-image:url(../images/smHeaderOff.png);
+    background-image:url(../images/logo-sprite-globalheader-off.png);
     background-repeat:no-repeat;
     margin:0 10px;
     width:150px;
@@ -29,7 +29,7 @@
     background-position:100% 50%;
 }
 #somHeader div:hover h2{
-    background-image:url(../images/smHeaderOn.png)
+    background-image:url(../images/logo-sprite-globalheader-on.png)
 }
 #somHeader ul{
     display:none;
