@@ -62,10 +62,10 @@
     <filter>
         <filter-name>monitoring</filter-name>
         <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
-		<init-param>
-			<param-name>storage-directory</param-name>
-			<param-value>${catalina.base}/logs/javamelody</param-value>
-		</init-param>
+        <init-param>
+            <param-name>storage-directory</param-name>
+            <param-value>${catalina.base}/logs/javamelody</param-value>
+        </init-param>
     </filter>
     
     <filter>
