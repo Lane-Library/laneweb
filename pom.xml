@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>2.1.57-SNAPSHOT</version>
+    <version>2.2.0.M1-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/maven/projects/laneweb/</url>
     <inceptionYear>2002</inceptionYear>
@@ -188,6 +188,7 @@
                                 <include>resource-list-pagination-min.css</include>
                                 <include>search-select-min.css</include>
                                 <include>search-image-min.css</include>
+                                <include>som-header-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
