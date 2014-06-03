@@ -161,13 +161,9 @@
         <div id="somHeader">
             <div id="som2">
                 <h2>Stanford Medicine</h2>
-                <ul>
-                    <li><a href="">Health Care</a></li>
-                    <li><a href="">Research</a></li>
-                    <li><a href="">Education</a></li>
-                    <li><a href="">Give</a></li>
-                    <li><a href="">About</a></li>
-                </ul>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/sm-dropdown.html">
+                    <xi:fallback></xi:fallback>
+                </xi:include>
             </div>
             <div id="su">
                 <h2>Stanford University</h2>
