@@ -2,19 +2,21 @@ body {
 	background-color: rgb(236, 241, 242);
 	font-family: 'Source Sans Pro', sans-serif;
 }
+
 a {
-    color: #007c92;
-    text-decoration: none;
-    border-bottom: none;
-    cursor: pointer;
+	color: #007c92;
+	text-decoration: none;
+	border-bottom: none;
+	cursor: pointer;
 }
-a:visited, a:active, a:hover {
+
+a:visited,a:active,a:hover {
 	color: #428bca;
-    text-decoration: none;
+	text-decoration: none;
 }
-.image-link,
-.image-link:hover {
-    border-bottom: none;
+
+.image-link,.image-link:hover {
+	border-bottom: none;
 }
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class*="yui3-u"] {
@@ -206,6 +208,20 @@ h1 a {
 	width: 148px;
 }
 
+#gift {
+	display: block;
+	width: 135px;
+	padding: 10px 10px 10px 68px;
+	background-color: rgb(255, 255, 255);
+	background-image: url(../../images/gift.png);
+	background-position: 9px 7px;
+	background-repeat: no-repeat;
+	line-height: 18px;
+	border: 1px rgb(203, 192, 193) solid;
+	box-shadow: 0px 0px 2px rgb(203, 192, 193);
+	font-size: 12px;
+}
+
 .menu {
 	border-top: 12px solid #8C1515;
 	margin-bottom: 24px;
@@ -242,6 +258,7 @@ h1 a {
 	padding: 6px;
 	font-weight: 300;
 }
+
 #search h2 {
 	color: #fff;
 	margin: 6px 0 24px 6px;
@@ -267,10 +284,36 @@ h1 a {
 }
 
 /*content styles start here*/
+.heading-container {
+	width: 100%;
+	text-align: center;
+	text-wrap: nowrap;
+}
+
+.heading-left,.heading-right {
+	display: block;
+	height: 4px;
+	width: 30%;
+	border-top: 1px solid;
+	border-top-color: #d8dbdc;
+	vertical-align: middle;
+}
+
+.heading-right {
+	border-left: 26px solid;
+	border-left-color: #d8dbdc;
+}
+
+.heading-left {
+	border-right: 26px solid;
+	border-right-color: #d8dbdc;
+}
+
 h2 {
-	color: #333333;
 	font-weight: 400;
 	font-size: 28px;
+	font-family: 'Fjord One', serif;
+	color: #333333;
 }
 
 h3 {
@@ -279,34 +322,22 @@ h3 {
 	padding: 6px 6px 6px 0;
 	line-height: 1.2em;
 	margin-bottom: .2em;
-	font-size: 18px;
-	line-height: 1.2em;
-	margin-bottom: .2em;
-	/*color: #ffffff;
-	text-transform: uppercase;*/
+	font-family: 'Fjord One', serif;
 }
 
 h4 {
-	color: #8c1515;
-	font-size: 18 px;
-	line-height: 1.2em;
-	margin-bottom: 1em;
 	display: block;
-}
-
-.section-header {
-	position: relative;
-	margin-bottom: 24px;
+	font-size: 18px;
+	line-height: 1.2em;
+	margin-bottom: .2em;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #8c1515;
 }
 
 .header-border {
-	content: " ";
-	display: block;
-	height: 4px;
-	width: 95%;
 	border-top: 1px solid #d8dbdc;
 	border-left: 26px solid #d8dbdc;
-	font-weight: 400;
+	height: 4px;
 	margin-bottom: 12px;
 }
 
@@ -323,7 +354,7 @@ h4 {
 	clear: both;
 }
 
-.border-and-shadow a,.side-box a, .content a {
+.border-and-shadow a,.side-box a,.content a {
 	color: #428bca;
 	text-decoration: none;
 }
@@ -442,11 +473,12 @@ h4 {
 	margin-bottom: 24px;
 }
 
-b {
+b,strong {
 	color: #8c1515;
 	text-transform: uppercase;
 	font-size: 14px;
 	margin-bottom: 6px;
+	font-weight: bold;
 }
 
 blockquote {
