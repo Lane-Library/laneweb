@@ -472,7 +472,7 @@ h4 {
 }
 
 .content p {
-	margin-bottom: 24px;
+	margin: 12px 0 24px 0px;
 }
 
 b,strong {
@@ -501,7 +501,25 @@ blockquote {
 	margin-top: -45px;
 }
 .img-caption {
-	
+	background-color: #333;
+	padding: 0;
+	margin-bottom: 12px;
+	clear: both;
+}
+.border-and-shadow .img-caption img {
+	float: right;
+	margin: 0;
+}
+.border-and-shadow .img-caption a {
+	color: #fff;
+	font-size: 12px;
+}
+.border-and-shadow .img-caption p {
+	margin: 18px 12px 12px 12px;
+	color: #fff;
+	overflow: hidden;
+	font-size: 1rem;
+	font-weight: normal;
 }
 .clearfix {
 	content: " ";
