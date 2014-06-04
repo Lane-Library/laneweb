@@ -213,7 +213,7 @@ h1 a {
 	width: 135px;
 	padding: 10px 10px 10px 68px;
 	background-color: rgb(255, 255, 255);
-	background-image: url(../../images/gift.png);
+	background-image: url(../../images/gift-transp.png);
 	background-position: 9px 7px;
 	background-repeat: no-repeat;
 	line-height: 18px;
@@ -254,14 +254,15 @@ h1 a {
 #search {
 	background-color: #8C1515;
 	height: auto;
-	color: #fff;
 	padding: 6px;
 	font-weight: 300;
+	color: #fff;
 }
 
 #search h2 {
 	color: #fff;
 	margin: 6px 0 24px 6px;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 #search fieldset {
@@ -327,7 +328,7 @@ h3 {
 
 h4 {
 	display: block;
-	font-size: 18px;
+	font-size: 20px;
 	line-height: 1.2em;
 	margin-bottom: .2em;
 	font-family: 'Source Sans Pro', sans-serif;
@@ -432,12 +433,13 @@ h4 {
 
 .block-heading h3 {
 	display: block;
-	font-size: 18px;
+	font-size: 20px;
 	padding: 6px 6px 6px 6px;
 	line-height: 1.2em;
 	margin-bottom: .2em;
 	color: #ffffff;
 	text-transform: uppercase;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .block-content {
@@ -498,7 +500,9 @@ blockquote {
 	margin: 0rem 0rem 0rem 0rem;
 	margin-top: -45px;
 }
-
+.img-caption {
+	
+}
 .clearfix {
 	content: " ";
 	display: table;
