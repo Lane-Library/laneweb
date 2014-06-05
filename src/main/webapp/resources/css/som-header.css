@@ -28,7 +28,8 @@
 #su h2{
     background-position:100% 50%;
 }
-#somHeader div:hover h2{
+#su:hover h2,
+#som2:hover h2{
     background-image:url(../images/logo-sprite-globalheader-on.png)
 }
 #somHeader ul{
@@ -40,7 +41,14 @@
     z-index:1;
     padding:8px;
 }
-#somHeader div:hover ul{
+#su{
+    position:relative;
+}
+#su ul{
+    right:0
+}
+#su:hover ul,
+#som2:hover ul{
     display:block
 }
 #somHeader li{

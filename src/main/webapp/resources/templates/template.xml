@@ -159,18 +159,20 @@
             <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
         </div>
         <div id="somHeader">
-            <div id="som2">
-                <h2>Stanford Medicine</h2>
-                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/sm-dropdown.html">
-                    <xi:fallback></xi:fallback>
-                </xi:include>
-            </div>
-            <div id="su">
-                <h2>Stanford University</h2>
-                <ul>
-                    <li><a href="http://www.stanford.edu/">Home</a></li>
-                    <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
-                </ul>
+            <div class="centered">
+                <div id="som2">
+                    <h2>Stanford Medicine</h2>
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/sm-dropdown.html">
+                        <xi:fallback></xi:fallback>
+                    </xi:include>
+                </div>
+                <div id="su">
+                    <h2>Stanford University</h2>
+                    <ul>
+                        <li><a href="http://www.stanford.edu/">Home</a></li>
+                        <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div id="laneFooter">
