@@ -51,7 +51,16 @@
 					</a>
 				</h4>
 				<p>
+				<xsl:choose>
+					<xsl:when test="./lc:speaker/text() != ''">
 					<xsl:value-of select="./lc:speaker/text()" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="./lc:event_instructors/lc:instructor/lc:fname/text()"/> 
+						<xsl:text>&#160;</xsl:text>
+						<xsl:value-of select="./lc:event_instructors/lc:instructor/lc:lname/text()"/> 
+					</xsl:otherwise>
+				</xsl:choose>
 				</p>
 				<xsl:if
 					test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() != '---'">

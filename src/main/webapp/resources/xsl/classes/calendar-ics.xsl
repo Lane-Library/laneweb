@@ -62,7 +62,17 @@ DESCRIPTION:</xsl:text>
 			select="concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....')" />
 		<xsl:text>		
 ORGANIZER;CN=</xsl:text>
-		<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" /><xsl:text>:
+			<xsl:choose>
+					<xsl:when test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text() != ''">
+						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:fname/text(), ',' , '\\,' )"/> 
+						<xsl:text>&#160;</xsl:text>
+						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:lname/text(), ',' , '\\,' )"/> 
+					</xsl:otherwise>
+				</xsl:choose>
+		<xsl:text>:
 END:VEVENT</xsl:text>
 	</xsl:template>
 

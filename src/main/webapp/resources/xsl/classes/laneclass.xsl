@@ -117,11 +117,29 @@
                                             <xsl:value-of
                                             select="./lc:more_info_url/text()" />
                                         </xsl:attribute>
-                                        <xsl:value-of select="./lc:speaker/text()" />
+                                       <xsl:choose>
+											<xsl:when test="./lc:speaker/text() != ''">
+											<xsl:value-of select="./lc:speaker/text()" />
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="./lc:event_instructors/lc:instructor/lc:fname/text()"/> 
+												<xsl:text>&#160;</xsl:text>
+												<xsl:value-of select="./lc:event_instructors/lc:instructor/lc:lname/text()"/> 
+											</xsl:otherwise>
+										</xsl:choose>
                                     </a>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="./lc:speaker/text()" />
+                                    <xsl:choose>
+										<xsl:when test="./lc:speaker/text() != ''">
+										<xsl:value-of select="./lc:speaker/text()" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="./lc:event_instructors/lc:instructor/lc:fname/text()"/> 
+											<xsl:text>&#160;</xsl:text>
+											<xsl:value-of select="./lc:event_instructors/lc:instructor/lc:lname/text()"/> 
+										</xsl:otherwise>
+									</xsl:choose>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </p>
