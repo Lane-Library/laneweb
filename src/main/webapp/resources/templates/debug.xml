@@ -58,6 +58,8 @@
                         <div id="selectAndInput">
                             <select name="source" id="searchSource">
                                 <option value="all-all" title="Enter Subject, Title, Author, PMID, ISSN, DOI">Lane Search</option>
+                                <option value="images-all" title="Image search">Images Search</option>
+                                <option value="free-images-all" title="Free image search">Free Images Search</option>
                                 <option value="clinical-all" title="Clinical evidence: Cochrane, DARE, ACP Journal Club, UpToDate, PubMed">Clinical/PICO</option>
                                 <option value="peds-all" title="Pediatric evidence: UpToDate, PubMed">Pediatrics</option>
                                 <option value="bioresearch-all" title="200+ bioresearch resources">Bioresearch</option>
