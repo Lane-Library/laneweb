@@ -7,6 +7,47 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-06-09" version="2.1.0" description="2.1.0 redesign release">
+            <action date="2014-06-07" dev="ceyates" issue="97932" type="update">
+                Stretch header and footer to edge of window
+            </action>
+            <action date="2014-06-07" dev="ceyates" issue="97931" type="update">
+                Change background color to #ecf1f2
+            </action>
+            <action date="2014-06-06" dev="alainb" issue="97913" type="update">
+                Feedback-bug:  Classes page needs new coding
+            </action>
+            <action date="2014-06-07" dev="ceyates" issue="97886" type="update">
+                flip the menu for Stanford logo inward (opening to the left, not right)
+            </action>
+            <action date="2014-06-05" dev="ceyates" issue="97884" type="update">
+                Align top logos with the edges of the site, not browser
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97854" type="update">
+                Changed a link name in the Global Navigation from Biomed Resources to All Resources
+            </action>
+            <action date="2014-06-02" dev="olgary" issue="97852" type="update">
+                Change main link color to SoM blue, remove link underline
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97851" type="update">
+                Addition of the drop down menus for SoM and Stanford logos in the top bar
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97850" type="update">
+                Addition of Lane global top header
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97849" type="update">
+                Addition of SoM main footer
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97848" type="update">
+                Visual modifications to the Lane footer
+            </action>
+            <action date="2014-06-08" dev="ceyates" issue="97826" type="update">
+                complete step 3 of redesign
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97825" type="update">
+                complete step 2 of redesign
+            </action>
+        </release>
         <release date="2014-05-12" version="2.1.57" description="2.1.57 bug fix release">
             <action date="2014-05-28" dev="ryanmax" issue="97775" type="update">
                 print search results: hide left column for Firefox
