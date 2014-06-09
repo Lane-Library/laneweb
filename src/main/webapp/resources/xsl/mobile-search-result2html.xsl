@@ -163,7 +163,7 @@
         </a>
         <xsl:value-of select="s:additional-text"/>
         <xsl:if test="@type = 'getPassword'">
-            <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
+            <a target="_blank" href="/secure/ejpw.html" title="Get Password" data-ajax="false">Get Password</a>
         </xsl:if>
     </xsl:template>
     
@@ -175,7 +175,7 @@
             <xsl:value-of select="s:additional-text"/>
             <xsl:if test="@type = 'getPassword'">
                 <xsl:text> </xsl:text>
-                <a target="_blank" href="/secure/ejpw.html" title="Get Password">Get Password</a>
+                <a target="_blank" href="/secure/ejpw.html" title="Get Password" data-ajax="false">Get Password</a>
             </xsl:if>
         </div>
     </xsl:template>
