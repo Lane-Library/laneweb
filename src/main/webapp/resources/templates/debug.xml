@@ -227,102 +227,106 @@
             </div>
         </div>
         <div id="laneFooter">
-            <div class="yui3-g">
-                <div class="yui3-u-1-5">
-                    <h3><a href="/biomed-resources/index.html">All Resources</a></h3>
-                    <ul>
-                        <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
-                        <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
-                        <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
-                        <li><a href="/biomed-resources/images.html?a=a">Images</a></li>
-                        <li><a href="/biomed-resources/cc.html?a=a">Clinical Decision Tools</a></li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-5">
-                    <h3><a href="/portals/index.html">Classes</a></h3>
-                    <ul>
-                        <li><a href="/laneweb/classes-consult/laneclasses.html">Currently Offered Classes</a></li>
-                        <li><a href="/laneweb/classes-consult/laneclasses-archive.html">Classes Archive</a></li>
-                        <li><a href="/laneweb/classes-consult/tutorials.html">Videos &amp; Tutorials</a></li>
-                        <li><a href="http://med.stanford.edu/irt/teaching/index.html">Teaching Support</a></li>
-                        <li><a href="/laneweb/help/index.html">Consulting</a></li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-5">
-                    <h3><a href="/using-lib/index.html">Using the Library</a></h3>
-                    <ul>
-                        <li><a href="/using-lib/get-started/affiliates.html">Get Started at Lane</a></li>
-                        <li><a href="/using-lib/get-started/affiliates.html">Your eligibility</a></li>
-                        <li><a href="/using-lib/get-started/sunetid.html">Manage Your SUNet ID</a></li>
-                        <li><a href="/using-lib/docdeliver.html">DocXpress</a></li>
-                        <li><a href="/using-lib/computing.html">Computing Spaces</a></li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-5">
-                    <h3><a href="/about/index.html">About Lane</a></h3>
-                    <ul>
-                        <li><a href="/about/index.html">Hours</a></li>
-                        <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
-                        <li><a href="/about/contact.html">Contact Us</a></li>
-                        <li><a href="/about/liaisons.html">Liaisons</a></li>
-                        <li><a href="/about/grantwriters.html">Info for Grant Writers</a></li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-5">
-                    <h3><a href="http://www.stanford.edu/">How To</a></h3>
-                    <ul>
-                        <li><a href="/help/choose-search.html">Choose Your Search</a></li>
-                        <li><a href="/help/lit-search.html">Search the Literature</a></li>
-                        <li><a href="/help/references.html">Manage References</a></li>
-                        <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
-                        <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
-                    </ul>
+            <div class="centered">
+                <div class="yui3-g">
+                    <div class="yui3-u-1-5">
+                        <h3><a href="/biomed-resources/index.html">All Resources</a></h3>
+                        <ul>
+                            <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
+                            <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
+                            <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
+                            <li><a href="/biomed-resources/images.html?a=a">Images</a></li>
+                            <li><a href="/biomed-resources/cc.html?a=a">Clinical Decision Tools</a></li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u-1-5">
+                        <h3><a href="/portals/index.html">Classes</a></h3>
+                        <ul>
+                            <li><a href="/laneweb/classes-consult/laneclasses.html">Currently Offered Classes</a></li>
+                            <li><a href="/laneweb/classes-consult/laneclasses-archive.html">Classes Archive</a></li>
+                            <li><a href="/laneweb/classes-consult/tutorials.html">Videos &amp; Tutorials</a></li>
+                            <li><a href="http://med.stanford.edu/irt/teaching/index.html">Teaching Support</a></li>
+                            <li><a href="/laneweb/help/index.html">Consulting</a></li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u-1-5">
+                        <h3><a href="/using-lib/index.html">Using the Library</a></h3>
+                        <ul>
+                            <li><a href="/using-lib/get-started/affiliates.html">Get Started at Lane</a></li>
+                            <li><a href="/using-lib/get-started/affiliates.html">Your eligibility</a></li>
+                            <li><a href="/using-lib/get-started/sunetid.html">Manage Your SUNet ID</a></li>
+                            <li><a href="/using-lib/docdeliver.html">DocXpress</a></li>
+                            <li><a href="/using-lib/computing.html">Computing Spaces</a></li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u-1-5">
+                        <h3><a href="/about/index.html">About Lane</a></h3>
+                        <ul>
+                            <li><a href="/about/index.html">Hours</a></li>
+                            <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
+                            <li><a href="/about/contact.html">Contact Us</a></li>
+                            <li><a href="/about/liaisons.html">Liaisons</a></li>
+                            <li><a href="/about/grantwriters.html">Info for Grant Writers</a></li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u-1-5">
+                        <h3><a href="http://www.stanford.edu/">How To</a></h3>
+                        <ul>
+                            <li><a href="/help/choose-search.html">Choose Your Search</a></li>
+                            <li><a href="/help/lit-search.html">Search the Literature</a></li>
+                            <li><a href="/help/references.html">Manage References</a></li>
+                            <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
+                            <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="lane-subfooter">
-            <div class="yui3-g">
-                <div class="yui3-u-1-3">
-                    <ul>
-                        <li>©<?laneweb current-year?> Stanford Medicine</li>
-                        <li style="margin-left:20px">
-                            <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a title="See us on Facebook" href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257">
-                                <span>See us on Facebook</span><i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a title="See us on Google Plus" href="https://plus.google.com/101896624694637406510/">
-                                <span>See us on Google Plus</span><i class="fa fa-google-plus"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a title="See our Flickr photo collection" href="https://www.flickr.com/photos/40390680@N08/">
-                                <span>See our Flickr photo collection</span><i class="fa fa-flickr"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a title="See us on Twitter" href="http://twitter.com/#!/LaneLibStanford">
-                                <span>See us on Twitter</span><i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="yui3-u-1-6">
-                    <p><a href="http://scopeblog.stanford.edu/">Scope Blog</a></p>
-                    <p><a href="http://openknowledge.stanford.edu/">Open Access &amp; NIH Policy</a></p>
-                </div>
-                <div class="yui3-u-1-6">
-                    <p><a href="/biomed-resources/recent-su-pubmed.html">Sanford Authors in PubMed</a></p>
-                    <p><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles</a></p>
-                </div>
-                <div class="yui3-u-1-3">
-                    <a id="gift" href="http://giving.stanford.edu/goto/lanelibrarygift" rel="popup standard"><strong>Make a difference.</strong>
-                        <br />Help us by making a contribution.</a>
+            <div class="centered">
+                <div class="yui3-g">
+                    <div class="yui3-u-1-3">
+                        <ul>
+                            <li>©<?laneweb current-year?> Stanford Medicine</li>
+                            <li style="margin-left:20px">
+                                <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a title="See us on Facebook" href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257">
+                                    <span>See us on Facebook</span><i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="See us on Google Plus" href="https://plus.google.com/101896624694637406510/">
+                                    <span>See us on Google Plus</span><i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="See our Flickr photo collection" href="https://www.flickr.com/photos/40390680@N08/">
+                                    <span>See our Flickr photo collection</span><i class="fa fa-flickr"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="See us on Twitter" href="http://twitter.com/#!/LaneLibStanford">
+                                    <span>See us on Twitter</span><i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u-1-6">
+                        <p><a href="http://scopeblog.stanford.edu/">Scope Blog</a></p>
+                        <p><a href="http://openknowledge.stanford.edu/">Open Access &amp; NIH Policy</a></p>
+                    </div>
+                    <div class="yui3-u-1-6">
+                        <p><a href="/biomed-resources/recent-su-pubmed.html">Sanford Authors in PubMed</a></p>
+                        <p><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles</a></p>
+                    </div>
+                    <div class="yui3-u-1-3">
+                        <a id="gift" href="http://giving.stanford.edu/goto/lanelibrarygift" rel="popup standard"><strong>Make a difference.</strong>
+                            <br />Help us by making a contribution.</a>
+                    </div>
                 </div>
             </div>
         </div>
