@@ -40,7 +40,7 @@ $(document).on("click", ".webauthLogin:contains('Login')", function(e) {
 
 
 //when a click is coming from a external resource
-$(document).on("click", 'a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"],a[href*="redirect/cme"]', function(event) {
+$(document).on("click", 'a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]', function(event) {
     var link = event.currentTarget,
     now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
     if (!model['disaster-mode'] && 'denied' !== statusCookie && (!model["isActiveSunetID"] || statusCookie < now.getTime())){
