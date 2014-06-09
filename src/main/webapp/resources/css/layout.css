@@ -1,10 +1,6 @@
-/* this file contains mostly yui grid customization and nesting error corrections */
-.content {
-    padding:0 15px 0 20px;
+.content{
     background-color:white
 }
- /*style moved from redesign-june-2011.css*/
-.noMarginContent {
-    position : relative;
-    margin : -10px -15px 0 -20px
+.noMarginContent{
+    position:relative;
 }

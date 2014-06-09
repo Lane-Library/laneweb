@@ -12,6 +12,7 @@
     float:right
 }
 #somHeader div:hover{
+    background-image:url(../images/diag.png);
     background-color:#666666
 }
 #somHeader h2{
@@ -28,19 +29,29 @@
 #su h2{
     background-position:100% 50%;
 }
-#somHeader div:hover h2{
+#su:hover h2,
+#som2:hover h2{
     background-image:url(../images/logo-sprite-globalheader-on.png)
 }
 #somHeader ul{
     display:none;
     position:absolute;
     top:50px;
+    background-image:url(../images/diag.png);
     background-color:#666666;
     color:white;
     z-index:1;
     padding:8px;
+    box-shadow:2px 3px 3px rgba(0, 0, 0, 0.8);
 }
-#somHeader div:hover ul{
+#su{
+    position:relative;
+}
+#su ul{
+    right:0
+}
+#su:hover ul,
+#som2:hover ul{
     display:block
 }
 #somHeader li{
@@ -54,5 +65,5 @@
     text-shadow:rgb(51, 51, 51) 1px 1px 2px
 }
 #somHeader a:hover{
-    background-color:#707070;
+    background-color:rgba(204, 204, 204, 0.2)
 }

@@ -36,8 +36,8 @@ h5 {
 }
 .h2-border {
 	border-bottom: 5px #575347 solid;
-	margin-bottom: 0;
 	padding-top: 25px;
+	margin:0 10px;
 }
 
 /*style for h4 - bigger font, red*/
