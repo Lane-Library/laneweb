@@ -20,14 +20,15 @@
     background-image:url(../images/logo-sprite-globalheader-off.png);
     background-repeat:no-repeat;
     margin:0 10px;
-    width:150px;
     height:35px;
 }
 #som2 h2{
     background-position:0 50%;
+    width:150px;
 }
 #su h2{
     background-position:100% 50%;
+    width:130px;
 }
 #su:hover h2,
 #som2:hover h2{
