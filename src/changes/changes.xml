@@ -7,7 +7,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2014-06-09" version="2.1.0" description="2.1.0 redesign release">
+        <release date="2014-06-09" version="2.2.1" description="2.2.1 bug fix release">
+            <action date="2014-06-09" dev="ceyates" issue="97952" type="update">
+                add SearchWorks link to Stanford drop down menu
+            </action>
+            <action date="2014-06-09" dev="ceyates" issue="97951" type="fix">
+                Stanford misspelled in lane-subfooter
+            </action>
+        </release>
+        <release date="2014-06-09" version="2.2.0" description="2.2.0 redesign release">
             <action date="2014-06-07" dev="ceyates" issue="97932" type="update">
                 Stretch header and footer to edge of window
             </action>
