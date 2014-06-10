@@ -19,34 +19,34 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 @RequestMapping(value = "/mvc/search/")
 public class ImagesSearchController {
 
-	@Autowired
-	MetaSearchManager metasearchManager;
-//	@RequestMapping(value = "/searchImages.html")
-	 @RequestMapping(value = "images.html")
-	 public String searchImgae(Model model, String q){//,@PathVariable String engines, @PathVariable String query){
-		 Result searchResult = null;
-		 String engines = "elasticsearch-endoatlas,wellcomeimages,philcdc_photos";
-	        if (q == null || q.isEmpty()) {
-	        	searchResult = new Result("");
-	        } else {
-	        	searchResult = this.metasearchManager.search(new SimpleQuery(q, Arrays.asList(engines.split(","))), 30000L , true);
-	        }
-		 List<ContentResult> result = new LinkedList<>();
-		 Collection<Result> enginesResult = searchResult.getChildren();
-		 for (Result engine : enginesResult) {
-			Collection<Result> resources = engine.getChildren();
-			for (Result resourceResult : resources) {
-				if(resourceResult.getId() != null && resourceResult.getId().contains("_content")){
-					for (Result content : resourceResult.getChildren()) {
-						result.add((ContentResult) content);
-					}
-				}
-			}
-		}
-		 model.addAttribute("searchResult", result);
-		 
-		 return "imagesSearch";
-	 }
-	
+    @Autowired
+    MetaSearchManager metasearchManager;
+//    @RequestMapping(value = "/searchImages.html")
+     @RequestMapping(value = "images.html")
+     public String searchImgae(Model model, String q){//,@PathVariable String engines, @PathVariable String query){
+         Result searchResult = null;
+         String engines = "elasticsearch-endoatlas,wellcomeimages,philcdc_photos";
+            if (q == null || q.isEmpty()) {
+                searchResult = new Result("");
+            } else {
+                searchResult = this.metasearchManager.search(new SimpleQuery(q, Arrays.asList(engines.split(","))), 30000L , true);
+            }
+         List<ContentResult> result = new LinkedList<>();
+         Collection<Result> enginesResult = searchResult.getChildren();
+         for (Result engine : enginesResult) {
+            Collection<Result> resources = engine.getChildren();
+            for (Result resourceResult : resources) {
+                if(resourceResult.getId() != null && resourceResult.getId().contains("_content")){
+                    for (Result content : resourceResult.getChildren()) {
+                        result.add((ContentResult) content);
+                    }
+                }
+            }
+        }
+         model.addAttribute("searchResult", result);
+         
+         return "imagesSearch";
+     }
+    
 
 }

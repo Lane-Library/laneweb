@@ -16,7 +16,7 @@ import edu.stanford.irt.laneweb.resource.Resource;
 
 public class DescriptionLabelTransformerTest {
 
-    private static final char[] CHARS = "some characters with ::DESCRIPTION LABEL WITH/SLASH## inside of it".toCharArray();
+    private static final char[] CHARS = "some characters with ::DESCRIPTION LABEL-DASH/SLASH## inside of it".toCharArray();
 
     private DescriptionLabelTransformer transformer;
 

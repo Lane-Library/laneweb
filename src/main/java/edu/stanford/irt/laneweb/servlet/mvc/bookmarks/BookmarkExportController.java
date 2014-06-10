@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
 
 @Controller
 @RequestMapping(value = "/bookmarks/export")
@@ -30,6 +34,12 @@ public class BookmarkExportController extends BookmarkController {
     private static final String ITEM_PREFIX = "        <DT><A HREF=\"";
 
     private static final String ITEM_SUFFIX = "</A>\n";
+
+    @Autowired
+    public BookmarkExportController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
+            SunetIdAndTicketDataBinder sunetidTicketDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, sunetidTicketDataBinder);
+    }
 
     /**
      * Produces importable html bookmarks.

@@ -42,7 +42,7 @@ public final class QueryTermPattern {
      *  replace hyphens and spaces with "\W"
      * </pre>
      * 
-     * @param query
+     * @param query the query text
      * @return a Pattern constructed from the query.
      * @throws LanewebException
      *             if there was a PatternSyntaxException in order to report the original query

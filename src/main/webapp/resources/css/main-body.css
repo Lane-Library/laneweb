@@ -1,11 +1,14 @@
 html{
-    background-color:#d6d5c7
+    background-color:#ecf1f2
 }
-body{
+#main{
+    text-align:left;
+    position:relative;
+    margin-top:50px
+}
+
+.centered{
     width:76.07em;
     min-width:989px;
     margin:auto;
-    text-align:left;
-    position:relative;
-    background-color:white
 }

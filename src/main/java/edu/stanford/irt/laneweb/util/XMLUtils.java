@@ -34,7 +34,11 @@ public final class XMLUtils {
 
     /**
      * Create a start and endElement without Attributes The content of the Element is set to the stringValue parameter
-     * 
+     *
+     * @param xmlConsumer
+     *            The SAX content handler
+     * @param namespaceURI
+     *            The Namespace URI
      * @param localName
      *            The local name (without prefix)
      * @param stringValue
@@ -51,11 +55,13 @@ public final class XMLUtils {
 
     /**
      * Add string data
-     * 
+     *
      * @param xmlConsumer
      *            The SAX content handler
      * @param data
      *            The string data
+     * @exception org.xml.sax.SAXException
+     *                Any SAX exception, possibly wrapping another exception.
      */
     public static void data(final XMLConsumer xmlConsumer, final String data) throws SAXException {
         xmlConsumer.characters(data.toCharArray(), 0, data.length());
@@ -66,7 +72,11 @@ public final class XMLUtils {
      * <p>
      * For information on the names, see startElement.
      * </p>
-     * 
+     *
+     * @param xmlConsumer
+     *            The SAX content handler
+     * @param namespaceURI
+     *            The Namespace URI
      * @param localName
      *            The local name (without prefix)
      * @exception org.xml.sax.SAXException
@@ -79,7 +89,9 @@ public final class XMLUtils {
 
     /**
      * Create a startElement without Attributes Prefix must be mapped to empty String
-     * 
+     *
+     * @param xmlConsumer
+     *            The SAX content handler
      * @param namespaceURI
      *            The Namespace URI
      * @param localName
@@ -94,7 +106,9 @@ public final class XMLUtils {
 
     /**
      * Create a startElement with a empty Namespace Prefix must be mapped to empty String
-     * 
+     *
+     * @param xmlConsumer
+     *            The SAX content handler
      * @param namespaceURI
      *            The Namespace URI
      * @param localName

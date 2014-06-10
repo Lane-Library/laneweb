@@ -48,7 +48,7 @@ em {
 
 .rss-link {
 	float: right;
-	background-image: url(/././resources/images/sprite-all.png);
+	background-image: url(../images/sprite-all.png);
 	background-position: -41px -240px;
 	height: 15px;
 	width: 15px;

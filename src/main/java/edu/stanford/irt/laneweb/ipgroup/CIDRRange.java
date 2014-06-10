@@ -45,7 +45,7 @@ public class CIDRRange {
     /**
      * add a CIDRRange as a subrange of this one.
      * 
-     * @param other
+     * @param other the subrange to add
      */
     public void addSubrange(final CIDRRange other) {
         if (!isSubrange(other)) {
@@ -120,7 +120,7 @@ public class CIDRRange {
     /**
      * Determine of another range is contained within this range
      * 
-     * @param other
+     * @param other the other CIDRange
      * @return true if other is within this range, otherwise false
      */
     public boolean isSubrange(final CIDRRange other) {

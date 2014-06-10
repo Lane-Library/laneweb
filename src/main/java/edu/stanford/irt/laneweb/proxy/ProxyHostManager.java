@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -90,7 +90,7 @@ public class ProxyHostManager {
         this.proxyHosts = new HashSet<String>();
         String proxyHost = null;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
-                "ezproxy-servers.txt"), Charset.forName("UTF-8")))) {
+                "ezproxy-servers.txt"), StandardCharsets.UTF_8))) {
             while ((proxyHost = reader.readLine()) != null) {
                 this.proxyHosts.add(proxyHost);
             }

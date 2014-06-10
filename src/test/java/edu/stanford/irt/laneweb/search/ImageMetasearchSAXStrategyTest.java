@@ -12,42 +12,42 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ImageMetasearchSAXStrategyTest {
 
-	private TestXMLConsumer xmlConsumer;
-	
-	private ImageMetasearchSAXStrategy strategy;
-	
+    private TestXMLConsumer xmlConsumer;
+    
+    private ImageMetasearchSAXStrategy strategy;
+    
 
-	@Before
+    @Before
     public void setUp() {
      this.xmlConsumer = new TestXMLConsumer();
      this.strategy = new ImageMetasearchSAXStrategy();
-	}
-	
-	
-	@Test
-	public void testToSAX() throws SAXException, IOException {
-		xmlConsumer.startDocument();
-		Result metasearch = new Result("search");
-		Result engine = new Result("engine");
-		engine.setHits("100");
-		engine.setDescription("engine_description");
-		Result resource = new Result("resource");
-		resource.setURL("http://resource-url.com");
-		Result content = new Result("resource_content");
-		content.setHits("10");
-		content.setDescription("resource_description");
-		ContentResult contentResult = new ContentResult("_content_");
-		contentResult.setDescription("http://image.src");
-		contentResult.setURL("http://urlcontent.com");
-		contentResult.setTitle("title");
-		content.addChild(contentResult);
-		engine.addChild(resource);
-		engine.addChild(content);
-		metasearch.addChild(engine);
-		strategy.toSAX(metasearch, xmlConsumer);
-		xmlConsumer.endDocument();
-		
-	}
-		
-	
+    }
+    
+    
+    @Test
+    public void testToSAX() throws SAXException, IOException {
+        xmlConsumer.startDocument();
+        Result metasearch = new Result("search");
+        Result engine = new Result("engine");
+        engine.setHits("100");
+        engine.setDescription("engine_description");
+        Result resource = new Result("resource");
+        resource.setURL("http://resource-url.com");
+        Result content = new Result("resource_content");
+        content.setHits("10");
+        content.setDescription("resource_description");
+        ContentResult contentResult = new ContentResult("_content_");
+        contentResult.setDescription("http://image.src");
+        contentResult.setURL("http://urlcontent.com");
+        contentResult.setTitle("title");
+        content.addChild(contentResult);
+        engine.addChild(resource);
+        engine.addChild(content);
+        metasearch.addChild(engine);
+        strategy.toSAX(metasearch, xmlConsumer);
+        xmlConsumer.endDocument();
+        
+    }
+        
+    
 }

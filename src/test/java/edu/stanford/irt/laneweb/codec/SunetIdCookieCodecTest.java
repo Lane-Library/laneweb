@@ -7,8 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
-import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
 
 public class SunetIdCookieCodecTest {
 

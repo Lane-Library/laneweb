@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
+
+
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -24,11 +26,16 @@ public abstract class AbstractImageSearchSAXStrategy<T extends Object> extends A
     protected static final String UL = "ul";
 
     
-	protected void generateImages(XMLConsumer xmlConsumer, String title, String url, String src) throws SAXException {
-		startLi(xmlConsumer);
-		startAnchor(xmlConsumer, url);
+	protected void generateImages(XMLConsumer xmlConsumer, String id, String title, String url, String thumbnailSrc, String imageSrc) throws SAXException {
+		 AttributesImpl atts = new AttributesImpl();
+		 if(null != id && imageSrc != null && !"".equals(imageSrc)){
+			atts.addAttribute(XHTML_NS, ID, ID, CDATA, id);
+			atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "yui3-tooltip-trigger");
+		 }
+	     XMLUtils.startElement(xmlConsumer, XHTML_NS, "li" , atts);
+	     startAnchor(xmlConsumer, url);
 		startElementWithId(xmlConsumer, DIV, "image");
-		createImage(xmlConsumer, src);
+		createImage(xmlConsumer, thumbnailSrc);
 		endDiv(xmlConsumer);
 		startDiv(xmlConsumer);
 		XMLUtils.data(xmlConsumer, title);
@@ -72,5 +79,18 @@ public abstract class AbstractImageSearchSAXStrategy<T extends Object> extends A
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
 	}
+	
+	protected void generateTooltipsImage(XMLConsumer xmlConsumer, String id, String imageSrc) throws SAXException {
+		if (null != imageSrc && !"".equals(imageSrc)) {
+			startElementWithId(xmlConsumer, "span",id.concat("Tooltip"));
+			AttributesImpl atts = new AttributesImpl();
+			atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, imageSrc);
+			atts.addAttribute(XHTML_NS, "style", "style", CDATA,"max-width: 300px;max-height: 240px");
+			XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
+			XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
+			XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
+		}
+	}
+	
 
 }

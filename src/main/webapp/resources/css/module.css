@@ -49,7 +49,7 @@
 .shadow {
     padding-bottom : 15px;
     margin-bottom : 15px;
-    background-image : url(/././resources/images/shadow-narrow.png);
+    background-image : url(../images/shadow-narrow.png);
     background-position : bottom;
     background-repeat : no-repeat;
 }
@@ -57,7 +57,7 @@
     padding-top : 10px;
     clear : left;
     text-align : center;
-    background-image : url(/././resources/images/shadow-wide.png);
+    background-image : url(../images/shadow-wide.png);
     background-repeat : no-repeat;
     background-position : top center;
 }

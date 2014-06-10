@@ -11,8 +11,12 @@ import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 @RequestMapping(value = "/secure/metrics/bookmarks")
 public class BookmarkMetricsController {
 
-    @Autowired
     private BookmarkDAO bookmarkDAO;
+
+    @Autowired
+    public BookmarkMetricsController(BookmarkDAO bookmarkDAO) {
+        this.bookmarkDAO = bookmarkDAO;
+    }
 
     @RequestMapping(value = "/rowcount")
     @ResponseBody

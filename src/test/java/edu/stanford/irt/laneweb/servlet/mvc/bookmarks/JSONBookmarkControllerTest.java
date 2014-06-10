@@ -37,12 +37,11 @@ public class JSONBookmarkControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.controller = new JSONBookmarkController();
+        this.bookmarkDAO = createMock(BookmarkDAO.class);
+        this.controller = new JSONBookmarkController(this.bookmarkDAO, null, null, null);
         this.sunetid = "ditenus";
         this.bookmarks = new ArrayList<Bookmark>();
         this.bookmark = new Bookmark("label", "url");
-        this.bookmarkDAO = createMock(BookmarkDAO.class);
-        this.controller.setBookmarkDAO(this.bookmarkDAO);
     }
 
     @Test

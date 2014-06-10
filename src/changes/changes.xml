@@ -7,6 +7,92 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-06-09" version="2.2.1" description="2.2.1 bug fix release">
+            <action date="2014-06-09" dev="ceyates" issue="97953" type="update">
+                make the Stanford University h2 less wide
+            </action>
+            <action date="2014-06-09" dev="ceyates" issue="97952" type="update">
+                add SearchWorks link to Stanford drop down menu
+            </action>
+            <action date="2014-06-09" dev="ceyates" issue="97951" type="fix">
+                Stanford misspelled in lane-subfooter
+            </action>
+            <action date="2014-06-09" dev="ceyates" issue="97945" type="update">
+                align background for Stanford University logo in top nav
+            </action>
+        </release>
+        <release date="2014-06-09" version="2.2.0" description="2.2.0 redesign release">
+            <action date="2014-06-07" dev="ceyates" issue="97932" type="update">
+                Stretch header and footer to edge of window
+            </action>
+            <action date="2014-06-07" dev="ceyates" issue="97931" type="update">
+                Change background color to #ecf1f2
+            </action>
+            <action date="2014-06-06" dev="alainb" issue="97913" type="update">
+                Feedback-bug:  Classes page needs new coding
+            </action>
+            <action date="2014-06-07" dev="ceyates" issue="97886" type="update">
+                flip the menu for Stanford logo inward (opening to the left, not right)
+            </action>
+            <action date="2014-06-05" dev="ceyates" issue="97884" type="update">
+                Align top logos with the edges of the site, not browser
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97854" type="update">
+                Changed a link name in the Global Navigation from Biomed Resources to All Resources
+            </action>
+            <action date="2014-06-02" dev="olgary" issue="97852" type="update">
+                Change main link color to SoM blue, remove link underline
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97851" type="update">
+                Addition of the drop down menus for SoM and Stanford logos in the top bar
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97850" type="update">
+                Addition of Lane global top header
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97849" type="update">
+                Addition of SoM main footer
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97848" type="update">
+                Visual modifications to the Lane footer
+            </action>
+            <action date="2014-06-08" dev="ceyates" issue="97826" type="update">
+                complete step 3 of redesign
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97825" type="update">
+                complete step 2 of redesign
+            </action>
+        </release>
+        <release date="2014-05-12" version="2.1.57" description="2.1.57 bug fix release">
+            <action date="2014-05-28" dev="ryanmax" issue="97775" type="update">
+                print search results: hide left column for Firefox
+            </action>
+            <action date="2014-05-27" dev="ceyates" issue="97768" type="update">
+                Update bookmark hover message
+            </action>
+            <action date="2014-05-29" dev="ryanmax" issue="97767" type="add">
+                separate feedback form into 4 pages with distinct URLs
+            </action>
+            <action date="2014-05-20" dev="ryanmax" issue="97715" type="fix">
+                pubmed abstract formatting bug
+            </action>
+            <action date="2014-05-14" dev="ceyates" issue="97657" type="update">
+                use relative urls in css files
+            </action>
+        </release>
+        <release date="2014-05-12" version="2.1.56" description="2.1.56 bug fix release">
+            <action date="2014-05-08" dev="ceyates" issue="97524" type="add">
+                Create filter to return an error code if there is a -1%27 parameter
+            </action>
+            <action date="2014-05-06" dev="ceyates" issue="97496" type="update">
+                update STAFF ip group
+            </action>
+            <action date="2014-05-06" dev="ryanmax" issue="96798" type="add">
+                Google Analytics - Tracking search "selection" for mobile site
+            </action>
+            <action date="2014-05-06" dev="ryanmax" issue="94676" type="fix">
+                Uncaught RangeError: Maximum call stack size exceeded in m-search.js
+            </action>
+        </release>
         <release date="2014-05-05" version="2.1.55" description="2.1.55 bug fix release">
             <action date="2014-05-01" dev="ceyates" issue="97393" type="remove">
                 remove crossdb_unists from metasearch

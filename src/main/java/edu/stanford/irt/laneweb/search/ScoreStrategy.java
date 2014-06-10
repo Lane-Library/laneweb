@@ -33,6 +33,9 @@ public class ScoreStrategy extends AbstractScoreStrategy {
      *  10 desc match
      *  1
      * </pre>
+     * @param searchResult the ContentResult
+     * @param queryTermPattern a Pattern
+     * @return the resulting score
      */
     public int computeScore(final ContentResult searchResult, final Pattern queryTermPattern) {
         int score;
