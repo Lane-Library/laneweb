@@ -17,6 +17,9 @@
             <action date="2014-06-09" dev="ceyates" issue="97951" type="fix">
                 Stanford misspelled in lane-subfooter
             </action>
+            <action date="2014-06-09" dev="ceyates" issue="97945" type="update">
+                align background for Stanford University logo in top nav
+            </action>
         </release>
         <release date="2014-06-09" version="2.2.0" description="2.2.0 redesign release">
             <action date="2014-06-07" dev="ceyates" issue="97932" type="update">
