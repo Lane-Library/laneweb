@@ -47,8 +47,12 @@
 #su{
     position:relative;
 }
+#som2 ul{
+    width:154px
+}
 #su ul{
-    right:0
+    right:0;
+    width:134px;
 }
 #su:hover ul,
 #som2:hover ul{
