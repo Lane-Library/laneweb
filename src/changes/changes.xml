@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2014-06-09" version="2.2.1" description="2.2.1 bug fix release">
+            <action date="2014-06-09" dev="ceyates" issue="97953" type="update">
+                make the Stanford University h2 less wide
+            </action>
             <action date="2014-06-09" dev="ceyates" issue="97952" type="update">
                 add SearchWorks link to Stanford drop down menu
             </action>
