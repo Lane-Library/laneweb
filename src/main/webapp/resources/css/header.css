@@ -7,8 +7,11 @@
 }
 h1 {
     font-size: 26px;
-    padding: 24px 0 24px 212px;
+    padding: 24px 0 24px 65px;
 	color: #820000;
+	background-image:url(../images/lane-logo.png);
+	background-repeat:no-repeat;
+	background-position:0 20px;
 }
 
 h1 span {
@@ -24,25 +27,9 @@ h1 a:visited {
 	color: #820000;
 }
 
-#som,h1 a:hover {
+h1 a:hover {
 	text-decoration: underline;
 	border-bottom-style: none;
-}
-
-#som {
-	display: block;
-	height: 50px;
-	position: absolute;
-	top: 22px;
-	width: 203px;
-	text-indent: -9000px;
-	background-image: url(../images/sprite-all.png);
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
-}
-
-#som:hover {
-	background-position: 0 -80px;
 }
 
 #login {
