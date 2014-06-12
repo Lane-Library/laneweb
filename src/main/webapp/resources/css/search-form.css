@@ -47,7 +47,7 @@
     width:90px;
     cursor:pointer;
     vertical-align:bottom;
-    margin-left:8px;
+    margin:0 8px;
 }
 #searchSubmit:hover {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadad4), to(#fafbf8));
@@ -124,10 +124,15 @@
 #searchIndicator.show {
     visibility:visible
 }
-/*#searchTips {
-    color: white;
-    font-size: 10px;
+#searchTips {
+    font-size:12px;
+    font-weight:600
 }
+#searchTips i{
+    color:white;
+    font-size:9px
+}
+/*
 #searchTips a {
     color : white;
     border-bottom : 1px dotted #fff;
