@@ -72,11 +72,13 @@
 
 
 #copyrightSection{
-	width: 470px;
-	position: absolute;
-	left:490px;
-	top:245px;
-	
+    margin-bottom: -100px;
+    margin-left: 475px;
+    overflow: hidden;
+    padding-top: 18px;
+    position: relative;
+    left: 0;
+    top: 0;
 	}
 
 #copyrightSection div:first-child{
