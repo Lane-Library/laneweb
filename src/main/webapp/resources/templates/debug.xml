@@ -101,7 +101,7 @@
                                 <span id="searchReset" title="Clear Search">×</span>
                             </div>
                             <input id="searchSubmit" type="submit" value="Search" />
-                            <a id="searchTools" href="/help/cool-tools-proxyBookmarklet.html" title="Search Tools"><i class="fa fa-wrench"></i></a>
+                            <!--<a id="searchTools" href="/help/cool-tools-proxyBookmarklet.html" title="Search Tools"><i class="fa fa-wrench"></i></a>-->
                             <a id="searchTips" href="/help/choose-search.html">NEED HELP?</a>
                             <img id="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
                         </fieldset>
