@@ -284,12 +284,12 @@ h1 a {
 .heading-container {
 	width: 100%;
 	text-align: center;
-	text-wrap: nowrap;
+	white-space: nowrap;
 	margin-top: 12px;
 }
 
 .heading-left,.heading-right {
-	display: block;
+	display: inline-block;
 	height: 4px;
 	width: 30%;
 	border-top: 1px solid;
