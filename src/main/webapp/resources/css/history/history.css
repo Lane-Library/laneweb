@@ -42,8 +42,8 @@ h1 {
 }
 
 h1 a {
-	color: #333333;
-	text-decoration: none
+	color: #333333 !important;
+	text-decoration: none;
 }
 
 #sm-header {
@@ -51,7 +51,7 @@ h1 a {
 	top: 0;
 	width: 100%;
 	height: 32px;
-	background-color: black
+	background-color: black;
 }
 
 #sm-header ul {
@@ -243,12 +243,13 @@ h1 a {
 }
 
 .gutter-left {
-	margin-left: 6px;
+	margin-right: 6px;
+	margin-top: 12px;
 }
 
 .gutter-right {
 	margin-right: 6px;
-	margin-top: 6px;
+	margin-top: 12px;
 }
 
 #search {
@@ -289,6 +290,7 @@ h1 a {
 	width: 100%;
 	text-align: center;
 	text-wrap: nowrap;
+	margin-top: 12px;
 }
 
 .heading-left,.heading-right {
@@ -314,7 +316,7 @@ h2 {
 	font-weight: 400;
 	font-size: 28px;
 	font-family: 'Fjord One', serif;
-	color: #333333;
+	color: #666666;
 }
 
 h3 {
@@ -324,6 +326,7 @@ h3 {
 	line-height: 1.2em;
 	margin-bottom: .2em;
 	font-family: 'Fjord One', serif;
+	color: #666666;
 }
 
 h4 {
@@ -384,6 +387,20 @@ h4 {
 	line-height: 1.4;
 }
 
+.home-photo {
+	margin-top: 12px;
+}
+.content ol {
+	list-style-type: decimal;
+	margin-top: 0;
+	margin-bottom: 12px;
+	display: block;
+	margin: 1em 0 1em 0;
+	padding-left: 40px;
+}
+.content ol li{
+	margin-bottom: 12px;
+}
 .side-box {
 	margin: 12px 0px 24px 0px;
 	clear: both;
@@ -484,43 +501,45 @@ b,strong {
 }
 
 blockquote {
-	float: left;
 	width: 85%;
 	color: #666666;
 	font-family: 'Fjord One', serif;
 	font-style: italic;
 	border: none;
-	padding-top: 24px;
-	padding-bottom: 0px;
-	padding-left: 57px;
-	padding-right: 12px;
-	text-indent: -45px;
+	padding-top: 0px;
+	padding-bottom: 18px;
+	padding-left: 36px;
 	overflow: hidden;
 	margin: 0px 0px 0px 0px;
-	margin: 0rem 0rem 0rem 0rem;
-	margin-top: -45px;
+	display: block;
+	clear: both;
 }
+
 .img-caption {
 	background-color: #333;
 	padding: 0;
 	margin-bottom: 12px;
 	clear: both;
 }
-.border-and-shadow .img-caption img {
+
+.border-and-shadow .img-caption img,.content .img-caption img {
 	float: right;
 	margin: 0;
 }
-.border-and-shadow .img-caption a {
+
+.border-and-shadow .img-caption a,.content .img-caption a {
 	color: #fff;
 	font-size: 12px;
 }
-.border-and-shadow .img-caption p {
+
+.border-and-shadow .img-caption p,.content .img-caption p {
 	margin: 18px 12px 12px 12px;
 	color: #fff;
 	overflow: hidden;
 	font-size: 1rem;
 	font-weight: normal;
 }
+
 .clearfix {
 	content: " ";
 	display: table;
