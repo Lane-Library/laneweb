@@ -1,3 +1,4 @@
+//TODO: determine of class="clinical" is still necessary
 (function() {
     var Lane = Y.lane,
         form = Y.one('#search'),

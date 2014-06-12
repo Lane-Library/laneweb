@@ -1,6 +1,4 @@
 #searchFormContainer {
-    padding-top: 3px;
-    height : 77px;
     margin-top: 46px;
     background-color: #9B0D00;
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9B0D00), to(#600700));
@@ -9,11 +7,8 @@
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700')";
     background-image: linear-gradient(#9B0D00, #600700);
 }
-#searchFormContainer.clinical {
-    height:115px
-}
-#search {
-    margin-top:6px
+#search{
+    padding:12px 0
 }
 #searchFields {
     /*IE7 requires this z-index for the autocomplete to show up over the laneNav menus*/
@@ -61,13 +56,20 @@
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8')";
     background: linear-gradient(#dadad4, #fafbf8);
 }
-#search a:hover {
-    border-bottom : 1px solid #fff;
+#searchTools{
+    background-color:white;
+    display:inline-block;
+    height:34px;
+    width:34px;
+    text-align: center;
+    font-size: x-large;
+    line-height: 32px;
+    margin:0 5px
 }
 #picoFields {
     background-color: white;
-    height: 35px;
-    margin-bottom: 11px;
+    height: 34px;
+    margin-bottom: 12px;
     width: 690px;
     display: none;
 }
@@ -82,7 +84,8 @@
     width:171px;
     text-align:center;
     border-right:1px rgb(220,220,220) solid;
-    border-radius:0
+    border-radius:0;
+    line-height:1px
 }
 #picoFields #clinicalO {
     border-right:none
@@ -110,6 +113,9 @@
 #searchReset.active {
     display:block;
 }
+#search a{
+    color:white
+}
 
 #searchIndicator {
     visibility : hidden;
@@ -120,7 +126,7 @@
 #searchIndicator.show {
     visibility:visible
 }
-#searchTips {
+/*#searchTips {
     color: white;
     font-size: 10px;
 }
@@ -130,11 +136,11 @@
 }
 #searchTips a:hover {
     border-bottom : 1px solid #fff;
-}
+}*/
 
 /* pubmed, uptodate, dynamed links inside the form: */
 
-#qlinks {
+/*#qlinks {
     float: right;
 }
 
@@ -159,4 +165,4 @@
 
 #qlinks a:hover {
     border-bottom: 1px dotted white;
-}
+}*/

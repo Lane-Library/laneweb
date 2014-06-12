@@ -83,7 +83,6 @@
             </div>
             <div id="searchFormContainer">
                 <div class="centered">
-                    <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
                     <form id="search" method="get" action="/search.html">
                         <fieldset id="searchFields">
                             <div id="selectAndInput">
@@ -102,10 +101,12 @@
                                 <span id="searchReset" title="Clear Search">×</span>
                             </div>
                             <input id="searchSubmit" type="submit" value="Search" />
+                            <a id="searchTools" href=""><i class="fa fa-wrench"></i></a>
+                            <a id="searchTips" href="/help/choose-search.html">NEED HELP?</a>
                             <img id="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
                         </fieldset>
                     </form>
-                    <ul id="qlinks">
+                    <!--<ul id="qlinks">
                         <li>
                             <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
                         </li>
@@ -115,7 +116,7 @@
                         <li>
                             <a href="http://www.uptodate.com/online">UpToDate</a>
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
             <div class="content centered">
