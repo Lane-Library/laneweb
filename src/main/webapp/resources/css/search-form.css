@@ -47,7 +47,7 @@
     width:90px;
     cursor:pointer;
     vertical-align:bottom;
-    margin-left:8px;
+    margin:0 8px;
 }
 #searchSubmit:hover {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadad4), to(#fafbf8));
@@ -85,7 +85,6 @@
     text-align:center;
     border-right:1px rgb(220,220,220) solid;
     border-radius:0;
-    line-height:1px
 }
 #picoFields #clinicalO {
     border-right:none
@@ -120,16 +119,20 @@
 #searchIndicator {
     visibility : hidden;
     position: absolute;
-    left: 710px;
-    top: 0;
+    right: 90px;
 }
 #searchIndicator.show {
     visibility:visible
 }
-/*#searchTips {
-    color: white;
-    font-size: 10px;
+#searchTips {
+    font-size:12px;
+    font-weight:600
 }
+#searchTips i{
+    color:white;
+    font-size:9px
+}
+/*
 #searchTips a {
     color : white;
     border-bottom : 1px dotted #fff;
