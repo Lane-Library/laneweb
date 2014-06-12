@@ -255,22 +255,15 @@ h1 a {
 #search {
 	background-color: #8C1515;
 	height: auto;
-	padding: 6px;
+	padding: 12px;
 	font-weight: 300;
 	color: #fff;
-}
-
-#search h2 {
-	color: #fff;
-	margin: 6px 0 24px 6px;
-	font-family: 'Source Sans Pro', sans-serif;
 }
 
 #search fieldset {
 	background-color: white;
 	display: inline-block;
-	padding: 2px;
-	margin: 6px 0 6px 6px;
+	padding:2px;
 }
 
 #search input[type='text'] {
