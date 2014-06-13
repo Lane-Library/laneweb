@@ -19,7 +19,7 @@ import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class ImageSearchGenerator extends AbstractMetasearchGenerator<HashMap<String, Object>> implements ParametersAware {
+public class ImageSearchGenerator extends AbstractMetasearchGenerator<Map<String, Object>> implements ParametersAware {
 
     public static final String BASSETT_RESULT = "bassett";
     public static final String METASEARCH_RESULT = "metasearch";
@@ -37,16 +37,16 @@ public class ImageSearchGenerator extends AbstractMetasearchGenerator<HashMap<St
 
     
     public ImageSearchGenerator(final MetaSearchManager metaSearchManager, final BassettCollectionManager collectionManager,
-            final SAXStrategy<HashMap<String, Object>> saxStrategy) {
+            final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(metaSearchManager, saxStrategy);
         this.bassettCollection = collectionManager;
         this.metasearchManager = metaSearchManager;
     }
 
     @Override
-    protected HashMap<String, Object> doSearch(String query) {
+    protected Map<String, Object> doSearch(String query) {
         
-        HashMap<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         Result metaSearchResult = null;
         if (query != null && !query.isEmpty()) {
             List<BassettImage> bassettResult = this.bassettCollection.search(query);

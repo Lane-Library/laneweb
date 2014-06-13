@@ -1,18 +1,16 @@
 package edu.stanford.irt.laneweb.search;
 
 
-import java.util.HashMap;
+import java.util.Map;
 
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
 import edu.stanford.irt.search.impl.Result;
 
-public class ImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<HashMap<String, Object>> implements
-        SAXStrategy<HashMap<String, Object>> {
+public class ImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<String, Object>> {
 
     ImageBassettSearchSAXStrategy bassettSAXStrategy;
     ImageMetasearchSAXStrategy metaSearchSAXStrategy;
@@ -24,7 +22,7 @@ public class ImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<HashMap<Str
     }
     
     @Override
-    public void toSAX(HashMap<String, Object> result, XMLConsumer xmlConsumer) {
+    public void toSAX(Map<String, Object> result, XMLConsumer xmlConsumer) {
 
         try {
             xmlConsumer.startDocument();
