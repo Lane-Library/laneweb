@@ -264,6 +264,7 @@ h1 a {
 	background-color: white;
 	display: inline-block;
 	padding:2px;
+	margin-top: 12px;
 }
 
 #search input[type='text'] {
@@ -300,11 +301,13 @@ h1 a {
 .heading-right {
 	border-left: 26px solid;
 	border-left-color: #d8dbdc;
+	margin-left: 6px;
 }
 
 .heading-left {
 	border-right: 26px solid;
 	border-right-color: #d8dbdc;
+	margin-right: 6px;
 }
 
 h2 {
