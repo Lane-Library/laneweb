@@ -6,7 +6,6 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}" />
         <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/layout.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/header.css" />

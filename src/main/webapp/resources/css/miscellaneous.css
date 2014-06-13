@@ -1,6 +1,6 @@
 /* This file has rules that don't seem to fit anywhere else */
-body, select,input,button,textarea,button{
-	font-family: Source Sans Pro, Arial, Helvetica, clean, sans-serif;
+body, select,input,button,textarea{
+	font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
 }
 p {
 	margin-bottom: 10px;
@@ -8,6 +8,8 @@ p {
 
 .content {
 	color: #333333;
+    background-color:white;
+    position:relative;
 }
 
 strong {

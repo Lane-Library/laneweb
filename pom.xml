@@ -153,7 +153,6 @@
                             <includes>
                                 <include>../../../../src/main/webapp/resources/css/yui.css</include>
                                 <include>main-body-min.css</include>
-                                <include>layout-min.css</include>
                                 <include>bassett-min.css</include>
                                 <include>font-awesome-min.css</include>
                                 <include>header-min.css</include>
