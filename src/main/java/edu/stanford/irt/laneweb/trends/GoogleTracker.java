@@ -14,8 +14,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-
 import edu.stanford.irt.laneweb.LanewebException;
 
 /**
@@ -40,8 +38,6 @@ public class GoogleTracker {
 
     private String localHostIp = null;
 
-    private Logger logger;
-
     private String referer;
 
     private String userAgent;
@@ -49,10 +45,6 @@ public class GoogleTracker {
     private String utmaCookie = null;
 
     private String visitorId = null;
-
-    public GoogleTracker(final Logger logger) {
-        this.logger = logger;
-    }
 
     /**
      * The last octect of the IP address is removed to anonymize the user.
@@ -242,7 +234,5 @@ public class GoogleTracker {
         } catch (NoSuchAlgorithmException | IOException e) {
             throw new LanewebException(e);
         }
-        this.logger.info(new StringBuilder(path).append("/").append(category).append("/").append(action).append("/")
-                .append(label).append("/").append(value).toString());
     }
 }
