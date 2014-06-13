@@ -22,9 +22,6 @@
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
-            <xsl:when test=". = '/secure/login.html' and $disaster-mode = 'true'">
-                <xsl:attribute name="href" select="'/login-disabled.html'"/>
-            </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link" select="."/>
@@ -98,6 +95,14 @@
                 </xsl:when>
                 <xsl:when test="contains($link,'%7Bsearch-terms%7D')">
                     <xsl:value-of select="replace($link,'%7Bsearch-terms%7D',$regex-query)"/>
+                </xsl:when>
+                <!-- login disabled in disaster mode -->
+                <xsl:when test="$link = '/secure/login.html' and $disaster-mode = 'true'">
+                    <xsl:text>/login-disabled.html</xsl:text>
+                </xsl:when>
+                <!-- login link goes to myaccounts.html when logged in (case 97645)-->
+                <xsl:when test="$link = '/secure/login.html' and $sunetid">
+                    <xsl:text>/myaccounts.html</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$link"/>
