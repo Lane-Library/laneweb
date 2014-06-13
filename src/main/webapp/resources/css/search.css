@@ -27,8 +27,6 @@
     text-transform:uppercase;
     font-weight:bold;
     list-style: none outside none;
-    /*list-style-image:url(../images/raquo.gif);
-    list-style-type:disc;*/
     margin-top: 1em;
 }
 #searchFacets .facetIndent {
@@ -57,12 +55,9 @@
     background-color: #F4F5EF;
     border: 1px solid #E6E4DC;
     margin-left: 160px;
-    margin-top: -10px;
     padding: 7px;
     white-space: nowrap;
     width: 792px;
-    _margin-right:-15px;
-    _width: 793px;
 }
 #popInContent .popInLabel {
     color:#FF6600;
@@ -77,7 +72,6 @@
     margin-top:-54px;
     margin-bottom:24px;
     width:647px;
-    _width:648px;
 }
 #searchResults {
     margin-top:30px;
