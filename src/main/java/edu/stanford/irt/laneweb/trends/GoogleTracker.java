@@ -18,19 +18,31 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * <pre>
- * based on: http://code.google.com/intl/en/apis/analytics/docs/mobile/mobileWebsites.html#jsp 
+ * based on: http://code.google.com/intl/en/apis/analytics/docs/mobile/mobileWebsites.html#jsp
  * useful reference: http://code.google.com/p/gaforflash/
  * </pre>
- * 
+ *
  * @author ryanmax
  */
 // Copied from the trends-tracker project in order to remove log4j dependency
 public class GoogleTracker {
 
+    /**
+     * A factory for URLConnections that can be mocked in tests.
+     */
+    static class URLConnectionFactory {
+
+        public URLConnection getConnection(final String url) throws IOException {
+            return new URL(url).openConnection();
+        }
+    }
+
     private static final String GA_GIF_LOCATION = "http://www.google-analytics.com/__utm.gif";
 
     // Tracker version.
     private static final String GA_VERSION = "4.4sj";
+
+    private URLConnectionFactory connectionFactory;
 
     private String domainName;
 
@@ -46,9 +58,48 @@ public class GoogleTracker {
 
     private String visitorId = null;
 
+    public GoogleTracker() {
+        this(new URLConnectionFactory());
+    }
+
+    GoogleTracker(final URLConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
+
+    public void setDomainName(final String domainName) {
+        this.domainName = domainName;
+    }
+
+    public void setGoogleAccount(final String googleAccount) {
+        this.googleAccount = googleAccount;
+    }
+
+    public void setReferer(final String referer) {
+        this.referer = referer;
+    }
+
+    public void setUserAgent(final String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    public void trackEvent(final String path, final String category, final String action, final String label,
+            final int value) {
+        String utmUrl;
+        try {
+            utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
+                    + encode(this.domainName) + "&utmt=" + "event" + "&utme=" + "5(" + encode(category) + "*"
+                    + encode(action) + "*" + encode(label) + ")(" + value + ")" + "&utmr=" + encode(this.referer)
+                    + "&utmp=" + encode(path) + "&utmac=" + this.googleAccount + "&utmcc=__utma" + getUtmaCookie()
+                    + "&utmvid=" + getVisitorId() + "&utmip=" + anonymizeIP(getLocalHostIP());
+            sendRequestToGoogleAnalytics(utmUrl);
+        } catch (NoSuchAlgorithmException | IOException e) {
+            throw new LanewebException(e);
+        }
+    }
+
     /**
      * The last octect of the IP address is removed to anonymize the user.
-     * 
+     *
      * @param remoteAddress
      * @return
      */
@@ -92,7 +143,7 @@ public class GoogleTracker {
      * when their last visit occurred. Values are hashed:
      * __utma=<domainHash>.<sessionId>.<firstTime>.<lastTime>.<currentTime>.<sessionCount>. Here we give dummy values
      * for all but domain and visitorId
-     * 
+     *
      * @throws IOException
      * @throws NoSuchAlgorithmException
      */
@@ -151,7 +202,7 @@ public class GoogleTracker {
 
     /**
      * based on http://code.google.com/p/gaforflash/source/browse/trunk/src/com/google/analytics/core/generateHash.as
-     * 
+     *
      * @param input
      * @return hash value of input string
      */
@@ -182,7 +233,7 @@ public class GoogleTracker {
 
     /**
      * A string is empty in our terms, if it is null, empty or a dash.
-     * 
+     *
      * @param input
      * @return boolean
      */
@@ -192,47 +243,15 @@ public class GoogleTracker {
 
     /**
      * Make a tracking request to Google Analytics from this server.
-     * 
+     *
      * @param utmUrl
      * @throws IOException
      */
     private void sendRequestToGoogleAnalytics(final String utmUrl) throws IOException {
-        URL url = new URL(utmUrl);
-        URLConnection connection = url.openConnection();
+        URLConnection connection = this.connectionFactory.getConnection(utmUrl);
         connection.setUseCaches(false);
         connection.addRequestProperty("User-Agent", this.userAgent);
         connection.addRequestProperty("Accept-Language", "en-us,en;q=0.5");
         connection.getContent();
-    }
-
-    public void setDomainName(final String domainName) {
-        this.domainName = domainName;
-    }
-
-    public void setGoogleAccount(final String googleAccount) {
-        this.googleAccount = googleAccount;
-    }
-
-    public void setReferer(final String referer) {
-        this.referer = referer;
-    }
-
-    public void setUserAgent(final String userAgent) {
-        this.userAgent = userAgent;
-    }
-
-    public void trackEvent(final String path, final String category, final String action, final String label,
-            final int value) {
-        String utmUrl;
-        try {
-            utmUrl = GA_GIF_LOCATION + "?" + "utmwv=" + GA_VERSION + "&utmn=" + getRandomNumber() + "&utmhn="
-                    + encode(this.domainName) + "&utmt=" + "event" + "&utme=" + "5(" + encode(category) + "*"
-                    + encode(action) + "*" + encode(label) + ")(" + value + ")" + "&utmr=" + encode(this.referer)
-                    + "&utmp=" + encode(path) + "&utmac=" + this.googleAccount + "&utmcc=__utma" + getUtmaCookie()
-                    + "&utmvid=" + getVisitorId() + "&utmip=" + anonymizeIP(getLocalHostIP());
-            sendRequestToGoogleAnalytics(utmUrl);
-        } catch (NoSuchAlgorithmException | IOException e) {
-            throw new LanewebException(e);
-        }
     }
 }
