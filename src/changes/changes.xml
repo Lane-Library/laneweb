@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2014-06-16" version="2.2.2" description="2.2.2 bug fix release">
+            <action date="2014-06-16" dev="ceyates" issue="98022" type="fix">
+                lightbox background does not cover viewport
+            </action>
             <action date="2014-06-13" dev="ceyates" issue="98000" type="fix">
                 search results overlap the red bar  on the top
             </action>
