@@ -34,7 +34,7 @@
             this._input.getInput().on("valueChange", this._handleValueChange, this);
 
             //set up the search tips link
-            this._tips = Y.one('#searchTips a');
+            this._tips = Y.one('#searchTips');
             this._tips.set("href", this._tips.get("href") + "#" + this._select.getSelected());
 
             //set up the auto-complete suggestions

@@ -64,7 +64,7 @@ public class ImageSearchGeneratorTest {
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put(Model.ENGINES, "engine-parameter");
         this.generator.setParameters(parameters);
-        HashMap<String, Object> resultMap = this.generator.doSearch("query 3");
+        Map<String, Object> resultMap = this.generator.doSearch("query 3");
         assertNotNull(resultMap.get(ImageSearchGenerator.BASSETT_RESULT));
         assertNotNull(resultMap.get(ImageSearchGenerator.METASEARCH_RESULT));
         assertEquals("query%203", resultMap.get(ImageSearchGenerator.SEARCH_TERM));

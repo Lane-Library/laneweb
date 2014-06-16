@@ -16,7 +16,6 @@
     
     <bean class="edu.stanford.irt.laneweb.trends.GoogleTracker"
         name="edu.stanford.irt.laneweb.trends.GoogleTracker">
-        <constructor-arg ref="org.slf4j.Logger/GoogleTracker"/>
         <property name="domainName">
             <value>lane.stanford.edu</value>
         </property>

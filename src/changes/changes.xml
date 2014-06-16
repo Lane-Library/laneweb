@@ -7,6 +7,41 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-06-16" version="2.2.2" description="2.2.2 bug fix release">
+            <action date="2014-06-16" dev="ceyates" issue="98022" type="fix">
+                lightbox background does not cover viewport
+            </action>
+            <action date="2014-06-13" dev="ceyates" issue="98000" type="fix">
+                search results overlap the red bar  on the top
+            </action>
+            <action date="2014-06-13" dev="ceyates" issue="97998" type="fix">
+                some footer links are incorrect
+            </action>
+            <action date="2014-06-12" dev="ceyates" issue="97976" type="update">
+                change gray to a darker shade for the main Lane nav
+            </action>
+            <action date="2014-06-11" dev="ceyates" issue="97971" type="remove">
+                remove delay for Lane nav drop downs
+            </action>
+            <action date="2014-06-12" dev="ceyates" issue="97965" type="update">
+                move Search Help link and rename to Need Help? 
+            </action>
+            <action date="2014-06-11" dev="ceyates" issue="97963" type="update">
+                change color for the main navigation
+            </action>
+            <action date="2014-06-11" dev="ceyates" issue="97962" type="update">
+                switch position of the global nav and search boxes
+            </action>
+            <action date="2014-06-09" dev="ryanmax" issue="97946" type="fix">
+                mobile: get password links produce security error 
+            </action>
+            <action date="2014-06-09" dev="ryanmax" issue="97646" type="add">
+                UTD, ezproxy and CME links
+            </action>
+            <action date="2014-06-12" dev="ceyates" issue="97645" type="update">
+                change My Lane link depending on logged in state
+            </action>
+        </release>
         <release date="2014-06-09" version="2.2.1" description="2.2.1 bug fix release">
             <action date="2014-06-09" dev="ceyates" issue="97953" type="update">
                 make the Stanford University h2 less wide

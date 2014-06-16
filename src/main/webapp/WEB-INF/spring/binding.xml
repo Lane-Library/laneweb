@@ -146,7 +146,7 @@
         <!-- regular expressions for IPs to be proxied TODO: change to CIDRRanges -->
         <constructor-arg>
             <list>
-                <!-- VPN 171.65.16.0 - 171.65.31.255 -->
+                <!-- VPN 171.66.16.0 - 171.66.31.255 -->
                 <value>^171\.66\.(?:1[6-9]|2[0-9]|3[0-1])\.\S+</value>
                 <!-- hospital 171.65.44.0 - 171.65.44.255 -->
                 <value>^171\.65\.44\.\S+</value>

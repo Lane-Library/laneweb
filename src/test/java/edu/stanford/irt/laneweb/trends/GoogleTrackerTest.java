@@ -1,23 +1,30 @@
 package edu.stanford.irt.laneweb.trends;
 
 import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
+import java.io.IOException;
+import java.net.URLConnection;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 public class GoogleTrackerTest {
 
-    Logger logger;
+    private URLConnection connection;
 
-    GoogleTracker tracker;
+    private GoogleTracker.URLConnectionFactory connectionFactory;
+
+    private GoogleTracker tracker;
 
     @Before
     public void setUp() throws Exception {
-        this.logger = createMock(Logger.class);
-        this.tracker = new GoogleTracker(this.logger);
+        this.connectionFactory = createMock(GoogleTracker.URLConnectionFactory.class);
+        this.tracker = new GoogleTracker(this.connectionFactory);
+        this.connection = createMock(URLConnection.class);
         this.tracker.setDomainName("domainName");
         this.tracker.setGoogleAccount("googleAccount");
         this.tracker.setReferer("referer");
@@ -25,10 +32,14 @@ public class GoogleTrackerTest {
     }
 
     @Test
-    public final void testTrackEvent() {
-        this.logger.info("path/category/action/label/1");
-        replay(this.logger);
+    public final void testTrackEvent() throws IOException {
+        expect(this.connectionFactory.getConnection(isA(String.class))).andReturn(this.connection);
+        this.connection.setUseCaches(false);
+        this.connection.addRequestProperty("User-Agent", "userAgent");
+        this.connection.addRequestProperty("Accept-Language", "en-us,en;q=0.5");
+        expect(this.connection.getContent()).andReturn(null);
+        replay(this.connectionFactory, this.connection);
         this.tracker.trackEvent("path", "category", "action", "label", 1);
-        verify(this.logger);
+        verify(this.connectionFactory, this.connection);
     }
 }

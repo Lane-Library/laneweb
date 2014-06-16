@@ -6,7 +6,6 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}" />
         <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/layout.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
@@ -28,7 +27,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/forms.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/table-styles.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/follow.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/images.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/captioned-img.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lightbox.css" />
@@ -83,14 +81,13 @@
             </div>
             <div id="searchFormContainer">
                 <div class="centered">
-                    <span id="searchTips"><a href="/help/choose-search.html">search help</a> &#187;</span>
                     <form id="search" method="get" action="/search.html">
                         <fieldset id="searchFields">
                             <div id="selectAndInput">
                                 <select name="source" id="searchSource">
                                     <option value="all-all" title="Enter Subject, Title, Author, PMID, ISSN, DOI">Lane Search</option>
-                                    <option value="images-all" title="Image search">Images Search</option>
-                                    <option value="free-images-all" title="Free image search">Free Images Search</option>
+                                    <option value="images-all" title="Images - All">Images - All</option>
+                                    <option value="free-images-all" title="Images - Light">Images - Light</option>
                                     <option value="clinical-all" title="Clinical evidence: Cochrane, DARE, ACP Journal Club, UpToDate, PubMed">Clinical/PICO</option>
                                     <option value="peds-all" title="Pediatric evidence: UpToDate, PubMed">Pediatrics</option>
                                     <option value="bioresearch-all" title="200+ bioresearch resources">Bioresearch</option>
@@ -102,10 +99,12 @@
                                 <span id="searchReset" title="Clear Search">×</span>
                             </div>
                             <input id="searchSubmit" type="submit" value="Search" />
+                            <!--<a id="searchTools" href="/help/cool-tools-proxyBookmarklet.html" title="Search Tools"><i class="fa fa-wrench"></i></a>-->
+                            <a id="searchTips" href="/help/choose-search.html">Need Help? <i class="fa fa-arrow-right"></i></a>
                             <img id="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
                         </fieldset>
                     </form>
-                    <ul id="qlinks">
+                    <!--<ul id="qlinks">
                         <li>
                             <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
                         </li>
@@ -115,7 +114,7 @@
                         <li>
                             <a href="http://www.uptodate.com/online">UpToDate</a>
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
             <div class="content centered">
@@ -205,9 +204,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="centered">
-                <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
-            </div>
         </div>
         <div id="somHeader">
             <div class="centered">
@@ -245,13 +241,13 @@
                         </ul>
                     </div>
                     <div class="yui3-u-1-5">
-                        <h3><a href="/portals/index.html">Classes</a></h3>
+                        <h3><a href="/classes-consult/index.html">Classes</a></h3>
                         <ul>
-                            <li><a href="/laneweb/classes-consult/laneclasses.html">Currently Offered Classes</a></li>
-                            <li><a href="/laneweb/classes-consult/laneclasses-archive.html">Classes Archive</a></li>
-                            <li><a href="/laneweb/classes-consult/tutorials.html">Videos &amp; Tutorials</a></li>
+                            <li><a href="/classes-consult/laneclasses.html">Currently Offered Classes</a></li>
+                            <li><a href="/classes-consult/laneclasses-archive.html">Classes Archive</a></li>
+                            <li><a href="/classes-consult/tutorials.html">Videos &amp; Tutorials</a></li>
                             <li><a href="http://med.stanford.edu/irt/teaching/index.html">Teaching Support</a></li>
-                            <li><a href="/laneweb/help/index.html">Consulting</a></li>
+                            <li><a href="/help/index.html">Consulting</a></li>
                         </ul>
                     </div>
                     <div class="yui3-u-1-5">
