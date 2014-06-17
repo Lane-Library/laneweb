@@ -104,7 +104,7 @@
                             <img id="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
                         </fieldset>
                     </form>
-                    <!--<ul id="qlinks">
+                    <ul id="qlinks">
                         <li>
                             <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
                         </li>
@@ -114,7 +114,7 @@
                         <li>
                             <a href="http://www.uptodate.com/online">UpToDate</a>
                         </li>
-                    </ul>-->
+                    </ul>
                 </div>
             </div>
             <div class="content centered">

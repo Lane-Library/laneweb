@@ -119,7 +119,8 @@
 #searchIndicator {
     visibility : hidden;
     position: absolute;
-    right: 90px;
+    right: 82px;
+    top: -9px;
 }
 #searchIndicator.show {
     visibility:visible
@@ -143,12 +144,10 @@
 
 /* pubmed, uptodate, dynamed links inside the form: */
 
-/*#qlinks {
-    float: right;
-}
-
-.clinical #qlinks {
-    margin-top: -8px
+#qlinks {
+    position:absolute;
+    right:0;
+    bottom:2px;
 }
 
 #qlinks li {
@@ -168,4 +167,4 @@
 
 #qlinks a:hover {
     border-bottom: 1px dotted white;
-}*/
+}

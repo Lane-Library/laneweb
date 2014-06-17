@@ -8,6 +8,7 @@ html{
 }
 
 .centered{
+    position:relative;
     width:76.07em;
     min-width:989px;
     margin:auto;
