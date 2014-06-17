@@ -291,7 +291,7 @@ h1 a {
 .heading-left,.heading-right {
 	display: inline-block;
 	height: 4px;
-	width: 30%;
+	width: 28%;
 	border-top: 1px solid;
 	border-top-color: #d8dbdc;
 	vertical-align: middle;
