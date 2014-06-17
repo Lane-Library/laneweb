@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-06-17" version="2.2.3" description="2.2.3 emergency release">
+            <action date="2014-06-17" dev="ceyates" issue="98045" type="update">
+                restore quick links
+            </action>
+        </release>
         <release date="2014-06-16" version="2.2.2" description="2.2.2 bug fix release">
             <action date="2014-06-16" dev="ceyates" issue="98022" type="fix">
                 lightbox background does not cover viewport
