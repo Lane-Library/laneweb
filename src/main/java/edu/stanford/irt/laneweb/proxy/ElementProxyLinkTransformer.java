@@ -15,6 +15,10 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     private XMLConsumer xmlConsumer;
 
+    public ElementProxyLinkTransformer(final String elementName) {
+        this.elementName = elementName;
+    }
+
     @Override
     public void characters(final char[] chars, final int start, final int length) throws SAXException {
         if (this.building) {
@@ -32,10 +36,6 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
             this.building = false;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
-    }
-
-    public void setElementName(final String elementName) {
-        this.elementName = elementName;
     }
 
     @Override
