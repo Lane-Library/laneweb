@@ -55,7 +55,7 @@
     </developers>
     <scm>
         <developerConnection>scm:git:ssh://corn.stanford.edu/afs/ir/group/lane/git/laneweb.git</developerConnection>
-        <tag>laneweb-2.2.2</tag>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <laneweb.build.sourceDirectory>src/main/java</laneweb.build.sourceDirectory>
