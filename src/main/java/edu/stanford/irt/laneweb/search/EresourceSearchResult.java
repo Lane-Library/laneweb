@@ -47,6 +47,12 @@ public class EresourceSearchResult extends AbstractSearchResult {
     }
 
     @Override
+    public boolean hasAdditionalText() {
+        String description = this.eresource.getDescription();
+        return description != null && description.length() > 0;
+    }
+
+    @Override
     public int hashCode() {
         if (this.hashCode == 0) {
             this.hashCode = getSortTitle().hashCode();

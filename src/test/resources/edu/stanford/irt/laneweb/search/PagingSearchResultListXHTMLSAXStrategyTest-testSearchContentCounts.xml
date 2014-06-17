@@ -10,6 +10,9 @@
       <div id="search-content-counts"> <span id="pubmed">
             <a href="url">hits</a>
          </span>
+         <span id="notpubmed">
+            <a href="url">hits</a>
+         </span>
       </div>
       <span id="showPubMedStrategies">true</span>
    </body>
