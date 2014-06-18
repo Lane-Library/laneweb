@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-06-18" version="2.2.4" description="2.2.4 emergency release">
+            <action date="2014-06-17" dev="ryanmax" issue="98047" type="fix">
+                metasearch results lack url
+            </action>
+        </release>
         <release date="2014-06-17" version="2.2.3" description="2.2.3 emergency release">
             <action date="2014-06-17" dev="ceyates" issue="98045" type="update">
                 restore quick links
