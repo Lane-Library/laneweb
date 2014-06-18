@@ -23,7 +23,7 @@
                     </ul>
                     <ul id="login">
                         <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
-                            <a href="/secure/login.html">MyLane login</a>
+                            <a href="/secure/login.html"><strong>MyLane login</strong></a>
                         </li>
                         <li id="favorites"><i class="fa fa-star fa-lg fa-fw"></i>
                             <a href="/favorites.html">My Bookmarks</a>
