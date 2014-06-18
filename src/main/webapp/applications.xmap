@@ -8,11 +8,6 @@
             <!-- /apps/search/xml returns the xmlized search result -->
             <map:match type="wildcard" pattern="search/xml">
                 <map:generate type="search"/>
-                <map:select type="cme-links">
-                    <map:when test="true">
-                        <map:transform type="search-cme-links"/>
-                    </map:when>
-                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="search-proxy-links"/>
@@ -25,11 +20,6 @@
                 <map:generate type="search-engine">
                     <map:parameter name="engines" value="{1}"/>
                 </map:generate>
-                <map:select type="cme-links">
-                    <map:when test="true">
-                        <map:transform type="search-cme-links"/>
-                    </map:when>
-                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="search-proxy-links"/>
@@ -42,11 +32,6 @@
                 <map:generate type="search-engine">
                     <map:parameter name="engines" value="{$engines}"/>
                 </map:generate>
-                <map:select type="cme-links">
-                    <map:when test="true">
-                        <map:transform type="search-cme-links"/>
-                    </map:when>
-                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="search-proxy-links"/>
@@ -121,11 +106,6 @@
             <!-- it is used in lane-metasearch.js and lane-querymap.js -->
             <map:match pattern="search/json" type="wildcard">
                 <map:generate type="search-resource"/>
-                <map:select type="cme-links">
-                    <map:when test="true">
-                        <map:transform type="search-cme-links"/>
-                    </map:when>
-                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="search-proxy-links"/>
