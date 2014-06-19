@@ -355,12 +355,12 @@
     </xsl:template>
     
     <!-- add a div so modules are separated -->
-    <xsl:template match="h:div['module' = tokenize(@class,' ')][parent::h:div[contains(@class,'yui3-u')]]">
+    <xsl:template match="h:div[contains(@class,'yui3-u')]//h:div[@class='module' or 'module' = tokenize(@class,' ')]">
         <div>
-            <xsl:if test="parent::h:div/preceding-sibling::h:div or parent::h:div/following-sibling::h:div">
+            <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div or ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">
                 <xsl:attribute name="style">
-                    <xsl:if test="parent::h:div/preceding-sibling::h:div">margin-left:10px;</xsl:if>
-                    <xsl:if test="parent::h:div/following-sibling::h:div">margin-right:10px;</xsl:if>
+                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div">margin-left:10px;</xsl:if>
+                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">margin-right:10px;</xsl:if>
                 </xsl:attribute>
             </xsl:if>
             <xsl:copy>
