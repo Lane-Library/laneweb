@@ -1,6 +1,7 @@
 .module {
 	margin-bottom: 1em;
     line-height : 1.6em;
+    background-color:white;
 }
 
 .module .bd {
