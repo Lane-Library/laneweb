@@ -237,6 +237,7 @@
                                 <include>lane-feedback-min.js</include>
                                 <include>banner-min.js</include>
                                 <include>purchase-suggestions-min.js</include>
+                                <include>menu-delay-min.js</include>
                                 <include>resource-list-pagination-min.js</include>
                             </includes>
                         </aggregation>
