@@ -141,12 +141,6 @@
                             </xi:include>
                         </li>
                         <li>
-                            <a href="/med-history/index.html">History Center</a>
-                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-medhistory.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include>
-                        </li>
-                        <li>
                             <a href="/using-lib/index.html">Using the Library</a>
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-using.html">
                                 <xi:fallback></xi:fallback>
