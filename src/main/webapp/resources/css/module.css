@@ -1,7 +1,10 @@
 .module {
-	margin-bottom: 1em;
+    margin-top:20px;
     line-height : 1.6em;
     background-color:white;
+    padding:10px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 3px .2px rgba(0,0,0,0.1);
 }
 
 .module .bd {
@@ -66,12 +69,6 @@
     border-right : 1px solid #eae9e6;
     padding-bottom : 15px;
     padding-right: 15px;
-}
-
-.yui3-g .module  /*module inside yui3-g to keep the margins*/ {
-    margin-top: 30px;
-    margin-right:15px;
-    margin-left: 20px;
 }
 
 .popular-shadow {

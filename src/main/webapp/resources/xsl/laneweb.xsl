@@ -78,7 +78,6 @@
         <div><span>All Resources</span><span>/biomed-resources</span></div>
         <div><span>Specialty Portals</span><span>/portals</span></div>
         <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
-        <div><span>History Center</span><span>/med-history</span></div>
         <div><span>Using the Library</span><span>/using-lib</span></div>
         <div><span>About Lane</span><span>/about</span></div>
         <div><span>How To</span><span>/help</span></div>
@@ -96,7 +95,6 @@
             <xsl:when test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/med-history')">history-all</xsl:when>
             <xsl:when test="starts-with($path,'/bassett')">bassett</xsl:when>
             <xsl:when test="starts-with($path,'/biomed-resources/bassett')">bassett</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
@@ -354,6 +352,21 @@
             </xsl:attribute>
             <xsl:apply-templates select="attribute::node()[not(name() = 'class')] | child::node()"/>
         </xsl:copy>
+    </xsl:template>
+    
+    <!-- add a div so modules are separated -->
+    <xsl:template match="h:div['module' = tokenize(@class,' ')][parent::h:div[contains(@class,'yui3-u')]]">
+        <div>
+            <xsl:if test="parent::h:div/preceding-sibling::h:div or parent::h:div/following-sibling::h:div">
+                <xsl:attribute name="style">
+                    <xsl:if test="parent::h:div/preceding-sibling::h:div">margin-left:10px;</xsl:if>
+                    <xsl:if test="parent::h:div/following-sibling::h:div">margin-right:10px;</xsl:if>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node()|child::node()"/>
+            </xsl:copy>
+        </div>
     </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
