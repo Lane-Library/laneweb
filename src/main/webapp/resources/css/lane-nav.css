@@ -36,12 +36,14 @@
 #laneNav .hover a,
 #laneNav .active a{
     background-color:white;
+    box-shadow: inset 0px 5px 5px -5px #000;
 }
 
 #laneNav li:hover ul a,
 #laneNav .hover ul a,
 #laneNav .active ul a{
     background-color:transparent;
+    box-shadow:none;
 }
 
 #laneNav ul ul,

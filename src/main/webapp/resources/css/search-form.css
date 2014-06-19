@@ -1,14 +1,9 @@
 #searchFormContainer {
     margin-top: 46px;
-    background-color: #9B0D00;
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9B0D00), to(#600700));
-    background-image: -moz-linear-gradient(#9B0D00, #600700);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700')";
-    background-image: linear-gradient(#9B0D00, #600700);
+    background-color: #8C1515;
 }
 #search{
-    padding:12px 0
+    padding:30px 0
 }
 #searchFields {
     /*IE7 requires this z-index for the autocomplete to show up over the laneNav menus*/
