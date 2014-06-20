@@ -51,19 +51,9 @@
 }
 /* module with shadow on bottom*/
 .shadow {
-    padding-bottom : 15px;
-    margin-bottom : 15px;
-    background-image : url(../images/shadow-narrow.png);
-    background-position : bottom;
-    background-repeat : no-repeat;
 }
 .bottomShadowWide {
-    padding-top : 10px;
-    clear : left;
-    text-align : center;
-    background-image : url(../images/shadow-wide.png);
-    background-repeat : no-repeat;
-    background-position : top center;
+    display:none;
 }
 .border {
     border-right : 1px solid #eae9e6;
