@@ -23,7 +23,7 @@ public abstract class AbstractTextProcessingTransformer extends AbstractXMLPipe 
 
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
-        if (this.parseLevel > 0 && getPattern() != null) {
+        if (getPattern() != null && this.parseLevel > 0) {
             while (this.chars.remaining() < length) {
                 CharBuffer newChars = CharBuffer.allocate(this.chars.capacity() + 256);
                 int position = this.chars.position();
