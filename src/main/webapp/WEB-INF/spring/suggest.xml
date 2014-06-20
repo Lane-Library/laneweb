@@ -6,7 +6,7 @@
     
     <bean name="edu.stanford.irt.suggest.SuggestionManager/eresource"
         class="edu.stanford.irt.laneweb.suggest.EresourceSuggestionManager">
-        <property name="collectionManager">
+        <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.suggest.EresourceCollectionManager">
                 <constructor-arg ref="javax.sql.DataSource/eresources"/>
                 <constructor-arg>
@@ -15,7 +15,7 @@
                     </bean>
                 </constructor-arg>
             </bean>
-        </property>
+        </constructor-arg>
     </bean>
     
     <bean name="edu.stanford.irt.suggest.SuggestionManager/mesh"

@@ -1,68 +1,24 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.nio.CharBuffer;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
-import edu.stanford.irt.cocoon.pipeline.Transformer;
-import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.Resource;
+import edu.stanford.irt.laneweb.util.ImmutableEmptyAttributes;
 
-public class QueryHighlightingTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
+public class QueryHighlightingTransformer extends AbstractTextProcessingTransformer implements ModelAware {
 
-    public static final String EMPTY = "";
-
-    private static final Attributes EMPTY_ATTRIBUTES = new AttributesImpl();
-
-    private CharBuffer chars = CharBuffer.allocate(256);
-
-    private boolean inTargetElement = false;
-
-    private int parseLevel = 0;
+    private static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
     private Pattern queryPattern;
-
-    private XMLConsumer xmlConsumer;
-
-    @Override
-    public void characters(final char[] ch, final int start, final int length) throws SAXException {
-        if (this.parseLevel > 0 && this.queryPattern != null) {
-            while (this.chars.remaining() < length) {
-                CharBuffer newChars = CharBuffer.allocate(this.chars.capacity() + 256);
-                int position = this.chars.position();
-                this.chars.rewind();
-                newChars.append(this.chars.subSequence(0, position));
-                this.chars = newChars;
-            }
-            this.chars.put(ch, start, length);
-        } else {
-            this.xmlConsumer.characters(ch, start, length);
-        }
-    }
-
-    @Override
-    public void endElement(final String uri, final String localName, final String qName) throws SAXException {
-        if (this.parseLevel > 0) {
-            handleMatches();
-        }
-        if ("title".equals(localName) || "description".equals(localName)) {
-            this.parseLevel--;
-            this.inTargetElement = false;
-        } else if (this.inTargetElement) {
-            // end of child element of title or description
-            ++this.parseLevel;
-        }
-        this.xmlConsumer.endElement(uri, localName, qName);
-    }
 
     public void setModel(final Map<String, Object> model) {
         String query = ModelUtil.getString(model, Model.QUERY);
@@ -72,49 +28,20 @@ public class QueryHighlightingTransformer extends AbstractXMLPipe implements Tra
     }
 
     @Override
-    public void setXMLConsumer(final XMLConsumer xmlConsumer) {
-        this.xmlConsumer = xmlConsumer;
-        super.setXMLConsumer(xmlConsumer);
+    protected void createSAXEvents(final XMLConsumer consumer, final Matcher matcher) throws SAXException {
+        consumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
+        char[] match = matcher.group().toCharArray();
+        consumer.characters(match, 0, match.length);
+        consumer.endElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD);
     }
 
     @Override
-    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
-            throws SAXException {
-        if (this.queryPattern != null) {
-            if ("title".equals(localName) || "description".equals(localName)) {
-                ++this.parseLevel;
-                this.inTargetElement = true;
-            } else if (this.inTargetElement) {
-                // don't process child elements of title or description
-                handleMatches();
-                this.parseLevel--;
-            }
-        }
-        this.xmlConsumer.startElement(uri, localName, qName, atts);
+    protected Pattern getPattern() {
+        return this.queryPattern;
     }
 
-    private void handleMatches() throws SAXException {
-        int charsEnd = this.chars.position();
-        this.chars.rewind();
-        Matcher matcher = this.queryPattern.matcher(this.chars.subSequence(0, charsEnd));
-        int current = 0;
-        while (current < charsEnd && matcher.find()) {
-            int matchStart = matcher.start();
-            int matchEnd = matcher.end();
-            if (matchStart > current) {
-                // send chars before match:
-                this.xmlConsumer.characters(this.chars.array(), current, matchStart - current);
-            }
-            this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
-            char[] match = matcher.group().toCharArray();
-            this.xmlConsumer.characters(match, 0, match.length);
-            this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD);
-            current = matchEnd;
-        }
-        if (current < charsEnd) {
-            // send chars after last match:
-            this.xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
-        }
-        this.chars.clear();
+    @Override
+    protected boolean isTargetName(final String name) {
+        return "title".equals(name) || "description".equals(name);
     }
 }
