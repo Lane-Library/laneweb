@@ -13,6 +13,7 @@
     padding:0;
     line-height:24px;
     text-transform:none;
+    background-image:none;
 }
 #laneFooter li,
 #laneFooter h3{
