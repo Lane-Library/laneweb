@@ -146,15 +146,15 @@ public class BassettCollectionManager {
         List<BassettImage> titleMatches = new LinkedList<BassettImage>();
         int i = 0;
         for (ListIterator<BassettImage> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
-            BassettImage eresource = it.next();
-            if (query.equalsIgnoreCase(eresource.getTitle())) {
-                titleMatches.add(eresource);
+            BassettImage image = it.next();
+            if (query.equalsIgnoreCase(image.getTitle())) {
+                titleMatches.add(image);
                 it.remove();
             }
         }
         i = 0;
-        for (BassettImage eresource : titleMatches) {
-            result.add(i++, eresource);
+        for (BassettImage image : titleMatches) {
+            result.add(i++, image);
         }
         return result;
     }
@@ -175,33 +175,34 @@ public class BassettCollectionManager {
     }
 
     private List<BassettImage> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
-        List<BassettImage> eresources = new LinkedList<BassettImage>();
-        BassettImage eresource = null;
-        int currentEresourceId = -1;
+        List<BassettImage> images = new LinkedList<BassettImage>();
+        BassettImage image = null;
+        int currentImageId = -1;
         String currentTitle = null;
         while (rs.next()) {
-            int rowEresourceId = rs.getInt("ERESOURCE_ID");
+            int rowImageId = rs.getInt("ERESOURCE_ID");
             String rowTitle = rs.getString("TITLE");
-            if (rowEresourceId != currentEresourceId) {
+            if (rowImageId != currentImageId) {
                 currentTitle = rowTitle;
                 String description = fullResult ? rs.getString("BASSETT_DESCRIPTION") : null;
-                eresource = new BassettImage(description, currentTitle);
-                eresource.setImage(rs.getString("IMAGE"));
-                eresource.setLatinLegend(rs.getString("LATIN_LEGEND"));
-                eresource.setBassettNumber(rs.getString("BASSETT_NUMBER"));
-                eresource.setDiagram(rs.getString("DIAGRAM"));
+                image = new BassettImage(description, currentTitle);
+                image.setImage(rs.getString("IMAGE"));
+                image.setLatinLegend(rs.getString("LATIN_LEGEND"));
+                image.setBassettNumber(rs.getString("BASSETT_NUMBER"));
+                image.setDiagram(rs.getString("DIAGRAM"));
                 if (fullResult) {
-                    eresource.setEngishLegend(rs.getString("ENGLISH_LEGEND"));
+                    image.setEngishLegend(rs.getString("ENGLISH_LEGEND"));
                 }
-                currentEresourceId = rowEresourceId;
-                eresources.add(eresource);
+                currentImageId = rowImageId;
+                images.add(image);
             }
-            if (rs.getString("SUB_REGION") != null) {
-                eresource.addRegion(rs.getString("REGION").concat("--").concat(rs.getString("SUB_REGION")));
+            String subregion = rs.getString("SUB_REGION");
+            if (subregion != null) {
+                image.addRegion(rs.getString("REGION").concat("--").concat(subregion));
             } else {
-                eresource.addRegion(rs.getString("REGION"));
+                image.addRegion(rs.getString("REGION"));
             }
         }
-        return eresources;
+        return images;
     }
 }
