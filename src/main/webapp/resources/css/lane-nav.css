@@ -6,12 +6,6 @@
     background-color:rgb(197,207,209);
     box-shadow: inset 0px 5px 5px -5px #000;
 }
-/*#laneNav:before{
-    content:''; width:200%; height:200%;
-    position:absolute; top:0; left:-10px;
-    box-shadow: inset 0px 0px 5px #000;
-    opacity:0
-    }*/
 
 #laneNav li{
     height:46px;
@@ -20,16 +14,12 @@
 
 #laneNav a{
     color:#3C3623;
-    padding:14px;
+    padding:14px 21px;
     text-decoration:none;
     border-bottom:none;
     display:block;
     font-size:15px;
     font-family:'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
-}
-
-#laneNav > li:first-child > a{
-    padding-left:20px
 }
 
 #laneNav li:hover a,
