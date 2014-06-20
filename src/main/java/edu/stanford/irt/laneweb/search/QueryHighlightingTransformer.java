@@ -27,18 +27,21 @@ public class QueryHighlightingTransformer extends AbstractTextProcessingTransfor
         }
     }
 
-    protected Pattern getPattern() {
-        return this.queryPattern;
-    }
-
-    protected boolean isTargetName(final String name) {
-        return "title".equals(name) || "description".equals(name);
-    }
-    
-    protected void createSAXEvents(XMLConsumer consumer, Matcher matcher) throws SAXException {
+    @Override
+    protected void createSAXEvents(final XMLConsumer consumer, final Matcher matcher) throws SAXException {
         consumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
         char[] match = matcher.group().toCharArray();
         consumer.characters(match, 0, match.length);
         consumer.endElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD);
+    }
+
+    @Override
+    protected Pattern getPattern() {
+        return this.queryPattern;
+    }
+
+    @Override
+    protected boolean isTargetName(final String name) {
+        return "title".equals(name) || "description".equals(name);
     }
 }
