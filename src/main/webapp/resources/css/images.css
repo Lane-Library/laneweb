@@ -1,5 +1,5 @@
 .drop-shadow-noimg {
-    border: 2px solid #fff;
+  /*  border: 2px solid #fff;
     box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
     -moz-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
     -webkit-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
@@ -8,5 +8,5 @@
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
 	/* For IE 5.5 - 7 */
 	filter: progid : DXImageTransform.Microsoft.Shadow ( Strength = 3,
-		Direction = 135, Color = '#989898' );
+		Direction = 135, Color = '#989898' );*/
 }
