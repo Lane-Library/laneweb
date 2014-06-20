@@ -359,8 +359,8 @@
         <div>
             <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div or ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">
                 <xsl:attribute name="style">
-                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div">margin-left:10px;</xsl:if>
-                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">margin-right:10px;</xsl:if>
+                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div">margin-left:6px;</xsl:if>
+                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">margin-right:6px;</xsl:if>
                 </xsl:attribute>
             </xsl:if>
             <xsl:copy>
