@@ -11,6 +11,12 @@ public class CMELinkSelector implements Selector {
 
     private static final String EMPTY_STRING = "";
 
+    @Override
+    public boolean select(final String expression, final Map<String, Object> objectModel,
+            final Map<String, String> parameters) {
+        return hasEmrid(objectModel) || isProxyNotHospital(objectModel);
+    }
+
     private boolean hasEmrid(final Map<String, Object> objectModel) {
         return !EMPTY_STRING.equals(ModelUtil.getString(objectModel, Model.EMRID, EMPTY_STRING));
     }
@@ -29,11 +35,5 @@ public class CMELinkSelector implements Selector {
             return isNotHospital(objectModel);
         }
         return false;
-    }
-
-    @Override
-    public boolean select(final String expression, final Map<String, Object> objectModel,
-            final Map<String, String> parameters) {
-        return (hasEmrid(objectModel) || isProxyNotHospital(objectModel));
     }
 }
