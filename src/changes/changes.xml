@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-06-23" version="2.2.5" description="2.2.5 bug fix release">
+            <action date="2014-06-20" dev="ceyates" issue="98106" type="update">
+                reposition search in progress wheel and need help link
+            </action>
+            <action date="2014-06-20" dev="ceyates" issue="98104" type="update">
+                separate content from search container by 12 px
+            </action>
+            <action date="2014-06-20" dev="ceyates" issue="98103" type="update">
+                Make more space between global nav links
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98090" type="update">
+                put a delay back on main nav drop down.
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98088" type="update">
+                make top and bottom padding for the search box 30px
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98087" type="update">
+                remove gradient from red bar, make it flat red: #8C1515
+            </action>
+            <action date="2014-06-18" dev="ceyates" issue="98062" type="update">
+                bold 'MyLane Login' link in the header
+            </action>
+            <action date="2014-06-23" dev="ceyates" issue="98060" type="add">
+                css for button - match SoM blue button with an arrow
+            </action>
+        </release>
         <release date="2014-06-18" version="2.2.4" description="2.2.4 emergency release">
             <action date="2014-06-17" dev="ryanmax" issue="98047" type="fix">
                 metasearch results lack url
