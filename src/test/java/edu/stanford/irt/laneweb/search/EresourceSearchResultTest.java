@@ -281,6 +281,36 @@ public class EresourceSearchResultTest {
     }
 
     @Test
+    public void testHasAdditionalText() {
+        expect(this.eresource1.getTitle()).andReturn("the foo");
+        expect(this.eresource1.getScore()).andReturn(99);
+        expect(this.eresource1.getDescription()).andReturn("description");
+        replay(this.eresource1);
+        assertTrue(new EresourceSearchResult(this.eresource1).hasAdditionalText());
+        verify(this.eresource1);
+    }
+
+    @Test
+    public void testHasAdditionalTextEmpty() {
+        expect(this.eresource1.getTitle()).andReturn("the foo");
+        expect(this.eresource1.getScore()).andReturn(99);
+        expect(this.eresource1.getDescription()).andReturn("");
+        replay(this.eresource1);
+        assertFalse(new EresourceSearchResult(this.eresource1).hasAdditionalText());
+        verify(this.eresource1);
+    }
+
+    @Test
+    public void testHasAdditionalTextNull() {
+        expect(this.eresource1.getTitle()).andReturn("the foo");
+        expect(this.eresource1.getScore()).andReturn(99);
+        expect(this.eresource1.getDescription()).andReturn(null);
+        replay(this.eresource1);
+        assertFalse(new EresourceSearchResult(this.eresource1).hasAdditionalText());
+        verify(this.eresource1);
+    }
+
+    @Test
     public void testNotEquals() {
         expect(this.eresource1.getTitle()).andReturn("title");
         expect(this.eresource1.getScore()).andReturn(0);

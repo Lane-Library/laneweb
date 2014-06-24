@@ -8,7 +8,15 @@ html{
 }
 
 .centered{
+    position:relative;
     width:76.07em;
     min-width:989px;
     margin:auto;
+}
+
+.content {
+    color: #333333;
+    background-color:white;
+    position:relative;
+    margin-top:12px;
 }

@@ -1,6 +1,10 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -27,16 +31,6 @@ public class ContentResultSearchResultTest {
         replay(this.contentResult);
         this.searchResult = new ContentResultSearchResult(this.contentResult, this.resourceResult, 100);
         reset(this.contentResult);
-    }
-    
-    @Test
-    public void testNotContentResultSearchResult() {
-        SearchResult result = createMock(SearchResult.class);
-        expect(result.getScore()).andReturn(100);
-        expect(result.getSortTitle()).andReturn("title");
-        replay(this.contentResult, result);
-        assertTrue(this.searchResult.compareTo(result) > 0);
-        verify(this.contentResult, result);
     }
 
     @Test
@@ -151,6 +145,30 @@ public class ContentResultSearchResultTest {
     }
 
     @Test
+    public void testHasAdditionalText() {
+        expect(this.contentResult.getDescription()).andReturn("description");
+        replay(this.contentResult);
+        assertTrue(this.searchResult.hasAdditionalText());
+        verify(this.contentResult);
+    }
+
+    @Test
+    public void testHasAdditionalTextEmpty() {
+        expect(this.contentResult.getDescription()).andReturn("");
+        replay(this.contentResult);
+        assertFalse(this.searchResult.hasAdditionalText());
+        verify(this.contentResult);
+    }
+
+    @Test
+    public void testHasAdditionalTextNull() {
+        expect(this.contentResult.getDescription()).andReturn(null);
+        replay(this.contentResult);
+        assertFalse(this.searchResult.hasAdditionalText());
+        verify(this.contentResult);
+    }
+
+    @Test
     public void testHashCode() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("the title");
@@ -158,6 +176,16 @@ public class ContentResultSearchResultTest {
         ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
         assertEquals(this.searchResult.hashCode(), other.hashCode());
         verify(result, this.contentResult);
+    }
+
+    @Test
+    public void testNotContentResultSearchResult() {
+        SearchResult result = createMock(SearchResult.class);
+        expect(result.getScore()).andReturn(100);
+        expect(result.getSortTitle()).andReturn("title");
+        replay(this.contentResult, result);
+        assertTrue(this.searchResult.compareTo(result) > 0);
+        verify(this.contentResult, result);
     }
 
     @Test

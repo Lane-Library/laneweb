@@ -12,6 +12,10 @@ public class EresourceSuggestionManager implements SuggestionManager {
 
     private CollectionManager collectionManager;
 
+    public EresourceSuggestionManager(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+
     private Collection<Suggestion> getSuggestions(final Collection<Eresource> eresources) {
         Collection<Suggestion> suggestions = new LinkedList<Suggestion>();
         for (Eresource eresource : eresources) {
@@ -21,26 +25,10 @@ public class EresourceSuggestionManager implements SuggestionManager {
     }
 
     public Collection<Suggestion> getSuggestionsForTerm(final String term) {
-        if (null == term) {
-            throw new IllegalArgumentException("null term");
-        }
         return getSuggestions(this.collectionManager.search(term));
     }
 
     public Collection<Suggestion> getSuggestionsForTerm(final String type, final String term) {
-        if (null == term) {
-            throw new IllegalArgumentException("null term");
-        }
-        if (null == type) {
-            throw new IllegalArgumentException("null type");
-        }
         return getSuggestions(this.collectionManager.searchType(type, term));
-    }
-
-    public void setCollectionManager(final CollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
-        this.collectionManager = collectionManager;
     }
 }

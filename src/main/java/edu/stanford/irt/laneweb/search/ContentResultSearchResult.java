@@ -56,6 +56,12 @@ public class ContentResultSearchResult extends AbstractSearchResult {
     }
 
     @Override
+    public boolean hasAdditionalText() {
+        String description = this.contentResult.getDescription();
+        return description != null && description.length() > 0;
+    }
+
+    @Override
     public int hashCode() {
         if (this.hashCode == 0) {
             this.hashCode = getSortTitle().hashCode();

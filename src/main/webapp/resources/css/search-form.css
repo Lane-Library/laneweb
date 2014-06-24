@@ -1,18 +1,11 @@
 #searchFormContainer {
     margin-top: 46px;
-    background-color: #9B0D00;
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9B0D00), to(#600700));
-    background-image: -moz-linear-gradient(#9B0D00, #600700);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#9B0D00', endColorstr='#600700')";
-    background-image: linear-gradient(#9B0D00, #600700);
+    background-color: #8C1515;
 }
 #search{
-    padding:12px 0
+    padding:30px 0
 }
 #searchFields {
-    /*IE7 requires this z-index for the autocomplete to show up over the laneNav menus*/
-    z-index:1;
     position:relative
 }
 #selectAndInput {
@@ -21,8 +14,6 @@
 }
 #searchSource {
     width:124px;
-}
-#searchSource option {
 }
 #searchTerms {
     width:458px;
@@ -112,19 +103,22 @@
 #searchReset.active {
     display:block;
 }
-#search a{
+#searchFormContainer a{
     color:white
 }
 
 #searchIndicator {
     visibility : hidden;
     position: absolute;
-    right: 90px;
+    right: 220px;
+    bottom: 35%;
 }
 #searchIndicator.show {
     visibility:visible
 }
 #searchTips {
+    position:absolute;
+    bottom:7px;
     font-size:12px;
     font-weight:600
 }
@@ -132,23 +126,13 @@
     color:white;
     font-size:9px
 }
-/*
-#searchTips a {
-    color : white;
-    border-bottom : 1px dotted #fff;
-}
-#searchTips a:hover {
-    border-bottom : 1px solid #fff;
-}*/
 
 /* pubmed, uptodate, dynamed links inside the form: */
 
-/*#qlinks {
-    float: right;
-}
-
-.clinical #qlinks {
-    margin-top: -8px
+#qlinks {
+    position:absolute;
+    right:0;
+    bottom:7px;
 }
 
 #qlinks li {
@@ -161,11 +145,3 @@
     border-right : none;
 }
 
-#qlinks a {
-    color: white;
-    border-bottom: none;
-}
-
-#qlinks a:hover {
-    border-bottom: 1px dotted white;
-}*/

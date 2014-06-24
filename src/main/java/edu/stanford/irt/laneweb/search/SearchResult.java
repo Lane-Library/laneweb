@@ -14,4 +14,9 @@ public interface SearchResult extends Comparable<SearchResult> {
      * @return the sortTitle
      */
     String getSortTitle();
+    
+    /**
+     * @return whether or not there is additional text
+     */
+    boolean hasAdditionalText();
 }
