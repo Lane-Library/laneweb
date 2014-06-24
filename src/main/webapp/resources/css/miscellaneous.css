@@ -1,7 +1,8 @@
 /* This file has rules that don't seem to fit anywhere else */
-body, select,input,button,textarea{
+body,select,input,button,textarea {
 	font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
 }
+
 p {
 	margin-bottom: 10px;
 }
@@ -62,13 +63,14 @@ em {
 
 .announce {
 	text-align: center;
-	background-color: #F4F5EF;
-	margin-left: -1.3em;
-	margin-right: -0.9em;
-	border-top: 1px solid #dadad9;
-	border-bottom: 1px solid #dadad9;
-	border-left: none;
-	border-right: none;
+	background-color: #333;
+	border: none;
+	padding: 12px;
+	font-family: 'Fjord One', serif;
+	color: #fff;
+	font-size: 20px;
+	text-shadow: 0.07em #000;
+	margin-bottom: 12px;
 }
 
 #class-title {
@@ -142,6 +144,7 @@ em {
 	padding: 15px;
 	width: 200px;
 }
+
 .seminar {
-    padding-bottom:15px;
+	padding-bottom: 15px;
 }
