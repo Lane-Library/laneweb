@@ -9,16 +9,26 @@ h2 {
 	padding-top: 25px;
 	text-align:center;
 }
-.content h2:after,
-.content h2:before{
-    content:"";
-    display:inline-block;
-    width:20%;
-    height:10px;
-    background:url(../images/header-border.png) no-repeat 0 0;
-    margin:0 12px;
+/*.content h2{
+    display:table;
+    width:100%;
 }
-.content h2:before{
+.content h2 div{
+    display:table-row;
+}*/
+.content h2 span {
+    display:table-cell;
+    white-space:nowrap;
+    padding:0 12px;
+}
+.content h2 div:after,
+.content h2 div:before{
+    content:"";
+    display:table-cell;
+    background:url(../images/header-border.png) no-repeat 0 50%;
+    width:50%;
+}
+.content h2 div:before{
     -webkit-transform:scaleX(-1);
     -moz-transform:scaleX(-1);
     -ms-transform:scaleX(-1);

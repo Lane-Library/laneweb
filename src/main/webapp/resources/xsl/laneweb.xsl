@@ -368,6 +368,17 @@
             </xsl:copy>
         </div>
     </xsl:template>
+    
+    <!-- add a div and a span to h2 so that the golf club images can be positioned correctly-->
+    <xsl:template match="h:h2">
+        <xsl:copy>
+            <div>
+                <span>
+                    <xsl:apply-templates/>
+                </span>
+            </div>
+        </xsl:copy>
+    </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 
