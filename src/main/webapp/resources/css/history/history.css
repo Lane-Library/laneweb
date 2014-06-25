@@ -109,7 +109,12 @@ h1 a {
 #lane-footer h2 {
 	font-size: 24px;
 	padding: 17px 0 12px;
-	margin-bottom: 24px
+	margin-bottom: 24px;
+	font-family:'Source Sans Pro',sans-serif;
+}
+#lane-footer h3{
+    font-size:16px;
+    font-family:'Source Sans Pro',sans-serif;
 }
 
 #lane-footer li,#lane-footer h3,#lane-footer h2 {
