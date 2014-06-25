@@ -567,53 +567,43 @@ blockquote {
 	display: table;
 }
 
-.btn {
-	display: inline-block;
-	margin-bottom: 0;
-	font-weight: normal;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
-	background-image: none;
-	border: 1px solid transparent;
-	white-space: nowrap;
-	padding: 0.375rem 0.75rem;
-	font-size: 16px;
-	line-height: 1.428571429;
-	border-radius: 0.25rem;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
+/*class button for mimicing SOM buttons.  See markup at:
+http://lane.stanford.edu/samples/button-css.html
+ */
+.button{
+    font-size:14px;
+    font-weight:400;
+    margin:3px;
+    padding:5.25px 10.5px;
+    border:1px #CCCCCC solid;
+    border-radius:3.5px;
+    cursor:pointer;
+    background-color:#F1F1F1;
 }
-
-btn-default {
-	color: #333333;
-	background-color: #ffffff;
-	border-color: #cccccc;
+.button:hover{
+    border-color:#ADADAD;
 }
-
-.button-container {
-	display: block;
-	font-size: 14px;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.0;
-	text-align: left;
-	width: auto;
-	margin: 3px;
-	padding: 5px;
+.button span{
+    background-color:#007C92;
+    color:#FFFFFF;
+    padding:7px 12px 7px 7px;
+    border-radius:4px;
+    margin-right:6px;
+    display:inline-block;
 }
-
-.button-container {
-	display: block;
-	width: auto;
-	margin: 3px;
-	padding: 5px;
-	font-size: 14px;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.0;
-	text-align: left;
+.button span .icon{
+    background-color:#FFFFFF;
+    border-radius:12px;
+    font-size:13px;
+    height:16px;
+    width:16px;
+    padding:4px;
+    margin-right:6px;
+    line-height:15px;
+}
+.button .icon{
+    color:#007C92;
+}
+.button *{
+    vertical-align:middle
 }
