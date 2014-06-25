@@ -184,7 +184,6 @@
             <map>
                 <entry key="^/biomed-resources/bassett/raw/bassettLargerView.html"
                     value="bassettLargerView"/>
-                <entry key="^/med-history-new/.*" value="history"/>
             </map>
         </constructor-arg>
     </bean>
