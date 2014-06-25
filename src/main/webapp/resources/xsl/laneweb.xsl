@@ -370,7 +370,7 @@
     </xsl:template>
     
     <!-- add a div and a span to h2 so that the golf club images can be positioned correctly-->
-    <xsl:template match="h:h2">
+    <xsl:template match="h:h2[ancestor::h:div[@id='main']]">
         <xsl:copy>
             <div>
                 <span>
