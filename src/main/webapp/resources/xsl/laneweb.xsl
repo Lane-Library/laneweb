@@ -379,6 +379,30 @@
             </div>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="h:div[@class='heading-container']">
+        <xsl:apply-templates select="h:*" mode="history"/>
+    </xsl:template>
+    
+    <xsl:template match="h:span" mode="history">
+        <xsl:apply-templates mode="history"/>
+    </xsl:template>
+    
+    <xsl:template match="h:br" mode="history">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+    
+    <xsl:template match="h:h2|h:h3" mode="history">
+        <xsl:copy>
+            <xsl:attribute name="class" select="'golfclub'"/>
+            <div>
+                <span>
+                    <xsl:apply-templates mode="history"/>
+                </span>
+            </div>
+        </xsl:copy>
+    </xsl:template>
+    
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 

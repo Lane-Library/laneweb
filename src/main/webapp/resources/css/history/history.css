@@ -375,6 +375,28 @@ h4 {
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #8c1515;
 }
+.golfclub{
+    text-align:center;
+}
+.golfclub span {
+    display:table-cell;
+    white-space:nowrap;
+    padding:0 12px;
+}
+.golfclub div:after,
+.golfclub div:before{
+    content:"";
+    display:table-cell;
+    background:url(../../images/header-border.png) no-repeat 0 50%;
+    width:50%;
+}
+.golfclub div:before{
+    -webkit-transform:scaleX(-1);
+    -moz-transform:scaleX(-1);
+    -ms-transform:scaleX(-1);
+    -o-transform:scaleX(-1);
+    transform:scaleX(-1)
+}
 
 .header-border {
 	border-top: 1px solid #d8dbdc;
