@@ -354,6 +354,7 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- ================ temporary templates to facilitate 2.2.6 redesign ===================-->
     <!-- add a div so modules are separated -->
     <xsl:template match="h:div[contains(@class,'yui3-u')]//h:div[@class='module' or 'module' = tokenize(@class,' ')]">
         <div>
@@ -369,39 +370,11 @@
         </div>
     </xsl:template>
     
-    <!-- add a div and a span to h2 so that the golf club images can be positioned correctly-->
-    <xsl:template match="h:h2[ancestor::h:html = $source-doc]">
-        <xsl:copy>
-            <div>
-                <span>
-                    <xsl:apply-templates/>
-                </span>
-            </div>
-        </xsl:copy>
-    </xsl:template>
-    
-    <!-- these next templates are about getting the golfclubs to look nice in the history pages -->
-    <xsl:template match="h:div[@class='heading-container']">
-        <xsl:apply-templates select="h:*" mode="history"/>
-    </xsl:template>
-    
-    <xsl:template match="h:span" mode="history">
-        <xsl:apply-templates mode="history"/>
-    </xsl:template>
-    
-    <xsl:template match="h:br" mode="history">
-        <xsl:copy-of select="."/>
-    </xsl:template>
-    
-    <xsl:template match="h:h2|h:h3" mode="history">
-        <xsl:copy>
-            <xsl:attribute name="class" select="'golfclub'"/>
-            <div>
-                <span>
-                    <xsl:apply-templates mode="history"/>
-                </span>
-            </div>
-        </xsl:copy>
+    <!-- add class="golfclub" to h2 so that the golf club images can be positioned correctly-->
+    <xsl:template match="h:h2[not(@class='golfclub')][ancestor::h:html = $source-doc]">
+        <h2 class="golfclub">
+            <xsl:apply-templates/>
+        </h2>
     </xsl:template>
     
     <!-- temporary rewrite of search result pages -->
@@ -413,16 +386,16 @@
             </div>
             <div class="yui3-u-4-5">
                 <div style="margin-left:6px">
-                <div class="module">
-                <div class="yui3-g">
-                    <div class="yui3-u-17-24">
-                        <xsl:apply-templates select="h:div[2]/*"/>
+                    <div class="module">
+                        <div class="yui3-g">
+                            <div class="yui3-u-17-24">
+                                <xsl:apply-templates select="h:div[2]/*"/>
+                            </div>
+                            <div class="yui3-u-7-24">
+                                <xsl:apply-templates select="h:div[3]/*"/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="yui3-u-7-24">
-                        <xsl:apply-templates select="h:div[3]/*"/>
-                    </div>
-                </div>
-                </div>
                 </div>
             </div>
         </xsl:copy>
