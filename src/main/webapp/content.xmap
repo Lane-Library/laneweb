@@ -119,7 +119,8 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="regex-parameter" pattern="^history-all$">
+            <!-- TODO: remove this once history site is live -->
+            <!--<map:match type="regex-parameter" pattern="^history-all$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:aggregate type="default" element="doc">
                     <map:generate type="search-engine">
@@ -131,7 +132,7 @@
                 </map:aggregate>
                 <map:transform type="saxon" src="resources/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
-            </map:match>
+            </map:match>-->
               <map:match type="regex-parameter" pattern="^free-images-all$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="html" src="cocoon://content/cached/search/{source}.html"/>

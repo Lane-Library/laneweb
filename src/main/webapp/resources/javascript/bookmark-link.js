@@ -57,7 +57,7 @@
                 if (Model.get(Model.QUERY)) {
                     var bookmarkSearch = Y.one("#bookmarkSearch");
                     if (bookmarkSearch) {
-                        bookmarkSearch.setStyle("display", "block");
+                        bookmarkSearch.addClass("active");
                         bookmarkSearch.on("click", this._handleBookmarkSearchClick, this);
                     }
                 }

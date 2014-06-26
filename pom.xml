@@ -196,6 +196,7 @@
                                 <include>../../../../src/main/webapp/resources/javascript/yui-3.13.0.js</include>
                                 <include>lane-min.js</include>
                                 <include>location-min.js</include>
+                                <include>golfclub-headings-min.js</include>
                                 <include>model-min.js</include>
                                 <include>link-plugin-min.js</include>
                                 <include>lane-ie-min.js</include>
