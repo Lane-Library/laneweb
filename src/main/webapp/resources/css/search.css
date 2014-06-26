@@ -16,10 +16,6 @@
 .lwSearchResults a.primaryLink {
     font-size:16px;
 }
-#searchFacets {
-    margin-top:5px;
-    background-color:#fff; /* IE needs for opacity animation */
-}
 #searchFacets a {
     border-bottom:none;
 }
@@ -50,14 +46,14 @@
 }
 #popInContent {
     display:none;
-    position:relative;
+    position:absolute;
+    top:-16px;
+    left:220px;
     overflow:hidden;
     background-color: #F4F5EF;
     border: 1px solid #E6E4DC;
-    margin-left: 160px;
     padding: 7px;
     white-space: nowrap;
-    width: 792px;
 }
 #popInContent .popInLabel {
     color:#FF6600;
@@ -74,7 +70,7 @@
     width:647px;
 }
 #searchResults {
-    margin-top:30px;
+    padding-top:10px;
 }
 .content .lwSearchResults li {
     margin-left:0;
