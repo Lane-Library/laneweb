@@ -646,6 +646,10 @@ http://lane.stanford.edu/samples/button-css.html
 	line-height: 15px;
 }
 
+.button a {
+	color: #ffffff;
+}
+
 .button .icon {
 	color: #007C92;
 }
