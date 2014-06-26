@@ -111,7 +111,10 @@ background-position: -600px -80px;
 	width: 25em;
 }
 #bookmarkSearch{
-    display: block;
+    visibility:hidden;
     margin: auto;
     text-align: center;
+}
+#bookmarkSearch.active{
+    visibility:visible;
 }
