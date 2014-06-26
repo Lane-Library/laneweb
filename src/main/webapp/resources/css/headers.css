@@ -6,8 +6,10 @@ h2 {
 	font-size: 28px;
 	font-family: 'Fjord One', serif;
 	color: #666666;
-	padding-top: 25px;
 	text-align:center;
+}
+h2,h3{
+    margin-top:18px;
 }
 .golfclub span span {
     display:table-cell;
@@ -41,7 +43,6 @@ h3, h4 {
     background-repeat:no-repeat;
     background-position:bottom left;
     padding-bottom:12px;
-	
 }
 h5 {
 	color: black;
