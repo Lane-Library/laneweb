@@ -192,10 +192,10 @@
             <map:transform type="saxon" src="resources/xsl/banners.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-        <!-- med-history-new/search-form.html is to be used in an xinclude. If there is a q parameter, the
+        <!-- med-history/search-form.html is to be used in an xinclude. If there is a q parameter, the
             first pipeline in this match is invoked, xincluding the form and the metasearch results, otherwise
             the second pipeline is invoked xincluding just the form -->
-        <map:match pattern="med-history-new/search-form.html" type="wildcard">
+        <map:match pattern="med-history/search-form.html" type="wildcard">
             <map:match type="regex-parameter" pattern=".+">
                 <map:parameter name="parameter-name" value="query"/>
                 <map:aggregate type="default" element="doc">
@@ -204,7 +204,7 @@
                         <map:parameter name="timeout" value="20000"/>
                         <map:parameter name="engines" value="wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006"/>
                     </map:generate>
-                    <map:generate type="html" src="{content-base}/med-history-new/search-results.html"/>
+                    <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="resources/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
