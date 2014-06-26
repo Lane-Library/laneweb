@@ -614,40 +614,67 @@ blockquote {
 /*class button for mimicing SOM buttons.  See markup at:
 http://lane.stanford.edu/samples/button-css.html
  */
-.button{
-    font-size:14px;
-    font-weight:400;
-    margin:3px;
-    padding:5.25px 10.5px;
-    border:1px #CCCCCC solid;
-    border-radius:3.5px;
-    cursor:pointer;
-    background-color:#F1F1F1;
+.button {
+	font-size: 14px;
+	font-weight: 400;
+	margin: 3px;
+	padding: 5.25px 10.5px;
+	border: 1px #CCCCCC solid;
+	border-radius: 3.5px;
+	cursor: pointer;
+	background-color: #F1F1F1;
 }
-.button:hover{
-    border-color:#ADADAD;
+
+.button:hover {
+	border-color: #ADADAD;
 }
-.button span{
-    background-color:#007C92;
-    color:#FFFFFF;
-    padding:7px 12px 7px 7px;
-    border-radius:4px;
-    margin-right:6px;
-    display:inline-block;
+
+.button span {
+	background-color: #007C92;
+	color: #FFFFFF;
+	padding: 7px 12px 7px 7px;
+	border-radius: 4px;
+	margin-right: 6px;
+	display: inline-block;
 }
-.button span .icon{
-    background-color:#FFFFFF;
-    border-radius:12px;
-    font-size:13px;
-    height:16px;
-    width:16px;
-    padding:4px;
-    margin-right:6px;
-    line-height:15px;
+
+.button span .icon {
+	background-color: #FFFFFF;
+	border-radius: 12px;
+	font-size: 13px;
+	height: 16px;
+	width: 16px;
+	padding: 4px;
+	margin-right: 6px;
+	line-height: 15px;
 }
-.button .icon{
-    color:#007C92;
+
+.button a {
+	color: #ffffff;
 }
-.button *{
-    vertical-align:middle
+
+.button .icon {
+	color: #007C92;
+}
+
+.button * {
+	vertical-align: middle;
+}
+
+/*styles for events on homepage*/
+.month {
+	font-weight:bold;
+    color:#820000;
+    text-transform:uppercase;
+}
+
+.day {
+    font-size:21px;
+    color:#565347;
+    margin-top:0;
+    padding-bottom:5px;
+}
+
+.time {
+    color:#820000;
 }
