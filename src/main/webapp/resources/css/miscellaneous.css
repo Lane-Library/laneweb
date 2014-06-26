@@ -40,7 +40,8 @@ em {
 /* used for pubmed and highly accessed article lists */
 .citationList li {
 	list-style: decimal;
-	margin-bottom: 1em
+	margin-bottom: 1em;
+	margin-left:24px;
 }
 
 .rss-link {
