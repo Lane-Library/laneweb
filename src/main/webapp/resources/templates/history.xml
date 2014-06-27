@@ -28,11 +28,11 @@
                                     <li><a href="http://stanfordhospital.org/profiles/frdActionServlet?choiceId=searchClinicalService">Adult-care doctor</a></li>
                                     <li><a href="http://www.stanfordchildrens.org/en/search/default?tab=doctors">Pediatrician or pediatric specialist</a></li>
                                     <li><a href="http://www.stanfordchildrens.org/en/search/default?tab=doctors&amp;search-term=Obstetrics">Obstetrician</a></li>
-                                    <li>CLINICS &amp; SERVICES</li>
+                                    <li style="margin-top:10px">CLINICS &amp; SERVICES</li>
                                     <li><a href="http://stanfordhospital.org/directory/#0">Adult care</a></li>
                                     <li><a href="http://www.stanfordchildrens.org/en/service/index?">Pediatric care</a></li>
                                     <li><a href="http://www.stanfordchildrens.org/en/service/index?">Obstetrics</a></li>
-                                    <li><a href="//med.stanford.edu/clinicaltrials/">Clinical trials</a></li>
+                                    <li style="border-bottom:none"><a href="//med.stanford.edu/clinicaltrials/">Clinical trials</a></li>
                                 </ul>
                             </div>
                             <div class="yui3-u-1-2">
@@ -41,10 +41,10 @@
                                     <li><a href="http://stanfordhospital.org/directions/">Stanford Hospital &amp; Clinics</a></li>
                                     <li><a href="http://www.stanfordchildrens.org/en/locations-directions">Stanford Children's Health</a></li>
                                     <li><a href="http://stanfordhospital.org/clinicsmedServices/medicalServices/emergencyroom/">Emergency Department</a></li>
-                                    <li><span style="font-style:italic;font-size:12px;font-weight:400">Dial 911 in the event of a medical emergency</span></li>
+                                    <li style="border-bottom:none"><span style="font-style:italic;font-size:12px;font-weight:400;border-bottom:none;color:rgb(221, 221, 221)">Dial 911 in the event of a medical emergency</span></li>
                                 </ul>
-                                <a href="/health-care.html" style="line-height:16px">
-                                    <span>Explore Health Care</span>
+                                <a href="/health-care.html" class="explore">
+                                    <span>EXPLORE HEALTH CARE</span>
                                     <p>Learn how we are healing patients through science &amp; compassion <i class="fa fa-arrow-right"></i></p>
                                 </a>
                             </div>
@@ -72,8 +72,8 @@
                                 </ul>
                             </div>
                             <div class="yui3-u-1-2">
-                                <a href="/research.html" style="line-height:16px">
-                                    <span>Explore Research</span>
+                                <a href="/research.html" class="explore">
+                                    <span>EXPLORE RESEARCH</span>
                                     <p>Learn how we are fueling innovation <i class="fa fa-arrow-right"></i></p>
                                 </a>
                             </div>
@@ -103,7 +103,7 @@
                                 </ul>
                             </div>
                             <div class="yui3-u-1-2">
-                                <a href="/content/sm/education" style="line-height:16px">
+                                <a href="/content/sm/education" class="explore">
                                     <span>Explore Education</span>
                                     <p>Learn how we empower tomorrow's leaders <i class="fa fa-arrow-right"></i></p>
                                 </a>

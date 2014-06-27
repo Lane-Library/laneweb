@@ -209,6 +209,7 @@
                 <map:transform type="saxon" src="resources/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- TODO: maybe this following can be removed and the match of ** below will provide cached content -->
             <map:generate type="html" src="{content-base}/{0}"/>
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
