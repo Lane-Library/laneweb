@@ -194,7 +194,7 @@
                             background-image: none;
                             background-color:rgb(221, 221, 221);
                             padding:12px;
-                            width:296px;
+                            width:305px;
                             box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 2px 0px;">
                             <form role="search" action="http://med.stanford.edu/search-results/sm.html">
                                 <div>
