@@ -80,7 +80,7 @@
             <action date="2014-06-19" dev="ceyates" issue="98072" type="update">
                 remove white background from the content area
             </action>
-            <action date="2014-06-??" dev="ceyates" issue="98058" type="fix">
+            <action date="2014-06-28" dev="ceyates" issue="98058" type="fix">
                 fix the drop downs for history site to match SoM styles
             </action>
         </release>
