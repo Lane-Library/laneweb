@@ -165,14 +165,38 @@
                     </li>
                     <li class="nav-item">
                         <a href="#"><i class="fa fa-search"></i></a>
-                        <div style="right:0">
-                            <form role="search" action="/content/sm-mcd/en/search.html">
-                                <label for="globalHeaderSearch">Search by name or topic</label>
+                        <div style="
+                            right:0;
+                            min-height:0;
+                            background-image: none;
+                            background-color:rgb(221, 221, 221);
+                            padding:12px;
+                            width:296px;
+                            box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 2px 0px;">
+                            <form role="search" action="http://med.stanford.edu/search-results/sm.html">
                                 <div>
-                                    <input type="text" placeholder="Search by name or topic..." name="q" id="globalHeaderSearch" />
-                                    <span>
-                                        <button type="submit"><span>Submit Search Query</span><i class="fa fa-arrow-right"></i></button>
-                                    </span>
+                                    <input style="
+                                        color:rgb(85, 85, 85);
+                                        font-size:14px;
+                                        border:1px rgb(202, 204, 204) solid;
+                                        border-right:none;
+                                        border-radius:3.5px 0 0 3.5px;
+                                        color:rgb(85, 85, 85);
+                                        height:18px;
+                                        width:243px;
+                                        padding:5px 10px;
+                                        " type="text" placeholder="Search by name or topic..." name="q" id="globalHeaderSearch" />
+                                        <button type="submit" style="
+                                            background-color:rgb(0, 124, 146);
+                                            border:1px rgb(204, 204, 204) solid;
+                                            border-radius:0 3.5px 3.5px 0;
+                                            color:white;
+                                            font-size:14px;
+                                            padding:5px 9px;
+                                            line-height:20px;
+                                            margin:0;
+                                            "><i class="fa fa-arrow-right"></i></button>
+                                    
                                 </div>
                             </form>
                         </div>
