@@ -20,7 +20,8 @@
     background-image:url(../images/logo-sprite-globalheader-off.png);
     background-repeat:no-repeat;
     margin:0 10px;
-    height:35px;
+    height:50px;
+    padding-top:0;
 }
 #som2 h2{
     background-position:0 50%;

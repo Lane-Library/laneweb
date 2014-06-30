@@ -78,7 +78,6 @@
         <div><span>All Resources</span><span>/biomed-resources</span></div>
         <div><span>Specialty Portals</span><span>/portals</span></div>
         <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
-        <div><span>History Center</span><span>/med-history</span></div>
         <div><span>Using the Library</span><span>/using-lib</span></div>
         <div><span>About Lane</span><span>/about</span></div>
         <div><span>How To</span><span>/help</span></div>
@@ -96,7 +95,6 @@
             <xsl:when test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/med-history')">history-all</xsl:when>
             <xsl:when test="starts-with($path,'/bassett')">bassett</xsl:when>
             <xsl:when test="starts-with($path,'/biomed-resources/bassett')">bassett</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
@@ -355,6 +353,60 @@
             <xsl:apply-templates select="attribute::node()[not(name() = 'class')] | child::node()"/>
         </xsl:copy>
     </xsl:template>
+    
+    <!-- ================ temporary templates to facilitate 2.2.6 redesign ===================-->
+    <!-- add a div so modules are separated -->
+    <xsl:template match="h:div[contains(@class,'yui3-u')]//h:div[@class='module' or 'module' = tokenize(@class,' ')]">
+        <div>
+            <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div or ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">
+                <xsl:attribute name="style">
+                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div">margin-left:6px;</xsl:if>
+                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">margin-right:6px;</xsl:if>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node()|child::node()"/>
+            </xsl:copy>
+        </div>
+    </xsl:template>
+    
+    <!-- add class="golfclub" to h2 so that the golf club images can be positioned correctly-->
+    <xsl:template match="h:h2[not(@class='golfclub')][ancestor::h:html = $source-doc]">
+        <h2 class="golfclub">
+            <xsl:apply-templates/>
+        </h2>
+    </xsl:template>
+    
+    <!-- temporary rewrite of search result pages -->
+    <xsl:template match="h:div[@class='yui3-g'][h:div[@class='yui3-u-1-6'][h:div[@id='searchFacets']]]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <div class="yui3-u-1-5">
+                <xsl:apply-templates select="h:div[1]/*"/>
+            </div>
+            <div class="yui3-u-4-5">
+                <div style="margin-left:6px">
+                    <div class="module">
+                        <div class="yui3-g">
+                            <div class="yui3-u-17-24">
+                                <xsl:apply-templates select="h:div[2]/*"/>
+                            </div>
+                            <div class="yui3-u-7-24">
+                                <xsl:apply-templates select="h:div[3]/*"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:div[@id='searchFacets']" priority="2">
+        <div id="searchFacets" class="module leftColumn">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 

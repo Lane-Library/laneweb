@@ -7,6 +7,83 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-06-30" version="2.2.6" description="2.2.6 bug fix release">
+            <action date="2014-06-26" dev="ceyates" issue="98183" type="update">
+                bioresearch and textbook search result pages badly layed out
+            </action>
+            <action date="2014-06-26" dev="ceyates" issue="98179" type="update">
+                make margin-top: 18px for h2 and h3
+            </action>
+            <action date="2014-06-27 " dev="ceyates" issue="98178" type="add">
+                styles for landing page blocks
+            </action>
+            <action date="2014-06-26" dev="ceyates" issue="98177" type="remove">
+                remove history search from drop down
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98172" type="fix">
+                floated module-links-narrow class not cleared in some places
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98168" type="fix">
+                ordered list numbers are outside content div
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98165" type="fix">
+                golf clubs for h2 in history center don't work..
+            </action>
+            <action date="2014-06-26" dev="ceyates" issue="98163" type="update">
+                change paths from /med-history-new to /med-history
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98159" type="update">
+                run left/right golf clubs all the way to the edges...
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98155" type="update">
+                do not create proxy links for med-history pages
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98154" type="update">
+                change title for flickr icon in template....
+            </action>
+            <action date="2014-06-24" dev="olgary" issue="98145" type="update">
+                changed misc.css - change styles for announcement to match SoM
+            </action>
+            <action date="2014-06-24" dev="ceyates" issue="98144" type="update">
+                make 'book' logo clickable
+            </action>
+            <action date="2014-06-24" dev="ceyates" issue="98142" type="fix">
+                header elements in history template footer have incorrect style
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98139" type="fix">
+                on some portal pages, floats are not cleared
+            </action>
+            <action date="2014-06-24" dev="ceyates" issue="98138" type="fix">
+                Teaching Support link in lane footer is broken
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98137" type="fix">
+                h2 elements that wrap look ugly
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98136" type="fix">
+                search results are not contained in a white box
+            </action>
+            <action date="2014-06-20" dev="ceyates" issue="98110" type="update">
+                add golf clubs under h3 and h4, add golf clubs to the side of h2, center h2
+            </action>
+            <action date="2014-06-20" dev="ceyates" issue="98107" type="update">
+                12px width between the index cards
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98105" type="update">
+                make the search filters box wider to fit 'save the search' button
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98075" type="remove">
+                remove history links from lane nav
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98073" type="update">
+                change styles for the content blocks
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98072" type="update">
+                remove white background from the content area
+            </action>
+            <action date="2014-06-28" dev="ceyates" issue="98058" type="fix">
+                fix the drop downs for history site to match SoM styles
+            </action>
+        </release>
         <release date="2014-06-23" version="2.2.5" description="2.2.5 bug fix release">
             <action date="2014-06-20" dev="ceyates" issue="98106" type="update">
                 reposition search in progress wheel and need help link

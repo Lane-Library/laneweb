@@ -57,8 +57,8 @@
                 });
             }
     };
-    // FIXME: temporarily disabling for history until it works
-    if (query && facets.size() > 0 && !Y.one("#history-allFacet")) {
+
+    if (query && facets.size() > 0) {
         makeRequest();
     }
 })();

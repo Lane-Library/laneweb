@@ -47,8 +47,9 @@
         <xsl:variable name="resource" select="/doc/s:search/s:engine/s:resource[@s:id = $id]"/>
         <xsl:copy>
             <xsl:attribute name="href" select="$resource/s:url"/>
+            <!-- TODO: remove this attribute once history site is live -->
             <!-- don't proxy the history search links -->
-            <xsl:attribute name="class" select="'noproxy'"/>
+            <!--<xsl:attribute name="class" select="'noproxy'"/>-->
             <xsl:apply-templates select="*|text()"/>
         </xsl:copy>
         <span><xsl:text> </xsl:text><xsl:value-of select="$resource/s:hits"/></span>

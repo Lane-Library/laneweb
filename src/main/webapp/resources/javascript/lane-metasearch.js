@@ -5,7 +5,8 @@
         query = model.get(model.QUERY),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         searchIndicator = Y.lane.SearchIndicator,
-        searchSource = Y.lane.Search.getSearchSource(),
+        // TODO: remove this commented out code once new history site is released
+//        searchSource = Y.lane.Search.getSearchSource(),
     metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
@@ -14,7 +15,9 @@
             startTime,
             getSearchUrl = function() {
                 var add, i, y,
-                    appsSearch = searchSource === "history-all" ? "/apps/search/noproxy/json?q=" : "/apps/search/json?q=",
+                appsSearch = "/apps/search/json?q=",
+                // TODO: remove this commented out code once new history site is released
+//                appsSearch = searchSource === "history-all" ? "/apps/search/noproxy/json?q=" : "/apps/search/json?q=",
                     searchUrl = basePath + appsSearch + encodedQuery;
                 for (y = 0; y < searchables.length; y++) {
                     add = true;

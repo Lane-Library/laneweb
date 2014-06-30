@@ -1,30 +1,48 @@
-h1,h2,h3,h4 {
-	font-family: Source Sans Pro, Arial, Helvetica, clean, sans-serif;
-}
-h2 a,h2 a:visited {
-	color: inherit;
+h1,h3,h4 {
+	font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
 }
 h2 {
-	color: #565245;
-	font-size: 250%;
-	padding-top: 15px;
 	font-weight: 400;
-	margin-bottom: 0;
+	font-size: 28px;
+	font-family: 'Fjord One', serif;
+	color: #666666;
+	text-align:center;
 }
-h3 {
-	text-transform: uppercase;
-	font-size: 1.2em;
-	font-weight: 400;
-	color: #575347;
-	border-bottom: 5px #575347 solid;
-	padding-bottom: 2px;
+h2,h3{
+    margin-top:18px;
 }
-h4 {
-	color: black;
-	font-size: 1.4em;
-	letter-spacing: 0.04em;
+.golfclub span span {
+    display:table-cell;
+    white-space:nowrap;
+    padding:0 12px;
+}
+.golfclub span{
+    display:table-row;
+}
+.golfclub > span:after,
+.golfclub > span:before{
+    content:"";
+    display:table-cell;
+    background:url(../images/header-border.png) no-repeat 0 50%;
+    width:50%;
+}
+.golfclub > span:before{
+    -webkit-transform:scaleX(-1);
+    -moz-transform:scaleX(-1);
+    -ms-transform:scaleX(-1);
+    -o-transform:scaleX(-1);
+    transform:scaleX(-1)
+}
+h3, h4 {
+	color: #8c1515;
+	display: block;
+	font-size: 20px;
 	line-height: 1.2em;
 	margin-bottom: .2em;
+    background-image:url(../images/header-border.png);
+    background-repeat:no-repeat;
+    background-position:bottom left;
+    padding-bottom:12px;
 }
 h5 {
 	color: black;
@@ -33,19 +51,4 @@ h5 {
 	line-height: 1.2em;
 	margin-bottom: .2em;
 	font-size: 1.1em;
-}
-.h2-border {
-	border-bottom: 5px #575347 solid;
-	padding-top: 25px;
-	margin:0 10px;
-}
-
-/*style for h4 - bigger font, red*/
-.plain {
-	color: #820000;
-	font-size: 1.8em;
-}
-.weak {
-    font-size : 11px;
-    font-weight : normal;
 }

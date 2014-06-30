@@ -4,15 +4,17 @@
     min-width:989px;
 }
 #laneFooter{
-    margin-top:10px;
+    margin-top:12px;
     padding-top:17px;
 }
 #laneFooter h3{
     font-size:16px;
     font-weight:300;
     padding:0;
+    margin:0;
     line-height:24px;
     text-transform:none;
+    background-image:none;
 }
 #laneFooter li,
 #laneFooter h3{

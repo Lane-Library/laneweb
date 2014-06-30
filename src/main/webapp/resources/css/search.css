@@ -10,15 +10,11 @@
 #findIt.active, #spellCheck.active, #queryMapping.active {
     display:inline;
 }
-#queryMapping span {
+#queryMapping span, #spellCheckLink, #findItLink {
     padding-right:25px;
 }
 .lwSearchResults a.primaryLink {
     font-size:16px;
-}
-#searchFacets {
-    margin-top:5px;
-    background-color:#fff; /* IE needs for opacity animation */
 }
 #searchFacets a {
     border-bottom:none;
@@ -50,31 +46,28 @@
 }
 #popInContent {
     display:none;
-    position:relative;
+    position:absolute;
+    top:-16px;
+    left:220px;
     overflow:hidden;
     background-color: #F4F5EF;
     border: 1px solid #E6E4DC;
-    margin-left: 160px;
-    padding: 7px;
+    padding: 7px 0 7px 10px;
     white-space: nowrap;
-    width: 792px;
 }
 #popInContent .popInLabel {
     color:#FF6600;
     padding-right:25px;
-    padding-left:10px;
 }
 #popInContent.active {
     display: block;
 }
-.hitCountPopIn#popInContent {
-    margin-left:305px;
-    margin-top:-54px;
-    margin-bottom:24px;
-    width:647px;
+#popInContent.hitCountPopIn {
+    top: 32px;
+    left: 172px;
 }
 #searchResults {
-    margin-top:30px;
+    padding-top:10px;
 }
 .content .lwSearchResults li {
     margin-left:0;

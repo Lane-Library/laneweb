@@ -6,7 +6,7 @@
 }
 h1 {
     font-size: 26px;
-    padding: 24px 0 24px 65px;
+    padding: 24px 0 24px 0;
 	color: #820000;
 	background-image:url(../images/lane-logo.png);
 	background-repeat:no-repeat;
@@ -20,6 +20,7 @@ h1 span {
 h1 a {
 	border-bottom: none;
 	color: #820000;
+	padding-left:68px;
 }
 
 h1 a:visited {
