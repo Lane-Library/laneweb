@@ -81,6 +81,11 @@ public class QueryTermPatternTest {
     }
 
     @Test
+    public void testNullQuery() {
+        assertEquals("MATCH", QueryTermPattern.getPattern(null).matcher("").replaceAll("MATCH"));
+    }
+
+    @Test
     public void testOpenSquareBracket() {
         String openSquareBracket = "atyp[ical meningiomas";
         try {
