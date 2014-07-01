@@ -30,7 +30,7 @@ public class ContentResultConversionStrategy {
     public List<SearchResult> convertResult(final Result result) {
         Map<ContentResultSearchResult, ContentResultSearchResult> resultMap = new HashMap<ContentResultSearchResult, ContentResultSearchResult>();
         List<ContentResult> contentResults = getContentResultList(result);
-        Pattern queryTermPattern = QueryTermPattern.getPattern(result.getQuery().toString());
+        Pattern queryTermPattern = QueryTermPattern.getPattern(result.getQuery().getSearchText());
         for (ContentResult contentResult : contentResults) {
             // create a ContentResultSearch result from each ContentResult, retain the highest scoring one if more than
             // one the same

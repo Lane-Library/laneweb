@@ -64,6 +64,7 @@ public class ContentResultConversionStrategyTest {
         expect(this.contentParentResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
         this.contentResult.setParent(this.resourceResult);
         expect(this.uberResult.getQuery()).andReturn(this.query);
+        expect(this.query.getSearchText()).andReturn("");
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getParent()).andReturn(this.resourceResult);
         expect(this.contentResult.getTitle()).andReturn("title");
@@ -85,6 +86,7 @@ public class ContentResultConversionStrategyTest {
         expect(this.contentParentResult.getId()).andReturn("id_content");
         expect(this.contentParentResult.getChildren()).andReturn(null);
         expect(this.uberResult.getQuery()).andReturn(this.query);
+        expect(this.query.getSearchText()).andReturn("");
         this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
         replay(this.contentParentResult, this.contentResult, this.query, this.resourceResult, this.result,
                 this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
