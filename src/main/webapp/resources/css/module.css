@@ -2,7 +2,7 @@
 	margin-top: 12px;
 	line-height: 1.6em;
 	background-color: white;
-	padding: 10px;
+	padding: 12px;
 	border: 1px solid #ccc;
 	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
 }
@@ -101,7 +101,7 @@
 	margin: 0;
 	padding: 10px 0;
 	text-align: center;
-	text-transform:uppercase;
+	text-transform: uppercase;
 	font-size: 18px;
 	line-height: 19.8px;
 }
@@ -111,10 +111,14 @@
 }
 
 .landing p {
-	padding: 10px;
+	padding: 12px;
 	margin: 0;
 }
 
+.landing ul {
+	margin-top: 12px;
+	margin-left: 12px;
+}
 
 .landing ul li {
 	list-style-image: none;
