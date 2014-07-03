@@ -19,7 +19,7 @@ em {
 	color: #808080
 }
 
-.more {
+/*.more {
 	text-transform: uppercase;
 	text-align: right;
 	border-bottom: 1px solid #EAE9E6;
@@ -27,7 +27,7 @@ em {
 	clear: left;
 	letter-spacing: 1px;
 	padding: 3px
-}
+}*/
 
 .more.classes {
 	border-top: none;
@@ -36,6 +36,7 @@ em {
 
 .more a {
 	border: none;
+	margin-right: 6px;
 }
 /* used for pubmed and highly accessed article lists */
 .citationList li {
