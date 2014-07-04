@@ -1,52 +1,67 @@
-
 #highlightedResources {
-    position: absolute;
+	/* position: absolute;
     top: 0;
     right: 0;
     border: 3px #5A8CB4 solid;
-    width: 250px;
+      */
+	margin-top: 12px;
+	line-height: 1.6em;
+	background-color: #333333;
+	padding: 10px;
+	/*border: 1px solid #ccc;*/
+	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
+}
+#highlightedResources h3 {
+	text-transform:uppercase;
+	color: #ffffff;
 }
 #highlightedResources li {
-    list-style: none inside none;
-    margin-left: 0;
+	list-style: none inside none;
+	margin-left: 0;
 }
+
 #highlightedResources a {
-    border-bottom: none;
+	border-bottom: none;
 }
+
 #topResources {
-    background-image: url(../images/sprite-all.png);
-    background-position: -320px -200px;
-    background-repeat: no-repeat;
-    font-size: 15px;
-    margin-bottom: 0;
-    white-space: nowrap;
-    /* required for IE7:*/
-    height: 100%;
+	/*background-image: url(../images/sprite-all.png);
+	background-position: -320px -200px;
+	background-repeat: no-repeat;
+	font-size: 15px;
+	margin-bottom: 0;
+	white-space: nowrap;
+	 required for IE7:
+	height: 100%;*/
 }
-#topResources:after, #topResources .after {
-    content: ".";
-    display: block;
-    height: 0;
-    font-size: 0;
-    clear: both;
-    visibility: hidden;
+
+#topResources:after,#topResources .after {
+	content: ".";
+	display: block;
+	height: 0;
+	font-size: 0;
+	clear: both;
+	visibility: hidden;
 }
+
 #topResources li {
-    float: left;
-    /*need this to get bookmark link in the right place*/
-    position: relative
+	float: left;
+	/*need this to get bookmark link in the right place*/
+	position: relative;
 }
+
 #topResources a {
-    display: block;
-    width: 111px;
-    height: 25px;
-    padding: 9px 0 0 14px;
-    margin-bottom: 1px;
-    color: #FFF;
+	/*display: block;
+	width: 111px;
+	height: 25px;
+	padding: 9px 0 0 14px;
+	margin-bottom: 1px;*/
+	color: #FFF;
 }
-#topResources a:hover {
-    background-color: #256592;
-    background-image: url(../images/sprite-all.png);
-    background-repeat: no-repeat;
-    background-position: -320px -160px;
-}
+
+/*#topResources a:hover {
+	background-color: #256592;
+	background-image: url(../images/sprite-all.png);
+	background-repeat: no-repeat;
+	background-position: -320px -160px;
+}*/
