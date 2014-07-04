@@ -13,7 +13,7 @@
 			<body>
 				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt; 3]" />
                 <div class="more classes">
-                    <a href="{/s:seminars/@s:url}">More »</a>
+                    <a href="{/s:seminars/@s:url}">CME Calendar <i class="icon fa fa-arrow-right"></i></a>
                 </div>
 			</body>
 		</html>
