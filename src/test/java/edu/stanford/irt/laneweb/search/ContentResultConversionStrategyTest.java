@@ -30,7 +30,7 @@ public class ContentResultConversionStrategyTest {
 
     private Query query;
 
-    private Result resourceResult;
+    private Result hitCountResult;
 
     private Result result;
 
@@ -49,7 +49,7 @@ public class ContentResultConversionStrategyTest {
         this.query = createMock(Query.class);
         this.result = createMock(Result.class);
         this.contentParentResult = createMock(Result.class);
-        this.resourceResult = createMock(Result.class);
+        this.hitCountResult = createMock(Result.class);
         this.contentResult = createMock(ContentResult.class);
     }
 
@@ -58,40 +58,21 @@ public class ContentResultConversionStrategyTest {
     public void testConvertResult() {
         expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
         expect(this.result.getChildren()).andReturn(
-                Arrays.asList(new Result[] { this.resourceResult, this.contentParentResult }));
-        expect(this.resourceResult.getId()).andReturn("id");
+                Arrays.asList(new Result[] { this.hitCountResult, this.contentParentResult }));
+        expect(this.hitCountResult.getId()).andReturn("id");
         expect(this.contentParentResult.getId()).andReturn("id_content");
         expect(this.contentParentResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
-        this.contentResult.setParent(this.resourceResult);
+        this.hitCountResult.setChildren(Collections.<Result> singleton(this.contentResult));
         expect(this.uberResult.getQuery()).andReturn(this.query);
         expect(this.query.getSearchText()).andReturn("");
+        expect(this.hitCountResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
-        expect(this.contentResult.getParent()).andReturn(this.resourceResult);
         expect(this.contentResult.getTitle()).andReturn("title");
         this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
-        replay(this.contentParentResult, this.contentResult, this.query, this.resourceResult, this.result,
+        replay(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
                 this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
         assertEquals(1, this.conversionStrategy.convertResult(this.uberResult).size());
-        verify(this.contentParentResult, this.contentResult, this.query, this.resourceResult, this.result,
-                this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    public void testConvertResultNullChildren() {
-        expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
-        expect(this.result.getChildren()).andReturn(
-                Arrays.asList(new Result[] { this.resourceResult, this.contentParentResult }));
-        expect(this.resourceResult.getId()).andReturn("id");
-        expect(this.contentParentResult.getId()).andReturn("id_content");
-        expect(this.contentParentResult.getChildren()).andReturn(null);
-        expect(this.uberResult.getQuery()).andReturn(this.query);
-        expect(this.query.getSearchText()).andReturn("");
-        this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
-        replay(this.contentParentResult, this.contentResult, this.query, this.resourceResult, this.result,
-                this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
-        assertEquals(0, this.conversionStrategy.convertResult(this.uberResult).size());
-        verify(this.contentParentResult, this.contentResult, this.query, this.resourceResult, this.result,
+        verify(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
                 this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
     }
 }
