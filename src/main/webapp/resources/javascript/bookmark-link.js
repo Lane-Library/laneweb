@@ -209,7 +209,7 @@
 
             /**
              * Determine if a link is bookmarkable.  For now true if its display property is inline
-             * or inline-block and it does not contain an img element.  Added #topResources links, 
+             * or inline-block and it does not contain an img element.  Added #topResources links,
              * case 71323.  Added logic for if link was already bookmarked case 75199
              * @method _isBookmarkable
              * @private
