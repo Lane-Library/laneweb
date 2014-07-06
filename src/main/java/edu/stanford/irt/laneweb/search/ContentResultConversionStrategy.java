@@ -61,7 +61,9 @@ public class ContentResultConversionStrategy {
                     hitCount = child;
                 }
             }
-            hitCount.setChildren(contents);
+            if (contents != null) {
+                hitCount.setChildren(contents);
+            }
             list.add(hitCount);
         }
         return list;

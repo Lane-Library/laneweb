@@ -75,4 +75,22 @@ public class ContentResultConversionStrategyTest {
         verify(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
                 this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
     }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testConvertResultNoContent() {
+        expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
+        expect(this.result.getChildren()).andReturn(
+                Arrays.asList(new Result[] { this.hitCountResult }));
+        expect(this.hitCountResult.getId()).andReturn("id");
+        expect(this.hitCountResult.getChildren()).andReturn(Collections.<Result>emptySet());
+        expect(this.uberResult.getQuery()).andReturn(this.query);
+        expect(this.query.getSearchText()).andReturn("");
+        this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
+        replay(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
+                this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
+        assertEquals(0, this.conversionStrategy.convertResult(this.uberResult).size());
+        verify(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
+                this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
+    }
 }
