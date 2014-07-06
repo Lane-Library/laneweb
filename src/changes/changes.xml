@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2014-07-07" version="2.2.7" description="2.2.7 bug fix release">
+            <action date="2014-07-06" dev="ceyates" issue="98276" type="fix">
+                lists meant to be float:left, aren't
+            </action>
             <action date="2014-07-03" dev="ryanmax" issue="98266" type="update">
                 change for GR block on homepage
             </action>
