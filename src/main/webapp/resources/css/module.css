@@ -49,14 +49,6 @@
 	margin-bottom: 13px;
 	margin-right: 1em;
 }
-/* module with shadow on bottom*/
-.shadow {
-	
-}
-
-.bottomShadowWide {
-	display: none;
-}
 
 .border {
 	border-right: 1px solid #eae9e6;

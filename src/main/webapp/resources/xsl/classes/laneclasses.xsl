@@ -16,7 +16,6 @@
 	<xsl:template match="lc:event_data">
 		<div class="bd">
 			<xsl:call-template name="decorator" />
-			<div class="bottomShadowWide"></div>
 		</div>
 	</xsl:template>
 	<xsl:template name="decorator">
