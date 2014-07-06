@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-07-07" version="2.2.7" description="2.2.7 bug fix release">
+            <action date="2014-07-03" dev="ryanmax" issue="98266" type="update">
+                change for GR block on homepage
+            </action>
+            <action date="2014-07-04" dev="ceyates" issue="98265" type="fix">
+                bookmark link for new buttons inherit blue background
+            </action>
+            <action date="2014-07-03" dev="olgary" issue="98236" type="update">
+                make the h headings convert to all caps in css, and change red background to #09425a
+            </action>
+            <action date="2014-07-06" dev="ceyates" issue="98235" type="fix">
+                not enough margin between searchFacets and results
+            </action>
+            <action date="2014-07-01" dev="ryanmax" issue="98223" type="fix">
+                PubMed abstracts sometimes display incorrectly
+            </action>
+            <action date="2014-06-30" dev="ryanmax" issue="98218" type="fix">
+                metasearch content ranking not working correctly
+            </action>
+        </release>
         <release date="2014-06-30" version="2.2.6" description="2.2.6 bug fix release">
             <action date="2014-06-26" dev="ceyates" issue="98183" type="update">
                 bioresearch and textbook search result pages badly layed out
