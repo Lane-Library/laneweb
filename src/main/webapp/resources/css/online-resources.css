@@ -16,11 +16,9 @@
     visibility:hidden;
 }
 #browseTabs a {
-    border:1px solid #CDCFBE;
     display:block;
     padding:10px;
     text-align:center;
-    width:18px;
 }
 #browseTabs .long a {
     width: 98px;
