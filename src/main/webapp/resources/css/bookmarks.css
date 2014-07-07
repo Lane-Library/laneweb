@@ -21,12 +21,6 @@
     margin-left: 5px;
 }
 
-/*styles for topResources links so appears inside li element*/
-#topResources #bookmark-link {
-    bottom: 2px;
-    right: 0
-}
-
 #bookmark-link.active,
 #bookmark-link.bookmarking {
 background-position: -600px -40px;
