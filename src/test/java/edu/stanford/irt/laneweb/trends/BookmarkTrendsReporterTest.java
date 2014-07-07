@@ -36,12 +36,14 @@ public class BookmarkTrendsReporterTest {
     @SuppressWarnings("boxing")
     @Test
     public final void testReportCount() throws Exception {
-        expect(this.dao.getRowCount()).andReturn(10);
+        expect(this.dao.getRowCount()).andReturn(10).times(2);
+        this.tracker.trackEvent(eq("/bookmarks"), eq("laneTrends:bookmark"), isA(String.class), eq("dailyUserCount"),
+                eq(10));
         this.tracker.trackEvent(eq("/bookmarks"), eq("laneTrends:bookmark"), isA(String.class), eq("dailyUserCount"),
                 eq(10));
         replay(this.tracker, this.dao);
         this.reporter.reportCount();
+        this.reporter.reportCount();
         verify(this.tracker, this.dao);
     }
-    
 }
