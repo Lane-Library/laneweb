@@ -12,6 +12,7 @@ http://lane.stanford.edu/samples/button-css.html
     border-radius:3.5px;
     cursor:pointer;
     background-color:#F1F1F1;
+    display:inline-block;
 }
 .button:hover{
     border-color:#ADADAD;
@@ -36,6 +37,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 .button .icon{
     color:#007C92;
+    text-align:center;
 }
 .button *{
     vertical-align:middle
