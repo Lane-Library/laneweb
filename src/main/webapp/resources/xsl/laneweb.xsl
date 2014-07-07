@@ -370,6 +370,14 @@
         </div>
     </xsl:template>
     
+    <xsl:template match="h:div[@id='highlightedResources']">
+        <div style="margin-left:6px">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|*"/>
+            </xsl:copy>
+        </div>
+    </xsl:template>
+    
     <!-- add class="golfclub" to h2 so that the golf club images can be positioned correctly-->
     <xsl:template match="h:h2[not(@class='golfclub')][ancestor::h:html = $source-doc]">
         <h2 class="golfclub">
