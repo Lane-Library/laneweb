@@ -19,6 +19,12 @@
 	list-style: none inside none;
 	margin-left: 0;
 }
+#highlightedResources li:after{
+    border-bottom: none;
+    content: "";
+    display: none;
+    position: static;
+}
 
 #highlightedResources a {
 	border-bottom: none;
