@@ -36,13 +36,6 @@ dt {
     border-bottom: none;
 }
 
-.content .popular li:after{
-    border-bottom: none;
-    content: "";
-    display: none;
-    position: static;
-}
-
 /*this is the left column*/
 .content .leftColumn li {
 	list-style: none outside none;
