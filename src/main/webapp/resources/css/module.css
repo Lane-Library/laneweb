@@ -2,9 +2,12 @@
 	margin-top: 12px;
 	line-height: 1.6em;
 	background-color: white;
-	padding: 12px;
 	border: 1px solid #ccc;
 	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
+}
+
+.module p {
+	margin: 0 12px 12px 12px;
 }
 
 .module .bd {
@@ -117,7 +120,6 @@
 
 .landing ul {
 	margin-top: 12px;
-	margin-left: 12px;
 }
 
 .landing ul li {
