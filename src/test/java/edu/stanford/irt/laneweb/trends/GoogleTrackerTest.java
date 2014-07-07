@@ -33,12 +33,16 @@ public class GoogleTrackerTest {
 
     @Test
     public final void testTrackEvent() throws IOException {
-        expect(this.connectionFactory.getConnection(isA(String.class))).andReturn(this.connection);
+        expect(this.connectionFactory.getConnection(isA(String.class))).andReturn(this.connection).times(2);
         this.connection.setUseCaches(false);
         this.connection.addRequestProperty("User-Agent", "userAgent");
         this.connection.addRequestProperty("Accept-Language", "en-us,en;q=0.5");
-        expect(this.connection.getContent()).andReturn(null);
+        this.connection.setUseCaches(false);
+        this.connection.addRequestProperty("User-Agent", "userAgent");
+        this.connection.addRequestProperty("Accept-Language", "en-us,en;q=0.5");
+        expect(this.connection.getContent()).andReturn(null).times(2);
         replay(this.connectionFactory, this.connection);
+        this.tracker.trackEvent("path", "category", "action", "label", 1);
         this.tracker.trackEvent("path", "category", "action", "label", 1);
         verify(this.connectionFactory, this.connection);
     }
