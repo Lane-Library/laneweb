@@ -7,6 +7,8 @@ import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class EresourceListPagingData extends PagingData {
 
+    private static final long serialVersionUID = 1L;
+
     private List<Eresource> list;
 
     private List<PagingLabel> pagingLabels;
