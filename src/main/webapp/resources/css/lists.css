@@ -31,12 +31,16 @@ dt {
 }
 
 .content ul li:after {
-border-bottom: solid 1px #dddddd;
-content: no-open-quote;
-display: inherit;
-position: relative;
-bottom: -6px;
+    border-bottom: solid 1px #dddddd;
+    content: no-open-quote;
+    display: inherit;
+    position: relative;
+    bottom: -6px;
 }
+.content ul li:last-child:after {
+    border-bottom: none;
+}
+
 
 /*this is the left column*/
 .content .leftColumn li {
