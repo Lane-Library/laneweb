@@ -1,3 +1,7 @@
+#browseTabs {
+	background-color: #cccccc;
+}
+
 #browseTabs li {
     list-style:none outside none;
     float:left;
