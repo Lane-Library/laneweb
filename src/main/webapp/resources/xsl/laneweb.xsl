@@ -370,7 +370,7 @@
         </div>
     </xsl:template>
     
-    <xsl:template match="h:div[@id='highlightedResources']">
+    <xsl:template match="h:div[@class='popular']">
         <div style="margin-left:6px">
             <xsl:copy>
                 <xsl:apply-templates select="@*|*"/>

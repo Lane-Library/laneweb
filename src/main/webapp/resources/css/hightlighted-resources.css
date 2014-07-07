@@ -1,29 +1,30 @@
-#highlightedResources {
+/*TODO: rename this file to popular.css*/
+.popular {
 	margin-top: 12px;
 	line-height: 1.6em;
 	background-color: #333333;
 	padding: 10px;
 	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
 }
-#highlightedResources h3 {
+.popular h3 {
 	text-transform:uppercase;
 	color: #ffffff;
 }
-#highlightedResources li {
+.popular li {
 	list-style: none inside none;
 	width:138px;
 	margin-left: 0;
 	float:left;
 	clear:none;
 }
-#highlightedResources li:after{
+.content .popular li:after {
     border-bottom: none;
     content: "";
     display: none;
     position: static;
 }
 
-#highlightedResources:after{
+.popular:after{
 	content: ".";
 	display: block;
 	height: 0;
@@ -32,6 +33,6 @@
 	visibility: hidden;
 }
 
-#highlightedResources a {
+.popular a {
 	color: #FFF;
 }
