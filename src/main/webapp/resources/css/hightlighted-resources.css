@@ -10,18 +10,12 @@
 	text-transform:uppercase;
 	color: #ffffff;
 }
-.popular li {
+.content .popular li {
 	list-style: none inside none;
 	width:138px;
 	margin-left: 0;
 	float:left;
-	clear:none;
-}
-.content .popular li:after {
-    border-bottom: none;
-    content: "";
-    display: none;
-    position: static;
+	border-bottom:none;
 }
 
 .popular:after{
