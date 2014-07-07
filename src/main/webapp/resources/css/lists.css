@@ -17,10 +17,6 @@ dt {
 }
 
 .content ul li {
-	/*list-style-image: url(../images/raquo.gif);
-	list-style-type: disc;
-	list-style-position: outside;
-	margin-left: 15px;*/
 	display: block;
 	padding-top: 6px;
 	padding-right: 6px;
@@ -39,7 +35,6 @@ dt {
 .content ul li:last-child:after {
     border-bottom: none;
 }
-
 
 /*this is the left column*/
 .content .leftColumn li {
