@@ -91,7 +91,7 @@
                 <div class="centered">
                     <ul>
                         <li>
-                            <a href="/biomed-resources/index.html">All Resources</a>
+                            <a href="/biomed-resources/index.html">All Biomedical Resources</a>
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-resources.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include>
