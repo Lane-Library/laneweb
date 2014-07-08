@@ -27,18 +27,13 @@ public class ImageMetasearchSAXStrategyTest {
     @Test
     public void testToSAX() throws SAXException, IOException {
         xmlConsumer.startDocument();
-        Result metasearch = new Result("search");
-        Result engine = new Result("engine");
+        Result metasearch = new Result("search", "description", "url");
+        Result engine = new Result("engine", "engine_description", "url");
         engine.setHits("100");
-        engine.setDescription("engine_description");
-        Result resource = new Result("resource");
-        resource.setURL("http://resource-url.com");
-        Result content = new Result("resource_content");
+        Result resource = new Result("resource", "description", "http://resource-url.com");
+        Result content = new Result("resource_content", "resource_description", "url");
         content.setHits("10");
-        content.setDescription("resource_description");
-        ContentResult contentResult = new ContentResult("_content_");
-        contentResult.setDescription("http://image.src");
-        contentResult.setURL("http://urlcontent.com");
+        ContentResult contentResult = new ContentResult("_content_", "http://image.src", "http://urlcontent.com");
         contentResult.setTitle("title");
         content.addChild(contentResult);
         engine.addChild(resource);
