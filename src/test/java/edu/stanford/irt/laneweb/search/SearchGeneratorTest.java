@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.MetaSearchManager;
@@ -54,14 +55,14 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testDoSearchEmptyQuery() {
         replay(this.saxStrategy, this.manager);
         this.generator.doSearch("");
         verify(this.saxStrategy, this.manager);
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testDoSearchNullQuery() {
         replay(this.saxStrategy, this.manager);
         this.generator.doSearch(null);

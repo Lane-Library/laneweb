@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.MetaSearchManager;
@@ -47,7 +48,7 @@ public class ContentSearchGeneratorTest {
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testGetSearchResultsEmptyQuery() {
         expect(this.conversionStrategy.convertResult(isA(Result.class))).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
@@ -67,7 +68,7 @@ public class ContentSearchGeneratorTest {
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testGetSearchResultsNullQuery() {
         expect(this.conversionStrategy.convertResult(isA(Result.class))).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
