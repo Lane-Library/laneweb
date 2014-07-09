@@ -18,11 +18,13 @@
     <xsl:template match="lc:event_data">
             <div class="yui3-g">
                 <div class="yui3-u-1-6">
+                    <div class="date lane-date">
                     <div class="month">
                         <xsl:call-template name="month" />
                     </div>
                     <div class="day">
                         <xsl:call-template name="day" />
+                    </div>
                     </div>
                 </div>
                 <div class="yui3-u-5-6">
