@@ -5,6 +5,7 @@ import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.SearchStatus;
@@ -51,8 +52,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
     protected Result searchWithEngines(final String query, final Collection<String> engines) {
         Result result = null;
         if (query == null || query.isEmpty()) {
-            result = new Result("null");
-            result.setStatus(SearchStatus.FAILED);
+            throw new LanewebException("no query");
         } else {
             long searchTimeout = DEFAULT_TIMEOUT;
             if (null != this.timeout) {
@@ -85,7 +85,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
                         }
                     }
                 } catch (InterruptedException ie) {
-                    throw new IllegalStateException(ie);
+                    throw new LanewebException(ie);
                 }
             }
         }

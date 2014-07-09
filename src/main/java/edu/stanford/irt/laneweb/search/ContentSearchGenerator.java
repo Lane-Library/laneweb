@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.impl.MetaSearchManager;
@@ -76,7 +77,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         }
         Result result = null;
         if (query == null || query.isEmpty()) {
-            result = new Result("");
+            throw new LanewebException("no query");
         } else {
             result = this.metasearchManager.search(new SimpleQuery(query, this.engines), time, true);
         }

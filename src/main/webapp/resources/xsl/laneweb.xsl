@@ -370,41 +370,19 @@
         </div>
     </xsl:template>
     
+    <xsl:template match="h:div[@class='popular']">
+        <div style="margin-left:6px">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|*"/>
+            </xsl:copy>
+        </div>
+    </xsl:template>
+    
     <!-- add class="golfclub" to h2 so that the golf club images can be positioned correctly-->
     <xsl:template match="h:h2[not(@class='golfclub')][ancestor::h:html = $source-doc]">
         <h2 class="golfclub">
             <xsl:apply-templates/>
         </h2>
-    </xsl:template>
-    
-    <!-- temporary rewrite of search result pages -->
-    <xsl:template match="h:div[@class='yui3-g'][h:div[@class='yui3-u-1-6'][h:div[@id='searchFacets']]]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <div class="yui3-u-1-5">
-                <xsl:apply-templates select="h:div[1]/*"/>
-            </div>
-            <div class="yui3-u-4-5">
-                <div style="margin-left:6px">
-                    <div class="module">
-                        <div class="yui3-g">
-                            <div class="yui3-u-17-24">
-                                <xsl:apply-templates select="h:div[2]/*"/>
-                            </div>
-                            <div class="yui3-u-7-24">
-                                <xsl:apply-templates select="h:div[3]/*"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:div[@id='searchFacets']" priority="2">
-        <div id="searchFacets" class="module leftColumn">
-            <xsl:apply-templates/>
-        </div>
     </xsl:template>
     
 

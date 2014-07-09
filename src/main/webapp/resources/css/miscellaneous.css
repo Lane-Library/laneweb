@@ -4,7 +4,7 @@ body,select,input,button,textarea {
 }
 
 p {
-	margin-bottom: 10px;
+	margin-bottom: 12px;
 }
 
 strong {
@@ -16,10 +16,10 @@ em {
 }
 
 .inputHint {
-	color: #808080
+	color: #808080;
 }
 
-.more {
+/*.more {
 	text-transform: uppercase;
 	text-align: right;
 	border-bottom: 1px solid #EAE9E6;
@@ -27,15 +27,16 @@ em {
 	clear: left;
 	letter-spacing: 1px;
 	padding: 3px
-}
+}*/
 
-.more.classes {
+.more {
 	border-top: none;
-	padding: 6px;
+	padding: 24px 12px 12px 12px;
 }
 
 .more a {
 	border: none;
+	margin-right: 6px;
 }
 /* used for pubmed and highly accessed article lists */
 .citationList li {
@@ -117,18 +118,15 @@ em {
 }
 
 .content .calendar li {
-	height: 64px;
+	height: 75px;
 	float: left;
 	margin: .2em;
 	padding: .5em;
 	list-style: none inside none;
 	margin-left: 0;
-	background-color: #d6d5c7;
+	background-color: #09425a;
 	margin-bottom: 0;
-	-webkit-border-radius: 0 0 0 19px;
-	-moz-border-radius: 0 0 0 19px;
-	border-radius: 0 0 0 19px;
-	border: 2px #ffffff solid;
+	color: #fff;
 }
 
 .calendar li p {

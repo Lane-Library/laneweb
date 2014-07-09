@@ -10,15 +10,21 @@ dt {
 }
 
 .content ul {
-	margin-bottom: 10px;
+	margin-bottom: 12px;
+	margin-top: 0px;
+	list-style: none;
+	padding-left: 12px;
+}
+.content ul li{
+    border-bottom: solid 1px #dddddd;
+    padding:4px 0;
 }
 
-.content ul li {
-	list-style-image: url(../images/raquo.gif);
-	list-style-type: disc;
-	list-style-position: outside;
-	margin-left: 15px;
+.content ul li:last-child{
+    border-bottom:none;
 }
+
+
 /*this is the left column*/
 .content .leftColumn li {
 	list-style: none outside none;
@@ -26,10 +32,12 @@ dt {
 	border-bottom: 1px solid #E6E4DC;
 	margin-left: 0;
 }
+
 .content .leftColumn li ul {
 	padding-top: 4px;
 }
-.content .leftColumn li ul li{
+
+.content .leftColumn li ul li {
 	padding: 1px 5px 0px 6px;
 	border-bottom: 0;
 }
@@ -46,33 +54,37 @@ dt {
 
 /*styles for the list of portals on /portals/index.html*/
 #portalList {
-    padding : 11px;
-    background-color : #e6e4dc;
-    /*requred for IE < 8:*/
-    *height:404px
+	padding: 11px;
+	background-color: #e6e4dc;
+	/*requred for IE < 8:*/
+	*height: 404px
 }
+
 #portalList:after {
-    content : ".";
-    display : block;
-    height : 0;
-    font-size : 0;
-    clear : both;
-    visibility : hidden;
+	content: ".";
+	display: block;
+	height: 0;
+	font-size: 0;
+	clear: both;
+	visibility: hidden;
 }
+
 #portalList li {
-    float : left;
-    list-style : none inside none;
-    margin-left : 0
+	float: left;
+	list-style: none inside none;
+	margin-left: 0
 }
+
 #portalList a {
-    display : block;
-    width : 200px;
-    padding : 15px;
-    border-bottom : none;
-    background-color : white;
-    font-size : 15px;
-    margin : 1px
+	display: block;
+	width: 200px;
+	padding: 15px;
+	border-bottom: none;
+	background-color: white;
+	font-size: 15px;
+	margin: 1px
 }
+
 #portalList a:hover {
-    background-color : #e6e4dc
+	background-color: #e6e4dc
 }
