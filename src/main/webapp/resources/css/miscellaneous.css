@@ -118,18 +118,15 @@ em {
 }
 
 .content .calendar li {
-	height: 64px;
+	height: 75px;
 	float: left;
 	margin: .2em;
 	padding: .5em;
 	list-style: none inside none;
 	margin-left: 0;
-	background-color: #d6d5c7;
+	background-color: #09425a;
 	margin-bottom: 0;
-	-webkit-border-radius: 0 0 0 19px;
-	-moz-border-radius: 0 0 0 19px;
-	border-radius: 0 0 0 19px;
-	border: 2px #ffffff solid;
+	color: #fff;
 }
 
 .calendar li p {
