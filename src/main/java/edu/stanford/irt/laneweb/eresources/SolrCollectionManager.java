@@ -45,9 +45,10 @@ public class SolrCollectionManager implements CollectionManager {
         SolrQuery solrQuery = new SolrQuery();
         solrQuery.setRequestHandler(handler);
         solrQuery.add(params);
-        // TODO: efficiencies to be gained here by NOT returning all results
-        //solrQuery.add("rows", Integer.toString(Integer.MAX_VALUE));
-        solrQuery.add("rows", "1000");
+        if (null == params.get("rows")) {
+            // TODO: efficiencies to be gained here by NOT returning all results
+            solrQuery.add("rows", Integer.toString(Integer.MAX_VALUE));
+        }
         String q = solrQuery.getQuery();
         QueryResponse rsp;
         try {
@@ -230,6 +231,8 @@ public class SolrCollectionManager implements CollectionManager {
     public List<Eresource> search(final String query) {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("q", query);
+        // TODO: just for demo ... need pagination
+        params.set("rows", "100");
         return doGet(LANE_SEARCH_HANDLER, params);
     }
 
@@ -270,6 +273,8 @@ public class SolrCollectionManager implements CollectionManager {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "subset:" + quoteWrap(subset));
         params.set("q", query);
+        // TODO: just for demo ... need pagination
+        params.set("rows", "100");
         return doGet(LANE_SEARCH_HANDLER, params);
     }
 
@@ -281,6 +286,8 @@ public class SolrCollectionManager implements CollectionManager {
         ModifiableSolrParams params = new ModifiableSolrParams();
         params.set("fq", "type:" + quoteWrap(type));
         params.set("q", query);
+        // TODO: just for demo ... need pagination
+        params.set("rows", "100");
         return doGet(LANE_SEARCH_HANDLER, params);
     }
 }
