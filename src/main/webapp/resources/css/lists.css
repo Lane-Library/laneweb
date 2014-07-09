@@ -18,6 +18,7 @@ dt {
 .content ul li{
     border-bottom: solid 1px #dddddd;
     padding:4px 0;
+    margin-right:12px
 }
 
 .content ul li:last-child{
