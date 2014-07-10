@@ -5,8 +5,9 @@
     text-transform:uppercase;
     text-align:right;
     color:white;
-    padding:4px;
-    margin-left:12px
+    padding: 4px 4px 20px;
+    margin-left:12px;
+    width:40px;
 }
 .time{
     font-weight:bold
