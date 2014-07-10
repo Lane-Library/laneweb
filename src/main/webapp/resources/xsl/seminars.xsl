@@ -93,7 +93,7 @@
 				<div>
 					<xsl:attribute name="class">
 						<xsl:choose>
-							<xsl:when test="$type='gran'">yui3-u-1-4</xsl:when>
+							<xsl:when test="$type='gran'">yui3-u-5-6</xsl:when>
 							<xsl:when test="$type='cme'">yui3-u-3-4</xsl:when>
 						</xsl:choose>
 					</xsl:attribute>
