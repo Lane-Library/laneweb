@@ -1,21 +1,5 @@
 
 /*styles for classes on homepage*/
- .module .bd .month {
-	font-weight:bold;
-    color:#820000;
-    text-transform:uppercase;
-}
-
- .module .bd .day {
-    font-size:21px;
-    color:#565347;
-    margin-top:0;
-    padding-bottom:5px;
-}
-
- .module .bd .time {
-    color:#820000;
-}
 
 .date{
     text-transform:uppercase;
