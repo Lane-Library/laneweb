@@ -1,6 +1,9 @@
 html{
     background-color:#ecf1f2
 }
+body{
+    min-width: 989px;
+}
 #main{
     text-align:left;
     position:relative;
@@ -10,7 +13,6 @@ html{
 .centered{
     position:relative;
     width:76.07em;
-    min-width:989px;
     margin:auto;
 }
 
