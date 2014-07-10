@@ -66,7 +66,7 @@
 
 		<div class="seminar">
 			<div class="yui3-g">
-				<div class="yui3-u-1-6">
+				<div class="yui3-u-1-4">
 					<div>
 						<xsl:attribute name="class">
 							<xsl:text>date </xsl:text>
@@ -84,15 +84,13 @@
 					</div>
 					</div>
 				</div>
-				<div class="yui3-u-5-6">
-					<div class="semTitle">
+				<div class="yui3-u-3-4">
+					<p>
 						<xsl:copy-of select="$anchor" />
-					</div>
-					<xsl:if test="$time != ''">
-						<div class="time">
-							<xsl:value-of select="$time" />
-						</div>
-					</xsl:if>
+						<xsl:if test="$time != ''">
+							<br/><span class="time"><xsl:value-of select="$time" /></span>
+						</xsl:if>
+					</p>
 				</div>
 			</div>
 		</div>
