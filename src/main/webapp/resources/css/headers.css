@@ -8,7 +8,7 @@ h2 {
 	color: #666666;
 	text-align:center;
 }
-h2,h3{
+h2,h3,h5{
     margin-top:18px;
 }
 .golfclub span span {
@@ -49,8 +49,6 @@ h3, h4 {
 h5 {
 	color: #666666;
 	font-size: 20px;
-	letter-spacing: 0.05em;
-	line-height: 1.2em;
 	margin-bottom: .2em;
 	 margin-left: 12px;
 }

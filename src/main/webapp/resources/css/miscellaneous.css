@@ -30,7 +30,7 @@ em {
 }*/
 .more {
 	border-top: none;
-	padding: 24px 12px 12px 12px;
+	padding: 0 12px 12px 12px;
 }
 
 .more a {
@@ -159,6 +159,5 @@ em {
 hr {
 	color: #dddddd;
 	border-top: 1px solid;
-	margin-top: 12px;
-	margin-bottom: 12px;
+	margin: 12px;
 }
