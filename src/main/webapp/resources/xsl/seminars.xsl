@@ -66,23 +66,43 @@
 
 		<div class="seminar">
 			<div class="yui3-g">
-				<div class="yui3-u-1-6">
+				<div>
+					<xsl:attribute name="class">
+						<xsl:choose>
+							<xsl:when test="$type='gran'">yui3-u-1-6</xsl:when>
+							<xsl:when test="$type='cme'">yui3-u-1-4</xsl:when>
+						</xsl:choose>
+					</xsl:attribute>
+					<div>
+						<xsl:attribute name="class">
+							<xsl:text>date </xsl:text>
+							<xsl:choose>
+								<xsl:when test="$type='gran'">grandrounds-date</xsl:when>
+								<xsl:when test="$type='cme'">cme-date</xsl:when>
+								<xsl:otherwise><xsl:value-of select="$type"/></xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
 					<div class="month">
 						<xsl:value-of select="$month" />
 					</div>
 					<div class="day">
 						<xsl:value-of select="$day" />
 					</div>
-				</div>
-				<div class="yui3-u-5-6">
-					<div class="semTitle">
-						<xsl:copy-of select="$anchor" />
 					</div>
-					<xsl:if test="$time != ''">
-						<div class="time">
-							<xsl:value-of select="$time" />
-						</div>
-					</xsl:if>
+				</div>
+				<div>
+					<xsl:attribute name="class">
+						<xsl:choose>
+							<xsl:when test="$type='gran'">yui3-u-5-6</xsl:when>
+							<xsl:when test="$type='cme'">yui3-u-3-4</xsl:when>
+						</xsl:choose>
+					</xsl:attribute>
+					<p>
+						<xsl:copy-of select="$anchor" />
+						<xsl:if test="$time != ''">
+							<br/><span class="time"><xsl:value-of select="$time" /></span>
+						</xsl:if>
+					</p>
 				</div>
 			</div>
 		</div>

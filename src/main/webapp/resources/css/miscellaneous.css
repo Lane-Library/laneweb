@@ -28,10 +28,9 @@ em {
 	letter-spacing: 1px;
 	padding: 3px
 }*/
-
 .more {
 	border-top: none;
-	padding: 24px 12px 12px 12px;
+	padding: 0 12px 12px 12px;
 }
 
 .more a {
@@ -42,7 +41,7 @@ em {
 .citationList li {
 	list-style: decimal;
 	margin-bottom: 1em;
-	margin-left:24px;
+	margin-left: 24px;
 }
 
 .rss-link {
@@ -117,6 +116,10 @@ em {
 	font-size: 10px;
 }
 
+.content .calendar ul {
+	padding-left: 0;
+}
+
 .content .calendar li {
 	height: 75px;
 	float: left;
@@ -127,6 +130,11 @@ em {
 	background-color: #09425a;
 	margin-bottom: 0;
 	color: #fff;
+	font-size: 18px;
+}
+
+.content .calendar li p {
+	font-size: 13px;
 }
 
 .calendar li p {
@@ -146,4 +154,10 @@ em {
 
 .seminar {
 	padding-bottom: 15px;
+}
+
+hr {
+	color: #dddddd;
+	border-top: 1px solid;
+	margin: 12px;
 }
