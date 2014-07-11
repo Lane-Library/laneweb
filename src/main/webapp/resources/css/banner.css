@@ -11,7 +11,7 @@
 #banner .banner-content {
 	background-color: #333333;
 	color: #ffffff;
-	height: 202px;
+	height: 235px;
 	margin-top: -4px;
 }
 
@@ -19,10 +19,12 @@
 	margin: 0 12px 12px 12px;
 	padding-top: 12px; color : #ffffff;
 	font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 400;
 	text-transform: uppercase;
 	color: #ffffff;
+	background-image:none;
+	padding-bottom: 0;
 }
 
 #banner .banner-content p {
