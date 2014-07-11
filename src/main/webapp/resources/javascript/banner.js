@@ -41,15 +41,16 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
         prev = (index - 1) < 0 ? navNodes.size() - 1 : index - 1;
         this.set("index", prev);
     },
-    setNewContent : function(imgSrc, content) {
-        var contentBox = this.get("contentBox"),
+    setNewContent : function(content) {
+        var newNavNodes, contentBox = this.get("contentBox"),
         anim = new Y.Anim({
             node: contentBox,
-            to: {opacity: 1}
+            to: {opacity: 0},
         });
-        contentBox.setStyle('opacity', '0');
-        contentBox.one("img").set("src", imgSrc);
-        contentBox.one(".banner-content").set("innerHTML", content);
+        anim.on("end", function() {
+            contentBox.one("div").replace(content);
+            new Y.Anim({node: contentBox, to:{opacity:1}}).run();
+        });
         anim.run();
     },
     _handleIndexChange : function(event) {
@@ -65,9 +66,8 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
                     success : function(id, o) {
                         var fragment = Y.Node.create(o.responseText),
                             childNodes = fragment.get("childNodes"),
-                            imgSrc = childNodes.filter("img").item(0).getAttribute("src"),
-                            bannerContent = childNodes.filter(".banner-content").item(0);
-                        this.setNewContent(imgSrc, bannerContent ? bannerContent.get("innerHTML") : "");
+                            content = childNodes.filter("div").item(0);
+                        this.setNewContent(content);
                     }
                 },
                 context : this

@@ -16,7 +16,9 @@
     <xsl:template match="/h:html/h:body/h:div"/>
     
     <xsl:template match="/h:html/h:body/h:div[position() = $banner-wanted]" priority="1">
-        <xsl:apply-templates select="child::node()"/>
+        <xsl:copy>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
         <!-- only construct navigation if there is more than one banner -->
         <xsl:if test="count(/h:html/h:body/h:div) &gt; 1">
             <xsl:call-template name="create-nav"/>
