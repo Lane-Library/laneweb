@@ -42,16 +42,20 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
         this.set("index", prev);
     },
     setNewContent : function(content) {
-        var newNavNodes, contentBox = this.get("contentBox"),
-        anim = new Y.Anim({
+        var fadein, contentBox = this.get("contentBox"),
+        fadeout = new Y.Anim({
             node: contentBox,
-            to: {opacity: 0},
+            to: {opacity: 0}
         });
-        anim.on("end", function() {
+        fadeout.on("end", function() {
             contentBox.one("div").replace(content);
-            new Y.Anim({node: contentBox, to:{opacity:1}}).run();
+            fadein = new Y.Anim({
+                node: contentBox,
+                to:{opacity:1}
+            });
+            fadein.run();
         });
-        anim.run();
+        fadeout.run();
     },
     _handleIndexChange : function(event) {
         var navNodes = this.get("navNodes"),
