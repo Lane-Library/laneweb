@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-07-14" version="2.2.8" description="2.2.8 bug fix release">
+            <action date="2014-07-14" dev="ceyates" issue="98374" type="update">
+                upgrade to search-lane-2.0.9
+            </action>
+        </release>
         <release date="2014-07-07" version="2.2.7" description="2.2.7 bug fix release">
             <action date="2014-07-06" dev="ceyates" issue="98276" type="fix">
                 lists meant to be float:left, aren't
