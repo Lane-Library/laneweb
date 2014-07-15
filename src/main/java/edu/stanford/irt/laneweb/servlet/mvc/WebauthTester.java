@@ -21,10 +21,18 @@ public class WebauthTester {
         StringBuilder sb = new StringBuilder();
         sb.append("<h3>Headers</h3>");
         sb.append("<ul>");
-        Enumeration<?> names = request.getHeaderNames();
-        while (names.hasMoreElements()) {
-            String name = (String) names.nextElement();
+        Enumeration<?> headers = request.getHeaderNames();
+        while (headers.hasMoreElements()) {
+            String name = (String) headers.nextElement();
             sb.append("<li>").append(name).append(" --> ").append(request.getHeader(name)).append("</li>");
+        }
+        sb.append("</ul>");
+        sb.append("<h3>Attributes</h3>");
+        sb.append("<ul>");
+        Enumeration<?> attributes = request.getAttributeNames();
+        while (attributes.hasMoreElements()) {
+            String name = (String) attributes.nextElement();
+            sb.append("<li>").append(name).append(" --> ").append(request.getAttribute(name)).append("</li>");
         }
         sb.append("</ul>");
         return sb.toString();
