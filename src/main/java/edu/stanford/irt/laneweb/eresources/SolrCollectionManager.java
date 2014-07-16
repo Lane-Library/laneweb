@@ -33,7 +33,7 @@ public class SolrCollectionManager implements CollectionManager {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    private SolrScoreStrategy scoreStrategy = new SolrScoreStrategy();
+    //private SolrScoreStrategy scoreStrategy = new SolrScoreStrategy();
 
     private SolrServer solrServer;
 
@@ -94,7 +94,8 @@ public class SolrCollectionManager implements CollectionManager {
                 publicationAuthorsText = (String) doc.getFieldValue("publicationAuthorsText");
             }
             if (doc.containsKey("score")) {
-                score = this.scoreStrategy.computeScore(q, title, year, (Float) doc.getFieldValue("score"), maxScore);
+                //score = this.scoreStrategy.computeScore(q, title, year, (Float) doc.getFieldValue("score"), maxScore);
+                score = (int) doc.getFieldValue("score");
             }
             Eresource eresource = new Eresource(description, docId, Integer.parseInt(recordId), recordType, score,
                     title, publicationAuthorsText, publicationText);
