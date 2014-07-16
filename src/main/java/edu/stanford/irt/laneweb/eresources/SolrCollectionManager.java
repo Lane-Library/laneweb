@@ -95,7 +95,7 @@ public class SolrCollectionManager implements CollectionManager {
             }
             if (doc.containsKey("score")) {
                 //score = this.scoreStrategy.computeScore(q, title, year, (Float) doc.getFieldValue("score"), maxScore);
-                score = (int) doc.getFieldValue("score");
+                score = (int) ((Float) doc.getFieldValue("score")).floatValue();
             }
             Eresource eresource = new Eresource(description, docId, Integer.parseInt(recordId), recordType, score,
                     title, publicationAuthorsText, publicationText);
