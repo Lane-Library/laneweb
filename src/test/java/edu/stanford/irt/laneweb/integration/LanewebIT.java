@@ -86,7 +86,7 @@ public class LanewebIT {
             ns.put("h", "http://www.w3.org/1999/xhtml");
             // query term must appear within <strong> in first three results
             this.mockMvc.perform(get("/apps/search/content/html/pubmed?q=test")).andExpect(
-                    xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns, new Object()).exists());
+                    xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists());
         }
     }
 

@@ -8,7 +8,6 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
@@ -21,8 +20,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
 
     private String timeout;
 
-    private String wait;
-
     public SearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
     }
@@ -31,7 +28,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
-        this.wait = ModelUtil.getString(model, "wait");
         this.synchronous = ModelUtil.getString(model, Model.SYNCHRONOUS);
     }
 
@@ -65,29 +61,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
             boolean sync = Boolean.parseBoolean(this.synchronous);
             final SimpleQuery q = new SimpleQuery(query, engines);
             result = search(q, searchTimeout, sync);
-            if (null != this.wait) {
-                long wt = 0;
-                try {
-                    wt = Long.parseLong(this.wait);
-                } catch (NumberFormatException nfe) {
-                    wt = 0;
-                }
-                long start = System.currentTimeMillis();
-                try {
-                    synchronized (result) {
-                        while ((wt > 0) && SearchStatus.RUNNING.equals(result.getStatus())) {
-                            result.wait(wt);
-                            if (wt != 0) {
-                                long now = System.currentTimeMillis();
-                                wt = wt - (now - start);
-                                start = now;
-                            }
-                        }
-                    }
-                } catch (InterruptedException ie) {
-                    throw new LanewebException(ie);
-                }
-            }
         }
         return result;
     }

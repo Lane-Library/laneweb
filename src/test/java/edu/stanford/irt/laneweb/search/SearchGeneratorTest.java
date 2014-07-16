@@ -114,18 +114,6 @@ public class SearchGeneratorTest {
     }
 
     @Test
-    public void testDoSearchWait() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
-                this.result);
-        expect(this.result.getStatus()).andReturn(SearchStatus.RUNNING);
-        replay(this.saxStrategy, this.manager, this.result);
-        this.model.put("wait", "10");
-        this.generator.setModel(this.model);
-        this.generator.doSearch("query");
-        verify(this.saxStrategy, this.manager, this.result);
-    }
-
-    @Test
     public void testDoSearchWaitNumberFormatException() {
         expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
                 this.result);
