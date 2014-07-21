@@ -249,7 +249,7 @@ h1 a {
 #sm-footer a {
 	display: block;
 	text-indent: -9999px;
-	background-image: url(../../images/history/logo-sprite-globalfooter.png);
+	background-image: url(../../images/history/footer-logos.png);
 	margin: auto;
 	height: 50px;
 	cursor: pointer;
@@ -265,14 +265,22 @@ h1 a {
 }
 
 #footer-shc {
-	background-position: -326px 0px;
-	width: 172px;
+	background-position: -320px 0px;
+	width: 130px;
 }
 
 #footer-sch {
-	background-position: -518px 0px;
-	width: 148px;
+	background-position: -476px 0px;
+	width: 126px;
 }
+#footer-lpch {
+	background-position: -626px 0px;
+	width: 128px;
+}
+#footer-alliance {
+	background-position: -782px 0px;
+	width: 125px;
+}   
 
 #gift {
 	display: block;
