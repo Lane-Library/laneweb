@@ -7,6 +7,41 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-07-21" version="2.2.9" description="2.2.9 bug fix release">
+            <action date="2014-07-20" dev="ceyates" issue="98489" type="fix">
+                metasearch hit counts fail to appear in some circumstances
+            </action>
+            <action date="2014-07-10" dev="ceyates" issue="98324" type="update">
+                align Top Resources title and a golfclub with the other titles (My Medical library)
+            </action>
+            <action date="2014-07-09" dev="ceyates" issue="98316" type="update">
+                make margin-right: 12px for li, but not for top resources
+            </action>
+            <action date="2014-07-09" dev="ceyates" issue="98308" type="add">
+                make a variation for a button with red background
+            </action>
+            <action date="2014-07-08" dev="olgary" issue="98304" type="update">
+                debug.xml, template.xml - change wording to "All Biomedical Resources"
+            </action>
+            <action date="2014-07-09" dev="ceyates" issue="98295" type="fix">
+                backgrounds not extending fully across the page
+            </action>
+            <action date="2014-07-07" dev="ceyates" issue="98289" type="update">
+                make h3 margin-right 12px
+            </action>
+            <action date="2014-07-09" dev="ceyates" issue="98285" type="update">
+                style dates - colored blocks
+            </action>
+            <action date="2014-07-11" dev="olgary" issue="98283" type="update">
+                style a new smaller banner as shown on inside lane: https://insidelane.stanford.edu/wp-content/uploads/2014/04/homepage2.jpg
+            </action>
+            <action date="2014-07-07" dev="ceyates" issue="98282" type="update">
+                top resources list - wrap into 2 columns
+            </action>
+            <action date="2014-07-07" dev="ceyates" issue="98281" type="update">
+                remove underline from the last &lt;li&gt; in ul
+            </action>
+        </release>
         <release date="2014-07-14" version="2.2.8" description="2.2.8 bug fix release">
             <action date="2014-07-14" dev="ceyates" issue="98374" type="update">
                 upgrade to search-lane-2.0.9
