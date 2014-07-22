@@ -689,7 +689,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-solr</artifactId>
-			<version>1.0.0.RELEASE</version>
+			<version>1.2.1.RELEASE</version>
 			<exclusions>
 			 <exclusion>
 	            <groupId>org.apache.httpcomponents</groupId>
