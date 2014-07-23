@@ -1,5 +1,5 @@
 (function() {
-    
+
     /* javascript to set the height of a group of boxes to the that of the tallest one.
      * The boxes are grouped using the same-height-n class where n is a number 0-9 */
 
@@ -9,7 +9,7 @@
         size = nodes.size(),
         height,
         i,
-        j,
+        clazz = "",
         classes = {},
         regex = /.*(same-height-\d).*/,
         matches;
@@ -22,20 +22,22 @@
         }
     }
 
-    for (j in classes) {
-        // for each group find the tallest
-        maxHeight = 0;
-        nodes = Y.all(classes[j]);
-        size = nodes.size();
-        for (i = 0; i < size; i++) {
-            height = nodes.item(i).get("clientHeight");
-            if (height > maxHeight) {
-                maxHeight = height;
+    for (clazz in classes) {
+        if (classes.hasOwnProperty(clazz)) {
+            // for each group find the tallest
+            maxHeight = 0;
+            nodes = Y.all(classes[clazz]);
+            size = nodes.size();
+            for (i = 0; i < size; i++) {
+                height = nodes.item(i).get("clientHeight");
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
             }
-        }
-        // set all of the group to the tallest's height
-        for (i = 0; i < size; i++) {
-            nodes.item(i).setStyle("height", maxHeight + "px");
+            // set all of the group to the tallest's height
+            for (i = 0; i < size; i++) {
+                nodes.item(i).setStyle("height", maxHeight + "px");
+            }
         }
     }
 
