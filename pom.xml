@@ -274,8 +274,7 @@
                             <removeIncluded>false</removeIncluded>
                             <output>target/laneweb/resources/css/history/lane-history.css</output>
                             <includes>
-                                <include>../../../../../src/main/webapp/resources/css/history/yui-cssreset-3.16.0.css</include>
-                                <include>../../../../../src/main/webapp/resources/css/history/yui-cssgrids-3.16.0.css</include>
+                                <include>../../../../../src/main/webapp/resources/css/yui.css</include>
                                 <include>history-min.css</include>
                             </includes>
                         </aggregation>
