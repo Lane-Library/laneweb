@@ -5,9 +5,7 @@
     
     
     <bean name="edu.stanford.irt.suggest.SuggestionManager/eresource"
-        class="edu.stanford.irt.laneweb.suggest.SolrSuggestionManager">
-        <constructor-arg ref="laneSearchSolrServer"/>
-    </bean>
+        class="edu.stanford.irt.laneweb.suggest.SolrSuggestionManager"/>
     
     <bean name="edu.stanford.irt.suggest.SuggestionManager/mesh"
         class="edu.stanford.irt.suggest.MeshSuggestionManager"/>

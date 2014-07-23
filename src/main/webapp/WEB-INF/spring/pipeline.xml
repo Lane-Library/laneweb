@@ -42,9 +42,7 @@
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/link-scan"
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator"
-        scope="prototype">
-        <constructor-arg ref="laneSearchSolrServer"/>
-    </bean>
+        scope="prototype"/>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/parameter-map"
         class="edu.stanford.irt.laneweb.search.ParameterMapGenerator"
