@@ -22,6 +22,7 @@ public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearch
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
         try {
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
+            // TODO: access to resourceResult should be synchronized
             maybeCreateElement(xmlConsumer, RESOURCE_ID, resourceResult.getId());
             maybeCreateElement(xmlConsumer, RESOURCE_NAME, resourceResult.getDescription());
             maybeCreateElement(xmlConsumer, RESOURCE_URL, resourceResult.getURL());

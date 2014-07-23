@@ -51,6 +51,7 @@ public class ContentResultConversionStrategy {
     // moves the ContentResult children from the id_content Result to the Result with the hit counts
     private List<Result> moveContentChildrenToHitcount(Result result) {
         List<Result> list = new LinkedList<Result>();
+        // TODO: operations on engine should be synchronized
         for (Result engine : result.getChildren()) {
             Result hitCount = null;
             Collection<Result> contents = null;

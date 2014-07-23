@@ -26,6 +26,7 @@ public class ImageMetasearchSAXStrategy extends AbstractImageSearchSAXStrategy<R
         try {
             Collection<Result> engines = metaSearchResult.getChildren();
             String hits = null;
+            // TODO: access to Result should be synchronized
             for (Result engineResult : engines) {
                 startDiv(xmlConsumer);
                 Collection<Result> resources = engineResult.getChildren();
