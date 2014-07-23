@@ -1,10 +1,12 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.search.impl.ContentResult;
@@ -29,12 +31,14 @@ public class ContentResultConversionStrategy {
 
     public List<SearchResult> convertResult(final Result result) {
         Map<ContentResultSearchResult, ContentResultSearchResult> resultMap = new HashMap<ContentResultSearchResult, ContentResultSearchResult>();
-        List<Result> hitCounts = moveContentChildrenToHitcount(result);
+        Map<Result, Collection<Result>> resultContentMap = getContentResultMap(result);
         Pattern queryTermPattern = QueryTermPattern.getPattern(result.getQuery().getSearchText());
-        for (Result hitCount : hitCounts) {
-            for (Result c : hitCount.getChildren()) {
+        for (Entry<Result, Collection<Result>> entry : resultContentMap.entrySet()) {
+            Result hitCount = entry.getKey();
+            for (Result c : entry.getValue()) {
                 ContentResult contentResult = (ContentResult) c;
-                // create a ContentResultSearchResult from each ContentResult, retain the highest scoring one if more than
+                // create a ContentResultSearchResult from each ContentResult, retain the highest scoring one if more
+                // than
                 // one the same
                 int score = this.scoreStrategy.computeScore(contentResult, queryTermPattern);
                 ContentResultSearchResult current = new ContentResultSearchResult(contentResult, hitCount, score);
@@ -47,14 +51,13 @@ public class ContentResultConversionStrategy {
         this.scopusDeduplicator.removeDuplicates(resultMap.values());
         return new LinkedList<SearchResult>(resultMap.values());
     }
-    
-    // moves the ContentResult children from the id_content Result to the Result with the hit counts
-    private List<Result> moveContentChildrenToHitcount(Result result) {
-        List<Result> list = new LinkedList<Result>();
-        // TODO: operations on engine should be synchronized
+
+    private Map<Result, Collection<Result>> getContentResultMap(final Result result) {
+        Map<Result, Collection<Result>> resultMap = new HashMap<Result, Collection<Result>>();
         for (Result engine : result.getChildren()) {
+            // TODO: operations on engine should be synchronized
             Result hitCount = null;
-            Collection<Result> contents = null;
+            Collection<Result> contents = Collections.emptySet();
             for (Result child : engine.getChildren()) {
                 if (child.getId().endsWith(UNDERSCORE_CONTENT)) {
                     contents = child.getChildren();
@@ -62,11 +65,8 @@ public class ContentResultConversionStrategy {
                     hitCount = child;
                 }
             }
-            if (contents != null) {
-                hitCount.setChildren(contents);
-            }
-            list.add(hitCount);
+            resultMap.put(hitCount, contents);
         }
-        return list;
+        return resultMap;
     }
 }
