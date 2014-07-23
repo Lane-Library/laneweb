@@ -62,10 +62,8 @@ public class ContentResultConversionStrategyTest {
         expect(this.hitCountResult.getId()).andReturn("id");
         expect(this.contentParentResult.getId()).andReturn("id_content");
         expect(this.contentParentResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
-        this.hitCountResult.setChildren(Collections.<Result> singleton(this.contentResult));
         expect(this.uberResult.getQuery()).andReturn(this.query);
         expect(this.query.getSearchText()).andReturn("");
-        expect(this.hitCountResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getTitle()).andReturn("title");
         this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
@@ -83,7 +81,6 @@ public class ContentResultConversionStrategyTest {
         expect(this.result.getChildren()).andReturn(
                 Arrays.asList(new Result[] { this.hitCountResult }));
         expect(this.hitCountResult.getId()).andReturn("id");
-        expect(this.hitCountResult.getChildren()).andReturn(Collections.<Result>emptySet());
         expect(this.uberResult.getQuery()).andReturn(this.query);
         expect(this.query.getSearchText()).andReturn("");
         this.scopusDeduplicator.removeDuplicates(isA(Collection.class));

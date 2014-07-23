@@ -145,6 +145,7 @@ public class MetaSearchController {
         Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
         for (Result engine : engines) {
             for (Result resource : engine.getChildren()) {
+                // TODO: access to resource should be synchronized
                 String id = resource.getId();
                 if (resources.contains(id)) {
                     Map<String, Object> resourceMap = new HashMap<String, Object>();

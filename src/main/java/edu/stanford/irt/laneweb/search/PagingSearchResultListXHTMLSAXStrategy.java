@@ -92,6 +92,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             boolean showPubMedStrategies = false;
             for (SearchResult resource : list) {
                 if (resource instanceof ContentResultSearchResult) {
+                    // TODO: access to resousrceResult should be synchronized
                     Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
                     if (!countedResources.contains(resourceResult)) {
                         countedResources.add(resourceResult);
