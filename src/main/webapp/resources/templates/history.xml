@@ -310,8 +310,8 @@
         </div>
         <div id="sm-footer">
             <ul class="centered">
-                <li><a id="footer-sm" href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
                 <li><a id="footer-su" href="http://www.stanford.edu/">Stanford University</a></li>
+                <li><a id="footer-sm" href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
                 <li><a id="footer-shc" href="http://stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
                 <li><a id="footer-sch" href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
                 <li><a id="footer-lpch" href="http://www.stanfordchildrens.org/">Lucile Packard Children's Hospital Stanford</a></li>

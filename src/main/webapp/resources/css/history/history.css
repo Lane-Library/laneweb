@@ -254,12 +254,12 @@ h1 a {
 	cursor: pointer;
 }
 
-#footer-sm {
+#footer-su {
 	width: 128px;
 	background-position:8px 0;
 }
 
-#footer-su {
+#footer-sm {
 	background-position: -104px 0;
 	width: 208px;
 }
