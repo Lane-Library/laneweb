@@ -29,7 +29,7 @@ public interface SolrRepository extends SolrCrudRepository<SolrEresource, String
 
     // test
     @Query(value = "?0", requestHandler = SEARCH_HANDLER)
-    @Facet(fields = { "type", "mesh", "year", "publicationTitle", "publicationAuthor", "publicationType" }, limit = 10)
+    @Facet(fields = { "type", "mesh", "year", "publicationTitle", "publicationType" }, limit = 10)
     public FacetPage<SolrEresource> searchFacetByManyFields(String term, Pageable page);
 
     @Query(value = "?0", requestHandler = SEARCH_HANDLER)
