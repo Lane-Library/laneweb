@@ -67,8 +67,15 @@
                 <map:generate src="cocoon://content/biomed-resources/bassett/bassettsView.html" type="file"/>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <map:match type="regex-parameter" pattern="^all-all$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:generate type="file" src="resources/solr-search.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <!-- all search pages (parameter is all-all, all-pubmed, articles-all, articles-pubmed, catalog-all, catalog-ej, etc)-->
-            <map:match type="regex-parameter" pattern="^(all|articles|catalog)-.*$">
+            <map:match type="regex-parameter" pattern="^(articles|catalog)-.*$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:aggregate type="default" element="doc">
                     <map:generate type="eresources-count"/>

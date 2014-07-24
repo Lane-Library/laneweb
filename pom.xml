@@ -240,6 +240,7 @@
                                 <include>purchase-suggestions-min.js</include>
                                 <include>menu-delay-min.js</include>
                                 <include>resource-list-pagination-min.js</include>
+                                <include>solr-facets-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
