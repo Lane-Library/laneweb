@@ -8,12 +8,13 @@
             Y.io(basePath + '/apps/search/facets?q=' + encodedQuery + '&rd=' + Math.random(), {
                 on: {
                     success:function(id, o) {
-                        var response = Y.JSON.parse(o.responseText), facetId, j, url, sibling;
+                        var response = Y.JSON.parse(o.responseText), facetId, j, url, sibling, p;
                         for (j = 0; j < facets.size(); j++) {
                             sibling = facets.item(j).get('nextSibling');
                             facetId = facets.item(j).getAttribute('id');
                             if (undefined !== response.facets[facetId]) {
-                                for (var p in response.facets[facetId]) {
+                                facets.item(j).setStyle('display','block');
+                                for (p in response.facets[facetId]) {
                                     url = basePath + '/search.html?source=all-all&q=' + encodedQuery + '+' + facetId + ':"' + escape(p) + '"';
                                     sibling.insert("<li><a href='"+ url + "'>" + p + "</a> - " + response.facets[facetId][p] + "</li>",'before');
                                 }

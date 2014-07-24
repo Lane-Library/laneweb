@@ -41,7 +41,7 @@
 #searchFacets li.current a {
     color:#9a0003;
 }
-#searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a {
+#searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a, .solrFacet {
     display:none;
 }
 #popInContent {
