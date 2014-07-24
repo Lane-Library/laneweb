@@ -1,12 +1,9 @@
-#browseTabs {
-	background-color: #cccccc;
-}
-
 #browseTabs li {
     list-style:none outside none;
     float:left;
     padding:0;
     margin:0;
+    border-bottom:none;
 }
 #browseTabs:after {
     content: ".";
@@ -16,12 +13,14 @@
     visibility:hidden;
 }
 #browseTabs a {
+    border:1px solid #CDCFBE;
     display:block;
     padding:10px;
     text-align:center;
+    width:20px;
 }
 #browseTabs .long a {
-    width: 98px;
+    width: 104px;
 }
 #browseTabs .longer a {
     width: 218px;

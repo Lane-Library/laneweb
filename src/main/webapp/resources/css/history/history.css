@@ -242,37 +242,45 @@ h1 a {
 
 #sm-footer li {
 	display: inline-block;
-	width: 25%;
 	list-style-type: none
 }
 
 #sm-footer a {
 	display: block;
 	text-indent: -9999px;
-	background-image: url(../../images/history/logo-sprite-globalfooter.png);
+	background-image: url(../../images/history/footer-logos.png);
 	margin: auto;
-	height: 50px;
+	height: 56px;
 	cursor: pointer;
 }
 
-#footer-sm {
-	width: 102px;
+#footer-su {
+	width: 128px;
+	background-position:8px 0;
 }
 
-#footer-su {
-	background-position: -120px 0;
-	width: 182px;
+#footer-sm {
+	background-position: -104px 0;
+	width: 208px;
 }
 
 #footer-shc {
-	background-position: -326px 0px;
-	width: 172px;
+	background-position: -306px 0px;
+	width: 156px;
 }
 
 #footer-sch {
-	background-position: -518px 0px;
-	width: 148px;
+	background-position: -464px 0;
+	width: 152px;
 }
+#footer-lpch {
+	background-position: -614px 0;
+	width: 154px;
+}
+#footer-alliance {
+	background-position: -769px 0;
+	width: 151px;
+}   
 
 #gift {
 	display: block;

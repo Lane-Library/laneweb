@@ -57,6 +57,7 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
             Set<Result> countedResources = new HashSet<Result>();
             for (SearchResult resource : list) {
                 if (resource instanceof ContentResultSearchResult) {
+                    // TODO: access to resourceResult should be synchronized
                     Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
                     if (!countedResources.contains(resourceResult)) {
                         countedResources.add(resourceResult);

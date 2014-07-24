@@ -85,6 +85,7 @@ public class HistorySearchController {
         Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
         for (Result engine : result.getChildren()) {
             for (Result resource : engine.getChildren()) {
+                // TODO: access to resource should be synchronized
                 String id = resource.getId();
                 Map<String, Object> resourceMap = new HashMap<String, Object>();
                 map.put(id, resourceMap);

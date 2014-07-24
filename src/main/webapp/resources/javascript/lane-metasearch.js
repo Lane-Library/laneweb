@@ -90,13 +90,12 @@
                                             }
                                             updateables.item(y).setAttribute('target', '_blank');
                                             updateables.item(y).removeClass('metasearch');
-                                            searchables.splice(i--, 1);
                                         } else if (result.status === 'failed' || result.status === 'canceled') {
                                             resultSpan.setContent('&#160;? ');
                                             updateables.item(y).removeClass('metasearch');
-                                            searchables.splice(i--, 1);
                                         }
                                     }
+                                    searchables.splice(i--, 1);
                                 }
                             }
                             sleepingTime = 2000;

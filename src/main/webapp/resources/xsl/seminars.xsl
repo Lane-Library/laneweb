@@ -64,7 +64,15 @@
 			</xsl:call-template>
 		</xsl:variable>
 
-		<div class="seminar">
+		<div>
+			<xsl:attribute name="class">
+				<xsl:choose>
+					<!-- see case 98500 align the color blocks for classes -->
+					<xsl:when test="$type='cme' and position() = 1">same-height-8</xsl:when>
+					<xsl:when test="$type='cme' and position() = 2">same-height-9</xsl:when>
+					<xsl:otherwise>seminar</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
 			<div class="yui3-g">
 				<div>
 					<xsl:attribute name="class">

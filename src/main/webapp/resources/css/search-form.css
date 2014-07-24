@@ -110,8 +110,8 @@
 #searchIndicator {
     visibility : hidden;
     position: absolute;
-    right: 220px;
-    bottom: 35%;
+    right: 250px;
+    bottom: 30px;
 }
 #searchIndicator.show {
     visibility:visible

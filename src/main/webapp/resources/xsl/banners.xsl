@@ -5,6 +5,7 @@
     version="2.0">
     
     <xsl:param name="banner"/>
+    <xsl:variable name="empty" select="''"/>
     
     <xsl:variable name="banner-wanted">
         <xsl:choose>
@@ -13,16 +14,20 @@
         </xsl:choose>
     </xsl:variable>
     
-    <xsl:template match="/h:html/h:body/h:div"/>
+    <xsl:template match="/">
+        <xsl:apply-templates select="h:html/h:body/h:div[position() = $banner-wanted]"/>
+    </xsl:template>
     
-    <xsl:template match="/h:html/h:body/h:div[position() = $banner-wanted]" priority="1">
-        <xsl:copy>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-        <!-- only construct navigation if there is more than one banner -->
-        <xsl:if test="count(/h:html/h:body/h:div) &gt; 1">
-            <xsl:call-template name="create-nav"/>
-        </xsl:if>
+    <xsl:template match="/h:html/h:body/h:div">
+        <body>
+            <xsl:copy>
+                <xsl:apply-templates select="child::node()"/>
+            </xsl:copy>
+            <!-- only construct navigation if there is more than one banner -->
+            <xsl:if test="count(/h:html/h:body/h:div) &gt; 1">
+                <xsl:call-template name="create-nav"/>
+            </xsl:if>
+        </body>
     </xsl:template>
     
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
@@ -35,6 +40,13 @@
     <!-- default attribute match, copies the attribute -->
     <xsl:template match="attribute::node()">
         <xsl:copy-of select="."/>
+    </xsl:template>
+    
+    <xsl:template match="h:i">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:comment/>
+        </xsl:copy>
     </xsl:template>
     
     <xsl:template name="create-nav">

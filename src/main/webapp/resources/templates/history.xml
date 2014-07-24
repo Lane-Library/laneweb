@@ -232,25 +232,25 @@
         </div>
         <div id="lane-footer">
             <div class="centered">
-                <h2><a href="http://med.stanford.edu/">Stanford Medicine</a></h2>
+                <h2><a href="//med.stanford.edu/">Stanford Medicine</a></h2>
                 <div class="yui3-g">
                     <div class="yui3-u-1-2">
-                        <h3><a href="http://med.stanford.edu/">Stanford School of Medicine</a></h3>
+                        <h3><a href="//med.stanford.edu/school.html">Stanford School of Medicine</a></h3>
                         <div class="yui3-g">
                             <div class="yui3-u-1-2">
                                 <ul>
-                                    <li><a href="//med.stanford.edu/school">About</a></li>
+                                    <li><a href="//med.stanford.edu/school.html">About</a></li>
                                     <li><a href="//med.stanford.edu/school/contacts">Contact</a></li>
-                                    <li><a href="//med.stanford.edu/school/maps">Maps &amp; Directions</a></li>
+                                    <li><a href="//med.stanford.edu/about/contacts/maps-directions.html">Maps &amp; Directions</a></li>
                                     <li><a href="//stanfordcareers.stanford.edu/">Jobs</a></li>
                                 </ul>
                             </div>
                             <div class="yui3-u-1-2">
                                 <ul>
-                                    <li><a href="//med.stanford.edu/school/directory">Departments</a></li>
-                                    <li><a href="//med.stanford.eu/education">Academic Programs</a></li>
-                                    <li><a href="//med.stanford.edu/vision">Vision</a></li>
-                                    <li><a href="//med.stanford.edu/school/leadership">Leadership</a></li>
+                                    <li><a href="//med.stanford.edu/school/directory/basic-science-departments.html">Basic Science Departments</a></li>
+                                    <li><a href="//med.stanford.edu/school/directory/clinical-science-departments.html">Clinical Science Departments</a></li>
+                                    <li><a href="//med.stanford.edu/education.html">Academic Programs</a></li>
+                                    <li><a href="//med.stanford.edu/about/vision.html">Vision</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -287,6 +287,9 @@
                             <li>
                                 <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
                             </li>
+                             <li style="list-style:disc;margin-left:16px">
+                                <a href="http://med.stanford.edu/irt/web/feedback.html">Feedback</a>
+                            </li>
                             <li style="list-style:disc;margin-left:16px">
                                 <a href="http://med.stanford.edu/irt/help/?group=webnewmedia">Help</a>
                             </li>
@@ -307,10 +310,12 @@
         </div>
         <div id="sm-footer">
             <ul class="centered">
-                <li><a id="footer-sm" href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
                 <li><a id="footer-su" href="http://www.stanford.edu/">Stanford University</a></li>
+                <li><a id="footer-sm" href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
                 <li><a id="footer-shc" href="http://stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
                 <li><a id="footer-sch" href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
+                <li><a id="footer-lpch" href="http://www.stanfordchildrens.org/">Lucile Packard Children's Hospital Stanford</a></li>
+                <li><a id="footer-alliance" href="http://universityhealthcarealliance.org/">University Healthcare Alliance</a></li>
             </ul>
         </div>
     </body>

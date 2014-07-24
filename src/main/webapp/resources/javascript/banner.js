@@ -68,9 +68,7 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
             Y.io(basePath + "/plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
                 on : {
                     success : function(id, o) {
-                        var fragment = Y.Node.create(o.responseText),
-                            childNodes = fragment.get("childNodes"),
-                            content = childNodes.filter("div").item(0);
+                        var content = Y.Node.create(o.responseText).one("div");
                         this.setNewContent(content);
                     }
                 },

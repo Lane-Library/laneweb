@@ -160,7 +160,8 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "banner.js",
         "purchase-suggestions.js",
         "menu-delay.js",
-        "resource-list-pagination.js"
+        "resource-list-pagination.js",
+        "same-height.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:

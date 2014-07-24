@@ -1,5 +1,6 @@
 .module {
 	margin-top: 12px;
+	padding-top: 12px;
 	line-height: 1.6em;
 	background-color: white;
 	border: 1px solid #ccc;
@@ -8,10 +9,6 @@
 
 .module p {
 	margin: 0 12px 12px 12px;
-}
-
-.module .bd {
-	margin-top: 13px;
 }
 
 .module:after,.module .after,.module .bd:after {
