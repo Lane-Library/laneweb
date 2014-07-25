@@ -45,9 +45,6 @@
                     limit = "er-mesh";
                 } else if (source.match(/^bioresearch/)) {
                     limit = "mesh";
-                    //TODO: remove this commented out code once history site is live
-//                } else if (source.match(/^history/)) {
-//                    limit = "history";
                 } else if (source.match(/^bassett/)) {
                     limit = "bassett";
                 }

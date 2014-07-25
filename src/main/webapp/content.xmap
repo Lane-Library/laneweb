@@ -119,20 +119,6 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- TODO: remove this once history site is live -->
-            <!--<map:match type="regex-parameter" pattern="^history-all$">
-                <map:parameter name="parameter-name" value="source"/>
-                <map:aggregate type="default" element="doc">
-                    <map:generate type="search-engine">
-                        <map:parameter name="synchronous" value="true"/>
-                        <map:parameter name="timeout" value="20000"/>
-                        <map:parameter name="engines" value="wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006"/>
-                    </map:generate>
-                    <map:generate type="file" src="cocoon://content/cached/search/history-all.html"/>
-                </map:aggregate>
-                <map:transform type="saxon" src="resources/xsl/history-search.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>-->
               <map:match type="regex-parameter" pattern="^free-images-all$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="html" src="cocoon://content/cached/search/{source}.html"/>
