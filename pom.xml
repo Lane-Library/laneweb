@@ -178,7 +178,7 @@
                                 <include>captioned-img-min.css</include>
                                 <include>lightbox-min.css</include>
                                 <include>banner-min.css</include>
-                                <include>hightlighted-resources-min.css</include>
+                                <include>popular-min.css</include>
                                 <include>antibiogram-min.css</include>
                                 <include>bookmarks-min.css</include>
                                 <include>bookmark-instructions-min.css</include>
@@ -533,7 +533,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>2.0.10-SNAPSHOT</version>
+            <version>2.0.9</version>
             <exclusions>
                 <exclusion>
                     <artifactId>log4j</artifactId>

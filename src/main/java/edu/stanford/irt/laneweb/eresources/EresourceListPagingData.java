@@ -9,13 +9,21 @@ public class EresourceListPagingData extends PagingData {
 
     private static final long serialVersionUID = 1L;
 
+    private String alpha;
+
     private List<Eresource> list;
 
     private List<PagingLabel> pagingLabels;
 
-    public EresourceListPagingData(final List<Eresource> list, final int page, final String baseQuery) {
+    public EresourceListPagingData(final List<Eresource> list, final int page, final String baseQuery,
+            final String alpha) {
         super(list, page, baseQuery);
         this.list = list;
+        this.alpha = alpha;
+    }
+
+    public String getAlpha() {
+        return this.alpha;
     }
 
     public List<PagingLabel> getPagingLabels() {
