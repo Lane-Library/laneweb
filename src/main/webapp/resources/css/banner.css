@@ -8,9 +8,12 @@
 }
 
 #banner .banner-content{
+    height:219px;
+}
+
+.banner-content {
     background-color:#333333;
     color:#ffffff;
-    height:219px;
 }
 
 .banner-content h4{
