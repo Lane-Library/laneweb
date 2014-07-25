@@ -63,10 +63,6 @@ public class SolrEresource {
         return this.id;
     }
 
-    public int getIntergerId() {
-        return this.id.hashCode();
-    }
-
     public List<Link> getLinks() {
         if (this.linksList == null) {
             setLinkList();
