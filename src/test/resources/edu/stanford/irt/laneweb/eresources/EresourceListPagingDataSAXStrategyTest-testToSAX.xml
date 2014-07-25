@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div class="resourceListPagination">Displaying <span id="pageStart">1</span> to 260 of <a href="?a=a&amp;page=all">1039 matches</a>
+<div class="resourceListPagination">
+   <span id="pageStart">1</span> to 260 of <a href="?a=a&amp;page=all">1039 "A" titles</a>
    <a class="pagingButton gray-btn" href="#">
       <span>Choose Aa-Az</span>
    </a>
@@ -45,5 +46,5 @@
          </a>
       </li>
    </ul>
-   <a class="seeAll" href="?a=a&amp;page=all">See All</a>
+   <a class="seeAll" href="?a=a&amp;page=all">All "A" titles</a>
 </div>

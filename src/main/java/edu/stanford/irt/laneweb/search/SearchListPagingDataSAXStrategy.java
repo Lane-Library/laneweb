@@ -24,7 +24,7 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
     private static final String HREF = "href";
 
     private static final String ID = "id";
-    
+
     private static final String SPAN = "span";
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
@@ -40,7 +40,6 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             String hrefBase = pagingData.getBaseQuery();
             if (size > length) {
-                XMLUtils.data(xmlConsumer, "Displaying ");
                 atts = new AttributesImpl();
                 atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "pageStart");
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
@@ -63,8 +62,7 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
                 XMLUtils.data(xmlConsumer, sb.toString());
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
             } else {
-                StringBuilder sb = new StringBuilder("Displaying ");
-                sb.append("all ").append(size).append(" matches");
+                StringBuilder sb = new StringBuilder("all ").append(size).append(" matches");
                 XMLUtils.data(xmlConsumer, sb.toString());
             }
             if (size > length) {

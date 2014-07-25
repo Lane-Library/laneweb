@@ -37,8 +37,7 @@
 			</xsl:choose>
 		</xsl:variable>
 		
-		<div class="resourceListPagination">
-					<xsl:text>Displaying </xsl:text>
+		<div class="resourceListPagination">=
 					<xsl:choose>
 						<xsl:when
 							test="number(/s:resources/@size) &gt; number(/s:resources/@length)">

@@ -12,20 +12,20 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class EresourceListPagingDataTest {
-    
-    private EresourceListPagingData pagingData;
-    
-    private PagingEresourceList eresources;
+
     private Eresource eresource;
+
+    private PagingEresourceList eresources;
+
+    private EresourceListPagingData pagingData;
 
     @Before
     public void setUp() throws Exception {
         this.eresources = createMock(PagingEresourceList.class);
         expect(this.eresources.size()).andReturn(256);
         replay(this.eresources);
-        this.pagingData = new EresourceListPagingData(this.eresources, 0, "");
+        this.pagingData = new EresourceListPagingData(this.eresources, 0, "", "a");
         verify(this.eresources);
         this.eresource = createMock(Eresource.class);
     }
@@ -57,5 +57,4 @@ public class EresourceListPagingDataTest {
         }
         verify(this.eresources, this.eresource);
     }
-
 }
