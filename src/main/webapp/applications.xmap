@@ -114,13 +114,6 @@
                 <map:transform type="saxon" src="resources/xsl/search2json.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
-            <!-- TODO: remove this once history site is live -->
-            <!-- this is used in lane-metasearch.js when the source is history-all -->
-            <!--<map:match pattern="search/noproxy/json" type="wildcard">
-                <map:generate type="search-resource"/>
-                <map:transform type="saxon" src="resources/xsl/search2json.xsl"/>
-                <map:serialize type="text"/>
-            </map:match>-->
             <!-- search facet counts -->
             <!-- used in lane-search-facet-counts.js -->
             <map:match pattern="search/facets/json" type="wildcard">

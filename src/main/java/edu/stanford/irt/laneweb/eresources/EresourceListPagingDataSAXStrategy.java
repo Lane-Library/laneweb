@@ -95,15 +95,12 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
         sb.append("page=").append(i);
         startAnchor(xmlConsumer, sb.toString());
+        createSpan(xmlConsumer, label.getStart());
+        createSpanWithClass(xmlConsumer, "plDash", "—");
+        createSpan(xmlConsumer, label.getEnd());
         sb.setLength(0);
-        sb.append(label.getStart());
-        createSpan(xmlConsumer, sb.toString());
-        createSpanWithClass(xmlConsumer, "plDash", " — ");
-        sb.setLength(0);
-        sb.append(label.getEnd());
-        sb.append(" ");
-        createSpan(xmlConsumer, sb.toString());
-        createSpanWithClass(xmlConsumer, "plResults", " (" + label.getResults() + ")");
+        sb.append('(').append(label.getResults()).append(')');
+        createSpanWithClass(xmlConsumer, "plResults", sb.toString());
         endAnchor(xmlConsumer);
         endLi(xmlConsumer);
     }
@@ -120,12 +117,10 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
     }
 
     private String maybeGetQuotedAlpha(final String alpha) {
-        String quotedAlpha = null;
         if (alpha.isEmpty()) {
-            quotedAlpha = alpha;
+            return alpha;
         } else {
-            quotedAlpha = new StringBuilder(" \"").append(alpha).append('"').toString();
+            return new StringBuilder(" \"").append(alpha).append('"').toString();
         }
-        return quotedAlpha;
     }
 }
