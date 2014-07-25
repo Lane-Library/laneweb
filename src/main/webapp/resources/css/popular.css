@@ -25,3 +25,8 @@
 .popular a {
 	color: #FFF;
 }
+
+.popular .bus-card {
+	color: #FFF;
+	font-family: Fjord One, serif;
+}
