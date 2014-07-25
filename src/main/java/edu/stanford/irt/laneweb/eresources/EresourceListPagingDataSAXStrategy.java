@@ -9,10 +9,6 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy<EresourceListPagingData> {
 
-    private static final int LINK_LENGTH = 40;
-
-    private static final int TEXT_LENGTH = 37;
-
     @Override
     public void toSAX(final EresourceListPagingData pagingData, final XMLConsumer xmlConsumer) {
         try {
@@ -23,18 +19,21 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             } else {
                 alpha = alpha.toUpperCase();
             }
-            createDisplayingMarkup(xmlConsumer, pagingData, alpha);
             if (pagingData.getSize() > pagingData.getLength()) {
+                startDivWithClass(xmlConsumer, "yui3-g");
+                startDivWithClass(xmlConsumer, "yui3-u-1-3");
+                createDisplayingMarkup(xmlConsumer, pagingData, alpha);
+                endDiv(xmlConsumer);
                 String hrefBase = pagingData.getBaseQuery();
-                createPagingButton(xmlConsumer, hrefBase, alpha);
-                startUlWithClass(xmlConsumer, "pagingLabels");
-                int i = 1;
-                for (PagingLabel label : pagingData.getPagingLabels()) {
-                    createPagingLabelMarkup(xmlConsumer, label, hrefBase, i);
-                    i++;
-                }
-                endUl(xmlConsumer);
+                startDivWithClass(xmlConsumer, "yui3-u-1-3");
                 createSeeAllMarkup(xmlConsumer, hrefBase, alpha);
+                endDiv(xmlConsumer);
+                startDivWithClass(xmlConsumer, "yui3-u-1-3");
+                createPagingButton(xmlConsumer, hrefBase, pagingData, alpha);
+                endDiv(xmlConsumer);
+                endDiv(xmlConsumer);
+            } else {
+                createDisplayingMarkup(xmlConsumer, pagingData, alpha);
             }
             endDiv(xmlConsumer);
         } catch (SAXException e) {
@@ -67,9 +66,8 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
     }
 
-    private void createPagingButton(final XMLConsumer xmlConsumer, final String hrefBase, final String alpha)
-            throws SAXException {
-        startAnchorWithClass(xmlConsumer, "#", "pagingButton gray-btn");
+    private void createPagingButton(final XMLConsumer xmlConsumer, final String hrefBase, EresourceListPagingData pagingData, final String alpha) throws SAXException {
+        startDivWithClass(xmlConsumer, "pagingButton");
         StringBuilder sb = new StringBuilder("Choose ");
         if (alpha.isEmpty()) {
             sb.append("A-Z");
@@ -78,7 +76,14 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append(upperAlpha).append("a-").append(upperAlpha).append('z');
         }
         createSpan(xmlConsumer, sb.toString());
-        endAnchor(xmlConsumer);
+        startUlWithClass(xmlConsumer, "pagingLabels");
+        int i = 1;
+        for (PagingLabel label : pagingData.getPagingLabels()) {
+            createPagingLabelMarkup(xmlConsumer, label, hrefBase, i);
+            i++;
+        }
+        endUl(xmlConsumer);
+        endDiv(xmlConsumer);
     }
 
     private void createPagingLabelMarkup(final XMLConsumer xmlConsumer, final PagingLabel label, final String hrefBase,
@@ -90,39 +95,15 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
         sb.append("page=").append(i);
         startAnchor(xmlConsumer, sb.toString());
-        startUl(xmlConsumer);
-        startLi(xmlConsumer);
         sb.setLength(0);
         sb.append(label.getStart());
-        if (sb.length() > TEXT_LENGTH) {
-            sb.setLength(TEXT_LENGTH);
-        } else {
-            sb.append(' ');
-        }
-        while (sb.length() < LINK_LENGTH) {
-            sb.append('.');
-        }
-        XMLUtils.data(xmlConsumer, sb.toString());
-        endLi(xmlConsumer);
-        startLi(xmlConsumer);
+        createSpan(xmlConsumer, sb.toString());
         createSpanWithClass(xmlConsumer, "plDash", " — ");
         sb.setLength(0);
         sb.append(label.getEnd());
-        if (sb.length() > TEXT_LENGTH) {
-            sb.setLength(TEXT_LENGTH);
-        } else {
-            sb.append(' ');
-        }
-        while (sb.length() < LINK_LENGTH) {
-            sb.append('.');
-        }
         sb.append(" ");
-        XMLUtils.data(xmlConsumer, sb.toString());
-        endLi(xmlConsumer);
-        startLiWithClass(xmlConsumer, "plResults");
-        XMLUtils.data(xmlConsumer, " (" + label.getResults() + ")");
-        endLi(xmlConsumer);
-        endUl(xmlConsumer);
+        createSpan(xmlConsumer, sb.toString());
+        createSpanWithClass(xmlConsumer, "plResults", " (" + label.getResults() + ")");
         endAnchor(xmlConsumer);
         endLi(xmlConsumer);
     }
@@ -134,7 +115,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append(hrefBase).append("&");
         }
         sb.append("page=all");
-        createAnchorWithClass(xmlConsumer, sb.toString(), "seeAll",
+        createAnchor(xmlConsumer, sb.toString(),
                 new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles").toString());
     }
 
