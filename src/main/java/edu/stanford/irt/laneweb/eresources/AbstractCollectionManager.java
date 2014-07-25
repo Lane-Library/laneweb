@@ -19,6 +19,10 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public abstract class AbstractCollectionManager implements CollectionManager {
 
+    protected static final String SEARCH = "search";
+
+    protected static final String SEARCH_TYPE = "search.type";
+
     private static final String BROWSE = "browse";
 
     private static final String BROWSE_ALPHA = "browse.alpha";
@@ -34,10 +38,6 @@ public abstract class AbstractCollectionManager implements CollectionManager {
     private static final String COUNT = "search.count.0";
 
     private static final String COUNT_TYPE_UNION = "search.count.1";
-
-    protected static final String SEARCH = "search";
-
-    protected static final String SEARCH_TYPE = "search.type";
 
     private DataSource dataSource;
 
@@ -59,11 +59,6 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         params.add(mesh);
         params.add(type);
         return doGet(BROWSE_MESH, params, null);
-    }
-
-    // TODO: remove these when upgrading to eresources-1.8
-    public List<Eresource> getMeshCore(final String type, final String mesh) {
-        throw new UnsupportedOperationException();
     }
 
     public List<Eresource> getSubset(final String subset) {
