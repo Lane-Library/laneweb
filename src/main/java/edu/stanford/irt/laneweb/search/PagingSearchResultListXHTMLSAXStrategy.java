@@ -10,11 +10,9 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultList> {
 
@@ -42,10 +40,12 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
 
     private SAXStrategy<SearchResult> saxStrategy;
     
-    private SAXStrategy<PagingData> pagingDataStrategy = new SearchListPagingDataSAXStrategy();
+    private SAXStrategy<PagingData> pagingDataStrategy;
 
-    public PagingSearchResultListXHTMLSAXStrategy(final SAXStrategy<SearchResult> saxStrategy) {
+    public PagingSearchResultListXHTMLSAXStrategy(final SAXStrategy<SearchResult> saxStrategy,
+            final SAXStrategy<PagingData> pagingDataStrategy) {
         this.saxStrategy = saxStrategy;
+        this.pagingDataStrategy = pagingDataStrategy;
     }
 
     public void toSAX(final PagingSearchResultList list, final XMLConsumer xmlConsumer) {
@@ -68,7 +68,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             int i = 0;
             for (ListIterator<SearchResult> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 SearchResult result = it.next();
-                    if (isHvrTrig(result)) {
+                    if (result.hasAdditionalText()) {
                         atts = new AttributesImpl();
                         atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "hvrTrig");
                         XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
@@ -82,7 +82,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             
             int size = list.size();
             if (size > 100) {
-            	this.pagingDataStrategy.toSAX(pagingData, xmlConsumer);
+                this.pagingDataStrategy.toSAX(pagingData, xmlConsumer);
             }
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "search-content-counts");
@@ -92,6 +92,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             boolean showPubMedStrategies = false;
             for (SearchResult resource : list) {
                 if (resource instanceof ContentResultSearchResult) {
+                    // TODO: access to resousrceResult should be synchronized
                     Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
                     if (!countedResources.contains(resourceResult)) {
                         countedResources.add(resourceResult);
@@ -127,17 +128,5 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
-    }
-
-    private boolean isHvrTrig(SearchResult result) {
-        String description = null;
-        if (result instanceof EresourceSearchResult) {
-            Eresource eresource = ((EresourceSearchResult) result).getEresource();
-            description = eresource.getDescription();
-        } else if (result instanceof ContentResultSearchResult) {
-            ContentResult contentResult = ((ContentResultSearchResult) result).getContentResult();
-            description = contentResult.getDescription();
-        }
-        return description != null && description.length() > 0;
     }
 }

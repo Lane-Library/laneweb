@@ -1,8 +1,11 @@
 package edu.stanford.irt.laneweb.resource;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PagingData {
+public class PagingData implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private static final int DEFAULT_PAGE_SIZE = 100;
 

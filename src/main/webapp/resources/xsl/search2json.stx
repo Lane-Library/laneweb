@@ -3,29 +3,29 @@
     
     <stx:variable name="first-resource" select="true()"/>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult">
+    <stx:template match="/edu.stanford.irt.search.impl.Result">
         {
         <stx:process-children/>
         }
     </stx:template>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult/id">
+    <stx:template match="/edu.stanford.irt.search.impl.Result/id">
         "id": "<stx:value-of select="."/>",
     </stx:template>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult/children">
+    <stx:template match="/edu.stanford.irt.search.impl.Result/children">
         "resources": {<stx:process-children/>}},
     </stx:template>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult/status">
+    <stx:template match="/edu.stanford.irt.search.impl.Result/status">
         "status": "<stx:value-of select="."/>"
     </stx:template>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult/query/string">
+    <stx:template match="/edu.stanford.irt.search.impl.Result/query/string">
         "query": "<stx:value-of select="."/>",
     </stx:template>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult/children/entry/edu.stanford.irt.search.impl.DefaultResult/children/entry/edu.stanford.irt.search.impl.DefaultResult/id">
+    <stx:template match="/edu.stanford.irt.search.impl.Result/children/entry/edu.stanford.irt.search.impl.Result/children/entry/edu.stanford.irt.search.impl.Result/id">
         <stx:choose>
             <stx:when test="$first-resource">
                 <stx:assign name="first-resource" select="false()"/>
@@ -37,15 +37,15 @@
         "<stx:value-of select="."/>":{
     </stx:template>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult/children/entry/edu.stanford.irt.search.impl.DefaultResult/children/entry/edu.stanford.irt.search.impl.DefaultResult/url">
+    <stx:template match="/edu.stanford.irt.search.impl.Result/children/entry/edu.stanford.irt.search.impl.Result/children/entry/edu.stanford.irt.search.impl.Result/url">
         "url":"<stx:value-of select="."/>"
     </stx:template>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult/children/entry/edu.stanford.irt.search.impl.DefaultResult/children/entry/edu.stanford.irt.search.impl.DefaultResult/hits">
+    <stx:template match="/edu.stanford.irt.search.impl.Result/children/entry/edu.stanford.irt.search.impl.Result/children/entry/edu.stanford.irt.search.impl.Result/hits">
         ,"hits":"<stx:value-of select="."/>",
     </stx:template>
     
-    <stx:template match="/edu.stanford.irt.search.impl.DefaultResult/children/entry/edu.stanford.irt.search.impl.DefaultResult/children/entry/edu.stanford.irt.search.impl.DefaultResult/status">
+    <stx:template match="/edu.stanford.irt.search.impl.Result/children/entry/edu.stanford.irt.search.impl.Result/children/entry/edu.stanford.irt.search.impl.Result/status">
         ,"status":"<stx:value-of select="."/>"
     </stx:template>
     

@@ -102,21 +102,22 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "widget-uievents",
         "yui-throttle",
         function(Y) {
-    
+
     //keep a global reference of this YUI object
     window.Y = Y;
-    
+
     //create the lane namespace
     var lane = Y.namespace("lane");
-    
+
     Y.augment(lane, Y.EventTarget, null, null, {
-    	prefix : "lane",
-    	emitFacade : true,
-    	broadcast : 1
+        prefix : "lane",
+        emitFacade : true,
+        broadcast : 1
     });
-    
+
     var i, laneJavascript = [
         "location.js",
+        "golfclub-headings.js",
         "model.js",
         "link-plugin.js",
         "lane-ie.js",
@@ -129,7 +130,11 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "search-select.js",
         "lane-search-pico.js",
         "search.js",
+        "bookmark.js",
         "bookmarks.js",
+        "bookmarks-widget.js",
+        "bookmark-editor.js",
+        "bookmarks-editor.js",
         "bookmark-link.js",
         "lane-lightbox.js",
         "bookmark-login.js",
@@ -155,16 +160,17 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "banner.js",
         "purchase-suggestions.js",
         "menu-delay.js",
-        "resource-list-pagination.js"
+        "resource-list-pagination.js",
+        "same-height.js"
     ];
-    
+
     //Model doesn't exist yet, get basePath by hand:
     var basePath = "";
-    
+
     if (window.model) {
-    	basePath = window.model["base-path"] || basePath;
+        basePath = window.model["base-path"] || basePath;
     }
-    
+
     //load each javascript file separately
     for (i = 0; i < laneJavascript.length; i++) {
         Y.Get.js(basePath + "/resources/javascript/" + laneJavascript[i], function (err) {
@@ -174,5 +180,5 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
             }
         });
     }
-    
+
 });

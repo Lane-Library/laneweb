@@ -57,6 +57,24 @@ public class ControlCenterTest {
     }
 
     @Test
+    public void testAddSpamReferrer() {
+        expect(this.context.getBean(EMailSender.class)).andReturn(this.sender);
+        this.sender.addSpamReferrer("referrer");
+        replay(this.context, this.sender);
+        assertEquals("referrer", this.control.addSpamReferrer("referrer", "ceyates"));
+        verify(this.context, this.sender);
+    }
+
+    @Test
+    public void testAddSpamReferrerNotAuthorized() {
+        try {
+            this.control.addSpamReferrer("referrer", "ditenus");
+            fail();
+        } catch (LanewebException e) {
+        }
+    }
+
+    @Test
     public void testGetParameters() {
         expect(this.model.asMap()).andReturn(null);
         this.binder.bind(null, null);
@@ -78,6 +96,24 @@ public class ControlCenterTest {
     public void testRemoveSpamIPNotAuthorized() {
         try {
             this.control.removeSpamIP("127.0.0.1", "ditenus");
+            fail();
+        } catch (LanewebException e) {
+        }
+    }
+
+    @Test
+    public void testRemoveSpamReferrer() {
+        expect(this.context.getBean(EMailSender.class)).andReturn(this.sender);
+        expect(this.sender.removeSpamReferrer("referrer")).andReturn(true);
+        replay(this.context, this.sender);
+        assertTrue(this.control.removeSpamReferrer("referrer", "ceyates"));
+        verify(this.context, this.sender);
+    }
+
+    @Test
+    public void testRemoveSpamRefrrerNotAuthorized() {
+        try {
+            this.control.removeSpamReferrer("referrer", "ditenus");
             fail();
         } catch (LanewebException e) {
         }

@@ -5,23 +5,20 @@ import java.util.Map;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
-import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class SearchGenerator extends AbstractMetasearchGenerator implements ParametersAware {
+public class SearchGenerator extends AbstractMetasearchGenerator<Result> implements ParametersAware {
 
     private static final long DEFAULT_TIMEOUT = 60000;
 
     private String synchronous;
 
     private String timeout;
-
-    private String wait;
 
     public SearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
         super(metaSearchManager, saxStrategy);
@@ -31,7 +28,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
-        this.wait = ModelUtil.getString(model, "wait");
         this.synchronous = ModelUtil.getString(model, Model.SYNCHRONOUS);
     }
 
@@ -52,8 +48,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
     protected Result searchWithEngines(final String query, final Collection<String> engines) {
         Result result = null;
         if (query == null || query.isEmpty()) {
-            result = new DefaultResult("null");
-            result.setStatus(SearchStatus.FAILED);
+            throw new LanewebException("no query");
         } else {
             long searchTimeout = DEFAULT_TIMEOUT;
             if (null != this.timeout) {
@@ -64,31 +59,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator implements Para
                 }
             }
             boolean sync = Boolean.parseBoolean(this.synchronous);
-            final SimpleQuery q = new SimpleQuery(query);
-            result = search(q, searchTimeout, engines, sync);
-            if (null != this.wait) {
-                long wt = 0;
-                try {
-                    wt = Long.parseLong(this.wait);
-                } catch (NumberFormatException nfe) {
-                    wt = 0;
-                }
-                long start = System.currentTimeMillis();
-                try {
-                    synchronized (result) {
-                        while ((wt > 0) && SearchStatus.RUNNING.equals(result.getStatus())) {
-                            result.wait(wt);
-                            if (wt != 0) {
-                                long now = System.currentTimeMillis();
-                                wt = wt - (now - start);
-                                start = now;
-                            }
-                        }
-                    }
-                } catch (InterruptedException ie) {
-                    throw new IllegalStateException(ie);
-                }
-            }
+            final SimpleQuery q = new SimpleQuery(query, engines);
+            result = search(q, searchTimeout, sync);
         }
         return result;
     }

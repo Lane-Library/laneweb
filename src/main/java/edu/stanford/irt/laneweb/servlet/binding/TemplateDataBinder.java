@@ -11,6 +11,10 @@ public class TemplateDataBinder implements DataBinder {
 
     private TemplateChooser templateChooser;
 
+    public TemplateDataBinder(final TemplateChooser templateChooser) {
+        this.templateChooser = templateChooser;
+    }
+
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         if (ModelUtil.getObject(model, Model.DEBUG, Boolean.class, Boolean.FALSE)) {
             // use the debug template if debug mode is on.
@@ -18,9 +22,5 @@ public class TemplateDataBinder implements DataBinder {
         } else {
             model.put(Model.TEMPLATE, this.templateChooser.getTemplate(request));
         }
-    }
-
-    public void setTemplateChooser(final TemplateChooser templateChooser) {
-        this.templateChooser = templateChooser;
     }
 }

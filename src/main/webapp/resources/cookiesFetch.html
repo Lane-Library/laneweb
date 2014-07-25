@@ -7,7 +7,7 @@
 <!--
 
 var userAgent = navigator.userAgent;
-  if(userAgent.indexOf("Firefox")>-1)
+  if(userAgent.indexOf("Firefox")>-1 || userAgent.indexOf("Chrome")>-1 || userAgent.indexOf("Opera")>-1)
   {
         document.write("<IFRAME SRC='"+entryUrl.replace(/&amp;/g,"&")+"' onload='redirect()' name='session' frameborder='0' height='0' width='0'><\/IFRAME>");  
   }

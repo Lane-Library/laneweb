@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.core.io.Resource;
@@ -17,7 +18,7 @@ public class HttpResource extends UrlResource {
     private URL url;
 
     public HttpResource(final URL url, final String userName, final String password) throws IOException {
-        this(url, Base64.encodeBase64String((userName.concat(":").concat(password)).getBytes("UTF-8")));
+        this(url, Base64.encodeBase64String((userName.concat(":").concat(password)).getBytes(StandardCharsets.UTF_8)));
     }
 
     private HttpResource(final URL url) throws MalformedURLException {

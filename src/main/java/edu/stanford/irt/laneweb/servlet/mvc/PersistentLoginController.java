@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
+import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
+import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
-import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 
 @Controller
@@ -63,7 +63,7 @@ public class PersistentLoginController {
         } else {
             resetCookies(request, response);
         }
-        RedirectView view = new RedirectView(URLDecoder.decode(url, "utf-8"), true, true);
+        RedirectView view = new RedirectView(URLDecoder.decode(url, "UTF-8"), true, true);
         view.setExpandUriTemplateVariables(false);
         return view;
     }
@@ -161,7 +161,7 @@ public class PersistentLoginController {
             response.setCharacterEncoding("UTF-8");
             view = new RedirectView("/myaccounts.html", true, true);
         } else {
-            view = new RedirectView(URLDecoder.decode(url, "utf-8"), true, true);
+            view = new RedirectView(URLDecoder.decode(url, "UTF-8"), true, true);
         }
         view.setExpandUriTemplateVariables(false);
         return view;

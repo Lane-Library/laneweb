@@ -1,5 +1,5 @@
 (function() {
-    
+
     var Lane = Y.lane,
         location = Lane.Location,
         model = Lane.Model,
@@ -15,7 +15,7 @@
             //TODO use 'track' less
             var getEventTrackingData = function(event) {
                 var link = event.target, category = null, action = null, label = null, value = null;
-                while (link && link.get('nodeName') != 'A') {
+                while (link && link.get('nodeName') !== 'A') {
                     link = link.get('parentNode');
                 }
                 //TODO: this counts My Bookmarks clicks as well: check if href=/favorites.html and skip?
@@ -55,11 +55,11 @@
                     label = link.get('text');
                 }
                 else if (link.ancestor(".lwSearchResults")) {
-                	var list = link.ancestor(".lwSearchResults"),
-                	    pageStart = Y.one("#pageStart");
-                	// pageStart is the value in the pageStart span or 1 if its not there.
-                	pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
-                	value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
+                    var list = link.ancestor(".lwSearchResults"),
+                        pageStart = Y.one("#pageStart");
+                    // pageStart is the value in the pageStart span or 1 if its not there.
+                    pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
+                    value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
                     label = link.get('text');
                     if (searchTerms) {
                         category = "lane:searchResultClick";
@@ -71,10 +71,10 @@
                 }
                 else if (link.get('href').match('^javascript:.*bookmarklet.*')) {
                     category = "lane:bookmarklet";
-                    if ("dragend" == event.type) {
+                    if ("dragend" === event.type) {
                         category += "Drag";
                     }
-                    else if ("contextmenu" == event.type) {
+                    else if ("contextmenu" === event.type) {
                         category += "RightClick";
                     }
                     action = link.get('href');
@@ -89,17 +89,17 @@
             },
             getPageviewTrackingData = function(event) {
                 var node = event.target, host, path, query, external, title;
-                if (event.type == 'click') {
+                if (event.type === 'click') {
                     if (node.hasClass('yui3-accordion-item-trigger')) {
                         host = location.get("host");
                         path = location.get("pathname");
                         query = location.get("search");
                         external = false;
                     } else {
-                        if (node.get('nodeName') != 'A' && node.one('a')) {
+                        if (node.get('nodeName') !== 'A' && node.one('a')) {
                             node = node.one('a');
                         }
-                        while (node && node.get('nodeName') != 'A') {
+                        while (node && node.get('nodeName') !== 'A') {
                             node = node.get('parentNode');
                             if (node === null) {
                                 throw 'not trackable';
@@ -114,17 +114,17 @@
                             host = host.substring(host.indexOf("//") + 2);
                             path = host.substring(host.indexOf("/"));
                             host = host.substring(0, host.indexOf("/"));
-                        } else if (node.get('pathname').indexOf('secure/apps/proxy/credential') > -1 || node.get('host').indexOf('laneproxy') === 0) {
+                        } else if (node.get('pathname').indexOf('secure/apps/proxy/credential') > -1 || node.get('pathname').indexOf('redirect/cme') > -1 || node.get('host').indexOf('laneproxy') === 0) {
                             host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                             if (host.indexOf('/') > -1) {
                                 path = host.substring(host.indexOf('/'));
                                 if (path.indexOf('?') > -1) {
-                                	query = path.substring(path.indexOf('?'), path.length);
+                                    query = path.substring(path.indexOf('?'), path.length);
                                     path = path.substring(0, path.indexOf('?'));
                                 }
                                 host = host.substring(0, host.indexOf('/'));
                             } else {
-                            	query = '';
+                                query = '';
                                 path = '/';
                             }
                             external = true;
@@ -138,8 +138,7 @@
                                 host = host.substring(0, host.indexOf(':'));
                             }
                             path = node.get('pathname');
-                            external = host != location.get("host");
-//                            query = external ? '' : node.get('search');
+                            external = host !== location.get("host");
                             query = node.get('search');
                         }
                     }
@@ -207,7 +206,7 @@
                     rel = node.get('rel');
                     if (rel && rel.indexOf('popup') === 0) {
                         relTokens = rel.split(' ');
-                        if (relTokens[1] == 'local') {
+                        if (relTokens[1] === 'local') {
                             title = 'YUI Pop-up [local]: ' + title;
                         }
                     }
@@ -215,7 +214,7 @@
                 },
                 isTrackableAsEvent: function(event) {
                     var link = event.target;
-                    while (link !== null && link.get('nodeName') != 'A') {
+                    while (link !== null && link.get('nodeName') !== 'A') {
                         link = link.get('parentNode');
                     }
                     if (link) {
@@ -232,7 +231,7 @@
                             return true;
                         }
                         // bookmarklet drag or right-click
-                        if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" == event.type || "contextmenu" == event.type) ) {
+                        if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
                             return true;
                         }
                     }
@@ -244,7 +243,7 @@
                     if (documentHost.indexOf(':') > -1) {
                         documentHost = documentHost.substring(0, documentHost.indexOf(':'));
                     }
-                    if (event.type == 'click') {
+                    if (event.type === 'click') {
                         if (event.target.ancestor('.searchFacet')) {
                             return true;
                         }
@@ -253,7 +252,7 @@
                         }
                         //find self ancestor that is <a>
                         link = event.target;
-                        while (link && link.get('nodeName') != 'A') {
+                        while (link && link.get('nodeName') !== 'A') {
                             link = link.get('parentNode');
                         }
                         if (link) {
@@ -261,7 +260,7 @@
                             rel = link.get('rel');
                             if (rel && rel.indexOf('popup ') === 0) {
                                 relTokens = rel.split(' ');
-                                if (relTokens[1] == 'local') {
+                                if (relTokens[1] === 'local') {
                                     return true;
                                 }
                             }
@@ -269,9 +268,9 @@
                             if (linkHost.indexOf(':') > -1) {
                                 linkHost = linkHost.substring(0, linkHost.indexOf(':'));
                             }
-                            if (linkHost == documentHost) {
+                            if (linkHost === documentHost) {
                                 //track proxy logins
-                                if ((/secure\/apps\/proxy\/credential\?/).test(link.get('pathname')) && link.get('search') && link.get('search').indexOf('url=') > -1) {
+                                if (((/secure\/apps\/proxy\/credential\?/).test(link.get('pathname')) || (/redirect\/cme\?/).test(link.get('pathname'))) && link.get('search') && link.get('search').indexOf('url=') > -1) {
                                     return true;
                                 }
                                 //track cookieFetch.html
@@ -343,15 +342,15 @@
         }, document);
 
         // limit dragend listener to bookmarklet links
-        Y.on('dragend', function(e) {
+        Y.all('a[href*=bookmarklet]').on('dragend', function(e) {
             Tracker.trackEvent(e);
-        }, 'a[href*=bookmarklet]');
-        
+        });
+
         // limit right-click listener to bookmarklet links
-        Y.on('contextmenu', function(e) {
+        Y.all('a[href*=bookmarklet]').on('contextmenu', function(e) {
             Tracker.trackEvent(e);
-        }, 'a[href*=bookmarklet]');
-        
+        });
+
         //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
         if (Lane.BookmarksWidget) {
             Lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
@@ -365,7 +364,7 @@
         Y.on("suggest:select",  function(event) {
             var action = "";
             //determine whether or not to include search source value.
-            if (event.input.get("id") == "searchTerms") {
+            if (event.input.get("id") === "searchTerms") {
                 action = Lane.Search.getSearchSource();
             }
             Tracker.fire("trackableEvent", {
@@ -375,17 +374,24 @@
                 label: event.suggestion
             });
         });
-        Lane.on("search:reset",  function(event) {
+        Lane.on("search:reset",  function() {
             Tracker.fire("trackableEvent", {
                 category: "lane:searchFormReset",
                 action: location.get("pathname")
             });
         });
-        
+        Lane.on("search:sourceChange", function(event) {
+            Tracker.fire("trackableEvent", {
+                category: "lane:searchDropdownSelection",
+                action: event.newVal,
+                label: "from " + event.prevVal + " to " + event.newVal
+            });
+        });
+
         Y.augment(Tracker, Y.EventTarget, null, null, {
             prefix : "tracker",
             emitFacade : true
         });
-        
+
         Tracker.addTarget(Lane);
 })();

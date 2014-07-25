@@ -12,13 +12,13 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
             Y.Assert.areEqual(Y.lane.Location.get("href"), node.get("href"));
         }
     });
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
-    
+
+
     Y.Test.Runner.add(spellCheckTestCase);
     Y.Test.Runner.masterSuite.name = "spellcheck-test.js";
     Y.Test.Runner.run();

@@ -10,28 +10,16 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
 
-    private static final String UTD_CME_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
+    protected static final String CME_REDIRECT = "/redirect/cme?url=";
 
-    private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
+    private static final String UTD_HOST = "www.uptodate.com";
 
-    private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
+    private String basePath;
 
     private String emrid;
 
-    public void setModel(final Map<String, Object> model) {
-        this.emrid = ModelUtil.getString(model, Model.EMRID);
-    }
-
-    protected String createCMELink(final String link) {
-        StringBuffer sb = new StringBuffer();
-        if (link.contains("?")) {
-            sb.append(link).append("&").append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
-        } else if (link.endsWith("/") || link.endsWith("online")) {
-            sb.append(UTD_CME_URL).append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
-        } else {
-            sb.append(link);
-        }
-        return sb.toString();
+    protected String getBasePath() {
+        return this.basePath;
     }
 
     protected String getEmrid() {
@@ -39,11 +27,12 @@ public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe impleme
     }
 
     protected boolean isCMEHost(final String link) {
-        for (String host : UTD_HOSTS) {
-            if (link.contains(host)) {
-                return true;
-            }
-        }
-        return false;
+        return link.contains(UTD_HOST);
+    }
+
+    @Override
+    public void setModel(final Map<String, Object> model) {
+        this.emrid = ModelUtil.getString(model, Model.EMRID);
+        this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
     }
 }

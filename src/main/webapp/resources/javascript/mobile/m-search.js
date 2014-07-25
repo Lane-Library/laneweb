@@ -1,6 +1,6 @@
 /**
  * append "q" querystring from PICO form elements
- * 
+ *
  * @param form
  * @returns {String}
  */
@@ -13,7 +13,7 @@ $.LANE.getPicoQuery = function(form){
     });
     if (qString.length) {
         qString = qString.replace(/\)\(/g, ") AND (");
-        if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
+        if (qString.indexOf('(') === 0 && qString.indexOf(')') === qString.length - 1) {
             qString = qString.replace(/(\(|\))/g, '');
         }
     }
@@ -22,7 +22,7 @@ $.LANE.getPicoQuery = function(form){
 
 /**
  * verify that "qSearch" data present before submitting form
- * 
+ *
  * @param event
  * @returns {Boolean}
  */
@@ -51,7 +51,7 @@ $.LANE.validateForm = function(event){
 };
 
 /**
- * 
+ *
  * @param event
  * @returns
  */
@@ -63,47 +63,14 @@ $.LANE.validatePicoForm = function(event){
 
 
 //When the homepage is loaded, attach event listeners for search tabs and search boxes
-$("#_home").live("pageinit", function() {
+$("#_home").on("pageinit", function() {
+    // shameless agent detection ... can't get android to NOT set input focus on vclick
+    var eHandler = (navigator.userAgent.match(/(iPhone|iP.d)/)) ? 'vclick' : 'click';
     // Attach click event listener to the search tabs.
     // User can select Lane, Clinical, Pediatric search by clicking/tapping on the appropriate icon.
-    $("#searchTabs li").click(function() {
-        $("#_home .search form").removeClass("selected");
-        $($("#_home .search form").get($(this).index())).addClass("selected");
-        if($(this).index() > 0 && $(this).index() < 3) {
-            if(!$("#overlayMask").length) {
-                var maskHeight = $('.ui-mobile .ui-page-active').height();
-                $("#_home").append("<div id='overlayMask'></div>");
-                $("#overlayMask").css("height", maskHeight + 100 + "px");
-                $("#overlayMask").click(function() {
-                    $($("#searchTabs li").get(0)).trigger("vclick");
-                    $($("#searchTabs li").get(0)).trigger("click");
-                });
-            }
-        }
-        else if($("#overlayMask").length) {
-            $("#overlayMask").remove();
-        }
-        window.scrollTo(0, 46);
-    });
-    
-    // attach vclick listener (doesn't have 700 ms delay)
-    // set LI background to red to avoid flicker
-    $("#searchTabs li").bind('vclick',function(e) {
-        e.stopPropagation();
-        $("#searchTabs li").removeClass("selected");
-        $(this).addClass("selected");
-        // shameless agent detection ... remove if find solution for vclick on android (below)
-        if(navigator.userAgent.match(/(iPhone|iP.d)/)){ 
-            e.preventDefault();
-            $(this).trigger("click");
-        }
-    });
-    
-    // ideally, only use vclick handler, but can't get android to NOT set input focus
-    /* 
-    $("#searchTabs li").bind('vclick',function(e) {
+    $("#searchTabs li").bind(eHandler,function(e) {
         e.preventDefault();
-        $("li").bind('click', function(e){
+        $(this).bind('click', function(e){
             e.preventDefault();
         });
         $("#searchTabs li").removeClass("selected");
@@ -117,7 +84,7 @@ $("#_home").live("pageinit", function() {
                 $("#overlayMask").css("height", maskHeight + 100 + "px");
                 $("#overlayMask").bind('click',function(e) {
                     e.preventDefault();
-                    $($("#searchTabs li").get(0)).trigger("vclick");
+                    $($("#searchTabs li").get(0)).trigger(eHandler);
                 });
             }
         }
@@ -126,7 +93,6 @@ $("#_home").live("pageinit", function() {
         }
         window.scrollTo(0, 46);
     });
-    */
 });
 
 $(this).bind("pagebeforechange", function(e,obj) {
@@ -156,7 +122,7 @@ $(this).bind("pageinit", function() {
         if($(this).data('events') && $(this).data('events').submit){
             for(i = 0; i < $(this).data('events').submit.length; i++){
                 handler = $(this).data('events').submit[i].handler;
-                if(handler == $.LANE.validateForm||handler == $.LANE.validatePicoForm){
+                if(handler === $.LANE.validateForm||handler === $.LANE.validatePicoForm){
                     needsListener = false;
                 }
             }
@@ -170,13 +136,10 @@ $(this).bind("pageinit", function() {
             }
         }
     });
-});
-
-$("form").live("focus", function() {
-    $(this).find(":input[data-type=search]").each(function(){
+    $(":input[data-type=search]").each(function(){
         $(this).bind("focus", function() {
             // scroll down to the top of this field
             window.scrollTo(0, $(this).offset().top - 6);
         });
-    });    
+    });
 });

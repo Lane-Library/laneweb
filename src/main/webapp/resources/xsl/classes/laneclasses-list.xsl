@@ -28,7 +28,6 @@
 						</xsl:for-each-group>
 					</ul>
 				</div>
-				<div class="bottomShadowWide"></div>
 				<div class="bd">
 					<div>
 						<h4 class="plain">
@@ -48,7 +47,6 @@
 						</ul>
 					</div>
 				</div>
-				<div class="bottomShadowWide"></div>
 			</body>
 		</html>
 	</xsl:template>

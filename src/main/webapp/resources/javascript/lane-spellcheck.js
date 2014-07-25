@@ -11,7 +11,7 @@
                 success:function(id, o) {
                     var sc = Y.JSON.parse(o.responseText), a, correctedUrl;
                     if (sc.suggestion) {
-                        //if there is a suggestion show the spellcheck markup 
+                        //if there is a suggestion show the spellcheck markup
                         //and add the suggestion to the href
                         correctedUrl = Y.lane.Location.get("href").replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery);
                         //strip #facet stuff from URL (#facet=catalog-lois added when no hits)

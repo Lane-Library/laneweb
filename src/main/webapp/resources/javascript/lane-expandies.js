@@ -4,7 +4,7 @@
 
     //only do this if there are expandies
     if (expandies.size() > 0) {
-        
+
         if (Y.UA.ie && Y.UA.ie < 8) {
             //IE 7 fails to redraw footer, etc unless we do this:
             anims  = {};
@@ -95,7 +95,7 @@
          * extend Y.Base
          */
         Y.extend(ExpandyItem, Y.Base, {
-            
+
             /**
              * the initializer adds the appropriate class names
              */
@@ -114,7 +114,9 @@
                 for (i = 0; i < size; i++) {
                     anchor = anchors.item(i);
                     if (anchor.get("href") && !anchor.get("rel")) {
-                        anchor.on("click", function(event) {event.stopPropagation();});
+                        anchor.on("click", function(event) {
+                            event.stopPropagation();
+                        });
                     }
                 }
                 this.get("hd").addClass("yui3-accordion-item-hd");
@@ -154,7 +156,7 @@
          * extend Y.Base
          */
         Y.extend(ExpandyList, Y.Base, {
-            
+
             /**
              * creates the individual ExpandyItems and plugs in NodeAccordion
              */

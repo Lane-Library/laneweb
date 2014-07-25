@@ -1,7 +1,7 @@
 /**
  * Initialize and return an object to be used by each of the autocomplete instances attached to search boxes.
  * The function expects an input element
- * 
+ *
  * @param input
  * @returns {AutocompleteObj}
  */
@@ -20,7 +20,7 @@ $.LANE.createAutocompleteObject = function(input) {
                   q : request.term
                 },
                 autocompleteRequest: ++requestIndex,
-                success: function( data, status ) {
+                success: function( data ) {
                     if ( this.autocompleteRequest === requestIndex ) {
                         response($.map(data.suggest, function(item) {
                             return {
@@ -44,7 +44,7 @@ $.LANE.createAutocompleteObject = function(input) {
 
 /**
  * return appropriate data limit for this input element
- * 
+ *
  * @param input
  * @returns {String}
  */
@@ -69,7 +69,7 @@ $.LANE.getACLimit = function(input){
         return "er-mesh";
     }
 };
-    
+
 // Activate autocomplete on every input
 $(this).bind("pageinit", function() {
     $(":input[data-type=search]").each(function(){
@@ -77,25 +77,20 @@ $(this).bind("pageinit", function() {
             $(this).attr('autocorrect','off'); // TODO: shouldn't be necessary?
             $(this).autocomplete($.LANE.createAutocompleteObject($(this)));
         }
-    });
-});
-// submit form on autocomplete select if input is "qSearch"
-$("form").live("autocompleteselect", function(e, ui) {
-    if(ui.item && $(e.target).attr('name') == 'qSearch'){
-        $(e.target).val(ui.item.value);
-        $.mobile.showPageLoadingMsg();
-        //$(this)[0].submit();
-        $(this).trigger('submit');
-    }
-});
-
-$("form").live("focus", function() {
-    $(this).find(":input[data-type=search]").each(function(){
         $(this).bind("focus", function() {
             // create or enable autocomplete on input
             if($(this).hasClass('ui-autocomplete-input')){
                 $(this).autocomplete('enable');
             }
         });
-    });    
+    });
+});
+// submit form on autocomplete select if input is "qSearch"
+$("form").on("autocompleteselect", function(e, ui) {
+    if(ui.item && $(e.target).attr('name') === 'qSearch'){
+        $(e.target).val(ui.item.value);
+        $.mobile.loading('show');
+        //$(this)[0].submit();
+        $(this).trigger('submit');
+    }
 });

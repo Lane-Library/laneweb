@@ -1,3 +1,4 @@
+//TODO: determine of class="clinical" is still necessary
 (function() {
     var Lane = Y.lane,
         form = Y.one('#search'),
@@ -27,7 +28,7 @@
                 nav.removeClass('clinical');
                 picoIsOn = false;
             }
-            
+
         },
         PICO = '<fieldset id="picoFields">' +
                '<input name="p" id="clinicalP" type="text" title="patient condition"/>' +
@@ -38,7 +39,7 @@
         createPicoFields = function() {
             var i, inputs, picoSuggest, queryString = {};
             if (location.search) {
-            	queryString = Y.QueryString.parse(location.search.substring(1));
+                queryString = Y.QueryString.parse(location.search.substring(1));
             }
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
@@ -65,7 +66,7 @@
                         picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-di");
                         break;
                 }
-                picoSuggest.on("select", function(event) {
+                picoSuggest.on("select", function() {
                     if(picoIsOn && getPicoQuery()){
                         searchTerms.setValue(getPicoQuery());
                     }
@@ -82,7 +83,7 @@
             }
             if ( qString.length ){
                 qString = qString.replace(/\)\(/g, ") AND (");
-                if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
+                if (qString.indexOf('(') === 0 && qString.indexOf(')') === qString.length - 1) {
                     qString = qString.replace(/(\(|\))/g, '');
                 }
             }
@@ -94,7 +95,7 @@
             picoOn();
         }
         Lane.on('search:sourceChange', function(event) {
-            if (event.newVal == 'clinical-all'||event.newVal.indexOf('peds') === 0) {
+            if (event.newVal === 'clinical-all'||event.newVal.indexOf('peds') === 0) {
                 picoOn();
                 form.one('#clinicalP').focus();
                 if(picoTextInputs[0].getValue()){
@@ -108,9 +109,9 @@
             }
         });
         Lane.on("search:reset", function() {
-        	for (var i = 0; i < picoTextInputs.length; i++) {
-        		picoTextInputs[i].reset();
-        	}
+            for (var i = 0; i < picoTextInputs.length; i++) {
+                picoTextInputs[i].reset();
+            }
         });
     }
 })();

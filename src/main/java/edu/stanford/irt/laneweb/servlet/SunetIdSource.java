@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
+import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
@@ -30,11 +32,15 @@ public class SunetIdSource {
     /**
      * looks up the sunet id from the session, request, and lane-user cookie in that order. If it is not in the session
      * it is put there.
+     * 
+     * @param request
+     *            the servlet request
+     * @return the sunetid
      */
     public String getSunetid(final HttpServletRequest request) {
         String sunetid = null;
         HttpSession session = request.getSession();
-        synchronized(session) {
+        synchronized (session) {
             sunetid = (String) session.getAttribute(Model.SUNETID);
             if (sunetid == null) {
                 sunetid = request.getRemoteUser();

@@ -20,7 +20,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
-import edu.stanford.irt.laneweb.servlet.mvc.bookmarks.JSONBookmarkController;
 
 // TODO: make assertions about this.bookmark after done, also throw exceptions
 // when saving.
@@ -38,12 +37,11 @@ public class JSONBookmarkControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.controller = new JSONBookmarkController();
+        this.bookmarkDAO = createMock(BookmarkDAO.class);
+        this.controller = new JSONBookmarkController(this.bookmarkDAO, null, null, null);
         this.sunetid = "ditenus";
         this.bookmarks = new ArrayList<Bookmark>();
         this.bookmark = new Bookmark("label", "url");
-        this.bookmarkDAO = createMock(BookmarkDAO.class);
-        this.controller.setBookmarkDAO(this.bookmarkDAO);
     }
 
     @Test

@@ -16,12 +16,10 @@ import org.springframework.mobile.device.site.SitePreferenceHandler;
 import org.springframework.mobile.device.site.StandardSitePreferenceHandler;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 /**
  * Interceptor to switch between mobile and desktop sites. Based on Keith Donald's
  * org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor
- * 
+ *
  * @author ryanmax
  */
 public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
@@ -36,6 +34,9 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * Creates a new Interceptor with a StandardSitePreferenceHandler
+     * 
+     * @param desktopRedirects
+     *            a Map of redirects
      */
     public MobileSiteInterceptor(final Map<String, String> desktopRedirects) {
         this(new StandardSitePreferenceHandler(new CookieSitePreferenceRepository()), desktopRedirects);
@@ -43,9 +44,11 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * Creates a new site switcher.
-     * 
+     *
      * @param sitePreferenceHandler
      *            the handler for the user site preference
+     * @param desktopRedirects
+     *            a Map of redirects
      */
     public MobileSiteInterceptor(final SitePreferenceHandler sitePreferenceHandler,
             final Map<String, String> desktopRedirects) {
@@ -58,7 +61,7 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
             throws IOException {
         SitePreference sitePreference = this.sitePreferenceHandler.handleSitePreference(request, response);
         String requestURI = request.getRequestURI();
-        String basePath = (String) request.getAttribute(Model.BASE_PATH);
+        String basePath = request.getContextPath();
         if (requestURI.indexOf(MOBILE_PATH) > -1) {
             if (sitePreference == SitePreference.NORMAL) {
                 response.sendRedirect(basePath + MOBILE_HELP_PATH);

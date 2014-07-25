@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
 
@@ -18,36 +17,22 @@ import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
 @RequestMapping(value = "/secure/reloadresources")
 public class SearchContextReloaderController {
 
-    @Autowired
+    private static final String SVN_PATH = "/src/main/resources/search-lane.xml";
+
+    private static final String SVN_PROJECT_URL = "https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-lane-";
+
     private MetaSearchManagerSource msms;
 
-    private String svnUrlPath = "/src/main/resources/search-lane.xml";
-
-    private String svnUrlProject = "https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-lane-";
-
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView reloadContext(@RequestParam final String release, @RequestParam final String sunetid,
-            @RequestParam final String password) throws IOException {
-        if (!"".equals(release) && !"".equals(sunetid) && !"".equals(password)) {
-            this.msms.reload(this.svnUrlProject.concat(release).concat(this.svnUrlPath), sunetid, password);
-        }
-        return new ModelAndView("/reloadresources.html");
-    }
-
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+    @Autowired
+    public SearchContextReloaderController(final MetaSearchManagerSource msms) {
         this.msms = msms;
     }
 
-    public void setSvnUrlPath(final String svnUrlPath) {
-        this.svnUrlPath = svnUrlPath;
-    }
-
-    public void setSvnUrlProject(final String svnUrlProject) {
-        this.svnUrlProject = svnUrlProject;
-    }
-
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView view() {
-        return new ModelAndView("/reloadresources.html");
+    @RequestMapping(method = RequestMethod.POST)
+    public String reloadContext(@RequestParam final String release, @RequestParam final String sunetid,
+            @RequestParam final String password) throws IOException {
+        this.msms.reload(new StringBuilder(SVN_PROJECT_URL).append(release).append(SVN_PATH).toString(), sunetid,
+                password);
+        return "redirect:/reloadresources.html";
     }
 }

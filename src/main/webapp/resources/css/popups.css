@@ -28,7 +28,7 @@
     cursor: move;
 }
 #popupClose {
-    background-image : url(/././resources/images/sprite-all.png);
+    background-image : url(../images/sprite-all.png);
     background-position: -40px -160px;
     width: 24px;
     height: 24px;
@@ -38,7 +38,7 @@
     border-bottom: none;
 }
 #popupClose:hover {
-    background-image: url(/././resources/images/sprite-all.png);
+    background-image: url(../images/sprite-all.png);
     background-position: -40px -200px;
 }
 .yui3-popup-content .yui3-widget-bd {

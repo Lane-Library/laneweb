@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.laneweb.resource.AbstractScoreStrategy;
-import edu.stanford.irt.search.ContentResult;
+import edu.stanford.irt.search.impl.ContentResult;
 
 public class ScoreStrategy extends AbstractScoreStrategy {
 
@@ -33,6 +33,9 @@ public class ScoreStrategy extends AbstractScoreStrategy {
      *  10 desc match
      *  1
      * </pre>
+     * @param searchResult the ContentResult
+     * @param queryTermPattern a Pattern
+     * @return the resulting score
      */
     public int computeScore(final ContentResult searchResult, final Pattern queryTermPattern) {
         int score;

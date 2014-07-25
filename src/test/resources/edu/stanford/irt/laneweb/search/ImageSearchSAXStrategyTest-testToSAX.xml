@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+   <div>
+      <ul id="imageList"/>
+      <h4 id="searchImageTitle" class="plain">engine_description</h4>
+      <div id="copyright"> 10 of <a href="http://resource-url.com">100 images found</a>
+         <a rel="popup local resource_content">Copyright Information</a>
+      </div>
+      <ul id="imageList">
+         <li>
+            <a href="http://urlcontent.com">
+               <div id="image">
+                  <image src="http://image.src"/>
+               </div>
+               <div>title</div>
+            </a>
+         </li>
+      </ul>
+   </div>
+   <div>
+      <h4 id="searchImageTitle" class="plain">Bassett</h4>
+      <div id="copyright"> 1 of <a href="http://lane.stanford.edu/search.html?source=bassett&amp;q=skin">1 images found</a>
+         <a rel="popup local bassett">Copyright Information</a>
+      </div>
+      <ul id="imageList">
+         <li>
+            <a href="/biomed-resources/bassett/bassettView.html?bn=bassettNumber">
+               <div id="image">
+                  <image src="http://elane.stanford.edu/public/L254573/small/bassettSrc"/>
+               </div>
+               <div>title</div>
+            </a>
+         </li>
+      </ul>
+   </div>
+</div>

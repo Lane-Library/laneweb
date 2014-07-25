@@ -1,39 +1,67 @@
+#banner{
+    margin-left:6px;
+    margin-top:12px;
+    position:relative;
+}
+#banner img{
+    display:block;
+}
 
-#banner {
-    height : 286px;
-    _width : 730px;
-    position : relative;
-    overflow : hidden
+#banner .banner-content{
+    background-color:#333333;
+    color:#ffffff;
+    height:219px;
 }
-#banner .bannerBackground {
-    display : block
+
+.banner-content h4{
+    margin:0 12px 12px 12px;
+    padding-top:12px;
+    color:#ffffff;
+    font-size:18px;
+    font-weight:400;
+    text-transform:uppercase;
+    background-image:none;
+    padding-bottom:0;
+    font-family: 'Fjord One', serif;
 }
-.banner-content {
-    position : relative;
-    top : -286px;
-    height : 286px
+
+#banner .banner-content p{
+    margin:12px 12px 12px 12px;
+    font-family:'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
+    line-height:1.6em;
 }
-#banner .banner-nav {
-    position : absolute;
-    bottom : 18px;
-    left : 5px
+
+#banner .banner-content a{
+    color:#ffffff;
 }
-#banner li {
-    list-style : none outside none;
-    float : left;
-    margin-left : 10px;
+
+#banner .banner-nav{
+    position:absolute;
+    right:0;
+    bottom:0;
+    margin: 0 12px 5px;
 }
-.banner-nav a {
-	background: url("/././resources/images/sprite-all.png") no-repeat
-		scroll 0px -160px transparent;
-    width : 18px;
-    height : 16px;
-	padding: 0;
-	border-bottom : none;
-	display : block;
+
+#banner .banner-nav li{
+    padding:0;
+    list-style:none outside none;
+    float:left;
+    border-bottom:none;
+    border:1px white solid;
+    margin:0 0 0 8px;
+    width:18px;
+    height:16px;
 }
-.banner-nav .banner-nav-active,
-.banner-nav a:hover {
-	background: url("/././resources/images/sprite-all.png") no-repeat
-		scroll 0px -200px transparent;
+
+.banner-nav a{
+    width:100%;
+    height:100%;
+    padding:0;
+    background-color:white;
+    display:block;
+}
+
+.banner-nav .banner-nav-active{
+    background-color:transparent;
+    cursor:default;
 }

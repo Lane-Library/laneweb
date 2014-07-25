@@ -19,13 +19,13 @@ Y.use("node-event-simulate", "console", "test", function(Y){
             }, 1500);
         }
     });
-    
+
     Y.one("body").addClass("yui3-skin-sam");
     new Y.Console({
         newestOnTop: false
     }).render("#log");
-    
-    
+
+
     Y.Test.Runner.add(searchHoverTextTestCase);
     Y.Test.Runner.masterSuite.name = "hover-controller-test.js";
     Y.Test.Runner.run();

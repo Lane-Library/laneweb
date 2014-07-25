@@ -99,9 +99,18 @@
             </map:select>
             <map:transform type="namespace-filter"/>
             <map:serialize type="xml"/>
+       </map:match>
+        <map:match pattern="med-history/**.html" type="wildcard">
+            <map:aggregate type="default" element="doc" ns="http://lane.stanford.edu/ns/template">
+                <map:generate type="file" src="cocoon://content/med-history/{1}.html"/>
+                <map:generate type="file" src="cocoon://content/templates/history.xml"/>
+            </map:aggregate>
+            <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+            <map:transform type="namespace-filter"/>
+            <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="**.html" type="wildcard">
-            <map:aggregate type="default" element="doc">
+            <map:aggregate type="default" element="doc" ns="http://lane.stanford.edu/ns/template">
                 <map:generate type="file" src="cocoon://content/{1}.html"/>
                 <map:generate type="file" src="cocoon://content/templates/{template}.xml"/>
             </map:aggregate>

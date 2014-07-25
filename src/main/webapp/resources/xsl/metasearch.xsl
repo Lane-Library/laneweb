@@ -69,7 +69,7 @@
             <xsl:apply-templates select="@*"/>
             <xsl:for-each select="child::node()">
                 <xsl:choose>
-                    <xsl:when test="@class='metasearch'">
+                    <xsl:when test="contains(@class,'metasearch')">
                         <xsl:copy>
                             <xsl:apply-templates select="@*"/>
                             <xsl:attribute name="href">
@@ -77,7 +77,7 @@
                             </xsl:attribute>
                             <xsl:if test="$success = 'true'">
                                 <xsl:attribute name="class">
-                                    <xsl:value-of select="replace(@class,'metasearch','searchSuccess')"/>
+                                    <xsl:value-of select="replace(@class,'metasearch','')"/>
                                 </xsl:attribute>
                                 <!-- using target _blank here for consistency w/ JS-built links -->
                                 <xsl:attribute name="target">_blank</xsl:attribute>

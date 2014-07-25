@@ -5,12 +5,32 @@
         <link rel="stylesheet" type="text/css" href="../yui-test-3.13.0.css"/>
     </head>
     <body>
-    <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> » </span>
-        <p><a class="metasearch" id="foo">foo</a><span id="searchIndicator"/></p>
+        <form id="search" method="get" action="">
+            <fieldset id="searchFields">
+                <select name="source" id="searchSource">
+                    <option value="option1" title="title1">Option 1</option>
+                    <option value="option2" title="title2">Option 2</option>
+                    <option value="option3" title="title3">Option 3</option>
+                </select>
+                <input name="q" id="searchTerms" type="text"/>
+                <span id="searchReset" title="Clear Search">×</span>
+                <input id="searchSubmit" type="submit" value="search"/>
+            </fieldset>
+            <div id="searchIndicator"></div>
+            <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> » </span>
+        </form>
+        <p><a class="metasearch" id="pubmed">pubmed</a></p>
+        <p><a class="metasearch" id="mdc_kumar">kumar</a></p>
+        <p><a class="metasearch" id="mdc_brenner">brenner</a></p>
+        <p><a class="metasearch" id="mdc_kumar">kumar</a></p>
         <script type="text/javascript" src="../yui-test-3.13.0.js"></script>
         <script src="../../javascript/lane.js" type="text/javascript"></script>
         <script src="../../javascript/model.js" type="text/javascript"></script>
         <script src="../../javascript/search-indicator.js" type="text/javascript"></script>
+        <script src="../../javascript/lane-textinputs.js" type="text/javascript"></script>
+        <script src="../../javascript/search-select.js" type="text/javascript"></script>
+        <script src="../../javascript/suggest.js" type="text/javascript"></script>
+        <script src="../../javascript/search.js" type="text/javascript"></script>
         <script src="metasearch-test.js" type="text/javascript"></script>
         <script src="../../javascript/lane-metasearch.js" type="text/javascript"></script>
     </body>

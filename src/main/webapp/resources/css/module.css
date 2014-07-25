@@ -1,13 +1,17 @@
 .module {
-	margin-bottom: 1em;
-    line-height : 1.6em;
+	margin-top: 12px;
+	padding-top: 12px;
+	line-height: 1.6em;
+	background-color: white;
+	border: 1px solid #ccc;
+	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
 }
 
-.module .bd {
-	margin-top: 13px;
+.module p {
+	margin: 0 12px 12px 12px;
 }
 
-.module:after,.module .after {
+.module:after,.module .after,.module .bd:after {
 	content: ".";
 	display: block;
 	height: 0;
@@ -45,58 +49,77 @@
 	margin-bottom: 13px;
 	margin-right: 1em;
 }
-/* module with shadow on bottom*/
-.shadow {
-    padding-bottom : 15px;
-    margin-bottom : 15px;
-    background-image : url(/././resources/images/shadow-narrow.png);
-    background-position : bottom;
-    background-repeat : no-repeat;
-}
-.bottomShadowWide {
-    padding-top : 10px;
-    clear : left;
-    text-align : center;
-    background-image : url(/././resources/images/shadow-wide.png);
-    background-repeat : no-repeat;
-    background-position : top center;
-}
-.border {
-    border-right : 1px solid #eae9e6;
-    padding-bottom : 15px;
-    padding-right: 15px;
-}
 
-.yui3-g .module  /*module inside yui3-g to keep the margins*/ {
-    margin-top: 30px;
-    margin-right:15px;
-    margin-left: 20px;
+.border {
+	border-right: 1px solid #eae9e6;
+	padding-bottom: 15px;
+	padding-right: 15px;
 }
 
 .popular-shadow {
-    background-color : #F4F5EF;
-    border: 1px solid #dadad9;
-    padding : 1em 1em 2em 2em;
-    /*width : 85%;
+	background-color: #F4F5EF;
+	border: 1px solid #dadad9;
+	padding: 1em 1em 2em 2em;
+	/*width : 85%;
     margin-bottom : 2em;
     margin-top : 1.5em;*/
 }
+
 .popular-shadow .bd {
-    margin-bottom : 2.5em;
+	margin-bottom: 2.5em;
 }
 
-
-.module-form  /*module inside the feedback widget to  keep the margins*/{
-margin-right:15px;
+.module-form /*module inside the feedback widget to  keep the margins*/
+	{
+	margin-right: 15px;
 }
 
 .module-links-narrow {
-    float : left;
-    width : 50%;
+	float: left;
+	width: 60%;
 }
 /*only one style for the left column nav remain to keep the current page link bold*/
 .sectionMenu em {
-    font-style:normal;
-    font-weight:bold;
-    color:#820000;
+	font-style: normal;
+	font-weight: bold;
+	color: #820000;
+}
+
+.landing {
+	padding: 0
+}
+
+.landing img {
+	display: block;
+	width: 100%
+}
+
+.landing h3 {
+	color: white;
+	background-color: #09425a;
+	background-image: none;
+	margin: 0;
+	padding: 10px 0;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 18px;
+	line-height: 19.8px;
+}
+
+.landing h3 a {
+	color: white;
+}
+
+.landing p {
+	padding: 12px;
+	margin: 0;
+}
+
+.landing ul {
+	margin-top: 12px;
+}
+
+.landing ul li {
+	list-style-image: none;
+	list-style: none;
 }

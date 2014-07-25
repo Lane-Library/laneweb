@@ -5,12 +5,12 @@ import java.io.Serializable;
 import edu.stanford.irt.laneweb.LanewebException;
 
 /**
- * The Bookmark object, having a label which corresponds to the link text, and a
- * url which corresponds to the link's href attribute. It is a pseudo-immutable
- * object in that the label and url can be changed but only if they have never
- * been set. This is so the jackson-mapper library can create one with the no
- * parameter constructor then set the label and url.
+ * The Bookmark object, having a label which corresponds to the link text, and a url which corresponds to the link's
+ * href attribute. It is a pseudo-immutable object in that the label and url can be changed but only if they have never
+ * been set. This is so the jackson-mapper library can create one with the no parameter constructor then set the label
+ * and url.
  */
+// TODO: make this class immutable by using a builder
 public class Bookmark implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,9 +29,11 @@ public class Bookmark implements Serializable {
 
     /**
      * Create a new Bookmark.
-     * 
+     *
      * @param label
+     *            the text associated with the bookmark
      * @param url
+     *            the url associated with the bookmark
      * @throws LanewebException
      *             if either the label or url are null.
      */
@@ -48,7 +50,7 @@ public class Bookmark implements Serializable {
 
     /**
      * Uses the hashCode() and equals() from the label and url.
-     * 
+     *
      * @return true if url and label are the same in both Bookmarks
      */
     @Override
@@ -63,7 +65,7 @@ public class Bookmark implements Serializable {
 
     /**
      * Getter for the label.
-     * 
+     *
      * @return the label
      */
     public String getLabel() {
@@ -72,7 +74,7 @@ public class Bookmark implements Serializable {
 
     /**
      * Getter for the url.
-     * 
+     *
      * @return the url
      */
     public String getUrl() {
@@ -81,7 +83,7 @@ public class Bookmark implements Serializable {
 
     /**
      * ANDs the label and url hashCodes.
-     * 
+     *
      * @return label.hashCode() ^ url.hashCode();
      */
     @Override
@@ -94,8 +96,9 @@ public class Bookmark implements Serializable {
 
     /**
      * Set the label.
-     * 
+     *
      * @param label
+     *            the text associted with the bookmark
      * @throws LanewebException
      *             if the label is null or has already been set.
      */
@@ -111,8 +114,9 @@ public class Bookmark implements Serializable {
 
     /**
      * Set the url
-     * 
+     *
      * @param url
+     *            the url associated with the bookmark
      * @throws LanewebException
      *             if the url is null or has already been set.
      */

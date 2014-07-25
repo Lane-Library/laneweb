@@ -9,13 +9,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class AbstractMetasearchGeneratorTest {
 
-    private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator {
+    private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator<Result> {
 
         public TestAbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
             super(metaSearchManager, saxStrategy);
@@ -27,7 +27,7 @@ public class AbstractMetasearchGeneratorTest {
         }
     }
 
-    private AbstractMetasearchGenerator generator;
+    private AbstractMetasearchGenerator<Result> generator;
 
     private MetaSearchManager manager;
 
@@ -46,17 +46,17 @@ public class AbstractMetasearchGeneratorTest {
 
     @Test
     public void testDescribe() {
-        expect(this.manager.describe(this.query, null)).andReturn(null);
+        expect(this.manager.describe(this.query)).andReturn(null);
         replay(this.manager);
-        this.generator.describe(this.query, null);
+        this.generator.describe(this.query);
         verify(this.manager);
     }
 
     @Test
     public void testSearch() {
-        expect(this.manager.search(this.query, 10, null, true)).andReturn(null);
+        expect(this.manager.search(this.query, 10, true)).andReturn(null);
         replay(this.manager);
-        this.generator.search(this.query, 10, null, true);
+        this.generator.search(this.query, 10, true);
         verify(this.manager);
     }
 }

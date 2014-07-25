@@ -1,15 +1,13 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * sends Disallow: / if not production server. NOTE: CAB group has asked to be
@@ -33,12 +31,8 @@ public class RobotsDotTextServlet extends HttpServlet {
     private byte[] production;
 
     public RobotsDotTextServlet() {
-        try {
-            this.production = PRODUCTION.getBytes("UTF-8");
-            this.nonproduction = NONPRODUCTION.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new LanewebException(e);
-        }
+        this.production = PRODUCTION.getBytes(StandardCharsets.UTF_8);
+        this.nonproduction = NONPRODUCTION.getBytes(StandardCharsets.UTF_8);
     }
 
     @Override

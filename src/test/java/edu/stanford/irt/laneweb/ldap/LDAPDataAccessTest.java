@@ -7,6 +7,9 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+
+import java.util.Collections;
 
 import javax.security.auth.Subject;
 
@@ -29,18 +32,39 @@ public class LDAPDataAccessTest {
 
     private Logger log;
 
+    private LDAPData ldapData;
+
     @Before
     public void setUp() {
         this.ldapTemplate = createMock(LdapTemplate.class);
         this.log = createMock(Logger.class);
         this.subjectSource = createMock(SubjectSource.class);
-        this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.log, this.subjectSource);
+        this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.subjectSource, Collections.<String>emptySet(), this.log);
+        this.ldapData = createMock(LDAPData.class);
     }
 
     @Test
     public void testGetUserInfo() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
+        expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(Collections.singletonList(this.ldapData));
+        replay(this.subjectSource, this.ldapTemplate);
+        assertSame(this.ldapData, this.lDAPDataAccess.getLdapDataForSunetid("ditenus"));
+        verify(this.subjectSource, this.ldapTemplate);
+    }
+
+    @Test
+    public void testGetUserInfoNull() {
+        expect(this.subjectSource.getSubject()).andReturn(this.subject);
         expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
+        replay(this.subjectSource, this.ldapTemplate);
+        this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
+        verify(this.subjectSource, this.ldapTemplate);
+    }
+
+    @Test
+    public void testGetUserInfoEmpty() {
+        expect(this.subjectSource.getSubject()).andReturn(this.subject);
+        expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(Collections.emptyList());
         replay(this.subjectSource, this.ldapTemplate);
         this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
         verify(this.subjectSource, this.ldapTemplate);

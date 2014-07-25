@@ -7,8 +7,8 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultSearchResult> {
 
@@ -39,6 +39,7 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
         ContentResult contentResult = result.getContentResult();
         Result resourceResult = result.getResourceResult();
         try {
+            // TODO: access to resourceResult should be synchronized
             String resourceName = resourceResult.getDescription();
             int resourceHits = Integer.parseInt(resourceResult.getHits());
             if (resourceName.indexOf(PUBMED) == 0) {

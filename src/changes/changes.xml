@@ -7,6 +7,434 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-07-21" version="2.2.10" description="2.2.10 bug fix release">
+            <action date="2014-07-21" dev="olgary" issue="98455" type="fix">
+                Bad Links on all History Portal pages
+            </action>
+        </release>
+        <release date="2014-07-21" version="2.2.9" description="2.2.9 bug fix release [not deployed]">
+            <action date="2014-07-20" dev="ceyates" issue="98489" type="fix">
+                metasearch hit counts fail to appear in some circumstances
+            </action>
+            <action date="2014-07-10" dev="ceyates" issue="98324" type="update">
+                align Top Resources title and a golfclub with the other titles (My Medical library)
+            </action>
+            <action date="2014-07-09" dev="ceyates" issue="98316" type="update">
+                make margin-right: 12px for li, but not for top resources
+            </action>
+            <action date="2014-07-09" dev="ceyates" issue="98308" type="add">
+                make a variation for a button with red background
+            </action>
+            <action date="2014-07-08" dev="olgary" issue="98304" type="update">
+                debug.xml, template.xml - change wording to "All Biomedical Resources"
+            </action>
+            <action date="2014-07-09" dev="ceyates" issue="98295" type="fix">
+                backgrounds not extending fully across the page
+            </action>
+            <action date="2014-07-07" dev="ceyates" issue="98289" type="update">
+                make h3 margin-right 12px
+            </action>
+            <action date="2014-07-09" dev="ceyates" issue="98285" type="update">
+                style dates - colored blocks
+            </action>
+            <action date="2014-07-11" dev="olgary" issue="98283" type="update">
+                style a new smaller banner as shown on inside lane: https://insidelane.stanford.edu/wp-content/uploads/2014/04/homepage2.jpg
+            </action>
+            <action date="2014-07-07" dev="ceyates" issue="98282" type="update">
+                top resources list - wrap into 2 columns
+            </action>
+            <action date="2014-07-07" dev="ceyates" issue="98281" type="update">
+                remove underline from the last &lt;li&gt; in ul
+            </action>
+        </release>
+        <release date="2014-07-14" version="2.2.8" description="2.2.8 bug fix release">
+            <action date="2014-07-14" dev="ceyates" issue="98374" type="update">
+                upgrade to search-lane-2.0.9
+            </action>
+        </release>
+        <release date="2014-07-07" version="2.2.7" description="2.2.7 bug fix release">
+            <action date="2014-07-06" dev="ceyates" issue="98276" type="fix">
+                lists meant to be float:left, aren't
+            </action>
+            <action date="2014-07-03" dev="ryanmax" issue="98266" type="update">
+                change for GR block on homepage
+            </action>
+            <action date="2014-07-04" dev="ceyates" issue="98265" type="fix">
+                bookmark link for new buttons inherit blue background
+            </action>
+            <action date="2014-07-03" dev="olgary" issue="98236" type="update">
+                make the h headings convert to all caps in css, and change red background to #09425a
+            </action>
+            <action date="2014-07-06" dev="ceyates" issue="98235" type="fix">
+                not enough margin between searchFacets and results
+            </action>
+            <action date="2014-07-01" dev="ryanmax" issue="98223" type="fix">
+                PubMed abstracts sometimes display incorrectly
+            </action>
+            <action date="2014-06-30" dev="ryanmax" issue="98218" type="fix">
+                metasearch content ranking not working correctly
+            </action>
+        </release>
+        <release date="2014-06-30" version="2.2.6" description="2.2.6 bug fix release">
+            <action date="2014-06-26" dev="ceyates" issue="98183" type="update">
+                bioresearch and textbook search result pages badly layed out
+            </action>
+            <action date="2014-06-26" dev="ceyates" issue="98179" type="update">
+                make margin-top: 18px for h2 and h3
+            </action>
+            <action date="2014-06-27 " dev="ceyates" issue="98178" type="add">
+                styles for landing page blocks
+            </action>
+            <action date="2014-06-26" dev="ceyates" issue="98177" type="remove">
+                remove history search from drop down
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98172" type="fix">
+                floated module-links-narrow class not cleared in some places
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98168" type="fix">
+                ordered list numbers are outside content div
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98165" type="fix">
+                golf clubs for h2 in history center don't work..
+            </action>
+            <action date="2014-06-26" dev="ceyates" issue="98163" type="update">
+                change paths from /med-history-new to /med-history
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98159" type="update">
+                run left/right golf clubs all the way to the edges...
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98155" type="update">
+                do not create proxy links for med-history pages
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98154" type="update">
+                change title for flickr icon in template....
+            </action>
+            <action date="2014-06-24" dev="olgary" issue="98145" type="update">
+                changed misc.css - change styles for announcement to match SoM
+            </action>
+            <action date="2014-06-24" dev="ceyates" issue="98144" type="update">
+                make 'book' logo clickable
+            </action>
+            <action date="2014-06-24" dev="ceyates" issue="98142" type="fix">
+                header elements in history template footer have incorrect style
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98139" type="fix">
+                on some portal pages, floats are not cleared
+            </action>
+            <action date="2014-06-24" dev="ceyates" issue="98138" type="fix">
+                Teaching Support link in lane footer is broken
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98137" type="fix">
+                h2 elements that wrap look ugly
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98136" type="fix">
+                search results are not contained in a white box
+            </action>
+            <action date="2014-06-20" dev="ceyates" issue="98110" type="update">
+                add golf clubs under h3 and h4, add golf clubs to the side of h2, center h2
+            </action>
+            <action date="2014-06-20" dev="ceyates" issue="98107" type="update">
+                12px width between the index cards
+            </action>
+            <action date="2014-06-25" dev="ceyates" issue="98105" type="update">
+                make the search filters box wider to fit 'save the search' button
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98075" type="remove">
+                remove history links from lane nav
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98073" type="update">
+                change styles for the content blocks
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98072" type="update">
+                remove white background from the content area
+            </action>
+            <action date="2014-06-28" dev="ceyates" issue="98058" type="fix">
+                fix the drop downs for history site to match SoM styles
+            </action>
+        </release>
+        <release date="2014-06-23" version="2.2.5" description="2.2.5 bug fix release">
+            <action date="2014-06-20" dev="ceyates" issue="98106" type="update">
+                reposition search in progress wheel and need help link
+            </action>
+            <action date="2014-06-20" dev="ceyates" issue="98104" type="update">
+                separate content from search container by 12 px
+            </action>
+            <action date="2014-06-20" dev="ceyates" issue="98103" type="update">
+                Make more space between global nav links
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98090" type="update">
+                put a delay back on main nav drop down.
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98088" type="update">
+                make top and bottom padding for the search box 30px
+            </action>
+            <action date="2014-06-19" dev="ceyates" issue="98087" type="update">
+                remove gradient from red bar, make it flat red: #8C1515
+            </action>
+            <action date="2014-06-18" dev="ceyates" issue="98062" type="update">
+                bold 'MyLane Login' link in the header
+            </action>
+            <action date="2014-06-23" dev="ceyates" issue="98060" type="add">
+                css for button - match SoM blue button with an arrow
+            </action>
+        </release>
+        <release date="2014-06-18" version="2.2.4" description="2.2.4 emergency release">
+            <action date="2014-06-17" dev="ryanmax" issue="98047" type="fix">
+                metasearch results lack url
+            </action>
+        </release>
+        <release date="2014-06-17" version="2.2.3" description="2.2.3 emergency release">
+            <action date="2014-06-17" dev="ceyates" issue="98045" type="update">
+                restore quick links
+            </action>
+        </release>
+        <release date="2014-06-16" version="2.2.2" description="2.2.2 bug fix release">
+            <action date="2014-06-16" dev="ceyates" issue="98022" type="fix">
+                lightbox background does not cover viewport
+            </action>
+            <action date="2014-06-13" dev="ceyates" issue="98000" type="fix">
+                search results overlap the red bar  on the top
+            </action>
+            <action date="2014-06-13" dev="ceyates" issue="97998" type="fix">
+                some footer links are incorrect
+            </action>
+            <action date="2014-06-12" dev="ceyates" issue="97976" type="update">
+                change gray to a darker shade for the main Lane nav
+            </action>
+            <action date="2014-06-11" dev="ceyates" issue="97971" type="remove">
+                remove delay for Lane nav drop downs
+            </action>
+            <action date="2014-06-12" dev="ceyates" issue="97965" type="update">
+                move Search Help link and rename to Need Help? 
+            </action>
+            <action date="2014-06-11" dev="ceyates" issue="97963" type="update">
+                change color for the main navigation
+            </action>
+            <action date="2014-06-11" dev="ceyates" issue="97962" type="update">
+                switch position of the global nav and search boxes
+            </action>
+            <action date="2014-06-09" dev="ryanmax" issue="97946" type="fix">
+                mobile: get password links produce security error 
+            </action>
+            <action date="2014-06-09" dev="ryanmax" issue="97646" type="add">
+                UTD, ezproxy and CME links
+            </action>
+            <action date="2014-06-12" dev="ceyates" issue="97645" type="update">
+                change My Lane link depending on logged in state
+            </action>
+        </release>
+        <release date="2014-06-09" version="2.2.1" description="2.2.1 bug fix release">
+            <action date="2014-06-09" dev="ceyates" issue="97953" type="update">
+                make the Stanford University h2 less wide
+            </action>
+            <action date="2014-06-09" dev="ceyates" issue="97952" type="update">
+                add SearchWorks link to Stanford drop down menu
+            </action>
+            <action date="2014-06-09" dev="ceyates" issue="97951" type="fix">
+                Stanford misspelled in lane-subfooter
+            </action>
+            <action date="2014-06-09" dev="ceyates" issue="97945" type="update">
+                align background for Stanford University logo in top nav
+            </action>
+        </release>
+        <release date="2014-06-09" version="2.2.0" description="2.2.0 redesign release">
+            <action date="2014-06-07" dev="ceyates" issue="97932" type="update">
+                Stretch header and footer to edge of window
+            </action>
+            <action date="2014-06-07" dev="ceyates" issue="97931" type="update">
+                Change background color to #ecf1f2
+            </action>
+            <action date="2014-06-06" dev="alainb" issue="97913" type="update">
+                Feedback-bug:  Classes page needs new coding
+            </action>
+            <action date="2014-06-07" dev="ceyates" issue="97886" type="update">
+                flip the menu for Stanford logo inward (opening to the left, not right)
+            </action>
+            <action date="2014-06-05" dev="ceyates" issue="97884" type="update">
+                Align top logos with the edges of the site, not browser
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97854" type="update">
+                Changed a link name in the Global Navigation from Biomed Resources to All Resources
+            </action>
+            <action date="2014-06-02" dev="olgary" issue="97852" type="update">
+                Change main link color to SoM blue, remove link underline
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97851" type="update">
+                Addition of the drop down menus for SoM and Stanford logos in the top bar
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97850" type="update">
+                Addition of Lane global top header
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97849" type="update">
+                Addition of SoM main footer
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97848" type="update">
+                Visual modifications to the Lane footer
+            </action>
+            <action date="2014-06-08" dev="ceyates" issue="97826" type="update">
+                complete step 3 of redesign
+            </action>
+            <action date="2014-06-03" dev="ceyates" issue="97825" type="update">
+                complete step 2 of redesign
+            </action>
+        </release>
+        <release date="2014-05-12" version="2.1.57" description="2.1.57 bug fix release">
+            <action date="2014-05-28" dev="ryanmax" issue="97775" type="update">
+                print search results: hide left column for Firefox
+            </action>
+            <action date="2014-05-27" dev="ceyates" issue="97768" type="update">
+                Update bookmark hover message
+            </action>
+            <action date="2014-05-29" dev="ryanmax" issue="97767" type="add">
+                separate feedback form into 4 pages with distinct URLs
+            </action>
+            <action date="2014-05-20" dev="ryanmax" issue="97715" type="fix">
+                pubmed abstract formatting bug
+            </action>
+            <action date="2014-05-14" dev="ceyates" issue="97657" type="update">
+                use relative urls in css files
+            </action>
+        </release>
+        <release date="2014-05-12" version="2.1.56" description="2.1.56 bug fix release">
+            <action date="2014-05-08" dev="ceyates" issue="97524" type="add">
+                Create filter to return an error code if there is a -1%27 parameter
+            </action>
+            <action date="2014-05-06" dev="ceyates" issue="97496" type="update">
+                update STAFF ip group
+            </action>
+            <action date="2014-05-06" dev="ryanmax" issue="96798" type="add">
+                Google Analytics - Tracking search "selection" for mobile site
+            </action>
+            <action date="2014-05-06" dev="ryanmax" issue="94676" type="fix">
+                Uncaught RangeError: Maximum call stack size exceeded in m-search.js
+            </action>
+        </release>
+        <release date="2014-05-05" version="2.1.55" description="2.1.55 bug fix release">
+            <action date="2014-05-01" dev="ceyates" issue="97393" type="remove">
+                remove crossdb_unists from metasearch
+            </action>
+        </release>
+        <release date="2014-04-28" version="2.1.54" description="2.1.54 bug fix release">
+            <action date="2014-04-28" dev="ceyates" issue="97227" type="update">
+                upgrade to search-2.0
+            </action>
+        </release>
+        <release date="2014-04-14" version="2.1.53" description="2.1.53 bug fix release">
+        </release>
+        <release date="2014-04-07" version="2.1.52" description="2.1.52 bug fix release">
+            <action date="2014-04-01" dev="ceyates" issue="96960" type="add">
+                return a 403 error for requests containing a show parameter
+            </action>
+            <action date="2014-04-01" dev="ceyates" issue="96959" type="update">
+                don't create 404 page for short extension-suggest requests
+            </action>
+        </release>
+        <release date="2014-03-31" version="2.1.51" description="2.1.51 bug fix release">
+            <action date="2014-03-20" dev="ryanmax" issue="96798" type="add">
+                Google Analytics - Tracking search "selection" for mobile site
+            </action>
+            <action date="2014-03-19" dev="ceyates" issue="96771" type="update">
+                History search: Order results with highest # of hits at the top
+            </action>
+            <action date="2014-03-19" dev="ceyates" issue="96764" type="update">
+                Remove the search results when 0 results
+            </action>
+        </release>
+        <release date="2014-03-17" version="2.1.50" description="2.1.50 bug fix release">
+            <action date="2014-03-14" dev="ceyates" issue="96722" type="fix">
+                respond to /errordocs/&lt;code&gt;err.html
+            </action>
+            <action date="2014-03-13" dev="ceyates" issue="96659" type="remove">
+                remove yui2 grids
+            </action>
+            <action date="2014-03-11" dev="ryanmax" issue="95169" type="add">
+                label print resources
+            </action>
+        </release>
+        <release date="2014-03-10" version="2.1.49" description="2.1.49 bug fix release">
+            <action date="2014-03-10" dev="ceyates" issue="96655" type="fix">
+                increase in CPU and memory usage since laneweb-2.1.47
+            </action>
+        </release>
+        <release date="2014-03-03" version="2.1.48" description="2.1.48 bug fix release">
+        </release>
+        <release date="2014-02-24" version="2.1.47" description="2.1.47 bug fix release">
+            <action date="2014-02-19" dev="olgary" issue="96394" type="remove">
+                removed shadow from highlighted resources, removed IE6 styles
+            </action>
+            <action date="2014-02-19" dev="olgary" issue="96391" type="remove">
+                removed bold font style for meta search results (.searchSuccess)
+            </action>
+            <action date="2014-02-12" dev="ceyates" issue="96317" type="remove">
+                remove the shaded borders, corners
+            </action>
+            <action date="2014-02-12" dev="olgary" issue="96308" type="update">
+                add font awesome icons, change  styles, remove reference to icons in sprite
+            </action>
+            <action date="2014-02-12" dev="ceyates" issue="96304" type="fix">
+                bookmarks editor and widget get out of sync
+            </action>
+            <action date="2014-02-10" dev="ceyates" issue="95798" type="remove">
+                remove /stage processing feature
+            </action>
+            <action date="2014-02-18" dev="ceyates" issue="94950" type="update">
+                provide hit count results for history search
+            </action>
+        </release>
+        <release date="2014-02-13" version="2.1.46" description="2.1.46 emergency release">
+            <action date="2014-02-13" dev="ceyates" issue="96335" type="fix">
+                logs are not rotating
+            </action>
+        </release>
+        <release date="2014-02-10" version="2.1.45" description="2.1.45 bug fix release">
+            <action date="2014-02-06" dev="ryanmax" issue="95792" type="fix">
+                stale content in CME and Grand Rounds sections of home page
+            </action>
+        </release>
+        <release date="2014-02-04" version="2.1.44" description="2.1.44 emergency release">
+            <action date="2014-02-04" dev="ceyates" issue="96184" type="fix">
+                bioresearch metasearch broken
+            </action>
+        </release>
+        <release date="2014-02-03" version="2.1.43" description="2.1.43 bug fix release">
+            <action date="2014-01-29" dev="ryanmax" issue="95577" type="update">
+                spam assistance: filter by referrer before sending mail
+            </action>
+            <action date="2014-01-28" dev="ryanmax" issue="95502" type="fix">
+                null username and ticket in proxy server requests
+            </action>
+            <action date="2014-01-28" dev="ryanmax" issue="95514" type="update">
+                upgrade jquery mobile library
+            </action>
+            <action date="2014-01-31" dev="olgary" issue="95321" type="remove">
+                remove expandees classes
+            </action>
+            <action date="2014-01-29" dev="olgary" issue="95130" type="update">
+                Change Google + link - template.xml, debug.xml
+            </action>
+        </release>
+        <release date="2014-01-27" version="2.1.42" description="2.1.42 bug fix release">
+            <action date="2014-01-27" dev="ceyates" issue="95443" type="fix">
+                xincludes with xpointer attribute are broken
+            </action>
+        </release>
+        <release date="2014-01-27" version="2.1.41" description="2.1.41 bug fix release [not deployed]">
+            <action date="2014-01-24" dev="ceyates" issue="95298" type="update">
+                widen metasearch input on portal pages
+            </action>
+            <action date="2014-01-17" dev="ceyates" issue="95122" type="update">
+                change logging framework from log4j to logback
+            </action>
+            <action date="2014-01-22" dev="ceyates" issue="79330" type="fix">
+                bookmarked links added to list without proxied urls
+            </action>
+            <action date="2014-01-21" dev="ceyates" issue="79139" type="update">
+                refactor feedback handler so that there is a separate validator for each form.
+            </action>
+            <action date="2014-01-21" dev="ceyates" issue="78579" type="fix">
+                DocumentBuilder attempts to connect to www.w3.org
+            </action>
+        </release>
         <release date="2014-01-13" version="2.1.40" description="2.1.40 bug fix release">
             <action date="2014-01-10" dev="olgary" issue="95036" type="update">
                 update template.xml, debug.xml - fix link order in portal dropdown, add new link for PCAP portal

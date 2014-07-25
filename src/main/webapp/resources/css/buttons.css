@@ -1,4 +1,66 @@
 /*this file also has styles for the tabs*/
+
+/*class button for mimicing SOM buttons.  See markup at:
+http://lane.stanford.edu/samples/button-css.html
+ */
+.button{
+    font-size:14px;
+    font-weight:400;
+    padding:5.25px 10.5px;
+    border:1px #CCCCCC solid;
+    border-radius:3.5px;
+    cursor:pointer;
+    background-color:#F1F1F1;
+    display:inline-block;
+}
+.button:hover{
+    border-color:#ADADAD;
+}
+.button span{
+    background-color:#007C92;
+    color:#FFFFFF;
+    padding:7px 12px 7px 7px;
+    border-radius:4px;
+    margin-right:6px;
+    display:inline-block;
+}
+.button span .icon{
+    background-color:#FFFFFF;
+    border-radius:12px;
+    font-size:13px;
+    height:16px;
+    width:16px;
+    padding:4px;
+    margin-right:6px;
+    line-height:15px;
+}
+.button .icon{
+    color:#007C92;
+    text-align:center;
+}
+.button *{
+    vertical-align:middle;
+}
+.button.alt1 span{
+    background-color:#8C1515
+}
+.button.alt1 .icon{
+    color:#8C1515
+}
+
+.my-lane{
+    display:block;
+    width:135px;
+    padding:10px 10px 10px 68px;
+    background-color:rgb(235, 240, 241);
+    background-image:url(../graphics/2014/my-lane.png);
+    background-position:9px 7px;
+    background-repeat:no-repeat;
+    line-height:18px;
+    border:1px rgb(203, 192, 193) solid;
+    box-shadow:0px 0px 2px rgb(203, 192, 193);
+}
+
 /* styles for css buttons ----------------------------------------------------------------------- */
 .red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn,.submitButton
 {

@@ -24,8 +24,36 @@
                 </constructor-arg>
             </bean>
         </constructor-arg>
-        <constructor-arg ref="org.slf4j.Logger/LDAPDataAccess"/>
         <constructor-arg ref="edu.stanford.irt.laneweb.ldap.SubjectSource"/>
+        <constructor-arg>
+            <set>
+                <value>stanford:affiliate:sponsored</value>
+                <value>stanford:faculty*</value>
+                <value>stanford:faculty:onleave</value>
+                <value>stanford:faculty:otherteaching</value>
+                <value>stanford:faculty:slac</value>
+                <value>stanford:faculty</value>
+                <value>stanford:faculty:affiliate</value>
+                <value>stanford:faculty:emeritus</value>
+                <value>stanford:faculty:retired</value>
+                <value>stanford:staff*</value>
+                <value>stanford:staff</value>
+                <value>stanford:staff:academic</value>
+                <value>stanford:faculty:onleave</value>
+                <value>stanford:staff:emeritus</value>
+                <value>stanford:staff:otherteaching</value>
+                <value>stanford:staff:temporary</value>
+                <value>stanford:staff:casual</value>
+                <value>stanford:student*</value>
+                <value>stanford:student</value>
+                <value>stanford:student:onleave</value>
+                <value>stanford:student:postdoc</value>
+                <value>stanford:student:mla</value>
+                <value>stanford:student:ndo</value>
+                <value>sumc:staff</value>
+            </set>
+        </constructor-arg>
+        <constructor-arg ref="org.slf4j.Logger/LDAPDataAccess"/>
     </bean>
     
     <bean class="edu.stanford.irt.laneweb.email.EMailSender">
@@ -47,19 +75,29 @@
                 <value>96.47.224.218</value>
                 <value>192.119.144.96</value>
                 <value>192.119.151.127</value>
+                <value>178.32.54.240</value>
+            </set>
+        </constructor-arg>
+        <constructor-arg>
+            <set>
+                <value>http://lane.stanford.edu/dept/anthropology/cgi-bin/web/index.html?q=user</value>
+                <value>http://lane.stanford.edu/dept/anthropology/cgi-bin/web/index.html?q=user/register</value>
             </set>
         </constructor-arg>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.ldap.SubjectSource"
           class="edu.stanford.irt.laneweb.ldap.SubjectSource">
-        <property name="name" value="IRT_K5"/>
+        <constructor-arg value="IRT_K5"/>
+        <constructor-arg ref="org.slf4j.Logger/errorhandler"/>
     </bean>
     
     <bean class="edu.stanford.irt.spell.PubmedESpellChecker"/>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXParser/xml"
-        class="edu.stanford.irt.cocoon.xml.JaxpSAXParser"/>
+        class="edu.stanford.irt.cocoon.xml.JaxpSAXParser">
+        <constructor-arg ref="javax.xml.parsers.SAXParserFactory"/>
+    </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXParser/html"
         class="edu.stanford.irt.laneweb.cocoon.HTMLSAXParser"
@@ -116,19 +154,54 @@
         scope="request">
     </bean>
     
+    <bean name="javax.xml.parsers.DocumentBuilderFactory"
+        class="edu.stanford.irt.cocoon.spring.DocumentBuilderFactoryBean">
+        <constructor-arg value="org.apache.xerces.jaxp.DocumentBuilderFactoryImpl"/>
+        <property name="coalescing" value="false"/>
+        <property name="expandEntityReferences" value="true"/>
+        <property name="ignoringComments" value="false"/>
+        <property name="ignoringElementContentWhitespace" value="false"/>
+        <property name="namespaceAware" value="true"/>
+        <property name="validating" value="false"/>
+        <property name="XIncludeAware" value="false"/>
+        <property name="features">
+            <map>           
+                <entry key="http://apache.org/xml/features/nonvalidating/load-external-dtd" value="false"/>
+            </map>
+        </property>
+    </bean>
+    
+    <bean name="javax.xml.parsers.SAXParserFactory"
+        class="edu.stanford.irt.cocoon.spring.SAXParserFactoryBean">
+        <constructor-arg value="org.apache.xerces.jaxp.SAXParserFactoryImpl"/>
+        <property name="namespaceAware" value="true"/>
+        <property name="validating" value="false"/>
+        <property name="XIncludeAware" value="false"/>
+        <property name="features">
+            <map>
+                <entry key="http://apache.org/xml/features/nonvalidating/load-external-dtd" value="false"/>
+            </map>
+        </property>
+    </bean>
+    
     <bean name="javax.xml.transform.sax.SAXTransformerFactory/saxon"
-        class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
-        <property name="transformerFactoryClass" value="net.sf.saxon.TransformerFactoryImpl"/>
+        class="edu.stanford.irt.cocoon.spring.SAXTransformerFactoryBean">
+        <constructor-arg value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
     
     <bean name="javax.xml.transform.sax.SAXTransformerFactory/joost"
-        class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
-        <property name="transformerFactoryClass" value="net.sf.joost.trax.TransformerFactoryImpl"/>
+        class="edu.stanford.irt.cocoon.spring.SAXTransformerFactoryBean">
+        <constructor-arg value="net.sf.joost.trax.TransformerFactoryImpl"/>
     </bean>
     
-    <bean name="javax.xml.transform.sax.SAXTransformerFactory/xalan"
-        class="edu.stanford.irt.laneweb.util.SAXTransformerFactoryBean">
-        <property name="transformerFactoryClass" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
+    <bean name="javax.xml.transform.TransformerFactory"
+        class="edu.stanford.irt.cocoon.spring.TransformerFactoryBean">
+        <constructor-arg value="net.sf.saxon.TransformerFactoryImpl"/>
+    </bean>
+    
+    <bean name="javax.xml.xpath.XPathFactory"
+        class="edu.stanford.irt.cocoon.spring.XPathFactoryBean">
+        <constructor-arg value="com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon"
@@ -141,13 +214,6 @@
     <bean name="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost"
         class="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory">
         <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/joost"/>
-        <constructor-arg ref="javax.xml.transform.URIResolver"/>
-        <constructor-arg ref="javax.xml.transform.ErrorListener"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/xalan"
-        class="edu.stanford.irt.cocoon.xml.TransformerHandlerFactory">
-        <constructor-arg ref="javax.xml.transform.sax.SAXTransformerFactory/xalan"/>
         <constructor-arg ref="javax.xml.transform.URIResolver"/>
         <constructor-arg ref="javax.xml.transform.ErrorListener"/>
     </bean>
@@ -172,8 +238,8 @@
                 <entry key="paging" value="edu.stanford.irt.laneweb.eresources.PagingData"/>
                 <entry key="region" value="edu.stanford.irt.laneweb.bassett.RegionCount"/>
                 <entry key="bassett" value="edu.stanford.irt.laneweb.bassett.BassettImage"/>
-                <entry key="mresource" value="edu.stanford.irt.search.impl.DefaultContentResult"/>
-                <entry key="result" value="edu.stanford.irt.search.impl.DefaultResult"/>-->
+                <entry key="mresource" value="edu.stanford.irt.search.impl.ContentResult"/>
+                <entry key="result" value="edu.stanford.irt.search.impl.Result"/>-->
                 <entry key="bookmark" value="edu.stanford.irt.laneweb.bookmarks.Bookmark"/>
             </map>
         </property>
@@ -187,6 +253,9 @@
     <bean id="edu.stanford.irt.cocoon.xml.XPointerProcessor"
         class="edu.stanford.irt.cocoon.xml.xpointer.XPointerProcessorImpl">
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
+        <constructor-arg ref="javax.xml.xpath.XPathFactory"/>
+        <constructor-arg ref="javax.xml.parsers.DocumentBuilderFactory"/>
+        <constructor-arg ref="javax.xml.transform.TransformerFactory"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.XIncludePipe"
@@ -207,20 +276,20 @@
         <property name="placeholderPrefix" value="%{"></property>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.servlet.SHCCodec"
-        class="edu.stanford.irt.laneweb.servlet.SHCCodec">
+    <bean id="edu.stanford.irt.laneweb.codec.SHCCodec"
+        class="edu.stanford.irt.laneweb.codec.SHCCodec">
         <constructor-arg value="%{laneweb.shccodec.key}"/>
         <constructor-arg value="%{laneweb.shccodec.vector}"/>
         <constructor-arg ref="org.slf4j.Logger/SHCCodec"/>
     </bean>
     
-    <bean class="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec">
+    <bean class="edu.stanford.irt.laneweb.codec.SunetIdCookieCodec">
         <constructor-arg value="%{laneweb.sunetidcookiecodec.key}"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.SunetIdSource"
         class="edu.stanford.irt.laneweb.servlet.SunetIdSource">
-        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.codec.SunetIdCookieCodec"/>
         <constructor-arg ref="org.slf4j.Logger/SunetIdSource"/>
     </bean>
     

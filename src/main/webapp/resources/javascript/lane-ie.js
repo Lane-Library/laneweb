@@ -1,7 +1,7 @@
 (function() {
     var i, nodes, node;
     if (Y.UA.ie && Y.UA.ie < 7) {
-    	node = Y.one("#laneNav");
+        node = Y.one("#laneNav");
         nodes = node.all('ul');
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).get('parentNode').on('mouseover', function() {
@@ -26,14 +26,10 @@
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).one('li').setStyle('borderLeft', 'none');
         }
-        nodes = Y.all(".type1 .details > div");
-        for (i = 0; i < nodes.size(); i++) {
-            nodes.item(i).addClass("child");
-        }
         //add ie6Feedback to feedbackLink to get position : absolute from feedback.css
         node = Y.one("#feedbackLink");
         if (node) {
-        	node.addClass("ie6Feedback");
+            node.addClass("ie6Feedback");
         }
     }
     if (Y.UA.ie && Y.UA.ie <= 8) {
@@ -44,19 +40,19 @@
         }
         node = Y.one("#topResources");
         if (node) {
-        	node.insert("<span class='after'/>", "after");
+            node.insert("<span class='after'/>", "after");
         }
     }
     if (Y.UA.ie) {
-    	//toggle bookmarklet instructions for IE on favorites page
-    	node = Y.one("#bookmarkletNotIE");
-    	if (node) {
-    	    node.setStyle("display", "none");
-    	}
-    	node = Y.one("#bookmarkletIE");
-    	if (node) {
-    	    node.setStyle("display", "block");
-    	}
+        //toggle bookmarklet instructions for IE on favorites page
+        node = Y.one("#bookmarkletNotIE");
+        if (node) {
+            node.setStyle("display", "none");
+        }
+        node = Y.one("#bookmarkletIE");
+        if (node) {
+            node.setStyle("display", "block");
+        }
     }
-    
+
 })();

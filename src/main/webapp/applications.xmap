@@ -8,11 +8,6 @@
             <!-- /apps/search/xml returns the xmlized search result -->
             <map:match type="wildcard" pattern="search/xml">
                 <map:generate type="search"/>
-                <map:select type="cme-links">
-                    <map:when test="true">
-                        <map:transform type="search-cme-links"/>
-                    </map:when>
-                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="search-proxy-links"/>
@@ -25,11 +20,6 @@
                 <map:generate type="search-engine">
                     <map:parameter name="engines" value="{1}"/>
                 </map:generate>
-                <map:select type="cme-links">
-                    <map:when test="true">
-                        <map:transform type="search-cme-links"/>
-                    </map:when>
-                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="search-proxy-links"/>
@@ -42,11 +32,6 @@
                 <map:generate type="search-engine">
                     <map:parameter name="engines" value="{$engines}"/>
                 </map:generate>
-                <map:select type="cme-links">
-                    <map:when test="true">
-                        <map:transform type="search-cme-links"/>
-                    </map:when>
-                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="search-proxy-links"/>
@@ -54,13 +39,19 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="search/image/*" type="wildcard">
+                <map:generate type="search-image">
+                    <map:parameter name="engines" value="{1}"/>
+                </map:generate>
+                <map:serialize type="xml"/>
+            </map:match>
             <!-- search/content/html returns xhtmlized metasearch content results -->
             <map:match pattern="search/content/html/*" type="wildcard">
                 <map:generate type="search-content">
                     <map:parameter name="engines" value="{1}"/>
                 </map:generate>
-                <map:transform type="query-highlighting"/>
                 <map:transform type="description-labeling"/>
+                <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -84,8 +75,8 @@
                 <map:generate type="search-content">
                     <map:parameter name="engines" value="{1}"/>
                 </map:generate>
-                <map:transform type="query-highlighting"/>
                 <map:transform type="description-labeling"/>
+                <map:transform type="query-highlighting"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- search/merged/html returns xhtmlized merged metasearch and eresources results -->
@@ -95,8 +86,8 @@
                     <map:parameter name="timeout" value="5000"/>
                     <map:parameter name="engines" value="{1}"/>
                 </map:generate>
-                <map:transform type="query-highlighting"/>
                 <map:transform type="description-labeling"/>
+                <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -107,29 +98,29 @@
                         <map:parameter name="timeout" value="5000"/>
                         <map:parameter name="engines" value="{1}"/>
                     </map:generate>
-                    <map:transform type="query-highlighting"/>
                     <map:transform type="description-labeling"/>
+                    <map:transform type="query-highlighting"/>
                     <map:serialize type="xml"/>
                 </map:match>-->
             <!-- search2json.xsl converts the result xml to json -->
             <!-- it is used in lane-metasearch.js and lane-querymap.js -->
             <map:match pattern="search/json" type="wildcard">
                 <map:generate type="search-resource"/>
-                <map:select type="cme-links">
-                    <map:when test="true">
-                        <map:transform type="search-cme-links"/>
-                    </map:when>
-                </map:select>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="search-proxy-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="saxon" src="resources/xsl/search2json.xsl">
-                    <map:parameter name="content-to-display" value="5"/>
-                </map:transform>
+                <map:transform type="saxon" src="resources/xsl/search2json.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
+            <!-- TODO: remove this once history site is live -->
+            <!-- this is used in lane-metasearch.js when the source is history-all -->
+            <!--<map:match pattern="search/noproxy/json" type="wildcard">
+                <map:generate type="search-resource"/>
+                <map:transform type="saxon" src="resources/xsl/search2json.xsl"/>
+                <map:serialize type="text"/>
+            </map:match>-->
             <!-- search facet counts -->
             <!-- used in lane-search-facet-counts.js -->
             <map:match pattern="search/facets/json" type="wildcard">
@@ -158,21 +149,20 @@
             <map:serialize type="text"/>
         </map:match>
     </map:pipeline>
+    <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{sitemap-uri}"/>
+        <!-- cache expires in 21600 seconds = 6 hours -->
+        <map:parameter name="cache-expires" value="21600"/>
+        <map:match pattern="seminars/type/*.xml" type="wildcard">
+            <map:generate type="seminars">
+                <map:parameter name="type" value="{1}"/>
+            </map:generate>
+            <map:transform type="saxon" src="resources/xsl/seminars.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">
-        <map:match pattern="seminars/type/*/days/*.xml" type="wildcard">
-            <map:generate type="file" src="resources/xsl/seminars.xsl"/>
-            <map:transform type="saxon" src="resources/xsl/seminars.xsl">
-                <map:parameter name="days" value="{2}"/>
-                <map:parameter name="type" value="{1}"/>
-                <map:parameter name="cache-key" value="type={1};days={2}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="seminars/*/*/*/*/*.xml" type="wildcard">
-            <map:generate type="html" src="http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&amp;selMonth={3}&amp;selDay={4}&amp;selYear={2}&amp;futureNumberDays={5}&amp;departmentId=0&amp;seminarLocation=0&amp;keyword=&amp;courseType={1}"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="search-templates.xml" type="wildcard">
             <map:generate type="search-describe"/>
             <map:transform type="search-directory">

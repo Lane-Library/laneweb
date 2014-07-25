@@ -1,98 +1,100 @@
-#laneNav {
-	position: absolute;
-	top: 160px;
-	width: 100%;
-	height: 46px;
-	/* IE6 doesn't get width 100% right */
-	_width: 989px;
-	background-image: url(/././resources/images/sprite-vertall.png);
-	background-repeat : repeat-x;
-    background-position:0 -240px;
+#laneNav{
+    position:absolute;
+    top:80px;
+    width:100%;
+    height:46px;
+    background-color:rgb(197,207,209);
+    box-shadow: inset 0px 5px 5px -5px #000;
 }
 
-.yui3-js-enabled #laneNav.clinical {
-	top: 198px;
+#laneNav li{
+    height:46px;
+    display:inline-block;
 }
 
-#laneNav li {
-	float: left;
+#laneNav a{
+    color:#3C3623;
+    padding:14px 21px;
+    text-decoration:none;
+    border-bottom:none;
+    display:block;
+    font-size:15px;
+    font-family:'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
 }
 
-#laneNav a {
-	color: #3C3623;
-	padding: 14px;
-	text-decoration: none;
-	border-bottom: none;
-	display: block;
-	font-size: 15px;
-	font-family: Source Sans Pro, Arial, Helvetica, clean, sans-serif;
+#laneNav li:hover a,
+#laneNav .hover a,
+#laneNav .active a{
+    background-color:white;
+    box-shadow: inset 0px 5px 5px -5px #000;
 }
 
-#laneNav>li:first-child>a {
-    padding-left:20px
+#laneNav li:hover ul a,
+#laneNav .hover ul a,
+#laneNav .active ul a{
+    background-color:transparent;
+    box-shadow:none;
 }
 
-#laneNav li:hover a,#laneNav .hover a,#laneNav .active a {
-	background-color: white;
+#laneNav ul ul,
+#favorites ul,
+.pagingLabels{
+    display:none;
+    background-color:white;
+    position:absolute;
+    border:1px solid #dadad9;
+    border-top:none;
+    padding:6px 0;
+    z-index:2;
+    background-image:url(../images/sprite-vertall.png);
+    background-position:0 bottom;
+    background-repeat:repeat-x;
+    -moz-border-radius-bottomleft:3px;
+    -moz-border-radius-bottomright:3px;
+    -webkit-border-bottom-left-radius:3px;
+    -webkit-border-bottom-right-radius:3px;
+    border-radius:0 0 3px 3px;
+    -webkit-box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-#laneNav li:hover ul a,#laneNav .hover ul a,#laneNav .active ul a {
-	background-color: transparent;
+#laneNav li:hover ul,
+#favorites:hover ul,
+#laneNav .hover ul,
+#favorites.hover ul
+{
+    display:block;
 }
 
-#laneNav ul,#favorites ul, .pagingLabels {
-	display: none;
-	background-color: white;
-	position: absolute;
-	border: 1px solid #dadad9;
-	border-top: none;
-	padding: 6px 0;
-	z-index: 2;
-	background-image: url(/././resources/images/sprite-vertall.png);
-	background-position: 0 bottom;
-	background-repeat: repeat-x;
-	-moz-border-radius-bottomleft: 3px;
-	-moz-border-radius-bottomright: 3px;
-	-webkit-border-bottom-left-radius: 3px;
-	-webkit-border-bottom-right-radius: 3px;
-	border-radius: 0 0 3px 3px;
-	-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+#laneNav ul ul li{
+    height:auto;
+    display:block;
+    width:190px;
+    padding:5px 0 3px 15px;
 }
 
-#laneNav li:hover ul,#favorites:hover ul,#laneNav .hover ul, #favorites.hover ul
-	{
-	display: block;
+#laneNav ul ul a{
+    display:inline;
+    font-weight:normal;
+    padding:0;
+    color:#1C4B70;
+    border-bottom:1px dotted #81785A;
+    text-shadow:none;
+    font-size:13px;
 }
 
-#laneNav ul li {
-	float: none;
-	width: 190px;
-	padding: 5px 0 3px 15px;
+#laneNav ul ul a:hover{
+    color:#820000;
+    border-color:#820000;
+    border-bottom-style:solid;
 }
 
-#laneNav ul a {
-	display: inline;
-	font-weight: normal;
-	padding: 0;
-	color: #1C4B70;
-	border-bottom: 1px dotted #81785A;
-	text-shadow: none;
-	font-size: 13px;
+#laneNav #specialties-menu{
+    width:350px;
 }
 
-#laneNav ul a:hover {
-	color: #820000;
-	border-color: #820000;
-	border-bottom-style: solid;
-}
-
-#laneNav #specialties-menu {
-	width: 350px;
-}
-
-#laneNav #specialties-menu li {
-	float: left;
-	width: 155px;
+#laneNav #specialties-menu li{
+    float:left;
+    width:155px;
 }

@@ -1,58 +1,58 @@
 Y.use("*",  function(){
-    
+
     Y.on("click", function(event) {
         event.preventDefault();
         event._event.preventDefault();
     });
-    
+
     Y.lane.Location.on("hrefChange", function(event) {
         event.preventDefault();
     });
 
     var trackingTestCase = new Y.Test.Case({
-        
+
         name: "Lane Tracking TestCase",
-        
+
         event: null,
-        
+
         pageView: null,
-        
+
         fixPath: function(path) {
             return path.charAt(0) === "/" ? path : "/" + path;
         },
-        
+
         setUp: function() {
             this.event = null;
             this.pageView = null;
         },
-        
+
         eventCallback: function(event) {
             this.event = event;
         },
-        
+
         pageViewCallback: function(event) {
             this.pageView = event;
         },
-        
+
         testBodyClickDoesNothing : function() {
             Y.one("body").simulate("click");
             Y.Assert.isNull(this.event);
             Y.Assert.isNull(this.pageView);
         },
-        
+
         testSearchFacetClick: function() {
             Y.one(".searchFacet a").simulate("click");
             Y.Assert.areEqual("search facet", this.pageView.title);
             Y.Assert.isNull(this.event);
         },
-        
+
         testExpandyTriggerClick: function() {
             var link = Y.one('.yui3-accordion-item-trigger');
             link.simulate('click');
             Y.Assert.areEqual("Expandy:head", this.pageView.title);
             Y.Assert.isNull(this.event);
         },
-        
+
         testFavoritesClick: function() {
             Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
             var link = Y.one("#favorites a");
@@ -64,7 +64,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testBookmarksClick: function() {
             Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
             var link = Y.one("#bookmarks a");
@@ -76,7 +76,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testBookmarksEditorClick: function() {
             Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
             var link = Y.one(".yui3-bookmark-editor-content a");
@@ -88,7 +88,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testLaneNavClick: function() {
             var link = Y.one("#laneNav a");
             link.simulate("click");
@@ -98,7 +98,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual("laneNav: " + link.get("text"), this.pageView.title);
         },
-        
+
         testQLinkClick: function() {
             var link = Y.one("#qlinks a");
             link.simulate("click");
@@ -108,7 +108,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testTopResourcesClick: function() {
             var link = Y.one("#topResources a");
             link.simulate("click");
@@ -118,7 +118,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testBannerContentClick: function() {
             var link = Y.one(".banner-content a");
             link.simulate("click");
@@ -128,7 +128,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testSectionMenuClick: function() {
             var link = Y.one(".sectionMenu a");
             link.simulate("click");
@@ -138,7 +138,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testLaneFooterClick: function() {
             var link = Y.one("#laneFooter a");
             link.simulate("click");
@@ -148,7 +148,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testBrowseResultClick: function() {
             var link = Y.one(".lwSearchResults a");
             link.simulate("click");
@@ -159,7 +159,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
-        
+
         testSearchResultClick: function() {
             Y.lane.Model.set(Y.lane.Model.QUERY, "query");
             var link = Y.one(".lwSearchResults a");
@@ -172,7 +172,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
             Y.lane.Model.set(Y.lane.Model.QUERY, null);
         },
-        
+
         testClickOnImage: function() {
             var link = Y.one("#eventImageLink");
             link.simulate("click");
@@ -188,7 +188,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual(link.get("src"), this.pageView.title);
             Y.Assert.isNull(this.event);
         },
-        
+
         testClickPopup: function() {
             var link = Y.one("#popup");
             link.simulate("click");
@@ -197,7 +197,7 @@ Y.use("*",  function(){
             Y.Assert.areEqual("YUI Pop-up [local]: " + link.get("text"), this.pageView.title);
             Y.Assert.isNull(this.event);
         },
-        
+
         testClickCookieFetch: function() {
             var link = Y.one("#testTrackCookiesFetch");
             link.simulate("click");
@@ -206,12 +206,21 @@ Y.use("*",  function(){
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
             Y.Assert.isNull(this.event);
         },
-        
+
         testClickProxyCredential: function() {
             var link = Y.one("#proxylink");
             link.simulate("click");
             Y.Assert.areEqual("www.google.com", this.pageView.host);
             Y.Assert.areEqual("/foo/bar" , this.pageView.path);
+            Y.Assert.areEqual(link.get("text"), this.pageView.title);
+            Y.Assert.isNull(this.event);
+        },
+
+        testClickProxyCme: function() {
+            var link = Y.one("#cmelink");
+            link.simulate("click");
+            Y.Assert.areEqual("www.uptodate.com", this.pageView.host);
+            Y.Assert.areEqual("/online" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
             Y.Assert.isNull(this.event);
         },
@@ -228,13 +237,13 @@ Y.use("*",  function(){
 
     Y.lane.on("tracker:trackableEvent", trackingTestCase.eventCallback, trackingTestCase);
     Y.lane.on("tracker:trackablePageview", trackingTestCase.pageViewCallback, trackingTestCase);
-    
+
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
-    
+
+
     Y.Test.Runner.add(trackingTestCase);
     Y.Test.Runner.masterSuite.name = "tracking-test.js";
     Y.Test.Runner.run();

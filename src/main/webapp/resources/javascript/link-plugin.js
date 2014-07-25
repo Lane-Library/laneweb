@@ -2,13 +2,12 @@
  * LinkPlugin is an plugin for anchor nodes to provide
  * valuable information about such things as proxy status, etc.
  */
-//YUI.add("lane-link-plugin", function(Y) {
 (function() {
-	
-	Y.namespace("lane");
-	
-	var ALT = "alt",
-	    COOKIES_FETCH = "cookiesFetch",
+
+    Y.namespace("lane");
+
+    var ALT = "alt",
+        COOKIES_FETCH = "cookiesFetch",
         LINK_HOST = "linkHost",
         LOCAL = "local",
         HOST_NAME = "hostname",
@@ -22,19 +21,19 @@
         TITLE = "title",
         lane = Y.lane,
         location = lane.Location,
-	    basePath = lane.Model.get("base-path") || "",
+        basePath = lane.Model.get("base-path") || "",
         cookiesFetchPath = basePath + "/cookiesFetch.html",
-	    documentHostName = location.get("hostname"),
-	    loginPath = basePath + "/secure/apps/proxy/credential",
-    
+        documentHostName = location.get("hostname"),
+        loginPath = basePath + "/secure/apps/proxy/credential",
+
     LinkPlugin = function(config) {
         LinkPlugin.superclass.constructor.apply(this, arguments);
     };
-    
+
     LinkPlugin.NS = "link";
-    
+
     LinkPlugin.NAME = "linkPlugin";
-    
+
     LinkPlugin.ATTRS = {
             cookiesFetch : {
                 readOnly : true,
@@ -145,12 +144,12 @@
                     rel = node.get('rel');
                     if (rel && rel.indexOf('popup') === 0) {
                         relTokens = rel.split(' ');
-                        if (relTokens[1] == LOCAL) {
+                        if (relTokens[1] === LOCAL) {
                             title = 'YUI Pop-up [local]: ' + title;
                         }
                     }
                     return title;
-                
+
                 }
             },
             trackable : {
@@ -209,11 +208,7 @@
     };
 
     Y.extend(LinkPlugin, Y.Plugin.Base);
-    
-    lane.LinkPlugin = LinkPlugin;
-    
-})();
 
-//}, "", {
-//	requires : ["lane-model", "plugin"]
-//});
+    lane.LinkPlugin = LinkPlugin;
+
+})();

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bassetts xmlns="http://lane.stanford.edu/bassett/ns">
+   <bassett bassett_number="bn">
+      <title>title</title>
+      <bassett_image>image</bassett_image>
+      <diagram_image>diagram</diagram_image>
+      <legend_image>legend</legend_image>
+      <legend>legend</legend>
+      <description>description</description>
+      <regions>
+         <region name="region1">
+            <sub_region>subregion1</sub_region>
+            <sub_region>subregion2</sub_region>
+         </region>
+         <region name="region2">
+            <sub_region>subregion1</sub_region>
+         </region>
+      </regions>
+   </bassett>
+</bassetts>

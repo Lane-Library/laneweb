@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.proxy;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -47,10 +48,10 @@ public class Ticket implements Serializable {
         return this.stringValue;
     }
 
-    private String getKeyedDigest(final String buffer) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        StringBuffer sb = new StringBuffer();
+    private String getKeyedDigest(final String buffer) throws NoSuchAlgorithmException {
+        StringBuilder sb = new StringBuilder();
         MessageDigest digest = MessageDigest.getInstance("MD5");
-        byte[] bytes = digest.digest(buffer.getBytes("UTF-8"));
+        byte[] bytes = digest.digest(buffer.getBytes(StandardCharsets.UTF_8));
         for (byte element : bytes) {
             sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
         }

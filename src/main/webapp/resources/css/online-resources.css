@@ -3,6 +3,7 @@
     float:left;
     padding:0;
     margin:0;
+    border-bottom:none;
 }
 #browseTabs:after {
     content: ".";
@@ -16,10 +17,10 @@
     display:block;
     padding:10px;
     text-align:center;
-    width:18px;
+    width:20px;
 }
 #browseTabs .long a {
-    width: 98px;
+    width: 104px;
 }
 #browseTabs .longer a {
     width: 218px;

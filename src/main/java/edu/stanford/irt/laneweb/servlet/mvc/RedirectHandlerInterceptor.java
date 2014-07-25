@@ -7,18 +7,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
 public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
 
     private RedirectProcessor redirectProcessor;
 
+    public RedirectHandlerInterceptor(final RedirectProcessor redirectProcessor) {
+        this.redirectProcessor = redirectProcessor;
+    }
+
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws IOException {
         String requestURI = request.getRequestURI();
-        String basePath = (String) request.getAttribute(Model.BASE_PATH);
+        String basePath = request.getContextPath();
         String sitemapURI = requestURI.substring(basePath.length());
         String redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI, basePath, request.getQueryString());
         if (redirectURL != null) {
@@ -26,9 +29,5 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         return true;
-    }
-
-    public void setRedirectProcessor(final RedirectProcessor redirectProcessor) {
-        this.redirectProcessor = redirectProcessor;
     }
 }

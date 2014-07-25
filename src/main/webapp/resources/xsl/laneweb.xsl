@@ -2,7 +2,8 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="h">
+    xmlns:template="http://lane.stanford.edu/ns/template"
+    exclude-result-prefixes="h template">
 
     <xsl:strip-space elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
 
@@ -60,10 +61,7 @@
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->
-    <xsl:variable name="source-doc" select="/*/h:html[1]"/>
-
-    <!-- the template document -->
-    <xsl:variable name="template" select="/*/h:html[2]"/>
+    <xsl:variable name="source-doc" select="/template:doc/h:html[1]"/>
 
     <xsl:variable name="path">
         <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
@@ -77,10 +75,9 @@
 
     <!-- here is the information associating urls with what is the laneNav active tab -->
     <xsl:variable name="laneNav-tabs">
-        <div><span>Biomed Resources</span><span>/biomed-resources</span></div>
+        <div><span>All Resources</span><span>/biomed-resources</span></div>
         <div><span>Specialty Portals</span><span>/portals</span></div>
         <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
-        <div><span>History Center</span><span>/med-history</span></div>
         <div><span>Using the Library</span><span>/using-lib</span></div>
         <div><span>About Lane</span><span>/about</span></div>
         <div><span>How To</span><span>/help</span></div>
@@ -98,7 +95,6 @@
             <xsl:when test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/med-history')">history-all</xsl:when>
             <xsl:when test="starts-with($path,'/bassett')">bassett</xsl:when>
             <xsl:when test="starts-with($path,'/biomed-resources/bassett')">bassett</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
@@ -117,20 +113,16 @@
     <xsl:include href="laneweb-forms.xsl"/>
     <xsl:include href="laneweb-links.xsl"/>
     <xsl:include href="laneweb-login.xsl"/>
-    <xsl:include href="laneweb-yui-grid.xsl"/>
 
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
-    <!-- root template applies templates on the template document -->
-    <xsl:template match="/">
-        <xsl:choose>
-            <xsl:when test="$template">
-                <xsl:apply-templates select="$template"/>
-            </xsl:when>
-            <!-- when there is not a template (ie the request is for /plain/**.html) process whole document -->
-            <xsl:otherwise>
-                <xsl:apply-templates select="child::node()"/>
-            </xsl:otherwise>
-        </xsl:choose>
+    <!-- applies templates on the template document -->
+    <xsl:template match="/template:doc">
+        <xsl:apply-templates select="h:html[2]"/>
+    </xsl:template>
+    
+    <!-- when there is not a template (ie the request is for /plain/**.html) process whole document -->
+    <xsl:template match="/h:html">
+        <xsl:apply-templates select="child::node()"/>
     </xsl:template>
 
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
@@ -361,6 +353,38 @@
             <xsl:apply-templates select="attribute::node()[not(name() = 'class')] | child::node()"/>
         </xsl:copy>
     </xsl:template>
+    
+    <!-- ================ temporary templates to facilitate 2.2.6 redesign ===================-->
+    <!-- add a div so modules are separated -->
+    <xsl:template match="h:div[contains(@class,'yui3-u')]//h:div[@class='module' or 'module' = tokenize(@class,' ')]">
+        <div>
+            <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div or ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">
+                <xsl:attribute name="style">
+                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div">margin-left:6px;</xsl:if>
+                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">margin-right:6px;</xsl:if>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node()|child::node()"/>
+            </xsl:copy>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="h:div[@class='popular']">
+        <div style="margin-left:6px">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|*"/>
+            </xsl:copy>
+        </div>
+    </xsl:template>
+    
+    <!-- add class="golfclub" to h2 so that the golf club images can be positioned correctly-->
+    <xsl:template match="h:h2[not(@class='golfclub')][ancestor::h:html = $source-doc]">
+        <h2 class="golfclub">
+            <xsl:apply-templates/>
+        </h2>
+    </xsl:template>
+    
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 

@@ -1,10 +1,16 @@
+#laneHeader{
+    background-color:white;
+}
+#laneHeader .centered{
+    position:relative;
+}
 h1 {
-	font-size: 26px;
-	position: absolute;
-	top: 24px;
-	left: 224px;
-	display: block;
+    font-size: 26px;
+    padding: 24px 0 24px 0;
 	color: #820000;
+	background-image:url(../images/lane-logo.png);
+	background-repeat:no-repeat;
+	background-position:0 20px;
 }
 
 h1 span {
@@ -14,71 +20,45 @@ h1 span {
 h1 a {
 	border-bottom: none;
 	color: #820000;
+	padding-left:68px;
 }
 
 h1 a:visited {
 	color: #820000;
 }
 
-#som,h1 a:hover {
+h1 a:hover {
 	text-decoration: underline;
 	border-bottom-style: none;
 }
 
-#som {
-	display: block;
-	height: 50px;
-	left: 18px;
-	position: absolute;
-	top: 22px;
-	width: 203px;
-	text-indent: -9000px;
-	background-image: url(/././resources/images/sprite-all.png);
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
-}
-
-#som:hover {
-	background-position: 0 -80px;
-}
-
 #login {
 	position: absolute;
-	right: 1em;
-}
-
-#login {
+	right: 0;
 	top: 0.8em;
 	vertical-align: text-bottom;
-	z-index: 1;
 }
 
 #libraryContact {
 	top: 62px;
 	white-space: nowrap;
-}
-
-#libraryContact {
 	position: absolute;
-	right: 3em;
+	right: 0;
 }
 
 #libraryContact li,#login li {
 	float: left;
-	padding: 0 7px;
-	background-image: none;
-	border-left: 1px dotted #C1C1C1;
-	height: 16px;
+	padding: 0 12px;
 }
 
-#login #favorites {
-	background: url("/././resources/images/sprite-all.png") no-repeat scroll
-		-680px -40px transparent;
-	padding-left: 22px;
-	margin-left: 1em;
-	border-left: none;
+#libraryContact .live-chat {
+	padding-left: 50px;
 }
 
-#libraryContact li:first-child,#login li:first-child {
-	border-left: none;
+#libraryContact .live-chat-inactive {
+	display: none;
+}
+/* live chat link in the body of the homepage */
+.content .live-chat-inactive {
+	display: none;
 }

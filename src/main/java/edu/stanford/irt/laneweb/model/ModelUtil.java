@@ -6,6 +6,10 @@ import java.util.Map;
  * Provides type casting and default values when accessing map values
  */
 public abstract class ModelUtil {
+    
+    private ModelUtil() {
+        // empty private default constructor
+    }
 
     public static <T> T getObject(final Map<String, Object> map, final String name, final Class<T> clazz) {
         return clazz.cast(map.get(name));

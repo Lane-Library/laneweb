@@ -5,30 +5,27 @@ import edu.stanford.irt.laneweb.eresources.Eresource;
 /**
  * @author ryanmax
  */
-public class EresourceSearchResult implements SearchResult {
+public class EresourceSearchResult extends AbstractSearchResult {
 
     private Eresource eresource;
 
     private int hashCode;
 
-    private String sortTitle;
-
     public EresourceSearchResult(final Eresource eresource) {
+        super(eresource.getScore(), eresource.getTitle());
         this.eresource = eresource;
-        this.sortTitle = NON_FILING_PATTERN.matcher(eresource.getTitle()).replaceFirst("");
-        this.sortTitle = WHITESPACE.matcher(this.sortTitle).replaceAll("").toLowerCase();
-        this.hashCode = this.sortTitle.hashCode();
     }
 
     public int compareTo(final SearchResult other) {
         int scoreCmp = other.getScore() - getScore();
         if (scoreCmp == 0) {
-            scoreCmp = this.sortTitle.compareTo(other.getSortTitle());
+            scoreCmp = getSortTitle().compareTo(other.getSortTitle());
             if (scoreCmp == 0 && !other.equals(this)) {
                 // This happens when more than one eresource has the same title
                 // as the query
                 if (other instanceof EresourceSearchResult) {
-                    scoreCmp = ((EresourceSearchResult)other).getEresource().getRecordId() - this.eresource.getRecordId();
+                    scoreCmp = ((EresourceSearchResult) other).getEresource().getRecordId()
+                            - this.eresource.getRecordId();
                 } else {
                     scoreCmp = -1;
                 }
@@ -49,17 +46,17 @@ public class EresourceSearchResult implements SearchResult {
         return this.eresource;
     }
 
-    public int getScore() {
-        int score = this.eresource.getScore();
-        return score < 0 ? 0 : score;
-    }
-
-    public String getSortTitle() {
-        return this.sortTitle;
+    @Override
+    public boolean hasAdditionalText() {
+        String description = this.eresource.getDescription();
+        return description != null && description.length() > 0;
     }
 
     @Override
     public int hashCode() {
+        if (this.hashCode == 0) {
+            this.hashCode = getSortTitle().hashCode();
+        }
         return this.hashCode;
     }
 }

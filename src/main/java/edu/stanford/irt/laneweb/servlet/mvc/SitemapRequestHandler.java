@@ -20,6 +20,7 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
+// TODO: use constructor injection for all properties
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private DataBinder dataBinder;
@@ -53,10 +54,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.dataBinder.bind(model, request);
         model.put(Model.SITEMAP_URI, sitemapURI);
         model.put(Sitemap.class.getName(), this.sitemap);
-        String mimeType = getContentType(sitemapURI);
-        if (mimeType != null) {
-            response.setContentType(mimeType);
-        }
+        response.setContentType(getContentType(sitemapURI));
         Pipeline pipeline = this.sitemap.buildPipeline(new SitemapContextImpl(model, this.componentFactory, this.sourceResolver));
         if ("GET".equals(method)) {
             // only process GET requests
@@ -95,7 +93,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         if (jsessionId > 0) {
             requestURI = requestURI.substring(0, jsessionId);
         }
-        String basePath = (String) request.getAttribute(Model.BASE_PATH);
+        String basePath = request.getContextPath();
         return requestURI.substring(basePath.length() + this.prefix.length());
     }
 

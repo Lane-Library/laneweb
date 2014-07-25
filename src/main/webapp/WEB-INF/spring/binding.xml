@@ -18,6 +18,7 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-header"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/content-base"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/version"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/disaster-mode"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule"/>
@@ -34,16 +35,16 @@
         class="edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder">
         <constructor-arg>
             <set>
+                <value>auth</value>
                 <value>base-path</value>
                 <value>disaster-mode</value>
+                <value>isActiveSunetID</value>
                 <value>ipgroup</value>
-                <value>auth</value>
+                <value>proxy-links</value>
                 <value>query</value>
                 <value>source</value>
                 <value>url-encoded-query</value>
-                <value>isActiveSunetID</value>
                 <!--<value>live-chat-available</value>
-                <value>proxy-links</value>
                 <value>sunetid</value>
                 <value>bookmarks</value>
                 <value>name</value>
@@ -81,7 +82,7 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"
         class="edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder">
-        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"
@@ -100,10 +101,19 @@
         class="edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder"/>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"
-        class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
+        class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder">
+        <constructor-arg ref="org.slf4j.Logger/errorhandler"/>
+    </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"
-        class="edu.stanford.irt.laneweb.servlet.binding.RequestAttributeDataBinder"/>
+        class="edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder">
+        <constructor-arg ref="servletContext"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/content-base"
+        class="edu.stanford.irt.laneweb.servlet.binding.ContentBaseDataBinder">
+        <constructor-arg value="%{laneweb.context.live-base}"/>
+    </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/version"
         class="edu.stanford.irt.laneweb.servlet.binding.VersionDataBinder">
@@ -120,7 +130,11 @@
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours"
         class="edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder">
-        <constructor-arg value="/includes/hours.xml"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.hours.TodaysHours">
+                <constructor-arg value="%{laneweb.context.live-base}/includes/hours.xml"/>
+            </bean>
+        </constructor-arg>
         <constructor-arg ref="org.slf4j.Logger/TodaysHoursBinder"/>
     </bean>
     
@@ -132,7 +146,7 @@
         <!-- regular expressions for IPs to be proxied TODO: change to CIDRRanges -->
         <constructor-arg>
             <list>
-                <!-- VPN 171.65.16.0 - 171.65.31.255 -->
+                <!-- VPN 171.66.16.0 - 171.66.31.255 -->
                 <value>^171\.66\.(?:1[6-9]|2[0-9]|3[0-1])\.\S+</value>
                 <!-- hospital 171.65.44.0 - 171.65.44.255 -->
                 <value>^171\.65\.44\.\S+</value>
@@ -168,7 +182,7 @@
         </constructor-arg>
         <constructor-arg>
             <map>
-                <entry key="^(?:/\w+|)/biomed-resources/bassett/raw/bassettLargerView.html"
+                <entry key="^/biomed-resources/bassett/raw/bassettLargerView.html"
                     value="bassettLargerView"/>
             </map>
         </constructor-arg>

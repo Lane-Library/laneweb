@@ -5,12 +5,13 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,8 @@ public class SuggestionController {
     private static final Map<String, List<String>> EMPTY_SUGGESTIONS = Collections.singletonMap("suggest",
             Collections.<String> emptyList());
 
-    private static final Pattern ER_PATTERN = Pattern.compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
+    private static final Pattern ER_PATTERN = Pattern
+            .compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
 
     private static final int MAX_QUERY_LENGTH = 32;
 
@@ -37,20 +39,27 @@ public class SuggestionController {
 
     private static final int RETURN_LIMIT = 10;
 
-    @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/eresource")
     private SuggestionManager eresourceSuggestionManager;
 
-    @Resource(name = "org.slf4j.Logger/SuggestionController")
     private Logger log;
 
-    @Resource(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
     private SuggestionManager meshSuggestionManager;
 
-    @RequestMapping(value = "/**/apps/suggest/getSuggestionList")
+    @Autowired
+    public SuggestionController(
+            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager eresourceSuggestionManager,
+            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/mesh") final SuggestionManager meshSuggestionManager,
+            @Qualifier("org.slf4j.Logger/SuggestionController") final Logger log) {
+        this.eresourceSuggestionManager = eresourceSuggestionManager;
+        this.meshSuggestionManager = meshSuggestionManager;
+        this.log = log;
+    }
+
+    @RequestMapping(value = "/apps/suggest/getSuggestionList")
     @ResponseBody
     public List<String> getSuggestionList(@RequestParam final String q, @RequestParam(required = false) final String l) {
         String query = q.trim();
-        TreeSet<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(query));
+        Set<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(query));
         suggestions.addAll(internalGetSuggestions(query, l));
         List<String> strings = new LinkedList<String>();
         for (Suggestion suggestion : suggestions) {
@@ -62,17 +71,17 @@ public class SuggestionController {
         return strings;
     }
 
-    @RequestMapping(value = "/**/apps/suggest/json")
+    @RequestMapping(value = "/apps/suggest/json")
     @ResponseBody
-    public Map<String, List<String>> getSuggestions(@RequestParam final String q, @RequestParam(required = false) final String l) {
+    public Map<String, List<String>> getSuggestions(@RequestParam final String q,
+            @RequestParam(required = false) final String l) {
         return Collections.singletonMap("suggest", getSuggestionList(q, l));
     }
 
     /**
-     * Handle situations where the SuggestionManager chokes on a String like so:
-     * java.lang.IllegalArgumentException: cleaned query is less than 3,
-     * query:,ed, cleaned:ed
-     * 
+     * Handle situations where the SuggestionManager chokes on a String like so: java.lang.IllegalArgumentException:
+     * cleaned query is less than 3, query:,ed, cleaned:ed
+     *
      * @param ex
      *            the IllegalArgumentException
      * @return an empty map;
@@ -86,46 +95,28 @@ public class SuggestionController {
         return EMPTY_SUGGESTIONS;
     }
 
-    public void setEresourceSuggestionManager(final SuggestionManager eresourceSuggestionManager) {
-        if (null == eresourceSuggestionManager) {
-            throw new IllegalArgumentException("null eresourceSuggestionManager");
-        }
-        this.eresourceSuggestionManager = eresourceSuggestionManager;
-    }
-
-    public void setMeshSuggestionManager(final SuggestionManager meshSuggestionManager) {
-        if (null == meshSuggestionManager) {
-            throw new IllegalArgumentException("null meshSuggestionManager");
-        }
-        this.meshSuggestionManager = meshSuggestionManager;
-    }
-
     private Collection<Suggestion> internalGetSuggestions(final String query, final String limit) {
+        Collection<Suggestion> suggestions = null;
         int length = query.length();
-        if (length > MAX_QUERY_LENGTH || length < MIN_QUERY_LENGTH) {
-            // return an empty list for queries > 32 characters, liable to cause
-            // SQLExceptions. Also for < 3 characters, will throw
-            // IllegalArgumentException
-            return NO_SUGGESTIONS;
+        if (length >= MIN_QUERY_LENGTH && length <= MAX_QUERY_LENGTH) {
+            // queries > 32 characters are liable to cause SQLExceptions.
+            // queries < 3 characters, will throw IllegalArgumentException
+            if (limit == null) {
+                suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
+            } else if ("er-mesh".equals(limit)) {
+                suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
+                suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
+            } else if (limit.indexOf("mesh-") == 0) {
+                suggestions = this.meshSuggestionManager.getSuggestionsForTerm(limit.substring(5), query);
+            } else if (ER_PATTERN.matcher(limit).matches()) {
+                suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
+            } else if ("mesh".equals(limit)) {
+                suggestions = this.meshSuggestionManager.getSuggestionsForTerm(query);
+            } else if ("ej-mesh".equals(limit)) {
+                suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm("ej", query);
+                suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
+            }
         }
-        if (limit != null && ER_PATTERN.matcher(limit).matches()) {
-            return this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
-        } else if ("er-mesh".equals(limit)) {
-            List<Suggestion> suggestions = new LinkedList<Suggestion>();
-            suggestions.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm(query));
-            suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
-            return suggestions;
-        } else if ("ej-mesh".equals(limit)) {
-            List<Suggestion> suggestions = new LinkedList<Suggestion>();
-            suggestions.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", query));
-            suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
-            return suggestions;
-        } else if ("mesh".equals(limit)) {
-            return this.meshSuggestionManager.getSuggestionsForTerm(query);
-        } else if (limit != null && limit.indexOf("mesh-") == 0) {
-            return this.meshSuggestionManager.getSuggestionsForTerm(limit.substring(5), query);
-        } else {
-            return this.eresourceSuggestionManager.getSuggestionsForTerm(query);
-        }
+        return suggestions == null ? NO_SUGGESTIONS : suggestions;
     }
 }

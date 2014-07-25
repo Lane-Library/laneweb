@@ -34,31 +34,32 @@ public class StreamDaysMapping extends HashMap<String, String> {
     private static final String TAG_LABEL = "label";
 
     public StreamDaysMapping(final InputStream inputStream) {
+        Document doc = null;
         try {
             DocumentBuilder builder = FACTORY.newDocumentBuilder();
-            Document doc = builder.parse(inputStream);
-            NodeList calendars = doc.getElementsByTagName(TAG_CALENDAR);
-            for (int i = 0; i < calendars.getLength(); i++) {
-                Element calendar = (Element) calendars.item(i);
-                NodeList days = calendar.getElementsByTagName(TAG_DAY);
-                for (int j = 0; j < days.getLength(); j++) {
-                    Element day = (Element) days.item(j);
-                    String key = null;
-                    String value = null;
-                    if (day.getElementsByTagName(TAG_DATE).getLength() > 0) {
-                        key = day.getElementsByTagName(TAG_DATE).item(0).getTextContent();
-                    } else if (day.getElementsByTagName(TAG_LABEL).getLength() > 0) {
-                        key = day.getElementsByTagName(TAG_LABEL).item(0).getTextContent();
-                    }
-                    if (day.getElementsByTagName(TAG_DESCRIPTION).getLength() > 0) {
-                        value = day.getElementsByTagName(TAG_DESCRIPTION).item(0).getTextContent();
-                        value = value.replaceAll(STRIPPABLE_MINUTES, "");
-                    }
-                    super.put(key, value);
-                }
-            }
+            doc = builder.parse(inputStream);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new LanewebException(e);
+        }
+        NodeList calendars = doc.getElementsByTagName(TAG_CALENDAR);
+        for (int i = 0; i < calendars.getLength(); i++) {
+            Element calendar = (Element) calendars.item(i);
+            NodeList days = calendar.getElementsByTagName(TAG_DAY);
+            for (int j = 0; j < days.getLength(); j++) {
+                Element day = (Element) days.item(j);
+                String key = null;
+                String value = null;
+                if (day.getElementsByTagName(TAG_DATE).getLength() > 0) {
+                    key = day.getElementsByTagName(TAG_DATE).item(0).getTextContent();
+                } else if (day.getElementsByTagName(TAG_LABEL).getLength() > 0) {
+                    key = day.getElementsByTagName(TAG_LABEL).item(0).getTextContent();
+                }
+                if (day.getElementsByTagName(TAG_DESCRIPTION).getLength() > 0) {
+                    value = day.getElementsByTagName(TAG_DESCRIPTION).item(0).getTextContent();
+                    value = value.replaceAll(STRIPPABLE_MINUTES, "");
+                }
+                super.put(key, value);
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ body {
     visibility: hidden;
 }
 
-body.ui-mobile-viewport,.ui-body-c {
+body.ui-mobile-viewport{
     margin: 0;
     padding: 0;
     font-size: 12px;
@@ -78,11 +78,11 @@ body.ui-mobile-viewport,.ui-body-c {
     padding-bottom: 80px;
 }
 
-.ui-body-c .ui-link {
+.ui-link {
     font-weight: normal;
 }
 
-.ui-body-c .ui-link:hover, .ui-body-c .ui-link:visited, .ui-body-c .ui-link:active {
+.ui-link:hover, .ui-link:visited, .ui-link:active {
     color:#000;
 }
 
@@ -92,7 +92,7 @@ body.ui-mobile-viewport,.ui-body-c {
 *
 *
 */
-.ui-body-c .brand {
+.brand {
     width: 100%;
     height: 44px;
     background-color: #bdbdbb;
@@ -142,7 +142,7 @@ body.ui-mobile-viewport,.ui-body-c {
     letter-spacing: 2px;
 }
 
-.ui-body-c .webauthLogin.ui-link,.ui-body-c .homeBtn.ui-link {
+.webauthLogin, .homeBtn.ui-link {
     display: block;
     float: right;
     margin: 8px 8px 0 0;
@@ -170,14 +170,14 @@ body.ui-mobile-viewport,.ui-body-c {
     background: linear-gradient(top, #eeedeb 0%, #ccc8c5 50%, #bbb7b2 51%, #f2ede8 100%);
 }
 
-.ui-body-c .homeBtn.ui-link {
+.homeBtn.ui-link {
     float: left;
     margin-left: 8px;
     width: 25px;
     padding-left: 3px;
 }
 
-.ui-body-c .webauthLogin.ui-link:active,.ui-body-c .homeBtn.ui-link:active
+.webauthLogin.ui-link:active,.homeBtn.ui-link:active
     {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#f2ede8),
         color-stop(50%, #bbb7b2), color-stop(51%, #ccc8c5),
@@ -261,7 +261,7 @@ body.ui-mobile-viewport,.ui-body-c {
     width: 35.5%;
 }
 
-.ui-body-c .search input {
+.search form input {
     -webkit-appearance: none;
     border: 1px solid #FFFFFF;
     -webkit-border-radius: 15px 15px 15px 15px;
@@ -271,7 +271,7 @@ body.ui-mobile-viewport,.ui-body-c {
     font-size: 1.3em;
     margin: 10px 0px;
     padding: 6px 0 4px 25px;
-    background: url(/././resources/images/mobile/search_bg.png) no-repeat
+    background: url(../../images/mobile/search_bg.png) no-repeat
         5px 6px #ffffff;
     line-height: 1.5em;
     -webkit-background-size: 18px;
@@ -283,7 +283,7 @@ body.ui-mobile-viewport,.ui-body-c {
     display: none;
 }
 
-.ui-body-c .search form.selected input {
+.search form.selected input {
     display: block;
 }
 
@@ -293,6 +293,7 @@ body.ui-mobile-viewport,.ui-body-c {
     margin: 0 auto;
     position: relative;
     overflow: visible;
+    border: none;
 }
 
 .search .ui-btn-corner-all {
@@ -307,15 +308,17 @@ body.ui-mobile-viewport,.ui-body-c {
     display: none;
 }
 
-.ui-input-search .ui-input-clear {
-    background: url(/././resources/images/mobile/clear_search.png) no-repeat
+.search .ui-input-has-clear {
+    padding:0;
+}
+
+.ui-input-search.ui-input-has-clear .ui-btn.ui-input-clear {
+    background: url(../../images/mobile/clear_search.png) no-repeat
         right top transparent;
     -webkit-background-size: 100%;
     background-size: 100%;
     margin-top: -9px;
-    position: absolute;
     right: 5px;
-    top: 50%;
     width: 19px;
     height: 19px;
     text-decoration:none;
@@ -329,11 +332,11 @@ body.ui-mobile-viewport,.ui-body-c {
     box-shadow: 0 0 0 transparent;
 }
 
-.search label.ui-input-text {
+.search label {
     display: none;
 }
 
-.ui-body-c .search input.searchSubmit {
+.search input.searchSubmit {
     position: absolute;
     top: -9999px;
     left: -9999px;
@@ -423,7 +426,7 @@ body.ui-mobile-viewport,.ui-body-c {
     color: #084676;
     margin: 0;
     text-align: center;
-    background: url(/././resources/images/mobile/icon_sprite.png) no-repeat
+    background: url(../../images/mobile/icon_sprite.png) no-repeat
         center 11px transparent;
     -webkit-background-size: 70px auto;
     background-size: 70px;
@@ -597,14 +600,14 @@ body.ui-mobile-viewport,.ui-body-c {
 }
 
 .resourceList li a.newWindow {
-    background: url(/././resources/images/mobile/link_bg_sprite.png)
+    background: url(../../images/mobile/link_bg_sprite.png)
         no-repeat right -39px transparent;
     -webkit-background-size: 36px;
     background-size: 36px;
 }
 
 .resourceList li a.sameWindow {
-    background: url(/././resources/images/mobile/link_bg_sprite.png)
+    background: url(../../images/mobile/link_bg_sprite.png)
         no-repeat right 11px transparent;
     -webkit-background-size: 36px;
     background-size: 36px;
@@ -726,7 +729,7 @@ body.ui-mobile-viewport,.ui-body-c {
     margin: 0;
 }
 
-#contactButtons li a,#contactButtons li a:link,#contactButtons li a:visited,#contactButtons li a:hover,.ui-body-c .askUsBtn.ui-link,.ui-body-c .askUsBtn.ui-link:link,.ui-body-c .askUsBtn.ui-link:visited,.ui-body-c .askUsBtn.ui-link:hover,#loggedIn button
+#contactButtons li a,#contactButtons li a:link,#contactButtons li a:visited,#contactButtons li a:hover,.askUsBtn.ui-link,.askUsBtn.ui-link:link,.askUsBtn.ui-link:visited,.askUsBtn.ui-link:hover,#loggedIn button
     {
     border: 1px solid #9e9d98;
     -webkit-border-radius: 6px;
@@ -748,7 +751,7 @@ body.ui-mobile-viewport,.ui-body-c {
     position: relative;
 }
 
-#contactButtons li a:active,#loggedIn button:active,.ui-body-c .askUsBtn.ui-link:active
+#contactButtons li a:active,#loggedIn button:active,.askUsBtn.ui-link:active
     {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#a7a395),
         color-stop(2%, #b4b0a3), color-stop(3%, #c4c0b2),
@@ -762,7 +765,7 @@ body.ui-mobile-viewport,.ui-body-c {
     box-shadow: 0 0 8px #fff;
 }
 
-.ui-body-c .askUsBtn.ui-link,.ui-body-c .askUsBtn.ui-link:link,.ui-body-c .askUsBtn.ui-link:visited,.ui-body-c .askUsBtn.ui-link:active,.ui-body-c .askUsBtn.ui-link:hover
+ .askUsBtn.ui-link,.askUsBtn.ui-link:link,.askUsBtn.ui-link:visited,.askUsBtn.ui-link:active,.askUsBtn.ui-link:hover
     {
     float: right;
     margin: 67px 6% 0 0;
@@ -787,23 +790,23 @@ body.ui-mobile-viewport,.ui-body-c {
     bottom: 0;
 }
 
-.ui-body-c .ui-body-c .footer a.ui-link,.ui-body-c .footer a.ui-link:link,.ui-body-c .footer a.ui-link:visited,.ui-body-c .footer a.ui-link:hover
+ .footer a.ui-link,.footer a.ui-link:link,.footer a.ui-link:visited,.footer a.ui-link:hover
     {
     color: #ffffff;
     font-size: 0.9em;
     text-decoration: none;
 }
 
-.ui-body-c .footer a.ui-link:active {
+.footer a.ui-link:active {
     text-decoration: underline;
 }
 
-.ui-body-c .footer a.ui-link:first-child {
+.footer a.ui-link:first-child {
     float: left;
     margin-left: 3%;
 }
 
-.ui-body-c .footer a.ui-link:last-child {
+.footer a.ui-link:last-child {
     text-transform: uppercase;
     float: right;
     margin-right: 5%;
@@ -891,7 +894,7 @@ body.ui-mobile-viewport,.ui-body-c {
 
 .results li a:first-child {
     padding-right: 46px;
-    background: url(/././resources/images/mobile/link_bg_sprite.png)
+    background: url(../../images/mobile/link_bg_sprite.png)
         no-repeat right -42px transparent;
     -webkit-background-size: 32px;
     background-size: 32px;
@@ -1023,8 +1026,10 @@ div.absInfo a {
 * override jquery image location
 */
 /* loading icon */
-.ui-icon-loading {
-    background-image: url(/././resources/images/mobile/ajax-loader.gif);
+.ui-loader .ui-icon-loading {
+    background-image: url(../../images/mobile/ajax-loader.gif);
+    width: 46px;
+    height: 46px;
 }
 .ui-loader {
     opacity: .7;

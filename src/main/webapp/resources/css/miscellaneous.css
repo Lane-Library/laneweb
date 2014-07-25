@@ -1,13 +1,14 @@
 /* This file has rules that don't seem to fit anywhere else */
-body, select,input,button,textarea,button{
-	font-family: Source Sans Pro, Arial, Helvetica, clean, sans-serif;
+body,select,input,button,textarea {
+	font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
 }
-p {
-	margin-bottom: 10px;
+/*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
+.yui3-g [class*="yui3-u"] {
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
-.content {
-	color: #3F3C30;
+p {
+	margin-bottom: 12px;
 }
 
 strong {
@@ -19,10 +20,10 @@ em {
 }
 
 .inputHint {
-	color: #808080
+	color: #808080;
 }
 
-.more {
+/*.more {
 	text-transform: uppercase;
 	text-align: right;
 	border-bottom: 1px solid #EAE9E6;
@@ -30,25 +31,26 @@ em {
 	clear: left;
 	letter-spacing: 1px;
 	padding: 3px
-}
-
-.more.classes {
+}*/
+.more {
 	border-top: none;
-	padding: 6px;
+	padding: 0 12px 12px 12px;
 }
 
 .more a {
 	border: none;
+	margin-right: 6px;
 }
 /* used for pubmed and highly accessed article lists */
 .citationList li {
 	list-style: decimal;
-	margin-bottom: 1em
+	margin-bottom: 1em;
+	margin-left: 24px;
 }
 
 .rss-link {
 	float: right;
-	background-image: url(/././resources/images/sprite-all.png);
+	background-image: url(../images/sprite-all.png);
 	background-position: -41px -240px;
 	height: 15px;
 	width: 15px;
@@ -66,13 +68,14 @@ em {
 
 .announce {
 	text-align: center;
-	background-color: #F4F5EF;
-	margin-left: -1.3em;
-	margin-right: -0.9em;
-	border-top: 1px solid #dadad9;
-	border-bottom: 1px solid #dadad9;
-	border-left: none;
-	border-right: none;
+	background-color: #333;
+	border: none;
+	padding: 12px;
+	font-family: 'Fjord One', serif;
+	color: #fff;
+	font-size: 20px;
+	text-shadow: 0.07em #000;
+	margin-bottom: 12px;
 }
 
 #class-title {
@@ -117,19 +120,25 @@ em {
 	font-size: 10px;
 }
 
+.content .calendar ul {
+	padding-left: 0;
+}
+
 .content .calendar li {
-	height: 64px;
+	height: 75px;
 	float: left;
 	margin: .2em;
 	padding: .5em;
 	list-style: none inside none;
 	margin-left: 0;
-	background-color: #d6d5c7;
+	background-color: #09425a;
 	margin-bottom: 0;
-	-webkit-border-radius: 0 0 0 19px;
-	-moz-border-radius: 0 0 0 19px;
-	border-radius: 0 0 0 19px;
-	border: 2px #ffffff solid;
+	color: #fff;
+	font-size: 18px;
+}
+
+.content .calendar li p {
+	font-size: 13px;
 }
 
 .calendar li p {
@@ -146,6 +155,18 @@ em {
 	padding: 15px;
 	width: 200px;
 }
+
 .seminar {
-    padding-bottom:15px;
+	padding-bottom: 15px;
+}
+
+hr {
+	color: #dddddd;
+	border-top: 1px solid;
+	margin: 12px;
+}
+.nomodule {
+    margin: 12px 0 24px 0;
+    line-height: normal;
+    font-size: 16px;
 }

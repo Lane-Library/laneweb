@@ -1,29 +1,27 @@
 package edu.stanford.irt.laneweb.search;
 
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 /**
  * @author ryanmax
  */
-public class ContentResultSearchResult implements SearchResult {
+public class ContentResultSearchResult extends AbstractSearchResult {
 
     private ContentResult contentResult;
 
+    private int hashCode;
+
     private Result resourceResult;
 
-    private int score;
-
-    private String sortTitle;
-
     public ContentResultSearchResult(final ContentResult contentResult, final Result resourceResult, final int score) {
+        super(score, contentResult.getTitle());
         this.contentResult = contentResult;
         this.resourceResult = resourceResult;
-        this.score = score;
     }
 
     public int compareTo(final SearchResult o) {
-        int value = o.getScore() - this.score;
+        int value = o.getScore() - getScore();
         if (value == 0) {
             value = getSortTitle().compareTo(o.getSortTitle());
             if (value == 0 && o instanceof ContentResultSearchResult) {
@@ -57,21 +55,18 @@ public class ContentResultSearchResult implements SearchResult {
         return this.resourceResult;
     }
 
-    public int getScore() {
-        return this.score;
-    }
-
-    public String getSortTitle() {
-        if (this.sortTitle == null) {
-            String temp = NON_FILING_PATTERN.matcher(this.contentResult.getTitle()).replaceFirst("");
-            this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
-        }
-        return this.sortTitle;
+    @Override
+    public boolean hasAdditionalText() {
+        String description = this.contentResult.getDescription();
+        return description != null && description.length() > 0;
     }
 
     @Override
     public int hashCode() {
-        return getSortTitle().hashCode();
+        if (this.hashCode == 0) {
+            this.hashCode = getSortTitle().hashCode();
+        }
+        return this.hashCode;
     }
 
     private int compareToIgnoreScore(final ContentResultSearchResult other) {

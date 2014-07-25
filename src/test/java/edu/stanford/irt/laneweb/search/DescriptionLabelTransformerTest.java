@@ -16,7 +16,7 @@ import edu.stanford.irt.laneweb.resource.Resource;
 
 public class DescriptionLabelTransformerTest {
 
-    private static final char[] CHARS = "some characters with ::DESCRIPTION LABEL WITH/SLASH## inside of it".toCharArray();
+    private static final char[] CHARS = "some characters with ::DESCRIPTION LABEL-DASH/SLASH## inside of it".toCharArray();
 
     private DescriptionLabelTransformer transformer;
 
@@ -39,34 +39,26 @@ public class DescriptionLabelTransformerTest {
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.DESCRIPTION_LABEL), eq(Resource.DESCRIPTION_LABEL));
         this.xmlConsumer.characters(isA(char[].class), eq(53), eq(13));
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION);
-        replayMocks();
+        replay(this.xmlConsumer);
         this.transformer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION, null);
         this.transformer.characters(CHARS, 0, CHARS.length);
         this.transformer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION);
-        verifyMocks();
+        verify(this.xmlConsumer);
     }
 
     @Test
     public void testEndElement() throws SAXException {
         this.xmlConsumer.endElement(null, null, null);
-        replayMocks();
+        replay(this.xmlConsumer);
         this.transformer.endElement(null, null, null);
-        verifyMocks();
+        verify(this.xmlConsumer);
     }
 
     @Test
     public void testStartElement() throws SAXException {
         this.xmlConsumer.startElement(null, null, null, null);
-        replayMocks();
-        this.transformer.startElement(null, null, null, null);
-        verifyMocks();
-    }
-
-    private void replayMocks() {
         replay(this.xmlConsumer);
-    }
-
-    private void verifyMocks() {
+        this.transformer.startElement(null, null, null, null);
         verify(this.xmlConsumer);
     }
 }

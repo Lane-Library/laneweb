@@ -4,22 +4,20 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.MetaSearchManager;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentSearchGeneratorTest {
 
@@ -40,10 +38,9 @@ public class ContentSearchGeneratorTest {
         this.generator = new ContentSearchGenerator(this.metasearchManager, this.saxStrategy, this.conversionStrategy);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testGetSearchResults() {
-        expect(this.metasearchManager.search(isA(Query.class), eq(20000L), (Collection<String>) isNull(), eq(true)))
+        expect(this.metasearchManager.search(isA(Query.class), eq(20000L), eq(true)))
                 .andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
@@ -51,7 +48,7 @@ public class ContentSearchGeneratorTest {
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testGetSearchResultsEmptyQuery() {
         expect(this.conversionStrategy.convertResult(isA(Result.class))).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
@@ -63,8 +60,7 @@ public class ContentSearchGeneratorTest {
     public void testGetSearchResultsEngines() {
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.TIMEOUT, "1000"));
         expect(
-                this.metasearchManager.search(isA(Query.class), eq(1000L), eq(Arrays.asList(new String[] { "a", "b", "c" })),
-                        eq(true))).andReturn(null);
+                this.metasearchManager.search(isA(Query.class), eq(1000L), eq(true))).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c"));
@@ -72,7 +68,7 @@ public class ContentSearchGeneratorTest {
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testGetSearchResultsNullQuery() {
         expect(this.conversionStrategy.convertResult(isA(Result.class))).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
@@ -82,7 +78,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGetSearchResultsTimeout() {
-        expect(this.metasearchManager.search(isA(Query.class), eq(1000L), eq(Collections.<String> emptyList()), eq(true)))
+        expect(this.metasearchManager.search(isA(Query.class), eq(1000L), eq(true)))
                 .andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
@@ -93,7 +89,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGetSearchResultsTimeoutNFE() {
-        expect(this.metasearchManager.search(isA(Query.class), eq(20000L), eq(Collections.<String> emptyList()), eq(true)))
+        expect(this.metasearchManager.search(isA(Query.class), eq(20000L), eq(true)))
                 .andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
@@ -104,7 +100,7 @@ public class ContentSearchGeneratorTest {
 
     @Test
     public void testGetSearchResultsTimeoutParameter() {
-        expect(this.metasearchManager.search(isA(Query.class), eq(1000L), eq(Collections.<String> emptyList()), eq(true)))
+        expect(this.metasearchManager.search(isA(Query.class), eq(1000L), eq(true)))
                 .andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);

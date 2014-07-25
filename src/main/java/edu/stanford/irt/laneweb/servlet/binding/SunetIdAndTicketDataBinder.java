@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -69,11 +69,11 @@ public class SunetIdAndTicketDataBinder implements DataBinder {
         StringBuilder sb = new StringBuilder();
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
-            byte[] bytes = digest.digest(buffer.getBytes("UTF-8"));
+            byte[] bytes = digest.digest(buffer.getBytes(StandardCharsets.UTF_8));
             for (byte element : bytes) {
                 sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
             }
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new LanewebException(e);
         }
         return sb.toString();

@@ -1,12 +1,12 @@
 (function() {
-    
+
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
-    
+
     var popup, maybeCreatePopup, popupWindow, showWindow;
-    
+
     maybeCreatePopup = function(title, body, width, xy) {
         var boundingBox;
-        if (width == "0px" || width == "auto") {
+        if (width === "0px" || width === "auto") {
             width = 350;
         }
         if (!popup) {
@@ -31,18 +31,18 @@
         if (popupWindow !== undefined && !popupWindow.closed) {
             popupWindow.close();
         }
-        if (type == 'fullscreen') {
+        if (type === 'fullscreen') {
             strWidth = screen.availWidth;
             strHeight = screen.availHeight;
         }
         var tools = '';
-        if (type == 'standard') {
+        if (type === 'standard') {
             tools = 'resizable,toolbar=yes,location=yes,scrollbars=yes,menubar=yes';
         }
-        if (type == 'console' || type == 'fullscreen') {
+        if (type === 'console' || type === 'fullscreen') {
             tools = 'resizable,toolbar=no,location=no,scrollbars=no';
         }
-        if (type == 'console-with-scrollbars') {
+        if (type === 'console-with-scrollbars') {
             tools = 'resizable,toolbar=no,location=no,scrollbars=yes';
         }
         if (strWidth && strHeight) {
@@ -52,8 +52,8 @@
         popupWindow.focus();
     };
     Y.on("click", function(event) {
-        var args, href, popupElement, title, body,
-            anchor = event.target.get("nodeName") == "A" ? event.target : event.target.ancestor("a"),
+        var args, popupElement, title, body,
+            anchor = event.target.get("nodeName") === "A" ? event.target : event.target.ancestor("a"),
             rel = anchor !== null && anchor.get("rel");
         if (rel && rel.indexOf("popup") === 0) {
             event.preventDefault();

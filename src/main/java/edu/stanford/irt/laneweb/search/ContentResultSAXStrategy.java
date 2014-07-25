@@ -8,8 +8,8 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearchResult>, Resource {
 
@@ -22,6 +22,7 @@ public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearch
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
         try {
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
+            // TODO: access to resourceResult should be synchronized
             maybeCreateElement(xmlConsumer, RESOURCE_ID, resourceResult.getId());
             maybeCreateElement(xmlConsumer, RESOURCE_NAME, resourceResult.getDescription());
             maybeCreateElement(xmlConsumer, RESOURCE_URL, resourceResult.getURL());

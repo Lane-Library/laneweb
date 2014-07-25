@@ -13,7 +13,7 @@
 }
 
 .pagingButton span {
-    background-image: url(/././resources/images/sprite-all.png);
+    background-image: url(../images/sprite-all.png);
     background-repeat: no-repeat;
     background-position: 100px -277px;
     font-weight: normal;

@@ -11,7 +11,7 @@
 
 #bookmark-link {
     cursor: pointer;
-    background-image: url("/././resources/images/sprite-all.png");
+    background-image: url("../images/sprite-all.png");
     background-position: -600px 0px;
     background-repeat:no-repeat;
     display: inline-block;
@@ -19,12 +19,6 @@
     width: 26px;
     position: absolute;
     margin-left: 5px;
-}
-
-/*styles for topResources links so appears inside li element*/
-#topResources #bookmark-link {
-    bottom: 2px;
-    right: 0
 }
 
 #bookmark-link.active,
@@ -109,4 +103,12 @@ background-position: -600px -80px;
 	padding: 5px;
 	border: solid 2px #C9C9C9;
 	width: 25em;
+}
+#bookmarkSearch{
+    visibility:hidden;
+    margin: auto;
+    text-align: center;
+}
+#bookmarkSearch.active{
+    visibility:visible;
 }

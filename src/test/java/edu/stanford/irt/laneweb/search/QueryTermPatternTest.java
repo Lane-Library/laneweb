@@ -67,9 +67,22 @@ public class QueryTermPatternTest {
     @Test
     public final void testGetPattern9() {
         assertEquals(
-                " in infants with",
+                "MATCH in infants with MATCH.",
                 QueryTermPattern.getPattern("(Hypertension, Pulmonary) AND (Bronchopulmonary Dysplasia)")
-                        .matcher("pulmonary hypertension in infants with bronchopulmonary dysplasia.").replaceAll(""));
+                        .matcher("pulmonary hypertension in infants with bronchopulmonary dysplasia.")
+                        .replaceAll("MATCH"));
+    }
+
+    @Test
+    public final void testGetPatternParens() {
+        assertEquals("MATCH blah blah",
+                QueryTermPattern.getPattern("(simulation) AND (laprascopy)").matcher("simulation blah blah")
+                        .replaceAll("MATCH"));
+    }
+
+    @Test
+    public void testNullQuery() {
+        assertEquals("MATCH", QueryTermPattern.getPattern(null).matcher("").replaceAll("MATCH"));
     }
 
     @Test

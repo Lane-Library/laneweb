@@ -1,13 +1,13 @@
 package edu.stanford.irt.laneweb.hours;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -17,23 +17,19 @@ public class TodaysHours {
 
     private Map<String, String> daysMap = new HashMap<String, String>();
 
-    private Resource hoursFileResource = null;
+    private File hoursFile = null;
 
     private long hoursLastModified = 0;
 
     private final SimpleDateFormat todaysDateFormat = new SimpleDateFormat("MMM d");
 
     private final SimpleDateFormat todaysDayFormat = new SimpleDateFormat("EEEE");
-
-    public TodaysHours(final String hoursPath) {
-        if (null == hoursPath) {
-            throw new IllegalArgumentException("null hoursPath");
-        }
-        this.hoursFileResource = new FileSystemResource(hoursPath);
+    
+    public TodaysHours(final File hoursFile) {
+        this.hoursFile = hoursFile;
     }
 
-    @Override
-    public String toString() {
+    public String getHours() {
         return toString(null);
     }
 
@@ -60,13 +56,13 @@ public class TodaysHours {
     }
 
     private void updateHoursMap() {
-        try {
-            if (this.hoursFileResource.lastModified() > this.hoursLastModified) {
-                this.hoursLastModified = this.hoursFileResource.lastModified();
-                this.daysMap = new StreamDaysMapping(this.hoursFileResource.getInputStream());
+        if (this.hoursFile.lastModified() > this.hoursLastModified) {
+            this.hoursLastModified = this.hoursFile.lastModified();
+            try (InputStream input = new FileInputStream(this.hoursFile)) {
+                this.daysMap = new StreamDaysMapping(input);
+            } catch (IOException e) {
+                throw new LanewebException(e);
             }
-        } catch (IOException e) {
-            throw new LanewebException(e);
         }
     }
 }

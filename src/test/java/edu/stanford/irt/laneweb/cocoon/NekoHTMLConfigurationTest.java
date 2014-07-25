@@ -1,9 +1,10 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,17 +15,21 @@ public class NekoHTMLConfigurationTest {
 
     @Before
     public void setUp() throws Exception {
-        // TODO: set up with the features/properties we actually use
-        this.configuration = new NekoHTMLConfiguration(Collections.<String, String> emptyMap(),
-                Collections.<String, Boolean> emptyMap());
+        Map<String, String> properties = new HashMap<String, String>();
+        properties.put("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
+        properties.put("http://cyberneko.org/html/properties/names/elems", "lower");
+        properties.put("http://cyberneko.org/html/properties/namespaces-uri", "http://www.w3.org/1999/xhtml");
+        Map<String, Boolean> features = new HashMap<String, Boolean>();
+        features.put("http://cyberneko.org/html/features/insert-namespaces", Boolean.TRUE);
+        this.configuration = new NekoHTMLConfiguration(properties, features);
     }
 
     @Test
     public void test() {
-        assertEquals("Windows-1252", this.configuration.getProperty("http://cyberneko.org/html/properties/default-encoding"));
-        assertEquals("upper", this.configuration.getProperty("http://cyberneko.org/html/properties/names/elems"));
+        assertEquals("UTF-8", this.configuration.getProperty("http://cyberneko.org/html/properties/default-encoding"));
+        assertEquals("lower", this.configuration.getProperty("http://cyberneko.org/html/properties/names/elems"));
         assertEquals("http://www.w3.org/1999/xhtml",
                 this.configuration.getProperty("http://cyberneko.org/html/properties/namespaces-uri"));
-        assertFalse(this.configuration.getFeature("http://cyberneko.org/html/features/insert-namespaces"));
+        assertTrue(this.configuration.getFeature("http://cyberneko.org/html/features/insert-namespaces"));
     }
 }

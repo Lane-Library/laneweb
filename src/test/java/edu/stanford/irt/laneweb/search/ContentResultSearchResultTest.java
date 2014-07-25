@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -11,9 +12,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
-import edu.stanford.irt.search.impl.DefaultContentResult;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.ContentResultBuilder;
+import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultSearchResultTest {
 
@@ -27,26 +28,18 @@ public class ContentResultSearchResultTest {
     public void setUp() {
         this.contentResult = createMock(ContentResult.class);
         this.resourceResult = createMock(Result.class);
-        this.searchResult = new ContentResultSearchResult(this.contentResult, this.resourceResult, 100);
-    }
-    
-    @Test
-    public void testNotContentResultSearchResult() {
-        SearchResult result = createMock(SearchResult.class);
-        expect(result.getScore()).andReturn(100);
         expect(this.contentResult.getTitle()).andReturn("title");
-        expect(result.getSortTitle()).andReturn("title");
-        replay(this.contentResult, result);
-        assertTrue(this.searchResult.compareTo(result) > 0);
-        verify(this.contentResult, result);
+        replay(this.contentResult);
+        this.searchResult = new ContentResultSearchResult(this.contentResult, this.resourceResult, 100);
+        reset(this.contentResult);
     }
 
     @Test
     public void testCompareToSameTitleDifferentContentIds() {
-        DefaultContentResult result1 = new DefaultContentResult("1");
+        ContentResult result1 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result1.setTitle("same title");
         result1.setContentId("99999");
-        DefaultContentResult result2 = new DefaultContentResult("1");
+        ContentResult result2 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result2.setTitle("same title");
         result2.setContentId("999");
         ContentResultSearchResult first = new ContentResultSearchResult(result1, this.resourceResult, 900);
@@ -56,10 +49,10 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testCompareToSameTitleDifferentDates() {
-        DefaultContentResult result1 = new DefaultContentResult("1");
+        ContentResult result1 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result1.setTitle("same title");
         result1.setPublicationDate("2012");
-        DefaultContentResult result2 = new DefaultContentResult("1");
+        ContentResult result2 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result2.setTitle("same title");
         result2.setPublicationDate("2010");
         ContentResultSearchResult first = new ContentResultSearchResult(result1, this.resourceResult, 900);
@@ -69,6 +62,7 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testCompareToSameTitleDifferentScore() {
+        expect(this.contentResult.getTitle()).andReturn("title").times(2);
         replay(this.contentResult);
         ContentResultSearchResult first = new ContentResultSearchResult(this.contentResult, this.resourceResult, 900);
         ContentResultSearchResult second = new ContentResultSearchResult(this.contentResult, this.resourceResult, 0);
@@ -78,10 +72,10 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testCompareToSameTitleSameContentIds() {
-        DefaultContentResult result1 = new DefaultContentResult("1");
+        ContentResult result1 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result1.setTitle("same title");
         result1.setContentId("999");
-        DefaultContentResult result2 = new DefaultContentResult("1");
+        ContentResult result2 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result2.setTitle("same title");
         result2.setContentId("999");
         ContentResultSearchResult first = new ContentResultSearchResult(result1, this.resourceResult, 900);
@@ -93,7 +87,6 @@ public class ContentResultSearchResultTest {
     public void testCompareToTitle() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("first title");
-        expect(this.contentResult.getTitle()).andReturn("title");
         replay(result, this.contentResult);
         ContentResultSearchResult first = new ContentResultSearchResult(result, this.resourceResult, 100);
         assertTrue(this.searchResult.compareTo(first) > 0);
@@ -102,9 +95,9 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testEquals() {
-        DefaultContentResult result1 = new DefaultContentResult("1");
+        ContentResult result1 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result1.setTitle("same title");
-        DefaultContentResult result2 = new DefaultContentResult("1");
+        ContentResult result2 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result2.setTitle("same title");
         ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
         ContentResultSearchResult two = new ContentResultSearchResult(result2, this.resourceResult, 100);
@@ -118,9 +111,9 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testEqualsNullContentIdsNullCompareStrings() {
-        DefaultContentResult result1 = new DefaultContentResult("1");
+        ContentResult result1 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result1.setTitle("same title");
-        DefaultContentResult result2 = new DefaultContentResult("1");
+        ContentResult result2 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result2.setTitle("same title");
         ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
         ContentResultSearchResult two = new ContentResultSearchResult(result2, this.resourceResult, 100);
@@ -144,9 +137,35 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testGetSortTitle() {
-        expect(this.contentResult.getTitle()).andReturn("the title");
+        ContentResult r = createMock(ContentResult.class);
+        expect(r.getTitle()).andReturn("the title");
+        replay(r);
+        ContentResultSearchResult c = new ContentResultSearchResult(r, this.resourceResult, 0);
+        assertEquals("title", c.getSortTitle());
+        verify(r);
+    }
+
+    @Test
+    public void testHasAdditionalText() {
+        expect(this.contentResult.getDescription()).andReturn("description");
         replay(this.contentResult);
-        assertEquals("title", this.searchResult.getSortTitle());
+        assertTrue(this.searchResult.hasAdditionalText());
+        verify(this.contentResult);
+    }
+
+    @Test
+    public void testHasAdditionalTextEmpty() {
+        expect(this.contentResult.getDescription()).andReturn("");
+        replay(this.contentResult);
+        assertFalse(this.searchResult.hasAdditionalText());
+        verify(this.contentResult);
+    }
+
+    @Test
+    public void testHasAdditionalTextNull() {
+        expect(this.contentResult.getDescription()).andReturn(null);
+        replay(this.contentResult);
+        assertFalse(this.searchResult.hasAdditionalText());
         verify(this.contentResult);
     }
 
@@ -154,7 +173,6 @@ public class ContentResultSearchResultTest {
     public void testHashCode() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("the title");
-        expect(this.contentResult.getTitle()).andReturn("title");
         replay(result, this.contentResult);
         ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
         assertEquals(this.searchResult.hashCode(), other.hashCode());
@@ -162,10 +180,19 @@ public class ContentResultSearchResultTest {
     }
 
     @Test
+    public void testNotContentResultSearchResult() {
+        SearchResult result = createMock(SearchResult.class);
+        expect(result.getScore()).andReturn(100);
+        expect(result.getSortTitle()).andReturn("title");
+        replay(this.contentResult, result);
+        assertTrue(this.searchResult.compareTo(result) > 0);
+        verify(this.contentResult, result);
+    }
+
+    @Test
     public void testNotEquals() {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("not the title");
-        expect(this.contentResult.getTitle()).andReturn("title");
         replay(this.contentResult, result);
         ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
         assertFalse(this.searchResult.equals(other));
@@ -174,10 +201,10 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testNotEqualsDifferentContentIds() {
-        DefaultContentResult result1 = new DefaultContentResult("1");
+        ContentResult result1 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result1.setTitle("same title");
         result1.setContentId("99999");
-        DefaultContentResult result2 = new DefaultContentResult("1");
+        ContentResult result2 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result2.setTitle("same title");
         result2.setContentId("999");
         ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
@@ -187,11 +214,11 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testNotEqualsDifferentContentIdsDifferentAuthors() {
-        DefaultContentResult result1 = new DefaultContentResult("1");
+        ContentResult result1 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result1.setTitle("same title");
         result1.setContentId("cid");
         result1.setAuthor("authors");
-        DefaultContentResult result2 = new DefaultContentResult("1");
+        ContentResult result2 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();;
         result2.setTitle("same title");
         result1.setAuthor("different authors");
         ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
@@ -201,10 +228,10 @@ public class ContentResultSearchResultTest {
 
     @Test
     public void testNotEqualsTwoDifferentContentIds() {
-        DefaultContentResult result1 = new DefaultContentResult("1");
+        ContentResult result1 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result1.setTitle("same title");
         result1.setContentId("cid");
-        DefaultContentResult result2 = new DefaultContentResult("1");
+        ContentResult result2 = new ContentResultBuilder().setId("id").setDescription("description").setURL("url").build();
         result2.setTitle("same title");
         result2.setContentId("different cid");
         ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
