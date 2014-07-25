@@ -37,8 +37,7 @@
 }
 
 #laneNav ul ul,
-#favorites ul,
-.pagingLabels{
+#favorites ul{
     display:none;
     background-color:white;
     position:absolute;

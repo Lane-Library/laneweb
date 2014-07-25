@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div class="resourceListPagination">
-   <span id="pageStart">1</span> to 260 of <a href="?a=a&amp;page=all">1039 "A" titles</a>
-   <div class="pagingButton gray-btn">
-      <span>Choose Aa-Az</span>
-      <ul class="pagingLabels">
-         <li>
-            <a href="?a=a&amp;page=1">
-               <span>A.M.A. American journal of diseases o...</span>
-               <span class="plDash"> — </span>
-               <span>Advances in immunology ................. </span>
-               <span class="plResults"> (260)</span>
-            </a>
-         </li>
-         <li>
-            <a href="?a=a&amp;page=2">
-               <span>Advances in insect physiology ..........</span>
-               <span class="plDash"> — </span>
-               <span>American journal of tropical medicine .. </span>
-               <span class="plResults"> (260)</span>
-            </a>
-         </li>
-         <li>
-            <a href="?a=a&amp;page=3">
-               <span>American journal of tropical medicine...</span>
-               <span class="plDash"> — </span>
-               <span>Applied optics ......................... </span>
-               <span class="plResults"> (260)</span>
-            </a>
-         </li>
-         <li>
-            <a href="?a=a&amp;page=4">
-               <span>Applied psychological measurement ......</span>
-               <span class="plDash"> — </span>
-               <span>Ayu .................................... </span>
-               <span class="plResults"> (259)</span>
-            </a>
-         </li>
-      </ul>
+   <div class="yui3-g">
+      <div class="yui3-u-1-3">
+         <span id="pageStart">1</span> to 260 of <a href="?a=a&amp;page=all">1039 "A" titles</a>
+      </div>
+      <div class="yui3-u-1-3">
+         <a href="?a=a&amp;page=all">All "A" titles</a>
+      </div>
+      <div class="yui3-u-1-3">
+         <div class="pagingButton">
+            <span>Choose Aa-Az</span>
+            <ul class="pagingLabels">
+               <li>
+                  <a href="?a=a&amp;page=1">
+                     <span>A.M.A. American journal of diseases of children</span>
+                     <span class="plDash"> — </span>
+                     <span>Advances in immunology </span>
+                     <span class="plResults"> (260)</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="?a=a&amp;page=2">
+                     <span>Advances in insect physiology</span>
+                     <span class="plDash"> — </span>
+                     <span>American journal of tropical medicine </span>
+                     <span class="plResults"> (260)</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="?a=a&amp;page=3">
+                     <span>American journal of tropical medicine and hygiene</span>
+                     <span class="plDash"> — </span>
+                     <span>Applied optics </span>
+                     <span class="plResults"> (260)</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="?a=a&amp;page=4">
+                     <span>Applied psychological measurement</span>
+                     <span class="plDash"> — </span>
+                     <span>Ayu </span>
+                     <span class="plResults"> (259)</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </div>
    </div>
-   <a class="seeAll" href="?a=a&amp;page=all">All "A" titles</a>
 </div>
