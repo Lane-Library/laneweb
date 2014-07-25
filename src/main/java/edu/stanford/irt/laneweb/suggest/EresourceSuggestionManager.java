@@ -19,7 +19,7 @@ public class EresourceSuggestionManager implements SuggestionManager {
     private Collection<Suggestion> getSuggestions(final Collection<Eresource> eresources) {
         Collection<Suggestion> suggestions = new LinkedList<Suggestion>();
         for (Eresource eresource : eresources) {
-            suggestions.add(new Suggestion(Integer.toString(eresource.getId()), eresource.getTitle()));
+            suggestions.add(new Suggestion(eresource.getId(), eresource.getTitle()));
         }
         return suggestions;
     }

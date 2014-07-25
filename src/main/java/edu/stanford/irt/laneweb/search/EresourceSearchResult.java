@@ -16,7 +16,10 @@ public class EresourceSearchResult extends AbstractSearchResult {
         this.eresource = eresource;
     }
 
+    @Override
     public int compareTo(final SearchResult other) {
+        // rely on solr for result order
+        // return 0;
         int scoreCmp = other.getScore() - getScore();
         if (scoreCmp == 0) {
             scoreCmp = getSortTitle().compareTo(other.getSortTitle());

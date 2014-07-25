@@ -23,20 +23,19 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.solr.SolrEresource;
 import edu.stanford.irt.laneweb.solr.SolrRepository;
 
 public class LinkScanGeneratorTest {
 
-    private SolrEresource eresource;
+    private Eresource eresource;
 
-    private List<SolrEresource> eresourceList;
+    private List<Eresource> eresourceList;
 
     private LinkScanGenerator generator;
 
-    private edu.stanford.irt.laneweb.solr.Link link;
+    private Link link;
 
-    private List<edu.stanford.irt.laneweb.solr.Link> linkList;
+    private List<Link> linkList;
 
     private SolrRepository repository;
 
@@ -47,11 +46,11 @@ public class LinkScanGeneratorTest {
         this.repository = createMock(SolrRepository.class);
         this.generator = new LinkScanGenerator(this.repository);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.eresource = createMock(SolrEresource.class);
-        this.link = createMock(edu.stanford.irt.laneweb.solr.Link.class);
-        this.eresourceList = new LinkedList<SolrEresource>();
+        this.eresource = createMock(Eresource.class);
+        this.link = createMock(Link.class);
+        this.eresourceList = new LinkedList<Eresource>();
         this.eresourceList.add(this.eresource);
-        this.linkList = new LinkedList<edu.stanford.irt.laneweb.solr.Link>();
+        this.linkList = new LinkedList<Link>();
         this.linkList.add(this.link);
     }
 

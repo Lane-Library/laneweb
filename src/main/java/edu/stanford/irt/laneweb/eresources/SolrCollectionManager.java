@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
-import edu.stanford.irt.laneweb.solr.SolrEresource;
 import edu.stanford.irt.laneweb.solr.SolrRepository;
 
 public class SolrCollectionManager implements CollectionManager {
@@ -25,8 +23,7 @@ public class SolrCollectionManager implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return solrEresourcesToEresources(this.repository
-                .searchFindAllCoreByType(type, new PageRequest(0, Integer.MAX_VALUE)));
+        return this.repository.browseAllCoreByType(type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override
@@ -37,8 +34,7 @@ public class SolrCollectionManager implements CollectionManager {
         if (null == mesh) {
             throw new IllegalArgumentException("null mesh");
         }
-        return solrEresourcesToEresources(this.repository.searchFindAllByMeshAndType(mesh, type, new PageRequest(0,
-                Integer.MAX_VALUE)));
+        return this.repository.browseAllByMeshAndType(mesh, type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override
@@ -46,8 +42,7 @@ public class SolrCollectionManager implements CollectionManager {
         if (null == subset) {
             throw new IllegalArgumentException("null subset");
         }
-        return solrEresourcesToEresources(this.repository
-                .searchFindAllBySubset(subset, new PageRequest(0, Integer.MAX_VALUE)));
+        return this.repository.browseAllBySubset(subset, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override
@@ -55,7 +50,7 @@ public class SolrCollectionManager implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return solrEresourcesToEresources(this.repository.searchFindAllByType(type, new PageRequest(0, Integer.MAX_VALUE)));
+        return this.repository.browseAllByType(type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override
@@ -68,13 +63,13 @@ public class SolrCollectionManager implements CollectionManager {
         if ('#' == sAlpha) {
             sAlpha = '1';
         }
-        return solrEresourcesToEresources(this.repository.browseFindByTypeTitleStartingWith(type, Character.toString(sAlpha),
-                new PageRequest(0, Integer.MAX_VALUE)));
+        return this.repository.browseByTypeTitleStartingWith(type, Character.toString(sAlpha), new PageRequest(0,
+                Integer.MAX_VALUE));
     }
 
     @Override
     public List<Eresource> search(final String query) {
-        return solrEresourcesToEresources(this.repository.searchFindAll(query, new PageRequest(0, 50)));
+        return this.repository.searchFindAll(query, new PageRequest(0, 50));
     }
 
     // TODO: remove these when upgrading to 1.8
@@ -104,7 +99,7 @@ public class SolrCollectionManager implements CollectionManager {
         if (null == subset) {
             throw new IllegalArgumentException("null subset");
         }
-        return solrEresourcesToEresources(this.repository.searchFindBySubset(query, subset, new PageRequest(0, 50)));
+        return this.repository.searchFindBySubset(query, subset, new PageRequest(0, 50));
     }
 
     @Override
@@ -112,34 +107,6 @@ public class SolrCollectionManager implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return solrEresourcesToEresources(this.repository.searchFindByType(query, type, new PageRequest(0, 50)));
-    }
-
-    private List<Eresource> solrEresourcesToEresources(final List<SolrEresource> solrEresources) {
-        List<Eresource> eresources = new LinkedList<Eresource>();
-        for (SolrEresource solrEresource : solrEresources) {
-            int score;
-            if (null == solrEresource.getScore()) {
-                score = 0;
-            } else {
-                score = (int) (Float.parseFloat(solrEresource.getScore()) * 1000);
-            }
-            Eresource eresource = new Eresource(solrEresource.getDescription(), solrEresource.getId().hashCode(),
-                    solrEresource.getRecordId(), solrEresource.getRecordType().toString().toLowerCase(), score,
-                    solrEresource.getTitle(), solrEresource.getPublicationAuthorsText(),
-                    solrEresource.getPublicationText());
-            for (edu.stanford.irt.laneweb.solr.Link link : solrEresource.getLinks()) {
-                LinkType linkType = null;
-                for (LinkType lt : LinkType.values()) {
-                    if (link.getType().equals(lt.toString())) {
-                        linkType = lt;
-                    }
-                }
-                eresource.addLink(new Link(link.getLabel(), linkType, link.getUrl(), link.getText(), link
-                        .getAdditionalText()));
-            }
-            eresources.add(eresource);
-        }
-        return eresources;
+        return this.repository.searchFindByType(query, type, new PageRequest(0, 50));
     }
 }

@@ -77,7 +77,7 @@ public class AbstractSuggestCollectionManagerTest {
         expect(this.resultSet.next()).andReturn(false);
         replay(this.dataSource, this.sqlStatements, this.resultSet);
         List<Eresource> list = this.manager.parseResultSet(this.resultSet, "query");
-        assertEquals(10, list.get(0).getId());
+        assertEquals("10", list.get(0).getId());
         assertEquals("title", list.get(0).getTitle());
         assertEquals(3, list.size());
         verify(this.dataSource, this.sqlStatements, this.resultSet);

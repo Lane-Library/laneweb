@@ -44,7 +44,7 @@ public class EresourceSAXStrategyTest {
     @Test
     public void testToSAX() throws SAXException, IOException {
         expect(this.eresource.getScore()).andReturn(1);
-        expect(this.eresource.getId()).andReturn(2);
+        expect(this.eresource.getId()).andReturn("2");
         expect(this.eresource.getRecordId()).andReturn(3);
         expect(this.eresource.getRecordType()).andReturn(Resource.RECORD_TYPE);
         expect(this.eresource.getTitle()).andReturn(Resource.TITLE);

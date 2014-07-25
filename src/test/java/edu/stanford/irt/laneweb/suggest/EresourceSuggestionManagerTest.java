@@ -33,7 +33,7 @@ public class EresourceSuggestionManagerTest {
     @Test
     public void testGetSuggestionsForTerm() {
         expect(this.eresources.search("term")).andReturn(Collections.singletonList(this.eresource));
-        expect(this.eresource.getId()).andReturn(0);
+        expect(this.eresource.getId()).andReturn("id");
         expect(this.eresource.getTitle()).andReturn("title");
         replay(this.eresources, this.eresource);
         Suggestion suggestion = this.suggestions.getSuggestionsForTerm("term").iterator().next();
@@ -44,7 +44,7 @@ public class EresourceSuggestionManagerTest {
     @Test
     public void testGetSuggestionsForTermType() {
         expect(this.eresources.searchType("type", "term")).andReturn(Collections.singletonList(this.eresource));
-        expect(this.eresource.getId()).andReturn(0);
+        expect(this.eresource.getId()).andReturn("id");
         expect(this.eresource.getTitle()).andReturn("title");
         replay(this.eresources, this.eresource);
         Suggestion suggestion = this.suggestions.getSuggestionsForTerm("type", "term").iterator().next();

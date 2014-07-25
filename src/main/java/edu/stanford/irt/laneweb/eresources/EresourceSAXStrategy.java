@@ -23,7 +23,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
             atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(eresource.getScore()));
             atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "eresource");
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
-            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, ID, Integer.toString(eresource.getId()));
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, ID, eresource.getId());
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_ID, Integer.toString(eresource.getRecordId()));
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_TYPE, eresource.getRecordType());
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, eresource.getTitle());

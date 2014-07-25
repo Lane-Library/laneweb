@@ -15,8 +15,6 @@ import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.solr.Link;
-import edu.stanford.irt.laneweb.solr.SolrEresource;
 import edu.stanford.irt.laneweb.solr.SolrRepository;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
@@ -40,13 +38,13 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<SolrEresource> results = this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
+        List<Eresource> results = this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
         int p = 1;
         String position, id, title;
         try {
             xmlConsumer.startDocument();
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "ul");
-            for (SolrEresource eresource : results) {
+            for (Eresource eresource : results) {
                 id = eresource.getId();
                 title = eresource.getTitle();
                 if (title == null) {
@@ -81,7 +79,7 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
         return KEY;
     }
 
-    private Set<String> getLinks(final SolrEresource eresource) {
+    private Set<String> getLinks(final Eresource eresource) {
         HashSet<String> urls = new HashSet<String>();
         for (Link link : eresource.getLinks()) {
             String linkUrl = link.getUrl();

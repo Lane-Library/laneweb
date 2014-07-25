@@ -36,7 +36,13 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
                 int score = query == null ? 0 : this.scoreStrategy.computeScore(query, currentTitle, rs);
-                eresource = new Eresource(rs.getString("DESCRIPTION"), rowEresourceId, recordId, recordType, score, currentTitle, null, null);
+                eresource = new Eresource();
+                eresource.setDescription(rs.getString("DESCRIPTION"));
+                eresource.setId(Integer.toString(rowEresourceId));
+                eresource.setRecordId(recordId);
+                eresource.setRecordType(recordType);
+                eresource.setScore(score);
+                eresource.setTitle(currentTitle);
                 eresources.add(eresource);
                 currentEresourceId = rowEresourceId;
                 currentVersionId = -1;
