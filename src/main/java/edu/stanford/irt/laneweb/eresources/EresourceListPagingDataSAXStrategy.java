@@ -96,11 +96,11 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         sb.append("page=").append(i);
         startAnchor(xmlConsumer, sb.toString());
         createSpan(xmlConsumer, label.getStart());
-        createSpanWithClass(xmlConsumer, "plDash", "—");
+        XMLUtils.data(xmlConsumer, " — ");
         createSpan(xmlConsumer, label.getEnd());
         sb.setLength(0);
-        sb.append('(').append(label.getResults()).append(')');
-        createSpanWithClass(xmlConsumer, "plResults", sb.toString());
+        sb.append(" (").append(label.getResults()).append(')');
+        XMLUtils.data(xmlConsumer, sb.toString());
         endAnchor(xmlConsumer);
         endLi(xmlConsumer);
     }
