@@ -9,7 +9,7 @@
 }
 
 .content .pagingLabels{
-    display:block;
+    display:none;
     position:absolute;
     right:0;
     background-color:white;
