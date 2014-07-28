@@ -115,8 +115,10 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append(hrefBase).append("&");
         }
         sb.append("page=all");
-        createAnchor(xmlConsumer, sb.toString(),
-                new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles").toString());
+        startAnchor(xmlConsumer, sb.toString());
+        XMLUtils.data(xmlConsumer, new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles ").toString());
+        createElementWithClass(xmlConsumer, "i", "fa fa-arrow-right", "");
+        endAnchor(xmlConsumer);
     }
 
     private String maybeGetQuotedAlpha(final String alpha) {
