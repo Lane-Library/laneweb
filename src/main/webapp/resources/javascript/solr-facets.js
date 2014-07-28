@@ -19,7 +19,7 @@
                                         thousandsSeparator: ","
                                     });
                                     url = basePath + '/search.html?source=all-all&q=' + encodedQuery + '+' + facetId + ':"' + escape(p) + '"';
-                                    sibling.insert("<li><a href='"+ url + "'>" + p + "</a> - " + value + "</li>",'before');
+                                    sibling.insert("<li><a href='"+ url + "'>" + p + "</a> (" + value + ")</li>",'before');
                                 }
                             }
                         }
