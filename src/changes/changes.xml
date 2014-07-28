@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2014-07-28" version="2.2.11" description="2.2.11 bug fix release">
+            <action date="2014-07-28" dev="olgary" issue="98654" type="update">
+                added new "surgery" portal to drop down menu: template.xml, debug.xml
+            </action>
             <action date="2014-07-27" dev="ceyates" issue="98607" type="update">
                 change the eresources paging markup
             </action>
