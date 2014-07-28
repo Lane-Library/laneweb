@@ -3,15 +3,26 @@
     font-size:13px;
 }
 .pagingButton{
+    display:inline-block;
     position:relative;
     float:right;
     cursor:pointer;
+    bottom:4px;
+    padding:4px 8px;
+    border:1px solid #dadad9;
+    border-radius:3px 3px 0 0;
+    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.pagingButton .fa{
+    margin-left:8px;
 }
 
 .content .pagingLabels{
     display:none;
     position:absolute;
-    right:0;
+    right:-1px;
+    top:28px;
     background-color:white;
     border:1px solid #dadad9;
     background-image:url(../images/sprite-vertall.png);
@@ -20,7 +31,7 @@
     border-radius:0 0 3px 3px;
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
     white-space:nowrap;
-    padding:0 8px 0 4px;
+    padding:0 8px 0 6px;
 }
 .pagingButton:hover .pagingLabels{
     display:block;

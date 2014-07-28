@@ -21,14 +21,14 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             }
             if (pagingData.getSize() > pagingData.getLength()) {
                 startDivWithClass(xmlConsumer, "yui3-g");
-                startDivWithClass(xmlConsumer, "yui3-u-1-3");
+                startDivWithClass(xmlConsumer, "yui3-u-5-12");
                 createDisplayingMarkup(xmlConsumer, pagingData, alpha);
                 endDiv(xmlConsumer);
                 String hrefBase = pagingData.getBaseQuery();
                 startDivWithClass(xmlConsumer, "yui3-u-1-3");
                 createSeeAllMarkup(xmlConsumer, hrefBase, alpha);
                 endDiv(xmlConsumer);
-                startDivWithClass(xmlConsumer, "yui3-u-1-3");
+                startDivWithClass(xmlConsumer, "yui3-u-1-4");
                 createPagingButton(xmlConsumer, hrefBase, pagingData, alpha);
                 endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
@@ -67,15 +67,18 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
     }
 
     private void createPagingButton(final XMLConsumer xmlConsumer, final String hrefBase, EresourceListPagingData pagingData, final String alpha) throws SAXException {
+
+        XMLUtils.data(xmlConsumer, "View by page ");
         startDivWithClass(xmlConsumer, "pagingButton");
-        StringBuilder sb = new StringBuilder("Choose ");
+        StringBuilder sb = new StringBuilder();
         if (alpha.isEmpty()) {
             sb.append("A-Z");
         } else {
             String upperAlpha = alpha.toUpperCase();
             sb.append(upperAlpha).append("a-").append(upperAlpha).append('z');
         }
-        createSpan(xmlConsumer, sb.toString());
+        XMLUtils.data(xmlConsumer, sb.toString());
+        createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
         startUlWithClass(xmlConsumer, "pagingLabels");
         int i = 1;
         for (PagingLabel label : pagingData.getPagingLabels()) {
