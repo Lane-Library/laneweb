@@ -17,6 +17,8 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     static final String BROWSE_HANDLER = "/lane-browse";
 
+    static final String FACET_HANDLER = "/lane-facet";
+
     static final String SEARCH_HANDLER = "/lane-search";
 
     static final String SUGGEST_HANDLER = "/lane-suggest";
@@ -36,19 +38,19 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Query(value = "ertlsw?1", filters = { "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
     public List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
 
+    @Query(value = "?0", requestHandler = FACET_HANDLER)
+    @Facet(fields = { "type", "mesh", "year", "publicationTitle", "publicationAuthor", "publicationType",
+            "publicationLanguage", "isRecent", "isEnglish" }, limit = 10)
+    public FacetPage<Eresource> facetByManyFields(String term, Pageable page);
+
+    @Query(value = "?0", requestHandler = FACET_HANDLER)
+    @Facet(fields = { "type" }, minCount = 0, limit = 100)
+    public SolrResultPage<?> facetByType(String term, Pageable page);
+
     // test
     @Query(value = "?0", requestHandler = SEARCH_HANDLER)
     @Highlight
     public HighlightPage<Eresource> findAllHighlighted(String text, Pageable page);
-
-    @Query(value = "?0", requestHandler = SEARCH_HANDLER)
-    @Facet(fields = { "type", "mesh", "year", "publicationTitle", "publicationAuthor", "publicationType",
-            "publicationLanguage", "isRecent", "isEnglish" }, limit = 10)
-    public FacetPage<Eresource> searchFacetByManyFields(String term, Pageable page);
-
-    @Query(value = "?0", requestHandler = SEARCH_HANDLER)
-    @Facet(fields = { "type" }, minCount = 0, limit = 100)
-    public SolrResultPage<?> searchFacetByType(String term, Pageable page);
 
     @Query(value = "?0", requestHandler = SEARCH_HANDLER)
     public List<Eresource> searchFindAll(String text, Pageable page);

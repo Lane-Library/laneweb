@@ -34,7 +34,7 @@ public class SearchFacetsController {
             @RequestParam(value = "q", required = true) final String query, final HttpServletRequest request) {
         Map<String, Map<String, Long>> facetsMap = new HashMap<String, Map<String, Long>>();
         Map<String, Long> countMap = new LinkedHashMap<String, Long>();
-        FacetPage<?> fps = this.repository.searchFacetByManyFields(query, new PageRequest(0, 1));
+        FacetPage<?> fps = this.repository.facetByManyFields(query, new PageRequest(0, 1));
         long total = fps.getTotalElements();
         countMap.put("total", Long.valueOf(total));
         facetsMap.put("all", countMap);

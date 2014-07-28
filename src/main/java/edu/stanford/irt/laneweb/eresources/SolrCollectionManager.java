@@ -80,7 +80,7 @@ public class SolrCollectionManager implements CollectionManager {
 
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
-        SolrResultPage<?> facets = this.repository.searchFacetByType(query, new PageRequest(0, 1));
+        SolrResultPage<?> facets = this.repository.facetByType(query, new PageRequest(0, 1));
         int total = (int) facets.getTotalElements();
         result.put("all", Integer.valueOf(total));
         for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
