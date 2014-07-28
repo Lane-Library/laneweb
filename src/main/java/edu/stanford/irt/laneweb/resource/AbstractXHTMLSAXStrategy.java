@@ -70,6 +70,25 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
         createElementWithClass(xmlConsumer, DIV, clazz, text);
     }
 
+    protected void createElement(final XMLConsumer xmlConsumer, final String name, final String text)
+            throws SAXException {
+        XMLUtils.createElementNS(xmlConsumer, XHTML_NS, name, text);
+    }
+
+    protected void createElementWithClass(final XMLConsumer xmlConsumer, final String name, final String clazz,
+            final String text) throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
+        XMLUtils.createElement(xmlConsumer, XHTML_NS, name, atts, text);
+    }
+
+    protected void createElementWithId(final XMLConsumer xmlConsumer, final String name, final String id,
+            final String text) throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, ID, ID, CDATA, id == null ? EMPTY : id);
+        XMLUtils.createElement(xmlConsumer, XHTML_NS, name, atts, text);
+    }
+
     protected void createSpan(final XMLConsumer xmlConsumer, final String text) throws SAXException {
         createElement(xmlConsumer, SPAN, text);
     }
@@ -161,6 +180,13 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
         startElementWithClass(xmlConsumer, DIV, clazz);
     }
 
+    protected void startElementWithClass(final XMLConsumer xmlConsumer, final String name, final String clazz)
+            throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, name, atts);
+    }
+
     protected void startHead(final XMLConsumer xmlConsumer) throws SAXException {
         XMLUtils.startElement(xmlConsumer, XHTML_NS, HEAD);
     }
@@ -185,30 +211,5 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     protected void startUlWithClass(final XMLConsumer xmlConsumer, final String clazz) throws SAXException {
         startElementWithClass(xmlConsumer, UL, clazz);
-    }
-
-    private void createElement(final XMLConsumer xmlConsumer, final String name, final String text) throws SAXException {
-        XMLUtils.createElementNS(xmlConsumer, XHTML_NS, name, text);
-    }
-
-    private void createElementWithClass(final XMLConsumer xmlConsumer, final String name, final String clazz,
-            final String text) throws SAXException {
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
-        XMLUtils.createElement(xmlConsumer, XHTML_NS, name, atts, text);
-    }
-
-    private void createElementWithId(final XMLConsumer xmlConsumer, final String name, final String id,
-            final String text) throws SAXException {
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY, ID, ID, CDATA, id == null ? EMPTY : id);
-        XMLUtils.createElement(xmlConsumer, XHTML_NS, name, atts, text);
-    }
-
-    private void startElementWithClass(final XMLConsumer xmlConsumer, final String name, final String clazz)
-            throws SAXException {
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz == null ? EMPTY : clazz);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, name, atts);
     }
 }

@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -12,28 +9,31 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy<EresourceListPagingData> {
 
-    private static final Pattern ALPHA_PATTERN = Pattern.compile("(^|.+&)a=([a-z])(&.+|$)");
-
-    private static final int LINK_LENGTH = 40;
-
-    private static final int TEXT_LENGTH = 37;
-
     @Override
     public void toSAX(final EresourceListPagingData pagingData, final XMLConsumer xmlConsumer) {
         try {
             startDivWithClass(xmlConsumer, "resourceListPagination");
-            createDisplayingMarkup(xmlConsumer, pagingData);
+            String alpha = pagingData.getAlpha();
+            if (alpha == null || "all".equals(alpha)) {
+                alpha = "";
+            } else {
+                alpha = alpha.toUpperCase();
+            }
             if (pagingData.getSize() > pagingData.getLength()) {
+                startDivWithClass(xmlConsumer, "yui3-g");
+                startDivWithClass(xmlConsumer, "yui3-u-5-12");
+                createDisplayingMarkup(xmlConsumer, pagingData, alpha);
+                endDiv(xmlConsumer);
                 String hrefBase = pagingData.getBaseQuery();
-                createPagingButton(xmlConsumer, hrefBase);
-                startUlWithClass(xmlConsumer, "pagingLabels");
-                int i = 1;
-                for (PagingLabel label : pagingData.getPagingLabels()) {
-                    createPagingLabelMarkup(xmlConsumer, label, hrefBase, i);
-                    i++;
-                }
-                endUl(xmlConsumer);
-                createSeeAllMarkup(xmlConsumer, hrefBase);
+                startDivWithClass(xmlConsumer, "yui3-u-1-3");
+                createSeeAllMarkup(xmlConsumer, hrefBase, alpha);
+                endDiv(xmlConsumer);
+                startDivWithClass(xmlConsumer, "yui3-u-1-4");
+                createPagingButton(xmlConsumer, hrefBase, pagingData, alpha);
+                endDiv(xmlConsumer);
+                endDiv(xmlConsumer);
+            } else {
+                createDisplayingMarkup(xmlConsumer, pagingData, alpha);
             }
             endDiv(xmlConsumer);
         } catch (SAXException e) {
@@ -41,14 +41,14 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
     }
 
-    private void createDisplayingMarkup(final XMLConsumer xmlConsumer, final EresourceListPagingData pagingData)
-            throws SAXException {
+    private void createDisplayingMarkup(final XMLConsumer xmlConsumer, final EresourceListPagingData pagingData,
+            final String alpha) throws SAXException {
         String hrefBase = pagingData.getBaseQuery();
         int size = pagingData.getSize();
         int length = pagingData.getLength();
         int start = pagingData.getStart();
+        String quotedAlpha = maybeGetQuotedAlpha(alpha);
         if (size > length) {
-            XMLUtils.data(xmlConsumer, "Displaying ");
             createSpanWithId(xmlConsumer, "pageStart", Integer.toString(start + 1));
             StringBuilder sb = new StringBuilder(" to ");
             sb.append(start + length).append(" of ");
@@ -59,30 +59,34 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
                 sb.append(hrefBase).append("&");
             }
             sb.append("page=all");
-            createAnchor(xmlConsumer, sb.toString(), size + " matches");
+            createAnchor(xmlConsumer, sb.toString(), size + quotedAlpha + " titles");
         } else {
-            StringBuilder sb = new StringBuilder("Displaying ");
-            sb.append("all ").append(size).append(" matches");
+            StringBuilder sb = new StringBuilder("all ").append(size).append(quotedAlpha).append(" titles");
             XMLUtils.data(xmlConsumer, sb.toString());
         }
     }
 
-    private void createPagingButton(final XMLConsumer xmlConsumer, final String hrefBase) throws SAXException {
-        startAnchorWithClass(xmlConsumer, "#", "pagingButton gray-btn");
-        String alpha = null;
-        Matcher matcher = ALPHA_PATTERN.matcher(hrefBase);
-        if (matcher.matches()) {
-            alpha = matcher.group(2);
-        }
-        StringBuilder sb = new StringBuilder("Choose ");
-        if (alpha == null) {
+    private void createPagingButton(final XMLConsumer xmlConsumer, final String hrefBase, EresourceListPagingData pagingData, final String alpha) throws SAXException {
+
+        XMLUtils.data(xmlConsumer, "View by page ");
+        startDivWithClass(xmlConsumer, "pagingButton");
+        StringBuilder sb = new StringBuilder();
+        if (alpha.isEmpty()) {
             sb.append("A-Z");
         } else {
-            alpha = alpha.toUpperCase();
-            sb.append(alpha).append("a-").append(alpha).append('z');
+            String upperAlpha = alpha.toUpperCase();
+            sb.append(upperAlpha).append("a-").append(upperAlpha).append('z');
         }
-        createSpan(xmlConsumer, sb.toString());
-        endAnchor(xmlConsumer);
+        XMLUtils.data(xmlConsumer, sb.toString());
+        createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
+        startUlWithClass(xmlConsumer, "pagingLabels");
+        int i = 1;
+        for (PagingLabel label : pagingData.getPagingLabels()) {
+            createPagingLabelMarkup(xmlConsumer, label, hrefBase, i);
+            i++;
+        }
+        endUl(xmlConsumer);
+        endDiv(xmlConsumer);
     }
 
     private void createPagingLabelMarkup(final XMLConsumer xmlConsumer, final PagingLabel label, final String hrefBase,
@@ -94,49 +98,34 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
         sb.append("page=").append(i);
         startAnchor(xmlConsumer, sb.toString());
-        startUl(xmlConsumer);
-        startLi(xmlConsumer);
+        createSpan(xmlConsumer, label.getStart());
+        XMLUtils.data(xmlConsumer, " — ");
+        createSpan(xmlConsumer, label.getEnd());
         sb.setLength(0);
-        sb.append(label.getStart());
-        if (sb.length() > TEXT_LENGTH) {
-            sb.setLength(TEXT_LENGTH);
-        } else {
-            sb.append(' ');
-        }
-        while (sb.length() < LINK_LENGTH) {
-            sb.append('.');
-        }
+        sb.append(" (").append(label.getResults()).append(')');
         XMLUtils.data(xmlConsumer, sb.toString());
-        endLi(xmlConsumer);
-        startLi(xmlConsumer);
-        createSpanWithClass(xmlConsumer, "plDash", " — ");
-        sb.setLength(0);
-        sb.append(label.getEnd());
-        if (sb.length() > TEXT_LENGTH) {
-            sb.setLength(TEXT_LENGTH);
-        } else {
-            sb.append(' ');
-        }
-        while (sb.length() < LINK_LENGTH) {
-            sb.append('.');
-        }
-        sb.append(" ");
-        XMLUtils.data(xmlConsumer, sb.toString());
-        endLi(xmlConsumer);
-        startLiWithClass(xmlConsumer, "plResults");
-        XMLUtils.data(xmlConsumer, " (" + label.getResults() + ")");
-        endLi(xmlConsumer);
-        endUl(xmlConsumer);
         endAnchor(xmlConsumer);
         endLi(xmlConsumer);
     }
 
-    private void createSeeAllMarkup(final XMLConsumer xmlConsumer, final String hrefBase) throws SAXException {
+    private void createSeeAllMarkup(final XMLConsumer xmlConsumer, final String hrefBase, final String alpha)
+            throws SAXException {
         StringBuilder sb = new StringBuilder("?");
         if (hrefBase.length() > 0) {
             sb.append(hrefBase).append("&");
         }
         sb.append("page=all");
-        createAnchorWithClass(xmlConsumer, sb.toString(), "seeAll", "See All");
+        startAnchor(xmlConsumer, sb.toString());
+        XMLUtils.data(xmlConsumer, new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles ").toString());
+        createElementWithClass(xmlConsumer, "i", "fa fa-arrow-right", "");
+        endAnchor(xmlConsumer);
+    }
+
+    private String maybeGetQuotedAlpha(final String alpha) {
+        if (alpha.isEmpty()) {
+            return alpha;
+        } else {
+            return new StringBuilder(" \"").append(alpha).append('"').toString();
+        }
     }
 }

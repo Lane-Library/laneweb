@@ -1,128 +1,50 @@
-.resourceListPagination {
-    background-color: #F7F3E5;
-    padding: 10px 5px;
-    font-size: 13px;
+.resourceListPagination{
+    margin:0 17px;
+    font-size:13px;
 }
-
-.pagingButton {
-    width: 115px;
-    padding: 5px 5px 5px 10px;
-    margin: -7px 0;
-    float: right;
+.pagingButton{
+    display:inline-block;
     position:relative;
-    z-index: 2;
+    float:right;
+    cursor:pointer;
+    bottom:4px;
+    padding:4px 8px;
+    border:1px solid #dadad9;
+    border-radius:3px 3px 0 0;
+    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.pagingButton span {
-    background-image: url(../images/sprite-all.png);
-    background-repeat: no-repeat;
-    background-position: 100px -277px;
-    font-weight: normal;
-    padding: 0 0px 0 5px;
-    width: 100%;
+.pagingButton .fa{
+    margin-left:8px;
 }
 
-
-.pagingButtonActive {
-    background-image: url(../images/sprite-vertall.png);
-    background-position: 0 -1866px;
-    border-right: 1px solid #dadad9;
-    border-bottom: none;
-    -webkit-box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
-    box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
-    padding-bottom: 9px;
-    filter: none;
-    -webkit-border-radius: 3px 3px 0 0;
-    -moz-border-radius: 3px 3px 0 0;
-    border-radius: 3px 3px 0 0;
+.content .pagingLabels{
+    display:none;
+    position:absolute;
+    right:-1px;
+    top:28px;
+    background-color:white;
+    border:1px solid #dadad9;
+    background-image:url(../images/sprite-vertall.png);
+    background-position:0 bottom;
+    background-repeat:repeat-x;
+    border-radius:0 0 3px 3px;
+    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
+    white-space:nowrap;
+    padding:0 8px 0 6px;
 }
-
-.pagingButtonActive:hover {
-    border: 1px solid #dadad9;
-    border-bottom: none;
-    -webkit-box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
-    box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
+.pagingButton:hover .pagingLabels{
+    display:block;
 }
-
-.pagingButtonActive span {
-    background-position: 100px -237px;
+.pagingLabels span{
+    display:inline-block;
+    width:152px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    vertical-align:bottom;
+    padding-left:4px;
 }
-
-.paginationNumbers {
-    float: right;
-}
-
-.pagingLabels.show {
-    display: block;
-}
-
-.pagingLabels li {
-    width: 100%;
-    padding: 0 0 5px 0;
-}
-
-.pagingLabels {
-    display: none;
-    text-align: left;
-    width: 360px;
-    right: 369px;
-    margin-top: 7px;
-    border: 1px solid #dadad9;
-    border-top-left-radius: 3px;
-    -moz-border-radius-topleft: 3px;
-    -webkit-border-top-left-radius: 3px;
-    z-index: 1;
-}
-
-#searchResults .pagingLabels {
-    padding: 10px 10px 10px 15px;
-}
-
-.content .pagingLabels li {
-    list-style:none outside none;
-    margin-left: 0
-}
-.pagingLabels li li {
-    float: left;
-    white-space: nowrap;
-    width: 159px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-#searchResults .pagingLabels ul {
-    height: 15px;
-    padding: 5px 5px 0 0;
-    margin-bottom: 0;
-}
-
-#searchResults .pagingLabels ul:hover {
-    color: #820000;
-    border-bottom: 1px solid #820000;
-    height: 14px;
-    margin-right: 10px;
-}
-
-.pagingLabels .plResults {
-    width: 20px;
-    padding-left: 2px;
-    overflow: visible;
-    color: gray;
-}
-
-.pagingLabels .plDash {
-    padding: 0 5px;
-}
-
-.pagingLabels a {
-    display: block; /* to disable bookmarking */
-    border-bottom: none;
-    color: #1C4B70;
-}
-
-.seeAll {
-    float: right;
-    margin: 0 15px 0 10px;
+.content .pagingLabels li{
+    margin-right:0;
 }

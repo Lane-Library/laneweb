@@ -55,17 +55,18 @@ public class ContentResultConversionStrategy {
     private Map<Result, Collection<Result>> getContentResultMap(final Result result) {
         Map<Result, Collection<Result>> resultMap = new HashMap<Result, Collection<Result>>();
         for (Result engine : result.getChildren()) {
-            // TODO: operations on engine should be synchronized
-            Result hitCount = null;
-            Collection<Result> contents = Collections.emptySet();
-            for (Result child : engine.getChildren()) {
-                if (child.getId().endsWith(UNDERSCORE_CONTENT)) {
-                    contents = child.getChildren();
-                } else {
-                    hitCount = child;
+            synchronized (engine) {
+                Result hitCount = null;
+                Collection<Result> contents = Collections.emptySet();
+                for (Result child : engine.getChildren()) {
+                    if (child.getId().endsWith(UNDERSCORE_CONTENT)) {
+                        contents = child.getChildren();
+                    } else {
+                        hitCount = child;
+                    }
                 }
+                resultMap.put(hitCount, contents);
             }
-            resultMap.put(hitCount, contents);
         }
         return resultMap;
     }

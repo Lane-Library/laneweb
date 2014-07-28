@@ -48,6 +48,7 @@ public class EresourceListPagingDataSAXStrategyTest {
         expect(this.pagingData.getLength()).andReturn(260).times(2);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getBaseQuery()).andReturn("a=a").times(2);
+        expect(this.pagingData.getAlpha()).andReturn("a");
         expect(this.pagingData.getPagingLabels()).andReturn(
                 Arrays.asList(new PagingLabel[] { this.pagingLabel, this.pagingLabel, this.pagingLabel,
                         this.pagingLabel }));
@@ -78,6 +79,7 @@ public class EresourceListPagingDataSAXStrategyTest {
         expect(this.pagingData.getLength()).andReturn(260).times(2);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getBaseQuery()).andReturn("").times(2);
+        expect(this.pagingData.getAlpha()).andReturn(null);
         expect(this.pagingData.getPagingLabels()).andReturn(
                 Arrays.asList(new PagingLabel[] { this.pagingLabel, this.pagingLabel, this.pagingLabel,
                         this.pagingLabel }));
@@ -109,6 +111,7 @@ public class EresourceListPagingDataSAXStrategyTest {
         expect(this.pagingData.getSize()).andReturn(50).times(2);
         expect(this.pagingData.getLength()).andReturn(50).times(2);
         expect(this.pagingData.getStart()).andReturn(0);
+        expect(this.pagingData.getAlpha()).andReturn("a");
         expect(this.pagingData.getBaseQuery()).andReturn("a=a");
         replay(this.pagingLabel, this.pagingData, this.list);
         this.xmlConsumer.startDocument();

@@ -7,6 +7,47 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-07-28" version="2.2.11" description="2.2.11 bug fix release">
+            <action date="2014-07-28" dev="olgary" issue="98654" type="update">
+                added new "surgery" portal to drop down menu: template.xml, debug.xml
+            </action>
+            <action date="2014-07-27" dev="ceyates" issue="98607" type="update">
+                change the eresources paging markup
+            </action>
+            <action date="2014-07-26" dev="ceyates" issue="98624" type="update">
+                paging links on biomed-resources pages have bad layout
+            </action>
+            <action date="2014-07-25" dev="ceyates" issue="98611" type="update">
+                no background in 'new book' on eb page
+            </action>
+            <action date="2014-07-25" dev="ceyates" issue="98610" type="update">
+                popular - 2 columns don't work for books (any long titles..)
+            </action>
+            <action date="2014-07-24" dev="ceyates" issue="98594" type="update">
+                align 'spinning' search wheel
+            </action>
+            <action date="2014-07-23" dev="ceyates" issue="98565" type="fix">
+                Error displaying homepage from Hospital Computer
+            </action>
+            <action date="2014-07-24" dev="ceyates" issue="98552" type="update">
+                match &lt;p> styles to history site
+            </action>
+            <action date="2014-07-24" dev="ceyates" issue="98542" type="update">
+                change ad title to Fjord font
+            </action>
+            <action date="2014-07-23" dev="ceyates" issue="98538" type="fix">
+                SOM and SU links in footer swapped on history pages
+            </action>
+            <action date="2014-07-23" dev="olgary" issue="98530" type="update">
+                replaced margin-top for 'bd' with padding-top for 'module'
+            </action>
+            <action date="2014-07-22" dev="ceyates" issue="98509" type="add">
+                create mechanism to set boxes to the same height as the tallest one
+            </action>
+            <action date="2014-07-24" dev="ceyates" issue="98500" type="update">
+                align the color blocks for classes
+            </action>
+        </release>
         <release date="2014-07-21" version="2.2.10" description="2.2.10 bug fix release">
             <action date="2014-07-21" dev="olgary" issue="98455" type="fix">
                 Bad Links on all History Portal pages
