@@ -20,7 +20,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(eresource.getScore()));
+            atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Float.toString(eresource.getScore()));
             atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "eresource");
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, ID, eresource.getId());

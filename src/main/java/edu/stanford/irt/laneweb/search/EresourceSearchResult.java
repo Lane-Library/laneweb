@@ -12,7 +12,7 @@ public class EresourceSearchResult extends AbstractSearchResult {
     private int hashCode;
 
     public EresourceSearchResult(final Eresource eresource) {
-        super(eresource.getScore(), eresource.getTitle());
+        super(Float.floatToIntBits(eresource.getScore()), eresource.getTitle());
         this.eresource = eresource;
     }
 

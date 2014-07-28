@@ -61,7 +61,7 @@ public class MergedSearchGeneratorTest {
         expect(this.eresource.getTitle()).andReturn("title");
 //        expect(this.result.compareTo(this.result)).andReturn(0);
         expect(this.result.getScore()).andReturn(1);
-        expect(this.eresource.getScore()).andReturn(0);
+        expect(this.eresource.getScore()).andReturn(0f);
         replay(this.collectionManager, this.conversionStrategy, this.MetaSearchManager, this.saxStrategy, this.result,
                 this.eresource);
         assertEquals(2, this.generator.doSearch("query").size());

@@ -37,7 +37,7 @@ public class Eresource {
     @Field
     private String recordType;
 
-    private int score;
+    private float score;
 
     @Field
     private String title;
@@ -86,7 +86,7 @@ public class Eresource {
         return this.recordType;
     }
 
-    public int getScore() {
+    public float getScore() {
         return this.score;
     }
 
@@ -177,7 +177,7 @@ public class Eresource {
         this.recordType = recordType;
     }
 
-    public void setScore(final int score) {
+    public void setScore(final float score) {
         this.score = score;
     }
 
