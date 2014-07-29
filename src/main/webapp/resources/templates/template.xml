@@ -71,7 +71,7 @@
                             <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
                         </li>
                         <li>
-                            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</a>
+                            <a href="http://www.ncbi.nlm.nih.gov/pubmed?otool=stanford&holding=F1000%2CF1000M">PubMed</a>
                         </li>
                         <li>
                             <a href="http://www.uptodate.com/contents/search">UpToDate</a>
@@ -252,7 +252,7 @@
                         </ul>
                         <ul>
                             <li>
-                                <a title="See us on Facebook" href="http://www.facebook.com/pages/Stanford-CA/Lane-Medical-Library-Stanford/332223227257">
+                                <a title="See us on Facebook" href="https://www.facebook.com/LaneLibrary.Stanford">
                                     <span>See us on Facebook</span><i class="fa fa-facebook"></i>
                                 </a>
                             </li>
@@ -267,7 +267,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a title="See us on Twitter" href="http://twitter.com/#!/LaneLibStanford">
+                                <a title="See us on Twitter" href="https://twitter.com/">
                                     <span>See us on Twitter</span><i class="fa fa-twitter"></i>
                                 </a>
                             </li>
