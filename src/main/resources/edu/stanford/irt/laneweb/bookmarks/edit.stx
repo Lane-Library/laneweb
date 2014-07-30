@@ -39,9 +39,15 @@
                 <input name="label" type="text" value="{.}"></input>
                 <label for="url">location:</label>
                 <input name="url" type="text" value="{@href}"></input>
-                <button name="action" value="save" type="submit">save</button>
-                <button value="reset" type="reset">undo</button>
-                <button name="action" value="cancel" type="submit">cancel</button>
+                <button class="button" name="action" value="save" type="submit">
+                    <span>Save</span><i class="icon fa fa-arrow-right"></i>
+                </button>
+                <button class="button" value="reset" type="reset">
+                    <span>Undo</span><i class="icon fa fa-arrow-right"></i>
+                </button>
+                <button class="button" name="action" value="cancel" type="submit">
+                    <span>Cancel</span><i class="icon fa fa-arrow-right"></i>
+                </button>
             </stx:when>
             <stx:otherwise>
                 <stx:copy>

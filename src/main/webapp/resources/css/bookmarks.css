@@ -60,30 +60,6 @@ background-position: -600px -80px;
 	padding: 5px 15px;
 }
 
-#bookmarks-editor button {
-	margin: 5px;
-	padding: 5px 12px;
-	font-weight: bold;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	color: #444444 !important;
-	background-color: #edede5;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4) );
-	background: -moz-linear-gradient(#fafbf8, #dadad4);
-	/*filter necessary to display gradient in IE*/
-	filter: progid: DXImageTransform.Microsoft.gradient (startColorstr ='#fafbf8', endColorstr ='#dadad4' );
-	border: 1px solid #dadad9;
-	text-transform:capitalize;
-}
-
-#bookmarks-editor button:hover {
-	border: 1px solid #9e9d98;
-	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
-	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
-	box-shadow: 1px 1px 1px 1px #e8e8e8;
-}
-
 #bookmarks-editor li {
 	list-style-image: none;
 	list-style-type: none;
