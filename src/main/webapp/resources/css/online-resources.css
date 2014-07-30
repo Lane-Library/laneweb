@@ -1,6 +1,5 @@
 #resources-header{
     text-align:center;
-    font-size:16px;
     margin-top:12px;
 }
 #browseTabs{
@@ -13,11 +12,14 @@
     padding:0;
     margin:0;
     border-bottom:0;
-    width:36px;
+    width:29px;
+    margin-right:7px;
 }
 #browseTabs li:first-child{
     list-style-type:none;
     width:22px;
+    margin-right:0;
+    margin-left:7px;
 }
 #browseTabs:after{
     content:".";
@@ -25,4 +27,7 @@
     height:0;
     clear:both;
     visibility:hidden;
+}
+#resources-header a{
+    font-size:16px;
 }
