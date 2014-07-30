@@ -19,13 +19,13 @@
                 <form action="/bookmarks" method="post" id="bookmarks-editor">
                     <fieldset>
                         <button class="button" name="action" value="add" type="submit">
-                            <span>Add</span><i class="icon fa fa-arrow-right"></i>
+                            <span><i class="icon fa fa-plus"></i>Add</span><i class="icon fa fa-arrow-right"></i>
                         </button>
                         <button class="button" name="action" value="delete" type="submit">
-                            <span>Delete</span><i class="icon fa fa-arrow-right"></i>
+                            <span><i class="icon fa fa-minus"></i>Delete</span><i class="icon fa fa-arrow-right"></i>
                         </button>
                         <button class="button" name="action" value="edit" type="submit">
-                            <span>Edit</span><i class="icon fa fa-arrow-right"></i>
+                            <span><i class="icon fa fa-edit"></i>Edit</span><i class="icon fa fa-arrow-right"></i>
                         </button>
                     </fieldset>
                     <stx:process-children/>
