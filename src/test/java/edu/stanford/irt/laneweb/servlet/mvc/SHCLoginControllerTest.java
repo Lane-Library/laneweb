@@ -74,7 +74,6 @@ public class SHCLoginControllerTest {
 
     @Test
     public void testLoginExpiredTimestamp() throws IOException {
-        expect(this.request.getSession()).andReturn(this.session);
         expect(this.codec.decrypt("123456789")).andReturn("123456789");
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
