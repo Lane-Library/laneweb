@@ -50,21 +50,18 @@ background-position: -600px -80px;
     display:none;
 }
 
-#bookmarks-editor  {
-	margin-top: -0.1em;
-	}
-
 #bookmarks-editor fieldset {
 	border: 1px #DADAD8 solid;
 	background-color: #F4F5EF;
 	padding: 5px 15px;
 }
-
+#bookmarks-editor ul{
+    padding-left:0;
+}
 #bookmarks-editor li {
-	list-style-image: none;
-	list-style-type: none;
 	border-bottom: 1px #DADAD8 solid;
 	margin-left: 0;
+	margin-right: 0;
 	padding: 12px;
 }
 
@@ -73,12 +70,12 @@ background-position: -600px -80px;
 }
 
 #bookmarks-editor input[type='text'] {
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 	padding: 5px;
 	border: solid 2px #C9C9C9;
-	width: 25em;
+	width: 260px;
 }
 #bookmarkSearch{
     visibility:hidden;
