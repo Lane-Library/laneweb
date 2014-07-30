@@ -4,6 +4,9 @@
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
         facets = Y.all('.solrFacet'),
+        encodeAndEscape = function(string) {
+            return encodeURIComponent(string).replace(/'/g,'%27');
+        },
         makeRequest = function() {
             Y.io(basePath + '/apps/search/facets?q=' + encodedQuery + '&rd=' + Math.random(), {
                 on: {
@@ -18,7 +21,7 @@
                                     value = Y.DataType.Number.format(response.facets[facetId][p], {
                                         thousandsSeparator: ","
                                     });
-                                    url = basePath + '/search.html?source=all-all&q=' + encodedQuery + '+' + facetId + ':"' + escape(p) + '"';
+                                    url = basePath + '/search.html?source=all-all&q=' + encodedQuery + '+' + facetId + ':"' + encodeAndEscape(p) + '"';
                                     sibling.insert("<li><a href='"+ url + "'>" + p + "</a> (" + value + ")</li>",'before');
                                 }
                             }
