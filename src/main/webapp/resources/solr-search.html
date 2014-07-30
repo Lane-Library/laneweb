@@ -25,14 +25,14 @@
                     <div class="bd">
                         <a id="bookmarkSearch"><img src="/graphics/buttons/savesearch-orangebtn.png" title="Save this search" alt="Save this search" width="150" height="31" /></a>
                         <ul>
-                            <li class="facetHeader">
-                                <a href="/search.html?source=all-all&amp;q={search-terms}">All Results</a>
+                            <li id="all:total" class="solrFacet facetHeader">
+                                All Results
                             </li>
-                            <li id="isEnglish" class="solrFacet facetHeader">
-                                English?
+                            <li id="isEnglish:true" class="solrFacet">
+                                <a href="/search.html?source=all-all&amp;q={search-terms}+isEnglish:true">English Only</a>
                             </li>
-                            <li id="isRecent" class="solrFacet facetHeader">
-                                Last 10 years?
+                            <li id="isRecent:true" class="solrFacet">
+                                <a href="/search.html?source=all-all&amp;q={search-terms}+isRecent:true">Last 10 Years</a>
                             </li>
                             <li id="type" class="solrFacet facetHeader">
                                 Format
@@ -55,9 +55,6 @@
                             <li id="publicationLanguage" class="solrFacet facetHeader">
                                 Language
                             </li>
-                            <li id="catalog-loisFacet" class="searchFacet facetHeader">
-                                <a href="/search.html?source=catalog-lois&amp;q={search-terms}">More Print</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -68,6 +65,12 @@
                         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://eresources/search.html">
                             <xi:fallback>sorry, something failed during your search.</xi:fallback>
                         </xi:include>
+                        <p id="noHitsText">
+                            No results found. Check for typos, try <a title="No Lane Search results: Try Searchworks"
+                                href="http://searchworks.stanford.edu/?q={search-terms}&amp;search_field=search">All Stanford Libraries</a>, try <a title="No Lane Search results: Try Google"
+                                href="http://www.google.com/search?q={search-terms}">Google</a>, or review <a href="/help/choose-search.html">How to Search</a>,.<img
+                                src="/resources/images/spacer.gif?log=no-results" alt="spacer" />
+                        </p>
                     </div>
                 </div>
             </div>

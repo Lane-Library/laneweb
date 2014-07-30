@@ -161,6 +161,8 @@
 /*
  * Display PRINT MATERIALS (catalog-lois) filter if print results are only results present
  */
+// disable for solr
+/*
 (function() {
     var printId = 'catalog-lois',
     noHits = Y.one('#noHitsText'),
@@ -172,3 +174,4 @@
         Y.one('#all-allFacet').addClass('inactiveFacet');
     }
 })();
+*/
