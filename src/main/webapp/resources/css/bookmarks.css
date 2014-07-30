@@ -57,6 +57,10 @@ background-position: -600px -80px;
 }
 #bookmarks-editor ul{
     padding-left:0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
+    border-top:none;
 }
 #bookmarks-editor li {
 	border-bottom: 1px #DADAD8 solid;
