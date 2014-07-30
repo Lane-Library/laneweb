@@ -9,6 +9,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<PagingEresourceList> {
 
@@ -29,6 +30,8 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
         int start = pagingData.getStart();
         int length = pagingData.getLength();
         int size = list.size();
+        String alpha = ((EresourceListPagingData)pagingData).getAlpha();
+        alpha = alpha == null ? "" : alpha.toUpperCase();
         try {
             startHTMLDocument(xmlConsumer);
             startHead(xmlConsumer);
@@ -38,6 +41,10 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
             if (size > DEFAULT_PAGE_SIZE) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "h3");
+            XMLUtils.data(xmlConsumer, alpha);
+            createSpan(xmlConsumer, "Access restricted to Stanford Community unless noticed otherwise");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
             startUlWithClass(xmlConsumer, "lwSearchResults");
             int i = 0;
             for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {

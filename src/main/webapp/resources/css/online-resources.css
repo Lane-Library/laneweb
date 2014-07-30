@@ -31,3 +31,16 @@
 #resources-header a{
     font-size:16px;
 }
+
+/*TODO: stop using #searchResults for eresources*/
+#searchResults h3{
+    margin:0 17px;
+    padding-bottom:4px;
+}
+
+#searchResults h3 span{
+    float:right;
+    color:black;
+    font-size:12px;
+    font-style:italic;
+}
