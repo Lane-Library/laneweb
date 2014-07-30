@@ -20,9 +20,9 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     private static final String NONPRODUCTION = "User-agent: *\nDisallow: /";
 
-    private static final String PRODUCTION = "User-agent: *\nCrawl-delay: 7\nDisallow: /bassett/\n"
-            + "Disallow: /howto/\nDisallow: /m/\nDisallow: /portals/history/\n"
-            + "Disallow: /search.html\nDisallow: /secure/\nDisallow: /stage/";
+    private static final String PRODUCTION = "User-agent: *\nCrawl-delay: 7\n"
+            + "Disallow: /m/\n"
+            + "Disallow: /search.html\nDisallow: /secure/";
 
     private static final long serialVersionUID = 1L;
 
