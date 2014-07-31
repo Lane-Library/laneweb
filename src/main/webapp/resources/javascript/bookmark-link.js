@@ -218,7 +218,10 @@
              */
             _isBookmarkable : function(target) {
                 var bookmarkable = false;
-                if (target.getStyle("display").indexOf("inline") === 0 && !target.one("img")) {
+                if (target.ancestor("#searchFacets")) {
+                    bookmarkable = false;
+                }
+                else if (target.getStyle("display").indexOf("inline") === 0 && !target.one("img")) {
                     bookmarkable = true;
                 } else if (target.ancestor("#topResources")) {
                     bookmarkable = true;
