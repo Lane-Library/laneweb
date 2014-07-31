@@ -28,13 +28,13 @@
                                         facets.item(j).setStyle('display','block');
                                         facets.item(j).append("&nbsp;(" + facetCount + ")");
                                         if (query.match(facetIdAndValue)) {
-                                            facets.item(j).setHTML(facets.item(j).get('textContent') + " [<a title='remove constraint' href='"+ urlFacetOff + "'> remove </a>]");
+                                            facets.item(j).setHTML(facets.item(j).get('textContent') + "&nbsp;[<a title='remove constraint' href='"+ urlFacetOff + "'>&nbsp;remove&nbsp;</a>]");
                                         }
                                     }
                                     else if (undefined == facetValue) {
                                         facets.item(j).setStyle('display','block');
                                         if (query.match(facetIdAndValue)) {
-                                            sibling.insert("<li>" + facetProp + " (" + facetCount + ") [<a title='remove constraint' href='"+ urlFacetOff + "'> remove </a>]</li>",'before');
+                                            sibling.insert("<li>" + facetProp + " (" + facetCount + ")&nbsp;[<a title='remove constraint' href='"+ urlFacetOff + "'>&nbsp;remove&nbsp;</a>]</li>",'before');
                                         } else {
                                             sibling.insert("<li><a href='"+ url + "'>" + facetProp + "</a> (" + facetCount + ")</li>",'before');
                                         }
