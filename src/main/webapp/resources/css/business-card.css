@@ -1,0 +1,10 @@
+.business-card{
+    padding:12px;
+}
+.business-card *,
+.business-card .yui3-g [class *= 'yui3-u']{
+    font-family:'Fjord One', serif;
+}
+.business-card h3{
+    margin:6px 0;
+}

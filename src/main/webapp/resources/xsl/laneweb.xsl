@@ -373,7 +373,7 @@
     <xsl:template match="h:div[@class='popular']">
         <div style="margin-left:6px">
             <xsl:copy>
-                <xsl:apply-templates select="@*|*"/>
+                <xsl:apply-templates select="attribute::node()|child::node()"/>
             </xsl:copy>
         </div>
     </xsl:template>
