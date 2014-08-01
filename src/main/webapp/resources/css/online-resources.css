@@ -2,24 +2,29 @@
     text-align:center;
     margin-top:12px;
 }
+#resources-header a{
+    font-size:16px;
+}
 #browseTabs{
     background-color:#c1c1c1;
-    padding:6px 6px 6px 12px;
+    padding:12px 22px;
+    position:relative;
 }
 #browseTabs li{
-    list-style:disc inside none;
+    list-style:none outside none;
     float:left;
     padding:0;
     margin:0;
     border-bottom:0;
-    width:29px;
-    margin-right:7px;
 }
-#browseTabs li:first-child{
-    list-style-type:none;
-    width:22px;
-    margin-right:0;
-    margin-left:7px;
+#browseTabs li:before{
+    content: '\2022';
+    position:absolute;
+    margin-left:-1px;
+    top:13px;
+}
+#browseTabs li:first-child:before{
+content:'';
 }
 #browseTabs:after{
     content:".";
@@ -28,17 +33,17 @@
     clear:both;
     visibility:hidden;
 }
-#resources-header a{
-    font-size:16px;
+#browseTabs a{
+    display:inline-block;
+    width:35px;
 }
 
-/*TODO: stop using #searchResults for eresources*/
-#searchResults h3{
+.eresources{
     margin:0 17px;
     padding-bottom:4px;
 }
 
-#searchResults h3 span{
+.eresources span{
     float:right;
     color:black;
     font-size:12px;

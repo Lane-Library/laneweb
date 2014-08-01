@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>search results</title>
+      <title>biomed-resources</title>
    </head>
    <body>
-      <h3>A<span>Access restricted to Stanford Community unless noticed otherwise</span>
+      <h3 class="eresources">A<span>Access restricted to Stanford Community unless noticed otherwise</span>
       </h3>
       <ul class="lwSearchResults">
          <li/>

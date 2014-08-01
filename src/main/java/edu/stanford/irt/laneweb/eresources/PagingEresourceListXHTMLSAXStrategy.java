@@ -35,13 +35,13 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
         try {
             startHTMLDocument(xmlConsumer);
             startHead(xmlConsumer);
-            createTitle(xmlConsumer, "search results");
+            createTitle(xmlConsumer, "biomed-resources");
             endHead(xmlConsumer);
             startBody(xmlConsumer);
             if (size > DEFAULT_PAGE_SIZE) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "h3");
+            startElementWithClass(xmlConsumer, "h3", "eresources");
             XMLUtils.data(xmlConsumer, alpha);
             createSpan(xmlConsumer, "Access restricted to Stanford Community unless noticed otherwise");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
