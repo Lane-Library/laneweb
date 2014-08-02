@@ -129,7 +129,7 @@ public class Eresource {
                     String linkLabel = null;
                     String linkUrl = null;
                     String linkText = null;
-                    String linkAdditionalText = null;
+                    String additionalText = null;
                     LinkType linkType = null;
                     LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
                     if (jsonLink.containsKey("label")) {
@@ -137,12 +137,15 @@ public class Eresource {
                     }
                     if (jsonLink.containsKey("linkText")) {
                         linkText = (String) jsonLink.get("linkText");
-                        if (isFirstLink++ == 0) {
-                            linkText = this.title;
-                        }
                     }
                     if (jsonLink.containsKey("additionalText")) {
-                        linkAdditionalText = (String) jsonLink.get("additionalText");
+                        additionalText = (String) jsonLink.get("additionalText");
+                    }
+                    if (isFirstLink++ == 0) {
+                        linkText = this.title;
+                        if (versionMap.containsKey("additionalText")) {
+                            additionalText = (String) versionMap.get("additionalText");
+                        }
                     }
                     if (jsonLink.containsKey("url")) {
                         linkUrl = (String) jsonLink.get("url");
@@ -155,7 +158,7 @@ public class Eresource {
                     } else {
                         linkType = LinkType.NORMAL;
                     }
-                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, linkAdditionalText));
+                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText));
                 }
             }
         }
