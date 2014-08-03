@@ -7,6 +7,68 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-08-04" version="2.2.12" description="2.2.12 bug fix release">
+            <action date="2014-08-01" dev="olgary" issue="98726" type="fix">
+                bad link: fixed in history.xml
+            </action>
+            <action date="2014-08-01" dev="olgary" issue="98724" type="fix">
+                bad link in bottom border: fixed template and debug xml
+            </action>
+            <action date="2014-07-31" dev="olgary" issue="98719" type="update">
+                update miscellnaous.css - removed extra def for h4 for class titles
+            </action>
+            <action date="2014-07-31" dev="ceyates" issue="98715" type="fix">
+                new button styles break in 'lightbox'
+            </action>
+            <action date="2014-07-29" dev="olgary" issue="98685" type="remove">
+                deleted lr.gif
+            </action>
+            <action date="2014-07-29" dev="olgary" issue="98683" type="remove">
+                deleted searchBg1.jpg - old
+            </action>
+            <action date="2014-07-29" dev="olgary" issue="98682" type="remove">
+                deleted search-button-on.png - old button
+            </action>
+            <action date="2014-07-29" dev="olgary" issue="98681" type="remove">
+                removed  /resources/images/clinSearchBg1.jpg
+            </action>
+            <action date="2014-07-29" dev="olgary" issue="98679" type="remove">
+                remove carrot image 
+            </action>
+            <action date="2014-07-29" dev="ryanmax" issue="98669" type="update">
+                change uptodate link in red bar
+            </action>
+            <action date="2014-07-30" dev="ceyates" issue="98667" type="update">
+                reduce gap between 'view by page' and its drop down
+            </action>
+            <action date="2014-07-31" dev="ceyates" issue="98638" type="update">
+                make new class for business cards
+            </action>
+            <action date="2014-07-30" dev="ceyates" issue="98635" type="update">
+                make bookmark editor background white and align checkboxes
+            </action>
+            <action date="2014-07-30" dev="ceyates" issue="98603" type="update">
+                add message from catalog records
+            </action>
+            <action date="2014-07-30" dev="ceyates" issue="98601" type="update">
+                add a corresponding letter as a header above eresources list
+            </action>
+            <action date="2014-07-30" dev="ceyates" issue="98572" type="update">
+                change buttons in bookmarks editor
+            </action>
+            <action date="2014-07-29" dev="olgary" issue="98496" type="update">
+                redirected links
+            </action>
+            <action date="2014-07-30" dev="ceyates" issue="98122" type="update">
+                review and revise robots.txt
+            </action>
+            <action date="2014-08-01" dev="ceyates" issue="98113" type="update">
+                style resource buttons A-Z
+            </action>
+            <action date="2014-07-30" dev="ceyates" issue="94962" type="update">
+                insure thread safe session access
+            </action>
+        </release>
         <release date="2014-07-28" version="2.2.11" description="2.2.11 bug fix release">
             <action date="2014-07-28" dev="olgary" issue="98654" type="update">
                 added new "surgery" portal to drop down menu: template.xml, debug.xml
