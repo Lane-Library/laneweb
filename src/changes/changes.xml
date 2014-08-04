@@ -7,7 +7,13 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2014-08-04" version="2.2.12" description="2.2.12 bug fix release">
+        <release date="2014-08-04" version="2.2.14" description="2.2.14 bug fix release"/>
+        <release date="2014-08-04" version="2.2.13" description="2.2.13 emergency release">
+            <action date="2014-08-04" dev="ceyates" issue="98741" type="fix">
+                excessive thread usage
+            </action>
+        </release>
+        <release date="2014-08-04" version="2.2.12" description="2.2.12 bug fix release [not deployed]">
             <action date="2014-08-01" dev="olgary" issue="98726" type="fix">
                 bad link: fixed in history.xml
             </action>
