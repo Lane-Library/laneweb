@@ -26,35 +26,33 @@ public class ImageMetasearchSAXStrategy extends AbstractImageSearchSAXStrategy<R
         try {
             Collection<Result> engines = metaSearchResult.getChildren();
             String hits = null;
+            // TODO: access to Result should be synchronized
             for (Result engineResult : engines) {
-                synchronized (engineResult) {
-                    startDiv(xmlConsumer);
-                    Collection<Result> resources = engineResult.getChildren();
-                    hits = engineResult.getHits();
-                    String url = null;
-                    for (Result resource : resources) {
-                        if (resource.getId().indexOf("_content") == -1) {
-                            url = resource.getURL();
-                        }
-                        if (resource.getHits() != null && !"0".equals(resource.getHits())
-                                && resource.getId().endsWith("_content")) {
-                            createTitle(xmlConsumer, resource.getId(), engineResult.getDescription(),
-                                    resource.getHits(), hits, url);
-                        }
-                        startElementWithId(xmlConsumer, UL, "imageList");
-                        Collection<Result> contents = resource.getChildren();
-                        for (Result content : contents) {
-                            if (content.getId().contains("_content_")) {
-                                ContentResult contentResult = (ContentResult) content;
-                                generateImages(xmlConsumer, contentResult.getContentId(), contentResult.getTitle(),
-                                        contentResult.getURL(), contentResult.getDescription(),
-                                        contentResult.getAuthor());
-                            }
-                        }
-                        endUl(xmlConsumer);
+                startDiv(xmlConsumer);
+                Collection<Result> resources = engineResult.getChildren();
+                hits = engineResult.getHits();
+                String url = null;
+                for (Result resource : resources) {
+                    if (resource.getId().indexOf("_content") == -1) {
+                        url = resource.getURL();
                     }
-                    endDiv(xmlConsumer);
+                    if (resource.getHits() != null && !"0".equals(resource.getHits())
+                            && resource.getId().endsWith("_content")) {
+                        createTitle(xmlConsumer, resource.getId(), engineResult.getDescription(), resource.getHits(),
+                                hits, url);
+                    }
+                    startElementWithId(xmlConsumer, UL, "imageList");
+                    Collection<Result> contents = resource.getChildren();
+                    for (Result content : contents) {
+                        if (content.getId().contains("_content_")) {
+                            ContentResult contentResult = (ContentResult) content;
+                            generateImages(xmlConsumer, contentResult.getContentId(), contentResult.getTitle(),
+                                    contentResult.getURL(), contentResult.getDescription(), contentResult.getAuthor());
+                        }
+                    }
+                    endUl(xmlConsumer);
                 }
+                endDiv(xmlConsumer);
             }
             generateTooltips(xmlConsumer, engines);
         } catch (SAXException e) {
