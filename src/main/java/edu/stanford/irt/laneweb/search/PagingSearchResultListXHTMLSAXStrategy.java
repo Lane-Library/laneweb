@@ -16,31 +16,31 @@ import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<PagingSearchResultList> {
 
-    private static final String A = "a";
-
     private static final String CDATA = "CDATA";
 
     private static final String CLASS = "class";
 
-    private static final String DIV = "div";
+    private static final String LI = "li";
 
     private static final String EMPTY_NS = "";
 
-    private static final String HREF = "href";
-
-    private static final String ID = "id";
-
-    private static final String LI = "li";
-
     private static final String NO_PREFIX = "";
-
-    private static final String SPAN = "span";
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
-    private SAXStrategy<PagingData> pagingDataStrategy;
+    private static final String ID = "id";
+
+    private static final String DIV = "div";
+
+    private static final String SPAN = "span";
+
+    private static final String HREF = "href";
+
+    private static final String A = "a";
 
     private SAXStrategy<SearchResult> saxStrategy;
+    
+    private SAXStrategy<PagingData> pagingDataStrategy;
 
     public PagingSearchResultListXHTMLSAXStrategy(final SAXStrategy<SearchResult> saxStrategy,
             final SAXStrategy<PagingData> pagingDataStrategy) {
@@ -68,17 +68,18 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             int i = 0;
             for (ListIterator<SearchResult> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 SearchResult result = it.next();
-                if (result.hasAdditionalText()) {
-                    atts = new AttributesImpl();
-                    atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "hvrTrig");
-                    XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
-                } else {
-                    XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
-                }
-                this.saxStrategy.toSAX(result, xmlConsumer);
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
+                    if (result.hasAdditionalText()) {
+                        atts = new AttributesImpl();
+                        atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "hvrTrig");
+                        XMLUtils.startElement(xmlConsumer, XHTML_NS, LI, atts);
+                    } else {
+                        XMLUtils.startElement(xmlConsumer, XHTML_NS, LI);
+                    }
+                    this.saxStrategy.toSAX(result, xmlConsumer);
+                    XMLUtils.endElement(xmlConsumer, XHTML_NS, LI);
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "ul");
+            
             int size = list.size();
             if (size > 100) {
                 this.pagingDataStrategy.toSAX(pagingData, xmlConsumer);
@@ -91,6 +92,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
             boolean showPubMedStrategies = false;
             for (SearchResult resource : list) {
                 if (resource instanceof ContentResultSearchResult) {
+                    // TODO: access to resousrceResult should be synchronized
                     Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
                     if (!countedResources.contains(resourceResult)) {
                         countedResources.add(resourceResult);
@@ -102,11 +104,9 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
                         atts.addAttribute(EMPTY_NS, ID, ID, CDATA, id);
                         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
                         atts = new AttributesImpl();
-                        synchronized (resourceResult) {
-                            atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, resourceResult.getURL());
-                            XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
-                            XMLUtils.data(xmlConsumer, resourceResult.getHits());
-                        }
+                        atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, resourceResult.getURL());
+                        XMLUtils.startElement(xmlConsumer, XHTML_NS, A, atts);
+                        XMLUtils.data(xmlConsumer, resourceResult.getHits());
                         XMLUtils.endElement(xmlConsumer, XHTML_NS, A);
                         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
                     }
@@ -120,6 +120,7 @@ public class PagingSearchResultListXHTMLSAXStrategy implements SAXStrategy<Pagin
                 XMLUtils.data(xmlConsumer, "true");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
             }
+                        
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "body");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "html");
             xmlConsumer.endPrefixMapping(NO_PREFIX);
