@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-08-04" version="2.2.13" description="2.2.13 emergency release">
+            <action date="2014-08-04" dev="ceyates" issue="98741" type="fix">
+                excessive thread usage
+            </action>
+        </release>
         <release date="2014-07-28" version="2.2.11" description="2.2.11 bug fix release">
             <action date="2014-07-28" dev="olgary" issue="98654" type="update">
                 added new "surgery" portal to drop down menu: template.xml, debug.xml
