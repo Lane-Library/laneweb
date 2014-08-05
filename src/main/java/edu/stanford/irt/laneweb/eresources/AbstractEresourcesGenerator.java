@@ -17,7 +17,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
 
 public abstract class AbstractEresourcesGenerator extends AbstractGenerator implements CacheablePipelineComponent,
-ParametersAware, ModelAware {
+        ParametersAware, ModelAware {
 
     /** the default cache expiration time, 20 minutes */
     private static final long DEFAULT_EXPIRES = 1000 * 60 * 20;
@@ -100,8 +100,10 @@ ParametersAware, ModelAware {
             baseQuery = "";
         }
         PagingData pagingData = new EresourceListPagingData(eresources, this.page, baseQuery, this.alpha);
-        this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData), xmlConsumer);
+        this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData, getHeading()), xmlConsumer);
     }
 
     protected abstract List<Eresource> getEresourceList(CollectionManager collectionManager);
+
+    protected abstract String getHeading();
 }

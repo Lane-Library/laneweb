@@ -70,7 +70,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(256);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn(null).times(256);
         expect(this.list.listIterator(0)).andReturn(this.listIterator);
@@ -93,7 +93,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(100);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("").times(100);
         expect(this.list.listIterator(0)).andReturn(this.listIterator);
@@ -116,7 +116,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(100);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn(null).times(100);
         expect(this.list.listIterator(0)).andReturn(this.listIterator);
@@ -139,7 +139,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(100);
         expect(this.pagingData.getLength()).andReturn(100);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn(null).times(100);
         expect(this.list.listIterator(100)).andReturn(this.listIterator);
@@ -162,7 +162,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(200);
         expect(this.pagingData.getLength()).andReturn(56);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn(null).times(56);
         expect(this.list.listIterator(200)).andReturn(this.listIterator);
@@ -185,7 +185,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(447);
         expect(this.pagingData.getLength()).andReturn(149);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn(null).times(149);
         expect(this.list.listIterator(447)).andReturn(this.listIterator);
@@ -207,7 +207,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(100);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description").times(100);
         expect(this.list.listIterator(0)).andReturn(this.listIterator);
@@ -229,7 +229,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(100);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(200);
         expect(this.eresource.getDescription()).andReturn(null).times(100);
         expect(this.list.listIterator(0)).andReturn(this.listIterator);
@@ -255,7 +255,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(100);
-        expect(this.pagingData.getAlpha()).andReturn("a");
+        expect(this.list.getHeading()).andReturn("A");
         expect(this.list.size()).andReturn(0);
         this.eresourceStrategy.toSAX(this.eresource, this.xmlConsumer);
         expectLastCall().times(100);

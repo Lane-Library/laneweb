@@ -30,8 +30,7 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
         int start = pagingData.getStart();
         int length = pagingData.getLength();
         int size = list.size();
-        String alpha = ((EresourceListPagingData)pagingData).getAlpha();
-        alpha = alpha == null ? "" : alpha.toUpperCase();
+        String heading = list.getHeading();
         try {
             startHTMLDocument(xmlConsumer);
             startHead(xmlConsumer);
@@ -41,10 +40,7 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
             if (size > DEFAULT_PAGE_SIZE) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
-            startElementWithClass(xmlConsumer, "h3", "eresources");
-            XMLUtils.data(xmlConsumer, alpha);
-            createSpan(xmlConsumer, "Access restricted to Stanford Community unless noticed otherwise");
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
+            createHeading(xmlConsumer, heading);
             startUlWithClass(xmlConsumer, "lwSearchResults");
             int i = 0;
             for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
@@ -66,6 +62,15 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
             endHTMLDocument(xmlConsumer);
         } catch (SAXException e) {
             throw new LanewebException(e);
+        }
+    }
+
+    private void createHeading(final XMLConsumer xmlConsumer, final String heading) throws SAXException {
+        if (heading != null) {
+            startElementWithClass(xmlConsumer, "h3", "eresources");
+            XMLUtils.data(xmlConsumer, heading);
+            createSpan(xmlConsumer, "Access restricted to Stanford Community unless noticed otherwise");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
         }
     }
 }

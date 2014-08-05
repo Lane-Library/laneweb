@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.eresources;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
@@ -49,5 +50,25 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
             return Collections.emptyList();
         }
         return collectionManager.getMesh(this.type, this.mesh);
+    }
+
+    @Override
+    protected String getHeading() {
+        if ("aids/hiv".equals(this.mesh)) {
+            return "AIDS/HIV";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (StringTokenizer st = new StringTokenizer(this.mesh, " -", true); st.hasMoreTokens();) {
+            String token = st.nextToken();
+            if ("and".equals(token) || "of".equals(token)) {
+                sb.append(token);
+            } else {
+                sb.append(Character.toUpperCase(token.charAt(0))).append(token.substring(1));
+            }
+            if (st.hasMoreTokens()) {
+                sb.append(st.nextToken());
+            }
+        }
+        return sb.toString();
     }
 }

@@ -37,6 +37,11 @@ public class AbstractEresourcesGeneratorTest {
         protected List<Eresource> getEresourceList(final CollectionManager collectionManager) {
             return this.eresourceList;
         }
+
+        @Override
+        protected String getHeading() {
+            return "A";
+        }
     }
 
     private CollectionManager collectionManager;
