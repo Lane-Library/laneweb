@@ -74,9 +74,9 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeEmridAndSunetidNoProxyRedirect() throws Exception {
+    public void testCmeEmridAndSunetidNoProxyRedirect() throws Exception {
         this.response
-                .sendRedirect("http://www.uptodate.com/online/content/search.do?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+                .sendRedirect("http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeRedirect("hashedSunet", "/basepath", "emrid", false, "http://www.uptodate.com/",
                 this.request, this.response);
@@ -84,9 +84,9 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeEmridAndSunetidRedirect() throws Exception {
+    public void testCmeEmridAndSunetidRedirect() throws Exception {
         this.response
-                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeRedirect("hashedSunet", "/basepath", "emrid", true, "http://www.uptodate.com/",
                 this.request, this.response);
@@ -94,9 +94,9 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeEmridRedirect() throws Exception {
+    public void testCmeEmridRedirect() throws Exception {
         this.response
-                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeRedirect(null, "/basepath", "emrid", true, "http://www.uptodate.com/", this.request,
                 this.response);
@@ -104,9 +104,9 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeEmridSecureRedirect() throws Exception {
+    public void testCmeEmridSecureRedirect() throws Exception {
         this.response
-                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeSecureRedirect(null, "emrid", true, "http://www.uptodate.com/online", this.request,
                 this.response);
@@ -114,7 +114,17 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeRedirectBadHost() throws Exception {
+    public void testCmeEmridSecureRedirect2() throws Exception {
+        this.response
+        .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+        replay(this.request, this.response);
+        this.controller.cmeSecureRedirect(null, "emrid", true, "http://www.uptodate.com/contents/search", this.request,
+                this.response);
+        verify(this.request, this.response);
+    }
+    
+    @Test
+    public void testCmeRedirectBadHost() throws Exception {
         expect(this.request.getQueryString()).andReturn("yo");
         this.response.sendRedirect("/cmeRedirectError.html?yo");
         replay(this.request, this.response);
@@ -124,7 +134,7 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeRedirectEmptyHost() throws Exception {
+    public void testCmeRedirectEmptyHost() throws Exception {
         expect(this.request.getQueryString()).andReturn("yo");
         this.response.sendRedirect("/cmeRedirectError.html?yo");
         replay(this.request, this.response);
@@ -133,7 +143,7 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeRedirectNonstandardHost() throws Exception {
+    public void testCmeRedirectNonstandardHost() throws Exception {
         this.response.sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/help/manual/cme");
         replay(this.request, this.response);
         this.controller.cmeRedirect("hashedSunet", "/basepath", null, true, "http://www.uptodate.com/help/manual/cme",
@@ -142,7 +152,7 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeRedirectNullEmridNullSunet() throws Exception {
+    public void testCmeRedirectNullEmridNullSunet() throws Exception {
         this.response.sendRedirect("/basepath/secure/redirect/cme?url=http://www.uptodate.com/online");
         replay(this.request, this.response);
         this.controller.cmeRedirect(null, "/basepath", null, true, "http://www.uptodate.com/online", this.request,
@@ -151,7 +161,7 @@ public class CMERedirectControllerTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void textCmeRedirectNullHost() throws Exception {
+    public void testCmeRedirectNullHost() throws Exception {
         expect(this.request.getQueryString()).andReturn("yo");
         this.response.sendRedirect("/cmeRedirectError.html?yo");
         replay(this.request, this.response);
@@ -160,7 +170,7 @@ public class CMERedirectControllerTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void textCmeRedirectNullHostNullQueryString() throws Exception {
+    public void testCmeRedirectNullHostNullQueryString() throws Exception {
         expect(this.request.getQueryString()).andReturn(null);
         this.response.sendRedirect("/cmeRedirectError.html");
         replay(this.request, this.response);
@@ -169,7 +179,7 @@ public class CMERedirectControllerTest {
     }
 
     @Test
-    public void textCmeRedirectSunetid() throws Exception {
+    public void testCmeRedirectSunetid() throws Exception {
         this.response
                 .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?foo=bar&unid=hashedSunet&srcsys=EZPX90710&eiv=2.1.0");
         replay(this.request, this.response);
@@ -179,7 +189,7 @@ public class CMERedirectControllerTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void textCmeSecureRedirectNullHost() throws Exception {
+    public void testCmeSecureRedirectNullHost() throws Exception {
         expect(this.request.getQueryString()).andReturn("yo");
         this.response.sendRedirect("/cmeRedirectError.html?yo");
         replay(this.request, this.response);

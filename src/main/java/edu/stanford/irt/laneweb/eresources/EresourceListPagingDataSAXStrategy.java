@@ -29,7 +29,9 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
                 createSeeAllMarkup(xmlConsumer, hrefBase, alpha);
                 endDiv(xmlConsumer);
                 startDivWithClass(xmlConsumer, "yui3-u-1-4");
+                startDivWithClass(xmlConsumer, "view-by");
                 createPagingButton(xmlConsumer, hrefBase, pagingData, alpha);
+                endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
             } else {

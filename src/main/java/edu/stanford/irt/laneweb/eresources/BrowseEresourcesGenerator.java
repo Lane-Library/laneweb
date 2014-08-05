@@ -73,9 +73,18 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         return list;
     }
 
+    @Override
+    protected String getHeading() {
+        String heading = null;
+        if (this.subset == null && this.type.indexOf("software, installed") == -1) {
+            heading = this.alpha.toUpperCase();
+        }
+        return heading;
+    }
+
     /**
      * A convenience method to URLDecode a string.
-     * 
+     *
      * @param string
      *            a string to decode
      * @return the decoded string

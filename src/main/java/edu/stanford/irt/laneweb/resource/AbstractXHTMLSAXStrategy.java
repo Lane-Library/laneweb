@@ -35,7 +35,7 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     private static final String UL = "ul";
 
-    private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
+    protected static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     protected void createAnchor(final XMLConsumer xmlConsumer, final String href, final String text)
             throws SAXException {

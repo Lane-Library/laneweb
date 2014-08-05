@@ -1,35 +1,51 @@
-#browseTabs li {
+#resources-header{
+    text-align:center;
+    margin-top:12px;
+}
+#resources-header a{
+    font-size:16px;
+}
+#browseTabs{
+    background-color:#c1c1c1;
+    padding:12px 22px;
+    position:relative;
+}
+#browseTabs li{
     list-style:none outside none;
     float:left;
     padding:0;
     margin:0;
-    border-bottom:none;
+    border-bottom:0;
 }
-#browseTabs:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
+#browseTabs li:before{
+    content: '\2022';
+    position:absolute;
+    margin-left:-1px;
+    top:13px;
+}
+#browseTabs li:first-child:before{
+content:'';
+}
+#browseTabs:after{
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
     visibility:hidden;
 }
-#browseTabs a {
-    border:1px solid #CDCFBE;
-    display:block;
-    padding:10px;
-    text-align:center;
-    width:20px;
+#browseTabs a{
+    display:inline-block;
+    width:35px;
 }
-#browseTabs .long a {
-    width: 104px;
+
+.eresources{
+    margin:0 17px;
+    padding-bottom:4px;
 }
-#browseTabs .longer a {
-    width: 218px;
-}
-#browseTabs a:hover {
-    border: 1px solid #820000;
-}
-#browseTabs .active {
-    background-color:#920000;
-    border-color:#920000;
-    color:white;
+
+.eresources span{
+    float:right;
+    color:black;
+    font-size:12px;
+    font-style:italic;
 }

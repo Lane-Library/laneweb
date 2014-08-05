@@ -2,6 +2,9 @@
     margin:0 17px;
     font-size:13px;
 }
+.view-by{
+    text-align:right;
+}
 .pagingButton{
     display:inline-block;
     position:relative;
@@ -12,6 +15,7 @@
     border:1px solid #dadad9;
     border-radius:3px 3px 0 0;
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
+    margin-left:6px;
 }
 
 .pagingButton .fa{
@@ -32,6 +36,7 @@
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
     white-space:nowrap;
     padding:0 8px 0 6px;
+    text-align:left;
 }
 .pagingButton:hover .pagingLabels{
     display:block;

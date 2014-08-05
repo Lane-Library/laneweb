@@ -9,6 +9,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<PagingEresourceList> {
 
@@ -29,15 +30,17 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
         int start = pagingData.getStart();
         int length = pagingData.getLength();
         int size = list.size();
+        String heading = list.getHeading();
         try {
             startHTMLDocument(xmlConsumer);
             startHead(xmlConsumer);
-            createTitle(xmlConsumer, "search results");
+            createTitle(xmlConsumer, "biomed-resources");
             endHead(xmlConsumer);
             startBody(xmlConsumer);
             if (size > DEFAULT_PAGE_SIZE) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
+            createHeading(xmlConsumer, heading);
             startUlWithClass(xmlConsumer, "lwSearchResults");
             int i = 0;
             for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
@@ -59,6 +62,15 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
             endHTMLDocument(xmlConsumer);
         } catch (SAXException e) {
             throw new LanewebException(e);
+        }
+    }
+
+    private void createHeading(final XMLConsumer xmlConsumer, final String heading) throws SAXException {
+        if (heading != null) {
+            startElementWithClass(xmlConsumer, "h3", "eresources");
+            XMLUtils.data(xmlConsumer, heading);
+            createSpan(xmlConsumer, "Access restricted to Stanford Community unless noticed otherwise");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
         }
     }
 }

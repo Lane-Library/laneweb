@@ -55,7 +55,6 @@ public class SHCLoginController {
     @RequestMapping(value = "/shclogin")
     public void login(@RequestParam final String emrid, @RequestParam final String univid, @RequestParam final String ts,
             final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
         StringBuilder errorMsg = new StringBuilder();
         StringBuilder url = new StringBuilder(TARGET_URL);
         url.append(URLEncoder.encode(emrid, "UTF-8"));
@@ -64,14 +63,17 @@ public class SHCLoginController {
         if (!validateTimestamp(ts)) {
             errorMsg.append(ERROR_TIMESTAMP + ts);
         } else {
-            if (!validateAndPopulateEmrid(emrid, session)) {
-                errorMsg.append(ERROR_EMRID + emrid);
-            }
-            if (!validateAndPopulateUnivid(univid, session)) {
-                errorMsg.append(ERROR_UNIVID + univid);
-            } else {
-                decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
-                sunetid = getSunetid(session, decryptedUnivid);
+            HttpSession session = request.getSession();
+            synchronized (session) {
+                if (!validateAndPopulateEmrid(emrid, session)) {
+                    errorMsg.append(ERROR_EMRID + emrid);
+                }
+                if (!validateAndPopulateUnivid(univid, session)) {
+                    errorMsg.append(ERROR_UNIVID + univid);
+                } else {
+                    decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
+                    sunetid = getSunetid(session, decryptedUnivid);
+                }
             }
         }
         if (sunetid == null && decryptedUnivid != null) {

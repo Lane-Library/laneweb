@@ -43,4 +43,9 @@ public class CoreEresourcesGenerator extends AbstractEresourcesGenerator {
         }
         return collectionManager.getCore(this.type);
     }
+
+    @Override
+    protected String getHeading() {
+        return "\u00A0";
+    }
 }

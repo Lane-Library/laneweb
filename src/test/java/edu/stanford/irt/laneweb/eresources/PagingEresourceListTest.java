@@ -38,7 +38,7 @@ public class PagingEresourceListTest {
     public void testPagingEresourceList256() throws SAXException {
         expect(this.eresources.toArray()).andReturn(this.eresourceArray);
         replay(this.eresources, this.eresource, this.pagingData);
-        PagingEresourceList list = new PagingEresourceList(this.eresources, this.pagingData);
+        PagingEresourceList list = new PagingEresourceList(this.eresources, this.pagingData, "A");
         assertEquals(256, list.size());
         verify(this.eresources, this.eresource, this.pagingData);
     }

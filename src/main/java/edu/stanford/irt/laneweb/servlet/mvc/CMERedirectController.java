@@ -25,7 +25,7 @@ public class CMERedirectController {
 
     private static final String SU_SUNETID_ARGS = "unid=?&srcsys=EZPX90710&eiv=2.1.0";
 
-    private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
+    private static final String UTD_CME_URL = "http://www.uptodate.com/contents/search?";
 
     @Autowired
     private CompositeDataBinder dataBinder;
@@ -109,7 +109,7 @@ public class CMERedirectController {
         }
         if (link.contains("?")) {
             sb.append(link).append("&").append(args.replaceFirst("\\?", id));
-        } else if (link.endsWith("/") || link.endsWith("online")) {
+        } else if (link.endsWith("/") || link.endsWith("online") || link.endsWith("search")) {
             sb.append(UTD_CME_URL).append(args.replaceFirst("\\?", id));
         } else {
             sb.append(link);

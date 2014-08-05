@@ -2,8 +2,8 @@
 	margin-top: 12px;
 	line-height: 1.6em;
 	background-color: #333333;
+    color:#ffffff;
 	border: 1px solid #333333;
-	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
 }
 .popular h3 {
 	text-transform:uppercase;
@@ -24,9 +24,4 @@
 
 .popular a {
 	color: #FFF;
-}
-
-.popular .bus-card {
-	color: #FFF;
-	font-family: Fjord One, serif;
 }

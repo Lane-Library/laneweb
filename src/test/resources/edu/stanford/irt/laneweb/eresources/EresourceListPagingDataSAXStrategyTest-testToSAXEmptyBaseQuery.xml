@@ -8,25 +8,27 @@
          <a href="?page=all">All titles <i class="fa fa-arrow-right"/>
          </a>
       </div>
-      <div class="yui3-u-1-4">View by page <div class="pagingButton">A-Z<i class="fa fa-angle-double-down"/>
-            <ul class="pagingLabels">
-               <li>
-                  <a href="?page=1">
-                     <span>A.M.A. American journal of diseases of children</span> — <span>Advances in immunology</span> (260)</a>
-               </li>
-               <li>
-                  <a href="?page=2">
-                     <span>Advances in insect physiology</span> — <span>American journal of tropical medicine with text added to make it very long indeed</span> (260)</a>
-               </li>
-               <li>
-                  <a href="?page=3">
-                     <span>American journal of tropical medicine and hygiene</span> — <span>Applied optics</span> (260)</a>
-               </li>
-               <li>
-                  <a href="?page=4">
-                     <span>Applied psychological measurement</span> — <span>Ayu</span> (259)</a>
-               </li>
-            </ul>
+      <div class="yui3-u-1-4">
+         <div class="view-by">View by page <div class="pagingButton">A-Z<i class="fa fa-angle-double-down"/>
+               <ul class="pagingLabels">
+                  <li>
+                     <a href="?page=1">
+                        <span>A.M.A. American journal of diseases of children</span> — <span>Advances in immunology</span> (260)</a>
+                  </li>
+                  <li>
+                     <a href="?page=2">
+                        <span>Advances in insect physiology</span> — <span>American journal of tropical medicine with text added to make it very long indeed</span> (260)</a>
+                  </li>
+                  <li>
+                     <a href="?page=3">
+                        <span>American journal of tropical medicine and hygiene</span> — <span>Applied optics</span> (260)</a>
+                  </li>
+                  <li>
+                     <a href="?page=4">
+                        <span>Applied psychological measurement</span> — <span>Ayu</span> (259)</a>
+                  </li>
+               </ul>
+            </div>
          </div>
       </div>
    </div>
