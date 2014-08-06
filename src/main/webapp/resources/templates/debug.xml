@@ -205,6 +205,7 @@
                 <div id="som2">
                     <h2>Stanford Medicine</h2>
                     <ul>
+                        <li><a href="http://med.stanford.edu/">Home</a></li>
                         <li><a href="http://med.stanford.edu/health-care.html">Health Care</a></li>
                         <li><a href="http://med.stanford.edu/research.html">Research</a></li>
                         <li><a href="http://med.stanford.edu/education.html">Education</a></li>
@@ -328,8 +329,8 @@
         </div>
         <div id="sm-footer">
             <ul class="centered">
-                <li id="footer-sm"><a href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
                 <li id="footer-su"><a href="http://www.stanford.edu/">Stanford University</a></li>
+                <li id="footer-sm"><a href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
                 <li id="footer-shc"><a href="http://stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
                 <li id="footer-sch"><a href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
                 <li id="footer-sul"><a href="http://library.stanford.edu/">Stanford University Libraries</a></li>
