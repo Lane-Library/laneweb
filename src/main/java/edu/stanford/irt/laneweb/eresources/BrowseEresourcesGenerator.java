@@ -10,6 +10,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
@@ -80,6 +81,11 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
             heading = this.alpha.toUpperCase();
         }
         return heading;
+    }
+
+    @Override
+    protected PagingData getPagingData(final List<Eresource> eresources, final int page, final String baseQuery) {
+        return new EresourceListPagingData(eresources, page, baseQuery, this.alpha);
     }
 
     /**
