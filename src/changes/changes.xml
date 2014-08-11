@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-08-11" version="2.2.15" description="2.2.15 bug fix release">
+            <action date="2014-08-11" dev="ceyates" issue="98830" type="fix">
+                odd paging label data in browse pages
+            </action>
+            <action date="2014-08-06" dev="olgary" issue="98806" type="update">
+                added link to Home for SoM header
+            </action>
+            <action date="2014-08-05" dev="ceyates" issue="98771" type="fix">
+                subjectbrowse pages - title is higher than numbers and drop down selection
+            </action>
+            <action date="2014-08-05" dev="ceyates" issue="98761" type="fix">
+                ejcore ebcore - message falls lower than golfclub
+            </action>
+            <action date="2014-08-06" dev="olgary" issue="98758" type="fix">
+                Feedback-suggestion:  link switched  in footer: SoM and SU 
+            </action>
+        </release>
         <release date="2014-08-04" version="2.2.14" description="2.2.14 bug fix release"/>
         <release date="2014-08-04" version="2.2.13" description="2.2.13 emergency release">
             <action date="2014-08-04" dev="ceyates" issue="98741" type="fix">
