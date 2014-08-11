@@ -23,19 +23,19 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     static final String SUGGEST_HANDLER = "/lane-suggest";
 
-    @Query(value = "*:*", filters = { "mesh:\"?0\"", "type:\"?1\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "*:*", filters = { "isRecent:true", "mesh:\"?0\"", "type:\"?1\"" }, requestHandler = BROWSE_HANDLER)
     public List<Eresource> browseAllByMeshAndType(String mesh, String type, Pageable page);
 
-    @Query(value = "*:*", filters = { "subset:\"?0\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "*:*", filters = { "isRecent:true", "subset:\"?0\"" }, requestHandler = BROWSE_HANDLER)
     public List<Eresource> browseAllBySubset(String subset, Pageable page);
 
-    @Query(value = "*:*", filters = { "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "*:*", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
     public List<Eresource> browseAllByType(String type, Pageable page);
 
-    @Query(value = "*:*", filters = { "isCore:1", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "*:*", filters = { "isRecent:true", "isCore:1", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
     public List<Eresource> browseAllCoreByType(String type, Pageable page);
 
-    @Query(value = "ertlsw?1", filters = { "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "ertlsw?1", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
     public List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
 
     @Query(value = "?0", requestHandler = FACET_HANDLER)
