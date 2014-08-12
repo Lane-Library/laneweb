@@ -42,7 +42,7 @@ public class EresourcesCountGeneratorTest {
 
     @Test
     public void testDoGenerate() throws SAXException {
-        expect(this.collectionManager.searchCount(this.types, null, "query")).andReturn(
+        expect(this.collectionManager.searchCount(this.types, "query")).andReturn(
                 Collections.singletonMap("type", Integer.valueOf(1)));
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://apache.org/cocoon/SQL/2.0");
@@ -122,7 +122,7 @@ public class EresourcesCountGeneratorTest {
 
     @Test
     public void testDoGenerateThrowException() throws SAXException {
-        expect(this.collectionManager.searchCount(this.types, null, "query")).andReturn(
+        expect(this.collectionManager.searchCount(this.types, "query")).andReturn(
                 Collections.singletonMap("type", Integer.valueOf(1)));
         this.xmlConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());

@@ -44,7 +44,7 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
                 results.put(type, zero);
             }
         } else {
-            results = this.collectionManager.searchCount(this.types, null, this.query);
+            results = this.collectionManager.searchCount(this.types, this.query);
         }
         try {
             xmlConsumer.startDocument();
