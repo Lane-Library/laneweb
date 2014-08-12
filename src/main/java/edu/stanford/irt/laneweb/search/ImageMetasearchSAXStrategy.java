@@ -23,14 +23,21 @@ public class ImageMetasearchSAXStrategy extends AbstractImageSearchSAXStrategy<R
 
     @Override
     public void toSAX(final Result metaSearchResult, final XMLConsumer xmlConsumer) {
+        Collection<Result> engines;
+        synchronized(metaSearchResult) {
+            engines = metaSearchResult.getChildren();
+        }
         try {
-            Collection<Result> engines = metaSearchResult.getChildren();
-            String hits = null;
-            // TODO: access to Result should be synchronized
             for (Result engineResult : engines) {
+                Collection<Result> resources;
+                String hits;
+                String description;
+                synchronized(engineResult) {
+                    resources = engineResult.getChildren();
+                    hits = engineResult.getHits();
+                    description = engineResult.getDescription();
+                }
                 startDiv(xmlConsumer);
-                Collection<Result> resources = engineResult.getChildren();
-                hits = engineResult.getHits();
                 String url = null;
                 for (Result resource : resources) {
                     if (resource.getId().indexOf("_content") == -1) {
@@ -38,7 +45,7 @@ public class ImageMetasearchSAXStrategy extends AbstractImageSearchSAXStrategy<R
                     }
                     if (resource.getHits() != null && !"0".equals(resource.getHits())
                             && resource.getId().endsWith("_content")) {
-                        createTitle(xmlConsumer, resource.getId(), engineResult.getDescription(), resource.getHits(),
+                        createTitle(xmlConsumer, resource.getId(), description, resource.getHits(),
                                 hits, url);
                     }
                     startElementWithId(xmlConsumer, UL, "imageList");

@@ -39,7 +39,6 @@ public class ContentResultXHTMLSAXStrategy implements SAXStrategy<ContentResultS
         ContentResult contentResult = result.getContentResult();
         Result resourceResult = result.getResourceResult();
         try {
-            // TODO: access to resourceResult should be synchronized
             String resourceName = resourceResult.getDescription();
             int resourceHits = Integer.parseInt(resourceResult.getHits());
             if (resourceName.indexOf(PUBMED) == 0) {

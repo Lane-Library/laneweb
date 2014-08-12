@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.Query;
+import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
@@ -121,12 +122,14 @@ public class MetaSearchController {
      */
     private Map<String, Object> getMapForResult(final Result result, final List<String> resources) {
         Map<String, Object> map = new HashMap<String, Object>();
-        // synchronized because otherwise search might update the result while
-        // this is happening
+        SearchStatus status;
+        Collection<Result> children;
         synchronized (result) {
-            map.put("status", result.getStatus());
-            map.put("resources", getResourceResultMap(result.getChildren(), resources));
+            status = result.getStatus();
+            children = result.getChildren();
         }
+        map.put("status", status);
+        map.put("resources", getResourceResultMap(children, resources));
         return map;
     }
 
@@ -143,9 +146,12 @@ public class MetaSearchController {
     private Map<String, Map<String, Object>> getResourceResultMap(final Collection<Result> engines,
             final List<String> resources) {
         Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
+        Collection<Result> children;
         for (Result engine : engines) {
-            for (Result resource : engine.getChildren()) {
-                // TODO: access to resource should be synchronized
+            synchronized(engine) {
+                children = engine.getChildren();
+            }
+            for (Result resource : children) {
                 String id = resource.getId();
                 if (resources.contains(id)) {
                     Map<String, Object> resourceMap = new HashMap<String, Object>();

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.Query;
+import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
@@ -55,8 +56,14 @@ public class HistorySearchController {
         Query simpleQuery = new SimpleQuery(query, this.engines);
         Result result = this.manager.search(simpleQuery, 60000, true);
         Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("status", result.getStatus());
-        resultMap.put("resources", getResourceResultMap(result));
+        SearchStatus status;
+        Collection<Result> children;
+        synchronized(result) {
+            status = result.getStatus();
+            children = result.getChildren();
+        }
+        resultMap.put("status", status);
+        resultMap.put("resources", getResourceResultMap(children));
         return resultMap;
     }
 
@@ -81,11 +88,14 @@ public class HistorySearchController {
      *            the parent Result
      * @return a map of resource results
      */
-    private Map<String, Map<String, Object>> getResourceResultMap(final Result result) {
+    private Map<String, Map<String, Object>> getResourceResultMap(final Collection<Result> children) {
         Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
-        for (Result engine : result.getChildren()) {
-            for (Result resource : engine.getChildren()) {
-                // TODO: access to resource should be synchronized
+        Collection<Result> resources;
+        for (Result engine : children) {
+            synchronized(engine) {
+                resources = engine.getChildren();
+            }
+            for (Result resource : resources) {
                 String id = resource.getId();
                 Map<String, Object> resourceMap = new HashMap<String, Object>();
                 map.put(id, resourceMap);
