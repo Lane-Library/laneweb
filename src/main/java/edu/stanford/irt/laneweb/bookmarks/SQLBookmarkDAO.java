@@ -45,14 +45,14 @@ public class SQLBookmarkDAO implements BookmarkDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Bookmark> getLinks(final String sunetid) {
+    public List<Object> getLinks(final String sunetid) {
         if (sunetid == null) {
             throw new LanewebException("null sunetid");
         }
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<Bookmark> links = null;
+        List<Object> links = null;
         ObjectInputStream oip = null;
         try {
             conn = this.dataSource.getConnection();
@@ -61,7 +61,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
-                links = (List<Bookmark>) oip.readObject();
+                links = (List<Object>) oip.readObject();
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
             this.log.error(e.getMessage(), e);
@@ -96,7 +96,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         return count;
     }
 
-    public void saveLinks(final String sunetid, final List<Bookmark> links) {
+    public void saveLinks(final String sunetid, final List<Object> links) {
         if (sunetid == null) {
             throw new LanewebException("null sunetid");
         }

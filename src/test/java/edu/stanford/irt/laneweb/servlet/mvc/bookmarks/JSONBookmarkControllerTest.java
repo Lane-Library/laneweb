@@ -29,7 +29,7 @@ public class JSONBookmarkControllerTest {
 
     private BookmarkDAO bookmarkDAO;
 
-    private List<Bookmark> bookmarks;
+    private List<Object> bookmarks;
 
     private JSONBookmarkController controller;
 
@@ -40,13 +40,13 @@ public class JSONBookmarkControllerTest {
         this.bookmarkDAO = createMock(BookmarkDAO.class);
         this.controller = new JSONBookmarkController(this.bookmarkDAO, null, null, null);
         this.sunetid = "ditenus";
-        this.bookmarks = new ArrayList<Bookmark>();
+        this.bookmarks = new ArrayList<Object>();
         this.bookmark = new Bookmark("label", "url");
     }
 
     @Test
     public void testAddBookmark() {
-        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Collections.singletonList(this.bookmark)));
+        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Collections.<Object>singletonList(this.bookmark)));
         replay(this.bookmarkDAO);
         this.controller.addBookmark(this.bookmarks, this.sunetid, this.bookmark);
         verify(this.bookmarkDAO);
@@ -58,7 +58,7 @@ public class JSONBookmarkControllerTest {
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Arrays.asList(new Bookmark[] { this.bookmark, this.bookmark })));
+        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Arrays.asList(new Object[] { this.bookmark, this.bookmark })));
         replay(this.bookmarkDAO);
         this.controller.deleteBookmark(this.bookmarks, this.sunetid, "[0,3]");
         verify(this.bookmarkDAO);
@@ -119,13 +119,13 @@ public class JSONBookmarkControllerTest {
         Map<String, Integer> json = new HashMap<String, Integer>();
         json.put("to", 1);
         json.put("from", 8);
-        Capture<List<Bookmark>> capture = new Capture<List<Bookmark>>();
+        Capture<List<Object>> capture = new Capture<List<Object>>();
         this.bookmarkDAO.saveLinks(eq(this.sunetid), capture(capture));
         replay(this.bookmarkDAO);
         this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
-        assertEquals("bookmark8", this.bookmarks.get(1).getLabel());
-        assertEquals("bookmark1", this.bookmarks.get(2).getLabel());
-        assertEquals("bookmark7", this.bookmarks.get(8).getLabel());
+        assertEquals("bookmark8", ((Bookmark) this.bookmarks.get(1)).getLabel());
+        assertEquals("bookmark1", ((Bookmark) this.bookmarks.get(2)).getLabel());
+        assertEquals("bookmark7", ((Bookmark) this.bookmarks.get(8)).getLabel());
         assertEquals(this.bookmarks, capture.getValue());
         verify(this.bookmarkDAO);
     }
@@ -147,13 +147,13 @@ public class JSONBookmarkControllerTest {
         Map<String, Integer> json = new HashMap<String, Integer>();
         json.put("to", 8);
         json.put("from", 1);
-        Capture<List<Bookmark>> capture = new Capture<List<Bookmark>>();
+        Capture<List<Object>> capture = new Capture<List<Object>>();
         this.bookmarkDAO.saveLinks(eq(this.sunetid), capture(capture));
         replay(this.bookmarkDAO);
         this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
-        assertEquals("bookmark1", this.bookmarks.get(8).getLabel());
-        assertEquals("bookmark2", this.bookmarks.get(1).getLabel());
-        assertEquals("bookmark8", this.bookmarks.get(7).getLabel());
+        assertEquals("bookmark1", ((Bookmark) this.bookmarks.get(8)).getLabel());
+        assertEquals("bookmark2", ((Bookmark) this.bookmarks.get(1)).getLabel());
+        assertEquals("bookmark8", ((Bookmark) this.bookmarks.get(7)).getLabel());
         assertEquals(this.bookmarks, capture.getValue());
         verify(this.bookmarkDAO);
     }
@@ -165,7 +165,7 @@ public class JSONBookmarkControllerTest {
         json.put("label", "newlabel");
         json.put("url", "newurl");
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Collections.singletonList(new Bookmark("newlabel", "newurl"))));
+        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Collections.<Object>singletonList(new Bookmark("newlabel", "newurl"))));
         replay(this.bookmarkDAO);
         this.controller.saveBookmark(this.bookmarks, this.sunetid, json);
         verify(this.bookmarkDAO);

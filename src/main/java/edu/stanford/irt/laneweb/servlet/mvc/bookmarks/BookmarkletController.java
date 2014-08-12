@@ -30,7 +30,7 @@ public class BookmarkletController extends BookmarkController {
 
     @RequestMapping(value = { "/bookmarklet", "/secure/bookmarklet" })
     public String addBookmark(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
+            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.SUNETID) final String sunetid,
             @RequestParam final String url,
             @RequestParam final String label) throws UnsupportedEncodingException {

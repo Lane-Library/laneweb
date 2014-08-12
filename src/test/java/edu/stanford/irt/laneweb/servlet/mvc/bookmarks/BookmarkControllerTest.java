@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
-import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
@@ -80,9 +79,9 @@ public class BookmarkControllerTest {
 
     @Test
     public void testSaveLinks() {
-        this.bookmarkDAO.saveLinks("sunetid", Collections.<Bookmark> emptyList());
+        this.bookmarkDAO.saveLinks("sunetid", Collections.<Object> emptyList());
         replay(this.bookmarkDAO, this.bookmarkDataBinder, this.sunetidTicketDataBinder, this.request, this.model);
-        this.controller.saveLinks("sunetid", Collections.<Bookmark> emptyList());
+        this.controller.saveLinks("sunetid", Collections.<Object> emptyList());
         verify(this.bookmarkDAO, this.bookmarkDataBinder, this.sunetidTicketDataBinder, this.request, this.model);
     }
 }
