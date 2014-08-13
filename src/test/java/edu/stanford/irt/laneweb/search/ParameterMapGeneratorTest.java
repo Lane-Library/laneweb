@@ -33,8 +33,7 @@ public class ParameterMapGeneratorTest {
     @Before
     public void setUp() {
         this.marshaller = createMock(Marshaller.class);
-        this.generator = new ParameterMapGenerator();
-        this.generator.setMarshaller(this.marshaller);
+        this.generator = new ParameterMapGenerator(this.marshaller);
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
 

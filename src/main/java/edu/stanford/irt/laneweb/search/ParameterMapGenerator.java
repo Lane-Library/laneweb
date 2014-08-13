@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.springframework.oxm.Marshaller;
+
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator;
@@ -13,6 +15,10 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 public class ParameterMapGenerator extends AbstractMarshallingGenerator implements ModelAware {
 
     private Map<String, String[]> parameters;
+
+    public ParameterMapGenerator(final Marshaller marshaller) {
+        super(marshaller);
+    }
 
     @SuppressWarnings("unchecked")
     public void setModel(final Map<String, Object> model) {
