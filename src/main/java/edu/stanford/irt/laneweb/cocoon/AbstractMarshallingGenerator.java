@@ -15,6 +15,7 @@ public abstract class AbstractMarshallingGenerator extends AbstractGenerator {
 
     private Marshaller marshaller;
 
+    // TODO: change to constructor injection
     public void setMarshaller(final Marshaller marshaller) {
         if (marshaller == null) {
             throw new LanewebException("null marshaller");

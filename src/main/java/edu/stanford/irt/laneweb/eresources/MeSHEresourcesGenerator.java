@@ -54,21 +54,26 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
 
     @Override
     protected String getHeading() {
-        if ("aids/hiv".equals(this.mesh)) {
-            return "AIDS/HIV";
-        }
-        StringBuilder sb = new StringBuilder();
-        for (StringTokenizer st = new StringTokenizer(this.mesh, " -", true); st.hasMoreTokens();) {
-            String token = st.nextToken();
-            if ("and".equals(token) || "of".equals(token)) {
-                sb.append(token);
+        String heading = null;
+        if (this.mesh != null) {
+            if ("aids/hiv".equals(this.mesh)) {
+                heading = "AIDS/HIV";
             } else {
-                sb.append(Character.toUpperCase(token.charAt(0))).append(token.substring(1));
-            }
-            if (st.hasMoreTokens()) {
-                sb.append(st.nextToken());
+                StringBuilder sb = new StringBuilder();
+                for (StringTokenizer st = new StringTokenizer(this.mesh, " -", true); st.hasMoreTokens();) {
+                    String token = st.nextToken();
+                    if ("and".equals(token) || "of".equals(token)) {
+                        sb.append(token);
+                    } else {
+                        sb.append(Character.toUpperCase(token.charAt(0))).append(token.substring(1));
+                    }
+                    if (st.hasMoreTokens()) {
+                        sb.append(st.nextToken());
+                    }
+                }
+                heading = sb.toString();
             }
         }
-        return sb.toString();
+        return heading;
     }
 }

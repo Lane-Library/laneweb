@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.bassett.BassettImage;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class ImageBassettSearchSAXStrategyTest {
 
@@ -27,10 +28,10 @@ public class ImageBassettSearchSAXStrategyTest {
         this.strategy = new ImageBassettSearchSAXStrategy();
     }
 
-    // Comment this test because the content will change several times.
-    // @Test
+    @Test
     public void testToSAX() throws SAXException, IOException {
         this.xmlConsumer.startDocument();
+        XMLUtils.startElement(this.xmlConsumer, "http://www.w3.org/1999/xhtml", "body");
         HashMap<String, Object> res = new HashMap<String, Object>();
         BassettImage bassettImage = new BassettImage("description", "title");
         bassettImage.setBassettNumber("110-3");
@@ -40,6 +41,7 @@ public class ImageBassettSearchSAXStrategyTest {
         res.put(ImageSearchGenerator.BASSETT_RESULT, bassettImages);
         res.put(ImageSearchGenerator.SEARCH_TERM, "skin");
         this.strategy.toSAX(res, this.xmlConsumer);
+        XMLUtils.endElement(this.xmlConsumer, "http://www.w3.org/1999/xhtml", "body");
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "ImageBassettSearchSAXStrategyTest-testToSAX.xml"),
                 this.xmlConsumer.getStringValue());
