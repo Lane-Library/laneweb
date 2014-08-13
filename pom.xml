@@ -188,6 +188,7 @@
                                 <include>search-select-min.css</include>
                                 <include>search-image-min.css</include>
                                 <include>som-header-min.css</include>
+                                <include>classes-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
