@@ -42,14 +42,14 @@
 
 
 	<xsl:template match="h:p[@id='description']">
-		<xsl:copy>
+	    <div>
             <xsl:if test="$hasOpenClass">
     			<xsl:attribute name="itemprop">description</xsl:attribute>
 			</xsl:if>
 			<xsl:apply-templates />
 			<xsl:copy-of
 				select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_description/child::node()" />
-		</xsl:copy>
+		</div>
 	</xsl:template>
 
 
