@@ -30,14 +30,14 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="h:h3[@id='class-title']">
-        <xsl:copy>
+	<xsl:template match="h:p[@id='description']">
+	    <div>
             <xsl:if test="$hasOpenClass">
                 <xsl:attribute name="itemprop">name</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="attribute::node()|child::node()"/>
             <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_name/text()"/>
-        </xsl:copy>
+        </div>
     </xsl:template>
 
     <xsl:template match="h:p[@id='description']">
