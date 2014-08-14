@@ -57,12 +57,9 @@
             <xsl:variable name="classId" select="./lc:module_id/text()"/>
             <!--  only include microdata on first open class -->
             <xsl:variable name="needsMicrodata" select="position() = 1"/>
-            <div style="margin-top:12px">
+            <div style="margin-top:12px;position:relative">
             <div>
-                <xsl:call-template name="month"/>
-                <xsl:text> </xsl:text>
-                <xsl:call-template name="day"/>
-                <xsl:text>, </xsl:text>
+                <xsl:apply-templates select="lc:event_dates/lc:start_date[1]"/>
                 <time>
                     <xsl:if test="$needsMicrodata">
                         <xsl:attribute name="itemprop">startDate</xsl:attribute>
@@ -178,6 +175,36 @@
 
     <xsl:template match="attribute::node()">
         <xsl:copy-of select="self::node()"/>
+    </xsl:template>
+    
+    <xsl:template match="lc:start_date">
+        <xsl:variable name="date-tokens" select="tokenize(.,'(/| )')"/>
+        <xsl:variable name="month">
+            <xsl:value-of select="number($date-tokens[1])"/>
+        </xsl:variable>
+        <!-- TODO: put these styles into css -->
+        <div class="date" style="position:absolute;right:126px;width:130px">
+            <div class="month-day" style="padding:0">
+                <xsl:choose>
+                    <xsl:when test="$month = 1">January </xsl:when>
+                    <xsl:when test="$month = 2">February </xsl:when>
+                    <xsl:when test="$month = 3">March </xsl:when>
+                    <xsl:when test="$month = 4">April </xsl:when>
+                    <xsl:when test="$month = 5">May </xsl:when>
+                    <xsl:when test="$month = 6">June </xsl:when>
+                    <xsl:when test="$month = 7">July </xsl:when>
+                    <xsl:when test="$month = 8">August </xsl:when>
+                    <xsl:when test="$month = 9">September </xsl:when>
+                    <xsl:when test="$month = 10">October </xsl:when>
+                    <xsl:when test="$month = 11">November </xsl:when>
+                    <xsl:when test="$month = 12">December </xsl:when>
+                </xsl:choose>
+                <xsl:value-of select="$date-tokens[2]"/>
+            </div>
+            <div class="year">
+                <xsl:value-of select="$date-tokens[3]"/>
+            </div>
+        </div>
     </xsl:template>
 
 </xsl:stylesheet>
