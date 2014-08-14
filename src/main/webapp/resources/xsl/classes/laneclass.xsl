@@ -29,25 +29,27 @@
             <xsl:apply-templates select="attribute::node()|child::node()"/>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="h:h3[@id='class-title']">
+        <xsl:copy>
+            <xsl:if test="$hasOpenClass">
+                <xsl:attribute name="itemprop">name</xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="attribute::node()|child::node()" />
+            <xsl:value-of
+                select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_name/text()" />
+        </xsl:copy>
+    </xsl:template>
 
 	<xsl:template match="h:p[@id='description']">
 	    <div>
             <xsl:if test="$hasOpenClass">
                 <xsl:attribute name="itemprop">name</xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates select="attribute::node()|child::node()"/>
-            <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_name/text()"/>
+	        <xsl:apply-templates />
+	        <xsl:copy-of
+	            select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_description/child::node()" />
         </div>
-    </xsl:template>
-
-    <xsl:template match="h:p[@id='description']">
-        <xsl:copy>
-            <xsl:if test="$hasOpenClass">
-                <xsl:attribute name="itemprop">description</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-            <xsl:copy-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_description/child::node()"/>
-        </xsl:copy>
     </xsl:template>
 
     <xsl:template match="h:p[@id='registration']">
