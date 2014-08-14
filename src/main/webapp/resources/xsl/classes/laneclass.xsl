@@ -153,19 +153,16 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
-            <a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}">
+            <a class="button alt1" href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}">
                 <xsl:choose>
                     <xsl:when test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() = '---'">
-                        <xsl:attribute name="class">button alt1</xsl:attribute>
                         <span>Waitlist</span>
-                        <i class="fa fa-arrow-right"></i>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:attribute name="class">button</xsl:attribute>
-                        <span>Sign Up</span>
-                        <i class="fa fa-arrow-right"></i>
+                        <span>Register</span>
                     </xsl:otherwise>
                 </xsl:choose>
+                <i class="icon fa fa-arrow-right"></i>
             </a>
             </div>
         </xsl:for-each>
