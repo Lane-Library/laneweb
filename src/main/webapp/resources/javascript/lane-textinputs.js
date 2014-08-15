@@ -32,32 +32,32 @@
                     if (input.get('value') === _hintText) {
                         input.set('value', '');
                     }
-                },
+                };
                 _getValue = function() {
                     var value = input.get('value');
                     return value === _hintText ? '' : value;
-                },
+                };
                 _reset = function(input) {
                     input.addClass(hintStyle);
                     input.set('value', _hintText);
-                },
+                };
                 _setHintText = function(hintText) {
                     var oldHintText = _hintText;
                     _hintText = hintText;
                     if (input.get('value') === '' || input.get('value') === oldHintText) {
                         _reset(input);
                     }
-                },
+                };
                 _setValue = function(value) {
                     input.set('value', value);
                     input.removeClass("inputHint");
-                },
+                };
                 focusHandle = input.on('focus', function(event) {
                     if (event.target.get('value') === _hintText) {
                         event.target.set('value', '');
                         event.target.removeClass(hintStyle);
                     }
-                }),
+                });
                 blurHandle = input.on('blur', function(event) {
                     if (event.target.get('value') === '') {
                         _reset(event.target);
