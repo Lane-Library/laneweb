@@ -19,6 +19,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
     }
 
     @Override
+    // TODO: reduce the complexity of this method
     protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
         List<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
@@ -33,6 +34,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             int recordId = rs.getInt("RECORD_ID");
             String recordType = rs.getString("RECORD_TYPE");
             String rowTitle = rs.getString("TITLE");
+            rowTitle = rowTitle == null ? "MISSING TITLE" : rowTitle;
             if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
                 int score = query == null ? 0 : this.scoreStrategy.computeScore(query, currentTitle, rs);
