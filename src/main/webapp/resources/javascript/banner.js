@@ -58,22 +58,29 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
         fadeout.run();
     },
     _handleIndexChange : function(event) {
-        var navNodes = this.get("navNodes"),
-            model = Y.lane.Model,
-            basePath = model.get(model.BASE_PATH) || "";
         //don't do anything if the index hasn't actually changed
         if (event.newVal !== event.prevVal) {
+            var navNodes = this.get("navNodes"),
+                model = Y.lane.Model,
+                contents = this.get("contents"),
+                newContent = contents[event.newVal],
+                basePath = model.get(model.BASE_PATH) || "";
             navNodes.item(event.prevVal).removeClass("banner-nav-active");
             navNodes.item(event.newVal).addClass("banner-nav-active");
-            Y.io(basePath + "/plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
-                on : {
-                    success : function(id, o) {
-                        var content = Y.Node.create(o.responseText).one("div");
-                        this.setNewContent(content);
-                    }
-                },
-                context : this
-            });
+            if (newContent) {
+                this.setNewContent(newContent);
+            } else {
+                Y.io(basePath + "/plain/includes/banner/banners.html?banner=" + (event.newVal + 1), {
+                    on : {
+                        success : function(id, o) {
+                            newContent = Y.Node.create(o.responseText).one("div");
+                            contents[event.newVal] = newContent;
+                            this.setNewContent(newContent);
+                        }
+                    },
+                    context : this
+                });
+            }
         }
     },
     _handleNavClick : function(event) {
@@ -85,6 +92,13 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
 
 Y.lane.Banner.ATTRS = {
     automate : {},
+    contents : {
+        valueFn : function() {
+            var c = [];
+            c[0] = this.get("contentBox").one("div");
+            return c;
+        }
+    },
     cycleCount : {
         value: 0
     },
