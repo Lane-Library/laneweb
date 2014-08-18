@@ -44,7 +44,7 @@
 	<xsl:template match="h:p[@id='description']">
 	    <div>
             <xsl:if test="$hasOpenClass">
-                <xsl:attribute name="itemprop">name</xsl:attribute>
+                <xsl:attribute name="itemprop">description</xsl:attribute>
             </xsl:if>
 	        <xsl:apply-templates />
 	        <xsl:copy-of
