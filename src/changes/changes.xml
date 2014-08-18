@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-08-18" version="2.2.16" description="2.2.16 bug fix release">
+            <action date="2014-08-14" dev="ceyates" issue="98898" type="fix">
+                empty &lt;p itemprop="description">&lt;/p> in laneclass.html
+            </action>
+            <action date="2014-08-13" dev="ryanmax" issue="98878" type="update">
+                use placeholder attribute for input hints where supported
+            </action>
+            <action date="2014-08-17" dev="ceyates" issue="98861" type="fix">
+                null title in eresources data causes 404 error
+            </action>
+            <action date="2014-08-13" dev="ceyates" issue="98755" type="update">
+                drop down for Lane search look
+            </action>
+            <action date="2014-08-14" dev="ceyates" issue="98718" type="update">
+                new styles for classes feed
+            </action>
+        </release>
         <release date="2014-08-11" version="2.2.15" description="2.2.15 bug fix release">
             <action date="2014-08-11" dev="ceyates" issue="98830" type="fix">
                 odd paging label data in browse pages
