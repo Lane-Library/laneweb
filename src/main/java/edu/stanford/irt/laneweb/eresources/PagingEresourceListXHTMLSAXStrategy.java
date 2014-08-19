@@ -69,7 +69,7 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
         if (heading != null) {
             startElementWithClass(xmlConsumer, "h3", "eresources");
             XMLUtils.data(xmlConsumer, heading);
-            createSpan(xmlConsumer, "Access restricted to Stanford Community unless noticed otherwise");
+            createSpan(xmlConsumer, "Access restricted to Stanford unless otherwise noted");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
         }
     }
