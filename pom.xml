@@ -478,7 +478,6 @@
         <dependency>
             <artifactId>commons-lang</artifactId>
             <groupId>commons-lang</groupId>
-            <scope>runtime</scope>
             <version>2.6</version>
         </dependency>
         <dependency>
