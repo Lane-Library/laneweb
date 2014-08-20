@@ -100,12 +100,7 @@ public class SolrCollectionManager implements CollectionManager {
         return this.repository.searchFindAll(query, new PageRequest(0, 50));
     }
 
-    // TODO: remove these when upgrading to 1.8
     @Override
-    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
-        return searchCount(types, query);
-    }
-
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         SolrResultPage<?> facets = this.repository.facetByType(query, new PageRequest(0, 1));
