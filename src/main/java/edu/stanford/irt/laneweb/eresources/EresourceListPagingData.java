@@ -11,9 +11,9 @@ public class EresourceListPagingData extends PagingData {
 
     private String alpha;
 
-    private List<Eresource> list;
+    private transient List<Eresource> list;
 
-    private List<PagingLabel> pagingLabels;
+    private transient List<PagingLabel> pagingLabels;
 
     public EresourceListPagingData(final List<Eresource> list, final int page, final String baseQuery,
             final String alpha) {
