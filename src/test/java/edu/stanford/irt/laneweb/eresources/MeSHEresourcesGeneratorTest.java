@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.Collections;
 
@@ -55,6 +56,18 @@ public class MeSHEresourcesGeneratorTest {
     }
 
     @Test
+    public void testAIDSHIV() {
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "aids/hiv"));
+        assertEquals("AIDS/HIV", this.generator.getHeading());
+    }
+
+    @Test
+    public void testAndSpaceDash() {
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "foo and bar-baz of mesh"));
+        assertEquals("Foo and Bar-Baz of Mesh", this.generator.getHeading());
+    }
+
+    @Test
     public void testGetEresourceList() {
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
@@ -78,5 +91,10 @@ public class MeSHEresourcesGeneratorTest {
         replay(this.collectionManager);
         assertEquals(0, this.generator.getEresourceList(this.collectionManager).size());
         verify(this.collectionManager);
+    }
+
+    @Test
+    public void testGetHeading() {
+        assertNull(this.generator.getHeading());
     }
 }

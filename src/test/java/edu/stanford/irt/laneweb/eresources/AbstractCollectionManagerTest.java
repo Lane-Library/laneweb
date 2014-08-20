@@ -18,7 +18,6 @@ import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class AbstractCollectionManagerTest {
 
     private static final class TestAbstractCollectionManager extends AbstractCollectionManager {
@@ -129,18 +128,6 @@ public class AbstractCollectionManagerTest {
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
         this.manager.search("query");
-    }
-
-    @Test
-    public void testSearchCountSetOfStringSetOfStringString() throws SQLException {
-        expect(this.sqlStatements.getProperty("search.count.0")).andReturn("");
-        expect(this.sqlStatements.getProperty("search.count.1")).andReturn("");
-        this.statement.setString(1, "((${query})) ");
-        this.statement.setString(2, "type");
-        this.statement.setString(3, "type");
-        expect(this.resultSet.next()).andReturn(false);
-        replay(this.statement, this.resultSet, this.sqlStatements);
-        this.manager.searchCount(Collections.singleton("type"), Collections.singleton("subset"), "query");
     }
 
     @Test

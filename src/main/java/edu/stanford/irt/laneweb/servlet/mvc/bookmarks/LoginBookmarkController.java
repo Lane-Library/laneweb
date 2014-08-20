@@ -28,13 +28,13 @@ public class LoginBookmarkController extends BookmarkController {
     @RequestMapping(value = "/secure/addBookmark")
     public String addBookmark(
             final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
+            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.SUNETID) final String sunetid,
             @RequestParam final String label,
             @RequestParam final String url,
             @RequestParam final String redirect) {
         Bookmark bookmark = new Bookmark(label, url);
-        List<Bookmark> clone = new ArrayList<Bookmark>(bookmarks);
+        List<Object> clone = new ArrayList<Object>(bookmarks);
         clone.add(0, bookmark);
         saveLinks(sunetid, clone);
         bookmarks.add(0, bookmark);

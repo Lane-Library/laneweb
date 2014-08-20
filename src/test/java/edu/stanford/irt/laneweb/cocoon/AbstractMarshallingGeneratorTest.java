@@ -1,19 +1,22 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.capture;
+import static org.easymock.EasyMock.createStrictMock;
+import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
 
 import javax.xml.transform.sax.SAXResult;
 
+import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.oxm.Marshaller;
+import org.springframework.oxm.MarshallingFailureException;
 import org.springframework.oxm.XmlMappingException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -22,6 +25,10 @@ import edu.stanford.irt.laneweb.LanewebException;
 public class AbstractMarshallingGeneratorTest {
 
     private static final class TestGenerator extends AbstractMarshallingGenerator {
+
+        public TestGenerator(final Marshaller marshaller) {
+            super(marshaller);
+        }
 
         @Override
         protected void doGenerate(final XMLConsumer xmlConsumer) {
@@ -32,44 +39,43 @@ public class AbstractMarshallingGeneratorTest {
 
     private Marshaller marshaller;
 
+    private XMLConsumer xmlConsumer;
+
     @Before
     public void setUp() throws Exception {
-        this.generator = new TestGenerator();
-        this.marshaller = createMock(Marshaller.class);
+        this.marshaller = createStrictMock(Marshaller.class);
+        this.generator = new TestGenerator(this.marshaller);
+        this.xmlConsumer = createStrictMock(XMLConsumer.class);
     }
 
     @Test
     public void testMarshall() throws XmlMappingException, IOException {
+        Capture<SAXResult> capture = new Capture<SAXResult>();
         Object obj = new Object();
-        this.marshaller.marshal(eq(obj), isA(SAXResult.class));
-        replay(this.marshaller);
-        this.generator.setMarshaller(this.marshaller);
-        this.generator.marshall(obj, null);
-        verify(this.marshaller);
+        this.marshaller.marshal(same(obj), capture(capture));
+        replay(this.marshaller, this.xmlConsumer);
+        this.generator.marshall(obj, this.xmlConsumer);
+        verify(this.marshaller, this.xmlConsumer);
+        assertSame(this.xmlConsumer, capture.getValue().getHandler());
     }
 
-    @Test
-    public void testMarshallNull() {
-        try {
-            this.generator.marshall(null, null);
-            fail();
-        } catch (LanewebException e) {
-        }
+    @Test(expected = LanewebException.class)
+    public void testMarshallThrowIOException() throws XmlMappingException, IOException {
+        Capture<SAXResult> capture = new Capture<SAXResult>();
+        Object obj = new Object();
+        this.marshaller.marshal(same(obj), capture(capture));
+        expectLastCall().andThrow(new IOException());
+        replay(this.marshaller, this.xmlConsumer);
+        this.generator.marshall(obj, this.xmlConsumer);
     }
 
-    @Test
-    public void testSetMarshaller() {
-        replay(this.marshaller);
-        this.generator.setMarshaller(this.marshaller);
-        verify(this.marshaller);
-    }
-
-    @Test
-    public void testSetMarshallerNull() {
-        try {
-            this.generator.setMarshaller(null);
-            fail();
-        } catch (LanewebException e) {
-        }
+    @Test(expected = LanewebException.class)
+    public void testMarshallThrowXmlMappingException() throws XmlMappingException, IOException {
+        Capture<SAXResult> capture = new Capture<SAXResult>();
+        Object obj = new Object();
+        this.marshaller.marshal(same(obj), capture(capture));
+        expectLastCall().andThrow(new MarshallingFailureException("oopsie"));
+        replay(this.marshaller, this.xmlConsumer);
+        this.generator.marshall(obj, this.xmlConsumer);
     }
 }

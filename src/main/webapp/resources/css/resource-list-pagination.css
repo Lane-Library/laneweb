@@ -37,6 +37,7 @@
     white-space:nowrap;
     padding:0 8px 0 6px;
     text-align:left;
+    z-index:1;
 }
 .pagingButton:hover .pagingLabels{
     display:block;

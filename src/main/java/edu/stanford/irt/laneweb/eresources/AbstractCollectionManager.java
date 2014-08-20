@@ -103,11 +103,6 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         return doGet(SEARCH, params, query);
     }
 
-    // TODO: remove these when upgrading to 1.8
-    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
-        return searchCount(types, query);
-    }
-
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         StringBuilder sb = new StringBuilder(this.sqlStatements.getProperty(COUNT));

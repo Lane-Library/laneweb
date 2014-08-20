@@ -22,8 +22,6 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
     /** the default cache expiration time, 20 minutes */
     private static final long DEFAULT_EXPIRES = 1000 * 60 * 20;
 
-    private String alpha;
-
     private CollectionManager collectionManager;
 
     private String componentType;
@@ -76,7 +74,6 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         } catch (NumberFormatException nfe) {
             this.page = 0;
         }
-        this.alpha = ModelUtil.getString(model, Model.ALPHA);
         this.queryString = ModelUtil.getString(model, Model.QUERY_STRING, "");
     }
 
@@ -99,11 +96,15 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         } else if (baseQuery.indexOf("page=") == 0) {
             baseQuery = "";
         }
-        PagingData pagingData = new EresourceListPagingData(eresources, this.page, baseQuery, this.alpha);
+        PagingData pagingData = getPagingData(eresources, this.page, baseQuery);
         this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData, getHeading()), xmlConsumer);
     }
 
     protected abstract List<Eresource> getEresourceList(CollectionManager collectionManager);
 
     protected abstract String getHeading();
+
+    protected PagingData getPagingData(final List<Eresource> eresources, final int page, final String baseQuery) {
+        return new EresourceListPagingData(eresources, page, baseQuery, null);
+    }
 }

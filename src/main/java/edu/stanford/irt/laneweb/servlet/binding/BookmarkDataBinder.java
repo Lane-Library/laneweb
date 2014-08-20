@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -20,14 +19,14 @@ public class BookmarkDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String sunetid = ModelUtil.getString(model, Model.SUNETID);
         if (sunetid != null) {
-            List<Bookmark> bookmarks = null;
+            List<Object> bookmarks = null;
             HttpSession session = request.getSession();
             synchronized (session) {
-                bookmarks = (List<Bookmark>) session.getAttribute(Model.BOOKMARKS);
+                bookmarks = (List<Object>) session.getAttribute(Model.BOOKMARKS);
                 if (bookmarks == null) {
                     bookmarks = this.bookmarkDAO.getLinks(sunetid);
                     if (bookmarks == null) {
-                        bookmarks = new ArrayList<Bookmark>();
+                        bookmarks = new ArrayList<Object>();
                     }
                     session.setAttribute(Model.BOOKMARKS, bookmarks);
                 }

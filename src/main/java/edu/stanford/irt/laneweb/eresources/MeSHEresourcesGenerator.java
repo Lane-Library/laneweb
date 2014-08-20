@@ -54,9 +54,18 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
 
     @Override
     protected String getHeading() {
-        if ("aids/hiv".equals(this.mesh)) {
-            return "AIDS/HIV";
+        String heading = null;
+        if (this.mesh != null) {
+            if ("aids/hiv".equals(this.mesh)) {
+                heading = "AIDS/HIV";
+            } else {
+                heading = getCapitalizedMesh();
+            }
         }
+        return heading;
+    }
+
+    private String getCapitalizedMesh() {
         StringBuilder sb = new StringBuilder();
         for (StringTokenizer st = new StringTokenizer(this.mesh, " -", true); st.hasMoreTokens();) {
             String token = st.nextToken();

@@ -42,7 +42,8 @@ public class VoyagerLogin {
         } else if (univId == null || univId.length() == 0) {
             this.log.error("bad univId: " + univId);
         } else {
-            String voyagerUnivId = "0" + univId; // voyager data prepends 0
+            // voyager data prepends 0
+            String voyagerUnivId = "0" + univId;
             Connection conn = null;
             PreparedStatement checkStmt = null;
             PreparedStatement clearStmt = null;
@@ -54,8 +55,8 @@ public class VoyagerLogin {
                 checkStmt.setString(1, voyagerUnivId);
                 rs = checkStmt.executeQuery();
                 rs.next();
-                if (rs.getInt(1) > 0) { // univid found so write to voyager
-                                        // tables
+                if (rs.getInt(1) > 0) {
+                    // univid found so write to voyager tables
                     clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
                     clearStmt.setString(1, voyagerUnivId);
                     clearStmt.setString(2, pid);

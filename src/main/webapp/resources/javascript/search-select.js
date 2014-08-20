@@ -44,7 +44,7 @@
         renderUI : function() {
             var srcNode = this.get("srcNode");
             var content = srcNode.all("option").item(srcNode.get("selectedIndex")).get("innerHTML");
-            this.get("boundingBox").appendChild("<span class='" + this.getClassName() + "-selected'><span>" + content + "</span></span>", srcNode);
+            this.get("boundingBox").appendChild("<span class='" + this.getClassName() + "-selected'><span>" + content + "</span><i class=\"fa fa-angle-double-down\"></i></span>", srcNode);
         },
         bindUI : function() {
             this.get("model").after("selectedChange", this._handleModelChange, this);

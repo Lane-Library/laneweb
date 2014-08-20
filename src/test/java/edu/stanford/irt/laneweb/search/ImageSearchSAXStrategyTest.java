@@ -34,8 +34,7 @@ public class ImageSearchSAXStrategyTest {
         this.strategy = new ImageSearchSAXStrategy(bassettSAXStrategy, metaSearchSAXStrategy);
     }
 
-    // I commented because the content will change several times before the production
-//     @Test
+     @Test
     public void testToSAX() throws SAXException, IOException {
         HashMap<String, Object> res = new HashMap<String, Object>();
         BassettImage bassettImage = new BassettImage("description", "title");

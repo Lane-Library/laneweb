@@ -27,10 +27,10 @@ public class BookmarkGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        this.generator = new BookmarkGenerator();
         this.marshaller = createMock(Marshaller.class);
-        this.generator.setMarshaller(this.marshaller);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.BOOKMARKS, Collections.<String> emptyList()));
+        this.generator = new BookmarkGenerator(this.marshaller);
+        this.generator.setModel(Collections.<String, Object> singletonMap(Model.BOOKMARKS,
+                Collections.<String> emptyList()));
     }
 
     @Test

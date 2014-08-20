@@ -84,10 +84,12 @@ Y.use('node-event-simulate','console','test', function(T) {
             T.Assert.isTrue(T.one("#searchTips").get("href").indexOf("#option2") > 0 );
         },
         testSearchTermsHintChange : function() {
-            T.Assert.areEqual("title1", Y.one("#searchTerms").get("value"));
+            var placeholderCapable = 'placeholder' in Y.Node.getDOMNode(Y.one("#searchTerms"));
+            var att = (placeholderCapable) ? "placeholder" : "value";
+            T.Assert.areEqual("title1", Y.one("#searchTerms").get(att));
             this.searchSource.set('selectedIndex',1);
             this.searchSource.simulate("change");
-            T.Assert.areEqual("title2", Y.one("#searchTerms").get("value"));
+            T.Assert.areEqual("title2", Y.one("#searchTerms").get(att));
         },
         testResetClickClearsInput : function() {
             T.one("#searchTerms").set("value","foo");

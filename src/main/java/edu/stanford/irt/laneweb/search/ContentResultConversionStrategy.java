@@ -52,13 +52,26 @@ public class ContentResultConversionStrategy {
         return new LinkedList<SearchResult>(resultMap.values());
     }
 
+    /**
+     * creates a Map where the keys are hit count Results and the values are the associated Collection
+     * of ContentResults.
+     * @param result the containing metasearch Result
+     * @return the Map as noted above.
+     */
     private Map<Result, Collection<Result>> getContentResultMap(final Result result) {
         Map<Result, Collection<Result>> resultMap = new HashMap<Result, Collection<Result>>();
-        for (Result engine : result.getChildren()) {
-            // TODO: operations on engine should be synchronized
+        Collection<Result> engines;
+        synchronized(result) {
+            engines = result.getChildren();
+        }
+        for (Result engine : engines) {
+            Collection<Result> children;
+            synchronized(engine) {
+                children = engine.getChildren();
+            }
             Result hitCount = null;
             Collection<Result> contents = Collections.emptySet();
-            for (Result child : engine.getChildren()) {
+            for (Result child : children) {
                 if (child.getId().endsWith(UNDERSCORE_CONTENT)) {
                     contents = child.getChildren();
                 } else {
