@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.bassett;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -19,6 +20,8 @@ public class BassettImageListSAXStrategy implements SAXStrategy<List<BassettImag
     private static final String BASSETT_NUMBER = "bassett_number";
 
     private static final String BASSETTS = "bassetts";
+    
+    private static final Pattern DASHES_PATTERN = Pattern.compile("--");
 
     private static final String DESCRIPTION = "description";
 
@@ -91,7 +94,7 @@ public class BassettImageListSAXStrategy implements SAXStrategy<List<BassettImag
         XMLUtils.startElement(xmlConsumer, NAMESPACE, REGIONS);
         for (int i = 0; i < regions.size(); i++) {
             String region = regions.get(i);
-            String[] splittedRegion = region.split("--");
+            String[] splittedRegion = DASHES_PATTERN.split(region);
             if (!splittedRegion[0].equals(currentRegion)) {
                 if (i != 0) {
                     XMLUtils.endElement(xmlConsumer, NAMESPACE, REGION);

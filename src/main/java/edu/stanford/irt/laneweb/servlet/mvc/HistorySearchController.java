@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +39,7 @@ public class HistorySearchController {
     public HistorySearchController(final MetaSearchManager manager, final CompositeDataBinder dataBinder) {
         this.manager = manager;
         this.dataBinder = dataBinder;
-        this.engines = new LinkedList<String>(Arrays.asList(ENGINES.split(",")));
+        this.engines = Arrays.asList(ENGINES.split(","));
     }
 
     /**

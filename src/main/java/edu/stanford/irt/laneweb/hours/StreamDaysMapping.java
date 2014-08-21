@@ -22,8 +22,6 @@ public class StreamDaysMapping extends HashMap<String, String> {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String STRIPPABLE_MINUTES = ":00";
-
     private static final Pattern STRIPPABLE_MINUTES_PATTERN = Pattern.compile(":00");
 
     private static final String TAG_CALENDAR = "calendar";
