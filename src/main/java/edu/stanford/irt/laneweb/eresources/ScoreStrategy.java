@@ -2,19 +2,22 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 import edu.stanford.irt.laneweb.resource.AbstractScoreStrategy;
 
 public class ScoreStrategy extends AbstractScoreStrategy {
 
     private static final int MAX_INT_MINUS_100 = Integer.MAX_VALUE - 100;
+    
+    private static final Pattern PATTERN = Pattern.compile(" \\(.*");
 
     public int computeScore(final String query, final String title, final ResultSet rs) throws SQLException {
         int score = 0;
         int year = rs.getInt("YEAR");
         if (query.equalsIgnoreCase(title)) {
             score = MAX_INT_MINUS_100;
-        } else if (title.indexOf('(') > -1 && query.equalsIgnoreCase(title.replaceFirst(" \\(.*", ""))) {
+        } else if (title.indexOf('(') > -1 && query.equalsIgnoreCase(PATTERN.matcher(title).replaceFirst(""))) {
             score = MAX_INT_MINUS_100;
         } else {
             // core material weighted * 3
