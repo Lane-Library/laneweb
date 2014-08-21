@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,8 +28,6 @@ import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
 @Controller
 @RequestMapping(value = "/bookmarks")
 public class JSONBookmarkController extends BookmarkController {
-
-    private static final Pattern COMMA_SPLIT = Pattern.compile(",");
 
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
@@ -60,7 +57,7 @@ public class JSONBookmarkController extends BookmarkController {
             @ModelAttribute(Model.SUNETID) final String sunetid,
             @RequestParam final String indexes) {
         // convert json array to an int[]
-        String[] split = COMMA_SPLIT.split(indexes.substring(1, indexes.length() - 1));
+        String[] split = indexes.substring(1, indexes.length() - 1).split(",");
         int[] ints = new int[split.length];
         for (int i = 0; i < split.length; i++) {
             ints[i] = Integer.parseInt(split[i]);

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
@@ -19,6 +20,8 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 public class BassettCollectionManager {
 
     private static final String DASHES = "--";
+
+    private static final Pattern DASHES_PATTERN = Pattern.compile(DASHES);
 
     private static final String GET_BASSETT_BY_REGION = "browse.region";
 
@@ -56,7 +59,7 @@ public class BassettCollectionManager {
     public List<BassettImage> getRegion(final String region) {
         List<String> params = new LinkedList<String>();
         if (region.indexOf(DASHES) > -1) {
-            String[] splittedRegion = region.split(DASHES);
+            String[] splittedRegion = DASHES_PATTERN.split(region);
             params.add(splittedRegion[0]);
             params.add(splittedRegion[1]);
             return doGet(GET_BASSETT_BY_SUB_REGION, params);
@@ -108,7 +111,7 @@ public class BassettCollectionManager {
             params.add(translatedQuery);
         }
         if (region.contains(DASHES)) {
-            String[] splittedRegion = region.split(DASHES);
+            String[] splittedRegion = DASHES_PATTERN.split(region);
             params.add(splittedRegion[0]);
             params.add(splittedRegion[1]);
             return doGetSearch(SEARCH_BASSETT_BY_SUB_REGION, params, query);
