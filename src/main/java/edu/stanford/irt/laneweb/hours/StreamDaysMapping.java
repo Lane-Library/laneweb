@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.hours;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,6 +23,8 @@ public class StreamDaysMapping extends HashMap<String, String> {
     private static final long serialVersionUID = 1L;
 
     private static final String STRIPPABLE_MINUTES = ":00";
+
+    private static final Pattern STRIPPABLE_MINUTES_PATTERN = Pattern.compile(":00");
 
     private static final String TAG_CALENDAR = "calendar";
 
@@ -56,7 +59,7 @@ public class StreamDaysMapping extends HashMap<String, String> {
                 }
                 if (day.getElementsByTagName(TAG_DESCRIPTION).getLength() > 0) {
                     value = day.getElementsByTagName(TAG_DESCRIPTION).item(0).getTextContent();
-                    value = value.replaceAll(STRIPPABLE_MINUTES, "");
+                    value = STRIPPABLE_MINUTES_PATTERN.matcher(value).replaceAll("");
                 }
                 super.put(key, value);
             }

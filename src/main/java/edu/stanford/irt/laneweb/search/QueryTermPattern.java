@@ -27,6 +27,8 @@ public final class QueryTermPattern {
     private static final Pattern PARENS_PATTERN = Pattern.compile("(\\(|\\))");
 
     private static final String PIPE = "|";
+    
+    private static final Pattern PIPE_PATTERN = Pattern.compile("\\|\\|");
 
     private static final Pattern QUOTES_PATTERN = Pattern.compile("\\\"");
 
@@ -66,7 +68,7 @@ public final class QueryTermPattern {
         normalQuery = SPACE_HYPHEN_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         // education, medical AND "cognitive+load" was generated two "||" -->
         // bug 65768
-        normalQuery = normalQuery.replaceAll("\\|\\|", PIPE);
+        normalQuery = PIPE_PATTERN.matcher(normalQuery).replaceAll(PIPE);
         try {
             return Pattern.compile(normalQuery, Pattern.CASE_INSENSITIVE);
         } catch (PatternSyntaxException e) {

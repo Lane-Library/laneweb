@@ -42,6 +42,8 @@ public class GoogleTracker {
     // Tracker version.
     private static final String GA_VERSION = "4.4sj";
 
+    private static final Pattern PLUS_PATTERN = Pattern.compile("\\+");
+
     private URLConnectionFactory connectionFactory;
 
     private String domainName;
@@ -130,7 +132,7 @@ public class GoogleTracker {
             encodedString = "";
         } else {
             encodedString = URLEncoder.encode(encodedString, "UTF-8");
-            encodedString = encodedString.replaceAll("\\+", "%20");
+            encodedString = PLUS_PATTERN.matcher(encodedString).replaceAll("%20");
         }
         return encodedString;
     }
