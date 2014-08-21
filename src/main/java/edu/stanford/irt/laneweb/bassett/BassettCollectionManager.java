@@ -18,9 +18,13 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class BassettCollectionManager {
 
+    private static final String DASHES = "--";
+
     private static final String GET_BASSETT_BY_REGION = "browse.region";
 
     private static final String GET_BASSETT_BY_SUB_REGION = "browse.subregion";
+
+    private static final String REGION = "REGION";
 
     private static final String SEARCH_BASSETT = "search";
 
@@ -31,6 +35,8 @@ public class BassettCollectionManager {
     private static final String SEARCH_BY_BASSETT_NUMBER = "search.number";
 
     private static final String SEARCH_COUNT = "search.count";
+
+    private static final String SUB_REGION = "SUB_REGION";
 
     private DataSource dataSource;
 
@@ -49,8 +55,8 @@ public class BassettCollectionManager {
 
     public List<BassettImage> getRegion(final String region) {
         List<String> params = new LinkedList<String>();
-        if (region.indexOf("--") > -1) {
-            String[] splittedRegion = region.split("--");
+        if (region.indexOf(DASHES) > -1) {
+            String[] splittedRegion = region.split(DASHES);
             params.add(splittedRegion[0]);
             params.add(splittedRegion[1]);
             return doGet(GET_BASSETT_BY_SUB_REGION, params);
@@ -101,8 +107,8 @@ public class BassettCollectionManager {
         for (int i = 0; i < 2; i++) {
             params.add(translatedQuery);
         }
-        if (region.contains("--")) {
-            String[] splittedRegion = region.split("--");
+        if (region.contains(DASHES)) {
+            String[] splittedRegion = region.split(DASHES);
             params.add(splittedRegion[0]);
             params.add(splittedRegion[1]);
             return doGetSearch(SEARCH_BASSETT_BY_SUB_REGION, params, query);
@@ -140,8 +146,7 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private List<BassettImage> doGetSearch(final String sqlKey, final List<String> params,
-            final String query) {
+    private List<BassettImage> doGetSearch(final String sqlKey, final List<String> params, final String query) {
         List<BassettImage> result = doGet(sqlKey, params);
         List<BassettImage> titleMatches = new LinkedList<BassettImage>();
         int i = 0;
@@ -163,12 +168,12 @@ public class BassettCollectionManager {
         Map<String, Integer> result = new LinkedHashMap<String, Integer>();
         while (rs.next()) {
             int count = rs.getInt("SUB_REGION_COUNT");
-            String region = rs.getString("REGION");
-            String subRegion = rs.getString("SUB_REGION");
+            String region = rs.getString(REGION);
+            String subRegion = rs.getString(SUB_REGION);
             if ("0".equals(subRegion)) {
                 result.put(region, count);
             } else if (subRegion != null) {
-                result.put(region.concat("--".concat(subRegion)), count);
+                result.put(new StringBuilder(region).append(DASHES).append(subRegion).toString(), count);
             }
         }
         return result;
@@ -196,11 +201,11 @@ public class BassettCollectionManager {
                 currentImageId = rowImageId;
                 images.add(image);
             }
-            String subregion = rs.getString("SUB_REGION");
+            String subregion = rs.getString(SUB_REGION);
             if (subregion != null) {
-                image.addRegion(rs.getString("REGION").concat("--").concat(subregion));
+                image.addRegion(new StringBuilder(rs.getString(REGION)).append(DASHES).append(subregion).toString());
             } else {
-                image.addRegion(rs.getString("REGION"));
+                image.addRegion(rs.getString(REGION));
             }
         }
         return images;

@@ -18,11 +18,20 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class EMailSender {
 
-    private static final Pattern EMAIL = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$",
+    private static final String BINDING_MAP = "org.springframework.validation.BindingResult.map";
+
+    private static final String EMAIL = "email";
+
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$",
             Pattern.CASE_INSENSITIVE);
 
-    private static final String[] EXCLUDED_FIELDS = new String[] { "subject", "recipient", "email",
-            "org.springframework.validation.BindingResult.map" };
+    private static final String RECIPIENT = "recipient";
+
+    private static final String REDIRECT = "redirect";
+
+    private static final String SUBJECT = "subject";
+
+    private static final String[] EXCLUDED_FIELDS = new String[] { SUBJECT, RECIPIENT, EMAIL, BINDING_MAP, REDIRECT };
 
     private Set<String> excludedFields;
 
@@ -67,10 +76,10 @@ public class EMailSender {
         final MimeMessage message = this.mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
-            helper.setSubject((String) map.get("subject"));
-            helper.setTo((String) map.get("recipient"));
-            String from = (String) map.get("email");
-            if (from == null || !EMAIL.matcher(from).matches()) {
+            helper.setSubject((String) map.get(SUBJECT));
+            helper.setTo((String) map.get(RECIPIENT));
+            String from = (String) map.get(EMAIL);
+            if (from == null || !EMAIL_PATTERN.matcher(from).matches()) {
                 from = "MAILER-DAEMON@stanford.edu";
             }
             helper.setFrom(from);
@@ -93,9 +102,9 @@ public class EMailSender {
     }
 
     private void validateModel(final Map<String, Object> map) {
-        Object recipient = map.get("recipient");
+        Object recipient = map.get(RECIPIENT);
         if (!this.recipients.contains(recipient)) {
-            throw new LanewebException("recipient " + recipient + " not permitted");
+            throw new LanewebException(RECIPIENT + " " + recipient + " not permitted");
         }
         Object remoteIp = map.get(Model.REMOTE_ADDR);
         if (this.spamIps.contains(remoteIp)) {

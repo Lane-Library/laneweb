@@ -20,8 +20,8 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(eresource.getScore()));
-            atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "eresource");
+            atts.addAttribute(EMPTY_NS, SCORE, SCORE, CDATA, Integer.toString(eresource.getScore()));
+            atts.addAttribute(EMPTY_NS, TYPE, TYPE, CDATA, "eresource");
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, ID, Integer.toString(eresource.getId()));
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_ID, Integer.toString(eresource.getRecordId()));
@@ -39,7 +39,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
 
     private void handleLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", link.getType().toString());
+        atts.addAttribute(EMPTY_NS, TYPE, TYPE, CDATA, link.getType().toString());
         XMLUtils.startElement(xmlConsumer, NAMESPACE, LINK, atts);
         maybeCreateElement(xmlConsumer, LABEL, link.getLabel());
         maybeCreateElement(xmlConsumer, LINK_TEXT, link.getLinkText());
