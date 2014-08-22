@@ -174,7 +174,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/classes-consult/index.html">Classes &amp; Consulting</a>
+                            <a href="/classes-consult/index.html">Classes &amp; Tutorials</a>
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-classes.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include>
