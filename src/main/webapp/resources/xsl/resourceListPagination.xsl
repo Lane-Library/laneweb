@@ -37,7 +37,7 @@
 			</xsl:choose>
 		</xsl:variable>
 		
-		<div class="resourceListPagination">=
+		<div class="resourceListPagination">
 					<xsl:choose>
 						<xsl:when
 							test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
@@ -94,11 +94,11 @@
 									</li>
 								</xsl:for-each>
 							</ul>
-							<a class="seeAll" href="?{$no-page-query-string}page=all">See All</a>
+							<a style="float:right;margin:0 15px 0 10px" href="?{$no-page-query-string}page=all">See All</a>
 						</xsl:when>
 						<xsl:otherwise>
-							<a class="seeAll" href="?{$no-page-query-string}page=all">See All</a>
-							<div class="paginationNumbers">
+							<a style="float:right;margin:0 15px 0 10px" href="?{$no-page-query-string}page=all">See All</a>
+							<div style="float:right">
 								<xsl:call-template name="paginationNumbers">
 									<xsl:with-param name="page" select="number(0)" />
 									<xsl:with-param name="query-string" select="$no-page-query-string" />
