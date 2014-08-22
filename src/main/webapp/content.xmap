@@ -119,13 +119,7 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
-              <map:match type="regex-parameter" pattern="^free-images-all$">
-                <map:parameter name="parameter-name" value="source"/>
-                <map:generate type="html" src="cocoon://content/cached/search/{source}.html"/>
-                <map:transform type="xinclude"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="regex-parameter" pattern="^images-all$">
+            <map:match type="regex-parameter" pattern=".*images-all$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="html" src="cocoon://content/cached/search/{source}.html"/>
                 <map:transform type="xinclude"/>

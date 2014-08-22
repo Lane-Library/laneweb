@@ -46,18 +46,7 @@
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
         class="edu.stanford.irt.laneweb.search.ResultSAXStrategy"/>
-    
-    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image"
-        class="edu.stanford.irt.laneweb.search.ImageSearchSAXStrategy">
-        <constructor-arg index="0" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image-bassett"/>
-        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image-metasearch"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image-bassett"
-        class="edu.stanford.irt.laneweb.search.ImageBassettSearchSAXStrategy"/>
-    
-    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image-metasearch"
-        class="edu.stanford.irt.laneweb.search.ImageMetasearchSAXStrategy"/>
+   
     
     <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"
         class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
@@ -115,13 +104,6 @@
         class="edu.stanford.irt.laneweb.search.EngineSearchGenerator"
         parent="edu.stanford.irt.cocoon.pipeline.Generator/search"/>
 
-
-     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-image"
-        class="edu.stanford.irt.laneweb.search.ImageSearchGenerator"
-         parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
-         <constructor-arg index="1" ref="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"/>
-        <constructor-arg  index="2" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/search-image"/>
-    </bean>
 
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-resource"
