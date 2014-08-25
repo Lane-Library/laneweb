@@ -117,10 +117,12 @@ em {
 }
 
 .content .calendar ul {
+	float: left;
 	padding-left: 0;
 }
 
 .content .calendar li {
+	width: 112px;
 	height: 75px;
 	float: left;
 	margin: .2em;
