@@ -1,0 +1,41 @@
+package edu.stanford.irt.laneweb.servlet.binding;
+
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class CompositeDataBinderTest {
+
+    private CompositeDataBinder binder;
+
+    private DataBinder child;
+
+    private Map<String, Object> model;
+
+    private HttpServletRequest request;
+
+    @Before
+    public void setUp() {
+        this.child = createMock(DataBinder.class);
+        this.binder = new CompositeDataBinder(Collections.singletonList(this.child));
+        this.request = createMock(HttpServletRequest.class);
+        this.model = new HashMap<String, Object>();
+    }
+
+    @Test
+    public void testBind() {
+        this.child.bind(this.model, this.request);
+        replay(this.request, this.child);
+        this.binder.bind(this.model, this.request);
+        verify(this.request, this.child);
+    }
+}

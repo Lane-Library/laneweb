@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+   <div>
+      <div id="result"> 1 of 52 images found</div>
+      <ul id="imageList">
+         <li>
+            <a href="pageUrl">
+               <div id="image">
+                  <image src="thumbnailSrc"/>
+               </div>
+               <div>title</div>
+            </a>
+            <div id="website-id">Source: <a href="pageUrl">id</a>
+            </div>
+            <div id="copyright">
+               <a rel="popup local id">Copyright Information <i class="fa fa-arrow-right"/>
+               </a>
+            </div>
+         </li>
+      </ul>
+   </div>
+   <div style="display:none" class="tooltips"/>
+</div>

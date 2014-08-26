@@ -68,7 +68,7 @@ em {
 
 .announce {
 	text-align: center;
-	background-color: #333;
+	background-color: #80982a;
 	border: none;
 	padding: 12px;
 	font-family: 'Fjord One', serif;
@@ -117,10 +117,12 @@ em {
 }
 
 .content .calendar ul {
+	float: left;
 	padding-left: 0;
 }
 
 .content .calendar li {
+	width: 112px;
 	height: 75px;
 	float: left;
 	margin: .2em;

@@ -15,6 +15,8 @@ public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Integer>
 
     private static final String BASSETT_COUNT = "bassett_count";
 
+    private static final String CDATA = "CDATA";
+
     private static final String NAME = "name";
 
     private static final String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
@@ -42,14 +44,14 @@ public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Integer>
                         XMLUtils.endElement(xmlConsumer, NAMESPACE, REGION);
                     }
                     attributes = new AttributesImpl();
-                    attributes.addAttribute(NAMESPACE, NAME, NAME, "CDATA", key.toLowerCase());
-                    attributes.addAttribute(NAMESPACE, TOTAL, TOTAL, "CDATA", count.toString());
+                    attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, key.toLowerCase());
+                    attributes.addAttribute(NAMESPACE, TOTAL, TOTAL, CDATA, count.toString());
                     XMLUtils.startElement(xmlConsumer, NAMESPACE, REGION, attributes);
                     haveStartRegion = true;
                 } else {
                     String subregion = key.substring(separatorIndex + 2).toLowerCase();
                     attributes = new AttributesImpl();
-                    attributes.addAttribute(NAMESPACE, NAME, NAME, "CDATA", subregion);
+                    attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subregion);
                     XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION, attributes);
                     XMLUtils.data(xmlConsumer, count.toString());
                     XMLUtils.endElement(xmlConsumer, NAMESPACE, SUB_REGION);

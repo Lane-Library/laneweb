@@ -28,17 +28,17 @@ public class ModelDataBinder implements DataBinder {
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        Map<String, Object> modelModel = new HashMap<String, Object>();
+        Map<String, Object> jsonModel = new HashMap<String, Object>();
         for (Entry<String, Object> entry : model.entrySet()) {
             String key = entry.getKey();
             if (this.keys.contains(key)) {
-                modelModel.put(key, entry.getValue());
+                jsonModel.put(key, entry.getValue());
             }
         }
         StringWriter stringWriter = new StringWriter();
         try {
             JsonGenerator jsonGenerator = this.objectMapper.getFactory().createGenerator(stringWriter);
-            this.objectMapper.writeValue(jsonGenerator, modelModel);
+            this.objectMapper.writeValue(jsonGenerator, jsonModel);
             model.put(Model.MODEL, stringWriter.toString());
         } catch (IOException e) {
             throw new LanewebException(e);

@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,8 @@ public class CMERedirectController {
 
     private static final String PROXY_LINK = "http://laneproxy.stanford.edu/login?url=";
 
+    private static final Pattern QUESTION_MARK_PATTERN = Pattern.compile("\\?");
+
     private static final String SHC_EMRID_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
 
     private static final String SU_SUNETID_ARGS = "unid=?&srcsys=EZPX90710&eiv=2.1.0";
@@ -36,31 +39,6 @@ public class CMERedirectController {
 
     public CMERedirectController(final CompositeDataBinder dataBinder) {
         this.dataBinder = dataBinder;
-    }
-
-    /**
-     * puts the EMRID, AUTH and PROXY_LINKS into the model.
-     * 
-     * @param request
-     *            the request
-     * @param model
-     *            the model
-     */
-    @ModelAttribute
-    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.dataBinder.bind(model.asMap(), request);
-        if (!model.containsAttribute(Model.AUTH)) {
-            model.addAttribute(Model.AUTH, null);
-        }
-        if (!model.containsAttribute(Model.BASE_PATH)) {
-            model.addAttribute(Model.BASE_PATH, null);
-        }
-        if (!model.containsAttribute(Model.EMRID)) {
-            model.addAttribute(Model.EMRID, null);
-        }
-        if (!model.containsAttribute(Model.PROXY_LINKS)) {
-            model.addAttribute(Model.PROXY_LINKS, Boolean.FALSE);
-        }
     }
 
     @RequestMapping(value = "redirect/cme")
@@ -89,6 +67,31 @@ public class CMERedirectController {
         doRedirect(sunetHash, emrid, proxyLinks, url, request, response);
     }
 
+    /**
+     * puts the EMRID, AUTH and PROXY_LINKS into the model.
+     *
+     * @param request
+     *            the request
+     * @param model
+     *            the model
+     */
+    @ModelAttribute
+    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.dataBinder.bind(model.asMap(), request);
+        if (!model.containsAttribute(Model.AUTH)) {
+            model.addAttribute(Model.AUTH, null);
+        }
+        if (!model.containsAttribute(Model.BASE_PATH)) {
+            model.addAttribute(Model.BASE_PATH, null);
+        }
+        if (!model.containsAttribute(Model.EMRID)) {
+            model.addAttribute(Model.EMRID, null);
+        }
+        if (!model.containsAttribute(Model.PROXY_LINKS)) {
+            model.addAttribute(Model.PROXY_LINKS, Boolean.FALSE);
+        }
+    }
+
     private String createCMELink(final String link, final String emrid, final String sunetHash, final boolean proxyLinks) {
         StringBuilder sb = new StringBuilder();
         String id = null;
@@ -108,9 +111,9 @@ public class CMERedirectController {
             args = SU_SUNETID_ARGS;
         }
         if (link.contains("?")) {
-            sb.append(link).append("&").append(args.replaceFirst("\\?", id));
+            sb.append(link).append("&").append(QUESTION_MARK_PATTERN.matcher(args).replaceFirst(id));
         } else if (link.endsWith("/") || link.endsWith("online") || link.endsWith("search")) {
-            sb.append(UTD_CME_URL).append(args.replaceFirst("\\?", id));
+            sb.append(UTD_CME_URL).append(QUESTION_MARK_PATTERN.matcher(args).replaceFirst(id));
         } else {
             sb.append(link);
         }

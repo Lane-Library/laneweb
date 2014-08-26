@@ -205,7 +205,7 @@
             //pressing return generates a click on the add button for some reason
             //pageX is 0 in that situation
             if (event.pageX !== 0) {
-                var fn = this[event.target.getAttribute("value")];
+                var fn = this[event.currentTarget.getAttribute("value")];
                 if (fn) {
                     fn.call(this);
                 }

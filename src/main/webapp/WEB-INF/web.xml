@@ -26,6 +26,7 @@
             /WEB-INF/spring/querymap.xml
             /WEB-INF/spring/redirect.xml
             /WEB-INF/spring/search.xml
+            /WEB-INF/spring/search-image.xml
             /WEB-INF/spring/sitemap.xml
             /WEB-INF/spring/source.xml
             /WEB-INF/spring/suggest.xml

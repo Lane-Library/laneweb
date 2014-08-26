@@ -7,6 +7,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-08-22" version="2.2.17" description="2.2.17 bug fix release">
+            <action date="2014-08-22" dev="ceyates" issue="99043" type="fix">
+                bad layout for search result paging links
+            </action>
+            <action date="2014-08-22" dev="olgary" issue="99041" type="update">
+                change global nav link name to 'Classes &amp; Tutorials'
+            </action>
+            <action date="2014-08-21" dev="olgary" issue="99025" type="update">
+                miscelaneous.css - changed background color for announce class
+            </action>
+            <action date="2014-08-21" dev="olgary" issue="99024" type="update">
+                added a new window to Otolaryngology portal link: template.xml, debugl.xml
+            </action>
+            <action date="2014-08-19" dev="ceyates" issue="98989" type="update">
+                change an arrow to fa-angle-double-down
+            </action>
+            <action date="2014-08-19" dev="ceyates" issue="98924" type="fix">
+                Feedback-bug: View by page: Ja-Jz isn't working properly
+            </action>
+            <action date="2014-08-19" dev="ceyates" issue="98804" type="update">
+                Resources pages note about restricted access
+            </action>
+        </release>
         <release date="2014-08-18" version="2.2.16" description="2.2.16 bug fix release">
             <action date="2014-08-14" dev="ceyates" issue="98898" type="fix">
                 empty &lt;p itemprop="description">&lt;/p> in laneclass.html

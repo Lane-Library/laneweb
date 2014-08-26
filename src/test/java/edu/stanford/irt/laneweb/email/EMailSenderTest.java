@@ -23,6 +23,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -141,7 +142,28 @@ public class EMailSenderTest {
     }
 
     @Test
-    public void testSendEmailThrows() throws MessagingException {
+    public void testSendEmailSendingThrows() throws MessagingException {
+        this.map.put("recipient", "recipient");
+        this.map.put("subject", "subject");
+        this.map.put("email", "email@foo.com");
+        this.map.put("message", "message");
+        expect(this.javaMailSender.createMimeMessage()).andReturn(this.message);
+        this.message.setSubject("subject");
+        this.message.setRecipient(eq(RecipientType.TO), isA(Address.class));
+        this.message.setFrom(isA(Address.class));
+        this.message.setText("message: message\n\n");
+        this.javaMailSender.send(this.message);
+        expectLastCall().andThrow(new MailSendException("oops"));
+        replay(this.javaMailSender, this.message);
+        try {
+            this.eMailSender.sendEmail(this.map);
+        } catch (LanewebException e) {
+        }
+        verify(this.javaMailSender, this.message);
+    }
+
+    @Test
+    public void testSendEmailSetSubjectThrows() throws MessagingException {
         this.map.put("recipient", "recipient");
         this.map.put("subject", "subject");
         this.map.put("email", "email@foo.com");

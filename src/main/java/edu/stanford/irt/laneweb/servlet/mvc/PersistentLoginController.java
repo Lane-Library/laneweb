@@ -1,14 +1,12 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
- * This class will add three cookies the persistent-expired-date,
- * persistent-preference and user. The user coolie will have the sunetid, the
- * userAgent and the expired date appended and encrypted. The
- * persistent-preference have the expired date minus 3 days only pl=true have to
- * have the secure in the path but not the other But if pl=renew the status of
- * the user is looked up see it is active or not. Before to delete the cookie,
- * we check if the persistent-preference value is not equals to denied because
- * if it is equals denied the persistent window will never appear.
+ * This class will add three cookies the persistent-expired-date, persistent-preference and user. The user coolie will
+ * have the sunetid, the userAgent and the expired date appended and encrypted. The persistent-preference have the
+ * expired date minus 3 days only pl=true have to have the secure in the path but not the other But if pl=renew the
+ * status of the user is looked up see it is active or not. Before to delete the cookie, we check if the
+ * persistent-preference value is not equals to denied because if it is equals denied the persistent window will never
+ * appear.
  */
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -35,6 +33,8 @@ public class PersistentLoginController {
 
     public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
 
+    private static final String UTF8 = "UTF-8";
+
     private SunetIdCookieCodec codec;
 
     private SunetIdSource sunetIdSource;
@@ -47,23 +47,23 @@ public class PersistentLoginController {
     }
 
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
-    public View removeCookieAndView(final String url, final HttpServletRequest request, final HttpServletResponse response)
-            throws UnsupportedEncodingException {
+    public View removeCookieAndView(final String url, final HttpServletRequest request,
+            final HttpServletResponse response) throws UnsupportedEncodingException {
         removeCookies(request, response);
         this.sunetIdSource.getSunetid(request);
         return setView(url, response);
     }
 
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
-    public View renewCookieAndRedirect(String url, final HttpServletRequest request, final HttpServletResponse response)
-            throws UnsupportedEncodingException {
+    public View renewCookieAndRedirect(final String url, final HttpServletRequest request,
+            final HttpServletResponse response) throws UnsupportedEncodingException {
         Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
         if (null != isActiveSunetID && isActiveSunetID) {
             checkSunetIdAndSetCookies(request, response);
         } else {
             resetCookies(request, response);
         }
-        RedirectView view = new RedirectView(URLDecoder.decode(url, "UTF-8"), true, true);
+        RedirectView view = new RedirectView(URLDecoder.decode(url, UTF8), true, true);
         view.setExpandUriTemplateVariables(false);
         return view;
     }
@@ -122,7 +122,7 @@ public class PersistentLoginController {
 
     /**
      * create and set the lane-user cookie
-     * 
+     *
      * @param sunetid
      * @param request
      * @param response
@@ -155,13 +155,13 @@ public class PersistentLoginController {
         }
     }
 
-    private View setView(String url, final HttpServletResponse response) throws UnsupportedEncodingException {
+    private View setView(final String url, final HttpServletResponse response) throws UnsupportedEncodingException {
         RedirectView view = null;
         if (null == url) {
-            response.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding(UTF8);
             view = new RedirectView("/myaccounts.html", true, true);
         } else {
-            view = new RedirectView(URLDecoder.decode(url, "UTF-8"), true, true);
+            view = new RedirectView(URLDecoder.decode(url, UTF8), true, true);
         }
         view.setExpandUriTemplateVariables(false);
         return view;

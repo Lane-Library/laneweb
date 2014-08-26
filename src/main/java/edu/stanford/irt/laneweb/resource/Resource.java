@@ -6,6 +6,8 @@ public interface Resource {
 
     String AUTHOR = "pub-author";
 
+    String CDATA = "CDATA";
+
     String CONTENT_HIT_COUNTS = "contentHitCounts";
 
     String CONTENT_ID = "contentId";

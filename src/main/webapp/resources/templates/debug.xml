@@ -143,7 +143,7 @@
                                 <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
                                 <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>
                                 <li><a href="/portals/cardiology.html">Cardiology</a></li>
-                                <li><a href="http://trachea.stanford.edu/">Otolaryngology</a></li>
+                                <li><a href="http://trachea.stanford.edu/">Otolaryngology <i class="fa fa-external-link"></i></a></li>
                                 <li><a href="/portals/clinical.html">Clinical</a></li>
                                 <li><a href="/portals/palliative-care.html">Palliative Care</a></li>
                                 <li><a href="/portals/comp-med.html">Comparative Medicine</a></li>
@@ -174,7 +174,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/classes-consult/index.html">Classes &amp; Consulting</a>
+                            <a href="/classes-consult/index.html">Classes &amp; Tutorials</a>
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-classes.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include>

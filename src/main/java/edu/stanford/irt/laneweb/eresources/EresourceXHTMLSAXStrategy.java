@@ -15,6 +15,8 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
 
     private static final String PRIMARY_LINK = "primaryLink";
 
+    private static final String SOURCE_LINK = "sourceLink";
+
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             boolean first = true;
@@ -46,7 +48,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         }
         if (LinkType.GETPASSWORD.equals(link.getType())) {
             if (!first) {
-                //the one getpassword link that is not a first link doesn't have trailing space in additional_text
+                // the one getpassword link that is not a first link doesn't have trailing space in additional_text
                 XMLUtils.data(xmlConsumer, " ");
             }
             createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
@@ -62,13 +64,13 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             sb.append("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=").append(eresource.getRecordId());
             createAnchor(xmlConsumer, sb.toString(), "Lane Catalog record");
         } else if ("auth".equals(recordType)) {
-            createSpanWithClass(xmlConsumer, "sourceLink", "Lane Community Info File");
+            createSpanWithClass(xmlConsumer, SOURCE_LINK, "Lane Community Info File");
         } else if ("web".equals(recordType)) {
-            createSpanWithClass(xmlConsumer, "sourceLink", "Lane Web Page");
+            createSpanWithClass(xmlConsumer, SOURCE_LINK, "Lane Web Page");
         } else if ("class".equals(recordType)) {
-            createSpanWithClass(xmlConsumer, "sourceLink", "Lane Class");
+            createSpanWithClass(xmlConsumer, SOURCE_LINK, "Lane Class");
         } else if ("print".equals(recordType)) {
-            createSpanWithClass(xmlConsumer, "sourceLink", "Print Material");
+            createSpanWithClass(xmlConsumer, SOURCE_LINK, "Print Material");
         }
         endDiv(xmlConsumer);
     }

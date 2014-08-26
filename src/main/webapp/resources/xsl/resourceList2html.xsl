@@ -153,6 +153,7 @@
             <xsl:if test="s:description">
                 <xsl:attribute name="class" select="'hvrTrig'"/>
             </xsl:if>
+            S: <xsl:value-of select="@score"/>
             <xsl:apply-templates select="s:link"/>
             <xsl:apply-templates select="s:recordType"/>
             <xsl:apply-templates select="s:pub-author"/>

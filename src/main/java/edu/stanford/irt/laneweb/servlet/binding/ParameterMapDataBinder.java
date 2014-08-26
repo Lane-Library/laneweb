@@ -12,7 +12,7 @@ public class ParameterMapDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         Map parameterMap = request.getParameterMap();
         if (!parameterMap.isEmpty()) {
-            model.put(Model.PARAMETER_MAP, request.getParameterMap());
+            model.put(Model.PARAMETER_MAP, parameterMap);
         }
     }
 }

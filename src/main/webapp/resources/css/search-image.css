@@ -3,6 +3,7 @@
 	/*requred for IE < 8:*/
 	*height: 404px;
 	text-align: center;
+	background-color:white; 
 }
 
 #imageList:after {
@@ -12,16 +13,19 @@
 	font-size: 0;
 	clear: both;
 	visibility: hidden;
+	
 }
 
 #imageList li {
 	float: left;
 	list-style: none inside none;
-	margin: 1px 1px 1px 1px;
+	margin: 0px 0px 0px 0px;
 	display: block;
-	background-color: #f0f4f5;
-	height: 230px;
-	width: 235px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ddd; 
+	height: 270px;
+	width: 232px;
 	
 }
 
@@ -45,6 +49,7 @@
 	width: 200px;
 	height: 50px;
 	margin:10px;
+	
 }
 
 #image{
@@ -53,8 +58,7 @@
 	display: table-cell;
 	vertical-align: middle;
 	float: initial;
-	padding-top: 30px;
-}
+	padding-top: 10px; }
 
 #searchImageTitle {
 	margin-top: 40px;
@@ -62,42 +66,89 @@
     padding-left: 10px;
 }
 
-#copyright{
+#website-id{
+	color: grey;
+	font-size: xx-small;
+	text-align: left;
+	margin-left: 10px;
+}
+
+#website-id a{
+	color:#007c92;
+	display:inline;
+}
+
+#result{
+	margin-top: 10px;
 	margin-bottom: 15px;
 	font-size: inherit;
     padding-left: 10px;
 }
 
+#tabs-image-search .copyright-help{
+	display:  initial;
+	padding:  0px 5px 0px 0px;
+	float: right;
+}
+
+#tabs- .fa{
+	color:  white;
+}
+	
+#copyright{
+	text-align: left;
+	margin-left: 10px;
+	font-size: x-small;
+}
+
 #copyright a{
-	margin-right: 50px;	
+	color:#007c92;	
+	display:inline;
 }
 
 
-#copyrightSection{
-    width: 470px;
-    margin-bottom: -100px;
-    margin-left: 500px;
-    overflow: hidden;
-    padding-top: 18px;
-    padding-right: 10px;
-    position: relative;
-	}
 
-#copyrightSection div:first-child{
-	color : #009abb;
-	margin-top: 8px;
-	float:left;
-	}
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/*styles for  big gray gradient tabs*/
+#tabs-image-search {
+	display: inline-block;
+	margin-top: 2em;
+	z-index: 5;
+	margin-top:0px;
+	padding-left:165px;
+	margin-bottom: -4px;
+}
 
-#copyrightSection div:last-child{
-	margin-left: 5px;
-	}
+#tabs-image-search .active{
+	margin-right: 3px;
+	margin-left: 3px;
+	border: 1px solid #660000;
+	border-bottom:none;
+}
+
+#tabs-image-search li {
+	display: inline-block;
+	border: 1px solid #dadad9;
+	border-bottom:none;
+	margin-left: 0;
+	margin-right: 1px;
+	list-style: none outside none;
+	float: left;
+}
+
+#tabs-image-search li:hover {
+	border: 1px solid #660000;
+	border-bottom:none;
+}
+
+#tabs-image-search li a {
+	color: #ffffff !important; /*to overwrite the color of the text links*/
+	display:table-cell;
+	text-decoration: none;
+	border-bottom: none;
+	padding: 12px 6px 12px 18px;
+	position: relative;
+	
+}
 
 
-#copyrightSection li{
-	list-style: none;
-	}
-
-#copyrightSection span{
-	color : #009abb;
-	}
