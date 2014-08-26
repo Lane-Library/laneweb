@@ -156,7 +156,7 @@
          */
         _handleButtonClick : function(event) {
             event.preventDefault();
-            this[event.target.getAttribute("value")].call(this, event);
+            this[event.currentTarget.getAttribute("value")].call(this, event);
         },
 
         /**
