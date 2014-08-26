@@ -7,11 +7,11 @@
     
     <solr:solr-server id="laneSearchSolrServer" url="%{laneweb.solr-url-laneSearch}"/>
 
-    <solr:repositories base-package="edu.stanford.irt.laneweb.solr"/>
+    <solr:repositories base-package="edu.stanford.irt.laneweb.solr" multicore-support="true"/>
 
     <context:component-scan base-package="edu.stanford.irt.laneweb.solr" />
 
-    <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
+    <bean id="laneSearchSolrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
         <constructor-arg index="0" ref="laneSearchSolrServer"/>
     </bean>
 

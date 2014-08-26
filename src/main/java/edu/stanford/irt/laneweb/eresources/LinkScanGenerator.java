@@ -7,6 +7,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.solr.core.SolrTemplate;
+import org.springframework.data.solr.repository.support.SolrRepositoryFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -31,11 +33,19 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
     private Validity validity;
 
     @Autowired
-    public LinkScanGenerator(final SolrRepository repository) {
-        this.repository = repository;
+    public LinkScanGenerator(final SolrTemplate laneSearchSolrTemplate) {
+        this.repository = new SolrRepositoryFactory(laneSearchSolrTemplate).getRepository(SolrRepository.class);
         this.validity = new LinkScanValidity();
     }
 
+    /**
+     * constructor for unit testing
+     * @param repository
+     */
+    public LinkScanGenerator(final SolrRepository repository) {
+        this.repository = repository;
+    }
+    
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         List<Eresource> results = this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
