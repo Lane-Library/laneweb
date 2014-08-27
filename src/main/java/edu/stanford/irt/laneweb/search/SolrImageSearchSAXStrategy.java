@@ -139,7 +139,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 		String number = String.valueOf(page.getSize() * page.getNumber() + page.getNumberOfElements());
 		startDivWithClass(xmlConsumer, "result");
 		if (page.hasContent()) {
-			XMLUtils.data(xmlConsumer, "Reuslts " + numberResult + " to " + number + " of " + page.getTotalElements());
+			XMLUtils.data(xmlConsumer, "Results " + numberResult + " to " + number + " of " + page.getTotalElements());
 		} else if (isTopScreen) {
 			XMLUtils.data(xmlConsumer,
 			        "No " + result.get("tab") + " images are available with search term, " + result.get("searchTerm"));
