@@ -14,12 +14,10 @@ import java.util.Map;
 import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SolrImageSearchGeneratorTest {
@@ -28,7 +26,7 @@ public class SolrImageSearchGeneratorTest {
 
     private Map<String, Object> model;
 
-    private SAXStrategy<Page<Image>> saxStrategy;
+    private SAXStrategy<Map<String, Object>> saxStrategy;
 
     private SolrImageService service;
 
@@ -43,9 +41,9 @@ public class SolrImageSearchGeneratorTest {
 
     @Test
     public void testDoSearchCategory() {
-        this.model.put(Model.CATEGORY, "2");
+        this.model.put(Model.SOURCE, "cc-");
         Capture<Pageable> pageable = new Capture<Pageable>();
-        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("2"), capture(pageable)))
+        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("10"), capture(pageable)))
                 .andReturn(null);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);

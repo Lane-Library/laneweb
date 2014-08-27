@@ -78,21 +78,31 @@
 	display:inline;
 }
 
-#result{
+
+
+.result-summary div{
+	display:inline-block;
 	margin-top: 10px;
 	margin-bottom: 15px;
 	font-size: inherit;
     padding-left: 10px;
-}
+}	
 
-#tabs-image-search .copyright-help{
-	display:  initial;
-	padding:  0px 5px 0px 0px;
+.result-summary a{
+	padding: 3px;
+} 
+
+.pagination{
 	float: right;
+	padding-right: 10px;
 }
 
-#tabs- .fa{
-	color:  white;
+.pagination  .actived {
+	color:#428bca !important ;
+}
+
+.pagination .disabled,  a.disabled:hover{
+	color:#dedede !important ;
 }
 	
 #copyright{
@@ -110,6 +120,19 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /*styles for  big gray gradient tabs*/
+
+
+#tabs-image-search .copyright-help{
+	display:  initial;
+	padding:  0px 5px 0px 0px;
+	float: right;
+}
+
+#tabs- .fa{
+	color:  white;
+}
+
+
 #tabs-image-search {
 	display: inline-block;
 	margin-top: 2em;
@@ -143,12 +166,11 @@
 
 #tabs-image-search li a {
 	color: #ffffff !important; /*to overwrite the color of the text links*/
-	display:table-cell;
+	display:inline-block;
 	text-decoration: none;
 	border-bottom: none;
 	padding: 12px 6px 12px 18px;
 	position: relative;
 	
 }
-
 
