@@ -78,12 +78,13 @@
 	display:inline;
 }
 
-
+.result-summary{
+	margin-top: 10px;
+	margin-bottom: 15px;
+} 
 
 .result-summary div{
 	display:inline-block;
-	margin-top: 10px;
-	margin-bottom: 15px;
 	font-size: inherit;
     padding-left: 10px;
 }	
