@@ -134,13 +134,13 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 	}
 
 	protected void generateResult(final XMLConsumer xmlConsumer, final Page<Image> page,
-	        final Map<String, Object> result, boolean isTopScreen) throws SAXException {
+	        final Map<String, Object> result) throws SAXException {
 		String numberResult = String.valueOf(page.getSize() * page.getNumber() + 1);
 		String number = String.valueOf(page.getSize() * page.getNumber() + page.getNumberOfElements());
 		startDivWithClass(xmlConsumer, "result");
 		if (page.hasContent()) {
 			XMLUtils.data(xmlConsumer, "Results " + numberResult + " to " + number + " of " + page.getTotalElements());
-		} else if (isTopScreen) {
+		} else {
 			XMLUtils.data(xmlConsumer,
 			        "No " + result.get("tab") + " images are available with search term, " + result.get("searchTerm"));
 		}
@@ -150,7 +150,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 	private void generateSumaryResult(final XMLConsumer xmlConsumer, final Page<Image> page,
 	        final Map<String, Object> result, boolean isTopScreen) throws SAXException {
 		startDivWithClass(xmlConsumer, "result-summary");
-		generateResult(xmlConsumer, page, result, isTopScreen);
+		if(isTopScreen){
+			generateResult(xmlConsumer, page, result);
+		}
 		if (page.getTotalPages() > 1) {
 			generatePagination(xmlConsumer, page, (String) result.get("path"));
 		}
