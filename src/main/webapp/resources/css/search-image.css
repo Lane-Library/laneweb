@@ -167,7 +167,8 @@
 
 #tabs-image-search li a {
 	color: #ffffff !important; /*to overwrite the color of the text links*/
-	display:inline-block;
+	display:-moz-box;
+	display:table-cell;
 	text-decoration: none;
 	border-bottom: none;
 	padding: 12px 6px 12px 18px;
