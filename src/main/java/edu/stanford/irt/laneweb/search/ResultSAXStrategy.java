@@ -5,7 +5,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.search.SAXResult;
 import edu.stanford.irt.search.impl.Result;
 
 public class ResultSAXStrategy implements SAXStrategy<Result> {
