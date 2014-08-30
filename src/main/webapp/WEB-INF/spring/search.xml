@@ -45,7 +45,19 @@
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
-        class="edu.stanford.irt.laneweb.search.ResultSAXStrategy"/>
+        class="edu.stanford.irt.laneweb.search.MetasearchResultSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.EngineResultSAXStrategy">
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.search.ResourceResultSAXStrategy">
+                        <constructor-arg>
+                            <bean class="edu.stanford.irt.laneweb.search.AlternateContentResultSAXStrategy"/>
+                        </constructor-arg>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
    
     
     <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"
