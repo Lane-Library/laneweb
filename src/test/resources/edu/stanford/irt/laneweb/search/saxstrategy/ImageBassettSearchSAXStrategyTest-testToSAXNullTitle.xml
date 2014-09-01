@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+   <h4 id="searchImageTitle" class="plain">Bassett</h4>
+   <div id="copyright"> 1 of <a href="http://lane.stanford.edu/search.html?source=bassett&amp;q=skin">1 images found</a>
+      <a rel="popup local bassett">Copyright Information</a>
+   </div>
+   <ul id="imageList">
+      <li>
+         <a href="/biomed-resources/bassett/bassettView.html?bn=bassettNumber">
+            <div id="image">
+               <image src="http://elane.stanford.edu/public/L254573/small/bassettSrc"/>
+            </div>
+            <div/>
+         </a>
+      </li>
+   </ul>
+</div>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+   <div class="result-summary">
+      <div class="result">Results 105 to 106 of 106</div>
+      <div class="pagination">
+         <a class="fa fa-fast-backward  actived" href="null0"/>
+         <a class="fa fa-step-backward  actived" href="null1"/>Page 3 of 15<a class="fa fa-step-forward actived" href="null3"/>
+         <a class="fa fa-fast-forward  actived" href="null14"/>
+      </div>
+   </div>
+   <ul id="imageList">
+      <li>
+         <a href="pageUrl">
+            <div id="image">
+               <image src="thumbnailSrc" id="id/andSlash" class="yui3-tooltip-trigger"/>
+            </div>
+            <div>title</div>
+         </a>
+         <div id="website-id">Source: <a href="pageUrl">id</a>
+         </div>
+         <div id="copyright">
+            <a rel="popup local id">Copyright Information <i class="fa fa-arrow-right"/>
+            </a>
+         </div>
+      </li>
+   </ul>
+   <div class="result-summary">
+      <div class="result">Results 105 to 106 of 106</div>
+      <div class="pagination">
+         <a class="fa fa-fast-backward  actived" href="null0"/>
+         <a class="fa fa-step-backward  actived" href="null1"/>Page 3 of 15<a class="fa fa-step-forward actived" href="null3"/>
+         <a class="fa fa-fast-forward  actived" href="null14"/>
+      </div>
+   </div>
+   <div style="display:none" class="tooltips">
+      <span id="id/andSlashTooltip">
+         <image src="src" style="max-width: 300px;max-height: 240px"/>
+      </span>
+   </div>
+</div>
