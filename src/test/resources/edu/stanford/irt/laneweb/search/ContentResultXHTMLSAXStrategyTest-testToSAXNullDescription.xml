@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<test>
-   <div>
-      <a class="primaryLink" href="url">title</a>
-   </div>
-   <div class="pubAuthor">author</div>
-   <div class="pubTitle">
-      <a href="url">All results from description</a> »</div>
-</test>

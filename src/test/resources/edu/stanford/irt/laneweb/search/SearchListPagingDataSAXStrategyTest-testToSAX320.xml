@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:fx="http://lane.stanford.edu/fx" class="resourceListPagination">
-   <span id="pageStart">101</span> to 200 of <a href="?page=all">320 matches</a>
-   <a id="seeAll" href="?page=all">See All</a>
-   <div class="paginationNumbers">
-      <a href="?page=1">1</a> | 2 | <a href="?page=3">3</a> | <a href="?page=4">4</a>
-   </div>
-</div>
