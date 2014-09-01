@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
@@ -18,6 +18,10 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
+import edu.stanford.irt.laneweb.search.PagingSearchResultList;
+import edu.stanford.irt.laneweb.search.SearchResult;
+import edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListSAXStrategy;
 import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListSAXStrategyTest {

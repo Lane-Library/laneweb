@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
@@ -17,6 +17,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
+import edu.stanford.irt.laneweb.search.saxstrategy.AlternateContentResultSAXStrategy;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.impl.ContentResult;
 

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import java.util.HashSet;
 import java.util.ListIterator;
@@ -11,6 +11,9 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
+import edu.stanford.irt.laneweb.search.PagingSearchResultList;
+import edu.stanford.irt.laneweb.search.SearchResult;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.impl.Result;
 

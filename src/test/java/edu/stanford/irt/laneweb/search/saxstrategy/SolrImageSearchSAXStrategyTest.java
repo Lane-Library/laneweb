@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.springframework.data.domain.Page;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
+import edu.stanford.irt.laneweb.search.saxstrategy.SolrImageSearchSAXStrategy;
 import edu.stanford.irt.solr.Image;
 
 public class SolrImageSearchSAXStrategyTest {
