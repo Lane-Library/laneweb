@@ -22,7 +22,6 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
-import edu.stanford.irt.laneweb.search.saxstrategy.ContentResultSAXStrategy;
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;
 

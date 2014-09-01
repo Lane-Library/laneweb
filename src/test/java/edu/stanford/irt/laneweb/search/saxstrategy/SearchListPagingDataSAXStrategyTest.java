@@ -14,7 +14,6 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.PagingData;
-import edu.stanford.irt.laneweb.search.saxstrategy.SearchListPagingDataSAXStrategy;
 
 public class SearchListPagingDataSAXStrategyTest {
 

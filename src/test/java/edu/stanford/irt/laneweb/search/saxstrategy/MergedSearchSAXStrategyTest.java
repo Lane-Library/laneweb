@@ -14,7 +14,6 @@ import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
 import edu.stanford.irt.laneweb.search.EresourceSearchResult;
 import edu.stanford.irt.laneweb.search.SearchResult;
-import edu.stanford.irt.laneweb.search.saxstrategy.MergedSearchSAXStrategy;
 
 public class MergedSearchSAXStrategyTest {
 

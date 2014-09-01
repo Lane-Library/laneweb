@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.search.saxstrategy.AbstractResultSAXStrategy;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.impl.Result;
 

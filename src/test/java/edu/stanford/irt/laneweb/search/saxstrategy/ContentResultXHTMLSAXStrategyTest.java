@@ -20,7 +20,6 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
-import edu.stanford.irt.laneweb.search.saxstrategy.ContentResultXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;

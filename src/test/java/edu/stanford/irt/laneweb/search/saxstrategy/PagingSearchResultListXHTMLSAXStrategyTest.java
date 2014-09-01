@@ -23,7 +23,6 @@ import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
 import edu.stanford.irt.laneweb.search.PagingSearchResultList;
 import edu.stanford.irt.laneweb.search.SearchResult;
-import edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListXHTMLSAXStrategy;
 import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListXHTMLSAXStrategyTest {
