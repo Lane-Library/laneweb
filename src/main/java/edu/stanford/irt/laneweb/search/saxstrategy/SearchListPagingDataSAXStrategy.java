@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
