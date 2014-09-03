@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2014-09-" version="2.2.18" description="2.2.18 bug fix release">
+            <action date="2014-09-02" dev="ceyates" issue="99121" type="update">
+                change content results to be children of the hit count result
+            </action>
             <action date="2014-08-27" dev="ryanmax" issue="99111" type="update">
                 update MeSH suggestions
             </action>
