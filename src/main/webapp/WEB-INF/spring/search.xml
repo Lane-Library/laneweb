@@ -16,11 +16,11 @@
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"
-        class="edu.stanford.irt.laneweb.search.PagingSearchResultListSAXStrategy">
+        class="edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListSAXStrategy">
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.search.MergedSearchSAXStrategy">
+            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.MergedSearchSAXStrategy">
                 <constructor-arg>
-                    <bean class="edu.stanford.irt.laneweb.search.ContentResultSAXStrategy"/>
+                    <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ContentResultSAXStrategy"/>
                 </constructor-arg>
                 <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"/>
             </bean>
@@ -28,11 +28,11 @@
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"
-        class="edu.stanford.irt.laneweb.search.PagingSearchResultListXHTMLSAXStrategy">
+        class="edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListXHTMLSAXStrategy">
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.search.MergedSearchSAXStrategy">
+            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.MergedSearchSAXStrategy">
                 <constructor-arg>
-                    <bean class="edu.stanford.irt.laneweb.search.ContentResultXHTMLSAXStrategy"/>
+                    <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ContentResultXHTMLSAXStrategy"/>
                 </constructor-arg>
                 <constructor-arg>
                     <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
@@ -40,12 +40,24 @@
             </bean>
         </constructor-arg>
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.search.SearchListPagingDataSAXStrategy"/>
+            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.SearchListPagingDataSAXStrategy"/>
         </constructor-arg>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
-        class="edu.stanford.irt.laneweb.search.ResultSAXStrategy"/>
+        class="edu.stanford.irt.laneweb.search.saxstrategy.MetasearchResultSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.EngineResultSAXStrategy">
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ResourceResultSAXStrategy">
+                        <constructor-arg>
+                            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.AlternateContentResultSAXStrategy"/>
+                        </constructor-arg>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
    
     
     <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"

@@ -71,6 +71,7 @@
 	font-size: xx-small;
 	text-align: left;
 	margin-left: 10px;
+	margin-top:30px;
 }
 
 #website-id a{
@@ -78,21 +79,31 @@
 	display:inline;
 }
 
-#result{
-	margin-top: 10px;
-	margin-bottom: 15px;
-	font-size: inherit;
-    padding-left: 10px;
+.result-summary{
+	margin: 10px 26px 15px 14px;
+	height:20px;
 }
+    
+    
+.result-summary div{
+	display:inline-block;
+	font-size: inherit;
+}	
 
-#tabs-image-search .copyright-help{
-	display:  initial;
-	padding:  0px 5px 0px 0px;
+.result-summary a{
+	padding: 3px;
+} 
+
+.pagination{
 	float: right;
 }
 
-#tabs- .fa{
-	color:  white;
+.pagination  .actived {
+	color:#428bca !important ;
+}
+
+.pagination .disabled,  a.disabled:hover{
+	color:#dedede !important ;
 }
 	
 #copyright{
@@ -110,6 +121,19 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /*styles for  big gray gradient tabs*/
+
+
+#tabs-image-search .copyright-help{
+	display:  initial;
+	padding:  0px 5px 0px 0px;
+	float: right;
+}
+
+#tabs- .fa{
+	color:  white;
+}
+
+
 #tabs-image-search {
 	display: inline-block;
 	margin-top: 2em;
@@ -150,5 +174,4 @@
 	position: relative;
 	
 }
-
 

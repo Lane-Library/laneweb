@@ -8,7 +8,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.regex.Pattern;
@@ -22,15 +21,13 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultConversionStrategyTest {
 
-    private Result contentParentResult;
-
     private ContentResult contentResult;
 
     private ContentResultConversionStrategy conversionStrategy;
 
-    private Query query;
-
     private Result hitCountResult;
+
+    private Query query;
 
     private Result result;
 
@@ -48,7 +45,6 @@ public class ContentResultConversionStrategyTest {
         this.uberResult = createMock(Result.class);
         this.query = createMock(Query.class);
         this.result = createMock(Result.class);
-        this.contentParentResult = createMock(Result.class);
         this.hitCountResult = createMock(Result.class);
         this.contentResult = createMock(ContentResult.class);
     }
@@ -57,37 +53,33 @@ public class ContentResultConversionStrategyTest {
     @Test
     public void testConvertResult() {
         expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
-        expect(this.result.getChildren()).andReturn(
-                Arrays.asList(new Result[] { this.hitCountResult, this.contentParentResult }));
-        expect(this.hitCountResult.getId()).andReturn("id");
-        expect(this.contentParentResult.getId()).andReturn("id_content");
-        expect(this.contentParentResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.hitCountResult));
+        expect(this.hitCountResult.getChildren()).andReturn(Collections.<Result> singleton(this.contentResult));
         expect(this.uberResult.getQuery()).andReturn(this.query);
         expect(this.query.getSearchText()).andReturn("");
         expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
         expect(this.contentResult.getTitle()).andReturn("title");
         this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
-        replay(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
-                this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
+        replay(this.contentResult, this.query, this.hitCountResult, this.result, this.scoreStrategy, this.uberResult,
+                this.scopusDeduplicator);
         assertEquals(1, this.conversionStrategy.convertResult(this.uberResult).size());
-        verify(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
-                this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
+        verify(this.contentResult, this.query, this.hitCountResult, this.result, this.scoreStrategy, this.uberResult,
+                this.scopusDeduplicator);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testConvertResultNoContent() {
         expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
-        expect(this.result.getChildren()).andReturn(
-                Arrays.asList(new Result[] { this.hitCountResult }));
-        expect(this.hitCountResult.getId()).andReturn("id");
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.hitCountResult));
+        expect(this.hitCountResult.getChildren()).andReturn(Collections.<Result> emptySet());
         expect(this.uberResult.getQuery()).andReturn(this.query);
         expect(this.query.getSearchText()).andReturn("");
         this.scopusDeduplicator.removeDuplicates(isA(Collection.class));
-        replay(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
-                this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
+        replay(this.contentResult, this.query, this.hitCountResult, this.result, this.scoreStrategy, this.uberResult,
+                this.scopusDeduplicator);
         assertEquals(0, this.conversionStrategy.convertResult(this.uberResult).size());
-        verify(this.contentParentResult, this.contentResult, this.query, this.hitCountResult, this.result,
-                this.scoreStrategy, this.uberResult, this.scopusDeduplicator);
+        verify(this.contentResult, this.query, this.hitCountResult, this.result, this.scoreStrategy, this.uberResult,
+                this.scopusDeduplicator);
     }
 }

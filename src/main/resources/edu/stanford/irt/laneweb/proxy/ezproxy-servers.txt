@@ -14,7 +14,6 @@
 216.185.112.5
 23andme.com
 ANAusa.org
-HOST
 aabb.org
 aac.asm.org
 aace.metapress.com
@@ -38,9 +37,10 @@ abzymeresearchfoundation.org
 acb.sagepub.com
 acc.sagepub.com
 accelrys.com
+access.rdatoolkit.org
 access.wa.gov
-accessmedicine.com
 accessmedicine.mhmedical.com
+accessphysiotherapy.mhmedical.com
 accesssurgery.com
 accesssurgery.mhmedical.com
 ace.orst.edu
@@ -64,11 +64,13 @@ ag.arizona.edu
 ag.ca.gov
 ageing.oxfordjournals.org
 ahcpub.com
+ahj.kmu.ac.ir
 aianp.uchsc.edu
 aidsinfo.nih.gov
 airforcemedicine.afms.mil
 aitl.uc.edu
 aja.sagepub.com
+ajas.info
 ajcc.aacnjournals.org
 ajcn.nutrition.org
 ajcp.ascpjournals.org
@@ -81,8 +83,9 @@ ajh.sagepub.com
 ajl.sagepub.com
 ajm.sagepub.com
 ajol.info
-ajot.aotapress.net
+ajot.aota.org
 ajp.amjpathol.org
+ajp.mums.ac.ir
 ajp.press.uiuc.edu
 ajp.psychiatryonline.org
 ajpcell.physiology.org
@@ -127,6 +130,8 @@ antiquarianscientist.com
 aob.oxfordjournals.org
 aobpla.oxfordjournals.org
 aol.com
+aop.sagepub.com
+aor.sagepub.com
 ap.psychiatryonline.org
 apa.org
 apa.sagepub.com
@@ -138,7 +143,9 @@ apm.sagepub.com
 apmha.com
 app.knovel.com
 apps.einstein.br
+apps.microsoft.com
 apps.nccd.cdc.gov
+apps.webofknowledge.com
 apps.who.int
 apr.psk.or.kr
 aps.cnidr.org
@@ -184,6 +191,7 @@ archpsyc.ama-assn.org
 archpsyc.jamanetwork.com
 archsurg.ama-assn.org
 archsurg.jamanetwork.com
+archtrauma.com
 arctichealth.nlm.nih.gov
 ard.bmj.com
 arj.sagepub.com
@@ -202,6 +210,7 @@ asb-biomech.org
 ascb.org
 asclepio.revistas.csic.es
 asecho.org
+asheducationbook.hematologylibrary.org
 asj.sagepub.com
 asjsm.tums.ac.ir
 ask.hrsa.gov
@@ -241,6 +250,8 @@ beckerimages.wustl.edu
 beheco.oxfordjournals.org
 ben-may.bsd.uchicago.edu
 bentham.org
+benthamopen.com
+benthamscience.com
 bernard.pitzer.edu
 beta.congress.gov
 bfg.oxfordjournals.org
@@ -251,11 +262,13 @@ bib.oxfordjournals.org
 bibpurl.oclc.org
 bio.biologists.org
 biodatabase.org
+biodiversitydatajournal.com
 biodiversitylibrary.org
 bioethics.georgetown.edu
 bioethics.gov
 bioguide.congress.gov
 biohorizons.oxfordjournals.org
+bioinformatics.ca
 bioinformatics.net
 bioinformatics.org
 bioinformatics.oxfordjournals.org
@@ -263,12 +276,13 @@ bioinformatics.weizmann.ac.il
 biointerphases.com
 biologicalproceduresonline.com
 biology.mit.edu
-biology.plosjournals.org
+biolsport.com
 biomechanical.asmedigitalcollection.asme.org
 biomed.humanapress.com
 biomed.papers.upol.cz
 biomed.uchicago.edu
 biomedgerontology.oxfordjournals.org
+biomedicaloptics.spiedigitallibrary.org
 biomet.oxfordjournals.org
 bioontology.org
 bioportal.cgb.indiana.edu
@@ -276,6 +290,7 @@ biostatistics.oxfordjournals.org
 biowaredb.org
 biowarehouse.ai.sri.com
 bja.oxfordjournals.org
+bjgp.org
 bji.sagepub.com
 bjj.boneandjoint.org.uk
 bjo.bmj.com
@@ -284,8 +299,7 @@ bjp.sagepub.com
 bjps.oxfordjournals.org
 bjr.birjournals.org
 bjsm.bmj.com
-bloodjournal.hematologylibrary.org
-bmf.aip.org
+blog.scopus.com
 bmjopen.bmj.com
 bmo.sagepub.com
 bod.sagepub.com
@@ -308,7 +322,6 @@ brodyhooked.blogspot.com
 brookdale-en.pionet.com
 brown.edu
 bsb.eurasipjournals.com
-bsb.ncbi.nlm.nih.gov
 bubbasoft.org
 buros.unl.edu
 bussemaker.bio.columbia.edu
@@ -338,6 +351,7 @@ cancerres.aacrjournals.org
 cancertrials.nci.nih.gov
 cancerweb.ncl.ac.uk
 canneo.groupsite.com
+canreviews.aacrjournals.org
 caonline.amcancersoc.org
 cap.medical.org
 cap.sagepub.com
@@ -406,6 +420,7 @@ chid.nih.gov
 childstats.gov
 chla.library.cornell.edu
 chp.sagepub.com
+chromsci.oxfordjournals.org
 chronicle.com
 ci.half-moon-bay.ca.us
 ci.nii.ac.jp
@@ -437,6 +452,7 @@ clincancerres.aacrjournals.org
 clineguide.factsandcomparisons.com
 clineguide.ovid.com
 clinical.diabetesjournals.org
+clinicalcenter.nih.gov
 clinicalevidence.bmj.com
 clinicalresearch.nih.gov
 clinicalresource.ovid.com
@@ -500,6 +516,7 @@ crl.acrl.org
 cro.sagepub.com
 crx.sagepub.com
 cs.nga.gov.au
+csbj.org
 csdd.tufts.edu
 cshperspectives.cshlp.org
 cshprotocols.cshlp.org
@@ -556,6 +573,7 @@ digital.library.pitt.edu
 digital.library.upenn.edu
 digital.slub-dresden.de
 digitalassets.lib.berkeley.edu
+digitalcommons.usu.edu
 digitalgallery.nypl.org
 diglib.mmc.edu
 diglib.princeton.edu
@@ -565,6 +583,7 @@ dirline.nlm.nih.gov
 discountmedbooks.com
 discover.nci.nih.gov
 discovernd.com
+discovery.ucl.ac.uk
 divcom.otago.ac.nz
 dlg.galileo.usg.edu
 dmd.aspetjournals.org
@@ -581,8 +600,10 @@ documents.irevues.inist.fr
 dovepress.com
 downloads.biohealthmatics.com
 dps.sagepub.com
+drmichaelportman.com
 droog.gs.washington.edu
 druginfo.nlm.nih.gov
+drugsincontext.com
 drugtopics.modernmedicine.com
 ds.cc.yamaguchi-u.ac.jp
 dsc.ucsf.edu
@@ -596,19 +617,25 @@ dvr.sagepub.com
 dwp.bigplanet.com
 dx.doi.org
 dxplain.mgh.harvard.edu
+e-Ultrasonography.org
 e-anca.org
+e-apem.org
 e-ceo.org
 e-cnr.org
 e-eht.org
+e-enm.org
 e-ips.org
+e-jbm.org
+e-jmd.org
 e-kjo.org
+e-kjs.org
 e-roj.org
 e.stanfordalumni.org
-eaaci.net
 eab.sagepub.com
 eaq.sagepub.com
 ebling.library.wisc.edu
 ebm.bmj.com
+ebm.jamanetwork.com
 ebm.rsmjournals.com
 ebm.sagepub.com
 ebmh.bmj.com
@@ -628,10 +655,12 @@ ecrbrowser.dcode.org
 ecro.cesg.cnrs.fr
 edoc.bibliothek.uni-halle.de
 edrv.endojournals.org
+education.uky.edu
 educationbook.aacrjournals.org
 educationforhealth.net
 eebo.chadwyck.com
 eeg.sagepub.com
+effectivehealthcare.ahrq.gov
 egov.cityofchicago.org
 ehbs.kff.org
 ehp.niehs.nih.gov
@@ -644,6 +673,8 @@ ejhi.net
 ejo.oxfordjournals.org
 ejo.univ-lyon1.fr
 ejournals.library.ualberta.ca
+electronicimaging.spiedigitallibrary.org
+elibrary.worldbank.org
 elife.elifesciences.org
 emboj.embopress.org
 embor.embopress.org
@@ -654,6 +685,7 @@ embryo.soad.umich.edu
 emedicine.medscape.com
 emedicine.medscape.com?src=stanford
 emj.bmj.com
+emph.oxfordjournals.org
 emphysemafoundation.org
 emr.sagepub.com
 en.citizendium.org
@@ -714,6 +746,7 @@ f1000biology.com
 f1000medicine.com
 f1000research.com
 faculty.med.ucalgary.ca
+faculty.pathology.ucla.edu
 fai.sagepub.com
 familydoctor.org
 fampra.oxfordjournals.org
@@ -730,7 +763,6 @@ firstsearch.oclc.org
 fla.sagepub.com
 flagspot.net
 flashpoint.lanl.gov
-fmlweb.fm.ul.pt
 fmx.sagepub.com
 fn.bmj.com
 fnic.nal.usda.gov
@@ -751,7 +783,6 @@ frontiersin.org
 frwebgate.access.gpo.gov
 fst.sagepub.com
 ftp.cdc.gov
-ftp.hrsa.gov
 ftp.nlm.nih.gov
 ftp.rootsweb.com
 functionalfoodscenter.net
@@ -771,6 +802,7 @@ gao.gov
 gaq.sagepub.com
 gas.sagepub.com
 gasnet.med.yale.edu
+gastro.oxfordjournals.org
 gatealoy.pcb.ub.es
 gateway.discoverygate.com
 gateway.nlm.nih.gov
@@ -857,6 +889,7 @@ herkimer.nygenweb.net
 hermia.ingentaselect.com
 het.sagepub.com
 hfs.sagepub.com
+hgp.sagepub.com
 hhc.sagepub.com
 hhs.sagepub.com
 hin.nhlbi.nih.gov
@@ -915,6 +948,7 @@ ia311307.us.archive.org
 ia600307.us.archive.org
 ia600503.us.archive.org
 ia600701.us.archive.org
+ia601507.us.archive.org
 ia700301.us.archive.org
 ia700305.us.archive.org
 ia700600.us.archive.org
@@ -946,11 +980,13 @@ ijaai.tums.ac.ir
 ije.oxfordjournals.org
 ijg.sagepub.com
 ijhoscr.tums.ac.ir
-ijhr.tums.ac.ir
+ijhpm.com
+ijhr.iums.ac.ir
 ijhs.org.sa
 ijl.sagepub.com
 ijm.tums.ac.ir
 ijms.sums.ac.ir
+ijmsc.org
 ijnl.tums.ac.ir
 ijo.sagepub.com
 ijoh.tums.ac.ir
@@ -958,25 +994,29 @@ ijorl.mums.ac.ir
 ijp.tums.ac.ir
 ijpa.tums.ac.ir
 ijph.tums.ac.ir
+ijpho.ssu.ac.ir
 ijpm.mui.ac.ir
 ijps.tums.ac.ir
-ijpt.tums.ac.ir
+ijpt.iums.ac.ir
 ijr.tums.ac.ir
 ijs.sagepub.com
 ijs.sgmjournals.org
 ijt.sagepub.com
 ilarjournal.oxfordjournals.org
 ils.unc.edu
+imagebank.hematology.org
 images.artnet.com
 images.bridgeman.co.uk
 images.library.upenn.edu
 images.wellcome.ac.uk
 imagesvr.library.upenn.edu
+imaging.birjournals.org
 imaging.onlinejacc.org
 imammb.oxfordjournals.org
 immunology.org
 impactjournals.com
 imr.sagepub.com
+inacsl.org
 indexmedicus.afro.who.int
 indmed.nic.in
 info.acm.org
@@ -993,6 +1033,7 @@ infoweb.newsbank.com
 ingenuity.acrobat.com
 ini.sagepub.com
 injuryprevention.bmj.com
+inq.sagepub.com
 inter.viewcentral.com
 internetshakespeare.uvic.ca
 interplast.org
@@ -1004,6 +1045,7 @@ intqhc.oxfordjournals.org
 invention.swmed.edu
 iopscience.iop.org
 iranjradiol.com
+ircrj.com
 iris.library.uiuc.edu
 iris.nyit.edu
 irjnm.tums.ac.ir
@@ -1111,7 +1153,10 @@ jima.imana.org
 jiv.sagepub.com
 jivresearch.org
 jjco.oxfordjournals.org
+jjmicrobiol.com
+jjnpp.com
 jkms.org
+jla.sagepub.com
 jls.sagepub.com
 jmbe.asm.org
 jmcb.oxfordjournals.org
@@ -1145,6 +1190,7 @@ journal.hematology.or.kr
 journal.ics.ac.uk
 journal.imbio.de
 journal.publications.chestnet.org
+journals.aps.org
 journals.bcdecker.com
 journals.cambridge.org
 journals.elsevierhealth.com
@@ -1153,9 +1199,11 @@ journals.humankinetics.com
 journals.iucr.org
 journals.lww.com
 journals.mui.ac.ir
+journals.plos.org
 journals.royalsociety.org
 journals.sbmu.ac.ir
 journals.sfu.ca
+journals.tbzmed.ac.ir
 journals.tums.ac.ir
 journaltogo.com
 journler.com
@@ -1175,6 +1223,7 @@ jpubhealth.oxfordjournals.org
 jra.sagepub.com
 jrc.sagepub.com
 jrn.sagepub.com
+jrr.oxfordjournals.org
 jrs.sagepub.com
 jscr.oxfordjournals.org
 jsgt.jp
@@ -1189,6 +1238,7 @@ jvi.asm.org
 jvi.sagepub.com
 jvin.org
 jxb.oxfordjournals.org
+kaiserfamilyfoundation.files.wordpress.com
 kalas.or.kr
 kennedyinstitute.georgetown.edu
 ki.se
@@ -1198,13 +1248,15 @@ koop.dartmouth.edu
 koreamed.org
 kqed.org
 la-press.com
-labautomation.org
 labmed.ascpjournals.org
+labs.cellbio.duke.edu
 ladb.unm.edu
 lamar.colostate.edu
 lan.sagepub.com
 landesbioscience.com
+las.alfred.edu
 las.sagepub.com
+law.wfu.edu
 lawwww.cwru.edu
 lcweb.loc.gov
 lcweb2.loc.gov
@@ -1216,6 +1268,7 @@ legacy.library.ucsf.edu
 leginfo.legislature.ca.gov
 leukaemialymphomaresearch.org.uk
 lexin.nada.kth.se
+lib.med.tottori-u.ac.jp
 lib.myilibrary.com
 libcoll.mpiwg-berlin.mpg.de
 libcontentdm.uams.edu
@@ -1261,6 +1314,7 @@ lpi.oregonstate.edu
 lsd.ornl.gov
 ltj.sagepub.com
 lup.sagepub.com
+lupus.bmj.com
 lww.com
 m.accessmedicine.com
 m.mdconsult.com
@@ -1277,6 +1331,7 @@ mbio.asm.org
 mcb.asm.org
 mcd2.stanfordmed.org
 mcgovern.library.tmc.edu
+mcpharmacol.com
 mcr.aacrjournals.org
 mcr.sagepub.com
 mcrcr2.med.nyu.edu
@@ -1288,6 +1343,7 @@ mec.sagepub.com
 med-ed-online.net
 med-libwww.bu.edu
 med.fsu.edu
+med.wmich.edu
 medcalc.com
 medcalc3000.com
 medgen.ugent.be
@@ -1308,6 +1364,9 @@ medicine.missouri.edu
 medicine.nova.edu
 medicine.snu.ac.kr
 medicine.ucsd.edu
+medicine.umich.edu
+medicine.utah.edu
+medicine.yale.edu
 medind.nic.in
 medinfo.ufl.edu
 medinfo.wustl.edu
@@ -1322,6 +1381,7 @@ medschool.creighton.edu
 medschool.duke.edu
 medschool.ucsf.edu
 medschool.umaryland.edu
+medschool.vanderbilt.edu
 medspace.mc.duke.edu
 medultrason.ro
 mekentosj.com
@@ -1337,9 +1397,11 @@ menstruationresearch.org
 mentalhealth.samhsa.gov
 metapress.com
 mgc.nci.nih.gov
+mgm.duke.edu
 mh.bmj.com
 mhc.com
 mhc.med.ohio-state.edu
+mhealth.jmir.org
 mi-aimh.msu.edu
 miami.edu
 mic.sgmjournals.org
@@ -1357,12 +1419,13 @@ mmd.sagepub.com
 mmj.sagepub.com
 mmr.sagepub.com
 mmumullana.org
+mmy.oxfordjournals.org
 moa.umdl.umich.edu
 mobile.drugeruptiondata.com
-mobile.uptodate.com
 molcells.inforang.com
 molehr.oxfordjournals.org
 molinterv.aspetjournals.org
+mollysharlach.net
 molmed.org
 molpharm.aspetjournals.org
 monographs.iarc.fr
@@ -1378,12 +1441,14 @@ mulford.meduohio.edu
 muse.jhu.edu
 musom.marshall.edu
 mutage.oxfordjournals.org
+my.americanheart.org
 my.avantgo.com
 myeloma.org
 nah.sagepub.com
 nahic.ucsf.edu
 nai.arc.nasa.gov
 name.umdl.umich.edu
+nanophotonics.spiedigitallibrary.org
 nar.oxfordjournals.org
 narha.org
 nas.sagepub.com
@@ -1413,9 +1478,11 @@ nejm200.nejm.org
 neonatalnetwork.metapress.com
 neoreviews.aappublications.org
 nephron.com
+nephropathol.com
 net.lib.byu.edu
 neuro-oncology.oxfordjournals.org
 neuro.psychiatryonline.org
+neurophotonics.spiedigitallibrary.org
 neuropractices.com
 new.paho.org
 newmeds.phrma.org
@@ -1476,13 +1543,12 @@ ohts.wustl.edu
 oig.hhs.gov
 ojphi.org
 ojps.aip.org
-ol.osa.org
+ojs.sagepub.com
 omia.angis.org.au
 ommbid.mhmedical.com
 one.aao.org
 online.lexi.com
 online.liebertpub.com
-online.medphys.org
 online.sagepub.com
 online.statref.com
 onlinebooks.library.upenn.edu
@@ -1515,6 +1581,7 @@ otology-neurotology.org
 ourworld.compuserve.com
 outpatient.stanfordhospital.org
 ovidsp.ovid.com
+p53.iarc.fr
 pacifica.ca.us
 pacs.unica.it
 paella.med.yale.edu
@@ -1549,12 +1616,14 @@ pds.sagepub.com
 ped.sagepub.com
 pediatrics.aappublications.org
 peds.oxfordjournals.org
+pedsccm.org
 pedsccm.wustl.edu
 pedsinreview.aappublications.org
 peerj.com
 peir.path.uab.edu
 pen.sagepub.com
 pensoftonline.net
+people.healthsciences.ucla.edu
 people.umass.edu
 peoria.medicine.uic.edu
 permanent.access.gpo.gov
@@ -1578,6 +1647,7 @@ pillbox.nlm.nih.gov
 pin.primate.wisc.edu
 pivot.cos.com
 pl.wikipedia.org
+play.google.com
 plaza.interport.net
 pluq59.free.fr
 pmj.bmj.com
@@ -1604,7 +1674,6 @@ prf.sagepub.com
 prg.nci.nih.gov
 prhsj.rcm.upr.edu
 pritzker.bsd.uchicago.edu
-prl.aps.org
 proceedings.spiedigitallibrary.org
 prod.amcp.org
 prodes.toulouse.inra.fr
@@ -1640,7 +1709,9 @@ ptsdalliance.org
 pubchem.ncbi.nlm.nih.gov
 pubget.com
 public.carnet.hr
+publications.amsus.org
 publications.cpa-apc.org
+publications.newberry.org
 publications.paho.org
 publikationen.ub.uni-frankfurt.de
 pubmedhh.nlm.nih.gov
@@ -1672,13 +1743,18 @@ radiology.rsnajnls.org
 rai.anthropology.org.uk
 rapid-i.com
 rarediseases.info.nih.gov
+ratecalc.cancer.gov
 rc.rcjournal.com
 rcb.sagepub.com
 rcpsc.medical.org
 rde.ac
+reader.digitale-sammlungen.de
 rebase.neb.com
 redalyc.uaemex.mx
 redatlas.org
+reliefweb.int
+remotesensing.spiedigitallibrary.org
+report.nih.gov
 repositories.cdlib.org
 repository.tufs.ac.jp
 rer.sagepub.com
@@ -1686,12 +1762,15 @@ research.brown.edu
 research.i2r.a-star.edu.sg
 research.med.umkc.edu
 research.nhgri.nih.gov
+researcher.watson.ibm.com
 researchlink.labvelocity.com
 resource.nlm.nih.gov
 respiratory-research.com
+reviews.spiedigitallibrary.org
 rex.nci.nih.gov
 rgd.mcw.edu
 rheumatology.oxfordjournals.org
+rheuminfo.com
 ricepress.rice.edu
 riley.nal.usda.gov
 rmbr.nus.edu.sg
@@ -1711,6 +1790,7 @@ rsif.royalsocietypublishing.org
 rsmu.ru
 rsnaindex.rsnajnls.org
 rsnr.royalsocietypublishing.org
+rsob.royalsocietypublishing.org
 rspa.royalsocietypublishing.org
 rspb.royalsocietypublishing.org
 rspl.royalsocietypublishing.org
@@ -1730,9 +1810,9 @@ sanfran.com
 sanfrancisco.citysearch.com
 sax.sagepub.com
 sbcglobal.net
-sbsonline.org
 scafricanamerican.com
 scan.oxfordjournals.org
+scharrlibrary.blogspot.com
 schizophreniabulletin.oxfordjournals.org
 scholar.google.com
 school.med.nyu.edu
@@ -1751,6 +1831,7 @@ scifinder.cas.org
 scilib.ucsd.edu
 scistore.cambridgesoft.com
 scitation.aip.org
+scm.sagepub.com
 scop.berkeley.edu
 scopeq.cc.univie.ac.at
 scv.sagepub.com
@@ -1772,6 +1853,7 @@ sequoiadoctors.org
 services.aamc.org
 sexualities.sagepub.com
 sfghdean.ucsf.edu
+sgo.sagepub.com
 sgr.sagepub.com
 shm.oxfordjournals.org
 shot.press.jhu.edu
@@ -1793,9 +1875,9 @@ sljol.info
 sln.fi.edu
 sls.org
 sls.publisher.ingentaconnect.com
+sma.org.sg
 smh.sagepub.com
 smi.curtin.edu.au
-smj.sma.org.sg
 smm.sagepub.com
 smr.sagepub.com
 smu.org.uy
@@ -1817,8 +1899,6 @@ spectrum.diabetesjournals.org
 sph.berkeley.edu
 sph.sagepub.com
 sphinxsai.com
-spiedigitallibrary.aip.org
-spiedl.aip.org
 spq.sagepub.com
 spr.sagepub.com
 spragueinstitute.org
@@ -1829,8 +1909,10 @@ srs.org
 ssc.sagepub.com
 ssl1.benefitscheckup.org
 sss.sagepub.com
+stan.md
 stanford.edu
 stanford.myexammaster.com
+stanfordhealthcare.org
 stanfordhospital.org
 statcoder.com
 statestats.rand.org
@@ -1840,6 +1922,7 @@ stemcellcenter.berkeley.edu
 stemcellres.com
 stemcells.alphamedpress.org
 stemcells.nih.gov
+steveolson.com
 stfm.org
 sth.sagepub.com
 sti.bmj.com
@@ -1880,6 +1963,7 @@ tan.sagepub.com
 tap.sagepub.com
 tar.sagepub.com
 tau.sagepub.com
+tav.sagepub.com
 taw.sagepub.com
 taylorandfrancis.metapress.com
 tbase.jax.org
@@ -1907,7 +1991,9 @@ thejns.org
 themerckindex.cambridgesoft.com
 theoncologist.alphamedpress.org
 thescipub.com
+thesurgery.or.kr
 thomasland.metapress.com
+thomsonreuters.com
 thorax.bmj.com
 tia.sagepub.com
 tidsskriftet.no
@@ -1947,6 +2033,7 @@ umc.edu
 umlsks.nlm.nih.gov
 undmedlibrary.org
 units.sla.org
+universityhealthcarealliance.org
 unstats.un.org
 upcmd.com
 upload.wikimedia.org
@@ -1961,6 +2048,7 @@ uthsc.edu
 utmj.org
 uuhsc.utah.edu
 uwadmnweb.uwyo.edu
+uwaterloo.ca
 valley.vcdh.virginia.edu
 vault.fbi.gov
 vaw.sagepub.com
@@ -2013,6 +2101,7 @@ webserver.uclan.ac.uk
 welcome.colostate.edu
 wellcomeimages.org
 westnilemaps.usgs.gov
+who.int
 whqlibdoc.who.int
 wichita.kumc.edu
 win.niddk.nih.gov
@@ -2032,6 +2121,7 @@ wox.sagepub.com
 wprim.wpro.who.int
 wrair-www.army.mil
 wsi.org
+wsopc.org
 ww2.cdph.ca.gov
 ww2.med.jhu.edu
 www-01.ibm.com
@@ -2044,12 +2134,10 @@ www-gap.dcs.st-and.ac.uk
 www-genome.wi.mit.edu
 www-groups.dcs.st-and.ac.uk
 www-groups.dcs.st-andrews.ac.uk
-www-klinik.uni-mainz.de
 www-med.ucdavis.edu
 www-medlib.med.utah.edu
 www-nbrf.georgetown.edu
 www-nmcsd.med.navy.mil
-www-p53.iarc.fr
 www-ulp.u-strasbg.fr
 www-users.med.cornell.edu
 www.1891.org
@@ -2099,7 +2187,6 @@ www.aab.org
 www.aabb.org
 www.aabh.org
 www.aabronchology.org
-www.aabt.org
 www.aacap.org
 www.aacc.org
 www.aace.com
@@ -2304,6 +2391,7 @@ www.acmc.ca
 www.acmcm.org
 www.acmedsci.ac.uk
 www.acmp.org
+www.acms.org
 www.acmt.net
 www.acnp.org
 www.acnponline.org
@@ -2494,6 +2582,7 @@ www.allhealth.org
 www.alliance1.org
 www.alliant.edu
 www.allos.com
+www.almende.com
 www.almob.org
 www.alphaomegaalpha.org
 www.alpinecountyca.gov
@@ -2608,7 +2697,6 @@ www.anes.ucla.edu
 www.anestech.org
 www.anesthesia-analgesia.org
 www.anesthesiaclinics.com
-www.anesthesiology.org
 www.aneuroa.org
 www.angelman.org
 www.angleorthodontist.org
@@ -2694,12 +2782,15 @@ www.apiindia.org
 www.aplici.org
 www.apma.org
 www.apmonline.org
+www.apnorc.org
 www.apocp.org
+www.apos-society.org
 www.apothecaries.org.uk
 www.apple.com
 www.applied-ethology.org
 www.appliedimmuno.org
 www.appliedimmunohist.com
+www.appliedradiology.com
 www.aps-spr.org
 www.apsa.org
 www.apsf.org
@@ -2808,11 +2899,9 @@ www.ashastd.org
 www.ashaweb.org
 www.ashdin.com
 www.ashe.org
-www.asheducationbook.org
 www.ashes.org
 www.ashg.org
 www.ashi-hla.org
-www.ashimagebank.org
 www.ashmolean.org
 www.ashp.org
 www.ashrm.org
@@ -2836,6 +2925,7 @@ www.asme.org
 www.asme.org.uk
 www.asmi.org
 www.asminternational.org
+www.asms.org
 www.asn-online.com
 www.asnm.org
 www.asnneuro.org
@@ -2927,6 +3017,7 @@ www.az.gov
 www.azdhs.gov
 www.azheart.com
 www.azhin.org
+www.bacandrology.com
 www.bacch.org.uk
 www.baccn.org.uk
 www.backpain.org
@@ -2982,6 +3073,7 @@ www.beckman.com
 www.becon.nih.gov
 www.bedfordstmartins.com
 www.beerinstitute.org
+www.behavioralandbrainfunctions.com
 www.behavioralsleep.org
 www.behaviouralpharm.com
 www.beilstein-journals.org
@@ -3021,6 +3113,7 @@ www.billwilsoncenter.org
 www.bind.ca
 www.bindingdb.org
 www.bio-diglib.com
+www.bio-protocol.org
 www.bio.org
 www.bio.unc.edu
 www.biochemia-medica.com
@@ -3038,7 +3131,6 @@ www.bioexecutiveintl.com
 www.biographi.ca
 www.bioinfo.de
 www.bioinfo.org.cn
-www.bioinformatics.ubc.ca
 www.biokemia.sote.hu
 www.biolbull.org
 www.biolcell.org
@@ -3049,6 +3141,7 @@ www.biologists.com
 www.biology.uiowa.edu
 www.biologydirect.com
 www.biolreprod.org
+www.biolres.com
 www.biolsci.org
 www.biomarkerres.org
 www.biomarkersconsortium.org
@@ -3081,10 +3174,13 @@ www.biotechnologyforbiofuels.com
 www.biotechnologyhealthcare.com
 www.bir.org.uk
 www.biras.co.uk
+www.birpublications.org
 www.bium.univ-paris5.fr
+www.biusante.parisdescartes.fr
 www.bjbms.org
 www.bjcardio.co.uk
 www.bjj.boneandjoint.org.uk
+www.bjjprocs.boneandjoint.org.uk
 www.bjmp.org
 www.bjmu.edu.cn
 www.bjr.boneandjoint.org.uk
@@ -3098,6 +3194,7 @@ www.blinkx.com
 www.blm.gov
 www.bloodcenters.org
 www.bloodcoagulation.com
+www.bloodjournal.org
 www.bloodtransfusion.it
 www.bls.gov
 www.bluecrossca.com
@@ -3129,6 +3226,7 @@ www.bodymobil.de
 www.boehringer-ingelheim.com
 www.bohs.org
 www.bonekey-ibms.org
+www.booksinprint.com
 www.bos.org.uk
 www.bowker.com
 www.bpei.med.miami.edu
@@ -3167,6 +3265,7 @@ www.broad.mit.edu
 www.broadinstitute.org
 www.bronchology.com
 www.brook.edu
+www.brookings.edu
 www.brown.edu
 www.brownandtoland.com
 www.brunel.ac.uk
@@ -3178,6 +3277,7 @@ www.bsg.org.uk
 www.bshi.org.uk
 www.bshs.org.uk
 www.bsmedicine.org
+www.bsms.ac.uk
 www.bsnp.org
 www.bso.ac.uk
 www.bsom.org.uk
@@ -3187,6 +3287,7 @@ www.bspd.co.uk
 www.bsra.org.uk
 www.bt.cdc.gov
 www.bt.tudelft.nl
+www.btrt.org
 www.bu.edu
 www.buav.org
 www.budapestinfo.hu
@@ -3452,6 +3553,7 @@ www.chnola.org
 www.chop.edu
 www.chori.org
 www.chpa-info.org
+www.chsjournal.org
 www.chula.ac.th
 www.chwhealth.org
 www.ci.atherton.ca.us
@@ -3485,6 +3587,7 @@ www.cihsp.org
 www.ciliajournal.com
 www.ciliate.org
 www.cilip.org.uk
+www.cimr.org
 www.cinahl.com
 www.cinjournal.com
 www.cinp.org
@@ -3501,6 +3604,7 @@ www.citizen.org
 www.city.palo-alto.ca.us
 www.citymatch.org
 www.cityofboston.gov
+www.cityofgilroy.org
 www.cityofhope.org
 www.civilavmed.com
 www.civilwarmed.org
@@ -3543,6 +3647,7 @@ www.clinicalproteomicsjournal.com
 www.clinicalsarcomaresearch.com
 www.clinicalscience.org
 www.clinicaltrialsregister.eu
+www.clinicsandpractice.org
 www.clinimmsoc.org
 www.clinmed.rcpjournal.org
 www.clinmedres.org
@@ -3559,7 +3664,9 @@ www.clr-online.com
 www.clsa.info
 www.clsjep.cz
 www.cma.ca
+www.cma.org.cn
 www.cmaj.ca
+www.cmajopen.ca
 www.cmanet.org
 www.cmbes.ca
 www.cmbl.org.pl
@@ -3632,6 +3739,7 @@ www.cochrane-handbook.org
 www.cochrane.org
 www.codata.org
 www.codexis.com
+www.cogansociety.org
 www.cogbehavneurol.com
 www.cogme.gov
 www.cola.org
@@ -3682,6 +3790,7 @@ www.cordblood.com
 www.coremine.com
 www.coriell.org
 www.coriumintl.com
+www.corlas.org
 www.corneajrnl.com
 www.cornell.edu
 www.cornellpress.cornell.edu
@@ -3742,6 +3851,7 @@ www.crona.org
 www.crops.org
 www.cruxbiomedical.com
 www.cs.amedd.army.mil
+www.cs.brown.edu
 www.cs.cornell.edu
 www.cs.sfu.ca
 www.cs.uga.edu
@@ -3802,6 +3912,7 @@ www.current-medicine.com
 www.current-oncology.com
 www.current-reports.com
 www.currentpsychiatry.com
+www.currentscience.ac.in
 www.curties-overzet.com
 www.curtin.edu.au
 www.cutis.com
@@ -3932,6 +4043,7 @@ www.dnzb.govt.nz
 www.doabooks.org
 www.doaj.org
 www.docboard.org
+www.docguide.com
 www.docinfo.org
 www.doctor.co.il
 www.doctorsorchestra.org
@@ -3984,6 +4096,7 @@ www.du.edu
 www.duj.com
 www.duke.edu
 www.dukemagazine.duke.edu
+www.dukeupress.edu
 www.dundee.ac.uk
 www.dur.ac.uk
 www.durect.com
@@ -3996,7 +4109,7 @@ www.e-emm.org
 www.e-epih.org
 www.e-hir.org
 www.e-ijd.org
-www.eaaci.net
+www.eaaci.org
 www.eacr.org
 www.eacts.org
 www.eahil.org
@@ -4024,6 +4137,8 @@ www.ecfmg.org
 www.ecmjournal.org
 www.ecnp.nl
 www.ecnsweb.com
+www.ecohealth.net
+www.ecohealthalliance.org
 www.ecosal.org
 www.ecri.org
 www.ecrpharma.com
@@ -4038,6 +4153,7 @@ www.ed.gov
 www.edap.org
 www.edauk.com
 www.editlib.org
+www.edmcasereports.com
 www.edreferral.com
 www.educause.edu
 www.edurad.com
@@ -4062,6 +4178,7 @@ www.ehuman.com
 www.eifoundation.org
 www.einj.or.kr
 www.einstein.edu
+www.einstein.yu.edu
 www.ejbc.kr
 www.ejbiochem.org
 www.ejbjs.org
@@ -4070,6 +4187,7 @@ www.ejh.it
 www.ejhs.ju.edu.et
 www.ejmii.com
 www.ejnmmires.com
+www.ejomr.org
 www.elcaminohospital.org
 www.electrocardiology.org
 www.electrosurgical instument.com
@@ -4140,6 +4258,7 @@ www.eps.ac.uk
 www.equator-network.org
 www.equityhealthj.com
 www.era-edta.org
+www.era.lib.ed.ac.uk
 www.erad.org
 www.erlbaum.com
 www.ers-education.org
@@ -4200,7 +4319,7 @@ www.euro-endo.org
 www.euro.who.int
 www.eurojgh.com
 www.eurojnlofpsychotraumatol.net
-www.europcronline
+www.europeana.eu
 www.eurosiva.org
 www.eurospe.org
 www.eurosurveillance.org
@@ -4258,6 +4377,7 @@ www.fedex.com
 www.fedora.info
 www.fedstats.gov
 www.fema.gov
+www.fen.uk.com
 www.feps.org
 www.fespb.org
 www.fetzer.org
@@ -4290,6 +4410,7 @@ www.flu.lanl.gov
 www.fluidsbarrierscns.com
 www.fluorideresearch.org
 www.flyoakland.com
+www.fm.ul.pt
 www.fm.viamedica.pl
 www.fmaonline.org
 www.fmaware.org
@@ -4346,6 +4467,7 @@ www.future-drugs.com
 www.future-science.com
 www.futuremedicine.com
 www.futureofchildren.org
+www.fvvo.be
 www.fws.gov
 www.fyebooks.com
 www.g3journal.org
@@ -4376,6 +4498,7 @@ www.gene-chips.com
 www.gene-regulation.com
 www.gene.com
 www.gene.ucl.ac.uk
+www.genebeyt.com
 www.geneclinics.org
 www.geneconserve.pro.br
 www.genelynx.org
@@ -4411,19 +4534,21 @@ www.georgia.gov
 www.geri.com
 www.geri.duke.edu
 www.geriatricspt.org
+www.germs.ro
 www.geron.com
 www.geron.org
 www.gesturestudies.com
 www.ggbreathe.org
 www.ghanamedassn.org
 www.ghfbb.ir
+www.ghspjournal.org
 www.gideononline.com
 www.gigasciencejournal.com
 www.gilead.com
-www.gilroy.org
 www.ginasthma.com
 www.ginasthma.org
 www.ginsengres.org
+www.giornalechirurgia.it
 www.gla.ac.uk
 www.gladstone.ucsf.edu
 www.glaserrarebooks.com
@@ -4432,7 +4557,6 @@ www.glaucoma.org
 www.glaucomajournal.com
 www.glaucomaweb.org
 www.glma.org
-www.globalbooksinprint.com
 www.globalhealth.gov
 www.globalhealth.org
 www.globalhealthaction.net
@@ -4445,6 +4569,7 @@ www.globemed.org
 www.glowm.com
 www.gmc-uk.org
 www.gmc.edu.in
+www.gmecuk.com
 www.gms.edu.sg
 www.gnotobiotics.org
 www.go-ahp.org
@@ -4469,6 +4594,7 @@ www.greenstone.org
 www.grg.org
 www.groupsinc.org
 www.growthhouse.org
+www.gru.edu
 www.gs.washington.edu
 www.gseis.ucla.edu
 www.gsejournal.org
@@ -4499,6 +4625,7 @@ www.haematologica.org
 www.hahainstitute.com
 www.hamptonproton.org
 www.handsurgery.org
+www.hanssteiner.com
 www.harcourt.com
 www.harcourthealth.com
 www.harefield.nthames.nhs.uk
@@ -4545,6 +4672,7 @@ www.headandneckoncology.org
 www.headington.org.uk
 www.headlice.org
 www.healcentral.org
+www.healingcenter.org
 www.healio.com
 www.health-physics.com
 www.health.adelaide.edu.au
@@ -4687,6 +4815,7 @@ www.hospicecare.com
 www.hospicenet.org
 www.hospitalcompare.hhs.gov
 www.hospitalmanagement.net
+www.hospitalpediatrics.org
 www.house.gov
 www.howard.edu
 www.hpa.org.uk
@@ -4796,6 +4925,7 @@ www.icgc.org
 www.ich.org
 www.ichejournal.com
 www.ichelp.com
+www.ichs.org
 www.icimagingsociety.org.uk
 www.icirn.org
 www.icm-mhi.org
@@ -4805,6 +4935,7 @@ www.icmpe.org
 www.icmr.nic.in
 www.icnet.uk
 www.ico-optics.org
+www.icongenetics.com
 www.icps.org.uk
 www.icr-heart.com
 www.icr.ac.uk
@@ -4884,6 +5015,7 @@ www.ijfs.ir
 www.ijhg.com
 www.ijhpr.org
 www.ijkd.org
+www.ijmcmed.org
 www.ijmeg.org
 www.ijmhs.com
 www.ijmm.org
@@ -4895,6 +5027,7 @@ www.ijo.in
 www.ijoeh.com
 www.ijoem.com
 www.ijoonline.com
+www.ijotm.com
 www.ijoy.org.in
 www.ijp-online.com
 www.ijpeonline.com
@@ -4999,7 +5132,6 @@ www.inja.org
 www.inlandnet.net
 www.innovationcanada.ca
 www.inprobiotech.com
-www.inquiryjournalonline.org
 www.ins1.org
 www.insel.ch
 www.inserm.fr
@@ -5051,6 +5183,7 @@ www.ipej.org
 www.iphaonline.org
 www.ipn.mx
 www.ipni.org
+www.ipos-society.org
 www.ippcweb.org
 www.ippf.org
 www.ippfen.org
@@ -5092,6 +5225,7 @@ www.iscd2001.edu.uy
 www.isce.org
 www.iscev.org
 www.ischool.berkeley.edu
+www.iscos.org.uk
 www.iscpubs.com
 www.isdci.org
 www.isde.net
@@ -5187,6 +5321,7 @@ www.ivf.net
 www.iwaponline.com
 www.j-biomed-discovery.com
 www.j-circ.or.jp
+www.j-epilepsy.org
 www.j-stroke.org
 www.jaacap.com
 www.jaaos.org
@@ -5215,6 +5350,7 @@ www.jax.org
 www.jazzpharma.com
 www.jbc.org
 www.jbioleng.org
+www.jbiolres.com
 www.jbiomedsci.com
 www.jbiomedsem.com
 www.jbjs.org
@@ -5223,6 +5359,7 @@ www.jbmb.or.kr
 www.jbmronline.org
 www.jbppni.com
 www.jbpub.com
+www.jbr.gr
 www.jbrha.com
 www.jbsdonline.com
 www.jbsoc.or.jp
@@ -5273,6 +5410,7 @@ www.jewishencyclopedia.com
 www.jfcmonline.com
 www.jfds.org
 www.jfma-online.com
+www.jfmpc.com
 www.jfootankleres.com
 www.jfponline.com
 www.jgi.doe.gov
@@ -5303,10 +5441,12 @@ www.jisponline.com
 www.jisppd.com
 www.jissn.com
 www.jiwh.org
+www.jkaoms.org
 www.jkscience.org
 www.jleukbio.org
 www.jlponline.org
 www.jlr.org
+www.jmatonline.com
 www.jmb.or.kr
 www.jmidlifehealth.org
 www.jmir.org
@@ -5315,7 +5455,6 @@ www.jmolecularpsychiatry.com
 www.jmolecularsignaling.com
 www.jmp.com
 www.jmp.org.in
-www.jmr.nmm.ac.uk
 www.jnatpharm.org
 www.jnccn.org
 www.jnephrol.com
@@ -5342,13 +5481,14 @@ www.jogh.org
 www.jognonline.com
 www.johninnesfoundation.org.uk
 www.joii-journal.com
-www.jointcommission.org
 www.jomfp.in
+www.jomi.com
 www.jonajournal.com
 www.jonesinstitute.org
 www.jonmd.com
 www.joplink.net
 www.joppp.org
+www.jorthodsci.org
 www.jorthotrauma.com
 www.josiahmacyfoundation.org
 www.joslin.harvard.edu
@@ -5374,6 +5514,7 @@ www.journalofvision.org
 www.journalotohns.com
 www.journals.mui.ac.ir
 www.journals.royalsoc.ac.uk
+www.journals.sbmu.ac.ir
 www.journals.uchicago.edu
 www.journalsleep.org
 www.jove.com
@@ -5397,8 +5538,8 @@ www.jpp.krakow.pl
 www.jpsychopathol.com
 www.jrheum.com
 www.jrheum.org
-www.jrm.medicaljournals.se
 www.jrnldbp.com
+www.jrpp.net
 www.jsad.com
 www.jscisociety.com
 www.jsei.org
@@ -5412,6 +5553,8 @@ www.jstage.jst.go.jp
 www.jstatsoft.org
 www.jstcr.org
 www.jstor.org
+www.jtcm.org
+www.jtgga.org
 www.jthoracdis.com
 www.jtrauma.com
 www.jtultrasound.com
@@ -5424,6 +5567,7 @@ www.jwa.org
 www.jwatch.org
 www.jwildlifedis.org
 www.jyoungpharm.in
+www.k4health.org
 www.kaau.edu.sa
 www.kalobios.com
 www.kanazawa-u.ac.jp
@@ -5440,6 +5584,7 @@ www.kcumb.edu
 www.keio.ac.jp
 www.kelloggs.com
 www.kemc.edu
+www.kennedykrieger.org
 www.kff.org
 www.kfu.edu.sa
 www.kfunigraz.ac.at
@@ -5613,6 +5758,7 @@ www.liv.ac.uk
 www.liverfoundation.org
 www.liverpoolmuseums.org.uk
 www.livertox.nih.gov
+www.lizdevitt.com
 www.lkcf.org
 www.ll.mit.edu
 www.llnl.gov
@@ -5627,7 +5773,7 @@ www.longevityandhealthspan.com
 www.longwoods.com
 www.lorenzinifoundation.org
 www.los-gatos.ca.us
-www.losaltosonline.com
+www.losaltoshills.ca.gov
 www.louisiana.gov
 www.louisville.edu
 www.louvre.fr
@@ -5689,6 +5835,7 @@ www.markle.org
 www.marrow.org
 www.marshall.edu
 www.masalink.org
+www.mascc.org
 www.masean.org
 www.mass-spectrometry.jp
 www.mass.gov
@@ -5710,6 +5857,7 @@ www.mbl.edu
 www.mblab.gla.ac.uk
 www.mc.uky.edu
 www.mc.vanderbilt.edu
+www.mcdb.ucsb.edu
 www.mcg.edu
 www.mcgill.ca
 www.mcgraw-hill.com
@@ -5776,6 +5924,7 @@ www.med.umn.edu
 www.med.umontreal.ca
 www.med.unc.edu
 www.med.und.nodak.edu
+www.med.uni-freiburg.de
 www.med.uni-giessen.de
 www.med.uni-muenchen.de
 www.med.unipg.it
@@ -5795,7 +5944,6 @@ www.medal.org
 www.medalreg.com
 www.medandlife.ro
 www.medanthro.net
-www.medassocthai.org
 www.medbd.ca.gov
 www.medbiq.org
 www.medbookstore.com
@@ -5843,6 +5991,7 @@ www.medicine.ox.ac.uk
 www.medicine.tamhsc.edu
 www.medicine.uiowa.edu
 www.medicine.utas.edu.au
+www.medicine20.com
 www.medicineatmichigan.org
 www.medicinenet.com
 www.medico.org
@@ -5855,6 +6004,7 @@ www.medind.nic.in
 www.medinfo.mlanet.org
 www.medizin.uni-tuebingen.de
 www.medizin.unibe.ch
+www.medlantis.org
 www.medlib.iupui.edu
 www.medpac.gov
 www.medpeds.org
@@ -5878,6 +6028,7 @@ www.meeth.org
 www.meetingsnet.com
 www.megasoftware.net
 www.meja.aub.edu.lb
+www.mejdd.org
 www.melanomaresearch.com
 www.mellon.org
 www.mencap.org.uk
@@ -5911,6 +6062,7 @@ www.mh-hannover.de
 www.mhc.com
 www.mhiz.uzh.ch
 www.mhra.gov.uk
+www.mhsnj.org
 www.mib.com
 www.michaeljfox.org
 www.michigan.gov
@@ -5935,6 +6087,7 @@ www.milbank.org
 www.mills-peninsula.org
 www.milner-fenwick.com
 www.miminc.org
+www.mind.uci.edu
 www.mindmirroreeg.com
 www.mindscience.org
 www.minerva.unito.it
@@ -5951,7 +6104,6 @@ www.mitre.org
 www.mitretek.org
 www.mja.com.au
 www.mjhid.org
-www.mjm.mcgill.ca
 www.mlanet.org
 www.mlgsca.mlanet.org
 www.mlst.ca
@@ -6073,7 +6225,9 @@ www.naemt.org
 www.nafc.org
 www.nahc.org
 www.nahdo.org
+www.nahospital.org
 www.nahq.org
+www.nahrs.org
 www.nahse.org
 www.nahu.org
 www.najms.org
@@ -6082,6 +6236,7 @@ www.namcp.org
 www.names.org
 www.nami.org
 www.nanda.org
+www.nann.org
 www.nano.gov
 www.nanomedacademy.org
 www.nanonetbase.com
@@ -6172,6 +6327,7 @@ www.ncra-usa.org
 www.ncrponline.org
 www.ncrr.nih.gov
 www.ncsl.org
+www.nctsnet.org
 www.ndaonline.org
 www.ndl.go.jp
 www.ndss.org
@@ -6240,7 +6396,6 @@ www.nhchc.org
 www.nhcouncil.org
 www.nhgri.nih.gov
 www.nhlbi.nih.gov
-www.nhlbisupport.com
 www.nhls.ac.za
 www.nhm.ac.uk
 www.nhmamd.org
@@ -6280,6 +6435,7 @@ www.niih.go.jp
 www.nimh.nih.gov
 www.nimhd.nih.gov
 www.nimr.mrc.ac.uk
+www.nin.knaw.nl
 www.nipac.org
 www.nismat.org
 www.niso.org
@@ -6337,6 +6493,7 @@ www.npr.org
 www.nps.gov
 www.npsf.org
 www.npsp.com
+www.npuap.org
 www.nrc-cnrc.gc.ca
 www.nrc.gov
 www.nrcam.uchc.edu
@@ -6467,7 +6624,6 @@ www.openhelix.com
 www.openmedicine.ca
 www.openscience.org
 www.ophthalmologia.be
-www.opticsexpress.org
 www.opticsinfobase.org
 www.optiker.at
 www.optnano.com
@@ -6591,10 +6747,12 @@ www.pcbvi.org
 www.pccmjournal.com
 www.pcf.org
 www.pcfs.org
+www.pcha.org
 www.pcmswa.org
 www.pcom.edu
 www.pcori.org
 www.pcrm.org
+www.pcronline.com
 www.pcrsonline.org
 www.pcs.org.ph
 www.pcshs.com
@@ -6626,6 +6784,7 @@ www.pelikantechnologies.com
 www.peninsulahumanesociety.org
 www.pennhealth.com
 www.pennmedicine.org
+www.pennstatehershey.org
 www.pensoft.net
 www.people.Virginia.EDU
 www.peoplesmed.org
@@ -6633,12 +6792,16 @@ www.pep-web.org
 www.pepfar.gov
 www.peppercenter.org
 www.perio.org
+www.periodicas.edu.uy
 www.perioiap.org
 www.perioperativemedicinejournal.com
 www.perl.org
 www.perlegen.com
 www.perotsystems.com
 www.peterclementbooks.com
+www.pewforum.org
+www.pewinternet.org
+www.pewresearch.org
 www.pewtrusts.com
 www.pfizer.com
 www.pflag.org
@@ -6779,12 +6942,10 @@ www.proteinsociety.org
 www.proteomesci.com
 www.proteomicsresource.org
 www.protocol-online.org
-www.proweb.org
 www.psastroke.org
 www.psgb.org
 www.psiweb.org
 www.psl.msu.edu
-www.pslgroup.com
 www.psm.edu
 www.psoriasis.org
 www.psr.org
@@ -6819,23 +6980,26 @@ www.publist.com
 www.pubmedcentral.com
 www.pubmedcentral.gov
 www.pubmedcentral.nih.gov
+www.pubstemcell.com
 www.pueblo.gsa.gov
 www.pulmonarycirculation.org
 www.pulsus.com
 www.pva.org
 www.pvrf.org
 www.pvri.info
-www.pvrireview.org
 www.pvss.org
 www.qld.gov.au
+www.qscience.com
 www.qsrinternational.com
 www.quackwatch.com
 www.quackwatch.org
+www.qualitycheck.org
 www.qualityforum.org
 www.qualityindicators.ahrq.gov
 www.qub.ac.uk
 www.queensu.ca
 www.questia.com
+www.quinnipiac.edu
 www.quinze-vingts.fr
 www.ra.mahidol.ac.th
 www.rabiah.com
@@ -6846,7 +7010,6 @@ www.radiks.net
 www.radiologija.org
 www.radiology.uchicago.edu
 www.radiology.ucsf.edu
-www.radiology2.ucsf.edu
 www.radiologycases.com
 www.ramcjournal.com
 www.ramdocs.org
@@ -6885,8 +7048,10 @@ www.rcsi.ie
 www.rcslt.org
 www.rcuk.ac.uk
 www.rcvs.org.uk
+www.rda-jsc.org
 www.rds-online.org.uk
 www.reactome.org
+www.reaganudall.org
 www.reametrix.com
 www.recap.com
 www.receptors.org
@@ -6989,6 +7154,7 @@ www.rrjournal.org
 www.rrobotics.com
 www.rsc.org
 www.rseek.org
+www.rsmas.miami.edu
 www.rsna.org
 www.rsoa.org
 www.rsph.org
@@ -7044,6 +7210,7 @@ www.santaclararesearch.net
 www.santafe.edu
 www.sanw.ch
 www.sapj.co.za
+www.saponline.org
 www.saratoga-ca.com
 www.sarcoidosis.it
 www.sarsreference.com
@@ -7087,6 +7254,7 @@ www.sci.port.ac.uk
 www.scialert.net
 www.sciam.com
 www.sciamarchive.org
+www.sciammedicine.com
 www.sciandmed.com
 www.scielo.br
 www.scielo.cl
@@ -7136,11 +7304,13 @@ www.searo.who.int
 www.sebd.ehu.es
 www.sebiology.org
 www.sebm.org
+www.secretsoflifeanddeath.com
 www.seiu715.org
 www.semes.org
 www.senate.gov
 www.sequoiahospital.org
 www.serena.unina.it
+www.sergioromagnoli.info
 www.seronosymposia.org
 www.setoncoastside.org
 www.setonmedicalcenter.org
@@ -7199,6 +7369,7 @@ www.shocksociety.org
 www.shoulderelbowsurgery.com
 www.shrinershq.org
 www.shsmu.edu.cn
+www.shu.ac.uk
 www.shvd.org
 www.shyness.com
 www.si.edu
@@ -7222,6 +7393,7 @@ www.silverplatter.com
 www.simd.org
 www.simhq.org
 www.simmons.edu
+www.sin-italy.org
 www.singinst.org
 www.sipweb.org
 www.sirna.com
@@ -7231,6 +7403,7 @@ www.sirweb.org
 www.sis.nlm.nih.gov
 www.sisbreast.org
 www.sisna.org
+www.siu-urology.org
 www.siu.edu
 www.siumed.edu
 www.sivb.org
@@ -7243,6 +7416,7 @@ www.sjsu.edu
 www.sjtrem.com
 www.sjweh.fi
 www.skeletalmusclejournal.com
+www.skinandallergynews.com
 www.skyscape.com
 www.sla.org
 www.slackinc.com
@@ -7338,6 +7512,7 @@ www.specola.unifi.it
 www.sperpharma.org
 www.sph.emory.edu
 www.sph.tulane.edu
+www.sph.umich.edu
 www.sph.umn.edu
 www.sph.unc.edu
 www.sphere.ad.jp
@@ -7347,6 +7522,7 @@ www.spiedl.org
 www.spine.org
 www.spinejournal.com
 www.spl.harvard.edu
+www.spnefro.pt
 www.spondylitis.org
 www.sportsmed.org
 www.sportsmedarthro.com
@@ -7456,6 +7632,7 @@ www.stmarysmedicalcenter.org
 www.stmatthews.edu
 www.stonybrookmedicalcenter.org
 www.stopaids.org
+www.stowers.org
 www.stratford.co.uk
 www.strath.ac.uk
 www.stress.org
@@ -7524,6 +7701,7 @@ www.tanta.edu.eg
 www.targen.com
 www.tate.org.uk
 www.tau.ac.il
+www.taviscoburn.com
 www.taylorandfrancisgroup.com
 www.tbims.org
 www.tbiomed.com
@@ -7571,7 +7749,6 @@ www.thecjcr.org
 www.thecochranelibrary.com
 www.thecommonwealthmedical.com
 www.thecommunityguide.org
-www.thedataweb.org
 www.theendocrinologist.org
 www.thegcf.org
 www.theglobalfund.org
@@ -7604,7 +7781,6 @@ www.thiemeteachingassistant.com
 www.thinkculturalhealth.org
 www.thno.org
 www.thomasnet.com
-www.thomson.com
 www.thomsonhc.com
 www.thomsonreuters.com
 www.thoracic.org
@@ -7622,6 +7798,7 @@ www.time.gov
 www.timeanddate.com
 www.timestream.com
 www.timi.org
+www.tinaberning.online.de
 www.tipaaa.com
 www.tissuebank.com
 www.tjh.com.tr
@@ -7681,6 +7858,7 @@ www.tufts.edu
 www.tulane.edu
 www.tumorionline.it
 www.turing.org.uk
+www.turkishjournalpediatrics.org
 www.turkishneurosurgery.org.tr
 www.turkjpath.org
 www.turkpsikiyatri.com
@@ -7703,6 +7881,7 @@ www.ubc.ca
 www.uc.edu
 www.uc.pt
 www.ucalgary.ca
+www.ucc.edu.ar
 www.ucd.ie
 www.ucdavis.edu
 www.uchicago.edu
@@ -7745,6 +7924,7 @@ www.uhfnyc.org
 www.uhm.hawaii.edu
 www.uhmc.sunysb.edu
 www.uhms.org
+www.uhn.ca
 www.ui.edu
 www.uia.org
 www.uib.no
@@ -7767,7 +7947,6 @@ www.ulaval.ca
 www.ulb.ac.be
 www.ulg.ac.be
 www.ultrasound-quarterly.com
-www.ulworkplace.com
 www.um.edu.mt
 www.um.edu.my
 www.umanitoba.ca
@@ -7780,7 +7959,6 @@ www.umds.ac.uk
 www.umesci.maine.edu
 www.umich.edu
 www.umm.edu
-www.ummed.edu
 www.umms.org
 www.umontreal.ca
 www.ums.ac.uk
@@ -7801,7 +7979,6 @@ www.uni-bonn.de
 www.uni-duesseldorf.de
 www.uni-erfurt.de
 www.uni-erlangen.org
-www.uni-freiburg.de
 www.uni-giessen.de
 www.uni-goettingen.de
 www.uni-greifswald.de
@@ -7866,6 +8043,7 @@ www.uottawa.ca
 www.up.ac.za
 www.upenn.edu
 www.uphs.upenn.edu
+www.upne.com
 www.upress.umn.edu
 www.ups-tlse.fr
 www.ups.com
@@ -8061,6 +8239,7 @@ www.whybiotech.com
 www.wi.mit.edu
 www.wiche.edu
 www.wien.gv.at
+www.wikidoc.org
 www.wildlifedisease.org
 www.wiley-vch.de
 www.wiley.com
@@ -8121,6 +8300,7 @@ www.wpanet.org
 www.wramc.amedd.army.mil
 www.wsma.org
 www.wsscc.org
+www.wssu.edu
 www.wustl.edu
 www.wvsma.com
 www.wvsom.edu
@@ -8144,6 +8324,7 @@ www.york.ac.uk
 www.yottalook.com
 www.youtube.com
 www.yume-net.ne.jp
+www.yumpu.com
 www.zavos.org
 www.zeno.org
 www.zfb.com
@@ -8153,9 +8334,9 @@ www.zotero.org
 www1.bjmu.edu.cn
 www1.umn.edu
 www1.wfubmc.edu
-www11.georgetown.edu
 www2.amia.org
 www2.arthroscopyjournal.org
+www2.bgsu.edu
 www2.biusante.parisdescartes.fr
 www2.braintrauma.org
 www2.criminology.fsu.edu
@@ -8168,6 +8349,7 @@ www2.ncaa.org
 www2.niddk.nih.gov
 www2.oaklandnet.com
 www2.onb.ac.at
+www2.radiology.ucsf.edu
 www2.royalsociety.org
 www2.sjsu.edu
 www2.tulane.edu
@@ -8176,7 +8358,6 @@ www2.warwick.ac.uk
 www2.york.ac.uk
 www25.uua.org
 www3.accessmedicine.com
-www3.cancer.gov
 www3.georgetown.edu
 www3.interscience.wiley.com
 www3.niaid.nih.gov
@@ -8205,6 +8386,7 @@ xpdb.nist.gov
 xroads.virginia.edu
 yas.sagepub.com
 yellowfever.lib.virginia.edu
+youtu.be
 youtube.com
 yvj.sagepub.com
 zeno.ibd.nrc.ca
@@ -8214,4 +8396,3 @@ zqsrc.com
 bodoni.stanford.edu
 library.stanford.edu
 searchworks.stanford.edu
-
