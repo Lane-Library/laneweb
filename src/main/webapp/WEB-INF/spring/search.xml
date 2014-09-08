@@ -44,6 +44,11 @@
         </constructor-arg>
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"
+        class="edu.stanford.irt.laneweb.search.saxstrategy.SolrPagingEresourceSAXStrategy">
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"/>
+    </bean>
+
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
         class="edu.stanford.irt.laneweb.search.saxstrategy.MetasearchResultSAXStrategy">
         <constructor-arg>
@@ -59,7 +64,6 @@
         </constructor-arg>
     </bean>
    
-    
     <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"
         class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
     
@@ -85,10 +89,10 @@
         parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"/>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search"
-        class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
+        class="edu.stanford.irt.laneweb.search.SolrSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
         <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search-html"

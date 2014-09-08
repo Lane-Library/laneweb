@@ -1,6 +1,5 @@
 .resourceListPagination{
-    margin:0 17px;
-    font-size:13px;
+    margin:0 17px 10px;
 }
 .view-by{
     text-align:right;
@@ -53,4 +52,28 @@
 }
 .content .pagingLabels li{
     margin-right:0;
+}
+
+.pagingForm {
+    display: inline;
+    padding:5px;
+}
+
+.pagingForm input {
+    width: 15px;
+    text-align: center;
+}
+
+.s-pagination {
+    float: right;
+    margin-top: -6px;
+}
+
+.s-pagination .pagingButton {
+    float: none;
+}
+
+.pagingButton.disabled {
+    color: #ccc;
+    cursor: default;
 }

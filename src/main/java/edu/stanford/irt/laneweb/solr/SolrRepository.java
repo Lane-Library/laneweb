@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.solr;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.HighlightPage;
@@ -53,7 +54,7 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     public HighlightPage<Eresource> findAllHighlighted(String text, Pageable page);
 
     @Query(value = "?0", requestHandler = SEARCH_HANDLER)
-    public List<Eresource> searchFindAll(String text, Pageable page);
+    public Page<Eresource> searchFindAll(String text, Pageable page);
 
     @Query(value = "-recordType:pubmed", requestHandler = SEARCH_HANDLER)
     public List<Eresource> searchFindAllNotRecordTypePubmed(Pageable page);

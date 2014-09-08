@@ -39,7 +39,7 @@ public class SolrCollectionManager implements CollectionManager {
 
     /**
      * backwards-compatible type-mapping; remove once types changed in biomed-resources browse pages
-     * 
+     *
      * @param maybeOldType
      * @return new type from TYPES_MAP or title-case version of maybeOldType
      */
@@ -103,7 +103,11 @@ public class SolrCollectionManager implements CollectionManager {
 
     @Override
     public List<Eresource> search(final String query) {
-        return this.repository.searchFindAll(query, new PageRequest(0, 50));
+        return this.repository.searchFindAll(query, new PageRequest(0, 50)).getContent();
+    }
+
+    public Page<Eresource> search(final String query, final PageRequest pageRequest) {
+        return this.repository.searchFindAll(query, pageRequest);
     }
 
     @Override

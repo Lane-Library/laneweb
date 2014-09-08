@@ -221,6 +221,9 @@
                 if (target.ancestor("#searchFacets")) {
                     bookmarkable = false;
                 }
+                else if (target.ancestor(".s-pagination")) {
+                    bookmarkable = false;
+                }
                 else if (target.getStyle("display").indexOf("inline") === 0 && !target.one("img")) {
                     bookmarkable = true;
                 } else if (target.ancestor("#topResources")) {
