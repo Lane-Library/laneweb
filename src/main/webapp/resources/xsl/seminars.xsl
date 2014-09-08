@@ -4,6 +4,14 @@
 	version="2.0">
 
 	<xsl:variable name="type" select="/s:seminars/@s:type" />
+	
+	<!-- case 99290 3 grand rounds items -->
+	<xsl:variable name="number-of-items">
+		<xsl:choose>
+			<xsl:when test="$type='gran'">3</xsl:when>
+			<xsl:otherwise>2</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 
 	<xsl:template match="/s:seminars">
 		<html>
@@ -11,7 +19,7 @@
 				<title>seminars</title>
 			</head>
 			<body>
-				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt; 3]" />
+				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= $number-of-items]" />
                 <div class="more classes">
                     <a href="{/s:seminars/@s:url}">CME Calendar <i class="icon fa fa-arrow-right"></i></a>
                 </div>
