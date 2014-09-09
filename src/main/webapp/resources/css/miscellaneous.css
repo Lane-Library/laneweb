@@ -23,15 +23,6 @@ em {
 	color: #808080;
 }
 
-/*.more {
-	text-transform: uppercase;
-	text-align: right;
-	border-bottom: 1px solid #EAE9E6;
-	border-top: 1px solid #EAE9E6;
-	clear: left;
-	letter-spacing: 1px;
-	padding: 3px
-}*/
 .more {
 	border-top: none;
 	padding: 0 12px 12px 12px;
@@ -122,7 +113,7 @@ em {
 }
 
 .content .calendar li {
-	width: 112px;
+	width: 125px;
 	height: 75px;
 	float: left;
 	margin: .2em;
@@ -132,7 +123,6 @@ em {
 	background-color: #09425a;
 	margin-bottom: 0;
 	color: #fff;
-	font-size: 18px;
 }
 
 .content .calendar li p {
