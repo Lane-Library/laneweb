@@ -55,7 +55,7 @@
 // TODO: find a home for this pagination-related js
 (function() {
         Y.all('form[name=pagination]').on('submit', function (e) {
-            var p = e.target.get('p'), page = p.get('value') - 1, pages = e.target.get('pages');
+            var p = e.target.get('p'), page = p.get('value').replace(/[^\d]/g,'') - 1, pages = e.target.get('pages');
             if (page < 0 || page > pages.get('value')) {
                 e.preventDefault();
                 alert("page out of range");
