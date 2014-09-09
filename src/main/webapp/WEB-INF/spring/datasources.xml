@@ -7,7 +7,7 @@
     
     <solr:solr-server id="laneSearchSolrServer" url="%{laneweb.solr-url-laneSearch}"/>
 
-    <solr:repositories base-package="edu.stanford.irt.laneweb.solr" multicore-support="true"/>
+    <solr:repositories base-package="edu.stanford.irt.laneweb.solr" multicore-support="true" solr-server-ref="laneSearchSolrServer"/>
 
     <context:component-scan base-package="edu.stanford.irt.laneweb.solr" />
 

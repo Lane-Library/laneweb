@@ -9,10 +9,8 @@ import org.apache.commons.lang.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
-import org.springframework.data.solr.repository.support.SolrRepositoryFactory;
 
 import edu.stanford.irt.laneweb.solr.SolrRepository;
 
@@ -30,12 +28,8 @@ public class SolrCollectionManager implements CollectionManager {
         TYPES_MAP.put("lksc-student software, installed", "Software, Installed - LKSC Student");
     }
 
-    private SolrRepository repository;
-
     @Autowired
-    public SolrCollectionManager(final SolrTemplate laneSearchSolrTemplate) {
-        this.repository = new SolrRepositoryFactory(laneSearchSolrTemplate).getRepository(SolrRepository.class);
-    }
+    private SolrRepository repository;
 
     /**
      * backwards-compatible type-mapping; remove once types changed in biomed-resources browse pages
