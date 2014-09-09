@@ -35,12 +35,13 @@ public class SolrPagingEresourceSAXStrategy implements SAXStrategy<Map<String, O
         Page<Eresource> page = (Page<Eresource>) object.get("resultPage");
         List<Eresource> eresources = page.getContent();
         String query = (String) object.get("searchTerm");
+        long start = page.getSize() * page.getNumber();
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", NAMESPACE);
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Long.toString(page.getTotalElements()));
-            atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(page.getSize() * page.getNumber()));
+            atts.addAttribute(EMPTY_NS, START, START, CDATA, Long.toString(start));
             atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(page.getSize()));
             atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(page.getNumber() + 1));
             atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(page.getTotalPages()));
