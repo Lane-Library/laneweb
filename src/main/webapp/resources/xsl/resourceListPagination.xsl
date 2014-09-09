@@ -32,12 +32,12 @@
 				<xsl:when
 					test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
 					<xsl:if test="$top = 'true'">
-						<span id="pageStart"><xsl:value-of select="number(/s:resources/@start) + 1" /></span>
+						<span id="pageStart"><xsl:value-of select="format-number(number(/s:resources/@start) + 1,'###,##0')" /></span>
 						<xsl:text> to </xsl:text>
 						<xsl:value-of
-							select="$end" />
+							select="format-number($end,'###,##0')" />
 						<xsl:text> of </xsl:text>
-						<xsl:value-of select="/s:resources/@size" />
+						<xsl:value-of select="format-number(/s:resources/@size, '###,##0')" />
 						<xsl:text> results</xsl:text>
 					</xsl:if>
                    <div class="s-pagination">
@@ -69,7 +69,7 @@
 		  <input type="hidden" name="q" value="{$query}"/>
 		  <label for="p"> Page </label>
 		  <input type="text" name="p" value="{number(/s:resources/@page)}"/>
-		  <label for="pages"> of <xsl:value-of select="number(/s:resources/@pages)" /></label>
+		  <label for="pages"> of <xsl:value-of select="format-number(/s:resources/@pages,'###,##0')" /></label>
 		  <input type="hidden" name="pages" value="{number(/s:resources/@pages)}"/>
 		</form>
         <xsl:choose>
