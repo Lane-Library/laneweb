@@ -67,10 +67,12 @@
 .s-pagination {
     float: right;
     margin-top: -6px;
+    padding-bottom: 10px;
 }
 
 .s-pagination .pagingButton {
     float: none;
+    bottom: 0;
 }
 
 .pagingButton.disabled {
