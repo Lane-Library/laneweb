@@ -58,6 +58,20 @@ public class MetasearchResultSAXStrategyTest {
         verify(this.result, this.query, this.engineSAXStrategy);
     }
 
+    @Test
+    public void testToSAXNullStatus() throws IOException, SAXException {
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
+        expect(this.result.getQuery()).andReturn(this.query);
+        expect(this.result.getStatus()).andReturn(null);
+        expect(this.query.getSearchText()).andReturn("query");
+        this.engineSAXStrategy.toSAX(this.result, this.xmlConsumer);
+        replay(this.result, this.query, this.engineSAXStrategy);
+        this.strategy.toSAX(this.result, this.xmlConsumer);
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "MetasearchResultSAXStrategyTest-testToSAXNullStatus.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.result, this.query, this.engineSAXStrategy);
+    }
+
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws IOException, SAXException {
         XMLConsumer c = createMock(XMLConsumer.class);
