@@ -21,7 +21,12 @@
 			<body>
 				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= $number-of-items]" />
                 <div class="more classes">
-                    <a href="{/s:seminars/@s:url}">CME Calendar <i class="icon fa fa-arrow-right"></i></a>
+                    <a href="{/s:seminars/@s:url}">
+                    	<xsl:choose>
+                    		<xsl:when test="$type='gran'">Grand Rounds Calendar</xsl:when>
+                    		<xsl:otherwise>CME Calendar</xsl:otherwise>
+                    	</xsl:choose>
+                    	<i class="icon fa fa-arrow-right"></i></a>
                 </div>
 			</body>
 		</html>
