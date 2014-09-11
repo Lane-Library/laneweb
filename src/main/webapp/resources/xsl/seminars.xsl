@@ -3,16 +3,12 @@
 	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/seminars/ns"
 	version="2.0">
 
+    <xsl:param name="link-label"/>
+
+    <xsl:param name="number-of-items"/>
+
 	<xsl:variable name="type" select="/s:seminars/@s:type" />
 	
-	<!-- case 99290 3 grand rounds items -->
-	<xsl:variable name="number-of-items">
-		<xsl:choose>
-			<xsl:when test="$type='gran'">3</xsl:when>
-			<xsl:otherwise>2</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-
 	<xsl:template match="/s:seminars">
 		<html>
 			<head>
@@ -21,12 +17,7 @@
 			<body>
 				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= $number-of-items]" />
                 <div class="more classes">
-                    <a href="{/s:seminars/@s:url}">
-                    	<xsl:choose>
-                    		<xsl:when test="$type='gran'">Grand Rounds Calendar</xsl:when>
-                    		<xsl:otherwise>CME Calendar</xsl:otherwise>
-                    	</xsl:choose>
-                    	<i class="icon fa fa-arrow-right"></i></a>
+                    <a href="{/s:seminars/@s:url}"><xsl:value-of select="replace($link-label,'(\+|%20)',' ')"/><xsl:text> </xsl:text><i class="icon fa fa-arrow-right"></i></a>
                 </div>
 			</body>
 		</html>
