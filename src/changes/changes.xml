@@ -42,6 +42,9 @@
             <action date="2014-08-19" dev="ceyates" issue="98989" type="update">
                 change an arrow to fa-angle-double-down
             </action>
+            <action date="2014-08-18" dev="ceyates" issue="98953" type="update">
+                don't repeat banner requests
+            </action>
             <action date="2014-08-19" dev="ceyates" issue="98924" type="fix">
                 Feedback-bug: View by page: Ja-Jz isn't working properly
             </action>
