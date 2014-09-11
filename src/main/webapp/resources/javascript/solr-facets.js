@@ -4,6 +4,11 @@
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
         facets = Y.all('.solrFacet'),
+        facetsContainer = Y.one('#searchFacets'),
+        fadein = new Y.Anim({
+            node: facetsContainer,
+            to:{opacity:1}
+        }),
         encodeAndEscape = function(string) {
             return encodeURIComponent(string).replace(/'/g,'%27');
         },
@@ -42,6 +47,7 @@
                                 }
                             }
                         }
+                        fadein.run();
                     }
                 }
             });

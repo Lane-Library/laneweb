@@ -44,6 +44,9 @@
 #searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a, .solrFacet {
     display:none;
 }
+#searchFacets {
+    opacity:0;
+}
 #popInContent {
     display:none;
     position:absolute;
