@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-09-25" version="2.2.20" description="2.2.20 bug fix release">
+            <action date="2014-09-10" dev="olgary" issue="99334" type="update">
+                updated logos in Lane SoM footer
+            </action>
+            <action date="2014-09-12" dev="ceyates" issue="99329" type="update">
+                fix layout for youtube videos
+            </action>
+            <action date="2014-09-08" dev="olgary" issue="99291" type="update">
+                updated calendar li width: misc.css 
+            </action>
+            <action date="2014-09-11" dev="ryanmax" issue="99290" type="update">
+                show three grand rounds items on home page
+            </action>
+        </release>
         <release date="2014-09-10" version="2.2.19" description="2.2.19 emergency release">
             <action date="2014-09-10" dev="ceyates" issue="99318" type="fix">
                 NullPointerException from facet json requests
