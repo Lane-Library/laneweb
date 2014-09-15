@@ -83,8 +83,8 @@
 	padding: 0
 }
 
-.landing img {
-	display: block;
+.landing img, .landing iframe {
+	vertical-align:bottom;
 	width: 100%
 }
 

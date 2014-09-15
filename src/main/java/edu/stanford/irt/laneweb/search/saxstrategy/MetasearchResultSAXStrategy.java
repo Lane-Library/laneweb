@@ -43,7 +43,9 @@ public class MetasearchResultSAXStrategy extends AbstractResultSAXStrategy<Resul
             query = result.getQuery();
             status = result.getStatus();
         }
-        atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
+        if (status != null) {
+            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
+        }
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startElement(NAMESPACE, SEARCH, SEARCH, atts);
