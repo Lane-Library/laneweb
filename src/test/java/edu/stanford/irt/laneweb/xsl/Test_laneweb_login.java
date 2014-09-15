@@ -3,9 +3,7 @@ package edu.stanford.irt.laneweb.xsl;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -20,7 +18,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-public class Test_laneweb_login {
+public class Test_laneweb_login extends AbstractXSLTest {
 
     private Source source;
 
@@ -182,19 +180,5 @@ public class Test_laneweb_login {
         this.transformer.setParameter(Model.IPGROUP, "SOM");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("TrueZeroSOM.xml"), sw.toString());
-    }
-
-    private String getExpectedResult(final String fileName) throws IOException {
-        StringWriter sw = new StringWriter();
-        InputStreamReader br = new InputStreamReader(getClass().getResourceAsStream(fileName), StandardCharsets.UTF_8);
-        char[] cbuf = new char[1024];
-        while (true) {
-            int i = br.read(cbuf);
-            if (i == -1) {
-                break;
-            }
-            sw.write(cbuf, 0, i);
-        }
-        return sw.toString();
     }
 }

@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s" version="2.0">
-
-    <xsl:param name="alpha"/>
-
-    <xsl:param name="request-uri"/>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s" version="2.0">
 
     <xsl:param name="source"/>
 
@@ -17,14 +11,8 @@
 
     <xsl:param name="emrid"/>
 
-    <xsl:param name="mesh"/>
-
     <xsl:variable name="guest-mode">
         <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
-    </xsl:variable>
-
-    <xsl:variable name="er-browse-mode">
-        <xsl:if test="contains($request-uri,'biomed-resources')">true</xsl:if>
     </xsl:variable>
 
 
@@ -41,18 +29,13 @@
                 <title>search results</title>
             </head>
             <body>
-                <xsl:if test="$er-browse-mode = 'true' and number(@size) &gt; 100">
-                    <xsl:call-template name="paginationLinks">
-                        <xsl:with-param name="browse-mode" select="$er-browse-mode"/>
-                    </xsl:call-template>
-                </xsl:if>
+                <xsl:call-template name="paginationLinks"/>
+                <h3 class="eresources">&#160;<span>Access restricted to Stanford unless otherwise noted</span></h3>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>
                 <xsl:if test="number(@size) &gt; 100">
-                    <xsl:call-template name="paginationLinks">
-                        <xsl:with-param name="browse-mode" select="$er-browse-mode"/>
-                    </xsl:call-template>
+                    <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
                 <div id="search-content-counts">
                     <!-- empty div causes problems when facets are imported with JS -->
@@ -123,13 +106,15 @@
                         <xsl:apply-templates select="s:contentId"/>
                         <br/>
                         <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
-                            <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a><xsl:text> &#187;</xsl:text>
+                            <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
+                            <xsl:text> &#187;</xsl:text>
                         </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
                             <xsl:when test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
-                                <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a><xsl:text> &#187;</xsl:text>
+                                <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
+                                <xsl:text> &#187;</xsl:text>
                                 <xsl:if test="$emrid and $resourceName = 'UpToDate'">
                                     <span class="utdCMEnote"> &#8592; Use this link for CME</span>
                                 </xsl:if>
@@ -181,7 +166,7 @@
             </xsl:choose>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="s:recordType"/>
 
     <xsl:template match="s:description">
