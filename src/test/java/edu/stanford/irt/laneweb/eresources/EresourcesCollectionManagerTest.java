@@ -37,6 +37,7 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("URL")).andReturn("url");
         expect(this.resultSet.getString("LABEL")).andReturn("label");
         expect(this.resultSet.getString("V_ADDITIONAL_TEXT")).andReturn("additional-text");
+        expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher");
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
         expect(this.resultSet.getInt("RECORD_ID")).andReturn(1);
@@ -48,6 +49,7 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("LINK_TEXT")).andReturn("link-text");
         expect(this.resultSet.getString("L_ADDITIONAL_TEXT")).andReturn("additional-text");
         expect(this.resultSet.getString("URL")).andReturn("url");
+        expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.resultSet);
         this.manager.parseResultSet(this.resultSet, null);
