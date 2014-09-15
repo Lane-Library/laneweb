@@ -38,10 +38,41 @@
 #searchFacets ul, .lwSearchResults li {
     padding-bottom:10px;
 }
+#searchFacets li {
+    overflow: hidden;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+#searchFacets li.facetHeader {
+    height: 20px;
+    border-bottom: 1px solid #e6e4dc;
+    display:none;
+    cursor: pointer;
+}
+#searchFacets li.facetHeader:after {
+    color: grey;
+    content: ">";
+    float: right;
+    font-size: 1.25em;
+    line-height: normal;
+    text-transform: none;
+    transition-property: transform;
+    transition-duration: 0.3s;
+}
+#searchFacets li.facetHeader.open:after {
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transform: rotate(90deg);
+}
+#searchFacets li.facetHeader.openIE:after {
+    content: "v";
+}
 #searchFacets li.current a {
     color:#9a0003;
 }
-#searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a, .solrFacet {
+#searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a {
     display:none;
 }
 #searchFacets {

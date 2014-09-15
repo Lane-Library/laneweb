@@ -1,5 +1,8 @@
 (function() {
     var i, nodes, node;
+    if (!String.prototype.trim) {
+        String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+     }
     if (Y.UA.ie && Y.UA.ie < 7) {
         node = Y.one("#laneNav");
         nodes = node.all('ul');
