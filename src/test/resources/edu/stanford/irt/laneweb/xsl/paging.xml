@@ -19,8 +19,7 @@
             </div>
          </div>
       </div>
-      <h3 class="eresources"> <span>Access restricted to Stanford unless otherwise noted</span>
-      </h3>
+      <h3 class="eresources"> </h3>
       <ul class="lwSearchResults"/>
       <div xmlns:fx="http://lane.stanford.edu/fx" class="resourceListPagination">
          <div class="yui3-g">

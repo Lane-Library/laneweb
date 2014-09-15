@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 public class Eresource {
 
+    private String author;
+
     private String description;
 
     private int id;
@@ -21,13 +23,18 @@ public class Eresource {
     private String title;
 
     public Eresource(final String description, final int id, final int recordId, final String recordType,
-            final int score, final String title) {
+            final int score, final String title, final String author) {
         this.description = description;
         this.id = id;
         this.recordId = recordId;
         this.recordType = recordType;
         this.score = score;
         this.title = title;
+        this.author = author;
+    }
+
+    public String getAuthor() {
+        return this.author;
     }
 
     public String getDescription() {

@@ -30,7 +30,7 @@
             </head>
             <body>
                 <xsl:call-template name="paginationLinks"/>
-                <h3 class="eresources">&#160;<span>Access restricted to Stanford unless otherwise noted</span></h3>
+                <h3 class="eresources">&#160;</h3>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>
@@ -180,11 +180,17 @@
             <a class="primaryLink" href="{s:url}" title="{../s:title}">
                 <xsl:apply-templates select="../s:title"/>
             </a>
-            <xsl:value-of select="s:additional-text"/>
+            <!--<xsl:value-of select="s:additional-text"/>-->
             <xsl:if test="@type = 'getPassword'">
                 <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
             </xsl:if>
         </div>
+        <xsl:if test="../s:author">
+            <div><xsl:value-of select="../s:author"/></div>
+        </xsl:if>
+        <xsl:if test="s:publisher">
+            <div><xsl:value-of select="s:publisher"/></div>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="s:link">
