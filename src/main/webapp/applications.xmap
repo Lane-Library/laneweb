@@ -144,11 +144,25 @@
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <!-- cache expires in 21600 seconds = 6 hours -->
         <map:parameter name="cache-expires" value="21600"/>
+        <map:match pattern="seminars/type/*/number-of-items/*/link-label/*.xml" type="wildcard">
+            <map:generate type="seminars">
+                <map:parameter name="type" value="{1}"/>
+            </map:generate>
+            <map:transform type="saxon" src="resources/xsl/seminars.xsl">
+                <map:parameter name="number-of-items" value="{2}"/>
+                <map:parameter name="link-label" value="{3}"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- remove after 2.2.20 release and index.html, samples/seminars.html content changes -->
         <map:match pattern="seminars/type/*.xml" type="wildcard">
             <map:generate type="seminars">
                 <map:parameter name="type" value="{1}"/>
             </map:generate>
-            <map:transform type="saxon" src="resources/xsl/seminars.xsl"/>
+            <map:transform type="saxon" src="resources/xsl/seminars.xsl">
+                <map:parameter name="number-of-items" value="2"/>
+                <map:parameter name="link-label" value="CME Calendar"/>
+            </map:transform>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>

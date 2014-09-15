@@ -36,11 +36,9 @@
     <xsl:template name="entry">
         <xsl:param name="entry"/>
         <div class="yui3-u-1-2">
-            <div class="module">
-            <iframe type="text/html" width="230" height="130" class="module-img drop-shadow-noimg"
-                src="//www.youtube.com/embed/{$entry/media:group/yt:videoid}"
-                frameborder="0"/>
-            <h5><xsl:value-of select="$entry/atom:title"/></h5>
+            <div class="module landing">
+            <iframe type="text/html" src="//www.youtube.com/embed/{$entry/media:group/yt:videoid}" frameborder="0"/>
+            <h3><xsl:value-of select="$entry/atom:title"/></h3>
             </div>
         </div>
     </xsl:template>
