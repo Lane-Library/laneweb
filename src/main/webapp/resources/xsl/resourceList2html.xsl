@@ -128,6 +128,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
+            <div>Article</div>
             <xsl:apply-templates select="s:description"/>
         </li>
     </xsl:template>
@@ -139,7 +140,8 @@
                 <xsl:attribute name="class" select="'hvrTrig'"/>
             </xsl:if>
             <xsl:apply-templates select="s:link"/>
-            <xsl:apply-templates select="s:recordType"/>
+            <div>resource type</div>
+            <!--<xsl:apply-templates select="s:recordType"/>-->
             <xsl:apply-templates select="s:description"/>
         </li>
     </xsl:template>
