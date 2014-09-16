@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-public class Test_resourceListPagination extends AbstractXSLTest {
+public class Test_resourceList2html extends AbstractXSLTest {
 
     private Source source;
 
@@ -28,7 +28,7 @@ public class Test_resourceListPagination extends AbstractXSLTest {
     public void setUp() throws Exception {
         this.transformer = TransformerFactory.newInstance().newTransformer(
                 new StreamSource("src/main/webapp/resources/xsl/resourceList2html.xsl"));
-        this.source = new StreamSource(getClass().getResourceAsStream("Test_resourceListPagingation.xml"));
+        this.source = new StreamSource(getClass().getResourceAsStream("Test_resourceList2html.xml"));
         this.transformer.setOutputProperty("indent", "yes");
         this.transformer.setOutputProperty("method", "xml");
     }
@@ -38,6 +38,6 @@ public class Test_resourceListPagination extends AbstractXSLTest {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("paging.xml"), sw.toString());
+        assertEquals(getExpectedResult("resources.xml"), sw.toString());
     }
 }
