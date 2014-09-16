@@ -132,6 +132,7 @@
                 <div class="yui3-u-1-4">
                     <xsl:apply-templates select="s:contentId"/>
                 </div>
+                <div class="yui3-u-1-4">Source: </div>
             </div>
             <xsl:apply-templates select="s:description"/>
         </li>
@@ -146,6 +147,8 @@
                 <div class="yui3-u-1-4">
                     <xsl:if test="s:description">click for more</xsl:if>
                 </div>
+                <div class="yui3-u-1-4"/>
+                <div class="yui3-u-1-4">Source: </div>
             </div>
             <!--<xsl:apply-templates select="s:recordType"/>-->
             <xsl:apply-templates select="s:description"/>
