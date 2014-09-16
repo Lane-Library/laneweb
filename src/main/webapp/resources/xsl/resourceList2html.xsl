@@ -78,9 +78,6 @@
         </xsl:variable>
 
         <li>
-            <xsl:if test="s:description">
-                <xsl:attribute name="class" select="'hvrTrig'"/>
-            </xsl:if>
             <div>
                 <a class="primaryLink" href="{$primaryLink}">
                     <xsl:apply-templates select="s:title"/>
@@ -103,7 +100,6 @@
                                 <xsl:value-of select="$resourceName"/>
                             </span>
                         </xsl:if>
-                        <xsl:apply-templates select="s:contentId"/>
                         <br/>
                         <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
                             <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
@@ -128,7 +124,16 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
-            <div>Article</div>
+            <div class="yui3-g">
+                <div class="yui3-u-1-4">Article</div>
+                <div class="yui3-u-1-4">
+                    <xsl:if test="s:description">click for more</xsl:if>
+                </div>
+                <div class="yui3-u-1-4">
+                    <xsl:apply-templates select="s:contentId"/>
+                </div>
+                <div class="yui3-u-1-4">Source: </div>
+            </div>
             <xsl:apply-templates select="s:description"/>
         </li>
     </xsl:template>
@@ -136,11 +141,15 @@
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
         <li>
-            <xsl:if test="s:description">
-                <xsl:attribute name="class" select="'hvrTrig'"/>
-            </xsl:if>
             <xsl:apply-templates select="s:link"/>
-            <div>resource type</div>
+            <div class="yui3-g">
+                <div class="yui3-u-1-4">resource type</div>
+                <div class="yui3-u-1-4">
+                    <xsl:if test="s:description">click for more</xsl:if>
+                </div>
+                <div class="yui3-u-1-4"/>
+                <div class="yui3-u-1-4">Source: </div>
+            </div>
             <!--<xsl:apply-templates select="s:recordType"/>-->
             <xsl:apply-templates select="s:description"/>
         </li>
