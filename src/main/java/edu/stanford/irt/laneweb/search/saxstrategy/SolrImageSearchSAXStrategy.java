@@ -58,8 +58,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 		generateSumaryResult(xmlConsumer, page, result, true);
 		startElementWithId(xmlConsumer, UL, "imageList");
 		for (Image image : images) {
-			generateImages(xmlConsumer, image.getId(), image.getTitle(), image.getPageUrl(), image.getThumbnailSrc(),
-			        image.getSrc(), String.valueOf(image.getCopyrightValue()));
+			generateImages(xmlConsumer, image);
 		}
 		endUl(xmlConsumer);
 		generateSumaryResult(xmlConsumer, page, result, false);
@@ -72,9 +71,20 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 		atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "tooltips");
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
 		for (Image image : images) {
-			generateTooltipsImage(xmlConsumer, image.getId(), image.getSrc());
+			generateImagePopup(xmlConsumer, image);
 		}
 		endDiv(xmlConsumer);
+		atts = new AttributesImpl();
+		atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "popups");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+		
+		for (Image image : images) {
+			generateCopyrightPopup(xmlConsumer, image);
+		}
+		endDiv(xmlConsumer);
+		
+		
+		
 	}
 
 	protected void createImage(final XMLConsumer xmlConsumer, final String id, final String thumbnailSrc,
@@ -133,8 +143,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 		endDiv(xmlConsumer);
 	}
 
-	protected void generateResult(final XMLConsumer xmlConsumer, final Page<Image> page,
-	        final Map<String, Object> result) throws SAXException {
+	protected void generateResult(final XMLConsumer xmlConsumer, final Page<Image> page, final Map<String, Object> result) throws SAXException {
 		String numberResult = String.valueOf(page.getSize() * page.getNumber() + 1);
 		String number = String.valueOf(page.getSize() * page.getNumber() + page.getNumberOfElements());
 		startDivWithClass(xmlConsumer, "result");
@@ -160,32 +169,31 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
 	}
 
-	protected void generateImages(final XMLConsumer xmlConsumer, final String id, String title, final String url,
-	        final String thumbnailSrc, final String imageSrc, final String copyright) throws SAXException {
+	protected void generateImages(final XMLConsumer xmlConsumer, final Image image) throws SAXException {
 
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, "li");
-		startAnchor(xmlConsumer, url);
+		startAnchor(xmlConsumer, image.getPageUrl());
 		startElementWithId(xmlConsumer, DIV, "image");
-		createImage(xmlConsumer, id, thumbnailSrc, imageSrc);
+		createImage(xmlConsumer, image.getId(), image.getThumbnailSrc(), image.getSrc());
 		endDiv(xmlConsumer);
 		startDiv(xmlConsumer);
+		String title = image.getTitle();
 		if (title.length() > 90) {
 			title = title.substring(0, 90).concat("....");
 		}
 		XMLUtils.data(xmlConsumer, title);
 		endDiv(xmlConsumer);
 		endAnchor(xmlConsumer);
-		generateWebsiteSource(xmlConsumer, id, url);
-		generateCopyright(xmlConsumer, id);
+		generateWebsiteSource(xmlConsumer, image.getId(), image.getPageUrl());
+		generateCopyright(xmlConsumer, image);
 
 		endLi(xmlConsumer);
 	}
 
-	private void generateCopyright(final XMLConsumer xmlConsumer, final String id) throws SAXException {
+	private void generateCopyright(final XMLConsumer xmlConsumer, final Image image) throws SAXException {
 		startElementWithId(xmlConsumer, DIV, "copyright");
 		AttributesImpl atts = new AttributesImpl();
-		atts.addAttribute(XHTML_NS, REL, REL, CDATA,
-		        "popup local ".concat(id.substring(0, id.indexOf("/")).replaceAll("\\.", "-")));
+		atts.addAttribute(XHTML_NS, REL, REL, CDATA,"popup local ".concat(image.getId().hashCode() +"_copyright"));
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
 		XMLUtils.data(xmlConsumer, "Copyright Information ");
 		atts = new AttributesImpl();
@@ -212,15 +220,30 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 		endDiv(xmlConsumer);
 	}
 
-	protected void generateTooltipsImage(final XMLConsumer xmlConsumer, final String id, final String imageSrc)
+	private void generateImagePopup(final XMLConsumer xmlConsumer, final Image image)
 	        throws SAXException {
-		if (null != id && null != imageSrc && !"".equals(imageSrc)) {
-			startElementWithId(xmlConsumer, "span", id.concat("Tooltip"));
+		if (null != image.getId() && null != image.getSrc() && !"".equals(image.getSrc())) {
+			startElementWithId(xmlConsumer, "span", image.getId().concat("Tooltip"));
 			AttributesImpl atts = new AttributesImpl();
-			atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, imageSrc);
+			atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getSrc());
 			atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "max-width: 300px;max-height: 240px");
 			XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
 			XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
+			XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
+		}
+	}
+		
+	private void generateCopyrightPopup(final XMLConsumer xmlConsumer, final Image image) throws SAXException{	
+		if (null != image.getId()) {
+			startElementWithId(xmlConsumer, "span", image.getId().hashCode() +"_copyright");
+		
+			if(image.getCopyrightText() != null){
+				startDiv(xmlConsumer);
+				XMLUtils.startElement(xmlConsumer, XHTML_NS, "event_description");
+				XMLUtils.data(xmlConsumer, image.getCopyrightText());
+				XMLUtils.endElement(xmlConsumer, XHTML_NS, "event_description");
+				XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
+			}
 			XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
 		}
 	}
