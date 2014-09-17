@@ -143,7 +143,7 @@
         <li>
             <xsl:apply-templates select="s:link"/>
             <div class="yui3-g">
-                <div class="yui3-u-1-4">resource type</div>
+                <div class="yui3-u-1-4"><xsl:value-of select="s:primaryType"/></div>
                 <div class="yui3-u-1-4">
                     <xsl:if test="s:description">click for more</xsl:if>
                 </div>

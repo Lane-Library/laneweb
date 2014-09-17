@@ -31,6 +31,7 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("RECORD_TYPE")).andReturn("type");
         expect(this.resultSet.getString("TITLE")).andReturn("title");
         expect(this.resultSet.getString("DESCRIPTION")).andReturn("description");
+        expect(this.resultSet.getString("PRIMARY_TYPE")).andReturn("primaryType");
         expect(this.resultSet.getInt("VERSION_ID")).andReturn(1);
         expect(this.resultSet.getString("GETPASSWORD")).andReturn("T");
         expect(this.resultSet.getInt("LINK_ID")).andReturn(1);

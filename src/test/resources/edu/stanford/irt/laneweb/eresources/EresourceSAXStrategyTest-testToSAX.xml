@@ -4,6 +4,7 @@
    <recordId>3</recordId>
    <recordType>recordType</recordType>
    <title>title</title>
+   <primaryType>primaryType</primaryType>
    <link type="normal">
       <label>label</label>
       <link-text>link-text</link-text>

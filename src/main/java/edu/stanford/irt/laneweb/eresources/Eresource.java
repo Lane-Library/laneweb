@@ -12,22 +12,25 @@ public class Eresource {
 
     private Collection<Link> links = new LinkedList<Link>();
 
+    private String primaryType;
+
     private int recordId;
 
     private String recordType;
 
     private int score;
 
-    private String title;
+    private String title;;
 
     public Eresource(final String description, final int id, final int recordId, final String recordType,
-            final int score, final String title) {
+            final int score, final String title, final String primaryType) {
         this.description = description;
         this.id = id;
         this.recordId = recordId;
         this.recordType = recordType;
         this.score = score;
         this.title = title;
+        this.primaryType = primaryType;
     }
 
     public String getDescription() {
@@ -40,6 +43,10 @@ public class Eresource {
 
     public Collection<Link> getLinks() {
         return Collections.unmodifiableCollection(this.links);
+    }
+
+    public String getPrimaryType() {
+        return this.primaryType;
     }
 
     public int getRecordId() {

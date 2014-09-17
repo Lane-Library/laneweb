@@ -27,6 +27,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_ID, Integer.toString(eresource.getRecordId()));
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_TYPE, eresource.getRecordType());
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, eresource.getTitle());
+            maybeCreateElement(xmlConsumer, "primaryType", eresource.getPrimaryType());
             maybeCreateElement(xmlConsumer, DESCRIPTION, eresource.getDescription());
             for (Link link : eresource.getLinks()) {
                 handleLink(xmlConsumer, link);
