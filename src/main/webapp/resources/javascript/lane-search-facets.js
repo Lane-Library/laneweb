@@ -74,7 +74,6 @@
                 SearchFacets.setCurrentResult(this);
                 this._facet.addClass('current');
                 this._container.set("innerHTML", this._content);
-                Result.addShowAbstract(this._container);
                 searchIndicator.hide();
             }
         };
@@ -94,18 +93,6 @@
             this._container.set("innerHTML", "");
             this._facet.removeClass('current');
         };
-        Result.addShowAbstract = function(container) {
-            if (Y.UA.ios && !container.one(".showAbstract")) {
-                //add showAbstract links in ios
-                container.all(".hvrTrig").each(function(node) {
-                    var label = (node.one(".pmid")) ? 'Abstract' : 'Description';
-                    node.one(".hvrTarg").insert("<li class='showAbstract'>[<a href='#'>Show " + label + "</a>]</li>", "before");
-                });
-            }
-        };
-        if (container) {
-            Result.addShowAbstract(container);
-        }
         if (elt) {
             facets = elt.all('.searchFacet');
             for (i = 0; i < facets.size(); i++) {

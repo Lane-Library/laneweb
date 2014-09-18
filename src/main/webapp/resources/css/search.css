@@ -76,37 +76,20 @@
 }
 
 /* abstract and description related styles*/
-/*.hoverTrigger class added by javascript (also removes .hvrTrig)*/
-.lwSearchResults .showAbstract {
-    margin-left:20px;
-}
-.hvrTrig:hover .showAbstract, .active .showAbstract {
-	display:none
-}
-.hvrTarg {
+.description {
     display:none;
     margin-top:5px;
     padding:2px;
     border-top:1px dotted #CCCCCC;
 }
-.hoverTrigger, .hoverTrigger a {
-    cursor:help;
-}
-.hvrTrig:hover, .hoverTrigger.active {
+#searchResults li.active {
     background-color: #F2F3ED;
     padding:4px;
     border:1px solid
 }
 
-.hvrTrig:hover .hvrTarg, .hoverTrigger.active .hvrTarg {
+li.active .description {
     display:block
-}
-
-.hoverTrigger.active {
-    cursor:default
-}
-.hoverTrigger.active a {
-    cursor:pointer
 }
 
 .sourceLink {

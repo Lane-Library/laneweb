@@ -3,10 +3,10 @@
     /**
      * A class that handles mouseover and mouseleave events on search and browse
      * resources that have abstracts or descriptions.
-     * @class HoverController
+     * @class ResultDescriptionController
      * @constructor
      */
-    var HoverController = function() {
+    var ResultDescriptionController = function() {
 
         //timer for activating hover state
         var timer = null,
@@ -72,14 +72,14 @@
         };
     },
 
-    //create a HoverController
-    hc = new HoverController();
+    //create a ResultDescriptionController
+    rdc = new ResultDescriptionController();
 
-    //delegate mouseenter events on class "hvrTrig" and "hoverTrigger"
+    //delegate click events on class "descriptionTrigger"
     if (Y.one("#searchResults")) {
-        Y.delegate("mouseenter", function(event) {
-            hc.setTarget(event.currentTarget);
-        }, "#searchResults", ".hvrTrig, .hoverTrigger");
+        Y.delegate("click", function(event) {
+            event.currentTarget.ancestor("li").addClass("active");
+        }, "#searchResults", ".descriptionTrigger");
     }
 
 })();
