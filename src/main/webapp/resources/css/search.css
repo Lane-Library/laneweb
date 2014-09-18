@@ -65,6 +65,7 @@
     transition-property: transform;
     transition-duration: 0.3s;
     transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
 }
 #searchFacets li.facetHeader.openIE:after {
     content: "v";
