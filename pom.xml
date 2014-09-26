@@ -226,6 +226,7 @@
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>
                                 <include>lane-search-facets-min.js</include>
+                                <include>lane-search-images-min.js</include>
                                 <include>lane-search-facet-counts-min.js</include>
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
@@ -322,7 +323,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -655,7 +656,7 @@
          <dependency>
         	<groupId>edu.stanford.irt.solr</groupId>
         	<artifactId>solr-image-repository</artifactId>
-  			<version>0.0.2</version>
+  			<version>0.0.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
