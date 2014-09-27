@@ -22,3 +22,4 @@ laneweb.sunetidcookiecodec.key=
 laneweb.sunetidhashkey=
 sun.net.client.defaultConnectTimeout=
 sun.net.client.defaultReadTimeout=
+laneweb.solr-url-imageSearch=http://irt-lane-stage.stanford.edu/solr/laneImage
