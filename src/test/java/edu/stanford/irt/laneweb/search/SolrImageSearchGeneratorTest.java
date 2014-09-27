@@ -50,7 +50,7 @@ public class SolrImageSearchGeneratorTest {
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=cc-&page=", result.get("path"));
-        assertEquals("query", result.get("searchTerm"));
+        assertEquals("query", result.get(Model.QUERY));
         assertEquals("CC: ND, NC, NC-ND, NC-SA, SA", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
@@ -68,7 +68,7 @@ public class SolrImageSearchGeneratorTest {
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=foo&page=", result.get("path"));
-        assertEquals("query", result.get("searchTerm"));
+        assertEquals("query", result.get(Model.QUERY));
         assertEquals("Public Domain & CC BY", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
@@ -86,7 +86,7 @@ public class SolrImageSearchGeneratorTest {
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=pmc-&page=", result.get("path"));
-        assertEquals("query", result.get("searchTerm"));
+        assertEquals("query", result.get(Model.QUERY));
         assertEquals("PMC - Article is CC", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
@@ -104,7 +104,7 @@ public class SolrImageSearchGeneratorTest {
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=rl-&page=", result.get("path"));
-        assertEquals("query", result.get("searchTerm"));
+        assertEquals("query", result.get(Model.QUERY));
         assertEquals("Rights Limited", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
@@ -134,7 +134,7 @@ public class SolrImageSearchGeneratorTest {
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
         assertEquals(52, pageable.getValue().getPageSize());
-        assertEquals(2, pageable.getValue().getPageNumber());
+        assertEquals(1, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }
 }
