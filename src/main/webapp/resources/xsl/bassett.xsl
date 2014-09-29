@@ -282,6 +282,29 @@
     </xsl:copy>
 </xsl:template>
 
+	<xsl:variable name="lower-page-class">
+		<xsl:choose>
+			<xsl:when test="$page-number =0">
+				disabled
+			</xsl:when>
+			<xsl:otherwise>
+				actived
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+
+	<xsl:template match="h:a[@id='first-page']/@class">
+		<xsl:attribute name="class">
+ 		<xsl:value-of select="$lower-page-class" />
+          </xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="h:a[@id='previous-page']/@class">
+		<xsl:attribute name="class">
+ 		<xsl:value-of select="$lower-page-class" />
+          </xsl:attribute>
+	</xsl:template>
+
 
 <xsl:template match="h:a[@id='first-page']/@href">
     <xsl:attribute name="href">
@@ -299,6 +322,31 @@
         </xsl:if>
     </xsl:attribute>
 </xsl:template>
+
+	<xsl:variable name="upper-page-class">
+		<xsl:choose>
+			<xsl:when test="$total-pages = $page-number">
+				disabled
+			</xsl:when>
+			<xsl:otherwise>
+				actived
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+
+
+	<xsl:template match="h:a[@id='next-page']/@class">
+		<xsl:attribute name="class">
+ 		<xsl:value-of select="$upper-page-class" />
+          </xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="h:a[@id='last-page']/@class">
+		<xsl:attribute name="class">
+ 			<xsl:value-of select="$upper-page-class" />
+        </xsl:attribute>
+	</xsl:template>
+
 
 <xsl:template match="h:a[@id='next-page']/@href">
     <xsl:attribute name="href">
