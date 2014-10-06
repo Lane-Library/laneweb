@@ -29,6 +29,8 @@
                             <xsl:text> results</xsl:text>
                         </xsl:otherwise>
                     </xsl:choose>
+                    <span id="searchInfo">&#160;<i class="fa fa-info-circle"></i></span>
+                    <span class="tooltips"><span id="searchInfoTooltip">Lane Search displays the top results from multiple sources then presents them in relevance rank order.</span></span>
                 </div>
                 <xsl:if test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
                     <div class="yui3-u-1-3">

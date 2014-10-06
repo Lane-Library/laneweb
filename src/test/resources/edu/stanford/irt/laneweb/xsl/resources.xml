@@ -6,7 +6,12 @@
    <body>
       <div xmlns:fx="http://lane.stanford.edu/fx" class="resourceListPagination">
          <div class="yui3-g">
-            <div class="yui3-u-5-12"> all 2 results</div>
+            <div class="yui3-u-5-12"> all 2 results<span id="searchInfo"> <i class="fa fa-info-circle"/>
+               </span>
+               <span class="tooltips">
+                  <span id="searchInfoTooltip">Lane Search displays the top results from multiple sources then presents them in relevance rank order.</span>
+               </span>
+            </div>
          </div>
       </div>
       <h3 class="eresources"> </h3>
