@@ -69,6 +69,11 @@
 #searchResults {
     padding-top:10px;
 }
+
+/*#searchInfo contains the font-awesome info icon*/
+#searchInfo {
+    cursor:default
+}
 .content .lwSearchResults li {
     margin-left:0;
     padding:5px;
