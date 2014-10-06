@@ -27,7 +27,7 @@ public class RequestParameterDataBinder implements DataBinder {
     private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CATEGORY, Model.CLASS_ID,
             Model.TIMEOUT, Model.SYNCHRONOUS, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER,
             Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SOURCEID, Model.SOURCE, Model.ID,
-            Model.TEXT };
+            Model.TEXT, Model.TARGET };
 
     /**
      * parameterArrayModelMap contains the mapping of parameter names to model

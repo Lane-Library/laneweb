@@ -117,6 +117,8 @@ public interface Model {
 
     String SYNCHRONOUS = "synchronous";
 
+    String TARGET = "target";
+
     String TEMPLATE = "template";
 
     String TEXT = "text";

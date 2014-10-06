@@ -3,7 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="h">
-
+    
     <!-- set the selected option of the search form -->
     <xsl:template match="h:option[parent::h:select[@id='searchSource']]">
         <xsl:copy>
@@ -20,9 +20,20 @@
     <xsl:template match="h:input[@name='q']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:if test="$query != ''">
+            <xsl:if test="$target != ''">
                 <xsl:attribute name="value">
-                    <xsl:value-of select="$query"/>
+                    <xsl:value-of select="$target"/>
+                </xsl:attribute>
+            </xsl:if>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="h:input[@name='target']">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:if test="$target != ''">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$target"/>
                 </xsl:attribute>
             </xsl:if>
         </xsl:copy>

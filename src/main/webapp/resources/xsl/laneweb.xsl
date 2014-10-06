@@ -58,6 +58,9 @@
     <!-- boolean: is app running in DR mode -->
     <xsl:param name="disaster-mode"/>
 
+    <!-- target parameter for shibboleth discovery service page -->
+    <xsl:param name="target"/>
+
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->
