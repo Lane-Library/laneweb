@@ -20,9 +20,9 @@
     <xsl:template match="h:input[@name='q']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:if test="$target != ''">
+            <xsl:if test="$query != ''">
                 <xsl:attribute name="value">
-                    <xsl:value-of select="$target"/>
+                    <xsl:value-of select="$query"/>
                 </xsl:attribute>
             </xsl:if>
         </xsl:copy>
