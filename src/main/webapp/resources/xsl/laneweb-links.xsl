@@ -22,6 +22,13 @@
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
+            <xsl:when test="starts-with(.,'/Shibboleth.sso/Login')">
+                <xsl:attribute name="href">
+                    <xsl:value-of select="."/>
+                    <xsl:text>&amp;target=</xsl:text>
+                     <xsl:value-of select="$target"/>
+                </xsl:attribute>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link" select="."/>

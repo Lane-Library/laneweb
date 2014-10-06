@@ -28,17 +28,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="h:input[@name='target']">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:if test="$target != ''">
-                <xsl:attribute name="value">
-                    <xsl:value-of select="$target"/>
-                </xsl:attribute>
-            </xsl:if>
-        </xsl:copy>
-    </xsl:template>
-
     <!-- add sourceid input to search form if sourceid param present -->
     <xsl:template match="h:fieldset[@id='searchFields' or parent::h:form[@class='breadcrumbForm']]">
         <xsl:copy>
