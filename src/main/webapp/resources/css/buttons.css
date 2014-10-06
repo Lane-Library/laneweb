@@ -239,7 +239,7 @@ http://lane.stanford.edu/samples/button-css.html
 	padding-right: 3em;
 }
 
-/* TODO: remove this, at the time I commented this out there was no class="bookmarklet" in the content
+/* TODO: remove this, at the time I commented this out there was no class="bookmarklet" in the content*/
 .bookmarklet {
 	background-position: -25px -529px;
 	background-color: transparent;
@@ -254,84 +254,4 @@ http://lane.stanford.edu/samples/button-css.html
 	cursor: pointer;
 	height: 36px;
 	width: 173px;
-}
-*/
-
-/*-------------------------------------------------------------------------------------------------------------------------------*/
-/*styles for  big gray gradient tabs*/
-#tabs-2012 {
-	display: inline-block;
-	font-weight: bold;
-	margin-top: 2em;
-	z-index: 5;
-	margin-bottom: -4px;
-}
-
-#tabs-2012 .active {
-	background-color: #ffffff;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadad4),
-		to(#ffffff) );
-	background: -moz-linear-gradient(#dadad4, #ffffff);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :       DXImageTransform.Microsoft.gradient (     
-		 startColorstr =   
-		   '#dadad4', endColorstr =         '#ffffff' );
-	border: 1px solid #dadad9;
-	border-bottom: 1px solid white;
-}
-
-#tabs-2012 li {
-	display: inline-block;
-	background-color: #edede5;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
-		to(#dadad4) );
-	background: -moz-linear-gradient(#fafbf8, #dadad4);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :               DXImageTransform.Microsoft.gradient (
-		      
-		     startColorstr =      
-		      '#fafbf8', endColorstr =             '#dadad4' );
-	border: 1px solid #dadad9;
-	margin-left: 0;
-	margin-right: 2px;
-	list-style: none outside none;
-	float: left;
-}
-
-#tabs-2012 li:hover {
-	background-color: #820000;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e82c2e),
-		to(#820000) );
-	background-image: -moz-linear-gradient(#e82c2e, #820000);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :               DXImageTransform.Microsoft.gradient (
-		      
-		     startColorstr =      
-		      '#e82c2e', endColorstr =               '#820000' );
-	border: 1px solid #660000;
-}
-
-#tabs-2012 li a {
-	color: #444444 !important; /*to overwrite the color of the text links*/
-	display: inline-block;
-	text-decoration: none;
-	border-bottom: none;
-	padding: 1.5em;
-	font-weight: bold;
-	position: relative;
-	vertical-align: middle;
-}
-
-#tabs-2012 li a:hover {
-	color: #ffffff !important; /*to overwrite the color of the text links*/
-}
-
-#step1,#step2,#step3,#step4,#step5 {
-	border: 1px solid #dadad9;
-}
-
-#step1 .module,#step2 .module,#step3 .module,#step4 .module,#step5 .module
-	{
-	margin: 2em;
-	z-index: 1;
 }

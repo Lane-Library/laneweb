@@ -172,17 +172,6 @@
             </map:transform>
             <map:serialize type="xml"/>
         </map:match>
-        <!-- remove after 2.2.20 release and index.html, samples/seminars.html content changes -->
-        <map:match pattern="seminars/type/*.xml" type="wildcard">
-            <map:generate type="seminars">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:transform type="saxon" src="resources/xsl/seminars.xsl">
-                <map:parameter name="number-of-items" value="2"/>
-                <map:parameter name="link-label" value="CME Calendar"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
     </map:pipeline>
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">

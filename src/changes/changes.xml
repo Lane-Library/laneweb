@@ -7,6 +7,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2014-09-29" version="2.2.21" description="2.2.21 bug fix release">
+            <action date="2014-09-29" dev="alainb" issue="99666" type="update">
+                pagination in the image search
+            </action>
+            <action date="2014-09-29" dev="olgary" issue="99387" type="update">
+                history.xml template change
+            </action>
+            <action date="2014-09-29" dev="olgary" issue="99291" type="update">
+                updated calendar li width: misc.css
+            </action>
+            <action date="2014-09-29" dev="olgary" issue="99455" type="update">
+                buttons.css - removed all styles for tabs-2012
+            </action>
+            <action date="2014-09-29" dev="ryanmax" issue="99582" type="update">
+                pdf  and word icons from fontawesome not showing up..
+            </action>
+            <action date="2014-09-29" dev="olgary" issue="99620" type="update">
+				update module.css - removed old classes                
+            </action>
+            <action date="2014-09-29" dev="olgary" issue="99630" type="update">
+                update laneclasses-list.xsl
+            </action>
+        </release>
         <release date="2014-09-15" version="2.2.20" description="2.2.20 bug fix release">
             <action date="2014-09-10" dev="olgary" issue="99334" type="update">
                 updated logos in Lane SoM footer

@@ -3,12 +3,14 @@ package edu.stanford.irt.laneweb.search;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<String,Object>>{
@@ -32,6 +34,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
 	
 	private final int TOTAL_ELEMENT_BY_PAGE = 52;
 	
+	private String source; 
 	
 	public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String,Object>> saxStrategy) {
 		super( saxStrategy);
@@ -42,12 +45,13 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
 	protected Map<String,Object> doSearch(String query) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Pageable page = new PageRequest(pageNumber, this.TOTAL_ELEMENT_BY_PAGE); 
-		result.put("page", service.findByTitleOrDescriptionFilterOnCopyright(query, this.copyright, page));
+		Page<Image> pageResult = service.findByTitleOrDescriptionFilterOnCopyright(query, this.copyright, page);
+		result.put("page", pageResult);
 		result.put("path", this.queryString);
-		result.put("searchTerm", this.searchTerm);
+		result.put( Model.QUERY, this.searchTerm);
 		result.put("tab", this.tab);
+		result.put(Model.SOURCE, this.source);
 		return result;
-		  
 	}
 
 	@Override
@@ -55,10 +59,10 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
 		super.setModel(model);
 		String page = ModelUtil.getString(model, Model.PAGE);
 		if(page != null){
-			this.pageNumber = Integer.valueOf(page);
-		}
+			this.pageNumber = Integer.valueOf( page) -1;
+		} 
 		searchTerm = ModelUtil.getString(model, Model.QUERY);
-		String source = ModelUtil.getString(model, Model.SOURCE);
+		source = ModelUtil.getString(model, Model.SOURCE);
 		this.queryString = "/search.html?q="+searchTerm+"&source="+source+"&page=";
 		if(source != null){
 			if(source.startsWith("cc-")){
