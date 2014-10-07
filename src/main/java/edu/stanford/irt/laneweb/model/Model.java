@@ -97,11 +97,11 @@ public interface Model {
 
     String REQUEST_URI = "request-uri";
 
-    String RETURN = "return";
-    
     String RESOURCE_ID = "rid";
 
     String RESOURCES = "resources";
+
+    String RETURN = "return";
 
     String SELECTION = "selection";
 
@@ -138,6 +138,8 @@ public interface Model {
     String URL = "url";
 
     String URL_ENCODED_QUERY = "url-encoded-query";
+
+    String USER = "user";
 
     String USER_AGENT = "user-agent";
 
