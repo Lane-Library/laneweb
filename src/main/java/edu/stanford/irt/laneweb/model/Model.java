@@ -97,6 +97,8 @@ public interface Model {
 
     String REQUEST_URI = "request-uri";
 
+    String RETURN = "return";
+    
     String RESOURCE_ID = "rid";
 
     String RESOURCES = "resources";
@@ -116,8 +118,6 @@ public interface Model {
     String SUNETID = "sunetid";
 
     String SYNCHRONOUS = "synchronous";
-
-    String TARGET = "target";
 
     String TEMPLATE = "template";
 

@@ -26,7 +26,7 @@
                 <xsl:attribute name="href">
                     <xsl:value-of select="."/>
                     <xsl:text>&amp;target=</xsl:text>
-                     <xsl:value-of select="$target"/>
+                     <xsl:value-of select="replace(substring-after($return,'target=') , '%3A', '%')"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:otherwise>

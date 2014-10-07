@@ -59,7 +59,7 @@
     <xsl:param name="disaster-mode"/>
 
     <!-- target parameter for shibboleth discovery service page -->
-    <xsl:param name="target"/>
+    <xsl:param name="return"/>
 
     <!-- ==========================  VARIABLES  ========================== -->
 
