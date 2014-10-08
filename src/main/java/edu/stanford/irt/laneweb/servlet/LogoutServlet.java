@@ -60,6 +60,6 @@ public class LogoutServlet extends HttpServlet {
         if (null != session) {
             session.invalidate();
         }
-        resp.sendRedirect(WEBAUTH_LOGOUT_URL);
+        resp.sendRedirect("https://"+ req.getLocalName() + WEBAUTH_LOGOUT_URL);
     }
 }
