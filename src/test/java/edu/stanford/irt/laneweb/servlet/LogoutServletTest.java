@@ -47,7 +47,7 @@ public class LogoutServletTest {
 		this.response.addCookie(isA(Cookie.class));
 		expectLastCall().times(4);
 		this.session.invalidate();
-		this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout");
+		this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
 		replay(this.request, this.response, this.session);
 		this.servlet.service(this.request, this.response);
 		verify(this.request, this.response, this.session);
@@ -64,7 +64,7 @@ public class LogoutServletTest {
 		expect(this.request.getCookies()).andReturn(null);
 		this.response.addCookie(isA(Cookie.class));
 		expectLastCall().times(4);
-		this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout");
+		this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
 		replay(this.request, this.response, this.session);
 		this.servlet.service(this.request, this.response);
 		verify(this.request, this.response, this.session);
@@ -83,11 +83,11 @@ public class LogoutServletTest {
 		this.response.addCookie(isA(Cookie.class));
 		expectLastCall().times(5);
 		this.session.invalidate();
-		this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout");
+		this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
 		replay(this.request, this.response, this.session);
 		this.servlet.service(this.request, this.response);
 		verify(this.request, this.response, this.session);
-	}
+	}	
 
 	@Test
 	public void testServicePersistentDenied() throws ServletException,
@@ -103,7 +103,7 @@ public class LogoutServletTest {
 		this.response.addCookie(isA(Cookie.class));
 		expectLastCall().times(4);
 		this.session.invalidate();
-		this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout");
+		this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
 		replay(this.request, this.response, this.session);
 		this.servlet.service(this.request, this.response);
 		verify(this.request, this.response, this.session);

@@ -21,7 +21,7 @@ public class LogoutServlet extends HttpServlet {
 
     private static final String WEBAUTH_COOKIE_NAME = "webauth_at";
 
-    private static final String WEBAUTH_LOGOUT_URL = "/Shibboleth.sso/Logout";
+    private static final String WEBAUTH_LOGOUT_URL = "/Shibboleth.sso/Logout?return=/logout.html";
 
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
