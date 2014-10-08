@@ -3,7 +3,7 @@
 	if(Y.one('#shibboleth-links')){
 	
 		var SHIBBOLETH_COOKIE_NAME = 'shibboleth-organization',
-			SLEEPING_TIME = 3000;
+			SLEEPING_TIME = 10000,
 		shibbolethAnchors = Y.all('#shibboleth-links a'),
 		id, value, expdate, href; 	
 	 	Y.on("click",function(event) {
