@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.user.User;
+import edu.stanford.irt.laneweb.user.UserAttribute;
 
 public class UserDataBinderTest {
 
@@ -59,7 +60,7 @@ public class UserDataBinderTest {
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn("user");
         expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
-        expect(this.parser2.parse(this.request)).andReturn(Collections.emptyMap());
+        expect(this.parser2.parse(this.request)).andReturn(Collections.<UserAttribute, String>emptyMap());
         this.session.setAttribute(eq(Model.USER), isA(User.class));
         replay(this.parser1, this.parser2, this.request, this.session, this.user);
         this.binder.bind(model, this.request);
@@ -86,7 +87,7 @@ public class UserDataBinderTest {
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn("user");
         expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn(null);
-        expect(this.parser1.parse(this.request)).andReturn(Collections.emptyMap());
+        expect(this.parser1.parse(this.request)).andReturn(Collections.<UserAttribute, String>emptyMap());
         this.session.setAttribute(eq(Model.USER), isA(User.class));
         replay(this.parser1, this.parser2, this.request, this.session, this.user);
         this.binder.bind(model, this.request);
