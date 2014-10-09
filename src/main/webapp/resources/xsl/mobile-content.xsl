@@ -43,6 +43,9 @@
     <!-- boolean: is app running in DR mode -->
     <xsl:param name="disaster-mode"/>
     
+    <!-- target parameter for shibboleth discovery service page -->
+    <xsl:param name="return"/>
+
     <xsl:variable name="path">
         <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
     </xsl:variable>
