@@ -45,7 +45,7 @@ public class LogoutServletTest {
         cookies[0] = new Cookie("test", "test");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
-        expectLastCall().times(4);
+        expectLastCall().times(3);
         this.session.invalidate();
         this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
         replay(this.request, this.response, this.session);
@@ -63,7 +63,7 @@ public class LogoutServletTest {
         expect(this.request.getSession(false)).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
         this.response.addCookie(isA(Cookie.class));
-        expectLastCall().times(4);
+        expectLastCall().times(3);
         this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
         replay(this.request, this.response, this.session);
         this.servlet.service(this.request, this.response);
@@ -81,7 +81,7 @@ public class LogoutServletTest {
         cookies[0] = new Cookie("persistent-preference", "test");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
-        expectLastCall().times(5);
+        expectLastCall().times(4);
         this.session.invalidate();
         this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
         replay(this.request, this.response, this.session);
@@ -101,7 +101,7 @@ public class LogoutServletTest {
         cookies[0] = new Cookie("persistent-preference", "denied");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
-        expectLastCall().times(4);
+        expectLastCall().times(3);
         this.session.invalidate();
         this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
         replay(this.request, this.response, this.session);

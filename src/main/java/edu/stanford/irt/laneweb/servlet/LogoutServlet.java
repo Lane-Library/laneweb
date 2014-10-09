@@ -19,9 +19,7 @@ public class LogoutServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String WEBAUTH_COOKIE_NAME = "webauth_at";
-
-    private static final String WEBAUTH_LOGOUT_URL = "/Shibboleth.sso/Logout?return=/logout.html";
+    private static final String LOGOUT_URL = "/Shibboleth.sso/Logout?return=/logout.html";
 
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
@@ -48,10 +46,6 @@ public class LogoutServlet extends HttpServlet {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         resp.addCookie(cookie);
-        Cookie webAuthCookie = new Cookie(WEBAUTH_COOKIE_NAME, null);
-        webAuthCookie.setPath("/");
-        webAuthCookie.setMaxAge(0);
-        resp.addCookie(webAuthCookie);
         Cookie ezproxyCookie = new Cookie(EZPROXY_COOKIE_NAME, null);
         ezproxyCookie.setPath("/");
         ezproxyCookie.setMaxAge(0);
@@ -60,6 +54,6 @@ public class LogoutServlet extends HttpServlet {
         if (null != session) {
             session.invalidate();
         }
-        resp.sendRedirect("https://"+ req.getLocalName() + WEBAUTH_LOGOUT_URL);
+        resp.sendRedirect("https://"+ req.getLocalName() + LOGOUT_URL);
     }
 }
