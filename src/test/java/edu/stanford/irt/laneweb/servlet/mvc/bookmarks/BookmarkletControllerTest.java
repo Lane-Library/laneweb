@@ -36,14 +36,14 @@ public class BookmarkletControllerTest {
 
     private HttpServletRequest request;
 
-    private UserIdAndTicketDataBinder sunetidBinder;
+    private UserIdAndTicketDataBinder useridBinder;
 
     @Before
     public void setUp() {
-        this.sunetidBinder = createMock(UserIdAndTicketDataBinder.class);
+        this.useridBinder = createMock(UserIdAndTicketDataBinder.class);
         this.dao = createMock(BookmarkDAO.class);
         this.bookmarkBinder = createMock(BookmarkDataBinder.class);
-        this.controller = new BookmarkletController(this.dao, this.bookmarkBinder, this.sunetidBinder);
+        this.controller = new BookmarkletController(this.dao, this.bookmarkBinder, this.useridBinder);
         this.request = createMock(HttpServletRequest.class);
         this.model = createMock(Model.class);
         this.bookmarks = new ArrayList<Object>();
@@ -52,17 +52,17 @@ public class BookmarkletControllerTest {
     @Test
     public void testAddBookmark() throws UnsupportedEncodingException {
         this.dao.saveLinks(edu.stanford.irt.laneweb.model.Model.USER_ID, this.bookmarks);
-        replay(this.dao, this.sunetidBinder, this.bookmarkBinder);
+        replay(this.dao, this.useridBinder, this.bookmarkBinder);
         assertEquals("redirect:url", this.controller.addBookmark(null, this.bookmarks, edu.stanford.irt.laneweb.model.Model.USER_ID, "url", "label"));
-        verify(this.dao, this.sunetidBinder, this.bookmarkBinder);
+        verify(this.dao, this.useridBinder, this.bookmarkBinder);
     }
 
     @Test
-    public void testAddBookmarkNullSunetid() throws UnsupportedEncodingException {
-        replay(this.dao, this.sunetidBinder, this.bookmarkBinder);
+    public void testAddBookmarkNullUserId() throws UnsupportedEncodingException {
+        replay(this.dao, this.useridBinder, this.bookmarkBinder);
         assertEquals("redirect:/secure/bookmarklet?url=url&label=label",
                 this.controller.addBookmark(null, this.bookmarks, null, "url", "label"));
-        verify(this.dao, this.sunetidBinder, this.bookmarkBinder);
+        verify(this.dao, this.useridBinder, this.bookmarkBinder);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class BookmarkletControllerTest {
     }
 
     @Test
-    public void testBindNoSunetid() {
+    public void testBindNoUserId() {
         Map<String, Object> map = new HashMap<String, Object>();
         expect(this.model.asMap()).andReturn(map).times(2);
         expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS)).andReturn(true);

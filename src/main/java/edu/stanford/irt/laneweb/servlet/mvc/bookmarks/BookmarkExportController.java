@@ -37,8 +37,8 @@ public class BookmarkExportController extends BookmarkController {
 
     @Autowired
     public BookmarkExportController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            UserIdAndTicketDataBinder sunetidTicketDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, sunetidTicketDataBinder);
+            UserIdAndTicketDataBinder useridTicketDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, useridTicketDataBinder);
     }
 
     /**

@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
  * This class will add three cookies the persistent-expired-date, persistent-preference and user. The user coolie will
- * have the sunetid, the userAgent and the expired date appended and encrypted. The persistent-preference have the
+ * have the userid, the userAgent and the expired date appended and encrypted. The persistent-preference have the
  * expired date minus 3 days only pl=true have to have the secure in the path but not the other But if pl=renew the
  * status of the user is looked up see it is active or not. Before to delete the cookie, we check if the
  * persistent-preference value is not equals to denied because if it is equals denied the persistent window will never
@@ -24,7 +24,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
-import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
+import edu.stanford.irt.laneweb.codec.UserIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.UserIdSource;
 
@@ -35,14 +35,14 @@ public class PersistentLoginController {
 
     private static final String UTF8 = "UTF-8";
 
-    private SunetIdCookieCodec codec;
+    private UserIdCookieCodec codec;
 
     private UserIdSource userIdSource;
 
     @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
     public View createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response)
             throws UnsupportedEncodingException {
-        checkSunetIdAndSetCookies(request, response);
+        checkUserIdAndSetCookies(request, response);
         return setView(url, response);
     }
 
@@ -57,9 +57,9 @@ public class PersistentLoginController {
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
     public View renewCookieAndRedirect(final String url, final HttpServletRequest request,
             final HttpServletResponse response) throws UnsupportedEncodingException {
-        Boolean isActiveSunetID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-        if (null != isActiveSunetID && isActiveSunetID) {
-            checkSunetIdAndSetCookies(request, response);
+        Boolean isActiveUserID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
+        if (null != isActiveUserID && isActiveUserID) {
+            checkUserIdAndSetCookies(request, response);
         } else {
             resetCookies(request, response);
         }
@@ -69,19 +69,19 @@ public class PersistentLoginController {
     }
 
     @Autowired
-    public void setSunetIdCookieCodec(final SunetIdCookieCodec codec) {
+    public void setUserIdCookieCodec(final UserIdCookieCodec codec) {
         this.codec = codec;
     }
 
     @Autowired
-    public void setSunetIdSource(final UserIdSource userIdSource) {
+    public void setUserIdSource(final UserIdSource userIdSource) {
         this.userIdSource = userIdSource;
     }
 
-    private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
-        String sunetid = this.userIdSource.getUserId(request);
-        if (null != sunetid) {
-            setCookies(request, response, sunetid);
+    private void checkUserIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
+        String userid = this.userIdSource.getUserId(request);
+        if (null != userid) {
+            setCookies(request, response, userid);
         } else {
             resetCookies(request, response);
         }
@@ -106,7 +106,7 @@ public class PersistentLoginController {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        cookie = new Cookie(SunetIdCookieCodec.LANE_COOKIE_NAME, null);
+        cookie = new Cookie(UserIdCookieCodec.LANE_COOKIE_NAME, null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
@@ -123,18 +123,18 @@ public class PersistentLoginController {
     /**
      * create and set the lane-user cookie
      *
-     * @param sunetid
+     * @param userid
      * @param request
      * @param response
      */
-    private void setCookies(final HttpServletRequest request, final HttpServletResponse response, final String sunetid) {
+    private void setCookies(final HttpServletRequest request, final HttpServletResponse response, final String userid) {
         String userAgent = request.getHeader("User-Agent");
-        if (null != userAgent && null != sunetid) {
+        if (null != userAgent && null != userid) {
             int twoWeeks = 3600 * 24 * 7 * 2;
             // gracePeriod is three days
             int gracePeriod = 3600 * 24 * 3;
-            PersistentLoginToken token = this.codec.createLoginToken(sunetid, userAgent.hashCode());
-            Cookie cookie = new Cookie(SunetIdCookieCodec.LANE_COOKIE_NAME, token.getEncryptedValue());
+            PersistentLoginToken token = this.codec.createLoginToken(userid, userAgent.hashCode());
+            Cookie cookie = new Cookie(UserIdCookieCodec.LANE_COOKIE_NAME, token.getEncryptedValue());
             cookie.setPath("/");
             // cookie is available for 2 weeks
             cookie.setMaxAge(twoWeeks);

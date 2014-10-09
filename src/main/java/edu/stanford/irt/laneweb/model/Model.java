@@ -115,8 +115,6 @@ public interface Model {
 
     String SUBSET = "subset";
 
-//    String SUNETID = "sunetid";
-
     String SYNCHRONOUS = "synchronous";
 
     String TEMPLATE = "template";

@@ -36,7 +36,7 @@
         <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.codec.SHCCodec"/>        
     </bean>
     
-    <bean name="org.slf4j.Logger/SunetIdSource" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+    <bean name="org.slf4j.Logger/UserIdSource" class="org.slf4j.LoggerFactory" factory-method="getLogger">
         <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.UserIdSource"/>        
     </bean>
     

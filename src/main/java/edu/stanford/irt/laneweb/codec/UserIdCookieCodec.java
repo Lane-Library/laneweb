@@ -16,7 +16,7 @@ import org.apache.commons.codec.binary.Base64;
 import edu.stanford.irt.laneweb.LanewebException;
 
 //TODO: remove code duplicated with SHCCodec
-public class SunetIdCookieCodec {
+public class UserIdCookieCodec {
 
     public static final String LANE_COOKIE_NAME = "user";
 
@@ -26,7 +26,7 @@ public class SunetIdCookieCodec {
 
     private SecretKey desKey;
 
-    public SunetIdCookieCodec(final String key) {
+    public UserIdCookieCodec(final String key) {
         try {
             // latest version of commons-codec (1.6) does not pad with 0 bytes
             // to 16, so do that here:
@@ -42,16 +42,16 @@ public class SunetIdCookieCodec {
         }
     }
 
-    public PersistentLoginToken createLoginToken(final String sunetId, final int userAgentHash) {
+    public PersistentLoginToken createLoginToken(final String userId, final int userAgentHash) {
         long now = System.currentTimeMillis();
         StringBuilder builder = new StringBuilder();
-        builder.append(sunetId);
+        builder.append(userId);
         builder.append(COOKIE_VALUE_SEPARATOR);
         builder.append(now);
         builder.append(COOKIE_VALUE_SEPARATOR);
         builder.append(userAgentHash);
         String encryptedValue = encrypt(builder.toString());
-        return new PersistentLoginToken(sunetId, now, userAgentHash, encryptedValue);
+        return new PersistentLoginToken(userId, now, userAgentHash, encryptedValue);
     }
 
     public PersistentLoginToken restoreLoginToken(final String encryptedValue) {

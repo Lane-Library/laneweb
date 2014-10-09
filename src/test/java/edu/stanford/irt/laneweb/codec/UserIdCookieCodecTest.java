@@ -8,23 +8,23 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class SunetIdCookieCodecTest {
+public class UserIdCookieCodecTest {
 
-    private SunetIdCookieCodec codec;
+    private UserIdCookieCodec codec;
 
     @Test
     public void createAndRestore() {
         PersistentLoginToken token = this.codec.createLoginToken("ditenus", 12345);
-        assertEquals(this.codec.restoreLoginToken(token.getEncryptedValue()).getSunetId(), "ditenus");
+        assertEquals(this.codec.restoreLoginToken(token.getEncryptedValue()).getUserId(), "ditenus");
     }
 
     @Before
     public void setUp() {
-        this.codec = new SunetIdCookieCodec("key");
+        this.codec = new UserIdCookieCodec("key");
     }
 
     @Test
-    public void testCreateLoginTokenNullSunetid() {
+    public void testCreateLoginTokenNullUserId() {
         try {
             this.codec.createLoginToken(null, 0);
             fail();

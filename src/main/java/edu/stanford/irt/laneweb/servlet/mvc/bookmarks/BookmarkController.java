@@ -16,18 +16,18 @@ public abstract class BookmarkController {
 
     private BookmarkDataBinder bookmarkDataBinder;
 
-    private UserIdAndTicketDataBinder sunetidTicketDataBinder;
+    private UserIdAndTicketDataBinder useridTicketDataBinder;
 
     public BookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
-            final UserIdAndTicketDataBinder sunetidTicketDataBinder) {
+            final UserIdAndTicketDataBinder useridTicketDataBinder) {
         this.bookmarkDAO = bookmarkDAO;
         this.bookmarkDataBinder = bookmarkDataBinder;
-        this.sunetidTicketDataBinder = sunetidTicketDataBinder;
+        this.useridTicketDataBinder = useridTicketDataBinder;
     }
 
     @ModelAttribute
     protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.sunetidTicketDataBinder.bind(model.asMap(), request);
+        this.useridTicketDataBinder.bind(model.asMap(), request);
         this.bookmarkDataBinder.bind(model.asMap(), request);
         // case 73359 need to put null value into model if not present.
         if (!model.containsAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS)) {
@@ -35,7 +35,7 @@ public abstract class BookmarkController {
         }
     }
 
-    protected void saveLinks(final String sunetid, final List<Object> links) {
-        this.bookmarkDAO.saveLinks(sunetid, links);
+    protected void saveLinks(final String userid, final List<Object> links) {
+        this.bookmarkDAO.saveLinks(userid, links);
     }
 }

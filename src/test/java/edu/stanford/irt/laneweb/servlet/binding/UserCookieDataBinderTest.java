@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
+import edu.stanford.irt.laneweb.codec.UserIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class UserCookieDataBinderTest {
@@ -49,7 +49,7 @@ public class UserCookieDataBinderTest {
         expect(this.cookie.getName()).andReturn(Model.PERSISTENT_LOGIN_EXPIRATION_DATE);
         expect(this.cookie.getValue()).andReturn(
                 Long.toString(System.currentTimeMillis() + (1000 * 60 * 60 * 24) + 100));
-        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(UserIdCookieCodec.LANE_COOKIE_NAME);
         expect(this.cookie.getValue()).andReturn("value");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
@@ -124,7 +124,7 @@ public class UserCookieDataBinderTest {
     @Test
     public void testBindUserCookie() {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
-        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(UserIdCookieCodec.LANE_COOKIE_NAME);
         expect(this.cookie.getValue()).andReturn("value");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);

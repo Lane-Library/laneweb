@@ -7,7 +7,7 @@
         class="edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder">
         <constructor-arg>
             <list>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/userid"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"/>
@@ -45,7 +45,7 @@
                 <value>source</value>
                 <value>url-encoded-query</value>
                 <!--<value>live-chat-available</value>
-                <value>sunetid</value>
+                <value>userid</value>
                 <value>bookmarks</value>
                 <value>name</value>
                 <value>ticket</value>-->
@@ -57,11 +57,11 @@
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"
         class="edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder"/>
 
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/userid"
         class="edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder">
         <constructor-arg ref="edu.stanford.irt.laneweb.servlet.UserIdSource"/>
         <constructor-arg value="%{laneweb.context.ezproxy-key}"/>
-        <constructor-arg value="%{laneweb.sunetidhashkey}"/>
+        <constructor-arg value="%{laneweb.useridhashkey}"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"

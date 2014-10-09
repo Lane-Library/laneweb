@@ -17,14 +17,14 @@ public class BookmarkDataBinder implements DataBinder {
 
     @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        String sunetid = ModelUtil.getString(model, Model.USER_ID);
-        if (sunetid != null) {
+        String userid = ModelUtil.getString(model, Model.USER_ID);
+        if (userid != null) {
             List<Object> bookmarks = null;
             HttpSession session = request.getSession();
             synchronized (session) {
                 bookmarks = (List<Object>) session.getAttribute(Model.BOOKMARKS);
                 if (bookmarks == null) {
-                    bookmarks = this.bookmarkDAO.getLinks(sunetid);
+                    bookmarks = this.bookmarkDAO.getLinks(userid);
                     if (bookmarks == null) {
                         bookmarks = new ArrayList<Object>();
                     }

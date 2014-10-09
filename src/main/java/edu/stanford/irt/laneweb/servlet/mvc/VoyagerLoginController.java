@@ -23,14 +23,14 @@ public class VoyagerLoginController {
     private LDAPDataBinder ldapDataBinder;
 
     @Autowired
-    private UserIdAndTicketDataBinder sunetidTicketDataBinder;
+    private UserIdAndTicketDataBinder useridTicketDataBinder;
 
     @Autowired
     private VoyagerLogin voyagerLogin;
 
     @ModelAttribute(Model.UNIVID)
     public void getUnivid(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.sunetidTicketDataBinder.bind(model.asMap(), request);
+        this.useridTicketDataBinder.bind(model.asMap(), request);
         this.ldapDataBinder.bind(model.asMap(), request);
     }
 

@@ -85,7 +85,7 @@ public class SHCLoginControllerTest {
     }
 
     @Test
-    public void testLoginSunetidNotActive() throws IOException {
+    public void testLoginUserIdNotActive() throws IOException {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.codec.decrypt(this.validTimestamp)).andReturn(this.validTimestamp);
         expect(this.codec.decrypt("emrid")).andReturn("emrid");
@@ -106,7 +106,7 @@ public class SHCLoginControllerTest {
     }
 
     @Test
-    public void testLoginSunetidNotInSession() throws IOException {
+    public void testLoginUserIdNotInSession() throws IOException {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.codec.decrypt(this.validTimestamp)).andReturn(this.validTimestamp);
         expect(this.codec.decrypt("emrid")).andReturn("emrid");

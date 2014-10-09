@@ -23,7 +23,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
 import edu.stanford.irt.laneweb.servlet.UserIdSource;
 
-public class SunetIdAndTicketDataBinderTest {
+public class UserIdAndTicketDataBinderTest {
 
     private UserIdAndTicketDataBinder dataBinder;
 
@@ -79,7 +79,7 @@ public class SunetIdAndTicketDataBinderTest {
     }
 
     @Test
-    public void testBindSunetidNull() {
+    public void testBindUserIdNull() {
         expect(this.userIdSource.getUserId(this.request)).andReturn(null);
         replay(this.request, this.session, this.userIdSource, this.ticket);
         this.dataBinder.bind(this.model, this.request);

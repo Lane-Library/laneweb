@@ -18,12 +18,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.view.RedirectView;
 
-import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
+import edu.stanford.irt.laneweb.codec.UserIdCookieCodec;
 import edu.stanford.irt.laneweb.servlet.UserIdSource;
 
 public class PersistentLoginControllerTest {
 
-    private SunetIdCookieCodec codec;
+    private UserIdCookieCodec codec;
 
     private PersistentLoginController persistenLoginController;
 
@@ -45,10 +45,10 @@ public class PersistentLoginControllerTest {
         this.session = createMock(HttpSession.class);
         this.response.addCookie(isA(Cookie.class));
         this.response.addCookie(isA(Cookie.class));
-        this.codec = new SunetIdCookieCodec("key");
-        this.persistenLoginController.setSunetIdCookieCodec(this.codec);
+        this.codec = new UserIdCookieCodec("key");
+        this.persistenLoginController.setUserIdCookieCodec(this.codec);
         this.userIdSource = createMock(UserIdSource.class);
-        this.persistenLoginController.setSunetIdSource(this.userIdSource);
+        this.persistenLoginController.setUserIdSource(this.userIdSource);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class PersistentLoginControllerTest {
     }
 
     @Test
-    public void testCreateCookieSunetIdNull() throws UnsupportedEncodingException {
+    public void testCreateCookieUserIdNull() throws UnsupportedEncodingException {
         expect(this.userIdSource.getUserId(this.request)).andReturn(null);
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, null);
@@ -127,7 +127,7 @@ public class PersistentLoginControllerTest {
     }
 
     @Test
-    public void testRenewCookieActiveSunetId() throws UnsupportedEncodingException {
+    public void testRenewCookieActiveUserId() throws UnsupportedEncodingException {
         expect(this.userIdSource.getUserId(this.request)).andReturn("alainb");
         expect(this.session.getAttribute("isActiveSunetID")).andReturn(true);
         expect(this.request.getSession()).andReturn(this.session);
@@ -141,7 +141,7 @@ public class PersistentLoginControllerTest {
     }
 
     @Test
-    public void testRenewCookieNotActiveSunetId() throws UnsupportedEncodingException {
+    public void testRenewCookieNotActiveUserId() throws UnsupportedEncodingException {
         expect(this.session.getAttribute("isActiveSunetID")).andReturn(false);
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, null);

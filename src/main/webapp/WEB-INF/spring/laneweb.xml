@@ -283,14 +283,14 @@
         <constructor-arg ref="org.slf4j.Logger/SHCCodec"/>
     </bean>
     
-    <bean class="edu.stanford.irt.laneweb.codec.SunetIdCookieCodec">
-        <constructor-arg value="%{laneweb.sunetidcookiecodec.key}"/>
+    <bean class="edu.stanford.irt.laneweb.codec.UserIdCookieCodec">
+        <constructor-arg value="%{laneweb.useridcookiecodec.key}"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.UserIdSource"
         class="edu.stanford.irt.laneweb.servlet.UserIdSource">
-        <constructor-arg ref="edu.stanford.irt.laneweb.codec.SunetIdCookieCodec"/>
-        <constructor-arg ref="org.slf4j.Logger/SunetIdSource"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.codec.UserIdCookieCodec"/>
+        <constructor-arg ref="org.slf4j.Logger/UserIdSource"/>
     </bean>
     
 </beans>

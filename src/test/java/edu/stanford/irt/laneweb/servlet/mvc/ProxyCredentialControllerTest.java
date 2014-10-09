@@ -50,7 +50,7 @@ public class ProxyCredentialControllerTest {
     }
 
     @Test
-    public void testBindNoSunetid() {
+    public void testBindNoUserId() {
         expect(this.model.asMap()).andReturn(Collections.<String, Object> emptyMap());
         expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(false);
         expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID, null)).andReturn(this.model);
@@ -84,7 +84,7 @@ public class ProxyCredentialControllerTest {
     }
 
     @Test
-    public void testProxyRedirectNullSunetid() {
+    public void testProxyRedirectNullUserId() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.binder);
         RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, null, this.ticket);

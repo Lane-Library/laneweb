@@ -36,7 +36,7 @@ public class UserIdAndTicketDataBinder implements DataBinder {
      * Adds the userid, ticket and hashed userid to the model.
      */
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        // the SunetidSource takes care of putting the userid into the session
+        // the UserIdSource takes care of putting the userid into the session
         // TODO: reconsider that as part of restricting access to the session to
         // this package.
         String userid = this.userIdSource.getUserId(request);

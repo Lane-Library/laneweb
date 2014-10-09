@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
-import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
+import edu.stanford.irt.laneweb.codec.UserIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
@@ -20,11 +20,11 @@ public class UserIdSource {
     /**
      * this codec codes and decodes the cookie value using userid, useragent and time of creation
      */
-    private final SunetIdCookieCodec codec;
+    private final UserIdCookieCodec codec;
 
     private final Logger log;
 
-    public UserIdSource(final SunetIdCookieCodec codec, final Logger log) {
+    public UserIdSource(final UserIdCookieCodec codec, final Logger log) {
         this.codec = codec;
         this.log = log;
     }
@@ -59,11 +59,11 @@ public class UserIdSource {
         String userid = null;
         if (cookies != null && userAgent != null) {
             for (Cookie cookie : cookies) {
-                if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                if (UserIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
                     try {
                         PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
                         if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
-                            userid = token.getSunetId();
+                            userid = token.getUserId();
                         }
                     } catch (LanewebException e) {
                         this.log.error("failed to decode userid from: " + cookie.getValue(), e);
