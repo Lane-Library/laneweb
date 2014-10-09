@@ -4,7 +4,6 @@
 	
 		var SHIBBOLETH_COOKIE_NAME = 'shibboleth-organization',
 			SLEEPING_TIME = 10000,
-			MESSAGE_CONTENT = "<h2>You will be a redirected</h2>",
 			
 		shibbolethAnchors = Y.all('#shibboleth-links a'),
 		id, value, expdate, href, message; 	
@@ -18,7 +17,7 @@
 		value = Y.Cookie.get(SHIBBOLETH_COOKIE_NAME);
 		if(value && Y.one('#'+value)){
 			message_contnair = Y.one('#message-contnair');
-			message_contnair.set('innerHTML', MESSAGE_CONTENT);
+			message_contnair.set('innerHTML', "<h2>You will be a redirected to " + value +" login in 10 seconds </h2>");
 			href = Y.one('#'+value).get('href');
 			setTimeout(function(){
 				window.location = href;
