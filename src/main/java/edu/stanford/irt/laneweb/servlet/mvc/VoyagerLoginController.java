@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
 @Controller
@@ -23,7 +23,7 @@ public class VoyagerLoginController {
     private LDAPDataBinder ldapDataBinder;
 
     @Autowired
-    private SunetIdAndTicketDataBinder sunetidTicketDataBinder;
+    private UserIdAndTicketDataBinder sunetidTicketDataBinder;
 
     @Autowired
     private VoyagerLogin voyagerLogin;

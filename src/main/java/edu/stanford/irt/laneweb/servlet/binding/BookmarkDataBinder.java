@@ -17,7 +17,7 @@ public class BookmarkDataBinder implements DataBinder {
 
     @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        String sunetid = ModelUtil.getString(model, Model.SUNETID);
+        String sunetid = ModelUtil.getString(model, Model.USER_ID);
         if (sunetid != null) {
             List<Object> bookmarks = null;
             HttpSession session = request.getSession();

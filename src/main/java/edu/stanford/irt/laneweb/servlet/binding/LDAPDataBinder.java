@@ -17,10 +17,11 @@ public class LDAPDataBinder implements DataBinder {
         this.ldapDataAccess = ldapDataAccess;
     }
 
-    //TODO: create an immutable user object with all this stuff and sunetid, etc.
+    //TODO: create an immutable user object with all this stuff and userid, etc.
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        String sunetid = (String) model.get(Model.SUNETID);
-        if (sunetid != null) {
+        String userid = (String) model.get(Model.USER_ID);
+        if (userid != null && userid.indexOf("@stanford.edu") > 0) {
+            String sunetid = userid.substring(0, userid.indexOf("@"));
             String name = null;
             String univid = null;
             Boolean isActive = null;

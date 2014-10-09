@@ -26,7 +26,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
+import edu.stanford.irt.laneweb.servlet.UserIdSource;
 
 @Controller
 public class PersistentLoginController {
@@ -37,7 +37,7 @@ public class PersistentLoginController {
 
     private SunetIdCookieCodec codec;
 
-    private SunetIdSource sunetIdSource;
+    private UserIdSource userIdSource;
 
     @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
     public View createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response)
@@ -50,7 +50,7 @@ public class PersistentLoginController {
     public View removeCookieAndView(final String url, final HttpServletRequest request,
             final HttpServletResponse response) throws UnsupportedEncodingException {
         removeCookies(request, response);
-        this.sunetIdSource.getSunetid(request);
+        this.userIdSource.getUserId(request);
         return setView(url, response);
     }
 
@@ -74,12 +74,12 @@ public class PersistentLoginController {
     }
 
     @Autowired
-    public void setSunetIdSource(final SunetIdSource sunetIdSource) {
-        this.sunetIdSource = sunetIdSource;
+    public void setSunetIdSource(final UserIdSource userIdSource) {
+        this.userIdSource = userIdSource;
     }
 
     private void checkSunetIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
-        String sunetid = this.sunetIdSource.getSunetid(request);
+        String sunetid = this.userIdSource.getUserId(request);
         if (null != sunetid) {
             setCookies(request, response, sunetid);
         } else {

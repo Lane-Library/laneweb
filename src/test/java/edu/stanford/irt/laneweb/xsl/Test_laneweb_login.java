@@ -83,7 +83,7 @@ public class Test_laneweb_login {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
         this.transformer.setParameter(Model.PROXY_LINKS, "false");
-        this.transformer.setParameter(Model.SUNETID, "sunetid");
+        this.transformer.setParameter(Model.USER_ID, "sunetid@stanford.edu");
         this.transformer.setParameter(Model.IPGROUP, "SOM");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("FalseSunetidSOM.xml"), sw.toString());
@@ -158,7 +158,7 @@ public class Test_laneweb_login {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
         this.transformer.setParameter(Model.PROXY_LINKS, "true");
-        this.transformer.setParameter(Model.SUNETID, "sunetid");
+        this.transformer.setParameter(Model.USER_ID, "sunetid@stanford.edu");
         this.transformer.setParameter(Model.IPGROUP, "SOM");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("TrueSunetidSOM.xml"), sw.toString());

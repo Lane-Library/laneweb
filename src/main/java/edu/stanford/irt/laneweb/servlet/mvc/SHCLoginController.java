@@ -29,7 +29,7 @@ public class SHCLoginController {
 
     private static final String ERROR_EMRID = "invalid or missing emrid: ";
 
-    private static final String ERROR_MISSING_SUNETID = "missing active sunetid for univid: ";
+    private static final String ERROR_MISSING_USER_ID = "missing active userid for univid: ";
 
     private static final String ERROR_TIMESTAMP = "invalid or missing timestamp: ";
 
@@ -58,7 +58,7 @@ public class SHCLoginController {
         StringBuilder errorMsg = new StringBuilder();
         StringBuilder url = new StringBuilder(TARGET_URL);
         url.append(URLEncoder.encode(emrid, "UTF-8"));
-        String sunetid = null;
+        String userid = null;
         String decryptedUnivid = null;
         if (!validateTimestamp(ts)) {
             errorMsg.append(ERROR_TIMESTAMP + ts);
@@ -72,12 +72,12 @@ public class SHCLoginController {
                     errorMsg.append(ERROR_UNIVID + univid);
                 } else {
                     decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
-                    sunetid = getSunetid(session, decryptedUnivid);
+                    userid = getUserId(session, decryptedUnivid);
                 }
             }
         }
-        if (sunetid == null && decryptedUnivid != null) {
-            errorMsg.append(ERROR_MISSING_SUNETID + decryptedUnivid);
+        if (userid == null && decryptedUnivid != null) {
+            errorMsg.append(ERROR_MISSING_USER_ID + decryptedUnivid);
         }
         if (errorMsg.length() > 0) {
             this.log.info(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
@@ -86,16 +86,16 @@ public class SHCLoginController {
         response.sendRedirect("https://" + request.getServerName() + request.getContextPath() + url.toString());
     }
 
-    private String getSunetid(final HttpSession session, final String univid) {
-        String sunetid = (String) session.getAttribute(Model.SUNETID);
-        if (sunetid == null) {
+    private String getUserId(final HttpSession session, final String univid) {
+        String userid = (String) session.getAttribute(Model.USER_ID);
+        if (userid == null) {
             LDAPData ldapData = this.ldapDataAccess.getLdapDataForUnivid(univid);
-            sunetid = (ldapData.isActive()) ? ldapData.getSunetId() : null;
-            if (sunetid != null) {
-                session.setAttribute(Model.SUNETID, sunetid);
+            userid = (ldapData.isActive()) ? ldapData.getSunetId() + "@stanford.edu" : null;
+            if (userid != null) {
+                session.setAttribute(Model.USER_ID, userid);
             }
         }
-        return sunetid;
+        return userid;
     }
 
     private boolean validateAndPopulateEmrid(final String emrid, final HttpSession session) {

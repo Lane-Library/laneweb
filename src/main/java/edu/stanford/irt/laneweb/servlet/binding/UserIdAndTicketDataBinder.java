@@ -11,36 +11,36 @@ import javax.servlet.http.HttpSession;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
+import edu.stanford.irt.laneweb.servlet.UserIdSource;
 
 /**
- * This DataBinder puts thing related to the sunetid into the model, including the sunetid, the ticket and the hashed
- * sunetid.
+ * This DataBinder puts thing related to the userid into the model, including the userid, the ticket and the hashed
+ * userid.
  */
-public class SunetIdAndTicketDataBinder implements DataBinder {
+public class UserIdAndTicketDataBinder implements DataBinder {
 
     private String ezproxyKey;
 
-    private String sunetidHashKey;
+    private String useridHashKey;
 
-    private SunetIdSource sunetIdSource;
+    private UserIdSource userIdSource;
 
-    public SunetIdAndTicketDataBinder(final SunetIdSource sunetIdSource, final String ezproxyKey,
-            final String sunetidHashKey) {
-        this.sunetIdSource = sunetIdSource;
+    public UserIdAndTicketDataBinder(final UserIdSource userIdSource, final String ezproxyKey,
+            final String useridHashKey) {
+        this.userIdSource = userIdSource;
         this.ezproxyKey = ezproxyKey;
-        this.sunetidHashKey = sunetidHashKey;
+        this.useridHashKey = useridHashKey;
     }
 
     /**
-     * Adds the sunetid, ticket and hashed sunetid to the model.
+     * Adds the userid, ticket and hashed userid to the model.
      */
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        // the SunetidSource takes care of putting the sunetid into the session
+        // the SunetidSource takes care of putting the userid into the session
         // TODO: reconsider that as part of restricting access to the session to
         // this package.
-        String sunetid = this.sunetIdSource.getSunetid(request);
-        if (sunetid != null) {
+        String userid = this.userIdSource.getUserId(request);
+        if (userid != null) {
             Ticket ticket = null;
             String auth = null;
             HttpSession session = request.getSession();
@@ -49,17 +49,17 @@ public class SunetIdAndTicketDataBinder implements DataBinder {
                 // valid.
                 ticket = (Ticket) session.getAttribute(Model.TICKET);
                 if (ticket == null || !ticket.isValid()) {
-                    ticket = new Ticket(sunetid, this.ezproxyKey);
+                    ticket = new Ticket(userid, this.ezproxyKey);
                     session.setAttribute(Model.TICKET, ticket);
                 }
-                // create a new hashed sunetid if it is not in the session
+                // create a new hashed userid if it is not in the session
                 auth = (String) session.getAttribute(Model.AUTH);
                 if (auth == null) {
-                    auth = getDigest(getDigest(this.sunetidHashKey + sunetid));
+                    auth = getDigest(getDigest(this.useridHashKey + userid));
                     session.setAttribute(Model.AUTH, auth);
                 }
             }
-            model.put(Model.SUNETID, sunetid);
+            model.put(Model.USER_ID, userid);
             model.put(Model.TICKET, ticket);
             model.put(Model.AUTH, auth);
         }

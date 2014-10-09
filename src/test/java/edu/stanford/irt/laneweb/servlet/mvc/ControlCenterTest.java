@@ -15,11 +15,11 @@ import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
 
 public class ControlCenterTest {
 
-    private SunetIdAndTicketDataBinder binder;
+    private UserIdAndTicketDataBinder binder;
 
     private ApplicationContext context;
 
@@ -31,7 +31,7 @@ public class ControlCenterTest {
 
     @Before
     public void setUp() throws Exception {
-        this.binder = createMock(SunetIdAndTicketDataBinder.class);
+        this.binder = createMock(UserIdAndTicketDataBinder.class);
         this.context = createMock(ApplicationContext.class);
         this.control = new ControlCenter(this.context, this.binder);
         this.model = createMock(Model.class);

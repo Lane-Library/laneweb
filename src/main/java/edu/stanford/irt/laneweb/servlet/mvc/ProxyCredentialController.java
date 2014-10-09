@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
 
 @Controller
 public class ProxyCredentialController {
@@ -21,10 +21,10 @@ public class ProxyCredentialController {
 
     private static final String TICKET_PARAM = "&ticket=";
 
-    private SunetIdAndTicketDataBinder binder;
+    private UserIdAndTicketDataBinder binder;
 
     @Autowired
-    public ProxyCredentialController(final SunetIdAndTicketDataBinder binder) {
+    public ProxyCredentialController(final UserIdAndTicketDataBinder binder) {
         this.binder = binder;
     }
 
@@ -32,17 +32,17 @@ public class ProxyCredentialController {
     public View proxyRedirect(
             final HttpServletRequest request,
             final RedirectAttributes attrs,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
         StringBuilder sb = new StringBuilder();
         String queryString = request.getQueryString();
         if (queryString == null) {
             throw new IllegalArgumentException("null queryString");
         }
-        if (sunetid == null || ticket == null) {
+        if (userid == null || ticket == null) {
             sb.append("/secure/apps/proxy/credential?").append(queryString);
         } else {
-            sb.append(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket).append('&').append(queryString);
+            sb.append(PROXY_URL_BASE).append(userid).append(TICKET_PARAM).append(ticket).append('&').append(queryString);
         }
         RedirectView view = new RedirectView(sb.toString(), true, true);
         view.setExpandUriTemplateVariables(false);
@@ -53,13 +53,13 @@ public class ProxyCredentialController {
     public View secureProxyRedirect(
             final HttpServletRequest request,
             final RedirectAttributes attrs,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
         String queryString = request.getQueryString();
         if (queryString == null) {
             throw new IllegalArgumentException("null queryString");
         }
-        String url = new StringBuilder(PROXY_URL_BASE).append(sunetid).append(TICKET_PARAM).append(ticket).append('&')
+        String url = new StringBuilder(PROXY_URL_BASE).append(userid).append(TICKET_PARAM).append(ticket).append('&')
                 .append(queryString).toString();
         RedirectView view = new RedirectView(url, true, true);
         view.setExpandUriTemplateVariables(false);
@@ -71,8 +71,8 @@ public class ProxyCredentialController {
         this.binder.bind(model.asMap(), request);
         // case 74082 /apps/proxy/credential causes an error, need to put null
         // values into the model
-        if (!model.containsAttribute(Model.SUNETID)) {
-            model.addAttribute(Model.SUNETID, null);
+        if (!model.containsAttribute(Model.USER_ID)) {
+            model.addAttribute(Model.USER_ID, null);
             model.addAttribute(Model.TICKET, null);
         }
     }

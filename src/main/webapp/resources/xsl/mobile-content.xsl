@@ -20,7 +20,7 @@
     
     <xsl:param name="proxy-links"/>
     
-    <xsl:param name="sunetid"/>
+    <xsl:param name="userid"/>
     
     <!-- LPCH and SHC don't require authentication for proxy server -->
     <xsl:param name="ipgroup"/>

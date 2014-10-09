@@ -287,8 +287,8 @@
         <constructor-arg value="%{laneweb.sunetidcookiecodec.key}"/>
     </bean>
     
-    <bean name="edu.stanford.irt.laneweb.servlet.SunetIdSource"
-        class="edu.stanford.irt.laneweb.servlet.SunetIdSource">
+    <bean name="edu.stanford.irt.laneweb.servlet.UserIdSource"
+        class="edu.stanford.irt.laneweb.servlet.UserIdSource">
         <constructor-arg ref="edu.stanford.irt.laneweb.codec.SunetIdCookieCodec"/>
         <constructor-arg ref="org.slf4j.Logger/SunetIdSource"/>
     </bean>

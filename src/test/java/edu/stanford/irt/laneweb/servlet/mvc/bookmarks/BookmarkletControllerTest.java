@@ -20,7 +20,7 @@ import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
 
 public class BookmarkletControllerTest {
 
@@ -36,11 +36,11 @@ public class BookmarkletControllerTest {
 
     private HttpServletRequest request;
 
-    private SunetIdAndTicketDataBinder sunetidBinder;
+    private UserIdAndTicketDataBinder sunetidBinder;
 
     @Before
     public void setUp() {
-        this.sunetidBinder = createMock(SunetIdAndTicketDataBinder.class);
+        this.sunetidBinder = createMock(UserIdAndTicketDataBinder.class);
         this.dao = createMock(BookmarkDAO.class);
         this.bookmarkBinder = createMock(BookmarkDataBinder.class);
         this.controller = new BookmarkletController(this.dao, this.bookmarkBinder, this.sunetidBinder);
@@ -51,9 +51,9 @@ public class BookmarkletControllerTest {
 
     @Test
     public void testAddBookmark() throws UnsupportedEncodingException {
-        this.dao.saveLinks("sunetid", this.bookmarks);
+        this.dao.saveLinks(edu.stanford.irt.laneweb.model.Model.USER_ID, this.bookmarks);
         replay(this.dao, this.sunetidBinder, this.bookmarkBinder);
-        assertEquals("redirect:url", this.controller.addBookmark(null, this.bookmarks, "sunetid", "url", "label"));
+        assertEquals("redirect:url", this.controller.addBookmark(null, this.bookmarks, edu.stanford.irt.laneweb.model.Model.USER_ID, "url", "label"));
         verify(this.dao, this.sunetidBinder, this.bookmarkBinder);
     }
 
@@ -69,8 +69,8 @@ public class BookmarkletControllerTest {
     public void testBind() {
         Map<String, Object> map = new HashMap<String, Object>();
         expect(this.model.asMap()).andReturn(map).times(2);
-        expect(this.model.containsAttribute("bookmarks")).andReturn(true);
-        expect(this.model.containsAttribute("sunetid")).andReturn(true);
+        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS)).andReturn(true);
+        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(true);
         replay(this.request, this.model);
         this.controller.bind(this.request, this.model);
         verify(this.request, this.model);
@@ -80,10 +80,10 @@ public class BookmarkletControllerTest {
     public void testBindNoSunetid() {
         Map<String, Object> map = new HashMap<String, Object>();
         expect(this.model.asMap()).andReturn(map).times(2);
-        expect(this.model.containsAttribute("bookmarks")).andReturn(true);
-        expect(this.model.containsAttribute("sunetid")).andReturn(false);
-        expect(this.model.addAttribute("sunetid", null)).andReturn(this.model);
-        expect(this.model.addAttribute("bookmarks", null)).andReturn(this.model);
+        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS)).andReturn(true);
+        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(false);
+        expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID, null)).andReturn(this.model);
+        expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS, null)).andReturn(this.model);
         replay(this.request, this.model);
         this.controller.bind(this.request, this.model);
         verify(this.request, this.model);

@@ -40,7 +40,7 @@ public class BookmarkDataBinderTest {
     public void setUp() throws Exception {
         this.binder = new BookmarkDataBinder();
         this.model = new HashMap<String, Object>();
-        this.model.put(Model.SUNETID, "ditenus");
+        this.model.put(Model.USER_ID, "ditenus");
         this.bookmarks = Collections.emptyList();
         this.dao = createMock(BookmarkDAO.class);
         this.binder.setBookmarkDAO(this.dao);

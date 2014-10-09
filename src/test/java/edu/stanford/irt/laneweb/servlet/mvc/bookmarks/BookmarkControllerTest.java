@@ -17,14 +17,14 @@ import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
 
 public class BookmarkControllerTest {
 
     private static final class TestBookmarkController extends BookmarkController {
 
         public TestBookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
-                final SunetIdAndTicketDataBinder sunetidTicketDataBinder) {
+                final UserIdAndTicketDataBinder sunetidTicketDataBinder) {
             super(bookmarkDAO, bookmarkDataBinder, sunetidTicketDataBinder);
         }
     }
@@ -39,13 +39,13 @@ public class BookmarkControllerTest {
 
     private HttpServletRequest request;
 
-    private SunetIdAndTicketDataBinder sunetidTicketDataBinder;
+    private UserIdAndTicketDataBinder sunetidTicketDataBinder;
 
     @Before
     public void setUp() throws Exception {
         this.bookmarkDAO = createMock(BookmarkDAO.class);
         this.bookmarkDataBinder = createMock(BookmarkDataBinder.class);
-        this.sunetidTicketDataBinder = createMock(SunetIdAndTicketDataBinder.class);
+        this.sunetidTicketDataBinder = createMock(UserIdAndTicketDataBinder.class);
         this.controller = new TestBookmarkController(this.bookmarkDAO, this.bookmarkDataBinder,
                 this.sunetidTicketDataBinder);
         this.request = createMock(HttpServletRequest.class);

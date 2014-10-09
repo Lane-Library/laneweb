@@ -17,11 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
 
 public class ProxyCredentialControllerTest {
 
-    private SunetIdAndTicketDataBinder binder;
+    private UserIdAndTicketDataBinder binder;
 
     private ProxyCredentialController controller;
 
@@ -33,7 +33,7 @@ public class ProxyCredentialControllerTest {
 
     @Before
     public void setUp() {
-        this.binder = createMock(SunetIdAndTicketDataBinder.class);
+        this.binder = createMock(UserIdAndTicketDataBinder.class);
         this.controller = new ProxyCredentialController(this.binder);
         this.request = createMock(HttpServletRequest.class);
         this.model = createMock(Model.class);
@@ -42,7 +42,7 @@ public class ProxyCredentialControllerTest {
     @Test
     public void testBind() {
         expect(this.model.asMap()).andReturn(Collections.<String, Object> emptyMap());
-        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID)).andReturn(true);
+        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(true);
         this.binder.bind(Collections.<String, Object> emptyMap(), this.request);
         replay(this.request, this.binder, this.model);
         this.controller.bind(this.request, this.model);
@@ -52,8 +52,8 @@ public class ProxyCredentialControllerTest {
     @Test
     public void testBindNoSunetid() {
         expect(this.model.asMap()).andReturn(Collections.<String, Object> emptyMap());
-        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID)).andReturn(false);
-        expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID, null)).andReturn(this.model);
+        expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(false);
+        expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID, null)).andReturn(this.model);
         expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.TICKET, null)).andReturn(this.model);
         this.binder.bind(Collections.<String, Object> emptyMap(), this.request);
         replay(this.request, this.binder, this.model);

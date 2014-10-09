@@ -63,7 +63,7 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.EMRID, "epic-emrid");
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
-        expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
+        expect(this.session.getAttribute(Model.USER_ID)).andReturn("ditenus");
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
         this.response.sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid");
@@ -93,13 +93,13 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.EMRID, "epic-emrid");
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
-        expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
+        expect(this.session.getAttribute(Model.USER_ID)).andReturn(null);
         expect(this.ldapDataAccess.getLdapDataForUnivid("univid")).andReturn(this.ldapData);
         expect(this.ldapData.isActive()).andReturn(Boolean.FALSE);
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
         this.response
-                .sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid&error=missing+active+sunetid+for+univid%3A+univid");
+                .sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid&error=missing+active+userid+for+univid%3A+univid");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
         this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
@@ -114,11 +114,11 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.EMRID, "epic-emrid");
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
-        expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
+        expect(this.session.getAttribute(Model.USER_ID)).andReturn(null);
         expect(this.ldapDataAccess.getLdapDataForUnivid("univid")).andReturn(this.ldapData);
         expect(this.ldapData.getSunetId()).andReturn("ditenus");
         expect(this.ldapData.isActive()).andReturn(Boolean.TRUE);
-        this.session.setAttribute(Model.SUNETID, "ditenus");
+        this.session.setAttribute(Model.USER_ID, "ditenus@stanford.edu");
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
         this.response.sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid");
@@ -137,7 +137,7 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.EMRID, "epic-emrid");
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
-        expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
+        expect(this.session.getAttribute(Model.USER_ID)).andReturn("ditenus");
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
         this.response.sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid");
@@ -156,7 +156,7 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.EMRID, "epic-emrid");
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
-        expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
+        expect(this.session.getAttribute(Model.USER_ID)).andReturn("ditenus");
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
         this.response.sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid");

@@ -24,7 +24,7 @@
 
     <xsl:param name="proxy-links"/>
 
-    <xsl:param name="sunetid"/>
+    <xsl:param name="userid"/>
     
     <xsl:param name="email"/>
 
@@ -157,7 +157,7 @@
             <xsl:when test=".='todays-hours'">
                 <xsl:value-of select="$todays-hours"/>
             </xsl:when>
-            <xsl:when test=".='bookmarks' and string-length($sunetid) &gt; 0">
+            <xsl:when test=".='bookmarks' and string-length($userid) &gt; 0">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://bookmarks/list.html">
                     <xi:fallback/>
                 </xi:include>

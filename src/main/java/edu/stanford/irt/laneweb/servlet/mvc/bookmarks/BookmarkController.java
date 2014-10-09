@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
 
 public abstract class BookmarkController {
 
@@ -16,10 +16,10 @@ public abstract class BookmarkController {
 
     private BookmarkDataBinder bookmarkDataBinder;
 
-    private SunetIdAndTicketDataBinder sunetidTicketDataBinder;
+    private UserIdAndTicketDataBinder sunetidTicketDataBinder;
 
     public BookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
-            final SunetIdAndTicketDataBinder sunetidTicketDataBinder) {
+            final UserIdAndTicketDataBinder sunetidTicketDataBinder) {
         this.bookmarkDAO = bookmarkDAO;
         this.bookmarkDataBinder = bookmarkDataBinder;
         this.sunetidTicketDataBinder = sunetidTicketDataBinder;

@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
 
 @Controller
 @RequestMapping(value = "/bookmarks", method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded")
@@ -24,17 +24,17 @@ public class HTMLBookmarkController extends BookmarkController {
 
     @Autowired
     public HTMLBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            SunetIdAndTicketDataBinder sunetidTicketDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, sunetidTicketDataBinder);
+            UserIdAndTicketDataBinder useridTicketDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, useridTicketDataBinder);
     }
 
     @RequestMapping(params = "action=add")
     public String addBookmark(
             final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid) {
+            @ModelAttribute(Model.USER_ID) final String userid) {
         bookmarks.add(0, new Bookmark("", ""));
-        saveLinks(sunetid, bookmarks);
+        saveLinks(userid, bookmarks);
         return editBookmark(redirectAttrs, 0);
     }
 
@@ -47,10 +47,10 @@ public class HTMLBookmarkController extends BookmarkController {
     public String deleteBookmark(
             final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final int i) {
         bookmarks.remove(i);
-        saveLinks(sunetid, bookmarks);
+        saveLinks(userid, bookmarks);
         return this.redirectURI;
     }
 
@@ -65,12 +65,12 @@ public class HTMLBookmarkController extends BookmarkController {
     public String saveBookmark(
             final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final int i,
             @RequestParam final String label,
             @RequestParam final String url) {
         bookmarks.set(i, new Bookmark(label, url));
-        saveLinks(sunetid, bookmarks);
+        saveLinks(userid, bookmarks);
         return this.redirectURI;
     }
 }

@@ -115,7 +115,7 @@ public interface Model {
 
     String SUBSET = "subset";
 
-    String SUNETID = "sunetid";
+//    String SUNETID = "sunetid";
 
     String SYNCHRONOUS = "synchronous";
 
@@ -144,6 +144,8 @@ public interface Model {
     String USER_AGENT = "user-agent";
 
     String USER_COOKIE = "user-cookie";
+
+    String USER_ID = "userid";
 
     String VERSION = "version";
 }

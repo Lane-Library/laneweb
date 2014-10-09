@@ -61,7 +61,7 @@ public class CacheableSelectorTest {
 
     @Test
     public void testSunetid() {
-        this.model.put(Model.SUNETID, "ditenus");
+        this.model.put(Model.USER_ID, "ditenus");
         assertFalse(this.selector.select(null, this.model, null));
     }
 }

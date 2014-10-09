@@ -21,11 +21,11 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
+import edu.stanford.irt.laneweb.servlet.UserIdSource;
 
 public class SunetIdAndTicketDataBinderTest {
 
-    private SunetIdAndTicketDataBinder dataBinder;
+    private UserIdAndTicketDataBinder dataBinder;
 
     private Map<String, Object> model;
 
@@ -33,14 +33,14 @@ public class SunetIdAndTicketDataBinderTest {
 
     private HttpSession session;
 
-    private SunetIdSource sunetIdSource;
+    private UserIdSource userIdSource;
 
     private Ticket ticket;
 
     @Before
     public void setUp() throws Exception {
-        this.sunetIdSource = createMock(SunetIdSource.class);
-        this.dataBinder = new SunetIdAndTicketDataBinder(this.sunetIdSource, "foo", "key");
+        this.userIdSource = createMock(UserIdSource.class);
+        this.dataBinder = new UserIdAndTicketDataBinder(this.userIdSource, "foo", "key");
         this.model = new HashMap<String, Object>();
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
@@ -49,74 +49,74 @@ public class SunetIdAndTicketDataBinderTest {
 
     @Test
     public void testBind() {
-        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("ditenus");
+        expect(this.userIdSource.getUserId(this.request)).andReturn("ditenus");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.TICKET)).andReturn(this.ticket);
         expect(this.ticket.isValid()).andReturn(true);
         expect(this.session.getAttribute(Model.AUTH)).andReturn("auth");
-        replay(this.request, this.session, this.sunetIdSource, this.ticket);
+        replay(this.request, this.session, this.userIdSource, this.ticket);
         this.dataBinder.bind(this.model, this.request);
-        assertEquals("ditenus", this.model.get(Model.SUNETID));
+        assertEquals("ditenus", this.model.get(Model.USER_ID));
         assertEquals(this.ticket, this.model.get(Model.TICKET));
         assertEquals("auth", this.model.get(Model.AUTH));
-        verify(this.request, this.session, this.sunetIdSource, this.ticket);
+        verify(this.request, this.session, this.userIdSource, this.ticket);
     }
 
     @Test
     public void testBindAuthNull() {
-        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("ditenus");
+        expect(this.userIdSource.getUserId(this.request)).andReturn("ditenus");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.TICKET)).andReturn(this.ticket);
         expect(this.ticket.isValid()).andReturn(true);
         expect(this.session.getAttribute(Model.AUTH)).andReturn(null);
         this.session.setAttribute(Model.AUTH, "027204c8263a79b02a8cf231399073ed");
-        replay(this.request, this.session, this.sunetIdSource, this.ticket);
+        replay(this.request, this.session, this.userIdSource, this.ticket);
         this.dataBinder.bind(this.model, this.request);
-        assertEquals("ditenus", this.model.get(Model.SUNETID));
+        assertEquals("ditenus", this.model.get(Model.USER_ID));
         assertEquals(this.ticket, this.model.get(Model.TICKET));
         assertEquals("027204c8263a79b02a8cf231399073ed", this.model.get(Model.AUTH));
-        verify(this.request, this.session, this.sunetIdSource, this.ticket);
+        verify(this.request, this.session, this.userIdSource, this.ticket);
     }
 
     @Test
     public void testBindSunetidNull() {
-        expect(this.sunetIdSource.getSunetid(this.request)).andReturn(null);
-        replay(this.request, this.session, this.sunetIdSource, this.ticket);
+        expect(this.userIdSource.getUserId(this.request)).andReturn(null);
+        replay(this.request, this.session, this.userIdSource, this.ticket);
         this.dataBinder.bind(this.model, this.request);
-        assertNull(this.model.get(Model.SUNETID));
+        assertNull(this.model.get(Model.USER_ID));
         assertNull(this.model.get(Model.TICKET));
         assertNull(this.model.get(Model.AUTH));
-        verify(this.request, this.session, this.sunetIdSource, this.ticket);
+        verify(this.request, this.session, this.userIdSource, this.ticket);
     }
 
     @Test
     public void testBindTicketInvalid() {
-        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("ditenus");
+        expect(this.userIdSource.getUserId(this.request)).andReturn("ditenus");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.TICKET)).andReturn(this.ticket);
         expect(this.ticket.isValid()).andReturn(false);
         this.session.setAttribute(eq(Model.TICKET), isA(Ticket.class));
         expect(this.session.getAttribute(Model.AUTH)).andReturn("auth");
-        replay(this.request, this.session, this.sunetIdSource, this.ticket);
+        replay(this.request, this.session, this.userIdSource, this.ticket);
         this.dataBinder.bind(this.model, this.request);
-        assertEquals("ditenus", this.model.get(Model.SUNETID));
+        assertEquals("ditenus", this.model.get(Model.USER_ID));
         assertNotNull(this.model.get(Model.TICKET));
         assertEquals("auth", this.model.get(Model.AUTH));
-        verify(this.request, this.session, this.sunetIdSource, this.ticket);
+        verify(this.request, this.session, this.userIdSource, this.ticket);
     }
 
     @Test
     public void testBindTicketNull() {
-        expect(this.sunetIdSource.getSunetid(this.request)).andReturn("ditenus");
+        expect(this.userIdSource.getUserId(this.request)).andReturn("ditenus");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.TICKET)).andReturn(null);
         this.session.setAttribute(eq(Model.TICKET), isA(Ticket.class));
         expect(this.session.getAttribute(Model.AUTH)).andReturn("auth");
-        replay(this.request, this.session, this.sunetIdSource, this.ticket);
+        replay(this.request, this.session, this.userIdSource, this.ticket);
         this.dataBinder.bind(this.model, this.request);
-        assertEquals("ditenus", this.model.get(Model.SUNETID));
+        assertEquals("ditenus", this.model.get(Model.USER_ID));
         assertNotNull(this.model.get(Model.TICKET));
         assertEquals("auth", this.model.get(Model.AUTH));
-        verify(this.request, this.session, this.sunetIdSource, this.ticket);
+        verify(this.request, this.session, this.userIdSource, this.ticket);
     }
 }

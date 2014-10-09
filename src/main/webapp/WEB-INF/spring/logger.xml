@@ -37,7 +37,7 @@
     </bean>
     
     <bean name="org.slf4j.Logger/SunetIdSource" class="org.slf4j.LoggerFactory" factory-method="getLogger">
-        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.SunetIdSource"/>        
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.UserIdSource"/>        
     </bean>
     
     <bean name="org.slf4j.Logger/SHCLoginController" class="org.slf4j.LoggerFactory" factory-method="getLogger">

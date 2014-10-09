@@ -5,7 +5,7 @@
 
     <xsl:param name="url"/>
     <xsl:param name="entry-url"/>
-    <xsl:param name="sunetid"/>
+    <xsl:param name="userid"/>
     <xsl:param name="ticket"/>
     <xsl:param name="title"/>
     <xsl:param name="proxy-links"/>
@@ -41,10 +41,10 @@
                <xsl:text>
             var url ='</xsl:text>
                <xsl:choose>
-                   <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
+                   <xsl:when test="$proxy-links = 'true' and $userid != '' and $ticket != ''">
                        <xsl:value-of select="$proxy-url"/>
                        <xsl:text>user=</xsl:text>
-                       <xsl:value-of select="$sunetid"/>
+                       <xsl:value-of select="$userid"/>
                        <xsl:text>&amp;ticket=</xsl:text>
                        <xsl:value-of select="$ticket"/>
                        <xsl:text>&amp;url=</xsl:text>
@@ -58,10 +58,10 @@
          </xsl:text>
              <xsl:text>var entryUrl ='</xsl:text>
                <xsl:choose>
-                   <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
+                   <xsl:when test="$proxy-links = 'true' and $userid != '' and $ticket != ''">
                        <xsl:value-of select="$proxy-url"/>
                        <xsl:text>user=</xsl:text>
-                       <xsl:value-of select="$sunetid"/>
+                       <xsl:value-of select="$userid"/>
                        <xsl:text>&amp;ticket=</xsl:text>
                        <xsl:value-of select="$ticket"/>
                        <xsl:text>&amp;url=</xsl:text>
