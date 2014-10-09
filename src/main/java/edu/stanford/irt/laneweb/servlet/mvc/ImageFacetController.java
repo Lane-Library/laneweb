@@ -18,17 +18,17 @@ import edu.stanford.irt.solr.service.SolrImageService;
 @Controller
 public class ImageFacetController {
 
-	@Autowired
-	@Qualifier("edu.stanford.irt.solr.service")
-	private SolrImageService service;
+    @Autowired
+    @Qualifier("edu.stanford.irt.solr.service")
+    private SolrImageService service;
 
-	@RequestMapping(value = "/facet/images/{facetOn}", produces = "application/json")
-	@ResponseBody
-	public List<FacetFieldEntry> getImageFacet(String query, @PathVariable String facetOn) {
-		FacetPage<Image> facetPage = service.facetOnCopyrightAndWebsiteId(query);
-		Page<FacetFieldEntry> page = facetPage.getFacetResultPage(facetOn);
-		return page.getContent();
-	}
-	
+    @RequestMapping(value = "/facet/images/{facetOn}", produces = "application/json")
+    @ResponseBody
+    public List<FacetFieldEntry> getImageFacet(String query, @PathVariable String facetOn) {
+        FacetPage<Image> facetPage = service.facetOnCopyrightAndWebsiteId(query);
+        Page<FacetFieldEntry> page = facetPage.getFacetResultPage(facetOn);
+        return page.getContent();
+    }
+    
 
 }
