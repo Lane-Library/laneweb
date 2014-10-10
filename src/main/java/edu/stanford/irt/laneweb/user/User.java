@@ -1,56 +1,73 @@
 package edu.stanford.irt.laneweb.user;
 
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class User {
 
     private String email;
 
-    private String fullId;
+    private String hashedId;
+
+    private String hashKey;
 
     private String id;
 
-    private String identityProvider;
-
-    private boolean isActive;
-
     private String name;
 
-    private String univId;
+    public User(final String id, final String name, final String email, final String hashKey) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.hashKey = hashKey;
+    }
 
-    public User(final Map<UserAttribute, String> userAttributes) {
-        this.id = userAttributes.get(UserAttribute.ID);
-        this.identityProvider = userAttributes.get(UserAttribute.PROVIDER);
-        this.isActive = Boolean.getBoolean(userAttributes.get(UserAttribute.PROVIDER));
-        this.name = userAttributes.get(UserAttribute.NAME);
-        this.univId = userAttributes.get(UserAttribute.UNIV_ID);
+    @Override
+    public boolean equals(final Object other) {
+        if (other instanceof User) {
+            return this.id.equals(((User) other).id);
+        }
+        return false;
     }
 
     public String getEmail() {
         return this.email;
     }
 
-    public String getFullId() {
-        return this.fullId;
+    public String getHashedId() {
+        if (this.hashedId == null) {
+            createHashedId(this.hashKey + this.id);
+        }
+        return this.hashedId;
     }
 
     public String getId() {
         return this.id;
     }
 
-    public String getIdentityProvider() {
-        return this.identityProvider;
-    }
-
     public String getName() {
         return this.name;
     }
 
-    public String getUnivId() {
-        return this.univId;
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
     }
 
-    public boolean isActive() {
-        return this.isActive;
+    private void createHashedId(final String buffer) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            byte[] bytes = digest.digest(buffer.getBytes(StandardCharsets.UTF_8));
+            for (byte element : bytes) {
+                sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            throw new LanewebException(e);
+        }
+        this.hashedId = sb.toString();
     }
 }

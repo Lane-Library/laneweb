@@ -14,15 +14,15 @@ import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
 public class LoginBookmarkController extends BookmarkController {
 
     @Autowired
     public LoginBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            UserIdAndTicketDataBinder useridTicketDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, useridTicketDataBinder);
+            UserDataBinder userDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
     }
 
     @RequestMapping(value = "/secure/addBookmark")

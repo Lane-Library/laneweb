@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
 @Controller
@@ -23,14 +23,14 @@ public class VoyagerLoginController {
     private LDAPDataBinder ldapDataBinder;
 
     @Autowired
-    private UserIdAndTicketDataBinder useridTicketDataBinder;
+    private UserDataBinder userBinder;
 
     @Autowired
     private VoyagerLogin voyagerLogin;
 
     @ModelAttribute(Model.UNIVID)
     public void getUnivid(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.useridTicketDataBinder.bind(model.asMap(), request);
+        this.userBinder.bind(model.asMap(), request);
         this.ldapDataBinder.bind(model.asMap(), request);
     }
 

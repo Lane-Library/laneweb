@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-// TODO: remove code duplicated with UserIdCookieCodec
+// TODO: remove code duplicated with UserCookieCodec
 public class SHCCodec {
 
     private Cipher cipher;

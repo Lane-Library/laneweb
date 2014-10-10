@@ -19,14 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
-import edu.stanford.irt.laneweb.codec.UserIdCookieCodec;
+import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.UserIdSource;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
+import edu.stanford.irt.laneweb.user.User;
 
 @Controller
 public class PersistentLoginController {
@@ -35,53 +37,33 @@ public class PersistentLoginController {
 
     private static final String UTF8 = "UTF-8";
 
-    private UserIdCookieCodec codec;
+    private UserCookieCodec codec;
 
-    private UserIdSource userIdSource;
+    private UserDataBinder binder;
+    
+    @Autowired
+    public PersistentLoginController(UserDataBinder binder, UserCookieCodec codec) {
+        this.binder = binder;
+        this.codec = codec;
+    }
 
     @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
-    public View createCookie(final String url, final HttpServletRequest request, final HttpServletResponse response)
+    public View createCookie(@ModelAttribute(Model.USER) User user, final String url, final HttpServletRequest request, final HttpServletResponse response)
             throws UnsupportedEncodingException {
-        checkUserIdAndSetCookies(request, response);
+        checkUserIdAndSetCookies(user, request, response);
         return setView(url, response);
     }
 
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
-    public View removeCookieAndView(final String url, final HttpServletRequest request,
+    public View removeCookieAndView(@ModelAttribute(Model.USER) User user, final String url, final HttpServletRequest request,
             final HttpServletResponse response) throws UnsupportedEncodingException {
         removeCookies(request, response);
-        this.userIdSource.getUserId(request);
         return setView(url, response);
     }
 
-    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
-    public View renewCookieAndRedirect(final String url, final HttpServletRequest request,
-            final HttpServletResponse response) throws UnsupportedEncodingException {
-        Boolean isActiveUserID = (Boolean) request.getSession().getAttribute(Model.IS_ACTIVE_SUNETID);
-        if (null != isActiveUserID && isActiveUserID) {
-            checkUserIdAndSetCookies(request, response);
-        } else {
-            resetCookies(request, response);
-        }
-        RedirectView view = new RedirectView(URLDecoder.decode(url, UTF8), true, true);
-        view.setExpandUriTemplateVariables(false);
-        return view;
-    }
-
-    @Autowired
-    public void setUserIdCookieCodec(final UserIdCookieCodec codec) {
-        this.codec = codec;
-    }
-
-    @Autowired
-    public void setUserIdSource(final UserIdSource userIdSource) {
-        this.userIdSource = userIdSource;
-    }
-
-    private void checkUserIdAndSetCookies(final HttpServletRequest request, final HttpServletResponse response) {
-        String userid = this.userIdSource.getUserId(request);
-        if (null != userid) {
-            setCookies(request, response, userid);
+    private void checkUserIdAndSetCookies(final User user, final HttpServletRequest request, final HttpServletResponse response) { 
+        if (null != user) {
+            setCookies(request, response, user);
         } else {
             resetCookies(request, response);
         }
@@ -106,7 +88,7 @@ public class PersistentLoginController {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        cookie = new Cookie(UserIdCookieCodec.LANE_COOKIE_NAME, null);
+        cookie = new Cookie(UserCookieCodec.LANE_COOKIE_NAME, null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
@@ -123,18 +105,18 @@ public class PersistentLoginController {
     /**
      * create and set the lane-user cookie
      *
-     * @param userid
+     * @param user
      * @param request
      * @param response
      */
-    private void setCookies(final HttpServletRequest request, final HttpServletResponse response, final String userid) {
+    private void setCookies(final HttpServletRequest request, final HttpServletResponse response, final User user) {
         String userAgent = request.getHeader("User-Agent");
-        if (null != userAgent && null != userid) {
+        if (null != userAgent && null != user) {
             int twoWeeks = 3600 * 24 * 7 * 2;
             // gracePeriod is three days
             int gracePeriod = 3600 * 24 * 3;
-            PersistentLoginToken token = this.codec.createLoginToken(userid, userAgent.hashCode());
-            Cookie cookie = new Cookie(UserIdCookieCodec.LANE_COOKIE_NAME, token.getEncryptedValue());
+            PersistentLoginToken token = this.codec.createLoginToken(user, userAgent.hashCode());
+            Cookie cookie = new Cookie(UserCookieCodec.LANE_COOKIE_NAME, token.getEncryptedValue());
             cookie.setPath("/");
             // cookie is available for 2 weeks
             cookie.setMaxAge(twoWeeks);
@@ -165,5 +147,13 @@ public class PersistentLoginController {
         }
         view.setExpandUriTemplateVariables(false);
         return view;
+    }
+
+    @ModelAttribute
+    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.binder.bind(model.asMap(), request);
+        if (!model.containsAttribute(Model.USER)) {
+            model.addAttribute(Model.USER, null);
+        }
     }
 }

@@ -12,7 +12,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
 public class ProxyCredentialController {
@@ -21,11 +22,14 @@ public class ProxyCredentialController {
 
     private static final String TICKET_PARAM = "&ticket=";
 
-    private UserIdAndTicketDataBinder binder;
+    private TicketDataBinder ticketBinder;
+    
+    private UserDataBinder userBinder;
 
     @Autowired
-    public ProxyCredentialController(final UserIdAndTicketDataBinder binder) {
-        this.binder = binder;
+    public ProxyCredentialController(final TicketDataBinder ticketBinder, final UserDataBinder userBinder) {
+        this.ticketBinder = ticketBinder;
+        this.userBinder = userBinder;
     }
 
     @RequestMapping(value = "/apps/proxy/credential")
@@ -68,7 +72,8 @@ public class ProxyCredentialController {
 
     @ModelAttribute
     protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.binder.bind(model.asMap(), request);
+        this.userBinder.bind(model.asMap(), request);
+        this.ticketBinder.bind(model.asMap(), request);
         // case 74082 /apps/proxy/credential causes an error, need to put null
         // values into the model
         if (!model.containsAttribute(Model.USER_ID)) {

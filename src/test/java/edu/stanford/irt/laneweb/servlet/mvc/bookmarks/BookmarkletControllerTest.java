@@ -20,7 +20,7 @@ import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 public class BookmarkletControllerTest {
 
@@ -36,14 +36,14 @@ public class BookmarkletControllerTest {
 
     private HttpServletRequest request;
 
-    private UserIdAndTicketDataBinder useridBinder;
+    private UserDataBinder userBinder;
 
     @Before
     public void setUp() {
-        this.useridBinder = createMock(UserIdAndTicketDataBinder.class);
+        this.userBinder = createMock(UserDataBinder.class);
         this.dao = createMock(BookmarkDAO.class);
         this.bookmarkBinder = createMock(BookmarkDataBinder.class);
-        this.controller = new BookmarkletController(this.dao, this.bookmarkBinder, this.useridBinder);
+        this.controller = new BookmarkletController(this.dao, this.bookmarkBinder, this.userBinder);
         this.request = createMock(HttpServletRequest.class);
         this.model = createMock(Model.class);
         this.bookmarks = new ArrayList<Object>();
@@ -52,17 +52,17 @@ public class BookmarkletControllerTest {
     @Test
     public void testAddBookmark() throws UnsupportedEncodingException {
         this.dao.saveLinks(edu.stanford.irt.laneweb.model.Model.USER_ID, this.bookmarks);
-        replay(this.dao, this.useridBinder, this.bookmarkBinder);
+        replay(this.dao, this.userBinder, this.bookmarkBinder);
         assertEquals("redirect:url", this.controller.addBookmark(null, this.bookmarks, edu.stanford.irt.laneweb.model.Model.USER_ID, "url", "label"));
-        verify(this.dao, this.useridBinder, this.bookmarkBinder);
+        verify(this.dao, this.userBinder, this.bookmarkBinder);
     }
 
     @Test
     public void testAddBookmarkNullUserId() throws UnsupportedEncodingException {
-        replay(this.dao, this.useridBinder, this.bookmarkBinder);
+        replay(this.dao, this.userBinder, this.bookmarkBinder);
         assertEquals("redirect:/secure/bookmarklet?url=url&label=label",
                 this.controller.addBookmark(null, this.bookmarks, null, "url", "label"));
-        verify(this.dao, this.useridBinder, this.bookmarkBinder);
+        verify(this.dao, this.userBinder, this.bookmarkBinder);
     }
 
     @Test

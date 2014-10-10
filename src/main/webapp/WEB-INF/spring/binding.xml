@@ -7,9 +7,9 @@
         class="edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder">
         <constructor-arg>
             <list>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/userid"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"/>
@@ -54,14 +54,19 @@
         <constructor-arg ref="com.fasterxml.jackson.databind.ObjectMapper"/>
     </bean>
     
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user"
+        class="edu.stanford.irt.laneweb.servlet.binding.UserDataBinder">
+        <constructor-arg ref="edu.stanford.irt.laneweb.codec.UserCookieCodec"/>
+        <constructor-arg ref="org.slf4j.Logger/UserDataBinder"/>
+        <constructor-arg value="%{laneweb.useridhashkey}"/>
+    </bean>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"
         class="edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder"/>
 
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/userid"
-        class="edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder">
-        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.UserIdSource"/>
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket"
+        class="edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder">
         <constructor-arg value="%{laneweb.context.ezproxy-key}"/>
-        <constructor-arg value="%{laneweb.useridhashkey}"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"
@@ -186,6 +191,11 @@
                     value="bassettLargerView"/>
             </map>
         </constructor-arg>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.codec.UserCookieCodec"
+        class="edu.stanford.irt.laneweb.codec.UserCookieCodec">
+        <constructor-arg value="%{laneweb.useridcookiecodec.key}"/>
     </bean>
 
 </beans>

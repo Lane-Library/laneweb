@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import edu.stanford.irt.laneweb.codec.UserIdCookieCodec;
+import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.mvc.PersistentLoginController;
 
@@ -23,7 +23,7 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        Cookie userCookie = new Cookie(UserIdCookieCodec.LANE_COOKIE_NAME, null);
+        Cookie userCookie = new Cookie(UserCookieCodec.LANE_COOKIE_NAME, null);
         userCookie.setPath("/");
         userCookie.setMaxAge(0);
         resp.addCookie(userCookie);

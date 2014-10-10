@@ -15,11 +15,11 @@ import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
-import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 public class ControlCenterTest {
 
-    private UserIdAndTicketDataBinder binder;
+    private UserDataBinder binder;
 
     private ApplicationContext context;
 
@@ -31,7 +31,7 @@ public class ControlCenterTest {
 
     @Before
     public void setUp() throws Exception {
-        this.binder = createMock(UserIdAndTicketDataBinder.class);
+        this.binder = createMock(UserDataBinder.class);
         this.context = createMock(ApplicationContext.class);
         this.control = new ControlCenter(this.context, this.binder);
         this.model = createMock(Model.class);
@@ -43,7 +43,7 @@ public class ControlCenterTest {
         expect(this.context.getBean(EMailSender.class)).andReturn(this.sender);
         this.sender.addSpamIP("127.0.0.1");
         replay(this.context, this.sender);
-        assertEquals("127.0.0.1", this.control.addSpamIP("127.0.0.1", "ceyates"));
+        assertEquals("127.0.0.1", this.control.addSpamIP("127.0.0.1", "ceyates@stanford.edu"));
         verify(this.context, this.sender);
     }
 
@@ -61,7 +61,7 @@ public class ControlCenterTest {
         expect(this.context.getBean(EMailSender.class)).andReturn(this.sender);
         this.sender.addSpamReferrer("referrer");
         replay(this.context, this.sender);
-        assertEquals("referrer", this.control.addSpamReferrer("referrer", "ceyates"));
+        assertEquals("referrer", this.control.addSpamReferrer("referrer", "ceyates@stanford.edu"));
         verify(this.context, this.sender);
     }
 
@@ -88,7 +88,7 @@ public class ControlCenterTest {
         expect(this.context.getBean(EMailSender.class)).andReturn(this.sender);
         expect(this.sender.removeSpamIP("127.0.0.1")).andReturn(true);
         replay(this.context, this.sender);
-        assertTrue(this.control.removeSpamIP("127.0.0.1", "ceyates"));
+        assertTrue(this.control.removeSpamIP("127.0.0.1", "ceyates@stanford.edu"));
         verify(this.context, this.sender);
     }
 
@@ -106,7 +106,7 @@ public class ControlCenterTest {
         expect(this.context.getBean(EMailSender.class)).andReturn(this.sender);
         expect(this.sender.removeSpamReferrer("referrer")).andReturn(true);
         replay(this.context, this.sender);
-        assertTrue(this.control.removeSpamReferrer("referrer", "ceyates"));
+        assertTrue(this.control.removeSpamReferrer("referrer", "ceyates@stanford.edu"));
         verify(this.context, this.sender);
     }
 

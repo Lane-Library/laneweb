@@ -22,7 +22,7 @@ import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 // TODO: revisit conscious decision not to synchronize list operations.
 @Controller
@@ -33,8 +33,8 @@ public class JSONBookmarkController extends BookmarkController {
 
     @Autowired
     public JSONBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            UserIdAndTicketDataBinder useridTicketDataBinder, RemoteProxyIPDataBinder proxyLinksDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, useridTicketDataBinder);
+            UserDataBinder userDataBinder, RemoteProxyIPDataBinder proxyLinksDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
         this.proxyLinksDataBinder = proxyLinksDataBinder;
     }
 

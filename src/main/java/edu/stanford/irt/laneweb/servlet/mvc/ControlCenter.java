@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
-import edu.stanford.irt.laneweb.servlet.binding.UserIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
 @RequestMapping(value="/control-center")
@@ -22,11 +22,11 @@ public class ControlCenter {
 
     private ApplicationContext context;
 
-    private UserIdAndTicketDataBinder useridBinder;
+    private UserDataBinder userBinder;
 
     @Autowired
-    public ControlCenter(final ApplicationContext context, final UserIdAndTicketDataBinder useridBinder) {
-        this.useridBinder = useridBinder;
+    public ControlCenter(final ApplicationContext context, final UserDataBinder userBinder) {
+        this.userBinder = userBinder;
         this.context = context;
     }
 
@@ -66,11 +66,11 @@ public class ControlCenter {
     
     @ModelAttribute
     protected void getParameters(final HttpServletRequest request, final Model model) {
-        this.useridBinder.bind(model.asMap(), request);
+        this.userBinder.bind(model.asMap(), request);
     }
 
     private void checkAccess(final String userid) {
-        if (!"ceyates".equals(userid)) {
+        if (!"ceyates@stanford.edu".equals(userid)) {
             throw new LanewebException(userid + " not authorized");
         }
     }
