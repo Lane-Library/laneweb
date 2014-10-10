@@ -39,7 +39,6 @@ public class UserDataBinder implements DataBinder {
                 if (user == null) {
                     user = getUserFromCookie(request);
                 }
-                user = new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", this.userIdHashKey);
                 if (user != null) {
                     session.setAttribute(Model.USER, user);
                 }
