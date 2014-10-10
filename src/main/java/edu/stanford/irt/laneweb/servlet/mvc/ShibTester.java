@@ -15,7 +15,7 @@ public class ShibTester {
 
     @RequestMapping(value = { "/secure/header-test", "/shib-secure/header-test" })
     public void testUrl(final HttpServletRequest request, final HttpServletResponse response) {
-        StringBuffer result = new StringBuffer("\n\n\n<!--\n\nRequest Headers:\n\n");
+        StringBuilder result = new StringBuilder("\n\n\n<!--\n\nRequest Headers:\n\n");
         Enumeration<String> headers = request.getHeaderNames();
         while (headers.hasMoreElements()) {
             String headerName = headers.nextElement();
@@ -40,8 +40,10 @@ public class ShibTester {
         Enumeration<String> attributes = request.getAttributeNames();
         while (attributes.hasMoreElements()) {
             String attributeName = attributes.nextElement();
-            result.append(attributeName).append("-->").append(request.getAttribute(attributeName));
-            result.append("\n");
+            if (attributeName.indexOf("org.spring") != 0) {
+                result.append(attributeName).append("-->").append(request.getAttribute(attributeName));
+                result.append("\n");
+            }
         }
         response.setHeader("Content-Type", "text/plain");
         try {
