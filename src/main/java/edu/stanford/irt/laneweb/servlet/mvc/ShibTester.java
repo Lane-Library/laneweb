@@ -36,6 +36,9 @@ public class ShibTester {
         result.append("uid --> ");
         result.append(request.getAttribute("uid"));
         result.append("\n");
+        result.append("mail --> ");
+        result.append(request.getAttribute("mail"));
+        result.append("\n");
         result.append("\n");
         Enumeration<String> attributes = request.getAttributeNames();
         while (attributes.hasMoreElements()) {
