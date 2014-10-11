@@ -8,6 +8,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class User {
 
+    private static final String AT_STANFORD_EDU = "@stanford.edu";
+
     private String email;
 
     private String hashedId;
@@ -19,7 +21,13 @@ public class User {
     private String name;
 
     public User(final String id, final String name, final String email, final String hashKey) {
-        this.id = id;
+        // remove @stanford.edu if present for backwards compatibility
+        int index = id.indexOf(AT_STANFORD_EDU);
+        if (index > -1) {
+            this.id = id.substring(0, index);
+        } else {
+            this.id = id;
+        }
         this.name = name;
         this.email = email;
         this.hashKey = hashKey;
