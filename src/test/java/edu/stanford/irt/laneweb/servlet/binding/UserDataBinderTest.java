@@ -84,7 +84,7 @@ public class UserDataBinderTest {
         assertEquals("id", model.get(Model.USER_ID));
         assertEquals("mail", model.get(Model.EMAIL));
         assertEquals("name", model.get(Model.NAME));
-        assertEquals("9d2f62b90efdf2293d7138e1ce176547", model.get(Model.AUTH));
+        assertEquals("911531548a5ea68cf13f5e0506367956", model.get(Model.AUTH));
         assertNull(model.get(Model.IS_ACTIVE_SUNETID));
         verify(this.request, this.session, this.user, this.ldap);
     }
@@ -94,17 +94,17 @@ public class UserDataBinderTest {
         Map<String, Object> model = new HashMap<String, Object>();
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
-        expect(this.request.getRemoteUser()).andReturn("id");
+        expect(this.request.getRemoteUser()).andReturn("id@name.org");
         expect(this.request.getAttribute("displayName")).andReturn(null);
         expect(this.request.getAttribute("mail")).andReturn(null);
         this.session.setAttribute(eq(Model.USER), isA(User.class));
         replay(this.request, this.session, this.user, this.ldap);
         this.binder.bind(model, this.request);
         assertNotNull(model.get(Model.USER));
-        assertEquals("id", model.get(Model.USER_ID));
+        assertEquals("id@name.org", model.get(Model.USER_ID));
         assertNull(model.get(Model.EMAIL));
         assertNull(model.get(Model.NAME));
-        assertEquals("9d2f62b90efdf2293d7138e1ce176547", model.get(Model.AUTH));
+        assertEquals("911531548a5ea68cf13f5e0506367956@name.org", model.get(Model.AUTH));
         assertNull(model.get(Model.IS_ACTIVE_SUNETID));
         verify(this.request, this.session, this.user, this.ldap);
     }
