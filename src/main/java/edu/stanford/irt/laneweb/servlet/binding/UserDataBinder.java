@@ -12,20 +12,27 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.user.LDAPData;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 import edu.stanford.irt.laneweb.user.User;
+import edu.stanford.irt.laneweb.user.User.Status;
 
 public class UserDataBinder implements DataBinder {
 
     private UserCookieCodec codec;
 
+    private LDAPDataAccess ldap;
+
     private Logger log;
 
     private String userIdHashKey;
 
-    public UserDataBinder(final UserCookieCodec codec, final Logger log, final String userIdHashKey) {
+    public UserDataBinder(final UserCookieCodec codec, final Logger log, final String userIdHashKey,
+            final LDAPDataAccess ldap) {
         this.codec = codec;
         this.log = log;
         this.userIdHashKey = userIdHashKey;
+        this.ldap = ldap;
     }
 
     @Override
@@ -56,6 +63,16 @@ public class UserDataBinder implements DataBinder {
             if (name != null) {
                 model.put(Model.NAME, name);
             }
+            if (user.isStanfordUser()) {
+                Boolean isActive = null;
+                Status status = user.getStatus();
+                if (status == Status.INACTIVE) {
+                    isActive = Boolean.FALSE;
+                } else {
+                    isActive = Boolean.TRUE;
+                }
+                model.put(Model.IS_ACTIVE_SUNETID, isActive);
+            }
         }
     }
 
@@ -71,6 +88,7 @@ public class UserDataBinder implements DataBinder {
                                 .restoreLoginToken(cookie.getValue(), this.userIdHashKey);
                         if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
                             user = token.getUser();
+                            user = getUserWithStatus(user);
                         }
                     } catch (LanewebException e) {
                         this.log.error("failed to decode userid from: " + cookie.getValue(), e);
@@ -88,8 +106,18 @@ public class UserDataBinder implements DataBinder {
         if (userId != null) {
             String name = (String) request.getAttribute("displayName");
             String email = (String) request.getAttribute("mail");
-            user = new User(userId, name, email, this.userIdHashKey);
+            user = getUserWithStatus(new User(userId, name, email, this.userIdHashKey));
         }
         return user;
+    }
+
+    private User getUserWithStatus(final User user) {
+        if (user.isStanfordUser()) {
+            LDAPData data = this.ldap.getLdapDataForSunetid(user.getId());
+            Status status = data.isActive() ? Status.ACTIVE : Status.INACTIVE;
+            return new User(user.getId() + "@stanford.edu", user.getName(), user.getEmail(), this.userIdHashKey, status);
+        } else {
+            return user;
+        }
     }
 }

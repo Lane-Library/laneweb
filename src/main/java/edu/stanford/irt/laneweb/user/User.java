@@ -8,6 +8,10 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class User {
 
+    public enum Status {
+        ACTIVE, INACTIVE, UNKNOWN
+    }
+
     private static final String AT_STANFORD_EDU = "@stanford.edu";
 
     private String email;
@@ -18,19 +22,30 @@ public class User {
 
     private String id;
 
+    private boolean isStanfordUser;
+
     private String name;
 
+    private Status status;
+
     public User(final String id, final String name, final String email, final String hashKey) {
+        this(id, name, email, hashKey, Status.UNKNOWN);
+    }
+
+    public User(final String id, final String name, final String email, final String hashKey, final Status status) {
         // remove @stanford.edu if present for backwards compatibility
         int index = id.indexOf(AT_STANFORD_EDU);
         if (index > -1) {
             this.id = id.substring(0, index);
+            this.isStanfordUser = true;
         } else {
             this.id = id;
+            this.isStanfordUser = false;
         }
         this.name = name;
         this.email = email;
         this.hashKey = hashKey;
+        this.status = status;
     }
 
     @Override
@@ -60,9 +75,17 @@ public class User {
         return this.name;
     }
 
+    public Status getStatus() {
+        return this.status;
+    }
+
     @Override
     public int hashCode() {
         return this.id.hashCode();
+    }
+
+    public boolean isStanfordUser() {
+        return this.isStanfordUser;
     }
 
     private void createHashedId(final String buffer) {

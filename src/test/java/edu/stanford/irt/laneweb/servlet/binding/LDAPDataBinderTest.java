@@ -16,9 +16,9 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.ldap.LDAPData;
-import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.user.LDAPData;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 public class LDAPDataBinderTest {
 

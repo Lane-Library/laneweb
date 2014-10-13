@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
- * This class will add three cookies the persistent-expired-date, persistent-preference and user. The user coolie will
- * have the userid, the userAgent and the expired date appended and encrypted. The persistent-preference have the
+ * This class will add three cookies the persistent-expired-date, persistent-preference and user. The user cookie will
+ * have the userid, name, email , the userAgent and the expired date appended and encrypted. The persistent-preference have the
  * expired date minus 3 days only pl=true have to have the secure in the path but not the other But if pl=renew the
  * status of the user is looked up see it is active or not. Before to delete the cookie, we check if the
  * persistent-preference value is not equals to denied because if it is equals denied the persistent window will never
@@ -11,7 +11,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +28,7 @@ import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.user.User;
+import edu.stanford.irt.laneweb.user.User.Status;
 
 @Controller
 public class PersistentLoginController {
@@ -37,31 +37,53 @@ public class PersistentLoginController {
 
     private static final String UTF8 = "UTF-8";
 
+    private UserDataBinder binder;
+
     private UserCookieCodec codec;
 
-    private UserDataBinder binder;
-    
     @Autowired
-    public PersistentLoginController(UserDataBinder binder, UserCookieCodec codec) {
+    public PersistentLoginController(final UserDataBinder binder, final UserCookieCodec codec) {
         this.binder = binder;
         this.codec = codec;
     }
 
     @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
-    public View createCookie(@ModelAttribute(Model.USER) User user, final String url, final HttpServletRequest request, final HttpServletResponse response)
-            throws UnsupportedEncodingException {
+    public View createCookie(@ModelAttribute(Model.USER) final User user, final String url,
+            final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException {
         checkUserIdAndSetCookies(user, request, response);
         return setView(url, response);
     }
 
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
-    public View removeCookieAndView(@ModelAttribute(Model.USER) User user, final String url, final HttpServletRequest request,
-            final HttpServletResponse response) throws UnsupportedEncodingException {
+    public View removeCookieAndView(@ModelAttribute(Model.USER) final User user, final String url,
+            final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException {
         removeCookies(request, response);
         return setView(url, response);
     }
 
-    private void checkUserIdAndSetCookies(final User user, final HttpServletRequest request, final HttpServletResponse response) { 
+    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
+    public View renewCookieAndRedirect(@ModelAttribute(Model.USER) final User user, final String url,
+            final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException {
+        if (user.isStanfordUser() && user.getStatus() == Status.ACTIVE) {
+            checkUserIdAndSetCookies(user, request, response);
+        } else {
+            resetCookies(request, response);
+        }
+        RedirectView view = new RedirectView(URLDecoder.decode(url, UTF8), true, true);
+        view.setExpandUriTemplateVariables(false);
+        return view;
+    }
+
+    @ModelAttribute
+    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+        this.binder.bind(model.asMap(), request);
+        if (!model.containsAttribute(Model.USER)) {
+            model.addAttribute(Model.USER, null);
+        }
+    }
+
+    private void checkUserIdAndSetCookies(final User user, final HttpServletRequest request,
+            final HttpServletResponse response) {
         if (null != user) {
             setCookies(request, response, user);
         } else {
@@ -121,7 +143,7 @@ public class PersistentLoginController {
             // cookie is available for 2 weeks
             cookie.setMaxAge(twoWeeks);
             response.addCookie(cookie);
-            GregorianCalendar gc = new GregorianCalendar();
+            Calendar gc = Calendar.getInstance();
             gc.add(Calendar.SECOND, twoWeeks);
             cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(gc.getTime().getTime()));
             cookie.setPath("/");
@@ -147,13 +169,5 @@ public class PersistentLoginController {
         }
         view.setExpandUriTemplateVariables(false);
         return view;
-    }
-
-    @ModelAttribute
-    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.binder.bind(model.asMap(), request);
-        if (!model.containsAttribute(Model.USER)) {
-            model.addAttribute(Model.USER, null);
-        }
     }
 }
