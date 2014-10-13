@@ -46,7 +46,7 @@ public class LDAPDataBinderTest {
 
     @Test
     public void testBind() {
-        this.model.put(Model.USER_ID, "sunetid@stanford.edu");
+        this.model.put(Model.USER_ID, "sunetid");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.NAME)).andReturn(null);
         expect(this.session.getAttribute(Model.UNIVID)).andReturn(null);
