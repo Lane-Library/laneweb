@@ -12,8 +12,10 @@ public class User {
         ACTIVE, INACTIVE, UNKNOWN
     }
 
-    private static final String AT_STANFORD_EDU = "@stanford.edu";
+    private static final String AT = "@";
 
+    private static final String AT_STANFORD_EDU = "@stanford.edu";
+    
     private String email;
 
     private String hashedId;
@@ -62,7 +64,7 @@ public class User {
 
     public String getHashedId() {
         if (this.hashedId == null) {
-            createHashedId(this.hashKey + this.id);
+            createHashedId();
         }
         return this.hashedId;
     }
@@ -88,7 +90,17 @@ public class User {
         return this.isStanfordUser;
     }
 
-    private void createHashedId(final String buffer) {
+    private void createHashedId() {
+        String hashableId = this.id;
+        StringBuilder org = new StringBuilder();
+        if (this.id.indexOf(AT) > -1) {
+            hashableId = this.id.substring(0, this.id.indexOf(AT));
+            org.append(this.id.substring(this.id.indexOf(AT)));
+        }
+        this.hashedId = hash(hash(this.hashKey + hashableId)) + org.toString();
+    }
+
+    private String hash(final String buffer) {
         StringBuilder sb = new StringBuilder();
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
@@ -99,6 +111,7 @@ public class User {
         } catch (NoSuchAlgorithmException e) {
             throw new LanewebException(e);
         }
-        this.hashedId = sb.toString();
+        return sb.toString();
     }
+    
 }

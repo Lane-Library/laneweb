@@ -38,7 +38,9 @@ public class UserTest {
 
     @Test
     public void testGetHashedId() {
-        assertEquals("3bbc7674c302e6b2cb6d947d0308f436", this.user.getHashedId());
+        assertEquals("307d214168011862c7f0a95ee0ece4e6", this.user.getHashedId());
+        User another = new User("id@name.org", "name", "email", "hashkey");
+        assertEquals("307d214168011862c7f0a95ee0ece4e6@name.org", another.getHashedId());
     }
 
     @Test
