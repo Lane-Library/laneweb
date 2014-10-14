@@ -46,32 +46,20 @@
      Y.on("click",
         function(event) {
          if (needPopup) {
-                 var link = event.target, clickedUrl;
+                var link = event.target, clickedUrl;
                 while (link && link.get('nodeName') !== 'A') {
                     link = link.get('parentNode');
                 }
                 if(link){
                     clickedUrl = link.get('href');
                 }
-                if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("redirect/cme") > 0 || clickedUrl.indexOf("laneproxy") > 0) && clickedUrl.indexOf("javascript") !== 0) {
-                    redirectUrl = encodeURIComponent(link.get('href'));
+                if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("redirect/cme") > 0 ) && clickedUrl.indexOf("javascript") !== 0) {
+                    
                     event.preventDefault();
                     // don\'t want a redirect with the tracking see tracking.js code if !rel  documment.location is not set
                     link.set('rel', 'persistentLogin');
-                    // if preference cookie is present but date get into grace period
-//                    if (persistentStatusCookie && now.getTime() > persistentStatusCookie && fromStanford && isActive) {
-//                        getPopup(basePath + '/plain/persistent-extension-popup.html');
-//                    } // no preference cookie at all
-//                    else 
-                    	if (!persistentStatusCookie) {
-                        getPopup(basePath + '/plain/shibboleth-persistent-login.html');
-                    }
-//                    else{// if the user not active and on "grace period" the cookies will be deleted and the page will be reload
-//                        Y.io(basePath + '/logout', {
-//                            sync : true
-//                        });
-//                    location.reload() ;
-//                    }
+                   	redirectUrl = encodeURIComponent(link.get('href'));
+                 	getPopup(basePath + '/plain/shibboleth-persistent-login.html');
                 }
             }
         },document.body);
