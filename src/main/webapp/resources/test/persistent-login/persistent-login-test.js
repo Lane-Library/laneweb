@@ -1,32 +1,32 @@
 (function(){
 
-//    Y.lane.Location.on("hrefChange", function(event) {
-//        event.preventDefault();
-//        persistentLoginTestCase.href = event.newVal;
-//    });
-//
-//    Y.all("a").on("click", function(event) {
-//        event.preventDefault();
-//        persistentLoginTestCase.path = event.target.get("pathname");
-//    });
-//
-//    Y.io = function(url, config) {
-//        config.on.success.apply(this, [0,{responseText:'<div><a id="yes-persistent-login">yes</a><a id="no-persistent-login">no</a><input type="checkbox" id="dont-ask-again"/></div>'}]);
-//    };
-//    var persistentLoginTestCase = new Y.Test.Case({
-//        name: 'persistent-login Test Case',
-//
-//        cookie: Y.Cookie.get("persistent-preference"),
-//
-//        href: null,
-//
-//        path: null,
-//
-//        tearDown: function() {
-//            Y.lane.Lightbox.hide();
-//            Y.lane.Lightbox.setContent("");
-//            this.href = null;
-//            this.path = null;
+    Y.lane.Location.on("hrefChange", function(event) {
+        event.preventDefault();
+        persistentLoginTestCase.href = event.newVal;
+    });
+
+    Y.all("a").on("click", function(event) {
+        event.preventDefault();
+        persistentLoginTestCase.path = event.target.get("pathname");
+    });
+
+    Y.io = function(url, config) {
+        config.on.success.apply(this, [0,{responseText:'<div><a id="yes-persistent-login">yes</a><a id="no-persistent-login">no</a><input type="checkbox" id="dont-ask-again"/></div>'}]);
+    };
+    var persistentLoginTestCase = new Y.Test.Case({
+        name: 'persistent-login Test Case',
+
+        cookie: Y.Cookie.get("persistent-preference"),
+
+        href: null,
+
+        path: null,
+
+        tearDown: function() {
+            Y.lane.Lightbox.hide();
+            Y.lane.Lightbox.setContent("");
+            this.href = null;
+            this.path = null;
 //        },
 //
 //        testLoginClickYesClick: function() {
@@ -91,17 +91,17 @@
 //                //TODO: why &url=, not ?url=
 //                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
 //            }
-//        }
-//    });
+        }
+    });
 
 
-//    Y.one('body').addClass('yui3-skin-sam');
-//    new Y.Console({
-//        newestOnTop: false
-//    }).render('#log');
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
 
 
-//    Y.Test.Runner.add(persistentLoginTestCase);
-//    Y.Test.Runner.masterSuite.name = "persistent-login.js";
-//    Y.Test.Runner.run();
+    Y.Test.Runner.add(persistentLoginTestCase);
+    Y.Test.Runner.masterSuite.name = "persistent-login.js";
+    Y.Test.Runner.run();
 })();
