@@ -40,14 +40,72 @@ public class SolrImageSearchGeneratorTest {
     }
 
     @Test
-    public void testDoSearchCategory() {
+    public void testDoSearchCategoryCC() {
+        this.model.put(Model.QUERY, "query");
         this.model.put(Model.SOURCE, "cc-");
         Capture<Pageable> pageable = new Capture<Pageable>();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("10"), capture(pageable)))
-                .andReturn(null);
+        .andReturn(null);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
-        this.generator.doSearch("query");
+        Map<String, Object> result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=cc-&page=", result.get("path"));
+        assertEquals("query", result.get(Model.QUERY));
+        assertEquals("CC: ND, NC, NC-ND, NC-SA, SA", result.get("tab"));
+        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(0, pageable.getValue().getPageNumber());
+        verify(this.service, this.saxStrategy);
+    }
+
+    @Test
+    public void testDoSearchCategoryOther() {
+        this.model.put(Model.QUERY, "query");
+        this.model.put(Model.SOURCE, "foo");
+        Capture<Pageable> pageable = new Capture<Pageable>();
+        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
+        .andReturn(null);
+        replay(this.service, this.saxStrategy);
+        this.generator.setModel(this.model);
+        Map<String, Object> result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=foo&page=", result.get("path"));
+        assertEquals("query", result.get(Model.QUERY));
+        assertEquals("Public Domain & CC BY", result.get("tab"));
+        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(0, pageable.getValue().getPageNumber());
+        verify(this.service, this.saxStrategy);
+    }
+
+    @Test
+    public void testDoSearchCategoryPMC() {
+        this.model.put(Model.QUERY, "query");
+        this.model.put(Model.SOURCE, "pmc-");
+        Capture<Pageable> pageable = new Capture<Pageable>();
+        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("15"), capture(pageable)))
+        .andReturn(null);
+        replay(this.service, this.saxStrategy);
+        this.generator.setModel(this.model);
+        Map<String, Object> result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=pmc-&page=", result.get("path"));
+        assertEquals("query", result.get(Model.QUERY));
+        assertEquals("PMC - Article is CC", result.get("tab"));
+        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(0, pageable.getValue().getPageNumber());
+        verify(this.service, this.saxStrategy);
+    }
+
+    @Test
+    public void testDoSearchCategoryRL() {
+        this.model.put(Model.QUERY, "query");
+        this.model.put(Model.SOURCE, "rl-");
+        Capture<Pageable> pageable = new Capture<Pageable>();
+        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("20"), capture(pageable)))
+        .andReturn(null);
+        replay(this.service, this.saxStrategy);
+        this.generator.setModel(this.model);
+        Map<String, Object> result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=rl-&page=", result.get("path"));
+        assertEquals("query", result.get(Model.QUERY));
+        assertEquals("Rights Limited", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
@@ -57,7 +115,7 @@ public class SolrImageSearchGeneratorTest {
     public void testDoSearchDefault() {
         Capture<Pageable> pageable = new Capture<Pageable>();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
-                .andReturn(null);
+        .andReturn(null);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
@@ -71,12 +129,12 @@ public class SolrImageSearchGeneratorTest {
         this.model.put(Model.PAGE, "2");
         Capture<Pageable> pageable = new Capture<Pageable>();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
-                .andReturn(null);
+        .andReturn(null);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
         assertEquals(52, pageable.getValue().getPageSize());
-        assertEquals(2, pageable.getValue().getPageNumber());
+        assertEquals(1, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }
 }

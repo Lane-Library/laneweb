@@ -12,7 +12,7 @@
 		<html>
 			<body>
 				<div class="bd">
-					<h4 class="plain">
+					<h4>
 						<xsl:value-of select="$currentYear" />
 					</h4>
 					<ul>
@@ -30,7 +30,7 @@
 				</div>
 				<div class="bd">
 					<div>
-						<h4 class="plain">
+						<h4>
 							<xsl:value-of select="$currentYear - 1" />
 						</h4>
 						<ul>

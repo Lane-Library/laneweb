@@ -20,7 +20,7 @@ public class BassettImageListSAXStrategy implements SAXStrategy<List<BassettImag
     private static final String BASSETT_NUMBER = "bassett_number";
 
     private static final String BASSETTS = "bassetts";
-    
+
     private static final Pattern DASHES_PATTERN = Pattern.compile("--");
 
     private static final String DESCRIPTION = "description";

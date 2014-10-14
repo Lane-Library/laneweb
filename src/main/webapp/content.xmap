@@ -131,6 +131,7 @@
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="html" src="cocoon://content/cached/search/{source}.html"/>
                 <map:transform type="xinclude"/>
+                 <map:transform type="textNodeParser"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- TODO is this error handling ever invoked? -->
