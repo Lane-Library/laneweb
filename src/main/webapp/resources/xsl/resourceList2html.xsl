@@ -132,7 +132,7 @@
                 <div class="yui3-u-1-4">
                     <xsl:apply-templates select="s:contentId"/>
                 </div>
-                <div class="yui3-u-1-4">Source: </div>
+                <div class="yui3-u-1-4">Source: <a href="{s:resourceUrl}"><xsl:value-of select="s:resourceName"/>: <xsl:value-of select="s:resourceHits"/></a></div>
             </div>
             <xsl:apply-templates select="s:description"/>
         </li>
