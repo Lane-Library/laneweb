@@ -6,11 +6,21 @@ Y.use("node-event-simulate", "console", "test", function(Y){
         testDescriptionTriggerPresent: function() {
             Y.Assert.isNotNull(Y.one(".descriptionTrigger"));
         },
-        testDescriptionActive: function() {
+        testToggleDescriptionOn: function() {
             var trigger = Y.one(".descriptionTrigger");
             var item = Y.one("#searchResults li");
+            Y.Assert.areEqual("more", trigger.get("text"));
             trigger.simulate('click');
             Y.Assert.isTrue(item.hasClass("active"));
+            Y.Assert.areEqual("less", trigger.get("text"));
+        },
+        testToggleDescriptionOff: function() {
+            var trigger = Y.one(".descriptionTrigger");
+            var item = Y.one("#searchResults li");
+            Y.Assert.areEqual("less", trigger.get("text"));
+            trigger.simulate('click');
+            Y.Assert.isFalse(item.hasClass("active"));
+            Y.Assert.areEqual("more", trigger.get("text"));
         }
     });
 

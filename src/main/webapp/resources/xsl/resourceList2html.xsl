@@ -127,7 +127,7 @@
             <div class="yui3-g">
                 <div class="yui3-u-1-4">Article</div>
                 <div class="yui3-u-1-4">
-                    <xsl:if test="s:description"><a class="descriptionTrigger">click for more</a></xsl:if>
+                    <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
                 </div>
                 <div class="yui3-u-1-4">
                     <xsl:apply-templates select="s:contentId"/>
@@ -145,7 +145,7 @@
             <div class="yui3-g">
                 <div class="yui3-u-1-4"><xsl:value-of select="s:primaryType"/></div>
                 <div class="yui3-u-1-4">
-                    <xsl:if test="s:description"><a class="descriptionTrigger">click for more</a></xsl:if>
+                    <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
                 </div>
                 <div class="yui3-u-1-4"/>
                 <div class="yui3-u-1-4">Source: </div>

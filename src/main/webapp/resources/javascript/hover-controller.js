@@ -78,7 +78,10 @@
     //delegate click events on class "descriptionTrigger"
     if (Y.one("#searchResults")) {
         Y.delegate("click", function(event) {
-            event.currentTarget.ancestor("li").addClass("active");
+            var target = event.currentTarget,
+                text = target.get("text");
+            target.set("text", text === "more" ? "less" : "more")
+            event.currentTarget.ancestor("li").toggleClass("active");
         }, "#searchResults", ".descriptionTrigger");
     }
 
