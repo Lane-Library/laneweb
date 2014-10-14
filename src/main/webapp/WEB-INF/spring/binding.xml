@@ -59,6 +59,7 @@
         <constructor-arg ref="edu.stanford.irt.laneweb.codec.UserCookieCodec"/>
         <constructor-arg ref="org.slf4j.Logger/UserDataBinder"/>
         <constructor-arg value="%{laneweb.useridhashkey}"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.user.LDAPDataAccess"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"
@@ -77,7 +78,7 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"
         class="edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder">
-        <constructor-arg ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.user.LDAPDataAccess"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"

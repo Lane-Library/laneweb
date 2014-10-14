@@ -8,6 +8,14 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class User {
 
+    public enum Status {
+        ACTIVE, INACTIVE, UNKNOWN
+    }
+
+    private static final String AT = "@";
+
+    private static final String AT_STANFORD_EDU = "@stanford.edu";
+    
     private String email;
 
     private String hashedId;
@@ -16,13 +24,30 @@ public class User {
 
     private String id;
 
+    private boolean isStanfordUser;
+
     private String name;
 
+    private Status status;
+
     public User(final String id, final String name, final String email, final String hashKey) {
-        this.id = id;
+        this(id, name, email, hashKey, Status.UNKNOWN);
+    }
+
+    public User(final String id, final String name, final String email, final String hashKey, final Status status) {
+        // remove @stanford.edu if present for backwards compatibility
+        int index = id.indexOf(AT_STANFORD_EDU);
+        if (index > -1) {
+            this.id = id.substring(0, index);
+            this.isStanfordUser = true;
+        } else {
+            this.id = id;
+            this.isStanfordUser = false;
+        }
         this.name = name;
         this.email = email;
         this.hashKey = hashKey;
+        this.status = status;
     }
 
     @Override
@@ -39,7 +64,7 @@ public class User {
 
     public String getHashedId() {
         if (this.hashedId == null) {
-            createHashedId(this.hashKey + this.id);
+            createHashedId();
         }
         return this.hashedId;
     }
@@ -52,12 +77,30 @@ public class User {
         return this.name;
     }
 
+    public Status getStatus() {
+        return this.status;
+    }
+
     @Override
     public int hashCode() {
         return this.id.hashCode();
     }
 
-    private void createHashedId(final String buffer) {
+    public boolean isStanfordUser() {
+        return this.isStanfordUser;
+    }
+
+    private void createHashedId() {
+        String hashableId = this.id;
+        StringBuilder org = new StringBuilder();
+        if (this.id.indexOf(AT) > -1) {
+            hashableId = this.id.substring(0, this.id.indexOf(AT));
+            org.append(this.id.substring(this.id.indexOf(AT)));
+        }
+        this.hashedId = hash(hash(this.hashKey + hashableId)) + org.toString();
+    }
+
+    private String hash(final String buffer) {
         StringBuilder sb = new StringBuilder();
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
@@ -68,6 +111,7 @@ public class User {
         } catch (NoSuchAlgorithmException e) {
             throw new LanewebException(e);
         }
-        this.hashedId = sb.toString();
+        return sb.toString();
     }
+    
 }

@@ -9,7 +9,7 @@
     </bean>
     
     <bean name="org.slf4j.Logger/LDAPDataAccess" class="org.slf4j.LoggerFactory" factory-method="getLogger">
-        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>        
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.user.LDAPDataAccess"/>        
     </bean>
     
     <bean name="org.slf4j.Logger/XIncludeExceptionListener" class="org.slf4j.LoggerFactory" factory-method="getLogger">

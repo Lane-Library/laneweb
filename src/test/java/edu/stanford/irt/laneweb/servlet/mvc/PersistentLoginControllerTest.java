@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.web.servlet.view.RedirectView;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
@@ -58,75 +57,73 @@ public class PersistentLoginControllerTest {
     }
 
     @Test
-    public void testCreateCookieNotNullUrl() throws UnsupportedEncodingException {
+    public void testCreateCookieNotNullUrl() {
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         this.response.addCookie(isA(Cookie.class));
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.request, this.response, this.session, this.user, this.codec);
-        RedirectView view = (RedirectView) this.persistenLoginController.createCookie(this.user, this.url, this.request, this.response);
-        assertEquals(view.getUrl(), "/test.html");
+        String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, this.url, this.request, this.response);
+        assertEquals(redirect, "redirect:/test.html");
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
     }
 
     @Test
-    public void testCreateCookieNullUrl() throws UnsupportedEncodingException {
+    public void testCreateCookieNullUrl() {
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         this.response.addCookie(isA(Cookie.class));
-        this.response.setCharacterEncoding(isA(String.class));
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.request, this.response, this.session, this.user, this.codec, this.token);
-        RedirectView view = (RedirectView) this.persistenLoginController.createCookie(this.user, null, this.request, this.response);
-        assertEquals(view.getUrl(), "/myaccounts.html");
+        String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, null, this.request, this.response);
+        assertEquals(redirect, "redirect:/myaccounts.html");
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec, this.token);
     }
 
     @Test
-    public void testCreateCookieUserIdNull() throws UnsupportedEncodingException {
+    public void testCreateCookieUserIdNull() {
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, null);
         this.response.addCookie(isA(Cookie.class));
         this.response.addCookie(isA(Cookie.class));
         expect(this.request.getCookies()).andReturn(cookies);
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
-        this.persistenLoginController.createCookie(null, this.url, this.request, this.response);
+        this.persistenLoginController.enablePersistentLogin(null, null, this.url, this.request, this.response);
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
     }
 
     @Test
-    public void testRemoveCookieUrlNotNull() throws UnsupportedEncodingException {
+    public void testRemoveCookieUrlNotNull() {
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "234890");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
-        RedirectView view = (RedirectView) this.persistenLoginController.removeCookieAndView(this.user, this.url, this.request, this.response);
-        assertEquals(view.getUrl(), "/test.html");
+        String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, this.url, this.request, this.response);
+        assertEquals(redirect, "redirect:/test.html");
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
     }
 
     @Test
-    public void testRemoveCookieUrlNull() throws UnsupportedEncodingException {
+    public void testRemoveCookieUrlNull() {
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "234033");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
-        this.response.setCharacterEncoding(isA(String.class));
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
-        RedirectView view = (RedirectView) this.persistenLoginController.removeCookieAndView(this.user, null, this.request, this.response);
-        assertEquals(view.getUrl(), "/myaccounts.html");
+        String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, null, this.request, this.response);
+        assertEquals(redirect, "redirect:/myaccounts.html");
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
     }
 
     @Test
-    public void testRemoveWithDeniedCookie() throws UnsupportedEncodingException {
+    public void testRemoveWithDeniedCookie() {
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "denied");
         expect(this.request.getCookies()).andReturn(cookies);
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
-        RedirectView view = (RedirectView) this.persistenLoginController.removeCookieAndView(this.user, this.url, this.request, this.response);
-        assertEquals(view.getUrl(), "/test.html");
+        String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, this.url, this.request, this.response);
+        assertEquals(redirect, "redirect:/test.html");
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
     }
 }
