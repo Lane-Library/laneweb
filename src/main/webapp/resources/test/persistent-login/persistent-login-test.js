@@ -103,5 +103,5 @@
 
     Y.Test.Runner.add(persistentLoginTestCase);
     Y.Test.Runner.masterSuite.name = "persistent-login.js";
-    Y.Test.Runner.run();
+//    Y.Test.Runner.run();
 })();
