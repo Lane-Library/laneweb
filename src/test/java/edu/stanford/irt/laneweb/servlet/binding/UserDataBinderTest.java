@@ -90,6 +90,26 @@ public class UserDataBinderTest {
     }
 
     @Test
+    public void testBindMultiValueName() {
+        Map<String, Object> model = new HashMap<String, Object>();
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.session.getAttribute(Model.USER)).andReturn(null);
+        expect(this.request.getRemoteUser()).andReturn("id");
+        expect(this.request.getAttribute("displayName")).andReturn("first name;another name");
+        expect(this.request.getAttribute("mail")).andReturn("mail");
+        this.session.setAttribute(eq(Model.USER), isA(User.class));
+        replay(this.request, this.session, this.user, this.ldap);
+        this.binder.bind(model, this.request);
+        assertNotNull(model.get(Model.USER));
+        assertEquals("id", model.get(Model.USER_ID));
+        assertEquals("mail", model.get(Model.EMAIL));
+        assertEquals("first name", model.get(Model.NAME));
+        assertEquals("911531548a5ea68cf13f5e0506367956", model.get(Model.AUTH));
+        assertNull(model.get(Model.IS_ACTIVE_SUNETID));
+        verify(this.request, this.session, this.user, this.ldap);
+    }
+
+    @Test
     public void testBindNoEmailOrName() {
         Map<String, Object> model = new HashMap<String, Object>();
         expect(this.request.getSession()).andReturn(this.session);

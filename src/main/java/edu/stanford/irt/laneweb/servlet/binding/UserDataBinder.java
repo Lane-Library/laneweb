@@ -76,6 +76,23 @@ public class UserDataBinder implements DataBinder {
         }
     }
 
+    /**
+     * SHC displayName fields can have multiple values; parse first value
+     * @param values
+     * @param separator
+     * @return first value
+     */
+    private String extractFirstValue(final String values, final char separator) {
+        String value = values;
+        if (null != value) {
+            int endIndex = value.indexOf(separator);
+            if (endIndex > -1) {
+                value = value.substring(0, endIndex);
+            }
+        }
+        return value;
+    }
+
     private User getUserFromCookie(final HttpServletRequest request) {
         User user = null;
         Cookie[] cookies = request.getCookies();
@@ -105,6 +122,7 @@ public class UserDataBinder implements DataBinder {
         String userId = request.getRemoteUser();
         if (userId != null) {
             String name = (String) request.getAttribute("displayName");
+            name = extractFirstValue(name, ';');
             String email = (String) request.getAttribute("mail");
             user = getUserWithStatus(new User(userId, name, email, this.userIdHashKey));
         }
@@ -116,8 +134,7 @@ public class UserDataBinder implements DataBinder {
             LDAPData data = this.ldap.getLdapDataForSunetid(user.getId());
             Status status = data.isActive() ? Status.ACTIVE : Status.INACTIVE;
             return new User(user.getId() + "@stanford.edu", user.getName(), user.getEmail(), this.userIdHashKey, status);
-        } else {
-            return user;
         }
+        return user;
     }
 }
