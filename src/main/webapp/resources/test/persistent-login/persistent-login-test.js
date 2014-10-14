@@ -13,22 +13,22 @@
     Y.io = function(url, config) {
         config.on.success.apply(this, [0,{responseText:'<div><a id="yes-persistent-login">yes</a><a id="no-persistent-login">no</a><input type="checkbox" id="dont-ask-again"/></div>'}]);
     };
-    var persistentLoginTestCase = new Y.Test.Case({
-        name: 'persistent-login Test Case',
-
-        cookie: Y.Cookie.get("persistent-preference"),
-
-        href: null,
-
-        path: null,
-
-        tearDown: function() {
-            Y.lane.Lightbox.hide();
-            Y.lane.Lightbox.setContent("");
-            this.href = null;
-            this.path = null;
-        },
-
+//    var persistentLoginTestCase = new Y.Test.Case({
+//        name: 'persistent-login Test Case',
+//
+//        cookie: Y.Cookie.get("persistent-preference"),
+//
+//        href: null,
+//
+//        path: null,
+//
+//        tearDown: function() {
+//            Y.lane.Lightbox.hide();
+//            Y.lane.Lightbox.setContent("");
+//            this.href = null;
+//            this.path = null;
+//        },
+//
 //        testLoginClickYesClick: function() {
 //            Y.one("#login").simulate("click");
 //            if (this.cookie === "denied") {
@@ -92,7 +92,7 @@
 //                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
 //            }
 //        }
-    });
+//    });
 
 
     Y.one('body').addClass('yui3-skin-sam');
