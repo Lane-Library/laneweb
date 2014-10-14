@@ -54,19 +54,38 @@
 
 /*-------------------------persistent login--------------------------------------------------------------------------*/
 #persistent #hd  {
-	color: #414042;
+	color: #8c1515;
 	font-weight: bold;
 	line-height: 1.4em;
-	font-size: 1.1em;
-	padding-bottom: 2em;
+	font-size: 1.4em;
+	padding-bottom: 1.5em;
 	text-align:center;
 }
 
-#persistent #ft {
-	text-align: right;
-	padding-right: 30px;
-	margin-top: .7em;
+#persistent label{
+	font-weight: bold;
+	margin-left: 3px;
+	}
+
+#shibboleth-links {
+	text-align:center;
+	margin-top:12px;
 }
+
+#shibboleth-links .organization{
+	text-align:center;
+	margin-top:6px;
+	padding: 12px;
+	background-color:  rgb(236, 241, 242);
+}
+
+
+#shibboleth-links a{
+	margin:12px;
+	
+}
+
+
 
 #persistent #login {
 	position: inherit;
