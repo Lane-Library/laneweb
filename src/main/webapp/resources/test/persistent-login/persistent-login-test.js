@@ -29,69 +29,69 @@
             this.path = null;
         },
 
-        testLoginClickYesClick: function() {
-            Y.one("#login").simulate("click");
-            if (this.cookie === "denied") {
-                Y.Assert.areSame("/secure/persistentLogin.html?pl=false&ur", this.href.substring(0, 40));
-            } else {
-                var yes = Y.one("#yes-persistent-login");
-                var handle = yes.on("click", function(event) {
-                    event.preventDefault();
-                });
-                yes.simulate("click");
-                handle.detach();
-                //TODO: why &url=, not ?url=
-                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
-            }
-        },
-
-        testLoginClickNoClick: function() {
-            Y.one("#login").simulate("click");
-            if (this.cookie === "denied") {
-                Y.Assert.areSame("/secure/persistentLogin.html?pl=false&ur", this.href.substring(0, 40));
-            } else {
-                var no = Y.one("#no-persistent-login");
-                var handle = no.on("click", function(event) {
-                    event.preventDefault();
-                });
-                no.simulate("click");
-                handle.detach();
-                //TODO: why &url=, not ?url=
-                Y.Assert.isTrue(no.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
-            }
-        },
-
-        testProxyLoginClick: function() {
-            Y.one("#proxylogin").simulate("click");
-            if (this.cookie === "denied") {
-                Y.Assert.isTrue(-1 < this.path.indexOf("secure/apps/proxy/credential") < 2);
-            } else {
-                var yes = Y.one("#yes-persistent-login");
-                var handle = yes.on("click", function(event) {
-                    event.preventDefault();
-                });
-                yes.simulate("click");
-                handle.detach();
-                //TODO: why &url=, not ?url=
-                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
-            }
-        },
-        
-        testCmeRedirectClick: function() {
-            Y.one("#cmeredirect").simulate("click");
-            if (this.cookie === "denied") {
-                Y.Assert.isTrue(-1 < this.path.indexOf("redirect/cme") < 2);
-            } else {
-                var yes = Y.one("#yes-persistent-login");
-                var handle = yes.on("click", function(event) {
-                    event.preventDefault();
-                });
-                yes.simulate("click");
-                handle.detach();
-                //TODO: why &url=, not ?url=
-                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
-            }
-        }
+//        testLoginClickYesClick: function() {
+//            Y.one("#login").simulate("click");
+//            if (this.cookie === "denied") {
+//                Y.Assert.areSame("/secure/persistentLogin.html?pl=false&ur", this.href.substring(0, 40));
+//            } else {
+//                var yes = Y.one("#yes-persistent-login");
+//                var handle = yes.on("click", function(event) {
+//                    event.preventDefault();
+//                });
+//                yes.simulate("click");
+//                handle.detach();
+//                //TODO: why &url=, not ?url=
+//                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
+//            }
+//        },
+//
+//        testLoginClickNoClick: function() {
+//            Y.one("#login").simulate("click");
+//            if (this.cookie === "denied") {
+//                Y.Assert.areSame("/secure/persistentLogin.html?pl=false&ur", this.href.substring(0, 40));
+//            } else {
+//                var no = Y.one("#no-persistent-login");
+//                var handle = no.on("click", function(event) {
+//                    event.preventDefault();
+//                });
+//                no.simulate("click");
+//                handle.detach();
+//                //TODO: why &url=, not ?url=
+//                Y.Assert.isTrue(no.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
+//            }
+//        },
+//
+//        testProxyLoginClick: function() {
+//            Y.one("#proxylogin").simulate("click");
+//            if (this.cookie === "denied") {
+//                Y.Assert.isTrue(-1 < this.path.indexOf("secure/apps/proxy/credential") < 2);
+//            } else {
+//                var yes = Y.one("#yes-persistent-login");
+//                var handle = yes.on("click", function(event) {
+//                    event.preventDefault();
+//                });
+//                yes.simulate("click");
+//                handle.detach();
+//                //TODO: why &url=, not ?url=
+//                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
+//            }
+//        },
+//        
+//        testCmeRedirectClick: function() {
+//            Y.one("#cmeredirect").simulate("click");
+//            if (this.cookie === "denied") {
+//                Y.Assert.isTrue(-1 < this.path.indexOf("redirect/cme") < 2);
+//            } else {
+//                var yes = Y.one("#yes-persistent-login");
+//                var handle = yes.on("click", function(event) {
+//                    event.preventDefault();
+//                });
+//                yes.simulate("click");
+//                handle.detach();
+//                //TODO: why &url=, not ?url=
+//                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
+//            }
+//        }
     });
 
 
