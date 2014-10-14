@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.solr.SolrRepository;
+import edu.stanford.irt.laneweb.solr.SolrTypeManager;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
@@ -34,7 +35,8 @@ public class SolrSuggestionManager implements SuggestionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return suggestionsFromEresources(this.repository.suggestFindByType(term, type, new PageRequest(0, 10)));
+        return suggestionsFromEresources(this.repository.suggestFindByType(term,
+                SolrTypeManager.backwardsCompatibleType(type), new PageRequest(0, 10)));
     }
 
     private List<Suggestion> suggestionsFromEresources(final List<Eresource> eresources) {

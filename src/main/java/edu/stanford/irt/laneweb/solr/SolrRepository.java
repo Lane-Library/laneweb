@@ -59,11 +59,8 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Query(value = "-recordType:pubmed", requestHandler = SEARCH_HANDLER)
     public List<Eresource> searchFindAllNotRecordTypePubmed(Pageable page);
 
-    @Query(value = "?0", filters = { "subset:\"?1\"" }, requestHandler = SEARCH_HANDLER)
-    public List<Eresource> searchFindBySubset(String query, String subset, Pageable page);
-
     @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = SEARCH_HANDLER)
-    public List<Eresource> searchFindByType(String query, String type, Pageable page);
+    public Page<Eresource> searchFindByType(String query, String type, Pageable page);
 
     @Query(value = "(+?1) OR title_sort:/?0.*/", requestHandler = SUGGEST_HANDLER)
     public List<Eresource> suggestFindAll(String term, String tokenizedTerm, Pageable page);
