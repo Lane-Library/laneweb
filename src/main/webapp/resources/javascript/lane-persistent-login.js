@@ -33,7 +33,7 @@
 		var redirectUrl = encodeURIComponent(location.get("href")), 
 		link = event.target;
 		link.set('rel', 'persistentLogin');
-		getPopup(basePath + '/plain/shibboleth-persistent-popup.html');
+		getPopup(basePath + '/plain/shibboleth-persistent-login.html');
 		event.preventDefault();
 		}, 'a[href=' + basePath + '/secure/login.html]');
 
@@ -64,7 +64,7 @@
 //                    } // no preference cookie at all
 //                    else 
                     	if (!persistentStatusCookie) {
-                        getPopup(basePath + '/plain/shibboleth-persistent-popup.html');
+                        getPopup(basePath + '/plain/shibboleth-persistent-login.html');
                     }
 //                    else{// if the user not active and on "grace period" the cookies will be deleted and the page will be reload
 //                        Y.io(basePath + '/logout', {
