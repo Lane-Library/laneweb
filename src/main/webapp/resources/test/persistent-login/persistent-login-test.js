@@ -1,18 +1,18 @@
 (function(){
 
-    Y.lane.Location.on("hrefChange", function(event) {
-        event.preventDefault();
-        persistentLoginTestCase.href = event.newVal;
-    });
-
-    Y.all("a").on("click", function(event) {
-        event.preventDefault();
-        persistentLoginTestCase.path = event.target.get("pathname");
-    });
-
-    Y.io = function(url, config) {
-        config.on.success.apply(this, [0,{responseText:'<div><a id="yes-persistent-login">yes</a><a id="no-persistent-login">no</a><input type="checkbox" id="dont-ask-again"/></div>'}]);
-    };
+//    Y.lane.Location.on("hrefChange", function(event) {
+//        event.preventDefault();
+//        persistentLoginTestCase.href = event.newVal;
+//    });
+//
+//    Y.all("a").on("click", function(event) {
+//        event.preventDefault();
+//        persistentLoginTestCase.path = event.target.get("pathname");
+//    });
+//
+//    Y.io = function(url, config) {
+//        config.on.success.apply(this, [0,{responseText:'<div><a id="yes-persistent-login">yes</a><a id="no-persistent-login">no</a><input type="checkbox" id="dont-ask-again"/></div>'}]);
+//    };
 //    var persistentLoginTestCase = new Y.Test.Case({
 //        name: 'persistent-login Test Case',
 //
@@ -95,10 +95,10 @@
 //    });
 
 
-    Y.one('body').addClass('yui3-skin-sam');
-    new Y.Console({
-        newestOnTop: false
-    }).render('#log');
+//    Y.one('body').addClass('yui3-skin-sam');
+//    new Y.Console({
+//        newestOnTop: false
+//    }).render('#log');
 
 
 //    Y.Test.Runner.add(persistentLoginTestCase);
