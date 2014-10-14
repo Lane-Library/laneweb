@@ -206,7 +206,7 @@
 
     <xsl:template match="s:link">
         <div>
-            <a href="{s:url}" title="{s:label}">
+            Also available: <a href="{s:url}" title="{s:label}">
                 <xsl:value-of select="s:link-text"/>
             </a>
             <xsl:value-of select="s:additional-text"/>
