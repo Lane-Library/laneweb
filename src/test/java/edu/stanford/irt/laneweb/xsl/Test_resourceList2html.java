@@ -37,6 +37,7 @@ public class Test_resourceList2html extends AbstractXSLTest {
     public void testFalseProxyLinksAndPageParameters() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
+        this.transformer.setParameter("url-encoded-query", "music");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("resources.xml"), sw.toString());
     }

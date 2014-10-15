@@ -10,11 +10,12 @@
     <xsl:param name="query"/>
 
     <xsl:param name="emrid"/>
+    
+    <xsl:param name="url-encoded-query"/>
 
     <xsl:variable name="guest-mode">
         <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
     </xsl:variable>
-
 
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
 
@@ -148,7 +149,8 @@
                     <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
                 </div>
                 <div class="yui3-u-1-4"/>
-                <div class="yui3-u-1-4">Source: </div>
+                <div class="yui3-u-1-4">Source: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results</a>
+                </div>
             </div>
             <!--<xsl:apply-templates select="s:recordType"/>-->
             <xsl:apply-templates select="s:description"/>
