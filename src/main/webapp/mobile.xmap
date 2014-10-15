@@ -5,6 +5,7 @@
     <!-- publishable paths for mobile search and browse -->
     <map:pipeline type="noncaching">
         <!-- Merged Search Content (er and metasearch) -->
+        <!-- disable merged search results ... use er instead
         <map:match pattern="search/lane/*" type="wildcard">
             <map:generate type="merged-search">
                 <map:parameter name="timeout" value="5000"/>
@@ -21,6 +22,7 @@
             </map:select>
             <map:serialize type="xml"/>
         </map:match>
+        -->
         <!-- Search Content (metasearch) -->
         <map:match pattern="search/content/*" type="wildcard">
             <map:generate type="search-content">
@@ -38,8 +40,9 @@
             <map:serialize type="xml"/>
         </map:match>
         <!-- EResources search -->
-        <map:match pattern="search/er" type="wildcard">
+        <map:match pattern="search/(er|lane)/.*" type="regexp">
             <map:generate type="er-search"/>
+            <map:transform type="description-labeling"/>
             <map:transform type="query-highlighting"/>
             <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
             <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
