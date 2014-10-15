@@ -5,13 +5,14 @@
     PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference',
     persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME),
     now = new Date(),
-    needPopup= true,
     location = Y.lane.Location,
     model = Y.lane.Model,
     basePath = model.get(model.BASE_PATH) || "",
     auth = model.get(model.AUTH),
     ipgroup = model.get(model.IPGROUP),
     drMode = model.get(model.DISASTER_MODE),
+    //isActive == true only if user is from stanford and is active in the LDAP
+    // See UserDataBinder.java
     isActive = model.get(model.IS_ACTIVE_SUNETID),
     
 
@@ -23,9 +24,6 @@
         });
     };
 
-    if(drMode ||  (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
-        needPopup = false;
-    }
 
 	
     // if someone click on MyLane Login
@@ -37,61 +35,44 @@
 		event.preventDefault();
 		}, 'a[href=' + basePath + '/secure/login.html]');
 
+	
+	// if someone click on link to be proxy
+	  Y.on("click", function(event) {
+		 var link = event.target; 
+		 var href = link.get('href');
+		if (!drMode && !persistentStatusCookie && href.indexOf("javascript") !== 0) {
+			event.preventDefault();
+			link.set('rel', 'persistentLogin');
+			redirectUrl = encodeURIComponent(event.target.get('href'));
+			getPopup(basePath + '/plain/shibboleth-persistent-login.html');
+		}
+	  },"a[href*=/secure/apps/proxy/credential]", "a[href*=redirect/cme]");
 
-
-    //if not from hospital and user click on a link that going to be proxy
-     //If there are click subscriptions at multiple points in the DOM heirarchy, they will be executed in order from
-     //most specific (the button) to least specific (document) unless e.stopPropagation() is called along the line.
-     //This will prevent subscriptions from elements higher up the parent axis from executing.
-     Y.on("click",
-        function(event) {
-         if (needPopup) {
-                var link = event.target, clickedUrl;
-                while (link && link.get('nodeName') !== 'A') {
-                    link = link.get('parentNode');
-                }
-                if(link){
-                    clickedUrl = link.get('href');
-                }
-                if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("redirect/cme") > 0 ) && clickedUrl.indexOf("javascript") !== 0) {
-                    
-                    event.preventDefault();
-                    // don\'t want a redirect with the tracking see tracking.js code if !rel  documment.location is not set
-                    link.set('rel', 'persistentLogin');
-                   	redirectUrl = encodeURIComponent(link.get('href'));
-                 	getPopup(basePath + '/plain/shibboleth-persistent-login.html');
-                }
-            }
-        },document.body);
-
-
-
-    // for the static page persistentlogin.hrml Click on YES this way the user
-    // will not have to go through webauth.
-//    if(Y.one('#persistent-login')){
-//        Y.on('click',function(event) {
-//            event.preventDefault();
-//            if (auth) {
-//                location.set("href", basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
-//            } else {
-//                location.set("href", basePath + '/secure/persistentLogin.html?pl=true');
-//            }
-//        }, '#persistent-login');
-//    }
-
-
-
+	  
+	  
+	// if someone click on a proxied link and he is from stanford so he will have the possibility to extend his persistent login
+	  Y.on("click", function(event) {
+		 var link = event.target; 
+		 var href = link.get('href');
+		if ( isActive && !drMode && !persistentStatusCookie && now.getTime() > persistentStatusCookie ) {
+			event.preventDefault();
+			link.set('rel', 'persistentLogin');
+			redirectUrl = encodeURIComponent(event.target.get('href'));
+			getPopup(basePath + '/plain/persistent-extention-popup.html');
+		}
+	  },"a[href*=laneproxy.stanford.edu/login?user]");
+     
 
 
     // The popup window
     var popupWindow = function(id, o) {
         var lightbox = Y.lane.Lightbox, shibbolethAnchors, href;
-
         lightbox.setContent(o.responseText);
         lightbox.show();
         shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
       
-        // Click on YES --
+        // Click on one organization -- below the url we have to set here for stanford idp
+        //  /Shibboleth.sso/Login?SAMLDS=1&entityID=https%3A%2F%2Fidp.stanford.edu%2F&target=%2Fsecure%2FpersistentLogin.html%3Fpl%3Dfalse%26url%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fsecure%252Fapps%252Fproxy%252Fcredential%253Furl%253Dhttp%253A%252F%252Fgoogle.com
         Y.once("click",function(event) {
         	var node = event.currentTarget, url,
         	persistentUrl =  basePath + '/secure/persistentLogin.html?pl=',

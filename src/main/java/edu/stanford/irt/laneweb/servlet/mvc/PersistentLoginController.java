@@ -39,7 +39,7 @@ public class PersistentLoginController {
     private static final int GRACE_PERIOD = 3600 * 24 * 3;
 
     // login duration is two weeks:
-    private static final int PERSISTENT_LOGIN_DURATION = GRACE_PERIOD + 1000;//3600 * 24 * 7 * 2;
+    private static final int PERSISTENT_LOGIN_DURATION = GRACE_PERIOD + 3600 * 24 * 7 * 2;
 
     private static final String UTF8 = "UTF-8";
 
@@ -59,7 +59,7 @@ public class PersistentLoginController {
             final String url,
             final HttpServletRequest request,
             final HttpServletResponse response) {
-        removeCookies(request, response);
+        resetCookies(request, response);
         return getRedirectURL(url);
     }
 
@@ -118,22 +118,12 @@ public class PersistentLoginController {
         return sb.toString();
     }
 
-    private void removeCookies(final HttpServletRequest request, final HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie webCookie : cookies) {
-                if (PERSISTENT_LOGIN_PREFERENCE.equals(webCookie.getName())) {
-                    String cookieValue = webCookie.getValue();
-                    if (!"denied".equals(cookieValue)) {
-                        webCookie.setPath("/");
-                        webCookie.setMaxAge(0);
-                        response.addCookie(webCookie);
-                    }
-                    break;
-                }
-            }
-        }
-        Cookie cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, null);
+    private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
+        Cookie cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
@@ -143,13 +133,7 @@ public class PersistentLoginController {
         response.addCookie(cookie);
     }
 
-    private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
-        Cookie cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, null);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        removeCookies(request, response);
-    }
+    
 
     /**
      * create and set the lane-user cookie
