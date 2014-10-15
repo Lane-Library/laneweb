@@ -85,8 +85,6 @@ public class PersistentLoginControllerTest {
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, null);
         this.response.addCookie(isA(Cookie.class));
-        this.response.addCookie(isA(Cookie.class));
-        expect(this.request.getCookies()).andReturn(cookies);
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
         this.persistenLoginController.enablePersistentLogin(null, null, this.url, this.request, this.response);
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
@@ -96,7 +94,6 @@ public class PersistentLoginControllerTest {
     public void testRemoveCookieUrlNotNull() {
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "234890");
-        expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
         String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, this.url, this.request, this.response);
@@ -108,7 +105,6 @@ public class PersistentLoginControllerTest {
     public void testRemoveCookieUrlNull() {
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "234033");
-        expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
         String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, null, this.request, this.response);
@@ -116,14 +112,4 @@ public class PersistentLoginControllerTest {
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
     }
 
-    @Test
-    public void testRemoveWithDeniedCookie() {
-        Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "denied");
-        expect(this.request.getCookies()).andReturn(cookies);
-        replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
-        String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, this.url, this.request, this.response);
-        assertEquals(redirect, "redirect:/test.html");
-        verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
-    }
 }
