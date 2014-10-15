@@ -72,13 +72,19 @@
 	margin-top:12px;
 }
 
-#shibboleth-links .organization{
+#shibboleth-links .organization{  
 	text-align:center;
 	margin-top:6px;
 	padding: 12px;
 	background-color:  rgb(236, 241, 242);
 }
 
+#shibboleth-links .organization li{
+	display: inline-block;
+	margin:6px;
+	padding:18px;
+	background-color:  white;
+	}
 
 #shibboleth-links a{
 	margin:12px;
