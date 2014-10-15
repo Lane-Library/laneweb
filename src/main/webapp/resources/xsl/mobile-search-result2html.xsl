@@ -141,9 +141,15 @@
         <li rank="{position()}">
             <xsl:apply-templates select="s:link[1]"/>
             <xsl:apply-templates select="s:recordType"/>
-            <xsl:if test="s:description or count(s:link) > 1">
-                <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">more info</a>
-            </xsl:if>
+            <xsl:value-of select="s:pub-text"/>
+            <xsl:choose>
+                <xsl:when test="s:description and contains(s:link[1],'pubmed')">
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">abstract</a>
+                </xsl:when>
+                <xsl:when test="s:description or count(s:link) > 1">
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">more info</a>
+                </xsl:when>
+            </xsl:choose>
         </li>
     </xsl:template>
     
