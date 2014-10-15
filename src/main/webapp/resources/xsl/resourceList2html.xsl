@@ -149,38 +149,34 @@
                     <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
                 </div>
                 <div class="yui3-u-1-4"/>
-                <div class="yui3-u-1-4">Source: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results</a>
+                <div class="yui3-u-1-4">
+                    <xsl:text>Source: </xsl:text>
+                    <xsl:apply-templates select="s:recordType"/>
                 </div>
             </div>
-            <!--<xsl:apply-templates select="s:recordType"/>-->
             <xsl:apply-templates select="s:description"/>
         </li>
     </xsl:template>
 
-    <xsl:template match="s:recordType[not(../s:link/s:label[.='catalog record'])]">
-        <div class="moreResults">
+    <xsl:template match="s:recordType">
             <xsl:choose>
                 <xsl:when test=". = 'auth'">
-                    <span class="sourceLink">Lane Community Info File</span>
+                    <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info All Results</a>
                 </xsl:when>
-                <!-- add catalog link to all bibs except those that already have one (history) -->
                 <xsl:when test=". = 'bib'">
-                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog record</a>
+                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results</a>
                 </xsl:when>
                 <xsl:when test=". = 'web'">
-                    <span class="sourceLink">Lane Web Page</span>
+                    <xsl:text>Lane Web Pages</xsl:text>
                 </xsl:when>
                 <xsl:when test=". = 'class'">
-                    <span class="sourceLink">Lane Class</span>
+                    <xsl:text>Lane Classes</xsl:text>
                 </xsl:when>
                 <xsl:when test=". = 'print'">
-                    <span class="sourceLink">Print Material</span>
+                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results</a>
                 </xsl:when>
             </xsl:choose>
-        </div>
     </xsl:template>
-
-    <xsl:template match="s:recordType"/>
 
     <xsl:template match="s:description">
         <div class="description">
