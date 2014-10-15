@@ -63,35 +63,49 @@
 }
 
 #persistent label{
+	display: inline-block;
 	font-weight: bold;
 	margin-left: 3px;
+	margin-bottom: 18px;
 	}
 
 #shibboleth-links {
 	text-align:center;
-	margin-top:12px;
 }
 
 #shibboleth-links .organization{  
 	text-align:center;
 	margin-top:6px;
-	padding: 12px;
+	padding:6px 0px 6px 0px;
 	background-color:  rgb(236, 241, 242);
 }
 
 #shibboleth-links .organization li{
 	display: inline-block;
-	margin:6px;
-	padding:18px;
-	background-color:  white;
+	border-bottom: none;
+	padding: 3px 6px 3px 6px;
 	}
 
-#shibboleth-links a{
-	margin:12px;
-	
+#shibboleth-links .organization a{
+	display: block;
+	border: 1px solid #ddd;
+	padding:12px 3px 12px 3px;
+	background-color: white;
+}
+#shibboleth-links .organization span{
+	display: block;
+	padding:38px 134px 0px 0px;
+	background-color:  white;
+	background-repeat: none;
+	background-image: url('/graphics/buttons/organizations.png');
 }
 
-
+#shibboleth-links .organization a#SHC span{
+background-position: 14px -51px;
+}
+#shibboleth-links .organization a#LPCH span{
+background-position: center -103px;
+}
 
 #persistent #login {
 	position: inherit;

@@ -13,7 +13,7 @@
     ipgroup = model.get(model.IPGROUP),
     drMode = model.get(model.DISASTER_MODE),
     isActive = model.get(model.IS_ACTIVE_SUNETID),
-    fromStanford = "Stanford" === ipgroup,
+    
 
     getPopup = function(urlPage) {
         Y.io(urlPage, {
@@ -63,6 +63,7 @@
                 }
             }
         },document.body);
+
 
 
     // for the static page persistentlogin.hrml Click on YES this way the user
