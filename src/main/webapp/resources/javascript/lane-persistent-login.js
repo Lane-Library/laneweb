@@ -27,12 +27,16 @@
 	Y.on("click", function(event) {popupShibboltehWindow(event);}, "a[href*=/redirect/cme]");
 
 	popupShibboltehWindow = function(event) {
-		var link = event.target, href = link.get('href');
-		if (!drMode && !persistentStatusCookie
-				&& href.indexOf("javascript") !== 0) {
+		var link = event.target, 
+		href = link.get('href');
+		if (!drMode && !persistentStatusCookie && ( !href ||  href.indexOf("javascript") !== 0)){
+			if(href){
+				redirectUrl = encodeURIComponent(href);
+			}else{
+				redirectUrl = encodeURIComponent(location.get("href"))
+			}
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
-			redirectUrl = encodeURIComponent(event.target.get('href'));
 			getPopup(basePath + '/plain/shibboleth-persistent-login.html');
 		}
 	};
