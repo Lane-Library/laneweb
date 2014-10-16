@@ -75,7 +75,7 @@
 				isPersistent = Y.one('#is-persistent-login').get('checked');
 				url = node.get('href') + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
 			}else{
-				url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUr);
+				url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
 			}
 			
 			node.set('href', url);
