@@ -38,8 +38,8 @@
 	
 	// if someone click on link to be proxy
 	  Y.on("click", function(event) {
-		 var link = event.target; 
-		 var href = link.get('href');
+		 var link = event.target,
+		 href = link.get('href');
 		if (!drMode && !persistentStatusCookie && href.indexOf("javascript") !== 0) {
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
@@ -52,15 +52,15 @@
 	  
 	// if someone click on a proxied link and he is from stanford so he will have the possibility to extend his persistent login
 	  Y.on("click", function(event) {
-		 var link = event.target; 
-		 var href = link.get('href');
+		 var link = event.target,
+		  href = link.get('href');
 		if ( isActive && !drMode && !persistentStatusCookie && now.getTime() > persistentStatusCookie ) {
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(event.target.get('href'));
 			getPopup(basePath + '/plain/persistent-extention-popup.html');
 		}
-	  },"a[href*=laneproxy.stanford.edu/login?user]");
+	  },"a[href*=laneproxy.stanford.edu/login]");
      
 
 
