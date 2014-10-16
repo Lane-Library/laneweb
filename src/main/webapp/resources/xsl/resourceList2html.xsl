@@ -215,7 +215,7 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="s:link[not(1)][@type = 'impactFactor']">
+    <xsl:template match="s:link[@type = 'impactFactor']">
         <div>
             <a href="{s:url}">Impact Factor</a>
         </div>

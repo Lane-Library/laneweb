@@ -33,5 +33,10 @@
       <additional-text> 2009, Springer </additional-text>
       <publisher>Springer</publisher>
     </link>
+    <link type="impactFactor">
+      <label>Impact Factor</label>
+      <link-text>Impact Factor</link-text>
+      <url>http://impactfactor.org/</url>
+    </link>
   </result>
 </resources>
