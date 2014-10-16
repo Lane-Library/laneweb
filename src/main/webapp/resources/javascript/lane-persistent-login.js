@@ -7,8 +7,6 @@
 	location = Y.lane.Location, 
 	model = Y.lane.Model, 
 	basePath = model.get(model.BASE_PATH)|| "", 
-	auth = model.get(model.AUTH), 
-	ipgroup = model.get(model.IPGROUP), 
 	drMode = model.get(model.DISASTER_MODE),
 	// isActive == true only if user is from stanford and is active in the LDAP
 	// See UserDataBinder.java
@@ -45,8 +43,7 @@
 	// have the possibility to extend his persistent login
 	Y.on("click", function(event) {
 		var link = event.target, href = link.get('href');
-		if (isActive && !drMode && persistentStatusCookie
-				&& now.getTime() > persistentStatusCookie) {
+		if (isActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(event.target.get('href'));
@@ -54,6 +51,8 @@
 		}
 	}, "a[href*=laneproxy.stanford.edu/login]");
 
+	
+	
 	// The popup window
 	var popupWindow = function(id, o) {
 		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href;
@@ -71,12 +70,12 @@
 			if (!redirectUrl) {
 				redirectUrl = "/index.html";
 			}
-			persistentUrl = persistentUrl + isPersistent + '&url='+ redirectUrl;
-			url = node.get('href') + encodeURIComponent(persistentUrl);
+			url = persistentUrl + isPersistent + '&url='+ redirectUrl;
+			if(isPersistent !== 'renew'){
+				url = node.get('href') + encodeURIComponent(url);
+			}
 			node.set('href', url);
-
 		}, shibbolethAnchors);
-
 	};
 	// END POPUP
 
