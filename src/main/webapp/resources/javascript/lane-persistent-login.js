@@ -66,14 +66,18 @@
 		Y.once("click", function(event) {
 			var node = event.currentTarget, url, 
 			persistentUrl = basePath+ '/secure/persistentLogin.html?pl=', 
-			isPersistent = Y.one('#is-persistent-login').get('checked');
+			isPersistent = 'renew';
 			if (!redirectUrl) {
 				redirectUrl = "/index.html";
 			}
-			url = persistentUrl + isPersistent + '&url='+ redirectUrl;
-			if(isPersistent !== 'renew'){
-				url = node.get('href') + encodeURIComponent(url);
+			
+			if(Y.one('#is-persistent-login')){
+				isPersistent = Y.one('#is-persistent-login').get('checked');
+				url = node.get('href') + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUr);
+			}else{
+				url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUr);
 			}
+			
 			node.set('href', url);
 		}, shibbolethAnchors);
 	};
