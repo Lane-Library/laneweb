@@ -22,27 +22,9 @@
 		});
 	};
 
-	// if someone click on MyLane Login
-
-	Y.on("click",
-		function(event) {
-			var redirectUrl = encodeURIComponent(location
-					.get("href")), link = event.target;
-			link.set('rel', 'persistentLogin');
-			getPopup(basePath
-					+ '/plain/shibboleth-persistent-login.html');
-			event.preventDefault();
-		}, 'a[href=' + basePath + '/secure/login.html]');
-
-
-	// if someone click on link to be proxy
-	Y.on("click", function(event) {
-		popupShibboltehWindow(event);
-	}, "a[href*=/secure/apps/proxy/credential]");
-
-	Y.on("click", function(event) {
-		popupShibboltehWindow(event);
-	}, "a[href*=/redirect/cme]");
+	Y.on("click", function(event) {popupShibboltehWindow(event);}, 'a[href=' + basePath + '/secure/login.html]');
+	Y.on("click", function(event) {popupShibboltehWindow(event);}, "a[href*=/secure/apps/proxy/credential]");
+	Y.on("click", function(event) {popupShibboltehWindow(event);}, "a[href*=/redirect/cme]");
 
 	popupShibboltehWindow = function(event) {
 		var link = event.target, href = link.get('href');
