@@ -39,6 +39,7 @@ public class LogoutServletTest {
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.session = createMock(HttpSession.class);
+        expect(this.request.getHeader("referer")).andReturn("/logout.html");
         expect(this.request.getSession(false)).andReturn(this.session);
         expect(this.request.getLocalName()).andReturn("localhost");
         Cookie[] cookies = new Cookie[1];
@@ -59,6 +60,7 @@ public class LogoutServletTest {
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.session = createMock(HttpSession.class);
+        expect(this.request.getHeader("referer")).andReturn("/logout.html");
         expect(this.request.getLocalName()).andReturn("localhost");
         expect(this.request.getSession(false)).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
@@ -75,6 +77,7 @@ public class LogoutServletTest {
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.session = createMock(HttpSession.class);
+        expect(this.request.getHeader("referer")).andReturn("/logout.html");
         expect(this.request.getLocalName()).andReturn("localhost");
         expect(this.request.getSession(false)).andReturn(this.session);
         Cookie[] cookies = new Cookie[1];
@@ -95,6 +98,7 @@ public class LogoutServletTest {
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.session = createMock(HttpSession.class);
+        expect(this.request.getHeader("referer")).andReturn("/index.html");
         expect(this.request.getLocalName()).andReturn("localhost");
         expect(this.request.getSession(false)).andReturn(this.session);
         Cookie[] cookies = new Cookie[1];
@@ -103,7 +107,28 @@ public class LogoutServletTest {
         this.response.addCookie(isA(Cookie.class));
         expectLastCall().times(3);
         this.session.invalidate();
-        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
+        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/index.html");
+        replay(this.request, this.response, this.session);
+        this.servlet.service(this.request, this.response);
+        verify(this.request, this.response, this.session);
+    }
+    
+    @Test
+    public void testNuuReferePage() throws ServletException,
+            IOException {
+        this.request = createMock(HttpServletRequest.class);
+        this.response = createMock(HttpServletResponse.class);
+        this.session = createMock(HttpSession.class);
+        expect(this.request.getHeader("referer")).andReturn(null);
+        expect(this.request.getLocalName()).andReturn("localhost");
+        expect(this.request.getSession(false)).andReturn(this.session);
+        Cookie[] cookies = new Cookie[1];
+        cookies[0] = new Cookie("persistent-preference", "denied");
+        expect(this.request.getCookies()).andReturn(cookies);
+        this.response.addCookie(isA(Cookie.class));
+        expectLastCall().times(3);
+        this.session.invalidate();
+        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/index.html");
         replay(this.request, this.response, this.session);
         this.servlet.service(this.request, this.response);
         verify(this.request, this.response, this.session);
