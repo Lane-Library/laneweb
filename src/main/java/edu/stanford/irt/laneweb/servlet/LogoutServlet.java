@@ -19,7 +19,7 @@ public class LogoutServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String LOGOUT_URL = "/Shibboleth.sso/Logout?return=/logout.html";
+    private static final String LOGOUT_URL = "/Shibboleth.sso/Logout?return=";
 
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
@@ -54,6 +54,11 @@ public class LogoutServlet extends HttpServlet {
         if (null != session) {
             session.invalidate();
         }
-        resp.sendRedirect("https://"+ req.getLocalName() + LOGOUT_URL);
+        String referer = req.getHeader("referer");
+        if(referer == null){
+            referer = "/index.html";
+        }
+       
+        resp.sendRedirect("https://"+ req.getLocalName() + LOGOUT_URL+referer);
     }
 }
