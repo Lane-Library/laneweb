@@ -114,7 +114,7 @@ public class LogoutServletTest {
     }
     
     @Test
-    public void testNuuReferePage() throws ServletException,
+    public void testNullReferePage() throws ServletException,
             IOException {
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
