@@ -18,6 +18,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 //TODO: remove code duplicated with SHCCodec
 public class SunetIdCookieCodec {
 
+    public static final String LANE_COOKIE_NAME = "user";
+
     private static final String COOKIE_VALUE_SEPARATOR = "%";
 
     private Cipher cipher;

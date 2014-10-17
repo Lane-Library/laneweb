@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static edu.stanford.irt.laneweb.servlet.LanewebCookie.LOGIN_PREFERENCE;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
@@ -79,7 +78,7 @@ public class PersistentLoginControllerTest {
     public void testCreateCookieSunetIdNull() throws UnsupportedEncodingException {
         expect(this.sunetIdSource.getSunetid(this.request)).andReturn(null);
         Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(LOGIN_PREFERENCE.getName(), null);
+        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, null);
         this.response.addCookie(isA(Cookie.class));
         this.response.addCookie(isA(Cookie.class));
         expect(this.request.getCookies()).andReturn(cookies);
@@ -92,7 +91,7 @@ public class PersistentLoginControllerTest {
     public void testRemoveCookieUrlNotNull() throws UnsupportedEncodingException {
         expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(LOGIN_PREFERENCE.getName(), "234890");
+        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "234890");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
         replay(this.sunetIdSource, this.request, this.session, this.response);
@@ -105,7 +104,7 @@ public class PersistentLoginControllerTest {
     public void testRemoveCookieUrlNull() throws UnsupportedEncodingException {
         expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(LOGIN_PREFERENCE.getName(), "234033");
+        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "234033");
         expect(this.request.getCookies()).andReturn(cookies);
         this.response.addCookie(isA(Cookie.class));
         this.response.setCharacterEncoding(isA(String.class));
@@ -119,7 +118,7 @@ public class PersistentLoginControllerTest {
     public void testRemoveWithDeniedCookie() throws UnsupportedEncodingException {
         expect(this.sunetIdSource.getSunetid(this.request)).andReturn("alainb");
         Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(LOGIN_PREFERENCE.getName(), "denied");
+        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "denied");
         expect(this.request.getCookies()).andReturn(cookies);
         replay(this.sunetIdSource, this.request, this.session, this.response);
         RedirectView view = (RedirectView) this.persistenLoginController.removeCookieAndView(this.url, this.request, this.response);
@@ -145,7 +144,7 @@ public class PersistentLoginControllerTest {
     public void testRenewCookieNotActiveSunetId() throws UnsupportedEncodingException {
         expect(this.session.getAttribute("isActiveSunetID")).andReturn(false);
         Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(LOGIN_PREFERENCE.getName(), null);
+        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, null);
         expect(this.request.getCookies()).andReturn(cookies);
         expect(this.request.getSession()).andReturn(this.session);
         this.response.addCookie(isA(Cookie.class));
