@@ -58,8 +58,6 @@
         <tag>HEAD</tag>
     </scm>
     <properties>
-        <laneweb.build.sourceDirectory>src/main/java</laneweb.build.sourceDirectory>
-        <laneweb.build.testSourceDirectory>src/test/java</laneweb.build.testSourceDirectory>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,8 +65,6 @@
     </properties>
     <build>
         <defaultGoal>package</defaultGoal>
-        <sourceDirectory>${laneweb.build.sourceDirectory}</sourceDirectory>
-        <testSourceDirectory>${laneweb.build.testSourceDirectory}</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
