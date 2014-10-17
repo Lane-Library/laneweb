@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 @Controller
 public class ShibTester {
 
@@ -40,6 +42,7 @@ public class ShibTester {
         result.append(request.getAttribute("mail"));
         result.append("\n");
         result.append("\n");
+        @SuppressWarnings("unchecked")
         Enumeration<String> attributes = request.getAttributeNames();
         while (attributes.hasMoreElements()) {
             String attributeName = attributes.nextElement();
@@ -51,12 +54,8 @@ public class ShibTester {
         response.setHeader("Content-Type", "text/plain");
         try {
             response.getOutputStream().write(result.toString().getBytes("UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new LanewebException(e);
         }
     }
 }
