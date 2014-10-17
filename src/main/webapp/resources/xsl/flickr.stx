@@ -8,13 +8,13 @@
     </stx:template>
     
     <stx:template match="photos">
-        <ul>
+        <div style="white-space:nowrap;overflow:hidden">
             <stx:process-children/>
-        </ul>
+        </div>
     </stx:template>
     
     <stx:template match="photo">
-        <li><a href="http://farm{@farm}.staticflickr.com/{@server}/{@id}_{@secret}_b.jpg"><img src="http://farm{@farm}.staticflickr.com/{@server}/{@id}_{@secret}_t.jpg" alt="photo"/> <stx:value-of select="@title"/></a></li>
+        <a href="http://farm{@farm}.staticflickr.com/{@server}/{@id}_{@secret}_b.jpg"><img src="http://farm{@farm}.staticflickr.com/{@server}/{@id}_{@secret}_t.jpg" alt="photo"/></a>
     </stx:template>
     
 </stx:transform>
