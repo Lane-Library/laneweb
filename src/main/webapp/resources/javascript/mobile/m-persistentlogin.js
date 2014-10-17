@@ -54,7 +54,7 @@ $(document).on("click", 'a[href*="laneproxy"]', function(event) {
 
 $(document).on("click", '#shibboleth-links a', function(e) {
 	var node = event.currentTarget, url, 
-	persistentUrl = basePath+ '/secure/persistentLogin.html?pl=', 
+	persistentUrl = model['base-path']+ '/secure/persistentLogin.html?pl=', 
 	isPersistent;
 	if (!redirectUrl) {
 		redirectUrl = "/index.html";
