@@ -60,8 +60,8 @@ $(document).on("click", '#shibboleth-links a', function(e) {
 		redirectUrl = "/index.html";
 	}
 	if($('#is-persistent-login')){
-		isPersistent = $('#is-persistent-login').get('checked');
-		url = node.get('href') + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
+		isPersistent = $('#is-persistent-login').prop( "checked" );
+		url = node.href + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
 	}else{
 		url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
 	}
