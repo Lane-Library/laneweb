@@ -42,7 +42,7 @@ $(document).on("click", 'a[href*="secure/apps/proxy/credential"],a[href*="lanepr
 $(document).on("click", 'a[href*="laneproxy"]', function(event) {
     var link = event.currentTarget,
     now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-    if (!model['disaster-mode'] && !statusCookie && model["isActiveSunetID"] && statusCookie < now.getTime()){
+    if (!model['disaster-mode']  && model["isActiveSunetID"] && statusCookie < now.getTime()){
         redirectUrl = encodeURIComponent(link.href);
         $.LANE.popupWindow(model['base-path'] + '/m/plain/persistentlogin-extention.html');
         event.preventDefault();
