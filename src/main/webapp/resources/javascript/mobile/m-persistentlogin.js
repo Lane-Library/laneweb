@@ -24,66 +24,51 @@ $(document).on("click", ".webauthLogin:contains('Logout')", function(e) {
 });
 
 
-$(document).on("click", ".webauthLogin:contains('Login')", function(e) {
-    e.preventDefault();
-    var persistentStatusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-    if (persistentStatusCookie    && 'denied' === persistentStatusCookie) {
-        document.location = model['base-path'] + '/secure/persistentLogin.html?pl=false&url='+ document.location;
-    } else if(model['disaster-mode']){
-        document.location = model['base-path'] + '/login-disabled.html';
-    }
-    else {
-        $.LANE.popupWindow(model['base-path'] + "/m/plain/persistent-login.html");
-        redirectUrl = encodeURIComponent(document.location);
+//when a click is coming from a external resource
+$(document).on("click", 'a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"], .webauthLogin:contains("Login")', function(event) {
+    var link = event.currentTarget,
+    now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
+    if (!model['disaster-mode'] && !statusCookie ){
+    	if(link.href && link.href.indexOf('/mobile-login.html') >-1){
+    		redirectUrl = encodeURIComponent(document.location);
+    	}else{
+    		redirectUrl = encodeURIComponent(link.href);
+    	}
+        $.LANE.popupWindow(model['base-path'] + '/m/plain/shibboleth-persistentlogin.html');
+        event.preventDefault();
     }
 });
 
-
-//when a click is coming from a external resource
-$(document).on("click", 'a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"]', function(event) {
+$(document).on("click", 'a[href*="laneproxy"]', function(event) {
     var link = event.currentTarget,
     now = new Date(), statusCookie = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-    if (!model['disaster-mode'] && 'denied' !== statusCookie && (!model["isActiveSunetID"] || statusCookie < now.getTime())){
+    if (!model['disaster-mode'] && !statusCookie && model["isActiveSunetID"] && statusCookie < now.getTime()){
         redirectUrl = encodeURIComponent(link.href);
-        if(model["isActiveSunetID"]){
-            $.LANE.popupWindow(model['base-path'] + '/m/plain/persistentlogin-extention.html');
-        }
-        else{
-            $.LANE.popupWindow(model['base-path'] + '/m/plain/persistentlogin-proxylink.html');
-        }
+        $.LANE.popupWindow(model['base-path'] + '/m/plain/persistentlogin-extention.html');
         event.preventDefault();
     }
 });
 
 
 
-$(document).on("click", "#yes-persistent-login", function(e) {
-    if ($('#dont-ask-again:checked').val() === 'on') {
-        e.preventDefault();
-    } else {
-        setLink(event); // cookie set in the PerssitentLoginFilter class
-    }
+
+$(document).on("click", '#shibboleth-links a', function(e) {
+	var node = event.currentTarget, url, 
+	persistentUrl = basePath+ '/secure/persistentLogin.html?pl=', 
+	isPersistent;
+	if (!redirectUrl) {
+		redirectUrl = "/index.html";
+	}
+	if(Y.one('#is-persistent-login')){
+		isPersistent = Y.one('#is-persistent-login').get('checked');
+		url = node.get('href') + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
+	}else{
+		url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
+	}
+	node.set('href', url);
 });
 
 
-
-// Click on NO
-$(document).on("click", "#no-persistent-login", function(event) {
-    if ($('#dont-ask-again') && $('#dont-ask-again:checked').val() === 'on') {
-        $.LANE.setCookie(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', 3650);
-    } else {
-        $.LANE.setCookie(PERSISTENT_PREFERENCE_COOKIE_NAME, 'denied', null);
-    }
-    setLink(event);
-});
-
-$(document).on("click", "#dont-ask-again", function() {
-    if ($('#dont-ask-again:checked').val() === 'on') {
-        $('#yes-persistent-login').removeClass('red-btn').addClass('disabled-btn');
-    } else {
-        $('#yes-persistent-login').removeClass('disabled-btn').addClass('red-btn');
-    }
-});
 
 
 $.LANE.toggleLogin = function(){
@@ -113,15 +98,4 @@ $(this).bind("pageinit", function() {
     $.LANE.toggleLogin();
 });
 
-var setLink = function(event) {
-    var node = event.target, url = model['base-path'] + '/';
-    if (node.nodeName === 'SPAN') {
-        node = node.parentNode;
-    }
-    if (!model["isActiveSunetID"] || node.search.indexOf("pl=true") >0 ) {
-         url = url + 'secure/';
-     }
-    event.preventDefault();
-    document.location = url + 'persistentLogin.html' + node.search + '&url=' + redirectUrl;
-};
 

@@ -33,6 +33,71 @@ body.ui-mobile-viewport{
 
 
 /*persistentlogin  */
+
+ .persistent-header{
+    margin: 40px auto 0px auto;
+    padding-left: 10px; 
+    padding-right: 10px;
+    height: 1px;
+ } 
+ 
+
+#persistent #hd  {
+	color: #8c1515;
+	font-weight: bold;
+	line-height: 1.4em;
+	font-size: 1.4em;
+	padding-bottom: 1.5em;
+	text-align:center;
+}
+
+#persistent label{
+	margin-top:12px;
+	display: inline;
+	font-weight: bold;
+	}
+
+#shibboleth-links{
+	margin-top:18px;
+}
+
+#shibboleth-links .organization{  
+	text-align:center;
+	margin-top:6px;
+	padding:6px 0px 6px 0px;
+	background-color:  rgb(236, 241, 242);
+}
+
+#shibboleth-links .organization li{
+	display: block;
+	border-bottom: none;
+	padding:6px 30px 6px 30px;
+	}
+
+#shibboleth-links .organization a{
+	display: block;
+	border: 1px solid #ddd;
+	background-color: white;
+}
+
+#shibboleth-links .organization span{
+	display: block;
+	width:140px;
+	height:48px;
+	margin: 14px 0px 0px 10px;
+	background-color:  white;
+	background-repeat: none;
+	background-image: url('/graphics/logos/organizations.png');
+}
+
+#shibboleth-links .organization a#SHC span{
+background-position: 14px -51px;
+}
+#shibboleth-links .organization a#LPCH span{
+background-position: center -112px;
+}
+
+
 #close{
     z-index:2; 
     padding-left: .40em; 
@@ -45,13 +110,6 @@ body.ui-mobile-viewport{
     margin: 0px;
 }
 
- .persistent-header{
-    margin: 40px auto 0px auto;
-    padding-left: 15px; 
-    padding-right: 15px;
-    height: 1px;
- } 
- 
  .ui-header, 
  .ui-content, 
  .ui-footer { 
@@ -63,13 +121,6 @@ body.ui-mobile-viewport{
   	margin: 0px auto 20px auto; 
 }
 
-#persistent #hd {
-    color: #414042;
-    font-weight: bold;
-    line-height: 1.4em;
-    font-size: 1.3em;
-    padding-bottom: .75em;
-}
 
 .ui-mobile .ui-page-active {
     overflow: hidden;
