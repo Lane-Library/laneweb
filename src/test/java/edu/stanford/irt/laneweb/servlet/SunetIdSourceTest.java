@@ -1,5 +1,5 @@
 package edu.stanford.irt.laneweb.servlet;
-
+import static edu.stanford.irt.laneweb.servlet.LanewebCookie.USER;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
@@ -48,7 +48,7 @@ public class SunetIdSourceTest {
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
-        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(USER.getName());
         expect(this.session.getAttribute("sunetid")).andReturn(null);
         expect(this.cookie.getValue()).andReturn("abc").times(2);
         replay(this.request, this.session, this.cookie);
@@ -62,7 +62,7 @@ public class SunetIdSourceTest {
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
-        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(USER.getName());
         expect(this.session.getAttribute("sunetid")).andReturn(null);
         String value = this.codec.createLoginToken("ditenus", "different".hashCode()).getEncryptedValue();
         expect(this.cookie.getValue()).andReturn(value);
@@ -77,7 +77,7 @@ public class SunetIdSourceTest {
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
-        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(USER.getName());
         expect(this.session.getAttribute("sunetid")).andReturn(null);
         this.session.setAttribute(Model.SUNETID, "ditenus");
         String value = this.codec.createLoginToken("ditenus", "user agent".hashCode()).getEncryptedValue();
@@ -114,7 +114,7 @@ public class SunetIdSourceTest {
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("userAgent");
-        expect(this.cookie.getName()).andReturn("not " + SunetIdCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn("not " + USER.getName());
         replay(this.request, this.session, this.cookie);
         assertNull(this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);

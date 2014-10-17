@@ -1,4 +1,5 @@
 package edu.stanford.irt.laneweb.servlet;
+import static edu.stanford.irt.laneweb.servlet.LanewebCookie.USER;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +60,7 @@ public class SunetIdSource {
         String sunetid = null;
         if (cookies != null && userAgent != null) {
             for (Cookie cookie : cookies) {
-                if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                if (USER.getName().equals(cookie.getName())) {
                     try {
                         PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
                         if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {

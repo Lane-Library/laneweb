@@ -75,8 +75,6 @@ public interface Model {
 
     String PERSISTENT_LOGIN = "persistent-login";
 
-    String PERSISTENT_LOGIN_EXPIRATION_DATE = "persistent-expiration-date";
-
     String PID = "pid";
 
     String PROXY_LINKS = "proxy-links";
@@ -138,8 +136,6 @@ public interface Model {
     String URL_ENCODED_QUERY = "url-encoded-query";
 
     String USER_AGENT = "user-agent";
-
-    String USER_COOKIE = "user-cookie";
 
     String VERSION = "version";
 }
