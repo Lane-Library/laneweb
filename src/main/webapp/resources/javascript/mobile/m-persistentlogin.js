@@ -53,19 +53,22 @@ $(document).on("click", 'a[href*="laneproxy"]', function(event) {
 
 
 $(document).on("click", '#shibboleth-links a', function(e) {
-	var node = event.currentTarget, url, 
+	var node = event.target, url, 
 	persistentUrl = model['base-path']+ '/secure/persistentLogin.html?pl=', 
 	isPersistent;
+	if (node.nodeName === 'SPAN') {
+        node = node.parentNode;
+    }
 	if (!redirectUrl) {
 		redirectUrl = "/index.html";
 	}
+	event.preventDefault();
 	if($('#is-persistent-login')){
 		isPersistent = $('#is-persistent-login').prop( "checked" );
-		url = node.href + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
+		document.location =  node.href + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
 	}else{
-		url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
+		document.location =   persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
 	}
-	node.set('href', url);
 });
 
 
