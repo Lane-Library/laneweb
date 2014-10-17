@@ -25,13 +25,13 @@
 	Y.on("click", function(event) {popupShibboltehWindow(event);}, "a[href*=/redirect/cme]");
 
 	popupShibboltehWindow = function(event) {
-		var link = event.target, 
+		var link = event.currentTarget,
 		href = link.get('href');
 		if (!drMode && !persistentStatusCookie && ( !href ||  href.indexOf("javascript") !== 0)){
-			if(href){
-				redirectUrl = encodeURIComponent(href);
-			}else{
+			if(!href || href.indexOf("/secure/login.html")>-1){
 				redirectUrl = encodeURIComponent(location.get("href"))
+			}else{
+				redirectUrl = encodeURIComponent(href);
 			}
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
