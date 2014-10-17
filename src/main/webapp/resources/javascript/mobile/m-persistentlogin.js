@@ -59,8 +59,8 @@ $(document).on("click", '#shibboleth-links a', function(e) {
 	if (!redirectUrl) {
 		redirectUrl = "/index.html";
 	}
-	if(Y.one('#is-persistent-login')){
-		isPersistent = Y.one('#is-persistent-login').get('checked');
+	if($('#is-persistent-login')){
+		isPersistent = $('#is-persistent-login').get('checked');
 		url = node.get('href') + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
 	}else{
 		url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
@@ -72,7 +72,7 @@ $(document).on("click", '#shibboleth-links a', function(e) {
 
 
 $.LANE.toggleLogin = function(){
-    if( model["isActiveSunetID"] || $.LANE.getCookie('webauth_at') != null){
+    if( model['auth']){
         $('.webauthLogin').each(function(){
             $(this).text('Logout');
             $(this).attr('href',model['base-path'] + '/logout');
