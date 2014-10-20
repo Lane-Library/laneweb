@@ -97,12 +97,6 @@ li.active .description {
     display:block
 }
 
-.sourceLink {
-    color:#666666;
-}
-.pmid {
-    font-weight:bold;
-}
 .results-nav {
     background-color:#F7F3E5;
     padding:10px 5px 24px;
@@ -125,7 +119,4 @@ li.active .description {
 }
 .utdCMEnote {
     color:#820000;
-}
-.abstractLabel {
-    font-weight:bold;
 }

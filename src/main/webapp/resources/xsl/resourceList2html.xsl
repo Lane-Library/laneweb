@@ -90,16 +90,14 @@
                 <xsl:apply-templates select="s:pub-author"/>
             </xsl:if>
 
-            <div class="pubTitle">
+            <div>
                 <xsl:variable name="hits" select="number(s:resourceHits)"/>
                 <xsl:choose>
                     <xsl:when test="s:pub-text">
                         <xsl:value-of select="s:pub-text"/>
                         <xsl:if test="$resourceName = 'PubMed' or $hits &lt;= $moreResultsLimit">
-                            <span class="sourceLink">
                                 <xsl:text> - </xsl:text>
                                 <xsl:value-of select="$resourceName"/>
-                            </span>
                         </xsl:if>
                         <br/>
                         <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
@@ -117,16 +115,14 @@
                                 </xsl:if>
                             </xsl:when>
                             <xsl:when test="not(s:resourceHits) or $moreResultsLimit &gt;= $hits">
-                                <span class="sourceLink">
                                     <xsl:value-of select="$resourceName"/>
-                                </span>
                             </xsl:when>
                         </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
             <div class="yui3-g">
-                <div class="yui3-u-1-4">Article</div>
+                <div class="yui3-u-1-4"><strong>Article</strong></div>
                 <div class="yui3-u-1-4">
                     <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
                 </div>
@@ -144,7 +140,9 @@
         <li>
             <xsl:apply-templates select="s:link"/>
             <div class="yui3-g">
-                <div class="yui3-u-1-4"><xsl:value-of select="s:primaryType"/></div>
+                <div class="yui3-u-1-4">
+                    <strong><xsl:value-of select="s:primaryType"/></strong>
+                </div>
                 <div class="yui3-u-1-4">
                     <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
                 </div>
@@ -224,7 +222,7 @@
     </xsl:template>
 
     <xsl:template match="s:pub-author">
-        <div class="pubAuthor">
+        <div>
             <xsl:value-of select="."/>
         </div>
     </xsl:template>
@@ -233,12 +231,7 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')"/>
         </xsl:variable>
-        <span class="pmid">
-            <xsl:text> PMID: </xsl:text>
-            <a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">
-                <xsl:value-of select="$pmid"/>
-            </a>
-        </span>
+        <a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/></a>
     </xsl:template>
 
     <xsl:template match="s:keyword">
@@ -251,9 +244,9 @@
         <xsl:if test="position() > 1">
             <br/>
         </xsl:if>
-        <span class="abstractLabel">
+        <strong>
             <xsl:value-of select="."/>
-        </span>
+        </strong>
         <xsl:text>: </xsl:text>
     </xsl:template>
 
