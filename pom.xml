@@ -58,17 +58,13 @@
         <tag>HEAD</tag>
     </scm>
     <properties>
-        <laneweb.build.sourceDirectory>src/main/java</laneweb.build.sourceDirectory>
-        <laneweb.build.testSourceDirectory>src/test/java</laneweb.build.testSourceDirectory>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.exclusions>**/yui*.js,**/jquery*.js,**/swfobject.js</sonar.exclusions>
+        <sonar.exclusions>**/yui*.js,**/jquery*.js,**/swfobject.js,**/*-test.js</sonar.exclusions>
     </properties>
     <build>
         <defaultGoal>package</defaultGoal>
-        <sourceDirectory>${laneweb.build.sourceDirectory}</sourceDirectory>
-        <testSourceDirectory>${laneweb.build.testSourceDirectory}</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -602,27 +598,27 @@
             <artifactId>spring-aop</artifactId>
             <groupId>org.springframework</groupId>
             <scope>runtime</scope>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-beans</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context-support</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-core</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
@@ -650,22 +646,22 @@
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
             <scope>test</scope>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-webmvc</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
          <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
@@ -692,7 +688,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-            <version>3.2.9.RELEASE</version>
+            <version>3.2.11.RELEASE</version>
         </dependency>
         <dependency>
             <!-- required only for shccodec key generation -->
