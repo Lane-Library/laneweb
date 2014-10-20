@@ -63,7 +63,7 @@ $(document).on("click", '#shibboleth-links a', function(e) {
 		redirectUrl = "/index.html";
 	}
 	event.preventDefault();
-	if($('#is-persistent-login')){
+	if($('#is-persistent-login').length >0){
 		isPersistent = $('#is-persistent-login').prop( "checked" );
 		document.location =  node.href + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
 	}else{
