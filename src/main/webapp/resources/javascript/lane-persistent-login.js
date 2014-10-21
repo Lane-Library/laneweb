@@ -86,4 +86,18 @@
 	};
 	// END POPUP
 
+	
+	
+	// for the static page myaccounts.html Click on YES this way the user
+    // will not have to go through webauth.
+    if(Y.one('#persistent-login')){
+        Y.on('click',function(event) {
+            event.preventDefault();
+            if (isActive) {
+                location.set("href", basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
+            } else {
+                location.set("href", basePath + '/secure/persistentLogin.html?pl=true');
+            }
+        }, '#persistent-login');
+    }
 })();
