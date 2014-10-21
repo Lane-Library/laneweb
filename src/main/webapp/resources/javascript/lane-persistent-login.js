@@ -55,32 +55,49 @@
 	
 	// The popup window
 	var popupWindow = function(id, o) {
-		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href;
+		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href, node
+		organizationCookieValue = Y.Cookie.get("organization");
 		lightbox.setContent(o.responseText);
 		lightbox.show();
 		shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
-
+		//auto redirect if user to the previous idp it was saved in the cookie
+		if(organizationCookieValue){
+			node = Y.one('#'+organizationCookieValue);
+			setTimeout(function(){document.location =  getLinkValue(node.get('href'))}, 3000);
+			node.one('span').addClass('selected');
+		}
+		
 		// Click on one organization -- below the url we have to set here for
 		// stanford idp
 		// /Shibboleth.sso/Login?SAMLDS=1&entityID=https%3A%2F%2Fidp.stanford.edu%2F&target=%2Fsecure%2FpersistentLogin.html%3Fpl%3Dfalse%26url%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fsecure%252Fapps%252Fproxy%252Fcredential%253Furl%253Dhttp%253A%252F%252Fgoogle.com
 		Y.once("click", function(event) {
-			var node = event.currentTarget, url, 
-			persistentUrl = basePath+ '/secure/persistentLogin.html?pl=', 
-			isPersistent;
-			if (!redirectUrl) {
-				redirectUrl = "/index.html";
-			}
-			
-			if(Y.one('#is-persistent-login')){
-				isPersistent = Y.one('#is-persistent-login').get('checked');
-				url = node.get('href') + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
-			}else{
-				url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
-			}
-			
-			node.set('href', url);
+			node = event.currentTarget,
+			setAutoRedirectCookie(node.get('id'));
+			href = getLinkValue(node.get('href'));
+			node.set('href', href);
 		}, shibbolethAnchors);
 	};
 	// END POPUP
 
+	getLinkValue = function(shibbolethChoice){
+	    var	url, persistentUrl = basePath+ '/secure/persistentLogin.html?pl=', 
+		isPersistent;
+		if (!redirectUrl) {
+			redirectUrl = "/index.html";
+		}
+		if(Y.one('#is-persistent-login')){
+			isPersistent = Y.one('#is-persistent-login').get('checked');
+			return shibbolethChoice + encodeURIComponent( persistentUrl + isPersistent + '&url='+ redirectUrl);
+		}else{
+			return  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
+		}
+	}
+	
+	setAutoRedirectCookie = function(id) {
+		var d = new Date();
+		d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+		Y.Cookie.set("organization", id, {
+			expires : d.toUTCString()
+		});
+	}
 })();
