@@ -35,9 +35,10 @@ public class User {
     }
 
     public User(final String id, final String name, final String email, final String hashKey, final Status status) {
-        if (id.indexOf('@') == -1) {
-            throw new LanewebException("domain missing from id: " + id);
-        }
+        // FIXME: SHC doesn't always send scoped userid; log this or maybe add @Shib-Identity-Provider?
+//        if (id.indexOf('@') == -1) {
+//            throw new LanewebException("domain missing from id: " + id);
+//        }
         this.id = id;
         this.isStanfordUser = id.indexOf(AT_STANFORD_EDU) > -1;
         this.name = name;
