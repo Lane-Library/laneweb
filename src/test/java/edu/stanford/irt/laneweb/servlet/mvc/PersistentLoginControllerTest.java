@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.user.User;
 
@@ -57,7 +58,6 @@ public class PersistentLoginControllerTest {
     @Test
     public void testCreateCookieNotNullUrl() {
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
-        this.response.addCookie(isA(Cookie.class));
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.request, this.response, this.session, this.user, this.codec);
@@ -69,7 +69,6 @@ public class PersistentLoginControllerTest {
     @Test
     public void testCreateCookieNullUrl() {
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
-        this.response.addCookie(isA(Cookie.class));
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.request, this.response, this.session, this.user, this.codec, this.token);
@@ -78,21 +77,9 @@ public class PersistentLoginControllerTest {
         verify(this.userSource, this.request, this.session, this.response, this.user, this.codec, this.token);
     }
 
-    @Test
-    public void testCreateCookieUserIdNull() {
-        Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, null);
-        this.response.addCookie(isA(Cookie.class));
-        replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
-        this.persistenLoginController.enablePersistentLogin(null, null, this.url, this.request, this.response);
-        verify(this.userSource, this.request, this.session, this.response, this.user, this.codec);
-    }
 
     @Test
     public void testRemoveCookieUrlNotNull() {
-        Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "234890");
-        this.response.addCookie(isA(Cookie.class));
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
         String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, this.url, this.request, this.response);
         assertEquals(redirect, "redirect:/test.html");
@@ -101,9 +88,6 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testRemoveCookieUrlNull() {
-        Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie(PersistentLoginController.PERSISTENT_LOGIN_PREFERENCE, "234033");
-        this.response.addCookie(isA(Cookie.class));
         replay(this.userSource, this.request, this.session, this.response, this.user, this.codec);
         String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, null, this.request, this.response);
         assertEquals(redirect, "redirect:/myaccounts.html");

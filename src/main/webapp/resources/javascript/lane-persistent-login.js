@@ -1,7 +1,7 @@
 (function() {
 
 	var redirectUrl = null, 
-	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference', 
+	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-expiration-date', 
 	persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME), 
 	now = new Date(), 
 	location = Y.lane.Location, 
@@ -45,8 +45,10 @@
 	Y.on("click", function(event) {extensionPersistentLoginPopup(event);}, "a[href*=laneproxy.stanford.edu/login]");
 	
 	var extensionPersistentLoginPopup = function(event){
-		var link = event.target, href = link.get('href');
-		if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
+		var threeDays = 3600 * 3;
+		link = event.target, href = link.get('href');
+		
+		if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > (persistentStatusCookie - threeDays)) {
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(event.target.get('href'));

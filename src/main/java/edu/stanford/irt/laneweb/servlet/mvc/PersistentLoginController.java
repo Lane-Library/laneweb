@@ -1,12 +1,11 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
- * This class will add three cookies the persistent-expired-date, persistent-preference and user. The user cookie will
- * have the userid, name, email , the userAgent and the expired date appended and encrypted. The persistent-preference
- * have the expired date minus 3 days only pl=true have to have the secure in the path but not the other But if pl=renew
- * the status of the user is looked up see it is active or not. Before to delete the cookie, we check if the
- * persistent-preference value is not equals to denied because if it is equals denied the persistent window will never
- * appear.
+ * This class will add three cookies the persistent-expired-date and user. The user cookie will
+ * have the userid, name, email , the userAgent and the expired date appended and encrypted.
+ *  The persistent-expired-date cookie have the expired date. So 3 days will be subtract from it to popup a extension
+ *  window if the user is active and from stanford.   
+ * 
  */
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -33,13 +32,8 @@ import edu.stanford.irt.laneweb.user.User.Status;
 @Controller
 public class PersistentLoginController {
 
-    public static final String PERSISTENT_LOGIN_PREFERENCE = "persistent-preference";
-
-    // grace period is three days
-    private static final int GRACE_PERIOD = 3600 * 24 * 3;
-
     // login duration is two weeks:
-    private static final int PERSISTENT_LOGIN_DURATION = GRACE_PERIOD + 3600 * 24 * 7 * 2;
+    private static final int PERSISTENT_LOGIN_DURATION =  3600 * 24 * 7 * 2;
 
     private static final String UTF8 = "UTF-8";
 
@@ -119,11 +113,7 @@ public class PersistentLoginController {
     }
 
     private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
-        Cookie cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, null);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, null);
+        Cookie cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
@@ -153,11 +143,6 @@ public class PersistentLoginController {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.SECOND, PERSISTENT_LOGIN_DURATION);
             cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(calendar.getTime().getTime()));
-            cookie.setPath("/");
-            cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
-            response.addCookie(cookie);
-            calendar.add(Calendar.SECOND, -GRACE_PERIOD);
-            cookie = new Cookie(PERSISTENT_LOGIN_PREFERENCE, String.valueOf(calendar.getTime().getTime()));
             cookie.setPath("/");
             cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
             response.addCookie(cookie);
