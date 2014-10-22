@@ -1,14 +1,12 @@
 (function() {
 
 	var redirectUrl = null, 
-	PERSISTENT_PREFERENCE_COOKIE_NAME = 'lane-login-expiration-date', 
-	persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME), 
-	now = new Date(), 
+	persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'), 
 	location = Y.lane.Location, 
 	model = Y.lane.Model, 
 	basePath = model.get(model.BASE_PATH)|| "", 
 	drMode = model.get(model.DISASTER_MODE),
-	// isActive == true only if user is from stanford and is active in the LDAP
+	// istanfordActive == true only if user is from stanford and is active in the LDAP
 	// See UserDataBinder.java
 	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
 
@@ -45,13 +43,14 @@
 	Y.on("click", function(event) {extensionPersistentLoginPopup(event);}, "a[href*=laneproxy.stanford.edu/login]");
 	
 	var extensionPersistentLoginPopup = function(event){
-		var threeDays = 3600 * 3;
-		link = event.target, href = link.get('href');
+		var threeDays = 3600 * 3, 
+		now = new Date(), 
+		link = event.target; 
 		
 		if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > (persistentStatusCookie - threeDays)) {
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
-			redirectUrl = encodeURIComponent(event.target.get('href'));
+			redirectUrl = encodeURIComponent(link.get('href'));
 			getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
 		}
 	};
@@ -60,7 +59,7 @@
 	
 	// The popup window
 	var popupWindow = function(id, o) {
-		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href;
+		var lightbox = Y.lane.Lightbox, shibbolethAnchors;
 		lightbox.setContent(o.responseText);
 		lightbox.show();
 		shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
@@ -82,7 +81,6 @@
 			}else{
 				url =  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
 			}
-			
 			node.set('href', url);
 		}, shibbolethAnchors);
 	};
