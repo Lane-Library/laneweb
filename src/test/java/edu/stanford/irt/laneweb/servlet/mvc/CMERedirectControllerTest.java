@@ -128,7 +128,7 @@ public class CMERedirectControllerTest {
         expect(this.request.getQueryString()).andReturn("yo");
         this.response.sendRedirect("/cmeRedirectError.html?yo");
         replay(this.request, this.response);
-        this.controller.cmeRedirect("sunetid", "/basepath", "emrid", true, "http://www.badhost.com", this.request,
+        this.controller.cmeRedirect("userid", "/basepath", "emrid", true, "http://www.badhost.com", this.request,
                 this.response);
         verify(this.request, this.response);
     }

@@ -33,22 +33,22 @@ public class JSONBookmarkControllerTest {
 
     private JSONBookmarkController controller;
 
-    private String sunetid;
+    private String userid;
 
     @Before
     public void setUp() throws Exception {
         this.bookmarkDAO = createMock(BookmarkDAO.class);
         this.controller = new JSONBookmarkController(this.bookmarkDAO, null, null, null);
-        this.sunetid = "ditenus";
+        this.userid = "ditenus";
         this.bookmarks = new ArrayList<Object>();
         this.bookmark = new Bookmark("label", "url");
     }
 
     @Test
     public void testAddBookmark() {
-        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Collections.<Object>singletonList(this.bookmark)));
+        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Collections.<Object>singletonList(this.bookmark)));
         replay(this.bookmarkDAO);
-        this.controller.addBookmark(this.bookmarks, this.sunetid, this.bookmark);
+        this.controller.addBookmark(this.bookmarks, this.userid, this.bookmark);
         verify(this.bookmarkDAO);
     }
 
@@ -58,9 +58,9 @@ public class JSONBookmarkControllerTest {
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Arrays.asList(new Object[] { this.bookmark, this.bookmark })));
+        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Arrays.asList(new Object[] { this.bookmark, this.bookmark })));
         replay(this.bookmarkDAO);
-        this.controller.deleteBookmark(this.bookmarks, this.sunetid, "[0,3]");
+        this.controller.deleteBookmark(this.bookmarks, this.userid, "[0,3]");
         verify(this.bookmarkDAO);
     }
 
@@ -81,7 +81,7 @@ public class JSONBookmarkControllerTest {
         json.put("from", 5);
         replay(this.bookmarkDAO);
         try {
-            this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
+            this.controller.moveBookmark(this.bookmarks, this.userid, json);
         } catch (IndexOutOfBoundsException e) {
         }
         assertEquals(this.bookmark, this.bookmarks.get(1));
@@ -97,7 +97,7 @@ public class JSONBookmarkControllerTest {
         json.put("from", 0);
         replay(this.bookmarkDAO);
         try {
-            this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
+            this.controller.moveBookmark(this.bookmarks, this.userid, json);
         } catch (IndexOutOfBoundsException e) {
         }
         assertEquals(this.bookmark, this.bookmarks.get(1));
@@ -120,9 +120,9 @@ public class JSONBookmarkControllerTest {
         json.put("to", 1);
         json.put("from", 8);
         Capture<List<Object>> capture = new Capture<List<Object>>();
-        this.bookmarkDAO.saveLinks(eq(this.sunetid), capture(capture));
+        this.bookmarkDAO.saveLinks(eq(this.userid), capture(capture));
         replay(this.bookmarkDAO);
-        this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
+        this.controller.moveBookmark(this.bookmarks, this.userid, json);
         assertEquals("bookmark8", ((Bookmark) this.bookmarks.get(1)).getLabel());
         assertEquals("bookmark1", ((Bookmark) this.bookmarks.get(2)).getLabel());
         assertEquals("bookmark7", ((Bookmark) this.bookmarks.get(8)).getLabel());
@@ -148,9 +148,9 @@ public class JSONBookmarkControllerTest {
         json.put("to", 8);
         json.put("from", 1);
         Capture<List<Object>> capture = new Capture<List<Object>>();
-        this.bookmarkDAO.saveLinks(eq(this.sunetid), capture(capture));
+        this.bookmarkDAO.saveLinks(eq(this.userid), capture(capture));
         replay(this.bookmarkDAO);
-        this.controller.moveBookmark(this.bookmarks, this.sunetid, json);
+        this.controller.moveBookmark(this.bookmarks, this.userid, json);
         assertEquals("bookmark1", ((Bookmark) this.bookmarks.get(8)).getLabel());
         assertEquals("bookmark2", ((Bookmark) this.bookmarks.get(1)).getLabel());
         assertEquals("bookmark8", ((Bookmark) this.bookmarks.get(7)).getLabel());
@@ -165,9 +165,9 @@ public class JSONBookmarkControllerTest {
         json.put("label", "newlabel");
         json.put("url", "newurl");
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(eq(this.sunetid), eq(Collections.<Object>singletonList(new Bookmark("newlabel", "newurl"))));
+        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Collections.<Object>singletonList(new Bookmark("newlabel", "newurl"))));
         replay(this.bookmarkDAO);
-        this.controller.saveBookmark(this.bookmarks, this.sunetid, json);
+        this.controller.saveBookmark(this.bookmarks, this.userid, json);
         verify(this.bookmarkDAO);
     }
 }

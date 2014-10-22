@@ -59,7 +59,7 @@ public class BookmarkDataBinderTest {
     }
 
     @Test
-    public void testNoSunetid() {
+    public void testNoUserid() {
         this.model = new HashMap<String, Object>();
         this.binder.bind(this.model, this.request);
         assertFalse(this.model.containsKey(Model.BOOKMARKS));
