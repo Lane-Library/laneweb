@@ -12,14 +12,14 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 public class CacheableSelector implements Selector {
 
     /**
-     * Checks to see if the model contains particular values, currently SUNETID, DEBUG, QUERY, EMRID,
+     * Checks to see if the model contains particular values, currently USER_ID, DEBUG, QUERY, EMRID,
      * or the sitemap-uri is /error.html or contains /bassett/, and if it does return false.
      */
     @Override
     public boolean select(final String expression, final Map<String, Object> model, final Map<String, String> parameters) {
         boolean result = true;
         String sitemapURI = ModelUtil.getString(model, Model.SITEMAP_URI, "");
-        if (model.containsKey(Model.SUNETID)) {
+        if (model.containsKey(Model.USER_ID)) {
             result = false;
         } else if (model.containsKey(Model.QUERY)) {
             result = false;

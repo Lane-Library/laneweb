@@ -26,7 +26,7 @@
     
     <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/logged-in"
         class="edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector">
-        <property name="attributeName" value="sunetid"/>
+        <property name="attributeName" value="userid"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/cacheable"

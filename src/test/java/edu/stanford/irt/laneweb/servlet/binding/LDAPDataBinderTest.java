@@ -16,9 +16,9 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.ldap.LDAPData;
-import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.user.LDAPData;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 public class LDAPDataBinderTest {
 
@@ -46,7 +46,7 @@ public class LDAPDataBinderTest {
 
     @Test
     public void testBind() {
-        this.model.put(Model.SUNETID, "sunetid");
+        this.model.put(Model.USER_ID, "sunetid");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.NAME)).andReturn(null);
         expect(this.session.getAttribute(Model.UNIVID)).andReturn(null);
@@ -72,7 +72,7 @@ public class LDAPDataBinderTest {
 
     @Test
     public void testBindNameOnlyInSession() {
-        this.model.put(Model.SUNETID, "sunetid");
+        this.model.put(Model.USER_ID, "sunetid");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.NAME)).andReturn("name");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn(null);
@@ -100,7 +100,7 @@ public class LDAPDataBinderTest {
 
     @Test
     public void testBindValuesInSession() {
-        this.model.put(Model.SUNETID, "sunetid");
+        this.model.put(Model.USER_ID, "sunetid");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.NAME)).andReturn("name");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");

@@ -2,17 +2,17 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0">
 
-    <xsl:param name="sunetid"/>
+    <xsl:param name="userid"/>
     <xsl:param name="ticket"/>
     <xsl:param name="proxy-links"/>
 
     <xsl:variable name="proxy-url">http://laneproxy.stanford.edu/login?</xsl:variable>
     <xsl:variable name="post-url">
         <xsl:choose>
-            <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
+            <xsl:when test="$proxy-links = 'true' and $userid != '' and $ticket != ''">
                 <xsl:value-of select="$proxy-url"/>
                 <xsl:text>user=</xsl:text>
-                <xsl:value-of select="$sunetid"/>
+                <xsl:value-of select="$userid"/>
                 <xsl:text>&amp;ticket=</xsl:text>
                 <xsl:value-of select="$ticket"/>
                 <xsl:text>&amp;url=</xsl:text>

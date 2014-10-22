@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.ldap;
+package edu.stanford.irt.laneweb.user;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
@@ -19,6 +19,10 @@ import org.slf4j.Logger;
 import org.springframework.ldap.CommunicationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
+
+import edu.stanford.irt.laneweb.user.LDAPData;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
+import edu.stanford.irt.laneweb.user.SubjectSource;
 
 public class LDAPDataAccessTest {
 

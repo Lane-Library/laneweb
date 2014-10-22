@@ -7,24 +7,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.user.User;
 
-public class SunetIdCookieCodecTest {
+public class UserCookieCodecTest {
 
-    private SunetIdCookieCodec codec;
+    private UserCookieCodec codec;
 
     @Test
     public void createAndRestore() {
-        PersistentLoginToken token = this.codec.createLoginToken("ditenus", 12345);
-        assertEquals(this.codec.restoreLoginToken(token.getEncryptedValue()).getSunetId(), "ditenus");
+        User user = new User("id@domain", "", "", "");
+        PersistentLoginToken token = this.codec.createLoginToken(user, 12345);
+        assertEquals(this.codec.restoreLoginToken(token.getEncryptedValue(), "").getUser(), user);
     }
 
     @Before
     public void setUp() {
-        this.codec = new SunetIdCookieCodec("key");
+        this.codec = new UserCookieCodec("key");
     }
 
     @Test
-    public void testCreateLoginTokenNullSunetid() {
+    public void testCreateLoginTokenNullUserId() {
         try {
             this.codec.createLoginToken(null, 0);
             fail();
@@ -35,7 +37,7 @@ public class SunetIdCookieCodecTest {
     @Test
     public void testRestoreLoginTokenBadValue() {
         try {
-            this.codec.restoreLoginToken("abc");
+            this.codec.restoreLoginToken("abc", "def");
             fail();
         } catch (LanewebException e) {
         }
@@ -44,7 +46,7 @@ public class SunetIdCookieCodecTest {
     @Test
     public void testRestoreLoginTokenNullValue() {
         try {
-            this.codec.restoreLoginToken(null);
+            this.codec.restoreLoginToken(null, null);
             fail();
         } catch (LanewebException e) {
         }

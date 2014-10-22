@@ -45,9 +45,9 @@ public class SQLBookmarkDAO implements BookmarkDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object> getLinks(final String sunetid) {
-        if (sunetid == null) {
-            throw new LanewebException("null sunetid");
+    public List<Object> getLinks(final String userid) {
+        if (userid == null) {
+            throw new LanewebException("null userid");
         }
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -57,7 +57,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         try {
             conn = this.dataSource.getConnection();
             pstmt = conn.prepareStatement(READ_BOOKMARKS_SQL);
-            pstmt.setString(1, sunetid);
+            pstmt.setString(1, userid);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
@@ -96,9 +96,9 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         return count;
     }
 
-    public void saveLinks(final String sunetid, final List<Object> links) {
-        if (sunetid == null) {
-            throw new LanewebException("null sunetid");
+    public void saveLinks(final String userid, final List<Object> links) {
+        if (userid == null) {
+            throw new LanewebException("null userid");
         }
         if (links == null) {
             throw new LanewebException("null links");
@@ -113,11 +113,11 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             // is the only place updates happen.
             conn.setAutoCommit(false);
             pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
-            pstmt.setString(1, sunetid);
+            pstmt.setString(1, userid);
             pstmt.execute();
             if (!links.isEmpty()) {
                 cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL);
-                cstmt.setString(1, sunetid);
+                cstmt.setString(1, userid);
                 cstmt.registerOutParameter(2, java.sql.Types.BLOB);
                 cstmt.executeUpdate();
                 Blob blob = cstmt.getBlob(2);

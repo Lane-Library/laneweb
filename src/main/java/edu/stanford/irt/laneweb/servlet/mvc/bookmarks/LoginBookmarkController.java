@@ -14,29 +14,29 @@ import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
 public class LoginBookmarkController extends BookmarkController {
 
     @Autowired
     public LoginBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            SunetIdAndTicketDataBinder sunetidTicketDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, sunetidTicketDataBinder);
+            UserDataBinder userDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
     }
 
     @RequestMapping(value = "/secure/addBookmark")
     public String addBookmark(
             final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final String label,
             @RequestParam final String url,
             @RequestParam final String redirect) {
         Bookmark bookmark = new Bookmark(label, url);
         List<Object> clone = new ArrayList<Object>(bookmarks);
         clone.add(0, bookmark);
-        saveLinks(sunetid, clone);
+        saveLinks(userid, clone);
         bookmarks.add(0, bookmark);
         return "redirect:" + redirect;
     }

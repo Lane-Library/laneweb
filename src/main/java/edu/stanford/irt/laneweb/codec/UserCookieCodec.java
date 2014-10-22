@@ -14,9 +14,10 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.user.User;
 
 //TODO: remove code duplicated with SHCCodec
-public class SunetIdCookieCodec {
+public class UserCookieCodec {
 
     public static final String LANE_COOKIE_NAME = "user";
 
@@ -26,7 +27,7 @@ public class SunetIdCookieCodec {
 
     private SecretKey desKey;
 
-    public SunetIdCookieCodec(final String key) {
+    public UserCookieCodec(final String key) {
         try {
             // latest version of commons-codec (1.6) does not pad with 0 bytes
             // to 16, so do that here:
@@ -42,29 +43,36 @@ public class SunetIdCookieCodec {
         }
     }
 
-    public PersistentLoginToken createLoginToken(final String sunetId, final int userAgentHash) {
+    public PersistentLoginToken createLoginToken(final User user, final int userAgentHash) {
+        if (user == null) {
+            throw new LanewebException("null user");
+        }
         long now = System.currentTimeMillis();
         StringBuilder builder = new StringBuilder();
-        builder.append(sunetId);
+        builder.append(user.getId());
+        builder.append(COOKIE_VALUE_SEPARATOR);
+        builder.append(user.getName());
+        builder.append(COOKIE_VALUE_SEPARATOR);
+        builder.append(user.getEmail());
         builder.append(COOKIE_VALUE_SEPARATOR);
         builder.append(now);
         builder.append(COOKIE_VALUE_SEPARATOR);
         builder.append(userAgentHash);
         String encryptedValue = encrypt(builder.toString());
-        return new PersistentLoginToken(sunetId, now, userAgentHash, encryptedValue);
+        return new PersistentLoginToken(user, now, userAgentHash, encryptedValue);
     }
 
-    public PersistentLoginToken restoreLoginToken(final String encryptedValue) {
+    public PersistentLoginToken restoreLoginToken(final String encryptedValue, final String userIdHashKey) {
         if (encryptedValue == null) {
             throw new LanewebException("null encryptedValue");
         }
         String decrypted = decrypt(encryptedValue);
         String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
-        if (values.length != 3) {
+        if (values.length != 5) {
             throw new LanewebException("invalid encryptedValue");
         }
         try {
-            return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]), encryptedValue);
+            return new PersistentLoginToken(new User(values[0], values[1], values[2], userIdHashKey), Long.parseLong(values[3]), Integer.parseInt(values[4]), encryptedValue);
         } catch (NumberFormatException e) {
             throw new LanewebException("invalid encryptedValue", e);
         }

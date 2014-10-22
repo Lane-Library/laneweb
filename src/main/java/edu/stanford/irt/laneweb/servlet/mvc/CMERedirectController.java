@@ -26,7 +26,7 @@ public class CMERedirectController {
 
     private static final String SHC_EMRID_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
 
-    private static final String SU_SUNETID_ARGS = "unid=?&srcsys=EZPX90710&eiv=2.1.0";
+    private static final String SU_USERID_ARGS = "unid=?&srcsys=EZPX90710&eiv=2.1.0";
 
     private static final String UTD_CME_URL = "http://www.uptodate.com/contents/search?";
 
@@ -42,29 +42,29 @@ public class CMERedirectController {
     }
 
     @RequestMapping(value = "redirect/cme")
-    public void cmeRedirect(@ModelAttribute(Model.AUTH) final String sunetHash,
+    public void cmeRedirect(@ModelAttribute(Model.AUTH) final String userHash,
             @ModelAttribute(Model.BASE_PATH) final String basePath, @ModelAttribute(Model.EMRID) final String emrid,
             @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks, @RequestParam final String url,
             final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         if (url == null) {
             throw new IllegalArgumentException("null url");
         }
-        if (emrid == null && sunetHash == null) {
+        if (emrid == null && userHash == null) {
             response.sendRedirect(basePath + "/secure/redirect/cme?url=" + url);
         } else {
-            doRedirect(sunetHash, emrid, proxyLinks, url, request, response);
+            doRedirect(userHash, emrid, proxyLinks, url, request, response);
         }
     }
 
     @RequestMapping(value = "secure/redirect/cme")
-    public void cmeSecureRedirect(@ModelAttribute(Model.AUTH) final String sunetHash,
+    public void cmeSecureRedirect(@ModelAttribute(Model.AUTH) final String userHash,
             @ModelAttribute(Model.EMRID) final String emrid,
             @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks, @RequestParam final String url,
             final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         if (url == null) {
             throw new IllegalArgumentException("null url");
         }
-        doRedirect(sunetHash, emrid, proxyLinks, url, request, response);
+        doRedirect(userHash, emrid, proxyLinks, url, request, response);
     }
 
     /**
@@ -92,23 +92,23 @@ public class CMERedirectController {
         }
     }
 
-    private String createCMELink(final String link, final String emrid, final String sunetHash, final boolean proxyLinks) {
+    private String createCMELink(final String link, final String emrid, final String userHash, final boolean proxyLinks) {
         StringBuilder sb = new StringBuilder();
         String id = null;
         String args = null;
         if (proxyLinks) {
             sb.append(PROXY_LINK);
         }
-        if (emrid == null && sunetHash == null) {
+        if (emrid == null && userHash == null) {
             sb.append(link);
             return sb.toString();
         }
         if (emrid != null) {
             id = emrid;
             args = SHC_EMRID_ARGS;
-        } else if (sunetHash != null) {
-            id = sunetHash;
-            args = SU_SUNETID_ARGS;
+        } else if (userHash != null) {
+            id = userHash;
+            args = SU_USERID_ARGS;
         }
         if (link.contains("?")) {
             sb.append(link).append("&").append(QUESTION_MARK_PATTERN.matcher(args).replaceFirst(id));
@@ -120,10 +120,10 @@ public class CMERedirectController {
         return sb.toString();
     }
 
-    private void doRedirect(final String sunetHash, final String emrid, final boolean proxyLinks, final String url,
+    private void doRedirect(final String userHash, final String emrid, final boolean proxyLinks, final String url,
             final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         if (url.contains("www.uptodate.com")) {
-            response.sendRedirect(createCMELink(url, emrid, sunetHash, proxyLinks));
+            response.sendRedirect(createCMELink(url, emrid, userHash, proxyLinks));
         } else {
             String queryString = request.getQueryString();
             response.sendRedirect(null == queryString ? ERROR_URL : ERROR_URL + '?' + queryString);

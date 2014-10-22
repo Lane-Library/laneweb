@@ -55,17 +55,57 @@
 /*-------------------------persistent login--------------------------------------------------------------------------*/
 #persistent #hd  {
 	color: #8c1515;
-	line-height: 1.2em;
-	font-size: 20px;
-	padding-bottom: 12px;
+	font-weight: bold;
+	line-height: 1.4em;
+	font-size: 1.4em;
+	padding-bottom: 1.5em;
 	text-align:center;
 	margin-bottom: .2em;	
 }
 
-#persistent #ft {
-	text-align: right;
-	padding-right: 30px;
-	margin-top: .7em;
+#persistent label{
+	display: inline-block;
+	font-weight: bold;
+	margin-left: 3px;
+	margin-bottom: 18px;
+	}
+
+#shibboleth-links {
+	text-align:center;
+}
+
+#shibboleth-links .organization{  
+	text-align:center;
+	margin-top:6px;
+	padding:6px 0px 6px 0px;
+	background-color:  rgb(236, 241, 242);
+}
+
+#shibboleth-links .organization li{
+	display: inline-block;
+	border-bottom: none;
+	padding: 3px 6px 3px 6px;
+	}
+
+#shibboleth-links .organization a{
+	display: block;
+	border: 1px solid #ddd;
+	padding:12px 3px 12px 3px;
+	background-color: white;
+}
+#shibboleth-links .organization span{
+	display: block;
+	padding:38px 134px 0px 0px;
+	background-color:  white;
+	background-repeat: none;
+	background-image: url('/graphics/logos/organizations.png');
+}
+
+#shibboleth-links .organization a#SHC span{
+background-position: 14px -51px;
+}
+#shibboleth-links .organization a#LPCH span{
+background-position: center -103px;
 }
 
 #persistent #login {

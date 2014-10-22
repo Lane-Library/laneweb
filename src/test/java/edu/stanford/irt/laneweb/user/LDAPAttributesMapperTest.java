@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.ldap;
+package edu.stanford.irt.laneweb.user;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
@@ -18,6 +18,9 @@ import javax.naming.directory.Attributes;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.user.LDAPAttributesMapper;
+import edu.stanford.irt.laneweb.user.LDAPData;
 
 public class LDAPAttributesMapperTest {
 

@@ -5,9 +5,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import edu.stanford.irt.laneweb.ldap.LDAPData;
-import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.user.LDAPData;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 public class LDAPDataBinder implements DataBinder {
 
@@ -17,10 +17,10 @@ public class LDAPDataBinder implements DataBinder {
         this.ldapDataAccess = ldapDataAccess;
     }
 
-    //TODO: create an immutable user object with all this stuff and sunetid, etc.
+    //TODO: create an immutable user object with all this stuff and userid, etc.
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        String sunetid = (String) model.get(Model.SUNETID);
-        if (sunetid != null) {
+        String userid = (String) model.get(Model.USER_ID);
+        if (userid != null) {
             String name = null;
             String univid = null;
             Boolean isActive = null;
@@ -32,7 +32,7 @@ public class LDAPDataBinder implements DataBinder {
                 isActive = (Boolean) session.getAttribute(Model.IS_ACTIVE_SUNETID);
                 email = (String) session.getAttribute(Model.EMAIL);
                 if (name == null) {
-                    LDAPData ldapData = this.ldapDataAccess.getLdapDataForSunetid(sunetid);
+                    LDAPData ldapData = this.ldapDataAccess.getLdapDataForSunetid(userid);
                     name = ldapData.getName();
                     univid = ldapData.getUnivId();
                     isActive = Boolean.valueOf(ldapData.isActive());

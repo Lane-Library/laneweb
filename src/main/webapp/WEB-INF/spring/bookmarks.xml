@@ -16,9 +16,13 @@
         class="edu.stanford.irt.laneweb.cocoon.ActionSelector"/>
     
     <bean name="edu.stanford.irt.laneweb.bookmarks.BookmarkDAO"
-        class="edu.stanford.irt.laneweb.bookmarks.SQLBookmarkDAO">
-        <constructor-arg ref="javax.sql.DataSource/eresources"/>
-        <constructor-arg ref="org.slf4j.Logger/SQLBookmarkDAO"/>
+        class="edu.stanford.irt.laneweb.bookmarks.StanfordDomainStrippingBookmarkDAO">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.bookmarks.SQLBookmarkDAO">
+                <constructor-arg ref="javax.sql.DataSource/eresources"/>
+                <constructor-arg ref="org.slf4j.Logger/SQLBookmarkDAO"/>
+            </bean>
+        </constructor-arg>
     </bean>
     
 </beans>

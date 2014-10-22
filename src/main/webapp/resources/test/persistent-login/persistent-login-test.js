@@ -1,5 +1,6 @@
 (function(){
 
+	
     Y.lane.Location.on("hrefChange", function(event) {
         event.preventDefault();
         persistentLoginTestCase.href = event.newVal;
@@ -11,17 +12,19 @@
     });
 
     Y.io = function(url, config) {
-        config.on.success.apply(this, [0,{responseText:'<div><a id="yes-persistent-login">yes</a><a id="no-persistent-login">no</a><input type="checkbox" id="dont-ask-again"/></div>'}]);
+        config.on.success.apply(this, [0,{responseText:'<input type="checkbox" id="is-persistent-login" /> <div id="shibboleth-links"><a href="shibbolethPath" id="Stanford">Stanford University</a><a id="SHC">shc</a><input type="checkbox" id="is-persistent-login"/></div>'}]);
     };
     var persistentLoginTestCase = new Y.Test.Case({
         name: 'persistent-login Test Case',
 
-        cookie: Y.Cookie.get("persistent-preference"),
+        cookie: null,
 
         href: null,
 
         path: null,
-
+        
+        
+        
         tearDown: function() {
             Y.lane.Lightbox.hide();
             Y.lane.Lightbox.setContent("");
@@ -29,69 +32,56 @@
             this.path = null;
         },
 
-        testLoginClickYesClick: function() {
+        testStanfordLoginClick: function() {
             Y.one("#login").simulate("click");
-            if (this.cookie === "denied") {
-                Y.Assert.areSame("/secure/persistentLogin.html?pl=false&ur", this.href.substring(0, 40));
-            } else {
-                var yes = Y.one("#yes-persistent-login");
-                var handle = yes.on("click", function(event) {
+             var stanford = Y.one("#Stanford");
+                var handle = stanford.on("click", function(event) {
                     event.preventDefault();
                 });
-                yes.simulate("click");
+                stanford.simulate("click");
                 handle.detach();
-                //TODO: why &url=, not ?url=
-                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
-            }
+                Y.Assert.isTrue(stanford.get("href").indexOf("/shibbolethPath%2Fsecure%2FpersistentLogin.html%3Fpl%3Dfalse") > 0);
+                
         },
 
-        testLoginClickNoClick: function() {
-            Y.one("#login").simulate("click");
-            if (this.cookie === "denied") {
-                Y.Assert.areSame("/secure/persistentLogin.html?pl=false&ur", this.href.substring(0, 40));
-            } else {
-                var no = Y.one("#no-persistent-login");
-                var handle = no.on("click", function(event) {
-                    event.preventDefault();
-                });
-                no.simulate("click");
-                handle.detach();
-                //TODO: why &url=, not ?url=
-                Y.Assert.isTrue(no.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
-            }
-        },
 
+            
         testProxyLoginClick: function() {
             Y.one("#proxylogin").simulate("click");
-            if (this.cookie === "denied") {
-                Y.Assert.isTrue(-1 < this.path.indexOf("secure/apps/proxy/credential") < 2);
-            } else {
-                var yes = Y.one("#yes-persistent-login");
-                var handle = yes.on("click", function(event) {
+             var stanford = Y.one("#Stanford");
+                var handle = stanford.on("click", function(event) {
                     event.preventDefault();
                 });
-                yes.simulate("click");
+                stanford.simulate("click");
                 handle.detach();
-                //TODO: why &url=, not ?url=
-                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
-            }
+                Y.Assert.isTrue(stanford.get("href").indexOf("/shibbolethPath%2Fsecure%2FpersistentLogin.html%3Fpl%3Dfalse") > 0);
+            
         },
         
         testCmeRedirectClick: function() {
             Y.one("#cmeredirect").simulate("click");
-            if (this.cookie === "denied") {
-                Y.Assert.isTrue(-1 < this.path.indexOf("redirect/cme") < 2);
-            } else {
-                var yes = Y.one("#yes-persistent-login");
-                var handle = yes.on("click", function(event) {
+                var stanford = Y.one("#Stanford");
+                var handle = stanford.on("click", function(event) {
                     event.preventDefault();
                 });
-                yes.simulate("click");
+                stanford.simulate("click");
                 handle.detach();
-                //TODO: why &url=, not ?url=
-                Y.Assert.isTrue(yes.get("href").indexOf("/secure/persistentLogin.html&url=") > 0);
-            }
-        }
+                Y.Assert.isTrue(stanford.get("href").indexOf("/shibbolethPath%2Fsecure%2FpersistentLogin.html%3Fpl%3Dfalse") > 0);
+        },
+        
+        testSetCookie: function() {
+            Y.one("#cmeredirect").simulate("click");
+                var stanford = Y.one("#Stanford");
+                Y.one("#is-persistent-login").set("checked",true);
+                var handle = stanford.on("click", function(event) {
+                	event.preventDefault();
+                });
+                stanford.simulate("click");
+                Y.Cookie.set("persistent-preference", "1000");
+                handle.detach();
+                Y.Assert.isTrue(stanford.get("href").indexOf("/shibbolethPath%2Fsecure%2FpersistentLogin.html%3Fpl%3Dtrue") > 0);
+        },
+        
     });
 
 
