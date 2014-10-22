@@ -19,7 +19,7 @@ import edu.stanford.irt.laneweb.user.User;
 //TODO: remove code duplicated with SHCCodec
 public class UserCookieCodec {
 
-    public static final String LANE_COOKIE_NAME = "user";
+    public static final String LANE_COOKIE_NAME = "lane_user";
 
     private static final String COOKIE_VALUE_SEPARATOR = "%";
 

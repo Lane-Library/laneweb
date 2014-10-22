@@ -166,7 +166,7 @@ public class UserDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
-        expect(this.cookie.getName()).andReturn("user");
+        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
         expect(this.cookie.getValue()).andReturn("value");
         expect(this.codec.restoreLoginToken("value", "key")).andReturn(this.token);
         expect(this.token.isValidFor(geq(System.currentTimeMillis()), eq("useragent".hashCode()))).andReturn(false);
@@ -185,7 +185,7 @@ public class UserDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
-        expect(this.cookie.getName()).andReturn("user");
+        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
         expect(this.cookie.getValue()).andReturn("value");
         expect(this.codec.restoreLoginToken("value", "key")).andReturn(this.token);
         expect(this.token.isValidFor(geq(System.currentTimeMillis()), eq("useragent".hashCode()))).andReturn(true);
@@ -217,7 +217,7 @@ public class UserDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
-        expect(this.cookie.getName()).andReturn("user");
+        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
         expect(this.cookie.getValue()).andReturn("value");
         expect(this.codec.restoreLoginToken("value", "key")).andReturn(this.token);
         expect(this.token.isValidFor(geq(System.currentTimeMillis()), eq("useragent".hashCode()))).andReturn(true);
@@ -252,7 +252,7 @@ public class UserDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
-        expect(this.cookie.getName()).andReturn("user");
+        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
         expect(this.cookie.getValue()).andReturn("value");
         expect(this.codec.restoreLoginToken("value", "key")).andReturn(this.token);
         expect(this.token.isValidFor(geq(System.currentTimeMillis()), eq("useragent".hashCode()))).andReturn(true);
@@ -287,7 +287,7 @@ public class UserDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
-        expect(this.cookie.getName()).andReturn("user");
+        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
         expect(this.cookie.getValue()).andReturn("value").times(2);
         expect(this.codec.restoreLoginToken("value", "key")).andThrow(new LanewebException("oopsie"));
         replay(this.request, this.session, this.user, this.cookie, this.codec, this.token);
