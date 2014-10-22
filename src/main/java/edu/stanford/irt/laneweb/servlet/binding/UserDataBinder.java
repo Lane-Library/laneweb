@@ -131,9 +131,11 @@ public class UserDataBinder implements DataBinder {
 
     private User getUserWithStatus(final User user) {
         if (user.isStanfordUser()) {
-            LDAPData data = this.ldap.getLdapDataForSunetid(user.getId());
+            String userid = user.getId();
+            String sunetid = userid.substring(0, userid.indexOf('@'));
+            LDAPData data = this.ldap.getLdapDataForSunetid(sunetid);
             Status status = data.isActive() ? Status.ACTIVE : Status.INACTIVE;
-            return new User(user.getId() + "@stanford.edu", user.getName(), user.getEmail(), this.userIdHashKey, status);
+            return new User(userid, user.getName(), user.getEmail(), this.userIdHashKey, status);
         }
         return user;
     }

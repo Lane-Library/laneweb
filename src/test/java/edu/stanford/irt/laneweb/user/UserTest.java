@@ -13,7 +13,7 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        this.user = new User("id", "name", "email", "hashkey");
+        this.user = new User("id@domain", "name", "email", "hashkey");
     }
 
     @Test
@@ -23,12 +23,12 @@ public class UserTest {
 
     @Test
     public void testEqualsObjectDifferentId() {
-        assertFalse(this.user.equals(new User("di", null, null, null)));
+        assertFalse(this.user.equals(new User("di@domain", null, null, null)));
     }
 
     @Test
     public void testEqualsObjectSameId() {
-        assertTrue(this.user.equals(new User("id", null, null, null)));
+        assertTrue(this.user.equals(new User("id@domain", null, null, null)));
     }
 
     @Test
@@ -38,14 +38,14 @@ public class UserTest {
 
     @Test
     public void testGetHashedId() {
-        assertEquals("307d214168011862c7f0a95ee0ece4e6", this.user.getHashedId());
+        assertEquals("307d214168011862c7f0a95ee0ece4e6@domain", this.user.getHashedId());
         User another = new User("id@name.org", "name", "email", "hashkey");
         assertEquals("307d214168011862c7f0a95ee0ece4e6@name.org", another.getHashedId());
     }
 
     @Test
     public void testGetId() {
-        assertEquals("id", this.user.getId());
+        assertEquals("id@domain", this.user.getId());
     }
 
     @Test
@@ -55,11 +55,11 @@ public class UserTest {
 
     @Test
     public void testHashCode() {
-        assertEquals(this.user.hashCode(), new User("id", null, null, null).hashCode());
+        assertEquals(this.user.hashCode(), new User("id@domain", null, null, null).hashCode());
     }
 
     @Test
     public void testStanfordEduId() {
-        assertEquals("sunetid", new User("sunetid@stanford.edu", null, null, null).getId());
+        assertEquals("sunetid@stanford.edu", new User("sunetid@stanford.edu", null, null, null).getId());
     }
 }

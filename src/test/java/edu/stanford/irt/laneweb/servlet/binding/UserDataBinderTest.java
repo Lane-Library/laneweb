@@ -74,17 +74,17 @@ public class UserDataBinderTest {
         Map<String, Object> model = new HashMap<String, Object>();
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
-        expect(this.request.getRemoteUser()).andReturn("id");
+        expect(this.request.getRemoteUser()).andReturn("id@domain");
         expect(this.request.getAttribute("displayName")).andReturn("name");
         expect(this.request.getAttribute("mail")).andReturn("mail");
         this.session.setAttribute(eq(Model.USER), isA(User.class));
         replay(this.request, this.session, this.user, this.ldap);
         this.binder.bind(model, this.request);
         assertNotNull(model.get(Model.USER));
-        assertEquals("id", model.get(Model.USER_ID));
+        assertEquals("id@domain", model.get(Model.USER_ID));
         assertEquals("mail", model.get(Model.EMAIL));
         assertEquals("name", model.get(Model.NAME));
-        assertEquals("911531548a5ea68cf13f5e0506367956", model.get(Model.AUTH));
+        assertEquals("911531548a5ea68cf13f5e0506367956@domain", model.get(Model.AUTH));
         assertNull(model.get(Model.IS_ACTIVE_SUNETID));
         verify(this.request, this.session, this.user, this.ldap);
     }
@@ -94,17 +94,17 @@ public class UserDataBinderTest {
         Map<String, Object> model = new HashMap<String, Object>();
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
-        expect(this.request.getRemoteUser()).andReturn("id");
+        expect(this.request.getRemoteUser()).andReturn("id@domain");
         expect(this.request.getAttribute("displayName")).andReturn("first name;another name");
         expect(this.request.getAttribute("mail")).andReturn("mail");
         this.session.setAttribute(eq(Model.USER), isA(User.class));
         replay(this.request, this.session, this.user, this.ldap);
         this.binder.bind(model, this.request);
         assertNotNull(model.get(Model.USER));
-        assertEquals("id", model.get(Model.USER_ID));
+        assertEquals("id@domain", model.get(Model.USER_ID));
         assertEquals("mail", model.get(Model.EMAIL));
         assertEquals("first name", model.get(Model.NAME));
-        assertEquals("911531548a5ea68cf13f5e0506367956", model.get(Model.AUTH));
+        assertEquals("911531548a5ea68cf13f5e0506367956@domain", model.get(Model.AUTH));
         assertNull(model.get(Model.IS_ACTIVE_SUNETID));
         verify(this.request, this.session, this.user, this.ldap);
     }
@@ -223,7 +223,7 @@ public class UserDataBinderTest {
         expect(this.token.isValidFor(geq(System.currentTimeMillis()), eq("useragent".hashCode()))).andReturn(true);
         expect(this.token.getUser()).andReturn(this.user);
         expect(this.user.isStanfordUser()).andReturn(true);
-        expect(this.user.getId()).andReturn("id").times(2);
+        expect(this.user.getId()).andReturn("id@stanford.edu");
         expect(this.ldap.getLdapDataForSunetid("id")).andReturn(this.ldapData);
         expect(this.ldapData.isActive()).andReturn(true);
         expect(this.user.getName()).andReturn("name");
@@ -235,7 +235,7 @@ public class UserDataBinderTest {
         User captured = capture.getValue();
         assertEquals(captured, model.get(Model.USER));
         assertSame(captured, model.get(Model.USER));
-        assertEquals("id", model.get(Model.USER_ID));
+        assertEquals("id@stanford.edu", model.get(Model.USER_ID));
         assertEquals("mail", model.get(Model.EMAIL));
         assertEquals("name", model.get(Model.NAME));
         assertEquals(captured.getHashedId(), model.get(Model.AUTH));
@@ -258,7 +258,7 @@ public class UserDataBinderTest {
         expect(this.token.isValidFor(geq(System.currentTimeMillis()), eq("useragent".hashCode()))).andReturn(true);
         expect(this.token.getUser()).andReturn(this.user);
         expect(this.user.isStanfordUser()).andReturn(true);
-        expect(this.user.getId()).andReturn("id").times(2);
+        expect(this.user.getId()).andReturn("id@stanford.edu");
         expect(this.ldap.getLdapDataForSunetid("id")).andReturn(this.ldapData);
         expect(this.ldapData.isActive()).andReturn(false);
         expect(this.user.getName()).andReturn("name");
@@ -270,7 +270,7 @@ public class UserDataBinderTest {
         User captured = capture.getValue();
         assertEquals(captured, model.get(Model.USER));
         assertSame(captured, model.get(Model.USER));
-        assertEquals("id", model.get(Model.USER_ID));
+        assertEquals("id@stanford.edu", model.get(Model.USER_ID));
         assertEquals("mail", model.get(Model.EMAIL));
         assertEquals("name", model.get(Model.NAME));
         assertEquals(Boolean.FALSE, model.get(Model.IS_ACTIVE_SUNETID));

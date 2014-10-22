@@ -15,7 +15,7 @@ public class UserCookieCodecTest {
 
     @Test
     public void createAndRestore() {
-        User user = new User("id", "", "", "");
+        User user = new User("id@domain", "", "", "");
         PersistentLoginToken token = this.codec.createLoginToken(user, 12345);
         assertEquals(this.codec.restoreLoginToken(token.getEncryptedValue(), "").getUser(), user);
     }

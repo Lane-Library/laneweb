@@ -35,15 +35,11 @@ public class User {
     }
 
     public User(final String id, final String name, final String email, final String hashKey, final Status status) {
-        // remove @stanford.edu if present for backwards compatibility
-        int index = id.indexOf(AT_STANFORD_EDU);
-        if (index > -1) {
-            this.id = id.substring(0, index);
-            this.isStanfordUser = true;
-        } else {
-            this.id = id;
-            this.isStanfordUser = false;
+        if (id.indexOf('@') == -1) {
+            throw new LanewebException("domain missing from id: " + id);
         }
+        this.id = id;
+        this.isStanfordUser = id.indexOf(AT_STANFORD_EDU) > -1;
         this.name = name;
         this.email = email;
         this.hashKey = hashKey;
@@ -91,13 +87,8 @@ public class User {
     }
 
     private void createHashedId() {
-        String hashableId = this.id;
-        StringBuilder org = new StringBuilder();
-        if (this.id.indexOf(AT) > -1) {
-            hashableId = this.id.substring(0, this.id.indexOf(AT));
-            org.append(this.id.substring(this.id.indexOf(AT)));
-        }
-        this.hashedId = hash(hash(this.hashKey + hashableId)) + org.toString();
+        String[] tokens = this.id.split(AT);
+        this.hashedId = new StringBuilder(hash(hash(this.hashKey.concat(tokens[0])))).append('@').append(tokens[1]).toString();
     }
 
     private String hash(final String buffer) {
