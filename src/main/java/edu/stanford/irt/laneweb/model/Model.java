@@ -75,7 +75,7 @@ public interface Model {
 
     String PERSISTENT_LOGIN = "persistent-login";
 
-    String PERSISTENT_LOGIN_EXPIRATION_DATE = "persistent-expiration-date";
+    String PERSISTENT_LOGIN_EXPIRATION_DATE = "lane-login-expiration-date";
 
     String PID = "pid";
 

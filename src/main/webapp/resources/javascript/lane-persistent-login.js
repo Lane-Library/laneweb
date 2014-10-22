@@ -1,7 +1,7 @@
 (function() {
 
 	var redirectUrl = null, 
-	PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-expiration-date', 
+	PERSISTENT_PREFERENCE_COOKIE_NAME = 'lane-login-expiration-date', 
 	persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME), 
 	now = new Date(), 
 	location = Y.lane.Location, 
