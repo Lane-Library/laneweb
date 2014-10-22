@@ -89,7 +89,11 @@ public class User {
 
     private void createHashedId() {
         String[] tokens = this.id.split(AT);
-        this.hashedId = new StringBuilder(hash(hash(this.hashKey.concat(tokens[0])))).append('@').append(tokens[1]).toString();
+        if (tokens.length > 1) {
+            this.hashedId = new StringBuilder(hash(hash(this.hashKey.concat(tokens[0])))).append('@').append(tokens[1]).toString();
+        } else {
+            this.hashedId = new StringBuilder(hash(hash(this.hashKey.concat(this.id)))).toString();
+        }
     }
 
     private String hash(final String buffer) {
