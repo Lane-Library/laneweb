@@ -10,7 +10,7 @@
 	drMode = model.get(model.DISASTER_MODE),
 	// isActive == true only if user is from stanford and is active in the LDAP
 	// See UserDataBinder.java
-	isActive = model.get(model.IS_ACTIVE_SUNETID),
+	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
 
 	getPopup = function(urlPage) {
 		Y.io(urlPage, {
@@ -46,11 +46,11 @@
 	
 	var extensionPersistentLoginPopup = function(event){
 		var link = event.target, href = link.get('href');
-		if (isActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
+		if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(event.target.get('href'));
-			getPopup(basePath + '/plain/persistent-extension-popup.html');
+			getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
 		}
 	};
 
@@ -93,7 +93,7 @@
     if(Y.one('#persistent-login')){
         Y.on('click',function(event) {
             event.preventDefault();
-            if (isActive) {
+            if (isStanfordActive) {
                 location.set("href", basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
             } else {
                 location.set("href", basePath + '/secure/persistentLogin.html?pl=true');
