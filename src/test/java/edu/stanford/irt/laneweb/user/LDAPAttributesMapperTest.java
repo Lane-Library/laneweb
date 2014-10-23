@@ -19,9 +19,6 @@ import javax.naming.directory.Attributes;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.user.LDAPAttributesMapper;
-import edu.stanford.irt.laneweb.user.LDAPData;
-
 public class LDAPAttributesMapperTest {
 
     private Attribute attribute;

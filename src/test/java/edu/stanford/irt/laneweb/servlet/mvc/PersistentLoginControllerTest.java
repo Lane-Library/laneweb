@@ -17,7 +17,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.user.User;
 

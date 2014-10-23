@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.mvc.PersistentLoginController;
 
 public class LogoutServlet extends HttpServlet {
 

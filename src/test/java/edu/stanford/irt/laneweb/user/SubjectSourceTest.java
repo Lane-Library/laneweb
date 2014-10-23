@@ -23,8 +23,6 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.slf4j.Logger;
 
-import edu.stanford.irt.laneweb.user.SubjectSource;
-
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Subject.class)
 public class SubjectSourceTest {

@@ -20,10 +20,6 @@ import org.springframework.ldap.CommunicationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
-import edu.stanford.irt.laneweb.user.LDAPData;
-import edu.stanford.irt.laneweb.user.LDAPDataAccess;
-import edu.stanford.irt.laneweb.user.SubjectSource;
-
 public class LDAPDataAccessTest {
 
     private LDAPDataAccess lDAPDataAccess;

@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.user.LDAPData;
-
 public class LDAPDataTest {
 
     private LDAPData data;
