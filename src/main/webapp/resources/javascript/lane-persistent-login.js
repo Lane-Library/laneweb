@@ -62,11 +62,11 @@
 		lightbox.setContent(o.responseText);
 		lightbox.show();
 		shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
-		//auto redirect if user to the previous idp it was saved in the cookie
+		//auto redirect if user went to the previous idp it was saved in a cookie
 		if(organizationCookieValue){
 			Y.one('#is-persistent-login').set('checked', true)
 			node = Y.one('#'+organizationCookieValue);
-			setTimeout(function(){displayRedirectMessage(node,(redirectSleepingTime/1000))}, 1000);
+			node.set("innerHTML","<span></span><p class='selected'></p>");
 			setTimeout(function(){document.location =  getLinkValue(node)}, redirectSleepingTime);
 		}
 		
@@ -110,13 +110,6 @@
 	}
 	
 
-    displayRedirectMessage = function(node, time){
-    	node.set("innerHTML","<span></span><p><img src='/resources/images/searchIndicator.gif'/></p> <p> Redirected in "+time+" seconds</p>");
-    	if(time != 0){
-    		setTimeout(function(){displayRedirectMessage(node, time -1)}, 1000);
-    	}
-    }
-	
 	// for the static page myaccounts.html Click on YES this way the user
     // will not have to go through webauth.
     if(Y.one('#persistent-login')){

@@ -93,6 +93,15 @@
 	padding:12px 3px 12px 3px;
 	background-color: white;
 }
+
+#shibboleth-links .organization p.selected{
+	width: 120px;
+	height: 30px;
+	margin-left: 9px;
+	margin-top: 14px;
+	background-image: url('/graphics/buttons/redirect.gif');
+	}
+
 #shibboleth-links .organization span{
 	display: block;
 	padding:38px 134px 0px 0px;
