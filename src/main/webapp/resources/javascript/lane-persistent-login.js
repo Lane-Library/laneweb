@@ -6,9 +6,9 @@
 	model = Y.lane.Model, 
 	basePath = model.get(model.BASE_PATH)|| "", 
 	drMode = model.get(model.DISASTER_MODE),
-	// isActive == true only if user is from stanford and is active in the LDAP
+	// isStanfordActive == true only if user is from stanford and is active in the LDAP
 	// See UserDataBinder.java
-	isActive = model.get(model.IS_ACTIVE_SUNETID),
+	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
 
 	getPopup = function(urlPage) {
 		Y.io(urlPage, {
@@ -44,7 +44,7 @@
 	
 	var extensionPersistentLoginPopup = function(event){
 		var link = event.target, href = link.get('href');
-		if (isActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
+		if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(event.target.get('href'));
