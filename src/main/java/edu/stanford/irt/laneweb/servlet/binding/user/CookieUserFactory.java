@@ -44,7 +44,7 @@ public class CookieUserFactory implements UserFactory {
     private Cookie getUserCookie(final HttpServletRequest request) {
         Cookie userCookie = null;
         Cookie[] cookies = request.getCookies();
-        for (int i = 0; i < cookies.length && userCookie == null; i++) {
+        for (int i = 0; cookies!= null && i <  cookies.length && userCookie == null; i++) {
             if (UserCookieCodec.LANE_COOKIE_NAME.equals(cookies[i].getName())) {
                 userCookie = cookies[i];
             }
