@@ -69,15 +69,15 @@
                                     <constructor-arg value="%{laneweb.useridhashkey}"/>
                                 </bean>
                             </entry>
-                            <entry key="https://idp.stanfordhospital.org/">
+                            <entry key="http://adfs.stanfordmed.org/adfs/services/trust">
                                 <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
-                                    <constructor-arg value="stanfordhospital.org"/>
+                                    <constructor-arg value="stanfordhealthcare.org"/>
                                     <constructor-arg value="displayName"/>
                                     <constructor-arg value="mail"/>
                                     <constructor-arg value="%{laneweb.useridhashkey}"/>
                                 </bean>
                             </entry>
-                            <entry key="https://idp.stanfordchildrens.org/">
+                            <entry key="https://sch-sts.lpch.org/adfs/services/trust">
                                 <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
                                     <constructor-arg value="stanfordchildrens.org"/>
                                     <constructor-arg value="displayName"/>
