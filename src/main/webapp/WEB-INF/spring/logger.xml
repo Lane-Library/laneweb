@@ -48,8 +48,8 @@
         <constructor-arg type="java.lang.Class" value="javax.xml.transform.ErrorListener"/>        
     </bean>
     
-    <bean name="org.slf4j.Logger/UserDataBinder" class="org.slf4j.LoggerFactory" factory-method="getLogger">
-        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.binding.UserDataBinder"/>        
+    <bean name="org.slf4j.Logger/CookieUserFactory" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg type="java.lang.Class" value="edu.stanford.irt.laneweb.servlet.binding.user.CookieUserFactory"/>        
     </bean>
     
     <bean name="org.slf4j.Logger/errorhandler" class="org.slf4j.LoggerFactory" factory-method="getLogger">

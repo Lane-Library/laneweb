@@ -56,10 +56,46 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user"
         class="edu.stanford.irt.laneweb.servlet.binding.UserDataBinder">
-        <constructor-arg ref="edu.stanford.irt.laneweb.codec.UserCookieCodec"/>
-        <constructor-arg ref="org.slf4j.Logger/UserDataBinder"/>
-        <constructor-arg value="%{laneweb.useridhashkey}"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.user.LDAPDataAccess"/>
+        <constructor-arg>
+            <list>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.ShibbolethAttributeUserFactory">
+                    <constructor-arg>
+                        <map>
+                            <entry key="https://idp.stanford.edu/">
+                                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
+                                    <constructor-arg value="stanford.edu"/>
+                                    <constructor-arg value="displayName"/>
+                                    <constructor-arg value="mail"/>
+                                    <constructor-arg value="%{laneweb.useridhashkey}"/>
+                                </bean>
+                            </entry>
+                            <entry key="https://idp.stanfordhospital.org/">
+                                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
+                                    <constructor-arg value="stanfordhospital.org"/>
+                                    <constructor-arg value="displayName"/>
+                                    <constructor-arg value="mail"/>
+                                    <constructor-arg value="%{laneweb.useridhashkey}"/>
+                                </bean>
+                            </entry>
+                            <entry key="https://idp.stanfordchildrens.org/">
+                                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
+                                    <constructor-arg value="stanfordchildrens.org"/>
+                                    <constructor-arg value="displayName"/>
+                                    <constructor-arg value="mail"/>
+                                    <constructor-arg value="%{laneweb.useridhashkey}"/>
+                                </bean>
+                            </entry>
+                        </map>
+                    </constructor-arg>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.CookieUserFactory">
+                    <constructor-arg ref="edu.stanford.irt.laneweb.codec.UserCookieCodec"/>
+                    <constructor-arg ref="edu.stanford.irt.laneweb.user.LDAPDataAccess"/>
+                    <constructor-arg ref="org.slf4j.Logger/CookieUserFactory"/>
+                    <constructor-arg value="%{laneweb.useridhashkey}"/>
+                </bean>
+            </list>
+        </constructor-arg>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"
