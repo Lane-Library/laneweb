@@ -58,35 +58,8 @@
         class="edu.stanford.irt.laneweb.servlet.binding.UserDataBinder">
         <constructor-arg>
             <list>
-                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.ShibbolethAttributeUserFactory">
-                    <constructor-arg>
-                        <map>
-                            <entry key="https://idp.stanford.edu/">
-                                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
-                                    <constructor-arg value="stanford.edu"/>
-                                    <constructor-arg value="displayName"/>
-                                    <constructor-arg value="mail"/>
-                                    <constructor-arg value="%{laneweb.useridhashkey}"/>
-                                </bean>
-                            </entry>
-                            <entry key="http://adfs.stanfordmed.org/adfs/services/trust">
-                                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
-                                    <constructor-arg value="stanfordhealthcare.org"/>
-                                    <constructor-arg value="displayName"/>
-                                    <constructor-arg value="mail"/>
-                                    <constructor-arg value="%{laneweb.useridhashkey}"/>
-                                </bean>
-                            </entry>
-                            <entry key="https://sch-sts.lpch.org/adfs/services/trust">
-                                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
-                                    <constructor-arg value="stanfordchildrens.org"/>
-                                    <constructor-arg value="displayName"/>
-                                    <constructor-arg value="mail"/>
-                                    <constructor-arg value="%{laneweb.useridhashkey}"/>
-                                </bean>
-                            </entry>
-                        </map>
-                    </constructor-arg>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
+                    <constructor-arg value="%{laneweb.useridhashkey}"/>
                 </bean>
                 <bean class="edu.stanford.irt.laneweb.servlet.binding.user.CookieUserFactory">
                     <constructor-arg ref="edu.stanford.irt.laneweb.codec.UserCookieCodec"/>

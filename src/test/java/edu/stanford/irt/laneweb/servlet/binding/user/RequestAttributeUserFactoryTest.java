@@ -24,35 +24,44 @@ public class RequestAttributeUserFactoryTest {
 
     @Before
     public void setUp() {
-        this.factory = new RequestAttributeUserFactory("domain", "nameAttribute", "emailAttribute", "key");
+        this.factory = new RequestAttributeUserFactory("key");
         this.request = createMock(HttpServletRequest.class);
     }
 
     @Test
     public void testCreateUser() {
         expect(this.request.getRemoteUser()).andReturn("user");
-        expect(this.request.getAttribute("nameAttribute")).andReturn("name");
-        expect(this.request.getAttribute("emailAttribute")).andReturn("email");
+        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("https://host.domain.org/").times(2);
+        expect(this.request.getAttribute("displayName")).andReturn("name").times(2);
+        expect(this.request.getAttribute("mail")).andReturn("email").times(2);
+        expect(this.request.getRemoteUser()).andReturn("anotheruser");
         replay(this.request);
         User user = this.factory.createUser(this.request);
         assertEquals("email", user.getEmail());
-        assertEquals("18b3f463d233d2e2764493fb5c951523@domain", user.getHashedId());
-        assertEquals("user@domain", user.getId());
+        assertEquals("18b3f463d233d2e2764493fb5c951523@domain.org", user.getHashedId());
+        assertEquals("user@domain.org", user.getId());
+        assertEquals("name", user.getName());
+        assertEquals(Status.UNKNOWN, user.getStatus());
+        user = this.factory.createUser(this.request);
+        assertEquals("email", user.getEmail());
+        assertEquals("320d15847395fb9aea0792150f9f8e8d@domain.org", user.getHashedId());
+        assertEquals("anotheruser@domain.org", user.getId());
         assertEquals("name", user.getName());
         assertEquals(Status.UNKNOWN, user.getStatus());
         verify(this.request);
     }
 
     @Test
-    public void testCreateUserDomain() {
-        expect(this.request.getRemoteUser()).andReturn("user@somethingelse");
-        expect(this.request.getAttribute("nameAttribute")).andReturn("name");
-        expect(this.request.getAttribute("emailAttribute")).andReturn("email");
+    public void testCreateUserBadURI() {
+        expect(this.request.getRemoteUser()).andReturn("user");
+        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("\u0000");
+        expect(this.request.getAttribute("displayName")).andReturn("name");
+        expect(this.request.getAttribute("mail")).andReturn("email");
         replay(this.request);
         User user = this.factory.createUser(this.request);
         assertEquals("email", user.getEmail());
-        assertEquals("18b3f463d233d2e2764493fb5c951523@domain", user.getHashedId());
-        assertEquals("user@domain", user.getId());
+        assertEquals("18b3f463d233d2e2764493fb5c951523@unknown", user.getHashedId());
+        assertEquals("user@unknown", user.getId());
         assertEquals("name", user.getName());
         assertEquals(Status.UNKNOWN, user.getStatus());
         verify(this.request);
@@ -61,8 +70,8 @@ public class RequestAttributeUserFactoryTest {
     @Test
     public void testCreateUserMultiValueName() {
         expect(this.request.getRemoteUser()).andReturn("id@domain");
-        expect(this.request.getAttribute("nameAttribute")).andReturn("first name;another name");
-        expect(this.request.getAttribute("emailAttribute")).andReturn("mail;mail2");
+        expect(this.request.getAttribute("displayName")).andReturn("first name;another name");
+        expect(this.request.getAttribute("mail")).andReturn("mail;mail2");
         replay(this.request);
         User user = this.factory.createUser(this.request);
         assertNotNull(user);
@@ -74,10 +83,57 @@ public class RequestAttributeUserFactoryTest {
     }
 
     @Test
+    public void testCreateUserNullEmail() {
+        expect(this.request.getRemoteUser()).andReturn("user@domain");
+        expect(this.request.getAttribute("displayName")).andReturn("name");
+        expect(this.request.getAttribute("mail")).andReturn(null);
+        replay(this.request);
+        User user = this.factory.createUser(this.request);
+        assertNull(user.getEmail());
+        assertEquals("18b3f463d233d2e2764493fb5c951523@domain", user.getHashedId());
+        assertEquals("user@domain", user.getId());
+        assertEquals("name", user.getName());
+        assertEquals(Status.UNKNOWN, user.getStatus());
+        verify(this.request);
+    }
+
+    @Test
+    public void testCreateUserNullProvider() {
+        expect(this.request.getRemoteUser()).andReturn("user");
+        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn(null);
+        expect(this.request.getAttribute("displayName")).andReturn("name");
+        expect(this.request.getAttribute("mail")).andReturn("email");
+        replay(this.request);
+        User user = this.factory.createUser(this.request);
+        assertEquals("email", user.getEmail());
+        assertEquals("18b3f463d233d2e2764493fb5c951523@unknown", user.getHashedId());
+        assertEquals("user@unknown", user.getId());
+        assertEquals("name", user.getName());
+        assertEquals(Status.UNKNOWN, user.getStatus());
+        verify(this.request);
+    }
+
+    @Test
     public void testCreateUserNullRemoteUser() {
         expect(this.request.getRemoteUser()).andReturn(null);
         replay(this.request);
         assertNull(this.factory.createUser(this.request));
+        verify(this.request);
+    }
+
+    @Test
+    public void testCreateUserOneDot() {
+        expect(this.request.getRemoteUser()).andReturn("user");
+        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("https://domain.org/");
+        expect(this.request.getAttribute("displayName")).andReturn("name");
+        expect(this.request.getAttribute("mail")).andReturn("email");
+        replay(this.request);
+        User user = this.factory.createUser(this.request);
+        assertEquals("email", user.getEmail());
+        assertEquals("18b3f463d233d2e2764493fb5c951523@domain.org", user.getHashedId());
+        assertEquals("user@domain.org", user.getId());
+        assertEquals("name", user.getName());
+        assertEquals(Status.UNKNOWN, user.getStatus());
         verify(this.request);
     }
 }

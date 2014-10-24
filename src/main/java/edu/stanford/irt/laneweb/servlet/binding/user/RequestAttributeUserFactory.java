@@ -1,5 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.binding.user;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,33 +14,64 @@ public class RequestAttributeUserFactory implements UserFactory {
 
     private static final String AT = "@";
 
-    private String domain;
+    private static final String EMAIL_ATTRIBUTE_NAME = "mail";
 
-    private String emailAttributeName;
+    private static final String NAME_ATTRIBUTE_NAME = "displayName";
 
-    private String nameAttributeName;
+    private static final String SHIBBOLETH_PROVIDER = "Shib-Identity-Provider";
 
-    private String userIdHashKey;
+    private final Map<String, String> domainMap;
 
-    public RequestAttributeUserFactory(final String domain, final String nameAttributeName,
-            final String emailAttributeName, final String userIdHashKey) {
-        this.domain = domain;
-        this.nameAttributeName = nameAttributeName;
-        this.emailAttributeName = emailAttributeName;
+    private final String userIdHashKey;
+
+    public RequestAttributeUserFactory(final String userIdHashKey) {
         this.userIdHashKey = userIdHashKey;
+        this.domainMap = new HashMap<String, String>();
     }
 
     public User createUser(final HttpServletRequest request) {
         User user = null;
         String remoteUser = request.getRemoteUser();
         if (remoteUser != null) {
-            user = new User(getId(remoteUser), getName(request), getEmail(request), this.userIdHashKey);
+            user = new User(getId(remoteUser, request), getName(request), getEmail(request), this.userIdHashKey);
         }
         return user;
     }
 
+    private String getDomain(final HttpServletRequest request) {
+        String domain = null;
+        String provider = (String) request.getAttribute(SHIBBOLETH_PROVIDER);
+        if (provider == null) {
+            domain = "unknown";
+        } else {
+            synchronized (this.domainMap) {
+                domain = this.domainMap.get(provider);
+                if (domain == null) {
+                    domain = getDomainFromProvider(provider);
+                    this.domainMap.put(provider, domain);
+                }
+            }
+        }
+        return domain;
+    }
+
+    private String getDomainFromProvider(final String provider) {
+        String domain = null;
+        try {
+            domain = new URI(provider).getHost();
+            int first = domain.indexOf('.');
+            int last = domain.lastIndexOf('.');
+            if (first != last) {
+                domain = domain.substring(first + 1, domain.length());
+            }
+        } catch (URISyntaxException e) {
+            domain = "unknown";
+        }
+        return domain;
+    }
+
     private String getEmail(final HttpServletRequest request) {
-        return getFirstToken(request.getAttribute(this.emailAttributeName));
+        return getFirstToken(request.getAttribute(EMAIL_ATTRIBUTE_NAME));
     }
 
     private String getFirstToken(final Object value) {
@@ -47,16 +82,17 @@ public class RequestAttributeUserFactory implements UserFactory {
         return firstToken;
     }
 
-    private String getId(final String remoteUser) {
-        StringBuilder sb = new StringBuilder(remoteUser);
-        int atIndex = sb.indexOf(AT);
-        if (atIndex > -1) {
-            sb.setLength(atIndex);
+    private String getId(final String remoteUser, final HttpServletRequest request) {
+        String id = null;
+        if (remoteUser.contains(AT)) {
+            id = remoteUser;
+        } else {
+            id = new StringBuilder(remoteUser).append(AT).append(getDomain(request)).toString();
         }
-        return sb.append(AT).append(this.domain).toString();
+        return id;
     }
 
     private String getName(final HttpServletRequest request) {
-        return getFirstToken(request.getAttribute(this.nameAttributeName));
+        return getFirstToken(request.getAttribute(NAME_ATTRIBUTE_NAME));
     }
 }
