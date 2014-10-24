@@ -60,6 +60,7 @@
             <list>
                 <bean class="edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory">
                     <constructor-arg value="%{laneweb.useridhashkey}"/>
+                    <constructor-arg ref="org.slf4j.Logger/RequestAttributeUserFactory"/>
                 </bean>
                 <bean class="edu.stanford.irt.laneweb.servlet.binding.user.CookieUserFactory">
                     <constructor-arg ref="edu.stanford.irt.laneweb.codec.UserCookieCodec"/>

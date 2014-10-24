@@ -8,6 +8,8 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+
 import edu.stanford.irt.laneweb.user.User;
 
 public class RequestAttributeUserFactory implements UserFactory {
@@ -22,11 +24,14 @@ public class RequestAttributeUserFactory implements UserFactory {
 
     private final Map<String, String> domainMap;
 
+    private Logger log;
+
     private final String userIdHashKey;
 
-    public RequestAttributeUserFactory(final String userIdHashKey) {
+    public RequestAttributeUserFactory(final String userIdHashKey, final Logger log) {
         this.userIdHashKey = userIdHashKey;
         this.domainMap = new HashMap<String, String>();
+        this.log = log;
     }
 
     public User createUser(final HttpServletRequest request) {
@@ -65,6 +70,7 @@ public class RequestAttributeUserFactory implements UserFactory {
                 domain = domain.substring(first + 1, domain.length());
             }
         } catch (URISyntaxException e) {
+            this.log.error(e.getMessage(), e);
             domain = "unknown";
         }
         return domain;
