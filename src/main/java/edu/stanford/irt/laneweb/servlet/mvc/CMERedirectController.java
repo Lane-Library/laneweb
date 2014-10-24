@@ -107,7 +107,7 @@ public class CMERedirectController {
             id = emrid;
             args = SHC_EMRID_ARGS;
         } else if (userHash != null) {
-            id = userHash;
+            id = removeDomainFromUserHash(userHash);
             args = SU_USERID_ARGS;
         }
         if (link.contains("?")) {
@@ -128,5 +128,13 @@ public class CMERedirectController {
             String queryString = request.getQueryString();
             response.sendRedirect(null == queryString ? ERROR_URL : ERROR_URL + '?' + queryString);
         }
+    }
+
+    private String removeDomainFromUserHash(final String userHash) {
+        String[] tokens = userHash.split("@");
+        if (tokens.length > 1) {
+            return tokens[0];
+        }
+        return userHash;
     }
 }

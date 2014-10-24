@@ -75,8 +75,7 @@ public class CMERedirectControllerTest {
 
     @Test
     public void testCmeEmridAndUserIdNoProxyRedirect() throws Exception {
-        this.response
-                .sendRedirect("http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+        this.response.sendRedirect("http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeRedirect("hashedUser", "/basepath", "emrid", false, "http://www.uptodate.com/",
                 this.request, this.response);
@@ -86,17 +85,17 @@ public class CMERedirectControllerTest {
     @Test
     public void testCmeEmridAndUserIdRedirect() throws Exception {
         this.response
-                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+        .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
-        this.controller.cmeRedirect("hashedUser", "/basepath", "emrid", true, "http://www.uptodate.com/",
-                this.request, this.response);
+        this.controller.cmeRedirect("hashedUser", "/basepath", "emrid", true, "http://www.uptodate.com/", this.request,
+                this.response);
         verify(this.request, this.response);
     }
 
     @Test
     public void testCmeEmridRedirect() throws Exception {
         this.response
-                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+        .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeRedirect(null, "/basepath", "emrid", true, "http://www.uptodate.com/", this.request,
                 this.response);
@@ -106,7 +105,7 @@ public class CMERedirectControllerTest {
     @Test
     public void testCmeEmridSecureRedirect() throws Exception {
         this.response
-                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+        .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeSecureRedirect(null, "emrid", true, "http://www.uptodate.com/online", this.request,
                 this.response);
@@ -116,13 +115,13 @@ public class CMERedirectControllerTest {
     @Test
     public void testCmeEmridSecureRedirect2() throws Exception {
         this.response
-        .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
+                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeSecureRedirect(null, "emrid", true, "http://www.uptodate.com/contents/search", this.request,
                 this.response);
         verify(this.request, this.response);
     }
-    
+
     @Test
     public void testCmeRedirectBadHost() throws Exception {
         expect(this.request.getQueryString()).andReturn("yo");
@@ -181,9 +180,19 @@ public class CMERedirectControllerTest {
     @Test
     public void testCmeRedirectUserId() throws Exception {
         this.response
-                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?foo=bar&unid=hashedUser&srcsys=EZPX90710&eiv=2.1.0");
+        .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?foo=bar&unid=hashedUser&srcsys=EZPX90710&eiv=2.1.0");
         replay(this.request, this.response);
         this.controller.cmeRedirect("hashedUser", "/basepath", null, true,
+                "http://www.uptodate.com/online/content/search.do?foo=bar", this.request, this.response);
+        verify(this.request, this.response);
+    }
+
+    @Test
+    public void testCmeRedirectUserIdWithDomain() throws Exception {
+        this.response
+                .sendRedirect("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?foo=bar&unid=hashedUser&srcsys=EZPX90710&eiv=2.1.0");
+        replay(this.request, this.response);
+        this.controller.cmeRedirect("hashedUser@lpch.net", "/basepath", null, true,
                 "http://www.uptodate.com/online/content/search.do?foo=bar", this.request, this.response);
         verify(this.request, this.response);
     }
