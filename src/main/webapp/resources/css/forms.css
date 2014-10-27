@@ -53,15 +53,6 @@
 }
 
 /*-------------------------persistent login--------------------------------------------------------------------------*/
-#persistent #hd  {
-	color: #8c1515;
-	font-weight: bold;
-	line-height: 1.4em;
-	font-size: 1.4em;
-	padding-bottom: 1.5em;
-	text-align:center;
-	margin-bottom: .2em;	
-}
 
 #persistent label{
 	display: inline-block;
@@ -104,12 +95,16 @@
 
 #shibboleth-links .organization span{
 	display: block;
-	padding:38px 134px 0px 0px;
+	width: 170px;
+	height: 146px;
 	background-color:  white;
 	background-repeat: none;
 	background-image: url('/graphics/logos/organizations.png');
 }
 
+#shibboleth-links .organization a#Stanford span{
+background-position: 14px -51px;
+}
 #shibboleth-links .organization a#SHC span{
 background-position: 14px -51px;
 }
