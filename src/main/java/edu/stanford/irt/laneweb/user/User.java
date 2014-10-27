@@ -8,10 +8,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class User {
 
-    public enum Status {
-        ACTIVE, INACTIVE, UNKNOWN
-    }
-
     private static final String AT = "@";
 
     private static final String AT_STANFORD_EDU = "@stanford.edu";
@@ -28,13 +24,7 @@ public class User {
 
     private String name;
 
-    private Status status;
-
     public User(final String id, final String name, final String email, final String hashKey) {
-        this(id, name, email, hashKey, Status.UNKNOWN);
-    }
-
-    public User(final String id, final String name, final String email, final String hashKey, final Status status) {
         if (id.indexOf('@') == -1) {
             throw new LanewebException("domain missing from id: " + id);
         }
@@ -43,7 +33,6 @@ public class User {
         this.name = name;
         this.email = email;
         this.hashKey = hashKey;
-        this.status = status;
     }
 
     @Override
@@ -71,10 +60,6 @@ public class User {
 
     public String getName() {
         return this.name;
-    }
-
-    public Status getStatus() {
-        return this.status;
     }
 
     @Override

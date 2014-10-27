@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.user.UserFactory;
 import edu.stanford.irt.laneweb.user.User;
-import edu.stanford.irt.laneweb.user.User.Status;
 
 public class UserDataBinder implements DataBinder {
 
@@ -52,14 +51,7 @@ public class UserDataBinder implements DataBinder {
                 model.put(Model.NAME, name);
             }
             if (user.isStanfordUser()) {
-                Boolean isActive = null;
-                Status status = user.getStatus();
-                if (status == Status.INACTIVE) {
-                    isActive = Boolean.FALSE;
-                } else {
-                    isActive = Boolean.TRUE;
-                }
-                model.put(Model.IS_ACTIVE_SUNETID, isActive);
+                model.put(Model.IS_ACTIVE_SUNETID, Boolean.TRUE);
             }
         }
     }

@@ -1,11 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
- * This class will add three cookies the persistent-expired-date and user. The user cookie will
- * have the userid, name, email , the userAgent and the expired date appended and encrypted.
- *  The persistent-expired-date cookie have the expired date. So 3 days will be subtract from it to popup a extension
- *  window if the user is active and from stanford.   
- * 
+ * This class will add three cookies the persistent-expired-date and user. The user cookie will have the userid, name,
+ * email , the userAgent and the expired date appended and encrypted. The persistent-expired-date cookie have the
+ * expired date. So 3 days will be subtract from it to popup a extension window if the user is active and from stanford.
  */
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -26,24 +24,28 @@ import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 import edu.stanford.irt.laneweb.user.User;
-import edu.stanford.irt.laneweb.user.User.Status;
 
 @Controller
 public class PersistentLoginController {
 
     // login duration is two weeks:
-    private static final int PERSISTENT_LOGIN_DURATION =  3600 * 24 * 7 * 2;
+    private static final int PERSISTENT_LOGIN_DURATION = 3600 * 24 * 7 * 2;
 
     private static final String UTF8 = "UTF-8";
 
-    private UserDataBinder binder;
-
     private UserCookieCodec codec;
 
+    private LDAPDataAccess ldap;
+
+    private UserDataBinder userBinder;
+
     @Autowired
-    public PersistentLoginController(final UserDataBinder binder, final UserCookieCodec codec) {
-        this.binder = binder;
+    public PersistentLoginController(final UserDataBinder userBinder, final LDAPDataAccess ldap,
+            final UserCookieCodec codec) {
+        this.userBinder = userBinder;
+        this.ldap = ldap;
         this.codec = codec;
     }
 
@@ -63,7 +65,7 @@ public class PersistentLoginController {
             final String url,
             final HttpServletRequest request,
             final HttpServletResponse response) {
-        checkUserIdAndSetCookies(user, request, response);
+        checkUserAndSetCookies(user, request, response);
         return getRedirectURL(url);
     }
 
@@ -73,8 +75,8 @@ public class PersistentLoginController {
             final String url,
             final HttpServletRequest request,
             final HttpServletResponse response) {
-        if (user.isStanfordUser() && user.getStatus() == Status.ACTIVE) {
-            checkUserIdAndSetCookies(user, request, response);
+        if (isRenewable(user)) {
+            checkUserAndSetCookies(user, request, response);
         } else {
             resetCookies(request, response);
         }
@@ -83,13 +85,13 @@ public class PersistentLoginController {
 
     @ModelAttribute
     protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.binder.bind(model.asMap(), request);
+        this.userBinder.bind(model.asMap(), request);
         if (!model.containsAttribute(Model.USER)) {
             model.addAttribute(Model.USER, null);
         }
     }
 
-    private void checkUserIdAndSetCookies(final User user, final HttpServletRequest request,
+    private void checkUserAndSetCookies(final User user, final HttpServletRequest request,
             final HttpServletResponse response) {
         if (null != user) {
             setCookies(request, response, user);
@@ -112,6 +114,16 @@ public class PersistentLoginController {
         return sb.toString();
     }
 
+    private boolean isRenewable(final User user) {
+        boolean renewable = false;
+        if (user != null && user.isStanfordUser()) {
+            String userid = user.getId();
+            String sunetid = userid.substring(0, userid.indexOf('@'));
+            renewable = this.ldap.getLdapDataForSunetid(sunetid).isActive();
+        }
+        return renewable;
+    }
+
     private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
         Cookie cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, null);
         cookie.setPath("/");
@@ -122,8 +134,6 @@ public class PersistentLoginController {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
     }
-
-    
 
     /**
      * create and set the lane-user cookie

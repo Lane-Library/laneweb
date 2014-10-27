@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.user.User;
-import edu.stanford.irt.laneweb.user.User.Status;
 
 public class RequestAttributeUserFactoryTest {
 
@@ -46,13 +45,11 @@ public class RequestAttributeUserFactoryTest {
         assertEquals("18b3f463d233d2e2764493fb5c951523@domain.org", user.getHashedId());
         assertEquals("user@domain.org", user.getId());
         assertEquals("name", user.getName());
-        assertEquals(Status.UNKNOWN, user.getStatus());
         user = this.factory.createUser(this.request);
         assertEquals("email", user.getEmail());
         assertEquals("320d15847395fb9aea0792150f9f8e8d@domain.org", user.getHashedId());
         assertEquals("anotheruser@domain.org", user.getId());
         assertEquals("name", user.getName());
-        assertEquals(Status.UNKNOWN, user.getStatus());
         verify(this.request, this.log);
     }
 
@@ -69,7 +66,6 @@ public class RequestAttributeUserFactoryTest {
         assertEquals("18b3f463d233d2e2764493fb5c951523@unknown", user.getHashedId());
         assertEquals("user@unknown", user.getId());
         assertEquals("name", user.getName());
-        assertEquals(Status.UNKNOWN, user.getStatus());
         verify(this.request, this.log);
     }
 
@@ -99,7 +95,6 @@ public class RequestAttributeUserFactoryTest {
         assertEquals("18b3f463d233d2e2764493fb5c951523@domain", user.getHashedId());
         assertEquals("user@domain", user.getId());
         assertEquals("name", user.getName());
-        assertEquals(Status.UNKNOWN, user.getStatus());
         verify(this.request, this.log);
     }
 
@@ -115,7 +110,6 @@ public class RequestAttributeUserFactoryTest {
         assertEquals("18b3f463d233d2e2764493fb5c951523@unknown", user.getHashedId());
         assertEquals("user@unknown", user.getId());
         assertEquals("name", user.getName());
-        assertEquals(Status.UNKNOWN, user.getStatus());
         verify(this.request, this.log);
     }
 
@@ -139,7 +133,6 @@ public class RequestAttributeUserFactoryTest {
         assertEquals("18b3f463d233d2e2764493fb5c951523@domain.org", user.getHashedId());
         assertEquals("user@domain.org", user.getId());
         assertEquals("name", user.getName());
-        assertEquals(Status.UNKNOWN, user.getStatus());
         verify(this.request, this.log);
     }
 }

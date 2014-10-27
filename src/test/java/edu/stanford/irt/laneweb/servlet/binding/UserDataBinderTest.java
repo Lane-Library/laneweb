@@ -53,6 +53,29 @@ public class UserDataBinderTest {
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.userFactory.createUser(this.request)).andReturn(this.user);
         this.session.setAttribute(Model.USER, this.user);
+        expect(this.user.getId()).andReturn("id@stanford.edu");
+        expect(this.user.getHashedId()).andReturn("911531548a5ea68cf13f5e0506367956@stanford.edu");
+        expect(this.user.getEmail()).andReturn("mail");
+        expect(this.user.getName()).andReturn("name");
+        expect(this.user.isStanfordUser()).andReturn(true);
+        replay(this.request, this.session, this.user, this.userFactory);
+        this.binder.bind(model, this.request);
+        assertNotNull(model.get(Model.USER));
+        assertEquals("id@stanford.edu", model.get(Model.USER_ID));
+        assertEquals("mail", model.get(Model.EMAIL));
+        assertEquals("name", model.get(Model.NAME));
+        assertEquals("911531548a5ea68cf13f5e0506367956@stanford.edu", model.get(Model.AUTH));
+        assertEquals(Boolean.TRUE, model.get(Model.IS_ACTIVE_SUNETID));
+        verify(this.request, this.session, this.user, this.userFactory);
+    }
+
+    @Test
+    public void testBindNotStanford() {
+        Map<String, Object> model = new HashMap<String, Object>();
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.session.getAttribute(Model.USER)).andReturn(null);
+        expect(this.userFactory.createUser(this.request)).andReturn(this.user);
+        this.session.setAttribute(Model.USER, this.user);
         expect(this.user.getId()).andReturn("id@domain");
         expect(this.user.getHashedId()).andReturn("911531548a5ea68cf13f5e0506367956@domain");
         expect(this.user.getEmail()).andReturn("mail");
