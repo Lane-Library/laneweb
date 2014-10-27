@@ -90,7 +90,7 @@
 	height: 30px;
 	margin-left: 9px;
 	margin-top: 14px;
-	background-image: url('/graphics/buttons/redirect.gif');
+	background-image: url('../../graphics/buttons/redirect.gif');
 	}
 
 #shibboleth-links .organization span{
@@ -99,7 +99,7 @@
 	height: 44px;
 	background-color:  white;
 	background-repeat: none;
-	background-image: url('/graphics/logos/organizations.png');
+	background-image: url('../../graphics/logos/organizations.png');
 }
 
 #shibboleth-links .organization a#Stanford span{
