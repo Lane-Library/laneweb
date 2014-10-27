@@ -42,15 +42,6 @@ body.ui-mobile-viewport{
  } 
  
 
-#persistent #hd  {
-	color: #8c1515;
-	font-weight: bold;
-	line-height: 1.4em;
-	font-size: 1.4em;
-	padding-bottom: 1.5em;
-	text-align:center;
-}
-
 #persistent label{
 	margin-top:12px;
 	display: inline;
@@ -87,7 +78,7 @@ body.ui-mobile-viewport{
 	margin: 14px 0px 0px 10px;
 	background-color:  white;
 	background-repeat: none;
-	background-image: url('/graphics/logos/organizations.png');
+	background-image: url('../../graphics/logos/organizations.png');
 }
 
 #shibboleth-links .organization a#SHC span{
