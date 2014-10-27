@@ -94,22 +94,22 @@
 	}
 
 #shibboleth-links .organization span{
-	display: block;
-	width: 170px;
-	height: 146px;
+	display: inline-block;
+	width: 166px;
+	height: 44px;
 	background-color:  white;
 	background-repeat: none;
 	background-image: url('/graphics/logos/organizations.png');
 }
 
 #shibboleth-links .organization a#Stanford span{
-background-position: 14px -51px;
+background-position: 1px -40px;
 }
 #shibboleth-links .organization a#SHC span{
-background-position: 14px -51px;
+background-position: -168px -7px;
 }
 #shibboleth-links .organization a#LPCH span{
-background-position: center -103px;
+background-position: 212px -2px;
 }
 
 #persistent #login {
