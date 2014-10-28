@@ -25,11 +25,11 @@
 	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, "a[href*=/secure/apps/proxy/credential]");
 	Y.on("click", function(event) {popupShibboltehWindow(event);}, "a[href*=/redirect/cme]");
 
-	popupShibbolethWindowNotHospital(event){
+	popupShibbolethWindowNotHospital = function(event){
 		if(!fromHospital){
 			popupShibboltehWindow(event);
 		}
-	}
+	};
 	
 	popupShibboltehWindow = function(event) {
 		var link = event.currentTarget,
