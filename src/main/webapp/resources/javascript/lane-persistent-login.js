@@ -66,7 +66,7 @@
 		if(organizationCookieValue){
 			Y.one('#is-persistent-login').set('checked', true)
 			node = Y.one('#'+organizationCookieValue);
-			node.set("innerHTML","<span></span><p class='selected'></p><p><br/></p>");
+			node.set("innerHTML","<span></span><p class='selected'></p>");
 			setTimeout(function(){document.location =  getLinkValue(node)}, redirectSleepingTime);
 		}
 		
