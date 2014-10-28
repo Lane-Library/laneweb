@@ -42,15 +42,6 @@ body.ui-mobile-viewport{
  } 
  
 
-#persistent #hd  {
-	color: #8c1515;
-	font-weight: bold;
-	line-height: 1.4em;
-	font-size: 1.4em;
-	padding-bottom: 1.5em;
-	text-align:center;
-}
-
 #persistent label{
 	margin-top:12px;
 	display: inline;
