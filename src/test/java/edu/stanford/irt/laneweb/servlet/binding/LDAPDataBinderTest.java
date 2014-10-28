@@ -46,7 +46,7 @@ public class LDAPDataBinderTest {
 
     @Test
     public void testBind() {
-        this.model.put(Model.USER_ID, "sunetid");
+        this.model.put(Model.USER_ID, "sunetid@unknown");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.NAME)).andReturn(null);
         expect(this.session.getAttribute(Model.UNIVID)).andReturn(null);
@@ -72,7 +72,7 @@ public class LDAPDataBinderTest {
 
     @Test
     public void testBindNameOnlyInSession() {
-        this.model.put(Model.USER_ID, "sunetid");
+        this.model.put(Model.USER_ID, "sunetid@stanford.edu");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.NAME)).andReturn("name");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn(null);
@@ -100,7 +100,7 @@ public class LDAPDataBinderTest {
 
     @Test
     public void testBindValuesInSession() {
-        this.model.put(Model.USER_ID, "sunetid");
+        this.model.put(Model.USER_ID, "sunetid@stanford.edu");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.NAME)).andReturn("name");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
