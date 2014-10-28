@@ -9,7 +9,10 @@
 	// isStanfordActive == true only if user is from stanford and is active in the LDAP
 	// See UserDataBinder.java
 	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
-
+	ipgroup = model.get(model.IPGROUP),
+    fromHospital = "SHC" === ipgroup || "LPCH" === ipgroup,
+	
+	
 	getPopup = function(urlPage) {
 		Y.io(urlPage, {
 			on : {
@@ -18,10 +21,16 @@
 		});
 	};
 
-	Y.on("click", function(event) {popupShibboltehWindow(event);}, 'a[href=' + basePath + '/secure/login.html]');
-	Y.on("click", function(event) {popupShibboltehWindow(event);}, "a[href*=/secure/apps/proxy/credential]");
+	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, 'a[href=' + basePath + '/secure/login.html]');
+	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, "a[href*=/secure/apps/proxy/credential]");
 	Y.on("click", function(event) {popupShibboltehWindow(event);}, "a[href*=/redirect/cme]");
 
+	popupShibbolethWindowNotHospital(event){
+		if(!fromHospital){
+			popupShibboltehWindow(event);
+		}
+	}
+	
 	popupShibboltehWindow = function(event) {
 		var link = event.currentTarget,
 		href = link.get('href');
