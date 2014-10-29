@@ -5,6 +5,7 @@
    <recordType>recordType</recordType>
    <title>title</title>
    <primaryType>primaryType</primaryType>
+   <hasItems>true</hasItems>
    <link type="normal">
       <label>label</label>
       <link-text>link-text</link-text>

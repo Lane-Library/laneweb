@@ -154,6 +154,9 @@
                     <xsl:apply-templates select="s:recordType"/>
                 </div>
             </div>
+            <xsl:if test="s:hasItems">
+                <div>Also available: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Print</a></div>
+            </xsl:if>
             <xsl:apply-templates select="s:description"/>
         </li>
     </xsl:template>
