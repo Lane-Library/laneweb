@@ -21,9 +21,9 @@
 		});
 	};
 
-	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, 'a[href=' + basePath + '/secure/login.html]');
+	Y.on("click", function(event) {popupShibboltehWindow(event);}, 'a[href=' + basePath + '/secure/login.html]');
 	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, "a[href*=/secure/apps/proxy/credential]");
-	Y.on("click", function(event) {popupShibboltehWindow(event);}, "a[href*=/redirect/cme]");
+	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, "a[href*=/redirect/cme]");
 
 	popupShibbolethWindowNotHospital = function(event){
 		if(!fromHospital){
