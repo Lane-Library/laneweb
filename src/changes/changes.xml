@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2014-10-29" version="2.3.0" description="2.3.0 refactor release">
+            <action date="2014-10-28" dev="ryanmax" issue="100188" type="fix">
+                voyager authentication broken
+            </action>
             <action date="2014-10-27" dev="ceyates" issue="100159" type="update">
                 assume logged in stanford user is active, but check when renewing persistent login
             </action>
