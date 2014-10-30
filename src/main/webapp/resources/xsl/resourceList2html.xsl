@@ -137,11 +137,17 @@
 
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
+        <xsl:copy-of select="."/>
+        <xsl:variable name="total" select="number(s:total)"/>
+        <xsl:variable name="available" select="number(s:available)"/>
         <li>
             <xsl:apply-templates select="s:link"/>
             <div class="yui3-g">
                 <div class="yui3-u-1-4">
                     <strong><xsl:value-of select="s:primaryType"/></strong>
+                    <xsl:if test="s:recordType = 'print' and $available &gt; 0">
+                        <xsl:text> Status: Not Checked Out</xsl:text>
+                    </xsl:if>
                 </div>
                 <div class="yui3-u-1-4">
                     <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
@@ -154,9 +160,7 @@
                     <xsl:apply-templates select="s:recordType"/>
                 </div>
             </div>
-            <xsl:variable name="total" select="number(s:total)"/>
-            <xsl:variable name="available" select="number(s:available)"/>
-            <xsl:if test="$total &gt; 0">
+            <xsl:if test="s:recordType != 'print' and $total &gt; 0">
                 <div>Also available: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Print</a></div>
             </xsl:if>
             <xsl:apply-templates select="s:description"/>
