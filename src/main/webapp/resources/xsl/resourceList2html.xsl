@@ -137,7 +137,6 @@
 
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
-        <xsl:copy-of select="."/>
         <xsl:variable name="total" select="number(s:total)"/>
         <xsl:variable name="available" select="number(s:available)"/>
         <li>
