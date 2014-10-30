@@ -22,10 +22,12 @@ public class Eresource {
 
     private String title;
     
-    private boolean hasItems;
+    private int total;
+    
+    private int available;
 
     public Eresource(final String description, final int id, final int recordId, final String recordType,
-            final int score, final String title, final String primaryType, final boolean hasItems) {
+            final int score, final String title, final String primaryType, final int total, int available) {
         this.description = description;
         this.id = id;
         this.recordId = recordId;
@@ -33,7 +35,8 @@ public class Eresource {
         this.score = score;
         this.title = title;
         this.primaryType = primaryType;
-        this.hasItems = hasItems;
+        this.total = total;
+        this.available = available;
     }
 
     public String getDescription() {
@@ -68,8 +71,12 @@ public class Eresource {
         return this.title;
     }
     
-    public boolean hasItems() {
-        return this.hasItems;
+    public int getTotal() {
+        return this.total;
+    }
+    
+    public int getAvailable() {
+        return this.available;
     }
 
     @Override

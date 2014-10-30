@@ -5,7 +5,8 @@
    <recordType>recordType</recordType>
    <title>title</title>
    <primaryType>primaryType</primaryType>
-   <hasItems>true</hasItems>
+   <total>10</total>
+   <avaliable>5</avaliable>
    <link type="normal">
       <label>label</label>
       <link-text>link-text</link-text>

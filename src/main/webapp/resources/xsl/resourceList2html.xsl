@@ -154,7 +154,9 @@
                     <xsl:apply-templates select="s:recordType"/>
                 </div>
             </div>
-            <xsl:if test="s:hasItems/text() = 'true'">
+            <xsl:variable name="total" select="number(s:total)"/>
+            <xsl:variable name="available" select="number(s:available)"/>
+            <xsl:if test="$total &gt; 0">
                 <div>Also available: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Print</a></div>
             </xsl:if>
             <xsl:apply-templates select="s:description"/>
