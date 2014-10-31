@@ -1,17 +1,20 @@
 package edu.stanford.irt.laneweb.user;
 
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class User {
+public class User implements Serializable {
 
     private static final String AT = "@";
 
     private static final String AT_STANFORD_EDU = "@stanford.edu";
-    
+
+    private static final long serialVersionUID = 1L;
+
     private String email;
 
     private String hashedId;
@@ -73,7 +76,8 @@ public class User {
 
     private void createHashedId() {
         String[] tokens = this.id.split(AT);
-        this.hashedId = new StringBuilder(hash(hash(this.hashKey.concat(tokens[0])))).append('@').append(tokens[1]).toString();
+        this.hashedId = new StringBuilder(hash(hash(this.hashKey.concat(tokens[0])))).append('@').append(tokens[1])
+                .toString();
     }
 
     private String hash(final String buffer) {
@@ -89,5 +93,4 @@ public class User {
         }
         return sb.toString();
     }
-    
 }
