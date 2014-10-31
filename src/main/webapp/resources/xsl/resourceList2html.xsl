@@ -131,7 +131,9 @@
                     <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
                 </div>
                 <div class="yui3-u-1-4">
-                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
+                    <xsl:if test="s:recordType = 'bib'">
+                        <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
+                    </xsl:if>
                 </div>
                 <div class="yui3-u-1-4">
                     <xsl:text>Source: </xsl:text>
