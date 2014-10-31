@@ -8,8 +8,6 @@
     <xsl:param name="ipgroup"/>
 
     <xsl:param name="query"/>
-
-    <xsl:param name="emrid"/>
     
     <xsl:param name="url-encoded-query"/>
 
@@ -89,29 +87,13 @@
             <xsl:if test="not(starts-with($source,'clinical') or starts-with($source,'peds')) and string-length(s:pub-author) > 1">
                 <xsl:apply-templates select="s:pub-author"/>
             </xsl:if>
-
-            <div>
-                <xsl:variable name="hits" select="number(s:resourceHits)"/>
-                <xsl:choose>
-                    <xsl:when test="s:pub-text">
-                        <xsl:value-of select="s:pub-text"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:choose>
-                            <xsl:when test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
-                                <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
-                                <xsl:text> &#187;</xsl:text>
-                                <xsl:if test="$emrid and $resourceName = 'UpToDate'">
-                                    <span class="utdCMEnote"> &#8592; Use this link for CME</span>
-                                </xsl:if>
-                            </xsl:when>
-                            <xsl:when test="not(s:resourceHits) or $moreResultsLimit &gt;= $hits">
-                                    <xsl:value-of select="$resourceName"/>
-                            </xsl:when>
-                        </xsl:choose>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </div>
+            
+            <xsl:if test="s:pub-text">
+                <div>
+                    <xsl:value-of select="s:pub-text"/>
+                </div>
+            </xsl:if>
+            
             <div class="yui3-g">
                 <div class="yui3-u-1-4"><strong>Article</strong></div>
                 <div class="yui3-u-1-4">
