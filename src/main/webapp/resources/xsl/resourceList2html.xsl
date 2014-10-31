@@ -95,15 +95,6 @@
                 <xsl:choose>
                     <xsl:when test="s:pub-text">
                         <xsl:value-of select="s:pub-text"/>
-                        <xsl:if test="$resourceName = 'PubMed' or $hits &lt;= $moreResultsLimit">
-                                <xsl:text> - </xsl:text>
-                                <xsl:value-of select="$resourceName"/>
-                        </xsl:if>
-                        <br/>
-                        <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
-                            <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
-                            <xsl:text> &#187;</xsl:text>
-                        </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
