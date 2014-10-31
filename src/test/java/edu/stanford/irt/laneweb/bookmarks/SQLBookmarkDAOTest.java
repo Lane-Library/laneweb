@@ -75,7 +75,7 @@ public class SQLBookmarkDAOTest {
     public void testGetLinks() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getBlob(1)).andReturn(this.blob);
@@ -84,7 +84,7 @@ public class SQLBookmarkDAOTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
-        assertEquals(this.bookmark, this.dao.getLinks("ditenus").get(0));
+        assertEquals(this.bookmark, this.dao.getLinks("userid").get(0));
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
     }
 
@@ -92,19 +92,19 @@ public class SQLBookmarkDAOTest {
     public void testGetLinksNone() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(false);
         this.resultSet.close();
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
-        assertNull(this.dao.getLinks("ditenus"));
+        assertNull(this.dao.getLinks("userid"));
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
     }
 
     @Test
-    public void testGetLinksNullSunetid() throws SQLException, IOException {
+    public void testGetLinksNullUserid() throws SQLException, IOException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
         try {
             this.dao.getLinks(null);
@@ -117,7 +117,7 @@ public class SQLBookmarkDAOTest {
     public void testGetLinksThrowIOException() throws SQLException, IOException, ClassNotFoundException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getBlob(1)).andReturn(this.blob);
@@ -128,7 +128,7 @@ public class SQLBookmarkDAOTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, input);
-        assertNull(this.dao.getLinks("ditenus"));
+        assertNull(this.dao.getLinks("userid"));
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, input);
     }
 
@@ -136,12 +136,12 @@ public class SQLBookmarkDAOTest {
     public void testGetLinksThrowSQLException() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.executeQuery()).andThrow(new SQLException());
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
-        assertNull(this.dao.getLinks("ditenus"));
+        assertNull(this.dao.getLinks("userid"));
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
     }
 
@@ -196,10 +196,10 @@ public class SQLBookmarkDAOTest {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.execute()).andReturn(true);
         expect(this.connection.prepareCall(isA(String.class))).andReturn(this.callableStatement);
-        this.callableStatement.setString(1, "ditenus");
+        this.callableStatement.setString(1, "userid");
         this.callableStatement.registerOutParameter(2, Types.BLOB);
         expect(this.callableStatement.executeUpdate()).andReturn(1);
         expect(this.callableStatement.getBlob(2)).andReturn(this.blob);
@@ -209,7 +209,7 @@ public class SQLBookmarkDAOTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
-        this.dao.saveLinks("ditenus", Collections.<Object> singletonList(this.bookmark));
+        this.dao.saveLinks("userid", Collections.<Object> singletonList(this.bookmark));
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
     }
 
@@ -217,14 +217,14 @@ public class SQLBookmarkDAOTest {
     public void testSaveLinksNullBookmarks() throws SQLException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
-            this.dao.saveLinks("ditenus", null);
+            this.dao.saveLinks("userid", null);
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
     }
 
     @Test
-    public void testSaveLinksNullSunetid() throws SQLException {
+    public void testSaveLinksNullUserid() throws SQLException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
             this.dao.saveLinks(null, Collections.<Object> singletonList(this.bookmark));
@@ -238,7 +238,7 @@ public class SQLBookmarkDAOTest {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.execute()).andThrow(new SQLException());
         this.connection.rollback();
         expectLastCall().andThrow(new SQLException());
@@ -246,7 +246,7 @@ public class SQLBookmarkDAOTest {
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
-            this.dao.saveLinks("ditenus", Collections.<Object> emptyList());
+            this.dao.saveLinks("userid", Collections.<Object> emptyList());
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
@@ -257,13 +257,13 @@ public class SQLBookmarkDAOTest {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.execute()).andReturn(true);
         this.connection.commit();
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
-        this.dao.saveLinks("ditenus", Collections.<Object> emptyList());
+        this.dao.saveLinks("userid", Collections.<Object> emptyList());
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
     }
 
@@ -272,14 +272,14 @@ public class SQLBookmarkDAOTest {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.execute()).andThrow(new SQLException());
         this.connection.rollback();
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
-            this.dao.saveLinks("ditenus", Collections.<Object> emptyList());
+            this.dao.saveLinks("userid", Collections.<Object> emptyList());
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
@@ -290,10 +290,10 @@ public class SQLBookmarkDAOTest {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.execute()).andReturn(true);
         expect(this.connection.prepareCall(isA(String.class))).andReturn(this.callableStatement);
-        this.callableStatement.setString(1, "ditenus");
+        this.callableStatement.setString(1, "userid");
         this.callableStatement.registerOutParameter(2, Types.BLOB);
         expect(this.callableStatement.executeUpdate()).andReturn(1);
         expect(this.callableStatement.getBlob(2)).andReturn(this.blob);
@@ -308,7 +308,7 @@ public class SQLBookmarkDAOTest {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
                 output);
         try {
-            this.dao.saveLinks("ditenus", Collections.<Object> singletonList(this.bookmark));
+            this.dao.saveLinks("userid", Collections.<Object> singletonList(this.bookmark));
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
@@ -320,10 +320,10 @@ public class SQLBookmarkDAOTest {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(1, "ditenus");
+        this.statement.setString(1, "userid");
         expect(this.statement.execute()).andReturn(true);
         expect(this.connection.prepareCall(isA(String.class))).andReturn(this.callableStatement);
-        this.callableStatement.setString(1, "ditenus");
+        this.callableStatement.setString(1, "userid");
         this.callableStatement.registerOutParameter(2, Types.BLOB);
         expect(this.callableStatement.executeUpdate()).andReturn(1);
         expect(this.callableStatement.getBlob(2)).andReturn(this.blob);
@@ -339,7 +339,7 @@ public class SQLBookmarkDAOTest {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
                 output);
         try {
-            this.dao.saveLinks("ditenus", Collections.<Object> singletonList(this.bookmark));
+            this.dao.saveLinks("userid", Collections.<Object> singletonList(this.bookmark));
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
@@ -351,7 +351,7 @@ public class SQLBookmarkDAOTest {
         expect(this.dataSource.getConnection()).andThrow(new SQLException());
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
-            this.dao.saveLinks("ditenus", Collections.<Object> emptyList());
+            this.dao.saveLinks("userid", Collections.<Object> emptyList());
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);

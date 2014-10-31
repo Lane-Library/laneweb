@@ -10,15 +10,15 @@ public class TicketTest {
 
     private String ezproxyKey;
 
-    private String sunetid;
+    private String userid;
 
     private Ticket ticket;
 
     @Before
     public void setUp() {
-        this.sunetid = "ceyates";
+        this.userid = "ceyates";
         this.ezproxyKey = "boguskey";
-        this.ticket = new Ticket(this.sunetid, this.ezproxyKey);
+        this.ticket = new Ticket(this.userid, this.ezproxyKey);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class TicketTest {
         } catch (IllegalArgumentException e) {
         }
         try {
-            new Ticket(this.sunetid, null);
+            new Ticket(this.userid, null);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }

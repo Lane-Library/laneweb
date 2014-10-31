@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>2.2.23-SNAPSHOT</version>
+    <version>2.3.1-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/maven/projects/laneweb/</url>
     <inceptionYear>2002</inceptionYear>
@@ -171,8 +171,6 @@
                                 <include>buttons-min.css</include>
                                 <include>forms-min.css</include>
                                 <include>table-styles-min.css</include>
-                                <include>images-min.css</include>
-                                <include>captioned-img-min.css</include>
                                 <include>lightbox-min.css</include>
                                 <include>banner-min.css</include>
                                 <include>popular-min.css</include>
@@ -558,7 +556,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>2.0.16</version>
+            <version>2.0.17</version>
             <exclusions>
                 <exclusion>
                     <artifactId>log4j</artifactId>

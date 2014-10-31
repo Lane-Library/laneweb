@@ -3,7 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="h">
-
+    
     <!-- set the selected option of the search form -->
     <xsl:template match="h:option[parent::h:select[@id='searchSource']]">
         <xsl:copy>

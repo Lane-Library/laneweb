@@ -72,12 +72,6 @@ public class MetaSearchController {
      * 
      * @param resultMap
      *            the result map
-     * @param ipgroup
-     *            the IPGroup
-     * @param sunetid
-     *            the sunetid
-     * @param ticket
-     *            the Ticket
      */
     @SuppressWarnings("unchecked")
     private void createProxyLinks(final Map<String, Object> resultMap, final String baseProxyURL) {

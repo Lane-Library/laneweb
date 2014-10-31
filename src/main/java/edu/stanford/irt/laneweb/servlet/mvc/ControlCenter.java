@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
 @RequestMapping(value="/control-center")
@@ -22,19 +22,19 @@ public class ControlCenter {
 
     private ApplicationContext context;
 
-    private SunetIdAndTicketDataBinder sunetidBinder;
+    private UserDataBinder userBinder;
 
     @Autowired
-    public ControlCenter(final ApplicationContext context, final SunetIdAndTicketDataBinder sunetidBinder) {
-        this.sunetidBinder = sunetidBinder;
+    public ControlCenter(final ApplicationContext context, final UserDataBinder userBinder) {
+        this.userBinder = userBinder;
         this.context = context;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/email/spamIP")
     @ResponseBody
     public String addSpamIP(@RequestParam final String ip,
-            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID) final String sunetid) {
-        checkAccess(sunetid);
+            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
+        checkAccess(userid);
         this.context.getBean(EMailSender.class).addSpamIP(ip);
         return ip;
     }
@@ -42,16 +42,16 @@ public class ControlCenter {
     @RequestMapping(method = RequestMethod.DELETE, value = "/email/spamIP")
     @ResponseBody
     public boolean removeSpamIP(@RequestParam final String ip,
-            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID) final String sunetid) {
-        checkAccess(sunetid);
+            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
+        checkAccess(userid);
         return this.context.getBean(EMailSender.class).removeSpamIP(ip);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/email/spamReferrer")
     @ResponseBody
     public String addSpamReferrer(@RequestParam final String referrer,
-            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID) final String sunetid) {
-        checkAccess(sunetid);
+            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
+        checkAccess(userid);
         this.context.getBean(EMailSender.class).addSpamReferrer(referrer);
         return referrer;
     }
@@ -59,19 +59,19 @@ public class ControlCenter {
     @RequestMapping(method = RequestMethod.DELETE, value = "/email/spamReferrer")
     @ResponseBody
     public boolean removeSpamReferrer(@RequestParam final String referrer,
-            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.SUNETID) final String sunetid) {
-        checkAccess(sunetid);
+            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
+        checkAccess(userid);
         return this.context.getBean(EMailSender.class).removeSpamReferrer(referrer);
     }
     
     @ModelAttribute
     protected void getParameters(final HttpServletRequest request, final Model model) {
-        this.sunetidBinder.bind(model.asMap(), request);
+        this.userBinder.bind(model.asMap(), request);
     }
 
-    private void checkAccess(final String sunetid) {
-        if (!"ceyates".equals(sunetid)) {
-            throw new LanewebException(sunetid + " not authorized");
+    private void checkAccess(final String userid) {
+        if (!"ceyates@stanford.edu".equals(userid)) {
+            throw new LanewebException(userid + " not authorized");
         }
     }
 }

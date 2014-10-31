@@ -22,6 +22,13 @@
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
+            <xsl:when test="starts-with(.,'/Shibboleth.sso/Login')">
+                <xsl:attribute name="href">
+                    <xsl:value-of select="."/>
+                    <xsl:text>&amp;target=</xsl:text>
+                     <xsl:value-of select="substring-after($return,'target=')"/>
+                </xsl:attribute>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link" select="."/>
@@ -101,7 +108,7 @@
                     <xsl:text>/login-disabled.html</xsl:text>
                 </xsl:when>
                 <!-- login link goes to myaccounts.html when logged in (case 97645)-->
-                <xsl:when test="$link = '/secure/login.html' and $sunetid">
+                <xsl:when test="$link = '/secure/login.html' and $userid">
                     <xsl:text>/myaccounts.html</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>

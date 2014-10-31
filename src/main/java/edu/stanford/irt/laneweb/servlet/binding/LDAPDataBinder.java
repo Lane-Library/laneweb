@@ -5,9 +5,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import edu.stanford.irt.laneweb.ldap.LDAPData;
-import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.user.LDAPData;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 public class LDAPDataBinder implements DataBinder {
 
@@ -17,16 +17,17 @@ public class LDAPDataBinder implements DataBinder {
         this.ldapDataAccess = ldapDataAccess;
     }
 
-    //TODO: create an immutable user object with all this stuff and sunetid, etc.
+    // TODO: create an immutable user object with all this stuff and userid, etc.
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        String sunetid = (String) model.get(Model.SUNETID);
-        if (sunetid != null) {
+        String userid = (String) model.get(Model.USER_ID);
+        if (userid != null) {
+            String sunetid = userid.substring(0, userid.indexOf('@'));
             String name = null;
             String univid = null;
             Boolean isActive = null;
             String email = null;
             HttpSession session = request.getSession();
-            synchronized(session) {
+            synchronized (session) {
                 name = (String) session.getAttribute(Model.NAME);
                 univid = (String) session.getAttribute(Model.UNIVID);
                 isActive = (Boolean) session.getAttribute(Model.IS_ACTIVE_SUNETID);

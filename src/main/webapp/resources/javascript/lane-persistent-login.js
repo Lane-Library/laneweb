@@ -1,172 +1,135 @@
-
 (function() {
 
-    var redirectUrl = null,
-    PERSISTENT_PREFERENCE_COOKIE_NAME = 'persistent-preference',
-    persistentStatusCookie = Y.Cookie.get(PERSISTENT_PREFERENCE_COOKIE_NAME),
-    now = new Date(),
-    needPopup= true,
-    location = Y.lane.Location,
-    model = Y.lane.Model,
-    basePath = model.get(model.BASE_PATH) || "",
-    auth = model.get(model.AUTH),
-    ipgroup = model.get(model.IPGROUP),
-    drMode = model.get(model.DISASTER_MODE),
-    isActive = model.get(model.IS_ACTIVE_SUNETID),
+	var redirectUrl = null, 
+	persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'), 
+	location = Y.lane.Location, 
+	model = Y.lane.Model, 
+	basePath = model.get(model.BASE_PATH)|| "", 
+	drMode = model.get(model.DISASTER_MODE),
+	// isStanfordActive == true only if user is from stanford and is active in the LDAP
+	// See UserDataBinder.java
+	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
+	ipgroup = model.get(model.IPGROUP),
     fromHospital = "SHC" === ipgroup || "LPCH" === ipgroup,
+	
+	
+	getPopup = function(urlPage) {
+		Y.io(urlPage, {
+			on : {
+				success : popupWindow
+			}
+		});
+	};
 
-    getPopup = function(urlPage) {
-        Y.io(urlPage, {
-            on : {
-                success : popupWindow
-                }
-        });
-    };
+	Y.on("click", function(event) {popupShibboltehWindow(event);}, 'a[href=' + basePath + '/secure/login.html]');
+	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, "a[href*=/secure/apps/proxy/credential]");
+	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, "a[href*=/redirect/cme]");
 
-    if(drMode || fromHospital ||  'denied' === persistentStatusCookie || (persistentStatusCookie  && now.getTime() < persistentStatusCookie )){
-        needPopup = false;
-    }
+	popupShibbolethWindowNotHospital = function(event){
+		if(!fromHospital){
+			popupShibboltehWindow(event);
+		}
+	};
+	
+	popupShibboltehWindow = function(event) {
+		var link = event.currentTarget,
+		href = link.get('href');
+		if (!drMode && !persistentStatusCookie && ( !href ||  href.indexOf("javascript") !== 0)){
+			if(!href || href.indexOf("/secure/login.html")>-1){
+				redirectUrl = encodeURIComponent(location.get("href"))
+			}else{
+				redirectUrl = encodeURIComponent(href);
+			}
+			event.preventDefault();
+			link.set('rel', 'persistentLogin');
+			getPopup(basePath + '/plain/shibboleth-persistent-login.html');
+		}
+	};
 
+	// if someone click on a proxied link and he is from stanford so he will
+	// have the possibility to extend his persistent login
+	Y.on("click", function(event) {extensionPersistentLoginPopup(event);}, "a[href*=/redirect/cme]");
+	Y.on("click", function(event) {extensionPersistentLoginPopup(event);}, "a[href*=laneproxy.stanford.edu/login]");
+	
+	var extensionPersistentLoginPopup = function(event){
+		var link = event.target, href = link.get('href');
+		if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
+			event.preventDefault();
+			link.set('rel', 'persistentLogin');
+			redirectUrl = encodeURIComponent(event.target.get('href'));
+			getPopup(basePath + '/plain/persistent-extension-popup.html');
+		}
+	};
 
-    //if someone click on MyLane Login
-     Y.on("click",function(event) {
-         var locationHref = location.get("href"),
-             encodedHref = encodeURIComponent(locationHref);
-         if (persistentStatusCookie    && 'denied' === persistentStatusCookie) {
-            //will be redirected to same page after the webauth
-             location.set("href", basePath + '/secure/persistentLogin.html?pl=false&url='+ encodedHref);
-        } else {
-            var link = event.target;
-            link.set('rel', 'persistentLogin');
-            redirectUrl = encodedHref;
-            getPopup(basePath + '/plain/persistent-login-popup.html');
-        }
-        event.preventDefault();
-    }, 'a[href=' + basePath + '/secure/login.html]');
+	
+	
+	// The popup window
+	var popupWindow = function(id, o) {
+		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href, node,
+		redirectSleepingTime = 3000;
+		organizationCookieValue = Y.Cookie.get("organization");
+		lightbox.setContent(o.responseText);
+		lightbox.show();
+		shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
+		//auto redirect if user went to the previous idp it was saved in a cookie
+		if(organizationCookieValue){
+			Y.one('#is-persistent-login').set('checked', true)
+			node = Y.one('#'+organizationCookieValue);
+			node.set("innerHTML","<span></span><p class='selected'></p>");
+			setTimeout(function(){document.location =  getLinkValue(node)}, redirectSleepingTime);
+		}
+		
+		// Click on one organization -- below the url we have to set here for
+		// stanford idp
+		// /Shibboleth.sso/Login?SAMLDS=1&entityID=https%3A%2F%2Fidp.stanford.edu%2F&target=%2Fsecure%2FpersistentLogin.html%3Fpl%3Dfalse%26url%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fsecure%252Fapps%252Fproxy%252Fcredential%253Furl%253Dhttp%253A%252F%252Fgoogle.com
+		Y.once("click", function(event) {
+			node = event.currentTarget,
+			href = getLinkValue(node);
+			node.set('href', href);
+		}, shibbolethAnchors);
+	};
+	// END POPUP
 
+	getLinkValue = function(node){
+	    var	url, persistentUrl = basePath+ '/secure/persistentLogin.html?pl=', 
+		isPersistent;
+		if (!redirectUrl) {
+			redirectUrl = "/index.html";
+		}
+		if(Y.one('#is-persistent-login')){
+			isPersistent = Y.one('#is-persistent-login').get('checked');
+			if(isPersistent || Y.Cookie.get("organization")){
+				setOrganizationCookie(node.get('id'));
+				return node.get('href') + encodeURIComponent( persistentUrl + 'true' + '&url='+ redirectUrl);
+			}
+			else{
+				return node.get('href') + encodeURIComponent( persistentUrl + 'false' + '&url='+ redirectUrl);
+			}
+		}else{
+			return  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
+		}
+	}
+	
+	setOrganizationCookie = function(id) {
+		var d = new Date();
+		d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+		Y.Cookie.set("organization", id, {
+			expires : d.toUTCString()
+		});
+	}
+	
 
-
-    //if not from hospital and user click on a link that going to be proxy
-     //If there are click subscriptions at multiple points in the DOM heirarchy, they will be executed in order from
-     //most specific (the button) to least specific (document) unless e.stopPropagation() is called along the line.
-     //This will prevent subscriptions from elements higher up the parent axis from executing.
-     Y.on("click",
-        function(event) {
-         if (needPopup) {
-                 var link = event.target, clickedUrl;
-                while (link && link.get('nodeName') !== 'A') {
-                    link = link.get('parentNode');
-                }
-                if(link){
-                    clickedUrl = link.get('href');
-                }
-                if (clickedUrl && (clickedUrl.indexOf("secure/apps/proxy/credential") > 0 || clickedUrl.indexOf("redirect/cme") > 0 || clickedUrl.indexOf("laneproxy") > 0) && clickedUrl.indexOf("javascript") !== 0) {
-                    redirectUrl = encodeURIComponent(link.get('href'));
-                    event.preventDefault();
-                    // don\'t want a redirect with the tracking see tracking.js code if !rel  documment.location is not set
-                    link.set('rel', 'persistentLogin');
-                    // if preference cookie is present but date get into grace period
-                    if (persistentStatusCookie && now.getTime() > persistentStatusCookie && isActive) {
-                        getPopup(basePath + '/plain/persistent-extension-popup.html');
-                    } // no preference cookie at all
-                    else if (!persistentStatusCookie) {
-                        getPopup(basePath + '/plain/persistent-popup.html');
-                    }
-                    else{// if the user not active and on "grace period" the cookies will be deleted and the page will be reload
-                        Y.io(basePath + '/logout', {
-                            sync : true
-                        });
-                    location.reload() ;
-                    }
-                }
-            }
-        },document.body);
-
-
-    // for the static page persistentlogin.hrml Click on YES this way the user
+	// for the static page myaccounts.html Click on YES this way the user
     // will not have to go through webauth.
     if(Y.one('#persistent-login')){
         Y.on('click',function(event) {
             event.preventDefault();
-            if (auth) {
+            if (isStanfordActive) {
                 location.set("href", basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
             } else {
                 location.set("href", basePath + '/secure/persistentLogin.html?pl=true');
             }
         }, '#persistent-login');
     }
-
-
-
-
-    var setLink = function(event) {
-        var node = event.currentTarget, url = basePath + '/';
-        if ( !auth ||  node.get('search').indexOf("pl=true") >0 ) {
-            url = url + 'secure/';
-        }
-        if(!redirectUrl) {
-            redirectUrl = "/index.html";
-        }
-        url = url + 'persistentLogin.html' + node.get('search') + '&url='+ redirectUrl;
-        node.set('href', url);
-    };
-
-    // The popup window
-    var popupWindow = function(id, o) {
-        var lightbox = Y.lane.Lightbox, date = new Date(), content, yesButton, noButton, dontAskCheckBox;
-
-        lightbox.setContent(o.responseText);
-        lightbox.show();
-        content = lightbox.get("contentBox");
-        yesButton = content.one('#yes-persistent-login');
-        noButton = content.one('#no-persistent-login');
-        dontAskCheckBox = content.one('#dont-ask-again');
-
-        // Click on YES --
-        yesButton.once('click',function(event) {
-            event.stopPropagation(); // don't allow event to bubble up to main click handler (line ~41)
-            setLink(event); // cookie set in the PerssitentLoginController class
-        });
-
-        // Click on NO
-        if(noButton){
-            noButton.once('click',function(event) {
-                event.stopPropagation(); // don't allow event to bubble up to main click handler (line ~41)
-                setLink(event);
-                //if the checkbox "don't ask me again" is enable the cookie is set to denied for 10 years
-                //otherwise it is set for the session only
-                if(dontAskCheckBox && dontAskCheckBox.get('checked')) {
-                        date.setFullYear(date.getFullYear() + 10);
-                        Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,    'denied', {
-                                path : "/",
-                                expires : date
-                            });
-                } else {
-                    Y.Cookie.set(PERSISTENT_PREFERENCE_COOKIE_NAME,'denied', {    path : "/"    });
-                }
-            });
-        }
-
-        //if someone click on the don't ask me again" the yes button class should look disable
-        if(dontAskCheckBox){
-            dontAskCheckBox.on('click',function() {
-                if (dontAskCheckBox.get('checked')) {
-                    yesButton.replaceClass('red-btn', 'disabled-btn');
-                    yesButton.detach('click');
-                    yesButton.on('click',function(event) {
-                        event.preventDefault();
-                    });
-                } else {
-                    yesButton.replaceClass('disabled-btn', 'red-btn');
-                    yesButton.detach('click');
-                    yesButton.once('click',function(event) {
-                        setLink(event);
-                    });
-                }
-            });
-        };
-    };
-    //END POPUP
-
+    
 })();
-
