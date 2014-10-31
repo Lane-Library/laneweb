@@ -26,9 +26,8 @@ $(document).on("click", ".webauthLogin:contains('Logout')", function(e) {
 
 //when a click is coming from a external resource
 $(document).on("click", 'a[href*="secure/apps/proxy/credential"],a[href*="laneproxy"], .webauthLogin:contains("Login")', function(event) {
-    var link = event.currentTarget,
-    now = new Date(), cookieValue = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-    if (!model['disaster-mode'] && ! cookieValue){
+    var link = event.currentTarget;
+    if (!model['disaster-mode'] && !model['auth']){
     	if(link.href && link.href.indexOf('/mobile-login.html') >-1){
     		redirectUrl = encodeURIComponent(document.location);
     	}else{
@@ -42,7 +41,7 @@ $(document).on("click", 'a[href*="secure/apps/proxy/credential"],a[href*="lanepr
 $(document).on("click", 'a[href*="laneproxy"]', function(event) {
     var link = event.currentTarget, threeDays = 3600 *3 , 
     now = new Date(), cookieValue = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-    if (!model['disaster-mode']  && model["isActiveSunetID"] && (cookieValue - threeDays) < now.getTime()){
+    if (!model['disaster-mode'] &&  model["isActiveSunetID"] && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
         redirectUrl = encodeURIComponent(link.href);
         $.LANE.popupWindow(model['base-path'] + '/m/plain/shibboleth-persistentlogin-extension.html');
         event.preventDefault();
