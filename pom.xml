@@ -61,7 +61,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.exclusions>**/yui*.js,**/jquery*.js,**/swfobject.js,**/*-test.js</sonar.exclusions>
+        <sonar.exclusions>**/yui*,**/jquery*,**/swfobject.js,**/*-test.js</sonar.exclusions>
     </properties>
     <build>
         <defaultGoal>package</defaultGoal>
