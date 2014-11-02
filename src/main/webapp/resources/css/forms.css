@@ -27,8 +27,6 @@
 	font: normal 13px/100% Source Sans Pro, Arial, Helvetica, clean, sans-serif;
 	background: #FFFFFF;
 	width: 100%;
-	*width: 95%;
-	_width: 95%;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -130,8 +128,6 @@ background-position: -346px 0;
 #feedbackMenu /*tabs on the left */ {
 	text-align: left;
 	margin-top: 40px;
-	/*IE6 fix*/
-	_overflow: hidden
 }
 #feedbackMenu li {
 	padding: 10px 15px;

@@ -1,7 +1,5 @@
 
 #imageList {
-	/*requred for IE < 8:*/
-	*height: 404px;
 	text-align: center;
 	background-color:white; 
 }
