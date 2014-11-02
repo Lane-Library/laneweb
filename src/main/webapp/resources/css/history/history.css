@@ -285,7 +285,7 @@ h1 a {
 	background-repeat: no-repeat;
 	line-height: 18px;
 	border: 1px rgb(203, 192, 193) solid;
-	box-shadow: 0px 0px 2px rgb(203, 192, 193);
+	box-shadow: 0 0 2px rgb(203, 192, 193);
 	font-size: 12px;
 }
 
@@ -370,7 +370,7 @@ h1 a {
 
 .wrap-title {
 	display: inline-block;
-	margin: 0px 10px;
+	margin: 0 10px;
 }
 
 .heading-right {
@@ -463,7 +463,7 @@ h4 {
 
 .border-and-shadow img {
 	float: left;
-	margin: 0px 12px 12px 0px;
+	margin: 0 12px 12px 0;
 }
 
 .border-and-shadow p,.border-and-shadow a {
@@ -477,8 +477,8 @@ h4 {
 	display: block;
 	list-style-type: disc;
 	-webkit-margin-after: 1em;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
+	-webkit-margin-start: 0;
+	-webkit-margin-end: 0;
 	padding-left: 24px;
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #333333;
@@ -503,7 +503,7 @@ h4 {
 }
 
 .side-box {
-	margin: 12px 0px 24px 0px;
+	margin: 12px 0 24px 0;
 	clear: both;
 	display: block;
 	height: auto;
@@ -523,9 +523,9 @@ h4 {
 	max-height: 200px;
 	float: left;
 	min-height: 100px;
-	padding-top: 0px;
+	padding-top: 0;
 	padding-bottom: 12px;
-	margin: 0px 12px 12px 0px;
+	margin: 0 12px 12px 0;
 	text-align: right;
 	overflow: hidden;
 	background-color: #009abb;
@@ -540,13 +540,13 @@ h4 {
 	width: 100%;
 	height: auto;
 	min-height: 1%;
-	padding-top: 0px;
+	padding-top: 0;
 	padding-bottom: 12px;
-	margin: 0px 12px 12px 0px;
+	margin: 0 12px 12px 0;
 	text-align: left;
 	overflow: hidden;
 	background-color: #8c1515;
-	padding-top: 0px;
+	padding-top: 0;
 }
 
 .block-heading h3 {
@@ -590,7 +590,7 @@ h4 {
 }
 
 .content p {
-	margin: 12px 0 24px 0px;
+	margin: 12px 0 24px 0;
 }
 
 b,strong {
@@ -607,11 +607,11 @@ blockquote {
 	font-family: 'Fjord One', serif;
 	font-style: italic;
 	border: none;
-	padding-top: 0px;
+	padding-top: 0;
 	padding-bottom: 18px;
 	padding-left: 36px;
 	overflow: hidden;
-	margin: 0px 0px 0px 0px;
+	margin: 0 0 0 0;
 	display: block;
 	clear: both;
 }

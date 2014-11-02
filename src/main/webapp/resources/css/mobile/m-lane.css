@@ -35,7 +35,7 @@ body.ui-mobile-viewport{
 /*persistentlogin  */
 
  .persistent-header{
-    margin: 40px auto 0px auto;
+    margin: 40px auto 0 auto;
     padding-left: 10px; 
     padding-right: 10px;
     height: 1px;
@@ -55,7 +55,7 @@ body.ui-mobile-viewport{
 #shibboleth-links .organization{  
 	text-align:center;
 	margin-top:6px;
-	padding:6px 0px 6px 0px;
+	padding:6px 0 6px 0;
 	background-color:  rgb(236, 241, 242);
 }
 
@@ -81,13 +81,13 @@ body.ui-mobile-viewport{
 }
 
 #shibboleth-links .organization a#Stanford span{
-background-position: -6px 0px;
+background-position: -6px 0;
 }
 #shibboleth-links .organization a#SHC span{
-background-position: -173px 0px;
+background-position: -173px 0;
 }
 #shibboleth-links .organization a#LPCH span{
-background-position: -346px 0px;
+background-position: -346px 0;
 }
 
 #close{
@@ -99,7 +99,7 @@ background-position: -346px 0px;
     position: relative;
     top: -10px;
     left: -127px;
-    margin: 0px;
+    margin: 0;
 }
 
  .ui-header, 
@@ -110,7 +110,7 @@ background-position: -346px 0px;
  }
 
 .ui-content{ 
-  	margin: 0px auto 20px auto; 
+  	margin: 0 auto 20px auto; 
 }
 
 
@@ -312,7 +312,7 @@ background-position: -346px 0px;
     -webkit-box-shadow: 0 3px 5px #A3A1A1 inset;
     box-shadow: 0 3px 5px #A3A1A1 inset;
     font-size: 1.3em;
-    margin: 10px 0px;
+    margin: 10px 0;
     padding: 6px 0 4px 25px;
     background: url(../../images/mobile/search_bg.png) no-repeat
         5px 6px #ffffff;
