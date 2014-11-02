@@ -29,10 +29,6 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
             Y.Assert.isTrue(style.indexOf("none") >= 0 || style === "currentColor");
         },
 
-        testFeedbackLinkHasClassIe6Feedback: function() {
-            Y.Assert.isTrue(Y.one("#feedbackLink").hasClass("ie6Feedback"));
-        },
-
         testSpanAfterLastInModule: function() {
             var node = Y.one(".module");
             Y.Assert.isTrue(node.get("lastChild").hasClass("after"));

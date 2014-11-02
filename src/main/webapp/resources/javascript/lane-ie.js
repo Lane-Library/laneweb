@@ -26,11 +26,6 @@
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).one('li').setStyle('borderLeft', 'none');
         }
-        //add ie6Feedback to feedbackLink to get position : absolute from feedback.css
-        node = Y.one("#feedbackLink");
-        if (node) {
-            node.addClass("ie6Feedback");
-        }
     }
     if (Y.UA.ie && Y.UA.ie <= 8) {
         //mimic .module:after so subsequent elements are cleared
