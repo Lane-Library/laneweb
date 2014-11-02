@@ -6,7 +6,6 @@
     text-align:right;
 }
 .pagingButton{
-    display:inline-block;
     position:relative;
     float:right;
     cursor:pointer;
