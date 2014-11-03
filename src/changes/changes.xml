@@ -8,14 +8,12 @@
     </properties>
     <body>
         <release date="2014-11-03" version="2.3.1" description="2.3.1 bug fix release">
-            <!--
             <action date="2014-11-03" dev="alainb" issue="100271" type="fix">
                 UHA and PCHA logos need to be separated from SHC and LPCH
             </action>
             <action date="2014-11-03" dev="alainb" issue="100251" type="fix">
                 404 errors when clicking more than once on IdP logo
             </action>
-            -->
             <action date="2014-10-31" dev="ceyates" issue="100225" type="update">
                 Have User implement Serializable
             </action>
