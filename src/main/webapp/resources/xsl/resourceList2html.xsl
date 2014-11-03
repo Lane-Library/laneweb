@@ -220,7 +220,7 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')"/>
         </xsl:variable>
-        <a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/></a>
+        <a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a>
     </xsl:template>
 
     <xsl:template match="s:keyword">
