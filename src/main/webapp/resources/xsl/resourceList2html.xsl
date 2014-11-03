@@ -8,8 +8,6 @@
     <xsl:param name="ipgroup"/>
 
     <xsl:param name="query"/>
-
-    <xsl:param name="emrid"/>
     
     <xsl:param name="url-encoded-query"/>
 
@@ -94,10 +92,6 @@
                 <div>
                     <xsl:value-of select="s:pub-text"/>
                 </div>
-            </xsl:if>
-            
-            <xsl:if test="$emrid and $resourceName = 'UpToDate'">
-                <div><a href="{s:resourceUrl}">Use this link for CME</a></div>
             </xsl:if>
             
             <div class="yui3-g">
