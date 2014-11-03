@@ -12,7 +12,7 @@
 #bookmark-link {
     cursor: pointer;
     background-image: url("../images/sprite-all.png");
-    background-position: -600px 0px;
+    background-position: -600px 0;
     background-repeat:no-repeat;
     display: inline-block;
     height: 16px;
@@ -78,9 +78,9 @@ background-position: -600px -80px;
 }
 
 #bookmarks-editor input[type='text'] {
-	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
-	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	padding: 5px;
 	border: solid 2px #C9C9C9;
 	width: 252px;

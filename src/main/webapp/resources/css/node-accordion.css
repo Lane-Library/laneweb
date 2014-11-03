@@ -2,13 +2,8 @@
     position:relative;
     zoom:1;
 }
-.yui3-accordion .yui3-accordion-item {
-/*    display:list-item;*/
-}
 .yui3-accordion .yui3-accordion-item .yui3-accordion-item-bd {
     height:0;
-    _height:1px;
-    *height:1px;
     overflow:hidden;
     zoom:1;
 }

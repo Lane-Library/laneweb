@@ -29,9 +29,9 @@
     color: #820000;
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8), to(#dadad4));
     background: -moz-linear-gradient(#fafbf8, #dadad4);
+    background: linear-gradient(#fafbf8, #dadad4);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafbf8', endColorstr='#dadad4');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafbf8', endColorstr='#dadad4')";
-    background: linear-gradient(#fafbf8, #dadad4);
     border: 1px solid #dadad9;
     font-weight:bold;
     height:34px;
@@ -43,9 +43,9 @@
 #searchSubmit:hover {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadad4), to(#fafbf8));
     background: -moz-linear-gradient(#dadad4, #fafbf8);
+    background: linear-gradient(#dadad4, #fafbf8);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8')";
-    background: linear-gradient(#dadad4, #fafbf8);
 }
 #searchTools{
     background-color:white;

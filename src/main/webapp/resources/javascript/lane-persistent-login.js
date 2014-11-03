@@ -65,58 +65,30 @@
 	
 	// The popup window
 	var popupWindow = function(id, o) {
-		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href, node,
-		redirectSleepingTime = 3000;
-		organizationCookieValue = Y.Cookie.get("organization");
+		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href, node;
 		lightbox.setContent(o.responseText);
 		lightbox.show();
 		shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
-		//auto redirect if user went to the previous idp it was saved in a cookie
-		if(organizationCookieValue){
-			Y.one('#is-persistent-login').set('checked', true)
-			node = Y.one('#'+organizationCookieValue);
-			node.set("innerHTML","<span></span><p class='selected'></p>");
-			setTimeout(function(){document.location =  getLinkValue(node)}, redirectSleepingTime);
-		}
 		
 		// Click on one organization -- below the url we have to set here for
 		// stanford idp
 		// /Shibboleth.sso/Login?SAMLDS=1&entityID=https%3A%2F%2Fidp.stanford.edu%2F&target=%2Fsecure%2FpersistentLogin.html%3Fpl%3Dfalse%26url%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fsecure%252Fapps%252Fproxy%252Fcredential%253Furl%253Dhttp%253A%252F%252Fgoogle.com
 		Y.once("click", function(event) {
-			node = event.currentTarget,
-			href = getLinkValue(node);
+			var node = event.currentTarget, href,
+		    persistentUrl = basePath+ '/secure/persistentLogin.html?pl='; 
+			if (!redirectUrl) {
+				redirectUrl = "/index.html";
+			}
+			if(Y.one('#is-persistent-login')){
+			   href = node.get('href') + encodeURIComponent( persistentUrl + Y.one('#is-persistent-login').get('checked') + '&url='+ redirectUrl);
+			}else{
+				href = persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
+			}
 			node.set('href', href);
 		}, shibbolethAnchors);
 	};
 	// END POPUP
 
-	getLinkValue = function(node){
-	    var	url, persistentUrl = basePath+ '/secure/persistentLogin.html?pl=', 
-		isPersistent;
-		if (!redirectUrl) {
-			redirectUrl = "/index.html";
-		}
-		if(Y.one('#is-persistent-login')){
-			isPersistent = Y.one('#is-persistent-login').get('checked');
-			if(isPersistent || Y.Cookie.get("organization")){
-				setOrganizationCookie(node.get('id'));
-				return node.get('href') + encodeURIComponent( persistentUrl + 'true' + '&url='+ redirectUrl);
-			}
-			else{
-				return node.get('href') + encodeURIComponent( persistentUrl + 'false' + '&url='+ redirectUrl);
-			}
-		}else{
-			return  persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
-		}
-	}
-	
-	setOrganizationCookie = function(id) {
-		var d = new Date();
-		d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
-		Y.Cookie.set("organization", id, {
-			expires : d.toUTCString()
-		});
-	}
 	
 
 	// for the static page myaccounts.html Click on YES this way the user
