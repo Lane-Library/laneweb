@@ -102,21 +102,8 @@ li.active .description {
     padding:10px 5px 24px;
     font-size:11px;
 }
-.rightSearchTips {
-    margin-top:40px;
-    padding:20px;
-    background-color:#edecdf;
-}
-.rightSearchTips h4 {
-    text-align:center;
-    color:#333;
-    font-size:18px;
-}
 .searchTerms {
     text-transform:none;
     font-weight:bold;
     font-style:italic;
-}
-.utdCMEnote {
-    color:#820000;
 }
