@@ -94,15 +94,13 @@
                 </div>
             </xsl:if>
             
-            <div class="yui3-g">
-                <div class="yui3-u-1-4"><strong>Article</strong></div>
-                <div class="yui3-u-1-4">
-                    <xsl:if test="s:description"><a class="descriptionTrigger">Preview Abstract <i class="fa fa-angle-double-down"></i></a></xsl:if>
-                </div>
-                <div class="yui3-u-1-4">
-                    <xsl:apply-templates select="s:contentId"/>
-                </div>
-                <div class="yui3-u-1-4">Source: <a href="{s:resourceUrl}"><xsl:value-of select="s:resourceName"/>: <xsl:value-of select="s:resourceHits"/><xsl:text> </xsl:text><i class="fa fa-external-link"></i></a></div>
+            <div class="resultInfo">
+                <span><strong>Article</strong></span>
+                <xsl:if test="s:description"><span><a class="descriptionTrigger">Preview Abstract <i class="fa fa-angle-double-down"></i></a></span></xsl:if>
+                
+                <xsl:apply-templates select="s:contentId"/>
+                
+                <span class="sourceInfo">Source: <a href="{s:resourceUrl}"><xsl:value-of select="s:resourceName"/>: <xsl:value-of select="s:resourceHits"/><xsl:text> </xsl:text><i class="fa fa-external-link"></i></a></span>
             </div>
             <xsl:apply-templates select="s:description"/>
         </li>
@@ -114,25 +112,25 @@
         <xsl:variable name="available" select="number(s:available)"/>
         <li>
             <xsl:apply-templates select="s:link"/>
-            <div class="yui3-g">
-                <div class="yui3-u-1-4">
+            <div class="resultInfo">
+                <span>
                     <strong><xsl:value-of select="s:primaryType"/></strong>
                     <xsl:if test="s:recordType = 'print' and $available &gt; 0">
                         <xsl:text> Status: Not Checked Out</xsl:text>
                     </xsl:if>
-                </div>
-                <div class="yui3-u-1-4">
-                    <xsl:if test="s:description"><a class="descriptionTrigger">View Description <i class="fa fa-angle-double-down"></i></a></xsl:if>
-                </div>
-                <div class="yui3-u-1-4">
+                </span>
+                    <xsl:if test="s:description"><span><a class="descriptionTrigger">View Description <i class="fa fa-angle-double-down"></i></a></span></xsl:if>
+                
                     <xsl:if test="s:recordType = 'bib'">
-                        <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
+                        <span>
+                            <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
+                        </span>
                     </xsl:if>
-                </div>
-                <div class="yui3-u-1-4">
+                
+                <span class="sourceInfo">
                     <xsl:text>Source: </xsl:text>
                     <xsl:apply-templates select="s:recordType"/>
-                </div>
+                </span>
             </div>
             <xsl:if test="s:recordType != 'print' and $total &gt; 0">
                 <div>Also available: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Print</a></div>
@@ -214,8 +212,10 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')"/>
         </xsl:variable>
-        <a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a>
+        <span><a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a></span>
     </xsl:template>
+    
+    <xsl:template match="s:contentId"/>
 
     <xsl:template match="s:keyword">
         <strong>

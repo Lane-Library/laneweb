@@ -10,13 +10,13 @@
     pass-through="all">
     
     <stx:template match="h:div[@class='yui3-u-17-24']">
-        <div class="yui3-u-3-4">
+        <div class="yui3-u-4-5">
             <stx:process-children/>
         </div>
     </stx:template>
     
     <stx:template match="h:div[@class='yui3-u-7-24']">
-        <div class="yui3-u-1-4">
+        <div class="yui3-u-1-5">
             <div style="margin-right:12px">
             <div class="pagingButton">Extend your Search In <i class="fa fa-angle-double-down"></i>
                 <div class="pagingLabels">

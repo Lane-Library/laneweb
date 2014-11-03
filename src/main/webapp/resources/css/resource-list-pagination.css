@@ -15,6 +15,7 @@
     border-radius:3px 3px 0 0;
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
     margin-left:6px;
+    white-space:nowrap;
 }
 
 .pagingButton .fa{
@@ -31,7 +32,6 @@
     background:linear-gradient(white,rgb(232,232,232));
     border-radius:0 0 3px 3px;
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-    white-space:nowrap;
     padding:0 8px 0 6px;
     text-align:left;
     z-index:1;
@@ -42,7 +42,6 @@
 .labelTitle{
     display:inline-block;
     width:152px;
-    white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
     vertical-align:bottom;

@@ -96,6 +96,13 @@
 li.active .description {
     display:block
 }
+.resultInfo span {
+    margin-right:10px;
+}
+.resultInfo .sourceInfo {
+    margin-right:0;
+    float:right;
+}
 
 .results-nav {
     background-color:#F7F3E5;
