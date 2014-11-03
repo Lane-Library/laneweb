@@ -108,7 +108,7 @@
                 <div class="yui3-u-1-4">
                     <xsl:apply-templates select="s:contentId"/>
                 </div>
-                <div class="yui3-u-1-4">Source: <a href="{s:resourceUrl}"><xsl:value-of select="s:resourceName"/>: <xsl:value-of select="s:resourceHits"/></a></div>
+                <div class="yui3-u-1-4">Source: <a href="{s:resourceUrl}"><xsl:value-of select="s:resourceName"/>: <xsl:value-of select="s:resourceHits"/><xsl:text> </xsl:text><i class="fa fa-external-link"></i></a></div>
             </div>
             <xsl:apply-templates select="s:description"/>
         </li>
@@ -150,10 +150,10 @@
     <xsl:template match="s:recordType">
             <xsl:choose>
                 <xsl:when test=". = 'auth'">
-                    <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info All Results</a>
+                    <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info All Results <i class="fa fa-external-link"></i></a>
                 </xsl:when>
                 <xsl:when test=". = 'bib'">
-                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results</a>
+                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results <i class="fa fa-external-link"></i></a>
                 </xsl:when>
                 <xsl:when test=". = 'web'">
                     <xsl:text>Lane Web Pages</xsl:text>
@@ -162,7 +162,7 @@
                     <xsl:text>Lane Classes</xsl:text>
                 </xsl:when>
                 <xsl:when test=". = 'print'">
-                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results</a>
+                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results <i class="fa fa-external-link"></i></a>
                 </xsl:when>
             </xsl:choose>
     </xsl:template>
