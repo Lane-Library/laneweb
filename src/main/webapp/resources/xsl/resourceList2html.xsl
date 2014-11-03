@@ -103,7 +103,7 @@
             <div class="yui3-g">
                 <div class="yui3-u-1-4"><strong>Article</strong></div>
                 <div class="yui3-u-1-4">
-                    <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
+                    <xsl:if test="s:description"><a class="descriptionTrigger">Preview Abstract <i class="fa fa-angle-double-down"></i></a></xsl:if>
                 </div>
                 <div class="yui3-u-1-4">
                     <xsl:apply-templates select="s:contentId"/>
@@ -128,7 +128,7 @@
                     </xsl:if>
                 </div>
                 <div class="yui3-u-1-4">
-                    <xsl:if test="s:description"><a class="descriptionTrigger">more</a></xsl:if>
+                    <xsl:if test="s:description"><a class="descriptionTrigger">View Description <i class="fa fa-angle-double-down"></i></a></xsl:if>
                 </div>
                 <div class="yui3-u-1-4">
                     <xsl:if test="s:recordType = 'bib'">

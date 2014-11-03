@@ -28,13 +28,17 @@
                <div class="yui3-u-1-4">
                   <strong>Article</strong>
                </div>
-               <div class="yui3-u-1-4"/>
+               <div class="yui3-u-1-4">
+                  <a class="descriptionTrigger">Preview Abstract <i class="fa fa-angle-double-down"/>
+                  </a>
+               </div>
                <div class="yui3-u-1-4">
                   <a href="http://www.ncbi.nlm.nih.gov/pubmed/25195623?otool=stanford">PMID: 25195623</a>
                </div>
                <div class="yui3-u-1-4">Source: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music&amp;holding=f1000%2CF1000M&amp;otool=Stanford">PubMed: 16847</a>
                </div>
             </div>
+            <div class="description">description</div>
          </li>
          <li>
             <div>
@@ -52,7 +56,8 @@
                   <strong>primaryType</strong>
                </div>
                <div class="yui3-u-1-4">
-                  <a class="descriptionTrigger">more</a>
+                  <a class="descriptionTrigger">View Description <i class="fa fa-angle-double-down"/>
+                  </a>
                </div>
                <div class="yui3-u-1-4">
                   <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=301866">Lane Catalog Record</a>
