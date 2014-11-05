@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.codec;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.user.User;
 
 public class PersistentLoginToken {
 
@@ -10,18 +11,18 @@ public class PersistentLoginToken {
 
     private String encryptedValue;
 
-    private String sunetId;
-
     private int userAgentHash;
+    
+    private User user;
 
-    public PersistentLoginToken(final String sunetId, final long dateValue, final int userAgentHash, final String encryptedValue) {
-        if (null == sunetId) {
-            throw new LanewebException("null sunetId");
+    public PersistentLoginToken(final User user, final long dateValue, final int userAgentHash, final String encryptedValue) {
+        if (null == user) {
+            throw new LanewebException("null user");
         }
         if (null == encryptedValue) {
             throw new LanewebException("null encryptedValue");
         }
-        this.sunetId = sunetId;
+        this.user = user;
         this.dateValue = dateValue;
         this.userAgentHash = userAgentHash;
         this.encryptedValue = encryptedValue;
@@ -31,11 +32,8 @@ public class PersistentLoginToken {
         return this.encryptedValue;
     }
 
-    public String getSunetId() {
-        if (this.sunetId.length() == 0) {
-            return null;
-        }
-        return this.sunetId;
+    public User getUser() {
+        return this.user;
     }
 
     public boolean isValidFor(final long dateValue, final int userAgentHash) {

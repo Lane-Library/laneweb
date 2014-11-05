@@ -11,7 +11,7 @@ import edu.stanford.irt.laneweb.proxy.Ticket;
 
 /**
  * A DataBinder that binds the base proxy url to the Model. It requires that the
- * sunetid, ticket, proxyLink, ipgroup and basePath, if present, have already
+ * userid, ticket, proxyLink, ipgroup and basePath, if present, have already
  * been put in the model.
  */
 public class BaseProxyURLDataBinder implements DataBinder {
@@ -36,12 +36,12 @@ public class BaseProxyURLDataBinder implements DataBinder {
             if (disasterMode.equals(Boolean.TRUE) || IPGroup.SHC.equals(ipgroup) || IPGroup.LPCH.equals(ipgroup)) {
                 baseProxyURL.append(HOSPITAL);
             } else {
-                String sunetid = ModelUtil.getString(model, Model.SUNETID);
+                String userid = ModelUtil.getString(model, Model.USER_ID);
                 Ticket ticket = ModelUtil.getObject(model, Model.TICKET, Ticket.class);
-                if (ticket == null || sunetid == null) {
+                if (ticket == null || userid == null) {
                     baseProxyURL.append(ModelUtil.getString(model, Model.BASE_PATH)).append(WEBAUTH);
                 } else {
-                    baseProxyURL.append(EZPROXY).append(sunetid).append(TICKET).append(ticket).append(URL);
+                    baseProxyURL.append(EZPROXY).append(userid).append(TICKET).append(ticket).append(URL);
                 }
             }
             model.put(Model.BASE_PROXY_URL, baseProxyURL.toString());

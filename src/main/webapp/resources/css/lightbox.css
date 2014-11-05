@@ -32,10 +32,6 @@
 	right: 0;
 	z-index: 1
 }
-/* IE6 doesn't do position : fixed, this class is added via lane-ie.js*/
-#feedbackLink.ie6Feedback {
-	position: absolute;
-}
 
 #feedbackLink a {
 	display: block;
@@ -59,15 +55,17 @@
 	-moz-border-radius: 3px;
 	background-color: white;
 	height: auto;
-	padding: 30px;
+	padding: 36px;
 	text-align: left;
 	border: 1px solid #9e9d98;
 }
 
-#persistent,.yui3-lightbox #subscribe {
-	width: 400px;
+.yui3-lightbox #subscribe {
+	width: 465px;
 }
-
+#persistent {
+	width: 600px;
+}
 .yui3-lightbox #feedback {
 	width: 750px;
 }

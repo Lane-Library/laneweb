@@ -3,7 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="h" version="2.0">
 
-    <xsl:param name="persistent-expiration-date"/>
+    <xsl:param name="lane-login-expiration-date"/>
 	
     <xsl:template match="*">
         <xsl:copy>
@@ -18,8 +18,8 @@
     <xsl:template match="h:strong[@id='persistent-login-expiration-day']">
         <xsl:copy>
             <xsl:choose>
-            	<xsl:when test="$persistent-expiration-date">
-            		<xsl:value-of select="$persistent-expiration-date"/>	
+            	<xsl:when test="$lane-login-expiration-date">
+            		<xsl:value-of select="$lane-login-expiration-date"/>	
 				</xsl:when>
 	            <xsl:otherwise>
 	            	 <xsl:apply-templates select="attribute::node() | child::node()"/>

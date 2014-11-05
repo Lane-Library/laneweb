@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.ldap;
+package edu.stanford.irt.laneweb.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

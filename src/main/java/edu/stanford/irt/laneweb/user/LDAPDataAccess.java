@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.ldap;
+package edu.stanford.irt.laneweb.user;
 
 import java.security.PrivilegedAction;
 import java.util.Collections;

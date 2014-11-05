@@ -27,8 +27,6 @@
 	font: normal 13px/100% Source Sans Pro, Arial, Helvetica, clean, sans-serif;
 	background: #FFFFFF;
 	width: 100%;
-	*width: 95%;
-	_width: 95%;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -53,20 +51,73 @@
 }
 
 /*-------------------------persistent login--------------------------------------------------------------------------*/
-#persistent #hd  {
-	color: #414042;
+
+#persistent label{
 	font-weight: bold;
-	line-height: 1.4em;
-	font-size: 1.1em;
-	padding-bottom: 2em;
+	margin-left: 3px;
+	}
+
+#shibboleth-links {
 	text-align:center;
+	margin: 36px -36px 0-36px;
 }
 
-#persistent #ft {
-	text-align: right;
-	padding-right: 30px;
-	margin-top: .7em;
+#shibboleth-links .organization{  
+	text-align:center;
+	margin-top:6px;
+	padding:18px 0 18px 0;
+	background-color:  rgb(236, 241, 242);
 }
+
+#shibboleth-links .organization li{
+	display: inline-block;
+	border-bottom: none;
+	padding: 3px 6px 3px 6px;
+	}
+
+#shibboleth-links .organization a{
+	display: block;
+	border: 1px solid #ddd;
+	padding:12px 3px 12px 3px;
+	background-color: white;
+}
+
+#shibboleth-links .organization p.selected{
+	width: 120px;
+	height: 30px;
+	margin-left: 9px;
+	margin-top: 14px;
+	background-image: url('../../graphics/buttons/redirect.gif');
+	}
+
+#shibboleth-links .organization span{
+	display: inline-block;
+	width: 166px;
+	height: 50px;
+	background-color:  white;
+	background-repeat: none;
+	background-image: url('../../graphics/logos/organizations-wide.gif');
+}
+
+#shibboleth-links .organization a#Stanford span{
+background-position: 0px -17px;
+}
+#shibboleth-links .organization a#SHC span{
+background-position: -167px -18px;
+}
+#shibboleth-links .organization a#LPCH span{
+background-position: -512px -14px;
+}
+
+#shibboleth-links .organization a#UHA span{
+background-position: -336px -14px;
+}
+
+#shibboleth-links .organization a#PCHA span{
+background-position: -673px -11px;
+}
+
+
 
 #persistent #login {
 	position: inherit;
@@ -87,8 +138,6 @@
 #feedbackMenu /*tabs on the left */ {
 	text-align: left;
 	margin-top: 40px;
-	/*IE6 fix*/
-	_overflow: hidden
 }
 #feedbackMenu li {
 	padding: 10px 15px;
@@ -96,9 +145,9 @@
 .yui3-lightbox #feedbackItems {
 	background-color: white;
 	border: 2px solid #fff;
-	box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
-	-moz-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
-	-webkit-box-shadow: rgba(152, 152, 152, 5) 0px 0px 6px;
+	box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
+	-moz-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
+	-webkit-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	/* For IE 8 */
 	-ms-filter:
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
@@ -119,9 +168,9 @@
 	border-left: 2px solid #fff;
 	border-bottom: 2px solid #fff;
 	border-right: none;
-	box-shadow: rgba(152, 152, 152, 5) -4px 0px 6px;
-	-moz-box-shadow: rgba(152, 152, 152, 5) -4px 0px 6px;
-	-webkit-box-shadow: rgba(152, 152, 152, 5) -4px 0px 6px;
+	box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
+	-moz-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
+	-webkit-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	/* For IE 8 */
 	-ms-filter:
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";

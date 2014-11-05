@@ -4,7 +4,7 @@
     width:100%;
     height:46px;
     background-color:rgb(197,207,209);
-    box-shadow: inset 0px 5px 5px -5px #000;
+    box-shadow: inset 0 5px 5px -5px #000;
 }
 
 #laneNav li{
@@ -26,7 +26,7 @@
 #laneNav .hover a,
 #laneNav .active a{
     background-color:white;
-    box-shadow: inset 0px 5px 5px -5px #000;
+    box-shadow: inset 0 5px 5px -5px #000;
 }
 
 #laneNav li:hover ul a,

@@ -75,7 +75,7 @@ public interface Model {
 
     String PERSISTENT_LOGIN = "persistent-login";
 
-    String PERSISTENT_LOGIN_EXPIRATION_DATE = "persistent-expiration-date";
+    String PERSISTENT_LOGIN_EXPIRATION_DATE = "lane-login-expiration-date";
 
     String PID = "pid";
 
@@ -101,6 +101,8 @@ public interface Model {
 
     String RESOURCES = "resources";
 
+    String RETURN = "return";
+
     String SELECTION = "selection";
 
     String SHOW = "show";
@@ -112,8 +114,6 @@ public interface Model {
     String SOURCEID = "sourceid";
 
     String SUBSET = "subset";
-
-    String SUNETID = "sunetid";
 
     String SYNCHRONOUS = "synchronous";
 
@@ -137,9 +137,13 @@ public interface Model {
 
     String URL_ENCODED_QUERY = "url-encoded-query";
 
+    String USER = "user";
+
     String USER_AGENT = "user-agent";
 
     String USER_COOKIE = "user-cookie";
+
+    String USER_ID = "userid";
 
     String VERSION = "version";
 }

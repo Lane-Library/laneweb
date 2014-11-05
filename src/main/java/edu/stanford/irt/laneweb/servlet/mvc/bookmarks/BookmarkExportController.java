@@ -13,7 +13,7 @@ import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
 @RequestMapping(value = "/bookmarks/export")
@@ -37,8 +37,8 @@ public class BookmarkExportController extends BookmarkController {
 
     @Autowired
     public BookmarkExportController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            SunetIdAndTicketDataBinder sunetidTicketDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, sunetidTicketDataBinder);
+            UserDataBinder userDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
     }
 
     /**

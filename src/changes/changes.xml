@@ -7,6 +7,68 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-11-03" version="2.3.1" description="2.3.1 bug fix release">
+            <action date="2014-11-03" dev="alainb" issue="100271" type="fix">
+                UHA and PCHA logos need to be separated from SHC and LPCH
+            </action>
+            <action date="2014-11-03" dev="alainb" issue="100251" type="fix">
+                404 errors when clicking more than once on IdP logo
+            </action>
+            <action date="2014-10-31" dev="ceyates" issue="100225" type="update">
+                Have User implement Serializable
+            </action>
+            <action date="2014-10-31" dev="alainb" issue="100224" type="fix">
+                login popup on every click in mobile
+            </action>
+        </release>
+        <release date="2014-10-29" version="2.3.0" description="2.3.0 refactor release">
+            <action date="2014-10-28" dev="ryanmax" issue="100188" type="fix">
+                voyager authentication broken
+            </action>
+            <action date="2014-10-27" dev="ceyates" issue="100159" type="update">
+                assume logged in stanford user is active, but check when renewing persistent login
+            </action>
+            <action date="2014-10-24" dev="ryanmax" issue="100114" type="update">
+                cme user ids need to be backwards compatible
+            </action>
+            <action date="2014-10-23" dev="olgary" issue="100111" type="remove">
+                removed captioned-image.css - no more
+            </action>
+            <action date="2014-10-23" dev="olgary" issue="100107" type="remove">
+                deleted images.css - no more shadow
+            </action>
+            <action date="2014-10-27" dev="ceyates" issue="100106" type="add">
+                lookup active status at persistent login renewal
+            </action>
+            <action date="2014-10-24" dev="ceyates" issue="100101" type="fix">
+                userids too large for bookmarks table
+            </action>
+            <action date="2014-10-22" dev="ceyates" issue="100058" type="update">
+                rename cookie from user to lane_user
+            </action>
+            <action date="2014-10-22" dev="ceyates" issue="100049" type="fix">
+                "isStanford" value is lost if user is getting from the cookie
+            </action>
+            <action date="2014-10-24" dev="alainb" issue="99915" type="update">
+                don't prompt non-stanford.edu users for persistent login extension
+            </action>
+            <action date="2014-10-14" dev="ryanmax" issue="99858" type="add">
+                configure shibboleth to provide user request attributes
+            </action>
+            <action date="2014-10-09" dev="ceyates" issue="99832" type="update">
+                replace the text sunetid with userid where appropriate
+            </action>
+            <action date="2014-10-10" dev="ceyates" issue="99831" type="update">
+                add name and email to PersistentLoginToken and cookie
+            </action>
+            <action date="2014-10-22" dev="ceyates" issue="99828" type="update">
+                alter bookmarks code to use userid
+            </action>
+            <action date="2014-10-29" dev="alainb" issue="99827" type="update">
+                advise deployment team of change in property name
+            </action>
+        </release>
+        <release date="2014-10-20" version="2.2.23" description="2.2.23 bug fix release"/>
         <release date="2014-10-13" version="2.2.22" description="2.2.22 bug fix release">
             <action date="2014-10-06" dev="olgary" issue="99763" type="fix">
                 fixed link in footer: template.xml, debug.xml

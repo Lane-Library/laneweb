@@ -22,7 +22,7 @@ import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 // TODO: revisit conscious decision not to synchronize list operations.
 @Controller
@@ -33,8 +33,8 @@ public class JSONBookmarkController extends BookmarkController {
 
     @Autowired
     public JSONBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            SunetIdAndTicketDataBinder sunetidTicketDataBinder, RemoteProxyIPDataBinder proxyLinksDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, sunetidTicketDataBinder);
+            UserDataBinder userDataBinder, RemoteProxyIPDataBinder proxyLinksDataBinder) {
+        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
         this.proxyLinksDataBinder = proxyLinksDataBinder;
     }
 
@@ -42,11 +42,11 @@ public class JSONBookmarkController extends BookmarkController {
     @ResponseStatus(value = HttpStatus.OK)
     public void addBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @RequestBody final Bookmark bookmark) {
         List<Object> clone = new ArrayList<Object>(bookmarks);
         clone.add(0, bookmark);
-        saveLinks(sunetid, clone);
+        saveLinks(userid, clone);
         bookmarks.add(0, bookmark);
     }
 
@@ -54,7 +54,7 @@ public class JSONBookmarkController extends BookmarkController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final String indexes) {
         // convert json array to an int[]
         String[] split = indexes.substring(1, indexes.length() - 1).split(",");
@@ -68,7 +68,7 @@ public class JSONBookmarkController extends BookmarkController {
         for (int j = ints.length - 1; j >= 0; --j) {
             clone.remove(ints[j]);
         }
-        saveLinks(sunetid, clone);
+        saveLinks(userid, clone);
         for (int j = ints.length - 1; j >= 0; --j) {
             bookmarks.remove(ints[j]);
         }
@@ -87,13 +87,13 @@ public class JSONBookmarkController extends BookmarkController {
     @ResponseStatus(value = HttpStatus.OK)
     public void moveBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @RequestBody final Map<String, Integer> json) {
         int to = json.get("to").intValue();
         int from = json.get("from").intValue();
         List<Object> clone = new ArrayList<Object>(bookmarks);
         clone.add(to, clone.remove(from));
-        saveLinks(sunetid, clone);
+        saveLinks(userid, clone);
         bookmarks.add(to, bookmarks.remove(from));
     }
 
@@ -101,13 +101,13 @@ public class JSONBookmarkController extends BookmarkController {
     @ResponseStatus(value = HttpStatus.OK)
     public void saveBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
-            @ModelAttribute(Model.SUNETID) final String sunetid,
+            @ModelAttribute(Model.USER_ID) final String userid,
             @RequestBody final Map<String, Object> json) {
         Bookmark bookmark = new Bookmark((String) json.get("label"), (String) json.get("url"));
         int position = ((Integer) json.get("position")).intValue();
         List<Object> clone = new ArrayList<Object>(bookmarks);
         clone.set(position, bookmark);
-        saveLinks(sunetid, clone);
+        saveLinks(userid, clone);
         bookmarks.set(position, bookmark);
     }
 

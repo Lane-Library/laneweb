@@ -20,9 +20,9 @@ public class Ticket implements Serializable {
 
     private String stringValue;
 
-    public Ticket(final String sunetid, final String ezyproxyKey) {
-        if (null == sunetid) {
-            throw new IllegalArgumentException("null sunetid");
+    public Ticket(final String userid, final String ezyproxyKey) {
+        if (null == userid) {
+            throw new IllegalArgumentException("null userid");
         }
         if (null == ezyproxyKey) {
             throw new IllegalArgumentException("null ezproxyKey");
@@ -30,7 +30,7 @@ public class Ticket implements Serializable {
         Date now = new Date();
         String packet = "$u" + ((int) (now.getTime() / ONE_SECOND)) + "$e";
         try {
-            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + sunetid + packet) + packet, "UTF-8");
+            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + userid + packet) + packet, "UTF-8");
             this.creationTime = System.currentTimeMillis();
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);

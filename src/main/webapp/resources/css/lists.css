@@ -11,7 +11,7 @@ dt {
 
 .content ul {
 	margin-bottom: 12px;
-	margin-top: 0px;
+	margin-top: 0;
 	list-style: none;
 	padding-left: 12px;
 }
@@ -39,7 +39,7 @@ dt {
 }
 
 .content .leftColumn li ul li {
-	padding: 1px 5px 0px 6px;
+	padding: 1px 5px 0 6px;
 	border-bottom: 0;
 }
 /*this is the middle column*/
