@@ -316,8 +316,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         
     private void generateCopyrightPopup(final XMLConsumer xmlConsumer, final Image image) throws SAXException{    
         if (null != image.getId()) {
-            startElementWithId(xmlConsumer, "span", image.getId().hashCode() +"_copyright");
-        
+            AttributesImpl atts = new AttributesImpl();
+            atts.addAttribute(XHTML_NS, ID, ID, CDATA, image.getId().hashCode() +"_copyright");
+            atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "width:450px");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
             if(image.getCopyrightText() != null){
                 startDiv(xmlConsumer);
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, "event_description");
