@@ -75,26 +75,25 @@ body.ui-mobile-viewport{
 	height: 55px;
 	background-color:  white;
 	background-repeat: none;
-	background-image: url('../../../graphics/logos/organizations-wide.gif');
+	background-image: url('../../../graphics/logos/organizational-logos.png');
 }
-
 
 #shibboleth-links .organization a#Stanford span{
-background-position: 0px -17px;
+background-position: -10px -236px;
 }
 #shibboleth-links .organization a#SHC span{
-background-position: -167px -18px;
+background-position: -175px -233px;
 }
 #shibboleth-links .organization a#LPCH span{
-background-position: -512px -14px;
+background-position: -362px -233px;
 }
 
 #shibboleth-links .organization a#UHA span{
-background-position: -336px -14px;
+background-position: -567px -233px;
 }
 
 #shibboleth-links .organization a#PCHA span{
-background-position: -673px -11px;
+background-position: -763px -233px;
 }
 
 #close{
