@@ -39,7 +39,7 @@ ol li {
 	border-bottom: none;
 }
 
-.menu a {
+.menu a, .menu a:visited, .menu a:active {
 	color: white;
 	background-color: #333333;
 	text-decoration: none;
