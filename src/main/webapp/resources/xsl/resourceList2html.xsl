@@ -131,10 +131,7 @@
                         </span>
                     </xsl:if>
                 
-                <span class="sourceInfo">
-                    <xsl:text>Source: </xsl:text>
-                    <xsl:apply-templates select="s:recordType"/>
-                </span>
+                <xsl:apply-templates select="s:recordType"/>
             </div>
             <xsl:if test="s:recordType != 'print' and $total &gt; 0">
                 <div>Also available: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Print</a></div>
@@ -144,23 +141,25 @@
     </xsl:template>
 
     <xsl:template match="s:recordType">
-            <xsl:choose>
-                <xsl:when test=". = 'auth'">
-                    <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info All Results <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-                <xsl:when test=". = 'bib'">
-                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-                <xsl:when test=". = 'web'">
-                    <xsl:text>Lane Web Pages</xsl:text>
-                </xsl:when>
-                <xsl:when test=". = 'class'">
-                    <xsl:text>Lane Classes</xsl:text>
-                </xsl:when>
-                <xsl:when test=". = 'print'">
-                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog All Results <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-            </xsl:choose>
+        <xsl:if test=". != 'web'">
+            <span class="sourceInfo">
+                <xsl:text>Source: </xsl:text>
+                <xsl:choose>
+                    <xsl:when test=". = 'auth'">
+                        <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info Results <i class="fa fa-external-link"></i></a>
+                    </xsl:when>
+                    <xsl:when test=". = 'bib'">
+                        <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog Results <i class="fa fa-external-link"></i></a>
+                    </xsl:when>
+                    <xsl:when test=". = 'class'">
+                        <xsl:text>Lane Classes</xsl:text>
+                    </xsl:when>
+                    <xsl:when test=". = 'print'">
+                        <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog Results <i class="fa fa-external-link"></i></a>
+                    </xsl:when>
+                </xsl:choose>
+            </span>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="s:description">
