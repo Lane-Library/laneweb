@@ -42,13 +42,3 @@ dt {
 	padding: 1px 5px 0 6px;
 	border-bottom: 0;
 }
-/*this is the middle column*/
-.content .middleColumn li {
-	padding-bottom: 0.2em;
-}
-
-/*this is the right column*/
-.content .rightColumn li {
-	line-height: 12px;
-	padding: 2.5px 0;
-}
