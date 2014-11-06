@@ -89,14 +89,16 @@
             </xsl:if>
             
             <xsl:if test="s:pub-text">
-                <div>
+                <div class="citation">
                     <xsl:value-of select="s:pub-text"/>
                 </div>
             </xsl:if>
             
             <div class="resultInfo">
                 <span><strong>Article</strong></span>
-                <xsl:if test="s:description"><span><a class="descriptionTrigger">Preview Abstract <i class="fa fa-angle-double-down"></i></a></span></xsl:if>
+                <xsl:if test="s:description">
+                    <span class="descriptionTrigger searchContent"/>
+                </xsl:if>
                 
                 <xsl:apply-templates select="s:contentId"/>
                 
@@ -119,7 +121,9 @@
                         <xsl:text> Status: Not Checked Out</xsl:text>
                     </xsl:if>
                 </span>
-                    <xsl:if test="s:description"><span><a class="descriptionTrigger">View Description <i class="fa fa-angle-double-down"></i></a></span></xsl:if>
+                <xsl:if test="s:description">
+                    <span class="descriptionTrigger eresource"/>
+                </xsl:if>
                 
                     <xsl:if test="s:recordType = 'bib'">
                         <span>
