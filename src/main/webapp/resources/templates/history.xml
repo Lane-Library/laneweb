@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css"
 			href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css"
-			href="/resources/css/history/lane-history.css" />
+			href="/resources/css/history/lane-history.css?${project.version}" />
 	</head>
 	<body>
 		<div id="header">
