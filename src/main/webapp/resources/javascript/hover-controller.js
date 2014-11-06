@@ -75,10 +75,33 @@
     //create a ResultDescriptionController
     rdc = new ResultDescriptionController();
 
-    //delegate click events on class "descriptionTrigger"
+    //add trigger markup and delegate click events on class "descriptionTrigger"
+    //FIXME this doesn't work with dynamically loaded content
     if (Y.one("#searchResults")) {
+        var triggers = Y.all(".descriptionTrigger");
+        triggers.each(function(node) {
+            if (node.hasClass("eresource")) {
+                node.set("innerHTML", "<a>View Description <i class=\"fa fa-angle-double-down\"></i></a>");
+            } else if (node.hasClass("searchContent")) {
+                node.set("innerHTML", "<a>Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>");
+            }
+        });
+
         Y.delegate("click", function(event) {
-            event.currentTarget.ancestor("li").toggleClass("active");
+            var node = event.currentTarget,
+            ancestor = node.ancestor("li"),
+            active = ancestor.hasClass("active"),
+            eresource = node.hasClass("eresource"),
+            searchContent = node.hasClass("searchContent");
+
+            ancestor.toggleClass("active");
+            if (active && eresource) {
+                node.set("innerHTML", "<a>View Description <i class=\"fa fa-angle-double-down\"></i></a>");
+            } else if (active && searchContent) {
+                node.set("innerHTML", "<a>Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>");
+            } else if (!active) {
+                node.set("innerHTML", "<a>close... <i class=\"fa fa-angle-double-up\"></i></a>");
+            }
         }, "#searchResults", ".descriptionTrigger");
     }
 

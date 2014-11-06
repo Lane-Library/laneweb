@@ -3,20 +3,41 @@ Y.use("node-event-simulate", "console", "test", function(Y){
 
     var searchHoverTextTestCase = new Y.Test.Case({
         name: "Lane Search Hover Text Test Case",
-        testDescriptionTriggerPresent: function() {
-            Y.Assert.isNotNull(Y.one(".descriptionTrigger"));
+        testTriggerContentPresent: function() {
+            var triggers = Y.all(".descriptionTrigger");
+            Y.Assert.areEqual("Preview Abstract ", triggers.item(0).get("text"));
+            Y.Assert.areEqual("View Description ", triggers.item(1).get("text"));
+            Y.Assert.areEqual(2, Y.all(".descriptionTrigger").size());
         },
         testToggleDescriptionOn: function() {
-            var trigger = Y.one(".descriptionTrigger");
-            var item = Y.one("#searchResults li");
-            trigger.simulate('click');
-            Y.Assert.isTrue(item.hasClass("active"));
+            var triggers = Y.all(".descriptionTrigger");
+            var items = Y.all("#searchResults li");
+            triggers.each(function(node) {
+                node.simulate("click");
+            });
+            items.each(function(node) {
+                Y.Assert.isTrue(node.hasClass("active"));
+            });
+            triggers.each(function(node) {
+                Y.Assert.areEqual("close... ", node.get("text"));
+            });
         },
         testToggleDescriptionOff: function() {
-            var trigger = Y.one(".descriptionTrigger");
-            var item = Y.one("#searchResults li");
-            trigger.simulate('click');
-            Y.Assert.isFalse(item.hasClass("active"));
+            var triggers = Y.all(".descriptionTrigger");
+            var items = Y.all("#searchResults li");
+            triggers.each(function(node) {
+                node.simulate("click");
+            });
+            items.each(function(node) {
+                Y.Assert.isFalse(node.hasClass("active"));
+            });
+            triggers.each(function(node, index) {
+                if (index === 0) {
+                    Y.Assert.areEqual("Preview Abstract ", node.get("text"));
+                } else {
+                    Y.Assert.areEqual("View Description ", node.get("text"));
+                }
+            });
         }
     });
 
