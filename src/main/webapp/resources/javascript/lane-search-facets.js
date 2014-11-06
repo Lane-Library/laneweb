@@ -35,6 +35,8 @@
     Y.lane.SearchFacets = SearchFacets;
 
     Result = function(type, source, facet, container){
+        this.publish("new-content");
+        this.addTarget(Lane);
         this._type = type;
         this._source = source;
         this._facet = facet;
@@ -46,8 +48,6 @@
                 success: function(id, o, args){
                     var result = args.result;
                     result.setContent(o.responseText);
-                    SearchFacets.getCurrentResult().hide();
-                    SearchFacets.setCurrentResult(result);
                     result.show();
                 },
                 failure: function(){
@@ -74,6 +74,7 @@
                 SearchFacets.setCurrentResult(this);
                 this._facet.addClass('current');
                 this._container.set("innerHTML", this._content);
+                this.fire("new-content");
                 searchIndicator.hide();
             }
         };
@@ -93,6 +94,17 @@
             this._container.set("innerHTML", "");
             this._facet.removeClass('current');
         };
+
+        // Add EventTarget attributes to the Result prototype
+        Y.augment(Result, Y.EventTarget, null, null, {
+            emitFacade : true,
+            prefix : "result"
+        });
+        
+        Lane.on("result:new-content", function() {
+            this.fire("new-content");
+        });
+        
         if (elt) {
             facets = elt.all('.searchFacet');
             for (i = 0; i < facets.size(); i++) {

@@ -73,11 +73,9 @@
     },
 
     //create a ResultDescriptionController
-    rdc = new ResultDescriptionController();
-
-    //add trigger markup and delegate click events on class "descriptionTrigger"
-    //FIXME this doesn't work with dynamically loaded content
-    if (Y.one("#searchResults")) {
+    rdc = new ResultDescriptionController(),
+    
+    initializeDescriptionToggles = function() {
         var triggers = Y.all(".descriptionTrigger");
         triggers.each(function(node) {
             if (node.hasClass("eresource")) {
@@ -103,6 +101,16 @@
                 node.set("innerHTML", "<a>close... <i class=\"fa fa-angle-double-up\"></i></a>");
             }
         }, "#searchResults", ".descriptionTrigger");
+    };
+
+    //add trigger markup and delegate click events on class "descriptionTrigger"
+    if (Y.one("#searchResults")) {
+        initializeDescriptionToggles();
     }
+    
+    //reinitialize when content has changed
+    Y.lane.on("lane:new-content", function() {
+        initializeDescriptionToggles();
+    });
 
 })();
