@@ -73,7 +73,7 @@
                                             // once all processed, remove id from searchables
                                             //TODO: see search2json.xsl todo note about number value for hits
                                             resultSpan.setContent('&#160;' +
-                                            Y.DataType.Number.format(parseInt(result.hits), {
+                                            Y.DataType.Number.format(parseInt(result.hits, 10), {
                                                 thousandsSeparator: ","
                                             }));
                                             result.name = (updateables.item(y).get('innerHTML')) ? updateables.item(y).get('innerHTML') : '';
