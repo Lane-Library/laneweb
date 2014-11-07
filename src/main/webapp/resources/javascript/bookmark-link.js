@@ -128,21 +128,20 @@
              * @method _handleBookmarkSearchClick
              * @private
              */
-            _handleBookmarkSearchClick : function() {
+            _handleBookmarkSearchClick : function(event) {
                 var query = Model.get(Model.QUERY),
                     source = Model.get(Model.SOURCE),
                     encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
                     label = "Search for: " + query,
                     url = "/search.html?source=" + source + "&q=" + encodedQuery,
-                    bookmarkSearch = Y.one("#bookmarkSearch"),
+                    bookmarkSearch = event.currentTarget,
                     eventHandle = null,
                     bookmarks = this.get("bookmarks");
-                //TODO: this is a temporary hack to take care of case 72768
-                if (bookmarkSearch && bookmarks) {
-                    bookmarkSearch.setStyle("cursor", "wait");
+                if (bookmarks) {
+                    bookmarkSearch.addClass("bookmarking");
                     eventHandle = bookmarks.after("addSync", function() {
-                        bookmarkSearch.setStyle("cursor", "default");
-                        bookmarkSearch.setStyle("visibility", "hidden");
+                        bookmarkSearch.removeClass("active");
+                        bookmarkSearch.removeClass("bookmarking");
                         eventHandle.detach();
                     }, this);
                 }

@@ -93,3 +93,6 @@ background-position: -600px -80px;
 #bookmarkSearch.active{
     visibility:visible;
 }
+#bookmarkSearch.bookmarking {
+    cursor:wait;
+}
