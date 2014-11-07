@@ -435,7 +435,6 @@
                 tooltipContainer, tooltipId, i, j, tt, content = {},
                 tooltipContainerNodeList = Y.all('.tooltips');
             for (i = 0; i < tooltipContainerNodeList.size(); i++) {
-                var foo = tooltipContainerNodeList.item(i);
                 tooltipContainer = tooltipContainerNodeList.item(i).all("> *");
                 for (j = 0; j < tooltipContainer.size(); j++) {
                     tooltipId = tooltipContainer.item(j).get('id').replace(/Tooltip$/, '');

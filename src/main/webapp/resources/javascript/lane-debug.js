@@ -165,16 +165,17 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     ];
 
     //Model doesn't exist yet, get basePath by hand:
-    var basePath = "",
-        errorHandler = function(err) {
-            if (err) {
-                Y.log('Error loading JS: ' + err[0].error, 'error');
-                return;
-            }
-        }
+    var basePath = "", errorHandler;
 
     if (window.model) {
         basePath = window.model["base-path"] || basePath;
+    }
+
+    errorHandler = function(err) {
+        if (err) {
+            Y.log('Error loading JS: ' + err[0].error, 'error');
+            return;
+        }
     }
 
     //load each javascript file separately
