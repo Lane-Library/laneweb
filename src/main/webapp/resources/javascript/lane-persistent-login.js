@@ -36,7 +36,7 @@
 		href = link.get('href');
 		if (!drMode && !persistentStatusCookie && ( !href ||  href.indexOf("javascript") !== 0)){
 			if(!href || href.indexOf("/secure/login.html")>-1){
-				redirectUrl = encodeURIComponent(location.get("href"))
+				redirectUrl = encodeURIComponent(location.get("href"));
 			}else{
 				redirectUrl = encodeURIComponent(href);
 			}

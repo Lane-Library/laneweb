@@ -740,7 +740,7 @@ http://lane.stanford.edu/samples/button-css.html
 
 .flickr-thumbs {
     white-space:nowrap;
-    overflow:hidden;
+    overflow:auto;
     margin:10px 0;
 }
 

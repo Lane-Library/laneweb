@@ -7,15 +7,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-     	<release date="2014-11-05" version="2.3.2" description="emergency release">
+     	<release date="2014-11-05" version="2.3.2" description="2.3.2 emergency release">
             <action date="2014-11-05" dev="alainb" issue="100271" type="fix">
                 UHA and PCHA logos need to be separated from SHC and LPCH as the dean wanted
             </action>
-        </release>
+     	    <action date="2014-11-04" dev="ceyates" issue="99385" type="update">
+     	        Flickr Pictures in History search results
+     	    </action>
+     	</release>
         <release date="2014-11-03" version="2.3.1" description="2.3.1 bug fix release">
-            <action date="2014-11-03" dev="alainb" issue="100271" type="fix">
-                UHA and PCHA logos need to be separated from SHC and LPCH
-            </action>
             <action date="2014-11-03" dev="alainb" issue="100251" type="fix">
                 404 errors when clicking more than once on IdP logo
             </action>

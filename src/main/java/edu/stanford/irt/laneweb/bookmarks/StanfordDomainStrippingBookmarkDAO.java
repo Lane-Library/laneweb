@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * This class is a wrapper for the SQLBookmarkDAO to provide backwards compatibility for the bookmarks table by removing
- * @stanford.edu from the userid for the database queries.
+ * {@literal @}stanford.edu from the userid for the database queries.
  */
 public class StanfordDomainStrippingBookmarkDAO implements BookmarkDAO {
 

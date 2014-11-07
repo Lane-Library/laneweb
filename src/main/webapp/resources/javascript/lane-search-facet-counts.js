@@ -1,4 +1,4 @@
-//TODO: should this stop polling when all facets are complete? currently polls until search app done or timeout
+//should this stop polling when all facets are complete? currently polls until search app done or timeout
 (function() {
     var model = Y.lane.Model,
         query = model.get(model.QUERY),
@@ -46,7 +46,8 @@
                             sleepingTime = 2000;
                             remainingTime = (new Date().getTime()) - startTime;
                             searchStatus = response.results.status;
-                            if (searchStatus !== 'successful' && (remainingTime <= 60 * 1000)) { // at more than 20 seconds the sleeping time becomes 10 seconds
+                            // at more than 20 seconds the sleeping time becomes 10 seconds
+                            if (searchStatus !== 'successful' && (remainingTime <= 60 * 1000)) {
                                 if (remainingTime > 20 * 1000) {
                                     sleepingTime = 10000;
                                 }
