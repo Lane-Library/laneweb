@@ -170,7 +170,7 @@
                                 <include>node-accordion-min.css</include>
                                 <include>buttons-min.css</include>
                                 <include>forms-min.css</include>
-                                <include>table-styles-min.css</include>
+                                <include>tables-min.css</include>
                                 <include>lightbox-min.css</include>
                                 <include>banner-min.css</include>
                                 <include>popular-min.css</include>
