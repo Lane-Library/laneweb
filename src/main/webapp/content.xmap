@@ -189,6 +189,8 @@
                     </map:generate>
                     <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="/resources/xsl/flickr.stx"/>
                 <map:transform type="saxon" src="resources/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>

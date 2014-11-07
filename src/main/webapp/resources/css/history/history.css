@@ -737,3 +737,13 @@ http://lane.stanford.edu/samples/button-css.html
     list-style-image:none;
     list-style:none;
 }
+
+.flickr-thumbs {
+    white-space:nowrap;
+    overflow:auto;
+    margin:10px 0;
+}
+
+.flickr-thumbs a {
+    margin-right:5px
+}
