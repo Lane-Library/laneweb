@@ -144,8 +144,6 @@
                         bookmarkSearch.removeClass("bookmarking");
                         eventHandle.detach();
                     }, this);
-                }
-                if (bookmarks) {
                     bookmarks.addBookmark(new Lane.Bookmark(label, url));
                 } else {
                     Y.lane.BookmarkLogin.addBookmark(label, url);
