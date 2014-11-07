@@ -165,7 +165,13 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     ];
 
     //Model doesn't exist yet, get basePath by hand:
-    var basePath = "";
+    var basePath = "",
+        errorHandler = function(err) {
+            if (err) {
+                Y.log('Error loading JS: ' + err[0].error, 'error');
+                return;
+            }
+        }
 
     if (window.model) {
         basePath = window.model["base-path"] || basePath;
@@ -173,12 +179,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
 
     //load each javascript file separately
     for (i = 0; i < laneJavascript.length; i++) {
-        Y.Get.js(basePath + "/resources/javascript/" + laneJavascript[i], function (err) {
-            if (err) {
-                Y.log('Error loading JS: ' + err[0].error, 'error');
-                return;
-            }
-        });
+        Y.Get.js(basePath + "/resources/javascript/" + laneJavascript[i], errorHandler);
     }
 
 });
