@@ -23,6 +23,9 @@
             <action date="2014-11-05" dev="ceyates" issue="100339" type="fix">
                 browser uses cached version of lane-history.css
             </action>
+            <action date="2014-11-05" dev="ceyates" issue="99453" type="add">
+                Add 3 new resources to the History search
+            </action>
         </release>
      	<release date="2014-11-05" version="2.3.2" description="2.3.2 emergency release">
             <action date="2014-11-05" dev="alainb" issue="100271" type="fix">
