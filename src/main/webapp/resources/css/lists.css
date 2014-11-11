@@ -4,51 +4,52 @@ ol li {
 	list-style-position: inside;
 }
 
-dt {
-	margin-top: .5em;
-	font-weight: bold;
-}
-
 .content ul {
 	margin-bottom: 12px;
 	margin-top: 0;
 	list-style: none;
 	padding-left: 12px;
 }
-.content ul li{
-    border-bottom: solid 1px #dddddd;
-    padding:4px 0;
-    margin-right:12px
+
+.content ul li {
+	border-bottom: solid 1px #f0f4f5;
+	padding: 6px 0;
+	margin-right: 12px;
 }
 
-.content ul li:last-child{
-    border-bottom:none;
+.content ul li:last-child {
+	border-bottom: none;
 }
 
-
-/*this is the left column*/
-.content .leftColumn li {
-	list-style: none outside none;
-	padding: 5px 5px 5px 18px;
-	border-bottom: 1px solid #E6E4DC;
-	margin-left: 0;
+/*black left menu as in the history site and SoM*/
+.menu {
+	margin-top: 12px;
+	margin-bottom: 24px;
+	margin-right: 12px;
+	border-top: 12px solid #8C1515;
 }
 
-.content .leftColumn li ul {
-	padding-top: 4px;
+.menu ul {
+	padding-left: 0;
 }
 
-.content .leftColumn li ul li {
-	padding: 1px 5px 0 6px;
-	border-bottom: 0;
-}
-/*this is the middle column*/
-.content .middleColumn li {
-	padding-bottom: 0.2em;
+.menu ul li {
+	margin-right: 0;
+	padding: 0;
+	border-bottom: none;
 }
 
-/*this is the right column*/
-.content .rightColumn li {
-	line-height: 12px;
-	padding: 2.5px 0;
+.menu a, .menu a:visited, .menu a:active {
+	color: white;
+	background-color: #333333;
+	text-decoration: none;
+	font-weight: 300;
+	display: block;
+	padding: 9px 20px 9px 13px;
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%,
+		rgba(0, 0, 0, 0) 100%);
+}
+
+.menu a:hover {
+	background-color: #555555;
 }

@@ -30,7 +30,7 @@ $.LANE.validateForm = function(event){
     var valid = false;
     if($(event.target).hasClass('noValidation')){
         valid = true;
-    };
+    }
     $(event.target).find(":input[data-type=search]").each(function(){
         // hide keyboard by blurring all inputs
         $(this).blur();

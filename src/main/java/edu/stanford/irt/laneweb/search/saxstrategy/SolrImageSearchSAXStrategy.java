@@ -234,7 +234,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             XMLUtils.data(xmlConsumer,  numberResult + " to " + number + " of " + page.getTotalElements() + " results");
         } else {
             XMLUtils.data(xmlConsumer,
-                    "No " + result.get("tab") + " images are available with search term, " + result.get("searchTerm"));
+                    "No " + result.get("tab") + " images are available with search term, " + result.get(Model.QUERY));
         }
         endDiv(xmlConsumer);
     }

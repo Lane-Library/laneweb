@@ -435,16 +435,14 @@
                 tooltipContainer, tooltipId, i, j, tt, content = {},
                 tooltipContainerNodeList = Y.all('.tooltips');
             for (i = 0; i < tooltipContainerNodeList.size(); i++) {
-                tooltipContainer = tooltipContainerNodeList.item(i).get('childNodes');
+                tooltipContainer = tooltipContainerNodeList.item(i).all("> *");
                 for (j = 0; j < tooltipContainer.size(); j++) {
-                    if (tooltipContainer.item(j).get('nodeType') === 1) {
-                        tooltipId = tooltipContainer.item(j).get('id').replace(/Tooltip$/, '');
-                        if (tooltipTriggerIds) {
-                            tooltipTriggerIds += ', ';
-                        }
-                        tooltipTriggerIds += '#' + tooltipId;
-                        content[tooltipId] = tooltipContainer.item(j).get("innerHTML");
+                    tooltipId = tooltipContainer.item(j).get('id').replace(/Tooltip$/, '');
+                    if (tooltipTriggerIds) {
+                        tooltipTriggerIds += ', ';
                     }
+                    tooltipTriggerIds += '#' + tooltipId;
+                    content[tooltipId] = tooltipContainer.item(j).get("innerHTML");
                 }
             }
             tt = new Tooltip({
