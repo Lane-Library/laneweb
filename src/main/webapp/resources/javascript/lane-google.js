@@ -15,8 +15,7 @@
                 } else {
                     gaPageTracker = _gat._createTracker("UA-3203486-2","gaPageTracker");
                 }
-                //uncomment this for testing/debugging:
-                //gaPageTracker._setLocalServerMode();
+                //you can call _setLocalServerMode on gaPageTracker for testing/debugging
                 gaPageTracker._setDomainName(".stanford.edu");
                 if (ipgroup) {
                     gaPageTracker._setVar(ipgroup);

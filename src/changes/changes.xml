@@ -7,10 +7,35 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2014-11-03" version="2.3.1" description="2.3.1 bug fix release">
-            <action date="2014-11-03" dev="alainb" issue="100271" type="fix">
-                UHA and PCHA logos need to be separated from SHC and LPCH
+        <release date="2014-11-10" version="2.3.3" description="2.3.3 bug fix release">
+            <action date="2014-11-07" dev="olgary" issue="100373" type="update">
+                deleted antibiogram.css, updated pom.xml, updated table-styles.xml
             </action>
+            <action date="2014-11-10" dev="ceyates" issue="100361" type="update">
+                change content used in instances from branches/lane-beta2 to /trunk
+            </action>
+            <action date="2014-11-06" dev="olgary" issue="100355" type="update">
+                updated lists.css - removed old middle and rightColumn styles
+            </action>
+            <action date="2014-11-05" dev="ceyates" issue="100340" type="update">
+                provide scrolling for history image search results
+            </action>
+            <action date="2014-11-05" dev="ceyates" issue="100339" type="fix">
+                browser uses cached version of lane-history.css
+            </action>
+            <action date="2014-11-05" dev="ceyates" issue="99453" type="add">
+                Add 3 new resources to the History search
+            </action>
+        </release>
+     	<release date="2014-11-05" version="2.3.2" description="2.3.2 emergency release">
+            <action date="2014-11-05" dev="alainb" issue="100271" type="fix">
+                UHA and PCHA logos need to be separated from SHC and LPCH as the dean wanted
+            </action>
+     	    <action date="2014-11-04" dev="ceyates" issue="99385" type="update">
+     	        Flickr Pictures in History search results
+     	    </action>
+     	</release>
+        <release date="2014-11-03" version="2.3.1" description="2.3.1 bug fix release">
             <action date="2014-11-03" dev="alainb" issue="100251" type="fix">
                 404 errors when clicking more than once on IdP logo
             </action>

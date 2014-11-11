@@ -52,21 +52,47 @@
 
 /*-------------------------persistent login--------------------------------------------------------------------------*/
 
-#persistent label{
+div#persistent {
+	height:350px;
+	width:980px;
+	padding: 0px !important;
+	text-align:center;
+}
+
+#persistent .header{
+	background-color:  #aabec6;
+	/*background-color:  rgb(236, 241, 242);*/
+	padding-top: 0px !important;
+	height: 90px;
+}
+
+#persistent .header span{
+	display:inline-block;
+	width: 250px;
+	height: 70px;
+	background-position: -346px -11px;
+	background-image: url('../../graphics/logos/organizational-logos.png');
+	background-repeat: no-repeat;
+}
+
+#persistent .is-persistent{
+	text-align: left;
+	margin-top: 35px;
 	font-weight: bold;
-	margin-left: 3px;
-	}
+	margin-left: 20px;
+}
+
+#persistent .is-persistent input{
+	margin-right: 3px;
+}
 
 #shibboleth-links {
-	text-align:center;
-	margin: 36px -36px 0-36px;
+	margin-top: 41px;
+	color: grey;
 }
 
 #shibboleth-links .organization{  
-	text-align:center;
-	margin-top:6px;
-	padding:18px 0 18px 0;
-	background-color:  rgb(236, 241, 242);
+	padding:18px;
 }
 
 #shibboleth-links .organization li{
@@ -82,39 +108,32 @@
 	background-color: white;
 }
 
-#shibboleth-links .organization p.selected{
-	width: 120px;
-	height: 30px;
-	margin-left: 9px;
-	margin-top: 14px;
-	background-image: url('../../graphics/buttons/redirect.gif');
-	}
 
 #shibboleth-links .organization span{
 	display: inline-block;
 	width: 166px;
 	height: 50px;
 	background-color:  white;
-	background-repeat: none;
-	background-image: url('../../graphics/logos/organizations-wide.gif');
+	background-repeat: no-repeat;
+	background-image: url('../../graphics/logos/organizational-logos.png');
 }
 
 #shibboleth-links .organization a#Stanford span{
-background-position: 0px -17px;
+background-position: -10px -236px;
 }
 #shibboleth-links .organization a#SHC span{
-background-position: -167px -18px;
+background-position: -175px -233px;
 }
-#shibboleth-links .organization a#LPCH span{
-background-position: -512px -14px;
+#shibboleth-links .organization a#UHA span{
+background-position: -362px -233px;
 }
 
-#shibboleth-links .organization a#UHA span{
-background-position: -336px -14px;
+#shibboleth-links .organization a#LPCH span{
+background-position: -567px -233px;
 }
 
 #shibboleth-links .organization a#PCHA span{
-background-position: -673px -11px;
+background-position: -763px -233px;
 }
 
 
