@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+   <div class="result-summary">
+      <div class="result">1 to 1 of 1 results</div>
+   </div>
+   <ul id="imageList">
+      <li>
+         <a href="pageUrl">
+            <div id="image">
+               <image src="thumbnailSrc" id="id/andSlash" class="yui3-tooltip-trigger"/>
+            </div>
+            <div>title</div>
+         </a>
+         <div id="website-id">Source: <a href="pageUrl">id</a>
+         </div>
+         <div id="copyright">
+            <a rel="popup local 2109089882_copyright">Copyright Information <i class="fa fa-arrow-right"/>
+            </a>
+         </div>
+      </li>
+   </ul>
+   <div class="result-summary"/>
+   <div style="display:none" class="tooltips">
+      <span id="id/andSlashTooltip">
+         <image src="src" style="max-width: 300px;max-height: 240px"/>
+      </span>
+   </div>
+   <div class="popups">
+      <span id="2109089882_copyright" style="width:450px">
+         <div>
+            <event_description>copyrightText</event_description>
+         </div>
+      </span>
+   </div>
+</div>
