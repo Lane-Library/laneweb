@@ -48,19 +48,6 @@ http://lane.stanford.edu/samples/button-css.html
     color:#8C1515
 }
 
-.my-lane{
-    display:block;
-    width:135px;
-    padding:10px 10px 10px 68px;
-    background-color:rgb(235, 240, 241);
-    background-image:url(../graphics/2014/my-lane.png);
-    background-position:9px 7px;
-    background-repeat:no-repeat;
-    line-height:18px;
-    border:1px rgb(203, 192, 193) solid;
-    box-shadow:0 0 2px rgb(203, 192, 193);
-}
-
 /* styles for css buttons ----------------------------------------------------------------------- */
 .red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn,.submitButton
 {

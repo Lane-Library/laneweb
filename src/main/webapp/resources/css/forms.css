@@ -71,7 +71,7 @@ div#persistent {
 	width: 250px;
 	height: 70px;
 	background-position: -346px -11px;
-	background-image: url('../../graphics/logos/organizational-logos.png');
+	background-image: url('../images/organizational-logos.png');
 	background-repeat: no-repeat;
 }
 
@@ -115,7 +115,7 @@ div#persistent {
 	height: 50px;
 	background-color:  white;
 	background-repeat: no-repeat;
-	background-image: url('../../graphics/logos/organizational-logos.png');
+	background-image: url('../images/organizational-logos.png');
 }
 
 #shibboleth-links .organization a#Stanford span{

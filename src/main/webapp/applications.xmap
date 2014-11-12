@@ -194,4 +194,17 @@
             <map:serialize type="html5"/>
         </map:match>
     </map:pipeline>
+    <map:pipeline type="noncaching">
+        <map:match pattern="grandrounds/*/*.html" type="wildcard">
+            <map:aggregate type="default" element="doc" ns="doc">
+                <map:generate type="file" src="{content-base}/biomed-resources/grandrounds/{1}.xml"/>
+                <map:generate type="file" src="{content-base}/biomed-resources/grandrounds/grandrounds.xml"/>
+            </map:aggregate>
+            <map:transform type="saxon" src="resources/xsl/grandrounds.xsl">
+                <map:parameter name="category" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:transform>
+            <map:serialize type="html5-indent"/>
+        </map:match>
+    </map:pipeline>
 </map:sitemap>

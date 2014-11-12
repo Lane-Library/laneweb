@@ -176,7 +176,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
             Y.log('Error loading JS: ' + err[0].error, 'error');
             return;
         }
-    }
+    };
 
     //load each javascript file separately
     for (i = 0; i < laneJavascript.length; i++) {
