@@ -75,7 +75,7 @@ body.ui-mobile-viewport{
 	height: 55px;
 	background-color:  white;
 	background-repeat: none;
-	background-image: url('../../../graphics/logos/organizational-logos.png');
+	background-image: url('../../images/organizational-logos.png');
 }
 
 #shibboleth-links .organization a#Stanford span{
