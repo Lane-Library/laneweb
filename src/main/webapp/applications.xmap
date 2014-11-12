@@ -193,6 +193,8 @@
             <map:transform type="saxon" src="resources/xsl/describe.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
+    </map:pipeline>
+    <map:pipeline type="noncaching">
         <map:match pattern="grandrounds/*/*.html" type="wildcard">
             <map:aggregate type="default" element="doc" ns="doc">
                 <map:generate type="file" src="{content-base}/biomed-resources/grandrounds/{1}.xml"/>
