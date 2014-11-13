@@ -102,7 +102,7 @@
                 
                 <xsl:apply-templates select="s:contentId"/>
                 
-                <span class="sourceInfo">Source: <a href="{s:resourceUrl}"><xsl:value-of select="s:resourceName"/>: <xsl:value-of select="s:resourceHits"/><xsl:text> </xsl:text><i class="fa fa-external-link"></i></a></span>
+                <span class="sourceInfo">Source: <a href="{s:resourceUrl}"><xsl:value-of select="s:resourceName"/>: <xsl:value-of select="format-number(number(s:resourceHits),'###,###,##0')"/><xsl:text> </xsl:text><i class="fa fa-external-link"></i></a></span>
             </div>
             <xsl:apply-templates select="s:description"/>
         </li>
