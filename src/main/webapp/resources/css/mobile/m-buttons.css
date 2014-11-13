@@ -1,9 +1,9 @@
-/*this file also has styles for the tabs*/
+
 /* styles for css buttons */
 
 
 
-.red-btn span,.gray-btn span,.mgray-btn
+.red-btn span,.gray-btn span
 	{
 	display: inline-block;
 	padding: 7px 12px;
@@ -13,7 +13,7 @@
 	border-radius: 3px;
 }
 
-.gray-btn,.red-btn,.mgray-btn {
+.gray-btn,.red-btn {
 	display: inline-block;
 	margin: 5px;
 	-webkit-border-radius: 3px;
@@ -63,32 +63,8 @@
 		  startColorstr =   
 		   '#e82c2e', endColorstr =         '#820000' );
 }
-/* medium gray button */
-.mgray-btn {
-	color: #444444 !important;
-	background-color: #dcdcdc;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dcdcdc),
-		to(#9d9fa2) );
-	background: -moz-linear-gradient(#dcdcdc, #9d9fa2);
-	filter: progid :         DXImageTransform.Microsoft.gradient (    
-		  startColorstr =   
-		   '#dcdcdc', endColorstr =       '#9d9fa2' );
-	border: 1px solid #9d9fa2;
-}
 
-.mgray-btn:hover {
-	border: 1px solid #414042;
-	background-color: #666666;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dcdcdc),
-		to(#666666) );
-	background-image: -moz-linear-gradient(#dcdcdc, #666666);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :         DXImageTransform.Microsoft.gradient (    
-		  startColorstr =   
-		   '#dcdcdc', endColorstr =       '#666666' );
-}
-
-.gray-btn:hover,.red-btn:hover,.mgray-btn:hover
+.gray-btn:hover,.red-btn:hover
 	{
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
@@ -98,27 +74,4 @@
 .btn-wide {
 	padding-left: 3em;
 	padding-right: 3em;
-}
-/*-------------------------------------------------------------------------------------------------------------------------------*/
-/* styles for grey buttons in sprite*/
-.button {
-	display: block;
-	font-size: 0;
-	color: white;
-	background-image: url(../../images/sprite-but-off1.gif);
-	background-repeat: no-repeat;
-	height: 27px;
-	width: 147px;
-	margin: 5px 0;
-	border: none;
-}
-
-.button:hover {
-	background: transparent url(../../images/sprite-but-on1.gif);
-	border: none;
-	color: white;
-}
-
-.events.button {
-	color: white;
 }
