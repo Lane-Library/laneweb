@@ -49,7 +49,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 /* styles for css buttons ----------------------------------------------------------------------- */
-.red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn,.submitButton
+.red-btn span,.gray-btn span,.mgray-btn,.gold-btn span,.disabled-btn,.submitButton
 {
 	display: inline-block;
 	padding: 7px 12px;
@@ -59,7 +59,7 @@ http://lane.stanford.edu/samples/button-css.html
 	border-radius: 3px;
 }
 
-.gray-btn,.red-btn,.orange-btn,.mgray-btn,.gold-btn,.disabled-btn
+.gray-btn,.red-btn,.mgray-btn,.gold-btn,.disabled-btn
 {
 	display: inline-block;
 	margin: 5px;
@@ -114,34 +114,6 @@ http://lane.stanford.edu/samples/button-css.html
 	filter: progid :           DXImageTransform.Microsoft.gradient (     
 		   startColorstr =    
 		    '#e82c2e', endColorstr =           '#820000' );
-}
-
-/* orange button ----------------------------------------------------------------------- */
-.orange-btn
-{
-	color: #444444 !important;
-	background-color: #fc8c09;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fc8c09),
-		to(#d15f03) );
-	background: -moz-linear-gradient(#fc8c09, #d15f03);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =    
-		    '#fc8c09', endColorstr =         '#d15f03' );
-	border: 1px solid #ed6b03;
-}
-
-.orange-btn:hover
-{
-	border: 1px solid #b74101;
-	background-color: #d15f03;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fc8c09),
-		to(#b74101) );
-	background-image: -moz-linear-gradient(#fc8c09, #b74101);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =    
-		    '#fc8c09', endColorstr =         '#b74101' );
 }
 
 /* medium gray button ----------------------------------------------------------------------- */
@@ -213,7 +185,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 /* hover shadow for all buttons ----------------------------------------------------------------------- */
-.gray-btn:hover,.red-btn:hover,.orange-btn:hover,.mgray-btn:hover,.gold-btn:hover
+.gray-btn:hover,.red-btn:hover,.mgray-btn:hover,.gold-btn:hover
 {
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;

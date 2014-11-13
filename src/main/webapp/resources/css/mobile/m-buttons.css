@@ -3,7 +3,7 @@
 
 
 
-.red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn
+.red-btn span,.gray-btn span,.mgray-btn,.gold-btn span,.disabled-btn
 	{
 	display: inline-block;
 	padding: 7px 12px;
@@ -13,7 +13,7 @@
 	border-radius: 3px;
 }
 
-.gray-btn,.red-btn,.orange-btn,.mgray-btn,.gold-btn,.disabled-btn {
+.gray-btn,.red-btn,.mgray-btn,.gold-btn,.disabled-btn {
 	display: inline-block;
 	margin: 5px;
 	-webkit-border-radius: 3px;
@@ -88,7 +88,7 @@
 		   '#dcdcdc', endColorstr =       '#666666' );
 }
 
-.gray-btn:hover,.red-btn:hover,.orange-btn:hover,.mgray-btn:hover,.gold-btn:hover
+.gray-btn:hover,.red-btn:hover,.mgray-btn:hover,.gold-btn:hover
 	{
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
