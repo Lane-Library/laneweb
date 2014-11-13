@@ -49,7 +49,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 /* styles for css buttons ----------------------------------------------------------------------- */
-.red-btn span,.gray-btn span,.mgray-btn,.disabled-btn,.submitButton
+.red-btn span,.gray-btn span,.mgray-btn,.submitButton
 {
 	display: inline-block;
 	padding: 7px 12px;
@@ -59,7 +59,7 @@ http://lane.stanford.edu/samples/button-css.html
 	border-radius: 3px;
 }
 
-.gray-btn,.red-btn,.mgray-btn,.disabled-btn
+.gray-btn,.red-btn,.mgray-btn
 {
 	display: inline-block;
 	margin: 5px;
@@ -141,20 +141,6 @@ http://lane.stanford.edu/samples/button-css.html
 	filter: progid :           DXImageTransform.Microsoft.gradient (     
 		   startColorstr =    
 		    '#dcdcdc', endColorstr =         '#666666' );
-}
-
-.disabled-btn,.disabled-btn:hover {
-	color: #ccc !important;
-	background-color: #edede5;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
-		to(#dadad4) );
-	background: -moz-linear-gradient(#fafbf8, #dadad4);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =    
-		    '#fafbf8', endColorstr =         '#dadad4' );
-	border: 1px solid #dadad9;
-	cursor: default;
 }
 
 /* hover shadow for all buttons ----------------------------------------------------------------------- */
