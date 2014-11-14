@@ -51,7 +51,7 @@
                 add result count to top of search and reformat start of search results
             </action>
         </release>
-        <release date="2014-11-03" version="2.3.4" description="2.3.4 bug fix release">
+        <release date="2014-11-17" version="2.3.4" description="2.3.4 bug fix release">
             <action date="2014-11-11" dev="ceyates" issue="100445" type="update">
                 move images referenced in css from content to webapp
             </action>
