@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-11-03" version="2.3.4" description="2.3.4 bug fix release">
+            <action date="2014-11-11" dev="ceyates" issue="100445" type="update">
+                move images referenced in css from content to webapp
+            </action>
+            <action date="2014-11-13" dev="ceyates" issue="99866" type="fix">
+                fix google search in Dr Wilson's book...
+            </action>
+            <action date="2014-11-11" dev="ceyates" issue="99406" type="add">
+                create an easy maintainable source of data for grand rounds information
+            </action>
+        </release>
         <release date="2014-11-10" version="2.3.3" description="2.3.3 bug fix release">
             <action date="2014-11-07" dev="olgary" issue="100373" type="update">
                 deleted antibiogram.css, updated pom.xml, updated table-styles.xml
