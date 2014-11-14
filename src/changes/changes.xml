@@ -7,6 +7,50 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-11-24" version="2.3.5" description="2.3.5 bug fix release">
+            <action date="2014-11-06" dev="ceyates" issue="100345" type="update">
+                tooltips don't work with dynamically loaded content
+            </action>
+            <action date="2014-11-06" dev="ceyates" issue="100344" type="update">
+                dynamically change descriptionTrigger markup
+            </action>
+            <action date="2014-11-03" dev="ceyates" issue="100162" type="update">
+                change rightSearchTips to a drop down
+            </action>
+            <action date="2014-10-16" dev="ceyates" issue="99361" type="update">
+                add Lane Catalog Record link for catalog items
+            </action>
+            <action date="2014-10-30" dev="ceyates" issue="99360" type="update">
+                add "Status: Not Checked Out" for book records when appropriate
+            </action>
+            <action date="2014-10-16" dev="ceyates" issue="99359" type="update">
+                add "Also Available" text for audio items for videos when appropriate
+            </action>
+            <action date="2014-10-29" dev="ceyates" issue="99358" type="update">
+                add “Also available” text when physical copy is available in catalog record 
+            </action>
+            <action date="2014-10-16" dev="ceyates" issue="99356" type="update">
+                add “Also available” text when displaying secondary links to the resource
+            </action>
+            <action date="2014-11-03" dev="ceyates" issue="99355" type="update">
+                add a link indicating source and hitcounts at the bottom right corner of search result
+            </action>
+            <action date="2014-11-03" dev="ceyates" issue="99354" type="update">
+                move PMID link next to view abstract link
+            </action>
+            <action date="2014-11-03" dev="ceyates" issue="99353" type="update">
+                change abstract to appear on link click instead of hover for search results
+            </action>
+            <action date="2014-09-17" dev="ceyates" issue="99352" type="update">
+                add resource type at bottom left corner of search results
+            </action>
+            <action date="2014-09-15" dev="ceyates" issue="99351" type="update">
+                move publisher to third line of search results
+            </action>
+            <action date="2014-10-06" dev="ceyates" issue="99349" type="update">
+                add result count to top of search and reformat start of search results
+            </action>
+        </release>
         <release date="2014-11-03" version="2.3.4" description="2.3.4 bug fix release">
             <action date="2014-11-11" dev="ceyates" issue="100445" type="update">
                 move images referenced in css from content to webapp
