@@ -1,6 +1,4 @@
-/*this file also has styles for the tabs*/
-
-/*class button for mimicing SOM buttons.  See markup at:
+/*class button for mimicking SOM buttons.  See markup at:
 http://lane.stanford.edu/samples/button-css.html
  */
 .button{
@@ -48,21 +46,8 @@ http://lane.stanford.edu/samples/button-css.html
     color:#8C1515
 }
 
-.my-lane{
-    display:block;
-    width:135px;
-    padding:10px 10px 10px 68px;
-    background-color:rgb(235, 240, 241);
-    background-image:url(../graphics/2014/my-lane.png);
-    background-position:9px 7px;
-    background-repeat:no-repeat;
-    line-height:18px;
-    border:1px rgb(203, 192, 193) solid;
-    box-shadow:0 0 2px rgb(203, 192, 193);
-}
-
 /* styles for css buttons ----------------------------------------------------------------------- */
-.red-btn span,.gray-btn span,.orange-btn span,.mgray-btn,.gold-btn span,.disabled-btn,.submitButton
+.red-btn span,.gray-btn span,.mgray-btn
 {
 	display: inline-block;
 	padding: 7px 12px;
@@ -72,7 +57,7 @@ http://lane.stanford.edu/samples/button-css.html
 	border-radius: 3px;
 }
 
-.gray-btn,.red-btn,.orange-btn,.mgray-btn,.gold-btn,.disabled-btn
+.gray-btn,.red-btn,.mgray-btn
 {
 	display: inline-block;
 	margin: 5px;
@@ -129,34 +114,6 @@ http://lane.stanford.edu/samples/button-css.html
 		    '#e82c2e', endColorstr =           '#820000' );
 }
 
-/* orange button ----------------------------------------------------------------------- */
-.orange-btn
-{
-	color: #444444 !important;
-	background-color: #fc8c09;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fc8c09),
-		to(#d15f03) );
-	background: -moz-linear-gradient(#fc8c09, #d15f03);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =    
-		    '#fc8c09', endColorstr =         '#d15f03' );
-	border: 1px solid #ed6b03;
-}
-
-.orange-btn:hover
-{
-	border: 1px solid #b74101;
-	background-color: #d15f03;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fc8c09),
-		to(#b74101) );
-	background-image: -moz-linear-gradient(#fc8c09, #b74101);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =    
-		    '#fc8c09', endColorstr =         '#b74101' );
-}
-
 /* medium gray button ----------------------------------------------------------------------- */
 .mgray-btn
 {
@@ -184,49 +141,8 @@ http://lane.stanford.edu/samples/button-css.html
 		    '#dcdcdc', endColorstr =         '#666666' );
 }
 
-/* gold button ----------------------------------------------------------------------- */
-.gold-btn
-{
-	color: #444444 !important;
-	background-color: #ede8dd;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ede8dd),
-		to(#C2B7A1) );
-	background: -moz-linear-gradient(#ede8dd, #C2B7A1);
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =    
-		    '#ede8dd', endColorstr =         '#C2B7A1' );
-	border: 1px solid #C2B7A1;
-}
-
-.gold-btn:hover
-{
-	border: 1px solid #918873;
-	background-color: #918873;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ede8dd),
-		to(#918873) );
-	background-image: -moz-linear-gradient(#ede8dd, #918873);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =    
-		    '#ede8dd', endColorstr =         '#918873' );
-}
-
-.disabled-btn,.disabled-btn:hover {
-	color: #ccc !important;
-	background-color: #edede5;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
-		to(#dadad4) );
-	background: -moz-linear-gradient(#fafbf8, #dadad4);
-	/*filter necessary to display gradient in IE*/
-	filter: progid :           DXImageTransform.Microsoft.gradient (     
-		   startColorstr =    
-		    '#fafbf8', endColorstr =         '#dadad4' );
-	border: 1px solid #dadad9;
-	cursor: default;
-}
-
 /* hover shadow for all buttons ----------------------------------------------------------------------- */
-.gray-btn:hover,.red-btn:hover,.orange-btn:hover,.mgray-btn:hover,.gold-btn:hover
+.gray-btn:hover,.red-btn:hover,.mgray-btn:hover
 {
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
 	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
@@ -237,21 +153,4 @@ http://lane.stanford.edu/samples/button-css.html
 .btn-wide {
 	padding-left: 3em;
 	padding-right: 3em;
-}
-
-/* TODO: remove this, at the time I commented this out there was no class="bookmarklet" in the content*/
-.bookmarklet {
-	background-position: -25px -529px;
-	background-color: transparent;
-	cursor: pointer;
-	height: 36px;
-	width: 173px;
-}
-
-.bookmarklet:hover {
-	background-position: -25px -529px;
-	background-color: transparent;
-	cursor: pointer;
-	height: 36px;
-	width: 173px;
 }
