@@ -63,6 +63,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.exclusions>**/yui*,**/jquery*,**/swfobject.js,**/*-test.js</sonar.exclusions>
         <sonar.javascript.lcov.reportPath>target/grover/lcov/lcov.info</sonar.javascript.lcov.reportPath>
+        <sonar.jacoco.reportPath>target/jacoco-ut.exec</sonar.jacoco.reportPath>
+        <sonar.jacoco.itReportPath>target/jacoco-it.exec</sonar.jacoco.itReportPath>
     </properties>
     <build>
         <defaultGoal>package</defaultGoal>
@@ -299,9 +301,17 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>test</id>
                         <phase>test</phase>
                         <goals>
                             <goal>grover</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>coverage</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>coverage</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -333,6 +343,28 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.2.201409121644</version>
+                <executions>
+                    <execution>
+                        <id>unit</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>target/jacoco-ut.exec</destFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>integration</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>prepare-agent-integration</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>target/jacoco-it.exec</destFile>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <pluginManagement>
