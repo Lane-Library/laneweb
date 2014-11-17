@@ -38,7 +38,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
                 currentTitle = rowTitle;
                 int score = query == null ? 0 : this.scoreStrategy.computeScore(query, currentTitle, rs);
-                eresource = new Eresource(rs.getString("DESCRIPTION"), rowEresourceId, recordId, recordType, score, currentTitle);
+                eresource = new Eresource(rs.getString("DESCRIPTION"), rowEresourceId, recordId, recordType, score, currentTitle, rs.getString("PRIMARY_TYPE"), rs.getInt("TOTAL"), rs.getInt("AVAILABLE"));
                 eresources.add(eresource);
                 currentEresourceId = rowEresourceId;
                 currentVersionId = -1;
@@ -66,7 +66,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 }
                 String linkText = isFirstLink ? rowTitle : rs.getString("LINK_TEXT");
                 String additionalText = isFirstLink ? rs.getString("V_ADDITIONAL_TEXT") : rs.getString("L_ADDITIONAL_TEXT");
-                eresource.addLink(new Link(label, type, rs.getString("URL"), linkText, additionalText));
+                eresource.addLink(new Link(label, type, rs.getString("URL"), linkText, additionalText, rs.getString("PUBLISHER")));
                 currentLinkId = rowLinkId;
                 isFirstLink = false;
             }

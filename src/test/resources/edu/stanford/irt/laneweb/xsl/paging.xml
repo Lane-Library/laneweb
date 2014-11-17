@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>search results</title>
+   </head>
+   <body>
+      <div xmlns:fx="http://lane.stanford.edu/fx" class="resourceListPagination">
+         <div class="yui3-g">
+            <div class="yui3-u-5-12">
+               <span id="pageStart">1</span> to 100 of <a href="?source=&amp;q=&amp;page=all">135 results</a>
+               <span id="searchInfo"> <i class="fa fa-info-circle"/>
+               </span>
+               <span class="tooltips">
+                  <span id="searchInfoTooltip">Lane Search displays the top results from multiple sources then presents them in relevance rank order.</span>
+               </span>
+            </div>
+            <div class="yui3-u-1-3">
+               <a href="?source=&amp;q=&amp;page=all">See All </a>
+               <i class="fa fa-arrow-right"/>
+            </div>
+            <div class="yui3-u-1-4">
+               <div style="float:right">View by page 1 | <a href="?source=&amp;q=&amp;page=2">2</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <h3 class="eresources"> </h3>
+      <ul class="lwSearchResults"/>
+      <div xmlns:fx="http://lane.stanford.edu/fx" class="resourceListPagination">
+         <div class="yui3-g">
+            <div class="yui3-u-5-12">
+               <span id="pageStart">1</span> to 100 of <a href="?source=&amp;q=&amp;page=all">135 results</a>
+               <span id="searchInfo"> <i class="fa fa-info-circle"/>
+               </span>
+               <span class="tooltips">
+                  <span id="searchInfoTooltip">Lane Search displays the top results from multiple sources then presents them in relevance rank order.</span>
+               </span>
+            </div>
+            <div class="yui3-u-1-3">
+               <a href="?source=&amp;q=&amp;page=all">See All </a>
+               <i class="fa fa-arrow-right"/>
+            </div>
+            <div class="yui3-u-1-4">
+               <div style="float:right">View by page 1 | <a href="?source=&amp;q=&amp;page=2">2</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="search-content-counts"> </div>
+   </body>
+</html>

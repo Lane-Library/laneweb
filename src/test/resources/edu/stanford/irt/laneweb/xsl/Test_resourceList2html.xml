@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns="http://lane.stanford.edu/resources/1.0" size="2" start="0" length="2" page="0" pages="1">
+  <query>music</query>
+  <contentHitCounts>
+    <resource resourceId="pubmed" resourceHits="16847" resourceUrl="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music&amp;holding=f1000%2CF1000M&amp;otool=Stanford"/>
+    <resource resourceId="scopus" resourceHits="69876" resourceUrl="http://www.scopus.com/search/submit/quick.url?src=s&amp;origin=resultslist&amp;searchtext=music&amp;x=14&amp;y=11"/>
+    <resource resourceId="pubmed_systematicreviews" resourceHits="264" resourceUrl="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music+AND+systematic%5Bsb%5D+AND+%22humans%22%5Bmesh%5D&amp;holding=f1000%2CF1000M&amp;otool=Stanford"/>
+    <resource resourceId="pubmed_clinicaltrial" resourceHits="1256" resourceUrl="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music+AND+clinical+trial%5Bpt%5D&amp;holding=f1000%2CF1000M&amp;otool=Stanford"/>
+  </contentHitCounts>
+  <result score="75" type="searchContent">
+    <resourceId>pubmed</resourceId>
+    <resourceName>PubMed</resourceName>
+    <resourceUrl>http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music&amp;holding=f1000%2CF1000M&amp;otool=Stanford</resourceUrl>
+    <resourceHits>16847</resourceHits>
+    <id>pubmed_content_26</id>
+    <contentId>PMID:25195623</contentId>
+    <title><keyword>Music</keyword>al rhythm discrimination explains individual differences in grammar skills in children.</title>
+    <pub-author>Gordon RL, Shivers CM, Wieland EA, Kotz SA, Yoder PJ, Devin McAuley J.</pub-author>
+    <url>http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623</url>
+    <pub-text>Dev Sci. 2014 Sep 7</pub-text>
+    <description>description</description>
+  </result>
+  <result score="62" type="eresource">
+    <id>12370</id>
+    <recordId>301866</recordId>
+    <recordType>bib</recordType>
+    <title><keyword>Music</keyword> that works</title>
+    <description>Introduction : <keyword>music</keyword> that works /Roland Haas --Sonification : listen to brain activity /Gerald Baier, Thomas Hermann --Chronobiology, as a foundation for and an approach to a new understanding of the influence of <keyword>music</keyword> /Hans-Ullrich Balzer --<keyword>Music</keyword> as medicine : incorporating scalable <keyword>music</keyword>-based interventions into standard medical practice /Vera Brandes --A perspective on evidence-based practice /Cheryl Dileo, Joke Bradt --The audio-vocal system in song and speech development /Wilfried Gruhn --The significance of exposure to <keyword>music</keyword> for the formation and stabilisation of complex neuronal relationship matrices in the human brain : implications for the salutogenetic effects of intervention by means of <keyword>music</keyword> theory /Gerald Hüther --<keyword>Music</keyword> and the self /Petr Janata --Neural substrates of processing syntax and semantics in <keyword>music</keyword> /Stefan Koelsch --A city upon a hill : making scientific progress in brain-based <keyword>music</keyword> research in typical development, autism, and other disorders /Nicolas Lange, Janet E. Lainhart --The rhythm of the heart, the tempus of <keyword>music</keyword> : Mozart, Ligeti, and the rat /Björn Lemmer --<keyword>Music</keyword> and child neurology : a developmental perspective /Luisa Lopez --Prenatal "experience" and the phylogenesis and ontogenesis of <keyword>music</keyword> /Richard Parncutt --<keyword>Music</keyword> and the evolution of human brain function /Juan G. Roederer --Clinical applications of <keyword>music</keyword> therapy in neurologic rehabilitation /Concetta M. Tomaino --Human biochronology : on the source and functions of "<keyword>music</keyword>ality" /Colwyn Trevarthen --A study of synchronisation behaviour in a group of test persons during Basky and Dhikr exercises via psycho-physiological monitoring /Gerhard Tucek, Elisabeth Ferstl, Florentina Maria Fritz --Resonance and silence : the significance in medicine /Rolf Verres --Emotion modulation by means of <keyword>music</keyword> and coping behaviour /Richard von Georgi, Miriam Göbel, Stefan Gebhardt --Identifying the effectiveness of a <keyword>music</keyword>-based auditory stimulation method, on children with sensory integration and auditory processing concerns : a pilot study /John Esteves ... [et al.] --<keyword>Music</keyword> as a medicine : incorporating <keyword>music</keyword> into standard hospital care /Vera Brandes.</description>
+    <primaryType>primaryType</primaryType>
+    <link type="normal">
+      <label>Fulltext</label>
+      <link-text>Music that works</link-text>
+      <url>http://link.springer.com/978-3-211-75120-6</url>
+      <additional-text> 2009, Springer </additional-text>
+      <publisher>Springer</publisher>
+    </link>
+    <link type="impactFactor">
+      <label>Impact Factor</label>
+      <link-text>Impact Factor</link-text>
+      <url>http://impactfactor.org/</url>
+    </link>
+  </result>
+</resources>
