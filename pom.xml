@@ -366,6 +366,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.daisy.maven</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
@@ -379,6 +380,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
         </plugins>
         <pluginManagement>
             <plugins>
