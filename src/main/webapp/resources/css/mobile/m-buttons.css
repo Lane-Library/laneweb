@@ -1,11 +1,5 @@
 
 /* styles for css buttons */
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> branch 'master' of ssh://olgary@corn.stanford.edu/afs/ir/group/lane/git/laneweb.git
 .red-btn span,.gray-btn span
 	{
 	display: inline-block;
@@ -66,11 +60,6 @@
 		  startColorstr =   
 		   '#e82c2e', endColorstr =         '#820000' );
 }
-
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of ssh://olgary@corn.stanford.edu/afs/ir/group/lane/git/laneweb.git
 .gray-btn:hover,.red-btn:hover
 	{
 	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
@@ -78,13 +67,11 @@
 	box-shadow: 1px 1px 1px 1px #e8e8e8;
 }
 
-<<<<<<< HEAD
-
 .events.button {
 	color: white;
-=======
+}
 .btn-wide {
 	padding-left: 3em;
 	padding-right: 3em;
->>>>>>> branch 'master' of ssh://olgary@corn.stanford.edu/afs/ir/group/lane/git/laneweb.git
+
 }
