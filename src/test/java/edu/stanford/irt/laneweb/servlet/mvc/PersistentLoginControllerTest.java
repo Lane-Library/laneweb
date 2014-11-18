@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
+import edu.stanford.irt.laneweb.servlet.CookieName;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.user.LDAPData;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
@@ -78,7 +79,7 @@ public class PersistentLoginControllerTest {
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
         assertTrue(System.currentTimeMillis() + (3600 * 24 * 7 * 2 * 1000) - 100 < Long.valueOf(cookie2.getValue().getValue()));
-        assertEquals("lane-login-expiration-date", cookie2.getValue().getName());
+        assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);
     }
 
@@ -110,7 +111,7 @@ public class PersistentLoginControllerTest {
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
         assertTrue(System.currentTimeMillis() + (3600 * 24 * 7 * 2 * 1000) - 100 < Long.valueOf(cookie2.getValue().getValue()));
-        assertEquals("lane-login-expiration-date", cookie2.getValue().getName());
+        assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);
     }
 
@@ -161,7 +162,7 @@ public class PersistentLoginControllerTest {
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
         assertTrue(System.currentTimeMillis() + (3600 * 24 * 7 * 2 * 1000) - 100 < Long.valueOf(cookie2.getValue().getValue()));
-        assertEquals("lane-login-expiration-date", cookie2.getValue().getName());
+        assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);
     }
     

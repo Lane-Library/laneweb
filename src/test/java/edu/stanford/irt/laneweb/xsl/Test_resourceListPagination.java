@@ -16,8 +16,6 @@ import javax.xml.transform.stream.StreamSource;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 public class Test_resourceListPagination extends AbstractXSLTest {
 
     private Source source;

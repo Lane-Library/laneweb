@@ -23,6 +23,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.CookieName;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 import edu.stanford.irt.laneweb.user.User;
@@ -125,11 +126,11 @@ public class PersistentLoginController {
     }
 
     private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
-        Cookie cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, null);
+        Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        cookie = new Cookie(UserCookieCodec.LANE_COOKIE_NAME, null);
+        cookie = new Cookie(CookieName.USER.toString(), null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
@@ -146,13 +147,13 @@ public class PersistentLoginController {
         String userAgent = request.getHeader("User-Agent");
         if (null != userAgent && null != user) {
             PersistentLoginToken token = this.codec.createLoginToken(user, userAgent.hashCode());
-            Cookie cookie = new Cookie(UserCookieCodec.LANE_COOKIE_NAME, token.getEncryptedValue());
+            Cookie cookie = new Cookie(CookieName.USER.toString(), token.getEncryptedValue());
             cookie.setPath("/");
             cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
             response.addCookie(cookie);
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.SECOND, PERSISTENT_LOGIN_DURATION);
-            cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, String.valueOf(calendar.getTime().getTime()));
+            cookie = new Cookie(CookieName.EXPIRATION.toString(), String.valueOf(calendar.getTime().getTime()));
             cookie.setPath("/");
             cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
             response.addCookie(cookie);

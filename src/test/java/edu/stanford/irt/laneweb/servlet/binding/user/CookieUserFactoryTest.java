@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
+import edu.stanford.irt.laneweb.servlet.CookieName;
 import edu.stanford.irt.laneweb.user.User;
 
 public class CookieUserFactoryTest {
@@ -56,7 +57,7 @@ public class CookieUserFactoryTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
-        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
         expect(this.cookie.getValue()).andReturn("value");
         expect(this.codec.restoreLoginToken("value", "key")).andReturn(this.token);
         expect(this.token.isValidFor(gt(0L), eq("useragent".hashCode()))).andReturn(true);
@@ -71,7 +72,7 @@ public class CookieUserFactoryTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
-        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
         expect(this.cookie.getValue()).andReturn("value").times(2);
         LanewebException ex = new LanewebException("invalid encryptedValue");
         expect(this.codec.restoreLoginToken("value", "key")).andThrow(ex);
@@ -86,7 +87,7 @@ public class CookieUserFactoryTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
-        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
         expect(this.cookie.getValue()).andReturn("value");
         expect(this.codec.restoreLoginToken("value", "key")).andReturn(this.token);
         expect(this.token.isValidFor(gt(0L), eq("useragent".hashCode()))).andReturn(false);
