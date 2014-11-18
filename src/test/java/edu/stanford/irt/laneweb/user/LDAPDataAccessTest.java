@@ -43,6 +43,7 @@ public class LDAPDataAccessTest {
         this.ldapData = createMock(LDAPData.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetUserInfo() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
@@ -52,6 +53,7 @@ public class LDAPDataAccessTest {
         verify(this.subjectSource, this.ldapTemplate);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetUserInfoNull() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
@@ -61,6 +63,7 @@ public class LDAPDataAccessTest {
         verify(this.subjectSource, this.ldapTemplate);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetUserInfoEmpty() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
@@ -70,6 +73,7 @@ public class LDAPDataAccessTest {
         verify(this.subjectSource, this.ldapTemplate);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testThrowCommunicationException() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
@@ -81,6 +85,7 @@ public class LDAPDataAccessTest {
         verify(this.subjectSource, this.ldapTemplate);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testThrowCommunicationExceptionNounivid() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);

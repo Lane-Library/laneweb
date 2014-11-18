@@ -17,14 +17,14 @@ public class LDAPDataAccess {
 
     private static final class LDAPPrivilegedAction implements PrivilegedAction<LDAPData> {
 
-        private AttributesMapper attributesMapper;
+        private AttributesMapper<LDAPData> attributesMapper;
 
         private LdapTemplate ldapTemplate;
 
         private String lookupFilter;
 
         private LDAPPrivilegedAction(final LdapTemplate ldapTemplate, final String lookupFilter,
-                final AttributesMapper attributesMapper) {
+                final AttributesMapper<LDAPData> attributesMapper) {
             this.lookupFilter = lookupFilter;
             this.ldapTemplate = ldapTemplate;
             this.attributesMapper = attributesMapper;
@@ -41,7 +41,7 @@ public class LDAPDataAccess {
         }
     }
 
-    private AttributesMapper attributesMapper;
+    private AttributesMapper<LDAPData> attributesMapper;
 
     private final LdapTemplate ldapTemplate;
 
