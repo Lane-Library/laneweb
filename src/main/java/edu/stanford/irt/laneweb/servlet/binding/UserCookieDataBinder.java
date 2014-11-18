@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 
-import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.CookieName;
 
 public class UserCookieDataBinder implements DataBinder {
 
@@ -30,10 +30,10 @@ public class UserCookieDataBinder implements DataBinder {
             String name = null;
             for (int i = 0; userCookieCount < MAX_USER_COOKIES && i < cookies.length; i++) {
                 name = cookies[i].getName();
-                if (UserCookieCodec.LANE_COOKIE_NAME.equals(name)) {
+                if (CookieName.USER.toString().equals(name)) {
                     model.put(Model.USER_COOKIE, cookies[i].getValue());
                     userCookieCount++;
-                } else if (Model.PERSISTENT_LOGIN_EXPIRATION_DATE.equals(name)) {
+                } else if (CookieName.EXPIRATION.toString().equals(name)) {
                     String expiration = getExpirationValue(cookies[i].getValue());
                     if (expiration != null) {
                         model.put(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, expiration);

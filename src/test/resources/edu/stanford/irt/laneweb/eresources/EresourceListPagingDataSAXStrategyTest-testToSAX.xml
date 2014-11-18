@@ -13,19 +13,19 @@
                <ul class="pagingLabels">
                   <li>
                      <a href="?a=a&amp;page=1">
-                        <span>A.M.A. American journal of diseases of children</span> — <span>Advances in immunology</span> (260)</a>
+                        <span class="labelTitle">A.M.A. American journal of diseases of children</span> — <span class="labelTitle">Advances in immunology</span> (260)</a>
                   </li>
                   <li>
                      <a href="?a=a&amp;page=2">
-                        <span>Advances in insect physiology</span> — <span>American journal of tropical medicine</span> (260)</a>
+                        <span class="labelTitle">Advances in insect physiology</span> — <span class="labelTitle">American journal of tropical medicine</span> (260)</a>
                   </li>
                   <li>
                      <a href="?a=a&amp;page=3">
-                        <span>American journal of tropical medicine and hygiene</span> — <span>Applied optics</span> (260)</a>
+                        <span class="labelTitle">American journal of tropical medicine and hygiene</span> — <span class="labelTitle">Applied optics</span> (260)</a>
                   </li>
                   <li>
                      <a href="?a=a&amp;page=4">
-                        <span>Applied psychological measurement</span> — <span>Ayu</span> (259)</a>
+                        <span class="labelTitle">Applied psychological measurement</span> — <span class="labelTitle">Ayu</span> (259)</a>
                   </li>
                </ul>
             </div>

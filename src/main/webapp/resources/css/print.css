@@ -6,6 +6,7 @@
     border:none;
 }
 
+/* TODO: not sure what to do with these as the classes no longer exist
 .hvrTrig,.hoverTrigger {
     background-color: #F2F3ED;
     padding: 10px;
@@ -15,6 +16,7 @@
 .hvrTarg,.hvrTrig .hvrTarg,.hoverTrigger .hvrTarg {
     display: block
 }
+*/
 
 /* case 92684: hack for firefox printing bug */
 @-moz-document url-prefix() {

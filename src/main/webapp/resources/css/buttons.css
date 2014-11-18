@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 /*class button for mimicing SOM buttons.  See markup at:
+=======
+/*class button for mimicking SOM buttons.  See markup at:
+>>>>>>> branch 'master' of ssh://olgary@corn.stanford.edu/afs/ir/group/lane/git/laneweb.git
 http://lane.stanford.edu/samples/button-css.html
  */
+<<<<<<< HEAD
 .button {
 	font-size: 14px;
 	font-weight: 400;
@@ -14,6 +19,160 @@ http://lane.stanford.edu/samples/button-css.html
 
 .button:hover {
 	border-color: #ADADAD;
+=======
+.button{
+    font-size:14px;
+    font-weight:400;
+    padding:5.25px 10.5px;
+    border:1px #CCCCCC solid;
+    border-radius:3.5px;
+    cursor:pointer;
+    background-color:#F1F1F1;
+    display:inline-block;
+}
+.button:hover{
+    border-color:#ADADAD;
+}
+.button span{
+    background-color:#007C92;
+    color:#FFFFFF;
+    padding:7px 12px 7px 7px;
+    border-radius:4px;
+    margin-right:6px;
+    display:inline-block;
+}
+.button span .icon{
+    background-color:#FFFFFF;
+    border-radius:12px;
+    font-size:13px;
+    height:16px;
+    width:16px;
+    padding:4px;
+    margin-right:6px;
+    line-height:15px;
+}
+.button .icon{
+    color:#007C92;
+    text-align:center;
+}
+.button *{
+    vertical-align:middle;
+}
+.button.alt1 span{
+    background-color:#8C1515
+}
+.button.alt1 .icon{
+    color:#8C1515
+}
+
+/* styles for css buttons ----------------------------------------------------------------------- */
+.red-btn span,.gray-btn span,.mgray-btn
+{
+	display: inline-block;
+	padding: 7px 12px;
+	font-weight: bold;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.gray-btn,.red-btn,.mgray-btn
+{
+	display: inline-block;
+	margin: 5px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/*gray button -------------------------------------------------------------------------------- */
+.gray-btn
+{
+	color: #444444 !important;
+	background-color: #edede5;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafbf8),
+		to(#dadad4) );
+	background: -moz-linear-gradient(#fafbf8, #dadad4);
+	/*filter necessary to display gradient in IE*/
+	filter: progid :           DXImageTransform.Microsoft.gradient (     
+		   startColorstr =    
+		    '#fafbf8', endColorstr =         '#dadad4' );
+	border: 1px solid #dadad9;
+}
+
+.gray-btn:hover
+{
+	border: 1px solid #9e9d98;
+}
+
+/* red button ------------------------------------------------------------------------------- */
+.red-btn
+{
+	color: #ffffff !important;
+	background-color: #e82c2e;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e82c2e),
+		to(#940506) );
+	background: -moz-linear-gradient(#e82c2e, #940506);
+	/*filter necessary to display gradient in IE*/
+	filter: progid :           DXImageTransform.Microsoft.gradient (     
+		   startColorstr =    
+		    '#e82c2e', endColorstr =         '#940506' );
+	border: 1px solid #b51e1f;
+}
+
+.red-btn:hover
+{
+	border: 1px solid #660000;
+	background-color: #820000;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e82c2e),
+		to(#820000) );
+	background-image: -moz-linear-gradient(#e82c2e, #820000);
+	/*filter necessary to display gradient in IE*/
+	filter: progid :           DXImageTransform.Microsoft.gradient (     
+		   startColorstr =    
+		    '#e82c2e', endColorstr =           '#820000' );
+}
+
+/* medium gray button ----------------------------------------------------------------------- */
+.mgray-btn
+{
+	color: #444444 !important;
+	background-color: #dcdcdc;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dcdcdc),
+		to(#9d9fa2) );
+	background: -moz-linear-gradient(#dcdcdc, #9d9fa2);
+	filter: progid :           DXImageTransform.Microsoft.gradient (     
+		   startColorstr =    
+		    '#dcdcdc', endColorstr =         '#9d9fa2' );
+	border: 1px solid #9d9fa2;
+}
+
+.mgray-btn:hover
+{
+	border: 1px solid #414042;
+	background-color: #666666;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dcdcdc),
+		to(#666666) );
+	background-image: -moz-linear-gradient(#dcdcdc, #666666);
+	/*filter necessary to display gradient in IE*/
+	filter: progid :           DXImageTransform.Microsoft.gradient (     
+		   startColorstr =    
+		    '#dcdcdc', endColorstr =         '#666666' );
+}
+
+/* hover shadow for all buttons ----------------------------------------------------------------------- */
+.gray-btn:hover,.red-btn:hover,.mgray-btn:hover
+{
+	-moz-box-shadow: 1px 1px 1px 1px #e8e8e8;
+	-webkit-box-shadow: 1px 1px 1px 1px #e8e8e8;
+	box-shadow: 1px 1px 1px 1px #e8e8e8;
+}
+
+/* makes the button wider ----------------------------------------------------------------------- */
+.btn-wide {
+	padding-left: 3em;
+	padding-right: 3em;
+>>>>>>> branch 'master' of ssh://olgary@corn.stanford.edu/afs/ir/group/lane/git/laneweb.git
 }
 
 .button span {

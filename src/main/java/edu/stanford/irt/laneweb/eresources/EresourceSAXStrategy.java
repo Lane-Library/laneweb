@@ -27,6 +27,9 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_ID, Integer.toString(eresource.getRecordId()));
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_TYPE, eresource.getRecordType());
             XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, eresource.getTitle());
+            maybeCreateElement(xmlConsumer, "primaryType", eresource.getPrimaryType());
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, "total", Integer.toString(eresource.getTotal()));
+            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, "available", Integer.toString(eresource.getAvailable()));
             maybeCreateElement(xmlConsumer, DESCRIPTION, eresource.getDescription());
             for (Link link : eresource.getLinks()) {
                 handleLink(xmlConsumer, link);
@@ -45,6 +48,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
         maybeCreateElement(xmlConsumer, LINK_TEXT, link.getLinkText());
         maybeCreateElement(xmlConsumer, URL, link.getUrl());
         maybeCreateElement(xmlConsumer, ADDITIONAL_TEXT, link.getAdditionalText());
+        maybeCreateElement(xmlConsumer, "publisher", link.getPublisher());
         XMLUtils.endElement(xmlConsumer, NAMESPACE, LINK);
     }
 

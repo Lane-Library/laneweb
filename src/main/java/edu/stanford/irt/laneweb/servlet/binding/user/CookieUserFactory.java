@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
+import edu.stanford.irt.laneweb.servlet.CookieName;
 import edu.stanford.irt.laneweb.user.User;
 
 public class CookieUserFactory implements UserFactory {
@@ -38,7 +39,7 @@ public class CookieUserFactory implements UserFactory {
         Cookie userCookie = null;
         Cookie[] cookies = request.getCookies();
         for (int i = 0; cookies!= null && i <  cookies.length && userCookie == null; i++) {
-            if (UserCookieCodec.LANE_COOKIE_NAME.equals(cookies[i].getName())) {
+            if (CookieName.USER.toString().equals(cookies[i].getName())) {
                 userCookie = cookies[i];
             }
         }
