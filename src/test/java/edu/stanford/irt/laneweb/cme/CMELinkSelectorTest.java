@@ -88,7 +88,6 @@ public class CMELinkSelectorTest {
     public void testSelectOTHERNoEmrid() {
         this.model.put(Model.PROXY_LINKS, true);
         this.model.put(Model.IPGROUP, IPGroup.OTHER);
-        // FIXME: should fail case 100499 IPGroup.OTHER gets cme link without emrid
         assertTrue(this.selector.select(null, this.model, null));
     }
 }
