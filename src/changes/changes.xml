@@ -8,6 +8,12 @@
     </properties>
     <body>
         <release date="2014-11-24" version="2.3.5" description="2.3.5 bug fix release">
+            <action date="2014-11-19" dev="ceyates" issue="100573" type="update">
+                align Extend your Search drop down
+            </action>
+            <action date="2014-11-18" dev="olgary" issue="100572" type="update">
+                updated buttons.css, and m-buttons.css
+            </action>
             <action date="2014-11-18" dev="ceyates" issue="100559" type="fix">
                 clicking logout does not remove ezproxy cookie
             </action>
