@@ -8,69 +8,114 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import edu.stanford.irt.laneweb.eresources.Eresource.EresourceBuilder;
 
 public class EresourcesCollectionManager extends AbstractCollectionManager {
 
+    private static class ResultSetHandler {
+
+        boolean createGetPassword = false;
+
+        private int currentEresourceId = -1;
+
+        private int currentLinkId = -1;
+
+        private String currentTitle = null;
+
+        private int currentVersionId = -1;
+
+        private List<Eresource> eresources = new LinkedList<Eresource>();
+
+        private boolean isFirstLink = true;
+
+        private String query;
+
+        private ResultSet rs;
+
+        private ScoreStrategy scoreStrategy;
+        
+        private EresourceBuilder builder;
+
+        public ResultSetHandler(final ResultSet resultSet, final String query, final ScoreStrategy scoreStrategy) {
+            this.rs = resultSet;
+            this.query = query;
+            this.scoreStrategy = scoreStrategy;
+        }
+
+        public List<Eresource> parseResultSet() throws SQLException {
+            while (this.rs.next()) {
+                int rowEresourceId = this.rs.getInt("ERESOURCE_ID");
+                int recordId = this.rs.getInt("RECORD_ID");
+                String recordType = this.rs.getString("RECORD_TYPE");
+                String rowTitle = this.rs.getString("TITLE");
+                rowTitle = rowTitle == null ? "MISSING TITLE" : rowTitle;
+                int rowVersionId = this.rs.getInt("VERSION_ID");
+                int rowLinkId = this.rs.getInt("LINK_ID");
+                this.builder = Eresource.builder();
+                if ((rowEresourceId != this.currentEresourceId) || !rowTitle.equals(this.currentTitle)) {
+                    addEresource(rowTitle, rowEresourceId, recordId, recordType);
+                }
+                if (rowVersionId != this.currentVersionId) {
+                    this.createGetPassword = "T".equals(this.rs.getString("GETPASSWORD"));
+                    this.currentVersionId = rowVersionId;
+                    this.currentLinkId = -1;
+                }
+                if (rowLinkId != this.currentLinkId) {
+                    addLink(rowTitle, rowLinkId);
+                }
+            }
+            return this.eresources;
+        }
+
+        private void addEresource(final String title, final int resourceId, final int recordId, final String recordType)
+                throws SQLException {
+            this.currentTitle = title;
+            int score = this.query == null ? 0 : this.scoreStrategy
+                    .computeScore(this.query, this.currentTitle, this.rs);
+            this.builder.description(this.rs.getString("DESCRIPTION")).id(resourceId)
+                    .recordId(recordId).recordType(recordType).score(score).title(this.currentTitle)
+                    .primaryType(this.rs.getString("PRIMARY_TYPE")).total(this.rs.getInt("TOTAL"))
+                    .available(this.rs.getInt("AVAILABLE"));
+            this.eresources.add(this.builder.build());
+            this.builder = Eresource.builder();
+            this.currentEresourceId = resourceId;
+            this.currentVersionId = -1;
+            this.currentLinkId = -1;
+            this.isFirstLink = true;
+        }
+
+        private void addLink(final String title, final int linkId) throws SQLException {
+            // determine the link type from the label
+            String label = this.rs.getString("LABEL");
+            LinkType type = null;
+            if (this.createGetPassword) {
+                type = LinkType.GETPASSWORD;
+                this.createGetPassword = false;
+            } else if (label != null && "impact factor".equalsIgnoreCase(label)) {
+                type = LinkType.IMPACTFACTOR;
+            } else {
+                type = LinkType.NORMAL;
+            }
+            String linkText = this.isFirstLink ? title : this.rs.getString("LINK_TEXT");
+            String additionalText = this.isFirstLink ? this.rs.getString("V_ADDITIONAL_TEXT") : this.rs
+                    .getString("L_ADDITIONAL_TEXT");
+            this.builder.addLink(new Link(label, type, this.rs.getString("URL"), linkText, additionalText, this.rs
+                    .getString("PUBLISHER")));
+            this.currentLinkId = linkId;
+            this.isFirstLink = false;
+        }
+    }
+
     private ScoreStrategy scoreStrategy;
 
-    public EresourcesCollectionManager(final DataSource dataSource, final Properties sqlStatements, final ScoreStrategy strategy) {
+    public EresourcesCollectionManager(final DataSource dataSource, final Properties sqlStatements,
+            final ScoreStrategy strategy) {
         super(dataSource, sqlStatements);
         this.scoreStrategy = strategy;
     }
 
     @Override
-    // TODO: reduce the complexity of this method
     protected List<Eresource> parseResultSet(final ResultSet rs, final String query) throws SQLException {
-        List<Eresource> eresources = new LinkedList<Eresource>();
-        Eresource eresource = null;
-        int currentEresourceId = -1;
-        int currentVersionId = -1;
-        int currentLinkId = -1;
-        String currentTitle = null;
-        boolean createGetPassword = false;
-        boolean isFirstLink = true;
-        while (rs.next()) {
-            int rowEresourceId = rs.getInt("ERESOURCE_ID");
-            int recordId = rs.getInt("RECORD_ID");
-            String recordType = rs.getString("RECORD_TYPE");
-            String rowTitle = rs.getString("TITLE");
-            rowTitle = rowTitle == null ? "MISSING TITLE" : rowTitle;
-            if ((rowEresourceId != currentEresourceId) || !rowTitle.equals(currentTitle)) {
-                currentTitle = rowTitle;
-                int score = query == null ? 0 : this.scoreStrategy.computeScore(query, currentTitle, rs);
-                eresource = new Eresource(rs.getString("DESCRIPTION"), rowEresourceId, recordId, recordType, score, currentTitle, rs.getString("PRIMARY_TYPE"), rs.getInt("TOTAL"), rs.getInt("AVAILABLE"));
-                eresources.add(eresource);
-                currentEresourceId = rowEresourceId;
-                currentVersionId = -1;
-                currentLinkId = -1;
-                isFirstLink = true;
-            }
-            int rowVersionId = rs.getInt("VERSION_ID");
-            if (rowVersionId != currentVersionId) {
-                createGetPassword = "T".equals(rs.getString("GETPASSWORD"));
-                currentVersionId = rowVersionId;
-                currentLinkId = -1;
-            }
-            int rowLinkId = rs.getInt("LINK_ID");
-            if (rowLinkId != currentLinkId) {
-                // determine the link type from the label
-                String label = rs.getString("LABEL");
-                LinkType type = null;
-                if (createGetPassword) {
-                    type = LinkType.GETPASSWORD;
-                    createGetPassword = false;
-                } else if (label != null && "impact factor".equalsIgnoreCase(label)) {
-                    type = LinkType.IMPACTFACTOR;
-                } else {
-                    type = LinkType.NORMAL;
-                }
-                String linkText = isFirstLink ? rowTitle : rs.getString("LINK_TEXT");
-                String additionalText = isFirstLink ? rs.getString("V_ADDITIONAL_TEXT") : rs.getString("L_ADDITIONAL_TEXT");
-                eresource.addLink(new Link(label, type, rs.getString("URL"), linkText, additionalText, rs.getString("PUBLISHER")));
-                currentLinkId = rowLinkId;
-                isFirstLink = false;
-            }
-        }
-        return eresources;
+        return new ResultSetHandler(rs, query, this.scoreStrategy).parseResultSet();
     }
 }

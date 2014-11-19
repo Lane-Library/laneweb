@@ -56,23 +56,7 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
                 XMLUtils.data(xmlConsumer, query);
                 XMLUtils.endElement(xmlConsumer, NAMESPACE, QUERY);
             }
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
-            Set<Result> countedResources = new HashSet<Result>();
-            for (SearchResult resource : list) {
-                if (resource instanceof ContentResultSearchResult) {
-                    Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
-                    if (!countedResources.contains(resourceResult)) {
-                        countedResources.add(resourceResult);
-                        atts = new AttributesImpl();
-                        atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, CDATA, resourceResult.getId());
-                        atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, CDATA, resourceResult.getHits());
-                        atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, CDATA, resourceResult.getURL());
-                        XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCE, atts);
-                        XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCE);
-                    }
-                }
-            }
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
+            hitCountsToSAX(xmlConsumer, list);
             int i = 0;
             for (ListIterator<SearchResult> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 this.saxStrategy.toSAX(it.next(), xmlConsumer);
@@ -83,5 +67,25 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
+    }
+
+    private void hitCountsToSAX(final XMLConsumer xmlConsumer, final PagingSearchResultList list) throws SAXException {
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
+        Set<Result> countedResources = new HashSet<Result>();
+        for (SearchResult resource : list) {
+            if (resource instanceof ContentResultSearchResult) {
+                Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
+                if (!countedResources.contains(resourceResult)) {
+                    countedResources.add(resourceResult);
+                    AttributesImpl atts = new AttributesImpl();
+                    atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, CDATA, resourceResult.getId());
+                    atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, CDATA, resourceResult.getHits());
+                    atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, CDATA, resourceResult.getURL());
+                    XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCE, atts);
+                    XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCE);
+                }
+            }
+        }
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
     }
 }
