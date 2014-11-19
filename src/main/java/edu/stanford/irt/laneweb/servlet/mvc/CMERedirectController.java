@@ -30,13 +30,9 @@ public class CMERedirectController {
 
     private static final String UTD_CME_URL = "http://www.uptodate.com/contents/search?";
 
-    @Autowired
     private CompositeDataBinder dataBinder;
 
-    public CMERedirectController() {
-        // empty default constructor
-    }
-
+    @Autowired
     public CMERedirectController(final CompositeDataBinder dataBinder) {
         this.dataBinder = dataBinder;
     }
