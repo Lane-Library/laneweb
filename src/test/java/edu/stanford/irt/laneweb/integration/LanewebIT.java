@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.integration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +20,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.web.context.WebApplicationContext;
+
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.user.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -95,4 +99,23 @@ public class LanewebIT {
     public void testTextbookSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test")).andExpect(status().isOk());
     }
+    
+    @Test
+    public void testCMEController() throws Exception {
+        this.mockMvc.perform(get("/redirect/cme")).andExpect(status().isBadRequest());
+        this.mockMvc.perform(get("/redirect/cme?url=url")).andExpect(status().isMovedTemporarily()).andExpect(redirectedUrl("/secure/redirect/cme?url=url"));
+        this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com")).andExpect(status().isMovedTemporarily()).andExpect(redirectedUrl("http://laneproxy.stanford.edu/login?url=www.uptodate.com"));
+        Map<String, Object> attributes = new HashMap<String, Object>();
+        attributes.put(Model.USER, new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo"));
+        String url = "/redirect/cme?url=http://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
+        String redirect1 = "http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
+        this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isMovedTemporarily()).andExpect(redirectedUrl(redirect1));
+        attributes.put(Model.EMRID, "emrid");
+        String redirect2 = "http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=emrid&srcsys=epic90710&eiv=2.1.0";
+        this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isMovedTemporarily()).andExpect(redirectedUrl(redirect2));
+        this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes)).andExpect(status().isMovedTemporarily()).andExpect(redirectedUrl("http://laneproxy.stanford.edu/login?url=www.uptodate.com"));
+        String redirect3 = "http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0";
+        this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes).header("X-FORWARDED-FOR","171.65.1.202")).andExpect(status().isMovedTemporarily()).andExpect(redirectedUrl(redirect3));
+    }
+    
 }
