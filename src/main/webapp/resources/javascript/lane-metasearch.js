@@ -20,15 +20,15 @@
                     for (i = 0; i < uberEngines.length; i++) {
                         // don't add if:
                         // - engine is uber and uber already on url
-                        // - engine already on url
                         if (searchables[y].match(uberEngines[i]) && searchUrl.match(uberEngines[i])) {
-                            add = false;
-                        } else if (searchUrl.match("r=" + searchables[y] + "(&|$)")) {
                             add = false;
                         }
                     }
                     if (add) {
                         searchUrl += '&r=' + searchables[y];
+                    }
+                    if (searchUrl.match="r=" + searchables[y] + "(&|$)") {
+                        Y.log(searchUrl + "\n" + searchables[y]);
                     }
                 }
                 searchUrl += '&rd=' + Math.random();
