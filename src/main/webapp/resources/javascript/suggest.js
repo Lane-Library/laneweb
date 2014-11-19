@@ -120,3 +120,16 @@
     //make the Suggest constructor globally accessible
     Lane.Suggest = Suggest;
 })();
+
+(function() {
+
+    // hybrid search page inputs
+    var laneSuggest, hybridInput = Y.one('.laneSuggest');
+    if (hybridInput) {
+        laneSuggest = new Y.lane.Suggest(hybridInput);
+        laneSuggest.on("select",function(){
+            searchIndicator.show();
+            hybridInput.ancestor("form").submit();
+        });
+    }
+})();
