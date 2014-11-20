@@ -49,25 +49,23 @@ $.LANE.createAutocompleteObject = function(input) {
  * @returns {String}
  */
 $.LANE.getACLimit = function(input){
-    var id = input.attr('id').toLowerCase();
-    if(id.match(/condition/)){
-        return "mesh-d";
+    var i, limit,
+        id = input.attr('id').toLowerCase(),
+        limits = [
+               {regex : /condition/, limit : "mesh-d"},
+               {regex : /intervention/, limit : "mesh-i"},
+               {regex : /comparison/, limit : "mesh-di"},
+               {regex : /(clinical|ped)/, limit : "mesh-di"},
+               {regex : /book/, limit : "book"},
+               {regex : /journal/, limit : "ej"}
+               ];
+    for (i = 0; i < limits.length; i++) {
+        if (id.match(limits[i].regex)) {
+            limit = limits[i].limit;
+            break;
+        }
     }
-    else if(id.match(/intervention/)){
-        return "mesh-i";
-    }
-    else if(id.match(/comparison/)||id.match(/(clinical|ped)/)){
-        return "mesh-di";
-    }
-    else if(id.match(/book/)){
-        return "book";
-    }
-    else if(id.match(/journal/)){
-        return "ej";
-    }
-    else{
-        return "er-mesh";
-    }
+    return limit || "er-mesh";
 };
 
 // Activate autocomplete on every input
