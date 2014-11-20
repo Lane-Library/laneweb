@@ -74,7 +74,8 @@ $.LANE.getACLimit = function(input){
 $(this).bind("pageinit", function() {
     $(":input[data-type=search]").each(function(){
         if(!$(this).hasClass('ui-autocomplete-input')){
-            $(this).attr('autocorrect','off'); // TODO: shouldn't be necessary?
+            // setting autocorrect off shouldn't be necessary?
+            $(this).attr('autocorrect','off');
             $(this).autocomplete($.LANE.createAutocompleteObject($(this)));
         }
         $(this).bind("focus", function() {
@@ -90,7 +91,6 @@ $("form").on("autocompleteselect", function(e, ui) {
     if(ui.item && $(e.target).attr('name') === 'qSearch'){
         $(e.target).val(ui.item.value);
         $.mobile.loading('show');
-        //$(this)[0].submit();
         $(this).trigger('submit');
     }
 });
