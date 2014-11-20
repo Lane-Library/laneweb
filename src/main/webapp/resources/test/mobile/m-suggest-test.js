@@ -39,6 +39,18 @@ YUI().use('console','test',"dump", function(Y) {
 //          window.history.relaceState = function(){}
 //          $("input[name='qSearch']").trigger("autocompleteselect", {item:{label:"label",value:"value"}});
 //          window.history.relaceState = history;
+        },
+        
+        "test AC limit" : function() {
+            var acLimit = $.LANE.getACLimit;
+            Y.Assert.areSame("mesh-d", acLimit($("<input id='condition'/>")));
+            Y.Assert.areSame("mesh-i", acLimit($("<input id='intervention'/>")));
+            Y.Assert.areSame("mesh-di", acLimit($("<input id='comparison'/>")));
+            Y.Assert.areSame("mesh-di", acLimit($("<input id='clinical'/>")));
+            Y.Assert.areSame("mesh-di", acLimit($("<input id='ped'/>")));
+            Y.Assert.areSame("book", acLimit($("<input id='book'/>")));
+            Y.Assert.areSame("ej", acLimit($("<input id='journal'/>")));
+            Y.Assert.areSame("er-mesh", acLimit($("<input id='foo'/>")));
         }
     });
 
