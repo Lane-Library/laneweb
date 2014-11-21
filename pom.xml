@@ -307,13 +307,6 @@
                             <goal>grover</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>coverage</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>coverage</goal>
-                        </goals>
-                    </execution>
                 </executions>
             </plugin>
             <plugin>
