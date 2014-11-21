@@ -232,6 +232,13 @@ Y.use("*",  function(){
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
             Y.Assert.isNull(this.event);
+        },
+        
+        testClickEndsWithHtml: function() {
+            var link = Y.one("#endswithhtml");
+            link.simulate("click");
+            Y.Assert.isNull(this.pageView);
+            Y.Assert.isNull(this.event);
         }
     });
 

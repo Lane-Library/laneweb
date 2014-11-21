@@ -61,28 +61,27 @@
                     resultSpan.setContent('&#160;? ');
                     node.removeClass('metasearch');
                 }
-            }
-            successful = function(id, o) {
-                var response = Y.JSON.parse(o.responseText),
-                    results = response.resources,
-                    needMore = false, i, y, result, updatableNodes,
-                    sleepingTime, remainingTime;
-
+            },
+            updateNodes = function(results) {
+                var i, j, updateableNodes, result, needMore = false;
                 for (i = 0; i < resourceIds.length; i++) {
                     // search content may have more than one element with same ID
-                    updatableNodes = Y.all('#' + resourceIds[i]);
+                    updateableNodes = Y.all('#' + resourceIds[i]);
                     result = results[resourceIds[i]];
                     if (result === undefined || !result.status) {
                         needMore = true;
-                    } else if (updatableNodes.size() > 0) {
-                        for (y = 0; y < updatableNodes.size(); y++) {
-                            updateNode(result, updatableNodes.item(y));
+                    } else if (updateableNodes.size() > 0) {
+                        for (j = 0; j < updateableNodes.size(); j++) {
+                            updateNode(result, updateableNodes.item(j));
                         }
                         resourceIds.splice(i--, 1);
                     }
                 }
-                sleepingTime = 2000;
-                remainingTime = (new Date().getTime()) - startTime;
+                return needMore;
+            },
+            maybeGetMore = function(response, needMore) {
+                var sleepingTime = 2000,
+                    remainingTime = (new Date().getTime()) - startTime;
                 if (response.status !== 'successful' && needMore && resourceIds.length > 0 && (remainingTime <= 60 * 1000)) {
                     // at more than 20 seconds the sleeping time becomes 10 seconds
                     if (remainingTime > 20 * 1000) {
@@ -92,6 +91,14 @@
                 } else {
                     searchIndicator.hide();
                 }
+            },
+            successful = function(id, o) {
+                var response = Y.JSON.parse(o.responseText),
+                    results = response.resources,
+                    needMore;
+
+                needMore = updateNodes(results);
+                maybeGetMore(response);
             };
         return {
             initialize: function() {

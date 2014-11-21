@@ -270,8 +270,15 @@
                             }
                             if (linkHost === documentHost) {
                                 //track proxy logins
-                                if (((/secure\/apps\/proxy\/credential\?/).test(link.get('pathname')) || (/redirect\/cme\?/).test(link.get('pathname'))) && link.get('search') && link.get('search').indexOf('url=') > -1) {
-                                    return true;
+                                if (link.get("search")) {
+                                    if (link.get("search").indexOf("url=") > -1) {
+                                        if (/secure\/apps\/proxy\/credential/.test(link.get("pathname"))) {
+                                            return true;
+                                        } else if (/redirect\/cme/.test(link.get("pathname"))) {
+                                            return true;
+                                            
+                                        }
+                                    }
                                 }
                                 //track cookieFetch.html
                                 if ((/cookiesFetch/).test(link.get('pathname'))) {
