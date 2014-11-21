@@ -62,6 +62,6 @@ YUI().use('console','test',"dump", function(Y) {
 
 
     Y.Test.Runner.add(laneMobileTestCase);
-    Y.Test.Runner.masterSuite.name = "m-lane-test.js";
+    Y.Test.Runner.masterSuite.name = "m-suggest-test.js";
     Y.Test.Runner.run();
 });
