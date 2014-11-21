@@ -7,30 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2014-11-24" version="2.3.5" description="2.3.5 bug fix release">
+        <release date="2014-12-0?" version="2.3.6" description="2.3.6 bug fix release">
             <action date="2014-11-19" dev="ceyates" issue="100573" type="update">
                 align Extend your Search drop down
             </action>
-            <action date="2014-11-18" dev="olgary" issue="100572" type="update">
-                updated buttons.css, and m-buttons.css
-            </action>
-            <action date="2014-11-18" dev="ceyates" issue="100559" type="fix">
-                clicking logout does not remove ezproxy cookie
-            </action>
-            <action date="2014-11-06" dev="ceyates" issue="100345" type="fix">
-                tooltips don't work with dynamically loaded content
-            </action>
             <action date="2014-11-06" dev="ceyates" issue="100344" type="update">
                 dynamically change descriptionTrigger markup
-            </action>
-            <action date="2014-11-03" dev="ceyates" issue="100162" type="update">
-                change rightSearchTips to a drop down
-            </action>
-            <action date="2014-11-18" dev="ceyates" issue="99978" type="update">
-                update to spring-ldap-core-2.0.2
-            </action>
-            <action date="2014-11-18" dev="ceyates" issue="99975" type="update">
-                refactor cookies by using an enum of cookie names
             </action>
             <action date="2014-10-16" dev="ceyates" issue="99361" type="update">
                 add Lane Catalog Record link for catalog items
@@ -64,6 +46,26 @@
             </action>
             <action date="2014-10-06" dev="ceyates" issue="99349" type="update">
                 add result count to top of search and reformat start of search results
+            </action>
+        </release>
+        <release date="2014-11-24" version="2.3.5" description="2.3.5 bug fix release">
+            <action date="2014-11-18" dev="ryanmax" issue="100633" type="fix">
+                proxy-links can be set to false even when a user is authenticated
+            </action>
+            <action date="2014-11-18" dev="olgary" issue="100572" type="update">
+                updated buttons.css, and m-buttons.css
+            </action>
+            <action date="2014-11-18" dev="ceyates" issue="100559" type="fix">
+                clicking logout does not remove ezproxy cookie
+            </action>
+            <action date="2014-11-06" dev="ceyates" issue="100345" type="fix">
+                tooltips don't work with dynamically loaded content
+            </action>
+            <action date="2014-11-18" dev="ceyates" issue="99978" type="update">
+                update to spring-ldap-core-2.0.2
+            </action>
+            <action date="2014-11-18" dev="ceyates" issue="99975" type="update">
+                refactor cookies by using an enum of cookie names
             </action>
         </release>
         <release date="2014-11-17" version="2.3.4" description="2.3.4 bug fix release">
