@@ -109,16 +109,6 @@ Y.use("*",  function(){
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
 
-        testTopResourcesClick: function() {
-            var link = Y.one("#topResources a");
-            link.simulate("click");
-            Y.Assert.areEqual(link.get("text"), this.event.label);
-            Y.Assert.areEqual("lane:topResources", this.event.category);
-            Y.Assert.areEqual(link.get("href"), this.event.action);
-            Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
-            Y.Assert.areEqual(link.get("text"), this.pageView.title);
-        },
-
         testBannerContentClick: function() {
             var link = Y.one(".banner-content a");
             link.simulate("click");
