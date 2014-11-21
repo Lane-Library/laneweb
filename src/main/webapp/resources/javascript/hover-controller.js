@@ -3,10 +3,10 @@
     /**
      * A class that handles mouseover and mouseleave events on search and browse
      * resources that have abstracts or descriptions.
-     * @class ResultDescriptionController
+     * @class HoverController
      * @constructor
      */
-    var ResultDescriptionController = function() {
+    var HoverController = function() {
 
         //timer for activating hover state
         var timer = null,
@@ -72,45 +72,14 @@
         };
     },
 
-    //create a ResultDescriptionController
-    rdc = new ResultDescriptionController(),
-    
-    initializeDescriptionToggles = function() {
-        var triggers = Y.all(".descriptionTrigger");
-        triggers.each(function(node) {
-            if (node.hasClass("eresource")) {
-                node.set("innerHTML", "<a>View Description <i class=\"fa fa-angle-double-down\"></i></a>");
-            } else if (node.hasClass("searchContent")) {
-                node.set("innerHTML", "<a>Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>");
-            }
-        });
+    //create a HoverController
+    hc = new HoverController();
 
-        Y.delegate("click", function(event) {
-            var node = event.currentTarget,
-            ancestor = node.ancestor("li"),
-            active = ancestor.hasClass("active"),
-            eresource = node.hasClass("eresource"),
-            searchContent = node.hasClass("searchContent");
-
-            ancestor.toggleClass("active");
-            if (active && eresource) {
-                node.set("innerHTML", "<a>View Description <i class=\"fa fa-angle-double-down\"></i></a>");
-            } else if (active && searchContent) {
-                node.set("innerHTML", "<a>Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>");
-            } else if (!active) {
-                node.set("innerHTML", "<a>close... <i class=\"fa fa-angle-double-up\"></i></a>");
-            }
-        }, "#searchResults", ".descriptionTrigger");
-    };
-
-    //add trigger markup and delegate click events on class "descriptionTrigger"
+    //delegate mouseenter events on class "hvrTrig" and "hoverTrigger"
     if (Y.one("#searchResults")) {
-        initializeDescriptionToggles();
+        Y.delegate("mouseenter", function(event) {
+            hc.setTarget(event.currentTarget);
+        }, "#searchResults", ".hvrTrig, .hoverTrigger");
     }
-    
-    //reinitialize when content has changed
-    Y.lane.on("lane:new-content", function() {
-        initializeDescriptionToggles();
-    });
 
 })();
