@@ -35,20 +35,6 @@ $.ajax({
         $.LANE.tracking = {};
     }
 
-    $.LANE.tracking.decode = function(value) {
-        if (decodeURIComponent) {
-            return decodeURIComponent(value);
-        }
-        return unescape(value);
-    };
-
-    $.LANE.tracking.encode = function(value) {
-        if (encodeURIComponent) {
-            return encodeURIComponent(value);
-        }
-        return escape(value);
-    };
-
     $.LANE.tracking.track = function(e) {
         var node = e.srcElement || e.target, basePath, label;
         // find parent A for IMG and STRONG nodes if possible
@@ -74,7 +60,7 @@ $.ajax({
             if(node.nodeName === 'A' && $(node).parent().attr('rank')){
                 _gaq.push(['_trackEvent', "searchResultClick", $("input[name=qSearch]").val(), node.textContent, parseInt($(node).parent().attr('rank'),10)]);
             }
-            _gaq.push(['_trackPageview', basePath + $.LANE.tracking.encode($.LANE.tracking.getTrackingTitle(node))]);
+            _gaq.push(['_trackPageview', basePath + encodeURIComponent($.LANE.tracking.getTrackingTitle(node))]);
         }
         else if (e.type === 'vclick' && node.parentNode && node.parentNode.id === 'searchTabs' && node.nodeName === 'LI') {
             _gaq.push(['_trackEvent', "searchTabClick", e.target.textContent]);
@@ -84,7 +70,7 @@ $.ajax({
         }
         // track suggestSelect
         else if (e.type === 'autocompleteselect') {
-            _gaq.push(['_trackEvent', "suggestSelect", e.target.id, $.LANE.tracking.decode(node.textContent)]);
+            _gaq.push(['_trackEvent', "suggestSelect", e.target.id, decodeURIComponent(node.textContent)]);
         }
     };
 
