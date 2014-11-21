@@ -53,6 +53,7 @@ public class UserDataBinderTest {
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.userFactory.createUser(this.request)).andReturn(this.user);
         this.session.setAttribute(Model.USER, this.user);
+        this.session.removeAttribute(Model.PROXY_LINKS);
         expect(this.user.getId()).andReturn("id@stanford.edu");
         expect(this.user.getHashedId()).andReturn("911531548a5ea68cf13f5e0506367956@stanford.edu");
         expect(this.user.getEmail()).andReturn("mail");
@@ -76,6 +77,7 @@ public class UserDataBinderTest {
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.userFactory.createUser(this.request)).andReturn(this.user);
         this.session.setAttribute(Model.USER, this.user);
+        this.session.removeAttribute(Model.PROXY_LINKS);
         expect(this.user.getId()).andReturn("id@domain");
         expect(this.user.getHashedId()).andReturn("911531548a5ea68cf13f5e0506367956@domain");
         expect(this.user.getEmail()).andReturn("mail");
@@ -104,6 +106,7 @@ public class UserDataBinderTest {
         expect(this.user.getName()).andReturn(null);
         expect(this.user.isStanfordUser()).andReturn(false);
         this.session.setAttribute(eq(Model.USER), isA(User.class));
+        this.session.removeAttribute(Model.PROXY_LINKS);
         replay(this.request, this.session, this.user, this.userFactory);
         this.binder.bind(model, this.request);
         assertNotNull(model.get(Model.USER));

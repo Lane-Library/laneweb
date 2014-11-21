@@ -31,6 +31,8 @@ public class UserDataBinder implements DataBinder {
                 }
                 if (user != null) {
                     session.setAttribute(Model.USER, user);
+                    // case 100633: clear Model.PROXY_LINKS if user is logged in
+                    session.removeAttribute(Model.PROXY_LINKS);
                 }
             }
         }

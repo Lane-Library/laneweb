@@ -27,10 +27,6 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         String requestParameter = request.getParameter(Model.PROXY_LINKS);
         HttpSession session = request.getSession();
         synchronized (session) {
-            // case 100633: clear Model.PROXY_LINKS if user is logged in
-            if (null != model.get(Model.USER)) {
-                session.removeAttribute(Model.PROXY_LINKS);
-            }
             boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
             if (!isSameIP) {
                 session.setAttribute(Model.REMOTE_ADDR, currentIP);
