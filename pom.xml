@@ -62,9 +62,9 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.exclusions>**/yui*,**/jquery*,**/swfobject.js,**/*-test.js</sonar.exclusions>
-        <sonar.javascript.lcov.reportPath>target/grover/lcov/lcov.info</sonar.javascript.lcov.reportPath>
-        <sonar.jacoco.reportPath>target/jacoco-ut.exec</sonar.jacoco.reportPath>
-        <sonar.jacoco.itReportPath>target/jacoco-it.exec</sonar.jacoco.itReportPath>
+        <sonar.javascript.lcov.reportPath>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPath>
+        <sonar.jacoco.reportPath>${project.build.directory}/jacoco-ut.exec</sonar.jacoco.reportPath>
+        <sonar.jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.itReportPath>
     </properties>
     <build>
         <defaultGoal>package</defaultGoal>
@@ -110,7 +110,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <webappDirectory>target/laneweb</webappDirectory>
+                    <webappDirectory>${project.build.directory}/laneweb</webappDirectory>
                     <nonFilteredFileExtensions>
                         <nonFilteredFileExtension>ico</nonFilteredFileExtension>
                         <nonFilteredFileExtension>xmap</nonFilteredFileExtension>
@@ -136,7 +136,7 @@
                 </executions>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <webappDirectory>target/laneweb</webappDirectory>
+                    <webappDirectory>${project.build.directory}/laneweb</webappDirectory>
                     <excludes>
                         <exclude>**/swfobject.js</exclude>
                         <exclude>**/lane-all.css</exclude>
@@ -149,9 +149,9 @@
                     <aggregations>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>target/laneweb/resources/css/lane-all.css</output>
+                            <output>${project.build.directory}/laneweb/resources/css/lane-all.css</output>
                             <includes>
-                                <include>../../../../src/main/webapp/resources/css/yui.css</include>
+                                <include>${basedir}/src/main/webapp/resources/css/yui.css</include>
                                 <include>main-body-min.css</include>
                                 <include>bassett-min.css</include>
                                 <include>font-awesome-min.css</include>
@@ -190,9 +190,9 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>target/laneweb/resources/javascript/lane-all.js</output>
+                            <output>${project.build.directory}/laneweb/resources/javascript/lane-all.js</output>
                             <includes>
-                                <include>../../../../src/main/webapp/resources/javascript/yui-3.13.0.js</include>
+                                <include>${basedir}/src/main/webapp/resources/javascript/yui-3.13.0.js</include>
                                 <include>lane-min.js</include>
                                 <include>location-min.js</include>
                                 <include>golfclub-headings-min.js</include>
@@ -244,7 +244,7 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>target/laneweb/resources/css/mobile/lane-mobile.css</output>
+                            <output>${project.build.directory}/laneweb/resources/css/mobile/lane-mobile.css</output>
                             <includes>
                                 <include>jquery.mobile.structure-1.4.0-min.css</include>
                                 <include>jquery-ui-1.10.4.custom-min.css</include>
@@ -254,7 +254,7 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>target/laneweb/resources/javascript/mobile/lane-mobile.js</output>
+                            <output>${project.build.directory}/laneweb/resources/javascript/mobile/lane-mobile.js</output>
                             <includes>
                                 <include>jquery-1.9.1-min.js</include>
                                 <include>jquery.mobile-1.4.0.custom-min.js</include>
@@ -271,9 +271,9 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>target/laneweb/resources/css/history/lane-history.css</output>
+                            <output>${project.build.directory}/laneweb/resources/css/history/lane-history.css</output>
                             <includes>
-                                <include>../../../../../src/main/webapp/resources/css/history/yui.css</include>
+                                <include>${basedir}/src/main/webapp/resources/css/history/yui.css</include>
                                 <include>history-min.css</include>
                             </includes>
                         </aggregation>
@@ -344,7 +344,7 @@
                             <goal>prepare-agent</goal>
                         </goals>
                         <configuration>
-                            <destFile>target/jacoco-ut.exec</destFile>
+                            <destFile>${project.build.directory}/jacoco-ut.exec</destFile>
                         </configuration>
                     </execution>
                     <execution>
@@ -354,7 +354,7 @@
                             <goal>prepare-agent-integration</goal>
                         </goals>
                         <configuration>
-                            <destFile>target/jacoco-it.exec</destFile>
+                            <destFile>${project.build.directory}/jacoco-it.exec</destFile>
                         </configuration>
                     </execution>
                 </executions>
