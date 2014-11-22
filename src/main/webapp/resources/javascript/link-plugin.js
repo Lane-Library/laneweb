@@ -27,6 +27,26 @@
         loginPath = basePath + "/secure/apps/proxy/credential",
 
     LinkPlugin = function(config) {
+        this._isLocalPopup = function(node) {
+            var rel = node.getAttribute("rel");
+            return rel && rel.indexOf("popup local") === 0;
+        };
+        this._getTitleFromImg = function(node) {
+            var i, title, img = node.all('img');
+            if (img) {
+                for (i = 0; i < img.size(); i++) {
+                    if (img.item(i).get(ALT)) {
+                        title = img.item(i).get(ALT);
+                    } else if (img.item(i).get(SRC)) {
+                        title = img.item(i).get(SRC);
+                    }
+                    if (title) {
+                        break;
+                    }
+                }
+            }
+            return title;
+        };
         LinkPlugin.superclass.constructor.apply(this, arguments);
     };
 
@@ -99,37 +119,21 @@
                 readOnly : true,
                 valueFn : function() {
                     //if there is a title attribute, use that.
-                    var node = this.get(HOST_NODE), title = node.get(TITLE), img, i, rel, relTokens;
+                    var node = this.get(HOST_NODE), title = node.get(TITLE);
                     //next try alt attribute.
                     if (!title) {
                         title = node.get(ALT);
                     }
-                    //next look for alt attributes in any child img.
+                    //next look for alt or src attributes in any child img.
                     if (!title) {
-                        img = node.all('img');
-                        if (img) {
-                            for (i = 0; i < img.size(); i++) {
-                                if (img.item(i).get(ALT)) {
-                                    title = img.item(i).get(ALT);
-                                    break;
-                                }
-                                else if (img.item(i).get(SRC)) {
-                                    title = img.item(i).get(SRC);
-                                    break;
-                                }
-                            }
-                        }
+                        title = this._getTitleFromImg(node);
                     }
                     //next get the text content before any nested markup
                     if (!title) {
-                        title = node.get('textContent');
+                        title = node.get('text');
                     }
                     if (!title) {
                         title = node.get('innerText');
-                    }
-                    if (title) {
-                        //trim and normalize:
-                        title = title.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
                     }
                     //finally:
                     if (!title) {
@@ -140,14 +144,11 @@
                     } else if (node.ancestor("#laneNav")) {
                         title = "laneNav: " + title;
                     }
-                    //if there is rel="popup .." then create a title from it.
-                    rel = node.get('rel');
-                    if (rel && rel.indexOf('popup') === 0) {
-                        relTokens = rel.split(' ');
-                        if (relTokens[1] === LOCAL) {
-                            title = 'YUI Pop-up [local]: ' + title;
-                        }
+                    //if there is rel="popup local" then add "pop-up" to the title
+                    if (this._isLocalPopup(node)) {
+                        title = 'YUI Pop-up [local]: ' + title;
                     }
+                    title = title.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
                     return title;
 
                 }
