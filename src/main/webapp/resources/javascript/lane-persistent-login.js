@@ -12,7 +12,7 @@
 	ipgroup = model.get(model.IPGROUP),
     fromHospital = "SHC" === ipgroup || "LPCH" === ipgroup,
     popupShibbolethWindowNotHospital,
-    popupShibboltehWindow,
+    popupShibbolethWindow,
 	
 	
 	getPopup = function(urlPage) {
