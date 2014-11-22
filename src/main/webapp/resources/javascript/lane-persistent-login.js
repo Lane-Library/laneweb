@@ -11,6 +11,8 @@
 	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
 	ipgroup = model.get(model.IPGROUP),
     fromHospital = "SHC" === ipgroup || "LPCH" === ipgroup,
+    popupShibbolethWindowNotHospital,
+    popupShibboltehWindow,
 	
 	
 	getPopup = function(urlPage) {
@@ -21,17 +23,17 @@
 		});
 	};
 
-	Y.on("click", function(event) {popupShibboltehWindow(event);}, 'a[href=' + basePath + '/secure/login.html]');
+	Y.on("click", function(event) {popupShibbolethWindow(event);}, 'a[href=' + basePath + '/secure/login.html]');
 	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, "a[href*=/secure/apps/proxy/credential]");
 	Y.on("click", function(event) {popupShibbolethWindowNotHospital(event);}, "a[href*=/redirect/cme]");
 
 	popupShibbolethWindowNotHospital = function(event){
 		if(!fromHospital){
-			popupShibboltehWindow(event);
+			popupShibbolethWindow(event);
 		}
 	};
 	
-	popupShibboltehWindow = function(event) {
+	popupShibbolethWindow = function(event) {
 		var link = event.currentTarget,
 		href = link.get('href');
 		if (!drMode && !persistentStatusCookie && ( !href ||  href.indexOf("javascript") !== 0)){

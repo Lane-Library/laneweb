@@ -1,7 +1,7 @@
 (function() {
 	var Model = Y.lane.Model,
 	    encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
-	    basePath = Model.get(Model.BASE_PATH) || "";
+	    basePath = Model.get(Model.BASE_PATH) || "",
 
 	makeRequest = function() {
 		Y.io(basePath + '/facet/images/copyright?query=' + encodedQuery+ '&rd=' + Math.random(), {
