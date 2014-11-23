@@ -11,7 +11,7 @@ Y.use('node-event-simulate','console','test', function(T) {
         search: Y.lane.Search,
 
         searchTermsInput: T.one('#searchTerms'),
-        searchIndicator: T.one('#searchIndicator'),
+        searchIndicator: T.one('.searchIndicator'),
         searchSource: T.one('#searchSource'),
         handle : null,
 
@@ -93,7 +93,7 @@ Y.use('node-event-simulate','console','test', function(T) {
         },
         testResetClickClearsInput : function() {
             T.one("#searchTerms").set("value","foo");
-            T.one("#searchReset").simulate("click");
+            T.one(".searchReset").simulate("click");
             this.wait(function() {
                 T.Assert.areEqual("", T.one("#searchTerms").get("value"));
             },1000);
@@ -101,14 +101,14 @@ Y.use('node-event-simulate','console','test', function(T) {
         testResetVisbleOnInputText : function() {
             Y.one("#searchTerms").set("value","foo");
             //TODO: fix this, the valueChange event doesn't happen before checking the changed style
-//            T.Assert.areEqual("block", Y.one("#searchReset").getStyle("display"));
+//            T.Assert.areEqual("block", Y.one(".searchReset").getStyle("display"));
         },
         testReset : function() {
             var reset = false;
             this.handle = this.search.on("reset", function(event) {
                 reset = true;
             });
-            T.one("#searchReset").simulate("click");
+            T.one(".searchReset").simulate("click");
             T.Assert.isTrue(reset);
         },
         testBubbleReset : function() {
@@ -116,7 +116,7 @@ Y.use('node-event-simulate','console','test', function(T) {
             this.handle = Y.lane.on("search:reset", function(event) {
                 reset = true;
             });
-            T.one("#searchReset").simulate("click");
+            T.one(".searchReset").simulate("click");
             T.Assert.isTrue(reset);
         }
     });

@@ -10,7 +10,7 @@ Y.use("node-event-simulate", "console", "test", function(Y){
         indicator : Y.lane.SearchIndicator,
 
         testShowAndHide: function() {
-            var node = Y.one("#searchIndicator");
+            var node = Y.one(".searchIndicator");
             this.indicator.show();
             Y.Assert.isTrue(node.hasClass("show"));
             this.indicator.hide();

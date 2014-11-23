@@ -30,7 +30,7 @@
             }
 
         },
-        PICO = '<fieldset id="picoFields">' +
+        PICO = '<fieldset class="picoFields">' +
                '<input name="p" id="clinicalP" type="text" title="patient condition"/>' +
                '<input name="i" id="clinicalI" type="text" title="intervention"/>' +
                '<input name="c" id="clinicalC" type="text" title="comparison"/>' +

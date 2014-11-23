@@ -54,7 +54,7 @@
             this._suggest.on("select", this.submitSearch, this);
 
             //set up search reset
-            this._searchReset = Y.one("#searchReset");
+            this._searchReset = Y.one(".searchReset");
             if (this._input.getValue()) {
                 this._searchReset.addClass("active");
             }

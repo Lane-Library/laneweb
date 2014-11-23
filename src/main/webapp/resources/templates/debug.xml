@@ -93,13 +93,13 @@
                                     <option value="textbooks-all" title="Selected clinical textbooks">Textbooks</option>
                                 </select>
                                 <input name="q" id="searchTerms" type="text" />
-                                <span id="searchReset" title="Clear Search">×</span>
+                                <span class="searchReset" title="Clear Search">×</span>
                             </div>
                             <input id="searchSubmit" type="submit" value="Search" />
                             <!--<a id="searchTools" href="/help/cool-tools-proxyBookmarklet.html" title="Search Tools"><i class="fa fa-wrench"></i></a>-->
                         </fieldset>
                     </form>
-                    <img id="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
+                    <img class="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
                     <a id="searchTips" href="/help/choose-search.html">Need Help? <i class="fa fa-arrow-right"></i></a>
                     <ul id="qlinks">
                         <li>
