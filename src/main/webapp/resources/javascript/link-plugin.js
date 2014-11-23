@@ -27,26 +27,6 @@
         loginPath = basePath + "/secure/apps/proxy/credential",
 
     LinkPlugin = function(config) {
-        this._isLocalPopup = function(node) {
-            var rel = node.getAttribute("rel");
-            return rel && rel.indexOf("popup local") === 0;
-        };
-        this._getTitleFromImg = function(node) {
-            var i, title, img = node.all('img');
-            if (img) {
-                for (i = 0; i < img.size(); i++) {
-                    if (img.item(i).get(ALT)) {
-                        title = img.item(i).get(ALT);
-                    } else if (img.item(i).get(SRC)) {
-                        title = img.item(i).get(SRC);
-                    }
-                    if (title) {
-                        break;
-                    }
-                }
-            }
-            return title;
-        };
         LinkPlugin.superclass.constructor.apply(this, arguments);
     };
 
@@ -208,7 +188,30 @@
             }
     };
 
-    Y.extend(LinkPlugin, Y.Plugin.Base);
+    Y.extend(LinkPlugin, Y.Plugin.Base, {
+
+        _isLocalPopup : function(node) {
+            var rel = node.getAttribute("rel");
+            return rel && rel.indexOf("popup local") === 0;
+        },
+        
+        _getTitleFromImg : function(node) {
+            var i, title, img = node.all('img');
+            if (img) {
+                for (i = 0; i < img.size(); i++) {
+                    if (img.item(i).get(ALT)) {
+                        title = img.item(i).get(ALT);
+                    } else if (img.item(i).get(SRC)) {
+                        title = img.item(i).get(SRC);
+                    }
+                    if (title) {
+                        break;
+                    }
+                }
+            }
+            return title;
+        }
+    });
 
     lane.LinkPlugin = LinkPlugin;
 
