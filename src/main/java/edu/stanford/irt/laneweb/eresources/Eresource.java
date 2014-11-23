@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.List;
 
 public class Eresource {
 
-    public static class EresourceBuilder extends Eresource {
+    public static class EresourceBuilder {
 
         private int total;
 
@@ -26,7 +26,7 @@ public class Eresource {
 
         private int available;
 
-        private Collection<Link> links = new LinkedList<Link>();
+        private List<Link> links = new ArrayList<Link>();
 
         public EresourceBuilder addLink(final Link link) {
             this.links.add(link);
@@ -89,7 +89,7 @@ public class Eresource {
 
     private int id;
 
-    private Collection<Link> links;
+    private List<Link> links;
 
     private String primaryType;
 
@@ -134,8 +134,8 @@ public class Eresource {
         return this.id;
     }
 
-    public Collection<Link> getLinks() {
-        return Collections.unmodifiableCollection(this.links);
+    public List<Link> getLinks() {
+        return Collections.unmodifiableList(this.links);
     }
 
     public String getPrimaryType() {

@@ -51,9 +51,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 rowTitle = rowTitle == null ? "MISSING TITLE" : rowTitle;
                 int rowVersionId = this.rs.getInt("VERSION_ID");
                 int rowLinkId = this.rs.getInt("LINK_ID");
-                this.builder = Eresource.builder();
                 if ((rowEresourceId != this.currentEresourceId) || !rowTitle.equals(this.currentTitle)) {
-                    addEresource(rowTitle, rowEresourceId, recordId, recordType);
+                    this.builder = newEresourceBuilder(rowTitle, rowEresourceId, recordId, recordType);
                 }
                 if (rowVersionId != this.currentVersionId) {
                     this.createGetPassword = "T".equals(this.rs.getString("GETPASSWORD"));
@@ -64,24 +63,29 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                     addLink(rowTitle, rowLinkId);
                 }
             }
+            if (this.builder != null) {
+                this.eresources.add(this.builder.build());
+            }
             return this.eresources;
         }
 
-        private void addEresource(final String title, final int resourceId, final int recordId, final String recordType)
+        private EresourceBuilder newEresourceBuilder(final String title, final int resourceId, final int recordId, final String recordType)
                 throws SQLException {
+            if (this.builder != null) {
+                this.eresources.add(this.builder.build());
+            }
             this.currentTitle = title;
             int score = this.query == null ? 0 : this.scoreStrategy
                     .computeScore(this.query, this.currentTitle, this.rs);
-            this.builder.description(this.rs.getString("DESCRIPTION")).id(resourceId)
-                    .recordId(recordId).recordType(recordType).score(score).title(this.currentTitle)
-                    .primaryType(this.rs.getString("PRIMARY_TYPE")).total(this.rs.getInt("TOTAL"))
-                    .available(this.rs.getInt("AVAILABLE"));
-            this.eresources.add(this.builder.build());
             this.builder = Eresource.builder();
             this.currentEresourceId = resourceId;
             this.currentVersionId = -1;
             this.currentLinkId = -1;
             this.isFirstLink = true;
+            return Eresource.builder().description(this.rs.getString("DESCRIPTION")).id(resourceId)
+                    .recordId(recordId).recordType(recordType).score(score).title(this.currentTitle)
+                    .primaryType(this.rs.getString("PRIMARY_TYPE")).total(this.rs.getInt("TOTAL"))
+                    .available(this.rs.getInt("AVAILABLE"));
         }
 
         private void addLink(final String title, final int linkId) throws SQLException {
