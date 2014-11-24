@@ -58,7 +58,7 @@
     </xsl:template>
     
     <xsl:template match="s:content">
-        <li><a href="{s:url}"><xsl:value-of select="s:title"/></a></li>
+        <li>Biographical Sketch of <a href="{s:url}"><xsl:value-of select="s:title"/></a></li>
     </xsl:template>
     
 </xsl:stylesheet>
