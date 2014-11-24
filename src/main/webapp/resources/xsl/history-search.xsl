@@ -50,6 +50,15 @@
             <xsl:apply-templates select="*|text()"/>
         </xsl:copy>
         <span><xsl:text> </xsl:text><xsl:value-of select="$resource/s:hits"/></span>
+        <xsl:if test="/doc/s:search/s:engine/s:resource[@s:id = $id]/s:content">
+            <ul>
+                <xsl:apply-templates select="/doc/s:search/s:engine/s:resource[@s:id = $id]/s:content"/>
+            </ul>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="s:content">
+        <li><a href="{s:url}"><xsl:value-of select="s:title"/></a></li>
     </xsl:template>
     
 </xsl:stylesheet>
