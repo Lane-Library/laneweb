@@ -11,7 +11,6 @@
     if (shibbLinks && inFrame()) {
         shibbLinks.all('a').each(function(node) {
             if (node.get('href').match(/stanfordmed|sch-sts/)) {
-                console.log(node)
                 node.on("click", function() {
                     top.location.href = this.get('href');
                 }, this);
