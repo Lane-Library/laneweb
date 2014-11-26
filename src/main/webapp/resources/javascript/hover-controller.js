@@ -18,17 +18,6 @@
             timeout = Y.UA.ios ? 0 : 1000,
 
             /**
-             * Turn the hover state off by removing the "active" class.  Also calls
-             * reset to cancel the timer and detach the mouseleave event handler.
-             * @method deactivate
-             * @private
-             */
-            deactivate = function() {
-                this.removeClass("active");
-                reset();
-            },
-
-            /**
              * Turn the hover state on by adding the "active" class.
              * @method activate
              * @private
@@ -51,6 +40,17 @@
                     timer.cancel();
                     timer = null;
                 }
+            },
+
+            /**
+             * Turn the hover state off by removing the "active" class.  Also calls
+             * reset to cancel the timer and detach the mouseleave event handler.
+             * @method deactivate
+             * @private
+             */
+            deactivate = function() {
+                this.removeClass("active");
+                reset();
             };
 
         return {

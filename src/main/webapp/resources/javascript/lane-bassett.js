@@ -54,18 +54,6 @@
                 ev.preventDefault();
             },
 
-            registerLinksContainer = function(container) {
-            var anchor, i;
-            if (container) {
-                anchor = container.all('a');
-                for (i = 0; i < anchor.size(); i++) {
-                    if (anchor.item(i).get('rel') === null || anchor.item(i).get('rel') === "" ||  anchor.item(i).get('rel') === "propagation") {
-                        anchor.item(i).on('click', handleClick);
-                    }
-                }
-            }
-        },
-
         initializeHistory = function() {
             history = new Y.HistoryHash();
             if(history.get('bassett')){
@@ -77,6 +65,18 @@
             history.on("bassettRemove",function() {
                 loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
             });
+        };
+
+        registerLinksContainer = function(container) {
+            var anchor, i;
+            if (container) {
+                anchor = container.all('a');
+                for (i = 0; i < anchor.size(); i++) {
+                    if (anchor.item(i).get('rel') === null || anchor.item(i).get('rel') === "" ||  anchor.item(i).get('rel') === "propagation") {
+                        anchor.item(i).on('click', handleClick);
+                    }
+                }
+            }
         };
 
         if (bassettContent) {
