@@ -11,9 +11,9 @@
 }
 #subscribe input,#subscribe textarea,#subscribe select,#feedback input,#feedback textarea,#feedback select
 	{
-	box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 }
 #feedback textarea {
 	height: 150px;
@@ -167,9 +167,9 @@ background-position: -763px -233px;
 .yui3-lightbox #feedbackItems {
 	background-color: white;
 	border: 2px solid #fff;
-	box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	-moz-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	-webkit-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
+    box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	/* For IE 8 */
 	-ms-filter:
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
@@ -191,9 +191,9 @@ background-position: -763px -233px;
 	border-left: 2px solid #fff;
 	border-bottom: 2px solid #fff;
 	border-right: none;
-	box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	-moz-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	-webkit-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
+    box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	/* For IE 8 */
 	-ms-filter:
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
