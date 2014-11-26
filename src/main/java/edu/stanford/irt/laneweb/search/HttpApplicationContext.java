@@ -5,15 +5,16 @@ import java.net.URL;
 
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 
 public class HttpApplicationContext extends AbstractXmlApplicationContext {
 
-    private HttpResource[] configResources;
+    private Resource[] configResources;
 
-    public HttpApplicationContext(final String url, final String login, final String password) throws IOException {
+    public HttpApplicationContext(final String url) throws IOException {
         URL urlObj = new URL(url);
-        HttpResource resource = new HttpResource(urlObj, login, password);
-        this.configResources = new HttpResource[1];
+        Resource resource = new UrlResource(urlObj);
+        this.configResources = new Resource[1];
         this.configResources[0] = resource;
         this.refresh();
     }
