@@ -1,6 +1,10 @@
 package edu.stanford.irt.laneweb.eresources;
 
-public class PagingLabel {
+import java.io.Serializable;
+
+public class PagingLabel implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String end;
 

@@ -1,10 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -70,6 +66,7 @@ public class AbstractEresourcesGeneratorTest {
 
     @Test
     public void testDoGenerate() {
+        expect(this.eresource.getTitle()).andReturn("title").times(2);
         this.generator.setModel(Collections.<String, Object>emptyMap());
         this.saxStrategy.toSAX(isA(PagingEresourceList.class), eq(this.xmlConsumer));
         replay(this.collectionManager, this.eresource, this.saxStrategy, this.xmlConsumer);
