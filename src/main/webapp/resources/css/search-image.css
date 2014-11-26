@@ -52,11 +52,13 @@
 
 #image{
 	width: 235px;
-	height: 125px;
+	height: 135px;
 	display: table-cell;
 	vertical-align: middle;
 	float: initial;
-	padding-top: 10px; }
+	padding-top: 10px;
+	box-sizing:border-box;
+}
 
 #searchImageTitle {
 	margin-top: 40px;

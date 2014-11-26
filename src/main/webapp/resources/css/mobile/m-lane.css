@@ -293,9 +293,10 @@ background-position: -763px -233px;
 }
 
 .search form.selected {
-    -webkit-transition-property: opacity;
-    -webkit-transition-duration: 0.3s;
-    -webkit-transition-timing-function: ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    -webkit-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+    transition: opacity 0.3s ease-in;
     height: auto;
     opacity: 1;
 }
@@ -319,6 +320,7 @@ background-position: -763px -233px;
 }
 
 .search form input {
+    -moz-appearance: none;
     -webkit-appearance: none;
     border: 1px solid #FFFFFF;
     -webkit-border-radius: 15px 15px 15px 15px;
@@ -364,6 +366,7 @@ background-position: -763px -233px;
     -ms-border-radius: 0;
     border-radius: 0;
     border: medium none;
+    -moz-box-shadow: 0 0 0 transparent;
     -webkit-box-shadow: 0 0 0 transparent;
     box-shadow: 0 0 0 transparent;
 }
@@ -1058,9 +1061,6 @@ background-position: -763px -233px;
 *
 */
 div.absInfo {
-    -webkit-user-select: text;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 10px;
     margin-top: 50px;

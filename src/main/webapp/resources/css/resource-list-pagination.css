@@ -41,11 +41,12 @@
 }
 .labelTitle{
     display:inline-block;
-    width:152px;
+    width:156px;
     overflow:hidden;
     text-overflow:ellipsis;
     vertical-align:bottom;
     padding-left:4px;
+    box-sizing:border-box;
 }
 .content .pagingLabels li{
     margin-right:0;

@@ -14,7 +14,6 @@
 	-moz-border-radius: 3px;
 	-moz-user-select: none;
 	background-color: white;
-	height: auto;
 	padding: 20px;
 	text-align: left;
 	border: 1px solid #9e9d98;
@@ -44,5 +43,4 @@
 .yui3-popup-content .yui3-widget-bd {
 	font-size: 1em;
     line-height: 1.6em;
-    margin: 0 0 1em;
 }

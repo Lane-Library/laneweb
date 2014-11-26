@@ -22,8 +22,9 @@
     display:inline-block;
     margin:2px;
     padding:6px;
-    width:108px;
+    width:122px;
     border:1px solid #dadad9;
+    box-sizing:border-box;
     border-radius:3px 3px 0 0;
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
 }

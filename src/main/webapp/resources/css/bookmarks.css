@@ -83,7 +83,8 @@ background-position: -600px -80px;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	padding: 5px;
 	border: solid 2px #C9C9C9;
-	width: 252px;
+	width: 266px;
+	box-sizing:border-box;
 }
 #bookmarkSearch{
     visibility:hidden;

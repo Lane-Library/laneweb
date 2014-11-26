@@ -1,8 +1,9 @@
 #sm-footer {
 	background-color: rgb(38, 38, 38);
 	color: rgb(158, 158, 158);
-	height: 100px;
-	padding: 30px 0 30px 0;
+	height: 160px;
+	padding: 30px 0;
+	box-sizing:border-box;
 }
 
 #sm-footer ul {

@@ -69,8 +69,9 @@
 #laneNav ul ul li{
     height:auto;
     display:block;
-    width:190px;
+    width:205px;
     padding:5px 0 3px 15px;
+    box-sizing:border-box;
 }
 
 #laneNav ul ul a{
