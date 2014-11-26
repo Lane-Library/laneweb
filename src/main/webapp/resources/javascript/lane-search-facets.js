@@ -7,6 +7,16 @@
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
         container = Y.one('#searchResults'),
         facets, i, type, source, Result,
+        clickHandler = function(event) {
+            var result = this.getData('result');
+            try {
+                Lane.SearchHistory.addValue("facet", this.getData('result')._source);
+            } catch (e) {
+                //log somewhere ... no need to break/alert
+                result.show();
+            }
+            event.preventDefault();
+        },
     SearchFacets = function(){
         var currentResult = null;
         return {
@@ -117,16 +127,7 @@
                             facets.item(i).getData('result').setContent(container.get('innerHTML'));
                             SearchFacets.setCurrentResult(facets.item(i).getData('result'));
                         }
-                        Y.on('click',function(event) {
-                            var result = this.getData('result');
-                            try {
-                                Lane.SearchHistory.addValue("facet", this.getData('result')._source);
-                            } catch (e) {
-                                //log somewhere ... no need to break/alert
-                                result.show();
-                            }
-                            event.preventDefault();
-                        }, facets.item(i));
+                        Y.on('click', clickHandler, facets.item(i));
                     }
                 }
             }

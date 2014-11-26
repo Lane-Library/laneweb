@@ -48,10 +48,8 @@
     background-image:url(../images/sprite-vertall.png);
     background-position:0 bottom;
     background-repeat:repeat-x;
-    -moz-border-radius-bottomleft:3px;
-    -moz-border-radius-bottomright:3px;
-    -webkit-border-bottom-left-radius:3px;
-    -webkit-border-bottom-right-radius:3px;
+    -webkit-border-radius:0 0 3px 3px;
+    -moz-border-radius:0 0 3px 3px;
     border-radius:0 0 3px 3px;
     -webkit-box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
@@ -69,8 +67,9 @@
 #laneNav ul ul li{
     height:auto;
     display:block;
-    width:190px;
+    width:205px;
     padding:5px 0 3px 15px;
+    box-sizing:border-box;
 }
 
 #laneNav ul ul a{

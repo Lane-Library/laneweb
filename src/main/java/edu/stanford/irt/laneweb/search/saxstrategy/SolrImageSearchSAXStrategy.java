@@ -52,6 +52,12 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
     private static final String SPAN = "span";
     
+    private static final String ACTIVED = "actived";
+    
+    private static final String DISABLED = "disabled";
+    
+    private static final String HIDDEN = "hidden";
+    
     
 
     public void toSAX(final Map<String, Object> result, final XMLConsumer xmlConsumer) {
@@ -117,10 +123,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         startDivWithClass(xmlConsumer, "pagination");
         AttributesImpl atts = new AttributesImpl();
         if (page.getNumber() != 0) {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "actived");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, ACTIVED);
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, path + "1");
         } else {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "disabled");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, DISABLED);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         atts = new AttributesImpl();
@@ -134,10 +140,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts = new AttributesImpl();
         
         if (page.getNumber() != 0) {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "actived");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, ACTIVED);
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, path + (page.getNumber()));
         } else {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "disabled");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, DISABLED);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         atts = new AttributesImpl();
@@ -158,10 +164,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts = new AttributesImpl();
         
         if (page.getNumber() != page.getTotalPages() - 1) {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "actived");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, ACTIVED);
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, path + (page.getNumber() + 2));
         } else {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "disabled");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, DISABLED);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         atts = new AttributesImpl();
@@ -174,10 +180,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
         atts = new AttributesImpl();
         if (page.getNumber() != page.getTotalPages() - 1) {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "actived");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, ACTIVED);
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, path + (page.getTotalPages()));
         } else {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "disabled");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, DISABLED);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         atts = new AttributesImpl();
@@ -200,19 +206,19 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts.addAttribute(XHTML_NS, NAME, NAME, CDATA,"paginationForm");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "form", atts);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, "hidden");
+        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, HIDDEN);
         atts.addAttribute(XHTML_NS, VALUE, VALUE , CDATA, (String)result.get(Model.SOURCE));
         atts.addAttribute(XHTML_NS, NAME, NAME , CDATA, "source");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, "hidden");
+        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, HIDDEN);
         atts.addAttribute(XHTML_NS, VALUE, VALUE , CDATA, (String)result.get(Model.QUERY));
         atts.addAttribute(XHTML_NS, NAME, NAME , CDATA, "q");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, "hidden");
+        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, HIDDEN);
         atts.addAttribute(XHTML_NS, VALUE, VALUE , CDATA, String.valueOf( page.getTotalPages()));
         atts.addAttribute(XHTML_NS, NAME, NAME , CDATA, "totalPages");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);

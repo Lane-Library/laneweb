@@ -98,7 +98,7 @@
                     needMore;
 
                 needMore = updateNodes(results);
-                maybeGetMore(response);
+                maybeGetMore(response, needMore);
             };
         return {
             initialize: function() {

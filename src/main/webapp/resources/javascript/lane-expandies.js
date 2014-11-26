@@ -114,13 +114,15 @@
                 for (i = 0; i < size; i++) {
                     anchor = anchors.item(i);
                     if (anchor.get("href") && !anchor.get("rel")) {
-                        anchor.on("click", function(event) {
-                            event.stopPropagation();
-                        });
+                        anchor.on("click", this._handleTriggerClick);
                     }
                 }
                 this.get("hd").addClass("yui3-accordion-item-hd");
                 this.get("bd").addClass("yui3-accordion-item-bd");
+            },
+            
+            _handleTriggerClick : function(event) {
+                event.stopPropagation();
             }
         });
 

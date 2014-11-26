@@ -29,9 +29,10 @@ http://lane.stanford.edu/samples/button-css.html
 	background-color: #FFFFFF;
 	border-radius: 12px;
 	font-size: 13px;
-	height: 16px;
-	width: 16px;
+	height: 24px;
+	width: 24px;
 	padding: 4px;
+	box-sizing:border-box;
 	margin-right: 6px;
 	line-height: 15px;
 }
