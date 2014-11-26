@@ -38,6 +38,7 @@
 	height: 37px;
 	padding: 6px;
 	margin-top: 24px;
+	box-sizing:border-box;
 }
 #subscribe input:hover,#subscribe textarea:hover,#subscribe input:focus,#subscribe textarea:focus,#feedback input:hover,#feedback textarea:hover,#feedback input:focus,#feedback textarea:focus
 	{
@@ -55,14 +56,16 @@
 div#persistent {
 	height:350px;
 	width:980px;
-	padding: 0px !important;
 	text-align:center;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid #9e9d98;
+    box-sizing:border-box;
 }
 
 #persistent .header{
 	background-color:  #aabec6;
-	/*background-color:  rgb(236, 241, 242);*/
-	padding-top: 0px !important;
 	height: 90px;
 }
 
@@ -182,7 +185,8 @@ background-position: -763px -233px;
 }
 .yui3-feedback-menu-active {
 	background-color: white;
-	width: 225px;
+	width: 250px;
+	box-sizing:border-box;
 	border-top: 2px solid #fff;
 	border-left: 2px solid #fff;
 	border-bottom: 2px solid #fff;
@@ -247,7 +251,8 @@ background-position: -763px -233px;
     margin-right : 10px;
     padding : 5px;
     text-align : right;
-    width : 30%;
+    width : 32%;
+    box-sizing:border-box;
 }
 .requiredField,
 .validatedField {
