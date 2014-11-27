@@ -32,7 +32,7 @@
                             {selector:"#favorites", category:"lane:bookmarkClick"},
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
-                            {selector:"#laneNav", category:"lane:laneNav-top"},
+                            {selector:".lane-nav", category:"lane:laneNav-top"},
                             {selector:"#qlinks", category:"lane:quickLinkClick"},
                             {selector:".banner-content", category:"lane:bannerClick"},
                             {selector:".sectionMenu", category:"lane:laneNav-sectionMenu"},
@@ -249,7 +249,7 @@
                     }
                     if (node.hasClass('yui3-accordion-item-trigger')) {
                         title = 'Expandy:' + title;
-                    } else if (node.ancestor("#laneNav")) {
+                    } else if (node.ancestor(".lane-nav")) {
                         title = "laneNav: " + title;
                     }
                     //if there is rel="popup local" then add "pop-up" to the title
@@ -399,5 +399,5 @@
         Tracker.addTarget(Lane);
 
         Y.all(".searchFacet, .yui3-accordion-item-trigger, *[rel^='popup local']").setData("isTrackableAsPageView", true);
-        Y.all("#favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, #laneNav a, #laneFooter a, #qlinks a, .sectionMenu a, .banner-content a").setData("isTrackableAsEvent", true);
+        Y.all("#favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, #qlinks a, .sectionMenu a, .banner-content a").setData("isTrackableAsEvent", true);
 })();

@@ -90,7 +90,7 @@ Y.use("*",  function(){
         },
 
         testLaneNavClick: function() {
-            var link = Y.one("#laneNav a");
+            var link = Y.one(".lane-nav a");
             link.simulate("click");
             Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:laneNav-top", this.event.category);

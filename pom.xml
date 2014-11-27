@@ -157,7 +157,9 @@
                                 <include>font-awesome-min.css</include>
                                 <include>header-min.css</include>
                                 <include>search-form-min.css</include>
+                                <include>dropdown-min.css</include>
                                 <include>lane-nav-min.css</include>
+                                <include>favorites-min.css</include>
                                 <include>lists-min.css</include>
                                 <include>anchors-min.css</include>
                                 <include>som-footer-min.css</include>
