@@ -29,7 +29,7 @@
             getEventTrackingData = function(event) {
                 var i, link = event.target, trackingData = {},
                 handlers = [
-                            {selector:"#favorites", category:"lane:bookmarkClick"},
+                            {selector:".favorites", category:"lane:bookmarkClick"},
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
                             {selector:".lane-nav", category:"lane:laneNav-top"},
@@ -399,5 +399,5 @@
         Tracker.addTarget(Lane);
 
         Y.all(".searchFacet, .yui3-accordion-item-trigger, *[rel^='popup local']").setData("isTrackableAsPageView", true);
-        Y.all("#favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, #qlinks a, .sectionMenu a, .banner-content a").setData("isTrackableAsEvent", true);
+        Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, #qlinks a, .sectionMenu a, .banner-content a").setData("isTrackableAsEvent", true);
 })();

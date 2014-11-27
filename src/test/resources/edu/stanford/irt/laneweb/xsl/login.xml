@@ -2,7 +2,7 @@
     <li>
         <a href="/secure/login.html">MyLane login</a>
     </li>
-    <li id="favorites">
+    <li class="favorites">
         <a href="/favorites.html">My Bookmarks</a>
         <?laneweb bookmarks?>
     </li>

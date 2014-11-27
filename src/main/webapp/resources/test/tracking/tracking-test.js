@@ -55,7 +55,7 @@ Y.use("*",  function(){
 
         testFavoritesClick: function() {
             Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
-            var link = Y.one("#favorites a");
+            var link = Y.one(".favorites a");
             link.simulate("click");
             Y.lane.Model.set(Y.lane.Model.AUTH, null);
             Y.Assert.areEqual(link.get("text"), this.event.label);
