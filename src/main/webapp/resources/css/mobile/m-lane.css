@@ -322,6 +322,7 @@ background-position: -763px -233px;
 .search form input {
     -moz-appearance: none;
     -webkit-appearance: none;
+    appearance:none;
     border: 1px solid #FFFFFF;
     -webkit-border-radius: 15px 15px 15px 15px;
     border-radius: 15px 15px 15px 15px;

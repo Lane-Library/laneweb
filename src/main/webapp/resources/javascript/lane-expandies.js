@@ -120,7 +120,7 @@
                 this.get("hd").addClass("yui3-accordion-item-hd");
                 this.get("bd").addClass("yui3-accordion-item-bd");
             },
-            
+
             _handleTriggerClick : function(event) {
                 event.stopPropagation();
             }

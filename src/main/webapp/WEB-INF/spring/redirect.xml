@@ -5,7 +5,7 @@
 
     <bean id="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"
         class="edu.stanford.irt.laneweb.servlet.redirect.CompositeRedirectProcessor">
-        <property name="redirectProcessors">
+        <constructor-arg>
             <list>
                 <bean class="edu.stanford.irt.laneweb.servlet.redirect.TrailingSlashRedirectProcessor"/>
                 <bean class="edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor">
@@ -47,6 +47,6 @@
                     </property>
                 </bean>
             </list>
-        </property>
+        </constructor-arg>
     </bean>
 </beans>

@@ -194,7 +194,7 @@
             var rel = node.getAttribute("rel");
             return rel && rel.indexOf("popup local") === 0;
         },
-        
+
         _getTitleFromImg : function(node) {
             var i, title, img = node.all('img');
             if (img) {
