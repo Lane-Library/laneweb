@@ -9,6 +9,7 @@
             diagramDisplay = false,
             accordion,
             history,
+            registerLinksContainer,
 
             formatAjaxUrl = function(href) {
                 var url;
@@ -65,7 +66,7 @@
             history.on("bassettRemove",function() {
                 loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
             });
-        },
+        };
 
         registerLinksContainer = function(container) {
             var anchor, i;
