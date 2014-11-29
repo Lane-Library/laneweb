@@ -113,4 +113,11 @@
         initializeDescriptionToggles();
     });
 
+    //delegate mouseenter events on class "hvrTrig" and "hoverTrigger"
+    if (Y.one("#searchResults")) {
+        Y.delegate("mouseenter", function(event) {
+            rdc.setTarget(event.currentTarget);
+        }, "#searchResults", ".hvrTrig, .hoverTrigger");
+    }
+
 })();
