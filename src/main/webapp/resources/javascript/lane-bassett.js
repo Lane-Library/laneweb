@@ -65,7 +65,7 @@
             history.on("bassettRemove",function() {
                 loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
             });
-        };
+        },
 
         registerLinksContainer = function(container) {
             var anchor, i;
