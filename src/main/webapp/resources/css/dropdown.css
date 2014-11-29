@@ -1,9 +1,6 @@
 .dropdown {
     position:relative;
 }
-.dropdown > *:first-child {
-    cursor:pointer;
-}
 .dropdown-content {
     display:none;
     position:absolute;
@@ -20,6 +17,7 @@
     display:inline-block;
 }
 .general-dropdown-trigger{
+    cursor:pointer;
     position:relative;
     padding:4px 8px;
     border:1px solid #dadad9;
