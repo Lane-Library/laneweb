@@ -3,28 +3,26 @@
     a temporary transformation to change content to new markup
     TODO: remove after content has changed
 -->
-<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
-    xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    version="1.0"
-    pass-through="all">
-    
-    <stx:template match="h:div[@class='yui3-u-17-24']">
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns" xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" version="1.0" pass-through="all">
+
+    <stx:template match="h:div[@class='yui3-u-17-24 ']">
         <div class="yui3-u-4-5">
             <stx:process-children/>
         </div>
     </stx:template>
-    
-    <stx:template match="h:div[@class='yui3-u-7-24']">
+
+    <stx:template match="h:div[@class='yui3-u-7-24 ']">
         <div class="yui3-u-1-5">
             <div style="margin-right:12px;padding-top:10px">
-            <div class="pagingButton">Extend your Search <i class="fa fa-angle-double-down"></i>
-                <div class="pagingLabels">
-                    <stx:process-children/>
+                <div class="general-dropdown dropdown">
+                    <div class="general-dropdown-trigger">Extend your Search <i class="fa fa-angle-double-down"/></div>
+                    <div class="general-dropdown-content dropdown-content">
+                        <stx:process-children/>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </stx:template>
-    
+
 </stx:transform>

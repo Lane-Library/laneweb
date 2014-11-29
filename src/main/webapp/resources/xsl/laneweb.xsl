@@ -298,15 +298,18 @@
     <xsl:template match="node()[@class='lane-nav']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
-            <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
-                <xsl:attribute name="class"><xsl:value-of select="@class"/> clinical</xsl:attribute>
-            </xsl:if>
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class"/>
+                <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
+                    <xsl:text> clinical</xsl:text>
+                </xsl:if>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
 
     <!-- add class="active" to lane-nav li when the path matches -->
-    <xsl:template match="h:ul[attribute::id='lane-nav']/h:li">
+    <xsl:template match="h:ul[attribute::class='lane-nav']/h:li">
         <xsl:variable name="link-content" select="child::h:a/text()"/>
         <xsl:variable name="active-tab" select="$laneNav-tabs/h:div[h:span[1]=$link-content]"/>
         <xsl:variable name="active" select="starts-with($path, $active-tab/h:span[2])"/>

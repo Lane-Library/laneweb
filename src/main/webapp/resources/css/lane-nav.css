@@ -37,8 +37,9 @@
 }
 
 .nav-menu-content{
+    border-top:none;
     padding:6px 0;
-    z-index:5;
+    z-index:1;
 }
 
 .nav-menu-content li{

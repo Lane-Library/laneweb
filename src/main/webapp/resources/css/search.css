@@ -118,14 +118,17 @@ li.active .description {
     font-style:italic;
 }
 .rightSearchTips {
-    padding-left:2px;
+    padding:0 12px;
+    white-space:nowrap;
 }
+
 .rightSearchTips .heading {
     font-weight: bold;
     padding: 10px 0 5px;
     border-bottom: solid 1px rgb(144,144,144);
     margin-bottom:4px;
 }
+
 .rightSearchTips ul {
     padding-left:0;
 }
