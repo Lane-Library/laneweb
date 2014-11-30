@@ -121,21 +121,21 @@ div#persistent {
 	background-image: url('../images/organizational-logos.png');
 }
 
-#shibboleth-links .organization a#Stanford span{
+#Stanford span{
 background-position: -10px -236px;
 }
-#shibboleth-links .organization a#SHC span{
+#SHC span{
 background-position: -175px -233px;
 }
-#shibboleth-links .organization a#UHA span{
+#UHA span{
 background-position: -362px -233px;
 }
 
-#shibboleth-links .organization a#LPCH span{
+#LPCH span{
 background-position: -567px -233px;
 }
 
-#shibboleth-links .organization a#PCHA span{
+#PCHA span{
 background-position: -763px -233px;
 }
 
