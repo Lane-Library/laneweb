@@ -58,26 +58,24 @@ div.bassett-image td#diagram-image {
 	vertical-align: top;
 }
 
-div.bassett-image table table td {
-	padding: 0;
-	padding-top: 3px;
-	padding-left: 2px;
+.legend td, .legend-title, .legend-sub-title, .legend-description {
+	padding: 3px 0 0 2px;
 	text-align: left;
 	vertical-align: top;
 }
-div.bassett-image table table td.legend-title, div.bassett-image table table td.legend-sub-title {
+.legend-title, .legend-sub-title {
 	text-align: center;
 }
-div.bassett-image table table td.legend-title {
+.legend-title {
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 1em;
 	color: #3F3C30;
 }
-div.bassett-image table table td.legend-sub-title {
+.legend-sub-title {
 	padding-bottom: 5px;
 	font-style: italic;
 }
-div.bassett-image table table td.legend-description {
+.legend-description {
 	padding-bottom: 15px;
 }
