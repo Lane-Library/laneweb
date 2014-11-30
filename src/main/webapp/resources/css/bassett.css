@@ -58,21 +58,21 @@ div.bassett-image td#diagram-image {
 	vertical-align: top;
 }
 
-.legend td, .legend-title, .legend-sub-title, .legend-description {
+#legend td {
 	padding: 3px 0 0 2px;
 	text-align: left;
 	vertical-align: top;
 }
-.legend-title, .legend-sub-title {
+#legend .legend-title, #legend .legend-sub-title {
 	text-align: center;
 }
-.legend-title {
+#legend .legend-title {
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 1em;
 	color: #3F3C30;
 }
-.legend-sub-title {
+#legend .legend-sub-title {
 	padding-bottom: 5px;
 	font-style: italic;
 }
