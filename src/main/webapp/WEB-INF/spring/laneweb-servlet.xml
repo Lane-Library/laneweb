@@ -27,8 +27,7 @@
     
     <mvc:interceptors>
      	<mvc:interceptor>
-            <mvc:mapping path="/secure/**/*.html"/>
-            <mvc:mapping path="/redirect/cme/**"/>
+            <mvc:mapping path="/**/*.html"/>
             <bean class="edu.stanford.irt.laneweb.servlet.mvc.PersistentLoginHandlerInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
