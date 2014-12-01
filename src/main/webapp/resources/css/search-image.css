@@ -100,12 +100,12 @@
 }
 
 .pagination  .actived ,.actived span, .actived label{
-	color:#428bca !important;
+	color:#428bca;
 	cursor: pointer;
 }
 
 .pagination .disabled,  a.disabled:hover{
-	color:#dedede !important;
+	color:#dedede;
 	cursor: default;
 }
 
@@ -193,7 +193,7 @@
 }
 
 #tabs-image-search li a {
-	color: #ffffff !important; /*to overwrite the color of the text links*/
+	color: #ffffff; /*to overwrite the color of the text links*/
 	display:table-cell;
 	text-decoration: none;
 	border-bottom: none;
