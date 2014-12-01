@@ -52,16 +52,22 @@
 
 /*-------------------------persistent login--------------------------------------------------------------------------*/
 
+	
+
+
 div#persistent {
-	height:350px;
-	width:980px;
+	width:989px;
+	margin-top: 50px;
+	margin-bottom: 20px;
 	padding: 0px !important;
 	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	position: relative;
 }
 
 #persistent .header{
 	background-color:  #aabec6;
-	/*background-color:  rgb(236, 241, 242);*/
 	padding-top: 0px !important;
 	height: 90px;
 }
@@ -111,31 +117,35 @@ div#persistent {
 
 #shibboleth-links .organization span{
 	display: inline-block;
-	width: 166px;
+	width: 170px;
 	height: 50px;
 	background-color:  white;
 	background-repeat: no-repeat;
-	background-image: url('../images/organizational-logos.png');
+	background-image: url('../images/organizations-logo-large.jpg');
 }
 
 #shibboleth-links .organization a#Stanford span{
-background-position: -10px -236px;
+background-position: -17px -23px;
 }
 #shibboleth-links .organization a#SHC span{
-background-position: -175px -233px;
+background-position: -211px -23px;
 }
 #shibboleth-links .organization a#UHA span{
-background-position: -362px -233px;
+background-position: -409px -17px;
 }
 
 #shibboleth-links .organization a#LPCH span{
-background-position: -567px -233px;
+background-position: -613px -18px;
 }
 
 #shibboleth-links .organization a#PCHA span{
-background-position: -763px -233px;
+background-position: -807px -18px;
 }
 
+#persistent .help{
+	text-align: left;
+	margin: 20px;
+}
 
 
 #persistent #login {

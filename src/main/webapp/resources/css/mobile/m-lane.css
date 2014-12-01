@@ -30,71 +30,6 @@ body.ui-mobile-viewport{
 }
 
 
-/*persistentlogin  */
-
- .persistent-header{
-    margin: 40px auto 0 auto;
-    padding-left: 10px; 
-    padding-right: 10px;
-    height: 1px;
- } 
- 
-
-#persistent label{
-	margin-top:12px;
-	display: inline;
-	font-weight: bold;
-	}
-
-#shibboleth-links{
-	margin-top:18px;
-}
-
-#shibboleth-links .organization{  
-	text-align:center;
-	margin-top:6px;
-	padding:6px 0 6px 0;
-	background-color:  rgb(236, 241, 242);
-}
-
-#shibboleth-links .organization li{
-	display: block;
-	border-bottom: none;
-	padding:6px 30px 6px 30px;
-	}
-
-#shibboleth-links .organization a{
-	display: block;
-	border: 1px solid #ddd;
-	background-color: white;
-}
-
-#shibboleth-links .organization span{
-	display: block;
-	width: 166px;
-	height: 55px;
-	background-color:  white;
-	background-repeat: none;
-	background-image: url('../../images/organizational-logos.png');
-}
-
-#shibboleth-links .organization a#Stanford span{
-background-position: -10px -236px;
-}
-#shibboleth-links .organization a#SHC span{
-background-position: -175px -233px;
-}
-#shibboleth-links .organization a#UHA span{
-background-position: -362px -233px;
-}
-
-#shibboleth-links .organization a#LPCH span{
-background-position: -567px -233px;
-}
-
-#shibboleth-links .organization a#PCHA span{
-background-position: -763px -233px;
-}
 
 #close{
     z-index:2; 
@@ -122,6 +57,7 @@ background-position: -763px -233px;
 
 .ui-mobile .ui-page-active {
     overflow: hidden;
+    height: auto;
     display: block;
     padding-bottom: 80px;
 }
@@ -142,14 +78,13 @@ background-position: -763px -233px;
 */
 .brand {
     width: 100%;
-    height: 45px;
-    box-sizing:border-box;
-    border-bottom: solid 1px #651006;
+    height: 44px;
     background-color: #bdbdbb;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff),
         to(#bdbdbb) );
     background-image: -webkit-linear-gradient(#ffffff, #bdbdbb);
     background-image: linear-gradient(#ffffff, #bdbdbb);
+    border-bottom: solid 1px #651006;
     position: relative;
     z-index: 202;
 }
@@ -195,15 +130,15 @@ background-position: -763px -233px;
     display: block;
     float: right;
     margin: 8px 8px 0 0;
+    border: 1px solid #cbcbc3;
     -webkit-border-radius: 6px;
     border-radius: 6px;
-    box-sizing:border-box;
-    height: 27px;
-    border: 1px solid #cbcbc3;
-    padding: 4px 12px;
+    width: 50px;
+    height: 17px;
     background-color: #e8e7e3;
     -webkit-box-shadow: -1px 1px 1px #a9a59c;
     box-shadow: -1px 1px 1px #a9a59c;
+    padding: 4px;
     text-align: center;
     text-decoration: none;
     color: #454442;
@@ -222,7 +157,8 @@ background-position: -763px -233px;
 .homeBtn.ui-link {
     float: left;
     margin-left: 8px;
-    padding: 4px 8px 4px 6px;
+    width: 25px;
+    padding-left: 3px;
 }
 
 .webauthLogin.ui-link:active,.homeBtn.ui-link:active
@@ -263,9 +199,12 @@ background-position: -763px -233px;
         #620b09 100%);
     background: linear-gradient(top, #de2a29 0%, #762625 50%, #620b09 51%, #620b09 100%);
     background-color: #620B09;
+    border: medium none;
     margin: 0;
+    padding: 0;
     position: relative;
     text-align: center;
+    width: 100%;
     overflow: hidden;
     height: 0;
     opacity: 0;
@@ -326,7 +265,6 @@ background-position: -763px -233px;
     position: relative;
     left: -1px;
     display: none;
-    box-sizing:border-box;
 }
 
 .search form.selected input {
@@ -403,16 +341,18 @@ background-position: -763px -233px;
 *
 */
 .ui-autocomplete {
-    left: 0 !important;
-    width: 100% !important;
-    padding: 9px 0 0 !important;
-    box-sizing:border-box;
+    left: 1px !important;
+    width: 99% !important;
+    padding: 9px 0 0 0 !important;
     text-align: left;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
     border-bottom: 1px solid #ABABAB;
 }
 
 .ui-menu-item:first-child {
-    border-top: medium none;
+    border-top: medium none !important;
 }
 
 .ui-menu-item:last-child {
@@ -420,7 +360,6 @@ background-position: -763px -233px;
 }
 
 .ui-menu-item {
-    box-sizing:border-box;
     background-color: #EBEBDE;
     border-left: 1px solid #ABABAB;
     border-right: 2px solid #B5B5AB;
@@ -454,7 +393,6 @@ background-position: -763px -233px;
     width: 100%;
     position: relative;
     list-style: none;
-    box-sizing:border-box;
     border-bottom: 1px solid #ffffff;
     float: left;
     margin: 0;
@@ -466,9 +404,8 @@ background-position: -763px -233px;
     display: block;
     float: left;
     width: 33.5%;
-    height: 105px;
+    height: 19px;
     padding: 86px 0 0;
-    box-sizing:border-box;
     font-weight: bold;
     color: #084676;
     margin: 0;
@@ -573,11 +510,11 @@ background-position: -763px -233px;
 */
 .resourceList {
     position: relative;
+    display: block;
     margin: 175px auto 0 auto;
     padding: 0;
     list-style: none;
     width: 90%;
-    box-sizing:border-box;
 }
 
 .resourceList li {
@@ -619,8 +556,7 @@ background-position: -763px -233px;
     font-weight: bold;
     padding: 11px;
     text-align: center;
-    width: 48%;
-    box-sizing:border-box;
+    width: 40%;
 }
 
 .resourceList li a,.resourceList li a:link,.resourceList li a:visited {
@@ -700,9 +636,8 @@ background-position: -763px -233px;
     padding: 1px;
     line-height: 0.6em;
     font-size: 1.4em;
-    box-sizing:border-box;
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     display: block;
     float: left;
     border: 1px solid #9e9d98;
@@ -725,6 +660,8 @@ background-position: -763px -233px;
     padding: 1px 1px 5px 3px;
     line-height: 0.3em;
     font-size: 1.8em;
+    width: 10px;
+    height: 8px;
 }
 
 #hours dl {
@@ -759,6 +696,8 @@ background-position: -763px -233px;
 *
 */
 #contactButtons {
+    display: block;
+    width: 100%;
     margin: 20px auto;
     padding: 0;
     list-style: none;
@@ -774,7 +713,7 @@ background-position: -763px -233px;
     margin: 0;
 }
 
-#contactButtons li a,#contactButtons li a:link,#contactButtons li a:visited,#contactButtons li a:hover,.askUsBtn.ui-link,.askUsBtn.ui-link:link,.askUsBtn.ui-link:visited,.askUsBtn.ui-link:hover
+#contactButtons li a,#contactButtons li a:link,#contactButtons li a:visited,#contactButtons li a:hover,.askUsBtn.ui-link,.askUsBtn.ui-link:link,.askUsBtn.ui-link:visited,.askUsBtn.ui-link:hover,#loggedIn button
     {
     border: 1px solid #9e9d98;
     -webkit-border-radius: 6px;
@@ -796,7 +735,7 @@ background-position: -763px -233px;
     position: relative;
 }
 
-#contactButtons li a:active,.askUsBtn.ui-link:active
+#contactButtons li a:active,#loggedIn button:active,.askUsBtn.ui-link:active
     {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#a7a395),
         color-stop(2%, #b4b0a3), color-stop(3%, #c4c0b2),
@@ -815,8 +754,7 @@ background-position: -763px -233px;
     float: right;
     margin: 67px 6% 0 0;
     padding: 7px;
-    width: 42%;
-    box-sizing:border-box;
+    width: 38%;
     z-index: 2;
 }
 
@@ -831,8 +769,7 @@ background-position: -763px -233px;
     background-color: #6e6a60;
     padding: 19px 5px 16px 5px;
     overflow: hidden;
-    width: 100%;
-    box-sizing:border-box;
+    width: 99%;
     position: absolute;
     bottom: 0;
 }
@@ -992,6 +929,50 @@ background-position: -763px -233px;
 .results .spell a {
     display: inline;
     font-weight: bold;    
+}
+
+/*
+*
+*  Login notification page 
+*
+*
+*/
+#loggedIn h2 {
+    width: 100%;
+    margin: 0 0 35px 0;
+    padding: 21px 0 21px 0;
+    font-size: 2em;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#de2a29),
+        color-stop(50%, #762625), color-stop(51%, #620b09),
+        color-stop(100%, #620b09) );
+    background-image: -webkit-linear-gradient(top, #de2a29 0%, #762625 50%, #620b09 51%,
+        #620b09 100%);
+    background: linear-gradient(top, #de2a29 0%, #762625 50%, #620b09 51%, #620b09 100%);
+    background-color: #620B09;
+    color: #e1d6a0;
+    border-bottom: 10px solid #9F9062;
+    -webkit-box-shadow: 0 0 6px #b5b5ab;
+    box-shadow: 0 0 6px #b5b5ab;
+    text-shadow: 0 -1px #1c110e;
+}
+
+#loggedIn h3 {
+    color: #990000;
+}
+
+#loggedIn p {
+    font-weight: bold;
+}
+
+#loggedIn button {
+    width: 60%;
+    margin-bottom: 5px;
+}
+
+#loggedIn button .btnSubText {
+    font-size: 0.7em;
+    color: #4d4c47;
+    display: block;
 }
 
 /*
