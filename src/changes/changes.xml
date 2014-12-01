@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-12-01" version="2.3.6" description="2.3.6 bug fix release">
+            <action date="2014-11-25" dev="ceyates" issue="100729" type="fix">
+                mobile subset eresources not appearing
+            </action>
+            <action date="2014-11-25" dev="ryanmax" issue="100699" type="fix">
+                login problems for hospital users via SFX
+            </action>
+            <action date="2014-11-24" dev="alainb" issue="100412" type="fix">
+                AAP links broken in peds search
+            </action>
+            <action date="2014-11-25" dev="ceyates" issue="100310" type="add">
+                create search engine for Historical Articles in PubMed
+            </action>
+            <action date="2014-11-24" dev="ceyates" issue="100309" type="add">
+                create search engine for broad MeSH 'History of Medicine' in the catalog
+            </action>
+            <action date="2014-11-24" dev="ceyates" issue="99391" type="add">
+                create search engine for history search from cifdb to include people
+            </action>
+        </release>
         <release date="2014-11-24" version="2.3.5" description="2.3.5 bug fix release">
             <action date="2014-11-18" dev="ryanmax" issue="100633" type="fix">
                 proxy-links can be set to false even when a user is authenticated
