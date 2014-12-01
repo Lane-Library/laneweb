@@ -431,9 +431,8 @@ background-position: -763px -233px;
 *
 */
 .ui-autocomplete {
-    left: 0 !important;
-    width: 100% !important;
-    padding: 9px 0 0 !important;
+    width: 100%;
+    padding: 9px 0 0;
     box-sizing:border-box;
     text-align: left;
     border-bottom: 1px solid #ABABAB;
