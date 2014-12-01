@@ -121,79 +121,29 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             throws SAXException {
         String path =  (String) result.get("path");
         startDivWithClass(xmlConsumer, "pagination");
-        AttributesImpl atts = new AttributesImpl();
-        if (page.getNumber() != 0) {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, ACTIVED);
-            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, path + "1");
+        int currentPage = page.getNumber();
+        int totalPages = page.getTotalPages();
+        if (currentPage != 0) {
+            createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", ACTIVED, path + "1");
+            createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", ACTIVED,  path + currentPage);
         } else {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, DISABLED);
+            createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", DISABLED, null);
+            createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", DISABLED, null);
         }
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-        atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-fast-backward");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, "First");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
-        atts = new AttributesImpl();
-        
-        if (page.getNumber() != 0) {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, ACTIVED);
-            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, path + (page.getNumber()));
-        } else {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, DISABLED);
-        }
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-        atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-step-backward");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL );
-        XMLUtils.data(xmlConsumer, "Previous");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.data(xmlConsumer, "Page ");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
         generateDirectAccessPageForm(xmlConsumer, page, result);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer,  " of " + page.getTotalPages());
+        XMLUtils.data(xmlConsumer,  " of " + totalPages);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        atts = new AttributesImpl();
-        
-        if (page.getNumber() != page.getTotalPages() - 1) {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, ACTIVED);
-            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, path + (page.getNumber() + 2));
+        if (currentPage != totalPages - 1) {
+            createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", ACTIVED, path + (currentPage + 2));
+            createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", ACTIVED, path + totalPages);
         } else {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, DISABLED);
+            createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", DISABLED, null);
+            createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", DISABLED, null);
         }
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-        atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-step-forward");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, "Next");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
-        atts = new AttributesImpl();
-        if (page.getNumber() != page.getTotalPages() - 1) {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, ACTIVED);
-            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, path + (page.getTotalPages()));
-        } else {
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, DISABLED);
-        }
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-        atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-fast-forward");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, "Last");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
         
         endDiv(xmlConsumer);
     }
@@ -344,5 +294,38 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts.addAttribute(XHTML_NS, ID, ID, CDATA, id == null ? "" : id);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, name, atts);
     }
-
+    
+    private void createBackwardLink(XMLConsumer xmlConsumer, String faClass, String text, String clazz, String href) throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, clazz);
+        if (href != null) {
+            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, href);
+        }
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL );
+        XMLUtils.data(xmlConsumer, text);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
+    }
+    
+    private void createForwardLink(XMLConsumer xmlConsumer, String faClass, String text, String clazz, String href) throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, clazz);
+        if (href != null) {
+            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, href);
+        }
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.data(xmlConsumer, text);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
+    }
 }

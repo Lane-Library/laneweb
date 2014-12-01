@@ -44,9 +44,9 @@ public class SolrImageSearchSAXStrategyTest {
     public void testToSAX() throws IOException {
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.image));
         expect(this.page.getNumberOfElements()).andReturn(2).times(1);
-        expect(this.page.getNumber()).andReturn(2).times(16);
+        expect(this.page.getNumber()).andReturn(2).times(6);
         expect(this.page.getSize()).andReturn(52).times(2);
-        expect(this.page.getTotalPages()).andReturn(15).times(12);
+        expect(this.page.getTotalPages()).andReturn(15).times(6);
         expect(this.page.getTotalElements()).andReturn(106L).times(1);
         expect(this.page.hasContent()).andReturn(true).times(1);
         expect(this.image.getId()).andReturn("id/andSlash").times(7);
@@ -96,9 +96,9 @@ public class SolrImageSearchSAXStrategyTest {
     public void testToSAXLongTitle() throws IOException {
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.image));
         expect(this.page.getNumberOfElements()).andReturn(2);
-        expect(this.page.getNumber()).andReturn(2).times(16);
+        expect(this.page.getNumber()).andReturn(2).times(6);
         expect(this.page.getSize()).andReturn(52).times(2);
-        expect(this.page.getTotalPages()).andReturn(15).times(12);
+        expect(this.page.getTotalPages()).andReturn(15).times(6);
         expect(this.page.getTotalElements()).andReturn(106L);
         expect(this.page.hasContent()).andReturn(true);
         expect(this.image.getTitle()).andReturn(
@@ -123,9 +123,9 @@ public class SolrImageSearchSAXStrategyTest {
     public void testToSAXFirstPage() throws IOException {
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.image));
         expect(this.page.getNumberOfElements()).andReturn(1).times(1);
-        expect(this.page.getNumber()).andReturn(0).times(14);
+        expect(this.page.getNumber()).andReturn(0).times(6);
         expect(this.page.getSize()).andReturn(10).times(2);
-        expect(this.page.getTotalPages()).andReturn(2).times(12);
+        expect(this.page.getTotalPages()).andReturn(2).times(6);
         expect(this.page.getTotalElements()).andReturn(2L).times(1);
         expect(this.page.hasContent()).andReturn(true).times(1);
         expect(this.image.getId()).andReturn("id/andSlash").times(7);
@@ -150,9 +150,9 @@ public class SolrImageSearchSAXStrategyTest {
     public void testToSAXLastPage() throws IOException {
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.image));
         expect(this.page.getNumberOfElements()).andReturn(1).times(1);
-        expect(this.page.getNumber()).andReturn(1).times(14);
+        expect(this.page.getNumber()).andReturn(1).times(6);
         expect(this.page.getSize()).andReturn(10).times(2);
-        expect(this.page.getTotalPages()).andReturn(2).times(10);
+        expect(this.page.getTotalPages()).andReturn(2).times(6);
         expect(this.page.getTotalElements()).andReturn(2L).times(1);
         expect(this.page.hasContent()).andReturn(true).times(1);
         expect(this.image.getId()).andReturn("id/andSlash").times(7);
