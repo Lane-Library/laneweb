@@ -51,7 +51,7 @@ public class ShibTester {
                 result.append("\n");
             }
         }
-        response.setHeader("Content-Type", "text/plain");
+        response.setContentType("text/plain");
         try {
             response.getOutputStream().write(result.toString().getBytes("UTF-8"));
         } catch (IOException e) {

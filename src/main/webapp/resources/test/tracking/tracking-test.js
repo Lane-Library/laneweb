@@ -55,7 +55,7 @@ Y.use("*",  function(){
 
         testFavoritesClick: function() {
             Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
-            var link = Y.one("#favorites a");
+            var link = Y.one(".favorites a");
             link.simulate("click");
             Y.lane.Model.set(Y.lane.Model.AUTH, null);
             Y.Assert.areEqual(link.get("text"), this.event.label);
@@ -90,7 +90,7 @@ Y.use("*",  function(){
         },
 
         testLaneNavClick: function() {
-            var link = Y.one("#laneNav a");
+            var link = Y.one(".lane-nav a");
             link.simulate("click");
             Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:laneNav-top", this.event.category);

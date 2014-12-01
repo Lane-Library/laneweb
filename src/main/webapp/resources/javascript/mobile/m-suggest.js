@@ -38,7 +38,12 @@ $.LANE.createAutocompleteObject = function(input) {
             });
         },
         delay : 150,
-        minLength : 3
+        minLength : 3,
+        position:{
+            my:"right top",
+            at:"left bottom",
+            collision:"fit none"
+        }
     };
 };
 
@@ -92,3 +97,4 @@ $("form").on("autocompleteselect", function(e, ui) {
         $(this).trigger('submit');
     }
 });
+

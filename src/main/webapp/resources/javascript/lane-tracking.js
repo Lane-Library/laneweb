@@ -10,13 +10,29 @@
                 searchTerms = event.newVal;
             });
             //TODO more thorough documentation
-            var getEventTrackingData = function(event) {
+            var getSearchResultsTrackingData = function(link) {
+                var trackingData = {}, list = link.ancestor(".lwSearchResults"),
+                    pageStart = Y.one("#pageStart");
+                    // pageStart is the value in the pageStart span or 1 if its not there.
+                pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
+                trackingData.value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
+                trackingData.label = link.get('text');
+                if (searchTerms) {
+                    trackingData.category = "lane:searchResultClick";
+                    trackingData.action = searchTerms;
+                } else {
+                    trackingData.category = "lane:browseResultClick";
+                    trackingData.action = location.get("pathname");
+                }
+                return trackingData;
+            },
+            getEventTrackingData = function(event) {
                 var i, link = event.target, trackingData = {},
                 handlers = [
-                            {selector:"#favorites", category:"lane:bookmarkClick"},
+                            {selector:".favorites", category:"lane:bookmarkClick"},
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
-                            {selector:"#laneNav", category:"lane:laneNav-top"},
+                            {selector:".lane-nav", category:"lane:laneNav-top"},
                             {selector:"#qlinks", category:"lane:quickLinkClick"},
                             {selector:".banner-content", category:"lane:bannerClick"},
                             {selector:".sectionMenu", category:"lane:laneNav-sectionMenu"},
@@ -50,22 +66,6 @@
                             }
                         }
                     }
-                }
-                return trackingData;
-            },
-            getSearchResultsTrackingData = function(link) {
-                var trackingData = {}, list = link.ancestor(".lwSearchResults"),
-                    pageStart = Y.one("#pageStart");
-                    // pageStart is the value in the pageStart span or 1 if its not there.
-                pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
-                trackingData.value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
-                trackingData.label = link.get('text');
-                if (searchTerms) {
-                    trackingData.category = "lane:searchResultClick";
-                    trackingData.action = searchTerms;
-                } else {
-                    trackingData.category = "lane:browseResultClick";
-                    trackingData.action = location.get("pathname");
                 }
                 return trackingData;
             },
@@ -249,7 +249,7 @@
                     }
                     if (node.hasClass('yui3-accordion-item-trigger')) {
                         title = 'Expandy:' + title;
-                    } else if (node.ancestor("#laneNav")) {
+                    } else if (node.ancestor(".lane-nav")) {
                         title = "laneNav: " + title;
                     }
                     //if there is rel="popup local" then add "pop-up" to the title
@@ -322,10 +322,12 @@
         }();
 
         Y.on('click', function(e) {
+            var t = e.target, setLocation = function() {
+                Lane.Location.set("href", t.get('href'));
+            };
             Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
             if (Y.UA.webkit && (Tracker.isTrackableAsPageview(e.target) || Tracker.isTrackableAsEvent(e))) {
-                    var t = e.target, f;
                     while (t) {
                         // have safari follow link if it's not:
                         //  - popup or facet
@@ -333,11 +335,8 @@
                         if (t.get('href') &&
                                 (!t.get('rel') && !t.get('target')) &&
                                 !t.get('parentNode').hasClass('searchFacet') ) {
-                            f = function() {
-                                Lane.Location.set("href", t.get('href'));
-                            };
                             e.preventDefault();
-                            setTimeout(f, 200);
+                            setTimeout(setLocation, 200);
                             break;
                         }
                         t = t.get('parentNode');
@@ -400,5 +399,5 @@
         Tracker.addTarget(Lane);
 
         Y.all(".searchFacet, .yui3-accordion-item-trigger, *[rel^='popup local']").setData("isTrackableAsPageView", true);
-        Y.all("#favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, #laneNav a, #laneFooter a, #qlinks a, .sectionMenu a, .banner-content a").setData("isTrackableAsEvent", true);
+        Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, #qlinks a, .sectionMenu a, .banner-content a").setData("isTrackableAsEvent", true);
 })();

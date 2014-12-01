@@ -3,25 +3,19 @@
     font-size:13px;
 }
 .view-by{
-    text-align:right;
-}
-.pagingButton{
-    position:relative;
     float:right;
-    cursor:pointer;
-    bottom:4px;
-    padding:4px 8px;
-    border:1px solid #dadad9;
-    border-radius:3px 3px 0 0;
-    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-    margin-left:6px;
     white-space:nowrap;
 }
-
-.pagingButton .fa{
-    margin-left:8px;
+.labelTitle{
+    display:inline-block;
+    width:156px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    vertical-align:bottom;
+    padding-left:4px;
+    box-sizing:border-box;
 }
-
+/*
 .content .pagingLabels{
     display:none;
     position:absolute;
@@ -41,12 +35,13 @@
 }
 .labelTitle{
     display:inline-block;
-    width:152px;
+    width:156px;
     overflow:hidden;
     text-overflow:ellipsis;
     vertical-align:bottom;
     padding-left:4px;
+    box-sizing:border-box;
 }
 .content .pagingLabels li{
     margin-right:0;
-}
+}*/

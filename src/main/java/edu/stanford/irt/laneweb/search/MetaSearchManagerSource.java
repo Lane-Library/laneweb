@@ -45,8 +45,8 @@ public class MetaSearchManagerSource {
         return this.searchCacheManager;
     }
 
-    public void reload(final String url, final String login, final String password) throws IOException {
-        AbstractXmlApplicationContext newContext = new HttpApplicationContext(url, login, password);
+    public void reload(final String url) throws IOException {
+        AbstractXmlApplicationContext newContext = new HttpApplicationContext(url);
         this.manager = newContext.getBean("manager", MetaSearchManager.class);
         this.httpClient = newContext.getBean("httpClient", HttpClient.class);
         this.searchCacheManager = newContext.getBean("searchCacheManager", SearchCacheManager.class);

@@ -24,16 +24,6 @@
 		}
 		, '#is-persistent-login');
 		
-		
-//		messageDiv.setStyle('display', 'none');
-//		
-//		Y.on('click', 	function(event) {
-//			
-//			messageDiv.setStyle('display', 'block');     
-//		}
-//		, '#show-message');
-//		
-
 	}
 	
 

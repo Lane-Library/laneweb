@@ -12,19 +12,20 @@
             queryMapper.on("success", function(queryMap) {
                 var i, span, labels = "",
                     resourceNames = [],
-                    resourceMap = queryMap.resourceMap;
+                    resourceMap = queryMap.resourceMap,
+                    appendHits = function() {
+                        span.one("a").set("href", this.url);
+                        if (this.status === "successful") {
+                            span.append(": " + this.hits + " ");
+                        }
+                    };
                 if (resourceMap) {
                     resources = resourceMap.resources;
                     for (i = 0; i < resources.length; i++) {
                         resourceNames.push(resources[i].id);
                         span = Y.Node.create('<span><a title="QueryMapping: ' + resources[i].label + '">' + resources[i].label + "</a></span>");
                         queryMapping.append(span);
-                        (new ResourceResultView(resources[i].id, function() {
-                            span.one("a").set("href", this.url);
-                            if (this.status === "successful") {
-                                span.append(": " + this.hits + " ");
-                            }
-                        }));
+                        (new ResourceResultView(resources[i].id, appendHits));
                         if (labels) {
                             labels += "; ";
                         }

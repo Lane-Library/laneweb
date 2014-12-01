@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class BibStatusGenerator extends AbstractGenerator implements ParametersA
 
     private static final MessageFormat RECORD_URL = new MessageFormat("cocoon://apps/bib/{0}/status.xml");
 
-    private Collection<String> bibIds;
+    private Collection<String> bibIds = Collections.emptySet();
 
     private String bibList;
 

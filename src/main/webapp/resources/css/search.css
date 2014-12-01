@@ -96,6 +96,39 @@
 li.active .description {
     display:block
 }
+/*.hoverTrigger class added by javascript (also removes .hvrTrig)*/
+.lwSearchResults .showAbstract {
+    margin-left:20px;
+}
+.hvrTrig:hover .showAbstract, .active .showAbstract {
+    display:none
+}
+.hvrTarg {
+    display:none;
+    margin-top:5px;
+    padding:2px;
+    border-top:1px dotted #CCCCCC;
+}
+.hoverTrigger, .hoverTrigger a {
+    cursor:help;
+}
+.hvrTrig:hover, .hoverTrigger.active {
+    background-color: #F2F3ED;
+    padding:4px;
+    border:1px solid
+}
+
+.hvrTrig:hover .hvrTarg, .hoverTrigger.active .hvrTarg {
+    display:block
+}
+
+.hoverTrigger.active {
+    cursor:default
+}
+.hoverTrigger.active a {
+    cursor:pointer
+}
+
 .citation{
     font-size:11px;
 }
@@ -118,14 +151,17 @@ li.active .description {
     font-style:italic;
 }
 .rightSearchTips {
-    padding-left:2px;
+    padding:0 12px;
+    white-space:nowrap;
 }
+
 .rightSearchTips .heading {
     font-weight: bold;
     padding: 10px 0 5px;
     border-bottom: solid 1px rgb(144,144,144);
     margin-bottom:4px;
 }
+
 .rightSearchTips ul {
     padding-left:0;
 }

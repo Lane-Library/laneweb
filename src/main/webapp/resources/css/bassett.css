@@ -45,10 +45,6 @@ div.paging {
     font-size: 10px;
     padding-left: 12px;
 }
-div.bassett-image{
-    width:100%;
-    padding-left: 10px;
-}
 div.bassett-image table{
     margin-bottom :30px;
     text-align: center;
@@ -62,26 +58,24 @@ div.bassett-image td#diagram-image {
 	vertical-align: top;
 }
 
-div.bassett-image table table td {
-	padding: 0;
-	padding-top: 3px;
-	padding-left: 2px;
+#legend td {
+	padding: 3px 0 0 2px;
 	text-align: left;
 	vertical-align: top;
 }
-div.bassett-image table table td.legend-title, div.bassett-image table table td.legend-sub-title {
+#legend .legend-title, #legend .legend-sub-title {
 	text-align: center;
 }
-div.bassett-image table table td.legend-title {
+#legend .legend-title {
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 1em;
 	color: #3F3C30;
 }
-div.bassett-image table table td.legend-sub-title {
+#legend .legend-sub-title {
 	padding-bottom: 5px;
 	font-style: italic;
 }
-div.bassett-image table table td.legend-description {
+#legend .legend-description {
 	padding-bottom: 15px;
 }

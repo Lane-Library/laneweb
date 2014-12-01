@@ -121,7 +121,7 @@
                     }
                     if (node.hasClass('yui3-accordion-item-trigger')) {
                         title = 'Expandy:' + title;
-                    } else if (node.ancestor("#laneNav")) {
+                    } else if (node.ancestor(".lane-nav")) {
                         title = "laneNav: " + title;
                     }
                     //if there is rel="popup local" then add "pop-up" to the title
@@ -194,7 +194,7 @@
             var rel = node.getAttribute("rel");
             return rel && rel.indexOf("popup local") === 0;
         },
-        
+
         _getTitleFromImg : function(node) {
             var i, title, img = node.all('img');
             if (img) {

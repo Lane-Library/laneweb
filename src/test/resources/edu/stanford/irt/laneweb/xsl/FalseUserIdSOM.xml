@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" id="login">
    <li>sunetid@stanford.edu</li>
-   <li id="favorites">
+   <li class="favorites">
       <a href="/favorites.html">My Bookmarks</a>
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                   href="cocoon://bookmarks/list.html">

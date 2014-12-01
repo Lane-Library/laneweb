@@ -161,7 +161,8 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "banner.js",
         "purchase-suggestions.js",
         "menu-delay.js",
-        "same-height.js"
+        "same-height.js",
+        "shibboleth-sfx.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:

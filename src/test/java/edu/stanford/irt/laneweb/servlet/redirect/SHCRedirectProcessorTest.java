@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.redirect;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.Collections;
 
@@ -32,5 +33,10 @@ public class SHCRedirectProcessorTest {
                 "http://www.guideline.gov/search/results.aspx?113=666&term=$1"));
         assertEquals("http://www.guideline.gov/search/results.aspx?113=666&term=femoral+fracture",
                 this.processor.getRedirectURL("/shc/radiology.html", "", "q=femoral+fracture"));
+    }
+    
+    @Test
+    public void testNotSHC() {
+        assertNull(this.processor.getRedirectURL("notshc", "basePath", "queryString"));
     }
 }

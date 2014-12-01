@@ -11,9 +11,9 @@
 }
 #subscribe input,#subscribe textarea,#subscribe select,#feedback input,#feedback textarea,#feedback select
 	{
-	box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 }
 #feedback textarea {
 	height: 150px;
@@ -38,6 +38,7 @@
 	height: 37px;
 	padding: 6px;
 	margin-top: 24px;
+	box-sizing:border-box;
 }
 #subscribe input:hover,#subscribe textarea:hover,#subscribe input:focus,#subscribe textarea:focus,#feedback input:hover,#feedback textarea:hover,#feedback input:focus,#feedback textarea:focus
 	{
@@ -124,21 +125,21 @@ div#persistent {
 	background-image: url('../images/organizations-logo-large.jpg');
 }
 
-#shibboleth-links .organization a#Stanford span{
+#Stanford span{
 background-position: -17px -23px;
 }
-#shibboleth-links .organization a#SHC span{
+#SHC span{
 background-position: -211px -23px;
 }
-#shibboleth-links .organization a#UHA span{
+#UHA span{
 background-position: -409px -17px;
 }
 
-#shibboleth-links .organization a#LPCH span{
+#LPCH span{
 background-position: -613px -18px;
 }
 
-#shibboleth-links .organization a#PCHA span{
+#PCHA span{
 background-position: -807px -18px;
 }
 
@@ -174,9 +175,9 @@ background-position: -807px -18px;
 .yui3-lightbox #feedbackItems {
 	background-color: white;
 	border: 2px solid #fff;
-	box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	-moz-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	-webkit-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
+    box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	/* For IE 8 */
 	-ms-filter:
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
@@ -192,14 +193,15 @@ background-position: -807px -18px;
 }
 .yui3-feedback-menu-active {
 	background-color: white;
-	width: 225px;
+	width: 250px;
+	box-sizing:border-box;
 	border-top: 2px solid #fff;
 	border-left: 2px solid #fff;
 	border-bottom: 2px solid #fff;
 	border-right: none;
-	box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	-moz-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	-webkit-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
+    box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	/* For IE 8 */
 	-ms-filter:
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
@@ -257,7 +259,8 @@ background-position: -807px -18px;
     margin-right : 10px;
     padding : 5px;
     text-align : right;
-    width : 30%;
+    width : 32%;
+    box-sizing:border-box;
 }
 .requiredField,
 .validatedField {

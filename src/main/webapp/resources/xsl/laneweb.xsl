@@ -222,7 +222,7 @@
 
     <!-- add 'current' class to li with a child a with current href -->
     <!-- TODO: reexamine this priority, should this be more specific?  -->
-    <xsl:template match="h:li[h:a/@href = $path][not(parent::h:ul[attribute::id='laneNav'])]" priority="-1">
+    <xsl:template match="h:li[h:a/@href = $path][not(parent::h:ul[attribute::class='lane-nav'])]" priority="-1">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:attribute name="class">
@@ -284,8 +284,8 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add clinical class to search form, fieldset and laneNav elements when clinical or peds is active -->
-    <xsl:template match="node()[@id='search' or @id='laneNav']">
+    <!-- add clinical class to search form, fieldset and lane-nav elements when clinical or peds is active -->
+    <xsl:template match="node()[@id='search']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
@@ -294,9 +294,22 @@
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="node()[@class='lane-nav']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class"/>
+                <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
+                    <xsl:text> clinical</xsl:text>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
 
-    <!-- add class="active" to laneNav li when the path matches -->
-    <xsl:template match="h:ul[attribute::id='laneNav']/h:li">
+    <!-- add class="active" to lane-nav li when the path matches -->
+    <xsl:template match="h:ul[attribute::class='lane-nav']/h:li">
         <xsl:variable name="link-content" select="child::h:a/text()"/>
         <xsl:variable name="active-tab" select="$laneNav-tabs/h:div[h:span[1]=$link-content]"/>
         <xsl:variable name="active" select="starts-with($path, $active-tab/h:span[2])"/>

@@ -22,7 +22,7 @@
             <map:match pattern="biomed-resources/bassett/raw/**.html" type="wildcard">
                 <map:aggregate type="default" element="doc">
                     <map:generate type="file" src="{content-base}/biomed-resources/bassett/{1}.html"/>
-                    <map:generate type="file" src="cocoon://content/biomed-resources/bassett/database"/>
+                    <map:generate type="file" src="cocoon://content/biomed-resources/bassett/database.xml"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="resources/xsl/bassett.xsl">
@@ -50,7 +50,7 @@
                 <map:transform type="saxon" src="resources/xsl/bassettAccordion.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match pattern="biomed-resources/bassett/database" type="wildcard">
+            <map:match pattern="biomed-resources/bassett/database.xml" type="wildcard">
                 <map:generate type="bassett"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -185,7 +185,7 @@
                     <map:generate type="search-engine">
                         <map:parameter name="synchronous" value="true"/>
                         <map:parameter name="timeout" value="20000"/>
-                        <map:parameter name="engines" value="pubmed_history,lmldb-history,cifdb-names,wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006,openlibrary-BillNorthwayHistory,openlibrary-40Careers,openlibrary-Graduates"/>
+                        <map:parameter name="engines" value="stanford-daily,pubmed_history,lmldb-history,cifdb-names,wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006,openlibrary-BillNorthwayHistory,openlibrary-40Careers,openlibrary-Graduates"/>
                     </map:generate>
                     <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>
