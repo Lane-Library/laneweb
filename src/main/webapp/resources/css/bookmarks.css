@@ -95,3 +95,16 @@ background-position: -600px -80px;
 #bookmarkSearch.bookmarking {
     cursor:wait;
 }
+/* next two are for the login required lightbox popup */
+.bookmark-login {
+    text-align:center;
+    padding: 30px;
+    width: 400px;
+    background-color:white
+}
+.bookmark-login-heading {
+    color: #414042;
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 28px;
+}
