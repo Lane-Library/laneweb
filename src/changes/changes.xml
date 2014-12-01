@@ -8,14 +8,14 @@
     </properties>
     <body>
         <release date="2014-12-01" version="2.3.6" description="2.3.6 bug fix release">
-            <action date="2014-12-01" dev="ceyates" issue="100415" type="add">
-                add Stanford Daily search engine to History search
-            </action>
             <action date="2014-11-25" dev="ceyates" issue="100729" type="fix">
                 mobile subset eresources not appearing
             </action>
             <action date="2014-11-25" dev="ryanmax" issue="100699" type="fix">
                 login problems for hospital users via SFX
+            </action>
+            <action date="2014-12-01" dev="ceyates" issue="100415" type="add">
+                add Stanford Daily search engine to History search
             </action>
             <action date="2014-11-24" dev="alainb" issue="100412" type="fix">
                 AAP links broken in peds search
