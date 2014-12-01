@@ -7,21 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2014-12-08" version="2.3.6" description="2.3.6 bug fix release">
-            <action date="2014-11-25" dev="ceyates" issue="100729" type="fix">
-                mobile subset eresources not appearing
-            </action>
+        <release date="2014-12-08" version="2.3.7" description="2.3.7 bug fix release">
             <action date="2014-??-??" dev="alainb" issue="100709" type="update">
                 updated logo, add text under the logos
             </action>
-            <action date="2014-11-25" dev="ryanmax" issue="100699" type="fix">
-                login problems for hospital users via SFX
-            </action>
             <action date="2014-11-19" dev="ceyates" issue="100573" type="update">
                 align Extend your Search drop down
-            </action>
-            <action date="2014-11-24" dev="alainb" issue="100412" type="fix">
-                AAP links broken in peds search
             </action>
             <action date="2014-11-26" dev="ceyates" issue="100350" type="update">
                 create print.css for proper printing
@@ -29,20 +20,11 @@
             <action date="2014-11-06" dev="ceyates" issue="100344" type="update">
                 dynamically change descriptionTrigger markup
             </action>
-            <action date="2014-11-25" dev="ceyates" issue="100310" type="add">
-                create search engine for Historical Articles in PubMed
-            </action>
-            <action date="2014-11-24" dev="ceyates" issue="100309" type="add">
-                create search engine for broad MeSH 'History of Medicine' in the catalog
-            </action>
             <action date="2014-11-29" dev="ceyates" issue="100266" type="add">
                 create css classes for common properties of drop down menus
             </action>
             <action date="2014-11-13" dev="ceyates" issue="100162" type="update">
                 change rightSearchTips to a drop down
-            </action>
-            <action date="2014-11-24" dev="ceyates" issue="99391" type="add">
-                create search engine for history search from cifdb to include people
             </action>
             <action date="2014-10-16" dev="ceyates" issue="99361" type="update">
                 add Lane Catalog Record link for catalog items
@@ -76,6 +58,26 @@
             </action>
             <action date="2014-10-06" dev="ceyates" issue="99349" type="update">
                 add result count to top of search and reformat start of search results
+            </action>
+        </release>
+        <release date="2014-11-24" version="2.3.6" description="2.3.6 bug fix release">
+            <action date="2014-11-25" dev="ceyates" issue="100729" type="fix">
+                mobile subset eresources not appearing
+            </action>
+            <action date="2014-11-25" dev="ryanmax" issue="100699" type="fix">
+                login problems for hospital users via SFX
+            </action>
+            <action date="2014-11-24" dev="alainb" issue="100412" type="fix">
+                AAP links broken in peds search
+            </action>
+            <action date="2014-11-25" dev="ceyates" issue="100310" type="add">
+                create search engine for Historical Articles in PubMed
+            </action>
+            <action date="2014-11-24" dev="ceyates" issue="100309" type="add">
+                create search engine for broad MeSH 'History of Medicine' in the catalog
+            </action>
+            <action date="2014-11-24" dev="ceyates" issue="99391" type="add">
+                create search engine for history search from cifdb to include people
             </action>
         </release>
         <release date="2014-11-24" version="2.3.5" description="2.3.5 bug fix release">
