@@ -19,9 +19,6 @@ public class PersistentLoginHandlerInterceptor extends HandlerInterceptorAdapter
             throws UnsupportedEncodingException, IOException {
         if (hasPersistentCookieSet(request)) {
             String req = request.getContextPath()+ request.getRequestURI();
-            if (req.indexOf("/secure/login.html")>-1 ) {
-                req = request.getContextPath()+ "/index.html";
-            }
             if (request.getQueryString() != null) {
                 req = req + "?" + request.getQueryString();
             }
