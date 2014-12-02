@@ -140,6 +140,15 @@
                 return this._bookmarks.length;
             },
 
+            hasURL : function(url) {
+                for (var i = 0; i < this._bookmarks.length; i++) {
+                    if (url === this._bookmarks[i].getUrl()) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+
             /**
              * @method indexOf
              * @param bookmark {Bookmark}

@@ -99,7 +99,8 @@ background-position: -600px -80px;
 .bookmark-login {
     text-align:center;
     padding: 30px;
-    width: 400px;
+    width: 460px;
+    box-sizing:border-box;
     background-color:white
 }
 .bookmark-login-heading {
