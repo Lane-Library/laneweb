@@ -145,10 +145,15 @@
 	display:inline;
 }
 
-
+.what-is-image-search{
+	position: absolute;
+	top: 33px;
+	left: 9px;
+}
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /*styles for  big gray gradient tabs*/
+
 
 
 #tabs-image-search .copyright-help{
