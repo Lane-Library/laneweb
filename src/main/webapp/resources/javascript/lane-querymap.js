@@ -17,24 +17,27 @@
             }
             return string;
         },
+        updatePageAndCheckForMore = function(results, resource) {
+            var needMore = false, result = results.resources[resource.id];
+            if (result !== undefined && result.url) {
+                resource.anchor.href = result.url;
+            }
+            if (result === undefined || !result.status) {
+                needMore = (results.status !== 'successful');
+            } else{
+                resource.status = result.status;
+                if (result.status === 'successful') {
+                    resource.anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
+                }
+            }
+            return needMore;
+        },
         resultSuccess = function(id, o) {
             var results = Y.JSON.parse(o.responseText),
-            i, needMore = false, result;
+            i, needMore = false;
         for (i = 0; i < queryMapResources.length; i++) {
             if (!queryMapResources[i].status) {
-                result = results.resources[queryMapResources[i].id];
-                if (result !== undefined && result.url) {
-                    queryMapResources[i].anchor.href = result.url;
-                }
-                if (result === undefined || !result.status) {
-                    needMore = (results.status !== 'successful');
-                }
-                else{
-                    queryMapResources[i].status = result.status;
-                    if (result.status === 'successful') {
-                        queryMapResources[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
-                    }
-                }
+                needMore = updatePageAndCheckForMore(results, queryMapResources[i]);
             }
         }
         if (needMore) {

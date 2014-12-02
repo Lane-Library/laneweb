@@ -183,7 +183,7 @@
              * @returns {Boolean}
              */
             _isAlreadyBookmarked : function(target) {
-                var url, i, bookmarks, size, query;
+                var url, bookmarks, query;
                 target.plug(Lane.LinkPlugin);
                 if (target.link.get("local")) {
                     url = target.link.get("path");
@@ -194,12 +194,7 @@
                 }
                 bookmarks = this.get("bookmarks");
                 if (bookmarks) {
-                    size = bookmarks.size();
-                    for (i = 0; i < size; i++) {
-                        if (url === bookmarks.getBookmark(i).getUrl()) {
-                            return true;
-                        }
-                    }
+                    return bookmarks.hasURL(url);
                 }
                 return false;
             },

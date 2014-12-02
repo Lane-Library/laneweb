@@ -26,8 +26,8 @@
                 }
                 return trackingData;
             },
-            getEventTrackingData = function(event) {
-                var i, link = event.target, trackingData = {},
+            getEventTrackingDataByAncestor = function(link) {
+                var i, trackingData = {},
                 handlers = [
                             {selector:".favorites", category:"lane:bookmarkClick"},
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
@@ -38,6 +38,23 @@
                             {selector:".sectionMenu", category:"lane:laneNav-sectionMenu"},
                             {selector:"#laneFooter", category:"lane:laneNav-footer"}
                             ];
+                //TODO: this counts My Bookmarks clicks as well: check if href=/favorites.html and skip?
+                for (i = 0; i < handlers.length; i++) {
+                    if (link.ancestor(handlers[i].selector)) {
+                        trackingData.category = handlers[i].category;
+                        if (trackingData.category === "lane:bookmarkClick") {
+                            trackingData.action = model.get(model.AUTH);
+                            trackingData.label = Tracker.getTrackedTitle(link);
+                        } else {
+                            trackingData.action = link.get('href');
+                            trackingData.label = link.get('text');
+                        }
+                    }
+                }
+                return trackingData;
+            },
+            getEventTrackingData = function(event) {
+                var link = event.target, trackingData = {};
                 while (link && link.get('nodeName') !== 'A') {
                     link = link.get('parentNode');
                 }
@@ -53,19 +70,7 @@
                     trackingData.action = link.get('href');
                     trackingData.label = link.get('title');
                 } else {
-                    //TODO: this counts My Bookmarks clicks as well: check if href=/favorites.html and skip?
-                    for (i = 0; i < handlers.length; i++) {
-                        if (link.ancestor(handlers[i].selector)) {
-                            trackingData.category = handlers[i].category;
-                            if (trackingData.category === "lane:bookmarkClick") {
-                                trackingData.action = model.get(model.AUTH);
-                                trackingData.label = Tracker.getTrackedTitle(link);
-                            } else {
-                                trackingData.action = link.get('href');
-                                trackingData.label = link.get('text');
-                            }
-                        }
-                    }
+                    trackingData = getEventTrackingDataByAncestor(link);
                 }
                 return trackingData;
             },

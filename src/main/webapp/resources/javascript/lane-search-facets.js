@@ -39,7 +39,22 @@
                 }
             }
         };
-    }();
+    }(),
+    setFacetResult = function(facet) {
+        var id = facet.get("id");
+        if (id.match("Facet$") && !facet.hasClass('inactiveFacet')) {
+            type = id.substring(0, id.indexOf('-'));
+            source = id.substring(0, id.indexOf('Facet'));
+            if (type) {
+                facet.setData('result', new Result(type, source, facet, container));
+                if (facet.hasClass('current')) {
+                    facet.getData('result').setContent(container.get('innerHTML'));
+                    SearchFacets.setCurrentResult(facet.getData('result'));
+                }
+                Y.on('click', clickHandler, facet);
+            }
+        }
+    };
 
     //TODO: remove the following line when no longer need global reference
     Y.lane.SearchFacets = SearchFacets;
@@ -118,18 +133,7 @@
         if (elt) {
             facets = elt.all('.searchFacet');
             for (i = 0; i < facets.size(); i++) {
-                if (facets.item(i).get('id').match("Facet$") && !facets.item(i).hasClass('inactiveFacet')) {
-                    type = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('-'));
-                    source = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('Facet'));
-                    if (type) {
-                        facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
-                        if (facets.item(i).hasClass('current')) {
-                            facets.item(i).getData('result').setContent(container.get('innerHTML'));
-                            SearchFacets.setCurrentResult(facets.item(i).getData('result'));
-                        }
-                        Y.on('click', clickHandler, facets.item(i));
-                    }
-                }
+                setFacetResult(facets.item(i));
             }
         }
 })();

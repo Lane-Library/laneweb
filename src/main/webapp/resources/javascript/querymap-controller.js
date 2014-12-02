@@ -18,18 +18,21 @@
                         if (this.status === "successful") {
                             span.append(": " + this.hits + " ");
                         }
+                    },
+                    createView = function(resource) {
+                        resourceNames.push(resource.id);
+                        span = Y.Node.create('<span><a title="QueryMapping: ' + resource.label + '">' + resource.label + "</a></span>");
+                        queryMapping.append(span);
+                        (new ResourceResultView(resource.id, appendHits));
+                        if (labels) {
+                            labels += "; ";
+                        }
+                        labels += resource.label;
                     };
                 if (resourceMap) {
                     resources = resourceMap.resources;
                     for (i = 0; i < resources.length; i++) {
-                        resourceNames.push(resources[i].id);
-                        span = Y.Node.create('<span><a title="QueryMapping: ' + resources[i].label + '">' + resources[i].label + "</a></span>");
-                        queryMapping.append(span);
-                        (new ResourceResultView(resources[i].id, appendHits));
-                        if (labels) {
-                            labels += "; ";
-                        }
-                        labels += resources[i].label;
+                        createView(resources[i]);
                     }
                     resourceSearch.once("update", function() {
                         Y.fire("lane:popin", queryMapping);
