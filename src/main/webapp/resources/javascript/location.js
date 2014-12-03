@@ -8,6 +8,6 @@
 
     Y.lane.Location = new Location(window);
 
-    Y.lane.TopLocation = new Location(top);
+    Y.lane.TopLocation = new Location(window.top);
 
 })();
