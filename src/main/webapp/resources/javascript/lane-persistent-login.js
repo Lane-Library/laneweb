@@ -22,7 +22,7 @@
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(event.target.get('href'));
-			getPopup(basePath + '/plain/persistent-extension-popup.html');
+			getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
 		}
 	};
 
