@@ -87,6 +87,7 @@ div#persistent {
 	margin-top: 35px;
 	font-weight: bold;
 	margin-left: 20px;
+	margin-right: 10px;
 }
 
 #persistent .is-persistent input{
