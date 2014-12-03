@@ -12,29 +12,29 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;
 
-public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearchResult>, Resource {
+public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearchResult> {
 
     @Override
     public void toSAX(final ContentResultSearchResult result, final XMLConsumer xmlConsumer) {
         ContentResult contentResult = result.getContentResult();
         Result resourceResult = result.getResourceResult();
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(result.getScore()));
-        atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
+        atts.addAttribute(Resource.EMPTY_NS, Resource.SCORE, Resource.SCORE, Resource.CDATA, Integer.toString(result.getScore()));
+        atts.addAttribute(Resource.EMPTY_NS, Resource.TYPE, Resource.TYPE, Resource.CDATA, "searchContent");
         try {
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
-            maybeCreateElement(xmlConsumer, RESOURCE_ID, resourceResult.getId());
-            maybeCreateElement(xmlConsumer, RESOURCE_NAME, resourceResult.getDescription());
-            maybeCreateElement(xmlConsumer, RESOURCE_URL, resourceResult.getURL());
-            maybeCreateElement(xmlConsumer, RESOURCE_HITS, resourceResult.getHits());
-            maybeCreateElement(xmlConsumer, ID, contentResult.getId());
-            maybeCreateElement(xmlConsumer, CONTENT_ID, contentResult.getContentId());
-            maybeCreateElement(xmlConsumer, TITLE, contentResult.getTitle());
-            maybeCreateElement(xmlConsumer, DESCRIPTION, contentResult.getDescription());
-            maybeCreateElement(xmlConsumer, AUTHOR, contentResult.getAuthor());
-            maybeCreateElement(xmlConsumer, URL, contentResult.getURL());
-            maybeCreateElement(xmlConsumer, PUBLICATION_TEXT, contentResult.getPublicationText());
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
+            XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESULT, atts);
+            maybeCreateElement(xmlConsumer, Resource.RESOURCE_ID, resourceResult.getId());
+            maybeCreateElement(xmlConsumer, Resource.RESOURCE_NAME, resourceResult.getDescription());
+            maybeCreateElement(xmlConsumer, Resource.RESOURCE_URL, resourceResult.getURL());
+            maybeCreateElement(xmlConsumer, Resource.RESOURCE_HITS, resourceResult.getHits());
+            maybeCreateElement(xmlConsumer, Resource.ID, contentResult.getId());
+            maybeCreateElement(xmlConsumer, Resource.CONTENT_ID, contentResult.getContentId());
+            maybeCreateElement(xmlConsumer, Resource.TITLE, contentResult.getTitle());
+            maybeCreateElement(xmlConsumer, Resource.DESCRIPTION, contentResult.getDescription());
+            maybeCreateElement(xmlConsumer, Resource.AUTHOR, contentResult.getAuthor());
+            maybeCreateElement(xmlConsumer, Resource.URL, contentResult.getURL());
+            maybeCreateElement(xmlConsumer, Resource.PUBLICATION_TEXT, contentResult.getPublicationText());
+            XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.RESULT);
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
@@ -43,7 +43,7 @@ public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearch
     private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value)
             throws SAXException {
         if (value != null && !"".equals(value)) {
-            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, name, value);
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, name, value);
         }
     }
 }

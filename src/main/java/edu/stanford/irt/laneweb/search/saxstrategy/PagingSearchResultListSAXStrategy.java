@@ -18,9 +18,7 @@ import edu.stanford.irt.laneweb.search.SearchResult;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.impl.Result;
 
-public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSearchResultList>, Resource {
-
-    private static final String CDATA = "CDATA";
+public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSearchResultList> {
 
     private static final String LENGTH = "length";
 
@@ -42,26 +40,26 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
         int length = pagingData.getLength();
         try {
             xmlConsumer.startDocument();
-            xmlConsumer.startPrefixMapping("", NAMESPACE);
+            xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(list.size()));
-            atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(start));
-            atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(length));
-            atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(pagingData.getPage()));
-            atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(pagingData.getPages()));
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCES, atts);
+            atts.addAttribute(Resource.EMPTY_NS, Resource.SIZE, Resource.SIZE, Resource.CDATA, Integer.toString(list.size()));
+            atts.addAttribute(Resource.EMPTY_NS, START, START, Resource.CDATA, Integer.toString(start));
+            atts.addAttribute(Resource.EMPTY_NS, LENGTH, LENGTH, Resource.CDATA, Integer.toString(length));
+            atts.addAttribute(Resource.EMPTY_NS, PAGE, PAGE, Resource.CDATA, Integer.toString(pagingData.getPage()));
+            atts.addAttribute(Resource.EMPTY_NS, PAGES, PAGES, Resource.CDATA, Integer.toString(pagingData.getPages()));
+            XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCES, atts);
             String query = list.getQuery();
             if (query != null) {
-                XMLUtils.startElement(xmlConsumer, NAMESPACE, QUERY);
+                XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.QUERY);
                 XMLUtils.data(xmlConsumer, query);
-                XMLUtils.endElement(xmlConsumer, NAMESPACE, QUERY);
+                XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.QUERY);
             }
             hitCountsToSAX(xmlConsumer, list);
             int i = 0;
             for (ListIterator<SearchResult> it = list.listIterator(start); it.hasNext() && i < length; i++) {
                 this.saxStrategy.toSAX(it.next(), xmlConsumer);
             }
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCES);
+            XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCES);
             xmlConsumer.endPrefixMapping("");
             xmlConsumer.endDocument();
         } catch (SAXException e) {
@@ -70,7 +68,7 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
     }
 
     private void hitCountsToSAX(final XMLConsumer xmlConsumer, final PagingSearchResultList list) throws SAXException {
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
+        XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.CONTENT_HIT_COUNTS);
         Set<Result> countedResources = new HashSet<Result>();
         for (SearchResult resource : list) {
             if (resource instanceof ContentResultSearchResult) {
@@ -78,14 +76,14 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
                 if (!countedResources.contains(resourceResult)) {
                     countedResources.add(resourceResult);
                     AttributesImpl atts = new AttributesImpl();
-                    atts.addAttribute(EMPTY_NS, RESOURCE_ID, RESOURCE_ID, CDATA, resourceResult.getId());
-                    atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, CDATA, resourceResult.getHits());
-                    atts.addAttribute(EMPTY_NS, RESOURCE_URL, RESOURCE_URL, CDATA, resourceResult.getURL());
-                    XMLUtils.startElement(xmlConsumer, NAMESPACE, RESOURCE, atts);
-                    XMLUtils.endElement(xmlConsumer, NAMESPACE, RESOURCE);
+                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_ID, Resource.RESOURCE_ID, Resource.CDATA, resourceResult.getId());
+                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_HITS, Resource.RESOURCE_HITS, Resource.CDATA, resourceResult.getHits());
+                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_URL, Resource.RESOURCE_URL, Resource.CDATA, resourceResult.getURL());
+                    XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE, atts);
+                    XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE);
                 }
             }
         }
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, CONTENT_HIT_COUNTS);
+        XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.CONTENT_HIT_COUNTS);
     }
 }

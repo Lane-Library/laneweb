@@ -3,147 +3,151 @@ package edu.stanford.irt.laneweb.model;
 /**
  * Model for sitemap components.
  */
-public interface Model {
+public abstract class Model {
 
-    String ACTION = "action";
+    public static final String ACTION = "action";
 
-    String ALPHA = "alpha";
+    public static final String ALPHA = "alpha";
 
-    String AUTH = "auth";
+    public static final String AUTH = "auth";
 
-    String BANNER = "banner";
+    public static final String BANNER = "banner";
 
-    String BASE_PATH = "base-path";
+    public static final String BASE_PATH = "base-path";
 
-    String BASE_PROXY_URL = "base-proxy-url";
+    public static final String BASE_PROXY_URL = "base-proxy-url";
 
-    String BASSETT_NUMBER = "basset-number";
+    public static final String BASSETT_NUMBER = "basset-number";
 
-    String BOOKMARKS = "bookmarks";
+    public static final String BOOKMARKS = "bookmarks";
 
-    String CALLBACK = "callback";
+    public static final String CALLBACK = "callback";
 
-    String CATEGORY = "category";
+    public static final String CATEGORY = "category";
 
-    String CLASS_ID = "class-id";
+    public static final String CLASS_ID = "class-id";
 
-    String CONTENT_BASE = "content-base";
+    public static final String CONTENT_BASE = "content-base";
 
-    String DEBUG = "debug";
+    public static final String DEBUG = "debug";
 
-    String DISASTER_MODE = "disaster-mode";
+    public static final String DISASTER_MODE = "disaster-mode";
 
-    String EMAIL = "email";
+    public static final String EMAIL = "email";
 
-    String EMRID = "emrid";
+    public static final String EMRID = "emrid";
 
-    String ENGINES = "engines";
+    public static final String ENGINES = "engines";
 
-    String ENTRY_URL = "entry-url";
+    public static final String ENTRY_URL = "entry-url";
 
-    String EXPIRES = "expires";
+    public static final String EXPIRES = "expires";
 
-    String FACETS = "facets";
+    public static final String FACETS = "facets";
 
-    String HOST = "host";
+    public static final String HOST = "host";
 
-    String ID = "id";
+    public static final String ID = "id";
 
-    String IPGROUP = "ipgroup";
+    public static final String IPGROUP = "ipgroup";
 
-    String IS_ACTIVE_SUNETID = "isActiveSunetID";
+    public static final String IS_ACTIVE_SUNETID = "isActiveSunetID";
 
-    String ITEMS = "items";
+    public static final String ITEMS = "items";
 
-    String LIMIT = "limit";
+    public static final String LIMIT = "limit";
 
-    String LIVE_CHAT_AVAILABLE = "live-chat-available";
+    public static final String LIVE_CHAT_AVAILABLE = "live-chat-available";
 
-    String MESH = "mesh";
+    public static final String MESH = "mesh";
 
-    String MODEL = "model";
+    public static final String MODEL = "model";
 
-    String NAME = "name";
+    public static final String NAME = "name";
 
-    String PAGE = "page";
+    public static final String PAGE = "page";
 
-    String PAGE_NUMBER = "pageNumber";
+    public static final String PAGE_NUMBER = "pageNumber";
 
-    String PARAMETER_MAP = "parameter-map";
+    public static final String PARAMETER_MAP = "parameter-map";
 
-    String PASSWORD = "password";
+    public static final String PASSWORD = "password";
 
-    String PERSISTENT_LOGIN = "persistent-login";
+    public static final String PERSISTENT_LOGIN = "persistent-login";
 
-    String PERSISTENT_LOGIN_EXPIRATION_DATE = "lane-login-expiration-date";
+    public static final String PERSISTENT_LOGIN_EXPIRATION_DATE = "lane-login-expiration-date";
 
-    String PID = "pid";
+    public static final String PID = "pid";
 
-    String PROXY_LINKS = "proxy-links";
+    public static final String PROXY_LINKS = "proxy-links";
 
-    String QUERY = "query";
+    public static final String QUERY = "query";
 
-    String QUERY_STRING = "query-string";
+    public static final String QUERY_STRING = "query-string";
 
-    String REFERRER = "referrer";
+    public static final String REFERRER = "referrer";
 
-    String REGION = "region";
+    public static final String REGION = "region";
 
-    String RELEASE = "release";
+    public static final String RELEASE = "release";
 
-    String REMOTE_ADDR = "remote-addr";
+    public static final String REMOTE_ADDR = "remote-addr";
 
-    String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
+    public static final String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
 
-    String REQUEST_URI = "request-uri";
+    public static final String REQUEST_URI = "request-uri";
 
-    String RESOURCE_ID = "rid";
+    public static final String RESOURCE_ID = "rid";
 
-    String RESOURCES = "resources";
+    public static final String RESOURCES = "resources";
 
-    String RETURN = "return";
+    public static final String RETURN = "return";
 
-    String SELECTION = "selection";
+    public static final String SELECTION = "selection";
 
-    String SHOW = "show";
+    public static final String SHOW = "show";
 
-    String SITEMAP_URI = "sitemap-uri";
+    public static final String SITEMAP_URI = "sitemap-uri";
 
-    String SOURCE = "source";
+    public static final String SOURCE = "source";
 
-    String SOURCEID = "sourceid";
+    public static final String SOURCEID = "sourceid";
 
-    String SUBSET = "subset";
+    public static final String SUBSET = "subset";
 
-    String SYNCHRONOUS = "synchronous";
+    public static final String SYNCHRONOUS = "synchronous";
 
-    String TEMPLATE = "template";
+    public static final String TEMPLATE = "template";
 
-    String TEXT = "text";
+    public static final String TEXT = "text";
 
-    String TICKET = "ticket";
+    public static final String TICKET = "ticket";
 
-    String TIMEOUT = "timeout";
+    public static final String TIMEOUT = "timeout";
 
-    String TITLE = "title";
+    public static final String TITLE = "title";
 
-    String TODAYS_HOURS = "todays-hours";
+    public static final String TODAYS_HOURS = "todays-hours";
 
-    String TYPE = "type";
+    public static final String TYPE = "type";
 
-    String UNIVID = "univid";
+    public static final String UNIVID = "univid";
 
-    String URL = "url";
+    public static final String URL = "url";
 
-    String URL_ENCODED_QUERY = "url-encoded-query";
+    public static final String URL_ENCODED_QUERY = "url-encoded-query";
 
-    String USER = "user";
+    public static final String USER = "user";
 
-    String USER_AGENT = "user-agent";
+    public static final String USER_AGENT = "user-agent";
 
-    String USER_COOKIE = "user-cookie";
+    public static final String USER_COOKIE = "user-cookie";
 
-    String USER_ID = "userid";
+    public static final String USER_ID = "userid";
 
-    String VERSION = "version";
+    public static final String VERSION = "version";
+
+    private Model() {
+        //private constructior
+    }
 }
