@@ -141,8 +141,6 @@ public abstract class Model {
 
     public static final String USER_AGENT = "user-agent";
 
-    public static final String USER_COOKIE = "user-cookie";
-
     public static final String USER_ID = "userid";
 
     public static final String VERSION = "version";
