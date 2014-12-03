@@ -69,7 +69,6 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:text>?</xsl:text>
-                                <!-- TODO not including proxy-links in query-string now so this is probably not necessary -->
                                 <xsl:analyze-string select="$query-string" regex="(.*)(proxy-links=true)(.*)">
                                     <xsl:matching-substring>
                                         <xsl:value-of select="concat(regex-group(1), 'proxy-links=false', regex-group(3))"/>
