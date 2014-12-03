@@ -49,8 +49,6 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
         expect(this.cookie.getValue()).andReturn(
                 Long.toString(System.currentTimeMillis() + (1000 * 60 * 60 * 24) + 100));
-//        expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
-//        expect(this.cookie.getValue()).andReturn("value");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
         assertEquals("1", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
