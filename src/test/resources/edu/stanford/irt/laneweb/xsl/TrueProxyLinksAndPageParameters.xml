@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" id="login">
    <li>
-      <a href="/secure/login.html?url=%3Fproxy-links%3Dtrue%26page%3D1">MyLane login</a>
+      <a href="/secure/login.html?url=%3Fpage%3D1">MyLane login</a>
    </li>
    <li>
       <a href="?proxy-links=false&amp;page=1">Guest Access</a>

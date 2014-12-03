@@ -117,14 +117,16 @@
                     <xsl:value-of select="encode-for-uri($request-uri)" />
                     <xsl:if test="string-length($query-string) != 0">
                         <xsl:variable name="no-proxylinks-query">
-                            <xsl:analyze-string select="$query-string" regex="(.*)((&amp;|)(proxy-links=(true|false))(&amp;|))(.*)">
-                                <xsl:matching-substring>
-                                    <xsl:value-of select="concat(regex-group(1), regex-group(7))"/>
-                                </xsl:matching-substring>
-                                <xsl:non-matching-substring>
-                                    <xsl:value-of select="$query-string" />
-                                </xsl:non-matching-substring>
-                            </xsl:analyze-string>
+                            <xsl:for-each select="tokenize($query-string, '&amp;')">
+                                <xsl:analyze-string select="." regex="proxy-links=(true|false)">
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="."/>
+                                        <xsl:if test="not(position() = last())">
+                                            <xsl:text>&amp;</xsl:text>
+                                        </xsl:if>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
+                            </xsl:for-each>
                         </xsl:variable>
                         <xsl:if test="string-length($no-proxylinks-query) != 0">
                             <xsl:value-of select="encode-for-uri(concat('?', $no-proxylinks-query))"/>
