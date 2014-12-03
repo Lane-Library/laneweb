@@ -12,7 +12,7 @@
         shibbLinks.all('a').each(function(node) {
             if (node.get('href').match(/stanfordmed|sch-sts/)) {
                 node.on("click", function() {
-                    Y.lane.TopLocation.set('href',this.get('href'));
+                    top.location.href = this.get('href');
                 }, this);
             }
         });
