@@ -51,7 +51,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
         this.transformer.setParameter(Model.QUERY_STRING, "proxy-links=false");
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("FalseZeroOther.xml"), sw.toString());
+        assertEquals(getExpectedResult("FalseZeroOtherProxyLink.xml"), sw.toString());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
         this.transformer.setParameter(Model.QUERY_STRING, "something=else");
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("FalseQuerySomethingElseProxyLinks.xml"), sw.toString());
+        assertEquals(getExpectedResult("FalseQuerySomethingElse.xml"), sw.toString());
     }
     
     @Test
@@ -126,7 +126,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
         this.transformer.setParameter(Model.QUERY_STRING, "proxy-links=true");
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("TrueZeroOther.xml"), sw.toString());
+        assertEquals(getExpectedResult("TrueZeroOtherWithQueryString.xml"), sw.toString());
     }
 
     @Test
@@ -137,7 +137,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
         this.transformer.setParameter(Model.QUERY_STRING, "something=else");
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("TrueQuerySomethingElseProxyLinks.xml"), sw.toString());
+        assertEquals(getExpectedResult("TrueQuerySomethingElseWithoutProxyLinks.xml"), sw.toString());
     }
 
     @Test
@@ -181,4 +181,15 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("TrueZeroSOM.xml"), sw.toString());
     }
+    
+    @Test
+    public void testUrlRedirect() throws TransformerException, IOException {
+        StringWriter sw = new StringWriter();
+        Result result = new StreamResult(sw);
+        this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=true");
+        this.transformer.setParameter(Model.REQUEST_URI, "/redirectPath");
+        this.transformer.transform(this.source, result);
+        assertEquals(getExpectedResult("urlRedirect.xml"), sw.toString());
+    }
+
 }
