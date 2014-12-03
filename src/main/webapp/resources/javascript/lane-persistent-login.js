@@ -1,11 +1,13 @@
 (function() {
 
 	var model = Y.lane.Model, redirectUrl ,
+	persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'), 
 	basePath = model.get(model.BASE_PATH)|| "",  
 	location = Y.lane.Location,
+	now = new Date(), 
 	// isStanfordActive == true only if user is from stanford and is active in the LDAP
 	// See UserDataBinder.java
-	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID)
+	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
 	basePath = model.get(model.BASE_PATH)|| "", 
 	drMode = model.get(model.DISASTER_MODE);
 	
