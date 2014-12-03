@@ -71,7 +71,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
         Result result = new StreamResult(sw);
         this.transformer.setParameter(Model.PROXY_LINKS, "false");
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
-        this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=false");
+        this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=false&param=onemore");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("FalseQuerySomethingElseProxyLinks.xml"), sw.toString());
     }
@@ -186,7 +186,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
     public void testUrlRedirect() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
-        this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=true");
+        this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=true&param=onemore");
         this.transformer.setParameter(Model.REQUEST_URI, "/redirectPath");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("urlRedirect.xml"), sw.toString());
