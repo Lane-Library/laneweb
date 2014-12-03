@@ -17,16 +17,21 @@ public class PersistentLoginHandlerInterceptor extends HandlerInterceptorAdapter
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, java.lang.Object handler)
             throws UnsupportedEncodingException, IOException {
+        String req = request.getContextPath() + request.getRequestURI();
+        if (req.contains("/secure/login.html")) {
+            req = request.getParameter("url");
+        } else if (request.getQueryString() != null) {
+            req = req + "?" + request.getQueryString();
+        }
         if (hasPersistentCookieSet(request)) {
-            String req = request.getContextPath()+ request.getRequestURI();
-            if (request.getQueryString() != null) {
-                req = req + "?" + request.getQueryString();
-            }
             Cookie cookie = new Cookie(IS_PERSISTENT_COOKIE_NAME, null);
             cookie.setPath("/");
             cookie.setMaxAge(0);
             response.addCookie(cookie);
-            response.sendRedirect(request.getContextPath()+"/secure/persistentLogin.html?pl=true&url=" + URLEncoder.encode(req, "UTF-8"));
+            response.sendRedirect(request.getContextPath() + "/secure/persistentLogin.html?pl=true&url="+ URLEncoder.encode(req, "UTF-8"));
+            return false;
+        } else if (request.getRequestURI().contains("/secure/login.html")) {
+            response.sendRedirect(req);
             return false;
         }
         return true;

@@ -26,11 +26,23 @@
                     <xsl:value-of select="$userid"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="child::node()"/>
+                		<xsl:apply-templates select="child::node()"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="h:a[contains(attribute::href,'/secure/login.html')]/@href">
+		<xsl:attribute name="href">
+ 		 	<xsl:copy-of select="."></xsl:copy-of>
+              <xsl:text>?url=</xsl:text>
+              <xsl:value-of select="encode-for-uri(concat($base-path, $request-uri))" />
+              <xsl:if test="string-length($query-string) != 0">
+              	<xsl:text>%3F</xsl:text> 
+              	<xsl:value-of select="encode-for-uri($query-string)" />
+              </xsl:if>
+          </xsl:attribute>
+	</xsl:template>
     
     <!-- the 2nd #login li is the link to the bookmarks page -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[2]">
