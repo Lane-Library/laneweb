@@ -9,19 +9,15 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
             testFramedSHC: function() {
                 if (window.self !== window.top) {
                     var shc = Y.one("#SHC");
-                    var currentTopHref = Y.lane.TopLocation.get("href");
-                    var newHref = "";
-                    var hrefChangeHandle = Y.lane.TopLocation.on("hrefChange", function(event) {
-                        event.preventDefault();
-                        newHref = event.newVal;
-                    });
+                    var currentTopHref = window.top.location.href;
+                    window.onbeforeunload = function(e) {
+                        e.preventDefault();
+                        Y.Assert.isTrue(e.target.location.href != currentTopHref);
+                    }
                     var clickHandle = shc.on("click", function(event) {
                         event.preventDefault();
                     });
                     shc.simulate("click");
-                    Y.Assert.isTrue(newHref != currentTopHref);
-                    Y.Assert.isTrue(newHref.indexOf("adfs.stanfordmed.org") > -1);
-                    hrefChangeHandle.detach();
                     clickHandle.detach();
                 }
             }
