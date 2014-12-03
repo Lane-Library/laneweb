@@ -111,6 +111,26 @@
                 <xsl:when test="$link = '/secure/login.html' and $userid">
                     <xsl:text>/myaccounts.html</xsl:text>
                 </xsl:when>
+                <xsl:when test="$link = '/secure/login.html'">
+                    <xsl:copy-of select="."/>
+                    <xsl:text>?url=</xsl:text>
+                    <xsl:value-of select="encode-for-uri($request-uri)" />
+                    <xsl:if test="string-length($query-string) != 0">
+                        <xsl:variable name="no-proxylinks-query">
+                            <xsl:analyze-string select="$query-string" regex="(.*)((&amp;|)(proxy-links=(true|false))(&amp;|))(.*)">
+                                <xsl:matching-substring>
+                                    <xsl:value-of select="concat(regex-group(1), regex-group(7))"/>
+                                </xsl:matching-substring>
+                                <xsl:non-matching-substring>
+                                    <xsl:value-of select="$query-string" />
+                                </xsl:non-matching-substring>
+                            </xsl:analyze-string>
+                        </xsl:variable>
+                        <xsl:if test="string-length($no-proxylinks-query) != 0">
+                            <xsl:value-of select="encode-for-uri(concat('?', $no-proxylinks-query))"/>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$link"/>
                 </xsl:otherwise>

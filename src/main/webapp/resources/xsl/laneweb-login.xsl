@@ -32,18 +32,6 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:a[contains(attribute::href,'/secure/login.html')]/@href">
-		<xsl:attribute name="href">
- 		 	<xsl:copy-of select="."></xsl:copy-of>
-              <xsl:text>?url=</xsl:text>
-              <xsl:value-of select="encode-for-uri(concat($base-path, $request-uri))" />
-              <xsl:if test="string-length($query-string) != 0">
-              	<xsl:text>%3F</xsl:text> 
-              	<xsl:value-of select="encode-for-uri($query-string)" />
-              </xsl:if>
-          </xsl:attribute>
-	</xsl:template>
-    
     <!-- the 2nd #login li is the link to the bookmarks page -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[2]">
         <xsl:if test="string-length($userid) &gt; 0">
@@ -81,6 +69,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:text>?</xsl:text>
+                                <!-- TODO not including proxy-links in query-string now so this is probably not necessary -->
                                 <xsl:analyze-string select="$query-string" regex="(.*)(proxy-links=true)(.*)">
                                     <xsl:matching-substring>
                                         <xsl:value-of select="concat(regex-group(1), 'proxy-links=false', regex-group(3))"/>
