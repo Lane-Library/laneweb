@@ -26,26 +26,37 @@
 }
 
 /*---------------feedback button graphic at the edge of a browser window----------------------*/
-#feedbackLink {
+.feedback-link {
 	position: fixed;
-	top: 45%;
+	top: 50%;
 	right: 0;
-	z-index: 1
+	z-index: 1;
+	border:1px white solid;
+    border-radius: 3px 0 0 3px;
+	border-right:none;
+	box-sizing:content-box;
+    display: block;
+    letter-spacing: 2px;
+    background-color: #8C1515;
+    height:110px;
+    width:30px;
 }
 
-#feedbackLink a {
-	display: block;
-	background-image: url(../images/sprite-all.png);
-	background-position: -760px -120px;
-	width: 31px;
-	height: 110px;
-	border-bottom: none;
+.feedback-link:hover {
+    background-color:rgb(38, 38, 38);
 }
-
-#feedbackLink a:hover {
-	background-image: url(../images/sprite-all.png);
-	background-repeat: no-repeat;
-	background-position: -720px -120px;
+/*for IE8 the rotation is in lane-ie.js*/
+.feedback-link span{
+    color:white;
+    display:block;
+    position:relative;
+    top:65px;
+    letter-spacing: 1px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
 }
 
 /*---------------the lightbox overall look (the same box for all lightboxes)------------------*/
@@ -66,20 +77,4 @@
 
 .yui3-lightbox #feedback {
 	width: 824px;
-}
-
-/* case 81447 add the 'x' button back to the feedback widget*/
-.yui3-lightbox #feedbackClose {
-    width:24px;
-    height:24px;
-    position:absolute;
-    right:3px;
-    top:3px;
-    background-image:url(../images/sprite-all.png);
-    background-position:-40px -160px;
-    cursor:pointer
-}
-
-.yui3-lightbox #feedbackClose:hover {
-    background-position:-40px -200px
 }

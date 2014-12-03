@@ -16,8 +16,8 @@
                 render : true
             });
             boundingBox = popup.get("boundingBox");
-            boundingBox.append("<a id='popupClose'></a>");
-            boundingBox.one("#popupClose").on("click", function() {
+            boundingBox.append("<a class='close sprite'></a>");
+            boundingBox.one(".close").on("click", function() {
                 popup.hide();
             });
             (new Y.DD.Drag({node: ".yui3-popup"}));

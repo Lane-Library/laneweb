@@ -7,9 +7,9 @@
 .favorites li {
     margin:1em 0;
 }
-#bookmark-link {
+/* .bookmark-link also gets class="sprite" */
+.bookmark-link {
     cursor: pointer;
-    background-image: url("../images/sprite-all.png");
     background-position: -600px 0;
     background-repeat:no-repeat;
     display: inline-block;
@@ -19,12 +19,12 @@
     margin-left: 5px;
 }
 
-#bookmark-link.active,
-#bookmark-link.bookmarking {
+.bookmark-link.active,
+.bookmark-link.bookmarking {
 background-position: -600px -40px;
 }
 
-#bookmark-link.successful {
+.bookmark-link.successful {
 background-position: -600px -80px;
 }
 

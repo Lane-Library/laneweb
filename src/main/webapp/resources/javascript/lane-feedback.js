@@ -55,8 +55,7 @@
                     self.destroy();
                 }
             });
-            //case 81447 add the 'x' button back to the feedback widget
-            Y.one("#feedbackClose").on("click", function(event) {
+            Y.one("#feedback .close").on("click", function(event) {
                 event.preventDefault();
                 Y.lane.Lightbox.hide();
             });

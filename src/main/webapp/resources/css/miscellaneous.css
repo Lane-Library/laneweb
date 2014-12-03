@@ -7,6 +7,25 @@ body,select,input,button,textarea {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+/*class="sprite" gets the background sprite*/
+.sprite {
+    background-image : url(../images/sprite-all.png);
+}
+/*.close is the X close box on popups and feedback*/
+.close {
+    width:24px;
+    height:24px;
+    position:absolute;
+    right:3px;
+    top:3px;
+    background-position:-40px -160px;
+    cursor:pointer
+}
+
+.close:hover {
+    background-position:-40px -200px
+}
+
 p {
 	margin-bottom: 12px;
 }
@@ -40,16 +59,12 @@ em {
 }
 
 .rss-link {
-	float: right;
-	background-image: url(../images/sprite-all.png);
 	background-position: -41px -240px;
 	height: 15px;
 	width: 15px;
-	font-size: 0;
-	text-indent: -10000px;
 	display: block;
-	margin-top: 4px;
-	border-bottom: none;
+	float:right;
+	margin:0 12px;
 }
 
 .rss-link:hover {
