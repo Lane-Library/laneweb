@@ -1,3 +1,44 @@
+var redirectUrl,
+    PERSISTENT_PREFERENCE_COOKIE_NAME = 'lane-login-expiration-date';
+
+
+$.LANE.popupWindow = function(url){
+    $.mobile.changePage(url, {
+        transition : "pop",
+        reverse : false,
+        changeHash : false
+    });
+};
+
+
+$(document).on("click", 'a[href*="laneproxy"]', function(event) {
+    var link = event.currentTarget, threeDays = 3600 *3 , 
+    now = new Date(), cookieValue = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
+    if (!model['disaster-mode'] &&  model["isActiveSunetID"] && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
+        redirectUrl = encodeURIComponent(link.href);
+        $.LANE.popupWindow(model['base-path'] + '/m/plain/shibboleth-persistentlogin-extension.html');
+        event.preventDefault();
+    }
+});
+
+
+
+
+$(document).on("click", '#shibboleth-links a', function(e) {
+	var node = event.target, url, 
+	persistentUrl = model['base-path']+ '/persistentLogin.html?pl=', 
+	isPersistent;
+	if (!redirectUrl) {
+		redirectUrl = "/index.html";
+	}
+	event.preventDefault();
+	document.location =   persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
+
+});
+
+
+
+
 
 // click on login link
 $(document).on("click", ".webauthLogin:contains('Logout')", function(e) {
