@@ -41,6 +41,7 @@
 		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href, node;
 		lightbox.setContent(o.responseText);
 		lightbox.show();
+		shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
 		Y.once("click", function(event) {
 			var node = event.currentTarget, href;
 		    if (!redirectUrl) {
@@ -48,7 +49,7 @@
 			}
 			href =  basePath+ '/persistentLogin.html?pl=renew&url='+ encodeURIComponent(redirectUrl);
 			node.set('href', href);
-		}, "shibboleth-links a");
+		}, shibbolethAnchors);
 	};
 	// END POPUP
 
