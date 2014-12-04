@@ -13,7 +13,7 @@
 #queryMapping span, #spellCheckLink, #findItLink {
     padding-right:25px;
 }
-.lwSearchResults a.primaryLink {
+.primaryLink {
     font-size:16px;
 }
 #searchFacets a {
@@ -38,10 +38,10 @@
 #searchFacets ul, .lwSearchResults li {
     padding-bottom:10px;
 }
-#searchFacets li.current a {
+.current-facet a {
     color:#9a0003;
 }
-#searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a {
+.inactiveFacet, .inactiveFacet a {
     display:none;
 }
 #popInContent {

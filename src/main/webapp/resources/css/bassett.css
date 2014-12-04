@@ -9,10 +9,10 @@
 
 
 /* Multi IMAGES VIEW */
-div.bassett-images, div.paging, div.bassett-image {
+.bassett-images, .paging, .bassett-image {
 	clear: both;
 }
-div.bassett-images div {
+.bassett-images div {
 	padding: 0 0 30px 9px;
 	float: left;
 }
@@ -23,7 +23,7 @@ div.bassett-images div {
 #bassettContent .image-text {
 	padding: 3px 0 0 0;
 }
-div.paging {
+.paging {
 	float: right;
 	padding: 10px ;
 }
@@ -45,16 +45,16 @@ div.paging {
     font-size: 10px;
     padding-left: 12px;
 }
-div.bassett-image table{
+.bassett-image table{
     margin-bottom :30px;
     text-align: center;
     vertical-align: middle;
     padding: 2em;
 }
-div.bassett-image td#image {
+.bassett-image td#image {
 	vertical-align: middle;
 }
-div.bassett-image td#diagram-image {
+.bassett-image td#diagram-image {
 	vertical-align: top;
 }
 
