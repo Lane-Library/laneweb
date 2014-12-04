@@ -28,7 +28,7 @@
 /*---------------feedback button graphic at the edge of a browser window----------------------*/
 .feedback-link {
 	position: fixed;
-	top: 50%;
+	top: 45%;
 	right: 0;
 	z-index: 1;
 	border:1px white solid;
