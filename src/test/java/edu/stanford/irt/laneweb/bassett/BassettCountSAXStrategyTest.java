@@ -38,10 +38,10 @@ public class BassettCountSAXStrategyTest {
     @Test
     public void testToSAX() throws SAXException {
         this.map.put("Region1", Integer.valueOf(10));
-        this.map.put("Region1--subregion1", Integer.valueOf(5));
-        this.map.put("Region1--subregion2", Integer.valueOf(5));
+        this.map.put("Region1--Subregion1", Integer.valueOf(5));
+        this.map.put("Region1--Subregion2", Integer.valueOf(5));
         this.map.put("Region2", Integer.valueOf(5));
-        this.map.put("Region2--subregion1", Integer.valueOf(5));
+        this.map.put("Region2--Subregion1", Integer.valueOf(5));
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"),

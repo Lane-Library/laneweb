@@ -71,8 +71,7 @@ public class SitemapRequestHandlerTest {
 
     @Test
     public void testGetSitemapURI() {
-        expect(this.request.getRequestURI()).andReturn("/contextPath/sitemapURI");
-        expect(this.request.getContextPath()).andReturn("/contextPath");
+        expect(this.request.getServletPath()).andReturn("/sitemapURI");
         replay(this.request);
         assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request));
         verify(this.request);
@@ -80,8 +79,7 @@ public class SitemapRequestHandlerTest {
 
     @Test
     public void testGetSitemapURIJsessionid() {
-        expect(this.request.getRequestURI()).andReturn("/contextPath/sitemapURI;jsessionid=jsessionid");
-        expect(this.request.getContextPath()).andReturn("/contextPath");
+        expect(this.request.getServletPath()).andReturn("/sitemapURI;jsessionid=jsessionid");
         replay(this.request);
         assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request));
         verify(this.request);
@@ -90,8 +88,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testGetSitemapURIPrefix() {
         this.handler.setPrefix("/prefix");
-        expect(this.request.getRequestURI()).andReturn("/contextPath/prefix/sitemapURI");
-        expect(this.request.getContextPath()).andReturn("/contextPath");
+        expect(this.request.getServletPath()).andReturn("/prefix/sitemapURI");
         replay(this.request);
         assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request));
         verify(this.request);
@@ -101,8 +98,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleHEADRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("/index.html");
+        expect(this.request.getServletPath()).andReturn("/index.html");
         expect(this.servletContext.getMimeType("/index.html")).andReturn("text/html");
         this.response.setContentType("text/html");
         expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
@@ -116,8 +112,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("/index.html");
+        expect(this.request.getServletPath()).andReturn("/index.html");
         expect(this.servletContext.getMimeType("/index.html")).andReturn("text/html");
         expect(this.response.getOutputStream()).andReturn(null);
         this.response.setContentType("text/html");
@@ -133,8 +128,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequestClasses() throws Exception {
         expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("/classes/");
+        expect(this.request.getServletPath()).andReturn("/classes/");
         expect(this.servletContext.getMimeType("/classes/")).andReturn(null);
         this.response.setContentType("text/xml");
         expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
@@ -148,8 +142,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequestHTML() throws Exception {
         expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("/html");
+        expect(this.request.getServletPath()).andReturn("/html");
         expect(this.servletContext.getMimeType("/html")).andReturn(null);
         this.response.setContentType("text/html");
         expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
@@ -163,8 +156,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequestJSON() throws Exception {
         expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("/json");
+        expect(this.request.getServletPath()).andReturn("/json");
         expect(this.servletContext.getMimeType("/json")).andReturn(null);
         this.response.setContentType("application/json");
         expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
@@ -189,8 +181,7 @@ public class SitemapRequestHandlerTest {
     public void testHandleRequestRSSPrefix() throws Exception {
         this.handler.setPrefix("/rss");
         expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("/rss/foo");
+        expect(this.request.getServletPath()).andReturn("/rss/foo");
         expect(this.servletContext.getMimeType("/foo")).andReturn(null);
         this.response.setContentType("text/xml");
         expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
@@ -204,8 +195,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequestText() throws Exception {
         expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("/foo");
+        expect(this.request.getServletPath()).andReturn("/foo");
         expect(this.servletContext.getMimeType("/foo")).andReturn(null);
         this.response.setContentType("text/plain");
         expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
@@ -219,8 +209,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequestXML() throws Exception {
         expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getRequestURI()).andReturn("/xml");
+        expect(this.request.getServletPath()).andReturn("/xml");
         expect(this.servletContext.getMimeType("/xml")).andReturn(null);
         this.response.setContentType("text/xml");
         expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);

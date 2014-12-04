@@ -47,7 +47,7 @@
             source = id.substring(0, id.indexOf('Facet'));
             if (type) {
                 facet.setData('result', new Result(type, source, facet, container));
-                if (facet.hasClass('current')) {
+                if (facet.hasClass('current-facet')) {
                     facet.getData('result').setContent(container.get('innerHTML'));
                     SearchFacets.setCurrentResult(facet.getData('result'));
                 }
@@ -97,7 +97,7 @@
             } else {
                 SearchFacets.getCurrentResult().hide();
                 SearchFacets.setCurrentResult(this);
-                this._facet.addClass('current');
+                this._facet.addClass('current-facet');
                 this._container.set("innerHTML", this._content);
                 this.fire("new-content");
                 searchIndicator.hide();
@@ -117,7 +117,7 @@
         };
         Result.prototype.hide = function(){
             this._container.set("innerHTML", "");
-            this._facet.removeClass('current');
+            this._facet.removeClass('current-facet');
         };
 
         // Add EventTarget attributes to the Result prototype

@@ -635,19 +635,19 @@ body.ui-mobile-viewport{
     -ms-border-radius: 0 0 8px 8px;
     border-radius: 0 0 8px 8px;
 }
-
-.resourceList li a.newWindow {
-    background: url(../../images/mobile/link_bg_sprite.png)
-        no-repeat right -39px transparent;
+.newWindow, .sameWindow {
+    background-image:url(../../images/mobile/link_bg_sprite.png);
     -webkit-background-size: 36px;
     background-size: 36px;
+    background-repeat:no-repeat;
+    background-color:transparent;
+}
+.newWindow {
+    background-position:right -39px;
 }
 
-.resourceList li a.sameWindow {
-    background: url(../../images/mobile/link_bg_sprite.png)
-        no-repeat right 11px transparent;
-    -webkit-background-size: 36px;
-    background-size: 36px;
+.sameWindow {
+    background-position: right 11px;
 }
 
 .resourceList li:last-child {
