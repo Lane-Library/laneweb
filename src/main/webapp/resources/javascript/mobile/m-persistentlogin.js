@@ -19,7 +19,7 @@ $.LANE.toggleLogin = function() {
 				function() {
 					$(this).text('Login');
 					$(this).attr('href',
-							model['base-path'] + '/secure/mobile-login.html');
+							model['base-path'] + '/secure/login.html?url='+encodeURIComponent(document.location.href));
 					$(this).attr('data-ajax', 'false');
 				});
 	}
