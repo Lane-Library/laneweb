@@ -30,16 +30,34 @@ body.ui-mobile-viewport{
 }
 
 
+.button-close a{
+        text-decoration: none;
+}
+
+.button-close a{
+        text-decoration: none;
+}
+
 #close{
-    z-index:2; 
-    padding-left: .40em; 
-    padding-right: .40em; 
-    font-size: 18px; 
+    background-color: #C80000;
+    color: #FFFFFF;
+    padding: 7px 12px 7px 7px;
+    z-index:2;
+    padding-left: .40em;
+    padding-right: .40em;
+    font-size: 18px;
     font-weight: bold;
     position: relative;
-    top: -10px;
+    top: 12px;
     left: -127px;
     margin: 0;
+    border: 1px #CCCCCC solid;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#persistent{
+    margin: 10px;
 }
 
  .ui-header, 
