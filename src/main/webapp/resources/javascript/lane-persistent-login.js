@@ -43,13 +43,12 @@
 		lightbox.show();
 		Y.once("click", function(event) {
 			var node = event.currentTarget, href;
-		     
-			if (!redirectUrl) {
+		    if (!redirectUrl) {
 				redirectUrl = "/index.html";
 			}
-				href =  basePath+ '/secure/persistentLogin.html?pl=renew&url='+ encodeURIComponent(redirectUrl);
+			href =  basePath+ '/persistentLogin.html?pl=renew&url='+ encodeURIComponent(redirectUrl);
 			node.set('href', href);
-		}, "");
+		}, "shibboleth-links a");
 	};
 	// END POPUP
 
