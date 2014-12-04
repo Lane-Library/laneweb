@@ -36,10 +36,12 @@ public class RequestMethodDataBinderTest {
     public void testBind() {
         expect(this.request.getRequestURI()).andReturn("requestURI");
         expect(this.request.getQueryString()).andReturn("queryString");
+        expect(this.request.getServletPath()).andReturn("servletPath");
         replay(this.request);
         this.binder.bind(this.model, this.request);
         assertEquals("requestURI", this.model.get(Model.REQUEST_URI));
         assertEquals("queryString", this.model.get(Model.QUERY_STRING));
+        assertEquals("servletPath", this.model.get(Model.SERVLET_PATH));
         verify(this.request);
     }
 
@@ -47,10 +49,12 @@ public class RequestMethodDataBinderTest {
     public void testBindNullValues() {
         expect(this.request.getRequestURI()).andReturn(null);
         expect(this.request.getQueryString()).andReturn(null);
+        expect(this.request.getServletPath()).andReturn(null);
         replay(this.request);
         this.binder.bind(this.model, this.request);
         assertNull(this.model.get(Model.REQUEST_URI));
         assertNull(this.model.get(Model.QUERY_STRING));
+        assertNull(this.model.get(Model.SERVLET_PATH));
         verify(this.request);
     }
 }

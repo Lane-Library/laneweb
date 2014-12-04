@@ -49,8 +49,7 @@ public class TemplateChooserTest {
         this.templateMap = Collections.singletonMap("^(?:/stage|)/bassett/raw/bassettLargerView.html", "bassettLargerView");
         this.templateChooser = new TemplateChooser(this.defaultTemplate, this.existingTemplates, this.templateMap);
         expect(this.request.getParameter(Model.TEMPLATE)).andReturn(null);
-        expect(this.request.getRequestURI()).andReturn("/laneweb/stage/bassett/raw/bassettLargerView.html");
-        expect(this.request.getContextPath()).andReturn("/laneweb");
+        expect(this.request.getServletPath()).andReturn("/stage/bassett/raw/bassettLargerView.html");
         replay(this.request);
         assertEquals("bassettLargerView", this.templateChooser.getTemplate(this.request));
         verify(this.request);

@@ -105,6 +105,8 @@ public abstract class Model {
 
     public static final String SELECTION = "selection";
 
+    public static final String SERVLET_PATH = "servlet-path";
+
     public static final String SHOW = "show";
 
     public static final String SITEMAP_URI = "sitemap-uri";
@@ -146,6 +148,6 @@ public abstract class Model {
     public static final String VERSION = "version";
 
     private Model() {
-        //private constructior
+        // private constructior
     }
 }

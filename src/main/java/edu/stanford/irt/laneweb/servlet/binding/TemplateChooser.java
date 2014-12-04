@@ -55,7 +55,7 @@ public class TemplateChooser {
             template = null;
         }
         if (null == template && !this.templateMap.isEmpty()) {
-            String uri = request.getRequestURI().substring(request.getContextPath().length());
+            String uri = request.getServletPath();
             for (Entry<String, Pattern> entry : this.patternMap.entrySet()) {
                 if (entry.getValue().matcher(uri).matches()) {
                     template = this.templateMap.get(entry.getKey());
