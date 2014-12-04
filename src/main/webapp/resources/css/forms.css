@@ -87,6 +87,7 @@ div#persistent {
 	margin-top: 35px;
 	font-weight: bold;
 	margin-left: 20px;
+	margin-right: 10px;
 }
 
 #persistent .is-persistent input{
@@ -100,6 +101,7 @@ div#persistent {
 
 #shibboleth-links .organization{  
 	padding:18px;
+	margin-bottom: 44px; 
 }
 
 #shibboleth-links .organization li{
@@ -145,6 +147,9 @@ background-position: -807px -18px;
 
 #persistent .help{
 	font-size: 13px;
+	position: absolute;
+	right: 24px;
+	top: 129px;
 }
 
 

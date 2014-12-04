@@ -1,11 +1,13 @@
 (function() {
 
 	var model = Y.lane.Model, redirectUrl ,
+	persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'), 
 	basePath = model.get(model.BASE_PATH)|| "",  
 	location = Y.lane.Location,
+	now = new Date(), 
 	// isStanfordActive == true only if user is from stanford and is active in the LDAP
 	// See UserDataBinder.java
-	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID)
+	isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
 	basePath = model.get(model.BASE_PATH)|| "", 
 	drMode = model.get(model.DISASTER_MODE);
 	
@@ -20,7 +22,7 @@
 			event.preventDefault();
 			link.set('rel', 'persistentLogin');
 			redirectUrl = encodeURIComponent(event.target.get('href'));
-			getPopup(basePath + '/plain/persistent-extension-popup.html');
+			getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
 		}
 	};
 
@@ -39,15 +41,15 @@
 		var lightbox = Y.lane.Lightbox, shibbolethAnchors, href, node;
 		lightbox.setContent(o.responseText);
 		lightbox.show();
+		shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
 		Y.once("click", function(event) {
 			var node = event.currentTarget, href;
-		     
-			if (!redirectUrl) {
+		    if (!redirectUrl) {
 				redirectUrl = "/index.html";
 			}
-				href =  basePath+ '/secure/persistentLogin.html?pl=renew&url='+ encodeURIComponent(redirectUrl);
+			href =  basePath+ '/persistentLogin.html?pl=renew&url='+ encodeURIComponent(redirectUrl);
 			node.set('href', href);
-		}, "");
+		}, shibbolethAnchors);
 	};
 	// END POPUP
 
