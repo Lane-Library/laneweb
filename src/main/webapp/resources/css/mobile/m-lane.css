@@ -39,7 +39,8 @@ body.ui-mobile-viewport{
 }
 
 #close{
-    background-color: #C80000;
+	background: linear-gradient(#e82c2e, #940506) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #b51e1f;
     color: #FFFFFF;
     padding: 7px 12px 7px 7px;
     z-index:2;
