@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.stanford.irt.laneweb.resource.PagingData;
@@ -11,13 +11,13 @@ public class EresourceListPagingData extends PagingData {
 
     private String alpha;
 
-    private List<PagingLabel> pagingLabels;
+    private ArrayList<PagingLabel> pagingLabels;
 
     public EresourceListPagingData(final List<Eresource> list, final int page, final String baseQuery,
             final String alpha) {
         super(list, page, baseQuery);
         this.alpha = alpha;
-        this.pagingLabels = new LinkedList<PagingLabel>();
+        this.pagingLabels = new ArrayList<PagingLabel>();
         int pages = getPages();
         int pageSize = getPageSize();
         int size = getSize();
@@ -34,8 +34,8 @@ public class EresourceListPagingData extends PagingData {
             }
             pageLabelEnd = pageLabelEnd >= size ? size - 1 : pageLabelEnd;
             numResults = (pageLabelEnd - pageLabelStart) + 1;
-            this.pagingLabels.add(new PagingLabel(list.get(pageLabelStart).getTitle(), list.get(pageLabelEnd)
-                    .getTitle(), numResults));
+            this.pagingLabels.add(new PagingLabel(list.get(pageLabelStart).getTitle(), list.get(
+                    pageLabelEnd).getTitle(), numResults));
         }
     }
 

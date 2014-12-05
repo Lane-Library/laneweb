@@ -26,9 +26,9 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private byte[] nonproduction;
+    private transient byte[] nonproduction;
 
-    private byte[] production;
+    private transient byte[] production;
 
     public RobotsDotTextServlet() {
         this.production = PRODUCTION.getBytes(StandardCharsets.UTF_8);
