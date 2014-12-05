@@ -829,24 +829,22 @@ input[type="text"] {
     position: absolute;
     bottom: 0;
 }
-
- .footer a.ui-link,.footer a.ui-link:link,.footer a.ui-link:visited,.footer a.ui-link:hover
-    {
+.footer .ui-link {
     color: #ffffff;
     font-size: 0.9em;
     text-decoration: none;
 }
 
-.footer a.ui-link:active {
+.footer a:active {
     text-decoration: underline;
 }
 
-.footer a.ui-link:first-child {
+.footer a:first-child {
     float: left;
     margin-left: 3%;
 }
 
-.footer a.ui-link:last-child {
+.footer a:last-child {
     text-transform: uppercase;
     float: right;
     margin-right: 5%;
@@ -940,8 +938,7 @@ input[type="text"] {
     overflow:visible;
 }
 
-.results li.resultsNav {
-    background: none repeat scroll 0 0 transparent;
+.results .resultsNav {
     text-align: right;
 }
 
