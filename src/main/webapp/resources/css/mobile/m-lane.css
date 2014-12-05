@@ -34,10 +34,6 @@ body.ui-mobile-viewport{
         text-decoration: none;
 }
 
-.button-close a{
-        text-decoration: none;
-}
-
 #close{
 	background: linear-gradient(#e82c2e, #940506) repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 1px solid #b51e1f;
