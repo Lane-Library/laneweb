@@ -634,7 +634,7 @@ input[type="text"] {
     -ms-border-radius: 0 0 8px 8px;
     border-radius: 0 0 8px 8px;
 }
-.newWindow, .sameWindow {
+.resourceList .newWindow, .resourceList .sameWindow {
     background-image:url(../../images/mobile/link_bg_sprite.png);
     -webkit-background-size: 36px;
     background-size: 36px;
