@@ -37,8 +37,9 @@ $(document).on("click", '#shibboleth-links a', function(e) {
 });
 
 
-
-
+$(document).on("click", ".persistent-header", function() {
+    document.location = model['base-path'] + '/';
+});
 
 // click on login link
 $(document).on("click", ".webauthLogin:contains('Logout')", function(e) {
