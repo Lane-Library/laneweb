@@ -37,7 +37,7 @@ $(document).on("click", '#shibboleth-links a', function(e) {
 });
 
 
-$(document).on("click", ".persistent-header", function() {
+$(document).on("click", "#close", function() {
     document.location = model['base-path'] + '/';
 });
 
