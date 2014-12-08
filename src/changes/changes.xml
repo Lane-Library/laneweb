@@ -8,11 +8,17 @@
     </properties>
     <body>
         <release date="2014-12-08" version="2.3.7" description="2.3.7 bug fix release">
-            <action date="2014-??-??" dev="alainb" issue="100709" type="update">
+            <action date="2014-12-03" dev="ryanmax" issue="100846" type="fix">
+                discoveryLoginPage from SFX: javascript permission error
+            </action>
+            <action date="2014-12-03" dev="alainb" issue="100709" type="update">
                 updated logo, add text under the logos
             </action>
             <action date="2014-11-19" dev="ceyates" issue="100573" type="update">
                 align Extend your Search drop down
+            </action>
+            <action date="2014-12-01" dev="ceyates" issue="100363" type="fix">
+                lightbox of bookmark login looks bad
             </action>
             <action date="2014-11-26" dev="ceyates" issue="100350" type="update">
                 create print.css for proper printing
