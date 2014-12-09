@@ -55,18 +55,10 @@
             for (i = 0; i < items.size(); i++) {
                 editor = new BookmarkEditor({srcNode : items.item(i), render : true, bookmark : bookmarks.getBookmark(i)});
                 editor.after("destroy", this._handleDestroyEditor, this);
-                (new Y.DD.Drag({
-                    node : editor.get("boundingBox"),
-                    target: {
-                        padding: '0 0 0 20'
-                    }}).plug(Y.Plugin.DDConstrained, {
-                        constrain : srcNode.one("ul")
-                    }).plug(Y.Plugin.DDProxy, {
-                        moveOnEnd: false
-                    }));
                 editors.push(editor);
             }
             this.set("editors", editors);
+            this._syncDD();
         },
 
         /**
@@ -155,6 +147,7 @@
          */
         _handleBookmarkAdd : function(event) {
             this.get("editors")[event.target.indexOf(event.bookmark)].update();
+            this._syncDD();
         },
 
         /**
@@ -178,6 +171,8 @@
         _handleBookmarksRemove : function(event) {
             var i, editors = this.get("editors");
             for (i = event.positions.length - 1; i >= 0; --i) {
+                this._dd[event.positions[i]].destroy(true);
+                this._dd.splice(event.positions[i], 1);
                 editors[event.positions[i]].destroy(true);
             }
         },
@@ -322,6 +317,28 @@
                 event.drop.get('node').get('parentNode').insertBefore(drag, drop);
                 //Resize this nodes shim, so we can drop on it later.
                 event.drop.sizeShim();
+            }
+        },
+
+        _syncDD : function() {
+            var i, srcNode = this.get("srcNode"),
+                editors = this.get("editors");
+            this._dd = this._dd || [];
+            for (i = 0; i < this._dd.length; i++) {
+                this._dd[i].destroy();
+            }
+            this._dd = [];
+            for (i = 0; i < editors.length; i++) {
+                this._dd.push(new Y.DD.Drag({
+                    node : editors[i].get("boundingBox"),
+                    target: {
+                        padding: '0 0 0 20',
+                        useShim: false
+                    }}).plug(Y.Plugin.DDConstrained, {
+                        constrain : srcNode.one("ul")
+                    }).plug(Y.Plugin.DDProxy, {
+                        moveOnEnd: false
+                    }));
             }
         }
     },
