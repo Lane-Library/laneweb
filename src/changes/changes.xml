@@ -65,6 +65,9 @@
             <action date="2014-10-06" dev="ceyates" issue="99349" type="update">
                 add result count to top of search and reformat start of search results
             </action>
+            <action date="2014-12-09" dev="ceyates" issue="96307" type="fix">
+                bookmark editor drag fails after delete or add
+            </action>
         </release>
         <release date="2014-12-01" version="2.3.6" description="2.3.6 bug fix release">
             <action date="2014-11-25" dev="ceyates" issue="100729" type="fix">

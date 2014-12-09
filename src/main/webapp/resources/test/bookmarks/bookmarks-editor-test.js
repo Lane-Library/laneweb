@@ -32,17 +32,6 @@ Y.use('console', 'test', function(Y) {
             this.editor["delete"]();
             handler.detach();
             Y.Assert.areSame(0,item);
-        },
-        
-        "test delete then drag" : function() {
-            var item = null, bookmarks = this.editor.get("bookmarks");
-            var handler = bookmarks.on("remove", function(event) {
-                event.preventDefault();
-                bookmarks.fire("removeSync", {positions:event.positions});
-            });
-            Y.all("#editors input[type='checkbox']").item(3).set("checked", true);
-            this.editor["delete"]();
-            handler.detach();
         }
 
     });
