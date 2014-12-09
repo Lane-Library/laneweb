@@ -17,7 +17,7 @@ public class PersistentLoginHandlerInterceptor extends HandlerInterceptorAdapter
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, java.lang.Object handler)
             throws UnsupportedEncodingException, IOException {
-        String req = request.getContextPath() + request.getRequestURI();
+        String req = request.getRequestURI();
         if (req.contains("/secure/login.html")) {
             req = request.getParameter("url");
         } else if (request.getQueryString() != null) {
