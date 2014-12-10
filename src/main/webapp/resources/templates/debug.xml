@@ -339,7 +339,7 @@
         </div>
         <div><a class="feedback-link" rel="lightbox" href="/help/feedback.html"><span>FEEDBACK</span></a></div>
         <script type="text/javascript" id="model">//</script>
-        <script type="text/javascript" src="http://yui.yahooapis.com/3.13.0/yui/yui-debug.js"></script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.18.1/yui/yui-debug.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>
     </body>
 </html>

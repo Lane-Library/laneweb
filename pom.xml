@@ -194,7 +194,7 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/laneweb/resources/javascript/lane-all.js</output>
                             <includes>
-                                <include>${basedir}/src/main/webapp/resources/javascript/yui-3.13.0.js</include>
+                                <include>${basedir}/src/main/webapp/resources/javascript/yui-3.18.1.js</include>
                                 <include>lane-min.js</include>
                                 <include>location-min.js</include>
                                 <include>golfclub-headings-min.js</include>
