@@ -99,10 +99,9 @@ public class ScoreStrategyTest {
         expect(this.result.getId()).andReturn("foo_content_1");
         expect(this.result.getTitle()).andReturn("title");
         expect(this.result.getDescription()).andReturn("description");
-//        expect(this.result.getYear()).andReturn("publicationDate");
-        expect(this.result.getYear()).andReturn(0);
+        expect(this.result.getYear()).andReturn(1994);
         replay(this.result);
-        assertEquals(1, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("query")));
+        assertEquals(0, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("query")));
         verify(this.result);
     }
 
