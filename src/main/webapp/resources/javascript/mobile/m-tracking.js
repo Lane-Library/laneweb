@@ -38,7 +38,7 @@ $.LANE.tracking.isExternal = function(node) {
     if(node.nodeName !== 'A'){
         return false;
     }
-    else if (node.pathname.indexOf('secure/apps/proxy/credential') > -1 || node.host.indexOf('laneproxy') === 0 || node.host !== document.location.host) {
+    else if (node.pathname.indexOf('secure/apps/proxy/credential') > -1 || node.host && (node.host.indexOf('laneproxy') === 0 || node.host !== document.location.host)) {
         return true;
     }
     return false;
@@ -86,6 +86,7 @@ $.LANE.tracking.track = function(e) {
     var handle, node, getNode = function(e) {
         var node = e.srcElement || e.target;
         // find parent A for IMG and STRONG nodes if possible
+        var name = node.nodeName;
         if(node.nodeName === 'IMG'||node.nodeName === 'STRONG'){
             while (node.nodeName !== 'A') {
                 node = node.parentNode;
@@ -101,7 +102,7 @@ $.LANE.tracking.track = function(e) {
             click: function(node) {
                 var label, basePath = $.LANE.tracking.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
                 if(node.nodeName === 'A' && $(node).parent().attr('rank')){
-                    _gaq.push(['_trackEvent', "searchResultClick", $("input[name=qSearch]").val(), node.textContent, parseInt($(node).parent().attr('rank'),10)]);
+                    _gaq.push(['_trackEvent', "searchResultClick", $("input[name=qSearch]").val(), $(node).text(), parseInt($(node).parent().attr('rank'),10)]);
                 }
                 if (node.nodeName === 'A'||node.nodeName === 'IMG') {
                     _gaq.push(['_trackPageview', basePath + encodeURIComponent($.LANE.tracking.getTrackingTitle(node))]);
@@ -112,7 +113,7 @@ $.LANE.tracking.track = function(e) {
             },
             vclick: function(node) {
                 if (node.parentNode && node.parentNode.id === 'searchTabs' && node.nodeName === 'LI') {
-                    _gaq.push(['_trackEvent', "searchTabClick", node.textContent]);
+                    _gaq.push(['_trackEvent', "searchTabClick", $(node).text()]);
                 }
             },
             submit: function(node) {

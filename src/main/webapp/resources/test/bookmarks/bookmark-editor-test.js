@@ -32,35 +32,17 @@ Y.use('console', 'test', function(Y) {
         },
 
         testSetEditingTrue : function() {
-            var elements = [];
-            elements.push(Y.one("input[name='label']"));
-            elements.push(Y.one("input[name='url']"));
-            elements.push(Y.one("button[value='save']"));
-            elements.push(Y.one("button[value='cancel']"));
-            elements.push(Y.one("button[type='reset']"));
-            for (var i = 0; i < elements.length; i++) {
-                Y.Assert.areEqual("none", elements[i].getStyle("display"));
-            }
+            var srcNode = this.editor.get("srcNode");
+            Y.Assert.isFalse(srcNode.hasClass("yui3-bookmark-editor-active"));
             this.editor.set("editing", true);
-            for (i = 0; i < elements.length; i++) {
-                Y.Assert.areEqual("inline-block", elements[i].getStyle("display"));
-            }
+            Y.Assert.isTrue(srcNode.hasClass("yui3-bookmark-editor-active"));
         },
 
         testSetEditingFalse : function() {
-            var elements = [];
-            elements.push(Y.one("input[name='label']"));
-            elements.push(Y.one("input[name='url']"));
-            elements.push(Y.one("button[value='save']"));
-            elements.push(Y.one("button[value='cancel']"));
-            elements.push(Y.one("button[type='reset']"));
-            for (var i = 0; i < elements.length; i++) {
-                Y.Assert.areEqual("inline-block", elements[i].getStyle("display"));
-            }
+            var srcNode = this.editor.get("srcNode");
+            Y.Assert.isTrue(srcNode.hasClass("yui3-bookmark-editor-active"));
             this.editor.set("editing", false);
-            for (i = 0; i < elements.length; i++) {
-                Y.Assert.areEqual("none", elements[i].getStyle("display"));
-            }
+            Y.Assert.isFalse(srcNode.hasClass("yui3-bookmark-editor-active"));
         },
 
         testCancel : function() {

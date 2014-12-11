@@ -103,7 +103,7 @@ YUI().use('console','test',"event-simulate", function(Y) {
         },
         
         "test click ranked" : function() {
-            var ranked = Y.Node.create("<div rank='10'><a>text</a></div>").one("a")._node;
+            var ranked = Y.Node.create("<div rank='10'><a href='foo'>text</a></div>").one("a")._node;
             $.LANE.tracking.track({type:"click",target:ranked});
             Y.Assert.areSame("_trackEvent", pushed[0][0]);
             Y.Assert.areSame("searchResultClick", pushed[0][1]);
