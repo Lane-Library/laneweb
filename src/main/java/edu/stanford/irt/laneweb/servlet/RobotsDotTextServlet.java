@@ -10,33 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * sends Disallow: / if not production server. NOTE: CAB group has asked to be
- * notified of any robots.txt changes. Send description of changes to
- * irt-change@lists.stanford.edu
- * 
+ * sends Disallow: / if not production server. NOTE: CAB group has asked to be notified of any robots.txt changes. Send
+ * description of changes to irt-change@lists.stanford.edu
+ *
  * @author ceyates
  */
 public class RobotsDotTextServlet extends HttpServlet {
 
-    private static final String NONPRODUCTION = "User-agent: *\nDisallow: /";
+    private static final byte[] NONPRODUCTION = "User-agent: *\nDisallow: /".getBytes(StandardCharsets.UTF_8);
 
-    private static final String PRODUCTION = "User-agent: *\nCrawl-delay: 7\n"
-            + "Disallow: /m/\n"
-            + "Disallow: /search.html\nDisallow: /secure/";
+    private static final byte[] PRODUCTION = ("User-agent: *\nCrawl-delay: 7\n"
+        + "Disallow: /m/\n"
+        + "Disallow: /search.html\nDisallow: /secure/").getBytes(StandardCharsets.UTF_8);
 
     private static final long serialVersionUID = 1L;
 
-    private transient byte[] nonproduction;
-
-    private transient byte[] production;
-
-    public RobotsDotTextServlet() {
-        this.production = PRODUCTION.getBytes(StandardCharsets.UTF_8);
-        this.nonproduction = NONPRODUCTION.getBytes(StandardCharsets.UTF_8);
-    }
-
     @Override
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+    IOException {
         // Proxy servers add this header, may be comma separated list
         String hostHeader = req.getHeader("X-Forwarded-Host");
         if (hostHeader == null) {
@@ -46,9 +37,9 @@ public class RobotsDotTextServlet extends HttpServlet {
         }
         ServletOutputStream outputStream = resp.getOutputStream();
         if ("lane.stanford.edu".equals(hostHeader)) {
-            outputStream.write(this.production);
+            outputStream.write(PRODUCTION);
         } else {
-            outputStream.write(this.nonproduction);
+            outputStream.write(NONPRODUCTION);
         }
         outputStream.close();
     }
