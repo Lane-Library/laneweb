@@ -86,7 +86,6 @@ $.LANE.tracking.track = function(e) {
     var handle, node, getNode = function(e) {
         var node = e.srcElement || e.target;
         // find parent A for IMG and STRONG nodes if possible
-        var name = node.nodeName;
         if(node.nodeName === 'IMG'||node.nodeName === 'STRONG'){
             while (node.nodeName !== 'A') {
                 node = node.parentNode;
