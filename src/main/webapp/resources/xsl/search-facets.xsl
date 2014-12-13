@@ -78,7 +78,7 @@
             <xsl:choose>
                 <!-- always show requested facet, even if zero hits -->
                 <xsl:when test="$facetId = $source">
-                    <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> current-facet</xsl:attribute>
+                    <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> current</xsl:attribute>
                 </xsl:when>
                 <!-- make facet inactive if zero hits -->
                 <xsl:when test="number($hit-count) = 0">
@@ -114,7 +114,11 @@
     <xsl:template match="h:span[@id='pubmedMoreStrategies']">
         <xsl:if test="//node()[@id='showPubMedStrategies']">
             <div class="rightSearchTips">
-                <div class="heading">PubMed Searches</div>
+                <div class="heading" style="
+                    font-weight: bold;
+                    padding: 10px 0 5px;
+                    border-bottom: solid 1px rgb(144,144,144);
+                    margin-bottom:4px;">PubMed Searches</div>
                 <ul>
                     <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_guidelines|pubmed_cochrane_reviews'))]">
                         <xsl:variable name="countFacetId" select="replace(attribute::id,'\w+-(.*)Facet','$1')"/>
