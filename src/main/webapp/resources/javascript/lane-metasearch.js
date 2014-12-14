@@ -10,9 +10,14 @@
             startTime,
             containsUberId = function(url, resourceId) {
                 var containsUberId = false,
+                    mdc = "mdc_",
                     cro = "cro_";
-                if (resourceId.indexOf(cro) === 0) {
-                    containsUberId = url.indexOf(cro) > 0;
+                if (resourceId.match(/^(mdc_|cro_)/)) {
+                    if (resourceId.indexOf(mdc) === 0) {
+                        containsUberId = url.indexOf(mdc) > 0;
+                    } else {
+                        containsUberId = url.indexOf(cro) > 0;
+                    }
                 }
                 return containsUberId;
             },
