@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2014-12-15" version="2.3.7" description="2.3.7 bug fix release">
+            <action date="2014-12-15" dev="alainb" issue="101256" type="fix">
+                Drugbank search engine is broken
+            </action>
             <action date="2014-12-12" dev="ceyates" issue="101078" type="update">
                 upgrade yui to version 3.18.1
             </action>
