@@ -1,17 +1,16 @@
-div#persistent {
-	width:989px;
-	margin-top: 50px;
-	margin-bottom: 20px;
-	padding: 0px !important;
+#persistent {
+	width:991px;
+	box-sizing:border-box;
+	margin: 50px 0 20px;
 	text-align:center;
 	margin-left:auto;
 	margin-right:auto;
 	position: relative;
+    padding-top: 0;
 }
 
 #persistent .header{
 	background-color:  #aabec6;
-	padding-top: 0px !important;
 	height: 90px;
 }
 
@@ -43,13 +42,14 @@ div#persistent {
 
 #shibboleth-links .organization{  
 	padding:18px;
-	margin-bottom: 44px; 
+	margin-bottom: 24px; 
 }
 
 #shibboleth-links .organization li{
 	display: inline-block;
 	border-bottom: none;
 	padding: 3px 6px 3px 6px;
+	margin-bottom:20px;
 	}
 
 #shibboleth-links .organization a{
