@@ -1,0 +1,38 @@
+
+.verticalPico {
+    visibility: hidden;
+    position: relative;
+}
+
+.verticalPico .yui3-acwidget-container {
+    position: relative;
+    top: -24px;
+}
+
+.verticalPico .yui3-acwidget-container li {
+    margin-left: 0px;
+    list-style-image: none; /* ie */
+}
+
+.verticalPico input {
+    margin-bottom: 24px;
+}
+
+.verticalPico input {
+    width: 245px;
+}
+
+.verticalPico #picoSubmit {
+    width: 80px;
+}
+
+#lightbox-flex {
+    width: 760px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: white;
+    padding: 30px;
+    box-sizing:border-box;
+    border: 1px solid #9e9d98;
+}
