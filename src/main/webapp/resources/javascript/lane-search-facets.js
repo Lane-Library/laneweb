@@ -27,7 +27,8 @@
                 return currentResult;
             },
             setActiveFacet: function(facetId){
-                var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
+                // result facet to make active
+                var result = Y.one('#' + facetId + 'Facet').getData('result');
                 if (result !== undefined) {
                     if (result._state === 'initialized') {
                         result.show();
@@ -125,11 +126,11 @@
             emitFacade : true,
             prefix : "result"
         });
-        
+
         Lane.on("result:new-content", function() {
             this.fire("new-content");
         });
-        
+
         if (elt) {
             facets = elt.all('.searchFacet');
             for (i = 0; i < facets.size(); i++) {

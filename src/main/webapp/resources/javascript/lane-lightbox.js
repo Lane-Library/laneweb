@@ -144,7 +144,7 @@
             });
         }
     }, document);
-    
+
     // anchor with class=autoLightbox will automatically render on page load
     var initializeAutoLightbox = function() {
         var href, autoLightboxAnchor = Y.one("a.autoLightbox");

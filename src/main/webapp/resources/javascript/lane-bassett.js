@@ -82,11 +82,11 @@
 
         if (bassettContent) {
             accordion = Y.one('#accordion');
-            if (accordion) // not if largerView.html
-            {
+            // not if largerView.html
+            if (accordion) {
                 registerLinksContainer(accordion);
                 registerLinksContainer(Y.one('#bassettContent'));
                 initializeHistory();
             }
         }
-    })();
+})();

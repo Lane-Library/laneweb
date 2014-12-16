@@ -8,7 +8,8 @@
         picoIsOn = false,
         picoTextInputs = [],
         picoFields,
-        getPicoQuery = function(){ //build query terms from pico inputs
+        getPicoQuery = function(){
+            //build query terms from pico inputs
             var qString = '', i;
             for (i = 0; i < picoTextInputs.length; i++) {
                 if (picoTextInputs[i].getValue()) {

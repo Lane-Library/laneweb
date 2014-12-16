@@ -17,17 +17,20 @@ if (typeof ($.LANE) === "undefined") {
  * @param activePage
  */
 $.LANE.scrollPage = function(activePage){
-    var delay = 160, // wait for jqm to finish its scrolling. TODO: verify this is long enough on slower devices
+    // wait for jqm to finish its scrolling. TODO: verify this is long enough on slower devices
+    var delay = 160,
     hideSearchScroll = 100,
     hideHeaderScroll = 50;
-    if(activePage.find(".results li").size() > 1 || activePage.find(".absInfo").size()){ // search results and abstract/info pages
+    if(activePage.find(".results li").size() > 1 || activePage.find(".absInfo").size()){
+        // search results and abstract/info pages
         setTimeout(function(){
             if(window.pageYOffset < hideSearchScroll){
                 window.scrollTo(0, hideSearchScroll);
             }
         },delay);
     }
-    else if(activePage.attr('id') !== '_home' && activePage.find(".resourceList").size()){ // resource list pages
+    else if(activePage.attr('id') !== '_home' && activePage.find(".resourceList").size()){
+        // resource list pages
         setTimeout(function(){
             if(window.pageYOffset < hideHeaderScroll){
                 window.scrollTo(0, hideHeaderScroll);
