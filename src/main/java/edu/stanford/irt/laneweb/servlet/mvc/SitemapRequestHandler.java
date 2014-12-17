@@ -88,13 +88,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     protected abstract Map<String, Object> getModel();
 
     protected String getSitemapURI(final HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        int jsessionId = requestURI.indexOf(";jsessionid=");
+        String servletPath = request.getServletPath();
+        int jsessionId = servletPath.indexOf(";jsessionid=");
         if (jsessionId > 0) {
-            requestURI = requestURI.substring(0, jsessionId);
+            servletPath = servletPath.substring(0, jsessionId);
         }
-        String basePath = request.getContextPath();
-        return requestURI.substring(basePath.length() + this.prefix.length());
+        return servletPath.substring(this.prefix.length());
     }
 
     private String getContentType(final String value) {

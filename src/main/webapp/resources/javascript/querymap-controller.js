@@ -12,23 +12,27 @@
             queryMapper.on("success", function(queryMap) {
                 var i, span, labels = "",
                     resourceNames = [],
-                    resourceMap = queryMap.resourceMap;
-                if (resourceMap) {
-                    resources = resourceMap.resources;
-                    for (i = 0; i < resources.length; i++) {
-                        resourceNames.push(resources[i].id);
-                        span = Y.Node.create('<span><a title="QueryMapping: ' + resources[i].label + '">' + resources[i].label + "</a></span>");
+                    resourceMap = queryMap.resourceMap,
+                    appendHits = function() {
+                        span.one("a").set("href", this.url);
+                        if (this.status === "successful") {
+                            span.append(": " + this.hits + " ");
+                        }
+                    },
+                    createView = function(resource) {
+                        resourceNames.push(resource.id);
+                        span = Y.Node.create('<span><a title="QueryMapping: ' + resource.label + '">' + resource.label + "</a></span>");
                         queryMapping.append(span);
-                        (new ResourceResultView(resources[i].id, function() {
-                            span.one("a").set("href", this.url);
-                            if (this.status === "successful") {
-                                span.append(": " + this.hits + " ");
-                            }
-                        }));
+                        (new ResourceResultView(resource.id, appendHits));
                         if (labels) {
                             labels += "; ";
                         }
-                        labels += resources[i].label;
+                        labels += resource.label;
+                    };
+                if (resourceMap) {
+                    resources = resourceMap.resources;
+                    for (i = 0; i < resources.length; i++) {
+                        createView(resources[i]);
                     }
                     resourceSearch.once("update", function() {
                         Y.fire("lane:popin", queryMapping);

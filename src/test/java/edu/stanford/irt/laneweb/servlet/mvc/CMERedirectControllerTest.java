@@ -159,24 +159,6 @@ public class CMERedirectControllerTest {
         verify(this.request, this.response);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testCmeRedirectNullHost() throws Exception {
-        expect(this.request.getQueryString()).andReturn("yo");
-        this.response.sendRedirect("/cmeRedirectError.html?yo");
-        replay(this.request, this.response);
-        this.controller.cmeRedirect(null, "/basepath", "emrid", true, null, this.request, this.response);
-        verify(this.request, this.response);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCmeRedirectNullHostNullQueryString() throws Exception {
-        expect(this.request.getQueryString()).andReturn(null);
-        this.response.sendRedirect("/cmeRedirectError.html");
-        replay(this.request, this.response);
-        this.controller.cmeRedirect(null, "/basepath", "emrid", true, null, this.request, this.response);
-        verify(this.request, this.response);
-    }
-
     @Test
     public void testCmeRedirectUserId() throws Exception {
         this.response
@@ -194,15 +176,6 @@ public class CMERedirectControllerTest {
         replay(this.request, this.response);
         this.controller.cmeRedirect("hashedUser@lpch.net", "/basepath", null, true,
                 "http://www.uptodate.com/online/content/search.do?foo=bar", this.request, this.response);
-        verify(this.request, this.response);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCmeSecureRedirectNullHost() throws Exception {
-        expect(this.request.getQueryString()).andReturn("yo");
-        this.response.sendRedirect("/cmeRedirectError.html?yo");
-        replay(this.request, this.response);
-        this.controller.cmeSecureRedirect(null, "emrid", true, null, this.request, this.response);
         verify(this.request, this.response);
     }
 }

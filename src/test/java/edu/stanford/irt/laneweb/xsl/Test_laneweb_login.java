@@ -3,9 +3,7 @@ package edu.stanford.irt.laneweb.xsl;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -20,7 +18,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-public class Test_laneweb_login {
+public class Test_laneweb_login extends AbstractXSLTest {
 
     private Source source;
 
@@ -53,7 +51,7 @@ public class Test_laneweb_login {
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
         this.transformer.setParameter(Model.QUERY_STRING, "proxy-links=false");
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("FalseZeroOther.xml"), sw.toString());
+        assertEquals(getExpectedResult("FalseZeroOtherProxyLink.xml"), sw.toString());
     }
 
     @Test
@@ -64,7 +62,7 @@ public class Test_laneweb_login {
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
         this.transformer.setParameter(Model.QUERY_STRING, "something=else");
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("FalseQuerySomethingElseProxyLinks.xml"), sw.toString());
+        assertEquals(getExpectedResult("FalseQuerySomethingElse.xml"), sw.toString());
     }
     
     @Test
@@ -73,7 +71,7 @@ public class Test_laneweb_login {
         Result result = new StreamResult(sw);
         this.transformer.setParameter(Model.PROXY_LINKS, "false");
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
-        this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=false");
+        this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=false&param=onemore");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("FalseQuerySomethingElseProxyLinks.xml"), sw.toString());
     }
@@ -128,7 +126,7 @@ public class Test_laneweb_login {
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
         this.transformer.setParameter(Model.QUERY_STRING, "proxy-links=true");
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("TrueZeroOther.xml"), sw.toString());
+        assertEquals(getExpectedResult("TrueZeroOtherWithQueryString.xml"), sw.toString());
     }
 
     @Test
@@ -139,7 +137,7 @@ public class Test_laneweb_login {
         this.transformer.setParameter(Model.IPGROUP, "OTHER");
         this.transformer.setParameter(Model.QUERY_STRING, "something=else");
         this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("TrueQuerySomethingElseProxyLinks.xml"), sw.toString());
+        assertEquals(getExpectedResult("TrueQuerySomethingElseWithoutProxyLinks.xml"), sw.toString());
     }
 
     @Test
@@ -183,18 +181,15 @@ public class Test_laneweb_login {
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("TrueZeroSOM.xml"), sw.toString());
     }
-
-    private String getExpectedResult(final String fileName) throws IOException {
+    
+    @Test
+    public void testUrlRedirect() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();
-        InputStreamReader br = new InputStreamReader(getClass().getResourceAsStream(fileName), StandardCharsets.UTF_8);
-        char[] cbuf = new char[1024];
-        while (true) {
-            int i = br.read(cbuf);
-            if (i == -1) {
-                break;
-            }
-            sw.write(cbuf, 0, i);
-        }
-        return sw.toString();
+        Result result = new StreamResult(sw);
+        this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=true&param=onemore");
+        this.transformer.setParameter(Model.REQUEST_URI, "/redirectPath");
+        this.transformer.transform(this.source, result);
+        assertEquals(getExpectedResult("urlRedirect.xml"), sw.toString());
     }
+
 }

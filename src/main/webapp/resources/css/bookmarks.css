@@ -1,17 +1,15 @@
-/* hover styles for #favorites currently in lane-nav.css */
-#favorites li {
-	float: none;
-	border-left: none;
-	margin: 1em .5em 1em .5em;
-	height: auto
+.favorites .dropdown-content {
+    z-index:2;
+    padding:0 18px;
+    border-top: 1px solid #dadad9;
+    white-space:nowrap;
 }
-#favorites ul {
-	border-top: 1px solid #dadad9;
+.favorites li {
+    margin:1em 0;
 }
-
-#bookmark-link {
+/* .bookmark-link also gets class="sprite" */
+.bookmark-link {
     cursor: pointer;
-    background-image: url("../images/sprite-all.png");
     background-position: -600px 0;
     background-repeat:no-repeat;
     display: inline-block;
@@ -21,12 +19,12 @@
     margin-left: 5px;
 }
 
-#bookmark-link.active,
-#bookmark-link.bookmarking {
+.bookmark-link.active,
+.bookmark-link.bookmarking {
 background-position: -600px -40px;
 }
 
-#bookmark-link.successful {
+.bookmark-link.successful {
 background-position: -600px -80px;
 }
 
@@ -83,7 +81,8 @@ background-position: -600px -80px;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	padding: 5px;
 	border: solid 2px #C9C9C9;
-	width: 252px;
+	width: 266px;
+	box-sizing:border-box;
 }
 #bookmarkSearch{
     visibility:hidden;
@@ -95,4 +94,18 @@ background-position: -600px -80px;
 }
 #bookmarkSearch.bookmarking {
     cursor:wait;
+}
+/* next two are for the login required lightbox popup */
+.bookmark-login {
+    text-align:center;
+    padding: 30px;
+    width: 460px;
+    box-sizing:border-box;
+    background-color:white
+}
+.bookmark-login-heading {
+    color: #414042;
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 28px;
 }

@@ -17,10 +17,12 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
 
     private SolrImageService service;
     
-    private final static String[] TAB_CONTENT = {"Public Domain & CC BY",
+    private static final String[] TAB_CONTENT = {"Public Domain & CC BY",
                                                  "CC: ND, NC, NC-ND, NC-SA, SA",
                                                  "PMC - Article is CC",
                                                  "Rights Limited"};
+    
+    private static final int TOTAL_ELEMENT_BY_PAGE = 52;
     
     private String copyright = "0";
     
@@ -32,8 +34,6 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
     
     private String searchTerm;
     
-    private final int TOTAL_ELEMENT_BY_PAGE = 52;
-    
     private String source; 
     
     public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String,Object>> saxStrategy) {
@@ -44,7 +44,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
     @Override
     protected Map<String,Object> doSearch(String query) {
         Map<String, Object> result = new HashMap<String, Object>();
-        Pageable page = new PageRequest(pageNumber, this.TOTAL_ELEMENT_BY_PAGE); 
+        Pageable page = new PageRequest(pageNumber, TOTAL_ELEMENT_BY_PAGE); 
         Page<Image> pageResult = service.findByTitleOrDescriptionFilterOnCopyright(query, this.copyright, page);
         result.put("page", pageResult);
         result.put("path", this.queryString);

@@ -114,7 +114,11 @@
     <xsl:template match="h:span[@id='pubmedMoreStrategies']">
         <xsl:if test="//node()[@id='showPubMedStrategies']">
             <div class="rightSearchTips">
-                <strong>PubMed Searches</strong>
+                <div class="heading" style="
+                    font-weight: bold;
+                    padding: 10px 0 5px;
+                    border-bottom: solid 1px rgb(144,144,144);
+                    margin-bottom:4px;">PubMed Searches</div>
                 <ul>
                     <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_guidelines|pubmed_cochrane_reviews'))]">
                         <xsl:variable name="countFacetId" select="replace(attribute::id,'\w+-(.*)Facet','$1')"/>

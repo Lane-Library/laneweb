@@ -86,10 +86,10 @@
             </div>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:resourceId,'pubmed')">
-                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">abstract</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">abstract &#xBB;</a>
                 </xsl:when>
                 <xsl:when test="s:description">
-                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">more info</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">more info &#xBB;</a>
                 </xsl:when>
             </xsl:choose>
         </li>
@@ -144,10 +144,10 @@
             <xsl:value-of select="s:pub-text"/>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:link[1],'pubmed')">
-                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">abstract</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">abstract &#xBB;</a>
                 </xsl:when>
                 <xsl:when test="s:description or count(s:link) > 1">
-                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">more info</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">more info &#xBB;</a>
                 </xsl:when>
             </xsl:choose>
         </li>
@@ -259,7 +259,7 @@
     <xsl:template name="paginationLinks">
         <xsl:if test="number(/s:resources/@pages) &gt; 1 and number(/s:resources/@page) &lt; number(/s:resources/@pages) - 1">
             <li class="more resultsNav">
-                <a href="{concat($base-link,'&amp;page=',/s:resources/@page)}">next</a>
+                <a href="{concat($base-link,'&amp;page=',/s:resources/@page)}">next &#xBB;</a>
             </li>
         </xsl:if>
     </xsl:template>

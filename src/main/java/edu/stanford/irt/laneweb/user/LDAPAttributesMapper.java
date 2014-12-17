@@ -9,7 +9,7 @@ import javax.naming.directory.Attributes;
 
 import org.springframework.ldap.core.AttributesMapper;
 
-public class LDAPAttributesMapper implements AttributesMapper {
+public class LDAPAttributesMapper implements AttributesMapper<LDAPData> {
 
     private Set<String> activeAffiliations;
 
@@ -18,7 +18,7 @@ public class LDAPAttributesMapper implements AttributesMapper {
     }
 
     @Override
-    public Object mapFromAttributes(final Attributes attributes) throws NamingException {
+    public LDAPData mapFromAttributes(final Attributes attributes) throws NamingException {
         String name = null;
         String sunetid = null;
         String univId = null;

@@ -5,10 +5,10 @@
      * and hide the search indicator animated gif.
      */
     var SearchIndicator = Y.namespace("lane.SearchIndicator"),
-        node = Y.one("#searchIndicator");
+        node = Y.one(".searchIndicator");
 
     /**
-     * Adds class "on" to #searchIndicator
+     * Adds class "on" to .searchIndicator
      * @method show
      * @static
      */
@@ -18,7 +18,7 @@
         }
     };
     /**
-     * Removes class "on" from #searchIndicator
+     * Removes class "on" from .searchIndicator
      * @method hide
      * @static
      */

@@ -13,15 +13,14 @@ import java.net.URLDecoder;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * @author ceyates
- */
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class QueryTranslatorTest {
 
     private QueryTranslator translator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         this.translator = new QueryTranslator();
     }
 
@@ -35,7 +34,7 @@ public class QueryTranslatorTest {
                 assertTrue(element + ": " + translatedQuery, translatedQuery.indexOf("()") == -1);
                 assertTrue(element + ": " + translatedQuery, translatedQuery.indexOf(" NOT") != 0);
                 fail(element + " " + this.translator.getQuery());
-            } catch (IllegalArgumentException e) {
+            } catch (LanewebException e) {
             }
         }
     }
@@ -50,6 +49,14 @@ public class QueryTranslatorTest {
         assertEquals("((${green} & ${red}))  NOT ${blue}", this.translator.getQuery());
         this.translator.processString("green  red  -blue");
         assertEquals("((${green} & ${red}))  NOT ${blue}", this.translator.getQuery());
+        this.translator.processString("green \"red -blue\"");
+        assertEquals("((${green} & ${\"red -blue\"})) ", this.translator.getQuery());
+        this.translator.processString("\"blue and +orange\" green -purple \"blue +tan\"" );
+        assertEquals("((${\"blue and +orange\"} & ${green} & ${\"blue +tan\"}))  NOT ${purple}", this.translator.getQuery());
+        this.translator.processString("\"blue and +orange\" green -purple \"blue +tan" );
+        assertEquals("((${\"blue} & ${and} & ${orange\" green -purple \"blue} & ${tan})) ", this.translator.getQuery());
+        this.translator.processString("green - red");
+        assertEquals("((${green} & ${-} & ${red})) ", this.translator.getQuery());
     }
 
     @Test
@@ -63,40 +70,8 @@ public class QueryTranslatorTest {
                 assertTrue(query + ": " + translatedQuery, translatedQuery.indexOf("{}") == -1);
                 assertTrue(query + ": " + translatedQuery, translatedQuery.indexOf("()") == -1);
                 assertTrue(query + ": " + translatedQuery, translatedQuery.indexOf(" NOT") != 0);
-            } catch (IllegalArgumentException e) {
+            } catch (LanewebException e) {
             }
         }
     }
-    // public void testForOracleError() throws ClassNotFoundException,
-    // SQLException, IOException {
-    // Class.forName("oracle.jdbc.driver.OracleDriver");
-    // Connection conn =
-    // DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:pplane","","");
-    // PreparedStatement stmt = conn.prepareStatement("SELECT count(*) FROM
-    // ERESOURCE WHERE CONTAINS(TEXT,?) > 0");
-    // InputStream stream = getClass().getResourceAsStream("search-terms.txt");
-    // BufferedReader reader = new BufferedReader(new InputStreamReader(stream,
-    // "ASCII"));
-    // for (String query = reader.readLine(); null != query; query =
-    // reader.readLine()) {
-    // String decodedQuery = URLDecoder.decode(query,StandardCharsets.UTF_8);
-    // try {
-    // String translatedQuery = this.translator.translate(decodedQuery);
-    // stmt.setString(1, translatedQuery);
-    // ResultSet rs = stmt.executeQuery();
-    // if (rs.next()) {
-    // System.out.println(rs.getInt(1) + " : " + decodedQuery + " : " +
-    // translatedQuery);
-    // }
-    // } catch (IllegalArgumentException e) {
-    // System.out.println(e.getMessage() + " : " + decodedQuery + " : " +
-    // this.translator.getQuery());
-    // } catch (SQLException e) {
-    // System.out.println(e.getMessage() + " : " + decodedQuery + " : " +
-    // this.translator.translate(decodedQuery));
-    // fail(e.getMessage() + " : " + decodedQuery + " : " +
-    // this.translator.translate(decodedQuery));
-    // }
-    // }
-    // }
 }

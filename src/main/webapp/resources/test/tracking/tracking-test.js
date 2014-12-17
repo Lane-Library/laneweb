@@ -55,7 +55,7 @@ Y.use("*",  function(){
 
         testFavoritesClick: function() {
             Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
-            var link = Y.one("#favorites a");
+            var link = Y.one(".favorites a");
             link.simulate("click");
             Y.lane.Model.set(Y.lane.Model.AUTH, null);
             Y.Assert.areEqual(link.get("text"), this.event.label);
@@ -90,7 +90,7 @@ Y.use("*",  function(){
         },
 
         testLaneNavClick: function() {
-            var link = Y.one("#laneNav a");
+            var link = Y.one(".lane-nav a");
             link.simulate("click");
             Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:laneNav-top", this.event.category);
@@ -104,16 +104,6 @@ Y.use("*",  function(){
             link.simulate("click");
             Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:quickLinkClick", this.event.category);
-            Y.Assert.areEqual(link.get("href"), this.event.action);
-            Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
-            Y.Assert.areEqual(link.get("text"), this.pageView.title);
-        },
-
-        testTopResourcesClick: function() {
-            var link = Y.one("#topResources a");
-            link.simulate("click");
-            Y.Assert.areEqual(link.get("text"), this.event.label);
-            Y.Assert.areEqual("lane:topResources", this.event.category);
             Y.Assert.areEqual(link.get("href"), this.event.action);
             Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
@@ -231,6 +221,13 @@ Y.use("*",  function(){
             Y.Assert.areEqual("www.nejm.org", this.pageView.host);
             Y.Assert.areEqual("/" , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
+            Y.Assert.isNull(this.event);
+        },
+        
+        testClickEndsWithHtml: function() {
+            var link = Y.one("#endswithhtml");
+            link.simulate("click");
+            Y.Assert.isNull(this.pageView);
             Y.Assert.isNull(this.event);
         }
     });

@@ -7,7 +7,7 @@
         // get all the nodes with same-height-n
         nodes = Y.all("*[class^='same-height-'], *[class*=' same-height-']"),
         size = nodes.size(),
-        height,
+        heights,
         i,
         clazz = "",
         classes = {},
@@ -25,15 +25,13 @@
     for (clazz in classes) {
         if (classes.hasOwnProperty(clazz)) {
             // for each group find the tallest
-            maxHeight = 0;
             nodes = Y.all(classes[clazz]);
             size = nodes.size();
+            heights = [];
             for (i = 0; i < size; i++) {
-                height = nodes.item(i).get("clientHeight");
-                if (height > maxHeight) {
-                    maxHeight = height;
-                }
+                heights.push(nodes.item(i).get("clientHeight"));
             }
+            maxHeight = Math.max.apply(null, heights);
             // set all of the group to the tallest's height
             for (i = 0; i < size; i++) {
                 nodes.item(i).setStyle("height", maxHeight + "px");

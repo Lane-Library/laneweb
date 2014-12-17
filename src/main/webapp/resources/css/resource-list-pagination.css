@@ -2,7 +2,17 @@
     margin:0 17px 10px;
 }
 .view-by{
-    text-align:right;
+    float:right;
+    white-space:nowrap;
+}
+.labelTitle{
+    display:inline-block;
+    width:156px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    vertical-align:bottom;
+    padding-left:4px;
+    box-sizing:border-box;
 }
 .pagingButton{
     position:relative;
@@ -19,7 +29,6 @@
 .pagingButton .fa{
     margin-left:8px;
 }
-
 .content .pagingLabels{
     display:none;
     position:absolute;
@@ -27,12 +36,9 @@
     top:28px;
     background-color:white;
     border:1px solid #dadad9;
-    background-image:url(../images/sprite-vertall.png);
-    background-position:0 bottom;
-    background-repeat:repeat-x;
+    background:linear-gradient(white,rgb(232,232,232));
     border-radius:0 0 3px 3px;
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-    white-space:nowrap;
     padding:0 8px 0 6px;
     text-align:left;
     z-index:1;
@@ -40,14 +46,14 @@
 .pagingButton:hover .pagingLabels{
     display:block;
 }
-.pagingLabels span{
+.labelTitle{
     display:inline-block;
-    width:152px;
-    white-space:nowrap;
+    width:156px;
     overflow:hidden;
     text-overflow:ellipsis;
     vertical-align:bottom;
     padding-left:4px;
+    box-sizing:border-box;
 }
 .content .pagingLabels li{
     margin-right:0;

@@ -17,6 +17,7 @@ public class ShibTester {
     @RequestMapping(value = { "/secure/header-test", "/shib-secure/header-test" })
     public void testUrl(final HttpServletRequest request, final HttpServletResponse response) {
         StringBuilder result = new StringBuilder("\n\n\n<!--\n\nRequest Headers:\n\n");
+        @SuppressWarnings("unchecked")
         Enumeration<String> headers = request.getHeaderNames();
         while (headers.hasMoreElements()) {
             String headerName = headers.nextElement();
@@ -50,7 +51,7 @@ public class ShibTester {
                 result.append("\n");
             }
         }
-        response.setHeader("Content-Type", "text/plain");
+        response.setContentType("text/plain");
         try {
             response.getOutputStream().write(result.toString().getBytes("UTF-8"));
         } catch (IOException e) {

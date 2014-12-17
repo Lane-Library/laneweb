@@ -7,6 +7,25 @@ body,select,input,button,textarea {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+/*class="sprite" gets the background sprite*/
+.sprite {
+    background-image : url(../images/sprite-all.png);
+}
+/*.close is the X close box on popups and feedback*/
+.close {
+    width:24px;
+    height:24px;
+    position:absolute;
+    right:3px;
+    top:3px;
+    background-position:-40px -160px;
+    cursor:pointer
+}
+
+.close:hover {
+    background-position:-40px -200px
+}
+
 p {
 	margin-bottom: 12px;
 }
@@ -40,16 +59,12 @@ em {
 }
 
 .rss-link {
-	float: right;
-	background-image: url(../images/sprite-all.png);
 	background-position: -41px -240px;
 	height: 15px;
 	width: 15px;
-	font-size: 0;
-	text-indent: -10000px;
 	display: block;
-	margin-top: 4px;
-	border-bottom: none;
+	float:right;
+	margin:0 12px;
 }
 
 .rss-link:hover {
@@ -113,11 +128,12 @@ em {
 }
 
 .content .calendar li {
-	width: 125px;
-	height: 75px;
+	width: 138px;
+	height: 88px;
 	float: left;
-	margin: .2em;
-	padding: .5em;
+	margin: 2.6px;
+	padding: 6.5px;
+	box-sizing:border-box;
 	list-style: none inside none;
 	margin-left: 0;
 	background-color: #09425a;
@@ -125,23 +141,10 @@ em {
 	color: #fff;
 }
 
-.content .calendar li p {
-	font-size: 13px;
-}
-
 .calendar li p {
 	line-height: normal;
 	font-weight: normal;
 	margin-top: .5em;
-}
-
-#portalList .empty-cell {
-	background-color: white;
-	border-bottom: medium none;
-	display: block;
-	margin: 1px;
-	padding: 15px;
-	width: 200px;
 }
 
 .seminar {

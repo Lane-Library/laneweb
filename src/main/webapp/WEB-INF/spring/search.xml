@@ -27,7 +27,7 @@
         </constructor-arg>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"
+    <!--<bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"
         class="edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListXHTMLSAXStrategy">
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.search.saxstrategy.MergedSearchSAXStrategy">
@@ -42,7 +42,7 @@
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.search.saxstrategy.SearchListPagingDataSAXStrategy"/>
         </constructor-arg>
-    </bean>
+    </bean>-->
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"
         class="edu.stanford.irt.laneweb.search.saxstrategy.SolrPagingEresourceSAXStrategy">

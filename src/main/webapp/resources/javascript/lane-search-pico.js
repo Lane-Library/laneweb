@@ -2,12 +2,70 @@
 (function() {
     var Lane = Y.lane,
         form = Y.one('#search'),
-        nav = Y.one('#laneNav'),
+        nav = Y.one(".lane-nav"),
         container = Y.one("#searchFormContainer"),
         searchTerms,
         picoIsOn = false,
         picoTextInputs = [],
         picoFields,
+        getPicoQuery = function(){
+            //build query terms from pico inputs
+            var qString = '', i;
+            for (i = 0; i < picoTextInputs.length; i++) {
+                if (picoTextInputs[i].getValue()) {
+                    qString += '(' + picoTextInputs[i].getValue() + ')';
+                }
+            }
+            if ( qString.length ){
+                qString = qString.replace(/\)\(/g, ") AND (");
+                if (qString.indexOf('(') === 0 && qString.indexOf(')') === qString.length - 1) {
+                    qString = qString.replace(/(\(|\))/g, '');
+                }
+            }
+            return qString;
+        },
+        updateQueryInput = function() {
+            if (picoIsOn && getPicoQuery()) {
+                searchTerms.setValue(getPicoQuery());
+            }
+        },
+        PICO = '<fieldset class="picoFields">' +
+        '<input name="p" id="clinicalP" type="text" title="patient condition"/>' +
+        '<input name="i" id="clinicalI" type="text" title="intervention"/>' +
+        '<input name="c" id="clinicalC" type="text" title="comparison"/>' +
+        '<input name="o" id="clinicalO" type="text" title="outcome"/>' +
+        '</fieldset>',
+        createPicoFields = function() {
+            var i, inputs, picoSuggest, queryString = {};
+            if (location.search) {
+                queryString = Y.QueryString.parse(location.search.substring(1));
+            }
+            picoFields = Y.Node.create(PICO);
+            inputs = picoFields.all('input');
+            for (i = 0; i < inputs.size(); i++) {
+                // set input value if found in query string
+                if (queryString[inputs.item(i).get('name')] !== undefined) {
+                    inputs.item(i).set('value',queryString[inputs.item(i).get('name')]);
+                }
+                picoTextInputs.push(new Lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
+                inputs.item(i).on("blur", updateQueryInput);
+                inputs.item(i).on("keyup", updateQueryInput);
+                switch(inputs.item(i).get('name')){
+                case 'p':
+                    picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-d");
+                    break;
+                case 'i':
+                    picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-i");
+                    break;
+                case 'c':
+                    picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-di");
+                    break;
+                default :
+                }
+                picoSuggest.on("select", updateQueryInput);
+            }
+            form.insert(picoFields,0);
+        },
         picoOn = function() {
             if (!picoIsOn) {
                 if (!picoFields) {
@@ -29,65 +87,6 @@
                 picoIsOn = false;
             }
 
-        },
-        PICO = '<fieldset id="picoFields">' +
-               '<input name="p" id="clinicalP" type="text" title="patient condition"/>' +
-               '<input name="i" id="clinicalI" type="text" title="intervention"/>' +
-               '<input name="c" id="clinicalC" type="text" title="comparison"/>' +
-               '<input name="o" id="clinicalO" type="text" title="outcome"/>' +
-               '</fieldset>',
-        createPicoFields = function() {
-            var i, inputs, picoSuggest, queryString = {};
-            if (location.search) {
-                queryString = Y.QueryString.parse(location.search.substring(1));
-            }
-            picoFields = Y.Node.create(PICO);
-            inputs = picoFields.all('input');
-            for (i = 0; i < inputs.size(); i++) {
-                // set input value if found in query string
-                if (queryString[inputs.item(i).get('name')] !== undefined) {
-                    inputs.item(i).set('value',queryString[inputs.item(i).get('name')]);
-                }
-                picoTextInputs.push(new Lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
-                inputs.item(i).on("blur",function(){
-                    searchTerms.setValue(getPicoQuery());
-                });
-                inputs.item(i).on("keyup",function(){
-                    searchTerms.setValue(getPicoQuery());
-                });
-                switch(inputs.item(i).get('name')){
-                    case 'p':
-                        picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-d");
-                        break;
-                    case 'i':
-                        picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-i");
-                        break;
-                    case 'c':
-                        picoSuggest = new Lane.Suggest(inputs.item(i),"mesh-di");
-                        break;
-                }
-                picoSuggest.on("select", function() {
-                    if(picoIsOn && getPicoQuery()){
-                        searchTerms.setValue(getPicoQuery());
-                    }
-                });
-            }
-            form.insert(picoFields,0);
-        },
-         getPicoQuery = function(){ //build query terms from pico inputs
-            var qString = '', i;
-            for (i = 0; i < picoTextInputs.length; i++) {
-                if (picoTextInputs[i].getValue()) {
-                    qString += '(' + picoTextInputs[i].getValue() + ')';
-                }
-            }
-            if ( qString.length ){
-                qString = qString.replace(/\)\(/g, ") AND (");
-                if (qString.indexOf('(') === 0 && qString.indexOf(')') === qString.length - 1) {
-                    qString = qString.replace(/(\(|\))/g, '');
-                }
-            }
-            return qString;
         };
     if (form) {
         searchTerms = new Lane.TextInput(Y.one("#searchTerms"));

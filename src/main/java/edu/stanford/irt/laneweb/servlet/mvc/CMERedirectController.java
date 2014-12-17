@@ -30,25 +30,22 @@ public class CMERedirectController {
 
     private static final String UTD_CME_URL = "http://www.uptodate.com/contents/search?";
 
-    @Autowired
     private CompositeDataBinder dataBinder;
 
-    public CMERedirectController() {
-        // empty default constructor
-    }
-
+    @Autowired
     public CMERedirectController(final CompositeDataBinder dataBinder) {
         this.dataBinder = dataBinder;
     }
 
     @RequestMapping(value = "redirect/cme")
-    public void cmeRedirect(@ModelAttribute(Model.AUTH) final String userHash,
-            @ModelAttribute(Model.BASE_PATH) final String basePath, @ModelAttribute(Model.EMRID) final String emrid,
-            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks, @RequestParam final String url,
-            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        if (url == null) {
-            throw new IllegalArgumentException("null url");
-        }
+    public void cmeRedirect(
+            @ModelAttribute(Model.AUTH) final String userHash,
+            @ModelAttribute(Model.BASE_PATH) final String basePath,
+            @ModelAttribute(Model.EMRID) final String emrid,
+            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks,
+            @RequestParam final String url,
+            final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException {
         if (emrid == null && userHash == null) {
             response.sendRedirect(basePath + "/secure/redirect/cme?url=" + url);
         } else {
@@ -57,13 +54,13 @@ public class CMERedirectController {
     }
 
     @RequestMapping(value = "secure/redirect/cme")
-    public void cmeSecureRedirect(@ModelAttribute(Model.AUTH) final String userHash,
+    public void cmeSecureRedirect(
+            @ModelAttribute(Model.AUTH) final String userHash,
             @ModelAttribute(Model.EMRID) final String emrid,
-            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks, @RequestParam final String url,
-            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        if (url == null) {
-            throw new IllegalArgumentException("null url");
-        }
+            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks,
+            @RequestParam final String url,
+            final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException {
         doRedirect(userHash, emrid, proxyLinks, url, request, response);
     }
 
@@ -92,30 +89,27 @@ public class CMERedirectController {
         }
     }
 
-    private String createCMELink(final String link, final String emrid, final String userHash, final boolean proxyLinks) {
+    private String createCMELink(final String url, final String emrid, final String userHash, final boolean proxyLinks) {
         StringBuilder sb = new StringBuilder();
-        String id = null;
-        String args = null;
         if (proxyLinks) {
             sb.append(PROXY_LINK);
         }
         if (emrid == null && userHash == null) {
-            sb.append(link);
-            return sb.toString();
-        }
-        if (emrid != null) {
-            id = emrid;
-            args = SHC_EMRID_ARGS;
-        } else if (userHash != null) {
-            id = removeDomainFromUserHash(userHash);
-            args = SU_USERID_ARGS;
-        }
-        if (link.contains("?")) {
-            sb.append(link).append("&").append(QUESTION_MARK_PATTERN.matcher(args).replaceFirst(id));
-        } else if (link.endsWith("/") || link.endsWith("online") || link.endsWith("search")) {
-            sb.append(UTD_CME_URL).append(QUESTION_MARK_PATTERN.matcher(args).replaceFirst(id));
+            sb.append(url);
         } else {
-            sb.append(link);
+            String args = null;
+            if (emrid != null) {
+                args = QUESTION_MARK_PATTERN.matcher(SHC_EMRID_ARGS).replaceFirst(emrid);
+            } else {
+                args = QUESTION_MARK_PATTERN.matcher(SU_USERID_ARGS).replaceFirst(removeDomainFromUserHash(userHash));
+            }
+            if (url.contains("?")) {
+                sb.append(url).append("&").append(args);
+            } else if (url.endsWith("/") || url.endsWith("online") || url.endsWith("search")) {
+                sb.append(UTD_CME_URL).append(args);
+            } else {
+                sb.append(url);
+            }
         }
         return sb.toString();
     }

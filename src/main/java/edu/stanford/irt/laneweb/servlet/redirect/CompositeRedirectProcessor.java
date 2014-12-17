@@ -7,6 +7,10 @@ public class CompositeRedirectProcessor implements RedirectProcessor {
 
     private List<RedirectProcessor> redirectProcessors = Collections.emptyList();
 
+    public CompositeRedirectProcessor(final List<RedirectProcessor> redirectProcessors) {
+        this.redirectProcessors = redirectProcessors;
+    }
+
     public String getRedirectURL(final String uri, final String basePath, final String queryString) {
         String redirectURI = null;
         for (RedirectProcessor redirectProcessor : this.redirectProcessors) {
@@ -16,9 +20,5 @@ public class CompositeRedirectProcessor implements RedirectProcessor {
             }
         }
         return redirectURI;
-    }
-
-    public void setRedirectProcessors(final List<RedirectProcessor> redirectProcessors) {
-        this.redirectProcessors = redirectProcessors;
     }
 }

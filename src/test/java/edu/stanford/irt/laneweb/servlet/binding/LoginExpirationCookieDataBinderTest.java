@@ -19,12 +19,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.CookieName;
 
-public class UserCookieDataBinderTest {
+public class LoginExpirationCookieDataBinderTest {
 
-    private UserCookieDataBinder binder;
+    private LoginExpirationCookieDataBinder binder;
 
     private Cookie cookie;
 
@@ -37,7 +37,7 @@ public class UserCookieDataBinderTest {
     @Before
     public void setUp() throws Exception {
         this.logger = createMock(Logger.class);
-        this.binder = new UserCookieDataBinder(this.logger);
+        this.binder = new LoginExpirationCookieDataBinder(this.logger);
         this.model = new HashMap<String, Object>();
         this.request = createMock(HttpServletRequest.class);
         this.cookie = createMock(Cookie.class);
@@ -46,22 +46,19 @@ public class UserCookieDataBinderTest {
     @Test
     public void testBindBothCookies() {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
-        expect(this.cookie.getName()).andReturn(Model.PERSISTENT_LOGIN_EXPIRATION_DATE);
+        expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
         expect(this.cookie.getValue()).andReturn(
                 Long.toString(System.currentTimeMillis() + (1000 * 60 * 60 * 24) + 100));
-        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
-        expect(this.cookie.getValue()).andReturn("value");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
         assertEquals("1", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
-        assertEquals("value", this.model.get(Model.USER_COOKIE));
         verify(this.request, this.cookie);
     }
 
     @Test
     public void testBindExpirationCookieNow() {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
-        expect(this.cookie.getName()).andReturn(Model.PERSISTENT_LOGIN_EXPIRATION_DATE);
+        expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
         expect(this.cookie.getValue()).andReturn(Long.toString(System.currentTimeMillis()));
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
@@ -72,7 +69,7 @@ public class UserCookieDataBinderTest {
     @Test
     public void testBindExpirationCookieOneDay() {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
-        expect(this.cookie.getName()).andReturn(Model.PERSISTENT_LOGIN_EXPIRATION_DATE);
+        expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
         expect(this.cookie.getValue()).andReturn(
                 Long.toString(System.currentTimeMillis() + (1000 * 60 * 60 * 24) + 100));
         replay(this.request, this.cookie);
@@ -84,7 +81,7 @@ public class UserCookieDataBinderTest {
     @Test
     public void testBindExpirationNumberFormatException() {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
-        expect(this.cookie.getName()).andReturn(Model.PERSISTENT_LOGIN_EXPIRATION_DATE);
+        expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
         expect(this.cookie.getValue()).andReturn("bad number");
         this.logger.error(eq("For input string: \"bad number\""), isA(NumberFormatException.class));
         replay(this.request, this.cookie, this.logger);
@@ -98,7 +95,6 @@ public class UserCookieDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
         replay(this.request);
         this.binder.bind(this.model, this.request);
-        assertNull(this.model.get(Model.USER_COOKIE));
         verify(this.request);
     }
 
@@ -107,7 +103,6 @@ public class UserCookieDataBinderTest {
         expect(this.request.getCookies()).andReturn(null);
         replay(this.request);
         this.binder.bind(this.model, this.request);
-        assertNull(this.model.get(Model.USER_COOKIE));
         verify(this.request);
     }
 
@@ -117,18 +112,15 @@ public class UserCookieDataBinderTest {
         expect(this.cookie.getName()).andReturn("name");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertNull(this.model.get(Model.USER_COOKIE));
         verify(this.request, this.cookie);
     }
 
     @Test
     public void testBindUserCookie() {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
-        expect(this.cookie.getName()).andReturn(UserCookieCodec.LANE_COOKIE_NAME);
-        expect(this.cookie.getValue()).andReturn("value");
+        expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertEquals("value", this.model.get(Model.USER_COOKIE));
         verify(this.request, this.cookie);
     }
 }

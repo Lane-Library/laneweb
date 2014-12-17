@@ -9,12 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import edu.stanford.irt.laneweb.codec.UserCookieCodec;
-import edu.stanford.irt.laneweb.model.Model;
-
 public class LogoutServlet extends HttpServlet {
-
-    private static final String EZPROXY_COOKIE_NAME = "ezproxy";
 
     private static final long serialVersionUID = 1L;
 
@@ -22,16 +17,17 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        Cookie userCookie = new Cookie(UserCookieCodec.LANE_COOKIE_NAME, null);
+        Cookie userCookie = new Cookie(CookieName.USER.toString(), null);
         userCookie.setPath("/");
         userCookie.setMaxAge(0);
         resp.addCookie(userCookie);
-        Cookie cookie = new Cookie(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, null);
+        Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         resp.addCookie(cookie);
-        Cookie ezproxyCookie = new Cookie(EZPROXY_COOKIE_NAME, null);
+        Cookie ezproxyCookie = new Cookie(CookieName.EZPROXY.toString(), null);
         ezproxyCookie.setPath("/");
+        ezproxyCookie.setDomain(".stanford.edu");
         ezproxyCookie.setMaxAge(0);
         resp.addCookie(ezproxyCookie);
         HttpSession session = req.getSession(false);
@@ -39,7 +35,7 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
         String referer = req.getHeader("referer");
-        if(referer == null){
+        if(referer == null || referer.indexOf("/secure/") > -1){
             referer = "/index.html";
         }
        

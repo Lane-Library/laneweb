@@ -32,30 +32,9 @@ public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Integer>
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", NAMESPACE);
             XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT_COUNT);
-            AttributesImpl attributes;
             boolean haveStartRegion = false;
             for (Entry<String, Integer> entry : regionMap.entrySet()) {
-                String key = entry.getKey();
-                Integer count = entry.getValue();
-                int separatorIndex = key.indexOf("--");
-                boolean isRegion = separatorIndex == -1;
-                if (isRegion) {
-                    if (haveStartRegion) {
-                        XMLUtils.endElement(xmlConsumer, NAMESPACE, REGION);
-                    }
-                    attributes = new AttributesImpl();
-                    attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, key.toLowerCase());
-                    attributes.addAttribute(NAMESPACE, TOTAL, TOTAL, CDATA, count.toString());
-                    XMLUtils.startElement(xmlConsumer, NAMESPACE, REGION, attributes);
-                    haveStartRegion = true;
-                } else {
-                    String subregion = key.substring(separatorIndex + 2).toLowerCase();
-                    attributes = new AttributesImpl();
-                    attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subregion);
-                    XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION, attributes);
-                    XMLUtils.data(xmlConsumer, count.toString());
-                    XMLUtils.endElement(xmlConsumer, NAMESPACE, SUB_REGION);
-                }
+                haveStartRegion = handleEntry(xmlConsumer, entry, haveStartRegion);
             }
             if (haveStartRegion) {
                 XMLUtils.endElement(xmlConsumer, NAMESPACE, REGION);
@@ -66,5 +45,32 @@ public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Integer>
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
+    }
+
+    private boolean handleEntry(final XMLConsumer xmlConsumer, final Entry<String, Integer> entry,
+            final boolean haveStartRegion) throws SAXException {
+        boolean foundStartRegion = haveStartRegion;
+        String key = entry.getKey().toLowerCase();
+        Integer count = entry.getValue();
+        int separatorIndex = key.indexOf("--");
+        boolean isRegion = separatorIndex == -1;
+        if (isRegion) {
+            if (haveStartRegion) {
+                XMLUtils.endElement(xmlConsumer, NAMESPACE, REGION);
+            }
+            AttributesImpl attributes = new AttributesImpl();
+            attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, key);
+            attributes.addAttribute(NAMESPACE, TOTAL, TOTAL, CDATA, count.toString());
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, REGION, attributes);
+            foundStartRegion = true;
+        } else {
+            String subregion = key.substring(separatorIndex + 2);
+            AttributesImpl attributes = new AttributesImpl();
+            attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subregion);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION, attributes);
+            XMLUtils.data(xmlConsumer, count.toString());
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, SUB_REGION);
+        }
+        return foundStartRegion;
     }
 }

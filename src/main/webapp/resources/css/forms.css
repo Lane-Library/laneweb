@@ -11,9 +11,9 @@
 }
 #subscribe input,#subscribe textarea,#subscribe select,#feedback input,#feedback textarea,#feedback select
 	{
-	box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 }
 #feedback textarea {
 	height: 150px;
@@ -38,6 +38,7 @@
 	height: 37px;
 	padding: 6px;
 	margin-top: 24px;
+	box-sizing:border-box;
 }
 #subscribe input:hover,#subscribe textarea:hover,#subscribe input:focus,#subscribe textarea:focus,#feedback input:hover,#feedback textarea:hover,#feedback input:focus,#feedback textarea:focus
 	{
@@ -48,98 +49,6 @@
 
 .submit-btn {
 	text-align: center;
-}
-
-/*-------------------------persistent login--------------------------------------------------------------------------*/
-
-div#persistent {
-	height:350px;
-	width:980px;
-	padding: 0px !important;
-	text-align:center;
-}
-
-#persistent .header{
-	background-color:  #aabec6;
-	/*background-color:  rgb(236, 241, 242);*/
-	padding-top: 0px !important;
-	height: 90px;
-}
-
-#persistent .header span{
-	display:inline-block;
-	width: 250px;
-	height: 70px;
-	background-position: -346px -11px;
-	background-image: url('../../graphics/logos/organizational-logos.png');
-	background-repeat: no-repeat;
-}
-
-#persistent .is-persistent{
-	text-align: left;
-	margin-top: 35px;
-	font-weight: bold;
-	margin-left: 20px;
-}
-
-#persistent .is-persistent input{
-	margin-right: 3px;
-}
-
-#shibboleth-links {
-	margin-top: 41px;
-	color: grey;
-}
-
-#shibboleth-links .organization{  
-	padding:18px;
-}
-
-#shibboleth-links .organization li{
-	display: inline-block;
-	border-bottom: none;
-	padding: 3px 6px 3px 6px;
-	}
-
-#shibboleth-links .organization a{
-	display: block;
-	border: 1px solid #ddd;
-	padding:12px 3px 12px 3px;
-	background-color: white;
-}
-
-
-#shibboleth-links .organization span{
-	display: inline-block;
-	width: 166px;
-	height: 50px;
-	background-color:  white;
-	background-repeat: no-repeat;
-	background-image: url('../../graphics/logos/organizational-logos.png');
-}
-
-#shibboleth-links .organization a#Stanford span{
-background-position: -10px -236px;
-}
-#shibboleth-links .organization a#SHC span{
-background-position: -175px -233px;
-}
-#shibboleth-links .organization a#UHA span{
-background-position: -362px -233px;
-}
-
-#shibboleth-links .organization a#LPCH span{
-background-position: -567px -233px;
-}
-
-#shibboleth-links .organization a#PCHA span{
-background-position: -763px -233px;
-}
-
-
-
-#persistent #login {
-	position: inherit;
 }
 
 /*-------------------------feedback widget--------------------------------------------------------------------------*/
@@ -164,9 +73,9 @@ background-position: -763px -233px;
 .yui3-lightbox #feedbackItems {
 	background-color: white;
 	border: 2px solid #fff;
-	box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	-moz-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	-webkit-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
+    box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 	/* For IE 8 */
 	-ms-filter:
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
@@ -182,14 +91,15 @@ background-position: -763px -233px;
 }
 .yui3-feedback-menu-active {
 	background-color: white;
-	width: 225px;
+	width: 250px;
+	box-sizing:border-box;
 	border-top: 2px solid #fff;
 	border-left: 2px solid #fff;
 	border-bottom: 2px solid #fff;
 	border-right: none;
-	box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	-moz-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	-webkit-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
+    box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 	/* For IE 8 */
 	-ms-filter:
 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
@@ -247,7 +157,8 @@ background-position: -763px -233px;
     margin-right : 10px;
     padding : 5px;
     text-align : right;
-    width : 30%;
+    width : 32%;
+    box-sizing:border-box;
 }
 .requiredField,
 .validatedField {

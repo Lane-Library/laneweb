@@ -9,20 +9,20 @@ Y.use('console', "node-event-simulate", 'test', function(Y){
                 newVal:'clinical-all',
                 oldVal:'all-all'
             });
-            var nav = Y.one('#laneNav');
+            var nav = Y.one('.lane-nav');
             var search = Y.one('#search');
                 Y.Assert.isTrue(nav.hasClass('clinical'), 'nav not class clinical');
                 Y.Assert.isTrue(search.hasClass('clinical'), 'search form not class clinical');
-                Y.Assert.isTrue(Y.Lang.isObject(Y.one('#picoFields')), 'no pico fields');
+                Y.Assert.isTrue(Y.Lang.isObject(Y.one('.picoFields')), 'no pico fields');
         },
         testSourceChangeNotClinical : function() {
             Y.lane.fire('search:sourceChange', {
                 newVal:'all-all',
                 oldVal:'clinical-all'
             });
-            var nav = Y.one('#laneNav');
+            var nav = Y.one('.lane-nav');
             var search = Y.one('#search');
-            var picoFields = Y.one("#picoFields");
+            var picoFields = Y.one(".picoFields");
             Y.Assert.isFalse(nav.hasClass('clinical'));
             Y.Assert.isFalse(search.hasClass('clinical'));
             Y.Assert.isFalse(picoFields.hasClass("active"));

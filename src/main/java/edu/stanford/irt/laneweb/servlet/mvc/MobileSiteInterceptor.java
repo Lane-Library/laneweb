@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,21 +59,19 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws IOException {
         SitePreference sitePreference = this.sitePreferenceHandler.handleSitePreference(request, response);
-        String requestURI = request.getRequestURI();
+        String servletPath = request.getServletPath();
         String basePath = request.getContextPath();
-        if (requestURI.indexOf(MOBILE_PATH) > -1) {
+        if (servletPath.indexOf(MOBILE_PATH) > -1) {
             if (sitePreference == SitePreference.NORMAL) {
                 response.sendRedirect(basePath + MOBILE_HELP_PATH);
                 return false;
             }
         } else {
-            for (Entry<String, String> entry : this.desktopRedirectMap.entrySet()) {
-                if (requestURI.equals(basePath + entry.getKey())) {
-                    Device device = DeviceUtils.getRequiredCurrentDevice(request);
-                    if (sitePreference == SitePreference.MOBILE || device.isMobile() && sitePreference == null) {
-                        response.sendRedirect(basePath + entry.getValue());
-                        return false;
-                    }
+            if (this.desktopRedirectMap.containsKey(servletPath)) {
+                Device device = DeviceUtils.getRequiredCurrentDevice(request);
+                if (sitePreference == SitePreference.MOBILE || device.isMobile() && sitePreference == null) {
+                    response.sendRedirect(basePath + this.desktopRedirectMap.get(servletPath));
+                    return false;
                 }
             }
         }

@@ -9,178 +9,237 @@
             model.on(model.QUERY + "Change", function(event) {
                 searchTerms = event.newVal;
             });
-            //TODO more descriptive variable names
-            //TODO put conditionals into sub-functions
             //TODO more thorough documentation
-            //TODO use 'track' less
-            var getEventTrackingData = function(event) {
-                var link = event.target, category = null, action = null, label = null, value = null;
+            var getSearchResultsTrackingData = function(link) {
+                var trackingData = {}, list = link.ancestor(".lwSearchResults"),
+                    pageStart = Y.one("#pageStart");
+                    // pageStart is the value in the pageStart span or 1 if its not there.
+                pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
+                trackingData.value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
+                trackingData.label = link.get('text');
+                if (searchTerms) {
+                    trackingData.category = "lane:searchResultClick";
+                    trackingData.action = searchTerms;
+                } else {
+                    trackingData.category = "lane:browseResultClick";
+                    trackingData.action = location.get("pathname");
+                }
+                return trackingData;
+            },
+            getEventTrackingDataByAncestor = function(link) {
+                var i, trackingData = {},
+                handlers = [
+                            {selector:".favorites", category:"lane:bookmarkClick"},
+                            {selector:"#bookmarks", category:"lane:bookmarkClick"},
+                            {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
+                            {selector:".lane-nav", category:"lane:laneNav-top"},
+                            {selector:"#qlinks", category:"lane:quickLinkClick"},
+                            {selector:".banner-content", category:"lane:bannerClick"},
+                            {selector:".sectionMenu", category:"lane:laneNav-sectionMenu"},
+                            {selector:"#laneFooter", category:"lane:laneNav-footer"}
+                            ];
+                //TODO: this counts My Bookmarks clicks as well: check if href=/favorites.html and skip?
+                for (i = 0; i < handlers.length; i++) {
+                    if (link.ancestor(handlers[i].selector)) {
+                        trackingData.category = handlers[i].category;
+                        if (trackingData.category === "lane:bookmarkClick") {
+                            trackingData.action = model.get(model.AUTH);
+                            trackingData.label = Tracker.getTrackedTitle(link);
+                        } else {
+                            trackingData.action = link.get('href');
+                            trackingData.label = link.get('text');
+                        }
+                    }
+                }
+                return trackingData;
+            },
+            getEventTrackingData = function(event) {
+                var link = event.target, trackingData = {};
                 while (link && link.get('nodeName') !== 'A') {
                     link = link.get('parentNode');
                 }
-                //TODO: this counts My Bookmarks clicks as well: check if href=/favorites.html and skip?
-                if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
-                    category = "lane:bookmarkClick";
-                    action = model.get(model.AUTH);
-                    label = Tracker.getTrackedTitle(link);
-                }
-                else if (link.ancestor("#laneNav")) {
-                    category = "lane:laneNav-top";
-                    action = link.get('href');
-                    label = link.get('text');
-                }
-                else if (link.ancestor("#qlinks")) {
-                    category = "lane:quickLinkClick";
-                    action = link.get('href');
-                    label = link.get('text');
-                }
-                else if (link.ancestor("#topResources")) {
-                    category = "lane:topResources";
-                    action = link.get('href');
-                    label = link.get('text');
-                }
-                else if (link.ancestor(".banner-content")) {
-                    category = "lane:bannerClick";
-                    action = link.get('href');
-                    label = link.get('title');
-                }
-                else if (link.ancestor(".sectionMenu")) {
-                    category = "lane:laneNav-sectionMenu";
-                    action = link.get('href');
-                    label = link.get('text');
-                }
-                else if (link.ancestor("#laneFooter")) {
-                    category = "lane:laneNav-footer";
-                    action = link.get('href');
-                    label = link.get('text');
-                }
-                else if (link.ancestor(".lwSearchResults")) {
-                    var list = link.ancestor(".lwSearchResults"),
-                        pageStart = Y.one("#pageStart");
-                    // pageStart is the value in the pageStart span or 1 if its not there.
-                    pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
-                    value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
-                    label = link.get('text');
-                    if (searchTerms) {
-                        category = "lane:searchResultClick";
-                        action = searchTerms;
-                    } else {
-                        category = "lane:browseResultClick";
-                        action = location.get("pathname");
-                    }
-                }
-                else if (link.get('href').match('^javascript:.*bookmarklet.*')) {
-                    category = "lane:bookmarklet";
+                if (link.ancestor(".lwSearchResults")) {
+                    trackingData = getSearchResultsTrackingData(link);
+                } else if (link.get('href').match('^javascript:.*bookmarklet.*')) {
                     if ("dragend" === event.type) {
-                        category += "Drag";
+                        trackingData.category = "lane:bookmarkletDrag";
                     }
                     else if ("contextmenu" === event.type) {
-                        category += "RightClick";
+                        trackingData.category = "lane:bookmarkletRightClick";
                     }
-                    action = link.get('href');
-                    label = link.get('title');
+                    trackingData.action = link.get('href');
+                    trackingData.label = link.get('title');
+                } else {
+                    trackingData = getEventTrackingDataByAncestor(link);
                 }
-                return {
-                    category: category,
-                    action: action,
-                    label: label,
-                    value: value
-                };
+                return trackingData;
             },
-            getPageviewTrackingData = function(event) {
-                var node = event.target, host, path, query, external, title;
-                if (event.type === 'click') {
-                    if (node.hasClass('yui3-accordion-item-trigger')) {
-                        host = location.get("host");
-                        path = location.get("pathname");
-                        query = location.get("search");
-                        external = false;
-                    } else {
-                        if (node.get('nodeName') !== 'A' && node.one('a')) {
-                            node = node.one('a');
-                        }
-                        while (node && node.get('nodeName') !== 'A') {
-                            node = node.get('parentNode');
-                            if (node === null) {
-                                throw 'not trackable';
-                            }
-                        }
-                        if (node.get('pathname').indexOf('cookiesFetch') > -1) {
-                            host = decodeURIComponent(node.get('search'));
-                            host = host.substring(host.indexOf("path=") + 6);
-                            if (host.indexOf("&") > -1) {
-                                host = host.substring(0, host.indexOf("&"));
-                            }
-                            host = host.substring(host.indexOf("//") + 2);
-                            path = host.substring(host.indexOf("/"));
-                            host = host.substring(0, host.indexOf("/"));
-                        } else if (node.get('pathname').indexOf('secure/apps/proxy/credential') > -1 || node.get('pathname').indexOf('redirect/cme') > -1 || node.get('host').indexOf('laneproxy') === 0) {
-                            host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
-                            if (host.indexOf('/') > -1) {
-                                path = host.substring(host.indexOf('/'));
-                                if (path.indexOf('?') > -1) {
-                                    query = path.substring(path.indexOf('?'), path.length);
-                                    path = path.substring(0, path.indexOf('?'));
-                                }
-                                host = host.substring(0, host.indexOf('/'));
-                            } else {
-                                query = '';
-                                path = '/';
-                            }
-                            external = true;
-                        } else if (node.get('rel') && (node.get('rel').indexOf('popup local') === 0)) {
-                            host = location.get("host");
-                            path = location.get("pathname");
-                            query = location.get("search");
-                        } else {
-                            host = node.get('host');
-                            if (host.indexOf(':') > -1) {
-                                host = host.substring(0, host.indexOf(':'));
-                            }
-                            path = node.get('pathname');
-                            external = host !== location.get("host");
-                            query = node.get('search');
-                        }
+            isProxyOrCMELogin = function(link) {
+                var search = link.get("search"),
+                    pathname = link.get("pathname"),
+                    isProxyOrCMELogin = false;
+                if (search && search.indexOf("url=") > -1 && /(secure\/apps\/proxy\/credential|redirect\/cme)/.test(pathname)) {
+                    isProxyOrCMELogin = true;
+                }
+                return isProxyOrCMELogin;
+            },
+            isLocalPopup = function(node) {
+                var rel = node.getAttribute("rel");
+                return rel && rel.indexOf("popup local") === 0;
+            },
+            getTrackedHost = function(node) {
+                var host, pathname = node.get("pathname");
+                if (node.hasClass('yui3-accordion-item-trigger')) {
+                    host = location.get("host");
+                } else if (pathname.indexOf("cookiesFetch") > -1) {
+                    host = decodeURIComponent(node.get('search'));
+                    host = host.substring(host.indexOf("path=") + 6);
+                    if (host.indexOf("&") > -1) {
+                        host = host.substring(0, host.indexOf("&"));
                     }
+                    host = host.substring(host.indexOf("//") + 2);
+                    host = host.substring(0, host.indexOf("/"));
+                } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {
+                    host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
+                    if (host.indexOf('/') > -1) {
+                        host = host.substring(0, host.indexOf('/'));
+                    }
+                } else if (isLocalPopup(node)) {
+                    host = location.get("host");
+                } else {
+                    host = node.get('hostname');
+                }
+                return host;
+            },
+            getTrackedPath = function(node) {
+                var path, host, pathname = node.get("pathname");
+                if (isLocalPopup(node) || node.hasClass('yui3-accordion-item-trigger')) {
+                    path = location.get("pathname");
+                } else if (pathname.indexOf('cookiesFetch') > -1) {
+                    host = decodeURIComponent(node.get('search'));
+                    host = host.substring(host.indexOf("path=") + 6);
+                    if (host.indexOf("&") > -1) {
+                        host = host.substring(0, host.indexOf("&"));
+                    }
+                    host = host.substring(host.indexOf("//") + 2);
+                    path = host.substring(host.indexOf("/"));
+                } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {
+                    host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
+                    if (host.indexOf('/') > -1) {
+                        path = host.substring(host.indexOf('/'));
+                        if (path.indexOf('?') > -1) {
+                            path = path.substring(0, path.indexOf('?'));
+                        }
+                    } else {
+                        path = '/';
+                    }
+                } else {
+                    path = pathname;
                 }
                 if (path.indexOf('/') !== 0) {
                     path = '/' + path;
                 }
-                title = Tracker.getTrackedTitle(node);
-                return {
-                    host: host,
-                    path: path,
-                    query: query,
-                    title: title,
-                    searchTerms: searchTerms,
-                    searchSource: searchSource,
-                    external: external
-                };
+                return path;
+            },
+            getTrackedQuery = function(node) {
+                var query;
+                if (node.hasClass('yui3-accordion-item-trigger')) {
+                    query = location.get("search");
+                } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {
+                    host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
+                    if (host.indexOf('/') > -1) {
+                        path = host.substring(host.indexOf('/'));
+                        if (path.indexOf('?') > -1) {
+                            query = path.substring(path.indexOf('?'), path.length);
+                        }
+                    } else {
+                        query = '';
+                    }
+                } else if (isLocalPopup(node)) {
+                    query = location.get("search");
+                } else {
+                    query = node.get('search');
+                }
+                return query;
+            },
+            getTrackedExternal = function(node) {
+                var external = false;
+                if (node.hasClass('yui3-accordion-item-trigger')) {
+                    external = false;
+                } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {
+                    external = true;
+                } else {
+                    external = node.get("hostname") !== location.get("host");
+                }
+                return external;
+            },
+            getPageviewTrackingData = function(event) {
+                var node = event.target, trackingData = {};
+                if (node.get('nodeName') !== 'A' && node.one('a')) {
+                    node = node.one('a');
+                }
+                if (!node.getData().isTrackableAsPageView) {
+                    while (node && node.get('nodeName') !== 'A') {
+                        node = node.get('parentNode');
+                        if (node === null) {
+                            throw 'not trackable';
+                        }
+                    }
+                }
+                trackingData.host = getTrackedHost(node);
+                trackingData.path = getTrackedPath(node);
+                trackingData.query = getTrackedQuery(node);
+                trackingData.title = Tracker.getTrackedTitle(node);
+                trackingData.searchTerms = searchTerms;
+                trackingData.searchSource = searchSource;
+                trackingData.external = getTrackedExternal(node);
+                return trackingData;
+            },
+            isTrackableLocalClick = function(link) {
+                var isTrackable, pathname = link.get("pathname");
+                //track proxy logins
+                if (isProxyOrCMELogin(link)) {
+                    isTrackable = true;
+                    //track cookieFetch.html
+                } else if ((/cookiesFetch/).test(pathname)) {
+                    isTrackable =  true;
+                    //otherwise rely on normal tracking for .html
+                } else if ((/\.html$/).test(pathname) || (/\/$/).test(pathname)) {
+                    isTrackable =  false;
+                    //all others fall through to trackable
+                } else {
+                    isTrackable =  true;
+                }
+                return isTrackable;
+            },
+            getTitleFromImg = function(node) {
+                var i, title, img = node.all('img');
+                if (img) {
+                    for (i = 0; i < img.size(); i++) {
+                        if (img.item(i).get('alt')) {
+                            title = img.item(i).get('alt');
+                        } else if (img.item(i).get('src')) {
+                            title = img.item(i).get('src');
+                        }
+                        if (title) {
+                            break;
+                        }
+                    }
+                }
+                return title;
             };
             return {
                 //figures out the title string for a node
                 getTrackedTitle: function(node) {
                     //if there is a title attribute, use that.
-                    var title = node.get('title'), img, i, rel, relTokens;
+                    var title = node.get('title');
                     //next try alt attribute.
                     if (!title) {
                         title = node.get('alt');
                     }
-                    //next look for alt attributes in any child img.
+                    //next look for alt or src attributes in any child img.
                     if (!title) {
-                        img = node.all('img');
-                        if (img) {
-                            for (i = 0; i < img.size(); i++) {
-                                if (img.item(i).get('alt')) {
-                                    title = img.item(i).get('alt');
-                                    break;
-                                }
-                                else if (img.item(i).get('src')) {
-                                    title = img.item(i).get('src');
-                                    break;
-                                }
-                            }
-                        }
+                        title = getTitleFromImg(node);
                     }
                     //next get the text content before any nested markup
                     if (!title) {
@@ -189,110 +248,60 @@
                     if (!title) {
                         title = node.get('innerText');
                     }
-                    if (title) {
-                        //trim and normalize:
-                        title = title.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
-                    }
                     //finally:
                     if (!title) {
                         title = 'unknown';
                     }
                     if (node.hasClass('yui3-accordion-item-trigger')) {
                         title = 'Expandy:' + title;
-                    } else if (node.ancestor("#laneNav")) {
+                    } else if (node.ancestor(".lane-nav")) {
                         title = "laneNav: " + title;
                     }
-                    //if there is rel="popup .." then add "pop-up" to the title
-                    rel = node.get('rel');
-                    if (rel && rel.indexOf('popup') === 0) {
-                        relTokens = rel.split(' ');
-                        if (relTokens[1] === 'local') {
-                            title = 'YUI Pop-up [local]: ' + title;
-                        }
+                    //if there is rel="popup local" then add "pop-up" to the title
+                    if (isLocalPopup(node)) {
+                        title = 'YUI Pop-up [local]: ' + title;
                     }
+                    title = title.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
                     return title;
                 },
                 isTrackableAsEvent: function(event) {
-                    var link = event.target;
+                    var link = event.target, isTrackable = false;
                     while (link !== null && link.get('nodeName') !== 'A') {
                         link = link.get('parentNode');
                     }
                     if (link) {
-                        // bookmarks
-                        if (link.ancestor("#favorites") || link.ancestor("#bookmarks") || link.ancestor(".yui3-bookmark-editor-content")) {
-                            return true;
-                        }
-                        // search results
-                        if (link.ancestor(".lwSearchResults")) {
-                            return true;
-                        }
-                        // navigation click events
-                        if (link.ancestor("#laneNav") || link.ancestor(".sectionMenu") || link.ancestor("#laneFooter") || link.ancestor("#qlinks") || link.ancestor("#topResources") || link.ancestor(".banner-content")) {
-                            return true;
-                        }
                         // bookmarklet drag or right-click
                         if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
-                            return true;
+                            isTrackable = true;
+                        } else {
+                            isTrackable = link.getData().isTrackableAsEvent;
                         }
                     }
-                    return false;
+                    return isTrackable;
                 },
-                isTrackableAsPageview: function(event) {
-                    var link, documentHost, linkHost, rel, relTokens;
-                    documentHost = location.get("host");
-                    if (documentHost.indexOf(':') > -1) {
-                        documentHost = documentHost.substring(0, documentHost.indexOf(':'));
-                    }
-                    if (event.type === 'click') {
-                        if (event.target.ancestor('.searchFacet')) {
-                            return true;
-                        }
-                        if (event.target.hasClass('yui3-accordion-item-trigger')) {
-                            return true;
-                        }
+                isTrackableAsPageview: function(link) {
+                    var isTrackable = false;
+                    if (link.getData().isTrackableAsPageView) {
+                        isTrackable = true;
+                    } else {
                         //find self ancestor that is <a>
-                        link = event.target;
-                        while (link && link.get('nodeName') !== 'A') {
-                            link = link.get('parentNode');
+                        if (link.get("nodeName") !== "A") {
+                            link = link.ancestor("a");
                         }
                         if (link) {
-                            //for popups:
-                            rel = link.get('rel');
-                            if (rel && rel.indexOf('popup ') === 0) {
-                                relTokens = rel.split(' ');
-                                if (relTokens[1] === 'local') {
-                                    return true;
-                                }
+                            if (link.get('hostname') === location.get("hostname")) {
+                                isTrackable =  isTrackableLocalClick(link);
+                            } else {
+                                //external reference is trackable
+                                isTrackable =  true;
                             }
-                            linkHost = link.get('host');
-                            if (linkHost.indexOf(':') > -1) {
-                                linkHost = linkHost.substring(0, linkHost.indexOf(':'));
-                            }
-                            if (linkHost === documentHost) {
-                                //track proxy logins
-                                if (((/secure\/apps\/proxy\/credential\?/).test(link.get('pathname')) || (/redirect\/cme\?/).test(link.get('pathname'))) && link.get('search') && link.get('search').indexOf('url=') > -1) {
-                                    return true;
-                                }
-                                //track cookieFetch.html
-                                if ((/cookiesFetch/).test(link.get('pathname'))) {
-                                    return true;
-                                }
-                                //otherwise rely on normal tracking for .html
-                                if ((/\.html$/).test(link.get('pathname')) || (/\/$/).test(link.get('pathname'))) {
-                                    return false;
-                                }
-                                //all others fall through to trackable
-                                return true;
-                            }
-                            //external reference is trackable
-                            return true;
                         }
                     }
-                    return false;
+                    return isTrackable;
                 },
                 trackEvent: function(event) {
                     var trackingData;
-                    if (this.isTrackableAsPageview(event)) {
+                    if (event.type === "click" && this.isTrackableAsPageview(event.target)) {
                         trackingData = getPageviewTrackingData(event);
                         this.fire("trackablePageview", {
                             host: trackingData.host,
@@ -318,10 +327,12 @@
         }();
 
         Y.on('click', function(e) {
+            var t = e.target, setLocation = function() {
+                Lane.Location.set("href", t.get('href'));
+            };
             Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
-            if (Y.UA.webkit && (Tracker.isTrackableAsPageview(e) || Tracker.isTrackableAsEvent(e))) {
-                    var t = e.target, f;
+            if (Y.UA.webkit && (Tracker.isTrackableAsPageview(e.target) || Tracker.isTrackableAsEvent(e))) {
                     while (t) {
                         // have safari follow link if it's not:
                         //  - popup or facet
@@ -329,11 +340,8 @@
                         if (t.get('href') &&
                                 (!t.get('rel') && !t.get('target')) &&
                                 !t.get('parentNode').hasClass('searchFacet') ) {
-                            f = function() {
-                                Lane.Location.set("href", t.get('href'));
-                            };
                             e.preventDefault();
-                            setTimeout(f, 200);
+                            setTimeout(setLocation, 200);
                             break;
                         }
                         t = t.get('parentNode');
@@ -394,4 +402,7 @@
         });
 
         Tracker.addTarget(Lane);
+
+        Y.all(".searchFacet, .yui3-accordion-item-trigger, *[rel^='popup local']").setData("isTrackableAsPageView", true);
+        Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, #qlinks a, .sectionMenu a, .banner-content a").setData("isTrackableAsEvent", true);
 })();

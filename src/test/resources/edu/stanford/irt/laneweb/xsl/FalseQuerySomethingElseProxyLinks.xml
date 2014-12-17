@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" id="login">
    <li>
-      <a href="/secure/login.html">MyLane login</a>
+      <a href="/secure/login.html?url=%3Fsomething%3Delse%26param%3Donemore">MyLane login</a>
    </li>
    <li>
-      <a href="?something=else&amp;proxy-links=true">Stanford Access</a>
+      <a href="?something=else&amp;proxy-links=true&amp;param=onemore">Stanford Access</a>
    </li>
 </ul>

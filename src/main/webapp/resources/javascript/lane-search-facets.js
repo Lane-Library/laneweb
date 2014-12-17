@@ -7,6 +7,16 @@
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
         container = Y.one('#searchResults'),
         facets, i, type, source, Result,
+        clickHandler = function(event) {
+            var result = this.getData('result');
+            try {
+                Lane.SearchHistory.addValue("facet", this.getData('result')._source);
+            } catch (e) {
+                //log somewhere ... no need to break/alert
+                result.show();
+            }
+            event.preventDefault();
+        },
     SearchFacets = function(){
         var currentResult = null;
         return {
@@ -17,7 +27,8 @@
                 return currentResult;
             },
             setActiveFacet: function(facetId){
-                var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
+                // result facet to make active
+                var result = Y.one('#' + facetId + 'Facet').getData('result');
                 if (result !== undefined) {
                     if (result._state === 'initialized') {
                         result.show();
@@ -29,12 +40,29 @@
                 }
             }
         };
-    }();
+    }(),
+    setFacetResult = function(facet) {
+        var id = facet.get("id");
+        if (id.match("Facet$") && !facet.hasClass('inactiveFacet')) {
+            type = id.substring(0, id.indexOf('-'));
+            source = id.substring(0, id.indexOf('Facet'));
+            if (type) {
+                facet.setData('result', new Result(type, source, facet, container));
+                if (facet.hasClass('current')) {
+                    facet.getData('result').setContent(container.get('innerHTML'));
+                    SearchFacets.setCurrentResult(facet.getData('result'));
+                }
+                Y.on('click', clickHandler, facet);
+            }
+        }
+    };
 
     //TODO: remove the following line when no longer need global reference
     Y.lane.SearchFacets = SearchFacets;
 
     Result = function(type, source, facet, container){
+        this.publish("new-content");
+        this.addTarget(Lane);
         this._type = type;
         this._source = source;
         this._facet = facet;
@@ -46,8 +74,6 @@
                 success: function(id, o, args){
                     var result = args.result;
                     result.setContent(o.responseText);
-                    SearchFacets.getCurrentResult().hide();
-                    SearchFacets.setCurrentResult(result);
                     result.show();
                 },
                 failure: function(){
@@ -74,7 +100,7 @@
                 SearchFacets.setCurrentResult(this);
                 this._facet.addClass('current');
                 this._container.set("innerHTML", this._content);
-                Result.addShowAbstract(this._container);
+                this.fire("new-content");
                 searchIndicator.hide();
             }
         };
@@ -94,42 +120,21 @@
             this._container.set("innerHTML", "");
             this._facet.removeClass('current');
         };
-        Result.addShowAbstract = function(container) {
-            if (Y.UA.ios && !container.one(".showAbstract")) {
-                //add showAbstract links in ios
-                container.all(".hvrTrig").each(function(node) {
-                    var label = (node.one(".pmid")) ? 'Abstract' : 'Description';
-                    node.one(".hvrTarg").insert("<li class='showAbstract'>[<a href='#'>Show " + label + "</a>]</li>", "before");
-                });
-            }
-        };
-        if (container) {
-            Result.addShowAbstract(container);
-        }
+
+        // Add EventTarget attributes to the Result prototype
+        Y.augment(Result, Y.EventTarget, null, null, {
+            emitFacade : true,
+            prefix : "result"
+        });
+
+        Lane.on("result:new-content", function() {
+            this.fire("new-content");
+        });
+
         if (elt) {
             facets = elt.all('.searchFacet');
             for (i = 0; i < facets.size(); i++) {
-                if (facets.item(i).get('id').match("Facet$") && !facets.item(i).hasClass('inactiveFacet')) {
-                    type = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('-'));
-                    source = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('Facet'));
-                    if (type) {
-                        facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
-                        if (facets.item(i).hasClass('current')) {
-                            facets.item(i).getData('result').setContent(container.get('innerHTML'));
-                            SearchFacets.setCurrentResult(facets.item(i).getData('result'));
-                        }
-                        Y.on('click',function(event) {
-                            var result = this.getData('result');
-                            try {
-                                Lane.SearchHistory.addValue("facet", this.getData('result')._source);
-                            } catch (e) {
-                                //log somewhere ... no need to break/alert
-                                result.show();
-                            }
-                            event.preventDefault();
-                        }, facets.item(i));
-                    }
-                }
+                setFacetResult(facets.item(i));
             }
         }
 })();

@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/dropdown.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-nav.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lists.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/anchors.css" />
@@ -26,6 +27,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/node-accordion.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/forms.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/login.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lightbox.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/banner.css" />
@@ -39,7 +41,8 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/search-image.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/som-header.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/classes.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css" media="print" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/shc-portal.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
     <body>
@@ -59,9 +62,11 @@
                         <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
                             <a href="/secure/login.html"><strong>MyLane login</strong></a>
                         </li>
-                        <li id="favorites"><i class="fa fa-star fa-lg fa-fw"></i>
+                        <li class="favorites dropdown"><i class="fa fa-star fa-lg fa-fw"></i>
                             <a href="/favorites.html">My Bookmarks</a>
-                            <?laneweb bookmarks?>
+                            <div class="dropdown-content">
+                                <?laneweb bookmarks?>
+                            </div>
                         </li>
                         <li>
                             <a href="/myaccounts.html">MyLane</a>
@@ -93,13 +98,13 @@
                                     <option value="textbooks-all" title="Selected clinical textbooks">Textbooks</option>
                                 </select>
                                 <input name="q" id="searchTerms" type="text" />
-                                <span id="searchReset" title="Clear Search">×</span>
+                                <span class="searchReset" title="Clear Search">×</span>
                             </div>
                             <input id="searchSubmit" type="submit" value="Search" />
                             <!--<a id="searchTools" href="/help/cool-tools-proxyBookmarklet.html" title="Search Tools"><i class="fa fa-wrench"></i></a>-->
                         </fieldset>
                     </form>
-                    <img id="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
+                    <img class="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
                     <a id="searchTips" href="/help/choose-search.html">Need Help? <i class="fa fa-arrow-right"></i></a>
                     <ul id="qlinks">
                         <li>
@@ -120,18 +125,18 @@
                 </xi:include>
                 <?laneweb content?>
             </div>
-            <div id="laneNav">
+            <div class="lane-nav">
                 <div class="centered">
                     <ul>
-                        <li>
+                        <li class="dropdown nav-menu">
                             <a href="/biomed-resources/index.html">All Biomedical Resources</a>
-                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-resources.html">
+                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-resources.html">
                                 <xi:fallback></xi:fallback>
-                            </xi:include>
+                            </xi:include></div>
                         </li>
-                        <li>
+                        <li class="dropdown nav-menu">
                             <a href="/portals/index.html">Specialty Portals</a>
-                            <ul id="specialties-menu">
+                            <ul class="dropdown-content nav-menu-content portals">
                                 <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
                                 <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
                                 <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
@@ -169,29 +174,29 @@
                                 <li><a href="/portals/neurology.html">Neurology</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="dropdown nav-menu">
                             <a href="/classes-consult/index.html">Classes &amp; Tutorials</a>
-                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-classes.html">
+                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-classes.html">
                                 <xi:fallback></xi:fallback>
-                            </xi:include>
+                            </xi:include></div>
                         </li>
-                        <li>
+                        <li class="dropdown nav-menu">
                             <a href="/using-lib/index.html">Using the Library</a>
-                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-using.html">
+                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-using.html">
                                 <xi:fallback></xi:fallback>
-                            </xi:include>
+                            </xi:include></div>
                         </li>
-                        <li>
+                        <li class="dropdown nav-menu">
                             <a href="/about/index.html">About Lane</a>
-                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-aboutlane.html">
+                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-aboutlane.html">
                                 <xi:fallback></xi:fallback>
-                            </xi:include>
+                            </xi:include></div>
                         </li>
-                        <li>
+                        <li class="dropdown nav-menu">
                             <a href="/help/index.html">How To</a>
-                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
+                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
                                 <xi:fallback></xi:fallback>
-                            </xi:include>
+                            </xi:include></div>
                         </li>
                     </ul>
                 </div>
@@ -333,9 +338,9 @@
                 <li id="footer-sul"><a href="http://library.stanford.edu/">Stanford University Libraries</a></li>
             </ul>
         </div>
-        <div id="feedbackLink"><a rel="lightbox" href="/help/feedback.html"></a></div>
+        <div><a class="feedback-link" rel="lightbox" href="/help/feedback.html"><span>FEEDBACK</span></a></div>
         <script type="text/javascript" id="model">//</script>
-        <script type="text/javascript" src="http://yui.yahooapis.com/3.13.0/yui/yui-debug.js"></script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.18.1/yui/yui-debug.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>
     </body>
 </html>

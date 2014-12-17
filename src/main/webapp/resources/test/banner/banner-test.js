@@ -26,7 +26,7 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
                 Y.Assert.isFalse(anchors.item(0).hasClass("banner-nav-active"));
                 Y.Assert.isTrue(anchors.item(1).hasClass("banner-nav-active"));
                 Y.Assert.areEqual("banner2", Y.one(".banner-content").get("text"));
-            }, 11000);
+            }, 12000);
         },
 
         testNavAnchorClick: function() {

@@ -17,21 +17,21 @@ import edu.stanford.irt.laneweb.model.Model;
 public class RequestParameterDataBinder implements DataBinder {
 
     private static final String[][] PARAMETER_ARRAY_MODEL = { { "r", Model.RESOURCES }, { "e", Model.ENGINES },
-            { "i", Model.ITEMS } };
+        { "i", Model.ITEMS } };
 
-    private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE }, { "s", Model.SUBSET },
-            { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS }, { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER },
-            { "r", Model.REGION }, { "PID", Model.PID }, { "page-number", Model.PAGE_NUMBER }, { "entryUrl", Model.ENTRY_URL },
-            { "pl", Model.PERSISTENT_LOGIN }, { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
+    private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE },
+            { "s", Model.SUBSET }, { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS },
+            { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER }, { "r", Model.REGION }, { "PID", Model.PID },
+            { "page-number", Model.PAGE_NUMBER }, { "entryUrl", Model.ENTRY_URL }, { "pl", Model.PERSISTENT_LOGIN },
+            { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
 
-    private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CATEGORY, Model.CLASS_ID,
-            Model.TIMEOUT, Model.SYNCHRONOUS, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER,
-            Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SOURCEID, Model.SOURCE, Model.ID,
-            Model.TEXT, Model.RETURN };
+    private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CATEGORY,
+            Model.CLASS_ID, Model.TIMEOUT, Model.SYNCHRONOUS, Model.RESOURCE_ID, Model.PAGE, Model.TITLE,
+            Model.SELECTION, Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE,
+            Model.HOST, Model.SOURCEID, Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN };
 
     /**
-     * parameterArrayModelMap contains the mapping of parameter names to model
-     * name of model attributes that are Lists
+     * parameterArrayModelMap contains the mapping of parameter names to model name of model attributes that are Lists
      */
     private Map<String, String> parameterArrayModelMap;
 
@@ -65,21 +65,25 @@ public class RequestParameterDataBinder implements DataBinder {
             if (this.parameterSameAsModel.contains(name)) {
                 model.put(name, value);
             } else if (this.parameterModelMap.containsKey(name)) {
-                if ("q".equals(name)) {
-                    // trim the query case 73719
-                    model.put(Model.QUERY, value.trim());
-                    try {
-                        model.put(Model.URL_ENCODED_QUERY, URLEncoder.encode(value, "UTF-8"));
-                    } catch (UnsupportedEncodingException e) {
-                        throw new LanewebException(e);
-                    }
-                } else {
-                    model.put(this.parameterModelMap.get(name), value);
-                }
+                getMappedParameterValue(name, value, model);
             }
             if (this.parameterArrayModelMap.containsKey(name)) {
                 model.put(this.parameterArrayModelMap.get(name), Arrays.asList(request.getParameterValues(name)));
             }
+        }
+    }
+
+    private void getMappedParameterValue(final String name, final String value, final Map<String, Object> model) {
+        if ("q".equals(name)) {
+            // trim the query case 73719
+            model.put(Model.QUERY, value.trim());
+            try {
+                model.put(Model.URL_ENCODED_QUERY, URLEncoder.encode(value, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                throw new LanewebException(e);
+            }
+        } else {
+            model.put(this.parameterModelMap.get(name), value);
         }
     }
 }

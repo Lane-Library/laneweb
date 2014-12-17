@@ -1,68 +1,72 @@
 package edu.stanford.irt.laneweb.resource;
 
-public interface Resource {
+public abstract class Resource {
     
-    String ADDITIONAL_TEXT = "additional-text";
+    public static final String ADDITIONAL_TEXT = "additional-text";
 
-    String AUTHOR = "pub-author";
+    public static final String AUTHOR = "pub-author";
 
-    String CDATA = "CDATA";
+    public static final String CDATA = "CDATA";
 
-    String CONTENT_HIT_COUNTS = "contentHitCounts";
+    public static final String CONTENT_HIT_COUNTS = "contentHitCounts";
 
-    String CONTENT_ID = "contentId";
+    public static final String CONTENT_ID = "contentId";
 
-    String DATES = "dates";
+    public static final String DATES = "dates";
 
-    String DESCRIPTION = "description";
+    public static final String DESCRIPTION = "description";
 
-    String DESCRIPTION_LABEL = "desc-label";
+    public static final String DESCRIPTION_LABEL = "desc-label";
 
-    String EMPTY_NS = "";
+    public static final String EMPTY_NS = "";
 
-    String ID = "id";
+    public static final String ID = "id";
 
-    String KEYWORD = "keyword";
+    public static final String KEYWORD = "keyword";
 
-    String LABEL = "label";
+    public static final String LABEL = "label";
 
-    String LINK = "link";
+    public static final String LINK = "link";
     
-    String LINK_TEXT = "link-text";
+    public static final String LINK_TEXT = "link-text";
 
-    String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
+    public static final String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
     
-    String PUBLICATION_TEXT = "pub-text";
+    public static final String PUBLICATION_TEXT = "pub-text";
 
-    String QUERY = "query";
+    public static final String QUERY = "query";
 
-    String RECORD_ID = "recordId";
+    public static final String RECORD_ID = "recordId";
 
-    String RECORD_TYPE = "recordType";
+    public static final String RECORD_TYPE = "recordType";
 
-    String RESOURCE = "resource";
+    public static final String RESOURCE = "resource";
 
-    String RESOURCE_HITS = "resourceHits";
+    public static final String RESOURCE_HITS = "resourceHits";
 
-    String RESOURCE_ID = "resourceId";
+    public static final String RESOURCE_ID = "resourceId";
 
-    String RESOURCE_NAME = "resourceName";
+    public static final String RESOURCE_NAME = "resourceName";
 
-    String RESOURCE_URL = "resourceUrl";
+    public static final String RESOURCE_URL = "resourceUrl";
 
-    String RESOURCES = "resources";
+    public static final String RESOURCES = "resources";
 
-    String RESULT = "result";
+    public static final String RESULT = "result";
 
-    String SCORE = "score";
+    public static final String SCORE = "score";
 
-    String SIZE = "size";
+    public static final String SIZE = "size";
 
-    String TITLE = "title";
+    public static final String TITLE = "title";
 
-    String TYPE = "type";
+    public static final String TYPE = "type";
 
-    String URL = "url";
+    public static final String URL = "url";
 
-    String VERSION = "version";
+    public static final String VERSION = "version";
+
+    private Resource() {
+        //private constructor
+    }
 }

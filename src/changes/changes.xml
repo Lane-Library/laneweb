@@ -7,6 +7,89 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2014-12-15" version="2.3.7" description="2.3.7 bug fix release">
+            <action date="2014-12-15" dev="alainb" issue="101256" type="fix">
+                Drugbank search engine is broken
+            </action>
+            <action date="2014-12-12" dev="ceyates" issue="101078" type="update">
+                upgrade yui to version 3.18.1
+            </action>
+            <action date="2014-12-03" dev="ryanmax" issue="100846" type="fix">
+                discoveryLoginPage from SFX: javascript permission error
+            </action>
+            <action date="2014-12-03" dev="alainb" issue="100709" type="update">
+                updated logo, add text under the logos
+            </action>
+            <action date="2014-12-01" dev="ceyates" issue="100363" type="fix">
+                lightbox of bookmark login looks bad
+            </action>
+            <action date="2014-11-26" dev="ceyates" issue="100350" type="update">
+                create print.css for proper printing
+            </action>
+            <action date="2014-12-08" dev="alainb" issue="100300" type="update">
+                single discovery page: remove the pop-up; remove mobile version of discovery page
+            </action>
+            <action date="2014-11-29" dev="ceyates" issue="100266" type="add">
+                create css classes for common properties of drop down menus
+            </action>
+            <action date="2014-12-09" dev="ceyates" issue="96307" type="fix">
+                bookmark editor drag fails after delete or add
+            </action>
+        </release>
+        <release date="2014-12-01" version="2.3.6" description="2.3.6 bug fix release">
+            <action date="2014-11-25" dev="ceyates" issue="100729" type="fix">
+                mobile subset eresources not appearing
+            </action>
+            <action date="2014-11-25" dev="ryanmax" issue="100699" type="fix">
+                login problems for hospital users via SFX
+            </action>
+            <action date="2014-12-01" dev="ceyates" issue="100415" type="add">
+                add Stanford Daily search engine to History search
+            </action>
+            <action date="2014-11-24" dev="alainb" issue="100412" type="fix">
+                AAP links broken in peds search
+            </action>
+            <action date="2014-11-25" dev="ceyates" issue="100310" type="add">
+                create search engine for Historical Articles in PubMed
+            </action>
+            <action date="2014-11-24" dev="ceyates" issue="100309" type="add">
+                create search engine for broad MeSH 'History of Medicine' in the catalog
+            </action>
+            <action date="2014-11-24" dev="ceyates" issue="99391" type="add">
+                create search engine for history search from cifdb to include people
+            </action>
+        </release>
+        <release date="2014-11-24" version="2.3.5" description="2.3.5 bug fix release">
+            <action date="2014-11-18" dev="ryanmax" issue="100633" type="fix">
+                proxy-links can be set to false even when a user is authenticated
+            </action>
+            <action date="2014-11-18" dev="olgary" issue="100572" type="update">
+                updated buttons.css, and m-buttons.css
+            </action>
+            <action date="2014-11-18" dev="ceyates" issue="100559" type="fix">
+                clicking logout does not remove ezproxy cookie
+            </action>
+            <action date="2014-11-06" dev="ceyates" issue="100345" type="fix">
+                tooltips don't work with dynamically loaded content
+            </action>
+            <action date="2014-11-18" dev="ceyates" issue="99978" type="update">
+                update to spring-ldap-core-2.0.2
+            </action>
+            <action date="2014-11-18" dev="ceyates" issue="99975" type="update">
+                refactor cookies by using an enum of cookie names
+            </action>
+        </release>
+        <release date="2014-11-17" version="2.3.4" description="2.3.4 bug fix release">
+            <action date="2014-11-11" dev="ceyates" issue="100445" type="update">
+                move images referenced in css from content to webapp
+            </action>
+            <action date="2014-11-13" dev="ceyates" issue="99866" type="fix">
+                fix google search in Dr Wilson's book...
+            </action>
+            <action date="2014-11-11" dev="ceyates" issue="99406" type="add">
+                create an easy maintainable source of data for grand rounds information
+            </action>
+        </release>
         <release date="2014-11-10" version="2.3.3" description="2.3.3 bug fix release">
             <action date="2014-11-07" dev="olgary" issue="100373" type="update">
                 deleted antibiogram.css, updated pom.xml, updated table-styles.xml

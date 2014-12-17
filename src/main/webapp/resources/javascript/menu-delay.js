@@ -2,8 +2,8 @@
  * A simple script that delays the visibility of the drop downs for a short time
  */
 (function() {
-    Y.all("#laneNav>div>ul>li").on("mouseenter", function(event) {
-        var list = event.currentTarget.one("ul");
+    Y.all(".nav-menu").on("mouseenter", function(event) {
+        var list = event.currentTarget.one(".nav-menu-content");
         if (list) {
             list.setStyle("visibility", "hidden");
             setTimeout(function() {

@@ -17,5 +17,9 @@ public class RequestMethodDataBinder implements DataBinder {
         if (value != null) {
             model.put(Model.REQUEST_URI, value);
         }
+        value = request.getServletPath();
+        if (value != null) {
+            model.put(Model.SERVLET_PATH, value);
+        }
     }
 }

@@ -15,17 +15,15 @@
     </xsl:template>
     
     <xsl:template match="s:resource">
-        <xsl:variable name="hitcount">
-            <xsl:if test="s:hits">
-                <xsl:value-of select="format-number(s:hits, '###,##0')"/>
-            </xsl:if>
-        </xsl:variable>
         "<xsl:value-of select="@s:id"/>":
         {
         "status": "<xsl:value-of select="@s:status"/>",
         "url": "<xsl:value-of select="s:url"/>",
-        <!-- TODO: return number value instead of string for hits -->
-        "hits": "<xsl:value-of select="s:hits"/>"<xsl:text/>
+        "hits": 
+        <xsl:choose>
+            <xsl:when test="string(number(s:hits)) = 'NaN'">null</xsl:when>
+            <xsl:otherwise><xsl:value-of select="number(s:hits)"/></xsl:otherwise>
+        </xsl:choose>
         }
         <xsl:if test="following::s:resource">,</xsl:if>
     </xsl:template>

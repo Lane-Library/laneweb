@@ -57,19 +57,12 @@
                 expanded : {
                     valueFn : function() {
                         var node = this.get("node"),
-                            hash = Y.lane.Location.get("hash"),
-                            anchors, i, size;
+                            hash = Y.lane.Location.get("hash");
                         if (node.hasClass("expanded")) {
                             return true;
                         } else if (hash) {
                             hash = hash.substring(1);
-                            anchors = node.all("a");
-                            size = anchors.size();
-                            for (i = 0; i < size; i++) {
-                                if (hash === anchors.item(i).get("name")) {
-                                    return true;
-                                }
-                            }
+                            return node.one("a[name=" + hash + "]") !== null;
                         }
                         return false;
                     }
@@ -114,13 +107,15 @@
                 for (i = 0; i < size; i++) {
                     anchor = anchors.item(i);
                     if (anchor.get("href") && !anchor.get("rel")) {
-                        anchor.on("click", function(event) {
-                            event.stopPropagation();
-                        });
+                        anchor.on("click", this._handleTriggerClick);
                     }
                 }
                 this.get("hd").addClass("yui3-accordion-item-hd");
                 this.get("bd").addClass("yui3-accordion-item-bd");
+            },
+
+            _handleTriggerClick : function(event) {
+                event.stopPropagation();
             }
         });
 

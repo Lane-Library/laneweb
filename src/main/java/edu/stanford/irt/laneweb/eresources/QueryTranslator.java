@@ -3,28 +3,35 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class QueryTranslator {
 
     private List<String> notWords = new ArrayList<String>();
 
     private List<String> reqWords = new ArrayList<String>();
+    
+    private static final Pattern QUOTES = Pattern.compile("\\s+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+    
+    private static final Pattern WILDCARD = Pattern.compile("[\\W&&[^%]]");
+    
+    private static final Pattern CURLY = Pattern.compile("(\\{|\\})");
 
-    public String translate(final String input) {
-        if (null == input) {
+    public String translate(final String theInput) {
+        if (theInput == null) {
             throw new IllegalArgumentException("null input");
         }
-        if ((input.indexOf('{') > -1) || (input.indexOf('}') > -1)) {
-            throw new IllegalArgumentException("'}' and '{' should not appear in input");
-        }
+        String input = CURLY.matcher(theInput).replaceAll("");
         processString(input);
         if (this.reqWords.isEmpty()) {
-            throw new IllegalArgumentException("no 'required' words in query: " + input);
+            throw new LanewebException("no 'required' words in query: " + theInput);
         }
         String translatedQuery = getQuery();
         if ((translatedQuery.indexOf("()") > -1) || (translatedQuery.indexOf("{}") > -1)
                 || (translatedQuery.indexOf("\\}") > -1)) {
-            throw new IllegalArgumentException("can't construct a valid oracle text query from: " + input);
+            throw new LanewebException("can't construct a valid oracle text query from: " + theInput);
         }
         return translatedQuery;
     }
@@ -66,55 +73,12 @@ public class QueryTranslator {
     }
 
     protected void processString(final String input) {
-        int p = 0;
-        int startWord;
-        String theWord;
         this.reqWords = new ArrayList<String>();
         this.notWords = new ArrayList<String>();
         // Loop over all words
-        while (true) {
-            startWord = p;
-            while ((p < input.length()) && (input.charAt(p) != ' ')) {
-                // Check for quoted phrase
-                // Quote - skip to next or end
-                if (input.charAt(p) == '"') {
-                    // skip the actual quote
-                    p++;
-                    while ((p < input.length()) && (input.charAt(p) != '"')) {
-                        p++;
-                    }
-                    if (p < input.length()) {
-                        // Skip the final quote if found
-                        p++;
-                    }
-                } else {
-                    p++;
-                }
-            }
-            // Got a word. Check for required/not wanted flags (+-)
-            theWord = input.substring(startWord, p);
-            // CY bug 11825, don't process zero length string
-            if (theWord.length() > 0) {
-                // CY changed this to required from optional to make it AND
-                // logic
-                boolean isRequired = true;
-                if ((theWord.charAt(0) == '+') && (theWord.length() > 1)) {
-                    isRequired = true;
-                    theWord = theWord.substring(1);
-                } else if ((theWord.charAt(0) == '-') && (theWord.length() > 1)) {
-                    isRequired = false;
-                    theWord = theWord.substring(1);
-                }
-                // Replace * wild cards with %
-                theWord = theWord.replace('*', '%');
-                if (!"%".equals(theWord)) {
-                    addWord(theWord, isRequired);
-                }
-            }
-            p++;
-            if (p >= input.length()) {
-                break;
-            }
+        String[] words = QUOTES.split(input);
+        for (int i = 0; i < words.length; i++) {
+            handleWord(words[i]);
         }
     }
 
@@ -141,7 +105,7 @@ public class QueryTranslator {
         // in curly braces
         String word = words.get(pos);
         if (word.indexOf('%') > -1) {
-            word = word.replaceAll("[\\W&&[^%]]", "");
+            word = WILDCARD.matcher(word).replaceAll("");
             if ("%".equals(word)) {
                 return "";
             }
@@ -151,5 +115,27 @@ public class QueryTranslator {
             word = word.substring(0, word.length() - 1);
         }
         return "${".concat(word) + '}';
+    }
+
+    private void handleWord(final String theWord) {
+        String word = theWord;
+        // CY bug 11825, don't process zero length string
+        if (word.length() > 0) {
+            // CY changed this to required from optional to make it AND
+            // logic
+            boolean isRequired = true;
+            if (word.charAt(0) == '+' && word.length() > 1) {
+                isRequired = true;
+                word = word.substring(1);
+            } else if (word.charAt(0) == '-' && word.length() > 1) {
+                isRequired = false;
+                word = word.substring(1);
+            }
+            // Replace * wild cards with %
+            word = word.replace('*', '%');
+            if (!"%".equals(word)) {
+                addWord(word, isRequired);
+            }
+        }
     }
 }

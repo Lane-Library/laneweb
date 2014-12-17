@@ -10,11 +10,9 @@
 }
 .yui3-popup-content {
     -webkit-border-radius: 3px;
-	border-radius: 3px;
 	-moz-border-radius: 3px;
-	-moz-user-select: none;
+    border-radius: 3px;
 	background-color: white;
-	height: auto;
 	padding: 20px;
 	text-align: left;
 	border: 1px solid #9e9d98;
@@ -27,22 +25,7 @@
     margin-bottom: .2em;
     cursor: move;
 }
-#popupClose {
-    background-image : url(../images/sprite-all.png);
-    background-position: -40px -160px;
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    right: 7px;
-    top: 5px;
-    border-bottom: none;
-}
-#popupClose:hover {
-    background-image: url(../images/sprite-all.png);
-    background-position: -40px -200px;
-}
 .yui3-popup-content .yui3-widget-bd {
 	font-size: 1em;
     line-height: 1.6em;
-    margin: 0 0 1em;
 }

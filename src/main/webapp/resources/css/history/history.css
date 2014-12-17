@@ -41,8 +41,8 @@ h1 {
 	padding: 52px 0 0 190px;
 }
 
-h1 a {
-	color: #333333 !important;
+h1 a, h1 a:visited, h1 a:active, h1 a:hover{
+	color: #333333;
 	text-decoration: none;
 }
 
@@ -76,11 +76,12 @@ h1 a {
 	display: none;
 	position: absolute;
 	background-color: #666666;
-	width: 304px;
+	width: 320px;
 	padding: 8px;
+	box-sizing:border-box;
 	background-image: url(../../images/diag.png);
 	box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.8);
-	min-height:236px;
+	min-height:258px;
 }
 
 .nav-item:hover>div {
@@ -122,7 +123,8 @@ h1 a {
     background-color: rgba(204, 204, 204, 0.2);
 }
 .nav-item .explore{
-    width: 136px;
+    width: 144px;
+    box-sizing:border-box;
     position:absolute;
     bottom:8px;
     right:8px;
@@ -146,12 +148,13 @@ h1 a {
 	position: absolute;
 	display: block;
 	height: 45px;
-	width: 179px;
+	width: 180px;
 	background-repeat: no-repeat;
 	background-image: url(../../images/history/sm.png);
 	top: 58px;
 	border-right: 1px black solid;
-	text-indent: -9999px
+	text-indent: -9999px;
+	box-sizing:border-box;
 }
 
 #lane-footer,#lane-subfooter {
@@ -228,8 +231,9 @@ h1 a {
 #sm-footer {
 	background-color: rgb(38, 38, 38);
 	color: rgb(158, 158, 158);
-	height: 100px;
-	padding: 30px 0 30px 0;
+	height: 160px;
+	padding: 30px 0;
+	box-sizing:border-box;
 }
 
 #sm-footer ul {
@@ -273,7 +277,6 @@ h1 a {
 
 #gift {
 	display: block;
-	width: 135px;
 	padding: 10px 10px 10px 68px;
 	background-color: rgb(255, 255, 255);
 	background-image: url(../../images/gift-transp.png);
@@ -317,7 +320,6 @@ h1 a {
 
 #search {
 	background-color: #8C1515;
-	height: auto;
 	padding: 12px;
 	font-weight: 300;
 	color: #fff;
@@ -331,8 +333,9 @@ h1 a {
 }
 
 #search input[type='text'] {
-	width: 500px;
+	width: 516px;
 	padding: 8px;
+	box-sizing:border-box;
 }
 
 #search input[type='submit'] {
@@ -358,6 +361,7 @@ h1 a {
 	border-top: 1px solid;
 	border-top-color: #d8dbdc;
 	vertical-align: middle;
+	box-sizing:border-box;
 }
 
 .wrap {
@@ -435,8 +439,9 @@ h4 {
 .header-border {
 	border-top: 1px solid #d8dbdc;
 	border-left: 26px solid #d8dbdc;
-	height: 4px;
+	height: 5px;
 	margin-bottom: 12px;
+	box-sizing:border-box;
 }
 
 .border-and-shadow {
@@ -447,7 +452,6 @@ h4 {
 	-webkit-box-shadow: 1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
 	box-shadow: 1px 1px 3px 0.2px rgba(0, 0, 0, 0.1);
-	height: 100%;
 	overflow: hidden;
 	clear: both;
 }
@@ -472,9 +476,6 @@ h4 {
 	margin-bottom: 11px;
 	display: block;
 	list-style-type: disc;
-	-webkit-margin-after: 1em;
-	-webkit-margin-start: 0;
-	-webkit-margin-end: 0;
 	padding-left: 24px;
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #333333;
@@ -541,6 +542,7 @@ h4 {
 	text-align: left;
 	overflow: hidden;
 	background-color: #8c1515;
+	box-sizing:border-box;
 }
 
 .block-heading h3 {
@@ -596,7 +598,8 @@ b,strong {
 }
 
 blockquote {
-	width: 85%;
+	width: 90%;
+	box-sizing:border-box;
 	color: #666666;
 	font-family: 'Fjord One', serif;
 	font-style: italic;
@@ -671,11 +674,12 @@ http://lane.stanford.edu/samples/button-css.html
 	background-color: #FFFFFF;
 	border-radius: 12px;
 	font-size: 13px;
-	height: 16px;
-	width: 16px;
+	height: 24px;
+	width: 24px;
 	padding: 4px;
 	margin-right: 6px;
 	line-height: 15px;
+	box-sizing:border-box;
 }
 
 .button a {

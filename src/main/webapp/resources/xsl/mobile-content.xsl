@@ -164,22 +164,6 @@
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
-    <xsl:template match="node()[attribute::id='loggedIn']/node()[attribute::id='ploginExtended']">
-        <xsl:if test="matches($query-string,'^pl=true')">
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node()"/>
-                <xsl:apply-templates select="child::node()"/>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>
-    <xsl:template match="node()[attribute::id='loggedIn']/node()[attribute::id='ploginRemoved']">
-        <xsl:if test="matches($query-string,'^remove-pl=true')">
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node()"/>
-                <xsl:apply-templates select="child::node()"/>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>
 
     <!-- full version link is context sensitive, pulling link from page's @data-desktop-url -->
     <xsl:template match="h:a[@id='desktop-url']">

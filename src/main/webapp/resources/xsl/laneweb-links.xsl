@@ -111,6 +111,36 @@
                 <xsl:when test="$link = '/secure/login.html' and $userid">
                     <xsl:text>/myaccounts.html</xsl:text>
                 </xsl:when>
+                <xsl:when test="$link = '/secure/login.html'">
+                    <xsl:copy-of select="."/>
+                    <xsl:text>?url=</xsl:text>
+                    <xsl:value-of select="encode-for-uri($request-uri)" />
+                    <xsl:if test="string-length($query-string) != 0">
+                        <xsl:variable name="no-proxylinks-query">
+                            <xsl:variable name="starts-with-proxylinks" select="starts-with($query-string, 'proxy-links=')"/>
+                        	<xsl:for-each select="tokenize($query-string, '&amp;')">
+                        	    <xsl:if test="not(starts-with(.,'proxy-links='))">
+                        	        <xsl:choose>
+                        	            <xsl:when test="$starts-with-proxylinks">
+                        	                <xsl:if test="position() != 2">
+                        	                    <xsl:text>&amp;</xsl:text>
+                        	                </xsl:if>
+                        	            </xsl:when>
+                        	            <xsl:otherwise>
+                        	                <xsl:if test="position() != 1">
+                        	                    <xsl:text>&amp;</xsl:text>
+                        	                </xsl:if>
+                        	            </xsl:otherwise>
+                        	        </xsl:choose>
+                        	        <xsl:value-of select="."/>
+                        	    </xsl:if>
+                            </xsl:for-each>
+                        </xsl:variable>
+                        <xsl:if test="string-length($no-proxylinks-query) != 0">
+                            <xsl:value-of select="encode-for-uri(concat('?', $no-proxylinks-query))"/>
+                        </xsl:if>
+                    </xsl:if>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$link"/>
                 </xsl:otherwise>

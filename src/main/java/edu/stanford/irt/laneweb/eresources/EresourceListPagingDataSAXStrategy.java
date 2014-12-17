@@ -30,7 +30,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
                 endDiv(xmlConsumer);
                 startDivWithClass(xmlConsumer, "yui3-u-1-4");
                 startDivWithClass(xmlConsumer, "view-by");
-                createPagingButton(xmlConsumer, hrefBase, pagingData, alpha);
+                createPagingDropdown(xmlConsumer, hrefBase, pagingData, alpha);
                 endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
@@ -68,10 +68,11 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
     }
 
-    private void createPagingButton(final XMLConsumer xmlConsumer, final String hrefBase, EresourceListPagingData pagingData, final String alpha) throws SAXException {
+    private void createPagingDropdown(final XMLConsumer xmlConsumer, final String hrefBase, EresourceListPagingData pagingData, final String alpha) throws SAXException {
 
         XMLUtils.data(xmlConsumer, "View by page ");
-        startDivWithClass(xmlConsumer, "pagingButton");
+        startDivWithClass(xmlConsumer, "general-dropdown dropdown");
+        startDivWithClass(xmlConsumer, "general-dropdown-trigger");
         StringBuilder sb = new StringBuilder();
         if (alpha.isEmpty()) {
             sb.append("A-Z");
@@ -81,6 +82,8 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
         XMLUtils.data(xmlConsumer, sb.toString());
         createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
+        endDiv(xmlConsumer);
+        startDivWithClass(xmlConsumer, "general-dropdown-content dropdown-content");
         startUlWithClass(xmlConsumer, "pagingLabels");
         int i = 1;
         for (PagingLabel label : pagingData.getPagingLabels()) {
@@ -88,6 +91,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             i++;
         }
         endUl(xmlConsumer);
+        endDiv(xmlConsumer);
         endDiv(xmlConsumer);
     }
 
@@ -100,9 +104,9 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
         sb.append("page=").append(i);
         startAnchor(xmlConsumer, sb.toString());
-        createSpan(xmlConsumer, label.getStart());
+        createSpanWithClass(xmlConsumer, "labelTitle", label.getStart());
         XMLUtils.data(xmlConsumer, " — ");
-        createSpan(xmlConsumer, label.getEnd());
+        createSpanWithClass(xmlConsumer, "labelTitle", label.getEnd());
         sb.setLength(0);
         sb.append(" (").append(label.getResults()).append(')');
         XMLUtils.data(xmlConsumer, sb.toString());

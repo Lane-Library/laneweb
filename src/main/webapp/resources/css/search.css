@@ -13,7 +13,7 @@
 #queryMapping span, #spellCheckLink, #findItLink {
     padding-right:25px;
 }
-.lwSearchResults a.primaryLink {
+.primaryLink {
     font-size:16px;
 }
 #searchFacets a {
@@ -73,7 +73,7 @@
 #searchFacets li.current a {
     color:#9a0003;
 }
-#searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a {
+#searchFacets .inactiveFacet, #searchFacets .inactiveFacet a {
     display:none;
 }
 #searchFacets {

@@ -12,7 +12,7 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 /**
  * A SAXStrategy that converts an Eresource into http://lane.stanford.edu/resources/1.0 namespaced SAX events.
  */
-public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
+public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
 
     /**
      * Produce SAX events from a given Eresource to the given XMLConsumer
@@ -20,20 +20,23 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, SCORE, SCORE, CDATA, Float.toString(eresource.getScore()));
-            atts.addAttribute(EMPTY_NS, TYPE, TYPE, CDATA, "eresource");
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULT, atts);
-            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, ID, eresource.getId());
-            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_ID, Integer.toString(eresource.getRecordId()));
-            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, RECORD_TYPE, eresource.getRecordType());
-            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, TITLE, eresource.getTitle());
-            maybeCreateElement(xmlConsumer, DESCRIPTION, eresource.getDescription());
-            maybeCreateElement(xmlConsumer, AUTHOR, eresource.getPublicationAuthorsText());
-            maybeCreateElement(xmlConsumer, PUBLICATION_TEXT, eresource.getPublicationText());
+            atts.addAttribute(Resource.EMPTY_NS, Resource.SCORE, Resource.SCORE, Resource.CDATA, Float.toString(eresource.getScore()));
+            atts.addAttribute(Resource.EMPTY_NS, Resource.TYPE, Resource.TYPE, Resource.CDATA, "eresource");
+            XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESULT, atts);
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.ID, eresource.getId());
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_ID, Integer.toString(eresource.getRecordId()));
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_TYPE, eresource.getRecordType());
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.TITLE, eresource.getTitle());
+            maybeCreateElement(xmlConsumer, "primaryType", eresource.getPrimaryType());
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "total", Integer.toString(eresource.getTotal()));
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "available", Integer.toString(eresource.getAvailable()));
+            maybeCreateElement(xmlConsumer, Resource.DESCRIPTION, eresource.getDescription());
+            maybeCreateElement(xmlConsumer, Resource.AUTHOR, eresource.getPublicationAuthorsText());
+            maybeCreateElement(xmlConsumer, Resource.PUBLICATION_TEXT, eresource.getPublicationText());
             for (Link link : eresource.getLinks()) {
                 handleLink(xmlConsumer, link);
             }
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULT);
+            XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.RESULT);
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
@@ -41,19 +44,20 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource>, Resource {
 
     private void handleLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, TYPE, TYPE, CDATA, link.getType().toString());
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, LINK, atts);
-        maybeCreateElement(xmlConsumer, LABEL, link.getLabel());
-        maybeCreateElement(xmlConsumer, LINK_TEXT, link.getLinkText());
-        maybeCreateElement(xmlConsumer, URL, link.getUrl());
-        maybeCreateElement(xmlConsumer, ADDITIONAL_TEXT, link.getAdditionalText());
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, LINK);
+        atts.addAttribute(Resource.EMPTY_NS, Resource.TYPE, Resource.TYPE, Resource.CDATA, link.getType().toString());
+        XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.LINK, atts);
+        maybeCreateElement(xmlConsumer, Resource.LABEL, link.getLabel());
+        maybeCreateElement(xmlConsumer, Resource.LINK_TEXT, link.getLinkText());
+        maybeCreateElement(xmlConsumer, Resource.URL, link.getUrl());
+        maybeCreateElement(xmlConsumer, Resource.ADDITIONAL_TEXT, link.getAdditionalText());
+        maybeCreateElement(xmlConsumer, "publisher", link.getPublisher());
+        XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.LINK);
     }
 
     private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value)
             throws SAXException {
         if (value != null && !"".equals(value)) {
-            XMLUtils.createElementNS(xmlConsumer, NAMESPACE, name, value);
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, name, value);
         }
     }
 }

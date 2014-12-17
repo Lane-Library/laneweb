@@ -33,58 +33,26 @@ public class ScoreStrategy extends AbstractScoreStrategy {
      *  10 desc match
      *  1
      * </pre>
-     * @param searchResult the ContentResult
-     * @param queryTermPattern a Pattern
+     *
+     * @param searchResult
+     *            the ContentResult
+     * @param queryTermPattern
+     *            a Pattern
      * @return the resulting score
      */
     public int computeScore(final ContentResult searchResult, final Pattern queryTermPattern) {
         int score;
-        double weight = computeWeight(ENGINEID_PATTERN.matcher(searchResult.getId()).replaceFirst(""));
-        Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern.toString() + ").*",
-                Pattern.CASE_INSENSITIVE);
         String title = searchResult.getTitle();
-        boolean titleBeginsWithQueryTerms = titleBeginsWithPattern.matcher(title).matches();
-        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern.toString() + "\\W?)$",
-                Pattern.CASE_INSENSITIVE);
-        boolean exactTitle = exactTitlePattern.matcher(title).matches();
-        int titleHits = 0;
-        int descriptionHits = 0;
-        Matcher ntMatcher = queryTermPattern.matcher(title);
-        while (ntMatcher.find()) {
-            titleHits++;
-        }
-        String description = searchResult.getDescription();
-        if (null != description) {
-            Matcher ndMatcher = queryTermPattern.matcher(description);
-            while (ndMatcher.find()) {
-                descriptionHits++;
-            }
-        }
-        if (exactTitle) {
-            score = 100;
-        } else if (titleBeginsWithQueryTerms && titleHits > 1 && descriptionHits > 1) {
-            score = 90;
-        } else if (titleBeginsWithQueryTerms && titleHits > 1 && descriptionHits == 1) {
-            score = 80;
-        } else if (titleBeginsWithQueryTerms && titleHits > 1) {
-            score = 70;
-        } else if (titleBeginsWithQueryTerms) {
-            score = 65;
-        } else if (titleHits > 1 && descriptionHits > 1) {
-            score = 60;
-        } else if (titleHits > 1) {
-            score = 50;
-        } else if (titleHits > 0 && descriptionHits > 1) {
-            score = 40;
-        } else if (titleHits > 0 && descriptionHits > 0) {
-            score = 30;
-        } else if (titleHits > 0) {
-            score = 20;
+        int titleHits = getTitleHits(queryTermPattern, title);
+        int descriptionHits = getDescriptionHits(searchResult, queryTermPattern);
+        if (titleHits > 0) {
+            score = getScoreWhenTitleHits(queryTermPattern, title, titleHits, descriptionHits);
         } else if (descriptionHits > 0) {
             score = 10;
         } else {
             score = 1;
         }
+        double weight = computeWeight(ENGINEID_PATTERN.matcher(searchResult.getId()).replaceFirst(""));
         score = (int) ((score + computeDateAdjustment(searchResult.getYear())) * weight);
         return score < 0 ? 0 : score;
     }
@@ -98,5 +66,84 @@ public class ScoreStrategy extends AbstractScoreStrategy {
             return 0.25;
         }
         return 1;
+    }
+
+    private int getDescriptionHits(final ContentResult searchResult, final Pattern queryTermPattern) {
+        int descriptionHits = 0;
+        String description = searchResult.getDescription();
+        if (null != description) {
+            Matcher ndMatcher = queryTermPattern.matcher(description);
+            while (ndMatcher.find()) {
+                descriptionHits++;
+            }
+        }
+        return descriptionHits;
+    }
+
+    private int getScoreWhenMultipleTitleHits(final int descriptionHits) {
+        int score;
+        if (descriptionHits > 1) {
+            score = 60;
+        } else {
+            score = 50;
+        }
+        return score;
+    }
+
+    private int getScoreWhenStartsWith(final int titleHits, final int descriptionHits, final Pattern queryTermPattern,
+            final String title) {
+        int score;
+        if (titleHits > 1) {
+            if (descriptionHits > 1) {
+                score = 90;
+            } else if (descriptionHits == 1) {
+                score = 80;
+            } else {
+                score = 70;
+            }
+        } else if (isExactTitle(queryTermPattern, title)) {
+            score = 100;
+        } else {
+            score = 65;
+        }
+        return score;
+    }
+
+    private int getScoreWhenTitleHits(final Pattern queryTermPattern, final String title, final int titleHits,
+            final int descriptionHits) {
+        int score;
+        if (titleBeginsWithTerm(queryTermPattern, title)) {
+            score = getScoreWhenStartsWith(titleHits, descriptionHits, queryTermPattern, title);
+        } else if (titleHits > 1) {
+            score = getScoreWhenMultipleTitleHits(descriptionHits);
+        } else if (descriptionHits > 1) {
+            score = 40;
+        } else if (descriptionHits == 1) {
+            score = 30;
+        } else {
+            score = 20;
+        }
+        return score;
+    }
+
+    private int getTitleHits(final Pattern queryTermPattern, final String title) {
+        int titleHits = 0;
+        Matcher ntMatcher = queryTermPattern.matcher(title);
+        while (ntMatcher.find()) {
+            titleHits++;
+        }
+        return titleHits;
+    }
+
+    private boolean isExactTitle(final Pattern queryTermPattern, final String title) {
+        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern.toString() + "\\W?)$",
+                Pattern.CASE_INSENSITIVE);
+        return exactTitlePattern.matcher(title).matches();
+    }
+
+    private boolean titleBeginsWithTerm(final Pattern queryTermPattern, final String title) {
+        Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern.toString() + ").*",
+                Pattern.CASE_INSENSITIVE);
+        return titleBeginsWithPattern.matcher(title).matches();
     }
 }
