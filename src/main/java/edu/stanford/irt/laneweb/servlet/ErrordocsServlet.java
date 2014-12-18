@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +29,7 @@ public class ErrordocsServlet extends HttpServlet {
         if (matcher.matches()) {
             responseCode = Integer.parseInt(matcher.group(1));
         } else {
-            responseCode = 404;
+            responseCode = HttpURLConnection.HTTP_NOT_FOUND;
         }
         return responseCode;
     }
