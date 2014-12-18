@@ -8,7 +8,6 @@
     // isStanfordActive == true only if user is from stanford and is active in the LDAP
     // See UserDataBinder.java
     isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
-    basePath = model.get(model.BASE_PATH)|| "",
     drMode = model.get(model.DISASTER_MODE),
     extensionPersistentLoginPopup,
     popupWindow,
