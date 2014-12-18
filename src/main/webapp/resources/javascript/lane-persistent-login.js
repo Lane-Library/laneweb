@@ -9,7 +9,10 @@
     // See UserDataBinder.java
     isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
     basePath = model.get(model.BASE_PATH)|| "",
-    drMode = model.get(model.DISASTER_MODE);
+    drMode = model.get(model.DISASTER_MODE),
+    extensionPersistentLoginPopup,
+    popupWindow,
+    getPopup;
 
     // if someone click on a proxied link and he is from stanford so he will
     // have the possibility to extend his persistent login
@@ -20,7 +23,7 @@
         extensionPersistentLoginPopup(event);
     }, "a[href*=laneproxy.stanford.edu/login]");
 
-    var extensionPersistentLoginPopup = function(event){
+    extensionPersistentLoginPopup = function(event){
         var link = event.target, href = link.get('href');
         if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
             event.preventDefault();
@@ -39,7 +42,7 @@
     };
 
     // The popup window for expension
-    var popupWindow = function(id, o) {
+    popupWindow = function(id, o) {
         var lightbox = Y.lane.Lightbox, shibbolethAnchors, href, node;
         lightbox.setContent(o.responseText);
         lightbox.show();
