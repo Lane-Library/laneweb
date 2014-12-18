@@ -31,6 +31,11 @@
             <map:transform type="saxon" src="resources/xsl/classes/thisweek.xsl"/>
             <map:serialize type="xhtml"/>
         </map:match>
+         <map:match pattern="history" type="wildcard">
+            <map:generate type="classes" src="cocoon://classes/data.xml"/>
+            <map:transform type="saxon" src="resources/xsl/classes/history.xsl"/>
+            <map:serialize type="xhtml"/>
+        </map:match>
         <map:match pattern="data.xml" type="wildcard">
             <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
             <map:transform type="joost" src="resources/xsl/classes/event-urls.stx"/>
