@@ -21,7 +21,7 @@
 		if (Y.all('form[name=paginationForm]')) {
 			Y.all('form[name=paginationForm]').on('submit',
 			function(e) {
-				var totalPages = Number(e.target.get('totalPages').get('value')), 
+				var totalPages = Number(e.target.get('totalPages').get('value')),
 				page = Number( e.target.get('page').get('value'));
 				if (page < 1 || page > totalPages ) {
 					alert("Page out of range");

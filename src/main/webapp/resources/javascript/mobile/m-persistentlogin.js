@@ -12,7 +12,7 @@ $.LANE.popupWindow = function(url){
 
 
 $(document).on("click", 'a[href*="laneproxy"]', function(event) {
-    var link = event.currentTarget, threeDays = 3600 *3 , 
+    var link = event.currentTarget, threeDays = 3600 *3 ,
     now = new Date(), cookieValue = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
     if (!model['disaster-mode'] &&  model["isActiveSunetID"] && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
         redirectUrl = encodeURIComponent(link.href);
@@ -25,14 +25,14 @@ $(document).on("click", 'a[href*="laneproxy"]', function(event) {
 
 
 $(document).on("click", '#shibboleth-links a', function(e) {
-	var node = event.target, url, 
-	persistentUrl = model['base-path']+ '/persistentLogin.html?pl=', 
-	isPersistent;
-	if (!redirectUrl) {
-		redirectUrl = "/index.html";
-	}
-	event.preventDefault();
-	document.location =   persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
+    var node = event.target, url,
+    persistentUrl = model['base-path']+ '/persistentLogin.html?pl=',
+    isPersistent;
+    if (!redirectUrl) {
+        redirectUrl = "/index.html";
+    }
+    event.preventDefault();
+    document.location =   persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
 
 });
 
@@ -43,32 +43,32 @@ $(document).on("click", "#close", function() {
 
 // click on login link
 $(document).on("click", ".webauthLogin:contains('Logout')", function(e) {
-	e.preventDefault();
-	if (confirm("Do you really want to logout?")) {
-		document.location.href = e.target.href;
-	}
+    e.preventDefault();
+    if (confirm("Do you really want to logout?")) {
+        document.location.href = e.target.href;
+    }
 });
 
 $.LANE.toggleLogin = function() {
-	if (model['auth']) {
-		$('.webauthLogin').each(function() {
-			$(this).text('Logout');
-			$(this).attr('href', model['base-path'] + '/logout');
-			$(this).attr('data-ajax', 'false');
-		});
-	} else {
-		$('.webauthLogin').each(
-				function() {
-					$(this).text('Login');
-					$(this).attr('href',
-							model['base-path'] + '/secure/login.html?url='+encodeURIComponent(document.location.href));
-					$(this).attr('data-ajax', 'false');
-				});
-	}
+    if (model['auth']) {
+        $('.webauthLogin').each(function() {
+            $(this).text('Logout');
+            $(this).attr('href', model['base-path'] + '/logout');
+            $(this).attr('data-ajax', 'false');
+        });
+    } else {
+        $('.webauthLogin').each(
+                function() {
+                    $(this).text('Login');
+                    $(this).attr('href',
+                            model['base-path'] + '/secure/login.html?url='+encodeURIComponent(document.location.href));
+                    $(this).attr('data-ajax', 'false');
+                });
+    }
 };
 
 //
 // //toggle login button at every pageinit
 $(this).bind("pageinit", function() {
-	$.LANE.toggleLogin();
+    $.LANE.toggleLogin();
 });

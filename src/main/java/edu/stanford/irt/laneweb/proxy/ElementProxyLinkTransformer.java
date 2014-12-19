@@ -6,8 +6,10 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
+    
+    private static final int BUILDER_CAPACITY = 256;
 
-    private StringBuilder builder = new StringBuilder(256);
+    private StringBuilder builder = new StringBuilder(BUILDER_CAPACITY);
 
     private boolean building = false;
 

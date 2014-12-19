@@ -18,7 +18,8 @@ $.LANE.getHours = function(){
                             hours.css("height", "auto");
                             window.scrollTo(0, $(this).offset().top);
                             hours.find("dl").animate({
-                                height: rows * 16, // calculate height based on number of DTs present
+                                // calculate height based on number of DTs present
+                                height: rows * 16,
                                 opacity: 1
                                 }, 300, 'linear');
                         }

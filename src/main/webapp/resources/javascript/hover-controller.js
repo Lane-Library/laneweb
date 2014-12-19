@@ -74,7 +74,7 @@
 
     //create a ResultDescriptionController
     rdc = new ResultDescriptionController(),
-    
+
     initializeDescriptionToggles = function() {
         var triggers = Y.all(".descriptionTrigger");
         triggers.each(function(node) {
@@ -107,7 +107,7 @@
     if (Y.one("#searchResults")) {
         initializeDescriptionToggles();
     }
-    
+
     //reinitialize when content has changed
     Y.lane.on("lane:new-content", function() {
         initializeDescriptionToggles();

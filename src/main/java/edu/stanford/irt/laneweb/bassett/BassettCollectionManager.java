@@ -73,9 +73,8 @@ public class BassettCollectionManager {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         List<String> params = new LinkedList<String>();
-        for (int i = 0; i < 2; i++) {
-            params.add(translatedQuery);
-        }
+        params.add(translatedQuery);
+        params.add(translatedQuery);
         return doGetSearch(SEARCH_BASSETT, params, query);
     }
 

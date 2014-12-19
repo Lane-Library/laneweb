@@ -17,6 +17,14 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class LinkScanGenerator extends AbstractGenerator {
+    
+    private static final int URL = 1;
+    
+    private static final int TYPE = 2;
+    
+    private static final int ID = 3;
+    
+    private static final int TITLE = 4;
 
     private static final String SQL = "select url, record_type, record_id, title " + "from link, eresource "
             + "where eresource.eresource_id = link.eresource_id";
@@ -44,12 +52,12 @@ public class LinkScanGenerator extends AbstractGenerator {
             String position, url, id, title;
             while (rs.next()) {
                 position = " #" + p++ + ' ';
-                url = rs.getString(1);
+                url = rs.getString(URL);
                 if (url == null) {
                     url = "NULL URL";
                 }
-                id = rs.getString(2) + '-' + rs.getString(3);
-                title = rs.getString(4);
+                id = rs.getString(TYPE) + '-' + rs.getString(ID);
+                title = rs.getString(TITLE);
                 if (title == null) {
                     title = "NULL TITLE";
                 }

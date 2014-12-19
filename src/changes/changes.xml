@@ -7,15 +7,18 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2014-12-08" version="2.3.7" description="2.3.7 bug fix release">
+        <release date="2014-12-15" version="2.3.7" description="2.3.7 bug fix release">
+            <action date="2014-12-15" dev="alainb" issue="101256" type="fix">
+                Drugbank search engine is broken
+            </action>
+            <action date="2014-12-12" dev="ceyates" issue="101078" type="update">
+                upgrade yui to version 3.18.1
+            </action>
             <action date="2014-12-03" dev="ryanmax" issue="100846" type="fix">
                 discoveryLoginPage from SFX: javascript permission error
             </action>
             <action date="2014-12-03" dev="alainb" issue="100709" type="update">
                 updated logo, add text under the logos
-            </action>
-            <action date="2014-11-19" dev="ceyates" issue="100573" type="update">
-                align Extend your Search drop down
             </action>
             <action date="2014-12-01" dev="ceyates" issue="100363" type="fix">
                 lightbox of bookmark login looks bad
@@ -23,47 +26,11 @@
             <action date="2014-11-26" dev="ceyates" issue="100350" type="update">
                 create print.css for proper printing
             </action>
-            <action date="2014-11-06" dev="ceyates" issue="100344" type="update">
-                dynamically change descriptionTrigger markup
+            <action date="2014-12-08" dev="alainb" issue="100300" type="update">
+                single discovery page: remove the pop-up; remove mobile version of discovery page
             </action>
             <action date="2014-11-29" dev="ceyates" issue="100266" type="add">
                 create css classes for common properties of drop down menus
-            </action>
-            <action date="2014-11-13" dev="ceyates" issue="100162" type="update">
-                change rightSearchTips to a drop down
-            </action>
-            <action date="2014-10-16" dev="ceyates" issue="99361" type="update">
-                add Lane Catalog Record link for catalog items
-            </action>
-            <action date="2014-10-30" dev="ceyates" issue="99360" type="update">
-                add "Status: Not Checked Out" for book records when appropriate
-            </action>
-            <action date="2014-10-16" dev="ceyates" issue="99359" type="update">
-                add "Also Available" text for audio items for videos when appropriate
-            </action>
-            <action date="2014-10-29" dev="ceyates" issue="99358" type="update">
-                add “Also available” text when physical copy is available in catalog record 
-            </action>
-            <action date="2014-10-16" dev="ceyates" issue="99356" type="update">
-                add “Also available” text when displaying secondary links to the resource
-            </action>
-            <action date="2014-11-03" dev="ceyates" issue="99355" type="update">
-                add a link indicating source and hitcounts at the bottom right corner of search result
-            </action>
-            <action date="2014-11-03" dev="ceyates" issue="99354" type="update">
-                move PMID link next to view abstract link
-            </action>
-            <action date="2014-11-03" dev="ceyates" issue="99353" type="update">
-                change abstract to appear on link click instead of hover for search results
-            </action>
-            <action date="2014-09-17" dev="ceyates" issue="99352" type="update">
-                add resource type at bottom left corner of search results
-            </action>
-            <action date="2014-09-15" dev="ceyates" issue="99351" type="update">
-                move publisher to third line of search results
-            </action>
-            <action date="2014-10-06" dev="ceyates" issue="99349" type="update">
-                add result count to top of search and reformat start of search results
             </action>
             <action date="2014-12-09" dev="ceyates" issue="96307" type="fix">
                 bookmark editor drag fails after delete or add

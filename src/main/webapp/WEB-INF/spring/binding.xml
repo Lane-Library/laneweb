@@ -199,6 +199,8 @@
             <map>
                 <entry key="^/biomed-resources/bassett/raw/bassettLargerView.html"
                     value="bassettLargerView"/>
+                <entry key="^/discoveryLoginPage.html" value="none"/>
+                <entry key="^/help/live-chat-only.html" value="none"/>
             </map>
         </constructor-arg>
     </bean>

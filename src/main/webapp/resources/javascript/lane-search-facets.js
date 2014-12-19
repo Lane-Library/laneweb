@@ -27,7 +27,8 @@
                 return currentResult;
             },
             setActiveFacet: function(facetId){
-                var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
+                // result facet to make active
+                var result = Y.one('#' + facetId + 'Facet').getData('result');
                 if (result !== undefined) {
                     if (result._state === 'initialized') {
                         result.show();
@@ -47,7 +48,7 @@
             source = id.substring(0, id.indexOf('Facet'));
             if (type) {
                 facet.setData('result', new Result(type, source, facet, container));
-                if (facet.hasClass('current-facet')) {
+                if (facet.hasClass('current')) {
                     facet.getData('result').setContent(container.get('innerHTML'));
                     SearchFacets.setCurrentResult(facet.getData('result'));
                 }
@@ -97,7 +98,7 @@
             } else {
                 SearchFacets.getCurrentResult().hide();
                 SearchFacets.setCurrentResult(this);
-                this._facet.addClass('current-facet');
+                this._facet.addClass('current');
                 this._container.set("innerHTML", this._content);
                 this.fire("new-content");
                 searchIndicator.hide();
@@ -117,7 +118,7 @@
         };
         Result.prototype.hide = function(){
             this._container.set("innerHTML", "");
-            this._facet.removeClass('current-facet');
+            this._facet.removeClass('current');
         };
 
         // Add EventTarget attributes to the Result prototype
@@ -125,11 +126,11 @@
             emitFacade : true,
             prefix : "result"
         });
-        
+
         Lane.on("result:new-content", function() {
             this.fire("new-content");
         });
-        
+
         if (elt) {
             facets = elt.all('.searchFacet');
             for (i = 0; i < facets.size(); i++) {

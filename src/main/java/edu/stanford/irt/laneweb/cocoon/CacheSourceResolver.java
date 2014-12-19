@@ -51,6 +51,8 @@ public class CacheSourceResolver implements SourceResolver {
             return this.uri;
         }
     }
+    
+    private static final int BUFFER_SIZE = 1024;
 
     private static final long MILLISECONDS_PER_MINUTE = 1000L * 60L;
 
@@ -107,7 +109,7 @@ public class CacheSourceResolver implements SourceResolver {
     private byte[] getBytesFromSource(final Source source) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         InputStream input = source.getInputStream();
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[BUFFER_SIZE];
         while (true) {
             int i = input.read(buffer);
             if (i == -1) {
