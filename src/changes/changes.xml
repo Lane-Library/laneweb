@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-01-05" version="2.3.8" description="2.3.8 bug fix release">
+            <action date="2015-01-05" dev="ceyates" issue="101551" type="update">
+                update to search-lane-2.0.24
+            </action>
+            <action date="2014-12-18" dev="alainb" issue="97865" type="add">
+                feed for history classes only
+            </action>
+        </release>
         <release date="2014-12-15" version="2.3.7" description="2.3.7 bug fix release">
             <action date="2014-12-15" dev="alainb" issue="101256" type="fix">
                 Drugbank search engine is broken

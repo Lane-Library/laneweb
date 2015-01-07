@@ -12,8 +12,10 @@ import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public abstract class AbstractTextProcessingTransformer extends AbstractXMLPipe implements Transformer {
+    
+    private static final int BUFFER_SIZE = 256;
 
-    private CharBuffer chars = CharBuffer.allocate(256);
+    private CharBuffer chars = CharBuffer.allocate(BUFFER_SIZE);
 
     private boolean inTargetElement = false;
 
@@ -25,7 +27,7 @@ public abstract class AbstractTextProcessingTransformer extends AbstractXMLPipe 
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
         if (getPattern() != null && this.parseLevel > 0) {
             while (this.chars.remaining() < length) {
-                CharBuffer newChars = CharBuffer.allocate(this.chars.capacity() + 256);
+                CharBuffer newChars = CharBuffer.allocate(this.chars.capacity() + BUFFER_SIZE);
                 int position = this.chars.position();
                 this.chars.rewind();
                 newChars.append(this.chars.subSequence(0, position));

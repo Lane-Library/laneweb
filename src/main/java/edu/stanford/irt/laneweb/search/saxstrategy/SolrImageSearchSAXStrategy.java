@@ -15,6 +15,8 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.solr.Image;
 
 public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<String, Object>> {
+    
+    private static final int MAX_TITLE_LENGTH = 90;
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
@@ -218,8 +220,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         endDiv(xmlConsumer);
         startDiv(xmlConsumer);
         String title = image.getTitle();
-        if (title.length() > 90) {
-            title = title.substring(0, 90).concat("....");
+        if (title.length() > MAX_TITLE_LENGTH) {
+            title = title.substring(0, MAX_TITLE_LENGTH).concat("....");
         }
         XMLUtils.data(xmlConsumer, title);
         endDiv(xmlConsumer);

@@ -27,6 +27,8 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  */
 @Controller
 public class MetaSearchController {
+    
+    private static final int ONE_MINUTE = 60000;
 
     private CompositeDataBinder dataBinder;
 
@@ -59,7 +61,7 @@ public class MetaSearchController {
             @ModelAttribute(Model.BASE_PROXY_URL) final String baseProxyURL) {
         Collection<String> engines = getEnginesForResources(resources);
         Query simpleQuery = new SimpleQuery(query, engines);
-        Result result = this.manager.search(simpleQuery, 60000, false);
+        Result result = this.manager.search(simpleQuery, ONE_MINUTE, false);
         Map<String, Object> resultMap = getMapForResult(result, resources);
         if (proxyLinks) {
             createProxyLinks(resultMap, baseProxyURL);
