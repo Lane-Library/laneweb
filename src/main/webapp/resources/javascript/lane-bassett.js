@@ -40,6 +40,7 @@
             },
 
             handleClick = function(ev) {
+                var url;
                 if (this.get('id') === "diagram-choice") {
                     diagramDisplay = true;
                 }
