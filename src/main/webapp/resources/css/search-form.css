@@ -1,159 +1,193 @@
 #searchFormContainer {
-    margin-top: 46px;
-    background-color: #8C1515;
+	margin-top: 46px;
+	background-color: #8C1515;
 }
-#search{
-    padding:30px 0
+
+#search {
+	padding: 30px 0
 }
+
 #searchFields {
-    position:relative
+	position: relative
 }
+
 #selectAndInput {
-    background-color:white;
-    float:left;
+	background-color: white;
+	float: left;
 }
+
 #searchSource {
-    width:124px;
+	width: 124px;
 }
+
 #searchTerms {
-    width:458px;
-    border:0 none;
-    height:34px;
-    box-sizing:border-box;
-    line-height:34px;
-    margin-left: 8px;
+	width: 458px;
+	border: 0 none;
+	height: 34px;
+	box-sizing: border-box;
+	line-height: 34px;
+	margin-left: 8px;
 }
+
 #searchSubmit {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    color: #820000;
-    background: #fafbf8; /* Old browsers */
-    background: -moz-linear-gradient(top,  #fafbf8 0%, #dadad4 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafbf8), color-stop(100%,#dadad4)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #fafbf8 0%,#dadad4 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #fafbf8 0%,#dadad4 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #fafbf8 0%,#dadad4 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #fafbf8 0%,#dadad4 100%); /* W3C */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafbf8', endColorstr='#dadad4')";
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafbf8', endColorstr='#dadad4',GradientType=0 ); /* IE6-9 */
-    border: 1px solid #dadad9;
-    font-weight:bold;
-    height:34px;
-    width:90px;
-    cursor:pointer;
-    vertical-align:bottom;
-    margin:0 8px;
-    box-sizing:border-box;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #820000;
+	background: #fafbf8; /* Old browsers */
+	background: -moz-linear-gradient(top, #fafbf8 0%, #dadad4 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafbf8),
+		color-stop(100%, #dadad4)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #fafbf8 0%, #dadad4 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #fafbf8 0%, #dadad4 100%);
+	/* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #fafbf8 0%, #dadad4 100%);
+	/* IE10+ */
+	background: linear-gradient(to bottom, #fafbf8 0%, #dadad4 100%);
+	/* W3C */
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafbf8', endColorstr='#dadad4')";
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafbf8',
+		endColorstr='#dadad4', GradientType=0); /* IE6-9 */
+	border: 1px solid #dadad9;
+	font-weight: bold;
+	height: 34px;
+	width: 90px;
+	cursor: pointer;
+	vertical-align: bottom;
+	margin: 0 8px;
+	box-sizing: border-box;
 }
+
 #searchSubmit:hover {
-    background: #dadad4; /* Old browsers */
-    background: -moz-linear-gradient(top,  #dadad4 0%, #fafbf8 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dadad4), color-stop(100%,#fafbf8)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #dadad4 0%,#fafbf8 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #dadad4 0%,#fafbf8 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #dadad4 0%,#fafbf8 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #dadad4 0%,#fafbf8 100%); /* W3C */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8')";
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dadad4', endColorstr='#fafbf8',GradientType=0 ); /* IE6-9 */
+	background: #dadad4; /* Old browsers */
+	background: -moz-linear-gradient(top, #dadad4 0%, #fafbf8 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dadad4),
+		color-stop(100%, #fafbf8)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #dadad4 0%, #fafbf8 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #dadad4 0%, #fafbf8 100%);
+	/* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #dadad4 0%, #fafbf8 100%);
+	/* IE10+ */
+	background: linear-gradient(to bottom, #dadad4 0%, #fafbf8 100%);
+	/* W3C */
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8')";
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dadad4',
+		endColorstr='#fafbf8', GradientType=0); /* IE6-9 */
 }
-#searchTools{
-    background-color:white;
-    display:inline-block;
-    height:34px;
-    width:34px;
-    text-align: center;
-    font-size: x-large;
-    line-height: 32px;
-    margin:0 5px
+#searchTools {
+	position: absolute;
+	right: 303px;
+	bottom: 7px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+#searchTools i {
+	color: white;
+	font-size: 9px;
 }
 .picoFields {
-    background-color: white;
-    height: 34px;
-    margin-bottom: 12px;
-    width: 690px;
-    display: none;
+	background-color: white;
+	height: 34px;
+	margin-bottom: 12px;
+	width: 690px;
+	display: none;
 }
+
 .picoFields.active {
-    display: block;
+	display: block;
 }
+
 .picoFields input {
-    border-width:0;
-    /* Mobile Safari: remove rounded corners and input shadow */
-    -webkit-appearance : none;
-    -moz-appearance:none;
-    appearance:none;
-    margin: 10px 0;
-    width:172px;
-    text-align:center;
-    border-right:1px rgb(220,220,220) solid;
-    border-radius:0;
-    box-sizing:border-box;
+	border-width: 0;
+	/* Mobile Safari: remove rounded corners and input shadow */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 10px 0;
+	width: 172px;
+	text-align: center;
+	border-right: 1px rgb(220, 220, 220) solid;
+	border-radius: 0;
+	box-sizing: border-box;
 }
+
 .picoFields #clinicalO {
-    border-right:none
+	border-right: none
 }
+
 #search input:focus {
-    outline-style : none;
+	outline-style: none;
 }
+
 .searchReset {
-    cursor : pointer;
-    display : none;
-    color : #A1B9ED;
-    font-size : 175%;
-    position:absolute;
-    left:570px;
-    top:0;
-    width:22px;
-    height:34px;
-    line-height:34px;
-    text-align:center;
+	cursor: pointer;
+	display: none;
+	color: #A1B9ED;
+	font-size: 175%;
+	position: absolute;
+	left: 570px;
+	top: 0;
+	width: 22px;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
 }
+
 .searchReset:hover {
-    color : #79455C;
+	color: #79455C;
 }
+
 .searchReset.active {
-    display:block;
+	display: block;
 }
-#searchFormContainer a{
-    color:white
+
+#searchFormContainer a {
+	color: white
 }
 
 .searchIndicator {
-    visibility : hidden;
-    position: absolute;
-    right: 250px;
-    bottom: 30px;
+	visibility: hidden;
+	position: absolute;
+	right: 250px;
+	bottom: 30px;
 }
+
 .searchIndicator.show {
-    visibility:visible
+	visibility: visible
 }
+
 #searchTips {
-    position:absolute;
-    bottom:7px;
-    font-size:12px;
-    font-weight:600
+	position: absolute;
+	bottom: 7px;
+	font-size: 12px;
+	font-weight: 600;
 }
-#searchTips i{
-    color:white;
-    font-size:9px
+
+#searchTips i {
+	color: white;
+	font-size: 9px;
 }
 
 /* pubmed, uptodate, dynamed links inside the form: */
-
 #qlinks {
-    position:absolute;
-    right:0;
-    bottom:7px;
+	position: absolute;
+	right: 0;
+	bottom: 7px;
 }
 
 #qlinks li {
-    padding : 0 5px;
-    display: inline;
-     border-right : 1px dotted #C1C1C1;
+	padding: 0 5px;
+	display: inline;
+	border-right: 1px dotted #C1C1C1;
 }
 
 #qlinks li:last-child {
-    border-right : none;
+	border-right: none;
 }
-
