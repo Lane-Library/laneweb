@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-01-12" version="2.3.9" description="2.3.9 bug fix release">
+            <action date="2015-01-09" dev="olgary" issue="101651" type="add">
+                SearchTools link -  make visible
+            </action>
+            <action date="2015-01-09" dev="ceyates" issue="101633" type="fix">
+                View by Page button at the bottom of the ejournals list isn't working
+            </action>
+            <action date="2015-01-09" dev="ceyates" issue="101627" type="fix">
+                printed pages - feedback button gets in the middle
+            </action>
+        </release>
         <release date="2015-01-05" version="2.3.8" description="2.3.8 bug fix release">
             <action date="2015-01-05" dev="ceyates" issue="101551" type="update">
                 update to search-lane-2.0.24
