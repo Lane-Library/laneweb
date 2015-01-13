@@ -54,11 +54,3 @@ h1 a:hover {
 #libraryContact .live-chat {
 	padding-left: 50px;
 }
-
-#libraryContact .live-chat-inactive {
-	display: none;
-}
-/* live chat link in the body of the homepage */
-.content .live-chat-inactive {
-	display: none;
-}
