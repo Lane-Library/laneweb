@@ -101,9 +101,7 @@
                                     <xsl:value-of select="./lc:speaker/text()"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="./lc:event_instructors/lc:instructor/lc:fname/text()"/>
-                                    <xsl:text>&#160;</xsl:text>
-                                    <xsl:value-of select="./lc:event_instructors/lc:instructor/lc:lname/text()"/>
+                                	<xsl:apply-templates select="lc:event_instructors/lc:instructor"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </a>
@@ -114,9 +112,7 @@
                                 <xsl:value-of select="./lc:speaker/text()"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="./lc:event_instructors/lc:instructor/lc:fname/text()"/>
-                                <xsl:text>&#160;</xsl:text>
-                                <xsl:value-of select="./lc:event_instructors/lc:instructor/lc:lname/text()"/>
+                              	<xsl:apply-templates select="lc:event_instructors/lc:instructor"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:otherwise>
@@ -166,6 +162,21 @@
             </div>
         </xsl:for-each>
     </xsl:template>
+
+	<xsl:template match="lc:instructor">
+		<xsl:variable name="position" select="position()"/>
+		<xsl:variable name="last" select="last()"/>
+		<div>
+		<xsl:for-each select=".">
+			<xsl:value-of select="lc:fname"/>
+			<xsl:text>&#160;</xsl:text>
+			<xsl:value-of select="lc:lname"/>
+			<xsl:if test="$position != $last" >
+				<xsl:text>&#160; &amp; &#160;</xsl:text>
+			</xsl:if>
+		</xsl:for-each>
+		</div>
+	</xsl:template>
 
     <xsl:template match="*">
         <xsl:copy>
