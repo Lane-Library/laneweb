@@ -49,16 +49,10 @@ h1 a:hover {
 #libraryContact > li,#login > li {
 	float: left;
 	padding: 0 12px;
+	margin:0;
+	border-bottom:none;
 }
 
 #libraryContact .live-chat {
 	padding-left: 50px;
-}
-
-#libraryContact .live-chat-inactive {
-	display: none;
-}
-/* live chat link in the body of the homepage */
-.content .live-chat-inactive {
-	display: none;
 }
