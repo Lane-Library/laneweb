@@ -190,6 +190,7 @@
                                 <include>classes-min.css</include>
                                 <include>shc-portal-min.css</include>
                                 <include>live-chat-min.css</include>
+                                <include>menu-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
