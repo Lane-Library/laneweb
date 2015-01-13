@@ -49,6 +49,8 @@ h1 a:hover {
 #libraryContact > li,#login > li {
 	float: left;
 	padding: 0 12px;
+	margin:0;
+	border-bottom:none;
 }
 
 #libraryContact .live-chat {

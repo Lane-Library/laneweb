@@ -10,11 +10,15 @@
 	margin-top: 16px;
 	background-image: url(../images/smFooter1.png);
 	background-repeat: no-repeat;
+	padding:0;
 }
 
 #sm-footer li {
 	display: inline-block;
-	list-style-type: none
+	list-style-type: none;
+	border-bottom:none;
+	padding:0;
+	margin:0;
 }
 
 #sm-footer a {

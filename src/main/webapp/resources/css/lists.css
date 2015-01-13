@@ -4,20 +4,20 @@ ol li {
 	list-style-position: inside;
 }
 
-.content ul {
+ul {
 	margin-bottom: 12px;
 	margin-top: 0;
 	list-style: none;
 	padding-left: 12px;
 }
 
-.content ul li {
+li {
 	border-bottom: solid 1px #f0f4f5;
 	padding: 6px 0;
 	margin-right: 12px;
 }
 
-.content ul li:last-child {
+li:last-child {
 	border-bottom: none;
 }
 
