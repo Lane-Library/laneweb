@@ -1,0 +1,25 @@
+.menu {
+    border-top: 12px solid #8c1515;
+    margin: 12px 12px 24px 0;
+    padding:0;
+}
+.menu li {
+    margin:0;
+    padding:0;
+    border-bottom:none;
+}
+.menu a {
+    background-color: #333;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0px, rgba(0, 0, 0, 0) 100%);
+    color: white;
+    display: block;
+    font-size:16px;
+    font-weight: 300;
+    padding: 9px 20px 9px 13px;
+}
+.menu .fa {
+    color:white;
+}
+.menu a:hover {
+    background-color: #555;
+}

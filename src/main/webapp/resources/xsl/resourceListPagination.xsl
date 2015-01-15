@@ -27,7 +27,7 @@
 		  </xsl:choose>
 		</xsl:variable>
 		
-		<div class="resourceListPagination">
+		<div class="resourceListPagination no-bookmarking">
 			<xsl:choose>
 				<xsl:when
 					test="number(/s:resources/@size) &gt; number(/s:resources/@length)">

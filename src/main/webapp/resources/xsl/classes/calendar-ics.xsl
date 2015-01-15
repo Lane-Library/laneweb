@@ -67,16 +67,25 @@ ORGANIZER;CN=</xsl:text>
 						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:fname/text(), ',' , '\\,' )"/> 
-						<xsl:text>&#160;</xsl:text>
-						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:lname/text(), ',' , '\\,' )"/> 
+						<xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
 					</xsl:otherwise>
 				</xsl:choose>
 		<xsl:text>:
 END:VEVENT</xsl:text>
 	</xsl:template>
 
-
+	<xsl:template match="lc:instructor">
+		<xsl:variable name="position" select="position()"/>
+		<xsl:variable name="last" select="last()"/>
+		<xsl:for-each select=".">
+			<xsl:value-of select="replace(lc:fname/text(), ',' , '\\,' )"/> 
+					<xsl:text>&#160;</xsl:text>
+			<xsl:value-of select="replace(lc:lname/text(), ',' , '\\,' )"/>
+			<xsl:if test="$position != $last" >
+				<xsl:text>&#160; &amp; &#160;</xsl:text>
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:template>	
 
 	<xsl:template name="formatDate">
 		<xsl:param name="dateTime" />

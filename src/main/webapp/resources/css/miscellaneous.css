@@ -122,12 +122,12 @@ em {
 	font-size: 10px;
 }
 
-.content .calendar ul {
+.calendar ul {
 	float: left;
 	padding-left: 0;
 }
 
-.content .calendar li {
+.calendar li {
 	width: 138px;
 	height: 88px;
 	float: left;

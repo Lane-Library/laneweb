@@ -60,7 +60,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
     private static final String HIDDEN = "hidden";
     
-    
+    private static final String PREVIEW_IMAGE_NOT_AVAILABLE = "/graphics/2014/no-previewavail.jpg";
 
     public void toSAX(final Map<String, Object> result, final XMLConsumer xmlConsumer) {
         try {
@@ -111,7 +111,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             final String src) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, thumbnailSrc);
-        if (null != id && src != null && !"".equals(src)) {
+        if (null != id) {
             atts.addAttribute(XHTML_NS, ID, ID, CDATA, id);
             atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "yui3-tooltip-trigger");
         }
@@ -262,10 +262,14 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     private void generateImagePopup(final XMLConsumer xmlConsumer, final Image image)
             throws SAXException {
-        if (null != image.getId() && null != image.getSrc() && !"".equals(image.getSrc())) {
+        if (null != image.getId()) {
             startElementWithId(xmlConsumer, "span", image.getId().concat("Tooltip"));
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getSrc());
+            if( null != image.getSrc() && !"".equals(image.getSrc())){
+            	atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getSrc());
+            }else{
+            	atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, PREVIEW_IMAGE_NOT_AVAILABLE);
+            }
             atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "max-width: 300px;max-height: 240px");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);

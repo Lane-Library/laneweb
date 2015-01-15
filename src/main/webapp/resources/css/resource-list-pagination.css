@@ -1,5 +1,6 @@
 .resourceListPagination{
-    margin:0 17px 10px;
+    margin:0 17px;
+    font-size:13px;
 }
 .view-by{
     float:right;

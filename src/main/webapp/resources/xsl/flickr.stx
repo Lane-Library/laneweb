@@ -7,8 +7,12 @@
     
     <stx:param name="query"/>
     
-    <stx:template match="rsp">
+    <stx:template match="rsp[@stat='ok']">
         <html><head><title>flickr photos</title></head><body><stx:process-children/></body></html>
+    </stx:template>
+    
+    <stx:template match="rsp[@stat='fail']">
+        <html><head><title>flickr photos</title></head><body><div>Please try again as the flickr search might have timed out</div></body></html>
     </stx:template>
     
     <stx:template match="photos">

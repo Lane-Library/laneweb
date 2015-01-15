@@ -142,7 +142,7 @@
                 return path;
             },
             getTrackedQuery = function(node) {
-                var query;
+                var query, host, path;
                 if (node.hasClass('yui3-accordion-item-trigger')) {
                     query = location.get("search");
                 } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {

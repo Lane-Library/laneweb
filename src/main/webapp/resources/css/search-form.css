@@ -57,15 +57,16 @@
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8')";
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dadad4', endColorstr='#fafbf8',GradientType=0 ); /* IE6-9 */
 }
-#searchTools{
-    background-color:white;
-    display:inline-block;
-    height:34px;
-    width:34px;
-    text-align: center;
-    font-size: x-large;
-    line-height: 32px;
-    margin:0 5px
+#searchTools {
+    position: absolute;
+    right: 303px;
+    bottom: 7px;
+    font-size: 12px;
+    font-weight: 600;
+}
+#searchTools i {
+    color: white;
+    font-size: 9px;
 }
 .picoFields {
     background-color: white;
@@ -145,12 +146,15 @@
     position:absolute;
     right:0;
     bottom:7px;
+    margin:0;
 }
 
 #qlinks li {
     padding : 0 5px;
-    display: inline;
-     border-right : 1px dotted #C1C1C1;
+    display: inline-block;
+    border-right : 1px dotted #C1C1C1;
+    border-bottom:none;
+    margin:0;
 }
 
 #qlinks li:last-child {

@@ -41,6 +41,18 @@ Y.use('console', 'test', "node-event-simulate", function(Y) {
             Y.Assert.areSame(0, this.link.get("status"));
         },
 
+        testTargetNoBookmarking: function() {
+            var bookmarkable = Y.one("a.no-bookmarking");
+            bookmarkable.simulate("mouseover");
+            Y.Assert.areSame(0, this.link.get("status"));
+        },
+
+        testTargetAncestorNoBookmarking: function() {
+            var bookmarkable = Y.one("div.no-bookmarking a");
+            bookmarkable.simulate("mouseover");
+            Y.Assert.areSame(0, this.link.get("status"));
+        },
+
         testTargetInlineBlock: function() {
             var bookmarkable = Y.one("#inline-block");
             bookmarkable.simulate("mouseover");
