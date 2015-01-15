@@ -31,11 +31,11 @@
     list-style-type:disc;
     padding-left: 0;
 }
-#searchFacets li, .content .lwSearchResults li {
+#searchFacets li, .lwSearchResults li {
     list-style-image:none;
     list-style-type:none;
 }
-#searchFacets ul, .lwSearchResults li {
+#searchFacets ul {
     padding-bottom:10px;
 }
 #searchFacets .current a {
@@ -69,10 +69,9 @@
 #searchResults {
     padding-top:10px;
 }
-.content .lwSearchResults li {
-    margin-left:0;
+.lwSearchResults li {
+    margin: 0 12px 10px 5px;
     padding:5px;
-    margin-bottom:10px
 }
 
 /* abstract and description related styles*/

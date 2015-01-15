@@ -4,8 +4,8 @@
         Lane = Y.lane,
         Model = Lane.Model;
 
-    //don't create BookmarkLink if there is a class=no-bookmarking or in disaster mode
-    if (!Model.get(Model.DISASTER_MODE) && !Y.one(".no-bookmarking")) {
+    //don't create BookmarkLink if in disaster mode
+    if (!Model.get(Model.DISASTER_MODE)) {
 
         /**
          * A link that appears when mousing over bookmarkable links and adds that link to bookmarks
@@ -203,6 +203,8 @@
              * Determine if a link is bookmarkable.  For now true if its display property is inline
              * or inline-block and it does not contain an img element.  Added #topResources links,
              * case 71323.  Added logic for if link was already bookmarked case 75199
+             * added logic for using class="no-bookmarking" for individual nodes and descendants for
+             * case 101724
              * @method _isBookmarkable
              * @private
              * @param target the target anchor
@@ -210,7 +212,7 @@
              */
             _isBookmarkable : function(target) {
                 var bookmarkable = false;
-                if (target.getStyle("display").indexOf("inline") === 0 && !target.one("img")) {
+                if (target.getStyle("display").indexOf("inline") === 0 && !target.one("img") && !target.ancestor(".no-bookmarking", true)) {
                     bookmarkable = true;
                 } else if (target.ancestor("#topResources")) {
                     bookmarkable = true;

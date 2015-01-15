@@ -50,10 +50,17 @@
 	</xsl:template>
 
 	<xsl:template match="lc:instructor">
+		<xsl:variable name="position" select="position()"/>
+		<xsl:variable name="last" select="last()"/>
 		<div>
+		<xsl:for-each select=".">
 			<xsl:value-of select="lc:fname"/>
-			<xsl:text> </xsl:text>
+			<xsl:text>&#160;</xsl:text>
 			<xsl:value-of select="lc:lname"/>
+			<xsl:if test="$position != $last" >
+				<xsl:text>&#160; &amp; &#160;</xsl:text>
+			</xsl:if>
+		</xsl:for-each>
 		</div>
 	</xsl:template>
 
