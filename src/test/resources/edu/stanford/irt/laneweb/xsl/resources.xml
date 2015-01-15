@@ -4,7 +4,8 @@
       <title>search results</title>
    </head>
    <body>
-      <div xmlns:fx="http://lane.stanford.edu/fx" class="resourceListPagination"> all 2 results</div>
+      <div xmlns:fx="http://lane.stanford.edu/fx"
+           class="resourceListPagination no-bookmarking"> all 2 results</div>
       <ul class="lwSearchResults">
          <li class="hvrTrig">
             <div>

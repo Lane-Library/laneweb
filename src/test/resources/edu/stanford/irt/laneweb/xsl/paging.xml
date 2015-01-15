@@ -4,7 +4,8 @@
       <title>search results</title>
    </head>
    <body>
-      <div xmlns:fx="http://lane.stanford.edu/fx" class="resourceListPagination">
+      <div xmlns:fx="http://lane.stanford.edu/fx"
+           class="resourceListPagination no-bookmarking">
          <span id="pageStart">1</span> to 100 of 135 results<div class="s-pagination">
             <span class="pagingButton disabled"> &lt; &lt; First </span>
             <span class="pagingButton disabled"> &lt; Previous </span>
