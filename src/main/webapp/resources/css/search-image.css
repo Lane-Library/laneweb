@@ -131,8 +131,6 @@
 .pagination label{
 	  margin: 3px;
 }
-
-
 	
 #copyright{
 	text-align: left;
@@ -147,9 +145,13 @@
 
 .what-is-image-search{
 	position: absolute;
-	top: 33px;
-	left: 9px;
+	top: 59px;
+	left: 19px;
 }
+.result-summary .result {
+	margin-top: 5px;
+}
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /*styles for  big gray gradient tabs*/
