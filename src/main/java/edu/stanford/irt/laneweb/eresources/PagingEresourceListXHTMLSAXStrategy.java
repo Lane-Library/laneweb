@@ -67,10 +67,7 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
 
     private void createHeading(final XMLConsumer xmlConsumer, final String heading) throws SAXException {
         if (heading != null) {
-            startElementWithClass(xmlConsumer, "h3", "eresources");
-            XMLUtils.data(xmlConsumer, heading);
-            createSpan(xmlConsumer, "Access restricted to Stanford unless otherwise noted");
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
+            createElementWithClass(xmlConsumer, "h3", "eresources", heading);
         }
     }
 }
