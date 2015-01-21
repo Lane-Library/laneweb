@@ -27,12 +27,12 @@ Y.use(function(){
                     'status': 'successful',
                     'url': '/secure/apps/proxy/credential?url=http://pubmed.gov',
                     'hits': 6159},
-                 "mdc_kumar":{
+                 "ck_kumar":{
                      "status": "successful",
                      "url": "http://mdc.com/kumar",
                      "hits":12
                  },
-                 "mdc_brenner":{
+                 "ck_brenner":{
                      "status": "successful",
                      "url": "http://mdc.com/brenner",
                      "hits":24
@@ -46,7 +46,7 @@ Y.use(function(){
         var metasearchTestCase = new Y.Test.Case({
             name: 'Lane Metasearch Test Case',
             testBrennerHits: function() {
-                var hitCountSpan = Y.one("#mdc_brenner").get('parentNode').one("span");
+                var hitCountSpan = Y.one("#ck_brenner").get('parentNode').one("span");
                 Y.Assert.areEqual("&nbsp;24", hitCountSpan.get("innerHTML"));
             }
         });
