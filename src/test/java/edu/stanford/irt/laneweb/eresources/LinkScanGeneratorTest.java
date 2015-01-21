@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -67,7 +68,7 @@ public class LinkScanGeneratorTest {
         this.xmlConsumer.characters(aryEq(" #1 ".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), isA(Attributes.class));
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         this.xmlConsumer.characters(aryEq(" id: type-id title: title".toCharArray()), eq(0), eq(25));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
@@ -102,7 +103,7 @@ public class LinkScanGeneratorTest {
         this.xmlConsumer.characters(aryEq(" #1 ".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), isA(Attributes.class));
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         this.xmlConsumer.characters(aryEq(" id: type-id title: NULL TITLE".toCharArray()), eq(0), eq(30));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
