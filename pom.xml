@@ -72,7 +72,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.17</version>
+                <version>2.18.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -85,7 +85,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.2</version>
                 <configuration>
                     <target>1.7</target>
                     <source>1.7</source>
@@ -108,7 +108,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
+                <version>2.6</version>
                 <configuration>
                     <webappDirectory>${project.build.directory}/laneweb</webappDirectory>
                     <nonFilteredFileExtensions>
@@ -126,7 +126,7 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
-                <version>1.4.0</version>
+                <version>1.5.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -294,7 +294,7 @@
                     <dependency>
                         <groupId>org.apache.maven.wagon</groupId>
                         <artifactId>wagon-ssh</artifactId>
-                        <version>2.7</version>
+                        <version>2.8</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -318,7 +318,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.17</version>
+                <version>2.18.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -413,7 +413,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh-external</artifactId>
-                <version>2.6</version>
+                <version>2.8</version>
             </extension>
         </extensions>
     </build>
@@ -540,23 +540,23 @@
             <artifactId>easymock</artifactId>
             <groupId>org.easymock</groupId>
             <scope>test</scope>
-            <version>3.2</version>
+            <version>3.3</version>
         </dependency>
         <dependency>
             <artifactId>ehcache-core</artifactId>
             <groupId>net.sf.ehcache</groupId>
-            <version>2.6.9</version>
+            <version>2.6.10</version>
         </dependency>
         <dependency>
             <artifactId>jackson-databind</artifactId>
             <groupId>com.fasterxml.jackson.core</groupId>
-            <version>2.4.3</version>
+            <version>2.4.5</version>
         </dependency>
         <dependency>
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.53.0</version>
+            <version>1.54.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -568,7 +568,7 @@
             <artifactId>junit</artifactId>
             <groupId>junit</groupId>
             <scope>test</scope>
-            <version>4.11</version>
+            <version>4.12</version>
         </dependency>
         <dependency>
             <artifactId>nekohtml</artifactId>
@@ -625,7 +625,7 @@
         <dependency>
             <artifactId>slf4j-api</artifactId>
             <groupId>org.slf4j</groupId>
-            <version>1.7.7</version>
+            <version>1.7.9</version>
         </dependency>
         <dependency>
             <artifactId>spellcheck-core</artifactId>
@@ -642,27 +642,27 @@
             <artifactId>spring-aop</artifactId>
             <groupId>org.springframework</groupId>
             <scope>runtime</scope>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-beans</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-context-support</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-core</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
@@ -694,22 +694,22 @@
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
             <scope>test</scope>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-webmvc</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
@@ -736,7 +736,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-            <version>3.2.11.RELEASE</version>
+            <version>3.2.13.RELEASE</version>
         </dependency>
         <dependency>
             <!-- required only for shccodec key generation -->
@@ -748,7 +748,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.7</version>
+            <version>1.7.9</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -800,13 +800,13 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.5.6</version>
+            <version>1.6.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-easymock</artifactId>
-            <version>1.5.6</version>
+            <version>1.6.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

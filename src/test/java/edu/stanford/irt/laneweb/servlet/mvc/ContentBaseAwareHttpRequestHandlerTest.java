@@ -53,6 +53,7 @@ public class ContentBaseAwareHttpRequestHandlerTest {
         expect(this.resource.exists()).andReturn(false);
         expect(this.resource.exists()).andReturn(true);
         expect(this.resource.isReadable()).andReturn(true);
+        expect(this.resource.getURL()).andReturn(getClass().getResource(".")).times(2);
         replay(this.request, this.resource);
         this.handler.getResource(this.request);
         verify(this.request, this.resource);
@@ -79,6 +80,7 @@ public class ContentBaseAwareHttpRequestHandlerTest {
         expect(this.resource.isReadable()).andReturn(false);
         expect(this.resource.exists()).andReturn(true);
         expect(this.resource.isReadable()).andReturn(true);
+        expect(this.resource.getURL()).andReturn(getClass().getResource(".")).times(2);
         replay(this.request, this.resource);
         this.handler.getResource(this.request);
         verify(this.request, this.resource);
