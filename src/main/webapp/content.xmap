@@ -58,6 +58,22 @@
                 <map:generate type="bassett-accordion"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="biomed-resources/*grandrounds.html" type="wildcard">
+                <map:generate type="file" src="cocoon://content/biomed-resources/grandrounds/{1}grandrounds-2015.html"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="biomed-resources/grandrounds/*grandrounds-*.html" type="wildcard">
+                <map:aggregate type="default" element="doc" ns="doc">
+                    <map:generate type="file" src="{content-base}/biomed-resources/grandrounds/{1}.xml"/>
+                    <map:generate type="file" src="{content-base}/biomed-resources/grandrounds/grandrounds.xml"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="resources/xsl/grandrounds.xsl">
+                    <map:parameter name="category" value="{1}"/>
+                    <map:parameter name="year" value="{2}"/>
+                </map:transform>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:match>
         <!-- search.html -->
         <map:match pattern="search.html" type="wildcard">

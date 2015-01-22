@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -51,7 +52,7 @@ public class ContentResultSAXStrategyTest {
         expect(this.searchResult.getContentResult()).andReturn(this.contentResult);
         expect(this.searchResult.getResourceResult()).andReturn(this.resourceResult);
         expect(this.searchResult.getScore()).andReturn(1);
-        Capture<Attributes> attributesCapture = new Capture<Attributes>();
+        Capture<Attributes> attributesCapture = newCapture();
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT),
                 capture(attributesCapture));
         expect(this.resourceResult.getId()).andReturn(Resource.RESOURCE_ID);

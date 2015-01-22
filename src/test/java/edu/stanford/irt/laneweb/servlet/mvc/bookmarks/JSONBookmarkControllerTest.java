@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -119,7 +120,7 @@ public class JSONBookmarkControllerTest {
         Map<String, Integer> json = new HashMap<String, Integer>();
         json.put("to", 1);
         json.put("from", 8);
-        Capture<List<Object>> capture = new Capture<List<Object>>();
+        Capture<List<Object>> capture = newCapture();
         this.bookmarkDAO.saveLinks(eq(this.userid), capture(capture));
         replay(this.bookmarkDAO);
         this.controller.moveBookmark(this.bookmarks, this.userid, json);
@@ -147,7 +148,7 @@ public class JSONBookmarkControllerTest {
         Map<String, Integer> json = new HashMap<String, Integer>();
         json.put("to", 8);
         json.put("from", 1);
-        Capture<List<Object>> capture = new Capture<List<Object>>();
+        Capture<List<Object>> capture = newCapture();
         this.bookmarkDAO.saveLinks(eq(this.userid), capture(capture));
         replay(this.bookmarkDAO);
         this.controller.moveBookmark(this.bookmarks, this.userid, json);

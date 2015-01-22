@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -38,7 +39,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateAnchor() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
@@ -50,7 +51,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateAnchorWithClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
@@ -63,7 +64,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateAnchorWithClassAndTitle() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
@@ -77,7 +78,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateAnchorWithTitle() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
@@ -90,7 +91,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateDivWithClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("div"), eq("div"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "div", "div");
@@ -102,7 +103,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateDivWithNullClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("div"), eq("div"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "div", "div");
@@ -125,7 +126,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateSpanWithClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("span"), eq("span"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "span", "span");
@@ -137,7 +138,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateSpanWithId() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("span"), eq("span"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "span", "span");
@@ -149,7 +150,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateSpanWithNullId() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("span"), eq("span"), capture(attributes));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "span", "span");
@@ -230,7 +231,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartAnchor() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startAnchor(this.xmlConsumer, "href");
@@ -240,7 +241,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartAnchorNullHref() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startAnchor(this.xmlConsumer, null);
@@ -250,7 +251,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartAnchorWithClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startAnchorWithClass(this.xmlConsumer, "href", "class");
@@ -261,7 +262,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartAnchorWithClassAndTitle() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startAnchorWithClassAndTitle(this.xmlConsumer, "href", "class", "title");
@@ -273,7 +274,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartAnchorWithClassAndTitleNullAtts() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startAnchorWithClassAndTitle(this.xmlConsumer, null, null, null);
@@ -285,7 +286,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartAnchorWithClassNullAtts() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startAnchorWithClass(this.xmlConsumer, null, null);
@@ -296,7 +297,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartAnchorWithTitle() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startAnchorWithTitle(this.xmlConsumer, "href", "title");
@@ -307,7 +308,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartAnchorWithTitleNullAtts() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startAnchorWithTitle(this.xmlConsumer, null, null);
@@ -335,7 +336,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartDivWithClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("div"), eq("div"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startDivWithClass(this.xmlConsumer, "class");
@@ -345,7 +346,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartDivWithNullClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("div"), eq("div"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startDivWithClass(this.xmlConsumer, null);
@@ -383,7 +384,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartLiWithClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startLiWithClass(this.xmlConsumer, "class");
@@ -401,7 +402,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartUlWithClass() throws SAXException {
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), capture(attributes));
         replay(this.xmlConsumer);
         this.strategy.startUlWithClass(this.xmlConsumer, "class");

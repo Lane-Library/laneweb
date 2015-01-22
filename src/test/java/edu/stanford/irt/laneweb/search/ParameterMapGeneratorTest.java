@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -39,8 +40,8 @@ public class ParameterMapGeneratorTest {
 
     @Test
     public void testDoGenerateXMLConsumer() throws IOException {
-        Capture<Map<String, String[]>> mapCapture = new Capture<Map<String, String[]>>();
-        Capture<SAXResult> saxResultCapture = new Capture<SAXResult>();
+        Capture<Map<String, String[]>> mapCapture = newCapture();
+        Capture<SAXResult> saxResultCapture = newCapture();
         Map<String, String[]> parameterMap = new HashMap<String, String[]>();
         parameterMap.put("foo", new String[] { "bar", "baz" });
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.PARAMETER_MAP, parameterMap));

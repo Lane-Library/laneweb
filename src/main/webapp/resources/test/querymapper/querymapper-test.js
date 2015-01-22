@@ -6,7 +6,7 @@ Y.applyConfig({fetchCSS:true});
 Y.use('console', 'test', function(Y){
 
     Y.io = function(url, obj) {
-        obj.on.success.apply(obj.context, ["id", {responseText:'{"descriptor":null,"frequencies":null,"query":"mitral valve","resourceMap":{"descriptor":{"descriptorName":"Heart Diseases","descriptorUI":"D006331","treeNumbers":["C14.280"]},"resources":[{"id":"mdc_braunwald","label":"Braunwald\'s Heart Disease"}]},"treePath":null}'}]);
+        obj.on.success.apply(obj.context, ["id", {responseText:'{"descriptor":null,"frequencies":null,"query":"mitral valve","resourceMap":{"descriptor":{"descriptorName":"Heart Diseases","descriptorUI":"D006331","treeNumbers":["C14.280"]},"resources":[{"id":"ck_braunwald","label":"Braunwald\'s Heart Disease"}]},"treePath":null}'}]);
     };
 
     var querymapTestCase = new Y.Test.Case({
@@ -20,7 +20,7 @@ Y.use('console', 'test', function(Y){
                     handle.detach();
             }, this);
             this.mapper.getQueryMap("mitral+valve");
-            Y.Assert.areEqual("mdc_braunwald", this.queryMap.resourceMap.resources[0].id);
+            Y.Assert.areEqual("ck_braunwald", this.queryMap.resourceMap.resources[0].id);
         }
     });
 
