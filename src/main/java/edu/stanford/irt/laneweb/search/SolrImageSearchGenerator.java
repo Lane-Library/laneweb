@@ -17,10 +17,10 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
 
     private SolrImageService service;
     
-    private static final String[] TAB_CONTENT = {"Public Domain & CC BY",
-                                                 "CC: ND, NC, NC-ND, NC-SA, SA",
-                                                 "PMC - Article is CC",
-                                                 "Rights Limited"};
+    private static final String[] TAB_CONTENT = {"Broad Reuse Rights",
+                                                 "Defined Reuse Rights",
+                                                 "Limited Reuse Rights",
+                                                 "Possibly CC Rights"};
     
     private static final int TOTAL_ELEMENT_BY_PAGE = 52;
     
