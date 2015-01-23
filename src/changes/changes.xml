@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-01-19" version="2.3.10" description="2.3.10 bug fix release">
+            <action date="2015-01-14" dev="" issue="101791" type="update">
+                classes.css updated
+            </action>
+            <action date="2015-01-" dev="ceyates" issue="101790" type="fix">
+                align 'metasearch' search field horizontally at the top with the other modules
+            </action>
+            <action date="2015-01-15" dev="ceyates" issue="101789" type="update">
+                move "Access restricted to Stanford unless otherwise noted" for biomed resources pages to below 'popular' (black box)
+            </action>
+            <action date="2015-01-16" dev="alainb" issue="101741" type="fix">
+                /classes/calendar.ics produces a 404 error
+            </action>
+            <action date="2015-01-13" dev="ceyates" issue="101670" type="add">
+                left column black menu for the main site
+            </action>
+            <action date="2015-01-15" dev="ceyates" issue="99386" type="add">
+                Searches time out on the flickr side
+            </action>
+        </release>
         <release date="2015-01-12" version="2.3.9" description="2.3.9 bug fix release">
             <action date="2015-01-09" dev="olgary" issue="101651" type="add">
                 SearchTools link -  make visible

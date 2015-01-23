@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -43,7 +44,7 @@ public class SolrImageSearchGeneratorTest {
     public void testDoSearchCategoryCC() {
         this.model.put(Model.QUERY, "query");
         this.model.put(Model.SOURCE, "cc-");
-        Capture<Pageable> pageable = new Capture<Pageable>();
+        Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("10"), capture(pageable)))
         .andReturn(null);
         replay(this.service, this.saxStrategy);
@@ -61,7 +62,7 @@ public class SolrImageSearchGeneratorTest {
     public void testDoSearchCategoryOther() {
         this.model.put(Model.QUERY, "query");
         this.model.put(Model.SOURCE, "foo");
-        Capture<Pageable> pageable = new Capture<Pageable>();
+        Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
         .andReturn(null);
         replay(this.service, this.saxStrategy);
@@ -79,7 +80,7 @@ public class SolrImageSearchGeneratorTest {
     public void testDoSearchCategoryPMC() {
         this.model.put(Model.QUERY, "query");
         this.model.put(Model.SOURCE, "pmc-");
-        Capture<Pageable> pageable = new Capture<Pageable>();
+        Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("15"), capture(pageable)))
         .andReturn(null);
         replay(this.service, this.saxStrategy);
@@ -97,7 +98,7 @@ public class SolrImageSearchGeneratorTest {
     public void testDoSearchCategoryRL() {
         this.model.put(Model.QUERY, "query");
         this.model.put(Model.SOURCE, "rl-");
-        Capture<Pageable> pageable = new Capture<Pageable>();
+        Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("20"), capture(pageable)))
         .andReturn(null);
         replay(this.service, this.saxStrategy);
@@ -113,7 +114,7 @@ public class SolrImageSearchGeneratorTest {
 
     @Test
     public void testDoSearchDefault() {
-        Capture<Pageable> pageable = new Capture<Pageable>();
+        Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
         .andReturn(null);
         replay(this.service, this.saxStrategy);
@@ -127,7 +128,7 @@ public class SolrImageSearchGeneratorTest {
     @Test
     public void testDoSearchPage() {
         this.model.put(Model.PAGE, "2");
-        Capture<Pageable> pageable = new Capture<Pageable>();
+        Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
         .andReturn(null);
         replay(this.service, this.saxStrategy);

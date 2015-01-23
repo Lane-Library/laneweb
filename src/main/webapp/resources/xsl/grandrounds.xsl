@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://www.w3.org/1999/xhtml" 
-    exclude-result-prefixes="h"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:d="doc"
+    exclude-result-prefixes="h d"
     version="2.0">
     
     <xsl:param name="category"/>
     
     <xsl:param name="year"/>
     
-    <xsl:template match="/">
-        <xsl:apply-templates select="*/h:html[1]"/>
+    <xsl:template match="/d:doc">
+        <xsl:apply-templates select="h:html[1]"/>
     </xsl:template>
     
     <xsl:template match="processing-instruction()">
-        <xsl:apply-templates select="/*/h:html[2]/h:body/h:div[@class=$category][tokenize(h:div[@class='date'], '-')[1] = $year]"/>
+        <xsl:apply-templates select="/d:doc/h:html[2]/h:body/h:div[@class=$category][tokenize(h:div[@class='date'], '-')[1] = $year]"/>
     </xsl:template>
     
     <xsl:template match="h:title|h:h2">
@@ -39,7 +40,7 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="/*/h:html[2]/h:body/h:div">
+    <xsl:template match="/d:doc/h:html[2]/h:body/h:div">
         <div class="class">
             <div class="yui3-g">
                 <div class="yui3-u-1-5">

@@ -1,10 +1,14 @@
 .resourceListPagination{
-    margin:0 17px;
+    margin:0 17px 12px;
     font-size:13px;
 }
 .view-by{
-    float:right;
+    position:relative;
     white-space:nowrap;
+}
+.view-by .dropdown {
+    position:absolute;
+    top:-4px;
 }
 .labelTitle{
     display:inline-block;

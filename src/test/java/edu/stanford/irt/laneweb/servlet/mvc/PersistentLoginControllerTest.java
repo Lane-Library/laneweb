@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -66,8 +67,8 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testEnablePersistentLoginNotNullUrl() {
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
@@ -85,8 +86,8 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testEnablePersistentLoginNullUser() {
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);
@@ -98,8 +99,8 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testEnablePersistentLoginNullUrl() {
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
@@ -118,8 +119,8 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testDisablePersistentLoginUrlNotNull() {
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);
@@ -132,8 +133,8 @@ public class PersistentLoginControllerTest {
 
     @Test
     public void testDisablePersistentLoginUrlNull() {
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);
@@ -150,8 +151,8 @@ public class PersistentLoginControllerTest {
         expect(this.user.getId()).andReturn("user@stanford.edu");
         expect(this.ldap.getLdapDataForSunetid("user")).andReturn(this.data);
         expect(this.data.isActive()).andReturn(true);
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
@@ -168,8 +169,8 @@ public class PersistentLoginControllerTest {
     
     @Test
     public void testRenewPersistentLoginNullUser() {
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);
@@ -185,8 +186,8 @@ public class PersistentLoginControllerTest {
         expect(this.user.getId()).andReturn("user@stanford.edu");
         expect(this.ldap.getLdapDataForSunetid("user")).andReturn(this.data);
         expect(this.data.isActive()).andReturn(false);
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);
@@ -199,8 +200,8 @@ public class PersistentLoginControllerTest {
     @Test
     public void testRenewPersistentLoginNotStanford() {
         expect(this.user.isStanfordUser()).andReturn(false);
-        Capture<Cookie> cookie1 = new Capture<Cookie>();
-        Capture<Cookie> cookie2 = new Capture<Cookie>();
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user, this.token, this.data);

@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.cocoon;
 import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
@@ -50,7 +51,7 @@ public class AbstractMarshallingGeneratorTest {
 
     @Test
     public void testMarshall() throws XmlMappingException, IOException {
-        Capture<SAXResult> capture = new Capture<SAXResult>();
+        Capture<SAXResult> capture = newCapture();
         Object obj = new Object();
         this.marshaller.marshal(same(obj), capture(capture));
         replay(this.marshaller, this.xmlConsumer);
@@ -61,7 +62,7 @@ public class AbstractMarshallingGeneratorTest {
 
     @Test(expected = LanewebException.class)
     public void testMarshallThrowIOException() throws XmlMappingException, IOException {
-        Capture<SAXResult> capture = new Capture<SAXResult>();
+        Capture<SAXResult> capture = newCapture();
         Object obj = new Object();
         this.marshaller.marshal(same(obj), capture(capture));
         expectLastCall().andThrow(new IOException());
@@ -71,7 +72,7 @@ public class AbstractMarshallingGeneratorTest {
 
     @Test(expected = LanewebException.class)
     public void testMarshallThrowXmlMappingException() throws XmlMappingException, IOException {
-        Capture<SAXResult> capture = new Capture<SAXResult>();
+        Capture<SAXResult> capture = newCapture();
         Object obj = new Object();
         this.marshaller.marshal(same(obj), capture(capture));
         expectLastCall().andThrow(new MarshallingFailureException("oopsie"));
