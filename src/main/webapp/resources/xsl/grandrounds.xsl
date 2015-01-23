@@ -15,7 +15,15 @@
     </xsl:template>
     
     <xsl:template match="processing-instruction()">
-        <xsl:apply-templates select="/d:doc/h:html[2]/h:body/h:div[@class=$category][tokenize(h:div[@class='date'], '-')[1] = $year]"/>
+        <xsl:variable name="grandrounds" select="/d:doc/h:html[2]/h:body/h:div[@class=$category][tokenize(h:div[@class='date'], '-')[1] = $year]"/>
+        <xsl:choose>
+            <xsl:when test="count($grandrounds) = 0">
+                <p>There are no grand rounds videos for this year.</p>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="$grandrounds"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="h:title|h:h2">
