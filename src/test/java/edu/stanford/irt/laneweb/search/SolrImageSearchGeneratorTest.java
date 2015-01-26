@@ -52,7 +52,7 @@ public class SolrImageSearchGeneratorTest {
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=cc-&page=", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
-        assertEquals("CC: ND, NC, NC-ND, NC-SA, SA", result.get("tab"));
+        assertEquals("Defined Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
@@ -70,7 +70,7 @@ public class SolrImageSearchGeneratorTest {
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=foo&page=", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
-        assertEquals("Public Domain & CC BY", result.get("tab"));
+        assertEquals("Broad Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
@@ -88,7 +88,7 @@ public class SolrImageSearchGeneratorTest {
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=pmc-&page=", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
-        assertEquals("PMC - Article is CC", result.get("tab"));
+        assertEquals("Limited Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
@@ -106,7 +106,7 @@ public class SolrImageSearchGeneratorTest {
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=rl-&page=", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
-        assertEquals("Rights Limited", result.get("tab"));
+        assertEquals("Possibly CC Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);

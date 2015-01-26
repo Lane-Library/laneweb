@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-01-26" version="2.3.11" description="2.3.11 bug fix release">
+            <action date="2015-01-22" dev="ceyates" issue="101899" type="fix">
+                align text 
+            </action>
+            <action date="2015-01-23" dev="ceyates" issue="101825" type="add">
+                dynamically pull all GR from a single xml into  content pages. 
+            </action>
+        </release>
         <release date="2015-01-19" version="2.3.10" description="2.3.10 bug fix release">
             <action date="2015-01-14" dev="" issue="101791" type="update">
                 classes.css updated
