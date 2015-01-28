@@ -11,6 +11,12 @@ body,select,input,button,textarea {
 .sprite {
     background-image : url(../images/sprite-all.png);
 }
+
+.scaled-image {
+    width:100%;
+    height:auto
+}
+
 /*.close is the X close box on popups and feedback*/
 .close {
     width:24px;
