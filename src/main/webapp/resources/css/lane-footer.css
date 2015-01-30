@@ -25,7 +25,6 @@
     border-bottom:1px solid #902827;
 }
 #laneFooter a{
-    border-bottom:none;
     color:white
 }
 #laneFooter li{
@@ -44,7 +43,6 @@
 #lane-subfooter,
 #lane-subfooter a{
     color:#999999;
-    text-decoration:none;
 }
 
 #lane-subfooter ul{

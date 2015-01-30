@@ -16,9 +16,6 @@
 .primaryLink {
     font-size:16px;
 }
-#searchFacets a {
-    border-bottom:none;
-}
 #searchFacets .facetHeader {
     text-transform:uppercase;
     font-weight:bold;
