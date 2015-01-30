@@ -348,14 +348,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
-    <!-- add class="active" to #tabs-2012 li when url matches child a href -->
-    <xsl:template match="h:ul[@id='tabs-2012']/h:li[h:a[@href=$path]]">
-        <xsl:copy>
-            <xsl:attribute name="class" select="'active'"/>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>
 
     <!-- disable live chat if not scheduled to be available -->
     <xsl:template match="h:*[@class = 'live-chat']">
