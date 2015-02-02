@@ -47,6 +47,8 @@
         inputFields = validator.get("inputFields");
         for (i = 0; i < inputFields.length; i++) {
             inputFields[i].isEmpty = emptyHandler;
+            // remove class incorrect if present (set if using placeholder, see lane-textinputs.js
+            nodes.item(i).removeClass("incorrect");
         }
         return {
             destroy : function() {
