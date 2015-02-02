@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-02-02" version="2.3.12" description="2.3.12 bug fix release">
+            <action date="2015-02-02" dev="ceyates" issue="102147" type="update">
+                update to search-lane-2.0.26
+            </action>
+            <action date="2015-01-27" dev="ceyates" issue="102050" type="add">
+                dynamically resize images
+            </action>
+        </release>
         <release date="2015-01-26" version="2.3.11" description="2.3.11 bug fix release">
             <action date="2015-01-22" dev="ceyates" issue="101899" type="fix">
                 align text 
