@@ -11,6 +11,12 @@ body,select,input,button,textarea {
 .sprite {
     background-image : url(../images/sprite-all.png);
 }
+
+.scaled-image {
+    width:100%;
+    height:auto
+}
+
 /*.close is the X close box on popups and feedback*/
 .close {
     width:24px;
@@ -27,7 +33,7 @@ body,select,input,button,textarea {
 }
 
 p {
-	margin-bottom: 12px;
+margin-bottom: 12px;
 }
 
 strong {
@@ -42,20 +48,8 @@ em {
 	color: #808080;
 }
 
-.more {
-	border-top: none;
-	padding: 0 12px 12px 12px;
-}
-
 .more a {
-	border: none;
-	margin-right: 6px;
-}
-/* used for pubmed and highly accessed article lists */
-.citationList li {
-	list-style: decimal;
-	margin-bottom: 1em;
-	margin-left: 24px;
+    margin-right: 6px;
 }
 
 .rss-link {
@@ -64,12 +58,10 @@ em {
 	width: 15px;
 	display: block;
 	float:right;
-	margin:0 12px;
 }
 
 .rss-link:hover {
 	background-position: -41px -280px;
-	border-bottom: none;
 }
 
 .announce {
@@ -124,20 +116,17 @@ em {
 
 .calendar ul {
 	float: left;
-	padding-left: 0;
+	margin-bottom:12px;
 }
 
 .calendar li {
 	width: 138px;
 	height: 88px;
 	float: left;
-	margin: 2.6px;
+	margin-right: 2.6px;
 	padding: 6.5px;
 	box-sizing:border-box;
-	list-style: none inside none;
-	margin-left: 0;
 	background-color: #09425a;
-	margin-bottom: 0;
 	color: #fff;
 }
 
@@ -148,16 +137,16 @@ em {
 }
 
 .seminar {
-	padding-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 hr {
 	color: #dddddd;
 	border-top: 1px solid;
-	margin: 12px;
+	margin-bottom:12px;
 }
 .nomodule {
-    margin: 12px 0 24px 0;
+    margin: 12px 0 24px;
     line-height: normal;
     font-size: 16px;
 }

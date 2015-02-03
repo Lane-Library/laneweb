@@ -76,7 +76,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     private void toSAXResult(final Map<String, Object> result, final XMLConsumer xmlConsumer) throws SAXException {
         @SuppressWarnings("unchecked")
-        Page<Image> page = ((Page<Image>) result.get("page"));
+        Page<Image> page = (Page<Image>) result.get("page");
         List<Image> images = page.getContent();
         generateSumaryResult(xmlConsumer, page, result, true);
         startElementWithId(xmlConsumer, UL, "imageList");
@@ -266,9 +266,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             startElementWithId(xmlConsumer, "span", image.getId().concat("Tooltip"));
             AttributesImpl atts = new AttributesImpl();
             if( null != image.getSrc() && !"".equals(image.getSrc())){
-            	atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getSrc());
+                atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getSrc());
             }else{
-            	atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, PREVIEW_IMAGE_NOT_AVAILABLE);
+                atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, PREVIEW_IMAGE_NOT_AVAILABLE);
             }
             atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "max-width: 300px;max-height: 240px");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);

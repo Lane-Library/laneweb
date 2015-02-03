@@ -15,9 +15,6 @@ a:visited,a:active,a:hover {
 	text-decoration: none;
 }
 
-.image-link,.image-link:hover {
-	border-bottom: none;
-}
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class*="yui3-u"] {
 	font-family: 'Source Sans Pro', sans-serif;

@@ -44,6 +44,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/shc-portal.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/live-chat.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/menu.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/gutters.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
@@ -107,7 +108,7 @@
                     </form>
                     <img class="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
                     <a id="searchTips" href="/help/choose-search.html">Need Help? <i class="fa fa-arrow-right"></i></a>
-                    <a id="searchTools" href="/help/searchtools.html" title="Search Tools">Search Tools <i class="fa fa-arrow-right"></i></a>     
+                    <a id="searchTools" href="/help/searchtools.html" title="Search Tools">Search Tools <i class="fa fa-arrow-right"></i></a>
                     <ul id="qlinks">
                         <li>
                             <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
@@ -317,12 +318,12 @@
                         </ul>
                     </div>
                     <div class="yui3-u-1-6">
-                        <p><a href="http://scopeblog.stanford.edu/">Scope Blog</a></p>
-                        <p><a href="http://openknowledge.stanford.edu/">Open Access &amp; NIH Policy</a></p>
+                        <div><a href="http://scopeblog.stanford.edu/">Scope Blog</a></div>
+                        <div><a href="http://openknowledge.stanford.edu/">Open Access &amp; NIH Policy</a></div>
                     </div>
                     <div class="yui3-u-1-6">
-                        <p><a href="/biomed-resources/recent-su-pubmed.html">Stanford Authors in PubMed</a></p>
-                        <p><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles</a></p>
+                        <div><a href="/biomed-resources/recent-su-pubmed.html">Stanford Authors in PubMed</a></div>
+                        <div><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles</a></div>
                     </div>
                     <div class="yui3-u-1-3">
                         <a id="gift" href="http://giving.stanford.edu/goto/lanelibrarygift" rel="popup standard"><strong>Make a difference.</strong>

@@ -4,17 +4,18 @@
         name: 'purchase-suggestions Test Case',
 
         testThatItRenders: function() {
-            var purchase = Y.one("#purchase");
-            purchase.remove();
-            Y.lane.Lightbox.setContent(purchase.get("outerHTML"));
+            var feedback = Y.one("#feedback");
+            feedback.remove();
+            Y.lane.Lightbox.set("url", "url");
+            Y.lane.Lightbox.setContent(feedback.get("outerHTML"));
             Y.lane.Lightbox.show();
         },
 
         testClick: function() {
-            var menu1 = Y.all("li").item(1);
+            var menu1 = Y.all("#purchase li").item(1);
             menu1.simulate("click");
             var text = Y.one(".yui3-purchase-item-active").get("text");
-            Y.Assert.areSame("item1form1", text.replace(/\s+/, "") );
+            Y.Assert.areSame("item1div1", text.replace(/\s+/, "") );
         }
     });
 

@@ -36,8 +36,8 @@
 	background-position: -80px -200px;
 }
 
-.bookmark-instructions .module {
-    padding: 2em 2em 1em 2em;
+.bookmark-instructions .nomodule {
+    padding:12px;
 }
 
 /*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
@@ -46,10 +46,12 @@
 }
 
 /* Graphics to replace css button for Bookmark on Lane. CSS button doesn't allow to bookmark in IE and image-sprite doesn't show in FF toolbar. Separate graphics and this style fixes both.  */
+/*
+ * .bookmark-on-lane no longer present anywhere
 #bookmarkletNotIE .bookmark-on-lane, #bookmarkletIE .bookmark-on-lane {
 	cursor: pointer;
 	height: 31px;
 	width: 326px;
 	display: inline-block;
-	margin-bottom: 1em;
-}
+    margin-bottom: 1em;
+}*/

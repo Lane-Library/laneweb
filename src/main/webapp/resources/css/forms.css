@@ -59,9 +59,6 @@
 	margin-bottom: .2em;
 	color: #820000;
 }
-#feedback li {
-	list-style: none outside none;
-}
 
 #feedbackMenu /*tabs on the left */ {
 	text-align: left;
@@ -175,5 +172,5 @@
     clear : both;
 }
 .breadcrumbForm {
-    margin:12px 0 0 6px
+    margin-top:12px
 }

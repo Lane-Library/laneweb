@@ -2,11 +2,6 @@
 #lane-subfooter{
     background-color:#8C1515;
 }
-#laneFooter ul,
-#lane-subfooter ul {
-    padding:0;
-    margin:0;
-}
 #laneFooter{
     margin-top:12px;
     padding-top:17px;
@@ -25,14 +20,11 @@
     border-bottom:1px solid #902827;
 }
 #laneFooter a{
-    border-bottom:none;
     color:white
 }
 #laneFooter li{
     font-size:12px;
     line-height:24px;
-    padding:0;
-    margin:0;
 }
 #lane-subfooter{
     font-size:12px;
@@ -44,7 +36,6 @@
 #lane-subfooter,
 #lane-subfooter a{
     color:#999999;
-    text-decoration:none;
 }
 
 #lane-subfooter ul{
@@ -53,9 +44,7 @@
 
 #lane-subfooter li{
     float:left;
-    margin:0;
     padding:3px 5px 5px 0;
-    border-bottom:none;
 }
 
 #lane-subfooter span{
@@ -68,12 +57,8 @@
     color:#8C1515;
     height:22px;
     line-height:20px;
-    margin-left:0;
     text-align:center;
     width:22px;
-}
-#lane-subfooter p{
-    margin-bottom:0
 }
 #gift{
     display:block;

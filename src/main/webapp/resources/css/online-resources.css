@@ -9,12 +9,11 @@
     background-color:#c1c1c1;
     padding:12px 22px;
     position:relative;
+    margin-bottom:12px;
 }
 #browseTabs li{
-    list-style:none outside none;
     float:left;
     padding:0;
-    margin:0;
     border-bottom:0;
 }
 #browseTabs li:before{
@@ -39,6 +38,6 @@ content:'';
 }
 
 .eresources{
-    margin:0 17px;
+    margin:12px 0 0;
     padding-bottom:4px;
 }

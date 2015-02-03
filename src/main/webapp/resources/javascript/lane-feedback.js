@@ -42,7 +42,7 @@
         bindUI : function() {
             var self = this, eventHandle1, eventHandle2;
             this.get("menu").on("click", this._handleMenuClick, this);
-            this.on("activeItemChange", this._handleActiveItemChange);
+            this.after("activeItemChange", this._handleActiveItemChange);
             this.on("validatorChange", this._handleValidatorChange);
             this.get("srcNode").all("form").on("submit", this._handleSubmit, this);
             eventHandle1 = Y.lane.Lightbox.on("animEnd", function() {
@@ -79,6 +79,11 @@
             if (thanks) {
                 this.set("thanks", thanks.get("innerHTML"));
             }
+        },
+        resetValidator : function() {
+            var activeItem = this.get("activeItem"),
+                items = this.get("items");
+            this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
         },
         sendFeedback : function(form) {
             var contentBox = this.get("contentBox"),
@@ -123,7 +128,7 @@
             items.item(event.prevVal).removeClass(itemActiveClass);
             menu.item(event.newVal).addClass(menuActiveClass);
             items.item(event.newVal).addClass(itemActiveClass);
-            this.set("validator", new Y.lane.FormValidator(items.item(event.newVal).one("form")));
+            this.resetValidator();
             focusElement = items.item(event.newVal).one("textarea, input[type='text']");
             if (focusElement) {
                 try {

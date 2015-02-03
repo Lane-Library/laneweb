@@ -1,10 +1,8 @@
 .menu {
     border-top: 12px solid #8c1515;
-    margin: 12px 12px 24px 0;
-    padding:0;
+    margin: 12px 0 24px;
 }
 .menu li {
-    margin:0;
     padding:0;
     border-bottom:none;
 }
