@@ -21,8 +21,7 @@
     Y.extend(PurchaseSuggestions, Y.lane.Feedback, {
         bindUI : function() {
             this.get("menu").on("click", this._handleMenuClick, this);
-            this.on("activeItemChange", this._handleActiveItemChange);
-            this.on("validatorChange", this._handleValidatorChange);
+            this.after("activeItemChange", this._handleActiveItemChange);
         },
         syncUI : function() {
             var items = this.get("items");
@@ -45,7 +44,7 @@
             item = items.item(event.newVal);
             item.addClass(this.getClassName("item", "active"));
             itemsList.append(item);
-            this.set("validator", new Y.lane.FormValidator(this.get("form")));
+            Y.Widget.getByNode("#feedback").resetValidator();
             focusElement = itemsList.one("textarea, input[type='text']");
             if (focusElement) {
                 focusElement.focus();

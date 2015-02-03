@@ -5,14 +5,24 @@
         <link rel="stylesheet" type="text/css" href="../yui-test-3.13.0.css"/>
     </head>
     <body>
-        <div id="purchase">
-            <ul id="purchaseMenu">
+        <div id="feedback"><span class="close"></span>
+            <ul id="feedbackMenu">
                 <li>menu0</li>
-                <li>menu1</li>
             </ul>
-            <ul id="purchaseItems">
-                <li>item0<form>form0</form></li>
-                <li>item1<form>form1</form></li>
+            <ul id="feedbackItems">
+                <li id="purchase">
+                    <form>
+                        <input type="text"/>
+                        <ul id="purchaseMenu">
+                            <li>menu0</li>
+                            <li>menu1</li>
+                        </ul>
+                        <ul id="purchaseItems">
+                            <li>item0<div>div0</div></li>
+                            <li>item1<div>div1</div></li>
+                        </ul>
+                    </form>
+                </li>
             </ul>
         </div>
         <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
