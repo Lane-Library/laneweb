@@ -19,21 +19,10 @@
 #searchFacets .facetHeader {
     text-transform:uppercase;
     font-weight:bold;
-    list-style: none outside none;
     margin-top: 1em;
 }
 #searchFacets .facetIndent {
-    margin-left:30px;
-    list-style-image:none;
-    list-style-type:disc;
-    padding-left: 0;
-}
-#searchFacets li, .lwSearchResults li {
-    list-style-image:none;
-    list-style-type:none;
-}
-#searchFacets ul {
-    padding-bottom:10px;
+    padding-left:30px;
 }
 #searchFacets .current a {
     color:#9a0003;
@@ -67,7 +56,7 @@
     padding-top:10px;
 }
 .lwSearchResults li {
-    margin: 0 12px 10px 5px;
+	margin-bottom:10px;
     padding:5px;
 }
 

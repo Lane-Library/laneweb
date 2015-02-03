@@ -362,37 +362,54 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- ================ temporary templates to facilitate 2.2.6 redesign ===================-->
-    <!-- add a div so modules are separated -->
-    <xsl:template match="h:div[contains(@class,'yui3-u')]//h:div[@class='module' or 'module' = tokenize(@class,' ')]">
-        <div>
-            <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div or ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">
-                <xsl:attribute name="style">
-                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/preceding-sibling::h:div">margin-left:6px;</xsl:if>
-                    <xsl:if test="ancestor::h:div[contains(@class,'yui3-u')]/following-sibling::h:div">margin-right:6px;</xsl:if>
-                </xsl:attribute>
-            </xsl:if>
+    <!-- add a div with class to grids so they can be separated by a gutter -->
+
+    <!-- left most grid has class gr, priority in case only one grid -->
+    <xsl:template match="h:div[@class='yui3-g']/h:div[1]" priority="1">
             <xsl:copy>
-                <xsl:apply-templates select="attribute::node()|child::node()"/>
+                <xsl:apply-templates select="@*"/>
+                <div class="gr">
+                    <xsl:apply-templates select="*"/>
+                </div>
             </xsl:copy>
-        </div>
     </xsl:template>
-    
-    <xsl:template match="h:div[@class='popular']">
-        <div style="margin-left:6px">
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node()|child::node()"/>
-            </xsl:copy>
-        </div>
+
+    <!-- right most grid has class gl -->
+    <xsl:template match="h:div[@class='yui3-g']/h:div[last()]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <div class="gl">
+                <xsl:apply-templates select="*"/>
+            </div>
+        </xsl:copy>
     </xsl:template>
-    
+
+    <!-- middle grids have class gb -->
+    <xsl:template match="h:div[@class='yui3-g']/h:div[position() &gt; 1 and position() &lt; last()]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <div class="gb">
+                <xsl:apply-templates select="*"/>
+            </div>
+        </xsl:copy>
+    </xsl:template>
+
+    <!-- add a div with class landing-content inside .module.landing so it can be given padding -->
+    <xsl:template match="h:div[@class='module landing']">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|*[position() = 1 or position() = 2]"/>
+            <div class="landing-content">
+                <xsl:apply-templates select="*[not(position() = 1 or position() = 2)]"/>
+            </div>
+        </xsl:copy>
+    </xsl:template>
+
     <!-- add class="golfclub" to h2 so that the golf club images can be positioned correctly-->
     <xsl:template match="h:h2[not(@class='golfclub')][ancestor::h:html = $source-doc]">
         <h2 class="golfclub">
             <xsl:apply-templates/>
         </h2>
     </xsl:template>
-    
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 

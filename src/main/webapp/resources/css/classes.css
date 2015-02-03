@@ -1,11 +1,9 @@
 .class{
-    margin-bottom: 60px;
-    margin-top: 12px;
+    margin:12px 0 60px;
 }
 .class .date{
     background-color:#009abb;
     width:auto;
-    margin:0;
     padding:0 12px;
     box-sizing:border-box;
 }
@@ -16,18 +14,9 @@
     font-size:24px;
     font-weight:700;
 }
-.class .details{
-    margin:0 6px;
-}
-.class h3{
-    margin:0;
-}
 .class h3 a{
     color:#8c1515;
 }
 .class .time{
     margin:12px 0;
-}
-.class .description{
-    margin-left:6px;
 }

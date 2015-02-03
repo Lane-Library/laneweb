@@ -146,15 +146,12 @@
     position:absolute;
     right:0;
     bottom:7px;
-    margin:0;
 }
 
 #qlinks li {
     padding : 0 5px;
     display: inline-block;
     border-right : 1px dotted #C1C1C1;
-    border-bottom:none;
-    margin:0;
 }
 
 #qlinks li:last-child {

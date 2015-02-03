@@ -1,5 +1,4 @@
 #banner{
-    margin-left:6px;
     margin-top:12px;
     position:relative;
 }
@@ -12,12 +11,12 @@
 }
 
 .banner-content {
+    padding:12px;
     background-color:#333333;
     color:#ffffff;
 }
 
 .banner-content h4{
-    margin:0 12px 12px 12px;
     padding-top:12px;
     color:#ffffff;
     font-size:18px;
@@ -29,7 +28,6 @@
 }
 
 #banner .banner-content p{
-    margin:12px 12px 12px 12px;
     font-family:'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
     line-height:1.6em;
 }
@@ -47,7 +45,6 @@
 
 #banner .banner-nav li{
     padding:0;
-    list-style:none outside none;
     float:left;
     border-bottom:none;
     border:1px white solid;
