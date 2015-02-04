@@ -369,7 +369,7 @@
             <xsl:copy>
                 <xsl:apply-templates select="@*"/>
                 <div class="gr">
-                    <xsl:apply-templates select="*"/>
+                    <xsl:apply-templates select="child::node()"/>
                 </div>
             </xsl:copy>
     </xsl:template>
@@ -379,7 +379,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <div class="gl">
-                <xsl:apply-templates select="*"/>
+                <xsl:apply-templates select="child::node()"/>
             </div>
         </xsl:copy>
     </xsl:template>
@@ -389,7 +389,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <div class="gb">
-                <xsl:apply-templates select="*"/>
+                <xsl:apply-templates select="child::node()"/>
             </div>
         </xsl:copy>
     </xsl:template>
