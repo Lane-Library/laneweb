@@ -1,3 +1,6 @@
+/*
+ * quick and dirty facet UI: replace once UI specs known
+ */
 (function() {
     var model = Y.lane.Model,
         query = model.get(model.QUERY),
@@ -67,6 +70,10 @@
                                     facetIdAndValuePattern = facetId + ':"?' + facetProp.replace(/([\(\)\[\]\+\.])/g,"\\$1") + '"?';
                                     url = basePath + '/search.html?source=all-all&q=' + encodedQuery + '+' + facetId + ':"' + encodeAndEscape(facetProp) + '"';
                                     urlFacetOff = basePath + '/search.html?source=all-all&q=' + encodeAndEscape(query.replace(new RegExp(facetIdAndValuePattern),'').trim());
+                                    // replace year 0 with "Unknown" 
+                                    if ("year" == facetId && facetProp == 0) {
+                                        facetProp = 'Unknown';
+                                    }
                                     if (facetProp == facetValue) {
                                         facets.item(j).setStyle('display','block');
                                         facets.item(j).append("&nbsp;(" + facetCount + ")");
