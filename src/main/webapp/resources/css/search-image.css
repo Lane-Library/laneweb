@@ -2,6 +2,7 @@
 #imageList {
 	text-align: center;
 	background-color:white; 
+	padding-left: 20px;
 }
 
 #imageList:after {
@@ -11,7 +12,6 @@
 	font-size: 0;
 	clear: both;
 	visibility: hidden;
-	
 }
 
 #imageList li {
@@ -80,7 +80,7 @@
 }
 
 .result-summary{
-	margin: 10px 26px 15px 14px;
+	margin: 10px 20px 15px 23px;
 	height:20px;
 }
     
@@ -141,6 +141,7 @@
 #copyright a{
 	color:#007c92;	
 	display:inline;
+	cursor: pointer;
 }
 
 .what-is-image-search{
@@ -181,23 +182,18 @@
 	margin-top: 2em;
 	z-index: 5;
 	margin-left: -12px;
-	margin-bottom: -2px;
+	margin-bottom: -4px;
 }
 
 #tabs-image-search li {
 	display: inline-block;
-	border: 1px solid #dadad9;
 	border-bottom:none;
-	margin-left: 0;
-	margin-right: 1px;
+	margin-right: 3px;
 	list-style: none outside none;
 	float: left;
 }
 
-#tabs-image-search li:hover {
-	border: 1px solid #660000;
-	border-bottom:none;
-}
+
 
 #tabs-image-search li a {
 	color: #ffffff; /*to overwrite the color of the text links*/
@@ -207,6 +203,7 @@
 	padding: 12px 6px 12px 18px;
 	position: relative;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 #tabs-image-search span{
