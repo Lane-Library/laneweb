@@ -9,6 +9,9 @@
     PurchaseSuggestions.ATTRS = {
         form : {
             value : null
+        },
+        activeItem : {
+            value : null
         }
     };
 
@@ -32,12 +35,9 @@
         _handleActiveItemChange : function(event) {
             var menu = this.get("menu"),
                 items = this.get("items"),
-                menuActiveClass = this.getClassName("menu", "active"),
                 itemsList = Y.one("#purchaseItems"),
                 item = itemsList.one("li"),
                 focusElement;
-            menu.item(event.prevVal).removeClass(menuActiveClass);
-            menu.item(event.newVal).addClass(menuActiveClass);
             if (item) {
                 item.remove(false);
             }
