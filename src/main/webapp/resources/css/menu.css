@@ -1,6 +1,18 @@
+.menu-container {
+    margin: 12px 0 24px;
+}
+.menu-container h3 {
+    font-size:20px;
+    letter-spacing:1px;
+    background-color: #8c1515;
+    color: white;
+    text-transform: uppercase;
+    padding: 55px 12px 42px;
+    margin:0;
+    background-image:none;
+}
 .menu {
     border-top: 12px solid #8c1515;
-    margin: 12px 0 24px;
 }
 .menu li {
     padding:0;
