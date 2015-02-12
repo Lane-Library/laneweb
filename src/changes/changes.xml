@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-02-09" version="2.3.13" description="2.3.13 bug fix release">
+            <action date="2015-02-02" dev="ceyates" issue="102110" type="add">
+                dyamically add gutters to the grid
+            </action>
+            <action date="2015-02-02" dev="ceyates" issue="100702" type="update">
+                Feedback-suggestion:  Suggestion for Purchase form
+            </action>
+        </release>
         <release date="2015-02-02" version="2.3.12" description="2.3.12 bug fix release">
             <action date="2015-02-02" dev="ceyates" issue="102149" type="fix">
                 form validator indicates required fields as incorrect
