@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2015-02-12" version="2.3.14" description="2.3.14 bug fix release">
+            <action date="2015-02-12" dev="ceyates" issue="102410" type="fix">
+                clicking on a suggestion in the portal metasearch form fails
+            </action>
             <action date="2015-02-11" dev="ryanmax" issue="102403" type="remove">
                 remove unused mobile image resources
             </action>
