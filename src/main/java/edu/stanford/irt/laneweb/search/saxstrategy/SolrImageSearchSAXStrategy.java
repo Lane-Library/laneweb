@@ -236,6 +236,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         startElementWithId(xmlConsumer, DIV, "copyright");
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, REL, REL, CDATA,"popup local ".concat(image.getId().hashCode() +"_copyright"));
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "no-bookmarking");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         XMLUtils.data(xmlConsumer, "Copyright Information ");
         atts = new AttributesImpl();

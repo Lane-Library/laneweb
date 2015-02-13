@@ -14,7 +14,7 @@
          <div id="website-id">Source: <a href="pageUrl">id</a>
          </div>
          <div id="copyright">
-            <a rel="popup local 2109089882_copyright">Copyright Information <i class="fa fa-arrow-right"/>
+            <a rel="popup local 2109089882_copyright" class="no-bookmarking">Copyright Information <i class="fa fa-arrow-right"/>
             </a>
          </div>
       </li>
