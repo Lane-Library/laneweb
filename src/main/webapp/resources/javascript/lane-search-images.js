@@ -37,7 +37,7 @@
 	if (Y.one("#searchSubmit")){
 		Y.on("submit", function(event) {
 			var selectedValue = Y.one("#searchSource option:checked");
-		 	if(selectedValue.get("text") === "Image Search" ){
+		 	if(selectedValue.get("text") === "Image Search" &&   Model.get(Model.SOURCE)){
 		 		selectedValue.set("value", Model.get(Model.SOURCE));
 		 	}
 		}, "#search");
