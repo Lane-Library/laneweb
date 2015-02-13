@@ -2,7 +2,7 @@
 	var Model = Y.lane.Model,
 	    encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
 	    basePath = Model.get(Model.BASE_PATH) || "",
-
+	    
 	makeRequest = function() {
 		Y.io(basePath + '/facet/images/copyright?query=' + encodedQuery+ '&rd=' + Math.random(), {
 			on : {
@@ -33,5 +33,14 @@
 			});
 		}
 	}
-
+// when the user do a search we want him to get back on the same tab 
+	if (Y.one("#searchSubmit")){
+		Y.on("submit", function(event) {
+			var selectedValue = Y.one("#searchSource option:checked");
+		 	if(selectedValue.get("text") === "Image Search" ){
+		 		selectedValue.set("value", Model.get(Model.SOURCE));
+		 	}
+		}, "#search");
+	}
+	
 })();
