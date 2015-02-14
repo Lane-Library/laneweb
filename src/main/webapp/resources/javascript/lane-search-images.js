@@ -36,8 +36,9 @@
 // when the user do a search we want him to get back on the same tab 
 	if (Y.one("#searchSubmit")){
 		Y.on("submit", function(event) {
-			var selectedValue = Y.one("#searchSource option:checked");
-		 	if(selectedValue.get("text") === "Image Search" &&   Model.get(Model.SOURCE)){
+			var selectedValue = Y.one("#searchSource option:checked"),
+			source =  Model.get(Model.SOURCE);
+		 	if(selectedValue.get("text") === "Image Search" && source && source.indexOf("images-all")>-1 ){
 		 		selectedValue.set("value", Model.get(Model.SOURCE));
 		 	}
 		}, "#search");
