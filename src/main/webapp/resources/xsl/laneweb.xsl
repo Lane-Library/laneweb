@@ -410,6 +410,20 @@
             <xsl:apply-templates/>
         </h2>
     </xsl:template>
+    
+    <!-- if an image search, change the search select option value to the source of the request tab -->
+    <xsl:template match="h:option[@value='images-all']/@value">
+        <xsl:choose>
+            <xsl:when test="contains($source, '-images-all')">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$source"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 

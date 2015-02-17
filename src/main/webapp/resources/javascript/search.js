@@ -1,7 +1,7 @@
 (function() {
 
     var Lane = Y.lane,
-    	Model = Y.lane.Model,
+
     SearchIndicator = Lane.SearchIndicator,
 
     /**
@@ -74,12 +74,6 @@
             this._searchReset.removeClass("active");
             if (this._input.getValue()) {
                 SearchIndicator.show();
-                //to be sure that the user is coming back to the same tab after a image search 
-                var selectedValue = this._form.one("select option:checked"),
-    			source =  Model.get(Model.SOURCE);
-    		 	if(selectedValue.get("text") === "Image Search" && source && source.indexOf("images-all")>-1 ){
-    		 		selectedValue.set("value", source);
-    		 	}
                 this._form.submit();
             }
         },
