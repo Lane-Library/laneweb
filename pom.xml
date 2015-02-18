@@ -627,6 +627,12 @@
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
             <version>2.0.3</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
