@@ -59,8 +59,8 @@
         <appender-ref ref="querymap"/>
     </logger>
     
-    <root level="${laneweb.log4j.root.priority.value}">
-        <appender-ref ref="${laneweb.log4j.root.appender-ref.ref}"/>
+    <root level="${edu.stanford.irt.laneweb.log.level}">
+        <appender-ref ref="${edu.stanford.irt.laneweb.log.appender}"/>
     </root>
     
 </configuration>

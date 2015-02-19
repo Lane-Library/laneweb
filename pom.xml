@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>2.3.15-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/maven/projects/laneweb/</url>
     <inceptionYear>2002</inceptionYear>
@@ -628,10 +628,10 @@
             <groupId>edu.stanford.irt.search</groupId>
             <version>2.0.3</version>
             <exclusions>
-            	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -763,7 +763,7 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
-            <version>8.0.18</version>
+            <version>7.0.59</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -790,9 +790,9 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>com.oracle.ojdbc</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.3</version>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -818,6 +818,18 @@
                     <groupId>cglib</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ons</artifactId>
+            <version>12.1.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ucp</artifactId>
+            <version>12.1.0.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
