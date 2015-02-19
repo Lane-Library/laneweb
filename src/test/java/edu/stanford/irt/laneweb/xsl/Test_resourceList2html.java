@@ -32,7 +32,7 @@ public class Test_resourceList2html extends AbstractXSLTest {
     }
 
     @Test
-    public void testFalseProxyLinksAndPageParameters() throws TransformerException, IOException {
+    public void testTransform() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
         this.transformer.setParameter("url-encoded-query", "music");

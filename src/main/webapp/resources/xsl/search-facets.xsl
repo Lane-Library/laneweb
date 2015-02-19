@@ -78,7 +78,7 @@
             <xsl:choose>
                 <!-- always show requested facet, even if zero hits -->
                 <xsl:when test="$facetId = $source">
-                    <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> current</xsl:attribute>
+                    <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> current-facet</xsl:attribute>
                 </xsl:when>
                 <!-- make facet inactive if zero hits -->
                 <xsl:when test="number($hit-count) = 0">
