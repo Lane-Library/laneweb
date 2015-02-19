@@ -33,8 +33,7 @@
             }
         },
         _handleActiveItemChange : function(event) {
-            var menu = this.get("menu"),
-                items = this.get("items"),
+            var items = this.get("items"),
                 itemsList = Y.one("#purchaseItems"),
                 item = itemsList.one("li"),
                 focusElement;

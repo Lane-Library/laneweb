@@ -17,7 +17,6 @@ public class NegativeOneAposFilter extends AbstractLanewebFilter {
 
     private static final String NEGATIVE_ONE_APOS = "-1'";
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
             final FilterChain chain) throws IOException, ServletException {

@@ -112,7 +112,6 @@ public class EMailController {
         Map<String, Object> modelMap = model.asMap();
         this.remoteIPBinder.bind(modelMap, request);
         this.headerBinder.bind(modelMap, request);
-        @SuppressWarnings("unchecked")
         Map<String, String[]> map = request.getParameterMap();
         for (Entry<String, String[]> entry : map.entrySet()) {
             String[] value = entry.getValue();
