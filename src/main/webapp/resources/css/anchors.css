@@ -2,6 +2,7 @@
 a {
     color: #007c92;
     text-decoration: none;
+    cursor: pointer;
 }
 a:visited, a:active, a:hover {
 	color: #428bca;
