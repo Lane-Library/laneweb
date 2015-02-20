@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s" version="2.0">
-
-    <xsl:param name="alpha"/>
-
-    <xsl:param name="request-uri"/>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s" version="2.0">
 
     <xsl:param name="source"/>
 
@@ -14,19 +8,12 @@
     <xsl:param name="ipgroup"/>
 
     <xsl:param name="query"/>
-
-    <xsl:param name="emrid"/>
-
-    <xsl:param name="mesh"/>
+    
+    <xsl:param name="url-encoded-query"/>
 
     <xsl:variable name="guest-mode">
         <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
     </xsl:variable>
-
-    <xsl:variable name="er-browse-mode">
-        <xsl:if test="contains($request-uri,'biomed-resources')">true</xsl:if>
-    </xsl:variable>
-
 
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
 
@@ -41,18 +28,13 @@
                 <title>search results</title>
             </head>
             <body>
-                <xsl:if test="$er-browse-mode = 'true' and number(@size) &gt; 100">
-                    <xsl:call-template name="paginationLinks">
-                        <xsl:with-param name="browse-mode" select="$er-browse-mode"/>
-                    </xsl:call-template>
-                </xsl:if>
+                <xsl:call-template name="paginationLinks"/>
+                <h3 class="eresources">&#160;</h3>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>
                 <xsl:if test="number(@size) &gt; 100">
-                    <xsl:call-template name="paginationLinks">
-                        <xsl:with-param name="browse-mode" select="$er-browse-mode"/>
-                    </xsl:call-template>
+                    <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
                 <div id="search-content-counts">
                     <!-- empty div causes problems when facets are imported with JS -->
@@ -95,9 +77,6 @@
         </xsl:variable>
 
         <li>
-            <xsl:if test="s:description">
-                <xsl:attribute name="class" select="'hvrTrig'"/>
-            </xsl:if>
             <div>
                 <a class="primaryLink" href="{$primaryLink}">
                     <xsl:apply-templates select="s:title"/>
@@ -108,84 +87,91 @@
             <xsl:if test="not(starts-with($source,'clinical') or starts-with($source,'peds')) and string-length(s:pub-author) > 1">
                 <xsl:apply-templates select="s:pub-author"/>
             </xsl:if>
-
-            <div class="pubTitle">
-                <xsl:variable name="hits" select="number(s:resourceHits)"/>
-                <xsl:choose>
-                    <xsl:when test="s:pub-text">
-                        <xsl:value-of select="s:pub-text"/>
-                        <xsl:if test="$resourceName = 'PubMed' or $hits &lt;= $moreResultsLimit">
-                            <span class="sourceLink">
-                                <xsl:text> - </xsl:text>
-                                <xsl:value-of select="$resourceName"/>
-                            </span>
-                        </xsl:if>
-                        <xsl:apply-templates select="s:contentId"/>
-                        <br/>
-                        <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
-                            <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a><xsl:text> &#187;</xsl:text>
-                        </xsl:if>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:choose>
-                            <xsl:when test="$resourceName != 'PubMed' and $moreResultsLimit &lt; $hits">
-                                <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a><xsl:text> &#187;</xsl:text>
-                                <xsl:if test="$emrid and $resourceName = 'UpToDate'">
-                                    <span class="utdCMEnote"> &#8592; Use this link for CME</span>
-                                </xsl:if>
-                            </xsl:when>
-                            <xsl:when test="not(s:resourceHits) or $moreResultsLimit &gt;= $hits">
-                                <span class="sourceLink">
-                                    <xsl:value-of select="$resourceName"/>
-                                </span>
-                            </xsl:when>
-                        </xsl:choose>
-                    </xsl:otherwise>
-                </xsl:choose>
+            
+            <xsl:if test="s:pub-text">
+                <div class="citation">
+                    <xsl:value-of select="s:pub-text"/>
+                </div>
+            </xsl:if>
+            
+            <div class="resultInfo">
+                <span><strong>Article</strong> Digital</span>
+                <xsl:if test="s:description">
+                    <span class="descriptionTrigger searchContent"/>
+                </xsl:if>
+                
+                <xsl:apply-templates select="s:contentId"/>
             </div>
             <xsl:apply-templates select="s:description"/>
+            <div class="sourceInfo">
+                <xsl:text>Source: </xsl:text>
+                <a href="{s:resourceUrl}">
+                    <xsl:value-of select="s:resourceName"/>
+                    <xsl:text>: </xsl:text>
+                    <xsl:value-of select="format-number(number(s:resourceHits),'###,###,##0')"/>
+                    <xsl:text> </xsl:text>
+                    <i class="fa fa-external-link"></i></a>
+            </div>
         </li>
     </xsl:template>
 
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
+        <xsl:variable name="total" select="number(s:total)"/>
+        <xsl:variable name="available" select="number(s:available)"/>
         <li>
-            <xsl:if test="s:description">
-                <xsl:attribute name="class" select="'hvrTrig'"/>
-            </xsl:if>
             <xsl:apply-templates select="s:link"/>
-            <xsl:apply-templates select="s:recordType"/>
+            <div class="resultInfo">
+                <span>
+                    <xsl:apply-templates select="s:primaryType"/>
+                </span>
+                <xsl:if test="s:recordType = 'print' and $available &gt; 0">
+                    <span>Status: Not Checked Out</span>
+                </xsl:if>
+                <xsl:if test="s:description">
+                    <span class="descriptionTrigger eresource"/>
+                </xsl:if>
+                
+                    <xsl:if test="s:recordType = 'bib'">
+                        <span>
+                            <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
+                        </span>
+                    </xsl:if>
+                
+            </div>
             <xsl:apply-templates select="s:description"/>
+            <div class="sourceInfo">
+                <xsl:apply-templates select="s:recordType"/>
+            </div>
+            <xsl:if test="s:recordType != 'print' and $total &gt; 0">
+                <div>Also available: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Print</a></div>
+            </xsl:if>
         </li>
     </xsl:template>
 
-    <xsl:template match="s:recordType[not(../s:link/s:label[.='catalog record'])]">
-        <div class="moreResults">
-            <xsl:choose>
-                <xsl:when test=". = 'auth'">
-                    <span class="sourceLink">Lane Community Info File</span>
-                </xsl:when>
-                <!-- add catalog link to all bibs except those that already have one (history) -->
-                <xsl:when test=". = 'bib'">
-                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog record</a>
-                </xsl:when>
-                <xsl:when test=". = 'web'">
-                    <span class="sourceLink">Lane Web Page</span>
-                </xsl:when>
-                <xsl:when test=". = 'class'">
-                    <span class="sourceLink">Lane Class</span>
-                </xsl:when>
-                <xsl:when test=". = 'print'">
-                    <span class="sourceLink">Print Material</span>
-                </xsl:when>
-            </xsl:choose>
-        </div>
+    <xsl:template match="s:recordType">
+        <xsl:text>Source: </xsl:text>
+        <xsl:choose>
+            <xsl:when test=". = 'auth'">
+                <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info Results <i class="fa fa-external-link"></i></a>
+            </xsl:when>
+            <xsl:when test=". = 'bib'">
+                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog Results <i class="fa fa-external-link"></i></a>
+            </xsl:when>
+            <xsl:when test=". = 'class'">
+                <a href="/classes-consult/laneclasses.html">Lane Classes</a>
+            </xsl:when>
+            <xsl:when test=". = 'print'">
+                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog Results <i class="fa fa-external-link"></i></a>
+            </xsl:when>
+            <xsl:when test=". = 'web'">
+                <a href="/index.html">Lane Website</a>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
-    
-    <xsl:template match="s:recordType"/>
 
     <xsl:template match="s:description">
-        <div class="hvrTarg">
+        <div class="description">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -195,16 +181,22 @@
             <a class="primaryLink" href="{s:url}" title="{../s:title}">
                 <xsl:apply-templates select="../s:title"/>
             </a>
-            <xsl:value-of select="s:additional-text"/>
+            <!--<xsl:value-of select="s:additional-text"/>-->
             <xsl:if test="@type = 'getPassword'">
                 <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
             </xsl:if>
         </div>
+        <xsl:if test="../s:author">
+            <div><xsl:value-of select="../s:author"/></div>
+        </xsl:if>
+        <xsl:if test="s:publisher">
+            <div><xsl:value-of select="s:publisher"/></div>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="s:link">
         <div>
-            <a href="{s:url}" title="{s:label}">
+            Also available: <a href="{s:url}" title="{s:label}">
                 <xsl:value-of select="s:link-text"/>
             </a>
             <xsl:value-of select="s:additional-text"/>
@@ -215,14 +207,27 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="s:link[not(1)][@type = 'impactFactor']">
+    <xsl:template match="s:link[@type = 'impactFactor']">
         <div>
             <a href="{s:url}">Impact Factor</a>
         </div>
     </xsl:template>
+    
+    <xsl:template match="s:primaryType">
+            <xsl:choose>
+                <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
+                    <strong><xsl:value-of select="substring-before(., ' ')"/></strong>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="substring-after(., ' ')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <strong><xsl:value-of select="."/></strong>
+                </xsl:otherwise>
+            </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="s:pub-author">
-        <div class="pubAuthor">
+        <div>
             <xsl:value-of select="."/>
         </div>
     </xsl:template>
@@ -231,13 +236,10 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')"/>
         </xsl:variable>
-        <span class="pmid">
-            <xsl:text> PMID: </xsl:text>
-            <a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">
-                <xsl:value-of select="$pmid"/>
-            </a>
-        </span>
+        <span><a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a></span>
     </xsl:template>
+    
+    <xsl:template match="s:contentId"/>
 
     <xsl:template match="s:keyword">
         <strong>
@@ -249,9 +251,9 @@
         <xsl:if test="position() > 1">
             <br/>
         </xsl:if>
-        <span class="abstractLabel">
+        <strong>
             <xsl:value-of select="."/>
-        </span>
+        </strong>
         <xsl:text>: </xsl:text>
     </xsl:template>
 

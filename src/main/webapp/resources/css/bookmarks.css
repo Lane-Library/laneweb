@@ -84,7 +84,8 @@ background-position: -600px -80px;
 }
 #bookmarkSearch{
     visibility:hidden;
-    margin: auto;
+    display:block;
+    margin-top: 12px;
     text-align: center;
 }
 #bookmarkSearch.active{
