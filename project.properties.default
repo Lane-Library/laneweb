@@ -1,5 +1,5 @@
 edu.stanford.irt.laneweb.ezproxy-key=
-edu.stanford.irt.laneweb.live-base=
+edu.stanford.irt.laneweb.live-base=file:/afs/ir/group/lane/beta2/live
 edu.stanford.irt.laneweb.metasearch-failed=
 edu.stanford.irt.laneweb.log.level=
 edu.stanford.irt.laneweb.log.appender=
@@ -10,7 +10,7 @@ edu.stanford.irt.laneweb.useridcookiecodec.key=
 edu.stanford.irt.laneweb.disaster-mode=
 
 #this property name is hard coded in the solr-image-repository project:
-laneweb.solr-url-imageSearch=
+laneweb.solr-url-imageSearch=none
 
 edu.stanford.irt.laneweb.db.eresources.jndiName=
 edu.stanford.irt.laneweb.db.eresources.identifier=
