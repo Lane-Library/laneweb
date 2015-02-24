@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div>
-   <div class="result-summary">
-      <div class="result">105 to 106 of 106 results</div>
-      <div class="pagination">
-         <a class="actived" href="/path1">
-            <span class="fa fa-fast-backward">
-               <label>First</label>
-            </span>
-         </a>
-         <a class="actived" href="/path2">
-            <span class="fa fa-step-backward">
-               <label>Previous</label>
-            </span>
-         </a>
-         <label>Page </label>
-         <form class="pagingForm" name="paginationForm">
-            <input type="hidden" value="source" name="source"/>
-            <input type="hidden" value="query" name="q"/>
-            <input type="hidden" value="15" name="totalPages"/>
-            <input type="text" size="4" value="3" name="page"/>
-         </form>
-         <label> of 15</label>
-         <a class="actived" href="/path4">
-            <label>Next</label>
-            <span class="fa fa-step-forward"/>
-         </a>
-         <a class="actived" href="/path15">
-            <label>Last</label>
-            <span class="fa fa-fast-forward"/>
-         </a>
+   <div id="search-image-header">
+      <div class="result-summary">
+         <div class="result">105 to 106 of 106 results</div>
+         <div id="sourceFilter"/>
+         <div class="pagination">
+            <a class="actived" href="/path1">
+               <span class="fa fa-fast-backward">
+                  <label>First</label>
+               </span>
+            </a>
+            <a class="actived" href="/path2">
+               <span class="fa fa-step-backward">
+                  <label>Previous</label>
+               </span>
+            </a>
+            <label>Page </label>
+            <form class="pagingForm" name="paginationForm">
+               <input type="hidden" value="source" name="source"/>
+               <input type="hidden" value="query" name="q"/>
+               <input type="hidden" value="15" name="totalPages"/>
+               <input type="text" size="4" value="3" name="page"/>
+            </form>
+            <label> of 15</label>
+            <a class="actived" href="/path4">
+               <label>Next</label>
+               <span class="fa fa-step-forward"/>
+            </a>
+            <a class="actived" href="/path15">
+               <label>Last</label>
+               <span class="fa fa-fast-forward"/>
+            </a>
+         </div>
       </div>
    </div>
    <ul id="imageList">
@@ -47,34 +50,36 @@
          </div>
       </li>
    </ul>
-   <div class="result-summary">
-      <div class="pagination">
-         <a class="actived" href="/path1">
-            <span class="fa fa-fast-backward">
-               <label>First</label>
-            </span>
-         </a>
-         <a class="actived" href="/path2">
-            <span class="fa fa-step-backward">
-               <label>Previous</label>
-            </span>
-         </a>
-         <label>Page </label>
-         <form class="pagingForm" name="paginationForm">
-            <input type="hidden" value="source" name="source"/>
-            <input type="hidden" value="query" name="q"/>
-            <input type="hidden" value="15" name="totalPages"/>
-            <input type="text" size="4" value="3" name="page"/>
-         </form>
-         <label> of 15</label>
-         <a class="actived" href="/path4">
-            <label>Next</label>
-            <span class="fa fa-step-forward"/>
-         </a>
-         <a class="actived" href="/path15">
-            <label>Last</label>
-            <span class="fa fa-fast-forward"/>
-         </a>
+   <div>
+      <div class="result-summary">
+         <div class="pagination">
+            <a class="actived" href="/path1">
+               <span class="fa fa-fast-backward">
+                  <label>First</label>
+               </span>
+            </a>
+            <a class="actived" href="/path2">
+               <span class="fa fa-step-backward">
+                  <label>Previous</label>
+               </span>
+            </a>
+            <label>Page </label>
+            <form class="pagingForm" name="paginationForm">
+               <input type="hidden" value="source" name="source"/>
+               <input type="hidden" value="query" name="q"/>
+               <input type="hidden" value="15" name="totalPages"/>
+               <input type="text" size="4" value="3" name="page"/>
+            </form>
+            <label> of 15</label>
+            <a class="actived" href="/path4">
+               <label>Next</label>
+               <span class="fa fa-step-forward"/>
+            </a>
+            <a class="actived" href="/path15">
+               <label>Last</label>
+               <span class="fa fa-fast-forward"/>
+            </a>
+         </div>
       </div>
    </div>
    <div style="display:none" class="tooltips">
