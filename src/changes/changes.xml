@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-02-23" version="2.4.0" description="2.4.0 redesign release">
+            <action date="2015-02-17" dev="ceyates" issue="102501" type="add">
+                When on an image search result page, have subsequent searches go to the same tab
+            </action>
+            <action date="2015-02-19" dev="ceyates" issue="102148" type="update">
+                redesign search result pages
+            </action>
+        </release>
         <release date="2015-02-12" version="2.3.14" description="2.3.14 bug fix release">
             <action date="2015-02-12" dev="ceyates" issue="102410" type="fix">
                 clicking on a suggestion in the portal metasearch form fails

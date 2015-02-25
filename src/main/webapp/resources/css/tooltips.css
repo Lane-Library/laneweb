@@ -11,3 +11,6 @@
 .yui3-tooltip-hidden {
     visibility:hidden;
 }
+.yui3-tooltip-trigger {
+    cursor: pointer;
+}

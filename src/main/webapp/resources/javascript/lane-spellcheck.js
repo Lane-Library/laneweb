@@ -14,7 +14,7 @@
                         //if there is a suggestion show the spellcheck markup
                         //and add the suggestion to the href
                         correctedUrl = Y.lane.Location.get("href").replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery);
-                        //strip #facet stuff from URL (#facet=catalog-lois added when no hits)
+                        //strip #facet stuff from URL
                         correctedUrl = correctedUrl.replace(/#.*/,'');
                         a = spellCheck.one('a');
                         a.set('href', correctedUrl);

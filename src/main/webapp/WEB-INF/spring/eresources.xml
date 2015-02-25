@@ -34,16 +34,25 @@
         scope="prototype">
         <constructor-arg>
             <set>
-                <value>ej</value>
-                <value>database</value>
-                <value>graphic</value>
-                <value>video</value>
+                <value>audio</value>
                 <value>book</value>
+                <value>bookdigital</value>
+                <value>bookprint</value>
+                <value>catalog</value>
                 <value>cc</value>
+                <value>database</value>
+                <value>image</value>
+                <value>journal</value>
+                <value>journaldigital</value>
+                <value>journalprint</value>
+                <value>laneclass</value>
+                <value>lanepage</value>
                 <value>lanesite</value>
+                <value>other</value>
                 <value>software</value>
                 <value>statistics</value>
-                <value>print</value>
+                <value>video</value>
+                <value>website</value>
             </set>
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>

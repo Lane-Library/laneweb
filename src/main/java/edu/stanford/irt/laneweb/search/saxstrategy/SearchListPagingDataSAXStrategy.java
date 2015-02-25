@@ -34,7 +34,6 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
             int size = pagingData.getSize();
             int length = pagingData.getLength();
             int start = pagingData.getStart();
-            xmlConsumer.startPrefixMapping("fx", "http://lane.stanford.edu/fx");
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "resourceListPagination");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
@@ -48,7 +47,6 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
                 XMLUtils.data(xmlConsumer, sb.toString());
             }
             XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-            xmlConsumer.endPrefixMapping("fx");
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
