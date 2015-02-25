@@ -12,9 +12,9 @@
 					var messages = Y.JSON.parse(o.responseText);
 					for (var i = 0; i < messages.length; ++i) {
 						if(messages[i].valueCount > 1){
-							Y.one("#copyright" + messages[i].value).set("innerHTML", messages[i].valueCount + " images ");
+							Y.one("#copyright" + messages[i].value).set("innerHTML", messages[i].valueCount + " images with");
 						}else{
-							Y.one("#copyright" + messages[i].value).set("innerHTML", messages[i].valueCount + " image");
+							Y.one("#copyright" + messages[i].value).set("innerHTML", messages[i].valueCount + " image with");
 						}
 					}
 				}
