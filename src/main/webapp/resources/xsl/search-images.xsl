@@ -21,16 +21,16 @@
 			<xsl:text>border: 6px solid </xsl:text>
 		 <xsl:choose> 
 		 	<xsl:when test="$source = 'cc-images-all'"> 
-		 		<xsl:text> #b96d12;</xsl:text> 
+		 		<xsl:text> #556222;</xsl:text> 
 		 	</xsl:when> 
 			<xsl:when test="$source = 'rl-images-all'"> 
 				<xsl:text> #8c1515;</xsl:text> 
 			</xsl:when> 
 			<xsl:when test="$source = 'pmc-images-all'"> 
-				<xsl:text> #5E3032;</xsl:text> 
+				<xsl:text> #b96d12;</xsl:text> 
 			</xsl:when> 
 			<xsl:otherwise> 
-				<xsl:text> #80982A;</xsl:text> 
+				<xsl:text> #80982A</xsl:text> 
 			</xsl:otherwise> 
 			</xsl:choose>
 			</xsl:attribute>  
@@ -42,9 +42,9 @@
 		<xsl:copy>
 		 <xsl:attribute name="style"> 
 		 	<xsl:text>background-color:</xsl:text> 
-			<xsl:choose> <xsl:when test="$source = 'cc-images-all'"> <xsl:text> #b96d12;</xsl:text> 
+			<xsl:choose> <xsl:when test="$source = 'cc-images-all'"> <xsl:text> #556222;</xsl:text> 
 			</xsl:when> <xsl:when test="$source = 'rl-images-all'"> <xsl:text> #8c1515;</xsl:text> 
-			</xsl:when> <xsl:when test="$source = 'pmc-images-all'"> <xsl:text> #5E3032;</xsl:text> 
+			</xsl:when> <xsl:when test="$source = 'pmc-images-all'"> <xsl:text> #b96d12;</xsl:text> 
 			</xsl:when> <xsl:otherwise> <xsl:text> #80982A;</xsl:text> </xsl:otherwise> 
 			</xsl:choose> 
 		</xsl:attribute> 
