@@ -4,6 +4,8 @@ public class Link {
 
     private String additionalText;
 
+    private String holdingsAndDates;
+
     private String label;
 
     private String linkText;
@@ -15,17 +17,22 @@ public class Link {
     private String url;
 
     public Link(final String label, final LinkType type, final String url, final String linkText,
-            final String additionalText, final String publisher) {
+            final String additionalText, final String publisher, final String holdingsAndDates) {
         this.label = label;
         this.type = type;
         this.url = url;
         this.linkText = linkText;
         this.additionalText = additionalText;
         this.publisher = publisher;
+        this.holdingsAndDates = holdingsAndDates;
     }
 
     public String getAdditionalText() {
         return this.additionalText;
+    }
+
+    public String getHoldingsAndDates() {
+        return this.holdingsAndDates;
     }
 
     public String getLabel() {

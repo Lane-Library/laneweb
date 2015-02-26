@@ -104,7 +104,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             String additionalText = this.isFirstLink ? this.rs.getString("V_ADDITIONAL_TEXT") : this.rs
                     .getString("L_ADDITIONAL_TEXT");
             this.builder.addLink(new Link(label, type, this.rs.getString("URL"), linkText, additionalText, this.rs
-                    .getString("PUBLISHER")));
+                    .getString("PUBLISHER"), this.rs.getString("HOLDINGS_DATES")));
             this.currentLinkId = linkId;
             this.isFirstLink = false;
         }

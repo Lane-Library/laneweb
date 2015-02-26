@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.solr.core.query.result.FacetFieldEntry;
+import org.w3c.dom.Attr;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -31,6 +33,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     private static final String ANCHOR = "a";
 
     private static final String HREF = "href";
+    
+    private static final String SELECT = "select";
+    
+    private static final String OPTION = "option";
 
     private static final String ID = "id";
 
@@ -78,6 +84,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         @SuppressWarnings("unchecked")
         Page<Image> page = (Page<Image>) result.get("page");
         List<Image> images = page.getContent();
+        
         generateSumaryResult(xmlConsumer, page, result, true);
         startElementWithId(xmlConsumer, UL, "imageList");
         for (Image image : images) {
@@ -198,18 +205,62 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         endDiv(xmlConsumer);
     }
 
-    private void generateSumaryResult(final XMLConsumer xmlConsumer, final Page<Image> page,
-            final Map<String, Object> result, boolean isTopScreen) throws SAXException {
-        startDivWithClass(xmlConsumer, "result-summary");
-        if(isTopScreen){
-            generateResult(xmlConsumer, page, result);
-        }
-        if (page.getTotalPages() > 1) {
-            generatePagination(xmlConsumer, page, result);
-        }
-        endDiv(xmlConsumer);
-
-    }
+	private void generateSumaryResult(final XMLConsumer xmlConsumer,
+			final Page<Image> page, final Map<String, Object> result,
+			boolean isTopScreen) throws SAXException {
+		AttributesImpl atts = new AttributesImpl();
+		if(isTopScreen){
+			atts.addAttribute(XHTML_NS, ID, ID, CDATA, "search-image-header");
+		}
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+		startDivWithClass(xmlConsumer, "result-summary");
+		if (isTopScreen) {
+			generateResult(xmlConsumer, page, result);
+			generateFilterWebsiteIdOptions(xmlConsumer, result);
+		}
+		if (page.getTotalPages() > 1) {
+			generatePagination(xmlConsumer, page, result);
+		}
+		endDiv(xmlConsumer);
+		endDiv(xmlConsumer);
+	}
+    
+	private void generateFilterWebsiteIdOptions(final XMLConsumer xmlConsumer, 
+			final Map<String, Object> result) throws SAXException {
+		Page<FacetFieldEntry> facet = (Page<FacetFieldEntry>) result.get("websiteIdFacet");
+		int totalElement = facet.getNumberOfElements();
+		startElementWithId(xmlConsumer,  DIV, "sourceFilter");
+		List<FacetFieldEntry> facetList = facet.getContent();
+		if (totalElement > 0) {
+			XMLUtils.data(xmlConsumer,"Filter by source ");
+			XMLUtils.startElement(xmlConsumer, XHTML_NS, SELECT);
+			if(totalElement > 1){
+			AttributesImpl atts = new AttributesImpl();
+			atts.addAttribute(XHTML_NS, "value", "value", CDATA, "");
+			XMLUtils.startElement(xmlConsumer, XHTML_NS, OPTION, atts);
+			totalElement = 0;
+			for (FacetFieldEntry facetFieldEntry : facetList) {
+				totalElement = totalElement + (int)facetFieldEntry.getValueCount();
+			}
+			XMLUtils.data(xmlConsumer, "All (" + String.valueOf(totalElement)+")");
+			XMLUtils.endElement(xmlConsumer, XHTML_NS, OPTION);
+			}
+			for (FacetFieldEntry facetFieldEntry : facetList) {
+				if (0 != facetFieldEntry.getValueCount()) {
+					AttributesImpl atts = new AttributesImpl();
+					atts.addAttribute(XHTML_NS, "value", "value", CDATA, facetFieldEntry.getValue());
+					if(result.get("selectedResource") != null && facetFieldEntry.getValue().equals(result.get("selectedResource")) ){
+						atts.addAttribute(XHTML_NS, "selected", "selected", CDATA, "true");
+					}
+					XMLUtils.startElement(xmlConsumer, XHTML_NS, "option", atts);
+					XMLUtils.data(xmlConsumer,  facetFieldEntry.getValue()+ " (" +String.valueOf(facetFieldEntry.getValueCount())+ ") ");
+					XMLUtils.endElement(xmlConsumer, XHTML_NS, "option");
+				}
+			}
+			XMLUtils.endElement(xmlConsumer, XHTML_NS, "select");
+		}
+		endDiv(xmlConsumer);
+	}
 
     protected void generateImages(final XMLConsumer xmlConsumer, final Image image) throws SAXException {
 

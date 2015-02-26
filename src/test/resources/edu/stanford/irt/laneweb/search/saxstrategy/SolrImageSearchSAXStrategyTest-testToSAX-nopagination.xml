@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div>
-   <div class="result-summary">
-      <div class="result">1 to 1 of 1 results</div>
+   <div id="search-image-header">
+      <div class="result-summary">
+         <div class="result">1 to 1 of 1 results</div>
+         <div id="sourceFilter">Filter by source <select/>
+         </div>
+      </div>
    </div>
    <ul id="imageList">
       <li>
@@ -19,7 +23,9 @@
          </div>
       </li>
    </ul>
-   <div class="result-summary"/>
+   <div>
+      <div class="result-summary"/>
+   </div>
    <div style="display:none" class="tooltips">
       <span id="id/andSlashTooltip">
          <image src="src" style="max-width: 300px;max-height: 240px"/>
