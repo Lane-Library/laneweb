@@ -188,7 +188,9 @@ public class SolrImageSearchSAXStrategyTest {
         this.model.put(Model.SOURCE, "source");
         this.model.put(Model.QUERY, "query");
         this.model.put("websiteIdFacet", this.facetEntry);
+        
         this.strategy.toSAX(this.model, this.xmlConsumer);
+       
         assertEquals(this.xmlConsumer.getExpectedResult(this, "SolrImageSearchSAXStrategyTest-testToSAX-lastPage.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.page, this.image);

@@ -68,6 +68,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
     private static final String PREVIEW_IMAGE_NOT_AVAILABLE = "/graphics/2014/no-previewavail.jpg";
 
+    private static final String NO_BOOKMARKING = "no-bookmarking";
+    
     public void toSAX(final Map<String, Object> result, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();
@@ -135,10 +137,11 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         if (currentPage != 0) {
             createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", ACTIVED, path + "1");
             createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", ACTIVED,  path + currentPage);
-        } else {
-            createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", DISABLED, null);
-            createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", DISABLED, null);
         }
+//        } else {
+//            createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", DISABLED, null);
+//            createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", DISABLED, null);
+//        }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.data(xmlConsumer, "Page ");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
@@ -149,10 +152,11 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         if (currentPage != totalPages - 1) {
             createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", ACTIVED, path + (currentPage + 2));
             createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", ACTIVED, path + totalPages);
-        } else {
-            createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", DISABLED, null);
-            createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", DISABLED, null);
-        }
+        } 
+//        else {
+//            createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", DISABLED, null);
+//            createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", DISABLED, null);
+//        }
         
         endDiv(xmlConsumer);
     }
@@ -209,10 +213,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 			final Page<Image> page, final Map<String, Object> result,
 			boolean isTopScreen) throws SAXException {
 		AttributesImpl atts = new AttributesImpl();
-		if(isTopScreen){
-			atts.addAttribute(XHTML_NS, ID, ID, CDATA, "search-image-header");
-		}
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
 		startDivWithClass(xmlConsumer, "result-summary");
 		if (isTopScreen) {
 			generateResult(xmlConsumer, page, result);
@@ -221,7 +221,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 		if (page.getTotalPages() > 1) {
 			generatePagination(xmlConsumer, page, result);
 		}
-		endDiv(xmlConsumer);
 		endDiv(xmlConsumer);
 	}
     
@@ -287,7 +286,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         startElementWithId(xmlConsumer, DIV, "copyright");
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, REL, REL, CDATA,"popup local ".concat(image.getId().hashCode() +"_copyright"));
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "no-bookmarking");
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         XMLUtils.data(xmlConsumer, "Copyright Information ");
         atts = new AttributesImpl();
@@ -355,13 +354,13 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
     private void createBackwardLink(XMLConsumer xmlConsumer, String faClass, String text, String clazz, String href) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, clazz);
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, clazz +" "+NO_BOOKMARKING);
         if (href != null) {
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, href);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass);
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass +" "+NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL );
         XMLUtils.data(xmlConsumer, text);
@@ -372,7 +371,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
     private void createForwardLink(XMLConsumer xmlConsumer, String faClass, String text, String clazz, String href) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, clazz);
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, clazz +" "+NO_BOOKMARKING);
         if (href != null) {
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, href);
         }
@@ -381,7 +380,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.data(xmlConsumer, text);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass);
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass +" "+NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);

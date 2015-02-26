@@ -89,7 +89,7 @@ margin-top: -4px;
 }
 
 .result-summary{
-	padding: 10px 20px 15px 23px;
+	padding: 3px 20px 15px 23px;
 	color: white;
 	height: 20px;
 }
@@ -162,7 +162,7 @@ margin-top: -4px;
 .what-is-image-search{
 	position: absolute;
 	top: 59px;
-	left: 855px;
+	left: 851px;
 	cursor: pointer;
 }
 
@@ -207,6 +207,26 @@ margin-top: -4px;
 }
 
 
+.search-image-selected-tab{
+	 margin-top: -7px;
+	padding-top: 13px !important; 
+}
+
+.free-image{
+	background:#80982A;
+}
+
+.cc-image{
+	background:#556222;
+}
+
+.pmc-image{
+	background:#b96d12;
+}
+
+.restricted-image{
+	background:#8c1515;
+}
 
 #tabs-image-search li a {
 	color: #ffffff; /*to overwrite the color of the text links*/
