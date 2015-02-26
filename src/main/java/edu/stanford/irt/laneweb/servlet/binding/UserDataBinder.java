@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,9 +25,11 @@ public class UserDataBinder implements DataBinder {
         synchronized (session) {
             user = (User) session.getAttribute(Model.USER);
             if (user == null) {
-                for (Iterator<UserFactory> it = this.userFactories.iterator(); user == null && it.hasNext();) {
-                    user = it.next().createUser(request);
-                }
+                user = this.userFactories.stream()
+                        .map(f -> f.createUser(request))
+                        .filter(u -> u != null)
+                        .findFirst()
+                        .orElse(null);
                 if (user != null) {
                     session.setAttribute(Model.USER, user);
                     // case 100633: clear Model.PROXY_LINKS if user is logged in
