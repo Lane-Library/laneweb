@@ -63,7 +63,7 @@
 	</xsl:template>	
 
 	
-	<xsl:template match="h:div[@class='result-summary']">
+	<xsl:template match="h:div[@class='result-summary'][1]">
 		<xsl:copy>
 		 <xsl:attribute name="style"> 
 		 	<xsl:text>background-color:</xsl:text> 
