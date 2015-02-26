@@ -181,7 +181,7 @@
             <a class="primaryLink" href="{s:url}" title="{../s:title}">
                 <xsl:apply-templates select="../s:title"/>
             </a>
-            <!--<xsl:value-of select="s:additional-text"/>-->
+            <xsl:value-of select="s:holdings-dates"/>
             <xsl:if test="@type = 'getPassword'">
                 <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
             </xsl:if>
