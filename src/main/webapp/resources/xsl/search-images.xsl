@@ -18,63 +18,29 @@
 
 	<xsl:template match="h:div[@id='search-image-content']">
 		<xsl:copy>
-			<xsl:attribute name="style"> 
-			<xsl:text>border: 6px solid </xsl:text>
-			 <xsl:choose> 
-			 	<xsl:when test="$source = 'cc-images-all'"> 
-			 		<xsl:text> #556222;</xsl:text> 
-			 	</xsl:when> 
-				<xsl:when test="$source = 'rl-images-all'"> 
-					<xsl:text> #8c1515;</xsl:text> 
-				</xsl:when> 
-				<xsl:when test="$source = 'pmc-images-all'"> 
-					<xsl:text> #b96d12;</xsl:text> 
-				</xsl:when> 
-				<xsl:otherwise> 
-					<xsl:text> #80982A;</xsl:text> 
-				</xsl:otherwise> 
-			</xsl:choose>
-		</xsl:attribute>
+			<xsl:attribute name="class"> 
+				<xsl:value-of select="concat($source,'-border')"></xsl:value-of>
+			</xsl:attribute>
 			<xsl:apply-templates select="node()|@*" />
-		</xsl:copy> 
+		</xsl:copy>
 	</xsl:template>
-
 
 	<xsl:template match="h:div[@id='tabs-image-search']/h:ul/h:li/@class">
 		<xsl:for-each select=".">
 			<xsl:attribute name="class">
 			  <xsl:copy-of select="." />
-				<xsl:choose> 
-			 	<xsl:when test=".='free-image' and $source = 'images-all'"> 
+				<xsl:if test=".=$source"> 
 			 		<xsl:text> search-image-selected-tab</xsl:text>
-			 	</xsl:when> 
-				<xsl:when test=".='cc-image' and $source = 'cc-images-all'"> 
-			 		<xsl:text> search-image-selected-tab</xsl:text>
-			 	</xsl:when> 
-				<xsl:when test=".='pmc-image' and $source = 'pmc-images-all'"> 
-			 		<xsl:text> search-image-selected-tab</xsl:text>
-			 	</xsl:when> 
-				<xsl:when test=".='restricted-image' and $source = 'rl-images-all'"> 
-			 		<xsl:text> search-image-selected-tab</xsl:text>
-			 	</xsl:when> 
-			</xsl:choose>			  
+			 	</xsl:if>	  
 		</xsl:attribute>
 		</xsl:for-each>
-	</xsl:template>	
+	</xsl:template>
 
-	
-	<xsl:template match="h:div[@class='result-summary'][1]">
-		<xsl:copy>
-		 <xsl:attribute name="style"> 
-		 	<xsl:text>background-color:</xsl:text> 
-			<xsl:choose> <xsl:when test="$source = 'cc-images-all'"> <xsl:text> #556222;</xsl:text> 
-			</xsl:when> <xsl:when test="$source = 'rl-images-all'"> <xsl:text> #8c1515;</xsl:text> 
-			</xsl:when> <xsl:when test="$source = 'pmc-images-all'"> <xsl:text> #b96d12;</xsl:text> 
-			</xsl:when> <xsl:otherwise> <xsl:text> #80982A;</xsl:text> </xsl:otherwise> 
-			</xsl:choose> 
-		</xsl:attribute> 
-		<xsl:apply-templates select="node()|@*" />
-		</xsl:copy>	
+	<xsl:template match="h:div[@class='result-summary'][1]/@class">
+		<xsl:attribute name="class">
+			  <xsl:copy-of select="." />
+			  <xsl:value-of select="concat(' ',$source)" />
+	   </xsl:attribute>
 	</xsl:template>
 
 </xsl:stylesheet> 
