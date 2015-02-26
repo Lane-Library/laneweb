@@ -12,22 +12,26 @@
       <link-text>link-text</link-text>
       <url>url</url>
       <additional-text>additional-text</additional-text>
+      <holdings-dates>holdings-dates</holdings-dates>
    </link>
    <link type="getPassword">
       <label>get password</label>
       <link-text>link-text</link-text>
       <url>url</url>
       <additional-text>additional-text</additional-text>
+      <holdings-dates>holdings-dates</holdings-dates>
    </link>
    <link type="impactFactor">
       <label>impact factor</label>
       <link-text>link-text</link-text>
       <url>url</url>
       <additional-text>additional-text</additional-text>
+      <holdings-dates>holdings-dates</holdings-dates>
    </link>
    <link type="normal">
       <link-text>link-text</link-text>
       <url>url</url>
       <additional-text>additional-text</additional-text>
+      <holdings-dates>holdings-dates</holdings-dates>
    </link>
 </result>
