@@ -102,7 +102,7 @@ public class SolrImageSearchGeneratorTest {
         Map<String, Object> result = this.generator.doSearch("query");
         assertEquals("/search.html?q=query&source=pmc-&page=", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
-        assertEquals("Possibly Reuse Rights", result.get("tab"));
+        assertEquals("Possible Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
