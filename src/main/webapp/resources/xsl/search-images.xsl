@@ -25,15 +25,11 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="h:div[@id='tabs-image-search']/h:ul/h:li/@class">
-		<xsl:for-each select=".">
+	<xsl:template match="h:div[@id='tabs-image-search']/h:ul/h:li[@class=$source]/@class">
 			<xsl:attribute name="class">
 			  <xsl:copy-of select="." />
-				<xsl:if test=".=$source"> 
-			 		<xsl:text> search-image-selected-tab</xsl:text>
-			 	</xsl:if>	  
+			 <xsl:text> search-image-selected-tab</xsl:text>
 		</xsl:attribute>
-		</xsl:for-each>
 	</xsl:template>
 
 
