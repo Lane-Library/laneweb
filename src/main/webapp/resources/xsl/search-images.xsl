@@ -36,10 +36,11 @@
 		</xsl:for-each>
 	</xsl:template>
 
+
 	<xsl:template match="h:div[@class='result-summary'][1]/@class">
 		<xsl:attribute name="class">
 			  <xsl:copy-of select="." />
-			  <xsl:value-of select="concat(' ',$source)" />
+			  <xsl:value-of select="concat(' ',$source)"/>
 	   </xsl:attribute>
 	</xsl:template>
 
