@@ -114,14 +114,10 @@ border: 6px solid;
 }
 
 .pagination  .actived ,.actived span, .actived label{
-	color:#428bca;
+	color:white;
 	cursor: pointer;
 }
 
-.pagination .disabled,  a.disabled:hover{
-	color:#dedede;
-	cursor: default;
-}
 
 .pagination form{
 	display: inline;
@@ -129,13 +125,14 @@ border: 6px solid;
 
 .pagination a{
     display:inline-block;
-    bottom:4px;
+   /*  bottom:4px; */
     padding:4px 8px;
-    border:1px solid #dadad9;
-    border-radius:3px 3px 0 0;
+    border:1px solid ;
+    /* border-radius:3px 3px 0 0;
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-    margin:0 3px 0 3px;
- 	background-color: white;
+     */
+     margin:0 3px 0 3px;
+ 	/* background-color: white; */
 }
 
 .pagination input{
