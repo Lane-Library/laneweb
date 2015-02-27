@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.query.result.FacetFieldEntry;
+import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
@@ -17,10 +19,10 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
 
     private SolrImageService service;
     
-    private static final String[] TAB_CONTENT = {"Broad Reuse Rights",
-                                                 "Defined Reuse Rights",
-                                                 "Limited Reuse Rights",
-                                                 "Possibly CC Rights"};
+    private static final String[] TAB_CONTENT = {"Maximum Reuse Rights",
+                                                 "Broad Reuse Rights",
+                                                 "Possibly Reuse Rights",
+                                                 "Restrictive Reuse Rights"};
     
     private static final int TOTAL_ELEMENT_BY_PAGE = 52;
     
@@ -28,13 +30,15 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
     
     private int pageNumber = 0;
 
-    private String queryString;
+    private String url;
     
     private String tab = TAB_CONTENT[0];
     
     private String searchTerm;
     
     private String source; 
+    
+    private String resourceId;
     
     public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String,Object>> saxStrategy) {
         super( saxStrategy);
@@ -44,10 +48,19 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
     @Override
     protected Map<String,Object> doSearch(String query) {
         Map<String, Object> result = new HashMap<String, Object>();
-        Pageable page = new PageRequest(pageNumber, TOTAL_ELEMENT_BY_PAGE); 
-        Page<Image> pageResult = service.findByTitleOrDescriptionFilterOnCopyright(query, this.copyright, page);
+        Pageable page = new PageRequest(pageNumber, TOTAL_ELEMENT_BY_PAGE);
+        Page<Image> pageResult = null;
+        if(this.resourceId == null){
+        	pageResult = service.findByTitleOrDescriptionFilterOnCopyright(query, this.copyright, page);
+        }else{
+        	pageResult = service.findByTitleOrDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
+        }
+        FacetPage<Image> facetPage =  service.facetOnWebsiteId(query, this.copyright);
+        Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
         result.put("page", pageResult);
-        result.put("path", this.queryString);
+        result.put("selectedResource", this.resourceId);
+        result.put("websiteIdFacet", facet);
+        result.put("path", this.url.toString());
         result.put( Model.QUERY, this.searchTerm);
         result.put("tab", this.tab);
         result.put(Model.SOURCE, this.source);
@@ -61,9 +74,16 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
         if(page != null){
             this.pageNumber = Integer.valueOf( page) -1;
         } 
+        this.resourceId =   ModelUtil.getString(model, Model.RESOURCE_ID);
         searchTerm = ModelUtil.getString(model, Model.QUERY);
         source = ModelUtil.getString(model, Model.SOURCE);
-        this.queryString = "/search.html?q="+searchTerm+"&source="+source+"&page=";
+        this.url ="/search.html?q="+searchTerm+"&source="+source;
+        
+        if(this.resourceId != null && !"".equals(this.resourceId)){
+        	this.url = this.url+ "&rid="+this.resourceId;
+        }
+        this.url = this.url +"&page=";
+        
         if(source != null){
             if(source.startsWith("cc-")){
                 this.copyright = "10";

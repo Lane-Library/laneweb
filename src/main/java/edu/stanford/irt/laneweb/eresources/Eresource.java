@@ -264,8 +264,8 @@ public class Eresource {
                     if (jsonLink.containsKey("url")) {
                         linkUrl = (String) jsonLink.get("url");
                     }
-                    if (jsonLink.containsKey("publisher")) {
-                        publisher = (String) jsonLink.get("publisher");
+                    if (versionMap.containsKey("publisher")) {
+                        publisher = (String) versionMap.get("publisher");
                     }
                     if (versionMap.get("hasGetPasswordLink") != null
                             && ((Boolean) versionMap.get("hasGetPasswordLink"))) {

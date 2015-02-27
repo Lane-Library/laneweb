@@ -56,10 +56,10 @@
 #searchFacets li.facetHeader.openIE:after {
     content: "v";
 }
-#searchFacets li.current a {
+.current-facet a {
     color:#9a0003;
 }
-#searchFacets .inactiveFacet, #searchFacets .inactiveFacet a {
+.inactiveFacet, .inactiveFacet a {
     display:none;
 }
 #searchFacets {
@@ -91,17 +91,40 @@
     padding-top:10px;
 }
 .lwSearchResults li {
-	margin-bottom:10px;
+    margin-bottom:10px;
     padding:5px;
 }
 
 /* abstract and description related styles*/
+.description {
+    display:none;
+    position:relative;
+    top:-1px;
+    background-color: #F2F3ED;
+    border:1px solid;
+    padding:12px;
+}
+.descriptionTrigger {
+    cursor:pointer;
+}
+li.active .descriptionTrigger {
+    background-color: #F2F3ED;
+    border:1px solid;
+    padding:0 12px;
+    border-bottom-color:#F2F3ED;
+    display:inline-block;
+    position:relative;
+    z-index:1;
+}
+li.active .description {
+    display:block
+}
 /*.hoverTrigger class added by javascript (also removes .hvrTrig)*/
 .lwSearchResults .showAbstract {
     margin-left:20px;
 }
 .hvrTrig:hover .showAbstract, .active .showAbstract {
-	display:none
+    display:none
 }
 .hvrTarg {
     display:none;
@@ -129,35 +152,38 @@
     cursor:pointer
 }
 
-.sourceLink {
-    color:#666666;
+.citation{
+    font-size:11px;
 }
-.pmid {
-    font-weight:bold;
+.resultInfo span {
+    margin-right:24px;
 }
 .results-nav {
     background-color:#F7F3E5;
     padding:10px 5px 24px;
     font-size:11px;
 }
-.rightSearchTips {
-    margin-top:40px;
-    padding:20px;
-    background-color:#edecdf;
-}
-.rightSearchTips h4 {
-    text-align:center;
-    color:#333;
-    font-size:18px;
-}
 .searchTerms {
     text-transform:none;
     font-weight:bold;
     font-style:italic;
 }
-.utdCMEnote {
-    color:#820000;
+.rightSearchTips {
+    padding:0 12px;
+    white-space:nowrap;
 }
-.abstractLabel {
+
+.rightSearchTips .heading {
     font-weight:bold;
+    padding: 10px 0 5px;
+    border-bottom: solid 1px rgb(144,144,144);
+    margin-bottom:4px;
+}
+
+.rightSearchTips ul {
+    padding-left:0;
+}
+.content .rightSearchTips li {
+    padding:3px 0 2px;
+    border-bottom:none
 }
