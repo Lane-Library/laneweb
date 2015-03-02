@@ -34,39 +34,6 @@
     margin-left:6px;
 }
 
-.pagingButton .fa{
-    margin-left:8px;
-}
-.content .pagingLabels{
-    display:none;
-    position:absolute;
-    right:-1px;
-    top:28px;
-    background-color:white;
-    border:1px solid #dadad9;
-    background:linear-gradient(white,rgb(232,232,232));
-    border-radius:0 0 3px 3px;
-    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-    padding:0 8px 0 6px;
-    text-align:left;
-    z-index:1;
-}
-.pagingButton:hover .pagingLabels{
-    display:block;
-}
-.labelTitle{
-    display:inline-block;
-    width:156px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    vertical-align:bottom;
-    padding-left:4px;
-    box-sizing:border-box;
-}
-.content .pagingLabels li{
-    margin-right:0;
-}
-
 .pagingForm {
     display: inline;
     padding:5px;
