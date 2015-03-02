@@ -11,6 +11,9 @@
             <action date="2015-02-26" dev="olgary" issue="102685" type="update">
                 change 'FEEDBACK' to 'CONTACT US' button label
             </action>
+            <action date="2015-03-02" dev="ceyates" issue="102664" type="add">
+                Feedback: Add year and volume to the first version in ejournal results
+            </action>
             <action date="2015-02-25" dev="ryanmax" issue="102660" type="fix">
                 save search button display issues on bioresearch and textbook search pages
             </action>
