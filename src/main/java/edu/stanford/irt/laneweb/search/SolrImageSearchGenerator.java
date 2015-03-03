@@ -21,7 +21,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
     
     private static final String[] TAB_CONTENT = {"Maximum Reuse Rights",
                                                  "Broad Reuse Rights",
-                                                 "Possibly Reuse Rights",
+                                                 "Possible Reuse Rights",
                                                  "Restrictive Reuse Rights"};
     
     private static final int TOTAL_ELEMENT_BY_PAGE = 52;

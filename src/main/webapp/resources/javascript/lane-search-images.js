@@ -3,19 +3,23 @@
 	    encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
 	    basePath = Model.get(Model.BASE_PATH) || "",
 	    source =  Model.get(Model.SOURCE),
-	    query = Model.get(Model.QUERY), 
-	    
+	    query = Model.get(Model.QUERY);
+
+	
 	makeRequest = function() {
 		Y.io(basePath + '/facet/images/copyright?query=' + encodedQuery+ '&rd=' + Math.random(), {
 			on : {
 				success : function(id, o) {
 					var messages = Y.JSON.parse(o.responseText);
 					for (var i = 0; i < messages.length; ++i) {
-						if(messages[i].valueCount > 1){
-							Y.one("#copyright" + messages[i].value).set("innerHTML", messages[i].valueCount + " images ");
-						}else{
-							Y.one("#copyright" + messages[i].value).set("innerHTML", messages[i].valueCount + " image");
+						var tab = Y.one("#copyright" + messages[i].value).ancestor().ancestor();
+						if(tab.hasClass('search-image-selected-tab')){
+							Y.one("#copyright" + messages[i].value).set("innerHTML", messages[i].valueCount + " images with");
 						}
+						else{
+							Y.one("#copyright" + messages[i].value).set("innerHTML",  "("+ messages[i].valueCount + ")");
+						}
+							
 					}
 				}
 			}

@@ -45,6 +45,7 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("LABEL")).andReturn("label1");
         expect(this.resultSet.getString("V_ADDITIONAL_TEXT")).andReturn("additional-text1");
         expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher1");
+        expect(this.resultSet.getString("HOLDINGS_DATES")).andReturn("holdings-dates");
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
         expect(this.resultSet.getInt("RECORD_ID")).andReturn(1);
@@ -58,6 +59,7 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("L_ADDITIONAL_TEXT")).andReturn("additional-text2");
         expect(this.resultSet.getString("URL")).andReturn("url2");
         expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher2");
+        expect(this.resultSet.getString("HOLDINGS_DATES")).andReturn("holdings-dates");
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(2);
         expect(this.resultSet.getInt("RECORD_ID")).andReturn(2);
@@ -74,6 +76,7 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("V_ADDITIONAL_TEXT")).andReturn("additional-text3");
         expect(this.resultSet.getString("URL")).andReturn("url3");
         expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher3");
+        expect(this.resultSet.getString("HOLDINGS_DATES")).andReturn("holdings-dates");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.resultSet);
         List<Eresource> eresources = this.manager.parseResultSet(this.resultSet, null);
