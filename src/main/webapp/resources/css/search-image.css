@@ -2,7 +2,7 @@
 #search-image-content{
 background-color: white;
 margin-top: -4px;
-	
+border: 6px solid;	
 }
 
 
@@ -89,10 +89,10 @@ margin-top: -4px;
 }
 
 .result-summary{
-	padding: 10px 20px 15px 23px;
-	color: white;
+	padding: 3px 20px 15px 23px;
 	height: 20px;
 }
+
     
     
 .result-summary div{
@@ -114,14 +114,10 @@ margin-top: -4px;
 }
 
 .pagination  .actived ,.actived span, .actived label{
-	color:#428bca;
+	color:white;
 	cursor: pointer;
 }
 
-.pagination .disabled,  a.disabled:hover{
-	color:#dedede;
-	cursor: default;
-}
 
 .pagination form{
 	display: inline;
@@ -129,13 +125,14 @@ margin-top: -4px;
 
 .pagination a{
     display:inline-block;
-    bottom:4px;
+   /*  bottom:4px; */
     padding:4px 8px;
-    border:1px solid #dadad9;
-    border-radius:3px 3px 0 0;
+    border:1px solid ;
+    /* border-radius:3px 3px 0 0;
     box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-    margin:0 3px 0 3px;
- 	background-color: white;
+     */
+     margin:0 3px 0 3px;
+ 	/* background-color: white; */
 }
 
 .pagination input{
@@ -162,7 +159,7 @@ margin-top: -4px;
 .what-is-image-search{
 	position: absolute;
 	top: 59px;
-	left: 855px;
+	left: 851px;
 	cursor: pointer;
 }
 
@@ -207,6 +204,46 @@ margin-top: -4px;
 }
 
 
+.search-image-selected-tab{
+	 margin-top: -7px;
+	padding-top: 13px !important; 
+}
+
+.images-all{
+	background-color:#80982A;
+	color: white;
+}
+
+.cc-images-all{
+	background-color:#556222;
+	color: white;
+}
+
+.pmc-images-all{
+	background-color:#b96d12;
+	color: white;
+}
+
+.rl-images-all{
+	background-color:#8c1515;
+	color: white;
+}
+
+.images-all-border{
+	border-color:#80982A !important;
+}
+
+.cc-images-all-border{
+	border-color:#556222 !important;
+}
+
+.pmc-images-all-border{
+	border-color:#b96d12 !important;
+}
+
+.rl-images-all-border{
+	border-color:#8c1515 !important;
+}
 
 #tabs-image-search li a {
 	color: #ffffff; /*to overwrite the color of the text links*/
