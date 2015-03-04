@@ -244,6 +244,7 @@ public class Eresource {
                     String linkText = null;
                     String additionalText = null;
                     String publisher = null;
+                    String holdingsAndDates = null;
                     LinkType linkType = null;
                     LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
                     if (jsonLink.containsKey("label")) {
@@ -267,6 +268,9 @@ public class Eresource {
                     if (versionMap.containsKey("publisher")) {
                         publisher = (String) versionMap.get("publisher");
                     }
+                    if (versionMap.containsKey("holdingsAndDates")) {
+                        holdingsAndDates = (String) versionMap.get("holdingsAndDates");
+                    }
                     if (versionMap.get("hasGetPasswordLink") != null
                             && ((Boolean) versionMap.get("hasGetPasswordLink"))) {
                         linkType = LinkType.GETPASSWORD;
@@ -275,7 +279,7 @@ public class Eresource {
                     } else {
                         linkType = LinkType.NORMAL;
                     }
-                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, publisher));
+                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, publisher, holdingsAndDates));
                 }
             }
         }
