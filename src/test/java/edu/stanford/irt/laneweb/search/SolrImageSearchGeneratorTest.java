@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.search;
 import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -15,9 +15,7 @@ import java.util.Map;
 import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -37,8 +35,6 @@ public class SolrImageSearchGeneratorTest {
 
     private FacetPage<Image> facetPage;
     
-    private Page<FacetFieldEntry> facetEntry;
-    
     
     @SuppressWarnings("unchecked")
     @Before
@@ -46,7 +42,6 @@ public class SolrImageSearchGeneratorTest {
         this.service = createMock(SolrImageService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.facetPage =  createMock(FacetPage.class);
-        this.facetEntry = createMock(Page.class);
         this.generator = new SolrImageSearchGenerator(this.service, this.saxStrategy);
         this.model = new HashMap<String, Object>();
     }

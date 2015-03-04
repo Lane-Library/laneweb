@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.w3c.dom.Attr;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -61,8 +60,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     private static final String SPAN = "span";
     
     private static final String ACTIVED = "actived";
-    
-    private static final String DISABLED = "disabled";
     
     private static final String HIDDEN = "hidden";
     
@@ -212,7 +209,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 	private void generateSumaryResult(final XMLConsumer xmlConsumer,
 			final Page<Image> page, final Map<String, Object> result,
 			boolean isTopScreen) throws SAXException {
-		AttributesImpl atts = new AttributesImpl();
 		startDivWithClass(xmlConsumer, "result-summary");
 		if (isTopScreen) {
 			generateResult(xmlConsumer, page, result);
@@ -226,7 +222,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
 	private void generateFilterWebsiteIdOptions(final XMLConsumer xmlConsumer, 
 			final Map<String, Object> result) throws SAXException {
-		Page<FacetFieldEntry> facet = (Page<FacetFieldEntry>) result.get("websiteIdFacet");
+		@SuppressWarnings("unchecked")
+        Page<FacetFieldEntry> facet = (Page<FacetFieldEntry>) result.get("websiteIdFacet");
 		int totalElement = facet.getNumberOfElements();
 		startElementWithId(xmlConsumer,  DIV, "sourceFilter");
 		List<FacetFieldEntry> facetList = facet.getContent();

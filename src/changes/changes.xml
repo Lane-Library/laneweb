@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-03-02" version="2.4.1" description="2.4.1 bug fix release">
+            <action date="2015-02-26" dev="olgary" issue="102685" type="update">
+                change 'FEEDBACK' to 'CONTACT US' button label
+            </action>
+            <action date="2015-03-02" dev="ceyates" issue="102664" type="add">
+                Feedback: Add year and volume to the first version in ejournal results
+            </action>
+            <action date="2015-02-25" dev="ryanmax" issue="102660" type="fix">
+                save search button display issues on bioresearch and textbook search pages
+            </action>
+            <action date="2015-02-27" dev="alainb" issue="102587" type="update">
+                left align tabs
+            </action>
+            <action date="2015-02-27" dev="alainb" issue="102586" type="update">
+                info "i"' buttons on the tabs
+            </action>
+            <action date="2015-02-27" dev="alainb" issue="102585" type="update">
+                edit tabs labels
+            </action>
+            <action date="2015-02-27" dev="alainb" issue="102584" type="update">
+                change order of the tabs
+            </action>
+            <action date="2015-02-27" dev="alainb" issue="102583" type="update">
+                "What is it" link
+            </action>
+        </release>
         <release date="2015-02-23" version="2.4.0" description="2.4.0 redesign release">
             <action date="2015-02-17" dev="ceyates" issue="102501" type="add">
                 When on an image search result page, have subsequent searches go to the same tab
