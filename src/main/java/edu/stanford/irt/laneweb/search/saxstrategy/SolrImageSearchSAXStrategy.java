@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.w3c.dom.Attr;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
