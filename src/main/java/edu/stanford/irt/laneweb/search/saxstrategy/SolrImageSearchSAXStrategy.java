@@ -61,8 +61,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
     private static final String ACTIVED = "actived";
     
-    private static final String DISABLED = "disabled";
-    
     private static final String HIDDEN = "hidden";
     
     private static final String PREVIEW_IMAGE_NOT_AVAILABLE = "/graphics/2014/no-previewavail.jpg";
@@ -211,7 +209,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 	private void generateSumaryResult(final XMLConsumer xmlConsumer,
 			final Page<Image> page, final Map<String, Object> result,
 			boolean isTopScreen) throws SAXException {
-		AttributesImpl atts = new AttributesImpl();
 		startDivWithClass(xmlConsumer, "result-summary");
 		if (isTopScreen) {
 			generateResult(xmlConsumer, page, result);
