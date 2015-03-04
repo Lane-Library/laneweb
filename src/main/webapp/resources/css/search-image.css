@@ -111,13 +111,16 @@ border: 6px solid;
 
 .pagination{
 	float: right;
-}
-
-.pagination  .actived ,.actived span, .actived label{
-	color:white;
 	cursor: pointer;
 }
 
+.pagination  .actived ,.pagination  .actived span,.pagination  .actived label{
+	color:black;
+}
+
+.top-pagination  .actived ,.top-pagination .actived span, .top-pagination .actived label{
+	color:white;
+}
 
 .pagination form{
 	display: inline;
@@ -125,14 +128,9 @@ border: 6px solid;
 
 .pagination a{
     display:inline-block;
-   /*  bottom:4px; */
     padding:4px 8px;
     border:1px solid ;
-    /* border-radius:3px 3px 0 0;
-    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-     */
      margin:0 3px 0 3px;
- 	/* background-color: white; */
 }
 
 .pagination input{
@@ -205,8 +203,12 @@ border: 6px solid;
 
 
 .search-image-selected-tab{
-	 margin-top: -7px;
+	margin-top: -7px;
 	padding-top: 13px !important; 
+}
+
+.search-image-selected-tab a.copyright-help{
+	top: -7px;
 }
 
 .images-all{
