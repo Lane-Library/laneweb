@@ -4,7 +4,7 @@
       <div class="result">105 to 106 of 106 results</div>
       <div id="sourceFilter">Filter by source <select/>
       </div>
-      <div class="pagination">
+      <div class="pagination top-pagination">
          <a class="actived no-bookmarking" href="null1">
             <span class="fa fa-fast-backward no-bookmarking">
                <label>First</label>

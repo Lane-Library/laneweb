@@ -3,7 +3,7 @@
    <div class="result-summary">
       <div class="result">11 to 11 of 2 results</div>
       <div id="sourceFilter"/>
-      <div class="pagination">
+      <div class="pagination top-pagination">
          <a class="actived no-bookmarking" href="/path1">
             <span class="fa fa-fast-backward no-bookmarking">
                <label>First</label>

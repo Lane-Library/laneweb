@@ -4,7 +4,7 @@
       <div class="result">1 to 1 of 2 results</div>
       <div id="sourceFilter">Filter by source <select/>
       </div>
-      <div class="pagination">
+      <div class="pagination top-pagination">
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
