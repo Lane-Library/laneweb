@@ -111,15 +111,16 @@ border: 6px solid;
 
 .pagination{
 	float: right;
-	cursor: pointer;
 }
 
 .pagination  .actived ,.pagination  .actived span,.pagination  .actived label{
 	color:black;
+	cursor: pointer;
 }
 
 .top-pagination  .actived ,.top-pagination .actived span, .top-pagination .actived label{
 	color:white;
+	cursor: pointer;
 }
 
 .pagination form{
