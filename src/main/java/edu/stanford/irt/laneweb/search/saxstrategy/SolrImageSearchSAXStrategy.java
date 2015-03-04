@@ -222,7 +222,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
 	private void generateFilterWebsiteIdOptions(final XMLConsumer xmlConsumer, 
 			final Map<String, Object> result) throws SAXException {
-		Page<FacetFieldEntry> facet = (Page<FacetFieldEntry>) result.get("websiteIdFacet");
+		@SuppressWarnings("unchecked")
+        Page<FacetFieldEntry> facet = (Page<FacetFieldEntry>) result.get("websiteIdFacet");
 		int totalElement = facet.getNumberOfElements();
 		startElementWithId(xmlConsumer,  DIV, "sourceFilter");
 		List<FacetFieldEntry> facetList = facet.getContent();
