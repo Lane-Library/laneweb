@@ -107,7 +107,7 @@ border-bottom: 0px;
 } 
 
 #sourceFilter{
-	padding-left: 80px;
+	padding-left: 75px;
 	padding-top: 2px;
 }
 
@@ -127,14 +127,9 @@ border-bottom: 0px;
 
 .pagination a{
     display:inline-block;
-   /*  bottom:4px; */
     padding:4px 8px;
     border:1px solid ;
-    /* border-radius:3px 3px 0 0;
-    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-     */
-     margin:0 3px 0 3px;
- 	/* background-color: white; */
+    margin:0 3px 0 3px;
 }
 
 .pagination input{
@@ -209,6 +204,10 @@ border-bottom: 0px;
 .search-image-selected-tab{
 	 margin-top: -7px;
 	padding-top: 13px !important; 
+}
+
+.search-image-selected-tab a.copyright-help{
+	top: -7px;
 }
 
 .images-all{
