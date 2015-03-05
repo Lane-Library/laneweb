@@ -192,6 +192,7 @@
                                 <include>live-chat-min.css</include>
                                 <include>menu-min.css</include>
                                 <includes>gutters-min.css</includes>
+                                <includes>solr-facets-min.css</includes>
                             </includes>
                         </aggregation>
                         <aggregation>

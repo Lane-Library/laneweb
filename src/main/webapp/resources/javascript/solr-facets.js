@@ -7,7 +7,7 @@
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
         facets = Y.all('.solrFacet'),
-        facetsContainer = Y.one('#searchFacets'),
+        facetsContainer = Y.one('.solrFacets'),
         encodeAndEscape = function(string) {
             return encodeURIComponent(string).replace(/'/g,'%27');
         },

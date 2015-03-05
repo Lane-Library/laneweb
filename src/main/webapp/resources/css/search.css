@@ -24,46 +24,11 @@
 #searchFacets .facetIndent {
     padding-left:30px;
 }
-#searchFacets li {
-    overflow: hidden;
-    height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-}
-#searchFacets li.facetHeader {
-    height: 20px;
-    border-bottom: 1px solid #e6e4dc;
-    display:none;
-    cursor: pointer;
-}
-#searchFacets li.facetHeader:after {
-    color: grey;
-    content: ">";
-    float: right;
-    font-size: 1.25em;
-    line-height: normal;
-    text-transform: none;
-    transition-property: transform;
-    transition-duration: 0.3s;
-}
-#searchFacets li.facetHeader.open:after {
-    transition-property: transform;
-    transition-duration: 0.3s;
-    transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-}
-#searchFacets li.facetHeader.openIE:after {
-    content: "v";
-}
 .current-facet a {
     color:#9a0003;
 }
 .inactiveFacet, .inactiveFacet a {
     display:none;
-}
-#searchFacets {
-    opacity:0;
 }
 #popInContent {
     display:none;
