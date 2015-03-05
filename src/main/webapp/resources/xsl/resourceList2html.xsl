@@ -135,9 +135,14 @@
                 <xsl:if test="s:recordType = 'print' and $available &gt; 0">
                     <span>Status: Not Checked Out</span>
                 </xsl:if>
-                <xsl:if test="s:description">
-                    <span class="descriptionTrigger eresource"/>
-                </xsl:if>
+                <xsl:choose>
+	                <xsl:when test="s:description and s:recordType = 'pubmed'">
+                        <span class="descriptionTrigger searchContent"/>
+	                </xsl:when>
+	                <xsl:when test="s:description">
+                        <span class="descriptionTrigger eresource"/>
+	                </xsl:when>
+                </xsl:choose>
                 
                 <xsl:if test="s:recordType = 'pubmed'">
 	                <span><a href="{concat($pubmed-baseUrl,s:recordId,'?otool=stanford')}">PMID: <xsl:value-of select="s:recordId"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a></span>
