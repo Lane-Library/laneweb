@@ -55,9 +55,9 @@
 	
 	<xsl:template name="paginationNumbers">
 		<xsl:choose>
-			<xsl:when test="number(/s:resources/@page) &gt; 1">
-	            <a class="pagingButton" href="?{$base-query-string}page=0"> &lt;&lt; First </a>
-	            <a class="pagingButton" href="?{$base-query-string}page={number(/s:resources/@page) - 2}"> &lt; Previous </a>
+			<xsl:when test="number(/s:resources/@page) &gt;= 1">
+	            <a class="pagingButton" href="?{$base-query-string}page=1"> &lt;&lt; First </a>
+	            <a class="pagingButton" href="?{$base-query-string}page={/s:resources/@page}"> &lt; Previous </a>
 			</xsl:when>
 			<xsl:otherwise>
 	            <span class="pagingButton disabled"> &lt; &lt; First </span>
@@ -67,15 +67,15 @@
 		<form class="pagingForm" name="pagination">
 		  <input type="hidden" name="source" value="{$source}"/>
 		  <input type="hidden" name="q" value="{$query}"/>
-		  <label for="p"> Page </label>
-		  <input type="text" name="p" value="{number(/s:resources/@page)}"/>
+		  <label for="page"> Page </label>
+		  <input type="text" name="page" value="{number(/s:resources/@page + 1)}"/>
 		  <label for="pages"> of <xsl:value-of select="format-number(/s:resources/@pages,'###,##0')" /></label>
 		  <input type="hidden" name="pages" value="{number(/s:resources/@pages)}"/>
 		</form>
         <xsl:choose>
-			<xsl:when test="number(/s:resources/@pages) &gt; number(/s:resources/@page)">
-				<a class="pagingButton" href="?{$base-query-string}page={/s:resources/@page}"> Next &gt; </a>
-                <a class="pagingButton" href="?{$base-query-string}page={number(/s:resources/@pages) - 1}"> Last &gt;&gt; </a>
+			<xsl:when test="number(/s:resources/@pages) &gt; number(/s:resources/@page) + 1">
+				<a class="pagingButton" href="?{$base-query-string}page={number(/s:resources/@page) + 2}"> Next &gt; </a>
+                <a class="pagingButton" href="?{$base-query-string}page={/s:resources/@pages}"> Last &gt;&gt; </a>
 			</xsl:when>
             <xsl:otherwise>
                 <span class="pagingButton disabled"> Next &gt; </span>

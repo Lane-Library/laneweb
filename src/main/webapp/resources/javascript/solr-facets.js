@@ -115,15 +115,13 @@
 // TODO: find a home for this pagination-related js
 (function() {
         Y.all('form[name=pagination]').on('submit', function (e) {
-            var p = e.target.get('p'), page = p.get('value').replace(/[^\d]/g,'') - 1, pages = e.target.get('pages');
-            if (page < 0 || page > pages.get('value')) {
+            var p = e.target.get('page'), page = +p.get('value').replace(/[^\d]/g,''), pages = e.target.get('pages');
+            if (page < 1 || page > +pages.get('value')) {
                 e.preventDefault();
+                p.set('value',1);
                 alert("page out of range");
                 return;
             }
-            p.insert(p.get('value'),'after');
-            e.target.append('<input type="hidden" name="page" value="' +  page + '"/>');
-            p.remove();
             pages.remove();
           }, this);
         

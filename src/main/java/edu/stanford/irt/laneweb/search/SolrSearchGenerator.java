@@ -50,7 +50,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
         super.setModel(model);
         String page = ModelUtil.getString(model, Model.PAGE);
         if (page != null) {
-            this.pageNumber = Integer.valueOf(page);
+            this.pageNumber = Integer.valueOf(page) - 1;
         }
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.type = ModelUtil.getString(model, Model.TYPE);

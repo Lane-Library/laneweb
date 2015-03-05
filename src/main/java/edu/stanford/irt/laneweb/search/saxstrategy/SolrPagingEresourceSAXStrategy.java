@@ -43,7 +43,7 @@ public class SolrPagingEresourceSAXStrategy implements SAXStrategy<Map<String, O
             atts.addAttribute(Resource.EMPTY_NS, Resource.SIZE, Resource.SIZE, Resource.CDATA, Long.toString(page.getTotalElements()));
             atts.addAttribute(Resource.EMPTY_NS, START, START, Resource.CDATA, Long.toString(start));
             atts.addAttribute(Resource.EMPTY_NS, LENGTH, LENGTH, Resource.CDATA, Integer.toString(page.getSize()));
-            atts.addAttribute(Resource.EMPTY_NS, PAGE, PAGE, Resource.CDATA, Integer.toString(page.getNumber() + 1));
+            atts.addAttribute(Resource.EMPTY_NS, PAGE, PAGE, Resource.CDATA, Integer.toString(page.getNumber()));
             atts.addAttribute(Resource.EMPTY_NS, PAGES, PAGES, Resource.CDATA, Integer.toString(page.getTotalPages()));
             XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCES, atts);
             if (query != null) {

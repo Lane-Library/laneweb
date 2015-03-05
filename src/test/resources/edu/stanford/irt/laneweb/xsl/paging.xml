@@ -12,13 +12,13 @@
             <form class="pagingForm" name="pagination">
                <input type="hidden" name="source" value=""/>
                <input type="hidden" name="q" value=""/>
-               <label for="p"> Page </label>
-               <input type="text" name="p" value="0"/>
+               <label for="page"> Page </label>
+               <input type="text" name="page" value="1"/>
                <label for="pages"> of 2</label>
                <input type="hidden" name="pages" value="2"/>
             </form>
-            <a class="pagingButton" href="?page=0"> Next &gt; </a>
-            <a class="pagingButton" href="?page=1"> Last &gt;&gt; </a>
+            <a class="pagingButton" href="?page=2"> Next &gt; </a>
+            <a class="pagingButton" href="?page=2"> Last &gt;&gt; </a>
          </div>
       </div>
       <h3 class="eresources"> </h3>
