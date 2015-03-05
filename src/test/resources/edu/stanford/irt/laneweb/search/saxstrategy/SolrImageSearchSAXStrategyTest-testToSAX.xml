@@ -3,7 +3,7 @@
    <div class="result-summary">
       <div class="result">105 to 106 of 106 results</div>
       <div id="sourceFilter"/>
-      <div class="pagination top-pagination">
+      <div class="pagination">
          <a class="actived no-bookmarking" href="/path1">
             <span class="fa fa-fast-backward no-bookmarking">
                <label>First</label>

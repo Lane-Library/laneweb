@@ -37,7 +37,7 @@
 		</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="h:div[@class='result-summary'][1]/@class">
+	<xsl:template match="h:div[@class='result-summary']/@class">
 		<xsl:attribute name="class">
 			  <xsl:copy-of select="." />
 			  <xsl:value-of select="concat(' ',$source)"/>

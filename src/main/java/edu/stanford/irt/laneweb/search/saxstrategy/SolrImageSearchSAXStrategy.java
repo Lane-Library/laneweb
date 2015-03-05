@@ -125,21 +125,20 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
     }
 
-    protected void generatePagination(final XMLConsumer xmlConsumer, final Page<Image> page, final Map<String, Object> result, final boolean isTop)
+    protected void generatePagination(final XMLConsumer xmlConsumer, final Page<Image> page, final Map<String, Object> result)
             throws SAXException {
         String path =  (String) result.get("path");
-        String className = "pagination";
-        if(isTop){
-        	className = className +" top-pagination";
-        }
-        
-        startDivWithClass(xmlConsumer, className);
+        startDivWithClass(xmlConsumer, "pagination");
         int currentPage = page.getNumber();
         int totalPages = page.getTotalPages();
         if (currentPage != 0) {
             createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", ACTIVED, path + "1");
             createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", ACTIVED,  path + currentPage);
         }
+//        } else {
+//            createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", DISABLED, null);
+//            createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", DISABLED, null);
+//        }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.data(xmlConsumer, "Page ");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
@@ -151,6 +150,11 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", ACTIVED, path + (currentPage + 2));
             createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", ACTIVED, path + totalPages);
         } 
+//        else {
+//            createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", DISABLED, null);
+//            createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", DISABLED, null);
+//        }
+        
         endDiv(xmlConsumer);
     }
 
@@ -202,7 +206,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         endDiv(xmlConsumer);
     }
 
-	private void generateSumaryResult(final XMLConsumer xmlConsumer, final Page<Image> page, final Map<String, Object> result,
+	private void generateSumaryResult(final XMLConsumer xmlConsumer,
+			final Page<Image> page, final Map<String, Object> result,
 			boolean isTopScreen) throws SAXException {
 		startDivWithClass(xmlConsumer, "result-summary");
 		if (isTopScreen) {
@@ -210,7 +215,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 			generateFilterWebsiteIdOptions(xmlConsumer, result);
 		}
 		if (page.getTotalPages() > 1) {
-			generatePagination(xmlConsumer, page, result, isTopScreen);
+			generatePagination(xmlConsumer, page, result);
 		}
 		endDiv(xmlConsumer);
 	}
