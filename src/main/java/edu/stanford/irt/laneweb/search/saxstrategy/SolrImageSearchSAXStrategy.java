@@ -135,10 +135,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", ACTIVED, path + "1");
             createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", ACTIVED,  path + currentPage);
         }
-//        } else {
-//            createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", DISABLED, null);
-//            createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", DISABLED, null);
-//        }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.data(xmlConsumer, "Page ");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
@@ -150,11 +146,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", ACTIVED, path + (currentPage + 2));
             createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", ACTIVED, path + totalPages);
         } 
-//        else {
-//            createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", DISABLED, null);
-//            createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", DISABLED, null);
-//        }
-        
         endDiv(xmlConsumer);
     }
 
@@ -359,10 +350,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass +" "+NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN , atts);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL );
         XMLUtils.data(xmlConsumer, text);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
     }
     

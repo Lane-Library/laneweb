@@ -5,14 +5,12 @@
       <div id="sourceFilter"/>
       <div class="pagination">
          <a class="actived no-bookmarking" href="/path1">
-            <span class="fa fa-fast-backward no-bookmarking">
-               <label>First</label>
-            </span>
+            <span class="fa fa-fast-backward no-bookmarking"/>
+            <label>First</label>
          </a>
          <a class="actived no-bookmarking" href="/path2">
-            <span class="fa fa-step-backward no-bookmarking">
-               <label>Previous</label>
-            </span>
+            <span class="fa fa-step-backward no-bookmarking"/>
+            <label>Previous</label>
          </a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
@@ -51,14 +49,12 @@
    <div class="result-summary">
       <div class="pagination">
          <a class="actived no-bookmarking" href="/path1">
-            <span class="fa fa-fast-backward no-bookmarking">
-               <label>First</label>
-            </span>
+            <span class="fa fa-fast-backward no-bookmarking"/>
+            <label>First</label>
          </a>
          <a class="actived no-bookmarking" href="/path2">
-            <span class="fa fa-step-backward no-bookmarking">
-               <label>Previous</label>
-            </span>
+            <span class="fa fa-step-backward no-bookmarking"/>
+            <label>Previous</label>
          </a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
