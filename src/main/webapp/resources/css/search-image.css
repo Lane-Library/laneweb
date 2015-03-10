@@ -95,21 +95,26 @@ border-bottom: 0px;
 	height: 20px;
 }
 
+.result-summary .result {
+	display: inline-block;
+	margin-top: 5px;
+}
+ 
+.result-summary .dropdown {
+	position: relative;
+	top: 0px;
+}
     
-    
-.result-summary div{
-	display:inline-block;
-	font-size: inherit;
-}	
-
+   
 .result-summary a{
 	padding: 3px;
 } 
 
 #sourceFilter{
-	padding-left: 75px;
-	padding-top: 2px;
+	margin-left: 75px;
+	
 }
+
 
 .pagination{
 	float: right;
@@ -160,9 +165,7 @@ border-bottom: 0px;
 	cursor: pointer;
 }
 
-.result-summary .result {
-	margin-top: 5px;
-}
+
 
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/

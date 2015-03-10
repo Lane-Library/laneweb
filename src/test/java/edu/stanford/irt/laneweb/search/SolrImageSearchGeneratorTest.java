@@ -57,7 +57,7 @@ public class SolrImageSearchGeneratorTest {
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("/search.html?q=query&source=cc-&page=", result.get("path"));
+        assertEquals("/search.html?q=query&source=cc-", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
         assertEquals("Broad Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
@@ -76,7 +76,7 @@ public class SolrImageSearchGeneratorTest {
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("/search.html?q=query&source=foo&page=", result.get("path"));
+        assertEquals("/search.html?q=query&source=foo", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
         assertEquals("Maximum Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
@@ -95,7 +95,7 @@ public class SolrImageSearchGeneratorTest {
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("/search.html?q=query&source=pmc-&page=", result.get("path"));
+        assertEquals("/search.html?q=query&source=pmc-", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
         assertEquals("Possible Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
@@ -114,7 +114,7 @@ public class SolrImageSearchGeneratorTest {
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("/search.html?q=query&source=rl-&page=", result.get("path"));
+        assertEquals("/search.html?q=query&source=rl-", result.get("path"));
         assertEquals("query", result.get(Model.QUERY));
         assertEquals("Restrictive Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
