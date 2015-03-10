@@ -79,11 +79,6 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
         source = ModelUtil.getString(model, Model.SOURCE);
         this.url ="/search.html?q="+searchTerm+"&source="+source;
         
-        if(this.resourceId != null && !"".equals(this.resourceId)){
-        	this.url = this.url+ "&rid="+this.resourceId;
-        }
-        this.url = this.url +"&page=";
-        
         if(source != null){
             if(source.startsWith("cc-")){
                 this.copyright = "10";

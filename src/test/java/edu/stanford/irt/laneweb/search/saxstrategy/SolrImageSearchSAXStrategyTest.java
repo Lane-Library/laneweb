@@ -1,15 +1,16 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -64,14 +65,15 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getSrc()).andReturn("src").times(4);
         expect( this.facetEntry.getNumberOfElements()).andReturn(0);
         expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        replay(this.page, this.image, this.facetEntry);
+        expect( this.facedFieldEntry.getValue()).andReturn("Bassett");
+        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(2);
+        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
         this.model.put("path", "/path");
         this.model.put("page", page);
         this.model.put(Model.SOURCE, "source");
         this.model.put(Model.QUERY, "query");
         this.model.put("websiteIdFacet", this.facetEntry);
         this.strategy.toSAX(this.model, this.xmlConsumer);
-        
         assertEquals(this.xmlConsumer.getExpectedResult(this, "SolrImageSearchSAXStrategyTest-testToSAX.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.page, this.image);
@@ -94,7 +96,9 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getSrc()).andReturn("src").times(4);
         expect( this.facetEntry.getNumberOfElements()).andReturn(1);
         expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        replay(this.page, this.image, this.facetEntry);
+        expect( this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
+        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
+        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
         this.model.put("page", page);
         this.model.put(Model.SOURCE, "source");
         this.model.put(Model.QUERY, "query");
@@ -124,7 +128,10 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getCopyrightText()).andReturn("copyrightText").times(2);
         expect( this.facetEntry.getNumberOfElements()).andReturn(1);
         expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        replay(this.page, this.image, this.facetEntry);
+        expect( this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
+        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
+        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
+        this.model.put("path", "/path");
         this.model.put("page", page);
         this.model.put(Model.SOURCE, "source");
         this.model.put(Model.QUERY, "query");
@@ -153,7 +160,9 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getSrc()).andReturn("src").times(4);  
         expect( this.facetEntry.getNumberOfElements()).andReturn(1);
         expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        replay(this.page, this.image, this.facetEntry);
+        expect( this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
+        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
+        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
         this.model.put("path", "/path");
         this.model.put("page", page);
         this.model.put(Model.SOURCE, "source");
@@ -182,7 +191,10 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
         expect(this.image.getSrc()).andReturn("src").times(4);  expect( this.facetEntry.getNumberOfElements()).andReturn(0);
         expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        replay(this.page, this.image, this.facetEntry);
+        expect( this.facedFieldEntry.getValue()).andReturn("Bassett");
+        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(2);
+        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
+
         this.model.put("path", "/path");
         this.model.put("page", page);
         this.model.put(Model.SOURCE, "source");

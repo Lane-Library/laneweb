@@ -2,7 +2,19 @@
 <div>
    <div class="result-summary">
       <div class="result">1 to 1 of 2 results</div>
-      <div id="sourceFilter">Filter by source <select/>
+      <div class="yui3-u-1-4">
+         <div class="view-by" id="sourceFilter">Filter by source <div class="general-dropdown dropdown">
+               <div class="general-dropdown-trigger">Bassett (2)<i class="fa fa-angle-double-down"/>
+               </div>
+               <div class="general-dropdown-content dropdown-content">
+                  <ul class="pagingLabels">
+                     <li>
+                        <a href="/path&amp;rid=Bassett">Bassett (2) </a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
       </div>
       <div class="pagination">
          <label>Page </label>
@@ -13,11 +25,11 @@
             <input type="text" size="4" value="1" name="page"/>
          </form>
          <label> of 2</label>
-         <a class="actived no-bookmarking" href="/path2">
+         <a class="actived no-bookmarking" href="/path&amp;page=2">
             <label>Next</label>
             <span class="fa fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path2">
+         <a class="actived no-bookmarking" href="/path&amp;page=2">
             <label>Last</label>
             <span class="fa fa-fast-forward no-bookmarking"/>
          </a>
@@ -49,11 +61,11 @@
             <input type="text" size="4" value="1" name="page"/>
          </form>
          <label> of 2</label>
-         <a class="actived no-bookmarking" href="/path2">
+         <a class="actived no-bookmarking" href="/path&amp;page=2">
             <label>Next</label>
             <span class="fa fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path2">
+         <a class="actived no-bookmarking" href="/path&amp;page=2">
             <label>Last</label>
             <span class="fa fa-fast-forward no-bookmarking"/>
          </a>
