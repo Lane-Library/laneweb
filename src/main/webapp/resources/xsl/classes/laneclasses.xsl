@@ -118,9 +118,7 @@
 								</a>
 							</div>
 							<div class="yui3-u-3-4">
-								<div class="description">
 								<xsl:apply-templates select="lc:event_description"/>
-								</div>
 							</div>
 						</div>
 					</div>

@@ -194,7 +194,7 @@
             <xsl:value-of select="number($date-tokens[1])"/>
         </xsl:variable>
         <!-- TODO: put these styles into css -->
-        <div class="date" style="position:absolute;right:126px;width:130px">
+        <div class="date" style="position:absolute;right:127px;width:130px">
             <div class="month-day" style="padding:0">
                 <xsl:choose>
                     <xsl:when test="$month = 1">January </xsl:when>
