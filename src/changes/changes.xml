@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-03-16" version="2.4.3" description="2.4.3 bug fix release">
+            <action date="2015-03-12" dev="ceyates" issue="102954" type="fix">
+                display:none for class="description" causes class descriptions not to show
+            </action>
+        </release>
         <release date="2015-03-09" version="2.4.2" description="2.4.2 bug fix release">
             <action date="2015-03-04" dev="ryanmax" issue="102771" type="update">
                 update MeSH suggestions
