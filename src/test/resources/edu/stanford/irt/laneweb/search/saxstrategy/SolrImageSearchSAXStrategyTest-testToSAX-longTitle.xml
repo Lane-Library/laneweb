@@ -2,18 +2,28 @@
 <div>
    <div class="result-summary">
       <div class="result">105 to 106 of 106 results</div>
-      <div id="sourceFilter">Filter by source <select/>
+      <div class="yui3-u-1-4">
+         <div class="view-by" id="sourceFilter">Filter by source <div class="general-dropdown dropdown">
+               <div class="general-dropdown-trigger">Bassett (2)<i class="fa fa-angle-double-down"/>
+               </div>
+               <div class="general-dropdown-content dropdown-content">
+                  <ul class="pagingLabels">
+                     <li>
+                        <a href="/path&amp;rid=Bassett">Bassett (2) </a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
       </div>
       <div class="pagination">
-         <a class="actived no-bookmarking" href="null1">
-            <span class="fa fa-fast-backward no-bookmarking">
-               <label>First</label>
-            </span>
+         <a class="actived no-bookmarking" href="/path&amp;page=1">
+            <span class="fa fa-fast-backward no-bookmarking"/>
+            <label>First</label>
          </a>
-         <a class="actived no-bookmarking" href="null2">
-            <span class="fa fa-step-backward no-bookmarking">
-               <label>Previous</label>
-            </span>
+         <a class="actived no-bookmarking" href="/path&amp;page=2">
+            <span class="fa fa-step-backward no-bookmarking"/>
+            <label>Previous</label>
          </a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
@@ -23,11 +33,11 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="null4">
+         <a class="actived no-bookmarking" href="/path&amp;page=4">
             <label>Next</label>
             <span class="fa fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="null15">
+         <a class="actived no-bookmarking" href="/path&amp;page=15">
             <label>Last</label>
             <span class="fa fa-fast-forward no-bookmarking"/>
          </a>
@@ -51,15 +61,13 @@
    </ul>
    <div class="result-summary">
       <div class="pagination">
-         <a class="actived no-bookmarking" href="null1">
-            <span class="fa fa-fast-backward no-bookmarking">
-               <label>First</label>
-            </span>
+         <a class="actived no-bookmarking" href="/path&amp;page=1">
+            <span class="fa fa-fast-backward no-bookmarking"/>
+            <label>First</label>
          </a>
-         <a class="actived no-bookmarking" href="null2">
-            <span class="fa fa-step-backward no-bookmarking">
-               <label>Previous</label>
-            </span>
+         <a class="actived no-bookmarking" href="/path&amp;page=2">
+            <span class="fa fa-step-backward no-bookmarking"/>
+            <label>Previous</label>
          </a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
@@ -69,11 +77,11 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="null4">
+         <a class="actived no-bookmarking" href="/path&amp;page=4">
             <label>Next</label>
             <span class="fa fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="null15">
+         <a class="actived no-bookmarking" href="/path&amp;page=15">
             <label>Last</label>
             <span class="fa fa-fast-forward no-bookmarking"/>
          </a>

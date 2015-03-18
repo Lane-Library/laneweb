@@ -3,7 +3,7 @@
  * Load contents of the Hours of Operation section from HTML document.
  */
 $.LANE.getHours = function(){
-    var hours = $("#hours"), rows;
+    var hours = $("#hours");
     if(hours){
         $.ajax({
             url: "plain/hours.html?site_preference=mobile",
@@ -11,20 +11,18 @@ $.LANE.getHours = function(){
             success: function(data) {
                 if(data) {
                     hours.html(data);
-                    rows = hours.find("dt").size()/hours.find("dl").size();
                     hours.find("h4").click(function() {
                         hours.toggleClass("expanded");
                         if(hours.attr("class") === "expanded") {
                             hours.css("height", "auto");
                             window.scrollTo(0, $(this).offset().top);
-                            hours.find("dl").animate({
-                                // calculate height based on number of DTs present
-                                height: rows * 16,
+                            hours.find(".hours-container").animate({
+                                height: "100%",
                                 opacity: 1
                                 }, 300, 'linear');
                         }
                         else {
-                            hours.find("dl").animate({
+                            hours.find(".hours-container").animate({
                                 height: '0',
                                 opacity: 0
                                 }, 300, 'linear');

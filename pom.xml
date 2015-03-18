@@ -601,7 +601,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>2.0.27</version>
+            <version>2.0.29</version>
             <exclusions>
                 <exclusion>
                     <artifactId>log4j</artifactId>
@@ -724,7 +724,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.0.14</version>
+            <version>1.0.15</version>
             <exclusions>
                 <exclusion>
                     <artifactId>eresources-api</artifactId>
