@@ -75,7 +75,7 @@ public class EngineSearchGeneratorTest {
         this.generator.setModel(Collections.<String, Object> emptyMap());
         try {
             this.generator.setParameters(Collections.<String, String> emptyMap());
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
         verify(this.MetaSearchManager, this.saxStrategy);
     }

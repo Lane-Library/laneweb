@@ -108,7 +108,7 @@ public class ResourceSearchGeneratorTest {
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
         try {
             this.generator.setParameters(Collections.<String, String> emptyMap());
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
         verify(this.manager, this.saxStrategy, this.result);
     }

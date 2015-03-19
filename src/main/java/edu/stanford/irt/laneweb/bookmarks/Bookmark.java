@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -34,18 +35,12 @@ public class Bookmark implements Serializable {
      *            the text associated with the bookmark
      * @param url
      *            the url associated with the bookmark
-     * @throws LanewebException
+     * @throws NullPointerException
      *             if either the label or url are null.
      */
     public Bookmark(final String label, final String url) {
-        if (label == null) {
-            throw new LanewebException("null label");
-        }
-        if (url == null) {
-            throw new LanewebException("null url");
-        }
-        this.label = label;
-        this.url = url;
+        this.label = Objects.requireNonNull(label, "null label");
+        this.url = Objects.requireNonNull(url, "null url");
     }
 
     /**
@@ -82,14 +77,12 @@ public class Bookmark implements Serializable {
     }
 
     /**
-     * ANDs the label and url hashCodes.
-     *
-     * @return label.hashCode() ^ url.hashCode();
+     * @return Objects.hash(this.label, this.url);
      */
     @Override
     public int hashCode() {
         if (this.hashcode == 0) {
-            this.hashcode = this.label.hashCode() ^ this.url.hashCode();
+            this.hashcode = Objects.hash(this.label, this.url);
         }
         return this.hashcode;
     }
@@ -98,18 +91,17 @@ public class Bookmark implements Serializable {
      * Set the label.
      *
      * @param label
-     *            the text associted with the bookmark
+     *            the text associated with the bookmark
      * @throws LanewebException
-     *             if the label is null or has already been set.
+     *             if the label has already been set.
+     * @throws NullPointerException
+     *             if the label is null.
      */
     public void setLabel(final String label) {
-        if (label == null) {
-            throw new LanewebException("null label");
-        }
         if (this.label != null) {
             throw new LanewebException("cannot change label");
         }
-        this.label = label;
+        this.label = Objects.requireNonNull(label, "null label");
     }
 
     /**
@@ -118,16 +110,15 @@ public class Bookmark implements Serializable {
      * @param url
      *            the url associated with the bookmark
      * @throws LanewebException
-     *             if the url is null or has already been set.
+     *             if the url has already been set.
+     * @throws NullPointerException
+     *             if the url is null.
      */
     public void setUrl(final String url) {
-        if (url == null) {
-            throw new LanewebException("null url");
-        }
         if (this.url != null) {
             throw new LanewebException("cannot change url");
         }
-        this.url = url;
+        this.url = Objects.requireNonNull(url, "null url");
     }
 
     @Override

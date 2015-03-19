@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.codec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -42,9 +43,7 @@ public class UserCookieCodec {
     }
 
     public PersistentLoginToken createLoginToken(final User user, final int userAgentHash) {
-        if (user == null) {
-            throw new LanewebException("null user");
-        }
+        Objects.requireNonNull(user, "null user");
         long now = System.currentTimeMillis();
         StringBuilder builder = new StringBuilder();
         builder.append(user.getId());
@@ -61,9 +60,7 @@ public class UserCookieCodec {
     }
 
     public PersistentLoginToken restoreLoginToken(final String encryptedValue, final String userIdHashKey) {
-        if (encryptedValue == null) {
-            throw new LanewebException("null encryptedValue");
-        }
+        Objects.requireNonNull(encryptedValue, "null encryptedValue");
         String decrypted = decrypt(encryptedValue);
         String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
         if (values.length != 5) {

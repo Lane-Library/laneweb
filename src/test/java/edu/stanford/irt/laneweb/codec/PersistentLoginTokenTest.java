@@ -41,12 +41,12 @@ public class PersistentLoginTokenTest {
         assertFalse(new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").isValidFor(woWeeksAndADay, 0));
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = NullPointerException.class)
     public void testNullEncryptedValue() {
         new PersistentLoginToken(this.user, 0L, 0, null);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = NullPointerException.class)
     public void testNullUser() {
         new PersistentLoginToken(null, 0L, 0, "");
     }

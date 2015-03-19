@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
@@ -30,11 +31,8 @@ public class EngineSearchGenerator extends SearchGenerator {
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (this.engines == null) {
-            String engineList = parameters.get(Model.ENGINES);
-            if (engineList == null) {
-                // TODO: maybe null engines is OK
-                throw new LanewebException("null engines");
-            }
+            // TODO: maybe null engines is OK
+            String engineList = Objects.requireNonNull(parameters.get(Model.ENGINES), "null engines");
             this.engines = Arrays.asList(engineList.split(","));
         }
     }
