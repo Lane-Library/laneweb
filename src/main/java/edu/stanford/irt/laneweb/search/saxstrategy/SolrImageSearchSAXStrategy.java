@@ -34,10 +34,6 @@ public class SolrImageSearchSAXStrategy extends
 
 	private static final String HREF = "href";
 
-	private static final String SELECT = "select";
-
-	private static final String OPTION = "option";
-
 	private static final String ID = "id";
 
 	private static final String IMAGE = "image";
