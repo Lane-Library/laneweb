@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.user.User;
 
 public class PersistentLoginTokenTest {

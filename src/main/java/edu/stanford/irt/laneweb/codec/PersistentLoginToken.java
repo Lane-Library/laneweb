@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.codec;
 
 import java.util.Objects;
 
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.user.User;
 
 public class PersistentLoginToken {
