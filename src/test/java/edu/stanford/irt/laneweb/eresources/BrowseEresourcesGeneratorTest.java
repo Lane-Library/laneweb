@@ -31,23 +31,13 @@ public class BrowseEresourcesGeneratorTest {
     }
 
     @Test
-    public void testEncodedSubset() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.SUBSET, "subset%20space"));
-        expect(this.collectionManager.getSubset("subset space")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=;t=;s=subset space", this.generator.createKey().toString());
-        verify(this.collectionManager);
-    }
-
-    @Test
     public void testEncodedType() {
         this.generator.setModel(Collections.<String, Object> emptyMap());
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type%20space"));
         expect(this.collectionManager.getType("type space")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=all;t=type space;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=all;t=type space", this.generator.createKey().toString());
         verify(this.collectionManager);
     }
 
@@ -73,7 +63,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=all;t=type;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=all;t=type", this.generator.createKey().toString());
         verify(this.collectionManager);
     }
 
@@ -84,7 +74,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.collectionManager.getType("type", 'a')).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=a;t=type;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
         verify(this.collectionManager);
     }
 
@@ -95,7 +85,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.collectionManager.getType("type", 'a')).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=a;t=type;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
         verify(this.collectionManager);
     }
 
@@ -105,17 +95,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=all;t=type;s=", this.generator.createKey().toString());
-        verify(this.collectionManager);
-    }
-
-    @Test
-    public void testGetEresourceSubset() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.SUBSET, "subset"));
-        expect(this.collectionManager.getSubset("subset")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getEresourceList(this.collectionManager);
-        assertEquals("p=0;a=;t=;s=subset", this.generator.createKey().toString());
+        assertEquals("p=0;a=all;t=type", this.generator.createKey().toString());
         verify(this.collectionManager);
     }
 }

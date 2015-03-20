@@ -10,8 +10,6 @@ public interface CollectionManager {
 
     List<Eresource> getMesh(String type, String mesh);
 
-    List<Eresource> getSubset(String subset);
-
     List<Eresource> getType(String type);
 
     List<Eresource> getType(String type, char charAt);
