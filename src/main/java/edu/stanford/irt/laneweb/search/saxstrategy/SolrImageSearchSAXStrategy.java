@@ -279,7 +279,7 @@ public class SolrImageSearchSAXStrategy extends
                     break;
                 }
             }
-            XMLUtils.data(xmlConsumer, selectResource + " (" + String.valueOf(totalElement) + ")");
+            XMLUtils.data(xmlConsumer, selectResource + " (" + totalElement + ")");
             createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down","");
             endDiv(xmlConsumer);
             startDivWithClass(xmlConsumer,"general-dropdown-content dropdown-content");
@@ -288,7 +288,7 @@ public class SolrImageSearchSAXStrategy extends
                 if (0 != facetFieldEntry.getValueCount()) {
                     startLi(xmlConsumer);
                     startAnchor(xmlConsumer, path + "&rid=" + facetFieldEntry.getValue());
-                    XMLUtils.data(xmlConsumer,facetFieldEntry.getValue()+ " ("+ String.valueOf(facetFieldEntry.getValueCount()) + ") ");
+                    XMLUtils.data(xmlConsumer,facetFieldEntry.getValue()+ " ("+ facetFieldEntry.getValueCount() + ") ");
                     endAnchor(xmlConsumer);
                     endLi(xmlConsumer);
                 }
