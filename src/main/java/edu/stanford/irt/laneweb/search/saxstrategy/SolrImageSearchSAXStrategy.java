@@ -39,6 +39,8 @@ public class SolrImageSearchSAXStrategy extends
     private static final String IMAGE = "image";
 
     private static final String REL = "rel";
+    
+    private static final String SELECTED_RESOURCE = "selectedResource";
 
     private static final String SRC = "src";
 
@@ -130,9 +132,9 @@ public class SolrImageSearchSAXStrategy extends
             final Page<Image> page, final Map<String, Object> result)
             throws SAXException {
         String path = (String) result.get("path");
-        if (result.get("selectedResource") != null
-                && !"".equals(result.get("selectedResource"))) {
-            path = path + "&rid=" + (String) result.get("selectedResource");
+        if (result.get(SELECTED_RESOURCE) != null
+                && !"".equals(result.get(SELECTED_RESOURCE))) {
+            path = path + "&rid=" + (String) result.get(SELECTED_RESOURCE);
         }
         path = path.concat("&page=");
         startDivWithClass(xmlConsumer, "pagination");
@@ -188,12 +190,12 @@ public class SolrImageSearchSAXStrategy extends
         atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "totalPages");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
-        if (result.get("selectedResource") != null
-                && !"".equals(result.get("selectedResource"))) {
+        if (result.get(SELECTED_RESOURCE) != null
+                && !"".equals(result.get(SELECTED_RESOURCE))) {
             atts = new AttributesImpl();
             atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, HIDDEN);
             atts.addAttribute(XHTML_NS, VALUE, VALUE, CDATA,
-                    (String) result.get("selectedResource"));
+                    (String) result.get(SELECTED_RESOURCE));
             atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "rid");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
@@ -252,16 +254,16 @@ public class SolrImageSearchSAXStrategy extends
             String path = (String) result.get("path");
             startDivWithClass(xmlConsumer, "yui3-u-1-4");
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, "class", "class", CDATA, "view-by");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "view-by");
             atts.addAttribute(XHTML_NS, "id", "id", CDATA, "sourceFilter");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             List<FacetFieldEntry> facetList = facet.getContent();
             XMLUtils.data(xmlConsumer, "Filter by source ");
             atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, "class", "class", CDATA, "general-dropdown dropdown");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "general-dropdown dropdown");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, "class", "class", CDATA, "general-dropdown-trigger");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "general-dropdown-trigger");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
 
             String selectResource = "All";
@@ -269,8 +271,8 @@ public class SolrImageSearchSAXStrategy extends
                 selectResource = facetList.get(0).getValue();
             }
             totalElement = 0;
-            if (result.get("selectedResource") != null && !"".equals(result.get("selectedResource"))) {
-                selectResource = (String) result.get("selectedResource");
+            if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
+                selectResource = (String) result.get(SELECTED_RESOURCE);
             }
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 totalElement = totalElement + (int) facetFieldEntry.getValueCount();
