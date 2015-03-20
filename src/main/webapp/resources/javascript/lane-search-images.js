@@ -1,7 +1,5 @@
 (function() {
-    var  Model = Y.lane.Model,
-        encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
-        basePath = Model.get(Model.BASE_PATH) || "",
+    var Model = Y.lane.Model,
         source =  Model.get(Model.SOURCE),
         query = Model.get(Model.QUERY);
 
