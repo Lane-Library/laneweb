@@ -4,7 +4,6 @@
         query = Model.get(Model.QUERY);
 
     if (Y.one("#tabs-image-search")) {
-        if (Y.all('form[name=paginationForm]')) {
             Y.all('form[name=paginationForm]').on('submit',
             function(e) {
                 var totalPages = Number(e.target.get('totalPages').get('value')),
@@ -17,12 +16,11 @@
                     e.target.get('totalPages').remove();
                 }
             });
-        }
     }
 
     if (Y.one("#sourceFilter")){
         Y.on("change",
-                function(e){
+                function(){
                     var selectedValue = Y.one("#sourceFilter select option:checked").get("value"),
                     url = "/search.html?q="+query+"&source="+source;
                     if(selectedValue !== ""){
