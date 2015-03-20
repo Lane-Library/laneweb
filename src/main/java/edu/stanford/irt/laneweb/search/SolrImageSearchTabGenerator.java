@@ -33,19 +33,19 @@ public class SolrImageSearchTabGenerator  extends AbstractMarshallingGenerator i
     }
 
     public void setModel(final Map<String, Object> model) {
-		this.copyrights = new HashMap<String, Long>();
-		String searchTerm = ModelUtil.getString(model, Model.QUERY);
-		FacetPage<Image> facetPage = service.facetOnCopyright(searchTerm);
-		Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
-		List<FacetFieldEntry> facet = page.getContent();
-		for (FacetFieldEntry entry : facet) {
-			this.copyrights.put(entry.getValue(), entry.getValueCount());
-		}
-	}
+        this.copyrights = new HashMap<String, Long>();
+        String searchTerm = ModelUtil.getString(model, Model.QUERY);
+        FacetPage<Image> facetPage = service.facetOnCopyright(searchTerm);
+        Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
+        List<FacetFieldEntry> facet = page.getContent();
+        for (FacetFieldEntry entry : facet) {
+            this.copyrights.put(entry.getValue(), entry.getValueCount());
+        }
+    }
     
     
     public void setService(SolrImageService service){
-    	this.service =  service;
+        this.service =  service;
     }
-	
+    
 }

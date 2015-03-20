@@ -35,9 +35,7 @@ public class UserCookieCodec {
             System.arraycopy(src, 0, dst, 0, src.length);
             this.desKey = new SecretKeySpec(dst, "AES");
             this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        } catch (NoSuchAlgorithmException e) {
-            throw new LanewebException(e);
-        } catch (NoSuchPaddingException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             throw new LanewebException(e);
         }
     }
@@ -79,11 +77,7 @@ public class UserCookieCodec {
             byte[] base = Base64.decodeBase64(codedInput.getBytes(StandardCharsets.UTF_8));
             byte[] cleartext = this.cipher.doFinal(base);
             return new String(cleartext, StandardCharsets.UTF_8);
-        } catch (InvalidKeyException e) {
-            throw new LanewebException(e);
-        } catch (IllegalBlockSizeException e) {
-            throw new LanewebException(e);
-        } catch (BadPaddingException e) {
+        } catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             throw new LanewebException(e);
         }
     }
@@ -94,11 +88,7 @@ public class UserCookieCodec {
             byte[] cleartext = input.getBytes(StandardCharsets.UTF_8);
             byte[] ciphertext = this.cipher.doFinal(cleartext);
             return new String(Base64.encodeBase64(ciphertext), StandardCharsets.UTF_8);
-        } catch (InvalidKeyException e) {
-            throw new LanewebException(e);
-        } catch (IllegalBlockSizeException e) {
-            throw new LanewebException(e);
-        } catch (BadPaddingException e) {
+        } catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             throw new LanewebException(e);
         }
     }
