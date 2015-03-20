@@ -129,7 +129,7 @@ public class SolrImageSearchSAXStrategy extends
     protected void generatePagination(final XMLConsumer xmlConsumer,
             final Page<Image> page, final Map<String, Object> result)
             throws SAXException {
-        String path = ((String) result.get("path"));
+        String path = (String) result.get("path");
         if (result.get("selectedResource") != null
                 && !"".equals(result.get("selectedResource"))) {
             path = path + "&rid=" + (String) result.get("selectedResource");
