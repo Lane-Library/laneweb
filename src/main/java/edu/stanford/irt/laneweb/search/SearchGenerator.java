@@ -16,9 +16,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
 
     private static final long DEFAULT_TIMEOUT = 60000;
 
-    // TODO: not used
-    private String synchronous;
-
     private String timeout;
 
     public SearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
@@ -29,15 +26,11 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
-        this.synchronous = ModelUtil.getString(model, Model.SYNCHRONOUS);
     }
 
     public void setParameters(final Map<String, String> parameters) {
         if (this.timeout == null) {
             this.timeout = parameters.get(Model.TIMEOUT);
-        }
-        if (this.synchronous == null) {
-            this.synchronous = parameters.get(Model.SYNCHRONOUS);
         }
     }
 

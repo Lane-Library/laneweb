@@ -85,30 +85,6 @@ public class SearchGeneratorTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testDoSearchSynchronous() {
-        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
-                .andReturn(this.result);
-        replay(this.saxStrategy, this.manager);
-        this.model.put("synchronous", "true");
-        this.generator.setModel(this.model);
-        this.generator.doSearch("query");
-        verify(this.saxStrategy, this.manager);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    public void testDoSearchSynchronousEmpty() {
-        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
-                .andReturn(this.result);
-        replay(this.saxStrategy, this.manager);
-        this.generator.setParameters(Collections.singletonMap("synchronous", ""));
-        this.generator.setModel(this.model);
-        this.generator.doSearch("query");
-        verify(this.saxStrategy, this.manager);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
     public void testDoSearchTimeout() {
         expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(10L))).andReturn(this.result);
         replay(this.saxStrategy, this.manager);
