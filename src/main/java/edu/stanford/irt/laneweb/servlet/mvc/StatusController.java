@@ -87,7 +87,7 @@ public class StatusController {
         try {
             this.suggestionManager.getSuggestionsForTerm("cardio");
             time = System.currentTimeMillis() - time;
-            sb.append('[').append(time < 3000 ? "OK" : "WARN").append("] suggestions took ").append(time).append("ms.");
+            sb.append('[').append(time < 250 ? "OK" : "WARN").append("] suggestions took ").append(time).append("ms.");
         } catch (LanewebException e) {
             sb.append("[ERROR] suggestions failed: ").append(e);
         }
