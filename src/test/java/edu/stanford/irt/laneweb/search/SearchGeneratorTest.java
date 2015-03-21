@@ -4,9 +4,11 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,10 +46,11 @@ public class SearchGeneratorTest {
         this.model.put(Model.QUERY, "query");
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
-                this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
+                .andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
@@ -68,10 +71,11 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchNumberFormatException() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
-                this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
+                .andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
         this.generator.setParameters(Collections.singletonMap("timeout", "foo"));
@@ -79,10 +83,11 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchSynchronous() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(true))).andReturn(
-                this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
+                .andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.model.put("synchronous", "true");
         this.generator.setModel(this.model);
@@ -90,10 +95,11 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchSynchronousEmpty() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
-                this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
+                .andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setParameters(Collections.singletonMap("synchronous", ""));
         this.generator.setModel(this.model);
@@ -101,10 +107,10 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchTimeout() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(10L), eq(false))).andReturn(
-                this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(10L))).andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.model.put("timeout", "10");
         this.generator.setModel(this.model);
@@ -112,10 +118,11 @@ public class SearchGeneratorTest {
         verify(this.saxStrategy, this.manager);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchWaitNumberFormatException() {
-        expect(this.manager.search(isA(SimpleQuery.class), eq(60000L), eq(false))).andReturn(
-                this.result);
+        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
+                .andReturn(this.result);
         replay(this.saxStrategy, this.manager, this.result);
         this.model.put("wait", "foo");
         this.generator.setModel(this.model);

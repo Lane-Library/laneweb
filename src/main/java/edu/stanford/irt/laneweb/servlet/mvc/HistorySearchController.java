@@ -54,8 +54,8 @@ public class HistorySearchController {
     @RequestMapping(value = "/apps/historySearch")
     @ResponseBody
     public Map<String, Object> search(@ModelAttribute(Model.QUERY) final String query) {
-        Query simpleQuery = new SimpleQuery(query, this.engines);
-        Result result = this.manager.search(simpleQuery, ONE_MINUTE, true);
+        Query simpleQuery = new SimpleQuery(query);
+        Result result = this.manager.search(simpleQuery, this.engines, ONE_MINUTE);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         SearchStatus status;
         Collection<Result> children;

@@ -1,15 +1,11 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -82,13 +78,13 @@ public class MetaSearchControllerTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testSearch() {
-        expect(this.manager.describe(isA(Query.class))).andReturn(this.result);
+        expect(this.manager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(2);
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
         expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
-        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false))).andReturn(this.result);
+        expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
         expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result }));
@@ -112,13 +108,13 @@ public class MetaSearchControllerTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testSearchNullHits() {
-        expect(this.manager.describe(isA(Query.class))).andReturn(this.result);
+        expect(this.manager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(2);
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
         expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
-        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false))).andReturn(this.result);
+        expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
         expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result }));
@@ -142,11 +138,11 @@ public class MetaSearchControllerTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testSearchProxyLinks() {
-        expect(this.manager.describe(isA(Query.class))).andReturn(this.result);
+        expect(this.manager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
         expect(this.result.getChildren()).andReturn(Collections.singletonList(this.result)).times(4);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
-        expect(this.manager.search(isA(Query.class), eq(60000L), eq(false))).andReturn(this.result);
+        expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL).times(2);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getURL()).andReturn("url");

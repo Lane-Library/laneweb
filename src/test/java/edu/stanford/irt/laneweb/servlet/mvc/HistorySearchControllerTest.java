@@ -9,6 +9,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
@@ -21,9 +22,11 @@ import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
-import edu.stanford.irt.search.impl.ResultBuilder;
+import edu.stanford.irt.search.impl.Result.ResultBuilder;
 
 public class HistorySearchControllerTest {
+
+    private ResultBuilder builder;
 
     private HistorySearchController controller;
 
@@ -33,15 +36,13 @@ public class HistorySearchControllerTest {
 
     private Model model;
 
-    private Result result;
-
     @Before
     public void setUp() {
         this.dataBinder = createMock(CompositeDataBinder.class);
         this.metasearchManager = createMock(MetaSearchManager.class);
         this.controller = new HistorySearchController(this.metasearchManager, this.dataBinder);
         this.model = createMock(Model.class);
-        this.result = new ResultBuilder().setId("id").setDescription("description").setURL("url").build();
+        this.builder = Result.newResultBuilder().id("id").description("description").url("url");
     }
 
     @Test
@@ -56,10 +57,18 @@ public class HistorySearchControllerTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testSearch() {
-        this.result.setHits("10");
-        this.result.setStatus(SearchStatus.SUCCESSFUL);
-        this.result.setChildren(Collections.singleton(this.result));
-        expect(this.metasearchManager.search(isA(Query.class), eq(60000L), eq(true))).andReturn(this.result);
+        Result child = Result
+                .newResultBuilder()
+                .id("id")
+                .description("description")
+                .url("url")
+                .children(
+                        Collections.singleton(Result.newResultBuilder().hits("10").status(SearchStatus.SUCCESSFUL)
+                                .id("id").description("description").url("url").build())).build();
+        this.builder.status(SearchStatus.SUCCESSFUL);
+        this.builder.children(Collections.singleton(child));
+        expect(this.metasearchManager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(
+                this.builder.build());
         replay(this.metasearchManager);
         Map<String, Object> resultMap = this.controller.search("query");
         assertEquals(SearchStatus.SUCCESSFUL, resultMap.get("status"));
@@ -75,16 +84,24 @@ public class HistorySearchControllerTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testSearchFailedNullHits() {
-        this.result.setStatus(SearchStatus.FAILED);
-        this.result.setChildren(Collections.singleton(this.result));
-        expect(this.metasearchManager.search(isA(Query.class), eq(60000L), eq(true))).andReturn(this.result);
+        Result child = Result
+                .newResultBuilder()
+                .id("id")
+                .description("description")
+                .url("url")
+                .children(
+                        Collections.singleton(Result.newResultBuilder().id("id").description("description").url("url")
+                                .build())).build();
+        this.builder.status(SearchStatus.FAILED);
+        this.builder.children(Collections.singleton(child));
+        expect(this.metasearchManager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(
+                this.builder.build());
         replay(this.metasearchManager);
         Map<String, Object> resultMap = this.controller.search("query");
         assertEquals(SearchStatus.FAILED, resultMap.get("status"));
         Map<String, Object> resourceMap = (Map<String, Object>) resultMap.get("resources");
         Map<String, Object> resource = (Map<String, Object>) resourceMap.get("id");
         assertNull(resource.get("hits"));
-        assertEquals(SearchStatus.FAILED, resource.get("status"));
         assertEquals("description", resource.get("description"));
         assertEquals("url", resource.get("url"));
         verify(this.metasearchManager);

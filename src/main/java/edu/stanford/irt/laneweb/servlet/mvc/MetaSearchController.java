@@ -60,8 +60,8 @@ public class MetaSearchController {
             @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks,
             @ModelAttribute(Model.BASE_PROXY_URL) final String baseProxyURL) {
         Collection<String> engines = getEnginesForResources(resources);
-        Query simpleQuery = new SimpleQuery(query, engines);
-        Result result = this.manager.search(simpleQuery, ONE_MINUTE, false);
+        Query simpleQuery = new SimpleQuery(query);
+        Result result = this.manager.search(simpleQuery, engines, ONE_MINUTE);
         Map<String, Object> resultMap = getMapForResult(result, resources);
         if (proxyLinks) {
             createProxyLinks(resultMap, baseProxyURL);
@@ -114,7 +114,7 @@ public class MetaSearchController {
      */
     private Collection<String> getEnginesForResources(final List<String> resources) {
         Collection<String> engines = new LinkedList<String>();
-        Result describeResult = this.manager.describe(new SimpleQuery("", null));
+        Result describeResult = this.manager.describe(new SimpleQuery(""), null);
         for (Result engine : describeResult.getChildren()) {
             for (Result resource : engine.getChildren()) {
                 if (resources.contains(resource.getId())) {

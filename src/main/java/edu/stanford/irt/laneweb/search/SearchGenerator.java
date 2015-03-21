@@ -16,6 +16,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
 
     private static final long DEFAULT_TIMEOUT = 60000;
 
+    // TODO: not used
     private String synchronous;
 
     private String timeout;
@@ -50,17 +51,16 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
         if (query == null || query.isEmpty()) {
             throw new LanewebException("no query");
         } else {
-            long searchTimeout = DEFAULT_TIMEOUT;
+            long wait = DEFAULT_TIMEOUT;
             if (null != this.timeout) {
                 try {
-                    searchTimeout = Long.parseLong(this.timeout);
+                    wait = Long.parseLong(this.timeout);
                 } catch (NumberFormatException nfe) {
-                    searchTimeout = DEFAULT_TIMEOUT;
+                    wait = DEFAULT_TIMEOUT;
                 }
             }
-            boolean sync = Boolean.parseBoolean(this.synchronous);
-            final SimpleQuery q = new SimpleQuery(query, engines);
-            result = search(q, searchTimeout, sync);
+            final SimpleQuery q = new SimpleQuery(query);
+            result = search(q, engines, wait);
         }
         return result;
     }

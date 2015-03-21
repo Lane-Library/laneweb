@@ -4,10 +4,12 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 
 import org.junit.Before;
@@ -23,59 +25,57 @@ public class EngineSearchGeneratorTest {
 
     private EngineSearchGenerator generator;
 
-    private MetaSearchManager MetaSearchManager;
+    private MetaSearchManager manager;
 
     private SAXStrategy<Result> saxStrategy;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.MetaSearchManager = createMock(MetaSearchManager.class);
+        this.manager = createMock(MetaSearchManager.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new EngineSearchGenerator(this.MetaSearchManager, this.saxStrategy);
+        this.generator = new EngineSearchGenerator(this.manager, this.saxStrategy);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchString() {
-        expect(this.MetaSearchManager.search(isA(Query.class), eq(60000L), eq(false))).andReturn(
-                null);
-        replay(this.MetaSearchManager, this.saxStrategy);
+        expect(this.manager.search(isA(Query.class), isNull(Collection.class), eq(60000L))).andReturn(null);
+        replay(this.manager, this.saxStrategy);
         this.generator.doSearch("query");
-        verify(this.MetaSearchManager, this.saxStrategy);
+        verify(this.manager, this.saxStrategy);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchStringEngines() {
-        expect(
-                this.MetaSearchManager.search(isA(Query.class), eq(60000L),
-                        eq(false))).andReturn(null);
-        replay(this.MetaSearchManager, this.saxStrategy);
+        expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(null);
+        replay(this.manager, this.saxStrategy);
         this.generator.setModel(Collections.<String, Object> singletonMap(Model.ENGINES,
                 Arrays.asList(new String[] { "a", "b", "c" })));
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c,d"));
         this.generator.doSearch("query");
-        verify(this.MetaSearchManager, this.saxStrategy);
+        verify(this.manager, this.saxStrategy);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchStringParameterEngines() {
-        expect(
-                this.MetaSearchManager.search(isA(Query.class), eq(60000L),
-                        eq(false))).andReturn(null);
-        replay(this.MetaSearchManager, this.saxStrategy);
+        expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(null);
+        replay(this.manager, this.saxStrategy);
         this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c"));
         this.generator.doSearch("query");
-        verify(this.MetaSearchManager, this.saxStrategy);
+        verify(this.manager, this.saxStrategy);
     }
 
     @Test
     public void testSetParametersEnginesNull() {
-        replay(this.MetaSearchManager, this.saxStrategy);
+        replay(this.manager, this.saxStrategy);
         this.generator.setModel(Collections.<String, Object> emptyMap());
         try {
             this.generator.setParameters(Collections.<String, String> emptyMap());
         } catch (NullPointerException e) {
         }
-        verify(this.MetaSearchManager, this.saxStrategy);
+        verify(this.manager, this.saxStrategy);
     }
 }
