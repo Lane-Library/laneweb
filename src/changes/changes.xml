@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-03-23" version="2.4.4" description="2.4.4 bug fix release">
+            <action date="2015-03-21" dev="ceyates" issue="103150" type="update">
+                upgrade to search-core-2.1.0
+            </action>
+            <action date="2015-03-19" dev="ceyates" issue="103128" type="remove">
+                remove eresource subset browse
+            </action>
+            <action date="2015-03-19" dev="ryanmax" issue="103077" type="fix">
+                mobile hours display problems
+            </action>
+            <action date="2015-03-21" dev="ceyates" issue="102620" type="add">
+                create status page for laneweb
+            </action>
+        </release>
         <release date="2015-03-16" version="2.4.3" description="2.4.3 bug fix release">
             <action date="2015-03-12" dev="ceyates" issue="102954" type="fix">
                 display:none for class="description" causes class descriptions not to show
