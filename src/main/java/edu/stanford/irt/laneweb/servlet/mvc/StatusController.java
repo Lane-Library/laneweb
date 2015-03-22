@@ -66,12 +66,14 @@ public class StatusController {
 
                         @Override
                         public void write(final int b) throws IOException {
+                            // do nothing
                         }
                     };
                 }
 
                 @Override
                 public void setContentType(final String type) {
+                    // do nothing
                 }
             };
             this.requestHandler.handleRequest(req, resp);
