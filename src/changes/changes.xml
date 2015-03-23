@@ -11,9 +11,6 @@
             <action date="2015-03-21" dev="ceyates" issue="103150" type="update">
                 upgrade to search-core-2.1.0
             </action>
-            <action date="2015-03-19" dev="ceyates" issue="103128" type="remove">
-                remove eresource subset browse
-            </action>
             <action date="2015-03-19" dev="ryanmax" issue="103077" type="fix">
                 mobile hours display problems
             </action>

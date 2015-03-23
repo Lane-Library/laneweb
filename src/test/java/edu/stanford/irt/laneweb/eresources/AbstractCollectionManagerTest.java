@@ -93,6 +93,15 @@ public class AbstractCollectionManagerTest {
     }
 
     @Test
+    public void testGetSubset() throws SQLException {
+        expect(this.sqlStatements.getProperty("browse.subset")).andReturn("");
+        this.statement.setString(1, "subset");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet, this.sqlStatements);
+        this.manager.getSubset("subset");
+    }
+
+    @Test
     public void testGetTypeString() throws SQLException {
         expect(this.sqlStatements.getProperty("browse")).andReturn("");
         this.statement.setString(1, "type");

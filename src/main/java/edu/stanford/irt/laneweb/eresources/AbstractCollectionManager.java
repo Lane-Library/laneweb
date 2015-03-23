@@ -33,6 +33,8 @@ public abstract class AbstractCollectionManager implements CollectionManager {
 
     private static final String BROWSE_NONALPHA = "browse.nonalpha";
 
+    private static final String BROWSE_SUBSET = "browse.subset";
+
     private static final String COUNT = "search.count.0";
 
     private static final String COUNT_TYPE_UNION = "search.count.1";
@@ -57,6 +59,12 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         params.add(mesh);
         params.add(type);
         return doGet(BROWSE_MESH, params, null);
+    }
+
+    public List<Eresource> getSubset(final String subset) {
+        Collection<String> params = new LinkedList<String>();
+        params.add(subset);
+        return doGet(BROWSE_SUBSET, params, null);
     }
 
     public List<Eresource> getType(final String type) {
@@ -127,6 +135,10 @@ public abstract class AbstractCollectionManager implements CollectionManager {
             JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeConnection(conn);
         }
+    }
+
+    public List<Eresource> searchSubset(final String subset, final String query) {
+        throw new UnsupportedOperationException();
     }
 
     public List<Eresource> searchType(final String type, final String query) {
