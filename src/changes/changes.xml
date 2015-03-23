@@ -7,7 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2015-03-23" version="2.4.4" description="2.4.4 bug fix release">
+        <release date="2015-03-23" version="2.4.5" description="2.4.5 bug fix release">
+            <action date="2015-03-23" dev="ceyates" issue="103195" type="fix">
+                textbook and bioresearch searches don't show incremental results
+            </action>
+        </release>
+        <release date="2015-03-23" version="2.4.4" description="2.4.4 bug fix release [not deployed]">
             <action date="2015-03-21" dev="ceyates" issue="103150" type="update">
                 upgrade to search-core-2.1.0
             </action>
