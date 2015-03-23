@@ -37,7 +37,7 @@ public class StatusController {
         this.suggestionManager = suggestionManager;
     }
 
-    @RequestMapping(value = "/status", produces = "text/plain; charset=utf-8")
+    @RequestMapping(value = "/status.txt", produces = "text/plain; charset=utf-8")
     @ResponseBody
     public String getStatus(final HttpServletRequest request, final HttpServletResponse response) {
         StringBuilder sb = new StringBuilder();
