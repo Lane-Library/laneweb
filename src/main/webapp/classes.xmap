@@ -11,7 +11,7 @@
                 <map:generate type="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
             </map:aggregate>
             <map:transform type="saxon" src="resources/xsl/classes/laneclasses.xsl"/>
-            <map:serialize type="xml"/>
+            <map:serialize type="xhtml"/>
         </map:match>
     </map:pipeline>
     <!-- caching pipeline for static documents -->
@@ -24,17 +24,17 @@
         <map:match pattern="classeslist" type="wildcard">
             <map:generate type="classes" src="cocoon://classes/all-data.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/laneclasses-list.xsl"/>
-            <map:serialize type="xml"/>
+            <map:serialize type="xhtml"/>
         </map:match>
         <map:match pattern="thisweek" type="wildcard">
             <map:generate type="classes" src="cocoon://classes/data.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/thisweek.xsl"/>
-            <map:serialize type="xml"/>
+            <map:serialize type="xhtml"/>
         </map:match>
          <map:match pattern="history" type="wildcard">
             <map:generate type="classes" src="cocoon://classes/data.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/history.xsl"/>
-            <map:serialize type="xml"/>
+            <map:serialize type="xhtml"/>
         </map:match>
         <map:match pattern="data.xml" type="wildcard">
             <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
