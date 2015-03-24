@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -86,7 +88,7 @@ public class BookmarkTest {
 
     @Test
     public void testHashCode() {
-        assertEquals((this.label.hashCode() ^ this.url.hashCode()), this.bookmark.hashCode());
+        assertEquals(Arrays.hashCode(new String[] {this.label, this.url}), this.bookmark.hashCode());
     }
 
     @Test
@@ -94,7 +96,7 @@ public class BookmarkTest {
         try {
             new Bookmark(null, this.url);
             fail();
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
     }
 
@@ -103,7 +105,7 @@ public class BookmarkTest {
         try {
             new Bookmark(this.label, null);
             fail();
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
     }
 
@@ -119,7 +121,7 @@ public class BookmarkTest {
         this.bookmark.setLabel(this.label);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = NullPointerException.class)
     public void testSetLabelNull() {
         Bookmark b = new Bookmark();
         b.setLabel(null);
@@ -137,7 +139,7 @@ public class BookmarkTest {
         this.bookmark.setUrl(this.url);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = NullPointerException.class)
     public void testSetUrlNull() {
         Bookmark b = new Bookmark();
         b.setUrl(null);

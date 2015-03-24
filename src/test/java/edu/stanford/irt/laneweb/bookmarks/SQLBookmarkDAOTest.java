@@ -108,7 +108,7 @@ public class SQLBookmarkDAOTest {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
         try {
             this.dao.getLinks(null);
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob);
     }
@@ -218,7 +218,7 @@ public class SQLBookmarkDAOTest {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
             this.dao.saveLinks("userid", null);
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
     }
@@ -228,7 +228,7 @@ public class SQLBookmarkDAOTest {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
             this.dao.saveLinks(null, Collections.<Object> singletonList(this.bookmark));
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
     }

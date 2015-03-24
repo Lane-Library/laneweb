@@ -50,7 +50,7 @@ public class EzproxyServersWriterTest {
     public void testNullOutputStream() throws IOException {
         try {
             this.writer.write(null);
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
     }
 

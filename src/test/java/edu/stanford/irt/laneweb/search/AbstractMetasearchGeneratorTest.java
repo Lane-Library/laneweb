@@ -17,7 +17,8 @@ public class AbstractMetasearchGeneratorTest {
 
     private static final class TestAbstractMetasearchGenerator extends AbstractMetasearchGenerator<Result> {
 
-        public TestAbstractMetasearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
+        public TestAbstractMetasearchGenerator(final MetaSearchManager metaSearchManager,
+                final SAXStrategy<Result> saxStrategy) {
             super(metaSearchManager, saxStrategy);
         }
 
@@ -46,17 +47,17 @@ public class AbstractMetasearchGeneratorTest {
 
     @Test
     public void testDescribe() {
-        expect(this.manager.describe(this.query)).andReturn(null);
+        expect(this.manager.describe(this.query, null)).andReturn(null);
         replay(this.manager);
-        this.generator.describe(this.query);
+        this.generator.describe(this.query, null);
         verify(this.manager);
     }
 
     @Test
     public void testSearch() {
-        expect(this.manager.search(this.query, 10, true)).andReturn(null);
+        expect(this.manager.search(this.query, null, 10)).andReturn(null);
         replay(this.manager);
-        this.generator.search(this.query, 10, true);
+        this.generator.search(this.query, null, 10);
         verify(this.manager);
     }
 }

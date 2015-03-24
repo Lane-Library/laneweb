@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.Collection;
+
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.MetaSearchManager;
@@ -14,11 +16,11 @@ public abstract class AbstractMetasearchGenerator<T> extends AbstractSearchGener
         this.metaSearchManager = metaSearchManager;
     }
 
-    public Result describe(final Query query) {
-        return this.metaSearchManager.describe(query);
+    public Result describe(final Query query, Collection<String> engines) {
+        return this.metaSearchManager.describe(query, engines);
     }
 
-    public Result search(final Query query, final long arg1, final boolean arg3) {
-        return this.metaSearchManager.search(query, arg1, arg3);
+    public Result search(final Query query, Collection<String> engines, final long wait) {
+        return this.metaSearchManager.search(query, engines, wait);
     }
 }

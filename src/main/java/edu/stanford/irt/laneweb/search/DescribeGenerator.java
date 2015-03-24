@@ -32,6 +32,6 @@ public class DescribeGenerator extends AbstractMetasearchGenerator<Result> imple
 
     @Override
     protected Result doSearch(final String query) {
-        return describe(new SimpleQuery(""));
+        return describe(new SimpleQuery(""), null);
     }
 }

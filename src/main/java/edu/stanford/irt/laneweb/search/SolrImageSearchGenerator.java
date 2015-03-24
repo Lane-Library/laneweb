@@ -51,9 +51,9 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator <Map<Strin
         Pageable page = new PageRequest(pageNumber, TOTAL_ELEMENT_BY_PAGE);
         Page<Image> pageResult = null;
         if(this.resourceId == null){
-        	pageResult = service.findByTitleOrDescriptionFilterOnCopyright(query, this.copyright, page);
+            pageResult = service.findByTitleOrDescriptionFilterOnCopyright(query, this.copyright, page);
         }else{
-        	pageResult = service.findByTitleOrDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
+            pageResult = service.findByTitleOrDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
         }
         FacetPage<Image> facetPage =  service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
