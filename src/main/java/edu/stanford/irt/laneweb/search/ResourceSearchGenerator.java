@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.impl.MetaSearchManager;
@@ -27,7 +27,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
     public Result doSearch(final String query) {
         String q = query == null ? "" : query;
         Collection<String> enginesToRun = new HashSet<String>();
-        Result describeResult = describe(new SimpleQuery(q));
+        Result describeResult = describe(new SimpleQuery(q), null);
         Map<String, String> enginesMap = new HashMap<String, String>();
         for (Result engine : describeResult.getChildren()) {
             String engineId = engine.getId();
@@ -54,10 +54,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (this.resources == null) {
-            String resourceList = parameters.get("resource-list");
-            if (resourceList == null) {
-                throw new LanewebException("null resource-list");
-            }
+            String resourceList = Objects.requireNonNull(parameters.get("resource-list"), "null resource-list");
             this.resources = Arrays.asList(resourceList.split(","));
         }
     }

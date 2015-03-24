@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.codec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -34,17 +35,13 @@ public class UserCookieCodec {
             System.arraycopy(src, 0, dst, 0, src.length);
             this.desKey = new SecretKeySpec(dst, "AES");
             this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        } catch (NoSuchAlgorithmException e) {
-            throw new LanewebException(e);
-        } catch (NoSuchPaddingException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             throw new LanewebException(e);
         }
     }
 
     public PersistentLoginToken createLoginToken(final User user, final int userAgentHash) {
-        if (user == null) {
-            throw new LanewebException("null user");
-        }
+        Objects.requireNonNull(user, "null user");
         long now = System.currentTimeMillis();
         StringBuilder builder = new StringBuilder();
         builder.append(user.getId());
@@ -61,9 +58,7 @@ public class UserCookieCodec {
     }
 
     public PersistentLoginToken restoreLoginToken(final String encryptedValue, final String userIdHashKey) {
-        if (encryptedValue == null) {
-            throw new LanewebException("null encryptedValue");
-        }
+        Objects.requireNonNull(encryptedValue, "null encryptedValue");
         String decrypted = decrypt(encryptedValue);
         String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
         if (values.length != 5) {
@@ -82,11 +77,7 @@ public class UserCookieCodec {
             byte[] base = Base64.decodeBase64(codedInput.getBytes(StandardCharsets.UTF_8));
             byte[] cleartext = this.cipher.doFinal(base);
             return new String(cleartext, StandardCharsets.UTF_8);
-        } catch (InvalidKeyException e) {
-            throw new LanewebException(e);
-        } catch (IllegalBlockSizeException e) {
-            throw new LanewebException(e);
-        } catch (BadPaddingException e) {
+        } catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             throw new LanewebException(e);
         }
     }
@@ -97,11 +88,7 @@ public class UserCookieCodec {
             byte[] cleartext = input.getBytes(StandardCharsets.UTF_8);
             byte[] ciphertext = this.cipher.doFinal(cleartext);
             return new String(Base64.encodeBase64(ciphertext), StandardCharsets.UTF_8);
-        } catch (InvalidKeyException e) {
-            throw new LanewebException(e);
-        } catch (IllegalBlockSizeException e) {
-            throw new LanewebException(e);
-        } catch (BadPaddingException e) {
+        } catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             throw new LanewebException(e);
         }
     }

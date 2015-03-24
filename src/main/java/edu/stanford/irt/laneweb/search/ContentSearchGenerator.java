@@ -79,7 +79,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         if (query == null || query.isEmpty()) {
             throw new LanewebException("no query");
         } else {
-            result = this.metasearchManager.search(new SimpleQuery(query, this.engines), time, true);
+            result = this.metasearchManager.search(new SimpleQuery(query), this.engines, time);
         }
         return result;
     }

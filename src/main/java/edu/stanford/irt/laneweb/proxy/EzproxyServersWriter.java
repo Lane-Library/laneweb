@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -39,9 +40,7 @@ public class EzproxyServersWriter {
     }
 
     public void write(final OutputStream outputStream) throws IOException {
-        if (outputStream == null) {
-            throw new LanewebException("null outputStream");
-        }
+        Objects.requireNonNull(outputStream, "null outputStream");
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;

@@ -30,7 +30,7 @@ public class UserCookieCodecTest {
         try {
             this.codec.createLoginToken(null, 0);
             fail();
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
     }
 
@@ -48,7 +48,7 @@ public class UserCookieCodecTest {
         try {
             this.codec.restoreLoginToken(null, null);
             fail();
-        } catch (LanewebException e) {
+        } catch (NullPointerException e) {
         }
     }
 }

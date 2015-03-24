@@ -680,7 +680,7 @@ input[type="text"] {
 .todays-hours {
     font-size: 1.1em;
     margin: 0;
-    padding: 0 0 8px 20px;
+    padding: 0 0 5px 20px;
 }
 
 .todays-hours:before {
@@ -717,16 +717,19 @@ input[type="text"] {
 
 #hours dl {
     font-size: 1em;
-    margin: 0 0 5px 0;
     width: 100%;
+}
+
+.hours-container {
     height: 0;
     opacity: 0;
+    margin-left: 42px;
 }
 
 #hours dt {
     display: inline-block;
-    width: 34%;
-    margin: 0 0 0 20px;
+    width: 50%;
+    margin: 0;
     vertical-align: top;
 }
 
@@ -737,6 +740,7 @@ input[type="text"] {
 }
 
 #hours .calTitle {
+    font-weight: bold;
     font-style: italic;
 }
 

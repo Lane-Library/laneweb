@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Objects;
 
 import javax.sql.DataSource;
 
@@ -46,9 +47,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
 
     @SuppressWarnings("unchecked")
     public List<Object> getLinks(final String userid) {
-        if (userid == null) {
-            throw new LanewebException("null userid");
-        }
+        Objects.requireNonNull(userid, "null userid");
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -97,12 +96,8 @@ public class SQLBookmarkDAO implements BookmarkDAO {
     }
 
     public void saveLinks(final String userid, final List<Object> links) {
-        if (userid == null) {
-            throw new LanewebException("null userid");
-        }
-        if (links == null) {
-            throw new LanewebException("null links");
-        }
+        Objects.requireNonNull(userid, "null userid");
+        Objects.requireNonNull(links, "null links");
         Connection conn = null;
         CallableStatement cstmt = null;
         PreparedStatement pstmt = null;

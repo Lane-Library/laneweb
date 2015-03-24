@@ -3,11 +3,14 @@ package edu.stanford.irt.laneweb.search;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,9 +34,10 @@ public class DescribeGeneratorTest {
         this.result = createMock(Result.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
-        expect(this.MetaSearchManager.describe(isA(Query.class))).andReturn(this.result);
+        expect(this.MetaSearchManager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
         replay(this.MetaSearchManager);
         assertSame(this.result, this.generator.doSearch("query"));
         verify(this.MetaSearchManager);

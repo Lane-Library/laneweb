@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 public enum CookieName {
-    EXPIRATION("lane-login-expiration-date"), EZPROXY("ezproxy"), USER("lane_user");
+    EXPIRATION("lane-login-expiration-date"), EZPROXY("ezproxy"), IS_PERSISTENT("isPersistent"), USER("lane_user");
 
     String name;
 

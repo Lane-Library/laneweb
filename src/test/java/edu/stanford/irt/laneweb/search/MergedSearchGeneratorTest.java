@@ -4,10 +4,12 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,16 +52,16 @@ public class MergedSearchGeneratorTest {
         this.eresource = createMock(Eresource.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetSearchResults() {
-        expect(this.MetaSearchManager.search(isA(Query.class), eq(20000L), eq(true)))
-                .andReturn(null);
+        expect(this.MetaSearchManager.search(isA(Query.class), isNull(Collection.class), eq(20000L))).andReturn(null);
         List<SearchResult> list = new LinkedList<SearchResult>();
         list.add(this.result);
         expect(this.conversionStrategy.convertResult(null)).andReturn(list);
         expect(this.collectionManager.search("query")).andReturn(Collections.singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
-//        expect(this.result.compareTo(this.result)).andReturn(0);
+        // expect(this.result.compareTo(this.result)).andReturn(0);
         expect(this.result.getScore()).andReturn(1);
         expect(this.eresource.getScore()).andReturn(0f);
         replay(this.collectionManager, this.conversionStrategy, this.MetaSearchManager, this.saxStrategy, this.result,
