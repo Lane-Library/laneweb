@@ -626,13 +626,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>2.1.0</version>
-            <exclusions>
-            	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
-            </exclusions>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
@@ -643,7 +637,7 @@
         <dependency>
             <artifactId>slf4j-api</artifactId>
             <groupId>org.slf4j</groupId>
-            <version>1.7.9</version>
+            <version>1.7.10</version>
         </dependency>
         <dependency>
             <artifactId>spellcheck-core</artifactId>
@@ -752,7 +746,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.9</version>
+            <version>1.7.10</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
