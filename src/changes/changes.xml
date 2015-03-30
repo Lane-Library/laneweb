@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-03-30" version="2.4.6" description="2.4.6 bug fix release">
+            <action date="2015-03-26" dev="ceyates" issue="103259" type="fix">
+                update to search-spring-2.1.1, search-core-2.1.2
+            </action>
+            <action date="2015-03-24" dev="ceyates" issue="103205" type="fix">
+                key to put Templates differs from key to get in TransformerHandlerFactory 
+            </action>
+        </release>
         <release date="2015-03-23" version="2.4.5" description="2.4.5 bug fix release">
             <action date="2015-03-23" dev="ceyates" issue="103195" type="fix">
                 textbook and bioresearch searches don't show incremental results
