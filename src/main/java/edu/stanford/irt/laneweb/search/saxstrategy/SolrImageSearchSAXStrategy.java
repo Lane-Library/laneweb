@@ -225,7 +225,7 @@ public class SolrImageSearchSAXStrategy extends
         } else {
             XMLUtils.data(xmlConsumer,
                     "No " + result.get("tab")
-                            + " images are available with search term, "
+                            + " images are available with search term: "
                             + result.get(Model.QUERY));
         }
         endDiv(xmlConsumer);
