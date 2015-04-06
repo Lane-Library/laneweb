@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-04-06" version="2.4.7" description="2.4.7 bug fix release">
+            <action date="2015-04-06" dev="ceyates" issue="103563" type="update">
+                update date to search-lane-2.1.0
+            </action>
+            <action date="2015-04-02" dev="ceyates" issue="103448" type="fix">
+                banner is in a &lt;body&gt; element
+            </action>
+        </release>
         <release date="2015-03-30" version="2.4.6" description="2.4.6 bug fix release">
             <action date="2015-03-26" dev="ceyates" issue="103259" type="fix">
                 update to search-spring-2.1.1, search-core-2.1.2
