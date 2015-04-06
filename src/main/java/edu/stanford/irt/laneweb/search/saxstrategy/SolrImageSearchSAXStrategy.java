@@ -225,7 +225,7 @@ public class SolrImageSearchSAXStrategy extends
         } else {
             XMLUtils.data(xmlConsumer,
                     "No " + result.get("tab")
-                            + " images are available with search term, "
+                            + " images are available with search term: "
                             + result.get(Model.QUERY));
         }
         endDiv(xmlConsumer);
@@ -308,10 +308,12 @@ public class SolrImageSearchSAXStrategy extends
             final Image image) throws SAXException {
 
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "li");
-        startAnchor(xmlConsumer, image.getPageUrl());
-        startElementWithId(xmlConsumer, DIV, "image");
-        createImage(xmlConsumer, image.getId(), image.getThumbnailSrc(),
-                image.getSrc());
+    	AttributesImpl atts = new AttributesImpl();
+		atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, image.getPageUrl());
+		atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "noproxy");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
+	    startElementWithId(xmlConsumer, DIV, "image");
+        createImage(xmlConsumer, image.getId(), image.getThumbnailSrc(),  image.getSrc());
         endDiv(xmlConsumer);
         startDiv(xmlConsumer);
         String title = image.getTitle();
@@ -323,7 +325,6 @@ public class SolrImageSearchSAXStrategy extends
         endAnchor(xmlConsumer);
         generateWebsiteSource(xmlConsumer, image.getId(), image.getPageUrl());
         generateCopyright(xmlConsumer, image);
-
         endLi(xmlConsumer);
     }
 
@@ -348,8 +349,11 @@ public class SolrImageSearchSAXStrategy extends
             final String id, final String url) throws SAXException {
         startElementWithId(xmlConsumer, DIV, "website-id");
         XMLUtils.data(xmlConsumer, "Source: ");
-        startAnchor(xmlConsumer, url);
-        if (id.startsWith("ncbi.nlm.nih.gov")) {
+    	AttributesImpl atts = new AttributesImpl();
+		atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, url);
+		atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "noproxy");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
+	    if (id.startsWith("ncbi.nlm.nih.gov")) {
             XMLUtils.data(xmlConsumer, "PubMed Central");
         } else {
             XMLUtils.data(xmlConsumer, id.substring(0, id.indexOf("/")));

@@ -19,7 +19,7 @@
     </xsl:template>
     
     <xsl:template match="/h:html/h:body/h:div">
-        <body>
+        <html><body>
             <xsl:copy>
                 <xsl:apply-templates select="child::node()"/>
             </xsl:copy>
@@ -27,7 +27,7 @@
             <xsl:if test="count(/h:html/h:body/h:div) &gt; 1">
                 <xsl:call-template name="create-nav"/>
             </xsl:if>
-        </body>
+        </body></html>
     </xsl:template>
     
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
