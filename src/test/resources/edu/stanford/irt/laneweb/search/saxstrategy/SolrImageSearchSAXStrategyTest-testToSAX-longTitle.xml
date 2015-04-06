@@ -45,13 +45,13 @@
    </div>
    <ul id="imageList">
       <li>
-         <a href="pageUrl">
+         <a href="pageUrl" class="noproxy">
             <div id="image">
                <image src="thumbnailSrc" id="id/andSlash" class="yui3-tooltip-trigger"/>
             </div>
             <div>012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789....</div>
          </a>
-         <div id="website-id">Source: <a href="pageUrl">id</a>
+         <div id="website-id">Source: <a href="pageUrl" class="noproxy">id</a>
          </div>
          <div id="copyright">
             <a rel="popup local 2109089882_copyright" class="no-bookmarking">Copyright Information <i class="fa fa-arrow-right"/>
