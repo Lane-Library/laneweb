@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class ContentBaseDataBinder implements DataBinder {
@@ -12,6 +13,9 @@ public class ContentBaseDataBinder implements DataBinder {
     private URL contentBase;
 
     public ContentBaseDataBinder(final URL contentBase) {
+        if (contentBase == null) {
+            throw new LanewebException("null contentBase");
+        }
         this.contentBase = contentBase;
     }
 

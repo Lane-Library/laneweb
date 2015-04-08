@@ -17,17 +17,17 @@
         <bean name="javax.sql.DataSource/eresources" class="org.apache.commons.dbcp.BasicDataSource"
             destroy-method="close">
             <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-            <property name="url" value="%{laneweb.context.eresources.url}"/>
-            <property name="username" value="%{laneweb.context.eresources.username}"/>
-            <property name="password" value="%{laneweb.context.eresources.password}"/>
+            <property name="url" value="%{edu.stanford.irt.laneweb.db.eresources.url}"/>
+            <property name="username" value="%{edu.stanford.irt.laneweb.db.eresources.user}"/>
+            <property name="password" value="%{edu.stanford.irt.laneweb.db.eresources.password}"/>
         </bean>
 
         <bean name="javax.sql.DataSource/voyager" class="org.apache.commons.dbcp.BasicDataSource"
             destroy-method="close">
             <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-            <property name="url" value="%{laneweb.context.voyager.url}"/>
-            <property name="username" value="%{laneweb.context.voyager.username}"/>
-            <property name="password" value="%{laneweb.context.voyager.password}"/>
+            <property name="url" value="%{edu.stanford.irt.laneweb.db.voyager.url}"/>
+            <property name="username" value="%{edu.stanford.irt.laneweb.db.voyager.user}"/>
+            <property name="password" value="%{edu.stanford.irt.laneweb.db.voyager.password}"/>
         </bean>
 
     </beans>

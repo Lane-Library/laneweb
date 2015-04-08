@@ -278,8 +278,8 @@
     
     <bean id="edu.stanford.irt.laneweb.codec.SHCCodec"
         class="edu.stanford.irt.laneweb.codec.SHCCodec">
-        <constructor-arg value="%{laneweb.shccodec.key}"/>
-        <constructor-arg value="%{laneweb.shccodec.vector}"/>
+        <constructor-arg value="%{edu.stanford.irt.laneweb.shccodec.key}"/>
+        <constructor-arg value="%{edu.stanford.irt.laneweb.shccodec.vector}"/>
         <constructor-arg ref="org.slf4j.Logger/SHCCodec"/>
     </bean>
     
