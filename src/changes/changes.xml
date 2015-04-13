@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-04-13" version="3.0.0" description="3.0.0 java 8 release">
+            <action date="2015-04-07" dev="ceyates" issue="103573" type="fix">
+                failed metasearch links have empty href on bioresearch and textbook search pages
+            </action>
+            <action date="2015-04-08" dev="ceyates" issue="102574" type="update">
+                use servlet api 3.0 and java 1.8
+            </action>
+        </release>
         <release date="2015-04-06" version="2.4.7" description="2.4.7 bug fix release">
             <action date="2015-04-06" dev="ceyates" issue="103563" type="update">
                 update date to search-lane-2.1.0
