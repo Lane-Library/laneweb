@@ -44,9 +44,10 @@ public class BassettCountSAXStrategyTest {
         this.map.put("Region2--Subregion1", Integer.valueOf(5));
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"),
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
+                eq("bassett_count"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"),
                 isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"), isA(Attributes.class));
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"),
                 isA(Attributes.class));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"));
@@ -56,13 +57,15 @@ public class BassettCountSAXStrategyTest {
         this.xmlConsumer.characters(aryEq(new char[] { '5' }), eq(0), eq(1));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"),
+                isA(Attributes.class));
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"),
                 isA(Attributes.class));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"));
         this.xmlConsumer.characters(aryEq(new char[] { '5' }), eq(0), eq(1));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"));
+        this.xmlConsumer
+                .endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         replay(this.xmlConsumer);
@@ -74,9 +77,10 @@ public class BassettCountSAXStrategyTest {
     public void testToSAXEmptyMap() throws SAXException {
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"),
-                isA(Attributes.class));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"));
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
+                eq("bassett_count"), isA(Attributes.class));
+        this.xmlConsumer
+                .endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         replay(this.xmlConsumer);

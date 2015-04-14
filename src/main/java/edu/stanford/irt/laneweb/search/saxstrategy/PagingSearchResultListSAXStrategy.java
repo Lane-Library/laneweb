@@ -34,6 +34,7 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
         this.saxStrategy = saxStrategy;
     }
 
+    @Override
     public void toSAX(final PagingSearchResultList list, final XMLConsumer xmlConsumer) {
         PagingData pagingData = list.getPagingData();
         int start = pagingData.getStart();
@@ -42,7 +43,8 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(Resource.EMPTY_NS, Resource.SIZE, Resource.SIZE, Resource.CDATA, Integer.toString(list.size()));
+            atts.addAttribute(Resource.EMPTY_NS, Resource.SIZE, Resource.SIZE, Resource.CDATA,
+                    Integer.toString(list.size()));
             atts.addAttribute(Resource.EMPTY_NS, START, START, Resource.CDATA, Integer.toString(start));
             atts.addAttribute(Resource.EMPTY_NS, LENGTH, LENGTH, Resource.CDATA, Integer.toString(length));
             atts.addAttribute(Resource.EMPTY_NS, PAGE, PAGE, Resource.CDATA, Integer.toString(pagingData.getPage()));
@@ -76,9 +78,12 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
                 if (!countedResources.contains(resourceResult)) {
                     countedResources.add(resourceResult);
                     AttributesImpl atts = new AttributesImpl();
-                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_ID, Resource.RESOURCE_ID, Resource.CDATA, resourceResult.getId());
-                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_HITS, Resource.RESOURCE_HITS, Resource.CDATA, resourceResult.getHits());
-                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_URL, Resource.RESOURCE_URL, Resource.CDATA, resourceResult.getURL());
+                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_ID, Resource.RESOURCE_ID, Resource.CDATA,
+                            resourceResult.getId());
+                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_HITS, Resource.RESOURCE_HITS,
+                            Resource.CDATA, resourceResult.getHits());
+                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_URL, Resource.RESOURCE_URL, Resource.CDATA,
+                            resourceResult.getURL());
                     XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE, atts);
                     XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE);
                 }

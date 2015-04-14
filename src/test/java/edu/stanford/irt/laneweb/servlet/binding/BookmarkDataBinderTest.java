@@ -59,13 +59,6 @@ public class BookmarkDataBinderTest {
     }
 
     @Test
-    public void testNoUserid() {
-        this.model = new HashMap<String, Object>();
-        this.binder.bind(this.model, this.request);
-        assertFalse(this.model.containsKey(Model.BOOKMARKS));
-    }
-
-    @Test
     public void testNotInDAO() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(null);
@@ -88,5 +81,12 @@ public class BookmarkDataBinderTest {
         this.binder.bind(this.model, this.request);
         assertEquals(this.bookmarks, this.model.get(Model.BOOKMARKS));
         verify(this.dao, this.request, this.session);
+    }
+
+    @Test
+    public void testNoUserid() {
+        this.model = new HashMap<String, Object>();
+        this.binder.bind(this.model, this.request);
+        assertFalse(this.model.containsKey(Model.BOOKMARKS));
     }
 }

@@ -46,6 +46,24 @@ public class SearchListPagingDataSAXStrategyTest {
     }
 
     @Test
+    public void testToSAX220Alpha() throws SAXException, IOException {
+        expect(this.pagingData.getSize()).andReturn(220);
+        expect(this.pagingData.getLength()).andReturn(100);
+        expect(this.pagingData.getStart()).andReturn(0);
+        expect(this.pagingData.getBaseQuery()).andReturn("a=a");
+        expect(this.pagingData.getPages()).andReturn(3);
+        expect(this.pagingData.getPage()).andReturn(0);
+        replay(this.pagingData);
+        this.xmlConsumer.startDocument();
+        this.strategy.toSAX(this.pagingData, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "SearchListPagingDataSAXStrategyTest-testToSAX220Alpha.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.pagingData);
+    }
+
+    @Test
     public void testToSAX320() throws SAXException, IOException {
         expect(this.pagingData.getSize()).andReturn(320);
         expect(this.pagingData.getLength()).andReturn(100);
@@ -58,23 +76,6 @@ public class SearchListPagingDataSAXStrategyTest {
         this.strategy.toSAX(this.pagingData, this.xmlConsumer);
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "SearchListPagingDataSAXStrategyTest-testToSAX320.xml"),
-                this.xmlConsumer.getStringValue());
-        verify(this.pagingData);
-    }
-
-    @Test
-    public void testToSAX220Alpha() throws SAXException, IOException {
-        expect(this.pagingData.getSize()).andReturn(220);
-        expect(this.pagingData.getLength()).andReturn(100);
-        expect(this.pagingData.getStart()).andReturn(0);
-        expect(this.pagingData.getBaseQuery()).andReturn("a=a");
-        expect(this.pagingData.getPages()).andReturn(3);
-        expect(this.pagingData.getPage()).andReturn(0);
-        replay(this.pagingData);
-        this.xmlConsumer.startDocument();
-        this.strategy.toSAX(this.pagingData, this.xmlConsumer);
-        this.xmlConsumer.endDocument();
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "SearchListPagingDataSAXStrategyTest-testToSAX220Alpha.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.pagingData);
     }

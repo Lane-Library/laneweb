@@ -64,6 +64,13 @@ public class CMELinkSelectorTest {
     }
 
     @Test
+    public void testSelectOTHERNoEmrid() {
+        this.model.put(Model.PROXY_LINKS, true);
+        this.model.put(Model.IPGROUP, IPGroup.OTHER);
+        assertTrue(this.selector.select(null, this.model, null));
+    }
+
+    @Test
     public void testSelectProxyLinks() {
         this.model.put(Model.PROXY_LINKS, true);
         assertTrue(this.selector.select(null, this.model, null));
@@ -82,12 +89,5 @@ public class CMELinkSelectorTest {
         this.model.put(Model.PROXY_LINKS, true);
         this.model.put(Model.IPGROUP, IPGroup.SHC);
         assertFalse(this.selector.select(null, this.model, null));
-    }
-
-    @Test
-    public void testSelectOTHERNoEmrid() {
-        this.model.put(Model.PROXY_LINKS, true);
-        this.model.put(Model.IPGROUP, IPGroup.OTHER);
-        assertTrue(this.selector.select(null, this.model, null));
     }
 }

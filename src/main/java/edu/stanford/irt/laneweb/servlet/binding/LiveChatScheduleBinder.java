@@ -11,6 +11,7 @@ public class LiveChatScheduleBinder implements DataBinder {
 
     private Schedule schedule = new Schedule();
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         model.put(Model.LIVE_CHAT_AVAILABLE, Boolean.valueOf(this.schedule.isAvailable()));
     }

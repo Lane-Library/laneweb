@@ -25,6 +25,8 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SolrImageSearchGeneratorTest {
 
+    private FacetPage<Image> facetPage;
+
     private SolrImageSearchGenerator generator;
 
     private Map<String, Object> model;
@@ -33,15 +35,12 @@ public class SolrImageSearchGeneratorTest {
 
     private SolrImageService service;
 
-    private FacetPage<Image> facetPage;
-    
-    
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.service = createMock(SolrImageService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.facetPage =  createMock(FacetPage.class);
+        this.facetPage = createMock(FacetPage.class);
         this.generator = new SolrImageSearchGenerator(this.service, this.saxStrategy);
         this.model = new HashMap<String, Object>();
     }
@@ -52,7 +51,7 @@ public class SolrImageSearchGeneratorTest {
         this.model.put(Model.SOURCE, "cc-");
         Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("10"), capture(pageable)))
-        .andReturn(null);
+                .andReturn(null);
         expect(this.service.facetOnWebsiteId(eq("query"), eq("10"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
@@ -71,7 +70,7 @@ public class SolrImageSearchGeneratorTest {
         this.model.put(Model.SOURCE, "foo");
         Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
-        .andReturn(null);
+                .andReturn(null);
         expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
@@ -90,7 +89,7 @@ public class SolrImageSearchGeneratorTest {
         this.model.put(Model.SOURCE, "pmc-");
         Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("15"), capture(pageable)))
-        .andReturn(null);
+                .andReturn(null);
         expect(this.service.facetOnWebsiteId(eq("query"), eq("15"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
@@ -109,7 +108,7 @@ public class SolrImageSearchGeneratorTest {
         this.model.put(Model.SOURCE, "rl-");
         Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("20"), capture(pageable)))
-        .andReturn(null);
+                .andReturn(null);
         expect(this.service.facetOnWebsiteId(eq("query"), eq("20"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
@@ -126,7 +125,7 @@ public class SolrImageSearchGeneratorTest {
     public void testDoSearchDefault() {
         Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
-        .andReturn(null);
+                .andReturn(null);
         expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
@@ -141,7 +140,7 @@ public class SolrImageSearchGeneratorTest {
         this.model.put(Model.PAGE, "2");
         Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
-        .andReturn(null);
+                .andReturn(null);
         expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);

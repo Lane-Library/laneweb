@@ -22,7 +22,8 @@ import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 // TODO: maybe create an AbstractTransformer that extends AbstractXMLPipe and implements Transformer
-public class TextNodeParsingTransformer extends AbstractXMLPipe implements Transformer, CacheablePipelineComponent, ParametersAware {
+public class TextNodeParsingTransformer extends AbstractXMLPipe implements Transformer, CacheablePipelineComponent,
+        ParametersAware {
 
     // the html parser creates screwy processing instructions from the classes
     // xml. TODO: this is specific to the classes yet this class is can be used
@@ -69,15 +70,21 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         if (this.elementName.equals(qName)) {
             this.inElement = false;
-            final ByteArrayInputStream inputStream = new ByteArrayInputStream(this.content.toString().getBytes(StandardCharsets.UTF_8));
+            final ByteArrayInputStream inputStream = new ByteArrayInputStream(this.content.toString().getBytes(
+                    StandardCharsets.UTF_8));
             Source source = new Source() {
 
+                @Override
                 public boolean exists() {
                     return true;
                 }
+
+                @Override
                 public InputStream getInputStream() throws IOException {
                     return inputStream;
                 }
+
+                @Override
                 public String getURI() {
                     return null;
                 }
@@ -89,29 +96,33 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
         this.xmlConsumer.endElement(uri, localName, qName);
     }
 
+    @Override
     public Serializable getKey() {
         return "textNodeParsing";
     }
 
+    @Override
     public String getType() {
         return this.type;
     }
 
+    @Override
     public Validity getValidity() {
         return AlwaysValid.SHARED_INSTANCE;
+    }
+
+    @Override
+    public void setParameters(final Map<String, String> parameters) {
+        String name = parameters.get("elementName");
+        if (name != null) {
+            this.elementName = name;
+        }
     }
 
     @Override
     public void setXMLConsumer(final XMLConsumer xmlConsumer) {
         this.xmlConsumer = xmlConsumer;
         super.setXMLConsumer(xmlConsumer);
-    }
-
-    public void setParameters(final Map<String, String> parameters) {
-        String name = parameters.get("elementName");
-        if (name != null) {
-            this.elementName = name;
-        }
     }
 
     @Override

@@ -56,7 +56,7 @@ public class LDAPAttributesMapperTest {
         expect(this.attributes.get("mail")).andReturn(this.attribute);
         expect(this.attribute.get()).andReturn("mail");
         replay(this.attributes, this.attribute, this.enumeration);
-        LDAPData data = (LDAPData) this.mapper.mapFromAttributes(this.attributes);
+        LDAPData data = this.mapper.mapFromAttributes(this.attributes);
         assertEquals("name", data.getName());
         assertEquals("uid", data.getSunetId());
         assertEquals("suunivid", data.getUnivId());
@@ -84,7 +84,7 @@ public class LDAPAttributesMapperTest {
         expect(this.attributes.get("mail")).andReturn(this.attribute);
         expect(this.attribute.get()).andReturn("mail");
         replay(this.attributes, this.attribute, this.enumeration);
-        LDAPData data = (LDAPData) this.mapper.mapFromAttributes(this.attributes);
+        LDAPData data = this.mapper.mapFromAttributes(this.attributes);
         assertEquals("name", data.getName());
         assertEquals("uid", data.getSunetId());
         assertEquals("suunivid", data.getUnivId());
@@ -101,7 +101,7 @@ public class LDAPAttributesMapperTest {
         expect(this.attributes.get("suAffiliation")).andReturn(null);
         expect(this.attributes.get("mail")).andReturn(null);
         replay(this.attributes, this.attribute, this.enumeration);
-        LDAPData data = (LDAPData) this.mapper.mapFromAttributes(this.attributes);
+        LDAPData data = this.mapper.mapFromAttributes(this.attributes);
         assertNull(data.getName());
         assertNull(data.getSunetId());
         assertNull(data.getUnivId());

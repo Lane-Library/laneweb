@@ -12,7 +12,7 @@ import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public abstract class AbstractTextProcessingTransformer extends AbstractXMLPipe implements Transformer {
-    
+
     private static final int BUFFER_SIZE = 256;
 
     private CharBuffer chars = CharBuffer.allocate(BUFFER_SIZE);

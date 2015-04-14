@@ -53,7 +53,8 @@ public class BookmarkletControllerTest {
     public void testAddBookmark() throws UnsupportedEncodingException {
         this.dao.saveLinks(edu.stanford.irt.laneweb.model.Model.USER_ID, this.bookmarks);
         replay(this.dao, this.userBinder, this.bookmarkBinder);
-        assertEquals("redirect:url", this.controller.addBookmark(null, this.bookmarks, edu.stanford.irt.laneweb.model.Model.USER_ID, "url", "label"));
+        assertEquals("redirect:url", this.controller.addBookmark(null, this.bookmarks,
+                edu.stanford.irt.laneweb.model.Model.USER_ID, "url", "label"));
         verify(this.dao, this.userBinder, this.bookmarkBinder);
     }
 

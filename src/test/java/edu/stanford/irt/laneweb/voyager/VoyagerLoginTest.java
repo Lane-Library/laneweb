@@ -24,13 +24,13 @@ public class VoyagerLoginTest {
 
     private DataSource dataSource;
 
+    private Logger log;
+
     private ResultSet resultSet;
 
     private PreparedStatement statement;
 
     private VoyagerLogin voyagerLogin;
-
-    private Logger log;
 
     @Before
     public void setUp() throws Exception {

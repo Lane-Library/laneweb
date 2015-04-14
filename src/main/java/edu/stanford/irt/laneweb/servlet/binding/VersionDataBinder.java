@@ -21,6 +21,7 @@ public class VersionDataBinder implements DataBinder {
         }
     }
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         model.put(Model.VERSION, this.version);
     }

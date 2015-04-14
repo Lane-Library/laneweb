@@ -14,7 +14,7 @@ import edu.stanford.irt.querymap.QueryMapper;
 
 @Controller
 public class QueryMapController {
-    
+
     @Resource(name = "org.slf4j.Logger/querymap")
     private Logger log;
 

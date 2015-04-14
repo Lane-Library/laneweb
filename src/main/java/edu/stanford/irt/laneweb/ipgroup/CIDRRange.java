@@ -8,8 +8,7 @@ import java.util.StringTokenizer;
 import edu.stanford.irt.laneweb.LanewebException;
 
 /**
- * CIDRRange represents a range of ip addresses using CIDR notation in the
- * constructor.
+ * CIDRRange represents a range of ip addresses using CIDR notation in the constructor.
  */
 public class CIDRRange {
 
@@ -25,7 +24,7 @@ public class CIDRRange {
 
     /**
      * create a new CIDRRange
-     * 
+     *
      * @param cidr
      *            with the format "nnn.nnn.nnn.nnn/nn"
      * @param ipGroup
@@ -44,8 +43,9 @@ public class CIDRRange {
 
     /**
      * add a CIDRRange as a subrange of this one.
-     * 
-     * @param other the subrange to add
+     *
+     * @param other
+     *            the subrange to add
      */
     public void addSubrange(final CIDRRange other) {
         if (!isSubrange(other)) {
@@ -67,7 +67,7 @@ public class CIDRRange {
 
     /**
      * determine if an address with in this CDIRRanges range.
-     * 
+     *
      * @param ip
      *            the 32 bit integer representation of an ip address
      * @return true if the ip is in range, otherwise false
@@ -78,7 +78,7 @@ public class CIDRRange {
 
     /**
      * get the IPGroup associated with an ip or null if not in range.
-     * 
+     *
      * @param ip
      *            the int value of an ip address
      * @return the IPGroup or null
@@ -101,7 +101,7 @@ public class CIDRRange {
 
     /**
      * get the IPGroup associated with an ip or null if not in range.
-     * 
+     *
      * @param ip
      *            the String value of an ip address
      * @return the IPGroup or null
@@ -119,8 +119,9 @@ public class CIDRRange {
 
     /**
      * Determine of another range is contained within this range
-     * 
-     * @param other the other CIDRange
+     *
+     * @param other
+     *            the other CIDRange
      * @return true if other is within this range, otherwise false
      */
     public boolean isSubrange(final CIDRRange other) {
@@ -155,7 +156,8 @@ public class CIDRRange {
 
     private int ipToInt(final String ip) {
         StringTokenizer st = new StringTokenizer(ip, ".");
-        return ((Integer.parseInt(st.nextToken()) << 24) & 0xFF000000) | ((Integer.parseInt(st.nextToken()) << 16) & 0xFF0000)
+        return ((Integer.parseInt(st.nextToken()) << 24) & 0xFF000000)
+                | ((Integer.parseInt(st.nextToken()) << 16) & 0xFF0000)
                 | ((Integer.parseInt(st.nextToken()) << 8) & 0xFF00) | (Integer.parseInt(st.nextToken()) & 0xFF);
     }
 }

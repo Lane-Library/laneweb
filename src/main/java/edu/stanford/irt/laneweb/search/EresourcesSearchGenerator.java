@@ -21,7 +21,8 @@ public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerat
 
     private String type;
 
-    public EresourcesSearchGenerator(final CollectionManager collectionManager, final SAXStrategy<PagingSearchResultList> saxStrategy) {
+    public EresourcesSearchGenerator(final CollectionManager collectionManager,
+            final SAXStrategy<PagingSearchResultList> saxStrategy) {
         super(saxStrategy);
         this.collectionManager = collectionManager;
     }
@@ -32,6 +33,7 @@ public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerat
         this.type = ModelUtil.getString(model, Model.TYPE);
     }
 
+    @Override
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.TYPE)) {
             try {

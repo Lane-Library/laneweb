@@ -29,7 +29,8 @@ public class SearchDirectoryTransformerTest {
         this.transformer = new SearchDirectoryTransformer();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
-        this.transformer.setParameters(Collections.singletonMap("directories", "file:" + System.getProperty("user.dir")));
+        this.transformer
+                .setParameters(Collections.singletonMap("directories", "file:" + System.getProperty("user.dir")));
     }
 
     @Test
@@ -38,7 +39,8 @@ public class SearchDirectoryTransformerTest {
         expectLastCall().atLeastOnce();
         this.xmlConsumer.endElement("", "file", "file");
         expectLastCall().atLeastOnce();
-        this.xmlConsumer.endElement("http://lane.stanford.edu/search-templates/ns", "search-templates", "search-templates");
+        this.xmlConsumer.endElement("http://lane.stanford.edu/search-templates/ns", "search-templates",
+                "search-templates");
         this.xmlConsumer.endDocument();
         replay(this.xmlConsumer);
         this.transformer.endDocument();

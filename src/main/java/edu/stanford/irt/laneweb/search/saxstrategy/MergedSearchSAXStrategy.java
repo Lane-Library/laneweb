@@ -19,6 +19,7 @@ public class MergedSearchSAXStrategy implements SAXStrategy<SearchResult> {
         this.eresourceStrategy = eresourceStrategy;
     }
 
+    @Override
     public void toSAX(final SearchResult searchResult, final XMLConsumer xmlConsumer) {
         if (searchResult instanceof EresourceSearchResult) {
             this.eresourceStrategy.toSAX(((EresourceSearchResult) searchResult).getEresource(), xmlConsumer);

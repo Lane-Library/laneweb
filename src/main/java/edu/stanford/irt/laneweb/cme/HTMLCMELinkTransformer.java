@@ -10,7 +10,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
  * Transformer to rewrite data when a Model.EMRID or Model.AUTH (hashed userid) value is present. Elements to rewrite
  * include: anchor element href attributes when value is known CME host, input element value attributes when found value
  * is EMRID_REPLACEMENT_STRING
- * 
+ *
  * @author ryanmax
  */
 public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {

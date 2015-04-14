@@ -17,19 +17,23 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
     /**
      * Produce SAX events from a given Eresource to the given XMLConsumer
      */
+    @Override
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(Resource.EMPTY_NS, Resource.SCORE, Resource.SCORE, Resource.CDATA, Integer.toString(eresource.getScore()));
+            atts.addAttribute(Resource.EMPTY_NS, Resource.SCORE, Resource.SCORE, Resource.CDATA,
+                    Integer.toString(eresource.getScore()));
             atts.addAttribute(Resource.EMPTY_NS, Resource.TYPE, Resource.TYPE, Resource.CDATA, "eresource");
             XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESULT, atts);
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.ID, Integer.toString(eresource.getId()));
-            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_ID, Integer.toString(eresource.getRecordId()));
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_ID,
+                    Integer.toString(eresource.getRecordId()));
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_TYPE, eresource.getRecordType());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.TITLE, eresource.getTitle());
             maybeCreateElement(xmlConsumer, "primaryType", eresource.getPrimaryType());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "total", Integer.toString(eresource.getTotal()));
-            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "available", Integer.toString(eresource.getAvailable()));
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "available",
+                    Integer.toString(eresource.getAvailable()));
             maybeCreateElement(xmlConsumer, Resource.DESCRIPTION, eresource.getDescription());
             for (Link link : eresource.getLinks()) {
                 handleLink(xmlConsumer, link);

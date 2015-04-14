@@ -5,11 +5,11 @@ import java.util.List;
 
 public class PagingData implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     private static final int DEFAULT_PAGE_SIZE = 100;
 
     private static final int MAX_PAGE_COUNT = 4;
+
+    private static final long serialVersionUID = 1L;
 
     private String baseQuery = "";
 

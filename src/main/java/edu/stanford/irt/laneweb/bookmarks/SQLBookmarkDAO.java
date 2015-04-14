@@ -40,11 +40,12 @@ public class SQLBookmarkDAO implements BookmarkDAO {
 
     private Logger log;
 
-    public SQLBookmarkDAO(final DataSource dataSource, Logger log) {
+    public SQLBookmarkDAO(final DataSource dataSource, final Logger log) {
         this.dataSource = dataSource;
         this.log = log;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<Object> getLinks(final String userid) {
         Objects.requireNonNull(userid, "null userid");
@@ -73,6 +74,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         return links;
     }
 
+    @Override
     public int getRowCount() {
         Connection conn = null;
         Statement stmt = null;
@@ -95,6 +97,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         return count;
     }
 
+    @Override
     public void saveLinks(final String userid, final List<Object> links) {
         Objects.requireNonNull(userid, "null userid");
         Objects.requireNonNull(links, "null links");

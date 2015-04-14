@@ -48,12 +48,14 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         this.sqlStatements = sqlStatements;
     }
 
+    @Override
     public List<Eresource> getCore(final String type) {
         Collection<String> params = new LinkedList<String>();
         params.add(type);
         return doGet(BROWSE_CORE, params, null);
     }
 
+    @Override
     public List<Eresource> getMesh(final String type, final String mesh) {
         Collection<String> params = new LinkedList<String>();
         params.add(mesh);
@@ -61,12 +63,14 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         return doGet(BROWSE_MESH, params, null);
     }
 
+    @Override
     public List<Eresource> getSubset(final String subset) {
         Collection<String> params = new LinkedList<String>();
         params.add(subset);
         return doGet(BROWSE_SUBSET, params, null);
     }
 
+    @Override
     public List<Eresource> getType(final String type) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
@@ -76,6 +80,7 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         return doGet(BROWSE, params, null);
     }
 
+    @Override
     public List<Eresource> getType(final String type, final char alpha) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
@@ -94,6 +99,7 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         return doGet(sql, params, null);
     }
 
+    @Override
     public List<Eresource> search(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
@@ -103,6 +109,7 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         return doGet(SEARCH, params, query);
     }
 
+    @Override
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         StringBuilder sb = new StringBuilder(this.sqlStatements.getProperty(COUNT));
@@ -141,6 +148,7 @@ public abstract class AbstractCollectionManager implements CollectionManager {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public List<Eresource> searchType(final String type, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);

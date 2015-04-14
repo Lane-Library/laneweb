@@ -18,6 +18,12 @@ public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe impleme
 
     private String emrid;
 
+    @Override
+    public void setModel(final Map<String, Object> model) {
+        this.emrid = ModelUtil.getString(model, Model.EMRID);
+        this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
+    }
+
     protected String getBasePath() {
         return this.basePath;
     }
@@ -28,11 +34,5 @@ public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe impleme
 
     protected boolean isCMEHost(final String link) {
         return link.contains(UTD_HOST);
-    }
-
-    @Override
-    public void setModel(final Map<String, Object> model) {
-        this.emrid = ModelUtil.getString(model, Model.EMRID);
-        this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
     }
 }

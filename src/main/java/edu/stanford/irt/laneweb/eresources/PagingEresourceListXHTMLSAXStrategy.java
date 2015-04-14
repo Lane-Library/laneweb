@@ -24,6 +24,7 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
         this.pagingSaxStrategy = pagingSaxStrategy;
     }
 
+    @Override
     public void toSAX(final PagingEresourceList list, final XMLConsumer xmlConsumer) {
         PagingData pagingData = list.getPagingData();
         int start = pagingData.getStart();

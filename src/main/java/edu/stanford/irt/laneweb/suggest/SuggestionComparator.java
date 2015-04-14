@@ -20,6 +20,7 @@ public class SuggestionComparator implements Comparator<Suggestion>, Serializabl
         this.query = toUpperCaseASCII(query);
     }
 
+    @Override
     public int compare(final Suggestion suggestion1, final Suggestion suggestion2) {
         if (suggestion1 == null || suggestion2 == null) {
             throw new IllegalArgumentException("cannot compare " + suggestion1 + " to " + suggestion2);

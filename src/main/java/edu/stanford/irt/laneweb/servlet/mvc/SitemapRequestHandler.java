@@ -23,6 +23,8 @@ import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 // TODO: use constructor injection for all properties
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
+    private ComponentFactory componentFactory;
+
     private DataBinder dataBinder;
 
     private Set<String> methodsNotAllowed = Collections.emptySet();
@@ -33,15 +35,14 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private Sitemap sitemap;
 
-    private ComponentFactory componentFactory;
-
     private SourceResolver sourceResolver;
-    
-    public SitemapRequestHandler(ComponentFactory componentFactory, SourceResolver sourceResolver) {
+
+    public SitemapRequestHandler(final ComponentFactory componentFactory, final SourceResolver sourceResolver) {
         this.componentFactory = componentFactory;
         this.sourceResolver = sourceResolver;
     }
 
+    @Override
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
         String method = request.getMethod();
@@ -55,7 +56,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         model.put(Model.SITEMAP_URI, sitemapURI);
         model.put(Sitemap.class.getName(), this.sitemap);
         response.setContentType(getContentType(sitemapURI));
-        Pipeline pipeline = this.sitemap.buildPipeline(new SitemapContextImpl(model, this.componentFactory, this.sourceResolver));
+        Pipeline pipeline = this.sitemap.buildPipeline(new SitemapContextImpl(model, this.componentFactory,
+                this.sourceResolver));
         if ("GET".equals(method)) {
             // only process GET requests
             pipeline.process(response.getOutputStream());

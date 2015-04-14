@@ -17,17 +17,17 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class LinkScanGenerator extends AbstractGenerator {
-    
-    private static final int URL = 1;
-    
-    private static final int TYPE = 2;
-    
+
     private static final int ID = 3;
-    
-    private static final int TITLE = 4;
 
     private static final String SQL = "select url, record_type, record_id, title " + "from link, eresource "
             + "where eresource.eresource_id = link.eresource_id";
+
+    private static final int TITLE = 4;
+
+    private static final int TYPE = 2;
+
+    private static final int URL = 1;
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 

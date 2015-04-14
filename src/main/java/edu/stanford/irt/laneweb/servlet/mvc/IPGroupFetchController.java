@@ -26,9 +26,7 @@ public class IPGroupFetchController {
 
     @RequestMapping(value = "/apps/ipGroupFetch", produces = "application/javascript")
     @ResponseBody
-    public String getIPGroup(
-            final HttpServletResponse response,
-            @ModelAttribute(Model.IPGROUP) final IPGroup ipGroup,
+    public String getIPGroup(final HttpServletResponse response, @ModelAttribute(Model.IPGROUP) final IPGroup ipGroup,
             @RequestParam(required = false) final String callback) {
         if (callback == null) {
             return ipGroup.toString();

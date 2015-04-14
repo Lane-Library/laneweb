@@ -12,8 +12,18 @@ public class EresourceSuggestionManager implements SuggestionManager {
 
     private CollectionManager collectionManager;
 
-    public EresourceSuggestionManager(CollectionManager collectionManager) {
+    public EresourceSuggestionManager(final CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
+    }
+
+    @Override
+    public Collection<Suggestion> getSuggestionsForTerm(final String term) {
+        return getSuggestions(this.collectionManager.search(term));
+    }
+
+    @Override
+    public Collection<Suggestion> getSuggestionsForTerm(final String type, final String term) {
+        return getSuggestions(this.collectionManager.searchType(type, term));
     }
 
     private Collection<Suggestion> getSuggestions(final Collection<Eresource> eresources) {
@@ -22,13 +32,5 @@ public class EresourceSuggestionManager implements SuggestionManager {
             suggestions.add(new Suggestion(Integer.toString(eresource.getId()), eresource.getTitle()));
         }
         return suggestions;
-    }
-
-    public Collection<Suggestion> getSuggestionsForTerm(final String term) {
-        return getSuggestions(this.collectionManager.search(term));
-    }
-
-    public Collection<Suggestion> getSuggestionsForTerm(final String type, final String term) {
-        return getSuggestions(this.collectionManager.searchType(type, term));
     }
 }

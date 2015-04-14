@@ -9,6 +9,8 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXStrategy<T> {
 
+    protected static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
+
     private static final String A = "a";
 
     private static final String BODY = "body";
@@ -34,8 +36,6 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
     private static final String TITLE = "title";
 
     private static final String UL = "ul";
-
-    protected static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     protected void createAnchor(final XMLConsumer xmlConsumer, final String href, final String text)
             throws SAXException {

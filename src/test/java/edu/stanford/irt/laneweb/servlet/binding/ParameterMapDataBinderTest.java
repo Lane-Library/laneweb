@@ -35,7 +35,7 @@ public class ParameterMapDataBinderTest {
 
     @Test
     public void testBindEmptyMap() {
-        expect(this.request.getParameterMap()).andReturn(Collections.<String, String[]>emptyMap());
+        expect(this.request.getParameterMap()).andReturn(Collections.<String, String[]> emptyMap());
         replay(this.request);
         this.binder.bind(this.model, this.request);
         verify(this.request);
@@ -44,7 +44,7 @@ public class ParameterMapDataBinderTest {
 
     @Test
     public void testBindNotEmptyMap() {
-        expect(this.request.getParameterMap()).andReturn(Collections.singletonMap("foo", new String[] {"bar"}));
+        expect(this.request.getParameterMap()).andReturn(Collections.singletonMap("foo", new String[] { "bar" }));
         replay(this.request);
         this.binder.bind(this.model, this.request);
         verify(this.request);

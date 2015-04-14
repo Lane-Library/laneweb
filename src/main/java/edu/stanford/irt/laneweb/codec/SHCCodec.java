@@ -48,7 +48,7 @@ public class SHCCodec {
     public String decrypt(final String ciphertext) {
         byte[] ciphertextBytes = Base64.decodeBase64(ciphertext);
         byte[] plaintext = null;
-        synchronized(this.cipher) {
+        synchronized (this.cipher) {
             initializeCipher(Cipher.DECRYPT_MODE);
             plaintext = doFinal(ciphertextBytes);
         }
@@ -58,7 +58,7 @@ public class SHCCodec {
     public synchronized String encrypt(final String plaintext) {
         byte[] plainTextBytes = plaintext.getBytes(StandardCharsets.UTF_8);
         byte[] ciphertext = null;
-        synchronized(this.cipher) {
+        synchronized (this.cipher) {
             initializeCipher(Cipher.ENCRYPT_MODE);
             ciphertext = doFinal(plainTextBytes);
         }

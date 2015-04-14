@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * An abstract implementation of Filter that does the casting to
- * HttpServletRequest and HttpServletResponse so that the subclasses don't have
- * to.
+ * An abstract implementation of Filter that does the casting to HttpServletRequest and HttpServletResponse so that the
+ * subclasses don't have to.
  */
 public abstract class AbstractLanewebFilter implements Filter {
 
@@ -23,8 +22,8 @@ public abstract class AbstractLanewebFilter implements Filter {
     }
 
     @Override
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException,
-            ServletException {
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
+            throws IOException, ServletException {
         internalDoFilter((HttpServletRequest) request, (HttpServletResponse) response, chain);
     }
 

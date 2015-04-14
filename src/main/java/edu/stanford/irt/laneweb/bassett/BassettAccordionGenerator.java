@@ -105,6 +105,7 @@ public class BassettAccordionGenerator extends AbstractGenerator implements Mode
         this.saxStrategy = saxStrategy;
     }
 
+    @Override
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
     }

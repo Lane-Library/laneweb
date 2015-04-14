@@ -40,6 +40,17 @@ public class BibStatusGenerator extends AbstractGenerator implements ParametersA
     }
 
     @Override
+    public void setParameters(final Map<String, String> parameters) {
+        this.bibList = parameters.get("bids");
+        if (this.bibList != null) {
+            this.bibIds = new LinkedList<String>();
+            for (String b : this.bibList.split(",")) {
+                this.bibIds.add(b);
+            }
+        }
+    }
+
+    @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();
@@ -54,17 +65,6 @@ public class BibStatusGenerator extends AbstractGenerator implements ParametersA
             xmlConsumer.endDocument();
         } catch (SAXException | URISyntaxException e) {
             throw new LanewebException(e);
-        }
-    }
-
-    @Override
-    public void setParameters(final Map<String, String> parameters) {
-        this.bibList = parameters.get("bids");
-        if (this.bibList != null) {
-            this.bibIds = new LinkedList<String>();
-            for (String b : this.bibList.split(",")) {
-                this.bibIds.add(b);
-            }
         }
     }
 }

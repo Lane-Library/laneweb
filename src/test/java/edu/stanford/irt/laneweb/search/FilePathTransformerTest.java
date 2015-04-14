@@ -25,8 +25,9 @@ import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class FilePathTransformerTest {
-    
-    private interface CacheableSource extends Cacheable, Source {}
+
+    private interface CacheableSource extends Cacheable, Source {
+    }
 
     private Attributes attributes;
 

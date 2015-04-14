@@ -22,7 +22,7 @@ public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
         try {
             setContentHandler(xmlConsumer);
             // case 79097 processing instructions with joost transformations
-            // nekohtml doesn't send endDTD which confuses joost.  fix by not setting lexicalHandler
+            // nekohtml doesn't send endDTD which confuses joost. fix by not setting lexicalHandler
             InputSource inputSource = new InputSource();
             inputSource.setSystemId(source.getURI());
             inputSource.setByteStream(source.getInputStream());

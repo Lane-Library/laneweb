@@ -8,6 +8,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class RequestMethodDataBinder implements DataBinder {
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String value = request.getQueryString();
         if (value != null) {

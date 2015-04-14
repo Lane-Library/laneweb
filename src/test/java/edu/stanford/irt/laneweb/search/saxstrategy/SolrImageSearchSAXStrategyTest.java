@@ -22,19 +22,20 @@ import edu.stanford.irt.solr.Image;
 
 public class SolrImageSearchSAXStrategyTest {
 
-    private TestXMLConsumer xmlConsumer;
+    private FacetFieldEntry facedFieldEntry;
 
-    private SolrImageSearchSAXStrategy strategy;
+    private Page<FacetFieldEntry> facetEntry;
+
+    private Image image;
 
     private Map<String, Object> model = new HashMap<String, Object>();
 
     private Page<Image> page;
 
-    private Image image;
+    private SolrImageSearchSAXStrategy strategy;
 
-    private Page<FacetFieldEntry> facetEntry;
-    private FacetFieldEntry facedFieldEntry;
-    
+    private TestXMLConsumer xmlConsumer;
+
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
@@ -43,7 +44,7 @@ public class SolrImageSearchSAXStrategyTest {
         this.page = createMock(Page.class);
         this.image = createMock(Image.class);
         this.facetEntry = createMock(Page.class);
-        this .facedFieldEntry = createMock(FacetFieldEntry.class);
+        this.facedFieldEntry = createMock(FacetFieldEntry.class);
     }
 
     @Test
@@ -61,82 +62,18 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getPageUrl()).andReturn("pageUrl").times(2);
         expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
         expect(this.image.getSrc()).andReturn("src").times(4);
-        expect( this.facetEntry.getNumberOfElements()).andReturn(0);
-        expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        expect( this.facedFieldEntry.getValue()).andReturn("Bassett");
-        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(2);
+        expect(this.facetEntry.getNumberOfElements()).andReturn(0);
+        expect(this.facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
+        expect(this.facedFieldEntry.getValue()).andReturn("Bassett");
+        expect(this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(2);
         replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
         this.model.put("path", "/path");
-        this.model.put("page", page);
+        this.model.put("page", this.page);
         this.model.put(Model.SOURCE, "source");
         this.model.put(Model.QUERY, "query");
         this.model.put("websiteIdFacet", this.facetEntry);
         this.strategy.toSAX(this.model, this.xmlConsumer);
         assertEquals(this.xmlConsumer.getExpectedResult(this, "SolrImageSearchSAXStrategyTest-testToSAX.xml"),
-                this.xmlConsumer.getStringValue());
-        verify(this.page, this.image);
-    }
-
-    @Test
-    public void testToSAXNoPagination() throws IOException {
-        expect(this.page.getContent()).andReturn(Collections.singletonList(this.image));
-        expect(this.page.getNumberOfElements()).andReturn(1).times(1);
-        expect(this.page.getNumber()).andReturn(1).times(2);
-        expect(this.page.getSize()).andReturn(0).times(2);
-        expect(this.page.getTotalPages()).andReturn(0).times(2);
-        expect(this.page.getTotalElements()).andReturn(1L).times(1);
-        expect(this.page.hasContent()).andReturn(true).times(1);
-        expect(this.image.getId()).andReturn("id/andSlash").times(7);
-        expect(this.image.getTitle()).andReturn("title");
-        expect(this.image.getCopyrightText()).andReturn("copyrightText").times(2);
-        expect(this.image.getPageUrl()).andReturn("pageUrl").times(2);
-        expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
-        expect(this.image.getSrc()).andReturn("src").times(4);
-        expect( this.facetEntry.getNumberOfElements()).andReturn(1);
-        expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        expect( this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
-        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
-        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
-        this.model.put("page", page);
-        this.model.put(Model.SOURCE, "source");
-        this.model.put(Model.QUERY, "query");
-        this.model.put("websiteIdFacet", this.facetEntry);
-        this.strategy.toSAX(this.model, this.xmlConsumer);
-        assertEquals(
-                this.xmlConsumer.getExpectedResult(this, "SolrImageSearchSAXStrategyTest-testToSAX-nopagination.xml"),
-                this.xmlConsumer.getStringValue());
-        verify(this.page, this.image);
-    }
-
-    @Test
-    public void testToSAXLongTitle() throws IOException {
-        expect(this.page.getContent()).andReturn(Collections.singletonList(this.image));
-        expect(this.page.getNumberOfElements()).andReturn(2);
-        expect(this.page.getNumber()).andReturn(2).times(6);
-        expect(this.page.getSize()).andReturn(52).times(2);
-        expect(this.page.getTotalPages()).andReturn(15).times(6);
-        expect(this.page.getTotalElements()).andReturn(106L);
-        expect(this.page.hasContent()).andReturn(true);
-        expect(this.image.getTitle()).andReturn(
-                "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
-        expect(this.image.getPageUrl()).andReturn("pageUrl").times(2);
-        expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
-        expect(this.image.getSrc()).andReturn("src").times(4);
-        expect(this.image.getId()).andReturn("id/andSlash").times(7);
-        expect(this.image.getCopyrightText()).andReturn("copyrightText").times(2);
-        expect( this.facetEntry.getNumberOfElements()).andReturn(1);
-        expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        expect( this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
-        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
-        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
-        this.model.put("path", "/path");
-        this.model.put("page", page);
-        this.model.put(Model.SOURCE, "source");
-        this.model.put(Model.QUERY, "query");
-        this.model.put("websiteIdFacet", this.facetEntry);
-        this.strategy.toSAX(this.model, this.xmlConsumer);
-        assertEquals(
-                this.xmlConsumer.getExpectedResult(this, "SolrImageSearchSAXStrategyTest-testToSAX-longTitle.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.page, this.image);
     }
@@ -155,14 +92,14 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getCopyrightText()).andReturn("copyrightText").times(2);
         expect(this.image.getPageUrl()).andReturn("pageUrl").times(2);
         expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
-        expect(this.image.getSrc()).andReturn("src").times(4);  
-        expect( this.facetEntry.getNumberOfElements()).andReturn(1);
-        expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        expect( this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
-        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
+        expect(this.image.getSrc()).andReturn("src").times(4);
+        expect(this.facetEntry.getNumberOfElements()).andReturn(1);
+        expect(this.facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
+        expect(this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
+        expect(this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
         replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
         this.model.put("path", "/path");
-        this.model.put("page", page);
+        this.model.put("page", this.page);
         this.model.put(Model.SOURCE, "source");
         this.model.put(Model.QUERY, "query");
         this.model.put("websiteIdFacet", this.facetEntry);
@@ -187,21 +124,83 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getCopyrightText()).andReturn("copyrightText").times(2);
         expect(this.image.getPageUrl()).andReturn("pageUrl").times(2);
         expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
-        expect(this.image.getSrc()).andReturn("src").times(4);  expect( this.facetEntry.getNumberOfElements()).andReturn(0);
-        expect(facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
-        expect( this.facedFieldEntry.getValue()).andReturn("Bassett");
-        expect( this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(2);
+        expect(this.image.getSrc()).andReturn("src").times(4);
+        expect(this.facetEntry.getNumberOfElements()).andReturn(0);
+        expect(this.facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
+        expect(this.facedFieldEntry.getValue()).andReturn("Bassett");
+        expect(this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(2);
         replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
-
         this.model.put("path", "/path");
-        this.model.put("page", page);
+        this.model.put("page", this.page);
         this.model.put(Model.SOURCE, "source");
         this.model.put(Model.QUERY, "query");
         this.model.put("websiteIdFacet", this.facetEntry);
-        
         this.strategy.toSAX(this.model, this.xmlConsumer);
-       
         assertEquals(this.xmlConsumer.getExpectedResult(this, "SolrImageSearchSAXStrategyTest-testToSAX-lastPage.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.page, this.image);
+    }
+
+    @Test
+    public void testToSAXLongTitle() throws IOException {
+        expect(this.page.getContent()).andReturn(Collections.singletonList(this.image));
+        expect(this.page.getNumberOfElements()).andReturn(2);
+        expect(this.page.getNumber()).andReturn(2).times(6);
+        expect(this.page.getSize()).andReturn(52).times(2);
+        expect(this.page.getTotalPages()).andReturn(15).times(6);
+        expect(this.page.getTotalElements()).andReturn(106L);
+        expect(this.page.hasContent()).andReturn(true);
+        expect(this.image.getTitle()).andReturn(
+                "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+        expect(this.image.getPageUrl()).andReturn("pageUrl").times(2);
+        expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
+        expect(this.image.getSrc()).andReturn("src").times(4);
+        expect(this.image.getId()).andReturn("id/andSlash").times(7);
+        expect(this.image.getCopyrightText()).andReturn("copyrightText").times(2);
+        expect(this.facetEntry.getNumberOfElements()).andReturn(1);
+        expect(this.facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
+        expect(this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
+        expect(this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
+        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
+        this.model.put("path", "/path");
+        this.model.put("page", this.page);
+        this.model.put(Model.SOURCE, "source");
+        this.model.put(Model.QUERY, "query");
+        this.model.put("websiteIdFacet", this.facetEntry);
+        this.strategy.toSAX(this.model, this.xmlConsumer);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "SolrImageSearchSAXStrategyTest-testToSAX-longTitle.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.page, this.image);
+    }
+
+    @Test
+    public void testToSAXNoPagination() throws IOException {
+        expect(this.page.getContent()).andReturn(Collections.singletonList(this.image));
+        expect(this.page.getNumberOfElements()).andReturn(1).times(1);
+        expect(this.page.getNumber()).andReturn(1).times(2);
+        expect(this.page.getSize()).andReturn(0).times(2);
+        expect(this.page.getTotalPages()).andReturn(0).times(2);
+        expect(this.page.getTotalElements()).andReturn(1L).times(1);
+        expect(this.page.hasContent()).andReturn(true).times(1);
+        expect(this.image.getId()).andReturn("id/andSlash").times(7);
+        expect(this.image.getTitle()).andReturn("title");
+        expect(this.image.getCopyrightText()).andReturn("copyrightText").times(2);
+        expect(this.image.getPageUrl()).andReturn("pageUrl").times(2);
+        expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
+        expect(this.image.getSrc()).andReturn("src").times(4);
+        expect(this.facetEntry.getNumberOfElements()).andReturn(1);
+        expect(this.facetEntry.getContent()).andReturn(Collections.singletonList(this.facedFieldEntry));
+        expect(this.facedFieldEntry.getValue()).andReturn("Bassett").times(4);
+        expect(this.facedFieldEntry.getValueCount()).andReturn((long) 2).times(4);
+        replay(this.page, this.image, this.facetEntry, this.facedFieldEntry);
+        this.model.put("page", this.page);
+        this.model.put(Model.SOURCE, "source");
+        this.model.put(Model.QUERY, "query");
+        this.model.put("websiteIdFacet", this.facetEntry);
+        this.strategy.toSAX(this.model, this.xmlConsumer);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "SolrImageSearchSAXStrategyTest-testToSAX-nopagination.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.page, this.image);
     }

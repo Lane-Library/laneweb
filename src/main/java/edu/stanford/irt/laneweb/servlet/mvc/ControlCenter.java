@@ -17,7 +17,7 @@ import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
-@RequestMapping(value="/control-center")
+@RequestMapping(value = "/control-center")
 public class ControlCenter {
 
     private ApplicationContext context;
@@ -39,14 +39,6 @@ public class ControlCenter {
         return ip;
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/email/spamIP")
-    @ResponseBody
-    public boolean removeSpamIP(@RequestParam final String ip,
-            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
-        checkAccess(userid);
-        return this.context.getBean(EMailSender.class).removeSpamIP(ip);
-    }
-
     @RequestMapping(method = RequestMethod.PUT, value = "/email/spamReferrer")
     @ResponseBody
     public String addSpamReferrer(@RequestParam final String referrer,
@@ -55,7 +47,15 @@ public class ControlCenter {
         this.context.getBean(EMailSender.class).addSpamReferrer(referrer);
         return referrer;
     }
-    
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/email/spamIP")
+    @ResponseBody
+    public boolean removeSpamIP(@RequestParam final String ip,
+            @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
+        checkAccess(userid);
+        return this.context.getBean(EMailSender.class).removeSpamIP(ip);
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/email/spamReferrer")
     @ResponseBody
     public boolean removeSpamReferrer(@RequestParam final String referrer,
@@ -63,7 +63,7 @@ public class ControlCenter {
         checkAccess(userid);
         return this.context.getBean(EMailSender.class).removeSpamReferrer(referrer);
     }
-    
+
     @ModelAttribute
     protected void getParameters(final HttpServletRequest request, final Model model) {
         this.userBinder.bind(model.asMap(), request);

@@ -47,7 +47,7 @@ public class JSONBookmarkControllerTest {
 
     @Test
     public void testAddBookmark() {
-        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Collections.<Object>singletonList(this.bookmark)));
+        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Collections.<Object> singletonList(this.bookmark)));
         replay(this.bookmarkDAO);
         this.controller.addBookmark(this.bookmarks, this.userid, this.bookmark);
         verify(this.bookmarkDAO);
@@ -166,7 +166,8 @@ public class JSONBookmarkControllerTest {
         json.put("label", "newlabel");
         json.put("url", "newurl");
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Collections.<Object>singletonList(new Bookmark("newlabel", "newurl"))));
+        this.bookmarkDAO.saveLinks(eq(this.userid),
+                eq(Collections.<Object> singletonList(new Bookmark("newlabel", "newurl"))));
         replay(this.bookmarkDAO);
         this.controller.saveBookmark(this.bookmarks, this.userid, json);
         verify(this.bookmarkDAO);

@@ -24,7 +24,7 @@ public class TodaysHours {
     private final SimpleDateFormat todaysDateFormat = new SimpleDateFormat("MMM d");
 
     private final SimpleDateFormat todaysDayFormat = new SimpleDateFormat("EEEE");
-    
+
     public TodaysHours(final File hoursFile) {
         this.hoursFile = hoursFile;
     }

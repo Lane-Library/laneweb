@@ -32,8 +32,8 @@ public class JSONBookmarkController extends BookmarkController {
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
     @Autowired
-    public JSONBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            UserDataBinder userDataBinder, RemoteProxyIPDataBinder proxyLinksDataBinder) {
+    public JSONBookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+            final UserDataBinder userDataBinder, final RemoteProxyIPDataBinder proxyLinksDataBinder) {
         super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
         this.proxyLinksDataBinder = proxyLinksDataBinder;
     }
@@ -52,8 +52,7 @@ public class JSONBookmarkController extends BookmarkController {
 
     @RequestMapping(method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteBookmark(
-            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
+    public void deleteBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final String indexes) {
         // convert json array to an int[]
@@ -75,8 +74,7 @@ public class JSONBookmarkController extends BookmarkController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Bookmark getBookmark(
-            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
+    public Bookmark getBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.PROXY_LINKS) final Boolean proxyLinks,
             @RequestParam final int i) {
         // TODO: extend Bookmark or create a map to add the proxylink url
@@ -85,8 +83,7 @@ public class JSONBookmarkController extends BookmarkController {
 
     @RequestMapping(value = "/move", method = RequestMethod.POST, consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
-    public void moveBookmark(
-            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
+    public void moveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestBody final Map<String, Integer> json) {
         int to = json.get("to").intValue();
@@ -99,8 +96,7 @@ public class JSONBookmarkController extends BookmarkController {
 
     @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
-    public void saveBookmark(
-            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
+    public void saveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestBody final Map<String, Object> json) {
         Bookmark bookmark = new Bookmark((String) json.get("label"), (String) json.get("url"));

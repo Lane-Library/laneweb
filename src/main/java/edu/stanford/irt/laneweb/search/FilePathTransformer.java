@@ -65,7 +65,7 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
                 throw new LanewebException(e);
             }
             if (source instanceof Cacheable) {
-                this.validity.add(((Cacheable)source).getValidity());
+                this.validity.add(((Cacheable) source).getValidity());
             } else {
                 this.validity.add(null);
             }

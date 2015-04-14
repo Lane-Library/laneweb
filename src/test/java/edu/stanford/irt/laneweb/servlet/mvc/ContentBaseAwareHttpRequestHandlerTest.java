@@ -48,7 +48,7 @@ public class ContentBaseAwareHttpRequestHandlerTest {
     @Test
     public void testGetResourceNotExists() throws IOException {
         expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("path")
-                .times(2);
+        .times(2);
         expect(this.resource.createRelative("path")).andReturn(this.resource).times(2);
         expect(this.resource.exists()).andReturn(false);
         expect(this.resource.exists()).andReturn(true);
@@ -62,7 +62,7 @@ public class ContentBaseAwareHttpRequestHandlerTest {
     @Test(expected = ResourceNotFoundException.class)
     public void testGetResourceNotFound() throws IOException {
         expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("path")
-                .times(2);
+        .times(2);
         expect(this.resource.createRelative("path")).andReturn(this.resource).times(2);
         expect(this.resource.exists()).andReturn(false);
         expect(this.resource.exists()).andReturn(false);
@@ -74,7 +74,7 @@ public class ContentBaseAwareHttpRequestHandlerTest {
     @Test
     public void testGetResourceNotReadable() throws IOException {
         expect(this.request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).andReturn("path")
-                .times(2);
+        .times(2);
         expect(this.resource.createRelative("path")).andReturn(this.resource).times(2);
         expect(this.resource.exists()).andReturn(true);
         expect(this.resource.isReadable()).andReturn(false);

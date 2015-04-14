@@ -16,6 +16,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
 
         boolean createGetPassword = false;
 
+        private EresourceBuilder builder;
+
         private int currentEresourceId = -1;
 
         private int currentLinkId = -1;
@@ -33,8 +35,6 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
         private ResultSet rs;
 
         private ScoreStrategy scoreStrategy;
-        
-        private EresourceBuilder builder;
 
         public ResultSetHandler(final ResultSet resultSet, final String query, final ScoreStrategy scoreStrategy) {
             this.rs = resultSet;
@@ -69,25 +69,6 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
             return this.eresources;
         }
 
-        private EresourceBuilder newEresourceBuilder(final String title, final int resourceId, final int recordId, final String recordType)
-                throws SQLException {
-            if (this.builder != null) {
-                this.eresources.add(this.builder.build());
-            }
-            this.currentTitle = title;
-            int score = this.query == null ? 0 : this.scoreStrategy
-                    .computeScore(this.query, this.currentTitle, this.rs);
-            this.builder = Eresource.builder();
-            this.currentEresourceId = resourceId;
-            this.currentVersionId = -1;
-            this.currentLinkId = -1;
-            this.isFirstLink = true;
-            return Eresource.builder().description(this.rs.getString("DESCRIPTION")).id(resourceId)
-                    .recordId(recordId).recordType(recordType).score(score).title(this.currentTitle)
-                    .primaryType(this.rs.getString("PRIMARY_TYPE")).total(this.rs.getInt("TOTAL"))
-                    .available(this.rs.getInt("AVAILABLE"));
-        }
-
         private void addLink(final String title, final int linkId) throws SQLException {
             // determine the link type from the label
             String label = this.rs.getString("LABEL");
@@ -107,6 +88,25 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                     .getString("PUBLISHER"), this.rs.getString("HOLDINGS_DATES")));
             this.currentLinkId = linkId;
             this.isFirstLink = false;
+        }
+
+        private EresourceBuilder newEresourceBuilder(final String title, final int resourceId, final int recordId,
+                final String recordType) throws SQLException {
+            if (this.builder != null) {
+                this.eresources.add(this.builder.build());
+            }
+            this.currentTitle = title;
+            int score = this.query == null ? 0 : this.scoreStrategy
+                    .computeScore(this.query, this.currentTitle, this.rs);
+            this.builder = Eresource.builder();
+            this.currentEresourceId = resourceId;
+            this.currentVersionId = -1;
+            this.currentLinkId = -1;
+            this.isFirstLink = true;
+            return Eresource.builder().description(this.rs.getString("DESCRIPTION")).id(resourceId).recordId(recordId)
+                    .recordType(recordType).score(score).title(this.currentTitle)
+                    .primaryType(this.rs.getString("PRIMARY_TYPE")).total(this.rs.getInt("TOTAL"))
+                    .available(this.rs.getInt("AVAILABLE"));
         }
     }
 

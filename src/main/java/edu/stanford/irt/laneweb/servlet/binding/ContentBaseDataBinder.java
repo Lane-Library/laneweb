@@ -19,6 +19,7 @@ public class ContentBaseDataBinder implements DataBinder {
         this.contentBase = contentBase;
     }
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         model.put(Model.CONTENT_BASE, this.contentBase);
     }

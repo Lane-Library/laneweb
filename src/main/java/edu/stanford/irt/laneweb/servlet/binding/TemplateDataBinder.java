@@ -15,6 +15,7 @@ public class TemplateDataBinder implements DataBinder {
         this.templateChooser = templateChooser;
     }
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         if (ModelUtil.getObject(model, Model.DEBUG, Boolean.class, Boolean.FALSE)) {
             // use the debug template if debug mode is on.

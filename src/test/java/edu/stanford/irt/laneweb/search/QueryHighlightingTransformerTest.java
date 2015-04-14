@@ -41,7 +41,8 @@ public class QueryHighlightingTransformerTest {
         this.model.put(Model.QUERY, "query");
         this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(21));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD),
+                isA(Attributes.class));
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(5));
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD));
         this.xmlConsumer.characters(isA(char[].class), eq(26), eq(13));

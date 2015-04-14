@@ -23,14 +23,13 @@ public class HTMLBookmarkController extends BookmarkController {
     private String redirectURI = "redirect:/favorites.html";
 
     @Autowired
-    public HTMLBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            UserDataBinder userDataBinder) {
+    public HTMLBookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+            final UserDataBinder userDataBinder) {
         super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
     }
 
     @RequestMapping(params = "action=add")
-    public String addBookmark(
-            final RedirectAttributes redirectAttrs,
+    public String addBookmark(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid) {
         bookmarks.add(0, new Bookmark("", ""));
@@ -44,8 +43,7 @@ public class HTMLBookmarkController extends BookmarkController {
     }
 
     @RequestMapping(params = "action=delete")
-    public String deleteBookmark(
-            final RedirectAttributes redirectAttrs,
+    public String deleteBookmark(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final int i) {
@@ -62,8 +60,7 @@ public class HTMLBookmarkController extends BookmarkController {
     }
 
     @RequestMapping(params = "action=save")
-    public String saveBookmark(
-            final RedirectAttributes redirectAttrs,
+    public String saveBookmark(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final int i,

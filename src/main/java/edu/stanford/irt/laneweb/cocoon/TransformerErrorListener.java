@@ -9,21 +9,24 @@ import org.slf4j.Logger;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class TransformerErrorListener implements ErrorListener {
-    
+
     private Logger log;
-    
-    public TransformerErrorListener(Logger log) {
+
+    public TransformerErrorListener(final Logger log) {
         this.log = log;
     }
 
+    @Override
     public void error(final TransformerException te) {
         throw new LanewebException(getMessage(te), te);
     }
 
+    @Override
     public void fatalError(final TransformerException te) {
         throw new LanewebException(getMessage(te), te);
     }
 
+    @Override
     public void warning(final TransformerException te) {
         this.log.warn(getMessage(te));
     }
@@ -33,7 +36,8 @@ public class TransformerErrorListener implements ErrorListener {
         SourceLocator locator = te.getLocator();
         if (locator != null) {
             sb.append(" publicId: ").append(locator.getPublicId()).append(" systemId: ").append(locator.getSystemId())
-                    .append(" line: ").append(locator.getLineNumber()).append(" column: ").append(locator.getColumnNumber());
+                    .append(" line: ").append(locator.getLineNumber()).append(" column: ")
+                    .append(locator.getColumnNumber());
         }
         return sb.toString();
     }

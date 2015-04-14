@@ -18,14 +18,17 @@ public class DescribeGenerator extends AbstractMetasearchGenerator<Result> imple
         super(metaSearchManager, saxStrategy);
     }
 
+    @Override
     public Serializable getKey() {
         return TYPE;
     }
 
+    @Override
     public String getType() {
         return TYPE;
     }
 
+    @Override
     public Validity getValidity() {
         return AlwaysValid.SHARED_INSTANCE;
     }

@@ -8,25 +8,25 @@ public class Eresource {
 
     public static class EresourceBuilder {
 
-        private int total;
-
-        private String title;
-
-        private int score;
-
-        private String recordType;
-
-        private int recordId;
-
-        private String primaryType;
-
-        private int id;
+        private int available;
 
         private String description;
 
-        private int available;
+        private int id;
 
         private List<Link> links = new ArrayList<Link>();
+
+        private String primaryType;
+
+        private int recordId;
+
+        private String recordType;
+
+        private int score;
+
+        private String title;
+
+        private int total;
 
         public EresourceBuilder addLink(final Link link) {
             this.links.add(link);
@@ -102,8 +102,6 @@ public class Eresource {
     private String title;
 
     private int total;
-    
-    protected Eresource() {}
 
     public Eresource(final EresourceBuilder builder) {
         this.description = builder.description;
@@ -116,6 +114,9 @@ public class Eresource {
         this.primaryType = builder.primaryType;
         this.total = builder.total;
         this.available = builder.available;
+    }
+
+    protected Eresource() {
     }
 
     public static EresourceBuilder builder() {

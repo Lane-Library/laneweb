@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.servlet.binding;
 
 public class BooleanSessionParameterDataBinder extends SessionParameterDataBinder<Boolean> {
 
-    public BooleanSessionParameterDataBinder(String modelKey, String parameterName) {
+    public BooleanSessionParameterDataBinder(final String modelKey, final String parameterName) {
         super(modelKey, parameterName);
     }
 

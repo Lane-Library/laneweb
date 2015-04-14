@@ -43,6 +43,7 @@ public class BassettImageListSAXStrategy implements SAXStrategy<List<BassettImag
 
     private static final String TITLE = "title";
 
+    @Override
     public void toSAX(final List<BassettImage> bassetts, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();

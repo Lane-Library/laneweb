@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * This class contains the logic to determine which template is used. The
- * highest priority is given to the template request parameter. Next priority is
- * a Map with regular expressions matching request URIs as the key with the
+ * This class contains the logic to determine which template is used. The highest priority is given to the template
+ * request parameter. Next priority is a Map with regular expressions matching request URIs as the key with the
  * associated template as the value. Finally, default value is provided.
  */
 public class TemplateChooser {
@@ -30,7 +29,8 @@ public class TemplateChooser {
     /** a Map of regular expressions associated with templates */
     private Map<String, String> templateMap = Collections.emptyMap();
 
-    public TemplateChooser(final String defaultTemplate, final List<String> existingTemplates, final Map<String, String> templateMap) {
+    public TemplateChooser(final String defaultTemplate, final List<String> existingTemplates,
+            final Map<String, String> templateMap) {
         if (null == defaultTemplate) {
             throw new IllegalArgumentException("null defaultTemplate");
         }

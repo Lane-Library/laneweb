@@ -20,6 +20,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
         this.log = log;
     }
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {

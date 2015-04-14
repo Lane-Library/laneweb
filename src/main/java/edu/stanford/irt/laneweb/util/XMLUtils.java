@@ -25,6 +25,9 @@ public final class XMLUtils {
      */
     public static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
+    private XMLUtils() {
+    }
+
     public static void createElement(final XMLConsumer xmlConsumer, final String ns, final String name,
             final AttributesImpl atts, final String text) throws SAXException {
         startElement(xmlConsumer, ns, name, atts);
@@ -122,8 +125,5 @@ public final class XMLUtils {
     public static void startElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName,
             final Attributes atts) throws SAXException {
         xmlConsumer.startElement(namespaceURI, localName, localName, atts);
-    }
-
-    private XMLUtils() {
     }
 }

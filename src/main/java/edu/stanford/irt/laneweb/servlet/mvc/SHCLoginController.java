@@ -46,15 +46,17 @@ public class SHCLoginController {
     private final Logger log;
 
     @Autowired
-    public SHCLoginController(final SHCCodec codec, final LDAPDataAccess ldapDataAccess, @Qualifier(value="org.slf4j.Logger/SHCLoginController") final Logger log) {
+    public SHCLoginController(final SHCCodec codec, final LDAPDataAccess ldapDataAccess,
+            @Qualifier(value = "org.slf4j.Logger/SHCLoginController") final Logger log) {
         this.codec = codec;
         this.ldapDataAccess = ldapDataAccess;
         this.log = log;
     }
 
     @RequestMapping(value = "/shclogin")
-    public void login(@RequestParam final String emrid, @RequestParam final String univid, @RequestParam final String ts,
-            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+    public void login(@RequestParam final String emrid, @RequestParam final String univid,
+            @RequestParam final String ts, final HttpServletRequest request, final HttpServletResponse response)
+            throws IOException {
         StringBuilder errorMsg = new StringBuilder();
         StringBuilder url = new StringBuilder(TARGET_URL);
         url.append(URLEncoder.encode(emrid, "UTF-8"));

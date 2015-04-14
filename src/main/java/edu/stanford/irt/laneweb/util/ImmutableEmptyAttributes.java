@@ -6,7 +6,8 @@ import org.xml.sax.helpers.AttributesImpl;
 public class ImmutableEmptyAttributes extends AttributesImpl {
 
     @Override
-    public void addAttribute(final String uri, final String localName, final String qName, final String type, final String value) {
+    public void addAttribute(final String uri, final String localName, final String qName, final String type,
+            final String value) {
         throw new UnsupportedOperationException();
     }
 
@@ -21,8 +22,8 @@ public class ImmutableEmptyAttributes extends AttributesImpl {
     }
 
     @Override
-    public void setAttribute(final int index, final String uri, final String localName, final String qName, final String type,
-            final String value) {
+    public void setAttribute(final int index, final String uri, final String localName, final String qName,
+            final String type, final String value) {
         throw new UnsupportedOperationException();
     }
 

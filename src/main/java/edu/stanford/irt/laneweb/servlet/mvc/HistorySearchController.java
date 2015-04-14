@@ -30,7 +30,7 @@ public class HistorySearchController {
     private static final String ENGINES = "wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006";
 
     private static final int ONE_MINUTE = 60000;
-    
+
     private CompositeDataBinder dataBinder;
 
     private Collection<String> engines;
@@ -59,7 +59,7 @@ public class HistorySearchController {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         SearchStatus status;
         Collection<Result> children;
-        synchronized(result) {
+        synchronized (result) {
             status = result.getStatus();
             children = result.getChildren();
         }
@@ -93,7 +93,7 @@ public class HistorySearchController {
         Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
         Collection<Result> resources;
         for (Result engine : children) {
-            synchronized(engine) {
+            synchronized (engine) {
                 resources = engine.getChildren();
             }
             for (Result resource : resources) {

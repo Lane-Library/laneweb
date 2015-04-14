@@ -88,7 +88,7 @@ public class BookmarkTest {
 
     @Test
     public void testHashCode() {
-        assertEquals(Arrays.hashCode(new String[] {this.label, this.url}), this.bookmark.hashCode());
+        assertEquals(Arrays.hashCode(new String[] { this.label, this.url }), this.bookmark.hashCode());
     }
 
     @Test

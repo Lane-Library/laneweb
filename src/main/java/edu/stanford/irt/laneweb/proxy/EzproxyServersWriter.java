@@ -31,7 +31,7 @@ public class EzproxyServersWriter {
     }
 
     private DataSource dataSource;
-    
+
     private String sql;
 
     public EzproxyServersWriter(final DataSource dataSource, final Properties sql) {

@@ -16,6 +16,7 @@ public class EresourceSearchResult extends AbstractSearchResult {
         this.eresource = eresource;
     }
 
+    @Override
     public int compareTo(final SearchResult other) {
         int scoreCmp = other.getScore() - getScore();
         if (scoreCmp == 0) {

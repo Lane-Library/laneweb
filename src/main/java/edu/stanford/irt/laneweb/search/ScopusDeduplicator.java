@@ -7,7 +7,7 @@ import java.util.List;
 public class ScopusDeduplicator {
 
     public void removeDuplicates(final Collection<ContentResultSearchResult> searchResults) {
-        //create a list of scopus results
+        // create a list of scopus results
         List<ContentResultSearchResult> scopusResults = new LinkedList<ContentResultSearchResult>();
         for (ContentResultSearchResult searchResult : searchResults) {
             if ("scopus".equals(searchResult.getResourceResult().getId())) {

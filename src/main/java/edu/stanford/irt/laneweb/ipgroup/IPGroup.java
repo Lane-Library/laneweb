@@ -227,14 +227,14 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("171.64.0.0/14", SU));
     }
 
-    public static IPGroup getGroupForIP(final String ip) {
-        return ROOT.getIPGroup(ip);
-    }
-
     private String stringValue;
 
     private IPGroup(final String stringValue) {
         this.stringValue = stringValue;
+    }
+
+    public static IPGroup getGroupForIP(final String ip) {
+        return ROOT.getIPGroup(ip);
     }
 
     @Override

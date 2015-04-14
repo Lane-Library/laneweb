@@ -12,10 +12,13 @@ import edu.stanford.irt.laneweb.LanewebException;
  */
 public abstract class JdbcUtils {
 
+    private JdbcUtils() {
+    }
+
     /**
-     * Close the given JDBC Connection and ignore any thrown SQLException. This
-     * is useful for typical finally blocks in manual JDBC code.
-     * 
+     * Close the given JDBC Connection and ignore any thrown SQLException. This is useful for typical finally blocks in
+     * manual JDBC code.
+     *
      * @param con
      *            the JDBC Connection to close (may be <code>null</code>)
      */
@@ -30,9 +33,9 @@ public abstract class JdbcUtils {
     }
 
     /**
-     * Close the given JDBC ResultSet and ignore any thrown SQLException. This
-     * is useful for typical finally blocks in manual JDBC code.
-     * 
+     * Close the given JDBC ResultSet and ignore any thrown SQLException. This is useful for typical finally blocks in
+     * manual JDBC code.
+     *
      * @param rs
      *            the JDBC ResultSet to close (may be <code>null</code>)
      */
@@ -47,9 +50,9 @@ public abstract class JdbcUtils {
     }
 
     /**
-     * Close the given JDBC Statement and ignore any thrown SQLException. This
-     * is useful for typical finally blocks in manual JDBC code.
-     * 
+     * Close the given JDBC Statement and ignore any thrown SQLException. This is useful for typical finally blocks in
+     * manual JDBC code.
+     *
      * @param stmt
      *            the JDBC Statement to close (may be <code>null</code>)
      */
@@ -61,8 +64,5 @@ public abstract class JdbcUtils {
                 throw new LanewebException(e);
             }
         }
-    }
-
-    private JdbcUtils() {
     }
 }

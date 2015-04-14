@@ -15,6 +15,7 @@ public class BookmarkDataBinder implements DataBinder {
 
     private BookmarkDAO bookmarkDAO;
 
+    @Override
     @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String userid = ModelUtil.getString(model, Model.USER_ID);

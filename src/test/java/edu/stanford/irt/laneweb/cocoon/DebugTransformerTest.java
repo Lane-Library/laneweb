@@ -15,7 +15,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 
-
 public class DebugTransformerTest {
 
     private XMLConsumer consumer;
