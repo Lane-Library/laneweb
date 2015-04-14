@@ -39,7 +39,7 @@ public class SearchImageFilter  extends AbstractLanewebFilter{
 	 protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain) throws IOException, ServletException {
 		String sourceOri = request.getParameter("source");
 		String auto = request.getParameter("auto");
-		if (sourceOri.indexOf("images-all") > -1 && !"no".equals(auto)){
+		if (sourceOri != null && sourceOri.indexOf("images-all") > -1 && !"no".equals(auto)){
 			String query = request.getParameter("q");
 			Map<String, Long> copyrighToValue = getTabValuesFromSolr(query);
 			Object[] keys = copyrighToValue.keySet().toArray();
