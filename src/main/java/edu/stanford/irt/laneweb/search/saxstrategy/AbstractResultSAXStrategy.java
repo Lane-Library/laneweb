@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -42,17 +39,10 @@ public abstract class AbstractResultSAXStrategy<R extends Result> implements SAX
     /** the String 'message'. */
     private static final String MESSAGE = "message";
 
-    /** the String 'stacktrace'. */
-    private static final String STACKTRACE = "stacktrace";
-
     protected void doToSAXException(final XMLConsumer xmlConsumer, final Exception exception) throws SAXException {
         if (exception != null) {
             xmlConsumer.startElement(NAMESPACE, EXCEPTION, EXCEPTION, XMLUtils.EMPTY_ATTRIBUTES);
             handleElement(xmlConsumer, MESSAGE, exception.getMessage());
-            StringWriter sw = new StringWriter();
-            PrintWriter writer = new PrintWriter(sw);
-            exception.printStackTrace(writer);
-            handleElement(xmlConsumer, STACKTRACE, sw.toString());
             xmlConsumer.endElement(NAMESPACE, EXCEPTION, EXCEPTION);
         }
     }
