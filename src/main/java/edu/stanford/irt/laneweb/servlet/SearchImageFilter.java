@@ -60,7 +60,7 @@ public class SearchImageFilter extends AbstractLanewebFilter {
             Object[] keys = copyrighToValue.keySet().toArray();
             Arrays.sort(keys);
             if (copyrighToValue.get(this.copyrightMapping.get(sourceOri)) == null && copyrighToValue.size() > 0) {
-                String source = null;
+                String source = "";
                 if ("0".equals(keys[0])) {
                     source = "images-all";
                 } else if ("10".equals(keys[0])) {
