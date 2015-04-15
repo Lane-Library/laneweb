@@ -34,6 +34,7 @@ public class RequestAttributeUserFactory implements UserFactory {
         this.log = log;
     }
 
+    @Override
     public User createUser(final HttpServletRequest request) {
         User user = null;
         String remoteUser = request.getRemoteUser();

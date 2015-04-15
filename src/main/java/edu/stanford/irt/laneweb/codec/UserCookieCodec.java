@@ -17,7 +17,7 @@ import org.apache.commons.codec.binary.Base64;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.user.User;
 
-//TODO: remove code duplicated with SHCCodec
+// TODO: remove code duplicated with SHCCodec
 public class UserCookieCodec {
 
     private static final String COOKIE_VALUE_SEPARATOR = "%";
@@ -65,7 +65,8 @@ public class UserCookieCodec {
             throw new LanewebException("invalid encryptedValue");
         }
         try {
-            return new PersistentLoginToken(new User(values[0], values[1], values[2], userIdHashKey), Long.parseLong(values[3]), Integer.parseInt(values[4]), encryptedValue);
+            return new PersistentLoginToken(new User(values[0], values[1], values[2], userIdHashKey),
+                    Long.parseLong(values[3]), Integer.parseInt(values[4]), encryptedValue);
         } catch (NumberFormatException e) {
             throw new LanewebException("invalid encryptedValue", e);
         }

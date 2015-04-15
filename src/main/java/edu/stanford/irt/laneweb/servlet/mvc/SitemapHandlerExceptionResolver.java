@@ -28,6 +28,7 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
         this.log = log;
     }
 
+    @Override
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
         if (ex instanceof ResourceNotFoundException) {

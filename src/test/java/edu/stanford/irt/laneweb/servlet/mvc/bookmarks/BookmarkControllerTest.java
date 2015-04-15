@@ -46,8 +46,7 @@ public class BookmarkControllerTest {
         this.bookmarkDAO = createMock(BookmarkDAO.class);
         this.bookmarkDataBinder = createMock(BookmarkDataBinder.class);
         this.userDataBinder = createMock(UserDataBinder.class);
-        this.controller = new TestBookmarkController(this.bookmarkDAO, this.bookmarkDataBinder,
-                this.userDataBinder);
+        this.controller = new TestBookmarkController(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder);
         this.request = createMock(HttpServletRequest.class);
         this.model = createMock(Model.class);
     }

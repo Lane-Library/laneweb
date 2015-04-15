@@ -38,14 +38,10 @@ public class CMERedirectController {
     }
 
     @RequestMapping(value = "redirect/cme")
-    public void cmeRedirect(
-            @ModelAttribute(Model.AUTH) final String userHash,
-            @ModelAttribute(Model.BASE_PATH) final String basePath,
-            @ModelAttribute(Model.EMRID) final String emrid,
-            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks,
-            @RequestParam final String url,
-            final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException {
+    public void cmeRedirect(@ModelAttribute(Model.AUTH) final String userHash,
+            @ModelAttribute(Model.BASE_PATH) final String basePath, @ModelAttribute(Model.EMRID) final String emrid,
+            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks, @RequestParam final String url,
+            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         if (emrid == null && userHash == null) {
             response.sendRedirect(basePath + "/secure/redirect/cme?url=" + url);
         } else {
@@ -54,8 +50,7 @@ public class CMERedirectController {
     }
 
     @RequestMapping(value = "secure/redirect/cme")
-    public void cmeSecureRedirect(
-            @ModelAttribute(Model.AUTH) final String userHash,
+    public void cmeSecureRedirect(@ModelAttribute(Model.AUTH) final String userHash,
             @ModelAttribute(Model.EMRID) final String emrid,
             @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks,
             @RequestParam final String url,

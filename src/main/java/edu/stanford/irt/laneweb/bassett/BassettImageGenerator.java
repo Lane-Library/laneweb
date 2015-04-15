@@ -32,6 +32,7 @@ public class BassettImageGenerator extends AbstractGenerator implements ModelAwa
         this.saxStrategy = saxStrategy;
     }
 
+    @Override
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
         this.region = ModelUtil.getString(model, Model.REGION);

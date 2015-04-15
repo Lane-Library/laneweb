@@ -27,7 +27,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  */
 @Controller
 public class MetaSearchController {
-    
+
     private static final int ONE_MINUTE = 60000;
 
     private CompositeDataBinder dataBinder;
@@ -150,7 +150,7 @@ public class MetaSearchController {
 
     /**
      * Creates a map from a Result with status, url and hits if available.
-     * 
+     *
      * @param resource
      *            the Result
      * @return a Map

@@ -12,11 +12,12 @@ public class PersistentLoginToken {
 
     private String encryptedValue;
 
-    private int userAgentHash;
-    
     private User user;
 
-    public PersistentLoginToken(final User user, final long dateValue, final int userAgentHash, final String encryptedValue) {
+    private int userAgentHash;
+
+    public PersistentLoginToken(final User user, final long dateValue, final int userAgentHash,
+            final String encryptedValue) {
         this.user = Objects.requireNonNull(user, "null user");
         this.dateValue = dateValue;
         this.userAgentHash = userAgentHash;

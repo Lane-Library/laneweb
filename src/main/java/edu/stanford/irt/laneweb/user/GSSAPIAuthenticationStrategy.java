@@ -10,10 +10,12 @@ import org.springframework.ldap.core.support.DirContextAuthenticationStrategy;
 
 public class GSSAPIAuthenticationStrategy implements DirContextAuthenticationStrategy {
 
+    @Override
     public DirContext processContextAfterCreation(final DirContext ctx, final String userDn, final String password) {
         return ctx;
     }
 
+    @Override
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void setupEnvironment(final Hashtable env, final String userDn, final String password) {
         env.put(Context.SECURITY_AUTHENTICATION, "GSSAPI");

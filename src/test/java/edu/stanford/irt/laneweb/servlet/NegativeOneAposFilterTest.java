@@ -16,14 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class NegativeOneAposFilterTest {
-    
-    private NegativeOneAposFilter filter;
+
     private FilterChain chain;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+
+    private NegativeOneAposFilter filter;
+
     private Enumeration<String> names;
+
+    private HttpServletRequest request;
+
+    private HttpServletResponse response;
 
     @SuppressWarnings("unchecked")
     @Before

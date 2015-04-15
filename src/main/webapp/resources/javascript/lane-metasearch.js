@@ -35,6 +35,7 @@
                     resultSpan = Y.Node.create('<span class="searchCount"></span>');
                     node.get('parentNode').insert(resultSpan);
                 }
+                node.setAttribute('href', result.url);
                 if (result.status === 'successful') {
                     // process display of each updateable node
                     // once all processed, remove id from resourceIds
@@ -43,7 +44,6 @@
                         thousandsSeparator: ","
                     });
                     result.name = (node.get('innerHTML')) ? node.get('innerHTML') : '';
-                    node.setAttribute('href', result.url);
                     // fix for IE: @ in text of element will cause element text to be replaced by href value
                     // relies on result.name being set before url is changed
                     // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html

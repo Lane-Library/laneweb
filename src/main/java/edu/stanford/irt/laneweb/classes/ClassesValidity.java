@@ -7,25 +7,26 @@ import edu.stanford.irt.cocoon.cache.Validity;
 // TODO: have isValid() return false if it has been more than one day
 public class ClassesValidity implements Validity {
 
-    private static final long ONE_HOUR_DELAY = 3600 * 1000;
-    
     private static final int ELEVEN_PM = 23;
+
+    private static final long ONE_HOUR_DELAY = 3600 * 1000;
 
     private static final long serialVersionUID = 1L;
 
-    private long expires;
-    
     int hour;
+
+    private long expires;
 
     public ClassesValidity() {
         this(ELEVEN_PM, ONE_HOUR_DELAY);
     }
-    
-    public ClassesValidity(int hour, long delay) {
+
+    public ClassesValidity(final int hour, final long delay) {
         this.hour = hour;
         this.expires = System.currentTimeMillis() + delay;
     }
 
+    @Override
     public boolean isValid() {
         final long now = System.currentTimeMillis();
         if (now <= this.expires) {

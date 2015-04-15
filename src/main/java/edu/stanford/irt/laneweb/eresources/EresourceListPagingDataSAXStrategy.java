@@ -68,8 +68,8 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
     }
 
-    private void createPagingDropdown(final XMLConsumer xmlConsumer, final String hrefBase, EresourceListPagingData pagingData, final String alpha) throws SAXException {
-
+    private void createPagingDropdown(final XMLConsumer xmlConsumer, final String hrefBase,
+            final EresourceListPagingData pagingData, final String alpha) throws SAXException {
         XMLUtils.data(xmlConsumer, "View by page ");
         startDivWithClass(xmlConsumer, "general-dropdown dropdown");
         startDivWithClass(xmlConsumer, "general-dropdown-trigger");
@@ -122,7 +122,8 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
         sb.append("page=all");
         startAnchor(xmlConsumer, sb.toString());
-        XMLUtils.data(xmlConsumer, new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles ").toString());
+        XMLUtils.data(xmlConsumer, new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles ")
+                .toString());
         createElementWithClass(xmlConsumer, "i", "fa fa-arrow-right", "");
         endAnchor(xmlConsumer);
     }

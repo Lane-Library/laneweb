@@ -23,7 +23,7 @@ public class ProxyCredentialController {
     private static final String TICKET_PARAM = "&ticket=";
 
     private TicketDataBinder ticketBinder;
-    
+
     private UserDataBinder userBinder;
 
     @Autowired
@@ -33,8 +33,7 @@ public class ProxyCredentialController {
     }
 
     @RequestMapping(value = "/apps/proxy/credential")
-    public View proxyRedirect(
-            final HttpServletRequest request,
+    public View proxyRedirect(final HttpServletRequest request,
             final RedirectAttributes attrs,
             @ModelAttribute(Model.USER_ID) final String userid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
@@ -46,7 +45,8 @@ public class ProxyCredentialController {
         if (userid == null || ticket == null) {
             sb.append("/secure/apps/proxy/credential?").append(queryString);
         } else {
-            sb.append(PROXY_URL_BASE).append(userid).append(TICKET_PARAM).append(ticket).append('&').append(queryString);
+            sb.append(PROXY_URL_BASE).append(userid).append(TICKET_PARAM).append(ticket).append('&')
+                    .append(queryString);
         }
         RedirectView view = new RedirectView(sb.toString(), true, true);
         view.setExpandUriTemplateVariables(false);
@@ -54,8 +54,7 @@ public class ProxyCredentialController {
     }
 
     @RequestMapping(value = "/secure/apps/proxy/credential")
-    public View secureProxyRedirect(
-            final HttpServletRequest request,
+    public View secureProxyRedirect(final HttpServletRequest request,
             final RedirectAttributes attrs,
             @ModelAttribute(Model.USER_ID) final String userid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {

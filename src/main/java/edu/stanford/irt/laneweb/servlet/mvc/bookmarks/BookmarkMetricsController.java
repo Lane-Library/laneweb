@@ -14,7 +14,7 @@ public class BookmarkMetricsController {
     private BookmarkDAO bookmarkDAO;
 
     @Autowired
-    public BookmarkMetricsController(BookmarkDAO bookmarkDAO) {
+    public BookmarkMetricsController(final BookmarkDAO bookmarkDAO) {
         this.bookmarkDAO = bookmarkDAO;
     }
 

@@ -20,6 +20,7 @@ public class ParameterMapGenerator extends AbstractMarshallingGenerator implemen
         super(marshaller);
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public void setModel(final Map<String, Object> model) {
         this.parameters = new HashMap<String, String[]>();

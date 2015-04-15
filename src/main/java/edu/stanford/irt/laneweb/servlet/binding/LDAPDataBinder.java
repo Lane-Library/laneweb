@@ -18,6 +18,7 @@ public class LDAPDataBinder implements DataBinder {
     }
 
     // TODO: create an immutable user object with all this stuff and userid, etc.
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String userid = (String) model.get(Model.USER_ID);
         if (userid != null) {

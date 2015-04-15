@@ -17,6 +17,7 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
 
     private static final String SOURCE_LINK = "sourceLink";
 
+    @Override
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             boolean first = true;

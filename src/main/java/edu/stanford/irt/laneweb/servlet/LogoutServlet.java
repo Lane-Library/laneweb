@@ -11,12 +11,13 @@ import javax.servlet.http.HttpSession;
 
 public class LogoutServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-
     private static final String LOGOUT_URL = "/Shibboleth.sso/Logout?return=";
 
+    private static final long serialVersionUID = 1L;
+
     @Override
-    protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+            IOException {
         Cookie userCookie = new Cookie(CookieName.USER.toString(), null);
         userCookie.setPath("/");
         userCookie.setMaxAge(0);
@@ -35,10 +36,9 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
         String referer = req.getHeader("referer");
-        if(referer == null || referer.indexOf("/secure/") > -1){
+        if (referer == null || referer.indexOf("/secure/") > -1) {
             referer = "/index.html";
         }
-       
-        resp.sendRedirect("https://"+ req.getLocalName() + LOGOUT_URL+referer);
+        resp.sendRedirect("https://" + req.getLocalName() + LOGOUT_URL + referer);
     }
 }

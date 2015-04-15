@@ -3,8 +3,6 @@ package edu.stanford.irt.laneweb.search.saxstrategy;
 import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.gt;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -45,10 +43,6 @@ public class AbstractResultSAXStrategyTest {
                 XMLUtils.EMPTY_ATTRIBUTES);
         this.xmlConsumer.characters(aryEq("oopsie".toCharArray()), eq(0), eq(6));
         this.xmlConsumer.endElement("http://irt.stanford.edu/search/2.0", "message", "message");
-        this.xmlConsumer.startElement("http://irt.stanford.edu/search/2.0", "stacktrace", "stacktrace",
-                XMLUtils.EMPTY_ATTRIBUTES);
-        this.xmlConsumer.characters(isA(char[].class), eq(0), gt(0));
-        this.xmlConsumer.endElement("http://irt.stanford.edu/search/2.0", "stacktrace", "stacktrace");
         this.xmlConsumer.endElement("http://irt.stanford.edu/search/2.0", "exception", "exception");
         replay(this.xmlConsumer);
         this.strategy.doToSAXException(this.xmlConsumer, new Exception("oopsie"));

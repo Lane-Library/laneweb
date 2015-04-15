@@ -10,9 +10,9 @@ public class TicketTest {
 
     private String ezproxyKey;
 
-    private String userid;
-
     private Ticket ticket;
+
+    private String userid;
 
     @Before
     public void setUp() {

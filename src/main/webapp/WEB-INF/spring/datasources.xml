@@ -5,7 +5,7 @@
       xmlns:context="http://www.springframework.org/schema/context"
       xsi:schemaLocation="http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr-1.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
     
-    <solr:solr-server id="laneSearchSolrServer" url="%{laneweb.solr-url-laneSearch}"/>
+    <solr:solr-server id="laneSearchSolrServer" url="%{edu.stanford.irt.laneweb.solr-url-laneSearch}"/>
 
     <solr:repositories base-package="edu.stanford.irt.laneweb.solr" multicore-support="true" solr-server-ref="laneSearchSolrServer"/>
 
@@ -29,17 +29,17 @@
         <bean name="javax.sql.DataSource/eresources" class="org.apache.commons.dbcp.BasicDataSource"
             destroy-method="close">
             <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-            <property name="url" value="%{laneweb.context.eresources.url}"/>
-            <property name="username" value="%{laneweb.context.eresources.username}"/>
-            <property name="password" value="%{laneweb.context.eresources.password}"/>
+            <property name="url" value="%{edu.stanford.irt.laneweb.db.eresources.url}"/>
+            <property name="username" value="%{edu.stanford.irt.laneweb.db.eresources.user}"/>
+            <property name="password" value="%{edu.stanford.irt.laneweb.db.eresources.password}"/>
         </bean>
 
         <bean name="javax.sql.DataSource/voyager" class="org.apache.commons.dbcp.BasicDataSource"
             destroy-method="close">
             <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-            <property name="url" value="%{laneweb.context.voyager.url}"/>
-            <property name="username" value="%{laneweb.context.voyager.username}"/>
-            <property name="password" value="%{laneweb.context.voyager.password}"/>
+            <property name="url" value="%{edu.stanford.irt.laneweb.db.voyager.url}"/>
+            <property name="username" value="%{edu.stanford.irt.laneweb.db.voyager.user}"/>
+            <property name="password" value="%{edu.stanford.irt.laneweb.db.voyager.password}"/>
         </bean>
 
     </beans>

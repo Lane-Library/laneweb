@@ -13,14 +13,15 @@ import edu.stanford.irt.laneweb.model.Model;
 public class TodaysHoursBinder implements DataBinder {
 
     private TodaysHours hours;
-    
+
     private final Logger log;
-    
+
     public TodaysHoursBinder(final TodaysHours hours, final Logger log) {
         this.hours = hours;
         this.log = log;
     }
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String todaysHoursString = null;
         try {

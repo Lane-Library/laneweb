@@ -23,6 +23,7 @@ public class TicketDataBinder implements DataBinder {
     /**
      * Adds the ticket to the model.
      */
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String userid = ModelUtil.getString(model, Model.USER_ID);
         if (userid != null) {

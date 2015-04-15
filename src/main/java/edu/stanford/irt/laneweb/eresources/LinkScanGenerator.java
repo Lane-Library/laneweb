@@ -38,7 +38,8 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<Eresource> results = this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
+        List<Eresource> results = this.repository
+                .searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
         int p = 1;
         String position, id, title;
         try {

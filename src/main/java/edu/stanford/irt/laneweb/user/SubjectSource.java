@@ -27,7 +27,7 @@ public class SubjectSource {
 
     /**
      * returns the kerberos authorized Subject
-     * 
+     *
      * @return the authorized Subject
      */
     public synchronized Subject getSubject() {
@@ -40,6 +40,11 @@ public class SubjectSource {
         return this.subject;
     }
 
+    // protected method so that tests can mock the LoginContext
+    protected LoginContext getLoginContext(final String name) throws LoginException {
+        return new LoginContext(name);
+    }
+
     private void authenticateIfNecessary() throws LoginException {
         if (null == this.subject || null == this.ticket || !this.ticket.isCurrent()) {
             LoginContext loginContext = getLoginContext(this.name);
@@ -49,10 +54,5 @@ public class SubjectSource {
                 this.ticket = subjectTicket;
             }
         }
-    }
-    
-    // protected method so that tests can mock the LoginContext
-    protected LoginContext getLoginContext(String name) throws LoginException {
-        return new LoginContext(name);
     }
 }

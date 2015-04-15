@@ -23,8 +23,8 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 public class BookmarkletController extends BookmarkController {
 
     @Autowired
-    public BookmarkletController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            UserDataBinder userDataBinder) {
+    public BookmarkletController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+            final UserDataBinder userDataBinder) {
         super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
     }
 

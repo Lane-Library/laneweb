@@ -24,6 +24,7 @@ public class BookmarkGenerator extends AbstractMarshallingGenerator implements M
         marshall(this.bookmarks, xmlConsumer);
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public void setModel(final Map<String, Object> model) {
         this.bookmarks = ModelUtil.getObject(model, Model.BOOKMARKS, List.class);

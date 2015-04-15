@@ -27,6 +27,7 @@ public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Integer>
 
     private static final String TOTAL = "total";
 
+    @Override
     public void toSAX(final Map<String, Integer> regionMap, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();

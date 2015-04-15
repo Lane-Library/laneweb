@@ -20,10 +20,12 @@ public class CompositeSuggestionManager implements SuggestionManager {
         this.suggestionManagers = suggestionManagers;
     }
 
+    @Override
     public Collection<Suggestion> getSuggestionsForTerm(final String term) {
         return doGetSuggestions(null, term);
     }
 
+    @Override
     public Collection<Suggestion> getSuggestionsForTerm(final String type, final String term) {
         return doGetSuggestions(type, term);
     }

@@ -15,23 +15,28 @@ public class EHCache implements Cache {
         this.cache = manager.getCache("cocoon-ehcache");
     }
 
+    @Override
     public void clear() {
         this.cache.removeAll();
     }
 
+    @Override
     public boolean containsKey(final Serializable key) {
         return this.cache.get(key) != null;
     }
 
+    @Override
     public CachedResponse get(final Serializable key) {
         Element element = this.cache.get(key);
         return (CachedResponse) (element == null ? null : element.getObjectValue());
     }
 
+    @Override
     public void remove(final Serializable key) {
         this.cache.remove(key);
     }
 
+    @Override
     public void store(final Serializable key, final CachedResponse response) {
         final Element element = new Element(key, response);
         this.cache.put(element);

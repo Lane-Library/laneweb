@@ -10,9 +10,8 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.proxy.Ticket;
 
 /**
- * A DataBinder that binds the base proxy url to the Model. It requires that the
- * userid, ticket, proxyLink, ipgroup and basePath, if present, have already
- * been put in the model.
+ * A DataBinder that binds the base proxy url to the Model. It requires that the userid, ticket, proxyLink, ipgroup and
+ * basePath, if present, have already been put in the model.
  */
 public class BaseProxyURLDataBinder implements DataBinder {
 

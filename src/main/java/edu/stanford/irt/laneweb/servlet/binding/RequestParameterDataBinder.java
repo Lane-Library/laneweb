@@ -17,18 +17,18 @@ import edu.stanford.irt.laneweb.model.Model;
 public class RequestParameterDataBinder implements DataBinder {
 
     private static final String[][] PARAMETER_ARRAY_MODEL = { { "r", Model.RESOURCES }, { "e", Model.ENGINES },
-        { "i", Model.ITEMS } };
+            { "i", Model.ITEMS } };
 
     private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE },
-            { "s", Model.SUBSET }, { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS },
-            { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER }, { "r", Model.REGION }, { "PID", Model.PID },
-            { "page-number", Model.PAGE_NUMBER }, { "entryUrl", Model.ENTRY_URL }, { "pl", Model.PERSISTENT_LOGIN },
-            { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
+        { "s", Model.SUBSET }, { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS },
+        { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER }, { "r", Model.REGION }, { "PID", Model.PID },
+        { "page-number", Model.PAGE_NUMBER }, { "entryUrl", Model.ENTRY_URL }, { "pl", Model.PERSISTENT_LOGIN },
+        { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
 
     private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CATEGORY,
-            Model.CLASS_ID, Model.TIMEOUT, Model.RESOURCE_ID, Model.PAGE, Model.TITLE,
-            Model.SELECTION, Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE,
-            Model.HOST, Model.SOURCEID, Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN };
+        Model.CLASS_ID, Model.TIMEOUT, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION,
+            Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SOURCEID,
+            Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN };
 
     /**
      * parameterArrayModelMap contains the mapping of parameter names to model name of model attributes that are Lists
@@ -57,6 +57,7 @@ public class RequestParameterDataBinder implements DataBinder {
         }
     }
 
+    @Override
     @SuppressWarnings("rawtypes")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {

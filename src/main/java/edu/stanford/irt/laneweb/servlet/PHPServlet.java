@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * A servlet that sends an empty 404 response.  To be used for .php requests, which will always
- * be attempts to spam or vulnerability probes.
+ * A servlet that sends an empty 404 response. To be used for .php requests, which will always be attempts to spam or
+ * vulnerability probes.
  */
 public class PHPServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    protected void service(final HttpServletRequest request, final HttpServletResponse response) throws IOException,
+            ServletException {
         response.sendError(HttpURLConnection.HTTP_NOT_FOUND);
     }
 }

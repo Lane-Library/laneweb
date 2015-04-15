@@ -15,6 +15,7 @@ public class BasePathDataBinder implements DataBinder {
         this.basePath = servletContext.getContextPath();
     }
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         model.put(Model.BASE_PATH, this.basePath);
     }

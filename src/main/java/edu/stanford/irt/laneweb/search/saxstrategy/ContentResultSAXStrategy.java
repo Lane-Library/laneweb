@@ -19,7 +19,8 @@ public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearch
         ContentResult contentResult = result.getContentResult();
         Result resourceResult = result.getResourceResult();
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(Resource.EMPTY_NS, Resource.SCORE, Resource.SCORE, Resource.CDATA, Integer.toString(result.getScore()));
+        atts.addAttribute(Resource.EMPTY_NS, Resource.SCORE, Resource.SCORE, Resource.CDATA,
+                Integer.toString(result.getScore()));
         atts.addAttribute(Resource.EMPTY_NS, Resource.TYPE, Resource.TYPE, Resource.CDATA, "searchContent");
         try {
             XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESULT, atts);

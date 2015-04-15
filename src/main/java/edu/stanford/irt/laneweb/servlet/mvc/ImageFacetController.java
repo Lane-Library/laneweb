@@ -23,11 +23,9 @@ public class ImageFacetController {
 
     @RequestMapping(value = "/facet/images/copyright", produces = "application/json")
     @ResponseBody
-    public List<FacetFieldEntry> getImageFacet(String query) {
-        FacetPage<Image> facetPage = service.facetOnCopyright(query);
+    public List<FacetFieldEntry> getImageFacet(final String query) {
+        FacetPage<Image> facetPage = this.service.facetOnCopyright(query);
         Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
         return page.getContent();
     }
-    
-
 }

@@ -33,7 +33,7 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * Creates a new Interceptor with a StandardSitePreferenceHandler
-     * 
+     *
      * @param desktopRedirects
      *            a Map of redirects
      */

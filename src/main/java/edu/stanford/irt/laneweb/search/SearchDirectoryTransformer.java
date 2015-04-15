@@ -34,6 +34,7 @@ public class SearchDirectoryTransformer extends AbstractCacheableTransformer imp
         super.endDocument();
     }
 
+    @Override
     public void setParameters(final Map<String, String> parameters) {
         this.directories = parameters.get("directories").split(",");
     }

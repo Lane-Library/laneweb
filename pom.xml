@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>2.4.8-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/maven/projects/laneweb/</url>
     <inceptionYear>2002</inceptionYear>
@@ -87,10 +87,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <target>1.7</target>
-                    <source>1.7</source>
-                    <testSource>1.7</testSource>
-                    <testTarget>1.7</testTarget>
+                    <target>1.8</target>
+                    <source>1.8</source>
+                    <testSource>1.8</testSource>
+                    <testTarget>1.8</testTarget>
                 </configuration>
             </plugin>
             <plugin>
@@ -452,7 +452,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <targetJdk>1.7</targetJdk>
+                    <targetJdk>1.8</targetJdk>
                 </configuration>
             </plugin>
             <plugin>
@@ -602,7 +602,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>2.1.0</version>
+            <version>2.1.1</version>
             <exclusions>
                 <exclusion>
                     <artifactId>log4j</artifactId>
@@ -757,8 +757,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
-            <artifactId>catalina</artifactId>
-            <version>6.0.35</version>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>7.0.59</version>
             <scope>provided</scope>
         </dependency>
 		<dependency>
@@ -800,9 +800,9 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>com.oracle.ojdbc</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.3</version>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -828,6 +828,18 @@
                     <groupId>cglib</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ons</artifactId>
+            <version>12.1.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ucp</artifactId>
+            <version>12.1.0.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

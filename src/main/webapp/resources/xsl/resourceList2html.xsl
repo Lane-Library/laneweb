@@ -183,7 +183,7 @@
                 <xsl:when test=". = 'print'">
                 <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog Results <i class="fa fa-external-link"></i></a>
             </xsl:when>
-            <xsl:when test=". = 'web'">
+            <xsl:when test=". = 'web' or . = 'laneblog'">
                 <a href="/index.html">Lane Website</a>
                 </xsl:when>
             </xsl:choose>

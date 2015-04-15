@@ -11,9 +11,10 @@ public class DisasterModeDataBinder implements DataBinder {
     private Boolean disasterMode;
 
     public DisasterModeDataBinder(final Boolean disasterMode) {
-        this.disasterMode = disasterMode;
+        this.disasterMode = disasterMode == null ? Boolean.FALSE : disasterMode;
     }
 
+    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         model.put(Model.DISASTER_MODE, this.disasterMode);
     }

@@ -29,6 +29,7 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
+    @Override
     public void toSAX(final PagingData pagingData, final XMLConsumer xmlConsumer) {
         try {
             int size = pagingData.getSize();

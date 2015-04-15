@@ -36,14 +36,14 @@ public class BookmarkExportController extends BookmarkController {
     private static final String ITEM_SUFFIX = "</A>\n";
 
     @Autowired
-    public BookmarkExportController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            UserDataBinder userDataBinder) {
+    public BookmarkExportController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+            final UserDataBinder userDataBinder) {
         super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
     }
 
     /**
      * Produces importable html bookmarks.
-     * 
+     *
      * @param bookmarks
      *            the Bookmarks
      * @return the bookmarks in netscape bookmark format
@@ -63,7 +63,7 @@ public class BookmarkExportController extends BookmarkController {
 
     /**
      * Converts bookmarks to RIS (Research Information Systems) format
-     * 
+     *
      * @param bookmarks
      *            the bookmarks
      * @return the bookmarks in RIS format
@@ -82,7 +82,7 @@ public class BookmarkExportController extends BookmarkController {
 
     /**
      * Converts bookmarks to a list of tab separated values.
-     * 
+     *
      * @param bookmarks
      *            the Bookmarks
      * @return the bookmarks as a list of tab separated values

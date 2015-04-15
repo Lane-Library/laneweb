@@ -143,21 +143,6 @@ public class BassettCollectionManagerTest {
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void testSearchThrowsException() throws SQLException {
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
-        expect(this.sqlStatements.getProperty("search")).andReturn("");
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.statement.setString(eq(1), isA(String.class));
-        this.statement.setString(eq(2), isA(String.class));
-        expect(this.statement.executeQuery()).andThrow(new SQLException());
-        this.statement.close();
-        this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
-        this.manager.search("query");
-        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
-    }
-
     @Test
     public void testSearchCount() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
@@ -238,6 +223,21 @@ public class BassettCollectionManagerTest {
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
         this.manager.searchRegion("region--subregion", "query");
+        verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testSearchThrowsException() throws SQLException {
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.sqlStatements.getProperty("search")).andReturn("");
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
+        this.statement.setString(eq(1), isA(String.class));
+        this.statement.setString(eq(2), isA(String.class));
+        expect(this.statement.executeQuery()).andThrow(new SQLException());
+        this.statement.close();
+        this.connection.close();
+        replay(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
+        this.manager.search("query");
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.sqlStatements);
     }
 }

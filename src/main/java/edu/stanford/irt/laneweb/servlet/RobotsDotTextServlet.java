@@ -27,7 +27,7 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-    IOException {
+            IOException {
         // Proxy servers add this header, may be comma separated list
         String hostHeader = req.getHeader("X-Forwarded-Host");
         if (hostHeader == null) {

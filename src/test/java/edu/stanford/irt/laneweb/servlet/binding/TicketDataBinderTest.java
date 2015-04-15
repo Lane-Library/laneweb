@@ -57,14 +57,6 @@ public class TicketDataBinderTest {
     }
 
     @Test
-    public void testBindUserIdNull() {
-        replay(this.request, this.session, this.ticket);
-        this.dataBinder.bind(this.model, this.request);
-        assertNull(this.model.get(Model.TICKET));
-        verify(this.request, this.session, this.ticket);
-    }
-
-    @Test
     public void testBindTicketInvalid() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.TICKET)).andReturn(this.ticket);
@@ -87,6 +79,14 @@ public class TicketDataBinderTest {
         this.model.put(Model.USER_ID, "id");
         this.dataBinder.bind(this.model, this.request);
         assertNotNull(this.model.get(Model.TICKET));
+        verify(this.request, this.session, this.ticket);
+    }
+
+    @Test
+    public void testBindUserIdNull() {
+        replay(this.request, this.session, this.ticket);
+        this.dataBinder.bind(this.model, this.request);
+        assertNull(this.model.get(Model.TICKET));
         verify(this.request, this.session, this.ticket);
     }
 }

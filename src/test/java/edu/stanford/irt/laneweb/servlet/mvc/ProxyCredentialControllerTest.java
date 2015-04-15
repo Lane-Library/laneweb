@@ -22,10 +22,6 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 public class ProxyCredentialControllerTest {
 
-    private TicketDataBinder ticketBinder;
-    
-    private UserDataBinder userBinder;
-
     private ProxyCredentialController controller;
 
     private Model model;
@@ -33,6 +29,10 @@ public class ProxyCredentialControllerTest {
     private HttpServletRequest request;
 
     private Ticket ticket = new Ticket("", "");
+
+    private TicketDataBinder ticketBinder;
+
+    private UserDataBinder userBinder;
 
     @Before
     public void setUp() {
@@ -90,19 +90,19 @@ public class ProxyCredentialControllerTest {
     }
 
     @Test
-    public void testProxyRedirectNullUserId() {
+    public void testProxyRedirectNullTicket() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.ticketBinder);
-        RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, null, this.ticket);
+        RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, "ditenus", null);
         assertEquals("/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.ticketBinder);
     }
 
     @Test
-    public void testProxyRedirectNullTicket() {
+    public void testProxyRedirectNullUserId() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.ticketBinder);
-        RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, "ditenus", null);
+        RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, null, this.ticket);
         assertEquals("/secure/apps/proxy/credential?url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.ticketBinder);
     }
@@ -123,7 +123,8 @@ public class ProxyCredentialControllerTest {
     public void testSecureRedirect() {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.ticketBinder);
-        RedirectView view = (RedirectView) this.controller.secureProxyRedirect(this.request, null, "ditenus", this.ticket);
+        RedirectView view = (RedirectView) this.controller.secureProxyRedirect(this.request, null, "ditenus",
+                this.ticket);
         assertEquals("http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
                 + "&url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.ticketBinder);

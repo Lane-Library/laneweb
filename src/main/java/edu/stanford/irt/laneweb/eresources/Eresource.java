@@ -15,25 +15,25 @@ public class Eresource {
 
     public static class EresourceBuilder {
 
-        private int total;
-
-        private String title;
-
-        private int score;
-
-        private String recordType;
-
-        private int recordId;
-
-        private String primaryType;
-
-        private String id;
+        private int available;
 
         private String description;
 
-        private int available;
+        private String id;
 
         private List<Link> links = new ArrayList<Link>();
+
+        private String primaryType;
+
+        private int recordId;
+
+        private String recordType;
+
+        private int score;
+
+        private String title;
+
+        private int total;
 
         public EresourceBuilder addLink(final Link link) {
             this.links.add(link);
@@ -102,11 +102,11 @@ public class Eresource {
     @Field
     private Boolean isCore;
 
-    @Field
-    private String primaryType;
-
     @Transient
     private Collection<Link> linksList = new ArrayList<Link>();
+
+    @Field
+    private String primaryType;
 
     @Field
     private String publicationAuthorsText;
@@ -125,6 +125,9 @@ public class Eresource {
     @Field
     private String title;
 
+    @Field("totalItems")
+    private int total;
+
     @Field
     String[] type;
 
@@ -133,15 +136,6 @@ public class Eresource {
 
     @Field
     private Integer year;
-
-    public void addLink(final Link link) {
-        this.linksList.add(link);
-    }
-
-    @Field("totalItems")
-    private int total;
-    
-    protected Eresource() {}
 
     public Eresource(final EresourceBuilder builder) {
         this.description = builder.description;
@@ -156,8 +150,15 @@ public class Eresource {
         this.available = builder.available;
     }
 
+    protected Eresource() {
+    }
+
     public static EresourceBuilder builder() {
         return new EresourceBuilder();
+    }
+
+    public void addLink(final Link link) {
+        this.linksList.add(link);
     }
 
     public int getAvailable() {
@@ -179,16 +180,16 @@ public class Eresource {
         return Collections.unmodifiableCollection(this.linksList);
     }
 
+    public String getPrimaryType() {
+        return this.primaryType;
+    }
+
     public String getPublicationAuthorsText() {
         return this.publicationAuthorsText;
     }
 
     public String getPublicationText() {
         return this.publicationText;
-    }
-
-    public String getPrimaryType() {
-        return this.primaryType;
     }
 
     public int getRecordId() {
@@ -205,6 +206,10 @@ public class Eresource {
 
     public String getTitle() {
         return this.title;
+    }
+
+    public int getTotal() {
+        return this.total;
     }
 
     public String[] getType() {
@@ -279,7 +284,8 @@ public class Eresource {
                     } else {
                         linkType = LinkType.NORMAL;
                     }
-                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, publisher, holdingsAndDates));
+                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, publisher,
+                            holdingsAndDates));
                 }
             }
         }
@@ -319,10 +325,6 @@ public class Eresource {
 
     public void setYear(final Integer year) {
         this.year = year;
-    }
-
-    public int getTotal() {
-        return this.total;
     }
 
     @Override

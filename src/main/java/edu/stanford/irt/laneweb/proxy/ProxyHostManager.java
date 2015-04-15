@@ -131,6 +131,7 @@ public class ProxyHostManager {
             this.lastUpdate = now;
             this.executor.execute(new Runnable() {
 
+                @Override
                 public void run() {
                     try {
                         Set<String> newSet = new DatabaseProxyHostSet(ProxyHostManager.this.dataSource);

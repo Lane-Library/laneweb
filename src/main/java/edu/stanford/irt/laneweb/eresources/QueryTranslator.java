@@ -9,15 +9,15 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class QueryTranslator {
 
+    private static final Pattern CURLY = Pattern.compile("(\\{|\\})");
+
+    private static final Pattern QUOTES = Pattern.compile("\\s+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+
+    private static final Pattern WILDCARD = Pattern.compile("[\\W&&[^%]]");
+
     private List<String> notWords = new ArrayList<String>();
 
     private List<String> reqWords = new ArrayList<String>();
-    
-    private static final Pattern QUOTES = Pattern.compile("\\s+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-    
-    private static final Pattern WILDCARD = Pattern.compile("[\\W&&[^%]]");
-    
-    private static final Pattern CURLY = Pattern.compile("(\\{|\\})");
 
     public String translate(final String theInput) {
         if (theInput == null) {
@@ -77,8 +77,8 @@ public class QueryTranslator {
         this.notWords = new ArrayList<String>();
         // Loop over all words
         String[] words = QUOTES.split(input);
-        for (int i = 0; i < words.length; i++) {
-            handleWord(words[i]);
+        for (String word : words) {
+            handleWord(word);
         }
     }
 

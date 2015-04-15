@@ -13,6 +13,7 @@ import org.springframework.web.HttpRequestHandler;
  */
 public class DefaultRequestHandler implements HttpRequestHandler {
 
+    @Override
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         String uri = request.getRequestURI();
         String queryString = request.getQueryString();

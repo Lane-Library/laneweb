@@ -34,7 +34,7 @@ public class SHCRedirectProcessorTest {
         assertEquals("http://www.guideline.gov/search/results.aspx?113=666&term=femoral+fracture",
                 this.processor.getRedirectURL("/shc/radiology.html", "", "q=femoral+fracture"));
     }
-    
+
     @Test
     public void testNotSHC() {
         assertNull(this.processor.getRedirectURL("notshc", "basePath", "queryString"));

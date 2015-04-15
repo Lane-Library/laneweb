@@ -19,10 +19,12 @@ public abstract class AbstractSearchResult implements SearchResult {
         this.title = title;
     }
 
+    @Override
     public int getScore() {
         return this.score;
     }
 
+    @Override
     public String getSortTitle() {
         if (this.sortTitle == null) {
             String temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");

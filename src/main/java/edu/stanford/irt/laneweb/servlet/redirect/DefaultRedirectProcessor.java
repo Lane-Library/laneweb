@@ -11,6 +11,7 @@ public class DefaultRedirectProcessor implements RedirectProcessor {
 
     private Map<Pattern, String> redirectMap = Collections.emptyMap();
 
+    @Override
     public String getRedirectURL(final String uri, final String basePath, final String queryString) {
         String testURI = queryString == null ? uri : uri + '?' + queryString;
         for (Entry<Pattern, String> entry : this.redirectMap.entrySet()) {

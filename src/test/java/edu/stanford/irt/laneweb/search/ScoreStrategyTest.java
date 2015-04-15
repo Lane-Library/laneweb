@@ -90,7 +90,8 @@ public class ScoreStrategyTest {
         expect(this.result.getDescription()).andReturn("description");
         expect(this.result.getYear()).andReturn(THIS_YEAR);
         replay(this.result);
-        assertEquals(110, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title with period")));
+        assertEquals(110,
+                this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("title with period")));
         verify(this.result);
     }
 

@@ -64,7 +64,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("FalseQuerySomethingElse.xml"), sw.toString());
     }
-    
+
     @Test
     public void testFalseQuerySomethingElseProxyLinks() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();
@@ -181,7 +181,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("TrueZeroSOM.xml"), sw.toString());
     }
-    
+
     @Test
     public void testUrlRedirect() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();
@@ -191,5 +191,4 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("urlRedirect.xml"), sw.toString());
     }
-
 }

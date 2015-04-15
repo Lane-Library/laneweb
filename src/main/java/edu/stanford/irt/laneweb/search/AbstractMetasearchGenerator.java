@@ -16,11 +16,11 @@ public abstract class AbstractMetasearchGenerator<T> extends AbstractSearchGener
         this.metaSearchManager = metaSearchManager;
     }
 
-    public Result describe(final Query query, Collection<String> engines) {
+    public Result describe(final Query query, final Collection<String> engines) {
         return this.metaSearchManager.describe(query, engines);
     }
 
-    public Result search(final Query query, Collection<String> engines, final long wait) {
+    public Result search(final Query query, final Collection<String> engines, final long wait) {
         return this.metaSearchManager.search(query, engines, wait);
     }
 }

@@ -85,23 +85,6 @@ public class RemoteProxyIPDataBinderTest {
     }
 
     @Test
-    public void testBindSameIP() {
-        expect(this.request.getRemoteAddr()).andReturn("97.126.62.121");
-        expect(this.request.getSession()).andReturn(this.session);
-        expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
-        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("97.126.62.121");
-        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
-        expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
-        expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(Boolean.TRUE);
-        replay(this.request, this.session, this.proxyLinks);
-        this.dataBinder.bind(this.model, this.request);
-        assertTrue((Boolean) this.model.get(Model.PROXY_LINKS));
-        assertEquals(IPGroup.OTHER, this.model.get(Model.IPGROUP));
-        assertEquals("97.126.62.121", this.model.get(Model.REMOTE_ADDR));
-        verify(this.request, this.session, this.proxyLinks);
-    }
-
-    @Test
     public void testBindParameter() {
         expect(this.request.getRemoteAddr()).andReturn("97.126.62.121");
         expect(this.request.getSession()).andReturn(this.session);
@@ -111,6 +94,23 @@ public class RemoteProxyIPDataBinderTest {
         expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn("true");
         expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(Boolean.FALSE);
         this.session.setAttribute(Model.PROXY_LINKS, Boolean.TRUE);
+        replay(this.request, this.session, this.proxyLinks);
+        this.dataBinder.bind(this.model, this.request);
+        assertTrue((Boolean) this.model.get(Model.PROXY_LINKS));
+        assertEquals(IPGroup.OTHER, this.model.get(Model.IPGROUP));
+        assertEquals("97.126.62.121", this.model.get(Model.REMOTE_ADDR));
+        verify(this.request, this.session, this.proxyLinks);
+    }
+
+    @Test
+    public void testBindSameIP() {
+        expect(this.request.getRemoteAddr()).andReturn("97.126.62.121");
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
+        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("97.126.62.121");
+        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
+        expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
+        expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(Boolean.TRUE);
         replay(this.request, this.session, this.proxyLinks);
         this.dataBinder.bind(this.model, this.request);
         assertTrue((Boolean) this.model.get(Model.PROXY_LINKS));

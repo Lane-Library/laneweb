@@ -12,14 +12,17 @@ public class MetaSearchManagerFactoryBean implements FactoryBean<MetaSearchManag
         this.msms = msms;
     }
 
+    @Override
     public MetaSearchManager getObject() {
         return this.msms.getMetaSearchManager();
     }
 
+    @Override
     public Class<MetaSearchManager> getObjectType() {
         return MetaSearchManager.class;
     }
 
+    @Override
     public boolean isSingleton() {
         return false;
     }

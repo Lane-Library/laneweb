@@ -51,7 +51,7 @@ public class CacheSourceResolver implements SourceResolver {
             return this.uri;
         }
     }
-    
+
     private static final int BUFFER_SIZE = 1024;
 
     private static final long MILLISECONDS_PER_MINUTE = 1000L * 60L;
@@ -62,7 +62,7 @@ public class CacheSourceResolver implements SourceResolver {
 
     /**
      * Create a CacheSourceResolver.
-     * 
+     *
      * @param cache
      *            the Cache
      * @param sourceResolver
@@ -99,7 +99,7 @@ public class CacheSourceResolver implements SourceResolver {
 
     /**
      * get the byte array from a Source object.
-     * 
+     *
      * @param source
      *            the Source
      * @return a byte array creted from the InputStream of the Source.

@@ -72,7 +72,7 @@ public class AbstractEresourcesGeneratorTest {
     @Test
     public void testDoGenerate() {
         expect(this.eresource.getTitle()).andReturn("title").times(2);
-        this.generator.setModel(Collections.<String, Object>emptyMap());
+        this.generator.setModel(Collections.<String, Object> emptyMap());
         this.saxStrategy.toSAX(isA(PagingEresourceList.class), eq(this.xmlConsumer));
         replay(this.collectionManager, this.eresource, this.saxStrategy, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);

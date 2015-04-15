@@ -20,6 +20,7 @@ public class ContentResultSearchResult extends AbstractSearchResult {
         this.resourceResult = resourceResult;
     }
 
+    @Override
     public int compareTo(final SearchResult o) {
         int value = o.getScore() - getScore();
         if (value == 0) {

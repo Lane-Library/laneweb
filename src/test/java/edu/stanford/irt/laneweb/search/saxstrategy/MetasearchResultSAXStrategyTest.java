@@ -67,7 +67,8 @@ public class MetasearchResultSAXStrategyTest {
         this.engineSAXStrategy.toSAX(this.result, this.xmlConsumer);
         replay(this.result, this.query, this.engineSAXStrategy);
         this.strategy.toSAX(this.result, this.xmlConsumer);
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "MetasearchResultSAXStrategyTest-testToSAXNullStatus.xml"),
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "MetasearchResultSAXStrategyTest-testToSAXNullStatus.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.result, this.query, this.engineSAXStrategy);
     }

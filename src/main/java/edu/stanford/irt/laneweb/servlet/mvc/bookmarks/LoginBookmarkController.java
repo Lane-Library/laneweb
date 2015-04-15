@@ -20,14 +20,13 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 public class LoginBookmarkController extends BookmarkController {
 
     @Autowired
-    public LoginBookmarkController(BookmarkDAO bookmarkDAO, BookmarkDataBinder bookmarkDataBinder,
-            UserDataBinder userDataBinder) {
+    public LoginBookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+            final UserDataBinder userDataBinder) {
         super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
     }
 
     @RequestMapping(value = "/secure/addBookmark")
-    public String addBookmark(
-            final RedirectAttributes redirectAttrs,
+    public String addBookmark(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final String label,

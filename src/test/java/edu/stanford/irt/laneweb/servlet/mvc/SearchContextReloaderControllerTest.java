@@ -27,7 +27,7 @@ public class SearchContextReloaderControllerTest {
     @Test
     public void testReloadContext() throws IOException {
         this.msms
-                .reload("https://sunetid:password@irt-svn.stanford.edu/repos/irt/lane/search/tags/search-lane-release/src/main/resources/search-lane.xml");
+        .reload("https://sunetid:password@irt-svn.stanford.edu/repos/irt/lane/search/tags/search-lane-release/src/main/resources/search-lane.xml");
         replay(this.msms);
         assertEquals("redirect:/reloadresources.html", this.controller.reloadContext("release", "sunetid", "password"));
         verify(this.msms);

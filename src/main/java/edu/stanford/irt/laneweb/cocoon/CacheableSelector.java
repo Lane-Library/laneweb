@@ -12,8 +12,8 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 public class CacheableSelector implements Selector {
 
     /**
-     * Checks to see if the model contains particular values, currently USER_ID, DEBUG, QUERY, EMRID,
-     * or the sitemap-uri is /error.html or contains /bassett/, and if it does return false.
+     * Checks to see if the model contains particular values, currently USER_ID, DEBUG, QUERY, EMRID, or the sitemap-uri
+     * is /error.html or contains /bassett/, and if it does return false.
      */
     @Override
     public boolean select(final String expression, final Map<String, Object> model, final Map<String, String> parameters) {

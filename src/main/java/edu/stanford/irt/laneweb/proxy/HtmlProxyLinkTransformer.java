@@ -16,9 +16,9 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     private static final String HTTP_SCHEME = "http";
 
-    private XMLConsumer xmlConsumer;
-
     private ProxyHostManager proxyHostManager;
+
+    private XMLConsumer xmlConsumer;
 
     public HtmlProxyLinkTransformer(final ProxyHostManager proxyHostManager) {
         this.proxyHostManager = proxyHostManager;

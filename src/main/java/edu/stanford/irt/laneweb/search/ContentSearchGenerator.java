@@ -31,7 +31,8 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
 
     private String timeout;
 
-    public ContentSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<PagingSearchResultList> saxStrategy,
+    public ContentSearchGenerator(final MetaSearchManager metaSearchManager,
+            final SAXStrategy<PagingSearchResultList> saxStrategy,
             final ContentResultConversionStrategy conversionStrategy) {
         super(saxStrategy);
         this.metasearchManager = metaSearchManager;
@@ -46,6 +47,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
     }
 
+    @Override
     public void setParameters(final Map<String, String> parameters) {
         if (this.timeout == null) {
             this.timeout = parameters.get(Model.TIMEOUT);

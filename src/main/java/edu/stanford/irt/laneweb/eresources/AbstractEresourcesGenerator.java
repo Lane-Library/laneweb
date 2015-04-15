@@ -45,6 +45,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         this.saxStrategy = saxStrategy;
     }
 
+    @Override
     public Serializable getKey() {
         if (null == this.key) {
             this.key = createKey().toString();
@@ -52,10 +53,12 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         return this.key;
     }
 
+    @Override
     public String getType() {
         return this.componentType;
     }
 
+    @Override
     public Validity getValidity() {
         if (this.validity == null) {
             this.validity = new ExpiresValidity(this.expires);
@@ -67,6 +70,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         this.expires = expires;
     }
 
+    @Override
     public void setModel(final Map<String, Object> model) {
         String p = ModelUtil.getString(model, Model.PAGE, "1");
         try {
@@ -77,6 +81,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         this.queryString = ModelUtil.getString(model, Model.QUERY_STRING, "");
     }
 
+    @Override
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.EXPIRES)) {
             this.expires = Long.parseLong(parameters.get(Model.EXPIRES));

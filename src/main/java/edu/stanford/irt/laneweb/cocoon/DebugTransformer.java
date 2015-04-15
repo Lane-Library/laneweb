@@ -13,8 +13,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 /**
- * This transformer puts a comment with all model attributes at the top of a
- * document.
+ * This transformer puts a comment with all model attributes at the top of a document.
  */
 public class DebugTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
 
@@ -22,6 +21,7 @@ public class DebugTransformer extends AbstractXMLPipe implements Transformer, Mo
 
     private Set<Entry<String, Object>> modelEntries;
 
+    @Override
     public void setModel(final Map<String, Object> model) {
         this.debug = ModelUtil.getObject(model, Model.DEBUG, Boolean.class, Boolean.FALSE);
         this.modelEntries = model.entrySet();
