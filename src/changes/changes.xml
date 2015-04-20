@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-04-20" version="3.0.1" description="3.0.1 bug fix release">
+            <action date="2015-04-17" dev="olgary" issue="103975" type="update">
+                new favicon.ico icon - updated file from .png to truly .ico
+            </action>
+            <action date="2015-04-14" dev="ryanmax" issue="103851" type="fix">
+                laneblog search results missing source
+            </action>
+        </release>
         <release date="2015-04-13" version="3.0.0" description="3.0.0 java 8 release">
             <action date="2015-04-07" dev="ceyates" issue="103573" type="fix">
                 failed metasearch links have empty href on bioresearch and textbook search pages
