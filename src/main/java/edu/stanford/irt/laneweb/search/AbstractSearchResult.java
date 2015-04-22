@@ -27,8 +27,12 @@ public abstract class AbstractSearchResult implements SearchResult {
     @Override
     public String getSortTitle() {
         if (this.sortTitle == null) {
-            String temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");
-            this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
+            if (this.title == null) {
+                this.sortTitle = "";
+            } else {
+                String temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");
+                this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
+            }
         }
         return this.sortTitle;
     }

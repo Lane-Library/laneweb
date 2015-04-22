@@ -30,7 +30,9 @@ public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearch
             maybeCreateElement(xmlConsumer, Resource.RESOURCE_HITS, resourceResult.getHits());
             maybeCreateElement(xmlConsumer, Resource.ID, contentResult.getId());
             maybeCreateElement(xmlConsumer, Resource.CONTENT_ID, contentResult.getContentId());
-            maybeCreateElement(xmlConsumer, Resource.TITLE, contentResult.getTitle());
+            String title = contentResult.getTitle();
+            title = title == null ? "no title" : title;
+            maybeCreateElement(xmlConsumer, Resource.TITLE, title);
             maybeCreateElement(xmlConsumer, Resource.DESCRIPTION, contentResult.getDescription());
             maybeCreateElement(xmlConsumer, Resource.AUTHOR, contentResult.getAuthor());
             maybeCreateElement(xmlConsumer, Resource.URL, contentResult.getURL());

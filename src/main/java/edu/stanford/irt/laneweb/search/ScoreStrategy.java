@@ -128,9 +128,11 @@ public class ScoreStrategy extends AbstractScoreStrategy {
 
     private int getTitleHits(final Pattern queryTermPattern, final String title) {
         int titleHits = 0;
-        Matcher ntMatcher = queryTermPattern.matcher(title);
-        while (ntMatcher.find()) {
-            titleHits++;
+        if (title != null) {
+            Matcher ntMatcher = queryTermPattern.matcher(title);
+            while (ntMatcher.find()) {
+                titleHits++;
+            }
         }
         return titleHits;
     }
