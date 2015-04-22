@@ -85,6 +85,43 @@ public class ContentResultSAXStrategyTest {
     }
 
     @Test
+    public void testToSAXNullTitle() throws SAXException {
+        expect(this.searchResult.getContentResult()).andReturn(this.contentResult);
+        expect(this.searchResult.getResourceResult()).andReturn(this.resourceResult);
+        expect(this.searchResult.getScore()).andReturn(1);
+        Capture<Attributes> attributesCapture = newCapture();
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT),
+                capture(attributesCapture));
+        expect(this.resourceResult.getId()).andReturn(Resource.RESOURCE_ID);
+        recordElement(Resource.RESOURCE_ID);
+        expect(this.resourceResult.getDescription()).andReturn(Resource.RESOURCE_NAME);
+        recordElement(Resource.RESOURCE_NAME);
+        expect(this.resourceResult.getURL()).andReturn(Resource.RESOURCE_URL);
+        recordElement(Resource.RESOURCE_URL);
+        expect(this.resourceResult.getHits()).andReturn(Resource.RESOURCE_HITS);
+        recordElement(Resource.RESOURCE_HITS);
+        expect(this.contentResult.getId()).andReturn(Resource.ID);
+        recordElement(Resource.ID);
+        expect(this.contentResult.getContentId()).andReturn(Resource.CONTENT_ID);
+        recordElement(Resource.CONTENT_ID);
+        expect(this.contentResult.getTitle()).andReturn(null);
+        recordElement(Resource.TITLE, "no title");
+        expect(this.contentResult.getDescription()).andReturn(Resource.DESCRIPTION);
+        recordElement(Resource.DESCRIPTION);
+        expect(this.contentResult.getAuthor()).andReturn(null);
+        expect(this.contentResult.getURL()).andReturn(Resource.URL);
+        recordElement(Resource.URL);
+        expect(this.contentResult.getPublicationText()).andReturn(Resource.PUBLICATION_TEXT);
+        recordElement(Resource.PUBLICATION_TEXT);
+        this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.RESULT, Resource.RESULT);
+        replay(this.searchResult, this.xmlConsumer, this.contentResult, this.resourceResult);
+        this.strategy.toSAX(this.searchResult, this.xmlConsumer);
+        assertEquals("1", attributesCapture.getValue().getValue("score"));
+        assertEquals("searchContent", attributesCapture.getValue().getValue("type"));
+        verify(this.searchResult, this.xmlConsumer, this.contentResult, this.resourceResult);
+    }
+
+    @Test
     public void testToSAXThrowsException() throws SAXException {
         expect(this.searchResult.getContentResult()).andReturn(this.contentResult);
         expect(this.searchResult.getResourceResult()).andReturn(this.resourceResult);
