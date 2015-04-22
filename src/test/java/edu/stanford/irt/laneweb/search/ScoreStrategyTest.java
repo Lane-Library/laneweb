@@ -237,4 +237,15 @@ public class ScoreStrategyTest {
         assertEquals(65, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("query")));
         verify(this.result);
     }
+
+    @Test
+    public void testTitleNull() {
+        expect(this.result.getId()).andReturn("foo_content_1");
+        expect(this.result.getTitle()).andReturn(null);
+        expect(this.result.getDescription()).andReturn("query query");
+        expect(this.result.getYear()).andReturn(0);
+        replay(this.result);
+        assertEquals(10, this.scoreStrategy.computeScore(this.result, QueryTermPattern.getPattern("query")));
+        verify(this.result);
+    }
 }
