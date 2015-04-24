@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +24,32 @@ public class EresourcesCollectionManagerTest {
     public void setUp() throws Exception {
         this.manager = new EresourcesCollectionManager(null, null, null);
         this.resultSet = createMock(ResultSet.class);
+    }
+
+    @Test
+    public void testInvalid() throws SQLException {
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
+        expect(this.resultSet.getInt("RECORD_ID")).andReturn(1);
+        expect(this.resultSet.getString("RECORD_TYPE")).andReturn("type1");
+        expect(this.resultSet.getString("TITLE")).andReturn("title1");
+        expect(this.resultSet.getInt("TOTAL")).andReturn(10);
+        expect(this.resultSet.getInt("AVAILABLE")).andReturn(5);
+        expect(this.resultSet.getString("DESCRIPTION")).andReturn("description1");
+        expect(this.resultSet.getString("PRIMARY_TYPE")).andReturn("primaryType1");
+        expect(this.resultSet.getInt("VERSION_ID")).andReturn(1);
+        expect(this.resultSet.getString("GETPASSWORD")).andReturn("F");
+        expect(this.resultSet.getInt("LINK_ID")).andReturn(1);
+        expect(this.resultSet.getString("URL")).andReturn("url1");
+        expect(this.resultSet.getString("LABEL")).andReturn("impact factor");
+        expect(this.resultSet.getString("V_ADDITIONAL_TEXT")).andReturn("additional-text1");
+        expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher1");
+        expect(this.resultSet.getString("HOLDINGS_DATES")).andReturn("holdings-dates");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.resultSet);
+        List<Eresource> eresources = this.manager.parseResultSet(this.resultSet, null);
+        assertTrue(eresources.isEmpty());
+        verify(this.resultSet);
     }
 
     @Test

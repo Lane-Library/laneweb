@@ -163,6 +163,14 @@ public class Eresource {
         return this.total;
     }
 
+    public boolean isValid() {
+        boolean valid = true;
+        if (this.links.size() == 1 && LinkType.IMPACTFACTOR.equals(this.links.get(0).getType())) {
+            valid = false;
+        }
+        return valid;
+    }
+
     @Override
     public String toString() {
         return new StringBuilder("title:").append(this.title).append(" score:").append(this.score).append(" updated:")
