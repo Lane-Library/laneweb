@@ -8,9 +8,6 @@
     </properties>
     <body>
         <release date="2015-04-27" version="3.0.2" description="3.0.2 bug fix release">
-            <action date="2015-04-27" dev="ceyates" issue="104270" type="update">
-                update to lane-search-2.2.0
-            </action>
             <action date="2015-04-23" dev="ceyates" issue="104185" type="fix">
                 resources with only an impact factor link cause search results to break
             </action>
