@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-04-27" version="3.0.2" description="3.0.2 bug fix release">
+            <action date="2015-04-27" dev="ceyates" issue="104270" type="update">
+                update to lane-search-2.2.0
+            </action>
+            <action date="2015-04-23" dev="ceyates" issue="104185" type="fix">
+                resources with only an impact factor link cause search results to break
+            </action>
+            <action date="2015-04-22" dev="ceyates" issue="104133" type="fix">
+                NullPointerExceptions occuring during searches
+            </action>
+        </release>
         <release date="2015-04-20" version="3.0.1" description="3.0.1 bug fix release">
             <action date="2015-04-17" dev="olgary" issue="103975" type="update">
                 new favicon.ico icon - updated file from .png to truly .ico
