@@ -42,22 +42,22 @@ public class QueryTranslatorTest {
     @Test
     public void testProcessString() {
         this.translator.processString("green  red");
-        assertEquals("((${green} & ${red})) ", this.translator.getQuery());
+        assertEquals("((${green} & ${red}|${green red})) ", this.translator.getQuery());
         this.translator.processString("green red");
-        assertEquals("((${green} & ${red})) ", this.translator.getQuery());
+        assertEquals("((${green} & ${red}|${green red})) ", this.translator.getQuery());
         this.translator.processString("green red -blue");
-        assertEquals("((${green} & ${red}))  NOT ${blue}", this.translator.getQuery());
+        assertEquals("((${green} & ${red}|${green red}))  NOT ${blue}", this.translator.getQuery());
         this.translator.processString("green  red  -blue");
-        assertEquals("((${green} & ${red}))  NOT ${blue}", this.translator.getQuery());
+        assertEquals("((${green} & ${red}|${green red}))  NOT ${blue}", this.translator.getQuery());
         this.translator.processString("green \"red -blue\"");
-        assertEquals("((${green} & ${\"red -blue\"})) ", this.translator.getQuery());
+        assertEquals("((${green} & ${\"red -blue\"}|${green \"red -blue\"})) ", this.translator.getQuery());
         this.translator.processString("\"blue and +orange\" green -purple \"blue +tan\"");
-        assertEquals("((${\"blue and +orange\"} & ${green} & ${\"blue +tan\"}))  NOT ${purple}",
+        assertEquals("((${\"blue and +orange\"} & ${green} & ${\"blue +tan\"}|${\"blue and +orange\" green \"blue +tan\"}))  NOT ${purple}",
                 this.translator.getQuery());
         this.translator.processString("\"blue and +orange\" green -purple \"blue +tan");
-        assertEquals("((${\"blue} & ${and} & ${orange\" green -purple \"blue} & ${tan})) ", this.translator.getQuery());
+        assertEquals("((${\"blue} & ${and} & ${orange\" green -purple \"blue} & ${tan}|${\"blue and orange\" green -purple \"blue tan})) ", this.translator.getQuery());
         this.translator.processString("green - red");
-        assertEquals("((${green} & ${-} & ${red})) ", this.translator.getQuery());
+        assertEquals("((${green} & ${-} & ${red}|${green - red})) ", this.translator.getQuery());
     }
 
     @Test

@@ -34,7 +34,7 @@ public class ScoreStrategyTest {
         expect(this.result.getInt("SCORE_TITLE")).andReturn(5);
         expect(this.result.getInt("SCORE_TEXT")).andReturn(5);
         replay(this.result);
-        assertEquals(15, this.scoreStrategy.computeScore("query", "title", this.result));
+        assertEquals(45, this.scoreStrategy.computeScore("query", "title", this.result));
         verify(this.result);
     }
 
@@ -78,7 +78,7 @@ public class ScoreStrategyTest {
         expect(this.result.getInt("SCORE_TITLE")).andReturn(5);
         expect(this.result.getInt("SCORE_TEXT")).andReturn(5);
         replay(this.result);
-        assertEquals(5, this.scoreStrategy.computeScore("query", "title", this.result));
+        assertEquals(15, this.scoreStrategy.computeScore("query", "title", this.result));
         verify(this.result);
     }
 }
