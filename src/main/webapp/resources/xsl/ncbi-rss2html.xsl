@@ -5,6 +5,9 @@
     
     <xsl:param name="format"/>
     
+	<!-- ncbi returns just a link to a PubMed search when more than the configured RSS limit citations are returned. -->
+	<xsl:variable name="linkToCitations" select="count(rss/channel/item) = 1 and matches(rss/channel/item/title,'.*; \+\d+ new citations')"/>
+        
     <xsl:template match="h:*">
         <xsl:copy>
             <xsl:apply-templates select="node()|@*"/>
@@ -16,33 +19,11 @@
     </xsl:template>
     
     <xsl:template match="rss">
-        <!-- ncbi returns just a link to a PubMed search when more than the configured RSS limit citations are returned. -->
-        <xsl:variable name="linkToCitations" select="count(channel/item) = 1 and matches(channel/item/title,'.*; \+\d+ new citations')"/>
         <xsl:choose>
-            <xsl:when test="$format = 'brief' and $linkToCitations">
-                <ul xmlns="http://www.w3.org/1999/xhtml">
-                    <li>
-                        <a href="{channel/item/link}">
-                            <xsl:value-of select="replace(channel/item/title,'.*; \+','')"/>
-                        </a>
-                    </li>
-                </ul>
-            </xsl:when>
             <xsl:when test="$format = 'brief'">
                 <ul xmlns="http://www.w3.org/1999/xhtml">
                     <xsl:apply-templates select="channel/item"/>
                 </ul>
-            </xsl:when>
-            <xsl:when test="$linkToCitations">
-                <span xmlns="http://www.w3.org/1999/xhtml">
-                    <ol class="citationList" xmlns="http://www.w3.org/1999/xhtml">
-                    <li>
-                        <a href="{channel/item/link}">
-                            <xsl:value-of select="replace(channel/item/title,'.*; \+','')"/>
-                        </a>
-                    </li>
-                    </ol>
-                </span>
             </xsl:when>
             <xsl:otherwise>
                 <span xmlns="http://www.w3.org/1999/xhtml">
@@ -60,6 +41,11 @@
     <xsl:template match="item">
         <li xmlns="http://www.w3.org/1999/xhtml">
             <xsl:choose>
+                <xsl:when test="$linkToCitations">
+	                <a href="{link}">
+	                    <xsl:value-of select="replace(title,'.*; \+','')"/>
+	                </a>
+                </xsl:when>
                 <xsl:when test="starts-with(guid,'PubMed:')">
                     <a xmlns="http://www.w3.org/1999/xhtml" id="pubmed_{substring-after(guid,':')}" href="{concat('http://www.ncbi.nlm.nih.gov/pubmed/',substring-after(guid,':'),'?otool=stanford&amp;holding=F1000,F1000M')}" title="feed link---{../../channel/title}---{title}"><xsl:value-of select="title"/></a>
                 </xsl:when>
@@ -69,6 +55,7 @@
             </xsl:choose>
             
             <xsl:choose>
+                <xsl:when test="$linkToCitations"/>
                 <xsl:when test="$format = 'brief'">
                     <xsl:text> </xsl:text>
                     <xsl:value-of select="category"/>
