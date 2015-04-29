@@ -16,11 +16,33 @@
     </xsl:template>
     
     <xsl:template match="rss">
+        <!-- ncbi returns just a link to a PubMed search when more than the configured RSS limit citations are returned. -->
+        <xsl:variable name="linkToCitations" select="count(channel/item) = 1 and matches(channel/item/title,'.*; \+\d+ new citations')"/>
         <xsl:choose>
+            <xsl:when test="$format = 'brief' and $linkToCitations">
+                <ul xmlns="http://www.w3.org/1999/xhtml">
+                    <li>
+                        <a href="{channel/item/link}">
+                            <xsl:value-of select="replace(channel/item/title,'.*; \+','')"/>
+                        </a>
+                    </li>
+                </ul>
+            </xsl:when>
             <xsl:when test="$format = 'brief'">
                 <ul xmlns="http://www.w3.org/1999/xhtml">
                     <xsl:apply-templates select="channel/item"/>
                 </ul>
+            </xsl:when>
+            <xsl:when test="$linkToCitations">
+                <span xmlns="http://www.w3.org/1999/xhtml">
+                    <ol class="citationList" xmlns="http://www.w3.org/1999/xhtml">
+                    <li>
+                        <a href="{channel/item/link}">
+                            <xsl:value-of select="replace(channel/item/title,'.*; \+','')"/>
+                        </a>
+                    </li>
+                    </ol>
+                </span>
             </xsl:when>
             <xsl:otherwise>
                 <span xmlns="http://www.w3.org/1999/xhtml">
