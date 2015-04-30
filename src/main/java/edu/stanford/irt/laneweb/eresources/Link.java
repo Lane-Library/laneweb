@@ -10,20 +10,17 @@ public class Link {
 
     private String linkText;
 
-    private String publisher;
-
     private LinkType type;
 
     private String url;
 
     public Link(final String label, final LinkType type, final String url, final String linkText,
-            final String additionalText, final String publisher, final String holdingsAndDates) {
+            final String additionalText, final String holdingsAndDates) {
         this.label = label;
         this.type = type;
         this.url = url;
         this.linkText = linkText;
         this.additionalText = additionalText;
-        this.publisher = publisher;
         this.holdingsAndDates = holdingsAndDates;
     }
 
@@ -41,10 +38,6 @@ public class Link {
 
     public String getLinkText() {
         return this.linkText;
-    }
-
-    public String getPublisher() {
-        return this.publisher;
     }
 
     /**

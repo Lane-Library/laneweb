@@ -43,12 +43,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAX() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
@@ -66,14 +66,12 @@ public class EresourceXHTMLSAXStrategyTest {
     @Test
     public void testToSAX2Links() throws SAXException, IOException {
         expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link, this.link }));
-        expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getLinkText()).andReturn("title").times(2);
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction").times(2);
         expect(this.link.getUrl()).andReturn("url").times(2);
-        expect(this.link.getType()).andReturn(LinkType.NORMAL).times(2);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
-        expect(this.link.getLinkText()).andReturn("summary holdings, dates description");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getLabel()).andReturn("label");
-        expect(this.link.getAdditionalText()).andReturn(" instruction publisher");
+        expect(this.link.getType()).andReturn(LinkType.NORMAL).times(2);
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
@@ -92,11 +90,11 @@ public class EresourceXHTMLSAXStrategyTest {
     public void testToSAX2ndLinkGetPassword() throws SAXException, IOException {
         expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link, this.link }));
         expect(this.link.getLinkText()).andReturn("title").times(2);
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction").times(2);
         expect(this.link.getUrl()).andReturn("url").times(2);
-        expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ").times(2);
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getLabel()).andReturn("label");
+        expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
@@ -114,12 +112,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXAuth() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
         expect(this.eresource.getRecordType()).andReturn("auth");
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -135,12 +133,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXBadType() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
         expect(this.eresource.getRecordType()).andReturn("bad");
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -156,12 +154,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXClass() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
         expect(this.eresource.getRecordType()).andReturn("class");
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -177,11 +175,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXEmptyAdditionalText() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
-        expect(this.link.getUrl()).andReturn("url");
-        expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getAdditionalText()).andReturn("");
+        expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
+        expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
@@ -198,12 +197,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXEmptyDescription() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("");
@@ -223,10 +222,10 @@ public class EresourceXHTMLSAXStrategyTest {
     public void testToSAXGetPassword() throws SAXException, IOException {
         expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
-        expect(this.link.getType()).andReturn(LinkType.GETPASSWORD);
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
+        expect(this.link.getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
@@ -244,11 +243,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXNullAdditionalText() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
-        expect(this.link.getUrl()).andReturn("url");
-        expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getAdditionalText()).andReturn(null);
+        expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
+        expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
@@ -265,12 +265,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXNullDescription() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
         expect(this.eresource.getRecordType()).andReturn("bib");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn(null);
@@ -288,12 +288,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXPrint() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
         expect(this.eresource.getRecordType()).andReturn("print");
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -312,6 +312,8 @@ public class EresourceXHTMLSAXStrategyTest {
         XMLConsumer c = createMock(XMLConsumer.class);
         expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
+        expect(this.link.getLinkText()).andReturn("title");
         c.startElement(eq("http://www.w3.org/1999/xhtml"), eq("div"), eq("div"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.eresource, this.link, c);
@@ -321,12 +323,12 @@ public class EresourceXHTMLSAXStrategyTest {
 
     @Test
     public void testToSAXWeb() throws SAXException, IOException {
-        expect(this.eresource.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.eresource.getLinks()).andReturn(Arrays.asList(new Link[] { this.link }));
         expect(this.link.getLinkText()).andReturn("title");
+        expect(this.link.getAdditionalText()).andReturn("publisher, additional text, instruction");
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.link.getAdditionalText()).andReturn(
-                " summary holdings, dates, publisher, description, instruction ");
         expect(this.eresource.getRecordType()).andReturn("web");
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);

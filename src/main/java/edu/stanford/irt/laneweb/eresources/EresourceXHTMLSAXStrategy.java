@@ -37,22 +37,25 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
 
     private void createLink(final XMLConsumer xmlConsumer, final Link link, final boolean first) throws SAXException {
         String linkText = link.getLinkText();
+        String additionalText = link.getAdditionalText();
         startDiv(xmlConsumer);
         if (first) {
             createAnchorWithClassAndTitle(xmlConsumer, link.getUrl(), PRIMARY_LINK, linkText, linkText);
+            if (link.getHoldingsAndDates() != null) {
+                XMLUtils.data(xmlConsumer, " " + link.getHoldingsAndDates());
+            }
+            maybeCreateGetPasswordLink(xmlConsumer, link);
+            if (additionalText != null && !additionalText.isEmpty()) {
+                startDiv(xmlConsumer);
+                XMLUtils.data(xmlConsumer, additionalText);
+                endDiv(xmlConsumer);
+            }
         } else {
             createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), linkText);
-        }
-        String text = link.getAdditionalText();
-        if (text != null && text.length() > 0) {
-            XMLUtils.data(xmlConsumer, text);
-        }
-        if (LinkType.GETPASSWORD.equals(link.getType())) {
-            if (!first) {
-                // the one getpassword link that is not a first link doesn't have trailing space in additional_text
-                XMLUtils.data(xmlConsumer, " ");
+            if (additionalText != null && !additionalText.isEmpty()) {
+                XMLUtils.data(xmlConsumer, " " + additionalText);
             }
-            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
+            maybeCreateGetPasswordLink(xmlConsumer, link);
         }
         endDiv(xmlConsumer);
     }
@@ -74,5 +77,12 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
             createSpanWithClass(xmlConsumer, SOURCE_LINK, "Print Material");
         }
         endDiv(xmlConsumer);
+    }
+
+    private void maybeCreateGetPasswordLink(final XMLConsumer xmlConsumer, final Link link) throws SAXException {
+        if (LinkType.GETPASSWORD.equals(link.getType())) {
+            XMLUtils.data(xmlConsumer, " ");
+            createAnchorWithTitle(xmlConsumer, "/secure/ejpw.html", GET_PASSWORD, GET_PASSWORD);
+        }
     }
 }

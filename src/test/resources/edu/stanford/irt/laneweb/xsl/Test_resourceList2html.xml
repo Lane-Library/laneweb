@@ -31,8 +31,7 @@
       <label>Fulltext</label>
       <link-text>Music that works</link-text>
       <url>http://link.springer.com/978-3-211-75120-6</url>
-      <additional-text> 2009, Springer </additional-text>
-      <publisher>Springer</publisher>
+      <additional-text>Springer, additional text, instruction</additional-text>
     </link>
     <link type="impactFactor">
       <label>Impact Factor</label>

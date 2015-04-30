@@ -85,12 +85,34 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 type = LinkType.NORMAL;
             }
             String linkText = this.isFirstLink ? title : this.rs.getString("LINK_TEXT");
-            String additionalText = this.isFirstLink ? this.rs.getString("V_ADDITIONAL_TEXT") : this.rs
-                    .getString("L_ADDITIONAL_TEXT");
-            this.builder.addLink(new Link(label, type, this.rs.getString("URL"), linkText, additionalText, this.rs
-                    .getString("PUBLISHER"), this.rs.getString("HOLDINGS_DATES")));
+            this.builder.addLink(new Link(label, type, this.rs.getString("URL"), linkText, getAdditionalText(), this.rs
+                    .getString("HOLDINGS_DATES")));
             this.currentLinkId = linkId;
             this.isFirstLink = false;
+        }
+
+        private String getAdditionalText() throws SQLException {
+            return this.rs.getString("ADDITIONAL_TEXT");
+//            StringBuilder sb = new StringBuilder();
+//            String publisher = this.rs.getString("PUBLISHER");
+//            String additionalText = this.rs.getString("ADDITIONAL_TEXT");
+//            String instruction = this.rs.getString("INSTRUCTION");
+//            if (publisher != null) {
+//                sb.append(publisher);
+//            }
+//            if (additionalText != null) {
+//                if (sb.length() > 0) {
+//                    sb.append(", ");
+//                }
+//                sb.append(additionalText);
+//            }
+//            if (instruction != null) {
+//                if (sb.length() > 0) {
+//                    sb.append(", ");
+//                }
+//                sb.append(instruction);
+//            }
+//            return sb.length() == 0 ? null : sb.toString();
         }
 
         private void maybeAdd(final Eresource eresource) {

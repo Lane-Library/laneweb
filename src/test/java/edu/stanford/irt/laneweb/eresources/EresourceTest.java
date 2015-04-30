@@ -19,13 +19,12 @@ public class EresourceTest {
 
     @Test
     public void testIsValidOnlyImpactFactory() {
-        assertFalse(this.builder.addLink(new Link(null, LinkType.IMPACTFACTOR, null, null, null, null, null)).build()
+        assertFalse(this.builder.addLink(new Link(null, LinkType.IMPACTFACTOR, null, null, null, null)).build()
                 .isValid());
     }
 
     @Test
     public void testIsValidOnlyNormal() {
-        assertTrue(this.builder.addLink(new Link(null, LinkType.NORMAL, null, null, null, null, null)).build()
-                .isValid());
+        assertTrue(this.builder.addLink(new Link(null, LinkType.NORMAL, null, null, null, null)).build().isValid());
     }
 }
