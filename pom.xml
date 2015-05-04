@@ -616,7 +616,6 @@
                     <groupId>commons-logging</groupId>
                 </exclusion>
             </exclusions>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
