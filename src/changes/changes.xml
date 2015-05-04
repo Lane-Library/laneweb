@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-05-04" version="3.0.3" description="3.0.3 bug fix release">
+            <action date="2015-05-04" dev="ceyates" issue="104270" type="update">
+                update to lane-search-2.2.0
+            </action>
+            <action date="2015-04-29" dev="ceyates" issue="104230" type="update">
+                show text from holdings 856 ^i and 866 ^z in eresource search and browse pages
+            </action>
+            <action date="2015-04-29" dev="ryanmax" issue="104003" type="update">
+                Lane website -- Manual override to include selected print materials
+            </action>
+            <action date="2015-04-29" dev="ryanmax" issue="103460" type="update">
+                Feedback-bug: consider expanding print eresource date limit
+            </action>
+            <action date="2015-04-29" dev="ryanmax" issue="103436" type="update">
+                search feedback: Pharmaceutical marketers directory not in search results
+            </action>
+            <action date="2015-04-28" dev="ryanmax" issue="103309" type="update">
+                Improve Lane Search Results Ranking
+            </action>
+            <action date="2015-04-29" dev="ryanmax" issue="99868" type="update">
+                Feedback-bug: search for Foundation grants to individuals
+            </action>
+            <action date="2015-04-29" dev="ryanmax" issue="99616" type="fix">
+                Feedback-bug: PubMed rss feed not working
+            </action>
+        </release>
         <release date="2015-04-27" version="3.0.2" description="3.0.2 bug fix release">
             <action date="2015-04-23" dev="ceyates" issue="104185" type="fix">
                 resources with only an impact factor link cause search results to break
