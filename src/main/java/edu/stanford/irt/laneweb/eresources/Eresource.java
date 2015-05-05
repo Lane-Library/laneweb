@@ -223,6 +223,14 @@ public class Eresource {
     public Integer getYear() {
         return this.year;
     }
+    
+    public boolean isValid() {
+        boolean valid = true;
+        if (getLinks().size() == 1 && LinkType.IMPACTFACTOR.equals(getLinks().iterator().next().getType())) {
+            valid = false;
+        }
+        return valid;
+    }
 
     public void setDescription(final String description) {
         this.description = description;
@@ -248,7 +256,6 @@ public class Eresource {
                     String linkUrl = null;
                     String linkText = null;
                     String additionalText = null;
-                    String publisher = null;
                     String holdingsAndDates = null;
                     LinkType linkType = null;
                     LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
@@ -270,9 +277,6 @@ public class Eresource {
                     if (jsonLink.containsKey("url")) {
                         linkUrl = (String) jsonLink.get("url");
                     }
-                    if (versionMap.containsKey("publisher")) {
-                        publisher = (String) versionMap.get("publisher");
-                    }
                     if (versionMap.containsKey("holdingsAndDates")) {
                         holdingsAndDates = (String) versionMap.get("holdingsAndDates");
                     }
@@ -284,8 +288,7 @@ public class Eresource {
                     } else {
                         linkType = LinkType.NORMAL;
                     }
-                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, publisher,
-                            holdingsAndDates));
+                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates));
                 }
             }
         }

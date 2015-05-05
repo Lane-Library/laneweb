@@ -17,8 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -30,9 +28,16 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SearchImageFilter extends AbstractLanewebFilter {
 
+    private static final String ALL_IMAGES = "images-all";
+
+    private static final String CC_IMAGES = "cc-images-all";
+
+    private static final String PMC_IMAGES = "pmc-images-all";
+
+    private static final String RL_IMAGES = "rl-images-all";
+
     private Map<String, String> copyrightMapping;
 
-    @Autowired
     private SolrImageService service;
 
     @Override
@@ -40,13 +45,12 @@ public class SearchImageFilter extends AbstractLanewebFilter {
         ServletContext servletContext = filterConfig.getServletContext();
         WebApplicationContext webApplicationContext = WebApplicationContextUtils
                 .getWebApplicationContext(servletContext);
-        AutowireCapableBeanFactory autowireCapableBeanFactory = webApplicationContext.getAutowireCapableBeanFactory();
-        autowireCapableBeanFactory.configureBean(this, "edu.stanford.irt.solr.service");
+        this.service = webApplicationContext.getBean("edu.stanford.irt.solr.service", SolrImageService.class);
         this.copyrightMapping = new HashMap<String, String>();
-        this.copyrightMapping.put("images-all", "0");
-        this.copyrightMapping.put("cc-images-all", "10");
-        this.copyrightMapping.put("pmc-images-all", "15");
-        this.copyrightMapping.put("rl-images-all", "20");
+        this.copyrightMapping.put(ALL_IMAGES, "0");
+        this.copyrightMapping.put(CC_IMAGES, "10");
+        this.copyrightMapping.put(PMC_IMAGES, "15");
+        this.copyrightMapping.put(RL_IMAGES, "20");
     }
 
     @Override
@@ -54,31 +58,37 @@ public class SearchImageFilter extends AbstractLanewebFilter {
             final FilterChain chain) throws IOException, ServletException {
         String sourceOri = request.getParameter("source");
         String auto = request.getParameter("auto");
-        if (sourceOri != null && sourceOri.indexOf("images-all") > -1 && !"no".equals(auto)) {
+        if (sourceOri != null && sourceOri.indexOf(ALL_IMAGES) > -1 && !"no".equals(auto)) {
             String query = request.getParameter("q");
             Map<String, Long> copyrighToValue = getTabValuesFromSolr(query);
             Object[] keys = copyrighToValue.keySet().toArray();
             Arrays.sort(keys);
-            if (copyrighToValue.get(this.copyrightMapping.get(sourceOri)) == null && copyrighToValue.size() > 0) {
-                String source = "";
-                if ("0".equals(keys[0])) {
-                    source = "images-all";
-                } else if ("10".equals(keys[0])) {
-                    source = "cc-images-all";
-                } else if ("15".equals(keys[0])) {
-                    source = "pmc-images-all";
-                } else if ("20".equals(keys[0])) {
-                    source = "rl-images-all";
-                }
+            if (copyrighToValue.get(this.copyrightMapping.get(sourceOri)) == null && !copyrighToValue.isEmpty()) {
+                String source = getNewSource(keys);
                 String url = request.getRequestURL() + "?" + request.getQueryString();
                 response.sendRedirect(url.replace(sourceOri, source));
+                return;
             }
         }
         chain.doFilter(request, response);
     }
 
+    private String getNewSource(final Object[] keys) {
+        String source = "";
+        if ("0".equals(keys[0])) {
+            source = ALL_IMAGES;
+        } else if ("10".equals(keys[0])) {
+            source = CC_IMAGES;
+        } else if ("15".equals(keys[0])) {
+            source = PMC_IMAGES;
+        } else if ("20".equals(keys[0])) {
+            source = RL_IMAGES;
+        }
+        return source;
+    }
+
     private Map<String, Long> getTabValuesFromSolr(final String queryTerm) {
-        HashMap<String, Long> result = new HashMap<String, Long>();
+        Map<String, Long> result = new HashMap<String, Long>();
         FacetPage<Image> facetPage = this.service.facetOnCopyright(queryTerm);
         Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
         List<FacetFieldEntry> list = page.getContent();

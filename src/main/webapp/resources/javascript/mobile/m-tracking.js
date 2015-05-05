@@ -111,7 +111,7 @@ $.LANE.tracking.track = function(e) {
                 }
             },
             vclick: function(node) {
-                if (node.parentNode && node.parentNode.id === 'searchTabs' && node.nodeName === 'LI') {
+                if (node.parentNode && node.parentNode.className === 'searchTabs' && node.nodeName === 'LI') {
                     _gaq.push(['_trackEvent', "searchTabClick", $(node).text()]);
                 }
             },

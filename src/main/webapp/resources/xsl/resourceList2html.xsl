@@ -200,16 +200,19 @@
             <a class="primaryLink" href="{s:url}" title="{../s:title}">
                 <xsl:apply-templates select="../s:title"/>
             </a>
-            <xsl:value-of select="s:holdings-dates"/>
+            <xsl:if test="s:holdings-dates">
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="s:holdings-dates"/>
+            </xsl:if>
             <xsl:if test="@type = 'getPassword'">
-                <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
+                <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
             </xsl:if>
         </div>
         <xsl:if test="../s:author">
             <div><xsl:value-of select="../s:author"/></div>
         </xsl:if>
-        <xsl:if test="s:publisher">
-            <div><xsl:value-of select="s:publisher"/></div>
+        <xsl:if test="s:additional-text">
+            <div><xsl:value-of select="s:additional-text"/></div>
         </xsl:if>
     </xsl:template>
 
@@ -218,7 +221,10 @@
             Also available: <a href="{s:url}" title="{s:label}">
                 <xsl:value-of select="s:link-text"/>
             </a>
-            <xsl:value-of select="s:additional-text"/>
+            <xsl:if test="s:additional-text">
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="s:additional-text"/>
+            </xsl:if>
             <xsl:if test="@type = 'getPassword'">
                 <xsl:text> </xsl:text>
                 <a href="/secure/ejpw.html" title="Get Password">Get Password</a>

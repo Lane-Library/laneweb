@@ -3,7 +3,7 @@
  * Load contents of the Hours of Operation section from HTML document.
  */
 $.LANE.getHours = function(){
-    var hours = $("#hours");
+    var hours = $(".hours");
     if(hours){
         $.ajax({
             url: "plain/hours.html?site_preference=mobile",
@@ -13,7 +13,7 @@ $.LANE.getHours = function(){
                     hours.html(data);
                     hours.find("h4").click(function() {
                         hours.toggleClass("expanded");
-                        if(hours.attr("class") === "expanded") {
+                        if(hours.hasClass("expanded")) {
                             hours.css("height", "auto");
                             window.scrollTo(0, $(this).offset().top);
                             hours.find(".hours-container").animate({

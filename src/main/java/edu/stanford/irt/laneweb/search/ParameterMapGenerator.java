@@ -32,6 +32,6 @@ public class ParameterMapGenerator extends AbstractMarshallingGenerator implemen
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        marshall(this.parameters, xmlConsumer);
+        marshal(this.parameters, xmlConsumer);
     }
 }

@@ -74,7 +74,7 @@ public class ProxyHostManager {
     }
 
     // update every 2 hours
-    private static final long UPDATE_INTERVAL = 1000 * 60 * 60 * 2;
+    private static final long UPDATE_INTERVAL = 1000L * 60L * 60L * 2L;
 
     private DataSource dataSource;
 

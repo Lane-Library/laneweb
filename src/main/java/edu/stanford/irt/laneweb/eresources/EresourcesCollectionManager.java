@@ -8,6 +8,9 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.stanford.irt.laneweb.eresources.Eresource.EresourceBuilder;
 
 public class EresourcesCollectionManager extends AbstractCollectionManager {
@@ -64,7 +67,7 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 }
             }
             if (this.builder != null) {
-                this.eresources.add(this.builder.build());
+                maybeAdd(this.builder.build());
             }
             return this.eresources;
         }
@@ -82,18 +85,25 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 type = LinkType.NORMAL;
             }
             String linkText = this.isFirstLink ? title : this.rs.getString("LINK_TEXT");
-            String additionalText = this.isFirstLink ? this.rs.getString("V_ADDITIONAL_TEXT") : this.rs
-                    .getString("L_ADDITIONAL_TEXT");
-            this.builder.addLink(new Link(label, type, this.rs.getString("URL"), linkText, additionalText, this.rs
-                    .getString("PUBLISHER"), this.rs.getString("HOLDINGS_DATES")));
+            this.builder.addLink(new Link(label, type, this.rs.getString("URL"), linkText, this.rs
+                    .getString("ADDITIONAL_TEXT"), this.rs.getString("HOLDINGS_DATES")));
             this.currentLinkId = linkId;
             this.isFirstLink = false;
+        }
+
+        private void maybeAdd(final Eresource eresource) {
+            if (eresource.isValid()) {
+                this.eresources.add(eresource);
+            } else {
+                LOG.error("{} eresource '{}', id {} is not valid", eresource.getRecordType(), eresource.getTitle(),
+                        eresource.getRecordId());
+            }
         }
         
         private EresourceBuilder newEresourceBuilder(final String title, final int resourceId, final int recordId, final String recordType)
                 throws SQLException {
             if (this.builder != null) {
-                this.eresources.add(this.builder.build());
+                maybeAdd(this.builder.build());
             }
             this.currentTitle = title;
             int score = this.query == null ? 0 : this.scoreStrategy
@@ -109,6 +119,8 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                     .available(this.rs.getInt("AVAILABLE"));
         }
     }
+
+    private static final Logger LOG = LoggerFactory.getLogger(EresourcesCollectionManager.class);
 
     private ScoreStrategy scoreStrategy;
 

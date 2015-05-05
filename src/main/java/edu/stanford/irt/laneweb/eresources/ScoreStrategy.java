@@ -20,11 +20,13 @@ public class ScoreStrategy extends AbstractScoreStrategy {
         } else if (title.indexOf('(') > -1 && query.equalsIgnoreCase(PATTERN.matcher(title).replaceFirst(""))) {
             score = MAX_INT_MINUS_100;
         } else {
+            // titles that start with query get boost
+            int titleFactor = title.toLowerCase().startsWith(query.toLowerCase()) ? 10 : 5;
             // core material weighted * 3
             int coreFactor = "Y".equals(rs.getString("CORE")) ? 3 : 1;
             // weighted oracle text scores for title and text
             // averaged
-            score = ((rs.getInt("SCORE_TITLE") * coreFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
+            score = ((rs.getInt("SCORE_TITLE") * coreFactor * titleFactor) + (rs.getInt("SCORE_TEXT") * coreFactor)) / 2;
         }
         score = score + computeDateAdjustment(year);
         return score;

@@ -9,7 +9,7 @@ public class ClassesValidity implements Validity {
 
     private static final int ELEVEN_PM = 23;
 
-    private static final long ONE_HOUR_DELAY = 3600 * 1000;
+    private static final int ONE_HOUR_DELAY = 3600 * 1000;
 
     private static final long serialVersionUID = 1L;
 

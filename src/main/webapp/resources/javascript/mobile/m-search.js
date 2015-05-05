@@ -68,28 +68,28 @@ $("#_home").on("pageinit", function() {
     var eHandler = (navigator.userAgent.match(/(iPhone|iP.d)/)) ? 'vclick' : 'click';
     // Attach click event listener to the search tabs.
     // User can select Lane, Clinical, Pediatric search by clicking/tapping on the appropriate icon.
-    $("#searchTabs li").bind(eHandler,function(e) {
+    $(".searchTabs li").bind(eHandler,function(e) {
         e.preventDefault();
         $(this).bind('click', function(e){
             e.preventDefault();
         });
-        $("#searchTabs li").removeClass("selected");
+        $(".searchTabs li").removeClass("selected");
         $(this).addClass("selected");
         $("#_home .search form").removeClass("selected");
         $($("#_home .search form").get($(this).index())).addClass("selected");
         if($(this).index() > 0 && $(this).index() < 3) {
-            if(!$("#overlayMask").length) {
+            if(!$(".overlayMask").length) {
                 var maskHeight = $('.ui-mobile .ui-page-active').height();
-                $("#_home").append("<div id='overlayMask'></div>");
-                $("#overlayMask").css("height", maskHeight + 100 + "px");
-                $("#overlayMask").bind('click',function(e) {
+                $("#_home").append("<div class='overlayMask'></div>");
+                $(".overlayMask").css("height", maskHeight + 100 + "px");
+                $(".overlayMask").bind('click',function(e) {
                     e.preventDefault();
-                    $($("#searchTabs li").get(0)).trigger(eHandler);
+                    $($(".searchTabs li").get(0)).trigger(eHandler);
                 });
             }
         }
-        else if($("#overlayMask").length) {
-            $("#overlayMask").remove();
+        else if($(".overlayMask").length) {
+            $(".overlayMask").remove();
         }
         window.scrollTo(0, 46);
     });

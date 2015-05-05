@@ -19,7 +19,7 @@ public abstract class AbstractMarshallingGenerator extends AbstractGenerator {
         this.marshaller = marshaller;
     }
 
-    protected void marshall(final Object object, final XMLConsumer xmlConsumer) {
+    protected void marshal(final Object object, final XMLConsumer xmlConsumer) {
         try {
             this.marshaller.marshal(object, new SAXResult(xmlConsumer));
         } catch (IOException | XmlMappingException e) {

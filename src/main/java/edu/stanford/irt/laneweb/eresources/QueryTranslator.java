@@ -58,6 +58,15 @@ public class QueryTranslator {
             }
         }
         if (reqCount > 0) {
+            // whole phrase search: case 103309
+            if (!this.reqWords.isEmpty() && sb.toString().lastIndexOf('$') > 2) {
+                sb.append("|${");
+                for (String word : this.reqWords) {
+                    sb.append(word).append(" ");
+                }
+                sb.deleteCharAt(sb.length() - 1);
+                sb.append("}");
+            }
             sb.append(")) ");
         }
         if (notCount > 0) {

@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +29,31 @@ public class EresourcesCollectionManagerTest {
     }
 
     @Test
+    public void testInvalid() throws SQLException {
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
+        expect(this.resultSet.getInt("RECORD_ID")).andReturn(1);
+        expect(this.resultSet.getString("RECORD_TYPE")).andReturn("type1");
+        expect(this.resultSet.getString("TITLE")).andReturn("title1");
+        expect(this.resultSet.getInt("TOTAL")).andReturn(10);
+        expect(this.resultSet.getInt("AVAILABLE")).andReturn(5);
+        expect(this.resultSet.getString("DESCRIPTION")).andReturn("description1");
+        expect(this.resultSet.getString("PRIMARY_TYPE")).andReturn("primaryType1");
+        expect(this.resultSet.getInt("VERSION_ID")).andReturn(1);
+        expect(this.resultSet.getString("GETPASSWORD")).andReturn("F");
+        expect(this.resultSet.getInt("LINK_ID")).andReturn(1);
+        expect(this.resultSet.getString("URL")).andReturn("url1");
+        expect(this.resultSet.getString("LABEL")).andReturn("impact factor");
+        expect(this.resultSet.getString("ADDITIONAL_TEXT")).andReturn("additional-text1");
+        expect(this.resultSet.getString("HOLDINGS_DATES")).andReturn("holdings-dates");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.resultSet);
+        List<Eresource> eresources = this.manager.parseResultSet(this.resultSet, null);
+        assertTrue(eresources.isEmpty());
+        verify(this.resultSet);
+    }
+
+    @Test
     public void testParseResultSet() throws SQLException {
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
@@ -43,8 +69,7 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getInt("LINK_ID")).andReturn(1);
         expect(this.resultSet.getString("URL")).andReturn("url1");
         expect(this.resultSet.getString("LABEL")).andReturn("label1");
-        expect(this.resultSet.getString("V_ADDITIONAL_TEXT")).andReturn("additional-text1");
-        expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher1");
+        expect(this.resultSet.getString("ADDITIONAL_TEXT")).andReturn("additional-text1");
         expect(this.resultSet.getString("HOLDINGS_DATES")).andReturn("holdings-dates");
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(1);
@@ -56,10 +81,9 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getInt("LINK_ID")).andReturn(2);
         expect(this.resultSet.getString("LABEL")).andReturn("label2");
         expect(this.resultSet.getString("LINK_TEXT")).andReturn("link-text2");
-        expect(this.resultSet.getString("L_ADDITIONAL_TEXT")).andReturn("additional-text2");
         expect(this.resultSet.getString("URL")).andReturn("url2");
-        expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher2");
         expect(this.resultSet.getString("HOLDINGS_DATES")).andReturn("holdings-dates");
+        expect(this.resultSet.getString("ADDITIONAL_TEXT")).andReturn("additional-text2");
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getInt("ERESOURCE_ID")).andReturn(2);
         expect(this.resultSet.getInt("RECORD_ID")).andReturn(2);
@@ -73,14 +97,13 @@ public class EresourcesCollectionManagerTest {
         expect(this.resultSet.getString("GETPASSWORD")).andReturn("F");
         expect(this.resultSet.getInt("LINK_ID")).andReturn(3);
         expect(this.resultSet.getString("LABEL")).andReturn("label3");
-        expect(this.resultSet.getString("V_ADDITIONAL_TEXT")).andReturn("additional-text3");
+        expect(this.resultSet.getString("ADDITIONAL_TEXT")).andReturn("additional-text3");
         expect(this.resultSet.getString("URL")).andReturn("url3");
-        expect(this.resultSet.getString("PUBLISHER")).andReturn("publisher3");
         expect(this.resultSet.getString("HOLDINGS_DATES")).andReturn("holdings-dates");
         expect(this.resultSet.next()).andReturn(false);
         replay(this.resultSet);
         List<Eresource> eresources = this.manager.parseResultSet(this.resultSet, null);
-        assertEquals(eresources.size(), 2);
+        assertEquals(2, eresources.size());
         Eresource eresource = eresources.get(0);
         assertEquals(5, eresource.getAvailable());
         assertEquals("description1", eresource.getDescription());
@@ -98,14 +121,12 @@ public class EresourcesCollectionManagerTest {
         assertEquals("additional-text1", link.getAdditionalText());
         assertEquals("label1", link.getLabel());
         assertEquals("title1", link.getLinkText());
-        assertEquals("publisher1", link.getPublisher());
         assertEquals(LinkType.GETPASSWORD, link.getType());
         assertEquals("url1", link.getUrl());
         link = it.next();
         assertEquals("additional-text2", link.getAdditionalText());
         assertEquals("label2", link.getLabel());
         assertEquals("link-text2", link.getLinkText());
-        assertEquals("publisher2", link.getPublisher());
         assertEquals(LinkType.NORMAL, link.getType());
         assertEquals("url2", link.getUrl());
         eresource = eresources.get(1);
@@ -124,7 +145,6 @@ public class EresourcesCollectionManagerTest {
         assertEquals("additional-text3", link.getAdditionalText());
         assertEquals("label3", link.getLabel());
         assertEquals("title2", link.getLinkText());
-        assertEquals("publisher3", link.getPublisher());
         assertEquals(LinkType.NORMAL, link.getType());
         assertEquals("url3", link.getUrl());
         verify(this.resultSet);
