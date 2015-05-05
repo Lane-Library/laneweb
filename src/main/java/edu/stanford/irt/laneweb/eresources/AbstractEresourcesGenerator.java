@@ -20,7 +20,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         ParametersAware, ModelAware {
 
     /** the default cache expiration time, 20 minutes */
-    private static final long DEFAULT_EXPIRES = 1000 * 60 * 20;
+    private static final long DEFAULT_EXPIRES = 1000L * 60L * 20L;
 
     private CollectionManager collectionManager;
 
