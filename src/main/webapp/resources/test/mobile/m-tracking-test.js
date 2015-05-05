@@ -37,7 +37,7 @@ YUI().use('console','test',"event-simulate", function(Y) {
         },
         
         "test track vclick" : function() {
-            var li = Y.Node.create("<ul id='searchTabs'><li>text</li></ul>").one("li")._node
+            var li = Y.Node.create("<ul class='searchTabs'><li>text</li></ul>").one("li")._node
             $.LANE.tracking.track({target:li,srcElement:li,type:"vclick"});
             Y.Assert.areSame("_trackEvent", pushed[0][0]);
             Y.Assert.areSame("searchTabClick", pushed[0][1]);
