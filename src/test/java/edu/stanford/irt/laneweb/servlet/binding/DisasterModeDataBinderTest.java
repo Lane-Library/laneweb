@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
@@ -16,13 +15,17 @@ public class DisasterModeDataBinderTest {
 
     private DisasterModeDataBinder binder;
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
     @Test
     public void testFalse() {
         this.binder = new DisasterModeDataBinder(Boolean.FALSE);
+        Map<String, Object> model = new HashMap<String, Object>();
+        this.binder.bind(model, null);
+        assertFalse(ModelUtil.getObject(model, Model.DISASTER_MODE, Boolean.class));
+    }
+
+    @Test
+    public void testNull() {
+        this.binder = new DisasterModeDataBinder(null);
         Map<String, Object> model = new HashMap<String, Object>();
         this.binder.bind(model, null);
         assertFalse(ModelUtil.getObject(model, Model.DISASTER_MODE, Boolean.class));
