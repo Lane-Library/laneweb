@@ -48,7 +48,7 @@ public class SearchFacetsController {
             @RequestParam(value = "q", required = true) final String query,
             @RequestParam(value = "f", required = true) final String field, final HttpServletRequest request) {
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(new FacetOptions()
-        .addFacetOnField(field).setFacetMinCount(1).setFacetLimit(1000));
+                .addFacetOnField(field).setFacetMinCount(1).setFacetLimit(1000));
         fquery.setRequestHandler("/lane-facet");
         FacetPage<Eresource> fps = this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
         return processFacets(fps);

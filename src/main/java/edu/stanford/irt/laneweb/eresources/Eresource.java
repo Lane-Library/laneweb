@@ -90,6 +90,9 @@ public class Eresource {
         }
     }
 
+    @Field
+    String[] type;
+
     @Field("availableItems")
     private int available;
 
@@ -127,9 +130,6 @@ public class Eresource {
 
     @Field("totalItems")
     private int total;
-
-    @Field
-    String[] type;
 
     @Field
     private String versionsJson;
@@ -223,7 +223,7 @@ public class Eresource {
     public Integer getYear() {
         return this.year;
     }
-    
+
     public boolean isValid() {
         boolean valid = true;
         if (getLinks().size() == 1 && LinkType.IMPACTFACTOR.equals(getLinks().iterator().next().getType())) {
@@ -238,6 +238,48 @@ public class Eresource {
 
     public void setId(final String id) {
         this.id = id;
+    }
+
+    public void setPublicationAuthorsText(final String publicationAuthorsText) {
+        this.publicationAuthorsText = publicationAuthorsText;
+    }
+
+    public void setPublicationText(final String publicationText) {
+        this.publicationText = publicationText;
+    }
+
+    public void setRecordId(final int recordId) {
+        this.recordId = recordId;
+    }
+
+    public void setRecordType(final String recordType) {
+        this.recordType = recordType;
+    }
+
+    public void setScore(final float score) {
+        this.score = score;
+    }
+
+    public void setTitle(final String title) {
+        this.title = title;
+    }
+
+    public void setType(final String[] type) {
+        this.type = type;
+    }
+
+    public void setVersionsJson(final String versionsJson) {
+        this.versionsJson = versionsJson;
+    }
+
+    public void setYear(final Integer year) {
+        this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder("title:").append(this.title).append(" score:").append(this.score).append(" updated:")
+                .append(" versions:").append(this.linksList).toString();
     }
 
     private void setLinks() {
@@ -288,51 +330,10 @@ public class Eresource {
                     } else {
                         linkType = LinkType.NORMAL;
                     }
-                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates));
+                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText,
+                            holdingsAndDates));
                 }
             }
         }
-    }
-
-    public void setPublicationAuthorsText(final String publicationAuthorsText) {
-        this.publicationAuthorsText = publicationAuthorsText;
-    }
-
-    public void setPublicationText(final String publicationText) {
-        this.publicationText = publicationText;
-    }
-
-    public void setRecordId(final int recordId) {
-        this.recordId = recordId;
-    }
-
-    public void setRecordType(final String recordType) {
-        this.recordType = recordType;
-    }
-
-    public void setScore(final float score) {
-        this.score = score;
-    }
-
-    public void setTitle(final String title) {
-        this.title = title;
-    }
-
-    public void setType(final String[] type) {
-        this.type = type;
-    }
-
-    public void setVersionsJson(final String versionsJson) {
-        this.versionsJson = versionsJson;
-    }
-
-    public void setYear(final Integer year) {
-        this.year = year;
-    }
-
-    @Override
-    public String toString() {
-        return new StringBuilder("title:").append(this.title).append(" score:").append(this.score).append(" updated:")
-                .append(" versions:").append(this.linksList).toString();
     }
 }

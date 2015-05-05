@@ -33,19 +33,6 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
     }
 
     @Override
-    protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = new HashMap<String, Object>();
-        PageRequest pageRequest = new PageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS);
-        if (null != this.type) {
-            result.put("resultPage", this.collectionManager.searchType(this.type, this.searchTerm, pageRequest));
-        } else {
-            result.put("resultPage", this.collectionManager.search(this.searchTerm, pageRequest));
-        }
-        result.put("searchTerm", this.searchTerm);
-        return result;
-    }
-
-    @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         String page = ModelUtil.getString(model, Model.PAGE);
@@ -65,5 +52,18 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
                 throw new LanewebException("won't happen", e);
             }
         }
+    }
+
+    @Override
+    protected Map<String, Object> doSearch(final String query) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        PageRequest pageRequest = new PageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS);
+        if (null != this.type) {
+            result.put("resultPage", this.collectionManager.searchType(this.type, this.searchTerm, pageRequest));
+        } else {
+            result.put("resultPage", this.collectionManager.search(this.searchTerm, pageRequest));
+        }
+        result.put("searchTerm", this.searchTerm);
+        return result;
     }
 }

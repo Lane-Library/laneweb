@@ -37,6 +37,21 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
     }
 
     @Override
+    public Serializable getKey() {
+        return KEY;
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
+    }
+
+    @Override
+    public Validity getValidity() {
+        return this.validity;
+    }
+
+    @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         List<Eresource> results = this.repository
                 .searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
@@ -75,11 +90,6 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
         }
     }
 
-    @Override
-    public Serializable getKey() {
-        return KEY;
-    }
-
     private Set<String> getLinks(final Eresource eresource) {
         HashSet<String> urls = new HashSet<String>();
         for (Link link : eresource.getLinks()) {
@@ -89,15 +99,5 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
             }
         }
         return urls;
-    }
-
-    @Override
-    public String getType() {
-        return TYPE;
-    }
-
-    @Override
-    public Validity getValidity() {
-        return this.validity;
     }
 }
