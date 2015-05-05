@@ -205,9 +205,9 @@ border-bottom: 0;
 }
 
 
-.search-image-selected-tab{
+.content .search-image-selected-tab{
 	 margin-top: -7px;
-	padding-top: 13px !important; 
+	padding-top: 13px; 
 }
 
 .search-image-selected-tab a.copyright-help{
@@ -234,20 +234,20 @@ border-bottom: 0;
 	color: white;
 }
 
-.images-all-border{
-	border-color:#80982A !important;
+#search-image-content.images-all-border{
+	border-color:#80982A;
 }
 
-.cc-images-all-border{
-	border-color:#556222 !important;
+#search-image-content.cc-images-all-border{
+	border-color:#556222;
 }
 
-.pmc-images-all-border{
-	border-color:#b96d12 !important;
+#search-image-content.pmc-images-all-border{
+	border-color:#b96d12;
 }
 
-.rl-images-all-border{
-	border-color:#8c1515 !important;
+#search-image-content.rl-images-all-border{
+	border-color:#8c1515;
 }
 
 #tabs-image-search li a {
