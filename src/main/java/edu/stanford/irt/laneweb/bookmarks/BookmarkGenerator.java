@@ -21,7 +21,7 @@ public class BookmarkGenerator extends AbstractMarshallingGenerator implements M
 
     @Override
     public void doGenerate(final XMLConsumer xmlConsumer) {
-        marshall(this.bookmarks, xmlConsumer);
+        marshal(this.bookmarks, xmlConsumer);
     }
 
     @Override

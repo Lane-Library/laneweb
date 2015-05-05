@@ -42,6 +42,6 @@ public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator im
         for (FacetFieldEntry entry : facet) {
             copyrights.put(entry.getValue(), entry.getValueCount());
         }
-        marshall(copyrights, xmlConsumer);
+        marshal(copyrights, xmlConsumer);
     }
 }

@@ -55,7 +55,7 @@ public class AbstractMarshallingGeneratorTest {
         Object obj = new Object();
         this.marshaller.marshal(same(obj), capture(capture));
         replay(this.marshaller, this.xmlConsumer);
-        this.generator.marshall(obj, this.xmlConsumer);
+        this.generator.marshal(obj, this.xmlConsumer);
         verify(this.marshaller, this.xmlConsumer);
         assertSame(this.xmlConsumer, capture.getValue().getHandler());
     }
@@ -67,7 +67,7 @@ public class AbstractMarshallingGeneratorTest {
         this.marshaller.marshal(same(obj), capture(capture));
         expectLastCall().andThrow(new IOException());
         replay(this.marshaller, this.xmlConsumer);
-        this.generator.marshall(obj, this.xmlConsumer);
+        this.generator.marshal(obj, this.xmlConsumer);
     }
 
     @Test(expected = LanewebException.class)
@@ -77,6 +77,6 @@ public class AbstractMarshallingGeneratorTest {
         this.marshaller.marshal(same(obj), capture(capture));
         expectLastCall().andThrow(new MarshallingFailureException("oopsie"));
         replay(this.marshaller, this.xmlConsumer);
-        this.generator.marshall(obj, this.xmlConsumer);
+        this.generator.marshal(obj, this.xmlConsumer);
     }
 }
