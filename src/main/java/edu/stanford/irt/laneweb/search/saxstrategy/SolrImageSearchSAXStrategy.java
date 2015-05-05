@@ -125,7 +125,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, "text");
         atts.addAttribute(XHTML_NS, "size", "size", CDATA, "4");
-        atts.addAttribute(XHTML_NS, VALUE, VALUE, CDATA, String.valueOf((page.getNumber() + 1)));
+        atts.addAttribute(XHTML_NS, VALUE, VALUE, CDATA, String.valueOf(page.getNumber() + 1));
         atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "page");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
