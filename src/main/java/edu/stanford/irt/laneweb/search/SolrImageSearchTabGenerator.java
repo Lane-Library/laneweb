@@ -19,32 +19,29 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator implements ModelAware {
 
-    private Map<String, Long> copyrights = null;
+    private String query;
 
     private SolrImageService service;
 
-    public SolrImageSearchTabGenerator(final Marshaller marshaller) {
+    public SolrImageSearchTabGenerator(final SolrImageService service, final Marshaller marshaller) {
         super(marshaller);
-    }
-
-    @Override
-    public void doGenerate(final XMLConsumer xmlConsumer) {
-        marshall(this.copyrights, xmlConsumer);
+        this.service = service;
     }
 
     @Override
     public void setModel(final Map<String, Object> model) {
-        this.copyrights = new HashMap<String, Long>();
-        String searchTerm = ModelUtil.getString(model, Model.QUERY);
-        FacetPage<Image> facetPage = this.service.facetOnCopyright(searchTerm);
+        this.query = ModelUtil.getString(model, Model.QUERY);
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
+        Map<String, Long> copyrights = new HashMap<String, Long>();
+        FacetPage<Image> facetPage = this.service.facetOnCopyright(this.query);
         Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
         List<FacetFieldEntry> facet = page.getContent();
         for (FacetFieldEntry entry : facet) {
-            this.copyrights.put(entry.getValue(), entry.getValueCount());
+            copyrights.put(entry.getValue(), entry.getValueCount());
         }
-    }
-
-    public void setService(final SolrImageService service) {
-        this.service = service;
+        marshall(copyrights, xmlConsumer);
     }
 }
