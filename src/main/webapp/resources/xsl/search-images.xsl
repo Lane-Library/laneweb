@@ -21,13 +21,10 @@
 		<xsl:copy-of select="." />
 	</xsl:template>
   
-	<xsl:template match="h:div[@id='search-image-content']">
-		<xsl:copy>
-			<xsl:attribute name="class"> 
-				<xsl:value-of select="concat($source,'-border')"></xsl:value-of>
-			</xsl:attribute>
-			<xsl:apply-templates select="node()|@*" />
-		</xsl:copy>
+	<xsl:template match="h:div[@class='search-image-content']/@class">
+		<xsl:attribute name="class">
+			<xsl:value-of select="concat(.,' ', $source,'-border')"/>
+		</xsl:attribute>
 	</xsl:template>
 
 	<xsl:template match="h:div[@id='tabs-image-search']/h:ul/h:li[@class=$source]/@class">

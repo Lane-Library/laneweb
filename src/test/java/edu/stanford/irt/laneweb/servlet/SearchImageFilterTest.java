@@ -50,6 +50,7 @@ public class SearchImageFilterTest {
 
     private ServletContext servletContext;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.filter = new SearchImageFilter();
