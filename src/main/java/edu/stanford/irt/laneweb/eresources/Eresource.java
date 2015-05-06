@@ -312,9 +312,6 @@ public class Eresource {
                     }
                     if (isFirstLink++ == 0) {
                         linkText = this.title;
-                        if (versionMap.containsKey("additionalText")) {
-                            additionalText = (String) versionMap.get("additionalText");
-                        }
                     }
                     if (jsonLink.containsKey("url")) {
                         linkUrl = (String) jsonLink.get("url");
