@@ -30,7 +30,7 @@
 .inactiveFacet, .inactiveFacet a {
     display:none;
 }
-#popInContent {
+.popInContent {
     display:none;
     position:absolute;
     top:-16px;
@@ -41,14 +41,14 @@
     padding: 7px 0 7px 10px;
     white-space: nowrap;
 }
-#popInContent .popInLabel {
+.popInContent .popInLabel {
     color:#FF6600;
     padding-right:25px;
 }
-#popInContent.active {
+.popInContent.active {
     display: block;
 }
-#popInContent.hitCountPopIn {
+.popInContent.hitCountPopIn {
     top: 32px;
     left: 172px;
 }

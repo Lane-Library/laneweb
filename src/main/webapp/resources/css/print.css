@@ -16,7 +16,7 @@ input,
     height:0;
     display:none
 }
-#popInContent.active{
+.popInContent.active{
     border:0
 }
 
