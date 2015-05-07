@@ -32,7 +32,7 @@
 									<li>FIND A DOCTOR</li>
 									<li>
 										<a
-											href="http://stanfordhospital.org/profiles/frdActionServlet?choiceId=searchClinicalService">Adult-care doctor</a>
+											href="http://stanfordhospital.org/directory/">Adult-care doctor</a>
 									</li>
 									<li>
 										<a
@@ -61,14 +61,14 @@
 								<ul style="padding-left:8px">
 									<li>LOCATIONS</li>
 									<li>
-										<a href="http://stanfordhospital.org/directions/">Stanford Hospital &amp; Clinics</a>
+										<a href="https://stanfordhealthcare.org/for-patients-visitors/locations-and-parking.html?ecid-int-directions-na-redir-na-mar15">Stanford Hospital &amp; Clinics</a>
 									</li>
 									<li>
 										<a href="http://www.stanfordchildrens.org/en/locations-directions">Stanford Children's Health</a>
 									</li>
 									<li>
 										<a
-											href="http://stanfordhospital.org/clinicsmedServices/medicalServices/emergencyroom/">Emergency Department</a>
+											href="https://stanfordhealthcare.org/medical-clinics/emergency-department.html">Emergency Department</a>
 									</li>
 									<li>
 										<span
@@ -115,7 +115,7 @@
 											href="http://med.stanford.edu/school/directory/research-administration.html">Research administration</a>
 									</li>
 									<li>
-										<a href="//med.stanford.edu/profiles/">Academic profiles</a>
+										<a href="https://med.stanford.edu/profiles/index.html">Academic profiles</a>
 									</li>
 									<li>
 										<a href="//med.stanford.edu/clinicaltrials/">Clinical trials</a>
@@ -179,7 +179,7 @@
 										<a href="http://med.stanford.edu/education/masters-programs.html">Masters programs</a>
 									</li>
 									<li>
-										<a href="//med.stanford.edu/cme/">Continuing Medical Education</a>
+										<a href="https://med.stanford.edu/cme.html">Continuing Medical Education</a>
 									</li>
 									<li>
 										<a href="//postdocs.stanford.edu">Postdoctoral scholars</a>
@@ -206,7 +206,7 @@
 											href="http://med.stanford.edu/school/directory/clinical-science-departments.html">Clinical science departments</a>
 									</li>
 									<li>
-										<a href="//med.stanford.edu/alumni/">Alumni services</a>
+										<a href="http://med.stanford.edu/alumni.html">Alumni services</a>
 									</li>
 									<li>
 										<a
@@ -241,7 +241,7 @@
 										<i style="font-size:6px" class="fa fa-arrow-right"></i>
 									</p>
 								</a>
-								<a href="http://med.stanford.edu/content/sm/education" class="explore">
+								<a href="http://med.stanford.edu/education.html" class="explore">
 									<span>Explore Education</span>
 									<p>
 										Learn how we empower tomorrow's leaders
@@ -282,13 +282,13 @@
 							</div>
 							<div class="yui3-u-1-2">
 								<a class="explore" style="position:static;margin-left:8px;width:auto"
-									href="//www.supportlpch.org">
+									href="http://supportlpch.org/">
 									<span style="border-bottom:none">STANFORD CHILDREN'S HEALTH</span>
 								</a>
 								<ul style="margin-left:8px">
 									<li>
 										<p style="margin-bottom:20px;font-size:12px">
-											<a href="//www.supportlpch.org">
+											<a href="http://supportlpch.org/">
 												Support Lucile Packard Children's Hospital Stanford and
 												child and maternal health
 												<i style="font-size:7px" class="fa fa-arrow-right"></i>
@@ -296,10 +296,10 @@
 										</p>
 									</li>
 									<li>
-										<a href="http://www.supportlpch.org/Waystogive">Ways to give</a>
+										<a href="http://supportlpch.org/ways-give">Ways to give</a>
 									</li>
 									<li>
-										<a href="http://www.supportlpch.org/page.aspx?pid=358">How your gift helps</a>
+										<a href="http://supportlpch.org/blog?pid=358">How your gift helps</a>
 									</li>
 									<li>
 										<a
@@ -358,7 +358,7 @@
 								</p>
 								<p
 									style="background-position: 0px -76px;margin:30px 0 0 8px;line-height:normal;text-indent:-9000px;background-image:url(../resources/images/history/logos-about-sprite.png)">
-									<a href="http://stanfordhospital.org/" class="logo-stanford-hospital-clinics">Stanford
+									<a href="https://stanfordhealthcare.org" class="logo-stanford-hospital-clinics">Stanford
 										Hospital &amp; Clinics</a>
 								</p>
 								<p
