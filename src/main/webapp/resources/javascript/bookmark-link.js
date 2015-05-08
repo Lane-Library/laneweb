@@ -55,7 +55,7 @@
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
                 if (Model.get(Model.QUERY)) {
-                    var bookmarkSearch = Y.one("#bookmarkSearch");
+                    var bookmarkSearch = Y.one(".bookmark-search");
                     if (bookmarkSearch) {
                         bookmarkSearch.addClass("active");
                         bookmarkSearch.on("click", this._handleBookmarkSearchClick, this);
