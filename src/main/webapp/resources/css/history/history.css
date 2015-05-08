@@ -667,7 +667,7 @@ http://lane.stanford.edu/samples/button-css.html
 	display: inline-block;
 }
 
-.button span .icon {
+.inner-icon {
 	background-color: #FFFFFF;
 	border-radius: 12px;
 	font-size: 13px;
@@ -683,12 +683,8 @@ http://lane.stanford.edu/samples/button-css.html
 	color: #ffffff;
 }
 
-.button .icon {
+.icon {
 	color: #007C92;
-}
-
-.button * {
-	vertical-align: middle;
 }
 
 /*styles for events on homepage*/
