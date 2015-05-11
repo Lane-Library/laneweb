@@ -1,5 +1,5 @@
 
-#search-image-content{
+.search-image-content{
 background-color: white;
 margin-top: -4px;
 border: 6px solid;	
@@ -234,19 +234,19 @@ border-bottom: 0;
 	color: white;
 }
 
-#search-image-content.images-all-border{
+.search-image-content.images-all-border{
 	border-color:#80982A;
 }
 
-#search-image-content.cc-images-all-border{
+.search-image-content.cc-images-all-border{
 	border-color:#556222;
 }
 
-#search-image-content.pmc-images-all-border{
+.search-image-content.pmc-images-all-border{
 	border-color:#b96d12;
 }
 
-#search-image-content.rl-images-all-border{
+.search-image-content.rl-images-all-border{
 	border-color:#8c1515;
 }
 

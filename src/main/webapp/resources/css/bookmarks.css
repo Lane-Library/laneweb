@@ -82,16 +82,16 @@ background-position: -600px -80px;
 	width: 266px;
 	box-sizing:border-box;
 }
-#bookmarkSearch{
+.bookmark-search{
     visibility:hidden;
     display:inline-block;
     margin-top: 12px;
     text-align: center;
 }
-#bookmarkSearch.active{
+.bookmark-search.active{
     visibility:visible;
 }
-#bookmarkSearch.bookmarking {
+.bookmark-search.bookmarking {
     cursor:wait;
 }
 /* next two are for the login required lightbox popup */

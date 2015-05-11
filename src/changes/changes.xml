@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-05-11" version="3.0.4" description="3.0.4 bug fix release">
+            <action date="2015-05-07" dev="ryanmax" issue="104586" type="update">
+                clinical search: down-weight BMJ results
+            </action>
+            <action date="2015-05-07" dev="olgary" issue="104487" type="update">
+                change name in template.xml - to Physical &amp; Rehabilitation Medicine
+            </action>
+            <action date="2015-05-07" dev="olgary" issue="104345" type="fix">
+                broken links in medhistory template
+            </action>
+        </release>
         <release date="2015-05-04" version="3.0.3" description="3.0.3 bug fix release">
             <action date="2015-05-04" dev="ceyates" issue="104270" type="update">
                 update to lane-search-2.2.0

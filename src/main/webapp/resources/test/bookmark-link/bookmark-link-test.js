@@ -126,7 +126,7 @@ Y.use('console', 'test', "node-event-simulate", function(Y) {
                 data = config.data;
                 config.on.success.apply(config.context, [0,{}]);
             };
-            Y.one("#bookmarkSearch").simulate("click");
+            Y.one(".bookmark-search").simulate("click");
             Y.Assert.areSame('{"label":"Search for: query","url":"/search.html?source=undefined&q=undefined"}', data);
         },
 

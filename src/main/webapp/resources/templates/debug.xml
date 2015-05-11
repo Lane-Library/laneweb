@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
@@ -159,7 +160,7 @@
                                 <li><a href="/portals/ihealth.html">Global Health</a></li>
                                 <li><a href="/portals/pharmacy.html">Pharmacy</a></li> 
                                 <li><a href="/portals/hematology.html">Hematology</a></li>
-                                <li><a href="/portals/pmr.html">Physical Medicine &amp; Rehab.</a></li>
+                                <li><a href="/portals/pmr.html">Physical &amp; Rehabilitation Med</a></li>
                                 <li><a href="/portals/rheumatology.html">Immunology/Rheumatology</a></li>
                                 <li><a href="/portals/picu.html">PICU</a></li>
                                 <li><a href="/portals/infectious-diseases.html">Infectious Diseases</a></li>
