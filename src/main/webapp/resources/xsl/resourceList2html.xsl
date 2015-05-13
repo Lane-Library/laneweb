@@ -132,7 +132,7 @@
                 <span>
                     <xsl:apply-templates select="s:primaryType"/>
                 </span>
-                <xsl:if test="s:recordType = 'print' and $available &gt; 0">
+                <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
                     <span>Status: Not Checked Out</span>
                 </xsl:if>
                 <xsl:choose>
@@ -159,7 +159,7 @@
             <div class="sourceInfo">
                 <xsl:apply-templates select="s:recordType"/>
             </div>
-            <xsl:if test="s:recordType != 'print' and $total &gt; 0">
+            <xsl:if test="not(contains(s:primaryType,'Print')) and $total &gt; 0">
                 <div>Also available: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Print</a></div>
             </xsl:if>
         </li>
@@ -180,10 +180,7 @@
                 <xsl:when test=". = 'class'">
                 <a href="/classes-consult/laneclasses.html">Lane Classes</a>
                 </xsl:when>
-                <xsl:when test=". = 'print'">
-                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog Results <i class="fa fa-external-link"></i></a>
-            </xsl:when>
-            <xsl:when test=". = 'web' or . = 'laneblog'">
+                <xsl:when test=". = 'web' or . = 'laneblog'">
                 <a href="/index.html">Lane Website</a>
                 </xsl:when>
             </xsl:choose>
