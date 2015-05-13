@@ -154,6 +154,12 @@
 					</span>
                 </xsl:if>
                 
+                <xsl:if test="s:recordType = 'auth'">
+					<span>
+					    <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Community Info Record</a>
+					</span>
+                </xsl:if>
+                
             </div>
             <xsl:apply-templates select="s:description"/>
             <div class="sourceInfo">
@@ -169,7 +175,7 @@
         <xsl:text>Source: </xsl:text>
             <xsl:choose>
                 <xsl:when test=". = 'pubmed'">
-                <a href="{concat($pubmed-baseUrl,../s:recordId,'?otool=stanford')}">PubMed <i class="fa fa-external-link"></i></a>
+                <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term={$url-encoded-query}">PubMed <i class="fa fa-external-link"></i></a>
                 </xsl:when>
                 <xsl:when test=". = 'auth'">
                 <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info Results <i class="fa fa-external-link"></i></a>
