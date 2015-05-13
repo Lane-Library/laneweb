@@ -165,9 +165,6 @@
             <div class="sourceInfo">
                 <xsl:apply-templates select="s:recordType"/>
             </div>
-            <xsl:if test="not(contains(s:primaryType,'Print')) and $total &gt; 0">
-                <div>Also available: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Print</a></div>
-            </xsl:if>
         </li>
     </xsl:template>
 
@@ -222,6 +219,7 @@
     <xsl:template match="s:link">
         <div>
             Also available: <a href="{s:url}" title="{s:label}">
+                <xsl:if test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')">Print &#8211; </xsl:if>
                 <xsl:value-of select="s:link-text"/>
             </a>
             <xsl:if test="s:additional-text">
