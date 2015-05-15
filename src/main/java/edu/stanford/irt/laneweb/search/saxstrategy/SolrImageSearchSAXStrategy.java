@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
+    private  NumberFormat nf = NumberFormat.getInstance();
+    
     @Override
     public void toSAX(final Map<String, Object> result, final XMLConsumer xmlConsumer) {
         try {
@@ -236,9 +239,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
                 }
             }
             if (!"All".equals(selectedResource)) {
-                XMLUtils.data(xmlConsumer, selectedResource + " (" + totalSelectedFacet + ")");
+                XMLUtils.data(xmlConsumer, selectedResource + " (" + nf.format(totalSelectedFacet) + ")");
             } else {
-                XMLUtils.data(xmlConsumer, selectedResource + " (" + totalElement + ")");
+                XMLUtils.data(xmlConsumer, selectedResource + " (" + nf.format(totalElement) + ")");
             }
             createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
             endDiv(xmlConsumer);
@@ -247,14 +250,14 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             if (!"All".equals(selectedResource) && totalFacet > 1) {
                 startLi(xmlConsumer);
                 startAnchor(xmlConsumer, path);
-                XMLUtils.data(xmlConsumer, "All (" + totalElement + ")");
+                XMLUtils.data(xmlConsumer, "All (" + nf.format(totalElement) + ")");
                 endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
             }
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 startLi(xmlConsumer);
                 startAnchor(xmlConsumer, path + "&rid=" + facetFieldEntry.getValue());
-                XMLUtils.data(xmlConsumer, facetFieldEntry.getValue() + " (" + facetFieldEntry.getValueCount()
+                XMLUtils.data(xmlConsumer, facetFieldEntry.getValue() + " (" + nf.format(facetFieldEntry.getValueCount())
                         + ") ");
                 endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
