@@ -59,7 +59,7 @@ public class SolrImageSearchTabGeneratorTest {
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.value));
         expect(this.value.getValue()).andReturn("value");
         expect(this.value.getValueCount()).andReturn(1L);
-        this.marshaller.marshal(eq(Collections.singletonMap("value", Long.valueOf(1L))), isA(SAXResult.class));
+        this.marshaller.marshal(eq(Collections.singletonMap("value", "1")), isA(SAXResult.class));
         replay(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
