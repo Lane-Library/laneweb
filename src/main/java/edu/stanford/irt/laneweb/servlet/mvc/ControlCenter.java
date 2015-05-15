@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,8 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 @RequestMapping(value = "/control-center")
 public class ControlCenter {
 
+    private Set<String> admins;
+
     private ApplicationContext context;
 
     private UserDataBinder userBinder;
@@ -28,6 +33,10 @@ public class ControlCenter {
     public ControlCenter(final ApplicationContext context, final UserDataBinder userBinder) {
         this.userBinder = userBinder;
         this.context = context;
+        this.admins = new HashSet<String>();
+        this.admins.add("alainb@stanford.edu");
+        this.admins.add("ceyates@stanford.edu");
+        this.admins.add("ryanmax@stanford.edu");
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/email/spamIP")
@@ -70,7 +79,7 @@ public class ControlCenter {
     }
 
     private void checkAccess(final String userid) {
-        if (!"ceyates@stanford.edu".equals(userid)) {
+        if (!this.admins.contains(userid)) {
             throw new LanewebException(userid + " not authorized");
         }
     }
