@@ -304,12 +304,6 @@
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="biomed-resources/otolaryngrandrounds.html" type="wildcard">
-            <map:generate type="html" src="{content-base}/biomed-resources/otolaryngrandrounds.html"/>
-            <map:transform type="xinclude"/>
-            <map:transform type="saxon" src="resources/xsl/youtubeAtom2Html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="portals/palliative-care.html" type="wildcard">
             <map:generate type="html" src="{content-base}/portals/palliative-care.html"/>
             <map:transform type="xinclude"/>
@@ -317,7 +311,6 @@
             <map:transform type="saxon" src="resources/xsl/youtubeAtom2Html-list.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-        <!-- reference, palliative-care & rheumatology are the only pages with xincluded rss -->
         <map:match type="regexp" pattern="portals/(reference|rheumatology)\.html$">
             <map:generate type="html" src="{content-base}/portals/{1}.html"/>
             <map:transform type="xinclude"/>
