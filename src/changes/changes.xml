@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-05-18" version="3.0.5" description="3.0.5 bug fix release">
+            <action date="2015-05-14" dev="ceyates" issue="105787" type="update">
+                add alainb and ryanmax as authorized control center users
+            </action>
+            <action date="2015-05-11" dev="ceyates" issue="104866" type="update">
+                upgrade to search-core-2.3.0
+            </action>
+            <action date="2015-05-11" dev="ceyates" issue="104851" type="fix">
+                email button styles for History center
+            </action>
+        </release>
         <release date="2015-05-11" version="3.0.4" description="3.0.4 bug fix release">
             <action date="2015-05-07" dev="ryanmax" issue="104586" type="update">
                 clinical search: down-weight BMJ results
