@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2015-05-18" version="3.0.5" description="3.0.5 bug fix release">
+            <action date="2015-05-18" dev="ceyates" issue="105818" type="fix">
+                Error message from Youtube - Fwd: YouTube videos on Palliative Care Portal
+            </action>
             <action date="2015-05-14" dev="ceyates" issue="105787" type="update">
                 add alainb and ryanmax as authorized control center users
             </action>
