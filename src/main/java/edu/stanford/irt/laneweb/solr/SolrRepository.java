@@ -39,10 +39,10 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Query(value = "ertlsw?1", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
     public List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
 
-    @Query(value = "?0", requestHandler = FACET_HANDLER)
+    @Query(value = "?0", filters = { "?1" }, requestHandler = FACET_HANDLER)
     @Facet(queries = { "*:*" }, limit = 10)
     // field list configured in solr lane-facet request handler (in solrconfig.xml)
-    public FacetPage<Eresource> facetByManyFields(String term, Pageable page);
+    public FacetPage<Eresource> facetByManyFields(String term, String filter, Pageable page);
 
     @Query(value = "?0", requestHandler = FACET_HANDLER)
     @Facet(fields = { "type" }, minCount = 0, limit = 100)
@@ -53,11 +53,14 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Highlight
     public HighlightPage<Eresource> findAllHighlighted(String text, Pageable page);
 
-    @Query(value = "?0", requestHandler = SEARCH_HANDLER)
-    public Page<Eresource> searchFindAll(String text, Pageable page);
-
+    // @Query(value = "?0", requestHandler = SEARCH_HANDLER)
+    // public Page<Eresource> searchFindAll(String text, Pageable page);
+    //
     @Query(value = "-recordType:pubmed", requestHandler = SEARCH_HANDLER)
     public List<Eresource> searchFindAllNotRecordTypePubmed(Pageable page);
+
+    @Query(value = "?0", filters = { "?1" }, requestHandler = SEARCH_HANDLER)
+    public Page<Eresource> searchFindAllWithFilter(String query, String filter, Pageable page);
 
     @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = SEARCH_HANDLER)
     public Page<Eresource> searchFindByType(String query, String type, Pageable page);

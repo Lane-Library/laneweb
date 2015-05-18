@@ -4,12 +4,31 @@
 (function() {
     var model = Y.lane.Model,
         query = model.get(model.QUERY),
+        locationSearch = location.search,
+        locationSearchDecoded = decodeURIComponent(locationSearch),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
         facets = Y.all('.solrFacet'),
         facetsContainer = Y.one('.solrFacets'),
-        encodeAndEscape = function(string) {
-            return encodeURIComponent(string).replace(/'/g,'%27');
+        cleanFacetProp = function(facetId, facetProp) {
+            // replace year 0 with "Unknown" 
+            if ("year" == facetId && facetProp == 0) {
+                facetProp = 'Unknown';
+            }
+            else if ("isEnglish" == facetId) {
+                if (facetProp == "true") {
+                    facetProp = 'English Only';
+                } else {
+                    facetProp = 'Non English';
+                }
+            } else if ("isRecent" == facetId) {
+                if (facetProp == "true") {
+                    facetProp = 'Last 10 Years';
+                } else {
+                    facetProp = 'More Than 10 Years Old';
+                }
+            }
+            return facetProp;
         },
         toggleHeader = function(nodeOrEvent) {
             var node = undefined != nodeOrEvent.currentTarget ? nodeOrEvent.currentTarget : nodeOrEvent, next = node.next('li'), anim;
@@ -54,10 +73,10 @@
             }
         },
         makeRequest = function() {
-            Y.io(basePath + '/apps/search/facets?q=' + encodedQuery + '&rd=' + Math.random(), {
+            Y.io(basePath + '/apps/search/facets' + locationSearch, {
                 on: {
                     success:function(id, o) {
-                        var response = Y.JSON.parse(o.responseText), facetId, facetValue, facetCount, facetIdAndValuePattern, j, url, urlFacetOff, sibling, facetProp = null, headersToToggle = {};
+                        var response = Y.JSON.parse(o.responseText), facetId, facetValue, facetCount, facetIdAndValuePattern, j, url, joiner, urlFacetOff, sibling, facetProp = null, headersToToggle = {};
                         for (j = 0; j < facets.size(); j++) {
                             sibling = facets.item(j).get('nextSibling');
                             facetId = facets.item(j).getAttribute('id').split(':')[0];
@@ -68,23 +87,23 @@
                                         thousandsSeparator: ","
                                     });
                                     facetIdAndValuePattern = facetId + ':"?' + facetProp.replace(/([\(\)\[\]\+\.])/g,"\\$1") + '"?';
-                                    url = basePath + '/search.html?source=all-all&q=' + encodedQuery + '+' + facetId + ':"' + encodeAndEscape(facetProp) + '"';
-                                    urlFacetOff = basePath + '/search.html?source=all-all&q=' + encodeAndEscape(query.replace(new RegExp(facetIdAndValuePattern),'').trim());
-                                    // replace year 0 with "Unknown" 
-                                    if ("year" == facetId && facetProp == 0) {
-                                        facetProp = 'Unknown';
-                                    }
+                                    joiner = (locationSearch.indexOf('&f=') > -1) ? '::' : '&f=';
+                                    url = location.pathname + locationSearch + joiner + facetId + ':"' + encodeURIComponent(facetProp).replace(/'/g,'%27') + '"';
+                                    urlFacetOff = location.pathname + locationSearchDecoded.replace(new RegExp(facetIdAndValuePattern),'').replace(/'/g,'%27');
+                                    urlFacetOff = urlFacetOff.replace(/(&f=|::)::/,'$1');
+                                    urlFacetOff = urlFacetOff.replace(/(&f=|::)$/,'');
+                                    facetProp = cleanFacetProp(facetId, facetProp);
                                     if (facetProp == facetValue) {
                                         facets.item(j).setStyle('display','block');
                                         facets.item(j).append("&nbsp;(" + facetCount + ")");
-                                        if (query.match(facetIdAndValuePattern)) {
+                                        if (locationSearchDecoded.match(facetIdAndValuePattern)) {
                                             headersToToggle[facets.item(j).previous('.facetHeader')] = facets.item(j).previous('.facetHeader');
                                             facets.item(j).setHTML(facets.item(j).get('textContent') + "&nbsp;[<a title='remove constraint' href='"+ urlFacetOff + "'>&nbsp;remove&nbsp;</a>]");
                                         }
                                     }
                                     else if (undefined == facetValue) {
                                         facets.item(j).setStyle('display','block');
-                                        if (query.match(new RegExp(facetIdAndValuePattern))) {
+                                        if (locationSearchDecoded.match(new RegExp(facetIdAndValuePattern))) {
                                             headersToToggle[facets.item(j)] = facets.item(j);
                                             sibling.insert("<li>" + facetProp + " (" + facetCount + ")&nbsp;[<a title='remove constraint' href='"+ urlFacetOff + "'>&nbsp;remove&nbsp;</a>]</li>",'before');
                                         } else {

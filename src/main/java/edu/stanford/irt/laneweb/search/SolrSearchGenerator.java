@@ -10,15 +10,17 @@ import org.springframework.data.domain.PageRequest;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.SolrCollectionManager;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.solr.SolrSearchService;
 
 public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Object>> implements ParametersAware {
 
     private static final int DEFAULT_RESULTS = 50;
 
-    private SolrCollectionManager collectionManager;
+    private SolrSearchService collectionManager;
+
+    private String facets;
 
     private Integer pageNumber = new Integer(0);
 
@@ -26,7 +28,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
 
     private String type;
 
-    public SolrSearchGenerator(final SolrCollectionManager collectionManager,
+    public SolrSearchGenerator(final SolrSearchService collectionManager,
             final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
         this.collectionManager = collectionManager;
@@ -41,6 +43,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
         }
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.type = ModelUtil.getString(model, Model.TYPE);
+        this.facets = ModelUtil.getString(model, Model.FACETS);
     }
 
     @Override
@@ -61,7 +64,8 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
         if (null != this.type) {
             result.put("resultPage", this.collectionManager.searchType(this.type, this.searchTerm, pageRequest));
         } else {
-            result.put("resultPage", this.collectionManager.search(this.searchTerm, pageRequest));
+            result.put("resultPage",
+                    this.collectionManager.searchWithFilters(this.searchTerm, this.facets, pageRequest));
         }
         result.put("searchTerm", this.searchTerm);
         return result;

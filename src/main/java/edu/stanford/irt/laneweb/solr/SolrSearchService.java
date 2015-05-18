@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.solr;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +9,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
-import edu.stanford.irt.laneweb.solr.SolrRepository;
-import edu.stanford.irt.laneweb.solr.SolrTypeManager;
+import edu.stanford.irt.laneweb.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 
-public class SolrCollectionManager implements CollectionManager {
+public class SolrSearchService implements CollectionManager {
+
+    private static final String AND = " AND ";
+
+    private static final String EMPTY = "";
 
     @Autowired
     private SolrRepository repository;
+
+    public FacetPage<Eresource> facetByManyFields(final String query, final String filters,
+            final PageRequest pageRequest) {
+        return this.repository.facetByManyFields(query, facetStringToFilters(filters), pageRequest);
+    }
 
     @Override
     public List<Eresource> getCore(final String type) {
@@ -73,11 +83,8 @@ public class SolrCollectionManager implements CollectionManager {
 
     @Override
     public List<Eresource> search(final String query) {
-        return this.repository.searchFindAll(query, new PageRequest(0, 50)).getContent();
-    }
-
-    public Page<Eresource> search(final String query, final PageRequest pageRequest) {
-        return this.repository.searchFindAll(query, pageRequest);
+        return this.repository.searchFindAllWithFilter(query, EMPTY, new PageRequest(0, 50)).getContent();
+        // return this.repository.searchFindAll(query, new PageRequest(0, 50)).getContent();
     }
 
     @Override
@@ -112,5 +119,18 @@ public class SolrCollectionManager implements CollectionManager {
             throw new IllegalArgumentException("null type");
         }
         return this.repository.searchFindByType(query, SolrTypeManager.backwardsCompatibleType(type), pageRequest);
+    }
+
+    public Page<Eresource> searchWithFilters(final String query, final String facets, final PageRequest pageRequest) {
+        return this.repository.searchFindAllWithFilter(query, facetStringToFilters(facets), pageRequest);
+    }
+
+    public String facetStringToFilters(final String facets) {
+        String filters = EMPTY;
+        if (null != facets) {
+            filters = facets.replaceFirst("::$", EMPTY);
+            filters = filters.replaceAll("::", AND);
+        }
+        return filters;
     }
 }

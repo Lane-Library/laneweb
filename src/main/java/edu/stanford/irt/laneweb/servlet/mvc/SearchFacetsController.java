@@ -17,7 +17,6 @@ import org.springframework.data.solr.core.query.SimpleFacetQuery;
 import org.springframework.data.solr.core.query.SimpleStringCriteria;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
-import org.springframework.data.solr.repository.support.SolrRepositoryFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,31 +24,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.solr.SolrRepository;
+import edu.stanford.irt.laneweb.solr.SolrSearchService;
 
 @Controller
 public class SearchFacetsController {
 
     private static final String FACETS = "facets";
 
-    SolrRepository repository;
+    SolrSearchService solrSearchService;
 
     SolrTemplate solrTemplate;
 
     @Autowired
-    public SearchFacetsController(final SolrTemplate laneSearchSolrTemplate) {
+    public SearchFacetsController(final SolrTemplate laneSearchSolrTemplate, final SolrSearchService searchService) {
         this.solrTemplate = laneSearchSolrTemplate;
-        this.repository = new SolrRepositoryFactory(laneSearchSolrTemplate).getRepository(SolrRepository.class);
+        this.solrSearchService = searchService;
     }
 
     @RequestMapping(value = "/apps/search/facet")
     @ResponseBody
     public Map<String, Map<String, Map<String, Long>>> facetByField(final Model model,
             @RequestParam(value = "q", required = true) final String query,
-            @RequestParam(value = "f", required = true) final String field, final HttpServletRequest request) {
+            @RequestParam(value = "f", required = false) final String facets,
+            @RequestParam(value = "ff", required = true) final String field, final HttpServletRequest request) {
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(new FacetOptions()
                 .addFacetOnField(field).setFacetMinCount(1).setFacetLimit(1000));
         fquery.setRequestHandler("/lane-facet");
+        fquery.addCriteria(new SimpleStringCriteria(this.solrSearchService.facetStringToFilters(facets)));
         FacetPage<Eresource> fps = this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
         return processFacets(fps);
     }
@@ -57,8 +58,9 @@ public class SearchFacetsController {
     @RequestMapping(value = "/apps/search/facets")
     @ResponseBody
     public Map<String, Map<String, Map<String, Long>>> facetByFields(final Model model,
-            @RequestParam(value = "q", required = true) final String query, final HttpServletRequest request) {
-        FacetPage<Eresource> fps = this.repository.facetByManyFields(query, new PageRequest(0, 1));
+            @RequestParam(value = "q", required = true) final String query,
+            @RequestParam(value = "f", required = false) final String facets, final HttpServletRequest request) {
+        FacetPage<Eresource> fps = this.solrSearchService.facetByManyFields(query, facets, new PageRequest(0, 1));
         return processFacets(fps);
     }
 
