@@ -23,11 +23,8 @@ public class SHCCodecTest {
 
     private String plaintext = "plain piece of text";
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         this.log = createMock(Logger.class);
         // note: not the real key and vector:
         this.codec = new SHCCodec("yfGIl68aDih3DamkzIJeYA==", "ABCDEFGHIJKLMNOP", this.log);
