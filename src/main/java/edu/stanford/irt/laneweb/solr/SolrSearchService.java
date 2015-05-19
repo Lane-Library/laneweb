@@ -29,6 +29,15 @@ public class SolrSearchService implements CollectionManager {
         return this.repository.facetByManyFields(query, facetStringToFilters(filters), pageRequest);
     }
 
+    public String facetStringToFilters(final String facets) {
+        String filters = EMPTY;
+        if (null != facets) {
+            filters = facets.replaceFirst("::$", EMPTY);
+            filters = filters.replaceAll("::", AND);
+        }
+        return filters;
+    }
+
     @Override
     public List<Eresource> getCore(final String type) {
         if (null == type) {
@@ -123,14 +132,5 @@ public class SolrSearchService implements CollectionManager {
 
     public Page<Eresource> searchWithFilters(final String query, final String facets, final PageRequest pageRequest) {
         return this.repository.searchFindAllWithFilter(query, facetStringToFilters(facets), pageRequest);
-    }
-
-    public String facetStringToFilters(final String facets) {
-        String filters = EMPTY;
-        if (null != facets) {
-            filters = facets.replaceFirst("::$", EMPTY);
-            filters = filters.replaceAll("::", AND);
-        }
-        return filters;
     }
 }
