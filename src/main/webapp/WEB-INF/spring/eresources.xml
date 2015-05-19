@@ -24,38 +24,26 @@
         scope="prototype">
         <constructor-arg>
             <set>
-				<value>Article</value>
-				<value>Atlases, Pictorial</value>
-				<value>Audio</value>
-				<value>Bassett</value>
-				<value>Biotools Software, Installed</value>
-				<value>Book</value>
-				<value>Book Digital</value>
-				<value>Book Print</value>
-				<value>Catalog</value>
-				<value>Clinical Decision Tools</value>
-				<value>Database</value>
-				<value>Graphic</value>
-				<value>Image</value>
-				<value>Journal</value>
-				<value>Journal Digital</value>
-				<value>Journal Print</value>
-				<value>Lane Class</value>
-				<value>Lane Web Page</value>
-				<value>Other</value>
-				<value>Print</value>
-				<value>Software</value>
-				<value>Software, Installed</value>
-				<value>Software, Installed - Duck Room</value>
-				<value>Software, Installed - LKSC Public</value>
-				<value>Software, Installed - LKSC Student</value>
-				<value>Software, Installed - M051</value>
-				<value>Software, Installed - Redwood Room</value>
-				<value>Software, Installed - Stone Room</value>
-				<value>Statistics</value>
-				<value>Statistics Software, Installed</value>
-				<value>Video</value>
-				<value>Website</value>
+                <value>article</value>
+                <value>audio</value>
+                <value>book</value>
+                <value>bookdigital</value>
+                <value>bookprint</value>
+                <value>catalog</value>
+                <value>cc</value>
+                <value>database</value>
+                <value>image</value>
+                <value>journal</value>
+                <value>journaldigital</value>
+                <value>journalprint</value>
+                <value>laneclass</value>
+                <value>lanepage</value>
+                <value>lanesite</value>
+                <value>other</value>
+                <value>software</value>
+                <value>statistics</value>
+                <value>video</value>
+                <value>website</value>
             </set>
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>

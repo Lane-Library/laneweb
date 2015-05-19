@@ -43,7 +43,7 @@ public class SolrSearchService implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return this.repository.browseAllCoreByType(SolrTypeManager.backwardsCompatibleType(type), new PageRequest(0,
+        return this.repository.browseAllCoreByType(SolrTypeManager.convertToNewType(type), new PageRequest(0,
                 Integer.MAX_VALUE));
     }
 
@@ -55,8 +55,8 @@ public class SolrSearchService implements CollectionManager {
         if (null == mesh) {
             throw new IllegalArgumentException("null mesh");
         }
-        return this.repository.browseAllByMeshAndType(mesh, SolrTypeManager.backwardsCompatibleType(type),
-                new PageRequest(0, Integer.MAX_VALUE));
+        return this.repository.browseAllByMeshAndType(mesh, SolrTypeManager.convertToNewType(type), new PageRequest(0,
+                Integer.MAX_VALUE));
     }
 
     @Override
@@ -72,7 +72,7 @@ public class SolrSearchService implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return this.repository.browseAllByType(SolrTypeManager.backwardsCompatibleType(type), new PageRequest(0,
+        return this.repository.browseAllByType(SolrTypeManager.convertToNewType(type), new PageRequest(0,
                 Integer.MAX_VALUE));
     }
 
@@ -86,7 +86,7 @@ public class SolrSearchService implements CollectionManager {
         if ('#' == sAlpha) {
             sAlpha = '1';
         }
-        return this.repository.browseByTypeTitleStartingWith(SolrTypeManager.backwardsCompatibleType(type),
+        return this.repository.browseByTypeTitleStartingWith(SolrTypeManager.convertToNewType(type),
                 Character.toString(sAlpha), new PageRequest(0, Integer.MAX_VALUE));
     }
 
@@ -104,10 +104,13 @@ public class SolrSearchService implements CollectionManager {
         result.put("all", Integer.valueOf(total));
         for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
             for (FacetFieldEntry entry : page) {
-                int value = (int) entry.getValueCount();
+                Integer value = Integer.valueOf((int) entry.getValueCount());
                 String fieldName = entry.getValue();
+                String bwCompatibleFieldName = SolrTypeManager.convertToOldType(fieldName);
                 if (types.contains(fieldName)) {
-                    result.put(fieldName, Integer.valueOf(value));
+                    result.put(fieldName, value);
+                } else if (types.contains(bwCompatibleFieldName)) {
+                    result.put(bwCompatibleFieldName, value);
                 }
             }
         }
@@ -119,15 +122,15 @@ public class SolrSearchService implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return this.repository.searchFindByType(query, SolrTypeManager.backwardsCompatibleType(type),
-                new PageRequest(0, 50)).getContent();
+        return this.repository.searchFindByType(query, SolrTypeManager.convertToNewType(type), new PageRequest(0, 50))
+                .getContent();
     }
 
     public Page<Eresource> searchType(final String type, final String query, final PageRequest pageRequest) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return this.repository.searchFindByType(query, SolrTypeManager.backwardsCompatibleType(type), pageRequest);
+        return this.repository.searchFindByType(query, SolrTypeManager.convertToNewType(type), pageRequest);
     }
 
     public Page<Eresource> searchWithFilters(final String query, final String facets, final PageRequest pageRequest) {

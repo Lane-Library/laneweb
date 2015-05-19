@@ -36,7 +36,7 @@ public class SolrSuggestionManager implements SuggestionManager {
             throw new IllegalArgumentException("null type");
         }
         return suggestionsFromEresources(this.repository.suggestFindByType(term,
-                SolrTypeManager.backwardsCompatibleType(type), new PageRequest(0, 10)));
+                SolrTypeManager.convertToNewType(type), new PageRequest(0, 10)));
     }
 
     private List<Suggestion> suggestionsFromEresources(final List<Eresource> eresources) {
