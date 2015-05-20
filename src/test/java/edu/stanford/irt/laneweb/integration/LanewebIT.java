@@ -69,20 +69,20 @@ public class LanewebIT {
         this.mockMvc.perform(get("/redirect/cme?url=url")).andExpect(status().isFound())
                 .andExpect(redirectedUrl("/secure/redirect/cme?url=url"));
         this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com")).andExpect(status().isFound())
-                .andExpect(redirectedUrl("http://laneproxy.stanford.edu/login?url=www.uptodate.com"));
+                .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
         Map<String, Object> attributes = new HashMap<String, Object>();
         attributes.put(Model.USER, new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo"));
         String url = "/redirect/cme?url=http://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
-        String redirect1 = "http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
+        String redirect1 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
         this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isFound())
                 .andExpect(redirectedUrl(redirect1));
         attributes.put(Model.EMRID, "emrid");
-        String redirect2 = "http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=emrid&srcsys=epic90710&eiv=2.1.0";
+        String redirect2 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=emrid&srcsys=epic90710&eiv=2.1.0";
         this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isFound())
                 .andExpect(redirectedUrl(redirect2));
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes))
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("http://laneproxy.stanford.edu/login?url=www.uptodate.com"));
+                .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
         String redirect3 = "http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0";
         this.mockMvc
                 .perform(

@@ -18,7 +18,7 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 @Controller
 public class ProxyCredentialController {
 
-    private static final String PROXY_URL_BASE = "http://laneproxy.stanford.edu/login?user=";
+    private static final String PROXY_URL_BASE = "https://login.laneproxy.stanford.edu/login?user=";
 
     private static final String TICKET_PARAM = "&ticket=";
 

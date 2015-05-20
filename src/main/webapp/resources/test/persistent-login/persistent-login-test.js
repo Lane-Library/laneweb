@@ -66,6 +66,22 @@
             });
             stanford.simulate("click");
             handle2.detach();
+            Y.Assert.areSame("/persistentLogin.html?pl=renew&url=https%253A%252F%252Flogin.laneproxy.stanford.edu%252Flogin%253Furl%253Dfoo", stanford.get("pathname") + stanford.get("search"));
+        },
+        
+        "test stanford click 2" : function() {
+            var node = Y.one("#proxylogin2");
+            var handle1 = node.on("click", function(e) {
+                e.preventDefault();
+            });
+            node.simulate("click");
+            handle1.detach();
+            var stanford = Y.one("#Stanford");
+            var handle2 = stanford.on("click", function(e) {
+                e.preventDefault();
+            });
+            stanford.simulate("click");
+            handle2.detach();
             Y.Assert.areSame("/persistentLogin.html?pl=renew&url=http%253A%252F%252Flaneproxy.stanford.edu%252Flogin%253Furl%253Dfoo", stanford.get("pathname") + stanford.get("search"));
         },
         

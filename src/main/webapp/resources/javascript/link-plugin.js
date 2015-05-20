@@ -14,7 +14,7 @@
         HOST_NODE = "host",
         PATH = "path",
         PROXY = "proxy",
-        PROXY_HOST = "laneproxy.stanford.edu",
+        PROXY_HOST_PATTERN = "^(?:login\.)?laneproxy.stanford.edu$",
         PROXY_LOGIN = "proxyLogin",
         PROXY_LOGIN_PATH = "/login",
         SRC = "src",
@@ -71,7 +71,7 @@
             proxy : {
                 readOnly : true,
                 valueFn : function() {
-                    return this.get(LINK_HOST) === PROXY_HOST && this.get(PATH) === PROXY_LOGIN_PATH;
+                    return this.get(LINK_HOST).match(PROXY_HOST_PATTERN) && this.get(PATH) === PROXY_LOGIN_PATH;
                 }
             },
             proxyLogin : {

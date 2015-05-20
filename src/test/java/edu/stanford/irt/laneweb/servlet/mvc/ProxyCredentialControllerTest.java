@@ -72,7 +72,7 @@ public class ProxyCredentialControllerTest {
         expect(this.request.getQueryString()).andReturn("url=http://www.pubmed.foo/search?q=a&b=c");
         replay(this.request, this.ticketBinder, this.userBinder);
         RedirectView view = (RedirectView) this.controller.proxyRedirect(this.request, null, "ditenus", this.ticket);
-        assertEquals("http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
+        assertEquals("https://login.laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
                 + "&url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.ticketBinder, this.userBinder);
     }
@@ -125,7 +125,7 @@ public class ProxyCredentialControllerTest {
         replay(this.request, this.ticketBinder);
         RedirectView view = (RedirectView) this.controller.secureProxyRedirect(this.request, null, "ditenus",
                 this.ticket);
-        assertEquals("http://laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
+        assertEquals("https://login.laneproxy.stanford.edu/login?user=ditenus&ticket=" + this.ticket
                 + "&url=http://www.pubmed.foo/search?q=a&b=c", view.getUrl());
         verify(this.request, this.ticketBinder);
     }

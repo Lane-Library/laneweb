@@ -74,10 +74,13 @@
                 }
                 return trackingData;
             },
+            isProxyHost = function(node) {
+                return node.get('host').match('^(?:login\.)?laneproxy.stanford.edu$');
+            },
             isProxyOrCMELogin = function(link) {
                 var search = link.get("search"),
-                    pathname = link.get("pathname"),
-                    isProxyOrCMELogin = false;
+                pathname = link.get("pathname"),
+                isProxyOrCMELogin = false;
                 if (search && search.indexOf("url=") > -1 && /(secure\/apps\/proxy\/credential|redirect\/cme)/.test(pathname)) {
                     isProxyOrCMELogin = true;
                 }
@@ -99,7 +102,7 @@
                     }
                     host = host.substring(host.indexOf("//") + 2);
                     host = host.substring(0, host.indexOf("/"));
-                } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {
+                } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
                         host = host.substring(0, host.indexOf('/'));
@@ -123,7 +126,7 @@
                     }
                     host = host.substring(host.indexOf("//") + 2);
                     path = host.substring(host.indexOf("/"));
-                } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {
+                } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
                         path = host.substring(host.indexOf('/'));
@@ -145,7 +148,7 @@
                 var query, host, path;
                 if (node.hasClass('yui3-accordion-item-trigger')) {
                     query = location.get("search");
-                } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {
+                } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
                         path = host.substring(host.indexOf('/'));
@@ -166,7 +169,7 @@
                 var external = false;
                 if (node.hasClass('yui3-accordion-item-trigger')) {
                     external = false;
-                } else if (isProxyOrCMELogin(node) || node.get('host').indexOf('laneproxy') === 0) {
+                } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     external = true;
                 } else {
                     external = node.get("hostname") !== location.get("host");
