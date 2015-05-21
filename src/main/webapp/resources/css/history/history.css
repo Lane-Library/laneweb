@@ -678,6 +678,7 @@ http://lane.stanford.edu/samples/button-css.html
 	margin-right: 6px;
 	line-height: 15px;
 	box-sizing:border-box;
+	text-align: center;
 }
 
 .button a {
