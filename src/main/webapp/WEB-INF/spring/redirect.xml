@@ -15,6 +15,7 @@
                             <entry key="/lksc-print(?:.*)" value="/help/lksc-print.html"/>
                             <entry key="/classes" value="/classes-consult/laneclasses.html"/>
                             <entry key="/m" value="/m/index\.html"/>
+                            <entry key="/imagesearch.html" value="/bioimagesearch.html"/>
                         </map>
                     </property>
                 </bean>
