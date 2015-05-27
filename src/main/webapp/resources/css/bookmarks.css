@@ -7,25 +7,31 @@
 .favorites li {
     margin:1em 0;
 }
-/* .bookmark-link also gets class="sprite" */
+
 .bookmark-link {
     cursor: pointer;
-    background-position: -600px 0;
-    background-repeat:no-repeat;
     display: inline-block;
     height: 16px;
     width: 26px;
     position: absolute;
     margin-left: 5px;
+    border:1px solid #ccc;
+    border-radius:3px;
+    text-align:center;
+    line-height:17px;
+    background: linear-gradient(to right, white , #ccc);
+}
+.bookmark-link .fa {
+    color:gray;
 }
 
-.bookmark-link.active,
-.bookmark-link.bookmarking {
-background-position: -600px -40px;
+.bookmark-link.active .fa,
+.bookmark-link.bookmarking .fa {
+    color:rgb(180,13,26);
 }
 
 .bookmark-link.successful {
-background-position: -600px -80px;
+    background-color:rgb(180,13,26);
 }
 
 .yui3-bookmark-editor {
