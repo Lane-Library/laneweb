@@ -114,6 +114,11 @@
                 <map:transform type="saxon" src="resources/xsl/search2json.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
+            <map:match pattern="search/facets/html" type="wildcard">
+                <map:generate type="solr-search-facets"/>
+                <map:transform type="saxon" src="resources/xsl/solr-facets.xsl"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
             <!-- search facet counts -->
             <!-- used in lane-search-facet-counts.js -->
             <map:match pattern="search/facets/json" type="wildcard">

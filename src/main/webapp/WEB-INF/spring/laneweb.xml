@@ -241,6 +241,7 @@
                 <entry key="mresource" value="edu.stanford.irt.search.impl.ContentResult"/>
                 <entry key="result" value="edu.stanford.irt.search.impl.Result"/>-->
                 <entry key="bookmark" value="edu.stanford.irt.laneweb.bookmarks.Bookmark"/>
+                <entry key="facet" value="edu.stanford.irt.laneweb.solr.Facet"/>
             </map>
         </property>
         <!-- setMode(XStream.NO_REFERENCES) -->

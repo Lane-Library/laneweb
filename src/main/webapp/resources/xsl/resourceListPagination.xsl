@@ -7,11 +7,19 @@
 	
 	<xsl:param name="page"/>
 	
+	<xsl:param name="facets"/>
+	
 	<xsl:variable name="base-query-string">
-		<xsl:if test="$query and $source">
-			<xsl:value-of
-				select="concat('source=', $source, '&amp;q=', $query, '&amp;')" />
-		</xsl:if>
+	   <xsl:choose>
+			<xsl:when test="$query and $source and $facets">
+				<xsl:value-of
+					select="concat('source=', $source, '&amp;q=', $query, '&amp;facets=',$facets, '&amp;')" />
+			</xsl:when>
+			<xsl:when test="$query and $source">
+				<xsl:value-of
+					select="concat('source=', $source, '&amp;q=', $query, '&amp;')" />
+			</xsl:when>
+	   </xsl:choose>
 	</xsl:variable>
 	
 	<xsl:template name="paginationLinks">

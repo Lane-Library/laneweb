@@ -90,7 +90,9 @@
                     boundingBox.setStyle("visibility", "visible");
                 }
                 Y.lane.LightboxBg.show();
-                this._animate();
+                if (this.get('animate')){
+                    this._animate();
+                }
             }
         }
     });
@@ -98,6 +100,9 @@
     Lightbox.ATTRS = {
         url : {
             value : null
+        },
+        animate : {
+            value: true
         }
     };
 
@@ -123,9 +128,13 @@
             anchor = event.target.ancestor("a") || event.target,
             rel = anchor.get("rel"),
             model = Y.lane.Model,
-            basePath = model.get(model.BASE_PATH) || "";
+            basePath = model.get(model.BASE_PATH) || "",
+            animation = true;
         if (rel && rel.indexOf("lightbox") === 0) {
             event.preventDefault();
+            if (rel.indexOf("lightbox-noanim") === 0){
+                animation = false;
+            }
             // need to dynamically create regex for getting /plain url because
             // of various base paths (eg /stage)
             regex = new RegExp("(.+)//([^/]+)(" + basePath + "/)(.+)".replace(/\//g, "\\\/"));
@@ -136,6 +145,7 @@
                 on : {
                     success : function(id, o) {
                         var lightbox = Y.lane.Lightbox;
+                        lightbox.set("animate", animation);
                         lightbox.set("url", href);
                         lightbox.setContent(o.responseText);
                         lightbox.show();

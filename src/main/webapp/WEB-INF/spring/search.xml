@@ -88,6 +88,12 @@
         class="edu.stanford.irt.laneweb.search.SearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"/>
     
+     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/solr-search-facets"
+        class="edu.stanford.irt.laneweb.search.SolrSearchFacetsGenerator"
+         parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator">
+        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+    </bean>
+    
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search"
         class="edu.stanford.irt.laneweb.search.SolrSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">

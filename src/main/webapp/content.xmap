@@ -75,6 +75,12 @@
                 <map:serialize type="xml"/>
             </map:match>
         </map:match>
+        <!-- facet browse html ...  move to content once solr live -->
+        <map:match pattern="search/solr-facet-browse.html" type="wildcard">
+            <map:generate type="file" src="resources/solr-facet-browse.html"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <!-- search.html -->
         <map:match pattern="search.html" type="wildcard">
             <!-- bassett search pages -->

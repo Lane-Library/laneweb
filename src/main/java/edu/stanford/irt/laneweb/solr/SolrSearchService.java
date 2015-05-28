@@ -8,6 +8,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.solr.core.SolrTemplate;
+import org.springframework.data.solr.core.query.FacetOptions;
+import org.springframework.data.solr.core.query.FacetOptions.FieldWithFacetParameters;
+import org.springframework.data.solr.core.query.FacetQuery;
+import org.springframework.data.solr.core.query.SimpleFacetQuery;
+import org.springframework.data.solr.core.query.SimpleStringCriteria;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
@@ -17,12 +23,29 @@ import edu.stanford.irt.laneweb.eresources.Eresource;
 
 public class SolrSearchService implements CollectionManager {
 
+    public static final String FACETS_SEPARATOR = "::";
+
     private static final String AND = " AND ";
 
     private static final String EMPTY = "";
 
     @Autowired
     private SolrRepository repository;
+
+    @Autowired
+    private SolrTemplate solrTemplate;
+
+    public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
+            final PageRequest pageRequest) {
+        int modifiedOffset = (pageRequest.getOffset() == 0) ? 0 : pageRequest.getOffset() - 1;
+        FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
+        fieldWithFacetParams.setOffset(Integer.valueOf(modifiedOffset));
+        FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(new FacetOptions()
+                .addFacetOnField(fieldWithFacetParams).setFacetMinCount(1).setFacetLimit(pageRequest.getPageSize()));
+        fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
+        fquery.addCriteria(new SimpleStringCriteria(facetStringToFilters(filters)));
+        return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
+    }
 
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters,
             final PageRequest pageRequest) {
@@ -32,8 +55,8 @@ public class SolrSearchService implements CollectionManager {
     public String facetStringToFilters(final String facets) {
         String filters = EMPTY;
         if (null != facets) {
-            filters = facets.replaceFirst("::$", EMPTY);
-            filters = filters.replaceAll("::", AND);
+            filters = facets.replaceFirst(FACETS_SEPARATOR + "$", EMPTY);
+            filters = filters.replaceAll(FACETS_SEPARATOR, AND);
         }
         return filters;
     }
@@ -93,7 +116,6 @@ public class SolrSearchService implements CollectionManager {
     @Override
     public List<Eresource> search(final String query) {
         return this.repository.searchFindAllWithFilter(query, EMPTY, new PageRequest(0, 50)).getContent();
-        // return this.repository.searchFindAll(query, new PageRequest(0, 50)).getContent();
     }
 
     @Override

@@ -9,7 +9,6 @@
 .solrFacets li.facetHeader {
     height: 20px;
     border-bottom: 1px solid #e6e4dc;
-    display: none;
     cursor: pointer;
 }
 
@@ -37,4 +36,15 @@
 
 .solrFacets {
     opacity: 0;
+}
+
+.facetBrowse {
+    min-width: 500px;
+    padding: 25px 50px;
+}
+
+.facetBrowse .s-pagination {
+    padding-top: 25px;
+    float: none;
+    text-align: center;
 }

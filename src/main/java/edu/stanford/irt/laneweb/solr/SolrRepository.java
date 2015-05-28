@@ -40,7 +40,7 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     public List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
 
     @Query(value = "?0", filters = { "?1" }, requestHandler = FACET_HANDLER)
-    @Facet(queries = { "*:*" }, limit = 10)
+    @Facet(queries = { "*:*" }, limit = 11)
     // field list configured in solr lane-facet request handler (in solrconfig.xml)
     public FacetPage<Eresource> facetByManyFields(String term, String filter, Pageable page);
 

@@ -43,6 +43,8 @@ public abstract class Model {
 
     public static final String EXPIRES = "expires";
 
+    public static final String FACET = "facet";
+
     public static final String FACETS = "facets";
 
     public static final String HOST = "host";
