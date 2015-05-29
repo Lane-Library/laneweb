@@ -93,7 +93,7 @@
 	                <ul>
 						<xsl:call-template name="field">
 	                        <xsl:with-param name="id" select="'type'"/>					   
-	                        <xsl:with-param name="label" select="'Format'"/>					   
+	                        <xsl:with-param name="label" select="'Resource Type'"/>					   
 						</xsl:call-template>
 	
 	                    <xsl:call-template name="field">
@@ -113,12 +113,12 @@
 	                    
 	                    <xsl:call-template name="field">
 	                        <xsl:with-param name="id" select="'mesh'"/>                    
-	                        <xsl:with-param name="label" select="'MeSH'"/>                    
+	                        <xsl:with-param name="label" select="'By Subject (MeSH)'"/>                    
 	                    </xsl:call-template>
 	                    
 	                    <xsl:call-template name="field">
 	                        <xsl:with-param name="id" select="'year'"/>                    
-	                        <xsl:with-param name="label" select="'Year'"/>                    
+	                        <xsl:with-param name="label" select="'Publication Year'"/>                    
 	                    </xsl:call-template>
 	                    
 	                    <xsl:call-template name="field">
