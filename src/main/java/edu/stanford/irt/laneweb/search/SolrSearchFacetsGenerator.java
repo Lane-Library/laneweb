@@ -2,15 +2,16 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
+import org.springframework.data.solr.core.query.result.FacetQueryEntry;
 import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
@@ -21,15 +22,16 @@ import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.solr.Facet;
+import edu.stanford.irt.laneweb.solr.FacetComparator;
 import edu.stanford.irt.laneweb.solr.SolrSearchService;
 
 public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator implements ModelAware {
 
-    private static final String COLON_QUOTE = ":\"";
+    private static final String COLON = ":";
+
+    private static final String DOT_STAR = ".*";
 
     private static final String EMPTY = "";
-
-    private static final int FACETS_SIZE = 21;
 
     private static final String QUOTE = "\"";
 
@@ -63,10 +65,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         FacetPage<Eresource> fps = null;
         if (null == this.facet) {
-            fps = this.service.facetByManyFields(this.query, this.facets, new PageRequest(this.pageNumber, 1));
+            fps = this.service.facetByManyFields(this.query, this.facets, this.pageNumber);
         } else {
-            fps = this.service.facetByField(this.query, this.facets, this.facet, new PageRequest(this.pageNumber,
-                    FACETS_SIZE));
+            fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber);
         }
         marshal(processFacets(fps), xmlConsumer);
     }
@@ -81,13 +82,16 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         return encoded;
     }
 
-    private String getUrl(final String fieldName, final String facetName, final boolean on) {
+    private String getUrl(final String fieldName, final String facetName, final boolean isEnabled) {
         String url = null;
         String joiner = (this.facets.isEmpty()) ? EMPTY : SolrSearchService.FACETS_SEPARATOR;
-        if (on) {
-            url = this.facets.replaceFirst("(^|::)" + fieldName + COLON_QUOTE + facetName + QUOTE, EMPTY);
+        String maybeQuote = (facetName.startsWith("[") && facetName.endsWith("]")) ? EMPTY : QUOTE;
+        String escapedFacetName = Pattern.quote(facetName);
+        if (isEnabled) {
+            url = this.facets.replaceFirst("(^|::)" + fieldName + COLON + maybeQuote + escapedFacetName + maybeQuote,
+                    EMPTY);
         } else {
-            url = this.facets + joiner + fieldName + COLON_QUOTE + facetName + QUOTE;
+            url = this.facets + joiner + fieldName + COLON + maybeQuote + facetName + maybeQuote;
         }
         url = url.replaceAll("(^::|::$)", EMPTY);
         return encodeString(url);
@@ -97,16 +101,36 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         if (null == this.facets) {
             return false;
         }
-        return this.facets.matches(".*" + fieldName + COLON_QUOTE + facetName + "\".*");
+        String maybeQuote = (facetName.startsWith("[") && facetName.endsWith("]")) ? EMPTY : QUOTE;
+        String escapedFacetName = Pattern.quote(facetName);
+        return this.facets
+                .matches(DOT_STAR + fieldName + COLON + maybeQuote + escapedFacetName + maybeQuote + DOT_STAR);
     }
 
-    private Map<String, Object> processFacets(final FacetPage<Eresource> facetpage) {
-        Map<String, Object> facetsMap = new LinkedHashMap<String, Object>();
+    private Map<String, Set<Facet>> processFacets(final FacetPage<Eresource> facetpage) {
+        Map<String, Set<Facet>> facetsMap = new LinkedHashMap<String, Set<Facet>>();
+        // extract from facet queries
+        for (FacetQueryEntry page : facetpage.getFacetQueryResult()) {
+            Set<Facet> facetSet = new TreeSet<Facet>(new FacetComparator());
+            String value = page.getValue();
+            String fieldName = value.split(COLON)[0];
+            String facetName = value.split(COLON)[1];
+            long count = page.getValueCount();
+            if (count > 0) {
+                boolean isEnabled = isEnabled(fieldName, facetName);
+                if (facetsMap.containsKey(fieldName)) {
+                    facetSet = facetsMap.get(fieldName);
+                }
+                facetSet.add(new Facet(value, count, isEnabled, getUrl(fieldName, facetName, isEnabled)));
+                facetsMap.put(fieldName, facetSet);
+            }
+        }
+        // extract from facet fields
         for (Page<FacetFieldEntry> page : facetpage.getFacetResultPages()) {
             if (!page.hasContent()) {
                 continue;
             }
-            List<Facet> facetList = new ArrayList<Facet>();
+            Set<Facet> facetSet = new TreeSet<Facet>(new FacetComparator());
             String fieldName = null;
             for (FacetFieldEntry entry : page) {
                 if (fieldName == null) {
@@ -114,10 +138,13 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
                 }
                 String facetName = entry.getValue();
                 boolean isEnabled = isEnabled(fieldName, facetName);
-                facetList.add(new Facet(facetName, entry.getValueCount(), isEnabled(fieldName, facetName), getUrl(
-                        fieldName, facetName, isEnabled)));
+                if (facetsMap.containsKey(fieldName)) {
+                    facetSet = facetsMap.get(fieldName);
+                }
+                facetSet.add(new Facet(facetName, entry.getValueCount(), isEnabled, getUrl(fieldName, facetName,
+                        isEnabled)));
             }
-            facetsMap.put(fieldName, facetList);
+            facetsMap.put(fieldName, facetSet);
         }
         return facetsMap;
     }

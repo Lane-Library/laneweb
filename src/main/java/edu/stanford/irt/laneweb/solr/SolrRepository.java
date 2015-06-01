@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 import org.springframework.data.solr.repository.Facet;
@@ -38,11 +37,6 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     @Query(value = "ertlsw?1", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
     public List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
-
-    @Query(value = "?0", filters = { "?1" }, requestHandler = FACET_HANDLER)
-    @Facet(queries = { "*:*" }, limit = 11)
-    // field list configured in solr lane-facet request handler (in solrconfig.xml)
-    public FacetPage<Eresource> facetByManyFields(String term, String filter, Pageable page);
 
     @Query(value = "?0", requestHandler = FACET_HANDLER)
     @Facet(fields = { "type" }, minCount = 0, limit = 100)

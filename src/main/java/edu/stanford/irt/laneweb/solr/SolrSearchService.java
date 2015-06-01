@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.solr;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +16,7 @@ import org.springframework.data.solr.core.query.FacetOptions;
 import org.springframework.data.solr.core.query.FacetOptions.FieldWithFacetParameters;
 import org.springframework.data.solr.core.query.FacetQuery;
 import org.springframework.data.solr.core.query.SimpleFacetQuery;
+import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.data.solr.core.query.SimpleStringCriteria;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -29,6 +33,31 @@ public class SolrSearchService implements CollectionManager {
 
     private static final String EMPTY = "";
 
+    private static final Collection<String> FACET_FIELDS = new ArrayList<String>();
+
+    private static final FacetOptions FACET_OPTIONS = new FacetOptions();
+
+    private static final int FACETS_BROWSE_SIZE = 21;
+
+    private static final int FACETS_LIST_SIZE = 11;
+
+    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    static {
+        FACET_FIELDS.add("mesh");
+        FACET_FIELDS.add("publicationAuthor");
+        FACET_FIELDS.add("publicationLanguage");
+        FACET_FIELDS.add("publicationTitle");
+        FACET_FIELDS.add("publicationType");
+        FACET_FIELDS.add("type");
+        FACET_FIELDS.add("year");
+    }
+    static {
+        FACET_OPTIONS.setFacetMinCount(1);
+        FACET_OPTIONS.addFacetOnFlieldnames(FACET_FIELDS);
+        FACET_OPTIONS.addFacetQuery(new SimpleQuery("year:[" + (THIS_YEAR - 5) + " TO *]"));
+        FACET_OPTIONS.addFacetQuery(new SimpleQuery("year:[" + (THIS_YEAR - 10) + " TO *]"));
+    }
+
     @Autowired
     private SolrRepository repository;
 
@@ -36,29 +65,31 @@ public class SolrSearchService implements CollectionManager {
     private SolrTemplate solrTemplate;
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
-            final PageRequest pageRequest) {
+            final int pageNumber) {
+        PageRequest pageRequest = new PageRequest(pageNumber, FACETS_BROWSE_SIZE);
+        String facetFilters = facetStringToFilters(filters);
         int modifiedOffset = (pageRequest.getOffset() == 0) ? 0 : pageRequest.getOffset() - 1;
         FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
         fieldWithFacetParams.setOffset(Integer.valueOf(modifiedOffset));
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(new FacetOptions()
-                .addFacetOnField(fieldWithFacetParams).setFacetMinCount(1).setFacetLimit(pageRequest.getPageSize()));
+        .addFacetOnField(fieldWithFacetParams).setFacetMinCount(1).setFacetLimit(pageRequest.getPageSize()));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
-        fquery.addCriteria(new SimpleStringCriteria(facetStringToFilters(filters)));
+        if (!facetFilters.isEmpty()) {
+            fquery.addCriteria(new SimpleStringCriteria(facetFilters));
+        }
         return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
     }
 
-    public FacetPage<Eresource> facetByManyFields(final String query, final String filters,
-            final PageRequest pageRequest) {
-        return this.repository.facetByManyFields(query, facetStringToFilters(filters), pageRequest);
-    }
-
-    public String facetStringToFilters(final String facets) {
-        String filters = EMPTY;
-        if (null != facets) {
-            filters = facets.replaceFirst(FACETS_SEPARATOR + "$", EMPTY);
-            filters = filters.replaceAll(FACETS_SEPARATOR, AND);
+    public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int pageNumber) {
+        PageRequest pageRequest = new PageRequest(pageNumber, FACETS_LIST_SIZE);
+        String facetFilters = facetStringToFilters(filters);
+        FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(FACET_OPTIONS
+                .setPageable(pageRequest));
+        fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
+        if (!facetFilters.isEmpty()) {
+            fquery.addCriteria(new SimpleStringCriteria(facetFilters));
         }
-        return filters;
+        return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
     }
 
     @Override
@@ -157,5 +188,14 @@ public class SolrSearchService implements CollectionManager {
 
     public Page<Eresource> searchWithFilters(final String query, final String facets, final PageRequest pageRequest) {
         return this.repository.searchFindAllWithFilter(query, facetStringToFilters(facets), pageRequest);
+    }
+
+    private String facetStringToFilters(final String facets) {
+        String filters = EMPTY;
+        if (null != facets) {
+            filters = facets.replaceFirst(FACETS_SEPARATOR + "$", EMPTY);
+            filters = filters.replaceAll(FACETS_SEPARATOR, AND);
+        }
+        return filters;
     }
 }

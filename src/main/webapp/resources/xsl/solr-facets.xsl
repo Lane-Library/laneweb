@@ -21,7 +21,8 @@
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
         <xsl:variable name="label">
             <xsl:choose>
-                <xsl:when test="../../string[. = 'isRecent']">Last 10 Years</xsl:when>
+                <xsl:when test="../../string[. = 'year'] and name = 'year:[2010 TO *]'">Last 5 Years</xsl:when>
+                <xsl:when test="../../string[. = 'year'] and name = 'year:[2005 TO *]'">Last 10 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and name = '0'">Unknown</xsl:when>
                 <xsl:otherwise><xsl:value-of select="name"/></xsl:otherwise>
             </xsl:choose>
@@ -46,20 +47,20 @@
 	        <xsl:choose>
 	            <xsl:when test="$facet = ''"> 
 		            <xsl:variable name="open">
-		                <xsl:if test="/linked-hash-map/entry/string[. = $id]/../list/facet/enabled[. = 'true'] or ($id = 'year' and /linked-hash-map/entry/string[. = 'isRecent']/../list/facet/enabled[. = 'true'])"> openOnInit</xsl:if>
+		                <xsl:if test="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet/enabled[. = 'true'] or ($id = 'year' and /linked-hash-map/entry/string[. = 'isRecent']/../sorted-set/facet/enabled[. = 'true'])"> openOnInit</xsl:if>
 		            </xsl:variable>
 		            <li class="solrFacet facetHeader{$open}"><xsl:value-of select="$label"/></li>
 		            <xsl:if test="$id = 'year'">
-		                <xsl:apply-templates select="/linked-hash-map/entry/string[. = 'isRecent']/../list/facet[name[. = 'true']]"/>
+		                <xsl:apply-templates select="/linked-hash-map/entry/string[. = 'isRecent']/../sorted-set/facet[name[. = 'true']]"/>
 		            </xsl:if>
-		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../list/facet[position() &lt;= $values-per-facet or $facet !='']"/>
-		            <xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../list/facet) > $values-per-facet and $facet = ''">
+		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $values-per-facet or $facet !='']"/>
+		            <xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $values-per-facet and $facet = ''">
 		                 <li> <a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> more </a> <i class="icon fa fa-arrow-right"></i></li>
 		            </xsl:if>
 	            </xsl:when>
 	            <xsl:otherwise>
                     <li class="solrFacet facetHeader"><h5><xsl:value-of select="$label"/></h5></li>
-                    <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../list/facet[position() &lt;= $facets-per-browse-page]"/>
+                    <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $facets-per-browse-page]"/>
                     <li>
                         <div class="s-pagination facetBrowse no-bookmarking">
 					        <xsl:choose>
@@ -71,7 +72,7 @@
 					            </xsl:otherwise>
 					        </xsl:choose>
 	                        <xsl:choose>
-	                            <xsl:when test="count(/linked-hash-map/entry/string[. = $id]/../list/facet) > $facets-per-browse-page">
+	                            <xsl:when test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $facets-per-browse-page">
 	                                <a class="pagingButton" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) + 1}"> Next &gt; </a>
 	                            </xsl:when>
 	                            <xsl:otherwise>
