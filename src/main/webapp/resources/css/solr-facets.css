@@ -48,3 +48,7 @@
     float: none;
     text-align: center;
 }
+
+#searchFacets .solrFacet.facetHeader {
+    text-transform:none;
+}
