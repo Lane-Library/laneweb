@@ -4,6 +4,7 @@
     padding-top: 0;
     padding-bottom: 0;
     border-bottom: none;
+    clear: right;
 }
 
 .solrFacets li.facetHeader {
@@ -30,6 +31,7 @@
     -webkit-transform: rotate(90deg);
 }
 
+/* IE <= 9 does not support transform: rotate */
 .solrFacets li.facetHeader.openIE:after {
     content: "v";
 }
