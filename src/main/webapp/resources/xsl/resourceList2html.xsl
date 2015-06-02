@@ -28,11 +28,9 @@
                 <title>search results</title>
             </head>
             <body>
-                <xsl:if test="number(@size) &gt;= number(@length)">
-                    <xsl:call-template name="paginationLinks">
-                        <xsl:with-param name="top" select="'true'"/>
-                    </xsl:call-template>
-                </xsl:if>
+				<xsl:call-template name="paginationLinks">
+				   <xsl:with-param name="top" select="'true'"/>
+				</xsl:call-template>
                 <h3 class="eresources">&#160;</h3>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
