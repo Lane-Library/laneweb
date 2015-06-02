@@ -14,7 +14,7 @@
                 node.removeClass('openIE');
             } else {
                 node.addClass('open');
-                if (Y.UA.ie) { 
+                if (Y.UA.ie && Y.UA.ie <= 9) {
                     node.addClass('openIE');
                 }
             }
