@@ -33,8 +33,8 @@
 .popInContent {
     display:none;
     position:absolute;
-    top:-45px;
-    min-width:593px;
+    top:-16px;
+    left:220px;
     overflow:hidden;
     background-color: #F4F5EF;
     border: 1px solid #E6E4DC;
@@ -56,7 +56,7 @@
     padding-top:10px;
 }
 .lwSearchResults li {
-    margin-bottom:10px;
+	margin-bottom:10px;
     padding:5px;
 }
 
@@ -89,7 +89,7 @@ li.active .description {
     margin-left:20px;
 }
 .hvrTrig:hover .showAbstract, .active .showAbstract {
-    display:none
+	display:none
 }
 .hvrTarg {
     display:none;
@@ -139,7 +139,7 @@ li.active .description {
 }
 
 .rightSearchTips .heading {
-    font-weight:bold;
+    font-weight: bold;
     padding: 10px 0 5px;
     border-bottom: solid 1px rgb(144,144,144);
     margin-bottom:4px;

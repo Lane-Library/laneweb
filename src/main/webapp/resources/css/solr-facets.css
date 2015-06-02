@@ -50,19 +50,30 @@
 }
 
 #searchFacets .solrFacet.facetHeader {
-    text-transform:none;
+    text-transform: none;
 }
 
 .facetCount {
-    float:right;
-    padding-right:5px;   
+    float: right;
+    padding-right: 5px;
 }
 
 .facetCount i.fa-times-circle {
     padding: 0 10px;
-    color:#222;
+    color: #222;
 }
 
 .facetCount i.fa-times-circle:hover {
     color: #007C92;
+}
+
+/* solr-specific mods for search suggestions ... move to search.css if keep */
+.solr.popInContent {
+    top: -45px;
+    left: 0;
+    min-width: 690px;
+}
+
+.solr #queryMapping span, .solr #spellCheckLink, .solr #findItLink {
+    font-weight: bold;
 }
