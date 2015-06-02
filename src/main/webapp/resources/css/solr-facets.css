@@ -53,16 +53,16 @@
     text-transform:none;
 }
 
-.solrFacets i.fa-times-circle {
+.facetCount {
+    float:right;
+    padding-right:5px;   
+}
+
+.facetCount i.fa-times-circle {
     padding: 0 10px;
     color:#222;
 }
 
-.solrFacets i.fa-times-circle:hover {
+.facetCount i.fa-times-circle:hover {
     color: #007C92;
-}
-
-.facetCount {
-    float:right;
-    padding-right:5px;   
 }
