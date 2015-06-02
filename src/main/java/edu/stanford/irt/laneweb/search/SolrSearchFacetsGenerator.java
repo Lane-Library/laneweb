@@ -65,7 +65,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         FacetPage<Eresource> fps = null;
         if (null == this.facet) {
-            fps = this.service.facetByManyFields(this.query, this.facets, this.pageNumber);
+            fps = this.service.facetByManyFields(this.query, this.facets);
         } else {
             fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber);
         }

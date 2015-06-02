@@ -72,7 +72,7 @@ public class SolrSearchService implements CollectionManager {
         FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
         fieldWithFacetParams.setOffset(Integer.valueOf(modifiedOffset));
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(new FacetOptions()
-        .addFacetOnField(fieldWithFacetParams).setFacetMinCount(1).setFacetLimit(pageRequest.getPageSize()));
+                .addFacetOnField(fieldWithFacetParams).setFacetMinCount(1).setFacetLimit(pageRequest.getPageSize()));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));
@@ -80,11 +80,10 @@ public class SolrSearchService implements CollectionManager {
         return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
     }
 
-    public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int pageNumber) {
-        PageRequest pageRequest = new PageRequest(pageNumber, FACETS_LIST_SIZE);
+    public FacetPage<Eresource> facetByManyFields(final String query, final String filters) {
         String facetFilters = facetStringToFilters(filters);
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(FACET_OPTIONS
-                .setPageable(pageRequest));
+                .setFacetLimit(FACETS_LIST_SIZE));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));
