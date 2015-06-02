@@ -29,11 +29,15 @@
     </xsl:template>
 
     <!-- add sourceid input to search form if sourceid param present -->
+    <!-- add facets to search form if facets param present -->
     <xsl:template match="h:fieldset[@id='searchFields' or parent::h:form[@class='breadcrumbForm']]">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
             <xsl:if test="$sourceid">
                 <input type="hidden" name="sourceid" value="{$sourceid}"/>
+            </xsl:if>
+            <xsl:if test="$facets">
+                <input type="hidden" name="facets" value="{$facets}"/>
             </xsl:if>
         </xsl:copy>
     </xsl:template>

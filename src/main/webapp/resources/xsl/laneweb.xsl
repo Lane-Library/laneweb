@@ -61,6 +61,8 @@
     <!-- target parameter for shibboleth discovery service page -->
     <xsl:param name="return"/>
 
+    <xsl:param name="facets"/>
+    
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->

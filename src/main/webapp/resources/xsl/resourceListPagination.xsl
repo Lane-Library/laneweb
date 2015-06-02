@@ -73,6 +73,9 @@
 			</xsl:otherwise>
 		</xsl:choose>
 		<form class="pagingForm" name="pagination">
+		  <xsl:if test="string-length($facets) > 0">
+			  <input type="hidden" name="facets" value="{$facets}"/>
+		  </xsl:if>
 		  <input type="hidden" name="source" value="{$source}"/>
 		  <input type="hidden" name="q" value="{$query}"/>
 		  <label for="page"> Page </label>
