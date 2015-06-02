@@ -89,45 +89,47 @@
     <xsl:template match="/">
         <html>
             <body>
-                <div class="bd">
-	                <h3>Limits</h3>
-	                <ul>
-						<xsl:call-template name="field">
-	                        <xsl:with-param name="id" select="'type'"/>					   
-	                        <xsl:with-param name="label" select="'Resource Type'"/>					   
-						</xsl:call-template>
-	
-	                    <xsl:call-template name="field">
-	                        <xsl:with-param name="id" select="'publicationType'"/>                    
-	                        <xsl:with-param name="label" select="'Article Type'"/>                    
-	                    </xsl:call-template>
-	
-	                    <xsl:call-template name="field">
-	                        <xsl:with-param name="id" select="'publicationTitle'"/>                    
-	                        <xsl:with-param name="label" select="'Article Source'"/>                    
-	                    </xsl:call-template>
-	                    
-	                    <xsl:call-template name="field">
-	                        <xsl:with-param name="id" select="'publicationAuthor'"/>                    
-	                        <xsl:with-param name="label" select="'Article Author'"/>                    
-	                    </xsl:call-template>
-	                    
-	                    <xsl:call-template name="field">
-	                        <xsl:with-param name="id" select="'mesh'"/>                    
-	                        <xsl:with-param name="label" select="'By Subject (MeSH)'"/>                    
-	                    </xsl:call-template>
-	                    
-	                    <xsl:call-template name="field">
-	                        <xsl:with-param name="id" select="'year'"/>                    
-	                        <xsl:with-param name="label" select="'Publication Year'"/>                    
-	                    </xsl:call-template>
-	                    
-	                    <xsl:call-template name="field">
-	                        <xsl:with-param name="id" select="'publicationLanguage'"/>                    
-	                        <xsl:with-param name="label" select="'Language'"/>                    
-	                    </xsl:call-template>
-	                </ul>
-                </div>
+                <xsl:if test="/linked-hash-map/entry">
+	                <div class="bd">
+		                <h3>Limits</h3>
+		                <ul>
+							<xsl:call-template name="field">
+		                        <xsl:with-param name="id" select="'type'"/>					   
+		                        <xsl:with-param name="label" select="'Resource Type'"/>					   
+							</xsl:call-template>
+		
+		                    <xsl:call-template name="field">
+		                        <xsl:with-param name="id" select="'publicationType'"/>                    
+		                        <xsl:with-param name="label" select="'Article Type'"/>                    
+		                    </xsl:call-template>
+		
+		                    <xsl:call-template name="field">
+		                        <xsl:with-param name="id" select="'publicationTitle'"/>                    
+		                        <xsl:with-param name="label" select="'Article Source'"/>                    
+		                    </xsl:call-template>
+		                    
+		                    <xsl:call-template name="field">
+		                        <xsl:with-param name="id" select="'publicationAuthor'"/>                    
+		                        <xsl:with-param name="label" select="'Article Author'"/>                    
+		                    </xsl:call-template>
+		                    
+		                    <xsl:call-template name="field">
+		                        <xsl:with-param name="id" select="'mesh'"/>                    
+		                        <xsl:with-param name="label" select="'By Subject (MeSH)'"/>                    
+		                    </xsl:call-template>
+		                    
+		                    <xsl:call-template name="field">
+		                        <xsl:with-param name="id" select="'year'"/>                    
+		                        <xsl:with-param name="label" select="'Publication Year'"/>                    
+		                    </xsl:call-template>
+		                    
+		                    <xsl:call-template name="field">
+		                        <xsl:with-param name="id" select="'publicationLanguage'"/>                    
+		                        <xsl:with-param name="label" select="'Language'"/>                    
+		                    </xsl:call-template>
+		                </ul>
+	                </div>
+                </xsl:if>
             </body>
         </html>
     </xsl:template>
