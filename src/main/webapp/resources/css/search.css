@@ -33,8 +33,8 @@
 .popInContent {
     display:none;
     position:absolute;
-    top:-16px;
-    left:220px;
+    top:-45px;
+    min-width:593px;
     overflow:hidden;
     background-color: #F4F5EF;
     border: 1px solid #E6E4DC;
