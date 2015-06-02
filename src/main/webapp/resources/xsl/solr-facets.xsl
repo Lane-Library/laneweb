@@ -32,10 +32,10 @@
         </xsl:variable>
 		<xsl:choose>
 		    <xsl:when test="enabled = 'true'">
-		         <li><xsl:value-of select="$label"/> (<xsl:value-of select="$count-formatted"/>) [<a href="?source={$source}&amp;q={$url-encoded-query}{$furl}"> remove </a>]</li>
+		         <li><xsl:value-of select="$label"/> <span class="facetCount"><a title="remove filter" href="?source={$source}&amp;q={$url-encoded-query}{$furl}"> <i class="fa fa-times-circle"></i> </a> <xsl:value-of select="$count-formatted"/></span></li>
 		    </xsl:when>
 		    <xsl:otherwise>
-		         <li><a href="?source={$source}&amp;q={$url-encoded-query}{$furl}"><xsl:value-of select="$label"/></a> (<xsl:value-of select="$count-formatted"/>)</li>
+		         <li><a href="?source={$source}&amp;q={$url-encoded-query}{$furl}"><xsl:value-of select="$label"/></a> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></li>
 		    </xsl:otherwise>
 		</xsl:choose>
     </xsl:template>
