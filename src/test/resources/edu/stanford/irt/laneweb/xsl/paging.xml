@@ -17,7 +17,7 @@
                <label for="pages"> of 2</label>
                <input type="hidden" name="pages" value="2"/>
             </form>
-            <a class="pagingButton" href="?page=2"> Next &gt; </a>
+            <a class="pagingButton next" href="?page=2"> Next &gt; </a>
             <a class="pagingButton" href="?page=2"> Last &gt;&gt; </a>
          </div>
       </div>
