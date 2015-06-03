@@ -53,9 +53,17 @@
                    </div>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:text> all </xsl:text>
-					<xsl:value-of select="/s:resources/@size" />
-					<xsl:text> results</xsl:text>
+				    <xsl:if test="number(/s:resources/@size) = 0">
+						<xsl:text> no results </xsl:text>
+				    </xsl:if>
+				    <xsl:if test="number(/s:resources/@size) = 1">
+						<xsl:text> one result </xsl:text>
+				    </xsl:if>
+				    <xsl:if test="number(/s:resources/@size) > 1">
+						<xsl:text> all </xsl:text>
+						<xsl:value-of select="/s:resources/@size" />
+						<xsl:text> results</xsl:text>
+				    </xsl:if>
 				</xsl:otherwise>
 			</xsl:choose>
 		</div>
