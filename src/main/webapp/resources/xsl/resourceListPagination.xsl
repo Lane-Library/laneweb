@@ -73,7 +73,7 @@
 		<xsl:choose>
 			<xsl:when test="number(/s:resources/@page) &gt;= 1">
 	            <a class="pagingButton" href="?{$base-query-string}page=1"> &lt;&lt; First </a>
-	            <a class="pagingButton" href="?{$base-query-string}page={/s:resources/@page}"> &lt; Previous </a>
+	            <a class="pagingButton previous" href="?{$base-query-string}page={/s:resources/@page}"> &lt; Previous </a>
 			</xsl:when>
 			<xsl:otherwise>
 	            <span class="pagingButton disabled"> &lt; &lt; First </span>
@@ -93,7 +93,7 @@
 		</form>
         <xsl:choose>
 			<xsl:when test="number(/s:resources/@pages) &gt; number(/s:resources/@page) + 1">
-				<a class="pagingButton" href="?{$base-query-string}page={number(/s:resources/@page) + 2}"> Next &gt; </a>
+				<a class="pagingButton next" href="?{$base-query-string}page={number(/s:resources/@page) + 2}"> Next &gt; </a>
                 <a class="pagingButton" href="?{$base-query-string}page={/s:resources/@pages}"> Last &gt;&gt; </a>
 			</xsl:when>
             <xsl:otherwise>

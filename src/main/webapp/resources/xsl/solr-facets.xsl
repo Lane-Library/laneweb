@@ -65,7 +65,7 @@
                         <div class="s-pagination facetBrowse no-bookmarking">
 					        <xsl:choose>
 					            <xsl:when test="number($page) &gt; 1">
-									<a class="pagingButton" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) - 1}"> &lt; Previous </a>
+									<a class="pagingButton previous" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) - 1}"> &lt; Previous </a>
 					            </xsl:when>
 					            <xsl:otherwise>
 	                                <span class="pagingButton disabled"> &lt; Previous </span>
@@ -73,7 +73,7 @@
 					        </xsl:choose>
 	                        <xsl:choose>
 	                            <xsl:when test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $facets-per-browse-page">
-	                                <a class="pagingButton" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) + 1}"> Next &gt; </a>
+	                                <a class="pagingButton next" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) + 1}"> Next &gt; </a>
 	                            </xsl:when>
 	                            <xsl:otherwise>
 	                                <span class="pagingButton disabled"> Next &gt; </span>
