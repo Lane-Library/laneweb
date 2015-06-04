@@ -11,6 +11,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.FacetOptions;
 import org.springframework.data.solr.core.query.FacetOptions.FieldWithFacetParameters;
@@ -72,7 +73,7 @@ public class SolrSearchService implements CollectionManager {
         FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
         fieldWithFacetParams.setOffset(Integer.valueOf(modifiedOffset));
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(new FacetOptions()
-                .addFacetOnField(fieldWithFacetParams).setFacetMinCount(1).setFacetLimit(pageRequest.getPageSize()));
+        .addFacetOnField(fieldWithFacetParams).setFacetMinCount(1).setFacetLimit(pageRequest.getPageSize()));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));
@@ -178,14 +179,14 @@ public class SolrSearchService implements CollectionManager {
                 .getContent();
     }
 
-    public Page<Eresource> searchType(final String type, final String query, final PageRequest pageRequest) {
+    public Page<Eresource> searchType(final String type, final String query, final Pageable pageRequest) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
         return this.repository.searchFindByType(query, SolrTypeManager.convertToNewType(type), pageRequest);
     }
 
-    public Page<Eresource> searchWithFilters(final String query, final String facets, final PageRequest pageRequest) {
+    public Page<Eresource> searchWithFilters(final String query, final String facets, final Pageable pageRequest) {
         return this.repository.searchFindAllWithFilter(query, facetStringToFilters(facets), pageRequest);
     }
 

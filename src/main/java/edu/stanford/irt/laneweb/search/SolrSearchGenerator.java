@@ -2,10 +2,16 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.solr.core.query.SolrPageRequest;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -26,6 +32,8 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
 
     private String searchTerm;
 
+    private String sort;
+
     private String type;
 
     public SolrSearchGenerator(final SolrSearchService collectionManager,
@@ -37,13 +45,14 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
+        this.facets = ModelUtil.getString(model, Model.FACETS);
         String page = ModelUtil.getString(model, Model.PAGE);
         if (page != null) {
             this.pageNumber = Integer.valueOf(page) - 1;
         }
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
+        this.sort = ModelUtil.getString(model, Model.SORT, "");
         this.type = ModelUtil.getString(model, Model.TYPE);
-        this.facets = ModelUtil.getString(model, Model.FACETS);
     }
 
     @Override
@@ -60,7 +69,8 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
     @Override
     protected Map<String, Object> doSearch(final String query) {
         Map<String, Object> result = new HashMap<String, Object>();
-        PageRequest pageRequest = new PageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS);
+        Sort sorts = parseSortParam();
+        Pageable pageRequest = new SolrPageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS, sorts);
         if (null != this.type) {
             result.put("resultPage", this.collectionManager.searchType(this.type, this.searchTerm, pageRequest));
         } else {
@@ -69,5 +79,19 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
         }
         result.put("searchTerm", this.searchTerm);
         return result;
+    }
+
+    private Sort parseSortParam() {
+        List<Order> orders = new ArrayList<Sort.Order>();
+        for (String string : this.sort.split(",")) {
+            String[] s = string.split(" ");
+            if (s.length == 2 && !s[0].isEmpty()) {
+                orders.add(new Order(Direction.fromStringOrNull(s[1]), s[0]));
+            }
+        }
+        if (!orders.isEmpty()) {
+            return new Sort(orders);
+        }
+        return null;
     }
 }

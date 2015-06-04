@@ -113,6 +113,8 @@ public abstract class Model {
 
     public static final String SITEMAP_URI = "sitemap-uri";
 
+    public static final String SORT = "sort";
+
     public static final String SOURCE = "source";
 
     public static final String SOURCEID = "sourceid";
