@@ -7,8 +7,12 @@
       <div xmlns:fx="http://lane.stanford.edu/fx"
            class="resourceListPagination no-bookmarking">
          <span id="pageStart">1</span> to 100 of 135 results<div class="s-pagination">
-            <span class="pagingButton disabled"> &lt; &lt; First </span>
-            <span class="pagingButton disabled"> &lt; Previous </span>
+            <span class="pagingButton disabled">
+               <i class="fa fa-fast-backward"/>
+            </span>
+            <span class="pagingButton disabled">
+               <i class="fa fa-backward"/>
+            </span>
             <form class="pagingForm" name="pagination">
                <input type="hidden" name="source" value=""/>
                <input type="hidden" name="q" value=""/>
@@ -17,8 +21,12 @@
                <label for="pages"> of 2</label>
                <input type="hidden" name="pages" value="2"/>
             </form>
-            <a class="pagingButton next" href="?page=2"> Next &gt; </a>
-            <a class="pagingButton" href="?page=2"> Last &gt;&gt; </a>
+            <a class="pagingButton next" href="?page=2" title="next">
+               <i class="fa fa-forward"/>
+            </a>
+            <a class="pagingButton" href="?page=2" title="last">
+               <i class="fa fa-fast-forward"/>
+            </a>
          </div>
       </div>
       <h3 class="eresources"> </h3>
