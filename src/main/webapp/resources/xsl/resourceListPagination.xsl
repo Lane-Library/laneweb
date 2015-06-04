@@ -7,6 +7,8 @@
 	
 	<xsl:param name="page"/>
 	
+	<xsl:param name="facets"/>
+	
 	<xsl:variable name="base-query-string">
 	   <xsl:choose>
 			<xsl:when test="$query and $source and $facets">
