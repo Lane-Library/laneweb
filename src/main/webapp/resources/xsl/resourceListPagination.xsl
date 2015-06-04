@@ -72,12 +72,12 @@
 	<xsl:template name="paginationNumbers">
 		<xsl:choose>
 			<xsl:when test="number(/s:resources/@page) &gt;= 1">
-	            <a class="pagingButton" href="?{$base-query-string}page=1"> &lt;&lt; First </a>
-	            <a class="pagingButton previous" href="?{$base-query-string}page={/s:resources/@page}"> &lt; Previous </a>
+	            <a class="pagingButton" href="?{$base-query-string}page=1" title="first"> <i class="fa fa-fast-backward"></i> </a>
+	            <a class="pagingButton previous" href="?{$base-query-string}page={/s:resources/@page}" title="previous"> <i class="fa fa-backward"></i> </a>
 			</xsl:when>
 			<xsl:otherwise>
-	            <span class="pagingButton disabled"> &lt; &lt; First </span>
-	            <span class="pagingButton disabled"> &lt; Previous </span>
+                <span class="pagingButton disabled"> <i class="fa fa-fast-backward"></i> </span>
+                <span class="pagingButton disabled"> <i class="fa fa-backward"></i> </span>
 			</xsl:otherwise>
 		</xsl:choose>
 		<form class="pagingForm" name="pagination">
@@ -93,12 +93,12 @@
 		</form>
         <xsl:choose>
 			<xsl:when test="number(/s:resources/@pages) &gt; number(/s:resources/@page) + 1">
-				<a class="pagingButton next" href="?{$base-query-string}page={number(/s:resources/@page) + 2}"> Next &gt; </a>
-                <a class="pagingButton" href="?{$base-query-string}page={/s:resources/@pages}"> Last &gt;&gt; </a>
+				<a class="pagingButton next" href="?{$base-query-string}page={number(/s:resources/@page) + 2}" title="next"> <i class="fa fa-forward"></i> </a>
+                <a class="pagingButton" href="?{$base-query-string}page={/s:resources/@pages}" title="last"> <i class="fa fa-fast-forward"></i> </a>
 			</xsl:when>
             <xsl:otherwise>
-                <span class="pagingButton disabled"> Next &gt; </span>
-                <span class="pagingButton disabled"> Last &gt;&gt; </span>
+                <span class="pagingButton disabled"> <i class="fa fa-forward"></i> </span>
+                <span class="pagingButton disabled"> <i class="fa fa-fast-forward"></i> </span>
             </xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

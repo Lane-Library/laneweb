@@ -36,7 +36,7 @@
     border: 1px solid #dadad9;
     border-radius: 3px 3px 0 0;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-    margin-left: 6px;
+    margin-left: 3px;
 }
 
 .pagingForm {
@@ -63,4 +63,16 @@
 .pagingButton.disabled {
     color: #ccc;
     cursor: default;
+}
+
+.pagingButton i {
+    color: #007C92;
+}
+
+.pagingButton i:hover {
+    color: #428BCA;
+}
+
+.pagingButton.disabled i {
+    color: #ccc;
 }
