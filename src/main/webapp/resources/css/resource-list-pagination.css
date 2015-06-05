@@ -51,7 +51,6 @@
 
 .s-pagination {
     float: right;
-    margin-top: -6px;
     padding-bottom: 10px;
 }
 
@@ -75,4 +74,18 @@
 
 .pagingButton.disabled i {
     color: #ccc;
+}
+
+.view-by.sort {
+    float: left;
+    margin-left: 400px;
+}
+
+.view-by.sort .general-dropdown-content {
+    left: 6px;
+    min-width: 140px;
+}
+
+.view-by.sort i {
+    margin-left: 20px;
 }

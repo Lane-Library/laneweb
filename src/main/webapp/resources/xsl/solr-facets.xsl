@@ -13,7 +13,9 @@
     <xsl:param name="source"/>
     <xsl:param name="url-encoded-query"/>
     
-    <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr-facet-browse.html?',replace($query-string,'&amp;page=\d+',''))"/>
+    <xsl:variable name="pageless-query-string" select="replace($query-string,'&amp;page=\d+','')"/>
+    <xsl:variable name="facet-search-base-path" select="concat('?',replace($pageless-query-string,'&amp;facets=[^&amp;]+',''))"/>
+    <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr-facet-browse.html?',$pageless-query-string)"/>
     <xsl:variable name="facets-per-browse-page" select="20"/>
     <xsl:variable name="values-per-facet" select="10"/>
     
@@ -32,10 +34,10 @@
         </xsl:variable>
 		<xsl:choose>
 		    <xsl:when test="enabled = 'true'">
-		         <li><xsl:value-of select="$label"/> <span class="facetCount"><a title="remove filter" href="?source={$source}&amp;q={$url-encoded-query}{$furl}"> <i class="fa fa-times-circle"></i> </a> <xsl:value-of select="$count-formatted"/></span></li>
+		         <li><xsl:value-of select="$label"/> <span class="facetCount"><a title="remove filter" href="{$facet-search-base-path}{$furl}"> <i class="fa fa-times-circle"></i> </a> <xsl:value-of select="$count-formatted"/></span></li>
 		    </xsl:when>
 		    <xsl:otherwise>
-		         <li><a href="?source={$source}&amp;q={$url-encoded-query}{$furl}"><xsl:value-of select="$label"/></a> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></li>
+		         <li><a href="{$facet-search-base-path}{$furl}"><xsl:value-of select="$label"/></a> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></li>
 		    </xsl:otherwise>
 		</xsl:choose>
     </xsl:template>

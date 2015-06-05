@@ -9,19 +9,10 @@
 	
 	<xsl:param name="facets"/>
 	
-	<xsl:variable name="base-query-string">
-	   <xsl:choose>
-			<xsl:when test="$query and $source and $facets">
-				<xsl:value-of
-					select="concat('source=', $source, '&amp;q=', $query, '&amp;facets=',$facets, '&amp;')" />
-			</xsl:when>
-			<xsl:when test="$query and $source">
-				<xsl:value-of
-					select="concat('source=', $source, '&amp;q=', $query, '&amp;')" />
-			</xsl:when>
-	   </xsl:choose>
-	</xsl:variable>
-	
+    <xsl:include href="resourceListSortBy.xsl"/>
+
+    <xsl:variable name="base-query-string" select="concat('?',replace($query-string,'&amp;page=\d+',''))"/>
+
 	<xsl:template name="paginationLinks">
 		<xsl:param name="top"/>
 		<xsl:variable name="end">
@@ -48,6 +39,7 @@
 						<xsl:value-of select="format-number(/s:resources/@size, '###,##0')" />
 						<xsl:text> results</xsl:text>
 					</xsl:if>
+                   <xsl:call-template name="sortBy"/>
                    <div class="s-pagination">
                        <xsl:call-template name="paginationNumbers"/>
                    </div>
@@ -72,8 +64,8 @@
 	<xsl:template name="paginationNumbers">
 		<xsl:choose>
 			<xsl:when test="number(/s:resources/@page) &gt;= 1">
-	            <a class="pagingButton" href="?{$base-query-string}page=1" title="first"> <i class="fa fa-fast-backward"></i> </a>
-	            <a class="pagingButton previous" href="?{$base-query-string}page={/s:resources/@page}" title="previous"> <i class="fa fa-backward"></i> </a>
+	            <a class="pagingButton" href="{$base-query-string}&amp;page=1" title="first"> <i class="fa fa-fast-backward"></i> </a>
+	            <a class="pagingButton previous" href="{$base-query-string}&amp;page={/s:resources/@page}" title="previous"> <i class="fa fa-backward"></i> </a>
 			</xsl:when>
 			<xsl:otherwise>
                 <span class="pagingButton disabled"> <i class="fa fa-fast-backward"></i> </span>
@@ -93,8 +85,8 @@
 		</form>
         <xsl:choose>
 			<xsl:when test="number(/s:resources/@pages) &gt; number(/s:resources/@page) + 1">
-				<a class="pagingButton next" href="?{$base-query-string}page={number(/s:resources/@page) + 2}" title="next"> <i class="fa fa-forward"></i> </a>
-                <a class="pagingButton" href="?{$base-query-string}page={/s:resources/@pages}" title="last"> <i class="fa fa-fast-forward"></i> </a>
+				<a class="pagingButton next" href="{$base-query-string}&amp;page={number(/s:resources/@page) + 2}" title="next"> <i class="fa fa-forward"></i> </a>
+                <a class="pagingButton" href="{$base-query-string}&amp;page={/s:resources/@pages}" title="last"> <i class="fa fa-fast-forward"></i> </a>
 			</xsl:when>
             <xsl:otherwise>
                 <span class="pagingButton disabled"> <i class="fa fa-forward"></i> </span>

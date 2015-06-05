@@ -63,6 +63,8 @@
 
     <xsl:param name="facets"/>
     
+    <xsl:param name="sort"/>
+    
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->
