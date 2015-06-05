@@ -39,7 +39,7 @@
 			<div class="view-by sort">
 				<div class="general-dropdown dropdown">
 					<div class="general-dropdown-trigger">
-						Sort by <xsl:value-of select="$active-sort-name" />
+                        Sort by <xsl:value-of select="$active-sort-name" />
 						<i class="fa fa-angle-double-down"></i>
 					</div>
 					<div class="general-dropdown-content dropdown-content">

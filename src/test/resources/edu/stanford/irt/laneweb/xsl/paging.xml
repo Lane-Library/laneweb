@@ -6,7 +6,31 @@
    <body>
       <div xmlns:fx="http://lane.stanford.edu/fx"
            class="resourceListPagination no-bookmarking">
-         <span id="pageStart">1</span> to 100 of 135 results<div class="s-pagination">
+         <span id="pageStart">1</span> to 100 of 135 results<div class="view-by sort">
+            <div class="general-dropdown dropdown">
+               <div class="general-dropdown-trigger">
+                        Sort by relevance<i class="fa fa-angle-double-down"/>
+               </div>
+               <div class="general-dropdown-content dropdown-content">
+                  <ul class="pagingLabels">
+                     <li>
+                        <a href="?">relevance</a>
+                        <i class="fa fa-check"/>
+                     </li>
+                     <li>
+                        <a href="?&amp;sort=title_sort+asc,year+desc">title</a>
+                     </li>
+                     <li>
+                        <a href="?&amp;sort=year+desc,title_sort+asc">year (new to old)</a>
+                     </li>
+                     <li>
+                        <a href="?&amp;sort=year+asc,title_sort+asc">year (old to new)</a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="s-pagination">
             <span class="pagingButton disabled">
                <i class="fa fa-fast-backward"/>
             </span>
@@ -21,10 +45,10 @@
                <label for="pages"> of 2</label>
                <input type="hidden" name="pages" value="2"/>
             </form>
-            <a class="pagingButton next" href="?page=2" title="next">
+            <a class="pagingButton next" href="?&amp;page=2" title="next">
                <i class="fa fa-forward"/>
             </a>
-            <a class="pagingButton" href="?page=2" title="last">
+            <a class="pagingButton" href="?&amp;page=2" title="last">
                <i class="fa fa-fast-forward"/>
             </a>
          </div>
