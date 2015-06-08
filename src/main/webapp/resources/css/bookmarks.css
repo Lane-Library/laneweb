@@ -13,6 +13,7 @@
     display: inline-block;
     height: 16px;
     width: 26px;
+    box-sizing: content-box;
     position: absolute;
     margin-left: 5px;
     border:1px solid #ccc;
