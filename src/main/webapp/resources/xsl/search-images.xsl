@@ -44,7 +44,7 @@
 	<xsl:template match="h:div[@id='tabs-image-search']/h:ul/h:li[@class=$source]//h:a/h:span">
 		<xsl:variable name="a" select="substring(@id, 10)"></xsl:variable>
 		<xsl:copy>
-			<xsl:value-of select="/d:doc/map/entry/string[text() = $a]/../string[2]"></xsl:value-of>
+			<xsl:value-of select="/d:doc/map/entry/string[text() = $a]/following-sibling::string"></xsl:value-of>
 			<xsl:text> images with</xsl:text>
 		</xsl:copy>
 	</xsl:template>
@@ -53,7 +53,7 @@
 		<xsl:variable name="a" select="substring(@id, 10)"></xsl:variable>
 		<xsl:copy>
 			<xsl:text>(</xsl:text>
-			<xsl:value-of select="/d:doc/map/entry/string[text() = $a]/../string[2]"></xsl:value-of>
+			<xsl:value-of select="/d:doc/map/entry/string[text() = $a]/following-sibling::string"></xsl:value-of>
 			<xsl:text>)</xsl:text>
 		</xsl:copy>
 	</xsl:template>
