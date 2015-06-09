@@ -11,8 +11,9 @@
 .bookmark-link {
     cursor: pointer;
     display: inline-block;
-    height: 16px;
+    height: 17px;
     width: 26px;
+    box-sizing: content-box;
     position: absolute;
     margin-left: 5px;
     border:1px solid #ccc;
