@@ -24,12 +24,8 @@ body,select,input,button,textarea {
     position:absolute;
     right:3px;
     top:3px;
-    background-position:-40px -160px;
-    cursor:pointer
-}
-
-.close:hover {
-    background-position:-40px -200px
+    cursor:pointer;
+    font-size:22px;
 }
 
 p {

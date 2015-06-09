@@ -16,7 +16,7 @@
                 render : true
             });
             boundingBox = popup.get("boundingBox");
-            boundingBox.append("<a class='close sprite'></a>");
+            boundingBox.append("<a class='close fa fa-close'></a>");
             boundingBox.one(".close").on("click", function() {
                 popup.hide();
             });
