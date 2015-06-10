@@ -65,16 +65,14 @@
             Y.io(basePath + '/apps/search/facets/html' + locationSearch, {
                 on: {
                     success:function(id, o) {
-                        if (o.responseText.indexOf('solrFacet') > -1) {
-                            facetsContainer.append(o.responseText);
-                            Y.all('.facetHeader.openOnInit').each(function(node){toggleHeader(node)});
-                            Y.all('.facetHeader').on('click',toggleHeader);
-                            // fade in facets container
-                            new Y.Anim({
-                                node: facetsContainer,
-                                to:{opacity:1}
-                            }).run();
-                        }
+                        facetsContainer.append(o.responseText);
+                        Y.all('.facetHeader.openOnInit').each(function(node){toggleHeader(node)});
+                        Y.all('.facetHeader').on('click',toggleHeader);
+                        // fade in facets container
+                        new Y.Anim({
+                            node: facetsContainer,
+                            to:{opacity:1}
+                        }).run();
                     }
                 }
             });

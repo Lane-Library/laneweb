@@ -45,8 +45,9 @@
                    </div>
 				</xsl:when>
 				<xsl:otherwise>
-				    <xsl:if test="number(/s:resources/@size) = 0">
-						<xsl:text> no results </xsl:text>
+				    <xsl:if test="number(/s:resources/@size) = 0 and string-length($facets) > 0">
+                        Limits activated: <xsl:value-of select="replace(replace($facets, '\w+:', ' '),'::',', ')"/> 
+                        <div>Try <a href="{$base-query-string}">clearing limits</a> to see more results</div> 
 				    </xsl:if>
 				    <xsl:if test="number(/s:resources/@size) = 1">
 						<xsl:text> one result </xsl:text>

@@ -2,11 +2,13 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://apache.org/cocoon/SQL/2.0"
     exclude-result-prefixes="h"
     version="2.0">
     
     <xsl:param name="base-path"/>
     <xsl:param name="facet"/>
+    <xsl:param name="facets"/>
     <xsl:param name="page"/>
     <xsl:param name="query"/>
     <xsl:param name="query-string"/>
@@ -91,9 +93,15 @@
     <xsl:template match="/">
         <html>
             <body>
-                <xsl:if test="/linked-hash-map/entry">
+                <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
 	                <div class="bd">
 		                <h3>Limits</h3>
+		                <xsl:if test="string-length($facets) > 0">
+		                  <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')//s:row[s:genre[ . = 'all']]/s:hits"/>
+		                  <xsl:if test="number($counts > 0)">
+	                          <div><a href="{$facet-search-base-path}">Clear limits</a> to show <xsl:value-of select="format-number($counts,'###,##0')"/> results</div>
+		                  </xsl:if>
+		                </xsl:if>
 		                <ul>
 							<xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'type'"/>					   
