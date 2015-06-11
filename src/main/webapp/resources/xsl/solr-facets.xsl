@@ -15,6 +15,7 @@
     <xsl:param name="source"/>
     <xsl:param name="url-encoded-query"/>
     
+    <xsl:variable name="search-mode" select="$facet = ''"/>
     <xsl:variable name="pageless-query-string" select="replace($query-string,'&amp;page=\d+','')"/>
     <xsl:variable name="facet-search-base-path" select="concat('?',replace($pageless-query-string,'&amp;facets?=[^&amp;]+',''))"/>
     <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr-facet-browse.html?',$pageless-query-string)"/>
@@ -49,7 +50,7 @@
         <xsl:param name="label"/>
         <xsl:if test="/linked-hash-map/entry/string[. = $id]">
 	        <xsl:choose>
-	            <xsl:when test="$facet = ''"> 
+	            <xsl:when test="$search-mode">
 		            <xsl:variable name="open">
 		                <xsl:if test="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet/enabled[. = 'true'] or ($id = 'year' and /linked-hash-map/entry/string[. = 'isRecent']/../sorted-set/facet/enabled[. = 'true'])"> openOnInit</xsl:if>
 		            </xsl:variable>
@@ -96,7 +97,7 @@
                 <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
 	                <div class="bd">
 		                <h3>Limits</h3>
-		                <xsl:if test="string-length($facets) > 0">
+		                <xsl:if test="$search-mode and string-length($facets) > 0">
 		                  <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')//s:row[s:genre[ . = 'all']]/s:hits"/>
 		                  <xsl:if test="number($counts > 0)">
 	                          <div><a href="{$facet-search-base-path}">Clear limits</a> to show <xsl:value-of select="format-number($counts,'###,##0')"/> results</div>
