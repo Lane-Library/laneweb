@@ -1,14 +1,25 @@
 /* these are the default list styles */
-ol li {
-	list-style-type: decimal;
-	list-style-position: inside;
+ol li{
+    list-style-type:decimal;
+    list-style-position:inside;
 }
 
-.content li {
-	border-bottom: solid 1px #f0f4f5;
-	padding: 6px 0;
+.content li{
+    border-bottom:solid 1px #f0f4f5;
+    padding:6px 0;
 }
 
-.content li:last-child {
-	border-bottom: none;
+.content li:last-child{
+    border-bottom:none;
+}
+
+.bulleted-list{
+    font-size:14px;
+    list-style-type:disc;
+    padding-left:40px
+}
+
+.bulleted-list li{
+    border-bottom:none;
+    padding:0
 }

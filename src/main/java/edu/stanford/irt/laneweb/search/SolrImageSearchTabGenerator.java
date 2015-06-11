@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator im
 
     private SolrImageService service;
 
+    private  NumberFormat nf = NumberFormat.getInstance(); 
+    
     public SolrImageSearchTabGenerator(final SolrImageService service, final Marshaller marshaller) {
         super(marshaller);
         this.service = service;
@@ -35,12 +38,12 @@ public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator im
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Map<String, Long> copyrights = new HashMap<String, Long>();
+        Map<String, String> copyrights = new HashMap<String, String>();
         FacetPage<Image> facetPage = this.service.facetOnCopyright(this.query);
         Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
         List<FacetFieldEntry> facet = page.getContent();
         for (FacetFieldEntry entry : facet) {
-            copyrights.put(entry.getValue(), entry.getValueCount());
+            copyrights.put(entry.getValue(), nf.format(entry.getValueCount()));
         }
         marshal(copyrights, xmlConsumer);
     }

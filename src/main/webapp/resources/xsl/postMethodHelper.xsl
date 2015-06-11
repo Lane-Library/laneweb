@@ -6,7 +6,7 @@
     <xsl:param name="ticket"/>
     <xsl:param name="proxy-links"/>
 
-    <xsl:variable name="proxy-url">http://laneproxy.stanford.edu/login?</xsl:variable>
+    <xsl:variable name="proxy-url">https://login.laneproxy.stanford.edu/login?</xsl:variable>
     <xsl:variable name="post-url">
         <xsl:choose>
             <xsl:when test="$proxy-links = 'true' and $userid != '' and $ticket != ''">

@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
+    private  NumberFormat nf = NumberFormat.getInstance();
+    
     @Override
     public void toSAX(final Map<String, Object> result, final XMLConsumer xmlConsumer) {
         try {
@@ -204,8 +207,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             throws SAXException {
         @SuppressWarnings("unchecked")
         Page<FacetFieldEntry> facet = (Page<FacetFieldEntry>) result.get("websiteIdFacet");
-        int totalElement = facet.getNumberOfElements();
-        if (totalElement > 0) {
+        int totalFacet = facet.getNumberOfElements();
+        if (totalFacet > 0) {
             String path = (String) result.get("path");
             startDivWithClass(xmlConsumer, "yui3-u-1-4");
             AttributesImpl atts = new AttributesImpl();
@@ -220,35 +223,44 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             atts = new AttributesImpl();
             atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "general-dropdown-trigger");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            String selectResource = "All";
-            if (totalElement == 1) {
-                selectResource = facetList.get(0).getValue();
+            String selectedResource = "All";
+            if (totalFacet == 1) {
+                selectedResource = facetList.get(0).getValue();
             }
-            totalElement = 0;
+            int totalElement = 0;
+            int totalSelectedFacet = 0;
             if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
-                selectResource = (String) result.get(SELECTED_RESOURCE);
+                selectedResource = (String) result.get(SELECTED_RESOURCE);
             }
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 totalElement = totalElement + (int) facetFieldEntry.getValueCount();
-                if (selectResource.equals(facetFieldEntry.getValue())) {
-                    totalElement = (int) facetFieldEntry.getValueCount();
-                    break;
+                if (selectedResource.equals(facetFieldEntry.getValue())) {
+                    totalSelectedFacet = (int) facetFieldEntry.getValueCount();
                 }
             }
-            XMLUtils.data(xmlConsumer, selectResource + " (" + totalElement + ")");
+            if (!"All".equals(selectedResource)) {
+                XMLUtils.data(xmlConsumer, selectedResource + " (" + nf.format(totalSelectedFacet) + ")");
+            } else {
+                XMLUtils.data(xmlConsumer, selectedResource + " (" + nf.format(totalElement) + ")");
+            }
             createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
             endDiv(xmlConsumer);
             startDivWithClass(xmlConsumer, "general-dropdown-content dropdown-content");
             startUlWithClass(xmlConsumer, "pagingLabels");
+            if (!"All".equals(selectedResource) && totalFacet > 1) {
+                startLi(xmlConsumer);
+                startAnchor(xmlConsumer, path);
+                XMLUtils.data(xmlConsumer, "All (" + nf.format(totalElement) + ")");
+                endAnchor(xmlConsumer);
+                endLi(xmlConsumer);
+            }
             for (FacetFieldEntry facetFieldEntry : facetList) {
-                if (0 != facetFieldEntry.getValueCount()) {
-                    startLi(xmlConsumer);
-                    startAnchor(xmlConsumer, path + "&rid=" + facetFieldEntry.getValue());
-                    XMLUtils.data(xmlConsumer, facetFieldEntry.getValue() + " (" + facetFieldEntry.getValueCount()
-                            + ") ");
-                    endAnchor(xmlConsumer);
-                    endLi(xmlConsumer);
-                }
+                startLi(xmlConsumer);
+                startAnchor(xmlConsumer, path + "&rid=" + facetFieldEntry.getValue());
+                XMLUtils.data(xmlConsumer, facetFieldEntry.getValue() + " (" + nf.format(facetFieldEntry.getValueCount())
+                        + ") ");
+                endAnchor(xmlConsumer);
+                endLi(xmlConsumer);
             }
             endUl(xmlConsumer);
             endDiv(xmlConsumer);

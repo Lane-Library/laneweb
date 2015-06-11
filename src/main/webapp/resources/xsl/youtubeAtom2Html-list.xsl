@@ -5,19 +5,19 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/"
     xmlns:media="http://search.yahoo.com/mrss/"
-    xmlns:yt="http://gdata.youtube.com/schemas/2007"
+    xmlns:yt="http://www.youtube.com/xml/schemas/2015"
     xmlns:gd="http://schemas.google.com/g/2005"
     exclude-result-prefixes="atom h openSearch media yt gd"
     version="2.0">
     
     <xsl:template match="atom:feed">
-        <xsl:for-each select="atom:entry[position() mod 2 = 1]">
+        <xsl:for-each select="atom:entry[position() &lt; 5 and position() mod 2 = 1]">
             <div class="yui3-g">
                 <xsl:call-template name="entry">
                     <xsl:with-param name="entry" select="self::node()"/>
                 </xsl:call-template>
                 <xsl:call-template name="entry">
-                    <xsl:with-param name="entry" select="following-sibling::node()[1]"/>
+                    <xsl:with-param name="entry" select="following-sibling::atom:entry[1]"/>
                 </xsl:call-template>
             </div>
         </xsl:for-each>
@@ -37,7 +37,7 @@
         <xsl:param name="entry"/>
         <div class="yui3-u-1-2">
             <div class="module landing">
-            <iframe type="text/html" src="//www.youtube.com/embed/{$entry/media:group/yt:videoid}" frameborder="0"/>
+            <iframe type="text/html" src="//www.youtube.com/embed/{$entry/yt:videoId}" frameborder="0"/>
             <h3><xsl:value-of select="$entry/atom:title"/></h3>
             </div>
         </div>

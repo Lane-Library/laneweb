@@ -7,6 +7,43 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-06-08" version="3.0.6" description="3.0.6 bug fix release">
+            <action date="2015-05-22" dev="olgary" issue="106095" type="remove">
+                removed sprite-vertall.png
+            </action>
+            <action date="2015-05-27" dev="ceyates" issue="106094" type="update">
+                replace bookmark star image with the font awesome star
+            </action>
+            <action date="2015-05-22" dev="olgary" issue="106088" type="remove">
+                deleted shadow-narrow.png and shadow-wide.png
+            </action>
+            <action date="2015-05-23" dev="ceyates" issue="106063" type="add">
+                Bio-Image Search help page redirect
+            </action>
+            <action date="2015-05-20" dev="ceyates" issue="106033" type="add">
+                create style rules for bulleted lists
+            </action>
+            <action date="2015-05-20" dev="ceyates" issue="106006" type="fix">
+                inner icon of buttons off center if font-size different from default
+            </action>
+            <action date="2015-05-20" dev="ryanmax" issue="100737" type="update">
+                change proxy prefix to use https
+            </action>
+        </release>
+        <release date="2015-05-18" version="3.0.5" description="3.0.5 bug fix release">
+            <action date="2015-05-18" dev="ceyates" issue="105818" type="fix">
+                Error message from Youtube - Fwd: YouTube videos on Palliative Care Portal
+            </action>
+            <action date="2015-05-14" dev="ceyates" issue="105787" type="update">
+                add alainb and ryanmax as authorized control center users
+            </action>
+            <action date="2015-05-11" dev="ceyates" issue="104866" type="update">
+                upgrade to search-core-2.3.0
+            </action>
+            <action date="2015-05-11" dev="ceyates" issue="104851" type="fix">
+                email button styles for History center
+            </action>
+        </release>
         <release date="2015-05-11" version="3.0.4" description="3.0.4 bug fix release">
             <action date="2015-05-07" dev="ryanmax" issue="104586" type="update">
                 clinical search: down-weight BMJ results

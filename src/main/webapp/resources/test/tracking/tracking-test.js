@@ -216,11 +216,16 @@ Y.use("*",  function(){
         },
         
         testClickLaneproxy: function() {
-            var link = Y.one("#laneproxy");
-            link.simulate("click");
+            var link1 = Y.one("#laneproxy1"), link2 = Y.one("#laneproxy2");
+            link1.simulate("click");
             Y.Assert.areEqual("www.nejm.org", this.pageView.host);
             Y.Assert.areEqual("/" , this.pageView.path);
-            Y.Assert.areEqual(link.get("text"), this.pageView.title);
+            Y.Assert.areEqual(link1.get("text"), this.pageView.title);
+            Y.Assert.isNull(this.event);
+            link2.simulate("click");
+            Y.Assert.areEqual("www.nejm.org", this.pageView.host);
+            Y.Assert.areEqual("/" , this.pageView.path);
+            Y.Assert.areEqual(link2.get("text"), this.pageView.title);
             Y.Assert.isNull(this.event);
         },
         

@@ -15,9 +15,9 @@ import edu.stanford.irt.laneweb.proxy.Ticket;
  */
 public class BaseProxyURLDataBinder implements DataBinder {
 
-    private static final String EZPROXY = "http://laneproxy.stanford.edu/login?user=";
+    private static final String EZPROXY = "https://login.laneproxy.stanford.edu/login?user=";
 
-    private static final String HOSPITAL = "http://laneproxy.stanford.edu/login?url=";
+    private static final String HOSPITAL = "https://login.laneproxy.stanford.edu/login?url=";
 
     private static final String TICKET = "&ticket=";
 

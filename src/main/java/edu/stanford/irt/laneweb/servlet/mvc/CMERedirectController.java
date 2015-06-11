@@ -20,7 +20,7 @@ public class CMERedirectController {
 
     private static final String ERROR_URL = "/cmeRedirectError.html";
 
-    private static final String PROXY_LINK = "http://laneproxy.stanford.edu/login?url=";
+    private static final String PROXY_LINK = "https://login.laneproxy.stanford.edu/login?url=";
 
     private static final Pattern QUESTION_MARK_PATTERN = Pattern.compile("\\?");
 

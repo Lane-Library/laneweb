@@ -15,8 +15,9 @@ Y.use("test", "console", "node-pluginhost", function(Y){
         },
 
         testIsProxyLink : function() {
-            var anchor = Y.one("#proxyurl");
-            Y.Assert.isTrue(anchor.link.get("proxy"));
+            var anchor1 = Y.one("#proxyurl1"), anchor2 = Y.one("#proxyurl2");
+            Y.Assert.isTrue(anchor1.link.get("proxy"));
+            Y.Assert.isTrue(anchor2.link.get("proxy"));
         },
 
         testProxyLoginIsNotLocal : function() {
@@ -35,8 +36,9 @@ Y.use("test", "console", "node-pluginhost", function(Y){
         },
 
         testGetProxiedURL : function() {
-            var anchor = Y.one("#proxyurl");
-            Y.Assert.areEqual("http://www.nejm.org/", anchor.link.get("url"));
+            var anchor1 = Y.one("#proxyurl1"), anchor2 = Y.one("#proxyurl2");
+            Y.Assert.areEqual("http://www.nejm.org/", anchor1.link.get("url"));
+            Y.Assert.areEqual("http://www.nejm.org/", anchor2.link.get("url"));
         },
 
         testCookiesFetchIsNotLocal : function() {

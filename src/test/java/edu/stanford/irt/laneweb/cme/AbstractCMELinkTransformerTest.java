@@ -21,11 +21,8 @@ public class AbstractCMELinkTransformerTest {
 
     private AbstractCMELinkTransformer transformer;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         this.transformer = new AbstractCMELinkTransformer() {
             //
         };
