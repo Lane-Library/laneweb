@@ -54,7 +54,7 @@
         </developer>
     </developers>
     <scm>
-        <developerConnection>scm:git:ssh://lane-local-02.stanford.edu/afs/ir/group/lane/git/laneweb.git</developerConnection>
+        <developerConnection>scm:git:ssh://corn.stanford.edu/afs/ir/group/lane/git/laneweb.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
     <properties>
