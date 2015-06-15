@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.io.BufferedReader;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,19 @@ import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
 
 @Controller
-public class ImageFacetController {
+public class JsonImageSearchController {
+
+    BufferedReader in = null;
 
     @Autowired
     @Qualifier("edu.stanford.irt.solr.service")
     private SolrImageService service;
+
+    @RequestMapping(value = "/image", produces = "application/json")
+    @ResponseBody
+    public Image getImage(final String id) {
+        return this.service.findById(id);
+    }
 
     @RequestMapping(value = "/facet/images/copyright", produces = "application/json")
     @ResponseBody
