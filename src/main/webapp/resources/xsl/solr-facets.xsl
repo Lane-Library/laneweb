@@ -121,17 +121,17 @@
 		                    
 		                    <xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'publicationAuthor'"/>                    
-		                        <xsl:with-param name="label" select="'Article Author'"/>                    
+		                        <xsl:with-param name="label" select="'Author'"/>                    
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'mesh'"/>                    
-		                        <xsl:with-param name="label" select="'By Subject (MeSH)'"/>                    
+		                        <xsl:with-param name="label" select="'Subject (MeSH)'"/>                    
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'year'"/>                    
-		                        <xsl:with-param name="label" select="'Publication Year'"/>                    
+		                        <xsl:with-param name="label" select="'Year'"/>                    
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">
