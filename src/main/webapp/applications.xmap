@@ -149,6 +149,14 @@
     </map:pipeline>
     <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
+        <map:match pattern="laneblog-rss.xml" type="wildcard">
+            <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
+            <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <!-- cache expires in 14400 seconds = 4 hours -->
         <map:parameter name="cache-expires" value="14400"/>
         <map:match pattern="bib/*/status.xml" type="wildcard">
