@@ -554,7 +554,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.6.0-5</version>
+            <version>9.5.1-6</version>
         </dependency>
         <dependency>
             <artifactId>search-lane</artifactId>
