@@ -20,8 +20,10 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
     private static final String[] TAB_CONTENT = { "Maximum Reuse Rights", "Broad Reuse Rights",
             "Possible Reuse Rights", "Restrictive Reuse Rights" };
 
-    private static final int TOTAL_ELEMENT_BY_PAGE = 5000;
+    private static final int TOTAL_ELEMENT_BY_PAGE = 52;
 
+    private static final int ADMIN_TOTAL_ELEMENT_BY_PAGE = 1000;
+    
     private String copyright = "0";
 
     private int pageNumber = 0;
@@ -40,6 +42,8 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
     
     private String basePath;
 
+    private boolean admin = false;
+    
     public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
         this.service = service;
@@ -57,6 +61,16 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         this.source = ModelUtil.getString(model, Model.SOURCE);
         this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
         this.url = "/search.html?q=" + this.searchTerm + "&source=" + this.source;
+        String action = ModelUtil.getString(model, Model.ACTION);
+        if (action != null && action.equals("admin")){
+            this.admin = true;
+            this.url = this.url.concat("&action=admin");
+        }else{
+            this.admin = false;
+            
+        }
+        
+        
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
                 this.copyright = "10";
@@ -74,7 +88,11 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
     @Override
     protected Map<String, Object> doSearch(final String query) {
         Map<String, Object> result = new HashMap<String, Object>(); 
-        Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
+        Pageable page = null;
+        if(this.admin)
+             page = new PageRequest(this.pageNumber, ADMIN_TOTAL_ELEMENT_BY_PAGE);
+        else
+            page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
         Page<Image> pageResult = null;
         if (this.resourceId == null) {
             pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
@@ -83,6 +101,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         }
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
+        result.put("isAdmin", this.admin);
         result.put("page", pageResult);
         result.put("selectedResource", this.resourceId);
         result.put("websiteIdFacet", facet);

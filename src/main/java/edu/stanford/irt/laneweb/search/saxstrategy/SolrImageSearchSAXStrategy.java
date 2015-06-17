@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
@@ -291,9 +293,12 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         }
     }
 
-    private void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
+    private void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber, final boolean isAdmin)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
+        if(isAdmin){
+            atts.addAttribute(XHTML_NS, CLASS,CLASS, CDATA, "admin");
+        }
         atts.addAttribute(XHTML_NS, ID, ID, CDATA, image.getId());
         atts.addAttribute(XHTML_NS, "row", "row", CDATA, String.valueOf(imageNumber / IMAGE_BY_ROW));
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
@@ -305,13 +310,39 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getThumbnailSrc());
         XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
+        
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedeco");
-        atts.addAttribute(XHTML_NS, "hidden", "hidden", CDATA, "true");
+        
+        if(!isAdmin){
+            atts.addAttribute(XHTML_NS, "hidden", "hidden", CDATA, "true");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedeco");
+        }else{
+            endAnchor(xmlConsumer);
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedeco-admin");
+        }
+            
+        
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-        XMLUtils.data(xmlConsumer, " ");
+        if(isAdmin){
+           String imageId = image.getId();
+           try {
+               atts = new AttributesImpl();
+               atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, "/image/update?id="+URLEncoder.encode(imageId, "UTF-8"));
+               atts.addAttribute(XHTML_NS, "target", "target", CDATA, "_self");
+               XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);   
+            
+            XMLUtils.data(xmlConsumer, imageId.substring(imageId.lastIndexOf("/")+1));
+            endAnchor(xmlConsumer);
+           } catch (UnsupportedEncodingException e) {
+               
+           }
+        }else
+        {
+            XMLUtils.data(xmlConsumer, " ");
+            endAnchor(xmlConsumer);
+        }
+       
         endDiv(xmlConsumer);
-        endAnchor(xmlConsumer);
         endLi(xmlConsumer);
     }
 
@@ -385,7 +416,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         startElementWithId(xmlConsumer, UL, "imageList");
         int index = 0;
         for (Image image : images) {
-            generateImages(xmlConsumer, image, index);
+            generateImages(xmlConsumer, image, index, (boolean)result.get("isAdmin"));
             if (index % IMAGE_BY_ROW == 3 || images.size() - 1 == index) {
                 generateDetailImage(xmlConsumer, (index / IMAGE_BY_ROW));
             }
