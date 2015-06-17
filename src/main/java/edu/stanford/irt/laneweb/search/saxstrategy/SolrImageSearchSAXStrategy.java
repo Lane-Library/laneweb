@@ -151,7 +151,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         endDiv(xmlConsumer);
         startDivWithClass(xmlConsumer, "to-image");
         startAnchor(xmlConsumer, "");
-        XMLUtils.data(xmlConsumer, "VIEW IMAGE ");
+        XMLUtils.data(xmlConsumer, "Visit Source Page ");
         atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-arrow-right");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
@@ -166,15 +166,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.data(xmlConsumer, "Article Title: ");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
-        endDiv(xmlConsumer);
-        startDivWithClass(xmlConsumer, "source");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, "Source: ");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
-        startAnchor(xmlConsumer, "");
-        endAnchor(xmlConsumer);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);

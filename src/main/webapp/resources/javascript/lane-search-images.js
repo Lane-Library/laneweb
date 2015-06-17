@@ -48,7 +48,7 @@
 
 	function successHandler(id, o, args) {
 		var image = Y.JSON.parse(o.responseText), 
-		row = args.row, source, sourceHref,
+		row = args.row,  
 		li = args.li, 
 		copyright = image.copyrightValue, 
 		imageId = image.id.split("/"), imageDetail = Y.one("#imageDetail_" + row);
@@ -71,28 +71,17 @@
 		}else{
 			imageDetail.one(".article-title").hide();
 		}
-		sourceHref = imageId[0];
-		source = imageId[0];
-		if(source == "ncbi.nlm.nih.gov"){
-			source = "Pubmed Central";
-			sourceHref = "www.ncbi.nlm.nih.gov/pmc/";
-		}else if(source == "health.education.assets.library" ){
-			sourceHref = "content.lib.utah.edu/cdm/search/collection/uu-heal";
-		}else if(source == "Bassett"){
-			sourceHref = "lane.stanford.edu/biomed-resources/bassett/index.html";
-		}else if(source == "usc.orthopaedic.surgical"){
-			sourceHref = "cdm15799.contentdm.oclc.org/cdm/landingpage/collection/p15799coll50";
-		}
-		
-		
-		imageDetail.one(".source a").setContent(source + " <span class='fa fa-arrow-right'>  </span>");
-		imageDetail.one(".source a").setAttribute("href", "http://" + sourceHref);
 
 		imageDetail.one(".copyright p").setContent(image.shortCopyrightText);
 		imageDetail.one(".to-image a").setAttribute("href", image.pageUrl);
-
 		li.one("div.imagedeco").show();
+		if(row > 1){
+			li = Y.one('li[row = "'+(row-1)+'"]');
+			window.location.hash = "#"+li.get('id');
+		}	
 		imageDetail.show();
+		
+		
 	}
 
 	if (Y.one("#sourceFilter")) {
