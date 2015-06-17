@@ -77,7 +77,7 @@
 		li.one("div.imagedeco").show();
 		if(row > 1){
 			li = Y.one('li[row = "'+(row-1)+'"]');
-			window.location.hash = "#"+li.get('id');
+			window.location.hash = "#"+encodeURIComponent(li.get('id'));
 		}	
 		imageDetail.show();
 		
