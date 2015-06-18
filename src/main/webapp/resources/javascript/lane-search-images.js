@@ -80,8 +80,6 @@
 			window.location.hash = "#"+encodeURIComponent(li.get('id'));
 		}	
 		imageDetail.show();
-		
-		
 	}
 
 	if (Y.one("#sourceFilter")) {

@@ -22,28 +22,24 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     private static final int TOTAL_ELEMENT_BY_PAGE = 52;
 
-    private static final int ADMIN_TOTAL_ELEMENT_BY_PAGE = 1000;
-    
-    private String copyright = "0";
+    protected String copyright = "0";
 
-    private int pageNumber = 0;
+    protected int pageNumber = 0;
 
-    private String resourceId;
+    protected String resourceId;
 
     private String searchTerm;
 
-    private SolrImageService service;
+    protected SolrImageService service;
 
     private String source;
 
     private String tab = TAB_CONTENT[0];
 
     private String url;
-    
+
     private String basePath;
 
-    private boolean admin = false;
-    
     public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
         this.service = service;
@@ -61,16 +57,6 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         this.source = ModelUtil.getString(model, Model.SOURCE);
         this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
         this.url = "/search.html?q=" + this.searchTerm + "&source=" + this.source;
-        String action = ModelUtil.getString(model, Model.ACTION);
-        if (action != null && action.equals("admin")){
-            this.admin = true;
-            this.url = this.url.concat("&action=admin");
-        }else{
-            this.admin = false;
-            
-        }
-        
-        
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
                 this.copyright = "10";
@@ -87,30 +73,28 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     @Override
     protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = new HashMap<String, Object>(); 
-        Pageable page = null;
-        if(this.admin)
-             page = new PageRequest(this.pageNumber, ADMIN_TOTAL_ELEMENT_BY_PAGE);
-        else
-            page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
-        Page<Image> pageResult = null;
-        if (this.resourceId == null) {
-            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
-        } else {
-            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
-        }
+        Map<String, Object> result = new HashMap<String, Object>();
+        Page<Image> pageResult = getPage(query);
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
-        result.put("isAdmin", this.admin);
         result.put("page", pageResult);
         result.put("selectedResource", this.resourceId);
         result.put("websiteIdFacet", facet);
         result.put("path", this.basePath.concat(this.url.toString()));
-        result.put(Model.QUERY, this.searchTerm);
         result.put("tab", this.tab);
         result.put(Model.SOURCE, this.source);
         return result;
     }
-    
-  
+
+    protected Page<Image> getPage(final String query) {
+        Page<Image> pageResult = null;
+        Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
+        if (this.resourceId == null) {
+            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
+        } else {
+            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright,
+                    this.resourceId, page);
+        }
+        return pageResult;
+    }
 }
