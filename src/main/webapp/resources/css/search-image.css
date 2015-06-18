@@ -32,6 +32,10 @@
 	width: 232px;
 }
 
+#imageList li.admin{
+	margin-top: 30px;
+	}
+
 .imageDetail tbody tr:nth-child(odd) {
 	background: inherit;
 }
@@ -105,6 +109,17 @@
 	height: 18px;
 	background-color: #eee;
 }
+
+#imageList .imagedeco-admin {
+	margin-top: -4px;
+	margin-right: 10px;
+	height: 18px;
+	background-color: #eee;
+	width: 90%;
+}
+
+
+
 
 #imageList img {
 	height: 120px;

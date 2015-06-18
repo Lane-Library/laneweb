@@ -23,10 +23,13 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator{
     @Override
     protected Map<String, Object> doSearch(final String query) {
         Map<String, Object> result = super.doSearch(query);
+        String pa result.get("path");
+        
         return result;
     }
     
-  
+   
+   @Override
     protected Page<Image> getPage(final String query){
         Page<Image> pageResult = null;
         Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);

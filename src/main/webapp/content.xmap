@@ -165,6 +165,7 @@
            		</map:aggregate>
            		<map:transform type="xinclude"/>
                 <map:transform type="textNodeParser"/>
+                 <map:transform type="saxon" src="resources/xsl/search-images.xsl"/>
               <map:serialize type="xml"/>
             </map:match>
          </map:match>

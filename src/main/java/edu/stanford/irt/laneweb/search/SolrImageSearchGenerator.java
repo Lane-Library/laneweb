@@ -38,8 +38,6 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     private String url;
 
-    private String basePath;
-
     public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
         this.service = service;
@@ -55,7 +53,6 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         this.resourceId = ModelUtil.getString(model, Model.RESOURCE_ID);
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.source = ModelUtil.getString(model, Model.SOURCE);
-        this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
         this.url = "/search.html?q=" + this.searchTerm + "&source=" + this.source;
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
@@ -80,21 +77,23 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         result.put("page", pageResult);
         result.put("selectedResource", this.resourceId);
         result.put("websiteIdFacet", facet);
-        result.put("path", this.basePath.concat(this.url.toString()));
+        result.put("path", this.url.toString());
+        result.put(Model.QUERY, this.searchTerm);
         result.put("tab", this.tab);
         result.put(Model.SOURCE, this.source);
         return result;
     }
-
-    protected Page<Image> getPage(final String query) {
+    
+    
+    protected Page<Image> getPage(final String query){
         Page<Image> pageResult = null;
         Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
         if (this.resourceId == null) {
             pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
         } else {
-            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright,
-                    this.resourceId, page);
+            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
         }
         return pageResult;
     }
+    
 }

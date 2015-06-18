@@ -47,4 +47,6 @@ public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator im
         }
         marshal(copyrights, xmlConsumer);
     }
+    
+    
 }
