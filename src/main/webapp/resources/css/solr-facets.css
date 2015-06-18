@@ -1,3 +1,8 @@
+.solrFacets.module {
+    border: none;
+    background-color: inherit;
+}
+
 .solrFacets li {
     overflow: hidden;
     height: 0;
