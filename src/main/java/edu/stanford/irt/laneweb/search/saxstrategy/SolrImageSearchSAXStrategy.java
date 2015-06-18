@@ -149,15 +149,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
         endDiv(xmlConsumer);
-        startDivWithClass(xmlConsumer, "to-image");
-        startAnchor(xmlConsumer, "");
-        XMLUtils.data(xmlConsumer, "Visit Source Page ");
-        atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-arrow-right");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-        endAnchor(xmlConsumer);
-        endDiv(xmlConsumer);
         atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, "hidden", "hidden", CDATA, "true");
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "article-title");
@@ -167,6 +158,22 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
+        endDiv(xmlConsumer);
+        startDivWithClass(xmlConsumer, "to-image");
+        startAnchor(xmlConsumer, "");
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "button");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, "button", atts);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
+        XMLUtils.data(xmlConsumer, "Visit Source Page ");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-arrow-right");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", atts);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, "button");
+        
+        endAnchor(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);
