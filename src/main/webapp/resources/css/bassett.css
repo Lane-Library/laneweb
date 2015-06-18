@@ -12,6 +12,8 @@
 .bassett-images, .paging, .bassett-image {
 	clear: both;
 }
+
+
 .bassett-images div {
 	padding: 0 0 30px 9px;
 	float: left;
@@ -23,11 +25,16 @@
 #bassettContent .image-text {
 	padding: 3px 0 0 0;
 }
-.paging {
-	float: right;
-	padding: 10px ;
+
+.pagination-disabled  , .pagination-disabled span, .pagination-disabled label {
+	color: white !important;
+	cursor: default;
 }
 
+.pagination-enable  , .pagination- span, .pagination-disabled label {
+	color: white !important;
+	cursor: pointer;
+}
 
 /* IMAGE VIEW */
 .legend-title {
