@@ -112,10 +112,8 @@
 
 #imageList .imagedeco-admin {
 	margin-top: -4px;
-	margin-right: 10px;
 	height: 18px;
-	background-color: #eee;
-	width: 90%;
+	text-align: center;
 }
 
 

@@ -36,7 +36,9 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     private String tab = TAB_CONTENT[0];
 
-    private String url;
+    protected String url;
+    
+    protected String basePath;
 
     public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
@@ -53,6 +55,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         this.resourceId = ModelUtil.getString(model, Model.RESOURCE_ID);
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.source = ModelUtil.getString(model, Model.SOURCE);
+        this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
         this.url = "/search.html?q=" + this.searchTerm + "&source=" + this.source;
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
@@ -77,7 +80,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         result.put("page", pageResult);
         result.put("selectedResource", this.resourceId);
         result.put("websiteIdFacet", facet);
-        result.put("path", this.url.toString());
+        result.put("path", this.basePath.concat(this.url.toString()));
         result.put(Model.QUERY, this.searchTerm);
         result.put("tab", this.tab);
         result.put(Model.SOURCE, this.source);
