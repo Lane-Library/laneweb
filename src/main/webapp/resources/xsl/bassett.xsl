@@ -285,10 +285,10 @@
 	<xsl:variable name="lower-page-class">
 		<xsl:choose>
 			<xsl:when test="$page-number =0">
-				disabled
+				<xsl:text>pagination-disabled no-bookmarking</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				actived
+				<xsl:text>pagination-enabled</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -326,10 +326,10 @@
 	<xsl:variable name="upper-page-class">
 		<xsl:choose>
 			<xsl:when test="$total-pages = $page-number">
-				disabled
+				<xsl:text>pagination-disabled no-bookmarking</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				actived
+				<xsl:text>pagination-enabled</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
