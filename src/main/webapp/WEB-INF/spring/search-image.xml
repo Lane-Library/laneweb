@@ -28,15 +28,15 @@
 	<bean id="edu.stanford.irt.laneweb.search.websiteIdMaping" class="org.springframework.beans.factory.config.MapFactoryBean">
 		<property name="sourceMap">
 			<map>
-				<entry key="Bassett" value="Stanford Bassett Anatomy Collection" />
+				<entry key="Bassett" value="Stanford Bassett Anatomy" />
 				<entry key="microbelibrary.org" value="ASM Microbe Library" />
-				<entry key="endoatlas.com" value="Atlas of Gastrointestinal Endoscopy" />
+				<entry key="endoatlas.com" value="Atlas of GI Endoscopy" />
 				<entry key="medpics.ucsd.edu" value="UCSD MedPics" />
-				<entry key="health.education.assets.library" value="Univ Utah Health Educ Asset Library" />
-				<entry key="usc.orthopaedic.surgical" value="USC Orthopaedic Surgical Anatomy" />
+				<entry key="health.education.assets.library" value="U Utah Health Ed Asset Lib" />
+				<entry key="usc.orthopaedic.surgical" value="USC Ortho Surg Anatomy" />
 				<entry key="ncbi.nlm.nih.gov" value="Pubmed Central" />
 				<entry key="wellcomeimages.org" value="Wellcome Images" />
-				<entry key="visualsonline.cancer.gov" value="National Cancer Institute Visuals Online" />
+				<entry key="visualsonline.cancer.gov" value="National Cancer Institute" />
 				<entry key="commons.wikimedia.org" value="Wikimedia Commons" />
 			</map>
 		</property>
