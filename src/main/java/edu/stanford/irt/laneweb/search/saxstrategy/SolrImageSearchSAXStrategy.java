@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     
     private  NumberFormat nf = NumberFormat.getInstance();
 
+    private Map<String, String> websiteIdMapping;
+    
     public void toSAX(final Map<String, Object> result, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();
@@ -251,6 +254,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
                 selectedResource = (String) result.get(SELECTED_RESOURCE);
             }
+
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 totalElement = totalElement + (int) facetFieldEntry.getValueCount();
                 if (selectedResource.equals(facetFieldEntry.getValue())) {
@@ -258,9 +262,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
                 }
             }
             if (!"All".equals(selectedResource)) {
-                XMLUtils.data(xmlConsumer, selectedResource + " (" + nf.format(totalSelectedFacet) + ")");
+                XMLUtils.data(xmlConsumer, getDisplayedResourceName(selectedResource) + " (" + nf.format(totalSelectedFacet) + ")");
             } else {
-                XMLUtils.data(xmlConsumer, selectedResource + " (" + nf.format(totalElement) + ")");
+                XMLUtils.data(xmlConsumer, getDisplayedResourceName(selectedResource) + " (" + nf.format(totalElement) + ")");
             }
             createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
             endDiv(xmlConsumer);
@@ -276,7 +280,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 startLi(xmlConsumer);
                 startAnchor(xmlConsumer, path + "&rid=" + facetFieldEntry.getValue());
-                XMLUtils.data(xmlConsumer, facetFieldEntry.getValue() + " (" + nf.format(facetFieldEntry.getValueCount())
+                XMLUtils.data(xmlConsumer, getDisplayedResourceName(facetFieldEntry.getValue()) + " (" + nf.format(facetFieldEntry.getValueCount())
                         + ") ");
                 endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
@@ -287,6 +291,14 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             endDiv(xmlConsumer);
             endDiv(xmlConsumer);
         }
+    }
+   
+    
+    private String getDisplayedResourceName(String resourceName){
+        if(this.websiteIdMapping.get(resourceName)!= null){
+            resourceName = this.websiteIdMapping.get(resourceName);
+        }
+        return resourceName;
     }
 
     private void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
@@ -391,5 +403,15 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         }
         endUl(xmlConsumer);
         generateSumaryResult(xmlConsumer, page, result, false);
+    }
+
+    
+    public Map<String, String> getWebsiteIdMapping() {
+        return websiteIdMapping;
+    }
+
+    
+    public void setWebsiteIdMapping(Map<String, String> websiteIdMapping) {
+        this.websiteIdMapping = websiteIdMapping;
     }
 }
