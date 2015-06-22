@@ -37,6 +37,8 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
     private String tab = TAB_CONTENT[0];
 
     private String url;
+    
+    private String basePath;
 
     public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
@@ -53,6 +55,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         this.resourceId = ModelUtil.getString(model, Model.RESOURCE_ID);
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.source = ModelUtil.getString(model, Model.SOURCE);
+        this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
         this.url = "/search.html?q=" + this.searchTerm + "&source=" + this.source;
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
@@ -70,24 +73,25 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     @Override
     protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<String, Object>(); 
         Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
         Page<Image> pageResult = null;
         if (this.resourceId == null) {
-            pageResult = this.service.findByTitleOrDescriptionFilterOnCopyright(query, this.copyright, page);
+            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
         } else {
-            pageResult = this.service.findByTitleOrDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright,
-                    this.resourceId, page);
+            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
         }
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
         result.put("page", pageResult);
         result.put("selectedResource", this.resourceId);
         result.put("websiteIdFacet", facet);
-        result.put("path", this.url.toString());
+        result.put("path", this.basePath.concat(this.url.toString()));
         result.put(Model.QUERY, this.searchTerm);
         result.put("tab", this.tab);
         result.put(Model.SOURCE, this.source);
         return result;
     }
+    
+  
 }
