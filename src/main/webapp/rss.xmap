@@ -37,7 +37,7 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="expires">
-        <map:parameter name="cache-key" value="{request-uri};{query-string}"/>
+        <map:parameter name="cache-key" value="{sitemap-uri}?p={page};a={alpha};q={query};t={type};subset={subset};source={source}"/>
         <map:parameter name="expires" value="access plus 1 hours"/>
         <map:match pattern="search/**" type="wildcard">
             <map:parameter name="parameter-name" value="source"/>
