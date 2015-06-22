@@ -22,7 +22,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -30,6 +32,9 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class EMailSenderTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private EMailSender eMailSender;
 
@@ -199,6 +204,32 @@ public class EMailSenderTest {
         try {
             this.eMailSender.sendEmail(this.map);
         } catch (LanewebException e) {
+        }
+        verify(this.javaMailSender, this.message);
+    }
+
+    @Test
+    public void testSendMailTooManyMessages() throws MessagingException {
+        this.thrown.expect(LanewebException.class);
+        this.thrown.expectMessage("too many emails from IP: null; # sent: 11");
+        this.map.put("recipient", "recipient");
+        this.map.put("subject", "subject");
+        this.map.put("email", "email@foo.com");
+        this.map.put("message", "message");
+        expect(this.javaMailSender.createMimeMessage()).andReturn(this.message).times(11);
+        this.message.setSubject("subject");
+        expectLastCall().times(11);
+        this.message.setRecipient(eq(RecipientType.TO), isA(Address.class));
+        expectLastCall().times(11);
+        this.message.setFrom(isA(Address.class));
+        expectLastCall().times(11);
+        this.message.setText("message: message\n\n");
+        expectLastCall().times(11);
+        this.javaMailSender.send(this.message);
+        expectLastCall().times(11);
+        replay(this.javaMailSender, this.message);
+        for (int i = 0; i <= 10; i++) {
+            this.eMailSender.sendEmail(this.map);
         }
         verify(this.javaMailSender, this.message);
     }

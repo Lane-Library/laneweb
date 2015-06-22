@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.email;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -20,10 +21,15 @@ public class EMailSender {
 
     private static final String BINDING_MAP = "org.springframework.validation.BindingResult.map";
 
+    // one hour
+    private static final long COUNT_CHECK_INTERVAL = 1000L * 60L * 60L;
+
     private static final String EMAIL = "email";
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$",
             Pattern.CASE_INSENSITIVE);
+
+    private static final int MAX_MAILS_PER_IP = 10;
 
     private static final String RECIPIENT = "recipient";
 
@@ -31,13 +37,19 @@ public class EMailSender {
 
     private static final String SUBJECT = "subject";
 
-    private static final String[] EXCLUDED_FIELDS = new String[] { SUBJECT, RECIPIENT, EMAIL, BINDING_MAP, REDIRECT };
+    private static final String[] XCLUDED_FIELDS = new String[] { SUBJECT, RECIPIENT, EMAIL, BINDING_MAP, REDIRECT };
 
     private Set<String> excludedFields;
+
+    private long lastUpdate = 0;
 
     private JavaMailSender mailSender;
 
     private Set<String> recipients;
+
+    private String remoteIp;
+
+    private Map<String, Integer> sentMailCounter = new HashMap<String, Integer>();
 
     private Set<String> spamIps;
 
@@ -50,7 +62,7 @@ public class EMailSender {
         this.spamIps = spamIps;
         this.spamReferrers = spamReferrers;
         this.excludedFields = new HashSet<String>();
-        for (String element : EXCLUDED_FIELDS) {
+        for (String element : XCLUDED_FIELDS) {
             this.excludedFields.add(element);
         }
     }
@@ -94,10 +106,38 @@ public class EMailSender {
         } catch (MessagingException e) {
             throw new LanewebException(e);
         }
+        maybeBlockBeforeSend();
         try {
             this.mailSender.send(message);
         } catch (MailException e) {
             throw new LanewebException(map.toString(), e);
+        }
+    }
+
+    private synchronized void maybeBlockBeforeSend() {
+        updateSentCountsIfNecessary();
+        int sent = 0;
+        if (this.sentMailCounter.containsKey(this.remoteIp)) {
+            sent = this.sentMailCounter.get(this.remoteIp).intValue();
+        }
+        this.sentMailCounter.put(this.remoteIp, Integer.valueOf(++sent));
+        if (sent > MAX_MAILS_PER_IP) {
+            throw new LanewebException("too many emails from IP: " + this.remoteIp + "; # sent: " + sent);
+        }
+    }
+
+    private synchronized void updateSentCountsIfNecessary() {
+        long now = System.currentTimeMillis();
+        if (now > this.lastUpdate + COUNT_CHECK_INTERVAL) {
+            for (Entry<String, Integer> entry : this.sentMailCounter.entrySet()) {
+                int newCount = entry.getValue().intValue() - MAX_MAILS_PER_IP;
+                if (newCount <= 0) {
+                    this.sentMailCounter.remove(entry.getKey());
+                } else {
+                    this.sentMailCounter.put(entry.getKey(), Integer.valueOf(newCount));
+                }
+            }
+            this.lastUpdate = now;
         }
     }
 
@@ -106,9 +146,9 @@ public class EMailSender {
         if (!this.recipients.contains(recipient)) {
             throw new LanewebException(RECIPIENT + " " + recipient + " not permitted");
         }
-        Object remoteIp = map.get(Model.REMOTE_ADDR);
-        if (this.spamIps.contains(remoteIp)) {
-            throw new LanewebException(remoteIp + " is in the spam IP list");
+        this.remoteIp = (String) map.get(Model.REMOTE_ADDR);
+        if (this.spamIps.contains(this.remoteIp)) {
+            throw new LanewebException(this.remoteIp + " is in the spam IP list");
         }
         Object referrer = map.get(Model.REFERRER);
         if (this.spamReferrers.contains(referrer)) {
