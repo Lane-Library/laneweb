@@ -8,6 +8,12 @@
     </properties>
     <body>
         <release date="2015-06-22" version="3.0.8" description="3.0.8 bug fix release">
+             <action date="2015-06-22" dev="alainb" issue="108562" type="fix">
+                update bassett css
+            </action> 
+            <action date="2015-06-22" dev="alainb" issue="----" type="update">
+                New bio-search image UI
+            </action>
             <action date="2015-06-22" dev="ceyates" issue="108643" type="fix">
                 excessive large object caching causing OutOfMemoryErrors
             </action>
