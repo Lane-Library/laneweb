@@ -20,7 +20,7 @@
              <action date="2015-06-22" dev="alainb" issue="108562" type="fix">
                  Fwd: missing next, last button on Bassett?
             </action> 
-            <action date="2015-06-18" dev="ceyates" issue="108492" type="update">
+            <action date="2015-06-18" dev="ceyates" issue="108492" type="fix">
                 xinclude of liaison-card/[sunetid].html may produce wrong liaison card
             </action>
             <action date="2015-06-18" dev="ceyates" issue="108468" type="update">
