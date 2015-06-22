@@ -8,16 +8,19 @@
     </properties>
     <body>
         <release date="2015-06-22" version="3.0.8" description="3.0.8 bug fix release">
-             <action date="2015-06-22" dev="alainb" issue="108562" type="fix">
-                update bassett css
-            </action> 
-            <action date="2015-06-22" dev="alainb" issue="----" type="update">
+            <action date="2015-06-22" dev="alainb" issue="108667" type="update">
                 New bio-search image UI
+            </action>
+            <action date="2015-06-22" dev="ceyates" issue="108662" type="update">
+                update to search-lane-2.3.0
             </action>
             <action date="2015-06-22" dev="ceyates" issue="108643" type="fix">
                 excessive large object caching causing OutOfMemoryErrors
             </action>
-            <action date="2015-06-18" dev="ceyates" issue="108492" type="update">
+             <action date="2015-06-22" dev="alainb" issue="108562" type="fix">
+                 Fwd: missing next, last button on Bassett?
+            </action> 
+            <action date="2015-06-18" dev="ceyates" issue="108492" type="fix">
                 xinclude of liaison-card/[sunetid].html may produce wrong liaison card
             </action>
             <action date="2015-06-18" dev="ceyates" issue="108468" type="update">
