@@ -51,7 +51,7 @@
 }
 
 .imageDetail label {
-	font-size: 20px;
+	font-size: 15px;
 	color: #8c1515;
 	line-height: 1.2em;
   	margin-bottom: .2em;
@@ -135,7 +135,7 @@
 	padding: 10px 20px 16px 23px;
 	height: 20px;
 	box-sizing: content-box;
-}
+}	
 
 .result-summary .result {
 	display: inline-block;
@@ -152,7 +152,7 @@
 }
 
 #sourceFilter {
-	margin-left: 75px;
+	margin-left: 55px;
 }
 
 .pagination {

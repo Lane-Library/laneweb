@@ -27,6 +27,9 @@ body,select,input,button,textarea {
     cursor:pointer;
     font-size:22px;
 }
+.close.fa:hover {
+    color : #79455C;
+}
 
 p {
 margin-bottom: 12px;

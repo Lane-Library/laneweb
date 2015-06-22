@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-06-15" version="3.0.7" description="3.0.7 bug fix release">
+            <action date="2015-06-09" dev="ceyates" issue="106087" type="update">
+                change 'close' button on popup to font awesome
+            </action>
+            <action date="2015-06-11" dev="ryanmax" issue="104016" type="add">
+                Feed latest title(s) from laneblog/WPress Laneweb
+            </action>
+            <action date="2015-06-09" dev="ceyates" issue="104007" type="add">
+                dynamic include for contact info - partial
+            </action>
+        </release>
         <release date="2015-06-08" version="3.0.6" description="3.0.6 bug fix release">
             <action date="2015-05-22" dev="olgary" issue="106095" type="remove">
                 removed sprite-vertall.png
