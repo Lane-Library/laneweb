@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-06-22" version="3.0.8" description="3.0.8 bug fix release">
+            <action date="2015-06-18" dev="ceyates" issue="108492" type="update">
+                xinclude of liaison-card/[sunetid].html may produce wrong liaison card
+            </action>
+            <action date="2015-06-18" dev="ceyates" issue="108468" type="update">
+                rollover for close "x" button
+            </action>
+        </release>
         <release date="2015-06-15" version="3.0.7" description="3.0.7 bug fix release">
             <action date="2015-06-09" dev="ceyates" issue="106087" type="update">
                 change 'close' button on popup to font awesome
