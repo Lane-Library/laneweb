@@ -47,8 +47,6 @@ public class EMailSender {
 
     private Set<String> recipients;
 
-    private String remoteIp;
-
     private Map<String, Integer> sentMailCounter = new HashMap<String, Integer>();
 
     private Set<String> spamIps;
@@ -106,7 +104,7 @@ public class EMailSender {
         } catch (MessagingException e) {
             throw new LanewebException(e);
         }
-        maybeBlockBeforeSend();
+        maybeBlockBeforeSend((String) map.get(Model.REMOTE_ADDR));
         try {
             this.mailSender.send(message);
         } catch (MailException e) {
@@ -114,15 +112,15 @@ public class EMailSender {
         }
     }
 
-    private synchronized void maybeBlockBeforeSend() {
+    private synchronized void maybeBlockBeforeSend(final String remoteIp) {
         updateSentCountsIfNecessary();
         int sent = 0;
-        if (this.sentMailCounter.containsKey(this.remoteIp)) {
-            sent = this.sentMailCounter.get(this.remoteIp).intValue();
+        if (this.sentMailCounter.containsKey(remoteIp)) {
+            sent = this.sentMailCounter.get(remoteIp).intValue();
         }
-        this.sentMailCounter.put(this.remoteIp, Integer.valueOf(++sent));
+        this.sentMailCounter.put(remoteIp, Integer.valueOf(++sent));
         if (sent > MAX_MAILS_PER_IP) {
-            throw new LanewebException("too many emails from IP: " + this.remoteIp + "; # sent: " + sent);
+            throw new LanewebException("too many emails from IP: " + remoteIp + "; # sent: " + sent);
         }
     }
 
@@ -146,9 +144,9 @@ public class EMailSender {
         if (!this.recipients.contains(recipient)) {
             throw new LanewebException(RECIPIENT + " " + recipient + " not permitted");
         }
-        this.remoteIp = (String) map.get(Model.REMOTE_ADDR);
-        if (this.spamIps.contains(this.remoteIp)) {
-            throw new LanewebException(this.remoteIp + " is in the spam IP list");
+        Object remoteIp = map.get(Model.REMOTE_ADDR);
+        if (this.spamIps.contains(remoteIp)) {
+            throw new LanewebException(remoteIp + " is in the spam IP list");
         }
         Object referrer = map.get(Model.REFERRER);
         if (this.spamReferrers.contains(referrer)) {
