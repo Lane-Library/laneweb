@@ -20,8 +20,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:net/bull/javamelody/monitoring-spring.xml
-            /WEB-INF/spring/admin-search-image.xml
-            /WEB-INF/spring/bassett.xml
+           	/WEB-INF/spring/bassett.xml
             /WEB-INF/spring/binding.xml
             /WEB-INF/spring/bookmarks.xml
             /WEB-INF/spring/cme.xml

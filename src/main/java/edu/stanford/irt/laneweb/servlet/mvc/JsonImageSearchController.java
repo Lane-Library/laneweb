@@ -33,7 +33,7 @@ public class JsonImageSearchController {
     @RequestMapping(value = "/image/update")
     @ResponseBody
     public String updateImage(final String id) {
-        Image image = this.service.findById(id);
+        Image image = this.service.findInInderxerById(id);
         String websiteId = id.substring(0, id.indexOf("/"));
         image.setWebsiteId(websiteId);
         boolean isEnable = image.isEnable();
@@ -42,7 +42,7 @@ public class JsonImageSearchController {
         }else{
             image.setEnable(true);
         }
-       this.service.saveImage(image);  
+       this.service.saveInIndexerImage(image);  
         return "ok";
     }
 

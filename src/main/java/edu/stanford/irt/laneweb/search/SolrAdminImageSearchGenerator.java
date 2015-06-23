@@ -30,13 +30,8 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator{
    
    @Override
     protected Page<Image> getPage(final String query){
-        Page<Image> pageResult = null;
         Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
-        if (this.resourceId == null) {
-            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
-        } else {
-            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
-        }
-        return pageResult;
+       return this.service.findInIndexerByTitleAndDescription(query, this.copyright, this.resourceId, (PageRequest) page);
+        
     }
 }
