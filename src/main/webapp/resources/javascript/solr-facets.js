@@ -66,7 +66,7 @@
                 on: {
                     success:function(id, o) {
                         facetsContainer.append(o.responseText);
-                        Y.all('.facetHeader.openOnInit').each(function(node){toggleHeader(node)});
+                        Y.all('.facetHeader').each(function(node){toggleHeader(node)});
                         Y.all('.facetHeader').on('click',toggleHeader);
                         // fade in facets container
                         new Y.Anim({
