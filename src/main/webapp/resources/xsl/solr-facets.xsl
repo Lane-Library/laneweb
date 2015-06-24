@@ -20,12 +20,18 @@
     <xsl:variable name="facet-search-base-path" select="concat('?',replace($pageless-query-string,'&amp;facets?=[^&amp;]+',''))"/>
     <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr-facet-browse.html?',$pageless-query-string)"/>
     <xsl:variable name="facets-per-browse-page" select="20"/>
-    <xsl:variable name="values-per-facet" select="10"/>
+    <xsl:variable name="values-per-facet" select="3"/>
     
     <xsl:template match="facet">
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
         <xsl:variable name="label">
             <xsl:choose>
+                <xsl:when test="../../string[. = 'recordType'] and name = 'pubmed'">PubMed</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and name = 'bib'">Lane Catalog</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and name = 'web'">Lane Web Page</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and name = 'class'">Lane Class</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and name = 'auth'">Lane Community Info</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and name = 'laneblog'">Lane Blog</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and name = 'year:[2010 TO *]'">Last 5 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and name = 'year:[2005 TO *]'">Last 10 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and name = '0'">Unknown</xsl:when>
@@ -51,10 +57,7 @@
         <xsl:if test="/linked-hash-map/entry/string[. = $id]">
 	        <xsl:choose>
 	            <xsl:when test="$search-mode">
-		            <xsl:variable name="open">
-		                <xsl:if test="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet/enabled[. = 'true'] or ($id = 'year' and /linked-hash-map/entry/string[. = 'isRecent']/../sorted-set/facet/enabled[. = 'true'])"> openOnInit</xsl:if>
-		            </xsl:variable>
-		            <li class="solrFacet facetHeader{$open}"><xsl:value-of select="$label"/></li>
+		            <li class="solrFacet facetHeader"><xsl:value-of select="$label"/></li>
 		            <xsl:if test="$id = 'year'">
 		                <xsl:apply-templates select="/linked-hash-map/entry/string[. = 'isRecent']/../sorted-set/facet[name[. = 'true']]"/>
 		            </xsl:if>
@@ -96,9 +99,7 @@
             <body>
                 <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
 	                <div class="bd">
-	                	<!-- 
-		                <h3>Limits</h3>
-	                	-->
+		                <h3>Narrow your search</h3>
 		                <xsl:if test="$search-mode and string-length($facets) > 0">
 		                  <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')//s:row[s:genre[ . = 'all']]/s:hits"/>
 		                  <xsl:if test="number($counts > 0)">
@@ -107,8 +108,13 @@
 		                </xsl:if>
 		                <ul>
 							<xsl:call-template name="field">
+		                        <xsl:with-param name="id" select="'recordType'"/>					   
+		                        <xsl:with-param name="label" select="'Only Results Within'"/>					   
+							</xsl:call-template>
+		
+							<xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'type'"/>					   
-		                        <xsl:with-param name="label" select="'Resource Type'"/>					   
+		                        <xsl:with-param name="label" select="'Resource Type'"/>
 							</xsl:call-template>
 		
 		                    <xsl:call-template name="field">

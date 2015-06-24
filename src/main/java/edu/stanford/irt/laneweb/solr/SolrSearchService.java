@@ -50,6 +50,7 @@ public class SolrSearchService implements CollectionManager {
         FACET_FIELDS.add("publicationTitle");
         FACET_FIELDS.add("publicationType");
         FACET_FIELDS.add("type");
+        FACET_FIELDS.add("recordType");
         FACET_FIELDS.add("year");
     }
     static {
