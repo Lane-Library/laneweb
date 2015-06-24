@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import java.text.NumberFormat;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,9 +92,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, text);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.data(xmlConsumer, " "+text);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
     }
 
@@ -107,9 +104,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, href);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, text);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.data(xmlConsumer, text+" ");
         atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
@@ -119,12 +114,14 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     private void generateDetailImage(final XMLConsumer xmlConsumer, final int rowNumber) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imageDetail");
-        atts.addAttribute(XHTML_NS, "hidden", "hidden", CDATA, "true");
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imageDetailHidden");
         atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "width:935px; height:350px;");
         atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageDetail_" + rowNumber);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
-        startDivWithClass(xmlConsumer, "image-detail-close close fa fa-close");
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, ID, ID, CDATA, "image-detail-close");
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "image-detail-close close fa fa-close");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         endDiv(xmlConsumer);
         startDivWithClass(xmlConsumer, "yui3-g");
         startDivWithClass(xmlConsumer, "yui3-u-3-5");
@@ -316,8 +313,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedeco");
-        atts.addAttribute(XHTML_NS, "hidden", "hidden", CDATA, "true");
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedecoHidden");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         XMLUtils.data(xmlConsumer, " ");
         endDiv(xmlConsumer);
