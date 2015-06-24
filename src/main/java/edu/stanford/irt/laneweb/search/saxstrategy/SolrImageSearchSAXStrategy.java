@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import java.text.NumberFormat;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
