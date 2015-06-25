@@ -5,15 +5,12 @@
         locationSearch = location.search,
         basePath = model.get(model.BASE_PATH) || "",
         facetsContainer = Y.one('.solrFacets'),
-        handlePaginationClick = function(event, direction) {
+        handleArrowKey = function(event, direction) {
             var browseFacetNavContainer = Y.one(".s-pagination.facetBrowse"),
-                searchFacetNavContainer = Y.one(".resourceListPagination > .s-pagination"),
                 selectorString = ".pagingButton." + direction,
                 pagingContainer;
             if (undefined != browseFacetNavContainer && browseFacetNavContainer.getStyle('visibility') == 'visible') {
                 pagingContainer = browseFacetNavContainer;
-            } else {
-                pagingContainer = searchFacetNavContainer;
             }
             if (pagingContainer) {
                 pagingContainer.one(selectorString)._node.click();
@@ -80,8 +77,8 @@
         if (query && facetsContainer) {
             makeRequest();
             // listeners for left/right arrows
-            doc.on("key", handlePaginationClick, "up:37", this, "previous");
-            doc.on("key", handlePaginationClick, "up:39", this, "next");
+            doc.on("key", handleArrowKey, "up:37", this, "previous");
+            doc.on("key", handleArrowKey, "up:39", this, "next");
         }
 })();
         
