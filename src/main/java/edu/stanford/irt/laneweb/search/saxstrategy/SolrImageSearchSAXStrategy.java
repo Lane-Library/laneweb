@@ -36,19 +36,17 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     private static final String IMAGE = "image";
 
+    private static final int IMAGE_BY_ROW = 4;
+
     private static final String INPUT = "input";
 
     private static final String LABEL = "label";
-
-    private static final int MAX_TITLE_LENGTH = 90;
 
     private static final String NAME = "name";
 
     private static final String NO_BOOKMARKING = "no-bookmarking";
 
-    private static final String PREVIEW_IMAGE_NOT_AVAILABLE = "/graphics/2014/no-previewavail.jpg";
-
-    private static final String REL = "rel";
+    private static final String P = "p";
 
     private static final String SELECTED_RESOURCE = "selectedResource";
 
@@ -65,10 +63,11 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     private static final String VALUE = "value";
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
-
-    private  NumberFormat nf = NumberFormat.getInstance();
     
-    @Override
+    private  NumberFormat nf = NumberFormat.getInstance();
+
+    private Map<String, String> websiteIdMapping;
+    
     public void toSAX(final Map<String, Object> result, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();
@@ -93,9 +92,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, text);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.data(xmlConsumer, " "+text);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
     }
 
@@ -107,9 +104,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, href);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, text);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.data(xmlConsumer, text+" ");
         atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
@@ -117,48 +112,72 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
     }
 
-    private void createImage(final XMLConsumer xmlConsumer, final String id, final String thumbnailSrc, final String src)
-            throws SAXException {
+    private void generateDetailImage(final XMLConsumer xmlConsumer, final int rowNumber) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, thumbnailSrc);
-        if (null != id) {
-            atts.addAttribute(XHTML_NS, ID, ID, CDATA, id);
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "yui3-tooltip-trigger");
-        }
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imageDetailHidden");
+        atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "width:935px; height:350px;");
+        atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageDetail_" + rowNumber);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, ID, ID, CDATA, "image-detail-close");
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "image-detail-close close fa fa-close");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+        endDiv(xmlConsumer);
+        startDivWithClass(xmlConsumer, "yui3-g");
+        startDivWithClass(xmlConsumer, "yui3-u-3-5");
+        startDivWithClass(xmlConsumer, "image-location");
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "image");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
-    }
-
-    private void generateCopyright(final XMLConsumer xmlConsumer, final Image image) throws SAXException {
-        startElementWithId(xmlConsumer, DIV, "copyright");
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, REL, REL, CDATA, "popup local ".concat(image.getId().hashCode() + "_copyright"));
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, NO_BOOKMARKING);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-        XMLUtils.data(xmlConsumer, "Copyright Information ");
+        endDiv(xmlConsumer);
+        endDiv(xmlConsumer);
+        startDivWithClass(xmlConsumer, "yui3-u-2-5");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, "h3");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
+        startDivWithClass(xmlConsumer, "desc");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.data(xmlConsumer, "Description: ");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
+        endDiv(xmlConsumer);
+        startDivWithClass(xmlConsumer, "copyright");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, "label");
+        XMLUtils.data(xmlConsumer, "Rights Statement: ");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, "label");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
+        endDiv(xmlConsumer);
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, "hidden", "hidden", CDATA, "true");
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "article-title");
+        startDivWithClass(xmlConsumer, "article-title");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.data(xmlConsumer, "Article Title: ");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
+        endDiv(xmlConsumer);
+        startDivWithClass(xmlConsumer, "to-image");
+        startAnchor(xmlConsumer, "");
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "button");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, "button", atts);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
+        XMLUtils.data(xmlConsumer, "Visit Source Page ");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
         atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-arrow-right");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, "button");
+        
+        endAnchor(xmlConsumer);
         endDiv(xmlConsumer);
-    }
-
-    private void generateCopyrightPopup(final XMLConsumer xmlConsumer, final Image image) throws SAXException {
-        if (null != image.getId()) {
-            AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, ID, ID, CDATA, image.getId().hashCode() + "_copyright");
-            atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "width:450px");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
-            if (image.getCopyrightText() != null) {
-                startDiv(xmlConsumer);
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "event_description");
-                XMLUtils.data(xmlConsumer, image.getCopyrightText());
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "event_description");
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, DIV);
-            }
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
-        }
+        endDiv(xmlConsumer);
+        endDiv(xmlConsumer);
+        endLi(xmlConsumer);
     }
 
     private void generateDirectAccessPageForm(final XMLConsumer xmlConsumer, final Page<Image> page,
@@ -213,7 +232,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             startDivWithClass(xmlConsumer, "yui3-u-1-4");
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "view-by");
-            atts.addAttribute(XHTML_NS, "id", "id", CDATA, "sourceFilter");
+            atts.addAttribute(XHTML_NS, ID , ID, CDATA, "sourceFilter");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             List<FacetFieldEntry> facetList = facet.getContent();
             XMLUtils.data(xmlConsumer, "Filter by source ");
@@ -232,6 +251,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
                 selectedResource = (String) result.get(SELECTED_RESOURCE);
             }
+
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 totalElement = totalElement + (int) facetFieldEntry.getValueCount();
                 if (selectedResource.equals(facetFieldEntry.getValue())) {
@@ -239,9 +259,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
                 }
             }
             if (!"All".equals(selectedResource)) {
-                XMLUtils.data(xmlConsumer, selectedResource + " (" + nf.format(totalSelectedFacet) + ")");
+                XMLUtils.data(xmlConsumer, getDisplayedResourceName(selectedResource) + " (" + nf.format(totalSelectedFacet) + ")");
             } else {
-                XMLUtils.data(xmlConsumer, selectedResource + " (" + nf.format(totalElement) + ")");
+                XMLUtils.data(xmlConsumer, getDisplayedResourceName(selectedResource) + " (" + nf.format(totalElement) + ")");
             }
             createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
             endDiv(xmlConsumer);
@@ -257,7 +277,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 startLi(xmlConsumer);
                 startAnchor(xmlConsumer, path + "&rid=" + facetFieldEntry.getValue());
-                XMLUtils.data(xmlConsumer, facetFieldEntry.getValue() + " (" + nf.format(facetFieldEntry.getValueCount())
+                XMLUtils.data(xmlConsumer, getDisplayedResourceName(facetFieldEntry.getValue()) + " (" + nf.format(facetFieldEntry.getValueCount())
                         + ") ");
                 endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
@@ -269,42 +289,35 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             endDiv(xmlConsumer);
         }
     }
-
-    private void generateImagePopup(final XMLConsumer xmlConsumer, final Image image) throws SAXException {
-        if (null != image.getId()) {
-            startElementWithId(xmlConsumer, "span", image.getId().concat("Tooltip"));
-            AttributesImpl atts = new AttributesImpl();
-            if (null != image.getSrc() && !"".equals(image.getSrc())) {
-                atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getSrc());
-            } else {
-                atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, PREVIEW_IMAGE_NOT_AVAILABLE);
-            }
-            atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "max-width: 300px;max-height: 240px");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
+   
+    
+    private String getDisplayedResourceName(String resourceName){
+        if(this.websiteIdMapping.get(resourceName)!= null){
+            resourceName = this.websiteIdMapping.get(resourceName);
         }
+        return resourceName;
     }
 
-    private void generateImages(final XMLConsumer xmlConsumer, final Image image) throws SAXException {
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, "li");
+    private void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
+            throws SAXException {
         AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, ID, ID, CDATA, image.getId());
+        atts.addAttribute(XHTML_NS, "row", "row", CDATA, String.valueOf(imageNumber / IMAGE_BY_ROW));
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
+        atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, image.getPageUrl());
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "noproxy");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
-        startElementWithId(xmlConsumer, DIV, "image");
-        createImage(xmlConsumer, image.getId(), image.getThumbnailSrc(), image.getSrc());
-        endDiv(xmlConsumer);
-        startDiv(xmlConsumer);
-        String title = image.getTitle();
-        if (title.length() > MAX_TITLE_LENGTH) {
-            title = title.substring(0, MAX_TITLE_LENGTH).concat("....");
-        }
-        XMLUtils.data(xmlConsumer, title);
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getThumbnailSrc());
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
+        atts = new AttributesImpl();
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedecoHidden");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+        XMLUtils.data(xmlConsumer, " ");
         endDiv(xmlConsumer);
         endAnchor(xmlConsumer);
-        generateWebsiteSource(xmlConsumer, image.getId(), image.getPageUrl());
-        generateCopyright(xmlConsumer, image);
         endLi(xmlConsumer);
     }
 
@@ -363,41 +376,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         endDiv(xmlConsumer);
     }
 
-    private void generateTooltips(final XMLConsumer xmlConsumer, final List<Image> images) throws SAXException {
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "display:none");
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "tooltips");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-        for (Image image : images) {
-            generateImagePopup(xmlConsumer, image);
-        }
-        endDiv(xmlConsumer);
-        atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "popups");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-        for (Image image : images) {
-            generateCopyrightPopup(xmlConsumer, image);
-        }
-        endDiv(xmlConsumer);
-    }
-
-    private void generateWebsiteSource(final XMLConsumer xmlConsumer, final String id, final String url)
-            throws SAXException {
-        startElementWithId(xmlConsumer, DIV, "website-id");
-        XMLUtils.data(xmlConsumer, "Source: ");
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, url);
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "noproxy");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
-        if (id.startsWith("ncbi.nlm.nih.gov")) {
-            XMLUtils.data(xmlConsumer, "PubMed Central");
-        } else {
-            XMLUtils.data(xmlConsumer, id.substring(0, id.indexOf("/")));
-        }
-        endAnchor(xmlConsumer);
-        endDiv(xmlConsumer);
-    }
-
     private void startElementWithId(final XMLConsumer xmlConsumer, final String name, final String id)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
@@ -411,11 +389,25 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         List<Image> images = page.getContent();
         generateSumaryResult(xmlConsumer, page, result, true);
         startElementWithId(xmlConsumer, UL, "imageList");
+        int index = 0;
         for (Image image : images) {
-            generateImages(xmlConsumer, image);
+            generateImages(xmlConsumer, image, index);
+            if (index % IMAGE_BY_ROW == 3 || images.size() - 1 == index) {
+                generateDetailImage(xmlConsumer, (index / IMAGE_BY_ROW));
+            }
+            index++;
         }
         endUl(xmlConsumer);
         generateSumaryResult(xmlConsumer, page, result, false);
-        generateTooltips(xmlConsumer, images);
+    }
+
+    
+    public Map<String, String> getWebsiteIdMapping() {
+        return websiteIdMapping;
+    }
+
+    
+    public void setWebsiteIdMapping(Map<String, String> websiteIdMapping) {
+        this.websiteIdMapping = websiteIdMapping;
     }
 }
