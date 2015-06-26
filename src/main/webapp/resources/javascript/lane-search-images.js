@@ -3,6 +3,8 @@
 			.get(Model.SOURCE), query = Model.get(Model.QUERY);
 
 	if (Y.one("#tabs-image-search")) {
+		
+		//Check # page value before to submit form
 		Y.all('form[name=paginationForm]').on(
 				'submit',
 				function(e) {
@@ -17,47 +19,70 @@
 					}
 				});
 
-		Y.all('#imageList li:not(.imageDetail)').on(
-				'click',
-				function(e) {
-					var li = e.currentTarget, anchor = e.target, row = li
-							.getAttribute("row"), id = li.get("id");
-					var href = anchor.get('href');
-					if (href == undefined) {
-						Y.io(BASE_PATH + "/image?id=" + id, {
-							on : {
-								success : successHandler
-							},
-							"arguments" : {
-								row : row,
-								li : li
-							}
-						});
-						e.stopPropagation();
-						e.preventDefault();
+
+		//On click on Image to open the imageDetail
+		Y.all('#imageList li:not(.imageDetailHidden)').on('click',
+			function(e) 
+			{
+				var li = e.currentTarget, row = li
+						.getAttribute("row"), id = li.get("id");
+				Y.io(BASE_PATH + "/image?id=" + id, {
+					on : {
+						success : successHandler
+					},
+					"arguments" : {
+						row : row,
+						li : li
 					}
 				});
+				e.stopPropagation();
+				e.preventDefault();
+		});
 
+		//To close the image detail
 		Y.on("click", function() {
-			Y.all(".imageDetail").each(function(node) {
-				node.hide();
-			});
-		}, ".image-detail-close");
+			cleanDetailImageWindow();
+		}, "#image-detail-close");
+		
 
+		//Admin on click on the id
+		Y.on("click", function(e) {
+			var div = e.currentTarget
+			var href = e.target.get('href');
+			Y.io(href, {
+				on : {
+					success : confirmAdminAction
+					},	});
+			e.stopPropagation();
+			e.preventDefault();
+		}, ".imagedeco-admin");
+		
+		
 	}
-
+	
+	
+	function confirmAdminAction(id, o, args){
+		var image = Y.JSON.parse(o.responseText),
+		id = "#" .concat(image.id.split('.').join('\\.').split('/').join('\\/')),
+		div = Y.one( id);
+		if(image.enable){
+			div.removeClass('admin-disable');
+			div.addClass('admin-enable');
+			
+		}else{
+			div.removeClass('admin-enable');
+			div.addClass('admin-disable');
+		}
+	}
+	
 	function successHandler(id, o, args) {
 		var image = Y.JSON.parse(o.responseText), 
 		row = args.row,  
 		li = args.li, 
 		copyright = image.copyrightValue, 
-		imageId = image.id.split("/"), imageDetail = Y.one("#imageDetail_" + row);
-		Y.all(".imageDetail").each(function(node) {
-			node.hide();
-		});
-		Y.all("div.imagedeco").each(function(node) {
-			node.hide();
-		});
+		imageId = image.id.split("/"), 
+		imageDetail = Y.one("#imageDetail_" + row);
+		cleanDetailImageWindow();
 
 		imageDetail.one(".image").setAttribute("src", image.src);
 		imageDetail.one("h3").setContent(image.shortTitle);
@@ -74,12 +99,30 @@
 
 		imageDetail.one(".copyright p").setContent(image.shortCopyrightText);
 		imageDetail.one(".to-image a").setAttribute("href", image.pageUrl);
-		li.one("div.imagedeco").show();
+		
+		li.one("div").removeClass('imagedecoHidden');
+		li.one("div").addClass('imagedeco');
+		imageDetail.removeClass('imageDetailHidden');
+		imageDetail.addClass('imageDetail');
+		
 		if(row > 1){
 			li = Y.one('li[row = "'+(row-1)+'"]');
 			window.location.hash = "#"+encodeURIComponent(li.get('id'));
 		}	
-		imageDetail.show();
+	}
+	
+	function cleanDetailImageWindow(){
+		Y.all(".imageDetail").each(function(node) {
+			node.removeClass('imageDetail');
+			node.addClass('imageDetailHidden');
+		});
+		Y.all(".imagedeco").each(function(node) {
+			if(!Y.one('.admin')){
+				node.removeClass('imagedeco');
+				node.addClass('imagedecoHidden');
+			}
+		});
+		
 	}
 
 	if (Y.one("#sourceFilter")) {

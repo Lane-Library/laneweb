@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.io.BufferedReader;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,6 @@ import edu.stanford.irt.solr.service.SolrImageService;
 @Controller
 public class JsonImageSearchController {
 
-    BufferedReader in = null;
-
     @Autowired
     @Qualifier("edu.stanford.irt.solr.service")
     private SolrImageService service;
@@ -30,10 +28,10 @@ public class JsonImageSearchController {
         return this.service.findById(id);
     }
     
-    @RequestMapping(value = "/image/update")
+    @RequestMapping(value = "/image/update",produces = "application/json")
     @ResponseBody
-    public String updateImage(final String id) {
-        Image image = this.service.findInInderxerById(id);
+    public Image updateImage(final String id) {
+        Image image = this.service.adminFindById(id);
         String websiteId = id.substring(0, id.indexOf("/"));
         image.setWebsiteId(websiteId);
         boolean isEnable = image.isEnable();
@@ -42,8 +40,8 @@ public class JsonImageSearchController {
         }else{
             image.setEnable(true);
         }
-       this.service.saveInIndexerImage(image);  
-        return "ok";
+       this.service.saveImage(image);  
+        return image;
     }
 
 

@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.solr.Image;
@@ -30,8 +29,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator{
    
    @Override
     protected Page<Image> getPage(final String query){
-        Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
-       return this.service.findInIndexerByTitleAndDescription(query, this.copyright, this.resourceId, (PageRequest) page);
-        
+       PageRequest page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
+       return service.adminFindByTitleAndDescription(query, this.copyright, this.resourceId, page);
     }
 }

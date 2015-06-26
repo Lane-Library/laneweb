@@ -94,9 +94,14 @@
 	background-color: #eee;
 }
 
+.imageDetailHidden{
+	display: none;
+}
+
 .image-detail-close {
-	position: inherit;
+	position:relative;
 	margin-left: 910px;
+	cursor: pointer;
 	
 }
 
@@ -110,10 +115,21 @@
 	background-color: #eee;
 }
 
+
 #imageList .imagedeco-admin {
-	margin-top: -4px;
-	height: 18px;
 	text-align: center;
+}
+
+#imageList .admin-enable {
+	background-color: #4DB84D;
+}
+
+#imageList .admin-disable {
+	background-color: #FF4747;
+}
+
+#imageList .imagedecoHidden {
+	display:none;
 }
 
 
