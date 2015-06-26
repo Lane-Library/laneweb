@@ -149,10 +149,14 @@
         </constructor-arg>
     </bean>
     
-    <bean id="edu.stanford.irt.cocoon.Model"
-        class="java.util.HashMap"
+    <bean id="edu.stanford.irt.laneweb.model.Model"
+        class="edu.stanford.irt.laneweb.model.Model"
         scope="request">
+        <constructor-arg ref="edu.stanford.irt.laneweb.model.ModelValidator"/>
     </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.model.ModelValidator"
+        class="edu.stanford.irt.laneweb.model.ModelValidator"/>
     
     <bean name="javax.xml.parsers.DocumentBuilderFactory"
         class="edu.stanford.irt.cocoon.spring.DocumentBuilderFactoryBean">

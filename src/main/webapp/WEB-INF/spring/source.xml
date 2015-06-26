@@ -22,7 +22,7 @@
                                 <entry key="bookmarks" value-ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
                             </map>
                         </property>
-                        <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
+                        <lookup-method bean="edu.stanford.irt.laneweb.model.Model" name="getModel"/>
                     </bean>
                 </entry>
                 <entry key="cache">
