@@ -68,9 +68,9 @@
         <listener-class>net.bull.javamelody.SessionListener</listener-class>
     </listener>
     
-    <!--<listener>
+    <listener>
         <listener-class>edu.stanford.irt.laneweb.servlet.UCPShutdownListener</listener-class>
-    </listener>-->
+    </listener>
     
     <filter>
         <filter-name>monitoring</filter-name>
