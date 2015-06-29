@@ -1,14 +1,9 @@
 package edu.stanford.irt.laneweb.model;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 /**
  * Model for sitemap components.
  */
-public class Model implements Map<String, Object> {
+public abstract class Model {
 
     public static final String ACTION = "action";
 
@@ -150,90 +145,7 @@ public class Model implements Map<String, Object> {
 
     public static final String VERSION = "version";
 
-    private Map<String, Object> map;
-
-    private ModelValidator validator;
-
-    public Model(final ModelValidator validator) {
-        this.map = new HashMap<String, Object>();
-        this.validator = validator;
-    }
-
-    @Override
-    public void clear() {
-        this.map.clear();
-    }
-
-    @Override
-    public boolean containsKey(final Object key) {
-        return this.map.containsKey(key);
-    }
-
-    @Override
-    public boolean containsValue(final Object value) {
-        return this.map.containsValue(value);
-    }
-
-    @Override
-    public Set<java.util.Map.Entry<String, Object>> entrySet() {
-        return this.map.entrySet();
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        return this.map.equals(o);
-    }
-
-    @Override
-    public Object get(final Object key) {
-        return this.map.get(key);
-    }
-
-    @Override
-    public int hashCode() {
-        return this.map.hashCode();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return this.map.isEmpty();
-    }
-
-    @Override
-    public Set<String> keySet() {
-        return this.map.keySet();
-    }
-
-    @Override
-    public Object put(final String key, final Object value) {
-        if (!this.validator.isValid(key, value)) {
-            throw new InvalidModelEntryException(key, value);
-        }
-        return this.map.put(key, value);
-    }
-
-    @Override
-    public void putAll(final Map<? extends String, ? extends Object> m) {
-        for (Entry<? extends String, ? extends Object> entry : m.entrySet()) {
-            if (!this.validator.isValid(entry.getKey(), entry.getValue())) {
-                throw new InvalidModelEntryException(entry.getKey(), entry.getValue());
-            }
-        }
-        this.map.putAll(m);
-    }
-
-    @Override
-    public Object remove(final Object key) {
-        return this.map.remove(key);
-    }
-
-    @Override
-    public int size() {
-        return this.map.size();
-    }
-
-    @Override
-    public Collection<Object> values() {
-        return this.map.values();
+    private Model() {
+        // private constructior
     }
 }
