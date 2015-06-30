@@ -7,6 +7,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.solr.Image;
 
@@ -36,19 +37,18 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
         atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getThumbnailSrc());
         XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
-        atts = new AttributesImpl();
         endAnchor(xmlConsumer);
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedeco-admin");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+        startDivWithClass(xmlConsumer,"imagedecoHidden");
         String imageId = image.getId();
         try {
             atts = new AttributesImpl();
             atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, "/image/update?id=" + URLEncoder.encode(imageId, "UTF-8"));
-            atts.addAttribute(XHTML_NS, "target", "target", CDATA, "_self");
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedeco-admin");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
             XMLUtils.data(xmlConsumer, imageId.substring(imageId.lastIndexOf("/") + 1));
             endAnchor(xmlConsumer);
         } catch (UnsupportedEncodingException e) {
+            throw new LanewebException(e);
         }
         endDiv(xmlConsumer);
         endLi(xmlConsumer);

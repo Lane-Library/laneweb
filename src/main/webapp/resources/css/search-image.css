@@ -116,10 +116,6 @@
 }
 
 
-#imageList .imagedeco-admin {
-	text-align: center;
-}
-
 #imageList .admin-enable {
 	background-color: #4DB84D;
 }
@@ -129,10 +125,8 @@
 }
 
 #imageList .imagedecoHidden {
-	display:none;
+	background-color: #FFFFFF;
 }
-
-
 
 
 #imageList img {

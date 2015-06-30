@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
@@ -21,6 +22,8 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator{
     private String limit = null;
     
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    
+    
     
     public SolrAdminImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(service, saxStrategy);        
@@ -58,7 +61,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator{
             try {
                 date = sdf.parse(limit);
              } catch (ParseException e) {
-                e.printStackTrace();
+                 throw new LanewebException(e);
             }
            result = service.adminFindAllFilterOnCopyrightAndWebsiteIdAndDate(query, this.copyright, this.resourceId, date ,page);
        }

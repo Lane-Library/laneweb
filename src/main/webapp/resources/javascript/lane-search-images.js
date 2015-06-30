@@ -47,7 +47,6 @@
 
 		//Admin on click on the id
 		Y.on("click", function(e) {
-			var div = e.currentTarget
 			var href = e.target.get('href');
 			Y.io(href, {
 				on : {
@@ -117,10 +116,8 @@
 			node.addClass('imageDetailHidden');
 		});
 		Y.all(".imagedeco").each(function(node) {
-			if(!Y.one('.admin')){
 				node.removeClass('imagedeco');
 				node.addClass('imagedecoHidden');
-			}
 		});
 		
 	}
