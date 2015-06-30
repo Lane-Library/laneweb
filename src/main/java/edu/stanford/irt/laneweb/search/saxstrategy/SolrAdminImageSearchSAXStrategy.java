@@ -20,7 +20,11 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
     protected void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "admin");
+        if(!image.isEnable()){
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "admin admin-disable");
+        }else{
+            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "admin");
+        }
         atts.addAttribute(XHTML_NS, ID, ID, CDATA, image.getId());
         atts.addAttribute(XHTML_NS, "row", "row", CDATA, String.valueOf(imageNumber / IMAGE_BY_ROW));
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
