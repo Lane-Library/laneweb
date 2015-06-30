@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-06-29" version="3.0.9" description="3.0.9 bug fix release">
+            <action date="2015-06-29" dev="ceyates" issue="108925" type="update">
+                update search to version 3.0.0
+            </action>
+            <action date="2015-06-25" dev="ceyates" issue="108718" type="fix">
+                nursing and neurology out of order in portals dropdown menu
+            </action>
+            <action date="2015-06-22" dev="ryanmax" issue="108657" type="add">
+                block excessive use of laneweb email forms
+            </action>
+        </release>
         <release date="2015-06-22" version="3.0.8" description="3.0.8 bug fix release">
             <action date="2015-06-22" dev="alainb" issue="108667" type="update">
                 New bio-search image UI

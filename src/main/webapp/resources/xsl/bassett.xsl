@@ -110,7 +110,7 @@
         <xsl:attribute name="href">
               <xsl:value-of select="."/>
                  <xsl:value-of select="$query-str"/>        
-                 <xsl:text>&amp;pageNumber=</xsl:text>
+                 <xsl:text>&amp;page-number=</xsl:text>
                  <xsl:value-of select="$page-number"/>
           </xsl:attribute> 
      </xsl:template> 
@@ -119,7 +119,7 @@
         <xsl:attribute name="href">
               <xsl:value-of select="."/>
                  <xsl:value-of select="$query-str"/>
-                 <xsl:text>&amp;t=diagram&amp;pageNumber=</xsl:text>
+                 <xsl:text>&amp;t=diagram&amp;page-number=</xsl:text>
                  <xsl:value-of select="$page-number"/>
           </xsl:attribute>
      </xsl:template> 

@@ -68,6 +68,10 @@
         <listener-class>net.bull.javamelody.SessionListener</listener-class>
     </listener>
     
+    <listener>
+        <listener-class>edu.stanford.irt.laneweb.servlet.UCPShutdownListener</listener-class>
+    </listener>
+    
     <filter>
         <filter-name>monitoring</filter-name>
         <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
@@ -83,8 +87,8 @@
     </filter>
     
     <filter>
-        <filter-name>ShowParameterFilter</filter-name>
-        <filter-class>edu.stanford.irt.laneweb.servlet.ShowParameterFilter</filter-class>
+        <filter-name>ValidParameterFilter</filter-name>
+        <filter-class>edu.stanford.irt.laneweb.servlet.ValidParameterFilter</filter-class>
     </filter>
     
     <filter>
@@ -126,7 +130,7 @@
     </filter-mapping>
     
     <filter-mapping>
-        <filter-name>ShowParameterFilter</filter-name>
+        <filter-name>ValidParameterFilter</filter-name>
         <url-pattern>/biomed-resources/*</url-pattern>
         <url-pattern>/rss/*</url-pattern>
     </filter-mapping>

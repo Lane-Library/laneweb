@@ -14,6 +14,7 @@ public class IPGroupTest {
     @Test
     public void testAllRanges() {
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.128.0"));
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.217.148"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.255.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.251.128.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.251.255.255"));
