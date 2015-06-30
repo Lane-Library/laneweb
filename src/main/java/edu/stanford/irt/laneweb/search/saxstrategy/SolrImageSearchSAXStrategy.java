@@ -149,9 +149,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
         endDiv(xmlConsumer);
-        atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, "hidden", "hidden", CDATA, "true");
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "article-title");
         startDivWithClass(xmlConsumer, "article-title");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.data(xmlConsumer, "Article Title: ");
