@@ -1,6 +1,7 @@
 .solrFacets.module {
     border: none;
     background-color: inherit;
+    box-shadow: none;
 }
 
 .solrFacets li {
