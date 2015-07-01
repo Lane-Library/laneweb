@@ -21,7 +21,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator{
 
     private String limit = null;
     
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     
     
     
@@ -32,14 +32,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator{
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        @SuppressWarnings("unchecked")
-        Map<String, String[]> parameters =  (Map<String, String[]>) model.get(Model.PARAMETER_MAP);
-        String[] limit = parameters.get(Model.LIMIT);  
-        if(limit != null && limit.length >0){
-            this.limit = limit[0];
-        }else{
-            this.limit = null;
-        }
+        this.limit = (String) model.get(Model.LIMIT);
     }
     
     @Override
