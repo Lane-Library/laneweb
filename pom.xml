@@ -570,7 +570,7 @@
         <dependency>
             <artifactId>search-spring</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
