@@ -60,6 +60,7 @@
 
 .imageDetail .gl div{
 	margin: 10px 10px 10px 0px;
+	overflow: hidden;
 }
 
 .imageDetail .yui3-g{
