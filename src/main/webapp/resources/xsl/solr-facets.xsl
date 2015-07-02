@@ -63,7 +63,7 @@
 		            </xsl:if>
 		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $values-per-facet or $facet !='']"/>
 		            <xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $values-per-facet and $facet = ''">
-		                 <li> <a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> more </a> <i class="icon fa fa-arrow-right"></i></li>
+		                 <li> <a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> all </a> <i class="icon fa fa-arrow-right"></i></li>
 		            </xsl:if>
 	            </xsl:when>
 	            <xsl:otherwise>
