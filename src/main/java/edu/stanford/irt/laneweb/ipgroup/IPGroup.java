@@ -14,24 +14,6 @@ public final class IPGroup implements Serializable {
 
     public static final IPGroup SHC = new IPGroup("SHC");
 
-    public static final IPGroup SOM_BECKMAN = new IPGroup("SOM_BECKMAN");
-
-    public static final IPGroup SOM_CCSR = new IPGroup("SOM_CCSR");
-
-    public static final IPGroup SOM_CLARK = new IPGroup("SOM_CLARK");
-
-    public static final IPGroup SOM_GRANT = new IPGroup("SOM_GRANT");
-
-    public static final IPGroup SOM_LANE = new IPGroup("SOM_LANE");
-
-    public static final IPGroup SOM_LKSC = new IPGroup("SOM_LKSC");
-
-    public static final IPGroup SOM_OTHER = new IPGroup("SOM_OTHER");
-
-    public static final IPGroup SOM_SIM1 = new IPGroup("SOM_SIM1");
-
-    public static final IPGroup STAFF = new IPGroup("STAFF");
-
     public static final IPGroup SU = new IPGroup("SU");
 
     private static final CIDRRange ROOT = new CIDRRange("0.0.0.0/0", OTHER) {
@@ -140,20 +122,8 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("10.248.0.0/16", SHC));
         ROOT.addSubrange(new CIDRRange("10.250.0.0/17", SHC));
         ROOT.addSubrange(new CIDRRange("10.251.0.0/17", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.20.0/22", SOM_BECKMAN));
-        ROOT.addSubrange(new CIDRRange("171.65.24.0/22", SOM_BECKMAN));
-        ROOT.addSubrange(new CIDRRange("171.65.4.0/22", SOM_CCSR));
-        ROOT.addSubrange(new CIDRRange("171.65.8.0/21", SOM_CCSR));
-        ROOT.addSubrange(new CIDRRange("171.65.71.0/25", SOM_CLARK));
-        ROOT.addSubrange(new CIDRRange("171.65.92.0/22", SOM_CLARK));
-        ROOT.addSubrange(new CIDRRange("171.65.102.0/23", SOM_CLARK));
-        ROOT.addSubrange(new CIDRRange("171.65.40.64/28", SOM_GRANT));
-        ROOT.addSubrange(new CIDRRange("171.65.88.0/22", SOM_GRANT));
-        ROOT.addSubrange(new CIDRRange("171.65.82.0/23", SOM_LANE));
-        ROOT.addSubrange(new CIDRRange("171.65.164.0/22", SOM_LKSC));
         ROOT.addSubrange(new CIDRRange("171.65.112.0/24", LPCH));
         ROOT.addSubrange(new CIDRRange("171.65.126.0/24", LPCH));
-        ROOT.addSubrange(new CIDRRange("171.65.0.0/16", SOM_OTHER));
         ROOT.addSubrange(new CIDRRange("171.65.44.0/24", PAVA));
         ROOT.addSubrange(new CIDRRange("171.65.65.46/32", OTHER));
         ROOT.addSubrange(new CIDRRange("171.65.46.0/23", SHC));
@@ -164,64 +134,6 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("171.65.168.0/21", SHC));
         ROOT.addSubrange(new CIDRRange("171.65.176.0/20", SHC));
         ROOT.addSubrange(new CIDRRange("171.65.192.0/18", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.160.0/22", SOM_SIM1));
-        ROOT.addSubrange(new CIDRRange("171.65.82.6/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.12/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.14/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.16/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.21/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.27/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.47/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.56/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.57/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.62/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.74/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.83/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.92/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.98/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.102/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.112/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.118/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.130/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.136/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.144/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.148/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.163/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.168/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.191/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.194/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.217/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.235/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.237/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.240/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.242/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.245/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.82.253/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.3/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.4/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.8/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.10/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.22/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.28/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.35/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.40/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.91/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.98/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.99/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.110/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.112/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.136/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.169/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.203/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.204/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.206/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.209/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.210/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.215/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.216/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.217/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.220/32", STAFF));
-        ROOT.addSubrange(new CIDRRange("171.65.83.221/32", STAFF));
         ROOT.addSubrange(new CIDRRange("128.12.0.0/16", SU));
         ROOT.addSubrange(new CIDRRange("134.79.0.0/16", SU));
         ROOT.addSubrange(new CIDRRange("171.64.0.0/14", SU));
