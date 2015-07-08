@@ -705,7 +705,9 @@ http://lane.stanford.edu/samples/button-css.html
 
 .event-info {
     background-color:white;
-    padding-left:6px
+    padding-left:6px;
+    /*safari & FF show px of .event background on right so:*/
+    margin-right:-1px;
 }
 
 .event-time {
