@@ -7,11 +7,6 @@ body,select,input,button,textarea {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-/*class="sprite" gets the background sprite*/
-.sprite {
-    background-image : url(../images/sprite-all.png);
-}
-
 .scaled-image {
     width:100%;
     height:auto
