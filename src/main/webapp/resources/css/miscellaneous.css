@@ -52,15 +52,11 @@ em {
 }
 
 .rss-link {
-	background-position: -41px -240px;
-	height: 15px;
-	width: 15px;
-	display: block;
 	float:right;
 }
 
-.rss-link:hover {
-	background-position: -41px -280px;
+.rss-link .fa {
+    color:black;
 }
 
 .announce {
