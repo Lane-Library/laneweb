@@ -690,22 +690,30 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 /*styles for events on homepage*/
-.month {
-	font-weight:bold;
-    color:#820000;
+.event {
+    background-color:#09425A;
+    font-size:13px;
+    margin-bottom:15px
+}
+
+.event-date {
+    color:white;
+    text-align:right;
     text-transform:uppercase;
+    padding:4px
 }
 
-.day {
-    font-size:21px;
-    color:#565347;
-    margin-top:0;
-    padding-bottom:5px;
+.event-info {
+    background-color:white;
+    padding-left:6px;
+    /*safari & FF show px of .event background on right so:*/
+    margin-right:-1px;
 }
 
-.time {
-    color:#820000;
+.event-time {
+    font-weight:bold
 }
+
 .landing{
     padding:0
 }
