@@ -14,8 +14,8 @@
             <action date="2015-07-08" dev="ryanmax" issue="109285" type="update">
                 update 10.252 subnet: LPCH and SHC IPs
             </action>
-            <action date="2015-07-07" dev="ceyates" issue="109251" type="update">
-                update to search-spring-3.0.2
+            <action date="2015-07-13" dev="ceyates" issue="109251" type="update">
+                update to search-spring-3.0.3
             </action>
             <action date="2015-07-09" dev="ceyates" issue="109228" type="update">
                 font awesome for 'show/hide instructions', remove sprite image after
