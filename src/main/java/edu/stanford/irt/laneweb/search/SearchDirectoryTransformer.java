@@ -46,14 +46,17 @@ public class SearchDirectoryTransformer extends AbstractCacheableTransformer imp
     }
 
     private void parseDirectory(final File directory) throws SAXException {
-        for (File file : directory.listFiles()) {
-            if (file.isDirectory() && !".svn".equals(file.getName())) {
-                parseDirectory(file);
-            } else if (file.isFile() && file.canRead() && file.getName().endsWith(".html")) {
-                AttributesImpl attributes = new AttributesImpl();
-                attributes.addAttribute("", "path", "path", "CDATA", file.getAbsolutePath());
-                startElement("", FILE, FILE, attributes);
-                endElement("", FILE, FILE);
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                    parseDirectory(file);
+                } else if (file.isFile() && file.canRead() && file.getName().endsWith(".html")) {
+                    AttributesImpl attributes = new AttributesImpl();
+                    attributes.addAttribute("", "path", "path", "CDATA", file.getAbsolutePath());
+                    startElement("", FILE, FILE, attributes);
+                    endElement("", FILE, FILE);
+                }
             }
         }
     }
