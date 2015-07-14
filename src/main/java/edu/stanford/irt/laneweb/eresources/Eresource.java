@@ -150,9 +150,6 @@ public class Eresource {
         this.available = builder.available;
     }
 
-    protected Eresource() {
-    }
-
     public static EresourceBuilder builder() {
         return new EresourceBuilder();
     }

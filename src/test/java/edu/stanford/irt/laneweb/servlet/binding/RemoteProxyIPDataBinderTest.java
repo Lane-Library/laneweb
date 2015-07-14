@@ -51,14 +51,14 @@ public class RemoteProxyIPDataBinderTest {
         expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
         expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(null);
         expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
-        expect(this.proxyLinks.getProxyLinks(IPGroup.SOM_OTHER, "171.65.1.202")).andReturn(Boolean.FALSE);
+        expect(this.proxyLinks.getProxyLinks(IPGroup.SU, "171.65.1.202")).andReturn(Boolean.FALSE);
         this.session.setAttribute(Model.REMOTE_ADDR, "171.65.1.202");
-        this.session.setAttribute(Model.IPGROUP, IPGroup.SOM_OTHER);
+        this.session.setAttribute(Model.IPGROUP, IPGroup.SU);
         this.session.setAttribute(Model.PROXY_LINKS, Boolean.FALSE);
         replay(this.request, this.session, this.proxyLinks);
         this.dataBinder.bind(this.model, this.request);
         assertFalse((Boolean) this.model.get(Model.PROXY_LINKS));
-        assertEquals(IPGroup.SOM_OTHER, this.model.get(Model.IPGROUP));
+        assertEquals(IPGroup.SU, this.model.get(Model.IPGROUP));
         assertEquals("171.65.1.202", this.model.get(Model.REMOTE_ADDR));
         verify(this.request, this.session, this.proxyLinks);
     }

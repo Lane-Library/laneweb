@@ -14,7 +14,7 @@
         HOST_NODE = "host",
         PATH = "path",
         PROXY = "proxy",
-        PROXY_HOST_PATTERN = "^(?:login\.)?laneproxy.stanford.edu$",
+        PROXY_HOST_PATTERN = "^(?:login\\.)?laneproxy.stanford.edu$",
         PROXY_LOGIN = "proxyLogin",
         PROXY_LOGIN_PATH = "/login",
         SRC = "src",

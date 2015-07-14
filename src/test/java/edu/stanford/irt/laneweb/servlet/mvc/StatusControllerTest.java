@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,8 @@ public class StatusControllerTest {
 
     private HttpServletResponse response;
 
+    private ServletContext servletContext;
+
     private SourceResolver sourceResolver;
 
     private SuggestionManager suggestionManager;
@@ -48,8 +51,11 @@ public class StatusControllerTest {
         this.componentFactory = createMock(ComponentFactory.class);
         this.sourceResolver = createMock(SourceResolver.class);
         this.requestHandler = createMock(SitemapRequestHandler.class);
+        this.servletContext = createMock(ServletContext.class);
+        expect(this.servletContext.getInitParameter("laneweb.context.version")).andReturn("version");
+        replay(this.servletContext);
         this.controller = new StatusController(this.requestHandler, this.componentFactory, this.sourceResolver,
-                this.suggestionManager);
+                this.suggestionManager, this.servletContext);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
     }
@@ -62,7 +68,8 @@ public class StatusControllerTest {
         replay(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
                 this.requestHandler);
         String status = this.controller.getStatus(this.request, this.response);
-        assertSame(0, status.indexOf("[ERROR] suggestions"));
+        assertSame(16, status.indexOf("[ERROR] suggestions"));
+        assertSame(0, status.indexOf("laneweb-version"));
         assertTrue(status.indexOf("[ERROR] index") > 0);
         verify(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
                 this.requestHandler);
@@ -75,7 +82,8 @@ public class StatusControllerTest {
         replay(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
                 this.requestHandler);
         String status = this.controller.getStatus(this.request, this.response);
-        assertSame(0, status.indexOf("[OK] suggestions"));
+        assertSame(0, status.indexOf("laneweb-version"));
+        assertSame(16, status.indexOf("[OK] suggestions"));
         assertTrue(status.indexOf("[OK] index") > 0);
         verify(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
                 this.requestHandler);
@@ -103,7 +111,8 @@ public class StatusControllerTest {
         replay(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
                 this.requestHandler);
         String status = this.controller.getStatus(this.request, this.response);
-        assertSame(0, status.indexOf("[WARN] suggestions"));
+        assertSame(0, status.indexOf("laneweb-version"));
+        assertSame(16, status.indexOf("[WARN] suggestions"));
         assertTrue(status.indexOf("[WARN] index") > 0);
         verify(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
                 this.requestHandler);
