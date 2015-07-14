@@ -92,7 +92,7 @@ public class SHCLoginController {
         String userid = (String) session.getAttribute(Model.USER_ID);
         if (userid == null) {
             LDAPData ldapData = this.ldapDataAccess.getLdapDataForUnivid(univid);
-            userid = (ldapData.isActive()) ? ldapData.getSunetId() + "@stanford.edu" : null;
+            userid = ldapData.isActive() ? ldapData.getSunetId() + "@stanford.edu" : null;
             if (userid != null) {
                 session.setAttribute(Model.USER_ID, userid);
             }
