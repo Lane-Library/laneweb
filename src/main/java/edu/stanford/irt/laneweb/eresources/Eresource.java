@@ -150,6 +150,10 @@ public class Eresource {
         this.available = builder.available;
     }
 
+    protected Eresource() {
+        // spring-data-solr mapping needs this constructor
+    }
+
     public static EresourceBuilder builder() {
         return new EresourceBuilder();
     }
