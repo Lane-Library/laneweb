@@ -51,9 +51,12 @@
                     <xsl:value-of select="$query"/>
                 </xsl:when>
                 <xsl:when test="$region">
-                    <xsl:value-of select="replace($region,'--',': ')"/>
+                	<xsl:value-of select="/doc/b:bassetts/b:bassett[1]/b:regions/b:region/@b:name"/>
+                	<xsl:if test="contains( $region, '--')">
+                		<xsl:text>: </xsl:text>
+                		<xsl:value-of select="/doc/b:bassetts/b:bassett[1]/b:regions/b:region/b:sub_region/text()"/>
+                	</xsl:if>    
                 </xsl:when>
-                <xsl:otherwise><xsl:value-of select="/doc/b:bassetts/b:bassett/b:regions/b:region[1]/@b:name"/></xsl:otherwise>
             </xsl:choose>
         </xsl:copy>
                     
@@ -110,7 +113,7 @@
         <xsl:attribute name="href">
               <xsl:value-of select="."/>
                  <xsl:value-of select="$query-str"/>        
-                 <xsl:text>&amp;pageNumber=</xsl:text>
+                 <xsl:text>&amp;page-number=</xsl:text>
                  <xsl:value-of select="$page-number"/>
           </xsl:attribute> 
      </xsl:template> 
@@ -119,7 +122,7 @@
         <xsl:attribute name="href">
               <xsl:value-of select="."/>
                  <xsl:value-of select="$query-str"/>
-                 <xsl:text>&amp;t=diagram&amp;pageNumber=</xsl:text>
+                 <xsl:text>&amp;t=diagram&amp;page-number=</xsl:text>
                  <xsl:value-of select="$page-number"/>
           </xsl:attribute>
      </xsl:template> 

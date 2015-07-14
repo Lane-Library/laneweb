@@ -151,6 +151,7 @@ public class Eresource {
     }
 
     protected Eresource() {
+        // spring-data-solr mapping needs this constructor
     }
 
     public static EresourceBuilder builder() {

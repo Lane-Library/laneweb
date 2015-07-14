@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -28,19 +29,25 @@ public class StatusController {
 
     private SuggestionManager suggestionManager;
 
+    private String version;
+
     @Autowired
     public StatusController(
             @Qualifier("edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap") final SitemapRequestHandler requestHandler,
-            final ComponentFactory componentFactory, final SourceResolver sourceResolver,
-            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager suggestionManager) {
+            final ComponentFactory componentFactory,
+            final SourceResolver sourceResolver,
+            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager suggestionManager,
+            final ServletContext servletContext) {
         this.requestHandler = requestHandler;
         this.suggestionManager = suggestionManager;
+        this.version = new StringBuilder("laneweb-").append(servletContext.getInitParameter("laneweb.context.version"))
+                .append('\n').toString();
     }
 
     @RequestMapping(value = "/status.txt", produces = "text/plain; charset=utf-8")
     @ResponseBody
     public String getStatus(final HttpServletRequest request, final HttpServletResponse response) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(this.version);
         getSuggestionStatus(sb);
         sb.append('\n');
         getIndexStatus(sb, request, response);

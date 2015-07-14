@@ -393,7 +393,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         for (Image image : images) {
             generateImages(xmlConsumer, image, index);
             if (index % IMAGE_BY_ROW == 3 || images.size() - 1 == index) {
-                generateDetailImage(xmlConsumer, (index / IMAGE_BY_ROW));
+                generateDetailImage(xmlConsumer, index / IMAGE_BY_ROW);
             }
             index++;
         }

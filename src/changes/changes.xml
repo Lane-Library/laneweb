@@ -7,6 +7,49 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-07-13" version="3.0.10" description="3.0.10 bug fix release">
+            <action date="2015-07-09" dev="olgary" issue="109304" type="update">
+                change the suggestion words in the search box for Bio-Image search
+            </action>
+            <action date="2015-07-08" dev="ryanmax" issue="109285" type="update">
+                update 10.252 subnet: LPCH and SHC IPs
+            </action>
+            <action date="2015-07-13" dev="ceyates" issue="109251" type="update">
+                update to search-spring-3.0.3
+            </action>
+            <action date="2015-07-09" dev="ceyates" issue="109228" type="update">
+                font awesome for 'show/hide instructions', remove sprite image after
+            </action>
+            <action date="2015-07-07" dev="olgary" issue="109223" type="remove">
+                remove images from history footer: footer-logos.png, logo-sprite-globalfooter.png
+            </action>
+            <action date="2015-07-08" dev="ceyates" issue="109221" type="update">
+                combine gift.png and gift-transp.png into one 
+            </action>
+            <action date="2015-07-07" dev="ryanmax" issue="109211" type="update">
+                changes to IPGroup reporting: stop reporting STAFF, SOM_xxx
+            </action>
+            <action date="2015-07-08" dev="ceyates" issue="109171" type="update">
+                events styles on history site to match Lane's
+            </action>
+            <action date="2015-07-01" dev="ceyates" issue="109008" type="add">
+                add version information to the status page
+            </action>
+            <action date="2015-06-30" dev="ceyates" issue="108847" type="add">
+                respond with error code 400 Bad Request for requests with bad parameters
+            </action>
+        </release>
+        <release date="2015-06-29" version="3.0.9" description="3.0.9 bug fix release">
+            <action date="2015-06-29" dev="ceyates" issue="108925" type="update">
+                update search to version 3.0.0
+            </action>
+            <action date="2015-06-25" dev="ceyates" issue="108718" type="fix">
+                nursing and neurology out of order in portals dropdown menu
+            </action>
+            <action date="2015-06-22" dev="ryanmax" issue="108657" type="add">
+                block excessive use of laneweb email forms
+            </action>
+        </release>
         <release date="2015-06-22" version="3.0.8" description="3.0.8 bug fix release">
             <action date="2015-06-22" dev="alainb" issue="108667" type="update">
                 New bio-search image UI
