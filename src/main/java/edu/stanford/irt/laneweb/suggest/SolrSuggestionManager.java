@@ -42,7 +42,11 @@ public class SolrSuggestionManager implements SuggestionManager {
     private List<Suggestion> suggestionsFromEresources(final List<Eresource> eresources) {
         List<Suggestion> suggestions = new LinkedList<Suggestion>();
         for (Eresource eresource : eresources) {
-            suggestions.add(new Suggestion(eresource.getId(), eresource.getTitle()));
+            String title = eresource.getTitle();
+            if (title.endsWith(".")) {
+                title = title.substring(0, title.length() - 1);
+            }
+            suggestions.add(new Suggestion(eresource.getId(), title));
         }
         return suggestions;
     }
