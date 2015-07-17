@@ -80,7 +80,7 @@ public class SubjectSourceTest {
         expectLastCall().times(2);
         expect(this.loginContext.getSubject()).andReturn(this.subject).times(2);
         expect(this.subject.getPrivateCredentials(KerberosTicket.class)).andReturn(
-                Collections.<KerberosTicket> emptySet()).times(2);
+                Collections.emptySet()).times(2);
         replay(this.log, this.loginContext, this.subject, this.ticket);
         assertEquals(this.subject, this.subjectSource.getSubject());
         assertEquals(this.subject, this.subjectSource.getSubject());

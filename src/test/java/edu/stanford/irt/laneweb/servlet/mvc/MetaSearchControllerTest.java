@@ -89,7 +89,7 @@ public class MetaSearchControllerTest {
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
-        expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
+        expect(this.result.getChildren()).andReturn(Collections.emptySet());
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
         expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
@@ -119,7 +119,7 @@ public class MetaSearchControllerTest {
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
-        expect(this.result.getChildren()).andReturn(Collections.<Result> emptySet());
+        expect(this.result.getChildren()).andReturn(Collections.emptySet());
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
         expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));

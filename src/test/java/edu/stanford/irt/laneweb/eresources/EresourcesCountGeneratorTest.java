@@ -63,7 +63,7 @@ public class EresourcesCountGeneratorTest {
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         replay(this.collectionManager, this.xmlConsumer);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.xmlConsumer);
     }
@@ -89,7 +89,7 @@ public class EresourcesCountGeneratorTest {
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         replay(this.collectionManager, this.xmlConsumer);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, ""));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, ""));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.xmlConsumer);
     }
@@ -115,7 +115,7 @@ public class EresourcesCountGeneratorTest {
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         replay(this.collectionManager, this.xmlConsumer);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, null));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, null));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.xmlConsumer);
     }
@@ -127,7 +127,7 @@ public class EresourcesCountGeneratorTest {
         this.xmlConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(this.collectionManager, this.xmlConsumer);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         try {
             this.generator.doGenerate(this.xmlConsumer);
             fail();

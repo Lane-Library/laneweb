@@ -58,7 +58,7 @@ public class ResourceSearchGeneratorTest {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put(Model.QUERY, "query");
         model.put("resources", Collections.singleton("resource-2-1"));
-        this.generator.setParameters(Collections.<String, String> emptyMap());
+        this.generator.setParameters(Collections.emptyMap());
         this.generator.setModel(model);
         this.generator.doSearch("query");
         verify(this.manager, this.saxStrategy, this.result);
@@ -97,7 +97,7 @@ public class ResourceSearchGeneratorTest {
         expect(this.result.getId()).andReturn("resource-2-2");
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         replay(this.manager, this.saxStrategy, this.result);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("resource-list", "resource-1-2,resource-2-1,foo");
         this.generator.setParameters(parameters);
@@ -108,9 +108,9 @@ public class ResourceSearchGeneratorTest {
     @Test
     public void testSetParametersNullResourceList() {
         replay(this.manager, this.saxStrategy, this.result);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         try {
-            this.generator.setParameters(Collections.<String, String> emptyMap());
+            this.generator.setParameters(Collections.emptyMap());
         } catch (NullPointerException e) {
         }
         verify(this.manager, this.saxStrategy, this.result);

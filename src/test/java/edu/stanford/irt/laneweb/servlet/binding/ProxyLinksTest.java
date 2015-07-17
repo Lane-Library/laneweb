@@ -16,8 +16,8 @@ public class ProxyLinksTest {
 
     @Before
     public void setUp() throws Exception {
-        this.proxyLinks = new ProxyLinks(Collections.<String> singletonList("^171\\.65\\.44\\.\\S+"),
-                Collections.<String> singletonList("^171\\.6[4-7]\\.\\S+"));
+        this.proxyLinks = new ProxyLinks(Collections.singletonList("^171\\.65\\.44\\.\\S+"),
+                Collections.singletonList("^171\\.6[4-7]\\.\\S+"));
     }
 
     @Test

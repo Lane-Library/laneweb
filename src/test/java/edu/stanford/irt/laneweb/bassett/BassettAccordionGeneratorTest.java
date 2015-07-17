@@ -41,7 +41,7 @@ public class BassettAccordionGeneratorTest {
         expect(this.collectionManager.searchCount("query")).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
         replay(this.collectionManager, this.saxStrategy, this.xmlConsumer);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.saxStrategy, this.xmlConsumer);
     }
@@ -51,7 +51,7 @@ public class BassettAccordionGeneratorTest {
     public void testDoGenerateEmptyQuery() {
         this.saxStrategy.toSAX(isA(Map.class), eq(this.xmlConsumer));
         replay(this.collectionManager, this.saxStrategy, this.xmlConsumer);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, ""));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, ""));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.saxStrategy, this.xmlConsumer);
     }

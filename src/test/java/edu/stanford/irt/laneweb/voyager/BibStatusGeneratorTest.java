@@ -71,7 +71,7 @@ public class BibStatusGeneratorTest {
         this.xmlConsumer.endElement("http://lane.stanford.edu/voyager/items/ns", "bibs", "bibs");
         this.xmlConsumer.endDocument();
         replay(this.parser, this.resolver, this.xmlConsumer, this.source);
-        this.generator.setParameters(Collections.<String, String> emptyMap());
+        this.generator.setParameters(Collections.emptyMap());
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.parser, this.resolver, this.xmlConsumer, this.source);
     }

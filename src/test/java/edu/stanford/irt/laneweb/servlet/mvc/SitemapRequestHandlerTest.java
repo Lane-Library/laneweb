@@ -226,6 +226,6 @@ public class SitemapRequestHandlerTest {
             fail();
         } catch (IllegalArgumentException e) {
         }
-        this.handler.setMethodsNotAllowed(Collections.<String> emptySet());
+        this.handler.setMethodsNotAllowed(Collections.emptySet());
     }
 }

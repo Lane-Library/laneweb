@@ -72,7 +72,7 @@ public class AbstractEresourcesGeneratorTest {
     @Test
     public void testDoGenerate() {
         expect(this.eresource.getTitle()).andReturn("title").times(2);
-        this.generator.setModel(Collections.<String, Object> emptyMap());
+        this.generator.setModel(Collections.emptyMap());
         this.saxStrategy.toSAX(isA(PagingEresourceList.class), eq(this.xmlConsumer));
         replay(this.collectionManager, this.eresource, this.saxStrategy, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);
@@ -114,19 +114,19 @@ public class AbstractEresourcesGeneratorTest {
 
     @Test
     public void testSetModel() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "2"));
+        this.generator.setModel(Collections.singletonMap(Model.PAGE, "2"));
         assertEquals("p=1", this.generator.getKey());
     }
 
     @Test
     public void testSetModelAll() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "all"));
+        this.generator.setModel(Collections.singletonMap(Model.PAGE, "all"));
         assertEquals("p=-1", this.generator.getKey());
     }
 
     @Test
     public void testSetModelNumberFormatException() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "page"));
+        this.generator.setModel(Collections.singletonMap(Model.PAGE, "page"));
         assertEquals("p=0", this.generator.getKey());
     }
 
@@ -138,7 +138,7 @@ public class AbstractEresourcesGeneratorTest {
 
     @Test
     public void testSetParametersNoValidity() {
-        this.generator.setParameters(Collections.<String, String> emptyMap());
+        this.generator.setParameters(Collections.emptyMap());
         assertTrue(this.generator.getValidity().isValid());
     }
 }

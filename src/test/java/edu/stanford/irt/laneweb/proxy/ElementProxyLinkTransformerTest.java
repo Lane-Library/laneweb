@@ -46,7 +46,7 @@ public class ElementProxyLinkTransformerTest {
 
     @Test
     public void testInElement() throws SAXException {
-        this.transformer.setModel(Collections.<String, Object> singletonMap(Model.BASE_PROXY_URL, "url"));
+        this.transformer.setModel(Collections.singletonMap(Model.BASE_PROXY_URL, "url"));
         this.xmlConsumer.startElement("", "elementName", "", null);
         this.xmlConsumer.characters(aryEq("urlfoobar".toCharArray()), eq(0), eq("urlfoobar".length()));
         this.xmlConsumer.endElement("", "elementName", "");

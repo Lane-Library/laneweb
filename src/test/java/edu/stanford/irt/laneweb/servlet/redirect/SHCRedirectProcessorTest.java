@@ -19,7 +19,7 @@ public class SHCRedirectProcessorTest {
 
     @Test
     public void testGetRedirectURL() {
-        this.processor.setRedirectMap(Collections.<String, String> singletonMap("/shc/anesthesia.html(?:\\??)(.*)",
+        this.processor.setRedirectMap(Collections.singletonMap("/shc/anesthesia.html(?:\\??)(.*)",
                 "/portals/anesthesia.html?sourceid=shc&source=/portals/anesthesia.html&$1"));
         assertEquals("/portals/anesthesia.html?sourceid=shc&source=/portals/anesthesia.html&q=query&foo=bar",
                 this.processor.getRedirectURL("/shc/anesthesia.html", "", "q=query&foo=bar"));
@@ -29,7 +29,7 @@ public class SHCRedirectProcessorTest {
 
     @Test
     public void testHttpRedirectWithURLEncodedQuery() {
-        this.processor.setRedirectMap(Collections.<String, String> singletonMap("/shc/radiology.html(?:\\?q=?)(.*)",
+        this.processor.setRedirectMap(Collections.singletonMap("/shc/radiology.html(?:\\?q=?)(.*)",
                 "http://www.guideline.gov/search/results.aspx?113=666&term=$1"));
         assertEquals("http://www.guideline.gov/search/results.aspx?113=666&term=femoral+fracture",
                 this.processor.getRedirectURL("/shc/radiology.html", "", "q=femoral+fracture"));

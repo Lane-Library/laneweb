@@ -40,7 +40,7 @@ public class LDAPDataAccessTest {
         this.log = createMock(Logger.class);
         this.subjectSource = createMock(SubjectSource.class);
         this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.subjectSource,
-                Collections.<String> emptySet(), this.log);
+                Collections.emptySet(), this.log);
         this.ldapData = createMock(LDAPData.class);
     }
 
@@ -64,7 +64,7 @@ public class LDAPDataAccessTest {
         expect(
                 this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
                         (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(
-                Collections.<LDAPData> emptyList());
+                Collections.emptyList());
         replay(this.subjectSource, this.ldapTemplate);
         this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
         verify(this.subjectSource, this.ldapTemplate);

@@ -67,7 +67,7 @@ public class SQLBookmarkDAOTest {
         this.callableStatement = createMock(CallableStatement.class);
         this.bookmark = new Bookmark("label", "url");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new ObjectOutputStream(baos).writeObject(Collections.<Object> singletonList(this.bookmark));
+        new ObjectOutputStream(baos).writeObject(Collections.singletonList(this.bookmark));
         this.bytes = baos.toByteArray();
     }
 
@@ -209,7 +209,7 @@ public class SQLBookmarkDAOTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
-        this.dao.saveLinks("userid", Collections.<Object> singletonList(this.bookmark));
+        this.dao.saveLinks("userid", Collections.singletonList(this.bookmark));
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
     }
 
@@ -227,7 +227,7 @@ public class SQLBookmarkDAOTest {
     public void testSaveLinksNullUserid() throws SQLException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
-            this.dao.saveLinks(null, Collections.<Object> singletonList(this.bookmark));
+            this.dao.saveLinks(null, Collections.singletonList(this.bookmark));
         } catch (NullPointerException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
@@ -246,7 +246,7 @@ public class SQLBookmarkDAOTest {
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
-            this.dao.saveLinks("userid", Collections.<Object> emptyList());
+            this.dao.saveLinks("userid", Collections.emptyList());
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
@@ -263,7 +263,7 @@ public class SQLBookmarkDAOTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
-        this.dao.saveLinks("userid", Collections.<Object> emptyList());
+        this.dao.saveLinks("userid", Collections.emptyList());
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
     }
 
@@ -279,7 +279,7 @@ public class SQLBookmarkDAOTest {
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
-            this.dao.saveLinks("userid", Collections.<Object> emptyList());
+            this.dao.saveLinks("userid", Collections.emptyList());
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
@@ -308,7 +308,7 @@ public class SQLBookmarkDAOTest {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
                 output);
         try {
-            this.dao.saveLinks("userid", Collections.<Object> singletonList(this.bookmark));
+            this.dao.saveLinks("userid", Collections.singletonList(this.bookmark));
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
@@ -339,7 +339,7 @@ public class SQLBookmarkDAOTest {
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
                 output);
         try {
-            this.dao.saveLinks("userid", Collections.<Object> singletonList(this.bookmark));
+            this.dao.saveLinks("userid", Collections.singletonList(this.bookmark));
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
@@ -351,7 +351,7 @@ public class SQLBookmarkDAOTest {
         expect(this.dataSource.getConnection()).andThrow(new SQLException());
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
-            this.dao.saveLinks("userid", Collections.<Object> emptyList());
+            this.dao.saveLinks("userid", Collections.emptyList());
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);

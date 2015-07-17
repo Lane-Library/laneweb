@@ -47,6 +47,6 @@ public class AbstractSearchGeneratorTest {
 
     @Test
     public void testSetModel() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
     }
 }

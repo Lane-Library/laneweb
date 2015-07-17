@@ -25,25 +25,25 @@ public class MeSHEresourcesGeneratorTest {
 
     @Test
     public void setModelMesh() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
+        this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
         assertEquals("p=0;t=;m=mesh", this.generator.createKey().toString());
     }
 
     @Test
     public void setModelNull() {
-        this.generator.setModel(Collections.<String, Object> emptyMap());
+        this.generator.setModel(Collections.emptyMap());
         assertEquals("p=0;t=;m=", this.generator.createKey().toString());
     }
 
     @Test
     public void setParametersNoType() {
-        this.generator.setParameters(Collections.<String, String> emptyMap());
+        this.generator.setParameters(Collections.emptyMap());
         assertEquals("p=0;t=;m=", this.generator.createKey().toString());
     }
 
     @Test
     public void setParametersType() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         assertEquals("p=0;t=type;m=", this.generator.createKey().toString());
     }
 
@@ -57,20 +57,20 @@ public class MeSHEresourcesGeneratorTest {
 
     @Test
     public void testAIDSHIV() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "aids/hiv"));
+        this.generator.setModel(Collections.singletonMap(Model.MESH, "aids/hiv"));
         assertEquals("AIDS/HIV", this.generator.getHeading());
     }
 
     @Test
     public void testAndSpaceDash() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "foo and bar-baz of mesh"));
+        this.generator.setModel(Collections.singletonMap(Model.MESH, "foo and bar-baz of mesh"));
         assertEquals("Foo and Bar-Baz of Mesh", this.generator.getHeading());
     }
 
     @Test
     public void testGetEresourceList() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
+        this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getMesh("type", "mesh")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
@@ -79,7 +79,7 @@ public class MeSHEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListNullMesh() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         replay(this.collectionManager);
         assertEquals(0, this.generator.getEresourceList(this.collectionManager).size());
         verify(this.collectionManager);
@@ -87,7 +87,7 @@ public class MeSHEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListNullType() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.MESH, "mesh"));
+        this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
         replay(this.collectionManager);
         assertEquals(0, this.generator.getEresourceList(this.collectionManager).size());
         verify(this.collectionManager);

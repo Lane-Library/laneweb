@@ -51,9 +51,9 @@ public class EngineSearchGeneratorTest {
     public void testDoSearchStringEngines() {
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(null);
         replay(this.manager, this.saxStrategy);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ENGINES,
+        this.generator.setModel(Collections.singletonMap(Model.ENGINES,
                 Arrays.asList(new String[] { "a", "b", "c" })));
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c,d"));
+        this.generator.setParameters(Collections.singletonMap(Model.ENGINES, "a,b,c,d"));
         this.generator.doSearch("query");
         verify(this.manager, this.saxStrategy);
     }
@@ -63,7 +63,7 @@ public class EngineSearchGeneratorTest {
     public void testDoSearchStringParameterEngines() {
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(null);
         replay(this.manager, this.saxStrategy);
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c"));
+        this.generator.setParameters(Collections.singletonMap(Model.ENGINES, "a,b,c"));
         this.generator.doSearch("query");
         verify(this.manager, this.saxStrategy);
     }
@@ -71,9 +71,9 @@ public class EngineSearchGeneratorTest {
     @Test
     public void testSetParametersEnginesNull() {
         replay(this.manager, this.saxStrategy);
-        this.generator.setModel(Collections.<String, Object> emptyMap());
+        this.generator.setModel(Collections.emptyMap());
         try {
-            this.generator.setParameters(Collections.<String, String> emptyMap());
+            this.generator.setParameters(Collections.emptyMap());
         } catch (NullPointerException e) {
         }
         verify(this.manager, this.saxStrategy);

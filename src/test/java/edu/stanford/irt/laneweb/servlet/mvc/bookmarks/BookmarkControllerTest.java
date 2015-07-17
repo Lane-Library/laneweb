@@ -78,9 +78,9 @@ public class BookmarkControllerTest {
 
     @Test
     public void testSaveLinks() {
-        this.bookmarkDAO.saveLinks("userid", Collections.<Object> emptyList());
+        this.bookmarkDAO.saveLinks("userid", Collections.emptyList());
         replay(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
-        this.controller.saveLinks("userid", Collections.<Object> emptyList());
+        this.controller.saveLinks("userid", Collections.emptyList());
         verify(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
     }
 }

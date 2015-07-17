@@ -55,19 +55,19 @@ public class AbstractPagingSearchResultGeneratorTest {
 
     @Test
     public void testDoSearchStringAll() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "all"));
+        this.generator.setModel(Collections.singletonMap(Model.PAGE, "all"));
         assertEquals(-1, this.generator.doSearch("query").getPagingData().getPage());
     }
 
     @Test
     public void testDoSearchStringNFE() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "foo"));
+        this.generator.setModel(Collections.singletonMap(Model.PAGE, "foo"));
         assertEquals(0, this.generator.doSearch("query").getPagingData().getPage());
     }
 
     @Test
     public void testDoSearchStringPage1() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PAGE, "2"));
+        this.generator.setModel(Collections.singletonMap(Model.PAGE, "2"));
         assertEquals(1, this.generator.doSearch("query").getPagingData().getPage());
     }
 }

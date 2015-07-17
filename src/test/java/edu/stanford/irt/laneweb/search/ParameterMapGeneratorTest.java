@@ -44,7 +44,7 @@ public class ParameterMapGeneratorTest {
         Capture<SAXResult> saxResultCapture = newCapture();
         Map<String, String[]> parameterMap = new HashMap<String, String[]>();
         parameterMap.put("foo", new String[] { "bar", "baz" });
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.PARAMETER_MAP, parameterMap));
+        this.generator.setModel(Collections.singletonMap(Model.PARAMETER_MAP, parameterMap));
         this.marshaller.marshal(capture(mapCapture), capture(saxResultCapture));
         replay(this.marshaller);
         this.generator.doGenerate(this.xmlConsumer);
