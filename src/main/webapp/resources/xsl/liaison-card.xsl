@@ -14,19 +14,14 @@
       <div class="business-card">
         <h3>Your Liaison</h3>
         <div class="yui3-g">
-          <div class="yui3-u-1-4">
-            <a href="{$liaison-profile-link}"><xsl:copy-of select=".//h:img[contains(@class,'liaison-image')]"/></a>
-          </div>
-          <div class="yui3-u-3-4">
-            <a href="{$liaison-profile-link}"><xsl:value-of select=".//h:span[@class='liaison-name']"/></a>
-            <br />
-            <a href="{$liaison-profile-link}"><i
-                  class="fa fa-users"></i> CAP Profile</a>
-            <br />
-            <xsl:copy-of select=".//h:a[@class='liaison-email-link']"/>
-            <br />
-            <xsl:copy-of select=".//*[@class='liaison-phone']/text()"/>
-          </div>
+          <xsl:choose>
+            <xsl:when test="$liaison = 'tbd'">
+              <xsl:call-template name="tbd"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:call-template name="liaison"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </div>
       </div>
     </div>
@@ -37,6 +32,31 @@
           class="button"> <span><i class="icon fa fa-users"></i>Lane Virtual Meeting Room</span><i class="icon fa fa-arrow-right"></i>
         </a>
     </p>
+  </xsl:template>
+  
+  <xsl:template name="tbd">
+    <div class="yui3-u-1-4">
+    </div>
+    <div class="yui3-u-3-4">
+      <a href="/about/liaisons.html#tbd"><xsl:value-of select=".//h:span[@class='liaison-name']"/></a>
+    </div>
+  </xsl:template>
+  
+  <xsl:template name="liaison">
+    <xsl:variable name="liaison-profile-link" select=".//h:a[@class='liaison-profile-link']/@href"/>
+    <div class="yui3-u-1-4">
+      <a href="{$liaison-profile-link}"><xsl:copy-of select=".//h:img[contains(@class,'liaison-image')]"/></a>
+    </div>
+    <div class="yui3-u-3-4">
+      <a href="{$liaison-profile-link}"><xsl:value-of select=".//h:span[@class='liaison-name']"/></a>
+      <br />
+      <a href="{$liaison-profile-link}"><i
+        class="fa fa-users"></i> CAP Profile</a>
+      <br />
+      <xsl:copy-of select=".//h:a[@class='liaison-email-link']"/>
+      <br />
+      <xsl:copy-of select=".//*[@class='liaison-phone']/text()"/>
+    </div>
   </xsl:template>
     
   <xsl:template match="text()"/>
