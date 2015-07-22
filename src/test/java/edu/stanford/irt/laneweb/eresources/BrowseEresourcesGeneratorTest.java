@@ -32,7 +32,7 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testEncodedSubset() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.SUBSET, "subset%20space"));
+        this.generator.setParameters(Collections.singletonMap(Model.SUBSET, "subset%20space"));
         expect(this.collectionManager.getSubset("subset space")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
@@ -42,8 +42,8 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testEncodedType() {
-        this.generator.setModel(Collections.<String, Object> emptyMap());
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type%20space"));
+        this.generator.setModel(Collections.emptyMap());
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type%20space"));
         expect(this.collectionManager.getType("type space")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
@@ -58,8 +58,8 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListType() {
-        this.generator.setModel(Collections.<String, Object> emptyMap());
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
+        this.generator.setModel(Collections.emptyMap());
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
@@ -68,8 +68,8 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListTypeAll() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ALPHA, "all"));
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
+        this.generator.setModel(Collections.singletonMap(Model.ALPHA, "all"));
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
@@ -79,8 +79,8 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListTypeAlpha() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ALPHA, "a"));
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
+        this.generator.setModel(Collections.singletonMap(Model.ALPHA, "a"));
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getType("type", 'a')).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
@@ -90,8 +90,8 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListTypeAlphaString() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.ALPHA, "abc"));
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TYPE, "type"));
+        this.generator.setModel(Collections.singletonMap(Model.ALPHA, "abc"));
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getType("type", 'a')).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
@@ -101,7 +101,7 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListTypeNoAlpha() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TYPE, "type"));
+        this.generator.setModel(Collections.singletonMap(Model.TYPE, "type"));
         expect(this.collectionManager.getType("type")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);
@@ -111,7 +111,7 @@ public class BrowseEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceSubset() {
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.SUBSET, "subset"));
+        this.generator.setParameters(Collections.singletonMap(Model.SUBSET, "subset"));
         expect(this.collectionManager.getSubset("subset")).andReturn(null);
         replay(this.collectionManager);
         this.generator.getEresourceList(this.collectionManager);

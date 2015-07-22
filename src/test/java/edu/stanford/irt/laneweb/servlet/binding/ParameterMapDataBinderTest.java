@@ -35,7 +35,7 @@ public class ParameterMapDataBinderTest {
 
     @Test
     public void testBindEmptyMap() {
-        expect(this.request.getParameterMap()).andReturn(Collections.<String, String[]> emptyMap());
+        expect(this.request.getParameterMap()).andReturn(Collections.emptyMap());
         replay(this.request);
         this.binder.bind(this.model, this.request);
         verify(this.request);

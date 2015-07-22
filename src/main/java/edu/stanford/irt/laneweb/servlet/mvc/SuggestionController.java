@@ -26,7 +26,7 @@ import edu.stanford.irt.suggest.SuggestionManager;
 public class SuggestionController {
 
     private static final Map<String, List<String>> EMPTY_SUGGESTIONS = Collections.singletonMap("suggest",
-            Collections.<String> emptyList());
+            Collections.emptyList());
 
     private static final Pattern ER_PATTERN = Pattern
             .compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");

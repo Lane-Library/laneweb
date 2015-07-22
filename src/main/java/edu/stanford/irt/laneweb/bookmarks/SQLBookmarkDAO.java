@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.bookmarks;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -120,7 +121,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 cstmt.executeUpdate();
                 Blob blob = cstmt.getBlob(2);
                 oop = new ObjectOutputStream(blob.setBinaryStream(1));
-                oop.writeObject(links);
+                oop.writeObject(Serializable.class.cast(links));
                 oop.flush();
             }
             conn.commit();

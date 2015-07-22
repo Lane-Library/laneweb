@@ -130,9 +130,9 @@ public class EMailSender {
             for (Entry<String, Integer> entry : this.sentMailCounter.entrySet()) {
                 int newCount = entry.getValue().intValue() - MAX_MAILS_PER_IP;
                 if (newCount <= 0) {
-                    this.sentMailCounter.remove(entry.getKey());
+                    this.sentMailCounter.entrySet().remove(entry);
                 } else {
-                    this.sentMailCounter.put(entry.getKey(), Integer.valueOf(newCount));
+                    entry.setValue(Integer.valueOf(newCount));
                 }
             }
             this.lastUpdate = now;

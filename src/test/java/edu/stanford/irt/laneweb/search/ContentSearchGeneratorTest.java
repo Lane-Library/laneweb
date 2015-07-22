@@ -61,11 +61,11 @@ public class ContentSearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testGetSearchResultsEngines() {
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TIMEOUT, "1000"));
+        this.generator.setModel(Collections.singletonMap(Model.TIMEOUT, "1000"));
         expect(this.metasearchManager.search(isA(Query.class), isA(Collection.class), eq(1000L))).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.ENGINES, "a,b,c"));
+        this.generator.setParameters(Collections.singletonMap(Model.ENGINES, "a,b,c"));
         this.generator.getSearchResults("query");
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
@@ -84,7 +84,7 @@ public class ContentSearchGeneratorTest {
         expect(this.metasearchManager.search(isA(Query.class), isA(Collection.class), eq(1000L))).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TIMEOUT, "1000"));
+        this.generator.setModel(Collections.singletonMap(Model.TIMEOUT, "1000"));
         this.generator.getSearchResults("query");
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
@@ -95,7 +95,7 @@ public class ContentSearchGeneratorTest {
         expect(this.metasearchManager.search(isA(Query.class), isA(Collection.class), eq(20000L))).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.TIMEOUT, "foo"));
+        this.generator.setModel(Collections.singletonMap(Model.TIMEOUT, "foo"));
         this.generator.getSearchResults("query");
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
@@ -106,8 +106,8 @@ public class ContentSearchGeneratorTest {
         expect(this.metasearchManager.search(isA(Query.class), isA(Collection.class), eq(1000L))).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(null);
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
-        this.generator.setModel(Collections.<String, Object> emptyMap());
-        this.generator.setParameters(Collections.<String, String> singletonMap(Model.TIMEOUT, "1000"));
+        this.generator.setModel(Collections.emptyMap());
+        this.generator.setParameters(Collections.singletonMap(Model.TIMEOUT, "1000"));
         this.generator.getSearchResults("query");
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }

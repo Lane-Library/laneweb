@@ -39,8 +39,8 @@ public class ValidParameterFilterTest {
     }
 
     @Test
-    public void testInternalDoFilterEmptyParameterNames() throws IOException, ServletException {
-        expect(this.request.getParameterNames()).andReturn(Collections.emptyEnumeration());
+    public void testInternalDoFilterEmptyParameterMap() throws IOException, ServletException {
+        expect(this.request.getParameterMap()).andReturn(Collections.emptyMap());
         this.chain.doFilter(this.request, this.response);
         replay(this.request, this.response, this.chain);
         this.filter.internalDoFilter(this.request, this.response, this.chain);
@@ -49,7 +49,7 @@ public class ValidParameterFilterTest {
 
     @Test
     public void testInternalDoFilterInvalidParameter() throws IOException, ServletException {
-        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.singleton("invalid")));
+        expect(this.request.getParameterMap()).andReturn(Collections.singletonMap("invalid", new String[] { "value" }));
         this.response.setStatus(400);
         expect(this.request.getServletPath()).andReturn("servletPath");
         expect(this.request.getQueryString()).andReturn("queryString");
@@ -60,8 +60,8 @@ public class ValidParameterFilterTest {
     }
 
     @Test
-    public void testInternalDoFilterNullParameterNames() throws IOException, ServletException {
-        expect(this.request.getParameterNames()).andReturn(null);
+    public void testInternalDoFilterNullParameterMap() throws IOException, ServletException {
+        expect(this.request.getParameterMap()).andReturn(null);
         this.chain.doFilter(this.request, this.response);
         replay(this.request, this.response, this.chain);
         this.filter.internalDoFilter(this.request, this.response, this.chain);
@@ -70,7 +70,7 @@ public class ValidParameterFilterTest {
 
     @Test
     public void testInternalDoFilterValidParameter() throws IOException, ServletException {
-        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.singleton("page")));
+        expect(this.request.getParameterMap()).andReturn(Collections.singletonMap("page", new String[] { "1" }));
         this.chain.doFilter(this.request, this.response);
         replay(this.request, this.response, this.chain);
         this.filter.internalDoFilter(this.request, this.response, this.chain);

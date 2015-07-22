@@ -39,8 +39,8 @@ public class HTMLSAXParserTest {
     @Before
     public void setUp() throws Exception {
         // TODO: set up with the features/properties we actually use
-        this.configuration = new NekoHTMLConfiguration(Collections.<String, String> emptyMap(),
-                Collections.<String, Boolean> emptyMap());
+        this.configuration = new NekoHTMLConfiguration(Collections.emptyMap(),
+                Collections.emptyMap());
         this.parser = new HTMLSAXParser(this.configuration);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.source = createMock(Source.class);

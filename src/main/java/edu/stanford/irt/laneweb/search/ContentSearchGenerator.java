@@ -44,7 +44,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
-        this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
+        this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class, Collections.emptyList());
     }
 
     @Override

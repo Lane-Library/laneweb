@@ -41,14 +41,14 @@ public class BassettImageGeneratorTest {
         expect(this.collectionManager.getById("bn")).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
         replay(this.collectionManager, this.xmlConsumer, this.saxStrategy);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.BASSETT_NUMBER, "bn"));
+        this.generator.setModel(Collections.singletonMap(Model.BASSETT_NUMBER, "bn"));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.xmlConsumer, this.saxStrategy);
     }
 
     @Test
     public void testDoGenerateNull() {
-        this.saxStrategy.toSAX(Collections.<BassettImage> emptyList(), this.xmlConsumer);
+        this.saxStrategy.toSAX(Collections.emptyList(), this.xmlConsumer);
         replay(this.collectionManager, this.xmlConsumer, this.saxStrategy);
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.xmlConsumer, this.saxStrategy);
@@ -59,7 +59,7 @@ public class BassettImageGeneratorTest {
         expect(this.collectionManager.search("query")).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
         replay(this.collectionManager, this.xmlConsumer, this.saxStrategy);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.QUERY, "query"));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.xmlConsumer, this.saxStrategy);
     }
@@ -82,7 +82,7 @@ public class BassettImageGeneratorTest {
         expect(this.collectionManager.getRegion("region")).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
         replay(this.collectionManager, this.xmlConsumer, this.saxStrategy);
-        this.generator.setModel(Collections.<String, Object> singletonMap(Model.REGION, "region"));
+        this.generator.setModel(Collections.singletonMap(Model.REGION, "region"));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.collectionManager, this.xmlConsumer, this.saxStrategy);
     }

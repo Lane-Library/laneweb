@@ -45,10 +45,10 @@ public class ProxyCredentialControllerTest {
 
     @Test
     public void testBind() {
-        expect(this.model.asMap()).andReturn(Collections.<String, Object> emptyMap()).times(2);
+        expect(this.model.asMap()).andReturn(Collections.emptyMap()).times(2);
         expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(true);
-        this.ticketBinder.bind(Collections.<String, Object> emptyMap(), this.request);
-        this.userBinder.bind(Collections.<String, Object> emptyMap(), this.request);
+        this.ticketBinder.bind(Collections.emptyMap(), this.request);
+        this.userBinder.bind(Collections.emptyMap(), this.request);
         replay(this.request, this.ticketBinder, this.userBinder, this.model);
         this.controller.bind(this.request, this.model);
         verify(this.request, this.ticketBinder, this.userBinder, this.model);
@@ -56,12 +56,12 @@ public class ProxyCredentialControllerTest {
 
     @Test
     public void testBindNoUserId() {
-        expect(this.model.asMap()).andReturn(Collections.<String, Object> emptyMap()).times(2);
+        expect(this.model.asMap()).andReturn(Collections.emptyMap()).times(2);
         expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(false);
         expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID, null)).andReturn(this.model);
         expect(this.model.addAttribute(edu.stanford.irt.laneweb.model.Model.TICKET, null)).andReturn(this.model);
-        this.ticketBinder.bind(Collections.<String, Object> emptyMap(), this.request);
-        this.userBinder.bind(Collections.<String, Object> emptyMap(), this.request);
+        this.ticketBinder.bind(Collections.emptyMap(), this.request);
+        this.userBinder.bind(Collections.emptyMap(), this.request);
         replay(this.request, this.ticketBinder, this.userBinder, this.model);
         this.controller.bind(this.request, this.model);
         verify(this.request, this.ticketBinder, this.userBinder, this.model);

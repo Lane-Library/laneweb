@@ -30,21 +30,21 @@ public class DebugTransformerTest {
 
     @Test
     public void testStartDocument() throws SAXException {
-        // expect(this.parameters.keySet()).andReturn(Collections.<String>emptySet());
+        // expect(this.parameters.keySet()).andReturn(Collections.emptySet());
         this.consumer.startDocument();
         this.consumer.comment(isA(char[].class), eq(0), eq(13));
         replay(this.consumer);
-        this.transformer.setModel(Collections.<String, Object> singletonMap(Model.DEBUG, Boolean.TRUE));
+        this.transformer.setModel(Collections.singletonMap(Model.DEBUG, Boolean.TRUE));
         this.transformer.startDocument();
         verify(this.consumer);
     }
 
     @Test
     public void testStartDocumentFalse() throws SAXException {
-        // expect(this.parameters.keySet()).andReturn(Collections.<String>emptySet());
+        // expect(this.parameters.keySet()).andReturn(Collections.emptySet());
         this.consumer.startDocument();
         replay(this.consumer);
-        this.transformer.setModel(Collections.<String, Object> singletonMap(Model.DEBUG, Boolean.FALSE));
+        this.transformer.setModel(Collections.singletonMap(Model.DEBUG, Boolean.FALSE));
         this.transformer.startDocument();
         verify(this.consumer);
     }

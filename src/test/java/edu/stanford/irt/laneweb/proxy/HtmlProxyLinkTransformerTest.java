@@ -34,7 +34,7 @@ public class HtmlProxyLinkTransformerTest {
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
         this.attributes = createMock(Attributes.class);
-        this.transformer.setModel(Collections.<String, Object> singletonMap(Model.BASE_PROXY_URL, "baseProxyUrl"));
+        this.transformer.setModel(Collections.singletonMap(Model.BASE_PROXY_URL, "baseProxyUrl"));
     }
 
     @Test

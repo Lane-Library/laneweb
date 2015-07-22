@@ -39,7 +39,7 @@ public class CMELinkSelectorTest {
 
     @Test
     public void testSelectEmridNull() {
-        assertFalse(this.selector.select(null, Collections.<String, Object> emptyMap(), null));
+        assertFalse(this.selector.select(null, Collections.emptyMap(), null));
     }
 
     @Test

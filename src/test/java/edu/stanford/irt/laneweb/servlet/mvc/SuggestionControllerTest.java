@@ -158,7 +158,7 @@ public class SuggestionControllerTest {
 
     @Test
     public void testNullLimit() {
-        expect(this.eresource.getSuggestionsForTerm("query")).andReturn(Collections.<Suggestion> emptyList());
+        expect(this.eresource.getSuggestionsForTerm("query")).andReturn(Collections.emptyList());
         replay(this.eresource, this.mesh);
         assertNotNull(this.controller.getSuggestions("query", null));
         verify(this.eresource, this.mesh);

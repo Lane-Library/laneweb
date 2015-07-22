@@ -35,7 +35,7 @@ public class CompositeSuggestionManagerTest {
 
     @Test
     public void testGetSuggestionsForTermString() {
-        expect(this.childManager.getSuggestionsForTerm("term")).andReturn(Collections.<Suggestion> emptySet());
+        expect(this.childManager.getSuggestionsForTerm("term")).andReturn(Collections.emptySet());
         replay(this.childManager);
         assertNotNull(this.manager.getSuggestionsForTerm("term"));
         verify(this.childManager);
@@ -43,7 +43,7 @@ public class CompositeSuggestionManagerTest {
 
     @Test
     public void testGetSuggestionsForTermStringString() {
-        expect(this.childManager.getSuggestionsForTerm("type", "term")).andReturn(Collections.<Suggestion> emptySet());
+        expect(this.childManager.getSuggestionsForTerm("type", "term")).andReturn(Collections.emptySet());
         replay(this.childManager);
         assertNotNull(this.manager.getSuggestionsForTerm("type", "term"));
         verify(this.childManager);

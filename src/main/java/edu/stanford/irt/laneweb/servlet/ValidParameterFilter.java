@@ -2,10 +2,10 @@ package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -23,45 +23,87 @@ import org.slf4j.LoggerFactory;
  */
 public class ValidParameterFilter extends AbstractLanewebFilter {
 
-    private static class ParameterNameValidator implements Validator<Enumeration<String>> {
+    private static class ParameterMapEntryValidator implements Validator<Entry<String, String[]>> {
 
-        private Set<String> validParameters;
+        private Map<String, Validator<String>> parameterValidators;
 
-        private ParameterNameValidator() {
-            this.validParameters = new HashSet<String>();
-            this.validParameters.add("a");
-            this.validParameters.add("page");
-            this.validParameters.add("m");
-            this.validParameters.add("proxy-links");
-            this.validParameters.add("sourceid");
-            this.validParameters.add("r");
-            this.validParameters.add("bn");
-            this.validParameters.add("t");
-            this.validParameters.add("pageNumber");
-            this.validParameters.add("page-number");
-            this.validParameters.add("q");
-            this.validParameters.add("laneNav");
-            this.validParameters.add("template");
-            this.validParameters.add("site_preference");
-            this.validParameters.add("source");
+        private ParameterMapEntryValidator() {
+            Validator<String> valid = (value) -> {
+                return Validity.VALID;
+            };
+            this.parameterValidators = new HashMap<String, Validator<String>>();
+            this.parameterValidators.put("a", new ParameterValueValidator("a", Pattern.compile("^([a-z#]|all)$")));
+            this.parameterValidators.put("page", new ParameterValueValidator("page", Pattern.compile("^([1-4]|all)$")));
+            this.parameterValidators.put("m", valid);
+            this.parameterValidators.put("proxy-links",
+                    new ParameterValueValidator("proxy-links", Pattern.compile("$(true|false)$")));
+            this.parameterValidators.put("sourceid",
+                    new ParameterValueValidator("sourceid", Pattern.compile("^[\\w.\\-]+$")));
+            this.parameterValidators.put("r", valid);
+            this.parameterValidators.put("bn", valid);
+            this.parameterValidators.put("t", valid);
+            this.parameterValidators.put("pageNumber", valid);
+            this.parameterValidators.put("page-number", valid);
+            this.parameterValidators.put("q", valid);
+            this.parameterValidators.put("laneNav", valid);
+            this.parameterValidators.put("template", valid);
+            this.parameterValidators.put("site_preference", valid);
+            this.parameterValidators.put("source", valid);
             // next three get put into google search results
-            this.validParameters.add("ved");
-            this.validParameters.add("sa");
-            this.validParameters.add("usg");
+            this.parameterValidators.put("ved", valid);
+            this.parameterValidators.put("sa", valid);
+            this.parameterValidators.put("usg", valid);
         }
 
         @Override
-        public Validity isValid(final Enumeration<String> names) {
+        public Validity isValid(final Entry<String, String[]> entry) {
+            String name = entry.getKey();
+            if (entry.getValue().length != 1) {
+                return new Validity(false, name + " has multiple values");
+            } else if (!this.parameterValidators.containsKey(entry.getKey())) {
+                return new Validity(false, name + " parameter not allowed");
+            }
+            return this.parameterValidators.get(name).isValid(entry.getValue()[0]);
+        }
+    }
+
+    private static class ParameterNameValidator implements Validator<Map<String, String[]>> {
+
+        private ParameterMapEntryValidator validator = new ParameterMapEntryValidator();
+
+        @Override
+        public Validity isValid(final Map<String, String[]> parameterMap) {
             Validity validity = Validity.VALID;
-            if (names != null) {
-                for (String name : Collections.list(names)) {
-                    if (!this.validParameters.contains(name)) {
-                        validity = new Validity(false, name + " parameter not accepted");
+            if (parameterMap != null) {
+                for (Entry<String, String[]> entry : parameterMap.entrySet()) {
+                    validity = this.validator.isValid(entry);
+                    if (!validity.isValid()) {
                         break;
                     }
                 }
             }
             return validity;
+        }
+    }
+
+    private static class ParameterValueValidator implements Validator<String> {
+
+        private String name;
+
+        private Pattern pattern;
+
+        private ParameterValueValidator(final String name, final Pattern pattern) {
+            this.name = name;
+            this.pattern = pattern;
+        }
+
+        @Override
+        public Validity isValid(final String value) {
+            if (this.pattern.matcher(value).matches()) {
+                return Validity.VALID;
+            } else {
+                return new Validity(false, value + " is not a valid value for " + this.name);
+            }
         }
     }
 
@@ -95,7 +137,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
 
     private static final Logger LOG = LoggerFactory.getLogger(ValidParameterFilter.class);
 
-    private Validator<Enumeration<String>> validator;
+    private Validator<Map<String, String[]>> validator;
 
     @Override
     public void init(final FilterConfig filterConfig) {
@@ -105,7 +147,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
     @Override
     protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
             final FilterChain chain) throws IOException, ServletException {
-        Validity validity = this.validator.isValid(request.getParameterNames());
+        Validity validity = this.validator.isValid(request.getParameterMap());
         if (validity.isValid()) {
             chain.doFilter(request, response);
         } else {
