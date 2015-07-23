@@ -1,7 +1,9 @@
 package edu.stanford.irt.laneweb.email;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -127,13 +129,17 @@ public class EMailSender {
     private synchronized void updateSentCountsIfNecessary() {
         long now = System.currentTimeMillis();
         if (now > this.lastUpdate + COUNT_CHECK_INTERVAL) {
+            List<String> entriesToRemove = new ArrayList<String>();
             for (Entry<String, Integer> entry : this.sentMailCounter.entrySet()) {
                 int newCount = entry.getValue().intValue() - MAX_MAILS_PER_IP;
                 if (newCount <= 0) {
-                    this.sentMailCounter.entrySet().remove(entry);
+                    entriesToRemove.add(entry.getKey());
                 } else {
                     entry.setValue(Integer.valueOf(newCount));
                 }
+            }
+            for (String key : entriesToRemove) {
+                this.sentMailCounter.remove(key);
             }
             this.lastUpdate = now;
         }
