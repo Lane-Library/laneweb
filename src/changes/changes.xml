@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-07-27" version="3.0.12" description="3.0.12 bug fix release">
+            <action date="2015-07-21" dev="ceyates" issue="109622" type="fix">
+                remove 'cap profile' link from an 'empty' liaison business card
+            </action>
+            <action date="2015-07-23" dev="ryanmax" issue="109531" type="fix">
+                ConcurrentModificationException in EMailSender.updateSentCountsIfNecessary
+            </action>
+        </release>
         <release date="2015-07-20" version="3.0.11" description="3.0.11 bug fix release">
             <action date="2015-07-16" dev="ryanmax" issue="109531" type="fix">
                 ConcurrentModificationException in EMailSender.updateSentCountsIfNecessary
