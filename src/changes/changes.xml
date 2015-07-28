@@ -7,6 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        
+        <release date="2015-07-28" version="3.0.13" description="3.0.13 emergency release">
+            <action date="2015-07-28" dev="ceyates" issue="109915" type="fix">
+                proxy-links parameter in url causes page not found in /biomed-resources
+            </action>
+        </release>
         <release date="2015-07-27" version="3.0.12" description="3.0.12 bug fix release">
             <action date="2015-07-21" dev="ceyates" issue="109622" type="fix">
                 remove 'cap profile' link from an 'empty' liaison business card
