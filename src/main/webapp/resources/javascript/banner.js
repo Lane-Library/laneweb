@@ -48,7 +48,15 @@ Y.lane.Banner = Y.Base.create("banner", Y.Widget, [], {
             to: {opacity: 0}
         });
         fadeout.on("end", function() {
+            var i, script, scripts = content.all("script");
             contentBox.one("div").replace(content);
+            // this part runs then removes embedded script, like the mailto: obfuscation thing.
+            // se case 109729
+            for (i = 0; i < scripts.size(); i++) {
+                script = scripts.item(i);
+                eval(script.get("text"));
+                script.remove(true);
+            }
             fadein = new Y.Anim({
                 node: contentBox,
                 to:{opacity:1}

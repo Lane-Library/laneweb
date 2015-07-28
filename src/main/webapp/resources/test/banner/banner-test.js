@@ -6,9 +6,9 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
 
     Y.io = function(url, config) {
         if (url.indexOf("banner=1") > 0) {
-            config.on.success.apply(config.context, [0, {responseText:Y.JSON.stringify("<?xml version='1.0' encoding='UTF-8'?><html xmlns='http://www.w3.org/1999/xhtml'> <head> <title>banner1</title> </head> <body> <div> <div class='banner-content'>banner1</div></div> <ul class='banner-nav'> <li><a href='?banner=1' class='banner-nav-active'></a></li> <li><a href='?banner=2'></a></li> </ul> </body></html>")}, {}]);
+            config.on.success.apply(config.context, [0, {responseText:Y.JSON.stringify("<?xml version='1.0' encoding='UTF-8'?><html xmlns='http://www.w3.org/1999/xhtml'> <head> <title>banner1</title> </head> <body> <div> <div class='banner-content'>banner1</div></div> <ul class='banner-nav'> <li><a href='?banner=1' class='banner-nav-active'>1</a></li> <li><a href='?banner=2'>2</a></li> </ul> </body></html>")}, {}]);
         } else if (url.indexOf("banner=2") > 0) {
-            config.on.success.apply(config.context, [0, {responseText:Y.JSON.stringify("<?xml version='1.0' encoding='UTF-8'?><html xmlns='http://www.w3.org/1999/xhtml'> <head> <title>banner1</title> </head> <body> <div> <div class='banner-content'>banner2</div></div> <ul class='banner-nav'> <li><a href='?banner=1'></a></li> <li><a href='?banner=2' class='banner-nav-active'></a></li> </ul> </body></html>")}, {}]);
+            config.on.success.apply(config.context, [0, {responseText:Y.JSON.stringify("<?xml version='1.0' encoding='UTF-8'?><html xmlns='http://www.w3.org/1999/xhtml'> <head> <title>banner1</title> </head> <body> <div> <div class='banner-content'>banner2<script type='text/javascript'>Y.one('body').append('<h2/>')</script></div></div> <ul class='banner-nav'> <li><a href='?banner=1'>1</a></li> <li><a href='?banner=2' class='banner-nav-active'>2</a></li> </ul> </body></html>")}, {}]);
         }
     };
 
@@ -67,6 +67,10 @@ Y.use('node-event-simulate', 'console', 'test', function(Y) {
                 Y.Assert.isFalse(anchors.item(1).hasClass("banner-nav-active"));
                 Y.Assert.areEqual("banner1", Y.one(".banner-content").get("text"));
             }, 1500);
+        },
+        
+        testOnlyOneH2: function() {
+            Y.Assert.areEqual(1, Y.all("h2").size());
         }
 
     });
