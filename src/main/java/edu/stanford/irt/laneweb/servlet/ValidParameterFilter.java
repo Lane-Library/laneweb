@@ -36,7 +36,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             this.parameterValidators.put("page", new ParameterValueValidator("page", Pattern.compile("^([1-4]|all)$")));
             this.parameterValidators.put("m", valid);
             this.parameterValidators.put("proxy-links",
-                    new ParameterValueValidator("proxy-links", Pattern.compile("$(true|false)$")));
+                    new ParameterValueValidator("proxy-links", Pattern.compile("^(true|false)$")));
             this.parameterValidators.put("sourceid",
                     new ParameterValueValidator("sourceid", Pattern.compile("^[\\w.\\-]+$")));
             this.parameterValidators.put("r", valid);
