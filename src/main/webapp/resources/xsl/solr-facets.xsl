@@ -109,7 +109,7 @@
 		                <ul>
 							<xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'recordType'"/>					   
-		                        <xsl:with-param name="label" select="'Only Results Within'"/>					   
+		                        <xsl:with-param name="label" select="'Sources Searched'"/>					   
 							</xsl:call-template>
 		
 							<xsl:call-template name="field">
@@ -124,7 +124,7 @@
 		
 		                    <xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'publicationTitle'"/>                    
-		                        <xsl:with-param name="label" select="'Article Source'"/>                    
+		                        <xsl:with-param name="label" select="'Journal'"/>                    
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">
