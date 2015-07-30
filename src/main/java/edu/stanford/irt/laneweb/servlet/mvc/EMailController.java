@@ -21,6 +21,7 @@ import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 
+// TODO: the individual methods for each address probably can be combined
 @Controller
 @RequestMapping(value = "/apps/mail", method = RequestMethod.POST)
 public class EMailController {
@@ -32,6 +33,10 @@ public class EMailController {
     private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
 
     private static final String ASKUS_PATH = "/askus";
+
+    private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
+
+    private static final String DOCXPRESS_PATH = "/docxpress";
 
     private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
@@ -71,6 +76,13 @@ public class EMailController {
         return getRedirectTo(map);
     }
 
+    @RequestMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
+    public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
+        Map<String, Object> map = model.asMap();
+        sendEmail(DOCXPRESS_ADDRESS, map);
+        return getRedirectTo(map);
+    }
+
     @RequestMapping(value = ISSUE_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitLaneissue(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
@@ -91,6 +103,13 @@ public class EMailController {
         feedback.putAll(model.asMap());
         appendNameToSubject(feedback);
         sendEmail(ASKUS_ADDRESS, feedback);
+    }
+
+    @RequestMapping(value = DOCXPRESS_PATH, consumes = JSON_MIME_TYPE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void jsonSubmitDocxpress(@RequestBody final Map<String, Object> feedback, final Model model) {
+        feedback.putAll(model.asMap());
+        sendEmail(DOCXPRESS_ADDRESS, feedback);
     }
 
     @RequestMapping(value = ISSUE_PATH, consumes = JSON_MIME_TYPE)

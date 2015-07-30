@@ -62,6 +62,7 @@
                 <value>lane-issue@med.stanford.edu</value>
                 <value>LaneAskUs@stanford.edu</value>
                 <value>lanelibacqs@lists.stanford.edu</value>
+                <value>docxpress@lists.stanford.edu</value>
             </set>
         </constructor-arg>
         <constructor-arg>
