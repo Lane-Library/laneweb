@@ -7,7 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        
+        <release date="2015-08-03" version="3.0.14" description="3.0.14 bug fix release">
+            <action date="2015-07-30" dev="ryanmax" issue="109994" type="update">
+                update MeSH suggestions
+            </action>
+            <action date="2015-07-29" dev="ceyates" issue="108934" type="add">
+                Contact Us Form additions
+            </action>
+        </release>
         <release date="2015-07-28" version="3.0.13" description="3.0.13 emergency release">
             <action date="2015-07-28" dev="ceyates" issue="109915" type="fix">
                 proxy-links parameter in url causes page not found in /biomed-resources
