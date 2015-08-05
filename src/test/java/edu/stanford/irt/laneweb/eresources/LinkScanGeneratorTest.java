@@ -17,13 +17,12 @@ import java.util.List;
 import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.domain.PageRequest;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.solr.SolrRepository;
+import edu.stanford.irt.laneweb.solr.SolrSearchService;
 
 public class LinkScanGeneratorTest {
 
@@ -37,14 +36,14 @@ public class LinkScanGeneratorTest {
 
     private List<Link> linkList;
 
-    private SolrRepository repository;
+    private SolrSearchService searchService;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.repository = createMock(SolrRepository.class);
-        this.generator = new LinkScanGenerator(this.repository);
+        this.searchService = createMock(SolrSearchService.class);
+        this.generator = new LinkScanGenerator(this.searchService);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.eresource = createMock(Eresource.class);
         this.link = createMock(Link.class);
@@ -56,8 +55,7 @@ public class LinkScanGeneratorTest {
 
     @Test
     public void testDoGenerate() throws Exception {
-        expect(this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE))).andReturn(
-                this.eresourceList);
+        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         expect(this.eresource.getId()).andReturn("type-id");
@@ -77,16 +75,15 @@ public class LinkScanGeneratorTest {
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "li", "li");
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "ul", "ul");
         this.xmlConsumer.endDocument();
-        replay(this.repository, this.xmlConsumer, this.eresource, this.link);
+        replay(this.searchService, this.xmlConsumer, this.eresource, this.link);
         this.generator.doGenerate(this.xmlConsumer);
         assertEquals("http://foo/bar", attributes.getValue().getValue("href"));
-        verify(this.repository, this.xmlConsumer, this.eresource, this.link);
+        verify(this.searchService, this.xmlConsumer, this.eresource, this.link);
     }
 
     @Test
     public void testDoGenerateNullTitleUrl() throws Exception {
-        expect(this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE))).andReturn(
-                this.eresourceList);
+        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         expect(this.eresource.getId()).andReturn("type-id");
@@ -95,19 +92,18 @@ public class LinkScanGeneratorTest {
         expect(this.link.getUrl()).andReturn(null);
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "ul", "ul");
         this.xmlConsumer.endDocument();
-        replay(this.repository, this.xmlConsumer, this.eresource, this.link);
+        replay(this.searchService, this.xmlConsumer, this.eresource, this.link);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.repository, this.xmlConsumer, this.eresource, this.link);
+        verify(this.searchService, this.xmlConsumer, this.eresource, this.link);
     }
 
     @Test(expected = LanewebException.class)
     public void testDoGenerateThrowSAXException() throws SAXException {
-        expect(this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE))).andReturn(
-                this.eresourceList);
+        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
-        replay(this.repository, this.xmlConsumer);
+        replay(this.searchService, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.repository, this.xmlConsumer);
+        verify(this.searchService, this.xmlConsumer);
     }
 }

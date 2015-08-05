@@ -5,26 +5,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.solr.SolrRepository;
-import edu.stanford.irt.laneweb.solr.SolrTypeManager;
+import edu.stanford.irt.laneweb.solr.SolrSearchService;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SolrSuggestionManager implements SuggestionManager {
 
     @Autowired
-    private SolrRepository repository;
+    private SolrSearchService searchService;
 
     @Override
     public Collection<Suggestion> getSuggestionsForTerm(final String term) {
         if (null == term) {
             throw new IllegalArgumentException("null term");
         }
-        return suggestionsFromEresources(this.repository.suggestFindAll(term.toLowerCase(), term.replaceAll(" ", " +"),
-                new PageRequest(0, 10)));
+        return suggestionsFromEresources(this.searchService.suggestFindAll(term));
     }
 
     @Override
@@ -35,8 +32,7 @@ public class SolrSuggestionManager implements SuggestionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return suggestionsFromEresources(this.repository.suggestFindByType(term,
-                SolrTypeManager.convertToNewType(type), new PageRequest(0, 10)));
+        return suggestionsFromEresources(this.searchService.suggestFindByType(term, type));
     }
 
     private List<Suggestion> suggestionsFromEresources(final List<Eresource> eresources) {

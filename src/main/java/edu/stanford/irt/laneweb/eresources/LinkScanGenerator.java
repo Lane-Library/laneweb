@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -15,7 +14,7 @@ import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.solr.SolrRepository;
+import edu.stanford.irt.laneweb.solr.SolrSearchService;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class LinkScanGenerator extends AbstractGenerator implements CacheablePipelineComponent {
@@ -26,13 +25,13 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
-    private SolrRepository repository;
+    private SolrSearchService searchService;
 
     private Validity validity;
 
     @Autowired
-    public LinkScanGenerator(final SolrRepository repository) {
-        this.repository = repository;
+    public LinkScanGenerator(final SolrSearchService searchService) {
+        this.searchService = searchService;
         this.validity = new LinkScanValidity();
     }
 
@@ -53,8 +52,7 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<Eresource> results = this.repository
-                .searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
+        List<Eresource> results = this.searchService.searchFindAllNotRecordTypePubmed();
         int p = 1;
         String position, id, title;
         try {

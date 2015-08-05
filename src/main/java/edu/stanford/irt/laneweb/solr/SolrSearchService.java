@@ -171,6 +171,10 @@ public class SolrSearchService implements CollectionManager {
         return result;
     }
 
+    public List<Eresource> searchFindAllNotRecordTypePubmed() {
+        return this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
+    }
+
     @Override
     public List<Eresource> searchType(final String type, final String query) {
         if (null == type) {
@@ -189,6 +193,14 @@ public class SolrSearchService implements CollectionManager {
 
     public Page<Eresource> searchWithFilters(final String query, final String facets, final Pageable pageRequest) {
         return this.repository.searchFindAllWithFilter(query, facetStringToFilters(facets), pageRequest);
+    }
+
+    public List<Eresource> suggestFindAll(final String query) {
+        return this.repository.suggestFindAll(query.toLowerCase(), query.replaceAll(" ", " +"), new PageRequest(0, 10));
+    }
+
+    public List<Eresource> suggestFindByType(final String query, final String type) {
+        return this.repository.suggestFindByType(query, SolrTypeManager.convertToNewType(type), new PageRequest(0, 10));
     }
 
     private String facetStringToFilters(final String facets) {
