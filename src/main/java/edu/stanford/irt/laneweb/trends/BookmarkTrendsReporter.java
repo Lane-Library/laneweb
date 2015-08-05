@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -11,17 +12,13 @@ import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 
 public class BookmarkTrendsReporter {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BookmarkTrendsReporter.class);
+
     private BookmarkDAO bookmarkDAO;
 
     private GoogleTracker googleTracker;
 
     private String localHostname;
-
-    private final Logger log;
-
-    public BookmarkTrendsReporter(final Logger log) {
-        this.log = log;
-    }
 
     // daily at 1:16AM
     @Scheduled(cron = "0 16 01 * * *")
@@ -30,7 +27,7 @@ public class BookmarkTrendsReporter {
             this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", getLocalHostname(), "dailyUserCount",
                     this.bookmarkDAO.getRowCount());
         } catch (UnknownHostException | LanewebException e) {
-            this.log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 

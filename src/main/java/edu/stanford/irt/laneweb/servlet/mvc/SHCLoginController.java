@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +35,8 @@ public class SHCLoginController {
 
     private static final String ERROR_UNIVID = "invalid or missing univid: ";
 
+    private static final Logger LOG = LoggerFactory.getLogger(SHCLoginController.class);
+
     private static final int ONE_MINUTE = 1000 * 60;
 
     private static final String TARGET_URL = "/portals/shc.html?sourceid=shc&u=";
@@ -43,20 +45,16 @@ public class SHCLoginController {
 
     private LDAPDataAccess ldapDataAccess;
 
-    private final Logger log;
-
     @Autowired
-    public SHCLoginController(final SHCCodec codec, final LDAPDataAccess ldapDataAccess,
-            @Qualifier(value = "org.slf4j.Logger/SHCLoginController") final Logger log) {
+    public SHCLoginController(final SHCCodec codec, final LDAPDataAccess ldapDataAccess) {
         this.codec = codec;
         this.ldapDataAccess = ldapDataAccess;
-        this.log = log;
     }
 
     @RequestMapping(value = "/shclogin")
     public void login(@RequestParam final String emrid, @RequestParam final String univid,
             @RequestParam final String ts, final HttpServletRequest request, final HttpServletResponse response)
-            throws IOException {
+                    throws IOException {
         StringBuilder errorMsg = new StringBuilder();
         StringBuilder url = new StringBuilder(TARGET_URL);
         url.append(URLEncoder.encode(emrid, "UTF-8"));
@@ -82,7 +80,7 @@ public class SHCLoginController {
             errorMsg.append(ERROR_MISSING_USER_ID + decryptedUnivid);
         }
         if (errorMsg.length() > 0) {
-            this.log.info(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
+            LOG.info(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
             url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
         }
         response.sendRedirect("https://" + request.getServerName() + request.getContextPath() + url.toString());
@@ -123,14 +121,14 @@ public class SHCLoginController {
         try {
             decryptedTimestamp = Long.parseLong(this.codec.decrypt(timestamp));
         } catch (NumberFormatException e) {
-            this.log.error("error parsing " + timestamp, e);
+            LOG.error("error parsing " + timestamp, e);
             return false;
         }
         Date now = new Date();
         if (Math.abs(now.getTime() - decryptedTimestamp) < ONE_MINUTE) {
             return true;
         }
-        this.log.error("invalid timestamp -- now: " + now.getTime() + ", timestamp: " + decryptedTimestamp);
+        LOG.error("invalid timestamp -- now: " + now.getTime() + ", timestamp: " + decryptedTimestamp);
         return false;
     }
 }

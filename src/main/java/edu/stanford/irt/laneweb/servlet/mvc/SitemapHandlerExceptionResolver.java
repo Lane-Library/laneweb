@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.connector.ClientAbortException;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,21 +19,21 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
 // TODO: simplify testing of this by injecting a RequestHandler instead of extending one
-public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
+public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler
+        implements HandlerExceptionResolver {
 
-    private final Logger log;
+    private static final Logger LOG = LoggerFactory.getLogger("error handler");
 
     public SitemapHandlerExceptionResolver(final ComponentFactory componentFactory,
-            final SourceResolver sourceResolver, final Logger log) {
+            final SourceResolver sourceResolver) {
         super(componentFactory, sourceResolver);
-        this.log = log;
     }
 
     @Override
     public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
             final Object handler, final Exception ex) {
         if (ex instanceof ResourceNotFoundException) {
-            this.log.warn(ex.toString());
+            LOG.warn(ex.toString());
         } else {
             Throwable cause = ex.getCause();
             Throwable reportableCause = ex;
@@ -41,12 +42,12 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
                 cause = cause.getCause();
             }
             if (reportableCause instanceof FileNotFoundException) {
-                this.log.warn(reportableCause.toString());
+                LOG.warn(reportableCause.toString());
             } else if (reportableCause instanceof ClientAbortException) {
-                this.log.warn(reportableCause.toString() + " ip=" + request.getRemoteAddr() + " url="
+                LOG.warn(reportableCause.toString() + " ip=" + request.getRemoteAddr() + " url="
                         + request.getRequestURL().toString());
             } else {
-                this.log.error(ex.toString(), reportableCause);
+                LOG.error(ex.toString(), reportableCause);
             }
         }
         if (!response.isCommitted()) {
@@ -54,7 +55,7 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
             try {
                 handleRequest(request, response);
             } catch (ServletException | IOException | LanewebException e) {
-                this.log.error("Exception while handling exception", e);
+                LOG.error("Exception while handling exception", e);
             }
         }
         return new ModelAndView();

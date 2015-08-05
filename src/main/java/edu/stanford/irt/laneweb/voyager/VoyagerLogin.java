@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
@@ -24,23 +25,22 @@ public class VoyagerLogin {
 
     private static final String ERROR_URL = "/voyagerError.html";
 
+    private static final Logger LOG = LoggerFactory.getLogger(VoyagerLogin.class);
+
     private static final Pattern PID_PATTERN = Pattern.compile("[\\w0-9-_]+");
 
     private DataSource dataSource;
 
-    private final Logger log;
-
-    public VoyagerLogin(final DataSource dataSource, final Logger log) {
+    public VoyagerLogin(final DataSource dataSource) {
         this.dataSource = dataSource;
-        this.log = log;
     }
 
     public String getVoyagerURL(final String univId, final String pid, final String queryString) {
         String voyagerURL = ERROR_URL;
         if (pid == null || !PID_PATTERN.matcher(pid).matches()) {
-            this.log.error("bad pid: " + pid);
+            LOG.error("bad pid: " + pid);
         } else if (univId == null || univId.length() == 0) {
-            this.log.error("bad univId: " + univId);
+            LOG.error("bad univId: " + univId);
         } else {
             // voyager data prepends 0
             String voyagerUnivId = "0" + univId;
@@ -67,10 +67,10 @@ public class VoyagerLogin {
                     createStmt.executeUpdate();
                     voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
                 } else {
-                    this.log.error("unable to find univId in voyager: " + univId);
+                    LOG.error("unable to find univId in voyager: " + univId);
                 }
             } catch (SQLException e) {
-                this.log.error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
                 voyagerURL = ERROR_URL;
             } finally {
                 JdbcUtils.closeResultSet(rs);

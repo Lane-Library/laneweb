@@ -16,15 +16,12 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 public class VoyagerLoginTest {
 
     private Connection connection;
 
     private DataSource dataSource;
-
-    private Logger log;
 
     private ResultSet resultSet;
 
@@ -34,9 +31,8 @@ public class VoyagerLoginTest {
 
     @Before
     public void setUp() throws Exception {
-        this.log = createMock(Logger.class);
         this.dataSource = createMock(DataSource.class);
-        this.voyagerLogin = new VoyagerLogin(this.dataSource, this.log);
+        this.voyagerLogin = new VoyagerLogin(this.dataSource);
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
         this.resultSet = createMock(ResultSet.class);

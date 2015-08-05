@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
@@ -28,16 +27,13 @@ public class SuggestionControllerTest {
 
     private SuggestionManager eresource;
 
-    private Logger log;
-
     private SuggestionManager mesh;
 
     @Before
     public void setUp() throws Exception {
         this.eresource = createMock(SuggestionManager.class);
         this.mesh = createMock(SuggestionManager.class);
-        this.log = createMock(Logger.class);
-        this.controller = new SuggestionController(this.eresource, this.mesh, this.log);
+        this.controller = new SuggestionController(this.eresource, this.mesh);
     }
 
     @Test
@@ -67,20 +63,13 @@ public class SuggestionControllerTest {
     @Test
     public void testHandleExceptionEnabled() {
         IllegalArgumentException ex = new IllegalArgumentException();
-        expect(this.log.isWarnEnabled()).andReturn(true);
-        this.log.warn(ex.getMessage(), ex);
-        replay(this.log);
         this.controller.handleIllegalArgumentException(ex);
-        verify(this.log);
     }
 
     @Test
     public void testHandleExceptionNotEnabled() {
         IllegalArgumentException ex = new IllegalArgumentException();
-        expect(this.log.isWarnEnabled()).andReturn(false);
-        replay(this.log);
         this.controller.handleIllegalArgumentException(ex);
-        verify(this.log);
     }
 
     @Test

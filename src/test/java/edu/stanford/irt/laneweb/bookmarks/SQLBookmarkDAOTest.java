@@ -29,7 +29,6 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -49,8 +48,6 @@ public class SQLBookmarkDAOTest {
 
     private DataSource dataSource;
 
-    private Logger log;
-
     private ResultSet resultSet;
 
     private PreparedStatement statement;
@@ -58,8 +55,7 @@ public class SQLBookmarkDAOTest {
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        this.log = createMock(Logger.class);
-        this.dao = new SQLBookmarkDAO(this.dataSource, this.log);
+        this.dao = new SQLBookmarkDAO(this.dataSource);
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
         this.resultSet = createMock(ResultSet.class);

@@ -6,13 +6,14 @@ import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides a Subject with Kerberos authentication.
  */
 public class SubjectSource {
 
-    private Logger log;
+    private static final Logger LOG = LoggerFactory.getLogger("error handler");
 
     private String name;
 
@@ -20,9 +21,8 @@ public class SubjectSource {
 
     private KerberosTicket ticket;
 
-    public SubjectSource(final String name, final Logger log) {
+    public SubjectSource(final String name) {
         this.name = name;
-        this.log = log;
     }
 
     /**
@@ -34,7 +34,7 @@ public class SubjectSource {
         try {
             authenticateIfNecessary();
         } catch (LoginException e) {
-            this.log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             this.subject = null;
         }
         return this.subject;

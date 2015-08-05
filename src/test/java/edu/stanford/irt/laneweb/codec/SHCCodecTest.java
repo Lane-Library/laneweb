@@ -3,12 +3,10 @@
  */
 package edu.stanford.irt.laneweb.codec;
 
-import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 /**
  * @author ryanmax
@@ -19,15 +17,12 @@ public class SHCCodecTest {
 
     private SHCCodec codec;
 
-    private Logger log;
-
     private String plaintext = "plain piece of text";
 
     @Before
     public void setUp() {
-        this.log = createMock(Logger.class);
         // note: not the real key and vector:
-        this.codec = new SHCCodec("yfGIl68aDih3DamkzIJeYA==", "ABCDEFGHIJKLMNOP", this.log);
+        this.codec = new SHCCodec("yfGIl68aDih3DamkzIJeYA==", "ABCDEFGHIJKLMNOP");
     }
 
     /**

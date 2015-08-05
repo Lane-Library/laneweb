@@ -21,7 +21,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.slf4j.Logger;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Subject.class)
@@ -31,8 +30,8 @@ public class SubjectSourceTest {
 
         private LoginContext loginContext;
 
-        public TestSubjectSource(final String name, final Logger log, final LoginContext loginContext) {
-            super(name, log);
+        public TestSubjectSource(final String name, final LoginContext loginContext) {
+            super(name);
             this.loginContext = loginContext;
         }
 
@@ -41,8 +40,6 @@ public class SubjectSourceTest {
             return this.loginContext;
         }
     }
-
-    private Logger log;
 
     private LoginContext loginContext;
 
@@ -56,9 +53,8 @@ public class SubjectSourceTest {
 
     @Before
     public void setUp() {
-        this.log = createMock(Logger.class);
         this.loginContext = createMock(LoginContext.class);
-        this.subjectSource = new TestSubjectSource("name", this.log, this.loginContext);
+        this.subjectSource = new TestSubjectSource("name", this.loginContext);
         this.subject = createMock(Subject.class);
         this.ticket = createMock(KerberosTicket.class);
         this.tickets = Collections.singleton(this.ticket);
@@ -69,9 +65,9 @@ public class SubjectSourceTest {
         this.loginContext.login();
         expect(this.loginContext.getSubject()).andReturn(this.subject);
         expect(this.subject.getPrivateCredentials(KerberosTicket.class)).andReturn(this.tickets);
-        replay(this.log, this.loginContext, this.subject, this.ticket);
+        replay(this.loginContext, this.subject, this.ticket);
         assertEquals(this.subject, this.subjectSource.getSubject());
-        verify(this.log, this.loginContext, this.subject, this.ticket);
+        verify(this.loginContext, this.subject, this.ticket);
     }
 
     @Test
@@ -79,12 +75,11 @@ public class SubjectSourceTest {
         this.loginContext.login();
         expectLastCall().times(2);
         expect(this.loginContext.getSubject()).andReturn(this.subject).times(2);
-        expect(this.subject.getPrivateCredentials(KerberosTicket.class)).andReturn(
-                Collections.emptySet()).times(2);
-        replay(this.log, this.loginContext, this.subject, this.ticket);
+        expect(this.subject.getPrivateCredentials(KerberosTicket.class)).andReturn(Collections.emptySet()).times(2);
+        replay(this.loginContext, this.subject, this.ticket);
         assertEquals(this.subject, this.subjectSource.getSubject());
         assertEquals(this.subject, this.subjectSource.getSubject());
-        verify(this.log, this.loginContext, this.subject, this.ticket);
+        verify(this.loginContext, this.subject, this.ticket);
     }
 
     @Test
@@ -93,10 +88,10 @@ public class SubjectSourceTest {
         expect(this.loginContext.getSubject()).andReturn(this.subject);
         expect(this.subject.getPrivateCredentials(KerberosTicket.class)).andReturn(this.tickets);
         expect(this.ticket.isCurrent()).andReturn(true);
-        replay(this.log, this.loginContext, this.subject, this.ticket);
+        replay(this.loginContext, this.subject, this.ticket);
         assertEquals(this.subject, this.subjectSource.getSubject());
         assertEquals(this.subject, this.subjectSource.getSubject());
-        verify(this.log, this.loginContext, this.subject, this.ticket);
+        verify(this.loginContext, this.subject, this.ticket);
     }
 
     @Test
@@ -106,10 +101,10 @@ public class SubjectSourceTest {
         expect(this.loginContext.getSubject()).andReturn(this.subject).times(2);
         expect(this.subject.getPrivateCredentials(KerberosTicket.class)).andReturn(this.tickets).times(2);
         expect(this.ticket.isCurrent()).andReturn(false);
-        replay(this.log, this.loginContext, this.subject, this.ticket);
+        replay(this.loginContext, this.subject, this.ticket);
         assertEquals(this.subject, this.subjectSource.getSubject());
         assertEquals(this.subject, this.subjectSource.getSubject());
-        verify(this.log, this.loginContext, this.subject, this.ticket);
+        verify(this.loginContext, this.subject, this.ticket);
     }
 
     @Test
@@ -117,9 +112,8 @@ public class SubjectSourceTest {
         LoginException ex = new LoginException("oopsie");
         this.loginContext.login();
         expectLastCall().andThrow(ex);
-        this.log.error("oopsie", ex);
-        replay(this.log, this.loginContext);
+        replay(this.loginContext);
         assertNull(this.subjectSource.getSubject());
-        verify(this.log, this.loginContext);
+        verify(this.loginContext);
     }
 }

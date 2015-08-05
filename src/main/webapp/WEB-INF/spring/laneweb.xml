@@ -53,7 +53,6 @@
                 <value>sumc:staff</value>
             </set>
         </constructor-arg>
-        <constructor-arg ref="org.slf4j.Logger/LDAPDataAccess"/>
     </bean>
     
     <bean class="edu.stanford.irt.laneweb.email.EMailSender">
@@ -90,7 +89,6 @@
     <bean id="edu.stanford.irt.laneweb.user.SubjectSource"
           class="edu.stanford.irt.laneweb.user.SubjectSource">
         <constructor-arg value="IRT_K5"/>
-        <constructor-arg ref="org.slf4j.Logger/errorhandler"/>
     </bean>
     
     <bean class="edu.stanford.irt.spell.PubmedESpellChecker"/>
@@ -225,9 +223,7 @@
     </bean>
     
     <bean name="javax.xml.transform.ErrorListener"
-        class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener">
-        <constructor-arg ref="org.slf4j.Logger/ErrorListener"/>
-    </bean>
+        class="edu.stanford.irt.laneweb.cocoon.TransformerErrorListener"/>
     
     <bean id="org.springframework.oxm.Marshaller"
         class="org.springframework.oxm.xstream.XStreamMarshaller">
@@ -265,9 +261,7 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/xml"/>
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl">
-                <constructor-arg ref="org.slf4j.Logger/XIncludeExceptionListener"/>
-            </bean>
+            <bean class="edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl"/>
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.XPointerProcessor"/>
     </bean>
@@ -281,7 +275,6 @@
         class="edu.stanford.irt.laneweb.codec.SHCCodec">
         <constructor-arg value="%{edu.stanford.irt.laneweb.shccodec.key}"/>
         <constructor-arg value="%{edu.stanford.irt.laneweb.shccodec.vector}"/>
-        <constructor-arg ref="org.slf4j.Logger/SHCCodec"/>
     </bean>
     
 </beans>

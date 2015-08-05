@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.hours.TodaysHours;
@@ -25,8 +24,6 @@ public class TodaysHoursBinderTest {
 
     private TodaysHours hours;
 
-    private Logger logger;
-
     private Map<String, Object> model;
 
     private HttpServletRequest request;
@@ -34,8 +31,7 @@ public class TodaysHoursBinderTest {
     @Before
     public void setUp() throws Exception {
         this.hours = createMock(TodaysHours.class);
-        this.logger = createMock(Logger.class);
-        this.binder = new TodaysHoursBinder(this.hours, this.logger);
+        this.binder = new TodaysHoursBinder(this.hours);
         this.model = new HashMap<String, Object>();
         this.request = createMock(HttpServletRequest.class);
     }
@@ -53,10 +49,9 @@ public class TodaysHoursBinderTest {
     public void testBindThrowsException() {
         LanewebException e = new LanewebException("oopsie");
         expect(this.hours.getHours()).andThrow(e);
-        this.logger.error("oopsie", e);
-        replay(this.hours, this.logger);
+        replay(this.hours);
         this.binder.bind(this.model, this.request);
         assertEquals("??", this.model.get(Model.TODAYS_HOURS));
-        verify(this.hours, this.logger);
+        verify(this.hours);
     }
 }

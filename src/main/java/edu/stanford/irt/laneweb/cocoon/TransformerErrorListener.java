@@ -5,16 +5,13 @@ import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class TransformerErrorListener implements ErrorListener {
 
-    private Logger log;
-
-    public TransformerErrorListener(final Logger log) {
-        this.log = log;
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(ErrorListener.class);
 
     @Override
     public void error(final TransformerException te) {
@@ -28,7 +25,7 @@ public class TransformerErrorListener implements ErrorListener {
 
     @Override
     public void warning(final TransformerException te) {
-        this.log.warn(getMessage(te));
+        LOG.warn(getMessage(te));
     }
 
     private String getMessage(final TransformerException te) {

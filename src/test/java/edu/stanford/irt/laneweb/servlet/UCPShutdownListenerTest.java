@@ -6,13 +6,14 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import oracle.ucp.UniversalConnectionPool;
 import oracle.ucp.UniversalConnectionPoolAdapter;
 import oracle.ucp.UniversalConnectionPoolException;
 import oracle.ucp.admin.UniversalConnectionPoolManagerImpl;
-
-import org.junit.Before;
-import org.junit.Test;
 
 public class UCPShutdownListenerTest {
 

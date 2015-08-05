@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
@@ -13,15 +14,14 @@ import edu.stanford.irt.laneweb.user.User;
 
 public class CookieUserFactory implements UserFactory {
 
-    private UserCookieCodec codec;
+    private static final Logger LOG = LoggerFactory.getLogger(CookieUserFactory.class);
 
-    private Logger log;
+    private UserCookieCodec codec;
 
     private String userIdHashKey;
 
-    public CookieUserFactory(final UserCookieCodec codec, final Logger log, final String userIdHashKey) {
+    public CookieUserFactory(final UserCookieCodec codec, final String userIdHashKey) {
         this.codec = codec;
-        this.log = log;
         this.userIdHashKey = userIdHashKey;
     }
 
@@ -55,7 +55,7 @@ public class CookieUserFactory implements UserFactory {
                     user = token.getUser();
                 }
             } catch (LanewebException e) {
-                this.log.error("failed to decode userid from: " + cookie.getValue(), e);
+                LOG.error("failed to decode userid from: " + cookie.getValue(), e);
             }
         }
         return user;

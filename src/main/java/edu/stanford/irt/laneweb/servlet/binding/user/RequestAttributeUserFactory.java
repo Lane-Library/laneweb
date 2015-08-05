@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.user.User;
 
@@ -18,20 +19,19 @@ public class RequestAttributeUserFactory implements UserFactory {
 
     private static final String EMAIL_ATTRIBUTE_NAME = "mail";
 
+    private static final Logger LOG = LoggerFactory.getLogger(RequestAttributeUserFactory.class);
+
     private static final String NAME_ATTRIBUTE_NAME = "displayName";
 
     private static final String SHIBBOLETH_PROVIDER = "Shib-Identity-Provider";
 
     private final Map<String, String> domainMap;
 
-    private Logger log;
-
     private final String userIdHashKey;
 
-    public RequestAttributeUserFactory(final String userIdHashKey, final Logger log) {
+    public RequestAttributeUserFactory(final String userIdHashKey) {
         this.userIdHashKey = userIdHashKey;
         this.domainMap = new HashMap<String, String>();
-        this.log = log;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class RequestAttributeUserFactory implements UserFactory {
                 domain = domain.substring(first + 1, domain.length());
             }
         } catch (URISyntaxException e) {
-            this.log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             domain = "unknown";
         }
         return domain;

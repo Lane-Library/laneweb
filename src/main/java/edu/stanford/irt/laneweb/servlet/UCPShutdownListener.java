@@ -3,10 +3,10 @@ package edu.stanford.irt.laneweb.servlet;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import oracle.ucp.UniversalConnectionPoolException;
 import oracle.ucp.admin.UniversalConnectionPoolManager;
 import oracle.ucp.admin.UniversalConnectionPoolManagerImpl;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class UCPShutdownListener implements ServletContextListener {
 

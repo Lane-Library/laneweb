@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.security.auth.Subject;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ldap.CommunicationException;
 import org.springframework.ldap.NamingException;
 import org.springframework.ldap.core.AttributesMapper;
@@ -41,26 +42,25 @@ public class LDAPDataAccess {
         }
     }
 
+    private static final Logger LOG = LoggerFactory.getLogger(LDAPDataAccess.class);
+
     private AttributesMapper<LDAPData> attributesMapper;
 
     private final LdapTemplate ldapTemplate;
 
-    private final Logger log;
-
     private final SubjectSource subjectSource;
 
     public LDAPDataAccess(final LdapTemplate ldapTemplate, final SubjectSource subjectSource,
-            final Set<String> activeAffiliations, final Logger log) {
+            final Set<String> activeAffiliations) {
         this.ldapTemplate = ldapTemplate;
         this.subjectSource = subjectSource;
         this.attributesMapper = new LDAPAttributesMapper(Collections.unmodifiableSet(activeAffiliations));
-        this.log = log;
     }
 
     public LDAPData getLdapDataForSunetid(final String sunetid) {
         LDAPData ldapData = doGet("susunetid=" + sunetid);
         if (ldapData == null) {
-            this.log.warn("using sunetid for name");
+            LDAPDataAccess.LOG.warn("using sunetid for name");
             ldapData = new LDAPData(sunetid, sunetid, null, false, null);
         }
         return ldapData;
@@ -69,7 +69,7 @@ public class LDAPDataAccess {
     public LDAPData getLdapDataForUnivid(final String univid) {
         LDAPData ldapData = doGet("suunivid=" + univid);
         if (ldapData == null) {
-            this.log.warn("can't find sunetid for univid: " + univid);
+            LDAPDataAccess.LOG.warn("can't find sunetid for univid: " + univid);
             ldapData = new LDAPData(null, null, univid, false, null);
         }
         return ldapData;
@@ -79,14 +79,14 @@ public class LDAPDataAccess {
         LDAPData ldapData = null;
         try {
             Subject subject = this.subjectSource.getSubject();
-            ldapData = Subject.doAs(subject, new LDAPPrivilegedAction(this.ldapTemplate, lookupFilter,
-                    this.attributesMapper));
+            ldapData = Subject.doAs(subject,
+                    new LDAPPrivilegedAction(this.ldapTemplate, lookupFilter, this.attributesMapper));
         } catch (SecurityException e) {
-            this.log.error("unable to authenticate", e);
+            LDAPDataAccess.LOG.error("unable to authenticate", e);
         } catch (CommunicationException e) {
-            this.log.error("unable to connect to ldap server", e);
+            LDAPDataAccess.LOG.error("unable to connect to ldap server", e);
         } catch (NamingException e) {
-            this.log.error("failed to get ldap data", e);
+            LDAPDataAccess.LOG.error("failed to get ldap data", e);
         }
         return ldapData;
     }

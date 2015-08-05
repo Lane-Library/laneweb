@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
@@ -73,6 +74,8 @@ public class ProxyHostManager {
         }
     }
 
+    private static final Logger LOG = LoggerFactory.getLogger("error handler");
+
     // update every 2 hours
     private static final long UPDATE_INTERVAL = 1000L * 60L * 60L * 2L;
 
@@ -82,17 +85,14 @@ public class ProxyHostManager {
 
     private long lastUpdate = 0;
 
-    private Logger log;
-
     private Set<String> proxyHosts;
 
-    public ProxyHostManager(final DataSource dataSource, final Logger log) {
+    public ProxyHostManager(final DataSource dataSource) {
         this.dataSource = dataSource;
-        this.log = log;
         this.proxyHosts = new HashSet<String>();
         String proxyHost = null;
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
-                "ezproxy-servers.txt"), StandardCharsets.UTF_8))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt"), StandardCharsets.UTF_8))) {
             while ((proxyHost = reader.readLine()) != null) {
                 this.proxyHosts.add(proxyHost);
             }
@@ -137,7 +137,7 @@ public class ProxyHostManager {
                         Set<String> newSet = new DatabaseProxyHostSet(ProxyHostManager.this.dataSource);
                         ProxyHostManager.this.proxyHosts = newSet;
                     } catch (LanewebException e) {
-                        ProxyHostManager.this.log.error("proxy hosts not updated", e);
+                        LOG.error("proxy hosts not updated", e);
                     }
                 }
             });

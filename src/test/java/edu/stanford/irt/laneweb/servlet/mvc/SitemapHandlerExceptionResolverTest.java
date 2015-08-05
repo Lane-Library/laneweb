@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.ClientAbortException;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 import edu.stanford.irt.cocoon.pipeline.Pipeline;
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
@@ -36,8 +35,8 @@ public class SitemapHandlerExceptionResolverTest {
         private Map<String, Object> model;
 
         public TestSitemapHandlerExceptionResolver(final Map<String, Object> model,
-                final ComponentFactory componentFactory, final SourceResolver sourceResolver, final Logger log) {
-            super(componentFactory, sourceResolver, log);
+                final ComponentFactory componentFactory, final SourceResolver sourceResolver) {
+            super(componentFactory, sourceResolver);
             this.model = model;
         }
 
@@ -52,8 +51,6 @@ public class SitemapHandlerExceptionResolverTest {
     private DataBinder dataBinder;
 
     private Object handler;
-
-    private Logger log;
 
     private Map<String, Object> model;
 
@@ -73,13 +70,11 @@ public class SitemapHandlerExceptionResolverTest {
     public void setUp() {
         this.componentFactory = createMock(ComponentFactory.class);
         this.sourceResolver = createMock(SourceResolver.class);
-        this.log = createMock(Logger.class);
         this.dataBinder = createMock(DataBinder.class);
         this.servletContext = createMock(ServletContext.class);
         this.sitemap = createMock(Sitemap.class);
         this.model = new HashMap<String, Object>();
-        this.resolver = new TestSitemapHandlerExceptionResolver(this.model, this.componentFactory, this.sourceResolver,
-                this.log);
+        this.resolver = new TestSitemapHandlerExceptionResolver(this.model, this.componentFactory, this.sourceResolver);
         this.resolver.setDataBinder(this.dataBinder);
         this.resolver.setServletContext(this.servletContext);
         this.resolver.setSitemap(this.sitemap);
@@ -93,27 +88,24 @@ public class SitemapHandlerExceptionResolverTest {
         Exception ex = new ClientAbortException(nested);
         expect(this.request.getRemoteAddr()).andReturn("remoteAddr");
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("requestURL"));
-        this.log.warn(ex.toString() + " ip=remoteAddr url=requestURL");
         expect(this.response.isCommitted()).andReturn(true);
-        replay(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        replay(this.sourceResolver, this.componentFactory, this.request, this.response);
         this.resolver.resolveException(this.request, this.response, this.handler, ex);
-        verify(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        verify(this.sourceResolver, this.componentFactory, this.request, this.response);
     }
 
     @Test
     public void testResolveException() {
         Exception ex = new Exception();
-        this.log.error(ex.toString(), ex);
         expect(this.response.isCommitted()).andReturn(true);
-        replay(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        replay(this.sourceResolver, this.componentFactory, this.request, this.response);
         this.resolver.resolveException(this.request, this.response, this.handler, ex);
-        verify(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        verify(this.sourceResolver, this.componentFactory, this.request, this.response);
     }
 
     @Test
     public void testResolveExceptionNotCommitted() throws IOException {
         Exception ex = new Exception();
-        this.log.error(ex.toString(), ex);
         expect(this.response.isCommitted()).andReturn(false);
         expect(this.request.getMethod()).andReturn("GET");
         this.response.setStatus(404);
@@ -124,17 +116,16 @@ public class SitemapHandlerExceptionResolverTest {
         expect(this.sitemap.buildPipeline(isA(SitemapContext.class))).andReturn(pipeline);
         expect(this.response.getOutputStream()).andReturn(null);
         pipeline.process((OutputStream) null);
-        replay(this.sourceResolver, this.componentFactory, this.log, this.request, this.response, this.dataBinder,
+        replay(this.sourceResolver, this.componentFactory, this.request, this.response, this.dataBinder,
                 this.servletContext, this.sitemap, pipeline);
         this.resolver.resolveException(this.request, this.response, this.handler, ex);
-        verify(this.sourceResolver, this.componentFactory, this.log, this.request, this.response, this.dataBinder,
+        verify(this.sourceResolver, this.componentFactory, this.request, this.response, this.dataBinder,
                 this.servletContext, this.sitemap, pipeline);
     }
 
     @Test
     public void testResolveExceptionThrowIOException() throws IOException {
         Exception ex = new Exception();
-        this.log.error(ex.toString(), ex);
         expect(this.response.isCommitted()).andReturn(false);
         expect(this.request.getMethod()).andReturn("GET");
         this.response.setStatus(404);
@@ -145,11 +136,10 @@ public class SitemapHandlerExceptionResolverTest {
         expect(this.sitemap.buildPipeline(isA(SitemapContext.class))).andReturn(pipeline);
         IOException ioe = new IOException();
         expect(this.response.getOutputStream()).andThrow(ioe);
-        this.log.error("Exception while handling exception", ioe);
-        replay(this.sourceResolver, this.componentFactory, this.log, this.request, this.response, this.dataBinder,
+        replay(this.sourceResolver, this.componentFactory, this.request, this.response, this.dataBinder,
                 this.servletContext, this.sitemap, pipeline);
         this.resolver.resolveException(this.request, this.response, this.handler, ex);
-        verify(this.sourceResolver, this.componentFactory, this.log, this.request, this.response, this.dataBinder,
+        verify(this.sourceResolver, this.componentFactory, this.request, this.response, this.dataBinder,
                 this.servletContext, this.sitemap, pipeline);
     }
 
@@ -157,31 +147,28 @@ public class SitemapHandlerExceptionResolverTest {
     public void testResolveFileNotFoundException() {
         Exception nested = new FileNotFoundException();
         Exception ex = new Exception(nested);
-        this.log.warn(nested.toString());
         expect(this.response.isCommitted()).andReturn(true);
-        replay(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        replay(this.sourceResolver, this.componentFactory, this.request, this.response);
         this.resolver.resolveException(this.request, this.response, this.handler, ex);
-        verify(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        verify(this.sourceResolver, this.componentFactory, this.request, this.response);
     }
 
     @Test
     public void testResolveNestedException() {
         Exception nested = new Exception();
         Exception ex = new Exception(nested);
-        this.log.error(ex.toString(), nested);
         expect(this.response.isCommitted()).andReturn(true);
-        replay(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        replay(this.sourceResolver, this.componentFactory, this.request, this.response);
         this.resolver.resolveException(this.request, this.response, this.handler, ex);
-        verify(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        verify(this.sourceResolver, this.componentFactory, this.request, this.response);
     }
 
     @Test
     public void testResolveResourceNotFoundException() {
         Exception ex = new ResourceNotFoundException("notfound");
-        this.log.warn(ex.toString());
         expect(this.response.isCommitted()).andReturn(true);
-        replay(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        replay(this.sourceResolver, this.componentFactory, this.request, this.response);
         this.resolver.resolveException(this.request, this.response, this.handler, ex);
-        verify(this.sourceResolver, this.componentFactory, this.log, this.request, this.response);
+        verify(this.sourceResolver, this.componentFactory, this.request, this.response);
     }
 }
