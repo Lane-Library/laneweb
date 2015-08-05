@@ -15,7 +15,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
 
     private static final int ONE_DAY = 1000 * 60 * 60 * 24;
 
-    private static final Logger log = LoggerFactory.getLogger("error handler");
+    private static final Logger LOG = LoggerFactory.getLogger("error handler");
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -41,7 +41,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
                 result = Long.toString(expiry / ONE_DAY);
             }
         } catch (NumberFormatException e) {
-            this.log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             result = "ERROR";
         }
         return result;
