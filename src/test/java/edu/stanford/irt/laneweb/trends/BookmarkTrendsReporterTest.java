@@ -9,25 +9,21 @@ import static org.easymock.EasyMock.verify;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 
 public class BookmarkTrendsReporterTest {
 
-    BookmarkDAO dao;
+    private BookmarkDAO dao;
 
-    Logger logger;
+    private BookmarkTrendsReporter reporter;
 
-    BookmarkTrendsReporter reporter;
-
-    GoogleTracker tracker;
+    private GoogleTracker tracker;
 
     @Before
     public void setUp() throws Exception {
-        this.logger = createMock(Logger.class);
         this.tracker = createMock(GoogleTracker.class);
-        this.reporter = new BookmarkTrendsReporter(this.logger);
+        this.reporter = new BookmarkTrendsReporter();
         this.dao = createMock(BookmarkDAO.class);
         this.reporter.setBookmarkDAO(this.dao);
         this.reporter.setGoogleTracker(this.tracker);

@@ -15,7 +15,6 @@ import javax.security.auth.Subject;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 import org.springframework.ldap.CommunicationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
@@ -28,8 +27,6 @@ public class LDAPDataAccessTest {
 
     private LdapTemplate ldapTemplate;
 
-    private Logger log;
-
     private Subject subject = new Subject();
 
     private SubjectSource subjectSource;
@@ -37,10 +34,8 @@ public class LDAPDataAccessTest {
     @Before
     public void setUp() {
         this.ldapTemplate = createMock(LdapTemplate.class);
-        this.log = createMock(Logger.class);
         this.subjectSource = createMock(SubjectSource.class);
-        this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.subjectSource,
-                Collections.emptySet(), this.log);
+        this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.subjectSource, Collections.emptySet());
         this.ldapData = createMock(LDAPData.class);
     }
 
@@ -48,10 +43,9 @@ public class LDAPDataAccessTest {
     @Test
     public void testGetUserInfo() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
-        expect(
-                this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
-                        (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(
-                Collections.singletonList(this.ldapData));
+        expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
+                (AttributesMapper<LDAPData>) isA(AttributesMapper.class)))
+                        .andReturn(Collections.singletonList(this.ldapData));
         replay(this.subjectSource, this.ldapTemplate);
         assertSame(this.ldapData, this.lDAPDataAccess.getLdapDataForSunetid("ditenus"));
         verify(this.subjectSource, this.ldapTemplate);
@@ -61,10 +55,8 @@ public class LDAPDataAccessTest {
     @Test
     public void testGetUserInfoEmpty() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
-        expect(
-                this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
-                        (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(
-                Collections.emptyList());
+        expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
+                (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(Collections.emptyList());
         replay(this.subjectSource, this.ldapTemplate);
         this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
         verify(this.subjectSource, this.ldapTemplate);
@@ -74,9 +66,8 @@ public class LDAPDataAccessTest {
     @Test
     public void testGetUserInfoNull() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
-        expect(
-                this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
-                        (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(null);
+        expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
+                (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(null);
         replay(this.subjectSource, this.ldapTemplate);
         this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
         verify(this.subjectSource, this.ldapTemplate);
@@ -86,10 +77,8 @@ public class LDAPDataAccessTest {
     @Test
     public void testThrowCommunicationException() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
-        expect(
-                this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
-                        (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andThrow(
-                new CommunicationException(null));
+        expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
+                (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andThrow(new CommunicationException(null));
         replay(this.subjectSource, this.ldapTemplate);
         LDAPData data = this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
         assertEquals("ditenus", data.getName());
@@ -100,10 +89,8 @@ public class LDAPDataAccessTest {
     @Test
     public void testThrowCommunicationExceptionNounivid() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
-        expect(
-                this.ldapTemplate.search(eq(""), eq("suunivid=12345678"),
-                        (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andThrow(
-                new CommunicationException(null));
+        expect(this.ldapTemplate.search(eq(""), eq("suunivid=12345678"),
+                (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andThrow(new CommunicationException(null));
         replay(this.subjectSource, this.ldapTemplate);
         LDAPData data = this.lDAPDataAccess.getLdapDataForUnivid("12345678");
         assertEquals(null, data.getName());

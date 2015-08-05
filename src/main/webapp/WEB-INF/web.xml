@@ -26,7 +26,6 @@
             /WEB-INF/spring/cme.xml
             /WEB-INF/spring/datasources.xml
             /WEB-INF/spring/eresources.xml
-            /WEB-INF/spring/logger.xml
             /WEB-INF/spring/laneweb.xml
             /WEB-INF/spring/mapping.xml
             /WEB-INF/spring/pipeline.xml
@@ -115,8 +114,6 @@
         <filter-name>searchImageFilter</filter-name>
         <url-pattern>/search.html</url-pattern>
     </filter-mapping>
-    
-    
     
     <filter-mapping>
         <filter-name>monitoring</filter-name>

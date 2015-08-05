@@ -6,19 +6,16 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.CookieName;
 
 public class LoginExpirationCookieDataBinder implements DataBinder {
 
+    private static final Logger LOG = LoggerFactory.getLogger("error handler");
+
     private static final int ONE_DAY = 1000 * 60 * 60 * 24;
-
-    private Logger log;
-
-    public LoginExpirationCookieDataBinder(final Logger log) {
-        this.log = log;
-    }
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -44,7 +41,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
                 result = Long.toString(expiry / ONE_DAY);
             }
         } catch (NumberFormatException e) {
-            this.log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             result = "ERROR";
         }
         return result;

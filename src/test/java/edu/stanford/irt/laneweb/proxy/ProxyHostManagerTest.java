@@ -17,15 +17,12 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 public class ProxyHostManagerTest {
 
     private Connection connection;
 
     private DataSource dataSource;
-
-    private Logger log;
 
     private ProxyHostManager manager;
 
@@ -36,8 +33,7 @@ public class ProxyHostManagerTest {
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        this.log = createMock(Logger.class);
-        this.manager = new ProxyHostManager(this.dataSource, this.log);
+        this.manager = new ProxyHostManager(this.dataSource);
         this.connection = createMock(Connection.class);
         this.statement = createMock(Statement.class);
         this.resultSet = createMock(ResultSet.class);

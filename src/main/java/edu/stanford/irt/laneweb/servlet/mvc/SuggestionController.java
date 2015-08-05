@@ -10,6 +10,7 @@ import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -41,18 +42,16 @@ public class SuggestionController {
 
     private SuggestionManager eresourceSuggestionManager;
 
-    private Logger log;
+    private static final Logger LOG = LoggerFactory.getLogger(SuggestionController.class);
 
     private SuggestionManager meshSuggestionManager;
 
     @Autowired
     public SuggestionController(
             @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager eresourceSuggestionManager,
-            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/mesh") final SuggestionManager meshSuggestionManager,
-            @Qualifier("org.slf4j.Logger/SuggestionController") final Logger log) {
+            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/mesh") final SuggestionManager meshSuggestionManager) {
         this.eresourceSuggestionManager = eresourceSuggestionManager;
         this.meshSuggestionManager = meshSuggestionManager;
-        this.log = log;
     }
 
     @RequestMapping(value = "/apps/suggest/getSuggestionList")
@@ -89,8 +88,8 @@ public class SuggestionController {
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseBody
     public Map<String, List<String>> handleIllegalArgumentException(final IllegalArgumentException ex) {
-        if (this.log.isWarnEnabled()) {
-            this.log.warn(ex.getMessage(), ex);
+        if (LOG.isWarnEnabled()) {
+            LOG.warn(ex.getMessage(), ex);
         }
         return EMPTY_SUGGESTIONS;
     }

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
@@ -30,8 +29,6 @@ public class CookieUserFactoryTest {
 
     private CookieUserFactory factory;
 
-    private Logger log;
-
     private HttpServletRequest request;
 
     private PersistentLoginToken token;
@@ -43,9 +40,8 @@ public class CookieUserFactoryTest {
     @Before
     public void setUp() {
         this.userIdHashKey = "key";
-        this.log = createMock(Logger.class);
         this.codec = createMock(UserCookieCodec.class);
-        this.factory = new CookieUserFactory(this.codec, this.log, this.userIdHashKey);
+        this.factory = new CookieUserFactory(this.codec, this.userIdHashKey);
         this.request = createMock(HttpServletRequest.class);
         this.cookie = createMock(Cookie.class);
         this.token = createMock(PersistentLoginToken.class);
@@ -62,9 +58,9 @@ public class CookieUserFactoryTest {
         expect(this.codec.restoreLoginToken("value", "key")).andReturn(this.token);
         expect(this.token.isValidFor(gt(0L), eq("useragent".hashCode()))).andReturn(true);
         expect(this.token.getUser()).andReturn(this.user);
-        replay(this.log, this.codec, this.request, this.cookie, this.token, this.user);
+        replay(this.codec, this.request, this.cookie, this.token, this.user);
         assertSame(this.user, this.factory.createUser(this.request));
-        verify(this.log, this.codec, this.request, this.cookie, this.token, this.user);
+        verify(this.codec, this.request, this.cookie, this.token, this.user);
     }
 
     @Test
@@ -76,10 +72,9 @@ public class CookieUserFactoryTest {
         expect(this.cookie.getValue()).andReturn("value").times(2);
         LanewebException ex = new LanewebException("invalid encryptedValue");
         expect(this.codec.restoreLoginToken("value", "key")).andThrow(ex);
-        this.log.error("failed to decode userid from: value", ex);
-        replay(this.log, this.codec, this.request, this.cookie, this.token, this.user);
+        replay(this.codec, this.request, this.cookie, this.token, this.user);
         assertNull(this.factory.createUser(this.request));
-        verify(this.log, this.codec, this.request, this.cookie, this.token, this.user);
+        verify(this.codec, this.request, this.cookie, this.token, this.user);
     }
 
     @Test
@@ -91,8 +86,8 @@ public class CookieUserFactoryTest {
         expect(this.cookie.getValue()).andReturn("value");
         expect(this.codec.restoreLoginToken("value", "key")).andReturn(this.token);
         expect(this.token.isValidFor(gt(0L), eq("useragent".hashCode()))).andReturn(false);
-        replay(this.log, this.codec, this.request, this.cookie, this.token, this.user);
+        replay(this.codec, this.request, this.cookie, this.token, this.user);
         assertNull(this.factory.createUser(this.request));
-        verify(this.log, this.codec, this.request, this.cookie, this.token, this.user);
+        verify(this.codec, this.request, this.cookie, this.token, this.user);
     }
 }

@@ -17,6 +17,7 @@ import java.util.Objects;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.IOUtils;
@@ -25,6 +26,8 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 public class SQLBookmarkDAO implements BookmarkDAO {
 
     private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE SUNETID = ?";
+
+    private static final Logger LOG = LoggerFactory.getLogger(SQLBookmarkDAO.class);
 
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
 
@@ -39,11 +42,8 @@ public class SQLBookmarkDAO implements BookmarkDAO {
 
     private DataSource dataSource;
 
-    private Logger log;
-
-    public SQLBookmarkDAO(final DataSource dataSource, final Logger log) {
+    public SQLBookmarkDAO(final DataSource dataSource) {
         this.dataSource = dataSource;
-        this.log = log;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 links = (List<Object>) oip.readObject();
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
-            this.log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         } finally {
             IOUtils.closeStream(oip);
             JdbcUtils.closeResultSet(rs);
@@ -130,7 +130,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 try {
                     conn.rollback();
                 } catch (SQLException e1) {
-                    this.log.error(e1.getMessage(), e1);
+                    LOG.error(e1.getMessage(), e1);
                 }
             }
             throw new LanewebException(e);

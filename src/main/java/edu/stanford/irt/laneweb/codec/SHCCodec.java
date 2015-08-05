@@ -16,22 +16,22 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
 // TODO: remove code duplicated with UserCookieCodec
 public class SHCCodec {
 
+    private static final Logger LOG = LoggerFactory.getLogger(SHCCodec.class);
+
     private Cipher cipher;
 
     private AlgorithmParameterSpec initialVector;
 
-    private final Logger log;
-
     private SecretKey secretKey;
 
-    public SHCCodec(final String key, final String vector, final Logger log) {
-        this.log = log;
+    public SHCCodec(final String key, final String vector) {
         // pad with 0 bytes to 16:
         byte[] src = Base64.decodeBase64(key);
         byte[] dst = new byte[16];
@@ -70,7 +70,7 @@ public class SHCCodec {
         try {
             result = this.cipher.doFinal(input);
         } catch (IllegalBlockSizeException | BadPaddingException e) {
-            this.log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }

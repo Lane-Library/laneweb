@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 import edu.stanford.irt.laneweb.codec.SHCCodec;
 import edu.stanford.irt.laneweb.model.Model;
@@ -31,8 +30,6 @@ public class SHCLoginControllerTest {
 
     private LDAPDataAccess ldapDataAccess;
 
-    private Logger log;
-
     private HttpServletRequest request;
 
     private HttpServletResponse response;
@@ -46,8 +43,7 @@ public class SHCLoginControllerTest {
         this.validTimestamp = Long.toString(new Date().getTime());
         this.codec = createMock(SHCCodec.class);
         this.ldapDataAccess = createMock(LDAPDataAccess.class);
-        this.log = createMock(Logger.class);
-        this.controller = new SHCLoginController(this.codec, this.ldapDataAccess, this.log);
+        this.controller = new SHCLoginController(this.codec, this.ldapDataAccess);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.session = createMock(HttpSession.class);
