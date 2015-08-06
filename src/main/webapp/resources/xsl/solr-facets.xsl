@@ -99,7 +99,7 @@
             <body>
                 <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
 	                <div class="bd">
-		                <h3>Narrow your search</h3>
+		                <h3>Narrow Your Search</h3>
 		                <xsl:if test="$search-mode and string-length($facets) > 0">
 		                  <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')//s:row[s:genre[ . = 'all']]/s:hits"/>
 		                  <xsl:if test="number($counts > 0)">
