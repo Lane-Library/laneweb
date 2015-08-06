@@ -28,7 +28,7 @@
             <xsl:choose>
                 <xsl:when test="../../string[. = 'recordType'] and name = 'pubmed'">PubMed</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and name = 'bib'">Lane Catalog</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and name = 'web'">Lane Web Page</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and name = 'web'">Lane Web Site</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and name = 'class'">Lane Class</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and name = 'auth'">Lane Community Info</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and name = 'laneblog'">Lane Blog</xsl:when>
