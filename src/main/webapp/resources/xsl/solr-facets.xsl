@@ -71,6 +71,7 @@
                     <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $facets-per-browse-page]"/>
                     <li>
                         <div class="s-pagination facetBrowse no-bookmarking">
+                            <a class="close fa fa-close"></a>
 					        <xsl:choose>
 					            <xsl:when test="number($page) &gt; 1">
 									<a class="pagingButton previous" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> </a>

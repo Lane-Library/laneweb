@@ -79,6 +79,15 @@
             // listeners for left/right arrows
             doc.on("key", handleArrowKey, "up:37", this, "previous");
             doc.on("key", handleArrowKey, "up:39", this, "next");
+            // close button on facet browse lightbox
+            Y.lane.Lightbox.on("contentChanged", function() {
+                var browseFacetClose = Y.one(".facetBrowse .close");
+                if (browseFacetClose) {
+                    browseFacetClose.on('click', function() {
+                        Y.lane.Lightbox.hide();
+                    });
+                }
+            });
         }
 })();
         
