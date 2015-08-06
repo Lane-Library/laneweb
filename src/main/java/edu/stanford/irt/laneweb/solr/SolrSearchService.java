@@ -73,8 +73,10 @@ public class SolrSearchService implements CollectionManager {
         int modifiedOffset = (pageRequest.getOffset() == 0) ? 0 : pageRequest.getOffset() - 1;
         FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
         fieldWithFacetParams.setOffset(Integer.valueOf(modifiedOffset));
-        FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(new FacetOptions()
-        .addFacetOnField(fieldWithFacetParams).setFacetMinCount(1).setFacetLimit(pageRequest.getPageSize()));
+        String cleanQuery = SolrQueryParser.parse(query);
+        FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery))
+        .setFacetOptions(new FacetOptions().addFacetOnField(fieldWithFacetParams).setFacetMinCount(1)
+                .setFacetLimit(pageRequest.getPageSize()));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));
@@ -84,7 +86,8 @@ public class SolrSearchService implements CollectionManager {
 
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters) {
         String facetFilters = facetStringToFilters(filters);
-        FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(query)).setFacetOptions(FACET_OPTIONS
+        String cleanQuery = SolrQueryParser.parse(query);
+        FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery)).setFacetOptions(FACET_OPTIONS
                 .setFacetLimit(FACETS_LIST_SIZE));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
         if (!facetFilters.isEmpty()) {
@@ -98,8 +101,8 @@ public class SolrSearchService implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return this.repository.browseAllCoreByType(SolrTypeManager.convertToNewType(type), new PageRequest(0,
-                Integer.MAX_VALUE));
+        String newType = SolrTypeManager.convertToNewType(type);
+        return this.repository.browseAllCoreByType(newType, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override
@@ -110,8 +113,8 @@ public class SolrSearchService implements CollectionManager {
         if (null == mesh) {
             throw new IllegalArgumentException("null mesh");
         }
-        return this.repository.browseAllByMeshAndType(mesh, SolrTypeManager.convertToNewType(type), new PageRequest(0,
-                Integer.MAX_VALUE));
+        String newType = SolrTypeManager.convertToNewType(type);
+        return this.repository.browseAllByMeshAndType(mesh, newType, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override
@@ -127,8 +130,8 @@ public class SolrSearchService implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return this.repository.browseAllByType(SolrTypeManager.convertToNewType(type), new PageRequest(0,
-                Integer.MAX_VALUE));
+        String newType = SolrTypeManager.convertToNewType(type);
+        return this.repository.browseAllByType(newType, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override
@@ -147,13 +150,14 @@ public class SolrSearchService implements CollectionManager {
 
     @Override
     public List<Eresource> search(final String query) {
-        return this.repository.searchFindAllWithFilter(query, EMPTY, new PageRequest(0, 50)).getContent();
+        return this.repository.searchFindAllWithFilter(SolrQueryParser.parse(query), EMPTY, new PageRequest(0, 50))
+                .getContent();
     }
 
     @Override
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
-        SolrResultPage<?> facets = this.repository.facetByType(query, new PageRequest(0, 1));
+        SolrResultPage<?> facets = this.repository.facetByType(SolrQueryParser.parse(query), new PageRequest(0, 1));
         int total = (int) facets.getTotalElements();
         result.put("all", Integer.valueOf(total));
         for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
@@ -180,27 +184,34 @@ public class SolrSearchService implements CollectionManager {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return this.repository.searchFindByType(query, SolrTypeManager.convertToNewType(type), new PageRequest(0, 50))
-                .getContent();
+        String cleanQuery = SolrQueryParser.parse(query);
+        String newType = SolrTypeManager.convertToNewType(type);
+        return this.repository.searchFindByType(cleanQuery, newType, new PageRequest(0, 50)).getContent();
     }
 
     public Page<Eresource> searchType(final String type, final String query, final Pageable pageRequest) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        return this.repository.searchFindByType(query, SolrTypeManager.convertToNewType(type), pageRequest);
+        String cleanQuery = SolrQueryParser.parse(query);
+        return this.repository.searchFindByType(cleanQuery, SolrTypeManager.convertToNewType(type), pageRequest);
     }
 
     public Page<Eresource> searchWithFilters(final String query, final String facets, final Pageable pageRequest) {
-        return this.repository.searchFindAllWithFilter(query, facetStringToFilters(facets), pageRequest);
+        String cleanQuery = SolrQueryParser.parse(query);
+        return this.repository.searchFindAllWithFilter(cleanQuery, facetStringToFilters(facets), pageRequest);
     }
 
     public List<Eresource> suggestFindAll(final String query) {
-        return this.repository.suggestFindAll(query.toLowerCase(), query.replaceAll(" ", " +"), new PageRequest(0, 10));
+        String cleanQuery = SolrQueryParser.parse(query);
+        return this.repository.suggestFindAll(cleanQuery.toLowerCase(), cleanQuery.replaceAll(" ", " +"),
+                new PageRequest(0, 10));
     }
 
     public List<Eresource> suggestFindByType(final String query, final String type) {
-        return this.repository.suggestFindByType(query, SolrTypeManager.convertToNewType(type), new PageRequest(0, 10));
+        String cleanQuery = SolrQueryParser.parse(query);
+        return this.repository.suggestFindByType(cleanQuery, SolrTypeManager.convertToNewType(type), new PageRequest(0,
+                10));
     }
 
     private String facetStringToFilters(final String facets) {
