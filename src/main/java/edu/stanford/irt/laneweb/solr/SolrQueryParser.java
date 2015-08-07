@@ -1,13 +1,12 @@
 package edu.stanford.irt.laneweb.solr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Clean query strings before sending to Solr
  * <p>
- * Case 110133: Solr can parse queries with brackets and braces as expensive ranges queries, causing performance
- * problems
- * </p>
- * <p>
- * Lucence special characters:
+ * Lucence special characters: + - && || ! ( ) { } [ ] ^ " ~ * ? : \
  * https://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Escaping%20Special%20Characters
  * </p>
  *
@@ -15,39 +14,50 @@ package edu.stanford.irt.laneweb.solr;
  */
 public final class SolrQueryParser {
 
-    private static final String SPACE_TO_SPACE = " TO ";
+    private static final List<Character> ESCAPEABLE_CHARS = new ArrayList<Character>();
 
+    private static final String TOGGLE_OFF = "advanced:true";
+    static {
+        // these seem harmless || &&
+        // these seem useful and harmless " *
+        ESCAPEABLE_CHARS.add(new Character('+'));
+        ESCAPEABLE_CHARS.add(new Character('-'));
+        ESCAPEABLE_CHARS.add(new Character('!'));
+        ESCAPEABLE_CHARS.add(new Character('('));
+        ESCAPEABLE_CHARS.add(new Character(')'));
+        ESCAPEABLE_CHARS.add(new Character('{'));
+        ESCAPEABLE_CHARS.add(new Character('}'));
+        ESCAPEABLE_CHARS.add(new Character('['));
+        ESCAPEABLE_CHARS.add(new Character(']'));
+        ESCAPEABLE_CHARS.add(new Character('^'));
+        ESCAPEABLE_CHARS.add(new Character('~'));
+        ESCAPEABLE_CHARS.add(new Character('?'));
+        ESCAPEABLE_CHARS.add(new Character(':'));
+        ESCAPEABLE_CHARS.add(new Character('\\'));
+    }
+
+    // to escape: ? [ ] { }
+    // to disable all escaping: advanced:true
     public static String parse(final String query) {
+        if (query.contains(TOGGLE_OFF)) {
+            return query.replace(TOGGLE_OFF, "").trim();
+        }
         return maybeEscape(query);
     }
 
     private static boolean isEscapableCharacter(final char c) {
-        if (c == '[' || c == ']' || c == '{' || c == '}') {
-            return true;
-        }
-        return false;
+        return ESCAPEABLE_CHARS.contains(Character.valueOf(c));
     }
 
     private static String maybeEscape(final String query) {
-        if (needsEscaping(query)) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < query.length(); i++) {
-                char c = query.charAt(i);
-                if (isEscapableCharacter(c)) {
-                    sb.append('\\');
-                }
-                sb.append(c);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < query.length(); i++) {
+            char c = query.charAt(i);
+            if (isEscapableCharacter(c)) {
+                sb.append('\\');
             }
-            return sb.toString();
+            sb.append(c);
         }
-        return query;
-    }
-
-    private static boolean needsEscaping(final String query) {
-        // escape brackets/braces if range query lacks the " TO " keyword
-        if ((query.contains("[") && query.contains("]")) || (query.contains("{") && query.contains("}"))) {
-            return !query.contains(SPACE_TO_SPACE);
-        }
-        return false;
+        return sb.toString();
     }
 }
