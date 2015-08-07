@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,8 +30,9 @@ import edu.stanford.irt.laneweb.user.User;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ActiveProfiles("test")
-@ContextConfiguration(locations = { "classpath:net/bull/javamelody/monitoring-spring.xml",
-        "file:src/main/webapp/WEB-INF/spring/*.xml", "file:src/main/webapp/*.xmap" }, initializers = LanewebContextInitializer.class)
+@ContextHierarchy({
+    @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/laneweb.xml", initializers = LanewebContextInitializer.class),
+    @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/laneweb-servlet.xml", initializers = LanewebContextInitializer.class)})
 public class LanewebIT {
 
     private MockMvc mockMvc;

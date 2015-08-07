@@ -20,33 +20,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:net/bull/javamelody/monitoring-spring.xml
-            /WEB-INF/spring/bassett.xml
-            /WEB-INF/spring/binding.xml
-            /WEB-INF/spring/bookmarks.xml
-            /WEB-INF/spring/cme.xml
-            /WEB-INF/spring/datasources.xml
-            /WEB-INF/spring/eresources.xml
             /WEB-INF/spring/laneweb.xml
-            /WEB-INF/spring/mapping.xml
-            /WEB-INF/spring/pipeline.xml
-            /WEB-INF/spring/proxy.xml
-            /WEB-INF/spring/querymap.xml
-            /WEB-INF/spring/redirect.xml
-            /WEB-INF/spring/search.xml
-            /WEB-INF/spring/search-image.xml
-            /WEB-INF/spring/sitemap.xml
-            /WEB-INF/spring/source.xml
-            /WEB-INF/spring/suggest.xml
-            /WEB-INF/spring/trends.xml
-            /WEB-INF/spring/voyager-login.xml
-            /applications.xmap
-            /bookmarks.xmap
-            /classes.xmap
-            /content.xmap
-            /eresources.xmap
-            /mobile.xmap
-            /rss.xmap
-            /sitemap.xmap
         </param-value>
     </context-param>
 
