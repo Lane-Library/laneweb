@@ -36,8 +36,6 @@ public final class SolrQueryParser {
         ESCAPEABLE_CHARS.add(new Character('\\'));
     }
 
-    // to escape: ? [ ] { }
-    // to disable all escaping: advanced:true
     public static String parse(final String query) {
         if (query.contains(TOGGLE_OFF)) {
             return query.replace(TOGGLE_OFF, "").trim();
