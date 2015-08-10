@@ -2,7 +2,9 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Set;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +16,11 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
+import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 // TODO: simplify testing of this by injecting a RequestHandler instead of extending one
 public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler
@@ -24,9 +28,10 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
 
     private static final Logger LOG = LoggerFactory.getLogger("error handler");
 
-    public SitemapHandlerExceptionResolver(final ComponentFactory componentFactory,
-            final SourceResolver sourceResolver) {
-        super(componentFactory, sourceResolver);
+    public SitemapHandlerExceptionResolver(final ComponentFactory componentFactory, final DataBinder dataBinder,
+            final Set<String> methodsNotAllowed, final String prefix, final ServletContext servletContext,
+            final Sitemap sitemap, final SourceResolver sourceResolver) {
+        super(componentFactory, dataBinder, methodsNotAllowed, prefix, servletContext, sitemap, sourceResolver);
     }
 
     @Override

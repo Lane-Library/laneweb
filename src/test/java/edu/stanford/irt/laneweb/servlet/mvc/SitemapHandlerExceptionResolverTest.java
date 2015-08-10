@@ -9,8 +9,10 @@ import static org.easymock.EasyMock.verify;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -35,8 +37,10 @@ public class SitemapHandlerExceptionResolverTest {
         private Map<String, Object> model;
 
         public TestSitemapHandlerExceptionResolver(final Map<String, Object> model,
-                final ComponentFactory componentFactory, final SourceResolver sourceResolver) {
-            super(componentFactory, sourceResolver);
+                final ComponentFactory componentFactory, final DataBinder dataBinder,
+                final Set<String> methodsNotAllowed, final String prefix, final ServletContext servletContext,
+                final Sitemap sitemap, final SourceResolver sourceResolver) {
+            super(componentFactory, dataBinder, methodsNotAllowed, prefix, servletContext, sitemap, sourceResolver);
             this.model = model;
         }
 
@@ -74,10 +78,8 @@ public class SitemapHandlerExceptionResolverTest {
         this.servletContext = createMock(ServletContext.class);
         this.sitemap = createMock(Sitemap.class);
         this.model = new HashMap<String, Object>();
-        this.resolver = new TestSitemapHandlerExceptionResolver(this.model, this.componentFactory, this.sourceResolver);
-        this.resolver.setDataBinder(this.dataBinder);
-        this.resolver.setServletContext(this.servletContext);
-        this.resolver.setSitemap(this.sitemap);
+        this.resolver = new TestSitemapHandlerExceptionResolver(this.model, this.componentFactory, this.dataBinder,
+                Collections.emptySet(), null, this.servletContext, this.sitemap, this.sourceResolver);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
     }

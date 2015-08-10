@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +32,10 @@ public class SitemapRequestHandlerTest {
 
     private static final class TestHandler extends SitemapRequestHandler {
 
-        public TestHandler(final ComponentFactory componentFactory, final SourceResolver sourceResolver) {
-            super(componentFactory, sourceResolver);
+        public TestHandler(final ComponentFactory componentFactory, final DataBinder dataBinder,
+                final Set<String> methodsNotAllowed, final String prefix, final ServletContext servletContext,
+                final Sitemap sitemap, final SourceResolver sourceResolver) {
+            super(componentFactory, dataBinder, methodsNotAllowed, prefix, servletContext, sitemap, sourceResolver);
         }
 
         @Override
@@ -57,15 +60,13 @@ public class SitemapRequestHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.handler = new TestHandler(null, null);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.processor = createMock(Sitemap.class);
         this.servletContext = createMock(ServletContext.class);
         this.dataBinder = createMock(DataBinder.class);
-        this.handler.setSitemap(this.processor);
-        this.handler.setServletContext(this.servletContext);
-        this.handler.setDataBinder(this.dataBinder);
+        this.handler = new TestHandler(null, this.dataBinder, Collections.emptySet(), "", this.servletContext,
+                this.processor, null);
         this.pipeline = createMock(Pipeline.class);
     }
 
@@ -78,16 +79,9 @@ public class SitemapRequestHandlerTest {
     }
 
     @Test
-    public void testGetSitemapURIJsessionid() {
-        expect(this.request.getServletPath()).andReturn("/sitemapURI;jsessionid=jsessionid");
-        replay(this.request);
-        assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request));
-        verify(this.request);
-    }
-
-    @Test
     public void testGetSitemapURIPrefix() {
-        this.handler.setPrefix("/prefix");
+        this.handler = new TestHandler(null, this.dataBinder, Collections.emptySet(), "/prefix", this.servletContext,
+                this.processor, null);
         expect(this.request.getServletPath()).andReturn("/prefix/sitemapURI");
         replay(this.request);
         assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request));
@@ -179,7 +173,8 @@ public class SitemapRequestHandlerTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testHandleRequestRSSPrefix() throws Exception {
-        this.handler.setPrefix("/rss");
+        this.handler = new TestHandler(null, this.dataBinder, Collections.emptySet(), "/rss", this.servletContext,
+                this.processor, null);
         expect(this.request.getMethod()).andReturn("HEAD");
         expect(this.request.getServletPath()).andReturn("/rss/foo");
         expect(this.servletContext.getMimeType("/foo")).andReturn(null);

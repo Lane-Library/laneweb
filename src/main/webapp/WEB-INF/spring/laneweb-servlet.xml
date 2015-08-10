@@ -83,71 +83,72 @@
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         abstract="true">
         <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.ComponentFactory"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
-        <property name="methodsNotAllowed">
+        <constructor-arg ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder"/>
+        <constructor-arg>
             <set>
                 <value>OPTIONS</value>
                 <value>PROPFIND</value>
             </set>
-        </property>
-        <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder"/>
-        <property name="servletContext" ref="servletContext"/>
+        </constructor-arg>
+        <constructor-arg ref="servletContext"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
         <lookup-method bean="edu.stanford.irt.cocoon.Model" name="getModel"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap"/>
+        <constructor-arg value=""/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/apps"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/applications"/>
-        <property name="prefix" value="/apps"/>
+        <constructor-arg value="/apps"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/applications"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile"/>
-        <property name="prefix" value="/m"/>
+        <constructor-arg value="/m"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/mobile"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/rss"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/rss"/>
-        <property name="prefix" value="/rss"/>
+        <constructor-arg value="/rss"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/rss"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/eresources"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources"/>
-        <property name="prefix" value="/eresources"/>
+        <constructor-arg value="/eresources"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/eresources"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/content"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>
-        <property name="prefix" value="/content"/>
+        <constructor-arg value="/content"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/content"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/classes"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/classes"/>
-        <property name="prefix" value="/classes"/>
+        <constructor-arg value="/classes"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/classes"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/bookmarks"
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="sitemap" ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
-        <property name="prefix" value="/bookmarks"/>
+        <constructor-arg value="/bookmarks"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.sitemap.Sitemap/bookmarks"/>
     </bean>
     
     <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static"

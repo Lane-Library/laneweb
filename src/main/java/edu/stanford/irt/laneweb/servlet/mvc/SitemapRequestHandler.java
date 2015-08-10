@@ -20,7 +20,6 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
-// TODO: use constructor injection for all properties
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private ComponentFactory componentFactory;
@@ -37,8 +36,15 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private SourceResolver sourceResolver;
 
-    public SitemapRequestHandler(final ComponentFactory componentFactory, final SourceResolver sourceResolver) {
+    public SitemapRequestHandler(final ComponentFactory componentFactory, final DataBinder dataBinder,
+            final Set<String> methodsNotAllowed, final String prefix, final ServletContext servletContext,
+            final Sitemap sitemap, final SourceResolver sourceResolver) {
         this.componentFactory = componentFactory;
+        this.dataBinder = dataBinder;
+        this.methodsNotAllowed = methodsNotAllowed;
+        this.prefix = prefix;
+        this.servletContext = servletContext;
+        this.sitemap = sitemap;
         this.sourceResolver = sourceResolver;
     }
 
@@ -56,16 +62,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         model.put(Model.SITEMAP_URI, sitemapURI);
         model.put(Sitemap.class.getName(), this.sitemap);
         response.setContentType(getContentType(sitemapURI));
-        Pipeline pipeline = this.sitemap.buildPipeline(new SitemapContextImpl(model, this.componentFactory,
-                this.sourceResolver));
+        Pipeline pipeline = this.sitemap
+                .buildPipeline(new SitemapContextImpl(model, this.componentFactory, this.sourceResolver));
         if ("GET".equals(method)) {
             // only process GET requests
             pipeline.process(response.getOutputStream());
         }
-    }
-
-    public void setDataBinder(final DataBinder dataBinder) {
-        this.dataBinder = dataBinder;
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {
@@ -73,18 +75,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             throw new IllegalArgumentException("null methodsNotAllowed");
         }
         this.methodsNotAllowed = methodsNotAllowed;
-    }
-
-    public void setPrefix(final String prefix) {
-        this.prefix = prefix;
-    }
-
-    public void setServletContext(final ServletContext servletContext) {
-        this.servletContext = servletContext;
-    }
-
-    public void setSitemap(final Sitemap sitemap) {
-        this.sitemap = sitemap;
     }
 
     protected abstract Map<String, Object> getModel();
