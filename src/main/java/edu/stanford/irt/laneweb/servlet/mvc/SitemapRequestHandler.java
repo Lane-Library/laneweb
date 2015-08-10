@@ -90,12 +90,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     protected abstract Map<String, Object> getModel();
 
     protected String getSitemapURI(final HttpServletRequest request) {
-        String servletPath = request.getServletPath();
-        int jsessionId = servletPath.indexOf(";jsessionid=");
-        if (jsessionId > 0) {
-            servletPath = servletPath.substring(0, jsessionId);
-        }
-        return servletPath.substring(this.prefix.length());
+        return request.getServletPath().substring(this.prefix.length());
     }
 
     private String getContentType(final String value) {
