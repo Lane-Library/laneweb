@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-08-10" version="3.0.15" description="3.0.15 bug fix release">
+            <action date="2015-08-06" dev="ryanmax" issue="110165" type="fix">
+                Lane favicon not visible in IE
+            </action>
+            <action date="2015-08-05" dev="ceyates" issue="110136" type="update">
+                don't use dependency injection for loggers
+            </action>
+        </release>
         <release date="2015-08-03" version="3.0.14" description="3.0.14 bug fix release">
             <action date="2015-07-30" dev="ryanmax" issue="109994" type="update">
                 update MeSH suggestions
