@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -86,7 +85,7 @@ public class StatusController {
             this.requestHandler.handleRequest(req, resp);
             time = System.currentTimeMillis() - time;
             sb.append('[').append(time < 250 ? "OK" : "WARN").append("] index.html took ").append(time).append("ms.");
-        } catch (ServletException | IOException | SitemapException e) {
+        } catch (IOException | SitemapException e) {
             sb.append("[ERROR] index.html failed: ").append(e);
         }
     }

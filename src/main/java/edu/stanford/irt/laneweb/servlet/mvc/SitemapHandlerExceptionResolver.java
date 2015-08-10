@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +22,7 @@ import edu.stanford.irt.laneweb.ResourceNotFoundException;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 // TODO: simplify testing of this by injecting a RequestHandler instead of extending one
-public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler
-        implements HandlerExceptionResolver {
+public class SitemapHandlerExceptionResolver extends SitemapRequestHandler implements HandlerExceptionResolver {
 
     private static final Logger LOG = LoggerFactory.getLogger("error handler");
 
@@ -59,7 +57,7 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             try {
                 handleRequest(request, response);
-            } catch (ServletException | IOException | LanewebException e) {
+            } catch (IOException | LanewebException e) {
                 LOG.error("Exception while handling exception", e);
             }
         }

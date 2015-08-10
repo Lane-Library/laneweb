@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.Collection;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -61,10 +60,10 @@ public class StatusControllerTest {
     }
 
     @Test
-    public void testGetStatusERROR() throws ServletException, IOException {
+    public void testGetStatusERROR() throws IOException {
         expect(this.suggestionManager.getSuggestionsForTerm("cardio")).andThrow(new LanewebException("oops"));
         this.requestHandler.handleRequest(isA(HttpServletRequest.class), isA(HttpServletResponse.class));
-        expectLastCall().andThrow(new ServletException());
+        expectLastCall().andThrow(new IOException());
         replay(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
                 this.requestHandler);
         String status = this.controller.getStatus(this.request, this.response);
@@ -76,7 +75,7 @@ public class StatusControllerTest {
     }
 
     @Test
-    public void testGetStatusOK() throws ServletException, IOException {
+    public void testGetStatusOK() throws IOException {
         expect(this.suggestionManager.getSuggestionsForTerm("cardio")).andReturn(null);
         this.requestHandler.handleRequest(isA(HttpServletRequest.class), isA(HttpServletResponse.class));
         replay(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
@@ -90,7 +89,7 @@ public class StatusControllerTest {
     }
 
     @Test
-    public void testGetStatusWarning() throws ServletException, IOException {
+    public void testGetStatusWarning() throws IOException {
         expect(this.suggestionManager.getSuggestionsForTerm("cardio")).andAnswer(new IAnswer<Collection<Suggestion>>() {
 
             @Override

@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,15 +48,15 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     }
 
     @Override
-    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response)
-            throws ServletException, IOException {
+    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         String method = request.getMethod();
         if (this.methodsNotAllowed.contains(method)) {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return;
         }
         String sitemapURI = getSitemapURI(request);
-        Map<String, Object> model = getModel();
+        @SuppressWarnings("unchecked")
+        Map<String, Object> model = this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class);
         this.dataBinder.bind(model, request);
         model.put(Model.SITEMAP_URI, sitemapURI);
         model.put(Sitemap.class.getName(), this.sitemap);
@@ -68,18 +67,6 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             // only process GET requests
             pipeline.process(response.getOutputStream());
         }
-    }
-
-    public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {
-        if (null == methodsNotAllowed) {
-            throw new IllegalArgumentException("null methodsNotAllowed");
-        }
-        this.methodsNotAllowed = methodsNotAllowed;
-    }
-
-    @SuppressWarnings("unchecked")
-    protected Map<String, Object> getModel() {
-        return this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class);
     }
 
     protected String getSitemapURI(final HttpServletRequest request) {

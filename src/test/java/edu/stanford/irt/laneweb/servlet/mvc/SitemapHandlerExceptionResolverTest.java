@@ -34,19 +34,11 @@ public class SitemapHandlerExceptionResolverTest {
 
     private static final class TestSitemapHandlerExceptionResolver extends SitemapHandlerExceptionResolver {
 
-        private Map<String, Object> model;
-
         public TestSitemapHandlerExceptionResolver(final Map<String, Object> model,
                 final ComponentFactory componentFactory, final DataBinder dataBinder,
                 final Set<String> methodsNotAllowed, final String prefix, final ServletContext servletContext,
                 final Sitemap sitemap, final SourceResolver sourceResolver) {
             super(componentFactory, dataBinder, methodsNotAllowed, prefix, servletContext, sitemap, sourceResolver);
-            this.model = model;
-        }
-
-        @Override
-        protected Map<String, Object> getModel() {
-            return this.model;
         }
     }
 
@@ -110,6 +102,7 @@ public class SitemapHandlerExceptionResolverTest {
         Exception ex = new Exception();
         expect(this.response.isCommitted()).andReturn(false);
         expect(this.request.getMethod()).andReturn("GET");
+        expect(this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class)).andReturn(this.model);
         this.response.setStatus(404);
         this.dataBinder.bind(this.model, this.request);
         expect(this.servletContext.getMimeType("/error.html")).andReturn("text/html");
@@ -130,6 +123,7 @@ public class SitemapHandlerExceptionResolverTest {
         Exception ex = new Exception();
         expect(this.response.isCommitted()).andReturn(false);
         expect(this.request.getMethod()).andReturn("GET");
+        expect(this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class)).andReturn(this.model);
         this.response.setStatus(404);
         this.dataBinder.bind(this.model, this.request);
         expect(this.servletContext.getMimeType("/error.html")).andReturn("text/html");

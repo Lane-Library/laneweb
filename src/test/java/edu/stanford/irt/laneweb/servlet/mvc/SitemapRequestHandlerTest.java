@@ -6,7 +6,6 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.OutputStream;
 import java.util.Collections;
@@ -162,7 +161,8 @@ public class SitemapRequestHandlerTest {
 
     @Test
     public void testHandleRequestMethodNotAllowed() throws Exception {
-        this.handler.setMethodsNotAllowed(Collections.singleton("POST"));
+        this.handler = new SitemapRequestHandler(this.componentFactory, this.dataBinder, Collections.singleton("POST"),
+                "", this.servletContext, this.processor, null);
         expect(this.request.getMethod()).andReturn("POST");
         this.response.sendError(405);
         replay(this.componentFactory, this.servletContext, this.response, this.request, this.processor, this.pipeline,
@@ -220,15 +220,5 @@ public class SitemapRequestHandlerTest {
         this.handler.handleRequest(this.request, this.response);
         verify(this.componentFactory, this.servletContext, this.response, this.request, this.processor, this.pipeline,
                 this.dataBinder);
-    }
-
-    @Test
-    public void testSetMethodsNotAllowed() {
-        try {
-            this.handler.setMethodsNotAllowed(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        this.handler.setMethodsNotAllowed(Collections.emptySet());
     }
 }
