@@ -20,7 +20,7 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
-public abstract class SitemapRequestHandler implements HttpRequestHandler {
+public class SitemapRequestHandler implements HttpRequestHandler {
 
     private ComponentFactory componentFactory;
 
@@ -77,7 +77,10 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.methodsNotAllowed = methodsNotAllowed;
     }
 
-    protected abstract Map<String, Object> getModel();
+    @SuppressWarnings("unchecked")
+    protected Map<String, Object> getModel() {
+        return this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class);
+    }
 
     protected String getSitemapURI(final HttpServletRequest request) {
         return request.getServletPath().substring(this.prefix.length());
