@@ -34,7 +34,7 @@ public class StatusControllerTest {
 
     private HttpServletRequest request;
 
-    private SitemapRequestHandler requestHandler;
+    private SitemapController requestHandler;
 
     private HttpServletResponse response;
 
@@ -49,7 +49,7 @@ public class StatusControllerTest {
         this.suggestionManager = createMock(SuggestionManager.class);
         this.componentFactory = createMock(ComponentFactory.class);
         this.sourceResolver = createMock(SourceResolver.class);
-        this.requestHandler = createMock(SitemapRequestHandler.class);
+        this.requestHandler = createMock(SitemapController.class);
         this.servletContext = createMock(ServletContext.class);
         expect(this.servletContext.getInitParameter("laneweb.context.version")).andReturn("version");
         replay(this.servletContext);

@@ -7,8 +7,8 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,15 +23,30 @@ import edu.stanford.irt.cocoon.pipeline.Pipeline;
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.sitemap.SitemapContext;
+import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
-public class SitemapRequestHandlerTest {
+public class AbstractSitemapControllerTest {
+
+    private static class TestAbstractSitemapController extends AbstractSitemapController {
+
+        public TestAbstractSitemapController(final ComponentFactory componentFactory, final DataBinder dataBinder,
+                final ServletContext servletContext, final Sitemap sitemap, final SourceResolver sourceResolver) {
+            super(componentFactory, dataBinder, servletContext, sitemap, sourceResolver);
+        }
+
+        @Override
+        public void handleRequest(final HttpServletRequest request, final HttpServletResponse response)
+                throws IOException {
+            super.doHandleRequest(request, response, "");
+        }
+    }
 
     private ComponentFactory componentFactory;
 
     private DataBinder dataBinder;
 
-    private SitemapRequestHandler handler;
+    private AbstractSitemapController handler;
 
     private Map<String, Object> model;
 
@@ -51,8 +66,8 @@ public class SitemapRequestHandlerTest {
         this.processor = createMock(Sitemap.class);
         this.servletContext = createMock(ServletContext.class);
         this.dataBinder = createMock(DataBinder.class);
-        this.handler = new SitemapRequestHandler(this.componentFactory, this.dataBinder, Collections.emptySet(), "",
-                this.servletContext, this.processor, null);
+        this.handler = new TestAbstractSitemapController(this.componentFactory, this.dataBinder, this.servletContext,
+                this.processor, null);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.pipeline = createMock(Pipeline.class);
@@ -63,17 +78,17 @@ public class SitemapRequestHandlerTest {
     public void testGetSitemapURI() {
         expect(this.request.getServletPath()).andReturn("/sitemapURI");
         replay(this.componentFactory, this.request);
-        assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request));
+        assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request, ""));
         verify(this.componentFactory, this.request);
     }
 
     @Test
     public void testGetSitemapURIPrefix() {
-        this.handler = new SitemapRequestHandler(null, this.dataBinder, Collections.emptySet(), "/prefix",
-                this.servletContext, this.processor, null);
+        this.handler = new TestAbstractSitemapController(null, this.dataBinder, this.servletContext, this.processor,
+                null);
         expect(this.request.getServletPath()).andReturn("/prefix/sitemapURI");
         replay(this.componentFactory, this.request);
-        assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request));
+        assertEquals("/sitemapURI", this.handler.getSitemapURI(this.request, "/prefix"));
         verify(this.componentFactory, this.request);
     }
 
@@ -151,37 +166,6 @@ public class SitemapRequestHandlerTest {
         this.dataBinder.bind(this.model, this.request);
         expect(this.servletContext.getMimeType("/json")).andReturn(null);
         this.response.setContentType("application/json");
-        expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
-        replay(this.componentFactory, this.servletContext, this.response, this.request, this.processor, this.pipeline,
-                this.dataBinder);
-        this.handler.handleRequest(this.request, this.response);
-        verify(this.componentFactory, this.servletContext, this.response, this.request, this.processor, this.pipeline,
-                this.dataBinder);
-    }
-
-    @Test
-    public void testHandleRequestMethodNotAllowed() throws Exception {
-        this.handler = new SitemapRequestHandler(this.componentFactory, this.dataBinder, Collections.singleton("POST"),
-                "", this.servletContext, this.processor, null);
-        expect(this.request.getMethod()).andReturn("POST");
-        this.response.sendError(405);
-        replay(this.componentFactory, this.servletContext, this.response, this.request, this.processor, this.pipeline,
-                this.dataBinder);
-        this.handler.handleRequest(this.request, this.response);
-        verify(this.componentFactory, this.servletContext, this.response, this.request, this.processor, this.pipeline,
-                this.dataBinder);
-    }
-
-    @Test
-    public void testHandleRequestRSSPrefix() throws Exception {
-        this.handler = new SitemapRequestHandler(this.componentFactory, this.dataBinder, Collections.emptySet(), "/rss",
-                this.servletContext, this.processor, null);
-        expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getServletPath()).andReturn("/rss/foo");
-        expect(this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class)).andReturn(this.model);
-        this.dataBinder.bind(this.model, this.request);
-        expect(this.servletContext.getMimeType("/foo")).andReturn(null);
-        this.response.setContentType("text/xml");
         expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
         replay(this.componentFactory, this.servletContext, this.response, this.request, this.processor, this.pipeline,
                 this.dataBinder);
