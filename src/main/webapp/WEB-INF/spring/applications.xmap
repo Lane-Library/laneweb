@@ -53,20 +53,6 @@
                 <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- a couple of pipelines for testing xhtml sax strategies -->
-            <!--<map:match pattern="search/foo/*" type="wildcard">
-                    <map:generate type="search-content">
-                        <map:parameter name="engines" value="{1}"/>
-                    </map:generate>
-                    <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match pattern="search/bar/*" type="wildcard">
-                    <map:generate type="search-content-html">
-                        <map:parameter name="engines" value="{1}"/>
-                    </map:generate>
-                    <map:serialize type="xml"/>
-                </map:match>-->
             <!-- return raw xml metasearch content results -->
             <!-- this was used in mobile.xmap -->
             <map:match pattern="search/content/xml/*" type="wildcard">
@@ -89,17 +75,6 @@
                 <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- return raw xml merged metasearch and eresources results -->
-            <!-- this was used in mobile.xmap -->
-            <!--<map:match pattern="search/merged/xml/*" type="wildcard">
-                    <map:generate type="merged-search">
-                        <map:parameter name="timeout" value="5000"/>
-                        <map:parameter name="engines" value="{1}"/>
-                    </map:generate>
-                    <map:transform type="description-labeling"/>
-                    <map:transform type="query-highlighting"/>
-                    <map:serialize type="xml"/>
-                </map:match>-->
             <!-- search2json.xsl converts the result xml to json -->
             <!-- it is used in lane-metasearch.js and lane-querymap.js -->
             <map:match pattern="search/json" type="wildcard">
@@ -150,6 +125,7 @@
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
+    <!-- TODO: do we need this anymore? -->
     <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <!-- cache expires in 14400 seconds = 4 hours -->
