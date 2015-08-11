@@ -2,6 +2,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:lc="http://lane.stanford.edu/laneclasses" exclude-result-prefixes="lc h" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
 
 	<xsl:template match="/doc/noncached-classes"/>
+	
+	<xsl:template match="/">
+		<html><head><title>classes</title></head><body><xsl:apply-templates/></body></html>
+	</xsl:template>
 
 	<xsl:template match="lc:start_date">
 		<xsl:variable name="date-tokens" select="tokenize(.,'(/| )')"/>
