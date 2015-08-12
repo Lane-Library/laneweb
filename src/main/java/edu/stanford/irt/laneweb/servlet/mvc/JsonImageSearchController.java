@@ -28,7 +28,7 @@ public class JsonImageSearchController {
         return this.service.findById(id);
     }
     
-    @RequestMapping(value = "/secure/image/update",produces = "application/json")
+    @RequestMapping(value = "/image/update",produces = "application/json")
     @ResponseBody
     public Image updateImage(final String id) {
         Image image = this.service.adminFindById(id);

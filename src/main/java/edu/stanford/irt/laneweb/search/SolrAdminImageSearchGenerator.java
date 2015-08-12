@@ -38,7 +38,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator{
     @Override
     protected Map<String, Object> doSearch(final String query) {
         Map<String, Object> result = super.doSearch(query);
-        result.put("path", this.basePath.concat("/secure/admin").concat(this.url.toString()));
+        result.put("path", this.basePath.concat("/admin").concat(this.url.toString()));
         return result;
     }
         
