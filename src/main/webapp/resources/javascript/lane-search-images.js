@@ -54,6 +54,7 @@
         cleanDetailImageWindow();
 
 
+
         imageDetail.one(".image").setAttribute("src", image.src);
         imageDetail.one("h3").setContent(image.shortTitle);
         if (undefined !== image.description) {
@@ -66,10 +67,38 @@
         }else{
             imageDetail.one(".article-title").hide();
         }
+		
 
+		//Admin on click on the id
+		Y.on("click", function(e) {
+			var href = e.target.get('href');
+			Y.io(href, {
+				on : {
+					success : confirmAdminAction
+					},	});
+			e.stopPropagation();
+			e.preventDefault();
+		}, ".imagedeco-admin");
+		
+		
+	}
+	
+	
+	function confirmAdminAction(id, o, args){
+		var image = Y.JSON.parse(o.responseText),
+		id = "#" .concat(image.id.split('.').join('\\.').split('/').join('\\/')),
+		div = Y.one( id);
+		if(image.enable){
+			div.removeClass('admin-disable');
+			div.addClass('admin-enable');
+			
+		}else{
+			div.removeClass('admin-enable');
+			div.addClass('admin-disable');
+		}
         imageDetail.one(".copyright p").setContent(image.shortCopyrightText);
         imageDetail.one(".to-image a").setAttribute("href", image.pageUrl);
-
+	
         li.one("div").removeClass('imagedecoHidden');
         li.one("div").addClass('imagedeco');
         imageDetail.removeClass('imageDetailHidden');

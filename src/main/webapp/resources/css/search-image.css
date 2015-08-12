@@ -32,6 +32,10 @@
 	width: 232px;
 }
 
+#imageList li.admin{
+	margin-top: 30px;
+	}
+
 .imageDetail tbody tr:nth-child(odd) {
 	background: inherit;
 }
@@ -57,6 +61,7 @@
 .imageDetail .gl div{
 	overflow: hidden;
 	margin: 10px 10px 10px 0;
+	overflow: hidden;
 }
 
 .imageDetail .yui3-g{
@@ -112,8 +117,17 @@
 	background-color: #eee;
 }
 
+
+#imageList .admin-enable {
+	background-color: #4DB84D;
+}
+
+#imageList .admin-disable {
+	background-color: #FF4747;
+}
+
 #imageList .imagedecoHidden {
-	display:none;
+	background-color: #FFFFFF;
 }
 
 
@@ -157,7 +171,7 @@
 	float: right;
 }
 
-.pagination  .actived, .actived span {
+.pagination  .actived, .actived span, .actived label {
 	color: white;
 	cursor: pointer;
 }
@@ -176,6 +190,10 @@
 .pagination input {
 	width: 28px;
 	text-align: center;
+}
+
+.pagination label {
+	margin: 3px;
 }
 
 #copyright {

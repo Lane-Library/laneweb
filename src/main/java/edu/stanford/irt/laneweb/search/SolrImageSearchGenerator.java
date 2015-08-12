@@ -22,23 +22,23 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     private static final int TOTAL_ELEMENT_BY_PAGE = 52;
 
-    private String copyright = "0";
+    protected String copyright = "0";
 
-    private int pageNumber = 0;
+    protected int pageNumber = 0;
 
-    private String resourceId;
+    protected String resourceId;
 
     private String searchTerm;
 
-    private SolrImageService service;
+    protected SolrImageService service;
 
     private String source;
 
     private String tab = TAB_CONTENT[0];
 
-    private String url;
+    protected String url;
     
-    private String basePath;
+    protected String basePath;
 
     public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
@@ -73,14 +73,8 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     @Override
     protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = new HashMap<String, Object>(); 
-        Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
-        Page<Image> pageResult = null;
-        if (this.resourceId == null) {
-            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
-        } else {
-            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
-        }
+        Map<String, Object> result = new HashMap<String, Object>();
+        Page<Image> pageResult = getPage(query);
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
         result.put("page", pageResult);
@@ -93,5 +87,16 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         return result;
     }
     
-  
+    
+    protected Page<Image> getPage(final String query){
+        Page<Image> pageResult = null;
+        Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
+        if (this.resourceId == null) {
+            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
+        } else {
+            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
+        }
+        return pageResult;
+    }
+    
 }

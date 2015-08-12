@@ -11,6 +11,7 @@ edu.stanford.irt.laneweb.disaster-mode=
 
 #this property name is hard coded in the solr-image-repository project:
 laneweb.solr-url-imageSearch=none
+laneweb.solr-url-indexer-imageSearch=none
 
 edu.stanford.irt.laneweb.db.eresources.jndiName=
 edu.stanford.irt.laneweb.db.eresources.identifier=
