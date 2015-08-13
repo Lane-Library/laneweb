@@ -469,6 +469,7 @@
                                 <include>menu-delay-min.js</include>
                                 <include>same-height-min.js</include>
                                 <include>shibboleth-sfx-min.js</include>
+                                <include>youtube-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
