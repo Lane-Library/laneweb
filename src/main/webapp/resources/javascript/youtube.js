@@ -1,6 +1,6 @@
 (function() {
 
-    var nodelist, iframes = [], iframe, i;
+    var nodelist, iframes = [], iframe, i,
 
     /**
      * A class for representing an embeded youtube iframe that replaces the iframe
