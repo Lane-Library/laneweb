@@ -12,9 +12,8 @@
      *            {node} the youtube iframe node
      */
     YouTubeNode = function(iframe) {
-        var src = iframe.src,
-                id = src.substring(src.lastIndexOf("/", src.length) + 1, src.length),
-                url = "http://img.youtube.com/vi/" + id + "/mqdefault.jpg",
+        var id, url,
+                src = iframe.src,
                 temp = document.createElement("div"),
                 self = this,
                 click = function() {
@@ -22,6 +21,11 @@
                 };
         this._iframe = iframe;
         this._parent = iframe.parentNode;
+        id = src.substring(src.lastIndexOf("/", src.length) + 1, src.length);
+        if (id.indexOf("?") > 0) {
+            id = id.substring(0, id.indexOf("?"));
+        }
+        url = "http://img.youtube.com/vi/" + id + "/mqdefault.jpg";
         temp.innerHTML = "<img class=\"youtube-thumbnail\" src=\"" + url + "\"/>";
         this._thumbnail = temp.firstChild;
         if (Element.prototype.addEventListener) {
