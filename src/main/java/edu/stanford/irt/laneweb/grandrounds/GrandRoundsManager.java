@@ -18,6 +18,7 @@ import edu.stanford.irt.grandrounds.AuthRecordPresenter;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.grandrounds.Presenter;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.lane.catalog.CatalogSQLException;
 import edu.stanford.lane.catalog.Record;
 import edu.stanford.lane.catalog.RecordCollection;
 import edu.stanford.lane.catalog.VoyagerInputStream2;
@@ -52,10 +53,10 @@ public class GrandRoundsManager {
             for (Record record : collection) {
                 presentations.add(new Presentation(record));
             }
-            return presentations.stream() //
-                    .sorted((p1, p2) ->  p2.getDate().compareTo(p1.getDate())) //
+            return presentations.stream()
+                    .sorted((p1, p2) ->  p2.getDate().compareTo(p1.getDate()))
                     .collect(Collectors.toList());
-        } catch (IOException e) {
+        } catch (CatalogSQLException | IOException e) {
             throw new LanewebException(e);
         }
     }
@@ -77,7 +78,7 @@ public class GrandRoundsManager {
                 presenters.add(new AuthRecordPresenter(record));
             }
             return presenters;
-        } catch (IOException e) {
+        } catch (CatalogSQLException | IOException e) {
             throw new LanewebException(e);
         }
     }

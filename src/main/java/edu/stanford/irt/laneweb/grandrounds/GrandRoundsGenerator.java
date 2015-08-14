@@ -63,11 +63,11 @@ public class GrandRoundsGenerator extends AbstractGenerator implements Parameter
 
     private Set<String> getPresenterIds(List<Presentation> presentations) {
         Set<String> presenterIds = new HashSet<String>();
-        presentations.stream() //
-            .map(Presentation::getPresenters) //
-            .flatMap(List::stream) //
-            .mapToInt(Presenter::getId) //
-            .filter(id -> id != -1) //
+        presentations.stream()
+            .map(Presentation::getPresenters)
+            .flatMap(List::stream)
+            .mapToInt(Presenter::getId)
+            .filter(id -> id != -1)
             .forEach(id -> presenterIds.add(Integer.toString(id)));
          return presenterIds;
     }

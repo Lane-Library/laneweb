@@ -16,8 +16,9 @@ public class PresenterSAXStrategy implements SAXStrategy<Presenter> {
     public void toSAX(final Presenter presenter, final XMLConsumer xmlConsumer) {
         try {
             AttributesImpl atts = new AttributesImpl();
-            if (presenter.getId() != -1) {
-                atts.addAttribute("", "id", "id", "CDATA", Integer.toString(presenter.getId()));
+            int id = presenter.getId();
+            if (id != -1) {
+                atts.addAttribute("", "id", "id", "CDATA", Integer.toString(id));
             }
             XMLUtils.startElement(xmlConsumer, "", "presenter", atts);
             XMLUtils.maybeCreateElement(xmlConsumer, "", "name", presenter.getName());
