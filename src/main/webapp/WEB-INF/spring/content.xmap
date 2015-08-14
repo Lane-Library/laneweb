@@ -158,7 +158,7 @@
                 <map:serialize type="xml"/>
             </map:match>
         </map:match>
-        <map:match pattern="admin/search.html" type="wildcard">
+        <map:match pattern="secure/admin/search.html" type="wildcard">
          	<map:match type="regex-parameter" pattern=".*images-all$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:aggregate type="default" element="doc"  ns="doc">
