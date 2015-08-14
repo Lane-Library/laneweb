@@ -143,5 +143,5 @@ hr {
 
 /*.youtube-thumbnail are created in youtube.js */
 .youtube-thumbnail {
-    cursor:pointer
+    cursor:pointer;
 }

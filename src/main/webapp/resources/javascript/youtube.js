@@ -40,7 +40,7 @@
 
         /**
          * causes the thumbnail to be replaced by the original iframe node
-         * 
+         *
          * @method replaceThumbnail
          */
         replaceThumbnail: function() {
