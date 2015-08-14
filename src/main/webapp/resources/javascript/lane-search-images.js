@@ -51,7 +51,8 @@
 			Y.io(href, {
 				on : {
 					success : confirmAdminAction
-					},	});
+					}
+			});
 			e.stopPropagation();
 			e.preventDefault();
 		}, ".imagedeco-admin");
