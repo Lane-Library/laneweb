@@ -202,6 +202,7 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="noncaching">
+        <!--
         <map:match pattern="grandrounds/*/*.html" type="wildcard">
             <map:aggregate type="default" element="doc" ns="doc">
                 <map:generate type="file" src="{content-base}/biomed-resources/grandrounds/{1}.xml"/>
@@ -212,6 +213,25 @@
                 <map:parameter name="year" value="{2}"/>
             </map:transform>
             <map:serialize type="html5-indent"/>
+        </map:match>
+        -->
+        <map:match pattern="grandrounds/*/*.html" type="wildcard">
+            <map:generate type="grandrounds">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:generate>
+            <map:transform type="saxon" src="resources/xsl/grandrounds2.xsl">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="grandrounds/*/*.xml" type="wildcard">
+            <map:generate type="grandrounds">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:generate>
+            <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
 </map:sitemap>

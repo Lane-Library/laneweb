@@ -58,6 +58,7 @@
                 <map:generate type="bassett-accordion"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!--
             <map:match pattern="biomed-resources/*grandrounds.html" type="wildcard">
                 <map:generate type="file" src="cocoon://content/biomed-resources/grandrounds/{1}grandrounds-2015.html"/>
                 <map:serialize type="xml"/>
@@ -74,6 +75,7 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
+            -->
         </map:match>
         <!-- search.html -->
         <map:match pattern="search.html" type="wildcard">

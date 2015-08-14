@@ -126,4 +126,11 @@ public final class XMLUtils {
             final Attributes atts) throws SAXException {
         xmlConsumer.startElement(namespaceURI, localName, localName, atts);
     }
+
+    public static void maybeCreateElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String name, final Object value)
+            throws SAXException {
+        if (value != null && !"".equals(value)) {
+            XMLUtils.createElementNS(xmlConsumer, namespaceURI, name, value.toString());
+        }
+    }
 }
