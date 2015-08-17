@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-08-17" version="3.1.0" description="3.1.0 feature release">
+            <action date="2015-08-13" dev="ceyates" issue="110381" type="update">
+                upgrade to spring 4.2.0
+            </action>
+            <action date="2015-08-10" dev="ceyates" issue="110296" type="update">
+                Use Spring Controllers to handle sitemap generated requests
+            </action>
+            <action date="2015-08-13" dev="ceyates" issue="110198" type="add">
+                Speed up youtube embeds
+            </action>
+            <action date="2015-08-12" dev="ceyates" issue="109657" type="add">
+                Send live - week of Aug 19 - GR videos - to feed from catalog?
+            </action>
+        </release>
         <release date="2015-08-10" version="3.0.15" description="3.0.15 bug fix release">
             <action date="2015-08-06" dev="ryanmax" issue="110165" type="fix">
                 Lane favicon not visible in IE
