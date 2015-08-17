@@ -77,7 +77,9 @@
     </xsl:template>
     
     <xsl:template match="presenter">
-        <p><xsl:value-of select="name"/></p>
+        <xsl:for-each select="tokenize(name,';')">
+            <p><xsl:value-of select="."/></p>
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:template match="presenter[@idref]">
