@@ -24,7 +24,7 @@ public class RSSSitemapController extends AbstractSitemapController {
     public RSSSitemapController(final ComponentFactory componentFactory,
             @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder,
             final ServletContext servletContext,
-            @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/classes") final Sitemap sitemap,
+            @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/rss") final Sitemap sitemap,
             final SourceResolver sourceResolver) {
         super(componentFactory, dataBinder, servletContext, sitemap, sourceResolver);
     }
