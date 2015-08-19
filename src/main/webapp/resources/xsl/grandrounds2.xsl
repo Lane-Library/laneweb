@@ -146,7 +146,14 @@
                 <xsl:value-of select="substring-after(.,'/embed/')"/>
                 </xsl:when>
                 <xsl:when test="contains(.,'v=')">
-                    <xsl:value-of select="substring-after(.,'v=')"/>
+                    <xsl:choose>
+                        <xsl:when test="contains(substring-after(.,'v='), '&amp;')">
+                            <xsl:value-of select="substring-before(substring-after(.,'v='), '&amp;')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="substring-after(.,'v=')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:when test="contains(.,'/youtu.be/')">
                     <xsl:value-of select="substring-after(.,'/youtu.be/')"/>
