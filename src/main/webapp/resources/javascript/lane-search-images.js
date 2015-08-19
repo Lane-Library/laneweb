@@ -1,6 +1,8 @@
 (function() {
-	var Model = Y.lane.Model, BASE_PATH = Model.get(Model.BASE_PATH), source = Model
-			.get(Model.SOURCE), query = Model.get(Model.QUERY);
+	var Model = Y.lane.Model,
+	    BASE_PATH = Model.get(Model.BASE_PATH),
+	    source = Model.get(Model.URL_ENCODED_SOURCE),
+	    query = Model.get(Model.URL_ENCODED_QUERY);
 
 	if (Y.one("#tabs-image-search")) {
 		

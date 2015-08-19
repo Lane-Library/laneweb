@@ -1,7 +1,6 @@
 (function(){
 
-
-    Y.lane.Model.set(Y.lane.Model.QUERY, "query");
+    Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, "foo%20bar");
 
     Y.io = function(url, config) {
         Y.io = function(url,config) {

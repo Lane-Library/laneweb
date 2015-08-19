@@ -1,7 +1,6 @@
 //should this stop polling when all facets are complete? currently polls until search app done or timeout
 (function() {
     var model = Y.lane.Model,
-        query = model.get(model.QUERY),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
         facets = Y.all('.searchFacet'),
@@ -59,7 +58,7 @@
             }
     };
 
-    if (query && facets.size() > 0) {
+    if (encodedQuery && facets.size() > 0) {
         makeRequest();
     }
 })();

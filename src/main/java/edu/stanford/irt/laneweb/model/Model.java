@@ -137,6 +137,8 @@ public abstract class Model {
 
     public static final String URL_ENCODED_QUERY = "url-encoded-query";
 
+    public static final String URL_ENCODED_SOURCE = "url-encoded-source";
+
     public static final String USER = "user";
 
     public static final String USER_AGENT = "user-agent";

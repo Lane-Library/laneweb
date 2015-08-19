@@ -41,6 +41,8 @@ public class RequestParameterDataBinder implements DataBinder {
     private Map<String, String> parameterModelMap;
 
     private Set<String> parameterSameAsModel;
+    
+    private Map<String, String> urlEncodedParameters;
 
     public RequestParameterDataBinder() {
         this.parameterModelMap = new HashMap<String, String>();
@@ -55,6 +57,9 @@ public class RequestParameterDataBinder implements DataBinder {
         for (String name : PARAMETER_SAME_AS_MODEL) {
             this.parameterSameAsModel.add(name);
         }
+        this.urlEncodedParameters = new HashMap<String, String>();
+        this.urlEncodedParameters.put("q", Model.URL_ENCODED_QUERY);
+        this.urlEncodedParameters.put(Model.SOURCE, Model.URL_ENCODED_SOURCE);
     }
 
     @Override
@@ -71,6 +76,13 @@ public class RequestParameterDataBinder implements DataBinder {
             if (this.parameterArrayModelMap.containsKey(name)) {
                 model.put(this.parameterArrayModelMap.get(name), Arrays.asList(request.getParameterValues(name)));
             }
+            if (this.urlEncodedParameters.containsKey(name)) {
+                try {
+                    model.put(this.urlEncodedParameters.get(name), URLEncoder.encode(value, "UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    throw new LanewebException(e);
+                }
+            }
         }
     }
 
@@ -78,11 +90,6 @@ public class RequestParameterDataBinder implements DataBinder {
         if ("q".equals(name)) {
             // trim the query case 73719
             model.put(Model.QUERY, value.trim());
-            try {
-                model.put(Model.URL_ENCODED_QUERY, URLEncoder.encode(value, "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                throw new LanewebException(e);
-            }
         } else {
             model.put(this.parameterModelMap.get(name), value);
         }

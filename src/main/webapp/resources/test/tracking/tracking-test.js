@@ -151,16 +151,16 @@ Y.use("*",  function(){
         },
 
         testSearchResultClick: function() {
-            Y.lane.Model.set(Y.lane.Model.QUERY, "query");
+            Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, "foo%20bar");
             var link = Y.one(".lwSearchResults a");
             link.simulate("click");
             Y.Assert.areEqual(link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:searchResultClick", this.event.category);
-            Y.Assert.areEqual("query", this.event.action);
+            Y.Assert.areEqual("foo bar", this.event.action);
             Y.Assert.areEqual(101, this.event.value);
             Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
-            Y.lane.Model.set(Y.lane.Model.QUERY, null);
+            Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, null);
         },
 
         testClickOnImage: function() {
