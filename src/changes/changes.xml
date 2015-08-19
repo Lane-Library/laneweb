@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-08-18" version="3.1.1" description="3.1.1 emergency release">
+            <action date="2015-08-18" dev="ceyates" issue="110474" type="fix">
+                requests for /rss urls responding with 404 not found
+            </action>
+        </release>
         <release date="2015-08-17" version="3.1.0" description="3.1.0 feature release">
             <action date="2015-08-13" dev="ceyates" issue="110381" type="update">
                 upgrade to spring 4.2.0
