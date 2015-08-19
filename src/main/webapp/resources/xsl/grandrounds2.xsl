@@ -136,11 +136,24 @@
     </xsl:template>
 
     <xsl:template match="video">
-        <xsl:apply-templates select="uri[contains(.,'youtube')]"/>
+        <xsl:apply-templates select="uri[contains(.,'youtu')]"/>
     </xsl:template>
 
     <xsl:template match="video/uri">
-        <iframe src="https://www.youtube.com/embed/{substring-after(.,'=')}" width="322" height="181" frameborder="0" scrolling="no"
+        <xsl:variable name="youtube-id">
+            <xsl:choose>
+                <xsl:when test="contains(.,'/embed/')">
+                <xsl:value-of select="substring-after(.,'/embed/')"/>
+                </xsl:when>
+                <xsl:when test="contains(.,'v=')">
+                    <xsl:value-of select="substring-after(.,'v=')"/>
+                </xsl:when>
+                <xsl:when test="contains(.,'/youtu.be/')">
+                    <xsl:value-of select="substring-after(.,'/youtu.be/')"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        <iframe src="https://www.youtube.com/embed/{$youtube-id}" width="322" height="181" frameborder="0" scrolling="no"
             webkitAllowFullScreen="true" mozallowfullscreen="true" allowFullScreen="true"/>
     </xsl:template>
 
