@@ -21,7 +21,6 @@ public class PresentationSAXStrategy implements SAXStrategy<Presentation> {
     public void toSAX(final Presentation presentation, final XMLConsumer xmlConsumer) {
         try {
             AttributesImpl atts = new AttributesImpl();
-            System.err.println(presentation.getId());
             atts.addAttribute("", "id", "id", "CDATA", Integer.toString(presentation.getId()));
             XMLUtils.startElement(xmlConsumer, "", "presentation", atts);
             XMLUtils.createElementNS(xmlConsumer, "", "date", FORMATTER.format(presentation.getDate()));
