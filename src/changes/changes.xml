@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-08-24" version="3.1.2" description="3.1.2 feature release">
+            <action date="2015-08-24" dev="ceyates" issue="110565" type="add">
+                don't show grand rounds presentations from suppressed records
+            </action>
+            <action date="2015-08-19" dev="ceyates" issue="110524" type="update">
+                switch from lane search to bio-image search
+            </action>
+            <action date="2015-08-19" dev="ceyates" issue="110483" type="fix">
+                some youtube videos links not appearing
+            </action>
+            <action date="2015-08-20" dev="olgary" issue="110410" type="update">
+                Feedback-suggestion - Change the grey text in bioresearch search 
+            </action>
+            <action date="2015-08-21" dev="olgary" issue="109445" type="update">
+                updated redirect links - template.xml, debug.xml
+            </action>
+            <action date="2015-08-19" dev="ceyates" issue="108506" type="add">
+                Cross-Site Scripting (XSS) Vulnerabilities
+            </action>
+        </release>
         <release date="2015-08-18" version="3.1.1" description="3.1.1 emergency release">
             <action date="2015-08-18" dev="ceyates" issue="110474" type="fix">
                 requests for /rss urls responding with 404 not found
