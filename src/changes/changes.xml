@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2015-08-24" version="3.1.2" description="3.1.2 feature release">
+        <release date="2015-08-24" version="3.1.2" description="3.1.2 bug fix release">
             <action date="2015-08-24" dev="ceyates" issue="110565" type="add">
                 don't show grand rounds presentations from suppressed records
             </action>
