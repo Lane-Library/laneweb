@@ -58,29 +58,34 @@ import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Autowired
-    private RedirectProcessor redirectProcessor;
+    private DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor;
+
+    @Autowired
+    private MobileSiteInterceptor mobileSiteInterceptor;
+
+    @Autowired
+    private PersistentLoginHandlerInterceptor persistentLoginHandlerInterceptor;
+
+    @Autowired
+    private RedirectHandlerInterceptor redirectHandlerInterceptor;
 
     @Bean(name = "propertyPlaceholderConfigurer")
     public static PropertyPlaceholderConfigurer getPropertyPlaceholderConfigurer() {
         PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
-        //change from default because of maven filter properties seen as properties in dev environment
+        // change from default because of maven filter properties seen as properties in dev environment
         configurer.setPlaceholderPrefix("%{");
         return configurer;
     }
 
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
-        registry.addInterceptor(new PersistentLoginHandlerInterceptor())
+        registry.addInterceptor(this.persistentLoginHandlerInterceptor)
             .addPathPatterns("/**/secure/**", "/**/redirect/cme/**");
-        registry.addInterceptor(new DeviceResolverHandlerInterceptor())
+        registry.addInterceptor(this.deviceResolverHandlerInterceptor)
             .addPathPatterns("/**/*.html");
-        Map<String, String> redirectMap = new HashMap<String, String>();
-        redirectMap.put("/index.html", "/m/index.html");
-        redirectMap.put("/biomed-resources/eb.html", "/m/book.html");
-        redirectMap.put("/biomed-resources/ej.html", "/m/ej.html");
-        registry.addInterceptor(new MobileSiteInterceptor(redirectMap))
+        registry.addInterceptor(this.mobileSiteInterceptor)
             .addPathPatterns("/**/*.html");
-        registry.addInterceptor(new RedirectHandlerInterceptor(this.redirectProcessor))
+        registry.addInterceptor(this.redirectHandlerInterceptor)
             .addPathPatterns("/**");
     }
 
@@ -91,36 +96,21 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         converters.add(converter);
     }
 
-    @Bean(name = "localeResolver")
-    public LocaleResolver getLocaleResolver() {
-        return new AcceptHeaderLocaleResolver();
+    @Bean
+    public DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor() {
+        return new DeviceResolverHandlerInterceptor();
     }
 
-    @Bean(name = "lifecycleProcessor")
-    public LifecycleProcessor getLifecycleProcessor() {
-        return new DefaultLifecycleProcessor();
-    }
-
-    @Bean(name = "viewNameTranslator")
-    public RequestToViewNameTranslator getRequestToViewNameTranslator() {
-        return new DefaultRequestToViewNameTranslator();
-    }
-
-    @Bean(name = "messageSource")
-    public MessageSource getMessageSource() {
-        return new DelegatingMessageSource();
-    }
-
-    @Bean(name = "themeSource")
-    public ThemeSource getThemeSource() {
-        return new DelegatingThemeSource();
+    @Bean(name = "applicationEventMulticaster")
+    public ApplicationEventMulticaster getApplicationEventMulticaster() {
+        return new SimpleApplicationEventMulticaster();
     }
 
     @Bean(name = "dispatcherServlet")
     public DispatcherServlet getDispatcherServlet() {
         DispatcherServlet servlet = new DispatcherServlet();
         servlet.setDetectAllHandlerMappings(true);
-        servlet.setDetectAllHandlerMappings(true);
+        servlet.setDetectAllHandlerAdapters(true);
         servlet.setDetectAllHandlerExceptionResolvers(false);
         servlet.setDetectAllViewResolvers(false);
         servlet.setPublishContext(false);
@@ -128,9 +118,9 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         return servlet;
     }
 
-    @Bean(name = "themeResolver")
-    public ThemeResolver getThemeResolver() {
-        return new FixedThemeResolver();
+    @Bean(name = "flashMapManager")
+    public FlashMapManager getFlashMapManager() {
+        return new SessionFlashMapManager();
     }
 
     @Bean(name = "handlerAdapter")
@@ -138,14 +128,29 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         return new HttpRequestHandlerAdapter();
     }
 
-    @Bean(name = "flashMapManager")
-    public FlashMapManager getFlashMapManager() {
-        return new SessionFlashMapManager();
+    @Bean(name = "lifecycleProcessor")
+    public LifecycleProcessor getLifecycleProcessor() {
+        return new DefaultLifecycleProcessor();
     }
 
-    @Bean(name = "applicationEventMulticaster")
-    public ApplicationEventMulticaster getApplicationEventMulticaster() {
-        return new SimpleApplicationEventMulticaster();
+    @Bean(name = "localeResolver")
+    public LocaleResolver getLocaleResolver() {
+        return new AcceptHeaderLocaleResolver();
+    }
+
+    @Bean(name = "messageSource")
+    public MessageSource getMessageSource() {
+        return new DelegatingMessageSource();
+    }
+
+    @Bean(name = "multipartResolver")
+    public MultipartResolver getMultipartResolver() {
+        return new StandardServletMultipartResolver();
+    }
+
+    @Bean(name = "viewNameTranslator")
+    public RequestToViewNameTranslator getRequestToViewNameTranslator() {
+        return new DefaultRequestToViewNameTranslator();
     }
 
     @Bean
@@ -159,28 +164,53 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         urlMap.put("/**/*.*", staticHandler);
         handlerMapping.setUrlMap(urlMap);
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
+        handlerMapping.setInterceptors(new Object[] { this.redirectHandlerInterceptor });
         return handlerMapping;
     }
 
     @Bean(name = "handlerExceptionResolver")
-    public SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(final SitemapController sitemapController) {
+    public SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(
+            final SitemapController sitemapController) {
         return new SitemapHandlerExceptionResolver(sitemapController);
-    }
-
-    @Bean(name = "multipartResolver")
-    public MultipartResolver getMultipartResolver() {
-        return new StandardServletMultipartResolver();
     }
 
     @Bean(name = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static")
     public HttpRequestHandler getStaticRequestHandler(final ServletContext servletContext,
             @Value(value = "%{edu.stanford.irt.laneweb.live-base}/") final UrlResource liveBase) {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"),
-                liveBase,
+        handler.setLocations(Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), liveBase,
                 new ServletContextResource(servletContext, "/resources/site-verification/") }));
         handler.setCacheSeconds(31536000);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;
+    }
+
+    @Bean(name = "themeResolver")
+    public ThemeResolver getThemeResolver() {
+        return new FixedThemeResolver();
+    }
+
+    @Bean(name = "themeSource")
+    public ThemeSource getThemeSource() {
+        return new DelegatingThemeSource();
+    }
+
+    @Bean
+    public MobileSiteInterceptor mobileSiteInterceptor() {
+        Map<String, String> redirectMap = new HashMap<String, String>();
+        redirectMap.put("/index.html", "/m/index.html");
+        redirectMap.put("/biomed-resources/eb.html", "/m/book.html");
+        redirectMap.put("/biomed-resources/ej.html", "/m/ej.html");
+        return new MobileSiteInterceptor(redirectMap);
+    }
+
+    @Bean
+    public PersistentLoginHandlerInterceptor persistentLoginHandlerInterceptor() {
+        return new PersistentLoginHandlerInterceptor();
+    }
+
+    @Bean
+    public RedirectHandlerInterceptor redirectHandlerInterceptor(final RedirectProcessor redirectProcessor) {
+        return new RedirectHandlerInterceptor(redirectProcessor);
     }
 }
