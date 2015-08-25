@@ -1,0 +1,186 @@
+package edu.stanford.irt.laneweb.servlet.mvc;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.context.LifecycleProcessor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.ApplicationEventMulticaster;
+import org.springframework.context.event.SimpleApplicationEventMulticaster;
+import org.springframework.context.support.DefaultLifecycleProcessor;
+import org.springframework.context.support.DelegatingMessageSource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
+import org.springframework.ui.context.ThemeSource;
+import org.springframework.ui.context.support.DelegatingThemeSource;
+import org.springframework.web.HttpRequestHandler;
+import org.springframework.web.context.support.ServletContextResource;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.FlashMapManager;
+import org.springframework.web.servlet.HandlerAdapter;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.RequestToViewNameTranslator;
+import org.springframework.web.servlet.ThemeResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
+import org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
+import org.springframework.web.servlet.support.SessionFlashMapManager;
+import org.springframework.web.servlet.theme.FixedThemeResolver;
+import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
+
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = { "edu.stanford.irt.laneweb.servlet.mvc", "edu.stanford.irt.laneweb.bookmarks" })
+public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    private RedirectProcessor redirectProcessor;
+
+    @Bean(name = "propertyPlaceholderConfigurer")
+    public static PropertyPlaceholderConfigurer getPropertyPlaceholderConfigurer() {
+        PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
+        //change from default because of maven filter properties seen as properties in dev environment
+        configurer.setPlaceholderPrefix("%{");
+        return configurer;
+    }
+
+    @Override
+    public void addInterceptors(final InterceptorRegistry registry) {
+        registry.addInterceptor(new PersistentLoginHandlerInterceptor())
+            .addPathPatterns("/**/secure/**", "/**/redirect/cme/**");
+        registry.addInterceptor(new DeviceResolverHandlerInterceptor())
+            .addPathPatterns("/**/*.html");
+        Map<String, String> redirectMap = new HashMap<String, String>();
+        redirectMap.put("/index.html", "/m/index.html");
+        redirectMap.put("/biomed-resources/eb.html", "/m/book.html");
+        redirectMap.put("/biomed-resources/ej.html", "/m/ej.html");
+        registry.addInterceptor(new MobileSiteInterceptor(redirectMap))
+            .addPathPatterns("/**/*.html");
+        registry.addInterceptor(new RedirectHandlerInterceptor(this.redirectProcessor))
+            .addPathPatterns("/**");
+    }
+
+    @Override
+    public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(new ObjectMapper());
+        converters.add(converter);
+    }
+
+    @Bean(name = "localeResolver")
+    public LocaleResolver getLocaleResolver() {
+        return new AcceptHeaderLocaleResolver();
+    }
+
+    @Bean(name = "lifecycleProcessor")
+    public LifecycleProcessor getLifecycleProcessor() {
+        return new DefaultLifecycleProcessor();
+    }
+
+    @Bean(name = "viewNameTranslator")
+    public RequestToViewNameTranslator getRequestToViewNameTranslator() {
+        return new DefaultRequestToViewNameTranslator();
+    }
+
+    @Bean(name = "messageSource")
+    public MessageSource getMessageSource() {
+        return new DelegatingMessageSource();
+    }
+
+    @Bean(name = "themeSource")
+    public ThemeSource getThemeSource() {
+        return new DelegatingThemeSource();
+    }
+
+    @Bean(name = "dispatcherServlet")
+    public DispatcherServlet getDispatcherServlet() {
+        DispatcherServlet servlet = new DispatcherServlet();
+        servlet.setDetectAllHandlerMappings(true);
+        servlet.setDetectAllHandlerMappings(true);
+        servlet.setDetectAllHandlerExceptionResolvers(false);
+        servlet.setDetectAllViewResolvers(false);
+        servlet.setPublishContext(false);
+        servlet.setPublishEvents(false);
+        return servlet;
+    }
+
+    @Bean(name = "themeResolver")
+    public ThemeResolver getThemeResolver() {
+        return new FixedThemeResolver();
+    }
+
+    @Bean(name = "handlerAdapter")
+    public HandlerAdapter getHandlerAdapter() {
+        return new HttpRequestHandlerAdapter();
+    }
+
+    @Bean(name = "flashMapManager")
+    public FlashMapManager getFlashMapManager() {
+        return new SessionFlashMapManager();
+    }
+
+    @Bean(name = "applicationEventMulticaster")
+    public ApplicationEventMulticaster getApplicationEventMulticaster() {
+        return new SimpleApplicationEventMulticaster();
+    }
+
+    @Bean
+    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(
+            @Qualifier(value = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static") final HttpRequestHandler staticHandler) {
+        SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
+        Map<String, Object> urlMap = new HashMap<String, Object>();
+        urlMap.put("/BingSiteAuth.xml", staticHandler);
+        urlMap.put("/google708f1eef3c6d1e52.html", staticHandler);
+        urlMap.put("/y_key_01fe447429961ab5.html", staticHandler);
+        urlMap.put("/**/*.*", staticHandler);
+        handlerMapping.setUrlMap(urlMap);
+        handlerMapping.setDefaultHandler(new DefaultRequestHandler());
+        return handlerMapping;
+    }
+
+    @Bean(name = "handlerExceptionResolver")
+    public SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(final SitemapController sitemapController) {
+        return new SitemapHandlerExceptionResolver(sitemapController);
+    }
+
+    @Bean(name = "multipartResolver")
+    public MultipartResolver getMultipartResolver() {
+        return new StandardServletMultipartResolver();
+    }
+
+    @Bean(name = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static")
+    public HttpRequestHandler getStaticRequestHandler(final ServletContext servletContext,
+            @Value(value = "%{edu.stanford.irt.laneweb.live-base}/") final UrlResource liveBase) {
+        ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
+        handler.setLocations(Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"),
+                liveBase,
+                new ServletContextResource(servletContext, "/resources/site-verification/") }));
+        handler.setCacheSeconds(31536000);
+        handler.setSupportedMethods("HEAD", "GET");
+        return handler;
+    }
+}

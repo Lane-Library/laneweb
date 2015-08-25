@@ -305,4 +305,16 @@
         <constructor-arg value="%{edu.stanford.irt.laneweb.shccodec.vector}"/>
     </bean>
     
+    <bean id="messageSource"
+        class="org.springframework.context.support.DelegatingMessageSource"/>
+    
+    <bean id="lifecycleProcessor"
+        class="org.springframework.context.support.DefaultLifecycleProcessor"/>
+    
+    <bean id="applicationEventMulticaster"
+        class="org.springframework.context.event.SimpleApplicationEventMulticaster"/>
+    
+    <bean  id="themeSource"
+        class="org.springframework.ui.context.support.DelegatingThemeSource"/>
+    
 </beans>
