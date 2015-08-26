@@ -3,30 +3,29 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.connector.ClientAbortException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
-import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
-// TODO: simplify testing of this by injecting a RequestHandler instead of extending one
-public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHandler
-        implements HandlerExceptionResolver {
+public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver {
 
     private static final Logger LOG = LoggerFactory.getLogger("error handler");
 
-    public SitemapHandlerExceptionResolver(final ComponentFactory componentFactory,
-            final SourceResolver sourceResolver) {
-        super(componentFactory, sourceResolver);
+    private SitemapController sitemapController;
+
+    @Autowired
+    public SitemapHandlerExceptionResolver(final SitemapController sitemapController) {
+        this.sitemapController = sitemapController;
     }
 
     @Override
@@ -52,17 +51,19 @@ public abstract class SitemapHandlerExceptionResolver extends SitemapRequestHand
         }
         if (!response.isCommitted()) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            HttpServletRequest wrapped = new HttpServletRequestWrapper(request) {
+
+                @Override
+                public String getServletPath() {
+                    return "/error.html";
+                }
+            };
             try {
-                handleRequest(request, response);
-            } catch (ServletException | IOException | LanewebException e) {
+                this.sitemapController.handleRequest(wrapped, response);
+            } catch (IOException | LanewebException e) {
                 LOG.error("Exception while handling exception", e);
             }
         }
         return new ModelAndView();
-    }
-
-    @Override
-    protected String getSitemapURI(final HttpServletRequest request) {
-        return "/error.html";
     }
 }

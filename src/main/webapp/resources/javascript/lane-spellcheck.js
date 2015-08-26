@@ -1,10 +1,9 @@
 (function() {
     var spellCheck = Y.one('#spellCheck'),
         model = Y.lane.Model,
-        query = model.get(model.QUERY),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "";
-    if (spellCheck && query) {
+    if (spellCheck && encodedQuery) {
         //get the suggestion
         Y.io(basePath + '/apps/spellcheck/json?q=' + encodedQuery, {
             on: {
@@ -23,7 +22,7 @@
                         // track suggestion and original query
                         Y.lane.fire("tracker:trackableEvent", {
                             category: "lane:spellSuggest",
-                            action: "query=" + query,
+                            action: "query=" + decodeURIComponent(encodedQuery),
                             label: "suggestion=" + sc.suggestion
                         });
                     }

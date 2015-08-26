@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -64,6 +65,7 @@ public class SolrSearchService implements CollectionManager {
     private SolrRepository repository;
 
     @Autowired
+    @Qualifier (value="laneSearchSolrTemplate")
     private SolrTemplate solrTemplate;
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,

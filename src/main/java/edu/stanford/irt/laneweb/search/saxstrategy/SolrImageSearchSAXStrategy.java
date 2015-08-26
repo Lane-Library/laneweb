@@ -18,51 +18,51 @@ import edu.stanford.irt.solr.Image;
 
 public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<String, Object>> {
 
-    private static final String ACTIVED = "actived";
+    protected static final String ACTIVED = "actived";
 
-    private static final String ANCHOR = "a";
+    protected static final String ANCHOR = "a";
 
-    private static final String CDATA = "CDATA";
+    protected static final String CDATA = "CDATA";
 
-    private static final String CLASS = "class";
+    protected static final String CLASS = "class";
 
-    private static final String DIV = "div";
+    protected static final String DIV = "div";
 
-    private static final String HIDDEN = "hidden";
+    protected static final String HIDDEN = "hidden";
 
-    private static final String HREF = "href";
+    protected static final String HREF = "href";
 
-    private static final String ID = "id";
+    protected static final String ID = "id";
 
-    private static final String IMAGE = "image";
+    protected static final String IMAGE = "image";
 
-    private static final int IMAGE_BY_ROW = 4;
+    protected static final int IMAGE_BY_ROW = 4;
 
     private static final String INPUT = "input";
 
-    private static final String LABEL = "label";
+    protected static final String LABEL = "label";
 
-    private static final String NAME = "name";
+    protected static final String NAME = "name";
 
-    private static final String NO_BOOKMARKING = "no-bookmarking";
+    protected static final String NO_BOOKMARKING = "no-bookmarking";
 
-    private static final String P = "p";
+    protected static final String P = "p";
 
-    private static final String SELECTED_RESOURCE = "selectedResource";
+    protected static final String SELECTED_RESOURCE = "selectedResource";
 
-    private static final String SPAN = "span";
+    protected static final String SPAN = "span";
 
-    private static final String SRC = "src";
+    protected static final String SRC = "src";
 
-    private static final String STYLE = "style";
+    protected static final String STYLE = "style";
 
-    private static final String TYPE = "type";
+    protected static final String TYPE = "type";
 
-    private static final String UL = "ul";
+    protected static final String UL = "ul";
 
-    private static final String VALUE = "value";
+    protected static final String VALUE = "value";
 
-    private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
+    protected static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
     
     private  NumberFormat nf = NumberFormat.getInstance();
 
@@ -149,9 +149,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
         endDiv(xmlConsumer);
-        atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, "hidden", "hidden", CDATA, "true");
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "article-title");
         startDivWithClass(xmlConsumer, "article-title");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.data(xmlConsumer, "Article Title: ");
@@ -251,7 +248,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
                 selectedResource = (String) result.get(SELECTED_RESOURCE);
             }
-
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 totalElement = totalElement + (int) facetFieldEntry.getValueCount();
                 if (selectedResource.equals(facetFieldEntry.getValue())) {
@@ -298,7 +294,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         return resourceName;
     }
 
-    private void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
+    protected void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(XHTML_NS, ID, ID, CDATA, image.getId());
@@ -316,8 +312,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedecoHidden");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         XMLUtils.data(xmlConsumer, " ");
-        endDiv(xmlConsumer);
         endAnchor(xmlConsumer);
+        endDiv(xmlConsumer);
         endLi(xmlConsumer);
     }
 

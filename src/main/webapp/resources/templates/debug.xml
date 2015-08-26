@@ -96,7 +96,7 @@
                                     <option value="all-all" title="Enter Subject, Title, Author, PMID, ISSN, DOI">Lane Search</option>
                                     <option value="clinical-all" title="Clinical evidence: Cochrane, DARE, ACP Journal Club, UpToDate, PubMed">Clinical/PICO</option>
                                     <option value="peds-all" title="Pediatric evidence: UpToDate, PubMed">Pediatrics</option>
-                                    <option value="bioresearch-all" title="200+ bioresearch resources">Bioresearch</option>
+                                    <option value="bioresearch-all" title="60 Bioresearch Resources">Bioresearch</option>
                                     <option value="images-all" title="Find Biomedical Images with Reuse Rights">Bio-Image Search</option>
                                     <option value="bassett" title="Anatomical images from Lane's Bassett collection">Bassett Anatomy</option>
                                     <option value="textbooks-all" title="Selected clinical textbooks">Textbooks</option>
@@ -327,7 +327,7 @@
                         <div><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles</a></div>
                     </div>
                     <div class="yui3-u-1-3">
-                        <a id="gift" href="http://giving.stanford.edu/goto/lanelibrarygift" rel="popup standard"><strong>Make a difference.</strong>
+                        <a id="gift" href="https://makeagift.stanford.edu/goto/lanelibrarygift/" rel="popup standard"><strong>Make a difference.</strong>
                             <br />Help us by making a contribution.</a>
                     </div>
                 </div>
@@ -337,7 +337,7 @@
             <ul class="centered">
                 <li id="footer-su"><a href="http://www.stanford.edu/">Stanford University</a></li>
                 <li id="footer-sm"><a href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
-                <li id="footer-shc"><a href="http://stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
+                <li id="footer-shc"><a href="http://www.stanfordhealthcare.org/">Stanford Hospitals and Clinics</a></li>
                 <li id="footer-sch"><a href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
                 <li id="footer-sul"><a href="http://library.stanford.edu/">Stanford University Libraries</a></li>
             </ul>

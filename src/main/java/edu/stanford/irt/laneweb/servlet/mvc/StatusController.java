@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -25,7 +24,7 @@ import edu.stanford.irt.suggest.SuggestionManager;
 @Controller
 public class StatusController {
 
-    private SitemapRequestHandler requestHandler;
+    private AbstractSitemapController sitemapController;
 
     private SuggestionManager suggestionManager;
 
@@ -33,12 +32,12 @@ public class StatusController {
 
     @Autowired
     public StatusController(
-            @Qualifier("edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/sitemap") final SitemapRequestHandler requestHandler,
+            final SitemapController sitemapController,
             final ComponentFactory componentFactory,
             final SourceResolver sourceResolver,
             @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager suggestionManager,
             final ServletContext servletContext) {
-        this.requestHandler = requestHandler;
+        this.sitemapController = sitemapController;
         this.suggestionManager = suggestionManager;
         this.version = new StringBuilder("laneweb-").append(servletContext.getInitParameter("laneweb.context.version"))
                 .append('\n').toString();
@@ -83,10 +82,10 @@ public class StatusController {
                     // do nothing
                 }
             };
-            this.requestHandler.handleRequest(req, resp);
+            this.sitemapController.handleRequest(req, resp);
             time = System.currentTimeMillis() - time;
             sb.append('[').append(time < 250 ? "OK" : "WARN").append("] index.html took ").append(time).append("ms.");
-        } catch (ServletException | IOException | SitemapException e) {
+        } catch (IOException | SitemapException e) {
             sb.append("[ERROR] index.html failed: ").append(e);
         }
     }

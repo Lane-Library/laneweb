@@ -1,7 +1,6 @@
 (function() {
     var model = Y.lane.Model,
         basePath = model.get(model.BASE_PATH) || "",
-        query = model.get(model.QUERY),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         searchIndicator = Y.lane.SearchIndicator,
     metasearch = function() {
@@ -120,7 +119,7 @@
     }();
 
     // check for presence of search term and metasearch classNames
-    if (Y.all('.metasearch').size() > 0 && query) {
+    if (Y.all('.metasearch').size() > 0 && encodedQuery) {
         metasearch.initialize();
         metasearch.getResultCounts();
         searchIndicator.show();

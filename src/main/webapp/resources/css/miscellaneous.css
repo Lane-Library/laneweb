@@ -140,3 +140,8 @@ hr {
     line-height: normal;
     font-size: 16px;
 }
+
+/*.youtube-thumbnail are created in youtube.js */
+.youtube-thumbnail {
+    cursor:pointer;
+}

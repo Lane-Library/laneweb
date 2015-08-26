@@ -5,7 +5,7 @@ Y.applyConfig({fetchCSS:true});
 Y.use('node-event-simulate', 'console', 'test', function(Y){
 
 
-    Y.lane.Model.set("query","query");
+    Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY,"foo%bar");
     Y.io = function(url, config) {
         config.on.success.apply(this, [1,{responseText:Y.JSON.stringify({results:{status:"successful",facets:{foo:{hits:0,status:"successful"}}}})}]);
 

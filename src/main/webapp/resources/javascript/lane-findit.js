@@ -1,12 +1,11 @@
 (function() {
     var findItNode = Y.one('#findIt'),
         model = Y.lane.Model,
-        query = model.get(model.QUERY),
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
         url;
     // SFX responds very slowly to numeric requests (PMIDs)
-    if (findItNode && query && isNaN(query)) {
+    if (findItNode && encodedQuery && isNaN(encodedQuery)) {
         url = basePath + '/apps/sfx/json?q=' + encodedQuery;
         Y.io(url, {
             on: {
@@ -21,7 +20,7 @@
                         // tracking
                         Y.lane.fire("tracker:trackableEvent", {
                             category: "lane:findit",
-                            action: "query=" + query,
+                            action: "query=" + decodeURIComponent(encodedQuery),
                             label: "result=" + findIt.result
                         });
                     }

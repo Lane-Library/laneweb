@@ -1,7 +1,7 @@
 (function() {
     var model = Y.lane.Model,
         doc = Y.one("doc"),
-        query = model.get(model.QUERY),
+        query = model.get(model.URL_ENCODED_QUERY),
         locationSearch = location.search,
         basePath = model.get(model.BASE_PATH) || "",
         facetsContainer = Y.one('.solrFacets'),

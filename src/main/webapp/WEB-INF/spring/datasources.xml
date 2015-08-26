@@ -19,9 +19,13 @@
         class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/eresources"/>
     </bean>
-
+    
     <bean name="javax.sql.DataSource/voyager" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/voyager"/>
+    </bean>
+    
+    <bean name="javax.sql.DataSource/grandrounds" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/grandrounds"/>
     </bean>
 
     <beans profile="test">
@@ -33,13 +37,21 @@
             <property name="username" value="%{edu.stanford.irt.laneweb.db.eresources.user}"/>
             <property name="password" value="%{edu.stanford.irt.laneweb.db.eresources.password}"/>
         </bean>
-
+        
         <bean name="javax.sql.DataSource/voyager" class="org.apache.commons.dbcp.BasicDataSource"
             destroy-method="close">
             <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
             <property name="url" value="%{edu.stanford.irt.laneweb.db.voyager.url}"/>
             <property name="username" value="%{edu.stanford.irt.laneweb.db.voyager.user}"/>
             <property name="password" value="%{edu.stanford.irt.laneweb.db.voyager.password}"/>
+        </bean>
+        
+        <bean name="javax.sql.DataSource/grandrounds" class="org.apache.commons.dbcp.BasicDataSource"
+            destroy-method="close">
+            <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+            <property name="url" value="%{edu.stanford.irt.laneweb.db.grandrounds.url}"/>
+            <property name="username" value="%{edu.stanford.irt.laneweb.db.grandrounds.user}"/>
+            <property name="password" value="%{edu.stanford.irt.laneweb.db.grandrounds.password}"/>
         </bean>
 
     </beans>

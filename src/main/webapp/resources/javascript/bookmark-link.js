@@ -54,7 +54,7 @@
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                if (Model.get(Model.QUERY)) {
+                if (Model.get(Model.URL_ENCODED_QUERY)) {
                     var bookmarkSearch = Y.one(".bookmark-search");
                     if (bookmarkSearch) {
                         bookmarkSearch.addClass("active");
@@ -129,11 +129,10 @@
              * @private
              */
             _handleBookmarkSearchClick : function(event) {
-                var query = Model.get(Model.QUERY),
-                    source = Model.get(Model.SOURCE),
-                    encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
-                    label = "Search for: " + query,
-                    url = "/search.html?source=" + source + "&q=" + encodedQuery,
+                var encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
+                    encodedSource = Model.get(Model.URL_ENCODED_SOURCE),
+                    label = "Search for: " + decodeURIComponent(encodedQuery),
+                    url = "/search.html?source=" + encodedSource + "&q=" + encodedQuery,
                     bookmarkSearch = event.currentTarget,
                     eventHandle = null,
                     bookmarks = this.get("bookmarks");

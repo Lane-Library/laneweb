@@ -127,7 +127,7 @@ Y.use('console', 'test', "node-event-simulate", function(Y) {
                 config.on.success.apply(config.context, [0,{}]);
             };
             Y.one(".bookmark-search").simulate("click");
-            Y.Assert.areSame('{"label":"Search for: query","url":"/search.html?source=undefined&q=undefined"}', data);
+            Y.Assert.areSame('{"label":"Search for: foo bar","url":"/search.html?source=bar%20foo&q=foo%20bar"}', data);
         },
 
         testTopResourceBookmarkable: function() {

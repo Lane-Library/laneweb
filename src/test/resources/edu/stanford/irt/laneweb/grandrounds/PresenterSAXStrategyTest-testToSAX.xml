@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presenter id="0">
+   <name>name</name>
+   <uri>uri</uri>
+   <affiliation>
+      <title>title</title>
+      <name>name</name>
+      <start>start</start>
+      <end>end</end>
+   </affiliation>
+</presenter>

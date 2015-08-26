@@ -41,14 +41,8 @@
                 <value>isActiveSunetID</value>
                 <value>ipgroup</value>
                 <value>proxy-links</value>
-                <value>query</value>
-                <value>source</value>
                 <value>url-encoded-query</value>
-                <!--<value>live-chat-available</value>
-                <value>userid</value>
-                <value>bookmarks</value>
-                <value>name</value>
-                <value>ticket</value>-->
+                <value>url-encoded-source</value>
             </set>
         </constructor-arg>
         <constructor-arg ref="com.fasterxml.jackson.databind.ObjectMapper"/>

@@ -1,7 +1,6 @@
 (function() {
 
     var Model = Y.lane.Model,
-        query = Model.get(Model.QUERY),
         basePath = Model.get(Model.BASE_PATH) || "",
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
         queryMapping = Y.one('#queryMapping'),
@@ -82,12 +81,12 @@
             // track mapped term, descriptor, and resources
             Y.lane.fire("tracker:trackableEvent", {
                 category: "lane:queryMapping",
-                action: "query=" + query + "; descriptor=" + resourceMap.descriptor.descriptorName,
+                action: "query=" + decodeURIComponent(encodedQuery) + "; descriptor=" + resourceMap.descriptor.descriptorName,
                 label: "resources=" + getResourcesString()
             });
         }
     };
-    if (query && queryMapping) {
+    if (encodedQuery && queryMapping) {
         Y.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
             on:{
                 success: mapSuccess

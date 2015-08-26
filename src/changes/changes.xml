@@ -7,6 +7,53 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-08-24" version="3.1.2" description="3.1.2 bug fix release">
+            <action date="2015-08-24" dev="ceyates" issue="110565" type="add">
+                don't show grand rounds presentations from suppressed records
+            </action>
+            <action date="2015-08-19" dev="ceyates" issue="110524" type="update">
+                switch from lane search to bio-image search
+            </action>
+            <action date="2015-08-19" dev="ceyates" issue="110483" type="fix">
+                some youtube videos links not appearing
+            </action>
+            <action date="2015-08-20" dev="olgary" issue="110410" type="update">
+                Feedback-suggestion - Change the grey text in bioresearch search 
+            </action>
+            <action date="2015-08-21" dev="olgary" issue="109445" type="update">
+                updated redirect links - template.xml, debug.xml
+            </action>
+            <action date="2015-08-19" dev="ceyates" issue="108506" type="add">
+                Cross-Site Scripting (XSS) Vulnerabilities
+            </action>
+        </release>
+        <release date="2015-08-18" version="3.1.1" description="3.1.1 emergency release">
+            <action date="2015-08-18" dev="ceyates" issue="110474" type="fix">
+                requests for /rss urls responding with 404 not found
+            </action>
+        </release>
+        <release date="2015-08-17" version="3.1.0" description="3.1.0 feature release">
+            <action date="2015-08-13" dev="ceyates" issue="110381" type="update">
+                upgrade to spring 4.2.0
+            </action>
+            <action date="2015-08-10" dev="ceyates" issue="110296" type="update">
+                Use Spring Controllers to handle sitemap generated requests
+            </action>
+            <action date="2015-08-13" dev="ceyates" issue="110198" type="add">
+                Speed up youtube embeds
+            </action>
+            <action date="2015-08-12" dev="ceyates" issue="109657" type="add">
+                Send live - week of Aug 19 - GR videos - to feed from catalog?
+            </action>
+        </release>
+        <release date="2015-08-10" version="3.0.15" description="3.0.15 bug fix release">
+            <action date="2015-08-06" dev="ryanmax" issue="110165" type="fix">
+                Lane favicon not visible in IE
+            </action>
+            <action date="2015-08-05" dev="ceyates" issue="110136" type="update">
+                don't use dependency injection for loggers
+            </action>
+        </release>
         <release date="2015-08-03" version="3.0.14" description="3.0.14 bug fix release">
             <action date="2015-07-30" dev="ryanmax" issue="109994" type="update">
                 update MeSH suggestions

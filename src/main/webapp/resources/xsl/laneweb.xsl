@@ -104,6 +104,7 @@
             <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/bassett')">bassett</xsl:when>
             <xsl:when test="starts-with($path,'/biomed-resources/bassett')">bassett</xsl:when>
+            <xsl:when test="$path = '/biomed-resources/images.html'">images-all</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
             <xsl:when test="string-length($source-prefix) &gt; 0">
                 <xsl:value-of select="concat($source-prefix,'-all')"/>

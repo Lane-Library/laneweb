@@ -43,6 +43,10 @@
                 <map:generate type="search-image"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="search/admin/image" type="wildcard">
+                <map:generate type="admin-search-image"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <!-- search/content/html returns xhtmlized metasearch content results -->
             <map:match pattern="search/content/html/*" type="wildcard">
                 <map:generate type="search-content">
@@ -53,20 +57,6 @@
                 <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- a couple of pipelines for testing xhtml sax strategies -->
-            <!--<map:match pattern="search/foo/*" type="wildcard">
-                    <map:generate type="search-content">
-                        <map:parameter name="engines" value="{1}"/>
-                    </map:generate>
-                    <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match pattern="search/bar/*" type="wildcard">
-                    <map:generate type="search-content-html">
-                        <map:parameter name="engines" value="{1}"/>
-                    </map:generate>
-                    <map:serialize type="xml"/>
-                </map:match>-->
             <!-- return raw xml metasearch content results -->
             <!-- this was used in mobile.xmap -->
             <map:match pattern="search/content/xml/*" type="wildcard">
@@ -89,17 +79,6 @@
                 <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- return raw xml merged metasearch and eresources results -->
-            <!-- this was used in mobile.xmap -->
-            <!--<map:match pattern="search/merged/xml/*" type="wildcard">
-                    <map:generate type="merged-search">
-                        <map:parameter name="timeout" value="5000"/>
-                        <map:parameter name="engines" value="{1}"/>
-                    </map:generate>
-                    <map:transform type="description-labeling"/>
-                    <map:transform type="query-highlighting"/>
-                    <map:serialize type="xml"/>
-                </map:match>-->
             <!-- search2json.xsl converts the result xml to json -->
             <!-- it is used in lane-metasearch.js and lane-querymap.js -->
             <map:match pattern="search/json" type="wildcard">
@@ -193,7 +172,7 @@
         <map:match pattern="search-templates.xml" type="wildcard">
             <map:generate type="search-describe"/>
             <map:transform type="search-directory">
-                <map:parameter name="directories" value="{content-base}/search,{content-base}/portals,{content-base}/med-history"/>
+                <map:parameter name="directories" value="{content-base}/search,{content-base}/portals"/>
             </map:transform>
             <map:transform type="file-path"/>
             <map:transform type="saxon" src="resources/xsl/search-templates.xsl"/>
@@ -228,6 +207,7 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="noncaching">
+        <!--
         <map:match pattern="grandrounds/*/*.html" type="wildcard">
             <map:aggregate type="default" element="doc" ns="doc">
                 <map:generate type="file" src="{content-base}/biomed-resources/grandrounds/{1}.xml"/>
@@ -238,6 +218,25 @@
                 <map:parameter name="year" value="{2}"/>
             </map:transform>
             <map:serialize type="html5-indent"/>
+        </map:match>
+        -->
+        <map:match pattern="grandrounds/*/*.html" type="wildcard">
+            <map:generate type="grandrounds">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:generate>
+            <map:transform type="saxon" src="resources/xsl/grandrounds2.xsl">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="grandrounds/*/*.xml" type="wildcard">
+            <map:generate type="grandrounds">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:generate>
+            <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
 </map:sitemap>

@@ -3,10 +3,10 @@
     var Lane = Y.lane,
         location = Lane.Location,
         model = Lane.Model,
-        searchTerms = model.get(model.QUERY),
-        searchSource = model.get(model.SOURCE),
+        searchTerms = model.get(model.URL_ENCODED_QUERY),
+        searchSource = model.get(model.URL_ENCODED_SOURCE),
         Tracker = function() {
-            model.on(model.QUERY + "Change", function(event) {
+            model.on(model.URL_ENCODED_QUERY + "Change", function(event) {
                 searchTerms = event.newVal;
             });
             //TODO more thorough documentation
@@ -19,7 +19,7 @@
                 trackingData.label = link.get('text');
                 if (searchTerms) {
                     trackingData.category = "lane:searchResultClick";
-                    trackingData.action = searchTerms;
+                    trackingData.action = decodeURIComponent(searchTerms);
                 } else {
                     trackingData.category = "lane:browseResultClick";
                     trackingData.action = location.get("pathname");
@@ -193,8 +193,8 @@
                 trackingData.path = getTrackedPath(node);
                 trackingData.query = getTrackedQuery(node);
                 trackingData.title = Tracker.getTrackedTitle(node);
-                trackingData.searchTerms = searchTerms;
-                trackingData.searchSource = searchSource;
+                trackingData.searchTerms = decodeURIComponent(searchTerms);
+                trackingData.searchSource = decodeURIComponent(searchSource);
                 trackingData.external = getTrackedExternal(node);
                 return trackingData;
             },
