@@ -168,7 +168,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         return handlerMapping;
     }
 
-    @Bean(name = "handlerExceptionResolver")
+    @Bean
     public SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(
             final SitemapController sitemapController) {
         return new SitemapHandlerExceptionResolver(sitemapController);
