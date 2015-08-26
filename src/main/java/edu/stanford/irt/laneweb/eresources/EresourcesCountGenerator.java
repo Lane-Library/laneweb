@@ -17,6 +17,8 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourcesCountGenerator extends AbstractGenerator implements ModelAware {
 
+    private static final int MAX_QUERY_LENGTH = 300;
+
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
     private CollectionManager collectionManager;
@@ -38,7 +40,7 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         Map<String, Integer> results = null;
-        if (this.query == null || this.query.isEmpty()) {
+        if (this.query == null || this.query.isEmpty() || this.query.length() > MAX_QUERY_LENGTH) {
             results = new HashMap<String, Integer>();
             Integer zero = Integer.valueOf(0);
             for (String type : this.types) {

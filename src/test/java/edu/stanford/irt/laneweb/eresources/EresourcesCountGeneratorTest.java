@@ -42,8 +42,8 @@ public class EresourcesCountGeneratorTest {
 
     @Test
     public void testDoGenerate() throws SAXException {
-        expect(this.collectionManager.searchCount(this.types, "query")).andReturn(
-                Collections.singletonMap("type", Integer.valueOf(1)));
+        expect(this.collectionManager.searchCount(this.types, "query"))
+                .andReturn(Collections.singletonMap("type", Integer.valueOf(1)));
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://apache.org/cocoon/SQL/2.0");
         this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"),
@@ -95,6 +95,36 @@ public class EresourcesCountGeneratorTest {
     }
 
     @Test
+    public void testDoGenerateLongQuery() throws SAXException {
+        this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", "http://apache.org/cocoon/SQL/2.0");
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"),
+                isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"),
+                isA(Attributes.class));
+        this.xmlConsumer.characters(aryEq("type".toCharArray()), eq(0), eq(4));
+        this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("genre"), eq("genre"));
+        this.xmlConsumer.startElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"),
+                isA(Attributes.class));
+        this.xmlConsumer.characters(aryEq(new char[] { '0' }), eq(0), eq(1));
+        this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("hits"), eq("hits"));
+        this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("row"), eq("row"));
+        this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"));
+        this.xmlConsumer.endPrefixMapping("");
+        this.xmlConsumer.endDocument();
+        replay(this.collectionManager, this.xmlConsumer);
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() <= 300) {
+            sb.append(" foo");
+        }
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, sb.toString()));
+        this.generator.doGenerate(this.xmlConsumer);
+        verify(this.collectionManager, this.xmlConsumer);
+    }
+
+    @Test
     public void testDoGenerateNullQuery() throws SAXException {
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://apache.org/cocoon/SQL/2.0");
@@ -122,8 +152,8 @@ public class EresourcesCountGeneratorTest {
 
     @Test
     public void testDoGenerateThrowException() throws SAXException {
-        expect(this.collectionManager.searchCount(this.types, "query")).andReturn(
-                Collections.singletonMap("type", Integer.valueOf(1)));
+        expect(this.collectionManager.searchCount(this.types, "query"))
+                .andReturn(Collections.singletonMap("type", Integer.valueOf(1)));
         this.xmlConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(this.collectionManager, this.xmlConsumer);
