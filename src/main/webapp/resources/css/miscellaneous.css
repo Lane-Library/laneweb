@@ -144,4 +144,15 @@ hr {
 /*.youtube-thumbnail are created in youtube.js */
 .youtube-thumbnail {
     cursor:pointer;
+    position:relative;
+    display:inline-block;
+}
+
+.youtube-thumbnail .fa {
+    font-size: 60px;
+    position: absolute;
+    right: 42%;
+    top: 38%;
+    color: #466484;
+    opacity: .5;
 }
