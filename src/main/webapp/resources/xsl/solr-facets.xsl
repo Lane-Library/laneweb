@@ -74,18 +74,18 @@
                             <a class="close fa fa-close"></a>
 					        <xsl:choose>
 					            <xsl:when test="number($page) &gt; 1">
-									<a class="pagingButton previous" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> </a>
+									<a class="pagingButton previous" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> Previous</a>
 					            </xsl:when>
 					            <xsl:otherwise>
-	                                <span class="pagingButton disabled"> <i class="fa fa-backward"></i> </span>
+	                                <span class="pagingButton disabled"> <i class="fa fa-backward"></i> Previous</span>
 					            </xsl:otherwise>
 					        </xsl:choose>
 	                        <xsl:choose>
 	                            <xsl:when test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $facets-per-browse-page">
-	                                <a class="pagingButton next" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next"> <i class="fa fa-forward"></i> </a>
+	                                <a class="pagingButton next" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa fa-forward"></i> </a>
 	                            </xsl:when>
 	                            <xsl:otherwise>
-	                                <span class="pagingButton disabled"> <i class="fa fa-forward"></i> </span>
+	                                <span class="pagingButton disabled">Next <i class="fa fa-forward"></i> </span>
 	                            </xsl:otherwise>
 	                        </xsl:choose>
                         </div>
