@@ -149,17 +149,19 @@ hr {
 }
 
 .youtube-thumbnail .fa {
-    font-size: 16px;
+    text-align: center;
+    font-size: 14px;
     position: absolute;
-    right: 42%;
-    top: 38%;
+    right: 43%;
+    top: 41%;
     color: white;
-    background-color: black;
-    padding: 5px 10px;
-    border-radius: 3px;
+    background-color: rgb(56,56,56);
+    border-radius: 9px;
+    width: 42px;
+    line-height: 30px;
+    opacity:.9;
 }
 
 .youtube-thumbnail:hover .fa {
-    color: black;
-    background-color: red;
+    background-color: rgb(195,22,35);
 }
