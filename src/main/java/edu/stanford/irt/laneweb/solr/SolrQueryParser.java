@@ -19,12 +19,10 @@ public final class SolrQueryParser {
     private static final String TOGGLE_OFF = "advanced:true";
     static {
         // these seem harmless || &&
-        // these seem useful and harmless " *
+        // these seem useful and harmless " * ( )
         ESCAPEABLE_CHARS.add(new Character('+'));
         ESCAPEABLE_CHARS.add(new Character('-'));
         ESCAPEABLE_CHARS.add(new Character('!'));
-        ESCAPEABLE_CHARS.add(new Character('('));
-        ESCAPEABLE_CHARS.add(new Character(')'));
         ESCAPEABLE_CHARS.add(new Character('{'));
         ESCAPEABLE_CHARS.add(new Character('}'));
         ESCAPEABLE_CHARS.add(new Character('['));
