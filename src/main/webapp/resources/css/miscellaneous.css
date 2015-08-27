@@ -141,7 +141,7 @@ hr {
     font-size: 16px;
 }
 
-/*.youtube-thumbnail are created in youtube.js */
+/*.youtube-thumbnail divs are created in youtube.js */
 .youtube-thumbnail {
     cursor:pointer;
     position:relative;
@@ -149,10 +149,17 @@ hr {
 }
 
 .youtube-thumbnail .fa {
-    font-size: 60px;
+    font-size: 16px;
     position: absolute;
     right: 42%;
     top: 38%;
-    color: #6793CA;
-    opacity: .8;
+    color: white;
+    background-color: black;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.youtube-thumbnail:hover .fa {
+    color: black;
+    background-color: red;
 }
