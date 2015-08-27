@@ -34,6 +34,7 @@
             this._thumbnail.attachEvent("onclick", click);
         }
         this._parent.replaceChild(this._thumbnail, this._iframe);
+        this._iframe.src = this._iframe.src + "?autoplay=1";
     };
 
     YouTubeNode.prototype = {
