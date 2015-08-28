@@ -32,11 +32,7 @@ public class PresentationSAXStrategy implements SAXStrategy<Presentation> {
                 int id = presenter.getId();
                 if (id == -1) {
                     XMLUtils.startElement(xmlConsumer, "", "presenter");
-                    String name = presenter.getName();
-                    if (!Normalizer.isNormalized(name, Form.NFKC)) {
-                        name = Normalizer.normalize(name, Form.NFKC);
-                    }
-                    XMLUtils.createElementNS(xmlConsumer, "", "name", name);
+                    XMLUtils.createElementNS(xmlConsumer, "", "name", normalize(presenter.getName()));
                     XMLUtils.endElement(xmlConsumer, "", "presenter");
                 } else {
                     atts = new AttributesImpl();
@@ -57,5 +53,10 @@ public class PresentationSAXStrategy implements SAXStrategy<Presentation> {
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
+    }
+
+    // TODO: move this to grand rounds and eventually catalog
+    private String normalize(final String string) {
+        return Normalizer.isNormalized(string, Form.NFKC) ? string : Normalizer.normalize(string, Form.NFKC);
     }
 }
