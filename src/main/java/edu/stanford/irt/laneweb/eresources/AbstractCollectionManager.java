@@ -104,6 +104,9 @@ public abstract class AbstractCollectionManager implements CollectionManager {
 
     @Override
     public List<Eresource> search(final String query) {
+        if (query == null || query.isEmpty() || query.length() >= MAX_QUERY_LENGTH) {
+            return Collections.emptyList();
+        }
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -165,9 +168,6 @@ public abstract class AbstractCollectionManager implements CollectionManager {
     }
 
     protected List<Eresource> doGet(final String sqlKey, final Collection<String> params, final String query) {
-        if (query == null || query.isEmpty() || query.length() >= MAX_QUERY_LENGTH) {
-            return Collections.emptyList();
-        }
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
