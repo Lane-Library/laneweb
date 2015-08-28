@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.grandrounds;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.time.format.DateTimeFormatter;
 
 import org.xml.sax.SAXException;
@@ -30,7 +32,11 @@ public class PresentationSAXStrategy implements SAXStrategy<Presentation> {
                 int id = presenter.getId();
                 if (id == -1) {
                     XMLUtils.startElement(xmlConsumer, "", "presenter");
-                    XMLUtils.createElementNS(xmlConsumer, "", "name", presenter.getName());
+                    String name = presenter.getName();
+                    if (!Normalizer.isNormalized(name, Form.NFKC)) {
+                        name = Normalizer.normalize(name, Form.NFKC);
+                    }
+                    XMLUtils.createElementNS(xmlConsumer, "", "name", name);
                     XMLUtils.endElement(xmlConsumer, "", "presenter");
                 } else {
                     atts = new AttributesImpl();
