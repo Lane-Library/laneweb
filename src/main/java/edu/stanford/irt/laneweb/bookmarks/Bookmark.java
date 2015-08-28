@@ -26,6 +26,7 @@ public class Bookmark implements Serializable {
      * Create a new Bookmark with null label and url.
      */
     public Bookmark() {
+        // default empty constructor
     }
 
     /**
