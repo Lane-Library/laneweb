@@ -58,9 +58,6 @@
 	        <xsl:choose>
 	            <xsl:when test="$search-mode">
 		            <li class="solrFacet facetHeader"><xsl:value-of select="$label"/></li>
-		            <xsl:if test="$id = 'year'">
-		                <xsl:apply-templates select="/linked-hash-map/entry/string[. = 'isRecent']/../sorted-set/facet[name[. = 'true']]"/>
-		            </xsl:if>
 		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $values-per-facet or $facet !='']"/>
 		            <xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $values-per-facet and $facet = ''">
 		                 <li> <a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> all </a> <i class="icon fa fa-arrow-right"></i></li>
