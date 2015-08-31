@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-08-31" version="3.1.3" description="3.1.3 bug fix release">
+            <action date="2015-08-27" dev="ceyates" issue="110718" type="fix">
+                text with diacritics is not composed utf-8 on grand rounds pages
+            </action>
+            <action date="2015-08-25" dev="ceyates" issue="110665" type="update">
+                don't attempt oracle text search with very long queries
+            </action>
+            <action date="2015-08-27" dev="ceyates" issue="110628" type="add">
+                YouTube embeds font awesome icon over image
+            </action>
+            <action date="2015-08-24" dev="ceyates" issue="110616" type="update">
+                use a @Configuration annotated class instead of laneweb-servlet.xml
+            </action>
+        </release>
         <release date="2015-08-24" version="3.1.2" description="3.1.2 bug fix release">
             <action date="2015-08-24" dev="ceyates" issue="110565" type="add">
                 don't show grand rounds presentations from suppressed records
