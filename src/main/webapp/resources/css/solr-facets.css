@@ -5,8 +5,6 @@
 }
 
 .solrFacets li {
-    overflow: hidden;
-    height: 0;
     padding-top: 0;
     padding-bottom: 0;
     border-bottom: none;
@@ -16,7 +14,6 @@
 .solrFacets li.facetHeader {
     height: 20px;
     border-bottom: 1px solid #e6e4dc;
-    cursor: pointer;
 }
 
 .solrFacets {

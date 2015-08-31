@@ -16,55 +16,11 @@
                 pagingContainer.one(selectorString)._node.click();
             } 
         },
-        toggleHeader = function(nodeOrEvent) {
-            var node = undefined != nodeOrEvent.currentTarget ? nodeOrEvent.currentTarget : nodeOrEvent, next = node.next('li'), anim;
-            if (node.hasClass('open')) {
-                node.removeClass('open');
-                node.removeClass('openIE');
-            } else {
-                node.addClass('open');
-                if (Y.UA.ie && Y.UA.ie <= 9) {
-                    node.addClass('openIE');
-                }
-            }
-            while (next && !next.hasClass('facetHeader')) {
-                if (next.getStyle('height').indexOf('0') == 0) {
-                    anim = new Y.Anim({
-                        node: next,
-                        to: { height: function(node) { return node.get('scrollHeight');}
-                            },
-                        duration : 0.25,
-                        easing: 'backIn'
-                    });
-                    anim.on('end',function(){
-                        var n = this.get('node');
-                        n.setStyle('overflow','visible');
-                        n.setStyle('border-bottom','1px solid #e6e4dc');
-                        })
-                    anim.run();
-                } else {
-                    next.setStyle('overflow','hidden');
-                    anim = new Y.Anim({
-                        node: next,
-                        to: { height: 0 },
-                        duration : 0.25,
-                        easing: 'backIn'
-                    });
-                    anim.on('end',function(){
-                        this.get('node').setStyle('border-bottom','none');
-                        })
-                    anim.run();
-                }
-                next = next.next('li');
-            }
-        },
         makeRequest = function() {
             Y.io(basePath + '/apps/search/facets/html' + locationSearch, {
                 on: {
                     success:function(id, o) {
                         facetsContainer.append(o.responseText);
-                        Y.all('.facetHeader').each(function(node){toggleHeader(node)});
-                        Y.all('.facetHeader').on('click',toggleHeader);
                         // fade in facets container
                         new Y.Anim({
                             node: facetsContainer,
