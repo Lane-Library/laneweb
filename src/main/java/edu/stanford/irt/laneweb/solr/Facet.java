@@ -32,4 +32,9 @@ public class Facet {
     public boolean isEnabled() {
         return this.enabled;
     }
+
+    @Override
+    public String toString() {
+        return this.name + " = " + this.count + "; enabled=" + this.enabled + "; url=" + this.url;
+    }
 }
