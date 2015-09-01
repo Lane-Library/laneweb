@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.ClientAbortException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,7 +22,6 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
 
     private SitemapController sitemapController;
 
-    @Autowired
     public SitemapHandlerExceptionResolver(final SitemapController sitemapController) {
         this.sitemapController = sitemapController;
     }

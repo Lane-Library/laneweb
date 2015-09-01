@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,6 +39,8 @@ public abstract class AbstractCollectionManager implements CollectionManager {
     private static final String COUNT = "search.count.0";
 
     private static final String COUNT_TYPE_UNION = "search.count.1";
+
+    private static final int MAX_QUERY_LENGTH = 300;
 
     private DataSource dataSource;
 
@@ -101,6 +104,9 @@ public abstract class AbstractCollectionManager implements CollectionManager {
 
     @Override
     public List<Eresource> search(final String query) {
+        if (query == null || query.isEmpty() || query.length() >= MAX_QUERY_LENGTH) {
+            return Collections.emptyList();
+        }
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -112,36 +118,38 @@ public abstract class AbstractCollectionManager implements CollectionManager {
     @Override
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
-        StringBuilder sb = new StringBuilder(this.sqlStatements.getProperty(COUNT));
-        String countTypeUnion = this.sqlStatements.getProperty(COUNT_TYPE_UNION);
-        for (int i = 0; i < types.size(); i++) {
-            sb.append(' ').append(countTypeUnion);
-        }
-        String sql = sb.toString();
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = this.dataSource.getConnection();
-            stmt = conn.prepareStatement(sql);
-            int index = 1;
-            stmt.setString(index++, new QueryTranslator().translate(query));
-            for (String type : types) {
-                stmt.setString(index++, type);
-                stmt.setString(index++, type);
+        if (query.length() <= MAX_QUERY_LENGTH) {
+            StringBuilder sb = new StringBuilder(this.sqlStatements.getProperty(COUNT));
+            String countTypeUnion = this.sqlStatements.getProperty(COUNT_TYPE_UNION);
+            for (int i = 0; i < types.size(); i++) {
+                sb.append(' ').append(countTypeUnion);
             }
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                result.put(rs.getString(1), Integer.valueOf(rs.getInt(2)));
+            String sql = sb.toString();
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                conn = this.dataSource.getConnection();
+                stmt = conn.prepareStatement(sql);
+                int index = 1;
+                stmt.setString(index++, new QueryTranslator().translate(query));
+                for (String type : types) {
+                    stmt.setString(index++, type);
+                    stmt.setString(index++, type);
+                }
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    result.put(rs.getString(1), Integer.valueOf(rs.getInt(2)));
+                }
+            } catch (SQLException e) {
+                throw new LanewebException(e);
+            } finally {
+                JdbcUtils.closeResultSet(rs);
+                JdbcUtils.closeStatement(stmt);
+                JdbcUtils.closeConnection(conn);
             }
-            return result;
-        } catch (SQLException e) {
-            throw new LanewebException(e);
-        } finally {
-            JdbcUtils.closeResultSet(rs);
-            JdbcUtils.closeStatement(stmt);
-            JdbcUtils.closeConnection(conn);
         }
+        return result;
     }
 
     public List<Eresource> searchSubset(final String subset, final String query) {

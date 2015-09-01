@@ -14,7 +14,6 @@ import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.Collections;
 
 import javax.sql.DataSource;
 
@@ -40,8 +39,7 @@ public class GrandRoundsManagerTest {
         this.dataSource = createMock(DataSource.class);
         InputStream presentationsSQL = getClass()
                 .getResourceAsStream("/edu/stanford/irt/grandrounds/getGrandRounds.fnc");
-        InputStream presentersSQL = getClass().getResourceAsStream("/edu/stanford/irt/grandrounds/getPresenters.fnc");
-        this.manager = new GrandRoundsManager(this.dataSource, presentationsSQL, presentersSQL);
+        this.manager = new GrandRoundsManager(this.dataSource, presentationsSQL);
         this.connection = createMock(Connection.class);
         this.callable = createMock(CallableStatement.class);
         this.clob = createMock(Clob.class);
@@ -81,47 +79,6 @@ public class GrandRoundsManagerTest {
         replay(this.callable, this.clob, this.connection, this.dataSource);
         try {
             this.manager.getGrandRounds("medicine", "year");
-        } catch (LanewebException e) {
-        }
-        verify(this.callable, this.clob, this.connection, this.dataSource);
-    }
-
-    @Test
-    public void testGetPresenters() throws SQLException {
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
-        expect(this.connection.prepareCall(isA(String.class))).andReturn(this.callable);
-        this.callable.setString(1, "id");
-        this.callable.setString(2, "id");
-        this.callable.registerOutParameter(3, Types.CLOB);
-        expect(this.callable.execute()).andReturn(true);
-        expect(this.callable.getClob(3)).andReturn(this.clob);
-        expect(this.clob.getAsciiStream()).andReturn(getClass().getResourceAsStream("presenter.mrc"));
-        this.clob.free();
-        this.callable.close();
-        this.connection.close();
-        replay(this.callable, this.clob, this.connection, this.dataSource);
-        assertEquals(1, this.manager.getPresenters(Collections.singleton("id")).size());
-        verify(this.callable, this.clob, this.connection, this.dataSource);
-    }
-
-    @Test
-    public void testGetPresentersEmptyIds() throws SQLException {
-        assertEquals(0, this.manager.getPresenters(Collections.emptySet()).size());
-    }
-
-    @Test
-    public void testGetPresentersThrowsException() throws SQLException {
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
-        expect(this.connection.prepareCall(isA(String.class))).andReturn(this.callable);
-        this.callable.setString(1, "id");
-        this.callable.setString(2, "id");
-        this.callable.registerOutParameter(3, Types.CLOB);
-        expect(this.callable.execute()).andThrow(new SQLException());
-        this.callable.close();
-        this.connection.close();
-        replay(this.callable, this.clob, this.connection, this.dataSource);
-        try {
-            this.manager.getPresenters(Collections.singleton("id"));
         } catch (LanewebException e) {
         }
         verify(this.callable, this.clob, this.connection, this.dataSource);

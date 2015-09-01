@@ -17,6 +17,7 @@ public class ContentResultConversionStrategy {
     private ScoreStrategy scoreStrategy = new ScoreStrategy();
 
     public ContentResultConversionStrategy() {
+        // default empty constructor
     }
 
     // constructor for unit tests

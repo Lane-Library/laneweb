@@ -4,6 +4,7 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
+import static org.junit.Assert.assertEquals;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -131,6 +132,22 @@ public class AbstractCollectionManagerTest {
     }
 
     @Test
+    public void testSearchCountLongQuery() throws SQLException {
+        expect(this.sqlStatements.getProperty("search.count.0")).andReturn("");
+        expect(this.sqlStatements.getProperty("search.count.1")).andReturn("");
+        this.statement.setString(1, "((${query})) ");
+        this.statement.setString(2, "type");
+        this.statement.setString(3, "type");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet, this.sqlStatements);
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() <= 300) {
+            sb.append(" foo");
+        }
+        assertEquals(Collections.emptyMap(), this.manager.searchCount(Collections.singleton("type"), sb.toString()));
+    }
+
+    @Test
     public void testSearchCountSetOfStringString() throws SQLException {
         expect(this.sqlStatements.getProperty("search.count.0")).andReturn("");
         expect(this.sqlStatements.getProperty("search.count.1")).andReturn("");
@@ -140,6 +157,20 @@ public class AbstractCollectionManagerTest {
         expect(this.resultSet.next()).andReturn(false);
         replay(this.statement, this.resultSet, this.sqlStatements);
         this.manager.searchCount(Collections.singleton("type"), "query");
+    }
+
+    @Test
+    public void testSearchLongQuery() throws SQLException {
+        expect(this.sqlStatements.getProperty("search")).andReturn("");
+        this.statement.setString(1, "((${query})) ");
+        this.statement.setString(2, "((${query})) ");
+        expect(this.resultSet.next()).andReturn(false);
+        replay(this.statement, this.resultSet, this.sqlStatements);
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() <= 300) {
+            sb.append(" foo");
+        }
+        assertEquals(0, this.manager.search(sb.toString()).size());
     }
 
     @Test

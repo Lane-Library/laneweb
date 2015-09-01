@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.mvc.WebMvcConfigurer;
 import edu.stanford.irt.laneweb.user.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,7 +33,7 @@ import edu.stanford.irt.laneweb.user.User;
 @ActiveProfiles("test")
 @ContextHierarchy({
     @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/laneweb.xml", initializers = LanewebContextInitializer.class),
-    @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/laneweb-servlet.xml", initializers = LanewebContextInitializer.class)})
+    @ContextConfiguration(classes = WebMvcConfigurer.class, initializers = LanewebContextInitializer.class)})
 public class LanewebIT {
 
     private MockMvc mockMvc;

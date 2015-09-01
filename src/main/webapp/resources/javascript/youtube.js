@@ -26,7 +26,7 @@
             id = id.substring(0, id.indexOf("?"));
         }
         url = "http://img.youtube.com/vi/" + id + "/mqdefault.jpg";
-        temp.innerHTML = "<img class=\"youtube-thumbnail\" src=\"" + url + "\"/>";
+        temp.innerHTML = "<div class=\"youtube-thumbnail\"><img src=\"" + url + "\"/><i class=\"fa fa-play\"></i></div>";
         this._thumbnail = temp.firstChild;
         if (Element.prototype.addEventListener) {
             this._thumbnail.addEventListener("click", click);
@@ -34,6 +34,7 @@
             this._thumbnail.attachEvent("onclick", click);
         }
         this._parent.replaceChild(this._thumbnail, this._iframe);
+        this._iframe.src = this._iframe.src + "?autoplay=1";
     };
 
     YouTubeNode.prototype = {

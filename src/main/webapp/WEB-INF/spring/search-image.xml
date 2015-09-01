@@ -50,6 +50,7 @@
 				<entry key="wellcomeimages.org" value="Wellcome Images" />
 				<entry key="visualsonline.cancer.gov" value="National Cancer Institute" />
 				<entry key="commons.wikimedia.org" value="Wikimedia Commons" />
+				<entry key="indiana.edu" value="Indiana U X-Rays via NLM"/>
 			</map>
 		</property>
 	</bean>
