@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.solr;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,25 +35,12 @@ public class SolrSearchService implements CollectionManager {
 
     private static final String EMPTY = "";
 
-    private static final Collection<String> FACET_FIELDS = new ArrayList<String>();
+    private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh", "publicationAuthor",
+            "publicationLanguage", "publicationTitle", "publicationType", "type", "recordType", "year");
 
     private static final FacetOptions FACET_OPTIONS = new FacetOptions();
 
-    private static final int FACETS_BROWSE_SIZE = 21;
-
-    private static final int FACETS_LIST_SIZE = 11;
-
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
-    static {
-        FACET_FIELDS.add("mesh");
-        FACET_FIELDS.add("publicationAuthor");
-        FACET_FIELDS.add("publicationLanguage");
-        FACET_FIELDS.add("publicationTitle");
-        FACET_FIELDS.add("publicationType");
-        FACET_FIELDS.add("type");
-        FACET_FIELDS.add("recordType");
-        FACET_FIELDS.add("year");
-    }
     static {
         FACET_OPTIONS.setFacetMinCount(1);
         FACET_OPTIONS.addFacetOnFlieldnames(FACET_FIELDS);
@@ -65,20 +52,20 @@ public class SolrSearchService implements CollectionManager {
     private SolrRepository repository;
 
     @Autowired
-    @Qualifier (value="laneSearchSolrTemplate")
+    @Qualifier(value = "laneSearchSolrTemplate")
     private SolrTemplate solrTemplate;
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
-            final int pageNumber) {
-        PageRequest pageRequest = new PageRequest(pageNumber, FACETS_BROWSE_SIZE);
+            final int pageNumber, final int facetLimit, final int facetMinCount) {
+        PageRequest pageRequest = new PageRequest(pageNumber, facetLimit);
         String facetFilters = facetStringToFilters(filters);
         int modifiedOffset = (pageRequest.getOffset() == 0) ? 0 : pageRequest.getOffset() - 1;
         FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
         fieldWithFacetParams.setOffset(Integer.valueOf(modifiedOffset));
         String cleanQuery = SolrQueryParser.parse(query);
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery))
-        .setFacetOptions(new FacetOptions().addFacetOnField(fieldWithFacetParams).setFacetMinCount(1)
-                .setFacetLimit(pageRequest.getPageSize()));
+                .setFacetOptions(new FacetOptions().addFacetOnField(fieldWithFacetParams)
+                        .setFacetMinCount(facetMinCount).setFacetLimit(pageRequest.getPageSize()));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));
@@ -86,11 +73,11 @@ public class SolrSearchService implements CollectionManager {
         return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
     }
 
-    public FacetPage<Eresource> facetByManyFields(final String query, final String filters) {
+    public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
         String facetFilters = facetStringToFilters(filters);
         String cleanQuery = SolrQueryParser.parse(query);
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery)).setFacetOptions(FACET_OPTIONS
-                .setFacetLimit(FACETS_LIST_SIZE));
+                .setFacetLimit(facetLimit));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));

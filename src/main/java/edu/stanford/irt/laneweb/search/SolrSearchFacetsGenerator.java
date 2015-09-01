@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -33,7 +35,12 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private static final String EMPTY = "";
 
+    private static final String PUBLICATION_TYPE = "publicationType";
+
     private static final String QUOTE = "\"";
+
+    private static final Collection<String> REQUIRED_PUBLICATION_TYPES = Arrays.asList("Clinical Trial",
+            "Randomized Controlled Trial", "Systematic Review");
 
     private String facet;
 
@@ -64,12 +71,15 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         FacetPage<Eresource> fps = null;
+        Map<String, Set<Facet>> facetsMap;
         if (null == this.facet) {
-            fps = this.service.facetByManyFields(this.query, this.facets);
+            fps = this.service.facetByManyFields(this.query, this.facets, 11);
         } else {
-            fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber);
+            fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber, 21, 1);
         }
-        marshal(processFacets(fps), xmlConsumer);
+        facetsMap = processFacets(fps);
+        maybeAddRequiredPublicationTypes(facetsMap);
+        marshal(facetsMap, xmlConsumer);
     }
 
     private String encodeString(final String string) {
@@ -105,6 +115,34 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         String escapedFacetName = Pattern.quote(facetName);
         return this.facets
                 .matches(DOT_STAR + fieldName + COLON + maybeQuote + escapedFacetName + maybeQuote + DOT_STAR);
+    }
+
+    private Map<String, Set<Facet>> maybeAddRequiredPublicationTypes(final Map<String, Set<Facet>> facetsMap) {
+        // don't enforce required pub types for facet browse
+        if (null != this.facet) {
+            return facetsMap;
+        }
+        Set<Facet> facetSet = facetsMap.get(PUBLICATION_TYPE);
+        if (null == facetSet) {
+            facetSet = new TreeSet<Facet>(new FacetComparator());
+        }
+        int required = 0;
+        for (Facet f : facetSet) {
+            if (REQUIRED_PUBLICATION_TYPES.contains(f.getName())) {
+                required++;
+            }
+        }
+        if (required < 3) {
+            Map<String, Set<Facet>> publicationTypeFacetMap = processFacets(this.service.facetByField(this.query,
+                    this.facets, PUBLICATION_TYPE, this.pageNumber, 1000, 0));
+            for (Facet f : publicationTypeFacetMap.get(PUBLICATION_TYPE)) {
+                if (REQUIRED_PUBLICATION_TYPES.contains(f.getName())) {
+                    facetSet.add(f);
+                }
+            }
+            facetsMap.put(PUBLICATION_TYPE, facetSet);
+        }
+        return facetsMap;
     }
 
     private Map<String, Set<Facet>> processFacets(final FacetPage<Eresource> facetpage) {
