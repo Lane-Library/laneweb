@@ -60,7 +60,7 @@
     <xsl:template match="presentation/title">
        <!-- <xsl:variable name="id" select="parent::presentation/@id"/>-->
         <h3>
-            <a href="{parent::presentation/video[1]/uri}">
+            <a href="{parent::presentation/uri[1]}">
                 <xsl:apply-templates/>
             </a>
             <!--<a style="font-size:9px" rel="popup standard"
@@ -78,68 +78,21 @@
     
     <xsl:template match="presenter">
         <p>
-            <xsl:for-each select="tokenize(name,';')">
+            <xsl:for-each select="tokenize(.,';')">
                 <xsl:value-of select="."/><br/>
             </xsl:for-each>
         </p>
     </xsl:template>
-
-    <xsl:template match="presenter[@idref]">
-        <xsl:call-template name="presenter-ref">
-            <xsl:with-param name="year" select="number('2015')"/>
-            <xsl:with-param name="presenter" select="/grandrounds/presenter[@id = current()/@idref]"/>
-        </xsl:call-template>
-    </xsl:template>
-
-    <xsl:template match="presenter[uri]/name">
-        <a href="{../uri}">
-            <xsl:value-of select="."/>
-        </a>
-        <xsl:if test="../@id">
-            <a style="font-size:9px" rel="popup standard"
-                href="http://lane-preprod.stanford.edu/catalog/marc.html?db=lmldb&amp;type=auth&amp;id={../@id}">
-                <xsl:value-of select="../@id"/>
-            </a>
-        </xsl:if>
-    </xsl:template>
-
-    <xsl:template match="name">
-        <xsl:value-of select="."/>
-        <xsl:if test="../@id">
-            <a style="font-size:9px" rel="popup standard"
-                href="http://lane-preprod.stanford.edu/catalog/marc.html?db=lmldb&amp;type=auth&amp;id={../@id}">
-                <xsl:value-of select="../@id"/>
-            </a>
-        </xsl:if>
-    </xsl:template>
-
-    <xsl:template name="presenter-ref">
-        <xsl:param name="year"/>
-        <xsl:param name="presenter"/>
-        <p>
-            <xsl:apply-templates select="$presenter/name | $presenter/affiliation[number(start) &lt;= $year and number(end) &gt;= $year]"/>
-        </p>
-    </xsl:template>
-
-
-    <xsl:template match="affiliation/title | affiliation/name">
-        <br/>
-        <xsl:value-of select="."/>
-    </xsl:template>
-    
-    <xsl:template match="start | end"/>
 
     <xsl:template match="description">
         <p>
             <xsl:value-of select="."/>
         </p>
     </xsl:template>
+    
+    <xsl:template match="uri"/>
 
-    <xsl:template match="video">
-        <xsl:apply-templates select="uri[contains(.,'youtu')]"/>
-    </xsl:template>
-
-    <xsl:template match="video/uri">
+    <xsl:template match="uri[contains(.,'youtu')]">
         <xsl:variable name="youtube-id">
             <xsl:choose>
                 <xsl:when test="contains(.,'/embed/')">

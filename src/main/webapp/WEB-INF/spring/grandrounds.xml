@@ -7,11 +7,7 @@
   	class="edu.stanford.irt.laneweb.grandrounds.GrandRoundsManager">
   	<constructor-arg ref="javax.sql.DataSource/grandrounds"/>
     <constructor-arg value="classpath:/edu/stanford/irt/grandrounds/getGrandRounds.fnc"/>
-    <constructor-arg value="classpath:/edu/stanford/irt/grandrounds/getPresenters.fnc"/>
   </bean>
-  
-  <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/presenter"
-    class="edu.stanford.irt.laneweb.grandrounds.PresenterSAXStrategy"/>
 	
 	<bean name="edu.stanford.irt.cocoon.pipeline.Generator/grandrounds"
 		class="edu.stanford.irt.laneweb.grandrounds.GrandRoundsGenerator"
@@ -19,9 +15,6 @@
 		<constructor-arg ref="edu.stanford.irt.laneweb.grandrounds.GrandRoundsManager"/>
 		<constructor-arg>
 			<bean class="edu.stanford.irt.laneweb.grandrounds.PresentationSAXStrategy"/>
-		</constructor-arg>
-		<constructor-arg>
-			<bean class="edu.stanford.irt.laneweb.grandrounds.PresenterSAXStrategy"/>
 		</constructor-arg>
 	</bean>
 

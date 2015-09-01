@@ -3,11 +3,7 @@
    <date>May 5 1969</date>
    <title>title</title>
    <sunet>true</sunet>
-   <presenter>
-      <name>name</name>
-   </presenter>
+   <presenter>presenter</presenter>
    <description>description</description>
-   <video>
-      <uri>uri</uri>
-   </video>
+   <uri>uri</uri>
 </presentation>

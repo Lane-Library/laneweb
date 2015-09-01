@@ -20,7 +20,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.grandrounds.Presentation;
-import edu.stanford.irt.grandrounds.Presenter;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 
@@ -36,10 +35,6 @@ public class GrandRoundsGeneratorTest {
 
     private SAXStrategy<Presentation> presentationSAXStrategy;
 
-    private Presenter presenter;
-
-    private SAXStrategy<Presenter> presenterSAXStrategy;
-
     private TestXMLConsumer xmlConsumer;
 
     @SuppressWarnings("unchecked")
@@ -47,13 +42,10 @@ public class GrandRoundsGeneratorTest {
     public void setUp() {
         this.manager = createMock(GrandRoundsManager.class);
         this.presentationSAXStrategy = createMock(SAXStrategy.class);
-        this.presenterSAXStrategy = createMock(SAXStrategy.class);
-        this.generator = new GrandRoundsGenerator(this.manager, this.presentationSAXStrategy,
-                this.presenterSAXStrategy);
+        this.generator = new GrandRoundsGenerator(this.manager, this.presentationSAXStrategy);
         this.xmlConsumer = new TestXMLConsumer();
         this.parameters = new HashMap<String, String>();
         this.presentation = createMock(Presentation.class);
-        this.presenter = createMock(Presenter.class);
     }
 
     @Test
@@ -63,21 +55,12 @@ public class GrandRoundsGeneratorTest {
         this.generator.setParameters(this.parameters);
         expect(this.manager.getGrandRounds("department", "year"))
                 .andReturn(Collections.singletonList(this.presentation));
-        expect(this.presentation.getPresenters())
-                .andReturn(Arrays.asList(new Presenter[] { this.presenter, this.presenter }));
-        expect(this.presenter.getId()).andReturn(-1);
-        expect(this.presenter.getId()).andReturn(0);
-        expect(this.manager.getPresenters(Collections.singleton("0")))
-                .andReturn(Collections.singletonList(this.presenter));
         this.presentationSAXStrategy.toSAX(this.presentation, this.xmlConsumer);
-        this.presenterSAXStrategy.toSAX(this.presenter, this.xmlConsumer);
-        replay(this.manager, this.presentation, this.presentationSAXStrategy, this.presenterSAXStrategy,
-                this.presenter);
+        replay(this.manager, this.presentation, this.presentationSAXStrategy);
         this.generator.doGenerate(this.xmlConsumer);
         assertEquals(this.xmlConsumer.getExpectedResult(this, "GrandRoundsGeneratorTest-testDoGenerate.xml"),
                 this.xmlConsumer.getStringValue());
-        verify(this.manager, this.presentation, this.presentationSAXStrategy, this.presenterSAXStrategy,
-                this.presenter);
+        verify(this.manager, this.presentation, this.presentationSAXStrategy);
     }
 
     @Test(expected = LanewebException.class)
@@ -88,16 +71,11 @@ public class GrandRoundsGeneratorTest {
         this.generator.setParameters(this.parameters);
         expect(this.manager.getGrandRounds("department", "year"))
                 .andReturn(Collections.singletonList(this.presentation));
-        expect(this.presentation.getPresenters())
-                .andReturn(Arrays.asList(new Presenter[] { this.presenter, this.presenter }));
-        expect(this.presenter.getId()).andReturn(-1);
-        expect(this.presenter.getId()).andReturn(0);
-        expect(this.manager.getPresenters(Collections.singleton("0")))
-                .andReturn(Collections.singletonList(this.presenter));
+        expect(this.presentation.getPresenterList())
+                .andReturn(Arrays.asList(new String[] { "presenter1", "presenter2" }));
         mockXMLConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
-        replay(this.manager, this.presentation, this.presentationSAXStrategy, this.presenterSAXStrategy, this.presenter,
-                mockXMLConsumer);
+        replay(this.manager, this.presentation, this.presentationSAXStrategy, mockXMLConsumer);
         this.generator.doGenerate(mockXMLConsumer);
     }
 }
