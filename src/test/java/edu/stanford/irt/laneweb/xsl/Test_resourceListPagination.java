@@ -35,6 +35,7 @@ public class Test_resourceListPagination extends AbstractXSLTest {
     public void testFalseProxyLinksAndPageParameters() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
+        this.transformer.setParameter("source", "all-all");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("paging.xml"), sw.toString());
     }

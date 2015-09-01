@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:fx="http://lane.stanford.edu/fx"
+	xmlns:s="http://lane.stanford.edu/resources/1.0"
 	exclude-result-prefixes="h s" version="2.0">
 
 	<xsl:param name="query-string" />
@@ -36,11 +36,12 @@
 	</xsl:variable>
 
 	<xsl:template name="sortBy">
-		<xsl:if test="number(/s:resources/@size) &gt; 1">
+		<xsl:if test="$source = 'all-all' and number(/s:resources/@size) &gt; 1">
 			<div class="view-by sort">
+			    <span>Sort by</span>
 				<div class="general-dropdown dropdown">
 					<div class="general-dropdown-trigger">
-                        Sort by <xsl:value-of select="$active-sort-name" />
+                        <xsl:value-of select="$active-sort-name" />
 						<i class="fa fa-angle-double-down"></i>
 					</div>
 					<div class="general-dropdown-content dropdown-content">

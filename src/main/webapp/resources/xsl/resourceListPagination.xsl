@@ -2,66 +2,57 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:s="http://lane.stanford.edu/resources/1.0"
-	xmlns:fx="http://lane.stanford.edu/fx"
 	exclude-result-prefixes="h s" version="2.0">
 	
 	<xsl:param name="page"/>
 	
 	<xsl:param name="facets"/>
-	
-    <xsl:include href="resourceListSortBy.xsl"/>
 
     <xsl:variable name="base-query-string" select="concat('?',replace($query-string,'&amp;page=\d+',''))"/>
 
-	<xsl:template name="paginationLinks">
-		<xsl:param name="top"/>
-		<xsl:variable name="end">
-		  <xsl:choose>
-			<xsl:when test="(number(/s:resources/@start) + number(/s:resources/@length)) &gt; number(/s:resources/@size)">
-				<xsl:value-of select="number(/s:resources/@size)" />
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="number(/s:resources/@start) + number(/s:resources/@length)" />
-			</xsl:otherwise>
-		  </xsl:choose>
-		</xsl:variable>
-		
-		<div class="resourceListPagination no-bookmarking">
-			<xsl:choose>
-				<xsl:when
-					test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
-					<xsl:if test="$top = 'true'">
-						<span id="pageStart"><xsl:value-of select="format-number(number(/s:resources/@start) + 1,'###,##0')" /></span>
-						<xsl:text> to </xsl:text>
-						<xsl:value-of
-							select="format-number($end,'###,##0')" />
-						<xsl:text> of </xsl:text>
-						<xsl:value-of select="format-number(/s:resources/@size, '###,##0')" />
-						<xsl:text> results</xsl:text>
-					</xsl:if>
-                   <xsl:call-template name="sortBy"/>
-                   <div class="s-pagination">
-                       <xsl:call-template name="paginationNumbers"/>
-                   </div>
-				</xsl:when>
-				<xsl:otherwise>
-				    <xsl:if test="number(/s:resources/@size) = 0 and string-length($facets) > 0">
-                        Limits activated: <xsl:value-of select="replace(replace($facets, '\w+:', ' '),'::',', ')"/> 
-                        <div>Try <a href="?source=all-all&amp;q={$url-encoded-query}">clearing limits</a> to see more results</div> 
-				    </xsl:if>
-				    <xsl:if test="number(/s:resources/@size) = 1">
-						<xsl:text> one result </xsl:text>
-				    </xsl:if>
-				    <xsl:if test="number(/s:resources/@size) > 1">
-						<xsl:text> all </xsl:text>
-						<xsl:value-of select="/s:resources/@size" />
-						<xsl:text> results</xsl:text>
-				    </xsl:if>
-				</xsl:otherwise>
-			</xsl:choose>
-		</div>
-	</xsl:template>
-	
+    <xsl:template name="resultsText">
+        <xsl:variable name="end">
+          <xsl:choose>
+            <xsl:when test="(number(/s:resources/@start) + number(/s:resources/@length)) &gt; number(/s:resources/@size)">
+                <xsl:value-of select="number(/s:resources/@size)" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="number(/s:resources/@start) + number(/s:resources/@length)" />
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+		<xsl:choose>
+		    <xsl:when test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
+	            <span id="pageStart"><xsl:value-of select="format-number(number(/s:resources/@start) + 1,'###,##0')" /></span>
+	            <xsl:text> to </xsl:text>
+	            <xsl:value-of
+	                select="format-number($end,'###,##0')" />
+	            <xsl:text> of </xsl:text>
+	            <xsl:value-of select="format-number(/s:resources/@size, '###,##0')" />
+	            <xsl:text> results</xsl:text>
+		    </xsl:when>
+		    <xsl:otherwise>
+		        <xsl:if test="number(/s:resources/@size) = 1">
+		            <xsl:text> one result </xsl:text>
+		        </xsl:if>
+		        <xsl:if test="number(/s:resources/@size) > 1">
+		            <xsl:text> all </xsl:text>
+		            <xsl:value-of select="/s:resources/@size" />
+		            <xsl:text> results</xsl:text>
+		        </xsl:if>
+		    </xsl:otherwise>
+		</xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="paginationLinks">
+		<xsl:if test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
+		   <div class="s-pagination">
+		       <xsl:call-template name="paginationNumbers"/>
+		   </div>
+		</xsl:if>
+    </xsl:template>
+    
 	<xsl:template name="paginationNumbers">
 		<xsl:choose>
 			<xsl:when test="number(/s:resources/@page) &gt;= 1">

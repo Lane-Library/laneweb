@@ -22,23 +22,43 @@
 
     <xsl:include href="resourceListPagination.xsl"/>
 
+    <xsl:include href="resourceListSortBy.xsl"/>
+
     <xsl:template match="/s:resources">
         <html>
             <head>
                 <title>search results</title>
             </head>
             <body>
-				<xsl:call-template name="paginationLinks">
-				   <xsl:with-param name="top" select="'true'"/>
-				</xsl:call-template>
+                <xsl:if test="number(/s:resources/@size) = 0 and string-length($facets) > 0">
+                    Limits activated: <xsl:value-of select="replace(replace($facets, '\w+:', ' '),'::',', ')"/> 
+                    <div>Try <a href="?source=all-all&amp;q={$url-encoded-query}">clearing limits</a> to see more results</div> 
+                </xsl:if>
+		        <div class="yui3-g no-bookmarking">
+		          <div class="yui3-u-1-3">
+	                <xsl:call-template name="resultsText"/>
+		          </div>
+		          <div class="yui3-u-1-3">
+                    <xsl:call-template name="sortBy"/>
+		          </div>
+		          <div class="yui3-u-1-3">
+	                <xsl:call-template name="paginationLinks"/>
+		          </div>
+		        </div>
                 <h3 class="eresources">&#160;</h3>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
-                    <xsl:call-template name="paginationLinks">
-                        <xsl:with-param name="top" select="'false'"/>
-                    </xsl:call-template>
+	                <div class="yui3-g no-bookmarking">
+	                  <div class="yui3-u-1-3"/>
+	                  <div class="yui3-u-1-3">
+	                    <xsl:call-template name="sortBy"/>
+	                  </div>
+	                  <div class="yui3-u-1-3">
+	                    <xsl:call-template name="paginationLinks"/>
+	                  </div>
+	                </div>
                 </xsl:if>
                 <div id="search-content-counts">
                     <!-- empty div causes problems when facets are imported with JS -->
