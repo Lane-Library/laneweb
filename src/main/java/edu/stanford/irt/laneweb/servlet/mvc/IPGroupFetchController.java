@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ public class IPGroupFetchController {
 
     @RequestMapping(value = "/apps/ipGroupFetch", produces = "application/javascript")
     @ResponseBody
-    public String getIPGroup(final HttpServletResponse response, @ModelAttribute(Model.IPGROUP) final IPGroup ipGroup,
+    public String getIPGroup(@ModelAttribute(Model.IPGROUP) final IPGroup ipGroup,
             @RequestParam(required = false) final String callback) {
         if (callback == null) {
             return ipGroup.toString();
