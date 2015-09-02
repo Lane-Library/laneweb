@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,37 +27,34 @@ public class IPGroupFetchControllerTest {
 
     private HttpServletRequest request;
 
-    private HttpServletResponse response;
-
     @Before
     public void setUp() throws Exception {
         this.binder = createMock(RemoteProxyIPDataBinder.class);
         this.controller = new IPGroupFetchController(this.binder);
         this.model = createMock(Model.class);
         this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
     }
 
     @Test
     public void testBind() {
         expect(this.model.asMap()).andReturn(Collections.emptyMap());
         this.binder.bind(Collections.emptyMap(), this.request);
-        replay(this.binder, this.model, this.request, this.response);
+        replay(this.binder, this.model, this.request);
         this.controller.bind(this.request, this.model);
-        verify(this.binder, this.model, this.request, this.response);
+        verify(this.binder, this.model, this.request);
     }
 
     @Test
     public void testGetIPGroup() {
-        replay(this.binder, this.model, this.request, this.response);
-        assertEquals("callback('OTHER');", this.controller.getIPGroup(this.response, IPGroup.OTHER, "callback"));
-        verify(this.binder, this.model, this.request, this.response);
+        replay(this.binder, this.model, this.request);
+        assertEquals("callback('OTHER');", this.controller.getIPGroup(IPGroup.OTHER, "callback"));
+        verify(this.binder, this.model, this.request);
     }
 
     @Test
     public void testGetIPGroupNoCallback() {
-        replay(this.binder, this.model, this.request, this.response);
-        assertEquals("OTHER", this.controller.getIPGroup(this.response, IPGroup.OTHER, null));
-        verify(this.binder, this.model, this.request, this.response);
+        replay(this.binder, this.model, this.request);
+        assertEquals("OTHER", this.controller.getIPGroup(IPGroup.OTHER, null));
+        verify(this.binder, this.model, this.request);
     }
 }
