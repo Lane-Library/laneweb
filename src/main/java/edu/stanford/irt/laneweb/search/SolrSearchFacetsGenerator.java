@@ -133,8 +133,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             }
         }
         if (required < 3) {
-            Map<String, Set<Facet>> publicationTypeFacetMap = processFacets(this.service.facetByField(this.query,
-                    this.facets, PUBLICATION_TYPE, this.pageNumber, 1000, 0));
+            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 0);
+            Map<String, Set<Facet>> publicationTypeFacetMap = processFacets(fps);
             for (Facet f : publicationTypeFacetMap.get(PUBLICATION_TYPE)) {
                 if (REQUIRED_PUBLICATION_TYPES.contains(f.getName())) {
                     facetSet.add(f);
