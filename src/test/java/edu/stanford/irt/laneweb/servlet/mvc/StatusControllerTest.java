@@ -20,15 +20,11 @@ import org.easymock.IAnswer;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
-import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class StatusControllerTest {
-
-    private ComponentFactory componentFactory;
 
     private StatusController controller;
 
@@ -40,21 +36,16 @@ public class StatusControllerTest {
 
     private ServletContext servletContext;
 
-    private SourceResolver sourceResolver;
-
     private SuggestionManager suggestionManager;
 
     @Before
     public void setUp() {
         this.suggestionManager = createMock(SuggestionManager.class);
-        this.componentFactory = createMock(ComponentFactory.class);
-        this.sourceResolver = createMock(SourceResolver.class);
         this.requestHandler = createMock(SitemapController.class);
         this.servletContext = createMock(ServletContext.class);
         expect(this.servletContext.getInitParameter("laneweb.context.version")).andReturn("version");
         replay(this.servletContext);
-        this.controller = new StatusController(this.requestHandler, this.componentFactory, this.sourceResolver,
-                this.suggestionManager, this.servletContext);
+        this.controller = new StatusController(this.requestHandler, this.suggestionManager, this.servletContext);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
     }
@@ -64,28 +55,24 @@ public class StatusControllerTest {
         expect(this.suggestionManager.getSuggestionsForTerm("cardio")).andThrow(new LanewebException("oops"));
         this.requestHandler.handleRequest(isA(HttpServletRequest.class), isA(HttpServletResponse.class));
         expectLastCall().andThrow(new IOException());
-        replay(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
-                this.requestHandler);
+        replay(this.request, this.response, this.suggestionManager, this.requestHandler);
         String status = this.controller.getStatus(this.request, this.response);
         assertSame(16, status.indexOf("[ERROR] suggestions"));
         assertSame(0, status.indexOf("laneweb-version"));
         assertTrue(status.indexOf("[ERROR] index") > 0);
-        verify(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
-                this.requestHandler);
+        verify(this.request, this.response, this.suggestionManager, this.requestHandler);
     }
 
     @Test
     public void testGetStatusOK() throws IOException {
         expect(this.suggestionManager.getSuggestionsForTerm("cardio")).andReturn(null);
         this.requestHandler.handleRequest(isA(HttpServletRequest.class), isA(HttpServletResponse.class));
-        replay(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
-                this.requestHandler);
+        replay(this.request, this.response, this.suggestionManager, this.requestHandler);
         String status = this.controller.getStatus(this.request, this.response);
         assertSame(0, status.indexOf("laneweb-version"));
         assertSame(16, status.indexOf("[OK] suggestions"));
         assertTrue(status.indexOf("[OK] index") > 0);
-        verify(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
-                this.requestHandler);
+        verify(this.request, this.response, this.suggestionManager, this.requestHandler);
     }
 
     @Test
@@ -107,13 +94,11 @@ public class StatusControllerTest {
                 return null;
             }
         });
-        replay(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
-                this.requestHandler);
+        replay(this.request, this.response, this.suggestionManager, this.requestHandler);
         String status = this.controller.getStatus(this.request, this.response);
         assertSame(0, status.indexOf("laneweb-version"));
         assertSame(16, status.indexOf("[WARN] suggestions"));
         assertTrue(status.indexOf("[WARN] index") > 0);
-        verify(this.request, this.response, this.suggestionManager, this.componentFactory, this.sourceResolver,
-                this.requestHandler);
+        verify(this.request, this.response, this.suggestionManager, this.requestHandler);
     }
 }

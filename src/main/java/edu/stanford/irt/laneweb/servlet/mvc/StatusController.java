@@ -15,9 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.SitemapException;
-import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.suggest.SuggestionManager;
 
@@ -33,8 +31,6 @@ public class StatusController {
     @Autowired
     public StatusController(
             final SitemapController sitemapController,
-            final ComponentFactory componentFactory,
-            final SourceResolver sourceResolver,
             @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager suggestionManager,
             final ServletContext servletContext) {
         this.sitemapController = sitemapController;
