@@ -35,7 +35,7 @@ public class SolrSearchService implements CollectionManager {
 
     private static final String EMPTY = "";
 
-    private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh", "publicationAuthor",
+    private static final Collection<String> FACET_FIELDS = Arrays.asList("meshNoCT", "publicationAuthor",
             "publicationLanguage", "publicationTitle", "publicationType", "type", "recordType", "year");
 
     private static final FacetOptions FACET_OPTIONS = new FacetOptions();
