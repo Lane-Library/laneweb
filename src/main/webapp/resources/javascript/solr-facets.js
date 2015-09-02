@@ -46,7 +46,16 @@
             });
         }
 })();
-        
+
+// TODO: move this to search.js once solr is live
+Y.lane.on("search:reset",  function() {
+    Y.one("#search").all('input[type=hidden]').each(function(){
+        if(this.get("name").match(/sort|facets/)){
+            this.remove();
+        }
+    });
+});
+
 // TODO: find a home for this pagination-related js
 (function() {
         Y.all('form[name=pagination]').on('submit', function (e) {
