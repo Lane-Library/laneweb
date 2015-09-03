@@ -41,6 +41,11 @@
             <map:transform type="saxon" src="resources/xsl/classes/laneclasses-list.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match pattern="classescategory.xml" type="wildcard">
+            <map:generate type="classes" src="cocoon://classes/data.xml"/>
+            <map:transform type="saxon" src="resources/xsl/classes/laneclasses-by-category.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <!-- TODO: Remove this match after content changes to the thisweek.xml one -->
         <map:match pattern="thisweek" type="wildcard">
             <map:generate type="classes" src="cocoon://classes/data.xml"/>
