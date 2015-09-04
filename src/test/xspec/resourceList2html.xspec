@@ -1,67 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" stylesheet="../../main/webapp/resources/xsl/resourceList2html.xsl">
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match '/s:resources">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" stylesheet="../../main/webapp/resources/xsl/resourceList2html.xsl" xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml">
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:result[@type='searchContent']">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="Scenario for testing template with match '/s:resources">
+        <x:context>
+            <s:resources/>
+        </x:context>
+        <x:expect label="page markup">
+            <html>
+                <head>
+                    <title>search results</title>
+                </head>
+                <body>
+                    <div class="resourceListPagination">
+                        <div class="yui3-g">
+                            <div class="yui3-u-5-12"> all  results<span id="searchInfo">&#160;<i class="fa fa-info-circle" />
+                            </span>
+                                <span class="tooltips">
+                                    <span id="searchInfoTooltip">Lane Search displays the top results from multiple sources then presents them in relevance rank order.</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="eresources">&#160;</h3>
+                    <ul class="lwSearchResults" />
+                    <div id="search-content-counts">&#160;</div>
+                </body>
+            </html>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:result[@type='eresource']">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:result[@type='searchContent']">
+        <x:context>
+            <s:result type="searchContent"/>
+        </x:context>
+        <x:expect label="searchContent gets a li with primaryLink resultInfo and sourceInfo with link">
+            <li>
+                <div>
+                    <a class="primaryLink"
+                        href="" />
+                </div>
+                <div class="resultInfo">
+                    <span>
+                        <strong>Article</strong> Digital</span>
+                </div>
+                <div class="sourceInfo">Source: <a href="">: NaN <i class="fa fa-external-link" />
+                </a>
+                </div>
+            </li>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:recordType[not(../s:link/s:label[.='catalog record'])]">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:result[@type='eresource']">
+        <x:context>
+            <s:result type="eresource"/>
+        </x:context>
+        <x:expect label="eresource goes in a li with resultInfo and sourceInfo divs">
+            <li>
+            <div class="resultInfo">
+                <span />
+            </div>
+            <div class="sourceInfo" />
+        </li>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:recordType">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:recordType">
+        <x:context>
+            <s:recordType>recordType</s:recordType>
+        </x:context>
+        <x:expect label="TODO: need to test actual types">Source: </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:description">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:description">
+        <x:context>
+            <s:description>description</s:description>
+        </x:context>
+        <x:expect label="s:description should go in a div with class description">
+            <div class="description">description</div>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:link[1]">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:link[1]">
+        <x:context>
+            <s:result>
+                <s:title>title</s:title>
+                <s:link><s:label>label</s:label><s:url>url</s:url><s:link-text>link-text</s:link-text><s:additional-text>additional-text</s:additional-text></s:link>
+            </s:result>
+        </x:context>
+        <x:expect label="first link should get class primaryLink and the parent title, etc">title<div>
+                <a class="primaryLink"
+                    href="url"
+                    title="title">title</a>
+            </div><div>additional-text</div>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:link">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:link">
+        <x:context>
+            <s:link/>
+            <s:link><s:label>label</s:label><s:url>url</s:url><s:link-text>link-text</s:link-text><s:additional-text>additional-text</s:additional-text></s:link>
+        </x:context>
+        <x:expect label="secondary links should go in a div with Also available: ">
+            <div>
+                <a class="primaryLink"
+                    href=""
+                    title="" />
+            </div><div>
+            Also available: <a href="url"
+                title="label">link-text</a> additional-text</div>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:link[not(1)][@type = 'impactFactor']">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:link[@type = 'impactFactor']">
+        <x:context>
+            <s:link type="impactFactor"><s:url>url</s:url></s:link>
+        </x:context>
+        <x:expect label="s:link should become a link with the s:url as href and Impact Factor as text inside a div">
+            <div>
+                <a href="url">Impact Factor</a>
+            </div>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:pub-author">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:primaryType">
+        <x:context>
+            <s:primaryType>primaryType</s:primaryType>
+        </x:context>
+        <x:expect label="s:primaryType should be in a strong element">
+            <strong>primaryType</strong>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:contentId[starts-with(.,'PMID:')]">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:pub-author">
+        <x:context>
+            <s:pub-author>pub-author</s:pub-author>
+        </x:context>
+        <x:expect label="s:pub-author should go in a div">
+            <div>pub-author</div>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:keyword">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:contentId[starts-with(.,'PMID:')]">
+        <x:context>
+            <s:contentId>PMID:1234567</s:contentId>
+        </x:context>
+        <x:expect label="s:contentId starting with PMID: should get a link to pubmed in a span">
+            <span>
+            <a href="http://www.ncbi.nlm.nih.gov/pubmed/1234567?otool=stanford">PMID: 1234567 <i class="fa fa-external-link" />
+            </a>
+        </span>
+        </x:expect>
     </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing template with match 's:desc-label">
-        <x:context/>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="Scenario for testing template with match 's:contentId">
+        <x:context>
+            <s:contentId>s:contentId</s:contentId>
+        </x:context>
+        <x:expect label="s:contentId should get no output" test="count($x:result/*) = 0"/>
+    </x:scenario>
+    
+    <x:scenario label="Scenario for testing template with match 's:keyword">
+        <x:context>
+            <s:keyword>keyword</s:keyword>
+        </x:context>
+        <x:expect label="the text in s:keyword should be in a strong element">
+            <strong>keyword</strong>
+        </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="Scenario for testing template with match 's:desc-label">
+        <x:context>
+            <s:desc-label>desc-label</s:desc-label>
+        </x:context>
+        <x:expect label="the text in s:desc-label should be in a strong element followed by a colon and space">
+            <strong>desc-label</strong>: </x:expect>
     </x:scenario>
 </x:description>
