@@ -85,8 +85,11 @@ public class EresourcesCollectionManager extends AbstractCollectionManager {
                 type = LinkType.NORMAL;
             }
             String linkText = this.isFirstLink ? title : this.rs.getString("LINK_TEXT");
-            this.builder.addLink(new Link(label, type, this.rs.getString("URL"), linkText, this.rs
-                    .getString("ADDITIONAL_TEXT"), this.rs.getString("HOLDINGS_DATES")));
+            // TODO: this is a temporary fix for fogbugz case 110705 Feedback-bug:  Impact factors links not working
+            if (type != LinkType.IMPACTFACTOR) {
+                this.builder.addLink(new Link(label, type, this.rs.getString("URL"), linkText,
+                        this.rs.getString("ADDITIONAL_TEXT"), this.rs.getString("HOLDINGS_DATES")));
+            }
             this.currentLinkId = linkId;
             this.isFirstLink = false;
         }
