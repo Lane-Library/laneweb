@@ -59,7 +59,7 @@ public class SolrSearchService implements CollectionManager {
             final int pageNumber, final int facetLimit, final int facetMinCount) {
         PageRequest pageRequest = new PageRequest(pageNumber, facetLimit);
         String facetFilters = facetStringToFilters(filters);
-        int modifiedOffset = (pageRequest.getOffset() == 0) ? 0 : pageRequest.getOffset() - 1;
+        int modifiedOffset = (facetLimit - 1) * pageNumber;
         FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
         fieldWithFacetParams.setOffset(Integer.valueOf(modifiedOffset));
         String cleanQuery = SolrQueryParser.parse(query);
