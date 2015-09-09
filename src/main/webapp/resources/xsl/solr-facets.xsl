@@ -27,16 +27,16 @@
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
         <xsl:variable name="label">
             <xsl:choose>
-                <xsl:when test="../../string[. = 'recordType'] and name = 'pubmed'">PubMed</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and name = 'bib'">Lane Catalog</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and name = 'web'">Lane Web Site</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and name = 'class'">Lane Class</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and name = 'auth'">Lane Community Info</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and name = 'laneblog'">Lane Blog</xsl:when>
-                <xsl:when test="../../string[. = 'year'] and name = 'year:[2010 TO *]'">Last 5 Years</xsl:when>
-                <xsl:when test="../../string[. = 'year'] and name = 'year:[2005 TO *]'">Last 10 Years</xsl:when>
-                <xsl:when test="../../string[. = 'year'] and name = '0'">Unknown</xsl:when>
-                <xsl:otherwise><xsl:value-of select="name"/></xsl:otherwise>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'pubmed'">PubMed</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'bib'">Lane Catalog</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'web'">Lane Web Site</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Class</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'auth'">Lane Community Info</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'laneblog'">Lane Blog</xsl:when>
+                <xsl:when test="../../string[. = 'year'] and value = '[2010 TO *]'">Last 5 Years</xsl:when>
+                <xsl:when test="../../string[. = 'year'] and value = '[2005 TO *]'">Last 10 Years</xsl:when>
+                <xsl:when test="../../string[. = 'year'] and value = '0'">Unknown</xsl:when>
+                <xsl:otherwise><xsl:value-of select="value"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="furl">

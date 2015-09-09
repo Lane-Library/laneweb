@@ -20,8 +20,8 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
         if (facet1 == null || facet2 == null) {
             throw new IllegalArgumentException("cannot compare " + facet1 + " to " + facet2);
         }
-        String facet1Name = facet1.getName();
-        String facet2Name = facet2.getName();
+        String facet1Name = facet1.getValue();
+        String facet2Name = facet2.getValue();
         // case 110630: Move 5 years to be higher then last 10 years within Year filter
         if (facet1Name.startsWith(LAST_X_YEARS_PREFIX) && facet2Name.startsWith(LAST_X_YEARS_PREFIX)) {
             return facet2Name.compareTo(facet1Name);
