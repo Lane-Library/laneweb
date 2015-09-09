@@ -22,7 +22,24 @@
 
 .facetBrowse {
     min-width: 500px;
-    padding: 25px 50px;
+    padding: 25px 0px;
+}
+
+.facetBrowse li, .facetBrowse .facetHeader{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.facetBrowse h3 {
+    margin: 0 20px;
+}
+
+.facetBrowse li:hover {
+    background-color: aliceblue;
+}
+
+.facetBrowse li:first-child, .facetBrowse li:last-child {
+    background: none;
 }
 
 .facetBrowse .s-pagination {

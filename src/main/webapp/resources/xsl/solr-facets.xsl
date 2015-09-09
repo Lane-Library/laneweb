@@ -66,11 +66,10 @@
 		            </xsl:if>
 	            </xsl:when>
 	            <xsl:otherwise>
-					<a class="close fa fa-close"></a>
                     <li class="solrFacet facetHeader"><h5><xsl:value-of select="$label"/></h5></li>
                     <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../list/facet[position() &lt;= $facets-per-browse-page]"/>
                     <li>
-                        <div class="yui3-g s-pagination facetBrowse no-bookmarking">
+                        <div class="yui3-g s-pagination no-bookmarking">
 	                        <div class="yui3-u-1-2">
 						        <xsl:choose>
 						            <xsl:when test="number($page) &gt; 1">
@@ -114,6 +113,9 @@
                 <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
 	                <div class="bd">
 		                <h3>Narrow Your Search</h3>
+		                <xsl:if test="not($search-mode)">
+                            <a class="close fa fa-close"></a>
+		                </xsl:if>
 		                <xsl:if test="$search-mode and string-length($facets) > 0">
 		                  <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')//s:row[s:genre[ . = 'all']]/s:hits"/>
 		                  <xsl:if test="number($counts > 0)">

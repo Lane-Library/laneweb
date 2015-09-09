@@ -6,7 +6,7 @@
         basePath = model.get(model.BASE_PATH) || "",
         facetsContainer = Y.one('.solrFacets'),
         handleArrowKey = function(event, direction) {
-            var browseFacetNavContainer = Y.one(".s-pagination.facetBrowse"),
+            var browseFacetNavContainer = Y.one(".facetBrowse .s-pagination"),
                 selectorString = ".pagingButton." + direction,
                 pagingContainer;
             if (undefined != browseFacetNavContainer && browseFacetNavContainer.getStyle('visibility') == 'visible') {
