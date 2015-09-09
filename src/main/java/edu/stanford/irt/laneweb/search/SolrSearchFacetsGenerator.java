@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -11,6 +12,7 @@ import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.FacetQueryEntry;
@@ -52,6 +54,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private SolrSearchService service;
 
+    private String facetSort;
+
     public SolrSearchFacetsGenerator(final SolrSearchService service, final Marshaller marshaller) {
         super(marshaller);
         this.service = service;
@@ -66,20 +70,25 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             this.pageNumber = Integer.valueOf(page) - 1;
         }
         this.query = ModelUtil.getString(model, Model.QUERY);
+        this.facetSort = ModelUtil.getString(model, Model.FACET_SORT, "");
     }
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         FacetPage<Eresource> fps = null;
-        Map<String, Set<Facet>> facetsMap;
+        Map<String, Collection<Facet>> facetsMap;
         if (null == this.facet) {
+            // search mode
             fps = this.service.facetByManyFields(this.query, this.facets, 11);
+            facetsMap = processFacets(fps);
+            maybeAddRequiredPublicationTypes(facetsMap);
+            marshal(sortFacets(facetsMap), xmlConsumer);
         } else {
-            fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber, 21, 1);
+            // browse mode
+            fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber, 21, 1, parseSort());
+            facetsMap = processFacets(fps);
+            marshal(facetsMap, xmlConsumer);
         }
-        facetsMap = processFacets(fps);
-        maybeAddRequiredPublicationTypes(facetsMap);
-        marshal(facetsMap, xmlConsumer);
     }
 
     private String encodeString(final String string) {
@@ -117,14 +126,11 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
                 .matches(DOT_STAR + fieldName + COLON + maybeQuote + escapedFacetName + maybeQuote + DOT_STAR);
     }
 
-    private Map<String, Set<Facet>> maybeAddRequiredPublicationTypes(final Map<String, Set<Facet>> facetsMap) {
-        // don't enforce required pub types for facet browse
-        if (null != this.facet) {
-            return facetsMap;
-        }
-        Set<Facet> facetSet = facetsMap.get(PUBLICATION_TYPE);
+    private Map<String, Collection<Facet>> maybeAddRequiredPublicationTypes(
+            final Map<String, Collection<Facet>> facetsMap) {
+        Collection<Facet> facetSet = facetsMap.get(PUBLICATION_TYPE);
         if (null == facetSet) {
-            facetSet = new TreeSet<Facet>(new FacetComparator());
+            facetSet = new ArrayList<Facet>();
         }
         int required = 0;
         for (Facet f : facetSet) {
@@ -133,8 +139,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             }
         }
         if (required < 3) {
-            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 0);
-            Map<String, Set<Facet>> publicationTypeFacetMap = processFacets(fps);
+            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 0,
+                    parseSort());
+            Map<String, Collection<Facet>> publicationTypeFacetMap = processFacets(fps);
             for (Facet f : publicationTypeFacetMap.get(PUBLICATION_TYPE)) {
                 if (REQUIRED_PUBLICATION_TYPES.contains(f.getName())) {
                     facetSet.add(f);
@@ -145,11 +152,18 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         return facetsMap;
     }
 
-    private Map<String, Set<Facet>> processFacets(final FacetPage<Eresource> facetpage) {
-        Map<String, Set<Facet>> facetsMap = new LinkedHashMap<String, Set<Facet>>();
+    private FacetSort parseSort() {
+        if ("index".equals(this.facetSort)) {
+            return FacetSort.INDEX;
+        }
+        return FacetSort.COUNT;
+    }
+
+    private Map<String, Collection<Facet>> processFacets(final FacetPage<Eresource> facetpage) {
+        Map<String, Collection<Facet>> facetsMap = new LinkedHashMap<String, Collection<Facet>>();
         // extract from facet queries
         for (FacetQueryEntry page : facetpage.getFacetQueryResult()) {
-            Set<Facet> facetSet = new TreeSet<Facet>(new FacetComparator());
+            Collection<Facet> facetSet = new ArrayList<Facet>();
             String value = page.getValue();
             String fieldName = value.split(COLON)[0];
             String facetName = value.split(COLON)[1];
@@ -168,7 +182,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             if (!page.hasContent()) {
                 continue;
             }
-            Set<Facet> facetSet = new TreeSet<Facet>(new FacetComparator());
+            Collection<Facet> facetSet = new ArrayList<Facet>();
             String fieldName = null;
             for (FacetFieldEntry entry : page) {
                 if (fieldName == null) {
@@ -185,5 +199,17 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             facetsMap.put(fieldName, facetSet);
         }
         return facetsMap;
+    }
+
+    private Map<String, Set<Facet>> sortFacets(final Map<String, Collection<Facet>> facetsMap) {
+        Map<String, Set<Facet>> sortedFacetsMap = new LinkedHashMap<String, Set<Facet>>();
+        for (Map.Entry<String, Collection<Facet>> entry : facetsMap.entrySet()) {
+            Set<Facet> facetSet = new TreeSet<Facet>(new FacetComparator());
+            for (Facet f : entry.getValue()) {
+                facetSet.add(f);
+            }
+            sortedFacetsMap.put(entry.getKey(), facetSet);
+        }
+        return sortedFacetsMap;
     }
 }

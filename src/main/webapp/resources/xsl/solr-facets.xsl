@@ -12,6 +12,7 @@
     <xsl:param name="page"/>
     <xsl:param name="query"/>
     <xsl:param name="query-string"/>
+    <xsl:param name="facet.sort"/>
     <xsl:param name="source"/>
     <xsl:param name="url-encoded-query"/>
     
@@ -65,27 +66,41 @@
 		            </xsl:if>
 	            </xsl:when>
 	            <xsl:otherwise>
+					<a class="close fa fa-close"></a>
                     <li class="solrFacet facetHeader"><h5><xsl:value-of select="$label"/></h5></li>
-                    <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $facets-per-browse-page]"/>
+                    <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../list/facet[position() &lt;= $facets-per-browse-page]"/>
                     <li>
-                        <div class="s-pagination facetBrowse no-bookmarking">
-                            <a class="close fa fa-close"></a>
-					        <xsl:choose>
-					            <xsl:when test="number($page) &gt; 1">
-									<a class="pagingButton previous" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> Previous</a>
-					            </xsl:when>
-					            <xsl:otherwise>
-	                                <span class="pagingButton disabled"> <i class="fa fa-backward"></i> Previous</span>
-					            </xsl:otherwise>
-					        </xsl:choose>
-	                        <xsl:choose>
-	                            <xsl:when test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $facets-per-browse-page">
-	                                <a class="pagingButton next" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa fa-forward"></i> </a>
-	                            </xsl:when>
-	                            <xsl:otherwise>
-	                                <span class="pagingButton disabled">Next <i class="fa fa-forward"></i> </span>
-	                            </xsl:otherwise>
-	                        </xsl:choose>
+                        <div class="yui3-g s-pagination facetBrowse no-bookmarking">
+	                        <div class="yui3-u-1-2">
+						        <xsl:choose>
+						            <xsl:when test="number($page) &gt; 1">
+										<a class="pagingButton previous" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> Previous</a>
+						            </xsl:when>
+						            <xsl:otherwise>
+		                                <span class="pagingButton disabled"> <i class="fa fa-backward"></i> Previous</span>
+						            </xsl:otherwise>
+						        </xsl:choose>
+		                        <xsl:choose>
+		                            <xsl:when test="count(/linked-hash-map/entry/string[. = $id]/../list/facet) > $facets-per-browse-page">
+		                                <a class="pagingButton next" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa fa-forward"></i> </a>
+		                            </xsl:when>
+		                            <xsl:otherwise>
+		                                <span class="pagingButton disabled">Next <i class="fa fa-forward"></i> </span>
+		                            </xsl:otherwise>
+		                        </xsl:choose>
+	                        </div>
+	                        <div class="yui3-u-1-2">
+                                <xsl:choose>
+                                    <xsl:when test="$facet.sort = 'index'">
+										<span class="pagingButton disabled">A-Z Sort</span>
+                                        <a class="pagingButton" rel="lightbox-noanim" href="{replace($facet-browse-base-path,'&amp;facet.sort=index','')}&amp;page=1" title="Numerical Sort"> Numerical Sort</a>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <a class="pagingButton" rel="lightbox-noanim" href="{$facet-browse-base-path}&amp;facet.sort=index&amp;page=1" title="A-Z Sort"> A-Z Sort</a>
+										<span class="pagingButton disabled">Numerical Sort</span>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+	                        </div>
                         </div>
                     </li>
 	            </xsl:otherwise>

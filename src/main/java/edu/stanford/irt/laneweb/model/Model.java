@@ -45,6 +45,8 @@ public abstract class Model {
 
     public static final String FACET = "facet";
 
+    public static final String FACET_SORT = "facet.sort";
+
     public static final String FACETS = "facets";
 
     public static final String HOST = "host";

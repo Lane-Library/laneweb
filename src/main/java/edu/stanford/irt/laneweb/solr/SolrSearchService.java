@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.FacetOptions;
+import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
 import org.springframework.data.solr.core.query.FacetOptions.FieldWithFacetParameters;
 import org.springframework.data.solr.core.query.FacetQuery;
 import org.springframework.data.solr.core.query.SimpleFacetQuery;
@@ -56,7 +57,7 @@ public class SolrSearchService implements CollectionManager {
     private SolrTemplate solrTemplate;
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
-            final int pageNumber, final int facetLimit, final int facetMinCount) {
+            final int pageNumber, final int facetLimit, final int facetMinCount, final FacetSort facetSort) {
         PageRequest pageRequest = new PageRequest(pageNumber, facetLimit);
         String facetFilters = facetStringToFilters(filters);
         int modifiedOffset = (facetLimit - 1) * pageNumber;
@@ -65,7 +66,8 @@ public class SolrSearchService implements CollectionManager {
         String cleanQuery = SolrQueryParser.parse(query);
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery))
                 .setFacetOptions(new FacetOptions().addFacetOnField(fieldWithFacetParams)
-                        .setFacetMinCount(facetMinCount).setFacetLimit(pageRequest.getPageSize()));
+                        .setFacetMinCount(facetMinCount).setFacetLimit(pageRequest.getPageSize())
+                        .setFacetSort(facetSort));
         fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));
