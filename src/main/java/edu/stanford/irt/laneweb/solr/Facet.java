@@ -22,8 +22,6 @@ public class Facet {
 
     private boolean enabled;
 
-    private String escapedFacetValue;
-
     private String fieldName;
 
     private String maybeQuote;
@@ -33,12 +31,12 @@ public class Facet {
     private String value;
 
     public Facet(final String fieldName, final String value, final long count, final String activeFacets) {
-        this.activeFacets = activeFacets;
+        this.activeFacets = (null == activeFacets) ? EMPTY : activeFacets;
         this.fieldName = fieldName;
         this.value = value;
         this.count = count;
         this.enabled = isEnabled();
-        this.url = buildUrl();
+        this.url = getUrl();
     }
 
     public long getCount() {
@@ -49,27 +47,39 @@ public class Facet {
         return this.fieldName;
     }
 
-    public String getValue() {
-        return this.value;
-    }
-
-    @Override
-    public String toString() {
-        return this.value + " = " + this.count + "; enabled=" + this.enabled + "; url=" + this.url;
-    }
-
-    private String buildUrl() {
-        String facetUrl = null;
+    public String getUrl() {
+        if (null != this.url) {
+            return this.url;
+        }
+        String facetUrl = this.url;
         String joiner = this.activeFacets.isEmpty() ? EMPTY : SolrSearchService.FACETS_SEPARATOR;
         if (this.enabled) {
-            facetUrl = this.activeFacets.replaceFirst("(^|::)" + this.fieldName + COLON + getMaybeQuote()
-                    + getEscapedFacetValue() + getMaybeQuote(), EMPTY);
+            facetUrl = this.activeFacets.replaceFirst(
+                    "(^|::)" + this.fieldName + COLON + getMaybeQuote() + Pattern.quote(this.value) + getMaybeQuote(),
+                    EMPTY);
         } else {
             facetUrl = this.activeFacets + joiner + this.fieldName + COLON + getMaybeQuote() + this.value
                     + getMaybeQuote();
         }
         facetUrl = facetUrl.replaceAll("(^::|::$)", EMPTY);
         return encodeString(facetUrl);
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public boolean isEnabled() {
+        if (this.activeFacets.isEmpty()) {
+            return false;
+        }
+        return this.activeFacets.matches(DOT_STAR + this.fieldName + COLON + getMaybeQuote()
+                + Pattern.quote(this.value) + getMaybeQuote() + DOT_STAR);
+    }
+
+    @Override
+    public String toString() {
+        return this.value + " = " + this.count + "; enabled=" + this.enabled + "; url=" + this.url;
     }
 
     private String encodeString(final String string) {
@@ -82,25 +92,10 @@ public class Facet {
         return encoded;
     }
 
-    private String getEscapedFacetValue() {
-        if (null == this.escapedFacetValue) {
-            this.escapedFacetValue = Pattern.quote(this.value);
-        }
-        return this.escapedFacetValue;
-    }
-
     private String getMaybeQuote() {
         if (null == this.maybeQuote) {
             this.maybeQuote = this.value.startsWith("[") && this.value.endsWith("]") ? EMPTY : QUOTE;
         }
         return this.maybeQuote;
-    }
-
-    private boolean isEnabled() {
-        if (this.activeFacets.isEmpty()) {
-            return false;
-        }
-        return this.activeFacets.matches(DOT_STAR + this.fieldName + COLON + getMaybeQuote() + getEscapedFacetValue()
-                + getMaybeQuote() + DOT_STAR);
     }
 }
