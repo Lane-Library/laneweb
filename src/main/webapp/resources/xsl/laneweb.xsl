@@ -106,11 +106,17 @@
             <xsl:when test="starts-with($path,'/biomed-resources/bassett')">bassett</xsl:when>
             <xsl:when test="$path = '/biomed-resources/images.html'">images-all</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
-            <xsl:when test="string-length($source-prefix) &gt; 0">
-                <xsl:value-of select="concat($source-prefix,'-all')"/>
-            </xsl:when>
             <xsl:when test="$source">
-                <xsl:value-of select="$source"/>
+                <xsl:choose>
+                    <!-- various -images-all source parameters get images-all -->
+                    <xsl:when test="ends-with($source, 'images-all')">images-all</xsl:when>
+                    <xsl:when test="string-length($source-prefix) &gt; 0">
+                        <xsl:value-of select="concat($source-prefix,'-all')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$source"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>

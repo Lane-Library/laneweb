@@ -227,9 +227,12 @@ public class Eresource {
 
     public boolean isValid() {
         boolean valid = true;
+        // TODO: this is a temporary fix for fogbugz case 110705 Feedback-bug:  Impact factors links not working
+        /*
         if (getLinks().size() == 1 && LinkType.IMPACTFACTOR.equals(getLinks().iterator().next().getType())) {
             valid = false;
         }
+        */
         return valid;
     }
 

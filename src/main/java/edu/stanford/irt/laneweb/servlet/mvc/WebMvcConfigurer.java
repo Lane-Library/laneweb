@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -22,8 +21,6 @@ import org.springframework.context.support.DefaultLifecycleProcessor;
 import org.springframework.context.support.DelegatingMessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.ui.context.ThemeSource;
 import org.springframework.ui.context.support.DelegatingThemeSource;
@@ -47,8 +44,6 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 import org.springframework.web.servlet.support.SessionFlashMapManager;
 import org.springframework.web.servlet.theme.FixedThemeResolver;
 import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
@@ -87,13 +82,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
             .addPathPatterns("/**/*.html");
         registry.addInterceptor(this.redirectHandlerInterceptor)
             .addPathPatterns("/**");
-    }
-
-    @Override
-    public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setObjectMapper(new ObjectMapper());
-        converters.add(converter);
     }
 
     @Bean

@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>2</version>
+        <version>3</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.1.4-SNAPSHOT</version>
+    <version>3.1.5-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -86,7 +86,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.56.0</version>
+            <version>1.57.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -351,7 +351,7 @@
         <dependency>
         	<groupId>edu.stanford.irt</groupId>
         	<artifactId>grandrounds</artifactId>
-        	<version>2.0.0-SNAPSHOT</version>
+        	<version>2.0.1</version>
         </dependency>
     </dependencies>
     <build>
@@ -559,21 +559,20 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--
             <plugin>
-                <groupId>org.daisy.maven</groupId>
-                <artifactId>xspec-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <executions>
-                    <execution>
-                        <id>xspec-tests</id>
+            	<groupId>uk.org.adamretter.maven</groupId>
+            	<artifactId>xspec-maven-plugin</artifactId>
+            	<version>1.2</version>
+            	<executions>
+            	    <execution>
+                        <id>test</id>
+                        <phase>test</phase>
                         <goals>
-                            <goal>test</goal>
+                            <goal>run-xspec</goal>
                         </goals>
-                    </execution>
-                </executions>
+            	    </execution>
+            	</executions>
             </plugin>
-            -->
         </plugins>
         <pluginManagement>
             <plugins>

@@ -59,20 +59,6 @@ public class PresentationSAXStrategyTest {
         verify(this.presentation);
     }
 
-    @Test
-    public void testToSAXNotValid() throws IOException, SAXException, URISyntaxException {
-        expect(this.presentation.getId()).andReturn(0);
-        expect(this.presentation.getDate()).andReturn(LocalDate.of(1969, 5, 5));
-        expect(this.presentation.getURIs()).andThrow(new GrandRoundsException(null));
-        replay(this.presentation);
-        this.xmlConsumer.startDocument();
-        this.strategy.toSAX(this.presentation, this.xmlConsumer);
-        this.xmlConsumer.endDocument();
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "PresentationSAXStrategyTest-testToSAXNotValid.xml"),
-                this.xmlConsumer.getStringValue());
-        verify(this.presentation);
-    }
-
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws IOException, SAXException, URISyntaxException {
         XMLConsumer mockXMLConsumer = createMock(XMLConsumer.class);
