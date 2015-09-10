@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Clean query strings before sending to Solr
  * <p>
- * Lucence special characters: + - && || ! ( ) { } [ ] ^ " ~ * ? : \
+ * Lucence special characters: + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \
  * https://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Escaping%20Special%20Characters
  * </p>
  *
