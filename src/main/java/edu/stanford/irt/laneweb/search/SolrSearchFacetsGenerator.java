@@ -141,15 +141,15 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
                 .collect(Collectors.toList());
         if (reduced.size() < this.facetsToShowSearch) {
             int limit = this.meshToIgnoreInSearch.size() + this.facetsToShowSearch + 1;
-            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, MESH, 0, limit, 0,
+            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, MESH, 0, limit, 1,
                     parseSort());
-            Map<String, Collection<Facet>> meshFacetMap = processFacets(fps);
-            for (Facet f : meshFacetMap.get(MESH)) {
-                if (!this.meshToIgnoreInSearch.contains(f.getValue())) {
-                    reduced.add(f);
-                }
+            facetList = processFacets(fps).get(MESH);
+            if (null != facetList) {
+                Collection<Facet> moreMesh = facetList.stream()
+                        .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue())).collect(Collectors.toList());
+                moreMesh.addAll(reduced);
+                facetsMap.put(MESH, moreMesh);
             }
-            facetsMap.put(MESH, reduced);
         }
         return facetsMap;
     }
