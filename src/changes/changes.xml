@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2015-09147" version="3.1.5" description="3.1.5 bug fix release">
+        <release date="2015-09-14" version="3.1.5" description="3.1.5 bug fix release">
             <action date="2015-09-10" dev="ceyates" issue="110951" type="fix">
                 emergency medicine grandrounds empty
             </action>
