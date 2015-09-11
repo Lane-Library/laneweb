@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
@@ -31,10 +31,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private static final String EMPTY = "";
 
-    private static final String PUBLICATION_TYPE = "publicationType";
+    private static final String MESH = "mesh";
 
-    private static final Collection<String> REQUIRED_PUBLICATION_TYPES = Arrays.asList("Clinical Trial",
-            "Randomized Controlled Trial", "Systematic Review");
+    private static final String PUBLICATION_TYPE = "publicationType";
 
     private String facet;
 
@@ -42,15 +41,37 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private String facetSort;
 
+    private int facetsToShowBrowse;
+
+    private int facetsToShowSearch;
+
+    private Collection<String> meshToIgnoreInSearch;
+
     private int pageNumber = 0;
 
     private String query;
+
+    private Collection<String> requiredPublicationTypes;
 
     private SolrSearchService service;
 
     public SolrSearchFacetsGenerator(final SolrSearchService service, final Marshaller marshaller) {
         super(marshaller);
         this.service = service;
+    }
+
+    public void setFacetsToShowBrowse(final int facetsToShowBrowse) {
+        // increment by one so we know if "next" link is needed
+        this.facetsToShowBrowse = facetsToShowBrowse + 1;
+    }
+
+    public void setFacetsToShowSearch(final int facetsToShowSearch) {
+        // increment by one so we know if "more" link is needed
+        this.facetsToShowSearch = facetsToShowSearch + 1;
+    }
+
+    public void setMeshToIgnoreInSearch(final Collection<String> meshToIgnoreInSearch) {
+        this.meshToIgnoreInSearch = meshToIgnoreInSearch;
     }
 
     @Override
@@ -65,19 +86,25 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         this.facetSort = ModelUtil.getString(model, Model.FACET_SORT, "");
     }
 
+    public void setRequiredPublicationTypes(final Collection<String> requiredPublicationTypes) {
+        this.requiredPublicationTypes = requiredPublicationTypes;
+    }
+
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         FacetPage<Eresource> fps = null;
         Map<String, Collection<Facet>> facetsMap;
         if (null == this.facet) {
             // search mode
-            fps = this.service.facetByManyFields(this.query, this.facets, 11);
+            fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShowSearch);
             facetsMap = processFacets(fps);
             maybeAddRequiredPublicationTypes(facetsMap);
+            maybeRequestMoreMesh(facetsMap);
             marshal(sortFacets(facetsMap), xmlConsumer);
         } else {
             // browse mode
-            fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber, 21, 1, parseSort());
+            fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber,
+                    this.facetsToShowBrowse, 1, parseSort());
             facetsMap = processFacets(fps);
             marshal(facetsMap, xmlConsumer);
         }
@@ -89,17 +116,40 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         if (null == facetList) {
             facetList = new ArrayList<Facet>();
         }
-        long required = facetList.stream().filter(s -> REQUIRED_PUBLICATION_TYPES.contains(s.getValue())).count();
+        long required = facetList.stream().filter(s -> this.requiredPublicationTypes.contains(s.getValue())).count();
         if (required < 3) {
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 0,
                     parseSort());
             Map<String, Collection<Facet>> publicationTypeFacetMap = processFacets(fps);
             for (Facet f : publicationTypeFacetMap.get(PUBLICATION_TYPE)) {
-                if (REQUIRED_PUBLICATION_TYPES.contains(f.getValue())) {
+                if (this.requiredPublicationTypes.contains(f.getValue())) {
                     facetList.add(f);
                 }
             }
             facetsMap.put(PUBLICATION_TYPE, facetList);
+        }
+        return facetsMap;
+    }
+
+    private Map<String, Collection<Facet>> maybeRequestMoreMesh(final Map<String, Collection<Facet>> facetsMap) {
+        Collection<Facet> facetList = facetsMap.get(MESH);
+        if (null == facetList) {
+            facetList = new ArrayList<Facet>();
+        }
+        Collection<Facet> reduced = facetList.stream()
+                .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
+                .collect(Collectors.toList());
+        if (reduced.size() < this.facetsToShowSearch) {
+            int limit = this.meshToIgnoreInSearch.size() + this.facetsToShowSearch + 1;
+            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, MESH, 0, limit, 0,
+                    parseSort());
+            Map<String, Collection<Facet>> meshFacetMap = processFacets(fps);
+            for (Facet f : meshFacetMap.get(MESH)) {
+                if (!this.meshToIgnoreInSearch.contains(f.getValue())) {
+                    reduced.add(f);
+                }
+            }
+            facetsMap.put(MESH, reduced);
         }
         return facetsMap;
     }

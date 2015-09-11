@@ -61,8 +61,7 @@
 		            <li class="solrFacet facetHeader"><xsl:value-of select="$label"/></li>
 		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $values-per-facet or $facet !='']"/>
 		            <xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $values-per-facet and $facet = ''">
-                        <!-- case 110340: use mesh field (with checktags) instead of meshNoCT for browsing all mesh facets -->
-                        <li> <a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={replace($id,'meshNoCT','mesh')}&amp;page=1"> all </a> <i class="icon fa fa-arrow-right"></i></li>
+                        <li> <a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> all </a> <i class="icon fa fa-arrow-right"></i></li>
 		            </xsl:if>
 	            </xsl:when>
 	            <xsl:otherwise>
@@ -154,7 +153,7 @@
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">
-		                        <xsl:with-param name="id" select="'meshNoCT'"/>                    
+		                        <xsl:with-param name="id" select="'mesh'"/>                    
 		                        <xsl:with-param name="label" select="'Subject (MeSH)'"/>                    
 		                    </xsl:call-template>
 		                    
@@ -162,14 +161,6 @@
 		                        <xsl:with-param name="id" select="'publicationLanguage'"/>                    
 		                        <xsl:with-param name="label" select="'Language'"/>                    
 		                    </xsl:call-template>
-		                    
-		                    <!-- case 110340: use mesh field (with checktags) instead of meshNoCT for browsing all mesh facets -->
-		                    <xsl:if test="$facet = 'mesh'">
-			                    <xsl:call-template name="field">
-			                        <xsl:with-param name="id" select="'mesh'"/>                    
-			                        <xsl:with-param name="label" select="'Subject (MeSH)'"/>                    
-			                    </xsl:call-template>
-		                    </xsl:if>
 		                </ul>
 	                </div>
                 </xsl:if>
