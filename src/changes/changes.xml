@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-09-14" version="3.1.5" description="3.1.5 bug fix release">
+            <action date="2015-09-10" dev="ceyates" issue="110951" type="fix">
+                emergency medicine grandrounds empty
+            </action>
+            <action date="2015-09-10" dev="ceyates" issue="110948" type="fix">
+                grandrounds object validation not working correctly
+            </action>
+        </release>
         <release date="2015-09-07" version="3.1.4" description="3.1.4 bug fix release">
             <action date="2015-09-01" dev="ceyates" issue="110793" type="fix">
                 406 not acceptable errors for /apps/ipGroupFetch
