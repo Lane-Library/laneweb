@@ -83,11 +83,7 @@
             </s:result>
         </x:context>
         <x:expect label="first link should get class primaryLink and the parent title, etc">title<div>
-                <a class="primaryLink"
-                    href="url"
-                    title="title">title</a>
-            </div><div>additional-text</div>
-        </x:expect>
+            <a class="primaryLink" href="url" title="title">title</a></div> additional-text</x:expect>
     </x:scenario>
     
     <x:scenario label="Scenario for testing template with match 's:link">
@@ -95,13 +91,13 @@
             <s:link/>
             <s:link><s:label>label</s:label><s:url>url</s:url><s:link-text>link-text</s:link-text><s:additional-text>additional-text</s:additional-text></s:link>
         </x:context>
-        <x:expect label="secondary links should go in a div with Also available: ">
+        <x:expect label="secondary links should go in a div without Also available: ">
             <div>
                 <a class="primaryLink"
                     href=""
                     title="" />
             </div><div>
-            Also available: <a href="url"
+            <a href="url"
                 title="label">link-text</a> additional-text</div>
         </x:expect>
     </x:scenario>
