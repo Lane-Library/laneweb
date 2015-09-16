@@ -83,7 +83,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             this.pageNumber = Integer.valueOf(page) - 1;
         }
         this.query = ModelUtil.getString(model, Model.QUERY);
-        this.facetSort = ModelUtil.getString(model, Model.FACET_SORT, "");
+        this.facetSort = ModelUtil.getString(model, Model.FACET_SORT, EMPTY);
     }
 
     public void setRequiredPublicationTypes(final Collection<String> requiredPublicationTypes) {
@@ -99,6 +99,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShowSearch);
             facetsMap = processFacets(fps);
             maybeAddRequiredPublicationTypes(facetsMap);
+            maybeAddActiveFacets(facetsMap);
             maybeRequestMoreMesh(facetsMap);
             marshal(sortFacets(facetsMap), xmlConsumer);
         } else {
@@ -110,6 +111,40 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         }
     }
 
+    /**
+     * need to include active/enabled facets, even if they have zero results
+     *
+     * @param facetsMap
+     * @return augmented facetsMap
+     */
+    private Map<String, Collection<Facet>> maybeAddActiveFacets(final Map<String, Collection<Facet>> facetsMap) {
+        if (this.facets.isEmpty()) {
+            return facetsMap;
+        }
+        String[] tokens = this.facets.split(SolrSearchService.FACETS_SEPARATOR);
+        for (String token2 : tokens) {
+            String[] token = token2.split(COLON);
+            String fieldName = token[0];
+            String facetValue = token[1].replaceAll("^?\"$?", EMPTY);
+            Collection<Facet> facetList = facetsMap.get(fieldName);
+            if (null == facetList) {
+                facetList = new ArrayList<Facet>();
+            }
+            long present = facetList.stream().filter(s -> facetValue.equals(s.getValue())).count();
+            if (present < 1) {
+                facetList.add(new Facet(fieldName, facetValue, 0, this.facets));
+                facetsMap.put(fieldName, facetList);
+            }
+        }
+        return facetsMap;
+    }
+
+    /**
+     * case 110125: Have article type display 3 items at all times (even if results are 0)
+     *
+     * @param facetsMap
+     * @return augmented facetsMap
+     */
     private Map<String, Collection<Facet>> maybeAddRequiredPublicationTypes(
             final Map<String, Collection<Facet>> facetsMap) {
         Collection<Facet> facetList = facetsMap.get(PUBLICATION_TYPE);
@@ -131,6 +166,12 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         return facetsMap;
     }
 
+    /**
+     * case 110340 don't show MeSH checktags in search (unless they are active)
+     *
+     * @param facetsMap
+     * @return augmented facetsMap
+     */
     private Map<String, Collection<Facet>> maybeRequestMoreMesh(final Map<String, Collection<Facet>> facetsMap) {
         Collection<Facet> facetList = facetsMap.get(MESH);
         if (null == facetList) {
@@ -139,15 +180,16 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         Collection<Facet> reduced = facetList.stream()
                 .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
                 .collect(Collectors.toList());
-        if (reduced.size() < this.facetsToShowSearch) {
+        long enabled = facetList.stream().filter(s -> s.isEnabled()).count();
+        if (reduced.size() < this.facetsToShowSearch || enabled >= this.facetsToShowSearch) {
             int limit = this.meshToIgnoreInSearch.size() + this.facetsToShowSearch + 1;
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, MESH, 0, limit, 1,
                     parseSort());
             facetList = processFacets(fps).get(MESH);
             if (null != facetList) {
                 Collection<Facet> moreMesh = facetList.stream()
-                        .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue())).collect(Collectors.toList());
-                moreMesh.addAll(reduced);
+                        .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
+                        .collect(Collectors.toList());
                 facetsMap.put(MESH, moreMesh);
             }
         }

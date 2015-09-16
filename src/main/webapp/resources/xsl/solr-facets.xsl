@@ -44,7 +44,7 @@
         </xsl:variable>
 		<xsl:choose>
 		    <xsl:when test="enabled = 'true'">
-		         <li><xsl:value-of select="$label"/> <span class="facetCount"><a title="remove filter" href="{$facet-search-base-path}{$furl}"> <i class="fa fa-times-circle"></i> </a> <xsl:value-of select="$count-formatted"/></span></li>
+		         <li class="enabled"><span class="facetLabel"><xsl:value-of select="$label"/></span> <span class="facetCount"><a title="remove filter" href="{$facet-search-base-path}{$furl}"> <i class="fa fa-times-circle"></i> </a> <xsl:value-of select="$count-formatted"/></span></li>
 		    </xsl:when>
 		    <xsl:otherwise>
 		         <li><a href="{$facet-search-base-path}{$furl}"><xsl:value-of select="$label"/></a> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></li>
@@ -59,8 +59,8 @@
 	        <xsl:choose>
 	            <xsl:when test="$search-mode">
 		            <li class="solrFacet facetHeader"><xsl:value-of select="$label"/></li>
-		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $values-per-facet or $facet !='']"/>
-		            <xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet) > $values-per-facet and $facet = ''">
+		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $values-per-facet or enabled = 'true']"/>
+		            <xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[fieldName = 'publicationType' or count > 0]) > $values-per-facet">
                         <li> <a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> all </a> <i class="icon fa fa-arrow-right"></i></li>
 		            </xsl:if>
 	            </xsl:when>
