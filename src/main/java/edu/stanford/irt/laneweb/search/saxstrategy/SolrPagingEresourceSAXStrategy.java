@@ -35,7 +35,9 @@ public class SolrPagingEresourceSAXStrategy implements SAXStrategy<Map<String, O
         Page<Eresource> page = (Page<Eresource>) object.get("resultPage");
         List<Eresource> eresources = page.getContent();
         String query = (String) object.get("searchTerm");
-        long start = page.getSize() * page.getNumber();
+        int pageSize = page.getSize();
+        int pageNumber = page.getNumber();
+        long start = pageSize * pageNumber;
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
@@ -43,8 +45,8 @@ public class SolrPagingEresourceSAXStrategy implements SAXStrategy<Map<String, O
             atts.addAttribute(Resource.EMPTY_NS, Resource.SIZE, Resource.SIZE, Resource.CDATA,
                     Long.toString(page.getTotalElements()));
             atts.addAttribute(Resource.EMPTY_NS, START, START, Resource.CDATA, Long.toString(start));
-            atts.addAttribute(Resource.EMPTY_NS, LENGTH, LENGTH, Resource.CDATA, Integer.toString(page.getSize()));
-            atts.addAttribute(Resource.EMPTY_NS, PAGE, PAGE, Resource.CDATA, Integer.toString(page.getNumber()));
+            atts.addAttribute(Resource.EMPTY_NS, LENGTH, LENGTH, Resource.CDATA, Integer.toString(pageSize));
+            atts.addAttribute(Resource.EMPTY_NS, PAGE, PAGE, Resource.CDATA, Integer.toString(pageNumber));
             atts.addAttribute(Resource.EMPTY_NS, PAGES, PAGES, Resource.CDATA, Integer.toString(page.getTotalPages()));
             XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCES, atts);
             if (query != null) {
