@@ -35,15 +35,25 @@ public class FacetComparatorTest {
         assertEquals("year:[yy TO zz]", i.next().getValue());
         assertEquals("year:[xx TO yy]", i.next().getValue());
         set.clear();
-        // case 110125: Have article type display 3 items at all times (even if results are 0), in reverse alpha
+        // case 110125: Have article type display 3 items at all times (even if results are 0)
         set.add(new Facet("fieldName", "foo", 10, null));
         set.add(new Facet("fieldName", "Clinical Trial", 0, null));
         set.add(new Facet("fieldName", "Systematic Review", 0, null));
         set.add(new Facet("fieldName", "Randomized Controlled Trial", 0, null));
         i = set.iterator();
+        assertEquals("Clinical Trial", i.next().getValue());
+        assertEquals("Randomized Controlled Trial", i.next().getValue());
         assertEquals("Systematic Review", i.next().getValue());
+        assertEquals("foo", i.next().getValue());
+        set.clear();
+        set.add(new Facet("fieldName", "foo", 10, null));
+        set.add(new Facet("fieldName", "Clinical Trial", 5, null));
+        set.add(new Facet("fieldName", "Systematic Review", 0, null));
+        set.add(new Facet("fieldName", "Randomized Controlled Trial", 10, null));
+        i = set.iterator();
         assertEquals("Randomized Controlled Trial", i.next().getValue());
         assertEquals("Clinical Trial", i.next().getValue());
+        assertEquals("Systematic Review", i.next().getValue());
         assertEquals("foo", i.next().getValue());
     }
 

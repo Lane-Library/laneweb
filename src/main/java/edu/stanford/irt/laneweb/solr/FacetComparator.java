@@ -27,10 +27,6 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
             return facet2Name.compareTo(facet1Name);
         }
         // case 110125: Have article type display 3 items at all times (even if results are 0)
-        if (REQ_PUBLICATION_TYPES.contains(facet1Name) && REQ_PUBLICATION_TYPES.contains(facet2Name)) {
-            // reverse alpha ... necessary?
-            return facet2Name.compareTo(facet1Name);
-        }
         if (REQ_PUBLICATION_TYPES.contains(facet1Name) && !REQ_PUBLICATION_TYPES.contains(facet2Name)) {
             return -1;
         }
