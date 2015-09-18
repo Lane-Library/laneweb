@@ -152,7 +152,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             facetList = new ArrayList<Facet>();
         }
         long required = facetList.stream().filter(s -> this.requiredPublicationTypes.contains(s.getValue())).count();
-        if (required < 3) {
+        if (required < this.requiredPublicationTypes.size()) {
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 0,
                     parseSort());
             Map<String, Collection<Facet>> publicationTypeFacetMap = processFacets(fps);
@@ -208,9 +208,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         // extract from facet queries
         for (FacetQueryEntry page : facetpage.getFacetQueryResult()) {
             Collection<Facet> facetList = new ArrayList<Facet>();
-            String value = page.getValue();
-            String fieldName = value.split(COLON)[0];
-            String facetValue = value.split(COLON)[1];
+            String[] value = page.getValue().split(COLON);
+            String fieldName = value[0];
+            String facetValue = value[1];
             long facetValueCount = page.getValueCount();
             if (facetsMap.containsKey(fieldName)) {
                 facetList = facetsMap.get(fieldName);
