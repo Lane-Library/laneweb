@@ -20,18 +20,22 @@ public final class SolrQueryParser {
     static {
         // these seem harmless || &&
         // these seem useful and harmless " * ( )
-        ESCAPEABLE_CHARS.add(new Character('+'));
-        ESCAPEABLE_CHARS.add(new Character('-'));
-        ESCAPEABLE_CHARS.add(new Character('!'));
-        ESCAPEABLE_CHARS.add(new Character('{'));
-        ESCAPEABLE_CHARS.add(new Character('}'));
-        ESCAPEABLE_CHARS.add(new Character('['));
-        ESCAPEABLE_CHARS.add(new Character(']'));
-        ESCAPEABLE_CHARS.add(new Character('^'));
-        ESCAPEABLE_CHARS.add(new Character('~'));
-        ESCAPEABLE_CHARS.add(new Character('?'));
-        ESCAPEABLE_CHARS.add(new Character(':'));
-        ESCAPEABLE_CHARS.add(new Character('\\'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('+'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('-'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('!'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('{'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('}'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('['));
+        ESCAPEABLE_CHARS.add(Character.valueOf(']'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('^'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('~'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('?'));
+        ESCAPEABLE_CHARS.add(Character.valueOf(':'));
+        ESCAPEABLE_CHARS.add(Character.valueOf('\\'));
+    }
+
+    private SolrQueryParser() {
+        // empty private constructor
     }
 
     public static String parse(final String query) {
