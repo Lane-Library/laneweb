@@ -68,7 +68,7 @@ public class SolrSearchService implements CollectionManager {
                 .setFacetOptions(new FacetOptions().addFacetOnField(fieldWithFacetParams)
                         .setFacetMinCount(facetMinCount).setFacetLimit(pageRequest.getPageSize())
                         .setFacetSort(facetSort));
-        fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
+        fquery.setRequestHandler(SolrRepository.Handlers.FACET);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));
         }
@@ -80,7 +80,7 @@ public class SolrSearchService implements CollectionManager {
         String cleanQuery = SolrQueryParser.parse(query);
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery)).setFacetOptions(FACET_OPTIONS
                 .setFacetLimit(facetLimit));
-        fquery.setRequestHandler(SolrRepository.FACET_HANDLER);
+        fquery.setRequestHandler(SolrRepository.Handlers.FACET);
         if (!facetFilters.isEmpty()) {
             fquery.addCriteria(new SimpleStringCriteria(facetFilters));
         }

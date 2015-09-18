@@ -13,45 +13,48 @@ import edu.stanford.irt.laneweb.eresources.Eresource;
 
 public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
-    static final String BROWSE_HANDLER = "/lane-browse";
+    public final class Handlers {
 
-    static final String FACET_HANDLER = "/lane-facet";
+        public static final String BROWSE = "/lane-browse";
 
-    static final String SEARCH_HANDLER = "/lane-search";
+        public static final String FACET = "/lane-facet";
 
-    static final String SUGGEST_HANDLER = "/lane-suggest";
+        public static final String SEARCH = "/lane-search";
 
-    @Query(value = "*:*", filters = { "isRecent:true", "mesh:\"?0\"", "type:\"?1\"" }, requestHandler = BROWSE_HANDLER)
+        public static final String SUGGEST = "/lane-suggest";
+    }
+
+    @Query(value = "*:*", filters = { "isRecent:true", "mesh:\"?0\"", "type:\"?1\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllByMeshAndType(String mesh, String type, Pageable page);
 
-    @Query(value = "*:*", filters = { "isRecent:true", "subset:\"?0\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "*:*", filters = { "isRecent:true", "subset:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllBySubset(String subset, Pageable page);
 
-    @Query(value = "*:*", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "*:*", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllByType(String type, Pageable page);
 
-    @Query(value = "*:*", filters = { "isRecent:true", "isCore:1", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "*:*", filters = { "isRecent:true", "isCore:1", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllCoreByType(String type, Pageable page);
 
-    @Query(value = "ertlsw?1", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = BROWSE_HANDLER)
+    @Query(value = "ertlsw?1", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
 
-    @Query(value = "?0", requestHandler = FACET_HANDLER)
+    @Query(value = "?0", requestHandler = Handlers.FACET)
     @Facet(fields = { "type" }, minCount = 0, limit = 100)
     public SolrResultPage<?> facetByType(String term, Pageable page);
 
-    @Query(value = "-recordType:pubmed", requestHandler = SEARCH_HANDLER)
+    @Query(value = "-recordType:pubmed", requestHandler = Handlers.SEARCH)
     public List<Eresource> searchFindAllNotRecordTypePubmed(Pageable page);
 
-    @Query(value = "?0", filters = { "?1" }, requestHandler = SEARCH_HANDLER)
+    @Query(value = "?0", filters = { "?1" }, requestHandler = Handlers.SEARCH)
     public Page<Eresource> searchFindAllWithFilter(String query, String filter, Pageable page);
 
-    @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = SEARCH_HANDLER)
+    @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = Handlers.SEARCH)
     public Page<Eresource> searchFindByType(String query, String type, Pageable page);
 
-    @Query(value = "(+?1) OR title_sort:/?0.*/", requestHandler = SUGGEST_HANDLER)
+    @Query(value = "(+?1) OR title_sort:/?0.*/", requestHandler = Handlers.SUGGEST)
     public List<Eresource> suggestFindAll(String term, String tokenizedTerm, Pageable page);
 
-    @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = SUGGEST_HANDLER)
+    @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = Handlers.SUGGEST)
     public List<Eresource> suggestFindByType(String term, String type, Pageable page);
 }
