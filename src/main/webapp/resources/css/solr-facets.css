@@ -11,18 +11,13 @@
     clear: right;
 }
 
-.solrFacets li.facetHeader {
-    height: 20px;
-    border-bottom: 1px solid #e6e4dc;
-}
-
 .solrFacets {
     opacity: 0;
 }
 
 .facetBrowse {
     min-width: 500px;
-    padding: 25px 0px;
+    padding: 25px 0;
 }
 
 .facetBrowse li, .facetBrowse .facetHeader{
@@ -49,6 +44,9 @@
 }
 
 #searchFacets .solrFacet.facetHeader {
+    box-sizing: border-box;
+    height: 20px;
+    border-bottom: 1px solid #e6e4dc;
     text-transform: none;
 }
 
@@ -57,12 +55,12 @@
     padding-right: 5px;
 }
 
-.facetCount i.fa-times-circle {
+.facetCount .fa-times-circle {
     padding: 0 10px;
     color: #222;
 }
 
-.facetCount i.fa-times-circle:hover {
+.facetCount .fa-times-circle:hover {
     color: #007C92;
 }
 
