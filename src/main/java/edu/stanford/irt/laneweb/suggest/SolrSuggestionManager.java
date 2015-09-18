@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.solr.SolrSearchService;
 import edu.stanford.irt.suggest.Suggestion;
@@ -13,8 +11,11 @@ import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SolrSuggestionManager implements SuggestionManager {
 
-    @Autowired
     private SolrSearchService searchService;
+
+    public SolrSuggestionManager(final SolrSearchService searchService) {
+        this.searchService = searchService;
+    }
 
     @Override
     public Collection<Suggestion> getSuggestionsForTerm(final String term) {
