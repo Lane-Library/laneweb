@@ -28,7 +28,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
 
     private String facets;
 
-    private Integer pageNumber = new Integer(0);
+    private Integer pageNumber = Integer.valueOf(0);
 
     private String searchTerm;
 
