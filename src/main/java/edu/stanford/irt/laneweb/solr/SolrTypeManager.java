@@ -19,7 +19,6 @@ public class SolrTypeManager {
         OLD_TO_NEW_TYPES_MAP.put("journaldigital", "Journal Digital");
         OLD_TO_NEW_TYPES_MAP.put("journalprint", "Journal Print");
         OLD_TO_NEW_TYPES_MAP.put("laneclass", "Lane Class");
-        // OLD_TO_NEW_TYPES_MAP.put("lanepage", "Lane Web Page");
         OLD_TO_NEW_TYPES_MAP.put("lanesite", "Lane Web Page");
         OLD_TO_NEW_TYPES_MAP.put("m051 software, installed", "Software, Installed - M051");
         OLD_TO_NEW_TYPES_MAP.put("redwood software, installed", "Software, Installed - Redwood Room");
@@ -27,6 +26,10 @@ public class SolrTypeManager {
         OLD_TO_NEW_TYPES_MAP.put("stone software, installed", "Software, Installed - Stone Room");
         OLD_TO_NEW_TYPES_MAP.put("lksc-public software, installed", "Software, Installed - LKSC Public");
         OLD_TO_NEW_TYPES_MAP.put("lksc-student software, installed", "Software, Installed - LKSC Student");
+    }
+
+    private SolrTypeManager() {
+        // empty private constructor
     }
 
     /**
@@ -46,7 +49,7 @@ public class SolrTypeManager {
      * backwards-compatible type-mapping TODO: remove once types changed in search-lane lane.xml engine
      *
      * @param maybeNewType
-     * @return old type from TYPES_MAP or lower-case version of maybeNewType
+     * @return old type from OLD_TO_NEW_TYPES_MAP or lower-case version of maybeNewType
      */
     public static final String convertToOldType(final String maybeNewType) {
         if (NEW_TO_OLD_TYPES_MAP.isEmpty()) {
