@@ -30,6 +30,11 @@ public class SolrSuggestionManagerTest {
         this.eresource = createMock(Eresource.class);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetSuggestionsForNullTerm() {
+        this.manager.getSuggestionsForTerm(null);
+    }
+
     @Test
     public void testGetSuggestionsForTerm() {
         expect(this.solrSearchService.suggestFindAll("term")).andReturn(Collections.singletonList(this.eresource));
@@ -49,6 +54,17 @@ public class SolrSuggestionManagerTest {
         expect(this.eresource.getId()).andReturn("id");
         replay(this.solrSearchService, this.eresource);
         Suggestion suggestion = this.manager.getSuggestionsForTerm("type", "term").iterator().next();
+        assertEquals("title", suggestion.getSuggestionTitle());
+        verify(this.solrSearchService, this.eresource);
+    }
+
+    @Test
+    public void testGetSuggestionsForTermWithPeriod() {
+        expect(this.solrSearchService.suggestFindAll("term")).andReturn(Collections.singletonList(this.eresource));
+        expect(this.eresource.getTitle()).andReturn("title.");
+        expect(this.eresource.getId()).andReturn("id");
+        replay(this.solrSearchService, this.eresource);
+        Suggestion suggestion = this.manager.getSuggestionsForTerm("term").iterator().next();
         assertEquals("title", suggestion.getSuggestionTitle());
         verify(this.solrSearchService, this.eresource);
     }
