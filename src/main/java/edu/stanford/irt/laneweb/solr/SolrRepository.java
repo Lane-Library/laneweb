@@ -22,6 +22,10 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
         public static final String SEARCH = "/lane-search";
 
         public static final String SUGGEST = "/lane-suggest";
+
+        private Handlers() {
+            // empty private constructor
+        }
     }
 
     @Query(value = "*:*", filters = { "isRecent:true", "mesh:\"?0\"", "type:\"?1\"" }, requestHandler = Handlers.BROWSE)
