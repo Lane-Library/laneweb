@@ -9,12 +9,12 @@
             var browseFacetNavContainer = Y.one(".facetBrowse .s-pagination"),
                 selectorString = ".pagingButton." + direction,
                 pagingContainer;
-            if (undefined != browseFacetNavContainer && browseFacetNavContainer.getStyle('visibility') == 'visible') {
+            if (undefined !== browseFacetNavContainer && browseFacetNavContainer.getStyle('visibility') === 'visible') {
                 pagingContainer = browseFacetNavContainer;
             }
             if (pagingContainer) {
                 pagingContainer.one(selectorString)._node.click();
-            } 
+            }
         },
         makeRequest = function() {
             Y.io(basePath + '/apps/search/facets/html' + locationSearch, {
@@ -59,7 +59,7 @@ Y.lane.on("search:reset",  function() {
 // TODO: find a home for this pagination-related js
 (function() {
         Y.all('form[name=pagination]').on('submit', function (e) {
-            var form = e.target; p = form.get('page'), page = Number(p.get('value').replace(/[^\d]/g,'')), pages = form.get('pages');
+            var form = e.target, p = form.get('page'), page = Number(p.get('value').replace(/[^\d]/g,'')), pages = form.get('pages');
             p.set('value',page);
             if (page < 1 || page > Number(pages.get('value'))) {
                 e.preventDefault();
@@ -68,5 +68,4 @@ Y.lane.on("search:reset",  function() {
             }
             pages.remove();
           }, this);
-        
 })();
