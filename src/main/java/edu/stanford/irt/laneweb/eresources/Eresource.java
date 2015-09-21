@@ -278,6 +278,43 @@ public class Eresource {
                 .append(" versions:").append(this.linksList).toString();
     }
 
+    private void parseLink(final Object linkObj, final LinkedHashMap<String, Object> versionMap,
+            final boolean isFirstLink) {
+        String linkLabel = null;
+        String linkUrl = null;
+        String linkText = null;
+        String additionalText = null;
+        String holdingsAndDates = null;
+        LinkType linkType = null;
+        LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
+        if (jsonLink.containsKey("label")) {
+            linkLabel = (String) jsonLink.get("label");
+        }
+        if (jsonLink.containsKey("linkText")) {
+            linkText = (String) jsonLink.get("linkText");
+        }
+        if (jsonLink.containsKey("additionalText")) {
+            additionalText = (String) jsonLink.get("additionalText");
+        }
+        if (isFirstLink) {
+            linkText = this.title;
+        }
+        if (jsonLink.containsKey("url")) {
+            linkUrl = (String) jsonLink.get("url");
+        }
+        if (versionMap.containsKey("holdingsAndDates")) {
+            holdingsAndDates = (String) versionMap.get("holdingsAndDates");
+        }
+        if (versionMap.get("hasGetPasswordLink") != null && ((Boolean) versionMap.get("hasGetPasswordLink"))) {
+            linkType = LinkType.GETPASSWORD;
+        } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
+            linkType = LinkType.IMPACTFACTOR;
+        } else {
+            linkType = LinkType.NORMAL;
+        }
+        this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates));
+    }
+
     private void setLinks() {
         ObjectMapper mapper = new ObjectMapper();
         List<LinkedHashMap<String, Object>> versionData = null;
@@ -290,41 +327,7 @@ public class Eresource {
         for (LinkedHashMap<String, Object> versionMap : versionData) {
             if (versionMap.containsKey("links")) {
                 for (Object linkObj : (ArrayList<Object>) versionMap.get("links")) {
-                    String linkLabel = null;
-                    String linkUrl = null;
-                    String linkText = null;
-                    String additionalText = null;
-                    String holdingsAndDates = null;
-                    LinkType linkType = null;
-                    LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
-                    if (jsonLink.containsKey("label")) {
-                        linkLabel = (String) jsonLink.get("label");
-                    }
-                    if (jsonLink.containsKey("linkText")) {
-                        linkText = (String) jsonLink.get("linkText");
-                    }
-                    if (jsonLink.containsKey("additionalText")) {
-                        additionalText = (String) jsonLink.get("additionalText");
-                    }
-                    if (isFirstLink++ == 0) {
-                        linkText = this.title;
-                    }
-                    if (jsonLink.containsKey("url")) {
-                        linkUrl = (String) jsonLink.get("url");
-                    }
-                    if (versionMap.containsKey("holdingsAndDates")) {
-                        holdingsAndDates = (String) versionMap.get("holdingsAndDates");
-                    }
-                    if (versionMap.get("hasGetPasswordLink") != null
-                            && ((Boolean) versionMap.get("hasGetPasswordLink"))) {
-                        linkType = LinkType.GETPASSWORD;
-                    } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
-                        linkType = LinkType.IMPACTFACTOR;
-                    } else {
-                        linkType = LinkType.NORMAL;
-                    }
-                    this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText,
-                            holdingsAndDates));
+                    parseLink(linkObj, versionMap, isFirstLink++ == 0);
                 }
             }
         }
