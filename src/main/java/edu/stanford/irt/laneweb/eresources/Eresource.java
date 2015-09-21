@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,6 +11,8 @@ import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class Eresource {
 
@@ -291,8 +294,8 @@ public class Eresource {
         List<LinkedHashMap<String, Object>> versionData = null;
         try {
             versionData = mapper.readValue(this.versionsJson, List.class);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new LanewebException(e);
         }
         int isFirstLink = 0;
         for (LinkedHashMap<String, Object> versionMap : versionData) {
