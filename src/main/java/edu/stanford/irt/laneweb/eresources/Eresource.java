@@ -93,9 +93,6 @@ public class Eresource {
         }
     }
 
-    @Field
-    String[] type;
-
     @Field("availableItems")
     private int available;
 
@@ -216,10 +213,6 @@ public class Eresource {
         return this.total;
     }
 
-    public String[] getType() {
-        return this.type;
-    }
-
     public String getVersionsJson() {
         return this.versionsJson;
     }
@@ -269,10 +262,6 @@ public class Eresource {
 
     public void setTitle(final String title) {
         this.title = title;
-    }
-
-    public void setType(final String[] type) {
-        this.type = type;
     }
 
     public void setVersionsJson(final String versionsJson) {
