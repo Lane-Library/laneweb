@@ -7,10 +7,12 @@ import java.util.Comparator;
 
 public class FacetComparator implements Comparator<Facet>, Serializable {
 
-    private static final String LAST_X_YEARS_PREFIX = "year:[";
+    private static final String COLON = ":";
 
-    private static final Collection<String> REQ_PUBLICATION_TYPES = Arrays.asList("Clinical Trial",
-            "Randomized Controlled Trial", "Systematic Review");
+    private static final String LAST_X_YEARS_PREFIX = "year:[20";
+
+    private static final Collection<String> REQ_PUBLICATION_TYPES = Arrays.asList("publicationType:Clinical Trial",
+            "publicationType:Randomized Controlled Trial", "publicationType:Systematic Review");
 
     /** for Serializable. */
     private static final long serialVersionUID = 1L;
@@ -20,8 +22,8 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
         if (facet1 == null || facet2 == null) {
             throw new IllegalArgumentException("cannot compare " + facet1 + " to " + facet2);
         }
-        String facet1Name = facet1.getValue();
-        String facet2Name = facet2.getValue();
+        String facet1Name = new StringBuilder(facet1.getFieldName()).append(COLON).append(facet1.getValue()).toString();
+        String facet2Name = new StringBuilder(facet2.getFieldName()).append(COLON).append(facet2.getValue()).toString();
         // case 110630: Move 5 years to be higher then last 10 years within Year filter
         if (facet1Name.startsWith(LAST_X_YEARS_PREFIX) && facet2Name.startsWith(LAST_X_YEARS_PREFIX)) {
             return facet2Name.compareTo(facet1Name);
