@@ -97,21 +97,20 @@
 #search input:focus {
     outline-style : none;
 }
+.searchReset i.fa-times-circle {
+    color: #8c1515;
+}
+
+.searchReset i.fa-times-circle:hover {
+    color: #428bca;
+}
 .searchReset {
     cursor : pointer;
     display : none;
-    color : #A1B9ED;
-    font-size : 175%;
     position:absolute;
     left:570px;
     top:0;
-    width:22px;
-    height:34px;
     line-height:34px;
-    text-align:center;
-}
-.searchReset:hover {
-    color : #79455C;
 }
 .searchReset.active {
     display:block;

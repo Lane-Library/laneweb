@@ -77,6 +77,7 @@
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="file" src="resources/solr-search.html"/>
                 <map:transform type="xinclude"/>
+                <map:transform type="joost" src="resources/xsl/solr-limits.stx"/>
                 <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
                 <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                 <map:serialize type="xml"/>

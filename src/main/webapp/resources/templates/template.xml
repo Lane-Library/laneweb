@@ -62,7 +62,7 @@
                                     <option value="textbooks-all" title="Selected clinical textbooks">Textbooks</option>
                                 </select>
                                 <input name="q" id="searchTerms" type="text" />
-                                <span class="searchReset" title="Clear Search">×</span>
+                                <span class="searchReset" title="Clear Search"><i class="fa fa-times-circle fa-lg"/></span>
                             </div>
                             <input id="searchSubmit" type="submit" value="Search" />
                         </fieldset>

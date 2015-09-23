@@ -4,11 +4,30 @@
     box-shadow: none;
 }
 
+.solrFacets h3 {
+    margin-bottom: 30px;
+}
+
 .solrFacets li {
-    padding-top: 0;
-    padding-bottom: 0;
-    border-bottom: none;
+    padding: 0 5px;
+    border-bottom: 1px solid #e6e4dc;
     clear: right;
+}
+
+.solrFacets .enabled, .facetBrowse .enabled {
+    padding: 1px 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+.facetBrowse .enabled {
+    margin: 0 15px;
+    padding: 1px 5px;
+    border-bottom: 1px solid #e6e4dc;
+}
+
+.facetBrowse li {
+    padding: 0 5px;
 }
 
 .solrFacets {
@@ -20,17 +39,13 @@
     padding: 25px 0;
 }
 
-.facetBrowse li, .facetBrowse .facetHeader{
+.facetBrowse li, .facetBrowse .facetHeader {
     padding-left: 20px;
     padding-right: 20px;
 }
 
 .facetBrowse h3 {
     margin: 0 20px;
-}
-
-.facetBrowse li:hover {
-    background-color: aliceblue;
 }
 
 .facetBrowse li:first-child, .facetBrowse li:last-child {
@@ -46,8 +61,14 @@
 #searchFacets .solrFacet.facetHeader {
     box-sizing: border-box;
     height: 20px;
-    border-bottom: 1px solid #e6e4dc;
+    border-bottom: none;
     text-transform: none;
+    padding: 0;
+}
+
+.facetHeader .headerLink {
+    font-weight: normal;
+    padding-left: 5px;
 }
 
 .facetCount {
@@ -55,13 +76,26 @@
     padding-right: 5px;
 }
 
-.facetCount .fa-times-circle {
-    padding: 0 10px;
-    color: #222;
+.solrFacets .fa-check-square, .facetBrowse .fa-check-square {
+    color: #fff;
 }
 
-.facetCount .fa-times-circle:hover {
-    color: #007C92;
+.solrFacets .fa-square-o, .facetBrowse .fa-square-o {
+    color: #ccc;
+}
+
+.solrFacets .fa-square-o::after, .facetBrowse .fa-square-o::after {
+    content: " ";
+    position: absolute;
+    background-color: #fff;
+    height: 12px;
+    left: 18px;
+    width: 11px;
+    z-index: -1;
+}
+
+.facetLabel {
+    padding-left: 10px;
 }
 
 /* solr-specific mods for search suggestions ... move to search.css if keep */
@@ -73,4 +107,35 @@
 
 .solr #queryMapping span, .solr #spellCheckLink, .solr #findItLink {
     font-weight: bold;
+}
+
+#solrLimits {
+    font-size: 14px;
+    margin-top: 30px;
+    margin-bottom: -5px;
+}
+
+#solrLimits span {
+    padding: 0 15px 0 10px;
+    display: inline-block;
+}
+
+#solrLimits a {
+    padding: 0 5px;
+}
+
+#solrLimits i.fa-times-circle {
+    color: #8c1515;
+}
+
+#solrLimits i.fa-times-circle:hover {
+    color: #428bca;
+}
+
+#solrLimits .clearLimits {
+    padding: 0;
+}
+
+#solrAllCount {
+    display: none;
 }

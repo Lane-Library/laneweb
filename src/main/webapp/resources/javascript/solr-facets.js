@@ -16,6 +16,26 @@
                 pagingContainer.one(selectorString)._node.click();
             }
         },
+        processEnabledFacets = function(facetsContainer) {
+            var enabledFacets = facetsContainer.all('.enabled'),
+                limitsContainer = Y.one('#solrLimits'),
+                allCount = Y.one('#solrAllCount'),
+                count = 0,
+                html = '', i, facet, label, url;
+            if (allCount) {
+                count = allCount.get('textContent');
+            }
+            for (i = 0; i < enabledFacets.size(); i++) {
+                facet = enabledFacets.item(i);
+                label = facet.one('.facetLabel').get('textContent');
+                url = facet.one('a').get('href');
+                html += '<span>' + label + '<a title="remove filter" href="' + url + '"> <i class="fa fa-times-circle fa-lg"></i></a></span>';
+            }
+            if (enabledFacets.size() > 0) {
+                html += '<span class="clearLimits"><a href="' + basePath + '/search.html?source=all-all&q=' + query + '">Clear all to show</a>' + count + '<a href="' + basePath + '/search.html?source=all-all&q=' + query + '">results</a></span>';
+                limitsContainer.append(html);
+            }
+        },
         makeRequest = function() {
             Y.io(basePath + '/apps/search/facets/html' + locationSearch, {
                 on: {
@@ -26,6 +46,8 @@
                             node: facetsContainer,
                             to:{opacity:1}
                         }).run();
+                        processEnabledFacets(facetsContainer);
+                        Y.lane.fire("lane:new-content");
                     }
                 }
             });
