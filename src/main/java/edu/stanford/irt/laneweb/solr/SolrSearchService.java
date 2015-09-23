@@ -50,11 +50,13 @@ public class SolrSearchService implements CollectionManager {
     }
 
     @Autowired
-    private SolrRepository repository;
+    // protected for unit test ... better way to do this?
+    protected SolrRepository repository;
 
     @Autowired
     @Qualifier(value = "laneSearchSolrTemplate")
-    private SolrTemplate solrTemplate;
+    // protected for unit test ... better way to do this?
+    protected SolrTemplate solrTemplate;
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
             final int pageNumber, final int facetLimit, final int facetMinCount, final FacetSort facetSort) {
