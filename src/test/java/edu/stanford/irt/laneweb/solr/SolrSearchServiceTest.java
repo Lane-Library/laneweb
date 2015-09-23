@@ -119,6 +119,16 @@ public class SolrSearchServiceTest {
         this.searchService.getType(null, 'a');
     }
 
+    @Test
+    public final void testGetTypeStringCharHash() {
+        PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
+        expect(this.repository.browseByTypeTitleStartingWith("Type", "1", pageRequest)).andReturn(
+                Collections.emptyList());
+        replay(this.repository);
+        this.searchService.getType("type", '#');
+        verify(this.repository);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public final void testGetTypeStringException() {
         this.searchService.getType(null);
@@ -138,19 +148,35 @@ public class SolrSearchServiceTest {
     @Test
     public final void testSearchCount() {
         Set<String> types = new TreeSet<String>();
-        types.add("type");
+        types.add("type1");
         SolrResultPage page = createMock(SolrResultPage.class);
+        Page<FacetFieldEntry> page1 = createMock(Page.class);
+        FacetFieldEntry facetFieldEntry = createMock(FacetFieldEntry.class);
         Collection<Page<FacetFieldEntry>> facetResultPages = createMock(Collection.class);
-        Iterator it = createMock(Iterator.class);
+        Iterator it1 = createMock(Iterator.class);
+        Iterator it2 = createMock(Iterator.class);
         expect(this.repository.facetByType(isA(String.class), isA(PageRequest.class))).andReturn(page);
-        expect(page.getTotalElements()).andReturn((long) 10);
+        expect(page.getTotalElements()).andReturn((long) 20);
         expect(page.getFacetResultPages()).andReturn(facetResultPages);
-        expect(facetResultPages.iterator()).andReturn(it);
-        expect(it.hasNext()).andReturn(false);
-        replay(this.repository, facetResultPages, page, it);
+        expect(facetResultPages.iterator()).andReturn(it1);
+        expect(it1.hasNext()).andReturn(true);
+        expect(it1.next()).andReturn(page1);
+        expect(page1.iterator()).andReturn(it2);
+        expect(it2.hasNext()).andReturn(true);
+        expect(it2.next()).andReturn(facetFieldEntry);
+        expect(facetFieldEntry.getValueCount()).andReturn((long) 10);
+        expect(facetFieldEntry.getValue()).andReturn("type1");
+        expect(it2.hasNext()).andReturn(true);
+        expect(it2.next()).andReturn(facetFieldEntry);
+        expect(facetFieldEntry.getValueCount()).andReturn((long) 10);
+        expect(facetFieldEntry.getValue()).andReturn("Type1");
+        expect(it2.hasNext()).andReturn(false);
+        expect(it1.hasNext()).andReturn(false);
+        replay(this.repository, facetResultPages, page, it1, it2, facetFieldEntry, page1);
         Map<String, Integer> map = this.searchService.searchCount(types, "query");
-        verify(this.repository, facetResultPages, page, it);
-        assertEquals(10, (int) map.get("all"));
+        verify(this.repository, facetResultPages, page, it1, it2, facetFieldEntry, page1);
+        assertEquals(20, (int) map.get("all"));
+        assertEquals(10, (int) map.get("type1"));
     }
 
     @Test
@@ -201,6 +227,15 @@ public class SolrSearchServiceTest {
                         null))).andReturn(page);
         replay(this.repository, page);
         this.searchService.searchWithFilters("query", "field1:value::field2:value", new PageRequest(0, 1));
+        verify(this.repository, page);
+    }
+
+    @Test
+    public final void testSearchWithFiltersFacetsNull() {
+        Page<Eresource> page = createMock(Page.class);
+        expect(this.repository.searchFindAllWithFilter("query", "", new PageRequest(0, 1, null))).andReturn(page);
+        replay(this.repository, page);
+        this.searchService.searchWithFilters("query", null, new PageRequest(0, 1));
         verify(this.repository, page);
     }
 
