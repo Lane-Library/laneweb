@@ -15,6 +15,11 @@ public class LinkScanValidity implements Validity {
         this.lastCheck = System.currentTimeMillis();
     }
 
+    // for unit testing
+    protected LinkScanValidity(final long lastCheck) {
+        this.lastCheck = lastCheck;
+    }
+
     @Override
     public boolean isValid() {
         boolean valid = true;
