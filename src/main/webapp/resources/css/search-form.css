@@ -97,11 +97,11 @@
 #search input:focus {
     outline-style : none;
 }
-.searchReset i.fa-times-circle {
+.searchReset .fa-times-circle {
     color: #8c1515;
 }
 
-.searchReset i.fa-times-circle:hover {
+.searchReset .fa-times-circle:hover {
     color: #428bca;
 }
 .searchReset {
