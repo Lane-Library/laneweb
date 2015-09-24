@@ -35,6 +35,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private static final String PUBLICATION_TYPE = "publicationType";
 
+    private FacetComparator comparator;
+
     private String facet;
 
     private String facets;
@@ -88,6 +90,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     public void setRequiredPublicationTypes(final Collection<String> requiredPublicationTypes) {
         this.requiredPublicationTypes = requiredPublicationTypes;
+        this.comparator = new FacetComparator(this.requiredPublicationTypes);
     }
 
     @Override
@@ -245,7 +248,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     private Map<String, Set<Facet>> sortFacets(final Map<String, Collection<Facet>> facetsMap) {
         Map<String, Set<Facet>> sortedFacetsMap = new LinkedHashMap<String, Set<Facet>>();
         for (Map.Entry<String, Collection<Facet>> entry : facetsMap.entrySet()) {
-            Set<Facet> facetSet = new TreeSet<Facet>(new FacetComparator());
+            Set<Facet> facetSet = new TreeSet<Facet>(this.comparator);
             for (Facet f : entry.getValue()) {
                 facetSet.add(f);
             }

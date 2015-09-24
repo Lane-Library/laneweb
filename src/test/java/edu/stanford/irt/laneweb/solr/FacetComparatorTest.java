@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.solr;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -10,9 +12,11 @@ import org.junit.Test;
 
 public class FacetComparatorTest {
 
+    private static final Collection<String> PUB_TYPES = Arrays.asList("Req Pub 1", "Req Pub 2", "Req Pub 3");
+
     @Test
     public final void test() {
-        Set<Facet> set = new TreeSet<Facet>(new FacetComparator());
+        Set<Facet> set = new TreeSet<Facet>(new FacetComparator(PUB_TYPES));
         Iterator<Facet> i;
         // basic order by count
         set.add(new Facet("fieldName", "value", 1, null));
@@ -37,29 +41,29 @@ public class FacetComparatorTest {
         set.clear();
         // case 110125: Have article type display 3 items at all times (even if results are 0)
         set.add(new Facet("publicationType", "foo", 10, null));
-        set.add(new Facet("publicationType", "Clinical Trial", 0, null));
-        set.add(new Facet("publicationType", "Systematic Review", 0, null));
-        set.add(new Facet("publicationType", "Randomized Controlled Trial", 0, null));
+        set.add(new Facet("publicationType", "Req Pub 2", 0, null));
+        set.add(new Facet("publicationType", "Req Pub 3", 0, null));
+        set.add(new Facet("publicationType", "Req Pub 1", 0, null));
         i = set.iterator();
-        assertEquals("Clinical Trial", i.next().getValue());
-        assertEquals("Randomized Controlled Trial", i.next().getValue());
-        assertEquals("Systematic Review", i.next().getValue());
+        assertEquals("Req Pub 1", i.next().getValue());
+        assertEquals("Req Pub 2", i.next().getValue());
+        assertEquals("Req Pub 3", i.next().getValue());
         assertEquals("foo", i.next().getValue());
         set.clear();
         set.add(new Facet("publicationType", "foo", 10, null));
-        set.add(new Facet("publicationType", "Clinical Trial", 5, null));
-        set.add(new Facet("publicationType", "Systematic Review", 0, null));
-        set.add(new Facet("publicationType", "Randomized Controlled Trial", 10, null));
+        set.add(new Facet("publicationType", "Req Pub 1", 5, null));
+        set.add(new Facet("publicationType", "Req Pub 2", 0, null));
+        set.add(new Facet("publicationType", "Req Pub 3", 10, null));
         i = set.iterator();
-        assertEquals("Randomized Controlled Trial", i.next().getValue());
-        assertEquals("Clinical Trial", i.next().getValue());
-        assertEquals("Systematic Review", i.next().getValue());
+        assertEquals("Req Pub 3", i.next().getValue());
+        assertEquals("Req Pub 1", i.next().getValue());
+        assertEquals("Req Pub 2", i.next().getValue());
         assertEquals("foo", i.next().getValue());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public final void testException() {
-        Set<Facet> set = new TreeSet<Facet>(new FacetComparator());
+        Set<Facet> set = new TreeSet<Facet>(new FacetComparator(PUB_TYPES));
         set.add(new Facet("fieldName", "value", 1, null));
         set.add(null);
     }

@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.solr;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 
@@ -11,11 +11,18 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
 
     private static final String LAST_X_YEARS_PREFIX = "year:[20";
 
-    private static final Collection<String> REQ_PUBLICATION_TYPES = Arrays.asList("publicationType:Clinical Trial",
-            "publicationType:Randomized Controlled Trial", "publicationType:Systematic Review");
+    private static final String PUBLICATION_TYPE = "publicationType:";
 
     /** for Serializable. */
     private static final long serialVersionUID = 1L;
+
+    private Collection<String> requiredPublicationTypes = new ArrayList<String>();
+
+    public FacetComparator(final Collection<String> reqPublicationTypes) {
+        for (String pt : reqPublicationTypes) {
+            this.requiredPublicationTypes.add(PUBLICATION_TYPE + pt);
+        }
+    }
 
     @Override
     public int compare(final Facet facet1, final Facet facet2) {
@@ -29,10 +36,10 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
             return facet2Name.compareTo(facet1Name);
         }
         // case 110125: Have article type display 3 items at all times (even if results are 0)
-        if (REQ_PUBLICATION_TYPES.contains(facet1Name) && !REQ_PUBLICATION_TYPES.contains(facet2Name)) {
+        if (this.requiredPublicationTypes.contains(facet1Name) && !this.requiredPublicationTypes.contains(facet2Name)) {
             return -1;
         }
-        if (REQ_PUBLICATION_TYPES.contains(facet2Name) && !REQ_PUBLICATION_TYPES.contains(facet1Name)) {
+        if (this.requiredPublicationTypes.contains(facet2Name) && !this.requiredPublicationTypes.contains(facet1Name)) {
             return 1;
         }
         int countDiff = (int) (facet2.getCount() - facet1.getCount());
