@@ -124,11 +124,11 @@
     padding: 0 5px;
 }
 
-#solrLimits i.fa-times-circle {
+#solrLimits .fa-times-circle {
     color: #8c1515;
 }
 
-#solrLimits i.fa-times-circle:hover {
+#solrLimits .fa-times-circle:hover {
     color: #428bca;
 }
 
