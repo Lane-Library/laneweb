@@ -125,8 +125,8 @@
         </property>
         <property name="requiredPublicationTypes">
             <list>
-                <value>Clinical Trial</value>
                 <value>Randomized Controlled Trial</value>
+                <value>Review</value>
                 <value>Systematic Review</value>
             </list>
         </property>
