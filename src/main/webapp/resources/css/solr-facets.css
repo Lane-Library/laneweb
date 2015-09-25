@@ -112,7 +112,7 @@
 #solrLimits {
     font-size: 14px;
     margin-top: 30px;
-    margin-bottom: -5px;
+    margin-bottom: 25px;
 }
 
 #solrLimits span {
@@ -132,8 +132,16 @@
     color: #428bca;
 }
 
+#solrLimits span:nth-last-child(2) {
+     padding-right: 55px;
+}
+
 #solrLimits .clearLimits {
     padding: 0;
+}
+
+#solrLimits .clearLimits a {
+     padding: 0;
 }
 
 #solrAllCount {
