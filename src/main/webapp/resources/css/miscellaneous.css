@@ -1,33 +1,34 @@
 /* This file has rules that don't seem to fit anywhere else */
-body,select,input,button,textarea {
+body, select, input, button, textarea {
 	font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
 }
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class*="yui3-u"] {
-    font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .scaled-image {
-    width:100%;
-    height:auto
+	width: 100%;
+	height: auto
 }
 
 /*.close is the X close box on popups and feedback*/
 .close {
-    width:24px;
-    height:24px;
-    position:absolute;
-    right:3px;
-    top:3px;
-    cursor:pointer;
-    font-size:22px;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	right: 3px;
+	top: 3px;
+	cursor: pointer;
+	font-size: 22px;
 }
+
 .close.fa:hover {
-    color : #79455C;
+	color: #79455C;
 }
 
 p {
-margin-bottom: 12px;
+	margin-bottom: 12px;
 }
 
 strong {
@@ -43,15 +44,15 @@ em {
 }
 
 .more a {
-    margin-right: 6px;
+	margin-right: 6px;
 }
 
 .rss-link {
-	float:right;
+	float: right;
 }
 
 .rss-link .fa {
-    color:black;
+	color: black;
 }
 
 .announce {
@@ -106,7 +107,7 @@ em {
 
 .calendar ul {
 	float: left;
-	margin-bottom:12px;
+	margin-bottom: 12px;
 }
 
 .calendar li {
@@ -115,7 +116,7 @@ em {
 	float: left;
 	margin-right: 2.6px;
 	padding: 6.5px;
-	box-sizing:border-box;
+	box-sizing: border-box;
 	background-color: #09425a;
 	color: #fff;
 }
@@ -133,35 +134,71 @@ em {
 hr {
 	color: #dddddd;
 	border-top: 1px solid;
-	margin-bottom:12px;
+	margin-bottom: 12px;
 }
+
 .nomodule {
-    margin: 12px 0 24px;
-    line-height: normal;
-    font-size: 16px;
+	margin: 12px 0 24px;
+	line-height: normal;
+	font-size: 16px;
 }
 
 /*.youtube-thumbnail divs are created in youtube.js */
 .youtube-thumbnail {
-    cursor:pointer;
-    position:relative;
-    display:inline-block;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
 }
 
 .youtube-thumbnail .fa {
-    text-align: center;
-    font-size: 14px;
-    position: absolute;
-    right: 43%;
-    top: 41%;
-    color: white;
-    background-color: rgb(56,56,56);
-    border-radius: 9px;
-    width: 42px;
-    line-height: 30px;
-    opacity:.9;
+	text-align: center;
+	font-size: 14px;
+	position: absolute;
+	right: 43%;
+	top: 41%;
+	color: white;
+	background-color: rgb(56, 56, 56);
+	border-radius: 9px;
+	width: 42px;
+	line-height: 30px;
+	opacity: .9;
 }
 
 .youtube-thumbnail:hover .fa {
-    background-color: rgb(195,22,35);
+	background-color: rgb(195, 22, 35);
+}
+
+/*to make a highlighted note on the right of the module, similar to history site*/
+.feature {
+	padding-left: 12px;
+}
+
+.feature .block-heading {
+	width: 100%;
+	height: auto;
+	min-height: 1%;
+	padding-top: 0;
+	padding-bottom: 12px;
+	margin: 0 12px 12px 0;
+	text-align: left;
+	overflow: hidden;
+	background-color: #556222; /*#8c1515;*/
+	box-sizing: border-box;
+}
+
+.block-content {
+	float: left;
+	margin-bottom: 36px;
+}
+
+.block-heading h3 {
+    display: block;
+    background-image: none;
+    font-size: 20px;
+    padding: 6px 6px 6px 6px;
+    line-height: 1.2em;
+    margin-bottom: .2em;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-family: 'Source Sans Pro', sans-serif;
 }
