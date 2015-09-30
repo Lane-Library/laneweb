@@ -21,7 +21,8 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     private static final byte[] PRODUCTION = ("User-agent: *\nCrawl-delay: 7\n"
         + "Disallow: /m/\n"
-        + "Disallow: /search.html\nDisallow: /secure/").getBytes(StandardCharsets.UTF_8);
+        + "Disallow: /search.html\nDisallow: /secure/\n"
+        + "Sitemap: http://lane.stanford.edu/biomed-resources/bassett/bassett-sitemap.xml").getBytes(StandardCharsets.UTF_8);
 
     private static final long serialVersionUID = 1L;
 

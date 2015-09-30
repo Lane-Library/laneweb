@@ -468,6 +468,7 @@
 
     //reinitialize when content has changed
     Y.lane.on("lane:new-content", function() {
+        Y.lane.ToolTips.destructor();
         createTooltips();
     });
 

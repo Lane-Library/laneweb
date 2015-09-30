@@ -6,13 +6,13 @@
     </head>
 
     <body>
-        <div class="solr popInContent module">
+        <div class="solr popInContent module no-bookmarking">
             <div id="spellCheck">
                 <span class="popInLabel">Did You Mean: </span>
                 <a id="spellCheckLink" href="/index.html">?</a>
             </div>
             <div id="queryMapping">
-                <span class="popInLabel">Have You Tried: </span>
+                <span id="qmInfo" class="popInLabel">Recommended Resources <i class="fa fa-info-circle"></i></span>
             </div>
             <div id="findIt">
                 <span class="popInLabel">FindIt@Stanford eJournal </span>
@@ -47,6 +47,13 @@
                 </div>
             </div>
         </div>
+        <!-- tooltips -->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                xmlns:h="http://www.w3.org/1999/xhtml"
+                href="cocoon:/includes/tooltips.html"
+                xpointer="xpointer(//h:div[@id='queryMappingTooltips'])">
+          <xi:fallback />
+        </xi:include>
         <div class="tooltips">
             <span id="sourcesTooltip">Lane Search includes results from PubMed, Lane Catalog, the Lane website, and Lane Classes</span>
         </div>
