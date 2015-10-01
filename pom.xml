@@ -211,7 +211,7 @@
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
-            <version>1.0.10</version>
+            <version>1.0.12</version>
             <exclusions>
             	<exclusion>
             		<artifactId>log4j</artifactId>
