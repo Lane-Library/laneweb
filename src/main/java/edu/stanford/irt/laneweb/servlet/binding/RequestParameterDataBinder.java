@@ -26,7 +26,7 @@ public class RequestParameterDataBinder implements DataBinder {
         { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
 
     private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CATEGORY,
-        Model.CLASS_ID, Model.TIMEOUT, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION,
+        Model.CLASS_ID, Model.EMAIL, Model.TIMEOUT, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION,
             Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SOURCEID,
             Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN , Model.LIMIT };
 

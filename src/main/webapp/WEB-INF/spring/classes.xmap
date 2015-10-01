@@ -13,14 +13,14 @@
             <map:transform type="saxon" src="resources/xsl/classes/laneclasses.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-    </map:pipeline>
-    <!-- caching pipeline for static documents -->
-    <map:pipeline type="caching">
-        <map:match pattern="calendar.ics" type="wildcard">
+		<map:match pattern="calendar.ics" type="wildcard">
             <map:generate type="classes" src="cocoon://classes/data.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/calendar-ics.xsl"/>
             <map:serialize type="text"/>
         </map:match>
+    </map:pipeline>
+    <!-- caching pipeline for static documents -->
+    <map:pipeline type="caching">
         <map:match pattern="classeslist.xml" type="wildcard">
             <map:generate type="classes" src="cocoon://classes/all-data.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/laneclasses-list.xsl"/>
