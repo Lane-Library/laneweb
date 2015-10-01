@@ -93,7 +93,7 @@
          parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator">
         <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
         <property name="facetsToShowBrowse" value="20"/>
-        <property name="facetsToShowSearch" value="3"/>
+        <property name="facetsToShowSearch" value="4"/>
         <property name="meshToIgnoreInSearch">
             <list>
 		        <value>nomesh</value>
@@ -125,6 +125,7 @@
         </property>
         <property name="requiredPublicationTypes">
             <list>
+                <value>Clinical Trial</value>
                 <value>Randomized Controlled Trial</value>
                 <value>Review</value>
                 <value>Systematic Review</value>

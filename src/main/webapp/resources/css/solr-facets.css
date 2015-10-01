@@ -66,9 +66,14 @@
     padding: 0;
 }
 
-.facetHeader .headerLink {
+.facetHeader .fa-info-circle {
+    padding-left: 2px;
+}
+
+.facetHeader .seeAll {
     font-weight: normal;
-    padding-left: 5px;
+    float: right;
+    padding-right: 10px;
 }
 
 .facetCount {

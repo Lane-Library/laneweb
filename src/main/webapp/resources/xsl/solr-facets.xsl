@@ -21,7 +21,7 @@
     <xsl:variable name="facet-search-base-path" select="concat('?',replace($pageless-query-string,'&amp;(facets?=[^&amp;]+|facet.sort=index)',''))"/>
     <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr-facet-browse.html?',$pageless-query-string)"/>
     <xsl:variable name="facets-per-browse-page" select="20"/>
-    <xsl:variable name="values-per-facet" select="3"/>
+    <xsl:variable name="values-per-facet" select="4"/>
     
     <xsl:template match="facet">
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
@@ -58,11 +58,13 @@
         <xsl:if test="/linked-hash-map/entry/string[. = $id]">
 	        <xsl:choose>
 	            <xsl:when test="$search-mode">
-		            <li class="solrFacet facetHeader"><xsl:copy-of select="$label"/></li>
+		            <li class="solrFacet facetHeader">
+						<xsl:copy-of select="$label"/>
+						<xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[fieldName = 'publicationType' or count > 0]) > $values-per-facet">
+						          <span class="seeAll"><a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> see all </a></span>
+						</xsl:if>
+		            </li>
 		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $values-per-facet or enabled = 'true']"/>
-		            <xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[fieldName = 'publicationType' or count > 0]) > $values-per-facet">
-                        <li> <a rel="lightbox" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> all </a> <i class="icon fa fa-arrow-right"></i></li>
-		            </xsl:if>
 	            </xsl:when>
 	            <xsl:otherwise>
                     <li class="solrFacet facetHeader"><h5><xsl:copy-of select="$label"/></h5></li>
@@ -123,7 +125,7 @@
 		                <ul>
 							<xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'recordType'"/>
-		                        <xsl:with-param name="label">Results from <span class="headerLink">(<a id="sources" href="{$base-path}/help/choose-search.html#all-all">Sources searched</a>)</span></xsl:with-param>					   
+		                        <xsl:with-param name="label">Results from <span id="sources"><i class="fa fa-info-circle"></i></span></xsl:with-param>					   
 							</xsl:call-template>
 		
 							<xsl:call-template name="field">
@@ -148,7 +150,7 @@
 		                    
 		                    <xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'mesh'"/>                    
-		                        <xsl:with-param name="label" select="'Medical Subject Headings (MeSH)'"/>                    
+		                        <xsl:with-param name="label" select="'Subject (MeSH)'"/>                    
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">
