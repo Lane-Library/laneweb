@@ -16,11 +16,19 @@
 
 
 	<xsl:template match="/lc:classes">
-	
 		<xsl:text>BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//lane.stanford.edu//Classes Events v1.0//EN
-X-WR-CALNAME:Lane Classes
+</xsl:text>
+<xsl:choose>
+<xsl:when test="$email">
+<xsl:text>X-WR-CALNAME:My Lane Classes</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+<xsl:text>X-WR-CALNAME:Lane Library Classes</xsl:text>
+			</xsl:otherwise>
+</xsl:choose>
+<xsl:text>
 X-WR-CALDESC:Lane Medical Library offers an array of courses and presentations, including: database searching (PubMed, SCOPUS, etc.); reference/PDF/bibliography management (EndNote, Zotero); writing (grants, biomedical and scientific manuscripts); and  local tours (School of Medicine architectural history).  Registration is free to all Stanford affiliates (including SHC and LPCH).</xsl:text>
 	<xsl:choose>
 			<xsl:when test="$class-id">
