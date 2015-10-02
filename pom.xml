@@ -424,6 +424,7 @@
                                 <include>live-chat-min.css</include>
                                 <include>menu-min.css</include>
                                 <includes>gutters-min.css</includes>
+                                <include>back-to-top-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -480,6 +481,7 @@
                                 <include>same-height-min.js</include>
                                 <include>shibboleth-sfx-min.js</include>
                                 <include>youtube-min.js</include>
+                                <include>back-to-top-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
