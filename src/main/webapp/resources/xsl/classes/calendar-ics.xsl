@@ -4,8 +4,8 @@
 	exclude-result-prefixes="lc" version="2.0">
 
    <xsl:param name="class-id" />  
-
-
+   <xsl:param name="email"/>  
+   
   <xsl:variable name="today">
         <xsl:value-of select="year-from-date(current-date())"/>
         <xsl:value-of select="format-number(number(month-from-date(current-date())), '00')"/>
@@ -14,20 +14,35 @@
     </xsl:variable>
     
 
+
 	<xsl:template match="/lc:classes">
 		<xsl:text>BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//lane.stanford.edu//Classes Events v1.0//EN
-X-WR-CALNAME:Lane Classes
+</xsl:text>
+<xsl:choose>
+<xsl:when test="$email">
+<xsl:text>X-WR-CALNAME:My Lane Classes</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+<xsl:text>X-WR-CALNAME:Lane Library Classes</xsl:text>
+			</xsl:otherwise>
+</xsl:choose>
+<xsl:text>
 X-WR-CALDESC:Lane Medical Library offers an array of courses and presentations, including: database searching (PubMed, SCOPUS, etc.); reference/PDF/bibliography management (EndNote, Zotero); writing (grants, biomedical and scientific manuscripts); and  local tours (School of Medicine architectural history).  Registration is free to all Stanford affiliates (including SHC and LPCH).</xsl:text>
-		<xsl:choose>
+	<xsl:choose>
 			<xsl:when test="$class-id">
 				<xsl:call-template name="VEVENT" ><xsl:with-param name="classId" select="$class-id" /></xsl:call-template>
 			</xsl:when>
+			 <xsl:when test="$email">
+				<xsl:for-each select="./lc:event_data[./lc:event_instructors/lc:instructor/lc:email[ contains(.,$email)]]">
+				   <xsl:call-template name="VEVENT" ><xsl:with-param name="classId" select="./lc:module_id/text()" /></xsl:call-template>
+				</xsl:for-each>
+			</xsl:when>
 			<xsl:otherwise>
-			<xsl:for-each select="./lc:event_data">
-				<xsl:call-template name="VEVENT" ><xsl:with-param name="classId" select="./lc:module_id/text()" /></xsl:call-template>
-			</xsl:for-each>
+				<xsl:for-each select="./lc:event_data">
+				  	<xsl:call-template name="VEVENT" ><xsl:with-param name="classId" select="./lc:module_id/text()" /></xsl:call-template>
+				</xsl:for-each>
 			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:text>
@@ -58,8 +73,7 @@ SUMMARY:</xsl:text>
 			select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_name/text()" />
 		<xsl:text>
 DESCRIPTION:</xsl:text>
-		<xsl:value-of
-			select="concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....')" />
+		<xsl:value-of select="concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....')" />
 		<xsl:text>		
 ORGANIZER;CN=</xsl:text>
 			<xsl:choose>

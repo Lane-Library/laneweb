@@ -46,6 +46,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/live-chat.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/menu.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/gutters.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/back-to-top.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
@@ -158,7 +159,7 @@
                                 <li><a href="/portals/emergency.html">Emergency Medicine</a></li>
                                 <li><a href="/portals/peds.html">Pediatrics</a></li>
                                 <li><a href="/portals/ihealth.html">Global Health</a></li>
-                                <li><a href="/portals/pharmacy.html">Pharmacy</a></li> 
+                                <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
                                 <li><a href="/portals/hematology.html">Hematology</a></li>
                                 <li><a href="/portals/pmr.html">Physical &amp; Rehabilitation Med</a></li>
                                 <li><a href="/portals/rheumatology.html">Immunology/Rheumatology</a></li>
@@ -168,7 +169,7 @@
                                 <li><a href="/portals/internal-medicine.html">Internal Medicine</a></li>
                                 <li><a href="/portals/pulmonary.html">Pulmonary</a></li>
                                 <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
-                                <li><a href="/portals/reference.html">Reference Desk</a></li>  
+                                <li><a href="/portals/reference.html">Reference Desk</a></li>
                                 <li><a href="/portals/medicalEd.html">Medical Education</a></li>
                                 <li><a href="/portals/spiritual.html">Spiritual Care</a></li>
                                 <li><a href="/portals/cultural.html">Multicultural Health</a></li>
@@ -337,7 +338,7 @@
             <ul class="centered">
                 <li id="footer-su"><a href="http://www.stanford.edu/">Stanford University</a></li>
                 <li id="footer-sm"><a href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
-                <li id="footer-shc"><a href="http://www.stanfordhealthcare.org/">Stanford Hospitals and Clinics</a></li>
+                <li id="footer-shc"><a href="http://www.stanfordhospital.org/">Stanford Hospitals and Clinics</a></li>
                 <li id="footer-sch"><a href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
                 <li id="footer-sul"><a href="http://library.stanford.edu/">Stanford University Libraries</a></li>
             </ul>

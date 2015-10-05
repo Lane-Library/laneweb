@@ -4,6 +4,7 @@
         basePath = Model.get(Model.BASE_PATH) || "",
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
         queryMapping = Y.one('#queryMapping'),
+        queryMappingDescriptor = Y.one('#queryMappingDescriptor'),
         getResultCounts,
         queryMapResources,
         getResourcesString = function() {
@@ -74,8 +75,9 @@
                 queryMapping.append(span);
                 queryMapResources[i].anchor = anchor;
             }
-            if (document.getElementById('queryMappingDescriptor')) {
-                document.getElementById('queryMappingDescriptor').appendChild(document.createTextNode(resourceMap.descriptor));
+            if (queryMappingDescriptor) {
+                queryMappingDescriptor.append(resourceMap.descriptor.descriptorName);
+                Y.lane.fire("lane:new-content");
             }
             getResultCounts();
             // track mapped term, descriptor, and resources

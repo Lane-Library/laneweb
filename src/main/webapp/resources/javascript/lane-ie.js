@@ -14,7 +14,7 @@
             //this rotates the feedback link text
             node = Y.one(".feedback-link span");
             if (node) {
-                node.setStyles({"filter": "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)","width":"70px","top":"16px","left":"7px"});
+                node.setStyles({"filter": "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)","width":"90px","top":"8px","left":"7px"});
             }
         }
     }
