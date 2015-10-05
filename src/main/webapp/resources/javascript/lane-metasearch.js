@@ -42,13 +42,6 @@
                     Y.DataType.Number.format(result.hits), {
                         thousandsSeparator: ","
                     });
-                    result.name = (node.get('innerHTML')) ? node.get('innerHTML') : '';
-                    // fix for IE: @ in text of element will cause element text to be replaced by href value
-                    // relies on result.name being set before url is changed
-                    // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
-                    if (Y.UA.ie) {
-                        node.set('innerHTML',result.name);
-                    }
                     node.setAttribute('target', '_blank');
                     node.removeClass('metasearch');
                 } else if (result.status === 'failed' || result.status === 'canceled') {
