@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-10-05" version="3.1.8" description="3.1.8 bug fix release">
+            <action date="2015-10-05" dev="ceyates" issue="111638" type="remove">
+                remove javascript workarounds for Internet Explorer less than version 8
+            </action>
+            <action date="2015-10-02" dev="ceyates" issue="110541" type="add">
+                create a scroll back to top link
+            </action>
+        </release>
     	<release date="2015-09-28" version="3.1.7" description="3.1.7 bug fix release">
             <action date="2015-09-25" dev="ryanmax" issue="111416" type="fix">
                 Contact Us button text is cutout in IE8
