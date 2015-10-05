@@ -84,7 +84,7 @@
     });
 
     Y.on("click", function(event) {
-        var href, regex, url,
+        var href, regex,
             anchor = event.target.ancestor("a") || event.target,
             rel = anchor.get("rel"),
             model = Y.lane.Model,
@@ -95,9 +95,7 @@
             // of various base paths (eg /stage)
             regex = new RegExp("(.+)//([^/]+)(" + basePath + "/)(.+)".replace(/\//g, "\\\/"));
             href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
-            //IE <= 7 includes the hash in the href, so remove it from request url:
-            url = href.indexOf("#") === -1 ? href : href.substring(0, href.indexOf("#"));
-            Y.io(url, {
+            Y.io(href, {
                 on : {
                     success : function(id, o) {
                         var lightbox = Y.lane.Lightbox;
