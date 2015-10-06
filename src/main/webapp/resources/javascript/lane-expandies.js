@@ -1,6 +1,6 @@
 (function() {
 
-    var i, anims, expandies = Y.all(".expandy");
+    var i, expandies = Y.all(".expandy");
 
     //only do this if there are expandies
     if (expandies.size() > 0) {
