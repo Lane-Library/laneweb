@@ -140,13 +140,7 @@
             this.resetValidator();
             focusElement = items.item(event.newVal).one("textarea, input[type='text']");
             if (focusElement) {
-                try {
-                    focusElement.focus();
-                } catch (e) {
-                    //IE6 throws an error here:
-                    //Can't move focus to the control because it is invisible, not enabled, or
-                    //of a type that does not accept the focus.
-                }
+                focusElement.focus();
             }
         },
         _handleMenuClick : function(event) {
