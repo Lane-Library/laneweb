@@ -1,5 +1,8 @@
 
 /*--------------ALL forms within lightbox-----------------------------------------------------*/
+#feedback {
+    cursor:move;
+}
 
 #feedback form,#subscribe form {
 	padding: 20px;

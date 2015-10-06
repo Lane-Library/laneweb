@@ -343,7 +343,7 @@
                 <li id="footer-sul"><a href="http://library.stanford.edu/">Stanford University Libraries</a></li>
             </ul>
         </div>
-        <div><a class="feedback-link" rel="lightbox" href="/help/feedback.html"><span>CONTACT US</span></a></div>
+        <div><a class="feedback-link" rel="lightbox disableBackground" href="/help/feedback.html"><span>CONTACT US</span></a></div>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="http://yui.yahooapis.com/3.18.1/yui/yui-debug.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>

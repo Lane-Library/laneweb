@@ -8,6 +8,7 @@
             this.after("visibleChange", this._afterVisibleChange);
             // close on escape
             Y.one("doc").on("key", this.hide, "esc", this);
+            this.get("background").on("click", this.hide, this);
         },
         setContent : function(content) {
             this.get("contentBox").set("innerHTML", content);
@@ -16,8 +17,8 @@
         },
         _afterVisibleChange : function(event) {
             if (!event.newVal) {
-                //TODO: make the background a property of Lightbox
-                Y.lane.LightboxBg.hide();
+                this.get("background").hide();
+                this.set("disableBackground", false);
             }
         },
         _animate : function() {
@@ -54,7 +55,9 @@
         },
         _onVisibleChange : function(event) {
             if (event.newVal) {
-                Y.lane.LightboxBg.show();
+                if (!this.get("disableBackground")) {
+                    this.get("background").show();
+                }
                 this._animate();
             }
         }
@@ -63,6 +66,15 @@
     Lightbox.ATTRS = {
         url : {
             value : null
+        },
+        disableBackground: {
+            value: false
+        },
+        background: {
+            value: new LightboxBg({
+                visible : false,
+                render : true
+            })
         }
     };
 
@@ -71,35 +83,27 @@
         render : true
     });
 
-    Y.lane.LightboxBg = new LightboxBg({
-        visible : false,
-        render : true
-    });
-
     //TODO: put more of this initialization into the Lightbox object
-    //case 74468 remove close link, close on background click:
-    Y.lane.LightboxBg.on("click", function(event) {
-        event.preventDefault();
-        Y.lane.Lightbox.hide();
-    });
-
     Y.on("click", function(event) {
         var href, regex,
             anchor = event.target.ancestor("a") || event.target,
             rel = anchor.get("rel"),
             model = Y.lane.Model,
-            basePath = model.get(model.BASE_PATH) || "";
+            basePath = model.get(model.BASE_PATH) || "",
+            disableBackground;
         if (rel && rel.indexOf("lightbox") === 0) {
             event.preventDefault();
             // need to dynamically create regex for getting /plain url because
             // of various base paths (eg /stage)
             regex = new RegExp("(.+)//([^/]+)(" + basePath + "/)(.+)".replace(/\//g, "\\\/"));
             href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
+            disableBackground = rel.indexOf("disableBackground") > -1;
             Y.io(href, {
                 on : {
                     success : function(id, o) {
                         var lightbox = Y.lane.Lightbox;
                         lightbox.set("url", href);
+                        lightbox.set("disableBackground", disableBackground);
                         lightbox.setContent(o.responseText);
                         lightbox.show();
                     }

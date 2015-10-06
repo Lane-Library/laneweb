@@ -15,6 +15,9 @@
         activeItem : {
             value : 0
         },
+        drag: {
+            value: null
+        },
         items : {
             value : null,
             writeOnce : true
@@ -38,6 +41,7 @@
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
             this.get("items").addClass(this.getClassName("item"));
+            this.set("drag", new Y.DD.Drag({node: "#feedback"}));
         },
         bindUI : function() {
             var self = this, eventHandle1, eventHandle2;
@@ -56,6 +60,11 @@
                 }
             });
             Y.one("#feedback .close").on("click", function(event) {
+                // TODO: shouldn't have to do this with drag, only because purchase-suggestions extends feedback
+                var drag = this.get("drag");
+                if (drag) {
+                    drag.destroy();
+                }
                 event.preventDefault();
                 Y.lane.Lightbox.hide();
             });
