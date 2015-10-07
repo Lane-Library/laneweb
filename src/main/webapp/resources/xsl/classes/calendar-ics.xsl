@@ -76,7 +76,7 @@ SUMMARY:</xsl:text>
 		<xsl:text>
 DESCRIPTION:</xsl:text>
 		<xsl:value-of select="replace(concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....'), ',','\\,')" />
-		<xsl:text>		
+		<xsl:text>
 ORGANIZER;CN=</xsl:text>
 			<xsl:choose>
 					<xsl:when test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:fname/text() != ''">
