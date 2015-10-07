@@ -1,35 +1,9 @@
 (function() {
 
-    var i, anims, expandies = Y.all(".expandy");
+    var i, expandies = Y.all(".expandy");
 
     //only do this if there are expandies
     if (expandies.size() > 0) {
-
-        if (Y.UA.ie && Y.UA.ie < 8) {
-            //IE 7 fails to redraw footer, etc unless we do this:
-            anims  = {};
-            Y.Plugin.NodeAccordion.prototype._animate = function(id, conf, fn) {
-                var anim = anims[id], nodes = Y.all(".sb-tb");
-                if ((anim) && (anim.get ('running'))) {
-                    anim.stop();
-                }
-                if (Y.Lang.isFunction(this.get("anim"))) {
-                    conf.easing = this.get("anim");
-                }
-                anim = new Y.Anim(conf);
-                anim.on('end', fn, this);
-                if (nodes) {
-                    //toggle display style to force redraw
-                    anim.on("end", function() {
-                        nodes.setStyle("display", "none");
-                        nodes.setStyle("display", "block");
-                    }, this);
-                }
-                anim.run();
-                anims[id] = anim;
-                return anim;
-            };
-        }
 
         /**
          * An ExpandyItem represents a single item in an expandy list

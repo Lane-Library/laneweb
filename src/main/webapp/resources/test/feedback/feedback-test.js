@@ -16,7 +16,7 @@
             this.resetContent();
             var feedback = Y.Widget.getByNode("#feedback");
             feedback.sendFeedback(Y.one("form"));
-            Y.Assert.areEqual(feedback.get("thanks"), feedback.get("contentBox").get("text"));
+            Y.Assert.areEqual(feedback.get("thanks"), feedback.get("contentBox").one(".feedback-contents").get("text"));
         }
     });
 

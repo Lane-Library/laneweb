@@ -35,13 +35,6 @@
 	margin:0 1em 13px 0;
 }
 
-/*only one style for the left column nav remain to keep the current page link bold*/
-.sectionMenu em {
-	font-style: normal;
-	font-weight: bold;
-	color: #820000;
-}
-
 .landing {
 	padding: 0
 }

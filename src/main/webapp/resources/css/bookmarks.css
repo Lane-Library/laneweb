@@ -20,6 +20,7 @@
     border-radius:3px;
     text-align:center;
     line-height:17px;
+    background-color: white;
     background: linear-gradient(to right, white , #ccc);
 }
 .bookmark-link .fa {

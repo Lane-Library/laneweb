@@ -1,5 +1,8 @@
 
 /*--------------ALL forms within lightbox-----------------------------------------------------*/
+#feedback {
+    cursor:move;
+}
 
 #feedback form,#subscribe form {
 	padding: 20px;
@@ -105,6 +108,9 @@
 		Direction =   135, Color =   '#989898' );
 }
 
+.feedback-item-thanks {
+    display:none;
+}
 /*--------------suggestion for purchase styles--------------------------------------------*/
 #purchaseMenu {
 	margin: 9px 0 40px;

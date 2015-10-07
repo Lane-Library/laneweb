@@ -1,6 +1,8 @@
 (function() {
 
-    var Feedback = function(config) {
+    var DEFAULT_THANKS = "Thank you for your feedback.",
+
+    Feedback = function(config) {
         Feedback.superclass.constructor.apply(this, arguments);
     };
 
@@ -15,6 +17,9 @@
         activeItem : {
             value : 0
         },
+        drag: {
+            value: null
+        },
         items : {
             value : null,
             writeOnce : true
@@ -27,7 +32,7 @@
             value : "Sending feedback."
         },
         thanks : {
-            value : "Thank you for your feedback."
+            value : DEFAULT_THANKS
         },
         validator : {
             value : null
@@ -38,6 +43,7 @@
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
             this.get("items").addClass(this.getClassName("item"));
+            this.set("drag", new Y.DD.Drag({node: ".yui3-lightbox"}));
         },
         bindUI : function() {
             var self = this, eventHandle1, eventHandle2;
@@ -56,9 +62,14 @@
                 }
             });
             Y.one("#feedback .close").on("click", function(event) {
+                // TODO: shouldn't have to do this with drag, only because purchase-suggestions extends feedback
+                var drag = this.get("drag");
+                if (drag) {
+                    drag.destroy();
+                }
                 event.preventDefault();
                 Y.lane.Lightbox.hide();
-            });
+            }, this);
             //create a TelInput object for each input with type="tel" (see telinput.js)
             this.get("srcNode").all("input[type='tel']").each(function(input) {
                 (new Y.lane.TelInput(input));
@@ -68,17 +79,14 @@
             var activeItem = this.get("activeItem"),
                 items = this.get("items"),
                 srcNode = this.get("srcNode"),
-                sending = srcNode.one("#sending"),
-                thanks = srcNode.one("#thanks");
+                sending = srcNode.one("#sending");
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
             items.item(activeItem).addClass(this.getClassName("item", "active"));
             this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
             if (sending) {
                 this.set("sending", sending.get("innerHTML"));
             }
-            if (thanks) {
-                this.set("thanks", thanks.get("innerHTML"));
-            }
+            this._resetThanks();
         },
         resetValidator : function() {
             var activeItem = this.get("activeItem"),
@@ -88,7 +96,7 @@
         sendFeedback : function(form) {
             var contentBox = this.get("contentBox"),
                 data = Y.JSON.stringify(this._getFeedback(form));
-            contentBox.set("innerHTML", this.get("sending"));
+            contentBox.one(".feedback-contents").set("innerHTML", this.get("sending"));
             contentBox.scrollIntoView();
             Y.io(form.getAttribute("action"), {
                 method : "post",
@@ -98,7 +106,7 @@
                 },
                 on : {
                     success : function() {
-                        this.get("contentBox").set("innerHTML", this.get("thanks"));
+                        this.get("contentBox").one(".feedback-contents").set("innerHTML", this.get("thanks"));
                     },
                     failure : function() {
                         alert("Sorry, sending feedback failed.");
@@ -123,21 +131,22 @@
                 items = this.get("items"),
                 menuActiveClass = this.getClassName("menu", "active"),
                 itemActiveClass = this.getClassName("item", "active"),
+                newItem = items.item(event.newVal),
+                newItemThanks = newItem.one(".feedback-item-thanks"),
                 focusElement;
             menu.item(event.prevVal).removeClass(menuActiveClass);
             items.item(event.prevVal).removeClass(itemActiveClass);
             menu.item(event.newVal).addClass(menuActiveClass);
-            items.item(event.newVal).addClass(itemActiveClass);
+            newItem.addClass(itemActiveClass);
+            if (newItemThanks) {
+                this.set("thanks", newItemThanks.get("innerHTML"));
+            } else {
+                this._resetThanks();
+            }
             this.resetValidator();
             focusElement = items.item(event.newVal).one("textarea, input[type='text']");
             if (focusElement) {
-                try {
-                    focusElement.focus();
-                } catch (e) {
-                    //IE6 throws an error here:
-                    //Can't move focus to the control because it is invisible, not enabled, or
-                    //of a type that does not accept the focus.
-                }
+                focusElement.focus();
             }
         },
         _handleMenuClick : function(event) {
@@ -154,6 +163,11 @@
             if (event.prevVal) {
                 event.prevVal.destroy();
             }
+        },
+        _resetThanks: function() {
+            var srcNode = this.get("srcNode"),
+                thanks = srcNode.one("#thanks");
+            this.set("thanks", thanks ? thanks.get("innerHTML") : DEFAULT_THANKS);
         }
     });
 

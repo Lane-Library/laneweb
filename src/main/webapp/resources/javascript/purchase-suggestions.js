@@ -22,6 +22,10 @@
     };
 
     Y.extend(PurchaseSuggestions, Y.lane.Feedback, {
+        renderUI : function() {
+            this.get("menu").addClass(this.getClassName("menu"));
+            this.get("items").addClass(this.getClassName("item"));
+        },
         bindUI : function() {
             this.get("menu").on("click", this._handleMenuClick, this);
             this.after("activeItemChange", this._handleActiveItemChange);

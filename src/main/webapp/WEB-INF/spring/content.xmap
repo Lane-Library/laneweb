@@ -314,7 +314,6 @@
         <map:match pattern="templates/**.xml" type="wildcard">
             <map:generate type="file" src="resources/templates/{1}.xml"/>
             <map:transform type="xinclude"/>
-            <map:transform type="joost" src="resources/xsl/template-menu-includes.stx"/>
             <map:serialize type="xml"/>
         </map:match>
         <!-- secure/** generates an error unless used from a pipeline -->
