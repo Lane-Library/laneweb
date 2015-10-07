@@ -29,6 +29,7 @@ PRODID:-//lane.stanford.edu//Classes Events v1.0//EN
 			</xsl:otherwise>
 </xsl:choose>
 <xsl:text>
+METHOD:PUBLISH
 X-WR-TIMEZONE:America/Los_Angeles
 X-WR-CALDESC:Lane Medical Library offers an array of courses and presentations, including: database searching (PubMed, SCOPUS, etc.); reference/PDF/bibliography management (EndNote, Zotero); writing (grants, biomedical and scientific manuscripts); and  local tours (School of Medicine architectural history).  Registration is free to all Stanford affiliates (including SHC and LPCH).</xsl:text>
 	<xsl:choose>
@@ -54,7 +55,6 @@ END:VCALENDAR</xsl:text>
 	<xsl:template name="VEVENT">
 		<xsl:param name="classId" /><xsl:text>
 BEGIN:VEVENT
-METHOD:PUBLISH
 UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 URL:http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 DTSTAMP:</xsl:text><xsl:value-of select="$today"/><xsl:text>
