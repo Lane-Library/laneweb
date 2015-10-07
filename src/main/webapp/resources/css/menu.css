@@ -33,3 +33,6 @@
 .menu a:hover {
     background-color: #555;
 }
+.menu .menuitem-active {
+    background-color: #707070;
+}

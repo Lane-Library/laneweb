@@ -35,7 +35,6 @@
                             {selector:".lane-nav", category:"lane:laneNav-top"},
                             {selector:"#qlinks", category:"lane:quickLinkClick"},
                             {selector:".banner-content", category:"lane:bannerClick"},
-                            {selector:".sectionMenu", category:"lane:laneNav-sectionMenu"},
                             {selector:"#laneFooter", category:"lane:laneNav-footer"}
                             ];
                 //TODO: this counts My Bookmarks clicks as well: check if href=/favorites.html and skip?
@@ -407,5 +406,5 @@
         Tracker.addTarget(Lane);
 
         Y.all(".searchFacet, .yui3-accordion-item-trigger, *[rel^='popup local']").setData("isTrackableAsPageView", true);
-        Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, #qlinks a, .sectionMenu a, .banner-content a").setData("isTrackableAsEvent", true);
+        Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, #qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
 })();

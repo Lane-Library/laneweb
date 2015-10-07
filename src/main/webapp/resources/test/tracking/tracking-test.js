@@ -119,16 +119,6 @@ Y.use("*",  function(){
             Y.Assert.areEqual(link.get("text"), this.pageView.title);
         },
 
-        testSectionMenuClick: function() {
-            var link = Y.one(".sectionMenu a");
-            link.simulate("click");
-            Y.Assert.areEqual(link.get("text"), this.event.label);
-            Y.Assert.areEqual("lane:laneNav-sectionMenu", this.event.category);
-            Y.Assert.areEqual(link.get("href"), this.event.action);
-            Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
-            Y.Assert.areEqual(link.get("text"), this.pageView.title);
-        },
-
         testLaneFooterClick: function() {
             var link = Y.one("#laneFooter a");
             link.simulate("click");

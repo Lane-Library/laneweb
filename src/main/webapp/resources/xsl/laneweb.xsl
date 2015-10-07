@@ -337,23 +337,11 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- surround <a> with <em> for the menu item for the current page -->
-    <xsl:template match="h:ul[contains(@class,'sectionMenu')]/h:li//h:a[@href=$path]">
-      <em><xsl:copy><xsl:apply-templates select="attribute::node() | child::node()"/></xsl:copy></em>
-    </xsl:template>
-
-    <!-- ugly hack to get all the resource pages to cause the main menu link to highlight,
-        gets a priority=1 because ambiguous with the preceding template-->
-    <xsl:template match="h:ul[contains(@class, 'sectionMenu')]/h:li/h:a[starts-with(@href, '/biomed-resources/')]" priority="1">
-        <xsl:variable name="href-base" select="substring-before(@href, '.html')"/>
-        <xsl:choose>
-            <xsl:when test="starts-with($path, $href-base)">
-                <em><xsl:copy><xsl:apply-templates select="attribute::node()|child::node()"/></xsl:copy></em>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:copy><xsl:apply-templates select="attribute::node()|child::node()"/></xsl:copy>
-            </xsl:otherwise>
-        </xsl:choose>
+    <!-- att class menuitem-active to the menu item link for the current page -->
+    <xsl:template match="h:ul[contains(@class,'menu')]/h:li/h:a[@href=$path]">
+      <a class="menuitem-active">
+          <xsl:apply-templates select="attribute::node()|child::node()"/>
+      </a>
     </xsl:template>
 
     <!-- disable live chat if not scheduled to be available -->
