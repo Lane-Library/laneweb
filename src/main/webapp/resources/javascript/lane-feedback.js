@@ -1,6 +1,8 @@
 (function() {
 
-    var Feedback = function(config) {
+    var DEFAULT_THANKS = "Thank you for your feedback.",
+
+    Feedback = function(config) {
         Feedback.superclass.constructor.apply(this, arguments);
     };
 
@@ -30,7 +32,7 @@
             value : "Sending feedback."
         },
         thanks : {
-            value : "Thank you for your feedback."
+            value : DEFAULT_THANKS
         },
         validator : {
             value : null
@@ -77,17 +79,14 @@
             var activeItem = this.get("activeItem"),
                 items = this.get("items"),
                 srcNode = this.get("srcNode"),
-                sending = srcNode.one("#sending"),
-                thanks = srcNode.one("#thanks");
+                sending = srcNode.one("#sending");
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
             items.item(activeItem).addClass(this.getClassName("item", "active"));
             this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
             if (sending) {
                 this.set("sending", sending.get("innerHTML"));
             }
-            if (thanks) {
-                this.set("thanks", thanks.get("innerHTML"));
-            }
+            this._resetThanks();
         },
         resetValidator : function() {
             var activeItem = this.get("activeItem"),
@@ -107,7 +106,7 @@
                 },
                 on : {
                     success : function() {
-                        this.get("contentBox").one(".feedback-contents").set("innerHTML", this._getThanks());
+                        this.get("contentBox").one(".feedback-contents").set("innerHTML", this.get("thanks"));
                     },
                     failure : function() {
                         alert("Sorry, sending feedback failed.");
@@ -115,9 +114,6 @@
                 },
                 context : this
             });
-        },
-        _getThanks: function() {
-            return this.get("thanks");
         },
         _getFeedback : function(form) {
             var nodes = form.all("input, textarea, select"), feedback = {}, i, node, name;
@@ -135,11 +131,18 @@
                 items = this.get("items"),
                 menuActiveClass = this.getClassName("menu", "active"),
                 itemActiveClass = this.getClassName("item", "active"),
+                newItem = items.item(event.newVal),
+                newItemThanks = newItem.one(".feedback-item-thanks"),
                 focusElement;
             menu.item(event.prevVal).removeClass(menuActiveClass);
             items.item(event.prevVal).removeClass(itemActiveClass);
             menu.item(event.newVal).addClass(menuActiveClass);
-            items.item(event.newVal).addClass(itemActiveClass);
+            newItem.addClass(itemActiveClass);
+            if (newItemThanks) {
+                this.set("thanks", newItemThanks.get("innerHTML"));
+            } else {
+                this._resetThanks();
+            }
             this.resetValidator();
             focusElement = items.item(event.newVal).one("textarea, input[type='text']");
             if (focusElement) {
@@ -160,6 +163,11 @@
             if (event.prevVal) {
                 event.prevVal.destroy();
             }
+        },
+        _resetThanks: function() {
+            var srcNode = this.get("srcNode"),
+                thanks = srcNode.one("#thanks");
+            this.set("thanks", thanks ? thanks.get("innerHTML") : DEFAULT_THANKS);
         }
     });
 
