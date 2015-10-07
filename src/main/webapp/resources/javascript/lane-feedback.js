@@ -41,7 +41,7 @@
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
             this.get("items").addClass(this.getClassName("item"));
-            this.set("drag", new Y.DD.Drag({node: "#feedback"}));
+            this.set("drag", new Y.DD.Drag({node: ".yui3-lightbox"}));
         },
         bindUI : function() {
             var self = this, eventHandle1, eventHandle2;
