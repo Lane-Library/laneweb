@@ -54,6 +54,7 @@ END:VCALENDAR</xsl:text>
 	<xsl:template name="VEVENT">
 		<xsl:param name="classId" /><xsl:text>
 BEGIN:VEVENT
+METHOD:PUBLISH
 UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 URL:http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 DTSTAMP:</xsl:text><xsl:value-of select="$today"/><xsl:text>
