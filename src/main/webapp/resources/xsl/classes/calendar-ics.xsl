@@ -29,6 +29,7 @@ PRODID:-//lane.stanford.edu//Classes Events v1.0//EN
 			</xsl:otherwise>
 </xsl:choose>
 <xsl:text>
+X-WR-TIMEZONE:America/Los_Angeles
 X-WR-CALDESC:Lane Medical Library offers an array of courses and presentations, including: database searching (PubMed, SCOPUS, etc.); reference/PDF/bibliography management (EndNote, Zotero); writing (grants, biomedical and scientific manuscripts); and  local tours (School of Medicine architectural history).  Registration is free to all Stanford affiliates (including SHC and LPCH).</xsl:text>
 	<xsl:choose>
 			<xsl:when test="$class-id">
@@ -56,13 +57,13 @@ BEGIN:VEVENT
 UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 URL:http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 DTSTAMP:</xsl:text><xsl:value-of select="$today"/><xsl:text>
-DTSTART;TZID=America/Los_Angeles:</xsl:text>
+DTSTART:</xsl:text>
 		<xsl:call-template name="formatDate">
 			<xsl:with-param name="dateTime"
 				select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_dates/lc:start_date/text()" />
 		</xsl:call-template>
 		<xsl:text>
-DTEND;TZID=America/Los_Angeles:</xsl:text>
+DTEND:</xsl:text>
 		<xsl:call-template name="formatDate">
 			<xsl:with-param name="dateTime"
 				select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_dates/lc:end_date/text()" />
@@ -70,10 +71,10 @@ DTEND;TZID=America/Los_Angeles:</xsl:text>
 		<xsl:text>
 SUMMARY:</xsl:text>
 		<xsl:value-of
-			select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_name/text()" />
+			select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_name/text(), ',','\\,')" />
 		<xsl:text>
 DESCRIPTION:</xsl:text>
-		<xsl:value-of select="concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....')" />
+		<xsl:value-of select="replace(concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....'), ',','\\,')" />
 		<xsl:text>		
 ORGANIZER;CN=</xsl:text>
 			<xsl:choose>
