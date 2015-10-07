@@ -19,6 +19,7 @@
 		<xsl:text>BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//lane.stanford.edu//Classes Events v1.0//EN
+METHOD:PUBLISH
 </xsl:text>
 <xsl:choose>
 <xsl:when test="$email">
@@ -29,7 +30,6 @@ PRODID:-//lane.stanford.edu//Classes Events v1.0//EN
 			</xsl:otherwise>
 </xsl:choose>
 <xsl:text>
-METHOD:PUBLISH
 X-WR-TIMEZONE:America/Los_Angeles
 X-WR-CALDESC:Lane Medical Library offers an array of courses and presentations, including: database searching (PubMed, SCOPUS, etc.); reference/PDF/bibliography management (EndNote, Zotero); writing (grants, biomedical and scientific manuscripts); and  local tours (School of Medicine architectural history).  Registration is free to all Stanford affiliates (including SHC and LPCH).</xsl:text>
 	<xsl:choose>
@@ -79,14 +79,15 @@ DESCRIPTION:</xsl:text>
 		<xsl:text>		
 ORGANIZER;CN=</xsl:text>
 			<xsl:choose>
-					<xsl:when test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text() != ''">
-						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
+					<xsl:when test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:fname/text() != ''">
+						<xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
+						<xsl:text>:MAILTO:</xsl:text><xsl:value-of select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text()"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
+						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
 					</xsl:otherwise>
 				</xsl:choose>
-		<xsl:text>:
+		<xsl:text>
 END:VEVENT</xsl:text>
 	</xsl:template>
 
