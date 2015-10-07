@@ -41,3 +41,7 @@ content:'';
     margin:12px 0 0;
     padding-bottom:4px;
 }
+
+.solrSearch .eresources{
+    margin-top:0;
+}
