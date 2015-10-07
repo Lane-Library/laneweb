@@ -67,7 +67,7 @@
                 }
                 event.preventDefault();
                 Y.lane.Lightbox.hide();
-            });
+            }, this);
             //create a TelInput object for each input with type="tel" (see telinput.js)
             this.get("srcNode").all("input[type='tel']").each(function(input) {
                 (new Y.lane.TelInput(input));
@@ -97,7 +97,7 @@
         sendFeedback : function(form) {
             var contentBox = this.get("contentBox"),
                 data = Y.JSON.stringify(this._getFeedback(form));
-            contentBox.set("innerHTML", this.get("sending"));
+            contentBox.one(".feedback-contents").set("innerHTML", this.get("sending"));
             contentBox.scrollIntoView();
             Y.io(form.getAttribute("action"), {
                 method : "post",
@@ -107,7 +107,7 @@
                 },
                 on : {
                     success : function() {
-                        this.get("contentBox").set("innerHTML", this.get("thanks"));
+                        this.get("contentBox").one(".feedback-contents").set("innerHTML", this._getThanks());
                     },
                     failure : function() {
                         alert("Sorry, sending feedback failed.");
@@ -115,6 +115,9 @@
                 },
                 context : this
             });
+        },
+        _getThanks: function() {
+            return this.get("thanks");
         },
         _getFeedback : function(form) {
             var nodes = form.all("input, textarea, select"), feedback = {}, i, node, name;
