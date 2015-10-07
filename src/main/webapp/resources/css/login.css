@@ -18,8 +18,8 @@
 	display:inline-block;
 	width: 250px;
 	height: 70px;
-	background-position: -346px -11px;
-	background-image: url('../images/organizational-logos.png');
+	background-position: -355px -18px;
+	background-image: url('../images/organizations-logos-large.png');
 	background-repeat: no-repeat;
 }
 
@@ -70,25 +70,25 @@
 	height: 50px;
 	background-color:  white;
 	background-repeat: no-repeat;
-	background-image: url('../images/organizations-logo-large.jpg');
+	background-image: url('../images/organizations-logos-large.png');
 }
 
 #Stanford span{
-background-position: -17px -23px;
+background-position: -22px -272px;
 }
 #SHC span{
-background-position: -211px -23px;
+background-position: -218px -272px;
 }
 #UHA span{
-background-position: -409px -17px;
+background-position: -407px -272px;
 }
 
 #LPCH span{
-background-position: -613px -18px;
+background-position: -598px -272px;
 }
 
 #PCHA span{
-background-position: -807px -18px;
+background-position: -784px -272px;
 }
 
 #persistent .help{
