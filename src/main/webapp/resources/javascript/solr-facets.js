@@ -33,7 +33,7 @@
                 html += '<span>' + label + '<a title="remove filter" href="' + url + '"> <i class="fa fa-times-circle fa-lg"></i></a></span>';
             }
             if (enabledFacets.size() > 0) {
-                html += '<span class="clearLimits"><a href="' + basePath + '/search.html?source=all-all&q=' + query + '">Clear all to show</a> ' + count + ' <a href="' + basePath + '/search.html?source=all-all&q=' + query + '">results</a></span>';
+                html += '<span class="clearLimits"><a href="' + basePath + '/search.html?source=all-all&q=' + query + '">Clear all</a> to show ' + count + ' results</span>';
                 limitsContainer.append(html);
             }
         },
