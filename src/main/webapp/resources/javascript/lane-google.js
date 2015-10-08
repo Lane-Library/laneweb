@@ -12,6 +12,8 @@
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
                     gaPageTracker = _gat._createTracker("UA-3202241-2","gaPageTracker");
+                } else if (host.match("lane-beta.stanford.edu")) {
+                    gaPageTracker = _gat._createTracker("UA-3203486-9","gaPageTracker");
                 } else {
                     gaPageTracker = _gat._createTracker("UA-3203486-2","gaPageTracker");
                 }
