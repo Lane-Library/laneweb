@@ -55,16 +55,16 @@ END:VCALENDAR</xsl:text>
 	<xsl:template name="VEVENT">
 		<xsl:param name="classId" /><xsl:text>
 BEGIN:VEVENT
-UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>
+UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>@lane.stanford.edu
 URL:http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 DTSTAMP:</xsl:text><xsl:value-of select="$today"/><xsl:text>
-DTSTART:</xsl:text>
+DTSTART;TZID=America/Los_Angeles:</xsl:text>
 		<xsl:call-template name="formatDate">
 			<xsl:with-param name="dateTime"
 				select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_dates/lc:start_date/text()" />
 		</xsl:call-template>
 		<xsl:text>
-DTEND:</xsl:text>
+DTEND;TZID=America/Los_Angeles:</xsl:text>
 		<xsl:call-template name="formatDate">
 			<xsl:with-param name="dateTime"
 				select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_dates/lc:end_date/text()" />
@@ -87,8 +87,8 @@ ORGANIZER;CN=</xsl:text>
 						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
 					</xsl:otherwise>
 				</xsl:choose>
-		<xsl:text>
-CONTACT:</xsl:text><xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
+				<xsl:text>
+LOCATION:</xsl:text>	<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:venue/lc:venue_name/text(), ',' , '\\,' )" />
 		<xsl:text>
 END:VEVENT</xsl:text>
 	</xsl:template>
