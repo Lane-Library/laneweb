@@ -50,7 +50,7 @@ X-WR-CALDESC:Lane Medical Library offers an array of courses and presentations, 
 		<xsl:text>
 END:VCALENDAR</xsl:text>
 	</xsl:template>
-
+	
 
 	<xsl:template name="VEVENT">
 		<xsl:param name="classId" /><xsl:text>
@@ -87,6 +87,8 @@ ORGANIZER;CN=</xsl:text>
 						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
 					</xsl:otherwise>
 				</xsl:choose>
+		<xsl:text>
+CONTACT:</xsl:text><xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
 		<xsl:text>
 END:VEVENT</xsl:text>
 	</xsl:template>
