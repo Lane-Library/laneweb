@@ -40,7 +40,7 @@ public abstract class AbstractCollectionManager implements CollectionManager {
 
     private static final String COUNT_TYPE_UNION = "search.count.1";
 
-    private static final int MAX_QUERY_LENGTH = 300;
+    private static final int MAX_QUERY_LENGTH = 200;
 
     private DataSource dataSource;
 
