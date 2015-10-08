@@ -20,6 +20,7 @@
 VERSION:2.0
 PRODID:-//lane.stanford.edu//Classes Events v1.0//EN
 METHOD:PUBLISH
+TZID:California-Los_Angeles
 </xsl:text>
 <xsl:choose>
 <xsl:when test="$email">
@@ -58,13 +59,13 @@ BEGIN:VEVENT
 UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>@lane.stanford.edu
 URL:http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 DTSTAMP:</xsl:text><xsl:value-of select="$today"/><xsl:text>
-DTSTART;TZID=America/Los_Angeles:</xsl:text>
+DTSTART:</xsl:text>
 		<xsl:call-template name="formatDate">
 			<xsl:with-param name="dateTime"
 				select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_dates/lc:start_date/text()" />
 		</xsl:call-template>
 		<xsl:text>
-DTEND;TZID=America/Los_Angeles:</xsl:text>
+DTEND:</xsl:text>
 		<xsl:call-template name="formatDate">
 			<xsl:with-param name="dateTime"
 				select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_dates/lc:end_date/text()" />
