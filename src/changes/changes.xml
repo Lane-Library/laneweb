@@ -7,6 +7,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-10-12" version="3.1.9" description="3.1.9 bug fix release">
+            <action date="2015-10-06" dev="ceyates" issue="111681" type="fix">
+                multiple 830 fields cause multiple grand rounds listings
+            </action>
+            <action date="2015-10-06" dev="ceyates" issue="111666" type="fix">
+                trailing text in 830 ^d causes invalid grand rounds presentation
+            </action>
+            <action date="2015-10-07" dev="ceyates" issue="111636" type="update">
+                reduce maximum oracle text query size to 200 characters
+            </action>
+            <action date="2015-10-07" dev="ceyates" issue="111395" type="update">
+                Change http://www.stanfordhospital.org/ Stanford Hospitals and Clinics [Redir: https://stanfordhealthcare.org]
+            </action>
+            <action date="2015-10-07" dev="ceyates" issue="111151" type="update">
+                make the active tab different color
+            </action>
+            <action date="2015-10-07" dev="ceyates" issue="111114" type="add">
+                Feedback-suggestion:  confirmation message for Suggestion for Purchase (SFP)
+            </action>
+            <action date="2015-10-06" dev="ceyates" issue="111113" type="add">
+                Make Feedback form draggable
+            </action>
+        </release>
         <release date="2015-10-05" version="3.1.8" description="3.1.8 bug fix release">
             <action date="2015-10-05" dev="ceyates" issue="111638" type="remove">
                 remove javascript workarounds for Internet Explorer less than version 8
