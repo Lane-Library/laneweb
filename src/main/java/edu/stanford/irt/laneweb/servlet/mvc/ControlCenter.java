@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.email.SpamFilter;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
