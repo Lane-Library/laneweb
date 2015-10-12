@@ -85,32 +85,36 @@
     
     <bean class="edu.stanford.irt.laneweb.email.EMailSender">
         <constructor-arg>
-            <set>
-                <value>lane-issue@med.stanford.edu</value>
-                <value>LaneAskUs@stanford.edu</value>
-                <value>lanelibacqs@lists.stanford.edu</value>
-                <value>docxpress@lists.stanford.edu</value>
-            </set>
-        </constructor-arg>
-        <constructor-arg>
             <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
                 <property name="host" value="medmail.stanford.edu"/>
             </bean>
         </constructor-arg>
         <constructor-arg>
-            <set>
-                <value>173.44.37.242</value>
-                <value>96.47.224.218</value>
-                <value>192.119.144.96</value>
-                <value>192.119.151.127</value>
-                <value>178.32.54.240</value>
-            </set>
-        </constructor-arg>
-        <constructor-arg>
-            <set>
-                <value>http://lane.stanford.edu/dept/anthropology/cgi-bin/web/index.html?q=user</value>
-                <value>http://lane.stanford.edu/dept/anthropology/cgi-bin/web/index.html?q=user/register</value>
-            </set>
+            <bean class="edu.stanford.irt.laneweb.email.SpamFilter">
+                <constructor-arg>
+                    <set>
+                        <value>lane-issue@med.stanford.edu</value>
+                        <value>LaneAskUs@stanford.edu</value>
+                        <value>lanelibacqs@lists.stanford.edu</value>
+                        <value>docxpress@lists.stanford.edu</value>
+                    </set>
+                </constructor-arg>
+                <constructor-arg>
+                    <set>
+                        <value>173.44.37.242</value>
+                        <value>96.47.224.218</value>
+                        <value>192.119.144.96</value>
+                        <value>192.119.151.127</value>
+                        <value>178.32.54.240</value>
+                    </set>
+                </constructor-arg>
+                <constructor-arg>
+                    <set>
+                        <value>http://lane.stanford.edu/dept/anthropology/cgi-bin/web/index.html?q=user</value>
+                        <value>http://lane.stanford.edu/dept/anthropology/cgi-bin/web/index.html?q=user/register</value>
+                    </set>
+                </constructor-arg>
+            </bean>
         </constructor-arg>
     </bean>
 

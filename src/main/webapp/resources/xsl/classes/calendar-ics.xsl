@@ -19,6 +19,8 @@
 		<xsl:text>BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//lane.stanford.edu//Classes Events v1.0//EN
+METHOD:PUBLISH
+TZID:California-Los_Angeles
 </xsl:text>
 <xsl:choose>
 <xsl:when test="$email">
@@ -49,12 +51,12 @@ X-WR-CALDESC:Lane Medical Library offers an array of courses and presentations, 
 		<xsl:text>
 END:VCALENDAR</xsl:text>
 	</xsl:template>
-
+	
 
 	<xsl:template name="VEVENT">
 		<xsl:param name="classId" /><xsl:text>
 BEGIN:VEVENT
-UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>
+UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>@lane.stanford.edu
 URL:http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text><xsl:value-of select="$classId"/><xsl:text>
 DTSTAMP:</xsl:text><xsl:value-of select="$today"/><xsl:text>
 DTSTART:</xsl:text>
@@ -74,18 +76,20 @@ SUMMARY:</xsl:text>
 			select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_name/text(), ',','\\,')" />
 		<xsl:text>
 DESCRIPTION:</xsl:text>
-		<xsl:value-of select="replace(concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....'), ',','\\,')" />
-		<xsl:text>		
-ORGANIZER;CN=</xsl:text>
-			<xsl:choose>
-					<xsl:when test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text() != ''">
-						<xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
-					</xsl:otherwise>
-				</xsl:choose>
-		<xsl:text>:
+		<xsl:value-of select="replace(concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....'), ',','\\,')" />			
+		
+			<xsl:if test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text() != ''">
+				<xsl:text>
+ORGANIZER:</xsl:text><xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
+			</xsl:if>
+				<xsl:if test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor">
+					<xsl:text>
+ORGANIZER;CN=</xsl:text><xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
+					<xsl:text>:MAILTO:</xsl:text><xsl:value-of select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text()"/>
+				</xsl:if>
+				<xsl:text>
+LOCATION:</xsl:text><xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:venue/lc:venue_name/text(), ',' , '\\,' )" />
+		<xsl:text>
 END:VEVENT</xsl:text>
 	</xsl:template>
 
