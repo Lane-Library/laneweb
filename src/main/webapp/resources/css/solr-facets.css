@@ -153,3 +153,45 @@
 #solrAllCount {
     display: none;
 }
+
+/* lane-beta banner stuff ... remove before going live */
+#bb-bkgr {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 176px;
+    opacity: 0.75;
+    background-color: black;
+    width: 100%;
+    z-index: 3;
+}
+
+#bb-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    z-index: 4;
+    color: white;
+    width: 100%;
+    top: 35px;
+}
+
+#bb-banner {
+    width: 550px;
+    padding-left: 100px;
+}
+
+#bb-banner .fa-search {
+    color: #fff;
+    margin-top: 10px;
+}
+
+#bb-banner .title {
+    font-size: 24px;
+}
+
+#bb-banner .button {
+    margin-top: 5px;
+}
+/* end lane-beta banner stuff */

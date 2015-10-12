@@ -10,6 +10,19 @@
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
     <body>
+		<div id="bb-bkgr"></div>
+	    <div id="bb-container">
+		    <div id="bb-banner" class="yui3-g centered">
+		        <div class="yui3-u-1-12">
+		            <i class="fa fa-search fa-3x"></i>
+		        </div>
+		        <div class="yui3-u-11-12">
+		            <span class="title">Lane Search Beta</span>
+		            <div>Searches all 25 millions PubMed records and gives you full access to journals, books, and other resources uniquely available through Lane Medical Library.</div>
+		            <a title="Back to Live Site" class="button active" href="http://lane.stanford.edu/"> <span>Go back to Lane Library Site</span><i class="icon fa fa-arrow-right"></i></a>
+		        </div>
+		    </div>
+        </div>
         <div id="main">
             <div id="laneHeader">
                 <div class="centered">
