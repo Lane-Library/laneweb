@@ -1,9 +1,6 @@
 package edu.stanford.irt.laneweb.email;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -17,21 +14,15 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.model.Model;
 
 public class EMailSender {
 
     private static final String BINDING_MAP = "org.springframework.validation.BindingResult.map";
 
-    // one hour
-    private static final long COUNT_CHECK_INTERVAL = 1000L * 60L * 60L;
-
     private static final String EMAIL = "email";
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$",
             Pattern.CASE_INSENSITIVE);
-
-    private static final int MAX_MAILS_PER_IP = 10;
 
     private static final String RECIPIENT = "recipient";
 
@@ -43,48 +34,21 @@ public class EMailSender {
 
     private Set<String> excludedFields;
 
-    private long lastUpdate = 0;
-
     private JavaMailSender mailSender;
 
-    private Set<String> recipients;
+    private SpamFilter spamFilter;
 
-    private Map<String, Integer> sentMailCounter = new HashMap<String, Integer>();
-
-    private Set<String> spamIps;
-
-    private Set<String> spamReferrers;
-
-    public EMailSender(final Set<String> recipients, final JavaMailSender mailSender, final Set<String> spamIps,
-            final Set<String> spamReferrers) {
-        this.recipients = recipients;
+    public EMailSender(final JavaMailSender mailSender, final SpamFilter spamFilter) {
         this.mailSender = mailSender;
-        this.spamIps = spamIps;
-        this.spamReferrers = spamReferrers;
+        this.spamFilter = spamFilter;
         this.excludedFields = new HashSet<String>();
         for (String element : XCLUDED_FIELDS) {
             this.excludedFields.add(element);
         }
     }
 
-    public void addSpamIP(final String spamIP) {
-        this.spamIps.add(spamIP);
-    }
-
-    public void addSpamReferrer(final String spamReferrer) {
-        this.spamReferrers.add(spamReferrer);
-    }
-
-    public boolean removeSpamIP(final String spamIP) {
-        return this.spamIps.remove(spamIP);
-    }
-
-    public boolean removeSpamReferrer(final String spamReferrer) {
-        return this.spamReferrers.remove(spamReferrer);
-    }
-
     public void sendEmail(final Map<String, Object> map) {
-        validateModel(map);
+        this.spamFilter.checkForSpam(map);
         final MimeMessage message = this.mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
@@ -106,57 +70,11 @@ public class EMailSender {
         } catch (MessagingException e) {
             throw new LanewebException(e);
         }
-        maybeBlockBeforeSend((String) map.get(Model.REMOTE_ADDR));
+        System.out.println(map);
         try {
             this.mailSender.send(message);
         } catch (MailException e) {
             throw new LanewebException(map.toString(), e);
-        }
-    }
-
-    private synchronized void maybeBlockBeforeSend(final String remoteIp) {
-        updateSentCountsIfNecessary();
-        int sent = 0;
-        if (this.sentMailCounter.containsKey(remoteIp)) {
-            sent = this.sentMailCounter.get(remoteIp).intValue();
-        }
-        this.sentMailCounter.put(remoteIp, Integer.valueOf(++sent));
-        if (sent > MAX_MAILS_PER_IP) {
-            throw new LanewebException("too many emails from IP: " + remoteIp + "; # sent: " + sent);
-        }
-    }
-
-    private synchronized void updateSentCountsIfNecessary() {
-        long now = System.currentTimeMillis();
-        if (now > this.lastUpdate + COUNT_CHECK_INTERVAL) {
-            List<String> entriesToRemove = new ArrayList<String>();
-            for (Entry<String, Integer> entry : this.sentMailCounter.entrySet()) {
-                int newCount = entry.getValue().intValue() - MAX_MAILS_PER_IP;
-                if (newCount <= 0) {
-                    entriesToRemove.add(entry.getKey());
-                } else {
-                    entry.setValue(Integer.valueOf(newCount));
-                }
-            }
-            for (String key : entriesToRemove) {
-                this.sentMailCounter.remove(key);
-            }
-            this.lastUpdate = now;
-        }
-    }
-
-    private void validateModel(final Map<String, Object> map) {
-        Object recipient = map.get(RECIPIENT);
-        if (!this.recipients.contains(recipient)) {
-            throw new LanewebException(RECIPIENT + " " + recipient + " not permitted");
-        }
-        Object remoteIp = map.get(Model.REMOTE_ADDR);
-        if (this.spamIps.contains(remoteIp)) {
-            throw new LanewebException(remoteIp + " is in the spam IP list");
-        }
-        Object referrer = map.get(Model.REFERRER);
-        if (this.spamReferrers.contains(referrer)) {
-            throw new LanewebException(referrer + " is in the spam referrer list");
         }
     }
 }

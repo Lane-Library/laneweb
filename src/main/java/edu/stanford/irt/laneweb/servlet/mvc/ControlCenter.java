@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
+import edu.stanford.irt.laneweb.email.SpamFilter;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
@@ -44,7 +45,7 @@ public class ControlCenter {
     public String addSpamIP(@RequestParam final String ip,
             @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
         checkAccess(userid);
-        this.context.getBean(EMailSender.class).addSpamIP(ip);
+        this.context.getBean(SpamFilter.class).addSpamIP(ip);
         return ip;
     }
 
@@ -53,7 +54,7 @@ public class ControlCenter {
     public String addSpamReferrer(@RequestParam final String referrer,
             @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
         checkAccess(userid);
-        this.context.getBean(EMailSender.class).addSpamReferrer(referrer);
+        this.context.getBean(SpamFilter.class).addSpamReferrer(referrer);
         return referrer;
     }
 
@@ -62,7 +63,7 @@ public class ControlCenter {
     public boolean removeSpamIP(@RequestParam final String ip,
             @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
         checkAccess(userid);
-        return this.context.getBean(EMailSender.class).removeSpamIP(ip);
+        return this.context.getBean(SpamFilter.class).removeSpamIP(ip);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/email/spamReferrer")
@@ -70,7 +71,7 @@ public class ControlCenter {
     public boolean removeSpamReferrer(@RequestParam final String referrer,
             @ModelAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID) final String userid) {
         checkAccess(userid);
-        return this.context.getBean(EMailSender.class).removeSpamReferrer(referrer);
+        return this.context.getBean(SpamFilter.class).removeSpamReferrer(referrer);
     }
 
     @ModelAttribute
