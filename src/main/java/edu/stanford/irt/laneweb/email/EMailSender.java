@@ -70,7 +70,6 @@ public class EMailSender {
         } catch (MessagingException e) {
             throw new LanewebException(e);
         }
-        System.out.println(map);
         try {
             this.mailSender.send(message);
         } catch (MailException e) {
