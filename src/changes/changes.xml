@@ -8,9 +8,6 @@
     </properties>
     <body>
         <release date="2015-10-12" version="3.1.9" description="3.1.9 bug fix release">
-        	<action date="2015-10-11" dev="alainb" issue="109227" type="fix">
-        		merge organization logo images
-        	</action>
             <action date="2015-10-06" dev="ceyates" issue="111681" type="fix">
                 multiple 830 fields cause multiple grand rounds listings
             </action>
@@ -32,6 +29,9 @@
             <action date="2015-10-06" dev="ceyates" issue="111113" type="add">
                 Make Feedback form draggable
             </action>
+            <action date="2015-10-11" dev="alainb" issue="109227" type="update">
+                merge organization logo images
+            </action>
         </release>
         <release date="2015-10-05" version="3.1.8" description="3.1.8 bug fix release">
             <action date="2015-10-05" dev="ceyates" issue="111638" type="remove">
@@ -41,19 +41,19 @@
                 create a scroll back to top link
             </action>
         </release>
-    	<release date="2015-09-28" version="3.1.7" description="3.1.7 bug fix release">
+        <release date="2015-09-28" version="3.1.7" description="3.1.7 bug fix release">
             <action date="2015-09-25" dev="ryanmax" issue="111416" type="fix">
                 Contact Us button text is cutout in IE8
             </action>
             <action date="2015-09-25" dev="olgary" issue="111402" type="update">
                 updated h4 and h5 sizes - headers.css
             </action>
-    	    <action date="2015-09-25" dev="olgary" issue="111392" type="update">
-    	        miscellaneous.css
-    	    </action>
-    	    <action date="2015-09-25" dev="ryanmax" issue="111335" type="update">
-    	        Change Wording in Query Mapping result
-    	    </action>
+            <action date="2015-09-25" dev="olgary" issue="111392" type="update">
+                miscellaneous.css
+            </action>
+            <action date="2015-09-25" dev="ryanmax" issue="111335" type="update">
+                Change Wording in Query Mapping result
+            </action>
         </release>
         <release date="2015-09-21" version="3.1.6" description="3.1.6 bug fix release">
             <action date="2015-09-17" dev="olgary" issue="111194" type="update">
@@ -606,14 +606,14 @@
                 Add 3 new resources to the History search
             </action>
         </release>
-     	<release date="2014-11-05" version="2.3.2" description="2.3.2 emergency release">
+         <release date="2014-11-05" version="2.3.2" description="2.3.2 emergency release">
             <action date="2014-11-05" dev="alainb" issue="100271" type="fix">
                 UHA and PCHA logos need to be separated from SHC and LPCH as the dean wanted
             </action>
-     	    <action date="2014-11-04" dev="ceyates" issue="99385" type="update">
-     	        Flickr Pictures in History search results
-     	    </action>
-     	</release>
+             <action date="2014-11-04" dev="ceyates" issue="99385" type="update">
+                 Flickr Pictures in History search results
+             </action>
+         </release>
         <release date="2014-11-03" version="2.3.1" description="2.3.1 bug fix release">
             <action date="2014-11-03" dev="alainb" issue="100251" type="fix">
                 404 errors when clicking more than once on IdP logo
@@ -678,7 +678,7 @@
                 fixed link in footer: template.xml, debug.xml
             </action>
         </release>
-    	<release date="2014-09-29" version="2.2.21" description="2.2.21 bug fix release">
+        <release date="2014-09-29" version="2.2.21" description="2.2.21 bug fix release">
             <action date="2014-09-29" dev="alainb" issue="99666" type="update">
                 pagination in the image search
             </action>
@@ -695,7 +695,7 @@
                 pdf  and word icons from fontawesome not showing up..
             </action>
             <action date="2014-09-29" dev="olgary" issue="99620" type="update">
-				update module.css - removed old classes                
+                update module.css - removed old classes                
             </action>
             <action date="2014-09-29" dev="olgary" issue="99630" type="update">
                 update laneclasses-list.xsl

@@ -30,6 +30,10 @@
             <body>
                 <xsl:call-template name="paginationLinks"/>
                 <h3 class="eresources">&#160;</h3>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="cocoon://content/search/lane-beta-link.html">
+                    <xi:fallback></xi:fallback>
+                </xi:include>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>
