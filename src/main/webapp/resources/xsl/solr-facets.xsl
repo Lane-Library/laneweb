@@ -3,7 +3,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:s="http://apache.org/cocoon/SQL/2.0"
-    exclude-result-prefixes="h"
+    exclude-result-prefixes="h s"
     version="2.0">
     
     <xsl:param name="base-path"/>
