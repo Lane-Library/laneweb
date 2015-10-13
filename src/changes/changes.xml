@@ -29,7 +29,7 @@
             <action date="2015-10-06" dev="ceyates" issue="111113" type="add">
                 Make Feedback form draggable
             </action>
-            <action date="2015-10-11" dev="alainb" issue="109227" type="update">
+            <action date="2015-10-08" dev="alainb" issue="109227" type="update">
                 merge organization logo images
             </action>
         </release>

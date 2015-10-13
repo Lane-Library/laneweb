@@ -60,7 +60,7 @@
     <xsl:template match="presentation/title">
        <!-- <xsl:variable name="id" select="parent::presentation/@id"/>-->
         <h3>
-            <a href="{parent::presentation/uri[1]}">
+            <a href="{parent::presentation/link[1]/uri}">
                 <xsl:apply-templates/>
             </a>
             <!--<a style="font-size:9px" rel="popup standard"
@@ -90,7 +90,15 @@
         </p>
     </xsl:template>
     
-    <xsl:template match="uri"/>
+    <xsl:template match="link[1]"/>
+    
+    <xsl:template match="link[not(1)]">
+        <xsl:apply-templates select="uri"/>
+    </xsl:template>
+    
+    <xsl:template match="uri[not(contains(.,'youtu'))]">
+        <div>Also available: <a href="{.}"><xsl:value-of select="../text"/></a></div>
+    </xsl:template>
 
     <xsl:template match="uri[contains(.,'youtu')]">
         <xsl:variable name="youtube-id">
@@ -116,5 +124,7 @@
         <iframe src="https://www.youtube.com/embed/{$youtube-id}" width="322" height="181" frameborder="0" scrolling="no"
             webkitAllowFullScreen="true" mozallowfullscreen="true" allowFullScreen="true"/>
     </xsl:template>
+    
+    <xsl:template match="text"/>
 
 </xsl:stylesheet>

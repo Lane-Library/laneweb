@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.grandrounds;
+ package edu.stanford.irt.laneweb.grandrounds;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +61,7 @@ public class GrandRoundsManager {
         int recordId = presentation.getId();
         try {
             presentation.getDate();
-            presentation.getURIs();
+            presentation.getLinks().stream().forEach(l -> l.getURI());
             presentations.add(presentation);
         } catch (GrandRoundsException e) {
             LOG.error(recordId + " not valid", e);

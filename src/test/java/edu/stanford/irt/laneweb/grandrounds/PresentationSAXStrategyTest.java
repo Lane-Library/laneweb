@@ -21,11 +21,14 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.grandrounds.Link;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 
 public class PresentationSAXStrategyTest {
+
+    private Link link;
 
     private Presentation presentation;
 
@@ -38,24 +41,27 @@ public class PresentationSAXStrategyTest {
         this.strategy = new PresentationSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
         this.presentation = createMock(Presentation.class);
+        this.link = createMock(Link.class);
     }
 
     @Test
     public void testToSAX() throws IOException, SAXException, URISyntaxException {
         expect(this.presentation.getId()).andReturn(0);
         expect(this.presentation.getDate()).andReturn(LocalDate.of(1969, 5, 5));
-        expect(this.presentation.getURIs()).andReturn(Collections.singletonList(new URI("uri")));
+        expect(this.presentation.getLinks()).andReturn(Collections.singletonList(this.link));
+        expect(this.link.getURI()).andReturn(new URI("uri"));
+        expect(this.link.getLinkText()).andReturn("linkText");
         expect(this.presentation.getTitle()).andReturn("title");
         expect(this.presentation.getSunetRequired()).andReturn(true);
         expect(this.presentation.getPresenterList()).andReturn(Collections.singletonList("presenter"));
         expect(this.presentation.getDescriptions()).andReturn(Collections.singletonList("description"));
-        replay(this.presentation);
+        replay(this.presentation, this.link);
         this.xmlConsumer.startDocument();
         this.strategy.toSAX(this.presentation, this.xmlConsumer);
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "PresentationSAXStrategyTest-testToSAX.xml"),
                 this.xmlConsumer.getStringValue());
-        verify(this.presentation);
+        verify(this.presentation, this.link);
     }
 
     @Test(expected = LanewebException.class)
@@ -63,7 +69,7 @@ public class PresentationSAXStrategyTest {
         XMLConsumer mockXMLConsumer = createMock(XMLConsumer.class);
         expect(this.presentation.getId()).andReturn(0);
         expect(this.presentation.getDate()).andReturn(null);
-        expect(this.presentation.getURIs()).andReturn(null);
+        expect(this.presentation.getLinks()).andReturn(null);
         mockXMLConsumer.startElement(eq(""), eq("presentation"), eq("presentation"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.presentation, mockXMLConsumer);
