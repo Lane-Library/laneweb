@@ -25,9 +25,6 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
         super.setModel(model);
         this.type = ModelUtil.getString(model, Model.TYPE);
         this.mesh = ModelUtil.getString(model, Model.MESH);
-        if (this.mesh != null) {
-            this.mesh = this.mesh;
-        }
     }
 
     @Override
