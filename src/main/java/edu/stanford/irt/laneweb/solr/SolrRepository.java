@@ -28,19 +28,19 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
         }
     }
 
-    @Query(value = "*:*", filters = { "isRecent:true", "mesh:\"?0\"", "type:\"?1\"" }, requestHandler = Handlers.BROWSE)
+    @Query(value = "*:*", filters = { "isRecent:true OR text:laneconnex", "mesh:\"?0\"", "type:\"?1\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllByMeshAndType(String mesh, String type, Pageable page);
 
-    @Query(value = "*:*", filters = { "isRecent:true", "subset:\"?0\"" }, requestHandler = Handlers.BROWSE)
+    @Query(value = "*:*", filters = { "isRecent:true OR text:laneconnex", "subset:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllBySubset(String subset, Pageable page);
 
-    @Query(value = "*:*", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
+    @Query(value = "*:*", filters = { "isRecent:true OR text:laneconnex", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllByType(String type, Pageable page);
 
-    @Query(value = "*:*", filters = { "isRecent:true", "isCore:1", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
+    @Query(value = "*:*", filters = { "isRecent:true OR text:laneconnex", "isCore:1", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllCoreByType(String type, Pageable page);
 
-    @Query(value = "ertlsw?1", filters = { "isRecent:true", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
+    @Query(value = "ertlsw?1", filters = { "isRecent:true OR text:laneconnex", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
 
     @Query(value = "?0", requestHandler = Handlers.FACET)
