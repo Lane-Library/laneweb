@@ -82,17 +82,3 @@ Y.lane.on("search:reset",  function() {
         }
     });
 });
-
-// TODO: find a home for this pagination-related js
-(function() {
-        Y.all('form[name=pagination]').on('submit', function (e) {
-            var form = e.target, p = form.get('page'), page = Number(p.get('value').replace(/[^\d]/g,'')), pages = form.get('pages');
-            p.set('value',page);
-            if (page < 1 || page > Number(pages.get('value'))) {
-                e.preventDefault();
-                form.get('parentNode').appendChild('<div style="margin:10px 80px;color:red;font-size:20px;">ERROR: page out of range</div>');
-                return;
-            }
-            pages.remove();
-          }, this);
-})();

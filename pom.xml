@@ -504,6 +504,7 @@
                                 <include>youtube-min.js</include>
                                 <include>back-to-top-min.js</include>
                                 <include>solr-facets-min.js</include>
+                                <include>solr-pagination-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>

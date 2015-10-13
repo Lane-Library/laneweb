@@ -88,3 +88,10 @@
 .view-by.sort span {
     font-weight: bold;
 }
+
+.s-pagination .error {
+    margin-top: -20px;
+    text-align: center;
+    color: red;
+    font-size: 14px;
+}

@@ -101,7 +101,9 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "same-height.js",
         "shibboleth-sfx.js",
         "youtube.js",
-        "back-to-top.js"
+        "back-to-top.js",
+        "solr-facets.js",
+        "solr-pagination.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:
