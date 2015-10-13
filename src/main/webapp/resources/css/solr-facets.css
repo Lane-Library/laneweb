@@ -163,7 +163,7 @@
     opacity: 0.75;
     background-color: black;
     width: 100%;
-    z-index: 3;
+    z-index: 2;
 }
 
 #bb-container {
@@ -171,7 +171,7 @@
     top: 0;
     left: 0;
     opacity: 1;
-    z-index: 4;
+    z-index: 3;
     color: white;
     width: 100%;
     top: 35px;
