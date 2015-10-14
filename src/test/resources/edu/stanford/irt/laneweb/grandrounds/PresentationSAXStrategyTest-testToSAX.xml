@@ -5,5 +5,8 @@
    <sunet>true</sunet>
    <presenter>presenter</presenter>
    <description>description</description>
-   <uri>uri</uri>
+   <link>
+      <uri>uri</uri>
+      <text>linkText</text>
+   </link>
 </presentation>

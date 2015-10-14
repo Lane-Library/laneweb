@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.grandrounds;
 
-import java.net.URI;
 import java.time.format.DateTimeFormatter;
 
 import org.xml.sax.SAXException;
@@ -8,6 +7,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.grandrounds.Link;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
@@ -31,8 +31,11 @@ public class PresentationSAXStrategy implements SAXStrategy<Presentation> {
             for (String description : presentation.getDescriptions()) {
                 XMLUtils.createElementNS(xmlConsumer, "", "description", description);
             }
-            for (URI uri : presentation.getURIs()) {
-                XMLUtils.maybeCreateElement(xmlConsumer, "", "uri", uri);
+            for (Link link : presentation.getLinks()) {
+                XMLUtils.startElement(xmlConsumer, "", "link");
+                XMLUtils.maybeCreateElement(xmlConsumer, "", "uri", link.getURI());
+                XMLUtils.maybeCreateElement(xmlConsumer, "", "text", link.getLinkText());
+                XMLUtils.endElement(xmlConsumer, "", "link");
             }
             XMLUtils.endElement(xmlConsumer, "", "presentation");
         } catch (SAXException e) {
