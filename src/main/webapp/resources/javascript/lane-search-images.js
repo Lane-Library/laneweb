@@ -81,8 +81,6 @@
         var image = Y.JSON.parse(o.responseText),
         row = args.row,
         li = args.li,
-        copyright = image.copyrightValue,
-        imageId = image.id.split("/"),
         imageDetail = Y.one("#imageDetail_" + row);
         cleanDetailImageWindow();
 

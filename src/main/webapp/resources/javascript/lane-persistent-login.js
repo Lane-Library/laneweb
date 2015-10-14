@@ -23,7 +23,7 @@
     }, "a[href*=laneproxy.stanford.edu/login]");
 
     extensionPersistentLoginPopup = function(event){
-        var link = event.target, href = link.get('href');
+        var link = event.target;
         if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
             event.preventDefault();
             link.set('rel', 'persistentLogin');
@@ -42,7 +42,7 @@
 
     // The popup window for expension
     popupWindow = function(id, o) {
-        var lightbox = Y.lane.Lightbox, shibbolethAnchors, href, node;
+        var lightbox = Y.lane.Lightbox, shibbolethAnchors;
         lightbox.setContent(o.responseText);
         lightbox.show();
         shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
@@ -60,7 +60,6 @@
     //To display the persistent checkbox in the discoverypage
     if(Y.one('#persistent')){
         var div = Y.one('#persistent div.header'),
-        messageDiv = Y.one('#persistent .message'),
         isPersistent = Y.Node.create("<div class='is-persistent'><input type='checkbox' id='is-persistent-login' /> <label>Log me in for 2 weeks (DON’T check if on a shared computer)</label></div>");
         div.insert(isPersistent, 'after');
 
