@@ -30,7 +30,7 @@
                 <xsl:when test="../../string[. = 'recordType'] and value = 'pubmed'">PubMed</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'bib'">Lane Catalog</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'web'">Lane Web Site</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Class</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Classes</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'auth'">Lane Community Info</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'laneblog'">Lane Blog</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and value = '[2010 TO *]'">Last 5 Years</xsl:when>
