@@ -36,6 +36,7 @@ public class SolrTypeManager {
      * backwards-compatible type-mapping TODO: remove once types changed in biomed-resources browse pages
      *
      * @param maybeOldType
+     *            type that may be in non-Solr format
      * @return new type from OLD_TO_NEW_TYPES_MAP or title-case version of maybeOldType
      */
     public static final String convertToNewType(final String maybeOldType) {
@@ -49,6 +50,7 @@ public class SolrTypeManager {
      * backwards-compatible type-mapping TODO: remove once types changed in search-lane lane.xml engine
      *
      * @param maybeNewType
+     *            type that may be in Solr format
      * @return old type from OLD_TO_NEW_TYPES_MAP or lower-case version of maybeNewType
      */
     public static final String convertToOldType(final String maybeNewType) {
