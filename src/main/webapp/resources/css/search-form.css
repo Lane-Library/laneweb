@@ -24,19 +24,10 @@
     margin-left: 8px;
 }
 #searchSubmit {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
     border-radius: 3px;
     color: #820000;
     background: #fafbf8; /* Old browsers */
-    background: -moz-linear-gradient(top,  #fafbf8 0%, #dadad4 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafbf8), color-stop(100%,#dadad4)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #fafbf8 0%,#dadad4 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #fafbf8 0%,#dadad4 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #fafbf8 0%,#dadad4 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #fafbf8 0%,#dadad4 100%); /* W3C */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafbf8', endColorstr='#dadad4')";
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafbf8', endColorstr='#dadad4',GradientType=0 ); /* IE6-9 */
     border: 1px solid #dadad9;
     font-weight:bold;
     height:34px;
@@ -48,14 +39,7 @@
 }
 #searchSubmit:hover {
     background: #dadad4; /* Old browsers */
-    background: -moz-linear-gradient(top,  #dadad4 0%, #fafbf8 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dadad4), color-stop(100%,#fafbf8)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #dadad4 0%,#fafbf8 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #dadad4 0%,#fafbf8 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #dadad4 0%,#fafbf8 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #dadad4 0%,#fafbf8 100%); /* W3C */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#dadad4', endColorstr='#fafbf8')";
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dadad4', endColorstr='#fafbf8',GradientType=0 ); /* IE6-9 */
 }
 #searchTools {
     position: absolute;
@@ -83,7 +67,6 @@
     /* Mobile Safari: remove rounded corners and input shadow */
     -webkit-appearance : none;
     -moz-appearance:none;
-    appearance:none;
     margin: 10px 0;
     width:172px;
     text-align:center;
