@@ -7,6 +7,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-10-19" version="3.1.10" description="3.1.10 bug fix release">
+            <action date="2015-10-16" dev="ceyates" issue="112023" type="fix">
+                AskUs link not working in IE9 and IE10
+            </action>
+            <action date="2015-10-15" dev="ryanmax" issue="111993" type="fix">
+                sourceid parameter duplicated on browse pages
+            </action>
+            <action date="2015-10-15" dev="olgary" issue="111975" type="update">
+                update template and debug.xml 
+            </action>
+            <action date="2015-10-16" dev="ceyates" issue="111946" type="update">
+                Feedback-suggestion: 'images.html' page only
+            </action>
+            <action date="2015-10-16" dev="ceyates" issue="111897" type="remove">
+                remove most vendor prefixes from css
+            </action>
+            <action date="2015-10-13" dev="ceyates" issue="111740" type="add">
+                Link to Lane Search (beta) from current search results
+            </action>
+            <action date="2015-10-13" dev="ceyates" issue="111683" type="fix">
+                some links in grand rounds records not being displayed
+            </action>
+        </release>
         <release date="2015-10-12" version="3.1.9" description="3.1.9 bug fix release">
             <action date="2015-10-06" dev="ceyates" issue="111681" type="fix">
                 multiple 830 fields cause multiple grand rounds listings
