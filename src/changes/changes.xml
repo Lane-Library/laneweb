@@ -34,6 +34,9 @@
             <action date="2015-10-06" dev="ceyates" issue="111681" type="fix">
                 multiple 830 fields cause multiple grand rounds listings
             </action>
+            <action date="2015-10-09" dev="alainb" issue="111673" type="add">
+                Create a calendar filter by instructor 
+            </action>
             <action date="2015-10-06" dev="ceyates" issue="111666" type="fix">
                 trailing text in 830 ^d causes invalid grand rounds presentation
             </action>
