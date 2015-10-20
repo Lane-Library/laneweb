@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
   <bean id="edu.stanford.irt.laneweb.grandrounds.GrandRoundsManager"
-  	class="edu.stanford.irt.laneweb.grandrounds.GrandRoundsManager">
-  	<constructor-arg ref="javax.sql.DataSource/grandrounds"/>
+      class="edu.stanford.irt.laneweb.grandrounds.GrandRoundsManager">
+      <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
     <constructor-arg value="classpath:/edu/stanford/irt/grandrounds/getGrandRounds.fnc"/>
   </bean>
-	
-	<bean name="edu.stanford.irt.cocoon.pipeline.Generator/grandrounds"
-		class="edu.stanford.irt.laneweb.grandrounds.GrandRoundsGenerator"
-		scope="prototype">
-		<constructor-arg ref="edu.stanford.irt.laneweb.grandrounds.GrandRoundsManager"/>
-		<constructor-arg>
-			<bean class="edu.stanford.irt.laneweb.grandrounds.PresentationSAXStrategy"/>
-		</constructor-arg>
-	</bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/grandrounds"
+        class="edu.stanford.irt.laneweb.grandrounds.GrandRoundsGenerator"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.laneweb.grandrounds.GrandRoundsManager"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.grandrounds.PresentationSAXStrategy"/>
+        </constructor-arg>
+    </bean>
 
 </beans>
