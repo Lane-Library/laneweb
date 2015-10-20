@@ -50,6 +50,7 @@
             <action date="2015-09-02" dev="ryanmax" issue="110336" type="feature">Add Grand Rounds Resource Type</action>
             <action date="2015-08-26" dev="ryanmax" issue="110338" type="feature">Add Words "Next" and "Previous" under all Filter options</action>
             <action date="2015-09-02" dev="ryanmax" issue="110340" type="feature">MeSH facet visible values</action>
+            <action date="2015-09-15" dev="ryanmax" issue="110506" type="bug">Double periods after last author's name</action>
             <action date="2015-09-10" dev="ryanmax" issue="110507" type="bug">Displays for components(articles and chapters) are not very informative</action>
             <action date="2015-09-25" dev="ryanmax" issue="110525" type="feature">Make filter interactions clearer</action>
             <action date="2015-09-01" dev="ryanmax" issue="110546" type="feature">Add first name to author filter</action>
