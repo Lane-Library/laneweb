@@ -7,7 +7,7 @@
         <version>4</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>solr-RC-1.1-SNAPSHOT</version>
+    <version>solr-RC-1.1</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -40,7 +40,7 @@
     </developers>
     <scm>
         <developerConnection>scm:git:ssh://lane-local-02.stanford.edu/afs/ir/group/lane/git/laneweb.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>laneweb-solr-RC-1.1</tag>
     </scm>
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
