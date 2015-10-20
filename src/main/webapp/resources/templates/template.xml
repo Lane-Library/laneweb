@@ -18,7 +18,7 @@
 		        </div>
 		        <div class="yui3-u-11-12">
 		            <span class="title">Lane Search Beta</span>
-		            <div>Multiple searches in one - article citations from Pubmed combined with materials uniquely available from Lane Medical Library.</div>
+		            <div class="text">Multiple searches in one - article citations from Pubmed combined with materials uniquely available from Lane Medical Library.</div>
 		            <a title="Back to Live Site" class="button active" href="http://lane.stanford.edu/"> <span>Go back to Lane Library Site</span><i class="icon fa fa-arrow-right"></i></a>
 		        </div>
 		    </div>

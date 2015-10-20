@@ -168,7 +168,7 @@
 
 #bb-container {
     position: absolute;
-    top: 35px;
+    top: 23px;
     left: 0;
     opacity: 1;
     z-index: 3;
@@ -188,6 +188,10 @@
 
 #bb-banner .title {
     font-size: 24px;
+}
+
+#bb-banner .text {
+    padding: 12px 0;
 }
 
 #bb-banner .button {
