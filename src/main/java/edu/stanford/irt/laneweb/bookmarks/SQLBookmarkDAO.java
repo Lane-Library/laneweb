@@ -108,8 +108,6 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         ObjectOutputStream oop = null;
         try {
             conn = this.dataSource.getConnection();
-            // TODO: this autocommit state probably persists, OK for now as this
-            // is the only place updates happen.
             conn.setAutoCommit(false);
             pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
             pstmt.setString(1, userid);

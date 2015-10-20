@@ -21,13 +21,11 @@ import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
-// TODO: maybe create an AbstractTransformer that extends AbstractXMLPipe and implements Transformer
 public class TextNodeParsingTransformer extends AbstractXMLPipe implements Transformer, CacheablePipelineComponent,
         ParametersAware {
 
     // the html parser creates screwy processing instructions from the classes
-    // xml. TODO: this is specific to the classes yet this class is can be used
-    // generally
+    // xml.
     private static final class ProcessingInstructionSwallowingPipe extends EmbeddedXMLPipe {
 
         public ProcessingInstructionSwallowingPipe(final XMLConsumer consumer) {
