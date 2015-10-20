@@ -90,7 +90,7 @@
 
     //TODO: put more of this initialization into the Lightbox object
     Y.on("click", function(event) {
-        var href, regex,
+        var url, regex,
             anchor = event.target.ancestor("a") || event.target,
             rel = anchor.get("rel"),
             model = Y.lane.Model,
@@ -104,16 +104,16 @@
             }
             // need to dynamically create regex for getting /plain url because
             // of various base paths (eg /stage)
-            regex = new RegExp("(.+)//([^/]+)(" + basePath + "/)(.+)".replace(/\//g, "\\\/"));
-            href = anchor.get("href").replace(regex, "$1//$2$3plain/$4");
+            regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
+            url = anchor.get("pathname").replace(regex, "$1/plain/$2");
             disableBackground = rel.indexOf("disableBackground") > -1;
-            Y.io(href, {
+            Y.io(url, {
                 on : {
                     success : function(id, o) {
                         var lightbox = Y.lane.Lightbox;
+                        lightbox.set("url", url);
                         lightbox.set("animate", animation);
                         lightbox.set("disableBackground", disableBackground);
-                        lightbox.set("url", href);
                         lightbox.setContent(o.responseText);
                         lightbox.show();
                     }

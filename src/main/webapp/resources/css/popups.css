@@ -9,8 +9,6 @@
     visibility: hidden;
 }
 .yui3-popup-content {
-    -webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
     border-radius: 3px;
 	background-color: white;
 	padding: 20px;

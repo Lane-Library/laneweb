@@ -79,7 +79,7 @@
         <xsl:param name="link"/>
         <xsl:param name="attr"/>
         <xsl:variable name="param-string">
-            <xsl:if test="not(contains($link,'/secure/login.html'))">
+            <xsl:if test="not(contains($link,'/secure/login.html')) and not(contains($link, 'sourceid='))">
                 <xsl:choose>
                     <xsl:when test="contains($link, '?')">&amp;</xsl:when>
                     <xsl:otherwise>?</xsl:otherwise>

@@ -14,8 +14,6 @@
 }
 #subscribe input,#subscribe textarea,#subscribe select,#feedback input,#feedback textarea,#feedback select
 	{
-	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
-	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 }
 #feedback textarea {
@@ -30,9 +28,6 @@
 	font: normal 13px/100% Source Sans Pro, Arial, Helvetica, clean, sans-serif;
 	background: #FFFFFF;
 	width: 100%;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 #feedback select,#subscribe select {
@@ -73,15 +68,7 @@
 .yui3-lightbox #feedbackItems {
 	background-color: white;
 	border: 2px solid #fff;
-	-moz-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
-	-webkit-box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
     box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
-	/* For IE 8 */
-	-ms-filter:
-		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
-	/* For IE 5.5 - 7 */
-	filter: progid :   DXImageTransform.Microsoft.Shadow (   Strength =   3,
-		Direction =   135, Color =   '#989898' );
 }
 .yui3-feedback-item,.yui3-purchase-item {
 	display: none;
@@ -97,15 +84,7 @@
 	border-left: 2px solid #fff;
 	border-bottom: 2px solid #fff;
 	border-right: none;
-	-moz-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
-	-webkit-box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
     box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
-	/* For IE 8 */
-	-ms-filter:
-		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#989898')";
-	/* For IE 5.5 - 7 */
-	filter: progid :   DXImageTransform.Microsoft.Shadow (   Strength =   3,
-		Direction =   135, Color =   '#989898' );
 }
 
 .feedback-item-thanks {

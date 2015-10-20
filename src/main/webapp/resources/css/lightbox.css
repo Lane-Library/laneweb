@@ -61,8 +61,6 @@
 
 /*---------------the lightbox overall look (the same box for all lightboxes)------------------*/
 .yui3-lightbox #feedback,.yui3-lightbox #subscribe {
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
     border-radius: 3px;
 	background-color: white;
 	padding: 36px;

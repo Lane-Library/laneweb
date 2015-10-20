@@ -82,8 +82,6 @@
 }
 
 #bookmarks-editor input[type='text'] {
-	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
-	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 	padding: 5px;
 	border: solid 2px #C9C9C9;
