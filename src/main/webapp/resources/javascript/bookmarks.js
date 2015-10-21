@@ -77,7 +77,6 @@
          * @event updateSync
          * @description fired when an update is successfully synced with the server
          */
-        //TODO: handle updateSync failure
         this.publish("updateSync", {preventable : false});
     };
 

@@ -4,10 +4,12 @@
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
         bindUI : function () {
+            var doc = Y.one("doc");
             this.on("visibleChange", this._onVisibleChange);
             this.after("visibleChange", this._afterVisibleChange);
             // close on escape
-            Y.one("doc").on("key", this.hide, "esc", this);
+            doc.on("key", this.hide, "esc", this);
+            doc.on("click", this._lightboxLinkClick, this);
             this.get("background").on("click", this.hide, this);
         },
         setContent : function(content) {
@@ -53,6 +55,35 @@
             anim1.run();
             anim2.run();
         },
+        _lightboxLinkClick: function(event) {
+            var url, regex, disableBackground,
+                lightbox = this,
+                anchor = event.target.ancestor("a") || event.target,
+                rel = anchor.get("rel"),
+                model = Y.lane.Model,
+                basePath = model.get(model.BASE_PATH) || "";
+            if (rel && rel.indexOf("lightbox") === 0) {
+                event.preventDefault();
+                if (this.get("visible")) {
+                    this.hide();
+                }
+                // need to dynamically create regex for getting /plain url because
+                // of various base paths (eg /stage)
+                regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
+                url = anchor.get("pathname").replace(regex, "$1/plain/$2");
+                disableBackground = rel.indexOf("disableBackground") > -1;
+                Y.io(url, {
+                    on : {
+                        success : function(id, o) {
+                            lightbox.set("url", url);
+                            lightbox.set("disableBackground", disableBackground);
+                            lightbox.setContent(o.responseText);
+                            lightbox.show();
+                        }
+                    }
+                });
+            }
+        },
         _onVisibleChange : function(event) {
             if (event.newVal) {
                 if (!this.get("disableBackground")) {
@@ -82,38 +113,6 @@
         visible : false,
         render : true
     });
-
-    //TODO: put more of this initialization into the Lightbox object
-    Y.on("click", function(event) {
-        var url, regex,
-            anchor = event.target.ancestor("a") || event.target,
-            rel = anchor.get("rel"),
-            lightbox = Y.lane.Lightbox,
-            model = Y.lane.Model,
-            basePath = model.get(model.BASE_PATH) || "",
-            disableBackground;
-        if (rel && rel.indexOf("lightbox") === 0) {
-            event.preventDefault();
-            if (lightbox.get("visible")) {
-                lightbox.hide();
-            }
-            // need to dynamically create regex for getting /plain url because
-            // of various base paths (eg /stage)
-            regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
-            url = anchor.get("pathname").replace(regex, "$1/plain/$2");
-            disableBackground = rel.indexOf("disableBackground") > -1;
-            Y.io(url, {
-                on : {
-                    success : function(id, o) {
-                        lightbox.set("url", url);
-                        lightbox.set("disableBackground", disableBackground);
-                        lightbox.setContent(o.responseText);
-                        lightbox.show();
-                    }
-                }
-            });
-        }
-    }, document);
 
     // anchor with class=autoLightbox will automatically render on page load
     var initializeAutoLightbox = function() {
