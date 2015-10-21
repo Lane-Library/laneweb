@@ -128,7 +128,6 @@
                        <map:generate type="html" src="cocoon://content/cached/search/search-images.html"/>
                    </map:aggregate>
                    <map:transform type="xinclude"/>
-                <map:transform type="textNodeParser"/>
                 <map:transform type="saxon" src="resources/xsl/search-images.xsl"/>
                    <map:serialize type="xml"/>
             </map:match>
@@ -146,7 +145,6 @@
                        <map:generate type="html" src="cocoon://content/cached/search/admin-search-images.html"/>
                    </map:aggregate>
                    <map:transform type="xinclude"/>
-                <map:transform type="textNodeParser"/>
                  <map:transform type="saxon" src="resources/xsl/search-images.xsl"/>
               <map:serialize type="xml"/>
             </map:match>
