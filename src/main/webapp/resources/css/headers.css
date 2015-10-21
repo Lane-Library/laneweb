@@ -1,10 +1,10 @@
 h2 {
     margin-top:5px;
-	font-weight: 400;
-	font-size: 28px;
-	font-family: 'Fjord One', serif;
-	color: #666666;
-	text-align:center;
+    font-weight: 400;
+    font-size: 28px;
+    font-family: 'Fjord One', serif;
+    color: #666666;
+    text-align:center;
 }
 .golfclub span span {
     display:table-cell;
@@ -29,9 +29,9 @@ h2 {
     transform:scaleX(-1)
 }
 h3, h4 {
-	color: #8c1515;
-	font-size: 22px;
-	line-height: 1.2em;
+    color: #8c1515;
+    font-size: 22px;
+    line-height: 1.2em;
     margin-bottom: .2em;
     background-image:url(../images/header-border.png);
     background-repeat:no-repeat;
@@ -39,8 +39,8 @@ h3, h4 {
     padding-bottom:12px;
 }
 h5 {
-	color: #666666;
-	font-size: 16px;
-	margin:18px 0 .4em;
-	text-transform: uppercase;
+    color: #666666;
+    font-size: 16px;
+    margin:18px 0 .4em;
+    text-transform: uppercase;
 }

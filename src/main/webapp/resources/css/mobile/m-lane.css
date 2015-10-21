@@ -33,7 +33,7 @@ body {
 }
 
 .button-close span{
-	background: linear-gradient(#e82c2e, #940506) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: linear-gradient(#e82c2e, #940506) repeat scroll 0 0 rgba(0, 0, 0, 0);
     color: #FFFFFF;
     padding: 7px 12px 7px 7px;
     z-index:2;
@@ -57,12 +57,12 @@ body {
  .ui-header, 
  .ui-content, 
  .ui-footer { 
-	max-width: 225px;
-	background-color: #ffffff;
+    max-width: 225px;
+    background-color: #ffffff;
  }
 
 .ui-content{ 
-  	margin: 0 auto 20px auto; 
+      margin: 0 auto 20px auto; 
 }
 
 

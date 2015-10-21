@@ -1,45 +1,45 @@
 #sm-footer {
-	background-color: rgb(38, 38, 38);
-	color: rgb(158, 158, 158);
-	height: 160px;
-	padding: 30px 0;
-	box-sizing:border-box;
+    background-color: rgb(38, 38, 38);
+    color: rgb(158, 158, 158);
+    height: 160px;
+    padding: 30px 0;
+    box-sizing:border-box;
 }
 
 #sm-footer ul {
-	margin-top: 16px;
-	background-image: url(../images/smFooter1.png);
-	background-repeat: no-repeat;
+    margin-top: 16px;
+    background-image: url(../images/smFooter1.png);
+    background-repeat: no-repeat;
 }
 
 #sm-footer li {
-	display: inline-block;
+    display: inline-block;
 }
 
 #sm-footer a {
-	display: block;
-	text-indent: -9999px;
-	width: 100%;
-	height: 60px;
-	cursor: pointer;
+    display: block;
+    text-indent: -9999px;
+    width: 100%;
+    height: 60px;
+    cursor: pointer;
 }
 
 #footer-su {
-	width: 110px;
+    width: 110px;
 }
 
 #footer-sm {
-	width: 210px;
+    width: 210px;
 }
 
 #footer-shc {
-	width: 180px
+    width: 180px
 }
 
 #footer-sch {
-	width: 180px;
+    width: 180px;
 }
 
 #footer-sul {
-	width: 308px;
+    width: 308px;
 }
