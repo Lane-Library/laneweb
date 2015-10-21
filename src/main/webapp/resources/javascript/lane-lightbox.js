@@ -88,11 +88,15 @@
         var url, regex,
             anchor = event.target.ancestor("a") || event.target,
             rel = anchor.get("rel"),
+            lightbox = Y.lane.Lightbox,
             model = Y.lane.Model,
             basePath = model.get(model.BASE_PATH) || "",
             disableBackground;
         if (rel && rel.indexOf("lightbox") === 0) {
             event.preventDefault();
+            if (lightbox.get("visible")) {
+                lightbox.hide();
+            }
             // need to dynamically create regex for getting /plain url because
             // of various base paths (eg /stage)
             regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
@@ -101,7 +105,6 @@
             Y.io(url, {
                 on : {
                     success : function(id, o) {
-                        var lightbox = Y.lane.Lightbox;
                         lightbox.set("url", url);
                         lightbox.set("disableBackground", disableBackground);
                         lightbox.setContent(o.responseText);
