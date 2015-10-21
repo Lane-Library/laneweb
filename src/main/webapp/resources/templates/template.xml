@@ -23,6 +23,11 @@
                         <li><i class="fa fa-envelope fa-fw"></i><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>
                     </ul>
                     <ul id="login">
+                    	<!--  revert li numbers in laneweb-login.xsl before removing beta banner -->
+                    	<li style="font-weight:bold;margin-right:90px;">
+							<span style="color:#9a0003">NEW! </span>
+							<a style="color:#007c92" href="http://lane-beta.stanford.edu/lanesearch.html">Try Lane Search beta <i class="fa fa-arrow-right" style="color:#007c92"></i></a>
+                    	</li>
                         <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
                             <a href="/secure/login.html"><strong>MyLane login</strong></a>
                         </li>
