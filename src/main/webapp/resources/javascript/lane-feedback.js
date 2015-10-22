@@ -179,7 +179,7 @@
                 hash = Y.lane.Lightbox.get("hash"),
                 items, index;
             feedback.render();
-            //if there lightbox has a hash, choose that as the active item
+            //if lightbox has a hash, choose that as the active item
             if (hash) {
                 items = feedback.get("items");
                 index = items.indexOf(feedback.get("contentBox").one(hash));
