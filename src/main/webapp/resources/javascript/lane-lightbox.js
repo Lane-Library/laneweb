@@ -58,7 +58,7 @@
         _lightboxLinkClick: function(event) {
             var lightbox, model, basePath,  hash, url, regex, disableBackground,
                 anchor = event.target.ancestor("a") || event.target,
-                animation = true,
+                disableAnimation,
                 rel = anchor.get("rel");
             if (rel && rel.indexOf("lightbox") === 0) {
                 lightbox = this;
@@ -69,9 +69,6 @@
                 if (lightbox.get("visible")) {
                     lightbox.hide();
                 }
-                if (rel.indexOf("lightbox-noanim") === 0){
-                	animation = false;
-                }
                 // need to dynamically create regex for getting /plain url because
                 // of various base paths (eg /stage)
                 regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
@@ -79,10 +76,11 @@
                 url = anchor.get("pathname") + anchor.get('search');
                 url = url.replace(/(^\/?)/,"/").replace(regex, "$1/plain$2");
                 disableBackground = rel.indexOf("disableBackground") > -1;
+                disableAnimation = rel.indexOf("disableAnimation") === -1;
                 Y.io(url, {
                     on : {
                         success : function(id, o) {
-                            lightbox.set("animate", animation);
+                            lightbox.set("animate", disableAnimation);
                             lightbox.set("hash", hash);
                             lightbox.set("disableBackground", disableBackground);
                             lightbox.setContent(o.responseText);
