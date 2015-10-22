@@ -3,6 +3,8 @@ package edu.stanford.irt.laneweb.solr;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 /**
  * Clean query strings before sending to Solr
  * <p>
@@ -17,6 +19,7 @@ public final class SolrQueryParser {
     private static final List<Character> ESCAPEABLE_CHARS = new ArrayList<Character>();
 
     private static final String TOGGLE_OFF = "advanced:true";
+
     static {
         // these seem harmless | &
         // these seem useful and harmless " * ( )
@@ -39,6 +42,9 @@ public final class SolrQueryParser {
     }
 
     public static String parse(final String query) {
+        if (query == null || query.isEmpty()) {
+            throw new LanewebException("no query");
+        }
         if (query.contains(TOGGLE_OFF)) {
             return query.replace(TOGGLE_OFF, "").trim();
         }
