@@ -173,15 +173,14 @@
 
     Y.lane.Feedback = Feedback;
 
-    Y.lane.Lightbox.on("contentChanged", function(e) {
+    Y.lane.Lightbox.on("contentChanged", function() {
         if (Y.one("#feedback")) {
             var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
-                url = Y.lane.Lightbox.get("url"),
-                hash, items, index;
+                hash = Y.lane.Lightbox.get("hash"),
+                items, index;
             feedback.render();
-            //if there is a hash in the url, choose that as the active item
-            if (url.indexOf("#") > -1) {
-                hash = url.substring(url.indexOf("#"));
+            //if there lightbox has a hash, choose that as the active item
+            if (hash) {
                 items = feedback.get("items");
                 index = items.indexOf(feedback.get("contentBox").one(hash));
                 if (index > -1) {

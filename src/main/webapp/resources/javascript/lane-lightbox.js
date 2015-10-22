@@ -56,26 +56,28 @@
             anim2.run();
         },
         _lightboxLinkClick: function(event) {
-            var url, regex, disableBackground,
-                lightbox = this,
+            var lightbox, model, basePath,  hash, url, regex, disableBackground,
                 anchor = event.target.ancestor("a") || event.target,
-                rel = anchor.get("rel"),
-                model = Y.lane.Model,
-                basePath = model.get(model.BASE_PATH) || "";
+                rel = anchor.get("rel");
             if (rel && rel.indexOf("lightbox") === 0) {
+                lightbox = this;
+                model = Y.lane.Model;
+                basePath = model.get(model.BASE_PATH) || "";
+                hash = anchor.get("hash");
                 event.preventDefault();
-                if (this.get("visible")) {
-                    this.hide();
+                if (lightbox.get("visible")) {
+                    lightbox.hide();
                 }
                 // need to dynamically create regex for getting /plain url because
                 // of various base paths (eg /stage)
                 regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
-                url = anchor.get("pathname").replace(regex, "$1/plain/$2");
+                // first replace takes care of missing leading slash in IE < 10
+                url = anchor.get("pathname").replace(/(^\/?)/,"/").replace(regex, "$1/plain$2");
                 disableBackground = rel.indexOf("disableBackground") > -1;
                 Y.io(url, {
                     on : {
                         success : function(id, o) {
-                            lightbox.set("url", url);
+                            lightbox.set("hash", hash);
                             lightbox.set("disableBackground", disableBackground);
                             lightbox.setContent(o.responseText);
                             lightbox.show();
@@ -95,18 +97,18 @@
     });
 
     Lightbox.ATTRS = {
-        url : {
-            value : null
-        },
-        disableBackground: {
-            value: false
-        },
         background: {
             value: new LightboxBg({
                 visible : false,
                 render : true
             })
-        }
+        },
+        disableBackground: {
+            value: false
+        },
+        hash : {
+            value : null
+        },
     };
 
     Y.lane.Lightbox = new Lightbox({

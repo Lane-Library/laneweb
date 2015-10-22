@@ -8,7 +8,7 @@
         name: 'Lane Feedback Test Case',
 
         resetContent: function() {
-            Y.lane.Lightbox.set("url", "url#feedback1");
+            Y.lane.Lightbox.set("hash", "#feedback1");
             Y.lane.Lightbox.setContent("<div id='feedback'>" + Y.one("#xfeedback").get("innerHTML") + "</div>");
         },
 
