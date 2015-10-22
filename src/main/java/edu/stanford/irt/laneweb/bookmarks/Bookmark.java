@@ -11,7 +11,6 @@ import edu.stanford.irt.laneweb.LanewebException;
  * been set. This is so the jackson-mapper library can create one with the no parameter constructor then set the label
  * and url.
  */
-// TODO: make this class immutable by using a builder
 public class Bookmark implements Serializable {
 
     private static final long serialVersionUID = 1L;

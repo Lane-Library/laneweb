@@ -43,7 +43,7 @@
                     <br/>
                     <span class="time">
                         <xsl:call-template name="start-time"/>
-                        <xsl:text>–</xsl:text>
+                        <xsl:text> – </xsl:text>
                         <xsl:call-template name="end-time"/>
                     </span>
                 </p>

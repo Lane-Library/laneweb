@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-// TODO: remove code duplicated with UserCookieCodec
 public class SHCCodec {
 
     private static final Logger LOG = LoggerFactory.getLogger(SHCCodec.class);

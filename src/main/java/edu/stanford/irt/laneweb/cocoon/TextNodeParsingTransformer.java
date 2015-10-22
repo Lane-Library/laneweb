@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
@@ -20,14 +19,13 @@ import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.LanewebException;
 
-// TODO: maybe create an AbstractTransformer that extends AbstractXMLPipe and implements Transformer
-public class TextNodeParsingTransformer extends AbstractXMLPipe implements Transformer, CacheablePipelineComponent,
-        ParametersAware {
+public class TextNodeParsingTransformer extends AbstractXMLPipe
+        implements Transformer, CacheablePipelineComponent, ParametersAware {
 
     // the html parser creates screwy processing instructions from the classes
-    // xml. TODO: this is specific to the classes yet this class is can be used
-    // generally
+    // xml.
     private static final class ProcessingInstructionSwallowingPipe extends EmbeddedXMLPipe {
 
         public ProcessingInstructionSwallowingPipe(final XMLConsumer consumer) {
@@ -42,7 +40,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
 
     private StringBuilder content = new StringBuilder();
 
-    private String elementName = "event_description";
+    private String elementName;
 
     private boolean inElement = false;
 
@@ -70,8 +68,8 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         if (this.elementName.equals(qName)) {
             this.inElement = false;
-            final ByteArrayInputStream inputStream = new ByteArrayInputStream(this.content.toString().getBytes(
-                    StandardCharsets.UTF_8));
+            final ByteArrayInputStream inputStream = new ByteArrayInputStream(
+                    this.content.toString().getBytes(StandardCharsets.UTF_8));
             Source source = new Source() {
 
                 @Override
@@ -80,7 +78,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
                 }
 
                 @Override
-                public InputStream getInputStream() throws IOException {
+                public InputStream getInputStream() {
                     return inputStream;
                 }
 
@@ -113,9 +111,9 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
-        String name = parameters.get("elementName");
-        if (name != null) {
-            this.elementName = name;
+        this.elementName = parameters.get("elementName");
+        if (this.elementName == null) {
+            throw new LanewebException("elementName parameter is required");
         }
     }
 

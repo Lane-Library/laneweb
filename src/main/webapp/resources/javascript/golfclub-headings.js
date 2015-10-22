@@ -1,4 +1,3 @@
-//TODO: unit test
 (function() {
 
     Y.all(".golfclub").each(function() {

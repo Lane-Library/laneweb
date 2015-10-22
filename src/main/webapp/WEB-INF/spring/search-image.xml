@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-	<bean name="edu.stanford.irt.cocoon.pipeline.Generator/facet-copyright"
-		class="edu.stanford.irt.laneweb.search.SolrImageSearchTabGenerator"
-		parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator">
-		<constructor-arg ref="edu.stanford.irt.solr.service" />
-	</bean>
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/facet-copyright"
+        class="edu.stanford.irt.laneweb.search.SolrImageSearchTabGenerator"
+        parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator">
+        <constructor-arg ref="edu.stanford.irt.solr.service" />
+    </bean>
 
-	<bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-image"
-		class="edu.stanford.irt.laneweb.search.SolrImageSearchGenerator"
-		parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-		<constructor-arg index="0" ref="edu.stanford.irt.solr.service" />
-		<constructor-arg index="1"
-			ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-image-search" />
-	</bean> 
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-image"
+        class="edu.stanford.irt.laneweb.search.SolrImageSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
+        <constructor-arg index="0" ref="edu.stanford.irt.solr.service" />
+        <constructor-arg index="1"
+            ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-image-search" />
+    </bean> 
 
 
-	<bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-image-search"
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-image-search"
         class="edu.stanford.irt.laneweb.search.saxstrategy.SolrImageSearchSAXStrategy">
         <property name="websiteIdMapping" ref="edu.stanford.irt.laneweb.search.websiteIdMaping"/>
-	</bean>
-	
-		
-	 <bean name="edu.stanford.irt.cocoon.pipeline.Generator/admin-search-image"
+    </bean>
+    
+        
+     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/admin-search-image"
         class="edu.stanford.irt.laneweb.search.SolrAdminImageSearchGenerator">
           <constructor-arg  index="0"  ref="edu.stanford.irt.solr.service"/>
           <constructor-arg  index="1"  ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-admin-image-search"/>
     </bean>
-	
+    
 
-	<bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-admin-image-search"
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-admin-image-search"
         class="edu.stanford.irt.laneweb.search.saxstrategy.SolrAdminImageSearchSAXStrategy">
         <property name="websiteIdMapping" ref="edu.stanford.irt.laneweb.search.websiteIdMaping"/>
-	</bean>
-	
-	
-	<bean id="edu.stanford.irt.laneweb.search.websiteIdMaping" class="org.springframework.beans.factory.config.MapFactoryBean">
-		<property name="sourceMap">
-			<map>
-				<entry key="Bassett" value="Stanford Bassett Anatomy" />
-				<entry key="microbelibrary.org" value="ASM Microbe Library" />
-				<entry key="endoatlas.com" value="Atlas of GI Endoscopy" />
-				<entry key="medpics.ucsd.edu" value="UCSD MedPics" />
-				<entry key="health.education.assets.library" value="U Utah Health Ed Asset Lib" />
-				<entry key="usc.orthopaedic.surgical" value="USC Ortho Surg Anatomy" />
-				<entry key="ncbi.nlm.nih.gov" value="Pubmed Central" />
-				<entry key="wellcomeimages.org" value="Wellcome Images" />
-				<entry key="visualsonline.cancer.gov" value="National Cancer Institute" />
-				<entry key="commons.wikimedia.org" value="Wikimedia Commons" />
-				<entry key="indiana.edu" value="Indiana U X-Rays via NLM"/>
-			</map>
-		</property>
-	</bean>
+    </bean>
+    
+    
+    <bean id="edu.stanford.irt.laneweb.search.websiteIdMaping" class="org.springframework.beans.factory.config.MapFactoryBean">
+        <property name="sourceMap">
+            <map>
+                <entry key="Bassett" value="Stanford Bassett Anatomy" />
+                <entry key="microbelibrary.org" value="ASM Microbe Library" />
+                <entry key="endoatlas.com" value="Atlas of GI Endoscopy" />
+                <entry key="medpics.ucsd.edu" value="UCSD MedPics" />
+                <entry key="health.education.assets.library" value="U Utah Health Ed Asset Lib" />
+                <entry key="usc.orthopaedic.surgical" value="USC Ortho Surg Anatomy" />
+                <entry key="ncbi.nlm.nih.gov" value="Pubmed Central" />
+                <entry key="wellcomeimages.org" value="Wellcome Images" />
+                <entry key="visualsonline.cancer.gov" value="National Cancer Institute" />
+                <entry key="commons.wikimedia.org" value="Wikimedia Commons" />
+                <entry key="indiana.edu" value="Indiana U X-Rays via NLM"/>
+            </map>
+        </property>
+    </bean>
 
-	<import resource="classpath:solr-image-search.xml" />
+    <import resource="classpath:solr-image-search.xml" />
 
 </beans>

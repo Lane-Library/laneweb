@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>4</version>
+        <version>5</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>solr-RC-1.2-SNAPSHOT</version>
@@ -121,10 +121,10 @@
             <version>3.0.5</version>
             <scope>runtime</scope>
             <exclusions>
-            	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -218,10 +218,10 @@
             <artifactId>solr-image-repository</artifactId>
             <version>1.0.12</version>
             <exclusions>
-            	<exclusion>
-            		<artifactId>log4j</artifactId>
-            		<groupId>log4j</groupId>
-            	</exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -338,14 +338,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>catalog</artifactId>
-        	<version>3.7.0</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>catalog</artifactId>
+            <version>3.7.0</version>
         </dependency>
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>grandrounds</artifactId>
-        	<version>2.1.0</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>grandrounds</artifactId>
+            <version>2.1.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -557,18 +557,18 @@
                 </executions>
             </plugin>
             <plugin>
-            	<groupId>uk.org.adamretter.maven</groupId>
-            	<artifactId>xspec-maven-plugin</artifactId>
-            	<version>1.2</version>
-            	<executions>
-            	    <execution>
+                <groupId>uk.org.adamretter.maven</groupId>
+                <artifactId>xspec-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
                         <id>test</id>
                         <phase>test</phase>
                         <goals>
                             <goal>run-xspec</goal>
                         </goals>
-            	    </execution>
-            	</executions>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <pluginManagement>

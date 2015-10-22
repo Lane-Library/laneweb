@@ -47,9 +47,15 @@
 
 	<xsl:template match="lc:event_dates">
 		<div class="time">
-			<xsl:value-of select="tokenize(lc:start_date[1], '( |:00 )')[2]"/>
-			<xsl:text> – </xsl:text>
-			<xsl:value-of select="tokenize(lc:end_date[1], '( |:00 )')[2]"/>
+		<xsl:variable name="hour">
+		  <xsl:value-of select="tokenize(lc:start_date[1], '( |:00 )')[2]"/>
+		  </xsl:variable>
+          <xsl:value-of select="concat($hour,' ', lower-case(substring-after(./lc:end_date[1]/text(),':00 ')))"/>
+		  <xsl:text> – </xsl:text>
+		<xsl:variable name="hour">
+             <xsl:value-of select="tokenize(lc:end_date[1], '( |:00 )')[2]"/>
+        </xsl:variable>
+        	<xsl:value-of select="concat($hour, ' ', lower-case(substring-after(./lc:end_date[1]/text(),':00 ')))"/>
 		</div>
 	</xsl:template>
 

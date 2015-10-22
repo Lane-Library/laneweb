@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import edu.stanford.irt.cocoon.cache.Validity;
 
-// TODO: have isValid() return false if it has been more than one day
 public class ClassesValidity implements Validity {
 
     private static final int ELEVEN_PM = 23;
