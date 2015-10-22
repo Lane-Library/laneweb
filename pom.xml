@@ -476,6 +476,7 @@
                                 <include>shibboleth-sfx-min.js</include>
                                 <include>youtube-min.js</include>
                                 <include>back-to-top-min.js</include>
+                                <include>solr-ad-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
