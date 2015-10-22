@@ -72,8 +72,9 @@
                 // need to dynamically create regex for getting /plain url because
                 // of various base paths (eg /stage)
                 regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
-                // first replace takes care of missing leading slash in IE < 10
+                // case 112216
                 url = anchor.get("pathname") + anchor.get('search');
+                // first replace takes care of missing leading slash in IE < 10
                 url = url.replace(/(^\/?)/,"/").replace(regex, "$1/plain$2");
                 disableBackground = rel.indexOf("disableBackground") > -1;
                 disableAnimation = rel.indexOf("disableAnimation") === -1;
