@@ -19,7 +19,7 @@
     <xsl:variable name="search-mode" select="$facet = ''"/>
     <xsl:variable name="pageless-query-string" select="replace($query-string,'&amp;page=\d+','')"/>
     <xsl:variable name="facet-search-base-path" select="concat('?',replace($pageless-query-string,'&amp;(facets?=[^&amp;]+|facet.sort=index)',''))"/>
-    <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr-facet-browse.html?',$pageless-query-string)"/>
+    <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr/facet-browse.html?',$pageless-query-string)"/>
     <xsl:variable name="facets-per-browse-page" select="20"/>
     <xsl:variable name="values-per-facet" select="4"/>
     
