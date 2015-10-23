@@ -108,7 +108,7 @@
         },
         hash : {
             value : null
-        },
+        }
     };
 
     Y.lane.Lightbox = new Lightbox({
