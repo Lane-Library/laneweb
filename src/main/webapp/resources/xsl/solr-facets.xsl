@@ -125,7 +125,7 @@
 		                <ul>
 							<xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'recordType'"/>
-		                        <xsl:with-param name="label">Results from <span id="sources"><i class="fa fa-info-circle"></i></span></xsl:with-param>					   
+		                        <xsl:with-param name="label">Results from <span id="sources"><i class="fa fa-info-circle fa-lg"></i></span></xsl:with-param>					   
 							</xsl:call-template>
 		
 							<xsl:call-template name="field">
