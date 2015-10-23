@@ -13,7 +13,7 @@
                 <body>
                     <div class="resourceListPagination">
                         <div class="yui3-g">
-                            <div class="yui3-u-5-12"> all  results<span id="searchInfo">&#160;<i class="fa fa-info-circle" />
+                            <div class="yui3-u-5-12"> all  results<span id="searchInfo">&#160;<i class="fa fa-info-circle fa-lg" />
                             </span>
                                 <span class="tooltips">
                                     <span id="searchInfoTooltip">Lane Search displays the top results from multiple sources then presents them in relevance rank order.</span>

@@ -8,7 +8,7 @@
          <div class="yui3-g">
             <div class="yui3-u-5-12">
                <span id="pageStart">1</span> to 100 of <a href="?source=&amp;q=&amp;page=all" class="no-bookmarking">135 results</a>
-               <span id="searchInfo"> <i class="fa fa-info-circle"/>
+               <span id="searchInfo"> <i class="fa fa-info-circle fa-lg"/>
                </span>
                <span class="tooltips">
                   <span id="searchInfoTooltip">Lane Search displays the top results from multiple sources then presents them in relevance rank order.</span>
@@ -34,7 +34,7 @@
          <div class="yui3-g">
             <div class="yui3-u-5-12">
                <span id="pageStart">1</span> to 100 of <a href="?source=&amp;q=&amp;page=all" class="no-bookmarking">135 results</a>
-               <span id="searchInfo"> <i class="fa fa-info-circle"/>
+               <span id="searchInfo"> <i class="fa fa-info-circle fa-lg"/>
                </span>
                <span class="tooltips">
                   <span id="searchInfoTooltip">Lane Search displays the top results from multiple sources then presents them in relevance rank order.</span>
