@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-10-26" version="3.1.11" description="3.1.11 bug fix release">
+            <action date="2015-10-26" dev="ceyates" issue="112260" type="update">
+                Update links in History pages header
+            </action>
+            <action date="2015-10-22" dev="ryanmax" issue="112236" type="update">
+                increase the size of 'i' icon
+            </action>
+            <action date="2015-10-22" dev="ceyates" issue="112206" type="fix">
+                using hash no longer selects feedback form
+            </action>
+            <action date="2015-10-22" dev="ryanmax" issue="112176" type="add">
+                add a link for solr beta in the header
+            </action>
+            <action date="2015-10-20" dev="ceyates" issue="112116" type="fix">
+                lightbox widget breaks when lightbox link is clicked when it is visible
+            </action>
+        </release>
         <release date="2015-10-20" version="laneweb-solr-rc-2.0" description="beta solr release rc-2">
             <action date="2015-10-19" dev="ryanmax" issue="112112" type="feature">js for Lane Beta Survey on search results</action>
             <action date="2015-10-19" dev="ryanmax" issue="111741" type="feature">update overlay text</action>
