@@ -34,7 +34,7 @@
                                     <li>FIND A DOCTOR</li>
                                     <li>
                                         <a
-                                            href="http://stanfordhospital.org/directory/">Adult-care doctor</a>
+                                            href="https://stanfordhealthcare.org/content/shc/en/search-results.doctors.html">Adult-care doctor</a>
                                     </li>
                                     <li>
                                         <a
@@ -46,7 +46,7 @@
                                     </li>
                                     <li style="margin-top:10px">CLINICS &amp; SERVICES</li>
                                     <li>
-                                        <a href="http://stanfordhospital.org/directory/#0">Adult care</a>
+                                        <a href="https://stanfordhealthcare.org/content/shc/en/search-results.clinics.html">Adult care</a>
                                     </li>
                                     <li>
                                         <a href="http://www.stanfordchildrens.org/en/service/index?">Pediatric care</a>
@@ -139,23 +139,6 @@
                                 </ul>
                             </div>
                             <div class="yui3-u-1-2">
-                                <a
-                                    style="
-                                    padding:0 8px;
-                                    line-height:normal;"
-                                    href="http://med.stanford.edu/news/all-news/2014/04/5-questions-ann-arvin-on-stanfords-history-of-collaboration.html">
-                                    <span
-                                        style="
-                                        font-size:13px;
-                                        color:white;
-                                        ">RESEARCH NEWS</span>
-                                    <img alt="Ann Arvin"
-                                        src="http://med.stanford.edu/content/dam/sm-profiles/ann-arvin-global-nav.jpg.img.620.high.png" />
-                                    <p style="font-size:12px">
-                                        5 Questions: Ann Arvin on Stanford's history of collaboration
-                                        <i style="font-size:6px" class="fa fa-arrow-right"></i>
-                                    </p>
-                                </a>
                                 <a href="http://med.stanford.edu/research.html" class="explore">
                                     <span>EXPLORE RESEARCH</span>
                                     <p>
@@ -224,25 +207,6 @@
                                 </ul>
                             </div>
                             <div class="yui3-u-1-2">
-                                <a
-                                    style="
-                                    padding:0 8px;
-                                    line-height:normal;"
-                                    href="http://med.stanford.edu/news/all-news/2014/06/respect-the-rituals-of-medicine--verghese-tells-graduating-stude.html">
-                                    <span
-                                        style="
-                                        font-size:13px;
-                                        color:white;
-                                        ">EDUCATION NEWS</span>
-                                    <img
-                                        alt="Respect the rituals of medicine, Verghese tells graduating students"
-                                        src='http://med.stanford.edu/content/dam/sm-news/images/featured/graduation2014-verghese-menu.jpg.img.620.high.png' />
-                                    <p style="font-size:12px">
-                                        Respect the rituals of medicine, Verghese tells graduating
-                                        students
-                                        <i style="font-size:6px" class="fa fa-arrow-right"></i>
-                                    </p>
-                                </a>
                                 <a href="http://med.stanford.edu/education.html" class="explore">
                                     <span>Explore Education</span>
                                     <p>
