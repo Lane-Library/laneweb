@@ -159,10 +159,11 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 0,
                     parseSort());
             Map<String, Collection<Facet>> publicationTypeFacetMap = processFacets(fps);
-            for (Facet f : publicationTypeFacetMap.get(PUBLICATION_TYPE)) {
-                if (this.requiredPublicationTypes.contains(f.getValue())) {
-                    facetList.add(f);
-                }
+            facetList = publicationTypeFacetMap.get(PUBLICATION_TYPE);
+            if (null != facetList) {
+                Collection<Facet> moreTypes = facetList.stream()
+                        .filter(s -> this.requiredPublicationTypes.contains(s.getValue())).collect(Collectors.toList());
+                facetList.addAll(moreTypes);
             }
             facetsMap.put(PUBLICATION_TYPE, facetList);
         }
@@ -249,8 +250,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         Map<String, Set<Facet>> sortedFacetsMap = new LinkedHashMap<String, Set<Facet>>();
         for (Map.Entry<String, Collection<Facet>> entry : facetsMap.entrySet()) {
             Set<Facet> facetSet = new TreeSet<Facet>(this.comparator);
-            for (Facet f : entry.getValue()) {
-                facetSet.add(f);
+            Collection<Facet> facetList = entry.getValue();
+            if (null != facetList) {
+                facetSet.addAll(facetList);
             }
             sortedFacetsMap.put(entry.getKey(), facetSet);
         }
