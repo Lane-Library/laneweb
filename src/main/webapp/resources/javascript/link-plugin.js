@@ -47,8 +47,7 @@
                 valueFn : function() {
                     var host = this.get(HOST_NODE).get(HOST_NAME);
                     host = host || documentHostName;
-                    //TODO: need to check for :443, too?
-                    if (host.indexOf(":80") > -1) {
+                    if (host.indexOf(":") > -1) {
                         host = host.substring(0, host.indexOf(":"));
                     }
                     return host;

@@ -75,9 +75,6 @@
                     var result = args.result;
                     result.setContent(o.responseText);
                     result.show();
-                },
-                failure: function(){
-                    //TODO: use Y.lane.Location.set("href", href) to set page to href of facet
                 }
             },
             "arguments": {
