@@ -1,8 +1,6 @@
 (function() {
     var Lane = Y.lane,
         form = Y.one('#search'),
-        nav = Y.one(".lane-nav"),
-        container = Y.one("#searchFormContainer"),
         searchTerms,
         picoIsOn = false,
         picoTextInputs = [],
