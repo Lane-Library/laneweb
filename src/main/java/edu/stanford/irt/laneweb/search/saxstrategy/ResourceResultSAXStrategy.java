@@ -10,7 +10,6 @@ import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;
 
-// TODO: remove duplication between this and EngineResultSAXStrategy
 public class ResourceResultSAXStrategy extends AbstractResultSAXStrategy<Result> {
 
     /** the String 'resource'. */

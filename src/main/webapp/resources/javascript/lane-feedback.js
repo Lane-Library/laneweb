@@ -59,7 +59,6 @@
                     eventHandle1.detach();
                     eventHandle2.detach();
                     self.destroy();
-                    // TODO: shouldn't have to do this with drag, only because purchase-suggestions extends feedback
                     var drag = this.get("drag");
                     if (drag) {
                         drag.destroy();

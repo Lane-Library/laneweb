@@ -30,7 +30,6 @@ public class EngineSearchGenerator extends SearchGenerator {
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (this.engines == null) {
-            // TODO: maybe null engines is OK
             String engineList = Objects.requireNonNull(parameters.get(Model.ENGINES), "null engines");
             this.engines = Arrays.asList(engineList.split(","));
         }

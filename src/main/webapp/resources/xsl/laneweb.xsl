@@ -294,26 +294,13 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add clinical class to search form, fieldset and lane-nav elements when clinical or peds is active -->
+    <!-- add clinical class to search form when clinical or peds is active -->
     <xsl:template match="node()[@id='search']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
                 <xsl:attribute name="class">clinical</xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="node()[@class='lane-nav']">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
-            <xsl:attribute name="class">
-                <xsl:value-of select="@class"/>
-                <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
-                    <xsl:text> clinical</xsl:text>
-                </xsl:if>
-            </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
