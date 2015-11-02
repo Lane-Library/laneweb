@@ -50,6 +50,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("primary type");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -73,6 +74,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getLabel()).andReturn("label");
         expect(this.link.getType()).andReturn(LinkType.NORMAL).times(2);
         expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("primary type");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -97,6 +99,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("primary type");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -182,6 +185,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("primary type");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -204,6 +208,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("primary type");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("");
         replay(this.eresource, this.link);
@@ -227,6 +232,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("primary type");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -250,6 +256,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("primary type");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
@@ -272,6 +279,7 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("primary type");
         expect(this.eresource.getRecordId()).andReturn(0);
         expect(this.eresource.getDescription()).andReturn(null);
         replay(this.eresource, this.link);
@@ -294,7 +302,8 @@ public class EresourceXHTMLSAXStrategyTest {
         expect(this.link.getUrl()).andReturn("url");
         expect(this.link.getHoldingsAndDates()).andReturn("holdings, dates").times(2);
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
-        expect(this.eresource.getRecordType()).andReturn("print");
+        expect(this.eresource.getRecordType()).andReturn("bib");
+        expect(this.eresource.getPrimaryType()).andReturn("foo Print");
         expect(this.eresource.getDescription()).andReturn("description");
         replay(this.eresource, this.link);
         this.xmlConsumer.startDocument();

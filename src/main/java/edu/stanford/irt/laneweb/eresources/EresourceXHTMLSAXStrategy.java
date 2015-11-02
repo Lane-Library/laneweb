@@ -9,6 +9,8 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresource> {
 
+    private static final String CATALOG_BASE = "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=";
+
     private static final String GET_PASSWORD = "Get Password";
 
     private static final String HVRTARG = "hvrTarg";
@@ -51,7 +53,12 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
                 endDiv(xmlConsumer);
             }
         } else {
-            createAnchorWithTitle(xmlConsumer, link.getUrl(), link.getLabel(), linkText);
+            String url = link.getUrl();
+            if (null != url && url.startsWith(CATALOG_BASE)) {
+                XMLUtils.data(xmlConsumer, "Also available: ");
+                linkText = "Print – " + linkText;
+            }
+            createAnchorWithTitle(xmlConsumer, url, link.getLabel(), linkText);
             if (additionalText != null && !additionalText.isEmpty()) {
                 XMLUtils.data(xmlConsumer, " " + additionalText);
             }
@@ -64,17 +71,19 @@ public class EresourceXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<Eresourc
         startDivWithClass(xmlConsumer, "moreResults");
         String recordType = eresource.getRecordType();
         if ("bib".equals(recordType)) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=").append(eresource.getRecordId());
-            createAnchor(xmlConsumer, sb.toString(), "Lane Catalog record");
+            if (eresource.getPrimaryType().contains("Print")) {
+                createSpanWithClass(xmlConsumer, SOURCE_LINK, "Print Material");
+            } else {
+                StringBuilder sb = new StringBuilder();
+                sb.append(CATALOG_BASE).append(eresource.getRecordId());
+                createAnchor(xmlConsumer, sb.toString(), "Lane Catalog record");
+            }
         } else if ("auth".equals(recordType)) {
             createSpanWithClass(xmlConsumer, SOURCE_LINK, "Lane Community Info File");
         } else if ("web".equals(recordType)) {
             createSpanWithClass(xmlConsumer, SOURCE_LINK, "Lane Web Page");
         } else if ("class".equals(recordType)) {
             createSpanWithClass(xmlConsumer, SOURCE_LINK, "Lane Class");
-        } else if ("print".equals(recordType)) {
-            createSpanWithClass(xmlConsumer, SOURCE_LINK, "Print Material");
         }
         endDiv(xmlConsumer);
     }
