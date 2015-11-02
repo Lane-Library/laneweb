@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-11-02" version="3.1.12" description="3.1.12 bug fix release">
+            <action date="2015-11-02" dev="alainb" issue="112445" type="fix">
+                search includes empty Scopus result
+            </action>
+        </release>
         <release date="2015-10-26" version="3.1.11" description="3.1.11 bug fix release">
             <action date="2015-10-26" dev="ceyates" issue="112260" type="update">
                 Update links in History pages header
