@@ -166,10 +166,16 @@
         <constructor-arg>
             <list>
                 <value>^171\.6[4-7]\.\S+</value>
-                <!-- campus wireless 10.32.0.0 through 10.33.255.255 -->
-                <value>^10\.3[2-3]\.\S+</value>
-                <!-- library wireless 10.39.32.1 through 10.39.47.255 -->
-                <value>^10\.39\.(?:3[2-9]|4[0-7])\.\S+</value>
+                <!-- 10.34.0.0 - 10.35.255.255		Wireless NAT range for clients registered in NetDB connected to the "Stanford" SSID in academic buildings -->
+                <value>^10\.3[4-5]\.\S+</value>
+                <!-- 10.39.0.0 - 10.39.255.255		Wireless NAT range for School of Medicine -->
+                <value>^10\.39\.\S+</value>
+                <!--  10.38.0.0 - 10.38.127.25		Wireless NAT range for "Stanford Secure" SSID for School of Medicine -->
+                <value>^10\.38\.(?:[0-9]{1,2}|1[0-2][0-7])\.\S+</value>
+				<!-- 10.98.0.0 - 10.99.255.255		Wireless NAT range for "Stanford Secure" SSID in academic buildings -->
+                <value>^10\.9[8-9]\.\S+</value>
+				<!-- 10.128.0.0 - 10.135.255.255	Wireless NAT range for "Stanford Secure" SSID for Student Residences -->
+                <value>^10\.(?:12[8-9]|13[0-5])\.\S+</value>
             </list>
         </constructor-arg>
     </bean>
