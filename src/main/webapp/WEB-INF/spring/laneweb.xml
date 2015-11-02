@@ -106,6 +106,7 @@
                         <value>192.119.144.96</value>
                         <value>192.119.151.127</value>
                         <value>178.32.54.240</value>
+                        <value>178.150.15.201</value>
                     </set>
                 </constructor-arg>
                 <constructor-arg>
