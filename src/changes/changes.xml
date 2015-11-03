@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-11-03" version="laneweb-solr-rc-3.0" description="beta solr release rc-3">
+            <action date="2015-11-02" dev="ryanmax" issue="112523" type="fix">
+            	browse pages missing "Also available: Print" links and "Print Material" labels
+			</action>
+        </release>
         <release date="2015-11-02" version="3.1.12" description="3.1.12 bug fix release">
             <action date="2015-11-02" dev="alainb" issue="112445" type="fix">
                 search includes empty Scopus result
