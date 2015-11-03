@@ -8,6 +8,7 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 
 public class ProxyLinksTest {
@@ -16,8 +17,8 @@ public class ProxyLinksTest {
 
     @Before
     public void setUp() throws Exception {
-        this.proxyLinks = new ProxyLinks(Collections.singletonList("^171\\.65\\.44\\.\\S+"),
-                Collections.singletonList("^171\\.6[4-7]\\.\\S+"));
+        this.proxyLinks = new ProxyLinks(Collections.singletonList(new CIDRRange("171.65.44.0/24")),
+                Collections.singletonList(new CIDRRange("171.64.0.0/14")));
     }
 
     @Test

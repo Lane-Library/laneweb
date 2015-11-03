@@ -147,35 +147,52 @@
 
     <bean id="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"
         class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks">
-        <!-- regular expressions for IPs to be proxied TODO: change to CIDRRanges -->
         <constructor-arg>
             <list>
                 <!-- VPN 171.66.16.0 - 171.66.31.255 -->
-                <value>^171\.66\.(?:1[6-9]|2[0-9]|3[0-1])\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="171.66.16.0/20"/>
+                </bean>
                 <!-- hospital 171.65.44.0 - 171.65.44.255 -->
-                <value>^171\.65\.44\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="171.65.44.0/24"/>
+                </bean>
                 <!-- hospital 171.65.125.0 - 171.65.125.255 -->
-                <value>^171\.65\.125\.\S+</value>
-                <!-- hospital 171.65.128.0 - 171.65.199.255 -->
-                <value>^171\.65\.1(?:2[8-9]|[3-9][0-9])\.\S+</value>
-                <!-- hospital 171.65.200.0 - 171.65.255.255 -->
-                <value>^171\.65\.2[0-5][0-9]\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="171.65.125.0/24"/>
+                </bean>
+                <!-- hospital 171.65.128.0 - 171.65.255.255 -->
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="171.65.128.0/17"/>
+                </bean>
             </list>
         </constructor-arg>
         <!-- regular expressions for IPs to NOT be proxied -->
         <constructor-arg>
             <list>
-                <value>^171\.6[4-7]\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="171.64.0.0/14"/>
+                </bean>
                 <!-- 10.34.0.0 - 10.35.255.255		Wireless NAT range for clients registered in NetDB connected to the "Stanford" SSID in academic buildings -->
-                <value>^10\.3[4-5]\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="10.34.0.0/15"/>
+                </bean>
                 <!-- 10.39.0.0 - 10.39.255.255		Wireless NAT range for School of Medicine -->
-                <value>^10\.39\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="10.39.0.0/16"/>
+                </bean>
                 <!--  10.38.0.0 - 10.38.127.25		Wireless NAT range for "Stanford Secure" SSID for School of Medicine -->
-                <value>^10\.38\.(?:[0-9]{1,2}|1[0-2][0-7])\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="10.38.0.0/17"/>
+                </bean>
 				<!-- 10.98.0.0 - 10.99.255.255		Wireless NAT range for "Stanford Secure" SSID in academic buildings -->
-                <value>^10\.9[8-9]\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="10.98.0.0/15"/>
+                </bean>
 				<!-- 10.128.0.0 - 10.135.255.255	Wireless NAT range for "Stanford Secure" SSID for Student Residences -->
-                <value>^10\.(?:12[8-9]|13[0-5])\.\S+</value>
+                <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
+                	<constructor-arg value="10.128.0.0/13"/>
+                </bean>
             </list>
         </constructor-arg>
     </bean>

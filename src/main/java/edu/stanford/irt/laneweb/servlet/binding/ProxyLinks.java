@@ -1,26 +1,19 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Pattern;
 
+import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 
 public class ProxyLinks {
 
-    private List<Pattern> noProxyRegex;
+    private List<CIDRRange> noProxyCIDRRange;
 
-    private List<Pattern> proxyRegex;
+    private List<CIDRRange> proxyCIDRRange;
 
-    public ProxyLinks(final List<String> proxyRegex, final List<String> noProxyRegex) {
-        this.proxyRegex = new LinkedList<Pattern>();
-        for (String pattern : proxyRegex) {
-            this.proxyRegex.add(Pattern.compile(pattern));
-        }
-        this.noProxyRegex = new LinkedList<Pattern>();
-        for (String pattern : noProxyRegex) {
-            this.noProxyRegex.add(Pattern.compile(pattern));
-        }
+    public ProxyLinks(final List<CIDRRange> proxyCIDRRange, final List<CIDRRange> noProxyCIDRRange) {
+        this.proxyCIDRRange = proxyCIDRRange;
+        this.noProxyCIDRRange = noProxyCIDRRange;
     }
 
     public Boolean getProxyLinks(final IPGroup ipGroup, final String remoteAddress) {
@@ -35,8 +28,8 @@ public class ProxyLinks {
     }
 
     private boolean isNoProxy(final String ip) {
-        for (Pattern pattern : this.noProxyRegex) {
-            if (pattern.matcher(ip).matches()) {
+        for (CIDRRange cidrRange : this.noProxyCIDRRange) {
+            if (cidrRange.contains(ip)) {
                 return true;
             }
         }
@@ -44,8 +37,8 @@ public class ProxyLinks {
     }
 
     private boolean isProxy(final String ip) {
-        for (Pattern pattern : this.proxyRegex) {
-            if (pattern.matcher(ip).matches()) {
+        for (CIDRRange cidrRange : this.proxyCIDRRange) {
+            if (cidrRange.contains(ip)) {
                 return true;
             }
         }
