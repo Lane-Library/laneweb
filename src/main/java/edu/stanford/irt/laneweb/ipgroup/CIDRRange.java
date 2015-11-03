@@ -29,7 +29,13 @@ public class CIDRRange {
      *            with the format "nnn.nnn.nnn.nnn/nn"
      */
     public CIDRRange(final String cidr) {
-        init(cidr);
+        this.cidr = cidr;
+        this.subranges = new ArrayList<CIDRRange>();
+        String ip = cidr.substring(0, cidr.indexOf('/'));
+        int addr = ipToInt(ip);
+        int mask = (-1) << (32 - Integer.parseInt(cidr.substring(ip.length() + 1)));
+        this.lowest = addr & mask;
+        this.highest = this.lowest + (~mask);
     }
 
     /**
@@ -41,7 +47,7 @@ public class CIDRRange {
      *            the IPGroup associated with this range
      */
     public CIDRRange(final String cidr, final IPGroup ipGroup) {
-        init(cidr);
+        this(cidr);
         this.ipGroup = ipGroup;
     }
 
@@ -164,16 +170,6 @@ public class CIDRRange {
             }
         }
         return containedBy;
-    }
-
-    private void init(final String cidr) {
-        this.cidr = cidr;
-        this.subranges = new ArrayList<CIDRRange>();
-        String ip = cidr.substring(0, cidr.indexOf('/'));
-        int addr = ipToInt(ip);
-        int mask = (-1) << (32 - Integer.parseInt(cidr.substring(ip.length() + 1)));
-        this.lowest = addr & mask;
-        this.highest = this.lowest + (~mask);
     }
 
     private int ipToInt(final String ip) {

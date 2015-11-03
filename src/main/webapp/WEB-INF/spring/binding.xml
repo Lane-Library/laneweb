@@ -167,7 +167,7 @@
                 </bean>
             </list>
         </constructor-arg>
-        <!-- regular expressions for IPs to NOT be proxied -->
+        <!-- CIDR ranges for IPs to NOT be proxied -->
         <constructor-arg>
             <list>
                 <bean class="edu.stanford.irt.laneweb.ipgroup.CIDRRange">
