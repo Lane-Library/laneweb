@@ -63,7 +63,7 @@
     }
 
 
-    function confirmAdminAction(id, o, args){
+    function confirmAdminAction(id, o){
         var image = Y.JSON.parse(o.responseText),
         id = "#" .concat(image.id.split('.').join('\\.').split('/').join('\\/')),
         div = Y.one( id);
