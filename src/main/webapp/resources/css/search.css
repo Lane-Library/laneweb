@@ -41,6 +41,7 @@
     border: none;
     padding: 7px 0 7px 10px;
     white-space: nowrap;
+    box-sizing:border-box;
 }
 .popInContent .popInLabel {
     color:#FF6600;
@@ -54,8 +55,8 @@
 }
 .popInContent.hitCountPopIn {
     border: 1px solid #E6E4DC;
-	top:55px;
-    width:unset;
+    top:55px;
+    width:auto;
 }
 #searchResults {
     padding-top:10px;
