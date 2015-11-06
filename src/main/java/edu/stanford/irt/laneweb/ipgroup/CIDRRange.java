@@ -94,7 +94,11 @@ public class CIDRRange {
      * @return true if the ip is in range, otherwise false
      */
     public boolean contains(final String ip) {
-        return contains(ipToInt(ip));
+        try {
+            return contains(ipToInt(ip));
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
