@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-11-09" version="3.1.13" description="3.1.13 bug fix release">
+            <action date="2015-11-06" dev="ceyates" issue="112616" type="fix">
+                crawler site validation not working (google and yahoo)
+            </action>
+            <action date="2015-11-06" dev="ceyates" issue="112590" type="remove">
+                remove email obfuscation
+            </action>
+            <action date="2015-11-03" dev="ryanmax" issue="112552" type="update">
+                change bookmark error messages
+            </action>
+            <action date="2015-11-02" dev="ryanmax" issue="112333" type="update">
+                do not force authentication for Stanford wireless users
+            </action>
+            <action date="2015-11-03" dev="ryanmax" issue="111475" type="update">
+                odd placements for spelling, querymapping and FindIt suggestions
+            </action>
+        </release>
         <release date="2015-11-02" version="3.1.12" description="3.1.12 bug fix release">
             <action date="2015-11-02" dev="alainb" issue="112445" type="fix">
                 search includes empty Scopus result
