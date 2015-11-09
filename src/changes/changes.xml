@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2015-11-09" version="3.1.13" description="3.1.13 bug fix release">
+            <action date="2015-11-09" dev="ceyates" issue="112620" type="fix">
+                Not Found using-lib/docdeliver.html DocXpress 
+            </action>
             <action date="2015-11-06" dev="ceyates" issue="112616" type="fix">
                 crawler site validation not working (google and yahoo)
             </action>
