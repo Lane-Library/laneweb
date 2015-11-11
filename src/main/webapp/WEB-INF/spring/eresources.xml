@@ -6,6 +6,17 @@
     <bean name="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"
         class="edu.stanford.irt.laneweb.solr.SolrSearchService"/>
     
+     <bean name="edu.stanford.irt.laneweb.solr.SolrQueryParser"
+        class="edu.stanford.irt.laneweb.solr.SolrQueryParser">
+        <constructor-arg>
+            <list>
+                <bean class="edu.stanford.irt.laneweb.solr.AdvancedQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.solr.PmidQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.solr.EscapingQueryInspector"/>
+            </list>
+        </constructor-arg>
+     </bean>
+     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"
         class="edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy"/>
     

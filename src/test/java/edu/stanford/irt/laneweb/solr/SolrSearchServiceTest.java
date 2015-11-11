@@ -36,6 +36,7 @@ public class SolrSearchServiceTest {
         public TestSolrSearchService(final SolrTemplate solrTemplate, final SolrRepository solrRepository) {
             super.solrTemplate = solrTemplate;
             super.repository = solrRepository;
+            super.parser = new SolrQueryParser(Collections.emptyList());
         }
     }
 
@@ -82,8 +83,8 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testGetCore() {
-        expect(this.repository.browseAllCoreByType(isA(String.class), isA(PageRequest.class))).andReturn(
-                Collections.emptyList());
+        expect(this.repository.browseAllCoreByType(isA(String.class), isA(PageRequest.class)))
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.getCore("type");
         verify(this.repository);
@@ -97,7 +98,7 @@ public class SolrSearchServiceTest {
     @Test
     public final void testGetMesh() {
         expect(this.repository.browseAllByMeshAndType(isA(String.class), isA(String.class), isA(PageRequest.class)))
-        .andReturn(Collections.emptyList());
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.getMesh("type", "mesh");
         verify(this.repository);
@@ -115,8 +116,8 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testGetSubset() {
-        expect(this.repository.browseAllBySubset(isA(String.class), isA(PageRequest.class))).andReturn(
-                Collections.emptyList());
+        expect(this.repository.browseAllBySubset(isA(String.class), isA(PageRequest.class)))
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.getSubset("subset");
         verify(this.repository);
@@ -129,8 +130,8 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testGetTypeString() {
-        expect(this.repository.browseAllByType(isA(String.class), isA(PageRequest.class))).andReturn(
-                Collections.emptyList());
+        expect(this.repository.browseAllByType(isA(String.class), isA(PageRequest.class)))
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.getType("type");
         verify(this.repository);
@@ -138,9 +139,8 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testGetTypeStringChar() {
-        expect(
-                this.repository.browseByTypeTitleStartingWith(isA(String.class), isA(String.class),
-                        isA(PageRequest.class))).andReturn(Collections.emptyList());
+        expect(this.repository.browseByTypeTitleStartingWith(isA(String.class), isA(String.class),
+                isA(PageRequest.class))).andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.getType("type", 'a');
         verify(this.repository);
@@ -154,8 +154,8 @@ public class SolrSearchServiceTest {
     @Test
     public final void testGetTypeStringCharHash() {
         PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
-        expect(this.repository.browseByTypeTitleStartingWith("Type", "1", pageRequest)).andReturn(
-                Collections.emptyList());
+        expect(this.repository.browseByTypeTitleStartingWith("Type", "1", pageRequest))
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.getType("type", '#');
         verify(this.repository);
@@ -170,7 +170,7 @@ public class SolrSearchServiceTest {
     public final void testSearch() {
         Page<Eresource> page = createMock(Page.class);
         expect(this.repository.searchFindAllWithFilter(isA(String.class), isA(String.class), isA(PageRequest.class)))
-        .andReturn(page);
+                .andReturn(page);
         expect(page.getContent()).andReturn(Collections.emptyList());
         replay(this.repository, page);
         this.searchService.search("query");
@@ -213,8 +213,8 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testSearchFindAllNotRecordTypePubmed() {
-        expect(this.repository.searchFindAllNotRecordTypePubmed(isA(PageRequest.class))).andReturn(
-                Collections.emptyList());
+        expect(this.repository.searchFindAllNotRecordTypePubmed(isA(PageRequest.class)))
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.searchFindAllNotRecordTypePubmed();
         verify(this.repository);
@@ -224,7 +224,7 @@ public class SolrSearchServiceTest {
     public final void testSearchTypeStringString() {
         Page<Eresource> page = createMock(Page.class);
         expect(this.repository.searchFindByType(isA(String.class), isA(String.class), isA(PageRequest.class)))
-        .andReturn(page);
+                .andReturn(page);
         expect(page.getContent()).andReturn(Collections.emptyList());
         replay(this.repository, page);
         this.searchService.searchType("type", "query");
@@ -240,7 +240,7 @@ public class SolrSearchServiceTest {
     public final void testSearchTypeStringStringPageable() {
         Page<Eresource> page = createMock(Page.class);
         expect(this.repository.searchFindByType(isA(String.class), isA(String.class), isA(PageRequest.class)))
-        .andReturn(page);
+                .andReturn(page);
         replay(this.repository, page);
         this.searchService.searchType("type", "query", new PageRequest(0, 1));
         verify(this.repository, page);
@@ -254,9 +254,8 @@ public class SolrSearchServiceTest {
     @Test
     public final void testSearchWithFilters() {
         Page<Eresource> page = createMock(Page.class);
-        expect(
-                this.repository.searchFindAllWithFilter("query", "field1:value AND field2:value", new PageRequest(0, 1,
-                        null))).andReturn(page);
+        expect(this.repository.searchFindAllWithFilter("query", "field1:value AND field2:value",
+                new PageRequest(0, 1, null))).andReturn(page);
         replay(this.repository, page);
         this.searchService.searchWithFilters("query", "field1:value::field2:value", new PageRequest(0, 1));
         verify(this.repository, page);
@@ -273,8 +272,8 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testSuggestFindAll() {
-        expect(this.repository.suggestFindAll("query terms", "query +terms", new PageRequest(0, 10))).andReturn(
-                Collections.emptyList());
+        expect(this.repository.suggestFindAll("query terms", "query +terms", new PageRequest(0, 10)))
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.suggestFindAll("query terms");
         verify(this.repository);
@@ -282,8 +281,8 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testSuggestFindByType() {
-        expect(this.repository.suggestFindByType("term", "Type", new PageRequest(0, 10))).andReturn(
-                Collections.emptyList());
+        expect(this.repository.suggestFindByType("term", "Type", new PageRequest(0, 10)))
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.suggestFindByType("term", "type");
         verify(this.repository);
