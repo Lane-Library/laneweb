@@ -93,7 +93,10 @@
     position:absolute;
     left:570px;
     top:0;
+    width:22px;
     line-height:34px;
+    text-align: center;
+    background-color: #fff;
 }
 .searchReset.active {
     display:block;
