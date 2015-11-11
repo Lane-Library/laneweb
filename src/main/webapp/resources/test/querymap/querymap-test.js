@@ -30,7 +30,7 @@
             };
             config.on.success.apply(this, [1, {"responseText":' { "id": "267196285", "status": "running", "query": "histrionic", "resources": { "ovid-kaplan": { "status": "", "url": "/secure/apps/proxy/credential?url=http://ovidsp.ovid.com/ovidweb.cgi?T=JS&PAGE=titles&D=books&SEARCH=histrionic.mp%0701412563.sc.%071+and+2", "hits": "" } , "am_ebert": { "status": "", "url": "/secure/apps/proxy/credential?url=http://www.accessmedicine.com/search/searchAMResult.aspx?searchStr=histrionic&searchType=2&fullTextStr=histrionic&resourceID=10", "hits": "" } } }'}]);
         };
-        config.on.success.apply(this, [0, {"responseText":'{"descriptor":null,"frequencies":null,"query":"histrionic","resourceMap":{"descriptor":{"descriptorName":"Mental Disorders","descriptorUI":"D001523","treeNumbers":["F03"]},"resources":[{"id":"ovid-kaplan","label":"Kaplan\'s Comprehensive Psychiatry"},{"id":"am_ebert","label":"Current Dx & Tx: Psychiatry"}]},"treePath":null}'}]);
+        config.on.success.apply(this, [0, {"responseText":'{"descriptor":{"descriptorName":"Mental Disorders","descriptorUI":"D001523","treeNumbers":["F03"]},"resources":[{"id":"ovid-kaplan","label":"Kaplan\'s Comprehensive Psychiatry"},{"id":"am_ebert","label":"Current Dx & Tx: Psychiatry"}]}'}]);
     };
 
 })();
