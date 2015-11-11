@@ -41,6 +41,8 @@ public class SolrSearchService implements CollectionManager {
 
     private static final FacetOptions FACET_OPTIONS = new FacetOptions();
 
+    private static final String NULL_TYPE = "null type";
+
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
     static {
@@ -96,7 +98,7 @@ public class SolrSearchService implements CollectionManager {
     @Override
     public List<Eresource> getCore(final String type) {
         if (null == type) {
-            throw new IllegalArgumentException("null type");
+            throw new IllegalArgumentException(NULL_TYPE);
         }
         String newType = SolrTypeManager.convertToNewType(type);
         return this.repository.browseAllCoreByType(newType, new PageRequest(0, Integer.MAX_VALUE));
@@ -105,7 +107,7 @@ public class SolrSearchService implements CollectionManager {
     @Override
     public List<Eresource> getMesh(final String type, final String mesh) {
         if (null == type) {
-            throw new IllegalArgumentException("null type");
+            throw new IllegalArgumentException(NULL_TYPE);
         }
         if (null == mesh) {
             throw new IllegalArgumentException("null mesh");
@@ -125,7 +127,7 @@ public class SolrSearchService implements CollectionManager {
     @Override
     public List<Eresource> getType(final String type) {
         if (null == type) {
-            throw new IllegalArgumentException("null type");
+            throw new IllegalArgumentException(NULL_TYPE);
         }
         String newType = SolrTypeManager.convertToNewType(type);
         return this.repository.browseAllByType(newType, new PageRequest(0, Integer.MAX_VALUE));
@@ -134,7 +136,7 @@ public class SolrSearchService implements CollectionManager {
     @Override
     public List<Eresource> getType(final String type, final char alpha) {
         if (null == type) {
-            throw new IllegalArgumentException("null type");
+            throw new IllegalArgumentException(NULL_TYPE);
         }
         char sAlpha = alpha;
         // solr stores starts with numeric as '1'
@@ -179,7 +181,7 @@ public class SolrSearchService implements CollectionManager {
     @Override
     public List<Eresource> searchType(final String type, final String query) {
         if (null == type) {
-            throw new IllegalArgumentException("null type");
+            throw new IllegalArgumentException(NULL_TYPE);
         }
         String cleanQuery = this.parser.parse(query);
         String newType = SolrTypeManager.convertToNewType(type);
@@ -188,7 +190,7 @@ public class SolrSearchService implements CollectionManager {
 
     public Page<Eresource> searchType(final String type, final String query, final Pageable pageRequest) {
         if (null == type) {
-            throw new IllegalArgumentException("null type");
+            throw new IllegalArgumentException(NULL_TYPE);
         }
         String cleanQuery = this.parser.parse(query);
         return this.repository.searchFindByType(cleanQuery, SolrTypeManager.convertToNewType(type), pageRequest);
