@@ -146,9 +146,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
             @Qualifier(value = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static") final HttpRequestHandler staticHandler) {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         Map<String, Object> urlMap = new HashMap<String, Object>();
-        urlMap.put("/BingSiteAuth.xml", staticHandler);
-        urlMap.put("/google708f1eef3c6d1e52.html", staticHandler);
-        urlMap.put("/y_key_01fe447429961ab5.html", staticHandler);
         urlMap.put("/**/*.*", staticHandler);
         handlerMapping.setUrlMap(urlMap);
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
@@ -166,8 +163,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public HttpRequestHandler getStaticRequestHandler(final ServletContext servletContext,
             @Value(value = "%{edu.stanford.irt.laneweb.live-base}/") final UrlResource liveBase) {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), liveBase,
-                new ServletContextResource(servletContext, "/resources/site-verification/") }));
+        handler.setLocations(Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), liveBase}));
         handler.setCacheSeconds(31536000);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;

@@ -193,7 +193,7 @@
                             this.fire("addSync", {success : true, bookmark : event.bookmark});
                         },
                         failure : function() {
-                            this._handleSyncFailure("Sorry, add bookmark failed.");
+                            this._handleSyncFailure("add");
                         }
                     },
                     "arguments" : {
@@ -223,7 +223,7 @@
                             this.fire("moveSync", {success : true, to : event.to, from : event.from});
                         },
                         failure : function() {
-                            this._handleSyncFailure("Sorry, move bookmark failed.");
+                            this._handleSyncFailure("move");
                         }
                     },
                     context : this
@@ -246,7 +246,7 @@
                             this.fire("removeSync", {success: true, positions : event.positions});
                         },
                         failure : function() {
-                            this._handleSyncFailure("Sorry, delete bookmark failed.");
+                            this._handleSyncFailure("delete");
                         }
                     },
                     "arguments" : {
@@ -276,7 +276,7 @@
                             this.fire("updateSync", {success : true, position : event.position});
                         },
                         failure :  function() {
-                            this._handleSyncFailure("Sorry, bookmark update failed.");
+                            this._handleSyncFailure("update");
                         }
                     },
                     "arguments" : {
@@ -337,7 +337,7 @@
              * @param message {String}
              */
             _handleSyncFailure : function(message) {
-                alert(message);
+                alert("Sorry, " + message + " bookmark failed. Please try again later.");
             }
     };
 

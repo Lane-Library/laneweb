@@ -27,18 +27,28 @@ public class CIDRRange {
      *
      * @param cidr
      *            with the format "nnn.nnn.nnn.nnn/nn"
-     * @param ipGroup
-     *            the IPGroup associated with this range
      */
-    public CIDRRange(final String cidr, final IPGroup ipGroup) {
+    public CIDRRange(final String cidr) {
         this.cidr = cidr;
-        this.ipGroup = ipGroup;
         this.subranges = new ArrayList<CIDRRange>();
         String ip = cidr.substring(0, cidr.indexOf('/'));
         int addr = ipToInt(ip);
         int mask = (-1) << (32 - Integer.parseInt(cidr.substring(ip.length() + 1)));
         this.lowest = addr & mask;
         this.highest = this.lowest + (~mask);
+    }
+
+    /**
+     * create a new CIDRRange
+     *
+     * @param cidr
+     *            with the format "nnn.nnn.nnn.nnn/nn"
+     * @param ipGroup
+     *            the IPGroup associated with this range
+     */
+    public CIDRRange(final String cidr, final IPGroup ipGroup) {
+        this(cidr);
+        this.ipGroup = ipGroup;
     }
 
     /**
@@ -74,6 +84,21 @@ public class CIDRRange {
      */
     public boolean contains(final int ip) {
         return ip >= this.lowest && ip <= this.highest;
+    }
+
+    /**
+     * determine if an address is within this CDIRRanges range.
+     *
+     * @param ip
+     *            the String value of an ip address
+     * @return true if the ip is in range, otherwise false
+     */
+    public boolean contains(final String ip) {
+        try {
+            return contains(ipToInt(ip));
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**

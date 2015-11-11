@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-11-09" version="3.1.13" description="3.1.13 bug fix release">
+            <action date="2015-11-09" dev="ceyates" issue="112620" type="fix">
+                Not Found using-lib/docdeliver.html DocXpress 
+            </action>
+            <action date="2015-11-06" dev="ceyates" issue="112616" type="fix">
+                crawler site validation not working (google and yahoo)
+            </action>
+            <action date="2015-11-06" dev="ceyates" issue="112590" type="remove">
+                remove email obfuscation
+            </action>
+            <action date="2015-11-03" dev="ryanmax" issue="112552" type="update">
+                change bookmark error messages
+            </action>
+            <action date="2015-11-02" dev="ryanmax" issue="112333" type="update">
+                do not force authentication for Stanford wireless users
+            </action>
+            <action date="2015-11-03" dev="ryanmax" issue="111475" type="update">
+                odd placements for spelling, querymapping and FindIt suggestions
+            </action>
+        </release>
         <release date="2015-11-03" version="laneweb-solr-rc-3.0" description="beta solr release rc-3">
             <action date="2015-11-02" dev="ryanmax" issue="112523" type="fix">
             	browse pages missing "Also available: Print" links and "Print Material" labels

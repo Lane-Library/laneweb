@@ -122,7 +122,6 @@
     </xsl:variable>
 
     <!-- ====================  INCLUDED TEMPLATES ============================= -->
-    <xsl:include href="laneweb-email.xsl"/>
     <xsl:include href="laneweb-forms.xsl"/>
     <xsl:include href="laneweb-links.xsl"/>
     <xsl:include href="laneweb-login.xsl"/>
