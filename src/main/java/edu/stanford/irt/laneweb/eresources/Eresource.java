@@ -276,30 +276,15 @@ public class Eresource {
 
     private void parseLink(final Object linkObj, final LinkedHashMap<String, Object> versionMap,
             final boolean isFirstLink) {
-        String linkLabel = null;
-        String linkUrl = null;
-        String linkText = null;
-        String additionalText = null;
-        String holdingsAndDates = null;
-        LinkType linkType = LinkType.NORMAL;
         LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
-        if (jsonLink.containsKey("label")) {
-            linkLabel = (String) jsonLink.get("label");
-        }
-        if (jsonLink.containsKey("linkText")) {
-            linkText = (String) jsonLink.get("linkText");
-        }
-        if (jsonLink.containsKey("additionalText")) {
-            additionalText = (String) jsonLink.get("additionalText");
-        }
+        String linkLabel = (String) jsonLink.get("label");
+        String linkUrl = (String) jsonLink.get("url");
+        String linkText = (String) jsonLink.get("linkText");
+        String additionalText = (String) jsonLink.get("additionalText");
+        String holdingsAndDates = (String) versionMap.get("holdingsAndDates");
+        LinkType linkType = LinkType.NORMAL;
         if (isFirstLink) {
             linkText = this.title;
-        }
-        if (jsonLink.containsKey("url")) {
-            linkUrl = (String) jsonLink.get("url");
-        }
-        if (versionMap.containsKey("holdingsAndDates")) {
-            holdingsAndDates = (String) versionMap.get("holdingsAndDates");
         }
         if (versionMap.get("hasGetPasswordLink") != null && ((Boolean) versionMap.get("hasGetPasswordLink"))) {
             linkType = LinkType.GETPASSWORD;
