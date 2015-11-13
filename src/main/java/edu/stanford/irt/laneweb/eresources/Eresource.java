@@ -281,7 +281,7 @@ public class Eresource {
         String linkText = null;
         String additionalText = null;
         String holdingsAndDates = null;
-        LinkType linkType = null;
+        LinkType linkType = LinkType.NORMAL;
         LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
         if (jsonLink.containsKey("label")) {
             linkLabel = (String) jsonLink.get("label");
@@ -305,8 +305,6 @@ public class Eresource {
             linkType = LinkType.GETPASSWORD;
         } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
             linkType = LinkType.IMPACTFACTOR;
-        } else {
-            linkType = LinkType.NORMAL;
         }
         this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates));
     }
