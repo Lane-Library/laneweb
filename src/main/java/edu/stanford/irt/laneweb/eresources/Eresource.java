@@ -135,7 +135,7 @@ public class Eresource {
     private String versionsJson;
 
     @Field
-    private Integer year;
+    private int year;
 
     public Eresource(final EresourceBuilder builder) {
         this.description = builder.description;
@@ -156,10 +156,6 @@ public class Eresource {
 
     public static EresourceBuilder builder() {
         return new EresourceBuilder();
-    }
-
-    public void addLink(final Link link) {
-        this.linksList.add(link);
     }
 
     public int getAvailable() {
@@ -217,7 +213,7 @@ public class Eresource {
         return this.versionsJson;
     }
 
-    public Integer getYear() {
+    public int getYear() {
         return this.year;
     }
 
