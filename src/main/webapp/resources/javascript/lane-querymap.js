@@ -47,7 +47,7 @@
     },
         mapSuccess = function(id, o) {
         var anchor, span, i,
-        resourceMap = Y.JSON.parse(o.responseText);
+        resourceMap = (o.responseText) ? Y.JSON.parse(o.responseText) : null;
     if (resourceMap) {
         queryMapResources = resourceMap.resources;
         getResultCounts = function() {
