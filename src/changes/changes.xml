@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-11-16" version="3.1.14" description="3.1.14 bug fix release">
+            <action date="2015-11-11" dev="ryanmax" issue="112757" type="fix">
+                Reflected Cross-Site Scripting (XSS) Vulnerabilities on qwa.8822348 (lane-local-02.stanford.edu)
+            </action>
+            <action date="2015-11-11" dev="ryanmax" issue="112750" type="fix">
+                long query text can bleed through search reset
+            </action>
+            <action date="2015-11-09" dev="ceyates" issue="112705" type="add">
+                create an animated arrow to point to the solr search ad
+            </action>
+        </release>
         <release date="2015-11-09" version="3.1.13" description="3.1.13 bug fix release">
             <action date="2015-11-09" dev="ceyates" issue="112620" type="fix">
                 Not Found using-lib/docdeliver.html DocXpress 

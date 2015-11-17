@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>6</version>
+        <version>7</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>solr-RC-1.4-SNAPSHOT</version>
@@ -12,6 +12,9 @@
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
     <inceptionYear>2002</inceptionYear>
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
     <developers>
         <developer>
             <id>ceyates</id>
@@ -113,12 +116,12 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.6</version>
+            <version>3.0.8-SNAPSHOT</version>
             <scope>runtime</scope>
             <exclusions>
                 <exclusion>
@@ -130,7 +133,7 @@
         <dependency>
             <artifactId>search-spring</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.3</version>
+            <version>3.0.4</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
