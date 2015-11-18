@@ -19,6 +19,7 @@ public class SolrQueryParserTest {
         this.inspectors = new ArrayList<>();
         this.inspectors.add(new AdvancedQueryInspector());
         this.inspectors.add(new PmidQueryInspector());
+        this.inspectors.add(new NumberQueryInspector());
         this.inspectors.add(new EscapingQueryInspector());
         this.parser = new SolrQueryParser(this.inspectors);
     }
@@ -43,5 +44,9 @@ public class SolrQueryParserTest {
         assertEquals("pmid\\:12345", this.parser.parse("pmid12345"));
         assertEquals("pmid\\:12345678", this.parser.parse("pubmed id 12345678"));
         assertEquals("pubmed id 12345678", this.parser.parse("advanced:true pubmed id 12345678"));
+        assertEquals("id\\:pubmed-12345678 OR id\\:bib-12345678", this.parser.parse("12345678"));
+        assertEquals("id\\:pubmed-12345 OR id\\:bib-12345", this.parser.parse("12345"));
+        assertEquals("12345 54321", this.parser.parse("12345 54321"));
+        assertEquals("12345\\-54321", this.parser.parse("12345-54321"));
     }
 }

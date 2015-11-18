@@ -12,6 +12,7 @@
             <list>
                 <bean class="edu.stanford.irt.laneweb.solr.AdvancedQueryInspector"/>
                 <bean class="edu.stanford.irt.laneweb.solr.PmidQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.solr.NumberQueryInspector"/>
                 <bean class="edu.stanford.irt.laneweb.solr.EscapingQueryInspector"/>
             </list>
         </constructor-arg>
