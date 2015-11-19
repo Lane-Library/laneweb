@@ -80,6 +80,11 @@
     </filter>
     
     <filter>
+        <filter-name>FrameOptionsFilter</filter-name>
+        <filter-class>edu.stanford.irt.laneweb.servlet.FrameOptionsFilter</filter-class>
+    </filter>
+    
+    <filter>
         <filter-name>searchImageFilter</filter-name>
         <filter-class>edu.stanford.irt.laneweb.servlet.SearchImageFilter</filter-class>
     </filter>
@@ -115,6 +120,11 @@
     
     <filter-mapping>
         <filter-name>ieCompatibilityFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>FrameOptionsFilter</filter-name>
         <url-pattern>*.html</url-pattern>
     </filter-mapping>
     
