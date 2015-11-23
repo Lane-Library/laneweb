@@ -43,9 +43,6 @@ public class ShibTester {
         result.append("group --> ");
         result.append(request.getAttribute("group"));
         result.append("\n");
-        result.append("Group --> ");
-        result.append(request.getAttribute("Group"));
-        result.append("\n");
         result.append("\n");
         Enumeration<String> attributes = request.getAttributeNames();
         while (attributes.hasMoreElements()) {
