@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-11-23" version="laneweb-solr-rc-4.0" description="beta solr release rc-4">
+            <action date="2015-11-10" dev="ryanmax" issue="112734" type="fix">
+            	improve pubmed id searching 
+			</action>
+        </release>
         <release date="2015-11-16" version="3.1.14" description="3.1.14 bug fix release">
             <action date="2015-11-11" dev="ryanmax" issue="112757" type="fix">
                 Reflected Cross-Site Scripting (XSS) Vulnerabilities on qwa.8822348 (lane-local-02.stanford.edu)
